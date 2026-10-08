@@ -1,0 +1,1016 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C01-I01",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Agriculture in Pakistan",
+      "topic_name": "agriculture role",
+      "category": "mcq",
+      "question_text": "Which statement best reflects agriculture’s national role?",
+      "options": [
+        {
+          "id": "A",
+          "text": "It supports food supply, livelihoods and related industries"
+        },
+        {
+          "id": "B",
+          "text": "It only produces office software"
+        },
+        {
+          "id": "C",
+          "text": "It has no link to the economy"
+        },
+        {
+          "id": "D",
+          "text": "It only concerns city roads"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "It supports food supply, livelihoods and related industries",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 1",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "agriculture role"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C01-I02",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Agriculture in Pakistan",
+      "topic_name": "agriculture branches",
+      "category": "short",
+      "question_text": "Name two major branches or components of agriculture.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Examples include crop husbandry, animal husbandry, poultry, fisheries and forestry; any two.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 1",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "agriculture branches"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C01-I03",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Agriculture in Pakistan",
+      "topic_name": "agriculture significance",
+      "category": "long",
+      "question_text": "Explain how agriculture contributes to food security, employment and the economy of Pakistan.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A strong answer links farm output, jobs, raw materials, rural income and food availability.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 1",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "agriculture significance"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C02-I01",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Crop Production and Farming System",
+      "topic_name": "crop choice",
+      "category": "mcq",
+      "question_text": "Which factor should influence crop selection?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Climate and soil suitability"
+        },
+        {
+          "id": "B",
+          "text": "Random choice only"
+        },
+        {
+          "id": "C",
+          "text": "Screen brightness"
+        },
+        {
+          "id": "D",
+          "text": "Keyboard layout"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Climate and soil suitability",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 2",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "crop choice"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C02-I02",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Crop Production and Farming System",
+      "topic_name": "farming system",
+      "category": "short",
+      "question_text": "What is meant by a farming system?",
+      "options": [],
+      "correct_option": "",
+      "answer": "The organized combination of crops, livestock, resources and management practices used on a farm.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 2",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "farming system"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C02-I03",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Crop Production and Farming System",
+      "topic_name": "crop production",
+      "category": "long",
+      "question_text": "Describe the main planning factors in crop production without giving hazardous chemical-use instructions.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Discuss climate, soil, water availability, seed choice, timing, labour, market and safe resource management.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 2",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "crop production"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C03-I01",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Production Technologies and Kharif Crops",
+      "topic_name": "kharif crops",
+      "category": "mcq",
+      "question_text": "Kharif crops are mainly associated with which season?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Warm/monsoon growing season"
+        },
+        {
+          "id": "B",
+          "text": "Only freezing conditions"
+        },
+        {
+          "id": "C",
+          "text": "No growing season"
+        },
+        {
+          "id": "D",
+          "text": "Only indoor storage"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Warm/monsoon growing season",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 3",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "kharif crops"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C03-I02",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Production Technologies and Kharif Crops",
+      "topic_name": "production technology",
+      "category": "short",
+      "question_text": "Why is timely sowing important in crop production?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It helps match crop growth with suitable temperature, moisture and seasonal conditions.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 3",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "production technology"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C03-I03",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Production Technologies and Kharif Crops",
+      "topic_name": "kharif management",
+      "category": "long",
+      "question_text": "Explain how seed quality, soil condition, irrigation planning and timely field operations affect Kharif crop productivity.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Cover each factor conceptually and connect it to germination, growth, resource use and yield.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 3",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "kharif management"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C04-I01",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Crop Rotation and Cropping Pattern",
+      "topic_name": "crop rotation",
+      "category": "mcq",
+      "question_text": "A major purpose of crop rotation is to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Improve long-term soil and crop management"
+        },
+        {
+          "id": "B",
+          "text": "Grow the same crop forever"
+        },
+        {
+          "id": "C",
+          "text": "Remove all soil organisms"
+        },
+        {
+          "id": "D",
+          "text": "Eliminate planning"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Improve long-term soil and crop management",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 4",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "crop rotation"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C04-I02",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Crop Rotation and Cropping Pattern",
+      "topic_name": "cropping pattern",
+      "category": "short",
+      "question_text": "What is a cropping pattern?",
+      "options": [],
+      "correct_option": "",
+      "answer": "The sequence and proportion of crops grown on a farm or in an area over time.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 4",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "cropping pattern"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C04-I03",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Crop Rotation and Cropping Pattern",
+      "topic_name": "rotation benefits",
+      "category": "long",
+      "question_text": "Discuss how crop rotation can support soil fertility, pest management and farm resilience.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Explain nutrient balance, breaking pest/disease cycles, diversity and risk distribution without prescribing chemicals.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 4",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "rotation benefits"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C05-I01",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Soil and Water Conservation",
+      "topic_name": "soil conservation",
+      "category": "mcq",
+      "question_text": "Which practice helps reduce soil erosion?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Maintaining protective vegetation/contour-based management"
+        },
+        {
+          "id": "B",
+          "text": "Leaving soil permanently bare"
+        },
+        {
+          "id": "C",
+          "text": "Removing all field boundaries"
+        },
+        {
+          "id": "D",
+          "text": "Increasing runoff"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Maintaining protective vegetation/contour-based management",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 5",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "soil conservation"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C05-I02",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Soil and Water Conservation",
+      "topic_name": "water conservation",
+      "category": "short",
+      "question_text": "Why is water conservation important in farming?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It protects a limited resource, reduces waste and helps sustain crop production during variable supply.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 5",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "water conservation"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C05-I03",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Soil and Water Conservation",
+      "topic_name": "resource conservation",
+      "category": "long",
+      "question_text": "Explain principles of soil and water conservation on farms.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Discuss erosion control, ground cover, careful land shaping, water storage/efficient use and monitoring.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 5",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "resource conservation"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C06-I01",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Management of Water Problems",
+      "topic_name": "waterlogging",
+      "category": "mcq",
+      "question_text": "Waterlogging mainly means?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Excess water saturating the root zone"
+        },
+        {
+          "id": "B",
+          "text": "Complete absence of water in all cases"
+        },
+        {
+          "id": "C",
+          "text": "Only high wind"
+        },
+        {
+          "id": "D",
+          "text": "Only low light"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Excess water saturating the root zone",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 6",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "waterlogging"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C06-I02",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Management of Water Problems",
+      "topic_name": "salinity",
+      "category": "short",
+      "question_text": "How can salinity affect crops?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Excess salts can reduce water uptake, damage plants and lower productivity.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 6",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "salinity"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C06-I03",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Management of Water Problems",
+      "topic_name": "water problems",
+      "category": "long",
+      "question_text": "Explain how drainage, efficient irrigation and monitoring help manage farm water problems.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A good answer covers avoiding excess water, reducing losses, checking soil/water conditions and adapting irrigation to crop need.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 6",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "water problems"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C07-I01",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Farm Forestry / Agro Forestry",
+      "topic_name": "agroforestry",
+      "category": "mcq",
+      "question_text": "Agroforestry combines trees with?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Agricultural crops and/or livestock systems"
+        },
+        {
+          "id": "B",
+          "text": "Only office buildings"
+        },
+        {
+          "id": "C",
+          "text": "Only roads"
+        },
+        {
+          "id": "D",
+          "text": "No land use"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Agricultural crops and/or livestock systems",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 7",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "agroforestry"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C07-I02",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Farm Forestry / Agro Forestry",
+      "topic_name": "farm forestry",
+      "category": "short",
+      "question_text": "State two potential benefits of farm forestry.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Examples: shelter, fuel/wood, soil protection, biodiversity, shade or additional farm income; any two.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 7",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "farm forestry"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C07-I03",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Farm Forestry / Agro Forestry",
+      "topic_name": "agroforestry value",
+      "category": "long",
+      "question_text": "Discuss environmental and economic benefits of integrating suitable trees into farms.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Include soil/water protection, microclimate, biodiversity, products/income and careful species/site selection.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 7",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "agroforestry value"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C08-I01",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Production of Farm Animals",
+      "topic_name": "animal production",
+      "category": "mcq",
+      "question_text": "Good farm-animal management should prioritize?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Health, nutrition, welfare and suitable housing"
+        },
+        {
+          "id": "B",
+          "text": "Neglecting clean water"
+        },
+        {
+          "id": "C",
+          "text": "Ignoring disease signs"
+        },
+        {
+          "id": "D",
+          "text": "Overcrowding"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Health, nutrition, welfare and suitable housing",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 8",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "animal production"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C08-I02",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Production of Farm Animals",
+      "topic_name": "animal welfare",
+      "category": "short",
+      "question_text": "Why is clean water important for farm animals?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It supports hydration, digestion, temperature regulation, health and productivity.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 8",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "animal welfare"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C08-I03",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Production of Farm Animals",
+      "topic_name": "livestock management",
+      "category": "long",
+      "question_text": "Explain the principles of responsible farm-animal production.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Cover balanced nutrition, clean water, housing, hygiene, welfare, observation and veterinary support when needed.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 8",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "livestock management"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C09-I01",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Dairy Industry",
+      "topic_name": "dairy quality",
+      "category": "mcq",
+      "question_text": "Milk quality is strongly supported by?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Clean handling and cold-chain hygiene"
+        },
+        {
+          "id": "B",
+          "text": "Unclean containers"
+        },
+        {
+          "id": "C",
+          "text": "Long exposure to heat"
+        },
+        {
+          "id": "D",
+          "text": "Ignoring sanitation"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Clean handling and cold-chain hygiene",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 9",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "dairy quality"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C09-I02",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Dairy Industry",
+      "topic_name": "dairy industry",
+      "category": "short",
+      "question_text": "Name two stages in the dairy value chain.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Examples: milk production, collection, chilling, processing, packaging, transport or retail; any two.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 9",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "dairy industry"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C09-I03",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Dairy Industry",
+      "topic_name": "dairy management",
+      "category": "long",
+      "question_text": "Describe how hygiene, animal health, cooling and quality control support a safe dairy industry.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Explain each factor conceptually and link it to product safety, shelf life and consumer trust.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 9",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "dairy management"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C10-I01",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Poultry Husbandry",
+      "topic_name": "poultry welfare",
+      "category": "mcq",
+      "question_text": "Good poultry husbandry requires?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Clean housing, suitable feed/water and health monitoring"
+        },
+        {
+          "id": "B",
+          "text": "Overcrowding"
+        },
+        {
+          "id": "C",
+          "text": "No ventilation"
+        },
+        {
+          "id": "D",
+          "text": "Ignoring sick birds"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Clean housing, suitable feed/water and health monitoring",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 10",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "poultry welfare"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C10-I02",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Poultry Husbandry",
+      "topic_name": "poultry environment",
+      "category": "short",
+      "question_text": "Why is ventilation important in poultry housing?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It helps control heat, moisture and air quality, supporting bird comfort and health.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 10",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "poultry environment"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C10-I03",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Poultry Husbandry",
+      "topic_name": "poultry husbandry",
+      "category": "long",
+      "question_text": "Explain the principles of responsible poultry husbandry from housing to health monitoring.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Cover space, ventilation, feed/water, cleanliness, welfare, observation and professional disease control.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-039 | f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf | chapter 10",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "poultry husbandry"
+      ]
+    }
+  ]
+}

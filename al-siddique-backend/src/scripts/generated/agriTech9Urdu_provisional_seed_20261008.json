@@ -1,0 +1,1016 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "IX-AGRI-TECH-URDU-C01-I01",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "پاکستان میں زراعت",
+      "topic_name": "agriculture role",
+      "category": "mcq",
+      "question_text": "پاکستان میں زراعت کا اہم قومی کردار کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "خوراک، روزگار اور متعلقہ صنعتوں کو سہارا دینا"
+        },
+        {
+          "id": "B",
+          "text": "صرف office software بنانا"
+        },
+        {
+          "id": "C",
+          "text": "معیشت سے کوئی تعلق نہ ہونا"
+        },
+        {
+          "id": "D",
+          "text": "صرف سڑکیں بنانا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "خوراک، روزگار اور متعلقہ صنعتوں کو سہارا دینا",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 1",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "agriculture role"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C01-I02",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "پاکستان میں زراعت",
+      "topic_name": "agriculture branches",
+      "category": "short",
+      "question_text": "زراعت کی دو اہم شاخیں یا components لکھیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "مثلاً crop husbandry، animal husbandry، poultry، fisheries یا forestry میں سے کوئی دو۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 1",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "agriculture branches"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C01-I03",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "پاکستان میں زراعت",
+      "topic_name": "agriculture significance",
+      "category": "long",
+      "question_text": "پاکستان میں food security، employment اور economy میں زراعت کا کردار بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Farm output، jobs، raw materials، rural income اور food availability کے باہمی تعلق کو واضح کیا جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 1",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "agriculture significance"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C02-I01",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "فصلوں کی پیداوار اور فارمنگ سسٹم",
+      "topic_name": "crop choice",
+      "category": "mcq",
+      "question_text": "Crop selection میں کون سا factor اہم ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Climate اور soil suitability"
+        },
+        {
+          "id": "B",
+          "text": "صرف random choice"
+        },
+        {
+          "id": "C",
+          "text": "screen brightness"
+        },
+        {
+          "id": "D",
+          "text": "keyboard layout"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Climate اور soil suitability",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 2",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "crop choice"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C02-I02",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "فصلوں کی پیداوار اور فارمنگ سسٹم",
+      "topic_name": "farming system",
+      "category": "short",
+      "question_text": "Farming system سے کیا مراد ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Farm پر crops، livestock، resources اور management practices کے منظم مجموعے کو farming system کہتے ہیں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 2",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "farming system"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C02-I03",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "فصلوں کی پیداوار اور فارمنگ سسٹم",
+      "topic_name": "crop production",
+      "category": "long",
+      "question_text": "Crop production planning کے اہم عوامل بیان کریں، hazardous chemical-use instructions کے بغیر۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Climate، soil، water، seed choice، timing، labour، market اور safe resource management شامل ہوں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 2",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "crop production"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C03-I01",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "پیداواری ٹیکنالوجیز اور خریف کی فصلیں",
+      "topic_name": "kharif crops",
+      "category": "mcq",
+      "question_text": "Kharif crops عموماً کس موسم سے متعلق ہیں؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "گرم/مون سون growing season"
+        },
+        {
+          "id": "B",
+          "text": "صرف freezing conditions"
+        },
+        {
+          "id": "C",
+          "text": "کوئی growing season نہیں"
+        },
+        {
+          "id": "D",
+          "text": "صرف indoor storage"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "گرم/مون سون growing season",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 3",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "kharif crops"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C03-I02",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "پیداواری ٹیکنالوجیز اور خریف کی فصلیں",
+      "topic_name": "production technology",
+      "category": "short",
+      "question_text": "Timely sowing کیوں اہم ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "اس سے crop growth مناسب temperature، moisture اور seasonal conditions کے ساتھ align رہتی ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 3",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "production technology"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C03-I03",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "پیداواری ٹیکنالوجیز اور خریف کی فصلیں",
+      "topic_name": "kharif management",
+      "category": "long",
+      "question_text": "Seed quality، soil condition، irrigation planning اور timely field operations Kharif productivity کو کیسے متاثر کرتے ہیں؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Germination، growth، resource use اور yield کے ساتھ ہر factor کا تعلق بیان کیا جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 3",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "kharif management"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C04-I01",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "فصلوں کی گردش اور کراپنگ پیٹرن",
+      "topic_name": "crop rotation",
+      "category": "mcq",
+      "question_text": "Crop rotation کا بڑا مقصد کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Long-term soil اور crop management بہتر کرنا"
+        },
+        {
+          "id": "B",
+          "text": "ہمیشہ ایک ہی crop اگانا"
+        },
+        {
+          "id": "C",
+          "text": "تمام soil organisms ختم کرنا"
+        },
+        {
+          "id": "D",
+          "text": "planning ختم کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Long-term soil اور crop management بہتر کرنا",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 4",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "crop rotation"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C04-I02",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "فصلوں کی گردش اور کراپنگ پیٹرن",
+      "topic_name": "cropping pattern",
+      "category": "short",
+      "question_text": "Cropping pattern کیا ہوتا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "وقت کے ساتھ farm یا area میں اگائی جانے والی crops کی ترتیب اور proportion۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 4",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "cropping pattern"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C04-I03",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "فصلوں کی گردش اور کراپنگ پیٹرن",
+      "topic_name": "rotation benefits",
+      "category": "long",
+      "question_text": "Crop rotation soil fertility، pest management اور farm resilience کو کیسے support کرتی ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Nutrient balance، pest/disease cycle break، diversity اور risk distribution بیان کیے جائیں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 4",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "rotation benefits"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C05-I01",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "مٹی اور پانی کا تحفظ",
+      "topic_name": "soil conservation",
+      "category": "mcq",
+      "question_text": "Soil erosion کم کرنے میں کون سا اصول مدد دیتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Protective vegetation/contour-based management"
+        },
+        {
+          "id": "B",
+          "text": "soil کو ہمیشہ bare چھوڑنا"
+        },
+        {
+          "id": "C",
+          "text": "field boundaries ختم کرنا"
+        },
+        {
+          "id": "D",
+          "text": "runoff بڑھانا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Protective vegetation/contour-based management",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 5",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "soil conservation"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C05-I02",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "مٹی اور پانی کا تحفظ",
+      "topic_name": "water conservation",
+      "category": "short",
+      "question_text": "Farming میں water conservation کیوں اہم ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Limited water resource کی حفاظت، waste کم کرنے اور variable supply میں production sustain کرنے کے لیے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 5",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "water conservation"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C05-I03",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "مٹی اور پانی کا تحفظ",
+      "topic_name": "resource conservation",
+      "category": "long",
+      "question_text": "Farm پر soil اور water conservation کے بنیادی اصول بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Erosion control، ground cover، careful land shaping، water storage/efficient use اور monitoring شامل ہوں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 5",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "resource conservation"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C06-I01",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "پانی کے مسائل کا انتظام",
+      "topic_name": "waterlogging",
+      "category": "mcq",
+      "question_text": "Waterlogging سے کیا مراد ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Root zone میں ضرورت سے زیادہ پانی بھر جانا"
+        },
+        {
+          "id": "B",
+          "text": "ہر حالت میں مکمل خشک سالی"
+        },
+        {
+          "id": "C",
+          "text": "صرف تیز ہوا"
+        },
+        {
+          "id": "D",
+          "text": "صرف کم روشنی"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Root zone میں ضرورت سے زیادہ پانی بھر جانا",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 6",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "waterlogging"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C06-I02",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "پانی کے مسائل کا انتظام",
+      "topic_name": "salinity",
+      "category": "short",
+      "question_text": "Salinity crops کو کیسے متاثر کر سکتی ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Excess salts water uptake کم کر سکتے ہیں، plants کو damage اور yield کم کر سکتے ہیں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 6",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "salinity"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C06-I03",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "پانی کے مسائل کا انتظام",
+      "topic_name": "water problems",
+      "category": "long",
+      "question_text": "Drainage، efficient irrigation اور monitoring farm water problems manage کرنے میں کیسے مدد دیتے ہیں؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Excess water avoid کرنا، losses کم کرنا، soil/water condition monitor کرنا اور crop need کے مطابق irrigation شامل ہو۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 6",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "water problems"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C07-I01",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "فارم فاریسٹری / ایگرو فاریسٹری",
+      "topic_name": "agroforestry",
+      "category": "mcq",
+      "question_text": "Agroforestry میں trees کو کس کے ساتھ integrate کیا جاتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Agricultural crops اور/یا livestock systems"
+        },
+        {
+          "id": "B",
+          "text": "صرف office buildings"
+        },
+        {
+          "id": "C",
+          "text": "صرف roads"
+        },
+        {
+          "id": "D",
+          "text": "کوئی land use نہیں"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Agricultural crops اور/یا livestock systems",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 7",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "agroforestry"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C07-I02",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "فارم فاریسٹری / ایگرو فاریسٹری",
+      "topic_name": "farm forestry",
+      "category": "short",
+      "question_text": "Farm forestry کے دو فائدے لکھیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Shelter، wood/fuel، soil protection، biodiversity، shade یا extra income میں سے کوئی دو۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 7",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "farm forestry"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C07-I03",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "فارم فاریسٹری / ایگرو فاریسٹری",
+      "topic_name": "agroforestry value",
+      "category": "long",
+      "question_text": "Farm میں suitable trees integrate کرنے کے environmental اور economic benefits بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Soil/water protection، microclimate، biodiversity، products/income اور suitable species/site selection شامل ہوں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 7",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "agroforestry value"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C08-I01",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "فارم جانوروں کی پیداوار",
+      "topic_name": "animal production",
+      "category": "mcq",
+      "question_text": "Responsible farm-animal management میں priority کیا ہونی چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Health، nutrition، welfare اور suitable housing"
+        },
+        {
+          "id": "B",
+          "text": "clean water ignore کرنا"
+        },
+        {
+          "id": "C",
+          "text": "disease signs ignore کرنا"
+        },
+        {
+          "id": "D",
+          "text": "overcrowding"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Health، nutrition، welfare اور suitable housing",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 8",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "animal production"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C08-I02",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "فارم جانوروں کی پیداوار",
+      "topic_name": "animal welfare",
+      "category": "short",
+      "question_text": "Farm animals کے لیے clean water کیوں ضروری ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Hydration، digestion، temperature regulation، health اور productivity کے لیے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 8",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "animal welfare"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C08-I03",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "فارم جانوروں کی پیداوار",
+      "topic_name": "livestock management",
+      "category": "long",
+      "question_text": "Responsible farm-animal production کے بنیادی اصول بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Balanced nutrition، clean water، housing، hygiene، welfare، observation اور ضرورت پر veterinary support شامل ہو۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 8",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "livestock management"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C09-I01",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "ڈیری انڈسٹری",
+      "topic_name": "dairy quality",
+      "category": "mcq",
+      "question_text": "Milk quality کو کون سا عمل بہتر support کرتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Clean handling اور cold-chain hygiene"
+        },
+        {
+          "id": "B",
+          "text": "unclean containers"
+        },
+        {
+          "id": "C",
+          "text": "heat میں دیر تک چھوڑنا"
+        },
+        {
+          "id": "D",
+          "text": "sanitation ignore کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Clean handling اور cold-chain hygiene",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 9",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "dairy quality"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C09-I02",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "ڈیری انڈسٹری",
+      "topic_name": "dairy industry",
+      "category": "short",
+      "question_text": "Dairy value chain کے دو stages لکھیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Milk production، collection، chilling، processing، packaging، transport یا retail میں سے کوئی دو۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 9",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "dairy industry"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C09-I03",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "ڈیری انڈسٹری",
+      "topic_name": "dairy management",
+      "category": "long",
+      "question_text": "Hygiene، animal health، cooling اور quality control safe dairy industry کو کیسے support کرتے ہیں؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "ہر factor کو product safety، shelf life اور consumer trust سے جوڑا جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 9",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "dairy management"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C10-I01",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "پولٹری ہسبنڈری",
+      "topic_name": "poultry welfare",
+      "category": "mcq",
+      "question_text": "Good poultry husbandry میں کیا ضروری ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Clean housing، suitable feed/water اور health monitoring"
+        },
+        {
+          "id": "B",
+          "text": "overcrowding"
+        },
+        {
+          "id": "C",
+          "text": "no ventilation"
+        },
+        {
+          "id": "D",
+          "text": "sick birds ignore کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Clean housing، suitable feed/water اور health monitoring",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 10",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "poultry welfare"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C10-I02",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "پولٹری ہسبنڈری",
+      "topic_name": "poultry environment",
+      "category": "short",
+      "question_text": "Poultry housing میں ventilation کیوں اہم ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Heat، moisture اور air quality control کر کے bird comfort اور health support کرتی ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 10",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "poultry environment"
+      ]
+    },
+    {
+      "id": "IX-AGRI-TECH-URDU-C10-I03",
+      "class_level": "9th",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "پولٹری ہسبنڈری",
+      "topic_name": "poultry husbandry",
+      "category": "long",
+      "question_text": "Housing سے health monitoring تک responsible poultry husbandry کے اصول بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Space، ventilation، feed/water، cleanliness، welfare، observation اور professional disease control شامل ہوں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-040 | 4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224 | chapter 10",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "agriculture",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "poultry husbandry"
+      ]
+    }
+  ]
+}

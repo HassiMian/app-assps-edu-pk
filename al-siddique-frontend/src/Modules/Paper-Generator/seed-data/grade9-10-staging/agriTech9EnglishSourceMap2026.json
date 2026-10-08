@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "assps-agriTech9-english-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-039",
+  "sourcePdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+  "sourceByteLength": 39467610,
+  "pageCount": 140,
+  "identity": [
+    "Agriculture Science (Tech) 9 EM",
+    "Grade IX Matric-Tech Agriculture Sciences"
+  ],
+  "tocEvidence": "RENDERED_OFFICIAL_TOC_AND_CHAPTER_STARTS_VERIFIED",
+  "chapters": [
+    {
+      "number": 1,
+      "titleEnglish": "Agriculture in Pakistan",
+      "titleUrdu": "پاکستان میں زراعت",
+      "status": "RENDERED_TOC_VERIFIED"
+    },
+    {
+      "number": 2,
+      "titleEnglish": "Crop Production and Farming System",
+      "titleUrdu": "فصلوں کی پیداوار اور فارمنگ سسٹم",
+      "status": "RENDERED_TOC_VERIFIED"
+    },
+    {
+      "number": 3,
+      "titleEnglish": "Production Technologies and Kharif Crops",
+      "titleUrdu": "پیداواری ٹیکنالوجیز اور خریف کی فصلیں",
+      "status": "RENDERED_TOC_VERIFIED"
+    },
+    {
+      "number": 4,
+      "titleEnglish": "Crop Rotation and Cropping Pattern",
+      "titleUrdu": "فصلوں کی گردش اور کراپنگ پیٹرن",
+      "status": "RENDERED_TOC_VERIFIED"
+    },
+    {
+      "number": 5,
+      "titleEnglish": "Soil and Water Conservation",
+      "titleUrdu": "مٹی اور پانی کا تحفظ",
+      "status": "RENDERED_TOC_VERIFIED"
+    },
+    {
+      "number": 6,
+      "titleEnglish": "Management of Water Problems",
+      "titleUrdu": "پانی کے مسائل کا انتظام",
+      "status": "RENDERED_TOC_VERIFIED"
+    },
+    {
+      "number": 7,
+      "titleEnglish": "Farm Forestry / Agro Forestry",
+      "titleUrdu": "فارم فاریسٹری / ایگرو فاریسٹری",
+      "status": "RENDERED_TOC_VERIFIED"
+    },
+    {
+      "number": 8,
+      "titleEnglish": "Production of Farm Animals",
+      "titleUrdu": "فارم جانوروں کی پیداوار",
+      "status": "RENDERED_TOC_VERIFIED"
+    },
+    {
+      "number": 9,
+      "titleEnglish": "Dairy Industry",
+      "titleUrdu": "ڈیری انڈسٹری",
+      "status": "RENDERED_TOC_VERIFIED"
+    },
+    {
+      "number": 10,
+      "titleEnglish": "Poultry Husbandry",
+      "titleUrdu": "پولٹری ہسبنڈری",
+      "status": "RENDERED_TOC_VERIFIED"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "practicalProceduresKeptSeparate": true
+  }
+}

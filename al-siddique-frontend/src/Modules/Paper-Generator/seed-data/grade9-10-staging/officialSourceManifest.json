@@ -1052,9 +1052,9 @@
       "catalogLabel": "Agriculture Science (Tech) 9 EM",
       "pdfUrl": "https://drive.google.com/file/d/1l0VrqpNpeU2wTe2dn8wybuNWr9DDa32D/view?usp=sharing",
       "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
-      "chapterIndexStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "chapterIndexStatus": "VERIFIED_RENDERED_TOC_10_CHAPTERS",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_VERIFIED_CONTENT_MAP",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
       "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
@@ -1067,8 +1067,9 @@
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
       "sourceCacheRef": "20261008/tech9-theory/agri9em.pdf",
-      "contentMapStatus": "PENDING_VERIFIED_CONTENT_MAP",
-      "authoringBoundary": "NO_AUTHORING_UNTIL_GRADE9_MATRIC_TECH_THEORY_CONTENT_MAP_VERIFIED"
+      "contentMapStatus": "VERIFIED_RENDERED_TOC_10_CHAPTERS_PAGE_LEVEL_REVIEW_PENDING",
+      "authoringBoundary": "PROVISIONAL_ORIGINAL_CONCEPTUAL_ONLY_NO_TEXTBOOK_OR_EXERCISE_COPYING",
+      "contentMapEvidence": "agriTech9EnglishSourceMap2026.json"
     },
     {
       "recordId": "pectaa-catalog-040",
@@ -1081,9 +1082,9 @@
       "catalogLabel": "Agriculture Science (Tech) 9 UM",
       "pdfUrl": "https://drive.google.com/file/d/1JhPqFvbXYYFklaMIFge9vWNk5ADCuclV/view?usp=sharing",
       "pdfSha256": "4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224",
-      "chapterIndexStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "chapterIndexStatus": "VERIFIED_RENDERED_TOC_10_CHAPTERS",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_VERIFIED_CONTENT_MAP",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
       "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
@@ -1096,8 +1097,9 @@
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
       "sourceCacheRef": "20261008/tech9-theory/agri9ur.pdf",
-      "contentMapStatus": "PENDING_VERIFIED_CONTENT_MAP",
-      "authoringBoundary": "NO_AUTHORING_UNTIL_GRADE9_MATRIC_TECH_THEORY_CONTENT_MAP_VERIFIED"
+      "contentMapStatus": "VERIFIED_RENDERED_TOC_10_CHAPTERS_PAGE_LEVEL_REVIEW_PENDING",
+      "authoringBoundary": "PROVISIONAL_ORIGINAL_CONCEPTUAL_ONLY_NO_TEXTBOOK_OR_EXERCISE_COPYING",
+      "contentMapEvidence": "agriTech9UrduSourceMap2026.json"
     },
     {
       "recordId": "pectaa-catalog-041",
