@@ -174,7 +174,7 @@ const GEMINI_TOOLS = [{
     },
     {
       name: 'manage_student',
-      description: 'Search student profile, fee ledger, add new student, update details, or deactivate student.',
+      description: 'Search student profile, fee ledger, add/admit new student, update details, or deactivate student.',
       parameters: {
         type: 'OBJECT',
         properties: {
@@ -182,13 +182,18 @@ const GEMINI_TOOLS = [{
           studentData: {
             type: 'OBJECT',
             properties: {
-              query: { type: 'STRING', description: 'Search term (name, GR, phone)' },
+              query: { type: 'STRING', description: 'Search term (name, GR, phone, B-Form)' },
               name: { type: 'STRING', description: 'Full name' },
               father_name: { type: 'STRING', description: 'Father name' },
-              class: { type: 'STRING', description: 'Class' },
-              section: { type: 'STRING', description: 'Section' },
-              parent_phone: { type: 'STRING', description: 'Phone' },
-              monthly_fee: { type: 'NUMBER', description: 'Monthly fee' }
+              class: { type: 'STRING', description: 'Class e.g. "Seven", "Nine", "Starter"' },
+              section: { type: 'STRING', description: 'Section e.g. "A"' },
+              b_form: { type: 'STRING', description: 'Student B-Form or CNIC ID e.g. "34501-1521552-3"' },
+              father_cnic: { type: 'STRING', description: 'Father CNIC e.g. "34501-1953914-9"' },
+              date_of_birth: { type: 'STRING', description: 'Date of birth (YYYY-MM-DD or DD/MM/YYYY)' },
+              address: { type: 'STRING', description: 'Village, locality, or residential address' },
+              parent_phone: { type: 'STRING', description: 'Parent Phone number' },
+              parent_whatsapp: { type: 'STRING', description: 'Parent WhatsApp number' },
+              monthly_fee: { type: 'NUMBER', description: 'Monthly fee amount e.g. 3000' }
             }
           }
         },
@@ -459,6 +464,12 @@ RELIABILITY DIRECTIVES:
    - When asked to create/generate an exam paper (e.g. "Class 5 Science Chapter 2 ka paper banao"), call "generate_assessment_paper". It synthesizes MCQs, Short Questions, Column Matching (Column A/B), and Long Questions, saves to paper_vault, and disaggregates all items into question_bank.
    - When teachers or the Owner paste raw exam drafts, questions, or test notes on WhatsApp, call "parse_and_ingest_paper_to_vault". It decomposes, analyzes, aligns, formats, saves to paper_vault, and disaggregates into question_bank.
    - When asked to view or print saved papers, call "get_paper_from_vault".
+6. STUDENT ADMISSIONS & RECORD MUTATIONS (PRIVILEGED ONLY):
+   - When an authenticated OWNER or ADMIN commands to admit/register a student (e.g. "is student ka admission kro", or provides student bio-data with Name, Father Name, B-Form, Class, etc.):
+     * Extract all provided fields: name, father_name, class, section, b_form, father_cnic, date_of_birth, address/village, parent_phone, parent_whatsapp, monthly_fee.
+     * Call "manage_student" with action: "add" and the extracted studentData!
+     * Upon success, reply with an executive Roman Urdu confirmation detailing Assigned GR Number, Student Name, Father Name, Class, B-Form, Monthly Fee, and initial October Fee Challan Number.
+   - When asked to update student details or fee, call "manage_student" with action: "update" or "edit_student_fee".
 
 GROUNDED TELEMETRY & CONTEXT:
 - Current Local Time: ${timeStr}, ${dayName}, ${dateStr} (PKT / Asia/Karachi, UTC+5)
@@ -492,56 +503,57 @@ class JarvisCognitiveCore {
     return resolveUserRole(fromNumber);
   }
 
-  async executeTool(name, args, role) {
+  async executeTool(name, args, role, fromNumber) {
     if (!canExecuteSchoolTool(role, name)) {
       console.warn(`[JARVIS Authorization] Denied tool "${name}" for role ${role || 'UNKNOWN'}`);
       return { success: false, error: 'This school operation is not authorized for the caller role.' };
     }
-    console.log(`[JARVIS Tool Call] Executing "${name}" for role ${role}`);
+    console.log(`[JARVIS Tool Call] Executing "${name}" for role ${role} (caller: ${fromNumber})`);
+    const ctx = { role, fromNumber };
     try {
       switch (name) {
         case 'get_exam_datesheet':
-          return await tools.getExamDatesheet(args);
+          return await tools.getExamDatesheet(args, ctx);
         case 'manage_datesheet':
-          return await tools.manageDatesheet(args);
+          return await tools.manageDatesheet(args, ctx);
         case 'enter_exam_marks':
-          return await tools.enterExamMarks(args);
+          return await tools.enterExamMarks(args, ctx);
         case 'get_or_print_result_cards':
-          return await tools.getOrPrintResultCards(args);
+          return await tools.getOrPrintResultCards(args, ctx);
         case 'edit_student_fee':
-          return await tools.editStudentFee(args);
+          return await tools.editStudentFee(args, ctx);
         case 'generate_fee_challans':
-          return await tools.generateFeeChallans(args);
+          return await tools.generateFeeChallans(args, ctx);
         case 'get_attendance':
-          return await tools.getAttendance(args);
+          return await tools.getAttendance(args, ctx);
         case 'mark_attendance':
-          return await tools.markAttendance(args);
+          return await tools.markAttendance(args, ctx);
         case 'get_or_manage_timetable':
-          return await tools.getOrManageTimetable(args);
+          return await tools.getOrManageTimetable(args, ctx);
         case 'manage_student':
-          return await tools.manageStudent(args);
+          return await tools.manageStudent(args, ctx);
         case 'manage_classes_and_settings':
-          return await tools.manageClassesAndSettings(args);
+          return await tools.manageClassesAndSettings(args, ctx);
         case 'dispatch_desktop_task':
-          return await tools.dispatchDesktopTask(args);
+          return await tools.dispatchDesktopTask(args, ctx);
         case 'get_or_manage_daily_diary':
-          return await tools.getOrManageDailyDiary(args);
+          return await tools.getOrManageDailyDiary(args, ctx);
         case 'get_or_manage_staff':
-          return await tools.getOrManageStaff(args);
+          return await tools.getOrManageStaff(args, ctx);
         case 'get_fee_financial_summary_and_defaulters':
-          return await tools.getFeeFinancialSummaryAndDefaulters(args);
+          return await tools.getFeeFinancialSummaryAndDefaulters(args, ctx);
         case 'get_or_manage_notices':
-          return await tools.getOrManageNotices(args);
+          return await tools.getOrManageNotices(args, ctx);
         case 'manage_admissions_and_families':
-          return await tools.manageAdmissionsAndFamilies(args);
+          return await tools.manageAdmissionsAndFamilies(args, ctx);
         case 'manage_expenses_and_accounts':
-          return await tools.manageExpensesAndAccounts(args);
+          return await tools.manageExpensesAndAccounts(args, ctx);
         case 'generate_assessment_paper':
-          return await tools.generateAssessmentPaper(args);
+          return await tools.generateAssessmentPaper(args, ctx);
         case 'parse_and_ingest_paper_to_vault':
-          return await tools.parseAndIngestPaperToVault(args);
+          return await tools.parseAndIngestPaperToVault(args, ctx);
         case 'get_paper_from_vault':
-          return await tools.getPaperFromVault(args);
+          return await tools.getPaperFromVault(args, ctx);
         default:
           return { error: `Tool ${name} not found` };
       }
@@ -602,7 +614,7 @@ class JarvisCognitiveCore {
       for (const fc of functionCalls) {
         const toolName = fc.functionCall.name;
         const toolArgs = fc.functionCall.args || {};
-        const toolResult = await this.executeTool(toolName, toolArgs, role);
+        const toolResult = await this.executeTool(toolName, toolArgs, role, fromNumber);
         toolResponses.push({
           functionResponse: {
             name: toolName,
@@ -662,7 +674,7 @@ class JarvisCognitiveCore {
         const fnName = tc.function.name;
         let fnArgs = {};
         try { fnArgs = JSON.parse(tc.function.arguments || '{}'); } catch {}
-        const result = await this.executeTool(fnName, fnArgs, role);
+        const result = await this.executeTool(fnName, fnArgs, role, fromNumber);
 
         messages.push({
           role: 'tool',
