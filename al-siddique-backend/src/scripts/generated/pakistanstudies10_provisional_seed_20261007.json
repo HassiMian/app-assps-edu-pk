@@ -1,0 +1,1358 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "X-PAKS-C01-M01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Ideological Basis of Pakistan",
+      "topic_name": "ideology",
+      "category": "mcq",
+      "question_text": "The term ideology most nearly means?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A coherent system of ideas and values"
+        },
+        {
+          "id": "B",
+          "text": "A weather pattern"
+        },
+        {
+          "id": "C",
+          "text": "A trade route only"
+        },
+        {
+          "id": "D",
+          "text": "A map scale"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "A coherent system of ideas and values",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "ideology"
+      ]
+    },
+    {
+      "id": "X-PAKS-C01-M02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Ideological Basis of Pakistan",
+      "topic_name": "two nation theory",
+      "category": "mcq",
+      "question_text": "The Two-Nation Theory emphasized distinct identity primarily between?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Muslims and Hindus of British India"
+        },
+        {
+          "id": "B",
+          "text": "Farmers and traders"
+        },
+        {
+          "id": "C",
+          "text": "Cities and villages"
+        },
+        {
+          "id": "D",
+          "text": "Mountains and plains"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Muslims and Hindus of British India",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "two nation theory"
+      ]
+    },
+    {
+      "id": "X-PAKS-C01-S01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Ideological Basis of Pakistan",
+      "topic_name": "ideology",
+      "category": "short",
+      "question_text": "Why is ideology important in nation-building?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It provides shared principles, goals and a framework that can guide collective political and social action.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "ideology"
+      ]
+    },
+    {
+      "id": "X-PAKS-C01-S02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Ideological Basis of Pakistan",
+      "topic_name": "ideological basis",
+      "category": "short",
+      "question_text": "State one way the social and political experience of Muslims in British India contributed to the demand for a separate homeland.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Many Muslims feared political marginalization and sought constitutional safeguards and political space to protect their religious, cultural and social identity.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "ideological basis"
+      ]
+    },
+    {
+      "id": "X-PAKS-C01-L01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Ideological Basis of Pakistan",
+      "topic_name": "ideological basis",
+      "category": "long",
+      "question_text": "Explain the major ideas that contributed to the ideological basis of Pakistan.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for Muslim identity, political safeguards, Islamic social values, the Two-Nation Theory, and connection between these ideas and the demand for a separate homeland.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "ideological basis"
+      ]
+    },
+    {
+      "id": "X-PAKS-C02-M01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Pakistan Movement",
+      "topic_name": "Pakistan Movement",
+      "category": "mcq",
+      "question_text": "The Lahore Resolution was adopted in which year?",
+      "options": [
+        {
+          "id": "A",
+          "text": "1940"
+        },
+        {
+          "id": "B",
+          "text": "1930"
+        },
+        {
+          "id": "C",
+          "text": "1947"
+        },
+        {
+          "id": "D",
+          "text": "1956"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "1940",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Pakistan Movement"
+      ]
+    },
+    {
+      "id": "X-PAKS-C02-M02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Pakistan Movement",
+      "topic_name": "leadership",
+      "category": "mcq",
+      "question_text": "Who led the All-India Muslim League during the final phase of the Pakistan Movement?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Muhammad Ali Jinnah"
+        },
+        {
+          "id": "B",
+          "text": "Sir Syed Ahmad Khan"
+        },
+        {
+          "id": "C",
+          "text": "Allama Iqbal only"
+        },
+        {
+          "id": "D",
+          "text": "Liaquat Ali Khan alone"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Muhammad Ali Jinnah",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "leadership"
+      ]
+    },
+    {
+      "id": "X-PAKS-C02-S01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Pakistan Movement",
+      "topic_name": "Lahore Resolution",
+      "category": "short",
+      "question_text": "Why was the Lahore Resolution important?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It gave a clear political direction to the Muslim demand for autonomous or independent Muslim-majority regions and became a major milestone toward Pakistan.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Lahore Resolution"
+      ]
+    },
+    {
+      "id": "X-PAKS-C02-S02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Pakistan Movement",
+      "topic_name": "political mobilization",
+      "category": "short",
+      "question_text": "How did political organization help the Pakistan Movement?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It enabled Muslims to coordinate leadership, communicate demands, contest elections and build public support across different regions.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "political mobilization"
+      ]
+    },
+    {
+      "id": "X-PAKS-C02-L01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Pakistan Movement",
+      "topic_name": "Pakistan Movement",
+      "category": "long",
+      "question_text": "Trace major developments from Muslim political awakening to the creation of Pakistan in 1947.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for early Muslim political organization, intellectual contributions, the Muslim League, Lahore Resolution 1940, and the final constitutional/political developments leading to independence in 1947.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Pakistan Movement"
+      ]
+    },
+    {
+      "id": "X-PAKS-C03-M01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "History of Pakistan (1947-Uptill Now) and Constitutional Development in Pakistan",
+      "topic_name": "constitutional history",
+      "category": "mcq",
+      "question_text": "Pakistan’s first constitution came into force in?",
+      "options": [
+        {
+          "id": "A",
+          "text": "1956"
+        },
+        {
+          "id": "B",
+          "text": "1947"
+        },
+        {
+          "id": "C",
+          "text": "1962"
+        },
+        {
+          "id": "D",
+          "text": "1973"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "1956",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "constitutional history"
+      ]
+    },
+    {
+      "id": "X-PAKS-C03-M02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "History of Pakistan (1947-Uptill Now) and Constitutional Development in Pakistan",
+      "topic_name": "1973 Constitution",
+      "category": "mcq",
+      "question_text": "The Constitution currently forming the basic constitutional framework of Pakistan was adopted in?",
+      "options": [
+        {
+          "id": "A",
+          "text": "1973"
+        },
+        {
+          "id": "B",
+          "text": "1956"
+        },
+        {
+          "id": "C",
+          "text": "1962"
+        },
+        {
+          "id": "D",
+          "text": "1949"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "1973",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "1973 Constitution"
+      ]
+    },
+    {
+      "id": "X-PAKS-C03-S01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "History of Pakistan (1947-Uptill Now) and Constitutional Development in Pakistan",
+      "topic_name": "Objectives Resolution",
+      "category": "short",
+      "question_text": "What was the constitutional significance of the Objectives Resolution of 1949?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It set out guiding principles for Pakistan’s constitutional development, including representative government, fundamental values and the role of Islamic principles.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Objectives Resolution"
+      ]
+    },
+    {
+      "id": "X-PAKS-C03-S02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "History of Pakistan (1947-Uptill Now) and Constitutional Development in Pakistan",
+      "topic_name": "constitution",
+      "category": "short",
+      "question_text": "Why is a constitution important for a state?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It defines institutions, distributes powers, protects rights, sets legal procedures and establishes the relationship between state organs and citizens.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "constitution"
+      ]
+    },
+    {
+      "id": "X-PAKS-C03-L01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "History of Pakistan (1947-Uptill Now) and Constitutional Development in Pakistan",
+      "topic_name": "constitutional development",
+      "category": "long",
+      "question_text": "Compare the broad constitutional milestones of 1956, 1962 and 1973.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for identifying each constitution, noting major changes in governmental structure, constitutional continuity/disruption, representative institutions, and why the 1973 Constitution remains central to the current framework.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "constitutional development"
+      ]
+    },
+    {
+      "id": "X-PAKS-C04-M01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Geography of Pakistan",
+      "topic_name": "physical geography",
+      "category": "mcq",
+      "question_text": "The Indus River system is most important to Pakistan for?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Irrigation and agriculture"
+        },
+        {
+          "id": "B",
+          "text": "Ocean tides only"
+        },
+        {
+          "id": "C",
+          "text": "Volcanic activity"
+        },
+        {
+          "id": "D",
+          "text": "Polar transport"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Irrigation and agriculture",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "physical geography"
+      ]
+    },
+    {
+      "id": "X-PAKS-C04-M02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Geography of Pakistan",
+      "topic_name": "location",
+      "category": "mcq",
+      "question_text": "Pakistan has coastline along the?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Arabian Sea"
+        },
+        {
+          "id": "B",
+          "text": "Red Sea"
+        },
+        {
+          "id": "C",
+          "text": "Mediterranean Sea"
+        },
+        {
+          "id": "D",
+          "text": "Black Sea"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Arabian Sea",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "location"
+      ]
+    },
+    {
+      "id": "X-PAKS-C04-S01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Geography of Pakistan",
+      "topic_name": "geography",
+      "category": "short",
+      "question_text": "Name two major physical regions of Pakistan.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Examples include the northern mountains, Indus plain, Balochistan Plateau, deserts and coastal areas; any two valid regions.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "geography"
+      ]
+    },
+    {
+      "id": "X-PAKS-C04-S02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Geography of Pakistan",
+      "topic_name": "climate",
+      "category": "short",
+      "question_text": "Why does Pakistan experience regional variation in climate?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Differences in latitude, altitude, distance from the sea, relief and monsoon/western weather systems produce regional climate variation.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "climate"
+      ]
+    },
+    {
+      "id": "X-PAKS-C04-L01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Geography of Pakistan",
+      "topic_name": "geography",
+      "category": "long",
+      "question_text": "Explain how relief, rivers and climate influence settlement and economic activity in Pakistan.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for relief constraints/opportunities, Indus irrigation, fertile plains, climate effects on agriculture/water, and links to population/transport/economic concentration.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "geography"
+      ]
+    },
+    {
+      "id": "X-PAKS-C05-M01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Pakistan and International Affairs",
+      "topic_name": "foreign relations",
+      "category": "mcq",
+      "question_text": "A basic aim of foreign policy is to protect a state’s?",
+      "options": [
+        {
+          "id": "A",
+          "text": "National interests"
+        },
+        {
+          "id": "B",
+          "text": "Weather only"
+        },
+        {
+          "id": "C",
+          "text": "School timetable"
+        },
+        {
+          "id": "D",
+          "text": "Local road map"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "National interests",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "foreign relations"
+      ]
+    },
+    {
+      "id": "X-PAKS-C05-M02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Pakistan and International Affairs",
+      "topic_name": "international organizations",
+      "category": "mcq",
+      "question_text": "Pakistan is a member of which global organization?",
+      "options": [
+        {
+          "id": "A",
+          "text": "United Nations"
+        },
+        {
+          "id": "B",
+          "text": "European Union"
+        },
+        {
+          "id": "C",
+          "text": "ASEAN only"
+        },
+        {
+          "id": "D",
+          "text": "Arctic Council only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "United Nations",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "international organizations"
+      ]
+    },
+    {
+      "id": "X-PAKS-C05-S01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Pakistan and International Affairs",
+      "topic_name": "foreign policy",
+      "category": "short",
+      "question_text": "State two factors that can influence Pakistan’s foreign policy.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Geography, security, economic interests, historical ties, international law and regional/global developments can influence foreign policy; any two.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "foreign policy"
+      ]
+    },
+    {
+      "id": "X-PAKS-C05-S02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Pakistan and International Affairs",
+      "topic_name": "international cooperation",
+      "category": "short",
+      "question_text": "Why are international organizations important for states?",
+      "options": [],
+      "correct_option": "",
+      "answer": "They provide forums for diplomacy, cooperation, conflict management, development, humanitarian action and rule-based international engagement.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "international cooperation"
+      ]
+    },
+    {
+      "id": "X-PAKS-C05-L01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Pakistan and International Affairs",
+      "topic_name": "international affairs",
+      "category": "long",
+      "question_text": "Explain how geography, security and economic interests shape Pakistan’s international relations.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for location, regional security, trade/energy needs, diplomatic cooperation, and participation in international organizations, without requiring current officeholder names.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "international affairs"
+      ]
+    },
+    {
+      "id": "X-PAKS-C06-M01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Resources and Economic Development of Pakistan",
+      "topic_name": "resources",
+      "category": "mcq",
+      "question_text": "Which resource is renewable when managed sustainably?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Solar energy"
+        },
+        {
+          "id": "B",
+          "text": "Natural gas"
+        },
+        {
+          "id": "C",
+          "text": "Coal"
+        },
+        {
+          "id": "D",
+          "text": "Metal ore"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Solar energy",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "resources"
+      ]
+    },
+    {
+      "id": "X-PAKS-C06-M02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Resources and Economic Development of Pakistan",
+      "topic_name": "economic sectors",
+      "category": "mcq",
+      "question_text": "Agriculture belongs mainly to which sector?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Primary sector"
+        },
+        {
+          "id": "B",
+          "text": "Secondary sector"
+        },
+        {
+          "id": "C",
+          "text": "Tertiary sector only"
+        },
+        {
+          "id": "D",
+          "text": "Quaternary sector only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Primary sector",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "economic sectors"
+      ]
+    },
+    {
+      "id": "X-PAKS-C06-S01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Resources and Economic Development of Pakistan",
+      "topic_name": "economic development",
+      "category": "short",
+      "question_text": "How can education contribute to economic development?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It improves skills, productivity, innovation and employability, helping workers and institutions use resources more effectively.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "economic development"
+      ]
+    },
+    {
+      "id": "X-PAKS-C06-S02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Resources and Economic Development of Pakistan",
+      "topic_name": "resources",
+      "category": "short",
+      "question_text": "Why is sustainable resource management important?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It helps meet present needs while reducing depletion, environmental damage and risks to future generations.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "resources"
+      ]
+    },
+    {
+      "id": "X-PAKS-C06-L01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Resources and Economic Development of Pakistan",
+      "topic_name": "economic development",
+      "category": "long",
+      "question_text": "Discuss the roles of agriculture, industry, services and human capital in Pakistan’s economic development.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for each major sector, interdependence among sectors, human skills/education, infrastructure/resource efficiency, and balanced sustainable growth.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "economic development"
+      ]
+    },
+    {
+      "id": "X-PAKS-C07-M01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Population, Society and Cultural Diversity in Pakistan",
+      "topic_name": "population",
+      "category": "mcq",
+      "question_text": "Population density means?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Number of people per unit area"
+        },
+        {
+          "id": "B",
+          "text": "Birth rate only"
+        },
+        {
+          "id": "C",
+          "text": "Total land area only"
+        },
+        {
+          "id": "D",
+          "text": "Number of cities only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Number of people per unit area",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "population"
+      ]
+    },
+    {
+      "id": "X-PAKS-C07-M02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Population, Society and Cultural Diversity in Pakistan",
+      "topic_name": "cultural diversity",
+      "category": "mcq",
+      "question_text": "Cultural diversity includes differences in?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Languages, traditions and regional practices"
+        },
+        {
+          "id": "B",
+          "text": "Gravity only"
+        },
+        {
+          "id": "C",
+          "text": "Latitude only"
+        },
+        {
+          "id": "D",
+          "text": "Currency notes only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Languages, traditions and regional practices",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "cultural diversity"
+      ]
+    },
+    {
+      "id": "X-PAKS-C07-S01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Population, Society and Cultural Diversity in Pakistan",
+      "topic_name": "population",
+      "category": "short",
+      "question_text": "State one opportunity and one challenge created by a large young population.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Opportunity: a large future workforce; challenge: strong demand for education, health, skills and jobs.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "population"
+      ]
+    },
+    {
+      "id": "X-PAKS-C07-S02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Population, Society and Cultural Diversity in Pakistan",
+      "topic_name": "society",
+      "category": "short",
+      "question_text": "How can cultural diversity strengthen national society?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It can enrich languages, arts, traditions and perspectives when combined with mutual respect, equal citizenship and social inclusion.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "society"
+      ]
+    },
+    {
+      "id": "X-PAKS-C07-L01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Population, Society and Cultural Diversity in Pakistan",
+      "topic_name": "population and society",
+      "category": "long",
+      "question_text": "Explain how population trends, urbanization and cultural diversity affect development.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for population growth/age structure, urbanization pressures, services/jobs, cultural diversity, and need for inclusive planning and social cohesion.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "population and society"
+      ]
+    },
+    {
+      "id": "X-PAKS-C08-M01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Women Empowerment in Pakistan",
+      "topic_name": "women empowerment",
+      "category": "mcq",
+      "question_text": "Women empowerment includes improved access to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Education, health, economic and civic opportunities"
+        },
+        {
+          "id": "B",
+          "text": "Only household chores"
+        },
+        {
+          "id": "C",
+          "text": "Only one occupation"
+        },
+        {
+          "id": "D",
+          "text": "No decision-making role"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Education, health, economic and civic opportunities",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "women empowerment"
+      ]
+    },
+    {
+      "id": "X-PAKS-C08-M02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Women Empowerment in Pakistan",
+      "topic_name": "participation",
+      "category": "mcq",
+      "question_text": "Increasing women’s participation in education and work can contribute to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Broader social and economic development"
+        },
+        {
+          "id": "B",
+          "text": "Lower skill levels by definition"
+        },
+        {
+          "id": "C",
+          "text": "Less human capital"
+        },
+        {
+          "id": "D",
+          "text": "No effect on society"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Broader social and economic development",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "participation"
+      ]
+    },
+    {
+      "id": "X-PAKS-C08-S01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Women Empowerment in Pakistan",
+      "topic_name": "women empowerment",
+      "category": "short",
+      "question_text": "What is meant by women empowerment?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It means expanding women’s ability to access rights, education, resources, opportunities, safety and meaningful participation in decisions affecting their lives.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "women empowerment"
+      ]
+    },
+    {
+      "id": "X-PAKS-C08-S02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Women Empowerment in Pakistan",
+      "topic_name": "development",
+      "category": "short",
+      "question_text": "Why is girls’ education important for national development?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It expands human capital, improves health and family outcomes, increases economic opportunity and supports informed civic participation.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "development"
+      ]
+    },
+    {
+      "id": "X-PAKS-C08-L01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Women Empowerment in Pakistan",
+      "topic_name": "women empowerment",
+      "category": "long",
+      "question_text": "Discuss major ways societies can support women empowerment in Pakistan.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for education, legal rights/equal protection, health and safety, economic opportunity, and meaningful social/civic participation.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-019 | 430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a | page 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "women empowerment"
+      ]
+    }
+  ]
+}

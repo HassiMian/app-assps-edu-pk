@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "assps-urdu-9-10-grammar-source-v1",
+  "checkedOn": "2026-10-07",
+  "sourceRecordId": "pectaa-catalog-107",
+  "sourcePdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+  "sourceByteLength": 131046901,
+  "pageCount": 160,
+  "authorityIdentity": "PECTAA Urdu Quaid-e-Insha 2023-24 (Classes IX-X)",
+  "authorityState": "OFFICIAL_CATALOG_AND_BYTES_VERIFIED_CONTENT_MAP_PARTIAL",
+  "grade9PatternAuthority": "officialGrade9LanguageModelHierarchy2026.json",
+  "grade10PatternAuthorityState": "PENDING_CURRENT_OFFICIAL_PATTERN_CONFIRMATION",
+  "verifiedGrade9TaskFamilies": [
+    "gender",
+    "singular_plural",
+    "synonym",
+    "antonym",
+    "idiom",
+    "sentence_correction",
+    "application_or_letter",
+    "story_or_dialogue"
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copySourcePassages": false,
+    "copyModelPaperStems": false,
+    "exactInternalPageMapPending": true
+  }
+}
