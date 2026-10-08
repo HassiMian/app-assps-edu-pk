@@ -8,11 +8,16 @@ const ATTESTATIONS = Object.freeze([
   'sourceImageChecked','editionChecked','chapterMatchChecked',
   'curriculumChecked','answerKeyChecked','languageChecked','originalityChecked',
 ])
-const GRADE_PATTERN = /^(?:9|10)(?:th)?$/i
 const normalizeGrade = value => {
-  const grade = String(value||'').trim()
-  return GRADE_PATTERN.test(grade) ? parseInt(grade,10) : null
+  const grade = String(value||'').trim().toLowerCase()
+    .replace(/^(?:class|grade)\s*[:.-]?\s*/,'')
+  if (/^(?:09|9|9th|ix|nine)$/.test(grade)) return 9
+  if (/^(?:10|10th|x|ten)$/.test(grade)) return 10
+  return null
 }
+const looksLikeHighSchoolGrade = value =>
+  /^(?:(?:class|grade)\s*[:.-]?\s*)?(?:0?9(?:th)?|10(?:th)?|ix|x|nine|ten)$/i
+    .test(String(value||'').trim())
 function error(code,message,status=409){
   const e=new Error(message);e.code=code;e.status=status;return e
 }
@@ -108,7 +113,12 @@ async function assertIndependentReviewReady(client,{schoolId,master,actorId}){
       [schoolId,master.source_question_bank_id])
     : {rowCount:0,rows:[]}
   const sourceGrade=linked.rowCount===1?normalizeGrade(linked.rows[0].class_level):null
-  if(!grade&&!sourceGrade)return {grade:null,legacyRecord:null,review:null,revision:rev}
+  if(!grade&&!sourceGrade){
+    if(looksLikeHighSchoolGrade(rev.content_json?.classLevel) ||
+       looksLikeHighSchoolGrade(linked.rows[0]?.class_level))
+      throw error('UNRECOGNIZED_HIGH_SCHOOL_GRADE','High-school class representation must be unambiguous.')
+    return {grade:null,legacyRecord:null,review:null,revision:rev}
+  }
   if(grade!==sourceGrade)
     throw error('ACADEMIC_GRADE_MISMATCH','Governed revision and linked Question Bank grade disagree.')
 

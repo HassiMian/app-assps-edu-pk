@@ -32,7 +32,7 @@ const reviewPayload={
 test('tenant-local revision-bound independent academic gate prevents premature Grade 9 approval',
   {timeout:60000},async t=>{
   assert.equal(process.env.NODE_ENV,'test')
-  assert.match(String(process.env.DB_NAME||''),/^assps_academic_review_stage_/)
+  assert.match(String(process.env.DB_NAME||''),/^assps_(?:academic_review_stage|review_255_stage)_20261008$/)
   const app=express();app.use(express.json())
   app.use((req,res,next)=>tenantContext.run({
     rlsEnabled:true,isSuperAdmin:false,tenantId:1,tenantKey:'assps'
@@ -63,6 +63,21 @@ test('tenant-local revision-bound independent academic gate prevents premature G
   const context=await request(port,'GET','/api/question-bank/governance/'+pub+'/review-context',undefined,reviewer)
   assert.equal(context.status,200,context.raw)
   assert.equal(context.body.data.currentRevision,1)
+  // A valid admin of another school cannot discover or review this tenant's revision.
+  const otherSchoolAdmin=signed(2420)
+  const foreignContext=await request(port,'GET','/api/question-bank/governance/'+pub+
+    '/review-context',undefined,otherSchoolAdmin)
+  assert.ok([401,403,404].includes(foreignContext.status),foreignContext.raw)
+  const foreignReview=await request(port,'POST','/api/question-bank/governance/'+pub+
+    '/academic-review',{expectedRevision:1,
+      expectedContentHash:context.body.data.currentContentHash,
+      evidence:reviewPayload},otherSchoolAdmin)
+  assert.ok([401,403,404].includes(foreignReview.status),foreignReview.raw)
+  const {getAcademicReviewContext}=require('../services/grade910AcademicReviewService')
+  await assert.rejects(
+    getAcademicReviewContext({schoolId:2,requesterId:2420,publicId:pub}),
+    {code:'REVIEW_QUESTION_NOT_FOUND'}
+  )
   const cmd={expectedRevision:context.body.data.currentRevision,
     expectedContentHash:context.body.data.currentContentHash,evidence:reviewPayload}
   const url='/api/question-bank/governance/'+pub+'/academic-review'

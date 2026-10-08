@@ -72,3 +72,11 @@ test('question and answer revision parity cannot be bypassed by keeping stem unc
  assert.equal(approvedSourceMatchesRevision(source,{...revision,marks:2}),false)
  assert.equal(approvedSourceMatchesRevision(source,{...revision,options:[...revision.options.slice(0,3),{label:'D',text:'Physics'}]}),false)
 })
+
+test('high-school grade aliases cannot bypass independent approval',()=>{
+  assert.equal(normalizeGrade('Grade 9'),9)
+  assert.equal(normalizeGrade('Class IX'),9)
+  assert.equal(normalizeGrade('Class 10'),10)
+  assert.equal(normalizeGrade('Grade X'),10)
+  assert.equal(normalizeGrade('Class 8'),null)
+})
