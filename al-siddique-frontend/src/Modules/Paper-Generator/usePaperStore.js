@@ -1,13 +1,14 @@
 // usePaperStore.js — Al Siddique Smart School OS
 import { useState, useEffect } from 'react'
-import { resolveAssetUrl } from '../../services/api'
+import api, { resolveAssetUrl } from '../../services/api'
 import { classLevelLabel, classLevelsMatch, normalizeClassLevel } from '../../services/useAcademicStore'
-import { getTenantStorageItem, setTenantStorageItem } from '../../services/tenantStorage'
+import { getTenantScope, getTenantStorageItem, setTenantStorageItem } from '../../services/tenantStorage'
 import asspsQuestionBankSeed from './seed-data/assps-question-bank-class4-7-8.json'
 import officialFirstTermPapers from './seed-data/official-first-term-2026-v13.json'
 import { getFinalExamScheduleForPaper } from '../dateSheetFinalExam2026.js'
 import examNightRecoverySeed from './seed-data/exam-night-recovery-v3.json'
 import { buildRecoverySavedPapers } from './seed-data/examNightRecoveryAdapter.js'
+import { mergeBackendQuestionBankRows } from './questionBankBackendSync.js'
 
 const STORE_KEY = 'al_siddique_paper_store'
 const NOTIFICATIONS_KEY = 'saas_admin_notifications'
@@ -830,6 +831,51 @@ function notifyPaperSaved(paper) {
  window.dispatchEvent(new StorageEvent('storage', { key: NOTIFICATIONS_KEY }))
 }
 
+const BACKEND_QBANK_PAGE_SIZE = 500
+let backendQuestionBankHydration = { scope: null, promise: null, completed: false }
+
+async function fetchBackendQuestionBankRows() {
+  const rows = []
+  let offset = 0
+  let total = Infinity
+  let pageGuard = 0
+  while (rows.length < total && pageGuard < 20) {
+    pageGuard += 1
+    const response = await api.get('/api/question-bank', {
+      params: { limit: BACKEND_QBANK_PAGE_SIZE, offset },
+      skipCache: true,
+    })
+    const pageRows = Array.isArray(response?.data?.data) ? response.data.data : []
+    const reportedTotal = Number(response?.data?.meta?.total)
+    if (Number.isFinite(reportedTotal)) total = reportedTotal
+    rows.push(...pageRows)
+    if (!pageRows.length || pageRows.length < BACKEND_QBANK_PAGE_SIZE || rows.length >= total) break
+    offset += pageRows.length
+  }
+  return rows
+}
+
+function beginBackendQuestionBankHydration() {
+  const scope = getTenantScope()
+  if (backendQuestionBankHydration.scope !== scope) {
+    backendQuestionBankHydration = { scope, promise: null, completed: false }
+  }
+  if (backendQuestionBankHydration.completed) {
+    return Promise.resolve({ scope, rows: null, alreadyHydrated: true })
+  }
+  if (backendQuestionBankHydration.promise) return backendQuestionBankHydration.promise
+  backendQuestionBankHydration.promise = fetchBackendQuestionBankRows()
+    .then(rows => ({ scope, rows, alreadyHydrated: false }))
+    .finally(() => {
+      if (backendQuestionBankHydration.scope === scope) backendQuestionBankHydration.promise = null
+    })
+  return backendQuestionBankHydration.promise
+}
+
+function markBackendQuestionBankHydrated(scope) {
+  if (backendQuestionBankHydration.scope === scope) backendQuestionBankHydration.completed = true
+}
+
 let globalStore = null;
 const listeners = new Set();
 
@@ -889,6 +935,28 @@ export function usePaperStore() {
       cancelled = true;
     };
   }, []);
+
+  useEffect(() => {
+    let cancelled = false
+    beginBackendQuestionBankHydration()
+      .then(({ scope, rows, alreadyHydrated }) => {
+        if (cancelled || alreadyHydrated || !Array.isArray(rows)) return
+        // Fail closed if tenant/school identity changed while the request was in flight.
+        if (getTenantScope() !== scope) return
+        const merged = mergeBackendQuestionBankRows(globalStore, rows, { scope })
+        let applied = true
+        if (merged.changed) {
+          applied = saveStore(merged.store)
+          if (applied) {
+            globalStore = merged.store
+            emit()
+          }
+        }
+        if (applied) markBackendQuestionBankHydrated(scope)
+      })
+      .catch(() => {})
+    return () => { cancelled = true }
+  }, [])
 
   function update(updater) {
     const next = updater(globalStore);

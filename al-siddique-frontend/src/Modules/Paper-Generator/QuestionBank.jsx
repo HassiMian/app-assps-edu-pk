@@ -2409,6 +2409,7 @@ export default function QuestionBank() {
                           <Badge color={tc.color}>{tc.icon} {tc.label}</Badge>
                           <Badge color={C.gold}>{q.marks} mk</Badge>
                           <Badge color={C.cyan}>{mediumLabel(q.medium || (q.textUrdu ? 'dual' : 'english'))}</Badge>
+                          {q.approvalStatus === 'provisional' && <Badge color={C.orange}>Provisional</Badge>}
                           {q.chapter && <Badge color={C.blue}>{q.chapter}</Badge>}
                           <PriorityTag priority={q.priority} />
                           {showAnswers && q.type === 'mcq' && q.answer && <Badge color={C.green}>Ans: {q.answer}</Badge>}
