@@ -42,7 +42,11 @@ before(async () => {
 
   const context = await browser.newContext({ viewport: { width: 1440, height: 1100 } })
   await context.addInitScript(() => {
+    localStorage.setItem('al_siddique_token', 'canary-test-only-token')
     localStorage.setItem('al_siddique_user', JSON.stringify({
+      id: 999,
+      school_id: 1,
+      name: 'Canary Test Admin',
       role: 'admin',
       school_name: 'Al Siddique Scholars Public School',
       schoolCode: 'ASSPS',
@@ -51,11 +55,16 @@ before(async () => {
   page = await context.newPage()
 
   await page.route('**/favicon.ico', route => route.fulfill({ status: 204, body: '' }))
-  await page.route('**/api/**', route => route.fulfill({
-    status: 200,
-    contentType: 'application/json',
-    body: JSON.stringify({ success: true, data: {} }),
-  }))
+  await page.route('**/api/**', route => {
+    const isSession = route.request().url().includes('/api/auth/me')
+    return route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify(isSession
+        ? { success: true, user: { id: 999, school_id: 1, name: 'Canary Test Admin', role: 'admin' } }
+        : { success: true, data: {} }),
+    })
+  })
 
   page.on('pageerror', error => pageErrors.push(error.message))
   page.on('console', message => {
@@ -86,11 +95,11 @@ async function loadSavedPaper(paper) {
   const exactName = page.getByText(paper.name, { exact: true })
   await exactName.waitFor({ timeout: 10000 })
 
-  const loadButton = page.getByRole('button', { name: 'Load & Preview' }).first()
+  const loadButton = page.getByRole('button', { name: 'Open in Workspace' }).first()
   await loadButton.click()
 }
 
-test('Phase 18: real PaperGenerator default route opens all 43 pristine V13 papers in Canonical V2', async () => {
+test('Phase 18: Saved Papers opens all 43 official V13 papers in the unified Paper Workspace', async () => {
   assert.strictEqual(v13.papers.length, 43)
 
   await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' })
@@ -105,10 +114,10 @@ test('Phase 18: real PaperGenerator default route opens all 43 pristine V13 pape
 
     try {
       await loadSavedPaper(paper)
-      await page.waitForSelector('.canonical-paper-editor-container', { timeout: 12000 })
-      await page.waitForSelector('[data-canonical-working-document]', { timeout: 12000 })
+      await page.waitForSelector('[data-paper-style-root]', { timeout: 12000 })
+      await page.waitForSelector('.pts-generator-surface', { timeout: 12000 })
 
-      const canonicalSurface = page.locator('[data-canonical-working-document]').first()
+      const canonicalSurface = page.locator('[data-paper-style-root]').first()
       const renderedText = await canonicalSurface.innerText()
       assert.ok(renderedText.length > 0, `${paper.id}: canonical paper text is empty`)
       assert.ok(!renderedText.includes('[object Object]'), `${paper.id}: leaked [object Object]`)
@@ -138,7 +147,7 @@ test('Phase 18: real PaperGenerator default route opens all 43 pristine V13 pape
   assert.strictEqual(canonicalCount, 43)
 })
 
-test('Phase 18: emergency canonicalLegacy=1 rollback keeps official paper on stable Paper Workspace', async () => {
+test('Phase 18: legacy query flag cannot reopen retired editor for official papers', async () => {
   const sample = v13.papers.find(paper => paper.id === 'official-first-term-2026-class-5-english')
   assert.ok(sample)
 
@@ -146,7 +155,7 @@ test('Phase 18: emergency canonicalLegacy=1 rollback keeps official paper on sta
   await openSavedPapers()
   await loadSavedPaper(sample)
 
-  await page.waitForSelector('.pts-generator-surface', { timeout: 12000 })
-  assert.strictEqual(await page.locator('.canonical-paper-editor-container').count(), 0)
+  await page.waitForSelector('[data-paper-style-root]', { timeout: 12000 })
   assert.ok(await page.locator('.pts-generator-surface').count() > 0)
+  assert.strictEqual(await page.locator('.paper-editor-v2-root').count(), 0)
 })
