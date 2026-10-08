@@ -1,25 +1,35 @@
 // LessonPlanTab.jsx — Al Siddique Smart School OS
 // Full Bloom's taxonomy + Weekly/Annual planner + Auto-generate + Portal send
 
-import { useState, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Edit, Trash2, X, Send, BookOpen, Plus, Printer, Check } from 'lucide-react'
 import Portal from '../../components/Portal'
 import { useAcademicStore } from '../../services/useAcademicStore'
+import { getTenantStorageItem, setTenantStorageItem } from '../../services/tenantStorage'
 import { usePaperStore } from './usePaperStore'
+import { createLessonPlan, deleteLessonPlan as deleteLessonPlanServer, listLessonPlans, shareLessonPlan, updateLessonPlan } from './lessonPlanClient'
 
 //  Storage 
 const LP_KEY = 'al_siddique_lesson_plans'
-function getStorage() {
+const loadPlans = () => {
  try {
- return typeof window !== 'undefined' ? window.localStorage : null
- } catch {
- return null
- }
+  const scoped = getTenantStorageItem(LP_KEY)
+  if (scoped) return JSON.parse(scoped) || []
+  const legacy = typeof window !== 'undefined' ? window.localStorage?.getItem(LP_KEY) : null
+  const parsed = legacy ? JSON.parse(legacy) : []
+  if (Array.isArray(parsed) && parsed.length) setTenantStorageItem(LP_KEY, JSON.stringify(parsed))
+  return Array.isArray(parsed) ? parsed : []
+ } catch { return [] }
 }
-const loadPlans = () => { try { return JSON.parse(getStorage()?.getItem(LP_KEY)) || [] } catch { return [] } }
 const storePlans = (plans) => {
- const storage = getStorage()
- try { storage?.setItem(LP_KEY, JSON.stringify(plans)) } catch {}
+ try { setTenantStorageItem(LP_KEY, JSON.stringify(plans)); return true } catch { return false }
+}
+const mergePlanSources = (serverPlans = [], recoveryPlans = []) => {
+ const byId = new Map(serverPlans.map(plan => [String(plan.id), plan]))
+ for (const plan of recoveryPlans) {
+  if (!byId.has(String(plan.id))) byId.set(String(plan.id), { ...plan, persistenceMode: plan.persistenceMode || 'LOCAL_RECOVERY' })
+ }
+ return [...byId.values()].sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')))
 }
 
 //  Palette 
@@ -1096,20 +1106,85 @@ export default function LessonPlanTab({ settings }) {
  const [autoGen, setAutoGen] = useState(false)
  const [toast, setToast] = useState(null)
 
- function savePlan(plan) {
- const updated = plans.find(p => p.id === plan.id)
- ? plans.map(p => p.id === plan.id ? { ...plan, updatedAt: new Date().toISOString() } : p)
- : [{ ...plan, createdAt: new Date().toISOString() }, ...plans]
- storePlans(updated)
- setPlans(updated)
- setView('list')
+ useEffect(() => {
+  let cancelled = false
+  const recoveryPlans = loadPlans()
+  listLessonPlans({ limit:500 }).then(serverPlans => {
+   if (cancelled) return
+   const merged = mergePlanSources(Array.isArray(serverPlans) ? serverPlans : [], recoveryPlans)
+   setPlans(merged)
+   storePlans(merged)
+  }).catch(() => {
+   if (cancelled || !recoveryPlans.length) return
+   setToast({ message:'Lesson Plans server is temporarily unavailable. Local recovery copies are still available.', color:C.orange })
+  })
+  return () => { cancelled = true }
+ }, [])
+
+ async function persistPlanToServer(plan) {
+  return Number(plan.serverRevision || plan.revision || 0) > 0
+   ? updateLessonPlan(plan)
+   : createLessonPlan(plan)
  }
 
- function deletePlan(id) {
- const updated = plans.filter(p => p.id !== id)
- storePlans(updated)
- setPlans(updated)
- setConfirmDel(null)
+ async function savePlan(plan) {
+  const now = new Date().toISOString()
+  const provisional = {
+   ...plan,
+   createdAt: plan.createdAt || now,
+   updatedAt: now,
+   persistenceMode:'PENDING_SERVER',
+  }
+  const optimistic = plans.find(item => item.id === plan.id)
+   ? plans.map(item => item.id === plan.id ? provisional : item)
+   : [provisional, ...plans]
+  storePlans(optimistic)
+  setPlans(optimistic)
+  try {
+   const saved = await persistPlanToServer(provisional)
+   const authoritative = { ...saved, persistenceMode:'ONLINE' }
+   const updated = optimistic.map(item => item.id === authoritative.id ? authoritative : item)
+   storePlans(updated)
+   setPlans(updated)
+   setEditing(authoritative)
+   setView('list')
+   setToast({ message:'Lesson plan saved to server.', color:C.green })
+  } catch (error) {
+   const current = error?.response?.data?.data
+   if (error?.response?.status === 409 && current?.id) {
+    const reconciled = optimistic.map(item => item.id === current.id ? { ...current, persistenceMode:'ONLINE' } : item)
+    storePlans(reconciled)
+    setPlans(reconciled)
+    setToast({ message:'This lesson plan changed on the server. The latest server copy was restored; reopen it before editing again.', color:C.red })
+    return
+   }
+   const recovery = optimistic.map(item => item.id === plan.id ? { ...item, persistenceMode:'LOCAL_RECOVERY' } : item)
+   storePlans(recovery)
+   setPlans(recovery)
+   setView('list')
+   setToast({ message:'Server save is unavailable. A tenant-scoped local recovery copy was preserved.', color:C.orange })
+  }
+  setTimeout(() => setToast(null), 4500)
+ }
+
+ async function deletePlan(id) {
+  const plan = plans.find(item => item.id === id)
+  if (!plan) return
+  if (Number(plan.serverRevision || plan.revision || 0) > 0) {
+   try {
+    await deleteLessonPlanServer(plan)
+   } catch (error) {
+    const conflict = error?.response?.status === 409
+    setToast({ message: conflict ? 'Delete blocked because this plan changed on the server. Reopen it first.' : 'Could not delete the server copy. Nothing was removed.', color:C.red })
+    setConfirmDel(null)
+    setTimeout(() => setToast(null), 4500)
+    return
+   }
+  }
+  const updated = plans.filter(item => item.id !== id)
+  storePlans(updated)
+  setPlans(updated)
+  setConfirmDel(null)
  }
 
  function openEdit(plan) {
@@ -1127,20 +1202,47 @@ export default function LessonPlanTab({ settings }) {
  setView('editor')
  }
 
- function handleAutoGen(newPlans) {
- const updated = [...newPlans.map(p => ({ ...p, createdAt: new Date().toISOString() })), ...plans]
- storePlans(updated)
- setPlans(updated)
- setToast({ message: `${newPlans.length} lesson plan${newPlans.length>1?'s':''} generated successfully!`, color: C.green })
- setTimeout(() => setToast(null), 4000)
+ async function handleAutoGen(newPlans) {
+  const now = new Date().toISOString()
+  const provisional = newPlans.map(plan => ({ ...plan, createdAt:plan.createdAt || now, updatedAt:now, persistenceMode:'PENDING_SERVER' }))
+  let updated = [...provisional, ...plans]
+  storePlans(updated)
+  setPlans(updated)
+  const results = await Promise.allSettled(provisional.map(plan => createLessonPlan(plan)))
+  let failed = 0
+  results.forEach((result, index) => {
+   const original = provisional[index]
+   if (result.status === 'fulfilled') {
+    updated = updated.map(item => item.id === original.id ? { ...result.value, persistenceMode:'ONLINE' } : item)
+   } else {
+    failed += 1
+    updated = updated.map(item => item.id === original.id ? { ...item, persistenceMode:'LOCAL_RECOVERY' } : item)
+   }
+  })
+  storePlans(updated)
+  setPlans(updated)
+  setToast({ message: failed ? `${newPlans.length-failed} plan(s) saved to server; ${failed} preserved as local recovery.` : `${newPlans.length} lesson plan${newPlans.length>1?'s':''} generated and saved to server.`, color:failed ? C.orange : C.green })
+  setTimeout(() => setToast(null), 4500)
  }
 
- function sendToPortal(plan) {
- const updated = plans.map(p => p.id === plan.id ? { ...p, sentToPortal: true } : p)
- storePlans(updated)
- setPlans(updated)
- setToast({ message: `"${plan.title || plan.subject}" sent to Parent & Student Portal!`, color: C.blue })
- setTimeout(() => setToast(null), 4000)
+ async function sendToPortal(plan) {
+  try {
+   let serverPlan = plan
+   if (!Number(serverPlan.serverRevision || serverPlan.revision || 0)) {
+    serverPlan = await createLessonPlan(serverPlan)
+   }
+   const shared = await shareLessonPlan(serverPlan)
+   const authoritative = { ...shared.plan, persistenceMode:'ONLINE' }
+   const updated = plans.map(item => item.id === plan.id ? authoritative : item)
+   storePlans(updated)
+   setPlans(updated)
+   const students = Number(shared.delivery?.students || 0)
+   setToast({ message:`"${plan.title || plan.subject}" sent to portal for ${students} student${students===1?'':'s'} and their parents.`, color:C.blue })
+  } catch (error) {
+   const conflict = error?.response?.status === 409
+   setToast({ message: conflict ? 'Portal send blocked because this plan changed on the server. Reopen it first.' : 'Portal delivery failed. The plan was not marked as sent.', color:C.red })
+  }
+  setTimeout(() => setToast(null), 4500)
  }
 
  const filtered = plans.filter(p =>

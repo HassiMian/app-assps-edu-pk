@@ -73,26 +73,31 @@ router.patch('/governance/:publicId/status', canManageQuestionBank, async (req, 
 })
 
 // ─── 1. Get List of Questions (with filters) ──────────────────────────────────
-async function loadQuestionGovernanceRevisionMap(schoolId, ids = []) {
+async function loadQuestionGovernanceMap(schoolId, ids = []) {
   const keys = [...new Set((ids || []).map(id => String(id || '')).filter(Boolean))]
   if (!keys.length) return new Map()
   const result = await query(
-    `SELECT source_id, MAX(current_revision)::int AS current_revision
+    `SELECT DISTINCT ON (source_id)
+            source_id, public_id, lifecycle_status, current_revision
        FROM (
-         SELECT qm.source_question_bank_id AS source_id, qm.current_revision
+         SELECT qm.source_question_bank_id AS source_id, qm.public_id, qm.lifecycle_status, qm.current_revision
            FROM question_masters qm
           WHERE qm.school_id=$1 AND qm.source_question_bank_id = ANY($2::text[])
          UNION ALL
-         SELECT m.mapping_key AS source_id, qm.current_revision
+         SELECT m.mapping_key AS source_id, qm.public_id, qm.lifecycle_status, qm.current_revision
            FROM question_masters qm
            JOIN question_mappings m ON m.school_id=qm.school_id AND m.question_master_id=qm.id
           WHERE qm.school_id=$1 AND m.mapping_type='source_question_bank_id' AND m.mapping_key = ANY($2::text[])
        ) governed
       WHERE source_id IS NOT NULL
-      GROUP BY source_id`,
+      ORDER BY source_id, current_revision DESC`,
     [schoolId, keys]
   )
-  return new Map(result.rows.map(row => [String(row.source_id), Number(row.current_revision || 0)]))
+  return new Map(result.rows.map(row => [String(row.source_id), {
+    publicId:String(row.public_id || ''),
+    lifecycleStatus:String(row.lifecycle_status || ''),
+    currentRevision:Number(row.current_revision || 0),
+  }]))
 }
 
 function requireExpectedQuestionRevision(req, res) {
@@ -168,8 +173,16 @@ router.get('/', async (req, res) => {
     params.push(limit, offset)
 
     const result = await query(sql, params)
-    const governanceRevisions = await loadQuestionGovernanceRevisionMap(schoolId, result.rows.map(row => row.id))
-    const hydratedRows = result.rows.map(row => ({ ...row, governance_revision: governanceRevisions.get(String(row.id)) || 0 }))
+    const governanceMap = await loadQuestionGovernanceMap(schoolId, result.rows.map(row => row.id))
+    const hydratedRows = result.rows.map(row => {
+      const governance = governanceMap.get(String(row.id)) || null
+      return {
+        ...row,
+        governance_revision: governance?.currentRevision || 0,
+        governance_public_id: governance?.publicId || null,
+        governance_lifecycle_status: governance?.lifecycleStatus || (row.is_approved ? 'ready' : 'candidate'),
+      }
+    })
 
     // Get total count for pagination
     const countSql = sql.split('ORDER BY')[0].replace('SELECT *', 'SELECT COUNT(*) as total')
@@ -215,8 +228,14 @@ router.get('/:id', async (req, res) => {
       return res.status(404).json({ success: false, message: 'Question not found' })
     }
 
-    const governanceRevisions = await loadQuestionGovernanceRevisionMap(schoolId, [result.rows[0].id])
-    res.json({ success: true, data: { ...result.rows[0], governance_revision: governanceRevisions.get(String(result.rows[0].id)) || 0 } })
+    const governanceMap = await loadQuestionGovernanceMap(schoolId, [result.rows[0].id])
+    const governance = governanceMap.get(String(result.rows[0].id)) || null
+    res.json({ success: true, data: {
+      ...result.rows[0],
+      governance_revision: governance?.currentRevision || 0,
+      governance_public_id: governance?.publicId || null,
+      governance_lifecycle_status: governance?.lifecycleStatus || (result.rows[0].is_approved ? 'ready' : 'candidate'),
+    } })
   } catch (error) {
     console.error('Error fetching question:', error)
     res.status(500).json({ success: false, message: 'Failed to fetch question' })

@@ -30,6 +30,9 @@ test('finalized manual paper creates one durable personalized duplex print job',
     ]}),
   }))
   await context.route('**/api/settings/public**',r=>r.fulfill({status:200,contentType:'application/json',body:'{}'}))
+ await context.route('**/api/settings',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:{}})}))
+ await context.route('**/api/academic/setup',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,configured:false,data:null,defaults:{periodsPerDay:8,localities:['Rayya Khas'],classes:[],subjects:[]}})}))
+ await context.route('**/api/auth/me',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({user:{id:999,role:'admin',school_id:1,tenant_id:'assps'}})}))
 
   let revision=0
   await context.route('**/api/assessment-studio/papers/*/revisions',r=>{

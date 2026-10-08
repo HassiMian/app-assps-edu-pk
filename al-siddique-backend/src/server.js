@@ -203,6 +203,7 @@ const registerRoutes = (router) => {
   mount('/portal',     './routes/portalRoutes')
   mount('/ops',        './routes/opsRoutes')
   mount('/daily-diary','./routes/dailyDiaryRoutes')
+  mount('/lesson-plans','./routes/lessonPlanRoutes')
   mount('/ai-analytics', './routes/aiAnalyticsRoutes')
   mount('/whatsapp', './routes/whatsappRoutes')
 }
