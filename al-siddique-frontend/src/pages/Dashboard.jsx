@@ -273,12 +273,7 @@ export default function Dashboard() {
       setClassData(classArr)
     } catch (err) {
       console.error('Dashboard fetch error:', err)
-      setDashboardError(err.response?.data?.message || 'Core dashboard data could not be loaded from the server.')
-      if (!silent) {
-        setStats(null)
-        setStudents([])
-        setClassData([])
-      }
+      setDashboardError(err.response?.data?.message || 'Core dashboard data could not be refreshed. Existing loaded dashboard data was preserved.')
     } finally {
       setLoading(false)
     }
