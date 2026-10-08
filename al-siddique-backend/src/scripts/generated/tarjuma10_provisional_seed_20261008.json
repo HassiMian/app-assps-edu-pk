@@ -1,0 +1,1521 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "X-TTQ-C01-M01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "سورۃ الانعام",
+      "topic_name": "توحید اور ذمہ داری",
+      "category": "mcq",
+      "question_text": "سورۃ الانعام کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف عددی حساب"
+        },
+        {
+          "id": "D",
+          "text": "صرف جغرافیائی معلومات"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 1",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "توحید اور ذمہ داری"
+      ]
+    },
+    {
+      "id": "X-TTQ-C01-S01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "سورۃ الانعام",
+      "topic_name": "توحید اور ذمہ داری",
+      "category": "short",
+      "question_text": "سورۃ الانعام سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اللہ کی وحدانیت، حلال و حرام میں ذمہ داری اور شرک سے اجتناب کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 1",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "توحید اور ذمہ داری"
+      ]
+    },
+    {
+      "id": "X-TTQ-C01-L01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "سورۃ الانعام",
+      "topic_name": "توحید اور ذمہ داری",
+      "category": "long",
+      "question_text": "سورۃ الانعام کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں اللہ کی وحدانیت، حلال و حرام میں ذمہ داری اور شرک سے اجتناب کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 1",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "توحید اور ذمہ داری"
+      ]
+    },
+    {
+      "id": "X-TTQ-C02-M01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "سورۃ الاعراف",
+      "topic_name": "ہدایت اور جواب دہی",
+      "category": "mcq",
+      "question_text": "سورۃ الاعراف کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف عددی حساب"
+        },
+        {
+          "id": "D",
+          "text": "صرف جغرافیائی معلومات"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 2",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "ہدایت اور جواب دہی"
+      ]
+    },
+    {
+      "id": "X-TTQ-C02-S01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "سورۃ الاعراف",
+      "topic_name": "ہدایت اور جواب دہی",
+      "category": "short",
+      "question_text": "سورۃ الاعراف سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "انسانی اختیار، شیطان کے فتنوں سے بچاؤ اور آخرت کی جواب دہی کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 2",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "ہدایت اور جواب دہی"
+      ]
+    },
+    {
+      "id": "X-TTQ-C02-L01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "سورۃ الاعراف",
+      "topic_name": "ہدایت اور جواب دہی",
+      "category": "long",
+      "question_text": "سورۃ الاعراف کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں انسانی اختیار، شیطان کے فتنوں سے بچاؤ اور آخرت کی جواب دہی کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 2",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "ہدایت اور جواب دہی"
+      ]
+    },
+    {
+      "id": "X-TTQ-C03-M01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "سورۃ یونس",
+      "topic_name": "ایمان و توکل",
+      "category": "mcq",
+      "question_text": "سورۃ یونس کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف عددی حساب"
+        },
+        {
+          "id": "D",
+          "text": "صرف جغرافیائی معلومات"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 3",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "ایمان و توکل"
+      ]
+    },
+    {
+      "id": "X-TTQ-C03-S01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "سورۃ یونس",
+      "topic_name": "ایمان و توکل",
+      "category": "short",
+      "question_text": "سورۃ یونس سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اللہ پر بھروسا، رسالت کی تصدیق اور مشکل میں ثابت قدمی کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 3",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "ایمان و توکل"
+      ]
+    },
+    {
+      "id": "X-TTQ-C03-L01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "سورۃ یونس",
+      "topic_name": "ایمان و توکل",
+      "category": "long",
+      "question_text": "سورۃ یونس کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں اللہ پر بھروسا، رسالت کی تصدیق اور مشکل میں ثابت قدمی کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 3",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "ایمان و توکل"
+      ]
+    },
+    {
+      "id": "X-TTQ-C04-M01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "سورۃ ہود",
+      "topic_name": "استقامت اور انجام",
+      "category": "mcq",
+      "question_text": "سورۃ ہود کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف عددی حساب"
+        },
+        {
+          "id": "D",
+          "text": "صرف جغرافیائی معلومات"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 4",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "استقامت اور انجام"
+      ]
+    },
+    {
+      "id": "X-TTQ-C04-S01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "سورۃ ہود",
+      "topic_name": "استقامت اور انجام",
+      "category": "short",
+      "question_text": "سورۃ ہود سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "انبیاء کی دعوت، قوموں کے رویّے اور اعمال کے نتائج کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 4",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "استقامت اور انجام"
+      ]
+    },
+    {
+      "id": "X-TTQ-C04-L01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "سورۃ ہود",
+      "topic_name": "استقامت اور انجام",
+      "category": "long",
+      "question_text": "سورۃ ہود کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں انبیاء کی دعوت، قوموں کے رویّے اور اعمال کے نتائج کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 4",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "استقامت اور انجام"
+      ]
+    },
+    {
+      "id": "X-TTQ-C05-M01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "سورۃ الرعد",
+      "topic_name": "قدرت اور تبدیلی",
+      "category": "mcq",
+      "question_text": "سورۃ الرعد کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف عددی حساب"
+        },
+        {
+          "id": "D",
+          "text": "صرف جغرافیائی معلومات"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 5",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "قدرت اور تبدیلی"
+      ]
+    },
+    {
+      "id": "X-TTQ-C05-S01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "سورۃ الرعد",
+      "topic_name": "قدرت اور تبدیلی",
+      "category": "short",
+      "question_text": "سورۃ الرعد سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اللہ کی قدرت، کائناتی نشانیاں اور اچھے عمل سے تبدیلی کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 5",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "قدرت اور تبدیلی"
+      ]
+    },
+    {
+      "id": "X-TTQ-C05-L01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "سورۃ الرعد",
+      "topic_name": "قدرت اور تبدیلی",
+      "category": "long",
+      "question_text": "سورۃ الرعد کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں اللہ کی قدرت، کائناتی نشانیاں اور اچھے عمل سے تبدیلی کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 5",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "قدرت اور تبدیلی"
+      ]
+    },
+    {
+      "id": "X-TTQ-C06-M01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "سورۃ ابراہیم",
+      "topic_name": "شکر اور دعا",
+      "category": "mcq",
+      "question_text": "سورۃ ابراہیم کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف عددی حساب"
+        },
+        {
+          "id": "D",
+          "text": "صرف جغرافیائی معلومات"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 6",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "شکر اور دعا"
+      ]
+    },
+    {
+      "id": "X-TTQ-C06-S01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "سورۃ ابراہیم",
+      "topic_name": "شکر اور دعا",
+      "category": "short",
+      "question_text": "سورۃ ابراہیم سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "نعمتوں پر شکر، دعا اور حق پر استقامت کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 6",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "شکر اور دعا"
+      ]
+    },
+    {
+      "id": "X-TTQ-C06-L01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "سورۃ ابراہیم",
+      "topic_name": "شکر اور دعا",
+      "category": "long",
+      "question_text": "سورۃ ابراہیم کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں نعمتوں پر شکر، دعا اور حق پر استقامت کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 6",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "شکر اور دعا"
+      ]
+    },
+    {
+      "id": "X-TTQ-C07-M01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "سورۃ الحجر",
+      "topic_name": "حفاظت وحی",
+      "category": "mcq",
+      "question_text": "سورۃ الحجر کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف عددی حساب"
+        },
+        {
+          "id": "D",
+          "text": "صرف جغرافیائی معلومات"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 7",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "حفاظت وحی"
+      ]
+    },
+    {
+      "id": "X-TTQ-C07-S01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "سورۃ الحجر",
+      "topic_name": "حفاظت وحی",
+      "category": "short",
+      "question_text": "سورۃ الحجر سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اللہ کی قدرت، وحی کی حفاظت اور تکبر سے اجتناب کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 7",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "حفاظت وحی"
+      ]
+    },
+    {
+      "id": "X-TTQ-C07-L01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "سورۃ الحجر",
+      "topic_name": "حفاظت وحی",
+      "category": "long",
+      "question_text": "سورۃ الحجر کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں اللہ کی قدرت، وحی کی حفاظت اور تکبر سے اجتناب کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 7",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "حفاظت وحی"
+      ]
+    },
+    {
+      "id": "X-TTQ-C08-M01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "سورۃ النحل",
+      "topic_name": "نعمت اور عدل",
+      "category": "mcq",
+      "question_text": "سورۃ النحل کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف عددی حساب"
+        },
+        {
+          "id": "D",
+          "text": "صرف جغرافیائی معلومات"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 8",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "نعمت اور عدل"
+      ]
+    },
+    {
+      "id": "X-TTQ-C08-S01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "سورۃ النحل",
+      "topic_name": "نعمت اور عدل",
+      "category": "short",
+      "question_text": "سورۃ النحل سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "نعمتوں کی پہچان، عدل، احسان اور ذمہ دارانہ زندگی کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 8",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "نعمت اور عدل"
+      ]
+    },
+    {
+      "id": "X-TTQ-C08-L01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "سورۃ النحل",
+      "topic_name": "نعمت اور عدل",
+      "category": "long",
+      "question_text": "سورۃ النحل کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں نعمتوں کی پہچان، عدل، احسان اور ذمہ دارانہ زندگی کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 8",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "نعمت اور عدل"
+      ]
+    },
+    {
+      "id": "X-TTQ-C09-M01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "سورۃ بنی اسرائیل",
+      "topic_name": "والدین اور اخلاق",
+      "category": "mcq",
+      "question_text": "سورۃ بنی اسرائیل کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف عددی حساب"
+        },
+        {
+          "id": "D",
+          "text": "صرف جغرافیائی معلومات"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 9",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "والدین اور اخلاق"
+      ]
+    },
+    {
+      "id": "X-TTQ-C09-S01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "سورۃ بنی اسرائیل",
+      "topic_name": "والدین اور اخلاق",
+      "category": "short",
+      "question_text": "سورۃ بنی اسرائیل سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "والدین کے حقوق، اعتدال، وعدہ، عدل اور پاکیزہ معاشرت کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 9",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "والدین اور اخلاق"
+      ]
+    },
+    {
+      "id": "X-TTQ-C09-L01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "سورۃ بنی اسرائیل",
+      "topic_name": "والدین اور اخلاق",
+      "category": "long",
+      "question_text": "سورۃ بنی اسرائیل کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں والدین کے حقوق، اعتدال، وعدہ، عدل اور پاکیزہ معاشرت کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 9",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "والدین اور اخلاق"
+      ]
+    },
+    {
+      "id": "X-TTQ-C10-M01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "سورۃ الکہف",
+      "topic_name": "ایمان کی آزمائش",
+      "category": "mcq",
+      "question_text": "سورۃ الکہف کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف عددی حساب"
+        },
+        {
+          "id": "D",
+          "text": "صرف جغرافیائی معلومات"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 10",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "ایمان کی آزمائش"
+      ]
+    },
+    {
+      "id": "X-TTQ-C10-S01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "سورۃ الکہف",
+      "topic_name": "ایمان کی آزمائش",
+      "category": "short",
+      "question_text": "سورۃ الکہف سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "ایمان، آزمائش، علم اور دنیاوی ظواہر کے پیچھے حکمت کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 10",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "ایمان کی آزمائش"
+      ]
+    },
+    {
+      "id": "X-TTQ-C10-L01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "سورۃ الکہف",
+      "topic_name": "ایمان کی آزمائش",
+      "category": "long",
+      "question_text": "سورۃ الکہف کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں ایمان، آزمائش، علم اور دنیاوی ظواہر کے پیچھے حکمت کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 10",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "ایمان کی آزمائش"
+      ]
+    },
+    {
+      "id": "X-TTQ-C11-M01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "سورۃ المؤمنون",
+      "topic_name": "اہل ایمان کی صفات",
+      "category": "mcq",
+      "question_text": "سورۃ المؤمنون کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف عددی حساب"
+        },
+        {
+          "id": "D",
+          "text": "صرف جغرافیائی معلومات"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 11",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "اہل ایمان کی صفات"
+      ]
+    },
+    {
+      "id": "X-TTQ-C11-S01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "سورۃ المؤمنون",
+      "topic_name": "اہل ایمان کی صفات",
+      "category": "short",
+      "question_text": "سورۃ المؤمنون سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "نماز، امانت، پاکدامنی، ذمہ داری اور آخرت کا یقین کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 11",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "اہل ایمان کی صفات"
+      ]
+    },
+    {
+      "id": "X-TTQ-C11-L01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "سورۃ المؤمنون",
+      "topic_name": "اہل ایمان کی صفات",
+      "category": "long",
+      "question_text": "سورۃ المؤمنون کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں نماز، امانت، پاکدامنی، ذمہ داری اور آخرت کا یقین کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 11",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "اہل ایمان کی صفات"
+      ]
+    },
+    {
+      "id": "X-TTQ-C12-M01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "سورۃ الزمر",
+      "topic_name": "اخلاص اور رجوع",
+      "category": "mcq",
+      "question_text": "سورۃ الزمر کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف عددی حساب"
+        },
+        {
+          "id": "D",
+          "text": "صرف جغرافیائی معلومات"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 12",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "اخلاص اور رجوع"
+      ]
+    },
+    {
+      "id": "X-TTQ-C12-S01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "سورۃ الزمر",
+      "topic_name": "اخلاص اور رجوع",
+      "category": "short",
+      "question_text": "سورۃ الزمر سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "خالص بندگی، امید، توبہ اور اللہ کی طرف رجوع کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 12",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "اخلاص اور رجوع"
+      ]
+    },
+    {
+      "id": "X-TTQ-C12-L01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "سورۃ الزمر",
+      "topic_name": "اخلاص اور رجوع",
+      "category": "long",
+      "question_text": "سورۃ الزمر کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں خالص بندگی، امید، توبہ اور اللہ کی طرف رجوع کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 12",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "اخلاص اور رجوع"
+      ]
+    },
+    {
+      "id": "X-TTQ-C13-M01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "13",
+      "chapter_name": "سورۃ المؤمن/غافر",
+      "topic_name": "دعوت اور مغفرت",
+      "category": "mcq",
+      "question_text": "سورۃ المؤمن/غافر کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف عددی حساب"
+        },
+        {
+          "id": "D",
+          "text": "صرف جغرافیائی معلومات"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 13",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "دعوت اور مغفرت"
+      ]
+    },
+    {
+      "id": "X-TTQ-C13-S01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "13",
+      "chapter_name": "سورۃ المؤمن/غافر",
+      "topic_name": "دعوت اور مغفرت",
+      "category": "short",
+      "question_text": "سورۃ المؤمن/غافر سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "توحید کی دعوت، دعا، صبر اور مغفرت کی امید کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 13",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "دعوت اور مغفرت"
+      ]
+    },
+    {
+      "id": "X-TTQ-C13-L01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "13",
+      "chapter_name": "سورۃ المؤمن/غافر",
+      "topic_name": "دعوت اور مغفرت",
+      "category": "long",
+      "question_text": "سورۃ المؤمن/غافر کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں توحید کی دعوت، دعا، صبر اور مغفرت کی امید کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 13",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "دعوت اور مغفرت"
+      ]
+    },
+    {
+      "id": "X-TTQ-C14-M01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "14",
+      "chapter_name": "سورۃ حم السجدہ/فصلت",
+      "topic_name": "واضح آیات اور کردار",
+      "category": "mcq",
+      "question_text": "سورۃ حم السجدہ/فصلت کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف عددی حساب"
+        },
+        {
+          "id": "D",
+          "text": "صرف جغرافیائی معلومات"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 14",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "واضح آیات اور کردار"
+      ]
+    },
+    {
+      "id": "X-TTQ-C14-S01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "14",
+      "chapter_name": "سورۃ حم السجدہ/فصلت",
+      "topic_name": "واضح آیات اور کردار",
+      "category": "short",
+      "question_text": "سورۃ حم السجدہ/فصلت سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "وحی کی وضاحت، حق کی قبولیت اور نیک کردار کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 14",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "واضح آیات اور کردار"
+      ]
+    },
+    {
+      "id": "X-TTQ-C14-L01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "14",
+      "chapter_name": "سورۃ حم السجدہ/فصلت",
+      "topic_name": "واضح آیات اور کردار",
+      "category": "long",
+      "question_text": "سورۃ حم السجدہ/فصلت کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں وحی کی وضاحت، حق کی قبولیت اور نیک کردار کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 14",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "واضح آیات اور کردار"
+      ]
+    },
+    {
+      "id": "X-TTQ-C15-M01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "15",
+      "chapter_name": "سورۃ الشوریٰ",
+      "topic_name": "مشاورت اور اجتماعی اخلاق",
+      "category": "mcq",
+      "question_text": "سورۃ الشوریٰ کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف عددی حساب"
+        },
+        {
+          "id": "D",
+          "text": "صرف جغرافیائی معلومات"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 15",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "مشاورت اور اجتماعی اخلاق"
+      ]
+    },
+    {
+      "id": "X-TTQ-C15-S01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "15",
+      "chapter_name": "سورۃ الشوریٰ",
+      "topic_name": "مشاورت اور اجتماعی اخلاق",
+      "category": "short",
+      "question_text": "سورۃ الشوریٰ سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "مشاورت، معافی، اعتدال، عدل اور اجتماعی ذمہ داری کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 15",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "مشاورت اور اجتماعی اخلاق"
+      ]
+    },
+    {
+      "id": "X-TTQ-C15-L01",
+      "class_level": "10th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "15",
+      "chapter_name": "سورۃ الشوریٰ",
+      "topic_name": "مشاورت اور اجتماعی اخلاق",
+      "category": "long",
+      "question_text": "سورۃ الشوریٰ کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں مشاورت، معافی، اعتدال، عدل اور اجتماعی ذمہ داری کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade X Tarjuma resource | 52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301 | chapter 15",
+      "tags": [
+        "grade10",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current",
+        "internal-provisional",
+        "original-draft",
+        "مشاورت اور اجتماعی اخلاق"
+      ]
+    }
+  ]
+}

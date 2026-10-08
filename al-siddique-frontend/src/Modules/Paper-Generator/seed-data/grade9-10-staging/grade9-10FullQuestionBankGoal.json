@@ -91,7 +91,8 @@
         "Urdu"
       ],
       "manifestRecordIds": [
-        "pectaa-catalog-001"
+        "pectaa-catalog-001",
+        "pectaa-recovered-tarjuma9-2026"
       ],
       "completionState": "NOT_COMPLETE",
       "requiredArtifacts": [
@@ -308,7 +309,8 @@
         "Urdu"
       ],
       "manifestRecordIds": [
-        "pectaa-catalog-014"
+        "pectaa-catalog-014",
+        "pectaa-recovered-tarjuma10-current"
       ],
       "completionState": "NOT_COMPLETE",
       "requiredArtifacts": [
@@ -1978,7 +1980,7 @@
       "identityRule": "Religious alternatives never inherit Islamiat/Tarjuma content or pattern without their own verified authority."
     }
   ],
-  "manifestRecordCount": 109,
+  "manifestRecordCount": 111,
   "manifestRecordIds": [
     "pectaa-catalog-001",
     "pectaa-catalog-002",
@@ -2088,7 +2090,9 @@
     "pectaa-catalog-106",
     "pectaa-catalog-107",
     "pectaa-recovered-chemistry10-en-2026",
-    "pectaa-recovered-computer10-en-2026"
+    "pectaa-recovered-computer10-en-2026",
+    "pectaa-recovered-tarjuma9-2026",
+    "pectaa-recovered-tarjuma10-current"
   ],
   "catalogExpansionRequired": [
     "Any newly notified 2026-27/2027 exam source replacing a currently VERIFY/UNCONFIRMED record"

@@ -1,0 +1,1824 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "IX-TTQ-C01-M01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "سورۃ مریم",
+      "topic_name": "صبر اور اللہ کی رحمت",
+      "category": "mcq",
+      "question_text": "سورۃ مریم کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف تاریخی نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف جغرافیہ پڑھنا"
+        },
+        {
+          "id": "D",
+          "text": "صرف عددی حساب"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 1",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "صبر اور اللہ کی رحمت"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C01-S01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "سورۃ مریم",
+      "topic_name": "صبر اور اللہ کی رحمت",
+      "category": "short",
+      "question_text": "سورۃ مریم سے متعلق ایک بنیادی اخلاقی یا ایمانی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "مشکل حالات میں اللہ پر بھروسا اور پاکیزہ کردار کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا ایک بنیادی سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 1",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "صبر اور اللہ کی رحمت"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C01-L01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "سورۃ مریم",
+      "topic_name": "صبر اور اللہ کی رحمت",
+      "category": "long",
+      "question_text": "سورۃ مریم کے مرکزی پیغام کو روزمرہ اخلاقی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں مشکل حالات میں اللہ پر بھروسا اور پاکیزہ کردار کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 1",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "صبر اور اللہ کی رحمت"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C02-M01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "سورۃ طٰہٰ",
+      "topic_name": "توحید اور رسالت",
+      "category": "mcq",
+      "question_text": "سورۃ طٰہٰ کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف تاریخی نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف جغرافیہ پڑھنا"
+        },
+        {
+          "id": "D",
+          "text": "صرف عددی حساب"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 2",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "توحید اور رسالت"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C02-S01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "سورۃ طٰہٰ",
+      "topic_name": "توحید اور رسالت",
+      "category": "short",
+      "question_text": "سورۃ طٰہٰ سے متعلق ایک بنیادی اخلاقی یا ایمانی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اللہ کی بندگی، وحی اور حضرت موسیٰؑ کی جدوجہد کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا ایک بنیادی سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 2",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "توحید اور رسالت"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C02-L01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "سورۃ طٰہٰ",
+      "topic_name": "توحید اور رسالت",
+      "category": "long",
+      "question_text": "سورۃ طٰہٰ کے مرکزی پیغام کو روزمرہ اخلاقی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں اللہ کی بندگی، وحی اور حضرت موسیٰؑ کی جدوجہد کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 2",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "توحید اور رسالت"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C03-M01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "سورۃ الانبیاء",
+      "topic_name": "انبیاء کی دعوت",
+      "category": "mcq",
+      "question_text": "سورۃ الانبیاء کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف تاریخی نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف جغرافیہ پڑھنا"
+        },
+        {
+          "id": "D",
+          "text": "صرف عددی حساب"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 3",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "انبیاء کی دعوت"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C03-S01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "سورۃ الانبیاء",
+      "topic_name": "انبیاء کی دعوت",
+      "category": "short",
+      "question_text": "سورۃ الانبیاء سے متعلق ایک بنیادی اخلاقی یا ایمانی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "تمام انبیاء کی دعوت میں توحید اور ذمہ داری کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا ایک بنیادی سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 3",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "انبیاء کی دعوت"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C03-L01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "سورۃ الانبیاء",
+      "topic_name": "انبیاء کی دعوت",
+      "category": "long",
+      "question_text": "سورۃ الانبیاء کے مرکزی پیغام کو روزمرہ اخلاقی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں تمام انبیاء کی دعوت میں توحید اور ذمہ داری کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 3",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "انبیاء کی دعوت"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C04-M01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "سورۃ الحج",
+      "topic_name": "عبادت اور حج",
+      "category": "mcq",
+      "question_text": "سورۃ الحج کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف تاریخی نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف جغرافیہ پڑھنا"
+        },
+        {
+          "id": "D",
+          "text": "صرف عددی حساب"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 4",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "عبادت اور حج"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C04-S01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "سورۃ الحج",
+      "topic_name": "عبادت اور حج",
+      "category": "short",
+      "question_text": "سورۃ الحج سے متعلق ایک بنیادی اخلاقی یا ایمانی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "عبادت، قربانی، اطاعت اور اجتماعی شعور کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا ایک بنیادی سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 4",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "عبادت اور حج"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C04-L01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "سورۃ الحج",
+      "topic_name": "عبادت اور حج",
+      "category": "long",
+      "question_text": "سورۃ الحج کے مرکزی پیغام کو روزمرہ اخلاقی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں عبادت، قربانی، اطاعت اور اجتماعی شعور کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 4",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "عبادت اور حج"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C05-M01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "سورۃ الفرقان",
+      "topic_name": "حق و باطل",
+      "category": "mcq",
+      "question_text": "سورۃ الفرقان کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف تاریخی نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف جغرافیہ پڑھنا"
+        },
+        {
+          "id": "D",
+          "text": "صرف عددی حساب"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 5",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "حق و باطل"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C05-S01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "سورۃ الفرقان",
+      "topic_name": "حق و باطل",
+      "category": "short",
+      "question_text": "سورۃ الفرقان سے متعلق ایک بنیادی اخلاقی یا ایمانی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "قرآن بطور معیار اور نیک بندوں کی صفات کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا ایک بنیادی سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 5",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "حق و باطل"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C05-L01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "سورۃ الفرقان",
+      "topic_name": "حق و باطل",
+      "category": "long",
+      "question_text": "سورۃ الفرقان کے مرکزی پیغام کو روزمرہ اخلاقی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں قرآن بطور معیار اور نیک بندوں کی صفات کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 5",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "حق و باطل"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C06-M01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "سورۃ الشعراء",
+      "topic_name": "دعوت و استقامت",
+      "category": "mcq",
+      "question_text": "سورۃ الشعراء کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف تاریخی نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف جغرافیہ پڑھنا"
+        },
+        {
+          "id": "D",
+          "text": "صرف عددی حساب"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 6",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "دعوت و استقامت"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C06-S01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "سورۃ الشعراء",
+      "topic_name": "دعوت و استقامت",
+      "category": "short",
+      "question_text": "سورۃ الشعراء سے متعلق ایک بنیادی اخلاقی یا ایمانی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "انبیاء کی دعوت، انکار اور ثابت قدمی کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا ایک بنیادی سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 6",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "دعوت و استقامت"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C06-L01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "سورۃ الشعراء",
+      "topic_name": "دعوت و استقامت",
+      "category": "long",
+      "question_text": "سورۃ الشعراء کے مرکزی پیغام کو روزمرہ اخلاقی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں انبیاء کی دعوت، انکار اور ثابت قدمی کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 6",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "دعوت و استقامت"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C07-M01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "سورۃ النمل",
+      "topic_name": "شکر اور حکمت",
+      "category": "mcq",
+      "question_text": "سورۃ النمل کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف تاریخی نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف جغرافیہ پڑھنا"
+        },
+        {
+          "id": "D",
+          "text": "صرف عددی حساب"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 7",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "شکر اور حکمت"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C07-S01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "سورۃ النمل",
+      "topic_name": "شکر اور حکمت",
+      "category": "short",
+      "question_text": "سورۃ النمل سے متعلق ایک بنیادی اخلاقی یا ایمانی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اللہ کی نعمتوں پر شکر اور حکمت سے فیصلہ کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا ایک بنیادی سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 7",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "شکر اور حکمت"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C07-L01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "سورۃ النمل",
+      "topic_name": "شکر اور حکمت",
+      "category": "long",
+      "question_text": "سورۃ النمل کے مرکزی پیغام کو روزمرہ اخلاقی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں اللہ کی نعمتوں پر شکر اور حکمت سے فیصلہ کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 7",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "شکر اور حکمت"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C08-M01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "سورۃ القصص",
+      "topic_name": "عدل اور آزمائش",
+      "category": "mcq",
+      "question_text": "سورۃ القصص کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف تاریخی نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف جغرافیہ پڑھنا"
+        },
+        {
+          "id": "D",
+          "text": "صرف عددی حساب"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 8",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "عدل اور آزمائش"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C08-S01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "سورۃ القصص",
+      "topic_name": "عدل اور آزمائش",
+      "category": "short",
+      "question_text": "سورۃ القصص سے متعلق ایک بنیادی اخلاقی یا ایمانی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "حضرت موسیٰؑ کے حالات، ظلم کے مقابل حق کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا ایک بنیادی سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 8",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "عدل اور آزمائش"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C08-L01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "سورۃ القصص",
+      "topic_name": "عدل اور آزمائش",
+      "category": "long",
+      "question_text": "سورۃ القصص کے مرکزی پیغام کو روزمرہ اخلاقی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں حضرت موسیٰؑ کے حالات، ظلم کے مقابل حق کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 8",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "عدل اور آزمائش"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C09-M01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "سورۃ العنکبوت",
+      "topic_name": "آزمائش ایمان",
+      "category": "mcq",
+      "question_text": "سورۃ العنکبوت کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف تاریخی نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف جغرافیہ پڑھنا"
+        },
+        {
+          "id": "D",
+          "text": "صرف عددی حساب"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 9",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "آزمائش ایمان"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C09-S01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "سورۃ العنکبوت",
+      "topic_name": "آزمائش ایمان",
+      "category": "short",
+      "question_text": "سورۃ العنکبوت سے متعلق ایک بنیادی اخلاقی یا ایمانی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "ایمان کی آزمائش، صبر اور ذمہ داری کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا ایک بنیادی سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 9",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "آزمائش ایمان"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C09-L01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "سورۃ العنکبوت",
+      "topic_name": "آزمائش ایمان",
+      "category": "long",
+      "question_text": "سورۃ العنکبوت کے مرکزی پیغام کو روزمرہ اخلاقی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں ایمان کی آزمائش، صبر اور ذمہ داری کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 9",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "آزمائش ایمان"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C10-M01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "سورۃ الروم",
+      "topic_name": "قدرت کی نشانیاں",
+      "category": "mcq",
+      "question_text": "سورۃ الروم کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف تاریخی نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف جغرافیہ پڑھنا"
+        },
+        {
+          "id": "D",
+          "text": "صرف عددی حساب"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 10",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "قدرت کی نشانیاں"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C10-S01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "سورۃ الروم",
+      "topic_name": "قدرت کی نشانیاں",
+      "category": "short",
+      "question_text": "سورۃ الروم سے متعلق ایک بنیادی اخلاقی یا ایمانی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اللہ کی قدرت، تاریخ اور انسان کی ذمہ داری کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا ایک بنیادی سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 10",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "قدرت کی نشانیاں"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C10-L01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "سورۃ الروم",
+      "topic_name": "قدرت کی نشانیاں",
+      "category": "long",
+      "question_text": "سورۃ الروم کے مرکزی پیغام کو روزمرہ اخلاقی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں اللہ کی قدرت، تاریخ اور انسان کی ذمہ داری کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 10",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "قدرت کی نشانیاں"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C11-M01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "سورۃ لقمان",
+      "topic_name": "حکمت لقمان",
+      "category": "mcq",
+      "question_text": "سورۃ لقمان کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف تاریخی نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف جغرافیہ پڑھنا"
+        },
+        {
+          "id": "D",
+          "text": "صرف عددی حساب"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 11",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "حکمت لقمان"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C11-S01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "سورۃ لقمان",
+      "topic_name": "حکمت لقمان",
+      "category": "short",
+      "question_text": "سورۃ لقمان سے متعلق ایک بنیادی اخلاقی یا ایمانی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "والدین، شکر، نماز اور اخلاقی تربیت کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا ایک بنیادی سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 11",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "حکمت لقمان"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C11-L01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "سورۃ لقمان",
+      "topic_name": "حکمت لقمان",
+      "category": "long",
+      "question_text": "سورۃ لقمان کے مرکزی پیغام کو روزمرہ اخلاقی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں والدین، شکر، نماز اور اخلاقی تربیت کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 11",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "حکمت لقمان"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C12-M01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "سورۃ السجدہ",
+      "topic_name": "سجدہ و بندگی",
+      "category": "mcq",
+      "question_text": "سورۃ السجدہ کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف تاریخی نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف جغرافیہ پڑھنا"
+        },
+        {
+          "id": "D",
+          "text": "صرف عددی حساب"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 12",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "سجدہ و بندگی"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C12-S01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "سورۃ السجدہ",
+      "topic_name": "سجدہ و بندگی",
+      "category": "short",
+      "question_text": "سورۃ السجدہ سے متعلق ایک بنیادی اخلاقی یا ایمانی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اللہ کے سامنے عاجزی، آخرت اور جواب دہی کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا ایک بنیادی سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 12",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "سجدہ و بندگی"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C12-L01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "سورۃ السجدہ",
+      "topic_name": "سجدہ و بندگی",
+      "category": "long",
+      "question_text": "سورۃ السجدہ کے مرکزی پیغام کو روزمرہ اخلاقی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں اللہ کے سامنے عاجزی، آخرت اور جواب دہی کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 12",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "سجدہ و بندگی"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C13-M01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "13",
+      "chapter_name": "سورۃ سبا",
+      "topic_name": "شکر اور ناشکری",
+      "category": "mcq",
+      "question_text": "سورۃ سبا کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف تاریخی نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف جغرافیہ پڑھنا"
+        },
+        {
+          "id": "D",
+          "text": "صرف عددی حساب"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 13",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "شکر اور ناشکری"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C13-S01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "13",
+      "chapter_name": "سورۃ سبا",
+      "topic_name": "شکر اور ناشکری",
+      "category": "short",
+      "question_text": "سورۃ سبا سے متعلق ایک بنیادی اخلاقی یا ایمانی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "نعمتوں کا درست استعمال اور ناشکری کے نتائج کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا ایک بنیادی سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 13",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "شکر اور ناشکری"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C13-L01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "13",
+      "chapter_name": "سورۃ سبا",
+      "topic_name": "شکر اور ناشکری",
+      "category": "long",
+      "question_text": "سورۃ سبا کے مرکزی پیغام کو روزمرہ اخلاقی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں نعمتوں کا درست استعمال اور ناشکری کے نتائج کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 13",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "شکر اور ناشکری"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C14-M01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "14",
+      "chapter_name": "سورۃ فاطر",
+      "topic_name": "خالق کی قدرت",
+      "category": "mcq",
+      "question_text": "سورۃ فاطر کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف تاریخی نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف جغرافیہ پڑھنا"
+        },
+        {
+          "id": "D",
+          "text": "صرف عددی حساب"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 14",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "خالق کی قدرت"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C14-S01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "14",
+      "chapter_name": "سورۃ فاطر",
+      "topic_name": "خالق کی قدرت",
+      "category": "short",
+      "question_text": "سورۃ فاطر سے متعلق ایک بنیادی اخلاقی یا ایمانی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "تخلیق، رزق اور اللہ کی قدرت کی نشانیاں کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا ایک بنیادی سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 14",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "خالق کی قدرت"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C14-L01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "14",
+      "chapter_name": "سورۃ فاطر",
+      "topic_name": "خالق کی قدرت",
+      "category": "long",
+      "question_text": "سورۃ فاطر کے مرکزی پیغام کو روزمرہ اخلاقی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں تخلیق، رزق اور اللہ کی قدرت کی نشانیاں کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 14",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "خالق کی قدرت"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C15-M01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "15",
+      "chapter_name": "سورۃ یٰسین",
+      "topic_name": "رسالت و آخرت",
+      "category": "mcq",
+      "question_text": "سورۃ یٰسین کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف تاریخی نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف جغرافیہ پڑھنا"
+        },
+        {
+          "id": "D",
+          "text": "صرف عددی حساب"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 15",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "رسالت و آخرت"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C15-S01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "15",
+      "chapter_name": "سورۃ یٰسین",
+      "topic_name": "رسالت و آخرت",
+      "category": "short",
+      "question_text": "سورۃ یٰسین سے متعلق ایک بنیادی اخلاقی یا ایمانی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "رسالت، قیامت اور اخلاقی جواب دہی کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا ایک بنیادی سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 15",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "رسالت و آخرت"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C15-L01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "15",
+      "chapter_name": "سورۃ یٰسین",
+      "topic_name": "رسالت و آخرت",
+      "category": "long",
+      "question_text": "سورۃ یٰسین کے مرکزی پیغام کو روزمرہ اخلاقی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں رسالت، قیامت اور اخلاقی جواب دہی کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 15",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "رسالت و آخرت"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C16-M01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "16",
+      "chapter_name": "سورۃ الصافات",
+      "topic_name": "توحید و انبیاء",
+      "category": "mcq",
+      "question_text": "سورۃ الصافات کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف تاریخی نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف جغرافیہ پڑھنا"
+        },
+        {
+          "id": "D",
+          "text": "صرف عددی حساب"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 16",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "توحید و انبیاء"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C16-S01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "16",
+      "chapter_name": "سورۃ الصافات",
+      "topic_name": "توحید و انبیاء",
+      "category": "short",
+      "question_text": "سورۃ الصافات سے متعلق ایک بنیادی اخلاقی یا ایمانی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اللہ کی وحدانیت اور انبیاء کی اطاعت کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا ایک بنیادی سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 16",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "توحید و انبیاء"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C16-L01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "16",
+      "chapter_name": "سورۃ الصافات",
+      "topic_name": "توحید و انبیاء",
+      "category": "long",
+      "question_text": "سورۃ الصافات کے مرکزی پیغام کو روزمرہ اخلاقی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں اللہ کی وحدانیت اور انبیاء کی اطاعت کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 16",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "توحید و انبیاء"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C17-M01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "17",
+      "chapter_name": "سورۃ ص",
+      "topic_name": "صبر و رجوع",
+      "category": "mcq",
+      "question_text": "سورۃ ص کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف تاریخی نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف جغرافیہ پڑھنا"
+        },
+        {
+          "id": "D",
+          "text": "صرف عددی حساب"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 17",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "صبر و رجوع"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C17-S01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "17",
+      "chapter_name": "سورۃ ص",
+      "topic_name": "صبر و رجوع",
+      "category": "short",
+      "question_text": "سورۃ ص سے متعلق ایک بنیادی اخلاقی یا ایمانی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "آزمائش، صبر، توبہ اور اللہ کی طرف رجوع کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا ایک بنیادی سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 17",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "صبر و رجوع"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C17-L01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "17",
+      "chapter_name": "سورۃ ص",
+      "topic_name": "صبر و رجوع",
+      "category": "long",
+      "question_text": "سورۃ ص کے مرکزی پیغام کو روزمرہ اخلاقی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں آزمائش، صبر، توبہ اور اللہ کی طرف رجوع کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 17",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "صبر و رجوع"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C18-M01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "18",
+      "chapter_name": "سورۃ الاحقاف",
+      "topic_name": "حق کی قبولیت",
+      "category": "mcq",
+      "question_text": "سورۃ الاحقاف کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہدایت اور عملی اصلاح"
+        },
+        {
+          "id": "B",
+          "text": "صرف تاریخی نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف جغرافیہ پڑھنا"
+        },
+        {
+          "id": "D",
+          "text": "صرف عددی حساب"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ہدایت اور عملی اصلاح",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 18",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "حق کی قبولیت"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C18-S01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "18",
+      "chapter_name": "سورۃ الاحقاف",
+      "topic_name": "حق کی قبولیت",
+      "category": "short",
+      "question_text": "سورۃ الاحقاف سے متعلق ایک بنیادی اخلاقی یا ایمانی سبق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "توحید، رسالت، سابق اقوام سے عبرت اور استقامت کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا ایک بنیادی سبق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 18",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "حق کی قبولیت"
+      ]
+    },
+    {
+      "id": "IX-TTQ-C18-L01",
+      "class_level": "9th",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "18",
+      "chapter_name": "سورۃ الاحقاف",
+      "topic_name": "حق کی قبولیت",
+      "category": "long",
+      "question_text": "سورۃ الاحقاف کے مرکزی پیغام کو روزمرہ اخلاقی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں توحید، رسالت، سابق اقوام سے عبرت اور استقامت کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "Current Grade IX Tarjuma resource | e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66 | chapter 18",
+      "tags": [
+        "grade9",
+        "tarjuma-tul-quran",
+        "urdu",
+        "current-2026",
+        "internal-provisional",
+        "original-draft",
+        "حق کی قبولیت"
+      ]
+    }
+  ]
+}
