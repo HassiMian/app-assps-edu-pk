@@ -2,6 +2,7 @@ import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom/client'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from '@/context/AuthContext.jsx'
+import { ThemeProvider } from '@/context/ThemeContext.jsx'
 import PaperGenerator from '../../PaperGenerator.jsx'
 import '@/index.css'
 
@@ -16,6 +17,7 @@ function CanaryHarnessApp() {
     : '/paper-generator'
 
   return (
+    <ThemeProvider>
     <AuthProvider>
       <MemoryRouter initialEntries={[initialEntry]}>
         <Routes>
@@ -30,6 +32,7 @@ function CanaryHarnessApp() {
         </Routes>
       </MemoryRouter>
     </AuthProvider>
+    </ThemeProvider>
   )
 }
 
