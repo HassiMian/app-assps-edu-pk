@@ -4,6 +4,7 @@ const router = express.Router()
 const { query } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId, tenantClause } = require('../middleware/tenant')
+const { isSchoolDocumentManager, canAccessAuthoredDocument } = require('../services/teacherDocumentAccess')
 
 const canManageDiary = requireRoles('super_admin', 'admin', 'school_admin', 'principal', 'teacher')
 
@@ -75,7 +76,10 @@ function mapDiaryRow(row) {
   }
 }
 
-router.use(protect, canManageDiary)
+router.use(protect, canManageDiary, (req, res, next) => {
+  if (!isSchoolDocumentManager(req.user) && (!Number.isSafeInteger(Number(req.user?.id)) || Number(req.user?.id) <= 0)) return res.status(403).json({ success:false, message:'A verified teacher identity is required.' })
+  next()
+})
 
 router.get('/', async (req, res) => {
   try {
@@ -87,19 +91,10 @@ router.get('/', async (req, res) => {
     if (!isSuperAdmin && !schoolId) return res.status(400).json({ success: false, message: 'School context is required.' })
 
     const result = isSuperAdmin
-      ? await query(
-        `SELECT * FROM daily_diaries
-         ORDER BY created_at DESC
-         LIMIT $1`,
-        [limit]
-      )
-      : await query(
-        `SELECT * FROM daily_diaries
-         WHERE school_id = $1
-         ORDER BY created_at DESC
-         LIMIT $2`,
-        [schoolId, limit]
-      )
+      ? await query(`SELECT * FROM daily_diaries ORDER BY created_at DESC LIMIT $1`, [limit])
+      : isSchoolDocumentManager(req.user)
+        ? await query(`SELECT * FROM daily_diaries WHERE school_id = $1 ORDER BY created_at DESC LIMIT $2`, [schoolId, limit])
+        : await query(`SELECT * FROM daily_diaries WHERE school_id = $1 AND created_by = $2 ORDER BY created_at DESC LIMIT $3`, [schoolId, Number(req.user.id), limit])
 
     res.json({
       success: true,
@@ -127,8 +122,8 @@ router.get('/:id', async (req, res) => {
     }
 
     const userSchoolId = resolveDiarySchoolId(req)
-    if (req.user?.role !== 'super_admin' && diary.school_id !== userSchoolId) {
-      return res.status(403).json({ success: false, message: 'Unauthorized.' })
+    if (!canAccessAuthoredDocument(req.user, diary, userSchoolId)) {
+      return res.status(404).json({ success: false, message: 'Daily diary not found.' })
     }
 
     res.json({
@@ -208,8 +203,8 @@ router.put('/:id', async (req, res) => {
     }
 
     const userSchoolId = resolveDiarySchoolId(req)
-    if (req.user?.role !== 'super_admin' && current.school_id !== userSchoolId) {
-      return res.status(403).json({ success: false, message: 'Unauthorized.' })
+    if (!canAccessAuthoredDocument(req.user, current, userSchoolId)) {
+      return res.status(404).json({ success: false, message: 'Daily diary not found.' })
     }
 
     const payload = normalizePayload({ ...current, ...(req.body || {}) })
@@ -231,7 +226,7 @@ router.put('/:id', async (req, res) => {
         rows = $11::jsonb,
         style_settings = $12::jsonb,
         updated_at = CURRENT_TIMESTAMP
-      WHERE id = $13 AND school_id = $14
+      WHERE id = $13 AND school_id = $14 AND ($15::boolean OR created_by = $16)
       RETURNING *`,
       [
         payload.template_id,
@@ -248,9 +243,12 @@ router.put('/:id', async (req, res) => {
         JSON.stringify(payload.style_settings),
         id,
         Number(current.school_id),
+        isSchoolDocumentManager(req.user),
+        Number(req.user?.id) || -1,
       ]
     )
 
+    if (!result.rows[0]) return res.status(409).json({ success: false, message: 'The diary changed during this update. Reload it before retrying.' })
     res.json({
       success: true,
       data: mapDiaryRow(result.rows[0]),
@@ -271,17 +269,17 @@ router.delete('/:id', async (req, res) => {
       return res.status(400).json({ success: false, message: 'Invalid diary id.' })
     }
 
-    const existing = await query('SELECT id, school_id FROM daily_diaries WHERE id = $1 LIMIT 1', [id])
+    const existing = await query('SELECT id, school_id, created_by FROM daily_diaries WHERE id = $1 LIMIT 1', [id])
     const diary = existing.rows[0]
     if (!diary) {
       return res.status(404).json({ success: false, message: 'Daily diary not found.' })
     }
     const userSchoolId = resolveDiarySchoolId(req)
-    if (req.user?.role !== 'super_admin' && diary.school_id !== userSchoolId) {
-      return res.status(403).json({ success: false, message: 'Unauthorized.' })
+    if (!canAccessAuthoredDocument(req.user, diary, userSchoolId)) {
+      return res.status(404).json({ success: false, message: 'Daily diary not found.' })
     }
 
-    await query('DELETE FROM daily_diaries WHERE id = $1 AND school_id = $2', [id, Number(diary.school_id)])
+    await query('DELETE FROM daily_diaries WHERE id = $1 AND school_id = $2 AND ($3::boolean OR created_by = $4)', [id, Number(diary.school_id), isSchoolDocumentManager(req.user), Number(req.user?.id) || -1])
     res.json({ success: true, message: 'Daily diary deleted successfully.' })
   } catch (error) {
     console.error('Daily diary delete error:', error)

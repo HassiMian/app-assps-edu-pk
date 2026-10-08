@@ -45,3 +45,41 @@ test('smart parser accepts a whole multi-subject day and preserves unclassified 
   assert.equal(parsed.subjects[1].subject, 'Science')
   assert.ok(parsed.subjects[1].notes.some(note => /Loose coordinator note/.test(note)))
 })
+
+test('calendar validation refuses nonexistent dates and does not invent rollover lessons', () => {
+  const { parseIsoDate, enumerateDates } = require('../services/lessonPlanningEngine')
+  assert.equal(parseIsoDate('2026-02-30'), null)
+  assert.equal(parseIsoDate('2026-13-01'), null)
+  assert.equal(parseIsoDate('2026-02-29'), null)
+  assert.ok(parseIsoDate('2028-02-29'))
+  assert.deepEqual(enumerateDates('2026-02-30', '2026-03-03'), [])
+  assert.deepEqual(enumerateDates('2026-10-12', '2026-10-08'), [])
+})
+
+test('calendar expansion rejects out-of-policy term ranges rather than silently truncating', () => {
+  const { enumerateDates, MAX_RANGE_DAYS } = require('../services/lessonPlanningEngine')
+  assert.equal(enumerateDates('2026-01-01', '2027-01-05').length, MAX_RANGE_DAYS)
+  assert.throws(() => enumerateDates('2026-01-01', '2027-01-06'), /exceeds 370 calendar days/)
+})
+
+test('scarce timetable allocation never assigns imaginary teaching periods', () => {
+  const { allocatePeriods } = require('../services/lessonPlanningEngine')
+  const units = [{id:'a',weight:2},{id:'b',weight:1},{id:'c',weight:1},{id:'d',weight:1}]
+  for (const capacity of [0,1,2,3,4,5,10,19]) {
+    const result = allocatePeriods(units, capacity)
+    assert.equal(result.reduce((sum,item) => sum + item.allocatedPeriods,0), capacity)
+    assert.ok(result.every(item => Number.isInteger(item.allocatedPeriods) && item.allocatedPeriods >= 0))
+  }
+  assert.equal(allocatePeriods(units, 2).filter(item=>item.allocatedPeriods>0).length,2)
+  assert.equal(allocatePeriods(units, NaN).reduce((sum,item)=>sum+item.allocatedPeriods,0),0)
+})
+
+test('invalid calendar blackouts and buffer ratios never invalidate scheduled capacity', () => {
+  const { buildTimetableSlots, buildDeterministicPlan } = require('../services/lessonPlanningEngine')
+  const context = { timetable:[{class_name:'8',section:'A',subject:'Science',day_name:'Thursday',period_label:'P1'}], curriculumScopes:[], questionBankSignals:[], warnings:[], holidayCalendarAvailable:false }
+  const slots = buildTimetableSlots({ timetable:context.timetable,classLevel:'8',section:'A',startDate:'2026-10-08',endDate:'2026-10-08',blackoutDates:['2026-02-30'] })
+  assert.equal(slots.length,1)
+  const plan = buildDeterministicPlan({ classLevel:'8',section:'A',startDate:'2026-10-08',endDate:'2026-10-08',subjects:['Science'],bufferRatio:'invalid' },context)
+  assert.equal(plan.bufferRatio,0.1)
+  assert.equal(plan.subjects[0].capacityPeriods,1)
+})

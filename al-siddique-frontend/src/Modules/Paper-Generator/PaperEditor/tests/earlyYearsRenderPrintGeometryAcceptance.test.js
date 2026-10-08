@@ -474,7 +474,7 @@ test('EY-RENDER-08: Real PaperGenerator Route Print: Chrome Hidden, PDFs Generat
   assert.equal(navDisplay, 'none', 'Paper Generator module navigation strip must have display: none in print')
 
   // B. Early Years editor top header: display === none
-  const headerDisplay = await page.locator('header.no-print').evaluate((el) => window.getComputedStyle(el).display)
+  const headerDisplay = await page.locator('.early-years-editor-root > header.no-print').evaluate((el) => window.getComputedStyle(el).display)
   assert.equal(headerDisplay, 'none', 'Early Years editor top header must have display: none in print')
 
   // C. Inspector: display === none

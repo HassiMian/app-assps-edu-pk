@@ -5,8 +5,9 @@ const router = express.Router()
 const { pool } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
+const { isSchoolDocumentManager, canAccessAuthoredDocument } = require('../services/teacherDocumentAccess')
 const { loadPlanningContext } = require('../services/lessonPlanningContext')
-const { buildDeterministicPlan, enhancePlanWithAi, parseSmartPlanningText } = require('../services/lessonPlanningEngine')
+const { buildDeterministicPlan, enhancePlanWithAi, parseSmartPlanningText, parseIsoDate, MAX_RANGE_DAYS } = require('../services/lessonPlanningEngine')
 
 const canManageLessonPlans = requireRoles('super_admin', 'admin', 'school_admin', 'principal', 'teacher')
 
@@ -16,8 +17,8 @@ function cleanText(value, max = 500) {
 }
 
 function cleanDate(value) {
-  const date = cleanText(value, 10)
-  return /^\d{4}-\d{2}-\d{2}$/.test(date) ? date : null
+  const date = cleanText(value, 40)
+  return /^\d{4}-\d{2}-\d{2}$/.test(date) && parseIsoDate(date) ? date : null
 }
 
 function normalizeClassKey(value) {
@@ -127,7 +128,10 @@ function expectedRevision(req) {
   return Number.isInteger(revision) && revision > 0 ? revision : null
 }
 
-router.use(protect, canManageLessonPlans)
+router.use(protect, canManageLessonPlans, (req, res, next) => {
+  if (!isSchoolDocumentManager(req.user) && (!Number.isSafeInteger(Number(req.user?.id)) || Number(req.user?.id) <= 0)) return res.status(403).json({ success:false, code:'LESSON_PLAN_ACTOR_REQUIRED', message:'Verified teacher identity is required.' })
+  next()
+})
 
 router.get('/planner/context', async (req, res) => {
   try {
@@ -171,6 +175,7 @@ router.post('/planner/generate', async (req, res) => {
     const endDate = cleanDate(input.endDate || input.date || input.startDate)
     if (!classLevel) return res.status(422).json({ success:false, code:'LESSON_PLAN_CLASS_REQUIRED', message:'Class is required.' })
     if (!startDate || !endDate || endDate < startDate) return res.status(422).json({ success:false, code:'LESSON_PLAN_DATE_RANGE_INVALID', message:'A valid planning date range is required.' })
+    if (Math.round((parseIsoDate(endDate) - parseIsoDate(startDate)) / 86400000) + 1 > MAX_RANGE_DAYS) return res.status(422).json({ success:false, code:'LESSON_PLAN_DATE_RANGE_TOO_LONG', message:`Planning range cannot exceed ${MAX_RANGE_DAYS} days.` })
     const subjects = Array.isArray(input.subjects) ? input.subjects.slice(0,20).map(value => cleanText(value,160)).filter(Boolean) : []
     const context = await withTenantTransaction(req, schoolId, client => loadPlanningContext(client, schoolId, { classLevel, section, subjects }))
     const deterministic = buildDeterministicPlan({ ...input, classLevel, section, startDate, endDate, subjects }, context)
@@ -194,6 +199,7 @@ router.get('/', async (req, res) => {
     const data = await withTenantTransaction(req, schoolId, async client => {
       const params = [schoolId]
       let sql = 'SELECT * FROM lesson_plans WHERE school_id=$1'
+      if (!isSchoolDocumentManager(req.user)) { params.push(Number(req.user.id)); sql += ` AND created_by=$${params.length}` }
       if (req.query.classLevel) { params.push(cleanText(req.query.classLevel,100)); sql += ` AND class_level=$${params.length}` }
       if (req.query.subject) { params.push(cleanText(req.query.subject,160)); sql += ` AND subject ILIKE $${params.length}` }
       if (req.query.from) { params.push(cleanDate(req.query.from)); sql += ` AND plan_date >= $${params.length}::date` }
@@ -234,7 +240,7 @@ router.post('/', async (req, res) => {
       ])
       if (result.rowCount) return { created:true, plan:mapRow(result.rows[0]) }
       const current = await client.query('SELECT * FROM lesson_plans WHERE school_id=$1 AND public_id=$2 LIMIT 1', [schoolId, plan.publicId])
-      return { created:false, plan:current.rows[0] ? mapRow(current.rows[0]) : null }
+      return { created:false, plan:current.rows[0] && canAccessAuthoredDocument(req.user, current.rows[0], schoolId) ? mapRow(current.rows[0]) : null }
     })
     if (!data.created) return res.status(409).json({ success:false, code:'LESSON_PLAN_EXISTS', message:'This lesson plan already exists on the server.', data:data.plan })
     res.status(201).json({ success:true, data:data.plan })
@@ -259,15 +265,17 @@ router.put('/:id', async (req, res) => {
           revision=revision+1,title=$1,subject=$2,class_level=$3,chapter=$4,teacher=$5,
           plan_date=$6::date,planning_scope=$7,plan_range_label=$8,end_date=$9::date,
           period=$10,duration=$11,sent_to_portal=$12,payload=$13::jsonb,updated_at=NOW()
-        WHERE school_id=$14 AND public_id=$15 AND revision=$16
+        WHERE school_id=$14 AND public_id=$15 AND revision=$16 AND ($17::boolean OR created_by=$18)
         RETURNING *
       `, [
         plan.title, plan.subject, plan.classLevel, plan.chapter, plan.teacher, plan.planDate,
         plan.planningScope, plan.planRangeLabel, plan.endDate, plan.period, plan.duration,
         plan.sentToPortal, JSON.stringify(plan.payload), schoolId, id, revision,
+        isSchoolDocumentManager(req.user), Number(req.user?.id) || -1,
       ])
       if (result.rowCount) return { plan:mapRow(result.rows[0]) }
-      const current = await client.query('SELECT revision FROM lesson_plans WHERE school_id=$1 AND public_id=$2 LIMIT 1', [schoolId, id])
+      const current = await client.query('SELECT revision, school_id, created_by FROM lesson_plans WHERE school_id=$1 AND public_id=$2 LIMIT 1', [schoolId, id])
+      if (current.rows[0] && !canAccessAuthoredDocument(req.user, current.rows[0], schoolId)) return { missing:true }
       return current.rowCount ? { conflict:true, currentRevision:Number(current.rows[0].revision) } : { missing:true }
     })
     if (data.missing) return res.status(404).json({ success:false, code:'LESSON_PLAN_NOT_FOUND', message:'Lesson plan not found.' })
@@ -288,9 +296,10 @@ router.delete('/:id', async (req, res) => {
     const revision = expectedRevision(req)
     if (!revision) return res.status(428).json({ success:false, code:'LESSON_PLAN_REVISION_REQUIRED', message:'Current lesson plan revision is required.' })
     const data = await withTenantTransaction(req, schoolId, async client => {
-      const result = await client.query('DELETE FROM lesson_plans WHERE school_id=$1 AND public_id=$2 AND revision=$3 RETURNING public_id', [schoolId, id, revision])
+      const result = await client.query('DELETE FROM lesson_plans WHERE school_id=$1 AND public_id=$2 AND revision=$3 AND ($4::boolean OR created_by=$5) RETURNING public_id', [schoolId, id, revision, isSchoolDocumentManager(req.user), Number(req.user?.id) || -1])
       if (result.rowCount) return { deleted:true }
-      const current = await client.query('SELECT revision FROM lesson_plans WHERE school_id=$1 AND public_id=$2 LIMIT 1', [schoolId, id])
+      const current = await client.query('SELECT revision, school_id, created_by FROM lesson_plans WHERE school_id=$1 AND public_id=$2 LIMIT 1', [schoolId, id])
+      if (current.rows[0] && !canAccessAuthoredDocument(req.user, current.rows[0], schoolId)) return { missing:true }
       return current.rowCount ? { conflict:true, currentRevision:Number(current.rows[0].revision) } : { missing:true }
     })
     if (data.missing) return res.status(404).json({ success:false, code:'LESSON_PLAN_NOT_FOUND', message:'Lesson plan not found.' })
@@ -313,7 +322,8 @@ router.post('/:id/share', async (req, res) => {
 
     const data = await withTenantTransaction(req, schoolId, async client => {
       const row = (await client.query('SELECT * FROM lesson_plans WHERE school_id=$1 AND public_id=$2 LIMIT 1', [schoolId, id])).rows[0]
-      if (!row) return { missing:true }
+      if (!row || !canAccessAuthoredDocument(req.user, row, schoolId)) return { missing:true }
+      if (!isSchoolDocumentManager(req.user)) return { forbidden:true }
       if (Number(row.revision) !== revision) return { conflict:true, currentRevision:Number(row.revision) }
 
       const payload = row.payload && typeof row.payload === 'object' ? row.payload : {}
@@ -350,6 +360,7 @@ router.post('/:id/share', async (req, res) => {
     })
 
     if (data.missing) return res.status(404).json({ success:false, code:'LESSON_PLAN_NOT_FOUND', message:'Lesson plan not found.' })
+    if (data.forbidden) return res.status(403).json({ success:false, code:'LESSON_PLAN_SHARE_REVIEW_REQUIRED', message:'A school administrator must review and share this lesson plan.' })
     if (data.conflict) return res.status(409).json({ success:false, code:'LESSON_PLAN_REVISION_CONFLICT', currentRevision:data.currentRevision, message:'Lesson plan changed in another session. Reopen it before sharing.' })
     res.json({ success:true, data:data.plan, delivery:{ students:data.studentCount, notifications:data.notifications } })
   } catch (error) {
