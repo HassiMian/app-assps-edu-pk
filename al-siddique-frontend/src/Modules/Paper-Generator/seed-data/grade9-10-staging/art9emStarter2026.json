@@ -1,0 +1,1779 @@
+{
+  "schemaVersion": "assps-art9em-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-065",
+  "sourcePdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+  "scope": "CURRENT_ELECTIVE_CHAPTER_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "ART9EM-C01-M01",
+      "chapter": {
+        "id": "ART9EM-C01",
+        "number": 1
+      },
+      "topicId": "Introduction to Art and Drawing",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-065",
+        "pdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Art and Drawing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2024-25",
+        "textbookId": "PECTAA-9-ART9EM",
+        "syllabusVersion": "2024-25"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "en": {
+          "stem": "Which description best matches the focus of “Introduction to Art and Drawing”?",
+          "answer": "elements, shapes, forms and principles of art",
+          "options": [
+            {
+              "id": "A",
+              "text": "elements, shapes, forms and principles of art"
+            },
+            {
+              "id": "B",
+              "text": "Memorizing unrelated facts without understanding"
+            },
+            {
+              "id": "C",
+              "text": "Focusing on an isolated detail unrelated to the chapter purpose"
+            },
+            {
+              "id": "D",
+              "text": "Ignoring context, safety and practical judgment"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "ART9EM-C01-S01",
+      "chapter": {
+        "id": "ART9EM-C01",
+        "number": 1
+      },
+      "topicId": "Introduction to Art and Drawing",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-065",
+        "pdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Art and Drawing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2024-25",
+        "textbookId": "PECTAA-9-ART9EM",
+        "syllabusVersion": "2024-25"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "en": {
+          "stem": "State two principles or considerations that are important when studying Introduction to Art and Drawing.",
+          "answer": "A strong answer should identify two accurate chapter-relevant principles and explain briefly why each matters. Focus: elements, shapes, forms and principles of art."
+        }
+      }
+    },
+    {
+      "id": "ART9EM-C01-L01",
+      "chapter": {
+        "id": "ART9EM-C01",
+        "number": 1
+      },
+      "topicId": "Introduction to Art and Drawing",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-065",
+        "pdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Art and Drawing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2024-25",
+        "textbookId": "PECTAA-9-ART9EM",
+        "syllabusVersion": "2024-25"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "en": {
+          "stem": "Explain the core ideas of Introduction to Art and Drawing and show how they guide responsible practical or analytical decisions.",
+          "answer": "Cover the chapter focus (elements, shapes, forms and principles of art), at least three relevant principles, one realistic application, and appropriate safety/ethical/sustainability considerations where applicable. Do not reproduce textbook passages."
+        }
+      }
+    },
+    {
+      "id": "ART9EM-C02-M01",
+      "chapter": {
+        "id": "ART9EM-C02",
+        "number": 2
+      },
+      "topicId": "Drawing and Sketching-I",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-065",
+        "pdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Drawing and Sketching-I"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2024-25",
+        "textbookId": "PECTAA-9-ART9EM",
+        "syllabusVersion": "2024-25"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "en": {
+          "stem": "Which description best matches the focus of “Drawing and Sketching-I”?",
+          "answer": "observation, line, form, proportion and sketching practice",
+          "options": [
+            {
+              "id": "A",
+              "text": "observation, line, form, proportion and sketching practice"
+            },
+            {
+              "id": "B",
+              "text": "Memorizing unrelated facts without understanding"
+            },
+            {
+              "id": "C",
+              "text": "Focusing on an isolated detail unrelated to the chapter purpose"
+            },
+            {
+              "id": "D",
+              "text": "Ignoring context, safety and practical judgment"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "ART9EM-C02-S01",
+      "chapter": {
+        "id": "ART9EM-C02",
+        "number": 2
+      },
+      "topicId": "Drawing and Sketching-I",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-065",
+        "pdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Drawing and Sketching-I"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2024-25",
+        "textbookId": "PECTAA-9-ART9EM",
+        "syllabusVersion": "2024-25"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "en": {
+          "stem": "State two principles or considerations that are important when studying Drawing and Sketching-I.",
+          "answer": "A strong answer should identify two accurate chapter-relevant principles and explain briefly why each matters. Focus: observation, line, form, proportion and sketching practice."
+        }
+      }
+    },
+    {
+      "id": "ART9EM-C02-L01",
+      "chapter": {
+        "id": "ART9EM-C02",
+        "number": 2
+      },
+      "topicId": "Drawing and Sketching-I",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-065",
+        "pdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Drawing and Sketching-I"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2024-25",
+        "textbookId": "PECTAA-9-ART9EM",
+        "syllabusVersion": "2024-25"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "en": {
+          "stem": "Explain the core ideas of Drawing and Sketching-I and show how they guide responsible practical or analytical decisions.",
+          "answer": "Cover the chapter focus (observation, line, form, proportion and sketching practice), at least three relevant principles, one realistic application, and appropriate safety/ethical/sustainability considerations where applicable. Do not reproduce textbook passages."
+        }
+      }
+    },
+    {
+      "id": "ART9EM-C03-M01",
+      "chapter": {
+        "id": "ART9EM-C03",
+        "number": 3
+      },
+      "topicId": "Painting Practice-I",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-065",
+        "pdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Painting Practice-I"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2024-25",
+        "textbookId": "PECTAA-9-ART9EM",
+        "syllabusVersion": "2024-25"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "en": {
+          "stem": "Which description best matches the focus of “Painting Practice-I”?",
+          "answer": "painting media, colour, technique and visual expression",
+          "options": [
+            {
+              "id": "A",
+              "text": "painting media, colour, technique and visual expression"
+            },
+            {
+              "id": "B",
+              "text": "Memorizing unrelated facts without understanding"
+            },
+            {
+              "id": "C",
+              "text": "Focusing on an isolated detail unrelated to the chapter purpose"
+            },
+            {
+              "id": "D",
+              "text": "Ignoring context, safety and practical judgment"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "ART9EM-C03-S01",
+      "chapter": {
+        "id": "ART9EM-C03",
+        "number": 3
+      },
+      "topicId": "Painting Practice-I",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-065",
+        "pdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Painting Practice-I"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2024-25",
+        "textbookId": "PECTAA-9-ART9EM",
+        "syllabusVersion": "2024-25"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "en": {
+          "stem": "State two principles or considerations that are important when studying Painting Practice-I.",
+          "answer": "A strong answer should identify two accurate chapter-relevant principles and explain briefly why each matters. Focus: painting media, colour, technique and visual expression."
+        }
+      }
+    },
+    {
+      "id": "ART9EM-C03-L01",
+      "chapter": {
+        "id": "ART9EM-C03",
+        "number": 3
+      },
+      "topicId": "Painting Practice-I",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-065",
+        "pdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Painting Practice-I"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2024-25",
+        "textbookId": "PECTAA-9-ART9EM",
+        "syllabusVersion": "2024-25"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "en": {
+          "stem": "Explain the core ideas of Painting Practice-I and show how they guide responsible practical or analytical decisions.",
+          "answer": "Cover the chapter focus (painting media, colour, technique and visual expression), at least three relevant principles, one realistic application, and appropriate safety/ethical/sustainability considerations where applicable. Do not reproduce textbook passages."
+        }
+      }
+    },
+    {
+      "id": "ART9EM-C04-M01",
+      "chapter": {
+        "id": "ART9EM-C04",
+        "number": 4
+      },
+      "topicId": "An Introduction to Graphic Design",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-065",
+        "pdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "An Introduction to Graphic Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2024-25",
+        "textbookId": "PECTAA-9-ART9EM",
+        "syllabusVersion": "2024-25"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "en": {
+          "stem": "Which description best matches the focus of “An Introduction to Graphic Design”?",
+          "answer": "calligraphy, poster, pattern and graphic communication",
+          "options": [
+            {
+              "id": "A",
+              "text": "calligraphy, poster, pattern and graphic communication"
+            },
+            {
+              "id": "B",
+              "text": "Memorizing unrelated facts without understanding"
+            },
+            {
+              "id": "C",
+              "text": "Focusing on an isolated detail unrelated to the chapter purpose"
+            },
+            {
+              "id": "D",
+              "text": "Ignoring context, safety and practical judgment"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "ART9EM-C04-S01",
+      "chapter": {
+        "id": "ART9EM-C04",
+        "number": 4
+      },
+      "topicId": "An Introduction to Graphic Design",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-065",
+        "pdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "An Introduction to Graphic Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2024-25",
+        "textbookId": "PECTAA-9-ART9EM",
+        "syllabusVersion": "2024-25"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "en": {
+          "stem": "State two principles or considerations that are important when studying An Introduction to Graphic Design.",
+          "answer": "A strong answer should identify two accurate chapter-relevant principles and explain briefly why each matters. Focus: calligraphy, poster, pattern and graphic communication."
+        }
+      }
+    },
+    {
+      "id": "ART9EM-C04-L01",
+      "chapter": {
+        "id": "ART9EM-C04",
+        "number": 4
+      },
+      "topicId": "An Introduction to Graphic Design",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-065",
+        "pdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "An Introduction to Graphic Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2024-25",
+        "textbookId": "PECTAA-9-ART9EM",
+        "syllabusVersion": "2024-25"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "en": {
+          "stem": "Explain the core ideas of An Introduction to Graphic Design and show how they guide responsible practical or analytical decisions.",
+          "answer": "Cover the chapter focus (calligraphy, poster, pattern and graphic communication), at least three relevant principles, one realistic application, and appropriate safety/ethical/sustainability considerations where applicable. Do not reproduce textbook passages."
+        }
+      }
+    },
+    {
+      "id": "ART9EM-C05-M01",
+      "chapter": {
+        "id": "ART9EM-C05",
+        "number": 5
+      },
+      "topicId": "History of Architecture in Pakistan",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-065",
+        "pdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "History of Architecture in Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2024-25",
+        "textbookId": "PECTAA-9-ART9EM",
+        "syllabusVersion": "2024-25"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "en": {
+          "stem": "Which description best matches the focus of “History of Architecture in Pakistan”?",
+          "answer": "selected architectural heritage and visual characteristics in Pakistan",
+          "options": [
+            {
+              "id": "A",
+              "text": "selected architectural heritage and visual characteristics in Pakistan"
+            },
+            {
+              "id": "B",
+              "text": "Memorizing unrelated facts without understanding"
+            },
+            {
+              "id": "C",
+              "text": "Focusing on an isolated detail unrelated to the chapter purpose"
+            },
+            {
+              "id": "D",
+              "text": "Ignoring context, safety and practical judgment"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "ART9EM-C05-S01",
+      "chapter": {
+        "id": "ART9EM-C05",
+        "number": 5
+      },
+      "topicId": "History of Architecture in Pakistan",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-065",
+        "pdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "History of Architecture in Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2024-25",
+        "textbookId": "PECTAA-9-ART9EM",
+        "syllabusVersion": "2024-25"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "en": {
+          "stem": "State two principles or considerations that are important when studying History of Architecture in Pakistan.",
+          "answer": "A strong answer should identify two accurate chapter-relevant principles and explain briefly why each matters. Focus: selected architectural heritage and visual characteristics in Pakistan."
+        }
+      }
+    },
+    {
+      "id": "ART9EM-C05-L01",
+      "chapter": {
+        "id": "ART9EM-C05",
+        "number": 5
+      },
+      "topicId": "History of Architecture in Pakistan",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-065",
+        "pdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "History of Architecture in Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2024-25",
+        "textbookId": "PECTAA-9-ART9EM",
+        "syllabusVersion": "2024-25"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "en": {
+          "stem": "Explain the core ideas of History of Architecture in Pakistan and show how they guide responsible practical or analytical decisions.",
+          "answer": "Cover the chapter focus (selected architectural heritage and visual characteristics in Pakistan), at least three relevant principles, one realistic application, and appropriate safety/ethical/sustainability considerations where applicable. Do not reproduce textbook passages."
+        }
+      }
+    },
+    {
+      "id": "ART9EM-C06-M01",
+      "chapter": {
+        "id": "ART9EM-C06",
+        "number": 6
+      },
+      "topicId": "History of Painting in South Asia",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-065",
+        "pdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "History of Painting in South Asia"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2024-25",
+        "textbookId": "PECTAA-9-ART9EM",
+        "syllabusVersion": "2024-25"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "en": {
+          "stem": "Which description best matches the focus of “History of Painting in South Asia”?",
+          "answer": "South Asian painting traditions and selected Pakistani painters",
+          "options": [
+            {
+              "id": "A",
+              "text": "South Asian painting traditions and selected Pakistani painters"
+            },
+            {
+              "id": "B",
+              "text": "Memorizing unrelated facts without understanding"
+            },
+            {
+              "id": "C",
+              "text": "Focusing on an isolated detail unrelated to the chapter purpose"
+            },
+            {
+              "id": "D",
+              "text": "Ignoring context, safety and practical judgment"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "ART9EM-C06-S01",
+      "chapter": {
+        "id": "ART9EM-C06",
+        "number": 6
+      },
+      "topicId": "History of Painting in South Asia",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-065",
+        "pdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "History of Painting in South Asia"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2024-25",
+        "textbookId": "PECTAA-9-ART9EM",
+        "syllabusVersion": "2024-25"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "en": {
+          "stem": "State two principles or considerations that are important when studying History of Painting in South Asia.",
+          "answer": "A strong answer should identify two accurate chapter-relevant principles and explain briefly why each matters. Focus: South Asian painting traditions and selected Pakistani painters."
+        }
+      }
+    },
+    {
+      "id": "ART9EM-C06-L01",
+      "chapter": {
+        "id": "ART9EM-C06",
+        "number": 6
+      },
+      "topicId": "History of Painting in South Asia",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-065",
+        "pdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "History of Painting in South Asia"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2024-25",
+        "textbookId": "PECTAA-9-ART9EM",
+        "syllabusVersion": "2024-25"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "en": {
+          "stem": "Explain the core ideas of History of Painting in South Asia and show how they guide responsible practical or analytical decisions.",
+          "answer": "Cover the chapter focus (South Asian painting traditions and selected Pakistani painters), at least three relevant principles, one realistic application, and appropriate safety/ethical/sustainability considerations where applicable. Do not reproduce textbook passages."
+        }
+      }
+    },
+    {
+      "id": "ART9EM-C07-M01",
+      "chapter": {
+        "id": "ART9EM-C07",
+        "number": 7
+      },
+      "topicId": "Master Calligraphists of Pakistan",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-065",
+        "pdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Master Calligraphists of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2024-25",
+        "textbookId": "PECTAA-9-ART9EM",
+        "syllabusVersion": "2024-25"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "en": {
+          "stem": "Which description best matches the focus of “Master Calligraphists of Pakistan”?",
+          "answer": "calligraphy as visual art and selected Pakistani calligraphists",
+          "options": [
+            {
+              "id": "A",
+              "text": "calligraphy as visual art and selected Pakistani calligraphists"
+            },
+            {
+              "id": "B",
+              "text": "Memorizing unrelated facts without understanding"
+            },
+            {
+              "id": "C",
+              "text": "Focusing on an isolated detail unrelated to the chapter purpose"
+            },
+            {
+              "id": "D",
+              "text": "Ignoring context, safety and practical judgment"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "ART9EM-C07-S01",
+      "chapter": {
+        "id": "ART9EM-C07",
+        "number": 7
+      },
+      "topicId": "Master Calligraphists of Pakistan",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-065",
+        "pdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Master Calligraphists of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2024-25",
+        "textbookId": "PECTAA-9-ART9EM",
+        "syllabusVersion": "2024-25"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "en": {
+          "stem": "State two principles or considerations that are important when studying Master Calligraphists of Pakistan.",
+          "answer": "A strong answer should identify two accurate chapter-relevant principles and explain briefly why each matters. Focus: calligraphy as visual art and selected Pakistani calligraphists."
+        }
+      }
+    },
+    {
+      "id": "ART9EM-C07-L01",
+      "chapter": {
+        "id": "ART9EM-C07",
+        "number": 7
+      },
+      "topicId": "Master Calligraphists of Pakistan",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-065",
+        "pdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Master Calligraphists of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2024-25",
+        "textbookId": "PECTAA-9-ART9EM",
+        "syllabusVersion": "2024-25"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "en": {
+          "stem": "Explain the core ideas of Master Calligraphists of Pakistan and show how they guide responsible practical or analytical decisions.",
+          "answer": "Cover the chapter focus (calligraphy as visual art and selected Pakistani calligraphists), at least three relevant principles, one realistic application, and appropriate safety/ethical/sustainability considerations where applicable. Do not reproduce textbook passages."
+        }
+      }
+    },
+    {
+      "id": "ART9EM-C08-M01",
+      "chapter": {
+        "id": "ART9EM-C08",
+        "number": 8
+      },
+      "topicId": "Textiles: Weaving, Printing and Embroidery",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-065",
+        "pdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Textiles: Weaving, Printing and Embroidery"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2024-25",
+        "textbookId": "PECTAA-9-ART9EM",
+        "syllabusVersion": "2024-25"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "en": {
+          "stem": "Which description best matches the focus of “Textiles: Weaving, Printing and Embroidery”?",
+          "answer": "weaving, printing, embroidery and Pakistani textile crafts",
+          "options": [
+            {
+              "id": "A",
+              "text": "weaving, printing, embroidery and Pakistani textile crafts"
+            },
+            {
+              "id": "B",
+              "text": "Memorizing unrelated facts without understanding"
+            },
+            {
+              "id": "C",
+              "text": "Focusing on an isolated detail unrelated to the chapter purpose"
+            },
+            {
+              "id": "D",
+              "text": "Ignoring context, safety and practical judgment"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "ART9EM-C08-S01",
+      "chapter": {
+        "id": "ART9EM-C08",
+        "number": 8
+      },
+      "topicId": "Textiles: Weaving, Printing and Embroidery",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-065",
+        "pdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Textiles: Weaving, Printing and Embroidery"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2024-25",
+        "textbookId": "PECTAA-9-ART9EM",
+        "syllabusVersion": "2024-25"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "en": {
+          "stem": "State two principles or considerations that are important when studying Textiles: Weaving, Printing and Embroidery.",
+          "answer": "A strong answer should identify two accurate chapter-relevant principles and explain briefly why each matters. Focus: weaving, printing, embroidery and Pakistani textile crafts."
+        }
+      }
+    },
+    {
+      "id": "ART9EM-C08-L01",
+      "chapter": {
+        "id": "ART9EM-C08",
+        "number": 8
+      },
+      "topicId": "Textiles: Weaving, Printing and Embroidery",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-065",
+        "pdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Textiles: Weaving, Printing and Embroidery"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2024-25",
+        "textbookId": "PECTAA-9-ART9EM",
+        "syllabusVersion": "2024-25"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "en": {
+          "stem": "Explain the core ideas of Textiles: Weaving, Printing and Embroidery and show how they guide responsible practical or analytical decisions.",
+          "answer": "Cover the chapter focus (weaving, printing, embroidery and Pakistani textile crafts), at least three relevant principles, one realistic application, and appropriate safety/ethical/sustainability considerations where applicable. Do not reproduce textbook passages."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 24,
+    "mcq": 8,
+    "short": 8,
+    "long": 8,
+    "chapters": 8
+  }
+}

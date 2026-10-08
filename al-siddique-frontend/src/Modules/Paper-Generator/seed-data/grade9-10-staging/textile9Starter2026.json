@@ -1,0 +1,1559 @@
+{
+  "schemaVersion": "assps-textile9-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-067",
+  "sourcePdfSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+  "scope": "CURRENT_ELECTIVE_CHAPTER_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "TEXTILE9-C01-M01",
+      "chapter": {
+        "id": "TEXTILE9-C01",
+        "number": 1
+      },
+      "topicId": "Textiles and Clothing",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-067",
+        "pdfSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پارچہ بافی اور لباس"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "parcha-bafi-(textile-and-clothing)",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-TEXTILE9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”پارچہ بافی اور لباس“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "textiles, clothing اور ان کے روزمرہ/معاشی کردار",
+          "options": [
+            {
+              "id": "A",
+              "text": "textiles, clothing اور ان کے روزمرہ/معاشی کردار"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "TEXTILE9-C01-S01",
+      "chapter": {
+        "id": "TEXTILE9-C01",
+        "number": 1
+      },
+      "topicId": "Textiles and Clothing",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-067",
+        "pdfSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پارچہ بافی اور لباس"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "parcha-bafi-(textile-and-clothing)",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-TEXTILE9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”پارچہ بافی اور لباس“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: textiles, clothing اور ان کے روزمرہ/معاشی کردار۔"
+        }
+      }
+    },
+    {
+      "id": "TEXTILE9-C01-L01",
+      "chapter": {
+        "id": "TEXTILE9-C01",
+        "number": 1
+      },
+      "topicId": "Textiles and Clothing",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-067",
+        "pdfSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پارچہ بافی اور لباس"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "parcha-bafi-(textile-and-clothing)",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-TEXTILE9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”پارچہ بافی اور لباس“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (textiles, clothing اور ان کے روزمرہ/معاشی کردار)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "TEXTILE9-C02-M01",
+      "chapter": {
+        "id": "TEXTILE9-C02",
+        "number": 2
+      },
+      "topicId": "Textile Fibres",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-067",
+        "pdfSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پارچہ بافی کے ریشے"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "parcha-bafi-(textile-and-clothing)",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-TEXTILE9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”پارچہ بافی کے ریشے“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "natural/synthetic fibres کی عمومی خصوصیات اور انتخاب",
+          "options": [
+            {
+              "id": "A",
+              "text": "natural/synthetic fibres کی عمومی خصوصیات اور انتخاب"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "TEXTILE9-C02-S01",
+      "chapter": {
+        "id": "TEXTILE9-C02",
+        "number": 2
+      },
+      "topicId": "Textile Fibres",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-067",
+        "pdfSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پارچہ بافی کے ریشے"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "parcha-bafi-(textile-and-clothing)",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-TEXTILE9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”پارچہ بافی کے ریشے“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: natural/synthetic fibres کی عمومی خصوصیات اور انتخاب۔"
+        }
+      }
+    },
+    {
+      "id": "TEXTILE9-C02-L01",
+      "chapter": {
+        "id": "TEXTILE9-C02",
+        "number": 2
+      },
+      "topicId": "Textile Fibres",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-067",
+        "pdfSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پارچہ بافی کے ریشے"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "parcha-bafi-(textile-and-clothing)",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-TEXTILE9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”پارچہ بافی کے ریشے“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (natural/synthetic fibres کی عمومی خصوصیات اور انتخاب)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "TEXTILE9-C03-M01",
+      "chapter": {
+        "id": "TEXTILE9-C03",
+        "number": 3
+      },
+      "topicId": "Textile Industry in Pakistan",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-067",
+        "pdfSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پاکستان میں پارچہ بافی کی صنعت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "parcha-bafi-(textile-and-clothing)",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-TEXTILE9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”پاکستان میں پارچہ بافی کی صنعت“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "پاکستانی textile sector کا معاشی/روزگار کردار",
+          "options": [
+            {
+              "id": "A",
+              "text": "پاکستانی textile sector کا معاشی/روزگار کردار"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "TEXTILE9-C03-S01",
+      "chapter": {
+        "id": "TEXTILE9-C03",
+        "number": 3
+      },
+      "topicId": "Textile Industry in Pakistan",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-067",
+        "pdfSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پاکستان میں پارچہ بافی کی صنعت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "parcha-bafi-(textile-and-clothing)",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-TEXTILE9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”پاکستان میں پارچہ بافی کی صنعت“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: پاکستانی textile sector کا معاشی/روزگار کردار۔"
+        }
+      }
+    },
+    {
+      "id": "TEXTILE9-C03-L01",
+      "chapter": {
+        "id": "TEXTILE9-C03",
+        "number": 3
+      },
+      "topicId": "Textile Industry in Pakistan",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-067",
+        "pdfSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پاکستان میں پارچہ بافی کی صنعت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "parcha-bafi-(textile-and-clothing)",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-TEXTILE9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”پاکستان میں پارچہ بافی کی صنعت“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (پاکستانی textile sector کا معاشی/روزگار کردار)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "TEXTILE9-C04-M01",
+      "chapter": {
+        "id": "TEXTILE9-C04",
+        "number": 4
+      },
+      "topicId": "Fibre Identification",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-067",
+        "pdfSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ریشوں کی شناخت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "parcha-bafi-(textile-and-clothing)",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-TEXTILE9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”ریشوں کی شناخت“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "fibres کی observable properties اور responsible identification",
+          "options": [
+            {
+              "id": "A",
+              "text": "fibres کی observable properties اور responsible identification"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "TEXTILE9-C04-S01",
+      "chapter": {
+        "id": "TEXTILE9-C04",
+        "number": 4
+      },
+      "topicId": "Fibre Identification",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-067",
+        "pdfSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ریشوں کی شناخت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "parcha-bafi-(textile-and-clothing)",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-TEXTILE9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”ریشوں کی شناخت“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: fibres کی observable properties اور responsible identification۔"
+        }
+      }
+    },
+    {
+      "id": "TEXTILE9-C04-L01",
+      "chapter": {
+        "id": "TEXTILE9-C04",
+        "number": 4
+      },
+      "topicId": "Fibre Identification",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-067",
+        "pdfSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ریشوں کی شناخت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "parcha-bafi-(textile-and-clothing)",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-TEXTILE9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”ریشوں کی شناخت“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (fibres کی observable properties اور responsible identification)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "TEXTILE9-C05-M01",
+      "chapter": {
+        "id": "TEXTILE9-C05",
+        "number": 5
+      },
+      "topicId": "Textile Construction Methods",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-067",
+        "pdfSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پارچہ بافی کے طریقے"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "parcha-bafi-(textile-and-clothing)",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-TEXTILE9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”پارچہ بافی کے طریقے“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "weaving/other fabric construction کے بنیادی تصورات",
+          "options": [
+            {
+              "id": "A",
+              "text": "weaving/other fabric construction کے بنیادی تصورات"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "TEXTILE9-C05-S01",
+      "chapter": {
+        "id": "TEXTILE9-C05",
+        "number": 5
+      },
+      "topicId": "Textile Construction Methods",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-067",
+        "pdfSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پارچہ بافی کے طریقے"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "parcha-bafi-(textile-and-clothing)",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-TEXTILE9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”پارچہ بافی کے طریقے“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: weaving/other fabric construction کے بنیادی تصورات۔"
+        }
+      }
+    },
+    {
+      "id": "TEXTILE9-C05-L01",
+      "chapter": {
+        "id": "TEXTILE9-C05",
+        "number": 5
+      },
+      "topicId": "Textile Construction Methods",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-067",
+        "pdfSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پارچہ بافی کے طریقے"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "parcha-bafi-(textile-and-clothing)",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-TEXTILE9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”پارچہ بافی کے طریقے“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (weaving/other fabric construction کے بنیادی تصورات)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "TEXTILE9-C06-M01",
+      "chapter": {
+        "id": "TEXTILE9-C06",
+        "number": 6
+      },
+      "topicId": "Textile Design",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-067",
+        "pdfSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Textile Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "parcha-bafi-(textile-and-clothing)",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-TEXTILE9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”Textile Design“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "pattern, colour, function اور design planning",
+          "options": [
+            {
+              "id": "A",
+              "text": "pattern, colour, function اور design planning"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "TEXTILE9-C06-S01",
+      "chapter": {
+        "id": "TEXTILE9-C06",
+        "number": 6
+      },
+      "topicId": "Textile Design",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-067",
+        "pdfSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Textile Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "parcha-bafi-(textile-and-clothing)",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-TEXTILE9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”Textile Design“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: pattern, colour, function اور design planning۔"
+        }
+      }
+    },
+    {
+      "id": "TEXTILE9-C06-L01",
+      "chapter": {
+        "id": "TEXTILE9-C06",
+        "number": 6
+      },
+      "topicId": "Textile Design",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-067",
+        "pdfSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Textile Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "parcha-bafi-(textile-and-clothing)",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-TEXTILE9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”Textile Design“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (pattern, colour, function اور design planning)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "TEXTILE9-C07-M01",
+      "chapter": {
+        "id": "TEXTILE9-C07",
+        "number": 7
+      },
+      "topicId": "Clothing Selection",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-067",
+        "pdfSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "لباس کا انتخاب"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "parcha-bafi-(textile-and-clothing)",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-TEXTILE9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”لباس کا انتخاب“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "comfort, purpose, climate, durability اور budget-aware selection",
+          "options": [
+            {
+              "id": "A",
+              "text": "comfort, purpose, climate, durability اور budget-aware selection"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "TEXTILE9-C07-S01",
+      "chapter": {
+        "id": "TEXTILE9-C07",
+        "number": 7
+      },
+      "topicId": "Clothing Selection",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-067",
+        "pdfSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "لباس کا انتخاب"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "parcha-bafi-(textile-and-clothing)",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-TEXTILE9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”لباس کا انتخاب“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: comfort, purpose, climate, durability اور budget-aware selection۔"
+        }
+      }
+    },
+    {
+      "id": "TEXTILE9-C07-L01",
+      "chapter": {
+        "id": "TEXTILE9-C07",
+        "number": 7
+      },
+      "topicId": "Clothing Selection",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-067",
+        "pdfSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "لباس کا انتخاب"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "parcha-bafi-(textile-and-clothing)",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-TEXTILE9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”لباس کا انتخاب“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (comfort, purpose, climate, durability اور budget-aware selection)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 21,
+    "mcq": 7,
+    "short": 7,
+    "long": 7,
+    "chapters": 7
+  }
+}

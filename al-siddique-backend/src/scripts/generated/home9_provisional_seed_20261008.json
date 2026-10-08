@@ -1,0 +1,790 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "HOME9-C01-M01",
+      "class_level": "9th",
+      "subject": "Home Economics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Home Economics کا تعارف",
+      "topic_name": "Introduction to Home Economics",
+      "category": "mcq",
+      "question_text": "باب ”Home Economics کا تعارف“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "گھر، فرد، خاندان اور وسائل کے بہتر استعمال میں Home Economics کا کردار"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "گھر، فرد، خاندان اور وسائل کے بہتر استعمال میں Home Economics کا کردار",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-066 | faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3 | chapter 1",
+      "tags": [
+        "grade9",
+        "elective",
+        "home economics",
+        "internal-provisional",
+        "original-draft",
+        "Introduction to Home Economics"
+      ]
+    },
+    {
+      "id": "HOME9-C01-S01",
+      "class_level": "9th",
+      "subject": "Home Economics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Home Economics کا تعارف",
+      "topic_name": "Introduction to Home Economics",
+      "category": "short",
+      "question_text": "”Home Economics کا تعارف“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: گھر، فرد، خاندان اور وسائل کے بہتر استعمال میں Home Economics کا کردار۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-066 | faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3 | chapter 1",
+      "tags": [
+        "grade9",
+        "elective",
+        "home economics",
+        "internal-provisional",
+        "original-draft",
+        "Introduction to Home Economics"
+      ]
+    },
+    {
+      "id": "HOME9-C01-L01",
+      "class_level": "9th",
+      "subject": "Home Economics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Home Economics کا تعارف",
+      "topic_name": "Introduction to Home Economics",
+      "category": "long",
+      "question_text": "”Home Economics کا تعارف“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (گھر، فرد، خاندان اور وسائل کے بہتر استعمال میں Home Economics کا کردار)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-066 | faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3 | chapter 1",
+      "tags": [
+        "grade9",
+        "elective",
+        "home economics",
+        "internal-provisional",
+        "original-draft",
+        "Introduction to Home Economics"
+      ]
+    },
+    {
+      "id": "HOME9-C02-M01",
+      "class_level": "9th",
+      "subject": "Home Economics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "غذا اور غذائیت کا تعارف",
+      "topic_name": "Introduction to Food and Nutrition",
+      "category": "mcq",
+      "question_text": "باب ”غذا اور غذائیت کا تعارف“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "غذا اور غذائیت کے بنیادی تصورات اور صحت سے تعلق"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "غذا اور غذائیت کے بنیادی تصورات اور صحت سے تعلق",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-066 | faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3 | chapter 2",
+      "tags": [
+        "grade9",
+        "elective",
+        "home economics",
+        "internal-provisional",
+        "original-draft",
+        "Introduction to Food and Nutrition"
+      ]
+    },
+    {
+      "id": "HOME9-C02-S01",
+      "class_level": "9th",
+      "subject": "Home Economics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "غذا اور غذائیت کا تعارف",
+      "topic_name": "Introduction to Food and Nutrition",
+      "category": "short",
+      "question_text": "”غذا اور غذائیت کا تعارف“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: غذا اور غذائیت کے بنیادی تصورات اور صحت سے تعلق۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-066 | faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3 | chapter 2",
+      "tags": [
+        "grade9",
+        "elective",
+        "home economics",
+        "internal-provisional",
+        "original-draft",
+        "Introduction to Food and Nutrition"
+      ]
+    },
+    {
+      "id": "HOME9-C02-L01",
+      "class_level": "9th",
+      "subject": "Home Economics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "غذا اور غذائیت کا تعارف",
+      "topic_name": "Introduction to Food and Nutrition",
+      "category": "long",
+      "question_text": "”غذا اور غذائیت کا تعارف“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (غذا اور غذائیت کے بنیادی تصورات اور صحت سے تعلق)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-066 | faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3 | chapter 2",
+      "tags": [
+        "grade9",
+        "elective",
+        "home economics",
+        "internal-provisional",
+        "original-draft",
+        "Introduction to Food and Nutrition"
+      ]
+    },
+    {
+      "id": "HOME9-C03-M01",
+      "class_level": "9th",
+      "subject": "Home Economics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "غذا اور خوراک کو سمجھنا",
+      "topic_name": "Understanding Food",
+      "category": "mcq",
+      "question_text": "باب ”غذا اور خوراک کو سمجھنا“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "food groups، quality، hygiene اور informed food choices"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "food groups، quality، hygiene اور informed food choices",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-066 | faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3 | chapter 3",
+      "tags": [
+        "grade9",
+        "elective",
+        "home economics",
+        "internal-provisional",
+        "original-draft",
+        "Understanding Food"
+      ]
+    },
+    {
+      "id": "HOME9-C03-S01",
+      "class_level": "9th",
+      "subject": "Home Economics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "غذا اور خوراک کو سمجھنا",
+      "topic_name": "Understanding Food",
+      "category": "short",
+      "question_text": "”غذا اور خوراک کو سمجھنا“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: food groups، quality، hygiene اور informed food choices۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-066 | faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3 | chapter 3",
+      "tags": [
+        "grade9",
+        "elective",
+        "home economics",
+        "internal-provisional",
+        "original-draft",
+        "Understanding Food"
+      ]
+    },
+    {
+      "id": "HOME9-C03-L01",
+      "class_level": "9th",
+      "subject": "Home Economics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "غذا اور خوراک کو سمجھنا",
+      "topic_name": "Understanding Food",
+      "category": "long",
+      "question_text": "”غذا اور خوراک کو سمجھنا“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (food groups، quality، hygiene اور informed food choices)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-066 | faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3 | chapter 3",
+      "tags": [
+        "grade9",
+        "elective",
+        "home economics",
+        "internal-provisional",
+        "original-draft",
+        "Understanding Food"
+      ]
+    },
+    {
+      "id": "HOME9-C04-M01",
+      "class_level": "9th",
+      "subject": "Home Economics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "کھانوں کی تیاری",
+      "topic_name": "Food Preparation",
+      "category": "mcq",
+      "question_text": "باب ”کھانوں کی تیاری“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "محفوظ، صاف اور منظم food preparation کے بنیادی اصول"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "محفوظ، صاف اور منظم food preparation کے بنیادی اصول",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-066 | faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3 | chapter 4",
+      "tags": [
+        "grade9",
+        "elective",
+        "home economics",
+        "internal-provisional",
+        "original-draft",
+        "Food Preparation"
+      ]
+    },
+    {
+      "id": "HOME9-C04-S01",
+      "class_level": "9th",
+      "subject": "Home Economics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "کھانوں کی تیاری",
+      "topic_name": "Food Preparation",
+      "category": "short",
+      "question_text": "”کھانوں کی تیاری“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: محفوظ، صاف اور منظم food preparation کے بنیادی اصول۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-066 | faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3 | chapter 4",
+      "tags": [
+        "grade9",
+        "elective",
+        "home economics",
+        "internal-provisional",
+        "original-draft",
+        "Food Preparation"
+      ]
+    },
+    {
+      "id": "HOME9-C04-L01",
+      "class_level": "9th",
+      "subject": "Home Economics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "کھانوں کی تیاری",
+      "topic_name": "Food Preparation",
+      "category": "long",
+      "question_text": "”کھانوں کی تیاری“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (محفوظ، صاف اور منظم food preparation کے بنیادی اصول)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-066 | faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3 | chapter 4",
+      "tags": [
+        "grade9",
+        "elective",
+        "home economics",
+        "internal-provisional",
+        "original-draft",
+        "Food Preparation"
+      ]
+    },
+    {
+      "id": "HOME9-C05-M01",
+      "class_level": "9th",
+      "subject": "Home Economics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "بچوں کی نگہداشت اور نشوونما کا تعارف",
+      "topic_name": "Introduction to Child Care and Development",
+      "category": "mcq",
+      "question_text": "باب ”بچوں کی نگہداشت اور نشوونما کا تعارف“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "بچوں کی نگہداشت، محفوظ ماحول اور holistic development کی بنیادی ضروریات"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "بچوں کی نگہداشت، محفوظ ماحول اور holistic development کی بنیادی ضروریات",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-066 | faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3 | chapter 5",
+      "tags": [
+        "grade9",
+        "elective",
+        "home economics",
+        "internal-provisional",
+        "original-draft",
+        "Introduction to Child Care and Development"
+      ]
+    },
+    {
+      "id": "HOME9-C05-S01",
+      "class_level": "9th",
+      "subject": "Home Economics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "بچوں کی نگہداشت اور نشوونما کا تعارف",
+      "topic_name": "Introduction to Child Care and Development",
+      "category": "short",
+      "question_text": "”بچوں کی نگہداشت اور نشوونما کا تعارف“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: بچوں کی نگہداشت، محفوظ ماحول اور holistic development کی بنیادی ضروریات۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-066 | faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3 | chapter 5",
+      "tags": [
+        "grade9",
+        "elective",
+        "home economics",
+        "internal-provisional",
+        "original-draft",
+        "Introduction to Child Care and Development"
+      ]
+    },
+    {
+      "id": "HOME9-C05-L01",
+      "class_level": "9th",
+      "subject": "Home Economics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "بچوں کی نگہداشت اور نشوونما کا تعارف",
+      "topic_name": "Introduction to Child Care and Development",
+      "category": "long",
+      "question_text": "”بچوں کی نگہداشت اور نشوونما کا تعارف“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (بچوں کی نگہداشت، محفوظ ماحول اور holistic development کی بنیادی ضروریات)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-066 | faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3 | chapter 5",
+      "tags": [
+        "grade9",
+        "elective",
+        "home economics",
+        "internal-provisional",
+        "original-draft",
+        "Introduction to Child Care and Development"
+      ]
+    },
+    {
+      "id": "HOME9-C06-M01",
+      "class_level": "9th",
+      "subject": "Home Economics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "نشوونمائی خصوصیات",
+      "topic_name": "Developmental Characteristics",
+      "category": "mcq",
+      "question_text": "باب ”نشوونمائی خصوصیات“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "عمر کے ساتھ physical, social, emotional اور cognitive development میں تبدیلیاں"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "عمر کے ساتھ physical, social, emotional اور cognitive development میں تبدیلیاں",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-066 | faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3 | chapter 6",
+      "tags": [
+        "grade9",
+        "elective",
+        "home economics",
+        "internal-provisional",
+        "original-draft",
+        "Developmental Characteristics"
+      ]
+    },
+    {
+      "id": "HOME9-C06-S01",
+      "class_level": "9th",
+      "subject": "Home Economics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "نشوونمائی خصوصیات",
+      "topic_name": "Developmental Characteristics",
+      "category": "short",
+      "question_text": "”نشوونمائی خصوصیات“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: عمر کے ساتھ physical, social, emotional اور cognitive development میں تبدیلیاں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-066 | faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3 | chapter 6",
+      "tags": [
+        "grade9",
+        "elective",
+        "home economics",
+        "internal-provisional",
+        "original-draft",
+        "Developmental Characteristics"
+      ]
+    },
+    {
+      "id": "HOME9-C06-L01",
+      "class_level": "9th",
+      "subject": "Home Economics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "نشوونمائی خصوصیات",
+      "topic_name": "Developmental Characteristics",
+      "category": "long",
+      "question_text": "”نشوونمائی خصوصیات“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (عمر کے ساتھ physical, social, emotional اور cognitive development میں تبدیلیاں)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-066 | faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3 | chapter 6",
+      "tags": [
+        "grade9",
+        "elective",
+        "home economics",
+        "internal-provisional",
+        "original-draft",
+        "Developmental Characteristics"
+      ]
+    },
+    {
+      "id": "HOME9-C07-M01",
+      "class_level": "9th",
+      "subject": "Home Economics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "بچوں کے رویوں کے مسائل",
+      "topic_name": "Child Behaviour Concerns",
+      "category": "mcq",
+      "question_text": "باب ”بچوں کے رویوں کے مسائل“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "بچوں کے رویوں کو سمجھنے میں صبر، consistency اور age-appropriate guidance"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "بچوں کے رویوں کو سمجھنے میں صبر، consistency اور age-appropriate guidance",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-066 | faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3 | chapter 7",
+      "tags": [
+        "grade9",
+        "elective",
+        "home economics",
+        "internal-provisional",
+        "original-draft",
+        "Child Behaviour Concerns"
+      ]
+    },
+    {
+      "id": "HOME9-C07-S01",
+      "class_level": "9th",
+      "subject": "Home Economics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "بچوں کے رویوں کے مسائل",
+      "topic_name": "Child Behaviour Concerns",
+      "category": "short",
+      "question_text": "”بچوں کے رویوں کے مسائل“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: بچوں کے رویوں کو سمجھنے میں صبر، consistency اور age-appropriate guidance۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-066 | faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3 | chapter 7",
+      "tags": [
+        "grade9",
+        "elective",
+        "home economics",
+        "internal-provisional",
+        "original-draft",
+        "Child Behaviour Concerns"
+      ]
+    },
+    {
+      "id": "HOME9-C07-L01",
+      "class_level": "9th",
+      "subject": "Home Economics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "بچوں کے رویوں کے مسائل",
+      "topic_name": "Child Behaviour Concerns",
+      "category": "long",
+      "question_text": "”بچوں کے رویوں کے مسائل“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (بچوں کے رویوں کو سمجھنے میں صبر، consistency اور age-appropriate guidance)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-066 | faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3 | chapter 7",
+      "tags": [
+        "grade9",
+        "elective",
+        "home economics",
+        "internal-provisional",
+        "original-draft",
+        "Child Behaviour Concerns"
+      ]
+    },
+    {
+      "id": "HOME9-C08-M01",
+      "class_level": "9th",
+      "subject": "Home Economics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "انسانی نشوونما میں خاندان اور معاشرے کا کردار",
+      "topic_name": "Family and Society in Human Development",
+      "category": "mcq",
+      "question_text": "باب ”انسانی نشوونما میں خاندان اور معاشرے کا کردار“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "خاندان، school اور community کے supportive کردار"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "خاندان، school اور community کے supportive کردار",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-066 | faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3 | chapter 8",
+      "tags": [
+        "grade9",
+        "elective",
+        "home economics",
+        "internal-provisional",
+        "original-draft",
+        "Family and Society in Human Development"
+      ]
+    },
+    {
+      "id": "HOME9-C08-S01",
+      "class_level": "9th",
+      "subject": "Home Economics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "انسانی نشوونما میں خاندان اور معاشرے کا کردار",
+      "topic_name": "Family and Society in Human Development",
+      "category": "short",
+      "question_text": "”انسانی نشوونما میں خاندان اور معاشرے کا کردار“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: خاندان، school اور community کے supportive کردار۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-066 | faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3 | chapter 8",
+      "tags": [
+        "grade9",
+        "elective",
+        "home economics",
+        "internal-provisional",
+        "original-draft",
+        "Family and Society in Human Development"
+      ]
+    },
+    {
+      "id": "HOME9-C08-L01",
+      "class_level": "9th",
+      "subject": "Home Economics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "انسانی نشوونما میں خاندان اور معاشرے کا کردار",
+      "topic_name": "Family and Society in Human Development",
+      "category": "long",
+      "question_text": "”انسانی نشوونما میں خاندان اور معاشرے کا کردار“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (خاندان، school اور community کے supportive کردار)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-066 | faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3 | chapter 8",
+      "tags": [
+        "grade9",
+        "elective",
+        "home economics",
+        "internal-provisional",
+        "original-draft",
+        "Family and Society in Human Development"
+      ]
+    }
+  ]
+}

@@ -101,7 +101,8 @@ test('Grade IX/X arts and shared IX-X elective catalogue identities are represen
  assert.equal(m.additionalCatalogStreamsPending.includes('Humanities/Arts'),false);
  const art9=arts.filter(x=>x.grade===9&&x.subject==='Art & Model Drawing');assert.deepEqual(new Set(art9.map(x=>x.medium)),new Set(['English','Urdu']));
  const econ=arts.filter(x=>x.grade===0&&x.subject==='Economics');assert.deepEqual(new Set(econ.map(x=>x.medium)),new Set(['English','Urdu']));
- assert(arts.every(x=>x.questionGenerationStatus==='BLOCKED_PENDING_SOURCE'&&x.catalogLinkStatus==='OFFICIAL_PAGE_ANCHOR_FOUND'));
+ assert(arts.filter(x=>[9,10].includes(x.grade)).every(x=>x.questionGenerationStatus==='PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW'&&x.catalogLinkStatus==='OFFICIAL_PAGE_ANCHOR_FOUND'));
+ assert(arts.filter(x=>x.grade===0).every(x=>x.questionGenerationStatus==='BLOCKED_PENDING_SOURCE'&&x.catalogLinkStatus==='OFFICIAL_PAGE_ANCHOR_FOUND'));
 });
 
 test('Grade IX/X Practical Notebook sources are explicit and dimension-isolated',()=>{

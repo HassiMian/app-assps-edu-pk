@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "assps-art10em-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-072",
+  "sourcePdfSha256": "d88ff4dd8f1e87791bf580dff1ccb3bb5af5d6360cf487e8ad8ca4a6d12e4bd7",
+  "sourceByteLength": 46304515,
+  "pageCount": 220,
+  "identity": [
+    "Art & Model Drawing",
+    "Grade 10",
+    "English",
+    "2023-24"
+  ],
+  "resolvedMedium": "English",
+  "chapterMapState": "OFFICIAL_BYTES_HASHED_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_BOUNDARIES_PENDING",
+  "chapterEvidence": {
+    "officialCatalogRecordId": "pectaa-catalog-072",
+    "sourceCacheRef": "20261006/elective10-art-em.pdf",
+    "crossCheckUrls": [
+      "https://www.ilmkidunya.com/10th-class/books/art_and_drawing-punjab-board"
+    ]
+  },
+  "chapters": [
+    {
+      "number": 1,
+      "titleLocal": "Drawing and Sketching",
+      "titleEnglish": "Drawing and Sketching",
+      "focus": "observation, structure, proportion and expressive drawing",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 2,
+      "titleLocal": "Painting Practice",
+      "titleEnglish": "Painting Practice",
+      "focus": "colour, composition, media and painting decisions",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 3,
+      "titleLocal": "Graphic Design",
+      "titleEnglish": "Graphic Design",
+      "focus": "visual communication, layout, lettering and design",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 4,
+      "titleLocal": "Sculpture Making",
+      "titleEnglish": "Sculpture Making",
+      "focus": "three-dimensional form, modelling and safe material handling",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 5,
+      "titleLocal": "History of Sculpture and Architectural Relief in Pakistan",
+      "titleEnglish": "History of Sculpture and Architectural Relief in Pakistan",
+      "focus": "selected Pakistani sculpture/relief heritage and context",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 6,
+      "titleLocal": "History of Pottery and Ceramics in Pakistan",
+      "titleEnglish": "History of Pottery and Ceramics in Pakistan",
+      "focus": "pottery/ceramic traditions, form and decorative practice",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 7,
+      "titleLocal": "Craft of Pakistan",
+      "titleEnglish": "Craft of Pakistan",
+      "focus": "regional craft traditions, materials, function and cultural value",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "exactPageBoundariesPending": true,
+    "safetyBoundary": "NO_DANGEROUS_PROCEDURE_STEPS_NO_RESTRICTIVE_DIET_FRAMING"
+  }
+}

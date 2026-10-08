@@ -1,0 +1,692 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "TEXTILE10-C01-M01",
+      "class_level": "10th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Fashion اور بننا سنورنا",
+      "topic_name": "Fashion and Grooming",
+      "category": "mcq",
+      "question_text": "باب ”Fashion اور بننا سنورنا“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "fashion trends کو comfort, identity, context اور responsible choices کے ساتھ سمجھنا"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "fashion trends کو comfort, identity, context اور responsible choices کے ساتھ سمجھنا",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-070 | 81829814fdbc6005d89b3c91672610a5a0ac274f9d70a43d6c4e9a7da6ce5902 | chapter 1",
+      "tags": [
+        "grade10",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Fashion and Grooming"
+      ]
+    },
+    {
+      "id": "TEXTILE10-C01-S01",
+      "class_level": "10th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Fashion اور بننا سنورنا",
+      "topic_name": "Fashion and Grooming",
+      "category": "short",
+      "question_text": "”Fashion اور بننا سنورنا“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: fashion trends کو comfort, identity, context اور responsible choices کے ساتھ سمجھنا۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-070 | 81829814fdbc6005d89b3c91672610a5a0ac274f9d70a43d6c4e9a7da6ce5902 | chapter 1",
+      "tags": [
+        "grade10",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Fashion and Grooming"
+      ]
+    },
+    {
+      "id": "TEXTILE10-C01-L01",
+      "class_level": "10th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Fashion اور بننا سنورنا",
+      "topic_name": "Fashion and Grooming",
+      "category": "long",
+      "question_text": "”Fashion اور بننا سنورنا“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (fashion trends کو comfort, identity, context اور responsible choices کے ساتھ سمجھنا)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-070 | 81829814fdbc6005d89b3c91672610a5a0ac274f9d70a43d6c4e9a7da6ce5902 | chapter 1",
+      "tags": [
+        "grade10",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Fashion and Grooming"
+      ]
+    },
+    {
+      "id": "TEXTILE10-C02-M01",
+      "class_level": "10th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "کپڑوں کی منصوبہ بندی کے اصول",
+      "topic_name": "Principles of Clothing Planning",
+      "category": "mcq",
+      "question_text": "باب ”کپڑوں کی منصوبہ بندی کے اصول“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "wardrobe planning, needs, budget, versatility اور sustainability"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "wardrobe planning, needs, budget, versatility اور sustainability",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-070 | 81829814fdbc6005d89b3c91672610a5a0ac274f9d70a43d6c4e9a7da6ce5902 | chapter 2",
+      "tags": [
+        "grade10",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Principles of Clothing Planning"
+      ]
+    },
+    {
+      "id": "TEXTILE10-C02-S01",
+      "class_level": "10th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "کپڑوں کی منصوبہ بندی کے اصول",
+      "topic_name": "Principles of Clothing Planning",
+      "category": "short",
+      "question_text": "”کپڑوں کی منصوبہ بندی کے اصول“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: wardrobe planning, needs, budget, versatility اور sustainability۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-070 | 81829814fdbc6005d89b3c91672610a5a0ac274f9d70a43d6c4e9a7da6ce5902 | chapter 2",
+      "tags": [
+        "grade10",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Principles of Clothing Planning"
+      ]
+    },
+    {
+      "id": "TEXTILE10-C02-L01",
+      "class_level": "10th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "کپڑوں کی منصوبہ بندی کے اصول",
+      "topic_name": "Principles of Clothing Planning",
+      "category": "long",
+      "question_text": "”کپڑوں کی منصوبہ بندی کے اصول“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (wardrobe planning, needs, budget, versatility اور sustainability)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-070 | 81829814fdbc6005d89b3c91672610a5a0ac274f9d70a43d6c4e9a7da6ce5902 | chapter 2",
+      "tags": [
+        "grade10",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Principles of Clothing Planning"
+      ]
+    },
+    {
+      "id": "TEXTILE10-C03-M01",
+      "class_level": "10th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "کپڑوں کی حفاظت اور ذخیرہ",
+      "topic_name": "Clothing Care and Storage",
+      "category": "mcq",
+      "question_text": "باب ”کپڑوں کی حفاظت اور ذخیرہ“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "clean, dry, organized storage اور fabric-appropriate care"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "clean, dry, organized storage اور fabric-appropriate care",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-070 | 81829814fdbc6005d89b3c91672610a5a0ac274f9d70a43d6c4e9a7da6ce5902 | chapter 3",
+      "tags": [
+        "grade10",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Clothing Care and Storage"
+      ]
+    },
+    {
+      "id": "TEXTILE10-C03-S01",
+      "class_level": "10th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "کپڑوں کی حفاظت اور ذخیرہ",
+      "topic_name": "Clothing Care and Storage",
+      "category": "short",
+      "question_text": "”کپڑوں کی حفاظت اور ذخیرہ“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: clean, dry, organized storage اور fabric-appropriate care۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-070 | 81829814fdbc6005d89b3c91672610a5a0ac274f9d70a43d6c4e9a7da6ce5902 | chapter 3",
+      "tags": [
+        "grade10",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Clothing Care and Storage"
+      ]
+    },
+    {
+      "id": "TEXTILE10-C03-L01",
+      "class_level": "10th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "کپڑوں کی حفاظت اور ذخیرہ",
+      "topic_name": "Clothing Care and Storage",
+      "category": "long",
+      "question_text": "”کپڑوں کی حفاظت اور ذخیرہ“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (clean, dry, organized storage اور fabric-appropriate care)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-070 | 81829814fdbc6005d89b3c91672610a5a0ac274f9d70a43d6c4e9a7da6ce5902 | chapter 3",
+      "tags": [
+        "grade10",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Clothing Care and Storage"
+      ]
+    },
+    {
+      "id": "TEXTILE10-C04-M01",
+      "class_level": "10th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "داغ دھبے دور کرنا",
+      "topic_name": "Stain Management",
+      "category": "mcq",
+      "question_text": "باب ”داغ دھبے دور کرنا“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "fabric label, prompt safe treatment اور professional help when appropriate"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "fabric label, prompt safe treatment اور professional help when appropriate",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-070 | 81829814fdbc6005d89b3c91672610a5a0ac274f9d70a43d6c4e9a7da6ce5902 | chapter 4",
+      "tags": [
+        "grade10",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Stain Management"
+      ]
+    },
+    {
+      "id": "TEXTILE10-C04-S01",
+      "class_level": "10th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "داغ دھبے دور کرنا",
+      "topic_name": "Stain Management",
+      "category": "short",
+      "question_text": "”داغ دھبے دور کرنا“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: fabric label, prompt safe treatment اور professional help when appropriate۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-070 | 81829814fdbc6005d89b3c91672610a5a0ac274f9d70a43d6c4e9a7da6ce5902 | chapter 4",
+      "tags": [
+        "grade10",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Stain Management"
+      ]
+    },
+    {
+      "id": "TEXTILE10-C04-L01",
+      "class_level": "10th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "داغ دھبے دور کرنا",
+      "topic_name": "Stain Management",
+      "category": "long",
+      "question_text": "”داغ دھبے دور کرنا“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (fabric label, prompt safe treatment اور professional help when appropriate)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-070 | 81829814fdbc6005d89b3c91672610a5a0ac274f9d70a43d6c4e9a7da6ce5902 | chapter 4",
+      "tags": [
+        "grade10",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Stain Management"
+      ]
+    },
+    {
+      "id": "TEXTILE10-C05-M01",
+      "class_level": "10th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Textile اور لباس میں کاروبار کے مواقع اور پیشے",
+      "topic_name": "Careers and Enterprise in Textiles",
+      "category": "mcq",
+      "question_text": "باب ”Textile اور لباس میں کاروبار کے مواقع اور پیشے“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "textile/clothing careers, entrepreneurship, quality, ethics اور customer needs"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "textile/clothing careers, entrepreneurship, quality, ethics اور customer needs",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-070 | 81829814fdbc6005d89b3c91672610a5a0ac274f9d70a43d6c4e9a7da6ce5902 | chapter 5",
+      "tags": [
+        "grade10",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Careers and Enterprise in Textiles"
+      ]
+    },
+    {
+      "id": "TEXTILE10-C05-S01",
+      "class_level": "10th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Textile اور لباس میں کاروبار کے مواقع اور پیشے",
+      "topic_name": "Careers and Enterprise in Textiles",
+      "category": "short",
+      "question_text": "”Textile اور لباس میں کاروبار کے مواقع اور پیشے“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: textile/clothing careers, entrepreneurship, quality, ethics اور customer needs۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-070 | 81829814fdbc6005d89b3c91672610a5a0ac274f9d70a43d6c4e9a7da6ce5902 | chapter 5",
+      "tags": [
+        "grade10",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Careers and Enterprise in Textiles"
+      ]
+    },
+    {
+      "id": "TEXTILE10-C05-L01",
+      "class_level": "10th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Textile اور لباس میں کاروبار کے مواقع اور پیشے",
+      "topic_name": "Careers and Enterprise in Textiles",
+      "category": "long",
+      "question_text": "”Textile اور لباس میں کاروبار کے مواقع اور پیشے“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (textile/clothing careers, entrepreneurship, quality, ethics اور customer needs)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-070 | 81829814fdbc6005d89b3c91672610a5a0ac274f9d70a43d6c4e9a7da6ce5902 | chapter 5",
+      "tags": [
+        "grade10",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Careers and Enterprise in Textiles"
+      ]
+    },
+    {
+      "id": "TEXTILE10-C06-M01",
+      "class_level": "10th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "سلائی کا تعارف",
+      "topic_name": "Introduction to Sewing",
+      "category": "mcq",
+      "question_text": "باب ”سلائی کا تعارف“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "measurement, tools, safe workspace اور basic construction planning"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "measurement, tools, safe workspace اور basic construction planning",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-070 | 81829814fdbc6005d89b3c91672610a5a0ac274f9d70a43d6c4e9a7da6ce5902 | chapter 6",
+      "tags": [
+        "grade10",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Introduction to Sewing"
+      ]
+    },
+    {
+      "id": "TEXTILE10-C06-S01",
+      "class_level": "10th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "سلائی کا تعارف",
+      "topic_name": "Introduction to Sewing",
+      "category": "short",
+      "question_text": "”سلائی کا تعارف“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: measurement, tools, safe workspace اور basic construction planning۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-070 | 81829814fdbc6005d89b3c91672610a5a0ac274f9d70a43d6c4e9a7da6ce5902 | chapter 6",
+      "tags": [
+        "grade10",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Introduction to Sewing"
+      ]
+    },
+    {
+      "id": "TEXTILE10-C06-L01",
+      "class_level": "10th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "سلائی کا تعارف",
+      "topic_name": "Introduction to Sewing",
+      "category": "long",
+      "question_text": "”سلائی کا تعارف“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (measurement, tools, safe workspace اور basic construction planning)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-070 | 81829814fdbc6005d89b3c91672610a5a0ac274f9d70a43d6c4e9a7da6ce5902 | chapter 6",
+      "tags": [
+        "grade10",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Introduction to Sewing"
+      ]
+    },
+    {
+      "id": "TEXTILE10-C07-M01",
+      "class_level": "10th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "لباس بنانا",
+      "topic_name": "Garment Making",
+      "category": "mcq",
+      "question_text": "باب ”لباس بنانا“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "design-to-garment workflow, fit, finishing, quality and safe tool use"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "design-to-garment workflow, fit, finishing, quality and safe tool use",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-070 | 81829814fdbc6005d89b3c91672610a5a0ac274f9d70a43d6c4e9a7da6ce5902 | chapter 7",
+      "tags": [
+        "grade10",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Garment Making"
+      ]
+    },
+    {
+      "id": "TEXTILE10-C07-S01",
+      "class_level": "10th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "لباس بنانا",
+      "topic_name": "Garment Making",
+      "category": "short",
+      "question_text": "”لباس بنانا“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: design-to-garment workflow, fit, finishing, quality and safe tool use۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-070 | 81829814fdbc6005d89b3c91672610a5a0ac274f9d70a43d6c4e9a7da6ce5902 | chapter 7",
+      "tags": [
+        "grade10",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Garment Making"
+      ]
+    },
+    {
+      "id": "TEXTILE10-C07-L01",
+      "class_level": "10th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "لباس بنانا",
+      "topic_name": "Garment Making",
+      "category": "long",
+      "question_text": "”لباس بنانا“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (design-to-garment workflow, fit, finishing, quality and safe tool use)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-070 | 81829814fdbc6005d89b3c91672610a5a0ac274f9d70a43d6c4e9a7da6ce5902 | chapter 7",
+      "tags": [
+        "grade10",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Garment Making"
+      ]
+    }
+  ]
+}

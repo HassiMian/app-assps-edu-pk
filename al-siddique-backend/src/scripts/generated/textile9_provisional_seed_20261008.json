@@ -1,0 +1,692 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "TEXTILE9-C01-M01",
+      "class_level": "9th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "پارچہ بافی اور لباس",
+      "topic_name": "Textiles and Clothing",
+      "category": "mcq",
+      "question_text": "باب ”پارچہ بافی اور لباس“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "textiles, clothing اور ان کے روزمرہ/معاشی کردار"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "textiles, clothing اور ان کے روزمرہ/معاشی کردار",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-067 | 9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a | chapter 1",
+      "tags": [
+        "grade9",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Textiles and Clothing"
+      ]
+    },
+    {
+      "id": "TEXTILE9-C01-S01",
+      "class_level": "9th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "پارچہ بافی اور لباس",
+      "topic_name": "Textiles and Clothing",
+      "category": "short",
+      "question_text": "”پارچہ بافی اور لباس“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: textiles, clothing اور ان کے روزمرہ/معاشی کردار۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-067 | 9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a | chapter 1",
+      "tags": [
+        "grade9",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Textiles and Clothing"
+      ]
+    },
+    {
+      "id": "TEXTILE9-C01-L01",
+      "class_level": "9th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "پارچہ بافی اور لباس",
+      "topic_name": "Textiles and Clothing",
+      "category": "long",
+      "question_text": "”پارچہ بافی اور لباس“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (textiles, clothing اور ان کے روزمرہ/معاشی کردار)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-067 | 9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a | chapter 1",
+      "tags": [
+        "grade9",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Textiles and Clothing"
+      ]
+    },
+    {
+      "id": "TEXTILE9-C02-M01",
+      "class_level": "9th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "پارچہ بافی کے ریشے",
+      "topic_name": "Textile Fibres",
+      "category": "mcq",
+      "question_text": "باب ”پارچہ بافی کے ریشے“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "natural/synthetic fibres کی عمومی خصوصیات اور انتخاب"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "natural/synthetic fibres کی عمومی خصوصیات اور انتخاب",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-067 | 9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a | chapter 2",
+      "tags": [
+        "grade9",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Textile Fibres"
+      ]
+    },
+    {
+      "id": "TEXTILE9-C02-S01",
+      "class_level": "9th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "پارچہ بافی کے ریشے",
+      "topic_name": "Textile Fibres",
+      "category": "short",
+      "question_text": "”پارچہ بافی کے ریشے“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: natural/synthetic fibres کی عمومی خصوصیات اور انتخاب۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-067 | 9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a | chapter 2",
+      "tags": [
+        "grade9",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Textile Fibres"
+      ]
+    },
+    {
+      "id": "TEXTILE9-C02-L01",
+      "class_level": "9th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "پارچہ بافی کے ریشے",
+      "topic_name": "Textile Fibres",
+      "category": "long",
+      "question_text": "”پارچہ بافی کے ریشے“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (natural/synthetic fibres کی عمومی خصوصیات اور انتخاب)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-067 | 9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a | chapter 2",
+      "tags": [
+        "grade9",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Textile Fibres"
+      ]
+    },
+    {
+      "id": "TEXTILE9-C03-M01",
+      "class_level": "9th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "پاکستان میں پارچہ بافی کی صنعت",
+      "topic_name": "Textile Industry in Pakistan",
+      "category": "mcq",
+      "question_text": "باب ”پاکستان میں پارچہ بافی کی صنعت“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "پاکستانی textile sector کا معاشی/روزگار کردار"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "پاکستانی textile sector کا معاشی/روزگار کردار",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-067 | 9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a | chapter 3",
+      "tags": [
+        "grade9",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Textile Industry in Pakistan"
+      ]
+    },
+    {
+      "id": "TEXTILE9-C03-S01",
+      "class_level": "9th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "پاکستان میں پارچہ بافی کی صنعت",
+      "topic_name": "Textile Industry in Pakistan",
+      "category": "short",
+      "question_text": "”پاکستان میں پارچہ بافی کی صنعت“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: پاکستانی textile sector کا معاشی/روزگار کردار۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-067 | 9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a | chapter 3",
+      "tags": [
+        "grade9",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Textile Industry in Pakistan"
+      ]
+    },
+    {
+      "id": "TEXTILE9-C03-L01",
+      "class_level": "9th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "پاکستان میں پارچہ بافی کی صنعت",
+      "topic_name": "Textile Industry in Pakistan",
+      "category": "long",
+      "question_text": "”پاکستان میں پارچہ بافی کی صنعت“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (پاکستانی textile sector کا معاشی/روزگار کردار)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-067 | 9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a | chapter 3",
+      "tags": [
+        "grade9",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Textile Industry in Pakistan"
+      ]
+    },
+    {
+      "id": "TEXTILE9-C04-M01",
+      "class_level": "9th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "ریشوں کی شناخت",
+      "topic_name": "Fibre Identification",
+      "category": "mcq",
+      "question_text": "باب ”ریشوں کی شناخت“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "fibres کی observable properties اور responsible identification"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "fibres کی observable properties اور responsible identification",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-067 | 9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a | chapter 4",
+      "tags": [
+        "grade9",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Fibre Identification"
+      ]
+    },
+    {
+      "id": "TEXTILE9-C04-S01",
+      "class_level": "9th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "ریشوں کی شناخت",
+      "topic_name": "Fibre Identification",
+      "category": "short",
+      "question_text": "”ریشوں کی شناخت“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: fibres کی observable properties اور responsible identification۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-067 | 9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a | chapter 4",
+      "tags": [
+        "grade9",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Fibre Identification"
+      ]
+    },
+    {
+      "id": "TEXTILE9-C04-L01",
+      "class_level": "9th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "ریشوں کی شناخت",
+      "topic_name": "Fibre Identification",
+      "category": "long",
+      "question_text": "”ریشوں کی شناخت“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (fibres کی observable properties اور responsible identification)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-067 | 9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a | chapter 4",
+      "tags": [
+        "grade9",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Fibre Identification"
+      ]
+    },
+    {
+      "id": "TEXTILE9-C05-M01",
+      "class_level": "9th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "پارچہ بافی کے طریقے",
+      "topic_name": "Textile Construction Methods",
+      "category": "mcq",
+      "question_text": "باب ”پارچہ بافی کے طریقے“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "weaving/other fabric construction کے بنیادی تصورات"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "weaving/other fabric construction کے بنیادی تصورات",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-067 | 9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a | chapter 5",
+      "tags": [
+        "grade9",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Textile Construction Methods"
+      ]
+    },
+    {
+      "id": "TEXTILE9-C05-S01",
+      "class_level": "9th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "پارچہ بافی کے طریقے",
+      "topic_name": "Textile Construction Methods",
+      "category": "short",
+      "question_text": "”پارچہ بافی کے طریقے“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: weaving/other fabric construction کے بنیادی تصورات۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-067 | 9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a | chapter 5",
+      "tags": [
+        "grade9",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Textile Construction Methods"
+      ]
+    },
+    {
+      "id": "TEXTILE9-C05-L01",
+      "class_level": "9th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "پارچہ بافی کے طریقے",
+      "topic_name": "Textile Construction Methods",
+      "category": "long",
+      "question_text": "”پارچہ بافی کے طریقے“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (weaving/other fabric construction کے بنیادی تصورات)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-067 | 9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a | chapter 5",
+      "tags": [
+        "grade9",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Textile Construction Methods"
+      ]
+    },
+    {
+      "id": "TEXTILE9-C06-M01",
+      "class_level": "9th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Textile Design",
+      "topic_name": "Textile Design",
+      "category": "mcq",
+      "question_text": "باب ”Textile Design“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "pattern, colour, function اور design planning"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "pattern, colour, function اور design planning",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-067 | 9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a | chapter 6",
+      "tags": [
+        "grade9",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Textile Design"
+      ]
+    },
+    {
+      "id": "TEXTILE9-C06-S01",
+      "class_level": "9th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Textile Design",
+      "topic_name": "Textile Design",
+      "category": "short",
+      "question_text": "”Textile Design“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: pattern, colour, function اور design planning۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-067 | 9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a | chapter 6",
+      "tags": [
+        "grade9",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Textile Design"
+      ]
+    },
+    {
+      "id": "TEXTILE9-C06-L01",
+      "class_level": "9th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Textile Design",
+      "topic_name": "Textile Design",
+      "category": "long",
+      "question_text": "”Textile Design“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (pattern, colour, function اور design planning)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-067 | 9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a | chapter 6",
+      "tags": [
+        "grade9",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Textile Design"
+      ]
+    },
+    {
+      "id": "TEXTILE9-C07-M01",
+      "class_level": "9th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "لباس کا انتخاب",
+      "topic_name": "Clothing Selection",
+      "category": "mcq",
+      "question_text": "باب ”لباس کا انتخاب“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "comfort, purpose, climate, durability اور budget-aware selection"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "comfort, purpose, climate, durability اور budget-aware selection",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-067 | 9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a | chapter 7",
+      "tags": [
+        "grade9",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Clothing Selection"
+      ]
+    },
+    {
+      "id": "TEXTILE9-C07-S01",
+      "class_level": "9th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "لباس کا انتخاب",
+      "topic_name": "Clothing Selection",
+      "category": "short",
+      "question_text": "”لباس کا انتخاب“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: comfort, purpose, climate, durability اور budget-aware selection۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-067 | 9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a | chapter 7",
+      "tags": [
+        "grade9",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Clothing Selection"
+      ]
+    },
+    {
+      "id": "TEXTILE9-C07-L01",
+      "class_level": "9th",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "لباس کا انتخاب",
+      "topic_name": "Clothing Selection",
+      "category": "long",
+      "question_text": "”لباس کا انتخاب“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (comfort, purpose, climate, durability اور budget-aware selection)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-067 | 9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a | chapter 7",
+      "tags": [
+        "grade9",
+        "elective",
+        "parcha bafi (textile and clothing)",
+        "internal-provisional",
+        "original-draft",
+        "Clothing Selection"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,692 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "ART10UR-C01-M01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "ڈرائنگ اور خاکہ کشی",
+      "topic_name": "Drawing and Sketching",
+      "category": "mcq",
+      "question_text": "باب ”ڈرائنگ اور خاکہ کشی“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "مشاہدہ، structure، proportion اور expressive drawing"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "مشاہدہ، structure، proportion اور expressive drawing",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 1",
+      "tags": [
+        "grade10",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Drawing and Sketching"
+      ]
+    },
+    {
+      "id": "ART10UR-C01-S01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "ڈرائنگ اور خاکہ کشی",
+      "topic_name": "Drawing and Sketching",
+      "category": "short",
+      "question_text": "”ڈرائنگ اور خاکہ کشی“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: مشاہدہ، structure، proportion اور expressive drawing۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 1",
+      "tags": [
+        "grade10",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Drawing and Sketching"
+      ]
+    },
+    {
+      "id": "ART10UR-C01-L01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "ڈرائنگ اور خاکہ کشی",
+      "topic_name": "Drawing and Sketching",
+      "category": "long",
+      "question_text": "”ڈرائنگ اور خاکہ کشی“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (مشاہدہ، structure، proportion اور expressive drawing)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 1",
+      "tags": [
+        "grade10",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Drawing and Sketching"
+      ]
+    },
+    {
+      "id": "ART10UR-C02-M01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "پینٹنگ کی مشق",
+      "topic_name": "Painting Practice",
+      "category": "mcq",
+      "question_text": "باب ”پینٹنگ کی مشق“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "رنگ، composition، media اور painting decisions"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "رنگ، composition، media اور painting decisions",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 2",
+      "tags": [
+        "grade10",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Painting Practice"
+      ]
+    },
+    {
+      "id": "ART10UR-C02-S01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "پینٹنگ کی مشق",
+      "topic_name": "Painting Practice",
+      "category": "short",
+      "question_text": "”پینٹنگ کی مشق“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: رنگ، composition، media اور painting decisions۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 2",
+      "tags": [
+        "grade10",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Painting Practice"
+      ]
+    },
+    {
+      "id": "ART10UR-C02-L01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "پینٹنگ کی مشق",
+      "topic_name": "Painting Practice",
+      "category": "long",
+      "question_text": "”پینٹنگ کی مشق“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (رنگ، composition، media اور painting decisions)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 2",
+      "tags": [
+        "grade10",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Painting Practice"
+      ]
+    },
+    {
+      "id": "ART10UR-C03-M01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "گرافک ڈیزائن",
+      "topic_name": "Graphic Design",
+      "category": "mcq",
+      "question_text": "باب ”گرافک ڈیزائن“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "visual communication، layout اور lettering"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "visual communication، layout اور lettering",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 3",
+      "tags": [
+        "grade10",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Graphic Design"
+      ]
+    },
+    {
+      "id": "ART10UR-C03-S01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "گرافک ڈیزائن",
+      "topic_name": "Graphic Design",
+      "category": "short",
+      "question_text": "”گرافک ڈیزائن“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: visual communication، layout اور lettering۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 3",
+      "tags": [
+        "grade10",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Graphic Design"
+      ]
+    },
+    {
+      "id": "ART10UR-C03-L01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "گرافک ڈیزائن",
+      "topic_name": "Graphic Design",
+      "category": "long",
+      "question_text": "”گرافک ڈیزائن“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (visual communication، layout اور lettering)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 3",
+      "tags": [
+        "grade10",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Graphic Design"
+      ]
+    },
+    {
+      "id": "ART10UR-C04-M01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "مجسمہ سازی",
+      "topic_name": "Sculpture Making",
+      "category": "mcq",
+      "question_text": "باب ”مجسمہ سازی“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "three-dimensional form، modelling اور safe material handling"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "three-dimensional form، modelling اور safe material handling",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 4",
+      "tags": [
+        "grade10",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Sculpture Making"
+      ]
+    },
+    {
+      "id": "ART10UR-C04-S01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "مجسمہ سازی",
+      "topic_name": "Sculpture Making",
+      "category": "short",
+      "question_text": "”مجسمہ سازی“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: three-dimensional form، modelling اور safe material handling۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 4",
+      "tags": [
+        "grade10",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Sculpture Making"
+      ]
+    },
+    {
+      "id": "ART10UR-C04-L01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "مجسمہ سازی",
+      "topic_name": "Sculpture Making",
+      "category": "long",
+      "question_text": "”مجسمہ سازی“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (three-dimensional form، modelling اور safe material handling)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 4",
+      "tags": [
+        "grade10",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Sculpture Making"
+      ]
+    },
+    {
+      "id": "ART10UR-C05-M01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "پاکستان میں مجسمہ سازی اور Architectural Relief کی تاریخ",
+      "topic_name": "History of Sculpture and Architectural Relief in Pakistan",
+      "category": "mcq",
+      "question_text": "باب ”پاکستان میں مجسمہ سازی اور Architectural Relief کی تاریخ“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "پاکستانی sculpture/relief heritage"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "پاکستانی sculpture/relief heritage",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 5",
+      "tags": [
+        "grade10",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "History of Sculpture and Architectural Relief in Pakistan"
+      ]
+    },
+    {
+      "id": "ART10UR-C05-S01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "پاکستان میں مجسمہ سازی اور Architectural Relief کی تاریخ",
+      "topic_name": "History of Sculpture and Architectural Relief in Pakistan",
+      "category": "short",
+      "question_text": "”پاکستان میں مجسمہ سازی اور Architectural Relief کی تاریخ“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: پاکستانی sculpture/relief heritage۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 5",
+      "tags": [
+        "grade10",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "History of Sculpture and Architectural Relief in Pakistan"
+      ]
+    },
+    {
+      "id": "ART10UR-C05-L01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "پاکستان میں مجسمہ سازی اور Architectural Relief کی تاریخ",
+      "topic_name": "History of Sculpture and Architectural Relief in Pakistan",
+      "category": "long",
+      "question_text": "”پاکستان میں مجسمہ سازی اور Architectural Relief کی تاریخ“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (پاکستانی sculpture/relief heritage)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 5",
+      "tags": [
+        "grade10",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "History of Sculpture and Architectural Relief in Pakistan"
+      ]
+    },
+    {
+      "id": "ART10UR-C06-M01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "پاکستان میں برتن سازی اور Ceramics کی تاریخ",
+      "topic_name": "History of Pottery and Ceramics in Pakistan",
+      "category": "mcq",
+      "question_text": "باب ”پاکستان میں برتن سازی اور Ceramics کی تاریخ“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "pottery/ceramic traditions، form اور decoration"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "pottery/ceramic traditions، form اور decoration",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 6",
+      "tags": [
+        "grade10",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "History of Pottery and Ceramics in Pakistan"
+      ]
+    },
+    {
+      "id": "ART10UR-C06-S01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "پاکستان میں برتن سازی اور Ceramics کی تاریخ",
+      "topic_name": "History of Pottery and Ceramics in Pakistan",
+      "category": "short",
+      "question_text": "”پاکستان میں برتن سازی اور Ceramics کی تاریخ“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: pottery/ceramic traditions، form اور decoration۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 6",
+      "tags": [
+        "grade10",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "History of Pottery and Ceramics in Pakistan"
+      ]
+    },
+    {
+      "id": "ART10UR-C06-L01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "پاکستان میں برتن سازی اور Ceramics کی تاریخ",
+      "topic_name": "History of Pottery and Ceramics in Pakistan",
+      "category": "long",
+      "question_text": "”پاکستان میں برتن سازی اور Ceramics کی تاریخ“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (pottery/ceramic traditions، form اور decoration)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 6",
+      "tags": [
+        "grade10",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "History of Pottery and Ceramics in Pakistan"
+      ]
+    },
+    {
+      "id": "ART10UR-C07-M01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "پاکستانی دستکاری",
+      "topic_name": "Craft of Pakistan",
+      "category": "mcq",
+      "question_text": "باب ”پاکستانی دستکاری“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "regional crafts، materials، function اور cultural value"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "regional crafts، materials، function اور cultural value",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 7",
+      "tags": [
+        "grade10",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Craft of Pakistan"
+      ]
+    },
+    {
+      "id": "ART10UR-C07-S01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "پاکستانی دستکاری",
+      "topic_name": "Craft of Pakistan",
+      "category": "short",
+      "question_text": "”پاکستانی دستکاری“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: regional crafts، materials، function اور cultural value۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 7",
+      "tags": [
+        "grade10",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Craft of Pakistan"
+      ]
+    },
+    {
+      "id": "ART10UR-C07-L01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "پاکستانی دستکاری",
+      "topic_name": "Craft of Pakistan",
+      "category": "long",
+      "question_text": "”پاکستانی دستکاری“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (regional crafts، materials، function اور cultural value)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 7",
+      "tags": [
+        "grade10",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Craft of Pakistan"
+      ]
+    }
+  ]
+}

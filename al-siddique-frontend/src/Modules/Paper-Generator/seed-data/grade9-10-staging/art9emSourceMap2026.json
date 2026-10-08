@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "assps-art9em-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-065",
+  "sourcePdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+  "sourceByteLength": 79217551,
+  "pageCount": 224,
+  "identity": [
+    "Art & Model Drawing",
+    "Grade 9",
+    "English",
+    "2024-25"
+  ],
+  "resolvedMedium": "English",
+  "chapterMapState": "OFFICIAL_BYTES_HASHED_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_BOUNDARIES_PENDING",
+  "chapterEvidence": {
+    "officialCatalogRecordId": "pectaa-catalog-065",
+    "sourceCacheRef": "20261006/elective9-art-em.pdf",
+    "crossCheckUrls": [
+      "OFFICIAL_PDF_NATIVE_TOC"
+    ]
+  },
+  "chapters": [
+    {
+      "number": 1,
+      "titleLocal": "Introduction to Art and Drawing",
+      "titleEnglish": "Introduction to Art and Drawing",
+      "focus": "elements, shapes, forms and principles of art",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 2,
+      "titleLocal": "Drawing and Sketching-I",
+      "titleEnglish": "Drawing and Sketching-I",
+      "focus": "observation, line, form, proportion and sketching practice",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 3,
+      "titleLocal": "Painting Practice-I",
+      "titleEnglish": "Painting Practice-I",
+      "focus": "painting media, colour, technique and visual expression",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 4,
+      "titleLocal": "An Introduction to Graphic Design",
+      "titleEnglish": "An Introduction to Graphic Design",
+      "focus": "calligraphy, poster, pattern and graphic communication",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 5,
+      "titleLocal": "History of Architecture in Pakistan",
+      "titleEnglish": "History of Architecture in Pakistan",
+      "focus": "selected architectural heritage and visual characteristics in Pakistan",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 6,
+      "titleLocal": "History of Painting in South Asia",
+      "titleEnglish": "History of Painting in South Asia",
+      "focus": "South Asian painting traditions and selected Pakistani painters",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 7,
+      "titleLocal": "Master Calligraphists of Pakistan",
+      "titleEnglish": "Master Calligraphists of Pakistan",
+      "focus": "calligraphy as visual art and selected Pakistani calligraphists",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 8,
+      "titleLocal": "Textiles: Weaving, Printing and Embroidery",
+      "titleEnglish": "Textiles: Weaving, Printing and Embroidery",
+      "focus": "weaving, printing, embroidery and Pakistani textile crafts",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "exactPageBoundariesPending": true,
+    "safetyBoundary": "NO_DANGEROUS_PROCEDURE_STEPS_NO_RESTRICTIVE_DIET_FRAMING"
+  }
+}

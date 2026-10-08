@@ -1,0 +1,496 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "GHIZA9-C01-M01",
+      "class_level": "9th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "غذا اور غذائیت کا تعارف",
+      "topic_name": "Introduction to Food and Nutrition",
+      "category": "mcq",
+      "question_text": "باب ”غذا اور غذائیت کا تعارف“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "غذا، غذائیت، صحت اور روزمرہ خوراک کے بنیادی تصورات"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "غذا، غذائیت، صحت اور روزمرہ خوراک کے بنیادی تصورات",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-064 | 277bd11cb59f8e424c519572f8db727349cabb131d60e1e8be57753f60562c6c | chapter 1",
+      "tags": [
+        "grade9",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Introduction to Food and Nutrition"
+      ]
+    },
+    {
+      "id": "GHIZA9-C01-S01",
+      "class_level": "9th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "غذا اور غذائیت کا تعارف",
+      "topic_name": "Introduction to Food and Nutrition",
+      "category": "short",
+      "question_text": "”غذا اور غذائیت کا تعارف“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: غذا، غذائیت، صحت اور روزمرہ خوراک کے بنیادی تصورات۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-064 | 277bd11cb59f8e424c519572f8db727349cabb131d60e1e8be57753f60562c6c | chapter 1",
+      "tags": [
+        "grade9",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Introduction to Food and Nutrition"
+      ]
+    },
+    {
+      "id": "GHIZA9-C01-L01",
+      "class_level": "9th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "غذا اور غذائیت کا تعارف",
+      "topic_name": "Introduction to Food and Nutrition",
+      "category": "long",
+      "question_text": "”غذا اور غذائیت کا تعارف“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (غذا، غذائیت، صحت اور روزمرہ خوراک کے بنیادی تصورات)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-064 | 277bd11cb59f8e424c519572f8db727349cabb131d60e1e8be57753f60562c6c | chapter 1",
+      "tags": [
+        "grade9",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Introduction to Food and Nutrition"
+      ]
+    },
+    {
+      "id": "GHIZA9-C02-M01",
+      "class_level": "9th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "توانائی اور غذائی اجزا",
+      "topic_name": "Energy and Nutrients",
+      "category": "mcq",
+      "question_text": "باب ”توانائی اور غذائی اجزا“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "جسم کو توانائی دینے اور نشوونما/صحت میں مدد دینے والے مختلف غذائی اجزا"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "جسم کو توانائی دینے اور نشوونما/صحت میں مدد دینے والے مختلف غذائی اجزا",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-064 | 277bd11cb59f8e424c519572f8db727349cabb131d60e1e8be57753f60562c6c | chapter 2",
+      "tags": [
+        "grade9",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Energy and Nutrients"
+      ]
+    },
+    {
+      "id": "GHIZA9-C02-S01",
+      "class_level": "9th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "توانائی اور غذائی اجزا",
+      "topic_name": "Energy and Nutrients",
+      "category": "short",
+      "question_text": "”توانائی اور غذائی اجزا“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: جسم کو توانائی دینے اور نشوونما/صحت میں مدد دینے والے مختلف غذائی اجزا۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-064 | 277bd11cb59f8e424c519572f8db727349cabb131d60e1e8be57753f60562c6c | chapter 2",
+      "tags": [
+        "grade9",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Energy and Nutrients"
+      ]
+    },
+    {
+      "id": "GHIZA9-C02-L01",
+      "class_level": "9th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "توانائی اور غذائی اجزا",
+      "topic_name": "Energy and Nutrients",
+      "category": "long",
+      "question_text": "”توانائی اور غذائی اجزا“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (جسم کو توانائی دینے اور نشوونما/صحت میں مدد دینے والے مختلف غذائی اجزا)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-064 | 277bd11cb59f8e424c519572f8db727349cabb131d60e1e8be57753f60562c6c | chapter 2",
+      "tags": [
+        "grade9",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Energy and Nutrients"
+      ]
+    },
+    {
+      "id": "GHIZA9-C03-M01",
+      "class_level": "9th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "متوازن غذا",
+      "topic_name": "Balanced Diet",
+      "category": "mcq",
+      "question_text": "باب ”متوازن غذا“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "متنوع اور متوازن غذا، مناسب food groups اور صحت مند عادات"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "متنوع اور متوازن غذا، مناسب food groups اور صحت مند عادات",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-064 | 277bd11cb59f8e424c519572f8db727349cabb131d60e1e8be57753f60562c6c | chapter 3",
+      "tags": [
+        "grade9",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Balanced Diet"
+      ]
+    },
+    {
+      "id": "GHIZA9-C03-S01",
+      "class_level": "9th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "متوازن غذا",
+      "topic_name": "Balanced Diet",
+      "category": "short",
+      "question_text": "”متوازن غذا“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: متنوع اور متوازن غذا، مناسب food groups اور صحت مند عادات۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-064 | 277bd11cb59f8e424c519572f8db727349cabb131d60e1e8be57753f60562c6c | chapter 3",
+      "tags": [
+        "grade9",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Balanced Diet"
+      ]
+    },
+    {
+      "id": "GHIZA9-C03-L01",
+      "class_level": "9th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "متوازن غذا",
+      "topic_name": "Balanced Diet",
+      "category": "long",
+      "question_text": "”متوازن غذا“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (متنوع اور متوازن غذا، مناسب food groups اور صحت مند عادات)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-064 | 277bd11cb59f8e424c519572f8db727349cabb131d60e1e8be57753f60562c6c | chapter 3",
+      "tags": [
+        "grade9",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Balanced Diet"
+      ]
+    },
+    {
+      "id": "GHIZA9-C04-M01",
+      "class_level": "9th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "غذاؤں کے اجزائے ترکیبی",
+      "topic_name": "Composition of Food Ingredients",
+      "category": "mcq",
+      "question_text": "باب ”غذاؤں کے اجزائے ترکیبی“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "غذائی اشیا کے بنیادی اجزا اور ان کے غذائی کردار"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "غذائی اشیا کے بنیادی اجزا اور ان کے غذائی کردار",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-064 | 277bd11cb59f8e424c519572f8db727349cabb131d60e1e8be57753f60562c6c | chapter 4",
+      "tags": [
+        "grade9",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Composition of Food Ingredients"
+      ]
+    },
+    {
+      "id": "GHIZA9-C04-S01",
+      "class_level": "9th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "غذاؤں کے اجزائے ترکیبی",
+      "topic_name": "Composition of Food Ingredients",
+      "category": "short",
+      "question_text": "”غذاؤں کے اجزائے ترکیبی“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: غذائی اشیا کے بنیادی اجزا اور ان کے غذائی کردار۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-064 | 277bd11cb59f8e424c519572f8db727349cabb131d60e1e8be57753f60562c6c | chapter 4",
+      "tags": [
+        "grade9",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Composition of Food Ingredients"
+      ]
+    },
+    {
+      "id": "GHIZA9-C04-L01",
+      "class_level": "9th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "غذاؤں کے اجزائے ترکیبی",
+      "topic_name": "Composition of Food Ingredients",
+      "category": "long",
+      "question_text": "”غذاؤں کے اجزائے ترکیبی“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (غذائی اشیا کے بنیادی اجزا اور ان کے غذائی کردار)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-064 | 277bd11cb59f8e424c519572f8db727349cabb131d60e1e8be57753f60562c6c | chapter 4",
+      "tags": [
+        "grade9",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Composition of Food Ingredients"
+      ]
+    },
+    {
+      "id": "GHIZA9-C05-M01",
+      "class_level": "9th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "اشیائے خوردنی کی خریداری اور ذخیرہ",
+      "topic_name": "Purchasing and Storing Food Items",
+      "category": "mcq",
+      "question_text": "باب ”اشیائے خوردنی کی خریداری اور ذخیرہ“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "محفوظ خریداری، label/quality checks اور مناسب storage"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "محفوظ خریداری، label/quality checks اور مناسب storage",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-064 | 277bd11cb59f8e424c519572f8db727349cabb131d60e1e8be57753f60562c6c | chapter 5",
+      "tags": [
+        "grade9",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Purchasing and Storing Food Items"
+      ]
+    },
+    {
+      "id": "GHIZA9-C05-S01",
+      "class_level": "9th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "اشیائے خوردنی کی خریداری اور ذخیرہ",
+      "topic_name": "Purchasing and Storing Food Items",
+      "category": "short",
+      "question_text": "”اشیائے خوردنی کی خریداری اور ذخیرہ“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: محفوظ خریداری، label/quality checks اور مناسب storage۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-064 | 277bd11cb59f8e424c519572f8db727349cabb131d60e1e8be57753f60562c6c | chapter 5",
+      "tags": [
+        "grade9",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Purchasing and Storing Food Items"
+      ]
+    },
+    {
+      "id": "GHIZA9-C05-L01",
+      "class_level": "9th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "اشیائے خوردنی کی خریداری اور ذخیرہ",
+      "topic_name": "Purchasing and Storing Food Items",
+      "category": "long",
+      "question_text": "”اشیائے خوردنی کی خریداری اور ذخیرہ“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (محفوظ خریداری، label/quality checks اور مناسب storage)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-064 | 277bd11cb59f8e424c519572f8db727349cabb131d60e1e8be57753f60562c6c | chapter 5",
+      "tags": [
+        "grade9",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Purchasing and Storing Food Items"
+      ]
+    }
+  ]
+}

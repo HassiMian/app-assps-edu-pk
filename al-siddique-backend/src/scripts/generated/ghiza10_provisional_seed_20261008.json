@@ -1,0 +1,496 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "GHIZA10-C01-M01",
+      "class_level": "10th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "غذاؤں کی تیاری اور پکانے کے طریقے",
+      "topic_name": "Food Preparation and Cooking Methods",
+      "category": "mcq",
+      "question_text": "باب ”غذاؤں کی تیاری اور پکانے کے طریقے“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "food preparation، مناسب cooking methods، hygiene اور غذائی معیار"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "food preparation، مناسب cooking methods، hygiene اور غذائی معیار",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-069 | 05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722 | chapter 1",
+      "tags": [
+        "grade10",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Food Preparation and Cooking Methods"
+      ]
+    },
+    {
+      "id": "GHIZA10-C01-S01",
+      "class_level": "10th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "غذاؤں کی تیاری اور پکانے کے طریقے",
+      "topic_name": "Food Preparation and Cooking Methods",
+      "category": "short",
+      "question_text": "”غذاؤں کی تیاری اور پکانے کے طریقے“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: food preparation، مناسب cooking methods، hygiene اور غذائی معیار۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-069 | 05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722 | chapter 1",
+      "tags": [
+        "grade10",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Food Preparation and Cooking Methods"
+      ]
+    },
+    {
+      "id": "GHIZA10-C01-L01",
+      "class_level": "10th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "غذاؤں کی تیاری اور پکانے کے طریقے",
+      "topic_name": "Food Preparation and Cooking Methods",
+      "category": "long",
+      "question_text": "”غذاؤں کی تیاری اور پکانے کے طریقے“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (food preparation، مناسب cooking methods، hygiene اور غذائی معیار)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-069 | 05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722 | chapter 1",
+      "tags": [
+        "grade10",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Food Preparation and Cooking Methods"
+      ]
+    },
+    {
+      "id": "GHIZA10-C02-M01",
+      "class_level": "10th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "خاندان اور معاشرے کی غذائیت",
+      "topic_name": "Family and Community Nutrition",
+      "category": "mcq",
+      "question_text": "باب ”خاندان اور معاشرے کی غذائیت“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "مختلف افراد/گروہوں کی balanced nutrition needs کو context کے مطابق سمجھنا"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "مختلف افراد/گروہوں کی balanced nutrition needs کو context کے مطابق سمجھنا",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-069 | 05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722 | chapter 2",
+      "tags": [
+        "grade10",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Family and Community Nutrition"
+      ]
+    },
+    {
+      "id": "GHIZA10-C02-S01",
+      "class_level": "10th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "خاندان اور معاشرے کی غذائیت",
+      "topic_name": "Family and Community Nutrition",
+      "category": "short",
+      "question_text": "”خاندان اور معاشرے کی غذائیت“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: مختلف افراد/گروہوں کی balanced nutrition needs کو context کے مطابق سمجھنا۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-069 | 05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722 | chapter 2",
+      "tags": [
+        "grade10",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Family and Community Nutrition"
+      ]
+    },
+    {
+      "id": "GHIZA10-C02-L01",
+      "class_level": "10th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "خاندان اور معاشرے کی غذائیت",
+      "topic_name": "Family and Community Nutrition",
+      "category": "long",
+      "question_text": "”خاندان اور معاشرے کی غذائیت“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (مختلف افراد/گروہوں کی balanced nutrition needs کو context کے مطابق سمجھنا)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-069 | 05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722 | chapter 2",
+      "tags": [
+        "grade10",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Family and Community Nutrition"
+      ]
+    },
+    {
+      "id": "GHIZA10-C03-M01",
+      "class_level": "10th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "انتظامِ طعام",
+      "topic_name": "Meal Management",
+      "category": "mcq",
+      "question_text": "باب ”انتظامِ طعام“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "meal planning، وقت، وسائل، variety اور household needs کا متوازن انتظام"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "meal planning، وقت، وسائل، variety اور household needs کا متوازن انتظام",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-069 | 05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722 | chapter 3",
+      "tags": [
+        "grade10",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Meal Management"
+      ]
+    },
+    {
+      "id": "GHIZA10-C03-S01",
+      "class_level": "10th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "انتظامِ طعام",
+      "topic_name": "Meal Management",
+      "category": "short",
+      "question_text": "”انتظامِ طعام“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: meal planning، وقت، وسائل، variety اور household needs کا متوازن انتظام۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-069 | 05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722 | chapter 3",
+      "tags": [
+        "grade10",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Meal Management"
+      ]
+    },
+    {
+      "id": "GHIZA10-C03-L01",
+      "class_level": "10th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "انتظامِ طعام",
+      "topic_name": "Meal Management",
+      "category": "long",
+      "question_text": "”انتظامِ طعام“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (meal planning، وقت، وسائل، variety اور household needs کا متوازن انتظام)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-069 | 05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722 | chapter 3",
+      "tags": [
+        "grade10",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Meal Management"
+      ]
+    },
+    {
+      "id": "GHIZA10-C04-M01",
+      "class_level": "10th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "میز لگانا اور کھانا پیش کرنا",
+      "topic_name": "Table Setting and Food Service",
+      "category": "mcq",
+      "question_text": "باب ”میز لگانا اور کھانا پیش کرنا“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "صاف، منظم اور مناسب table setting/food service"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "صاف، منظم اور مناسب table setting/food service",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-069 | 05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722 | chapter 4",
+      "tags": [
+        "grade10",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Table Setting and Food Service"
+      ]
+    },
+    {
+      "id": "GHIZA10-C04-S01",
+      "class_level": "10th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "میز لگانا اور کھانا پیش کرنا",
+      "topic_name": "Table Setting and Food Service",
+      "category": "short",
+      "question_text": "”میز لگانا اور کھانا پیش کرنا“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: صاف، منظم اور مناسب table setting/food service۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-069 | 05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722 | chapter 4",
+      "tags": [
+        "grade10",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Table Setting and Food Service"
+      ]
+    },
+    {
+      "id": "GHIZA10-C04-L01",
+      "class_level": "10th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "میز لگانا اور کھانا پیش کرنا",
+      "topic_name": "Table Setting and Food Service",
+      "category": "long",
+      "question_text": "”میز لگانا اور کھانا پیش کرنا“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (صاف، منظم اور مناسب table setting/food service)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-069 | 05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722 | chapter 4",
+      "tags": [
+        "grade10",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Table Setting and Food Service"
+      ]
+    },
+    {
+      "id": "GHIZA10-C05-M01",
+      "class_level": "10th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "غذاؤں کو محفوظ کرنا",
+      "topic_name": "Food Preservation",
+      "category": "mcq",
+      "question_text": "باب ”غذاؤں کو محفوظ کرنا“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "food spoilage کم کرنے، hygiene اور safe preservation کے اصول"
+        },
+        {
+          "id": "B",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+        },
+        {
+          "id": "C",
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+        },
+        {
+          "id": "D",
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "food spoilage کم کرنے، hygiene اور safe preservation کے اصول",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-069 | 05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722 | chapter 5",
+      "tags": [
+        "grade10",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Food Preservation"
+      ]
+    },
+    {
+      "id": "GHIZA10-C05-S01",
+      "class_level": "10th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "غذاؤں کو محفوظ کرنا",
+      "topic_name": "Food Preservation",
+      "category": "short",
+      "question_text": "”غذاؤں کو محفوظ کرنا“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: food spoilage کم کرنے، hygiene اور safe preservation کے اصول۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-069 | 05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722 | chapter 5",
+      "tags": [
+        "grade10",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Food Preservation"
+      ]
+    },
+    {
+      "id": "GHIZA10-C05-L01",
+      "class_level": "10th",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "غذاؤں کو محفوظ کرنا",
+      "topic_name": "Food Preservation",
+      "category": "long",
+      "question_text": "”غذاؤں کو محفوظ کرنا“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں باب کا مرکزی focus (food spoilage کم کرنے، hygiene اور safe preservation کے اصول)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-069 | 05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722 | chapter 5",
+      "tags": [
+        "grade10",
+        "elective",
+        "ghiza aur ghizayat",
+        "internal-provisional",
+        "original-draft",
+        "Food Preservation"
+      ]
+    }
+  ]
+}

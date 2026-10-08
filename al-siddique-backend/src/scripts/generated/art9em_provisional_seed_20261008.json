@@ -1,0 +1,790 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "ART9EM-C01-M01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Introduction to Art and Drawing",
+      "topic_name": "Introduction to Art and Drawing",
+      "category": "mcq",
+      "question_text": "Which description best matches the focus of “Introduction to Art and Drawing”?",
+      "options": [
+        {
+          "id": "A",
+          "text": "elements, shapes, forms and principles of art"
+        },
+        {
+          "id": "B",
+          "text": "Memorizing unrelated facts without understanding"
+        },
+        {
+          "id": "C",
+          "text": "Focusing on an isolated detail unrelated to the chapter purpose"
+        },
+        {
+          "id": "D",
+          "text": "Ignoring context, safety and practical judgment"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "elements, shapes, forms and principles of art",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 1",
+      "tags": [
+        "grade9",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Introduction to Art and Drawing"
+      ]
+    },
+    {
+      "id": "ART9EM-C01-S01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Introduction to Art and Drawing",
+      "topic_name": "Introduction to Art and Drawing",
+      "category": "short",
+      "question_text": "State two principles or considerations that are important when studying Introduction to Art and Drawing.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A strong answer should identify two accurate chapter-relevant principles and explain briefly why each matters. Focus: elements, shapes, forms and principles of art.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 1",
+      "tags": [
+        "grade9",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Introduction to Art and Drawing"
+      ]
+    },
+    {
+      "id": "ART9EM-C01-L01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Introduction to Art and Drawing",
+      "topic_name": "Introduction to Art and Drawing",
+      "category": "long",
+      "question_text": "Explain the core ideas of Introduction to Art and Drawing and show how they guide responsible practical or analytical decisions.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Cover the chapter focus (elements, shapes, forms and principles of art), at least three relevant principles, one realistic application, and appropriate safety/ethical/sustainability considerations where applicable. Do not reproduce textbook passages.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 1",
+      "tags": [
+        "grade9",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Introduction to Art and Drawing"
+      ]
+    },
+    {
+      "id": "ART9EM-C02-M01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Drawing and Sketching-I",
+      "topic_name": "Drawing and Sketching-I",
+      "category": "mcq",
+      "question_text": "Which description best matches the focus of “Drawing and Sketching-I”?",
+      "options": [
+        {
+          "id": "A",
+          "text": "observation, line, form, proportion and sketching practice"
+        },
+        {
+          "id": "B",
+          "text": "Memorizing unrelated facts without understanding"
+        },
+        {
+          "id": "C",
+          "text": "Focusing on an isolated detail unrelated to the chapter purpose"
+        },
+        {
+          "id": "D",
+          "text": "Ignoring context, safety and practical judgment"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "observation, line, form, proportion and sketching practice",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 2",
+      "tags": [
+        "grade9",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Drawing and Sketching-I"
+      ]
+    },
+    {
+      "id": "ART9EM-C02-S01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Drawing and Sketching-I",
+      "topic_name": "Drawing and Sketching-I",
+      "category": "short",
+      "question_text": "State two principles or considerations that are important when studying Drawing and Sketching-I.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A strong answer should identify two accurate chapter-relevant principles and explain briefly why each matters. Focus: observation, line, form, proportion and sketching practice.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 2",
+      "tags": [
+        "grade9",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Drawing and Sketching-I"
+      ]
+    },
+    {
+      "id": "ART9EM-C02-L01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Drawing and Sketching-I",
+      "topic_name": "Drawing and Sketching-I",
+      "category": "long",
+      "question_text": "Explain the core ideas of Drawing and Sketching-I and show how they guide responsible practical or analytical decisions.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Cover the chapter focus (observation, line, form, proportion and sketching practice), at least three relevant principles, one realistic application, and appropriate safety/ethical/sustainability considerations where applicable. Do not reproduce textbook passages.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 2",
+      "tags": [
+        "grade9",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Drawing and Sketching-I"
+      ]
+    },
+    {
+      "id": "ART9EM-C03-M01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Painting Practice-I",
+      "topic_name": "Painting Practice-I",
+      "category": "mcq",
+      "question_text": "Which description best matches the focus of “Painting Practice-I”?",
+      "options": [
+        {
+          "id": "A",
+          "text": "painting media, colour, technique and visual expression"
+        },
+        {
+          "id": "B",
+          "text": "Memorizing unrelated facts without understanding"
+        },
+        {
+          "id": "C",
+          "text": "Focusing on an isolated detail unrelated to the chapter purpose"
+        },
+        {
+          "id": "D",
+          "text": "Ignoring context, safety and practical judgment"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "painting media, colour, technique and visual expression",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 3",
+      "tags": [
+        "grade9",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Painting Practice-I"
+      ]
+    },
+    {
+      "id": "ART9EM-C03-S01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Painting Practice-I",
+      "topic_name": "Painting Practice-I",
+      "category": "short",
+      "question_text": "State two principles or considerations that are important when studying Painting Practice-I.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A strong answer should identify two accurate chapter-relevant principles and explain briefly why each matters. Focus: painting media, colour, technique and visual expression.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 3",
+      "tags": [
+        "grade9",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Painting Practice-I"
+      ]
+    },
+    {
+      "id": "ART9EM-C03-L01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Painting Practice-I",
+      "topic_name": "Painting Practice-I",
+      "category": "long",
+      "question_text": "Explain the core ideas of Painting Practice-I and show how they guide responsible practical or analytical decisions.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Cover the chapter focus (painting media, colour, technique and visual expression), at least three relevant principles, one realistic application, and appropriate safety/ethical/sustainability considerations where applicable. Do not reproduce textbook passages.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 3",
+      "tags": [
+        "grade9",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Painting Practice-I"
+      ]
+    },
+    {
+      "id": "ART9EM-C04-M01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "An Introduction to Graphic Design",
+      "topic_name": "An Introduction to Graphic Design",
+      "category": "mcq",
+      "question_text": "Which description best matches the focus of “An Introduction to Graphic Design”?",
+      "options": [
+        {
+          "id": "A",
+          "text": "calligraphy, poster, pattern and graphic communication"
+        },
+        {
+          "id": "B",
+          "text": "Memorizing unrelated facts without understanding"
+        },
+        {
+          "id": "C",
+          "text": "Focusing on an isolated detail unrelated to the chapter purpose"
+        },
+        {
+          "id": "D",
+          "text": "Ignoring context, safety and practical judgment"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "calligraphy, poster, pattern and graphic communication",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 4",
+      "tags": [
+        "grade9",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "An Introduction to Graphic Design"
+      ]
+    },
+    {
+      "id": "ART9EM-C04-S01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "An Introduction to Graphic Design",
+      "topic_name": "An Introduction to Graphic Design",
+      "category": "short",
+      "question_text": "State two principles or considerations that are important when studying An Introduction to Graphic Design.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A strong answer should identify two accurate chapter-relevant principles and explain briefly why each matters. Focus: calligraphy, poster, pattern and graphic communication.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 4",
+      "tags": [
+        "grade9",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "An Introduction to Graphic Design"
+      ]
+    },
+    {
+      "id": "ART9EM-C04-L01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "An Introduction to Graphic Design",
+      "topic_name": "An Introduction to Graphic Design",
+      "category": "long",
+      "question_text": "Explain the core ideas of An Introduction to Graphic Design and show how they guide responsible practical or analytical decisions.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Cover the chapter focus (calligraphy, poster, pattern and graphic communication), at least three relevant principles, one realistic application, and appropriate safety/ethical/sustainability considerations where applicable. Do not reproduce textbook passages.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 4",
+      "tags": [
+        "grade9",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "An Introduction to Graphic Design"
+      ]
+    },
+    {
+      "id": "ART9EM-C05-M01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "History of Architecture in Pakistan",
+      "topic_name": "History of Architecture in Pakistan",
+      "category": "mcq",
+      "question_text": "Which description best matches the focus of “History of Architecture in Pakistan”?",
+      "options": [
+        {
+          "id": "A",
+          "text": "selected architectural heritage and visual characteristics in Pakistan"
+        },
+        {
+          "id": "B",
+          "text": "Memorizing unrelated facts without understanding"
+        },
+        {
+          "id": "C",
+          "text": "Focusing on an isolated detail unrelated to the chapter purpose"
+        },
+        {
+          "id": "D",
+          "text": "Ignoring context, safety and practical judgment"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "selected architectural heritage and visual characteristics in Pakistan",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 5",
+      "tags": [
+        "grade9",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "History of Architecture in Pakistan"
+      ]
+    },
+    {
+      "id": "ART9EM-C05-S01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "History of Architecture in Pakistan",
+      "topic_name": "History of Architecture in Pakistan",
+      "category": "short",
+      "question_text": "State two principles or considerations that are important when studying History of Architecture in Pakistan.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A strong answer should identify two accurate chapter-relevant principles and explain briefly why each matters. Focus: selected architectural heritage and visual characteristics in Pakistan.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 5",
+      "tags": [
+        "grade9",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "History of Architecture in Pakistan"
+      ]
+    },
+    {
+      "id": "ART9EM-C05-L01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "History of Architecture in Pakistan",
+      "topic_name": "History of Architecture in Pakistan",
+      "category": "long",
+      "question_text": "Explain the core ideas of History of Architecture in Pakistan and show how they guide responsible practical or analytical decisions.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Cover the chapter focus (selected architectural heritage and visual characteristics in Pakistan), at least three relevant principles, one realistic application, and appropriate safety/ethical/sustainability considerations where applicable. Do not reproduce textbook passages.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 5",
+      "tags": [
+        "grade9",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "History of Architecture in Pakistan"
+      ]
+    },
+    {
+      "id": "ART9EM-C06-M01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "History of Painting in South Asia",
+      "topic_name": "History of Painting in South Asia",
+      "category": "mcq",
+      "question_text": "Which description best matches the focus of “History of Painting in South Asia”?",
+      "options": [
+        {
+          "id": "A",
+          "text": "South Asian painting traditions and selected Pakistani painters"
+        },
+        {
+          "id": "B",
+          "text": "Memorizing unrelated facts without understanding"
+        },
+        {
+          "id": "C",
+          "text": "Focusing on an isolated detail unrelated to the chapter purpose"
+        },
+        {
+          "id": "D",
+          "text": "Ignoring context, safety and practical judgment"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "South Asian painting traditions and selected Pakistani painters",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 6",
+      "tags": [
+        "grade9",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "History of Painting in South Asia"
+      ]
+    },
+    {
+      "id": "ART9EM-C06-S01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "History of Painting in South Asia",
+      "topic_name": "History of Painting in South Asia",
+      "category": "short",
+      "question_text": "State two principles or considerations that are important when studying History of Painting in South Asia.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A strong answer should identify two accurate chapter-relevant principles and explain briefly why each matters. Focus: South Asian painting traditions and selected Pakistani painters.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 6",
+      "tags": [
+        "grade9",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "History of Painting in South Asia"
+      ]
+    },
+    {
+      "id": "ART9EM-C06-L01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "History of Painting in South Asia",
+      "topic_name": "History of Painting in South Asia",
+      "category": "long",
+      "question_text": "Explain the core ideas of History of Painting in South Asia and show how they guide responsible practical or analytical decisions.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Cover the chapter focus (South Asian painting traditions and selected Pakistani painters), at least three relevant principles, one realistic application, and appropriate safety/ethical/sustainability considerations where applicable. Do not reproduce textbook passages.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 6",
+      "tags": [
+        "grade9",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "History of Painting in South Asia"
+      ]
+    },
+    {
+      "id": "ART9EM-C07-M01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Master Calligraphists of Pakistan",
+      "topic_name": "Master Calligraphists of Pakistan",
+      "category": "mcq",
+      "question_text": "Which description best matches the focus of “Master Calligraphists of Pakistan”?",
+      "options": [
+        {
+          "id": "A",
+          "text": "calligraphy as visual art and selected Pakistani calligraphists"
+        },
+        {
+          "id": "B",
+          "text": "Memorizing unrelated facts without understanding"
+        },
+        {
+          "id": "C",
+          "text": "Focusing on an isolated detail unrelated to the chapter purpose"
+        },
+        {
+          "id": "D",
+          "text": "Ignoring context, safety and practical judgment"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "calligraphy as visual art and selected Pakistani calligraphists",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 7",
+      "tags": [
+        "grade9",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Master Calligraphists of Pakistan"
+      ]
+    },
+    {
+      "id": "ART9EM-C07-S01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Master Calligraphists of Pakistan",
+      "topic_name": "Master Calligraphists of Pakistan",
+      "category": "short",
+      "question_text": "State two principles or considerations that are important when studying Master Calligraphists of Pakistan.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A strong answer should identify two accurate chapter-relevant principles and explain briefly why each matters. Focus: calligraphy as visual art and selected Pakistani calligraphists.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 7",
+      "tags": [
+        "grade9",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Master Calligraphists of Pakistan"
+      ]
+    },
+    {
+      "id": "ART9EM-C07-L01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Master Calligraphists of Pakistan",
+      "topic_name": "Master Calligraphists of Pakistan",
+      "category": "long",
+      "question_text": "Explain the core ideas of Master Calligraphists of Pakistan and show how they guide responsible practical or analytical decisions.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Cover the chapter focus (calligraphy as visual art and selected Pakistani calligraphists), at least three relevant principles, one realistic application, and appropriate safety/ethical/sustainability considerations where applicable. Do not reproduce textbook passages.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 7",
+      "tags": [
+        "grade9",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Master Calligraphists of Pakistan"
+      ]
+    },
+    {
+      "id": "ART9EM-C08-M01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Textiles: Weaving, Printing and Embroidery",
+      "topic_name": "Textiles: Weaving, Printing and Embroidery",
+      "category": "mcq",
+      "question_text": "Which description best matches the focus of “Textiles: Weaving, Printing and Embroidery”?",
+      "options": [
+        {
+          "id": "A",
+          "text": "weaving, printing, embroidery and Pakistani textile crafts"
+        },
+        {
+          "id": "B",
+          "text": "Memorizing unrelated facts without understanding"
+        },
+        {
+          "id": "C",
+          "text": "Focusing on an isolated detail unrelated to the chapter purpose"
+        },
+        {
+          "id": "D",
+          "text": "Ignoring context, safety and practical judgment"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "weaving, printing, embroidery and Pakistani textile crafts",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 8",
+      "tags": [
+        "grade9",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Textiles: Weaving, Printing and Embroidery"
+      ]
+    },
+    {
+      "id": "ART9EM-C08-S01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Textiles: Weaving, Printing and Embroidery",
+      "topic_name": "Textiles: Weaving, Printing and Embroidery",
+      "category": "short",
+      "question_text": "State two principles or considerations that are important when studying Textiles: Weaving, Printing and Embroidery.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A strong answer should identify two accurate chapter-relevant principles and explain briefly why each matters. Focus: weaving, printing, embroidery and Pakistani textile crafts.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 8",
+      "tags": [
+        "grade9",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Textiles: Weaving, Printing and Embroidery"
+      ]
+    },
+    {
+      "id": "ART9EM-C08-L01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Textiles: Weaving, Printing and Embroidery",
+      "topic_name": "Textiles: Weaving, Printing and Embroidery",
+      "category": "long",
+      "question_text": "Explain the core ideas of Textiles: Weaving, Printing and Embroidery and show how they guide responsible practical or analytical decisions.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Cover the chapter focus (weaving, printing, embroidery and Pakistani textile crafts), at least three relevant principles, one realistic application, and appropriate safety/ethical/sustainability considerations where applicable. Do not reproduce textbook passages.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 8",
+      "tags": [
+        "grade9",
+        "elective",
+        "art & model drawing",
+        "internal-provisional",
+        "original-draft",
+        "Textiles: Weaving, Printing and Embroidery"
+      ]
+    }
+  ]
+}

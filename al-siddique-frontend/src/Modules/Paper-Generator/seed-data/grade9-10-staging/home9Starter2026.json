@@ -1,0 +1,1779 @@
+{
+  "schemaVersion": "assps-home9-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-066",
+  "sourcePdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+  "scope": "CURRENT_ELECTIVE_CHAPTER_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "HOME9-C01-M01",
+      "chapter": {
+        "id": "HOME9-C01",
+        "number": 1
+      },
+      "topicId": "Introduction to Home Economics",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-066",
+        "pdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Home Economics کا تعارف"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "home-economics",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-HOME9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”Home Economics کا تعارف“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "گھر، فرد، خاندان اور وسائل کے بہتر استعمال میں Home Economics کا کردار",
+          "options": [
+            {
+              "id": "A",
+              "text": "گھر، فرد، خاندان اور وسائل کے بہتر استعمال میں Home Economics کا کردار"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "HOME9-C01-S01",
+      "chapter": {
+        "id": "HOME9-C01",
+        "number": 1
+      },
+      "topicId": "Introduction to Home Economics",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-066",
+        "pdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Home Economics کا تعارف"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "home-economics",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-HOME9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”Home Economics کا تعارف“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: گھر، فرد، خاندان اور وسائل کے بہتر استعمال میں Home Economics کا کردار۔"
+        }
+      }
+    },
+    {
+      "id": "HOME9-C01-L01",
+      "chapter": {
+        "id": "HOME9-C01",
+        "number": 1
+      },
+      "topicId": "Introduction to Home Economics",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-066",
+        "pdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Home Economics کا تعارف"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "home-economics",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-HOME9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”Home Economics کا تعارف“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (گھر، فرد، خاندان اور وسائل کے بہتر استعمال میں Home Economics کا کردار)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "HOME9-C02-M01",
+      "chapter": {
+        "id": "HOME9-C02",
+        "number": 2
+      },
+      "topicId": "Introduction to Food and Nutrition",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-066",
+        "pdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "غذا اور غذائیت کا تعارف"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "home-economics",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-HOME9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”غذا اور غذائیت کا تعارف“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "غذا اور غذائیت کے بنیادی تصورات اور صحت سے تعلق",
+          "options": [
+            {
+              "id": "A",
+              "text": "غذا اور غذائیت کے بنیادی تصورات اور صحت سے تعلق"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "HOME9-C02-S01",
+      "chapter": {
+        "id": "HOME9-C02",
+        "number": 2
+      },
+      "topicId": "Introduction to Food and Nutrition",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-066",
+        "pdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "غذا اور غذائیت کا تعارف"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "home-economics",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-HOME9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”غذا اور غذائیت کا تعارف“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: غذا اور غذائیت کے بنیادی تصورات اور صحت سے تعلق۔"
+        }
+      }
+    },
+    {
+      "id": "HOME9-C02-L01",
+      "chapter": {
+        "id": "HOME9-C02",
+        "number": 2
+      },
+      "topicId": "Introduction to Food and Nutrition",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-066",
+        "pdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "غذا اور غذائیت کا تعارف"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "home-economics",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-HOME9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”غذا اور غذائیت کا تعارف“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (غذا اور غذائیت کے بنیادی تصورات اور صحت سے تعلق)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "HOME9-C03-M01",
+      "chapter": {
+        "id": "HOME9-C03",
+        "number": 3
+      },
+      "topicId": "Understanding Food",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-066",
+        "pdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "غذا اور خوراک کو سمجھنا"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "home-economics",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-HOME9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”غذا اور خوراک کو سمجھنا“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "food groups، quality، hygiene اور informed food choices",
+          "options": [
+            {
+              "id": "A",
+              "text": "food groups، quality، hygiene اور informed food choices"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "HOME9-C03-S01",
+      "chapter": {
+        "id": "HOME9-C03",
+        "number": 3
+      },
+      "topicId": "Understanding Food",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-066",
+        "pdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "غذا اور خوراک کو سمجھنا"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "home-economics",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-HOME9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”غذا اور خوراک کو سمجھنا“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: food groups، quality، hygiene اور informed food choices۔"
+        }
+      }
+    },
+    {
+      "id": "HOME9-C03-L01",
+      "chapter": {
+        "id": "HOME9-C03",
+        "number": 3
+      },
+      "topicId": "Understanding Food",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-066",
+        "pdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "غذا اور خوراک کو سمجھنا"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "home-economics",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-HOME9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”غذا اور خوراک کو سمجھنا“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (food groups، quality، hygiene اور informed food choices)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "HOME9-C04-M01",
+      "chapter": {
+        "id": "HOME9-C04",
+        "number": 4
+      },
+      "topicId": "Food Preparation",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-066",
+        "pdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "کھانوں کی تیاری"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "home-economics",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-HOME9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”کھانوں کی تیاری“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "محفوظ، صاف اور منظم food preparation کے بنیادی اصول",
+          "options": [
+            {
+              "id": "A",
+              "text": "محفوظ، صاف اور منظم food preparation کے بنیادی اصول"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "HOME9-C04-S01",
+      "chapter": {
+        "id": "HOME9-C04",
+        "number": 4
+      },
+      "topicId": "Food Preparation",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-066",
+        "pdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "کھانوں کی تیاری"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "home-economics",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-HOME9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”کھانوں کی تیاری“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: محفوظ، صاف اور منظم food preparation کے بنیادی اصول۔"
+        }
+      }
+    },
+    {
+      "id": "HOME9-C04-L01",
+      "chapter": {
+        "id": "HOME9-C04",
+        "number": 4
+      },
+      "topicId": "Food Preparation",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-066",
+        "pdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "کھانوں کی تیاری"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "home-economics",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-HOME9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”کھانوں کی تیاری“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (محفوظ، صاف اور منظم food preparation کے بنیادی اصول)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "HOME9-C05-M01",
+      "chapter": {
+        "id": "HOME9-C05",
+        "number": 5
+      },
+      "topicId": "Introduction to Child Care and Development",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-066",
+        "pdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "بچوں کی نگہداشت اور نشوونما کا تعارف"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "home-economics",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-HOME9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”بچوں کی نگہداشت اور نشوونما کا تعارف“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "بچوں کی نگہداشت، محفوظ ماحول اور holistic development کی بنیادی ضروریات",
+          "options": [
+            {
+              "id": "A",
+              "text": "بچوں کی نگہداشت، محفوظ ماحول اور holistic development کی بنیادی ضروریات"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "HOME9-C05-S01",
+      "chapter": {
+        "id": "HOME9-C05",
+        "number": 5
+      },
+      "topicId": "Introduction to Child Care and Development",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-066",
+        "pdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "بچوں کی نگہداشت اور نشوونما کا تعارف"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "home-economics",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-HOME9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”بچوں کی نگہداشت اور نشوونما کا تعارف“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: بچوں کی نگہداشت، محفوظ ماحول اور holistic development کی بنیادی ضروریات۔"
+        }
+      }
+    },
+    {
+      "id": "HOME9-C05-L01",
+      "chapter": {
+        "id": "HOME9-C05",
+        "number": 5
+      },
+      "topicId": "Introduction to Child Care and Development",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-066",
+        "pdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "بچوں کی نگہداشت اور نشوونما کا تعارف"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "home-economics",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-HOME9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”بچوں کی نگہداشت اور نشوونما کا تعارف“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (بچوں کی نگہداشت، محفوظ ماحول اور holistic development کی بنیادی ضروریات)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "HOME9-C06-M01",
+      "chapter": {
+        "id": "HOME9-C06",
+        "number": 6
+      },
+      "topicId": "Developmental Characteristics",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-066",
+        "pdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "نشوونمائی خصوصیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "home-economics",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-HOME9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”نشوونمائی خصوصیات“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "عمر کے ساتھ physical, social, emotional اور cognitive development میں تبدیلیاں",
+          "options": [
+            {
+              "id": "A",
+              "text": "عمر کے ساتھ physical, social, emotional اور cognitive development میں تبدیلیاں"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "HOME9-C06-S01",
+      "chapter": {
+        "id": "HOME9-C06",
+        "number": 6
+      },
+      "topicId": "Developmental Characteristics",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-066",
+        "pdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "نشوونمائی خصوصیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "home-economics",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-HOME9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”نشوونمائی خصوصیات“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: عمر کے ساتھ physical, social, emotional اور cognitive development میں تبدیلیاں۔"
+        }
+      }
+    },
+    {
+      "id": "HOME9-C06-L01",
+      "chapter": {
+        "id": "HOME9-C06",
+        "number": 6
+      },
+      "topicId": "Developmental Characteristics",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-066",
+        "pdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "نشوونمائی خصوصیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "home-economics",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-HOME9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”نشوونمائی خصوصیات“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (عمر کے ساتھ physical, social, emotional اور cognitive development میں تبدیلیاں)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "HOME9-C07-M01",
+      "chapter": {
+        "id": "HOME9-C07",
+        "number": 7
+      },
+      "topicId": "Child Behaviour Concerns",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-066",
+        "pdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "بچوں کے رویوں کے مسائل"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "home-economics",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-HOME9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”بچوں کے رویوں کے مسائل“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "بچوں کے رویوں کو سمجھنے میں صبر، consistency اور age-appropriate guidance",
+          "options": [
+            {
+              "id": "A",
+              "text": "بچوں کے رویوں کو سمجھنے میں صبر، consistency اور age-appropriate guidance"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "HOME9-C07-S01",
+      "chapter": {
+        "id": "HOME9-C07",
+        "number": 7
+      },
+      "topicId": "Child Behaviour Concerns",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-066",
+        "pdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "بچوں کے رویوں کے مسائل"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "home-economics",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-HOME9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”بچوں کے رویوں کے مسائل“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: بچوں کے رویوں کو سمجھنے میں صبر، consistency اور age-appropriate guidance۔"
+        }
+      }
+    },
+    {
+      "id": "HOME9-C07-L01",
+      "chapter": {
+        "id": "HOME9-C07",
+        "number": 7
+      },
+      "topicId": "Child Behaviour Concerns",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-066",
+        "pdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "بچوں کے رویوں کے مسائل"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "home-economics",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-HOME9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”بچوں کے رویوں کے مسائل“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (بچوں کے رویوں کو سمجھنے میں صبر، consistency اور age-appropriate guidance)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "HOME9-C08-M01",
+      "chapter": {
+        "id": "HOME9-C08",
+        "number": 8
+      },
+      "topicId": "Family and Society in Human Development",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-066",
+        "pdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "انسانی نشوونما میں خاندان اور معاشرے کا کردار"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "home-economics",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-HOME9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”انسانی نشوونما میں خاندان اور معاشرے کا کردار“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "خاندان، school اور community کے supportive کردار",
+          "options": [
+            {
+              "id": "A",
+              "text": "خاندان، school اور community کے supportive کردار"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "HOME9-C08-S01",
+      "chapter": {
+        "id": "HOME9-C08",
+        "number": 8
+      },
+      "topicId": "Family and Society in Human Development",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-066",
+        "pdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "انسانی نشوونما میں خاندان اور معاشرے کا کردار"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "home-economics",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-HOME9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”انسانی نشوونما میں خاندان اور معاشرے کا کردار“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: خاندان، school اور community کے supportive کردار۔"
+        }
+      }
+    },
+    {
+      "id": "HOME9-C08-L01",
+      "chapter": {
+        "id": "HOME9-C08",
+        "number": 8
+      },
+      "topicId": "Family and Society in Human Development",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-066",
+        "pdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "انسانی نشوونما میں خاندان اور معاشرے کا کردار"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "home-economics",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-9-HOME9",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”انسانی نشوونما میں خاندان اور معاشرے کا کردار“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (خاندان، school اور community کے supportive کردار)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 24,
+    "mcq": 8,
+    "short": 8,
+    "long": 8,
+    "chapters": 8
+  }
+}

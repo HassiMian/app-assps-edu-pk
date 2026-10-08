@@ -1,0 +1,1559 @@
+{
+  "schemaVersion": "assps-art10ur-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-071",
+  "sourcePdfSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+  "scope": "CURRENT_ELECTIVE_CHAPTER_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "ART10UR-C01-M01",
+      "chapter": {
+        "id": "ART10UR-C01",
+        "number": 1
+      },
+      "topicId": "Drawing and Sketching",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-071",
+        "pdfSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ڈرائنگ اور خاکہ کشی"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-10-ART10UR",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”ڈرائنگ اور خاکہ کشی“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "مشاہدہ، structure، proportion اور expressive drawing",
+          "options": [
+            {
+              "id": "A",
+              "text": "مشاہدہ، structure، proportion اور expressive drawing"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "ART10UR-C01-S01",
+      "chapter": {
+        "id": "ART10UR-C01",
+        "number": 1
+      },
+      "topicId": "Drawing and Sketching",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-071",
+        "pdfSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ڈرائنگ اور خاکہ کشی"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-10-ART10UR",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”ڈرائنگ اور خاکہ کشی“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: مشاہدہ، structure، proportion اور expressive drawing۔"
+        }
+      }
+    },
+    {
+      "id": "ART10UR-C01-L01",
+      "chapter": {
+        "id": "ART10UR-C01",
+        "number": 1
+      },
+      "topicId": "Drawing and Sketching",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-071",
+        "pdfSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ڈرائنگ اور خاکہ کشی"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-10-ART10UR",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”ڈرائنگ اور خاکہ کشی“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (مشاہدہ، structure، proportion اور expressive drawing)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "ART10UR-C02-M01",
+      "chapter": {
+        "id": "ART10UR-C02",
+        "number": 2
+      },
+      "topicId": "Painting Practice",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-071",
+        "pdfSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پینٹنگ کی مشق"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-10-ART10UR",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”پینٹنگ کی مشق“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "رنگ، composition، media اور painting decisions",
+          "options": [
+            {
+              "id": "A",
+              "text": "رنگ، composition، media اور painting decisions"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "ART10UR-C02-S01",
+      "chapter": {
+        "id": "ART10UR-C02",
+        "number": 2
+      },
+      "topicId": "Painting Practice",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-071",
+        "pdfSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پینٹنگ کی مشق"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-10-ART10UR",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”پینٹنگ کی مشق“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: رنگ، composition، media اور painting decisions۔"
+        }
+      }
+    },
+    {
+      "id": "ART10UR-C02-L01",
+      "chapter": {
+        "id": "ART10UR-C02",
+        "number": 2
+      },
+      "topicId": "Painting Practice",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-071",
+        "pdfSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پینٹنگ کی مشق"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-10-ART10UR",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”پینٹنگ کی مشق“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (رنگ، composition، media اور painting decisions)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "ART10UR-C03-M01",
+      "chapter": {
+        "id": "ART10UR-C03",
+        "number": 3
+      },
+      "topicId": "Graphic Design",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-071",
+        "pdfSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "گرافک ڈیزائن"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-10-ART10UR",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”گرافک ڈیزائن“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "visual communication، layout اور lettering",
+          "options": [
+            {
+              "id": "A",
+              "text": "visual communication، layout اور lettering"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "ART10UR-C03-S01",
+      "chapter": {
+        "id": "ART10UR-C03",
+        "number": 3
+      },
+      "topicId": "Graphic Design",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-071",
+        "pdfSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "گرافک ڈیزائن"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-10-ART10UR",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”گرافک ڈیزائن“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: visual communication، layout اور lettering۔"
+        }
+      }
+    },
+    {
+      "id": "ART10UR-C03-L01",
+      "chapter": {
+        "id": "ART10UR-C03",
+        "number": 3
+      },
+      "topicId": "Graphic Design",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-071",
+        "pdfSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "گرافک ڈیزائن"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-10-ART10UR",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”گرافک ڈیزائن“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (visual communication، layout اور lettering)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "ART10UR-C04-M01",
+      "chapter": {
+        "id": "ART10UR-C04",
+        "number": 4
+      },
+      "topicId": "Sculpture Making",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-071",
+        "pdfSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مجسمہ سازی"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-10-ART10UR",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”مجسمہ سازی“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "three-dimensional form، modelling اور safe material handling",
+          "options": [
+            {
+              "id": "A",
+              "text": "three-dimensional form، modelling اور safe material handling"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "ART10UR-C04-S01",
+      "chapter": {
+        "id": "ART10UR-C04",
+        "number": 4
+      },
+      "topicId": "Sculpture Making",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-071",
+        "pdfSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مجسمہ سازی"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-10-ART10UR",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”مجسمہ سازی“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: three-dimensional form، modelling اور safe material handling۔"
+        }
+      }
+    },
+    {
+      "id": "ART10UR-C04-L01",
+      "chapter": {
+        "id": "ART10UR-C04",
+        "number": 4
+      },
+      "topicId": "Sculpture Making",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-071",
+        "pdfSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مجسمہ سازی"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-10-ART10UR",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”مجسمہ سازی“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (three-dimensional form، modelling اور safe material handling)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "ART10UR-C05-M01",
+      "chapter": {
+        "id": "ART10UR-C05",
+        "number": 5
+      },
+      "topicId": "History of Sculpture and Architectural Relief in Pakistan",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-071",
+        "pdfSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پاکستان میں مجسمہ سازی اور Architectural Relief کی تاریخ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-10-ART10UR",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”پاکستان میں مجسمہ سازی اور Architectural Relief کی تاریخ“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "پاکستانی sculpture/relief heritage",
+          "options": [
+            {
+              "id": "A",
+              "text": "پاکستانی sculpture/relief heritage"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "ART10UR-C05-S01",
+      "chapter": {
+        "id": "ART10UR-C05",
+        "number": 5
+      },
+      "topicId": "History of Sculpture and Architectural Relief in Pakistan",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-071",
+        "pdfSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پاکستان میں مجسمہ سازی اور Architectural Relief کی تاریخ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-10-ART10UR",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”پاکستان میں مجسمہ سازی اور Architectural Relief کی تاریخ“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: پاکستانی sculpture/relief heritage۔"
+        }
+      }
+    },
+    {
+      "id": "ART10UR-C05-L01",
+      "chapter": {
+        "id": "ART10UR-C05",
+        "number": 5
+      },
+      "topicId": "History of Sculpture and Architectural Relief in Pakistan",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-071",
+        "pdfSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پاکستان میں مجسمہ سازی اور Architectural Relief کی تاریخ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-10-ART10UR",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”پاکستان میں مجسمہ سازی اور Architectural Relief کی تاریخ“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (پاکستانی sculpture/relief heritage)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "ART10UR-C06-M01",
+      "chapter": {
+        "id": "ART10UR-C06",
+        "number": 6
+      },
+      "topicId": "History of Pottery and Ceramics in Pakistan",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-071",
+        "pdfSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پاکستان میں برتن سازی اور Ceramics کی تاریخ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-10-ART10UR",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”پاکستان میں برتن سازی اور Ceramics کی تاریخ“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "pottery/ceramic traditions، form اور decoration",
+          "options": [
+            {
+              "id": "A",
+              "text": "pottery/ceramic traditions، form اور decoration"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "ART10UR-C06-S01",
+      "chapter": {
+        "id": "ART10UR-C06",
+        "number": 6
+      },
+      "topicId": "History of Pottery and Ceramics in Pakistan",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-071",
+        "pdfSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پاکستان میں برتن سازی اور Ceramics کی تاریخ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-10-ART10UR",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”پاکستان میں برتن سازی اور Ceramics کی تاریخ“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: pottery/ceramic traditions، form اور decoration۔"
+        }
+      }
+    },
+    {
+      "id": "ART10UR-C06-L01",
+      "chapter": {
+        "id": "ART10UR-C06",
+        "number": 6
+      },
+      "topicId": "History of Pottery and Ceramics in Pakistan",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-071",
+        "pdfSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پاکستان میں برتن سازی اور Ceramics کی تاریخ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-10-ART10UR",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”پاکستان میں برتن سازی اور Ceramics کی تاریخ“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (pottery/ceramic traditions، form اور decoration)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "ART10UR-C07-M01",
+      "chapter": {
+        "id": "ART10UR-C07",
+        "number": 7
+      },
+      "topicId": "Craft of Pakistan",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-071",
+        "pdfSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پاکستانی دستکاری"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-10-ART10UR",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”پاکستانی دستکاری“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "regional crafts، materials، function اور cultural value",
+          "options": [
+            {
+              "id": "A",
+              "text": "regional crafts، materials، function اور cultural value"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "ART10UR-C07-S01",
+      "chapter": {
+        "id": "ART10UR-C07",
+        "number": 7
+      },
+      "topicId": "Craft of Pakistan",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-071",
+        "pdfSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پاکستانی دستکاری"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-10-ART10UR",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”پاکستانی دستکاری“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: regional crafts، materials، function اور cultural value۔"
+        }
+      }
+    },
+    {
+      "id": "ART10UR-C07-L01",
+      "chapter": {
+        "id": "ART10UR-C07",
+        "number": 7
+      },
+      "topicId": "Craft of Pakistan",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-071",
+        "pdfSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پاکستانی دستکاری"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "art-&-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-10-ART10UR",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”پاکستانی دستکاری“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (regional crafts، materials، function اور cultural value)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 21,
+    "mcq": 7,
+    "short": 7,
+    "long": 7,
+    "chapters": 7
+  }
+}

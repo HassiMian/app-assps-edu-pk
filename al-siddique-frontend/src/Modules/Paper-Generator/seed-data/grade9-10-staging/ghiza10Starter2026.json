@@ -1,0 +1,1119 @@
+{
+  "schemaVersion": "assps-ghiza10-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-069",
+  "sourcePdfSha256": "05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722",
+  "scope": "CURRENT_ELECTIVE_CHAPTER_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "GHIZA10-C01-M01",
+      "chapter": {
+        "id": "GHIZA10-C01",
+        "number": 1
+      },
+      "topicId": "Food Preparation and Cooking Methods",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-069",
+        "pdfSha256": "05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "غذاؤں کی تیاری اور پکانے کے طریقے"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "ghiza-aur-ghizayat",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-10-GHIZA10",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”غذاؤں کی تیاری اور پکانے کے طریقے“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "food preparation، مناسب cooking methods، hygiene اور غذائی معیار",
+          "options": [
+            {
+              "id": "A",
+              "text": "food preparation، مناسب cooking methods، hygiene اور غذائی معیار"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "GHIZA10-C01-S01",
+      "chapter": {
+        "id": "GHIZA10-C01",
+        "number": 1
+      },
+      "topicId": "Food Preparation and Cooking Methods",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-069",
+        "pdfSha256": "05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "غذاؤں کی تیاری اور پکانے کے طریقے"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "ghiza-aur-ghizayat",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-10-GHIZA10",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”غذاؤں کی تیاری اور پکانے کے طریقے“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: food preparation، مناسب cooking methods، hygiene اور غذائی معیار۔"
+        }
+      }
+    },
+    {
+      "id": "GHIZA10-C01-L01",
+      "chapter": {
+        "id": "GHIZA10-C01",
+        "number": 1
+      },
+      "topicId": "Food Preparation and Cooking Methods",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-069",
+        "pdfSha256": "05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "غذاؤں کی تیاری اور پکانے کے طریقے"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "ghiza-aur-ghizayat",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-10-GHIZA10",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”غذاؤں کی تیاری اور پکانے کے طریقے“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (food preparation، مناسب cooking methods، hygiene اور غذائی معیار)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "GHIZA10-C02-M01",
+      "chapter": {
+        "id": "GHIZA10-C02",
+        "number": 2
+      },
+      "topicId": "Family and Community Nutrition",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-069",
+        "pdfSha256": "05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "خاندان اور معاشرے کی غذائیت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "ghiza-aur-ghizayat",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-10-GHIZA10",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”خاندان اور معاشرے کی غذائیت“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "مختلف افراد/گروہوں کی balanced nutrition needs کو context کے مطابق سمجھنا",
+          "options": [
+            {
+              "id": "A",
+              "text": "مختلف افراد/گروہوں کی balanced nutrition needs کو context کے مطابق سمجھنا"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "GHIZA10-C02-S01",
+      "chapter": {
+        "id": "GHIZA10-C02",
+        "number": 2
+      },
+      "topicId": "Family and Community Nutrition",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-069",
+        "pdfSha256": "05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "خاندان اور معاشرے کی غذائیت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "ghiza-aur-ghizayat",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-10-GHIZA10",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”خاندان اور معاشرے کی غذائیت“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: مختلف افراد/گروہوں کی balanced nutrition needs کو context کے مطابق سمجھنا۔"
+        }
+      }
+    },
+    {
+      "id": "GHIZA10-C02-L01",
+      "chapter": {
+        "id": "GHIZA10-C02",
+        "number": 2
+      },
+      "topicId": "Family and Community Nutrition",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-069",
+        "pdfSha256": "05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "خاندان اور معاشرے کی غذائیت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "ghiza-aur-ghizayat",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-10-GHIZA10",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”خاندان اور معاشرے کی غذائیت“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (مختلف افراد/گروہوں کی balanced nutrition needs کو context کے مطابق سمجھنا)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "GHIZA10-C03-M01",
+      "chapter": {
+        "id": "GHIZA10-C03",
+        "number": 3
+      },
+      "topicId": "Meal Management",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-069",
+        "pdfSha256": "05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "انتظامِ طعام"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "ghiza-aur-ghizayat",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-10-GHIZA10",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”انتظامِ طعام“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "meal planning، وقت، وسائل، variety اور household needs کا متوازن انتظام",
+          "options": [
+            {
+              "id": "A",
+              "text": "meal planning، وقت، وسائل، variety اور household needs کا متوازن انتظام"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "GHIZA10-C03-S01",
+      "chapter": {
+        "id": "GHIZA10-C03",
+        "number": 3
+      },
+      "topicId": "Meal Management",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-069",
+        "pdfSha256": "05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "انتظامِ طعام"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "ghiza-aur-ghizayat",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-10-GHIZA10",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”انتظامِ طعام“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: meal planning، وقت، وسائل، variety اور household needs کا متوازن انتظام۔"
+        }
+      }
+    },
+    {
+      "id": "GHIZA10-C03-L01",
+      "chapter": {
+        "id": "GHIZA10-C03",
+        "number": 3
+      },
+      "topicId": "Meal Management",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-069",
+        "pdfSha256": "05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "انتظامِ طعام"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "ghiza-aur-ghizayat",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-10-GHIZA10",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”انتظامِ طعام“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (meal planning، وقت، وسائل، variety اور household needs کا متوازن انتظام)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "GHIZA10-C04-M01",
+      "chapter": {
+        "id": "GHIZA10-C04",
+        "number": 4
+      },
+      "topicId": "Table Setting and Food Service",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-069",
+        "pdfSha256": "05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "میز لگانا اور کھانا پیش کرنا"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "ghiza-aur-ghizayat",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-10-GHIZA10",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”میز لگانا اور کھانا پیش کرنا“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "صاف، منظم اور مناسب table setting/food service",
+          "options": [
+            {
+              "id": "A",
+              "text": "صاف، منظم اور مناسب table setting/food service"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "GHIZA10-C04-S01",
+      "chapter": {
+        "id": "GHIZA10-C04",
+        "number": 4
+      },
+      "topicId": "Table Setting and Food Service",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-069",
+        "pdfSha256": "05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "میز لگانا اور کھانا پیش کرنا"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "ghiza-aur-ghizayat",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-10-GHIZA10",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”میز لگانا اور کھانا پیش کرنا“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: صاف، منظم اور مناسب table setting/food service۔"
+        }
+      }
+    },
+    {
+      "id": "GHIZA10-C04-L01",
+      "chapter": {
+        "id": "GHIZA10-C04",
+        "number": 4
+      },
+      "topicId": "Table Setting and Food Service",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-069",
+        "pdfSha256": "05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "میز لگانا اور کھانا پیش کرنا"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "ghiza-aur-ghizayat",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-10-GHIZA10",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”میز لگانا اور کھانا پیش کرنا“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (صاف، منظم اور مناسب table setting/food service)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "GHIZA10-C05-M01",
+      "chapter": {
+        "id": "GHIZA10-C05",
+        "number": 5
+      },
+      "topicId": "Food Preservation",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-069",
+        "pdfSha256": "05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "غذاؤں کو محفوظ کرنا"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "ghiza-aur-ghizayat",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-10-GHIZA10",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "باب ”غذاؤں کو محفوظ کرنا“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+          "answer": "food spoilage کم کرنے، hygiene اور safe preservation کے اصول",
+          "options": [
+            {
+              "id": "A",
+              "text": "food spoilage کم کرنے، hygiene اور safe preservation کے اصول"
+            },
+            {
+              "id": "B",
+              "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+            },
+            {
+              "id": "C",
+              "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+            },
+            {
+              "id": "D",
+              "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "GHIZA10-C05-S01",
+      "chapter": {
+        "id": "GHIZA10-C05",
+        "number": 5
+      },
+      "topicId": "Food Preservation",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-069",
+        "pdfSha256": "05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "غذاؤں کو محفوظ کرنا"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "ghiza-aur-ghizayat",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-10-GHIZA10",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”غذاؤں کو محفوظ کرنا“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+          "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: food spoilage کم کرنے، hygiene اور safe preservation کے اصول۔"
+        }
+      }
+    },
+    {
+      "id": "GHIZA10-C05-L01",
+      "chapter": {
+        "id": "GHIZA10-C05",
+        "number": 5
+      },
+      "topicId": "Food Preservation",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-069",
+        "pdfSha256": "05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "غذاؤں کو محفوظ کرنا"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "ghiza-aur-ghizayat",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-10-GHIZA10",
+        "syllabusVersion": "CURRENT_CATALOG_LABEL_NO_SESSION"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original chapter-aligned elective starter. Official-linked PDF bytes/hash verified; chapter structure cross-checked. Academic review and exact page anchors remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned provisional elective item.",
+      "content": {
+        "ur": {
+          "stem": "”غذاؤں کو محفوظ کرنا“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+          "answer": "جواب میں باب کا مرکزی focus (food spoilage کم کرنے، hygiene اور safe preservation کے اصول)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔"
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 15,
+    "mcq": 5,
+    "short": 5,
+    "long": 5,
+    "chapters": 5
+  }
+}

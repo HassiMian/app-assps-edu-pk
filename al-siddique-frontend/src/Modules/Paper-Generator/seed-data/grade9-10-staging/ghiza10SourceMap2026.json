@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "assps-ghiza10-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-069",
+  "sourcePdfSha256": "05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722",
+  "sourceByteLength": 41407239,
+  "pageCount": 124,
+  "identity": [
+    "Ghiza aur Ghizayat",
+    "Grade 10",
+    "Urdu",
+    "CURRENT_CATALOG_LABEL_NO_SESSION"
+  ],
+  "resolvedMedium": "Urdu",
+  "chapterMapState": "OFFICIAL_BYTES_HASHED_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_BOUNDARIES_PENDING",
+  "chapterEvidence": {
+    "officialCatalogRecordId": "pectaa-catalog-069",
+    "sourceCacheRef": "20261006/elective10-ghiza.pdf",
+    "crossCheckUrls": [
+      "https://www.ilmkidunya.com/10th-class/books/food_and_nutrition-punjab-board"
+    ]
+  },
+  "chapters": [
+    {
+      "number": 1,
+      "titleLocal": "غذاؤں کی تیاری اور پکانے کے طریقے",
+      "titleEnglish": "Food Preparation and Cooking Methods",
+      "focus": "food preparation، مناسب cooking methods، hygiene اور غذائی معیار",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 2,
+      "titleLocal": "خاندان اور معاشرے کی غذائیت",
+      "titleEnglish": "Family and Community Nutrition",
+      "focus": "مختلف افراد/گروہوں کی balanced nutrition needs کو context کے مطابق سمجھنا",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 3,
+      "titleLocal": "انتظامِ طعام",
+      "titleEnglish": "Meal Management",
+      "focus": "meal planning، وقت، وسائل، variety اور household needs کا متوازن انتظام",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 4,
+      "titleLocal": "میز لگانا اور کھانا پیش کرنا",
+      "titleEnglish": "Table Setting and Food Service",
+      "focus": "صاف، منظم اور مناسب table setting/food service",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 5,
+      "titleLocal": "غذاؤں کو محفوظ کرنا",
+      "titleEnglish": "Food Preservation",
+      "focus": "food spoilage کم کرنے، hygiene اور safe preservation کے اصول",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "exactPageBoundariesPending": true,
+    "safetyBoundary": "NO_DANGEROUS_PROCEDURE_STEPS_NO_RESTRICTIVE_DIET_FRAMING"
+  }
+}

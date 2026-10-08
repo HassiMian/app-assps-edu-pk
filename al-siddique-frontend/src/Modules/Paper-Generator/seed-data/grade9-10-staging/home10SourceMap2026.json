@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "assps-home10-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-073",
+  "sourcePdfSha256": "1cb7bb3c1847880cd4e22fb6d1ef6247ade6018528784a040f1bdf084f995483",
+  "sourceByteLength": 57225410,
+  "pageCount": 157,
+  "identity": [
+    "Home Economics",
+    "Grade 10",
+    "Urdu",
+    "CURRENT_CATALOG_LABEL_NO_SESSION"
+  ],
+  "resolvedMedium": "Urdu",
+  "chapterMapState": "OFFICIAL_BYTES_HASHED_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_BOUNDARIES_PENDING",
+  "chapterEvidence": {
+    "officialCatalogRecordId": "pectaa-catalog-073",
+    "sourceCacheRef": "20261006/elective10-homeeconomics.pdf",
+    "crossCheckUrls": [
+      "https://www.ilmkidunya.com/10th-class/books/home_economics-punjab-board"
+    ]
+  },
+  "chapters": [
+    {
+      "number": 1,
+      "titleLocal": "پارچہ بافی اور لباس کا تعارف",
+      "titleEnglish": "Introduction to Textiles and Clothing",
+      "focus": "fibres, fabrics, clothing functions اور responsible selection",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 2,
+      "titleLocal": "لباس بنانا",
+      "titleEnglish": "Making Clothes",
+      "focus": "planning, measurement, fit, fabric choice اور safe sewing workflow",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 3,
+      "titleLocal": "عمر کے مختلف گروپوں کے لباس کی ضروریات",
+      "titleEnglish": "Clothing Needs of Different Age Groups",
+      "focus": "comfort, function, climate, safety اور age-related needs",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 4,
+      "titleLocal": "انتظام کا تعارف",
+      "titleEnglish": "Introduction to Management",
+      "focus": "goals، resources، time اور decision-making کے اصول",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 5,
+      "titleLocal": "ماحول اور انتظام",
+      "titleEnglish": "Environment and Management",
+      "focus": "گھریلو ماحول، resources، sustainability اور organization",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 6,
+      "titleLocal": "Art اور Design",
+      "titleEnglish": "Art and Design",
+      "focus": "elements/principles of design اور functional/aesthetic decisions",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 7,
+      "titleLocal": "روزمرہ زندگی میں Art",
+      "titleEnglish": "Art in Daily Life",
+      "focus": "art/design principles کا home and daily-life applications میں استعمال",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "exactPageBoundariesPending": true,
+    "safetyBoundary": "NO_DANGEROUS_PROCEDURE_STEPS_NO_RESTRICTIVE_DIET_FRAMING"
+  }
+}
