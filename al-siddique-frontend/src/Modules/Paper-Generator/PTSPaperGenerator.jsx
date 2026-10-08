@@ -1409,9 +1409,13 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
    {personalizedStatus && <div data-personalized-print-status style={{fontSize:9,lineHeight:1.5,color:D.muted,marginTop:7}}>{personalizedStatus}</div>}
   </div>
  </details>}
- <GoldBtn onClick={doPrint} style={{ padding:'8px 20px', fontSize:13 }}> Print</GoldBtn>
+ <GoldBtn onClick={doPrint} style={{ padding:'8px 20px', fontSize:13 }}> Print / Save PDF</GoldBtn>
  </div>
  </div>
+ <details data-printer-destination-help style={{ marginTop:8 }}>
+  <summary>Printer / PDF destination — use any connected printer</summary>
+  <p>The Print / Save PDF button opens the browser print dialog on this computer. Choose any Ready local, USB, Wi-Fi or shared printer. No Ricoh, Samsung or other printer is hardcoded. If none is connected, select Save as PDF to print later from a connected PC. Printer connection is controlled by this computer, not the school website.</p>
+ </details>
  <details data-paper-metadata-editor style={{ marginTop:8 }}>
  <summary style={{ cursor:'pointer', color:D.gold, fontSize:12, fontWeight:800, userSelect:'none' }}>Paper Information — edit all header fields</summary>
  <div style={{ display:'grid', gridTemplateColumns:'2fr 1.4fr 1fr', gap:10, marginTop:8, alignItems:'end' }}>
