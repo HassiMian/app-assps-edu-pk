@@ -4,6 +4,12 @@
 require('dotenv').config({ path: __dirname + '/../.env' })
 const { Pool } = require('pg')
 const { AsyncLocalStorage } = require('async_hooks')
+const { applySignedTenantContext } = require('../services/security/coreSignedTenantContext')
+const signedTenantGate=process.env.DB_SIGNED_TENANT_RLS_ENABLED==='true'
+if(signedTenantGate && (process.env.DB_ENFORCE_LEAST_PRIVILEGE_LOGIN!=='true' || process.env.DB_AUTH_USE_SIGNED_TENANT_CONTEXT!=='true' || String(process.env.DB_SIGNED_TENANT_HMAC_KEY||'').length<32)) {
+  throw new Error('DB_SIGNED_TENANT_DEPENDENCY_REQUIRED: strict non-BYPASS login, JWT prebinding and HMAC key required')
+}
+
 
 function envOrDev(name, fallback) {
   const value = process.env[name]
@@ -156,8 +162,19 @@ const pool = new Proxy(rawPool, {
     if (property === 'query') {
       return async (...args) => {
         const client = await connectForContext()
+        let open=false
         try {
-          return await client.query(...args)
+          if(signedTenantGate && normalizedRuntimeContext()) {
+            await client.query('BEGIN')
+            open=true
+            await applyTenantContext(client)
+          }
+          const result=await client.query(...args)
+          if(open) { await client.query('COMMIT'); open=false }
+          return result
+        } catch(err) {
+          if(open) await client.query('ROLLBACK').catch(()=>{})
+          throw err
         } finally {
           await client.release()
         }
@@ -176,6 +193,16 @@ async function applyTenantContext(client) {
   await client.query(`SELECT set_config('app.is_super_admin', $1, true)`, [context.isSuperAdmin ? 'true' : 'false'])
   await client.query(`SELECT set_config('app.tenant_id', $1, true)`, [context.tenantId])
   await client.query(`SELECT set_config('app.tenant_key', $1, true)`, [context.tenantKey])
+  if(signedTenantGate) {
+    const actorId=tenantContext.getStore()?.actorId
+    await applySignedTenantContext(client,{
+      tenantId:context.tenantId,
+      tenantKey:context.tenantKey,
+      actorId,
+      secret:process.env.DB_SIGNED_TENANT_HMAC_KEY,
+      expectedLogin:process.env.DB_USER
+    })
+  }
   return true
 }
 

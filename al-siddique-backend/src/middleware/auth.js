@@ -154,6 +154,7 @@ function activateRequestRlsContext(req) {
   const role = String(req.user?.role || '').toLowerCase()
   const isSuperAdmin = role === 'super_admin' || role === 'platform_owner'
   ctx.rlsEnabled = true
+  ctx.actorId = Number.parseInt(req.user?.id,10) || null
   ctx.isSuperAdmin = isSuperAdmin
   ctx.tenantId = isSuperAdmin ? null : normalizeSchoolId(req.school_id || req.user?.school_id)
   ctx.tenantKey = isSuperAdmin ? null : String(req.tenant_id || req.user?.tenant_id || req.school?.tenant_id || '').trim() || null
@@ -258,6 +259,7 @@ async function protect(req, res, next) {
         return sendJson(res, 401, { message: 'Signed school context is required.' })
       }
       context.rlsEnabled = true
+      context.actorId = Number.parseInt(decoded?.id,10) || null
       context.isSuperAdmin = false
       context.tenantId = verifiedClaimSchoolId
       context.tenantKey = String(decoded?.tenant_id || '').trim() || null
