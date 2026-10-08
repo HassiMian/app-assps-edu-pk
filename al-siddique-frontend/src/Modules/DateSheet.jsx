@@ -4,6 +4,7 @@ import { classLevelLabel, classLevelsMatch, useAcademicStore } from '../services
 import { useStudentStore } from '../services/useStudentStore'
 import { usePaperStore } from './Paper-Generator/usePaperStore'
 import api from '../services/api'
+import { pickDateSheetSession, dateSheetSessionOptions } from './dateSheetSession'
 
 function academicSessionLabel(sessionStart, sessionEnd) {
   const start = String(sessionStart || '').slice(0, 4)
@@ -119,30 +120,30 @@ function extractLoadedGrid(sessionVal, termVal, allSheets, classOpts) {
 }
 
 const styles = {
-  page: { minHeight:'100vh', padding:'24px 20px', background:'transparent', color:'#e2e8f0' },
-  shell: { maxWidth:1460, margin:'0 auto', background:'rgba(15,23,42,0.4)', backdropFilter:'blur(12px)', borderRadius:22, border:'1px solid rgba(148,163,184,0.1)', overflow:'hidden', boxShadow:'0 8px 32px rgba(0,0,0,0.4)' },
+  page: { minHeight:'100vh', padding:'24px 20px', background:'transparent', color:'var(--app-text)' },
+  shell: { maxWidth:1460, margin:'0 auto', background:'var(--app-surface)', backdropFilter:'blur(12px)', borderRadius:22, border:'1px solid var(--app-border)', overflow:'hidden', boxShadow:'var(--app-shadow)' },
   body: { padding:'22px 24px 32px' },
-  crumb: { color:'rgba(148,163,184,0.6)', fontSize:13, marginBottom:10, fontWeight:500 },
+  crumb: { color:'var(--app-muted)', fontSize:13, marginBottom:10, fontWeight:500 },
   notice: { background:'rgba(245,166,35,0.1)', color:'#f5a623', border:'1px solid rgba(245,166,35,0.2)', borderRadius:14, padding:'16px 20px', fontSize:14, lineHeight:1.55, fontWeight:600, marginBottom:32, position:'relative' },
   close: { position:'absolute', right:16, top:14, color:'rgba(245,166,35,0.5)', fontWeight:900, cursor:'pointer', fontSize:18 },
-  title: { margin:'0 0 20px', fontSize:24, fontWeight:700, color:'#fff', borderBottom:'1px solid rgba(148,163,184,0.1)', paddingBottom:14 },
+  title: { margin:'0 0 20px', fontSize:24, fontWeight:700, color:'var(--app-text)', borderBottom:'1px solid rgba(148,163,184,0.1)', paddingBottom:14 },
   formGrid: { display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(180px, 1fr))', gap:16, alignItems:'end', marginBottom:28 },
-  label: { display:'block', fontWeight:600, color:'rgba(148,163,184,0.9)', marginBottom:6, fontSize:13 },
-  input: { width:'100%', height:40, border:'1px solid rgba(148,163,184,0.2)', background:'rgba(15,23,42,0.6)', color:'#fff', padding:'0 12px', fontSize:14, borderRadius:12, outline:'none', transition:'all 0.2s', boxShadow:'inset 0 2px 4px rgba(0,0,0,0.1)', colorScheme:'dark' },
+  label: { display:'block', fontWeight:600, color:'var(--app-muted)', marginBottom:6, fontSize:13 },
+  input: { width:'100%', height:40, border:'1px solid var(--app-border)', background:'var(--app-input)', color:'var(--app-text)', padding:'0 12px', fontSize:14, borderRadius:12, outline:'none', transition:'all 0.2s', boxShadow:'inset 0 2px 4px rgba(0,0,0,0.1)', colorScheme:'normal' },
   button: { height:40, border:0, borderRadius:12, background:'linear-gradient(135deg, #0A84FF 0%, #22d3ee 100%)', color:'#fff', padding:'0 18px', fontSize:14, cursor:'pointer', fontWeight: 600, display:'inline-flex', alignItems:'center', justifyContent:'center', gap:6, boxShadow:'0 4px 12px rgba(10,132,255,0.3)', transition:'all 0.2s' },
   warn: { background:'rgba(239,68,68,0.1)', color:'#ef4444', border:'1px solid rgba(239,68,68,0.2)', borderRadius:14, padding:'14px 18px', fontSize:14, margin:'0 0 22px', fontWeight:500, position:'relative' },
   gridWrap: { width:'100%', overflow:'auto', borderTop:'1px solid rgba(148,163,184,0.1)', marginTop:18, maxHeight:'62vh', borderRadius:12 },
-  table: { borderCollapse:'collapse', minWidth:1200, width:'max-content', color:'#e2e8f0' },
-  th: { background:'rgba(15,23,42,0.8)', color:'#fff', border:'1px solid rgba(148,163,184,0.1)', padding:'12px 14px', verticalAlign:'bottom', minWidth:176, fontSize:13, fontWeight:600 },
-  classTh: { background:'rgba(15,23,42,0.8)', color:'#fff', border:'1px solid rgba(148,163,184,0.1)', padding:'12px 14px', minWidth:200, textAlign:'left', verticalAlign:'bottom', fontSize:13, fontWeight:600 },
-  td: { border:'1px solid rgba(148,163,184,0.1)', background:'rgba(30,41,59,0.3)', minWidth:176, height:80, padding:10, verticalAlign:'top', position:'relative' },
-  classCell: { border:'1px solid rgba(148,163,184,0.1)', background:'rgba(30,41,59,0.3)', minWidth:200, width:200, padding:10, verticalAlign:'top' },
-  cellBtn: { width:'100%', minHeight:42, border:'1px solid rgba(148,163,184,0.2)', background:'rgba(15,23,42,0.5)', color:'rgba(148,163,184,0.9)', textAlign:'left', padding:'0 12px', fontSize:13, borderRadius:10, cursor:'pointer', overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', transition:'all 0.2s' },
-  dropdown: { position:'absolute', left:10, top:56, width:250, maxHeight:320, overflowY:'auto', background:'#1e293b', border:'1px solid rgba(148,163,184,0.2)', boxShadow:'0 12px 32px rgba(0,0,0,0.5)', zIndex:10, borderRadius:12 },
-  searchBox: { width:'calc(100% - 20px)', height:38, border:'1px solid rgba(148,163,184,0.2)', borderRadius:10, margin:10, padding:'0 10px', outline:'none', fontSize:13, background:'rgba(15,23,42,0.6)', color:'#fff' },
-  subjectRow: { padding:'10px 16px', color:'#e2e8f0', cursor:'pointer', fontSize:13, borderBottom:'1px solid rgba(148,163,184,0.1)', transition:'all 0.15s' },
-  printPanel: { borderTop:'1px solid rgba(148,163,184,0.1)', marginTop:24, paddingTop:20, display:'grid', gap:14, background:'rgba(15,23,42,0.3)', padding:'20px', borderRadius:16 },
-  pickerPanel: { background:'rgba(15,23,42,0.5)', border:'1px solid rgba(148,163,184,0.12)', borderRadius:16, padding:'16px 18px', marginBottom:18 },
+  table: { borderCollapse:'collapse', minWidth:1200, width:'max-content', color:'var(--app-text)' },
+  th: { background:'var(--app-bg-soft)', color:'var(--app-text)', border:'1px solid var(--app-border)', padding:'12px 14px', verticalAlign:'bottom', minWidth:176, fontSize:13, fontWeight:600 },
+  classTh: { background:'var(--app-bg-soft)', color:'var(--app-text)', border:'1px solid var(--app-border)', padding:'12px 14px', minWidth:200, textAlign:'left', verticalAlign:'bottom', fontSize:13, fontWeight:600 },
+  td: { border:'1px solid var(--app-border)', background:'var(--app-surface)', minWidth:176, height:80, padding:10, verticalAlign:'top', position:'relative' },
+  classCell: { border:'1px solid var(--app-border)', background:'var(--app-surface)', minWidth:200, width:200, padding:10, verticalAlign:'top' },
+  cellBtn: { width:'100%', minHeight:42, border:'1px solid var(--app-border)', background:'var(--app-surface)', color:'var(--app-muted)', textAlign:'left', padding:'0 12px', fontSize:13, borderRadius:10, cursor:'pointer', overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', transition:'all 0.2s' },
+  dropdown: { position:'absolute', left:10, top:56, width:250, maxHeight:320, overflowY:'auto', background:'var(--app-surface-strong)', border:'1px solid var(--app-border)', boxShadow:'0 12px 32px rgba(0,0,0,0.5)', zIndex:10, borderRadius:12 },
+  searchBox: { width:'calc(100% - 20px)', height:38, border:'1px solid var(--app-border)', borderRadius:10, margin:10, padding:'0 10px', outline:'none', fontSize:13, background:'var(--app-input)', color:'var(--app-text)' },
+  subjectRow: { padding:'10px 16px', color:'var(--app-text)', cursor:'pointer', fontSize:13, borderBottom:'1px solid rgba(148,163,184,0.1)', transition:'all 0.15s' },
+  printPanel: { borderTop:'1px solid rgba(148,163,184,0.1)', marginTop:24, paddingTop:20, display:'grid', gap:14, background:'var(--app-surface)', padding:'20px', borderRadius:16 },
+  pickerPanel: { background:'var(--app-surface)', border:'1px solid var(--app-border)', borderRadius:16, padding:'16px 18px', marginBottom:18 },
   chip: { display:'inline-flex', alignItems:'center', gap:6, height:32, padding:'0 12px', borderRadius:20, fontSize:13, fontWeight:600, cursor:'pointer', border:'1px solid', transition:'all 0.18s' },
 }
 
@@ -240,7 +241,7 @@ export default function DateSheet() {
   const { students } = useStudentStore()
   const { paperSettings } = usePaperStore()
   const classOptions = activeClasses.map(c => ({ value: c.level, label: c.name }))
-  const [session, setSession] = useState(activeAcademicSession || paperSettings.academicYear || '')
+  const [session, setSession] = useState(() => pickDateSheetSession(activeAcademicSession, paperSettings.academicYear))
   const [term, setTerm] = useState(TERMS[0])
   const [dayCount, setDayCount] = useState(12)
   const [warning, setWarning] = useState('')
@@ -254,10 +255,11 @@ export default function DateSheet() {
   const [sheets, setSheets] = useState([])
   const [syncState, setSyncState] = useState('loading')
   const [printClass, setPrintClass] = useState(classOptions[0]?.value || '1')
-  const [printSession, setPrintSession] = useState(activeAcademicSession || paperSettings.academicYear || '')
+  const [printSession, setPrintSession] = useState(() => pickDateSheetSession(activeAcademicSession, paperSettings.academicYear))
   const [printTerm, setPrintTerm] = useState(TERMS[0])
   const [template, setTemplate] = useState('classic')
   const [layout, setLayout] = useState('single')
+  const sessionOptions = dateSheetSessionOptions(sheets, activeAcademicSession, paperSettings.academicYear, session, printSession)
 
   const loadDateSheet = (targetSession, targetTerm, sourceRows = sheets) => {
     if (!targetSession || !targetTerm) {
@@ -299,7 +301,14 @@ export default function DateSheet() {
         if (cancelled) return
         setSheets(serverRows)
         setSyncState('synced')
-        loadDateSheet(session, term, serverRows)
+        // Reconcile with the authenticated school's saved sessions, not with the
+        // browser's implicit first <option>. Keep the print selector in sync too.
+        const restoredSession = pickDateSheetSession(activeAcademicSession, paperSettings.academicYear, serverRows)
+        const restoredTerm = serverRows.some(row => row.session === restoredSession && row.term === term)
+          ? term : (serverRows.find(row => row.session === restoredSession)?.term || term)
+        setPrintSession(restoredSession)
+        setPrintTerm(restoredTerm)
+        loadDateSheet(restoredSession, restoredTerm, serverRows)
       } catch (err) {
         console.error('Date sheet server sync failed', err)
         if (!cancelled) {
@@ -444,7 +453,7 @@ export default function DateSheet() {
 
           <h1 style={styles.title}>Create &amp; Edit Date Sheet</h1>
           <div style={styles.formGrid}>
-            <div><label style={styles.label}>Session</label><select style={styles.input} value={session} onChange={e => setSession(e.target.value)}><option>2026-2027</option><option>2027-2028</option></select></div>
+            <div><label style={styles.label}>Session</label><select aria-label="Date sheet session" style={styles.input} value={session} onChange={e => setSession(e.target.value)}>{sessionOptions.map(option => <option value={option} key={option}>{option}</option>)}</select></div>
             <div><label style={styles.label}>Term</label><select style={styles.input} value={term} onChange={e => setTerm(e.target.value)}><option value="">Select Term</option>{TERMS.map(item => <option key={item}>{item}</option>)}</select></div>
             <div><label style={styles.label}>Number of Days</label><input type="number" min="1" max="20" style={styles.input} value={dayCount} onChange={e => setDayCount(e.target.value)} /></div>
             <button type="button" style={styles.button} onClick={search}><Edit2 size={14} /> Search / Edit</button>
@@ -457,7 +466,7 @@ export default function DateSheet() {
               {/*  Class Picker & Toolbar Panel  */}
               <div style={styles.pickerPanel}>
                 <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:12, flexWrap:'wrap', gap:10 }}>
-                  <span style={{ color:'rgba(148,163,184,0.9)', fontSize:13, fontWeight:600 }}>Manage Classes &amp; Schedule Dates</span>
+                  <span style={{ color:'var(--app-muted)', fontSize:13, fontWeight:600 }}>Manage Classes &amp; Schedule Dates</span>
                   <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
                     <button type="button" onClick={addAllClasses} style={{ ...styles.button, height:34, fontSize:13, padding:'0 14px', background:'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)', boxShadow:'0 4px 10px rgba(34,197,94,0.25)' }}>
                       All Classes
@@ -501,7 +510,7 @@ export default function DateSheet() {
                 </div>
 
                 {classRows.length > 0 && (
-                  <div style={{ marginTop:12, color:'rgba(148,163,184,0.6)', fontSize:12 }}>
+                  <div style={{ marginTop:12, color:'var(--app-muted)', fontSize:12 }}>
                     {classRows.length} class row{classRows.length !== 1 ? 's' : ''} &amp; {columns.length} exam date{columns.length !== 1 ? 's' : ''} — edit subjects, dates, or times below.
                   </div>
                 )}
@@ -593,7 +602,7 @@ export default function DateSheet() {
                                 <td key={col.id} style={styles.td}>
                                   <button
                                     type="button"
-                                    style={{ ...styles.cellBtn, borderColor:isOpen ? '#22d3ee' : 'rgba(148,163,184,0.2)', color:picked.length ? '#fff' : 'rgba(148,163,184,0.6)', background:picked.length ? 'rgba(34,211,238,0.1)' : 'rgba(15,23,42,0.5)' }}
+                                    style={{ ...styles.cellBtn, borderColor:isOpen ? '#22d3ee' : 'rgba(148,163,184,0.2)', color:picked.length ? 'var(--app-text)' : 'var(--app-muted)', background:picked.length ? 'rgba(34,211,238,0.1)' : 'var(--app-input)' }}
                                     onClick={() => { setOpenCell(isOpen ? null : key); setSubjectSearch('') }}
                                   >
                                     {picked.length ? picked.join(', ') : 'Select subject'}
@@ -613,7 +622,7 @@ export default function DateSheet() {
                                       {subjects.map(subject => (
                                         <div
                                           key={subject}
-                                          style={{ ...styles.subjectRow, background:picked.includes(subject) ? 'rgba(34,211,238,0.15)' : 'transparent', color:picked.includes(subject) ? '#22d3ee' : '#e2e8f0' }}
+                                          style={{ ...styles.subjectRow, background:picked.includes(subject) ? 'rgba(34,211,238,0.15)' : 'transparent', color:picked.includes(subject) ? '#0d84b3' : 'var(--app-text)' }}
                                           onClick={() => toggleSubject(row.id, dayIndex, subject)}
                                         >
                                           {subject}
@@ -642,21 +651,21 @@ export default function DateSheet() {
             <h2 style={{ ...styles.title, fontSize:20, margin:'0 0 2px', paddingBottom:10 }}>Print Student Date Sheets</h2>
             <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(180px, 1fr))', gap:14 }}>
               <div><label style={styles.label}>Class</label><select style={styles.input} value={printClass} onChange={e => setPrintClass(e.target.value)}>{classOptions.map(item => <option key={item.value} value={item.value}>{item.label}</option>)}</select></div>
-              <div><label style={styles.label}>Session</label><input style={styles.input} value={printSession} onChange={e => setPrintSession(e.target.value)} /></div>
+              <div><label style={styles.label}>Session</label><select aria-label="Print date sheet session" style={styles.input} value={printSession} onChange={e => setPrintSession(e.target.value)}>{sessionOptions.map(option => <option value={option} key={option}>{option}</option>)}</select></div>
               <div><label style={styles.label}>Term</label><select style={styles.input} value={printTerm} onChange={e => setPrintTerm(e.target.value)}>{TERMS.map(item => <option key={item}>{item}</option>)}</select></div>
               <div><label style={styles.label}>Template</label><select style={styles.input} value={template} onChange={e => setTemplate(e.target.value)}>{TEMPLATES.map(item => <option key={item.id} value={item.id}>{item.label}</option>)}</select></div>
               <div><label style={styles.label}>Layout</label><select style={styles.input} value={layout} onChange={e => setLayout(e.target.value)}><option value="single">1 student per page</option><option value="two">2 students per page</option></select></div>
             </div>
-            <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', color:'#64748b', fontSize:14, flexWrap:'wrap', gap:10 }}>
+            <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', color:'var(--app-muted)', fontSize:14, flexWrap:'wrap', gap:10 }}>
               <span>{printableRows.length} saved papers | {printableStudents.length} students</span>
               <button type="button" style={styles.button} onClick={print}><Printer size={15} /> Print</button>
             </div>
             {printablePreviewRows.length > 0 && (
               <div style={{ border:'1px solid rgba(148,163,184,0.12)', borderRadius:14, overflow:'hidden', background:'rgba(15,23,42,0.35)' }}>
-                <div style={{ padding:'12px 16px', color:'#e2e8f0', fontWeight:700, borderBottom:'1px solid rgba(148,163,184,0.1)', display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:10 }}>
+                <div style={{ padding:'12px 16px', color:'var(--app-text)', fontWeight:700, borderBottom:'1px solid rgba(148,163,184,0.1)', display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:10 }}>
                   <div>
-                    <span style={{ fontSize:15, color:'#fff' }}>{clsLabel(printClass)} - {printTerm} preview</span>
-                    <span style={{ color:'rgba(148,163,184,0.7)', fontSize:12, marginLeft:10 }}>({printablePreviewRows.length} papers scheduled)</span>
+                    <span style={{ fontSize:15, color:'var(--app-text)' }}>{clsLabel(printClass)} - {printTerm} preview</span>
+                    <span style={{ color:'var(--app-muted)', fontSize:12, marginLeft:10 }}>({printablePreviewRows.length} papers scheduled)</span>
                   </div>
                   <button
                     type="button"
@@ -669,9 +678,9 @@ export default function DateSheet() {
                     <Edit2 size={13} /> Edit This Date Sheet
                   </button>
                 </div>
-                <table style={{ width:'100%', borderCollapse:'collapse', fontSize:13, color:'#cbd5e1' }}>
+                <table style={{ width:'100%', borderCollapse:'collapse', fontSize:13, color:'var(--app-text)' }}>
                   <thead>
-                    <tr style={{ background:'rgba(15,23,42,0.55)', color:'#94a3b8', textTransform:'uppercase', fontSize:11 }}>
+                    <tr style={{ background:'var(--app-bg-soft)', color:'var(--app-text)', textTransform:'uppercase', fontSize:11 }}>
                       <th style={{ textAlign:'left', padding:'9px 12px' }}>Date</th>
                       <th style={{ textAlign:'left', padding:'9px 12px' }}>Day</th>
                       <th style={{ textAlign:'left', padding:'9px 12px' }}>Subject</th>
@@ -681,10 +690,10 @@ export default function DateSheet() {
                   <tbody>
                     {printablePreviewRows.map(row => (
                       <tr key={row.id} style={{ borderTop:'1px solid rgba(148,163,184,0.08)' }}>
-                        <td style={{ padding:'10px 12px', fontWeight:700 }}>{prettyDate(row.date)}</td>
-                        <td style={{ padding:'10px 12px' }}>{dayName(row.date)}</td>
-                        <td style={{ padding:'10px 12px', color:'#fff', fontWeight:700 }}>{(row.subjects || []).join(', ')}</td>
-                        <td style={{ padding:'10px 12px' }}>{(row.times || []).filter(Boolean).join(' / ') || '-'}</td>
+                        <td style={{ padding:'10px 12px', fontWeight:700, color:'var(--app-text)' }}>{prettyDate(row.date)}</td>
+                        <td style={{ padding:'10px 12px', color:'var(--app-text)' }}>{dayName(row.date)}</td>
+                        <td style={{ padding:'10px 12px', color:'var(--app-text)', fontWeight:700 }}>{(row.subjects || []).join(', ')}</td>
+                        <td style={{ padding:'10px 12px', color:'var(--app-text)' }}>{(row.times || []).filter(Boolean).join(' / ') || '-'}</td>
                       </tr>
                     ))}
                   </tbody>
