@@ -1,0 +1,1224 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "IX-ISL-U01-M01",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "قرآن مجید اور حدیث نبوی ﷺ",
+      "topic_name": "تدوین قرآن",
+      "category": "mcq",
+      "question_text": "قرآن مجید کی حفاظت کے لیے تدوین اور کتابت کی اہمیت کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "متن کی محفوظ اور منظم ترسیل"
+        },
+        {
+          "id": "B",
+          "text": "صرف خطاطی کی مشق"
+        },
+        {
+          "id": "C",
+          "text": "صرف تاریخی نام یاد کرنا"
+        },
+        {
+          "id": "D",
+          "text": "ترجمہ کو ختم کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "متن کی محفوظ اور منظم ترسیل",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 3",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "تدوین قرآن"
+      ]
+    },
+    {
+      "id": "IX-ISL-U01-M02",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "قرآن مجید اور حدیث نبوی ﷺ",
+      "topic_name": "حدیث کی اقسام",
+      "category": "mcq",
+      "question_text": "حدیثِ قولی سے مراد کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "نبی کریم ﷺ کے ارشادات"
+        },
+        {
+          "id": "B",
+          "text": "صرف صحابہ کے اقوال"
+        },
+        {
+          "id": "C",
+          "text": "صرف تاریخی واقعات"
+        },
+        {
+          "id": "D",
+          "text": "فقہی کتابوں کے ابواب"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "نبی کریم ﷺ کے ارشادات",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 3",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "حدیث کی اقسام"
+      ]
+    },
+    {
+      "id": "IX-ISL-U01-S01",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "قرآن مجید اور حدیث نبوی ﷺ",
+      "topic_name": "حفاظت قرآن",
+      "category": "short",
+      "question_text": "قرآن مجید کی حفاظت میں جمع و تدوین کا بنیادی مقصد بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "بنیادی مقصد قرآنی متن کو معتبر طریقے سے محفوظ کرنا، درست قراءت و کتابت کو برقرار رکھنا اور امت تک صحیح صورت میں منتقل کرنا تھا۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 3",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "حفاظت قرآن"
+      ]
+    },
+    {
+      "id": "IX-ISL-U01-S02",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "قرآن مجید اور حدیث نبوی ﷺ",
+      "topic_name": "حدیث کی اہمیت",
+      "category": "short",
+      "question_text": "اسلامی تعلیمات کو سمجھنے میں حدیث کی اہمیت کیوں ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "حدیث نبی کریم ﷺ کی تعلیمات، عملی رہنمائی اور قرآن مجید کے احکام کی وضاحت کو سمجھنے میں مدد دیتی ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 3",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "حدیث کی اہمیت"
+      ]
+    },
+    {
+      "id": "IX-ISL-U01-L01",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "قرآن مجید اور حدیث نبوی ﷺ",
+      "topic_name": "قرآن و حدیث",
+      "category": "long",
+      "question_text": "قرآن مجید اور حدیث نبوی ﷺ کو اسلامی رہنمائی کے بنیادی سرچشموں کے طور پر واضح کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں قرآن مجید کی بنیادی حیثیت، حدیث کی تشریحی و عملی رہنمائی، دونوں کے باہمی تعلق، معتبر نقل و حفاظت، اور روزمرہ زندگی میں رہنمائی کا ذکر ہونا چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 3",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "قرآن و حدیث"
+      ]
+    },
+    {
+      "id": "IX-ISL-U02-M01",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "ایمانیات اور عبادات",
+      "topic_name": "توحید",
+      "category": "mcq",
+      "question_text": "عقیدۂ توحید کا بنیادی مفہوم کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "اللہ تعالیٰ کی وحدانیت پر ایمان"
+        },
+        {
+          "id": "B",
+          "text": "صرف تاریخی علم"
+        },
+        {
+          "id": "C",
+          "text": "صرف معاشی اصول"
+        },
+        {
+          "id": "D",
+          "text": "صرف اخلاقی رسم"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "اللہ تعالیٰ کی وحدانیت پر ایمان",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 3",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "توحید"
+      ]
+    },
+    {
+      "id": "IX-ISL-U02-M02",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "ایمانیات اور عبادات",
+      "topic_name": "عبادت",
+      "category": "mcq",
+      "question_text": "زکوٰۃ کا ایک اہم معاشرتی مقصد کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ضرورت مندوں کی مدد اور معاشرتی توازن"
+        },
+        {
+          "id": "B",
+          "text": "صرف تجارت بڑھانا"
+        },
+        {
+          "id": "C",
+          "text": "صرف سفر آسان کرنا"
+        },
+        {
+          "id": "D",
+          "text": "صرف زمین ناپنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ضرورت مندوں کی مدد اور معاشرتی توازن",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 3",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "عبادت"
+      ]
+    },
+    {
+      "id": "IX-ISL-U02-S01",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "ایمانیات اور عبادات",
+      "topic_name": "ایمانیات",
+      "category": "short",
+      "question_text": "ایمان بالآخرت انسان کے رویّے پر کس طرح اثر انداز ہو سکتا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "یہ احساسِ جواب دہی، نیکی کی رغبت، برائی سے اجتناب اور ذمہ دارانہ طرزِ عمل پیدا کر سکتا ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 3",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "ایمانیات"
+      ]
+    },
+    {
+      "id": "IX-ISL-U02-S02",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "ایمانیات اور عبادات",
+      "topic_name": "عبادات",
+      "category": "short",
+      "question_text": "نماز کی انفرادی اور اجتماعی اہمیت میں ایک ایک نکتہ بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "انفرادی طور پر نماز اللہ تعالیٰ سے تعلق اور نظم پیدا کرتی ہے؛ اجتماعی طور پر باہمی مساوات، نظم اور امت کے احساس کو مضبوط کرتی ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 3",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "عبادات"
+      ]
+    },
+    {
+      "id": "IX-ISL-U02-L01",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "ایمانیات اور عبادات",
+      "topic_name": "ایمان و عبادت",
+      "category": "long",
+      "question_text": "واضح کریں کہ ایمان اور عبادات انسان کی شخصیت اور معاشرتی زندگی کی اصلاح میں کس طرح مدد دیتی ہیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں عقائد سے ذمہ داری و مقصد، نماز سے نظم، زکوٰۃ سے سماجی تعاون، اللہ سے تعلق، اور اخلاقی و معاشرتی اثرات شامل ہوں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 3",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "ایمان و عبادت"
+      ]
+    },
+    {
+      "id": "IX-ISL-U03-M01",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "سیرت النبی ﷺ",
+      "topic_name": "فتح مکہ",
+      "category": "mcq",
+      "question_text": "فتح مکہ کے موقع پر عام معافی کا رویّہ کس قدر کو نمایاں کرتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "رحمت اور درگزر"
+        },
+        {
+          "id": "B",
+          "text": "انتقام"
+        },
+        {
+          "id": "C",
+          "text": "تکبر"
+        },
+        {
+          "id": "D",
+          "text": "بدعہدی"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "رحمت اور درگزر",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 3",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "فتح مکہ"
+      ]
+    },
+    {
+      "id": "IX-ISL-U03-M02",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "سیرت النبی ﷺ",
+      "topic_name": "سیرت",
+      "category": "mcq",
+      "question_text": "سیرت النبی ﷺ کے مطالعے کا بنیادی مقصد کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "عملی اخلاقی رہنمائی حاصل کرنا"
+        },
+        {
+          "id": "B",
+          "text": "صرف نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف تاریخیں گننا"
+        },
+        {
+          "id": "D",
+          "text": "صرف جغرافیہ پڑھنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "عملی اخلاقی رہنمائی حاصل کرنا",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 3",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "سیرت"
+      ]
+    },
+    {
+      "id": "IX-ISL-U03-S01",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "سیرت النبی ﷺ",
+      "topic_name": "فتح مکہ",
+      "category": "short",
+      "question_text": "فتح مکہ سے عفو و درگزر کے بارے میں کیا سبق ملتا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "قدرت حاصل ہونے کے باوجود معافی، رحمت، امن اور اصلاح کو ترجیح دینا اعلیٰ اخلاقی طرزِ عمل ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 3",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "فتح مکہ"
+      ]
+    },
+    {
+      "id": "IX-ISL-U03-S02",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "سیرت النبی ﷺ",
+      "topic_name": "عام الوفود",
+      "category": "short",
+      "question_text": "عام الوفود کی اہمیت مختصراً بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "یہ دور مختلف قبائل اور وفود کے مدینہ آ کر اسلام اور اسلامی ریاست سے تعلق قائم کرنے کی علامت بنا، جس سے عرب میں اسلام کی قبولیت اور نظم مضبوط ہوا۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 3",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "عام الوفود"
+      ]
+    },
+    {
+      "id": "IX-ISL-U03-L01",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "سیرت النبی ﷺ",
+      "topic_name": "سیرت کے اسباق",
+      "category": "long",
+      "question_text": "سیرت النبی ﷺ سے قیادت، عدل، رحمت، عہد کی پابندی اور معاشرتی اصلاح کے اسباق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں کم از کم پانچ پہلو واضح ہوں: عدل، رحم، مشاورت یا حکمت، وعدہ و عہد کی پابندی، کمزور طبقات کا خیال اور اصلاحِ معاشرہ۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 3",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "سیرت کے اسباق"
+      ]
+    },
+    {
+      "id": "IX-ISL-U04-M01",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "اخلاق و آداب",
+      "topic_name": "شکر",
+      "category": "mcq",
+      "question_text": "شکر کا عملی اظہار کیا ہو سکتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "نعمت کا درست استعمال اور اللہ کا اعتراف"
+        },
+        {
+          "id": "B",
+          "text": "نعمت ضائع کرنا"
+        },
+        {
+          "id": "C",
+          "text": "تکبر کرنا"
+        },
+        {
+          "id": "D",
+          "text": "دوسروں کو حقیر سمجھنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "نعمت کا درست استعمال اور اللہ کا اعتراف",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 4",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "شکر"
+      ]
+    },
+    {
+      "id": "IX-ISL-U04-M02",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "اخلاق و آداب",
+      "topic_name": "امانت",
+      "category": "mcq",
+      "question_text": "امانت و دیانت کا تقاضا کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "حق دار کا حق محفوظ رکھنا"
+        },
+        {
+          "id": "B",
+          "text": "جھوٹ سے فائدہ اٹھانا"
+        },
+        {
+          "id": "C",
+          "text": "وعدہ توڑنا"
+        },
+        {
+          "id": "D",
+          "text": "ذمہ داری سے بچنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "حق دار کا حق محفوظ رکھنا",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 4",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "امانت"
+      ]
+    },
+    {
+      "id": "IX-ISL-U04-S01",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "اخلاق و آداب",
+      "topic_name": "تکبر",
+      "category": "short",
+      "question_text": "تکبر انسان اور معاشرے کے لیے نقصان دہ کیوں ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "تکبر خود پسندی، دوسروں کی تحقیر، تعلقات میں خرابی اور حق قبول کرنے میں رکاوٹ پیدا کر سکتا ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 4",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "تکبر"
+      ]
+    },
+    {
+      "id": "IX-ISL-U04-S02",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "اخلاق و آداب",
+      "topic_name": "حسد",
+      "category": "short",
+      "question_text": "حسد سے بچنے کے لیے دو عملی طریقے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اپنی نعمتوں پر شکر کرنا، دوسروں کی کامیابی پر خیر خواہی کرنا، مثبت محنت اور دل کی اصلاح کرنا مفید طریقے ہیں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 4",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "حسد"
+      ]
+    },
+    {
+      "id": "IX-ISL-U04-L01",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "اخلاق و آداب",
+      "topic_name": "اخلاق",
+      "category": "long",
+      "question_text": "شکر، قناعت، امانت و دیانت کے مثبت اثرات اور تکبر و حسد کے منفی اثرات کا تقابل کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں ہر مثبت قدر کا فرد و معاشرہ پر اثر، تکبر و حسد کے نقصانات، اور عملی مثالوں کے ذریعے اخلاقی توازن واضح ہونا چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 4",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "اخلاق"
+      ]
+    },
+    {
+      "id": "IX-ISL-U05-M01",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "حسن معاملات و معاشرت",
+      "topic_name": "حقوق العباد",
+      "category": "mcq",
+      "question_text": "حقوق العباد سے مراد کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "لوگوں کے باہمی حقوق اور ذمہ داریاں"
+        },
+        {
+          "id": "B",
+          "text": "صرف کاروباری منافع"
+        },
+        {
+          "id": "C",
+          "text": "صرف عبادت گاہ کا انتظام"
+        },
+        {
+          "id": "D",
+          "text": "صرف سفر کے اصول"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "لوگوں کے باہمی حقوق اور ذمہ داریاں",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 4",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "حقوق العباد"
+      ]
+    },
+    {
+      "id": "IX-ISL-U05-M02",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "حسن معاملات و معاشرت",
+      "topic_name": "گواہی",
+      "category": "mcq",
+      "question_text": "درست گواہی کا بنیادی تقاضا کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "سچائی اور انصاف"
+        },
+        {
+          "id": "B",
+          "text": "جانبداری"
+        },
+        {
+          "id": "C",
+          "text": "ذاتی فائدہ"
+        },
+        {
+          "id": "D",
+          "text": "اندازہ لگانا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "سچائی اور انصاف",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 4",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "گواہی"
+      ]
+    },
+    {
+      "id": "IX-ISL-U05-S01",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "حسن معاملات و معاشرت",
+      "topic_name": "قسم",
+      "category": "short",
+      "question_text": "قسم کے معاملے میں احتیاط کیوں ضروری ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "قسم ایک سنجیدہ ذمہ داری ہے؛ غلط یا جھوٹی قسم اعتماد، اخلاق اور حقوق کو نقصان پہنچا سکتی ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 4",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "قسم"
+      ]
+    },
+    {
+      "id": "IX-ISL-U05-S02",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "حسن معاملات و معاشرت",
+      "topic_name": "معاشرت",
+      "category": "short",
+      "question_text": "حقوق العباد کی ادائیگی سے معاشرے کو کیا فائدہ ہوتا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "اعتماد، انصاف، امن، تعاون اور باہمی احترام بڑھتا ہے اور ظلم و تنازع کم ہو سکتے ہیں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 4",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "معاشرت"
+      ]
+    },
+    {
+      "id": "IX-ISL-U05-L01",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "حسن معاملات و معاشرت",
+      "topic_name": "حسن معاملات",
+      "category": "long",
+      "question_text": "حسن معاملات میں سچائی، گواہی، وعدہ، حقوق العباد اور انصاف کی اہمیت واضح کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں ان اصولوں کی تعریف یا وضاحت، باہمی اعتماد، حقوق کے تحفظ، تنازعات کی کمی اور عملی مثالیں شامل ہوں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 4",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "حسن معاملات"
+      ]
+    },
+    {
+      "id": "IX-ISL-U06-M01",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "ہدایت کے سرچشمے اور مشاہیر اسلام",
+      "topic_name": "مشاہیر اسلام",
+      "category": "mcq",
+      "question_text": "مشاہیر اسلام کے مطالعے کا بہتر مقصد کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ان کی علمی و اخلاقی خدمات سے رہنمائی لینا"
+        },
+        {
+          "id": "B",
+          "text": "صرف نام یاد کرنا"
+        },
+        {
+          "id": "C",
+          "text": "صرف تاریخیں جمع کرنا"
+        },
+        {
+          "id": "D",
+          "text": "صرف نسب نامہ لکھنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ان کی علمی و اخلاقی خدمات سے رہنمائی لینا",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 4",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "مشاہیر اسلام"
+      ]
+    },
+    {
+      "id": "IX-ISL-U06-M02",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "ہدایت کے سرچشمے اور مشاہیر اسلام",
+      "topic_name": "صحابہ و صحابیات",
+      "category": "mcq",
+      "question_text": "صحابہ و صحابیات کی زندگیوں سے بنیادی طور پر کیا حاصل کیا جا سکتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "عملی دینی و اخلاقی نمونے"
+        },
+        {
+          "id": "B",
+          "text": "صرف جغرافیائی معلومات"
+        },
+        {
+          "id": "C",
+          "text": "صرف معاشی اعداد"
+        },
+        {
+          "id": "D",
+          "text": "صرف ادبی اصطلاحات"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "عملی دینی و اخلاقی نمونے",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 4",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "صحابہ و صحابیات"
+      ]
+    },
+    {
+      "id": "IX-ISL-U06-S01",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "ہدایت کے سرچشمے اور مشاہیر اسلام",
+      "topic_name": "علمی خدمت",
+      "category": "short",
+      "question_text": "علماء اور مفکرین کی علمی خدمت معاشرے کے لیے کیوں اہم ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "وہ علم کی حفاظت، تشریح، تعلیم، فکری رہنمائی اور نئے مسائل پر ذمہ دارانہ غور میں کردار ادا کرتے ہیں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 4",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "علمی خدمت"
+      ]
+    },
+    {
+      "id": "IX-ISL-U06-S02",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "ہدایت کے سرچشمے اور مشاہیر اسلام",
+      "topic_name": "صوفیاء کرام",
+      "category": "short",
+      "question_text": "صوفیاء کرام کی دعوتی و اخلاقی خدمات کا ایک پہلو بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "انہوں نے کردار، خدمت، محبت، رواداری اور اصلاحِ نفس کے ذریعے لوگوں تک دینی و اخلاقی پیغام پہنچانے میں کردار ادا کیا۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 4",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "صوفیاء کرام"
+      ]
+    },
+    {
+      "id": "IX-ISL-U06-L01",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "ہدایت کے سرچشمے اور مشاہیر اسلام",
+      "topic_name": "ہدایت کے نمونے",
+      "category": "long",
+      "question_text": "صحابہ، صحابیات، علماء، مفکرین اور صوفیاء کی زندگیوں سے حاصل ہونے والے پانچ عملی اسباق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "ممکنہ نکات: علم دوستی، اخلاص، خدمت، صبر، عدل، تقویٰ، حسنِ اخلاق، دعوت میں حکمت اور معاشرتی بھلائی۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 4",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "ہدایت کے نمونے"
+      ]
+    },
+    {
+      "id": "IX-ISL-U07-M01",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "اسلامی تعلیمات اور عصرِ حاضر کے تقاضے",
+      "topic_name": "خود اعتمادی",
+      "category": "mcq",
+      "question_text": "خود اعتمادی کا متوازن مفہوم کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "صلاحیت پر اعتماد کے ساتھ ذمہ داری اور اللہ پر توکل"
+        },
+        {
+          "id": "B",
+          "text": "تکبر اور دوسروں کی تحقیر"
+        },
+        {
+          "id": "C",
+          "text": "مشورہ نہ لینا"
+        },
+        {
+          "id": "D",
+          "text": "غلطی نہ ماننا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "صلاحیت پر اعتماد کے ساتھ ذمہ داری اور اللہ پر توکل",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 4",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "خود اعتمادی"
+      ]
+    },
+    {
+      "id": "IX-ISL-U07-M02",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "اسلامی تعلیمات اور عصرِ حاضر کے تقاضے",
+      "topic_name": "صحت",
+      "category": "mcq",
+      "question_text": "جسمانی اور ذہنی صحت کے لیے کون سا رویّہ مناسب ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "متوازن غذا، ورزش، آرام اور مثبت عادات"
+        },
+        {
+          "id": "B",
+          "text": "مسلسل بے خوابی"
+        },
+        {
+          "id": "C",
+          "text": "غیر متوازن معمول"
+        },
+        {
+          "id": "D",
+          "text": "صحت کی علامات کو نظر انداز کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "متوازن غذا، ورزش، آرام اور مثبت عادات",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 4",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "صحت"
+      ]
+    },
+    {
+      "id": "IX-ISL-U07-S01",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "اسلامی تعلیمات اور عصرِ حاضر کے تقاضے",
+      "topic_name": "خود انحصاری",
+      "category": "short",
+      "question_text": "خود انحصاری اور تعاون میں توازن کیسے قائم کیا جا سکتا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "انسان اپنی ذمہ داری خود پوری کرے، اپنی صلاحیتیں استعمال کرے اور جہاں ضرورت ہو دوسروں سے مناسب تعاون و مشورہ بھی حاصل کرے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 4",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "خود انحصاری"
+      ]
+    },
+    {
+      "id": "IX-ISL-U07-S02",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "اسلامی تعلیمات اور عصرِ حاضر کے تقاضے",
+      "topic_name": "عصر حاضر",
+      "category": "short",
+      "question_text": "عصر حاضر میں اسلامی اخلاقی اصولوں کی ضرورت کیوں برقرار ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "کیونکہ نئی ٹیکنالوجی اور سماجی تبدیلیوں کے باوجود سچائی، عدل، ذمہ داری، احترام اور امانت جیسے اصول انسانی فیصلوں کی رہنمائی کرتے ہیں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 4",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "عصر حاضر"
+      ]
+    },
+    {
+      "id": "IX-ISL-U07-L01",
+      "class_level": "9th",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "اسلامی تعلیمات اور عصرِ حاضر کے تقاضے",
+      "topic_name": "عصر حاضر کے تقاضے",
+      "category": "long",
+      "question_text": "خود اعتمادی، خود انحصاری، جسمانی و ذہنی صحت اور اخلاقی ذمہ داری کو عصرِ حاضر کی زندگی سے مربوط کر کے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں متوازن خود اعتمادی، محنت و ذمہ داری، صحت مند معمول، ذہنی توازن، اور جدید حالات میں اخلاقی فیصلوں کی ضرورت واضح ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-002 | 8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b | toc-page 4",
+      "tags": [
+        "grade9",
+        "islamiat",
+        "urdu",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "عصر حاضر کے تقاضے"
+      ]
+    }
+  ]
+}

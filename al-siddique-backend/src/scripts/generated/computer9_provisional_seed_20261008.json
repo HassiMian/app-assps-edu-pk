@@ -1,0 +1,2094 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "IX-COMP-U01-M01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Introduction to Systems",
+      "topic_name": "systems",
+      "category": "mcq",
+      "question_text": "A system is best described as?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Interacting components working toward an objective"
+        },
+        {
+          "id": "B",
+          "text": "A single unrelated object only"
+        },
+        {
+          "id": "C",
+          "text": "A random list with no purpose"
+        },
+        {
+          "id": "D",
+          "text": "Only a computer program"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Interacting components working toward an objective",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "systems"
+      ]
+    },
+    {
+      "id": "IX-COMP-U01-M02",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Introduction to Systems",
+      "topic_name": "computer system",
+      "category": "mcq",
+      "question_text": "Which component primarily executes instructions?",
+      "options": [
+        {
+          "id": "A",
+          "text": "CPU"
+        },
+        {
+          "id": "B",
+          "text": "Monitor"
+        },
+        {
+          "id": "C",
+          "text": "Keyboard"
+        },
+        {
+          "id": "D",
+          "text": "Printer"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "CPU",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "computer system"
+      ]
+    },
+    {
+      "id": "IX-COMP-U01-S01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Introduction to Systems",
+      "topic_name": "system components",
+      "category": "short",
+      "question_text": "Differentiate input, processing and output in a computing system.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Input supplies data/instructions, processing transforms them according to rules, and output presents or communicates the result.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "system components"
+      ]
+    },
+    {
+      "id": "IX-COMP-U01-S02",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Introduction to Systems",
+      "topic_name": "von Neumann model",
+      "category": "short",
+      "question_text": "State the basic idea of the stored-program concept.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Instructions and data are stored in memory so the CPU can fetch and execute instructions from memory.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "von Neumann model"
+      ]
+    },
+    {
+      "id": "IX-COMP-U01-L01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Introduction to Systems",
+      "topic_name": "system interaction",
+      "category": "long",
+      "question_text": "Explain how CPU, memory, storage, input and output devices cooperate when a computer performs a task.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for input, memory holding data/instructions, CPU fetch-decode-execute, storage for longer-term data, and output/results.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "system interaction"
+      ]
+    },
+    {
+      "id": "IX-COMP-U02-M01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Number Systems",
+      "topic_name": "binary",
+      "category": "mcq",
+      "question_text": "Which digits are used in binary?",
+      "options": [
+        {
+          "id": "A",
+          "text": "0 and 1"
+        },
+        {
+          "id": "B",
+          "text": "0 to 7"
+        },
+        {
+          "id": "C",
+          "text": "0 to 9"
+        },
+        {
+          "id": "D",
+          "text": "A to F only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "0 and 1",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "binary"
+      ]
+    },
+    {
+      "id": "IX-COMP-U02-M02",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Number Systems",
+      "topic_name": "hexadecimal",
+      "category": "mcq",
+      "question_text": "Hexadecimal uses how many distinct digit symbols?",
+      "options": [
+        {
+          "id": "A",
+          "text": "16"
+        },
+        {
+          "id": "B",
+          "text": "2"
+        },
+        {
+          "id": "C",
+          "text": "8"
+        },
+        {
+          "id": "D",
+          "text": "10"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "16",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "hexadecimal"
+      ]
+    },
+    {
+      "id": "IX-COMP-U02-S01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Number Systems",
+      "topic_name": "place value",
+      "category": "short",
+      "question_text": "Why is place value important in a positional number system?",
+      "options": [],
+      "correct_option": "",
+      "answer": "The value of each digit depends on both the digit itself and its position, which corresponds to a power of the base.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "place value"
+      ]
+    },
+    {
+      "id": "IX-COMP-U02-S02",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Number Systems",
+      "topic_name": "conversion",
+      "category": "short",
+      "question_text": "Convert binary 1010 to decimal.",
+      "options": [],
+      "correct_option": "",
+      "answer": "1×8 + 0×4 + 1×2 + 0×1 = 10.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "conversion"
+      ]
+    },
+    {
+      "id": "IX-COMP-U02-L01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Number Systems",
+      "topic_name": "number systems",
+      "category": "long",
+      "question_text": "Compare decimal, binary, octal and hexadecimal number systems and explain why binary and hexadecimal are useful in computing.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for bases 10,2,8,16, binary matching digital states, hexadecimal compactly representing binary, and a correct conversion example.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "number systems"
+      ]
+    },
+    {
+      "id": "IX-COMP-U03-M01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Digital Systems and Logic Design",
+      "topic_name": "logic gates",
+      "category": "mcq",
+      "question_text": "An AND gate outputs 1 when?",
+      "options": [
+        {
+          "id": "A",
+          "text": "All required inputs are 1"
+        },
+        {
+          "id": "B",
+          "text": "Any one input is 1"
+        },
+        {
+          "id": "C",
+          "text": "All inputs are 0"
+        },
+        {
+          "id": "D",
+          "text": "Input values are ignored"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "All required inputs are 1",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "logic gates"
+      ]
+    },
+    {
+      "id": "IX-COMP-U03-M02",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Digital Systems and Logic Design",
+      "topic_name": "NOT gate",
+      "category": "mcq",
+      "question_text": "A NOT gate does what?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Inverts its input"
+        },
+        {
+          "id": "B",
+          "text": "Adds two inputs"
+        },
+        {
+          "id": "C",
+          "text": "Stores a file"
+        },
+        {
+          "id": "D",
+          "text": "Routes network packets"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Inverts its input",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "NOT gate"
+      ]
+    },
+    {
+      "id": "IX-COMP-U03-S01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Digital Systems and Logic Design",
+      "topic_name": "truth tables",
+      "category": "short",
+      "question_text": "What is the purpose of a truth table?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It lists all possible input combinations for a logic expression or circuit and shows the corresponding output for each combination.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "truth tables"
+      ]
+    },
+    {
+      "id": "IX-COMP-U03-S02",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Digital Systems and Logic Design",
+      "topic_name": "digital systems",
+      "category": "short",
+      "question_text": "Why are binary states suitable for digital electronic systems?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Electronic circuits can reliably represent two distinct states such as low/high voltage, making storage and logic operations robust.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "digital systems"
+      ]
+    },
+    {
+      "id": "IX-COMP-U03-L01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Digital Systems and Logic Design",
+      "topic_name": "logic design",
+      "category": "long",
+      "question_text": "Explain how AND, OR and NOT gates can be combined to represent decision logic.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for correct behavior of each gate, combining outputs as inputs, use of truth tables, a simple original condition, and explaining resulting decision output.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "logic design"
+      ]
+    },
+    {
+      "id": "IX-COMP-U04-M01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "System Troubleshooting",
+      "topic_name": "troubleshooting",
+      "category": "mcq",
+      "question_text": "What should usually be done first when troubleshooting a system problem?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Identify and describe the problem clearly"
+        },
+        {
+          "id": "B",
+          "text": "Replace every component"
+        },
+        {
+          "id": "C",
+          "text": "Delete all data"
+        },
+        {
+          "id": "D",
+          "text": "Ignore symptoms"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Identify and describe the problem clearly",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "troubleshooting"
+      ]
+    },
+    {
+      "id": "IX-COMP-U04-M02",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "System Troubleshooting",
+      "topic_name": "diagnosis",
+      "category": "mcq",
+      "question_text": "A good troubleshooting step should be?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Testable and reversible where possible"
+        },
+        {
+          "id": "B",
+          "text": "Random and undocumented"
+        },
+        {
+          "id": "C",
+          "text": "Destructive by default"
+        },
+        {
+          "id": "D",
+          "text": "Based only on guessing"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Testable and reversible where possible",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "diagnosis"
+      ]
+    },
+    {
+      "id": "IX-COMP-U04-S01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "System Troubleshooting",
+      "topic_name": "troubleshooting process",
+      "category": "short",
+      "question_text": "Why is it useful to change one variable at a time during troubleshooting?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It helps isolate cause and effect so the source of the problem can be identified more reliably.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "troubleshooting process"
+      ]
+    },
+    {
+      "id": "IX-COMP-U04-S02",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "System Troubleshooting",
+      "topic_name": "documentation",
+      "category": "short",
+      "question_text": "Why should troubleshooting actions and results be documented?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Documentation prevents repeated work, records what changed, supports rollback and helps others understand the diagnosis.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "documentation"
+      ]
+    },
+    {
+      "id": "IX-COMP-U04-L01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "System Troubleshooting",
+      "topic_name": "safe troubleshooting",
+      "category": "long",
+      "question_text": "Describe a safe troubleshooting workflow for a computer that does not start normally.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for observing symptoms, checking power/connections, using non-destructive diagnostics, isolating one cause at a time, and documenting/restoring changes while protecting user data.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "safe troubleshooting"
+      ]
+    },
+    {
+      "id": "IX-COMP-U05-M01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Software System",
+      "topic_name": "software types",
+      "category": "mcq",
+      "question_text": "Which is system software?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Operating system"
+        },
+        {
+          "id": "B",
+          "text": "Word-processing document"
+        },
+        {
+          "id": "C",
+          "text": "Photo file"
+        },
+        {
+          "id": "D",
+          "text": "Presentation slide"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Operating system",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "software types"
+      ]
+    },
+    {
+      "id": "IX-COMP-U05-M02",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Software System",
+      "topic_name": "operating system",
+      "category": "mcq",
+      "question_text": "An operating system primarily manages?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Hardware resources and software services"
+        },
+        {
+          "id": "B",
+          "text": "Only printed pages"
+        },
+        {
+          "id": "C",
+          "text": "Only web colours"
+        },
+        {
+          "id": "D",
+          "text": "Only passwords"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Hardware resources and software services",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "operating system"
+      ]
+    },
+    {
+      "id": "IX-COMP-U05-S01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Software System",
+      "topic_name": "system vs application",
+      "category": "short",
+      "question_text": "Differentiate system software and application software.",
+      "options": [],
+      "correct_option": "",
+      "answer": "System software manages hardware and provides a platform; application software helps users perform specific tasks.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "system vs application"
+      ]
+    },
+    {
+      "id": "IX-COMP-U05-S02",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Software System",
+      "topic_name": "files and processes",
+      "category": "short",
+      "question_text": "State one role of an operating system in file management and one in process management.",
+      "options": [],
+      "correct_option": "",
+      "answer": "It organizes/accesses stored files and allocates CPU/resources among running processes.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "files and processes"
+      ]
+    },
+    {
+      "id": "IX-COMP-U05-L01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Software System",
+      "topic_name": "software system",
+      "category": "long",
+      "question_text": "Explain five important functions of an operating system.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Possible marks: user interface, process/CPU management, memory management, file/storage management, device management, security/access control; any five with explanation.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "software system"
+      ]
+    },
+    {
+      "id": "IX-COMP-U06-M01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Introduction to Computer Networks",
+      "topic_name": "networks",
+      "category": "mcq",
+      "question_text": "A LAN typically covers?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A limited local area such as a school or office"
+        },
+        {
+          "id": "B",
+          "text": "The entire world only"
+        },
+        {
+          "id": "C",
+          "text": "One CPU register"
+        },
+        {
+          "id": "D",
+          "text": "A single file"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "A limited local area such as a school or office",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "networks"
+      ]
+    },
+    {
+      "id": "IX-COMP-U06-M02",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Introduction to Computer Networks",
+      "topic_name": "network devices",
+      "category": "mcq",
+      "question_text": "Which device commonly forwards data between different networks?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Router"
+        },
+        {
+          "id": "B",
+          "text": "Keyboard"
+        },
+        {
+          "id": "C",
+          "text": "Scanner"
+        },
+        {
+          "id": "D",
+          "text": "Speaker"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Router",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "network devices"
+      ]
+    },
+    {
+      "id": "IX-COMP-U06-S01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Introduction to Computer Networks",
+      "topic_name": "network benefits",
+      "category": "short",
+      "question_text": "State two benefits of computer networks.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Examples include sharing resources, communication, centralized services, collaborative work and shared internet access; any two.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "network benefits"
+      ]
+    },
+    {
+      "id": "IX-COMP-U06-S02",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Introduction to Computer Networks",
+      "topic_name": "internet",
+      "category": "short",
+      "question_text": "Differentiate a local network and the Internet.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A local network connects devices within a limited organization/location; the Internet is a global network of interconnected networks.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "internet"
+      ]
+    },
+    {
+      "id": "IX-COMP-U06-L01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Introduction to Computer Networks",
+      "topic_name": "network design",
+      "category": "long",
+      "question_text": "Describe the main components and considerations for a small school network.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for end devices, switches/access points, router/internet gateway, addressing/connectivity, and security/reliability/resource-sharing considerations.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "network design"
+      ]
+    },
+    {
+      "id": "IX-COMP-U07-M01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Computational Thinking",
+      "topic_name": "decomposition",
+      "category": "mcq",
+      "question_text": "Breaking a large problem into smaller parts is called?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Decomposition"
+        },
+        {
+          "id": "B",
+          "text": "Encryption"
+        },
+        {
+          "id": "C",
+          "text": "Compression"
+        },
+        {
+          "id": "D",
+          "text": "Rendering"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Decomposition",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "decomposition"
+      ]
+    },
+    {
+      "id": "IX-COMP-U07-M02",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Computational Thinking",
+      "topic_name": "algorithm",
+      "category": "mcq",
+      "question_text": "An algorithm is?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A finite ordered set of steps for solving a problem"
+        },
+        {
+          "id": "B",
+          "text": "A hardware port"
+        },
+        {
+          "id": "C",
+          "text": "A network cable"
+        },
+        {
+          "id": "D",
+          "text": "A file extension"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "A finite ordered set of steps for solving a problem",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "algorithm"
+      ]
+    },
+    {
+      "id": "IX-COMP-U07-S01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Computational Thinking",
+      "topic_name": "abstraction",
+      "category": "short",
+      "question_text": "What is abstraction in computational thinking?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Focusing on relevant features of a problem while hiding or ignoring unnecessary detail.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "abstraction"
+      ]
+    },
+    {
+      "id": "IX-COMP-U07-S02",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Computational Thinking",
+      "topic_name": "pattern recognition",
+      "category": "short",
+      "question_text": "How does pattern recognition help problem solving?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Recognizing similarities lets a solver reuse strategies, generalize solutions and reduce repeated work.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "pattern recognition"
+      ]
+    },
+    {
+      "id": "IX-COMP-U07-L01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Computational Thinking",
+      "topic_name": "computational thinking",
+      "category": "long",
+      "question_text": "Apply decomposition, pattern recognition, abstraction and algorithm design to planning a school attendance program.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for decomposing tasks, identifying repeated data/actions, selecting essential data fields, defining an ordered attendance workflow, and explaining testing/refinement.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "computational thinking"
+      ]
+    },
+    {
+      "id": "IX-COMP-U08-M01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Web Development with HTML, CSS and JavaScript",
+      "topic_name": "HTML",
+      "category": "mcq",
+      "question_text": "HTML is mainly used to define?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Structure and content of a web page"
+        },
+        {
+          "id": "B",
+          "text": "Only network routing"
+        },
+        {
+          "id": "C",
+          "text": "Only database passwords"
+        },
+        {
+          "id": "D",
+          "text": "CPU instructions"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Structure and content of a web page",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "HTML"
+      ]
+    },
+    {
+      "id": "IX-COMP-U08-M02",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Web Development with HTML, CSS and JavaScript",
+      "topic_name": "CSS",
+      "category": "mcq",
+      "question_text": "CSS is mainly used for?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Presentation and styling of web content"
+        },
+        {
+          "id": "B",
+          "text": "Replacing the operating system"
+        },
+        {
+          "id": "C",
+          "text": "Converting decimal to binary"
+        },
+        {
+          "id": "D",
+          "text": "Managing CPU registers"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Presentation and styling of web content",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "CSS"
+      ]
+    },
+    {
+      "id": "IX-COMP-U08-S01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Web Development with HTML, CSS and JavaScript",
+      "topic_name": "JavaScript",
+      "category": "short",
+      "question_text": "What role can JavaScript play on a web page?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It can add client-side behavior and interactivity, such as responding to user actions and updating page content.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "JavaScript"
+      ]
+    },
+    {
+      "id": "IX-COMP-U08-S02",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Web Development with HTML, CSS and JavaScript",
+      "topic_name": "web separation",
+      "category": "short",
+      "question_text": "Why is separating HTML structure, CSS style and JavaScript behavior useful?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It improves organization, maintainability, reuse and clarity because each technology has a distinct responsibility.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "web separation"
+      ]
+    },
+    {
+      "id": "IX-COMP-U08-L01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Web Development with HTML, CSS and JavaScript",
+      "topic_name": "web development",
+      "category": "long",
+      "question_text": "Describe how HTML, CSS and JavaScript cooperate to create a simple interactive school information page.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for HTML structure, CSS presentation, JavaScript interaction, linking the files correctly, and testing accessibility/usability without copying textbook code.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "web development"
+      ]
+    },
+    {
+      "id": "IX-COMP-U09-M01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Data Science and Data Gathering",
+      "topic_name": "data",
+      "category": "mcq",
+      "question_text": "Data becomes information when it is?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Processed and interpreted meaningfully"
+        },
+        {
+          "id": "B",
+          "text": "Deleted"
+        },
+        {
+          "id": "C",
+          "text": "Disconnected from context"
+        },
+        {
+          "id": "D",
+          "text": "Randomized without purpose"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Processed and interpreted meaningfully",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "data"
+      ]
+    },
+    {
+      "id": "IX-COMP-U09-M02",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Data Science and Data Gathering",
+      "topic_name": "data collection",
+      "category": "mcq",
+      "question_text": "Which is a primary data-collection method?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Conducting a survey directly"
+        },
+        {
+          "id": "B",
+          "text": "Copying an unrelated old chart"
+        },
+        {
+          "id": "C",
+          "text": "Guessing values"
+        },
+        {
+          "id": "D",
+          "text": "Ignoring observations"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Conducting a survey directly",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "data collection"
+      ]
+    },
+    {
+      "id": "IX-COMP-U09-S01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Data Science and Data Gathering",
+      "topic_name": "data quality",
+      "category": "short",
+      "question_text": "State two characteristics of good-quality data.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Accuracy, completeness, relevance, consistency and timeliness are examples; any two.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "data quality"
+      ]
+    },
+    {
+      "id": "IX-COMP-U09-S02",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Data Science and Data Gathering",
+      "topic_name": "bias",
+      "category": "short",
+      "question_text": "What is sampling bias?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It occurs when the selected sample systematically fails to represent the target population, leading to distorted conclusions.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "bias"
+      ]
+    },
+    {
+      "id": "IX-COMP-U09-L01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Data Science and Data Gathering",
+      "topic_name": "data project",
+      "category": "long",
+      "question_text": "Outline a responsible data-gathering project to study students’ preferred library hours.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for clear question, target population/sample, unbiased collection method, privacy/minimal data, analysis/visualization, and cautious interpretation.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "data project"
+      ]
+    },
+    {
+      "id": "IX-COMP-U10-M01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Emerging Technologies in Computer Science",
+      "topic_name": "emerging technologies",
+      "category": "mcq",
+      "question_text": "Artificial intelligence broadly refers to computer systems designed to perform tasks involving?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Learning, reasoning or pattern-based decision support"
+        },
+        {
+          "id": "B",
+          "text": "Only printing"
+        },
+        {
+          "id": "C",
+          "text": "Only electricity generation"
+        },
+        {
+          "id": "D",
+          "text": "Only file naming"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Learning, reasoning or pattern-based decision support",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "emerging technologies"
+      ]
+    },
+    {
+      "id": "IX-COMP-U10-M02",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Emerging Technologies in Computer Science",
+      "topic_name": "cloud computing",
+      "category": "mcq",
+      "question_text": "Cloud computing commonly provides?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Computing resources/services over networks on demand"
+        },
+        {
+          "id": "B",
+          "text": "Only local paper storage"
+        },
+        {
+          "id": "C",
+          "text": "Only offline calculators"
+        },
+        {
+          "id": "D",
+          "text": "Only physical keyboards"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Computing resources/services over networks on demand",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "cloud computing"
+      ]
+    },
+    {
+      "id": "IX-COMP-U10-S01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Emerging Technologies in Computer Science",
+      "topic_name": "IoT",
+      "category": "short",
+      "question_text": "What is the Internet of Things (IoT)?",
+      "options": [],
+      "correct_option": "",
+      "answer": "A network of physical devices with sensors/software/connectivity that can collect, exchange or act on data.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "IoT"
+      ]
+    },
+    {
+      "id": "IX-COMP-U10-S02",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Emerging Technologies in Computer Science",
+      "topic_name": "technology evaluation",
+      "category": "short",
+      "question_text": "Why should emerging technologies be evaluated for benefits and risks?",
+      "options": [],
+      "correct_option": "",
+      "answer": "New technologies can improve efficiency and capability but may also create privacy, security, fairness, environmental or social concerns.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "technology evaluation"
+      ]
+    },
+    {
+      "id": "IX-COMP-U10-L01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Emerging Technologies in Computer Science",
+      "topic_name": "emerging technology",
+      "category": "long",
+      "question_text": "Compare AI, cloud computing and IoT in terms of purpose, one application and one responsible-use concern for each.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for accurate purpose of each technology, applications, and concerns such as privacy, reliability, fairness, security or dependence on connectivity.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "emerging technology"
+      ]
+    },
+    {
+      "id": "IX-COMP-U11-M01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Ethical, Social, and Legal Concerns in Computer Usage",
+      "topic_name": "digital ethics",
+      "category": "mcq",
+      "question_text": "Which action best respects digital privacy?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Collecting only necessary personal data with appropriate permission"
+        },
+        {
+          "id": "B",
+          "text": "Sharing private data publicly without consent"
+        },
+        {
+          "id": "C",
+          "text": "Using someone else’s password"
+        },
+        {
+          "id": "D",
+          "text": "Publishing confidential records"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Collecting only necessary personal data with appropriate permission",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "digital ethics"
+      ]
+    },
+    {
+      "id": "IX-COMP-U11-M02",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Ethical, Social, and Legal Concerns in Computer Usage",
+      "topic_name": "copyright",
+      "category": "mcq",
+      "question_text": "Copyright mainly protects?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Original creative works and their authorized use"
+        },
+        {
+          "id": "B",
+          "text": "Any random fact forever"
+        },
+        {
+          "id": "C",
+          "text": "Only computer hardware"
+        },
+        {
+          "id": "D",
+          "text": "Only passwords"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Original creative works and their authorized use",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "copyright"
+      ]
+    },
+    {
+      "id": "IX-COMP-U11-S01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Ethical, Social, and Legal Concerns in Computer Usage",
+      "topic_name": "digital citizenship",
+      "category": "short",
+      "question_text": "What is responsible digital citizenship?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Using digital technologies safely, ethically and respectfully while considering privacy, security, law and the wellbeing of others.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "digital citizenship"
+      ]
+    },
+    {
+      "id": "IX-COMP-U11-S02",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Ethical, Social, and Legal Concerns in Computer Usage",
+      "topic_name": "plagiarism",
+      "category": "short",
+      "question_text": "What is plagiarism?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Presenting another person’s words, ideas or work as one’s own without proper acknowledgement.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "plagiarism"
+      ]
+    },
+    {
+      "id": "IX-COMP-U11-L01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Ethical, Social, and Legal Concerns in Computer Usage",
+      "topic_name": "ethical computing",
+      "category": "long",
+      "question_text": "Explain how privacy, copyright, respectful communication, data security and accessibility contribute to ethical computer use.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award one mark for each area with a clear responsible-use principle or example.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "ethical computing"
+      ]
+    },
+    {
+      "id": "IX-COMP-U12-M01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "Entrepreneurship in Digital Age",
+      "topic_name": "digital entrepreneurship",
+      "category": "mcq",
+      "question_text": "A value proposition explains?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Why a product or service is useful to a target customer"
+        },
+        {
+          "id": "B",
+          "text": "Only its file size"
+        },
+        {
+          "id": "C",
+          "text": "Only its colour"
+        },
+        {
+          "id": "D",
+          "text": "Only its password"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Why a product or service is useful to a target customer",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "digital entrepreneurship"
+      ]
+    },
+    {
+      "id": "IX-COMP-U12-M02",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "Entrepreneurship in Digital Age",
+      "topic_name": "business planning",
+      "category": "mcq",
+      "question_text": "Market research helps an entrepreneur understand?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Customer needs and competing solutions"
+        },
+        {
+          "id": "B",
+          "text": "Only CPU temperature"
+        },
+        {
+          "id": "C",
+          "text": "Only binary arithmetic"
+        },
+        {
+          "id": "D",
+          "text": "Only screen resolution"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Customer needs and competing solutions",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "business planning"
+      ]
+    },
+    {
+      "id": "IX-COMP-U12-S01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "Entrepreneurship in Digital Age",
+      "topic_name": "digital product",
+      "category": "short",
+      "question_text": "Give one example of a responsible digital product or service a student team could design.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Examples include a school event planner, study-reminder tool, local information site or simple educational app that respects privacy and school rules.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "digital product"
+      ]
+    },
+    {
+      "id": "IX-COMP-U12-S02",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "Entrepreneurship in Digital Age",
+      "topic_name": "cost and revenue",
+      "category": "short",
+      "question_text": "Differentiate cost and revenue.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Cost is money/resources spent to create and operate a product or service; revenue is money earned from sales or service delivery.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "cost and revenue"
+      ]
+    },
+    {
+      "id": "IX-COMP-U12-L01",
+      "class_level": "9th",
+      "subject": "Computer",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "Entrepreneurship in Digital Age",
+      "topic_name": "entrepreneurship",
+      "category": "long",
+      "question_text": "Outline a simple plan for a small digital service from problem identification to responsible launch.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for identifying a real need, defining target users/value proposition, planning features/resources/costs, testing with feedback, and responsible launch including privacy/legal considerations.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-013 | 29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb | toc-page 2",
+      "tags": [
+        "grade9",
+        "computer",
+        "english",
+        "2025-26",
+        "internal-provisional",
+        "original-draft",
+        "entrepreneurship"
+      ]
+    }
+  ]
+}

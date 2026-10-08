@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "assps-islamiyat9-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-002",
+  "sourcePdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+  "sourceByteLength": 25011563,
+  "pageCount": 170,
+  "identity": [
+    "Islamiyat 2025-26",
+    "Grade IX",
+    "Urdu",
+    "PECTAA/PCTB"
+  ],
+  "units": [
+    {
+      "number": 1,
+      "title": "قرآن مجید اور حدیث نبوی ﷺ",
+      "tocEvidencePages": [
+        3,
+        4
+      ],
+      "status": "THEME_LEVEL_VERIFIED_FROM_RENDERED_TOC_OCR"
+    },
+    {
+      "number": 2,
+      "title": "ایمانیات اور عبادات",
+      "tocEvidencePages": [
+        3,
+        4
+      ],
+      "status": "THEME_LEVEL_VERIFIED_FROM_RENDERED_TOC_OCR"
+    },
+    {
+      "number": 3,
+      "title": "سیرت النبی ﷺ",
+      "tocEvidencePages": [
+        3,
+        4
+      ],
+      "status": "THEME_LEVEL_VERIFIED_FROM_RENDERED_TOC_OCR"
+    },
+    {
+      "number": 4,
+      "title": "اخلاق و آداب",
+      "tocEvidencePages": [
+        3,
+        4
+      ],
+      "status": "THEME_LEVEL_VERIFIED_FROM_RENDERED_TOC_OCR"
+    },
+    {
+      "number": 5,
+      "title": "حسن معاملات و معاشرت",
+      "tocEvidencePages": [
+        3,
+        4
+      ],
+      "status": "THEME_LEVEL_VERIFIED_FROM_RENDERED_TOC_OCR"
+    },
+    {
+      "number": 6,
+      "title": "ہدایت کے سرچشمے اور مشاہیر اسلام",
+      "tocEvidencePages": [
+        3,
+        4
+      ],
+      "status": "THEME_LEVEL_VERIFIED_FROM_RENDERED_TOC_OCR"
+    },
+    {
+      "number": 7,
+      "title": "اسلامی تعلیمات اور عصرِ حاضر کے تقاضے",
+      "tocEvidencePages": [
+        3,
+        4
+      ],
+      "status": "THEME_LEVEL_VERIFIED_FROM_RENDERED_TOC_OCR"
+    }
+  ],
+  "contentMapStatus": "THEME_LEVEL_VERIFIED_PAGE_LEVEL_PENDING",
+  "crossCheckNote": "Current scan hash matches official catalogue asset; rendered TOC/OCR and independent structure cross-check agree on the seven thematic units. Exact lesson-level page mapping remains pending.",
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyQuranOrHadithPassages": false,
+    "copyTextbookPassages": false,
+    "copyPastPaperStems": false,
+    "exactLessonPageMapPending": true
+  }
+}

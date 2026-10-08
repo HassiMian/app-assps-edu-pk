@@ -1,0 +1,2630 @@
+{
+  "schemaVersion": "assps-islamiyat9-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-002",
+  "sourcePdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+  "scope": "CURRENT_TEXTBOOK_THEME_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "IX-ISL-U01-M01",
+      "chapter": {
+        "id": "IX-ISL-2025-U01",
+        "number": 1
+      },
+      "topicId": "تدوین قرآن",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "قرآن مجید اور حدیث نبوی ﷺ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "قرآن مجید کی حفاظت کے لیے تدوین اور کتابت کی اہمیت کیا ہے؟",
+          "answer": "متن کی محفوظ اور منظم ترسیل",
+          "options": [
+            {
+              "id": "A",
+              "text": "متن کی محفوظ اور منظم ترسیل"
+            },
+            {
+              "id": "B",
+              "text": "صرف خطاطی کی مشق"
+            },
+            {
+              "id": "C",
+              "text": "صرف تاریخی نام یاد کرنا"
+            },
+            {
+              "id": "D",
+              "text": "ترجمہ کو ختم کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ISL-U01-M02",
+      "chapter": {
+        "id": "IX-ISL-2025-U01",
+        "number": 1
+      },
+      "topicId": "حدیث کی اقسام",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "قرآن مجید اور حدیث نبوی ﷺ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "حدیثِ قولی سے مراد کیا ہے؟",
+          "answer": "نبی کریم ﷺ کے ارشادات",
+          "options": [
+            {
+              "id": "A",
+              "text": "نبی کریم ﷺ کے ارشادات"
+            },
+            {
+              "id": "B",
+              "text": "صرف صحابہ کے اقوال"
+            },
+            {
+              "id": "C",
+              "text": "صرف تاریخی واقعات"
+            },
+            {
+              "id": "D",
+              "text": "فقہی کتابوں کے ابواب"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ISL-U01-S01",
+      "chapter": {
+        "id": "IX-ISL-2025-U01",
+        "number": 1
+      },
+      "topicId": "حفاظت قرآن",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "قرآن مجید اور حدیث نبوی ﷺ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "قرآن مجید کی حفاظت میں جمع و تدوین کا بنیادی مقصد بیان کریں۔",
+          "answer": "بنیادی مقصد قرآنی متن کو معتبر طریقے سے محفوظ کرنا، درست قراءت و کتابت کو برقرار رکھنا اور امت تک صحیح صورت میں منتقل کرنا تھا۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ISL-U01-S02",
+      "chapter": {
+        "id": "IX-ISL-2025-U01",
+        "number": 1
+      },
+      "topicId": "حدیث کی اہمیت",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "قرآن مجید اور حدیث نبوی ﷺ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "اسلامی تعلیمات کو سمجھنے میں حدیث کی اہمیت کیوں ہے؟",
+          "answer": "حدیث نبی کریم ﷺ کی تعلیمات، عملی رہنمائی اور قرآن مجید کے احکام کی وضاحت کو سمجھنے میں مدد دیتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ISL-U01-L01",
+      "chapter": {
+        "id": "IX-ISL-2025-U01",
+        "number": 1
+      },
+      "topicId": "قرآن و حدیث",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "قرآن مجید اور حدیث نبوی ﷺ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "قرآن مجید اور حدیث نبوی ﷺ کو اسلامی رہنمائی کے بنیادی سرچشموں کے طور پر واضح کریں۔",
+          "answer": "جواب میں قرآن مجید کی بنیادی حیثیت، حدیث کی تشریحی و عملی رہنمائی، دونوں کے باہمی تعلق، معتبر نقل و حفاظت، اور روزمرہ زندگی میں رہنمائی کا ذکر ہونا چاہیے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ISL-U02-M01",
+      "chapter": {
+        "id": "IX-ISL-2025-U02",
+        "number": 2
+      },
+      "topicId": "توحید",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ایمانیات اور عبادات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "عقیدۂ توحید کا بنیادی مفہوم کیا ہے؟",
+          "answer": "اللہ تعالیٰ کی وحدانیت پر ایمان",
+          "options": [
+            {
+              "id": "A",
+              "text": "اللہ تعالیٰ کی وحدانیت پر ایمان"
+            },
+            {
+              "id": "B",
+              "text": "صرف تاریخی علم"
+            },
+            {
+              "id": "C",
+              "text": "صرف معاشی اصول"
+            },
+            {
+              "id": "D",
+              "text": "صرف اخلاقی رسم"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ISL-U02-M02",
+      "chapter": {
+        "id": "IX-ISL-2025-U02",
+        "number": 2
+      },
+      "topicId": "عبادت",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ایمانیات اور عبادات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "زکوٰۃ کا ایک اہم معاشرتی مقصد کیا ہے؟",
+          "answer": "ضرورت مندوں کی مدد اور معاشرتی توازن",
+          "options": [
+            {
+              "id": "A",
+              "text": "ضرورت مندوں کی مدد اور معاشرتی توازن"
+            },
+            {
+              "id": "B",
+              "text": "صرف تجارت بڑھانا"
+            },
+            {
+              "id": "C",
+              "text": "صرف سفر آسان کرنا"
+            },
+            {
+              "id": "D",
+              "text": "صرف زمین ناپنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ISL-U02-S01",
+      "chapter": {
+        "id": "IX-ISL-2025-U02",
+        "number": 2
+      },
+      "topicId": "ایمانیات",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ایمانیات اور عبادات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "ایمان بالآخرت انسان کے رویّے پر کس طرح اثر انداز ہو سکتا ہے؟",
+          "answer": "یہ احساسِ جواب دہی، نیکی کی رغبت، برائی سے اجتناب اور ذمہ دارانہ طرزِ عمل پیدا کر سکتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ISL-U02-S02",
+      "chapter": {
+        "id": "IX-ISL-2025-U02",
+        "number": 2
+      },
+      "topicId": "عبادات",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ایمانیات اور عبادات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "نماز کی انفرادی اور اجتماعی اہمیت میں ایک ایک نکتہ بیان کریں۔",
+          "answer": "انفرادی طور پر نماز اللہ تعالیٰ سے تعلق اور نظم پیدا کرتی ہے؛ اجتماعی طور پر باہمی مساوات، نظم اور امت کے احساس کو مضبوط کرتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ISL-U02-L01",
+      "chapter": {
+        "id": "IX-ISL-2025-U02",
+        "number": 2
+      },
+      "topicId": "ایمان و عبادت",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ایمانیات اور عبادات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "واضح کریں کہ ایمان اور عبادات انسان کی شخصیت اور معاشرتی زندگی کی اصلاح میں کس طرح مدد دیتی ہیں۔",
+          "answer": "جواب میں عقائد سے ذمہ داری و مقصد، نماز سے نظم، زکوٰۃ سے سماجی تعاون، اللہ سے تعلق، اور اخلاقی و معاشرتی اثرات شامل ہوں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ISL-U03-M01",
+      "chapter": {
+        "id": "IX-ISL-2025-U03",
+        "number": 3
+      },
+      "topicId": "فتح مکہ",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سیرت النبی ﷺ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "فتح مکہ کے موقع پر عام معافی کا رویّہ کس قدر کو نمایاں کرتا ہے؟",
+          "answer": "رحمت اور درگزر",
+          "options": [
+            {
+              "id": "A",
+              "text": "رحمت اور درگزر"
+            },
+            {
+              "id": "B",
+              "text": "انتقام"
+            },
+            {
+              "id": "C",
+              "text": "تکبر"
+            },
+            {
+              "id": "D",
+              "text": "بدعہدی"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ISL-U03-M02",
+      "chapter": {
+        "id": "IX-ISL-2025-U03",
+        "number": 3
+      },
+      "topicId": "سیرت",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سیرت النبی ﷺ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سیرت النبی ﷺ کے مطالعے کا بنیادی مقصد کیا ہونا چاہیے؟",
+          "answer": "عملی اخلاقی رہنمائی حاصل کرنا",
+          "options": [
+            {
+              "id": "A",
+              "text": "عملی اخلاقی رہنمائی حاصل کرنا"
+            },
+            {
+              "id": "B",
+              "text": "صرف نام یاد کرنا"
+            },
+            {
+              "id": "C",
+              "text": "صرف تاریخیں گننا"
+            },
+            {
+              "id": "D",
+              "text": "صرف جغرافیہ پڑھنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ISL-U03-S01",
+      "chapter": {
+        "id": "IX-ISL-2025-U03",
+        "number": 3
+      },
+      "topicId": "فتح مکہ",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سیرت النبی ﷺ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "فتح مکہ سے عفو و درگزر کے بارے میں کیا سبق ملتا ہے؟",
+          "answer": "قدرت حاصل ہونے کے باوجود معافی، رحمت، امن اور اصلاح کو ترجیح دینا اعلیٰ اخلاقی طرزِ عمل ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ISL-U03-S02",
+      "chapter": {
+        "id": "IX-ISL-2025-U03",
+        "number": 3
+      },
+      "topicId": "عام الوفود",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سیرت النبی ﷺ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "عام الوفود کی اہمیت مختصراً بیان کریں۔",
+          "answer": "یہ دور مختلف قبائل اور وفود کے مدینہ آ کر اسلام اور اسلامی ریاست سے تعلق قائم کرنے کی علامت بنا، جس سے عرب میں اسلام کی قبولیت اور نظم مضبوط ہوا۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ISL-U03-L01",
+      "chapter": {
+        "id": "IX-ISL-2025-U03",
+        "number": 3
+      },
+      "topicId": "سیرت کے اسباق",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سیرت النبی ﷺ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سیرت النبی ﷺ سے قیادت، عدل، رحمت، عہد کی پابندی اور معاشرتی اصلاح کے اسباق بیان کریں۔",
+          "answer": "جواب میں کم از کم پانچ پہلو واضح ہوں: عدل، رحم، مشاورت یا حکمت، وعدہ و عہد کی پابندی، کمزور طبقات کا خیال اور اصلاحِ معاشرہ۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ISL-U04-M01",
+      "chapter": {
+        "id": "IX-ISL-2025-U04",
+        "number": 4
+      },
+      "topicId": "شکر",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "اخلاق و آداب"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "شکر کا عملی اظہار کیا ہو سکتا ہے؟",
+          "answer": "نعمت کا درست استعمال اور اللہ کا اعتراف",
+          "options": [
+            {
+              "id": "A",
+              "text": "نعمت کا درست استعمال اور اللہ کا اعتراف"
+            },
+            {
+              "id": "B",
+              "text": "نعمت ضائع کرنا"
+            },
+            {
+              "id": "C",
+              "text": "تکبر کرنا"
+            },
+            {
+              "id": "D",
+              "text": "دوسروں کو حقیر سمجھنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ISL-U04-M02",
+      "chapter": {
+        "id": "IX-ISL-2025-U04",
+        "number": 4
+      },
+      "topicId": "امانت",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "اخلاق و آداب"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "امانت و دیانت کا تقاضا کیا ہے؟",
+          "answer": "حق دار کا حق محفوظ رکھنا",
+          "options": [
+            {
+              "id": "A",
+              "text": "حق دار کا حق محفوظ رکھنا"
+            },
+            {
+              "id": "B",
+              "text": "جھوٹ سے فائدہ اٹھانا"
+            },
+            {
+              "id": "C",
+              "text": "وعدہ توڑنا"
+            },
+            {
+              "id": "D",
+              "text": "ذمہ داری سے بچنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ISL-U04-S01",
+      "chapter": {
+        "id": "IX-ISL-2025-U04",
+        "number": 4
+      },
+      "topicId": "تکبر",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "اخلاق و آداب"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "تکبر انسان اور معاشرے کے لیے نقصان دہ کیوں ہے؟",
+          "answer": "تکبر خود پسندی، دوسروں کی تحقیر، تعلقات میں خرابی اور حق قبول کرنے میں رکاوٹ پیدا کر سکتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ISL-U04-S02",
+      "chapter": {
+        "id": "IX-ISL-2025-U04",
+        "number": 4
+      },
+      "topicId": "حسد",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "اخلاق و آداب"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "حسد سے بچنے کے لیے دو عملی طریقے بیان کریں۔",
+          "answer": "اپنی نعمتوں پر شکر کرنا، دوسروں کی کامیابی پر خیر خواہی کرنا، مثبت محنت اور دل کی اصلاح کرنا مفید طریقے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ISL-U04-L01",
+      "chapter": {
+        "id": "IX-ISL-2025-U04",
+        "number": 4
+      },
+      "topicId": "اخلاق",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "اخلاق و آداب"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "شکر، قناعت، امانت و دیانت کے مثبت اثرات اور تکبر و حسد کے منفی اثرات کا تقابل کریں۔",
+          "answer": "جواب میں ہر مثبت قدر کا فرد و معاشرہ پر اثر، تکبر و حسد کے نقصانات، اور عملی مثالوں کے ذریعے اخلاقی توازن واضح ہونا چاہیے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ISL-U05-M01",
+      "chapter": {
+        "id": "IX-ISL-2025-U05",
+        "number": 5
+      },
+      "topicId": "حقوق العباد",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "حسن معاملات و معاشرت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "حقوق العباد سے مراد کیا ہے؟",
+          "answer": "لوگوں کے باہمی حقوق اور ذمہ داریاں",
+          "options": [
+            {
+              "id": "A",
+              "text": "لوگوں کے باہمی حقوق اور ذمہ داریاں"
+            },
+            {
+              "id": "B",
+              "text": "صرف کاروباری منافع"
+            },
+            {
+              "id": "C",
+              "text": "صرف عبادت گاہ کا انتظام"
+            },
+            {
+              "id": "D",
+              "text": "صرف سفر کے اصول"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ISL-U05-M02",
+      "chapter": {
+        "id": "IX-ISL-2025-U05",
+        "number": 5
+      },
+      "topicId": "گواہی",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "حسن معاملات و معاشرت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "درست گواہی کا بنیادی تقاضا کیا ہے؟",
+          "answer": "سچائی اور انصاف",
+          "options": [
+            {
+              "id": "A",
+              "text": "سچائی اور انصاف"
+            },
+            {
+              "id": "B",
+              "text": "جانبداری"
+            },
+            {
+              "id": "C",
+              "text": "ذاتی فائدہ"
+            },
+            {
+              "id": "D",
+              "text": "اندازہ لگانا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ISL-U05-S01",
+      "chapter": {
+        "id": "IX-ISL-2025-U05",
+        "number": 5
+      },
+      "topicId": "قسم",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "حسن معاملات و معاشرت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "قسم کے معاملے میں احتیاط کیوں ضروری ہے؟",
+          "answer": "قسم ایک سنجیدہ ذمہ داری ہے؛ غلط یا جھوٹی قسم اعتماد، اخلاق اور حقوق کو نقصان پہنچا سکتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ISL-U05-S02",
+      "chapter": {
+        "id": "IX-ISL-2025-U05",
+        "number": 5
+      },
+      "topicId": "معاشرت",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "حسن معاملات و معاشرت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "حقوق العباد کی ادائیگی سے معاشرے کو کیا فائدہ ہوتا ہے؟",
+          "answer": "اعتماد، انصاف، امن، تعاون اور باہمی احترام بڑھتا ہے اور ظلم و تنازع کم ہو سکتے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ISL-U05-L01",
+      "chapter": {
+        "id": "IX-ISL-2025-U05",
+        "number": 5
+      },
+      "topicId": "حسن معاملات",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "حسن معاملات و معاشرت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "حسن معاملات میں سچائی، گواہی، وعدہ، حقوق العباد اور انصاف کی اہمیت واضح کریں۔",
+          "answer": "جواب میں ان اصولوں کی تعریف یا وضاحت، باہمی اعتماد، حقوق کے تحفظ، تنازعات کی کمی اور عملی مثالیں شامل ہوں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ISL-U06-M01",
+      "chapter": {
+        "id": "IX-ISL-2025-U06",
+        "number": 6
+      },
+      "topicId": "مشاہیر اسلام",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ہدایت کے سرچشمے اور مشاہیر اسلام"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "مشاہیر اسلام کے مطالعے کا بہتر مقصد کیا ہے؟",
+          "answer": "ان کی علمی و اخلاقی خدمات سے رہنمائی لینا",
+          "options": [
+            {
+              "id": "A",
+              "text": "ان کی علمی و اخلاقی خدمات سے رہنمائی لینا"
+            },
+            {
+              "id": "B",
+              "text": "صرف نام یاد کرنا"
+            },
+            {
+              "id": "C",
+              "text": "صرف تاریخیں جمع کرنا"
+            },
+            {
+              "id": "D",
+              "text": "صرف نسب نامہ لکھنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ISL-U06-M02",
+      "chapter": {
+        "id": "IX-ISL-2025-U06",
+        "number": 6
+      },
+      "topicId": "صحابہ و صحابیات",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ہدایت کے سرچشمے اور مشاہیر اسلام"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "صحابہ و صحابیات کی زندگیوں سے بنیادی طور پر کیا حاصل کیا جا سکتا ہے؟",
+          "answer": "عملی دینی و اخلاقی نمونے",
+          "options": [
+            {
+              "id": "A",
+              "text": "عملی دینی و اخلاقی نمونے"
+            },
+            {
+              "id": "B",
+              "text": "صرف جغرافیائی معلومات"
+            },
+            {
+              "id": "C",
+              "text": "صرف معاشی اعداد"
+            },
+            {
+              "id": "D",
+              "text": "صرف ادبی اصطلاحات"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ISL-U06-S01",
+      "chapter": {
+        "id": "IX-ISL-2025-U06",
+        "number": 6
+      },
+      "topicId": "علمی خدمت",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ہدایت کے سرچشمے اور مشاہیر اسلام"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "علماء اور مفکرین کی علمی خدمت معاشرے کے لیے کیوں اہم ہے؟",
+          "answer": "وہ علم کی حفاظت، تشریح، تعلیم، فکری رہنمائی اور نئے مسائل پر ذمہ دارانہ غور میں کردار ادا کرتے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ISL-U06-S02",
+      "chapter": {
+        "id": "IX-ISL-2025-U06",
+        "number": 6
+      },
+      "topicId": "صوفیاء کرام",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ہدایت کے سرچشمے اور مشاہیر اسلام"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "صوفیاء کرام کی دعوتی و اخلاقی خدمات کا ایک پہلو بیان کریں۔",
+          "answer": "انہوں نے کردار، خدمت، محبت، رواداری اور اصلاحِ نفس کے ذریعے لوگوں تک دینی و اخلاقی پیغام پہنچانے میں کردار ادا کیا۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ISL-U06-L01",
+      "chapter": {
+        "id": "IX-ISL-2025-U06",
+        "number": 6
+      },
+      "topicId": "ہدایت کے نمونے",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ہدایت کے سرچشمے اور مشاہیر اسلام"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "صحابہ، صحابیات، علماء، مفکرین اور صوفیاء کی زندگیوں سے حاصل ہونے والے پانچ عملی اسباق بیان کریں۔",
+          "answer": "ممکنہ نکات: علم دوستی، اخلاص، خدمت، صبر، عدل، تقویٰ، حسنِ اخلاق، دعوت میں حکمت اور معاشرتی بھلائی۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ISL-U07-M01",
+      "chapter": {
+        "id": "IX-ISL-2025-U07",
+        "number": 7
+      },
+      "topicId": "خود اعتمادی",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "اسلامی تعلیمات اور عصرِ حاضر کے تقاضے"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "خود اعتمادی کا متوازن مفہوم کیا ہے؟",
+          "answer": "صلاحیت پر اعتماد کے ساتھ ذمہ داری اور اللہ پر توکل",
+          "options": [
+            {
+              "id": "A",
+              "text": "صلاحیت پر اعتماد کے ساتھ ذمہ داری اور اللہ پر توکل"
+            },
+            {
+              "id": "B",
+              "text": "تکبر اور دوسروں کی تحقیر"
+            },
+            {
+              "id": "C",
+              "text": "مشورہ نہ لینا"
+            },
+            {
+              "id": "D",
+              "text": "غلطی نہ ماننا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ISL-U07-M02",
+      "chapter": {
+        "id": "IX-ISL-2025-U07",
+        "number": 7
+      },
+      "topicId": "صحت",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "اسلامی تعلیمات اور عصرِ حاضر کے تقاضے"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "جسمانی اور ذہنی صحت کے لیے کون سا رویّہ مناسب ہے؟",
+          "answer": "متوازن غذا، ورزش، آرام اور مثبت عادات",
+          "options": [
+            {
+              "id": "A",
+              "text": "متوازن غذا، ورزش، آرام اور مثبت عادات"
+            },
+            {
+              "id": "B",
+              "text": "مسلسل بے خوابی"
+            },
+            {
+              "id": "C",
+              "text": "غیر متوازن معمول"
+            },
+            {
+              "id": "D",
+              "text": "صحت کی علامات کو نظر انداز کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ISL-U07-S01",
+      "chapter": {
+        "id": "IX-ISL-2025-U07",
+        "number": 7
+      },
+      "topicId": "خود انحصاری",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "اسلامی تعلیمات اور عصرِ حاضر کے تقاضے"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "خود انحصاری اور تعاون میں توازن کیسے قائم کیا جا سکتا ہے؟",
+          "answer": "انسان اپنی ذمہ داری خود پوری کرے، اپنی صلاحیتیں استعمال کرے اور جہاں ضرورت ہو دوسروں سے مناسب تعاون و مشورہ بھی حاصل کرے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ISL-U07-S02",
+      "chapter": {
+        "id": "IX-ISL-2025-U07",
+        "number": 7
+      },
+      "topicId": "عصر حاضر",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "اسلامی تعلیمات اور عصرِ حاضر کے تقاضے"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "عصر حاضر میں اسلامی اخلاقی اصولوں کی ضرورت کیوں برقرار ہے؟",
+          "answer": "کیونکہ نئی ٹیکنالوجی اور سماجی تبدیلیوں کے باوجود سچائی، عدل، ذمہ داری، احترام اور امانت جیسے اصول انسانی فیصلوں کی رہنمائی کرتے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ISL-U07-L01",
+      "chapter": {
+        "id": "IX-ISL-2025-U07",
+        "number": 7
+      },
+      "topicId": "عصر حاضر کے تقاضے",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-002",
+        "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_OCR_THEME_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "اسلامی تعلیمات اور عصرِ حاضر کے تقاضے"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "islamiat",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ISLAMIAT-UR-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Islamiyat IX conceptual starter. Theme structure verified; exact lesson-page and scholarly review remain pending. No Quran/Hadith passage is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ صرف provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "خود اعتمادی، خود انحصاری، جسمانی و ذہنی صحت اور اخلاقی ذمہ داری کو عصرِ حاضر کی زندگی سے مربوط کر کے بیان کریں۔",
+          "answer": "جواب میں متوازن خود اعتمادی، محنت و ذمہ داری، صحت مند معمول، ذہنی توازن، اور جدید حالات میں اخلاقی فیصلوں کی ضرورت واضح ہونی چاہیے۔"
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 35,
+    "mcq": 14,
+    "short": 14,
+    "long": 7,
+    "units": 7
+  }
+}

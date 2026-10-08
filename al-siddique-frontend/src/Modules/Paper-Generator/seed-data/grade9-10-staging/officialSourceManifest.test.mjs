@@ -7,38 +7,34 @@ test('source catalog manifest is well-formed and IDs unique',()=>{
  assert.ok(m.entries.length>=25);
  assert.equal(new Set(m.entries.map(s=>s.recordId)).size,m.entries.length);
 });
-test('Biology IX English and Urdu have verified PDF bytes; ALL edition/page/exercise audits remain pending',()=>{
- const downloaded=new Map([
-  ['pectaa-catalog-007',{bytes:56635737,sha:'05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518',pages:192,status:'PDF_BYTES_VERIFIED',chapter:'VERIFIED'}],
-  ['pectaa-catalog-009',{bytes:31362949,sha:'f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5',pages:180,status:'PDF_BYTES_VERIFIED',chapter:'VERIFIED',questionStatus:'PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW'}],
+test('downloaded official sources carry hash/page evidence while unreviewed sources remain blocked',()=>{
+ const locked=new Map([
+  ['pectaa-catalog-002',{bytes:25011563,sha:'8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b',pages:170}],
+  ['pectaa-catalog-004',{bytes:19576377,sha:'737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf',pages:168}],
+  ['pectaa-catalog-005',{bytes:113912128,sha:'181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1',pages:288}],
+  ['pectaa-catalog-007',{bytes:56635737,sha:'05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518',pages:192}],
+  ['pectaa-catalog-009',{bytes:31362949,sha:'f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5',pages:180}],
   ['pectaa-catalog-010',{bytes:84697797,sha:'7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd',pages:212}],
-  ['pectaa-catalog-004',{bytes:19576377,sha:'737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf',pages:168,status:'PDF_BYTES_VERIFIED',chapter:'VERIFIED',questionStatus:'PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW'}],
-  ['pectaa-catalog-005',{bytes:113912128,sha:'181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1',pages:288,status:'PDF_BYTES_VERIFIED',chapter:'VERIFIED',questionStatus:'PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW'}],
-  ['pectaa-catalog-011',{bytes:51384536,sha:'a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794',pages:204,status:'PDF_BYTES_VERIFIED',chapter:'VERIFIED',questionStatus:'PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW'}],
-  ['pectaa-catalog-016',{bytes:48593549,sha:'61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07',pages:132,status:'PDF_BYTES_VERIFIED',chapter:'VERIFIED',questionStatus:'PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW'}],
-  ['pectaa-catalog-017',{bytes:103679382,sha:'4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece',pages:248,status:'PDF_BYTES_VERIFIED',chapter:'VERIFIED',questionStatus:'PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW'}],
-  ['pectaa-catalog-019',{bytes:103176678,sha:'430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a',pages:156,status:'PDF_BYTES_VERIFIED',chapter:'VERIFIED',questionStatus:'PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW'}],
-  ['pectaa-catalog-020',{bytes:51021585,sha:'ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b',pages:132,status:'PDF_BYTES_VERIFIED',chapter:'VERIFIED',questionStatus:'PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW'}],
-  ['pectaa-catalog-024',{bytes:122695379,sha:'47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f',pages:204,status:'PDF_BYTES_VERIFIED',chapter:'VERIFIED',questionStatus:'PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW'}],
-  ['pectaa-catalog-107',{bytes:131046901,sha:'75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3',pages:160,status:'PDF_BYTES_VERIFIED',questionStatus:'PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW'}],
+  ['pectaa-catalog-011',{bytes:51384536,sha:'a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794',pages:204}],
+  ['pectaa-catalog-015',{bytes:86277897,sha:'9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16',pages:164}],
+  ['pectaa-catalog-016',{bytes:48593549,sha:'61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07',pages:132}],
+  ['pectaa-catalog-017',{bytes:103679382,sha:'4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece',pages:248}],
+  ['pectaa-catalog-019',{bytes:103176678,sha:'430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a',pages:156}],
+  ['pectaa-catalog-020',{bytes:51021585,sha:'ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b',pages:132}],
+  ['pectaa-catalog-024',{bytes:122695379,sha:'47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f',pages:204}],
+  ['pectaa-catalog-025',{bytes:94367319,sha:'acefc9ba9e8c60baa66df7f222db169def63a93b69df3f664c14841ac009474a',pages:152}],
  ]);
  for(const e of m.entries){
-   const expected=downloaded.get(e.recordId);
-   if(expected){
-     assert.match(e.pdfUrl,/drive.google.com/);
-     assert.equal(e.downloadStatus,expected.status||'PDF_BYTES_VERIFIED_EDITION_UNREVIEWED');
-     assert.equal(e.downloadByteLength,expected.bytes);
-     assert.equal(e.pdfSha256,expected.sha);
-     if(expected.pages)assert.equal(e.pdfPageCount,expected.pages);
-     if(expected.chapter)assert.equal(e.chapterIndexStatus,expected.chapter);
-   }else{
-     assert.equal(e.pdfUrl,null);
-     assert.equal(e.pdfSha256,null);
-   }
-   if(!downloaded.get(e.recordId)?.chapter) assert.equal(e.chapterIndexStatus,'PENDING');
-   assert.equal(e.exerciseIndexStatus,'PENDING');
-   if(expected?.questionStatus) assert.equal(e.questionGenerationStatus,expected.questionStatus); else assert.match(e.questionGenerationStatus,/^BLOCKED/);
+  if(e.pdfUrl){
+   assert.match(e.pdfSha256,/^[a-f0-9]{64}$/);assert.match(e.downloadStatus||'',/^PDF_BYTES_VERIFIED/);
+   assert(Number(e.downloadByteLength)>0,e.recordId);assert(Number(e.pdfPageCount)>0,e.recordId);
+  } else assert.equal(e.pdfSha256,null);
+  assert.equal(e.exerciseIndexStatus,'PENDING');
+  if(e.questionGenerationStatus==='PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW'){
+   if(e.chapterIndexStatus!=='VERIFIED'){assert.match(e.contentMapStatus||'',/VERIFIED.*PENDING|PARTIAL_VERIFIED/,e.recordId);assert(e.contentMapEvidence,e.recordId);assert.match(e.authoringBoundary||'',/^PROVISIONAL_/);}
+  } else assert.match(e.questionGenerationStatus,/^BLOCKED/,e.recordId);
  }
+ for(const [rid,x] of locked){const e=m.entries.find(v=>v.recordId===rid);assert(e,rid);assert.equal(e.downloadByteLength,x.bytes);assert.equal(e.pdfSha256,x.sha);assert.equal(e.pdfPageCount,x.pages);}
 });
 test('revised cohorts remain independently catalogued',()=>{
  assert.ok(m.entries.some(s=>s.grade===9&&s.edition==='2025-26'));

@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "assps-computer9-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-013",
+  "sourcePdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+  "sourceByteLength": 17968456,
+  "pageCount": 264,
+  "identity": [
+    "Computer (EM) 2025-26",
+    "Revised National Curriculum of Pakistan 2023",
+    "Punjab Curriculum and Textbook Board, Lahore"
+  ],
+  "units": [
+    {
+      "number": 1,
+      "title": "Introduction to Systems",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 2,
+      "title": "Number Systems",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 3,
+      "title": "Digital Systems and Logic Design",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 4,
+      "title": "System Troubleshooting",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 5,
+      "title": "Software System",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 6,
+      "title": "Introduction to Computer Networks",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 7,
+      "title": "Computational Thinking",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 8,
+      "title": "Web Development with HTML, CSS and JavaScript",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 9,
+      "title": "Data Science and Data Gathering",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 10,
+      "title": "Emerging Technologies in Computer Science",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 11,
+      "title": "Ethical, Social, and Legal Concerns in Computer Usage",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 12,
+      "title": "Entrepreneurship in Digital Age",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "securityTopicsRestrictedToDefensiveAndBenignContent": true
+  }
+}
