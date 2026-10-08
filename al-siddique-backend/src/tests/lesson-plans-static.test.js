@@ -1,0 +1,27 @@
+const test=require('node:test')
+const assert=require('node:assert/strict')
+const fs=require('node:fs')
+const path=require('node:path')
+const root=path.resolve(__dirname,'..')
+const route=fs.readFileSync(path.join(root,'routes/lessonPlanRoutes.js'),'utf8')
+const migrate=fs.readFileSync(path.join(root,'config/migrate.js'),'utf8')
+const rls=fs.readFileSync(path.join(root,'config/migrations/005_rls_policies.js'),'utf8')
+const server=fs.readFileSync(path.join(root,'server.js'),'utf8')
+const diary=fs.readFileSync(path.join(root,'routes/dailyDiaryRoutes.js'),'utf8')
+
+test('lesson plans are versioned, mounted, tenant/RLS protected and revision bound',()=>{
+ assert.match(migrate,/021_lesson_plans_schema/)
+ assert.match(server,/mount\('\/lesson-plans','\.\/routes\/lessonPlanRoutes'\)/)
+ assert.match(rls,/['"]lesson_plans['"]/)
+ assert.match(route,/router\.use\(protect, canManageLessonPlans\)/)
+ assert.match(route,/set_config\('app\.tenant_id'/)
+ assert.match(route,/LESSON_PLAN_REVISION_REQUIRED/)
+ assert.match(route,/LESSON_PLAN_REVISION_CONFLICT/)
+ assert.match(route,/notification_log/)
+ assert.match(route,/recipient.*\['student','parent'\]/s)
+})
+
+test('daily diary schema-not-ready path references the caught error safely',()=>{
+ assert.doesNotMatch(diary,/res\.status\(err\.code/)
+ assert.match(diary,/res\.status\(error\.code === 'DAILY_DIARY_SCHEMA_NOT_READY'/)
+})

@@ -107,7 +107,7 @@ router.get('/', async (req, res) => {
     })
   } catch (error) {
     console.error('Daily diary list error:', error)
-    res.status(err.code === 'DAILY_DIARY_SCHEMA_NOT_READY' ? 503 : 500).json({ success: false, message: err.code === 'DAILY_DIARY_SCHEMA_NOT_READY' ? 'Daily Diary storage is not initialized.' : 'Failed to load daily diaries.' })
+    res.status(error.code === 'DAILY_DIARY_SCHEMA_NOT_READY' ? 503 : 500).json({ success: false, message: error.code === 'DAILY_DIARY_SCHEMA_NOT_READY' ? 'Daily Diary storage is not initialized.' : 'Failed to load daily diaries.' })
   }
 })
 

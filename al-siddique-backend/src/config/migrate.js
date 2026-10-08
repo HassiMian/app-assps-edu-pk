@@ -601,6 +601,15 @@ async function migrate() {
     }
 
     try {
+      const lessonPlansMigration = require('../../migrations/021_lesson_plans_schema')
+      await lessonPlansMigration.up()
+      console.log('lesson plans schema ready')
+    } catch (err) {
+      console.error('Lesson Plans Schema Migration Error:', err.message)
+      throw err
+    }
+
+    try {
       const assessmentStudioMigration = require('./migrations/006_assessment_studio_v1')
       await assessmentStudioMigration.up()
       const questionGovernanceMigration = require('./migrations/007_question_bank_governance_v1')
