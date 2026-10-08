@@ -1,0 +1,2342 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "IX-PHT-E-C01-M01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Physical Quantities and Measurements",
+      "topic_name": "SI units",
+      "category": "mcq",
+      "question_text": "The SI base unit of length is?",
+      "options": [
+        {
+          "id": "A",
+          "text": "metre"
+        },
+        {
+          "id": "B",
+          "text": "second"
+        },
+        {
+          "id": "C",
+          "text": "kilogram"
+        },
+        {
+          "id": "D",
+          "text": "newton"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "metre",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 1",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "SI units"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C01-M02",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Physical Quantities and Measurements",
+      "topic_name": "accuracy precision",
+      "category": "mcq",
+      "question_text": "Precision mainly describes?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Closeness of repeated measurements to each other"
+        },
+        {
+          "id": "B",
+          "text": "Only closeness to zero"
+        },
+        {
+          "id": "C",
+          "text": "Instrument colour"
+        },
+        {
+          "id": "D",
+          "text": "Unit conversion"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Closeness of repeated measurements to each other",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 1",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "accuracy precision"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C01-S01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Physical Quantities and Measurements",
+      "topic_name": "measurement",
+      "category": "short",
+      "question_text": "Differentiate accuracy and precision.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Accuracy is closeness to an accepted/true value; precision is closeness among repeated measurements.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 1",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "measurement"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C01-N01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Physical Quantities and Measurements",
+      "topic_name": "scientific notation",
+      "category": "numerical",
+      "question_text": "Write 0.00045 in scientific notation.",
+      "options": [],
+      "correct_option": "",
+      "answer": "4.5 × 10⁻⁴.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 1",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "scientific notation"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C02-M01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Kinematics",
+      "topic_name": "velocity",
+      "category": "mcq",
+      "question_text": "Velocity differs from speed because velocity includes?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Direction"
+        },
+        {
+          "id": "B",
+          "text": "Mass"
+        },
+        {
+          "id": "C",
+          "text": "Temperature"
+        },
+        {
+          "id": "D",
+          "text": "Pressure"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Direction",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 2",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "velocity"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C02-M02",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Kinematics",
+      "topic_name": "acceleration",
+      "category": "mcq",
+      "question_text": "Acceleration is the rate of change of?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Velocity"
+        },
+        {
+          "id": "B",
+          "text": "Mass"
+        },
+        {
+          "id": "C",
+          "text": "Density"
+        },
+        {
+          "id": "D",
+          "text": "Energy only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Velocity",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 2",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "acceleration"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C02-S01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Kinematics",
+      "topic_name": "motion graphs",
+      "category": "short",
+      "question_text": "What does the slope of a distance-time graph represent?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It represents speed.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 2",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "motion graphs"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C02-N01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Kinematics",
+      "topic_name": "speed",
+      "category": "numerical",
+      "question_text": "A body covers 150 m in 15 s. Find average speed.",
+      "options": [],
+      "correct_option": "",
+      "answer": "v = 150/15 = 10 m/s.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 2",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "speed"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C03-M01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Dynamics",
+      "topic_name": "Newton laws",
+      "category": "mcq",
+      "question_text": "F = ma is associated with?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Newton’s second law"
+        },
+        {
+          "id": "B",
+          "text": "Hooke’s law"
+        },
+        {
+          "id": "C",
+          "text": "Pascal’s law"
+        },
+        {
+          "id": "D",
+          "text": "Ohm’s law"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Newton’s second law",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 3",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "Newton laws"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C03-M02",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Dynamics",
+      "topic_name": "momentum",
+      "category": "mcq",
+      "question_text": "Momentum is equal to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "mass × velocity"
+        },
+        {
+          "id": "B",
+          "text": "force ÷ area"
+        },
+        {
+          "id": "C",
+          "text": "work ÷ time"
+        },
+        {
+          "id": "D",
+          "text": "mass ÷ volume"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "mass × velocity",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 3",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "momentum"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C03-S01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Dynamics",
+      "topic_name": "inertia",
+      "category": "short",
+      "question_text": "Define inertia.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Inertia is the tendency of a body to resist a change in its state of rest or uniform motion.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 3",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "inertia"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C03-N01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Dynamics",
+      "topic_name": "force",
+      "category": "numerical",
+      "question_text": "Find the force on a 4 kg mass accelerating at 2 m/s².",
+      "options": [],
+      "correct_option": "",
+      "answer": "F = ma = 4×2 = 8 N.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 3",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "force"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C04-M01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Turning Effects of Force",
+      "topic_name": "moment",
+      "category": "mcq",
+      "question_text": "Moment of a force equals?",
+      "options": [
+        {
+          "id": "A",
+          "text": "force × perpendicular distance"
+        },
+        {
+          "id": "B",
+          "text": "mass × velocity"
+        },
+        {
+          "id": "C",
+          "text": "pressure × volume"
+        },
+        {
+          "id": "D",
+          "text": "power × time only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "force × perpendicular distance",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 4",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "moment"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C04-M02",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Turning Effects of Force",
+      "topic_name": "equilibrium",
+      "category": "mcq",
+      "question_text": "For rotational equilibrium, the net moment is?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Zero"
+        },
+        {
+          "id": "B",
+          "text": "Always maximum"
+        },
+        {
+          "id": "C",
+          "text": "Equal to mass"
+        },
+        {
+          "id": "D",
+          "text": "Undefined"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Zero",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 4",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "equilibrium"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C04-S01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Turning Effects of Force",
+      "topic_name": "stability",
+      "category": "short",
+      "question_text": "How can lowering the centre of gravity affect stability?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It generally increases stability by making tipping less likely.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 4",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "stability"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C04-N01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Turning Effects of Force",
+      "topic_name": "moment",
+      "category": "numerical",
+      "question_text": "A 12 N force acts 0.5 m perpendicular from a pivot. Find the moment.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Moment = 12×0.5 = 6 N m.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 4",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "moment"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C05-M01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Work, Energy and Power",
+      "topic_name": "power",
+      "category": "mcq",
+      "question_text": "Power is the rate of doing?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Work"
+        },
+        {
+          "id": "B",
+          "text": "Mass"
+        },
+        {
+          "id": "C",
+          "text": "Density"
+        },
+        {
+          "id": "D",
+          "text": "Pressure only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Work",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 5",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "power"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C05-M02",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Work, Energy and Power",
+      "topic_name": "energy conservation",
+      "category": "mcq",
+      "question_text": "Conservation of energy means energy can?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Change form but total energy remains conserved"
+        },
+        {
+          "id": "B",
+          "text": "Be created from nothing"
+        },
+        {
+          "id": "C",
+          "text": "Always disappear"
+        },
+        {
+          "id": "D",
+          "text": "Exist only as heat"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Change form but total energy remains conserved",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 5",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "energy conservation"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C05-S01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Work, Energy and Power",
+      "topic_name": "renewable energy",
+      "category": "short",
+      "question_text": "Give one renewable and one non-renewable energy source.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Example: solar energy is renewable; coal is non-renewable.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 5",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "renewable energy"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C05-N01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Work, Energy and Power",
+      "topic_name": "power",
+      "category": "numerical",
+      "question_text": "A machine does 300 J of work in 15 s. Find power.",
+      "options": [],
+      "correct_option": "",
+      "answer": "P = W/t = 300/15 = 20 W.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 5",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "power"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C06-M01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Mechanical Properties of Matter",
+      "topic_name": "density",
+      "category": "mcq",
+      "question_text": "Density is?",
+      "options": [
+        {
+          "id": "A",
+          "text": "mass ÷ volume"
+        },
+        {
+          "id": "B",
+          "text": "force ÷ area"
+        },
+        {
+          "id": "C",
+          "text": "work ÷ time"
+        },
+        {
+          "id": "D",
+          "text": "distance ÷ time"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "mass ÷ volume",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 6",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "density"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C06-M02",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Mechanical Properties of Matter",
+      "topic_name": "pressure",
+      "category": "mcq",
+      "question_text": "Pressure is?",
+      "options": [
+        {
+          "id": "A",
+          "text": "force per unit area"
+        },
+        {
+          "id": "B",
+          "text": "mass per unit time"
+        },
+        {
+          "id": "C",
+          "text": "energy per unit volume only"
+        },
+        {
+          "id": "D",
+          "text": "speed per unit time"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "force per unit area",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 6",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "pressure"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C06-S01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Mechanical Properties of Matter",
+      "topic_name": "Pascal law",
+      "category": "short",
+      "question_text": "State Pascal’s principle in words.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Pressure applied to a confined fluid is transmitted throughout the fluid.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 6",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "Pascal law"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C06-N01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Mechanical Properties of Matter",
+      "topic_name": "density",
+      "category": "numerical",
+      "question_text": "A 600 g sample occupies 300 cm³. Find density.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Density = 600/300 = 2 g/cm³.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 6",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "density"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C07-M01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Thermal Properties of Matter",
+      "topic_name": "temperature heat",
+      "category": "mcq",
+      "question_text": "Temperature is mainly related to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thermal state / average particle kinetic energy"
+        },
+        {
+          "id": "B",
+          "text": "Amount of substance only"
+        },
+        {
+          "id": "C",
+          "text": "Magnetic pole strength"
+        },
+        {
+          "id": "D",
+          "text": "Momentum only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Thermal state / average particle kinetic energy",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 7",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "temperature heat"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C07-M02",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Thermal Properties of Matter",
+      "topic_name": "thermometer",
+      "category": "mcq",
+      "question_text": "A thermometer is designed to measure?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Temperature"
+        },
+        {
+          "id": "B",
+          "text": "Mass"
+        },
+        {
+          "id": "C",
+          "text": "Force"
+        },
+        {
+          "id": "D",
+          "text": "Momentum"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Temperature",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 7",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "thermometer"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C07-S01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Thermal Properties of Matter",
+      "topic_name": "heat temperature",
+      "category": "short",
+      "question_text": "Differentiate heat and temperature.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Heat is energy transferred because of temperature difference; temperature measures thermal state.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 7",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "heat temperature"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C07-L01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Thermal Properties of Matter",
+      "topic_name": "kinetic molecular theory",
+      "category": "long",
+      "question_text": "Explain how heating affects particle motion in matter.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Heating generally increases average particle kinetic energy; this can increase temperature and may contribute to expansion or state changes depending on conditions.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 7",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "kinetic molecular theory"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C08-M01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Magnetism",
+      "topic_name": "magnetic poles",
+      "category": "mcq",
+      "question_text": "Like magnetic poles?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Repel"
+        },
+        {
+          "id": "B",
+          "text": "Always attract"
+        },
+        {
+          "id": "C",
+          "text": "Lose all magnetism instantly"
+        },
+        {
+          "id": "D",
+          "text": "Have no interaction"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Repel",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 8",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "magnetic poles"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C08-M02",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Magnetism",
+      "topic_name": "electromagnet",
+      "category": "mcq",
+      "question_text": "An electromagnet depends on?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Electric current producing a magnetic field"
+        },
+        {
+          "id": "B",
+          "text": "Only gravity"
+        },
+        {
+          "id": "C",
+          "text": "Only heat"
+        },
+        {
+          "id": "D",
+          "text": "Only pressure"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Electric current producing a magnetic field",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 8",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "electromagnet"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C08-S01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Magnetism",
+      "topic_name": "magnetic field",
+      "category": "short",
+      "question_text": "Define a magnetic field.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A region where a magnetic force can act on magnetic materials or magnetic poles.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 8",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "magnetic field"
+      ]
+    },
+    {
+      "id": "IX-PHT-E-C08-L01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Magnetism",
+      "topic_name": "magnet applications",
+      "category": "long",
+      "question_text": "Compare permanent magnets and electromagnets and give one safe everyday application of each.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Permanent magnets retain magnetism without current; electromagnets depend on current and can be controlled. Examples may include a fridge magnet and a relay/doorbell mechanism.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-045 | 9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead | chapter 8",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "magnet applications"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C01-M01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "طبعی مقداریں اور پیمائش",
+      "topic_name": "SI units",
+      "category": "mcq",
+      "question_text": "لمبائی کی SI unit کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "metre"
+        },
+        {
+          "id": "B",
+          "text": "second"
+        },
+        {
+          "id": "C",
+          "text": "kilogram"
+        },
+        {
+          "id": "D",
+          "text": "newton"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "metre",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 1",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "SI units"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C01-M02",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "طبعی مقداریں اور پیمائش",
+      "topic_name": "accuracy precision",
+      "category": "mcq",
+      "question_text": "Precision بنیادی طور پر کس چیز کو ظاہر کرتی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Repeated measurements کا ایک دوسرے کے قریب ہونا"
+        },
+        {
+          "id": "B",
+          "text": "صرف zero کے قریب ہونا"
+        },
+        {
+          "id": "C",
+          "text": "instrument کا رنگ"
+        },
+        {
+          "id": "D",
+          "text": "unit تبدیل کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Repeated measurements کا ایک دوسرے کے قریب ہونا",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 1",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "accuracy precision"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C01-S01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "طبعی مقداریں اور پیمائش",
+      "topic_name": "measurement",
+      "category": "short",
+      "question_text": "Accuracy اور precision میں فرق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Accuracy accepted/true value سے قربت ہے، جبکہ precision repeated measurements کے باہمی قریب ہونے سے متعلق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 1",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "measurement"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C01-N01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "طبعی مقداریں اور پیمائش",
+      "topic_name": "scientific notation",
+      "category": "numerical",
+      "question_text": "0.00045 کو scientific notation میں لکھیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "4.5 × 10⁻⁴۔",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 1",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "scientific notation"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C02-M01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "حرکیات",
+      "topic_name": "velocity",
+      "category": "mcq",
+      "question_text": "Velocity میں speed کے علاوہ کیا شامل ہوتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Direction"
+        },
+        {
+          "id": "B",
+          "text": "Mass"
+        },
+        {
+          "id": "C",
+          "text": "Temperature"
+        },
+        {
+          "id": "D",
+          "text": "Pressure"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Direction",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 2",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "velocity"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C02-M02",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "حرکیات",
+      "topic_name": "acceleration",
+      "category": "mcq",
+      "question_text": "Acceleration کس مقدار کی تبدیلی کی rate ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Velocity"
+        },
+        {
+          "id": "B",
+          "text": "Mass"
+        },
+        {
+          "id": "C",
+          "text": "Density"
+        },
+        {
+          "id": "D",
+          "text": "Energy only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Velocity",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 2",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "acceleration"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C02-S01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "حرکیات",
+      "topic_name": "motion graphs",
+      "category": "short",
+      "question_text": "Distance-time graph کی slope کیا ظاہر کرتی ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Slope speed کو ظاہر کرتی ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 2",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "motion graphs"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C02-N01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "حرکیات",
+      "topic_name": "speed",
+      "category": "numerical",
+      "question_text": "ایک جسم 150 m فاصلہ 15 s میں طے کرتا ہے۔ average speed معلوم کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "v = 150/15 = 10 m/s۔",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 2",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "speed"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C03-M01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "قوت اور حرکت",
+      "topic_name": "Newton laws",
+      "category": "mcq",
+      "question_text": "F = ma کس law سے متعلق ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Newton کا دوسرا law"
+        },
+        {
+          "id": "B",
+          "text": "Hooke law"
+        },
+        {
+          "id": "C",
+          "text": "Pascal law"
+        },
+        {
+          "id": "D",
+          "text": "Ohm law"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Newton کا دوسرا law",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 3",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "Newton laws"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C03-M02",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "قوت اور حرکت",
+      "topic_name": "momentum",
+      "category": "mcq",
+      "question_text": "Momentum کا فارمولا کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "mass × velocity"
+        },
+        {
+          "id": "B",
+          "text": "force ÷ area"
+        },
+        {
+          "id": "C",
+          "text": "work ÷ time"
+        },
+        {
+          "id": "D",
+          "text": "mass ÷ volume"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "mass × velocity",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 3",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "momentum"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C03-S01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "قوت اور حرکت",
+      "topic_name": "inertia",
+      "category": "short",
+      "question_text": "Inertia کی تعریف کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جسم کی وہ خاصیت جس سے وہ اپنی حالتِ سکون یا یکساں حرکت میں تبدیلی کی مزاحمت کرتا ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 3",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "inertia"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C03-N01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "قوت اور حرکت",
+      "topic_name": "force",
+      "category": "numerical",
+      "question_text": "4 kg mass کو 2 m/s² acceleration ملے تو force معلوم کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "F = ma = 4×2 = 8 N۔",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 3",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "force"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C04-M01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "قوت کے گردشی اثرات",
+      "topic_name": "moment",
+      "category": "mcq",
+      "question_text": "Moment of force کا فارمولا کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "force × perpendicular distance"
+        },
+        {
+          "id": "B",
+          "text": "mass × velocity"
+        },
+        {
+          "id": "C",
+          "text": "pressure × volume"
+        },
+        {
+          "id": "D",
+          "text": "power × time only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "force × perpendicular distance",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 4",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "moment"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C04-M02",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "قوت کے گردشی اثرات",
+      "topic_name": "equilibrium",
+      "category": "mcq",
+      "question_text": "Rotational equilibrium میں net moment کیا ہوتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Zero"
+        },
+        {
+          "id": "B",
+          "text": "ہمیشہ maximum"
+        },
+        {
+          "id": "C",
+          "text": "mass کے برابر"
+        },
+        {
+          "id": "D",
+          "text": "Undefined"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Zero",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 4",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "equilibrium"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C04-S01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "قوت کے گردشی اثرات",
+      "topic_name": "stability",
+      "category": "short",
+      "question_text": "Centre of gravity کم کرنے سے stability پر کیا اثر پڑتا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "عام طور پر stability بڑھتی ہے کیونکہ جسم کے پلٹنے کا امکان کم ہوتا ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 4",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "stability"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C04-N01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "قوت کے گردشی اثرات",
+      "topic_name": "moment",
+      "category": "numerical",
+      "question_text": "12 N force pivot سے 0.5 m perpendicular distance پر لگے تو moment معلوم کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Moment = 12×0.5 = 6 N m۔",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 4",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "moment"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C05-M01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "کام، توانائی اور طاقت",
+      "topic_name": "power",
+      "category": "mcq",
+      "question_text": "Power کس چیز کی rate ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Work کرنے کی"
+        },
+        {
+          "id": "B",
+          "text": "Mass کی"
+        },
+        {
+          "id": "C",
+          "text": "Density کی"
+        },
+        {
+          "id": "D",
+          "text": "Pressure only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Work کرنے کی",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 5",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "power"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C05-M02",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "کام، توانائی اور طاقت",
+      "topic_name": "energy conservation",
+      "category": "mcq",
+      "question_text": "Conservation of energy کا مطلب کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Energy form بدل سکتی ہے مگر total محفوظ رہتی ہے"
+        },
+        {
+          "id": "B",
+          "text": "Energy کچھ نہیں سے بنتی ہے"
+        },
+        {
+          "id": "C",
+          "text": "Energy ہمیشہ ختم ہو جاتی ہے"
+        },
+        {
+          "id": "D",
+          "text": "صرف heat موجود ہے"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Energy form بدل سکتی ہے مگر total محفوظ رہتی ہے",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 5",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "energy conservation"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C05-S01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "کام، توانائی اور طاقت",
+      "topic_name": "renewable energy",
+      "category": "short",
+      "question_text": "ایک renewable اور ایک non-renewable energy source کی مثال دیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "مثال: solar energy renewable ہے جبکہ coal non-renewable ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 5",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "renewable energy"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C05-N01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "کام، توانائی اور طاقت",
+      "topic_name": "power",
+      "category": "numerical",
+      "question_text": "ایک machine 300 J work، 15 s میں کرتی ہے۔ power معلوم کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "P = W/t = 300/15 = 20 W۔",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 5",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "power"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C06-M01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "مادے کی میکانی خصوصیات",
+      "topic_name": "density",
+      "category": "mcq",
+      "question_text": "Density کا فارمولا کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "mass ÷ volume"
+        },
+        {
+          "id": "B",
+          "text": "force ÷ area"
+        },
+        {
+          "id": "C",
+          "text": "work ÷ time"
+        },
+        {
+          "id": "D",
+          "text": "distance ÷ time"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "mass ÷ volume",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 6",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "density"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C06-M02",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "مادے کی میکانی خصوصیات",
+      "topic_name": "pressure",
+      "category": "mcq",
+      "question_text": "Pressure کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "force per unit area"
+        },
+        {
+          "id": "B",
+          "text": "mass per unit time"
+        },
+        {
+          "id": "C",
+          "text": "energy per unit volume only"
+        },
+        {
+          "id": "D",
+          "text": "speed per unit time"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "force per unit area",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 6",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "pressure"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C06-S01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "مادے کی میکانی خصوصیات",
+      "topic_name": "Pascal law",
+      "category": "short",
+      "question_text": "Pascal principle الفاظ میں بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Confined fluid پر لگایا گیا pressure پورے fluid میں transmit ہوتا ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 6",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "Pascal law"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C06-N01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "مادے کی میکانی خصوصیات",
+      "topic_name": "density",
+      "category": "numerical",
+      "question_text": "600 g sample کا volume 300 cm³ ہو تو density معلوم کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Density = 600/300 = 2 g/cm³۔",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 6",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "density"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C07-M01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "مادے کی حرارتی خصوصیات",
+      "topic_name": "temperature heat",
+      "category": "mcq",
+      "question_text": "Temperature بنیادی طور پر کس چیز سے متعلق ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thermal state / particles کی average kinetic energy"
+        },
+        {
+          "id": "B",
+          "text": "صرف substance کی مقدار"
+        },
+        {
+          "id": "C",
+          "text": "magnetic pole strength"
+        },
+        {
+          "id": "D",
+          "text": "momentum only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Thermal state / particles کی average kinetic energy",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 7",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "temperature heat"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C07-M02",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "مادے کی حرارتی خصوصیات",
+      "topic_name": "thermometer",
+      "category": "mcq",
+      "question_text": "Thermometer کس quantity کو measure کرتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Temperature"
+        },
+        {
+          "id": "B",
+          "text": "Mass"
+        },
+        {
+          "id": "C",
+          "text": "Force"
+        },
+        {
+          "id": "D",
+          "text": "Momentum"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Temperature",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 7",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "thermometer"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C07-S01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "مادے کی حرارتی خصوصیات",
+      "topic_name": "heat temperature",
+      "category": "short",
+      "question_text": "Heat اور temperature میں فرق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Heat temperature difference کی وجہ سے transfer ہونے والی energy ہے؛ temperature thermal state کا پیمانہ ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 7",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "heat temperature"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C07-L01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "مادے کی حرارتی خصوصیات",
+      "topic_name": "kinetic molecular theory",
+      "category": "long",
+      "question_text": "Heating سے matter کے particles کی motion پر کیا اثر پڑتا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Heating عموماً particles کی average kinetic energy بڑھاتی ہے؛ اس سے temperature بڑھ سکتا ہے اور حالات کے مطابق expansion یا state change ہو سکتا ہے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 7",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "kinetic molecular theory"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C08-M01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "مقناطیسیت",
+      "topic_name": "magnetic poles",
+      "category": "mcq",
+      "question_text": "Like magnetic poles کیا کرتے ہیں؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Repel"
+        },
+        {
+          "id": "B",
+          "text": "ہمیشہ attract"
+        },
+        {
+          "id": "C",
+          "text": "فوراً تمام magnetism کھو دیتے ہیں"
+        },
+        {
+          "id": "D",
+          "text": "کوئی interaction نہیں"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Repel",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 8",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "magnetic poles"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C08-M02",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "مقناطیسیت",
+      "topic_name": "electromagnet",
+      "category": "mcq",
+      "question_text": "Electromagnet کس principle پر کام کرتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Electric current magnetic field پیدا کرتا ہے"
+        },
+        {
+          "id": "B",
+          "text": "صرف gravity"
+        },
+        {
+          "id": "C",
+          "text": "صرف heat"
+        },
+        {
+          "id": "D",
+          "text": "صرف pressure"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Electric current magnetic field پیدا کرتا ہے",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 8",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "electromagnet"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C08-S01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "مقناطیسیت",
+      "topic_name": "magnetic field",
+      "category": "short",
+      "question_text": "Magnetic field کی تعریف کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "وہ region جہاں magnetic force magnetic material یا magnetic pole پر اثر انداز ہو سکتی ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 8",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "magnetic field"
+      ]
+    },
+    {
+      "id": "IX-PHT-U-C08-L01",
+      "class_level": "9th",
+      "subject": "Physics-Tech",
+      "medium": "urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "مقناطیسیت",
+      "topic_name": "magnet applications",
+      "category": "long",
+      "question_text": "Permanent magnet اور electromagnet کا تقابل کریں اور ہر ایک کی ایک محفوظ روزمرہ application لکھیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Permanent magnet بغیر current کے magnetism برقرار رکھتا ہے؛ electromagnet current پر depend کرتا اور control کیا جا سکتا ہے۔ مثالیں fridge magnet اور relay/doorbell mechanism ہو سکتی ہیں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-046 | 9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b | chapter 8",
+      "tags": [
+        "grade9",
+        "physics-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "magnet applications"
+      ]
+    }
+  ]
+}

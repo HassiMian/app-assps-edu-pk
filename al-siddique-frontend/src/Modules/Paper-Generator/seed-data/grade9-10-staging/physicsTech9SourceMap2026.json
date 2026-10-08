@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "assps-physics-tech9-dual-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sources": {
+    "english": {
+      "recordId": "pectaa-catalog-045",
+      "sha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+      "bytes": 44625210,
+      "pages": 136,
+      "cache": "20261008/tech9-next/phys9em.pdf"
+    },
+    "urdu": {
+      "recordId": "pectaa-catalog-046",
+      "sha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+      "bytes": 55864300,
+      "pages": 132,
+      "cache": "20261008/tech9-next/phys9ur.pdf"
+    }
+  },
+  "identity": [
+    "Physics (Tech) Grade IX",
+    "PCTB current prescribed textbook",
+    "Matric-Tech"
+  ],
+  "patternEvidence": {
+    "authority": "PECTAA",
+    "totalMarks": 40,
+    "objectiveMarks": 10,
+    "subjectiveMarks": 30,
+    "mcqDistribution": {
+      "1": 1,
+      "2": 1,
+      "3": 1,
+      "4": 2,
+      "5": 1,
+      "6": 2,
+      "7": 1,
+      "8": 1
+    }
+  },
+  "chapters": [
+    {
+      "number": 1,
+      "titleEnglish": "Physical Quantities and Measurements",
+      "titleUrdu": "طبعی مقداریں اور پیمائش",
+      "status": "CURRENT_BISE_SYLLABUS_VERIFIED"
+    },
+    {
+      "number": 2,
+      "titleEnglish": "Kinematics",
+      "titleUrdu": "حرکیات",
+      "status": "CURRENT_BISE_SYLLABUS_VERIFIED"
+    },
+    {
+      "number": 3,
+      "titleEnglish": "Dynamics",
+      "titleUrdu": "قوت اور حرکت",
+      "status": "CURRENT_BISE_SYLLABUS_VERIFIED"
+    },
+    {
+      "number": 4,
+      "titleEnglish": "Turning Effects of Force",
+      "titleUrdu": "قوت کے گردشی اثرات",
+      "status": "CURRENT_BISE_SYLLABUS_VERIFIED"
+    },
+    {
+      "number": 5,
+      "titleEnglish": "Work, Energy and Power",
+      "titleUrdu": "کام، توانائی اور طاقت",
+      "status": "CURRENT_BISE_SYLLABUS_VERIFIED"
+    },
+    {
+      "number": 6,
+      "titleEnglish": "Mechanical Properties of Matter",
+      "titleUrdu": "مادے کی میکانی خصوصیات",
+      "status": "CURRENT_BISE_SYLLABUS_VERIFIED"
+    },
+    {
+      "number": 7,
+      "titleEnglish": "Thermal Properties of Matter",
+      "titleUrdu": "مادے کی حرارتی خصوصیات",
+      "status": "CURRENT_BISE_SYLLABUS_VERIFIED"
+    },
+    {
+      "number": 8,
+      "titleEnglish": "Magnetism",
+      "titleUrdu": "مقناطیسیت",
+      "status": "CURRENT_BISE_SYLLABUS_VERIFIED"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "fullBookDefault": true,
+    "alpPolicy": "OPTIONAL_VERIFIED_EXAM_FILTER_ONLY"
+  }
+}

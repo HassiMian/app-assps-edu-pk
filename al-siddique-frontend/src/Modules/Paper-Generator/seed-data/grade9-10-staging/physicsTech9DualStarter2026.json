@@ -1,0 +1,4916 @@
+{
+  "schemaVersion": "assps-physics-tech9-dual-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "scope": "CURRENT_GRADE9_PHYSICS_TECH_DUAL_MEDIUM_STARTER",
+  "drafts": [
+    {
+      "id": "IX-PHT-E-C01-M01",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C01",
+        "number": 1
+      },
+      "topicId": "SI units",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Physical Quantities and Measurements"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "The SI base unit of length is?",
+          "answer": "metre",
+          "options": [
+            {
+              "id": "A",
+              "text": "metre"
+            },
+            {
+              "id": "B",
+              "text": "second"
+            },
+            {
+              "id": "C",
+              "text": "kilogram"
+            },
+            {
+              "id": "D",
+              "text": "newton"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-E-C01-M02",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C01",
+        "number": 1
+      },
+      "topicId": "accuracy precision",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Physical Quantities and Measurements"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "Precision mainly describes?",
+          "answer": "Closeness of repeated measurements to each other",
+          "options": [
+            {
+              "id": "A",
+              "text": "Closeness of repeated measurements to each other"
+            },
+            {
+              "id": "B",
+              "text": "Only closeness to zero"
+            },
+            {
+              "id": "C",
+              "text": "Instrument colour"
+            },
+            {
+              "id": "D",
+              "text": "Unit conversion"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-E-C01-S01",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C01",
+        "number": 1
+      },
+      "topicId": "measurement",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Physical Quantities and Measurements"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "Differentiate accuracy and precision.",
+          "answer": "Accuracy is closeness to an accepted/true value; precision is closeness among repeated measurements."
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-E-C01-N01",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C01",
+        "number": 1
+      },
+      "topicId": "scientific notation",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Physical Quantities and Measurements"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "Write 0.00045 in scientific notation.",
+          "answer": "4.5 × 10⁻⁴."
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-E-C02-M01",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C02",
+        "number": 2
+      },
+      "topicId": "velocity",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Kinematics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "Velocity differs from speed because velocity includes?",
+          "answer": "Direction",
+          "options": [
+            {
+              "id": "A",
+              "text": "Direction"
+            },
+            {
+              "id": "B",
+              "text": "Mass"
+            },
+            {
+              "id": "C",
+              "text": "Temperature"
+            },
+            {
+              "id": "D",
+              "text": "Pressure"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-E-C02-M02",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C02",
+        "number": 2
+      },
+      "topicId": "acceleration",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Kinematics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "Acceleration is the rate of change of?",
+          "answer": "Velocity",
+          "options": [
+            {
+              "id": "A",
+              "text": "Velocity"
+            },
+            {
+              "id": "B",
+              "text": "Mass"
+            },
+            {
+              "id": "C",
+              "text": "Density"
+            },
+            {
+              "id": "D",
+              "text": "Energy only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-E-C02-S01",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C02",
+        "number": 2
+      },
+      "topicId": "motion graphs",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Kinematics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "What does the slope of a distance-time graph represent?",
+          "answer": "It represents speed."
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-E-C02-N01",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C02",
+        "number": 2
+      },
+      "topicId": "speed",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Kinematics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "A body covers 150 m in 15 s. Find average speed.",
+          "answer": "v = 150/15 = 10 m/s."
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-E-C03-M01",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C03",
+        "number": 3
+      },
+      "topicId": "Newton laws",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Dynamics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "F = ma is associated with?",
+          "answer": "Newton’s second law",
+          "options": [
+            {
+              "id": "A",
+              "text": "Newton’s second law"
+            },
+            {
+              "id": "B",
+              "text": "Hooke’s law"
+            },
+            {
+              "id": "C",
+              "text": "Pascal’s law"
+            },
+            {
+              "id": "D",
+              "text": "Ohm’s law"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-E-C03-M02",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C03",
+        "number": 3
+      },
+      "topicId": "momentum",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Dynamics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "Momentum is equal to?",
+          "answer": "mass × velocity",
+          "options": [
+            {
+              "id": "A",
+              "text": "mass × velocity"
+            },
+            {
+              "id": "B",
+              "text": "force ÷ area"
+            },
+            {
+              "id": "C",
+              "text": "work ÷ time"
+            },
+            {
+              "id": "D",
+              "text": "mass ÷ volume"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-E-C03-S01",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C03",
+        "number": 3
+      },
+      "topicId": "inertia",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Dynamics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "Define inertia.",
+          "answer": "Inertia is the tendency of a body to resist a change in its state of rest or uniform motion."
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-E-C03-N01",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C03",
+        "number": 3
+      },
+      "topicId": "force",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Dynamics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "Find the force on a 4 kg mass accelerating at 2 m/s².",
+          "answer": "F = ma = 4×2 = 8 N."
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-E-C04-M01",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C04",
+        "number": 4
+      },
+      "topicId": "moment",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Turning Effects of Force"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "Moment of a force equals?",
+          "answer": "force × perpendicular distance",
+          "options": [
+            {
+              "id": "A",
+              "text": "force × perpendicular distance"
+            },
+            {
+              "id": "B",
+              "text": "mass × velocity"
+            },
+            {
+              "id": "C",
+              "text": "pressure × volume"
+            },
+            {
+              "id": "D",
+              "text": "power × time only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-E-C04-M02",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C04",
+        "number": 4
+      },
+      "topicId": "equilibrium",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Turning Effects of Force"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "For rotational equilibrium, the net moment is?",
+          "answer": "Zero",
+          "options": [
+            {
+              "id": "A",
+              "text": "Zero"
+            },
+            {
+              "id": "B",
+              "text": "Always maximum"
+            },
+            {
+              "id": "C",
+              "text": "Equal to mass"
+            },
+            {
+              "id": "D",
+              "text": "Undefined"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-E-C04-S01",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C04",
+        "number": 4
+      },
+      "topicId": "stability",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Turning Effects of Force"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "How can lowering the centre of gravity affect stability?",
+          "answer": "It generally increases stability by making tipping less likely."
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-E-C04-N01",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C04",
+        "number": 4
+      },
+      "topicId": "moment",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Turning Effects of Force"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "A 12 N force acts 0.5 m perpendicular from a pivot. Find the moment.",
+          "answer": "Moment = 12×0.5 = 6 N m."
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-E-C05-M01",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C05",
+        "number": 5
+      },
+      "topicId": "power",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Work, Energy and Power"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "Power is the rate of doing?",
+          "answer": "Work",
+          "options": [
+            {
+              "id": "A",
+              "text": "Work"
+            },
+            {
+              "id": "B",
+              "text": "Mass"
+            },
+            {
+              "id": "C",
+              "text": "Density"
+            },
+            {
+              "id": "D",
+              "text": "Pressure only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-E-C05-M02",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C05",
+        "number": 5
+      },
+      "topicId": "energy conservation",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Work, Energy and Power"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "Conservation of energy means energy can?",
+          "answer": "Change form but total energy remains conserved",
+          "options": [
+            {
+              "id": "A",
+              "text": "Change form but total energy remains conserved"
+            },
+            {
+              "id": "B",
+              "text": "Be created from nothing"
+            },
+            {
+              "id": "C",
+              "text": "Always disappear"
+            },
+            {
+              "id": "D",
+              "text": "Exist only as heat"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-E-C05-S01",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C05",
+        "number": 5
+      },
+      "topicId": "renewable energy",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Work, Energy and Power"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "Give one renewable and one non-renewable energy source.",
+          "answer": "Example: solar energy is renewable; coal is non-renewable."
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-E-C05-N01",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C05",
+        "number": 5
+      },
+      "topicId": "power",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Work, Energy and Power"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "A machine does 300 J of work in 15 s. Find power.",
+          "answer": "P = W/t = 300/15 = 20 W."
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-E-C06-M01",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C06",
+        "number": 6
+      },
+      "topicId": "density",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Mechanical Properties of Matter"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "Density is?",
+          "answer": "mass ÷ volume",
+          "options": [
+            {
+              "id": "A",
+              "text": "mass ÷ volume"
+            },
+            {
+              "id": "B",
+              "text": "force ÷ area"
+            },
+            {
+              "id": "C",
+              "text": "work ÷ time"
+            },
+            {
+              "id": "D",
+              "text": "distance ÷ time"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-E-C06-M02",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C06",
+        "number": 6
+      },
+      "topicId": "pressure",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Mechanical Properties of Matter"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "Pressure is?",
+          "answer": "force per unit area",
+          "options": [
+            {
+              "id": "A",
+              "text": "force per unit area"
+            },
+            {
+              "id": "B",
+              "text": "mass per unit time"
+            },
+            {
+              "id": "C",
+              "text": "energy per unit volume only"
+            },
+            {
+              "id": "D",
+              "text": "speed per unit time"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-E-C06-S01",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C06",
+        "number": 6
+      },
+      "topicId": "Pascal law",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Mechanical Properties of Matter"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "State Pascal’s principle in words.",
+          "answer": "Pressure applied to a confined fluid is transmitted throughout the fluid."
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-E-C06-N01",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C06",
+        "number": 6
+      },
+      "topicId": "density",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Mechanical Properties of Matter"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "A 600 g sample occupies 300 cm³. Find density.",
+          "answer": "Density = 600/300 = 2 g/cm³."
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-E-C07-M01",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C07",
+        "number": 7
+      },
+      "topicId": "temperature heat",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Thermal Properties of Matter"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "Temperature is mainly related to?",
+          "answer": "Thermal state / average particle kinetic energy",
+          "options": [
+            {
+              "id": "A",
+              "text": "Thermal state / average particle kinetic energy"
+            },
+            {
+              "id": "B",
+              "text": "Amount of substance only"
+            },
+            {
+              "id": "C",
+              "text": "Magnetic pole strength"
+            },
+            {
+              "id": "D",
+              "text": "Momentum only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-E-C07-M02",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C07",
+        "number": 7
+      },
+      "topicId": "thermometer",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Thermal Properties of Matter"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "A thermometer is designed to measure?",
+          "answer": "Temperature",
+          "options": [
+            {
+              "id": "A",
+              "text": "Temperature"
+            },
+            {
+              "id": "B",
+              "text": "Mass"
+            },
+            {
+              "id": "C",
+              "text": "Force"
+            },
+            {
+              "id": "D",
+              "text": "Momentum"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-E-C07-S01",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C07",
+        "number": 7
+      },
+      "topicId": "heat temperature",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Thermal Properties of Matter"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "Differentiate heat and temperature.",
+          "answer": "Heat is energy transferred because of temperature difference; temperature measures thermal state."
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-E-C07-L01",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C07",
+        "number": 7
+      },
+      "topicId": "kinetic molecular theory",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Thermal Properties of Matter"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "Explain how heating affects particle motion in matter.",
+          "answer": "Heating generally increases average particle kinetic energy; this can increase temperature and may contribute to expansion or state changes depending on conditions."
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-E-C08-M01",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C08",
+        "number": 8
+      },
+      "topicId": "magnetic poles",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Magnetism"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "Like magnetic poles?",
+          "answer": "Repel",
+          "options": [
+            {
+              "id": "A",
+              "text": "Repel"
+            },
+            {
+              "id": "B",
+              "text": "Always attract"
+            },
+            {
+              "id": "C",
+              "text": "Lose all magnetism instantly"
+            },
+            {
+              "id": "D",
+              "text": "Have no interaction"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-E-C08-M02",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C08",
+        "number": 8
+      },
+      "topicId": "electromagnet",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Magnetism"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "An electromagnet depends on?",
+          "answer": "Electric current producing a magnetic field",
+          "options": [
+            {
+              "id": "A",
+              "text": "Electric current producing a magnetic field"
+            },
+            {
+              "id": "B",
+              "text": "Only gravity"
+            },
+            {
+              "id": "C",
+              "text": "Only heat"
+            },
+            {
+              "id": "D",
+              "text": "Only pressure"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-E-C08-S01",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C08",
+        "number": 8
+      },
+      "topicId": "magnetic field",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Magnetism"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "Define a magnetic field.",
+          "answer": "A region where a magnetic force can act on magnetic materials or magnetic poles."
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-E-C08-L01",
+      "chapter": {
+        "id": "IX-PHYTECH-EN-C08",
+        "number": 8
+      },
+      "topicId": "magnet applications",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-045",
+        "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Magnetism"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "en": {
+          "stem": "Compare permanent magnets and electromagnets and give one safe everyday application of each.",
+          "answer": "Permanent magnets retain magnetism without current; electromagnets depend on current and can be controlled. Examples may include a fridge magnet and a relay/doorbell mechanism."
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-U-C01-M01",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C01",
+        "number": 1
+      },
+      "topicId": "SI units",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "طبعی مقداریں اور پیمائش"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "لمبائی کی SI unit کیا ہے؟",
+          "answer": "metre",
+          "options": [
+            {
+              "id": "A",
+              "text": "metre"
+            },
+            {
+              "id": "B",
+              "text": "second"
+            },
+            {
+              "id": "C",
+              "text": "kilogram"
+            },
+            {
+              "id": "D",
+              "text": "newton"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-U-C01-M02",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C01",
+        "number": 1
+      },
+      "topicId": "accuracy precision",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "طبعی مقداریں اور پیمائش"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "Precision بنیادی طور پر کس چیز کو ظاہر کرتی ہے؟",
+          "answer": "Repeated measurements کا ایک دوسرے کے قریب ہونا",
+          "options": [
+            {
+              "id": "A",
+              "text": "Repeated measurements کا ایک دوسرے کے قریب ہونا"
+            },
+            {
+              "id": "B",
+              "text": "صرف zero کے قریب ہونا"
+            },
+            {
+              "id": "C",
+              "text": "instrument کا رنگ"
+            },
+            {
+              "id": "D",
+              "text": "unit تبدیل کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-U-C01-S01",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C01",
+        "number": 1
+      },
+      "topicId": "measurement",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "طبعی مقداریں اور پیمائش"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "Accuracy اور precision میں فرق بیان کریں۔",
+          "answer": "Accuracy accepted/true value سے قربت ہے، جبکہ precision repeated measurements کے باہمی قریب ہونے سے متعلق ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-U-C01-N01",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C01",
+        "number": 1
+      },
+      "topicId": "scientific notation",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "طبعی مقداریں اور پیمائش"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "0.00045 کو scientific notation میں لکھیں۔",
+          "answer": "4.5 × 10⁻⁴۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-U-C02-M01",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C02",
+        "number": 2
+      },
+      "topicId": "velocity",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "حرکیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "Velocity میں speed کے علاوہ کیا شامل ہوتا ہے؟",
+          "answer": "Direction",
+          "options": [
+            {
+              "id": "A",
+              "text": "Direction"
+            },
+            {
+              "id": "B",
+              "text": "Mass"
+            },
+            {
+              "id": "C",
+              "text": "Temperature"
+            },
+            {
+              "id": "D",
+              "text": "Pressure"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-U-C02-M02",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C02",
+        "number": 2
+      },
+      "topicId": "acceleration",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "حرکیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "Acceleration کس مقدار کی تبدیلی کی rate ہے؟",
+          "answer": "Velocity",
+          "options": [
+            {
+              "id": "A",
+              "text": "Velocity"
+            },
+            {
+              "id": "B",
+              "text": "Mass"
+            },
+            {
+              "id": "C",
+              "text": "Density"
+            },
+            {
+              "id": "D",
+              "text": "Energy only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-U-C02-S01",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C02",
+        "number": 2
+      },
+      "topicId": "motion graphs",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "حرکیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "Distance-time graph کی slope کیا ظاہر کرتی ہے؟",
+          "answer": "Slope speed کو ظاہر کرتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-U-C02-N01",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C02",
+        "number": 2
+      },
+      "topicId": "speed",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "حرکیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "ایک جسم 150 m فاصلہ 15 s میں طے کرتا ہے۔ average speed معلوم کریں۔",
+          "answer": "v = 150/15 = 10 m/s۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-U-C03-M01",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C03",
+        "number": 3
+      },
+      "topicId": "Newton laws",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "قوت اور حرکت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "F = ma کس law سے متعلق ہے؟",
+          "answer": "Newton کا دوسرا law",
+          "options": [
+            {
+              "id": "A",
+              "text": "Newton کا دوسرا law"
+            },
+            {
+              "id": "B",
+              "text": "Hooke law"
+            },
+            {
+              "id": "C",
+              "text": "Pascal law"
+            },
+            {
+              "id": "D",
+              "text": "Ohm law"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-U-C03-M02",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C03",
+        "number": 3
+      },
+      "topicId": "momentum",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "قوت اور حرکت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "Momentum کا فارمولا کیا ہے؟",
+          "answer": "mass × velocity",
+          "options": [
+            {
+              "id": "A",
+              "text": "mass × velocity"
+            },
+            {
+              "id": "B",
+              "text": "force ÷ area"
+            },
+            {
+              "id": "C",
+              "text": "work ÷ time"
+            },
+            {
+              "id": "D",
+              "text": "mass ÷ volume"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-U-C03-S01",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C03",
+        "number": 3
+      },
+      "topicId": "inertia",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "قوت اور حرکت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "Inertia کی تعریف کریں۔",
+          "answer": "جسم کی وہ خاصیت جس سے وہ اپنی حالتِ سکون یا یکساں حرکت میں تبدیلی کی مزاحمت کرتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-U-C03-N01",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C03",
+        "number": 3
+      },
+      "topicId": "force",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "قوت اور حرکت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "4 kg mass کو 2 m/s² acceleration ملے تو force معلوم کریں۔",
+          "answer": "F = ma = 4×2 = 8 N۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-U-C04-M01",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C04",
+        "number": 4
+      },
+      "topicId": "moment",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "قوت کے گردشی اثرات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "Moment of force کا فارمولا کیا ہے؟",
+          "answer": "force × perpendicular distance",
+          "options": [
+            {
+              "id": "A",
+              "text": "force × perpendicular distance"
+            },
+            {
+              "id": "B",
+              "text": "mass × velocity"
+            },
+            {
+              "id": "C",
+              "text": "pressure × volume"
+            },
+            {
+              "id": "D",
+              "text": "power × time only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-U-C04-M02",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C04",
+        "number": 4
+      },
+      "topicId": "equilibrium",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "قوت کے گردشی اثرات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "Rotational equilibrium میں net moment کیا ہوتا ہے؟",
+          "answer": "Zero",
+          "options": [
+            {
+              "id": "A",
+              "text": "Zero"
+            },
+            {
+              "id": "B",
+              "text": "ہمیشہ maximum"
+            },
+            {
+              "id": "C",
+              "text": "mass کے برابر"
+            },
+            {
+              "id": "D",
+              "text": "Undefined"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-U-C04-S01",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C04",
+        "number": 4
+      },
+      "topicId": "stability",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "قوت کے گردشی اثرات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "Centre of gravity کم کرنے سے stability پر کیا اثر پڑتا ہے؟",
+          "answer": "عام طور پر stability بڑھتی ہے کیونکہ جسم کے پلٹنے کا امکان کم ہوتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-U-C04-N01",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C04",
+        "number": 4
+      },
+      "topicId": "moment",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "قوت کے گردشی اثرات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "12 N force pivot سے 0.5 m perpendicular distance پر لگے تو moment معلوم کریں۔",
+          "answer": "Moment = 12×0.5 = 6 N m۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-U-C05-M01",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C05",
+        "number": 5
+      },
+      "topicId": "power",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "کام، توانائی اور طاقت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "Power کس چیز کی rate ہے؟",
+          "answer": "Work کرنے کی",
+          "options": [
+            {
+              "id": "A",
+              "text": "Work کرنے کی"
+            },
+            {
+              "id": "B",
+              "text": "Mass کی"
+            },
+            {
+              "id": "C",
+              "text": "Density کی"
+            },
+            {
+              "id": "D",
+              "text": "Pressure only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-U-C05-M02",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C05",
+        "number": 5
+      },
+      "topicId": "energy conservation",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "کام، توانائی اور طاقت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "Conservation of energy کا مطلب کیا ہے؟",
+          "answer": "Energy form بدل سکتی ہے مگر total محفوظ رہتی ہے",
+          "options": [
+            {
+              "id": "A",
+              "text": "Energy form بدل سکتی ہے مگر total محفوظ رہتی ہے"
+            },
+            {
+              "id": "B",
+              "text": "Energy کچھ نہیں سے بنتی ہے"
+            },
+            {
+              "id": "C",
+              "text": "Energy ہمیشہ ختم ہو جاتی ہے"
+            },
+            {
+              "id": "D",
+              "text": "صرف heat موجود ہے"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-U-C05-S01",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C05",
+        "number": 5
+      },
+      "topicId": "renewable energy",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "کام، توانائی اور طاقت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "ایک renewable اور ایک non-renewable energy source کی مثال دیں۔",
+          "answer": "مثال: solar energy renewable ہے جبکہ coal non-renewable ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-U-C05-N01",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C05",
+        "number": 5
+      },
+      "topicId": "power",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "کام، توانائی اور طاقت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "ایک machine 300 J work، 15 s میں کرتی ہے۔ power معلوم کریں۔",
+          "answer": "P = W/t = 300/15 = 20 W۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-U-C06-M01",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C06",
+        "number": 6
+      },
+      "topicId": "density",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مادے کی میکانی خصوصیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "Density کا فارمولا کیا ہے؟",
+          "answer": "mass ÷ volume",
+          "options": [
+            {
+              "id": "A",
+              "text": "mass ÷ volume"
+            },
+            {
+              "id": "B",
+              "text": "force ÷ area"
+            },
+            {
+              "id": "C",
+              "text": "work ÷ time"
+            },
+            {
+              "id": "D",
+              "text": "distance ÷ time"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-U-C06-M02",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C06",
+        "number": 6
+      },
+      "topicId": "pressure",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مادے کی میکانی خصوصیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "Pressure کیا ہے؟",
+          "answer": "force per unit area",
+          "options": [
+            {
+              "id": "A",
+              "text": "force per unit area"
+            },
+            {
+              "id": "B",
+              "text": "mass per unit time"
+            },
+            {
+              "id": "C",
+              "text": "energy per unit volume only"
+            },
+            {
+              "id": "D",
+              "text": "speed per unit time"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-U-C06-S01",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C06",
+        "number": 6
+      },
+      "topicId": "Pascal law",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مادے کی میکانی خصوصیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "Pascal principle الفاظ میں بیان کریں۔",
+          "answer": "Confined fluid پر لگایا گیا pressure پورے fluid میں transmit ہوتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-U-C06-N01",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C06",
+        "number": 6
+      },
+      "topicId": "density",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مادے کی میکانی خصوصیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "600 g sample کا volume 300 cm³ ہو تو density معلوم کریں۔",
+          "answer": "Density = 600/300 = 2 g/cm³۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-U-C07-M01",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C07",
+        "number": 7
+      },
+      "topicId": "temperature heat",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مادے کی حرارتی خصوصیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "Temperature بنیادی طور پر کس چیز سے متعلق ہے؟",
+          "answer": "Thermal state / particles کی average kinetic energy",
+          "options": [
+            {
+              "id": "A",
+              "text": "Thermal state / particles کی average kinetic energy"
+            },
+            {
+              "id": "B",
+              "text": "صرف substance کی مقدار"
+            },
+            {
+              "id": "C",
+              "text": "magnetic pole strength"
+            },
+            {
+              "id": "D",
+              "text": "momentum only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-U-C07-M02",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C07",
+        "number": 7
+      },
+      "topicId": "thermometer",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مادے کی حرارتی خصوصیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "Thermometer کس quantity کو measure کرتا ہے؟",
+          "answer": "Temperature",
+          "options": [
+            {
+              "id": "A",
+              "text": "Temperature"
+            },
+            {
+              "id": "B",
+              "text": "Mass"
+            },
+            {
+              "id": "C",
+              "text": "Force"
+            },
+            {
+              "id": "D",
+              "text": "Momentum"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-U-C07-S01",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C07",
+        "number": 7
+      },
+      "topicId": "heat temperature",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مادے کی حرارتی خصوصیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "Heat اور temperature میں فرق بیان کریں۔",
+          "answer": "Heat temperature difference کی وجہ سے transfer ہونے والی energy ہے؛ temperature thermal state کا پیمانہ ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-U-C07-L01",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C07",
+        "number": 7
+      },
+      "topicId": "kinetic molecular theory",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مادے کی حرارتی خصوصیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "Heating سے matter کے particles کی motion پر کیا اثر پڑتا ہے؟",
+          "answer": "Heating عموماً particles کی average kinetic energy بڑھاتی ہے؛ اس سے temperature بڑھ سکتا ہے اور حالات کے مطابق expansion یا state change ہو سکتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-U-C08-M01",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C08",
+        "number": 8
+      },
+      "topicId": "magnetic poles",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مقناطیسیت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "Like magnetic poles کیا کرتے ہیں؟",
+          "answer": "Repel",
+          "options": [
+            {
+              "id": "A",
+              "text": "Repel"
+            },
+            {
+              "id": "B",
+              "text": "ہمیشہ attract"
+            },
+            {
+              "id": "C",
+              "text": "فوراً تمام magnetism کھو دیتے ہیں"
+            },
+            {
+              "id": "D",
+              "text": "کوئی interaction نہیں"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-U-C08-M02",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C08",
+        "number": 8
+      },
+      "topicId": "electromagnet",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مقناطیسیت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "Electromagnet کس principle پر کام کرتا ہے؟",
+          "answer": "Electric current magnetic field پیدا کرتا ہے",
+          "options": [
+            {
+              "id": "A",
+              "text": "Electric current magnetic field پیدا کرتا ہے"
+            },
+            {
+              "id": "B",
+              "text": "صرف gravity"
+            },
+            {
+              "id": "C",
+              "text": "صرف heat"
+            },
+            {
+              "id": "D",
+              "text": "صرف pressure"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHT-U-C08-S01",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C08",
+        "number": 8
+      },
+      "topicId": "magnetic field",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مقناطیسیت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "Magnetic field کی تعریف کریں۔",
+          "answer": "وہ region جہاں magnetic force magnetic material یا magnetic pole پر اثر انداز ہو سکتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHT-U-C08-L01",
+      "chapter": {
+        "id": "IX-PHYTECH-UR-C08",
+        "number": 8
+      },
+      "topicId": "magnet applications",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-046",
+        "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مقناطیسیت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics-Tech IX dual-medium starter aligned to verified eight-chapter syllabus; academic review pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Physics-Tech item.",
+      "content": {
+        "ur": {
+          "stem": "Permanent magnet اور electromagnet کا تقابل کریں اور ہر ایک کی ایک محفوظ روزمرہ application لکھیں۔",
+          "answer": "Permanent magnet بغیر current کے magnetism برقرار رکھتا ہے؛ electromagnet current پر depend کرتا اور control کیا جا سکتا ہے۔ مثالیں fridge magnet اور relay/doorbell mechanism ہو سکتی ہیں۔"
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 64,
+    "english": 32,
+    "urdu": 32,
+    "mcq": 32,
+    "short": 16,
+    "numerical": 12,
+    "long": 4,
+    "chapters": 8
+  }
+}

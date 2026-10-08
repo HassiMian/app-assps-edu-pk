@@ -74,7 +74,7 @@ test('Grade X current catalogue refresh preserves unresolved medium/session fact
 test('Grade IX Matric-Tech catalogue identities are expanded without collapsing media or similarly named subjects',()=>{
  const tech=m.entries.filter(x=>x.grade===9&&x.curriculumTrack==='MATRIC_TECH'&&x.stream==='Matric-Tech');
  assert.equal(tech.length,17);
- const provisional=new Set(['pectaa-catalog-030','pectaa-catalog-031','pectaa-catalog-032','pectaa-catalog-033','pectaa-catalog-034','pectaa-catalog-035','pectaa-catalog-036','pectaa-catalog-038','pectaa-catalog-039','pectaa-catalog-040','pectaa-catalog-042','pectaa-catalog-043','pectaa-catalog-044']);
+ const provisional=new Set(['pectaa-catalog-030','pectaa-catalog-031','pectaa-catalog-032','pectaa-catalog-033','pectaa-catalog-034','pectaa-catalog-035','pectaa-catalog-036','pectaa-catalog-038','pectaa-catalog-039','pectaa-catalog-040','pectaa-catalog-042','pectaa-catalog-043','pectaa-catalog-044','pectaa-catalog-045','pectaa-catalog-046']);
  assert(tech.every(x=>x.stream==='Matric-Tech'&&x.catalogLinkStatus==='OFFICIAL_PAGE_ANCHOR_FOUND'&&x.catalogAssetUrl&&(provisional.has(x.recordId)?x.questionGenerationStatus==='PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW':/^BLOCKED_PENDING_/.test(x.questionGenerationStatus))));
  assert.equal(m.additionalCatalogStreamsPending.includes('Matric-Tech IX'),false);
  assert(tech.some(x=>x.subject==='Computer-Tech'));
