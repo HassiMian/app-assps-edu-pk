@@ -497,7 +497,7 @@ class JarvisCognitiveCore {
       console.warn(`[JARVIS Authorization] Denied tool "${name}" for role ${role || 'UNKNOWN'}`);
       return { success: false, error: 'This school operation is not authorized for the caller role.' };
     }
-    console.log(`[JARVIS Tool Call] Executing "${name}" for role ${role} with args:`, JSON.stringify(args));
+    console.log(`[JARVIS Tool Call] Executing "${name}" for role ${role}`);
     try {
       switch (name) {
         case 'get_exam_datesheet':
@@ -739,13 +739,8 @@ class JarvisCognitiveCore {
       }
     }
 
-    // 5. General Intelligent Autonomous Query
-    try {
-      const tables = await tools.inspectDatabaseSchema({ action: 'list_tables' });
-      return `Sir, aap ka command: "${text}" process karne ke liye database active hai (83 tables connected). Kisi bhi table ka data, fee adjustment, ya operational task foran perform kiya ja sakta hai.`;
-    } catch {
-      return `Sir, aap ka paigham mosool ho gaya hai: "${text}". Main Al-Siddique Scholars OS operations ke liye hazir hoon.`;
-    }
+    // 5. General grounded school-operation fallback
+    return `Sir, aap ka paigham mosool ho gaya hai: "${text}". Main sirf authorized, tenant-scoped ASSPS school operations par kaam karunga aur verified data ke baghair koi record ya result invent nahi karunga.`;
   }
 
   // ─── Main Entry Point ─────────────────────────────────────────────────────
@@ -754,7 +749,7 @@ class JarvisCognitiveCore {
     const cleanFrom = cleanPhoneNumber(fromNumber);
     const role = this.getCallerRole(cleanFrom);
 
-    console.log(`[JARVIS Core] Processing message from +${cleanFrom} (Role: ${role}): "${text}"`);
+    console.log(`[JARVIS Core] Processing message (role=${role}, chars=${String(text || '').length})`);
 
     if (!this.sessionMemory.has(cleanFrom)) {
       this.sessionMemory.set(cleanFrom, []);

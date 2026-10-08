@@ -113,3 +113,18 @@ test('WhatsApp event migration adds nullable school scope without guessing legac
   assert.doesNotMatch(migration, /UPDATE\s+whatsapp_inbound_events\s+SET\s+school_id/i)
   assert.doesNotMatch(migration, /school_id\s+INTEGER\s+NOT NULL/i)
 })
+
+test('school cognitive core does not log tool argument payloads or promise unscoped database authority', () => {
+  const core = read('al-siddique-backend/src/services/whatsapp/jarvisCognitiveCore.js')
+  assert.doesNotMatch(core, /JSON\.stringify\(args\)/)
+  assert.doesNotMatch(core, /83 tables connected/)
+  assert.doesNotMatch(core, /Kisi bhi table ka data, fee adjustment/)
+  assert.match(core, /authorized, tenant-scoped ASSPS school operations/)
+})
+
+test('school cognitive runtime logs metadata instead of caller phone, message text, or tool payloads', () => {
+  const core = read('al-siddique-backend/src/services/whatsapp/jarvisCognitiveCore.js')
+  assert.doesNotMatch(core, /Processing message from \+\$\{cleanFrom\}/)
+  assert.doesNotMatch(core, /JSON\.stringify\(args\)/)
+  assert.match(core, /Processing message \(role=\$\{role\}, chars=\$\{String\(text \|\| ''\)\.length\}\)/)
+})
