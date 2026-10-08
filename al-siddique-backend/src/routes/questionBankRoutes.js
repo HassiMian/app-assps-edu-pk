@@ -9,7 +9,8 @@ const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
 const { ensureTeacherAssignmentSchema } = require('../services/teacherAssignmentService')
 const { captureQuestionGovernance, transitionQuestionLifecycle } = require('../services/questionBankGovernance')
-const { recordIndependentAcademicReview, getAcademicReviewContext } = require('../services/grade910AcademicReviewService')
+const { recordIndependentAcademicReview, getAcademicReviewContext, returnAcademicReviewForCorrection } = require('../services/grade910AcademicReviewService')
+const { reviseProvisionalAcademicQuestion } = require('../services/grade910AcademicRevisionService')
 
 const canUseQuestionBank = requireRoles('super_admin', 'admin', 'principal', 'teacher')
 const canManageQuestionBank = requireRoles('super_admin', 'admin', 'principal')
@@ -91,6 +92,25 @@ router.get('/governance/:publicId/review-context', canManageQuestionBank, async 
   }
 })
 
+router.post('/governance/:publicId/return-for-correction', canManageQuestionBank, async(req,res)=>{
+  try {
+    const schoolId=requireSchoolContext(req,res);if(!schoolId)return
+    const data=await returnAcademicReviewForCorrection({
+      schoolId,reviewerId:req.user?.id||null,publicId:req.params.publicId,
+      expectedRevision:req.body?.expectedRevision,
+      expectedContentHash:req.body?.expectedContentHash,
+      reason:req.body?.reason,
+    })
+    res.set('Cache-Control','private, no-store')
+    res.status(200).json({success:true,data})
+  } catch(e) {
+    const status=Number(e.status)||500
+    if(status>=500)console.error('Grade9/10 correction request failed:',e)
+    res.status(status).json({success:false,code:e.code||'ACADEMIC_CORRECTION_FAILED',
+      message:status>=500?'Academic correction request failed.':e.message})
+  }
+})
+
 router.post('/governance/:publicId/academic-review', canManageQuestionBank, async (req,res)=>{
   try {
     const schoolId=requireSchoolContext(req,res);if(!schoolId)return
@@ -107,6 +127,77 @@ router.post('/governance/:publicId/academic-review', canManageQuestionBank, asyn
     if(status>=500)console.error('Grade9/10 academic review failed:',e)
     res.status(status).json({success:false,code:e.code||'GRADE910_REVIEW_FAILED',
       message:status>=500?'Academic review could not be recorded.':e.message})
+  }
+})
+
+// Phase 5: read-only official source registry for authorized school reviewers.
+router.get('/academic-sources', canManageQuestionBank, (req, res) => {
+  const schoolId = requireSchoolContext(req, res)
+  if (!schoolId) return
+  if (!['admin','principal','super_admin'].includes(String(req.user?.role || '').toLowerCase()))
+    return res.status(403).json({ success:false, code:'ACADEMIC_REVIEW_ROLE_REQUIRED' })
+  const registry = require('../data/verifiedGrade910SourceRegistry.json')
+  res.set('Cache-Control','private, no-store')
+  res.json({ success:true, data:registry.entries.map(item => ({
+    recordId:item.recordId, grade:item.grade, subject:item.subject,
+    medium:item.medium, edition:item.edition, pdfSha256:item.pdfSha256,
+    academicApproval:false,
+  })) })
+})
+
+// Intake is metadata-only: links the EXISTING tenant-local provisional row
+// to an immutable governance revision. It neither duplicates nor approves it.
+router.post('/academic-revise/:id', canManageQuestionBank, async(req,res)=>{
+  try {
+    const schoolId=requireSchoolContext(req,res);if(!schoolId)return
+    if(!['admin','principal','super_admin'].includes(String(req.user?.role||'').toLowerCase()))
+      return res.status(403).json({success:false,code:'ACADEMIC_REVISION_ROLE_REQUIRED'})
+    const data=await reviseProvisionalAcademicQuestion({
+      schoolId,authorId:req.user?.id||null,questionId:req.params.id,
+      expectedRevision:req.body?.expectedRevision,
+      expectedContentHash:req.body?.expectedContentHash,
+      changes:req.body?.changes,
+    })
+    res.set('Cache-Control','private, no-store')
+    return res.status(200).json({success:true,data})
+  } catch(e) {
+    const status=Number(e.status)||500
+    if(status>=500)console.error('Grade9/10 atomic correction failed:',e)
+    return res.status(status).json({success:false,code:e.code||'ACADEMIC_REVISION_FAILED',
+      message:status>=500?'Academic question revision could not be saved.':e.message})
+  }
+})
+
+router.post('/academic-intake/:id', canManageQuestionBank, async (req, res) => {
+  try {
+    const schoolId = requireSchoolContext(req, res)
+    if (!schoolId) return
+    if (!['admin','principal','super_admin'].includes(String(req.user?.role || '').toLowerCase()))
+      return res.status(403).json({ success:false, code:'ACADEMIC_INTAKE_ROLE_REQUIRED' })
+    const source = await query(
+      'SELECT * FROM question_bank WHERE school_id=$1 AND id=$2',
+      [schoolId, String(req.params.id || '')]
+    )
+    if (source.rowCount !== 1)
+      return res.status(404).json({ success:false, code:'QUESTION_NOT_FOUND' })
+    const result = await captureQuestionGovernance({
+      schoolId, userId:req.user.id,
+      idempotencyKey:'academic-intake:'+crypto.randomUUID(),
+      question:source.rows[0], sourceQuestionBankId:source.rows[0].id,
+      requireExactProvisionalSource:true,
+      expectedRevision:0,
+    })
+    res.set('Cache-Control','private, no-store')
+    return res.status(201).json({
+      success:true, data:result,
+      academicApprovalGranted:false,sourceQuestionBankId:source.rows[0].id,
+    })
+  } catch(e) {
+    const status=Number(e.status)||500
+    if(status>=500)console.error('Provisional academic intake failed:',e)
+    return res.status(status).json({success:false,
+      code:e.code||'ACADEMIC_INTAKE_FAILED',
+      message:status>=500?'Academic intake failed.':e.message})
   }
 })
 
@@ -207,7 +298,7 @@ router.get('/', async (req, res) => {
       params.push(approved === 'true')
     }
 
-    sql += ` ORDER BY created_at DESC LIMIT $${paramCount + 1} OFFSET $${paramCount + 2}`
+    sql += ` ORDER BY created_at DESC, id DESC LIMIT $${paramCount + 1} OFFSET $${paramCount + 2}`
     params.push(limit, offset)
 
     const result = await query(sql, params)

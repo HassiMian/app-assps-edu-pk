@@ -1,5 +1,5 @@
 const crypto = require('crypto')
-const {assertIndependentReviewReady}=require('./grade910AcademicReviewGate')
+const {assertIndependentReviewReady,normalizeGrade,reviewMappingKey}=require('./grade910AcademicReviewGate')
 
 const text = value => String(value ?? '').trim().replace(/\s+/g, ' ')
 const lower = value => text(value).toLowerCase()
@@ -138,7 +138,7 @@ async function withTenantTransaction(schoolId, fn) {
   }
 }
 
-async function captureQuestionGovernance({ schoolId, userId = null, idempotencyKey, question = {}, sourceQuestionBankId = null, expectedRevision = null }) {
+async function captureQuestionGovernance({ schoolId, userId = null, idempotencyKey, question = {}, sourceQuestionBankId = null, expectedRevision = null, requireExactProvisionalSource = false, tenantClient = null }) {
   const key = assertIdempotencyKey(idempotencyKey)
   const fingerprint = buildCanonicalFingerprint(question)
   const revisionPayload = buildQuestionRevisionPayload(question)
@@ -150,7 +150,31 @@ async function captureQuestionGovernance({ schoolId, userId = null, idempotencyK
   }
   const requestHash = sha256({ fingerprint, revisionHash, sourceId, expectedRevision:normalizedExpectedRevision })
 
-  return withTenantTransaction(schoolId, async (client, tenantId) => {
+  const captureInTransaction = async (client, tenantId) => {
+    if (requireExactProvisionalSource) {
+      if (!sourceId || !Number.isInteger(Number(userId)) || Number(userId) < 1)
+        throw governanceError(400, 'INTAKE_SOURCE_AND_AUTHOR_REQUIRED', 'An existing question and authenticated intake author are required.')
+      const source = await client.query(
+        "SELECT * FROM question_bank WHERE school_id=$1 AND id=$2 FOR UPDATE",
+        [tenantId, sourceId]
+      )
+      if (source.rowCount !== 1)
+        throw governanceError(404, 'INTAKE_QUESTION_NOT_FOUND', 'Question not found in this school.')
+      const row = source.rows[0]
+      if (row.is_approved === true || row.source_type !== 'json_seed' ||
+          row.metadata?.review_state !== 'provisional_internal' ||
+          !['9th', '10th'].includes(String(row.class_level || '').trim()))
+        throw governanceError(409, 'INTAKE_NOT_PROVISIONAL', 'Only provisional Grade 9/10 seeded questions can be linked by this intake.')
+      if (buildRevisionHash(row) !== revisionHash ||
+          buildCanonicalFingerprint(row) !== fingerprint)
+        throw governanceError(409, 'INTAKE_CONTENT_CHANGED', 'Question changed after loading; reload the current seeded record.')
+      const existing = await client.query(
+        "SELECT public_id FROM question_masters WHERE school_id=$1 AND source_question_bank_id=$2 LIMIT 1",
+        [tenantId, sourceId]
+      )
+      if (existing.rowCount)
+        throw governanceError(409, 'INTAKE_ALREADY_GOVERNED', 'This question already has a governed revision; reload it.')
+    }
     const previous = await client.query(
       `SELECT request_hash, result_json FROM question_capture_requests WHERE school_id=$1 AND idempotency_key=$2`,
       [tenantId, key]
@@ -186,6 +210,9 @@ async function captureQuestionGovernance({ schoolId, userId = null, idempotencyK
     )
 
     let master = masterResult.rows[0] || null
+    if (requireExactProvisionalSource && master &&
+        String(master.source_question_bank_id || '') !== String(sourceId))
+      throw governanceError(409, 'INTAKE_DUPLICATE_FINGERPRINT', 'This question collides with another governed source; independent review of the duplicate is required.')
     if (normalizedExpectedRevision != null) {
       const currentRevision = Number(master?.current_revision || 0)
       if (currentRevision !== normalizedExpectedRevision) {
@@ -280,7 +307,11 @@ async function captureQuestionGovernance({ schoolId, userId = null, idempotencyK
       [tenantId, key, fingerprint, master.id, requestHash, JSON.stringify(result), userId]
     )
     return result
-  })
+  }
+  // A trusted caller may provide an existing, tenant-scoped transaction so a
+  // corrected legacy row and its immutable revision commit or roll back together.
+  if (tenantClient) return captureInTransaction(tenantClient,Number(schoolId))
+  return withTenantTransaction(schoolId,captureInTransaction)
 }
 
 async function transitionQuestionLifecycle({ schoolId, userId = null, publicId, toStatus }) {
@@ -296,6 +327,20 @@ async function transitionQuestionLifecycle({ schoolId, userId = null, publicId, 
       throw governanceError(409, 'QUESTION_MASTER_HAS_NO_REVISION', 'A question must have an immutable revision before it can be ready.')
     }
     const nextStatus = lower(toStatus)
+    if(nextStatus==='reviewed' && master.lifecycle_status==='candidate' && Number(master.current_revision)>0){
+      const latest=await client.query(
+        'SELECT content_json,content_hash FROM question_revisions WHERE school_id=$1 AND question_master_id=$2 AND revision_number=$3',
+        [tenantId,master.id,master.current_revision]
+      )
+      if(latest.rowCount===1 && normalizeGrade(latest.rows[0].content_json?.classLevel)){
+        const rejection=await client.query(
+          "SELECT id FROM question_mappings WHERE school_id=$1 AND question_master_id=$2 AND mapping_type='grade910_academic_rejection' AND mapping_key=$3 AND mapping_status='reviewed'",
+          [tenantId,master.id,reviewMappingKey(Number(master.current_revision),String(latest.rows[0].content_hash))]
+        )
+        if(rejection.rowCount)
+          throw governanceError(409,'CORRECTION_REQUIRES_NEW_REVISION','The author must submit a corrected question revision before another review.')
+      }
+    }
     const academicReview = nextStatus==='ready'
       ? await assertIndependentReviewReady(client,{schoolId:tenantId,master,actorId:userId})
       : null

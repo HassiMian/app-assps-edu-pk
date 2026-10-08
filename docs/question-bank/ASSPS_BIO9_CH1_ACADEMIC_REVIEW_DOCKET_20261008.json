@@ -1,0 +1,568 @@
+{
+  "schemaVersion": "assps-biology9-ch1-review-docket-v1",
+  "draftId": "ASSPS-BIO9-C1-ORIGINAL-EDITORIAL-PILOT-20261008",
+  "sourceDraftFile": "ASSPS_BIO9_CH1_ORIGINAL_PRACTICE_DRAFT_20261008.json",
+  "sourceDraftSha256": "0ddc3084d0de2583579f18c24eda8fc3ff766f44af0dbe26def06a003205036d",
+  "schoolCode": "assps",
+  "schoolId": 1,
+  "grade": "9th",
+  "subject": "Biology",
+  "chapterNo": "1",
+  "sourceRecordId": "pectaa-catalog-009",
+  "sourcePdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+  "sourceEdition": "2025-26",
+  "originalQuestionsOnly": true,
+  "independentReviewCompleted": false,
+  "approvedQuestions": 0,
+  "automaticApprovalAllowed": false,
+  "automaticImportAllowed": false,
+  "draftTotals": {
+    "total": 27,
+    "mcq": 12,
+    "short": 12,
+    "long": 3
+  },
+  "releasePrerequisite": "Subject expert must inspect textbook source images, answer keys, curriculum mapping, originality and latest Question Bank content revision before governed approval.",
+  "questions": [
+    {
+      "localQuestionId": "BIO9-C1-MCQ-001",
+      "questionType": "mcq",
+      "proposedMarks": 1,
+      "sourceDraftSha256": "7dda7e32e620ecf69767a9acbc4d0bce5c5f9e807ba64a3443ea6f7e113f2416",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    },
+    {
+      "localQuestionId": "BIO9-C1-MCQ-002",
+      "questionType": "mcq",
+      "proposedMarks": 1,
+      "sourceDraftSha256": "fb2b683bb7aa113ed6dccd63097117272e81b37eb9b1cf81689c4183857dd8d0",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    },
+    {
+      "localQuestionId": "BIO9-C1-MCQ-003",
+      "questionType": "mcq",
+      "proposedMarks": 1,
+      "sourceDraftSha256": "552abca1af2449305c50d525a445fc18fd3bc8f15ef64be09fc3b508c7229a84",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    },
+    {
+      "localQuestionId": "BIO9-C1-MCQ-004",
+      "questionType": "mcq",
+      "proposedMarks": 1,
+      "sourceDraftSha256": "8e9b2166d0cd914f3e90556974908dd8a6bb53058e1723533e21aceeae45f3e7",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    },
+    {
+      "localQuestionId": "BIO9-C1-MCQ-005",
+      "questionType": "mcq",
+      "proposedMarks": 1,
+      "sourceDraftSha256": "d12b91b4d1ecd19b4dc6720bbd0fa6a173a4f513303b9bf93e076dbbc3081d7a",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    },
+    {
+      "localQuestionId": "BIO9-C1-MCQ-006",
+      "questionType": "mcq",
+      "proposedMarks": 1,
+      "sourceDraftSha256": "0777bcd48e4c7579660dbd47e9608eed2408b0c17783c8507b991b4f3ba268b9",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    },
+    {
+      "localQuestionId": "BIO9-C1-MCQ-007",
+      "questionType": "mcq",
+      "proposedMarks": 1,
+      "sourceDraftSha256": "72a500052cce9e7aff544fd83f7a6f1195bf5c3ba79ebcd2fe6b232ee149c3c3",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    },
+    {
+      "localQuestionId": "BIO9-C1-MCQ-008",
+      "questionType": "mcq",
+      "proposedMarks": 1,
+      "sourceDraftSha256": "6512aa6317275b08acf7eb82c590d90c066710f78560ee4468e71aa2e26c88cf",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    },
+    {
+      "localQuestionId": "BIO9-C1-MCQ-009",
+      "questionType": "mcq",
+      "proposedMarks": 1,
+      "sourceDraftSha256": "dc33259219977c5ae83bb388631567dea451bdeae5472418afb0cb45bee09f63",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    },
+    {
+      "localQuestionId": "BIO9-C1-MCQ-010",
+      "questionType": "mcq",
+      "proposedMarks": 1,
+      "sourceDraftSha256": "0dd63bbd12e7d935c11832c0e7b55235edc5aae9dda6268fed50760d2ffb7c32",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    },
+    {
+      "localQuestionId": "BIO9-C1-MCQ-011",
+      "questionType": "mcq",
+      "proposedMarks": 1,
+      "sourceDraftSha256": "b7b1b44d026bffae5bcb5d7db6dfa4dbee0eaadf4c80c0de3f0c4e0b1d53618d",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    },
+    {
+      "localQuestionId": "BIO9-C1-MCQ-012",
+      "questionType": "mcq",
+      "proposedMarks": 1,
+      "sourceDraftSha256": "d9d67fc16a8407e2b39b62ba49cb329337ca372395ff5807a2f0815210ca081f",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    },
+    {
+      "localQuestionId": "BIO9-C1-SHORT-001",
+      "questionType": "short",
+      "proposedMarks": 2,
+      "sourceDraftSha256": "d06d8c58da8334563bc28e559530ef9e14329d26e5549f15edd1d885fc04ce71",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    },
+    {
+      "localQuestionId": "BIO9-C1-SHORT-002",
+      "questionType": "short",
+      "proposedMarks": 2,
+      "sourceDraftSha256": "1e4573bc83e485ae8322b53b0c2693a72293e85813be8e20b84ced097962b881",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    },
+    {
+      "localQuestionId": "BIO9-C1-SHORT-003",
+      "questionType": "short",
+      "proposedMarks": 2,
+      "sourceDraftSha256": "602116063ccf56dc38b3571682d3b3e291cee320cdc8f36b12d6205b980c22ad",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    },
+    {
+      "localQuestionId": "BIO9-C1-SHORT-004",
+      "questionType": "short",
+      "proposedMarks": 2,
+      "sourceDraftSha256": "455e9c710f8ea6bb99ecd445d7f74972c4ad98d8701bd5f06a4ac234c0ffc2de",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    },
+    {
+      "localQuestionId": "BIO9-C1-SHORT-005",
+      "questionType": "short",
+      "proposedMarks": 2,
+      "sourceDraftSha256": "7cdd8699b751a807baa5b5b1c1c204588cc8f4491cf16098bae85815f621df3b",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    },
+    {
+      "localQuestionId": "BIO9-C1-SHORT-006",
+      "questionType": "short",
+      "proposedMarks": 2,
+      "sourceDraftSha256": "48723c822bc2f518f49f0fc58af26d23fa48335ab8169a4a53390f583182000e",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    },
+    {
+      "localQuestionId": "BIO9-C1-SHORT-007",
+      "questionType": "short",
+      "proposedMarks": 2,
+      "sourceDraftSha256": "0c8c100d336ef4cbcd9e7f83706224f887b97086294cd23ee54a070aaec24243",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    },
+    {
+      "localQuestionId": "BIO9-C1-SHORT-008",
+      "questionType": "short",
+      "proposedMarks": 2,
+      "sourceDraftSha256": "bb2cab45cd716b4e57496bd752707da90dbd196caa446d5e43427a62db97dfc6",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    },
+    {
+      "localQuestionId": "BIO9-C1-SHORT-009",
+      "questionType": "short",
+      "proposedMarks": 2,
+      "sourceDraftSha256": "46085c0a726c2a959a795c8b014f5a6f57c32c7ed10c08a0f70dbfaae0307147",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    },
+    {
+      "localQuestionId": "BIO9-C1-SHORT-010",
+      "questionType": "short",
+      "proposedMarks": 2,
+      "sourceDraftSha256": "75cb4ce787014d0b6995fa430b6a05ffe5226baf05d0ad48bff7773d19ce4009",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    },
+    {
+      "localQuestionId": "BIO9-C1-SHORT-011",
+      "questionType": "short",
+      "proposedMarks": 2,
+      "sourceDraftSha256": "853c8b564220afcb5d5b4a5cc6e78d0730921d0e3964296e0b0cda00505f543b",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    },
+    {
+      "localQuestionId": "BIO9-C1-SHORT-012",
+      "questionType": "short",
+      "proposedMarks": 2,
+      "sourceDraftSha256": "cd720f53e4fcd4d3dd732d57fbcef3828b0b9468ebd572d2a44413f6751b1b25",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    },
+    {
+      "localQuestionId": "BIO9-C1-LONG-001",
+      "questionType": "long",
+      "proposedMarks": 5,
+      "sourceDraftSha256": "a0c24d19d9972473aa29c6e32b3380ca2d63eaa9763e19a78162f8343d8f65e8",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    },
+    {
+      "localQuestionId": "BIO9-C1-LONG-002",
+      "questionType": "long",
+      "proposedMarks": 5,
+      "sourceDraftSha256": "0d7d3c1e6f1f7982e7491131a0ccf045c874fd60f030e1da5064d49f361b6ed7",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    },
+    {
+      "localQuestionId": "BIO9-C1-LONG-003",
+      "questionType": "long",
+      "proposedMarks": 5,
+      "sourceDraftSha256": "014a6579d3dd870bd911ac44bd4b40f8239e979bb98ececfe76f2f3b6d6d3ccc",
+      "editorialState": "pending_independent_review",
+      "sourcePageEvidenceVerified": false,
+      "academicallyReviewed": false,
+      "independentAnswerVerified": false,
+      "eligibleForProductionSeed": false,
+      "verifiedChecks": {
+        "sourceImageChecked": false,
+        "editionChecked": false,
+        "chapterMatchChecked": false,
+        "curriculumChecked": false,
+        "answerKeyChecked": false,
+        "languageChecked": false,
+        "originalityChecked": false
+      }
+    }
+  ]
+}
