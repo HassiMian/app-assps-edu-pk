@@ -42,3 +42,19 @@ test('family refresh failures preserve loaded families and expose source availab
   assert.match(module, /familyError && families\.length === 0/)
   assert.match(module, /Family data is temporarily unavailable\./)
 })
+
+test('dashboard refresh failures preserve last-known-good core data', () => {
+  const s = source('al-siddique-frontend/src/pages/Dashboard.jsx')
+  const block = s.match(/Dashboard fetch error[\s\S]{0,360}?finally/)?.[0] || ''
+  assert.ok(block)
+  assert.doesNotMatch(block, /setStats\(null\)|setStudents\(\[\]\)|setClassData\(\[\]\)/)
+  assert.match(block, /Existing loaded dashboard data was preserved/)
+})
+
+test('date sheet sync failures preserve loaded server state instead of fabricating an empty sheet', () => {
+  const s = source('al-siddique-frontend/src/Modules/DateSheet.jsx')
+  const block = s.match(/Date sheet server sync failed[\s\S]{0,520}?\n\s*}\n\s*}/)?.[0] || ''
+  assert.ok(block)
+  assert.doesNotMatch(block, /setSheets\(\[\]\)|loadDateSheet\([^\n]*\[\]\)/)
+  assert.match(block, /Existing loaded date sheet data was preserved/)
+})

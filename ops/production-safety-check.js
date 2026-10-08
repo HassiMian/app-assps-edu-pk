@@ -1326,8 +1326,8 @@ assertNotContains(
 
 assertContains(
   'al-siddique-frontend/src/pages/Dashboard.jsx',
-  "setDashboardError(err.response?.data?.message || 'Core dashboard data could not be loaded from the server.')",
-  'dashboard core data failures must be visible and explicit.'
+  'Core dashboard data could not be refreshed. Existing loaded dashboard data was preserved.',
+  'dashboard core data failures must be visible and explicit while preserving last-known-good state.'
 )
 
 
@@ -3184,4 +3184,36 @@ assertContains(
   'al-siddique-frontend/src/Modules/families/FamilyModule.jsx',
   'Family data is temporarily unavailable.',
   'family UI must distinguish source unavailability from a verified empty family list.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/pages/Dashboard.jsx',
+  /Dashboard fetch error[\s\S]{0,360}?(?:setStats\(null\)|setStudents\(\[\]\)|setClassData\(\[\]\))/,
+  'dashboard source failures must preserve last-known-good core data.'
+)
+assertNotContains(
+  'al-siddique-frontend/src/Modules/DateSheet.jsx',
+  /Date sheet server sync failed[\s\S]{0,420}?(?:setSheets\(\[\]\)|loadDateSheet\([^\n]*\[\]\))/,
+  'date sheet source failures must preserve last-known-good server state.'
+)
+
+assertContains(
+  'package.json',
+  '"release:consistency": "node ops/check-release-consistency.cjs"',
+  'canonical deployments must expose the live release-consistency gate.'
+)
+assertContains(
+  'ops/check-release-consistency.cjs',
+  'FRONTEND_COMMIT_DRIFT',
+  'release consistency must fail closed when frontend metadata drifts from canonical Git.'
+)
+assertContains(
+  'ops/check-release-consistency.cjs',
+  'BACKEND_COMMIT_DRIFT',
+  'release consistency must fail closed when backend metadata drifts from canonical Git.'
+)
+assertContains(
+  'ops/check-release-consistency.cjs',
+  "DB_RUNTIME_ROLE: 'apex_app_runtime'",
+  'release consistency must validate the restricted production database runtime role.'
 )

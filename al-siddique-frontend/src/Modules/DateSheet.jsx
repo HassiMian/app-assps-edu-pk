@@ -303,10 +303,8 @@ export default function DateSheet() {
       } catch (err) {
         console.error('Date sheet server sync failed', err)
         if (!cancelled) {
-          setSheets([])
           setSyncState('error')
-          loadDateSheet(session, term, [])
-          setWarning(err.response?.data?.message || 'Date sheet server is unavailable. No cached timetable was substituted for live data.')
+          setWarning(err.response?.data?.message || 'Date sheet server is unavailable. Existing loaded date sheet data was preserved; no browser cache was promoted into live tenant data.')
         }
       }
     }
