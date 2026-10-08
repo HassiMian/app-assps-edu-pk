@@ -1,0 +1,1050 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "IX-ICT-C01-M01",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Mastering Microsoft Word and PowerPoint",
+      "topic_name": "word processing",
+      "category": "mcq",
+      "question_text": "Which application is primarily used to create and format text documents?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Microsoft Word"
+        },
+        {
+          "id": "B",
+          "text": "A calculator only"
+        },
+        {
+          "id": "C",
+          "text": "A file compressor"
+        },
+        {
+          "id": "D",
+          "text": "A network cable"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Microsoft Word",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 1",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "word processing"
+      ]
+    },
+    {
+      "id": "IX-ICT-C01-M02",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Mastering Microsoft Word and PowerPoint",
+      "topic_name": "presentations",
+      "category": "mcq",
+      "question_text": "A slide layout in presentation software mainly helps to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Organize content consistently"
+        },
+        {
+          "id": "B",
+          "text": "Increase processor temperature"
+        },
+        {
+          "id": "C",
+          "text": "Replace all text with code"
+        },
+        {
+          "id": "D",
+          "text": "Disable formatting"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Organize content consistently",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 1",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "presentations"
+      ]
+    },
+    {
+      "id": "IX-ICT-C01-S01",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Mastering Microsoft Word and PowerPoint",
+      "topic_name": "document formatting",
+      "category": "short",
+      "question_text": "State two benefits of using styles or consistent formatting in a document.",
+      "options": [],
+      "correct_option": "",
+      "answer": "They improve readability and visual consistency, and they make large documents easier to update and organize.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 1",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "document formatting"
+      ]
+    },
+    {
+      "id": "IX-ICT-C01-S02",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Mastering Microsoft Word and PowerPoint",
+      "topic_name": "presentation design",
+      "category": "short",
+      "question_text": "Why should a presentation avoid overcrowding each slide?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Clear, limited content improves readability and helps the audience focus on the main idea.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 1",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "presentation design"
+      ]
+    },
+    {
+      "id": "IX-ICT-C01-L01",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Mastering Microsoft Word and PowerPoint",
+      "topic_name": "office productivity",
+      "category": "long",
+      "question_text": "Explain how word-processing and presentation tools support school communication.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for document creation, formatting, tables/images, presentation structure, visual communication and responsible use of templates/media.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 1",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "office productivity"
+      ]
+    },
+    {
+      "id": "IX-ICT-C02-M01",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Exploring Arduino Basics – Circuits, Code and Projects",
+      "topic_name": "microcontroller",
+      "category": "mcq",
+      "question_text": "An Arduino board is commonly described as a platform built around a?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Microcontroller"
+        },
+        {
+          "id": "B",
+          "text": "Printer cartridge"
+        },
+        {
+          "id": "C",
+          "text": "Hard-disk platter"
+        },
+        {
+          "id": "D",
+          "text": "Projector lens"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Microcontroller",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 2",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "microcontroller"
+      ]
+    },
+    {
+      "id": "IX-ICT-C02-M02",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Exploring Arduino Basics – Circuits, Code and Projects",
+      "topic_name": "digital logic",
+      "category": "mcq",
+      "question_text": "A digital signal is commonly represented using?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Discrete states such as 0 and 1"
+        },
+        {
+          "id": "B",
+          "text": "Only paragraph styles"
+        },
+        {
+          "id": "C",
+          "text": "Only colours"
+        },
+        {
+          "id": "D",
+          "text": "Only file names"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Discrete states such as 0 and 1",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 2",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "digital logic"
+      ]
+    },
+    {
+      "id": "IX-ICT-C02-S01",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Exploring Arduino Basics – Circuits, Code and Projects",
+      "topic_name": "input output",
+      "category": "short",
+      "question_text": "Differentiate an input and an output in a microcontroller system.",
+      "options": [],
+      "correct_option": "",
+      "answer": "An input provides information to the controller, while an output is a response or signal produced by the controller.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 2",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "input output"
+      ]
+    },
+    {
+      "id": "IX-ICT-C02-S02",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Exploring Arduino Basics – Circuits, Code and Projects",
+      "topic_name": "hardware safety",
+      "category": "short",
+      "question_text": "Why should beginner electronics work be done only with teacher-approved low-voltage classroom equipment?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Supervision and approved low-voltage equipment reduce risk, prevent damage and ensure components are used within safe limits.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 2",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "hardware safety"
+      ]
+    },
+    {
+      "id": "IX-ICT-C02-L01",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Exploring Arduino Basics – Circuits, Code and Projects",
+      "topic_name": "embedded systems",
+      "category": "long",
+      "question_text": "Explain the basic input-process-output model of a microcontroller project without describing wiring steps.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for identifying input/sensor data, program logic, controller processing, output/action and the importance of safe supervised hardware use.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 2",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "embedded systems"
+      ]
+    },
+    {
+      "id": "IX-ICT-C03-M01",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Graphic Designing and Multimedia",
+      "topic_name": "raster vector",
+      "category": "mcq",
+      "question_text": "Which type of graphic is defined mainly by mathematical shapes and paths?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Vector graphic"
+        },
+        {
+          "id": "B",
+          "text": "Raster photo only"
+        },
+        {
+          "id": "C",
+          "text": "Audio file"
+        },
+        {
+          "id": "D",
+          "text": "Spreadsheet formula"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Vector graphic",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 3",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "raster vector"
+      ]
+    },
+    {
+      "id": "IX-ICT-C03-M02",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Graphic Designing and Multimedia",
+      "topic_name": "multimedia",
+      "category": "mcq",
+      "question_text": "Multimedia commonly combines?",
+      "options": [
+        {
+          "id": "A",
+          "text": "More than one media form such as text, image, audio or video"
+        },
+        {
+          "id": "B",
+          "text": "Only numbers"
+        },
+        {
+          "id": "C",
+          "text": "Only plain text"
+        },
+        {
+          "id": "D",
+          "text": "Only hardware"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "More than one media form such as text, image, audio or video",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 3",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "multimedia"
+      ]
+    },
+    {
+      "id": "IX-ICT-C03-S01",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Graphic Designing and Multimedia",
+      "topic_name": "design principles",
+      "category": "short",
+      "question_text": "Why are contrast and alignment useful in graphic design?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Contrast helps important elements stand out; alignment creates order and visual relationships between elements.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 3",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "design principles"
+      ]
+    },
+    {
+      "id": "IX-ICT-C03-S02",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Graphic Designing and Multimedia",
+      "topic_name": "image quality",
+      "category": "short",
+      "question_text": "Why can enlarging a low-resolution raster image reduce visual quality?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Raster images are made of pixels; strong enlargement can make individual pixels visible and reduce sharpness.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 3",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "image quality"
+      ]
+    },
+    {
+      "id": "IX-ICT-C03-L01",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Graphic Designing and Multimedia",
+      "topic_name": "multimedia communication",
+      "category": "long",
+      "question_text": "Describe a good workflow for planning a school multimedia poster or presentation.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for purpose/audience, content planning, layout, appropriate media, readability/accessibility and copyright-responsible use of assets.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 3",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "multimedia communication"
+      ]
+    },
+    {
+      "id": "IX-ICT-C04-M01",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Fundamentals of Web Development and e-Commerce",
+      "topic_name": "web structure",
+      "category": "mcq",
+      "question_text": "HTML is mainly used to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Structure web-page content"
+        },
+        {
+          "id": "B",
+          "text": "Repair computer hardware"
+        },
+        {
+          "id": "C",
+          "text": "Compress every file"
+        },
+        {
+          "id": "D",
+          "text": "Replace all databases"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Structure web-page content",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 4",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "web structure"
+      ]
+    },
+    {
+      "id": "IX-ICT-C04-M02",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Fundamentals of Web Development and e-Commerce",
+      "topic_name": "ecommerce",
+      "category": "mcq",
+      "question_text": "An online shopping cart is mainly used to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Track items a customer may purchase"
+        },
+        {
+          "id": "B",
+          "text": "Format a hard drive"
+        },
+        {
+          "id": "C",
+          "text": "Draw electrical circuits"
+        },
+        {
+          "id": "D",
+          "text": "Edit operating-system kernels"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Track items a customer may purchase",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 4",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "ecommerce"
+      ]
+    },
+    {
+      "id": "IX-ICT-C04-S01",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Fundamentals of Web Development and e-Commerce",
+      "topic_name": "web design",
+      "category": "short",
+      "question_text": "Differentiate web-page content and presentation.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Content is the information or structure of a page; presentation concerns how that content is visually styled and arranged.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 4",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "web design"
+      ]
+    },
+    {
+      "id": "IX-ICT-C04-S02",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Fundamentals of Web Development and e-Commerce",
+      "topic_name": "ecommerce safety",
+      "category": "short",
+      "question_text": "State two responsible practices for an e-commerce website.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Examples include clear product information, secure handling of user data, honest pricing, accessible design and transparent return/contact information.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 4",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "ecommerce safety"
+      ]
+    },
+    {
+      "id": "IX-ICT-C04-L01",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Fundamentals of Web Development and e-Commerce",
+      "topic_name": "web ecommerce",
+      "category": "long",
+      "question_text": "Explain the basic components of a small responsible e-commerce website.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for product/content pages, navigation, cart/order flow, privacy/security awareness, accurate information and user-friendly design.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 4",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "web ecommerce"
+      ]
+    },
+    {
+      "id": "IX-ICT-C05-M01",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "System Troubleshooting and Maintenance",
+      "topic_name": "troubleshooting",
+      "category": "mcq",
+      "question_text": "A good first troubleshooting step is usually to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Identify and record the symptoms"
+        },
+        {
+          "id": "B",
+          "text": "Delete all files immediately"
+        },
+        {
+          "id": "C",
+          "text": "Replace every component"
+        },
+        {
+          "id": "D",
+          "text": "Ignore the problem"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Identify and record the symptoms",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 5",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "troubleshooting"
+      ]
+    },
+    {
+      "id": "IX-ICT-C05-M02",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "System Troubleshooting and Maintenance",
+      "topic_name": "maintenance",
+      "category": "mcq",
+      "question_text": "Preventive maintenance aims to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Reduce avoidable failures and keep systems reliable"
+        },
+        {
+          "id": "B",
+          "text": "Create faults deliberately"
+        },
+        {
+          "id": "C",
+          "text": "Remove all backups"
+        },
+        {
+          "id": "D",
+          "text": "Disable updates forever"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Reduce avoidable failures and keep systems reliable",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 5",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "maintenance"
+      ]
+    },
+    {
+      "id": "IX-ICT-C05-S01",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "System Troubleshooting and Maintenance",
+      "topic_name": "diagnosis",
+      "category": "short",
+      "question_text": "Why should troubleshooting change one factor at a time when possible?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It makes it easier to identify which change affected the problem and reduces unnecessary modifications.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 5",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "diagnosis"
+      ]
+    },
+    {
+      "id": "IX-ICT-C05-S02",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "System Troubleshooting and Maintenance",
+      "topic_name": "data protection",
+      "category": "short",
+      "question_text": "Why should important data be backed up before major recovery work?",
+      "options": [],
+      "correct_option": "",
+      "answer": "A backup helps protect user files if recovery or repair fails or changes the system unexpectedly.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 5",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "data protection"
+      ]
+    },
+    {
+      "id": "IX-ICT-C05-L01",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "System Troubleshooting and Maintenance",
+      "topic_name": "safe troubleshooting",
+      "category": "long",
+      "question_text": "Describe a safe troubleshooting workflow for a school computer.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for documenting symptoms, backing up data, checking simple causes first, using non-destructive diagnostics, applying the least-invasive fix and verifying/recording the result.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 5",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "safe troubleshooting"
+      ]
+    },
+    {
+      "id": "IX-ICT-C06-M01",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "AI Technologies",
+      "topic_name": "artificial intelligence",
+      "category": "mcq",
+      "question_text": "AI systems are commonly designed to perform tasks involving?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Pattern recognition, prediction or reasoning"
+        },
+        {
+          "id": "B",
+          "text": "Only cable storage"
+        },
+        {
+          "id": "C",
+          "text": "Only page margins"
+        },
+        {
+          "id": "D",
+          "text": "Only battery charging"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Pattern recognition, prediction or reasoning",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 6",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "artificial intelligence"
+      ]
+    },
+    {
+      "id": "IX-ICT-C06-M02",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "AI Technologies",
+      "topic_name": "machine learning",
+      "category": "mcq",
+      "question_text": "Machine learning mainly allows a system to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Learn useful patterns from data for a task"
+        },
+        {
+          "id": "B",
+          "text": "Ignore all data"
+        },
+        {
+          "id": "C",
+          "text": "Remove all software"
+        },
+        {
+          "id": "D",
+          "text": "Increase screen size"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Learn useful patterns from data for a task",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 6",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "machine learning"
+      ]
+    },
+    {
+      "id": "IX-ICT-C06-S01",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "AI Technologies",
+      "topic_name": "training data",
+      "category": "short",
+      "question_text": "Why does training-data quality matter in machine learning?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Poor, biased or unrepresentative data can produce unreliable or unfair model behavior.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 6",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "training data"
+      ]
+    },
+    {
+      "id": "IX-ICT-C06-S02",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "AI Technologies",
+      "topic_name": "responsible AI",
+      "category": "short",
+      "question_text": "Name two principles of responsible AI use.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Examples include privacy, fairness, accuracy checking, transparency, safety and human oversight; any two.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 6",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "responsible AI"
+      ]
+    },
+    {
+      "id": "IX-ICT-C06-L01",
+      "class_level": "9th",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "AI Technologies",
+      "topic_name": "ai applications",
+      "category": "long",
+      "question_text": "Discuss three useful AI applications and the safeguards needed for responsible use.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for three valid applications plus discussion of privacy, fairness, accuracy/security and appropriate human oversight.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-043 | 9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a | chapter 6",
+      "tags": [
+        "grade9",
+        "ict-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "ai applications"
+      ]
+    }
+  ]
+}

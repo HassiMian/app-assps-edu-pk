@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "assps-ict9-tech-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-043",
+  "sourcePdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+  "sourceByteLength": 37880122,
+  "pageCount": 136,
+  "identity": [
+    "Information and Communication Technologies Grade IX",
+    "PCTB Curriculum-2025",
+    "Matric-Tech in Computer Science",
+    "Printed April 2025"
+  ],
+  "languageObservation": "TEXTBOOK_CONTENT_OBSERVED_ENGLISH_CATALOG_LABEL_MEDIUM_UNSPECIFIED",
+  "chapters": [
+    {
+      "number": 1,
+      "title": "Mastering Microsoft Word and PowerPoint",
+      "status": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED"
+    },
+    {
+      "number": 2,
+      "title": "Exploring Arduino Basics – Circuits, Code and Projects",
+      "status": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED"
+    },
+    {
+      "number": 3,
+      "title": "Graphic Designing and Multimedia",
+      "status": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED"
+    },
+    {
+      "number": 4,
+      "title": "Fundamentals of Web Development and e-Commerce",
+      "status": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED"
+    },
+    {
+      "number": 5,
+      "title": "System Troubleshooting and Maintenance",
+      "status": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED"
+    },
+    {
+      "number": 6,
+      "title": "AI Technologies",
+      "status": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "hardwareSafetyBoundary": "CONCEPTUAL_ONLY_NO_WIRING_OR_UNSUPERVISED_HARDWARE_OPERATION"
+  }
+}
