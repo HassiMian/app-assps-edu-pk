@@ -13,8 +13,18 @@ async function tableExists(client, name) {
   return Boolean(result.rows[0]?.table_name)
 }
 
+async function canSelectTable(client, name) {
+  const result = await client.query("SELECT has_table_privilege(current_user, $1, 'SELECT') AS allowed", [`public.${name}`])
+  return Boolean(result.rows[0]?.allowed)
+}
+
 async function loadAcademicSetup(client, schoolId) {
   if (!(await tableExists(client, 'settings'))) return {}
+  // Avoid triggering a PostgreSQL permission error inside the tenant transaction:
+  // once a statement fails, the whole transaction becomes unusable until rollback.
+  // The planner must respect the app role's least-privilege posture and simply use
+  // versioned session/timetable evidence when direct settings access is unavailable.
+  if (!(await canSelectTable(client, 'settings'))) return {}
   const result = await client.query('SELECT academic_setup FROM settings WHERE school_id=$1 LIMIT 1', [schoolId])
   return result.rows[0]?.academic_setup && typeof result.rows[0].academic_setup === 'object' ? result.rows[0].academic_setup : {}
 }
