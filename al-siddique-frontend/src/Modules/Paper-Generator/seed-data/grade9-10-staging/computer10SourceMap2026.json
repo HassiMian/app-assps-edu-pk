@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "assps-computer10-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-025",
+  "sourcePdfSha256": "acefc9ba9e8c60baa66df7f222db169def63a93b69df3f664c14841ac009474a",
+  "sourceByteLength": 94367319,
+  "pageCount": 152,
+  "identity": [
+    "Computer Science 10 (2026-27)",
+    "PECTAA",
+    "Urdu-medium content verified from title/review pages"
+  ],
+  "chapterMapState": "CURRENT_2026_TITLES_CROSS_VERIFIED_EXACT_PAGE_BOUNDARIES_PENDING",
+  "chapterEvidence": {
+    "officialPdf": "hash/bytes/page-count verified; Urdu-medium review/content visible",
+    "independentCurrent2026CrossChecks": [
+      "Chapter 1 Introduction to Operating System",
+      "Chapter 2 System Recovery and Advanced Maintenance",
+      "Chapter 3 Introduction to Python Programming",
+      "Chapter 4 Control Structures in Python",
+      "Chapter 5 Introduction to Data Science",
+      "Chapter 6 Introduction to Artificial Intelligence (AI) and Machine Learning (ML)",
+      "Chapter 7 Applications of AI",
+      "Chapter 8 Digital Entrepreneurship"
+    ],
+    "exactChapterPageBoundariesPending": true
+  },
+  "chapters": [
+    {
+      "number": 1,
+      "title": "Operating Systems: Structure and Services",
+      "status": "CURRENT_2026_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 2,
+      "title": "System Recovery and Advanced Maintenance",
+      "status": "CURRENT_2026_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 3,
+      "title": "Introduction to Python Programming",
+      "status": "CURRENT_2026_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 4,
+      "title": "Control Structures in Python",
+      "status": "CURRENT_2026_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 5,
+      "title": "Introduction to Data Science",
+      "status": "CURRENT_2026_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 6,
+      "title": "Introduction to Artificial Intelligence (AI) and Machine Learning (ML)",
+      "status": "CURRENT_2026_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 7,
+      "title": "Applications of AI",
+      "status": "CURRENT_2026_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 8,
+      "title": "Digital Entrepreneurship",
+      "status": "CURRENT_2026_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "exactChapterPageBoundariesPending": true,
+    "securityTopicsRestrictedToDefensiveAndBenignContent": true
+  }
+}
