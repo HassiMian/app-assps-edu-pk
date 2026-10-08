@@ -5,8 +5,7 @@ const path = require('path')
 const crypto = require('crypto')
 const { Pool } = require('pg')
 const dotenv = require('dotenv')
-
-const DEFAULT_SCHOOL_NAME = 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL'
+const { seedPolicy, seedEvidence, optionQuality } = require('./lib/seed-intake-policy.cjs')
 
 const TYPE_MAP = {
   mcq: 'mcq',
@@ -107,22 +106,21 @@ function loadJson(file) {
   return { resolved, rows }
 }
 
-async function findSchool(client, selector) {
-  const wanted = norm(selector || DEFAULT_SCHOOL_NAME)
+async function findSchool(client, schoolCode) {
   const result = await client.query(
-    `SELECT id, name, code, NULL::text AS slug
+    `SELECT id, name, code
        FROM schools
-      WHERE lower(name) = lower($1)
-         OR lower(code) = lower($1)
-         OR lower(name) = lower($2)
-      ORDER BY CASE WHEN lower(name) = lower($1) THEN 0 ELSE 1 END
-      LIMIT 1`,
-    [wanted, DEFAULT_SCHOOL_NAME]
+      WHERE lower(code) = lower($1)
+      LIMIT 2`,
+    [schoolCode]
   )
-  return result.rows[0] || null
+  if (result.rows.length !== 1) {
+    throw new Error(`EXACT_TENANT_NOT_FOUND_OR_DUPLICATED: ${schoolCode}`)
+  }
+  return result.rows[0]
 }
 
-function normalizeRecord(record, index, schoolId, sourceFile) {
+function normalizeRecord(record, index, schoolId, sourceFile, sourceSha256) {
   const classLevel = norm(record.class_level || record.classLevel || record.class)
   const subject = norm(record.subject)
   const chapterName = norm(record.chapter_name || record.chapterName || record.chapter)
@@ -165,6 +163,7 @@ function normalizeRecord(record, index, schoolId, sourceFile) {
       original_category: rawCategory,
       category_label: CATEGORY_LABELS[rawCategory] || rawCategory,
       direction: isRtl ? 'rtl' : 'ltr',
+      ...seedEvidence(record, sourceSha256),
     },
   }
 }
@@ -216,7 +215,7 @@ async function insertQuestion(client, row) {
       $7, $8, $9, $10, $11,
       $12, $13, $14,
       $15::jsonb, $16, $17, $18, $19, $20, $21,
-      $22, $23, $24, $25::jsonb, true, 100
+      $22, $23, $24, $25::jsonb, false, 60
     )`,
     [
       id, row.schoolId, row.classLevel, row.subject, row.medium, row.board,
@@ -240,16 +239,19 @@ function summarizeBy(rows, keyFn) {
 
 async function main() {
   const envFile = loadEnv()
-  const pool = createPool()
+  const policy = seedPolicy(process.argv.slice(2))
   const file = argValue('--file')
-  const schoolSelector = argValue('--school', DEFAULT_SCHOOL_NAME)
-  const dryRun = hasFlag('--dry-run') || !hasFlag('--apply')
-
   if (!file) {
-    throw new Error('Usage: node scripts/seedQuestionBankFromJson.js --file path/to/all_question_bank_seed.json --school "AL SIDDIQUE SCHOLARS PUBLIC SCHOOL" --dry-run|--apply')
+    throw new Error('Usage: node scripts/seedQuestionBankFromJson.js --file seed.json --school-code assps|al-siddique [--dry-run | --apply --provisional --expected-db DB_NAME]. All JSON seeds are candidates.')
   }
-
+  const dryRun = !policy.apply
+  const schoolSelector = policy.schoolCode
+  if (!dryRun && !argValue('--expected-db')) {
+    throw new Error('EXPECTED_DATABASE_REQUIRED for applying a provisional import')
+  }
   const { resolved, rows } = loadJson(file)
+  const sourceSha256 = crypto.createHash('sha256').update(fs.readFileSync(resolved)).digest('hex')
+  const pool = createPool()
   const client = await pool.connect()
   const report = {
     file: resolved,
@@ -257,6 +259,7 @@ async function main() {
     school: null,
     totalRead: rows.length,
     inserted: 0,
+    wouldInsert: 0,
     skippedDuplicates: 0,
     failed: 0,
     failures: [],
@@ -268,18 +271,26 @@ async function main() {
   }
 
   try {
+    const connectedDatabase = (await client.query('SELECT current_database() AS name')).rows[0]?.name
+    if (!dryRun && connectedDatabase !== argValue('--expected-db')) {
+      throw new Error('DATABASE_PROVENANCE_MISMATCH: refusing import into an unexpected database')
+    }
     const school = await findSchool(client, schoolSelector)
-    if (!school) throw new Error(`School not found: ${schoolSelector}`)
     report.school = school
+    report.connectedDatabase = connectedDatabase
+    report.sourceSha256 = sourceSha256
+    report.approvedByIntake = false
+    report.reviewStatus = 'provisional_internal'
 
     const beforeSubjects = new Set((await client.query('SELECT DISTINCT class_level, subject FROM question_bank WHERE school_id = $1', [school.id])).rows.map(r => `${r.class_level}||${r.subject}`))
     const beforeChapters = new Set((await client.query('SELECT DISTINCT class_level, subject, chapter_name FROM question_bank WHERE school_id = $1', [school.id])).rows.map(r => `${r.class_level}||${r.subject}||${r.chapter_name}`))
 
-    const normalizedRows = rows.map((record, index) => normalizeRecord(record, index, school.id, resolved))
+    const normalizedRows = rows.map((record, index) => normalizeRecord(record, index, school.id, resolved, sourceSha256))
     report.byClassSubject = summarizeBy(normalizedRows, row => `Class ${row.classLevel} - ${row.subject}`)
     report.byType = summarizeBy(normalizedRows, row => row.questionType)
+    report.mcqAnswerQuality = optionQuality(normalizedRows)
 
-    await client.query('BEGIN')
+    await client.query(dryRun ? 'BEGIN READ ONLY' : 'BEGIN')
     for (const [index, row] of normalizedRows.entries()) {
       const error = validate(row)
       if (error) {
@@ -305,8 +316,12 @@ async function main() {
         report.newChapters.push({ class_level: row.classLevel, subject: row.subject, chapter_name: row.chapterName })
       }
 
-      if (!dryRun) await insertQuestion(client, row)
-      report.inserted += 1
+      if (!dryRun) {
+        await insertQuestion(client, row)
+        report.inserted += 1
+      } else {
+        report.wouldInsert += 1
+      }
     }
 
     if (dryRun) await client.query('ROLLBACK')

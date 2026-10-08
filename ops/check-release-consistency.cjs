@@ -27,7 +27,7 @@ function evaluateReleaseConsistency({ canonicalCommit, canonicalBranch = CANONIC
     // the still-live frontend. It must preserve the canonical base and prove
     // ancestry AND exact remote branch identity. No heuristic SHA allowance.
     const verifiedBackendForward = name === 'BACKEND' &&
-      meta.component === 'backend-paper-studio-rls-hardening' &&
+      ['backend-paper-studio-rls-hardening','backend-question-bank-seed-intake-safety'].includes(meta.component) &&
       meta.sourceBaseLiveCommit === canonicalCommit &&
       meta.previousRelease?.commit === canonicalCommit &&
       backendForwardVerifier(canonicalCommit, meta.commit, meta.branch)
@@ -74,11 +74,27 @@ function canonicalRemoteCommit() {
 
 function verifyBackendForward(base, head, branch) {
   if (!/^[0-9a-f]{40}$/i.test(String(head || ''))) return false
-  if (branch !== 'fix/paper-v1-release-rls-reconcile-20261008') return false
+  if (!['fix/paper-v1-release-rls-reconcile-20261008','fix/paper-grade910-qbank-safe-intake-20261008'].includes(branch)) return false
   try {
     execFileSync('git', ['-C', repoRoot, 'merge-base', '--is-ancestor', base, head], {timeout:12000})
     const remote = execFileSync('git', ['-C', repoRoot, 'ls-remote', 'origin', 'refs/heads/' + branch], {encoding:'utf8',timeout:12000}).trim().split(/\s+/)[0]
-    return remote === head
+    if (remote !== head) return false
+    // Backend-only release cannot silently replace newer teacher-facing frontend
+    // or unrelated backend business logic. The QBank intake release is scoped
+    // strictly to the offline seed importer, its local policy, audits/tests/docs.
+    if (branch === 'fix/paper-grade910-qbank-safe-intake-20261008') {
+      const paths = execFileSync('git', ['-C',repoRoot,'diff','--name-only',base,head],
+        {encoding:'utf8',timeout:12000}).trim().split('\n').filter(Boolean)
+      const permitted = p =>
+        p === 'al-siddique-backend/src/scripts/seedQuestionBankFromJson.js' ||
+        p === 'al-siddique-backend/src/scripts/lib/seed-intake-policy.cjs' ||
+        p.startsWith('ops/qbank/') || p.startsWith('ops/tests/') ||
+        p === 'ops/check-release-consistency.cjs' ||
+        p === 'ops/check-school-exam-readiness.cjs' ||
+        p.startsWith('docs/question-bank/')
+      if (!paths.every(permitted)) return false
+    }
+    return true
   } catch (_) { return false }
 }
 
@@ -101,7 +117,7 @@ function main() {
   const frontendMeta = readJson(process.env.ASSPS_FRONTEND_RELEASE_META || '/var/www/apex-os/release-meta.json')
   const backendMeta = readJson(process.env.ASSPS_BACKEND_RELEASE_META || '/var/www/apex-backend/release-meta.json')
   const pm2Env = pm2Environment()
-  const isBackendOnlyForward = backendMeta?.component === 'backend-paper-studio-rls-hardening'
+  const isBackendOnlyForward = ['backend-paper-studio-rls-hardening','backend-question-bank-seed-intake-safety'].includes(backendMeta?.component)
   const canonicalCommit = isBackendOnlyForward ? frontendMeta?.commit : remoteCanonicalCommit
   const extraFindings = []
   if (isBackendOnlyForward) {

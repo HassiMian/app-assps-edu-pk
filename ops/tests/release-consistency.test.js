@@ -74,3 +74,18 @@ test('static frontend release uses its actual frontendDeployedContracts seal, no
   assert.equal(deniedApi.safe,false)
   assert.ok(deniedApi.findings.includes('BACKEND_LIVE_CONTRACT_NOT_SEALED'))
 })
+
+test('governed Question Bank seeding uses distinct backend forward component and cannot bypass release ancestry',()=>{
+  const candidate={...meta,
+    commit:'b'.repeat(40),branch:'fix/paper-grade910-qbank-safe-intake-20261008',
+    component:'backend-question-bank-seed-intake-safety',
+    sourceBaseLiveCommit:commit,previousRelease:{commit},
+  }
+  const yes=evaluateReleaseConsistency({canonicalCommit:commit,frontendMeta:meta,
+    backendMeta:candidate,pm2Env:env,backendForwardVerifier:()=>true})
+  assert.equal(yes.safe,true)
+  const no=evaluateReleaseConsistency({canonicalCommit:commit,frontendMeta:meta,
+    backendMeta:candidate,pm2Env:env,backendForwardVerifier:()=>false})
+  assert.equal(no.safe,false)
+  assert.ok(no.findings.some(s=>s.startsWith('BACKEND_COMMIT_DRIFT:')))
+})
