@@ -23,6 +23,7 @@ import { createBlankPaperDraft } from './paperCreationDraft.js'
 import { createAssessmentRelease, createManualAssessmentDocument, validateManualAssessmentForRelease } from './AssessmentStudio/core/manualAssessmentDocument.js'
 import { AssessmentRevisionConflictError, bindQueuedAssessmentSave, finalizeAssessmentRelease, flushAssessmentOfflineQueue, saveAssessmentRevision } from './AssessmentStudio/core/assessmentPersistence.js'
 import { createAssessmentPrintJob, fetchActivePrintRosterStudents, transitionAssessmentPrintJob } from './AssessmentStudio/core/printJobClient.js'
+import { buildCheckingStripModel } from './AssessmentStudio/core/checkingStrip.js'
 
 function storeQToTemplate(q) {
  return {
@@ -2362,6 +2363,7 @@ function PremiumPaperTemplate({ variant='academic', paper, cfg, printBubble, pri
   ['Subject', cfg.subjectName], ['Time Allowed', cfg.timeAllowed], ['Total Marks', String(total)], ['Exam Date', cfg.examDate],
  ]
  const visibleQuestionTypes = questionTypes.filter(type => (paper[type.value] || []).length)
+ const checkingModel = buildCheckingStripModel({ paper, config:cfg })
  return <div
   {...editablePaperProps(editMode)}
   data-premium-template={variant}
@@ -2389,6 +2391,11 @@ function PremiumPaperTemplate({ variant='academic', paper, cfg, printBubble, pri
   <table data-student-info style={{ direction:'ltr', width:'100%', borderCollapse:'collapse', tableLayout:'fixed', margin:`${7 * fs}px 0 ${10 * fs}px`, fontFamily:'Arial, sans-serif' }}><tbody>
    {chunk(metadata, 4).map((row, rowIndex) => <tr key={rowIndex}>{row.map(([label, value]) => <td key={label} style={{ border:`1px solid ${theme.line}`, padding:`${4 * fs}px ${6 * fs}px`, background:rowIndex === 0 ? '#fff' : theme.soft, textAlign:'left', verticalAlign:'top' }}><div style={{ color:theme.accent, fontWeight:800, fontSize:`${7.5 * fs}px`, textTransform:'uppercase' }}>{label}</div>{value ? <div style={{ color:'#172033', fontWeight:700, fontSize:`${10 * fs}px`, direction:'ltr' }}>{value}</div> : <div data-personalization-field={label==='Student Name'?'student.name':label==='Roll Number'?'student.rollNumber':undefined} style={{ borderBottom:`1px solid ${theme.accent}`, height:`${13 * fs}px` }} />}</td>)}</tr>)}
   </tbody></table>
+  {checkingModel.enabled && checkingModel.entries.length > 0 && <div data-checking-strip style={{direction:'ltr',display:'flex',flexWrap:'wrap',gap:half?'4px':'6px',alignItems:'center',margin:'5px 0 7px',padding:half?'4px 5px':'5px 7px',border:'1px solid '+theme.line,borderRadius:4,fontSize:String(Math.max(8,9*fs))+'px',background:'#fff',color:'#263545'}}>
+   <strong style={{color:theme.accent,marginRight:2}}>{isUrdu?'چیکنگ':'Checking'}</strong>
+   {checkingModel.entries.map(entry => <span key={entry.questionInstanceId} data-question-instance-id={entry.questionInstanceId} style={{whiteSpace:'nowrap'}}>{entry.label} [ __/{entry.maximumMarks} ]</span>)}
+   <span data-checking-total style={{marginLeft:'auto',whiteSpace:'nowrap',fontWeight:800}}>{isUrdu?'کل':'TOTAL'} [ __/{checkingModel.maximumMarks} ]</span>
+  </div>}
   {printBubble && <ObjectiveBubbleSheet paper={paper} isUrdu={isUrdu} themeColor={theme.accent} showAnswers={printAns} />}
   <main style={{ position:'relative', zIndex:2 }}>
    {visibleQuestionTypes.map((type, typeIndex) => (
