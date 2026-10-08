@@ -1,0 +1,2000 @@
+{
+  "schemaVersion": "assps-physics9Urdu-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-012",
+  "sourcePdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+  "scope": "CURRENT_URDU_MEDIUM_CHAPTER_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "IX-PHY-UR-C01-M01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C01",
+        "number": 1
+      },
+      "topicId": "SI units",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "طبعی مقداریں اور پیمائش"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "لمبائی کی SI unit کیا ہے؟",
+          "answer": "metre",
+          "options": [
+            {
+              "id": "A",
+              "text": "metre"
+            },
+            {
+              "id": "B",
+              "text": "second"
+            },
+            {
+              "id": "C",
+              "text": "kilogram"
+            },
+            {
+              "id": "D",
+              "text": "newton"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-UR-C01-S01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C01",
+        "number": 1
+      },
+      "topicId": "پیمائش",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "طبعی مقداریں اور پیمائش"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Least count سے کیا مراد ہے؟",
+          "answer": "کسی measuring instrument کی وہ سب سے چھوٹی مقدار جسے وہ قابلِ اعتماد طور پر ناپ سکے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-UR-C01-N01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C01",
+        "number": 1
+      },
+      "topicId": "unit conversion",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "طبعی مقداریں اور پیمائش"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "250 cm کو metre میں تبدیل کریں۔",
+          "answer": "250 cm = 2.50 m۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-UR-C02-M01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C02",
+        "number": 2
+      },
+      "topicId": "speed",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "حرکت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "speed کا بنیادی فارمولا کیا ہے؟",
+          "answer": "distance/time",
+          "options": [
+            {
+              "id": "A",
+              "text": "distance/time"
+            },
+            {
+              "id": "B",
+              "text": "time/distance"
+            },
+            {
+              "id": "C",
+              "text": "force×distance"
+            },
+            {
+              "id": "D",
+              "text": "mass/volume"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-UR-C02-S01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C02",
+        "number": 2
+      },
+      "topicId": "velocity",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "حرکت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "speed اور velocity میں بنیادی فرق بیان کریں۔",
+          "answer": "speed scalar مقدار ہے جبکہ velocity میں magnitude کے ساتھ direction بھی شامل ہوتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-UR-C02-N01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C02",
+        "number": 2
+      },
+      "topicId": "رفتار",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "حرکت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "120 m فاصلہ 10 s میں طے کیا جائے تو average speed معلوم کریں۔",
+          "answer": "120/10 = 12 m/s۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-UR-C03-M01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C03",
+        "number": 3
+      },
+      "topicId": "Newton second law",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "قوت اور حرکت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "F=ma کس قانون کی ریاضیاتی صورت ہے؟",
+          "answer": "Newton کا دوسرا قانون",
+          "options": [
+            {
+              "id": "A",
+              "text": "Newton کا دوسرا قانون"
+            },
+            {
+              "id": "B",
+              "text": "Newton کا پہلا قانون"
+            },
+            {
+              "id": "C",
+              "text": "قانون بقائے توانائی"
+            },
+            {
+              "id": "D",
+              "text": "Ohm law"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-UR-C03-S01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C03",
+        "number": 3
+      },
+      "topicId": "inertia",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "قوت اور حرکت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Inertia کیا ہے؟",
+          "answer": "جسم کی وہ خاصیت جس کے باعث وہ اپنی حالتِ سکون یا یکساں سیدھی حرکت میں تبدیلی کی مزاحمت کرتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-UR-C03-N01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C03",
+        "number": 3
+      },
+      "topicId": "قوت",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "قوت اور حرکت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "2 kg mass کو 3 m/s² acceleration دینے کے لیے force معلوم کریں۔",
+          "answer": "F=ma=2×3=6 N۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-UR-C04-M01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C04",
+        "number": 4
+      },
+      "topicId": "moment",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "قوتوں کے گردشی اثرات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Moment of force کا فارمولا کیا ہے؟",
+          "answer": "force × perpendicular distance",
+          "options": [
+            {
+              "id": "A",
+              "text": "force × perpendicular distance"
+            },
+            {
+              "id": "B",
+              "text": "mass × velocity"
+            },
+            {
+              "id": "C",
+              "text": "work/time"
+            },
+            {
+              "id": "D",
+              "text": "mass/volume"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-UR-C04-S01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C04",
+        "number": 4
+      },
+      "topicId": "center of mass",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "قوتوں کے گردشی اثرات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Center of mass سے کیا مراد ہے؟",
+          "answer": "وہ مؤثر point جہاں جسم کی پوری mass کو concentrated تصور کیا جا سکتا ہے جب translational motion کا مطالعہ کیا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-UR-C04-N01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C04",
+        "number": 4
+      },
+      "topicId": "moment",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "قوتوں کے گردشی اثرات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "10 N force pivot سے 0.5 m عمودی فاصلے پر لگے تو moment معلوم کریں۔",
+          "answer": "Moment=10×0.5=5 N m۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-UR-C05-M01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C05",
+        "number": 5
+      },
+      "topicId": "work",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "کام، توانائی اور طاقت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "اگر force اور displacement ایک direction میں ہوں تو work کیا ہے؟",
+          "answer": "F×d",
+          "options": [
+            {
+              "id": "A",
+              "text": "F×d"
+            },
+            {
+              "id": "B",
+              "text": "F/d"
+            },
+            {
+              "id": "C",
+              "text": "d/F"
+            },
+            {
+              "id": "D",
+              "text": "m/v"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-UR-C05-S01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C05",
+        "number": 5
+      },
+      "topicId": "power",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "کام، توانائی اور طاقت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Power کی تعریف کریں۔",
+          "answer": "کام کرنے یا توانائی منتقل کرنے کی شرح power کہلاتی ہے؛ P=W/t۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-UR-C05-N01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C05",
+        "number": 5
+      },
+      "topicId": "power",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "کام، توانائی اور طاقت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "200 J کام 10 s میں ہو تو power معلوم کریں۔",
+          "answer": "P=200/10=20 W۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-UR-C06-M01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C06",
+        "number": 6
+      },
+      "topicId": "density",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مادے کی میکانی خصوصیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Density کا فارمولا کیا ہے؟",
+          "answer": "mass/volume",
+          "options": [
+            {
+              "id": "A",
+              "text": "mass/volume"
+            },
+            {
+              "id": "B",
+              "text": "volume/mass"
+            },
+            {
+              "id": "C",
+              "text": "force/area"
+            },
+            {
+              "id": "D",
+              "text": "work/time"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-UR-C06-S01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C06",
+        "number": 6
+      },
+      "topicId": "pressure",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مادے کی میکانی خصوصیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Pressure کی تعریف اور فارمولا بیان کریں۔",
+          "answer": "فی unit area عمودی force کو pressure کہتے ہیں؛ P=F/A۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-UR-C06-N01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C06",
+        "number": 6
+      },
+      "topicId": "density",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مادے کی میکانی خصوصیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "400 g mass کا volume 200 cm³ ہو تو density معلوم کریں۔",
+          "answer": "400/200 = 2 g/cm³۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-UR-C07-M01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C07",
+        "number": 7
+      },
+      "topicId": "specific heat",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مادے کی حرارتی خصوصیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Specific heat capacity کس چیز کی پیمائش ہے؟",
+          "answer": "1 kg مادے کا temperature 1 K بڑھانے کے لیے درکار energy",
+          "options": [
+            {
+              "id": "A",
+              "text": "1 kg مادے کا temperature 1 K بڑھانے کے لیے درکار energy"
+            },
+            {
+              "id": "B",
+              "text": "مادے کی density"
+            },
+            {
+              "id": "C",
+              "text": "مادے کی speed"
+            },
+            {
+              "id": "D",
+              "text": "مقناطیسی قوت"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-UR-C07-S01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C07",
+        "number": 7
+      },
+      "topicId": "حرارت و درجہ حرارت",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مادے کی حرارتی خصوصیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Heat اور temperature میں فرق بیان کریں۔",
+          "answer": "Heat energy transfer ہے جو temperature difference کی وجہ سے ہوتی ہے؛ temperature کسی جسم کی حرارتی حالت/particles کی average kinetic energy سے متعلق پیمانہ ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-UR-C07-N01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C07",
+        "number": 7
+      },
+      "topicId": "specific heat",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مادے کی حرارتی خصوصیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "2 kg مادے کی specific heat 500 J kg⁻¹ K⁻¹ ہو اور temperature 3 K بڑھے تو Q معلوم کریں۔",
+          "answer": "Q=mcΔT=2×500×3=3000 J۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-UR-C08-M01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C08",
+        "number": 8
+      },
+      "topicId": "magnetic poles",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مقناطیسیت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "دو like magnetic poles کیا کرتے ہیں؟",
+          "answer": "repel",
+          "options": [
+            {
+              "id": "A",
+              "text": "repel"
+            },
+            {
+              "id": "B",
+              "text": "attract"
+            },
+            {
+              "id": "C",
+              "text": "neutralize"
+            },
+            {
+              "id": "D",
+              "text": "کوئی اثر نہیں"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-UR-C08-S01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C08",
+        "number": 8
+      },
+      "topicId": "magnetic field",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مقناطیسیت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Magnetic field سے کیا مراد ہے؟",
+          "answer": "مقناطیس یا current-carrying conductor کے گرد وہ region جہاں magnetic force محسوس کی جا سکے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-UR-C08-L01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C08",
+        "number": 8
+      },
+      "topicId": "electromagnet",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مقناطیسیت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Electromagnet کے بنیادی اصول اور اس کی قوت بڑھانے کے محفوظ طریقے بیان کریں۔",
+          "answer": "current-carrying coil magnetic field پیدا کرتی ہے؛ turns بڑھانا، مناسب soft-iron core استعمال کرنا اور مقررہ محفوظ limits میں current بڑھانا field کو مضبوط کر سکتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-UR-C09-M01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C09",
+        "number": 9
+      },
+      "topicId": "scientific method",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سائنس کی فطرت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "سائنسی hypothesis کی بہترین خاصیت کیا ہے؟",
+          "answer": "قابلِ آزمائش ہونا",
+          "options": [
+            {
+              "id": "A",
+              "text": "قابلِ آزمائش ہونا"
+            },
+            {
+              "id": "B",
+              "text": "کبھی test نہ ہو سکنا"
+            },
+            {
+              "id": "C",
+              "text": "صرف رائے ہونا"
+            },
+            {
+              "id": "D",
+              "text": "evidence سے آزاد ہونا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-UR-C09-S01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C09",
+        "number": 9
+      },
+      "topicId": "evidence",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سائنس کی فطرت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "سائنس میں reproducibility کیوں اہم ہے؟",
+          "answer": "آزاد طور پر نتائج دہرائے جا سکیں تو evidence پر اعتماد بڑھتا ہے اور غلطی یا اتفاق کے امکانات جانچے جا سکتے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-UR-C09-L01",
+      "chapter": {
+        "id": "IX-PHYSICS-UR-C09",
+        "number": 9
+      },
+      "topicId": "nature of science",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-012",
+        "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سائنس کی فطرت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-PHYSICS-UR-CURRENT",
+        "syllabusVersion": "ix-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "مشاہدہ، hypothesis، experiment، evidence اور revision کے باہمی تعلق کو بیان کریں۔",
+          "answer": "سائنسی عمل مشاہدے سے سوال، قابلِ آزمائش hypothesis، منظم experiment/data، evidence-based نتیجہ اور نئے evidence پر explanation کی revision پر مشتمل ہوتا ہے۔"
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 27,
+    "mcq": 9,
+    "short": 9,
+    "numerical": 7,
+    "long": 2,
+    "chapters": 9
+  }
+}

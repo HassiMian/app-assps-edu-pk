@@ -1,0 +1,2880 @@
+{
+  "schemaVersion": "assps-chemistry9Urdu-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-008",
+  "sourcePdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+  "scope": "CURRENT_URDU_MEDIUM_CHAPTER_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "IX-CHEM-UR-C01-M01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C01",
+        "number": 1
+      },
+      "topicId": "particle model",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مادے کی حالتیں اور فیز تبدیلیاں"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Solid میں particles عموماً کیسے ہوتے ہیں؟",
+          "answer": "قریب اور نسبتاً مقررہ ترتیب میں",
+          "options": [
+            {
+              "id": "A",
+              "text": "قریب اور نسبتاً مقررہ ترتیب میں"
+            },
+            {
+              "id": "B",
+              "text": "بہت دور اور آزاد"
+            },
+            {
+              "id": "C",
+              "text": "موجود نہیں ہوتے"
+            },
+            {
+              "id": "D",
+              "text": "ہمیشہ ions ہوتے ہیں"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-UR-C01-S01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C01",
+        "number": 1
+      },
+      "topicId": "evaporation boiling",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مادے کی حالتیں اور فیز تبدیلیاں"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Evaporation اور boiling میں فرق بیان کریں۔",
+          "answer": "Evaporation surface پر مختلف temperatures پر ہو سکتی ہے، جبکہ boiling پورے liquid میں مخصوص boiling point کے قریب ہوتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-UR-C01-L01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C01",
+        "number": 1
+      },
+      "topicId": "phase change",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مادے کی حالتیں اور فیز تبدیلیاں"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Particle model کی مدد سے melting اور boiling کی وضاحت کریں۔",
+          "answer": "Heating سے particles کی energy بڑھتی ہے؛ phase change کے دوران energy attractions پر قابو پانے میں استعمال ہوتی ہے، جس سے arrangement اور freedom of movement بدلتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-UR-C02-M01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C02",
+        "number": 2
+      },
+      "topicId": "proton",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ایٹمی ساخت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Proton کا charge کیا ہے؟",
+          "answer": "positive",
+          "options": [
+            {
+              "id": "A",
+              "text": "positive"
+            },
+            {
+              "id": "B",
+              "text": "negative"
+            },
+            {
+              "id": "C",
+              "text": "neutral"
+            },
+            {
+              "id": "D",
+              "text": "variable always"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-UR-C02-S01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C02",
+        "number": 2
+      },
+      "topicId": "isotopes",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ایٹمی ساخت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Isotopes سے کیا مراد ہے؟",
+          "answer": "ایک ہی element کے atoms جن کا proton number یکساں مگر neutron number مختلف ہو۔"
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-UR-C02-L01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C02",
+        "number": 2
+      },
+      "topicId": "atomic number mass number",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ایٹمی ساخت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Atomic number اور mass number میں فرق اور ان کا atom کی ساخت سے تعلق بیان کریں۔",
+          "answer": "Atomic number=protons کی تعداد؛ mass number=protons+neutrons۔ Neutral atom میں electrons کی تعداد proton number کے برابر ہوتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-UR-C03-M01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C03",
+        "number": 3
+      },
+      "topicId": "ionic bond",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "کیمیائی بند"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Ionic bonding میں بنیادی طور پر کیا ہوتا ہے؟",
+          "answer": "electrons کی transfer اور مخالف ions کی attraction",
+          "options": [
+            {
+              "id": "A",
+              "text": "electrons کی transfer اور مخالف ions کی attraction"
+            },
+            {
+              "id": "B",
+              "text": "protons کی sharing"
+            },
+            {
+              "id": "C",
+              "text": "neutrons کی transfer"
+            },
+            {
+              "id": "D",
+              "text": "کوئی particle interaction نہیں"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-UR-C03-S01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C03",
+        "number": 3
+      },
+      "topicId": "covalent bond",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "کیمیائی بند"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Covalent bond کا بنیادی تصور بیان کریں۔",
+          "answer": "دو atoms ایک یا زیادہ electron pairs share کرتے ہیں تاکہ زیادہ stable electronic arrangement حاصل ہو۔"
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-UR-C03-L01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C03",
+        "number": 3
+      },
+      "topicId": "bond comparison",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "کیمیائی بند"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Ionic اور covalent bonding کا اصولی تقابل کریں۔",
+          "answer": "Ionic bonding electron transfer سے بننے والے ions کی electrostatic attraction ہے؛ covalent bonding shared electron pairs پر مبنی ہوتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-UR-C04-M01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C04",
+        "number": 4
+      },
+      "topicId": "mole",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "اسٹوکیومیٹری"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "ایک mole میں particles کی تعداد تقریباً کتنی ہے؟",
+          "answer": "6.02×10²³",
+          "options": [
+            {
+              "id": "A",
+              "text": "6.02×10²³"
+            },
+            {
+              "id": "B",
+              "text": "6.02×10³"
+            },
+            {
+              "id": "C",
+              "text": "3×10⁸"
+            },
+            {
+              "id": "D",
+              "text": "9.8"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-UR-C04-S01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C04",
+        "number": 4
+      },
+      "topicId": "balanced equation",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "اسٹوکیومیٹری"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Stoichiometry سے پہلے equation balance کرنا کیوں ضروری ہے؟",
+          "answer": "Balanced coefficients reactants اور products کے mole ratios دیتے ہیں اور atoms کے conservation کو ظاہر کرتے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-UR-C04-N01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C04",
+        "number": 4
+      },
+      "topicId": "moles",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "اسٹوکیومیٹری"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "اگر H₂O کا molar mass 18 g mol⁻¹ ہو تو 18 g پانی کتنے moles ہے؟",
+          "answer": "n=m/M=18/18=1 mol۔"
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-UR-C05-M01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C05",
+        "number": 5
+      },
+      "topicId": "exothermic",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "انرجیٹکس"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Exothermic reaction میں surroundings کی طرف کیا منتقل ہوتا ہے؟",
+          "answer": "energy",
+          "options": [
+            {
+              "id": "A",
+              "text": "energy"
+            },
+            {
+              "id": "B",
+              "text": "mass ہمیشہ ختم"
+            },
+            {
+              "id": "C",
+              "text": "protons"
+            },
+            {
+              "id": "D",
+              "text": "صرف electrons"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-UR-C05-S01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C05",
+        "number": 5
+      },
+      "topicId": "activation energy",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "انرجیٹکس"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Activation energy سے کیا مراد ہے؟",
+          "answer": "Reaction شروع ہونے کے لیے reacting particles کو درکار minimum energy barrier۔"
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-UR-C05-L01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C05",
+        "number": 5
+      },
+      "topicId": "energy changes",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "انرجیٹکس"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Exothermic اور endothermic reactions کا energy کے لحاظ سے تقابل کریں۔",
+          "answer": "Exothermic reactions surroundings کو energy release کرتی ہیں؛ endothermic reactions surroundings سے energy absorb کرتی ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-UR-C06-M01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C06",
+        "number": 6
+      },
+      "topicId": "dynamic equilibrium",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "کیمیائی توازن"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Dynamic equilibrium میں کیا برابر ہوتا ہے؟",
+          "answer": "forward اور reverse reaction rates",
+          "options": [
+            {
+              "id": "A",
+              "text": "forward اور reverse reaction rates"
+            },
+            {
+              "id": "B",
+              "text": "reactant اور product masses لازماً"
+            },
+            {
+              "id": "C",
+              "text": "تمام concentrations صفر"
+            },
+            {
+              "id": "D",
+              "text": "temperature ہمیشہ 0°C"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-UR-C06-S01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C06",
+        "number": 6
+      },
+      "topicId": "equilibrium",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "کیمیائی توازن"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Dynamic equilibrium کو dynamic کیوں کہا جاتا ہے؟",
+          "answer": "Microscopic level پر forward اور reverse reactions جاری رہتی ہیں لیکن برابر rates کی وجہ سے macroscopic concentrations مستقل رہتی ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-UR-C06-L01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C06",
+        "number": 6
+      },
+      "topicId": "equilibrium factors",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "کیمیائی توازن"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Concentration یا temperature میں تبدیلی equilibrium position کو کیوں متاثر کر سکتی ہے؟",
+          "answer": "System applied change کے اثر کو oppose کرنے والی direction میں shift کر سکتا ہے؛ temperature change endothermic/exothermic directions کے relative favor کو بدلتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-UR-C07-M01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C07",
+        "number": 7
+      },
+      "topicId": "pH",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ایسڈ، بیس کیمسٹری"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Acidic solution کا pH عام طور پر کیسا ہوتا ہے؟",
+          "answer": "7 سے کم",
+          "options": [
+            {
+              "id": "A",
+              "text": "7 سے کم"
+            },
+            {
+              "id": "B",
+              "text": "7 سے زیادہ"
+            },
+            {
+              "id": "C",
+              "text": "ہمیشہ 14"
+            },
+            {
+              "id": "D",
+              "text": "ہمیشہ 7"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-UR-C07-S01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C07",
+        "number": 7
+      },
+      "topicId": "neutralization",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ایسڈ، بیس کیمسٹری"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Neutralization reaction کا بنیادی تصور بیان کریں۔",
+          "answer": "Acid اور base مناسب تناسب میں react کر کے عموماً salt اور water بناتے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-UR-C07-L01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C07",
+        "number": 7
+      },
+      "topicId": "acid base",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ایسڈ، بیس کیمسٹری"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Acids اور bases کی عمومی خصوصیات اور pH scale سے تعلق بیان کریں۔",
+          "answer": "Acids aqueous medium میں acidic behavior/H⁺ availability سے، bases OH⁻ acceptance/availability سے متعلق ہوتے ہیں؛ pH scale acidity/basicity کا relative measure دیتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-UR-C08-M01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C08",
+        "number": 8
+      },
+      "topicId": "periodic table",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پیریاڈک ٹیبل اور دوریت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Periodic table میں vertical column کیا کہلاتا ہے؟",
+          "answer": "group",
+          "options": [
+            {
+              "id": "A",
+              "text": "group"
+            },
+            {
+              "id": "B",
+              "text": "period"
+            },
+            {
+              "id": "C",
+              "text": "isotope"
+            },
+            {
+              "id": "D",
+              "text": "bond"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-UR-C08-S01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C08",
+        "number": 8
+      },
+      "topicId": "periodicity",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پیریاڈک ٹیبل اور دوریت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Periodicity سے کیا مراد ہے؟",
+          "answer": "Atomic number بڑھنے کے ساتھ عناصر کی بعض physical/chemical properties کا باقاعدہ repeating pattern۔"
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-UR-C08-L01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C08",
+        "number": 8
+      },
+      "topicId": "periodic trends",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پیریاڈک ٹیبل اور دوریت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Group اور period کے تصور سے elements کی properties کی پیش گوئی کیسے مدد ملتی ہے؟",
+          "answer": "Same group elements میں valence-electron pattern ملتا جلتا ہونے سے chemical behavior میں مشابہت آتی ہے؛ periods میں properties باقاعدہ trends دکھاتی ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-UR-C09-M01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C09",
+        "number": 9
+      },
+      "topicId": "group 1",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "گروپس کی خصوصیات اور عناصر"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Alkali metals periodic table کے کس group میں ہوتے ہیں؟",
+          "answer": "Group 1",
+          "options": [
+            {
+              "id": "A",
+              "text": "Group 1"
+            },
+            {
+              "id": "B",
+              "text": "Group 18"
+            },
+            {
+              "id": "C",
+              "text": "Group 17"
+            },
+            {
+              "id": "D",
+              "text": "Group 14"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-UR-C09-S01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C09",
+        "number": 9
+      },
+      "topicId": "group properties",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "گروپس کی خصوصیات اور عناصر"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Same group کے elements میں properties کیوں ملتی جلتی ہو سکتی ہیں؟",
+          "answer": "ان کے outer-shell/valence electron arrangements میں similarity کی وجہ سے chemical behavior میں مماثلت آ سکتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-UR-C09-L01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C09",
+        "number": 9
+      },
+      "topicId": "groups",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "گروپس کی خصوصیات اور عناصر"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Group 1 اور Group 17 کے عمومی chemical behavior کا تقابلی خاکہ بیان کریں۔",
+          "answer": "Group 1 metals عموماً ایک valence electron lose کرنے کی tendency رکھتے ہیں؛ Group 17 elements عموماً ایک electron gain/share کر کے stable arrangement کی طرف جاتے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-UR-C10-M01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C10",
+        "number": 10
+      },
+      "topicId": "air pollution",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ماحولیاتی کیمسٹری"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Carbon dioxide کی excessive increase کس environmental issue سے متعلق ہے؟",
+          "answer": "greenhouse effect میں اضافہ",
+          "options": [
+            {
+              "id": "A",
+              "text": "greenhouse effect میں اضافہ"
+            },
+            {
+              "id": "B",
+              "text": "صرف water hardness"
+            },
+            {
+              "id": "C",
+              "text": "metal bonding"
+            },
+            {
+              "id": "D",
+              "text": "radioactivity"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-UR-C10-S01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C10",
+        "number": 10
+      },
+      "topicId": "acid rain",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ماحولیاتی کیمسٹری"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Acid rain کے بننے میں کن gaseous pollutants کا کردار ہو سکتا ہے؟",
+          "answer": "Sulphur dioxide اور nitrogen oxides atmosphere میں acids بنانے والے reactions کے ذریعے acid deposition میں کردار ادا کر سکتے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-UR-C10-L01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C10",
+        "number": 10
+      },
+      "topicId": "environmental chemistry",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ماحولیاتی کیمسٹری"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Air pollution کم کرنے میں monitoring، cleaner fuels/technology اور responsible behavior کی اہمیت بیان کریں۔",
+          "answer": "Monitoring sources identify کرتی ہے؛ cleaner processes emissions کم کر سکتے ہیں؛ efficient energy use، public transport اور regulations exposure/environmental impact کم کرنے میں مدد دیتے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-UR-C11-M01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C11",
+        "number": 11
+      },
+      "topicId": "hydrocarbon",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ہائیڈروکاربنز"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Hydrocarbon میں بنیادی طور پر کون سے elements ہوتے ہیں؟",
+          "answer": "carbon اور hydrogen",
+          "options": [
+            {
+              "id": "A",
+              "text": "carbon اور hydrogen"
+            },
+            {
+              "id": "B",
+              "text": "carbon اور oxygen only"
+            },
+            {
+              "id": "C",
+              "text": "hydrogen اور nitrogen only"
+            },
+            {
+              "id": "D",
+              "text": "تمام elements"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-UR-C11-S01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C11",
+        "number": 11
+      },
+      "topicId": "saturated unsaturated",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ہائیڈروکاربنز"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Saturated اور unsaturated hydrocarbons میں فرق بیان کریں۔",
+          "answer": "Saturated hydrocarbons میں carbon-carbon single bonds ہوتے ہیں؛ unsaturated میں کم از کم ایک multiple bond موجود ہوتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-UR-C11-L01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C11",
+        "number": 11
+      },
+      "topicId": "hydrocarbon reactions",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ہائیڈروکاربنز"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Alkanes اور alkenes کی bonding اور reactivity کا عمومی تقابل کریں۔",
+          "answer": "Alkanes saturated single-bond compounds ہیں اور نسبتاً کم reactive؛ alkenes میں C=C bond ہونے کی وجہ سے addition reactions کی tendency زیادہ ہوتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-UR-C12-M01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C12",
+        "number": 12
+      },
+      "topicId": "data quality",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "تجرباتی ڈیٹا اور تجزیہ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Repeated measurements کا ایک فائدہ کیا ہے؟",
+          "answer": "random variation کا اندازہ اور reliability بہتر کرنا",
+          "options": [
+            {
+              "id": "A",
+              "text": "random variation کا اندازہ اور reliability بہتر کرنا"
+            },
+            {
+              "id": "B",
+              "text": "ہر غلطی ختم ہونا لازمی"
+            },
+            {
+              "id": "C",
+              "text": "units کی ضرورت ختم کرنا"
+            },
+            {
+              "id": "D",
+              "text": "data کو چھپانا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-UR-C12-S01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C12",
+        "number": 12
+      },
+      "topicId": "accuracy precision",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "تجرباتی ڈیٹا اور تجزیہ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Accuracy اور precision میں فرق بیان کریں۔",
+          "answer": "Accuracy measured value کی true/accepted value سے closeness ہے؛ precision repeated measurements کے باہمی closeness/consistency سے متعلق ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-UR-C12-L01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C12",
+        "number": 12
+      },
+      "topicId": "data analysis",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "تجرباتی ڈیٹا اور تجزیہ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "ایک اچھے experimental data table اور graph کی بنیادی خصوصیات بیان کریں۔",
+          "answer": "واضح headings، units، مناسب significant figures، independent/dependent variables کی درست ترتیب، مناسب scale اور labelled axes ضروری ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-UR-C13-M01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C13",
+        "number": 13
+      },
+      "topicId": "lab safety",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "لیبارٹری اور عملی مہارتیں"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Lab میں بنیادی safety practice کون سی ہے؟",
+          "answer": "instructions اور protective equipment کی پابندی",
+          "options": [
+            {
+              "id": "A",
+              "text": "instructions اور protective equipment کی پابندی"
+            },
+            {
+              "id": "B",
+              "text": "نامعلوم chemicals چکھنا"
+            },
+            {
+              "id": "C",
+              "text": "بغیر label کے samples رکھنا"
+            },
+            {
+              "id": "D",
+              "text": "safety rules نظر انداز کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-UR-C13-S01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C13",
+        "number": 13
+      },
+      "topicId": "measurement records",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "لیبارٹری اور عملی مہارتیں"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Lab observations فوراً record کرنا کیوں اہم ہے؟",
+          "answer": "اس سے memory error کم ہوتا ہے، raw data محفوظ رہتا ہے اور بعد کی analysis/reproducibility بہتر ہوتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-UR-C13-L01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-UR-C13",
+        "number": 13
+      },
+      "topicId": "safe practical work",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-008",
+        "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "لیبارٹری اور عملی مہارتیں"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-CHEMISTRY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Safe اور reliable practical work کے لیے planning، measurement، labeling، waste handling اور documentation کی اہمیت بیان کریں۔",
+          "answer": "واضح plan، مناسب calibrated tools، واضح labels، teacher/lab rules کے مطابق waste handling اور مکمل records safety اور data reliability دونوں بہتر کرتے ہیں؛ کسی hazardous procedure کی خود سے improvisation نہیں کرنی چاہیے۔"
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 39,
+    "mcq": 13,
+    "short": 13,
+    "numerical": 1,
+    "long": 12,
+    "chapters": 13
+  }
+}

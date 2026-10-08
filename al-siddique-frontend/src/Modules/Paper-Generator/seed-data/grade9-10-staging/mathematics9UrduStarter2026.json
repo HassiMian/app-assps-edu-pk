@@ -1,0 +1,2880 @@
+{
+  "schemaVersion": "assps-mathematics9Urdu-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-006",
+  "sourcePdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+  "scope": "CURRENT_URDU_MEDIUM_CHAPTER_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "IX-MATH-UR-C01-M01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C01",
+        "number": 1
+      },
+      "topicId": "حقیقی و غیر ناطق اعداد",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "حقیقی اعداد"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "ان میں سے کون سا عدد غیر ناطق (irrational) ہے؟",
+          "answer": "√2",
+          "options": [
+            {
+              "id": "A",
+              "text": "√2"
+            },
+            {
+              "id": "B",
+              "text": "3/4"
+            },
+            {
+              "id": "C",
+              "text": "0.25"
+            },
+            {
+              "id": "D",
+              "text": "-5"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-UR-C01-S01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C01",
+        "number": 1
+      },
+      "topicId": "حقیقی و غیر ناطق اعداد",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "حقیقی اعداد"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "ناطق اور غیر ناطق اعداد میں فرق بیان کریں۔",
+          "answer": "ناطق عدد p/q کی صورت میں لکھا جا سکتا ہے جہاں q صفر نہ ہو؛ غیر ناطق عدد اس صورت میں نہیں لکھا جا سکتا اور اس کی اعشاری توسیع غیر اختتامی و غیر تکراری ہوتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-UR-C01-N01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C01",
+        "number": 1
+      },
+      "topicId": "سرڈز",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "حقیقی اعداد"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "√72 کو سادہ کریں۔",
+          "answer": "√72 = √(36×2) = 6√2۔"
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-UR-C02-M01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C02",
+        "number": 2
+      },
+      "topicId": "لوگارتھم",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "لوگارتھم"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "log₁₀(1000) کی قیمت کیا ہے؟",
+          "answer": "3",
+          "options": [
+            {
+              "id": "A",
+              "text": "3"
+            },
+            {
+              "id": "B",
+              "text": "10"
+            },
+            {
+              "id": "C",
+              "text": "100"
+            },
+            {
+              "id": "D",
+              "text": "1"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-UR-C02-S01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C02",
+        "number": 2
+      },
+      "topicId": "لوگارتھم کے قوانین",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "لوگارتھم"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "لوگارتھم کا product law بیان کریں۔",
+          "answer": "logₐ(xy)=logₐx+logₐy، بشرطیکہ x اور y مثبت ہوں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-UR-C02-N01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C02",
+        "number": 2
+      },
+      "topicId": "لوگارتھم",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "لوگارتھم"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "log₁₀(100)+log₁₀(0.01) معلوم کریں۔",
+          "answer": "2 + (-2) = 0۔"
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-UR-C03-M01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C03",
+        "number": 3
+      },
+      "topicId": "سیٹس",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سیٹس اور فنکشنز"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "اگر A={1,2,3} اور B={3,4} ہوں تو A∩B کیا ہوگا؟",
+          "answer": "{3}",
+          "options": [
+            {
+              "id": "A",
+              "text": "{3}"
+            },
+            {
+              "id": "B",
+              "text": "{1,2,4}"
+            },
+            {
+              "id": "C",
+              "text": "{1,2,3,4}"
+            },
+            {
+              "id": "D",
+              "text": "∅"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-UR-C03-S01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C03",
+        "number": 3
+      },
+      "topicId": "فنکشن",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سیٹس اور فنکشنز"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "فنکشن کی domain سے کیا مراد ہے؟",
+          "answer": "فنکشن کے تمام قابلِ قبول input values کا مجموعہ domain کہلاتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-UR-C03-N01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C03",
+        "number": 3
+      },
+      "topicId": "سیٹس کی تعداد",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سیٹس اور فنکشنز"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "اگر n(A)=18، n(B)=15 اور n(A∩B)=6 ہو تو n(A∪B) معلوم کریں۔",
+          "answer": "18+15-6=27۔"
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-UR-C04-M01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C04",
+        "number": 4
+      },
+      "topicId": "فیکٹرائزیشن",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "فیکٹرائزیشن اور الجبری عمل"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "x²−16 کی درست factorization کون سی ہے؟",
+          "answer": "(x−4)(x+4)",
+          "options": [
+            {
+              "id": "A",
+              "text": "(x−4)(x+4)"
+            },
+            {
+              "id": "B",
+              "text": "(x−8)(x+2)"
+            },
+            {
+              "id": "C",
+              "text": "(x−4)²"
+            },
+            {
+              "id": "D",
+              "text": "x(x−16)"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-UR-C04-S01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C04",
+        "number": 4
+      },
+      "topicId": "الجبرائی شناخت",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "فیکٹرائزیشن اور الجبری عمل"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "(a+b)² کی شناخت لکھیں۔",
+          "answer": "(a+b)²=a²+2ab+b²۔"
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-UR-C04-N01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C04",
+        "number": 4
+      },
+      "topicId": "فیکٹرائزیشن",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "فیکٹرائزیشن اور الجبری عمل"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "x²+7x+12 کو factorize کریں۔",
+          "answer": "x²+7x+12=(x+3)(x+4)۔"
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-UR-C05-M01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C05",
+        "number": 5
+      },
+      "topicId": "خطی مساوات",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "خطی مساوات اور عدم مساوات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "3x+2=14 میں x کی قیمت کیا ہے؟",
+          "answer": "4",
+          "options": [
+            {
+              "id": "A",
+              "text": "4"
+            },
+            {
+              "id": "B",
+              "text": "3"
+            },
+            {
+              "id": "C",
+              "text": "5"
+            },
+            {
+              "id": "D",
+              "text": "6"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-UR-C05-S01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C05",
+        "number": 5
+      },
+      "topicId": "عدم مساوات",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "خطی مساوات اور عدم مساوات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "کسی inequality کے دونوں اطراف منفی عدد سے ضرب دینے پر نشان کے ساتھ کیا ہوتا ہے؟",
+          "answer": "عدم مساوات کا نشان الٹ جاتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-UR-C05-N01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C05",
+        "number": 5
+      },
+      "topicId": "بیک وقت مساوات",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "خطی مساوات اور عدم مساوات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "x+y=10 اور x−y=2 حل کریں۔",
+          "answer": "جمع کرنے سے 2x=12، لہٰذا x=6 اور y=4۔"
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-UR-C06-M01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C06",
+        "number": 6
+      },
+      "topicId": "مثلثی نسبتیں",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مثلثیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "قائمہ مثلث میں sin θ کیا ہوتا ہے؟",
+          "answer": "مقابل ضلع/وتر",
+          "options": [
+            {
+              "id": "A",
+              "text": "مقابل ضلع/وتر"
+            },
+            {
+              "id": "B",
+              "text": "متصل ضلع/وتر"
+            },
+            {
+              "id": "C",
+              "text": "مقابل ضلع/متصل ضلع"
+            },
+            {
+              "id": "D",
+              "text": "وتر/مقابل ضلع"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-UR-C06-S01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C06",
+        "number": 6
+      },
+      "topicId": "مثلثی نسبتیں",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مثلثیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "tan θ کو sin θ اور cos θ کی مدد سے لکھیں۔",
+          "answer": "tan θ = sin θ / cos θ، بشرطیکہ cos θ صفر نہ ہو۔"
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-UR-C06-N01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C06",
+        "number": 6
+      },
+      "topicId": "قائمہ مثلث",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مثلثیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "ایک قائمہ مثلث کے قائم ضلع 5 cm اور 12 cm ہیں۔ وتر معلوم کریں۔",
+          "answer": "وتر=√(5²+12²)=√169=13 cm۔"
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-UR-C07-M01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C07",
+        "number": 7
+      },
+      "topicId": "محددی سطح",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "محددی جیومیٹری"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "origin کے coordinates کیا ہیں؟",
+          "answer": "(0,0)",
+          "options": [
+            {
+              "id": "A",
+              "text": "(0,0)"
+            },
+            {
+              "id": "B",
+              "text": "(1,0)"
+            },
+            {
+              "id": "C",
+              "text": "(0,1)"
+            },
+            {
+              "id": "D",
+              "text": "(1,1)"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-UR-C07-S01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C07",
+        "number": 7
+      },
+      "topicId": "ڈھلوان",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "محددی جیومیٹری"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "دو points (x₁,y₁)، (x₂,y₂) کے درمیان slope کا فارمولا لکھیں۔",
+          "answer": "m=(y₂−y₁)/(x₂−x₁)، بشرطیکہ x₂≠x₁۔"
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-UR-C07-N01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C07",
+        "number": 7
+      },
+      "topicId": "ڈھلوان",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "محددی جیومیٹری"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "points (1,2) اور (5,10) سے گزرنے والی line کی slope معلوم کریں۔",
+          "answer": "m=(10−2)/(5−1)=8/4=2۔"
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-UR-C08-M01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C08",
+        "number": 8
+      },
+      "topicId": "منطق",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "منطق"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "p∧q کب true ہوتا ہے؟",
+          "answer": "جب p اور q دونوں true ہوں",
+          "options": [
+            {
+              "id": "A",
+              "text": "جب p اور q دونوں true ہوں"
+            },
+            {
+              "id": "B",
+              "text": "جب صرف ایک true ہو"
+            },
+            {
+              "id": "C",
+              "text": "جب دونوں false ہوں"
+            },
+            {
+              "id": "D",
+              "text": "ہمیشہ true"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-UR-C08-S01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C08",
+        "number": 8
+      },
+      "topicId": "statement",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "منطق"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "ریاضیاتی statement سے کیا مراد ہے؟",
+          "answer": "ایسا خبری جملہ جس کی truth value واضح طور پر true یا false ہو۔"
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-UR-C08-L01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C08",
+        "number": 8
+      },
+      "topicId": "truth table",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "منطق"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "p∧q کی مکمل truth table بیان کریں۔",
+          "answer": "TT→T، TF→F، FT→F، FF→F۔ conjunction صرف اس وقت true ہے جب دونوں statements true ہوں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-UR-C09-M01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C09",
+        "number": 9
+      },
+      "topicId": "مشابہت",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مشابہ اشکال"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "مشابہ اشکال کے corresponding angles کیسے ہوتے ہیں؟",
+          "answer": "برابر",
+          "options": [
+            {
+              "id": "A",
+              "text": "برابر"
+            },
+            {
+              "id": "B",
+              "text": "ہمیشہ 90°"
+            },
+            {
+              "id": "C",
+              "text": "غیر متعلق"
+            },
+            {
+              "id": "D",
+              "text": "ہمیشہ مکمل زاویے"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-UR-C09-S01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C09",
+        "number": 9
+      },
+      "topicId": "scale factor",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مشابہ اشکال"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "اگر length scale factor k ہو تو area scale factor کیا ہوگا؟",
+          "answer": "k²۔"
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-UR-C09-N01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C09",
+        "number": 9
+      },
+      "topicId": "مشابہ مثلث",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "مشابہ اشکال"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "دو مشابہ مثلثوں کا scale factor 3 ہے۔ چھوٹے مثلث کی ایک side 5 cm ہو تو بڑی corresponding side معلوم کریں۔",
+          "answer": "5×3=15 cm۔"
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-UR-C10-M01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C10",
+        "number": 10
+      },
+      "topicId": "گراف",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "فنکشنز کے گراف"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "y=mx+c کا graph کیا ہوتا ہے؟",
+          "answer": "سیدھی line",
+          "options": [
+            {
+              "id": "A",
+              "text": "سیدھی line"
+            },
+            {
+              "id": "B",
+              "text": "circle"
+            },
+            {
+              "id": "C",
+              "text": "صرف parabola"
+            },
+            {
+              "id": "D",
+              "text": "صرف hyperbola"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-UR-C10-S01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C10",
+        "number": 10
+      },
+      "topicId": "intercept",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "فنکشنز کے گراف"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "y=f(x) کا x-intercept کیسے معلوم کیا جاتا ہے؟",
+          "answer": "y=0 رکھ کر f(x)=0 حل کیا جاتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-UR-C10-N01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C10",
+        "number": 10
+      },
+      "topicId": "فنکشن کی قیمت",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "فنکشنز کے گراف"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "اگر y=3x−4 ہو تو x=5 پر y معلوم کریں۔",
+          "answer": "y=15−4=11۔"
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-UR-C11-M01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C11",
+        "number": 11
+      },
+      "topicId": "لوکس",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "لوکس اور تعمیرات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "line segment کے perpendicular bisector پر موجود points کی خاصیت کیا ہے؟",
+          "answer": "وہ دونوں endpoints سے برابر فاصلے پر ہوتے ہیں",
+          "options": [
+            {
+              "id": "A",
+              "text": "وہ دونوں endpoints سے برابر فاصلے پر ہوتے ہیں"
+            },
+            {
+              "id": "B",
+              "text": "صرف ایک endpoint کے قریب ہوتے ہیں"
+            },
+            {
+              "id": "C",
+              "text": "ہمیشہ circle پر ہوتے ہیں"
+            },
+            {
+              "id": "D",
+              "text": "کوئی خاصیت نہیں"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-UR-C11-S01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C11",
+        "number": 11
+      },
+      "topicId": "angle bisector",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "لوکس اور تعمیرات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "زاویے کی دونوں sides سے برابر فاصلے والے points کا locus کیا ہے؟",
+          "answer": "زاویے کا angle bisector۔"
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-UR-C11-L01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C11",
+        "number": 11
+      },
+      "topicId": "تعمیر",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "لوکس اور تعمیرات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "line segment کا perpendicular bisector بنانے کا اصولی طریقہ بیان کریں۔",
+          "answer": "دونوں endpoints سے برابر radius کے arcs اوپر اور نیچے intersect کرائیں، پھر intersection points کو ملائیں؛ حاصل line segment کو عموداً نصف کرتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-UR-C12-M01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C12",
+        "number": 12
+      },
+      "topicId": "mean",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "معلومات کی تنظیم"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Arithmetic mean کیسے معلوم کیا جاتا ہے؟",
+          "answer": "values کا مجموعہ/values کی تعداد",
+          "options": [
+            {
+              "id": "A",
+              "text": "values کا مجموعہ/values کی تعداد"
+            },
+            {
+              "id": "B",
+              "text": "صرف درمیانی value"
+            },
+            {
+              "id": "C",
+              "text": "صرف سب سے زیادہ value"
+            },
+            {
+              "id": "D",
+              "text": "maximum−minimum"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-UR-C12-S01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C12",
+        "number": 12
+      },
+      "topicId": "range",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "معلومات کی تنظیم"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "dataset کا range کیا ہوتا ہے؟",
+          "answer": "maximum value − minimum value۔"
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-UR-C12-N01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C12",
+        "number": 12
+      },
+      "topicId": "mean",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "معلومات کی تنظیم"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "4، 6، 8، 12 کا mean معلوم کریں۔",
+          "answer": "(4+6+8+12)/4=30/4=7.5۔"
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-UR-C13-M01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C13",
+        "number": 13
+      },
+      "topicId": "احتمال",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "احتمال"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "ناممکن event کا probability کیا ہوتا ہے؟",
+          "answer": "0",
+          "options": [
+            {
+              "id": "A",
+              "text": "0"
+            },
+            {
+              "id": "B",
+              "text": "1"
+            },
+            {
+              "id": "C",
+              "text": "1/2"
+            },
+            {
+              "id": "D",
+              "text": "−1"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-UR-C13-S01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C13",
+        "number": 13
+      },
+      "topicId": "sample space",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "احتمال"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Sample space سے کیا مراد ہے؟",
+          "answer": "random experiment کے تمام ممکن outcomes کا مجموعہ۔"
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-UR-C13-N01",
+      "chapter": {
+        "id": "IX-MATHEMATICS-UR-C13",
+        "number": 13
+      },
+      "topicId": "سادہ probability",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-006",
+        "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "احتمال"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-UR-CURRENT",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "ایک fair die پھینکا جائے تو even number آنے کا probability معلوم کریں۔",
+          "answer": "even outcomes {2,4,6} ہیں؛ probability=3/6=1/2۔"
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 39,
+    "mcq": 13,
+    "short": 13,
+    "numerical": 11,
+    "long": 2,
+    "chapters": 13
+  }
+}

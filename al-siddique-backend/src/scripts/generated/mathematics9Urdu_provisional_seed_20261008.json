@@ -1,0 +1,1319 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "IX-MATH-UR-C01-M01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "حقیقی اعداد",
+      "topic_name": "حقیقی و غیر ناطق اعداد",
+      "category": "mcq",
+      "question_text": "ان میں سے کون سا عدد غیر ناطق (irrational) ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "√2"
+        },
+        {
+          "id": "B",
+          "text": "3/4"
+        },
+        {
+          "id": "C",
+          "text": "0.25"
+        },
+        {
+          "id": "D",
+          "text": "-5"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "√2",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 1",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "حقیقی و غیر ناطق اعداد"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C01-S01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "حقیقی اعداد",
+      "topic_name": "حقیقی و غیر ناطق اعداد",
+      "category": "short",
+      "question_text": "ناطق اور غیر ناطق اعداد میں فرق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "ناطق عدد p/q کی صورت میں لکھا جا سکتا ہے جہاں q صفر نہ ہو؛ غیر ناطق عدد اس صورت میں نہیں لکھا جا سکتا اور اس کی اعشاری توسیع غیر اختتامی و غیر تکراری ہوتی ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 1",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "حقیقی و غیر ناطق اعداد"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C01-N01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "حقیقی اعداد",
+      "topic_name": "سرڈز",
+      "category": "numerical",
+      "question_text": "√72 کو سادہ کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "√72 = √(36×2) = 6√2۔",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 1",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "سرڈز"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C02-M01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "لوگارتھم",
+      "topic_name": "لوگارتھم",
+      "category": "mcq",
+      "question_text": "log₁₀(1000) کی قیمت کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "3"
+        },
+        {
+          "id": "B",
+          "text": "10"
+        },
+        {
+          "id": "C",
+          "text": "100"
+        },
+        {
+          "id": "D",
+          "text": "1"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "3",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 2",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "لوگارتھم"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C02-S01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "لوگارتھم",
+      "topic_name": "لوگارتھم کے قوانین",
+      "category": "short",
+      "question_text": "لوگارتھم کا product law بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "logₐ(xy)=logₐx+logₐy، بشرطیکہ x اور y مثبت ہوں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 2",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "لوگارتھم کے قوانین"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C02-N01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "لوگارتھم",
+      "topic_name": "لوگارتھم",
+      "category": "numerical",
+      "question_text": "log₁₀(100)+log₁₀(0.01) معلوم کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "2 + (-2) = 0۔",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 2",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "لوگارتھم"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C03-M01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "سیٹس اور فنکشنز",
+      "topic_name": "سیٹس",
+      "category": "mcq",
+      "question_text": "اگر A={1,2,3} اور B={3,4} ہوں تو A∩B کیا ہوگا؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "{3}"
+        },
+        {
+          "id": "B",
+          "text": "{1,2,4}"
+        },
+        {
+          "id": "C",
+          "text": "{1,2,3,4}"
+        },
+        {
+          "id": "D",
+          "text": "∅"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "{3}",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 3",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "سیٹس"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C03-S01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "سیٹس اور فنکشنز",
+      "topic_name": "فنکشن",
+      "category": "short",
+      "question_text": "فنکشن کی domain سے کیا مراد ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "فنکشن کے تمام قابلِ قبول input values کا مجموعہ domain کہلاتا ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 3",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "فنکشن"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C03-N01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "سیٹس اور فنکشنز",
+      "topic_name": "سیٹس کی تعداد",
+      "category": "numerical",
+      "question_text": "اگر n(A)=18، n(B)=15 اور n(A∩B)=6 ہو تو n(A∪B) معلوم کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "18+15-6=27۔",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 3",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "سیٹس کی تعداد"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C04-M01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "فیکٹرائزیشن اور الجبری عمل",
+      "topic_name": "فیکٹرائزیشن",
+      "category": "mcq",
+      "question_text": "x²−16 کی درست factorization کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "(x−4)(x+4)"
+        },
+        {
+          "id": "B",
+          "text": "(x−8)(x+2)"
+        },
+        {
+          "id": "C",
+          "text": "(x−4)²"
+        },
+        {
+          "id": "D",
+          "text": "x(x−16)"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "(x−4)(x+4)",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 4",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "فیکٹرائزیشن"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C04-S01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "فیکٹرائزیشن اور الجبری عمل",
+      "topic_name": "الجبرائی شناخت",
+      "category": "short",
+      "question_text": "(a+b)² کی شناخت لکھیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "(a+b)²=a²+2ab+b²۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 4",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "الجبرائی شناخت"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C04-N01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "فیکٹرائزیشن اور الجبری عمل",
+      "topic_name": "فیکٹرائزیشن",
+      "category": "numerical",
+      "question_text": "x²+7x+12 کو factorize کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "x²+7x+12=(x+3)(x+4)۔",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 4",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "فیکٹرائزیشن"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C05-M01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "خطی مساوات اور عدم مساوات",
+      "topic_name": "خطی مساوات",
+      "category": "mcq",
+      "question_text": "3x+2=14 میں x کی قیمت کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "4"
+        },
+        {
+          "id": "B",
+          "text": "3"
+        },
+        {
+          "id": "C",
+          "text": "5"
+        },
+        {
+          "id": "D",
+          "text": "6"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "4",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 5",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "خطی مساوات"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C05-S01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "خطی مساوات اور عدم مساوات",
+      "topic_name": "عدم مساوات",
+      "category": "short",
+      "question_text": "کسی inequality کے دونوں اطراف منفی عدد سے ضرب دینے پر نشان کے ساتھ کیا ہوتا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "عدم مساوات کا نشان الٹ جاتا ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 5",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "عدم مساوات"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C05-N01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "خطی مساوات اور عدم مساوات",
+      "topic_name": "بیک وقت مساوات",
+      "category": "numerical",
+      "question_text": "x+y=10 اور x−y=2 حل کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جمع کرنے سے 2x=12، لہٰذا x=6 اور y=4۔",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 5",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "بیک وقت مساوات"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C06-M01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "مثلثیات",
+      "topic_name": "مثلثی نسبتیں",
+      "category": "mcq",
+      "question_text": "قائمہ مثلث میں sin θ کیا ہوتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "مقابل ضلع/وتر"
+        },
+        {
+          "id": "B",
+          "text": "متصل ضلع/وتر"
+        },
+        {
+          "id": "C",
+          "text": "مقابل ضلع/متصل ضلع"
+        },
+        {
+          "id": "D",
+          "text": "وتر/مقابل ضلع"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "مقابل ضلع/وتر",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 6",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "مثلثی نسبتیں"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C06-S01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "مثلثیات",
+      "topic_name": "مثلثی نسبتیں",
+      "category": "short",
+      "question_text": "tan θ کو sin θ اور cos θ کی مدد سے لکھیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "tan θ = sin θ / cos θ، بشرطیکہ cos θ صفر نہ ہو۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 6",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "مثلثی نسبتیں"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C06-N01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "مثلثیات",
+      "topic_name": "قائمہ مثلث",
+      "category": "numerical",
+      "question_text": "ایک قائمہ مثلث کے قائم ضلع 5 cm اور 12 cm ہیں۔ وتر معلوم کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "وتر=√(5²+12²)=√169=13 cm۔",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 6",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "قائمہ مثلث"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C07-M01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "محددی جیومیٹری",
+      "topic_name": "محددی سطح",
+      "category": "mcq",
+      "question_text": "origin کے coordinates کیا ہیں؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "(0,0)"
+        },
+        {
+          "id": "B",
+          "text": "(1,0)"
+        },
+        {
+          "id": "C",
+          "text": "(0,1)"
+        },
+        {
+          "id": "D",
+          "text": "(1,1)"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "(0,0)",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 7",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "محددی سطح"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C07-S01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "محددی جیومیٹری",
+      "topic_name": "ڈھلوان",
+      "category": "short",
+      "question_text": "دو points (x₁,y₁)، (x₂,y₂) کے درمیان slope کا فارمولا لکھیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "m=(y₂−y₁)/(x₂−x₁)، بشرطیکہ x₂≠x₁۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 7",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "ڈھلوان"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C07-N01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "محددی جیومیٹری",
+      "topic_name": "ڈھلوان",
+      "category": "numerical",
+      "question_text": "points (1,2) اور (5,10) سے گزرنے والی line کی slope معلوم کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "m=(10−2)/(5−1)=8/4=2۔",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 7",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "ڈھلوان"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C08-M01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "منطق",
+      "topic_name": "منطق",
+      "category": "mcq",
+      "question_text": "p∧q کب true ہوتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "جب p اور q دونوں true ہوں"
+        },
+        {
+          "id": "B",
+          "text": "جب صرف ایک true ہو"
+        },
+        {
+          "id": "C",
+          "text": "جب دونوں false ہوں"
+        },
+        {
+          "id": "D",
+          "text": "ہمیشہ true"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "جب p اور q دونوں true ہوں",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 8",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "منطق"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C08-S01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "منطق",
+      "topic_name": "statement",
+      "category": "short",
+      "question_text": "ریاضیاتی statement سے کیا مراد ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "ایسا خبری جملہ جس کی truth value واضح طور پر true یا false ہو۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 8",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "statement"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C08-L01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "منطق",
+      "topic_name": "truth table",
+      "category": "long",
+      "question_text": "p∧q کی مکمل truth table بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "TT→T، TF→F، FT→F، FF→F۔ conjunction صرف اس وقت true ہے جب دونوں statements true ہوں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 8",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "truth table"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C09-M01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "مشابہ اشکال",
+      "topic_name": "مشابہت",
+      "category": "mcq",
+      "question_text": "مشابہ اشکال کے corresponding angles کیسے ہوتے ہیں؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "برابر"
+        },
+        {
+          "id": "B",
+          "text": "ہمیشہ 90°"
+        },
+        {
+          "id": "C",
+          "text": "غیر متعلق"
+        },
+        {
+          "id": "D",
+          "text": "ہمیشہ مکمل زاویے"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "برابر",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 9",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "مشابہت"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C09-S01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "مشابہ اشکال",
+      "topic_name": "scale factor",
+      "category": "short",
+      "question_text": "اگر length scale factor k ہو تو area scale factor کیا ہوگا؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "k²۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 9",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "scale factor"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C09-N01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "مشابہ اشکال",
+      "topic_name": "مشابہ مثلث",
+      "category": "numerical",
+      "question_text": "دو مشابہ مثلثوں کا scale factor 3 ہے۔ چھوٹے مثلث کی ایک side 5 cm ہو تو بڑی corresponding side معلوم کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "5×3=15 cm۔",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 9",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "مشابہ مثلث"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C10-M01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "فنکشنز کے گراف",
+      "topic_name": "گراف",
+      "category": "mcq",
+      "question_text": "y=mx+c کا graph کیا ہوتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "سیدھی line"
+        },
+        {
+          "id": "B",
+          "text": "circle"
+        },
+        {
+          "id": "C",
+          "text": "صرف parabola"
+        },
+        {
+          "id": "D",
+          "text": "صرف hyperbola"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "سیدھی line",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 10",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "گراف"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C10-S01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "فنکشنز کے گراف",
+      "topic_name": "intercept",
+      "category": "short",
+      "question_text": "y=f(x) کا x-intercept کیسے معلوم کیا جاتا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "y=0 رکھ کر f(x)=0 حل کیا جاتا ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 10",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "intercept"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C10-N01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "فنکشنز کے گراف",
+      "topic_name": "فنکشن کی قیمت",
+      "category": "numerical",
+      "question_text": "اگر y=3x−4 ہو تو x=5 پر y معلوم کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "y=15−4=11۔",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 10",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "فنکشن کی قیمت"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C11-M01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "لوکس اور تعمیرات",
+      "topic_name": "لوکس",
+      "category": "mcq",
+      "question_text": "line segment کے perpendicular bisector پر موجود points کی خاصیت کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "وہ دونوں endpoints سے برابر فاصلے پر ہوتے ہیں"
+        },
+        {
+          "id": "B",
+          "text": "صرف ایک endpoint کے قریب ہوتے ہیں"
+        },
+        {
+          "id": "C",
+          "text": "ہمیشہ circle پر ہوتے ہیں"
+        },
+        {
+          "id": "D",
+          "text": "کوئی خاصیت نہیں"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "وہ دونوں endpoints سے برابر فاصلے پر ہوتے ہیں",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 11",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "لوکس"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C11-S01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "لوکس اور تعمیرات",
+      "topic_name": "angle bisector",
+      "category": "short",
+      "question_text": "زاویے کی دونوں sides سے برابر فاصلے والے points کا locus کیا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "زاویے کا angle bisector۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 11",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "angle bisector"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C11-L01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "لوکس اور تعمیرات",
+      "topic_name": "تعمیر",
+      "category": "long",
+      "question_text": "line segment کا perpendicular bisector بنانے کا اصولی طریقہ بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "دونوں endpoints سے برابر radius کے arcs اوپر اور نیچے intersect کرائیں، پھر intersection points کو ملائیں؛ حاصل line segment کو عموداً نصف کرتی ہے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 11",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "تعمیر"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C12-M01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "معلومات کی تنظیم",
+      "topic_name": "mean",
+      "category": "mcq",
+      "question_text": "Arithmetic mean کیسے معلوم کیا جاتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "values کا مجموعہ/values کی تعداد"
+        },
+        {
+          "id": "B",
+          "text": "صرف درمیانی value"
+        },
+        {
+          "id": "C",
+          "text": "صرف سب سے زیادہ value"
+        },
+        {
+          "id": "D",
+          "text": "maximum−minimum"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "values کا مجموعہ/values کی تعداد",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 12",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "mean"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C12-S01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "معلومات کی تنظیم",
+      "topic_name": "range",
+      "category": "short",
+      "question_text": "dataset کا range کیا ہوتا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "maximum value − minimum value۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 12",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "range"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C12-N01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "معلومات کی تنظیم",
+      "topic_name": "mean",
+      "category": "numerical",
+      "question_text": "4، 6، 8، 12 کا mean معلوم کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "(4+6+8+12)/4=30/4=7.5۔",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 12",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "mean"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C13-M01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "13",
+      "chapter_name": "احتمال",
+      "topic_name": "احتمال",
+      "category": "mcq",
+      "question_text": "ناممکن event کا probability کیا ہوتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "0"
+        },
+        {
+          "id": "B",
+          "text": "1"
+        },
+        {
+          "id": "C",
+          "text": "1/2"
+        },
+        {
+          "id": "D",
+          "text": "−1"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "0",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 13",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "احتمال"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C13-S01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "13",
+      "chapter_name": "احتمال",
+      "topic_name": "sample space",
+      "category": "short",
+      "question_text": "Sample space سے کیا مراد ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "random experiment کے تمام ممکن outcomes کا مجموعہ۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 13",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "sample space"
+      ]
+    },
+    {
+      "id": "IX-MATH-UR-C13-N01",
+      "class_level": "9th",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "13",
+      "chapter_name": "احتمال",
+      "topic_name": "سادہ probability",
+      "category": "numerical",
+      "question_text": "ایک fair die پھینکا جائے تو even number آنے کا probability معلوم کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "even outcomes {2,4,6} ہیں؛ probability=3/6=1/2۔",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-006 | d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11 | chapter 13",
+      "tags": [
+        "grade9",
+        "mathematics",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "سادہ probability"
+      ]
+    }
+  ]
+}

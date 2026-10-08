@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "assps-physics9Urdu-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-012",
+  "sourcePdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+  "sourceByteLength": 86790350,
+  "pageCount": 200,
+  "identity": [
+    "Physics Grade IX Urdu Medium",
+    "PECTAA/PCTB current official catalogue asset CURRENT_CATALOG"
+  ],
+  "chapterParityStatus": "TOC_COUNT_AND_SEQUENCE_VERIFIED_AGAINST_CURRENT_EM_MAP",
+  "chapters": [
+    {
+      "number": 1,
+      "titleUrdu": "طبعی مقداریں اور پیمائش",
+      "titleEnglish": "Physical Quantities and Measurements",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 2,
+      "titleUrdu": "حرکت",
+      "titleEnglish": "Kinematics",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 3,
+      "titleUrdu": "قوت اور حرکت",
+      "titleEnglish": "Dynamics",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 4,
+      "titleUrdu": "قوتوں کے گردشی اثرات",
+      "titleEnglish": "Turning Effects of Forces",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 5,
+      "titleUrdu": "کام، توانائی اور طاقت",
+      "titleEnglish": "Work, Energy and Power",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 6,
+      "titleUrdu": "مادے کی میکانی خصوصیات",
+      "titleEnglish": "Mechanical Properties of Matter",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 7,
+      "titleUrdu": "مادے کی حرارتی خصوصیات",
+      "titleEnglish": "Thermal Properties of Matter",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 8,
+      "titleUrdu": "مقناطیسیت",
+      "titleEnglish": "Magnetism",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 9,
+      "titleUrdu": "سائنس کی فطرت",
+      "titleEnglish": "Nature of Science",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "exactUrduPageBoundariesPending": true,
+    "urduLanguageConvention": "NATURAL_URDU_WITH_FAMILIAR_SCIENTIFIC_TERMS"
+  }
+}

@@ -1,0 +1,1319 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "IX-CHEM-UR-C01-M01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "مادے کی حالتیں اور فیز تبدیلیاں",
+      "topic_name": "particle model",
+      "category": "mcq",
+      "question_text": "Solid میں particles عموماً کیسے ہوتے ہیں؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "قریب اور نسبتاً مقررہ ترتیب میں"
+        },
+        {
+          "id": "B",
+          "text": "بہت دور اور آزاد"
+        },
+        {
+          "id": "C",
+          "text": "موجود نہیں ہوتے"
+        },
+        {
+          "id": "D",
+          "text": "ہمیشہ ions ہوتے ہیں"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "قریب اور نسبتاً مقررہ ترتیب میں",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 1",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "particle model"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C01-S01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "مادے کی حالتیں اور فیز تبدیلیاں",
+      "topic_name": "evaporation boiling",
+      "category": "short",
+      "question_text": "Evaporation اور boiling میں فرق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Evaporation surface پر مختلف temperatures پر ہو سکتی ہے، جبکہ boiling پورے liquid میں مخصوص boiling point کے قریب ہوتی ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 1",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "evaporation boiling"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C01-L01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "مادے کی حالتیں اور فیز تبدیلیاں",
+      "topic_name": "phase change",
+      "category": "long",
+      "question_text": "Particle model کی مدد سے melting اور boiling کی وضاحت کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Heating سے particles کی energy بڑھتی ہے؛ phase change کے دوران energy attractions پر قابو پانے میں استعمال ہوتی ہے، جس سے arrangement اور freedom of movement بدلتی ہے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 1",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "phase change"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C02-M01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "ایٹمی ساخت",
+      "topic_name": "proton",
+      "category": "mcq",
+      "question_text": "Proton کا charge کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "positive"
+        },
+        {
+          "id": "B",
+          "text": "negative"
+        },
+        {
+          "id": "C",
+          "text": "neutral"
+        },
+        {
+          "id": "D",
+          "text": "variable always"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "positive",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 2",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "proton"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C02-S01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "ایٹمی ساخت",
+      "topic_name": "isotopes",
+      "category": "short",
+      "question_text": "Isotopes سے کیا مراد ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "ایک ہی element کے atoms جن کا proton number یکساں مگر neutron number مختلف ہو۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 2",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "isotopes"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C02-L01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "ایٹمی ساخت",
+      "topic_name": "atomic number mass number",
+      "category": "long",
+      "question_text": "Atomic number اور mass number میں فرق اور ان کا atom کی ساخت سے تعلق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Atomic number=protons کی تعداد؛ mass number=protons+neutrons۔ Neutral atom میں electrons کی تعداد proton number کے برابر ہوتی ہے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 2",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "atomic number mass number"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C03-M01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "کیمیائی بند",
+      "topic_name": "ionic bond",
+      "category": "mcq",
+      "question_text": "Ionic bonding میں بنیادی طور پر کیا ہوتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "electrons کی transfer اور مخالف ions کی attraction"
+        },
+        {
+          "id": "B",
+          "text": "protons کی sharing"
+        },
+        {
+          "id": "C",
+          "text": "neutrons کی transfer"
+        },
+        {
+          "id": "D",
+          "text": "کوئی particle interaction نہیں"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "electrons کی transfer اور مخالف ions کی attraction",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 3",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "ionic bond"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C03-S01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "کیمیائی بند",
+      "topic_name": "covalent bond",
+      "category": "short",
+      "question_text": "Covalent bond کا بنیادی تصور بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "دو atoms ایک یا زیادہ electron pairs share کرتے ہیں تاکہ زیادہ stable electronic arrangement حاصل ہو۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 3",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "covalent bond"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C03-L01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "کیمیائی بند",
+      "topic_name": "bond comparison",
+      "category": "long",
+      "question_text": "Ionic اور covalent bonding کا اصولی تقابل کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Ionic bonding electron transfer سے بننے والے ions کی electrostatic attraction ہے؛ covalent bonding shared electron pairs پر مبنی ہوتی ہے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 3",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "bond comparison"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C04-M01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "اسٹوکیومیٹری",
+      "topic_name": "mole",
+      "category": "mcq",
+      "question_text": "ایک mole میں particles کی تعداد تقریباً کتنی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "6.02×10²³"
+        },
+        {
+          "id": "B",
+          "text": "6.02×10³"
+        },
+        {
+          "id": "C",
+          "text": "3×10⁸"
+        },
+        {
+          "id": "D",
+          "text": "9.8"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "6.02×10²³",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 4",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "mole"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C04-S01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "اسٹوکیومیٹری",
+      "topic_name": "balanced equation",
+      "category": "short",
+      "question_text": "Stoichiometry سے پہلے equation balance کرنا کیوں ضروری ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Balanced coefficients reactants اور products کے mole ratios دیتے ہیں اور atoms کے conservation کو ظاہر کرتے ہیں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 4",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "balanced equation"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C04-N01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "اسٹوکیومیٹری",
+      "topic_name": "moles",
+      "category": "numerical",
+      "question_text": "اگر H₂O کا molar mass 18 g mol⁻¹ ہو تو 18 g پانی کتنے moles ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "n=m/M=18/18=1 mol۔",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 4",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "moles"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C05-M01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "انرجیٹکس",
+      "topic_name": "exothermic",
+      "category": "mcq",
+      "question_text": "Exothermic reaction میں surroundings کی طرف کیا منتقل ہوتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "energy"
+        },
+        {
+          "id": "B",
+          "text": "mass ہمیشہ ختم"
+        },
+        {
+          "id": "C",
+          "text": "protons"
+        },
+        {
+          "id": "D",
+          "text": "صرف electrons"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "energy",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 5",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "exothermic"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C05-S01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "انرجیٹکس",
+      "topic_name": "activation energy",
+      "category": "short",
+      "question_text": "Activation energy سے کیا مراد ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Reaction شروع ہونے کے لیے reacting particles کو درکار minimum energy barrier۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 5",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "activation energy"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C05-L01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "انرجیٹکس",
+      "topic_name": "energy changes",
+      "category": "long",
+      "question_text": "Exothermic اور endothermic reactions کا energy کے لحاظ سے تقابل کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Exothermic reactions surroundings کو energy release کرتی ہیں؛ endothermic reactions surroundings سے energy absorb کرتی ہیں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 5",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "energy changes"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C06-M01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "کیمیائی توازن",
+      "topic_name": "dynamic equilibrium",
+      "category": "mcq",
+      "question_text": "Dynamic equilibrium میں کیا برابر ہوتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "forward اور reverse reaction rates"
+        },
+        {
+          "id": "B",
+          "text": "reactant اور product masses لازماً"
+        },
+        {
+          "id": "C",
+          "text": "تمام concentrations صفر"
+        },
+        {
+          "id": "D",
+          "text": "temperature ہمیشہ 0°C"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "forward اور reverse reaction rates",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 6",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "dynamic equilibrium"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C06-S01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "کیمیائی توازن",
+      "topic_name": "equilibrium",
+      "category": "short",
+      "question_text": "Dynamic equilibrium کو dynamic کیوں کہا جاتا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Microscopic level پر forward اور reverse reactions جاری رہتی ہیں لیکن برابر rates کی وجہ سے macroscopic concentrations مستقل رہتی ہیں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 6",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "equilibrium"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C06-L01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "کیمیائی توازن",
+      "topic_name": "equilibrium factors",
+      "category": "long",
+      "question_text": "Concentration یا temperature میں تبدیلی equilibrium position کو کیوں متاثر کر سکتی ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "System applied change کے اثر کو oppose کرنے والی direction میں shift کر سکتا ہے؛ temperature change endothermic/exothermic directions کے relative favor کو بدلتی ہے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 6",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "equilibrium factors"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C07-M01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "ایسڈ، بیس کیمسٹری",
+      "topic_name": "pH",
+      "category": "mcq",
+      "question_text": "Acidic solution کا pH عام طور پر کیسا ہوتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "7 سے کم"
+        },
+        {
+          "id": "B",
+          "text": "7 سے زیادہ"
+        },
+        {
+          "id": "C",
+          "text": "ہمیشہ 14"
+        },
+        {
+          "id": "D",
+          "text": "ہمیشہ 7"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "7 سے کم",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 7",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "pH"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C07-S01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "ایسڈ، بیس کیمسٹری",
+      "topic_name": "neutralization",
+      "category": "short",
+      "question_text": "Neutralization reaction کا بنیادی تصور بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Acid اور base مناسب تناسب میں react کر کے عموماً salt اور water بناتے ہیں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 7",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "neutralization"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C07-L01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "ایسڈ، بیس کیمسٹری",
+      "topic_name": "acid base",
+      "category": "long",
+      "question_text": "Acids اور bases کی عمومی خصوصیات اور pH scale سے تعلق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Acids aqueous medium میں acidic behavior/H⁺ availability سے، bases OH⁻ acceptance/availability سے متعلق ہوتے ہیں؛ pH scale acidity/basicity کا relative measure دیتی ہے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 7",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "acid base"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C08-M01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "پیریاڈک ٹیبل اور دوریت",
+      "topic_name": "periodic table",
+      "category": "mcq",
+      "question_text": "Periodic table میں vertical column کیا کہلاتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "group"
+        },
+        {
+          "id": "B",
+          "text": "period"
+        },
+        {
+          "id": "C",
+          "text": "isotope"
+        },
+        {
+          "id": "D",
+          "text": "bond"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "group",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 8",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "periodic table"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C08-S01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "پیریاڈک ٹیبل اور دوریت",
+      "topic_name": "periodicity",
+      "category": "short",
+      "question_text": "Periodicity سے کیا مراد ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Atomic number بڑھنے کے ساتھ عناصر کی بعض physical/chemical properties کا باقاعدہ repeating pattern۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 8",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "periodicity"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C08-L01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "پیریاڈک ٹیبل اور دوریت",
+      "topic_name": "periodic trends",
+      "category": "long",
+      "question_text": "Group اور period کے تصور سے elements کی properties کی پیش گوئی کیسے مدد ملتی ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Same group elements میں valence-electron pattern ملتا جلتا ہونے سے chemical behavior میں مشابہت آتی ہے؛ periods میں properties باقاعدہ trends دکھاتی ہیں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 8",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "periodic trends"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C09-M01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "گروپس کی خصوصیات اور عناصر",
+      "topic_name": "group 1",
+      "category": "mcq",
+      "question_text": "Alkali metals periodic table کے کس group میں ہوتے ہیں؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Group 1"
+        },
+        {
+          "id": "B",
+          "text": "Group 18"
+        },
+        {
+          "id": "C",
+          "text": "Group 17"
+        },
+        {
+          "id": "D",
+          "text": "Group 14"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Group 1",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 9",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "group 1"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C09-S01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "گروپس کی خصوصیات اور عناصر",
+      "topic_name": "group properties",
+      "category": "short",
+      "question_text": "Same group کے elements میں properties کیوں ملتی جلتی ہو سکتی ہیں؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "ان کے outer-shell/valence electron arrangements میں similarity کی وجہ سے chemical behavior میں مماثلت آ سکتی ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 9",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "group properties"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C09-L01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "گروپس کی خصوصیات اور عناصر",
+      "topic_name": "groups",
+      "category": "long",
+      "question_text": "Group 1 اور Group 17 کے عمومی chemical behavior کا تقابلی خاکہ بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Group 1 metals عموماً ایک valence electron lose کرنے کی tendency رکھتے ہیں؛ Group 17 elements عموماً ایک electron gain/share کر کے stable arrangement کی طرف جاتے ہیں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 9",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "groups"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C10-M01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "ماحولیاتی کیمسٹری",
+      "topic_name": "air pollution",
+      "category": "mcq",
+      "question_text": "Carbon dioxide کی excessive increase کس environmental issue سے متعلق ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "greenhouse effect میں اضافہ"
+        },
+        {
+          "id": "B",
+          "text": "صرف water hardness"
+        },
+        {
+          "id": "C",
+          "text": "metal bonding"
+        },
+        {
+          "id": "D",
+          "text": "radioactivity"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "greenhouse effect میں اضافہ",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 10",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "air pollution"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C10-S01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "ماحولیاتی کیمسٹری",
+      "topic_name": "acid rain",
+      "category": "short",
+      "question_text": "Acid rain کے بننے میں کن gaseous pollutants کا کردار ہو سکتا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Sulphur dioxide اور nitrogen oxides atmosphere میں acids بنانے والے reactions کے ذریعے acid deposition میں کردار ادا کر سکتے ہیں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 10",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "acid rain"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C10-L01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "ماحولیاتی کیمسٹری",
+      "topic_name": "environmental chemistry",
+      "category": "long",
+      "question_text": "Air pollution کم کرنے میں monitoring، cleaner fuels/technology اور responsible behavior کی اہمیت بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Monitoring sources identify کرتی ہے؛ cleaner processes emissions کم کر سکتے ہیں؛ efficient energy use، public transport اور regulations exposure/environmental impact کم کرنے میں مدد دیتے ہیں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 10",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "environmental chemistry"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C11-M01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "ہائیڈروکاربنز",
+      "topic_name": "hydrocarbon",
+      "category": "mcq",
+      "question_text": "Hydrocarbon میں بنیادی طور پر کون سے elements ہوتے ہیں؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "carbon اور hydrogen"
+        },
+        {
+          "id": "B",
+          "text": "carbon اور oxygen only"
+        },
+        {
+          "id": "C",
+          "text": "hydrogen اور nitrogen only"
+        },
+        {
+          "id": "D",
+          "text": "تمام elements"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "carbon اور hydrogen",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 11",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "hydrocarbon"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C11-S01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "ہائیڈروکاربنز",
+      "topic_name": "saturated unsaturated",
+      "category": "short",
+      "question_text": "Saturated اور unsaturated hydrocarbons میں فرق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Saturated hydrocarbons میں carbon-carbon single bonds ہوتے ہیں؛ unsaturated میں کم از کم ایک multiple bond موجود ہوتا ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 11",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "saturated unsaturated"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C11-L01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "ہائیڈروکاربنز",
+      "topic_name": "hydrocarbon reactions",
+      "category": "long",
+      "question_text": "Alkanes اور alkenes کی bonding اور reactivity کا عمومی تقابل کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Alkanes saturated single-bond compounds ہیں اور نسبتاً کم reactive؛ alkenes میں C=C bond ہونے کی وجہ سے addition reactions کی tendency زیادہ ہوتی ہے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 11",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "hydrocarbon reactions"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C12-M01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "تجرباتی ڈیٹا اور تجزیہ",
+      "topic_name": "data quality",
+      "category": "mcq",
+      "question_text": "Repeated measurements کا ایک فائدہ کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "random variation کا اندازہ اور reliability بہتر کرنا"
+        },
+        {
+          "id": "B",
+          "text": "ہر غلطی ختم ہونا لازمی"
+        },
+        {
+          "id": "C",
+          "text": "units کی ضرورت ختم کرنا"
+        },
+        {
+          "id": "D",
+          "text": "data کو چھپانا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "random variation کا اندازہ اور reliability بہتر کرنا",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 12",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "data quality"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C12-S01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "تجرباتی ڈیٹا اور تجزیہ",
+      "topic_name": "accuracy precision",
+      "category": "short",
+      "question_text": "Accuracy اور precision میں فرق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Accuracy measured value کی true/accepted value سے closeness ہے؛ precision repeated measurements کے باہمی closeness/consistency سے متعلق ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 12",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "accuracy precision"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C12-L01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "تجرباتی ڈیٹا اور تجزیہ",
+      "topic_name": "data analysis",
+      "category": "long",
+      "question_text": "ایک اچھے experimental data table اور graph کی بنیادی خصوصیات بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "واضح headings، units، مناسب significant figures، independent/dependent variables کی درست ترتیب، مناسب scale اور labelled axes ضروری ہیں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 12",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "data analysis"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C13-M01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "13",
+      "chapter_name": "لیبارٹری اور عملی مہارتیں",
+      "topic_name": "lab safety",
+      "category": "mcq",
+      "question_text": "Lab میں بنیادی safety practice کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "instructions اور protective equipment کی پابندی"
+        },
+        {
+          "id": "B",
+          "text": "نامعلوم chemicals چکھنا"
+        },
+        {
+          "id": "C",
+          "text": "بغیر label کے samples رکھنا"
+        },
+        {
+          "id": "D",
+          "text": "safety rules نظر انداز کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "instructions اور protective equipment کی پابندی",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 13",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "lab safety"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C13-S01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "13",
+      "chapter_name": "لیبارٹری اور عملی مہارتیں",
+      "topic_name": "measurement records",
+      "category": "short",
+      "question_text": "Lab observations فوراً record کرنا کیوں اہم ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "اس سے memory error کم ہوتا ہے، raw data محفوظ رہتا ہے اور بعد کی analysis/reproducibility بہتر ہوتی ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 13",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "measurement records"
+      ]
+    },
+    {
+      "id": "IX-CHEM-UR-C13-L01",
+      "class_level": "9th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "13",
+      "chapter_name": "لیبارٹری اور عملی مہارتیں",
+      "topic_name": "safe practical work",
+      "category": "long",
+      "question_text": "Safe اور reliable practical work کے لیے planning، measurement، labeling، waste handling اور documentation کی اہمیت بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "واضح plan، مناسب calibrated tools، واضح labels، teacher/lab rules کے مطابق waste handling اور مکمل records safety اور data reliability دونوں بہتر کرتے ہیں؛ کسی hazardous procedure کی خود سے improvisation نہیں کرنی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-008 | 37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7 | chapter 13",
+      "tags": [
+        "grade9",
+        "chemistry",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "safe practical work"
+      ]
+    }
+  ]
+}
