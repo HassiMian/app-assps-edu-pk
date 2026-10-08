@@ -39,3 +39,17 @@
 6. Retest save/reopen, choice marks, genuine PDF/print fidelity and teacher-class assignment after a governed import.
 
 **These originals are ready for academic review, not for automatic production question generation.**
+
+## Chapter exercise-heading source candidates
+
+A separate bounded, low-resource OCR pass examined at most six pages near the
+end of each chapter. It detected nine exercise headings. Chapters 6 and 11
+required a logged, higher-resolution OCR recheck on physical PDF pages 106
+and 174 respectively. A supplemental-evidence validator combines the two
+independent methods, producing **11/11 candidate exercise pages**.
+
+The complete per-chapter candidate source pages are recorded in
+`ASSPS_BIO9_EXERCISE_REVIEW_QUEUE_20261008.json`. Neither an OCR signal nor a
+source checksum establishes answer correctness, image review, rights to
+reproduce questions, or academic approval. No textbook exercise questions were
+transcribed by this scan.

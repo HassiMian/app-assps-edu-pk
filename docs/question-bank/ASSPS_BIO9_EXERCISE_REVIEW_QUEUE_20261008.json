@@ -1,0 +1,154 @@
+{
+  "schemaVersion": "assps-bio9-exercise-page-review-v1",
+  "sourceId": "pectaa-catalog-009",
+  "sourceSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+  "scope": "OCR_PAGE_CANDIDATES_ONLY",
+  "copyrightedQuestionsCopied": false,
+  "academicApprovalGranted": false,
+  "productionImportAllowed": false,
+  "rows": [
+    {
+      "chapter": 1,
+      "title": "The Science of Biology",
+      "sourcePdfPages": [
+        5,
+        24
+      ],
+      "exercisePhysicalPageCandidate": 22,
+      "exercisePrintedPageCandidate": 18,
+      "evidenceMethod": "BOUNDED_OCR",
+      "manualImageReviewRequired": true,
+      "academicApproval": false
+    },
+    {
+      "chapter": 2,
+      "title": "Biodiversity",
+      "sourcePdfPages": [
+        25,
+        40
+      ],
+      "exercisePhysicalPageCandidate": 38,
+      "exercisePrintedPageCandidate": 34,
+      "evidenceMethod": "BOUNDED_OCR",
+      "manualImageReviewRequired": true,
+      "academicApproval": false
+    },
+    {
+      "chapter": 3,
+      "title": "The Cell",
+      "sourcePdfPages": [
+        41,
+        62
+      ],
+      "exercisePhysicalPageCandidate": 60,
+      "exercisePrintedPageCandidate": 56,
+      "evidenceMethod": "BOUNDED_OCR",
+      "manualImageReviewRequired": true,
+      "academicApproval": false
+    },
+    {
+      "chapter": 4,
+      "title": "Cell Cycle",
+      "sourcePdfPages": [
+        63,
+        78
+      ],
+      "exercisePhysicalPageCandidate": 77,
+      "exercisePrintedPageCandidate": 73,
+      "evidenceMethod": "BOUNDED_OCR",
+      "manualImageReviewRequired": true,
+      "academicApproval": false
+    },
+    {
+      "chapter": 5,
+      "title": "Tissues, Organs, and Organ Systems",
+      "sourcePdfPages": [
+        79,
+        92
+      ],
+      "exercisePhysicalPageCandidate": 90,
+      "exercisePrintedPageCandidate": 86,
+      "evidenceMethod": "BOUNDED_OCR",
+      "manualImageReviewRequired": true,
+      "academicApproval": false
+    },
+    {
+      "chapter": 6,
+      "title": "Biomolecules",
+      "sourcePdfPages": [
+        93,
+        108
+      ],
+      "exercisePhysicalPageCandidate": 106,
+      "exercisePrintedPageCandidate": 102,
+      "evidenceMethod": "HIGH_RES_OCR",
+      "manualImageReviewRequired": true,
+      "academicApproval": false
+    },
+    {
+      "chapter": 7,
+      "title": "Enzymes",
+      "sourcePdfPages": [
+        109,
+        118
+      ],
+      "exercisePhysicalPageCandidate": 117,
+      "exercisePrintedPageCandidate": 113,
+      "evidenceMethod": "BOUNDED_OCR",
+      "manualImageReviewRequired": true,
+      "academicApproval": false
+    },
+    {
+      "chapter": 8,
+      "title": "Bioenergetics",
+      "sourcePdfPages": [
+        119,
+        132
+      ],
+      "exercisePhysicalPageCandidate": 131,
+      "exercisePrintedPageCandidate": 127,
+      "evidenceMethod": "BOUNDED_OCR",
+      "manualImageReviewRequired": true,
+      "academicApproval": false
+    },
+    {
+      "chapter": 9,
+      "title": "Plant Physiology",
+      "sourcePdfPages": [
+        133,
+        150
+      ],
+      "exercisePhysicalPageCandidate": 149,
+      "exercisePrintedPageCandidate": 145,
+      "evidenceMethod": "BOUNDED_OCR",
+      "manualImageReviewRequired": true,
+      "academicApproval": false
+    },
+    {
+      "chapter": 10,
+      "title": "Reproduction in Plants",
+      "sourcePdfPages": [
+        151,
+        166
+      ],
+      "exercisePhysicalPageCandidate": 164,
+      "exercisePrintedPageCandidate": 160,
+      "evidenceMethod": "BOUNDED_OCR",
+      "manualImageReviewRequired": true,
+      "academicApproval": false
+    },
+    {
+      "chapter": 11,
+      "title": "Biostatistics",
+      "sourcePdfPages": [
+        167,
+        180
+      ],
+      "exercisePhysicalPageCandidate": 174,
+      "exercisePrintedPageCandidate": 170,
+      "evidenceMethod": "HIGH_RES_OCR",
+      "manualImageReviewRequired": true,
+      "academicApproval": false
+    }
+  ]
+}
