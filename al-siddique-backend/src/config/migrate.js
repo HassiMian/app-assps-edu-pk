@@ -601,7 +601,7 @@ async function migrate() {
     }
 
     try {
-      const lessonPlansMigration = require('../../migrations/021_lesson_plans_schema')
+      const lessonPlansMigration = require('../../migrations/022_lesson_plans_schema')
       await lessonPlansMigration.up()
       console.log('lesson plans schema ready')
     } catch (err) {

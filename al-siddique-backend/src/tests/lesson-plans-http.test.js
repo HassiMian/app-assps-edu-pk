@@ -33,7 +33,7 @@ async function createSchoolWithAdmin(label){
 test('lesson plans are durable, revision-bound, tenant-isolated and portal-shared',{timeout:45000},async()=>{
  assert.equal(process.env.NODE_ENV,'test')
  assert.notEqual(process.env.DB_NAME,'apexos')
- await require('../../migrations/021_lesson_plans_schema').up({pool})
+ await require('../../migrations/022_lesson_plans_schema').up({pool})
  await require('../config/migrations/005_rls_policies').up()
  const a=await createSchoolWithAdmin('a')
  const b=await createSchoolWithAdmin('b')

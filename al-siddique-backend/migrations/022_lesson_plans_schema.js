@@ -1,5 +1,5 @@
 /**
- * Migration 021: Tenant-scoped Lesson Plan persistence.
+ * Migration 022: Tenant-scoped Lesson Plan persistence.
  */
 const { pool } = require('../src/config/database')
 

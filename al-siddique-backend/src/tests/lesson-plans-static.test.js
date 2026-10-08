@@ -10,7 +10,7 @@ const server=fs.readFileSync(path.join(root,'server.js'),'utf8')
 const diary=fs.readFileSync(path.join(root,'routes/dailyDiaryRoutes.js'),'utf8')
 
 test('lesson plans are versioned, mounted, tenant/RLS protected and revision bound',()=>{
- assert.match(migrate,/021_lesson_plans_schema/)
+ assert.match(migrate,/022_lesson_plans_schema/)
  assert.match(server,/mount\('\/lesson-plans','\.\/routes\/lessonPlanRoutes'\)/)
  assert.match(rls,/['"]lesson_plans['"]/)
  assert.match(route,/router\.use\(protect, canManageLessonPlans\)/)

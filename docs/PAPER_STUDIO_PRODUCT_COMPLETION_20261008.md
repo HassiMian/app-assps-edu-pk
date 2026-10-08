@@ -30,7 +30,7 @@ Legacy `word_editor` and `board_pattern` routes remain compatibility-only. Old A
 | DOCX export | COMPLETE | G20 model 43/43; browser English/Urdu; math/image OOXML media; G21/G23 revision/hash boundaries |
 | Personalized printing privacy | COMPLETE | Student projection recursively strips answers/teacher-only material; answer key staff-only; hash/tenant bound |
 | Daily Diary | COMPLETE | Server-backed tenant storage + local recovery; adversarial tenant isolation 8/8; schema-not-ready error path fixed |
-| Lesson Plans | COMPLETE | Migration 021 + RLS; HTTP durability/revision/tenant/share 12/12; browser load/save/share 1/1 |
+| Lesson Plans | COMPLETE | Migration 022 + RLS; HTTP durability/revision/tenant/share 12/12; browser load/save/share 1/1 |
 | Question Bank lifecycle metadata | COMPLETE | List and single item expose governance public ID, lifecycle and current revision consistently |
 | Full DB migration chain | COMPLETE | Exact production clone migration PASS with Lesson Plans migration and RLS |
 
