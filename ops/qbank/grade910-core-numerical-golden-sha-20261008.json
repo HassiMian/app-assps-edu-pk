@@ -1,0 +1,223 @@
+{
+  "schemaVersion": "assps-grade910-numerical-golden-baseline-v1",
+  "scope": "IMMUTABLE_ORIGINAL_AUTHORING_CONTENT_HASHES_NOT_ACADEMIC_APPROVAL",
+  "sourceHashOnly": true,
+  "approvalGranted": false,
+  "items": [
+    {
+      "questionId": "IX-PHY-2025-C01-N01",
+      "sourceFile": "physics9EnglishStarter2026.json",
+      "contentSha256": "76c84aa8f20d3881824d0a1111a9ddae7f407361790e141fee9a050ecaf49acb"
+    },
+    {
+      "questionId": "IX-PHY-2025-C02-N01",
+      "sourceFile": "physics9EnglishStarter2026.json",
+      "contentSha256": "21970bda446ecb7e6cd0920a64e261c8d4094663ab1b5661a67602f30a5656ad"
+    },
+    {
+      "questionId": "IX-PHY-2025-C03-N01",
+      "sourceFile": "physics9EnglishStarter2026.json",
+      "contentSha256": "3cefff6ffe9f29044a5331d991723f0446d68449763a7637b4cc3b99b2191cea"
+    },
+    {
+      "questionId": "IX-PHY-2025-C04-N01",
+      "sourceFile": "physics9EnglishStarter2026.json",
+      "contentSha256": "61c1ec02002393aa40d4512023315e20e6d0ab53fa2e5125d3a34622ec235e4a"
+    },
+    {
+      "questionId": "IX-PHY-2025-C05-N01",
+      "sourceFile": "physics9EnglishStarter2026.json",
+      "contentSha256": "751a47a83c99cc241dfd93ecc446a571843388dd6fa5e0148ded9c365e4cb5aa"
+    },
+    {
+      "questionId": "IX-PHY-2025-C06-N01",
+      "sourceFile": "physics9EnglishStarter2026.json",
+      "contentSha256": "0edd628c1cab17074c160e10b317304c7b937f8f8da9a588d714049af6e58efd"
+    },
+    {
+      "questionId": "IX-PHY-2025-C07-N01",
+      "sourceFile": "physics9EnglishStarter2026.json",
+      "contentSha256": "9e6b440f72c1d57b4ab8890aa79be270f0f818b5b27154d0859b5209a085a567"
+    },
+    {
+      "questionId": "IX-PHY-UR-C01-N01",
+      "sourceFile": "physics9UrduStarter2026.json",
+      "contentSha256": "623c5c5ab2bd1d8604c17c8357f53a9da03a65e30bc17c4106dc3ee346b986cc"
+    },
+    {
+      "questionId": "IX-PHY-UR-C02-N01",
+      "sourceFile": "physics9UrduStarter2026.json",
+      "contentSha256": "99b9f9db6cb51714a176e6b5f3ec332a9c3ee0cb5a25a4354bc5edf2140ca236"
+    },
+    {
+      "questionId": "IX-PHY-UR-C03-N01",
+      "sourceFile": "physics9UrduStarter2026.json",
+      "contentSha256": "5ff52df324735c0da55dfdc2b3d3385394b72c3b95d3bf692e30f4d03b3c5ddd"
+    },
+    {
+      "questionId": "IX-PHY-UR-C04-N01",
+      "sourceFile": "physics9UrduStarter2026.json",
+      "contentSha256": "08f2ad4f34e956e354b79810d807711b8e22e68da7b29c2cb4d5f26aea5f8028"
+    },
+    {
+      "questionId": "IX-PHY-UR-C05-N01",
+      "sourceFile": "physics9UrduStarter2026.json",
+      "contentSha256": "528fe3eb8f568583878417ab95529ae34890a3a7e0020e65b4d41d5d969a3cca"
+    },
+    {
+      "questionId": "IX-PHY-UR-C06-N01",
+      "sourceFile": "physics9UrduStarter2026.json",
+      "contentSha256": "5bd0c4dfc2cf330f4e727130736070b05a3ed535834d81c2fe1af762fd904459"
+    },
+    {
+      "questionId": "IX-PHY-UR-C07-N01",
+      "sourceFile": "physics9UrduStarter2026.json",
+      "contentSha256": "4f2973cc06d16cafffd705c7653722eb61b1cedb802e85a2bb8b489524a025da"
+    },
+    {
+      "questionId": "X-PHY-C10-N01",
+      "sourceFile": "physics10Starter2026.json",
+      "contentSha256": "7a321c3d8897b8b312b894dff9f47eb8804cd13726f0bf65918d32f60a87aaf2"
+    },
+    {
+      "questionId": "X-PHY-C12-N01",
+      "sourceFile": "physics10Starter2026.json",
+      "contentSha256": "c8706fe255e13bb98314240ed50b8fed3ef84e78a7c2f6ff2e1420f34881022d"
+    },
+    {
+      "questionId": "X-PHY-C13-N01",
+      "sourceFile": "physics10Starter2026.json",
+      "contentSha256": "f635c84aef9f9343c792ab085609ad3a9d6a16bec55c875f9ce9fda0667a53d5"
+    },
+    {
+      "questionId": "X-PHY-C14-N01",
+      "sourceFile": "physics10Starter2026.json",
+      "contentSha256": "099464dc5222a43dd3d04fdfd1218f33014e8bb09631b86456ca4d70474541ae"
+    },
+    {
+      "questionId": "X-PHY-C16-N01",
+      "sourceFile": "physics10Starter2026.json",
+      "contentSha256": "f0eb312ab0ef62035aa9481b3893f8e8f508eadabc2b9e9e206b56baa2b52449"
+    },
+    {
+      "questionId": "X-PHY-C18-N01",
+      "sourceFile": "physics10Starter2026.json",
+      "contentSha256": "acb790beb22ea40bad97cb4b58b3ef5830914eb8c52f468d34f04a88c95c3a14"
+    },
+    {
+      "questionId": "X-PHY-C20-N01",
+      "sourceFile": "physics10Starter2026.json",
+      "contentSha256": "4d00a1e457ff1b700705756343c47d252d695a56be2c564ec16d97178af9f68c"
+    },
+    {
+      "questionId": "IX-MATH-C01-N01",
+      "sourceFile": "mathematics9Starter2026.json",
+      "contentSha256": "0bca13bea7c7923c562e6d7cd23d145d5db7c15fd2b429fa65858c1410681a7b"
+    },
+    {
+      "questionId": "IX-MATH-C02-N01",
+      "sourceFile": "mathematics9Starter2026.json",
+      "contentSha256": "cd8edd680e821c6924e68c6246d4a8888e689063d1704d843217b01a0fa2d516"
+    },
+    {
+      "questionId": "IX-MATH-C03-N01",
+      "sourceFile": "mathematics9Starter2026.json",
+      "contentSha256": "b4cb347977b5372def27c5744cc3d0a45366cd504c209d548df6b2656e4cc826"
+    },
+    {
+      "questionId": "IX-MATH-C04-N01",
+      "sourceFile": "mathematics9Starter2026.json",
+      "contentSha256": "627b20f7fcd4fe872b1446a546aeaf4b8b15dd119e36a05cc42cbc4a51ad4c15"
+    },
+    {
+      "questionId": "IX-MATH-C05-N01",
+      "sourceFile": "mathematics9Starter2026.json",
+      "contentSha256": "3e5e5108b501145dfd58851e56143f5e2ec4e9544da385673dde99d101af520b"
+    },
+    {
+      "questionId": "IX-MATH-C06-N01",
+      "sourceFile": "mathematics9Starter2026.json",
+      "contentSha256": "4e69fe5a1196fdd9d9177201338fdaa8e8a54f539851e20be7ffd198371d2bc8"
+    },
+    {
+      "questionId": "IX-MATH-C07-N01",
+      "sourceFile": "mathematics9Starter2026.json",
+      "contentSha256": "257d5d35c4cf8625fe253d732e2a4994df455f08925939e1dfa01adec8da88bf"
+    },
+    {
+      "questionId": "IX-MATH-C09-N01",
+      "sourceFile": "mathematics9Starter2026.json",
+      "contentSha256": "ed2427e50023f6a71cb60fdac73d3915956ec230b7a884ee899c27cd3df9fd15"
+    },
+    {
+      "questionId": "IX-MATH-C10-N01",
+      "sourceFile": "mathematics9Starter2026.json",
+      "contentSha256": "709ebf0cf37a1bf8ae6a4c6299f8c5507d13fc2c8b4953271ff1ce91722314ea"
+    },
+    {
+      "questionId": "IX-MATH-C12-N01",
+      "sourceFile": "mathematics9Starter2026.json",
+      "contentSha256": "b62d478f0ed252c74ae57cec44945ec68db51c733ce635e68e25d981e61e57ce"
+    },
+    {
+      "questionId": "IX-MATH-C13-N01",
+      "sourceFile": "mathematics9Starter2026.json",
+      "contentSha256": "430bebc76fbf023244134233acc55aa6cd708cd0ebaa0895ddbbbcc0ad0a5c7d"
+    },
+    {
+      "questionId": "IX-MATH-UR-C01-N01",
+      "sourceFile": "mathematics9UrduStarter2026.json",
+      "contentSha256": "12d3ded65e24d1da646ecf92ec5bd31f29f16d1ff3b3e0ee7051e2f30ff75e55"
+    },
+    {
+      "questionId": "IX-MATH-UR-C02-N01",
+      "sourceFile": "mathematics9UrduStarter2026.json",
+      "contentSha256": "bd0e51e1d7652e9ae42fa6f34772f3ba63c76f40753f2c4c7628b79a72283997"
+    },
+    {
+      "questionId": "IX-MATH-UR-C03-N01",
+      "sourceFile": "mathematics9UrduStarter2026.json",
+      "contentSha256": "67205919e76e914f4023a5dbfdbf926f5fc0ecdf5542c3c28ed9ccdf6f9d994c"
+    },
+    {
+      "questionId": "IX-MATH-UR-C04-N01",
+      "sourceFile": "mathematics9UrduStarter2026.json",
+      "contentSha256": "3cd49cb949c16b40672aa5086dbe553b2e4f960dfbbb622982016b5e2e2ae64e"
+    },
+    {
+      "questionId": "IX-MATH-UR-C05-N01",
+      "sourceFile": "mathematics9UrduStarter2026.json",
+      "contentSha256": "3c4a82fadacaeafefca331c1267c4c493b8fbe6e97a0d96ddc9ddaf7341c899a"
+    },
+    {
+      "questionId": "IX-MATH-UR-C06-N01",
+      "sourceFile": "mathematics9UrduStarter2026.json",
+      "contentSha256": "0cc46f7f941c92af707c62d2003854c02a53e455944960cae9e71be842a48e20"
+    },
+    {
+      "questionId": "IX-MATH-UR-C07-N01",
+      "sourceFile": "mathematics9UrduStarter2026.json",
+      "contentSha256": "fa3e77ed2efa7f3ad9e7931db6b412ccba24d50eb0762206163183dabd550219"
+    },
+    {
+      "questionId": "IX-MATH-UR-C09-N01",
+      "sourceFile": "mathematics9UrduStarter2026.json",
+      "contentSha256": "aa00457270fae6812b6e495ac75476e0ad587029ad44c0060e5ea30db7db0db6"
+    },
+    {
+      "questionId": "IX-MATH-UR-C10-N01",
+      "sourceFile": "mathematics9UrduStarter2026.json",
+      "contentSha256": "b112dd317b56adfc5097fbc3ea3a96079ac61bc6823e8985b1c8e325e0587762"
+    },
+    {
+      "questionId": "IX-MATH-UR-C12-N01",
+      "sourceFile": "mathematics9UrduStarter2026.json",
+      "contentSha256": "c3817f610411b7c29d62c3c5d2212f55684c4b07943e5e2bb7ea62cdc015b5d5"
+    },
+    {
+      "questionId": "IX-MATH-UR-C13-N01",
+      "sourceFile": "mathematics9UrduStarter2026.json",
+      "contentSha256": "1537f5ef2865799190f2d4dd906c1147ab9e744235db8c9adffd86b697fed1a1"
+    }
+  ]
+}
