@@ -1,0 +1,2073 @@
+{
+  "schemaVersion": "assps-g910-review-only-authoring-queue-v1",
+  "scope": "AUTHORING_ONLY_NOT_IMPORTABLE_NOT_APPROVED",
+  "generatedAt": "2026-10-08T08:51:51.899Z",
+  "summary": {
+    "items": 98,
+    "files": 3,
+    "byFile": {
+      "biology9Chapter1TopicDrafts.json": 48,
+      "biology9TopicResearchDrafts.json": 6,
+      "english9CompetencyOriginals2026.json": 44
+    },
+    "approvedItems": 0
+  },
+  "items": [
+    {
+      "id": "IX-BIO-2025-C01-T0101-M01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 7,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0101-M02",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 8,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0101-S01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 6,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0101-S02",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 6,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0101-C01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 8,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0101-L01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "long",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 7,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0102-M01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 9,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0102-M02",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 9,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0102-S01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 8,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0102-S02",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 10,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0102-C01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 9,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0102-L01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "long",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 8,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0103-M01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 11,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0103-M02",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 12,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0103-S01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 11,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0103-S02",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 11,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0103-C01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 10,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0103-L01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "long",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 10,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0104-M01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 12,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0104-M02",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 13,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0104-S01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 12,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0104-S02",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 12,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0104-C01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 13,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0105-M01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 13,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0105-M02",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 13,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0105-S01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 13,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0105-S02",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 14,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0105-C01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 13,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0105-L01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "long",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 13,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0106-M01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 15,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0106-M02",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 15,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0106-S01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 15,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0106-S02",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 15,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0106-C01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 15,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0106-C02",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 15,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0106-C03",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 16,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0106-L01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "long",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 15,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0107-M01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 17,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0107-M02",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 17,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0107-S01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 17,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0107-S02",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 17,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0107-C01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 17,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0108-M01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 18,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0108-M02",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 18,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0108-S01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 18,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0108-S02",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 19,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0108-C01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 18,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-T0108-L01",
+      "file": "biology9Chapter1TopicDrafts.json",
+      "bucket": "drafts",
+      "questionType": "long",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 18,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false,
+        "originality": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-EM-RESEARCH-C01-T0101-S01",
+      "file": "biology9TopicResearchDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 6,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-EM-RESEARCH-C01-T0101-S02",
+      "file": "biology9TopicResearchDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 7,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-EM-RESEARCH-C01-T0101-S03",
+      "file": "biology9TopicResearchDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 6,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-EM-RESEARCH-C01-T0101-S04",
+      "file": "biology9TopicResearchDrafts.json",
+      "bucket": "drafts",
+      "questionType": "short",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 7,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-EM-RESEARCH-C01-T0101-M01",
+      "file": "biology9TopicResearchDrafts.json",
+      "bucket": "drafts",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 7,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-BIO-EM-RESEARCH-C01-T0101-M02",
+      "file": "biology9TopicResearchDrafts.json",
+      "bucket": "drafts",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": "pectaa-catalog-009",
+      "sourcePage": 6,
+      "reviewStatus": "draft",
+      "reviewChecks": {
+        "source": false,
+        "academic": false,
+        "answer": false,
+        "english": false,
+        "urdu": false,
+        "translation": false,
+        "syllabus": false,
+        "duplicate": false,
+        "hindi": false
+      },
+      "blockers": [
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M001",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M002",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M003",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M004",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M005",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M006",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M007",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M008",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M009",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M010",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M011",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M012",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M013",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M014",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M015",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M016",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M017",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M018",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M019",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M020",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M021",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M022",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M023",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M024",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "mcq",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-G001",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "grammar",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-G002",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "grammar",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-G003",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "grammar",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-G004",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "grammar",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-G005",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "grammar",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-G006",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "grammar",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-G007",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "grammar",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-G008",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "grammar",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-G009",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "grammar",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-G010",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "grammar",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-W001",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "essay",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-W002",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "essay",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-W003",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "essay",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-W004",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "essay",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-C001",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "comprehension",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-C002",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "comprehension",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-C003",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "comprehension",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-C004",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "comprehension",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-T001",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "translation",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-T002",
+      "file": "english9CompetencyOriginals2026.json",
+      "bucket": "items",
+      "questionType": "translation",
+      "sourceCatalogRecordId": null,
+      "sourcePage": null,
+      "reviewStatus": null,
+      "reviewChecks": null,
+      "blockers": [
+        "source-binding",
+        "source-page",
+        "academic-review",
+        "answer-review"
+      ]
+    }
+  ],
+  "validation": {
+    "method": "Schema-aware scan of drafts/items/questions across the three review-only authoring sources, plus exact ID exclusion against all generated provisional seed files.",
+    "items": 98,
+    "uniqueIds": 98,
+    "approvedOrLiveImportItems": 0,
+    "importPackageOverlap": 0,
+    "validatedOn": "2026-10-08"
+  }
+}
