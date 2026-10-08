@@ -114,22 +114,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Conduction"
+          "text": "Nuclear decay"
         },
         {
           "id": "B",
-          "text": "Convection only"
+          "text": "Conduction"
         },
         {
           "id": "C",
-          "text": "Evaporation only"
+          "text": "Convection only"
         },
         {
           "id": "D",
-          "text": "Nuclear decay"
+          "text": "Evaporation only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Conduction",
       "marks": 1,
       "difficulty": "easy",
@@ -212,22 +212,22 @@
       "options": [
         {
           "id": "A",
-          "text": "frequency × wavelength"
-        },
-        {
-          "id": "B",
-          "text": "frequency/wavelength"
-        },
-        {
-          "id": "C",
           "text": "amplitude × time"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "period × mass"
+        },
+        {
+          "id": "C",
+          "text": "frequency × wavelength"
+        },
+        {
+          "id": "D",
+          "text": "frequency/wavelength"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "frequency × wavelength",
       "marks": 1,
       "difficulty": "easy",
@@ -310,22 +310,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Frequency"
-        },
-        {
-          "id": "B",
           "text": "Amplitude only"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Distance only"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Mass"
+        },
+        {
+          "id": "D",
+          "text": "Frequency"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Frequency",
       "marks": 1,
       "difficulty": "easy",
@@ -506,22 +506,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Repel"
+          "text": "Have no force"
         },
         {
           "id": "B",
-          "text": "Attract"
+          "text": "Repel"
         },
         {
           "id": "C",
-          "text": "Always disappear"
+          "text": "Attract"
         },
         {
           "id": "D",
-          "text": "Have no force"
+          "text": "Always disappear"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Repel",
       "marks": 1,
       "difficulty": "easy",
@@ -604,22 +604,22 @@
       "options": [
         {
           "id": "A",
-          "text": "V=IR"
-        },
-        {
-          "id": "B",
-          "text": "F=ma"
-        },
-        {
-          "id": "C",
           "text": "P=W/t only"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Q=mcΔT"
+        },
+        {
+          "id": "C",
+          "text": "V=IR"
+        },
+        {
+          "id": "D",
+          "text": "F=ma"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "V=IR",
       "marks": 1,
       "difficulty": "easy",
@@ -702,22 +702,22 @@
       "options": [
         {
           "id": "A",
-          "text": "A magnetic field"
-        },
-        {
-          "id": "B",
           "text": "Only heat with no field"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Gravity only"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "No effect"
+        },
+        {
+          "id": "D",
+          "text": "A magnetic field"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "A magnetic field",
       "marks": 1,
       "difficulty": "easy",
@@ -898,22 +898,22 @@
       "options": [
         {
           "id": "A",
-          "text": "A spontaneous nuclear change"
+          "text": "Chemical neutralization"
         },
         {
           "id": "B",
-          "text": "Ordinary melting"
+          "text": "A spontaneous nuclear change"
         },
         {
           "id": "C",
-          "text": "Mechanical vibration"
+          "text": "Ordinary melting"
         },
         {
           "id": "D",
-          "text": "Chemical neutralization"
+          "text": "Mechanical vibration"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "A spontaneous nuclear change",
       "marks": 1,
       "difficulty": "easy",

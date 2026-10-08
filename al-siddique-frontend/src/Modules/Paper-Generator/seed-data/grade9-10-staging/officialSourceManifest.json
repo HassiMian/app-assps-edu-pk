@@ -55,12 +55,16 @@
       "pdfPageCount": 170,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/islamiat9.pdf",
+      "sourceCacheRef": "20261008/official-verified/pectaa-catalog-002.pdf",
       "providerAccessState": "DOWNLOADED_VERIFIED_PDF_BYTES",
       "providerAccessNote": "Official catalogue linked PDF downloaded; SHA256, bytes and page count verified. Full academic chapter/page mapping and approval not implied.",
       "contentMapStatus": "THEME_LEVEL_VERIFIED_PAGE_LEVEL_PENDING",
       "contentMapEvidence": "islamiyat9SourceMap2026.json",
-      "authoringBoundary": "PROVISIONAL_CONCEPTUAL_ONLY_NO_QURAN_HADITH_OR_TEXTBOOK_PASSAGE_COPYING"
+      "authoringBoundary": "PROVISIONAL_CONCEPTUAL_ONLY_NO_QURAN_HADITH_OR_TEXTBOOK_PASSAGE_COPYING",
+      "sourceCacheRefHistory": [
+        "20261006/islamiat9.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-003",
@@ -85,10 +89,14 @@
       "pdfPageCount": 144,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/urdu9.pdf",
+      "sourceCacheRef": "20261008/official-verified/pectaa-catalog-003.pdf",
       "contentMapStatus": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARIES_PENDING",
       "contentMapEvidence": "urdu9LiteratureSourceMap2026.json",
-      "authoringBoundary": "PROVISIONAL_RUBRIC_BASED_ANALYTICAL_ONLY_NO_TEXTBOOK_POETRY_EXERCISE_COPYING"
+      "authoringBoundary": "PROVISIONAL_RUBRIC_BASED_ANALYTICAL_ONLY_NO_TEXTBOOK_POETRY_EXERCISE_COPYING",
+      "sourceCacheRefHistory": [
+        "20261006/urdu9.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-004",
@@ -113,7 +121,11 @@
       "pdfPageCount": 168,
       "downloadVerifiedOn": "2026-10-07",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/english9.pdf"
+      "sourceCacheRef": "20261008/official-verified/pectaa-catalog-004.pdf",
+      "sourceCacheRefHistory": [
+        "20261006/english9.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-005",
@@ -140,7 +152,11 @@
       "pdfPageCount": 288,
       "downloadVerifiedOn": "2026-10-07",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/mathematics9-en.pdf"
+      "sourceCacheRef": "20261008/official-verified/pectaa-catalog-005.pdf",
+      "sourceCacheRefHistory": [
+        "20261006/mathematics9-en.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-006",
@@ -167,10 +183,14 @@
       "pdfPageCount": 288,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/mathematics9-ur.pdf",
+      "sourceCacheRef": "20261008/official-verified/pectaa-catalog-006.pdf",
       "contentMapStatus": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
       "contentMapEvidence": "mathematics9UrduSourceMap2026.json",
-      "authoringBoundary": "PROVISIONAL_ORIGINAL_CONCEPTUAL_ONLY_NO_TEXTBOOK_EXERCISE_COPYING"
+      "authoringBoundary": "PROVISIONAL_ORIGINAL_CONCEPTUAL_ONLY_NO_TEXTBOOK_EXERCISE_COPYING",
+      "sourceCacheRefHistory": [
+        "20261006/mathematics9-ur.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-007",
@@ -197,7 +217,11 @@
       "pdfPageCount": 192,
       "downloadVerifiedOn": "2026-10-06",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/chemistry9-en.pdf"
+      "sourceCacheRef": "20261008/official-verified/chemistry9-pectaa-007.pdf",
+      "sourceCacheRefHistory": [
+        "20261006/chemistry9-en.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-008",
@@ -224,10 +248,14 @@
       "pdfPageCount": 188,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/chemistry9-ur.pdf",
+      "sourceCacheRef": "20261008/official-verified/pectaa-catalog-008.pdf",
       "contentMapStatus": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
       "contentMapEvidence": "chemistry9UrduSourceMap2026.json",
-      "authoringBoundary": "PROVISIONAL_ORIGINAL_CONCEPTUAL_ONLY_NO_TEXTBOOK_EXERCISE_COPYING"
+      "authoringBoundary": "PROVISIONAL_ORIGINAL_CONCEPTUAL_ONLY_NO_TEXTBOOK_EXERCISE_COPYING",
+      "sourceCacheRefHistory": [
+        "20261006/chemistry9-ur.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-009",
@@ -251,8 +279,12 @@
       "downloadByteLength": 31362949,
       "downloadVerifiedOn": "2026-10-07",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/biology9-en.pdf",
-      "pdfPageCount": 180
+      "sourceCacheRef": "20261008/official-verified/biology9-pectaa-009.pdf",
+      "pdfPageCount": 180,
+      "sourceCacheRefHistory": [
+        "20261006/biology9-en.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-010",
@@ -277,13 +309,17 @@
       "pdfPageCount": 212,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/biology9-ur.pdf",
+      "sourceCacheRef": "20261008/official-verified/pectaa-catalog-010.pdf",
       "editionEvidenceNote": "Official catalog label is Biology 9 (UM) 03.09.26. Binary/cover verified; equivalence to the Grade IX 2025-26 English cohort is NOT yet established.",
       "providerAccessState": "SIGN_IN_PAGE",
       "providerAccessNote": "Official PECTAA catalogue anchor is current; linked Google Drive provider may require sign-in. This blocks fresh byte acquisition but does not erase catalogue identity.",
       "contentMapStatus": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
       "contentMapEvidence": "biology9UrduSourceMap2026.json",
-      "authoringBoundary": "PROVISIONAL_ORIGINAL_CONCEPTUAL_ONLY_NO_TEXTBOOK_EXERCISE_COPYING"
+      "authoringBoundary": "PROVISIONAL_ORIGINAL_CONCEPTUAL_ONLY_NO_TEXTBOOK_EXERCISE_COPYING",
+      "sourceCacheRefHistory": [
+        "20261006/biology9-ur.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-011",
@@ -310,7 +346,11 @@
       "pdfPageCount": 204,
       "downloadVerifiedOn": "2026-10-07",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/physics9-en.pdf"
+      "sourceCacheRef": "20261008/official-verified/pectaa-catalog-011.pdf",
+      "sourceCacheRefHistory": [
+        "20261006/physics9-en.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-012",
@@ -337,10 +377,14 @@
       "pdfPageCount": 200,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/physics9-ur.pdf",
+      "sourceCacheRef": "20261008/official-verified/pectaa-catalog-012.pdf",
       "contentMapStatus": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
       "contentMapEvidence": "physics9UrduSourceMap2026.json",
-      "authoringBoundary": "PROVISIONAL_ORIGINAL_CONCEPTUAL_ONLY_NO_TEXTBOOK_EXERCISE_COPYING"
+      "authoringBoundary": "PROVISIONAL_ORIGINAL_CONCEPTUAL_ONLY_NO_TEXTBOOK_EXERCISE_COPYING",
+      "sourceCacheRefHistory": [
+        "20261006/physics9-ur.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-013",
@@ -365,7 +409,11 @@
       "pdfPageCount": 264,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/computer9-en.pdf"
+      "sourceCacheRef": "20261008/official-verified/pectaa-catalog-013.pdf",
+      "sourceCacheRefHistory": [
+        "20261006/computer9-en.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-014",
@@ -418,10 +466,14 @@
       "pdfPageCount": 164,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/urdu10-current.pdf",
+      "sourceCacheRef": "20261008/official-verified/pectaa-catalog-015.pdf",
       "contentMapStatus": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARIES_PENDING",
       "contentMapEvidence": "urdu10LiteratureSourceMap2026.json",
-      "authoringBoundary": "PROVISIONAL_RUBRIC_BASED_ANALYTICAL_ONLY_NO_TEXTBOOK_POETRY_EXERCISE_COPYING"
+      "authoringBoundary": "PROVISIONAL_RUBRIC_BASED_ANALYTICAL_ONLY_NO_TEXTBOOK_POETRY_EXERCISE_COPYING",
+      "sourceCacheRefHistory": [
+        "20261006/urdu10-current.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-016",
@@ -448,7 +500,11 @@
       "pdfPageCount": 132,
       "downloadVerifiedOn": "2026-10-07",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/english10.pdf"
+      "sourceCacheRef": "20261008/official-verified/pectaa-catalog-016.pdf",
+      "sourceCacheRefHistory": [
+        "20261006/english10.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-017",
@@ -477,7 +533,11 @@
       "downloadStatus": "PDF_BYTES_VERIFIED",
       "providerContentIdentity": "MATHEMATICS 10",
       "providerIdentityStatus": "MAINSTREAM_TITLE_VERIFIED",
-      "sourceCacheRef": "20261006/mathematics10.pdf"
+      "sourceCacheRef": "20261008/official-verified/pectaa-catalog-017.pdf",
+      "sourceCacheRefHistory": [
+        "20261006/mathematics10.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-018",
@@ -504,10 +564,14 @@
       "pdfPageCount": 148,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/pakstudies10-ur.pdf",
+      "sourceCacheRef": "20261008/official-verified/pectaa-catalog-018.pdf",
       "contentMapStatus": "CURRENT_URDU_8_CHAPTER_PARITY_VERIFIED_PAGE_BOUNDARIES_PENDING",
       "contentMapEvidence": "pakistanStudies10UrduSourceMap2026.json",
-      "authoringBoundary": "PROVISIONAL_ORIGINAL_CONCEPTUAL_ONLY_NO_TEXTBOOK_EXERCISE_COPYING"
+      "authoringBoundary": "PROVISIONAL_ORIGINAL_CONCEPTUAL_ONLY_NO_TEXTBOOK_EXERCISE_COPYING",
+      "sourceCacheRefHistory": [
+        "20261006/pakstudies10-ur.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-019",
@@ -536,7 +600,11 @@
       "downloadStatus": "PDF_BYTES_VERIFIED",
       "providerContentIdentity": "PAKISTAN STUDIES 10 (EM)",
       "providerIdentityStatus": "MAINSTREAM_TITLE_AND_TOC_VERIFIED",
-      "sourceCacheRef": "20261006/pakstudies10-en.pdf"
+      "sourceCacheRef": "20261008/official-verified/pectaa-catalog-019.pdf",
+      "sourceCacheRefHistory": [
+        "20261006/pakstudies10-en.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-020",
@@ -563,7 +631,11 @@
       "pdfPageCount": 132,
       "downloadVerifiedOn": "2026-10-07",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/biology10-en.pdf"
+      "sourceCacheRef": "20261008/official-verified/pectaa-catalog-020.pdf",
+      "sourceCacheRefHistory": [
+        "20261006/biology10-en.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-021",
@@ -593,7 +665,11 @@
       "contentMapStatus": "CURRENT_EDITION_PARITY_VERIFIED_EXACT_URDU_PAGE_BOUNDARIES_PENDING",
       "contentMapEvidence": "biology10UrduSourceMap2026.json",
       "authoringBoundary": "PROVISIONAL_CONCEPTUAL_ONLY_NO_TEXTBOOK_OR_EXERCISE_COPYING",
-      "sourceCacheRef": "20261006/biology10-urdu.pdf"
+      "sourceCacheRef": "20261008/official-verified/pectaa-catalog-021.pdf",
+      "sourceCacheRefHistory": [
+        "20261006/biology10-urdu.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-022",
@@ -620,11 +696,15 @@
       "pdfPageCount": 156,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/chemistry10-urdu.pdf",
+      "sourceCacheRef": "20261008/official-verified/pectaa-catalog-022.pdf",
       "contentEvidenceNote": "Urdu chemistry title and partial table of contents inspected; chapter names/pages not yet fully verified.",
       "contentMapStatus": "CURRENT_EDITION_PARITY_VERIFIED_EXACT_URDU_PAGE_BOUNDARIES_PENDING",
       "contentMapEvidence": "chemistry10UrduSourceMap2026.json",
-      "authoringBoundary": "PROVISIONAL_CONCEPTUAL_ONLY_NO_TEXTBOOK_OR_EXERCISE_COPYING"
+      "authoringBoundary": "PROVISIONAL_CONCEPTUAL_ONLY_NO_TEXTBOOK_OR_EXERCISE_COPYING",
+      "sourceCacheRefHistory": [
+        "20261006/chemistry10-urdu.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-023",
@@ -683,7 +763,11 @@
       "downloadStatus": "PDF_BYTES_VERIFIED",
       "providerContentIdentity": "PHYSICS 10",
       "providerIdentityStatus": "MAINSTREAM_TITLE_VERIFIED",
-      "sourceCacheRef": "20261006/physics10-alt.pdf"
+      "sourceCacheRef": "20261008/official-verified/pectaa-catalog-024.pdf",
+      "sourceCacheRefHistory": [
+        "20261006/physics10-alt.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-025",
@@ -710,13 +794,17 @@
       "pdfPageCount": 152,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/computer10-current.pdf",
+      "sourceCacheRef": "20261008/official-verified/pectaa-catalog-025.pdf",
       "contentEvidenceNote": "Source contains Urdu-script instructional text; catalogue medium unspecified, do not infer English or claim verified chapter map.",
       "providerContentIdentity": "Computer Science 10 Urdu Medium",
       "providerIdentityStatus": "URDU_MEDIUM_CONTENT_VERIFIED",
       "contentMapStatus": "CURRENT_2026_CHAPTER_TITLES_CROSS_VERIFIED_PAGE_BOUNDARIES_PENDING",
       "contentMapEvidence": "computer10SourceMap2026.json",
-      "authoringBoundary": "PROVISIONAL_CONCEPTUAL_ONLY_CURRENT_CHAPTER_TITLES_NO_TEXTBOOK_OR_EXERCISE_COPYING"
+      "authoringBoundary": "PROVISIONAL_CONCEPTUAL_ONLY_CURRENT_CHAPTER_TITLES_NO_TEXTBOOK_OR_EXERCISE_COPYING",
+      "sourceCacheRefHistory": [
+        "20261006/computer10-current.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-026",
@@ -741,9 +829,13 @@
       "pdfPageCount": 200,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/englishgrammar.pdf",
+      "sourceCacheRef": "20261008/official-verified/pectaa-catalog-026.pdf",
       "contentMapStatus": "PENDING_VERIFIED_CONTENT_MAP",
-      "authoringBoundary": "NO_AUTHORING_UNTIL_GRAMMAR_COMPETENCY_MAP_VERIFIED"
+      "authoringBoundary": "NO_AUTHORING_UNTIL_GRAMMAR_COMPETENCY_MAP_VERIFIED",
+      "sourceCacheRefHistory": [
+        "20261006/englishgrammar.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-027",
@@ -1827,11 +1919,15 @@
       "pdfPageCount": 124,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/elective9-ghiza.pdf",
+      "sourceCacheRef": "20261008-electives/g9-ghiza.pdf",
       "contentMapStatus": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARIES_PENDING",
       "contentMapEvidence": "ghiza9SourceMap2026.json",
       "authoringBoundary": "PROVISIONAL_ORIGINAL_CHAPTER_ALIGNED_ONLY_NO_TEXTBOOK_EXERCISE_COPYING",
-      "resolvedMedium": "Urdu"
+      "resolvedMedium": "Urdu",
+      "sourceCacheRefHistory": [
+        "20261006/elective9-ghiza.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-065",
@@ -1857,11 +1953,15 @@
       "pdfPageCount": 224,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/elective9-art-em.pdf",
+      "sourceCacheRef": "20261008-electives/g9-art-em.pdf",
       "contentMapStatus": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARIES_PENDING",
       "contentMapEvidence": "art9emSourceMap2026.json",
       "authoringBoundary": "PROVISIONAL_ORIGINAL_CHAPTER_ALIGNED_ONLY_NO_TEXTBOOK_EXERCISE_COPYING",
-      "resolvedMedium": "English"
+      "resolvedMedium": "English",
+      "sourceCacheRefHistory": [
+        "20261006/elective9-art-em.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-066",
@@ -1887,11 +1987,15 @@
       "pdfPageCount": 212,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/elective9-homeeconomics.pdf",
+      "sourceCacheRef": "20261008-electives/g9-homeeco.pdf",
       "contentMapStatus": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARIES_PENDING",
       "contentMapEvidence": "home9SourceMap2026.json",
       "authoringBoundary": "PROVISIONAL_ORIGINAL_CHAPTER_ALIGNED_ONLY_NO_TEXTBOOK_EXERCISE_COPYING",
-      "resolvedMedium": "Urdu"
+      "resolvedMedium": "Urdu",
+      "sourceCacheRefHistory": [
+        "20261006/elective9-homeeconomics.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-067",
@@ -1917,11 +2021,15 @@
       "pdfPageCount": 100,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/elective9-textile.pdf",
+      "sourceCacheRef": "20261008-electives/g9-parcha.pdf",
       "contentMapStatus": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARIES_PENDING",
       "contentMapEvidence": "textile9SourceMap2026.json",
       "authoringBoundary": "PROVISIONAL_ORIGINAL_CHAPTER_ALIGNED_ONLY_NO_TEXTBOOK_EXERCISE_COPYING",
-      "resolvedMedium": "Urdu"
+      "resolvedMedium": "Urdu",
+      "sourceCacheRefHistory": [
+        "20261006/elective9-textile.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-068",
@@ -1947,11 +2055,15 @@
       "pdfPageCount": 220,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/elective9-art-ur.pdf",
+      "sourceCacheRef": "20261008-electives/g9-art-um.pdf",
       "contentMapStatus": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARIES_PENDING",
       "contentMapEvidence": "art9urSourceMap2026.json",
       "authoringBoundary": "PROVISIONAL_ORIGINAL_CHAPTER_ALIGNED_ONLY_NO_TEXTBOOK_EXERCISE_COPYING",
-      "resolvedMedium": "Urdu"
+      "resolvedMedium": "Urdu",
+      "sourceCacheRefHistory": [
+        "20261006/elective9-art-ur.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-069",
@@ -1977,11 +2089,15 @@
       "pdfPageCount": 124,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/elective10-ghiza.pdf",
+      "sourceCacheRef": "20261008-electives/g10-ghiza.pdf",
       "contentMapStatus": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARIES_PENDING",
       "contentMapEvidence": "ghiza10SourceMap2026.json",
       "authoringBoundary": "PROVISIONAL_ORIGINAL_CHAPTER_ALIGNED_ONLY_NO_TEXTBOOK_EXERCISE_COPYING",
-      "resolvedMedium": "Urdu"
+      "resolvedMedium": "Urdu",
+      "sourceCacheRefHistory": [
+        "20261006/elective10-ghiza.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-070",
@@ -2007,11 +2123,15 @@
       "pdfPageCount": 141,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/elective10-textile.pdf",
+      "sourceCacheRef": "20261008-electives/g10-parcha.pdf",
       "contentMapStatus": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARIES_PENDING",
       "contentMapEvidence": "textile10SourceMap2026.json",
       "authoringBoundary": "PROVISIONAL_ORIGINAL_CHAPTER_ALIGNED_ONLY_NO_TEXTBOOK_EXERCISE_COPYING",
-      "resolvedMedium": "Urdu"
+      "resolvedMedium": "Urdu",
+      "sourceCacheRefHistory": [
+        "20261006/elective10-textile.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-071",
@@ -2037,11 +2157,15 @@
       "pdfPageCount": 216,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/elective10-art-ur.pdf",
+      "sourceCacheRef": "20261008-electives/g10-art-um.pdf",
       "contentMapStatus": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARIES_PENDING",
       "contentMapEvidence": "art10urSourceMap2026.json",
       "authoringBoundary": "PROVISIONAL_ORIGINAL_CHAPTER_ALIGNED_ONLY_NO_TEXTBOOK_EXERCISE_COPYING",
-      "resolvedMedium": "Urdu"
+      "resolvedMedium": "Urdu",
+      "sourceCacheRefHistory": [
+        "20261006/elective10-art-ur.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-072",
@@ -2067,11 +2191,15 @@
       "pdfPageCount": 220,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/elective10-art-em.pdf",
+      "sourceCacheRef": "20261008-electives/g10-art-em.pdf",
       "contentMapStatus": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARIES_PENDING",
       "contentMapEvidence": "art10emSourceMap2026.json",
       "authoringBoundary": "PROVISIONAL_ORIGINAL_CHAPTER_ALIGNED_ONLY_NO_TEXTBOOK_EXERCISE_COPYING",
-      "resolvedMedium": "English"
+      "resolvedMedium": "English",
+      "sourceCacheRefHistory": [
+        "20261006/elective10-art-em.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-073",
@@ -2097,11 +2225,15 @@
       "pdfPageCount": 157,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
-      "sourceCacheRef": "20261006/elective10-homeeconomics.pdf",
+      "sourceCacheRef": "20261008-electives/g10-homeeco.pdf",
       "contentMapStatus": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARIES_PENDING",
       "contentMapEvidence": "home10SourceMap2026.json",
       "authoringBoundary": "PROVISIONAL_ORIGINAL_CHAPTER_ALIGNED_ONLY_NO_TEXTBOOK_EXERCISE_COPYING",
-      "resolvedMedium": "Urdu"
+      "resolvedMedium": "Urdu",
+      "sourceCacheRefHistory": [
+        "20261006/elective10-homeeconomics.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-074",
@@ -3041,7 +3173,7 @@
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
-      "sourceCacheRef": "20261006/quaidinsha.pdf",
+      "sourceCacheRef": "20261008/official-verified/pectaa-catalog-107.pdf",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
       "catalogLinkCheckedOn": "2026-10-07",
       "catalogLinkMatchCount": 1,
@@ -3050,7 +3182,11 @@
       "identityNote": "Official PECTAA Class IX-X shared Urdu Quaid-e-Insha authority. PDF bytes/hash verified; exact internal page/content map remains pending, therefore all generated items remain provisional and unapproved.",
       "contentMapStatus": "PARTIAL_VERIFIED_TASK_FAMILIES",
       "contentMapEvidence": "urduGrammarSourceMap2026.json",
-      "authoringBoundary": "PROVISIONAL_GRAMMAR_COMPOSITION_ONLY_NO_SOURCE_PASSAGE_COPYING"
+      "authoringBoundary": "PROVISIONAL_GRAMMAR_COMPOSITION_ONLY_NO_SOURCE_PASSAGE_COPYING",
+      "sourceCacheRefHistory": [
+        "20261006/quaidinsha.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-recovered-chemistry10-en-2026",
@@ -3079,8 +3215,12 @@
       "providerAccessState": "ARCHIVE_MIRROR_HASH_MATCHED_TO_INDEPENDENT_PECTAA_RECORD",
       "archiveEvidenceUrl": "https://textbookevidence.com/ur/books/pctb-chemistry-10-en/",
       "originalSourceUrl": "https://drive.usercontent.google.com/download?export=download&confirm=t&id=142r9HIosiPteAb2BvlcqSxuOTx9KYqSr",
-      "sourceCacheRef": "20261006/chemistry10-en.pdf",
-      "identityNote": "Separate English-medium PECTAA 2026 textbook recovered via an independent archive. SHA256 exactly matches the independent evidence record; it is not merged with catalog record 022 (Urdu medium)."
+      "sourceCacheRef": "20261008/official-verified/pectaa-recovered-chemistry10-en-2026.pdf",
+      "identityNote": "Separate English-medium PECTAA 2026 textbook recovered via an independent archive. SHA256 exactly matches the independent evidence record; it is not merged with catalog record 022 (Urdu medium).",
+      "sourceCacheRefHistory": [
+        "20261006/chemistry10-en.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-recovered-computer10-en-2026",
@@ -3108,11 +3248,15 @@
       "catalogAssetUrl": null,
       "providerAccessState": "ARCHIVE_PECTAA_LABEL_RENDERED_IDENTITY_VERIFIED",
       "archiveEvidenceUrl": "https://www.taleem360.com/10th-class-computer-em-new-text-book-2026-pectaa",
-      "sourceCacheRef": "20261006/computer10-en-2026.pdf",
+      "sourceCacheRef": "20261008/official-verified/pectaa-recovered-computer10-en-2026.pdf",
       "contentMapStatus": "CURRENT_UNIT_TITLES_CROSS_CHECKED_CHAPTER_STARTS_PENDING",
       "contentMapEvidence": "computer10SourceMap2026.json",
       "authoringBoundary": "PROVISIONAL_CONCEPTUAL_ONLY_NO_TEXTBOOK_OR_EXERCISE_COPYING",
-      "identityNote": "English-medium current 2026-27 PECTAA-labelled archive copy kept separate from generic catalog record 025 and from Urdu-medium/tech tracks."
+      "identityNote": "English-medium current 2026-27 PECTAA-labelled archive copy kept separate from generic catalog record 025 and from Urdu-medium/tech tracks.",
+      "sourceCacheRefHistory": [
+        "20261006/computer10-en-2026.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-recovered-tarjuma9-2026",
@@ -3140,11 +3284,15 @@
       "catalogAssetUrl": null,
       "providerAccessState": "ARCHIVE_CURRENT_GRADE_IDENTITY_CROSS_VERIFIED",
       "archiveEvidenceUrl": "https://studyplusplus.com/punjab-board/books/9/tarjama-tul-quran",
-      "sourceCacheRef": "20261006/tarjuma9-current.pdf",
+      "sourceCacheRef": "20261008/official-verified/pectaa-recovered-tarjuma9-2026.pdf",
       "contentMapStatus": "CURRENT_SURAH_SEQUENCE_CROSS_VERIFIED_AYAH_RANGES_PENDING",
       "contentMapEvidence": "tarjuma9SourceMap2026.json",
       "authoringBoundary": "PROVISIONAL_CONCEPTUAL_ONLY_NO_QURAN_TEXT_TRANSLATION_OR_EXERCISE_COPYING",
-      "identityNote": "Grade-specific recovered current Class IX resource kept separate from ambiguous repeated official catalogue label."
+      "identityNote": "Grade-specific recovered current Class IX resource kept separate from ambiguous repeated official catalogue label.",
+      "sourceCacheRefHistory": [
+        "20261006/tarjuma9-current.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     },
     {
       "recordId": "pectaa-recovered-tarjuma10-current",
@@ -3172,11 +3320,15 @@
       "catalogAssetUrl": null,
       "providerAccessState": "ARCHIVE_HASH_MATCHED_INDEPENDENT_RECORD",
       "archiveEvidenceUrl": "https://textbookevidence.com/books/pctb-mutalea-quran-10-ur/",
-      "sourceCacheRef": "20261006/tarjuma10-current.pdf",
+      "sourceCacheRef": "20261008/official-verified/pectaa-recovered-tarjuma10-current.pdf",
       "contentMapStatus": "CURRENT_SURAH_SEQUENCE_VERIFIED_AYAH_RANGES_PENDING",
       "contentMapEvidence": "tarjuma10SourceMap2026.json",
       "authoringBoundary": "PROVISIONAL_CONCEPTUAL_ONLY_NO_QURAN_TEXT_TRANSLATION_OR_EXERCISE_COPYING",
-      "identityNote": "Grade-specific continuing textbook recovered with independent checksum match; kept separate from ambiguous repeated official catalogue label."
+      "identityNote": "Grade-specific continuing textbook recovered with independent checksum match; kept separate from ambiguous repeated official catalogue label.",
+      "sourceCacheRefHistory": [
+        "20261006/tarjuma10-current.pdf"
+      ],
+      "sourceCacheRefReconciledOn": "2026-10-08"
     }
   ],
   "additionalCatalogStreamsPending": [

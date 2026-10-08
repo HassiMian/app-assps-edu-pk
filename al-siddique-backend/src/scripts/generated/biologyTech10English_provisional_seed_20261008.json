@@ -114,22 +114,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Alveoli"
+          "text": "Tendon"
         },
         {
           "id": "B",
-          "text": "Ureter"
+          "text": "Alveoli"
         },
         {
           "id": "C",
-          "text": "Stomach"
+          "text": "Ureter"
         },
         {
           "id": "D",
-          "text": "Tendon"
+          "text": "Stomach"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Alveoli",
       "marks": 1,
       "difficulty": "easy",
@@ -212,22 +212,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Left ventricle"
-        },
-        {
-          "id": "B",
-          "text": "Right atrium"
-        },
-        {
-          "id": "C",
           "text": "Left atrium only"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Vena cava"
+        },
+        {
+          "id": "C",
+          "text": "Left ventricle"
+        },
+        {
+          "id": "D",
+          "text": "Right atrium"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Left ventricle",
       "marks": 1,
       "difficulty": "easy",
@@ -310,22 +310,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Nephron"
-        },
-        {
-          "id": "B",
           "text": "Alveolus"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Neuron"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Villus"
+        },
+        {
+          "id": "D",
+          "text": "Nephron"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Nephron",
       "marks": 1,
       "difficulty": "easy",
@@ -506,22 +506,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Male and female gametes"
+          "text": "Two bones"
         },
         {
           "id": "B",
-          "text": "Two red blood cells"
+          "text": "Male and female gametes"
         },
         {
           "id": "C",
-          "text": "Two neurons"
+          "text": "Two red blood cells"
         },
         {
           "id": "D",
-          "text": "Two bones"
+          "text": "Two neurons"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Male and female gametes",
       "marks": 1,
       "difficulty": "easy",
@@ -604,22 +604,22 @@
       "options": [
         {
           "id": "A",
-          "text": "A DNA sequence associated with a functional product or trait"
-        },
-        {
-          "id": "B",
-          "text": "A whole organ"
-        },
-        {
-          "id": "C",
           "text": "A blood vessel"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "A mineral"
+        },
+        {
+          "id": "C",
+          "text": "A DNA sequence associated with a functional product or trait"
+        },
+        {
+          "id": "D",
+          "text": "A whole organ"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "A DNA sequence associated with a functional product or trait",
       "marks": 1,
       "difficulty": "easy",
@@ -702,22 +702,22 @@
       "options": [
         {
           "id": "A",
-          "text": "A DNA vector in microorganisms"
-        },
-        {
-          "id": "B",
           "text": "A bone joint"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "A respiratory surface"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "A muscle protein"
+        },
+        {
+          "id": "D",
+          "text": "A DNA vector in microorganisms"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "A DNA vector in microorganisms",
       "marks": 1,
       "difficulty": "easy",

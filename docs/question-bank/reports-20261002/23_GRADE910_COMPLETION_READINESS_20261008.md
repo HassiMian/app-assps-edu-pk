@@ -4,12 +4,12 @@
 
 ## Snapshot
 
-- Provisional backend package: **2303 questions / 52 files**.
-- Full authoring universe: **2401 unique questions / 67 authoring files**.
-- Starter authoring corpus: **1988 questions / 51 files / 51 source records**.
-- Authoring outside Starter files: **413 questions**.
-- Generated provisional import package: **2303 questions / 52 files** (a deployment package, not the full authoring universe).
-- MCQs: **773**; biased seed files after editorial rebalancing: **0**.
+- Provisional backend package: **2411 questions / 56 files**.
+- Full authoring universe: **2581 unique questions / 73 authoring files**.
+- Starter authoring corpus: **2096 questions / 55 files / 55 source records**.
+- Authoring outside Starter files: **485 questions**.
+- Generated provisional import package: **2411 questions / 56 files** (a deployment package, not the full authoring universe).
+- MCQs: **809**; biased seed files after editorial rebalancing: **0**.
 - Academically approved questions in staging/import package: **0**.
 - Publication-enabled provisional questions: **0**.
 - Starter questions without verified physical page: **1144**.
@@ -70,20 +70,20 @@
 | pectaa-catalog-046 | 9 | Physics-Tech | Urdu | 32 | yes | VERIFIED_CURRENT_8_CHAPTER_BISE_SYLLABUS | PENDING | PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW | exercise-index; question-pages:32; academic-review |
 | pectaa-catalog-047 | 10 | Chemistry-Tech | English | 0 | yes | PENDING | PENDING | BLOCKED_PENDING_SOURCE | chapter/page-map; exercise-index; question-authoring; academic-review |
 | pectaa-catalog-048 | 10 | Chemistry-Tech | Urdu | 0 | yes | PENDING | PENDING | BLOCKED_PENDING_SOURCE | chapter/page-map; exercise-index; question-authoring; academic-review |
-| pectaa-catalog-049 | 10 | Communication Skills & Personal Grooming-Tech | UNSPECIFIED_BY_CATALOG_LABEL | 0 | yes | PENDING | PENDING | BLOCKED_PENDING_SOURCE | chapter/page-map; exercise-index; question-authoring; academic-review |
+| pectaa-catalog-049 | 10 | Communication Skills & Personal Grooming-Tech | UNSPECIFIED_BY_CATALOG_LABEL | 27 | yes | VERIFIED_NATIVE_TEXT_LAYER | PARTIAL_VERIFIED_NATIVE_TEXT_LAYER | PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW | exercise-index; academic-review |
 | pectaa-catalog-050 | 10 | Computer-Tech | UNSPECIFIED_BY_CATALOG_LABEL | 0 | yes | PENDING | PENDING | BLOCKED_PENDING_SOURCE | chapter/page-map; exercise-index; question-authoring; academic-review |
 | pectaa-catalog-051 | 10 | Computer (Matric-Tech catalog identity) | UNSPECIFIED_BY_CATALOG_LABEL | 0 | yes | PENDING | PENDING | BLOCKED_PENDING_SOURCE | chapter/page-map; exercise-index; question-authoring; academic-review |
 | pectaa-catalog-052 | 10 | Computer Science-Tech | Urdu | 0 | yes | PENDING | PENDING | BLOCKED_PENDING_SOURCE | chapter/page-map; exercise-index; question-authoring; academic-review |
 | pectaa-catalog-053 | 10 | Fashion Designing-Tech | UNSPECIFIED_BY_CATALOG_LABEL | 0 | yes | PENDING | PENDING | BLOCKED_PENDING_SOURCE | chapter/page-map; exercise-index; question-authoring; academic-review |
-| pectaa-catalog-054 | 10 | Health Sciences-Tech | UNSPECIFIED_BY_CATALOG_LABEL | 0 | yes | PENDING | PENDING | BLOCKED_PENDING_SOURCE | chapter/page-map; exercise-index; question-authoring; academic-review |
+| pectaa-catalog-054 | 10 | Health Sciences-Tech | UNSPECIFIED_BY_CATALOG_LABEL | 27 | yes | VERIFIED_NATIVE_TEXT_LAYER | PARTIAL_VERIFIED_NATIVE_TEXT_LAYER | PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW | exercise-index; academic-review |
 | pectaa-catalog-055 | 10 | Information & Communication Technologies-Tech | UNSPECIFIED_BY_CATALOG_LABEL | 0 | yes | PENDING | PENDING | BLOCKED_PENDING_SOURCE | chapter/page-map; exercise-index; question-authoring; academic-review |
 | pectaa-catalog-056 | 10 | Physics-Tech | Urdu | 0 | yes | PENDING | PENDING | BLOCKED_PENDING_SOURCE | chapter/page-map; exercise-index; question-authoring; academic-review |
-| pectaa-catalog-057 | 10 | Physics-Tech | English | 0 | yes | PENDING | PENDING | BLOCKED_PENDING_SOURCE | chapter/page-map; exercise-index; question-authoring; academic-review |
+| pectaa-catalog-057 | 10 | Physics-Tech | English | 30 | yes | VERIFIED_NATIVE_TEXT_LAYER | PARTIAL_VERIFIED_NATIVE_TEXT_LAYER | PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW | exercise-index; academic-review |
 | pectaa-catalog-058 | 10 | General Science-Tech | English | 0 | yes | PENDING | PENDING | BLOCKED_PENDING_SOURCE | chapter/page-map; exercise-index; question-authoring; academic-review |
 | pectaa-catalog-059 | 10 | General Science-Tech | Urdu | 0 | yes | PENDING | PENDING | BLOCKED_PENDING_SOURCE | chapter/page-map; exercise-index; question-authoring; academic-review |
 | pectaa-catalog-060 | 10 | Agriculture Sciences-Tech | English | 0 | yes | PENDING | PENDING | BLOCKED_PENDING_SOURCE | chapter/page-map; exercise-index; question-authoring; academic-review |
 | pectaa-catalog-061 | 10 | Agriculture Sciences-Tech | Urdu | 0 | yes | PENDING | PENDING | BLOCKED_PENDING_SOURCE | chapter/page-map; exercise-index; question-authoring; academic-review |
-| pectaa-catalog-062 | 10 | Biology-Tech | English | 0 | yes | PENDING | PENDING | BLOCKED_PENDING_SOURCE | chapter/page-map; exercise-index; question-authoring; academic-review |
+| pectaa-catalog-062 | 10 | Biology-Tech | English | 24 | yes | VERIFIED_NATIVE_TEXT_LAYER | PARTIAL_VERIFIED_NATIVE_TEXT_LAYER | PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW | exercise-index; academic-review |
 | pectaa-catalog-063 | 10 | Biology-Tech | Urdu | 0 | yes | PENDING | PENDING | BLOCKED_PENDING_SOURCE | chapter/page-map; exercise-index; question-authoring; academic-review |
 | pectaa-catalog-064 | 9 | Ghiza aur Ghizayat | UNSPECIFIED_BY_CATALOG_LABEL | 15 | yes | PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING | PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW | chapter/page-map; exercise-index; question-pages:15; academic-review |
 | pectaa-catalog-065 | 9 | Art & Model Drawing | English | 24 | yes | PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING | PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW | chapter/page-map; exercise-index; question-pages:24; academic-review |

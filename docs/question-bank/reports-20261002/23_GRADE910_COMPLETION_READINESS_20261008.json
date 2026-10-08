@@ -1,18 +1,18 @@
 {
   "schemaVersion": "assps-grade910-completion-readiness-v1",
   "scope": "STAGING_AND_SOURCE_READINESS_NOT_ACADEMIC_APPROVAL",
-  "generatedAt": "2026-10-08T08:50:17.781Z",
+  "generatedAt": "2026-10-08T12:50:21.158Z",
   "summary": {
-    "generatedFiles": 52,
-    "generatedQuestions": 2303,
-    "fullAuthoringFiles": 67,
-    "fullAuthoringQuestions": 2401,
+    "generatedFiles": 56,
+    "generatedQuestions": 2411,
+    "fullAuthoringFiles": 73,
+    "fullAuthoringQuestions": 2581,
     "fullAuthoringDuplicateIds": 0,
-    "starterFiles": 51,
-    "starterQuestions": 1988,
-    "stagedSourceRecords": 51,
-    "authoringOutsideStarterQuestions": 413,
-    "mcqs": 773,
+    "starterFiles": 55,
+    "starterQuestions": 2096,
+    "stagedSourceRecords": 55,
+    "authoringOutsideStarterQuestions": 485,
+    "mcqs": 809,
     "mcqBiasFlaggedFiles": 0,
     "approvedQuestions": 0,
     "publicationEnabledQuestions": 0,
@@ -25,8 +25,8 @@
     "missingKnownSources": 0,
     "missingLedgerHashes": 1,
     "exerciseVerifiedRecords": 0,
-    "recordsWithStaging": 51,
-    "recordsWithoutStaging": 60
+    "recordsWithStaging": 55,
+    "recordsWithoutStaging": 56
   },
   "academicReady": false,
   "records": [
@@ -1084,18 +1084,18 @@
       "stream": "Matric-Tech",
       "subject": "Communication Skills & Personal Grooming-Tech",
       "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
-      "stagedQuestions": 0,
-      "stagingFiles": [],
+      "stagedQuestions": 27,
+      "stagingFiles": [
+        "communicationSkills10TechStarter2026.json"
+      ],
       "missingPageQuestions": 0,
       "cachedHashVerified": true,
-      "chapterStatus": "PENDING",
-      "exerciseStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "chapterStatus": "VERIFIED_NATIVE_TEXT_LAYER",
+      "exerciseStatus": "PARTIAL_VERIFIED_NATIVE_TEXT_LAYER",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
       "academicApproved": false,
       "blockers": [
-        "chapter/page-map",
         "exercise-index",
-        "question-authoring",
         "academic-review"
       ]
     },
@@ -1189,18 +1189,18 @@
       "stream": "Matric-Tech",
       "subject": "Health Sciences-Tech",
       "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
-      "stagedQuestions": 0,
-      "stagingFiles": [],
+      "stagedQuestions": 27,
+      "stagingFiles": [
+        "healthSciences10TechStarter2026.json"
+      ],
       "missingPageQuestions": 0,
       "cachedHashVerified": true,
-      "chapterStatus": "PENDING",
-      "exerciseStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "chapterStatus": "VERIFIED_NATIVE_TEXT_LAYER",
+      "exerciseStatus": "PARTIAL_VERIFIED_NATIVE_TEXT_LAYER",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
       "academicApproved": false,
       "blockers": [
-        "chapter/page-map",
         "exercise-index",
-        "question-authoring",
         "academic-review"
       ]
     },
@@ -1252,18 +1252,18 @@
       "stream": "Matric-Tech",
       "subject": "Physics-Tech",
       "medium": "English",
-      "stagedQuestions": 0,
-      "stagingFiles": [],
+      "stagedQuestions": 30,
+      "stagingFiles": [
+        "physicsTech10EnglishStarter2026.json"
+      ],
       "missingPageQuestions": 0,
       "cachedHashVerified": true,
-      "chapterStatus": "PENDING",
-      "exerciseStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "chapterStatus": "VERIFIED_NATIVE_TEXT_LAYER",
+      "exerciseStatus": "PARTIAL_VERIFIED_NATIVE_TEXT_LAYER",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
       "academicApproved": false,
       "blockers": [
-        "chapter/page-map",
         "exercise-index",
-        "question-authoring",
         "academic-review"
       ]
     },
@@ -1357,18 +1357,18 @@
       "stream": "Matric-Tech",
       "subject": "Biology-Tech",
       "medium": "English",
-      "stagedQuestions": 0,
-      "stagingFiles": [],
+      "stagedQuestions": 24,
+      "stagingFiles": [
+        "biologyTech10EnglishStarter2026.json"
+      ],
       "missingPageQuestions": 0,
       "cachedHashVerified": true,
-      "chapterStatus": "PENDING",
-      "exerciseStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "chapterStatus": "VERIFIED_NATIVE_TEXT_LAYER",
+      "exerciseStatus": "PARTIAL_VERIFIED_NATIVE_TEXT_LAYER",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
       "academicApproved": false,
       "blockers": [
-        "chapter/page-map",
         "exercise-index",
-        "question-authoring",
         "academic-review"
       ]
     },

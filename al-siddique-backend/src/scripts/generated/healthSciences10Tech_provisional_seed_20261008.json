@@ -114,22 +114,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Muscle to bone"
+          "text": "Artery to vein"
         },
         {
           "id": "B",
-          "text": "Bone to bone"
+          "text": "Muscle to bone"
         },
         {
           "id": "C",
-          "text": "Nerve to gland"
+          "text": "Bone to bone"
         },
         {
           "id": "D",
-          "text": "Artery to vein"
+          "text": "Nerve to gland"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Muscle to bone",
       "marks": 1,
       "difficulty": "easy",
@@ -212,22 +212,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Endocrine glands"
-        },
-        {
-          "id": "B",
-          "text": "Bones only"
-        },
-        {
-          "id": "C",
           "text": "Red blood cells only"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Teeth"
+        },
+        {
+          "id": "C",
+          "text": "Endocrine glands"
+        },
+        {
+          "id": "D",
+          "text": "Bones only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Endocrine glands",
       "marks": 1,
       "difficulty": "easy",
@@ -310,22 +310,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Children and adolescents"
-        },
-        {
-          "id": "B",
           "text": "Plants"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Only athletes"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Only older adults"
+        },
+        {
+          "id": "D",
+          "text": "Children and adolescents"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Children and adolescents",
       "marks": 1,
       "difficulty": "easy",
@@ -506,22 +506,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Eliminate all viable microorganisms from an item"
+          "text": "Replace hand hygiene"
         },
         {
           "id": "B",
-          "text": "Make an item look cleaner only"
+          "text": "Eliminate all viable microorganisms from an item"
         },
         {
           "id": "C",
-          "text": "Add fragrance"
+          "text": "Make an item look cleaner only"
         },
         {
           "id": "D",
-          "text": "Replace hand hygiene"
+          "text": "Add fragrance"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Eliminate all viable microorganisms from an item",
       "marks": 1,
       "difficulty": "easy",
@@ -604,22 +604,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Dignity, safety and independence where possible"
-        },
-        {
-          "id": "B",
-          "text": "Ignoring preferences"
-        },
-        {
-          "id": "C",
           "text": "Unnecessary restriction"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Speaking about the person as if absent"
+        },
+        {
+          "id": "C",
+          "text": "Dignity, safety and independence where possible"
+        },
+        {
+          "id": "D",
+          "text": "Ignoring preferences"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Dignity, safety and independence where possible",
       "marks": 1,
       "difficulty": "easy",
@@ -702,22 +702,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Human behavior and factors influencing it"
-        },
-        {
-          "id": "B",
           "text": "Only bone structure"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Only chemistry equations"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Weather forecasting"
+        },
+        {
+          "id": "D",
+          "text": "Human behavior and factors influencing it"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Human behavior and factors influencing it",
       "marks": 1,
       "difficulty": "easy",

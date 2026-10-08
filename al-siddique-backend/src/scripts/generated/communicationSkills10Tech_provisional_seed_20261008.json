@@ -114,22 +114,22 @@
       "options": [
         {
           "id": "A",
-          "text": "A neat, appropriate and trustworthy presentation"
+          "text": "Replacing skills with appearance"
         },
         {
           "id": "B",
-          "text": "Ignoring hygiene"
+          "text": "A neat, appropriate and trustworthy presentation"
         },
         {
           "id": "C",
-          "text": "Using the same clothing for every context"
+          "text": "Ignoring hygiene"
         },
         {
           "id": "D",
-          "text": "Replacing skills with appearance"
+          "text": "Using the same clothing for every context"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "A neat, appropriate and trustworthy presentation",
       "marks": 1,
       "difficulty": "easy",
@@ -212,22 +212,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Understanding the role and organization"
-        },
-        {
-          "id": "B",
-          "text": "Memorizing unrelated answers"
-        },
-        {
-          "id": "C",
           "text": "Arriving without documents"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Ignoring the job requirements"
+        },
+        {
+          "id": "C",
+          "text": "Understanding the role and organization"
+        },
+        {
+          "id": "D",
+          "text": "Memorizing unrelated answers"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Understanding the role and organization",
       "marks": 1,
       "difficulty": "easy",
@@ -310,22 +310,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Strengths, limits, emotions and values"
-        },
-        {
-          "id": "B",
           "text": "Only other people’s faults"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Salary only"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Clothing size"
+        },
+        {
+          "id": "D",
+          "text": "Strengths, limits, emotions and values"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Strengths, limits, emotions and values",
       "marks": 1,
       "difficulty": "easy",
@@ -506,22 +506,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Clear respectful communication and reliability"
+          "text": "Refusing collaboration"
         },
         {
           "id": "B",
-          "text": "Withholding needed information"
+          "text": "Clear respectful communication and reliability"
         },
         {
           "id": "C",
-          "text": "Blaming others automatically"
+          "text": "Withholding needed information"
         },
         {
           "id": "D",
-          "text": "Refusing collaboration"
+          "text": "Blaming others automatically"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Clear respectful communication and reliability",
       "marks": 1,
       "difficulty": "easy",
@@ -604,22 +604,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Evaluate evidence and assumptions"
-        },
-        {
-          "id": "B",
-          "text": "Accept every claim immediately"
-        },
-        {
-          "id": "C",
           "text": "Avoid questions"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Choose the first answer without checking"
+        },
+        {
+          "id": "C",
+          "text": "Evaluate evidence and assumptions"
+        },
+        {
+          "id": "D",
+          "text": "Accept every claim immediately"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Evaluate evidence and assumptions",
       "marks": 1,
       "difficulty": "easy",
@@ -702,22 +702,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Authentic skills, conduct and consistent values"
-        },
-        {
-          "id": "B",
           "text": "False claims"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Private data oversharing"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Copying another person’s identity"
+        },
+        {
+          "id": "D",
+          "text": "Authentic skills, conduct and consistent values"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Authentic skills, conduct and consistent values",
       "marks": 1,
       "difficulty": "easy",
