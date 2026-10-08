@@ -12,7 +12,7 @@ Date 2026-10-08 ~18:51–19:01 UTC. Isolated owner engineering only, **productio
 
 - Built one test-only **three-MCQ Urdu/English** official renderer stress fixture, each with 4 genuine option cells, 3 marks, original content always synthetic. Includes one 720+ character unbroken English scientific term in prompt, 500+ character unbroken option, and 220-character unbroken Urdu prompt, unique `MCQ-STEM-01..03` tokens, RTL medium, canonical `matrix-table` MCQ layout and A4 print preview.
 - First browser attempt **failed on Vite cold start/navigation timeout** during heavy concurrent VPS builds, not counted as a renderer failure. A warmed, independent Chromium rerun **reproduced REAL product defect**: MCQ fixed-layout table `scrollWidth 10717` vs `clientWidth 732`, with prompt-cell `10658/672`, option-cell `7822/167`, Urdu prompt-cell `1414/672` overflow. That was a genuine negative geometry assertion; text existed, but visible/printable width was violated.
-- Scoped fix in `al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/official/OfficialSectionRenderer.jsx` **only inside matrix-table branch**: prompt-cell and choice-cell CSS gain `overflowWrap:'anywhere',wordBreak:'break-word'`; replaces ineffective `overflowWrap:break-word` on options. No option-text mutation, answers/marks/labels/selection changes, layout switch, old/simple editor change, or truncation. 
+- Scoped fix in `al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/official/OfficialSectionRenderer.jsx` **only inside matrix-table branch**: prompt-cell and choice-cell CSS gain `overflowWrap:'anywhere',wordBreak:'break-word'`; replaces ineffective `overflowWrap:break-word` on options. No option-text mutation, answers/marks/labels/selection changes, layout switch, old/simple editor change, or truncation.
 - Post-patch same Playwright **1/1 PASS**: screen table `scroll/client=732/732`, actual print iframe `731/732`, zero overflowing prompt/choice cells; all unique question stems and long option text preserved. Actual iframe HTML passed to Chromium A4 print-to-PDF compositor, generated **5-page nonempty PDF**. This checks paginator invocation and DOM element boundaries, not every rendered page glyph or school printer output.
 
 ## Regressions (final results tracked below)
@@ -27,7 +27,7 @@ Date 2026-10-08 ~18:51–19:01 UTC. Isolated owner engineering only, **productio
 | Protected 6 original templates | **PASS**, six protected original templates unchanged, `/tmp/paper-p13-templates.log` |
 | Frontend Vite build | **PASS**, 2,519 modules, 40.27 s under concurrency `/tmp/paper-p13-build.log` |
 
-Remote tool wrapper 50 seconds may time out under concurrent browser/build CPU load. A wrapper timeout is **not** success; underlying complete TAP and process exit were independently checked: 43-paper corpus exit 0, Urdu Workspace final 9/9 PASS, prior layouts process exit 0 and DOCX/official process exit 0. Build log finished successfully but its remote wrapper timed out and no independent shell rc was written, so rely on Vite terminal completed output rather than claiming wrapper success. 
+Remote tool wrapper 50 seconds may time out under concurrent browser/build CPU load. A wrapper timeout is **not** success; underlying complete TAP and process exit were independently checked: 43-paper corpus exit 0, Urdu Workspace final 9/9 PASS, prior layouts process exit 0 and DOCX/official process exit 0. Build log finished successfully but its remote wrapper timed out and no independent shell rc was written, so rely on Vite terminal completed output rather than claiming wrapper success.
 
 ## Remaining ownership and release gates
 
@@ -35,4 +35,4 @@ Remote tool wrapper 50 seconds may time out under concurrent browser/build CPU l
 - Printable visual glyph/page fidelity for long Urdu + mixed English, Jameel Noori on Windows printers, external physical USB/shared printer, multipage page-break content visual inspection and issue #3 full staff operator acceptance remain outstanding. PDF page-count and print iframe text do not prove those.
 - Issue #2 original Phase3AE reviewed ZIP and PG18 runner not located in currently accessible project sources, so original artifact certification unavailable. Historical chat transcripts partially inaccessible. Grade IX–X independently approved questions still zero and must not be selected as verified.
 
-Rollback: selectively revert the renderer-only candidate after review; **no live rollback or production deployment attempted**. 
+Rollback: selectively revert the renderer-only candidate after review; **no live rollback or production deployment attempted**.
