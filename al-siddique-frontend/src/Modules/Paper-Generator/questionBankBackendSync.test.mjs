@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { mapBackendQuestionRow, mergeBackendQuestionBankRows } from './questionBankBackendSync.js'
+import { isQuestionEligibleForPaper, mapBackendQuestionRow, mergeBackendQuestionBankRows } from './questionBankBackendSync.js'
 
 const row = {
  id: 101, subject: 'Biology', class_level: '10th', chapter_name: 'Inheritance', topic_name: 'DNA',
@@ -31,4 +31,13 @@ test('content duplicate is skipped even when backend id is new',()=>{
  const store={subjects:[{id:'b10',name:'Biology',classLevel:'10th'}],questions:[{id:'manual',subjectId:'b10',type:'mcq',textUrdu:row.question_text,text:'',chapter:'Inheritance'}]}
  const merged=mergeBackendQuestionBankRows(store,[{...row,id:202}],{scope:'school-1'})
  assert.equal(merged.stats.inserted,0);assert.equal(merged.stats.skippedDuplicates,1);assert.equal(merged.store.questions.length,1)
+})
+
+
+test('paper-generation eligibility excludes explicit provisional rows without hiding legacy approved/unknown rows', () => {
+  assert.equal(isQuestionEligibleForPaper({ isApproved:false, approvalStatus:'provisional' }), false)
+  assert.equal(isQuestionEligibleForPaper({ isApproved:false, approvalStatus:'approved' }), false)
+  assert.equal(isQuestionEligibleForPaper({ approvalStatus:'provisional' }), false)
+  assert.equal(isQuestionEligibleForPaper({ isApproved:true, approvalStatus:'approved' }), true)
+  assert.equal(isQuestionEligibleForPaper({}), true)
 })

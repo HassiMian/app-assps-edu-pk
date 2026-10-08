@@ -8,7 +8,7 @@ import officialFirstTermPapers from './seed-data/official-first-term-2026-v13.js
 import { getFinalExamScheduleForPaper } from '../dateSheetFinalExam2026.js'
 import examNightRecoverySeed from './seed-data/exam-night-recovery-v3.json'
 import { buildRecoverySavedPapers } from './seed-data/examNightRecoveryAdapter.js'
-import { mergeBackendQuestionBankRows } from './questionBankBackendSync.js'
+import { isQuestionEligibleForPaper, mergeBackendQuestionBankRows } from './questionBankBackendSync.js'
 
 const STORE_KEY = 'al_siddique_paper_store'
 const NOTIFICATIONS_KEY = 'saas_admin_notifications'
@@ -1282,6 +1282,7 @@ export function usePaperStore() {
 
  function getQuestionsForPaper({ subjectName, classLevel, type, chapters = [], priority = 'all' }) {
  return globalStore.questions.filter(q => {
+ if (!isQuestionEligibleForPaper(q)) return false
  const sub = globalStore.subjects.find(s => s.id === q.subjectId)
  if (!sub) return false
  const nameMatch = sub.name.toLowerCase() === subjectName?.toLowerCase()
@@ -1297,6 +1298,7 @@ export function usePaperStore() {
  return [...new Set(
  store.questions
  .filter(q => {
+ if (!isQuestionEligibleForPaper(q)) return false
  const sub = store.subjects.find(s => s.id === q.subjectId)
  return sub &&
  sub.name.toLowerCase() === subjectName?.toLowerCase() &&

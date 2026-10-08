@@ -2,6 +2,10 @@ const normalizeText = value => String(value ?? '').trim()
 const normKey = value => normalizeText(value).toLowerCase().replace(/\s+/g, ' ')
 const safeIdPart = value => normKey(value).replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '') || 'unknown'
 
+export function isQuestionEligibleForPaper(question) {
+  return question?.isApproved !== false && question?.approvalStatus !== 'provisional'
+}
+
 export function normalizeBackendQuestionMedium(value) {
   const v = normKey(value)
   if (v === 'urdu' || v === 'ur' || v.includes('urdu')) return 'urdu'
