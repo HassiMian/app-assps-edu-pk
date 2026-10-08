@@ -55,3 +55,14 @@ pectaa-catalog-002, pectaa-catalog-003, pectaa-catalog-004, pectaa-catalog-005, 
 5. Repeat teacher-assignment, PaperDocument/ScoringPlan and end-to-end print checks before enabling auto-selection.
 
 **Do not approve or move provisional questions solely because the source PDF hash matches.**
+
+## Core Grade 9 official book text-layer check
+
+The two core, hash-verified Biology 9 and Chemistry 9 English source PDFs were inspected non-destructively with PDFium:
+
+| Catalog record | PDF pages | Text-layer sampling (first 10 pages) | Implication |
+|---|---:|---|---|
+| `pectaa-catalog-009` Biology 9 English | 180 | 0 extracted characters | Image-only in sampled pages; chapter/exercise mapping cannot safely be inferred from text extraction |
+| `pectaa-catalog-007` Chemistry 9 English | 192 | Only short page-number/`Not for sale PCTB` overlay | Main textbook body is not reliably text-extractable in sampled pages |
+
+Source-content transcription or OCR output must be independently checked against page images and edition. **No generated questions were academically approved on the basis of these partial text-layer checks.**
