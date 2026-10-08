@@ -5,6 +5,8 @@ import PaperAiJobsPanel from './PaperAiJobsPanel'
 import QuickQuestionEntry from './QuickQuestionEntry.jsx'
 import { QUICK_TEXT_KINDS } from './quickQuestionRecord.js'
 import api from '../../services/api'
+import { useAuth } from '../../context/AuthContext'
+import { Link } from 'react-router-dom'
 
 import { useState, useRef, useMemo, useCallback, useEffect } from 'react'
 import Portal from '../../components/Portal'
@@ -1918,6 +1920,8 @@ function SettingsTab({ store }) {
 //  Main Component 
 
 export default function QuestionBank() {
+ const { user } = useAuth()
+ const canOpenAcademicReview = ['admin','principal','super_admin'].includes(String(user?.role||'').toLowerCase())
  const store = usePaperStore()
  const { activeClasses } = useAcademicStore()
 
@@ -2184,6 +2188,7 @@ export default function QuestionBank() {
  </div>
 
  <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+ {canOpenAcademicReview && <Link to="/question-bank/academic-review" style={{ display:'inline-flex',alignItems:'center',gap:7,padding:'8px 13px',borderRadius:9,border:'1px solid rgba(100,210,200,.4)',background:'rgba(100,210,200,.12)',color:'#91E2DC',fontSize:12,fontWeight:700,textDecoration:'none' }}><CheckSquare size={14}/> Academic Review</Link>}
  <button onClick={() => setShowAnswers(!showAnswers)}
  style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 12px', borderRadius: 8, border: `1px solid ${showAnswers ? C.green : 'rgba(255,255,255,0.1)'}`, background: showAnswers ? 'rgba(48,209,88,0.15)' : 'rgba(255,255,255,0.05)', color: showAnswers ? C.green : C.silver, cursor: 'pointer', fontSize: 13, fontWeight: 600 }}>
  {showAnswers ? <Eye size={14} /> : <EyeOff size={14} />} Answer Key

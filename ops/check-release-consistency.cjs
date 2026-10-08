@@ -41,6 +41,8 @@ function evaluateReleaseConsistency({ canonicalCommit, canonicalBranch = CANONIC
       'backend-grade910-independent-review-results-rls-v1',
       'frontend-phase4-printer-neutral',
       'backend-phase4-fee-payment-modes',
+      'frontend-phase5-academic-review-workspace',
+      'backend-phase5-governed-academic-review',
     ].includes(meta.component) &&
       declaredReleaseVerifier(name, canonicalCommit, meta, frontendMeta, backendMeta)
     if (meta.commit !== canonicalCommit && !verifiedBackendForward && !verifiedFrontendForward && !verifiedDeclaredForward)
@@ -186,6 +188,8 @@ function verifyDeclaredRelease(name, base, meta, frontend, backend) {
     'backend-grade910-independent-review-results-rls-v1': ['BACKEND','release/grade910-review-final-candidate-20261008'],
     'frontend-phase4-printer-neutral': ['FRONTEND','fix/phase4-printer-fee-after-review-20261008'],
     'backend-phase4-fee-payment-modes': ['BACKEND','fix/phase4-printer-fee-after-review-20261008'],
+    'frontend-phase5-academic-review-workspace': ['FRONTEND','feat/phase5-academic-review-workspace-forward-20261008'],
+    'backend-phase5-governed-academic-review': ['BACKEND','feat/phase5-academic-review-workspace-forward-20261008'],
   }
   const expected=refs[meta.component]
   if (!expected || expected[0]!==name || expected[1]!==meta.branch ||
@@ -209,6 +213,42 @@ function verifyDeclaredRelease(name, base, meta, frontend, backend) {
       const delta=execFileSync('git',['-C',repoRoot,'diff','--name-only',prior,meta.commit,
         '--','al-siddique-frontend/src/'],{encoding:'utf8',timeout:12000}).trim()
       return !delta
+    }
+    if (['frontend-phase5-academic-review-workspace','backend-phase5-governed-academic-review'].includes(meta.component)) {
+      const previous='16ab8f346ba27aa6b2e29a8f03c68db32a326cb9'
+      if(frontend?.component!=='frontend-phase5-academic-review-workspace' ||
+         backend?.component!=='backend-phase5-governed-academic-review' ||
+         frontend?.commit!==backend?.commit ||
+         frontend?.branch!==backend?.branch ||
+         frontend?.previousRelease?.commit!==previous ||
+         backend?.previousRelease?.commit!==previous ||
+         frontend?.sourceBaseLiveCommit!==previous ||
+         backend?.sourceBaseLiveCommit!==previous ||
+         !gitAncestor(previous,meta.commit)) return false
+      const allowed=new Set([
+        'al-siddique-backend/src/routes/questionBankRoutes.js',
+        'al-siddique-backend/src/services/grade910AcademicReviewService.js',
+        'al-siddique-backend/src/services/grade910AcademicRevisionService.js',
+        'al-siddique-backend/src/services/questionBankGovernance.js',
+        'al-siddique-backend/src/tests/grade910-phase5-correction-http.test.js',
+        'al-siddique-backend/src/tests/grade910-phase5-intake-http.test.js',
+        'al-siddique-frontend/src/App.jsx',
+        'al-siddique-frontend/src/Modules/Paper-Generator/QuestionBank.jsx',
+        'al-siddique-frontend/src/Modules/Paper-Generator/AcademicReviewWorkspace.css',
+        'al-siddique-frontend/src/Modules/Paper-Generator/AcademicReviewWorkspace.jsx',
+        'al-siddique-frontend/src/Modules/Paper-Generator/academicReviewClient.js',
+        'al-siddique-frontend/src/Modules/Paper-Generator/tests/academicReviewClient.test.js',
+        'al-siddique-frontend/src/Modules/Paper-Generator/tests/academicReviewWorkspaceBrowserAcceptance.test.js',
+        'ops/check-release-consistency.cjs',
+        'ops/tests/release-consistency.test.js',
+        'ops/qbank/live-source-evidence-audit.cjs',
+        'ops/qbank/live-source-evidence-audit.test.cjs',
+        'docs/question-bank/ASSPS_GRADE910_LIVE_5023_SOURCE_AUDIT_20261008.md',
+        'docs/phase5/PHASE5_GRADE910_ACADEMIC_REVIEW_WORKSPACE_20261008.md',
+      ])
+      const changed=execFileSync('git',['-C',repoRoot,'diff','--name-only',previous,meta.commit],
+        {encoding:'utf8',timeout:12000}).trim().split('\n').filter(Boolean)
+      return changed.length>0 && changed.every(file=>allowed.has(file))
     }
     // Phase 4 is a paired promotion based on current separately verified
     // frontend and backend. It may not claim a backend-only exemption.

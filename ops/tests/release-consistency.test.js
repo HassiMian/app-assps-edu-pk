@@ -236,3 +236,32 @@ test('phase4 paired release requires a verified frontend and backend identity', 
     declaredReleaseVerifier:paired})
   assert.equal(wrong.safe,false)
 })
+
+test('Phase5 academic workspace paired release requires exact independent frontend and backend identities',()=>{
+  const prior='c'.repeat(40)
+  const target='d'.repeat(40)
+  const branch='feat/phase5-academic-review-workspace-forward-20261008'
+  const front={...meta,commit:target,branch,
+    component:'frontend-phase5-academic-review-workspace',
+    sourceBaseLiveCommit:prior,previousRelease:{commit:prior}}
+  const back={...meta,commit:target,branch,
+    component:'backend-phase5-governed-academic-review',
+    sourceBaseLiveCommit:prior,previousRelease:{commit:prior}}
+  const verifies=(name,_base,item,frontend,backend)=>
+    frontend.commit===backend.commit &&
+    frontend.sourceBaseLiveCommit===prior &&
+    backend.sourceBaseLiveCommit===prior &&
+    item.branch===branch &&
+    (name==='FRONTEND'?item.component===front.component:item.component===back.component)
+  const allowed=evaluateReleaseConsistency({canonicalCommit:commit,pm2Env:env,
+    frontendMeta:front,backendMeta:back,declaredReleaseVerifier:verifies})
+  assert.equal(allowed.safe,true,allowed.findings.join(','))
+  const missing=evaluateReleaseConsistency({canonicalCommit:commit,pm2Env:env,
+    frontendMeta:front,backendMeta:{...back,sourceBaseLiveCommit:'e'.repeat(40)},
+    declaredReleaseVerifier:verifies})
+  assert.equal(missing.safe,false)
+  assert.ok(missing.findings.some(x=>x.startsWith('BACKEND_COMMIT_DRIFT')))
+  const unverified=evaluateReleaseConsistency({canonicalCommit:commit,pm2Env:env,
+    frontendMeta:front,backendMeta:back,declaredReleaseVerifier:()=>false})
+  assert.equal(unverified.safe,false)
+})
