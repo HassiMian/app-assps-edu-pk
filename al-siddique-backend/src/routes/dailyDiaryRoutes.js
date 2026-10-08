@@ -45,6 +45,19 @@ function normalizeText(value, fallback = '') {
   return str || fallback
 }
 
+function normalizeDiaryDate(value) {
+  let text
+  if (value instanceof Date) {
+    if (!Number.isFinite(value.getTime())) return null
+    text = value.toISOString().slice(0, 10)
+  } else {
+    text = String(value ?? '').trim()
+  }
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(text)) return null
+  const calendarDate = new Date(`${text}T12:00:00Z`)
+  return !Number.isNaN(calendarDate.getTime()) && calendarDate.toISOString().slice(0, 10) === text ? text : null
+}
+
 function normalizePayload(body = {}) {
   const templateId = Number(body.template_id ?? body.templateId ?? 1) || 1
   const slipsPerPage = Number(body.slips_per_page ?? body.slipsPerPage ?? 8) || 8
@@ -59,13 +72,32 @@ function normalizePayload(body = {}) {
     logo_url: normalizeText(body.logo_url ?? body.logoUrl, ''),
     class_level: normalizeText(body.class_level ?? body.classLevel, ''),
     class_name: normalizeText(body.class_name ?? body.className, ''),
-    diary_date: normalizeText(body.diary_date ?? body.diaryDate, new Date().toISOString().slice(0, 10)),
+    diary_date: normalizeDiaryDate(body.diary_date ?? body.diaryDate ?? new Date()),
     slips_per_page: [2, 3, 4, 5, 6, 8, 10, 12, 14].includes(slipsPerPage) ? slipsPerPage : 4,
     footer_text: normalizeText(body.footer_text ?? body.footerText, ''),
     footer_is_urdu: footerIsUrdu,
     rows,
     style_settings: styleSettings,
   }
+}
+
+// A stored row uses snake_case. Browser edits may send camelCase; patch values
+// must take precedence over the old row (without discarding omitted fields).
+function mergeDiaryEdit(current, body = {}) {
+  const update = body && typeof body === 'object' && !Array.isArray(body) ? body : {}
+  const merged = { ...current, ...update }
+  const fields = [
+    ['template_id','templateId'], ['logo_url','logoUrl'], ['class_level','classLevel'],
+    ['class_name','className'], ['diary_date','diaryDate'], ['slips_per_page','slipsPerPage'],
+    ['footer_text','footerText'], ['footer_is_urdu','footerIsUrdu'],
+    ['style_settings','styleSettings'],
+  ]
+  for (const [column, alias] of fields) {
+    if (Object.prototype.hasOwnProperty.call(update, alias) && !Object.prototype.hasOwnProperty.call(update, column)) {
+      merged[column] = update[alias]
+    }
+  }
+  return merged
 }
 
 function mapDiaryRow(row) {
@@ -143,6 +175,7 @@ router.post('/', async (req, res) => {
     const schoolId = resolveDiarySchoolId(req)
     if (!schoolId) return res.status(400).json({ success: false, message: 'School context is required.' })
     const payload = normalizePayload(req.body || {})
+    if (!payload.diary_date) return res.status(422).json({ success:false, code:'DAILY_DIARY_DATE_INVALID', message:'A valid diary date is required.' })
     const canonicalSchoolName = await resolveDiarySchoolName(schoolId)
     if (!canonicalSchoolName) return res.status(422).json({ success: false, message: 'School identity is not configured for this diary.' })
     payload.school_name = canonicalSchoolName
@@ -207,7 +240,8 @@ router.put('/:id', async (req, res) => {
       return res.status(404).json({ success: false, message: 'Daily diary not found.' })
     }
 
-    const payload = normalizePayload({ ...current, ...(req.body || {}) })
+    const payload = normalizePayload(mergeDiaryEdit(current, req.body))
+    if (!payload.diary_date) return res.status(422).json({ success:false, code:'DAILY_DIARY_DATE_INVALID', message:'A valid diary date is required.' })
     const canonicalSchoolName = await resolveDiarySchoolName(Number(current.school_id))
     if (!canonicalSchoolName) return res.status(422).json({ success: false, message: 'School identity is not configured for this diary.' })
     payload.school_name = canonicalSchoolName

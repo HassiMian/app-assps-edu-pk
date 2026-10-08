@@ -51,6 +51,10 @@ function normalizePlan(body = {}) {
   const payload = JSON.parse(JSON.stringify(body || {}))
   for (const key of ['school_id','schoolId','revision','serverRevision','created_at','createdAt','updated_at','updatedAt']) delete payload[key]
   payload.id = id
+  // Only the revision-bound /:id/share action may publish a lesson.
+  // Never trust a client-supplied sentToPortal flag during draft creation/editing.
+  payload.sentToPortal = false
+  payload.sent_to_portal = false
   return {
     publicId: id,
     title: cleanText(body.title, 500),
@@ -64,7 +68,7 @@ function normalizePlan(body = {}) {
     endDate: cleanDate(body.endDate ?? body.end_date),
     period: cleanText(body.period, 64),
     duration: Number.isFinite(duration) && duration > 0 ? Math.min(Math.round(duration), 600) : 40,
-    sentToPortal: Boolean(body.sentToPortal ?? body.sent_to_portal),
+    sentToPortal: false,
     payload,
   }
 }
@@ -265,7 +269,7 @@ router.put('/:id', async (req, res) => {
           revision=revision+1,title=$1,subject=$2,class_level=$3,chapter=$4,teacher=$5,
           plan_date=$6::date,planning_scope=$7,plan_range_label=$8,end_date=$9::date,
           period=$10,duration=$11,sent_to_portal=$12,payload=$13::jsonb,updated_at=NOW()
-        WHERE school_id=$14 AND public_id=$15 AND revision=$16 AND ($17::boolean OR created_by=$18)
+        WHERE school_id=$14 AND public_id=$15 AND revision=$16 AND ($17::boolean OR created_by=$18) AND ($17::boolean OR sent_to_portal=false)
         RETURNING *
       `, [
         plan.title, plan.subject, plan.classLevel, plan.chapter, plan.teacher, plan.planDate,
@@ -274,8 +278,8 @@ router.put('/:id', async (req, res) => {
         isSchoolDocumentManager(req.user), Number(req.user?.id) || -1,
       ])
       if (result.rowCount) return { plan:mapRow(result.rows[0]) }
-      const current = await client.query('SELECT revision, school_id, created_by FROM lesson_plans WHERE school_id=$1 AND public_id=$2 LIMIT 1', [schoolId, id])
-      if (current.rows[0] && !canAccessAuthoredDocument(req.user, current.rows[0], schoolId)) return { missing:true }
+      const current = await client.query('SELECT revision, school_id, created_by, sent_to_portal FROM lesson_plans WHERE school_id=$1 AND public_id=$2 LIMIT 1', [schoolId, id])
+      if (current.rows[0] && (!canAccessAuthoredDocument(req.user, current.rows[0], schoolId) || (!isSchoolDocumentManager(req.user) && current.rows[0].sent_to_portal))) return { missing:true }
       return current.rowCount ? { conflict:true, currentRevision:Number(current.rows[0].revision) } : { missing:true }
     })
     if (data.missing) return res.status(404).json({ success:false, code:'LESSON_PLAN_NOT_FOUND', message:'Lesson plan not found.' })
@@ -296,10 +300,10 @@ router.delete('/:id', async (req, res) => {
     const revision = expectedRevision(req)
     if (!revision) return res.status(428).json({ success:false, code:'LESSON_PLAN_REVISION_REQUIRED', message:'Current lesson plan revision is required.' })
     const data = await withTenantTransaction(req, schoolId, async client => {
-      const result = await client.query('DELETE FROM lesson_plans WHERE school_id=$1 AND public_id=$2 AND revision=$3 AND ($4::boolean OR created_by=$5) RETURNING public_id', [schoolId, id, revision, isSchoolDocumentManager(req.user), Number(req.user?.id) || -1])
+      const result = await client.query('DELETE FROM lesson_plans WHERE school_id=$1 AND public_id=$2 AND revision=$3 AND ($4::boolean OR created_by=$5) AND ($4::boolean OR sent_to_portal=false) RETURNING public_id', [schoolId, id, revision, isSchoolDocumentManager(req.user), Number(req.user?.id) || -1])
       if (result.rowCount) return { deleted:true }
-      const current = await client.query('SELECT revision, school_id, created_by FROM lesson_plans WHERE school_id=$1 AND public_id=$2 LIMIT 1', [schoolId, id])
-      if (current.rows[0] && !canAccessAuthoredDocument(req.user, current.rows[0], schoolId)) return { missing:true }
+      const current = await client.query('SELECT revision, school_id, created_by, sent_to_portal FROM lesson_plans WHERE school_id=$1 AND public_id=$2 LIMIT 1', [schoolId, id])
+      if (current.rows[0] && (!canAccessAuthoredDocument(req.user, current.rows[0], schoolId) || (!isSchoolDocumentManager(req.user) && current.rows[0].sent_to_portal))) return { missing:true }
       return current.rowCount ? { conflict:true, currentRevision:Number(current.rows[0].revision) } : { missing:true }
     })
     if (data.missing) return res.status(404).json({ success:false, code:'LESSON_PLAN_NOT_FOUND', message:'Lesson plan not found.' })
@@ -328,6 +332,7 @@ router.post('/:id/share', async (req, res) => {
 
       const payload = row.payload && typeof row.payload === 'object' ? row.payload : {}
       payload.sentToPortal = true
+      payload.sent_to_portal = true
       const updated = (await client.query(`
         UPDATE lesson_plans SET sent_to_portal=true,payload=$1::jsonb,revision=revision+1,updated_at=NOW()
         WHERE school_id=$2 AND public_id=$3 AND revision=$4 RETURNING *
