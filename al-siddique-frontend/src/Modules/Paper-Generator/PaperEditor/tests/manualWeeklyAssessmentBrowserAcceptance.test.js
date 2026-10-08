@@ -70,6 +70,11 @@ test('Manual Weekly Assessment: no Question Bank -> canonical save -> finalize -
  await page.getByLabel('Selected question heading').fill('Q1. Answer briefly. (10)')
  await page.getByLabel('Selected question content').fill('What is photosynthesis?')
  await page.locator('[data-section-inspector] input[type="number"]').nth(1).fill('10')
+ const checking=page.locator('[data-checking-strip]')
+ await checking.waitFor({timeout:8000})
+ assert.match(await checking.textContent(),/Q1 \[ __\/10 \]/)
+ assert.match(await page.locator('[data-checking-total]').textContent(),/TOTAL \[ __\/10 \]/)
+ assert.equal(await checking.locator('[data-question-instance-id]').count(),1)
  await page.getByRole('button',{name:'Save Draft'}).click()
  await page.waitForFunction(()=>{
    const keys=Object.keys(localStorage).filter(k=>k.startsWith('al_siddique_paper_store'))
