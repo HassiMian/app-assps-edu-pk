@@ -1,0 +1,28 @@
+# ASSPS SaaS Core — Phase 11 PostgreSQL session cleanup and tenant-isolation gate
+**2026-10-08 UTC. Isolated development candidate only. PRODUCTION RELEASE HOLD.**
+
+## Source provenance, ownership, protection
+- Clean parent Phase10 `12089d21b6f5c61349ce165ebe9ec8180f6e9a73`. New isolated branch `feat/saas-core-phase11-session-reset-20261008` / worktree `/root/workspace/assps-core-phase11-db-session-reset-20261008`.
+- Latest checked deployed metadata: FRONTEND `24cbcae33b96f1bb058ad9b005f0eb8bfe5eac92`; BACKEND `16ab8f346ba27aa6b2e29a8f03c68db32a326cb9`. Health 200 at start. No live database, real school data, roles, credentials, PM2, SSH/firewall or Nginx modified, no deployment.
+- ARCHV1 current-live 26 dirty tracked paths preserved. Independent Paper Studio Phase9 `4bbfacc47ddfc1e26f39ea1b71866a4d4919b149` formatting persistence and Connect/Academic branches remain their own Masters' source; do not overwrite or deploy them from Core.
+
+## Newly closed security risk
+- Previous runtime `prepareRuntimeClient()` injected tenant identity via session settings and `SET ROLE`, but `resetRuntimeSession()` silently ignored **both** reset query failures, and `client.release()` unconditionally returned the client to the pool. Under an aborted PostgreSQL transaction, `set_config` and `RESET ROLE` fail, leaving an unsafe session potentially reusable. The effective-role failure path also released without passing the error to `pg-pool`.
+- New reset returns explicit boolean only when **both** GUC and role reset succeed, always tries both, and the lease calls original `release(error)` on either failure. `pg-pool` evicts contaminated connections instead of putting them back on idle list. When setup/effective-role validation throws, `connectForContext` now disposes the connection by passing the error to `release`. Normal successful reset preserves pooling/performance and idempotent single release.
+- The test-only helper access is exported **only when NODE_ENV=test**, not available in regular production module exports; no HTTP API or feature flag changed. Retained existing signed general-SaaS/independent Paper-role boundaries. This change does not itself prove all raw/privileged pool paths have been removed.
+
+## Executed tests, failures and limits
+- New test-only synthetic cleanup unit suite **4/4 PASS**: successful reset reusable, GUC reset failure => evict, RESET ROLE failure => evict, authorization-error release => evict. Prepatch harness was RED because the private helper was not yet test-exported, rather than a direct executable prepatch eviction assertion; original unsafe reset behavior was confirmed by source and live-clone condition.
+- Real PostgreSQL16 disposable signed-RLS clone **2/2 PASS**: (1) abort transaction by a synthetic PostgreSQL division error and verify failed cleanup evicts original `pg_backend_pid()`, leaves zero pool idle connections, then separate backend accesses only tenant B; (2) successful cleanup reuses same backend PID with newly signed tenant B and does not expose tenant A.
+- Combined signed Core Phase 7/8 + new real isolated DB suite **17/17 PASS** (includes the 2 above, not additive). Dedicated signed Paper/Assessment real HTTP (independent non-BYPASS Paper LOGIN) **5/5 PASS**. Prior unsigned-compatible/teacher role/lesson planning/G43/DOCX/math regression **35/35 PASS** with explicit Phase6 disposable DB and signed flags off. Targeted static/Paper login + new cleanup tests **12/12 PASS** (overlaps new 4). No production role/tenant data used.
+- Backend JS syntax check **253/253 PASS**; isolated frontend `npm ci --prefer-offline --no-audit --no-fund` **315 packages**, Vite build PASS **3.52s**, protected templates **6/6 unchanged**. Git whitespace verification PASS.
+- Attempted full frontend `npm run lint` / `eslint .`: **TIMEOUT** at command runner (~34 seconds) with no diagnostics emitted, process no longer running. **Not certified**, no claim of lint PASS.
+- Real DB test cluster: PostgreSQL16 loopback 127.0.0.1:55432, only disposable synthetic named databases, base PostgreSQL auth login `assps_core_test_login` NOBYPASS/NOSUPER, signed tenant/actor HMAC. Not a production migration or production backup restore. The work introduces **no new SQL migration or fixture data**.
+
+## Remaining release gates / accountable owners
+1. P0 production migration from privileged live login to managed non-BYPASS app login and distinct dedicated Paper role, deterministic signed tenant/actor provisioning, key vault/rotation, SQL policies across 77 FORCE-RLS tables and full restricted service/bootstrap/superadmin/tenant write matrix. Require clean credentials, grants and production-equivalent clone, rollback.
+2. All raw/direct pool and privileged flows across authentication/service, finance, attendance, student/parent, official papers, lesson plans and Connect must be inventoried and tested. The new cleanup only ensures role reset failure discards sessions on **this normal Core pool**.
+3. Shared Paper Studio Phase9 canonical rich heading formatting / server revision contract and full authenticated official-paper browser/print/PDF/DOCX must be integrated on exact descendant after Core review; physical printer remains unverified. Academic Grade IX/X remains zero independently human-approved/published; do not seed drafts.
+4. Connect full auth/source provenance and private uploads; Hostinger external ingress and cloud firewall, SSH rescue, full lint, repeatable front/back artifact SHAs, production DB recovery/rollback, migration dry run, pre-prod browser acceptance all remain HOLD.
+
+**Decision: TESTED, ISOLATED, NOT DEPLOYED.** No production certification or promotion is authorized.

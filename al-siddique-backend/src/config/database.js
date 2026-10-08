@@ -202,14 +202,19 @@ async function connectRestrictedPaper() {
 
 
 async function resetRuntimeSession(client) {
+  // Never return a connection to the shared pool after a failed role/context
+  // reset: a PostgreSQL transaction error can leave the session poisoned or
+  // carrying the previous tenant's role. Callers must discard it on failure.
+  let clean = true
   try {
     await client.query(
       "SELECT set_config('app.rls_enabled', 'false', false), set_config('app.is_super_admin', 'false', false), set_config('app.tenant_id', '', false), set_config('app.tenant_key', '', false)"
     )
-  } catch (_) {}
+  } catch (_) { clean = false }
   try {
     await client.query('RESET ROLE')
-  } catch (_) {}
+  } catch (_) { clean = false }
+  return clean
 }
 
 async function prepareRuntimeClient(client) {
@@ -224,6 +229,8 @@ async function prepareRuntimeClient(client) {
       [context.isSuperAdmin ? 'true' : 'false', context.tenantId, context.tenantKey]
     )
   } catch (error) {
+    // connectForContext will release(error), forcing node-postgres to dispose
+    // the client if any privilege setup/verification operation failed.
     await resetRuntimeSession(client)
     throw error
   }
@@ -233,7 +240,13 @@ async function prepareRuntimeClient(client) {
   client.release = async (releaseError) => {
     if (released) return
     released = true
-    await resetRuntimeSession(client)
+    const clean = await resetRuntimeSession(client)
+    if (!clean && !releaseError) {
+      releaseError = new Error('Runtime database role or tenant session reset failed')
+      releaseError.code = 'DB_RUNTIME_SESSION_RESET_FAILED'
+    }
+    // pg-pool accepts release(error) to evict a potentially contaminated
+    // session instead of placing it on the reusable idle connection list.
     releaseRaw(releaseError)
   }
   return client
@@ -278,7 +291,9 @@ async function connectForContext() {
     }
     return prepared
   } catch (error) {
-    await client.release()
+    // Setup or effective-role verification failed. Never reuse this client,
+    // even if its cleanup query happens to succeed.
+    await client.release(error)
     throw error
   }
 }
@@ -407,4 +422,5 @@ module.exports = {
   normalizedRuntimeContext,
   rejectUnscopedProtectedSql,
   isRestrictedPaperRequest,
+  ...(process.env.NODE_ENV === 'test' ? { __test: { prepareRuntimeClient, resetRuntimeSession } } : {}),
 }
