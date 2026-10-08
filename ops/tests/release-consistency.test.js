@@ -150,3 +150,34 @@ test('independent concurrent backend and frontend forwards preserve shared canon
   assert.equal(reverse.safe,false)
   assert.ok(reverse.findings.some(f=>f.startsWith('FRONTEND_COMMIT_DRIFT:')))
 })
+
+test('sequential frontend-only promotions retain their previous live release identity', () => {
+  const priorLiveFrontend='d'.repeat(40)
+  const nextFrontend={
+    ...meta, commit:'e'.repeat(40),branch:'feat/paper-phase3-teacher-delivery-20261008',
+    component:'frontend-paper-studio-ux-hardening',
+    previousRelease:{commit:priorLiveFrontend},
+    sourceBaseLiveCommit:'b'.repeat(40),
+  }
+  const backend={
+    ...meta, commit:'b'.repeat(40),branch:'fix/paper-grade910-qbank-safe-intake-20261008',
+    component:'backend-question-bank-seed-intake-safety',
+    sourceBaseLiveCommit:commit,previousRelease:{commit},
+  }
+  const accepted=evaluateReleaseConsistency({
+    canonicalCommit:commit,frontendMeta:nextFrontend,backendMeta:backend,pm2Env:env,
+    backendForwardVerifier:()=>true,
+    frontendForwardVerifier:(base,head,branch,item,backendHead)=>
+      base===commit && head===nextFrontend.commit && branch===nextFrontend.branch &&
+      item.previousRelease.commit===priorLiveFrontend && item.sourceBaseLiveCommit===backendHead,
+  })
+  assert.equal(accepted.safe,true)
+  const rejected=evaluateReleaseConsistency({
+    canonicalCommit:commit,frontendMeta:{...nextFrontend,sourceBaseLiveCommit:commit},
+    backendMeta:backend,pm2Env:env,
+    backendForwardVerifier:()=>true,
+    frontendForwardVerifier:(_base,_head,_branch,item,backendHead)=>item.sourceBaseLiveCommit===backendHead,
+  })
+  assert.equal(rejected.safe,false)
+  assert.ok(rejected.findings.some(item=>item.startsWith('FRONTEND_COMMIT_DRIFT:')))
+})

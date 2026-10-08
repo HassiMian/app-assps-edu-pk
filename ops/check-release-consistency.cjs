@@ -131,8 +131,13 @@ function verifyFrontendForward(base, head, branch, meta = {}, backendHead = base
   if (![base, head, backendHead, meta.sourceBaseLiveCommit, meta.previousRelease?.commit]
     .every(value => /^[0-9a-f]{40}$/i.test(String(value || '')))) return false
   if (!/^(feat|fix|release)\/[a-z0-9][a-z0-9._/-]{4,120}$/i.test(String(branch || ''))) return false
-  if (meta.sourceBaseLiveCommit !== backendHead || meta.previousRelease.commit !== base) return false
-  if (!gitAncestor(base, backendHead) || !gitAncestor(backendHead, head)) return false
+  if (meta.sourceBaseLiveCommit !== backendHead) return false
+  // A subsequent frontend-only deployment legitimately follows the previous
+  // live frontend, not necessarily the older canonical branch tip. Require
+  // both the backend component and previous frontend to be verified ancestors.
+  if (!gitAncestor(base, backendHead) || !gitAncestor(backendHead, head) ||
+      !gitAncestor(base, meta.previousRelease.commit) ||
+      !gitAncestor(meta.previousRelease.commit, head)) return false
   try {
     const remote = execFileSync('git', ['-C', repoRoot, 'ls-remote', 'origin', 'refs/heads/' + branch],
       { encoding:'utf8', timeout:12000 }).trim().split(/\s+/)[0]

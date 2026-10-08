@@ -656,8 +656,10 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
     })
     if (recovered) onPaperChange(current => ({ ...current, serverRevision:recovered.serverRevision, serverContentHash:recovered.serverContentHash, persistenceAuthority:recovered.persistenceAuthority, persistenceMode:recovered.persistenceMode }))
    }
-   if (result.flushed) setPersistenceNotice(`Recovered ${result.flushed} queued save${result.flushed===1?'':'s'} to server.`)
+   if (result.scopeChanged) setPersistenceNotice('Account changed during sync. Offline drafts were kept for their original account.')
    else if (result.conflicts) setPersistenceNotice('Queued save needs conflict resolution before server sync.')
+   else if (result.authRequired) setPersistenceNotice('Some offline drafts belong to another staff account. Sign in with that account to sync them.')
+   else if (result.flushed) setPersistenceNotice(`Recovered ${result.flushed} queued save${result.flushed===1?'':'s'} to server.`)
   }).catch(() => {})
   retry()
   window.addEventListener('online', retry)
