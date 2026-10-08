@@ -5,6 +5,8 @@ const router = express.Router()
 const { pool } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
+const { loadPlanningContext } = require('../services/lessonPlanningContext')
+const { buildDeterministicPlan, enhancePlanWithAi, parseSmartPlanningText } = require('../services/lessonPlanningEngine')
 
 const canManageLessonPlans = requireRoles('super_admin', 'admin', 'school_admin', 'principal', 'teacher')
 
@@ -126,6 +128,63 @@ function expectedRevision(req) {
 }
 
 router.use(protect, canManageLessonPlans)
+
+router.get('/planner/context', async (req, res) => {
+  try {
+    const schoolId = resolveSchoolId(req)
+    if (!schoolId) return res.status(400).json({ success:false, message:'School context is required.' })
+    const subjects = String(req.query.subjects || '').split(',').map(value => cleanText(value,160)).filter(Boolean)
+    const data = await withTenantTransaction(req, schoolId, client => loadPlanningContext(client, schoolId, {
+      classLevel: cleanText(req.query.classLevel || req.query.class || '',100),
+      section: cleanText(req.query.section || '',80),
+      subjects,
+    }))
+    return res.json({ success:true, data })
+  } catch (error) {
+    const status = Number(error.status || 500)
+    if (status >= 500 && error.code !== 'LESSON_PLAN_SCHEMA_NOT_READY') console.error('Lesson planning context error:', error)
+    return res.status(status).json({ success:false, code:error.code || 'LESSON_PLANNING_CONTEXT_FAILED', message:status >= 500 ? 'Lesson planning context could not be loaded.' : error.message })
+  }
+})
+
+router.post('/planner/parse', async (req, res) => {
+  try {
+    const text = String(req.body?.text || '')
+    if (!text.trim()) return res.status(422).json({ success:false, code:'LESSON_PLAN_TEXT_REQUIRED', message:'Paste lesson-planning text first.' })
+    if (text.length > 60000) return res.status(413).json({ success:false, code:'LESSON_PLAN_TEXT_TOO_LARGE', message:'Pasted planning text is too large.' })
+    const knownSubjects = Array.isArray(req.body?.knownSubjects) ? req.body.knownSubjects.slice(0,40) : []
+    return res.json({ success:true, data:parseSmartPlanningText(text, knownSubjects) })
+  } catch (error) {
+    console.error('Lesson planning parser error:', error)
+    return res.status(500).json({ success:false, code:'LESSON_PLAN_PARSE_FAILED', message:'Planning text could not be arranged.' })
+  }
+})
+
+router.post('/planner/generate', async (req, res) => {
+  try {
+    const schoolId = resolveSchoolId(req)
+    if (!schoolId) return res.status(400).json({ success:false, message:'School context is required.' })
+    const input = req.body && typeof req.body === 'object' ? req.body : {}
+    const classLevel = cleanText(input.classLevel || input.class_level || '',100)
+    const section = cleanText(input.section || '',80)
+    const startDate = cleanDate(input.startDate || input.date)
+    const endDate = cleanDate(input.endDate || input.date || input.startDate)
+    if (!classLevel) return res.status(422).json({ success:false, code:'LESSON_PLAN_CLASS_REQUIRED', message:'Class is required.' })
+    if (!startDate || !endDate || endDate < startDate) return res.status(422).json({ success:false, code:'LESSON_PLAN_DATE_RANGE_INVALID', message:'A valid planning date range is required.' })
+    const subjects = Array.isArray(input.subjects) ? input.subjects.slice(0,20).map(value => cleanText(value,160)).filter(Boolean) : []
+    const context = await withTenantTransaction(req, schoolId, client => loadPlanningContext(client, schoolId, { classLevel, section, subjects }))
+    const deterministic = buildDeterministicPlan({ ...input, classLevel, section, startDate, endDate, subjects }, context)
+    const aiRequested = input.useAi !== false
+    const result = aiRequested
+      ? await enhancePlanWithAi(deterministic, context, { preferredModel: cleanText(input.preferredModel,120) || undefined })
+      : { plan:deterministic, ai:{ configured:false, used:false, message:'AI enhancement disabled for this generation.' } }
+    return res.json({ success:true, data:result.plan, analysis:result.plan.analysis, ai:result.ai, context:{ availableSubjects:context.availableSubjects, warnings:context.warnings } })
+  } catch (error) {
+    const status = Number(error.status || 500)
+    if (status >= 500 && error.code !== 'LESSON_PLAN_SCHEMA_NOT_READY') console.error('Cognitive lesson plan generation error:', error)
+    return res.status(status).json({ success:false, code:error.code || 'LESSON_PLAN_GENERATION_FAILED', message:status >= 500 ? 'Lesson plan could not be generated.' : error.message })
+  }
+})
 
 router.get('/', async (req, res) => {
   try {
