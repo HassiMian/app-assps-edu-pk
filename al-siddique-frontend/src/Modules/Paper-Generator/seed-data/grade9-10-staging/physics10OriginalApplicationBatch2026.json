@@ -1,0 +1,2660 @@
+{
+  "schemaVersion": "assps-physics10-original-application-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-024",
+  "sourcePdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+  "sourceEvidenceLimit": "Only current official textbook identity, chapter titles, and TOC PDF pages are verified. No exercise pages, chapter subtopics, annual-paper occurrences, or academic approval asserted.",
+  "drafts": [
+    {
+      "id": "X-PHY-C10-M03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C10",
+        "number": 10
+      },
+      "topicId": "thermal physics independent application",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Thermal Physics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "A metal sample of mass 0.50 kg absorbs 1000 J and warms by 5 K. What is its specific heat capacity?",
+          "options": [
+            {
+              "id": "A",
+              "text": "100 J kg⁻¹ K⁻¹"
+            },
+            {
+              "id": "B",
+              "text": "200 J kg⁻¹ K⁻¹"
+            },
+            {
+              "id": "C",
+              "text": "400 J kg⁻¹ K⁻¹"
+            },
+            {
+              "id": "D",
+              "text": "2500 J kg⁻¹ K⁻¹"
+            }
+          ],
+          "answer": "400 J kg⁻¹ K⁻¹"
+        }
+      },
+      "correctOptionId": "C"
+    },
+    {
+      "id": "X-PHY-C10-S03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C10",
+        "number": 10
+      },
+      "topicId": "thermal physics independent application",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Thermal Physics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "What does thermal equilibrium mean for two objects in contact?",
+          "answer": "They have the same temperature, so there is no net heat transfer between them."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C10-L03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C10",
+        "number": 10
+      },
+      "topicId": "thermal physics independent application",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Thermal Physics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "A 0.20 kg water sample loses 8400 J as it cools by 10 K. A 0.50 kg metal sample gains the same energy while warming by 40 K. Calculate the specific heat capacity of each and state one assumption.",
+          "answer": "Water: c = Q/(mΔT) = 8400/(0.20×10) = 4200 J kg⁻¹ K⁻¹ (2 marks). Metal: c = 8400/(0.50×40) = 420 J kg⁻¹ K⁻¹ (2 marks). Assumption: heat lost by water equals heat gained by metal, with negligible losses to surroundings (1 mark)."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C11-M03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C11",
+        "number": 11
+      },
+      "topicId": "transfer of thermal energy independent application",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Transfer of Thermal Energy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "Which surface most effectively reduces thermal radiation from a hot container?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Dull black surface"
+            },
+            {
+              "id": "B",
+              "text": "Shiny silver surface"
+            },
+            {
+              "id": "C",
+              "text": "Rough dark surface"
+            },
+            {
+              "id": "D",
+              "text": "Matte painted surface"
+            }
+          ],
+          "answer": "Shiny silver surface"
+        }
+      },
+      "correctOptionId": "B"
+    },
+    {
+      "id": "X-PHY-C11-S03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C11",
+        "number": 11
+      },
+      "topicId": "transfer of thermal energy independent application",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Transfer of Thermal Energy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "Why is convection important when warming the air in a room?",
+          "answer": "Warmer air becomes less dense and rises; cooler air moves in to replace it, creating circulation that distributes energy."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C11-L03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C11",
+        "number": 11
+      },
+      "topicId": "transfer of thermal energy independent application",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Transfer of Thermal Energy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "Explain four design features of a vacuum flask and how each slows energy transfer.",
+          "answer": "Vacuum between walls greatly reduces conduction and convection (2 marks). Reflective surfaces reduce radiation (1 mark). Insulating stopper reduces conduction and convection at the opening (1 mark). Narrow neck or insulating supports reduce conduction and air exchange (1 mark)."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C12-M03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C12",
+        "number": 12
+      },
+      "topicId": "waves independent application",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Waves"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "What is the period of a wave with frequency 5 Hz?",
+          "options": [
+            {
+              "id": "A",
+              "text": "0.2 s"
+            },
+            {
+              "id": "B",
+              "text": "2 s"
+            },
+            {
+              "id": "C",
+              "text": "5 s"
+            },
+            {
+              "id": "D",
+              "text": "25 s"
+            }
+          ],
+          "answer": "0.2 s"
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C12-S03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C12",
+        "number": 12
+      },
+      "topicId": "waves independent application",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Waves"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "Distinguish wave amplitude from wavelength.",
+          "answer": "Amplitude is the maximum displacement from equilibrium; wavelength is the distance between successive points in phase, such as crests."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C12-L03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C12",
+        "number": 12
+      },
+      "topicId": "waves independent application",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Waves"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "Six complete wave cycles pass a fixed point every second. The distance between adjacent crests is 0.50 m. Find frequency, period and speed, and explain what changes if wavelength increases while frequency stays fixed.",
+          "answer": "Frequency = 6 Hz (1 mark). Period = 1/6 s ≈ 0.167 s (1 mark). Speed = fλ = 6×0.50 = 3.0 m/s (2 marks). At fixed frequency, greater wavelength means greater speed (1 mark)."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C13-M03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C13",
+        "number": 13
+      },
+      "topicId": "sound independent application",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Sound"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "Why can astronauts not speak directly to one another through empty space without a communication device?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Sound requires a material medium"
+            },
+            {
+              "id": "B",
+              "text": "Sound always travels too slowly"
+            },
+            {
+              "id": "C",
+              "text": "Sound is an electromagnetic wave"
+            },
+            {
+              "id": "D",
+              "text": "Space makes all sounds ultrasonic"
+            }
+          ],
+          "answer": "Sound requires a material medium"
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C13-S03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C13",
+        "number": 13
+      },
+      "topicId": "sound independent application",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Sound"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "Explain why the same musical note can sound different when played by a flute and a violin.",
+          "answer": "Their waveforms contain different mixtures and strengths of overtones, producing different timbre even when the fundamental frequency is the same."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C13-L03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C13",
+        "number": 13
+      },
+      "topicId": "sound independent application",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Sound"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "A sound pulse travels through water at 1500 m/s and returns as an echo after 0.80 s. Calculate the distance to the reflecting surface and explain why the travel time is halved.",
+          "answer": "The pulse travels to the reflector and back (1 mark). One-way time = 0.80/2 = 0.40 s (1 mark). Distance = speed × one-way time = 1500×0.40 = 600 m (2 marks). Include correct unit and distinguish one-way distance from total path (1 mark)."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C14-M03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C14",
+        "number": 14
+      },
+      "topicId": "light independent application",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Light"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "A small object is placed closer to a converging lens than its focal length. The image is usually?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Real, inverted and smaller"
+            },
+            {
+              "id": "B",
+              "text": "Real, inverted and larger"
+            },
+            {
+              "id": "C",
+              "text": "Virtual, upright and magnified"
+            },
+            {
+              "id": "D",
+              "text": "Virtual, inverted and smaller"
+            }
+          ],
+          "answer": "Virtual, upright and magnified"
+        }
+      },
+      "correctOptionId": "C"
+    },
+    {
+      "id": "X-PHY-C14-S03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C14",
+        "number": 14
+      },
+      "topicId": "light independent application",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Light"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "Why does a straight pencil partly immersed in water appear bent at the surface?",
+          "answer": "Light from the submerged part refracts when it crosses from water into air; the eye traces refracted rays backward to an apparent displaced position."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C14-L03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C14",
+        "number": 14
+      },
+      "topicId": "light independent application",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Light"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "Light enters glass from air. Its speed falls from 3.0×10⁸ m/s to 2.0×10⁸ m/s. Find the refractive index of glass and explain what happens to frequency and wavelength.",
+          "answer": "n = c/v = (3.0×10⁸)/(2.0×10⁸) = 1.5 (2 marks). Frequency stays constant at the boundary (1 mark). Wavelength decreases because v=fλ (1 mark). Light bends toward the normal for oblique incidence into this optically denser medium (1 mark)."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C15-M03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C15",
+        "number": 15
+      },
+      "topicId": "electrostatics independent application",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electrostatics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "If the separation between two fixed point charges is doubled, their electrostatic force becomes?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Twice as large"
+            },
+            {
+              "id": "B",
+              "text": "Four times as large"
+            },
+            {
+              "id": "C",
+              "text": "One half as large"
+            },
+            {
+              "id": "D",
+              "text": "One quarter as large"
+            }
+          ],
+          "answer": "One quarter as large"
+        }
+      },
+      "correctOptionId": "D"
+    },
+    {
+      "id": "X-PHY-C15-S03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C15",
+        "number": 15
+      },
+      "topicId": "electrostatics independent application",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electrostatics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "What information can the divergence of an electroscope leaf provide?",
+          "answer": "It indicates that the electroscope is charged; a larger divergence generally indicates greater charging under comparable conditions, but not charge sign by itself."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C15-L03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C15",
+        "number": 15
+      },
+      "topicId": "electrostatics independent application",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electrostatics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "Describe how an electric field-line diagram represents direction and strength around a positive and a negative charge.",
+          "answer": "Lines point away from positive charges and toward negative charges (2 marks). The tangent indicates the force direction on a positive test charge (1 mark). Closer spacing represents a stronger field (1 mark). Field lines never cross because the field has one direction at a point (1 mark)."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C16-M03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C16",
+        "number": 16
+      },
+      "topicId": "electricity independent application",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electricity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "Two resistors of 6 Ω and 3 Ω are connected in parallel. Their equivalent resistance is?",
+          "options": [
+            {
+              "id": "A",
+              "text": "2 Ω"
+            },
+            {
+              "id": "B",
+              "text": "3 Ω"
+            },
+            {
+              "id": "C",
+              "text": "9 Ω"
+            },
+            {
+              "id": "D",
+              "text": "18 Ω"
+            }
+          ],
+          "answer": "2 Ω"
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C16-S03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C16",
+        "number": 16
+      },
+      "topicId": "electricity independent application",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electricity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "Why is a fuse placed in series with the appliance it protects?",
+          "answer": "It carries the appliance current and opens the circuit when excessive current heats its element, helping prevent overheating."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C16-L03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C16",
+        "number": 16
+      },
+      "topicId": "electricity independent application",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electricity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "A 9 V source is connected across a 3 Ω resistor. Calculate the current, power and electrical energy transferred in 10 s.",
+          "answer": "I = V/R = 9/3 = 3 A (2 marks). P = VI = 9×3 = 27 W (1 mark). E = Pt = 27×10 = 270 J (2 marks)."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C17-M03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C17",
+        "number": 17
+      },
+      "topicId": "electromagnetism independent application",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electromagnetism"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "What is the main purpose of the split-ring commutator in a simple d.c. motor?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Store electric charge"
+            },
+            {
+              "id": "B",
+              "text": "Reverse coil current every half-turn"
+            },
+            {
+              "id": "C",
+              "text": "Increase supply voltage"
+            },
+            {
+              "id": "D",
+              "text": "Eliminate the magnetic field"
+            }
+          ],
+          "answer": "Reverse coil current every half-turn"
+        }
+      },
+      "correctOptionId": "B"
+    },
+    {
+      "id": "X-PHY-C17-S03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C17",
+        "number": 17
+      },
+      "topicId": "electromagnetism independent application",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electromagnetism"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "What happens to the magnetic-field direction around a straight wire when the current reverses?",
+          "answer": "The circular magnetic field reverses direction, as indicated by the right-hand grip rule."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C17-L03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C17",
+        "number": 17
+      },
+      "topicId": "electromagnetism independent application",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electromagnetism"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "Compare a permanent magnet and an electromagnet in five meaningful ways.",
+          "answer": "Award one mark each for five accurate comparisons: field without current versus field requiring current; fixed versus switchable field; generally less adjustable versus current-controlled strength; pole reversal requires physically reversing the magnet versus reversing current; typical examples such as a compass magnet versus a relay or lifting electromagnet."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C18-M03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C18",
+        "number": 18
+      },
+      "topicId": "electromagnetic induction and electromagnetic waves independent application",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electromagnetic Induction and Electromagnetic Waves"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "In a vacuum, which statement about radio waves and visible light is correct?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Radio waves travel slower"
+            },
+            {
+              "id": "B",
+              "text": "Both travel at the same speed"
+            },
+            {
+              "id": "C",
+              "text": "Visible light needs a medium"
+            },
+            {
+              "id": "D",
+              "text": "Only radio waves carry energy"
+            }
+          ],
+          "answer": "Both travel at the same speed"
+        }
+      },
+      "correctOptionId": "B"
+    },
+    {
+      "id": "X-PHY-C18-S03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C18",
+        "number": 18
+      },
+      "topicId": "electromagnetic induction and electromagnetic waves independent application",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electromagnetic Induction and Electromagnetic Waves"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "Why does a conventional transformer require a changing current rather than steady direct current?",
+          "answer": "A changing primary current produces changing magnetic flux, which induces an emf in the secondary; steady current gives no sustained induced emf."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C18-L03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C18",
+        "number": 18
+      },
+      "topicId": "electromagnetic induction and electromagnetic waves independent application",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electromagnetic Induction and Electromagnetic Waves"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "Compare radio waves with visible light as electromagnetic waves, using propagation, frequency, wavelength, and energy.",
+          "answer": "Both are transverse electromagnetic waves that propagate in vacuum (1 mark) at approximately 3.0×10⁸ m/s (1 mark). Radio waves have lower frequency (1 mark), longer wavelength (1 mark), and lower photon energy E=hf than visible light (1 mark)."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C19-M03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C19",
+        "number": 19
+      },
+      "topicId": "electronics independent application",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electronics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "A NOT logic gate receives input 0. What is its output?",
+          "options": [
+            {
+              "id": "A",
+              "text": "0"
+            },
+            {
+              "id": "B",
+              "text": "1"
+            },
+            {
+              "id": "C",
+              "text": "Both 0 and 1"
+            },
+            {
+              "id": "D",
+              "text": "Undefined for binary input"
+            }
+          ],
+          "answer": "1"
+        }
+      },
+      "correctOptionId": "B"
+    },
+    {
+      "id": "X-PHY-C19-S03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C19",
+        "number": 19
+      },
+      "topicId": "electronics independent application",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electronics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "What is one important difference between an analogue signal and a digital signal?",
+          "answer": "An analogue signal varies continuously over a range; a digital signal represents information using discrete levels, commonly binary 0 and 1."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C19-L03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C19",
+        "number": 19
+      },
+      "topicId": "electronics independent application",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electronics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "Explain why digital signals are useful for storing and communicating information, and identify one limitation.",
+          "answer": "Discrete levels can be detected reliably in the presence of moderate noise (1 mark). Data can be copied and checked for errors (1 mark). Binary logic enables storage and processing (1 mark). Analogue input generally needs sampling and conversion (1 mark). Finite sampling or resolution can lose detail if poorly chosen (1 mark)."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C20-M03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C20",
+        "number": 20
+      },
+      "topicId": "atomic and nuclear physics independent application",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Atomic and Nuclear Physics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "An atom has 17 protons and 18 neutrons. Its mass number is?",
+          "options": [
+            {
+              "id": "A",
+              "text": "17"
+            },
+            {
+              "id": "B",
+              "text": "18"
+            },
+            {
+              "id": "C",
+              "text": "35"
+            },
+            {
+              "id": "D",
+              "text": "1"
+            }
+          ],
+          "answer": "35"
+        }
+      },
+      "correctOptionId": "C"
+    },
+    {
+      "id": "X-PHY-C20-S03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C20",
+        "number": 20
+      },
+      "topicId": "atomic and nuclear physics independent application",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Atomic and Nuclear Physics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "Distinguish atomic number from mass number.",
+          "answer": "Atomic number is the number of protons; mass number is the total number of protons and neutrons in the nucleus."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C20-L03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C20",
+        "number": 20
+      },
+      "topicId": "atomic and nuclear physics independent application",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Atomic and Nuclear Physics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "A hypothetical sample has 160 undecayed nuclei and a half-life of 4 days. How many undecayed nuclei are expected after 8 days and after 16 days? Show the method.",
+          "answer": "After 8 days, two half-lives have passed (1 mark): 160→80→40 nuclei (1 mark). After 16 days, four half-lives have passed (1 mark): 160→80→40→20→10 nuclei (1 mark). State that these are expected statistical values for radioactive decay (1 mark)."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C21-M03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C21",
+        "number": 21
+      },
+      "topicId": "space and environment independent application",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Space and Environment"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "A geostationary satellite appears fixed above one region mainly because its orbital period?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Matches Earth’s rotation"
+            },
+            {
+              "id": "B",
+              "text": "Is shorter than one hour"
+            },
+            {
+              "id": "C",
+              "text": "Matches the Moon’s orbit"
+            },
+            {
+              "id": "D",
+              "text": "Changes every day"
+            }
+          ],
+          "answer": "Matches Earth’s rotation"
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C21-S03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C21",
+        "number": 21
+      },
+      "topicId": "space and environment independent application",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Space and Environment"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "What is the difference between a meteor and a meteorite?",
+          "answer": "A meteor is the streak of light produced when a meteoroid enters the atmosphere; a meteorite is material that survives and reaches the ground."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C21-L03",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C21",
+        "number": 21
+      },
+      "topicId": "space and environment independent application",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_ONLY_NOT_QUESTION_PAGE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Space and Environment"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Independent original Grade X Physics practice draft. Only chapter identity and TOC location are verified; topic-page and exam appearance are not claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-PHYSICS10-ORIGINAL-20261008",
+      "difficultyRationale": "Chapter-level original application; requires academic and source-page review.",
+      "content": {
+        "en": {
+          "stem": "Explain the natural greenhouse effect and distinguish it from enhanced warming due to human activity. Give two broad mitigation measures.",
+          "answer": "Sunlight warms Earth’s surface (1 mark). The surface emits infrared radiation, some of which greenhouse gases absorb and re-emit (1 mark). The natural effect keeps Earth warmer than it would otherwise be (1 mark). Increased greenhouse-gas concentrations strengthen the effect (1 mark). Credit two measures together for one mark, e.g., cleaner energy and improved energy efficiency."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 36,
+    "chapters": 12,
+    "mcq": 12,
+    "short": 12,
+    "long": 12,
+    "approved": 0
+  }
+}
