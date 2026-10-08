@@ -1,3 +1,5 @@
+'use strict'
+const { paperRestrictedDatabase } = require('../middleware/paperRestrictedDatabase')
 // src/routes/questionBankRoutes.js
 // Al Siddique Smart School OS - Question Bank API
 
@@ -15,6 +17,7 @@ const canUseQuestionBank = requireRoles('super_admin', 'admin', 'principal', 'te
 const canManageQuestionBank = requireRoles('super_admin', 'admin', 'principal')
 
 router.use(protect, canUseQuestionBank)
+router.use(paperRestrictedDatabase)
 
 function requireSchoolContext(req, res) {
   const schoolId = currentSchoolId(req)

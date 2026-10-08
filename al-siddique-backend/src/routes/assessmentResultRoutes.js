@@ -1,3 +1,5 @@
+'use strict'
+const { paperRestrictedDatabase } = require('../middleware/paperRestrictedDatabase')
 const express = require('express')
 const router = express.Router()
 const { query } = require('../config/database')
@@ -42,6 +44,7 @@ async function teacherCanAccessRelease(req, schoolId, releaseId) {
 }
 
 router.use(protect, canEnterResults)
+router.use(paperRestrictedDatabase)
 
 router.post('/', async (req,res)=>{
   try{

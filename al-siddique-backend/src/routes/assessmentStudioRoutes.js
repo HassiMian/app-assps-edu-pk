@@ -1,3 +1,5 @@
+'use strict'
+const { paperRestrictedDatabase } = require('../middleware/paperRestrictedDatabase')
 const crypto = require('crypto')
 const express = require('express')
 const router = express.Router()
@@ -75,6 +77,7 @@ async function withTenantTransaction(req, schoolId, fn) {
 }
 
 router.use(protect, canAuthorAssessments)
+router.use(paperRestrictedDatabase)
 
 router.get('/papers', async (req, res) => {
   try {

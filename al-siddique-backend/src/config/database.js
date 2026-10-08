@@ -4,6 +4,7 @@
 require('dotenv').config({ path: __dirname + '/../.env' })
 const { Pool } = require('pg')
 const { AsyncLocalStorage } = require('async_hooks')
+const crypto = require('node:crypto')
 const { applySignedTenantContext } = require('../services/security/coreSignedTenantContext')
 const signedTenantGate=process.env.DB_SIGNED_TENANT_RLS_ENABLED==='true'
 if(signedTenantGate && (process.env.DB_ENFORCE_LEAST_PRIVILEGE_LOGIN!=='true' || process.env.DB_AUTH_USE_SIGNED_TENANT_CONTEXT!=='true' || String(process.env.DB_SIGNED_TENANT_HMAC_KEY||'').length<32)) {
@@ -72,6 +73,134 @@ function normalizedRuntimeContext(context = tenantContext.getStore()) {
   }
 }
 
+// Separate database LOGIN: unlike SET ROLE from a BYPASSRLS login, this
+// connection cannot escape RLS by RESET ROLE. Feature-gated per request and
+// deliberately not used by fees, attendance, authentication, or other SaaS.
+const paperRestrictedMode = process.env.PAPER_RESTRICTED_DB_ENABLED === 'true'
+if (paperRestrictedMode && (
+    process.env.DB_ENFORCE_LEAST_PRIVILEGE_LOGIN !== 'true' ||
+    process.env.DB_AUTH_USE_SIGNED_TENANT_CONTEXT !== 'true' ||
+    !signedTenantGate)) {
+  const err = new Error('PAPER_RESTRICTED_CORE_SIGNED_DEPENDENCIES_REQUIRED: independent Paper login requires signed non-BYPASS SaaS authentication')
+  err.code = 'PAPER_RESTRICTED_CORE_SIGNED_DEPENDENCIES_REQUIRED'
+  throw err
+}
+const paperRestrictedRole = 'apex_paper_runtime'
+const restrictedPaperPool = paperRestrictedMode ? (() => {
+  const user = String(process.env.PAPER_RESTRICTED_DB_USER || '').trim()
+  const password = String(process.env.PAPER_RESTRICTED_DB_PASSWORD || '')
+  if (!user || !password || user === process.env.DB_USER || user === 'postgres') {
+    throw new Error('PAPER_RESTRICTED_DB_CONFIG_REQUIRED: distinct unprivileged database login and password are mandatory')
+  }
+  return new Pool({
+    host: process.env.PAPER_RESTRICTED_DB_HOST || envOrDev('DB_HOST', 'localhost'),
+    port: Number(process.env.PAPER_RESTRICTED_DB_PORT || envOrDev('DB_PORT', 5432)),
+    database: envOrDev('DB_NAME', 'alsiddique_db'), user, password,
+    max: Math.min(5, Number(process.env.PAPER_RESTRICTED_DB_POOL_MAX || 4)),
+    connectionTimeoutMillis: 2500, idleTimeoutMillis: 20000,
+  })
+})() : null
+
+// Last-resort fail-closed protection for legacy consumers which have not yet
+// been migrated to an authenticated Paper scope. This is a *defense in depth*
+// application guard, NOT a substitute for database-enforced RLS.
+const PROTECTED_PAPER_RELATIONS = /\b(?:paper_vault|paper_vault_revision_history|paper_documents|paper_revisions|saved_papers|question_bank|question_bank_imports|question_masters|question_revisions|question_capture_requests|question_mappings|assessment_papers|assessment_paper_revisions|assessment_releases|assessment_print_jobs|assessment_roster_snapshots|assessment_result_records|assessment_result_revisions|curriculum_profiles|curriculum_profile_versions|curriculum_migration_plans|subject_offerings|learning_scope_identities|learning_scope_versions|resource_scope_mappings|teacher_class_assignments)\b/i
+function rejectUnscopedProtectedSql(input) {
+  if (!paperRestrictedMode || isRestrictedPaperRequest()) return
+  const sql = typeof input === 'string' ? input : (typeof input?.text === 'string' ? input.text : '')
+  if (!PROTECTED_PAPER_RELATIONS.test(sql)) return
+  const err = new Error('Protected Paper/Question/Curriculum table requires signed school context')
+  err.code = 'PAPER_RESTRICTED_SCOPE_REQUIRED'
+  err.status = 503
+  throw err
+}
+
+function isRestrictedPaperRequest() {
+  return Boolean(paperRestrictedMode && tenantContext.getStore()?.paperRestricted)
+}
+
+// One transaction per connection lease, all GUCs LOCAL. Caller-supplied SQL
+// cannot make the pool silently fall back to the privileged SaaS login.
+async function connectRestrictedPaper() {
+  const context = normalizedRuntimeContext()
+  if (!context || !context.tenantId || context.isSuperAdmin) {
+    const err = new Error('Restricted paper database requires an authenticated, selected school')
+    err.code = 'PAPER_TENANT_CONTEXT_REQUIRED'
+    throw err
+  }
+  const signingKey = String(process.env.PAPER_RESTRICTED_SIGNING_KEY || '')
+  if (signingKey.length < 32) throw new Error('PAPER_SIGNING_KEY_REQUIRED')
+  const actorId = Number(tenantContext.getStore()?.paperActorId)
+  const actorRole = String(tenantContext.getStore()?.paperActorRole || '')
+  if (!Number.isSafeInteger(actorId) || actorId <= 0 ||
+      !['teacher','principal','admin','school_admin','super_admin','result_entry'].includes(actorRole)) {
+    throw new Error('PAPER_SIGNED_ACTOR_REQUIRED')
+  }
+  const raw = await restrictedPaperPool.connect()
+  let open = false
+  let released = false
+  try {
+    const identity = (await raw.query(`
+      SELECT current_user AS db_login, rolbypassrls AS bypass,
+             rolsuper AS privileged, rolinherit AS inherited,
+             pg_has_role(current_user, 'apex_paper_runtime', 'SET') AS can_set_paper,
+             pg_has_role(current_user, 'apex_app_runtime', 'SET') AS can_set_app,
+             has_table_privilege(current_user, 'public.paper_vault', 'SELECT') AS direct_vault,
+             has_table_privilege(current_user, 'public.question_bank', 'SELECT') AS direct_bank,
+             (SELECT count(*)::int FROM pg_auth_members m
+                WHERE m.member = (SELECT oid FROM pg_roles WHERE rolname=current_user)
+                  AND m.roleid <> 'apex_paper_runtime'::regrole) AS other_memberships
+      FROM pg_roles WHERE rolname=current_user
+    `)).rows[0]
+    if (!identity || identity.db_login !== process.env.PAPER_RESTRICTED_DB_USER ||
+        identity.bypass || identity.privileged || identity.inherited ||
+        !identity.can_set_paper || identity.can_set_app ||
+        identity.direct_vault || identity.direct_bank || Number(identity.other_memberships)!==0) {
+      throw new Error('PAPER_DB_LOGIN_HAS_UNSAFE_ROLE_OR_PRIVILEGES')
+    }
+    await raw.query('BEGIN')
+    open = true
+    await raw.query(`SET LOCAL ROLE "${paperRestrictedRole}"`)
+    const expires = String(Math.floor(Date.now() / 1000) + 60)
+    const nonce = crypto.randomBytes(16).toString('hex')
+    const xid = String((await raw.query('SELECT txid_current()::text AS xid')).rows[0].xid)
+    const signed = `${context.tenantId}|${process.env.PAPER_RESTRICTED_DB_USER}|${actorId}|${actorRole}|${expires}|${nonce}|${xid}`
+    const signature = crypto.createHmac('sha256', signingKey).update(signed).digest('hex')
+    await raw.query(
+      "SELECT set_config('app.rls_enabled','true',true), set_config('app.is_super_admin','false',true), set_config('app.tenant_id',$1,true), set_config('app.tenant_key',$2,true), set_config('app.paper_rls_exp',$3,true), set_config('app.paper_rls_nonce',$4,true), set_config('app.paper_rls_sig',$5,true), set_config('app.paper_actor_id',$6,true), set_config('app.paper_actor_role',$7,true)",
+      [context.tenantId, context.tenantKey, expires, nonce, signature, String(actorId), actorRole]
+    )
+    const state = (await raw.query("SELECT current_user AS active_role, row_security_active('public.question_bank'::regclass) AS rls_active")).rows[0]
+    if (state?.active_role !== paperRestrictedRole || state?.rls_active !== true) {
+      throw new Error('PAPER_RESTRICTED_ROLE_RLS_INACTIVE')
+    }
+  } catch (err) {
+    if (open) await raw.query('ROLLBACK').catch(() => {})
+    raw.release()
+    throw err
+  }
+  // Several existing Paper Vault services explicitly BEGIN/COMMIT/ROLLBACK.
+  // BEGIN is already issued by this boundary, and COMMIT/ROLLBACK remain real.
+  return {
+    async query(...args) {
+      const command = typeof args[0] === 'string' ? args[0].trim().replace(/;$/, '').toUpperCase() : ''
+      if (command === 'BEGIN') return { rows: [], rowCount: null, command: 'BEGIN' }
+      if (!open) throw new Error('PAPER_DB_TRANSACTION_ALREADY_CLOSED')
+      if (command === 'COMMIT' || command === 'ROLLBACK') {
+        try { return await raw.query(command) } finally { open = false }
+      }
+      return raw.query(...args)
+    },
+    async release(releaseError) {
+      if (released) return
+      released = true
+      if (open) await raw.query('ROLLBACK').catch(() => {})
+      raw.release(releaseError)
+    },
+  }
+}
+
+
 async function resetRuntimeSession(client) {
   try {
     await client.query(
@@ -111,6 +240,7 @@ async function prepareRuntimeClient(client) {
 }
 
 async function connectForContext() {
+  if (isRestrictedPaperRequest()) return connectRestrictedPaper()
   const client = await rawPool.connect()
   try {
     // Independent non-BYPASS LOGIN requirement. Opt-in until all bootstrap,
@@ -159,11 +289,21 @@ async function connectForContext() {
 const pool = new Proxy(rawPool, {
   get(target, property) {
     if (property === 'connect') return connectForContext
+    if (property === 'end') return async () => {
+      if (restrictedPaperPool) await restrictedPaperPool.end()
+      return target.end()
+    }
     if (property === 'query') {
       return async (...args) => {
+        rejectUnscopedProtectedSql(args[0])
         const client = await connectForContext()
         let open=false
         try {
+          if(isRestrictedPaperRequest()) {
+            const value=await client.query(...args)
+            await client.query('COMMIT')
+            return value
+          }
           if(signedTenantGate && normalizedRuntimeContext()) {
             await client.query('BEGIN')
             open=true
@@ -208,6 +348,8 @@ async function applyTenantContext(client) {
 
 // Helper: simple query
 async function query(text, params) {
+  rejectUnscopedProtectedSql(text)
+  if(isRestrictedPaperRequest()) return pool.query(text,params)
   const start = Date.now()
   const context = tenantContext.getStore()
 
@@ -254,4 +396,6 @@ module.exports = {
   applyTenantContext,
   configuredRuntimeRole,
   normalizedRuntimeContext,
+  rejectUnscopedProtectedSql,
+  isRestrictedPaperRequest,
 }

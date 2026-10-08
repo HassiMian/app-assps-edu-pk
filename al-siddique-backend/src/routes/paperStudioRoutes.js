@@ -1,3 +1,5 @@
+'use strict'
+const { paperRestrictedDatabase } = require('../middleware/paperRestrictedDatabase')
 const express = require('express')
 const router = express.Router()
 const { protect, requireRoles } = require('../middleware/auth')
@@ -26,6 +28,7 @@ const { buildDeliveryManifest } = require('../services/papers/paperDeliveryManif
 const { saveGuardedRevision, renameGuardedPaper, deleteGuardedPaper, listGuardedRevisions, readGuardedRevision } = require('../services/papers/paperVaultRevisionV6D')
 
 router.use(protect, requireRoles('super_admin','admin','principal','teacher'))
+router.use(paperRestrictedDatabase)
 
 function schoolContext(req, res) {
   const schoolId = currentSchoolId(req)
