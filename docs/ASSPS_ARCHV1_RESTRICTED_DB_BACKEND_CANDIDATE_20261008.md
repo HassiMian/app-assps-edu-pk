@@ -46,3 +46,10 @@ HTTP request assertions include: 401 unauthenticated; assigned teacher can manua
 - **Outstanding release gates:** full SaaS attendance/fees/login regression under production-equivalent DB connections, print jobs and genuine Chromium/print proof on the *exact* candidate frontend/backend, revision-bound DOCX HTTP parity after final integration, immutable release workflow exercise, deterministic builds, exact SHAs/ancestry/release snapshots, clone rollback restore, staging and postdeployment checks. Do not turn `PAPER_RESTRICTED_DB_ENABLED` on in production before those are green.
 
 **Decision: restricted Paper/Assessment backend candidate passes its isolated SQL, role and HTTP gates. Full Architecture V1 production DB-RLS release gate is still HOLD. No new candidate code has been deployed to production.**
+
+## Post-test isolation cleanup (same UTC session)
+
+- Staging backend listener on loopback port 5034 was stopped; production backend remained on PM2 port 5000. Existing PM2 saved dump and running process both reported PORT=5000, and production `/health` returned HTTP 200 afterward.
+- The temporary global `GRANT apex_paper_runtime TO asspsworker` used for local peer-auth testing was **revoked**; membership query returned 0. No production database role privileges were broadened permanently.
+- All **six** independently named `assps_archv1_rls_..._20261008` disposable databases created by these tests were dropped after confirming no active sessions. Verification count afterward was **0**. Production database `apexos` and unrelated existing test databases were not removed or modified by cleanup.
+- Source, SQL migrations, HTTP test harness and evidence are preserved in the forward branch, so disposable clones can be reconstructed for the next isolated verification. Do not run the CLONE-only SQL on production.
