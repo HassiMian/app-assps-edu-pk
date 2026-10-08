@@ -59,18 +59,26 @@ function resolveChoiceGroupNode(group = {}, path = 'choice') {
     if (attemptCount && attemptCount > availableItemCount) {
       errors.push(path + ': attempt count cannot exceed available alternatives')
     }
+    if (mode === 'OR' && attemptCount !== 1) {
+      errors.push(path + ': OR choice must require exactly one alternative')
+    }
 
     const childMaxima = children.map(child => Number(child.maximumObtainableMarks) || 0)
     const childAvailable = children.map(child => Number(child.listedPotentialItemMarksTotal) || 0)
     const listedPotentialItemMarksTotal = explicitAvailable ?? childAvailable.reduce((sum, value) => sum + value, 0)
 
-    let maximumObtainableMarks = explicitMaximum ?? 0
-    if (!explicitMaximum) {
-      if (mode === 'ALL') maximumObtainableMarks = childMaxima.reduce((sum, value) => sum + value, 0)
-      else if (attemptCount && attemptCount <= availableItemCount) {
-        maximumObtainableMarks = [...childMaxima].sort((a, b) => b - a).slice(0, attemptCount).reduce((sum, value) => sum + value, 0)
-      }
+    // Derive the attainable score independently of any teacher-entered override.
+    // An override must agree with the actual choice rules; otherwise the header
+    // could appear balanced even when the student cannot earn that total.
+    let computedMaximum = 0
+    if (mode === 'ALL') computedMaximum = childMaxima.reduce((sum, value) => sum + value, 0)
+    else if (attemptCount && attemptCount <= availableItemCount) {
+      computedMaximum = [...childMaxima].sort((a, b) => b - a).slice(0, attemptCount).reduce((sum, value) => sum + value, 0)
     }
+    if (explicitMaximum && computedMaximum > 0 && Math.abs(explicitMaximum - computedMaximum) > 1e-8) {
+      errors.push(path + ': explicit maximum marks conflict with nested choice rules')
+    }
+    const maximumObtainableMarks = explicitMaximum ?? computedMaximum
     if (!(maximumObtainableMarks > 0)) errors.push(path + ': maximum obtainable marks cannot be resolved')
 
     return {
