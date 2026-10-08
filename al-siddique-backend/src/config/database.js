@@ -3,6 +3,7 @@
 
 require('dotenv').config({ path: __dirname + '/../.env' })
 const { Pool } = require('pg')
+const { AsyncLocalStorage } = require('async_hooks')
 
 function envOrDev(name, fallback) {
   const value = process.env[name]
@@ -13,7 +14,7 @@ function envOrDev(name, fallback) {
   return fallback
 }
 
-const pool = new Pool({
+const rawPool = new Pool({
   host:     envOrDev('DB_HOST', 'localhost'),
   port:     Number(envOrDev('DB_PORT', 5432)),
   database: envOrDev('DB_NAME', 'alsiddique_db'),
@@ -24,33 +25,124 @@ const pool = new Pool({
   connectionTimeoutMillis: Number(envOrDev('DB_POOL_CONNECTION_TIMEOUT', 2000)),
 })
 
-// Test connection on startup. Pure tests may opt out to avoid a background DB handle.
-if (process.env.DB_STARTUP_PROBE !== 'false') pool.connect((err, client, release) => {
+// Test the login role before request-scoped role switching is introduced.
+if (process.env.DB_STARTUP_PROBE !== 'false') rawPool.connect((err, client, release) => {
   if (err) {
     console.error('❌ PostgreSQL Connection Failed:', err.message || err)
     console.error('   Check: DB_HOST, DB_USER, DB_PASSWORD in .env and ensure PostgreSQL is running on port 5432')
-
   } else {
     console.log('✅ PostgreSQL Connected — alsiddique_db')
     release()
   }
 })
 
-const { AsyncLocalStorage } = require('async_hooks');
-const tenantContext = new AsyncLocalStorage();
+const tenantContext = new AsyncLocalStorage()
+const ROLE_NAME_PATTERN = /^[A-Za-z_][A-Za-z0-9_]*$/
+
+function configuredRuntimeRole() {
+  const value = String(process.env.DB_RUNTIME_ROLE || '').trim()
+  if (!value) return null
+  if (!ROLE_NAME_PATTERN.test(value)) {
+    const error = new Error('DB_RUNTIME_ROLE contains an invalid PostgreSQL role identifier.')
+    error.code = 'DB_RUNTIME_ROLE_INVALID'
+    throw error
+  }
+  return value
+}
+
+function normalizedRuntimeContext(context = tenantContext.getStore()) {
+  if (!context || !context.rlsEnabled) return null
+  const isSuperAdmin = Boolean(context.isSuperAdmin)
+  const tenantId = Number.parseInt(context.tenantId, 10)
+  if (!isSuperAdmin && (!Number.isInteger(tenantId) || tenantId <= 0)) {
+    const error = new Error('Authenticated database access requires an explicit school context.')
+    error.code = 'TENANT_CONTEXT_REQUIRED'
+    throw error
+  }
+  return {
+    isSuperAdmin,
+    tenantId: isSuperAdmin ? '' : String(tenantId),
+    tenantKey: isSuperAdmin ? '' : String(context.tenantKey || '').trim(),
+  }
+}
+
+async function resetRuntimeSession(client) {
+  try {
+    await client.query(
+      "SELECT set_config('app.rls_enabled', 'false', false), set_config('app.is_super_admin', 'false', false), set_config('app.tenant_id', '', false), set_config('app.tenant_key', '', false)"
+    )
+  } catch (_) {}
+  try {
+    await client.query('RESET ROLE')
+  } catch (_) {}
+}
+
+async function prepareRuntimeClient(client) {
+  const role = configuredRuntimeRole()
+  const context = normalizedRuntimeContext()
+  if (!role || !context) return client
+
+  try {
+    await client.query(`SET ROLE "${role}"`)
+    await client.query(
+      "SELECT set_config('app.rls_enabled', 'true', false), set_config('app.is_super_admin', $1, false), set_config('app.tenant_id', $2, false), set_config('app.tenant_key', $3, false)",
+      [context.isSuperAdmin ? 'true' : 'false', context.tenantId, context.tenantKey]
+    )
+  } catch (error) {
+    await resetRuntimeSession(client)
+    throw error
+  }
+
+  const releaseRaw = client.release.bind(client)
+  let released = false
+  client.release = async (releaseError) => {
+    if (released) return
+    released = true
+    await resetRuntimeSession(client)
+    releaseRaw(releaseError)
+  }
+  return client
+}
+
+async function connectForContext() {
+  const client = await rawPool.connect()
+  try {
+    return await prepareRuntimeClient(client)
+  } catch (error) {
+    client.release()
+    throw error
+  }
+}
+
+// Expose a pool-compatible facade. All authenticated callers pass through the
+// restricted runtime role while unauthenticated bootstrap/auth lookups keep the
+// login role. Callback-style pool usage is intentionally unsupported in src.
+const pool = new Proxy(rawPool, {
+  get(target, property) {
+    if (property === 'connect') return connectForContext
+    if (property === 'query') {
+      return async (...args) => {
+        const client = await connectForContext()
+        try {
+          return await client.query(...args)
+        } finally {
+          await client.release()
+        }
+      }
+    }
+    const value = Reflect.get(target, property, target)
+    return typeof value === 'function' ? value.bind(target) : value
+  },
+})
 
 async function applyTenantContext(client) {
-  const context = tenantContext.getStore()
-  if (!context || !context.rlsEnabled) return false
+  const context = normalizedRuntimeContext()
+  if (!context) return false
 
   await client.query(`SELECT set_config('app.rls_enabled', 'true', true)`)
-  if (context.isSuperAdmin) {
-    await client.query(`SELECT set_config('app.is_super_admin', 'true', true)`)
-    await client.query(`SELECT set_config('app.tenant_id', '', true)`)
-  } else {
-    await client.query(`SELECT set_config('app.is_super_admin', 'false', true)`)
-    await client.query(`SELECT set_config('app.tenant_id', $1, true)`, [context.tenantId ? String(context.tenantId) : ''])
-  }
+  await client.query(`SELECT set_config('app.is_super_admin', $1, true)`, [context.isSuperAdmin ? 'true' : 'false'])
+  await client.query(`SELECT set_config('app.tenant_id', $1, true)`, [context.tenantId])
+  await client.query(`SELECT set_config('app.tenant_key', $1, true)`, [context.tenantKey])
   return true
 }
 
@@ -74,28 +166,32 @@ async function query(text, params) {
       }
       return res
     } catch (err) {
-      await client.query('ROLLBACK')
+      try { await client.query('ROLLBACK') } catch (_) {}
       console.error('DB Query Error (RLS):', err.message)
       throw err
     } finally {
-      try {
-        await client.query("SELECT set_config('app.rls_enabled', 'false', false), set_config('app.is_super_admin', 'false', false), set_config('app.tenant_id', '', false)")
-      } catch (_) {}
-      client.release()
+      await client.release()
     }
-  } else {
-    try {
-      const res = await pool.query(text, params)
-      const duration = Date.now() - start
-      if (process.env.NODE_ENV === 'development') {
-        console.log('DB Query:', { text: text.slice(0, 60), duration: `${duration}ms`, rows: res.rowCount })
-      }
-      return res
-    } catch (err) {
-      console.error('DB Query Error:', err.message)
-      throw err
+  }
+
+  try {
+    const res = await pool.query(text, params)
+    const duration = Date.now() - start
+    if (process.env.NODE_ENV === 'development') {
+      console.log('DB Query:', { text: text.slice(0, 60), duration: `${duration}ms`, rows: res.rowCount })
     }
+    return res
+  } catch (err) {
+    console.error('DB Query Error:', err.message)
+    throw err
   }
 }
 
-module.exports = { pool, query, tenantContext, applyTenantContext }
+module.exports = {
+  pool,
+  query,
+  tenantContext,
+  applyTenantContext,
+  configuredRuntimeRole,
+  normalizedRuntimeContext,
+}

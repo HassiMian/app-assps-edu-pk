@@ -743,7 +743,7 @@ assertContains(
 
 assertContains(
   'al-siddique-backend/src/config/database.js',
-  'module.exports = { pool, query, tenantContext, applyTenantContext }',
+  /module\.exports\s*=\s*\{[\s\S]{0,260}?applyTenantContext/,
   'routes using explicit transactions must be able to import applyTenantContext.'
 )
 
@@ -3143,4 +3143,45 @@ assertContains(
   'ops/deploy-production.ps1',
   'liveArtifactDriftCheck.js',
   'production deploy must verify backend runtime/compatibility artifact drift before restart.'
+)
+
+assertContains(
+  'al-siddique-backend/src/config/database.js',
+  'DB_RUNTIME_ROLE',
+  'authenticated database traffic must support the restricted application runtime role.'
+)
+assertContains(
+  'al-siddique-backend/src/config/database.js',
+  'TENANT_CONTEXT_REQUIRED',
+  'authenticated database access must fail closed when school context is missing.'
+)
+assertContains(
+  'al-siddique-backend/src/config/database.js',
+  'RESET ROLE',
+  'pooled database connections must reset the restricted role before reuse.'
+)
+assertContains(
+  'al-siddique-backend/src/migrations/20261008_app_runtime_rls_v1.sql',
+  'CREATE ROLE apex_app_runtime NOLOGIN NOBYPASSRLS',
+  'application runtime role must never bypass row-level security.'
+)
+assertContains(
+  'al-siddique-backend/src/migrations/20261008_app_runtime_rls_v1.sql',
+  'AS RESTRICTIVE FOR ALL TO apex_app_runtime',
+  'runtime tenant policies must include a restrictive guard against permissive-policy bypass.'
+)
+assertNotContains(
+  'al-siddique-backend/src/migrations/20261008_app_runtime_rls_v1.sql',
+  /GRANT\s+ALL\s+ON\s+ALL\s+TABLES/i,
+  'application runtime migration must not flatten dedicated table ownership boundaries.'
+)
+assertNotContains(
+  'al-siddique-frontend/src/services/useFamilyStore.js',
+  /catch\s*\([^)]*\)\s*\{[\s\S]{0,220}?setFamilies\(\[\]\)/,
+  'family refresh failures must preserve loaded family state.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/families/FamilyModule.jsx',
+  'Family data is temporarily unavailable.',
+  'family UI must distinguish source unavailability from a verified empty family list.'
 )

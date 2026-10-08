@@ -156,6 +156,7 @@ function activateRequestRlsContext(req) {
   ctx.rlsEnabled = true
   ctx.isSuperAdmin = isSuperAdmin
   ctx.tenantId = isSuperAdmin ? null : normalizeSchoolId(req.school_id || req.user?.school_id)
+  ctx.tenantKey = isSuperAdmin ? null : String(req.tenant_id || req.user?.tenant_id || req.school?.tenant_id || '').trim() || null
 }
 
 function buildUserContext(user, school = null) {
