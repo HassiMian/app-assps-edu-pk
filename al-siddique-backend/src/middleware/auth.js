@@ -176,7 +176,7 @@ async function fetchActiveUserById(userId) {
   const parsedId = Number.parseInt(userId, 10)
   if (!Number.isFinite(parsedId)) return null
   const result = await query(
-    `SELECT id, school_id, name, email, role, designation
+    `SELECT id, school_id, tenant_id, name, email, role, designation
      FROM users
      WHERE id = $1 AND is_active = true
      LIMIT 1`,
@@ -185,10 +185,14 @@ async function fetchActiveUserById(userId) {
   return result.rows[0] || null
 }
 
-async function fetchVirtualBranchUserByEmail(email) {
+async function fetchVirtualBranchUserByEmail(email, signedSchoolId = null) {
   const normalizedEmail = String(email || '').trim().toLowerCase()
   if (!normalizedEmail) return null
-  const result = await query('SELECT school_id, school_access FROM settings WHERE school_access IS NOT NULL')
+  // Signed-tenant candidate uses a bounded school lookup. Never scan a
+  // different school's virtual branch settings under its authenticated role.
+  const result = signedSchoolId
+    ? await query('SELECT school_id, school_access FROM settings WHERE school_id=$1 AND school_access IS NOT NULL', [signedSchoolId])
+    : await query('SELECT school_id, school_access FROM settings WHERE school_access IS NOT NULL')
   for (const row of result.rows) {
     if (!Array.isArray(row.school_access)) continue
     const branch = row.school_access.find(item => {
@@ -260,7 +264,7 @@ async function protect(req, res, next) {
     }
     let activeUser = await fetchActiveUserById(decoded?.id)
     if (!activeUser) {
-      activeUser = await fetchVirtualBranchUserByEmail(decoded?.email)
+      activeUser = await fetchVirtualBranchUserByEmail(decoded?.email, prebindTenant ? verifiedClaimSchoolId : null)
     }
     if (!activeUser) {
       return sendJson(res, 401, { message: 'Invalid or expired token.' })
@@ -282,6 +286,21 @@ async function protect(req, res, next) {
       const school = await fetchSchoolById(req.school_id)
       if (!school) {
         return sendJson(res, 403, { message: 'School context not found. Please contact support.' })
+      }
+      if (prebindTenant) {
+        // The signed token may contain an additional tenant key, but only
+        // verified database identity/school attributes are authoritative.
+        // Reject disagreement rather than carrying a forged tenant key into
+        // any policy that checks app.tenant_key.
+        const canonicalUserTenant = String(activeUser.tenant_id || '').trim()
+        const canonicalSchoolTenant = String(school.tenant_id || '').trim()
+        const claimTenant = String(decoded.tenant_id || '').trim()
+        if ((canonicalUserTenant && canonicalSchoolTenant && canonicalUserTenant !== canonicalSchoolTenant) ||
+            (claimTenant && claimTenant !== (canonicalUserTenant || canonicalSchoolTenant))) {
+          return sendJson(res, 401, { message: 'Signed tenant context does not match the active school.' })
+        }
+        const ctx = tenantContext.getStore()
+        if (ctx) ctx.tenantKey = canonicalUserTenant || canonicalSchoolTenant || null
       }
       req.school = school
       req.school_code = school?.code || req.user.school_code || null

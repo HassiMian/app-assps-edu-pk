@@ -1,0 +1,8 @@
+# VALIDATION-ONLY. Do not install without Hostinger rescue, SSH key,
+# upstream firewall assessment and approved change window.
+table inet assps_phase6_private_app_ports {
+ chain input {
+  type filter hook input priority filter; policy accept;
+  iifname != "lo" tcp dport { 3000, 5000, 5017, 8888, 3104, 3105, 3128, 3140 } drop
+ }
+}

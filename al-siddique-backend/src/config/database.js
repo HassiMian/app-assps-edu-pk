@@ -126,9 +126,23 @@ async function connectForContext() {
         throw error
       }
     }
-    return await prepareRuntimeClient(client)
+    const prepared = await prepareRuntimeClient(client)
+    if (process.env.DB_ENFORCE_LEAST_PRIVILEGE_LOGIN === 'true') {
+      const active = await prepared.query(
+        'SELECT current_user AS role_name, rolsuper, rolbypassrls FROM pg_roles WHERE rolname=current_user'
+      )
+      const expected = normalizedRuntimeContext() ? configuredRuntimeRole() : null
+      if (active.rows.length !== 1 ||
+          active.rows[0].rolsuper || active.rows[0].rolbypassrls ||
+          (expected && active.rows[0].role_name !== expected)) {
+        const error = new Error('Restricted database session role could not be verified')
+        error.code = 'DB_RUNTIME_ROLE_UNSAFE'
+        throw error
+      }
+    }
+    return prepared
   } catch (error) {
-    client.release()
+    await client.release()
     throw error
   }
 }
