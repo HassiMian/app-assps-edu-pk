@@ -28,3 +28,6 @@ Review the 27 original Grade IX Biology, Chapter 1 candidates (12 MCQs, 12 short
 
 ## Contract and blockers
 GitHub issue #1 governs versioned approved revisions, server-side school/tenant filtering and Paper Studio integration; issue #4 governs concurrent branches. Current work provides *review inputs only*, never selectable approved content.
+
+## Editorial MCQ option-sequence defect found during this checkpoint
+The Biology IX Chapter 1 original pilot has 12 MCQ keys following `A B C D` **exactly three times**. The 3/3/3/3 key distribution looks balanced but the periodic answer pattern can be predicted. The read-only `ops/qbank/audit-mcq-key-patterns.cjs` now flags the entire BIO9-C1-MCQ-001–012 sequence without altering stems, option identity, original hashes or human review flags. These 12 require editorial option-order revision (and a NEW revision-hash docket) before independent academic review; the existing 27-question draft and docket are preserved unchanged.
