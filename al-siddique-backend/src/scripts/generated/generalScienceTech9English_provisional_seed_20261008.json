@@ -1,0 +1,1117 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C01-I01",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Introduction and Role of Science",
+      "topic_name": "science",
+      "category": "mcq",
+      "question_text": "Science is best described as?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Systematic study based on observation, evidence and testing"
+        },
+        {
+          "id": "B",
+          "text": "Only personal opinion"
+        },
+        {
+          "id": "C",
+          "text": "Only memorizing names"
+        },
+        {
+          "id": "D",
+          "text": "A process without evidence"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Systematic study based on observation, evidence and testing",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 1",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "science"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C01-I02",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Introduction and Role of Science",
+      "topic_name": "branches of science",
+      "category": "short",
+      "question_text": "Why are branches of science interconnected?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Different scientific problems often involve concepts and methods from more than one field.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 1",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "branches of science"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C01-I03",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Introduction and Role of Science",
+      "topic_name": "role of science",
+      "category": "long",
+      "question_text": "Explain how science, technology and evidence improve daily life while still having limitations.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A strong answer discusses evidence-based knowledge, practical applications, quality-of-life improvements, uncertainty and ethical/social limits.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 1",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "role of science"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C02-I01",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Our Life and Chemistry",
+      "topic_name": "chemistry in life",
+      "category": "mcq",
+      "question_text": "Which element is a major framework element in organic compounds?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Carbon"
+        },
+        {
+          "id": "B",
+          "text": "Neon only"
+        },
+        {
+          "id": "C",
+          "text": "Argon only"
+        },
+        {
+          "id": "D",
+          "text": "Helium only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Carbon",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 2",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "chemistry in life"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C02-I02",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Our Life and Chemistry",
+      "topic_name": "water",
+      "category": "short",
+      "question_text": "Why is water an important solvent in living systems?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Its polarity allows many ionic and polar substances to dissolve, supporting transport and reactions.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 2",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "water"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C02-I03",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Our Life and Chemistry",
+      "topic_name": "life and chemistry",
+      "category": "long",
+      "question_text": "Discuss how carbon compounds, water and air are connected with living systems and everyday life.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Cover carbon-based molecules, water as medium/solvent, oxygen/carbon dioxide roles and responsible use of chemical products.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 2",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "life and chemistry"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C03-I01",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Biochemistry and Biotechnology",
+      "topic_name": "enzyme",
+      "category": "mcq",
+      "question_text": "An enzyme mainly acts as?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A biological catalyst"
+        },
+        {
+          "id": "B",
+          "text": "A source of chromosomes only"
+        },
+        {
+          "id": "C",
+          "text": "A mineral rock"
+        },
+        {
+          "id": "D",
+          "text": "A type of current"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "A biological catalyst",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 3",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "enzyme"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C03-I02",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Biochemistry and Biotechnology",
+      "topic_name": "biotechnology",
+      "category": "short",
+      "question_text": "What is biotechnology?",
+      "options": [],
+      "correct_option": "",
+      "answer": "The use of living organisms, cells or biological processes to develop useful products or applications.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 3",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "biotechnology"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C03-I03",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Biochemistry and Biotechnology",
+      "topic_name": "biochemistry biotechnology",
+      "category": "long",
+      "question_text": "Explain the relationship among biomolecules, enzymes, genetic information and biotechnology.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A complete answer links molecules and metabolism, enzyme action, DNA information and responsible biological applications.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 3",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "biochemistry biotechnology"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C04-I01",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Human Health",
+      "topic_name": "balanced diet",
+      "category": "mcq",
+      "question_text": "A balanced diet should provide?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Appropriate energy and essential nutrients"
+        },
+        {
+          "id": "B",
+          "text": "Only sugar"
+        },
+        {
+          "id": "C",
+          "text": "Only water"
+        },
+        {
+          "id": "D",
+          "text": "Only one food group"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Appropriate energy and essential nutrients",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 4",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "balanced diet"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C04-I02",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Human Health",
+      "topic_name": "exercise health",
+      "category": "short",
+      "question_text": "State two benefits of regular physical activity.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Examples include cardiovascular fitness, muscle/bone health, healthy body composition and mental wellbeing; any two.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 4",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "exercise health"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C04-I03",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Human Health",
+      "topic_name": "human health",
+      "category": "long",
+      "question_text": "Explain how nutrition, hygiene, exercise, rest and preventive care work together to support health.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Discuss each factor and how consistent healthy habits reduce avoidable health risks.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 4",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "human health"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C05-I01",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Diseases, Cause and Prevention",
+      "topic_name": "prevention",
+      "category": "mcq",
+      "question_text": "Which is a general disease-prevention principle?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Good hygiene and appropriate vaccination where recommended"
+        },
+        {
+          "id": "B",
+          "text": "Sharing contaminated items"
+        },
+        {
+          "id": "C",
+          "text": "Ignoring symptoms"
+        },
+        {
+          "id": "D",
+          "text": "Avoiding all medical advice"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Good hygiene and appropriate vaccination where recommended",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 5",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "prevention"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C05-I02",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Diseases, Cause and Prevention",
+      "topic_name": "communicable disease",
+      "category": "short",
+      "question_text": "What makes a disease communicable?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It can be transmitted from an infected source or reservoir to another person, directly or indirectly.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 5",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "communicable disease"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C05-I03",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Diseases, Cause and Prevention",
+      "topic_name": "disease prevention",
+      "category": "long",
+      "question_text": "Compare communicable and non-communicable diseases and describe general prevention strategies.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Differentiate transmission-based and non-transmissible conditions, then discuss hygiene, vaccination, healthy lifestyle, screening and professional care.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 5",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "disease prevention"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C06-I01",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Environment and Natural Resources",
+      "topic_name": "natural resource",
+      "category": "mcq",
+      "question_text": "Which is a renewable resource when managed sustainably?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Solar energy"
+        },
+        {
+          "id": "B",
+          "text": "Coal"
+        },
+        {
+          "id": "C",
+          "text": "Petroleum"
+        },
+        {
+          "id": "D",
+          "text": "Natural gas"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Solar energy",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 6",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "natural resource"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C06-I02",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Environment and Natural Resources",
+      "topic_name": "conservation",
+      "category": "short",
+      "question_text": "Why should natural resources be conserved?",
+      "options": [],
+      "correct_option": "",
+      "answer": "To reduce depletion and environmental damage while preserving resources and ecosystem services for future use.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 6",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "conservation"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C06-I03",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Environment and Natural Resources",
+      "topic_name": "environment resources",
+      "category": "long",
+      "question_text": "Explain links among pollution, biodiversity, resource use and sustainable development.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Discuss environmental quality, ecosystem health, efficient resource use, waste reduction and long-term human wellbeing.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 6",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "environment resources"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C07-I01",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Energy",
+      "topic_name": "energy",
+      "category": "mcq",
+      "question_text": "Energy is commonly defined as the capacity to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Do work or cause change"
+        },
+        {
+          "id": "B",
+          "text": "Create mass from nothing"
+        },
+        {
+          "id": "C",
+          "text": "Stop all motion permanently"
+        },
+        {
+          "id": "D",
+          "text": "Remove time"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Do work or cause change",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 7",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "energy"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C07-I02",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Energy",
+      "topic_name": "energy transformation",
+      "category": "short",
+      "question_text": "Give one example of an energy transformation.",
+      "options": [],
+      "correct_option": "",
+      "answer": "For example, a solar panel converts light energy into electrical energy.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 7",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "energy transformation"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C07-I03",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Energy",
+      "topic_name": "energy sources",
+      "category": "long",
+      "question_text": "Compare renewable and non-renewable energy sources in terms of availability, environmental impact and sustainability.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Define both categories and compare resource renewal, emissions/impacts and long-term use.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 7",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "energy sources"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C08-I01",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Current Electricity",
+      "topic_name": "current",
+      "category": "mcq",
+      "question_text": "Electric current is the rate of flow of?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Electric charge"
+        },
+        {
+          "id": "B",
+          "text": "Mass only"
+        },
+        {
+          "id": "C",
+          "text": "Sound only"
+        },
+        {
+          "id": "D",
+          "text": "Temperature only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Electric charge",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 8",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "current"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C08-I02",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Current Electricity",
+      "topic_name": "voltage current",
+      "category": "short",
+      "question_text": "Differentiate voltage and current.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Voltage is electric potential difference; current is the rate at which charge flows.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 8",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "voltage current"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C08-I03",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Current Electricity",
+      "topic_name": "safe circuits",
+      "category": "long",
+      "question_text": "Explain basic relationships among current, voltage, resistance and safe circuit use.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Discuss the quantities conceptually, Ohm-type relationship for simple conductors, and safe use of properly rated components without hazardous mains instructions.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 8",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "safe circuits"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C09-I01",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Basic Electronics",
+      "topic_name": "diode",
+      "category": "mcq",
+      "question_text": "A diode is mainly used to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Allow current more readily in one direction"
+        },
+        {
+          "id": "B",
+          "text": "Store food"
+        },
+        {
+          "id": "C",
+          "text": "Measure body mass"
+        },
+        {
+          "id": "D",
+          "text": "Generate rainfall"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Allow current more readily in one direction",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 9",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "diode"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C09-I02",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Basic Electronics",
+      "topic_name": "transistor",
+      "category": "short",
+      "question_text": "What is a transistor used for in basic electronics?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It can act as an electronic switch or amplifier in circuits.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 9",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "transistor"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C09-I03",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Basic Electronics",
+      "topic_name": "electronics",
+      "category": "long",
+      "question_text": "Describe how components such as resistors, diodes and transistors contribute to simple electronic systems.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Explain current limiting/control, one-way conduction and switching/amplification conceptually.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 9",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "electronics"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C10-I01",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Science and Technology",
+      "topic_name": "technology",
+      "category": "mcq",
+      "question_text": "Technology is best understood as?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Application of knowledge and tools to solve practical problems"
+        },
+        {
+          "id": "B",
+          "text": "Only theoretical memorization"
+        },
+        {
+          "id": "C",
+          "text": "A process without users"
+        },
+        {
+          "id": "D",
+          "text": "Only old machines"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Application of knowledge and tools to solve practical problems",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 10",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "technology"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C10-I02",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Science and Technology",
+      "topic_name": "technology impact",
+      "category": "short",
+      "question_text": "Why should new technology be evaluated before adoption?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Benefits, costs, reliability, safety, privacy and environmental/social effects should be considered.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 10",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "technology impact"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C10-I03",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Science and Technology",
+      "topic_name": "science technology society",
+      "category": "long",
+      "question_text": "Explain how science and technology influence society and how society can guide responsible innovation.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Discuss knowledge-to-application pathways, benefits, risks, ethics, regulation and public needs.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 10",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "science technology society"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C11-I01",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Space and Nuclear Programme of Pakistan",
+      "topic_name": "space programme",
+      "category": "mcq",
+      "question_text": "A national space programme can support?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Communication, Earth observation and scientific research"
+        },
+        {
+          "id": "B",
+          "text": "Only road painting"
+        },
+        {
+          "id": "C",
+          "text": "Only food storage"
+        },
+        {
+          "id": "D",
+          "text": "No scientific work"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Communication, Earth observation and scientific research",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 11",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "space programme"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C11-I02",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Space and Nuclear Programme of Pakistan",
+      "topic_name": "peaceful nuclear uses",
+      "category": "short",
+      "question_text": "State two peaceful applications of nuclear science.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Examples include medicine, agriculture, industry, power generation and scientific research; any two.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 11",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "peaceful nuclear uses"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C11-I03",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Space and Nuclear Programme of Pakistan",
+      "topic_name": "pakistan science programmes",
+      "category": "long",
+      "question_text": "Discuss peaceful contributions of space and nuclear science programmes to national development.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Explain applications in communication, mapping, weather/environment observation, medicine, energy/research and the importance of safety and responsible governance.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-032 | 0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d | chapter 11",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "pakistan science programmes"
+      ]
+    }
+  ]
+}

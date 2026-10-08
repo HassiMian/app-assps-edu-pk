@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "assps-generalScienceTech9-urdu-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-038",
+  "sourcePdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+  "sourceByteLength": 73276320,
+  "pageCount": 73,
+  "identity": [
+    "General Science Tech 9 UM",
+    "Grade IX General Science-Tech",
+    "Urdu"
+  ],
+  "chapterEvidence": {
+    "officialPdfHashVerified": true,
+    "renderedTocPartialVerified": true,
+    "currentChapterIndexCrossChecked": true,
+    "externalIndex": "https://studyplusplus.com/punjab-board/books/9/general-science"
+  },
+  "chapters": [
+    {
+      "number": 1,
+      "titleEnglish": "Introduction and Role of Science",
+      "titleUrdu": "سائنس کا تعارف اور کردار",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED"
+    },
+    {
+      "number": 2,
+      "titleEnglish": "Our Life and Chemistry",
+      "titleUrdu": "ہماری زندگی اور کیمسٹری",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED"
+    },
+    {
+      "number": 3,
+      "titleEnglish": "Biochemistry and Biotechnology",
+      "titleUrdu": "بایوکیمسٹری اور بایوٹیکنالوجی",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED"
+    },
+    {
+      "number": 4,
+      "titleEnglish": "Human Health",
+      "titleUrdu": "انسانی صحت",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED"
+    },
+    {
+      "number": 5,
+      "titleEnglish": "Diseases, Cause and Prevention",
+      "titleUrdu": "بیماریاں، اسباب اور بچاؤ",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED"
+    },
+    {
+      "number": 6,
+      "titleEnglish": "Environment and Natural Resources",
+      "titleUrdu": "ماحول اور قدرتی وسائل",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED"
+    },
+    {
+      "number": 7,
+      "titleEnglish": "Energy",
+      "titleUrdu": "توانائی",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED"
+    },
+    {
+      "number": 8,
+      "titleEnglish": "Current Electricity",
+      "titleUrdu": "برقی رو",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED"
+    },
+    {
+      "number": 9,
+      "titleEnglish": "Basic Electronics",
+      "titleUrdu": "بنیادی الیکٹرانکس",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED"
+    },
+    {
+      "number": 10,
+      "titleEnglish": "Science and Technology",
+      "titleUrdu": "سائنس اور ٹیکنالوجی",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED"
+    },
+    {
+      "number": 11,
+      "titleEnglish": "Space and Nuclear Programme of Pakistan",
+      "titleUrdu": "پاکستان کا خلائی اور جوہری پروگرام",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false
+  }
+}

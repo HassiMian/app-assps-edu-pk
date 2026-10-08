@@ -853,9 +853,9 @@
       "catalogLabel": "General Science Tech 9",
       "pdfUrl": "https://drive.google.com/file/d/1y-R2gAB30M3D9dOPfNiITyVs_HZHFYmN/view?usp=sharing",
       "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
-      "chapterIndexStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "chapterIndexStatus": "VERIFIED_11_CHAPTER_SEQUENCE_OFFICIAL_PDF_PLUS_CURRENT_INDEX",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_VERIFIED_CONTENT_MAP",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
       "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
@@ -868,8 +868,9 @@
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
       "sourceCacheRef": "20261008/tech9-theory/gensci9.pdf",
-      "contentMapStatus": "PENDING_VERIFIED_CONTENT_MAP",
-      "authoringBoundary": "NO_AUTHORING_UNTIL_GRADE9_MATRIC_TECH_THEORY_CONTENT_MAP_VERIFIED"
+      "contentMapStatus": "VERIFIED_11_CHAPTER_SEQUENCE_PAGE_LEVEL_REVIEW_PENDING",
+      "authoringBoundary": "PROVISIONAL_ORIGINAL_CONCEPTUAL_ONLY_NO_TEXTBOOK_OR_EXERCISE_COPYING",
+      "contentMapEvidence": "generalScienceTech9EnglishSourceMap2026.json"
     },
     {
       "recordId": "pectaa-catalog-033",
@@ -1023,9 +1024,9 @@
       "catalogLabel": "General Science Tech 9 UM",
       "pdfUrl": "https://drive.google.com/file/d/1M1rpSVxAW1CmqGkjxKlkMccMklrbK-NU/view?usp=sharing",
       "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
-      "chapterIndexStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "chapterIndexStatus": "VERIFIED_11_CHAPTER_SEQUENCE_OFFICIAL_PDF_PLUS_CURRENT_INDEX",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_VERIFIED_CONTENT_MAP",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
       "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
@@ -1038,8 +1039,9 @@
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
       "sourceCacheRef": "20261008/tech9-theory/gensci9ur.pdf",
-      "contentMapStatus": "PENDING_VERIFIED_CONTENT_MAP",
-      "authoringBoundary": "NO_AUTHORING_UNTIL_GRADE9_MATRIC_TECH_THEORY_CONTENT_MAP_VERIFIED"
+      "contentMapStatus": "VERIFIED_11_CHAPTER_SEQUENCE_PAGE_LEVEL_REVIEW_PENDING",
+      "authoringBoundary": "PROVISIONAL_ORIGINAL_CONCEPTUAL_ONLY_NO_TEXTBOOK_OR_EXERCISE_COPYING",
+      "contentMapEvidence": "generalScienceTech9UrduSourceMap2026.json"
     },
     {
       "recordId": "pectaa-catalog-039",
@@ -1114,7 +1116,7 @@
       "pdfSha256": "f5e528a423503b67894702472a8070a1230ab839a4cef14258b109e0a585436a",
       "chapterIndexStatus": "PENDING_VERIFIED_CONTENT_MAP",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_VERIFIED_CONTENT_MAP",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE_IDENTITY_RECONCILIATION",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
       "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
@@ -1127,8 +1129,10 @@
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
       "sourceCacheRef": "20261008/tech9-theory/comms9.pdf",
-      "contentMapStatus": "PENDING_VERIFIED_CONTENT_MAP",
-      "authoringBoundary": "NO_AUTHORING_UNTIL_GRADE9_MATRIC_TECH_THEORY_CONTENT_MAP_VERIFIED"
+      "contentMapStatus": "BLOCKED_SOURCE_IDENTITY_MISMATCH_RENDERED_CONTENT_REFERENCES_FASHION_DESIGNING",
+      "authoringBoundary": "NO_AUTHORING_UNTIL_GRADE9_MATRIC_TECH_THEORY_CONTENT_MAP_VERIFIED",
+      "sourceIdentityIssue": "Hash-verified asset linked by catalog record 041 rendered content referencing Fashion Designing; do not author Communication Skills theory questions from this asset until reconciled.",
+      "providerAccessNote": "Catalogue label and linked bytes disagree at rendered-content identity level; practical notebook record 095 is separate and must not substitute for theory."
     },
     {
       "recordId": "pectaa-catalog-042",

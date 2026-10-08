@@ -1,0 +1,1117 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "IX-GENSCI-TECH-URDU-C01-I01",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "سائنس کا تعارف اور کردار",
+      "topic_name": "science",
+      "category": "mcq",
+      "question_text": "Science کی بہتر تعریف کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "مشاہدے، evidence اور testing پر مبنی منظم مطالعہ"
+        },
+        {
+          "id": "B",
+          "text": "صرف ذاتی رائے"
+        },
+        {
+          "id": "C",
+          "text": "صرف نام یاد کرنا"
+        },
+        {
+          "id": "D",
+          "text": "بغیر evidence کے نتیجہ"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "مشاہدے، evidence اور testing پر مبنی منظم مطالعہ",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 1",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "science"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C01-I02",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "سائنس کا تعارف اور کردار",
+      "topic_name": "branches of science",
+      "category": "short",
+      "question_text": "Science کی مختلف branches ایک دوسرے سے کیوں جڑی ہوتی ہیں؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "بہت سے scientific مسائل سمجھنے کے لیے ایک سے زیادہ fields کے concepts اور methods درکار ہوتے ہیں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 1",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "branches of science"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C01-I03",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "سائنس کا تعارف اور کردار",
+      "topic_name": "role of science",
+      "category": "long",
+      "question_text": "Science، technology اور evidence روزمرہ زندگی بہتر کرنے میں کیسے مدد دیتے ہیں اور ان کی limitations کیا ہیں؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Evidence-based knowledge، practical applications، quality of life، uncertainty اور ethical/social limits بیان کیے جائیں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 1",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "role of science"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C02-I01",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "ہماری زندگی اور کیمسٹری",
+      "topic_name": "chemistry in life",
+      "category": "mcq",
+      "question_text": "Organic compounds کا بنیادی framework element کون سا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Carbon"
+        },
+        {
+          "id": "B",
+          "text": "صرف Neon"
+        },
+        {
+          "id": "C",
+          "text": "صرف Argon"
+        },
+        {
+          "id": "D",
+          "text": "صرف Helium"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Carbon",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 2",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "chemistry in life"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C02-I02",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "ہماری زندگی اور کیمسٹری",
+      "topic_name": "water",
+      "category": "short",
+      "question_text": "Living systems میں water اہم solvent کیوں ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "اس کی polarity بہت سے ionic اور polar substances کو dissolve کر کے transport اور reactions میں مدد دیتی ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 2",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "water"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C02-I03",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "ہماری زندگی اور کیمسٹری",
+      "topic_name": "life and chemistry",
+      "category": "long",
+      "question_text": "Carbon compounds، water اور air کا living systems اور daily life سے تعلق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Carbon-based molecules، water as medium/solvent، oxygen/carbon dioxide roles اور chemical products کے responsible use کا ذکر ہو۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 2",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "life and chemistry"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C03-I01",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "بایوکیمسٹری اور بایوٹیکنالوجی",
+      "topic_name": "enzyme",
+      "category": "mcq",
+      "question_text": "Enzyme بنیادی طور پر کیا کرتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Biological catalyst کے طور پر کام کرتا ہے"
+        },
+        {
+          "id": "B",
+          "text": "صرف chromosomes بناتا ہے"
+        },
+        {
+          "id": "C",
+          "text": "mineral rock ہے"
+        },
+        {
+          "id": "D",
+          "text": "electric current ہے"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Biological catalyst کے طور پر کام کرتا ہے",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 3",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "enzyme"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C03-I02",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "بایوکیمسٹری اور بایوٹیکنالوجی",
+      "topic_name": "biotechnology",
+      "category": "short",
+      "question_text": "Biotechnology کیا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Living organisms، cells یا biological processes کو useful products یا applications کے لیے استعمال کرنا۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 3",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "biotechnology"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C03-I03",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "بایوکیمسٹری اور بایوٹیکنالوجی",
+      "topic_name": "biochemistry biotechnology",
+      "category": "long",
+      "question_text": "Biomolecules، enzymes، genetic information اور biotechnology کے باہمی تعلق کی وضاحت کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Molecules/metabolism، enzyme action، DNA information اور responsible biological applications کو جوڑا جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 3",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "biochemistry biotechnology"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C04-I01",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "انسانی صحت",
+      "topic_name": "balanced diet",
+      "category": "mcq",
+      "question_text": "Balanced diet میں کیا ہونا چاہیے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "مناسب energy اور ضروری nutrients"
+        },
+        {
+          "id": "B",
+          "text": "صرف sugar"
+        },
+        {
+          "id": "C",
+          "text": "صرف water"
+        },
+        {
+          "id": "D",
+          "text": "صرف ایک food group"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "مناسب energy اور ضروری nutrients",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 4",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "balanced diet"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C04-I02",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "انسانی صحت",
+      "topic_name": "exercise health",
+      "category": "short",
+      "question_text": "Regular physical activity کے دو فائدے لکھیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Cardiovascular fitness، muscle/bone health، healthy body composition یا mental wellbeing میں سے کوئی دو۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 4",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "exercise health"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C04-I03",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "انسانی صحت",
+      "topic_name": "human health",
+      "category": "long",
+      "question_text": "Nutrition، hygiene، exercise، rest اور preventive care مل کر health کو کیسے support کرتے ہیں؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "ہر factor اور healthy habits کے avoidable risk کم کرنے والے کردار کی وضاحت ہو۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 4",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "human health"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C05-I01",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "بیماریاں، اسباب اور بچاؤ",
+      "topic_name": "prevention",
+      "category": "mcq",
+      "question_text": "Disease prevention کا عمومی اصول کون سا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "اچھی hygiene اور recommended vaccination"
+        },
+        {
+          "id": "B",
+          "text": "contaminated items share کرنا"
+        },
+        {
+          "id": "C",
+          "text": "symptoms ignore کرنا"
+        },
+        {
+          "id": "D",
+          "text": "medical advice avoid کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "اچھی hygiene اور recommended vaccination",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 5",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "prevention"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C05-I02",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "بیماریاں، اسباب اور بچاؤ",
+      "topic_name": "communicable disease",
+      "category": "short",
+      "question_text": "Communicable disease کسے کہتے ہیں؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "ایسی بیماری جو infected source/reservoir سے دوسرے فرد تک direct یا indirect منتقل ہو سکے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 5",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "communicable disease"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C05-I03",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "بیماریاں، اسباب اور بچاؤ",
+      "topic_name": "disease prevention",
+      "category": "long",
+      "question_text": "Communicable اور non-communicable diseases کا تقابل اور general prevention strategies بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Transmission difference، hygiene، vaccination، healthy lifestyle، screening اور professional care شامل ہوں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 5",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "disease prevention"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C06-I01",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "ماحول اور قدرتی وسائل",
+      "topic_name": "natural resource",
+      "category": "mcq",
+      "question_text": "Sustainably managed renewable resource کی مثال کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Solar energy"
+        },
+        {
+          "id": "B",
+          "text": "Coal"
+        },
+        {
+          "id": "C",
+          "text": "Petroleum"
+        },
+        {
+          "id": "D",
+          "text": "Natural gas"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Solar energy",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 6",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "natural resource"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C06-I02",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "ماحول اور قدرتی وسائل",
+      "topic_name": "conservation",
+      "category": "short",
+      "question_text": "Natural resources conserve کرنا کیوں ضروری ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Depletion اور environmental damage کم کرنے اور future needs کے لیے resources محفوظ رکھنے کے لیے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 6",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "conservation"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C06-I03",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "ماحول اور قدرتی وسائل",
+      "topic_name": "environment resources",
+      "category": "long",
+      "question_text": "Pollution، biodiversity، resource use اور sustainable development کے تعلق کی وضاحت کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Environmental quality، ecosystem health، efficient use، waste reduction اور long-term wellbeing شامل ہوں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 6",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "environment resources"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C07-I01",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "توانائی",
+      "topic_name": "energy",
+      "category": "mcq",
+      "question_text": "Energy کو عمومی طور پر کس صلاحیت سے تعبیر کیا جاتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Work کرنے یا change پیدا کرنے کی صلاحیت"
+        },
+        {
+          "id": "B",
+          "text": "mass کو nothing سے بنانا"
+        },
+        {
+          "id": "C",
+          "text": "تمام motion ہمیشہ روکنا"
+        },
+        {
+          "id": "D",
+          "text": "time ختم کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Work کرنے یا change پیدا کرنے کی صلاحیت",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 7",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "energy"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C07-I02",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "توانائی",
+      "topic_name": "energy transformation",
+      "category": "short",
+      "question_text": "Energy transformation کی ایک مثال دیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Solar panel light energy کو electrical energy میں تبدیل کرتا ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 7",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "energy transformation"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C07-I03",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "توانائی",
+      "topic_name": "energy sources",
+      "category": "long",
+      "question_text": "Renewable اور non-renewable energy sources کا availability، environmental impact اور sustainability کے لحاظ سے تقابل کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "دونوں categories کی definition، renewal rate، impacts اور long-term use بیان ہوں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 7",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "energy sources"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C08-I01",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "برقی رو",
+      "topic_name": "current",
+      "category": "mcq",
+      "question_text": "Electric current کس چیز کے flow کی rate ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Electric charge"
+        },
+        {
+          "id": "B",
+          "text": "صرف mass"
+        },
+        {
+          "id": "C",
+          "text": "صرف sound"
+        },
+        {
+          "id": "D",
+          "text": "صرف temperature"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Electric charge",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 8",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "current"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C08-I02",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "برقی رو",
+      "topic_name": "voltage current",
+      "category": "short",
+      "question_text": "Voltage اور current میں فرق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Voltage electric potential difference ہے جبکہ current charge flow کی rate ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 8",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "voltage current"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C08-I03",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "برقی رو",
+      "topic_name": "safe circuits",
+      "category": "long",
+      "question_text": "Current، voltage، resistance اور safe circuit use کا بنیادی تعلق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Quantities، simple conductor relationship اور properly rated components کے safe use کی conceptual explanation ہو؛ hazardous mains instructions نہ ہوں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 8",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "safe circuits"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C09-I01",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "بنیادی الیکٹرانکس",
+      "topic_name": "diode",
+      "category": "mcq",
+      "question_text": "Diode کا بنیادی کام کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Current کو ایک direction میں زیادہ آسانی سے گزرنے دینا"
+        },
+        {
+          "id": "B",
+          "text": "food store کرنا"
+        },
+        {
+          "id": "C",
+          "text": "body mass measure کرنا"
+        },
+        {
+          "id": "D",
+          "text": "rainfall بنانا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Current کو ایک direction میں زیادہ آسانی سے گزرنے دینا",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 9",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "diode"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C09-I02",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "بنیادی الیکٹرانکس",
+      "topic_name": "transistor",
+      "category": "short",
+      "question_text": "Basic electronics میں transistor کس کام آ سکتا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Electronic switch یا amplifier کے طور پر۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 9",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "transistor"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C09-I03",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "بنیادی الیکٹرانکس",
+      "topic_name": "electronics",
+      "category": "long",
+      "question_text": "Resistor، diode اور transistor سادہ electronic system میں کیا کردار ادا کرتے ہیں؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Current limiting/control، one-way conduction اور switching/amplification کو conceptually explain کیا جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 9",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "electronics"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C10-I01",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "سائنس اور ٹیکنالوجی",
+      "topic_name": "technology",
+      "category": "mcq",
+      "question_text": "Technology کی بہتر تعریف کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Knowledge اور tools کا practical problems حل کرنے کے لیے استعمال"
+        },
+        {
+          "id": "B",
+          "text": "صرف theoretical memorization"
+        },
+        {
+          "id": "C",
+          "text": "users کے بغیر process"
+        },
+        {
+          "id": "D",
+          "text": "صرف old machines"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Knowledge اور tools کا practical problems حل کرنے کے لیے استعمال",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 10",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "technology"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C10-I02",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "سائنس اور ٹیکنالوجی",
+      "topic_name": "technology impact",
+      "category": "short",
+      "question_text": "New technology adopt کرنے سے پہلے evaluation کیوں ضروری ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Benefits، costs، reliability، safety، privacy اور environmental/social effects assess کرنا ضروری ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 10",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "technology impact"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C10-I03",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "سائنس اور ٹیکنالوجی",
+      "topic_name": "science technology society",
+      "category": "long",
+      "question_text": "Science اور technology society کو کیسے متاثر کرتے ہیں اور society responsible innovation کو کیسے guide کر سکتی ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Knowledge-to-application، benefits، risks، ethics، regulation اور public needs بیان ہوں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 10",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "science technology society"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C11-I01",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "پاکستان کا خلائی اور جوہری پروگرام",
+      "topic_name": "space programme",
+      "category": "mcq",
+      "question_text": "National space programme کس کام میں مدد دے سکتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Communication، Earth observation اور scientific research"
+        },
+        {
+          "id": "B",
+          "text": "صرف road painting"
+        },
+        {
+          "id": "C",
+          "text": "صرف food storage"
+        },
+        {
+          "id": "D",
+          "text": "کوئی scientific work نہیں"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Communication، Earth observation اور scientific research",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 11",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "space programme"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C11-I02",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "پاکستان کا خلائی اور جوہری پروگرام",
+      "topic_name": "peaceful nuclear uses",
+      "category": "short",
+      "question_text": "Nuclear science کے دو peaceful applications لکھیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Medicine، agriculture، industry، power generation یا scientific research میں سے کوئی دو۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 11",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "peaceful nuclear uses"
+      ]
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C11-I03",
+      "class_level": "9th",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "پاکستان کا خلائی اور جوہری پروگرام",
+      "topic_name": "pakistan science programmes",
+      "category": "long",
+      "question_text": "Space اور nuclear science programmes کے peaceful national-development uses بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Communication، mapping، weather/environment observation، medicine، energy/research اور safety/responsible governance شامل ہوں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-038 | 73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382 | chapter 11",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "general-science",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "pakistan science programmes"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2439 @@
+{
+  "schemaVersion": "assps-generalScienceTech9-english-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-032",
+  "sourcePdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+  "scope": "GRADE9_GENERAL_SCIENCE_TECH_FULL_CHAPTER_STARTER",
+  "drafts": [
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C01-I01",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C01",
+        "number": 1
+      },
+      "topicId": "science",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Introduction and Role of Science"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Science is best described as?",
+          "answer": "Systematic study based on observation, evidence and testing",
+          "options": [
+            {
+              "id": "A",
+              "text": "Systematic study based on observation, evidence and testing"
+            },
+            {
+              "id": "B",
+              "text": "Only personal opinion"
+            },
+            {
+              "id": "C",
+              "text": "Only memorizing names"
+            },
+            {
+              "id": "D",
+              "text": "A process without evidence"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C01-I02",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C01",
+        "number": 1
+      },
+      "topicId": "branches of science",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Introduction and Role of Science"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Why are branches of science interconnected?",
+          "answer": "Different scientific problems often involve concepts and methods from more than one field."
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C01-I03",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C01",
+        "number": 1
+      },
+      "topicId": "role of science",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Introduction and Role of Science"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain how science, technology and evidence improve daily life while still having limitations.",
+          "answer": "A strong answer discusses evidence-based knowledge, practical applications, quality-of-life improvements, uncertainty and ethical/social limits."
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C02-I01",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C02",
+        "number": 2
+      },
+      "topicId": "chemistry in life",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Our Life and Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Which element is a major framework element in organic compounds?",
+          "answer": "Carbon",
+          "options": [
+            {
+              "id": "A",
+              "text": "Carbon"
+            },
+            {
+              "id": "B",
+              "text": "Neon only"
+            },
+            {
+              "id": "C",
+              "text": "Argon only"
+            },
+            {
+              "id": "D",
+              "text": "Helium only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C02-I02",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C02",
+        "number": 2
+      },
+      "topicId": "water",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Our Life and Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Why is water an important solvent in living systems?",
+          "answer": "Its polarity allows many ionic and polar substances to dissolve, supporting transport and reactions."
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C02-I03",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C02",
+        "number": 2
+      },
+      "topicId": "life and chemistry",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Our Life and Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Discuss how carbon compounds, water and air are connected with living systems and everyday life.",
+          "answer": "Cover carbon-based molecules, water as medium/solvent, oxygen/carbon dioxide roles and responsible use of chemical products."
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C03-I01",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C03",
+        "number": 3
+      },
+      "topicId": "enzyme",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Biochemistry and Biotechnology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "An enzyme mainly acts as?",
+          "answer": "A biological catalyst",
+          "options": [
+            {
+              "id": "A",
+              "text": "A biological catalyst"
+            },
+            {
+              "id": "B",
+              "text": "A source of chromosomes only"
+            },
+            {
+              "id": "C",
+              "text": "A mineral rock"
+            },
+            {
+              "id": "D",
+              "text": "A type of current"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C03-I02",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C03",
+        "number": 3
+      },
+      "topicId": "biotechnology",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Biochemistry and Biotechnology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "What is biotechnology?",
+          "answer": "The use of living organisms, cells or biological processes to develop useful products or applications."
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C03-I03",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C03",
+        "number": 3
+      },
+      "topicId": "biochemistry biotechnology",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Biochemistry and Biotechnology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain the relationship among biomolecules, enzymes, genetic information and biotechnology.",
+          "answer": "A complete answer links molecules and metabolism, enzyme action, DNA information and responsible biological applications."
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C04-I01",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C04",
+        "number": 4
+      },
+      "topicId": "balanced diet",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Human Health"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "A balanced diet should provide?",
+          "answer": "Appropriate energy and essential nutrients",
+          "options": [
+            {
+              "id": "A",
+              "text": "Appropriate energy and essential nutrients"
+            },
+            {
+              "id": "B",
+              "text": "Only sugar"
+            },
+            {
+              "id": "C",
+              "text": "Only water"
+            },
+            {
+              "id": "D",
+              "text": "Only one food group"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C04-I02",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C04",
+        "number": 4
+      },
+      "topicId": "exercise health",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Human Health"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "State two benefits of regular physical activity.",
+          "answer": "Examples include cardiovascular fitness, muscle/bone health, healthy body composition and mental wellbeing; any two."
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C04-I03",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C04",
+        "number": 4
+      },
+      "topicId": "human health",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Human Health"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain how nutrition, hygiene, exercise, rest and preventive care work together to support health.",
+          "answer": "Discuss each factor and how consistent healthy habits reduce avoidable health risks."
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C05-I01",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C05",
+        "number": 5
+      },
+      "topicId": "prevention",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Diseases, Cause and Prevention"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Which is a general disease-prevention principle?",
+          "answer": "Good hygiene and appropriate vaccination where recommended",
+          "options": [
+            {
+              "id": "A",
+              "text": "Good hygiene and appropriate vaccination where recommended"
+            },
+            {
+              "id": "B",
+              "text": "Sharing contaminated items"
+            },
+            {
+              "id": "C",
+              "text": "Ignoring symptoms"
+            },
+            {
+              "id": "D",
+              "text": "Avoiding all medical advice"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C05-I02",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C05",
+        "number": 5
+      },
+      "topicId": "communicable disease",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Diseases, Cause and Prevention"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "What makes a disease communicable?",
+          "answer": "It can be transmitted from an infected source or reservoir to another person, directly or indirectly."
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C05-I03",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C05",
+        "number": 5
+      },
+      "topicId": "disease prevention",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Diseases, Cause and Prevention"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Compare communicable and non-communicable diseases and describe general prevention strategies.",
+          "answer": "Differentiate transmission-based and non-transmissible conditions, then discuss hygiene, vaccination, healthy lifestyle, screening and professional care."
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C06-I01",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C06",
+        "number": 6
+      },
+      "topicId": "natural resource",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Environment and Natural Resources"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Which is a renewable resource when managed sustainably?",
+          "answer": "Solar energy",
+          "options": [
+            {
+              "id": "A",
+              "text": "Solar energy"
+            },
+            {
+              "id": "B",
+              "text": "Coal"
+            },
+            {
+              "id": "C",
+              "text": "Petroleum"
+            },
+            {
+              "id": "D",
+              "text": "Natural gas"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C06-I02",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C06",
+        "number": 6
+      },
+      "topicId": "conservation",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Environment and Natural Resources"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Why should natural resources be conserved?",
+          "answer": "To reduce depletion and environmental damage while preserving resources and ecosystem services for future use."
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C06-I03",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C06",
+        "number": 6
+      },
+      "topicId": "environment resources",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Environment and Natural Resources"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain links among pollution, biodiversity, resource use and sustainable development.",
+          "answer": "Discuss environmental quality, ecosystem health, efficient resource use, waste reduction and long-term human wellbeing."
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C07-I01",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C07",
+        "number": 7
+      },
+      "topicId": "energy",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Energy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Energy is commonly defined as the capacity to?",
+          "answer": "Do work or cause change",
+          "options": [
+            {
+              "id": "A",
+              "text": "Do work or cause change"
+            },
+            {
+              "id": "B",
+              "text": "Create mass from nothing"
+            },
+            {
+              "id": "C",
+              "text": "Stop all motion permanently"
+            },
+            {
+              "id": "D",
+              "text": "Remove time"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C07-I02",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C07",
+        "number": 7
+      },
+      "topicId": "energy transformation",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Energy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Give one example of an energy transformation.",
+          "answer": "For example, a solar panel converts light energy into electrical energy."
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C07-I03",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C07",
+        "number": 7
+      },
+      "topicId": "energy sources",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Energy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Compare renewable and non-renewable energy sources in terms of availability, environmental impact and sustainability.",
+          "answer": "Define both categories and compare resource renewal, emissions/impacts and long-term use."
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C08-I01",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C08",
+        "number": 8
+      },
+      "topicId": "current",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Current Electricity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Electric current is the rate of flow of?",
+          "answer": "Electric charge",
+          "options": [
+            {
+              "id": "A",
+              "text": "Electric charge"
+            },
+            {
+              "id": "B",
+              "text": "Mass only"
+            },
+            {
+              "id": "C",
+              "text": "Sound only"
+            },
+            {
+              "id": "D",
+              "text": "Temperature only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C08-I02",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C08",
+        "number": 8
+      },
+      "topicId": "voltage current",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Current Electricity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Differentiate voltage and current.",
+          "answer": "Voltage is electric potential difference; current is the rate at which charge flows."
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C08-I03",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C08",
+        "number": 8
+      },
+      "topicId": "safe circuits",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Current Electricity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain basic relationships among current, voltage, resistance and safe circuit use.",
+          "answer": "Discuss the quantities conceptually, Ohm-type relationship for simple conductors, and safe use of properly rated components without hazardous mains instructions."
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C09-I01",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C09",
+        "number": 9
+      },
+      "topicId": "diode",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Basic Electronics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "A diode is mainly used to?",
+          "answer": "Allow current more readily in one direction",
+          "options": [
+            {
+              "id": "A",
+              "text": "Allow current more readily in one direction"
+            },
+            {
+              "id": "B",
+              "text": "Store food"
+            },
+            {
+              "id": "C",
+              "text": "Measure body mass"
+            },
+            {
+              "id": "D",
+              "text": "Generate rainfall"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C09-I02",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C09",
+        "number": 9
+      },
+      "topicId": "transistor",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Basic Electronics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "What is a transistor used for in basic electronics?",
+          "answer": "It can act as an electronic switch or amplifier in circuits."
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C09-I03",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C09",
+        "number": 9
+      },
+      "topicId": "electronics",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Basic Electronics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Describe how components such as resistors, diodes and transistors contribute to simple electronic systems.",
+          "answer": "Explain current limiting/control, one-way conduction and switching/amplification conceptually."
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C10-I01",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C10",
+        "number": 10
+      },
+      "topicId": "technology",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Science and Technology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Technology is best understood as?",
+          "answer": "Application of knowledge and tools to solve practical problems",
+          "options": [
+            {
+              "id": "A",
+              "text": "Application of knowledge and tools to solve practical problems"
+            },
+            {
+              "id": "B",
+              "text": "Only theoretical memorization"
+            },
+            {
+              "id": "C",
+              "text": "A process without users"
+            },
+            {
+              "id": "D",
+              "text": "Only old machines"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C10-I02",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C10",
+        "number": 10
+      },
+      "topicId": "technology impact",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Science and Technology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Why should new technology be evaluated before adoption?",
+          "answer": "Benefits, costs, reliability, safety, privacy and environmental/social effects should be considered."
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C10-I03",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C10",
+        "number": 10
+      },
+      "topicId": "science technology society",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Science and Technology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain how science and technology influence society and how society can guide responsible innovation.",
+          "answer": "Discuss knowledge-to-application pathways, benefits, risks, ethics, regulation and public needs."
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C11-I01",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C11",
+        "number": 11
+      },
+      "topicId": "space programme",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Space and Nuclear Programme of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "A national space programme can support?",
+          "answer": "Communication, Earth observation and scientific research",
+          "options": [
+            {
+              "id": "A",
+              "text": "Communication, Earth observation and scientific research"
+            },
+            {
+              "id": "B",
+              "text": "Only road painting"
+            },
+            {
+              "id": "C",
+              "text": "Only food storage"
+            },
+            {
+              "id": "D",
+              "text": "No scientific work"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C11-I02",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C11",
+        "number": 11
+      },
+      "topicId": "peaceful nuclear uses",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Space and Nuclear Programme of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "State two peaceful applications of nuclear science.",
+          "answer": "Examples include medicine, agriculture, industry, power generation and scientific research; any two."
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-ENGLISH-C11-I03",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-ENGLISH-C11",
+        "number": 11
+      },
+      "topicId": "pakistan science programmes",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-032",
+        "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Space and Nuclear Programme of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Discuss peaceful contributions of space and nuclear science programmes to national development.",
+          "answer": "Explain applications in communication, mapping, weather/environment observation, medicine, energy/research and the importance of safety and responsible governance."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 33,
+    "mcq": 11,
+    "short": 11,
+    "long": 11,
+    "chapters": 11
+  }
+}

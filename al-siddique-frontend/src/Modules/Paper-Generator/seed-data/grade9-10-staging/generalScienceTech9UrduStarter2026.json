@@ -1,0 +1,2439 @@
+{
+  "schemaVersion": "assps-generalScienceTech9-urdu-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-038",
+  "sourcePdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+  "scope": "GRADE9_GENERAL_SCIENCE_TECH_FULL_CHAPTER_STARTER",
+  "drafts": [
+    {
+      "id": "IX-GENSCI-TECH-URDU-C01-I01",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C01",
+        "number": 1
+      },
+      "topicId": "science",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Introduction and Role of Science"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Science کی بہتر تعریف کیا ہے؟",
+          "answer": "مشاہدے، evidence اور testing پر مبنی منظم مطالعہ",
+          "options": [
+            {
+              "id": "A",
+              "text": "مشاہدے، evidence اور testing پر مبنی منظم مطالعہ"
+            },
+            {
+              "id": "B",
+              "text": "صرف ذاتی رائے"
+            },
+            {
+              "id": "C",
+              "text": "صرف نام یاد کرنا"
+            },
+            {
+              "id": "D",
+              "text": "بغیر evidence کے نتیجہ"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C01-I02",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C01",
+        "number": 1
+      },
+      "topicId": "branches of science",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Introduction and Role of Science"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Science کی مختلف branches ایک دوسرے سے کیوں جڑی ہوتی ہیں؟",
+          "answer": "بہت سے scientific مسائل سمجھنے کے لیے ایک سے زیادہ fields کے concepts اور methods درکار ہوتے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C01-I03",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C01",
+        "number": 1
+      },
+      "topicId": "role of science",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Introduction and Role of Science"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Science، technology اور evidence روزمرہ زندگی بہتر کرنے میں کیسے مدد دیتے ہیں اور ان کی limitations کیا ہیں؟",
+          "answer": "Evidence-based knowledge، practical applications، quality of life، uncertainty اور ethical/social limits بیان کیے جائیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C02-I01",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C02",
+        "number": 2
+      },
+      "topicId": "chemistry in life",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Our Life and Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Organic compounds کا بنیادی framework element کون سا ہے؟",
+          "answer": "Carbon",
+          "options": [
+            {
+              "id": "A",
+              "text": "Carbon"
+            },
+            {
+              "id": "B",
+              "text": "صرف Neon"
+            },
+            {
+              "id": "C",
+              "text": "صرف Argon"
+            },
+            {
+              "id": "D",
+              "text": "صرف Helium"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C02-I02",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C02",
+        "number": 2
+      },
+      "topicId": "water",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Our Life and Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Living systems میں water اہم solvent کیوں ہے؟",
+          "answer": "اس کی polarity بہت سے ionic اور polar substances کو dissolve کر کے transport اور reactions میں مدد دیتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C02-I03",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C02",
+        "number": 2
+      },
+      "topicId": "life and chemistry",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Our Life and Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Carbon compounds، water اور air کا living systems اور daily life سے تعلق بیان کریں۔",
+          "answer": "Carbon-based molecules، water as medium/solvent، oxygen/carbon dioxide roles اور chemical products کے responsible use کا ذکر ہو۔"
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C03-I01",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C03",
+        "number": 3
+      },
+      "topicId": "enzyme",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Biochemistry and Biotechnology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Enzyme بنیادی طور پر کیا کرتا ہے؟",
+          "answer": "Biological catalyst کے طور پر کام کرتا ہے",
+          "options": [
+            {
+              "id": "A",
+              "text": "Biological catalyst کے طور پر کام کرتا ہے"
+            },
+            {
+              "id": "B",
+              "text": "صرف chromosomes بناتا ہے"
+            },
+            {
+              "id": "C",
+              "text": "mineral rock ہے"
+            },
+            {
+              "id": "D",
+              "text": "electric current ہے"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C03-I02",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C03",
+        "number": 3
+      },
+      "topicId": "biotechnology",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Biochemistry and Biotechnology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Biotechnology کیا ہے؟",
+          "answer": "Living organisms، cells یا biological processes کو useful products یا applications کے لیے استعمال کرنا۔"
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C03-I03",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C03",
+        "number": 3
+      },
+      "topicId": "biochemistry biotechnology",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Biochemistry and Biotechnology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Biomolecules، enzymes، genetic information اور biotechnology کے باہمی تعلق کی وضاحت کریں۔",
+          "answer": "Molecules/metabolism، enzyme action، DNA information اور responsible biological applications کو جوڑا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C04-I01",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C04",
+        "number": 4
+      },
+      "topicId": "balanced diet",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Human Health"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Balanced diet میں کیا ہونا چاہیے؟",
+          "answer": "مناسب energy اور ضروری nutrients",
+          "options": [
+            {
+              "id": "A",
+              "text": "مناسب energy اور ضروری nutrients"
+            },
+            {
+              "id": "B",
+              "text": "صرف sugar"
+            },
+            {
+              "id": "C",
+              "text": "صرف water"
+            },
+            {
+              "id": "D",
+              "text": "صرف ایک food group"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C04-I02",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C04",
+        "number": 4
+      },
+      "topicId": "exercise health",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Human Health"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Regular physical activity کے دو فائدے لکھیں۔",
+          "answer": "Cardiovascular fitness، muscle/bone health، healthy body composition یا mental wellbeing میں سے کوئی دو۔"
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C04-I03",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C04",
+        "number": 4
+      },
+      "topicId": "human health",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Human Health"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Nutrition، hygiene، exercise، rest اور preventive care مل کر health کو کیسے support کرتے ہیں؟",
+          "answer": "ہر factor اور healthy habits کے avoidable risk کم کرنے والے کردار کی وضاحت ہو۔"
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C05-I01",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C05",
+        "number": 5
+      },
+      "topicId": "prevention",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Diseases, Cause and Prevention"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Disease prevention کا عمومی اصول کون سا ہے؟",
+          "answer": "اچھی hygiene اور recommended vaccination",
+          "options": [
+            {
+              "id": "A",
+              "text": "اچھی hygiene اور recommended vaccination"
+            },
+            {
+              "id": "B",
+              "text": "contaminated items share کرنا"
+            },
+            {
+              "id": "C",
+              "text": "symptoms ignore کرنا"
+            },
+            {
+              "id": "D",
+              "text": "medical advice avoid کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C05-I02",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C05",
+        "number": 5
+      },
+      "topicId": "communicable disease",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Diseases, Cause and Prevention"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Communicable disease کسے کہتے ہیں؟",
+          "answer": "ایسی بیماری جو infected source/reservoir سے دوسرے فرد تک direct یا indirect منتقل ہو سکے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C05-I03",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C05",
+        "number": 5
+      },
+      "topicId": "disease prevention",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Diseases, Cause and Prevention"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Communicable اور non-communicable diseases کا تقابل اور general prevention strategies بیان کریں۔",
+          "answer": "Transmission difference، hygiene، vaccination، healthy lifestyle، screening اور professional care شامل ہوں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C06-I01",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C06",
+        "number": 6
+      },
+      "topicId": "natural resource",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Environment and Natural Resources"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Sustainably managed renewable resource کی مثال کون سی ہے؟",
+          "answer": "Solar energy",
+          "options": [
+            {
+              "id": "A",
+              "text": "Solar energy"
+            },
+            {
+              "id": "B",
+              "text": "Coal"
+            },
+            {
+              "id": "C",
+              "text": "Petroleum"
+            },
+            {
+              "id": "D",
+              "text": "Natural gas"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C06-I02",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C06",
+        "number": 6
+      },
+      "topicId": "conservation",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Environment and Natural Resources"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Natural resources conserve کرنا کیوں ضروری ہے؟",
+          "answer": "Depletion اور environmental damage کم کرنے اور future needs کے لیے resources محفوظ رکھنے کے لیے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C06-I03",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C06",
+        "number": 6
+      },
+      "topicId": "environment resources",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Environment and Natural Resources"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Pollution، biodiversity، resource use اور sustainable development کے تعلق کی وضاحت کریں۔",
+          "answer": "Environmental quality، ecosystem health، efficient use، waste reduction اور long-term wellbeing شامل ہوں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C07-I01",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C07",
+        "number": 7
+      },
+      "topicId": "energy",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Energy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Energy کو عمومی طور پر کس صلاحیت سے تعبیر کیا جاتا ہے؟",
+          "answer": "Work کرنے یا change پیدا کرنے کی صلاحیت",
+          "options": [
+            {
+              "id": "A",
+              "text": "Work کرنے یا change پیدا کرنے کی صلاحیت"
+            },
+            {
+              "id": "B",
+              "text": "mass کو nothing سے بنانا"
+            },
+            {
+              "id": "C",
+              "text": "تمام motion ہمیشہ روکنا"
+            },
+            {
+              "id": "D",
+              "text": "time ختم کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C07-I02",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C07",
+        "number": 7
+      },
+      "topicId": "energy transformation",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Energy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Energy transformation کی ایک مثال دیں۔",
+          "answer": "Solar panel light energy کو electrical energy میں تبدیل کرتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C07-I03",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C07",
+        "number": 7
+      },
+      "topicId": "energy sources",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Energy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Renewable اور non-renewable energy sources کا availability، environmental impact اور sustainability کے لحاظ سے تقابل کریں۔",
+          "answer": "دونوں categories کی definition، renewal rate، impacts اور long-term use بیان ہوں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C08-I01",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C08",
+        "number": 8
+      },
+      "topicId": "current",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Current Electricity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Electric current کس چیز کے flow کی rate ہے؟",
+          "answer": "Electric charge",
+          "options": [
+            {
+              "id": "A",
+              "text": "Electric charge"
+            },
+            {
+              "id": "B",
+              "text": "صرف mass"
+            },
+            {
+              "id": "C",
+              "text": "صرف sound"
+            },
+            {
+              "id": "D",
+              "text": "صرف temperature"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C08-I02",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C08",
+        "number": 8
+      },
+      "topicId": "voltage current",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Current Electricity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Voltage اور current میں فرق بیان کریں۔",
+          "answer": "Voltage electric potential difference ہے جبکہ current charge flow کی rate ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C08-I03",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C08",
+        "number": 8
+      },
+      "topicId": "safe circuits",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Current Electricity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Current، voltage، resistance اور safe circuit use کا بنیادی تعلق بیان کریں۔",
+          "answer": "Quantities، simple conductor relationship اور properly rated components کے safe use کی conceptual explanation ہو؛ hazardous mains instructions نہ ہوں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C09-I01",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C09",
+        "number": 9
+      },
+      "topicId": "diode",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Basic Electronics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Diode کا بنیادی کام کیا ہے؟",
+          "answer": "Current کو ایک direction میں زیادہ آسانی سے گزرنے دینا",
+          "options": [
+            {
+              "id": "A",
+              "text": "Current کو ایک direction میں زیادہ آسانی سے گزرنے دینا"
+            },
+            {
+              "id": "B",
+              "text": "food store کرنا"
+            },
+            {
+              "id": "C",
+              "text": "body mass measure کرنا"
+            },
+            {
+              "id": "D",
+              "text": "rainfall بنانا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C09-I02",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C09",
+        "number": 9
+      },
+      "topicId": "transistor",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Basic Electronics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Basic electronics میں transistor کس کام آ سکتا ہے؟",
+          "answer": "Electronic switch یا amplifier کے طور پر۔"
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C09-I03",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C09",
+        "number": 9
+      },
+      "topicId": "electronics",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Basic Electronics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Resistor، diode اور transistor سادہ electronic system میں کیا کردار ادا کرتے ہیں؟",
+          "answer": "Current limiting/control، one-way conduction اور switching/amplification کو conceptually explain کیا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C10-I01",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C10",
+        "number": 10
+      },
+      "topicId": "technology",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Science and Technology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Technology کی بہتر تعریف کیا ہے؟",
+          "answer": "Knowledge اور tools کا practical problems حل کرنے کے لیے استعمال",
+          "options": [
+            {
+              "id": "A",
+              "text": "Knowledge اور tools کا practical problems حل کرنے کے لیے استعمال"
+            },
+            {
+              "id": "B",
+              "text": "صرف theoretical memorization"
+            },
+            {
+              "id": "C",
+              "text": "users کے بغیر process"
+            },
+            {
+              "id": "D",
+              "text": "صرف old machines"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C10-I02",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C10",
+        "number": 10
+      },
+      "topicId": "technology impact",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Science and Technology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "New technology adopt کرنے سے پہلے evaluation کیوں ضروری ہے؟",
+          "answer": "Benefits، costs، reliability، safety، privacy اور environmental/social effects assess کرنا ضروری ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C10-I03",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C10",
+        "number": 10
+      },
+      "topicId": "science technology society",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Science and Technology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Science اور technology society کو کیسے متاثر کرتے ہیں اور society responsible innovation کو کیسے guide کر سکتی ہے؟",
+          "answer": "Knowledge-to-application، benefits، risks، ethics، regulation اور public needs بیان ہوں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C11-I01",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C11",
+        "number": 11
+      },
+      "topicId": "space programme",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Space and Nuclear Programme of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "National space programme کس کام میں مدد دے سکتا ہے؟",
+          "answer": "Communication، Earth observation اور scientific research",
+          "options": [
+            {
+              "id": "A",
+              "text": "Communication، Earth observation اور scientific research"
+            },
+            {
+              "id": "B",
+              "text": "صرف road painting"
+            },
+            {
+              "id": "C",
+              "text": "صرف food storage"
+            },
+            {
+              "id": "D",
+              "text": "کوئی scientific work نہیں"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C11-I02",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C11",
+        "number": 11
+      },
+      "topicId": "peaceful nuclear uses",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Space and Nuclear Programme of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Nuclear science کے دو peaceful applications لکھیں۔",
+          "answer": "Medicine، agriculture، industry، power generation یا scientific research میں سے کوئی دو۔"
+        }
+      }
+    },
+    {
+      "id": "IX-GENSCI-TECH-URDU-C11-I03",
+      "chapter": {
+        "id": "IX-GENSCI-TECH-URDU-C11",
+        "number": 11
+      },
+      "topicId": "pakistan science programmes",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-038",
+        "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_PDF_HASH_PLUS_CURRENT_CHAPTER_INDEX_CROSSCHECK",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Space and Nuclear Programme of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "general-science-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-GENSCI-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original General Science-Tech IX starter aligned to hash-verified official book and independently cross-checked current chapter index. Exact page-level review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned General Science-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Space اور nuclear science programmes کے peaceful national-development uses بیان کریں۔",
+          "answer": "Communication، mapping، weather/environment observation، medicine، energy/research اور safety/responsible governance شامل ہوں۔"
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 33,
+    "mcq": 11,
+    "short": 11,
+    "long": 11,
+    "chapters": 11
+  }
+}
