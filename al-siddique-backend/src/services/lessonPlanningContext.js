@@ -153,13 +153,13 @@ async function loadPlanningContext(client, schoolId, filters = {}) {
   const classLevel = clean(filters.classLevel, 80)
   const section = clean(filters.section, 80)
   const subjects = [...new Set((Array.isArray(filters.subjects) ? filters.subjects : []).map(value => clean(value, 160)).filter(Boolean))]
-  const [academicSetup, session, timetable, questionBankSignals, curriculumScopes] = await Promise.all([
-    loadAcademicSetup(client, schoolId),
-    loadSession(client, schoolId),
-    loadTimetable(client, schoolId, classLevel, section),
-    loadQuestionBankSignals(client, schoolId, classLevel, subjects),
-    loadCurriculumScopes(client, schoolId, classLevel, subjects),
-  ])
+  // A single pg Client must not execute concurrent queries. Keep these reads sequential
+  // inside the request-scoped RLS transaction so pg@9+ remains safe and deterministic.
+  const academicSetup = await loadAcademicSetup(client, schoolId)
+  const session = await loadSession(client, schoolId)
+  const timetable = await loadTimetable(client, schoolId, classLevel, section)
+  const questionBankSignals = await loadQuestionBankSignals(client, schoolId, classLevel, subjects)
+  const curriculumScopes = await loadCurriculumScopes(client, schoolId, classLevel, subjects)
   const timetableSubjects = [...new Set(timetable.map(row => clean(row.subject, 160)).filter(Boolean))]
   const curriculumSubjects = [...new Set(curriculumScopes.map(row => clean(row.subject, 160)).filter(Boolean))]
   const qbankSubjects = [...new Set(questionBankSignals.map(row => clean(row.subject, 160)).filter(Boolean))]
