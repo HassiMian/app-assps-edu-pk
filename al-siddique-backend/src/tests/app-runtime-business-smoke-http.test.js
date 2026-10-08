@@ -45,7 +45,14 @@ test('restricted app runtime preserves school dashboard and academic API', {time
     const paths = [
       '/api/dashboard/stats',
       '/api/students?active=true',
+      '/api/attendance',
+      '/api/academic/setup',
+      '/api/employees',
       '/api/fees/summary',
+      '/api/fees',
+      '/api/families',
+      '/api/date-sheets',
+      '/api/timetable',
       '/api/paper/vault',
       '/api/portal/paper-studio/context',
       '/api/question-bank',
@@ -55,7 +62,7 @@ test('restricted app runtime preserves school dashboard and academic API', {time
     for (const path of paths) {
       const res = await request(path, {cookie})
       console.log('APP_RUNTIME_STAGE_HTTP',path,res.status)
-      if (res.status >= 500 || res.status === 401) {
+      if (res.status !== 200) {
         problems.push(`${path}: ${res.status} ${res.body.slice(0,180)}`)
       }
     }

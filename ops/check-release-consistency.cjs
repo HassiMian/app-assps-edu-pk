@@ -77,6 +77,13 @@ function verifyBackendForward(base, head, branch) {
   } catch (_) { return false }
 }
 
+function remoteBackendChanges(liveFrontendCommit, remoteCanonicalCommit) {
+  if (!/^[0-9a-f]{40}$/i.test(String(liveFrontendCommit || ''))) throw new Error('Invalid live frontend SHA')
+  execFileSync('git', ['-C', repoRoot, 'merge-base', '--is-ancestor', liveFrontendCommit, remoteCanonicalCommit], {timeout:12000})
+  return execFileSync('git', ['-C', repoRoot, 'diff', '--name-only', liveFrontendCommit, remoteCanonicalCommit, '--', 'al-siddique-backend/'],
+    {encoding:'utf8',timeout:12000}).trim().split('\n').filter(Boolean)
+}
+
 function pm2Environment() {
   const output = execFileSync('pm2', ['pid', 'apex-backend'], { encoding: 'utf8' }).trim()
   const pid = output.split(/\s+/).filter(Boolean).at(-1)
@@ -85,14 +92,27 @@ function pm2Environment() {
 }
 
 function main() {
-  const canonicalCommit = canonicalRemoteCommit()
+  const remoteCanonicalCommit = canonicalRemoteCommit()
   const frontendMeta = readJson(process.env.ASSPS_FRONTEND_RELEASE_META || '/var/www/apex-os/release-meta.json')
   const backendMeta = readJson(process.env.ASSPS_BACKEND_RELEASE_META || '/var/www/apex-backend/release-meta.json')
   const pm2Env = pm2Environment()
+  const isBackendOnlyForward = backendMeta?.component === 'backend-paper-studio-rls-hardening'
+  const canonicalCommit = isBackendOnlyForward ? frontendMeta?.commit : remoteCanonicalCommit
+  const extraFindings = []
+  if (isBackendOnlyForward) {
+    try {
+      const backendChanges = remoteBackendChanges(canonicalCommit, remoteCanonicalCommit)
+      if (backendChanges.length) extraFindings.push('UNDEPLOYED_CANONICAL_BACKEND_CHANGES:' + backendChanges.join(','))
+    } catch (err) {
+      extraFindings.push('REMOTE_CANONICAL_ANCESTRY_NOT_VERIFIED')
+    }
+  }
   const result = evaluateReleaseConsistency({ canonicalCommit, frontendMeta, backendMeta, pm2Env, backendForwardVerifier: verifyBackendForward })
-  console.log(JSON.stringify({ canonicalCommit, canonicalBranch: CANONICAL_BRANCH, ...result }, null, 2))
-  if (!result.safe) process.exitCode = 1
+  const findings = [...result.findings, ...extraFindings]
+  console.log(JSON.stringify({ canonicalCommit, remoteCanonicalCommit, canonicalBranch: CANONICAL_BRANCH,
+    componentForward:isBackendOnlyForward, safe:findings.length===0, findings }, null, 2))
+  if (findings.length) process.exitCode = 1
 }
 
 if (require.main === module) main()
-module.exports = { CANONICAL_BRANCH, parseProcEnv, evaluateReleaseConsistency }
+module.exports = { CANONICAL_BRANCH, parseProcEnv, evaluateReleaseConsistency, remoteBackendChanges }

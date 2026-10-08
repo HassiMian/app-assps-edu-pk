@@ -15,7 +15,7 @@ After staging source from the verified live commit, genuine revision-bound G21 H
 - Alternate-port backend `127.0.0.1:5039`: health and readiness returned 200; release smoke PASS (unauthenticated paper/Question Bank endpoints return 401).
 - G21 revision-bound POST canonical DOCX HTTP on disposable DB/test server `5040`: 9/9 PASS, including cross-tenant, current revision/hash, fail-closed legacy sources and real DOCX SHA.
 - Lesson Plans HTTP 12/12 PASS; Question Bank governance HTTP 9/9 PASS; Assessment Print Jobs HTTP 8/8 PASS. The mock token was enabled only in the disposable print test process (`NODE_ENV=test`), never production.
-- Authenticated synthetic school operational smoke through alternate-port server: dashboard, students, fees summary, vault, paper context, Question Bank and lesson plans 7/7 PASS. Test created/deleted a synthetic school only in disposable DB.
+- Authenticated synthetic school operational smoke through alternate-port server: dashboard, students, attendance, academic setup, employees, fees, families, date sheets, timetable, Vault, paper context, Question Bank and lesson plans 14/14 HTTP 200 PASS. Test created/deleted a synthetic school only in disposable DB.
 - Static/contract/release tests: 58/58 PASS.
 - Vite production frontend build PASS; protected school paper templates 6/6 unchanged; production-safety check PASS.
 
@@ -29,3 +29,11 @@ After staging source from the verified live commit, genuine revision-bound G21 H
 - The legacy DB login still has BYPASSRLS for bootstrap compatibility. The authenticated application path is instead restricted by SET ROLE. Long-term deprivileging of the bootstrap login remains a separate cross-module hardening project requiring an independent rollout and explicit regression proof.
 
 Status: focused code and isolated staging validated. Production promotion and post-deploy checks must be recorded separately after actual execution.
+
+## Latest parallel production fence and rollback evidence
+
+The canonical production stream subsequently advanced frontend and backend metadata together to `25932458d9d2f9ea323576c4fe64f725b0cb9b0b` (authenticated attendance/settings corrections). The live frontend `index.html` and all 80 assets were independently verified byte-for-byte against this exact source commit. The Paper Studio forward branch merged that descendant, rather than replacing any of its unrelated UI improvements. The three scoped backend runtime files remained the only observed backend-source differences; they require the focused security release, not broad backend synchronization.
+
+A fresh pre-release rollback package was captured at `/var/backups/assps-paper-v1-rls-predeploy-20261008T032459Z`: frontend tar, critical backend files/metadata tar, and a complete PostgreSQL custom dump. All SHA256 checks passed, and the database dump was actually restored into disposable `assps_paper_v1_rollback_259_20261008`, verifying 85 public tables. The prior checkpoint package is preserved separately. Do not use the older checkpoint to revert the newer canonical attendance/settings release.
+
+The split-release consistency guard requires an exact source ancestry, matching Git remote branch, live frontend SHA, and assurance that unpromoted canonical work does not contain backend changes. Backend-only promotion must leave live frontend files and metadata untouched; post-deploy metadata must identify the backend forward SHA truthfully, not claim a frontend rebuild.
