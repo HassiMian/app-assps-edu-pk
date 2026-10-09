@@ -54,6 +54,7 @@ function normalizeEvidence(evidence, question, context={}) {
       throw error('ACADEMIC_ATTESTATION_INCOMPLETE','Missing explicit review attestation: '+key,422)
   if(String(evidence.editorialNotes||'').trim().length<45)
     throw error('ACADEMIC_REVIEW_NOTES_REQUIRED','Provide substantive independent review notes.',422)
+  requireGrade910McqIntegrity(question)
   const school=requireAdoptedSource({tenantId:context.tenantId,source,evidence,grade,question})
   const physical=requirePhysicalPageProof({source,evidence,question,mode})
   return {
@@ -96,7 +97,38 @@ function canonicalComparedContent(value = {}, legacy = false) {
     marks:Number(value.marks),
   }
 }
+// Structural checking cannot certify scientific correctness. It prevents
+// a self-consistent but malformed MCQ from inheriting an academic sign-off.
+const normalizedChoice = value => String(value??'').normalize('NFKC')
+  .trim().replace(/\s+/g,' ').toLowerCase().replace(/[.،۔!?؟]+$/g,'').trim()
+function grade910McqIntegrityIssues(value,legacy=false){
+  const c=canonicalComparedContent(value,legacy)
+  if(c.questionType!=='mcq')return []
+  const findings=[]
+  if(!c.questionText)findings.push('EMPTY_QUESTION_STEM')
+  if(c.options.length!==4||c.options.map(x=>x.label).join('')!=='ABCD'||
+     c.options.some(x=>!normalizedChoice(x.text)))
+    findings.push('MCQ_OPTIONS_OR_LABELS_INVALID')
+  const texts=c.options.map(x=>normalizedChoice(x.text))
+  if(new Set(texts).size!==4)findings.push('MCQ_OPTIONS_NOT_DISTINCT')
+  if(!/^[A-D]$/.test(c.correctOption))findings.push('MCQ_KEY_INVALID')
+  const selected=c.options['ABCD'.indexOf(c.correctOption)]
+  const answer=normalizedChoice(c.answer)
+  if(!answer||!selected||normalizedChoice(selected.text)!==answer||
+     texts.filter(x=>x===answer).length!==1)
+    findings.push('MCQ_STORED_ANSWER_NOT_SELECTED_OPTION')
+  return findings
+}
+function requireGrade910McqIntegrity(value){
+  const findings=grade910McqIntegrityIssues(value)
+  if(findings.length)
+    throw error('ACADEMIC_MCQ_ANSWER_OPTION_INCONSISTENT',
+      'MCQ requires four unique labeled choices and a selected option equal to the stored answer: '+findings.join(','),422)
+  return true
+}
 function approvedSourceMatchesRevision(source,revision){
+  if(grade910McqIntegrityIssues(source,true).length||
+     grade910McqIntegrityIssues(revision,false).length)return false
   return JSON.stringify(canonicalComparedContent(source,true))===
     JSON.stringify(canonicalComparedContent(revision,false))
 }
@@ -160,3 +192,5 @@ async function assertIndependentReviewReady(client,{schoolId,master,actorId}){
 module.exports.assertIndependentReviewReady=assertIndependentReviewReady
 
 module.exports.approvedSourceMatchesRevision=approvedSourceMatchesRevision
+module.exports.grade910McqIntegrityIssues=grade910McqIntegrityIssues
+module.exports.requireGrade910McqIntegrity=requireGrade910McqIntegrity

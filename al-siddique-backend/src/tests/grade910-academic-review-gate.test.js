@@ -81,3 +81,72 @@ test('older source-review schema v1 does not automatically inherit new edition/p
  e.schemaVersion='assps-grade910-independent-review-v1'
  assert.throws(()=>normalizeEvidence(e,question,{tenantId:1}),{code:'INVALID_REVIEW_SCHEMA'})
 })
+
+test('identical source/revision MCQ with an internally contradictory answer never qualifies for release',()=>{
+ const {approvedSourceMatchesRevision}=require('../services/grade910AcademicReviewGate')
+ const original={
+  question_type:'mcq',question_text:'Which particle carries positive electric charge?',
+  question_text_urdu:'',options:['Proton','Neutron','Photon','Electron'],
+  correct_option:'A',answer:'Electron',explanation:'Synthetic intentionally inconsistent key.',marks:1,
+ }
+ const rev={
+  questionType:'mcq',questionText:original.question_text,questionTextUrdu:'',
+  options:original.options.map((text,i)=>({label:'ABCD'[i],text})),
+  correctOption:original.correct_option,answer:original.answer,
+  explanation:original.explanation,marks:1,
+ }
+ // Existing source/revision parity alone returns true for this unsafe document.
+ assert.equal(approvedSourceMatchesRevision(original,rev),false)
+})
+test('MCQ structural corruption cannot be approved even when both sides agree on corrupt bytes',()=>{
+ const {approvedSourceMatchesRevision}=require('../services/grade910AcademicReviewGate')
+ const seed={
+  question_type:'mcq',question_text:'Synthetic question text?',question_text_urdu:'',
+  options:['Alpha','Beta','Gamma','Delta'],correct_option:'A',
+  answer:'Alpha',explanation:'Synthetic.',marks:1,
+ }
+ const mkRev=x=>({questionType:'mcq',questionText:x.question_text,questionTextUrdu:'',
+  options:x.options.map((text,i)=>({label:'ABCD'[i],text})),correctOption:x.correct_option,
+  answer:x.answer,explanation:x.explanation,marks:1})
+ const bad=[
+  {...seed,options:['Alpha','Alpha','Gamma','Delta']},
+  {...seed,options:['Alpha','Beta','Gamma']},
+  {...seed,correct_option:'E'},
+  {...seed,answer:''},
+  {...seed,answer:'Beta'},
+ ]
+ for(const source of bad){
+  assert.equal(approvedSourceMatchesRevision(source,mkRev(source)),false)
+ }
+})
+
+test('review capture requires four distinct A-D choices, an unambiguous selected answer and a question stem',()=>{
+ const {requireGrade910McqIntegrity,grade910McqIntegrityIssues}=require('../services/grade910AcademicReviewGate')
+ const base={questionType:'mcq',questionText:'Which statement is valid?',marks:1,
+  options:[{label:'A',text:'Proton'},{label:'B',text:'Neutron'},
+           {label:'C',text:'Electron'},{label:'D',text:'Photon'}],
+  correctOption:'A',answer:'Proton'}
+ assert.equal(requireGrade910McqIntegrity(base),true)
+ assert.deepEqual(grade910McqIntegrityIssues(base),[])
+ for(const broken of [
+  {...base,questionText:''},
+  {...base,correctOption:'D',answer:'Proton'},
+  {...base,correctOption:'E'},
+  {...base,options:base.options.slice(0,3)},
+  {...base,options:base.options.map((x,i)=>i===2?{...x,label:'B'}:x)},
+  {...base,options:base.options.map((x,i)=>i===2?{...x,text:'PROTON'}:x)},
+  {...base,answer:'Not an option'},
+ ]){
+  assert.throws(()=>requireGrade910McqIntegrity(broken),
+    {code:'ACADEMIC_MCQ_ANSWER_OPTION_INCONSISTENT'})
+ }
+})
+test('scientific notation 1+ vs 1- remains distinct when comparing MCQ answers',()=>{
+ const {grade910McqIntegrityIssues}=require('../services/grade910AcademicReviewGate')
+ const base={questionType:'mcq',questionText:'Which is a cation?',correctOption:'A',answer:'1+',
+  options:[{label:'A',text:'1+'},{label:'B',text:'1-'},{label:'C',text:'2-'},{label:'D',text:'0'}]}
+ assert.deepEqual(grade910McqIntegrityIssues(base),[])
+ assert.ok(grade910McqIntegrityIssues({...base,answer:'1-'}).includes('MCQ_STORED_ANSWER_NOT_SELECTED_OPTION'))
+ const variant={questionType:'short',questionText:'Why are cations positive?',answer:'Lost an electron'}
+ assert.deepEqual(grade910McqIntegrityIssues(variant),[])
+})
