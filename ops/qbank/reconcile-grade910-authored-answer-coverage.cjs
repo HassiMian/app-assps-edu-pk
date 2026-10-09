@@ -14,7 +14,8 @@ const MANIFEST=Object.freeze([
  ['computer9Starter2026.json','ASSPS_COMPUTER9_TWELVE_LONG_MODEL_ANSWER_DRAFTS_20261009.json',12],
  ['computer10Starter2026.json','ASSPS_COMPUTER10_EIGHT_LONG_MODEL_ANSWER_DRAFTS_20261009.json',8],
  ['ict9TechStarter2026.json','ASSPS_ICT9_SIX_LONG_MODEL_ANSWER_DRAFTS_20261009.json',6],
- ['pakistanStudies10Starter2026.json','ASSPS_PAKSTUDIES10_EIGHT_LONG_MODEL_ANSWER_DRAFTS_20261009.json',8]
+ ['pakistanStudies10Starter2026.json','ASSPS_PAKSTUDIES10_EIGHT_LONG_MODEL_ANSWER_DRAFTS_20261009.json',8],
+ ['fashionDesigning9TechStarter2026.json','ASSPS_FASHION9_NINE_LONG_MODEL_ANSWER_DRAFTS_20261009.json',9]
 ])
 function reconcile({sources,packets,docket}){
  const flags=docket?.reviewCandidates
@@ -26,6 +27,7 @@ function reconcile({sources,packets,docket}){
   originalIds.set(f.questionId,f)
  }
  const seen=new Set(),groups=[]
+ let totalCriteria=0
  for(const [filename,packetName,expectedCount] of MANIFEST){
   const raw=sources[filename]?.bytes,d=packets[packetName]
   if(!Buffer.isBuffer(raw)||!d)throw Error('COVERAGE_MISSING_INPUT:'+filename)
@@ -56,9 +58,10 @@ function reconcile({sources,packets,docket}){
     item.proposedIndependentMarkingPoints||item.proposedSeparateMarkingPoints||
     item.proposedDistinctMarkingPoints
    if(typeof answer!=='string'||answer.length<180||
-     !Array.isArray(criteria)||criteria.length!==5||
-     new Set(criteria).size!==5)
+     !Array.isArray(criteria)||criteria.length!==q.marks||
+     new Set(criteria).size!==q.marks)
     throw Error('COVERAGE_MISSING_PROPOSAL_OR_CRITERIA:'+id)
+   totalCriteria+=criteria.length
    for(const k of ['approved','academicApproved','academicallyApproved','published',
       'verifiedPublished','qualifiedSubjectReviewed','qualifiedIndependentSubjectReviewed',
       'subjectTeacherCorrectnessVerified','teacherScientificAnswerVerified',
@@ -72,15 +75,15 @@ function reconcile({sources,packets,docket}){
   groups.push({originalAuthoredSource:filename,sourceFileSha256:sha(raw),
    researchAnswerPacket:packetName,distinctUnapprovedExplanationProposals:expectedCount})
  }
- if(seen.size!==92)throw Error('COVERAGE_WRONG_TOTAL_DRAFTS')
+ if(seen.size!==101)throw Error('COVERAGE_WRONG_TOTAL_DRAFTS')
  const remaining=[...originalIds.keys()].filter(id=>!seen.has(id)).sort()
- if(remaining.length!==74)throw Error('COVERAGE_WRONG_REMAINING_COUNT')
+ if(remaining.length!==65)throw Error('COVERAGE_WRONG_REMAINING_COUNT')
  return {
-  schemaVersion:'assps-grade910-92-original-answer-draft-coverage-v2',
+  schemaVersion:'assps-grade910-101-original-answer-draft-coverage-v3',
   scope:'RESEARCH_DRAFT_PROVENANCE_ONLY_NO_ACADEMIC_APPROVAL',
   originalAuthoredQuestionCandidates:2581,originalLongQuestionCount:564,
   correctedRubricOnlyOriginals:166,distinctOriginalIdsWithSeparateAnswerDrafts:seen.size,
-  separateFiveMarkPointProposals:seen.size*5,
+  separateMarkingPointProposals:totalCriteria,
   originalRubricOnlyIdsWithoutNewAnswerDraft:remaining.length,
   schoolAdoptedTextbookPageVerified:0,independentlyHumanReviewed:0,
   academicallyApproved:0,verifiedPublished:0,
@@ -99,12 +102,12 @@ function loadInputs(){
 }
 function markdown(d){
  return [
-  '# ASSPS Grade IX–X — 92 distinct original IDs with separate answer research drafts',
+  '# ASSPS Grade IX–X — 101 distinct original IDs with separate answer research drafts',
   '', '**Academic draft completeness is not academic approval.**','',
   `- Original question research candidates: **${d.originalAuthoredQuestionCandidates}**, unchanged.`,
   `- Original long-answer rubric-only flags (corrected): **${d.correctedRubricOnlyOriginals}**.`,
   `- DISTINCT original IDs with a separate explanatory research draft: **${d.distinctOriginalIdsWithSeparateAnswerDrafts}**.`,
-  `- Separately proposed marking criteria: **${d.separateFiveMarkPointProposals}**.`,
+  `- Separately proposed marking criteria: **${d.separateMarkingPointProposals}**.`,
   `- Original flagged IDs still lacking a separate explanatory draft: **${d.originalRubricOnlyIdsWithoutNewAnswerDraft}**.`,
   '- Qualified subject independently reviewed: **0**; school textbook page verified: **0**; approved: **0**; verified published: **0**.','',
   '| Original source file | Distinct draft answers | SHA256 of original authored source |',
@@ -116,7 +119,7 @@ function markdown(d){
 }
 function main(){
  const d=reconcile(loadInputs())
- const base=path.join(OUT,'ASSPS_GRADE910_92_DISTINCT_UNAPPROVED_ANSWER_PROPOSALS_20261009')
+ const base=path.join(OUT,'ASSPS_GRADE910_101_DISTINCT_UNAPPROVED_ANSWER_PROPOSALS_20261009')
  fs.writeFileSync(base+'.json',JSON.stringify(d,null,2)+'\n')
  fs.writeFileSync(base+'.md',markdown(d))
  console.log(JSON.stringify({drafts:d.distinctOriginalIdsWithSeparateAnswerDrafts,remaining:d.originalRubricOnlyIdsWithoutNewAnswerDraft,approved:d.academicallyApproved}))
