@@ -1,0 +1,9 @@
+# Paper Studio Phase37 — confirmed Lesson Plan Save despite library refresh failure
+
+9 October 2026. Isolated Paper owner worktree from exact clean Phase36 `b6c8fe7c762dc9d1d3d561ce2f2a3aa6361078ba`.
+
+Genuine distinct bug: after successful authenticated-compatible synthetic POST `201 {success:true,data:...}`, listLessonPlans GET can return HTTP503. Existing LessonPlanningWorkspace treats the secondary list refresh error as failure of the already-successful Save, misleading teachers and potentially prompting duplicate creation. New narrow guard catches list refresh failures separately, keeps saved authoritative response and adds it to local saved-plans list, preserving stale-selection success check and server revision. Actual prepatch Chromium **RED 0/1 EXIT1** `/tmp/paper-p37-refresh-red.log`, patched **GREEN 1/1 EXIT0** `/tmp/paper-p37-refresh-green.log`.
+
+Fresh exact Phase37 serial Vite/Chromium suite across newly added refresh-failure fixture plus existing standalone plan, full multi-subject planning, delayed successful and failed saves: **5/5 PASS numeric EXIT0** `/tmp/paper-p37-five.log` `/tmp/paper-p37-five.exit`, 25461ms. New fixture ESLint PASS EXIT0, optimized frontend build PASS EXIT0 `/tmp/paper-p37-build.log` 8.37s. Existing unrelated LessonPlanningWorkspace.jsx whole-file lint diagnostics remain; do not claim full lint green. Full original protected 43-paper and DOCX suites not rerun on Phase37 (Phase36 previously 43/43 and 4/4 exit0 are historical, not a Phase37 certificate).
+
+Synthetic client tests are not genuine signed non-BYPASS PostgreSQL teacher/guardian/peer actor certification nor proof of private HTTPS media, server permissions/revisions, physical A4 Urdu Nastaleeq/PDF/DOCX visual fidelity, backups or production deployment. SaaS Core controls selective integration and release; production HOLD. No protected official papers, school database, Nginx, PM2 or other owners changed.
