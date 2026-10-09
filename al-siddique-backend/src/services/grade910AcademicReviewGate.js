@@ -1,5 +1,5 @@
 'use strict'
-const { createHash } = require('node:crypto')
+const {sha256}=require('./questionGovernanceHash')
 const { isDeepStrictEqual } = require('node:util')
 const SOURCE_REGISTRY = require('../data/verifiedGrade910SourceRegistry.json')
 const {requireAdoptedSource}=require('./grade910SchoolAdoptionGate')
@@ -201,13 +201,33 @@ function requireGrade910CurriculumMapping(source,revision){
   return true
 }
 
+// Recheck the stored JSONB using the SAME canonical SHA-256 as governance capture.
+function assertGrade910ImmutableRevisionHash(revision){
+  const payload=revision?.content_json
+  const recorded=String(revision?.content_hash??'').trim().toLowerCase()
+  if(!payload||typeof payload!=='object'||Array.isArray(payload)||
+     !/^[a-f0-9]{64}$/.test(recorded))
+    throw error('ACADEMIC_REVISION_HASH_CONTENT_DRIFT',
+      'Academic review requires an intact question revision JSON and SHA-256.',409)
+  let actual
+  try { actual=sha256(payload) } catch (_) {
+    throw error('ACADEMIC_REVISION_HASH_CONTENT_DRIFT',
+      'Immutable review content cannot be canonically SHA-256 hashed.',409)
+  }
+  if(actual!==recorded)
+    throw error('ACADEMIC_REVISION_HASH_CONTENT_DRIFT',
+      'Stored revision content does not match its immutable SHA-256.',409)
+  return true
+}
+
 async function assertIndependentReviewReady(client,{schoolId,master,actorId}){
   const latest=await client.query(
     'SELECT revision_number,content_hash,content_json,created_by FROM question_revisions WHERE school_id=$1 AND question_master_id=$2 AND revision_number=$3',
     [schoolId,master.id,master.current_revision]
   )
   if(latest.rowCount!==1)throw error('MISSING_REVIEWED_REVISION','Exact current revision was not found.')
-  const rev=latest.rows[0],grade=normalizeGrade(rev.content_json?.classLevel)
+  const rev=latest.rows[0]
+  const grade=normalizeGrade(rev.content_json?.classLevel)
   const linked=master.source_question_bank_id
     ? await client.query(
       'SELECT id,school_id,class_level,subject,medium,chapter_no,question_type,question_text,question_text_urdu,options,correct_option,answer,explanation,marks,is_approved,is_duplicate,metadata,created_by,board,chapter_name,topic_name FROM question_bank WHERE school_id=$1 AND id=$2 FOR UPDATE',
@@ -217,6 +237,7 @@ async function assertIndependentReviewReady(client,{schoolId,master,actorId}){
   if(!grade&&!sourceGrade)return {grade:null,legacyRecord:null,review:null,revision:rev}
   if(grade!==sourceGrade)
     throw error('ACADEMIC_GRADE_MISMATCH','Governed revision and linked Question Bank grade disagree.')
+  assertGrade910ImmutableRevisionHash(rev)
   requireUnflaggedGrade910Source(linked.rows[0])
   requireGrade910CurriculumMapping(linked.rows[0],rev.content_json)
 
@@ -285,5 +306,6 @@ module.exports.requireGrade910McqIntegrity=requireGrade910McqIntegrity
 module.exports.assertGrade910ReviewSignature=assertGrade910ReviewSignature
 module.exports.requireUnflaggedGrade910Source=requireUnflaggedGrade910Source
 module.exports.requireGrade910CurriculumMapping=requireGrade910CurriculumMapping
+module.exports.assertGrade910ImmutableRevisionHash=assertGrade910ImmutableRevisionHash
 module.exports.grade910MinimumQuestionIntegrityIssues=grade910MinimumQuestionIntegrityIssues
 module.exports.requireGrade910MinimumQuestionIntegrity=requireGrade910MinimumQuestionIntegrity

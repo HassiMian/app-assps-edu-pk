@@ -10,22 +10,24 @@ const ROOT=path.resolve(__dirname,'..')
 const SERVICE=path.join(ROOT,'services/grade910AcademicReviewService.js')
 const GATE=path.join(ROOT,'services/grade910AcademicReviewGate.js')
 const REVIEWER=103, SCHOOL=1
-const contentHash='a'.repeat(64)
+const {sha256}=require('../services/questionGovernanceHash')
 const question={classLevel:'9th',subject:'biology',medium:'english',chapterNo:'1',
  board:'punjab board',chapterName:'biological introduction',topicName:'cellular energy',
  questionType:'short',questionText:'Why do organisms require energy?',answer:'Energy supports biological processes.',marks:2}
+const contentHash=sha256(question)
 const legacy={id:'ORIG-IX-01',school_id:SCHOOL,class_level:'9th',subject:'biology',
  medium:'english',board:'Punjab Board',chapter_no:'1',chapter_name:'Biological Introduction',topic_name:'Cellular Energy',question_type:'short',question_text:question.questionText,
  question_text_urdu:'',options:[],correct_option:'',answer:question.answer,
  explanation:'',marks:2,is_approved:false,is_duplicate:false,metadata:{},created_by:REVIEWER}
-function fakeDatabase(sourceCreator,{sourceMissing=false,signedCreator=REVIEWER,signedAt='2026-10-09T00:00:00Z',linkedOverrides={},revisionOverrides={},reviewerActive=true,reviewerRole='principal',reviewerMissing=false}={}){
+function fakeDatabase(sourceCreator,{sourceMissing=false,signedCreator=REVIEWER,signedAt='2026-10-09T00:00:00Z',linkedOverrides={},revisionOverrides={},reviewerActive=true,reviewerRole='principal',reviewerMissing=false,recordedHash=null}={}){
  const queries=[]
  const master={id:3,public_id:'QB-1',current_revision:2,lifecycle_status:'reviewed',
   created_by:101,source_question_bank_id:legacy.id}
- const revision={revision_number:2,content_hash:contentHash,content_json:{...question,...revisionOverrides},created_by:102}
+ const revisionContent={...question,...revisionOverrides}
+ const revision={revision_number:2,content_hash:recordedHash??sha256(revisionContent),content_json:revisionContent,created_by:102}
  const linked={...legacy,created_by:sourceCreator,...linkedOverrides}
  const review={mapping_status:'reviewed',reviewed_by:REVIEWER,created_by:signedCreator,reviewed_at:signedAt,
-  metadata:{currentRevision:2,contentHash,reviewerUserId:REVIEWER,schoolId:SCHOOL,sourceEvidence:{}}}
+  metadata:{currentRevision:2,contentHash:revision.content_hash,reviewerUserId:REVIEWER,schoolId:SCHOOL,sourceEvidence:{}}}
  const client={async query(sql){
   queries.push(sql)
   if(sql.includes('FROM users'))return reviewerMissing?{rowCount:0,rows:[]}:{rowCount:1,rows:[{id:REVIEWER,role:reviewerRole,is_active:reviewerActive}]}
@@ -35,7 +37,7 @@ function fakeDatabase(sourceCreator,{sourceMissing=false,signedCreator=REVIEWER,
   if(sql.includes('FROM question_mappings'))return{rowCount:1,rows:[review]}
   throw Error('UNEXPECTED_TEST_QUERY:'+sql)
  }}
- return{client,queries,master}
+ return{client,queries,master,revisionHash:revision.content_hash}
 }
 function loadReviewService(client,{syntheticEvidence=false}={}){
  const nativeRequire=createRequire(SERVICE)
@@ -237,31 +239,31 @@ test('only boolean false source duplicate status can progress to other independe
 })
 
 test('recorded academic review cannot replay identical source and revision with an empty answer',async()=>{
- const {client,queries}=fakeDatabase(105,{linkedOverrides:{answer:' '},revisionOverrides:{answer:' '}})
+ const {client,queries,revisionHash}=fakeDatabase(105,{linkedOverrides:{answer:' '},revisionOverrides:{answer:' '}})
  await assert.rejects(loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
   schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',expectedRevision:2,
-  expectedContentHash:contentHash,evidence:{}
+  expectedContentHash:revisionHash,evidence:{}
  }),{code:'REVIEW_LINKED_SOURCE_CONTENT_DRIFT'})
  assert.equal(queries.some(q=>q.includes('INSERT INTO question_mappings')),false)
 })
 test('recorded academic review rejects identical invalid zero marks before writing signoff',async()=>{
- const {client,queries}=fakeDatabase(105,{linkedOverrides:{marks:0},revisionOverrides:{marks:0}})
+ const {client,queries,revisionHash}=fakeDatabase(105,{linkedOverrides:{marks:0},revisionOverrides:{marks:0}})
  await assert.rejects(loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
   schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',expectedRevision:2,
-  expectedContentHash:contentHash,evidence:{}
+  expectedContentHash:revisionHash,evidence:{}
  }),{code:'REVIEW_LINKED_SOURCE_CONTENT_DRIFT'})
  assert.equal(queries.some(q=>q.includes('INSERT INTO question_mappings')),false)
 })
 test('valid Urdu-only question with independent reviewable answer and positive marks remains eligible for other evidence checks',async()=>{
  const prompt='توانائی کیا ہے؟'
  const answer='توانائی کام کرنے کی صلاحیت ہے۔'
- const {client}=fakeDatabase(105,{
+ const {client,revisionHash}=fakeDatabase(105,{
   linkedOverrides:{medium:'urdu',question_text:'',question_text_urdu:prompt,answer},
   revisionOverrides:{medium:'urdu',questionText:'',questionTextUrdu:prompt,answer}
  })
  const replay=await loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
   schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
-  expectedRevision:2,expectedContentHash:contentHash,evidence:{}
+  expectedRevision:2,expectedContentHash:revisionHash,evidence:{}
  })
  assert.equal(replay.replayed,true)
  assert.equal(replay.questionBankApproved,false)
@@ -341,10 +343,10 @@ test('independent review rejects missing original topic/chapter/board provenance
    expectedRevision:2,expectedContentHash:contentHash,evidence:{}
   }),{code:'ACADEMIC_CURRICULUM_TOPIC_DRIFT'})
  }
- const {client}=fakeDatabase(105,{linkedOverrides:{topic_name:null},revisionOverrides:{topicName:''}})
+ const {client,revisionHash}=fakeDatabase(105,{linkedOverrides:{topic_name:null},revisionOverrides:{topicName:''}})
  await assert.rejects(loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
   schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
-  expectedRevision:2,expectedContentHash:contentHash,evidence:{}
+  expectedRevision:2,expectedContentHash:revisionHash,evidence:{}
  }),{code:'ACADEMIC_CURRICULUM_TOPIC_DRIFT'})
 })
 test('publisher rechecks original board chapter title and topic after a saved review is signed',async()=>{
@@ -373,4 +375,72 @@ test('case, Unicode and whitespace-equivalent verified mapping labels do not cau
  assert.equal(replay.replayed,true)
  assert.equal(replay.questionBankApproved,false)
  assert.ok(queries.some(sql=>sql.includes('FROM question_bank')&&sql.includes('board')&&sql.includes('topic_name')))
+})
+
+
+test('recording rejects source-aligned answer tampering when stored immutable hash was not recomputed',async()=>{
+ const tampered='Energy is a stored different explanation.'
+ const {client,queries}=fakeDatabase(105,{
+  linkedOverrides:{answer:tampered},revisionOverrides:{answer:tampered},recordedHash:contentHash
+ })
+ await assert.rejects(loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+  schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
+  expectedRevision:2,expectedContentHash:contentHash,evidence:{}
+ }),{code:'ACADEMIC_REVISION_HASH_CONTENT_DRIFT'})
+ assert.equal(queries.some(sql=>sql.includes('INSERT INTO question_mappings')),false)
+})
+test('publication rejects a signed source and revision both changed while the immutable SHA remains original',async()=>{
+ const tampered='Later modified answer.'
+ const {client,master}=fakeDatabase(105,{
+  linkedOverrides:{answer:tampered},revisionOverrides:{answer:tampered},recordedHash:contentHash
+ })
+ await assert.rejects(loadApprovalGate()(client,{schoolId:SCHOOL,master,actorId:104}),
+  {code:'ACADEMIC_REVISION_HASH_CONTENT_DRIFT'})
+})
+test('recorded revision SHA is the canonical governance SHA, not raw JSON key insertion order',()=>{
+ const {assertGrade910ImmutableRevisionHash}=require(GATE)
+ const rearranged={marks:question.marks,answer:question.answer,topicName:question.topicName,
+  chapterName:question.chapterName,chapterNo:question.chapterNo,
+  questionText:question.questionText,questionType:question.questionType,
+  board:question.board,medium:question.medium,subject:question.subject,
+  classLevel:question.classLevel}
+ assert.equal(assertGrade910ImmutableRevisionHash({content_json:rearranged,content_hash:contentHash}),true)
+})
+test('revision hash refuses unsupported or missing JSON content rather than hashing meaningless string',()=>{
+ const {assertGrade910ImmutableRevisionHash}=require(GATE)
+ for(const content of [null,undefined,'text',[],true])
+  assert.throws(()=>assertGrade910ImmutableRevisionHash({content_json:content,content_hash:contentHash}),
+   {code:'ACADEMIC_REVISION_HASH_CONTENT_DRIFT'})
+})
+
+test('canonical revision hashing preserves governance SHA-256 for English, Urdu and rearranged JSON keys',()=>{
+ const {sha256,stable}=require('../services/questionGovernanceHash')
+ assert.equal(sha256('abc'),'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad')
+ const a={marks:2,answer:'توانائی کام کرنے کی صلاحیت ہے۔',subject:'biology',options:[{text:'A + B',label:'A'}]}
+ const b={options:[{label:'A',text:'A + B'}],subject:'biology',answer:'توانائی کام کرنے کی صلاحیت ہے۔',marks:2}
+ assert.equal(sha256(a),sha256(b))
+ assert.deepEqual(Object.keys(stable({b:1,a:2})),['a','b'])
+ assert.notEqual(sha256({...a,marks:3}),sha256(a))
+})
+
+test('other-grade question publication precheck does not acquire Grade IX/X hash obligations',async()=>{
+ const {client,master}=fakeDatabase(105,{
+  linkedOverrides:{class_level:'8th'},
+  revisionOverrides:{classLevel:'8th'},
+  recordedHash:'f'.repeat(64)
+ })
+ const state=await loadApprovalGate()(client,{schoolId:SCHOOL,master,actorId:104})
+ assert.equal(state.grade,null)
+ assert.equal(state.review,null)
+})
+test('independent Grade9/10 review API rejects Grade8 before revision hash mismatch',async()=>{
+ const {client}=fakeDatabase(105,{
+  linkedOverrides:{class_level:'8th'},
+  revisionOverrides:{classLevel:'8th'},
+  recordedHash:'f'.repeat(64)
+ })
+ await assert.rejects(loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+  schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
+  expectedRevision:2,expectedContentHash:'f'.repeat(64),evidence:{}
+ }),{code:'REVIEW_GRADE_NOT_SUPPORTED'})
 })

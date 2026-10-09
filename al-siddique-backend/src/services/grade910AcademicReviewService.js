@@ -1,7 +1,7 @@
 'use strict'
 const { isDeepStrictEqual } = require('node:util')
 const {withTenantTransaction}=require('./questionBankGovernance')
-const {normalizeGrade,normalizeEvidence,reviewMappingKey,requireGrade910McqIntegrity,approvedSourceMatchesRevision,assertGrade910ReviewSignature,requireUnflaggedGrade910Source,requireGrade910MinimumQuestionIntegrity,requireGrade910CurriculumMapping,error}=require('./grade910AcademicReviewGate')
+const {normalizeGrade,normalizeEvidence,reviewMappingKey,requireGrade910McqIntegrity,approvedSourceMatchesRevision,assertGrade910ReviewSignature,requireUnflaggedGrade910Source,requireGrade910MinimumQuestionIntegrity,requireGrade910CurriculumMapping,assertGrade910ImmutableRevisionHash,error}=require('./grade910AcademicReviewGate')
 
 async function recordIndependentAcademicReview({
   schoolId, reviewerId, publicId, expectedRevision, expectedContentHash, evidence,
@@ -39,6 +39,7 @@ async function recordIndependentAcademicReview({
       throw error('REVIEW_CONTENT_HASH_CONFLICT','Current revision content hash changed.')
     if(!normalizeGrade(revision.content_json?.classLevel))
       throw error('REVIEW_GRADE_NOT_SUPPORTED','Only Grade 9/10 use this academic evidence gate.',422)
+    assertGrade910ImmutableRevisionHash(revision)
     const reviewer=Number(reviewerId),author=Number(master.created_by),revisionAuthor=Number(revision.created_by)
     if(!Number.isInteger(author)||author<1||!Number.isInteger(revisionAuthor)||
        revisionAuthor<1||author===reviewer||revisionAuthor===reviewer)
