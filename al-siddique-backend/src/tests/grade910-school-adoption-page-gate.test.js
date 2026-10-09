@@ -38,7 +38,7 @@ const basePhysical={
   id:'SYNTHETIC-EXERCISE-001',reviewState:'human_exercise_verified',
   sourceRecordId:source.recordId,sourcePdfSha256:source.pdfSha256,
   chapterPageEvidenceId:'SYNTHETIC-PAGE-001',sourcePrintedPage:19,
-  exerciseReference:'Exercise 1 A',pdfPhysicalPage:23,
+  exerciseReference:'Exercise 1 A',pdfPhysicalPage:23,bookPrintedPage:19,
   pageImageSha256:'c'.repeat(64),independentReviewerId:14
  }]
 }
@@ -101,4 +101,14 @@ test('textbook exercise requires separately recorded exact printed exercise/page
 test('physical image verification cannot be minted solely by client booleans',()=>{
  const unverified={...basePhysical,academicPageEvidenceCertified:false}
  assert.throws(()=>callPage(unverified,{sourceImageChecked:true}),{code:'PHYSICAL_SOURCE_PAGE_NOT_CERTIFIED'})
+})
+
+test('synthetic exercise requires independent server-owned actual printed page not a client-only number',()=>{
+ const e={...evidence,questionOrigin:'TEXTBOOK_EXERCISE',sourcePrintedPage:19,exerciseReference:'Exercise 1 A',exercisePageEvidenceId:'SYNTHETIC-EXERCISE-001'}
+ const invoke=reg=>requirePhysicalPageProof({source,question,mode:'TEXTBOOK_EXERCISE',evidence:e},reg)
+ const base=basePhysical.verifiedExerciseAnchors[0]
+ for(const broken of [{...base,bookPrintedPage:undefined},{...base,bookPrintedPage:20},{...base,bookPrintedPage:'19'},{...base,bookPrintedPage:0}]){
+  assert.throws(()=>invoke({...basePhysical,verifiedExerciseAnchors:[broken]}),{code:'EXERCISE_PAGE_IDENTITY_UNVERIFIED'})
+ }
+ assert.equal(invoke(basePhysical).exercisePageEvidenceId,'SYNTHETIC-EXERCISE-001')
 })

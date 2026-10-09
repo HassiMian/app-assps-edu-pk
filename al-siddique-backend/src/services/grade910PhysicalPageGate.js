@@ -27,7 +27,10 @@ function requirePhysicalPageProof({source,evidence,question,mode},registry=PAGE_
      row.id===exerciseId&&row.reviewState==='human_exercise_verified'&&
      row.sourceRecordId===source.recordId&&row.sourcePdfSha256===source.pdfSha256&&
      row.chapterPageEvidenceId===chapter.id&&
-     row.sourcePrintedPage===evidence.sourcePrintedPage&&
+     Number.isInteger(row.bookPrintedPage)&&row.bookPrintedPage>0&&
+     Number.isInteger(evidence.sourcePrintedPage)&&
+     row.bookPrintedPage===evidence.sourcePrintedPage&&
+     row.sourcePrintedPage===row.bookPrintedPage&&
      equal(row.exerciseReference,evidence.exerciseReference)&&
      Number.isInteger(row.pdfPhysicalPage)&&row.pdfPhysicalPage>0&&
      SHA.test(String(row.pageImageSha256||''))&&
