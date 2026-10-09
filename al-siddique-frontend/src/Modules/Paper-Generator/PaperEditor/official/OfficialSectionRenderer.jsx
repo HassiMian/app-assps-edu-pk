@@ -362,13 +362,13 @@ function PairPracticeTable({ content, isUrdu, qFs, fs, themeColor, editMode=fals
 
 
 function VerticalMathLines({ lines, themeColor }) {
-  return <div data-place-value-stack style={{ display:'inline-grid', gridTemplateColumns:'18px minmax(3ch,max-content)', alignItems:'baseline', justifyContent:'center', columnGap:4, fontVariantNumeric:'tabular-nums', direction:'ltr' }}>
+  return <div data-place-value-stack style={{ display:'grid', width:'100%', minWidth:0, maxWidth:'100%', gridTemplateColumns:'18px minmax(0,1fr)', alignItems:'baseline', justifyContent:'center', columnGap:4, fontVariantNumeric:'tabular-nums', direction:'ltr' }}>
     {lines.map((raw,index)=>{
       const line=String(raw||'').trim()
       if(/^_+$/.test(line)) return <span key={index} style={{ gridColumn:'1 / -1', height:5, borderTop:`1.6px solid ${themeColor}`, marginTop:1 }} />
       const match=line.match(/^([+\-−×xX÷])?\s*([0-9][0-9,.' ]*)$/)
-      if(match) return <Fragment key={index}><span style={{ textAlign:'center', fontWeight:800 }}>{match[1]||''}</span><span style={{ textAlign:'right', whiteSpace:'pre', letterSpacing:0 }}>{match[2].trim()}</span></Fragment>
-      return <span key={index} style={{ gridColumn:'1 / -1', textAlign:'center', whiteSpace:'pre' }}>{line}</span>
+      if(match) return <Fragment key={index}><span style={{ textAlign:'center', fontWeight:800 }}>{match[1]||''}</span><span style={{ textAlign:'right', minWidth:0, whiteSpace:'pre-wrap', overflowWrap:'anywhere', wordBreak:'break-word', letterSpacing:0 }}>{match[2].trim()}</span></Fragment>
+      return <span key={index} style={{ gridColumn:'1 / -1', textAlign:'center', minWidth:0, whiteSpace:'pre-wrap', overflowWrap:'anywhere', wordBreak:'break-word' }}>{line}</span>
     })}
   </div>
 }
@@ -386,7 +386,7 @@ function MathPracticeGrid({ content, kind, qFs, fs, themeColor }) {
         return <div key={blockIndex} style={{ display:'grid', gridTemplateColumns:`repeat(${cols}, minmax(0,1fr))`, gap:`${10*fs}px`, breakInside:'avoid' }}>
           {Array.from({length:cols}, (_,colIndex) => {
             const cellLines = rows.map(row => row[colIndex] || '').filter(Boolean)
-            return <div key={colIndex} style={{ border:`1px solid ${themeColor}55`, borderRadius:5, padding:`${7*fs}px ${9*fs}px`, textAlign:'center', fontFamily:mathFont, fontSize:`${Math.max(qFs+1,14)}px`, lineHeight:1.35, minHeight:`${58*fs}px`, display:'grid', placeItems:'center' }}>
+            return <div key={colIndex} style={{ border:`1px solid ${themeColor}55`, borderRadius:5, padding:`${7*fs}px ${9*fs}px`, textAlign:'center', fontFamily:mathFont, fontSize:`${Math.max(qFs+1,14)}px`, lineHeight:1.35, minHeight:`${58*fs}px`, display:'grid', minWidth:0, placeItems:'center' }}>
               <VerticalMathLines lines={cellLines} themeColor={themeColor} />
             </div>
           })}
