@@ -195,7 +195,7 @@ export default function LessonPlanningWorkspace() {
       const saved=document.id?await updateLessonPlan(payload):await createLessonPlan(payload)
       const unchanged=JSON.stringify(latestDocumentRef.current)===submittedDocument;const normalized=normalizeLessonPlanDocument(saved);if(unchanged){setDocument(normalized);setSelectedSubjects(normalized.subjects.map(item=>item.subject))}
       const all=await listLessonPlans({limit:200});setSavedPlans(Array.isArray(all)?all:[]);setStatus(unchanged?'Lesson plan saved safely.':'Previous lesson plan selection was saved. Current editor selection was not saved.')
-    }catch(error){const code=error?.response?.data?.code;if(code==='LESSON_PLAN_REVISION_CONFLICT')setStatus('This plan changed in another session. Reopen it before saving again.');else setStatus(error?.response?.data?.message||error?.message||'Save failed. Recovery draft remains on this device.')}
+    }catch(error){if(JSON.stringify(latestDocumentRef.current)!==submittedDocument){setStatus('Previous lesson plan selection could not be saved. Current editor selection was not submitted.');return}const code=error?.response?.data?.code;if(code==='LESSON_PLAN_REVISION_CONFLICT')setStatus('This plan changed in another session. Reopen it before saving again.');else setStatus(error?.response?.data?.message||error?.message||'Save failed. Recovery draft remains on this device.')}
     finally{setBusy('')}
   }
   const openPlan = plan => {const next=normalizeLessonPlanDocument(plan);setDocument(next);setSelectedSubjects(next.subjects.map(item=>item.subject));setAiState(null);setStatus('Saved plan reopened.')}
