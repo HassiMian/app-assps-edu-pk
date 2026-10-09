@@ -99,7 +99,7 @@ test('Blank Urdu paper: create without bank, save empty draft, add typed questio
  assert.equal(await page.locator('[data-official-section]').count(),1)
  assert.ok((await page.locator('[data-official-section]').first().textContent()).includes('پاکستان کا دارالحکومت کیا ہے؟'))
  assert.equal(await page.locator('[data-paper-metadata-editor]').evaluate(el=>el.open),false)
- await page.getByRole('button',{name:'Print',exact:true}).click()
+ await page.getByRole('button',{name:'Print / Save PDF',exact:true}).click()
  await page.locator('iframe').first().waitFor({state:'attached',timeout:12000})
  assert.deepEqual(errors,[])
 })

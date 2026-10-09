@@ -1,3 +1,4 @@
+import { currentSchoolDate } from './schoolCalendarDate.js'
 import { useEffect, useMemo, useState } from 'react'
 import { usePaperStore } from './usePaperStore'
 import { classLevelLabel, classLevelsMatch, useAcademicStore } from '../../services/useAcademicStore'
@@ -97,7 +98,7 @@ export default function AIGeneratorTab({ onProceedToPreview }) {
   const [autoBalance, setAutoBalance] = useState(true)
   const [priority, setPriority] = useState('all')
   const [paperCode, setPaperCode] = useState(String(Math.floor(1000 + Math.random() * 9000)))
-  const [examDate, setExamDate] = useState(new Date().toISOString().slice(0, 10))
+  const [examDate, setExamDate] = useState(currentSchoolDate())
   const [instructions, setInstructions] = useState('')
   const [qCounts, setQCounts] = useState({ mcq: 10, short: 5, long: 2 })
   const [qMarks, setQMarks] = useState({ mcq: 1, short: 2, long: 5 })

@@ -1,3 +1,4 @@
+import { currentSchoolDate } from './schoolCalendarDate.js'
 // Self-service paper creation: blank and duplicate are independent of Question Bank.
 // Creation drafts have NO persisted id; usePaperStore.savePaper supplies the real id.
 const safeText = value => String(value ?? '').trim()
@@ -14,7 +15,7 @@ export function createBlankPaperDraft(input={}) {
  const language=['english','urdu','dual'].includes(input.language) ? input.language : 'english'
  const target=Number(input.targetMarks)
  if(input.targetMarks !== '' && input.targetMarks != null && (!Number.isFinite(target)||target<0)) throw new Error('Total marks must be a non-negative number.')
- const date=safeText(input.examDate) || new Date().toISOString().slice(0,10)
+ const date=safeText(input.examDate) || currentSchoolDate()
  const title=safeText(input.title)||'New Examination Paper'
  const totalMarks=input.targetMarks===''||input.targetMarks==null?0:target
  const name=safeText(input.name)||`${subjectName} — ${classLevel} — ${title}`

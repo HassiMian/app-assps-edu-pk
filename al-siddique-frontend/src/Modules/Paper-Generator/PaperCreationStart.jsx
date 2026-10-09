@@ -1,3 +1,4 @@
+import { currentSchoolDate } from './schoolCalendarDate.js'
 import React, { useMemo, useState } from 'react'
 import { useAcademicStore } from '../../services/useAcademicStore'
 import { BASIC_PAPER_CLASS_LEVELS } from './paperCreationDraft.js'
@@ -40,7 +41,7 @@ export function BlankPaperSetup({onCreate,onBack}) {
  const [form,setForm]=useState({
   classLevel:'', subjectName:'',name:'',title:'Weekly Assessment',
   assessmentType:'Weekly Assessment',examType:'Weekly Assessment',scopeLabel:'',session:'2026-2027',language:'english',
-  examDate:new Date().toISOString().slice(0,10),timeAllowed:'30 minutes',targetMarks:'',
+  examDate:currentSchoolDate(),timeAllowed:'30 minutes',targetMarks:'',
   pageMode:'a4',paperCode:'',
  })
  const [error,setError]=useState('')
