@@ -1,3 +1,4 @@
+import { currentSchoolDate } from './schoolCalendarDate.js'
 import { useEffect, useMemo, useState } from 'react'
 import { BookOpen, Check, ChevronDown, FileText, Minus, Palette, Plus, Printer, RefreshCw, Save, Search, Sparkles, Users, WandSparkles, X } from 'lucide-react'
 import api, { resolveAssetUrl } from '../../services/api'
@@ -33,7 +34,7 @@ const safeSchoolName = value => {
   if (!text || /tenant[_-]|diary[_-]tenant|^assps[_-][a-z0-9]{8,}$/i.test(text)) return 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL'
   return text
 }
-const today = () => new Date().toISOString().slice(0,10)
+const today = currentSchoolDate
 const formatDate = value => {
   const date = new Date(`${value || today()}T12:00:00`)
   return Number.isNaN(date.getTime()) ? value : date.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})

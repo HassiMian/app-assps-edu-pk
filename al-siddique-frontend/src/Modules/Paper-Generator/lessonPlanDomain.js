@@ -1,4 +1,5 @@
-const today = () => new Date().toISOString().slice(0, 10)
+import { currentSchoolDate } from './schoolCalendarDate.js'
+const today = currentSchoolDate
 
 export const LESSON_PLAN_SCHEMA_VERSION = 2
 export const PLANNING_TYPES = [

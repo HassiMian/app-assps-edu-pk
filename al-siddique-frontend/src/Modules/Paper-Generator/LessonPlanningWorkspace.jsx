@@ -1,3 +1,4 @@
+import { currentSchoolDate } from './schoolCalendarDate.js'
 import { useEffect, useMemo, useState } from 'react'
 import { BookOpen, BrainCircuit, CalendarDays, CheckCircle2, ChevronDown, ChevronUp, Copy, FileText, Plus, Printer, RefreshCw, Save, Sparkles, Trash2, WandSparkles, X, Users } from 'lucide-react'
 import { useAcademicStore } from '../../services/useAcademicStore'
@@ -23,7 +24,7 @@ import {
 import './LessonPlanningWorkspace.css'
 
 const DRAFT_KEY = 'assps_lesson_planner_v2_draft'
-const today = () => new Date().toISOString().slice(0, 10)
+const today = currentSchoolDate
 const shiftDate = (value, days) => {
   const date = new Date(`${value || today()}T12:00:00Z`)
   date.setUTCDate(date.getUTCDate() + days)
