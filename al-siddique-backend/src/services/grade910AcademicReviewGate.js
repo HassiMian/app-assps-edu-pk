@@ -133,6 +133,26 @@ function approvedSourceMatchesRevision(source,revision){
     JSON.stringify(canonicalComparedContent(revision,false))
 }
 
+// A status='reviewed' is insufficient proof that the claimed reviewer actually
+// recorded the tenant-local review mapping. Recording sets both columns and NOW().
+function assertGrade910ReviewSignature(mapping,reviewerId){
+  const actor=Number(reviewerId)
+  const creator=Number(mapping?.created_by)
+  if(!Number.isSafeInteger(actor)||actor<1||
+     !Number.isSafeInteger(creator)||creator!==actor)
+    throw error('REVIEW_SIGNOFF_ORIGINATOR_MISMATCH',
+      'The academic review mapping originator must equal its independent reviewer.',403)
+  const raw=mapping?.reviewed_at
+  const time=raw instanceof Date
+    ?(Number.isFinite(raw.getTime())?raw.toISOString():null)
+    :raw
+  if(typeof time!=='string'||!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/.test(time)||
+     !Number.isFinite(Date.parse(time)))
+    throw error('REVIEW_SIGNOFF_TIMESTAMP_MISSING',
+      'An independently recorded review timestamp is required.',422)
+  return true
+}
+
 async function assertIndependentReviewReady(client,{schoolId,master,actorId}){
   const latest=await client.query(
     'SELECT revision_number,content_hash,content_json,created_by FROM question_revisions WHERE school_id=$1 AND question_master_id=$2 AND revision_number=$3',
@@ -153,7 +173,7 @@ async function assertIndependentReviewReady(client,{schoolId,master,actorId}){
   const hash=String(rev.content_hash||'').trim().toLowerCase()
   const key=reviewMappingKey(Number(rev.revision_number),hash)
   const review=await client.query(
-    "SELECT mapping_status,metadata,created_by,reviewed_by FROM question_mappings WHERE school_id=$1 AND question_master_id=$2 AND mapping_type='grade910_independent_academic_review' AND mapping_key=$3",
+    "SELECT mapping_status,metadata,created_by,reviewed_by,reviewed_at FROM question_mappings WHERE school_id=$1 AND question_master_id=$2 AND mapping_type='grade910_independent_academic_review' AND mapping_key=$3",
     [schoolId,master.id,key]
   )
   if(review.rowCount!==1||review.rows[0].mapping_status!=='reviewed')
@@ -164,6 +184,7 @@ async function assertIndependentReviewReady(client,{schoolId,master,actorId}){
      !Number.isInteger(Number(rev.created_by))||Number(rev.created_by)===reviewer ||
      !Number.isInteger(Number(master.created_by))||Number(master.created_by)===reviewer)
     throw error('REVIEW_INDEPENDENCE_REQUIRED','An identified independent academic reviewer, different from author and releaser, is mandatory.')
+  assertGrade910ReviewSignature(signed,reviewer)
   // Release must independently recheck who created the linked original, not just
   // the governed wrapper/revision author or an untrusted saved reviewer checkbox.
   const sourceCreator=Number(linked.rows[0]?.created_by)
@@ -201,3 +222,4 @@ module.exports.assertIndependentReviewReady=assertIndependentReviewReady
 module.exports.approvedSourceMatchesRevision=approvedSourceMatchesRevision
 module.exports.grade910McqIntegrityIssues=grade910McqIntegrityIssues
 module.exports.requireGrade910McqIntegrity=requireGrade910McqIntegrity
+module.exports.assertGrade910ReviewSignature=assertGrade910ReviewSignature

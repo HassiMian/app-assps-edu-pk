@@ -17,13 +17,13 @@ const legacy={id:'ORIG-IX-01',school_id:SCHOOL,class_level:'9th',subject:'biolog
  medium:'english',chapter_no:'1',question_type:'short',question_text:question.questionText,
  question_text_urdu:'',options:[],correct_option:'',answer:question.answer,
  explanation:'',marks:2,is_approved:false,metadata:{},created_by:REVIEWER}
-function fakeDatabase(sourceCreator,{sourceMissing=false}={}){
+function fakeDatabase(sourceCreator,{sourceMissing=false,signedCreator=REVIEWER,signedAt='2026-10-09T00:00:00Z'}={}){
  const queries=[]
  const master={id:3,public_id:'QB-1',current_revision:2,lifecycle_status:'reviewed',
   created_by:101,source_question_bank_id:legacy.id}
  const revision={revision_number:2,content_hash:contentHash,content_json:question,created_by:102}
  const linked={...legacy,created_by:sourceCreator}
- const review={mapping_status:'reviewed',reviewed_by:REVIEWER,
+ const review={mapping_status:'reviewed',reviewed_by:REVIEWER,created_by:signedCreator,reviewed_at:signedAt,
   metadata:{currentRevision:2,contentHash,reviewerUserId:REVIEWER,schoolId:SCHOOL,sourceEvidence:{}}}
  const client={async query(sql){
   queries.push(sql)
@@ -36,11 +36,16 @@ function fakeDatabase(sourceCreator,{sourceMissing=false}={}){
  }}
  return{client,queries,master}
 }
-function loadReviewService(client){
+function loadReviewService(client,{syntheticEvidence=false}={}){
  const nativeRequire=createRequire(SERVICE)
  const mod={exports:{}}
  const customRequire=(name)=>name==='./questionBankGovernance'
   ?{withTenantTransaction:async(schoolId,fn)=>fn(client,schoolId)}
+  :name==='./grade910AcademicReviewGate'&&syntheticEvidence
+   ?{...nativeRequire(name),normalizeEvidence:()=>({})}
+  :name==='node:util'&&syntheticEvidence
+   ?{isDeepStrictEqual:(a,b)=>require('node:util').isDeepStrictEqual(
+       JSON.parse(JSON.stringify(a)),JSON.parse(JSON.stringify(b)))}
   :nativeRequire(name)
  vm.runInNewContext(fs.readFileSync(SERVICE,'utf8'),
   {require:customRequire,module:mod,exports:mod.exports,console},{filename:SERVICE})
@@ -94,4 +99,59 @@ test('source creator lookup cannot accept a missing or differently tenant-owned 
   schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',expectedRevision:2,
   expectedContentHash:contentHash,evidence:{}
  }),{code:'REVIEW_SOURCE_QUESTION_NOT_FOUND'})
+})
+
+test('publication rejects a review mapping entered by a different claimed signer',async()=>{
+ const {client,master}=fakeDatabase(105,{signedCreator:108})
+ await assert.rejects(loadApprovalGate()(client,{schoolId:SCHOOL,master,actorId:104}),
+  {code:'REVIEW_SIGNOFF_ORIGINATOR_MISMATCH'})
+})
+test('publication rejects a reviewed mapping lacking its actual signing actor',async()=>{
+ const {client,master}=fakeDatabase(105,{signedCreator:null})
+ await assert.rejects(loadApprovalGate()(client,{schoolId:SCHOOL,master,actorId:104}),
+  {code:'REVIEW_SIGNOFF_ORIGINATOR_MISMATCH'})
+})
+test('publication requires recorded reviewer signoff timestamp rather than status text alone',async()=>{
+ const {client,master}=fakeDatabase(105,{signedAt:null})
+ await assert.rejects(loadApprovalGate()(client,{schoolId:SCHOOL,master,actorId:104}),
+  {code:'REVIEW_SIGNOFF_TIMESTAMP_MISSING'})
+})
+test('publication does not accept a fabricated invalid signing time',async()=>{
+ const {client,master}=fakeDatabase(105,{signedAt:'a fabricated timestamp'})
+ await assert.rejects(loadApprovalGate()(client,{schoolId:SCHOOL,master,actorId:104}),
+  {code:'REVIEW_SIGNOFF_TIMESTAMP_MISSING'})
+})
+
+test('recorded academic-review replay rejects a forged creator even if reviewer ID and revision SHA agree',async()=>{
+ const {client}=fakeDatabase(105,{signedCreator:108})
+ const service=loadReviewService(client,{syntheticEvidence:true})
+ await assert.rejects(service.recordIndependentAcademicReview({
+  schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',expectedRevision:2,
+  expectedContentHash:contentHash,evidence:{}
+ }),{code:'REVIEW_SIGNOFF_ORIGINATOR_MISMATCH'})
+})
+test('recorded academic-review replay rejects missing reviewed_at even when immutable revision agrees',async()=>{
+ const {client}=fakeDatabase(105,{signedAt:null})
+ const service=loadReviewService(client,{syntheticEvidence:true})
+ await assert.rejects(service.recordIndependentAcademicReview({
+  schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',expectedRevision:2,
+  expectedContentHash:contentHash,evidence:{}
+ }),{code:'REVIEW_SIGNOFF_TIMESTAMP_MISSING'})
+})
+test('synthetic replay with matching recorded actor/time is idempotent but never approves a question',async()=>{
+ const {client}=fakeDatabase(105)
+ const service=loadReviewService(client,{syntheticEvidence:true})
+ const output=await service.recordIndependentAcademicReview({
+  schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',expectedRevision:2,
+  expectedContentHash:contentHash,evidence:{}
+ })
+ assert.equal(output.replayed,true)
+ assert.equal(output.independentReviewRecorded,true)
+ assert.equal(output.questionBankApproved,false)
+})
+test('invalid PostgreSQL Date object fails closed without unhandled conversion error',()=>{
+ const {assertGrade910ReviewSignature}=require(GATE)
+ assert.throws(()=>assertGrade910ReviewSignature(
+  {created_by:REVIEWER,reviewed_at:new Date(NaN)},REVIEWER),
+  {code:'REVIEW_SIGNOFF_TIMESTAMP_MISSING'})
 })

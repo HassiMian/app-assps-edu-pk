@@ -1,7 +1,7 @@
 'use strict'
 const { isDeepStrictEqual } = require('node:util')
 const {withTenantTransaction}=require('./questionBankGovernance')
-const {normalizeGrade,normalizeEvidence,reviewMappingKey,requireGrade910McqIntegrity,error}=require('./grade910AcademicReviewGate')
+const {normalizeGrade,normalizeEvidence,reviewMappingKey,requireGrade910McqIntegrity,assertGrade910ReviewSignature,error}=require('./grade910AcademicReviewGate')
 
 async function recordIndependentAcademicReview({
   schoolId, reviewerId, publicId, expectedRevision, expectedContentHash, evidence,
@@ -59,7 +59,7 @@ async function recordIndependentAcademicReview({
     requireGrade910McqIntegrity(revision.content_json)
     const normalized=normalizeEvidence(evidence,revision.content_json,{tenantId})
     const existing=await client.query(
-      "SELECT metadata,reviewed_by FROM question_mappings WHERE school_id=$1 AND question_master_id=$2 AND mapping_type='grade910_independent_academic_review' AND mapping_key=$3",
+      "SELECT metadata,reviewed_by,created_by,reviewed_at FROM question_mappings WHERE school_id=$1 AND question_master_id=$2 AND mapping_type='grade910_independent_academic_review' AND mapping_key=$3",
       [tenantId,master.id,mappingKey]
     )
     const attestation={
@@ -67,6 +67,7 @@ async function recordIndependentAcademicReview({
       contentHash:pinned,sourceEvidence:normalized,
     }
     if(existing.rowCount){
+      assertGrade910ReviewSignature(existing.rows[0],reviewer)
       if(Number(existing.rows[0].reviewed_by)!==reviewer ||
         !isDeepStrictEqual(existing.rows[0].metadata,attestation))
         throw error('REVIEW_ALREADY_LOCKED','Existing review of this exact revision cannot be silently overwritten.')
