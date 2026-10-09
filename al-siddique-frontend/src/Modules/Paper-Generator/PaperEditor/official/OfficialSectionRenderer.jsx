@@ -288,6 +288,20 @@ function MatchingColumnsTable({ content, isUrdu, qFs, fs, themeColor, editMode=f
   </table>
 }
 
+// Long unbroken Urdu-script runs can form a single oversized shaping cluster in
+// Chromium despite overflow-wrap:anywhere. Invisible WBR elements introduce
+// layout opportunities without changing textContent or the saved teacher text.
+function SentencePrintSafeWord({ text }) {
+  const segments=String(text || '').split(/(\s+)/)
+  return <>{segments.map((segment,partIndex)=>{
+    const graphemes=Array.from(segment)
+    if(graphemes.length<=32) return <Fragment key={partIndex}><AnswerText text={segment}/></Fragment>
+    const blocks=[]
+    for(let index=0;index<graphemes.length;index+=24) blocks.push(graphemes.slice(index,index+24).join(''))
+    return <Fragment key={partIndex}>{blocks.map((block,index)=><Fragment key={index}>{block}{index<blocks.length-1&&<wbr/>}</Fragment>)}</Fragment>
+  })}</>
+}
+
 function SentenceUsageTable({ content, isUrdu, qFs, fs, themeColor, editMode=false, section=null, onQuestionChange, onActiveEditable }) {
   const rawLines = String(content).split(/\r?\n/).map(line => line.trim()).filter(Boolean)
   let items = rawLines.map(line => line.replace(/^(?:\d+|[ivxlcdm]+|[a-z]|الف|ب|ج|د|ہ|و)[.)]\s*/i,'').trim()).filter(Boolean)
@@ -316,7 +330,9 @@ function SentenceUsageTable({ content, isUrdu, qFs, fs, themeColor, editMode=fal
     <tbody>{items.map((item,index)=><tr key={index}>
       <td style={{ border:`1px solid ${themeColor}55`, padding:5, textAlign:'center', fontWeight:700, fontFamily:'Arial,sans-serif', direction:'ltr' }}>{index+1}</td>
       <td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px ${7*fs}px`, textAlign:isUrdu?'right':'left', fontWeight:700, overflowWrap:'anywhere', wordBreak:'break-word' }}>
-        {editMode&&section?.id?<InlineEditable text={item} editMode={true} direction={isUrdu?'rtl':'ltr'} fieldKey={'sentence-word-'+index} sectionId={section.id} ariaLabel={`Edit sentence word ${index+1}`} onActivate={onActiveEditable} onCommit={payload=>commitWord(index,payload)} style={{display:'block',fontWeight:700}}/>:<AnswerText text={item}/>}
+        <div style={{ minWidth:0, maxWidth:'100%', whiteSpace:'normal', overflowWrap:'anywhere', wordBreak:'break-word' }}>
+        {editMode&&section?.id?<InlineEditable text={item} editMode={true} direction={isUrdu?'rtl':'ltr'} fieldKey={'sentence-word-'+index} sectionId={section.id} ariaLabel={`Edit sentence word ${index+1}`} onActivate={onActiveEditable} onCommit={payload=>commitWord(index,payload)} style={{display:'block',fontWeight:700}}/>:<SentencePrintSafeWord text={item}/>}
+        </div>
       </td>
       <td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px ${7*fs}px`, minHeight:`${28*fs}px` }}><span style={{ display:'inline-block', width:'94%', borderBottom:`1px solid ${themeColor}88`, minHeight:'1.25em' }} /></td>
     </tr>)}</tbody>
@@ -346,13 +362,13 @@ function PairPracticeTable({ content, isUrdu, qFs, fs, themeColor, editMode=fals
 
 
 function VerticalMathLines({ lines, themeColor }) {
-  return <div data-place-value-stack style={{ display:'inline-grid', gridTemplateColumns:'18px minmax(3ch,max-content)', alignItems:'baseline', justifyContent:'center', columnGap:4, fontVariantNumeric:'tabular-nums', direction:'ltr' }}>
+  return <div data-place-value-stack style={{ display:'grid', width:'100%', minWidth:0, maxWidth:'100%', gridTemplateColumns:'18px minmax(0,1fr)', alignItems:'baseline', justifyContent:'center', columnGap:4, fontVariantNumeric:'tabular-nums', direction:'ltr' }}>
     {lines.map((raw,index)=>{
       const line=String(raw||'').trim()
       if(/^_+$/.test(line)) return <span key={index} style={{ gridColumn:'1 / -1', height:5, borderTop:`1.6px solid ${themeColor}`, marginTop:1 }} />
       const match=line.match(/^([+\-−×xX÷])?\s*([0-9][0-9,.' ]*)$/)
-      if(match) return <Fragment key={index}><span style={{ textAlign:'center', fontWeight:800 }}>{match[1]||''}</span><span style={{ textAlign:'right', whiteSpace:'pre', letterSpacing:0 }}>{match[2].trim()}</span></Fragment>
-      return <span key={index} style={{ gridColumn:'1 / -1', textAlign:'center', whiteSpace:'pre' }}>{line}</span>
+      if(match) return <Fragment key={index}><span style={{ textAlign:'center', fontWeight:800 }}>{match[1]||''}</span><span style={{ textAlign:'right', minWidth:0, whiteSpace:'pre-wrap', overflowWrap:'anywhere', wordBreak:'break-word', letterSpacing:0 }}>{match[2].trim()}</span></Fragment>
+      return <span key={index} style={{ gridColumn:'1 / -1', textAlign:'center', minWidth:0, whiteSpace:'pre-wrap', overflowWrap:'anywhere', wordBreak:'break-word' }}>{line}</span>
     })}
   </div>
 }
@@ -370,7 +386,7 @@ function MathPracticeGrid({ content, kind, qFs, fs, themeColor }) {
         return <div key={blockIndex} style={{ display:'grid', gridTemplateColumns:`repeat(${cols}, minmax(0,1fr))`, gap:`${10*fs}px`, breakInside:'avoid' }}>
           {Array.from({length:cols}, (_,colIndex) => {
             const cellLines = rows.map(row => row[colIndex] || '').filter(Boolean)
-            return <div key={colIndex} style={{ border:`1px solid ${themeColor}55`, borderRadius:5, padding:`${7*fs}px ${9*fs}px`, textAlign:'center', fontFamily:mathFont, fontSize:`${Math.max(qFs+1,14)}px`, lineHeight:1.35, minHeight:`${58*fs}px`, display:'grid', placeItems:'center' }}>
+            return <div key={colIndex} style={{ border:`1px solid ${themeColor}55`, borderRadius:5, padding:`${7*fs}px ${9*fs}px`, textAlign:'center', fontFamily:mathFont, fontSize:`${Math.max(qFs+1,14)}px`, lineHeight:1.35, minHeight:`${58*fs}px`, display:'grid', minWidth:0, placeItems:'center' }}>
               <VerticalMathLines lines={cellLines} themeColor={themeColor} />
             </div>
           })}
@@ -386,19 +402,19 @@ function MathPracticeGrid({ content, kind, qFs, fs, themeColor }) {
   })
 
   if (kind === 'math_table') {
-    return <div data-math-table-practice style={{ display:'grid', gridTemplateColumns:rows.length>1?'1fr 1fr':'1fr', gap:`${10*fs}px` }}>
-      {rows.map(row => <div key={row.serial} style={{ border:`1px solid ${themeColor}55`, borderRadius:5, padding:`${8*fs}px`, breakInside:'avoid' }}>
-        <div style={{ fontFamily:mathFont, fontWeight:800, fontSize:`${Math.max(qFs,13)}px`, marginBottom:5 }}><AnswerText text={row.text}/></div>
+    return <div data-math-table-practice style={{ display:'grid', gridTemplateColumns:rows.length>1?'repeat(2,minmax(0,1fr))':'minmax(0,1fr)', gap:`${10*fs}px` }}>
+      {rows.map(row => <div key={row.serial} style={{ border:`1px solid ${themeColor}55`, borderRadius:5, padding:`${8*fs}px`, minWidth:0, overflowWrap:'anywhere', wordBreak:'break-word', breakInside:'avoid' }}>
+        <div style={{ fontFamily:mathFont, fontWeight:800, fontSize:`${Math.max(qFs,13)}px`, marginBottom:5, overflowWrap:'anywhere', wordBreak:'break-word' }}><AnswerText text={row.text}/></div>
         <div style={{ height:`${38*fs}px`, borderBottom:`1px solid ${themeColor}88` }} />
       </div>)}
     </div>
   }
 
   const twoColumn = rows.length >= 4
-  return <div data-math-practice-grid data-math-kind={kind} style={{ display:'grid', gridTemplateColumns:twoColumn?'1fr 1fr':'1fr', gap:`${7*fs}px ${14*fs}px`, fontFamily:mathFont }}>
+  return <div data-math-practice-grid data-math-kind={kind} style={{ display:'grid', gridTemplateColumns:twoColumn?'repeat(2,minmax(0,1fr))':'minmax(0,1fr)', gap:`${7*fs}px ${14*fs}px`, fontFamily:mathFont }}>
     {rows.map(row => <div key={row.serial} style={{ display:'grid', gridTemplateColumns:'28px minmax(0,1fr)', alignItems:'center', gap:6, border:`1px solid ${themeColor}3D`, borderRadius:4, padding:`${6*fs}px ${8*fs}px`, breakInside:'avoid', minHeight:`${32*fs}px` }}>
       <b style={{ color:themeColor, textAlign:'center' }}>{row.serial}.</b>
-      <div style={{ fontSize:`${Math.max(qFs,13)}px`, minWidth:0 }}><AnswerText text={row.text}/></div>
+      <div style={{ fontSize:`${Math.max(qFs,13)}px`, minWidth:0, overflowWrap:'anywhere', wordBreak:'break-word' }}><AnswerText text={row.text}/></div>
     </div>)}
   </div>
 }

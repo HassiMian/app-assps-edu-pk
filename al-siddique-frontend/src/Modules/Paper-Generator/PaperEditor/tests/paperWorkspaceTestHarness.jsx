@@ -207,6 +207,37 @@ const earlyPairOverflowPaper = {
  ].join('\n')}],
 }
 
+// Isolated, synthetic math print stress. No protected source or school records.
+const mathPracticeOverflowPaper = {
+ id:'synthetic-math-practice-print-20261009',name:'Math Long Token 2-Column Print',documentFormat:'pts-native-v13',printReadiness:'READY',
+ config:{className:'6',classLevel:'6',subject:'Mathematics',subjectName:'Mathematics',language:'english',paperCode:'MATH-PRACTICE-PRINT',timeAllowed:'45 Minutes',totalMarks:6,title:'Synthetic Math Practice'},
+ official_section:[{id:'synthetic-math-practice',type:'official_section',sourceOrder:1,layoutPreset:'math_compare',medium:'english',
+ heading:'Q1. Compare the measurements (6)',marks:6,
+ content:Array.from({length:6},(_,i)=>`${i+1}. ${i===0?'LONGUNBREAKABLEMATHEMATICALVALUE'.repeat(24):i===1?'۱۲۳۴۵۶۷۸۹۰'.repeat(145):'x² + y² = z²; compare positive integer quantities'} [MATH-PRACTICE-${String(i+1).padStart(2,'0')}]`).join('\n')}],
+}
+const mathTablesOverflowPaper = {
+ id:'synthetic-math-table-print-20261009',name:'Math Tables Long Token Print',documentFormat:'pts-native-v13',printReadiness:'READY',
+ config:{className:'5',classLevel:'5',subject:'Mathematics',subjectName:'Mathematics',language:'english',paperCode:'MATH-TABLE-PRINT',timeAllowed:'45 Minutes',totalMarks:4,title:'Synthetic Math Tables'},
+ official_section:[{id:'synthetic-math-table',type:'official_section',sourceOrder:1,layoutPreset:'math_table',medium:'english',
+ heading:'Q1. Complete number tables (4)',marks:4,
+ content:Array.from({length:4},(_,i)=>`${i+1}. ${i===0?'NONDIVISIBLECONSECUTIVENUMBER'.repeat(27):i===1?'۱۲۳۴۵۶۷۸۹۰'.repeat(95):'Table of 7 × 3 = 21'} [MATH-TABLE-${String(i+1).padStart(2,'0')}]`).join('\n')}],
+}
+
+// Synthetic vertical-arithmetic print stress; not a real authored/official paper.
+const verticalMathOverflowPaper = {
+ id:'synthetic-vertical-math-print-20261009',name:'Mathematical Vertical Arithmetic Alignment Print Stress',documentFormat:'pts-native-v13',printReadiness:'READY',
+ config:{className:'6',classLevel:'6',subject:'Mathematics',subjectName:'Mathematics',language:'english',paperCode:'VERTICAL-MATH-STRESS',timeAllowed:'40 Minutes',totalMarks:4,title:'Synthetic Vertical Maths'},
+ official_section:[{id:'vertical-math-stress',type:'official_section',sourceOrder:1,layoutPreset:'vertical_math',medium:'english',
+ heading:'Q1. Vertical arithmetic (4)',marks:4,content:[
+ '1234567890'.repeat(82)+'   '+'9876543210'.repeat(82),
+ '+'+'1122334455'.repeat(79)+'   '+'-'+'9988776655'.repeat(79),
+ '[VERT-MATH-01]   [VERT-MATH-02]',
+ '',
+ 'LONGUNBROKENMATHEMATICALTOKEN'.repeat(29)+'   '+'۹۸۷۶۵۴۳۲۱۰'.repeat(125),
+ '[VERT-MATH-03]   [VERT-MATH-04]',
+ ].join('\n')}],
+}
+
 const nestedScoringPaper = {
  clientDraftId:'nested-scoring-browser-paper',
  name:'Nested Scoring Browser Paper',
@@ -291,7 +322,7 @@ function ThemeFixture() {
  const reopenPaper = savedPapers.find(p => p.userAuthored && (reopenId ? String(p.id)===reopenId : p.name===reopenName)) || null
  const officialId = params.get('officialId') || ''
  const officialPaper = officialId ? officialV13.papers.find(item => item.id === officialId) || null : null
- const fixture = params.has('new') ? null : params.has('reopen') ? reopenPaper : params.has('earlySentenceOverflow') ? earlySentenceOverflowPaper : params.has('earlyPairOverflow') ? earlyPairOverflowPaper : params.has('matchingColumnOverflow') ? matchingColumnOverflowPaper : params.has('sourceTableOverflow') ? sourceTableOverflowPaper : params.has('bilingualMatrixOverflow') ? bilingualMatrixOverflowPaper : params.has('bilingualTableOverflow') ? bilingualTableOverflowPaper : params.has('rtlOddOverflow') ? rtlOddOverflowPaper : params.has('nestedScoring') ? nestedScoringPaper : params.has('mathAssets') ? mathAssetsPaper : officialPaper || (params.has('recovery8') ? classEightUrduFixture : paper)
+ const fixture = params.has('new') ? null : params.has('reopen') ? reopenPaper : params.has('verticalMathOverflow') ? verticalMathOverflowPaper : params.has('mathPracticeOverflow') ? mathPracticeOverflowPaper : params.has('mathTablesOverflow') ? mathTablesOverflowPaper : params.has('earlySentenceOverflow') ? earlySentenceOverflowPaper : params.has('earlyPairOverflow') ? earlyPairOverflowPaper : params.has('matchingColumnOverflow') ? matchingColumnOverflowPaper : params.has('sourceTableOverflow') ? sourceTableOverflowPaper : params.has('bilingualMatrixOverflow') ? bilingualMatrixOverflowPaper : params.has('bilingualTableOverflow') ? bilingualTableOverflowPaper : params.has('rtlOddOverflow') ? rtlOddOverflowPaper : params.has('nestedScoring') ? nestedScoringPaper : params.has('mathAssets') ? mathAssetsPaper : officialPaper || (params.has('recovery8') ? classEightUrduFixture : paper)
  React.useEffect(() => { setTheme('light') }, [setTheme])
  return <>
   <button hidden id="fixture-global-theme-toggle" data-current-theme={theme} onClick={toggleTheme}>Portal theme toggle</button>

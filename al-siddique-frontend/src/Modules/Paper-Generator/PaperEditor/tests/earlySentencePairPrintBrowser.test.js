@@ -1,12 +1,12 @@
 import {test} from 'node:test'
-import assert from 'node:assert/strict'
 import {Buffer} from 'node:buffer'
+import assert from 'node:assert/strict'
 import {createServer} from 'vite'
 import {chromium} from 'playwright'
 import {fileURLToPath} from 'node:url'
 import path from 'node:path'
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../../../..')
-const PORT=5495
+const PORT=5633
 const fixtures=[
  {name:'sentence',param:'earlySentenceOverflow',selector:'[data-sentence-usage-table]',marker:/SENTENCE-CELL-\d{2}/g},
  {name:'pair',param:'earlyPairOverflow',selector:'[data-pair-practice-table]',marker:/PAIR-CELL-\d{2}/g},
@@ -38,6 +38,10 @@ test('Early language sentence and pair tables: bilingual long words never leave 
     console.log(item.name.toUpperCase()+'_PREVIEW_GEOMETRY',JSON.stringify({scroll:preview.scroll,client:preview.client,broken:preview.broken}))
     assert.equal(preview.rows,4);assert.equal(preview.rtl,'rtl')
     assert.equal([...preview.text.matchAll(item.marker)].length,4)
+    if(item.name==='sentence'){
+     assert.ok(preview.text.includes('ط'.repeat(225)),'Soft break elements must not modify original Urdu word characters')
+     assert.ok(await page.locator(item.selector).locator('wbr').count()>0,'Extreme uninterrupted Urdu script must receive invisible break opportunities')
+    }
     assert.ok(preview.text.includes('بادل')&&preview.text.includes('Sunshine'))
     assert.ok(preview.scroll<=preview.client+1,`${item.name} table outside real A4 screen: ${preview.scroll}/${preview.client}`)
     assert.deepEqual(preview.broken,[],`${item.name} headers and data cells must stay inside widths`)
@@ -46,6 +50,7 @@ test('Early language sentence and pair tables: bilingual long words never leave 
     const printed=await metric(frame)
     assert.ok(printed);assert.equal(printed.rows,4)
     assert.equal([...printed.text.matchAll(item.marker)].length,4)
+    if(item.name==='sentence') assert.ok(printed.text.includes('ط'.repeat(225)),'Printed copy must preserve every Urdu word character')
     assert.deepEqual(printed.broken,[])
     assert.ok(printed.scroll<=printed.client+1)
     const pdfPage=await browser.newPage()
