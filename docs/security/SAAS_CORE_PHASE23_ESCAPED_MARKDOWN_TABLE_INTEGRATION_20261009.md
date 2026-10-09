@@ -1,0 +1,33 @@
+# ASSPS SaaS Core Phase23 — escaped Markdown pipe-table lossless print/editor codec
+
+**9 October 2026 UTC. Isolated latest-Core descendant, production RELEASE HOLD.**
+
+## Verified ownership and ancestry
+
+- SaaS Core clean and independently pushed parent Phase22 `9b2c361bed778e622e6d58a5d8d27f1261a0b179`; new isolated `feat/saas-core-phase23-markdown-pipe-fidelity-20261009` worktree `/root/workspace/assps-core-phase23-markdown-pipe-fidelity-20261009`.
+- Owner Paper Studio Master Phase19 `b1b49a6eff8d702549e9102f58bd4630aef59d44` is verified clean in `/root/workspace/assps-paper-studio-master-phase19-20261009`, independently pushed, and linked from issue #4. The changes are new Markdown table parser/serializer behavior, synthetic fixtures and Chromium tests, NOT a request to replace the latest signed SaaS Core source.
+- A direct full owner renderer patch `git apply --check` did NOT apply against latest Core because of its different JSX import/editor context. Instead, selectively reviewed/ported only the two exact old local parser and serializer replacements with asserted match of the existing code: import owner-authored `official/markdownTableCodec.js`, remove duplicate local `parseMarkdownTable` and `serializeMarkdownRows`. No rewriting or wholesale cherry-pick of owner renderer, Core Phase21 private upload policy, signed Core/Paper auth, backend RLS, or other owner works. Extra paths: only synthetic one-table fixture in Core harness and owner's isolated Chromium and pure codec tests.
+- Neither official First Term question text, marks, source bank, original approved data, real student records, database, migrations, live server configs nor physical printers have been modified. Preserve all Paper Studio, Grade IX/X Academic and Connect worktrees.
+
+## Distinct actual RED → GREEN reproduced on newest Core
+
+- Synthetic bilingual 3-column Markdown teacher table with escaped literal `\|`, literal backslashes, Urdu and English science text was fed to the actual current Core Phase22 Paper Workspace browser harness. PREPATCH Chromium returned **[4,5,4] table cells**, not the intended 3/3/3; negative dedicated test **0/1 PASS, 1 FAIL**. Evidence `/tmp/assps_p23_prepatch.log`; not hypothetical and not using real papers.
+- Implemented owner-reviewed pure `parseMarkdownTable` / `serializeMarkdownRows` codec. It scans escaped separators and slash runs without treating literal pipes as column boundaries, preserves TeX single backslashes and existing legacy separator lines, re-escapes cell values before serializing edits. **Same Chromium after fix 1/1 PASS exit 0**, `cols:[3,3,3]` in preview AND actual cloned Print frame; 1-page A4 PDF generated. Actual Edit Paper → click cell → replace with pipe/backslash literal → blur → Done Editing → Print roundtrip also verified exact changed cell and all original neighboring data; `/tmp/assps_p23_browser.log`. No blanket HTML focus/selection claims.
+- Pure owner codec unit cases **5/5 PASS exit 0** on exact Core descendant: odd/even backslash runs, escaped source pipes, bidi Urdu/English data, math TeX backslashes, table dividers, existing simple Markdown compatibility and safe cell-reconstruction. Log `/tmp/assps_p23_codec_unit.log`.
+- Targeted ESLint three new codec/browser test files **exit 0 PASS**. Unmodified global frontend lint is separately known FAIL 707 errors/46 warnings from earlier baseline.
+
+## Fresh integration gates
+
+- **Full isolated Vite production build PASS** `✓ built in 3.43s`, controlled exit `0` in `/tmp/assps_p23_vite_build.exit`. Exact source same lock SHA256 `4d9385d6d72de6827d33f2e45eefda7424629e1d85bd3c5ea883965876fed7f4` as Phase22; isolated `node_modules` symlink. No fresh Phase23 npm ci.
+- Protected six original First Term templates SHA/integrity **PASS unchanged**; Canonical DOCX maths asset/source model **4/4 PASS exit 0** `/tmp/assps_p23_docx_unit.log`. Backend bytewise unchanged from Core Phase22.
+- **Phase23 original protected 43/43 official First Term paper render/print text parity PASS on the exact new Core codec source**, actual `ASSPS_CANONICAL_CORPUS_PORT=5671 node --test` process **exit 0**, all 43 unique paper-document PASS markers, complete TAP 1/1 PASS, failed/skipped/cancelled 0, `143208.82ms` elapsed. Evidence `/tmp/assps_p23_corpus43.log` and `.exit`; no reliance on prior owner or Core Phase22 result.
+- **Phase23 inherited eight browser print test files 12/12 TAP PASS, process exit 0, failed/skipped/cancelled 0, `39766.48ms`**, including early Urdu sentence/pair, maths compare/table, vertical operands, odd RTL two-column, bilingual paired table, MCQ matrix, Matching Columns and SourceTable with true Chromium A4/PDF. Evidence `/tmp/assps_p23_previous_print.log`, `.exit`. Five prior test scripts had temporary test-only ports 5681–5685 to prevent sibling-agents' port collisions, **git-restored only from Core Phase23 own worktree before commit** and not included in commit. Combined with the new escaped-table real Chromium 1/1, the new Core source has 13 measured passing browser subtests across nine scripts.
+- This change preserves the six earlier Core Paper Studio migrations/print fixes, but real teacher JWT Save→backend GET→reopen→DOCX/PDF, Jameel Noori visual glyph/pagination certification and connected printer physical acceptance remain outstanding.
+
+## Security and production RELEASE HOLD
+
+- Phase21 private uploads source gate survives unchanged; production active Nginx currently has FIVE generic `alias /var/uploads/;` locations in four host files (actual read-only Core Phase22 audit FAIL), so no production media confidentiality release can be certified yet. This security remediation needs controlled versioned five-server-block Nginx candidate, `nginx -t`, authorized real live school logo/public branding 200 & identity private 404 host-level smoke, backup and rollback before rollout.
+- Full SaaS 77-table FORCE-RLS/GRANT migrations and dedicated non-BYPASS signed PG roles, cross-tenant finance/attendance/guardian/student/service/superadmin writes, signed user role acceptance, provider per-record media, Connect owner local-only git publishing/upload privacy, physical printer, full ESLint baseline, Hostinger firewall/SSH rescue, backup/restore, artifact ancestry and controlled release smoke remain HOLD. Academic Grade IX–X independent textbook human approvals/published still ZERO.
+- Initial most recent deployed state: frontend `24cbcae33b96f1bb058ad9b005f0eb8bfe5eac92`, backend `16ab8f346ba27aa6b2e29a8f03c68db32a326cb9`. Old ARCHV1 worktree has 26 dirty tracked paths; do not modify. Reviewed Phase3AE historical original archive/PG18 and complete old chat transcripts unavailable/unverified.
+
+**Decision: SOURCE ONLY, NOT DEPLOYED.**

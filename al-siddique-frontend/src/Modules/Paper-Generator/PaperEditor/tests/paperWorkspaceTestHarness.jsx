@@ -238,6 +238,18 @@ const verticalMathOverflowPaper = {
  ].join('\n')}],
 }
 
+// Synthetic Markdown table escaped-pipe/escaped-backslash fidelity fixture only.
+const escapedPipeTablePaper = {
+ id:'synthetic-escaped-pipe-table-20261009',name:'Escaped Markdown Table Fidelity',documentFormat:'pts-native-v13',printReadiness:'READY',
+ config:{className:'7',classLevel:'7',subject:'Science',subjectName:'Science',language:'urdu',paperCode:'ESCAPED-PIPE',timeAllowed:'35 Minutes',totalMarks:4,title:'Synthetic Escaped Markdown'},
+ official_section:[{id:'escaped-pipe-markdown',type:'official_section',sourceOrder:1,medium:'urdu',layoutPreset:'table',
+ heading:'سوال نمبر 1: جدول مکمل کریں۔ (4)',marks:4,
+ content:String.raw`| Formula \| Unit | عنوان | Notes |
+| --- | --- | --- |
+| Pressure \| Temperature [ESCAPED-01] | دباؤ \| حرارت [ESCAPED-02] | C:\\Science [ESCAPED-03] |
+| Normal number | عام جواب | Value \| axis [ESCAPED-04] |` }],
+}
+
 const nestedScoringPaper = {
  clientDraftId:'nested-scoring-browser-paper',
  name:'Nested Scoring Browser Paper',
@@ -322,7 +334,7 @@ function ThemeFixture() {
  const reopenPaper = savedPapers.find(p => p.userAuthored && (reopenId ? String(p.id)===reopenId : p.name===reopenName)) || null
  const officialId = params.get('officialId') || ''
  const officialPaper = officialId ? officialV13.papers.find(item => item.id === officialId) || null : null
- const fixture = params.has('new') ? null : params.has('reopen') ? reopenPaper : params.has('verticalMathOverflow') ? verticalMathOverflowPaper : params.has('mathPracticeOverflow') ? mathPracticeOverflowPaper : params.has('mathTablesOverflow') ? mathTablesOverflowPaper : params.has('earlySentenceOverflow') ? earlySentenceOverflowPaper : params.has('earlyPairOverflow') ? earlyPairOverflowPaper : params.has('matchingColumnOverflow') ? matchingColumnOverflowPaper : params.has('sourceTableOverflow') ? sourceTableOverflowPaper : params.has('bilingualMatrixOverflow') ? bilingualMatrixOverflowPaper : params.has('bilingualTableOverflow') ? bilingualTableOverflowPaper : params.has('rtlOddOverflow') ? rtlOddOverflowPaper : params.has('nestedScoring') ? nestedScoringPaper : params.has('mathAssets') ? mathAssetsPaper : officialPaper || (params.has('recovery8') ? classEightUrduFixture : paper)
+ const fixture = params.has('new') ? null : params.has('reopen') ? reopenPaper : params.has('escapedPipeTable') ? escapedPipeTablePaper : params.has('verticalMathOverflow') ? verticalMathOverflowPaper : params.has('mathPracticeOverflow') ? mathPracticeOverflowPaper : params.has('mathTablesOverflow') ? mathTablesOverflowPaper : params.has('earlySentenceOverflow') ? earlySentenceOverflowPaper : params.has('earlyPairOverflow') ? earlyPairOverflowPaper : params.has('matchingColumnOverflow') ? matchingColumnOverflowPaper : params.has('sourceTableOverflow') ? sourceTableOverflowPaper : params.has('bilingualMatrixOverflow') ? bilingualMatrixOverflowPaper : params.has('bilingualTableOverflow') ? bilingualTableOverflowPaper : params.has('rtlOddOverflow') ? rtlOddOverflowPaper : params.has('nestedScoring') ? nestedScoringPaper : params.has('mathAssets') ? mathAssetsPaper : officialPaper || (params.has('recovery8') ? classEightUrduFixture : paper)
  React.useEffect(() => { setTheme('light') }, [setTheme])
  return <>
   <button hidden id="fixture-global-theme-toggle" data-current-theme={theme} onClick={toggleTheme}>Portal theme toggle</button>

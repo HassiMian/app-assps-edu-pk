@@ -12,6 +12,7 @@ import { URDU_FONT_STACK } from '../../resolvePaperRoute.js'
 import { optionLabelParts, replaceQuestionSerial, replaceSectionMarks, resolveSectionTotalMarks } from '../../paperSystemRules.js'
 import { InlineEditable } from '../../PaperInlineEditor.jsx'
 import StableClosingBracket from '../StableClosingBracket.jsx'
+import { parseMarkdownTable, serializeMarkdownRows } from './markdownTableCodec.js'
 
 function parseNumberedLines(content = '') {
   return String(content).split(/\r?\n/).map((raw, sourceIndex) => {
@@ -39,13 +40,6 @@ function replaceNumberedLine(content, row, text, isUrdu) {
   const punctuation=isUrdu && /^(?:الف|ب|ج|د|ہ|و|ز|ح)$/.test(String(row.serial)) ? ')' : '.'
   lines[row.sourceIndex]=(row.hadSerial ? String(row.serial)+punctuation+' ' : '')+String(text||'')
   return lines.join('\n')
-}
-
-function parseMarkdownTable(content = '') {
-  return String(content).split(/\r?\n/).map(line => line.trim())
-    .filter(line => /^\|.*\|$/.test(line))
-    .map(line => line.slice(1, -1).split('|').map(cell => cell.trim()))
-    .filter(row => !row.every(cell => /^:?-{3,}:?$/.test(cell)))
 }
 
 function AnswerText({ text }) {
@@ -205,13 +199,6 @@ function NumberedList({ rows, content='', isUrdu, qFs, fs, shortLayout, themeCol
     return <div data-short-two-column style={{ display:'grid', gridTemplateColumns:'repeat(2,minmax(0,1fr))', gap:`${6*fs}px ${18*fs}px`, direction:isUrdu?'rtl':'ltr' }}>{columns.map((column, idx)=><div key={idx}>{column.map(renderRow)}</div>)}</div>
   }
   return <div data-numbered-list>{rows.map(renderRow)}</div>
-}
-
-function serializeMarkdownRows(rows = []) {
-  if (!rows.length) return ''
-  const encode = row => '| ' + row.map(cell => String(cell || '').trim()).join(' | ') + ' |'
-  const separator = '| ' + rows[0].map(() => '---').join(' | ') + ' |'
-  return [encode(rows[0]), separator, ...rows.slice(1).map(encode)].join('\n')
 }
 
 function SourceTable({ rows, isUrdu, qFs, fs, themeColor, editMode=false, section=null, onQuestionChange, onActiveEditable }) {
