@@ -17,12 +17,12 @@ const legacy={id:'ORIG-IX-01',school_id:SCHOOL,class_level:'9th',subject:'biolog
  medium:'english',chapter_no:'1',question_type:'short',question_text:question.questionText,
  question_text_urdu:'',options:[],correct_option:'',answer:question.answer,
  explanation:'',marks:2,is_approved:false,metadata:{},created_by:REVIEWER}
-function fakeDatabase(sourceCreator,{sourceMissing=false,signedCreator=REVIEWER,signedAt='2026-10-09T00:00:00Z'}={}){
+function fakeDatabase(sourceCreator,{sourceMissing=false,signedCreator=REVIEWER,signedAt='2026-10-09T00:00:00Z',linkedOverrides={}}={}){
  const queries=[]
  const master={id:3,public_id:'QB-1',current_revision:2,lifecycle_status:'reviewed',
   created_by:101,source_question_bank_id:legacy.id}
  const revision={revision_number:2,content_hash:contentHash,content_json:question,created_by:102}
- const linked={...legacy,created_by:sourceCreator}
+ const linked={...legacy,created_by:sourceCreator,...linkedOverrides}
  const review={mapping_status:'reviewed',reviewed_by:REVIEWER,created_by:signedCreator,reviewed_at:signedAt,
   metadata:{currentRevision:2,contentHash,reviewerUserId:REVIEWER,schoolId:SCHOOL,sourceEvidence:{}}}
  const client={async query(sql){
@@ -154,4 +154,55 @@ test('invalid PostgreSQL Date object fails closed without unhandled conversion e
  assert.throws(()=>assertGrade910ReviewSignature(
   {created_by:REVIEWER,reviewed_at:new Date(NaN)},REVIEWER),
   {code:'REVIEW_SIGNOFF_TIMESTAMP_MISSING'})
+})
+
+test('review recording refuses an original source row with altered answer despite valid reviewed revision and reviewer',async()=>{
+ const {client}=fakeDatabase(105,{linkedOverrides:{answer:'Contradictory source answer'}})
+ await assert.rejects(loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+  schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
+  expectedRevision:2,expectedContentHash:contentHash,evidence:{}
+ }),{code:'REVIEW_LINKED_SOURCE_CONTENT_DRIFT'})
+})
+test('review recording refuses original-source marks and chapter drift before allowing recorded review replay',async()=>{
+ for(const linkedOverrides of [{marks:5},{chapter_no:'2'}]){
+  const {client}=fakeDatabase(105,{linkedOverrides})
+  await assert.rejects(loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+   schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
+   expectedRevision:2,expectedContentHash:contentHash,evidence:{}
+  }),{code:'REVIEW_LINKED_SOURCE_CONTENT_DRIFT'})
+ }
+})
+test('review recording must reject same-subject revision with a different original medium',async()=>{
+ const {client}=fakeDatabase(105,{linkedOverrides:{medium:'urdu'}})
+ await assert.rejects(loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+  schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
+  expectedRevision:2,expectedContentHash:contentHash,evidence:{}
+ }),{code:'REVIEW_LINKED_SOURCE_CONTENT_DRIFT'})
+})
+test('review recording rejects altered original stem, subject, grade or question type, and does not insert a review',async()=>{
+ const changes=[
+  {question_text:'Different unreviewed textbook question'},
+  {subject:'chemistry'},
+  {class_level:'10th'},
+  {question_type:'mcq'},
+  {explanation:'Different explanation from linked school source'}
+ ]
+ for(const linkedOverrides of changes){
+  const {client,queries}=fakeDatabase(105,{linkedOverrides})
+  await assert.rejects(loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+   schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
+   expectedRevision:2,expectedContentHash:contentHash,evidence:{}
+  }),{code:'REVIEW_LINKED_SOURCE_CONTENT_DRIFT'})
+  assert.equal(queries.some(sql=>sql.includes('INSERT INTO question_mappings')),false)
+ }
+})
+test('positive exact linked original permits idempotent replay only with tenant scoped share-locked source read',async()=>{
+ const {client,queries}=fakeDatabase(105)
+ const response=await loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+  schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
+  expectedRevision:2,expectedContentHash:contentHash,evidence:{}
+ })
+ assert.equal(response.replayed,true)
+ assert.equal(response.questionBankApproved,false)
+ assert.ok(queries.some(sql=>sql.includes('FROM question_bank')&&sql.includes('school_id=$1')&&sql.includes('FOR SHARE')&&sql.includes('question_text')&&sql.includes('marks')))
 })
