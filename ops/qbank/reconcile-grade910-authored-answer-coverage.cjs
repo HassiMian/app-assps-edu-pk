@@ -13,7 +13,8 @@ const MANIFEST=Object.freeze([
  ['physics10Starter2026.json','ASSPS_PHYSICS10_FIVE_LONG_MODEL_ANSWER_DRAFTS_20261009.json',5],
  ['computer9Starter2026.json','ASSPS_COMPUTER9_TWELVE_LONG_MODEL_ANSWER_DRAFTS_20261009.json',12],
  ['computer10Starter2026.json','ASSPS_COMPUTER10_EIGHT_LONG_MODEL_ANSWER_DRAFTS_20261009.json',8],
- ['ict9TechStarter2026.json','ASSPS_ICT9_SIX_LONG_MODEL_ANSWER_DRAFTS_20261009.json',6]
+ ['ict9TechStarter2026.json','ASSPS_ICT9_SIX_LONG_MODEL_ANSWER_DRAFTS_20261009.json',6],
+ ['pakistanStudies10Starter2026.json','ASSPS_PAKSTUDIES10_EIGHT_LONG_MODEL_ANSWER_DRAFTS_20261009.json',8]
 ])
 function reconcile({sources,packets,docket}){
  const flags=docket?.reviewCandidates
@@ -71,11 +72,11 @@ function reconcile({sources,packets,docket}){
   groups.push({originalAuthoredSource:filename,sourceFileSha256:sha(raw),
    researchAnswerPacket:packetName,distinctUnapprovedExplanationProposals:expectedCount})
  }
- if(seen.size!==84)throw Error('COVERAGE_WRONG_TOTAL_DRAFTS')
+ if(seen.size!==92)throw Error('COVERAGE_WRONG_TOTAL_DRAFTS')
  const remaining=[...originalIds.keys()].filter(id=>!seen.has(id)).sort()
- if(remaining.length!==82)throw Error('COVERAGE_WRONG_REMAINING_COUNT')
+ if(remaining.length!==74)throw Error('COVERAGE_WRONG_REMAINING_COUNT')
  return {
-  schemaVersion:'assps-grade910-84-original-answer-draft-coverage-v1',
+  schemaVersion:'assps-grade910-92-original-answer-draft-coverage-v2',
   scope:'RESEARCH_DRAFT_PROVENANCE_ONLY_NO_ACADEMIC_APPROVAL',
   originalAuthoredQuestionCandidates:2581,originalLongQuestionCount:564,
   correctedRubricOnlyOriginals:166,distinctOriginalIdsWithSeparateAnswerDrafts:seen.size,
@@ -98,7 +99,7 @@ function loadInputs(){
 }
 function markdown(d){
  return [
-  '# ASSPS Grade IX–X — 84 distinct original IDs with separate answer research drafts',
+  '# ASSPS Grade IX–X — 92 distinct original IDs with separate answer research drafts',
   '', '**Academic draft completeness is not academic approval.**','',
   `- Original question research candidates: **${d.originalAuthoredQuestionCandidates}**, unchanged.`,
   `- Original long-answer rubric-only flags (corrected): **${d.correctedRubricOnlyOriginals}**.`,
@@ -115,7 +116,7 @@ function markdown(d){
 }
 function main(){
  const d=reconcile(loadInputs())
- const base=path.join(OUT,'ASSPS_GRADE910_84_DISTINCT_UNAPPROVED_ANSWER_PROPOSALS_20261009')
+ const base=path.join(OUT,'ASSPS_GRADE910_92_DISTINCT_UNAPPROVED_ANSWER_PROPOSALS_20261009')
  fs.writeFileSync(base+'.json',JSON.stringify(d,null,2)+'\n')
  fs.writeFileSync(base+'.md',markdown(d))
  console.log(JSON.stringify({drafts:d.distinctOriginalIdsWithSeparateAnswerDrafts,remaining:d.originalRubricOnlyIdsWithoutNewAnswerDraft,approved:d.academicallyApproved}))

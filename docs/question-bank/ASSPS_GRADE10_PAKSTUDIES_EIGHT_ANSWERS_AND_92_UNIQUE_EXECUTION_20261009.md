@@ -1,0 +1,39 @@
+# ASSPS Grade IX–X Academic Master — Pakistan Studies X eight independent answer proposals and 92-ID unique coverage
+
+**9 October 2026. Isolated Academic research only. NO production deployment.**
+
+## Real resumed checkpoint
+Recovered GitHub issue #4 and clean owner `feat/grade910-academic-master-evidence-20261008` from actual local and remote matching `68fca56436f942ebc219f00227d2bc54e4690adc`. Existing 2,581 original question research candidates, 166 rubric-only original long answers, 84 separate previously authored Biology/Physics/Computer/ICT answer proposals, all question/source ledgers, original answer keys and historic evidence were preserved. No Paper Studio, Core, Connect, database, migration or official paper code changed.
+
+## NEW independent textbook-research answer authoring
+Inspected authentic `pakistanStudies10Starter2026.json`: **40 original provisional Grade X Pakistan Studies questions**; **8 five-mark long questions** carry marking-only `Award marks for...` instead of student-facing model answers. Wrote **8 new independently worded English explanatory answer research proposals**, **40 distinct proposed five-mark marking points**, one for each exact original long stable ID and chapter (chapters 1–8): ideological arguments in the Pakistan movement, Muslim political awakening/Lahore Resolution/independence, the 1956–1962–1973 constitutional sequence, Indus basin/landscape/climate, foreign policy and economy, agriculture/industry/services/human capital, demography/urbanization/cultural diversity, equal participation and women's opportunities.
+
+Neutral academic narrative: ideas about historical political identity are presented as historical positions rather than a demand for the learner to hold any viewpoint. No current official names or partisan persuasion inserted. Partition's impact and diverse historical viewpoints acknowledged; women's opportunities discussed through access to education, legal equality, health, economic and civic participation.
+
+Original authored source SHA256: `cf03d48d57698e8d0827e628132b8becd801cb127b9e3789df30e1fe87b12dae`. Registry source `pectaa-catalog-019`, claimed catalog PDF SHA256 `430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a`, catalog medium English, edition `CURRENT_CATALOG_LABEL_NO_SESSION`, `academicApproval:false`. A source chapter's TOC-related page marker is NOT an independently verified original textbook exercise page, PDF physical page, school textbook adoption or current academic/exam session.
+
+Independent public factual background checked, **NOT used as evidence that ASSPS adopted any textbook**:
+- National Assembly of Pakistan, History of the Constitution / political history: https://na.gov.pk/en/content.php?id=75 — records 1956 parliamentary unicameral structure, 1962 presidential system and 1973 parliamentary bicameral framework; corroborates selected core chronological claims.
+- Senate of Pakistan, History: https://senate.gov.pk/en/essence.php?catid=4&id=1098&subcatid=138 — describes relevant constitutional periods and bicameral parliamentary history.
+These are general public factual cross-checks, not physical Punjab textbook scans or independent qualified History faculty review. No textbook/past-paper quote or invented board-paper year has been imported.
+
+## Structural and academic protections
+`ops/qbank/author-pakstudies10-eight-concept-answer-candidates.cjs` pins exact original file bytes SHA and parsed-data identity, original 40-question/8-long shape, eight original IDs, chapter/topic/five marks, correct catalog grade/subject/medium, source PDF metadata and unapproved edition state. Generates `docs/question-bank/ASSPS_PAKSTUDIES10_EIGHT_LONG_MODEL_ANSWER_DRAFTS_20261009.{json,md}` with individually pinned original question and original answer SHA, original file SHA, independently authored explanations and 5 separate marking-point proposals. Each item explicitly maintains source-school-adoption=false, textbook printed-page=false, independent qualified review=false, Urdu equivalence=false, reviewer null, approvedRevisionId=null, academicallyApproved=false, verifiedPublished=false.
+
+**There is no source question modification, approved answer insertion, student content seeding, official paper rewrite, Paper Studio picker release, curriculum/source page false approval, translation certification or production deployment.**
+
+## NEW safe coverage reconciliation and historical preservation
+Prior cross-batch 84-ID report `ASSPS_GRADE910_84_DISTINCT_UNAPPROVED_ANSWER_PROPOSALS_20261009.{json,md}` remains preserved unchanged. Extended unique-ID verifier `ops/qbank/reconcile-grade910-authored-answer-coverage.cjs` with the eighth subject batch only. New versioned `ASSPS_GRADE910_92_DISTINCT_UNAPPROVED_ANSWER_PROPOSALS_20261009.{json,md}` independently checks eight source files, all individual original question IDs, original file SHA, individual source-question and answer SHA, actual marks/chapter/topic, exact five independent marking points, academic reviewer status and the corrected immutable 166-question full-corpus rubric-only audit. The new metadata-only backlog enumerates **74 stable original IDs** lacking a separate model-answer proposal without reproducing copyrighted question or textbook content.
+
+**Accurate cumulative research counts:** 2,581 original IX/X authored research questions unchanged, 564 original long questions, 166 original grading-only long-answer fields unchanged, **92 DISTINCT existing original long IDs** with *separately* proposed explanatory research drafts, **460 independently proposed marking criteria** (five per original), **74** still lacking any explanatory research draft. An answer proposal is NOT an added verified question record or human-approved replacement. School-adopted edition/page verified 0, independently qualified teacher reviewed 0, academically approved 0, verified published 0.
+
+## Executed tests — original unchanged sources
+- New Pakistan Studies X source/identity, factual chronology, neutrality and nonapproval regression: **9/9 PASS**, 0 fail/skip/cancel; `/tmp/assps-paks10-eight-targeted-20261009.tap`.
+- Updated eight-batch duplicate/fingerprint/approval-forgery detector: **8/8 PASS**, zero fail/skip/cancel; `/tmp/assps-paks10-reconcile-targeted-20261009.tap`.
+- Actual combined independent Biology/Physics/Computer/ICT/Pakistan Studies draft, signature publisher and 166-source audit suites: **144/144 PASS, process exit 0**, zero fail/skip/cancel; `/tmp/assps-grade910-paks10-final-combined-20261009.tap` and `.exit`.
+- Full original independent Academic focused regression: **184/184 PASS, process exit 0**, zero fail/skip/cancel, duration 4.90s; `/tmp/assps-grade910-paks10-final-focused-20261009.tap` and `.exit`.
+- Entire original Grade IX/X staging/candidate source regression: **510/510 PASS, process exit 0**, zero fail/skip/cancel, duration 7.41s; `/tmp/assps-grade910-paks10-final-staging-20261009.tap` and `.exit`.
+- Exact original source SHA, syntax, staged Git whitespace and remote SHA match to be verified at commit/push. These are repository-backed tests, not human academic source/adoption verification, textbook PDF physical-page examination, Urdu translation signoff or live restricted-role PostgreSQL RLS testing.
+
+## Next genuine school blockers
+School authority must establish ASSPS-adopted book title, grade, subject, medium, actual printed edition/session/exam year, and original physical textbook page/exercise. Separate qualified faculty must verify each answer and mark distribution, check Urdu-equivalence if applicable and approve an immutable corrected question revision with a reviewer distinct from author. No AI-generated/research-candidate answer is automatically source-verified, reviewed, approved or published. Paper Studio may select only approved versioned content, and SaaS Core exclusively certifies tenant security/RLS and production deployment. **Production HOLD.**
