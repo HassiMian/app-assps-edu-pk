@@ -1,0 +1,7 @@
+# Paper Studio Phase32 strict Diary Save response identifier, 2026-10-09
+
+On exact clean Paper Phase31 `44be3755443433c6aa98234424c79be27843e9f7`, reject coercible non-numeric saved IDs in the browser. Original success-response check used `Number.isSafeInteger(Number(saved?.id))`; JavaScript converts JSON boolean `true` to 1, so HTTP200 `{success:true,data:{id:true}}` could be falsely confirmed as saved ID1. Guard now requires actual `Number.isSafeInteger(saved?.id)` and positive integer. Scoped Paper-only one-line source change; no server/DB behavior changed.
+
+Actual RED: copied new synthetic deferred-HTTP Chromium test onto exact unpatched Phase31 source, TAP 0/1, exit1 `/tmp/paper-p32-original-red.log`. GREEN patched Vite+Chromium 1/1 exit0 `/tmp/paper-p32-id-type.log`. Four targeted browser acceptance tests 4/4 PASS exit0 `/tmp/paper-p32-regression.log`; focused ESLint PASS exit0 `/tmp/paper-p32-lint.log`; frontend optimized build PASS exit0 `/tmp/paper-p32-build.log`. Full original 43 protected paper corpus is NOT rerun on Phase32; exact Phase31 43/43 exit0 remains previous evidence only.
+
+Release HOLD: SaaS Core alone may review/forward-port on latest verified signed descendant. Still independently require signed non-BYPASS restricted PostgreSQL role/tenant, backend authorization/uniqueness, all HTTPS private-media ingress fixes, physical A4 Urdu print and PDF/DOCX visuals, Academic Grade IX/X human approval and rollback certification. No production deployment, service changes or protected papers edited.
