@@ -6,14 +6,33 @@ const { currentSchoolId } = require('./tenant')
 
 const PAPER_ROLES = new Set(['admin','school_admin','principal','teacher','super_admin','result_entry'])
 
+// The shared legacy currentSchoolId() accepts numeric prefixes via parseInt.
+// Re-validate trusted JWT / server-bound IDs at this restricted Paper boundary
+// before constructing a signed PostgreSQL tenant or actor context.
+function canonicalPaperId(value) {
+  if (typeof value === 'number') {
+    return Number.isSafeInteger(value) && value > 0 ? value : null
+  }
+  if (typeof value === 'string' && /^[0-9]+$/.test(value.trim())) {
+    const id = Number(value.trim())
+    return Number.isSafeInteger(id) && id > 0 ? id : null
+  }
+  return null
+}
+
 function verifiedPaperContext(req) {
   const role = String(req.user?.role || '').trim().toLowerCase()
-  const actorId = Number(req.user?.id)
-  const requestedSchoolId = Number(currentSchoolId(req))
+  const actorId = canonicalPaperId(req.user?.id)
+  // A malformed explicit server school ID must not be silently converted by
+  // resolveSchoolId() or discarded in favor of a second valid fallback.
+  const explicitSchoolValid = req.school_id == null || canonicalPaperId(req.school_id) !== null
+  const tenantSchoolValid = req.tenantSchoolId == null || canonicalPaperId(req.tenantSchoolId) !== null
+  const requestedSchoolId = canonicalPaperId(currentSchoolId(req))
   const serverBoundSchoolId = role === 'super_admin'
-    ? Number(req.school_id)
-    : Number(req.user?.school_id)
+    ? canonicalPaperId(req.school_id)
+    : canonicalPaperId(req.user?.school_id)
   if (!req.user || !PAPER_ROLES.has(role) ||
+      !explicitSchoolValid || !tenantSchoolValid ||
       !Number.isSafeInteger(actorId) || actorId <= 0 ||
       !Number.isSafeInteger(requestedSchoolId) || requestedSchoolId <= 0 ||
       !Number.isSafeInteger(serverBoundSchoolId) || serverBoundSchoolId !== requestedSchoolId) {

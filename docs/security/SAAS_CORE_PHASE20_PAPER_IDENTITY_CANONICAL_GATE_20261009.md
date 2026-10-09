@@ -1,0 +1,28 @@
+# ASSPS SaaS Core Phase20 — canonical Paper actor / selected-school identity gate
+
+**2026-10-09 UTC · New Core-only defense-in-depth implementation · PRODUCTION RELEASE HOLD**
+
+## Source ancestry and ownership boundaries
+- Exact clean and GitHub-pushed base `d4254da6acea715e091f6902f269c3a8e55b3b8f` (Core Phase19); new isolated `feat/saas-core-phase20-paper-scope-strict-20261009`, worktree `/root/workspace/assps-core-phase20-paper-scope-strict-20261009`.
+- Only `al-siddique-backend/src/middleware/paperRestrictedDatabase.js` plus one new Core-owned adversarial unit regression and this evidence document. No changes to Paper Studio editor, protected First Term papers, academic question source, Connect AuthContext, student/finance/attendance tables, signed DB policy/roles, VPS services, or other owners' dirty worktrees.
+- Baseline live frontend `24cbcae33b96f1bb058ad9b005f0eb8bfe5eac92`, backend `16ab8f346ba27aa6b2e29a8f03c68db32a326cb9` at initial inspection; candidate NOT deployed. ARCHV1 26 dirty tracked paths left untouched.
+
+## New vulnerability boundary found and reproduced
+- Prior Phase18 hardened `normalizedRuntimeContext()`, but its upstream Paper-only `verifiedPaperContext(req)` independently used `Number(req.user?.id)`, `Number(req.user?.school_id)`, `Number(req.school_id)`, and the legacy `currentSchoolId()` which resolves candidates via `parseInt`. Thus input `school_id="900001suffix"` was silently accepted as selected school 900001, `id="9.99001e5"` as actor 999001, `school_id="900001.0"` as canonical 900001, including a malformed selected school for the privileged role. A malformed string could bypass **lexical ID integrity**, not proven to bypass valid real user's tenant isolation, and not evidence of production exploitation.
+- New `canonicalPaperId()` accepts only a positive safe-integer number or a fully decimal positive string (trim permitted), requires strict canonical values for actor ID, selected/request school ID, optional server-bound tenantSchoolId and signed user's school ID. This is checked **before** calling legacy `currentSchoolId` or creating the signed RLS Paper context. Invalid formats fail with the existing `PAPER_DB_CONTEXT_FORBIDDEN` 403. Trusted principal/teacher and selected super-admin with valid decimal strings remain compatible; foreign selected schools still forbidden. No JSON/JWT parsing, main tenant resolver or existing auth protocol changes.
+- No changes to signing-key handling, `apex_paper_runtime` non-BYPASS login, RLS, HMAC transaction/rollback, SQL grants or schema.
+
+## Fresh measured RED→GREEN and regressions
+- Actual new six-case synthetic test suite **before fix: 2/6 PASS, 4/6 FAIL**, exposing malformed selected school prefix, actor exponent/hex/fraction, school partials and super-admin school coercion. Corrected code rerun exact suite **6/6 PASS**, including valid actor/school numeric and decimal strings and cross-school forbidden 403.
+- **Existing real PostgreSQL16 dedicated Paper login and Assessment HTTP suites 7/7 PASS**, using synthetic clone `assps_archv1_rls_corep9_20261008` with non-super/non-BYPASS `assps_core_paper_p9` and `assps_core_test_login`; retained signed teacher visibility and editorial-heading revision protections. This is real HTTP through existing auth tests, **not** a new Phase20 malformed-JWT HTTP test.
+- **19/19 PASS** general Core real signed SaaS school-A/school-B context, HTTP, diary/session, Phase18 real PG context tests, Paper flag OFF; **35/35 PASS** legacy signed-feature-OFF teacher/auth/permissions/DOCX/cognitive templates; **33/33 PASS** targeted static/HTML signing/session/lease/security tests including six new Phase20 unit cases. Counts overlap across suites, not aggregated as unique cases.
+- **262/262 backend JS syntax checks PASS**. Unmodified frontend on identical exact lock SHA, isolated `npm run build` **exit 0, `✓ built in 13.91s`** with matching-dependency symlink to last clean Core worktree. Protected six official templates unchanged PASS, Git diff whitespace PASS. No fresh Phase20 `npm ci`, frontend 43/43 or whole lint rerun claimed: frontend code unchanged from Phase19 (where 43/43 and seven browser print/PDF cases passed). Prior full frontend ESLint **707 errors + 46 warnings, FAIL** remains unresolved.
+- An additional bespoke signed-JWT HTTP negative harness was not executed due tool security checks; no such extra real-HTTP test is claimed or checked into this commit. Existing signed real HTTP regression and separate adversarial Paper middleware tests above constitute the actual evidence.
+
+## Strict remaining RELEASE HOLD gates
+1. Independent non-BYPASS signed Core+Paper LOGIN and 77-table FORCE-RLS role/GRANT policies in production-equivalent clone; student/parent/guardian/service/platform owner, finance/attendance protected read+write cross-tenant matrices, DB migration/up/down and backup restore/key rotation.
+2. Real school authenticated teacher Save→GET→reopen→print/PDF/DOCX on signed restricted server and Jameel Noori font/pagination human + Windows-connected printer UAT.
+3. Complete frontend ESLint baseline, Hostinger ingress/firewall/SSH rescue and live artifact ancestry, release candidate regression and controlled deployment rollback/smoke. Connect source local-only publication permission and signed session/privacy, GradeIX-X human verification 0 approved/published.
+4. Old complete historic chats and original reviewed Phase3AE/PG18 archive not verified; never infer signoff.
+
+**Release decision: HOLD.** Isolated source and tests only. No live migrations, sensitive data, PM2, Nginx, production configuration, services or firewall changes.
