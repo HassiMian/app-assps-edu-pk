@@ -43,7 +43,8 @@ function buildPremiumResultCardData({ student, exam, studentMarks, options, scho
  const activeTerms = termFields.filter(([key]) => opts[key])
  const slot = currentTermField(exam)
  const subjects = (studentMarks || []).map((row) => {
- const perTermTotal = Number(row.total_marks || exam?.total_marks || 100)
+ const rawTotal = row.total_marks ?? exam?.total_marks
+ const perTermTotal = rawTotal === null || rawTotal === undefined || rawTotal === '' || !Number.isFinite(Number(rawTotal)) || Number(rawTotal) <= 0 ? null : Number(rawTotal)
  const subject = {
  subjectName: row.subjectName || row.subject || '—',
  assessmentMarks: numberOrNull(row.assessmentMarks ?? row.assessment_marks),
@@ -54,12 +55,17 @@ function buildPremiumResultCardData({ student, exam, studentMarks, options, scho
  remarks: row.remarks || '',
  perTermTotal,
  }
- const storedCurrentTerm = numberOrNull(row.marks_obtained ?? row.obtainedMarks)
+ // Fail closed: legacy or partial payloads must never render invalid marks as a grade.
+ for (const [, field] of termFields) {
+  if (subject[field] !== null && (perTermTotal === null || subject[field] < 0 || subject[field] > perTermTotal)) subject[field] = null
+ }
+ const currentRaw = numberOrNull(row.marks_obtained ?? row.obtainedMarks)
+ const storedCurrentTerm = perTermTotal !== null && currentRaw !== null && currentRaw >= 0 && currentRaw <= perTermTotal ? currentRaw : null
  if (subject[slot] === null && activeTerms.some(([, field]) => field === slot)) subject[slot] = storedCurrentTerm
  const selectedMarks = activeTerms.map(([, field]) => subject[field]).filter(v => v !== null)
  const hasMarks = selectedMarks.length > 0 || (activeTerms.length === 0 && storedCurrentTerm !== null)
  const obtainedMarks = selectedMarks.length ? selectedMarks.reduce((s, v) => s + v, 0) : (activeTerms.length === 0 ? (storedCurrentTerm ?? 0) : 0)
- const totalMarks = selectedMarks.length ? selectedMarks.length * perTermTotal : perTermTotal
+ const totalMarks = perTermTotal === null ? 0 : (selectedMarks.length ? selectedMarks.length * perTermTotal : perTermTotal)
  const percentage = hasMarks && totalMarks > 0 ? Math.round((obtainedMarks / totalMarks) * 100) : null
  return {
  ...subject,
