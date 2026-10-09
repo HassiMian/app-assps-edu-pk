@@ -1,5 +1,5 @@
 import { currentSchoolDate } from './schoolCalendarDate.js'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { BookOpen, BrainCircuit, CalendarDays, CheckCircle2, ChevronDown, ChevronUp, Copy, FileText, Plus, Printer, RefreshCw, Save, Sparkles, Trash2, WandSparkles, X, Users } from 'lucide-react'
 import { useAcademicStore } from '../../services/useAcademicStore'
 import { getTenantStorageItem, setTenantStorageItem } from '../../services/tenantStorage'
@@ -185,13 +185,16 @@ export default function LessonPlanningWorkspace() {
     finally{setBusy('')}
   }
 
+  const latestDocumentRef=useRef(document)
+  useEffect(()=>{latestDocumentRef.current=document},[document])
   const save = async () => {
+    const submittedDocument=JSON.stringify(document)
     setBusy('save')
     try{
       const payload=toLessonPlanPersistencePayload(document)
       const saved=document.id?await updateLessonPlan(payload):await createLessonPlan(payload)
-      const normalized=normalizeLessonPlanDocument(saved);setDocument(normalized);setSelectedSubjects(normalized.subjects.map(item=>item.subject))
-      const all=await listLessonPlans({limit:200});setSavedPlans(Array.isArray(all)?all:[]);setStatus('Lesson plan saved safely.')
+      const unchanged=JSON.stringify(latestDocumentRef.current)===submittedDocument;const normalized=normalizeLessonPlanDocument(saved);if(unchanged){setDocument(normalized);setSelectedSubjects(normalized.subjects.map(item=>item.subject))}
+      const all=await listLessonPlans({limit:200});setSavedPlans(Array.isArray(all)?all:[]);setStatus(unchanged?'Lesson plan saved safely.':'Previous lesson plan selection was saved. Current editor selection was not saved.')
     }catch(error){const code=error?.response?.data?.code;if(code==='LESSON_PLAN_REVISION_CONFLICT')setStatus('This plan changed in another session. Reopen it before saving again.');else setStatus(error?.response?.data?.message||error?.message||'Save failed. Recovery draft remains on this device.')}
     finally{setBusy('')}
   }
