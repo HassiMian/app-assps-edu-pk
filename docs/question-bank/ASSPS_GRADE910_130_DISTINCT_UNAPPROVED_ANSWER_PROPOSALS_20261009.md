@@ -25,6 +25,6 @@
 | physics10OriginalApplicationBatch2026.json | 1 | `a214d121e4a6b21fa7e41f7b6d7d7207968b7e7ab0b71145ea68cd9ef4ac5255` |
 | chemistry9Chapter10EnglishDrafts2026.json | 10 | `c61a997c4da221578b2e3a0c38ac2c02aeab7d72a615be97ccd6250f10a52655` |
 
-Companion JSON gives 82 remaining stable IDs without reproducing original textbook or question passage. Each counted original question ID, raw source digest, answer digest, chapter/topic and marks was checked. No source file, paper or Question Bank row was modified.
+Companion JSON gives 36 remaining stable IDs without reproducing original textbook or question passage. Each counted original question ID, raw source digest, answer digest, chapter/topic and marks was checked. No source file, paper or Question Bank row was modified.
 
 **Adopted school book medium, edition, actual exam year, physical exercise pages, independent subject/Urdu review and revision-specific approval remain pending. Paper Studio verified Grade IX–X remains EMPTY; SaaS Core alone deploys.**

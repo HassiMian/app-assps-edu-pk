@@ -117,7 +117,7 @@ function markdown(d){
   '| Original source file | Distinct draft answers | SHA256 of original authored source |',
   '|---|---:|---|',
   ...d.sourceGroups.map(g=>`| ${g.originalAuthoredSource} | ${g.distinctUnapprovedExplanationProposals} | \`${g.sourceFileSha256}\` |`),
-  '', 'Companion JSON gives 82 remaining stable IDs without reproducing original textbook or question passage. Each counted original question ID, raw source digest, answer digest, chapter/topic and marks was checked. No source file, paper or Question Bank row was modified.',
+  '', 'Companion JSON gives '+d.originalRubricOnlyIdsWithoutNewAnswerDraft+' remaining stable IDs without reproducing original textbook or question passage. Each counted original question ID, raw source digest, answer digest, chapter/topic and marks was checked. No source file, paper or Question Bank row was modified.',
   '', '**Adopted school book medium, edition, actual exam year, physical exercise pages, independent subject/Urdu review and revision-specific approval remain pending. Paper Studio verified Grade IX–X remains EMPTY; SaaS Core alone deploys.**',''
  ].join('\n')
 }

@@ -57,6 +57,7 @@ test('reconciliation report is only original ID/source metadata and explicitly m
  assert.match(m,/130 distinct original IDs/)
  assert.match(m,/still lacking a separate explanatory draft: \*\*36\*\*/)
  assert.match(m,/approved: \*\*0\*\*/)
+ assert.ok(m.includes("Companion JSON gives "+d.originalRubricOnlyIdsWithoutNewAnswerDraft+" remaining stable IDs"))
  assert.ok(!JSON.stringify(d).includes('A word processor supports written communication'))
  assert.ok(!JSON.stringify(d).includes('possible marks:'))
 })
