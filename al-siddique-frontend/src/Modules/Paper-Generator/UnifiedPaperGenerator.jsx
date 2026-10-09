@@ -1,3 +1,4 @@
+import { currentSchoolDate } from './schoolCalendarDate.js'
 'use client'
 import { useMemo, useState } from 'react'
 import { usePaperStore } from './usePaperStore'
@@ -1514,7 +1515,7 @@ function adaptUnifiedForPaperStudio(config, sections) {
       language,
       instructions: sections?.[0]?.instructions || '',
       paperCode: '',
-      examDate: new Date().toISOString().slice(0, 10),
+      examDate: currentSchoolDate(),
     },
     selectedMCQ,
     selectedShort,
