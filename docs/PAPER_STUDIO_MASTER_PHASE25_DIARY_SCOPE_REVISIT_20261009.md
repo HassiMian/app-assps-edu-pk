@@ -16,7 +16,7 @@ Canonical DailyDiaryWorkspace.jsx now holds successful server-returned IDs in co
 - Protected original 43-paper render and printed text parity: `/tmp/paper-p25-all43.log/.rc`, **43/43 PASS, process exit0**, original protected First Term browser render and print text parity; 305.08s test /308.69s TAP; 0 failures/skips.
 - Previous eight independent Diary A4, Lesson Planning and school-date/schedule acceptance files: `/tmp/paper-p25-inherited.log/.rc`, **20/20 PASS, process exit0, 46.88s TAP**, deliberately run AFTER original corpus to avoid earlier shared CPU pagination timing failure.
 - Six protected templates hash validation: `/tmp/paper-p25-templates.log/.rc`, **PASS (6 original files unchanged), exit0**.
-- Full optimized frontend build: `/tmp/paper-p25-build.log/.rc`, **PASS (6 original files unchanged), exit0**.
+- Full optimized frontend build: `/tmp/paper-p25-build.log/.rc`, **PASS, 2,519 Vite modules, 26.97s, process exit0**.
 - GitHub push, local/remote SHA check and issue #4 readback to follow all-green gates. All four controlled primary rc markers were 0.
 
 ## Explicit boundaries
