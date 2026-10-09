@@ -104,6 +104,25 @@ router.get('/subscription/payment-screenshot/:fileName', protect, requireRoles('
     return res.status(400).json({ success: false, message: 'Invalid payment proof file name.' })
   }
 
+  // A school admin must only access a payment proof tied to their own approved school.
+  // Unassigned pre-admission requests remain exclusively available to super_admin.
+  if (req.user?.role !== 'super_admin') {
+    const schoolId = currentSchoolId(req)
+    if (!schoolId) return res.status(404).json({ success: false, message: 'Payment proof not found.' })
+    try {
+      const owned = await query(`
+        SELECT 1 FROM subscription_requests
+        WHERE created_school_id = $1
+          AND payment_screenshot_url = $2
+        LIMIT 1
+      `, [schoolId, `/api/subscription/payment-screenshot/${fileName}`])
+      if (!owned.rows.length) return res.status(404).json({ success: false, message: 'Payment proof not found.' })
+    } catch (err) {
+      console.error('Payment proof authorization error:', err.message)
+      return res.status(503).json({ success: false, message: 'Payment proof access unavailable.' })
+    }
+  }
+
   const filePath = path.join(rootUploadDir, 'payment-screenshots', fileName)
   try {
     const stat = await fs.promises.lstat(filePath)
