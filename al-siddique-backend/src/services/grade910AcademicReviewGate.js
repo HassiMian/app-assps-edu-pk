@@ -97,6 +97,23 @@ function canonicalComparedContent(value = {}, legacy = false) {
     marks:Number(value.marks),
   }
 }
+// Matching legacy source and revision can both share invalid question content.
+function grade910MinimumQuestionIntegrityIssues(value,legacy=false){
+  const q=canonicalComparedContent(value,legacy)
+  const findings=[]
+  if(!q.questionType)findings.push('MISSING_QUESTION_TYPE')
+  if(!q.questionText&&!q.questionTextUrdu)findings.push('EMPTY_QUESTION_STEM')
+  if(!q.answer)findings.push('EMPTY_QUESTION_ANSWER')
+  if(!Number.isSafeInteger(q.marks)||q.marks<1)findings.push('INVALID_QUESTION_MARKS')
+  return findings
+}
+function requireGrade910MinimumQuestionIntegrity(value){
+  const findings=grade910MinimumQuestionIntegrityIssues(value)
+  if(findings.length)
+    throw error('ACADEMIC_QUESTION_INCOMPLETE',
+      'Review requires a nonempty question and answer with positive integral marks: '+findings.join(','),422)
+  return true
+}
 // Structural checking cannot certify scientific correctness. It prevents
 // a self-consistent but malformed MCQ from inheriting an academic sign-off.
 const normalizedChoice = value => String(value??'').normalize('NFKC')
@@ -127,6 +144,8 @@ function requireGrade910McqIntegrity(value){
   return true
 }
 function approvedSourceMatchesRevision(source,revision){
+  if(grade910MinimumQuestionIntegrityIssues(source,true).length||
+     grade910MinimumQuestionIntegrityIssues(revision).length)return false
   if(grade910McqIntegrityIssues(source,true).length||
      grade910McqIntegrityIssues(revision,false).length)return false
   return JSON.stringify(canonicalComparedContent(source,true))===
@@ -234,3 +253,5 @@ module.exports.grade910McqIntegrityIssues=grade910McqIntegrityIssues
 module.exports.requireGrade910McqIntegrity=requireGrade910McqIntegrity
 module.exports.assertGrade910ReviewSignature=assertGrade910ReviewSignature
 module.exports.requireUnflaggedGrade910Source=requireUnflaggedGrade910Source
+module.exports.grade910MinimumQuestionIntegrityIssues=grade910MinimumQuestionIntegrityIssues
+module.exports.requireGrade910MinimumQuestionIntegrity=requireGrade910MinimumQuestionIntegrity

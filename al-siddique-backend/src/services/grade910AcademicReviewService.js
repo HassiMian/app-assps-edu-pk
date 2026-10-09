@@ -1,7 +1,7 @@
 'use strict'
 const { isDeepStrictEqual } = require('node:util')
 const {withTenantTransaction}=require('./questionBankGovernance')
-const {normalizeGrade,normalizeEvidence,reviewMappingKey,requireGrade910McqIntegrity,approvedSourceMatchesRevision,assertGrade910ReviewSignature,requireUnflaggedGrade910Source,error}=require('./grade910AcademicReviewGate')
+const {normalizeGrade,normalizeEvidence,reviewMappingKey,requireGrade910McqIntegrity,approvedSourceMatchesRevision,assertGrade910ReviewSignature,requireUnflaggedGrade910Source,requireGrade910MinimumQuestionIntegrity,error}=require('./grade910AcademicReviewGate')
 
 async function recordIndependentAcademicReview({
   schoolId, reviewerId, publicId, expectedRevision, expectedContentHash, evidence,
@@ -68,6 +68,7 @@ async function recordIndependentAcademicReview({
        !approvedSourceMatchesRevision(original,candidate))
       throw error('REVIEW_LINKED_SOURCE_CONTENT_DRIFT',
         'Linked school Question Bank text, answer, marks or chapter differs from the revision being independently reviewed.',409)
+    requireGrade910MinimumQuestionIntegrity(revision.content_json)
     requireGrade910McqIntegrity(revision.content_json)
     const normalized=normalizeEvidence(evidence,revision.content_json,{tenantId})
     const existing=await client.query(

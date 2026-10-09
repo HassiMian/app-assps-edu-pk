@@ -150,3 +150,39 @@ test('scientific notation 1+ vs 1- remains distinct when comparing MCQ answers',
  const variant={questionType:'short',questionText:'Why are cations positive?',answer:'Lost an electron'}
  assert.deepEqual(grade910McqIntegrityIssues(variant),[])
 })
+
+test('grade IX/X short/long/numerical revision cannot be academically cleared with a matching blank answer',()=>{
+ const {approvedSourceMatchesRevision}=require('../services/grade910AcademicReviewGate')
+ const cases=['short','long','numerical']
+ for(const type of cases){
+  const legacy={question_type:type,question_text:'Explain the principle.',question_text_urdu:'',
+   options:[],correct_option:'',answer:'',explanation:'',marks:2}
+  const revision={questionType:type,questionText:legacy.question_text,questionTextUrdu:'',
+   options:[],correctOption:'',answer:'',explanation:'',marks:2}
+  assert.equal(approvedSourceMatchesRevision(legacy,revision),false,`matching empty answer must not clear ${type}`)
+ }
+})
+test('revision-bound academic gate rejects invalid marks and missing question text for any type',()=>{
+ const {approvedSourceMatchesRevision}=require('../services/grade910AcademicReviewGate')
+ const legacy={question_type:'short',question_text:'Describe evaporation.',question_text_urdu:'',
+  options:[],correct_option:'',answer:'Liquid particles escape the surface.',explanation:'',marks:2}
+ const revision={questionType:'short',questionText:legacy.question_text,
+  questionTextUrdu:'',options:[],correctOption:'',answer:legacy.answer,explanation:'',marks:2}
+ assert.equal(approvedSourceMatchesRevision(legacy,revision),true)
+ for(const marks of [0,-2,1.5,null,'',null]){
+  assert.equal(approvedSourceMatchesRevision({...legacy,marks},{...revision,marks}),false)
+ }
+ assert.equal(approvedSourceMatchesRevision({...legacy,question_text:''},{...revision,questionText:''}),false)
+ assert.equal(approvedSourceMatchesRevision({...legacy,question_type:''},{...revision,questionType:''}),false)
+})
+test('non-MCQ integrity helper blocks incomplete question independently of school edition',()=>{
+ const {requireGrade910MinimumQuestionIntegrity}=require('../services/grade910AcademicReviewGate')
+ for(const change of [{answer:''},{questionText:'',questionTextUrdu:''},{marks:0},{marks:2.5},{questionType:''}]){
+  assert.throws(()=>requireGrade910MinimumQuestionIntegrity({
+   questionType:'long',questionText:'Describe a physical process.',marks:5,answer:'An answer.',...change,
+  }),{code:'ACADEMIC_QUESTION_INCOMPLETE'})
+ }
+ assert.equal(requireGrade910MinimumQuestionIntegrity({
+  questionType:'short',questionTextUrdu:'توانائی کیا ہے؟',marks:2,answer:'توانائی کام کرنے کی صلاحیت ہے۔'
+ }),true)
+})

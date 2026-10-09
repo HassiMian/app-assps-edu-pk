@@ -17,11 +17,11 @@ const legacy={id:'ORIG-IX-01',school_id:SCHOOL,class_level:'9th',subject:'biolog
  medium:'english',chapter_no:'1',question_type:'short',question_text:question.questionText,
  question_text_urdu:'',options:[],correct_option:'',answer:question.answer,
  explanation:'',marks:2,is_approved:false,is_duplicate:false,metadata:{},created_by:REVIEWER}
-function fakeDatabase(sourceCreator,{sourceMissing=false,signedCreator=REVIEWER,signedAt='2026-10-09T00:00:00Z',linkedOverrides={}}={}){
+function fakeDatabase(sourceCreator,{sourceMissing=false,signedCreator=REVIEWER,signedAt='2026-10-09T00:00:00Z',linkedOverrides={},revisionOverrides={}}={}){
  const queries=[]
  const master={id:3,public_id:'QB-1',current_revision:2,lifecycle_status:'reviewed',
   created_by:101,source_question_bank_id:legacy.id}
- const revision={revision_number:2,content_hash:contentHash,content_json:question,created_by:102}
+ const revision={revision_number:2,content_hash:contentHash,content_json:{...question,...revisionOverrides},created_by:102}
  const linked={...legacy,created_by:sourceCreator,...linkedOverrides}
  const review={mapping_status:'reviewed',reviewed_by:REVIEWER,created_by:signedCreator,reviewed_at:signedAt,
   metadata:{currentRevision:2,contentHash,reviewerUserId:REVIEWER,schoolId:SCHOOL,sourceEvidence:{}}}
@@ -233,4 +233,35 @@ test('only boolean false source duplicate status can progress to other independe
  assert.equal(output.replayed,true)
  assert.equal(output.questionBankApproved,false)
  assert.ok(queries.some(q=>q.includes('is_duplicate')&&q.includes('FROM question_bank')))
+})
+
+test('recorded academic review cannot replay identical source and revision with an empty answer',async()=>{
+ const {client,queries}=fakeDatabase(105,{linkedOverrides:{answer:' '},revisionOverrides:{answer:' '}})
+ await assert.rejects(loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+  schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',expectedRevision:2,
+  expectedContentHash:contentHash,evidence:{}
+ }),{code:'REVIEW_LINKED_SOURCE_CONTENT_DRIFT'})
+ assert.equal(queries.some(q=>q.includes('INSERT INTO question_mappings')),false)
+})
+test('recorded academic review rejects identical invalid zero marks before writing signoff',async()=>{
+ const {client,queries}=fakeDatabase(105,{linkedOverrides:{marks:0},revisionOverrides:{marks:0}})
+ await assert.rejects(loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+  schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',expectedRevision:2,
+  expectedContentHash:contentHash,evidence:{}
+ }),{code:'REVIEW_LINKED_SOURCE_CONTENT_DRIFT'})
+ assert.equal(queries.some(q=>q.includes('INSERT INTO question_mappings')),false)
+})
+test('valid Urdu-only question with independent reviewable answer and positive marks remains eligible for other evidence checks',async()=>{
+ const prompt='توانائی کیا ہے؟'
+ const answer='توانائی کام کرنے کی صلاحیت ہے۔'
+ const {client}=fakeDatabase(105,{
+  linkedOverrides:{medium:'urdu',question_text:'',question_text_urdu:prompt,answer},
+  revisionOverrides:{medium:'urdu',questionText:'',questionTextUrdu:prompt,answer}
+ })
+ const replay=await loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+  schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
+  expectedRevision:2,expectedContentHash:contentHash,evidence:{}
+ })
+ assert.equal(replay.replayed,true)
+ assert.equal(replay.questionBankApproved,false)
 })
