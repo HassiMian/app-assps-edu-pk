@@ -24,6 +24,12 @@ try {
  const explicitZero=m.buildResultCardData({...base,studentMarks:[{subject:'English',firstTermMarks:0}],options:{...opts,template:'signature-editorial'}})
  assert.equal(explicitZero.result.percentage,0,'Explicit zero is a scored result, not missing')
  console.log('PASS selected-term isolation and explicit zero')
+ const invalid = m.buildResultCardData({...base,studentMarks:[{subject:'English',marks_obtained:125,total_marks:100}],options:{...opts,template:'signature-editorial'}})
+ assert.equal(invalid.result.percentage,null,'Out-of-range scores must not become fabricated percentages')
+ assert.equal(invalid.result.totalMarks,0,'Invalid scores cannot pollute class totals')
+ const noMax = m.buildResultCardData({...base,exam:{name:'First Term'},studentMarks:[{subject:'Science',marks_obtained:24}],options:{...opts,template:'signature-editorial'}})
+ assert.equal(noMax.result.percentage,null,'Unknown max must not silently default to 100')
+ console.log('PASS invalid-score and unknown-maximum fail-closed')
  const ids = ['signature-editorial','swiss-grid','data-atelier']
  for (const id of ids) {
   const data = { ...mixed, options: { ...mixed.options, template: id } }

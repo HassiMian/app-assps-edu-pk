@@ -41,3 +41,5 @@
 @media (max-width:1050px) { .result-premium-shell .result-designer { grid-template-columns:1fr; overflow:auto; } }
 
 .result-premium-shell .premium-print-size { background:#F2F8FA; color:#285E76; border:1px solid #D5E5EC; padding:8px 10px; border-radius:7px; font-size:12px; }
+
+.result-premium-shell .result-logo-diagnostic { margin:0 0 12px; padding:9px 10px; background:#FFF9EB; color:#755414; border:1px solid #E9D8B1; border-radius:7px; font-size:11px; line-height:1.5; }

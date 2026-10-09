@@ -1,4 +1,6 @@
 import './premiumResultCardDesigner.css'
+import { summarizeResultRows, formatResultCell, meetsResultPassMark } from './resultPreviewIntegrity'
+import { getResultLogoDiagnostic } from './resultLogoDiagnostics'
 import { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import api from '../../services/api'
@@ -71,6 +73,7 @@ function ProfessionalParametersModal({ cards, student, exam, studentMarks, schoo
  <div className="result-designer no-print" style={{ flex:1, minHeight:0 }}>
  <aside className="result-options-panel">
  <h3>Templates</h3>
+ {getResultLogoDiagnostic(school?.logo) && <p className="result-logo-diagnostic" role="status">{getResultLogoDiagnostic(school?.logo)}</p>}
  <ResultCardTemplateSelector value={options.template} onChange={(template) => setOptions(prev => ({ ...prev, template }))} />
  <h3>Marks & Print Options</h3>
  <ResultCardPrintToolbar
@@ -151,6 +154,7 @@ export default function ResultCards() {
  const [showParams, setShowParams] = useState(false)
  const [gradeBands, setGradeBands] = useState([])
  const [loadError, setLoadError] = useState('')
+ const latestResultRequest = useRef(0)
  const { paperSettings } = usePaperStore()
 
  useEffect(() => {
@@ -170,21 +174,25 @@ export default function ResultCards() {
  const loadResults = () => {
  if (!selectedExam) return
  const requestExamId = String(selectedExam)
+ const requestId = ++latestResultRequest.current
  setLoading(true)
  setSelectedStudent('')
  setLoadError('')
  api.get(`/api/exams/results/${requestExamId}`)
  .then(r => {
- const list = r.data.data || []
+ if (latestResultRequest.current !== requestId) return
+ if (r.data?.success === false || !Array.isArray(r.data?.data)) throw new Error('Invalid result response')
+ const list = r.data.data
  setResults(list)
  setLoadedExamId(requestExamId)
  const ids = [...new Set(list.map(r => r.student_id))]
  if (ids.length) setSelectedStudent(String(ids[0]))
  })
  .catch(err => {
+ if (latestResultRequest.current !== requestId) return
  setLoadError(err.response?.data?.message || 'Exam results could not be loaded. Existing loaded results were preserved for their original exam.')
  })
- .finally(() => setLoading(false))
+ .finally(() => { if (latestResultRequest.current === requestId) setLoading(false) })
  }
 
  useEffect(() => {
@@ -224,9 +232,7 @@ export default function ResultCards() {
  const student = students.find(s => String(s.id) === selectedStudent)
  const exam = exams.find(e => String(e.id) === selectedExam)
  const classPrintCards = buildPrintCards(activeResults, exam, students)
- const totalObtained = studentMarks.reduce((s, r) => s + Number(r.marks_obtained || 0), 0)
- const totalPossible = studentMarks.reduce((s, r) => s + Number(r.total_marks || exam?.total_marks || 100), 0)
- const pct = totalPossible > 0 ? Math.round((totalObtained / totalPossible) * 100) : 0
+ const { obtained: totalObtained, possible: totalPossible, percentage: pct, pending: pendingSubjects } = summarizeResultRows(studentMarks, exam)
  const selectedStudentLabel = student
  ? `${student.name}${student.gr_number ? ` - ${student.gr_number}` : student.roll_number ? ` - Roll ${student.roll_number}` : ''}`
  : ''
@@ -338,7 +344,7 @@ export default function ResultCards() {
  <div className="super-module-card" style={{ ...card, display:'flex', flexDirection:'column', gap:12 }}>
  <div style={{ color:C.gold, fontSize:13, fontWeight:900 }}>1. Exam / Term</div>
  <div style={{ color:C.muted, fontSize:12 }}>Select the exam whose saved marks should appear on result cards.</div>
- <select style={select} value={selectedExam} onChange={e=>{ setSelectedExam(e.target.value); setSelectedStudent(''); setLoadError('') }}>
+ <select style={select} value={selectedExam} onChange={e=>{ latestResultRequest.current += 1; setSelectedExam(e.target.value); setSelectedStudent(''); setLoadError('') }}>
  <option value="">Select exam</option>
  {exams.map(e=><option key={e.id} value={e.id}>{e.name} - {e.class}</option>)}
  </select>
@@ -398,11 +404,11 @@ export default function ResultCards() {
  <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:10 }}>
  <div style={{ padding:12, borderRadius:14, background:'rgba(48,209,88,0.08)' }}>
  <div style={{ color:C.muted, fontSize:10, fontWeight:800 }}>OBTAINED</div>
- <div style={{ color:C.green, fontSize:20, fontWeight:900 }}>{outputMode === 'single' ? (totalObtained || '-') : outputMode === 'class' ? classPrintCards.length : 'All'}</div>
+ <div style={{ color:C.green, fontSize:20, fontWeight:900 }}>{outputMode === 'single' ? (totalPossible ? totalObtained : '—') : outputMode === 'class' ? classPrintCards.length : 'All'}</div>
  </div>
  <div style={{ padding:12, borderRadius:14, background:'rgba(200,153,26,0.08)' }}>
  <div style={{ color:C.muted, fontSize:10, fontWeight:800 }}>PERCENT</div>
- <div style={{ color:C.gold, fontSize:20, fontWeight:900 }}>{outputMode === 'single' ? (totalPossible ? `${pct}%` : '-') : outputMode === 'class' ? 'Cards' : 'Classes'}</div>
+ <div style={{ color:C.gold, fontSize:20, fontWeight:900 }}>{outputMode === 'single' ? (pct === null ? 'Pending' : `${pct}%`) : outputMode === 'class' ? 'Cards' : 'Classes'}</div>
  </div>
  </div>
  <button style={{ ...btnPrimary, marginTop:'auto', justifyContent:'center', opacity: canPrint ? 1 : 0.55, cursor: canPrint ? 'pointer' : 'not-allowed' }} onClick={openDesigner} disabled={!canPrint || loading}>
@@ -414,7 +420,7 @@ export default function ResultCards() {
  <div className="super-module-card" style={{ display:'none' }}>
  <div style={{ flex:'1 1 240px' }}>
  <div style={{ color:C.muted, fontSize:12, fontWeight:700, marginBottom:8 }}>Select Exam</div>
- <select style={select} value={selectedExam} onChange={e=>{ setSelectedExam(e.target.value); setSelectedStudent(''); setLoadError('') }}>
+ <select style={select} value={selectedExam} onChange={e=>{ latestResultRequest.current += 1; setSelectedExam(e.target.value); setSelectedStudent(''); setLoadError('') }}>
  {exams.map(e=><option key={e.id} value={e.id}>{e.name} ({e.class})</option>)}
  </select>
  </div>
@@ -452,17 +458,17 @@ export default function ResultCards() {
  {studentMarks.map(row=>(
  <div key={row.id || row.subject} style={{ display:'flex', justifyContent:'space-between', alignItems:'center', padding:'11px 14px', borderRadius:12, background:'rgba(255,255,255,0.04)' }}>
  <span style={{ color:C.silver }}>{row.subject}</span>
- <span style={{ color:Number.isFinite(Number(exam?.pass_marks)) && Number(row.marks_obtained) >= Number(exam.pass_marks)?C.green:C.red, fontWeight:700 }}>
- {row.marks_obtained} / {row.total_marks || exam?.total_marks || 100}
+ <span style={{ color:meetsResultPassMark(row.marks_obtained, exam?.pass_marks) === null ? C.muted : meetsResultPassMark(row.marks_obtained, exam?.pass_marks) ? C.green : C.red, fontWeight:700 }}>
+ {formatResultCell(row.marks_obtained)} / {formatResultCell(row.total_marks ?? exam?.total_marks)}
  </span>
  </div>
  ))}
  </div>
  <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', padding:16, borderRadius:20, background:'rgba(255,255,255,0.08)' }}>
- <div><div style={{ color:C.gold, fontWeight:800 }}>Total</div><div style={{ color:C.silver }}>{totalObtained} / {totalPossible}</div></div>
+ <div><div style={{ color:C.gold, fontWeight:800 }}>Total</div><div style={{ color:C.silver }}>{totalPossible ? `${totalObtained} / ${totalPossible}` : 'Pending marks'}</div></div>
  <div style={{ textAlign:'right' }}>
- <div style={{ color:Number.isFinite(Number(exam?.pass_marks)) && studentMarks.every(row => Number(row.marks_obtained) >= Number(exam.pass_marks))?C.green:C.red, fontSize:32, fontWeight:800 }}>{pct}%</div>
- <div style={{ color:C.muted }}>Grade: {gradeLabel(pct, gradeBands)}</div>
+ <div style={{ color:pct === null || pendingSubjects || studentMarks.some(row => meetsResultPassMark(row.marks_obtained, exam?.pass_marks) === null) ? C.muted : studentMarks.every(row => meetsResultPassMark(row.marks_obtained, exam?.pass_marks)) ? C.green : C.red, fontSize:32, fontWeight:800 }}>{pct === null ? 'Pending' : `${pct}%`}</div>
+ <div style={{ color:C.muted }}>Grade: {pct === null ? '—' : gradeLabel(pct, gradeBands)}{pendingSubjects ? ` · ${pendingSubjects} subject(s) pending` : ''}</div>
  </div>
  </div>
  </div>
