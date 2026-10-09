@@ -3,6 +3,7 @@
 // READ-ONLY, cross-cohort academic research integrity attestations.
 // A successful attestation does NOT authorize approval, tenant import or publication.
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto')
+const {assertFrozenProposals}=require('./assert-grade910-156-proposal-revisions.cjs')
 const ROOT=path.resolve(__dirname,'../..')
 const DOC=path.join(ROOT,'docs/question-bank')
 const SOURCE=path.join(ROOT,'al-siddique-frontend/src/Modules/Paper-Generator/seed-data/grade9-10-staging')
@@ -133,6 +134,7 @@ function attest({snapshot,registry,groups}){
    catalogSourceId:evidence.recordId,catalogPdfHashClaim:evidence.pdfSha256,
    originalSchoolAdoptionCertified:false,approvedForProduction:false})
  }
+ assertFrozenProposals(groups)
  if(rawCandidateIds.size!==741||items.length!==156||criteriaTotal(cohorts)!==798||
   new Set(items.map(x=>x.questionId)).size!==156)
   fail('CROSS_COHORT_AGGREGATE_COUNT_DRIFT')
