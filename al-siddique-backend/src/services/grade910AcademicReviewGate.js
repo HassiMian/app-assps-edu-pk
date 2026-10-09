@@ -201,6 +201,20 @@ function requireGrade910CurriculumMapping(source,revision){
   return true
 }
 
+function requireGrade910SourceClassification(source,revision){
+  const label=v=>String(v??'').normalize('NFKC').trim().replace(/\s+/g,' ').toLowerCase()
+  const fields=[['difficulty','difficulty'],['priority','priority'],['source_type','sourceType']]
+  const failed=fields.filter(([a,b])=>!label(source?.[a])||label(source?.[a])!==label(revision?.[b])).map(([a])=>a)
+  const file=v=>String(v??'').trim()
+  if(!file(source?.source_file_id)||file(source?.source_file_id)!==file(revision?.sourceFileId))failed.push('source_file_id')
+  const a=source?.source_page_no,b=revision?.sourcePageNo
+  const pageOk=v=>v==null||(Number.isSafeInteger(v)&&v>0)
+  if(!pageOk(a)||!pageOk(b)||(a??null)!==(b??null))failed.push('source_page_no')
+  if(failed.length)throw error('ACADEMIC_SOURCE_CLASSIFICATION_DRIFT',
+    'Original assessment classification and file/page provenance differ: '+failed.join(','),409)
+  return true
+}
+
 // Recheck the stored JSONB using the SAME canonical SHA-256 as governance capture.
 function assertGrade910ImmutableRevisionHash(revision){
   const payload=revision?.content_json
@@ -230,7 +244,7 @@ async function assertIndependentReviewReady(client,{schoolId,master,actorId}){
   const grade=normalizeGrade(rev.content_json?.classLevel)
   const linked=master.source_question_bank_id
     ? await client.query(
-      'SELECT id,school_id,class_level,subject,medium,chapter_no,question_type,question_text,question_text_urdu,options,correct_option,answer,explanation,marks,is_approved,is_duplicate,metadata,created_by,board,chapter_name,topic_name FROM question_bank WHERE school_id=$1 AND id=$2 FOR UPDATE',
+      'SELECT id,school_id,class_level,subject,medium,chapter_no,question_type,question_text,question_text_urdu,options,correct_option,answer,explanation,marks,is_approved,is_duplicate,metadata,created_by,board,chapter_name,topic_name,difficulty,priority,source_type,source_file_id,source_page_no FROM question_bank WHERE school_id=$1 AND id=$2 FOR UPDATE',
       [schoolId,master.source_question_bank_id])
     : {rowCount:0,rows:[]}
   const sourceGrade=linked.rowCount===1?normalizeGrade(linked.rows[0].class_level):null
@@ -240,6 +254,7 @@ async function assertIndependentReviewReady(client,{schoolId,master,actorId}){
   assertGrade910ImmutableRevisionHash(rev)
   requireUnflaggedGrade910Source(linked.rows[0])
   requireGrade910CurriculumMapping(linked.rows[0],rev.content_json)
+  requireGrade910SourceClassification(linked.rows[0],rev.content_json)
 
   const hash=String(rev.content_hash||'').trim().toLowerCase()
   const key=reviewMappingKey(Number(rev.revision_number),hash)
@@ -306,6 +321,7 @@ module.exports.requireGrade910McqIntegrity=requireGrade910McqIntegrity
 module.exports.assertGrade910ReviewSignature=assertGrade910ReviewSignature
 module.exports.requireUnflaggedGrade910Source=requireUnflaggedGrade910Source
 module.exports.requireGrade910CurriculumMapping=requireGrade910CurriculumMapping
+module.exports.requireGrade910SourceClassification=requireGrade910SourceClassification
 module.exports.assertGrade910ImmutableRevisionHash=assertGrade910ImmutableRevisionHash
 module.exports.grade910MinimumQuestionIntegrityIssues=grade910MinimumQuestionIntegrityIssues
 module.exports.requireGrade910MinimumQuestionIntegrity=requireGrade910MinimumQuestionIntegrity

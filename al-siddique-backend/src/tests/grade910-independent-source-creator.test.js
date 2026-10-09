@@ -13,12 +13,15 @@ const REVIEWER=103, SCHOOL=1
 const {sha256}=require('../services/questionGovernanceHash')
 const question={classLevel:'9th',subject:'biology',medium:'english',chapterNo:'1',
  board:'punjab board',chapterName:'biological introduction',topicName:'cellular energy',
- questionType:'short',questionText:'Why do organisms require energy?',answer:'Energy supports biological processes.',marks:2}
+ questionType:'short',questionText:'Why do organisms require energy?',answer:'Energy supports biological processes.',marks:2,
+ difficulty:'medium',priority:'additional',sourceType:'json_seed',sourceFileId:'biology9Starter2026.json',sourcePageNo:null}
 const contentHash=sha256(question)
 const legacy={id:'ORIG-IX-01',school_id:SCHOOL,class_level:'9th',subject:'biology',
  medium:'english',board:'Punjab Board',chapter_no:'1',chapter_name:'Biological Introduction',topic_name:'Cellular Energy',question_type:'short',question_text:question.questionText,
  question_text_urdu:'',options:[],correct_option:'',answer:question.answer,
- explanation:'',marks:2,is_approved:false,is_duplicate:false,metadata:{},created_by:REVIEWER}
+ explanation:'',marks:2,difficulty:'medium',priority:'additional',source_type:'json_seed',
+ source_file_id:'biology9Starter2026.json',source_page_no:null,
+ is_approved:false,is_duplicate:false,metadata:{},created_by:REVIEWER}
 function fakeDatabase(sourceCreator,{sourceMissing=false,signedCreator=REVIEWER,signedAt='2026-10-09T00:00:00Z',linkedOverrides={},revisionOverrides={},reviewerActive=true,reviewerRole='principal',reviewerMissing=false,recordedHash=null}={}){
  const queries=[]
  const master={id:3,public_id:'QB-1',current_revision:2,lifecycle_status:'reviewed',
@@ -403,7 +406,9 @@ test('recorded revision SHA is the canonical governance SHA, not raw JSON key in
   chapterName:question.chapterName,chapterNo:question.chapterNo,
   questionText:question.questionText,questionType:question.questionType,
   board:question.board,medium:question.medium,subject:question.subject,
-  classLevel:question.classLevel}
+  classLevel:question.classLevel,sourcePageNo:question.sourcePageNo,
+  sourceFileId:question.sourceFileId,sourceType:question.sourceType,
+  difficulty:question.difficulty,priority:question.priority}
  assert.equal(assertGrade910ImmutableRevisionHash({content_json:rearranged,content_hash:contentHash}),true)
 })
 test('revision hash refuses unsupported or missing JSON content rather than hashing meaningless string',()=>{
@@ -443,4 +448,85 @@ test('independent Grade9/10 review API rejects Grade8 before revision hash misma
   schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
   expectedRevision:2,expectedContentHash:'f'.repeat(64),evidence:{}
  }),{code:'REVIEW_GRADE_NOT_SUPPORTED'})
+})
+
+
+test('review recording refuses mismatched original difficulty, priority or source classification metadata',async()=>{
+ const cases=[
+  {difficulty:'easy'},
+  {priority:'past paper'},
+  {source_type:'copied_guide'},
+  {source_file_id:'other-school-file.json'},
+  {source_page_no:57}
+ ]
+ for(const linkedOverrides of cases){
+  const {client,queries}=fakeDatabase(105,{linkedOverrides})
+  await assert.rejects(loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+    schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
+    expectedRevision:2,expectedContentHash:contentHash,evidence:{}
+  }),{code:'ACADEMIC_SOURCE_CLASSIFICATION_DRIFT'})
+  assert.equal(queries.some(sql=>sql.includes('INSERT INTO question_mappings')),false)
+ }
+})
+test('review recording refuses unattested original file provenance and source-type even when revision is equally blank',async()=>{
+ for(const linkedOverrides of [{source_file_id:null},{source_type:''}]){
+  const {client}=fakeDatabase(105,{linkedOverrides})
+  await assert.rejects(loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+   schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
+   expectedRevision:2,expectedContentHash:contentHash,evidence:{}
+  }),{code:'ACADEMIC_SOURCE_CLASSIFICATION_DRIFT'})
+ }
+ for(const k of ['sourceFileId','sourceType']){
+  const revisionOverrides={[k]:''}
+  const linkedOverrides=k==='sourceFileId'?{source_file_id:''}:{source_type:''}
+  const {client,revisionHash}=fakeDatabase(105,{linkedOverrides,revisionOverrides})
+  await assert.rejects(loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+   schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
+   expectedRevision:2,expectedContentHash:revisionHash,evidence:{}
+  }),{code:'ACADEMIC_SOURCE_CLASSIFICATION_DRIFT'})
+ }
+})
+test('publisher checks changed source assessment and provenance metadata after signed review',async()=>{
+ for(const linkedOverrides of [
+  {difficulty:'hard'},{priority:'high'},{source_type:'external'},
+  {source_file_id:'different-source.pdf'},{source_page_no:4},{source_file_id:null}
+ ]){
+  const {client,master}=fakeDatabase(105,{linkedOverrides})
+  await assert.rejects(loadApprovalGate()(client,{schoolId:SCHOOL,master,actorId:104}),
+   {code:'ACADEMIC_SOURCE_CLASSIFICATION_DRIFT'})
+ }
+})
+test('source attribution requires full tenant-scoped locked fields, but matching provisional metadata never confers approval',async()=>{
+ const {client,queries}=fakeDatabase(105)
+ const out=await loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+  schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
+  expectedRevision:2,expectedContentHash:contentHash,evidence:{}
+ })
+ assert.equal(out.questionBankApproved,false)
+ assert.ok(queries.some(q=>q.includes('FROM question_bank')&&
+  q.includes('difficulty')&&q.includes('source_file_id')&&q.includes('source_page_no')&&q.includes('FOR SHARE')))
+})
+
+test('positive matching page number and editorial classification do not grant academic approval',async()=>{
+ const {client,revisionHash}=fakeDatabase(105,{
+  linkedOverrides:{source_page_no:12,difficulty:' Medium ',priority:' ADDITIONAL '},
+  revisionOverrides:{sourcePageNo:12}
+ })
+ const out=await loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+  schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
+  expectedRevision:2,expectedContentHash:revisionHash,evidence:{}
+ })
+ assert.equal(out.replayed,true)
+ assert.equal(out.questionBankApproved,false)
+})
+test('invalid original and immutable revision page identities both fail closed',async()=>{
+ for(const page of [0,-1,1.5,'12']){
+  const {client,revisionHash}=fakeDatabase(105,{
+   linkedOverrides:{source_page_no:page},revisionOverrides:{sourcePageNo:page}
+  })
+  await assert.rejects(loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+   schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
+   expectedRevision:2,expectedContentHash:revisionHash,evidence:{}
+  }),{code:'ACADEMIC_SOURCE_CLASSIFICATION_DRIFT'})
+ }
 })
