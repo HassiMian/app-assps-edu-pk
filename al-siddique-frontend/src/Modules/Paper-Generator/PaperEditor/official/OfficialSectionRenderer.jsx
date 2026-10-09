@@ -309,13 +309,13 @@ function SentenceUsageTable({ content, isUrdu, qFs, fs, themeColor, editMode=fal
   return <table data-sentence-usage-table style={{ width:'100%', borderCollapse:'collapse', tableLayout:'fixed', fontSize:`${qFs}px`, direction:isUrdu?'rtl':'ltr' }}>
     <thead><tr style={{ background:`${themeColor}10` }}>
       <th style={{ width:'9%', border:`1px solid ${themeColor}66`, padding:5 }}>#</th>
-      {headers.map((header,index)=><th key={index} style={{ width:index===0?'31%':undefined, border:`1px solid ${themeColor}66`, padding:5, textAlign:isUrdu?'right':'left' }}>
+      {headers.map((header,index)=><th key={index} style={{ width:index===0?'31%':undefined, border:`1px solid ${themeColor}66`, padding:5, textAlign:isUrdu?'right':'left', overflowWrap:'anywhere', wordBreak:'break-word' }}>
         {editMode&&section?.id?<InlineEditable text={header} editMode={true} direction={isUrdu?'rtl':'ltr'} fieldKey={'sentence-header-'+index} sectionId={section.id} ariaLabel={`Edit sentence table heading ${index+1}`} onActivate={onActiveEditable} onCommit={payload=>commitHeader(index,payload)} style={{display:'block',fontWeight:900}}/>:header}
       </th>)}
     </tr></thead>
     <tbody>{items.map((item,index)=><tr key={index}>
       <td style={{ border:`1px solid ${themeColor}55`, padding:5, textAlign:'center', fontWeight:700, fontFamily:'Arial,sans-serif', direction:'ltr' }}>{index+1}</td>
-      <td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px ${7*fs}px`, textAlign:isUrdu?'right':'left', fontWeight:700 }}>
+      <td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px ${7*fs}px`, textAlign:isUrdu?'right':'left', fontWeight:700, overflowWrap:'anywhere', wordBreak:'break-word' }}>
         {editMode&&section?.id?<InlineEditable text={item} editMode={true} direction={isUrdu?'rtl':'ltr'} fieldKey={'sentence-word-'+index} sectionId={section.id} ariaLabel={`Edit sentence word ${index+1}`} onActivate={onActiveEditable} onCommit={payload=>commitWord(index,payload)} style={{display:'block',fontWeight:700}}/>:<AnswerText text={item}/>}
       </td>
       <td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px ${7*fs}px`, minHeight:`${28*fs}px` }}><span style={{ display:'inline-block', width:'94%', borderBottom:`1px solid ${themeColor}88`, minHeight:'1.25em' }} /></td>
@@ -334,11 +334,11 @@ function PairPracticeTable({ content, isUrdu, qFs, fs, themeColor, editMode=fals
   return <table data-pair-practice-table style={{ width:'100%', borderCollapse:'collapse', tableLayout:'fixed', fontSize:`${qFs}px`, direction:isUrdu?'rtl':'ltr' }}>
     <thead><tr style={{ background:`${themeColor}10` }}>
       <th style={{ width:'9%', border:`1px solid ${themeColor}66`, padding:5 }}>#</th>
-      {headers.map((header,index)=><th key={index} style={{ border:`1px solid ${themeColor}66`, padding:5, textAlign:isUrdu?'right':'left' }}>{editMode&&section?.id?<InlineEditable text={header} editMode={true} direction={isUrdu?'rtl':'ltr'} fieldKey={'pair-header-'+index} sectionId={section.id} ariaLabel={`Edit pair table heading ${index+1}`} onActivate={onActiveEditable} onCommit={payload=>commitHeader(index,payload)} style={{display:'block',fontWeight:900}}/>:header}</th>)}
+      {headers.map((header,index)=><th key={index} style={{ border:`1px solid ${themeColor}66`, padding:5, textAlign:isUrdu?'right':'left', overflowWrap:'anywhere', wordBreak:'break-word' }}>{editMode&&section?.id?<InlineEditable text={header} editMode={true} direction={isUrdu?'rtl':'ltr'} fieldKey={'pair-header-'+index} sectionId={section.id} ariaLabel={`Edit pair table heading ${index+1}`} onActivate={onActiveEditable} onCommit={payload=>commitHeader(index,payload)} style={{display:'block',fontWeight:900}}/>:header}</th>)}
     </tr></thead>
     <tbody>{items.map((item,index)=><tr key={index}>
       <td style={{ border:`1px solid ${themeColor}55`, padding:5, textAlign:'center', fontWeight:700 }}>{index+1}</td>
-      <td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px`, textAlign:isUrdu?'right':'left' }}>{editMode&&section?.id?<InlineEditable text={item} editMode={true} direction={isUrdu?'rtl':'ltr'} fieldKey={'pair-item-'+index} sectionId={section.id} ariaLabel={`Edit pair table word ${index+1}`} onActivate={onActiveEditable} onCommit={payload=>commitItem(index,payload)} style={{display:'block'}}/>:<AnswerText text={item}/>}</td>
+      <td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px`, textAlign:isUrdu?'right':'left', overflowWrap:'anywhere', wordBreak:'break-word' }}>{editMode&&section?.id?<InlineEditable text={item} editMode={true} direction={isUrdu?'rtl':'ltr'} fieldKey={'pair-item-'+index} sectionId={section.id} ariaLabel={`Edit pair table word ${index+1}`} onActivate={onActiveEditable} onCommit={payload=>commitItem(index,payload)} style={{display:'block'}}/>:<AnswerText text={item}/>}</td>
       <td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px` }}><span style={{ display:'inline-block', width:'85%', borderBottom:`1px solid ${themeColor}88`, minHeight:'1em' }} /></td>
     </tr>)}</tbody>
   </table>
