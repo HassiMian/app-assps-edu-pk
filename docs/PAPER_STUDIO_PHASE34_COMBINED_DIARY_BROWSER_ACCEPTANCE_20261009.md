@@ -1,0 +1,7 @@
+# Phase34 consolidated Diary browser acceptance — 9 October 2026
+
+Source: Paper Studio `afc2aab0c44388a043fd1a0202ffe31efd649f78` on isolated `feat/paper-studio-phase34-return-scope-matrix-20261009` worktree. Latest issue #4 Core Phase37 has already adopted Paper Phase33 source; this Paper phase adds only date/section negative browser fixtures.
+
+New full serial Vite+Chromium run of TEN distinct Diary test files: returned wrong-date, returned wrong-section, returned wrong-class, strict saved JSON ID type, mismatched PUT record ID, semantic success:false HTTP200, delayed failed save scope, delayed successful save scope, POST/PUT saved identity, exact-scope revisit. **10/10 PASS, 0 failed/skipped/cancelled, numeric shell EXIT0** `/tmp/paper-p34-combined10.log` and `/tmp/paper-p34-combined10.exit`; TAP duration 91005.216858ms. Previously Phase34 independent 2/2 tests and focused ESLint exited 0. This report is evidence-only; no product source edited.
+
+Original 43 protected First Term Vite/Chromium parity and DOCX model on identical underlying Phase33 product source were previously 43/43 and 4/4 exit0, respectively; no repeated 43-corpus run in Phase34. Do not interpret synthetic HTTP browser tests as signed teacher PostgreSQL RLS certification, server authorization, live HTTPS private uploads, physical A4/Nastaleeq, real PDF/DOCX visual acceptance or rollback release approval. SaaS Core owns integration and production release. Strict HOLD.
