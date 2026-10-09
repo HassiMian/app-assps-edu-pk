@@ -121,6 +121,8 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   const [search,setSearch]=useState('')
   const [saving,setSaving]=useState(false)
   const savedDiaryIdentities=useRef(new Map())
+  const diaryScopeGeneration=useRef(0)
+  useEffect(()=>{diaryScopeGeneration.current+=1},[classLevel,section,date])
   const [status,setStatus]=useState('')
   const [previewZoom,setPreviewZoom]=useState(.68)
   const [lessonPlans,setLessonPlans]=useState([])
@@ -187,10 +189,14 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
     let schoolId=0
     try{const user=JSON.parse(window.localStorage.getItem('al_siddique_user')||'{}');schoolId=Number(user.school_id||user.schoolId||0)}catch{}
     if(!Number.isSafeInteger(schoolId)||schoolId<=0){setStatus('Current school identity could not be verified. Sign in to reopen a diary.');return}
+    const openGeneration=diaryScopeGeneration.current
+    const stillCurrent=()=>diaryScopeGeneration.current===openGeneration
+    const staleSelection=()=>setStatus('Diary selection changed while reopening. Saved record was not loaded; editor content was preserved.')
     setBusy('diary-open')
     const matchesScope=record=>Number(record.school_id)===schoolId&&String(record.class_level||'')===String(classLevel)&&String(record.style_settings?.section||'')===String(section)&&String(record.diary_date||'').slice(0,10)===date
     try{
       const listResponse=await api.get('/api/daily-diary',{params:{limit:100},skipCache:true})
+      if(!stillCurrent()){staleSelection();return}
       if(listResponse.data?.success!==true||!Array.isArray(listResponse.data?.data))throw new Error('Saved diary list was not verified.')
       const matches=listResponse.data.data.filter(matchesScope)
       if(!matches.length){setStatus('No saved diary found for this class, section and date in the accessible list.');return}
@@ -198,7 +204,9 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
       const id=Number(matches[0].id)
       if(!Number.isSafeInteger(id)||id<=0)throw new Error('Saved diary identity is invalid.')
       if(!window.confirm('Reopen this saved diary? This replaces unsaved fields currently in the editor.'))return
+      if(!stillCurrent()){staleSelection();return}
       const detailResponse=await api.get(`/api/daily-diary/${id}`,{skipCache:true})
+      if(!stillCurrent()){staleSelection();return}
       const saved=detailResponse.data?.data
       if(detailResponse.data?.success!==true||!saved||Number(saved.id)!==id||!matchesScope(saved))throw new Error('Saved diary scope verification failed. Editor was not changed.')
       if(!Array.isArray(saved.rows))throw new Error('Saved diary content is invalid. Editor was not changed.')
