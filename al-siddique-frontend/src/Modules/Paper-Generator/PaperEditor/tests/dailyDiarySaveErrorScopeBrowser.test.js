@@ -31,18 +31,12 @@ test('Late failed Diary Save must identify original selection, not current selec
   const method=req.method()
   if(method==='POST'||method==='PUT'){
    const body=req.postDataJSON();calls.push({method,url:new URL(req.url()).pathname,scope:[body.class_level,body.style_settings?.section,body.diary_date],body})
-   const match=/\/api\/daily-diary\/(\d+)$/.exec(new URL(req.url()).pathname)
-   const id=method==='POST'?200+calls.filter(c=>c.method==='POST').length:Number(match?.[1])
    if(method==='POST'&&calls.length===1)await deferredSave
    return r.fulfill({status:500,contentType:'application/json',body:JSON.stringify({success:false,message:'Original school-day save failed'})})
   }
   return r.fulfill({status:200,contentType:'application/json',body:'{"success":true,"data":[]}'});
  })
  const page=await ctx.newPage()
- const save=async()=>{
-  const [res]=await Promise.all([page.waitForResponse(r=>r.url().includes('/api/daily-diary')&&['POST','PUT'].includes(r.request().method()),{timeout:14000}),page.getByRole('button',{name:'Save Diary'}).click()])
-  console.log('DIARY_HTTP_RESPONSE',res.status(),res.url(),calls.at(-1)?.method);assert.equal(res.status(),200);return calls.at(-1)
- }
  try{
   await page.goto(`http://127.0.0.1:${PORT}/daily-diary-workspace-test.html`,{waitUntil:'domcontentloaded',timeout:35000})
   await page.locator('[data-diary-workspace]').waitFor({state:'visible',timeout:15000})
