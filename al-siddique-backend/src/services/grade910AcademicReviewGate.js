@@ -153,6 +153,15 @@ function assertGrade910ReviewSignature(mapping,reviewerId){
   return true
 }
 
+// is_duplicate is a nullable legacy flag. An uncertain state is NOT cleared
+// by reviewer signatures, matching revisions, or a client-side review claim.
+function requireUnflaggedGrade910Source(source){
+  if(source?.is_duplicate!==false)
+    throw error('REVIEW_DUPLICATE_STATUS_UNRESOLVED',
+      'An original Question Bank row flagged duplicate or lacking explicit duplicate clearance cannot be academically reviewed.',409)
+  return true
+}
+
 async function assertIndependentReviewReady(client,{schoolId,master,actorId}){
   const latest=await client.query(
     'SELECT revision_number,content_hash,content_json,created_by FROM question_revisions WHERE school_id=$1 AND question_master_id=$2 AND revision_number=$3',
@@ -162,13 +171,14 @@ async function assertIndependentReviewReady(client,{schoolId,master,actorId}){
   const rev=latest.rows[0],grade=normalizeGrade(rev.content_json?.classLevel)
   const linked=master.source_question_bank_id
     ? await client.query(
-      'SELECT id,school_id,class_level,subject,medium,chapter_no,question_type,question_text,question_text_urdu,options,correct_option,answer,explanation,marks,is_approved,metadata,created_by FROM question_bank WHERE school_id=$1 AND id=$2 FOR UPDATE',
+      'SELECT id,school_id,class_level,subject,medium,chapter_no,question_type,question_text,question_text_urdu,options,correct_option,answer,explanation,marks,is_approved,is_duplicate,metadata,created_by FROM question_bank WHERE school_id=$1 AND id=$2 FOR UPDATE',
       [schoolId,master.source_question_bank_id])
     : {rowCount:0,rows:[]}
   const sourceGrade=linked.rowCount===1?normalizeGrade(linked.rows[0].class_level):null
   if(!grade&&!sourceGrade)return {grade:null,legacyRecord:null,review:null,revision:rev}
   if(grade!==sourceGrade)
     throw error('ACADEMIC_GRADE_MISMATCH','Governed revision and linked Question Bank grade disagree.')
+  requireUnflaggedGrade910Source(linked.rows[0])
 
   const hash=String(rev.content_hash||'').trim().toLowerCase()
   const key=reviewMappingKey(Number(rev.revision_number),hash)
@@ -223,3 +233,4 @@ module.exports.approvedSourceMatchesRevision=approvedSourceMatchesRevision
 module.exports.grade910McqIntegrityIssues=grade910McqIntegrityIssues
 module.exports.requireGrade910McqIntegrity=requireGrade910McqIntegrity
 module.exports.assertGrade910ReviewSignature=assertGrade910ReviewSignature
+module.exports.requireUnflaggedGrade910Source=requireUnflaggedGrade910Source

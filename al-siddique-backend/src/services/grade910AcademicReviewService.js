@@ -1,7 +1,7 @@
 'use strict'
 const { isDeepStrictEqual } = require('node:util')
 const {withTenantTransaction}=require('./questionBankGovernance')
-const {normalizeGrade,normalizeEvidence,reviewMappingKey,requireGrade910McqIntegrity,approvedSourceMatchesRevision,assertGrade910ReviewSignature,error}=require('./grade910AcademicReviewGate')
+const {normalizeGrade,normalizeEvidence,reviewMappingKey,requireGrade910McqIntegrity,approvedSourceMatchesRevision,assertGrade910ReviewSignature,requireUnflaggedGrade910Source,error}=require('./grade910AcademicReviewGate')
 
 async function recordIndependentAcademicReview({
   schoolId, reviewerId, publicId, expectedRevision, expectedContentHash, evidence,
@@ -46,11 +46,12 @@ async function recordIndependentAcademicReview({
       throw error('REVIEW_SOURCE_QUESTION_LINK_REQUIRED','A tenant-linked legacy Question Bank record is required.')
     // The linked original row creator is separate provenance from the governed wrapper author.
     const linkedSource=await client.query(
-      'SELECT created_by,class_level,subject,medium,chapter_no,question_type,question_text,question_text_urdu,options,correct_option,answer,explanation,marks FROM question_bank WHERE school_id=$1 AND id=$2 FOR SHARE',
+      'SELECT created_by,class_level,subject,medium,chapter_no,question_type,question_text,question_text_urdu,options,correct_option,answer,explanation,marks,is_duplicate FROM question_bank WHERE school_id=$1 AND id=$2 FOR SHARE',
       [tenantId,master.source_question_bank_id]
     )
     if(linkedSource.rowCount!==1)
       throw error('REVIEW_SOURCE_QUESTION_NOT_FOUND','Tenant-local original Question Bank row is missing.',404)
+    requireUnflaggedGrade910Source(linkedSource.rows[0])
     const sourceCreator=Number(linkedSource.rows[0].created_by)
     if(!Number.isSafeInteger(sourceCreator)||sourceCreator<1)
       throw error('ACADEMIC_REVIEW_SOURCE_CREATOR_UNKNOWN','The linked original Question Bank creator is not independently attributable.',422)

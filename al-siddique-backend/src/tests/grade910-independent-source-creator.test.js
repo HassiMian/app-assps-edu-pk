@@ -16,7 +16,7 @@ const question={classLevel:'9th',subject:'biology',medium:'english',chapterNo:'1
 const legacy={id:'ORIG-IX-01',school_id:SCHOOL,class_level:'9th',subject:'biology',
  medium:'english',chapter_no:'1',question_type:'short',question_text:question.questionText,
  question_text_urdu:'',options:[],correct_option:'',answer:question.answer,
- explanation:'',marks:2,is_approved:false,metadata:{},created_by:REVIEWER}
+ explanation:'',marks:2,is_approved:false,is_duplicate:false,metadata:{},created_by:REVIEWER}
 function fakeDatabase(sourceCreator,{sourceMissing=false,signedCreator=REVIEWER,signedAt='2026-10-09T00:00:00Z',linkedOverrides={}}={}){
  const queries=[]
  const master={id:3,public_id:'QB-1',current_revision:2,lifecycle_status:'reviewed',
@@ -205,4 +205,32 @@ test('positive exact linked original permits idempotent replay only with tenant 
  assert.equal(response.replayed,true)
  assert.equal(response.questionBankApproved,false)
  assert.ok(queries.some(sql=>sql.includes('FROM question_bank')&&sql.includes('school_id=$1')&&sql.includes('FOR SHARE')&&sql.includes('question_text')&&sql.includes('marks')))
+})
+
+test('review recording blocks flagged or uncertain legacy Question Bank duplicates before a mapping is stored',async()=>{
+ for(const flag of [true,null,undefined,'false']){
+  const {client,queries}=fakeDatabase(105,{linkedOverrides:{is_duplicate:flag}})
+  await assert.rejects(loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+   schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
+   expectedRevision:2,expectedContentHash:contentHash,evidence:{}
+  }),{code:'REVIEW_DUPLICATE_STATUS_UNRESOLVED'})
+  assert.equal(queries.some(q=>q.includes('INSERT INTO question_mappings')),false)
+ }
+})
+test('publication precheck refuses an already-reviewed mapping linked to flagged or ambiguous duplicate source',async()=>{
+ for(const flag of [true,null,undefined,'false']){
+  const {client,master}=fakeDatabase(105,{linkedOverrides:{is_duplicate:flag}})
+  await assert.rejects(loadApprovalGate()(client,{schoolId:SCHOOL,master,actorId:104}),
+   {code:'REVIEW_DUPLICATE_STATUS_UNRESOLVED'})
+ }
+})
+test('only boolean false source duplicate status can progress to other independent review gates',async()=>{
+ const {client,queries}=fakeDatabase(105)
+ const output=await loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+  schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
+  expectedRevision:2,expectedContentHash:contentHash,evidence:{}
+ })
+ assert.equal(output.replayed,true)
+ assert.equal(output.questionBankApproved,false)
+ assert.ok(queries.some(q=>q.includes('is_duplicate')&&q.includes('FROM question_bank')))
 })
