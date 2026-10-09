@@ -142,7 +142,7 @@ async function assertIndependentReviewReady(client,{schoolId,master,actorId}){
   const rev=latest.rows[0],grade=normalizeGrade(rev.content_json?.classLevel)
   const linked=master.source_question_bank_id
     ? await client.query(
-      'SELECT id,school_id,class_level,subject,medium,chapter_no,question_type,question_text,question_text_urdu,options,correct_option,answer,explanation,marks,is_approved,metadata FROM question_bank WHERE school_id=$1 AND id=$2 FOR UPDATE',
+      'SELECT id,school_id,class_level,subject,medium,chapter_no,question_type,question_text,question_text_urdu,options,correct_option,answer,explanation,marks,is_approved,metadata,created_by FROM question_bank WHERE school_id=$1 AND id=$2 FOR UPDATE',
       [schoolId,master.source_question_bank_id])
     : {rowCount:0,rows:[]}
   const sourceGrade=linked.rowCount===1?normalizeGrade(linked.rows[0].class_level):null
@@ -164,6 +164,13 @@ async function assertIndependentReviewReady(client,{schoolId,master,actorId}){
      !Number.isInteger(Number(rev.created_by))||Number(rev.created_by)===reviewer ||
      !Number.isInteger(Number(master.created_by))||Number(master.created_by)===reviewer)
     throw error('REVIEW_INDEPENDENCE_REQUIRED','An identified independent academic reviewer, different from author and releaser, is mandatory.')
+  // Release must independently recheck who created the linked original, not just
+  // the governed wrapper/revision author or an untrusted saved reviewer checkbox.
+  const sourceCreator=Number(linked.rows[0]?.created_by)
+  if(!Number.isSafeInteger(sourceCreator)||sourceCreator<1)
+    throw error('REVIEW_SOURCE_CREATOR_UNKNOWN','Cannot establish original Question Bank author provenance.',422)
+  if(sourceCreator===reviewer)
+    throw error('REVIEW_SOURCE_CREATOR_NOT_INDEPENDENT','The source row creator cannot independently review that same question.',403)
   if(signed.metadata?.currentRevision!==Number(rev.revision_number)||
      signed.metadata?.contentHash!==hash ||
      signed.metadata?.reviewerUserId!==reviewer ||

@@ -44,6 +44,18 @@ async function recordIndependentAcademicReview({
       throw error('ACADEMIC_REVIEW_NOT_INDEPENDENT','Reviewer must differ from original author and revision author.',403)
     if(!master.source_question_bank_id)
       throw error('REVIEW_SOURCE_QUESTION_LINK_REQUIRED','A tenant-linked legacy Question Bank record is required.')
+    // The linked original row creator is separate provenance from the governed wrapper author.
+    const linkedSource=await client.query(
+      'SELECT created_by FROM question_bank WHERE school_id=$1 AND id=$2 FOR SHARE',
+      [tenantId,master.source_question_bank_id]
+    )
+    if(linkedSource.rowCount!==1)
+      throw error('REVIEW_SOURCE_QUESTION_NOT_FOUND','Tenant-local original Question Bank row is missing.',404)
+    const sourceCreator=Number(linkedSource.rows[0].created_by)
+    if(!Number.isSafeInteger(sourceCreator)||sourceCreator<1)
+      throw error('ACADEMIC_REVIEW_SOURCE_CREATOR_UNKNOWN','The linked original Question Bank creator is not independently attributable.',422)
+    if(sourceCreator===reviewer)
+      throw error('ACADEMIC_REVIEW_SOURCE_CREATOR_CONFLICT','Reviewer must differ from linked Question Bank originator.',403)
     requireGrade910McqIntegrity(revision.content_json)
     const normalized=normalizeEvidence(evidence,revision.content_json,{tenantId})
     const existing=await client.query(
