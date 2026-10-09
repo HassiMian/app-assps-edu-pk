@@ -7,7 +7,7 @@ const vm=require('node:vm')
 const filename=path.join(__dirname,'../routes/uploadStorageRoutes.js')
 const code=fs.readFileSync(filename,'utf8')
 const file='aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee.png'
-function harness(rows=[],school=900001){
+function harness(rows=[],school=900001,dbError=null){
  const calls=[];const handlers={};let diskReads=0
  const router={get:(path,...fns)=>{handlers[path]=fns.at(-1)},post:()=>{}}
  const fauxfs={existsSync:()=>true,promises:{lstat:async()=>{diskReads++;return {isFile:()=>true,isSymbolicLink:()=>false}}}}
@@ -17,7 +17,7 @@ function harness(rows=[],school=900001){
   if(name==='path')return path
   if(name==='crypto')return require('node:crypto')
   if(name==='multer')return ()=>({single:()=>()=>{}})
-  if(name==='../config/database')return {pool:{},query:async(sql,params)=>{calls.push({sql,params});return {rows}}}
+  if(name==='../config/database')return {pool:{},query:async(sql,params)=>{calls.push({sql,params});if(dbError)throw dbError;return {rows}}}
   if(name==='../middleware/auth')return {protect:()=>{},requireRoles:()=>()=>{}}
   if(name==='../middleware/tenant')return {currentSchoolId:()=>school}
   return require(name)
@@ -54,4 +54,14 @@ test('platform super_admin uses existing globally authorized path',async()=>{
 })
 test('missing school or ownership query error fails closed',async()=>{
  const missing=harness([{id:1}],null);assert.equal((await missing.invoke()).code,404);assert.equal(missing.diskReads,0)
+})
+
+test('ownership database outage fails closed without accessing payment file',async()=>{
+ const h=harness([],900001,new Error('SYNTHETIC_DB_UNAVAILABLE'))
+ const res=await h.invoke()
+ assert.equal(res.code,503)
+ assert.equal(res.body.success,false)
+ assert.equal(h.diskReads,0)
+ assert.equal(h.calls.length,1)
+ assert.ok(!JSON.stringify(res.body).includes('SYNTHETIC_DB_UNAVAILABLE'))
 })
