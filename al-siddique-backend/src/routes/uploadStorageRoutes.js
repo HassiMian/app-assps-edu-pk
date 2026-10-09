@@ -106,8 +106,8 @@ router.get('/subscription/payment-screenshot/:fileName', protect, requireRoles('
 
   const filePath = path.join(rootUploadDir, 'payment-screenshots', fileName)
   try {
-    const stat = await fs.promises.stat(filePath)
-    if (!stat.isFile()) return res.status(404).json({ success: false, message: 'Payment proof not found.' })
+    const stat = await fs.promises.lstat(filePath)
+    if (!stat.isFile() || stat.isSymbolicLink()) return res.status(404).json({ success: false, message: 'Payment proof not found.' })
     res.setHeader('Cache-Control', 'private, no-store')
     res.setHeader('X-Content-Type-Options', 'nosniff')
     return res.sendFile(filePath)
