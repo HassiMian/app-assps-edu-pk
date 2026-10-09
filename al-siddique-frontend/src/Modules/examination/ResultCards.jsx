@@ -1,6 +1,7 @@
 import './premiumResultCardDesigner.css'
 import { summarizeResultRows, formatResultCell, meetsResultPassMark } from './resultPreviewIntegrity'
 import { getResultLogoDiagnostic } from './resultLogoDiagnostics'
+import { summarizePrintBatch } from './resultPrintPlanning'
 import { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import api from '../../services/api'
@@ -32,8 +33,8 @@ const TEACHER_REMARK_PRESETS = [
 ]
 
 //  Main Component 
-function ProfessionalParametersModal({ cards, student, exam, studentMarks, school, gradeBands, onClose }) {
- const [options, setOptions] = useState(() => ({...DEFAULT_RESULT_OPTIONS, template:'signature-editorial'}))
+export function ProfessionalParametersModal({ cards, student, exam, studentMarks, school, gradeBands, onClose }) {
+ const [options, setOptions] = useState(() => ({...DEFAULT_RESULT_OPTIONS, template:'signature-editorial', autoTermColumns:true}))
  const [remarksOpen, setRemarksOpen] = useState(false)
  const previewRef = useRef(null)
  const [scale, setScale] = useState(1)
@@ -42,6 +43,20 @@ function ProfessionalParametersModal({ cards, student, exam, studentMarks, schoo
  .filter(item => item?.student && item?.exam && item?.studentMarks?.length)
  .map(item => buildResultCardData({ ...item, options: { ...options, gradeBands }, school }))
  const data = dataList[0]
+ const batchInfo = summarizePrintBatch(dataList)
+ const printBatch = (pdf = false) => {
+  if (!dataList.length) { window.alert('No result cards are ready for printing.'); return }
+  if (batchInfo.absentLogo) { window.alert(`${batchInfo.absentLogo} result card(s) have no school logo configured. Set the correct logo in SaaS School/Paper Settings before printing.`); return }
+  if (data?.options?.template && ['signature-editorial','swiss-grid','data-atelier'].includes(data.options.template)) {
+   const renderedSchoolLogo = previewRef.current?.querySelector('.result-card-a4 img[data-result-school-logo]')
+   if (!renderedSchoolLogo?.complete || !renderedSchoolLogo.naturalWidth) {
+    window.alert('The school logo configured in SaaS settings has not loaded. Check the school logo URL and retry. Print was stopped to prevent incorrect result cards.')
+    return
+   }
+  }
+  if (batchInfo.pending && !window.confirm(`${batchInfo.pending} subject result(s) are missing or invalid and will display Pending/—. Verify marks before printing ${batchInfo.cards} card(s). Continue?`)) return
+  openResultPrintWindow(dataList, pdf)
+ }
 
  useEffect(() => {
  const el = previewRef.current
@@ -76,11 +91,12 @@ function ProfessionalParametersModal({ cards, student, exam, studentMarks, schoo
  {getResultLogoDiagnostic(school?.logo) && <p className="result-logo-diagnostic" role="status">{getResultLogoDiagnostic(school?.logo)}</p>}
  <ResultCardTemplateSelector value={options.template} onChange={(template) => setOptions(prev => ({ ...prev, template }))} />
  <h3>Marks & Print Options</h3>
+ <p className="result-print-readiness" role="status">{batchInfo.cards} card(s) · {batchInfo.scored} recorded subject(s){batchInfo.pending ? ` · ${batchInfo.pending} pending/invalid` : ''}{batchInfo.absentLogo ? ` · ${batchInfo.absentLogo} missing SaaS school logo` : ''}</p>
  <ResultCardPrintToolbar
  options={options}
  setOptions={setOptions}
- onPrint={() => openResultPrintWindow(dataList)}
- onExportPdf={() => openResultPrintWindow(dataList, true)}
+ onPrint={() => printBatch(false)}
+ onExportPdf={() => printBatch(true)}
  />
  <div style={{ marginTop:14, border:'1px solid rgba(148,163,184,0.18)', borderRadius:14, overflow:'hidden', background:'var(--apex-bg-subtle)' }}>
  <button
@@ -315,6 +331,8 @@ export default function ResultCards() {
  urdu: paperSettings.schoolUrdu,
  address: paperSettings.address,
  phone: paperSettings.phone,
+ email: paperSettings.email,
+ academicYear: paperSettings.examYear,
  logo: paperSettings.logo,
  principalSignature: paperSettings.principalSignature,
  showUrduHeader: paperSettings.showUrduHeader !== false,

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Isolated Results Designer test</title><meta name="viewport" content="width=device-width,initial-scale=1"/></head>
+<body><div id="root"></div><script type="module">
+import React from 'react'
+import {createRoot} from 'react-dom/client'
+import {ProfessionalParametersModal} from '../../src/Modules/examination/ResultCards.jsx'
+import '../../src/index.css'
+const pixel='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIHWP4////fwAJ+wP9Cgd6ZQAAAABJRU5ErkJggg=='
+const terms=['First Term Exam','Second Term Exam','Annual Final Exam']
+const subjects=['English','Mathematics','Science','Urdu','Computer','Islamiyat','Social Studies','General Knowledge']
+const cards=terms.map((name,i)=>({
+ student:{name:'Fixture Student '+(i+1),father_name:'Fixture Father',roll_number:String(i+1),gr_number:'GR-XYZ'},
+ exam:{name,total_marks:100,session:'2026-2027',class:'Eight'},
+ studentMarks:subjects.map((subject,j)=>({subject,marks_obtained:75+j,total_marks:100})),
+}))
+window.__fixtureCards=cards
+const query=new URLSearchParams(location.search)
+const configuredLogo=query.has('missingLogo')?'':query.has('brokenLogo')?'/api/uploads/fixture-404.png':pixel
+const school={name:'Fixture Institution',logo:configuredLogo,address:'Synthetic address only',phone:'00000',academicYear:'2026-2027'}
+window.__fixtureRoot=createRoot(document.getElementById('root'))
+window.__fixtureRoot.render(React.createElement(ProfessionalParametersModal,{cards,student:cards[0].student,exam:cards[0].exam,studentMarks:cards[0].studentMarks,school,gradeBands:[{from:0,to:40,label:'D'},{from:41,to:100,label:'A'}],onClose:()=>{window.__closed=true}}))
+</script></body></html>
