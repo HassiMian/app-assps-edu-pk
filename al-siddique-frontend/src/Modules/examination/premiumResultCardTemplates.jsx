@@ -1,5 +1,6 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { resolveAssetUrl } from '../../services/api'
+import { resolveResultPrintOptions } from './resultPrintPlanning'
 import { RESULT_TEMPLATES as LEGACY_TEMPLATES, DEFAULT_RESULT_OPTIONS, ResultCardPreview as LegacyPreview, ResultCardTemplateSelector as LegacySelector, ResultCardPrintToolbar as LegacyToolbar, buildResultCardData as legacyBuilder, resultCardPrintCss as legacyCss, ResultStudentInfoBlock, ResultSignatureFooter } from './resultCardTemplates'
 
 export { DEFAULT_RESULT_OPTIONS }
@@ -40,7 +41,7 @@ function numberOrNull(value) {
 }
 
 function buildPremiumResultCardData({ student, exam, studentMarks, options, school }) {
- const opts = { ...DEFAULT_RESULT_OPTIONS, ...options, includeCharts:true, orientation:'portrait' }
+ const opts = resolveResultPrintOptions({ ...DEFAULT_RESULT_OPTIONS, ...options, includeCharts:true, orientation:'portrait' }, exam)
  const activeTerms = termFields.filter(([key]) => opts[key])
  const slot = currentTermField(exam)
  const subjects = (studentMarks || []).map((row) => {
@@ -89,7 +90,7 @@ function buildPremiumResultCardData({ student, exam, studentMarks, options, scho
  student: {
  name: student?.name || '—',
  fatherName: student?.fatherName || student?.father_name || '—',
- rollNo: student?.rollNo || student?.gr_number || student?.admissionNo || '—',
+ rollNo: student?.rollNo || student?.roll_number || student?.gr_number || student?.admissionNo || '—',
  className: student?.className || exam?.class || '—',
  section: student?.section || '-',
  photo: student?.photo || student?.image || student?.profile_photo || student?.profileImage || student?.profile_image || student?.photo_url || student?.image_url || '',
@@ -105,7 +106,7 @@ function buildPremiumResultCardData({ student, exam, studentMarks, options, scho
  principalSignature: school?.principalSignature || '',
  },
  result: {
- session: exam?.session || '—',
+ session: exam?.session || exam?.academic_year || school?.academicYear || school?.examYear || '—',
  term: exam?.name || '—',
  classTeacher: exam?.classTeacher || '—',
  issueDate: today,
@@ -147,14 +148,16 @@ export function ResultCardTemplateSelector({value,onChange}) {
 export function ResultCardPrintToolbar(props) {
  const premium = PREMIUM_IDS.has(props.options?.template)
  if (!premium) return <LegacyToolbar {...props}/>
- const toggle = key => props.setOptions(prev=>({...prev,[key]:!prev[key],includeCharts:true}))
+ const toggle = key => props.setOptions(prev=>({...prev,[key]:!prev[key],autoTermColumns:false,includeCharts:true}))
  return <div className="result-print-toolbar premium-print-toolbar no-print">
   <div className="toolbar-row"><label>Print Size</label><div className="premium-print-size">A4 Portrait · print-certified</div></div>
-  <div className="toolbar-checks">{[
-   ['includeAssessment','Assessment Marks'],['includeFirstTerm','First Term'],['includeSecondTerm','Second Term'],['includeThirdTerm','Third Term'],['includeFinalTerm','Final Term'],['includeAttendance','Attendance'],['includeTeacherRemarks','Teacher Feedback']
-  ].map(([key,label])=><label key={key}><input type="checkbox" checked={!!props.options[key]} onChange={()=>toggle(key)}/>{label}</label>)}</div>
-  <div className="premium-chart-policy" role="note">Subject performance + percentage chart are always included in premium templates.</div>
-  <div className="toolbar-actions"><button type="button" onClick={props.onPrint}>Print</button><button type="button" onClick={props.onExportPdf}>Export PDF</button></div>
+  <div className="premium-chart-policy"><label><input type="checkbox" checked={!!props.options.autoTermColumns} onChange={e=>props.setOptions(prev=>({...prev,autoTermColumns:e.target.checked}))} /> Auto-match each card to its exam term</label></div>
+  <div className="toolbar-checks">
+   {!props.options.autoTermColumns && [['includeAssessment','Assessment Marks'],['includeFirstTerm','First Term'],['includeSecondTerm','Second Term'],['includeThirdTerm','Third Term'],['includeFinalTerm','Final Term']].map(([key,label])=><label key={key}><input type="checkbox" checked={!!props.options[key]} onChange={()=>toggle(key)}/>{label}</label>)}
+   {[['includeAttendance','Attendance'],['includeTeacherRemarks','Teacher Feedback']].map(([key,label])=><label key={key}><input type="checkbox" checked={!!props.options[key]} onChange={()=>toggle(key)}/>{label}</label>)}
+  </div>
+  <div className="premium-chart-policy" role="note">Subject performance + percentage chart are always included. For PDF choose “Save as PDF” in your browser print dialog.</div>
+  <div className="toolbar-actions"><button type="button" onClick={props.onPrint}>Print</button><button type="button" onClick={props.onExportPdf}>Save as PDF</button></div>
  </div>
 }
 
@@ -178,7 +181,7 @@ function PremiumMarksTable({ data }) {
  <tr key={row.subjectName}>
  <td>{row.subjectName}</td>
  {activeTerms.map(([, field]) => <td key={field}>{row[field] ?? '—'}</td>)}
- <td>{row.totalMarks}</td>
+ <td>{row.totalMarks > 0 ? row.totalMarks : '—'}</td>
  <td>{row.obtainedMarks ?? '—'}</td>
  <td>{row.percentage === null ? '—' : row.percentage + '%'}</td>
  <td><b>{row.grade}</b></td>
@@ -188,11 +191,11 @@ function PremiumMarksTable({ data }) {
  <tr className="total-row">
  <td>Total</td>
  {activeTerms.map(([, , label]) => <td key={label}></td>)}
- <td>{data.result.totalMarks}</td>
+ <td>{data.result.totalMarks > 0 ? data.result.totalMarks : '—'}</td>
  <td>{data.result.obtainedMarks}</td>
  <td>{data.result.percentage === null ? '—' : data.result.percentage + '%'}</td>
  <td>{data.result.grade}</td>
- <td>{data.result.percentage === null ? 'Pending marks' : (data.result.percentage >= 50 ? 'Pass' : 'Needs review')}</td>
+ <td>{data.result.percentage === null ? 'Pending marks' : 'Recorded'}</td>
  </tr>
  </tbody>
  </table>
@@ -220,7 +223,7 @@ function PremiumSchoolHeader({ data, title }) {
  const configuredLogo = resolveAssetUrl(school.logo)
  const schoolName = school.name || '—'
  return <header className="rc-standard-header">
-  <div className="rc-header-logo">{configuredLogo ? <img src={configuredLogo} alt="School emblem configured in SaaS settings" /> : <div className="logo-fallback" aria-label="School logo not configured" />}</div>
+  <div className="rc-header-logo">{configuredLogo ? <img src={configuredLogo} alt="School emblem configured in SaaS settings" data-result-school-logo="true" /> : <div className="logo-fallback" aria-label="School logo not configured" />}</div>
   <div className="rc-header-center">
    {school.slogan && <div className="rc-urdu-title">{school.slogan}</div>}
    <h1 className="rc-school-name">{schoolName}</h1>
@@ -388,9 +391,42 @@ export function openResultPrintWindow(data, exportMode = false) {
  .result-card-a4:last-child { page-break-after: auto; break-after: auto; }
  `
  const safeTitle = title.replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]))
- const html = `<!doctype html><html><head><meta charset="UTF-8"><title>${safeTitle}</title><style>${resultCardPrintCss.replace('@page { size: A4; margin: 0; }', pageRule)}${batchCss}</style></head><body>${cardMarkup}<script>window.onload=function(){window.focus();window.print();}</script></body></html>`
+ // Document fonts and configured school emblems must resolve before invoking
+ // browser printing. Never substitute a different organization's artwork.
+ const printReadyScript = `<script>
+ (function(){
+  var finished=false, started=false;
+  function blocked(message){
+   if(finished)return;finished=true;
+   var status=document.getElementById('result-print-status');
+   status.textContent=message;status.style.display='block';
+  }
+  async function finish(){
+   if(started||finished)return;started=true;
+   try{if(document.fonts&&document.fonts.ready){
+    await Promise.race([document.fonts.ready,new Promise(function(resolve){setTimeout(resolve,6000)})]);
+   }}catch(e){}
+   if(finished)return;
+   var logos=Array.from(document.querySelectorAll('img[data-result-school-logo]'));
+   if(logos.some(function(img){return !img.complete||img.naturalWidth===0;})){
+    blocked('School logo could not load from SaaS settings. Check the configured logo link, then reopen the result card. Printing was paused to avoid incorrect cards.');
+    return;
+   }
+   finished=true;window.focus();window.print();
+  }
+  var logoError='School logo could not load from SaaS settings. Check the configured logo link, then reopen the result card. Printing was paused to avoid incorrect cards.';
+  Array.from(document.querySelectorAll('img[data-result-school-logo]')).forEach(function(img){
+   if(img.complete&&img.naturalWidth===0)blocked(logoError);
+   img.addEventListener('error',function(){blocked(logoError)},{once:true});
+  });
+  window.addEventListener('load',finish);
+  if(document.readyState==='complete')setTimeout(finish,0);
+  setTimeout(function(){blocked('Some result card assets are still loading. Verify the school logo in SaaS settings and retry opening print.');},9500);
+ })();
+ </script>`
+ const html = `<!doctype html><html><head><meta charset="UTF-8"><title>${safeTitle}</title><style>${resultCardPrintCss.replace('@page { size: A4; margin: 0; }', pageRule)}${batchCss}#result-print-status{display:none;margin:12px;padding:12px;border:1px solid #B45309;color:#92400E;background:#FFFBEB;font:14px Arial,sans-serif;}@media print{#result-print-status{display:none!important}}</style></head><body><div id="result-print-status" role="alert"></div>${cardMarkup}${printReadyScript}</body></html>`
  const w = window.open('', '_blank', 'width=1100,height=900')
- if (!w) return
+ if (!w) { window.alert('Your browser blocked the print window. Allow pop-ups for this SaaS site and retry.'); return false }
  w.document.write(html)
  w.document.close()
  if (exportMode) w.document.title = cards.length > 1 ? `Export PDF - ${cards.length} Result Cards` : `Export PDF - ${first.student.name}`
