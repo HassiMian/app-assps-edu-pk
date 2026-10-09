@@ -1,3 +1,4 @@
+import './premiumResultCardDesigner.css'
 import { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import api from '../../services/api'
@@ -11,7 +12,7 @@ import {
  buildResultCardData,
  openResultPrintWindow,
  resultCardPrintCss,
-} from './resultCardTemplates'
+} from './premiumResultCardTemplates'
 
 function gradeLabel(pct, bands = []) {
  const value = Math.max(0, Math.min(100, Number(pct) || 0))
@@ -30,7 +31,7 @@ const TEACHER_REMARK_PRESETS = [
 
 //  Main Component 
 function ProfessionalParametersModal({ cards, student, exam, studentMarks, school, gradeBands, onClose }) {
- const [options, setOptions] = useState(DEFAULT_RESULT_OPTIONS)
+ const [options, setOptions] = useState(() => ({...DEFAULT_RESULT_OPTIONS, template:'signature-editorial'}))
  const [remarksOpen, setRemarksOpen] = useState(false)
  const previewRef = useRef(null)
  const [scale, setScale] = useState(1)
@@ -56,8 +57,8 @@ function ProfessionalParametersModal({ cards, student, exam, studentMarks, schoo
  return createPortal(
  <div onMouseDown={(e) => { if (e.target === e.currentTarget) onClose() }}
  style={{ position:'fixed', inset:0, background:'var(--apex-bg-overlay)', backdropFilter:'blur(10px)', zIndex:9999, display:'flex', alignItems:'center', justifyContent:'center', padding:'22px' }}>
- <div onMouseDown={(e) => e.stopPropagation()}
- style={{ width:'min(1320px, 100%)', maxHeight:'calc(100vh - 44px)', background:'#0D2C4A', border:'1px solid rgba(200,153,26,0.25)', borderRadius:18, boxShadow:'0 24px 60px rgba(0,0,0,0.6)', display:'flex', flexDirection:'column', overflow:'hidden' }}>
+ <div className="result-premium-shell" onMouseDown={(e) => e.stopPropagation()}
+ style={{ width:'min(1320px, 100%)', maxHeight:'calc(100vh - 44px)', background:'#F6F8FA', border:'1px solid #DFE7EC', borderRadius:18, boxShadow:'0 24px 60px rgba(0,0,0,0.6)', display:'flex', flexDirection:'column', overflow:'hidden' }}>
  <style>{resultCardPrintCss}</style>
  <div className="result-modal-head no-print" style={{ flexShrink:0 }}>
  <div>
