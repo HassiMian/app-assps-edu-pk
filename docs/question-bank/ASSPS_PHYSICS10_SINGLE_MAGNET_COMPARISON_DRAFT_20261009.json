@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "assps-physics10-single-original-magnet-answer-research-v1",
+  "originalQuestionFile": "physics10OriginalApplicationBatch2026.json",
+  "originalFileSha256": "a214d121e4a6b21fa7e41f7b6d7d7207968b7e7ab0b71145ea68cd9ef4ac5255",
+  "sourceCatalogId": "pectaa-catalog-024",
+  "sourceCatalogPdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+  "originalAuthoredResearchQuestions": 36,
+  "originalRubricOnlyLongQuestions": 1,
+  "newExplanatoryAnswerResearchDrafts": 1,
+  "newFiveMarkPointProposals": 5,
+  "humanSchoolSourceVerified": 0,
+  "qualifiedHumanAcademicReviewed": 0,
+  "academicallyApproved": 0,
+  "verifiedPublished": 0,
+  "caveat": "Distinct Grade X original research question only. Similar Grade IX magnet concepts do not certify Grade X curriculum mapping; textbook printed exercise/page and separate independent subject signoff are missing.",
+  "items": [
+    {
+      "questionId": "X-PHY-C17-L03",
+      "chapterNo": 17,
+      "topicId": "electromagnetism independent application",
+      "marks": 5,
+      "sourceFileSha256": "a214d121e4a6b21fa7e41f7b6d7d7207968b7e7ab0b71145ea68cd9ef4ac5255",
+      "sourceQuestionSha256": "6fe9d7ba07a79df65315239914dfd36503954693451af5a9e1f20a9181e990b8",
+      "sourceAnswerSha256": "f7cb25b80d11d2cb50877647c0d3b26f4904ba71f71c9909e93b0cf65a9642dd",
+      "catalogSourceId": "pectaa-catalog-024",
+      "claimedSourcePdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+      "proposedIndependentEnglishExplanation": "A permanent magnet retains its magnetic field under ordinary conditions without an external electrical supply, whereas a typical electromagnet obtains a controllable magnetic field from electric current through a coil. The permanent magnet therefore does not have a simple electrical on/off control, while the field of an idealized electromagnet can be switched by controlling its current. The strength of a permanent magnet is not usually changed during use as easily as the strength of an electromagnet, whose field can respond to a change in current. The direction of the magnetic poles of a fixed permanent magnet is normally changed relative to an observer by turning the magnet, while changing the direction of coil current reverses the pole direction in a simple electromagnet. A magnetic compass illustrates a permanent magnet; relays and industrial lifting magnets illustrate useful controllable electromagnets. Material properties, residual magnetization and other operating circumstances can modify these idealized comparisons.",
+      "proposedDistinctMarkingPoints": [
+        "Permanent field without current versus current-associated controllable field",
+        "Typically not electrically switchable versus switchable coil field",
+        "Less readily adjustable versus current-dependent strength",
+        "Pole orientation by turning magnet versus reversing coil current direction",
+        "Valid compass example versus relay or industrial lifting electromagnet"
+      ],
+      "answerLanguage": "English",
+      "catalogLabelMediumVerified": true,
+      "originalQuestionUnchanged": true,
+      "schoolAdoptedEditionSessionVerified": false,
+      "originalPrintedExercisePageVerified": false,
+      "qualifiedIndependentSubjectReviewed": false,
+      "urduEquivalenceReviewed": false,
+      "independentReviewerId": null,
+      "approvedRevisionId": null,
+      "academicallyApproved": false,
+      "verifiedPublished": false,
+      "reviewStatus": "UNAPPROVED_PHYSICS_X_ORIGINAL_QUESTION_MODEL_ANSWER_DRAFT"
+    }
+  ]
+}
