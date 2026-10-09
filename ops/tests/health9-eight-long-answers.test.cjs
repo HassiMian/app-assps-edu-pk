@@ -1,0 +1,103 @@
+'use strict'
+const test=require('node:test'),assert=require('node:assert/strict')
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto')
+const {build,markdown,ANSWERS,PIN}=require('../qbank/author-health9-eight-long-answer-candidates.cjs')
+const {rubricOnlyLongAnswer}=require('../../al-siddique-backend/src/services/grade910ModelAnswerPolicy')
+const ROOT=path.resolve(__dirname,'../..')
+const FILE=path.join(ROOT,'al-siddique-frontend/src/Modules/Paper-Generator/seed-data/grade9-10-staging/healthSciences9TechStarter2026.json')
+const bytes=fs.readFileSync(FILE),original=JSON.parse(bytes),registry=JSON.parse(fs.readFileSync(path.join(ROOT,'al-siddique-backend/src/data/verifiedGrade910SourceRegistry.json')))
+const sha=x=>crypto.createHash('sha256').update(x).digest('hex')
+const run=(b=bytes,s=original,r=registry)=>build({bytes:b,source:s,registry:r})
+test('genuine Health Sciences IX 40 original questions yield eight distinct full-answer research drafts and 40 marking points',()=>{
+ const d=run()
+ assert.equal(sha(bytes),PIN)
+ assert.equal(d.originalAuthoredResearchQuestions,40)
+ assert.equal(d.originalRubricOnlyLongQuestions,8)
+ assert.equal(d.newExplanatoryAnswerResearchDrafts,8)
+ assert.equal(d.newFiveMarkPointProposals,40)
+ assert.equal(Object.keys(ANSWERS).length,8)
+ assert.deepEqual(d.items.map(x=>x.questionId),original.drafts.filter(x=>x.type==='long').map(x=>x.id))
+ assert.deepEqual(d.items.map(x=>x.chapterNo),[1,2,3,4,5,6,7,8])
+})
+test('original question and marking-only answer fingerprints exact; all separately authored answers unapproved',()=>{
+ const d=run(),byId=new Map(original.drafts.map(x=>[x.id,x]))
+ for(const x of d.items){
+  const q=byId.get(x.questionId)
+  assert.ok(q)
+  assert.equal(x.sourceQuestionSha256,sha(JSON.stringify(q)))
+  assert.equal(x.sourceAnswerSha256,sha(q.content.en.answer))
+  assert.equal(x.sourceFileSha256,PIN)
+  assert.equal(x.catalogSourceId,original.sourceRecordId)
+  assert.equal(x.claimedSourcePdfSha256,original.sourcePdfSha256)
+  assert.equal(x.chapterNo,q.chapter.number)
+  assert.equal(x.topicId,q.topicId)
+  assert.equal(x.marks,5)
+  assert.ok(x.proposedIndependentEnglishExplanation.length>250)
+  assert.notEqual(x.proposedIndependentEnglishExplanation,q.content.en.answer)
+  assert.equal(rubricOnlyLongAnswer('long',x.proposedIndependentEnglishExplanation),false)
+  assert.equal(x.proposedDistinctMarkingPoints.length,5)
+  assert.equal(new Set(x.proposedDistinctMarkingPoints).size,5)
+  assert.equal(x.originalQuestionUnchanged,true)
+  assert.equal(x.catalogMediumVerified,false)
+  assert.equal(x.schoolAdoptedEditionSessionVerified,false)
+  assert.equal(x.originalPrintedExercisePageVerified,false)
+  assert.equal(x.qualifiedIndependentSubjectReviewed,false)
+  assert.equal(x.urduEquivalenceReviewed,false)
+  assert.equal(x.independentReviewerId,null)
+  assert.equal(x.approvedRevisionId,null)
+  assert.equal(x.academicallyApproved,false)
+  assert.equal(x.verifiedPublished,false)
+ }
+})
+test('science explanations cover digestive, respiratory, circulatory and kidney function without treatment recipes',()=>{
+ const d=run(),map=new Map(d.items.map(x=>[x.questionId,x.proposedIndependentEnglishExplanation]))
+ assert.match(map.get('IX-HS-C02-L01'),/small intestine/i)
+ assert.match(map.get('IX-HS-C03-L01'),/alveoli/i)
+ assert.match(map.get('IX-HS-C04-L01'),/pulmonary circuit/i)
+ assert.match(map.get('IX-HS-C05-L01'),/kidneys/i)
+ assert.match(map.get('IX-HS-C06-L01'),/untrained bystander/i)
+ assert.match(map.get('IX-HS-C08-L01'),/rather than restrictive dieting/i)
+})
+test('first-aid draft provides safe escalation and explicitly omits treatment procedures',()=>{
+ const a=run().items.find(x=>x.questionId==='IX-HS-C06-L01').proposedIndependentEnglishExplanation
+ assert.match(a,/trusted adult/)
+ assert.match(a,/qualified responders/)
+ assert.match(a,/without teaching treatment procedures/i)
+ assert.doesNotMatch(a,/perform CPR|compressions per minute|administer .*drug|apply tourniquet/i)
+})
+test('physical-activity and nutrition drafts support well-being and do not promote extreme performance or restriction',()=>{
+ const byId=new Map(run().items.map(x=>[x.questionId,x.proposedIndependentEnglishExplanation]))
+ assert.match(byId.get('IX-HS-C07-L01'),/not extreme exertion, body comparison/i)
+ assert.match(byId.get('IX-HS-C08-L01'),/rather than restrictive dieting, weight targets or appearance ideals/i)
+})
+test('modified original long and unrelated short question are blocked by full immutable source SHA',()=>{
+ for(const id of ['IX-HS-C06-L01','IX-HS-C01-S01']){
+  const changed=structuredClone(original),q=changed.drafts.find(x=>x.id===id)
+  assert.ok(q,id)
+  q.content.en.answer='Changed without independent review'
+  assert.throws(()=>run(Buffer.from(JSON.stringify(changed)),changed),/HS9_SOURCE_SHA_CHANGED/)
+ }
+})
+test('forged in-memory original is rejected despite identical original file bytes',()=>{
+ const changed=structuredClone(original)
+ changed.drafts[0].content.en.answer='Tampered without source hash'
+ assert.throws(()=>run(bytes,changed),/HS9_SOURCE_SHA_CHANGED/)
+})
+test('catalog source grade PDF SHA, edition label, medium and approval status fail closed when altered',()=>{
+ for(const change of [x=>{x.pdfSha256='0'.repeat(64)},x=>{x.medium='English'},x=>{x.edition='2026-27'},x=>{x.academicApproval=true}]){
+  const r=structuredClone(registry)
+  change(r.entries.find(x=>x.recordId===original.sourceRecordId))
+  assert.throws(()=>run(bytes,original,r),/HS9_UNVERIFIED_CATALOG_IDENTITY_DRIFT/)
+ }
+})
+test('faculty packet declares uncertified source medium/session and no academic publication',()=>{
+ const d=run(),m=markdown(d)
+ assert.match(m,/eight new original explanatory answer drafts/i)
+ assert.match(m,/CURRENT_CATALOG_LABEL_NO_SESSION/)
+ assert.match(m,/Paper Studio verified selector remains empty/)
+ assert.match(m,/Human source\/page verified 0/)
+ assert.equal(d.humanSchoolSourceVerified,0)
+ assert.equal(d.qualifiedHumanAcademicReviewed,0)
+ assert.equal(d.academicallyApproved,0)
+ assert.equal(d.verifiedPublished,0)
+})
