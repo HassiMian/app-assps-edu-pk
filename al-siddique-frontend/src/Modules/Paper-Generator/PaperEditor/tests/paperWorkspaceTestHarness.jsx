@@ -144,6 +144,22 @@ const bilingualMatrixOverflowPaper = {
  }],
 }
 
+// Synthetic multilingual Markdown table; no official or tenant data.
+const sourceTableOverflowPaper = {
+ id:'synthetic-markdown-table-overflow-20261009',name:'Multilingual Markdown Table Print Stress',
+ documentFormat:'pts-native-v13',printReadiness:'READY',
+ config:{className:'8',classLevel:'8',subject:'Social Studies',subjectName:'Social Studies',language:'urdu',paperCode:'MD-TABLE-PRINT',timeAllowed:'1 Hour',examDate:'2026-10-08',totalMarks:5,title:'Synthetic Table Print'},
+ official_section:[{id:'source-markdown-table',type:'official_section',sourceOrder:1,medium:'urdu',layoutPreset:'table',
+ heading:'سوال نمبر 1: جدول مکمل کریں۔ (5)',marks:5,content:[
+ '| موضوع | وضاحت | English explanation |',
+ '| --- | --- | --- |',
+ '| ماحولیات | '+('ب'.repeat(210))+' [SOURCE-CELL-01] | Short |',
+ '| درجہ حرارت | Regular | '+('LONGUNBREAKABLEMEASUREMENTTOKEN'.repeat(25))+' [SOURCE-CELL-02] |',
+ '| موسم | مختصر وضاحت | climate data [SOURCE-CELL-03] |',
+ ].join('\n'),
+ }],
+}
+
 const nestedScoringPaper = {
  clientDraftId:'nested-scoring-browser-paper',
  name:'Nested Scoring Browser Paper',
@@ -228,7 +244,7 @@ function ThemeFixture() {
  const reopenPaper = savedPapers.find(p => p.userAuthored && (reopenId ? String(p.id)===reopenId : p.name===reopenName)) || null
  const officialId = params.get('officialId') || ''
  const officialPaper = officialId ? officialV13.papers.find(item => item.id === officialId) || null : null
- const fixture = params.has('new') ? null : params.has('reopen') ? reopenPaper : params.has('bilingualMatrixOverflow') ? bilingualMatrixOverflowPaper : params.has('bilingualTableOverflow') ? bilingualTableOverflowPaper : params.has('rtlOddOverflow') ? rtlOddOverflowPaper : params.has('nestedScoring') ? nestedScoringPaper : params.has('mathAssets') ? mathAssetsPaper : officialPaper || (params.has('recovery8') ? classEightUrduFixture : paper)
+ const fixture = params.has('new') ? null : params.has('reopen') ? reopenPaper : params.has('sourceTableOverflow') ? sourceTableOverflowPaper : params.has('bilingualMatrixOverflow') ? bilingualMatrixOverflowPaper : params.has('bilingualTableOverflow') ? bilingualTableOverflowPaper : params.has('rtlOddOverflow') ? rtlOddOverflowPaper : params.has('nestedScoring') ? nestedScoringPaper : params.has('mathAssets') ? mathAssetsPaper : officialPaper || (params.has('recovery8') ? classEightUrduFixture : paper)
  React.useEffect(() => { setTheme('light') }, [setTheme])
  return <>
   <button hidden id="fixture-global-theme-toggle" data-current-theme={theme} onClick={toggleTheme}>Portal theme toggle</button>

@@ -226,7 +226,7 @@ function SourceTable({ rows, isUrdu, qFs, fs, themeColor, editMode=false, sectio
     {rows.map((row,rowIndex)=><tr key={rowIndex}>{row.map((cell,cellIndex)=>{
       const key='source-table-'+rowIndex+'-'+cellIndex
       const rich=section?.richText?.[key]||''
-      return <td key={cellIndex} style={{ border:`1px solid ${themeColor}77`, padding:`${5*fs}px ${7*fs}px`, textAlign:isUrdu?'right':'left', fontWeight:rowIndex===0?800:500 }}>
+      return <td key={cellIndex} style={{ border:`1px solid ${themeColor}77`, padding:`${5*fs}px ${7*fs}px`, textAlign:isUrdu?'right':'left', fontWeight:rowIndex===0?800:500, overflowWrap:'anywhere', wordBreak:'break-word' }}>
         {(editMode||rich)&&section?.id
           ? <InlineEditable text={cell} richHtml={rich} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey={key} sectionId={section.id} ariaLabel={`Edit table row ${rowIndex+1} column ${cellIndex+1}`} onActivate={onActiveEditable} onCommit={payload=>commitCell(rowIndex,cellIndex,payload)} style={{display:'block',minWidth:0,fontWeight:rowIndex===0?800:500}}/>
           : <AnswerText text={cell}/>}
