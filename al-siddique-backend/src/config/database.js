@@ -58,13 +58,39 @@ function configuredRuntimeRole() {
 }
 
 function normalizedRuntimeContext(context = tenantContext.getStore()) {
-  if (!context || !context.rlsEnabled) return null
-  const isSuperAdmin = Boolean(context.isSuperAdmin)
-  const tenantId = Number.parseInt(context.tenantId, 10)
-  if (!isSuperAdmin && (!Number.isInteger(tenantId) || tenantId <= 0)) {
-    const error = new Error('Authenticated database access requires an explicit school context.')
-    error.code = 'TENANT_CONTEXT_REQUIRED'
+  if (!context) return null
+  // Only an explicit boolean may enable RLS. In particular, the string
+  // "false" must not become an authenticated database context by truthiness.
+  if (context.rlsEnabled === false || context.rlsEnabled == null) return null
+  if (context.rlsEnabled !== true) {
+    const error = new Error('Database RLS activation requires a trusted boolean flag.')
+    error.code = 'DB_RLS_FLAG_INVALID'
     throw error
+  }
+  // Boolean("false") === true: never elevate string/object cookie or JWT
+  // claims into unrestricted PostgreSQL super-admin context.
+  if (context.isSuperAdmin != null && typeof context.isSuperAdmin !== 'boolean') {
+    const error = new Error('Database super-admin scope requires a trusted boolean flag.')
+    error.code = 'DB_SUPERADMIN_SCOPE_INVALID'
+    throw error
+  }
+  const isSuperAdmin = context.isSuperAdmin === true
+  let tenantId = null
+  if (!isSuperAdmin) {
+    const input = context.tenantId
+    // parseInt("900001suffix") and parseInt("9e5") silently select a school.
+    // Require a complete positive decimal identifier, not just a prefix.
+    if (typeof input === 'number') {
+      if (Number.isSafeInteger(input) && input > 0) tenantId = input
+    } else if (typeof input === 'string' && /^[0-9]+$/.test(input.trim())) {
+      const parsed = Number(input.trim())
+      if (Number.isSafeInteger(parsed) && parsed > 0) tenantId = parsed
+    }
+    if (tenantId === null) {
+      const error = new Error('Authenticated database access requires a valid positive school identifier.')
+      error.code = 'TENANT_CONTEXT_REQUIRED'
+      throw error
+    }
   }
   return {
     isSuperAdmin,
