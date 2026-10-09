@@ -573,3 +573,25 @@ test('rubric language in short-answer teaching notes is not automatically classi
   assert.deepEqual(grade910ModelAnswerIssues({questionType:'long',answer:candidate}),['RUBRIC_DIRECTIVE_WITHOUT_MODEL_ANSWER'])
  }
 })
+
+test('Computer IX rubric phrase Possible marks must not masquerade as a verified explanatory long answer',async()=>{
+ const answer='Possible marks: user interface, process/CPU management, memory management, file/storage management, device management; any five with explanation.'
+ const {client,queries,revisionHash}=fakeDatabase(105,{
+  linkedOverrides:{question_type:'long',answer,marks:5},
+  revisionOverrides:{questionType:'long',answer,marks:5}
+ })
+ await assert.rejects(loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+  schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
+  expectedRevision:2,expectedContentHash:revisionHash,evidence:{}
+ }),{code:'ACADEMIC_MODEL_ANSWER_REQUIRED'})
+ assert.equal(queries.some(sql=>sql.includes('INSERT INTO question_mappings')),false)
+})
+test('Computer IX pre-existing signed mapping with Possible marks only must also be refused by publisher',async()=>{
+ const answer='Possible marks: any five operating system functions with explanations.'
+ const {client,master}=fakeDatabase(105,{
+  linkedOverrides:{question_type:'long',answer,marks:5},
+  revisionOverrides:{questionType:'long',answer,marks:5}
+ })
+ await assert.rejects(loadApprovalGate()(client,{schoolId:SCHOOL,master,actorId:104}),
+  {code:'ACADEMIC_MODEL_ANSWER_REQUIRED'})
+})

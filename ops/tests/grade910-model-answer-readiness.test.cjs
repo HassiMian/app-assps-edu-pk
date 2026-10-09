@@ -10,16 +10,16 @@ const documents=fs.readdirSync(INPUT).filter(f=>f.endsWith('.json')).sort().map(
  const bytes=fs.readFileSync(path.join(INPUT,filename))
  return {filename,bytes,data:JSON.parse(bytes)}
 })
-test('original 2,581 candidates have 165 rubric-only long answers across 564 long questions',()=>{
+test('original 2,581 candidates have 166 rubric-only long answers across 564 long questions',()=>{
  const d=audit(documents)
  assert.equal(d.totals.originalAuthoredCandidates,2581)
  assert.equal(d.totals.authoredFiles,73)
  assert.equal(d.totals.longQuestions,564)
- assert.equal(d.totals.rubricOnlyLongAnswers,165)
- assert.equal(d.totals.longAnswersNotFlaggedByEnglishRubricHeuristic,399)
+ assert.equal(d.totals.rubricOnlyLongAnswers,166)
+ assert.equal(d.totals.longAnswersNotFlaggedByEnglishRubricHeuristic,398)
  assert.equal(d.totals.excludedNonQuestionEvidenceRows,58)
- assert.equal(d.reviewCandidates.length,165)
- assert.equal(new Set(d.reviewCandidates.map(x=>x.questionId)).size,165)
+ assert.equal(d.reviewCandidates.length,166)
+ assert.equal(new Set(d.reviewCandidates.map(x=>x.questionId)).size,166)
  assert.equal(d.totals.approved,0)
  assert.equal(d.totals.verifiedFullModelAnswers,0)
 })
@@ -56,7 +56,7 @@ test('changing a long rubric-only answer into explanatory prose produces a new S
  }:x)
  changed.find(x=>x.filename==='biology10EnglishStarter2026.json').data.drafts.find(x=>x.id===q).content.en.answer='Food passes through ingestion, digestion and absorption, followed by transport and assimilation.'
  const after=audit(changed)
- assert.equal(after.totals.rubricOnlyLongAnswers,164)
+ assert.equal(after.totals.rubricOnlyLongAnswers,165)
  assert.equal(after.reviewCandidates.some(x=>x.questionId===q),false)
  assert.equal(before.reviewCandidates.some(x=>x.questionId===q),true)
  assert.equal(after.totals.approved,0)
@@ -85,4 +85,16 @@ test('audit file order does not change question ID hashes or original file-attri
  assert.deepEqual(a.totals,b.totals)
  assert.deepEqual(a.reviewCandidates,b.reviewCandidates)
  assert.deepEqual(a.byFile,b.byFile)
+})
+
+test('original Computer IX Possible marks rubric is newly caught without classifying explanatory text as rubric-only',()=>{
+ const d=audit(documents)
+ const flagged=d.reviewCandidates.find(x=>x.questionId==='IX-COMP-U05-L01')
+ assert.ok(flagged)
+ assert.equal(flagged.sourceFile,'computer9Starter2026.json')
+ assert.equal(d.byFile.find(x=>x.sourceFile==='computer9Starter2026.json').rubricOnlyLongAnswers,12)
+ assert.equal(rubricOnlyLongAnswer('long','Possible marks: interface, processes, memory'),true)
+ assert.equal(rubricOnlyLongAnswer('long','Suggested marks: three accurate ideas'),true)
+ assert.equal(rubricOnlyLongAnswer('long','Possible marks are not the same as explanatory scientific content.'),false)
+ assert.equal(rubricOnlyLongAnswer('short','Possible marks: any three.'),false)
 })

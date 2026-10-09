@@ -1,0 +1,116 @@
+'use strict'
+const test=require('node:test'),assert=require('node:assert/strict')
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto')
+const {build,markdown,ANSWERS,ORIGINAL_SHA}=require('../qbank/author-computer9-twelve-long-answers.cjs')
+const {revision}=require('../qbank/refresh-grade910-rubric-phrase-evidence.cjs')
+const {rubricOnlyLongAnswer}=require('../../al-siddique-backend/src/services/grade910ModelAnswerPolicy')
+const ROOT=path.resolve(__dirname,'../..')
+const P=path.join(ROOT,'al-siddique-frontend/src/Modules/Paper-Generator/seed-data/grade9-10-staging')
+const originalBytes=fs.readFileSync(path.join(P,'computer9Starter2026.json'))
+const source=JSON.parse(originalBytes)
+const registry=JSON.parse(fs.readFileSync(path.join(ROOT,'al-siddique-backend/src/data/verifiedGrade910SourceRegistry.json')))
+const old=JSON.parse(fs.readFileSync(path.join(ROOT,'docs/question-bank/ASSPS_GRADE910_RUBRIC_ONLY_MODEL_ANSWER_REVIEW_20261009.json')))
+const files=fs.readdirSync(P).filter(f=>f.endsWith('.json')).sort().map(filename=>{
+ const bytes=fs.readFileSync(path.join(P,filename))
+ return {filename,bytes,data:JSON.parse(bytes)}
+})
+const sha=b=>crypto.createHash('sha256').update(b).digest('hex')
+const run=(bytes=originalBytes,data=source,reg=registry)=>build({bytes,source:data,registry:reg})
+test('original 60-question Computer IX file yields 12/12 separate explanatory draft answers and 60 marking points',()=>{
+ const d=run()
+ assert.equal(sha(originalBytes),ORIGINAL_SHA)
+ assert.equal(d.originalCandidateQuestionCount,60)
+ assert.equal(d.originalRubricOnlyLongQuestionCount,12)
+ assert.equal(d.newSeparateExplanatoryAnswerProposals,12)
+ assert.equal(d.newSeparateMarkingCriterionProposals,60)
+ assert.equal(d.academicApprovalCount,0)
+ assert.deepEqual(d.items.map(x=>x.questionId),source.drafts.filter(x=>x.type==='long').map(x=>x.id))
+ assert.equal(Object.keys(ANSWERS).length,12)
+})
+test('all 12 proposed answers are substantive and bound to unmodified stable source ID/revision hashes',()=>{
+ const d=run(),qmap=new Map(source.drafts.map(x=>[x.id,x]))
+ for(const x of d.items){
+  const q=qmap.get(x.questionId)
+  assert.ok(q)
+  assert.equal(x.originalQuestionSha256,sha(JSON.stringify(q)))
+  assert.equal(x.originalAnswerSha256,sha(q.content.en.answer))
+  assert.equal(x.originalSourceFileSha256,ORIGINAL_SHA)
+  assert.equal(x.chapterNo,q.chapter.number)
+  assert.equal(x.topicId,q.topicId)
+  assert.equal(x.marks,5)
+  assert.ok(x.proposedOriginalEnglishExplanatoryAnswer.length>=230)
+  assert.notEqual(x.proposedOriginalEnglishExplanatoryAnswer,q.content.en.answer)
+  assert.equal(rubricOnlyLongAnswer('long',x.proposedOriginalEnglishExplanatoryAnswer),false)
+  assert.equal(x.proposedSeparateMarkingCriteria.length,5)
+  assert.equal(new Set(x.proposedSeparateMarkingCriteria).size,5)
+  assert.equal(x.originalAnswerUnmodified,true)
+  assert.equal(x.subjectTeacherCorrectnessVerified,false)
+  assert.equal(x.schoolTextbookEditionAndPageVerified,false)
+  assert.equal(x.englishUrduEquivalenceVerified,false)
+  assert.equal(x.independentReviewerId,null)
+  assert.equal(x.approvedRevisionId,null)
+  assert.equal(x.academicApproved,false)
+  assert.equal(x.published,false)
+ }
+})
+test('specific Computer IX explanation examples are intelligible and distinguish hexadecimal, logic and privacy',()=>{
+ const m=new Map(run().items.map(x=>[x.questionId,x.proposedOriginalEnglishExplanatoryAnswer]))
+ assert.match(m.get('IX-COMP-U02-L01'),/1010 represents 8 \+ 2/i)
+ assert.match(m.get('IX-COMP-U03-L01'),/truth table/i)
+ assert.match(m.get('IX-COMP-U05-L01'),/File-system management/i)
+ assert.match(m.get('IX-COMP-U09-L01'),/voluntary survey/i)
+ assert.match(m.get('IX-COMP-U10-L01'),/Internet of Things/i)
+})
+test('changes to flagged original Computer IX question or unrelated MCQ invalidate immutable source',()=>{
+ for(const id of ['IX-COMP-U05-L01','IX-COMP-U01-M01']){
+  const s=structuredClone(source),q=s.drafts.find(z=>z.id===id)
+  assert.ok(q)
+  q.content.en.answer='Altered unapproved original data'
+  assert.throws(()=>run(Buffer.from(JSON.stringify(s)),s),/COMP9_ORIGINAL_FILE_SHA_CHANGED/)
+ }
+})
+test('forged in-memory source cannot inherit stale review packet when original byte hash matches',()=>{
+ const s=structuredClone(source)
+ s.drafts[0].content.en.answer='Changed without original file byte changes'
+ assert.throws(()=>run(originalBytes,s),/COMP9_ORIGINAL_FILE_SHA_CHANGED/)
+})
+test('missing and altered registry source PDF claims fail closed',()=>{
+ const r=structuredClone(registry),entry=r.entries.find(z=>z.recordId===source.sourceRecordId)
+ entry.pdfSha256='0'.repeat(64)
+ assert.throws(()=>run(originalBytes,source,r),/COMP9_SOURCE_CATALOG_IDENTITY_CHANGED/)
+ const r2=structuredClone(registry)
+ r2.entries=r2.entries.filter(z=>z.recordId!==source.sourceRecordId)
+ assert.throws(()=>run(originalBytes,source,r2),/COMP9_SOURCE_CATALOG_IDENTITY_CHANGED/)
+})
+test('revised full corpus research evidence adds exactly one Computer IX ID without dropping any old finding',()=>{
+ const d=revision({documents:files,prior:old})
+ assert.equal(d.totals.originalAuthoredCandidates,2581)
+ assert.equal(d.totals.longQuestions,564)
+ assert.equal(d.totals.rubricOnlyLongAnswers,166)
+ assert.equal(d.totals.longAnswersNotFlaggedByEnglishRubricHeuristic,398)
+ assert.deepEqual(d.newlyDiscoveredOriginalQuestionIds,['IX-COMP-U05-L01'])
+ assert.equal(d.totals.approved,0)
+ assert.equal(d.totals.publishedVerified,0)
+})
+test('incorrect prior or missing Computer IX data cannot silently become revised faculty evidence',()=>{
+ const bad=structuredClone(old);bad.totals.rubricOnlyLongAnswers=164
+ assert.throws(()=>revision({documents:files,prior:bad}),/GRADE910_RUBRIC_REVISION_BASELINE_MISMATCH/)
+ const modified=files.map(x=>x.filename==='computer9Starter2026.json'?{...x,data:structuredClone(x.data)}:x)
+ modified.find(x=>x.filename==='computer9Starter2026.json').data.drafts.find(q=>q.id==='IX-COMP-U05-L01').content.en.answer='A genuine explanation, not marking criteria.'
+ assert.throws(()=>revision({documents:modified,prior:old}),/GRADE910_RUBRIC_REVISION_BASELINE_MISMATCH|GRADE910_RUBRIC_UNEXPECTED_NEW_FINDING/)
+})
+test('teacher-facing content and audit both explicitly retain approval and deployment HOLD',()=>{
+ const d=run(),md=markdown(d)
+ assert.match(md,/twelve independently authored long-answer drafts/)
+ assert.match(md,/Academic.*approved: 0/i)
+ assert.match(md,/verified picker empty/)
+ assert.ok(d.items.every(x=>x.status==='INDEPENDENT_AUTHORING_DRAFT_FOR_COMPUTER_IX_TEACHER_REVIEW' && !x.published))
+})
+
+test('octal system is explicitly base EIGHT and binary 1010 equals octal 12, not a base-12 system',()=>{
+ const q=run().items.find(x=>x.questionId==='IX-COMP-U02-L01')
+ assert.match(q.proposedOriginalEnglishExplanatoryAnswer,/Octal uses base eight/i)
+ assert.doesNotMatch(q.proposedOriginalEnglishExplanatoryAnswer,/Octal uses base twelve/i)
+ assert.match(q.proposedOriginalEnglishExplanatoryAnswer,/1010 represents 8 \+ 2/)
+ assert.match(q.proposedOriginalEnglishExplanatoryAnswer,/12 in octal/)
+})
