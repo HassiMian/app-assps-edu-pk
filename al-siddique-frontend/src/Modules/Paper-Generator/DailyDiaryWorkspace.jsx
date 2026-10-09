@@ -1,5 +1,5 @@
 import { currentSchoolDate } from './schoolCalendarDate.js'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { BookOpen, Check, ChevronDown, FileText, Minus, Palette, Plus, Printer, RefreshCw, Save, Search, Sparkles, Users, WandSparkles, X } from 'lucide-react'
 import api, { resolveAssetUrl } from '../../services/api'
 import { useAcademicStore } from '../../services/useAcademicStore'
@@ -120,7 +120,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   const [rosterStatus,setRosterStatus]=useState('')
   const [search,setSearch]=useState('')
   const [saving,setSaving]=useState(false)
-  const [savedDiaryIdentity,setSavedDiaryIdentity]=useState(null)
+  const savedDiaryIdentities=useRef(new Map())
   const [status,setStatus]=useState('')
   const [previewZoom,setPreviewZoom]=useState(.68)
   const [lessonPlans,setLessonPlans]=useState([])
@@ -180,7 +180,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   const arrangeLessonPaste=async()=>{if(!lessonPaste.trim())return;setBusy('parse');try{const parsed=await parseLessonPlanningText(lessonPaste,subjectOptions);const next=mergeParsedPlanningText({...lessonDoc,classLevel,section,startDate:date,endDate:date,planningType:'daily'},parsed);setLessonDoc(next);setLessonPaste('');setStatus(parsed.unclassified?.length?'Lesson plan arranged; review preserved unclassified lines.':'Whole-day lesson text arranged by subject.')}catch(error){setStatus(error?.response?.data?.message||'Could not arrange lesson plan text.')}finally{setBusy('')}}
   const saveLessonPlan=async()=>{setBusy('lesson-save');try{const payload=toLessonPlanPersistencePayload({...lessonDoc,classLevel,section,startDate:date,endDate:date,planningType:'daily'});const saved=lessonDoc.id?await updateLessonPlan(payload):await createLessonPlan(payload);const doc=normalizeLessonPlanDocument(saved);setLessonDoc(doc);setLessonPlanId(doc.id||'');setLessonPlans(current=>{const filtered=current.filter(item=>item.id!==saved.id);return [saved,...filtered]});setStatus('Lesson plan saved safely.')}catch(error){setStatus(error?.response?.data?.message||'Lesson plan save failed. Local workspace remains intact.')}finally{setBusy('')}}
 
-  const saveDiary=async()=>{setSaving(true);try{const payload={template_id:paletteId,school_name:schoolName,tagline:'',logo_url:logoUrl,class_level:classLevel,class_name:classLabel,diary_date:date,slips_per_page:cardsPerPage,footer_text:footerText,footer_is_urdu:/[\u0600-\u06ff]/.test(footerText),rows,style_settings:{workspaceVersion:2,section,paletteId,mode:'diary'}};const scopeKey=JSON.stringify([classLevel,section,date]);const updateId=savedDiaryIdentity?.scopeKey===scopeKey?savedDiaryIdentity.id:null;const response=updateId?await api.put(`/api/daily-diary/${updateId}`,payload):await api.post('/api/daily-diary',payload);const saved=response.data?.data||response.data;if(saved?.id)setSavedDiaryIdentity({id:saved.id,scopeKey});setStatus('Daily diary saved safely.')}catch(error){setStatus(error?.response?.data?.message||'Daily diary save failed. Local recovery draft remains available.')}finally{setSaving(false)}}
+  const saveDiary=async()=>{setSaving(true);try{const payload={template_id:paletteId,school_name:schoolName,tagline:'',logo_url:logoUrl,class_level:classLevel,class_name:classLabel,diary_date:date,slips_per_page:cardsPerPage,footer_text:footerText,footer_is_urdu:/[\u0600-\u06ff]/.test(footerText),rows,style_settings:{workspaceVersion:2,section,paletteId,mode:'diary'}};const scopeKey=JSON.stringify([classLevel,section,date]);const updateId=savedDiaryIdentities.current.get(scopeKey)||null;const response=updateId?await api.put(`/api/daily-diary/${updateId}`,payload):await api.post('/api/daily-diary',payload);const saved=response.data?.data||response.data;if(saved?.id)savedDiaryIdentities.current.set(scopeKey,saved.id);setStatus('Daily diary saved safely.')}catch(error){setStatus(error?.response?.data?.message||'Daily diary save failed. Local recovery draft remains available.')}finally{setSaving(false)}}
   const toggleStudent=id=>setSelectedStudentIds(current=>current.includes(id)?current.filter(value=>value!==id):[...current,id])
   const selectAll=()=>setSelectedStudentIds(students.map(studentId))
   const clearStudents=()=>setSelectedStudentIds([])
