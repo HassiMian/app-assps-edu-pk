@@ -17,7 +17,7 @@ const legacy={id:'ORIG-IX-01',school_id:SCHOOL,class_level:'9th',subject:'biolog
  medium:'english',chapter_no:'1',question_type:'short',question_text:question.questionText,
  question_text_urdu:'',options:[],correct_option:'',answer:question.answer,
  explanation:'',marks:2,is_approved:false,is_duplicate:false,metadata:{},created_by:REVIEWER}
-function fakeDatabase(sourceCreator,{sourceMissing=false,signedCreator=REVIEWER,signedAt='2026-10-09T00:00:00Z',linkedOverrides={},revisionOverrides={}}={}){
+function fakeDatabase(sourceCreator,{sourceMissing=false,signedCreator=REVIEWER,signedAt='2026-10-09T00:00:00Z',linkedOverrides={},revisionOverrides={},reviewerActive=true,reviewerRole='principal',reviewerMissing=false}={}){
  const queries=[]
  const master={id:3,public_id:'QB-1',current_revision:2,lifecycle_status:'reviewed',
   created_by:101,source_question_bank_id:legacy.id}
@@ -27,7 +27,7 @@ function fakeDatabase(sourceCreator,{sourceMissing=false,signedCreator=REVIEWER,
   metadata:{currentRevision:2,contentHash,reviewerUserId:REVIEWER,schoolId:SCHOOL,sourceEvidence:{}}}
  const client={async query(sql){
   queries.push(sql)
-  if(sql.includes('FROM users'))return{rowCount:1,rows:[{id:REVIEWER,role:'principal'}]}
+  if(sql.includes('FROM users'))return reviewerMissing?{rowCount:0,rows:[]}:{rowCount:1,rows:[{id:REVIEWER,role:reviewerRole,is_active:reviewerActive}]}
   if(sql.includes('FROM question_masters'))return{rowCount:1,rows:[master]}
   if(sql.includes('FROM question_revisions'))return{rowCount:1,rows:[revision]}
   if(sql.includes('FROM question_bank'))return sourceMissing?{rowCount:0,rows:[]}:{rowCount:1,rows:[linked]}
@@ -264,4 +264,52 @@ test('valid Urdu-only question with independent reviewable answer and positive m
  })
  assert.equal(replay.replayed,true)
  assert.equal(replay.questionBankApproved,false)
+})
+
+
+test('disabled reviewer cannot record or replay academic review even if principal role is retained',async()=>{
+ const {client,queries}=fakeDatabase(105,{reviewerActive:false})
+ await assert.rejects(loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+  schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
+  expectedRevision:2,expectedContentHash:contentHash,evidence:{}
+ }),{code:'REVIEWER_NOT_AUTHORIZED_FOR_TENANT'})
+ assert.equal(queries.some(sql=>sql.includes('INSERT INTO question_mappings')),false)
+})
+test('publication rejects academic signature of deactivated reviewer at latest tenant-scoped status',async()=>{
+ const {client,master,queries}=fakeDatabase(105,{reviewerActive:false})
+ await assert.rejects(loadApprovalGate()(client,{schoolId:SCHOOL,master,actorId:104}),
+  {code:'ACADEMIC_REVIEWER_NO_LONGER_AUTHORIZED'})
+ assert.ok(queries.some(sql=>sql.includes('FROM users')&&sql.includes('is_active')))
+})
+test('publication rejects old reviewed mapping after reviewer role downgrade',async()=>{
+ const {client,master}=fakeDatabase(105,{reviewerRole:'teacher'})
+ await assert.rejects(loadApprovalGate()(client,{schoolId:SCHOOL,master,actorId:104}),
+  {code:'ACADEMIC_REVIEWER_NO_LONGER_AUTHORIZED'})
+})
+test('publication rejects reviewer whose user no longer belongs to this tenant',async()=>{
+ const {client,master}=fakeDatabase(105,{reviewerMissing:true})
+ await assert.rejects(loadApprovalGate()(client,{schoolId:SCHOOL,master,actorId:104}),
+  {code:'ACADEMIC_REVIEWER_NO_LONGER_AUTHORIZED'})
+})
+test('authorized active principal may proceed to mandatory source-evidence checks without automatic approval',async()=>{
+ const {client,master,queries}=fakeDatabase(105,{reviewerActive:true,reviewerRole:'principal'})
+ await assert.rejects(loadApprovalGate()(client,{schoolId:SCHOOL,master,actorId:104}),
+  error=>error?.code!=='ACADEMIC_REVIEWER_NO_LONGER_AUTHORIZED')
+ assert.ok(queries.some(sql=>sql.includes('FROM users')&&sql.includes('school_id=$2')))
+})
+
+test('deactivated principal is denied academic review-context details before question lookup',async()=>{
+ const {client,queries}=fakeDatabase(105,{reviewerActive:false})
+ await assert.rejects(loadReviewService(client).getAcademicReviewContext({
+  schoolId:SCHOOL,requesterId:REVIEWER,publicId:'QB-1'
+ }),{code:'REVIEW_SCOPE_DENIED'})
+ assert.equal(queries.some(sql=>sql.includes('FROM question_masters')),false)
+})
+test('active principal can obtain limited review context but never an academic approval',async()=>{
+ const {client}=fakeDatabase(105,{reviewerActive:true})
+ const response=await loadReviewService(client).getAcademicReviewContext({
+  schoolId:SCHOOL,requesterId:REVIEWER,publicId:'QB-1'
+ })
+ assert.equal(response.academicApprovalGranted,false)
+ assert.equal(response.schoolId,SCHOOL)
 })

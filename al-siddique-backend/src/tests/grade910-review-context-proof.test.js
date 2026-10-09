@@ -6,7 +6,7 @@ let fakeMaster
 const fakeWithTenant=async(schoolId,callback)=>{
  assert.equal(Number(schoolId),1)
  const client={query:async sql=>{
-  if(sql.includes('FROM users'))return {rowCount:1,rows:[{id:42,role:'principal'}]}
+  if(sql.includes('FROM users'))return {rowCount:1,rows:[{id:42,role:'principal',is_active:true}]}
   if(sql.includes('FROM question_masters'))return {rowCount:1,rows:[fakeMaster]}
   throw Error('Unexpected DB query from review-context')
  }}

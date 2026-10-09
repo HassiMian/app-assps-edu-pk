@@ -214,6 +214,16 @@ async function assertIndependentReviewReady(client,{schoolId,master,actorId}){
      !Number.isInteger(Number(master.created_by))||Number(master.created_by)===reviewer)
     throw error('REVIEW_INDEPENDENCE_REQUIRED','An identified independent academic reviewer, different from author and releaser, is mandatory.')
   assertGrade910ReviewSignature(signed,reviewer)
+  // Saved review mappings are not permanent authorization: independently
+  // recheck the signing user's CURRENT school, active status and allowed role.
+  const activeReviewer=await client.query(
+    'SELECT id,role,is_active FROM users WHERE id=$1 AND school_id=$2 FOR SHARE',
+    [reviewer,schoolId]
+  )
+  if(activeReviewer.rowCount!==1||activeReviewer.rows[0].is_active!==true||
+     !['admin','principal','super_admin'].includes(activeReviewer.rows[0].role))
+    throw error('ACADEMIC_REVIEWER_NO_LONGER_AUTHORIZED',
+      'The independent academic reviewer must remain active and authorized in this school.',403)
   // Release must independently recheck who created the linked original, not just
   // the governed wrapper/revision author or an untrusted saved reviewer checkbox.
   const sourceCreator=Number(linked.rows[0]?.created_by)

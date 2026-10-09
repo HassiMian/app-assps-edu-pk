@@ -13,10 +13,11 @@ async function recordIndependentAcademicReview({
   const mappingKey=reviewMappingKey(version,pinned)
   return withTenantTransaction(schoolId,async(client,tenantId)=>{
     const user=await client.query(
-      'SELECT id,role FROM users WHERE id=$1 AND school_id=$2',
+      'SELECT id,role,is_active FROM users WHERE id=$1 AND school_id=$2 FOR SHARE',
       [reviewerId,tenantId]
     )
-    if(user.rowCount!==1||!['admin','principal','super_admin'].includes(user.rows[0].role))
+    if(user.rowCount!==1||user.rows[0].is_active!==true||
+       !['admin','principal','super_admin'].includes(user.rows[0].role))
       throw error('REVIEWER_NOT_AUTHORIZED_FOR_TENANT','An authorized reviewer in this school is required.',403)
     const masters=await client.query(
       "SELECT id,public_id,current_revision,lifecycle_status,created_by,source_question_bank_id FROM question_masters WHERE school_id=$1 AND public_id=$2 FOR UPDATE",
@@ -107,9 +108,10 @@ async function getAcademicReviewContext({schoolId,requesterId,publicId}={}){
   if(!Number.isSafeInteger(Number(requesterId))||Number(requesterId)<1)
     throw error('AUTHENTICATED_REVIEWER_REQUIRED','Requester identity is required.',403)
   return withTenantTransaction(schoolId,async(client,tenantId)=>{
-    const user=await client.query('SELECT id,role FROM users WHERE id=$1 AND school_id=$2',
+    const user=await client.query('SELECT id,role,is_active FROM users WHERE id=$1 AND school_id=$2',
       [requesterId,tenantId])
-    if(user.rowCount!==1||!['admin','principal','super_admin'].includes(user.rows[0].role))
+    if(user.rowCount!==1||user.rows[0].is_active!==true||
+       !['admin','principal','super_admin'].includes(user.rows[0].role))
       throw error('REVIEW_SCOPE_DENIED','User is not authorized for this school.',403)
     const rows=await client.query(`SELECT qm.public_id,qm.lifecycle_status,qm.current_revision,
              qm.created_by AS author_id,qm.source_question_bank_id,
