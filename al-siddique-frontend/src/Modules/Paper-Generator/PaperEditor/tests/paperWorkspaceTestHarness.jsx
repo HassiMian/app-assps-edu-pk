@@ -179,6 +179,34 @@ const matchingColumnOverflowPaper = {
  }],
 }
 
+// Synthetic Early Years sentence/pair exercise stress fixtures. No original papers edited.
+const earlySentenceOverflowPaper = {
+ id:'synthetic-early-sentence-20261009',name:'Urdu Sentence Table Print Test',documentFormat:'pts-native-v13',printReadiness:'READY',
+ config:{className:'3',classLevel:'3',subject:'Urdu',subjectName:'Urdu',language:'urdu',paperCode:'EARLY-SENTENCES',timeAllowed:'40 Minutes',totalMarks:4,title:'Synthetic Sentence Practice'},
+ official_section:[{id:'early-sentence',type:'official_section',sourceOrder:1,medium:'urdu',layoutPreset:'sentence_usage',
+ heading:'سوال نمبر 1: الفاظ کے جملے بنائیں۔ (4)',marks:4,
+ tableHeaders:['الفاظ '+('ب'.repeat(125)), 'Long English column '+('UNBROKENMEASUREWORD'.repeat(26))],
+ content:[
+ '1. '+('ط'.repeat(225))+' [SENTENCE-CELL-01]',
+ '2. '+('LONGENGLISHSCIENCETERM'.repeat(31))+' [SENTENCE-CELL-02]',
+ '3. بادل [SENTENCE-CELL-03]',
+ '4. Sunshine [SENTENCE-CELL-04]',
+ ].join('\n')}],
+}
+const earlyPairOverflowPaper = {
+ id:'synthetic-early-pair-20261009',name:'Urdu Pair Practice Table Print Test',documentFormat:'pts-native-v13',printReadiness:'READY',
+ config:{className:'4',classLevel:'4',subject:'English',subjectName:'English',language:'urdu',paperCode:'EARLY-PAIR',timeAllowed:'40 Minutes',totalMarks:4,title:'Synthetic Pair Practice'},
+ official_section:[{id:'early-pair',type:'official_section',sourceOrder:1,medium:'urdu',layoutPreset:'pair_table',
+ heading:'سوال نمبر 1: جوڑوں کے جواب لکھیں۔ (4)',marks:4,
+ tableHeaders:['لفظ '+('ب'.repeat(125)), 'Long English column '+('UNBROKENMEASUREWORD'.repeat(26))],
+ content:[
+ '1. '+('ط'.repeat(225))+' [PAIR-CELL-01]',
+ '2. '+('LONGENGLISHSCIENCETERM'.repeat(31))+' [PAIR-CELL-02]',
+ '3. بادل [PAIR-CELL-03]',
+ '4. Sunshine [PAIR-CELL-04]',
+ ].join('\n')}],
+}
+
 const nestedScoringPaper = {
  clientDraftId:'nested-scoring-browser-paper',
  name:'Nested Scoring Browser Paper',
@@ -263,7 +291,7 @@ function ThemeFixture() {
  const reopenPaper = savedPapers.find(p => p.userAuthored && (reopenId ? String(p.id)===reopenId : p.name===reopenName)) || null
  const officialId = params.get('officialId') || ''
  const officialPaper = officialId ? officialV13.papers.find(item => item.id === officialId) || null : null
- const fixture = params.has('new') ? null : params.has('reopen') ? reopenPaper : params.has('matchingColumnOverflow') ? matchingColumnOverflowPaper : params.has('sourceTableOverflow') ? sourceTableOverflowPaper : params.has('bilingualMatrixOverflow') ? bilingualMatrixOverflowPaper : params.has('bilingualTableOverflow') ? bilingualTableOverflowPaper : params.has('rtlOddOverflow') ? rtlOddOverflowPaper : params.has('nestedScoring') ? nestedScoringPaper : params.has('mathAssets') ? mathAssetsPaper : officialPaper || (params.has('recovery8') ? classEightUrduFixture : paper)
+ const fixture = params.has('new') ? null : params.has('reopen') ? reopenPaper : params.has('earlySentenceOverflow') ? earlySentenceOverflowPaper : params.has('earlyPairOverflow') ? earlyPairOverflowPaper : params.has('matchingColumnOverflow') ? matchingColumnOverflowPaper : params.has('sourceTableOverflow') ? sourceTableOverflowPaper : params.has('bilingualMatrixOverflow') ? bilingualMatrixOverflowPaper : params.has('bilingualTableOverflow') ? bilingualTableOverflowPaper : params.has('rtlOddOverflow') ? rtlOddOverflowPaper : params.has('nestedScoring') ? nestedScoringPaper : params.has('mathAssets') ? mathAssetsPaper : officialPaper || (params.has('recovery8') ? classEightUrduFixture : paper)
  React.useEffect(() => { setTheme('light') }, [setTheme])
  return <>
   <button hidden id="fixture-global-theme-toggle" data-current-theme={theme} onClick={toggleTheme}>Portal theme toggle</button>
