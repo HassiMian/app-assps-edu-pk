@@ -12,9 +12,10 @@ const GATE=path.join(ROOT,'services/grade910AcademicReviewGate.js')
 const REVIEWER=103, SCHOOL=1
 const contentHash='a'.repeat(64)
 const question={classLevel:'9th',subject:'biology',medium:'english',chapterNo:'1',
+ board:'punjab board',chapterName:'biological introduction',topicName:'cellular energy',
  questionType:'short',questionText:'Why do organisms require energy?',answer:'Energy supports biological processes.',marks:2}
 const legacy={id:'ORIG-IX-01',school_id:SCHOOL,class_level:'9th',subject:'biology',
- medium:'english',chapter_no:'1',question_type:'short',question_text:question.questionText,
+ medium:'english',board:'Punjab Board',chapter_no:'1',chapter_name:'Biological Introduction',topic_name:'Cellular Energy',question_type:'short',question_text:question.questionText,
  question_text_urdu:'',options:[],correct_option:'',answer:question.answer,
  explanation:'',marks:2,is_approved:false,is_duplicate:false,metadata:{},created_by:REVIEWER}
 function fakeDatabase(sourceCreator,{sourceMissing=false,signedCreator=REVIEWER,signedAt='2026-10-09T00:00:00Z',linkedOverrides={},revisionOverrides={},reviewerActive=true,reviewerRole='principal',reviewerMissing=false}={}){
@@ -312,4 +313,64 @@ test('active principal can obtain limited review context but never an academic a
  })
  assert.equal(response.academicApprovalGranted,false)
  assert.equal(response.schoolId,SCHOOL)
+})
+
+
+test('review signing rejects changed curriculum topic despite matching original chapter and question answer',async()=>{
+ const {client,queries}=fakeDatabase(105,{linkedOverrides:{topic_name:'Unrelated plant topic'}})
+ await assert.rejects(loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+  schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',expectedRevision:2,
+  expectedContentHash:contentHash,evidence:{}
+ }),{code:'ACADEMIC_CURRICULUM_TOPIC_DRIFT'})
+ assert.equal(queries.some(sql=>sql.includes('INSERT INTO question_mappings')),false)
+})
+test('independent review rejects mismatched textbook chapter title and examination board',async()=>{
+ for(const linkedOverrides of [{chapter_name:'Unrelated chapter title'},{board:'Other examination board'}]){
+  const {client}=fakeDatabase(105,{linkedOverrides})
+  await assert.rejects(loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+   schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
+   expectedRevision:2,expectedContentHash:contentHash,evidence:{}
+  }),{code:'ACADEMIC_CURRICULUM_TOPIC_DRIFT'})
+ }
+})
+test('independent review rejects missing original topic/chapter/board provenance and unchanged empty pairs',async()=>{
+ for(const linkedOverrides of [{topic_name:null},{chapter_name:''},{board:null}]){
+  const {client}=fakeDatabase(105,{linkedOverrides})
+  await assert.rejects(loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+   schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
+   expectedRevision:2,expectedContentHash:contentHash,evidence:{}
+  }),{code:'ACADEMIC_CURRICULUM_TOPIC_DRIFT'})
+ }
+ const {client}=fakeDatabase(105,{linkedOverrides:{topic_name:null},revisionOverrides:{topicName:''}})
+ await assert.rejects(loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+  schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
+  expectedRevision:2,expectedContentHash:contentHash,evidence:{}
+ }),{code:'ACADEMIC_CURRICULUM_TOPIC_DRIFT'})
+})
+test('publisher rechecks original board chapter title and topic after a saved review is signed',async()=>{
+ for(const linkedOverrides of [{topic_name:'Different topic'},{chapter_name:'Other chapter'},{board:'Other Board'},{topic_name:null}]){
+  const {client,master}=fakeDatabase(105,{linkedOverrides})
+  await assert.rejects(loadApprovalGate()(client,{schoolId:SCHOOL,master,actorId:104}),
+   {code:'ACADEMIC_CURRICULUM_TOPIC_DRIFT'})
+ }
+})
+test('exact matching mapped board/chapter title/topic permits other mandatory publication proof checks',async()=>{
+ const {client,master,queries}=fakeDatabase(105)
+ await assert.rejects(loadApprovalGate()(client,{schoolId:SCHOOL,master,actorId:104}),
+  e=>e.code!=='ACADEMIC_CURRICULUM_TOPIC_DRIFT')
+ assert.ok(queries.some(sql=>sql.includes('FROM question_bank')&&sql.includes('topic_name')&&sql.includes('chapter_name')&&sql.includes('board')))
+})
+
+test('case, Unicode and whitespace-equivalent verified mapping labels do not cause false source drift',async()=>{
+ const {client,queries}=fakeDatabase(105,{linkedOverrides:{
+  board:' PUNJAB   BOARD ',chapter_name:'BIOLOGICAL  INTRODUCTION',
+  topic_name:' Cellular    Energy ',
+ }})
+ const replay=await loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+  schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
+  expectedRevision:2,expectedContentHash:contentHash,evidence:{}
+ })
+ assert.equal(replay.replayed,true)
+ assert.equal(replay.questionBankApproved,false)
+ assert.ok(queries.some(sql=>sql.includes('FROM question_bank')&&sql.includes('board')&&sql.includes('topic_name')))
 })

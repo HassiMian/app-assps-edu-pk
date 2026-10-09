@@ -181,6 +181,26 @@ function requireUnflaggedGrade910Source(source){
   return true
 }
 
+// Revision hashes alone do not prove that the original school Question Bank
+// row is filed under the same adopted board, textbook chapter and topic.
+// Unattributed topic/chapter metadata is not human-verified curriculum mapping.
+function requireGrade910CurriculumMapping(source,revision){
+  const normalized=value=>String(value??'').normalize('NFKC').trim().replace(/\s+/g,' ').toLowerCase()
+  const fields=[
+    ['board','board'],
+    ['chapter_name','chapterName'],
+    ['topic_name','topicName'],
+  ]
+  const drift=fields.filter(([legacy,governed])=>{
+    const a=normalized(source?.[legacy]),b=normalized(revision?.[governed])
+    return !a||!b||a!==b
+  }).map(([legacy])=>legacy)
+  if(drift.length)
+    throw error('ACADEMIC_CURRICULUM_TOPIC_DRIFT',
+      'Original school board, textbook chapter and topic must match the reviewed revision: '+drift.join(','),409)
+  return true
+}
+
 async function assertIndependentReviewReady(client,{schoolId,master,actorId}){
   const latest=await client.query(
     'SELECT revision_number,content_hash,content_json,created_by FROM question_revisions WHERE school_id=$1 AND question_master_id=$2 AND revision_number=$3',
@@ -190,7 +210,7 @@ async function assertIndependentReviewReady(client,{schoolId,master,actorId}){
   const rev=latest.rows[0],grade=normalizeGrade(rev.content_json?.classLevel)
   const linked=master.source_question_bank_id
     ? await client.query(
-      'SELECT id,school_id,class_level,subject,medium,chapter_no,question_type,question_text,question_text_urdu,options,correct_option,answer,explanation,marks,is_approved,is_duplicate,metadata,created_by FROM question_bank WHERE school_id=$1 AND id=$2 FOR UPDATE',
+      'SELECT id,school_id,class_level,subject,medium,chapter_no,question_type,question_text,question_text_urdu,options,correct_option,answer,explanation,marks,is_approved,is_duplicate,metadata,created_by,board,chapter_name,topic_name FROM question_bank WHERE school_id=$1 AND id=$2 FOR UPDATE',
       [schoolId,master.source_question_bank_id])
     : {rowCount:0,rows:[]}
   const sourceGrade=linked.rowCount===1?normalizeGrade(linked.rows[0].class_level):null
@@ -198,6 +218,7 @@ async function assertIndependentReviewReady(client,{schoolId,master,actorId}){
   if(grade!==sourceGrade)
     throw error('ACADEMIC_GRADE_MISMATCH','Governed revision and linked Question Bank grade disagree.')
   requireUnflaggedGrade910Source(linked.rows[0])
+  requireGrade910CurriculumMapping(linked.rows[0],rev.content_json)
 
   const hash=String(rev.content_hash||'').trim().toLowerCase()
   const key=reviewMappingKey(Number(rev.revision_number),hash)
@@ -263,5 +284,6 @@ module.exports.grade910McqIntegrityIssues=grade910McqIntegrityIssues
 module.exports.requireGrade910McqIntegrity=requireGrade910McqIntegrity
 module.exports.assertGrade910ReviewSignature=assertGrade910ReviewSignature
 module.exports.requireUnflaggedGrade910Source=requireUnflaggedGrade910Source
+module.exports.requireGrade910CurriculumMapping=requireGrade910CurriculumMapping
 module.exports.grade910MinimumQuestionIntegrityIssues=grade910MinimumQuestionIntegrityIssues
 module.exports.requireGrade910MinimumQuestionIntegrity=requireGrade910MinimumQuestionIntegrity
