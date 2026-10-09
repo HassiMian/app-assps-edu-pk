@@ -1,0 +1,88 @@
+'use strict'
+const test=require('node:test')
+const assert=require('node:assert/strict')
+const fs=require('node:fs')
+const path=require('node:path')
+const {audit,markdown}=require('../qbank/audit-grade910-model-answer-readiness.cjs')
+const {rubricOnlyLongAnswer}=require('../../al-siddique-backend/src/services/grade910ModelAnswerPolicy')
+const INPUT=path.resolve(__dirname,'../../al-siddique-frontend/src/Modules/Paper-Generator/seed-data/grade9-10-staging')
+const documents=fs.readdirSync(INPUT).filter(f=>f.endsWith('.json')).sort().map(filename=>{
+ const bytes=fs.readFileSync(path.join(INPUT,filename))
+ return {filename,bytes,data:JSON.parse(bytes)}
+})
+test('original 2,581 candidates have 165 rubric-only long answers across 564 long questions',()=>{
+ const d=audit(documents)
+ assert.equal(d.totals.originalAuthoredCandidates,2581)
+ assert.equal(d.totals.authoredFiles,73)
+ assert.equal(d.totals.longQuestions,564)
+ assert.equal(d.totals.rubricOnlyLongAnswers,165)
+ assert.equal(d.totals.longAnswersNotFlaggedByEnglishRubricHeuristic,399)
+ assert.equal(d.totals.excludedNonQuestionEvidenceRows,58)
+ assert.equal(d.reviewCandidates.length,165)
+ assert.equal(new Set(d.reviewCandidates.map(x=>x.questionId)).size,165)
+ assert.equal(d.totals.approved,0)
+ assert.equal(d.totals.verifiedFullModelAnswers,0)
+})
+test('Grade X Biology and Chemistry review queues keep specific original IDs and authentic SHA identities',()=>{
+ const d=audit(documents)
+ const bio=d.byFile.find(x=>x.sourceFile==='biology10EnglishStarter2026.json')
+ assert.equal(bio.longQuestions,20)
+ assert.equal(bio.rubricOnlyLongAnswers,20)
+ const chem=d.byFile.find(x=>x.sourceFile==='chemistry10Starter2026.json')
+ assert.equal(chem.longQuestions,13)
+ assert.equal(chem.rubricOnlyLongAnswers,13)
+ const sample=d.reviewCandidates.find(x=>x.questionId==='X-BIO-2026-C01-B01-L01')
+ assert.ok(sample)
+ assert.equal(sample.originalQuestionType,'long')
+ assert.equal(sample.marks,5)
+ assert.match(sample.questionRevisionCandidateSha256,/^[0-9a-f]{64}$/)
+ assert.match(sample.sourceFileSha256,/^[0-9a-f]{64}$/)
+ assert.equal(sample.academicApproved,false)
+})
+test('classifier differentiates a marking command from a real explanatory answer and does not affect MCQs or shorts',()=>{
+ assert.equal(rubricOnlyLongAnswer('long','Award 1 mark each for correct answers'),true)
+ assert.equal(rubricOnlyLongAnswer('long','Award marks for five independent facts'),true)
+ assert.equal(rubricOnlyLongAnswer('long','Credit marks for accurate chemistry concepts'),true)
+ assert.equal(rubricOnlyLongAnswer('long','Marks for explaining each point'),true)
+ assert.equal(rubricOnlyLongAnswer('long','The lung alveoli exchange gases by diffusion.'),false)
+ assert.equal(rubricOnlyLongAnswer('short','Award marks for any two facts'),false)
+ assert.equal(rubricOnlyLongAnswer('mcq','Award marks for option A'),false)
+})
+test('changing a long rubric-only answer into explanatory prose produces a new SHA and a new audit count',()=>{
+ const q='X-BIO-2026-C01-B01-L01'
+ const before=audit(documents)
+ const changed=documents.map(x=>x.filename==='biology10EnglishStarter2026.json'?{
+  ...x,bytes:Buffer.from('synthetic-revision'),data:structuredClone(x.data)
+ }:x)
+ changed.find(x=>x.filename==='biology10EnglishStarter2026.json').data.drafts.find(x=>x.id===q).content.en.answer='Food passes through ingestion, digestion and absorption, followed by transport and assimilation.'
+ const after=audit(changed)
+ assert.equal(after.totals.rubricOnlyLongAnswers,164)
+ assert.equal(after.reviewCandidates.some(x=>x.questionId===q),false)
+ assert.equal(before.reviewCandidates.some(x=>x.questionId===q),true)
+ assert.equal(after.totals.approved,0)
+})
+test('duplicate stable original question ID prevents a false unique review docket',()=>{
+ const changed=documents.map(x=>x.filename==='biology10EnglishStarter2026.json'?{
+  ...x,data:structuredClone(x.data)
+ }:x)
+ const d=changed.find(x=>x.filename==='biology10EnglishStarter2026.json').data.drafts
+ d[1].id=d[0].id
+ assert.throws(()=>audit(changed),/MODEL_ANSWER_DUPLICATE_QUESTION_ID/)
+})
+test('metadata-only reports avoid copying question stems and model answer text and do not imply approval',()=>{
+ const d=audit(documents)
+ const text=JSON.stringify(d)
+ const md=markdown(d)
+ assert.ok(!text.includes('Ingestion is taking food'))
+ assert.ok(!text.includes('Award 1 mark each for ingestion'))
+ assert.ok(!md.includes('Award 1 mark each for ingestion'))
+ assert.match(md,/no model answer was invented or approved/i)
+ assert.ok(d.reviewCandidates.every(r=>r.modelAnswerReviewed===false&&r.academicApproved===false&&r.publishedVerified===false))
+})
+test('audit file order does not change question ID hashes or original file-attributed review flags',()=>{
+ const a=audit(documents)
+ const b=audit(documents.slice().reverse())
+ assert.deepEqual(a.totals,b.totals)
+ assert.deepEqual(a.reviewCandidates,b.reviewCandidates)
+ assert.deepEqual(a.byFile,b.byFile)
+})

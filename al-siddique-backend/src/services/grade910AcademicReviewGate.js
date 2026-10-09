@@ -1,5 +1,6 @@
 'use strict'
 const {sha256}=require('./questionGovernanceHash')
+const {rubricOnlyLongAnswer}=require('./grade910ModelAnswerPolicy')
 const { isDeepStrictEqual } = require('node:util')
 const SOURCE_REGISTRY = require('../data/verifiedGrade910SourceRegistry.json')
 const {requireAdoptedSource}=require('./grade910SchoolAdoptionGate')
@@ -114,6 +115,23 @@ function requireGrade910MinimumQuestionIntegrity(value){
       'Review requires a nonempty question and answer with positive integral marks: '+findings.join(','),422)
   return true
 }
+// An English marking instruction is a rubric hint, not a verified answer
+// explaining the long question. Do not sign or publish an answer field that
+// only tells teachers to award marks. The actual answer needs its own reviewed
+// revision; rubric metadata may be kept separately without becoming the answer.
+function grade910ModelAnswerIssues(value){
+  const q=canonicalComparedContent(value)
+  if(q.questionType!=='long')return []
+  return rubricOnlyLongAnswer(q.questionType,q.answer)?['RUBRIC_DIRECTIVE_WITHOUT_MODEL_ANSWER']:[]
+}
+function requireGrade910ModelAnswer(value){
+  const issues=grade910ModelAnswerIssues(value)
+  if(issues.length)
+    throw error('ACADEMIC_MODEL_ANSWER_REQUIRED',
+      'Academic long-answer signoff requires a verified explanatory answer, not grading directions alone.',422)
+  return true
+}
+
 // Structural checking cannot certify scientific correctness. It prevents
 // a self-consistent but malformed MCQ from inheriting an academic sign-off.
 const normalizedChoice = value => String(value??'').normalize('NFKC')
@@ -255,6 +273,7 @@ async function assertIndependentReviewReady(client,{schoolId,master,actorId}){
   requireUnflaggedGrade910Source(linked.rows[0])
   requireGrade910CurriculumMapping(linked.rows[0],rev.content_json)
   requireGrade910SourceClassification(linked.rows[0],rev.content_json)
+  requireGrade910ModelAnswer(rev.content_json)
 
   const hash=String(rev.content_hash||'').trim().toLowerCase()
   const key=reviewMappingKey(Number(rev.revision_number),hash)
@@ -325,3 +344,5 @@ module.exports.requireGrade910SourceClassification=requireGrade910SourceClassifi
 module.exports.assertGrade910ImmutableRevisionHash=assertGrade910ImmutableRevisionHash
 module.exports.grade910MinimumQuestionIntegrityIssues=grade910MinimumQuestionIntegrityIssues
 module.exports.requireGrade910MinimumQuestionIntegrity=requireGrade910MinimumQuestionIntegrity
+module.exports.grade910ModelAnswerIssues=grade910ModelAnswerIssues
+module.exports.requireGrade910ModelAnswer=requireGrade910ModelAnswer

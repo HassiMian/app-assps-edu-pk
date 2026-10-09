@@ -530,3 +530,46 @@ test('invalid original and immutable revision page identities both fail closed',
   }),{code:'ACADEMIC_SOURCE_CLASSIFICATION_DRIFT'})
  }
 })
+
+test('recording independent academic review refuses a rubric-only long answer as a verified model answer',async()=>{
+ const answer='Award marks for naming circulation, heart chambers and blood vessels.'
+ const {client,queries,revisionHash}=fakeDatabase(105,{
+  linkedOverrides:{question_type:'long',answer,marks:5},
+  revisionOverrides:{questionType:'long',answer,marks:5}
+ })
+ await assert.rejects(loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+  schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
+  expectedRevision:2,expectedContentHash:revisionHash,evidence:{}
+ }),{code:'ACADEMIC_MODEL_ANSWER_REQUIRED'})
+ assert.equal(queries.some(sql=>sql.includes('INSERT INTO question_mappings')),false)
+})
+test('publisher refuses pre-existing signed review of a rubric-only long answer',async()=>{
+ const answer='Award one mark each for all five concepts.'
+ const {client,master}=fakeDatabase(105,{
+  linkedOverrides:{question_type:'long',answer,marks:5},
+  revisionOverrides:{questionType:'long',answer,marks:5}
+ })
+ await assert.rejects(loadApprovalGate()(client,{schoolId:SCHOOL,master,actorId:104}),
+  {code:'ACADEMIC_MODEL_ANSWER_REQUIRED'})
+})
+test('a real explanatory long answer still passes the model answer integrity gate',async()=>{
+ const answer='Energy transfers among biological systems as organisms obtain nutrients, respire, and use ATP for cellular functions.'
+ const {client,revisionHash}=fakeDatabase(105,{
+  linkedOverrides:{question_type:'long',answer,marks:5},
+  revisionOverrides:{questionType:'long',answer,marks:5}
+ })
+ const replay=await loadReviewService(client,{syntheticEvidence:true}).recordIndependentAcademicReview({
+  schoolId:SCHOOL,reviewerId:REVIEWER,publicId:'QB-1',
+  expectedRevision:2,expectedContentHash:revisionHash,evidence:{}
+ })
+ assert.equal(replay.replayed,true)
+ assert.equal(replay.questionBankApproved,false)
+})
+test('rubric language in short-answer teaching notes is not automatically classified as a long model answer',()=>{
+ const {grade910ModelAnswerIssues}=require(GATE)
+ assert.deepEqual(grade910ModelAnswerIssues({questionType:'short',answer:'Award marks for any two valid differences.'}),[])
+ assert.deepEqual(grade910ModelAnswerIssues({questionType:'long',answer:'A detailed explanation of the biological process follows.'}),[])
+ for(const candidate of ['Award marks for identifying cells and their role.','Award 1 mark each for five ideas.','Credit marks for the listed properties.','Marks for comparing three systems.']){
+  assert.deepEqual(grade910ModelAnswerIssues({questionType:'long',answer:candidate}),['RUBRIC_DIRECTIVE_WITHOUT_MODEL_ANSWER'])
+ }
+})
