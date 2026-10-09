@@ -1,4 +1,5 @@
 import { currentSchoolDate } from './schoolCalendarDate.js'
+import { buildPlanDates } from './lessonPlanDateSchedule.js'
 // LessonPlanTab.jsx — Al Siddique Smart School OS
 // Full Bloom's taxonomy + Weekly/Annual planner + Auto-generate + Portal send
 
@@ -77,38 +78,12 @@ const scopeLabel = (scope) => PLANNING_SCOPES.find(s => s.key === scope)?.label 
 const isoDate = (date) => new Date(date).toISOString().slice(0, 10)
 
 function planRangeLabel(scope, date, index = 0) {
- const d = new Date(date)
- if (scope === 'weekly') return `Week ${index + 1} - ${MONTH_NAMES[d.getMonth()]} ${d.getFullYear()}`
- if (scope === 'monthly') return `${MONTH_NAMES[d.getMonth()]} ${d.getFullYear()}`
+ const d = new Date(`${date}T12:00:00Z`)
+ if (scope === 'weekly') return `Week ${index + 1} - ${MONTH_NAMES[d.getUTCMonth()]} ${d.getUTCFullYear()}`
+ if (scope === 'monthly') return `${MONTH_NAMES[d.getUTCMonth()]} ${d.getUTCFullYear()}`
  if (scope === 'term') return `Term Week ${index + 1}`
- if (scope === 'annual') return `${d.getFullYear()} Annual Plan`
+ if (scope === 'annual') return `${d.getUTCFullYear()} Annual Plan`
  return `Daily Plan - ${isoDate(d)}`
-}
-
-function buildPlanDates(startDate, scope, count) {
- const dates = []
- const start = new Date(startDate)
-
- if (scope === 'monthly' || scope === 'annual') {
- const total = scope === 'annual' ? 12 : count
- for (let i = 0; i < total; i += 1) {
- const d = new Date(start)
- d.setMonth(start.getMonth() + i)
- dates.push(isoDate(d))
- }
- return dates
- }
-
- const d = new Date(start)
- const needed = scope === 'daily' ? count * 5 : count
- while (dates.length < needed) {
- const dow = d.getDay()
- const ok = scope === 'daily' ? dow >= 1 && dow <= 5 : dow === 1
- if (ok) dates.push(isoDate(d))
- d.setDate(d.getDate() + 1)
- if (d - start > 365 * 86400000) break
- }
- return dates
 }
 
 //  Blank Plan Factory 
