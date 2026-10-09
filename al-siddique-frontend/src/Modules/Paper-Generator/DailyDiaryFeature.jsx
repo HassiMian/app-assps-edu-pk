@@ -1,3 +1,4 @@
+import { currentSchoolDate } from './schoolCalendarDate.js'
 import React, { useEffect, useMemo, useState } from 'react'
 import api, { resolveAssetUrl } from '../../services/api'
 import { useAcademicStore } from '../../services/useAcademicStore'
@@ -61,7 +62,7 @@ const defaultRows = [
   { id: 'gk', subject: 'G.K.', diary: 'Write 4 lines about myself', fontFamily: FONT_OPTIONS[0].value, fontSize: 12, lineHeight: 1.18, isBold: false, textAlign: 'left' },
 ]
 
-const todayForInput = () => new Date().toISOString().slice(0, 10)
+const todayForInput = currentSchoolDate
 
 const formatDateLabel = (date) => {
   const d = new Date(date)

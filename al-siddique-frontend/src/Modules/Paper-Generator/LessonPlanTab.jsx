@@ -1,3 +1,4 @@
+import { currentSchoolDate } from './schoolCalendarDate.js'
 // LessonPlanTab.jsx — Al Siddique Smart School OS
 // Full Bloom's taxonomy + Weekly/Annual planner + Auto-generate + Portal send
 
@@ -119,7 +120,7 @@ function blankPlan(overrides = {}) {
  classLevel: '',
  chapter: '',
  teacher: '',
- date: new Date().toISOString().slice(0, 10),
+ date: currentSchoolDate(),
  planningScope: 'daily',
  planRangeLabel: '',
  endDate: '',
@@ -206,7 +207,7 @@ function AutoGenModal({ onGenerate, onClose }) {
  const [subject, setSubject] = useState('')
  const [teacher, setTeacher] = useState('')
  const [selChapters,setSelChapters] = useState([])
- const [startDate, setStartDate] = useState(new Date().toISOString().slice(0,10))
+ const [startDate, setStartDate] = useState(currentSchoolDate())
  const [frequency, setFrequency] = useState('daily')
  const [weeks, setWeeks] = useState(4)
  const [period, setPeriod] = useState('1st')
@@ -441,7 +442,7 @@ function WeeklyView({ plans, onEdit, onPreview, onSendPortal, onNew }) {
  }, [plans])
 
  const weekLabel = `${weekDates[0].getDate()} ${MONTH_NAMES[weekDates[0].getMonth()]} — ${weekDates[5].getDate()} ${MONTH_NAMES[weekDates[5].getMonth()]} ${weekDates[0].getFullYear()}`
- const todayStr = new Date().toISOString().slice(0,10)
+ const todayStr = currentSchoolDate()
 
  const totalThisWeek = weekDates.reduce((s,d) => s + (plansByDate[d.toISOString().slice(0,10)]?.length||0), 0)
 
@@ -500,7 +501,7 @@ function AnnualView({ plans, onPreview, onNew }) {
  return map
  }, [plans])
 
- const todayStr = new Date().toISOString().slice(0,10)
+ const todayStr = currentSchoolDate()
 
  function MonthGrid({ month }) {
  const firstDay = new Date(year, month, 1)
