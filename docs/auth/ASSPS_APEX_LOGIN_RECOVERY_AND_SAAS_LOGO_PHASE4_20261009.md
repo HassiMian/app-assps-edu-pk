@@ -1,0 +1,37 @@
+# ASSPS Phase 4 — APEX product login, account recovery, dynamic school result logos
+
+Date: 2026-10-09. **Isolated development candidate. Production deployment HOLD.**
+
+## Immutable ownership rules
+1. APEX is the SaaS product identity. Login and public password-recovery screens use the **existing authentic APEX asset** copied without alteration from the APEX Connect public source `public/apex-logo.svg`, original SHA256 `65192abae92ff91286a452cdbdb589f1640f6ffa58f40c55fd7faccb73698cd5`. Neither sign-in screen uses an individual school's logo/wordmark.
+2. Official result cards use **only** the tenant's persisted SaaS school settings `paperSettings.logo` (via the `school.logo` payload). Premium result header now resolves the existing configured path without inventing a default logo or using the APEX asset. Source-driven missing logo remains missing/blank with a diagnostic instead of substituting a generated crest. User-supplied uploaded/generated crest candidates are NOT installed.
+3. Existing ten protected reference result templates, hash baseline and official First Term papers remain byte-identical. No production school marks or other persisted data mutated.
+
+## Implemented
+- Login: dedicated APEX OS lockup and product name, properly sized responsive source SVG, public “Forgot password?” action.
+- New public `/forgot-password` React route: account identifier, generic recovery notification, six-digit SMS OTP, new password + confirmation, retry, verified-success return to login. Only explicit school_id/school_code from the incoming URL are passed; token stays in transient React state, not local storage.
+- Existing backend `/api/auth/password-reset/request|confirm`: remove plaintext OTP notification_log insertion. Generic account-existence-agnostic request responses including a uniform 48-character token. Reset tokens have decoy entries for unknown/unavailable SMS, bcrypt-hashed codes, 10-minute TTL and bounded per-token failed attempts. Only a successful provider SMS acknowledgement permits the server-side token to reset a specific school user's password; requests don't block on network SMS latency. The existing `/api/auth` IP limiter is 10 requests/15m. No phone/identity metadata leaked in public request reply.
+- Results: independent PremiumSchoolHeader reads only SaaS-configured `school.logo` and normalizes it via the existing asset URL helper, without hard-coded school art, cross-tenant logo cache, or product branding substitution.
+
+## Actual isolated evidence
+- `node --check al-siddique-backend/src/routes/authRoutes.js` EXIT0.
+- `node al-siddique-backend/src/tests/password-reset-isolated.test.js` EXIT0; mocked lookup, fake SMS transport, no real DB/phone. Unknown/dummy token attempts and limits, generic success responses, disabled gateway, asynchronous acknowledgement, erroneous OTP, successful single-use reset and replay; no plaintext OTP logging.
+- `node scripts/test-login-recovery-browser.mjs` EXIT0; real Vite+Chromium sign-in shows APEX source SVG, no school logo, forgot-password navigation, synthetic request/confirm and responsive 390px layout, mocked 429 status. All non-local traffic blocked. Evidence `/tmp/assps-p4-apex-recovery-chromium.log`.
+- `node scripts/test-saas-school-logo-source.mjs` EXIT0; SSR different tenant-configured asset URLs are maintained verbatim, missing school logo stays empty, APEX never shown on a result.
+- `node scripts/test-premium-result-cards.mjs` EXIT0, `RESULT_EXTRA_SUBJECTS=1 node scripts/test-premium-result-a4.mjs` EXIT0 (3/3 actual Chromium 12-subject print geometry), `npm run verify:templates` EXIT0 (6 protected originals unchanged).
+- Focused ESLint on changed frontend components/tests with existing mixed export react-refresh rule disabled EXIT0; optimized Vite `npm run build` EXIT0 in 3.15s. VPS logs `/tmp/assps-p4-{reset-security,apex-recovery-chromium,dynamic-school-logo,premium-ssr,premium-a4,protected-templates,focused-lint,build}.log`.
+
+## Honest remaining release gates
+- **Real SMS transport:** no verified real registered phone delivery. Current provider configuration may be missing; backend refuses to enable reset when delivery cannot be confirmed. No delivery, no reset. School admin recovery remains the user-facing fallback.
+- **Durable OTP/session security:** temporary token storage currently uses a process-local Map; production multi-worker/restart-safe centrally persisted TTL store, refresh-token revocation upon password change, isolated denial-of-service/timing penetration tests and security owner certification are mandatory before release. Existing rate limiter is per process/instance unless shared store provisioned.
+- **Auth tenant, print and roles:** real authenticated user multi-school and school-owner recovery acceptance, Nginx private upload ingress, restricted signed non-BYPASS database actor certification, and Urdu/English physical A4/rollback remain SaaS Core release gates. No student/school production DB accessed in this work.
+- **Publication:** GitHub connector `permissions.push=false`; local source branch may require a separately authorized GitHub writer to publish safely. Never claim remote publication unless independently verified.
+
+**NO production deployment, service restart, migration, Nginx, PM2, SMS send or protected paper change.** Other worktrees preserved. Release owner = SaaS Core; handoff via issue #4.
+
+## Additional verified hardening completed before final commit
+- Login→Forgot Password→Login preserves the caller's explicit `school_code` or `school_id` query string. Only those two permitted context fields are sent in the recovery request, not arbitrary query parameters. Real Chromium tenant fixture `school_code=rayya-fixture` confirmed the same scoped value in request payload and return navigation.
+- An explicitly supplied invalid, unknown or inactive school hint now fails closed **without falling back to an unscoped user lookup**. Isolated backend route harness verifies unknown/inactive school scopes still get the same generic public response and do not query arbitrary users.
+- All request tokens have identical decoy-capable verification storage and 5-attempt lockout regardless of user existence, reducing token-confirmation enumeration. SMS is scheduled separately from the request response; no early activation before provider acknowledgement. Temporary Map is bounded (2000 entries), TTL 10 minutes; this is **not** durable/multi-worker production certification.
+- Exact final sequence completed: backend syntax, independent mock password reset flow (including nonexistent/inactive tenant), real Chromium login→recovery→OTP→success, 390px mobile, mocked 429 response, explicit tenant context, dynamic result school logo, three flagship SSR, 12-subject Chromium A4, six protected hashes, focused ESLint and optimized Vite build. Every single executed command returned **EXIT0**. Logs `/tmp/assps-login-p4-{auth-final,browser-final,result-logo-final,result-ssr-final,result-a4-final,template-final,eslint-final,build-final}.log`.
+- Important residual: full signed/real teacher, live SMS, multi-instance token persistence, old refresh-token revocation and system-wide lint were **not** certified; user-facing UI must not be considered deployed. Backend historical plaintext OTP notification history (if any was persisted on actual production) needs Core security-owner review without exposing or indiscriminately deleting school data.

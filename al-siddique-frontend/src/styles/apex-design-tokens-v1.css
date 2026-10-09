@@ -521,3 +521,17 @@
     border-radius: 22px;
   }
 }
+
+/* APEX product login identity — never substitute tenant/school emblems here. */
+.apex-auth-brand .apex-auth-logo-plate { width: 244px; height: 84px; padding: 9px 12px; border-radius: 16px; }
+.apex-auth-brand .apex-auth-logo-plate img { width: 100%; height: 100%; object-fit: contain; }
+.apex-login-recovery-row { display: flex; justify-content: flex-end; margin: -2px 0 7px; }
+.apex-login-recovery-link { cursor: pointer; border: 0; background: transparent; padding: 6px 0; color: var(--apex-action-primary); text-decoration: underline; text-underline-offset: 3px; font-weight: 700; font-size: 13px; }
+.apex-login-recovery-link:focus-visible { outline: 2px solid var(--apex-action-primary); outline-offset: 3px; }
+@media(max-width:600px) { .apex-auth-brand .apex-auth-logo-plate { width: 182px; height: 72px; } }
+
+.apex-recovery-page .apex-auth-stage { max-width: 720px; }
+.apex-recovery-page .apex-auth-card { max-width: 620px; margin: 0 auto; }
+.apex-recovery-help, .apex-recovery-notice { color: var(--apex-text-secondary); font-size: 12px; line-height: 1.6; }
+.apex-recovery-text-button { background: transparent; border: 0; padding: 7px; color: var(--apex-action-primary); cursor:pointer; text-decoration:underline; }
+.apex-recovery-back { display: inline-block; margin-top: 15px; color: var(--apex-action-primary); font-weight: 700; }

@@ -3,13 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import { Eye, EyeOff, Moon, ShieldCheck, Sun } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import { useTheme } from '../context/ThemeContext'
-import { useTenantBranding } from '../context/TenantBrandingContext'
 import { normalizeAppRole } from '../utils/role'
 
 export default function LoginPage() {
   const { login } = useAuth()
   const { theme, setTheme } = useTheme()
-  const branding = useTenantBranding()
   const navigate = useNavigate()
 
   const [email, setEmail] = useState('')
@@ -19,8 +17,8 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false)
 
   const isLight = theme === 'light'
-  const schoolName = branding?.schoolName || 'APEX Education Gateway'
-  const logoUrl = branding?.logoUrl || '/favicon.svg'
+  const productName = 'APEX Education OS'
+  const logoUrl = '/apex-logo.svg'
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -90,11 +88,11 @@ export default function LoginPage() {
       <section className="apex-auth-stage" aria-labelledby="login-title">
         <header className="apex-auth-brand">
           <div className="apex-auth-logo-plate">
-            <img src={logoUrl} alt={`${schoolName} logo`} />
+            <img src={logoUrl} alt="APEX Education OS official logo" />
           </div>
           <div>
             <p className="apex-auth-kicker">APEX OS · Secure School Workspace</p>
-            <h1 id="login-title">{schoolName}</h1>
+            <h1 id="login-title">{productName}</h1>
             <p className="apex-auth-brand-copy">A focused operating environment for academics, administration and school services.</p>
           </div>
         </header>
@@ -144,6 +142,8 @@ export default function LoginPage() {
                 {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
             </div>
+
+            <div className="apex-login-recovery-row"><button type="button" className="apex-login-recovery-link" onClick={() => navigate(`/forgot-password${window.location.search || ''}`)}>Forgot password?</button></div>
 
             {error && (
               <div className="apex-auth-error" role="alert">

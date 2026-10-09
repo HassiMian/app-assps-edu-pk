@@ -30,6 +30,7 @@ function lazyRetry(importer, name) {
 }
 
 const LoginPage = lazyRetry(() => import('./pages/LoginPage'), 'LoginPage')
+const PasswordRecoveryPage = lazyRetry(() => import('./pages/PasswordRecoveryPage'), 'PasswordRecoveryPage')
 const ForcePasswordChangePage = lazyRetry(() => import('./pages/ForcePasswordChangePage'), 'ForcePasswordChangePage')
 const AppLayout = lazyRetry(() => import('./components/Layout/AppLayout'), 'AppLayout')
 const Dashboard = lazyRetry(() => import('./pages/Dashboard'), 'Dashboard')
@@ -303,6 +304,7 @@ function AppRoutes() {
  <Suspense fallback={<AppRouteLoader />}>
  <Routes>
  <Route path="/login" element={<LoginPage />} />
+ <Route path="/forgot-password" element={<PasswordRecoveryPage />} />
  <Route path="/change-password" element={<WPasswordChange><ForcePasswordChangePage /></WPasswordChange>} />
  <Route path="/" element={<Navigate to="/dashboard" replace />} />
 

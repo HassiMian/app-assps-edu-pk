@@ -168,15 +168,7 @@ function normalizePakPhone(phone) {
 async function sendPasswordOtp(user, otp) {
   const phone = user.phone || user.parent_phone || user.parent_whatsapp
   const message = `Al Siddique password reset OTP: ${otp}. It expires in 10 minutes.`
-  try {
-    await query(
-      `INSERT INTO notification_log (school_id, recipient_role, title, message, type, channel, phone, sent_at, metadata)
-       VALUES ($1, $2, 'Password Reset OTP', $3, 'security', 'sms', $4, NOW(), $5::jsonb)`,
-      [normalizeSchoolId(user.school_id), user.role || 'user', message, phone || null, JSON.stringify({ user_id: user.id, reset: true })],
-    )
-  } catch (err) {
-    console.error('Password reset notification log error:', err.message)
-  }
+  // Never persist OTP plaintext in application logs or notification history.
   if (!phone) return { sent: false, message: 'No phone number is attached to this account.' }
   try {
     const config = await getTwilioConfigForSchool(normalizeSchoolId(user.school_id))
@@ -785,26 +777,41 @@ router.post('/password-reset/request', async (req, res) => {
       return sendJson(res, 400, { message: 'Invalid portal role.' })
     }
 
-    let requestedSchool = await resolveRequestedSchool(req)
-    const user = await findUserByLoginId(loginId, requestedRole, requestedSchool?.id, requestedSchool?.code)
-    if (!user) {
-      return sendJson(res, 404, { message: 'No active account found for this Login ID.' })
-    }
-
-    const otp = String(crypto.randomInt(100000, 1000000))
+    const requestedSchool = await resolveRequestedSchool(req)
+    const explicitSchoolHint = Boolean(req.body?.school_id || req.body?.schoolId || req.body?.school_code || req.body?.schoolCode || req.query?.school_id || req.query?.school_code)
+    const scopePermitted = !explicitSchoolHint || isSchoolActive(requestedSchool)
+    // Equivalent public response and token shape for all account states.
+    // Decoy entries also enforce identical invalid-code and attempt limits.
     const resetToken = crypto.randomBytes(24).toString('hex')
+    const otp = String(crypto.randomInt(100000, 1000000))
     const otpHash = await bcrypt.hash(otp, 10)
+    const user = scopePermitted ? await findUserByLoginId(loginId, requestedRole, requestedSchool?.id, requestedSchool?.code) : null
+    for (const [key, item] of passwordResetOtps) {
+      if (Date.now() > item.expiresAt) passwordResetOtps.delete(key)
+    }
+    if (passwordResetOtps.size >= 2000) passwordResetOtps.delete(passwordResetOtps.keys().next().value)
     passwordResetOtps.set(resetToken, {
-      userId: user.id,
-      schoolId: normalizeSchoolId(user.school_id),
-      otpHash,
-      expiresAt: Date.now() + RESET_OTP_TTL_MS,
-      attempts: 0,
+      userId: null, schoolId: null, otpHash,
+      expiresAt: Date.now() + RESET_OTP_TTL_MS, attempts: 0,
     })
-
-    const delivery = await sendPasswordOtp(user, otp)
+    if (user && normalizeSchoolId(user.school_id)) {
+      // Do not block the public request on SMS network timing. A token only
+      // becomes valid after provider acknowledgement, never before.
+      setImmediate(async () => {
+        try {
+          const delivery = await sendPasswordOtp(user, otp)
+          const entry = passwordResetOtps.get(resetToken)
+          if (delivery.sent === true && entry && Date.now() < entry.expiresAt) {
+            entry.userId = user.id
+            entry.schoolId = normalizeSchoolId(user.school_id)
+          }
+        } catch (err) {
+          console.error('Password reset delivery failed:', err.message)
+        }
+      })
+    }
     return sendJson(res, 200, {
-      message: delivery.message || `OTP sent to ${maskPhone(user.phone)}.`,
+      message: 'If eligible, a verification code will be sent to the registered number.',
       resetToken,
     })
   } catch (err) {
@@ -828,7 +835,7 @@ router.post('/password-reset/confirm', async (req, res) => {
     const entry = passwordResetOtps.get(resetToken)
     if (!entry || Date.now() > entry.expiresAt) {
       passwordResetOtps.delete(resetToken)
-      return sendJson(res, 400, { message: 'OTP expired. Please request a new OTP.' })
+      return sendJson(res, 400, { message: 'Invalid or expired verification code.' })
     }
     if (entry.attempts >= 5) {
       passwordResetOtps.delete(resetToken)
@@ -836,9 +843,9 @@ router.post('/password-reset/confirm', async (req, res) => {
     }
 
     const valid = await bcrypt.compare(otp, entry.otpHash)
-    if (!valid) {
+    if (!valid || !entry.userId || !entry.schoolId) {
       entry.attempts += 1
-      return sendJson(res, 400, { message: 'Invalid OTP.' })
+      return sendJson(res, 400, { message: 'Invalid or expired verification code.' })
     }
 
     const hashed = await bcrypt.hash(newPassword, 10)
