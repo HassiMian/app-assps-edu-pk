@@ -160,6 +160,25 @@ const sourceTableOverflowPaper = {
  }],
 }
 
+// Synthetic matching-column RTL/English adversarial print acceptance fixture.
+const matchingColumnOverflowPaper = {
+ id:'synthetic-matching-column-overflow-20261009',name:'Bilingual Matching Column Print Stress',
+ documentFormat:'pts-native-v13',printReadiness:'READY',
+ config:{className:'5',classLevel:'5',subject:'General Knowledge',subjectName:'General Knowledge',language:'urdu',
+  paperCode:'MATCHING-PRINT',timeAllowed:'40 Minutes',examDate:'2026-10-08',totalMarks:5,title:'Synthetic Matching Print'},
+ official_section:[{id:'matching-column-overflow',type:'official_section',sourceOrder:1,medium:'urdu',layoutPreset:'matching',
+ heading:'سوال نمبر 1: کالم الف کو کالم ب سے ملائیں۔ (5)',marks:5,
+ tableHeaders:['اردو کالم A '+('ب'.repeat(75)), 'Column B '+('LONGSCIENTIFICUNBREAKABLEHEADER'.repeat(14))],
+ content:[
+  '1. '+('ط'.repeat(195))+' [MATCHING-CELL-01] | Climate',
+  '2. Rain | '+('LONGUNBREAKABLESCIENCETOKEN'.repeat(27))+' [MATCHING-CELL-02]',
+  '3. دھوپ | Sunshine [MATCHING-CELL-03]',
+  '4. Temperature | درجہ حرارت [MATCHING-CELL-04]',
+  '5. Cloud | بادل [MATCHING-CELL-05]',
+ ].join('\n'),
+ }],
+}
+
 const nestedScoringPaper = {
  clientDraftId:'nested-scoring-browser-paper',
  name:'Nested Scoring Browser Paper',
@@ -244,7 +263,7 @@ function ThemeFixture() {
  const reopenPaper = savedPapers.find(p => p.userAuthored && (reopenId ? String(p.id)===reopenId : p.name===reopenName)) || null
  const officialId = params.get('officialId') || ''
  const officialPaper = officialId ? officialV13.papers.find(item => item.id === officialId) || null : null
- const fixture = params.has('new') ? null : params.has('reopen') ? reopenPaper : params.has('sourceTableOverflow') ? sourceTableOverflowPaper : params.has('bilingualMatrixOverflow') ? bilingualMatrixOverflowPaper : params.has('bilingualTableOverflow') ? bilingualTableOverflowPaper : params.has('rtlOddOverflow') ? rtlOddOverflowPaper : params.has('nestedScoring') ? nestedScoringPaper : params.has('mathAssets') ? mathAssetsPaper : officialPaper || (params.has('recovery8') ? classEightUrduFixture : paper)
+ const fixture = params.has('new') ? null : params.has('reopen') ? reopenPaper : params.has('matchingColumnOverflow') ? matchingColumnOverflowPaper : params.has('sourceTableOverflow') ? sourceTableOverflowPaper : params.has('bilingualMatrixOverflow') ? bilingualMatrixOverflowPaper : params.has('bilingualTableOverflow') ? bilingualTableOverflowPaper : params.has('rtlOddOverflow') ? rtlOddOverflowPaper : params.has('nestedScoring') ? nestedScoringPaper : params.has('mathAssets') ? mathAssetsPaper : officialPaper || (params.has('recovery8') ? classEightUrduFixture : paper)
  React.useEffect(() => { setTheme('light') }, [setTheme])
  return <>
   <button hidden id="fixture-global-theme-toggle" data-current-theme={theme} onClick={toggleTheme}>Portal theme toggle</button>

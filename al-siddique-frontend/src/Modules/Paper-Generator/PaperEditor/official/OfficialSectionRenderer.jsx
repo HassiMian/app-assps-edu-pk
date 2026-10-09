@@ -270,7 +270,7 @@ function MatchingColumnsTable({ content, isUrdu, qFs, fs, themeColor, editMode=f
       {headers.map((header,index)=>{
         const key='matching-header-'+index
         const rich=section?.richText?.[key]||''
-        return <th key={index} data-column-header={index===0?'A':'B'} style={{border:`1px solid ${themeColor}66`,padding:`${5*fs}px ${7*fs}px`,textAlign:'center',fontWeight:900}}>
+        return <th key={index} data-column-header={index===0?'A':'B'} style={{border:`1px solid ${themeColor}66`,padding:`${5*fs}px ${7*fs}px`,textAlign:'center',fontWeight:900,overflowWrap:'anywhere',wordBreak:'break-word'}}>
           {(editMode||rich)&&section?.id?<InlineEditable text={header} richHtml={rich} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey={key} sectionId={section.id} ariaLabel={`Edit Column ${index===0?'A':'B'} heading`} onActivate={onActiveEditable} onCommit={payload=>commitHeader(index,payload)} style={{display:'block',textAlign:'center',fontWeight:900}}/>:header}
         </th>
       })}
@@ -280,7 +280,7 @@ function MatchingColumnsTable({ content, isUrdu, qFs, fs, themeColor, editMode=f
         const key='matching-'+rowIndex+'-'+side
         const rich=section?.richText?.[key]||''
         const value=row[side]||''
-        return <td key={side} style={{border:`1px solid ${themeColor}55`,padding:`${6*fs}px ${8*fs}px`,textAlign:isUrdu?'right':'left',minHeight:`${28*fs}px`}}>
+        return <td key={side} style={{border:`1px solid ${themeColor}55`,padding:`${6*fs}px ${8*fs}px`,textAlign:isUrdu?'right':'left',minHeight:`${28*fs}px`,overflowWrap:'anywhere',wordBreak:'break-word'}}>
           {(editMode||rich)&&section?.id?<InlineEditable text={value} richHtml={rich} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey={key} sectionId={section.id} ariaLabel={`Edit Column ${cellIndex===0?'A':'B'} row ${rowIndex+1}`} onActivate={onActiveEditable} onCommit={payload=>commitCell(rowIndex,side,payload)} style={{display:'block',minWidth:0,minHeight:'1.2em'}}/>:<AnswerText text={value}/>}
         </td>
       })}
