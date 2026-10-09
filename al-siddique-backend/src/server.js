@@ -100,16 +100,12 @@ app.use(['/uploads/payment-screenshots', '/api/uploads/payment-screenshots'], (r
   res.status(404).json({ success: false, message: 'Payment proof files are not publicly accessible.' })
 })
 
-const uploadStaticOptions = {
-  index: false,
-  fallthrough: false,
+// Public assets are narrowly limited to school branding. Do not widen this
+// allowlist without a per-record authenticated media authorization design.
+const { mountPublicBrandingUploads } = require('./middleware/publicBrandingUploads')
+mountPublicBrandingUploads(app, uploadsDir, {
   maxAge: process.env.NODE_ENV === 'production' ? '7d' : 0,
-  setHeaders: (res) => {
-    res.setHeader('X-Content-Type-Options', 'nosniff')
-  },
-}
-app.use('/uploads', express.static(uploadsDir, uploadStaticOptions))
-app.use('/api/uploads', express.static(uploadsDir, uploadStaticOptions))
+})
 
 // ─── Health Check ─────────────────────────────────────────────────────────────
 app.get('/health', (req, res) => {
