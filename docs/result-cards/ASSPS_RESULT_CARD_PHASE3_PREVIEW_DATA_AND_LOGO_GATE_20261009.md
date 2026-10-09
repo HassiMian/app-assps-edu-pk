@@ -11,7 +11,7 @@ Date: 2026-10-09. **Development only, PRODUCTION HOLD.**
 - `resultLogoDiagnostics.js` adds a non-invasive light amber designer notice only if the school logo is missing or explicitly JPEG (which cannot contain alpha). A PNG/WebP/SVG extension alone never certifies real alpha. The current approved school branding setting remains unchanged.
 
 ## Executed checks (exact environment)
-- Synthetic backend-format Result Preview Integrity assertions: `node scripts/test-result-preview-integrity.mjs` **EXIT 0**, 13 checks: zero, null, partial rows, weighted max, invalid values, source integration and request-token checks. Static checks do **not** certify real-browser asynchronous race behavior.
+- Synthetic backend-format Result Preview Integrity assertions: `node scripts/test-result-preview-integrity.mjs` **EXIT 0**, 15 checks: zero, null, partial rows, weighted max, invalid values, source integration and request-token checks. Static checks do **not** certify real-browser asynchronous race behavior.
 - Logo diagnostics: `node scripts/test-result-logo-diagnostics.mjs` **EXIT 0**, 7 checks.
 - Flagship SSR and grade/zero/pending/invalid maximum tests: `node scripts/test-premium-result-cards.mjs` **EXIT 0**.
 - Real Chromium 12-subject 3-template A4 print-media geometry and PDF generation: `RESULT_EXTRA_SUBJECTS=1 node scripts/test-premium-result-a4.mjs` **EXIT 0**. No clipped footer.
