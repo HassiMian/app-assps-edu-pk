@@ -1,0 +1,97 @@
+'use strict'
+const test=require('node:test'),assert=require('node:assert/strict')
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto')
+const {build,markdown,ANSWERS,PIN}=require('../qbank/author-chemistry9-ch10-ten-original-answers.cjs')
+const ROOT=path.resolve(__dirname,'../..')
+const file=path.join(ROOT,'al-siddique-frontend/src/Modules/Paper-Generator/seed-data/grade9-10-staging/chemistry9Chapter10EnglishDrafts2026.json')
+const bytes=fs.readFileSync(file),original=JSON.parse(bytes)
+const registry=JSON.parse(fs.readFileSync(path.join(ROOT,'al-siddique-backend/src/data/verifiedGrade910SourceRegistry.json')))
+const sha=x=>crypto.createHash('sha256').update(x).digest('hex')
+const run=(b=bytes,s=original,r=registry)=>build({bytes:b,source:s,registry:r})
+test('actual Chemistry IX chapter 10 file contains 30 research questions and ten 5-mark long rubrics, all ten separately drafted',()=>{
+ const d=run()
+ assert.equal(sha(bytes),PIN)
+ assert.equal(d.originalAuthoredResearchQuestions,30)
+ assert.equal(d.originalRubricOnlyLongQuestions,10)
+ assert.equal(d.newExplanatoryAnswerResearchDrafts,10)
+ assert.equal(d.newFiveMarkPointProposals,50)
+ assert.equal(Object.keys(ANSWERS).length,10)
+ assert.deepEqual(d.items.map(x=>x.questionId),original.drafts.filter(x=>x.type==='long').map(x=>x.id))
+ assert.ok(d.items.every(x=>x.chapterNo===10&&x.marks===5))
+})
+test('each original source file, question, answer and catalog SHA remain exact and no academic reviewer approval is invented',()=>{
+ const d=run(),orig=new Map(original.drafts.map(x=>[x.id,x]))
+ for(const x of d.items){
+  const q=orig.get(x.questionId)
+  assert.ok(q)
+  assert.equal(x.sourceFileSha256,PIN)
+  assert.equal(x.sourceQuestionSha256,sha(JSON.stringify(q)))
+  assert.equal(x.sourceAnswerSha256,sha(q.content.en.answer))
+  assert.equal(x.catalogSourceId,original.sourceRecordId)
+  assert.equal(x.claimedSourcePdfSha256,original.sourcePdfSha256)
+  assert.equal(x.topicId,q.topicId)
+  assert.ok(x.proposedIndependentEnglishExplanation.length>=250)
+  assert.notEqual(x.proposedIndependentEnglishExplanation,q.content.en.answer)
+  assert.equal(x.proposedDistinctMarkingPoints.length,5)
+  assert.equal(new Set(x.proposedDistinctMarkingPoints).size,5)
+  assert.equal(x.schoolAdoptedEditionSessionVerified,false)
+  assert.equal(x.originalPrintedExercisePageVerified,false)
+  assert.equal(x.qualifiedIndependentSubjectReviewed,false)
+  assert.equal(x.urduEquivalenceReviewed,false)
+  assert.equal(x.independentReviewerId,null)
+  assert.equal(x.approvedRevisionId,null)
+  assert.equal(x.academicallyApproved,false)
+  assert.equal(x.verifiedPublished,false)
+ }
+})
+test('gas composition and biological gas exchange statements are distinguishable and fact-specific',()=>{
+ const a=new Map(run().items.map(x=>[x.questionId,x.proposedIndependentEnglishExplanation]))
+ assert.match(a.get('IX-CHEM-2025-C10-T1-01L'),/approximately 78 percent/)
+ assert.match(a.get('IX-CHEM-2025-C10-T1-01L'),/oxygen about 21 percent/)
+ assert.match(a.get('IX-CHEM-2025-C10-T1-02L'),/nitrogen cycle/)
+ assert.match(a.get('IX-CHEM-2025-C10-T1-02L'),/infrared radiation/)
+})
+test('acid deposition and natural weak rain acidity are not conflated',()=>{
+ const a=new Map(run().items.map(x=>[x.questionId,x.proposedIndependentEnglishExplanation]))
+ assert.match(a.get('IX-CHEM-2025-C10-T3-01L'),/Sulphur dioxide and nitrogen oxides/)
+ assert.match(a.get('IX-CHEM-2025-C10-T3-01L'),/naturally somewhat acidic/)
+ assert.match(a.get('IX-CHEM-2025-C10-T3-02L'),/professional/i)
+})
+test('greenhouse effect distinguishes infrared radiation from sunlight and long-term concentration changes',()=>{
+ const a=new Map(run().items.map(x=>[x.questionId,x.proposedIndependentEnglishExplanation]))
+ assert.match(a.get('IX-CHEM-2025-C10-T4-01L'),/infrared radiation/)
+ assert.match(a.get('IX-CHEM-2025-C10-T4-01L'),/human activity increases the concentrations/)
+ assert.match(a.get('IX-CHEM-2025-C10-T4-02L'),/reduced photosynthetic carbon uptake|reduce the ability of growing forests/)
+})
+test('edited original answer or unrelated MCQ never reuses immutable authored-question evidence',()=>{
+ for(const id of ['IX-CHEM-2025-C10-T4-01L','IX-CHEM-2025-C10-T1-01M']){
+  const d=structuredClone(original),q=d.drafts.find(x=>x.id===id)
+  assert.ok(q,id)
+  q.content.en.answer='Tampered without teacher review'
+  assert.throws(()=>run(Buffer.from(JSON.stringify(d)),d),/CHEM9C10_SOURCE_SHA_CHANGED/)
+ }
+})
+test('forged in-memory source fails despite genuine source file bytes',()=>{
+ const d=structuredClone(original)
+ d.drafts[0].content.en.answer='Forged unreviewed data'
+ assert.throws(()=>run(bytes,d),/CHEM9C10_SOURCE_SHA_CHANGED/)
+})
+test('changed source PDF identity, English medium, edition or false academicApproval fails closed',()=>{
+ for(const fn of [x=>x.pdfSha256='0'.repeat(64),x=>x.medium='Urdu',x=>x.edition='2026-27 approved',x=>x.academicApproval=true]){
+  const r=structuredClone(registry),catalog=r.entries.find(x=>x.recordId===original.sourceRecordId)
+  fn(catalog)
+  assert.throws(()=>run(bytes,original,r),/CHEM9C10_UNVERIFIED_CATALOG_IDENTITY_DRIFT/)
+ }
+})
+test('faculty readability and original research authoring never certify ASSPS edition, printed exercise pages or publication',()=>{
+ const d=run(),m=markdown(d)
+ assert.equal(d.sourceCatalogEditionClaim,'2025-26')
+ assert.equal(d.sourceCatalogMediumClaim,'English')
+ assert.equal(d.humanSchoolSourceVerified,0)
+ assert.equal(d.qualifiedHumanAcademicReviewed,0)
+ assert.equal(d.academicallyApproved,0)
+ assert.equal(d.verifiedPublished,0)
+ assert.match(m,/ten new original environmental-science explanatory drafts/)
+ assert.match(m,/academicApproval remains false/)
+ assert.match(m,/Paper Studio verified selector remains empty/)
+})
