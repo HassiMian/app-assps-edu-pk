@@ -43,7 +43,9 @@ function hasTeacherAssignment(assignments, schoolId, teacherId, student, subject
 }
 function validateTeacherMarksWrite({user, schoolId, results, students, exams, assignments}) {
   const teacherId = validId(user?.id)
-  if (!teacherId || !validId(schoolId)) return false
+  // Never derive a teacher's school from request URL/header fallback.
+  // The authenticated, active actor must independently carry the same school ID.
+  if (!teacherId || !validId(schoolId) || validId(user?.school_id) !== validId(schoolId)) return false
   const studentMap = new Map((students || []).map(row => [validId(row.id),row]))
   const examMap = new Map((exams || []).map(row => [validId(row.id),row]))
   return Array.isArray(results) && results.length > 0 && results.every(row => {
@@ -59,11 +61,14 @@ function validateTeacherMarksWrite({user, schoolId, results, students, exams, as
 function teacherResultReadScope(req, studentAlias='s', resultAlias='er', index=1) {
   if (!isTeacher(req)) return {clause:'',params:[],nextIndex:index}
   const teacherId = validId(req.user?.id)
-  // Missing actor ID fails closed; do not query unrestricted result rows.
-  if (!teacherId) return {clause:' AND 1=0',params:[],nextIndex:index}
+  const actorSchoolId = validId(req.user?.school_id)
+  // Require a verified actor school claim. URL/header school hints are never
+  // a replacement for an authenticated tenant binding.
+  if (!teacherId || !actorSchoolId) return {clause:' AND 1=0',params:[],nextIndex:index}
   const column = name => `${studentAlias}.${name}`
   return {
-    clause:` AND EXISTS (
+    clause:` AND ${column('school_id')} = $${index+1}
+      AND EXISTS (
       SELECT 1 FROM teacher_class_assignments tca
       WHERE tca.school_id = ${column('school_id')}
         AND tca.teacher_user_id = $${index}
@@ -74,8 +79,8 @@ function teacherResultReadScope(req, studentAlias='s', resultAlias='er', index=1
         AND (COALESCE(tca.subject,'') = ''
           OR LOWER(tca.subject) = LOWER(COALESCE(${resultAlias}.subject,'')))
     )`,
-    params:[teacherId],
-    nextIndex:index+1,
+    params:[teacherId,actorSchoolId],
+    nextIndex:index+2,
   }
 }
 

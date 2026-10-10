@@ -10,7 +10,7 @@ const path=require('node:path')
 
 test('actual examRoutes enforces assignment scoped reads and transactional writes',{timeout:20000},async t=>{
   const queries=[]
-  let actor={role:'teacher',id:77}
+  let actor={role:'teacher',id:77,school_id:21}
   let assignments=[{school_id:21,teacher_user_id:77,class_name:'One',section:'A',subject:'English',is_active:true}]
   const students=[{id:101,class:'One',section:'A'}]
   const exams=[{id:9,class:'All Classes'}]
@@ -83,6 +83,8 @@ test('actual examRoutes enforces assignment scoped reads and transactional write
   assert.ok(select.sql.includes('EXISTS'))
   assert.ok(select.sql.includes('tca.subject'))
   assert.ok(select.params.includes(77))
+  assert.ok(select.params.includes(21))
+  assert.ok(select.sql.includes('s.school_id = $'),'authenticated teacher school bound')
   console.log('REAL_EXPRESS_HTTP_PASS teacher saved marks GET class/subject scoped')
 
   reply=await request('GET','/api/exams/results?exam_ids=9')
@@ -123,6 +125,20 @@ test('actual examRoutes enforces assignment scoped reads and transactional write
   }
   assert.equal(transaction.rollbacks,6)
   console.log('REAL_EXPRESS_HTTP_PASS 6 forbidden teacher mark writes rejected before SQL UPSERT')
+
+  actor={role:'teacher',id:77,school_id:22}
+  assignments=[{school_id:21,teacher_user_id:77,class_name:'One',section:'A',subject:'English',is_active:true}]
+  let beforeUnbound=transaction.writes
+  reply=await request('POST','/api/exams/results',payload)
+  assert.equal(reply.status,403,'teacher authenticated school mismatch')
+  assert.equal(transaction.writes,beforeUnbound)
+  actor={role:'teacher',id:77}
+  reply=await request('GET','/api/exams/results/9')
+  assert.equal(reply.status,200)
+  select=queries.filter(q=>q.sql.includes('FROM exam_results')).at(-1)
+  assert.ok(select.sql.includes('AND 1=0'),'unbound actor read must be SQL denied')
+  actor={role:'teacher',id:77,school_id:21}
+  console.log('REAL_EXPRESS_HTTP_PASS mismatched/missing teacher school claim rejects mark write/read')
 
   assignments=[]
   actor={role:'principal',id:90}

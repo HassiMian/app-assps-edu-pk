@@ -6,7 +6,7 @@ const {
   validateTeacherMarksWrite,teacherResultReadScope,
 }=require('../services/examMarksTeacherScope')
 
-const schoolId=21, user={id:77,role:'teacher'}
+const schoolId=21, user={id:77,role:'teacher',school_id:21}
 const students=[{id:101,class:'One',section:'A'},{id:102,class:'Two',section:'B'}]
 const exams=[{id:9,class:'All Classes'},{id:18,class:'Class Two'}]
 const assignments=[
@@ -36,7 +36,9 @@ test('assignment must be active, in same tenant, same teacher and matching scope
   assert.equal(check([row()],{assignments:[{...assignments[0],...mutation}]}),false,JSON.stringify(mutation))
  }
  assert.equal(check([row()],{assignments:[]}),false)
- assert.equal(check([row()],{user:{role:'teacher',id:0}}),false)
+ assert.equal(check([row()],{user:{role:'teacher',id:0,school_id:21}}),false)
+ assert.equal(check([row()],{user:{role:'teacher',id:77,school_id:22}}),false)
+ assert.equal(check([row()],{user:{role:'teacher',id:77}}),false)
  assert.equal(check([row()],{schoolId:0}),false)
  assert.equal(check([row()],{students:[{id:0,class:'One',section:'A'}]}),false)
  assert.equal(check([row()],{exams:[{id:9,class:'Two'}]}),false)
@@ -53,13 +55,15 @@ test('legacy class names and class-all term exams can match without broadening a
 
 test('teacher result reads use DB-level EXISTS for school, class, section, subject',()=>{
  const scope=teacherResultReadScope({user},'s','er',4)
- assert.deepEqual(scope.params,[77])
- assert.equal(scope.nextIndex,5)
- for(const token of ['teacher_class_assignments','tca.school_id = s.school_id','tca.teacher_user_id = $4',
+ assert.deepEqual(scope.params,[77,21])
+ assert.equal(scope.nextIndex,6)
+ for(const token of ['teacher_class_assignments','s.school_id = $5','tca.school_id = s.school_id','tca.teacher_user_id = $4',
    'tca.is_active = true',"LOWER(tca.class_name)","LOWER(tca.section)","LOWER(tca.subject)","er.subject"])
   assert.ok(scope.clause.includes(token),token)
- const invalid=teacherResultReadScope({user:{role:'teacher',id:null}},'s','er',1)
+ const invalid=teacherResultReadScope({user:{role:'teacher',id:null,school_id:21}},'s','er',1)
  assert.equal(invalid.clause,' AND 1=0')
+ assert.equal(teacherResultReadScope({user:{role:'teacher',id:77}},'s','er',1).clause,' AND 1=0')
+ assert.equal(teacherResultReadScope({user:{role:'teacher',id:77,school_id:22}},'s','er',1).params[0],77)
  assert.deepEqual(invalid.params,[])
  assert.equal(isTeacher({user}),true)
  assert.deepEqual(teacherResultReadScope({user:{role:'principal',id:77}},'s','er',1),{clause:'',params:[],nextIndex:1})
