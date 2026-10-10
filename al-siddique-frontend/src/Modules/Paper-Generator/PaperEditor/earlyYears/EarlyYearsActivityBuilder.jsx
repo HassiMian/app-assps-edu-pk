@@ -29,7 +29,12 @@ export default function EarlyYearsActivityBuilder() {
  const template=useMemo(()=>getEarlyYearsTemplatePreset(templateId),[templateId])
  const check=paper?validateUserEarlyYearsPaper(paper):null
  const refresh=()=>{try{setLibrary(listUserEarlyYearsPapers());setError('')}catch(e){setError(e.message)}}
- useEffect(()=>{document.body.classList.add('early-years-mode');refresh();return ()=>document.body.classList.remove('early-years-mode')},[])
+ useEffect(()=>{
+  document.body.classList.add('early-years-mode')
+  let cancelled=false
+  queueMicrotask(()=>{if(!cancelled)refresh()})
+  return ()=>{cancelled=true;document.body.classList.remove('early-years-mode')}
+ },[])
  const open=(next)=>{setPaper(next);setSelected(null);setForm(emptyForm);setDirty(false);setError('');setNotice('');setTemplateId(next?.design?.templateId||getDefaultEarlyYearsTemplateId(next?.classStage||'starter'))}
  const start=()=>{try{open(createUserEarlyYearsPaper(setup))}catch(e){setError(e.message)}}
  const selectQuestion=id=>{

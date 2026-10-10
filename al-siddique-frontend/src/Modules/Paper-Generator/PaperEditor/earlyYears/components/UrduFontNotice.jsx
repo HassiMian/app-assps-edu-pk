@@ -7,7 +7,9 @@ export default function UrduFontNotice() {
   const [fontDiag, setFontDiag] = useState(null)
 
   useEffect(() => {
-    setFontDiag(checkUrduFontAvailability())
+    let cancelled = false
+    queueMicrotask(() => { if (!cancelled) setFontDiag(checkUrduFontAvailability()) })
+    return () => { cancelled = true }
   }, [])
 
   if (!fontDiag || fontDiag.jameelLoaded) {

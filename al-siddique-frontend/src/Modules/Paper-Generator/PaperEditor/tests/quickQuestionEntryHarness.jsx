@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ReactDOM from 'react-dom/client'
 import QuickQuestionEntry from '../../QuickQuestionEntry.jsx'
 
-function Harness(){
+export function Harness(){
  const [questions,setQuestions]=useState([])
  const [visible,setVisible]=useState(true)
  const subject={id:'subj-browser',name:'English',classLevel:'8'}

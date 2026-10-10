@@ -33,7 +33,7 @@ if (typeof window !== 'undefined') {
   }
 }
 
-function B3HarnessApp() {
+export function B3HarnessApp() {
   const [paper, setPaper] = useState(null)
 
   useEffect(() => {

@@ -851,9 +851,10 @@ function AITextbookModal({ subjectId, subjectClassLevel, subjects, questionTypes
 
  useEffect(() => {
  const firstType = questionTypes[0]?.value || 'short'
- if (!questionTypes.some(t => t.value === defaultCategory)) {
- setDefaultCategory(firstType)
- }
+ if (questionTypes.some(t => t.value === defaultCategory)) return
+ let cancelled = false
+ queueMicrotask(() => { if (!cancelled) setDefaultCategory(firstType) })
+ return () => { cancelled = true }
  }, [questionTypes, defaultCategory])
 
  // State for Textbook Topic Selection Tab
@@ -867,12 +868,11 @@ function AITextbookModal({ subjectId, subjectClassLevel, subjects, questionTypes
 
  // Autofill subject name on subjects list loaded
  useEffect(() => {
-   if (subjectId && subjects?.length > 0) {
-     const sub = subjects.find(s => s.id === subjectId)
-     if (sub) {
-       setSubject(sub.name)
-     }
-   }
+   const sub = subjectId ? subjects?.find(s => s.id === subjectId) : null
+   if (!sub) return
+   let cancelled = false
+   queueMicrotask(() => { if (!cancelled) setSubject(sub.name) })
+   return () => { cancelled = true }
  }, [subjectId, subjects])
 
  // Filter PTB curriculum standard chapters matching current subject & class level

@@ -322,13 +322,22 @@ export default function DailyDiaryFeature() {
   }
 
   useEffect(() => {
-    if (!classLevel && selectedClass?.level) setClassLevel(String(selectedClass.level))
+    if (classLevel || !selectedClass?.level) return
+    let cancelled = false
+    const level = String(selectedClass.level)
+    queueMicrotask(() => { if (!cancelled) setClassLevel(level) })
+    return () => { cancelled = true }
   }, [classLevel, selectedClass?.level])
 
   useEffect(() => {
     const savedPaperSettings = paperSettings || {}
-    if (savedPaperSettings.schoolName) setSchoolName(savedPaperSettings.schoolName)
-    if (savedPaperSettings.logo) setLogoUrl(savedPaperSettings.logo)
+    let cancelled = false
+    queueMicrotask(() => {
+      if (cancelled) return
+      if (savedPaperSettings.schoolName) setSchoolName(savedPaperSettings.schoolName)
+      if (savedPaperSettings.logo) setLogoUrl(savedPaperSettings.logo)
+    })
+    return () => { cancelled = true }
   }, [paperSettings])
 
   useEffect(() => {

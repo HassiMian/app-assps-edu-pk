@@ -485,7 +485,9 @@ export function PaperSelectionToolbar({editMode=false,active=null}) {
   }
  }
  useEffect(()=>{
-  setMarks({bold:false,italic:false,underline:false,strikeThrough:false})
+  let cancelled=false
+  queueMicrotask(()=>{if(!cancelled)setMarks({bold:false,italic:false,underline:false,strikeThrough:false})})
+  return()=>{cancelled=true}
  },[active?.sectionId,active?.fieldKey])
  useEffect(()=>{
   if(typeof window==='undefined') return

@@ -5,7 +5,6 @@ import Portal from '../../components/Portal'
 import { usePaperStore } from './usePaperStore'
 import { canDuplicatePaperInWorkspace } from './paperCreationDraft.js'
 import { useAuth } from '../../context/AuthContext'
-import { isUrduScriptPaper } from './resolvePaperRoute.js'
 import { inferOfficialSectionKind, countOfficialMcqs, countNumberedItems } from './officialSectionSemantics.js'
 
 const C = {
@@ -162,8 +161,6 @@ export default function SavedPapersTab({ onLoadPaper, onDuplicatePaper }) {
  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16 }}>
  {filtered.map(paper => {
  const stats = categoryStats(paper)
- const isUrdu = isUrduScriptPaper(paper)
- const isOfficial = paper.documentFormat === 'pts-native-v13' || paper.documentFormat === 'official-v12' || String(paper.id || '').startsWith('official-first-term-')
 
  return (
  <div key={paper.id} style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 18, overflow: 'hidden' }}>

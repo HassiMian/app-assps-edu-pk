@@ -1,6 +1,11 @@
 // PTSPaperGenerator.jsx — PTS clone, dark SaaS theme
 import { useEffect, useState, useRef } from 'react'
 import { useTheme } from '../../context/ThemeContext.jsx'
+
+function createManualSectionId(paperId) {
+  return `${paperId || 'paper'}-manual-${Date.now()}-${Math.random().toString(36).slice(2,7)}`
+}
+
 import { Maximize, Minimize, ZoomIn, ZoomOut } from 'lucide-react'
 import Portal from '../../components/Portal'
 import { SYLLABI, CLASSES, SUBJECTS, CHAPTERS, QUESTIONS } from './data/questionBank'
@@ -732,7 +737,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   return () => document.removeEventListener('fullscreenchange', onFullscreenChange)
  }, [])
 
- let derivedSubjectName = '', derivedClassName = ''
+ let derivedSubjectName, derivedClassName
  if (isLoaded) {
   derivedSubjectName = overrideConfig.subjectName || overrideConfig.subject || ''
   derivedClassName = overrideConfig.className || overrideConfig.classLevel || ''
@@ -825,7 +830,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   return { ...current, official_section:resequenceOfficial(sections) }
  })
  const addOfficialSection = (layoutPreset = 'auto') => {
-  const newId = `${loadedPaper?.id || 'paper'}-manual-${Date.now()}-${Math.random().toString(36).slice(2,7)}`
+  const newId = createManualSectionId(loadedPaper?.id)
   onPaperChange(current => {
   const sections = [...(current.official_section || [])]
   const academicCount = sections.filter(section => inferOfficialSectionKind(section) !== 'marker').length
