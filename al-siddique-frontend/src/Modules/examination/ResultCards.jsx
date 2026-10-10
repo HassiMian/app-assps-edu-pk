@@ -215,7 +215,12 @@ export default function ResultCards() {
  }
 
  useEffect(() => {
- if (selectedExam) loadResults()
+ if (!selectedExam) return undefined
+ let active = true
+ // Defer the fetch and its state resets beyond the synchronous effect phase.
+ // Cleanup prevents a stale exam's queued request from starting after selection changes.
+ queueMicrotask(() => { if (active) loadResults() })
+ return () => { active = false }
  // eslint-disable-next-line react-hooks/exhaustive-deps
  }, [selectedExam])
 

@@ -60,7 +60,7 @@ try {
  assert.deepEqual(m.buildResultCardData(legacyArgs),legacy.buildResultCardData(legacyArgs),'Legacy templates retain protected data conversion')
  console.log('PASS protected legacy delegation byte-compatible')
  const toolbar = renderToStaticMarkup(createElement(m.ResultCardPrintToolbar,{options:{...opts,template:'signature-editorial'},setOptions:()=>{},onPrint:()=>{},onExportPdf:()=>{}}))
- assert.ok(toolbar.includes('print-certified') && toolbar.includes('always included'))
+ assert.ok(toolbar.includes('print-certified') && toolbar.includes('Both analytics charts are included') && toolbar.includes('Print · Choose Printer') && toolbar.includes('Save as PDF'))
  assert.ok(!toolbar.includes('A4 Landscape'))
  console.log('PASS premium selector, locked analytics and A4-only toolbar')
 } finally {
