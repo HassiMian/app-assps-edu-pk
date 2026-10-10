@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "assps-biology9-two-scanned-pages-observed-research-only-v1",
+  "grade": 9,
+  "subject": "Biology",
+  "sourceCatalogId": "pectaa-catalog-009",
+  "officialCachedSourcePdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+  "sourcePdfPageCount": 180,
+  "cachedPdfPageTextLayer": "IMAGE_ONLY_NO_TEXT_LAYER",
+  "actualScannedPdfPagesVisuallyObservedByAI": 2,
+  "originalQuestionRevisionsLinkedToVisuallyObservedSourcePages": 8,
+  "originalExerciseQuestionMappingsIndependentlyVerified": 0,
+  "schoolAdoptedTextbookEditionAuthenticated": false,
+  "actualSchoolPhysicalBookAndExercisePageCertified": false,
+  "humanIndependentAcademicReviewerSignatures": 0,
+  "academicallyApproved": 0,
+  "verifiedPublished": 0,
+  "publicationDecision": "DENY_VERIFIED_PUBLICATION_AND_PRODUCTION_IMPORT",
+  "warning": "Actual cached PDF scan was visually inspected for chapter/topic and visible printed page numbers; not a school-signed adoption, independent teacher answer, exercise, Urdu equivalence or publication certification.",
+  "pages": [
+    {
+      "pdfPageIndex": 7,
+      "printedPageNumberObservedVisuallyByAI": 7,
+      "chapterHeaderObservedVisually": "THE SCIENCE OF BIOLOGY",
+      "shortTopicLabelsObserved": [
+        "Histology",
+        "Cytology",
+        "Genetics",
+        "Taxonomy"
+      ],
+      "scannedPageRenderedJpegSha256": "bf927237b0b57d3071d56eb452e18ebac91d86523dcac54f732f786019fbd687",
+      "renderedJpegIdentityIsLibraryVersionSpecific": true,
+      "cachedPdfPhysicalPageHumanSchoolReviewer": null,
+      "originalQuestionCount": 5,
+      "questions": [
+        {
+          "originalQuestionId": "IX-BIO-2025-C01-T0101-M01",
+          "sourceFile": "biology9Chapter1TopicDrafts.json",
+          "originalSourceFileSha256": "a247320e736c5f6304a17faeac85f277589bfd9746edb2be12da6f0e9f792a37",
+          "originalQuestionRevisionSha256": "96d1c4edde2738d7a50367c5d7c8a4324d05d96dcdd7c3aaa07d0e6a0c8bfbe6",
+          "originalPdfPageClaim": 7,
+          "originalTopicId": "1.1",
+          "originallyClaimedBilingualSource": true,
+          "humanScientificAnswerAndLanguageParityApproved": false,
+          "actualBookAdoptionVerified": false,
+          "actualTextbookExerciseVerified": false,
+          "academicallyApproved": false,
+          "verifiedPublished": false
+        },
+        {
+          "originalQuestionId": "IX-BIO-2025-C01-T0101-L01",
+          "sourceFile": "biology9Chapter1TopicDrafts.json",
+          "originalSourceFileSha256": "a247320e736c5f6304a17faeac85f277589bfd9746edb2be12da6f0e9f792a37",
+          "originalQuestionRevisionSha256": "c477f5f567d0fdf20b1c4708d8c9d09a953f8dfc0972fa7f6e73f24811260e7e",
+          "originalPdfPageClaim": 7,
+          "originalTopicId": "1.1",
+          "originallyClaimedBilingualSource": true,
+          "humanScientificAnswerAndLanguageParityApproved": false,
+          "actualBookAdoptionVerified": false,
+          "actualTextbookExerciseVerified": false,
+          "academicallyApproved": false,
+          "verifiedPublished": false
+        },
+        {
+          "originalQuestionId": "IX-BIO-EM-RESEARCH-C01-T0101-S02",
+          "sourceFile": "biology9TopicResearchDrafts.json",
+          "originalSourceFileSha256": "d7afb8f8feda76162600ff7b8e3c09cb38e4dc51d9862dd321898f8e5749372a",
+          "originalQuestionRevisionSha256": "751772d086b98a578ff20c514fed2700e3359add203449cbff96fa160c138878",
+          "originalPdfPageClaim": 7,
+          "originalTopicId": "1.1",
+          "originallyClaimedBilingualSource": false,
+          "humanScientificAnswerAndLanguageParityApproved": false,
+          "actualBookAdoptionVerified": false,
+          "actualTextbookExerciseVerified": false,
+          "academicallyApproved": false,
+          "verifiedPublished": false
+        },
+        {
+          "originalQuestionId": "IX-BIO-EM-RESEARCH-C01-T0101-S04",
+          "sourceFile": "biology9TopicResearchDrafts.json",
+          "originalSourceFileSha256": "d7afb8f8feda76162600ff7b8e3c09cb38e4dc51d9862dd321898f8e5749372a",
+          "originalQuestionRevisionSha256": "5a2b5ffb30e1e82e27ca5b6d6a3bc3671688d1c15ed06aadd865f90cdb7c5079",
+          "originalPdfPageClaim": 7,
+          "originalTopicId": "1.1",
+          "originallyClaimedBilingualSource": false,
+          "humanScientificAnswerAndLanguageParityApproved": false,
+          "actualBookAdoptionVerified": false,
+          "actualTextbookExerciseVerified": false,
+          "academicallyApproved": false,
+          "verifiedPublished": false
+        },
+        {
+          "originalQuestionId": "IX-BIO-EM-RESEARCH-C01-T0101-M01",
+          "sourceFile": "biology9TopicResearchDrafts.json",
+          "originalSourceFileSha256": "d7afb8f8feda76162600ff7b8e3c09cb38e4dc51d9862dd321898f8e5749372a",
+          "originalQuestionRevisionSha256": "0f2ab33402e7197adef0171f3eb86fb95ea4dc819ed0d85369d1e864f1594ac2",
+          "originalPdfPageClaim": 7,
+          "originalTopicId": "1.1",
+          "originallyClaimedBilingualSource": false,
+          "humanScientificAnswerAndLanguageParityApproved": false,
+          "actualBookAdoptionVerified": false,
+          "actualTextbookExerciseVerified": false,
+          "academicallyApproved": false,
+          "verifiedPublished": false
+        }
+      ]
+    },
+    {
+      "pdfPageIndex": 11,
+      "printedPageNumberObservedVisuallyByAI": 11,
+      "chapterHeaderObservedVisually": "THE SCIENCE OF BIOLOGY",
+      "shortTopicLabelsObserved": [
+        "Physiotherapy",
+        "Agriculture",
+        "Animal Husbandry",
+        "Horticulture"
+      ],
+      "scannedPageRenderedJpegSha256": "ac483cad415d9a4585240e34736480041f2be47f840ea1d70602942ee96d09fe",
+      "renderedJpegIdentityIsLibraryVersionSpecific": true,
+      "cachedPdfPhysicalPageHumanSchoolReviewer": null,
+      "originalQuestionCount": 3,
+      "questions": [
+        {
+          "originalQuestionId": "IX-BIO-2025-C01-T0103-M01",
+          "sourceFile": "biology9Chapter1TopicDrafts.json",
+          "originalSourceFileSha256": "a247320e736c5f6304a17faeac85f277589bfd9746edb2be12da6f0e9f792a37",
+          "originalQuestionRevisionSha256": "4c7160b4e42fafa6ffb8f37873920a81c3422c79602be54fe93ab80fa46cb5a4",
+          "originalPdfPageClaim": 11,
+          "originalTopicId": "1.3",
+          "originallyClaimedBilingualSource": true,
+          "humanScientificAnswerAndLanguageParityApproved": false,
+          "actualBookAdoptionVerified": false,
+          "actualTextbookExerciseVerified": false,
+          "academicallyApproved": false,
+          "verifiedPublished": false
+        },
+        {
+          "originalQuestionId": "IX-BIO-2025-C01-T0103-S01",
+          "sourceFile": "biology9Chapter1TopicDrafts.json",
+          "originalSourceFileSha256": "a247320e736c5f6304a17faeac85f277589bfd9746edb2be12da6f0e9f792a37",
+          "originalQuestionRevisionSha256": "bc93962144df9ee473f8df3cd02b8c76b6418f703c8fdad165ffde3d10b12a7c",
+          "originalPdfPageClaim": 11,
+          "originalTopicId": "1.3",
+          "originallyClaimedBilingualSource": true,
+          "humanScientificAnswerAndLanguageParityApproved": false,
+          "actualBookAdoptionVerified": false,
+          "actualTextbookExerciseVerified": false,
+          "academicallyApproved": false,
+          "verifiedPublished": false
+        },
+        {
+          "originalQuestionId": "IX-BIO-2025-C01-T0103-S02",
+          "sourceFile": "biology9Chapter1TopicDrafts.json",
+          "originalSourceFileSha256": "a247320e736c5f6304a17faeac85f277589bfd9746edb2be12da6f0e9f792a37",
+          "originalQuestionRevisionSha256": "815c94f6c37a37e7e2b8a57bc17cabd5ec9fd90525f25b0a9fabb3937bfd7173",
+          "originalPdfPageClaim": 11,
+          "originalTopicId": "1.3",
+          "originallyClaimedBilingualSource": true,
+          "humanScientificAnswerAndLanguageParityApproved": false,
+          "actualBookAdoptionVerified": false,
+          "actualTextbookExerciseVerified": false,
+          "academicallyApproved": false,
+          "verifiedPublished": false
+        }
+      ]
+    }
+  ]
+}
