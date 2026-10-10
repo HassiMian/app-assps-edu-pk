@@ -73,3 +73,27 @@ test('repeat revision review packets cannot falsely inflate reviewed count',()=>
  const r=valid()
  assert.throws(()=>mod.run({reviews:[r,r]}),/DUPLICATE_REVIEW_REVISION/)
 })
+
+test('frozen bilingual source cannot be downgraded by reviewer packet medium',()=>{
+ const sourceDual=[...indexed.values()].find(q=>q.requiresUrduParityReview)
+ assert.ok(sourceDual,'original frozen Grade IX Biology bilingual question must exist')
+ const r=valid()
+ r.originalQuestionId=sourceDual.originalQuestionId
+ r.originalQuestionRevisionSha256=sourceDual.originalQuestionRevisionSha256
+ r.originalFileSha256=sourceDual.sourceSha
+ r.medium='english'
+ assert.throws(()=>mod.run({reviews:[r]}),/FROZEN_DUAL_MEDIUM_DOWNGRADE/)
+ r.medium='dual'
+ assert.throws(()=>mod.run({reviews:[r]}),/INDEPENDENT_URDU_REVIEW_MISSING/)
+ r.urduTranslationReviewerId='qualifiedUrduReviewer3'
+ r.urduTranslationReviewEvidenceRef='urdu-signoff-pending/3'
+ const intake=mod.run({reviews:[r]})
+ assert.equal(intake.rows[0].publisherSelectable,false)
+ assert.equal(intake.authenticatedAcademicApprovals,0)
+})
+test('malformed review checks fail closed with stable academic error',()=>{
+ for(const invalid of [null,false,'curriculumApplicability',[]]){
+  const r=valid();r.checks[0]=invalid
+  assert.throws(()=>mod.run({reviews:[r]}),/ACADEMIC_REVIEW_INTAKE_REQUIRED_SIGNED_REVISION_SPECIFIC_CHECKS_INCOMPLETE/)
+ }
+})

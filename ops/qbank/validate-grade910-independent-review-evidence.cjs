@@ -8,10 +8,26 @@ const reject=x=>{throw Error('ACADEMIC_REVIEW_INTAKE_'+x)}
 const REASONS=['curriculumApplicability','textbookEditionAndPrintedPage','questionCorrectness',
  'answerAndOptionCorrectness','marksAndDifficulty','languageAccuracy',
  'duplicatesAndOriginality','sourceProvenance']
-function indexOriginals(frozen){
+function indexOriginals(frozen,documents=original.loadInputs().documents){
+ // Bind bilingual review requirements to the SHA-frozen original, never packet-supplied medium.
+ const byFile=new Map(documents.map(entry=>[entry.file,entry.data]))
  const result=new Map()
- for(const file of frozen.files)for(const q of file.originalQuestionRevisions)
-  result.set(q.originalQuestionId,{...q,originalFile:file.originalAuthoredFile,sourceSha:file.originalFileSha256})
+ for(const file of frozen.files){
+  const raw=byFile.get(file.originalAuthoredFile)
+  const originals=[...(Array.isArray(raw?.drafts)?raw.drafts:[]),
+   ...(Array.isArray(raw?.items)?raw.items:[])]
+  const byId=new Map(originals.map(q=>[q.id,q]))
+  for(const q of file.originalQuestionRevisions){
+   const source=byId.get(q.originalQuestionId)
+   if(!source)reject('FROZEN_QUESTION_SOURCE_CONTENT_MISSING')
+   const sourceMedium=String(source.medium||source.language||raw.medium||'').toLowerCase()
+   const en=source.content?.en,ur=source.content?.ur
+   const requiresUrduParityReview=sourceMedium==='dual'||
+    Boolean(en?.stem&&ur?.stem)
+   result.set(q.originalQuestionId,{...q,originalFile:file.originalAuthoredFile,
+    sourceSha:file.originalFileSha256,sourceMedium,requiresUrduParityReview})
+  }
+ }
  if(result.size!==2581)reject('SOURCE_ID_SET_DRIFT')
  return result
 }
@@ -37,12 +53,15 @@ function assess({review,sourceById,seenRevision=new Set()}){
    !review.schoolAcademicApprovalEvidenceRef||!review.approvedAt)
   reject('SIGNED_REVIEW_OR_SCHOOL_APPROVAL_MISSING')
  if(!Array.isArray(review.checks)||review.checks.length!==REASONS.length||
+   review.checks.some(x=>!x||typeof x!=='object'||Array.isArray(x))||
    new Set(review.checks.map(x=>x.name)).size!==REASONS.length||
    REASONS.some(name=>!review.checks.some(x=>x.name===name&&x.decision==='pass'&&
      x.evidenceRef&&x.reviewedQuestionRevisionSha256===review.finalQuestionRevisionSha256&&
      x.reviewedAnswerRevisionSha256===review.finalAnswerRevisionSha256)))
   reject('REQUIRED_SIGNED_REVISION_SPECIFIC_CHECKS_INCOMPLETE')
- if(review.medium==='dual'&&(!review.urduTranslationReviewerId||
+ if(q.requiresUrduParityReview&&review.medium!=='dual')
+  reject('FROZEN_DUAL_MEDIUM_DOWNGRADE')
+ if((q.requiresUrduParityReview||review.medium==='dual')&&(!review.urduTranslationReviewerId||
    review.urduTranslationReviewerId===review.authorId||
    !review.urduTranslationReviewEvidenceRef))
   reject('DUAL_LANGUAGE_INDEPENDENT_URDU_REVIEW_MISSING')
@@ -60,9 +79,9 @@ function assess({review,sourceById,seenRevision=new Set()}){
   requiredNextStep:'School-authorized independent identity/signature verification and Paper Studio release owner certification'}
 }
 function run({reviews=[]}={}){
- const frozen=original.assertFrozen(original.loadInputs())
+ const inputs=original.loadInputs(),frozen=original.assertFrozen(inputs)
  if(!Array.isArray(reviews))reject('INVALID_REVIEW_ARRAY')
- const sourceById=indexOriginals(frozen),seenRevision=new Set()
+ const sourceById=indexOriginals(frozen,inputs.documents),seenRevision=new Set()
  const rows=reviews.map(review=>assess({review,sourceById,seenRevision}))
  return{schemaVersion:'assps-grade910-independent-revision-bound-review-evidence-intake-v1',
   originalCandidateCount:2581,reviewEvidencePacketsReceived:reviews.length,
