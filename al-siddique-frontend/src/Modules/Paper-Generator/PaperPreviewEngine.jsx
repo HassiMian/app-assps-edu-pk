@@ -1,7 +1,7 @@
 // PaperPreviewEngine.jsx — Al Siddique Smart School OS
 // 3 Templates + Print Options + Bubble Sheet + Save + Half/Double Print
 
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import Portal from '../../components/Portal'
 import { usePaperStore } from './usePaperStore'
 
@@ -11,7 +11,7 @@ const C = {
  border: 'rgba(148,163,184,0.18)', blue: '#0A84FF',
 }
 
-const URDU_FONT = "'Noto Nastaliq Urdu', 'Noto Naskh Arabic', serif"
+const URDU_FONT = "'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', 'Noto Naskh Arabic', serif"
 
 const BASE_PRINT = `
 @media print {
@@ -90,7 +90,7 @@ function E({ children, style={}, block=false, edit }) {
 }
 
 //  Bubble Sheet 
-function BubbleSheet({ count, perRow = 5 }) {
+function BubbleSheet({ count }) {
  if (!count) return null
  return (
  <div style={{ marginBottom: 10 }}>
@@ -423,6 +423,7 @@ function ModernTemplate({ config, selectedMCQ, selectedShort, selectedLong, sett
 // TEMPLATE 3 — ELITE PREMIUM
 // 
 function EliteTemplate({ config, selectedMCQ, selectedShort, selectedLong, settings, showAnswers, edit, printOpts, selectedChapters=[] }) {
+ const isUrdu = config.language === 'urdu'
  const { mcqTotal, shortTotal, longTotal, grandTotal } = calcTotals(selectedMCQ, selectedShort, selectedLong)
  const gold = '#C8991A', dark = '#071e34'
  const engFS = printOpts.engFontSize||13
@@ -441,7 +442,7 @@ function EliteTemplate({ config, selectedMCQ, selectedShort, selectedLong, setti
  )
 
  return (
- <div className="ppe-paper" style={{ background:'#fff', color:'#1a1a2e', fontFamily:isUrdu?URDU_FONT:`'Georgia','Times New Roman',serif`, fontSize:12, lineHeight:lineH, maxWidth:794, margin:'0 auto', position:'relative', overflow:'hidden' }}>
+ <div className="ppe-paper" style={{ background:'#fff', color:'#1a1a2e', fontFamily:isUrdu?URDU_FONT:`'Georgia','Times New Roman',serif`, direction:isUrdu?'rtl':'ltr', fontSize:12, lineHeight:lineH, maxWidth:794, margin:'0 auto', position:'relative', overflow:'hidden' }}>
  <LogoWatermark logo={settings.logo} show={printOpts.showLogoWatermark} opacity={printOpts.watermarkOpacity} />
  <div style={{ background:gold, height:7 }} />
  <div style={{ background:`linear-gradient(135deg,${dark},#0d3060)`, color:'#fff', padding:'20px 32px', position:'relative', zIndex:1 }}>

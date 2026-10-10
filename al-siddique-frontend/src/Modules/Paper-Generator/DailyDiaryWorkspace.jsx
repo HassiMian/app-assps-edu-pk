@@ -1,6 +1,6 @@
 import { currentSchoolDate } from './schoolCalendarDate.js'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { BookOpen, Check, ChevronDown, FileText, Minus, Palette, Plus, Printer, RefreshCw, Save, Search, Sparkles, Users, WandSparkles, X } from 'lucide-react'
+import { BookOpen, Check, FileText, Minus, Plus, Printer, RefreshCw, Save, Search, Sparkles, Users, WandSparkles, X } from 'lucide-react'
 import api, { resolveAssetUrl } from '../../services/api'
 import { useAcademicStore } from '../../services/useAcademicStore'
 import { getTenantStorageItem, setTenantStorageItem } from '../../services/tenantStorage'
@@ -11,8 +11,6 @@ import './DailyDiaryWorkspace.css'
 
 const DRAFT_KEY = 'assps_daily_diary_workspace_v2'
 const CARD_COUNTS = [2,3,4,5,6,8,10]
-const URDU_FONT = "'ASSPS Jameel Noori','Jameel Noori Nastaleeq','Noto Nastaliq Urdu',serif"
-const LATIN_FONT = "'Inter','Arial',sans-serif"
 const PALETTES = [
   { id:1, name:'Navy Signature', accent:'#0b2a4a', soft:'#edf3f8', line:'#c9d7e4', ink:'#102538' },
   { id:2, name:'Royal Blue', accent:'#1769aa', soft:'#edf6fc', line:'#c7dcec', ink:'#12314a' },
@@ -69,7 +67,7 @@ function robustParseDiaryText(text, knownSubjects = []) {
   const aliases=new Map(subjects.map(subject=>[subject.toLowerCase().replace(/[^a-z0-9\u0600-\u06ff]/g,''),subject]))
   const rows=[]; let current=null
   for(const line of lines){
-    const m=line.match(/^([^:]{2,35})\s*[:\-]\s*(.*)$/)
+    const m=line.match(/^([^:]{2,35})\s*[:-]\s*(.*)$/)
     if(m){const key=m[1].toLowerCase().replace(/[^a-z0-9\u0600-\u06ff]/g,'');const subject=aliases.get(key);if(subject){current={id:`${subject}-${rows.length}-${Date.now()}`,subject:subject.toUpperCase(),diary:clean(m[2]),isUrdu:/urdu|اردو/i.test(subject),isBold:!/urdu|اردو/i.test(subject),fontSize:/urdu|اردو/i.test(subject)?12:11,textAlign:/urdu|اردو/i.test(subject)?'right':'left'};rows.push(current);continue}}
     const standalone=aliases.get(line.toLowerCase().replace(/[^a-z0-9\u0600-\u06ff]/g,''))
     if(standalone){current={id:`${standalone}-${rows.length}-${Date.now()}`,subject:standalone.toUpperCase(),diary:'',isUrdu:/urdu|اردو/i.test(standalone),isBold:!/urdu|اردو/i.test(standalone),fontSize:/urdu|اردو/i.test(standalone)?12:11,textAlign:/urdu|اردو/i.test(standalone)?'right':'left'};rows.push(current);continue}
@@ -145,8 +143,8 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   const pages=useMemo(()=>chunk(cardPopulation,cardsPerPage),[cardPopulation,cardsPerPage])
   const overflowWarning=useMemo(()=>estimateOverflow(previewRows,cardsPerPage),[previewRows,cardsPerPage])
 
-  useEffect(()=>{try{const raw=getTenantStorageItem(DRAFT_KEY);if(!raw)return;const draft=JSON.parse(raw);if(draft.classLevel)setClassLevel(draft.classLevel);if(draft.section)setSection(draft.section);if(draft.date)setDate(draft.date);if(Array.isArray(draft.rows))setRows(draft.rows);if(CARD_COUNTS.includes(Number(draft.cardsPerPage)))setCardsPerPage(Number(draft.cardsPerPage));if(PALETTES.some(p=>p.id===Number(draft.paletteId)))setPaletteId(Number(draft.paletteId));if(draft.footerText)setFooterText(draft.footerText);if(draft.mode)setMode(draft.mode)}catch{}},[])
-  useEffect(()=>{try{setTenantStorageItem(DRAFT_KEY,JSON.stringify({mode,classLevel,section,date,rows,cardsPerPage,paletteId,footerText}))}catch{}},[mode,classLevel,section,date,rows,cardsPerPage,paletteId,footerText])
+  useEffect(()=>{try{const raw=getTenantStorageItem(DRAFT_KEY);if(!raw)return;const draft=JSON.parse(raw);if(draft.classLevel)setClassLevel(draft.classLevel);if(draft.section)setSection(draft.section);if(draft.date)setDate(draft.date);if(Array.isArray(draft.rows))setRows(draft.rows);if(CARD_COUNTS.includes(Number(draft.cardsPerPage)))setCardsPerPage(Number(draft.cardsPerPage));if(PALETTES.some(p=>p.id===Number(draft.paletteId)))setPaletteId(Number(draft.paletteId));if(draft.footerText)setFooterText(draft.footerText);if(draft.mode)setMode(draft.mode)}catch{ /* Preserve current diary editor state if storage is unavailable. */ }},[])
+  useEffect(()=>{try{setTenantStorageItem(DRAFT_KEY,JSON.stringify({mode,classLevel,section,date,rows,cardsPerPage,paletteId,footerText}))}catch{ /* Preserve current diary editor state if storage is unavailable. */ }},[mode,classLevel,section,date,rows,cardsPerPage,paletteId,footerText])
   useEffect(()=>{
     if(initialMode==='lesson') setMode('lesson')
     if(initialContext?.classLevel) setClassLevel(initialContext.classLevel)
@@ -187,7 +185,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   const reopenSavedDiary=async()=>{
     if(!classLevel||!date){setStatus('Select a class and date before reopening a saved diary.');return}
     let schoolId=0
-    try{const user=JSON.parse(window.localStorage.getItem('al_siddique_user')||'{}');schoolId=Number(user.school_id||user.schoolId||0)}catch{}
+    try{const user=JSON.parse(window.localStorage.getItem('al_siddique_user')||'{}');schoolId=Number(user.school_id||user.schoolId||0)}catch{ /* Preserve current diary editor state if storage is unavailable. */ }
     if(!Number.isSafeInteger(schoolId)||schoolId<=0){setStatus('Current school identity could not be verified. Sign in to reopen a diary.');return}
     const openGeneration=diaryScopeGeneration.current
     const stillCurrent=()=>diaryScopeGeneration.current===openGeneration

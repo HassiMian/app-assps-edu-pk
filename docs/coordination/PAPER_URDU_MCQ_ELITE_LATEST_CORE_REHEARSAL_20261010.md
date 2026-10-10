@@ -1,0 +1,14 @@
+# Paper owner isolated integration rehearsal on latest checked SaaS Core descendant
+
+Date: 10 October 2026. Core RC `release/core-security-owner-reconcile-20261010` exact fetched and independently verified `210cd88dbed45a5bc230a93a1ffcb8c6c206419b`. Core separately cherry-picked preceding Paper owner `2fe7d6af...` without touching Paper owner worktree. Exact Paper module comparison against that predecessor found **zero overlapping paths changed** in this Core successor. Isolated Paper-owned Core-derived branch `test/paper-urdu-elite-core-rehearsal-20261010` at `/root/workspace/assps-paper-urdu-elite-core-rehearsal-20261010`, directly based on Core SHA, then cleanly applied Paper owner `73909cdf524c738db2635b980f852e406e760b3b` with `git cherry-pick --no-commit`; no release authority or production deployment transferred.
+
+## Verified combined-source executable acceptance
+
+- Combined-source new Urdu MCQ canonical boundary, Classic/Modern/Elite server renderer, marks/contracts/Early Years structured model **35/35 PASS numeric EXIT0**, `/tmp/paper-core-rehearsal-model.log` (10034ms).
+- Combined-source real Chromium bilingual MCQ, Urdu print, Diary, Early Years, selection-only formatting, quick Question Bank entry, A4 Markdown tables, universal question blocks and marks **34/34 PASS numeric EXIT0**, `/tmp/paper-core-rehearsal-browser.log` + `/tmp/paper-core-rehearsal-browser.exit` (118680ms).
+- Combined-source optimized frontend build **EXIT0**, `/tmp/paper-core-rehearsal-build.log` (7.32s), `git diff --cached --check` EXIT0.
+- Initial Paper owner source had actual new RED→GREEN Urdu two-questions-misclassified-as-four and Elite renderer `isUrdu ReferenceError` cases, proven in `docs/coordination/PAPER_STUDIO_OWNER_URDU_MCQS_PREVIEW_LINT_RECOVERY_20261010.md`. Retired 43 First Term papers remain historical preserved reference data, not ongoing content release acceptance.
+
+## Strict exclusions and final gate owner
+
+This branch is NOT the authoritative SaaS Core RC or deployment source. Core must check its latest moving descendant and selectively reconcile this complete 14-path Paper owner delta, then perform genuine authenticated restricted non-BYPASS tenant PostgreSQL RLS+GRANT/teacher/guardian and saved-paper/lesson revision gates; live HTTPS private file aliases, recoverable backups/rollback, physical Urdu Jameel Noori Nastaleeq A4 DOCX/PDF printer visual certification and final release signoff. The Paper frontend legacy full-module ESLint still has **409 errors + 15 warnings** in 131 affected files on the Paper owner's tested branch and must not be represented as green. No SQL, finance/school/student data, Nginx/PM2, printer driver, academic question seed, official historical paper or live deployment was touched. **PRODUCTION HOLD**. Safe rollback is reverting the isolated Paper delta on a fresh descendant; never reset authoritative Core or live production.

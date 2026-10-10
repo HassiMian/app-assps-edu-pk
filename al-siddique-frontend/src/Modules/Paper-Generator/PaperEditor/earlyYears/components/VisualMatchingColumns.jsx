@@ -1,7 +1,5 @@
 // VisualMatchingColumns.jsx — Reusable matching layout with wide connection corridor and anchor bullets
-import React from 'react'
 import { TYPOGRAPHY_TOKENS } from '../tokens/typographyTokens.js'
-import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
 import RenderSketch from '../assets/RenderSketch.jsx'
 
 export default function VisualMatchingColumns({
@@ -10,8 +8,7 @@ export default function VisualMatchingColumns({
   connectionGap = '50mm',
   rowHeight = '16mm',
   isUrdu = false,
-  sketchSize = 'choiceVisual',
-  layout = 'stacked'
+  sketchSize = 'choiceVisual'
 }) {
   const fontFamily = isUrdu
     ? TYPOGRAPHY_TOKENS.fontFamilies.urduPrimary
