@@ -1,7 +1,6 @@
 // editorWorkingStore.js — In-Memory Working Document Controller (B4 Schema 3.2-W)
 import {
   computeFieldDirtyState,
-  computeCanonicalFingerprint,
   extractPlainTextFromTiptap,
   canonicalTextToTiptapDoc,
   SUPPORTED_FONTS,
@@ -31,7 +30,6 @@ import {
   createGrammarPatch,
   createVerticalMathPatch,
   STRUCTURED_MUTATION,
-  createInsertedOption,
 } from './structured/structuredNodeModel.js'
 import {
   deriveBaselineSegmentId,
@@ -40,7 +38,7 @@ import {
 } from './structured/structuredIdAllocator.js'
 import { exportStructuredBlock, computeMaxSequenceFromStructured } from './structured/structuredDraftV2.js'
 import { validateV2StructuredBlock } from './structured/structuredPatchValidator.js'
-import { parseVerticalNumeric, resolveWorkingSectionNodes } from './structured/structuredNodeProjection.js'
+import { resolveWorkingSectionNodes } from './structured/structuredNodeProjection.js'
 import {
   normalizeWorkingMark,
   recalculateWorkingMarks,

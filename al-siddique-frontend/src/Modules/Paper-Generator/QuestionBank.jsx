@@ -1638,7 +1638,7 @@ function StructuredDataEditor({ type, data, onChange, urduFont = 'Noto Nastaliq 
  style={{ background: 'rgba(255,255,255,0.05)', border: 'none', padding: '7px 10px', color: '#fff', fontSize: 14, outline: 'none', fontFamily: urduFont }} />
  <input value={p.plural} onChange={e => setPair(i, 'plural', e.target.value)}
  dir="rtl" placeholder={`جمع ${i + 1}`}
- style={{ background: 'rgba(255,255,255,0.03)', borderLeft: '1px solid rgba(255,255,255,0.07)', border: 'none', borderLeft: '1px solid rgba(255,255,255,0.06)', padding: '7px 10px', color: C.silver, fontSize: 14, outline: 'none', fontFamily: urduFont }} />
+ style={{ background: 'rgba(255,255,255,0.03)', border: 'none', borderLeft: '1px solid rgba(255,255,255,0.06)', padding: '7px 10px', color: C.silver, fontSize: 14, outline: 'none', fontFamily: urduFont }} />
  {pairs.length > 1
  ? <button onClick={() => removePair(i)} style={{ background: 'none', border: 'none', color: C.red, cursor: 'pointer', fontSize: 16 }}>×</button>
  : <span />}

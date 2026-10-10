@@ -1,11 +1,11 @@
 // PaperRibbonToolbar.jsx — Office/Word-like Ribbon Toolbar for ASSPS Paper Generator
-import React, { useState } from 'react'
+import { useState } from 'react'
 import {
   Undo2, Redo2, Bold, Italic, Underline, Strikethrough,
   Superscript, Subscript, AlignLeft, AlignCenter, AlignRight,
   AlignJustify, ArrowLeft, ArrowRight, Table as TableIcon,
-  Columns, LayoutGrid, FileText, CheckSquare, Palette,
-  Printer, Save, ChevronDown, Sparkles, Layers,
+  Columns,
+  Printer, Save,
   Highlighter, RemoveFormatting, Rows, Minus, Plus
 } from 'lucide-react'
 import {
@@ -23,7 +23,6 @@ export default function PaperRibbonToolbar({
   paper,
   onUpdatePaper,
   activeSectionId,
-  activeQuestionId,
   onSave,
   onPrint,
   onUndo,
@@ -35,8 +34,6 @@ export default function PaperRibbonToolbar({
   const [activeTab, setActiveTab] = useState('home') // 'home' | 'insert' | 'layout' | 'paper'
 
   const activeSection = paper?.sections?.find(s => s.id === activeSectionId) || paper?.sections?.[0]
-  const isMcqActive = activeSection?.type === 'mcq'
-  const isShortActive = activeSection?.type === 'short'
   const isTableActive = editor?.isActive('table')
 
   const runCommand = (fn) => {
