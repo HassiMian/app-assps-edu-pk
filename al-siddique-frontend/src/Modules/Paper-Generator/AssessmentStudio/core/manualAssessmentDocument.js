@@ -1,6 +1,5 @@
 import {
   AttemptRule,
-  AttemptRuleOrigin,
   ClassificationCertainty,
   ContentCapability,
   MathSourceFormat,
