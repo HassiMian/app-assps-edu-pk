@@ -60,7 +60,7 @@ test('Workspace renders, edits, persists and prints math plus immutable image as
        const parsed=JSON.parse(localStorage.getItem(key))
        const raw=JSON.stringify(parsed)
        if(raw.includes('a^2 + b^2 = c^2')&&raw.includes('mathSource'))return true
-     }catch{}
+     }catch{ /* Expected optional probe failure; the assertion after this block remains authoritative. */ }
    }
    return false
  })

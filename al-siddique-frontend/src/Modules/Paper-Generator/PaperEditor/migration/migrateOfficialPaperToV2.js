@@ -211,7 +211,6 @@ export function migrateOfficialPaperToV2(v13Paper, manifestPaper, migrationConte
     }
     stitched.segments.forEach(seg => docCoverageLedger.push(seg))
 
-    let headingSegId = null
     const extraSectionSegmentIds = []
 
     if (headingOnlyAcademic) {
@@ -236,7 +235,7 @@ export function migrateOfficialPaperToV2(v13Paper, manifestPaper, migrationConte
       docCoverageLedger.push(emptyContentSeg)
       extraSectionSegmentIds.push(emptyContentSeg.sourceSegmentId)
     } else {
-      headingSegId = `${canonicalSectionId}__h_seg01`
+      const headingSegId = `${canonicalSectionId}__h_seg01`
       const headingCoverageSeg = createCoverageSegment({
         sourceSectionId: sourceSec.id,
         sourceField: 'heading',

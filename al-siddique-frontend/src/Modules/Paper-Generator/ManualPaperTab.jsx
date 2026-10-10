@@ -116,7 +116,7 @@ export default function ManualPaperTab({ onProceedToPreview }) {
       setTenantStorageItem('pg_manual_mode', contentMode)
       setTenantStorageItem('pg_manual_content', content)
       setTenantStorageItem('pg_manual_urdu', urduContent)
-    } catch {}
+    } catch { /* This optional operation may fail; preserve the existing editor state and fallback behavior. */ }
   }, [classLevel, subject, publisher, title, titleTouched, contentMode, content, urduContent])
 
   function handlePreview() {
