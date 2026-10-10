@@ -16,6 +16,7 @@ Both GitHub candidate branches verified HEAD=remote and clean, independently che
 Previous four-site/five unrestricted private media alias issue was corrected by controlled earlier operation, preserving separate exact rollback configs. Verified seven enabled Nginx sites pass privacy checker, Nginx syntax PASS and running active. Added reproducible live HTTPS probe using real verified TLS certificate and localhost SNI routing. 32/32 private or dangerous extension paths across api.assps.edu.pk, app.assps.edu.pk, apex.assps.edu.pk, www.assps.edu.pk return HTTP404; each public root gives HTTP2xx/3xx. No credentials, private school file contents or student names accessed.
 
 Relevant source: ops/security/verify-live-private-uploads-tls-matrix-20261010.py, 32/32 PASS exit0. This is live ingress proof, not teacher authorization proof.
+Additional live anonymous authorization smoke: ops/release/verify-live-anonymous-authorization-20261010.py uses certificate-verified local SNI TLS requests without credentials; the actual seven mounted API endpoints for exams/results, student roster, attendance, fees and /api/portal/paper-studio/papers all deny anonymous access HTTP401, 7/7 PASS. Correct Paper Studio mount is /api/portal/paper-studio (not /api/paper-studio). Still not proof of authorized teacher role isolation.
 
 ## Real signed non-BYPASS PostgreSQL clone and Marks Entry tenant test
 
@@ -36,7 +37,7 @@ ops/release/verify-assps-marks-release-gates-20261010.py runs only verifications
 
 Static phase, ACTUAL RUN EXIT0:
 - Exact live separate release metadata IDs, source local/remote/clean/ancestry, backup SHA256, isolated restored file comparisons with exact Argus runtime exception
-- Native live Nginx syntax, seven-site media policy, certificate-verified 32/32 HTTPS path denial
+- Native live Nginx syntax, seven-site media policy, certificate-verified 32/32 HTTPS path denial, seven mounted private API paths HTTP401 without JWT
 - Real 13/13 signed restricted disposable PostgreSQL session tests with original credential state restored
 - Real signed Marks Entry clone SQL exam/result READ, authorized UPDATE and cross-tenant UPDATE/GUC spoof denial, transaction ROLLBACK
 

@@ -53,6 +53,7 @@ def main():
         call('LIVE_NGINX_SYNTAX',['nginx','-t'])
         call('LIVE_NGINX_MEDIA_POLICY',['sh',str(OPS/'ops/security/check-nginx-private-uploads.sh'),'/etc/nginx/sites-enabled'])
         call('LIVE_HTTPS_CERT_AND_32_PRIVATE_PROBES',['python3',str(OPS/'ops/security/verify-live-private-uploads-tls-matrix-20261010.py')])
+        call('LIVE_ANONYMOUS_7_PROTECTED_API_ROUTES',['python3',str(OPS/'ops/release/verify-live-anonymous-authorization-20261010.py')])
         call('REAL_RESTRICTED_SIGNED_DISPOSABLE_POSTGRES_13_TESTS',['python3',str(OPS/'ops/security/run-isolated-signed-actor-acceptance-20261010.py'),'db'])
         sql=OPS/'ops/security/verify-signed-marks-transaction-clone-20261010.sql'
         # Script resides in Core's protected worktree. Stream code through stdin
