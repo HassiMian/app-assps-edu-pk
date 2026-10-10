@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react';
 import CanonicalEditableText from './CanonicalEditableText.jsx'
 import CanonicalStaticNode from './CanonicalStaticNode.jsx'
 import CanonicalOptionLabel from './CanonicalOptionLabel.jsx'
@@ -23,7 +23,7 @@ import {
   cmdReorderMcqOptions,
 } from './structured/structuredCommands.js'
 import { buildFieldKey } from './EditorFieldRegistry.js'
-import { getB3NodeEditability, B3_RENDER_STRATEGY } from './nodeRenderStrategy.js'
+import './nodeRenderStrategy.js';
 import { usePaperStore } from '../../usePaperStore.js'
 import { getTemplatePreset } from '../templates/paperTemplates.js'
 

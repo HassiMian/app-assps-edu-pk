@@ -2,35 +2,15 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import {
-  createPaperDocument,
-  createPaperSection,
-  createPaperQuestion,
-  calculatePaperTotalMarks,
-  calculatePaperQuestionCount,
-  clonePaperDocument,
-} from '../core/PaperDocument.js'
-import {
-  normalizeOptionLabel,
-  getDisplayOptionLabel,
-  isUrduText,
-  detectDirection,
-  toUrduDigits,
-  toWesternDigits,
-} from '../layouts/urduRtlEngine.js'
+import { createPaperDocument, createPaperSection, createPaperQuestion, clonePaperDocument } from '../core/PaperDocument.js';
+import { isUrduText, detectDirection } from '../layouts/urduRtlEngine.js';
 import {
   resolveMcqColumns,
   chunkOptions,
   normalizeQuestionOptions,
 } from '../layouts/mcqLayoutEngine.js'
-import {
-  splitQuestionsBalancedVertical,
-  resolveShortLayoutMode,
-} from '../layouts/shortQuestionLayoutEngine.js'
-import {
-  PAPER_TEMPLATES,
-  getTemplatePreset,
-} from '../templates/paperTemplates.js'
+import { splitQuestionsBalancedVertical } from '../layouts/shortQuestionLayoutEngine.js';
+import { getTemplatePreset } from '../templates/paperTemplates.js';
 import {
   migrateLegacyPaper,
 } from '../migration/migrateLegacyPaper.js'

@@ -2,7 +2,11 @@
 // Monospace stack layout. Raw numbers preserved exactly (e.g. "0012" not converted to 12).
 // Minimum 2 operands guard. Never auto-calculates result line.
 
-import React from 'react'
+// VerticalMathStructuredEditor.jsx — In-place structured editor for Vertical Math problems (B4-D).
+// Monospace stack layout. Raw numbers preserved exactly (e.g. "0012" not converted to 12).
+// Minimum 2 operands guard. Never auto-calculates result line.
+
+import 'react';
 import StructuredTextInput from '../components/StructuredTextInput.jsx'
 import StructuredItemControls from '../components/StructuredItemControls.jsx'
 import {

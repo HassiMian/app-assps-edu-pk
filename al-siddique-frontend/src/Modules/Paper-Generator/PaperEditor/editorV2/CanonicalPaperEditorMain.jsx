@@ -1,5 +1,6 @@
 // CanonicalPaperEditorMain.jsx — Top-Level Canonical Word-Like In-Place Editor (Rule 23)
-import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react'
+// CanonicalPaperEditorMain.jsx — Top-Level Canonical Word-Like In-Place Editor (Rule 23)
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import CanonicalPaperRibbonToolbar from './CanonicalPaperRibbonToolbar.jsx'
 import CanonicalDocumentRenderer from './CanonicalDocumentRenderer.jsx'
 import { EditorWorkingStore } from './editorWorkingStore.js'

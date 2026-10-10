@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState } from 'react'
+import { lazy, Suspense, useState } from 'react';
 const EarlyYearsWorksheetEditor = lazy(()=>import('./EarlyYearsWorksheetEditor.jsx'))
 const EarlyYearsActivityBuilder = lazy(()=>import('./EarlyYearsActivityBuilder.jsx'))
 export default function EarlyYearsStudio({initialPaperId,onReturnToSource}) {

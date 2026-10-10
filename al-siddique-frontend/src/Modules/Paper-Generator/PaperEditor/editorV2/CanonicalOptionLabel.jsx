@@ -1,4 +1,4 @@
-import React from 'react'
+import 'react';
 import { optionLabelParts } from '../../paperSystemRules.js'
 import StableClosingBracket from '../StableClosingBracket.jsx'
 

@@ -1,21 +1,14 @@
 // PaperDocumentRenderer.jsx — Unified Document Renderer for Editor, Preview, and Print
-import React from 'react'
+// PaperDocumentRenderer.jsx — Unified Document Renderer for Editor, Preview, and Print
+import 'react';
 import { getTemplatePreset } from '../templates/paperTemplates.js'
-import {
-  isUrduText,
-  detectDirection,
-  getQuestionNumberText,
-  getDisplayOptionLabel,
-} from '../layouts/urduRtlEngine.js'
+import { isUrduText, getQuestionNumberText, getDisplayOptionLabel } from '../layouts/urduRtlEngine.js';
 import {
   resolveMcqColumns,
   chunkOptions,
   normalizeQuestionOptions,
 } from '../layouts/mcqLayoutEngine.js'
-import {
-  splitQuestionsBalancedVertical,
-  splitQuestionsRowWise,
-} from '../layouts/shortQuestionLayoutEngine.js'
+import { splitQuestionsBalancedVertical } from '../layouts/shortQuestionLayoutEngine.js';
 import { PaperRichTextRenderer } from '../../PaperRichTextEditor.jsx'
 import EditableQuestionStem from './EditableQuestionStem.jsx'
 

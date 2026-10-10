@@ -2,7 +2,11 @@
 // RULE: Never use Tiptap for individual MCQ options, grammar cells, or fill-blank tokens.
 // Preserves exact string input without automatic trim(). Supports dir and keyboard shortcuts.
 
-import React, { useState, useEffect, useRef } from 'react'
+// StructuredTextInput.jsx — Plain text input for structured node fields (B4).
+// RULE: Never use Tiptap for individual MCQ options, grammar cells, or fill-blank tokens.
+// Preserves exact string input without automatic trim(). Supports dir and keyboard shortcuts.
+
+import { useState, useEffect, useRef } from 'react';
 import { useStructuredFocus, INTERACTION_MODE } from '../StructuredFocusContext.jsx'
 
 export default function StructuredTextInput({

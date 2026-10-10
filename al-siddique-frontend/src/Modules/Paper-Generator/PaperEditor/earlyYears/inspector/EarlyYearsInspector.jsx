@@ -1,17 +1,13 @@
 // EarlyYearsInspector.jsx — Inspector sidebar with FUNCTIONAL controls wired to EarlyYearsPresentationOverlay
 // Controls update presentation overlay WITHOUT mutating academic source JSON.
-import React, { useState, useCallback, useMemo, useEffect } from 'react'
+// EarlyYearsInspector.jsx — Inspector sidebar with FUNCTIONAL controls wired to EarlyYearsPresentationOverlay
+// Controls update presentation overlay WITHOUT mutating academic source JSON.
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import { getAllSketchAssets } from '../assets/SketchAssetRegistry.js'
 import { processSketchFileUpload } from '../upload/uploadSketchValidator.js'
 import RenderSketch from '../assets/RenderSketch.jsx'
 import { resolveEarlyYearsMarks } from '../specs/earlyYearsMarks.js'
-import {
-  getOverlay,
-  setOverlay,
-  SKETCH_SIZES,
-  LAYOUT_SUPPORT,
-  isLayoutSupported
-} from '../specs/EarlyYearsPresentationOverlay.js'
+import { getOverlay, setOverlay, SKETCH_SIZES, LAYOUT_SUPPORT } from '../specs/EarlyYearsPresentationOverlay.js';
 
 function getVisualSlotsForQuestion(question) {
   if (!question) return []

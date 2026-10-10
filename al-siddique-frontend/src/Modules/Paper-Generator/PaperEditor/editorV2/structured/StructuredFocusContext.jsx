@@ -1,7 +1,12 @@
 // StructuredFocusContext.jsx — Tracks whether focus is in a Tiptap field or a structured control.
 // Provides history-routing context via React context API.
 
-import React, { createContext, useContext, useRef, useCallback, useMemo } from 'react'
+// StructuredFocusContext.jsx — Tracks whether focus is in a Tiptap field or a structured control.
+// Provides history-routing context via React context API.
+
+import { createContext, useContext, useRef, useCallback, useMemo } from 'react';
+
+// Re-export pure JS helpers (no JSX) so both this file and node:test can use them.
 
 // Re-export pure JS helpers (no JSX) so both this file and node:test can use them.
 export {

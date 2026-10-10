@@ -1,15 +1,7 @@
 // earlyYearsSourceData.test.js — Verifies Early Years 9-paper source truth & QA manifest preservation
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import {
-  getEarlyYearsCorpus,
-  getAllEarlyYearsPapers,
-  getEarlyYearsPaperById,
-  getEarlyYearsPapersByClass,
-  getEarlyYearsQAManifest,
-  getQAFindingsForPaper,
-  validateEarlyYearsCorpus
-} from '../earlyYears/data/earlyYearsSourceStore.js'
+import { getAllEarlyYearsPapers, getEarlyYearsPaperById, getEarlyYearsPapersByClass, getEarlyYearsQAManifest, getQAFindingsForPaper, validateEarlyYearsCorpus } from '../earlyYears/data/earlyYearsSourceStore.js';
 
 test('EY-SOURCE 1: Exactly 9 papers exist and all are SOURCE_PRESENT (0 SOURCE_MISSING)', () => {
   const papers = getAllEarlyYearsPapers()

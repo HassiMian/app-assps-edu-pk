@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react';
 import EarlyYearsPaperContainer from './components/EarlyYearsPaperContainer.jsx'
 import { getDefaultEarlyYearsTemplateId, getEarlyYearsTemplatePreset, EARLY_YEARS_TEMPLATE_OPTIONS } from './earlyYearsTemplates.js'
 import { getAllSketchAssets } from './assets/SketchAssetRegistry.js'

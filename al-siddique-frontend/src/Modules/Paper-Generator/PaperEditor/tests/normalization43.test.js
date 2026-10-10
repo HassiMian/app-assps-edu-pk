@@ -5,11 +5,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import {
-  normalizeOfficialPaper,
-  generate43NormalizationManifest,
-  sortObjectKeysRecursively,
-} from '../migration/normalizeOfficialPaper.js'
+import { generate43NormalizationManifest } from '../migration/normalizeOfficialPaper.js';
 import {
   parseMarksFormula,
   resolveFormulaRoles,

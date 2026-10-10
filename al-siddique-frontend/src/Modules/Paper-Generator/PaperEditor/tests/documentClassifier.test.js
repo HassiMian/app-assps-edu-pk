@@ -10,36 +10,7 @@ import {
   DOCUMENT_CLASSIFICATIONS,
 } from '../migration/classifyPaperDocument.js'
 
-import {
-  CANONICAL_FORMAT,
-  CANONICAL_DOCUMENT_MODEL,
-  CANONICAL_SCHEMA_VERSION,
-  DocumentLanguage,
-  DocumentDirection,
-  AttemptRule,
-  AttemptRuleOrigin,
-  PaperMarksStatus,
-  PaperTotalOrigin,
-  SectionMarksOrigin,
-  CanonicalNodeType,
-  LabelOrigin,
-  FieldProvenanceOrigin,
-  NodeMarksOrigin,
-  ClassificationCertainty,
-  createCanonicalPaperDocument,
-  createCanonicalSection,
-  createMcqNode,
-  createShortQuestionNode,
-  createTrueFalseNode,
-  createFillBlankNode,
-  createMatchingColumnsNode,
-  createGrammarTableNode,
-  createVerticalMathNode,
-  createUnknownPreservedNode,
-  createScopeHeaderNode,
-  createSectionBannerNode,
-  validateCanonicalPaperDocument,
-} from '../core/PaperDocumentV2.js'
+import { CANONICAL_FORMAT, CANONICAL_DOCUMENT_MODEL, DocumentLanguage, DocumentDirection, AttemptRule, AttemptRuleOrigin, SectionMarksOrigin, CanonicalNodeType, LabelOrigin, ClassificationCertainty, createCanonicalPaperDocument, createCanonicalSection, createMcqNode, createShortQuestionNode, validateCanonicalPaperDocument } from '../core/PaperDocumentV2.js';
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)

@@ -1,5 +1,6 @@
 // SketchAssetRegistry.js — Reusable print-safe SVG line-art asset registry for Early Years papers
-import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
+// SketchAssetRegistry.js — Reusable print-safe SVG line-art asset registry for Early Years papers
+import '../tokens/layoutTokens.js';
 import { PROFESSIONAL_SKETCH_OVERRIDES } from './ProfessionalSketchLibrary.js'
 
 /**

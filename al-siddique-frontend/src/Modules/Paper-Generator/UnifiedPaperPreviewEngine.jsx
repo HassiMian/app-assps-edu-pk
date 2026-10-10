@@ -1,7 +1,10 @@
 // PaperPreviewEngine.jsx — Al Siddique Smart School OS
 // 3 Templates + Print Options + Bubble Sheet + Save + Half/Double Print
 
-import { useState, useRef } from 'react'
+// PaperPreviewEngine.jsx — Al Siddique Smart School OS
+// 3 Templates + Print Options + Bubble Sheet + Save + Half/Double Print
+
+import { useState } from 'react';
 import Portal from '../../components/Portal'
 import { usePaperStore } from './usePaperStore'
 

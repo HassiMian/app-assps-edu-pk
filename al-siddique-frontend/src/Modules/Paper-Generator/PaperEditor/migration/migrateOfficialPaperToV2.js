@@ -1,23 +1,6 @@
 // migrateOfficialPaperToV2.js — Lossless V13 to Canonical PaperDocument V2 migration engine
-import {
-  CANONICAL_FORMAT,
-  CANONICAL_DOCUMENT_MODEL,
-  CANONICAL_SCHEMA_VERSION,
-  DocumentLanguage,
-  DocumentDirection,
-  FieldProvenanceOrigin,
-  CoverageStatus,
-  NodeMarksOrigin,
-  SectionMarksOrigin,
-  ClassificationCertainty,
-  CanonicalNodeType,
-  createCanonicalPaperDocument,
-  createCanonicalSection,
-  createScopeHeaderNode,
-  createSectionBannerNode,
-  createUnknownPreservedNode,
-  validateCanonicalPaperDocument,
-} from '../core/PaperDocumentV2.js'
+// migrateOfficialPaperToV2.js — Lossless V13 to Canonical PaperDocument V2 migration engine
+import { DocumentLanguage, DocumentDirection, FieldProvenanceOrigin, CoverageStatus, NodeMarksOrigin, SectionMarksOrigin, ClassificationCertainty, CanonicalNodeType, createCanonicalPaperDocument, createCanonicalSection, createSectionBannerNode, createUnknownPreservedNode, validateCanonicalPaperDocument } from '../core/PaperDocumentV2.js';
 
 import {
   createCoverageSegment,
