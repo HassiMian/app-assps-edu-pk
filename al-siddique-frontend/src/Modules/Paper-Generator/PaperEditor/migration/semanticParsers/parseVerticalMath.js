@@ -106,9 +106,6 @@ export function parseVerticalMath(content, context = {}) {
     const nodeId = `${sectionId}__vm${blockIndex}`
 
     // Extract operands and operator for canonical vertical_math contract
-    const op1Line = block.lines[0] || ''
-    const op2Line = block.lines[1] || ''
-
     // Look for numbers and operator in the block
     const numbers = block.rawText.match(/\b\d+\b/g) || ['0', '0']
     const operatorMatch = block.rawText.match(/[-+×÷]/)
