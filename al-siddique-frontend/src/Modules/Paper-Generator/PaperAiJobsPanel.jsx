@@ -540,7 +540,7 @@ export default function PaperAiJobsPanel({ title = 'AI Job History' }) {
 
  <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
  <div style={{ color: '#C0C8D8', fontSize: 11 }}>
- {new Date(job.createdAt || Date.now()).toLocaleString()}
+ {job.createdAt ? new Date(job.createdAt).toLocaleString() : 'Time not recorded'}
  </div>
  <div style={{ color: '#8892A4', fontSize: 11 }}>Progress: {Math.round(Number(job.progress || 0))}%</div>
  </div>

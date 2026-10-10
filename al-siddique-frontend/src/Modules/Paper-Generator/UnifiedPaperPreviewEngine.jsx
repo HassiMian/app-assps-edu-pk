@@ -120,7 +120,7 @@ function E({ children, style={}, block=false, edit }) {
 }
 
 //  Bubble Sheet 
-function BubbleSheet({ count, perRow = 5 }) {
+function BubbleSheet({ count }) {
  if (!count) return null
  return (
  <div style={{ marginBottom: 10 }}>
@@ -458,7 +458,6 @@ function ModernTemplate({ config, selectedMCQ, selectedShort, selectedLong, sett
 function EliteTemplate({ config, selectedMCQ, selectedShort, selectedLong, settings, showAnswers, edit, printOpts, selectedChapters=[] }) {
  const { mcqTotal, shortTotal, longTotal, grandTotal } = calcTotals(selectedMCQ, selectedShort, selectedLong)
  const gold = '#C8991A', dark = '#071e34'
- const isUrdu = config.language === 'urdu'
  const bodyFont = resolveBodyFont(config.language, printOpts, 'elite')
  const engFS = printOpts.engFontSize||13
  const urdFS = printOpts.urdFontSize||14
@@ -600,6 +599,36 @@ function EliteTemplate({ config, selectedMCQ, selectedShort, selectedLong, setti
 // 
 // MAIN ENGINE
 // 
+const TBtn = ({ active, onClick, children, style={} }) => (
+ <button onClick={onClick} style={{ background: active ? `linear-gradient(135deg,${C.gold},${C.goldL})` : 'rgba(15,23,42,0.46)', color: active ? '#071e34' : C.silver, border: active ? 'none' : `1px solid ${C.border}`, borderRadius: 9, padding: '7px 14px', fontWeight: 600, fontSize: 12, cursor: 'pointer', ...style }}>
+ {children}
+ </button>
+ )
+
+ const SliderOpt = ({ label, value, min, max, step=0.1, onChange }) => (
+ <div style={{ display:'flex', flexDirection:'column', gap:2 }}>
+ <div style={{ fontSize:10, color:C.muted, fontWeight:600 }}>{label}: {value}</div>
+ <input type="range" min={min} max={max} step={step} value={value} onChange={e=>onChange(Number(e.target.value))}
+ style={{ width:80, accentColor:C.gold }} />
+ </div>
+ )
+
+ const NumOpt = ({ label, value, min, max, onChange }) => (
+ <div style={{ display:'flex', flexDirection:'column', gap:2 }}>
+ <div style={{ fontSize:10, color:C.muted, fontWeight:600 }}>{label}</div>
+ <input type="number" min={min} max={max} value={value} onChange={e=>onChange(Number(e.target.value))}
+ style={{ width:52, background:'rgba(11,44,77,0.7)', border:`1px solid ${C.border}`, borderRadius:6, color:C.gold, padding:'3px 6px', fontSize:12, outline:'none', fontWeight:700 }} />
+ </div>
+ )
+
+ const Toggle = ({ label, checked, onChange }) => (
+ <label style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:11, color:C.silver }}>
+ <input type="checkbox" checked={checked} onChange={e=>onChange(e.target.checked)}
+ style={{ accentColor:C.gold, width:14, height:14 }} />
+ {label}
+ </label>
+ )
+
 export default function UnifiedPaperPreviewEngine({ config, selectedMCQ, selectedShort, selectedLong, settings, showAnswers: initAns, onBack, selectedChapters=[], importToQuestionBank = false, questionBankSubjectId = '', questionBankSubjectMeta = null, paperSource = 'paper' }) {
  const { savePaper, importPaperQuestionsToBank } = usePaperStore()
  const unifiedDefaults = resolveUnifiedDefaults(config.classLevel)
@@ -675,35 +704,7 @@ export default function UnifiedPaperPreviewEngine({ config, selectedMCQ, selecte
  setTimeout(() => { setSaveSuccess(false); setShowSave(false) }, 1500)
  }
 
- const TBtn = ({ active, onClick, children, style={} }) => (
- <button onClick={onClick} style={{ background: active ? `linear-gradient(135deg,${C.gold},${C.goldL})` : 'rgba(15,23,42,0.46)', color: active ? '#071e34' : C.silver, border: active ? 'none' : `1px solid ${C.border}`, borderRadius: 9, padding: '7px 14px', fontWeight: 600, fontSize: 12, cursor: 'pointer', ...style }}>
- {children}
- </button>
- )
 
- const SliderOpt = ({ label, value, min, max, step=0.1, onChange }) => (
- <div style={{ display:'flex', flexDirection:'column', gap:2 }}>
- <div style={{ fontSize:10, color:C.muted, fontWeight:600 }}>{label}: {value}</div>
- <input type="range" min={min} max={max} step={step} value={value} onChange={e=>onChange(Number(e.target.value))}
- style={{ width:80, accentColor:C.gold }} />
- </div>
- )
-
- const NumOpt = ({ label, value, min, max, onChange }) => (
- <div style={{ display:'flex', flexDirection:'column', gap:2 }}>
- <div style={{ fontSize:10, color:C.muted, fontWeight:600 }}>{label}</div>
- <input type="number" min={min} max={max} value={value} onChange={e=>onChange(Number(e.target.value))}
- style={{ width:52, background:'rgba(11,44,77,0.7)', border:`1px solid ${C.border}`, borderRadius:6, color:C.gold, padding:'3px 6px', fontSize:12, outline:'none', fontWeight:700 }} />
- </div>
- )
-
- const Toggle = ({ label, checked, onChange }) => (
- <label style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:11, color:C.silver }}>
- <input type="checkbox" checked={checked} onChange={e=>onChange(e.target.checked)}
- style={{ accentColor:C.gold, width:14, height:14 }} />
- {label}
- </label>
- )
 
  return (
  <div>
