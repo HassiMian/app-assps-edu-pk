@@ -1,5 +1,6 @@
 // EditableQuestionStem.jsx — Interactive, selection-aware question stem editor
-import React, { useEffect } from 'react'
+// EditableQuestionStem.jsx — Interactive, selection-aware question stem editor
+import { useEffect } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react'
 import { getPaperEditorExtensions, createTiptapDocFromText } from '../extensions/PaperEditorExtensions.js'
 import { PaperRichTextRenderer } from '../../PaperRichTextEditor.jsx'

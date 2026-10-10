@@ -1,5 +1,6 @@
 // eyTestHarness.jsx — Test harness for Early Years browser acceptance tests
-import React, { useState, useEffect, Suspense } from 'react'
+// eyTestHarness.jsx — Test harness for Early Years browser acceptance tests
+import { useState, useEffect, Suspense } from 'react';
 import ReactDOM from 'react-dom/client'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import EarlyYearsWorksheetEditor from '../earlyYears/EarlyYearsWorksheetEditor.jsx'

@@ -2,7 +2,11 @@
 // Insertable types: MCQ, True/False, Fill Blank, Matching Columns, Grammar Table, Vertical Math.
 // FORBIDDEN: scope_header, section_banner, unknown_preserved.
 
-import React, { useState, useRef, useEffect } from 'react'
+// AddStructuredNodeMenu.jsx — Dropdown menu for inserting new canonical structured questions (B4-E).
+// Insertable types: MCQ, True/False, Fill Blank, Matching Columns, Grammar Table, Vertical Math.
+// FORBIDDEN: scope_header, section_banner, unknown_preserved.
+
+import { useState, useRef, useEffect } from 'react';
 
 const INSERTABLE_OPTIONS = [
   { type: 'mcq', label: 'Multiple Choice (MCQ)' },

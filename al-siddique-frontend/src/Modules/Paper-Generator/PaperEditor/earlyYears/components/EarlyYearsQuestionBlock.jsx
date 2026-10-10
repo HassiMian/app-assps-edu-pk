@@ -1,5 +1,6 @@
 // EarlyYearsQuestionBlock.jsx — Question container with fixed label column and visual component dispatch
-import React from 'react'
+// EarlyYearsQuestionBlock.jsx — Question container with fixed label column and visual component dispatch
+import 'react';
 import { TYPOGRAPHY_TOKENS } from '../tokens/typographyTokens.js'
 import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
 import { getOverlay } from '../specs/EarlyYearsPresentationOverlay.js'

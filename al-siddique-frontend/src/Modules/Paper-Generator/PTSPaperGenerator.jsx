@@ -14,8 +14,8 @@ import PaperRichTextEditor, { PaperRichTextRenderer } from './PaperRichTextEdito
 import { PaperSelectionToolbar } from './PaperInlineEditor.jsx'
 import './PaperEditor/paperWorkspaceLight.css'
 import { classLevelLabel, classLevelsMatch, useAcademicStore } from '../../services/useAcademicStore'
-import { splitQuestionsBalancedVertical } from './PaperEditor/layouts/shortQuestionLayoutEngine.js'
-import { resolveMcqColumns, normalizeQuestionOptions } from './PaperEditor/layouts/mcqLayoutEngine.js'
+import './PaperEditor/layouts/shortQuestionLayoutEngine.js';
+import './PaperEditor/layouts/mcqLayoutEngine.js';
 import { buildPaperTextFlow, resolvePaperFontFamily } from './PaperEditor/layouts/paperWorkspaceStyleEngine.js'
 import { isUrduScriptPaper, URDU_FONT_STACK } from './resolvePaperRoute.js'
 import { inferOfficialSectionKind, parseMcqRows as parseOfficialMcqRows, extractMarksLabel, stripTrailingMarks, splitContentWithMarkers } from './officialSectionSemantics.js'

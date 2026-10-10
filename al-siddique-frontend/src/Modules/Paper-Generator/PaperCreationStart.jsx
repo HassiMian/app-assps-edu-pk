@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react';
 import { useAcademicStore } from '../../services/useAcademicStore'
 import { BASIC_PAPER_CLASS_LEVELS } from './paperCreationDraft.js'
 

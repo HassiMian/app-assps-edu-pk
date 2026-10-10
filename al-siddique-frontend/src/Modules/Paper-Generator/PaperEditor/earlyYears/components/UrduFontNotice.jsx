@@ -1,5 +1,6 @@
 // UrduFontNotice.jsx — Diagnostic warning bar for font fallback (non-printable)
-import React, { useState, useEffect } from 'react'
+// UrduFontNotice.jsx — Diagnostic warning bar for font fallback (non-printable)
+import { useState, useEffect } from 'react';
 import { checkUrduFontAvailability } from '../diagnostics/EarlyYearsFontDiagnostics.js'
 
 export default function UrduFontNotice() {

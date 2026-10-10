@@ -1,13 +1,7 @@
 // earlyYearsComponents.test.js — Verifies visual asset registry and presentation tokens
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import {
-  BUILTIN_SKETCHES,
-  getSketchAsset,
-  getAllSketchAssets,
-  validateSketchSvg,
-  registerUserSketchAsset
-} from '../earlyYears/assets/SketchAssetRegistry.js'
+import { getSketchAsset, validateSketchSvg, registerUserSketchAsset } from '../earlyYears/assets/SketchAssetRegistry.js';
 import { TYPOGRAPHY_TOKENS } from '../earlyYears/tokens/typographyTokens.js'
 import { LAYOUT_TOKENS } from '../earlyYears/tokens/layoutTokens.js'
 

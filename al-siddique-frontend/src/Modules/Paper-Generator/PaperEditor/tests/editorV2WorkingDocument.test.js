@@ -6,13 +6,7 @@ import path from 'node:path'
 import crypto from 'node:crypto'
 import { fileURLToPath } from 'node:url'
 
-import {
-  canonicalTextToTiptapDoc,
-  extractPlainTextFromTiptap,
-  computeFieldDirtyState,
-  computeCanonicalFingerprint,
-  sanitizePaperRichText,
-} from '../editorV2/editorProjection.js'
+import { canonicalTextToTiptapDoc, extractPlainTextFromTiptap, computeFieldDirtyState, sanitizePaperRichText } from '../editorV2/editorProjection.js';
 import {
   createEditorWorkingDocument,
 } from '../editorV2/createEditorWorkingDocument.js'

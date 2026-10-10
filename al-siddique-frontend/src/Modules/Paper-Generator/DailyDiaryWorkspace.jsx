@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from 'react'
-import { BookOpen, Check, ChevronDown, FileText, Minus, Palette, Plus, Printer, RefreshCw, Save, Search, Sparkles, Users, WandSparkles, X } from 'lucide-react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { BookOpen, Check, FileText, Minus, Plus, Printer, RefreshCw, Save, Search, Sparkles, Users, WandSparkles, X } from 'lucide-react'
+import { currentSchoolDate } from './schoolCalendarDate.js'
 import api, { resolveAssetUrl } from '../../services/api'
 import { useAcademicStore } from '../../services/useAcademicStore'
 import { getTenantStorageItem, setTenantStorageItem } from '../../services/tenantStorage'
@@ -10,8 +11,6 @@ import './DailyDiaryWorkspace.css'
 
 const DRAFT_KEY = 'assps_daily_diary_workspace_v2'
 const CARD_COUNTS = [2,3,4,5,6,8,10]
-const URDU_FONT = "'ASSPS Jameel Noori','Jameel Noori Nastaleeq','Noto Nastaliq Urdu',serif"
-const LATIN_FONT = "'Inter','Arial',sans-serif"
 const PALETTES = [
   { id:1, name:'Navy Signature', accent:'#0b2a4a', soft:'#edf3f8', line:'#c9d7e4', ink:'#102538' },
   { id:2, name:'Royal Blue', accent:'#1769aa', soft:'#edf6fc', line:'#c7dcec', ink:'#12314a' },
@@ -33,7 +32,7 @@ const safeSchoolName = value => {
   if (!text || /tenant[_-]|diary[_-]tenant|^assps[_-][a-z0-9]{8,}$/i.test(text)) return 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL'
   return text
 }
-const today = () => new Date().toISOString().slice(0,10)
+const today = currentSchoolDate
 const formatDate = value => {
   const date = new Date(`${value || today()}T12:00:00`)
   return Number.isNaN(date.getTime()) ? value : date.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})
@@ -68,7 +67,7 @@ function robustParseDiaryText(text, knownSubjects = []) {
   const aliases=new Map(subjects.map(subject=>[subject.toLowerCase().replace(/[^a-z0-9\u0600-\u06ff]/g,''),subject]))
   const rows=[]; let current=null
   for(const line of lines){
-    const m=line.match(/^([^:]{2,35})\s*[:\-]\s*(.*)$/)
+    const m=line.match(/^([^:]{2,35})\s*[:-]\s*(.*)$/)
     if(m){const key=m[1].toLowerCase().replace(/[^a-z0-9\u0600-\u06ff]/g,'');const subject=aliases.get(key);if(subject){current={id:`${subject}-${rows.length}-${Date.now()}`,subject:subject.toUpperCase(),diary:clean(m[2]),isUrdu:/urdu|اردو/i.test(subject),isBold:!/urdu|اردو/i.test(subject),fontSize:/urdu|اردو/i.test(subject)?12:11,textAlign:/urdu|اردو/i.test(subject)?'right':'left'};rows.push(current);continue}}
     const standalone=aliases.get(line.toLowerCase().replace(/[^a-z0-9\u0600-\u06ff]/g,''))
     if(standalone){current={id:`${standalone}-${rows.length}-${Date.now()}`,subject:standalone.toUpperCase(),diary:'',isUrdu:/urdu|اردو/i.test(standalone),isBold:!/urdu|اردو/i.test(standalone),fontSize:/urdu|اردو/i.test(standalone)?12:11,textAlign:/urdu|اردو/i.test(standalone)?'right':'left'};rows.push(current);continue}
@@ -120,7 +119,9 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   const [rosterStatus,setRosterStatus]=useState('')
   const [search,setSearch]=useState('')
   const [saving,setSaving]=useState(false)
-  const [savedDiaryId,setSavedDiaryId]=useState(null)
+  const savedDiaryIdentities=useRef(new Map())
+  const diaryScopeGeneration=useRef(0)
+  useEffect(()=>{diaryScopeGeneration.current+=1},[classLevel,section,date])
   const [status,setStatus]=useState('')
   const [previewZoom,setPreviewZoom]=useState(.68)
   const [lessonPlans,setLessonPlans]=useState([])
@@ -189,7 +190,45 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   const arrangeLessonPaste=async()=>{if(!lessonPaste.trim())return;setBusy('parse');try{const parsed=await parseLessonPlanningText(lessonPaste,subjectOptions);const next=mergeParsedPlanningText({...lessonDoc,classLevel,section,startDate:date,endDate:date,planningType:'daily'},parsed);setLessonDoc(next);setLessonPaste('');setStatus(parsed.unclassified?.length?'Lesson plan arranged; review preserved unclassified lines.':'Whole-day lesson text arranged by subject.')}catch(error){setStatus(error?.response?.data?.message||'Could not arrange lesson plan text.')}finally{setBusy('')}}
   const saveLessonPlan=async()=>{const submittedScope=diaryScopeGeneration.current;const submittedDocument=lessonDoc;setBusy('lesson-save');try{const payload=toLessonPlanPersistencePayload({...lessonDoc,classLevel,section,startDate:date,endDate:date,planningType:'daily'});const saved=lessonDoc.id?await updateLessonPlan(payload):await createLessonPlan(payload);const doc=normalizeLessonPlanDocument(saved);if(diaryScopeGeneration.current===submittedScope&&latestLessonDocRef.current===submittedDocument){setLessonDoc(doc);setLessonPlanId(doc.id||'');setStatus('Lesson plan saved safely.')}else{setStatus('Previous lesson plan saved. Current editor selection was not overwritten.')}setLessonPlans(current=>{const filtered=current.filter(item=>String(item.id)!==String(saved.id));return [saved,...filtered]})}catch(error){setStatus(error?.response?.data?.message||'Lesson plan save failed. Local workspace remains intact.')}finally{setBusy('')}}
 
-  const saveDiary=async()=>{setSaving(true);try{const payload={template_id:paletteId,school_name:schoolName,tagline:'',logo_url:logoUrl,class_level:classLevel,class_name:classLabel,diary_date:date,slips_per_page:cardsPerPage,footer_text:footerText,footer_is_urdu:/[\u0600-\u06ff]/.test(footerText),rows,style_settings:{workspaceVersion:2,section,paletteId,mode:'diary'}};const response=savedDiaryId?await api.put(`/api/daily-diary/${savedDiaryId}`,payload):await api.post('/api/daily-diary',payload);const saved=response.data?.data||response.data;if(saved?.id)setSavedDiaryId(saved.id);setStatus('Daily diary saved safely.')}catch(error){setStatus(error?.response?.data?.message||'Daily diary save failed. Local recovery draft remains available.')}finally{setSaving(false)}}
+  // Explicit teacher action: never overwrite a local recovery draft while browsing saved records.
+  // The server independently authorizes BOTH the list and the document GET.
+  const reopenSavedDiary=async()=>{
+    if(!classLevel||!date){setStatus('Select a class and date before reopening a saved diary.');return}
+    let schoolId=0
+    try{const user=JSON.parse(window.localStorage.getItem('al_siddique_user')||'{}');schoolId=Number(user.school_id||user.schoolId||0)}catch{ /* Preserve current diary editor state if storage is unavailable. */ }
+    if(!Number.isSafeInteger(schoolId)||schoolId<=0){setStatus('Current school identity could not be verified. Sign in to reopen a diary.');return}
+    const openGeneration=diaryScopeGeneration.current
+    const stillCurrent=()=>diaryScopeGeneration.current===openGeneration
+    const staleSelection=()=>setStatus('Diary selection changed while reopening. Saved record was not loaded; editor content was preserved.')
+    setBusy('diary-open')
+    const matchesScope=record=>Number(record.school_id)===schoolId&&String(record.class_level||'')===String(classLevel)&&String(record.style_settings?.section||'')===String(section)&&String(record.diary_date||'').slice(0,10)===date
+    try{
+      const listResponse=await api.get('/api/daily-diary',{params:{limit:100},skipCache:true})
+      if(!stillCurrent()){staleSelection();return}
+      if(listResponse.data?.success!==true||!Array.isArray(listResponse.data?.data))throw new Error('Saved diary list was not verified.')
+      const matches=listResponse.data.data.filter(matchesScope)
+      if(!matches.length){setStatus('No saved diary found for this class, section and date in the accessible list.');return}
+      if(matches.length!==1){setStatus('Multiple saved diaries match. Select the exact record in Saved Diaries before editing.');return}
+      const id=Number(matches[0].id)
+      if(!Number.isSafeInteger(id)||id<=0)throw new Error('Saved diary identity is invalid.')
+      if(!window.confirm('Reopen this saved diary? This replaces unsaved fields currently in the editor.'))return
+      if(!stillCurrent()){staleSelection();return}
+      const detailResponse=await api.get(`/api/daily-diary/${id}`,{skipCache:true})
+      if(!stillCurrent()){staleSelection();return}
+      const saved=detailResponse.data?.data
+      if(detailResponse.data?.success!==true||!saved||Number(saved.id)!==id||!matchesScope(saved))throw new Error('Saved diary scope verification failed. Editor was not changed.')
+      if(!Array.isArray(saved.rows))throw new Error('Saved diary content is invalid. Editor was not changed.')
+      setRows(saved.rows)
+      if(CARD_COUNTS.includes(Number(saved.slips_per_page)))setCardsPerPage(Number(saved.slips_per_page))
+      if(PALETTES.some(p=>p.id===Number(saved.style_settings?.paletteId)))setPaletteId(Number(saved.style_settings.paletteId))
+      if(typeof saved.footer_text==='string')setFooterText(saved.footer_text)
+      savedDiaryIdentities.current.set(JSON.stringify([classLevel,section,date]),id)
+      setStatus('Saved diary reopened and verified. Changes will update its original record.')
+    }catch(error){setStatus(error?.response?.data?.message||error?.message||'Saved diary could not be reopened. Local editor remains intact.')}
+    finally{setBusy('')}
+  }
+
+  const saveDiary=async()=>{const saveGeneration=diaryScopeGeneration.current;setSaving(true);try{const payload={template_id:paletteId,school_name:schoolName,tagline:'',logo_url:logoUrl,class_level:classLevel,class_name:classLabel,diary_date:date,slips_per_page:cardsPerPage,footer_text:footerText,footer_is_urdu:/[\u0600-\u06ff]/.test(footerText),rows,style_settings:{workspaceVersion:2,section,paletteId,mode:'diary'}};const scopeKey=JSON.stringify([classLevel,section,date]);const updateId=savedDiaryIdentities.current.get(scopeKey)||null;const response=updateId?await api.put(`/api/daily-diary/${updateId}`,payload):await api.post('/api/daily-diary',payload);const saved=response.data?.data;if(response.data?.success!==true||!Number.isSafeInteger(saved?.id)||saved.id<=0)throw new Error('Unverified Diary Save response');if(updateId&&Number(saved.id)!==Number(updateId))throw new Error('Diary Save returned a different record identity');if((saved.class_level!=null&&String(saved.class_level)!==String(classLevel))||(saved.diary_date!=null&&String(saved.diary_date).slice(0,10)!==date)||(saved.style_settings?.section!=null&&String(saved.style_settings.section)!==String(section)))throw new Error('Diary Save returned a different school-day selection');savedDiaryIdentities.current.set(scopeKey,Number(saved.id));setStatus(diaryScopeGeneration.current===saveGeneration?'Daily diary saved safely.':'Previous diary selection was saved. Current editor selection was not saved.')}catch(error){setStatus(diaryScopeGeneration.current===saveGeneration?(error?.response?.data?.message||'Daily diary save failed. Local recovery draft remains available.'):'Previous diary selection could not be saved. Current editor selection was not submitted.')}finally{setSaving(false)}}
   const toggleStudent=id=>setSelectedStudentIds(current=>current.includes(id)?current.filter(value=>value!==id):[...current,id])
   const selectAll=()=>setSelectedStudentIds(students.map(studentId))
   const clearStudents=()=>setSelectedStudentIds([])
@@ -198,7 +237,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   return <div className="dd-workspace" data-diary-workspace>
     <div className="dd-toolbar no-print">
       <div><span className="dd-eyebrow">ASSPS Notebook Print Studio</span><h2>{mode==='diary'?'Daily Diary':'Lesson Plan Cards'}</h2><p>Edit on the left. A4 output updates live on the right.</p></div>
-      <div className="dd-toolbar-actions">{mode==='diary'?<button onClick={saveDiary} disabled={saving}><Save size={15}/>{saving?'Saving…':'Save Diary'}</button>:<button onClick={saveLessonPlan} disabled={busy==='lesson-save'}><Save size={15}/>{busy==='lesson-save'?'Saving…':'Save Lesson Plan'}</button>}<button className="primary" onClick={print}><Printer size={15}/> Print / PDF</button></div>
+      <div className="dd-toolbar-actions">{mode==='diary'?<><button onClick={reopenSavedDiary} disabled={saving||busy==='diary-open'}><BookOpen size={15}/>{busy==='diary-open'?'Opening…':'Reopen Saved Diary'}</button><button onClick={saveDiary} disabled={saving||busy==='diary-open'}><Save size={15}/>{saving?'Saving…':'Save Diary'}</button></>:<button onClick={saveLessonPlan} disabled={busy==='lesson-save'}><Save size={15}/>{busy==='lesson-save'?'Saving…':'Save Lesson Plan'}</button>}<button className="primary" onClick={print}><Printer size={15}/> Print / PDF</button></div>
     </div>
     {status&&<div className="dd-status no-print"><Check size={14}/>{status}<button onClick={()=>setStatus('')}><X size={13}/></button></div>}
 

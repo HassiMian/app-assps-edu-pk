@@ -2,7 +2,7 @@
 // Full Bloom's taxonomy + Weekly/Annual planner + Auto-generate + Portal send
 
 import { useEffect, useMemo, useState } from 'react'
-import { Edit, Trash2, X, Send, BookOpen, Plus, Printer, Check } from 'lucide-react'
+import { Edit, Trash2, X, Send, BookOpen, Printer, Check } from 'lucide-react';
 import Portal from '../../components/Portal'
 import { useAcademicStore } from '../../services/useAcademicStore'
 import { getTenantStorageItem, setTenantStorageItem } from '../../services/tenantStorage'
