@@ -1,5 +1,4 @@
 // CountingWritingGrid.jsx — Grid of cells for counting practice (1 to 30, 1 to 50, etc.)
-import React from 'react'
 import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
 
 export default function CountingWritingGrid({

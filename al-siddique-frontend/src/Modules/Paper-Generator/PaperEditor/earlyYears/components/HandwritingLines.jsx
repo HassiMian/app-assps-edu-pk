@@ -1,5 +1,4 @@
 // HandwritingLines.jsx — Reusable child handwriting guides (English 4-line or Urdu baseline)
-import React from 'react'
 import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
 
 export default function HandwritingLines({

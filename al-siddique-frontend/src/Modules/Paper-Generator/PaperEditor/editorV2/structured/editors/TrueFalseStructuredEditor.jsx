@@ -1,7 +1,6 @@
 // TrueFalseStructuredEditor.jsx — In-place structured editor for True/False nodes (B4-C).
 // Statement edited via StructuredTextInput; indicator box toggleable; expectedAnswer strictly read-only.
 
-import React from 'react'
 import StructuredTextInput from '../components/StructuredTextInput.jsx'
 import {
   cmdUpdateTfStatement,

@@ -1,4 +1,3 @@
-import React from 'react'
 import { buildWorksheetSpec } from '../specs/EarlyYearsWorksheetSpec.js'
 import { resolveEarlyYearsMarks } from '../specs/earlyYearsMarks.js'
 import EarlyYearsHeader from './EarlyYearsHeader.jsx'

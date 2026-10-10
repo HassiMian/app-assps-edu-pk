@@ -1,5 +1,4 @@
 // MissingNumberGrid.jsx — Grid of numbers with empty cells for child number completion
-import React from 'react'
 import { TYPOGRAPHY_TOKENS } from '../tokens/typographyTokens.js'
 import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
 import SourceFaithfulPracticeLayout from './SourceFaithfulPracticeLayout.jsx'

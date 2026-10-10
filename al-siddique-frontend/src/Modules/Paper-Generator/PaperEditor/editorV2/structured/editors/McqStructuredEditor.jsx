@@ -3,7 +3,6 @@
 // RULE: isCorrect is strictly read-only.
 // RULE: Source labels preserved on reorder. Minimum 2 options guard.
 
-import React from 'react'
 import StructuredTextInput from '../components/StructuredTextInput.jsx'
 import CanonicalOptionLabel from '../../CanonicalOptionLabel.jsx'
 import StructuredItemControls from '../components/StructuredItemControls.jsx'

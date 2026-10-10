@@ -1,5 +1,4 @@
 // CircleChoiceWithSketch.jsx — Sketch prompt with circle/tick choice letters or words
-import React from 'react'
 import { TYPOGRAPHY_TOKENS } from '../tokens/typographyTokens.js'
 import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
 import RenderSketch from '../assets/RenderSketch.jsx'

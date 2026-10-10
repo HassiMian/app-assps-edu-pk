@@ -1,5 +1,4 @@
 // UrduHandwritingResponse.jsx — RTL Urdu handwriting answer lines with optional numbering
-import React from 'react'
 import { TYPOGRAPHY_TOKENS } from '../tokens/typographyTokens.js'
 import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
 

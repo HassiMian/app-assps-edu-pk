@@ -1,5 +1,4 @@
 // AlphabetWritingArea.jsx — Multi-row structured alphabet writing practice area
-import React from 'react'
 import HandwritingLines from './HandwritingLines.jsx'
 
 export default function AlphabetWritingArea({

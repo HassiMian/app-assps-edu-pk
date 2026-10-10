@@ -1,7 +1,6 @@
 // GrammarTableStructuredEditor.jsx — In-place structured editor for Grammar Tables (B4-D).
 // Strictly 2-column tables. Fallback to read-only badge if columns.length !== 2.
 
-import React from 'react'
 import StructuredTextInput from '../components/StructuredTextInput.jsx'
 import StructuredItemControls from '../components/StructuredItemControls.jsx'
 import CanonicalStaticNode from '../../CanonicalStaticNode.jsx'

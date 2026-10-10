@@ -2,7 +2,6 @@
 // Two independent columns (Left & Right).
 // RULE: Never model as pair rows. Never update or invent correctMappings.
 
-import React from 'react'
 import StructuredTextInput from '../components/StructuredTextInput.jsx'
 import StructuredItemControls from '../components/StructuredItemControls.jsx'
 import {

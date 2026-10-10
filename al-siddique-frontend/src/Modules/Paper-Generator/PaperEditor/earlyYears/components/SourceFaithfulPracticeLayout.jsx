@@ -1,5 +1,4 @@
 // SourceFaithfulPracticeLayout.jsx — Raw ambiguous teacher layout fallback renderer
-import React from 'react'
 import { TYPOGRAPHY_TOKENS } from '../tokens/typographyTokens.js'
 
 export default function SourceFaithfulPracticeLayout({

@@ -1,4 +1,3 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import LessonPlanTab from '../../LessonPlanTab.jsx'
 import DailyDiaryFeature from '../../DailyDiaryFeature.jsx'

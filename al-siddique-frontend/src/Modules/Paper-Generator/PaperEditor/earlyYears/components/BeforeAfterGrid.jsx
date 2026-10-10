@@ -1,5 +1,4 @@
 // BeforeAfterGrid.jsx — Before/After child response boxes
-import React from 'react'
 import { TYPOGRAPHY_TOKENS } from '../tokens/typographyTokens.js'
 import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
 

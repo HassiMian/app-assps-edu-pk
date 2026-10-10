@@ -1,5 +1,4 @@
 // TraceGlyphGrid.jsx — Trace glyph grid with dotted/light glyphs and optional practice lane
-import React from 'react'
 import { TYPOGRAPHY_TOKENS } from '../tokens/typographyTokens.js'
 import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
 

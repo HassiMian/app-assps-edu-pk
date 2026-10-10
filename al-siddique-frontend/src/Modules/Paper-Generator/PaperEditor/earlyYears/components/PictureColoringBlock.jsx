@@ -1,5 +1,4 @@
 // PictureColoringBlock.jsx — Large printable coloring sketches with labels and coloring whitespace
-import React from 'react'
 import { TYPOGRAPHY_TOKENS } from '../tokens/typographyTokens.js'
 import RenderSketch from '../assets/RenderSketch.jsx'
 
