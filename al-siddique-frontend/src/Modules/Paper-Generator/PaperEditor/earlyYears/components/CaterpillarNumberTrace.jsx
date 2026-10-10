@@ -1,5 +1,4 @@
 // CaterpillarNumberTrace.jsx — Original worksheet caterpillar number trace layout
-import React from 'react'
 import { TYPOGRAPHY_TOKENS } from '../tokens/typographyTokens.js'
 
 export default function CaterpillarNumberTrace({

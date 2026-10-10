@@ -1,4 +1,3 @@
-import React from 'react'
 import McqStructuredEditor from './editors/McqStructuredEditor.jsx'
 import TrueFalseStructuredEditor from './editors/TrueFalseStructuredEditor.jsx'
 import FillBlankStructuredEditor from './editors/FillBlankStructuredEditor.jsx'

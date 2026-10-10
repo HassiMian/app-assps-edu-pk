@@ -1,5 +1,4 @@
 // CircleChoiceGrid.jsx — Spacious grid of letters for circle target letter exercises (e.g. Starter Urdu Q3)
-import React from 'react'
 import { TYPOGRAPHY_TOKENS } from '../tokens/typographyTokens.js'
 import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
 

@@ -2,7 +2,6 @@
 // Renders text segments as plain inputs and blank segments as dashed placeholders.
 // RULE: Arrays are NEVER reversed in memory for RTL; flex direction handles rendering order.
 
-import React from 'react'
 import StructuredTextInput from './StructuredTextInput.jsx'
 import StructuredItemControls from './StructuredItemControls.jsx'
 import { buildStructuredControlKey } from '../structuredFocusHelpers.js'

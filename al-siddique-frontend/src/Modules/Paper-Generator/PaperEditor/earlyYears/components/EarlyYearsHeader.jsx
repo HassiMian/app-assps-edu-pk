@@ -1,4 +1,3 @@
-import React from 'react'
 import { TYPOGRAPHY_TOKENS } from '../tokens/typographyTokens.js'
 import { useTenantBranding } from '../../../../../context/TenantBrandingContext.jsx'
 import fallbackSchoolLogo from '../../../../../assets/school-logo.svg'

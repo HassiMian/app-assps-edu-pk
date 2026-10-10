@@ -1,5 +1,4 @@
 // CanonicalStaticNode.jsx — Renders Read-Only Specialized Nodes in B3 (Rules 6, 7, 8, 9, 10, 11, 12, 13, 14)
-import React from 'react'
 import CanonicalOptionLabel from './CanonicalOptionLabel.jsx'
 import { buildStructuredControlKey } from './structured/structuredFocusHelpers.js'
 import { resolveStructuredFieldPresentation } from './structured/structuredFieldPresentation.js'

@@ -1,5 +1,4 @@
 // CanonicalStaticText.jsx — Zero-Overhead Static Renderer with Strict Geometry Parity (Rules 32, 33)
-import React from 'react'
 import { sanitizePaperRichText } from './editorProjection.js'
 
 function renderTextWithMarks(node, keyPrefix) {

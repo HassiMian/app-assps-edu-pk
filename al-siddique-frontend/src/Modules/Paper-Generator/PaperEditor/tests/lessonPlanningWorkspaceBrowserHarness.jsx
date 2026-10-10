@@ -1,4 +1,3 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import LessonPlanningWorkspace from '../../LessonPlanningWorkspace.jsx'
 import '@/index.css'

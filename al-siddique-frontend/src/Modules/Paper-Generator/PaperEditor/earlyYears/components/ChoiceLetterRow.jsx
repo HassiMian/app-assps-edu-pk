@@ -1,5 +1,4 @@
 // ChoiceLetterRow.jsx — Choice letter rows with prompt on left and spacious circular choice targets on right
-import React from 'react'
 import { TYPOGRAPHY_TOKENS } from '../tokens/typographyTokens.js'
 import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
 
