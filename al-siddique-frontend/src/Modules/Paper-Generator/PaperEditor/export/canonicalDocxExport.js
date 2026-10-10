@@ -26,7 +26,7 @@ const dataUrlToBytes = dataUrl => {
   const match=String(dataUrl||'').match(/^data:([^;,]+)?;base64,(.+)$/i)
   if(!match)return null
   const base64=match[2]
-  if(typeof Buffer!=='undefined')return Uint8Array.from(Buffer.from(base64,'base64'))
+  if(typeof globalThis.Buffer!=='undefined')return Uint8Array.from(globalThis.Buffer.from(base64,'base64'))
   const binary=atob(base64)
   return Uint8Array.from(binary,c=>c.charCodeAt(0))
 }
