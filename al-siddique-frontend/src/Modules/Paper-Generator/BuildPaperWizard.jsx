@@ -700,6 +700,7 @@ function PreviewStep({
  pSyllabus, setPSyllabus, pBubble, setPBubble, pAnswers, setPAnswers,
  onBack, onCancel, paperSettings,
 }) {
+ const { savePaper } = usePaperStore()
  const [iframeSrc, setIframeSrc] = useState('')
 
  const paperParams = useMemo(() => ({
@@ -749,7 +750,7 @@ function PreviewStep({
  <SideItem icon="" label="Save Paper" onClick={() => {
  const name = prompt('Enter Paper Name:', `${subject?.name} - ${classLabel(classVal)}`)
  if (!name) return
- const saved = usePaperStore().savePaper({
+ const saved = savePaper({
  name,
  config: { subject: subject?.name, classLevel: classVal, medium },
  selectedQuestions: selections,

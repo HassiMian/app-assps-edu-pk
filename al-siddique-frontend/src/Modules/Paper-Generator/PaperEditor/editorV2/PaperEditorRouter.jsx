@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react';
 import { resolvePaperEditorRoute } from './canonicalRouteGuards.js'
 import CanonicalPaperEditorMain from './CanonicalPaperEditorMain.jsx'
 import LegacyPaperEditorMain from '../PaperEditorMain.jsx'
@@ -20,6 +20,10 @@ export default function PaperEditorRouter({
     )
   }, [loadedPaper])
 
+  const routingDecision = useMemo(() => {
+    return resolvePaperEditorRoute(loadedPaper)
+  }, [loadedPaper])
+
   if (isEarlyYears) {
     return (
       <EarlyYearsWorksheetEditor
@@ -29,9 +33,6 @@ export default function PaperEditorRouter({
     )
   }
 
-  const routingDecision = useMemo(() => {
-    return resolvePaperEditorRoute(loadedPaper)
-  }, [loadedPaper])
 
   // 1. CANONICAL_V2 -> Render new B3 in-place canonical editor
   if (routingDecision.route === 'CANONICAL_V2') {

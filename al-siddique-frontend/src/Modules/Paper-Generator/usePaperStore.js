@@ -1165,7 +1165,6 @@ export function usePaperStore() {
  schoolName: '',
  contact: '',
  active: true,
- moduleAccess: { ...defaultStore.paperSettings.moduleAccess },
  note: '',
  ...entry,
  moduleAccess: entry?.moduleAccess && typeof entry.moduleAccess === 'object'
