@@ -23,17 +23,19 @@ try{
  }
  for(const [testName,cards,shouldBlock] of [
   ['valid_two_cards',[make(0,9,90),make(1,12,130)],false],
-  ['extreme_second_card',[make(0,9,90),make(1,39,1900)],true]
+  ['extreme_second_card',[make(0,9,90),make(1,39,1900)],true],
+  ['missing_browser_print_api',[make(0,9,90),make(1,12,130)],'unavailable']
  ]){
   const html=getHtml(cards)
   const page=await browser.newPage({viewport:{width:1200,height:1400}})
   await page.goto('about:blank')
-  await page.evaluate(()=>{window.__printCount=0;window.print=()=>{window.__printCount++}})
+  await page.evaluate((disablePrint)=>{window.__printCount=0;window.print=disablePrint?undefined:()=>{window.__printCount++}},shouldBlock==='unavailable')
   await page.setContent(html,{waitUntil:'load',timeout:30000})
   await page.waitForFunction(()=>window.__printCount>0||Boolean(document.querySelector('#result-print-status')?.textContent),null,{timeout:10000})
   const actual=await page.evaluate(()=>({printed:window.__printCount,status:document.querySelector('#result-print-status')?.textContent||'',cards:document.querySelectorAll('.result-card-a4').length}))
   assert.equal(actual.cards,2)
-  if(shouldBlock){assert.equal(actual.printed,0);assert.match(actual.status,/Result card 2 exceeds its A4 print area/)}
+  if(shouldBlock==='unavailable') {assert.equal(actual.printed,0);assert.match(actual.status,/No system print service is available in this browser/)}
+  else if(shouldBlock){assert.equal(actual.printed,0);assert.match(actual.status,/Result card 2 exceeds its A4 print area/)}
   else{assert.equal(actual.printed,1);assert.equal(actual.status,'')}
   console.log('BATCH_PRINT_PREFLIGHT_PASS',testName,JSON.stringify(actual))
   await page.close()

@@ -30,6 +30,14 @@ try{
  assert.ok((await page.locator('.result-card-a4').getAttribute('class')).includes('premium-heritage'))
  assert.equal(await page.getByText(/3 card\(s\)/).count()>0,true)
  assert.equal(await page.getByText('Auto-match each card to its exam term').count(),1)
+ await page.getByRole('button',{name:'Print · Choose Printer'}).waitFor()
+ assert.ok((await page.getByText(/Choose your connected printer/).innerText()).includes('Choose your connected printer'))
+ const [printPop] = await Promise.all([page.waitForEvent('popup'),page.getByRole('button',{name:'Print · Choose Printer'}).click()])
+ await printPop.locator('.result-card-a4').first().waitFor()
+ assert.equal(await printPop.locator('.result-card-a4').count(),3,'System printer route must support whole-school batch')
+ const printCss=await printPop.locator('style').first().textContent()
+ assert.match(printCss,/@page\s*\{\s*size:\s*A4 portrait/,'OS printer must receive A4 Portrait CSS')
+ await printPop.close()
  const [pop] = await Promise.all([page.waitForEvent('popup'),page.getByRole('button',{name:'Save as PDF'}).click()])
  await pop.locator('.result-card-a4').first().waitFor()
  assert.equal(await pop.locator('.result-card-a4').count(),3)
@@ -56,6 +64,19 @@ try{
  await page.getByRole('button',{name:'Save as PDF'}).click()
  assert.match(invalidLogoAlert,/logo configured in SaaS settings has not loaded/i)
  console.log('BROKEN_SAAS_LOGO_PREFLIGHT_DENIED_PASS')
+ for(const [flag,expectedMessage] of [
+  ['ungraded',/no matching school grade band/i],
+  ['missingSubject',/subject name is missing/i],
+  ['missingStudent',/student identity or subject name is missing/i],
+ ]){
+  await page.goto(host+'/scripts/fixtures/result-designer.html?'+flag+'=1',{waitUntil:'domcontentloaded'})
+  await page.getByText('Professional Result Card Designer').waitFor()
+  let text=''
+  page.once('dialog',async dialog=>{text=dialog.message();await dialog.accept()})
+  await page.getByRole('button',{name:'Save as PDF'}).click()
+  assert.match(text,expectedMessage,flag+' must fail closed before print')
+ }
+ console.log('AUTHENTICATED_RESULT_PREFLIGHT_FIXTURES_PASS ungraded fractional, missing subject and student identity denied')
  await page.goto(host+'/scripts/fixtures/result-designer.html?remarksSource=1',{waitUntil:'domcontentloaded'})
  await page.getByText('Professional Result Card Designer').waitFor()
  assert.ok((await page.locator('.result-card-a4').innerText()).includes('Original saved exam feedback for student 1.'))
@@ -66,6 +87,6 @@ try{
  await page.getByText('Teacher-approved updated remarks for printing.').first().waitFor()
  assert.ok((await page.locator('.result-card-a4').innerText()).includes('Teacher-approved updated remarks for printing.'))
  console.log('TEACHER_FEEDBACK_BROWSER_PASS saved exam remarks preserved, editing updates preview')
- console.log('RESULT_DESIGNER_BROWSER_PASS flagship switch, preview, mixed 3-student PDF, missing/broken SaaS logo blocks print')
+ console.log('RESULT_DESIGNER_BROWSER_PASS generic OS printer picker, PDF popup, A4 3-card batch, no/broken SaaS logo blocks print')
  await page.close()
 }finally{if(browser)await browser.close();child.kill('SIGTERM');await sleep(500);if(!child.killed)child.kill('SIGKILL')}

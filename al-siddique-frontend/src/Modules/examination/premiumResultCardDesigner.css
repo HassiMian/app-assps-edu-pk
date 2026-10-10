@@ -65,3 +65,6 @@
 .result-premium-shell .premium-featured-tile.examination-dossier .premium-tile-thumbnail { border:1px solid #AEC6D8; border-top:4px solid #356D96; }
 .result-premium-shell .premium-featured-tile.examination-dossier .premium-tile-thumbnail i:first-child { background:#356D96; }
 @media(max-width:390px) { .result-premium-shell .premium-featured-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+
+.result-premium-shell .premium-printer-guide { padding:9px 10px; margin:7px 0; border-radius:7px; border:1px solid #C9DDE8; background:#F4FAFD; color:#28556A; font-size:11px; line-height:1.55; }
+.result-premium-shell .premium-printer-guide strong { color:#153F58; }

@@ -48,6 +48,8 @@ export function ProfessionalParametersModal({ cards, student, exam, studentMarks
  const printBatch = (pdf = false) => {
   if (!dataList.length) { window.alert('No result cards are ready for printing.'); return }
   if (batchInfo.absentLogo) { window.alert(`${batchInfo.absentLogo} result card(s) have no school logo configured. Set the correct logo in SaaS School/Paper Settings before printing.`); return }
+  if (batchInfo.missingStudent || batchInfo.missingSubject) { window.alert('A student identity or subject name is missing from the authenticated result records. Verify the saved records before printing.'); return }
+  if (batchInfo.ungraded) { window.alert(`${batchInfo.ungraded} complete subject result(s) have no matching school grade band. Review the school's approved grade settings before printing.`); return }
   if (data?.options?.template && ['signature-editorial','swiss-grid','data-atelier','regal-linework','young-scholars','academic-heritage','airframe-geometry','corporate-ledger','examination-dossier'].includes(data.options.template)) {
    const renderedSchoolLogo = previewRef.current?.querySelector('.result-card-a4 img[data-result-school-logo]')
    if (!renderedSchoolLogo?.complete || !renderedSchoolLogo.naturalWidth) {
@@ -92,7 +94,7 @@ export function ProfessionalParametersModal({ cards, student, exam, studentMarks
  {getResultLogoDiagnostic(school?.logo) && <p className="result-logo-diagnostic" role="status">{getResultLogoDiagnostic(school?.logo)}</p>}
  <ResultCardTemplateSelector value={options.template} onChange={(template) => setOptions(prev => ({ ...prev, template }))} />
  <h3>Marks & Print Options</h3>
- <p className="result-print-readiness" role="status">{batchInfo.cards} card(s) · {batchInfo.scored} recorded subject(s){batchInfo.pending ? ` · ${batchInfo.pending} pending/invalid` : ''}{batchInfo.absentLogo ? ` · ${batchInfo.absentLogo} missing SaaS school logo` : ''}</p>
+ <p className="result-print-readiness" role="status">{batchInfo.cards} card(s) · {batchInfo.scored} recorded subject(s){batchInfo.pending ? ` · ${batchInfo.pending} pending/invalid` : ''}{batchInfo.absentLogo ? ` · ${batchInfo.absentLogo} missing SaaS school logo` : ''}{batchInfo.ungraded ? ` · ${batchInfo.ungraded} ungraded subject(s)` : ''}{batchInfo.missingStudent || batchInfo.missingSubject ? ' · missing record identity' : ''}</p>
  <ResultCardPrintToolbar
  options={options}
  setOptions={setOptions}
