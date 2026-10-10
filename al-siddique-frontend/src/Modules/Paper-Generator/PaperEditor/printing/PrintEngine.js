@@ -1,4 +1,4 @@
-// PrintEngine.js — Deterministic A4 Print & PDF Engine for ASSPS Paper Generator
+// PrintEngine.js — Deterministic A4/A5 Print & PDF Engine for ASSPS Paper Generator
 
 export function executePaperPrint(paperNode, { isHalf = false } = {}) {
   if (!paperNode) return false
@@ -9,16 +9,22 @@ export function executePaperPrint(paperNode, { isHalf = false } = {}) {
 
   const frame = document.createElement('iframe')
   frame.id = '__print_frame'
-  frame.style.cssText = 'position:fixed;left:-9999px;top:0;width:210mm;height:297mm;border:0;visibility:hidden;'
+  const page = isHalf
+    ? { size: 'A5', width: '148mm', height: '210mm', margin: '6mm' }
+    : { size: 'A4', width: '210mm', height: '297mm', margin: '8mm' }
+  frame.style.cssText = `position:fixed;left:-9999px;top:0;width:${page.width};height:${page.height};border:0;visibility:hidden;`
   document.body.appendChild(frame)
 
   const doc = frame.contentDocument
-  if (!doc) return false
+  if (!doc) {
+    frame.remove()
+    return false
+  }
 
   const pageCss = `
     @page {
-      size: A4 portrait;
-      margin: 8mm;
+      size: ${page.size} portrait;
+      margin: ${page.margin};
     }
     *, *:before, *:after {
       box-sizing: border-box;
