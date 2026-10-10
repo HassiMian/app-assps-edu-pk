@@ -217,8 +217,12 @@ function Remarks({ data }) {
 }
 
 function BaseTemplate({ data, templateClass, children }) {
+ const rows = data.result.subjects || []
+ const lengthy = rows.some(row => String(row.subjectName || '').length > 23)
+ const dense = rows.length >= 10 && (lengthy || String(data.student?.name || '').length > 36)
  return (
- <section className={`result-card-a4 ${data.options.orientation === 'landscape' ? 'landscape' : ''} ${templateClass}`}>
+ <section className={`result-card-a4 ${data.options.orientation === 'landscape' ? 'landscape' : ''} ${templateClass}${dense ? ' premium-dense' : ''}`}>
+
  {children}
  </section>
  )
@@ -516,6 +520,44 @@ export const resultCardPrintCss = legacyCss + `
  .premium-dossier .rc-chart-card { border:0.2mm dashed #B3C9D8; }
  .premium-dossier-top { display:flex; justify-content:space-between; border-bottom:0.55mm solid #376D91; padding-bottom:2mm; margin-bottom:3mm; letter-spacing:1px; font-size:7pt; color:#285C7C; }
  .premium-dossier-label { padding:0.65mm 1.5mm; margin:0.2mm 0 0.7mm; font-size:7pt; font-weight:800; letter-spacing:.9px; color:#305D7C; border-left:1mm solid #6394B4; background:#F1F7FB; }
+ /* Long subject names (including RTL) need balanced density to avoid clipping.
+    Keep ALL marks and analytics visible; never shrink the full A4 via CSS zoom. */
+ .premium-card.premium-dense { padding:8mm 10mm; }
+ .premium-card.premium-dense .rc-standard-header { margin-bottom:2.2mm; }
+ .premium-card.premium-dense .rc-header-logo { width:22mm; height:22mm; }
+ .premium-card.premium-dense .rc-school-name { font-size:16pt; }
+ .premium-card.premium-dense .rc-student-info { margin-bottom:2mm; gap:0.5mm; }
+ .premium-card.premium-dense .rc-student-info div { min-height:6.5mm; padding:0.65mm 1mm; }
+ .premium-card.premium-dense .rc-marks-table { margin-bottom:2mm; table-layout:fixed; }
+ .premium-card.premium-dense .rc-marks-table th:first-child,
+ .premium-card.premium-dense .rc-marks-table td:first-child { width:48mm; overflow-wrap:anywhere; }
+ .premium-card.premium-dense .rc-marks-table th { padding:0.75mm 0.5mm; font-size:6.1pt; line-height:1.08; }
+ .premium-card.premium-dense .rc-marks-table td { padding:0.6mm 0.5mm; font-size:6.6pt; line-height:1.06; }
+ .premium-card.premium-dense .premium-analytics { margin-bottom:1.7mm; gap:1.4mm; }
+ .premium-card.premium-dense .rc-chart-card { padding:1.5mm; min-height:26mm; }
+ .premium-card.premium-dense .rc-chart-card h3 { margin-bottom:1mm; font-size:6.8pt; }
+ .premium-card.premium-dense .premium-bar-list { gap:0.38mm; }
+ .premium-card.premium-dense .premium-bar-item { grid-template-columns:47mm minmax(12mm,1fr) 9mm; gap:0.8mm; font-size:6.1pt; line-height:1.06; }
+ .premium-card.premium-dense .premium-bar-item b { font-size:6.2pt; }
+ .premium-card.premium-dense .premium-donut { width:27mm; height:27mm; }
+ .premium-card.premium-dense .premium-chart-caption { font-size:6.1pt; }
+ .premium-card.premium-dense .rc-remarks { margin-bottom:1mm; padding:1mm 2mm; min-height:5mm; }
+ .premium-card.premium-dense .rc-signatures { margin-bottom:0; padding:0 1mm; }
+ .premium-card.premium-dense .rc-footer { padding-top:0; }
+ .premium-card.premium-dense .rc-footer p { padding-top:0.7mm; }
+ .premium-card.premium-dense .premium-topline,
+ .premium-card.premium-dense .premium-regal-crown,
+ .premium-card.premium-dense .premium-heritage-seal,
+ .premium-card.premium-dense .premium-airframe-axis,
+ .premium-card.premium-dense .premium-ledger-top,
+ .premium-card.premium-dense .premium-dossier-top { margin-bottom:1mm; }
+ .premium-card.premium-dense .premium-swiss-band,
+ .premium-card.premium-dense .premium-section-label,
+ .premium-card.premium-dense .premium-heritage-rule,
+ .premium-card.premium-dense .premium-airframe-title,
+ .premium-card.premium-dense .premium-ledger-overview,
+ .premium-card.premium-dense .premium-dossier-label,
+ .premium-card.premium-dense .premium-young-section { padding-top:0.5mm; padding-bottom:0.5mm; margin-top:0; margin-bottom:0.5mm; }
  /* Dense multi-subject A4: compact without removing labels or records */
  .premium-card .rc-marks-table td { padding:1.1mm 0.8mm; font-size:7.25pt; line-height:1.12; }
  .premium-card .rc-marks-table th { padding:1.35mm 0.8mm; line-height:1.12; }

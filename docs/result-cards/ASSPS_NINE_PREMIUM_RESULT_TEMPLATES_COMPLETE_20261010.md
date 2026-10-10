@@ -43,3 +43,13 @@ Logs: `/tmp/assps-p8-{nine-marks,premium-regression,print-plan,student-id,logo,b
 
 ## Release boundary
 This is finished source/automated-template testing, NOT a claim the live school app has these templates. Current Core production certification, actual authenticated tenant acceptance and physical school printer proof remain separate release responsibilities already deferred to issue #4; **do not deploy without certified approval**. No auth/payment/RLS/printing-device/module code changed in this sprint. No generated crests or grades were injected.
+
+
+## Phase 9 post-completion visual stress regression (10 Oct 2026)
+An additional print stress case exposed a genuine hidden clipping defect in the previously 9/9 PASS standard-length fixtures: 12 realistic, **long English and Urdu subject labels** plus a long student/father name made card content extend 166–243 pixels beyond the fixed A4 page even though headless Chromium generated exactly one PDF page. This could silently crop teacher remarks/signatures on real reports. A passing PDF page-count check alone was insufficient.
+
+**Scoped corrective implementation:** `BaseTemplate` detects 10+ subject rows with lengthy labels/names and adds a `premium-dense` class. The conditional print CSS preserves every marks row, the complete head/footer and both mandatory charts, while rebalancing subject width, compacting repeated labels, and reducing only layout whitespace/font sizes for the dense scenario; normal-length styles remain unchanged. No arbitrary truncation, `display:none`, zoom scaling, source marks mutation, or synthetic logo substitution. Student class/sections and official tenant-branding still come from SaaS.
+
+**Executed verification after fix:** `node scripts/test-premium-result-long-text-a4.mjs` 9/9 strict PDF A4 checks PASS for long English and Urdu titles, 12 subjects, no horizontal/vertical overflow and footer within fixed canvas; page count 1/1 in each. Original 12-subject 9-template A4 tests, 9-template grade accuracy, 25-card/25-page mixed-design Chromium PDF, browser Designer real interactions, 6 protected source hashes, focused lint and Vite optimized build also EXIT0. Logs `/tmp/assps-p9-long-rtl.log, /tmp/assps-p9-marks.log, /tmp/assps-p9-template-ssr.log, /tmp/assps-p9-normal12.log, /tmp/assps-p9-batch25-rerun.log, /tmp/assps-p9-lint-final.log, /tmp/assps-p9-build-final.log` (where lint is `/tmp/assps-p9-lint-final.log` and build is `/tmp/assps-p9-build-final.log`).
+
+**Release boundary unchanged:** source and tests are ready, but no certified production deployment or real school marks/physical printer acceptance claimed.
