@@ -169,7 +169,7 @@ export function migrateLegacyPaper(raw) {
       sections.push(createPaperSection({
         id: `sec_long_${Date.now()}`,
         type: 'long',
-        sectionNumber: sectionNum++,
+        sectionNumber: sectionNum,
         title: 'Long Questions',
         titleUrdu: 'تفصیلی سوالات',
         marksPerQuestion: marksEach,
@@ -194,14 +194,11 @@ export function migrateLegacyPaper(raw) {
   }
 
   // Resolve totalMarks without destructive falsy coercion
-  let migratedTotalMarks = 0
-  if (config.totalMarks !== undefined && config.totalMarks !== null && config.totalMarks !== '') {
-    migratedTotalMarks = finiteNumberOr(config.totalMarks, 0)
-  } else {
-    // Config total is truly absent: retain deterministic section sum only if sections provide one
-    const sectionSum = sections.reduce((sum, s) => sum + (s.totalMarks || 0), 0)
-    migratedTotalMarks = sectionSum > 0 ? sectionSum : 0
-  }
+  // Explicit zero is meaningful; only absent totals may fall back to section sums.
+  const hasConfiguredTotal = config.totalMarks !== undefined && config.totalMarks !== null && config.totalMarks !== ''
+  const migratedTotalMarks = hasConfiguredTotal
+    ? finiteNumberOr(config.totalMarks, 0)
+    : Math.max(0, sections.reduce((sum, section) => sum + (section.totalMarks || 0), 0))
 
   return createPaperDocument({
     id: raw.id,

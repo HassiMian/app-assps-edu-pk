@@ -50,7 +50,7 @@ function setRawDraftsContainer(container) {
   } catch (err) {
     // Check for quota exceeded or storage unavailable
     if (err && err.name === 'QuotaExceededError') {
-      throw new Error('Draft storage quota exceeded');
+      throw new Error('Draft storage quota exceeded', { cause: err });
     }
   }
   // Keep fallback synced
@@ -438,5 +438,5 @@ export function clearAllWorkingDrafts() {
   _memoryFallback.clear()
   try {
     removeTenantStorageItem(CANONICAL_DRAFTS_BASE_KEY)
-  } catch {}
+  } catch { /* This optional operation may fail; preserve the existing editor state and fallback behavior. */ }
 }

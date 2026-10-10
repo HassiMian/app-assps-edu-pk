@@ -22,21 +22,20 @@ export function parseFillBlanks(content, context = {}) {
 
   // Check if a word bank is defined at the top
   let wordBank = null
-  let contentToParse = content
   let wordBankOffset = 0
 
   const wbMatch = content.match(/^[ \t]*(?:الفاظ|words|word\s*bank|hint\s*box)[ \t]*[:：][ \t]*([^\n]+)\n+/i)
   if (wbMatch) {
     const rawBank = wbMatch[1]
     wordBank = rawBank
-      .split(/[،,؛;\/|\t]+/)
+      .split(/[،,؛;/|\t]+/)
       .map(w => w.trim())
       .filter(Boolean)
     wordBankOffset = wbMatch[0].length
   }
 
   // Match item line boundaries
-  const lineRegex = /^[ \t]*(?:(?:[0-9]+|[ivxIVX]+|[a-zA-Z]|[الف-ي])[\.\)\-:]|\([0-9]+\)|\([a-zA-Z]\)|\([الف-ي]\))[ \t]+/gm
+  const lineRegex = /^[ \t]*(?:(?:[0-9]+|[ivxIVX]+|[a-zA-Z]|[الف-ي])[.)\-:]|\([0-9]+\)|\([a-zA-Z]\)|\([الف-ي]\))[ \t]+/gm
   lineRegex.lastIndex = wordBankOffset
 
   const matches = []
@@ -146,7 +145,7 @@ export function parseFillBlanks(content, context = {}) {
 
 function parseSingleFillBlank(rawText, nodeId, defaultDirection, wordBank) {
   let fullText = rawText.trim()
-  fullText = fullText.replace(/^[ \t]*(?:[0-9]+|[ivxIVX]+|[a-zA-Z]|[الف-ي])[\.\)\-:][ \t]*/, '')
+  fullText = fullText.replace(/^[ \t]*(?:[0-9]+|[ivxIVX]+|[a-zA-Z]|[الف-ي])[.)\-:][ \t]*/, '')
 
   // Split into segments by blanks (sequences of 3 or more underscores or dashes)
   const blankRegex = /_{2,}|-{3,}/g

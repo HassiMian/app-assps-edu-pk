@@ -349,7 +349,7 @@ function withOfficialExamPaperSeed(store) {
 
  const savedPapers = Array.isArray(store.savedPapers) ? [...store.savedPapers] : []
  const seedById = new Map(seedPapers.map(paper => [String(paper.id), paper]))
- let inserted = 0
+ let inserted
  let migrated = 0
  let styled = 0
  const withReadableOfficialTypography = paper => {
@@ -685,7 +685,7 @@ async function hydrateBackendSettings() {
      const storedUser = JSON.parse(storage.getItem('al_siddique_user') || 'null')
      const candidate = Number(storedUser?.school_id ?? storedUser?.schoolId)
      if (Number.isInteger(candidate) && candidate > 0) explicitSchoolId = candidate
-    } catch {}
+    } catch { /* This optional operation may fail; preserve the existing editor state and fallback behavior. */ }
 
     if (explicitSchoolId) {
      const publicRes = await window.fetch(`/api/settings/public?school_id=${encodeURIComponent(explicitSchoolId)}`, {
@@ -802,7 +802,7 @@ function estimatePrints(classLevel) {
    const count = localStudents.filter(s => normalizeClassLevel(s.class || s.classLevel || s.class_name) === target && String(s.status || 'Active').toLowerCase() !== 'inactive').length
    if (count > 0) return count
   }
- } catch {}
+ } catch { /* This optional operation may fail; preserve the existing editor state and fallback behavior. */ }
  const counts = { starter: 33, mover: 42, flyer: 29, '1': 34, '2': 34, '3': 33, '4': 21, '5': 22, '6': 19, '7': 18, '8': 13, 'pre-nine': 16, hifaz: 3 }
  return counts[normalizeClassLevel(classLevel)] || 30
 }
@@ -826,7 +826,7 @@ function notifyPaperSaved(paper) {
  }
  const existing = readJson(NOTIFICATIONS_KEY, [])
  const storage = getStorage()
- try { storage?.setItem(NOTIFICATIONS_KEY, JSON.stringify([notification, ...existing])) } catch {}
+ try { storage?.setItem(NOTIFICATIONS_KEY, JSON.stringify([notification, ...existing])) } catch { /* This optional operation may fail; preserve the existing editor state and fallback behavior. */ }
  window.dispatchEvent(new StorageEvent('storage', { key: NOTIFICATIONS_KEY }))
 }
 
