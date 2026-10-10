@@ -10,6 +10,7 @@ const overlaps=require('./attest-grade910-three-overlap-faculty-docket.cjs')
 const mcqEditorial=require('./attest-grade910-mcq-editorial-hold.cjs')
 const fullMcq=require('./attest-grade910-all-mcq-source-revisions.cjs')
 const bio9UrduPreview=require('./attest-biology9-urdu-four-preview.cjs')
+const allOriginals=require('./attest-grade910-all-original-candidate-revisions.cjs')
 const author=require('./author-chemistry9-ch13-five-original-answers.cjs')
 const DOC=path.resolve(__dirname,'../../docs/question-bank')
 const PACKET='ASSPS_CHEMISTRY9_CH13_FIVE_LONG_MODEL_ANSWER_DRAFTS_20261009.json'
@@ -27,6 +28,7 @@ function reconcile({old,raw,registry,packet}){
  mcqEditorial.assertFrozen(mcqEditorial.loadInputs())
  fullMcq.assertFrozen(fullMcq.loadInputs())
  bio9UrduPreview.attest(bio9UrduPreview.loadInputs())
+ allOriginals.assertFrozen(allOriginals.loadInputs())
  const inherited=freeze.attest(freeze.loadInputs())
  if(inherited.sourceCryptographicallyMatchedOriginalIds!==156||
   inherited.sourceAuthenticMarkingPointProposals!==798||
