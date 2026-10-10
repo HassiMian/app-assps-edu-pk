@@ -9,7 +9,6 @@ import {
   createDefinitionNode,
   createScopeHeaderNode,
   createSectionBannerNode,
-  createUnknownPreservedNode,
   DocumentDirection,
   ClassificationCertainty,
 } from '../../core/PaperDocumentV2.js'
@@ -35,7 +34,7 @@ export function parseQuestionList(content, context = {}) {
   // Primary top-level question marker regex
   // Matches: 1., 1), (1), Q1., Q.1, ۱., ۱), ١., etc.
   // Conservative: requires start of line and whitespace after marker
-  const topQuestionRegex = /^[ \t]*(?:(?:Q\.?\s*\d+|[0-9]+|[ivxIVX]+|[۱-۹]+|[١-٩]+)[\.\)\-:]|\([0-9]+\)|\([۱-۹]+\)|\([١-٩]+\))[ \t]+/gm
+  const topQuestionRegex = /^[ \t]*(?:(?:Q\.?\s*\d+|[0-9]+|[ivxIVX]+|[۱-۹]+|[١-٩]+)[.)\-:]|\([0-9]+\)|\([۱-۹]+\)|\([١-٩]+\))[ \t]+/gm
   const matches = []
   let match
 
@@ -46,7 +45,7 @@ export function parseQuestionList(content, context = {}) {
   // If no primary numbering matches found, split by double newlines or single newlines
   if (matches.length === 0) {
     // Check if content has lines with alphabetic markers e.g. a), b)
-    const alphaRegex = /^[ \t]*\([a-zA-Z]\)[ \t]+|^[ \t]*[a-zA-Z][\.\)\-:][ \t]+/gm
+    const alphaRegex = /^[ \t]*\([a-zA-Z]\)[ \t]+|^[ \t]*[a-zA-Z][.)\-:][ \t]+/gm
     while ((match = alphaRegex.exec(content)) !== null) {
       matches.push({ index: match.index, text: match[0] })
     }
@@ -210,7 +209,7 @@ function parseSingleQuestionBlock(rawText, nodeId, defaultDirection, factory) {
   const subparts = []
 
   // Subpart regex: a), b), c), or (i), (ii), etc.
-  const subpartRegex = /^[ \t]*(?:\(([a-zA-Z]|[ivxIVX]+)\)|([a-zA-Z]|[ivxIVX]+)[\.\)\-:][ \t]+)(.+)$/
+  const subpartRegex = /^[ \t]*(?:\(([a-zA-Z]|[ivxIVX]+)\)|([a-zA-Z]|[ivxIVX]+)[.)\-:][ \t]+)(.+)$/
 
   for (let lIdx = 0; lIdx < lines.length; lIdx++) {
     const line = lines[lIdx].trim()
@@ -240,7 +239,7 @@ function parseSingleQuestionBlock(rawText, nodeId, defaultDirection, factory) {
   }
 
   let stemText = stemLines.join(' ')
-  stemText = stemText.replace(/^[ \t]*(?:Q\.?\s*\d+|[0-9]+|[ivxIVX]+|[۱-۹]+|[١-٩]+)[\.\)\-:][ \t]*/, '').trim()
+  stemText = stemText.replace(/^[ \t]*(?:Q\.?\s*\d+|[0-9]+|[ivxIVX]+|[۱-۹]+|[١-٩]+)[.)\-:][ \t]*/, '').trim()
 
   return factory({
     id: nodeId,
