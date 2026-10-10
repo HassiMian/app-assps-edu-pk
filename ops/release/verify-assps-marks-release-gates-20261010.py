@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
 """Deterministic ASSPS Marks Entry release gate; does NOT deploy anything."""
-import hashlib, json, pathlib, subprocess, sys
+import hashlib, json, os, pathlib, subprocess, sys
 OPS=pathlib.Path('/root/workspace/assps-core-marks-teacher-assignment-security-20261010')
-FRONT=pathlib.Path('/root/workspace/assps-marks-frontend-livebase-20261010')
+FRONT=pathlib.Path('/root/workspace/assps-core-marks-nine-results-livebase-20261010')
 BACK=pathlib.Path('/root/workspace/assps-marks-backend-livebase-20261010')
 ARCH=pathlib.Path('/root/secure-archive/assps-marks-predeploy-20261010')
 RESTORED=pathlib.Path('/var/tmp/assps-marks-rollback-rehearsal-20261010')
 DEPLOYED_F='24cbcae33b96f1bb058ad9b005f0eb8bfe5eac92'
 DEPLOYED_B='16ab8f346ba27aa6b2e29a8f03c68db32a326cb9'
-CANDIDATE_F='39ee8270442f6728f5a2c09c3a75bd8d4eea804e'
-CANDIDATE_B='d54183a815b30b6d7ad09cb2cedaee556774294d'
+CANDIDATE_F='2ec5ae597e9f50772cf443b0392b442b7fa037db'
+CANDIDATE_B='322c8262dbad947df8b54b0145d431b65983aad8'
 def call(label,cmd,cwd=None):
-    p=subprocess.run(cmd,cwd=cwd,capture_output=True,text=True,timeout=45)
+    p=subprocess.run(cmd,cwd=cwd,capture_output=True,text=True,timeout=45,
+        env={**os.environ,'ASSPS_TEST_BACKEND_SOURCE':str(BACK/'al-siddique-backend/src/routes/examRoutes.js')})
     if p.returncode:
         raise RuntimeError(label+' exit='+str(p.returncode)+' '+(p.stdout+' '+p.stderr)[-500:])
     print('PREFLIGHT_PASS '+label,flush=True)
@@ -30,12 +31,12 @@ def check_live_meta(path,expected,label):
     print('PREFLIGHT_PASS '+label+'_RELEASE_METADATA',flush=True)
 def main():
     phase=sys.argv[1] if len(sys.argv)>1 else 'all'
-    if phase not in ('static','functional','all'):
+    if phase not in ('static','functional','premium','all'):
         raise RuntimeError('UNKNOWN_CHECK_PHASE')
     if phase in ('static','all'):
         check_live_meta(pathlib.Path('/var/www/apex-os/release-meta.json'),DEPLOYED_F,'FRONTEND')
         check_live_meta(pathlib.Path('/var/www/apex-backend/release-meta.json'),DEPLOYED_B,'BACKEND')
-        check_branch(FRONT,'release/marks-firstterm-frontend-livebase-20261010',CANDIDATE_F,DEPLOYED_F)
+        check_branch(FRONT,'release/core-marks-nine-results-livebase-20261010',CANDIDATE_F,DEPLOYED_F)
         check_branch(BACK,'release/marks-firstterm-backend-livebase-20261010',CANDIDATE_B,DEPLOYED_B)
         call('ARTIFACT_BACKUPS_SHA256',['sha256sum','-c',str(ARCH/'sha256sums.txt')])
         call('FRONTEND_RESTORE_REHEARSAL_BYTES',['diff','-qr','/var/www/apex-os',str(RESTORED/'apex-os')])
@@ -46,10 +47,13 @@ def main():
         copy=RESTORED/'apex-backend'
         diff=subprocess.run(['diff','-qr',str(source),str(copy)],capture_output=True,text=True,timeout=35)
         if diff.returncode not in (0,1): raise RuntimeError('BACKEND_ARTIFACT_COMPARE_ERROR')
-        allowed='Files '+str(source/'runtime/argus_monitoring_state.json')+' and '+str(copy/'runtime/argus_monitoring_state.json')+' differ'
-        unknown=[line for line in diff.stdout.splitlines() if line!=allowed]
+        allowed={
+            'Files '+str(source/'runtime'/name)+' and '+str(copy/'runtime'/name)+' differ'
+            for name in ('argus_monitoring_state.json','argus_market_watches.json')
+        }
+        unknown=[line for line in diff.stdout.splitlines() if line not in allowed]
         if unknown: raise RuntimeError('UNKNOWN_BACKEND_ARTIFACT_DRIFT '+str(unknown[:3]))
-        print('PREFLIGHT_PASS BACKEND_RESTORE_REHEARSAL_BYTES_WITH_ONLY_KNOWN_ARGUS_STATE_DRIFT',flush=True)
+        print('PREFLIGHT_PASS BACKEND_RESTORE_REHEARSAL_BYTES_WITH_TWO_EXACT_ARGUS_RUNTIME_FILES',flush=True)
         call('LIVE_NGINX_SYNTAX',['nginx','-t'])
         call('LIVE_NGINX_MEDIA_POLICY',['sh',str(OPS/'ops/security/check-nginx-private-uploads.sh'),'/etc/nginx/sites-enabled'])
         call('LIVE_HTTPS_CERT_AND_32_PRIVATE_PROBES',['python3',str(OPS/'ops/security/verify-live-private-uploads-tls-matrix-20261010.py')])
@@ -64,6 +68,10 @@ def main():
         if marks.returncode!=0 or 'ROLLBACK' not in marks.stdout or 'ERROR' in marks.stderr:
             raise RuntimeError('SIGNED_MARKS_SQL_FAIL '+marks.stderr[-250:])
         print('PREFLIGHT_PASS SIGNED_MARKS_CLONE_READ_UPDATE_ISOLATION',flush=True)
+        call('REAL_SIGNED_JWT_MARKS_HTTP_CLONE',['python3',str(OPS/'ops/security/run-isolated-signed-actor-acceptance-20261010.py'),'marks'])
+        # Actual production DB_USER must be an explicit NOBYPASS login and
+        # signed tenant flags enabled. Source/clone PASS does not waive this.
+        call('REAL_PRODUCTION_RUNTIME_NONBYPASS_SIGNED_GATE',['python3',str(OPS/'ops/release/verify-prod-signed-runtime-identity-20261010.py')])
     if phase=='static':
         print('STATIC_PREFLIGHT_PASS; RELEASE_CERTIFICATION_NOT_GRANTED',flush=True)
         return 0
@@ -82,6 +90,21 @@ def main():
              'scripts/test-marks-entry-first-term-recovery.mjs',
              'scripts/test-marks-entry-firstterm-browser.mjs'],f)
         call('FRONTEND_OPTIMIZED_BUILD',['npm','run','build'],f)
+        call('FRONTEND_FOCUSED_NINE_CARD_MODULE_LINT',['npx','eslint',
+            'src/Modules/examination/ResultCards.jsx','src/Modules/examination/premiumResultCardTemplates.jsx',
+            'src/Modules/examination/premiumResultCardData.js','src/Modules/examination/premiumResultCardPrint.js',
+            'src/Modules/examination/resultStudentIdentity.js'],f)
+        call('FIRSTDAY_NINE_RESULT_CARD_INTEGRATION',['node','scripts/test-marks-to-nine-cards-firstday.mjs'],f)
+        call('RESULT_STUDENT_IDENTITY_COMPANION_BACKEND',['node','scripts/test-result-student-identity.mjs'],f)
+    if phase=='premium':
+        f=FRONT/'al-siddique-frontend'
+        call('NINE_CARD_RENDER_AND_REFERENCE',['node','scripts/test-premium-result-cards.mjs'],f)
+        call('NINE_CARD_MARKS_ACCURACY',['node','scripts/test-nine-premium-mark-accuracy.mjs'],f)
+        call('NINE_CARD_PDF_PAGE_LAYOUT',['node','scripts/test-premium-result-a4.mjs'],f)
+        call('NINE_CARD_REAL_CHROMIUM_DESIGNER',['node','scripts/test-result-designer-real-browser.mjs'],f)
+        call('NINE_CARD_PRINT_OVERFLOW_GUARD',['node','scripts/test-nine-result-print-overflow-guard.mjs'],f)
+        print('PREMIUM_SOURCE_GATE_PASS; PRODUCTION_ROLE_RELEASE_NOT_CERTIFIED',flush=True)
+        return 0
     print('PREFLIGHT_HOLD ACTUAL_SCHOOL_AUTHENTICATED_PROD_TEACHER_JWT_RLS_NOT_CERTIFIED',flush=True)
     print('PREFLIGHT_HOLD ASSESSMENT_RESULTS_CLONE_HTTP_FIXTURES_MISSING',flush=True)
     print('PREFLIGHT_HOLD PAPER_STUDIO_SIGNED_HTTP_TIMEOUT_NOT_CLOSED',flush=True)

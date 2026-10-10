@@ -9,6 +9,7 @@ TESTS = {
   'db': 'saas-core-signed-context-real-db.test.js',
   'assessment': 'saas-core-phase7-signed-http-clone.test.js',
   'paper': 'saas-core-phase8-paper-documents-signed-http.test.js',
+  'marks': '/root/workspace/assps-core-firstterm-signed-http-clone-20261010/al-siddique-backend/src/tests/saas-core-marks-signed-http-clone.test.js',
 }
 ROOT=pathlib.Path('/root/workspace/assps-core-marks-teacher-assignment-security-20261010')
 PG=['runuser','-u','postgres','--','psql','-X','-A','-t','-v','ON_ERROR_STOP=1','-p',PORT,'-d',DB]
@@ -49,6 +50,7 @@ def main():
         sql("ALTER ROLE "+ROLE+" PASSWORD '"+password+"'")
         temporary_legacy_role=False
         temporary_grants=False
+        grant_tables=()
         assessment_tables=('assessment_releases','assessment_result_records','assessment_result_revisions','teacher_class_assignments')
         try:
             if args.suite=='assessment':
@@ -59,6 +61,20 @@ def main():
                     exists=sql("SELECT has_table_privilege('apex_app_runtime','public."+table+"','SELECT')::int")
                     if exists!='0': raise RuntimeError('Unexpected existing clone grant '+table)
                 sql('GRANT SELECT ON TABLE '+','.join('public.'+t for t in assessment_tables)+' TO apex_app_runtime')
+                grant_tables=assessment_tables
+                temporary_grants=True
+            if args.suite=='marks':
+                expected='7ee2055afc667d2ab5c15e35177683f79323bd96'
+                checkout='/root/workspace/assps-core-firstterm-signed-http-clone-20261010'
+                sha=subprocess.run(['git','rev-parse','HEAD'],cwd=checkout,capture_output=True,text=True,timeout=8)
+                if sha.returncode or sha.stdout.strip()!=expected:
+                    raise RuntimeError('SIGNED_MARKS_HTTP_TEST_SOURCE_SHA_CHANGED')
+                mark_tables=('exams','exam_results','teacher_class_assignments','grade_settings')
+                for table in mark_tables:
+                    existing=sql("SELECT has_table_privilege('apex_app_runtime','public."+table+"','SELECT')::int")
+                    if existing!='0': raise RuntimeError('Unexpected pre-existing clone marks grant '+table)
+                sql('GRANT SELECT ON TABLE '+','.join('public.'+t for t in mark_tables)+' TO apex_app_runtime')
+                grant_tables=mark_tables
                 temporary_grants=True
             if args.suite=='db':
                 # Actual production has a legacy BYPASS role. The disposable clone
@@ -79,12 +95,14 @@ def main():
                 'DB_SIGNED_TENANT_HMAC_KEY':key,
                 'JWT_SECRET':'isolated-synthetic-signing-key-only',
                 'DB_STARTUP_PROBE':'false','NODE_ENV':'test',
+                'NODE_PATH':str(ROOT/'al-siddique-backend/src/node_modules'),
             })
             check=subprocess.run(['sh',str(ROOT/'ops/security/check-signed-rls-harness.sh')],env=env,text=True,capture_output=True,timeout=10)
             if check.returncode:
                 raise RuntimeError('DISPOSABLE_SIGNED_PREFLIGHT_FAIL '+check.stderr[:300])
             print('SIGNED_DISPOSABLE_PREFLIGHT_PASS restricted login, 127.0.0.1:55432, no production DB',flush=True)
-            completed=subprocess.run(['node','--test','tests/'+TESTS[args.suite]],
+            test_path=TESTS[args.suite] if args.suite=='marks' else 'tests/'+TESTS[args.suite]
+            completed=subprocess.run(['node','--test',test_path],
                  cwd=str(ROOT/'al-siddique-backend/src'),env=env,text=True,capture_output=True,timeout=27)
             lines=completed.stdout.splitlines()
             for line in lines:
@@ -105,8 +123,8 @@ def main():
             return 0
         finally:
             if temporary_grants:
-                sql('REVOKE SELECT ON TABLE '+','.join('public.'+t for t in assessment_tables)+' FROM apex_app_runtime')
-                print('DISPOSABLE_ASSESSMENT_CLONE_ONLY_GRANTS_REVOKED',flush=True)
+                sql('REVOKE SELECT ON TABLE '+','.join('public.'+t for t in grant_tables)+' FROM apex_app_runtime')
+                print('DISPOSABLE_'+args.suite.upper()+'_CLONE_ONLY_GRANTS_REVOKED',flush=True)
             if temporary_legacy_role:
                 sql('DROP ROLE apexos_user')
                 print('TEMPORARY_CLONE_ONLY_LEGACY_BYPASS_NEGATIVE_TARGET_DROPPED',flush=True)
