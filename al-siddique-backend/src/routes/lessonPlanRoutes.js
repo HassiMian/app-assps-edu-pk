@@ -2,7 +2,7 @@ const express = require('express')
 const crypto = require('node:crypto')
 const router = express.Router()
 
-const { pool } = require('../config/database')
+const { pool, tenantContext, applyTenantContext } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
 const { loadPlanningContext } = require('../services/lessonPlanningContext')
@@ -96,12 +96,27 @@ async function withTenantTransaction(req, schoolId, fn) {
   const client = await pool.connect()
   try {
     await client.query('BEGIN')
-    await client.query(`SELECT set_config('app.rls_enabled', 'true', true)`)
-    if (['super_admin','platform_owner'].includes(String(req.user?.role || '').toLowerCase())) {
-      await client.query(`SELECT set_config('app.is_super_admin', 'true', true)`)
+    if (process.env.DB_SIGNED_TENANT_RLS_ENABLED === 'true') {
+      // Dedicated signed request context: this manual pool.connect path must
+      // never bypass the verified HMAC tenant/actor contract.
+      const ctx = tenantContext.getStore()
+      if (!ctx || !ctx.rlsEnabled || ctx.isSuperAdmin ||
+          Number(ctx.tenantId) !== Number(schoolId) ||
+          Number(ctx.actorId) !== Number(req.user?.id)) {
+        const error = new Error('Verified school and actor context is required for lesson planning.')
+        error.status = 403
+        error.code = 'LESSON_PLAN_SIGNED_SCOPE_REQUIRED'
+        throw error
+      }
+      await applyTenantContext(client)
     } else {
-      await client.query(`SELECT set_config('app.tenant_id', $1, true)`, [String(schoolId)])
-      await client.query(`SELECT set_config('app.is_super_admin', 'false', true)`)
+      await client.query(`SELECT set_config('app.rls_enabled', 'true', true)`)
+      if (['super_admin','platform_owner'].includes(String(req.user?.role || '').toLowerCase())) {
+        await client.query(`SELECT set_config('app.is_super_admin', 'true', true)`)
+      } else {
+        await client.query(`SELECT set_config('app.tenant_id', $1, true)`, [String(schoolId)])
+        await client.query(`SELECT set_config('app.is_super_admin', 'false', true)`)
+      }
     }
     const exists = await client.query("SELECT to_regclass('public.lesson_plans') AS table_name")
     if (!exists.rows[0]?.table_name) {
