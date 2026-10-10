@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import {
   normalizeMarksClass, equivalentMarksClass, normalizeMarksExam,
-  matchesMarksExam, pickMarksExam, uniqueMarksClasses, marksEntryClasses, marksSubjectsForClass,
+  matchesMarksExam, pickMarksExam, uniqueMarksClasses, marksEntryClasses, marksSubjectsForClass, marksClassQueryAliases, mergeMarksRoster,
   filterMarksStudents, validateMarksBatch
 } from '../src/Modules/examination/marksEntryModel.js'
 import {readFileSync} from 'node:fs'
@@ -44,6 +44,17 @@ console.log('PASS 75 official First Term papers, 11 class subject lists, no futu
 const students=[{id:1,name:'A',class:'One'}, {id:2,name:'B',class:'Class One'}, {id:3,name:'C',class:'Two'}]
 assert.deepEqual(filterMarksStudents(students,'Class One').map(x=>x.id),[1,2])
 console.log('PASS canonical roster filtered within authorized response')
+assert.deepEqual(marksClassQueryAliases('Class One'),['One','Class One','1','Class 1'])
+assert.deepEqual(marksClassQueryAliases('Two'),['Two','Class Two','2','Class 2'])
+assert.deepEqual(marksClassQueryAliases('Starter'),['Starter','Class Starter'])
+assert.deepEqual(mergeMarksRoster([
+ [{id:1,name:'One A',class:'One'}],
+ [{id:2,name:'One B',class:'Class One'}],
+ [{id:1,name:'One A',class:'1'},{id:3,name:'Wrong class',class:'Three'}],
+ [{id:2,name:'One B',class:'Class 1'}, {id:0,name:'Bad ID',class:'One'}],
+], 'One').map(x=>x.id),[1,2])
+console.log('PASS class-specific roster alias union and ID dedupe, never require unfiltered school roster')
+
 const ctx={exam:exams[0],selectedClass:'One',students,subject:'Maths',marks:{1:'0',2:'89',3:''},totalMarks:'100',passMarks:'33'}
 const batch=validateMarksBatch(ctx)
 assert.equal(batch.error,'')
@@ -66,7 +77,7 @@ console.log('PASS invalid exam/student IDs and cross-class mark writes denied')
 console.log('PASS invalid marks / incomplete batch / nonexistent exam fail closed')
 const sheet=readFileSync(new URL('../src/Modules/examination/MarksSheet.jsx',import.meta.url),'utf8')
 assert.ok(sheet.includes('name="savedExam"'))
-assert.ok(sheet.includes("params: { class: canonicalClass }"))
+assert.ok(sheet.includes("params: { class: classAlias }"))
 assert.ok(sheet.includes('validateMarksBatch'))
 assert.ok(!sheet.includes("name: `${selectedExamType} - Class ${selectedClass}`"))
 assert.ok(!sheet.includes('await api.post(\'/api/exams\','))

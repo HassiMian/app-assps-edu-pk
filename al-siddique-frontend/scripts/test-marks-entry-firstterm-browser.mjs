@@ -37,8 +37,14 @@ try{
   ]})
   if(path==='/api/students' && request.method()==='GET'){
    const cls=url.searchParams.get('class')
-   // Reproduce old backend's exact-equality failure for class query.
-   return json(route,{success:true,data:cls?[]:students})
+   // Reproduce legacy admissions mixed class storage. Unfiltered roster
+   // access is intentionally forbidden; all four exact aliases are scoped.
+   if(!cls)return json(route,{success:false,message:'Unfiltered roster forbidden'},403)
+   if(cls==='One')return json(route,{success:true,data:[students[0]]})
+   if(cls==='Class One')return json(route,{success:true,data:[students[1]]})
+   if(cls==='1')return json(route,{success:true,data:[students[0]]})
+   if(cls==='Class 1')return json(route,{success:true,data:[students[1]]})
+   return json(route,{success:true,data:[]})
   }
   if(path==='/api/exams/results/9')return failMarks
     ? json(route,{success:false,message:'Saved marks temporarily unavailable'},503)
@@ -71,7 +77,7 @@ console.log('MARKS_BROWSER_PASS official First Term 2026-2027 subjects visible d
  assert.equal(await page.getByText('Synthetic Two C').count(),0)
  assert.equal(await page.locator('table tbody tr').count(),2)
  assert.equal(await page.locator('table tbody tr').nth(0).locator('input[type=number]').inputValue(),'76')
- console.log('MARKS_BROWSER_PASS two class-alias roster students load, other class excluded, saved 76 restored')
+ console.log('MARKS_BROWSER_PASS union of partial class-specific alias rosters loads both, other class excluded, saved 76 restored')
  await page.locator('table tbody tr').nth(1).locator('input[type=number]').fill('101')
  await page.getByRole('button',{name:'Save All Marks'}).click()
  await page.getByText(/Invalid marks for Synthetic One B/).waitFor()

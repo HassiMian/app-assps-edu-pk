@@ -56,6 +56,35 @@ export const marksSubjectsForClass = ({exam, className, academicSubjects=[]}) =>
   return Array.isArray(academicSubjects) ? academicSubjects : []
 }
 
+// Legacy admissions have used written, ordinal and prefixed class labels.
+ // Query each exact class value through the authenticated API; NEVER request
+ // the entire school roster merely to work around a class-label mismatch.
+const WRITTEN_TO_NUMERIC = Object.fromEntries(
+  Object.entries(CLASS_ORDINALS).map(([number,word])=>[word,number])
+)
+export const marksClassQueryAliases = className => {
+  const canonical = normalizeMarksClass(className)
+  if (!canonical) return []
+  const numeric = WRITTEN_TO_NUMERIC[canonical]
+  return [...new Set([
+    canonical, `Class ${canonical}`,
+    ...(numeric ? [numeric,`Class ${numeric}`] : []),
+  ])]
+}
+export const mergeMarksRoster = (responses, className) => {
+  const seen = new Set()
+  const result = []
+  for (const rows of responses || []) {
+    for (const student of filterMarksStudents(rows,className)) {
+      const id = Number(student?.id)
+      if (!Number.isSafeInteger(id) || id<=0 || seen.has(id)) continue
+      seen.add(id)
+      result.push(student)
+    }
+  }
+  return result
+}
+
 export const filterMarksStudents = (rows, className) =>
   (Array.isArray(rows)?rows:[]).filter(row=>equivalentMarksClass(row.class,className))
 
