@@ -3,6 +3,7 @@ const router  = express.Router()
 const { pool, query, applyTenantContext } = require('../config/database')
 const { protect, requireRoles, requireScopeForServiceOnly, hasServiceScope } = require('../middleware/auth')
 const { tenantClause, currentSchoolId, hasColumn } = require('../middleware/tenant')
+const { isTeacher, validateTeacherMarksWrite, teacherResultReadScope } = require('../services/examMarksTeacherScope')
 
 const canManageExams = requireRoles('super_admin', 'admin', 'principal', 'teacher')
 function canReadResults(req, res, next) {
@@ -23,6 +24,9 @@ function portalStudentScope(req, alias = 's', startIndex = 1) {
   }
   if (role === 'student') {
     return { clause: ` AND ${prefix}student_user_id = $${startIndex}`, params: [req.user?.id || null], nextIndex: startIndex + 1 }
+  }
+  if (role === 'teacher') {
+    return teacherResultReadScope(req,alias || 's','er',startIndex)
   }
   return { clause: '', params: [], nextIndex: startIndex }
 }
@@ -284,8 +288,8 @@ router.post('/results', protect, canManageExams, async (req, res) => {
     const studentIds = [...new Set(normalized.map(row => row.studentId))]
     const examIds = [...new Set(normalized.map(row => row.examId))]
     const [studentScope, examScope] = await Promise.all([
-      client.query('SELECT id FROM students WHERE school_id = $1 AND id = ANY($2::int[])', [schoolId, studentIds]),
-      client.query('SELECT id FROM exams WHERE school_id = $1 AND id = ANY($2::int[])', [schoolId, examIds]),
+      client.query('SELECT id, class, section FROM students WHERE school_id = $1 AND id = ANY($2::int[])', [schoolId, studentIds]),
+      client.query('SELECT id, class FROM exams WHERE school_id = $1 AND id = ANY($2::int[])', [schoolId, examIds]),
     ])
     const validStudents = new Set(studentScope.rows.map(row => Number(row.id)))
     const validExams = new Set(examScope.rows.map(row => Number(row.id)))
@@ -297,6 +301,26 @@ router.post('/results', protect, canManageExams, async (req, res) => {
         success: false,
         message: foreignStudent ? 'One or more students do not belong to this school.' : 'One or more exams do not belong to this school.',
       })
+    }
+
+    if (isTeacher(req)) {
+      const assignmentScope = await client.query(
+        `SELECT school_id, teacher_user_id, class_name, section, subject, is_active
+         FROM teacher_class_assignments
+         WHERE school_id=$1 AND teacher_user_id=$2 AND is_active=true`,
+        [schoolId, req.user?.id]
+      )
+      if (!validateTeacherMarksWrite({
+        user:req.user,schoolId,results:normalized,
+        students:studentScope.rows,exams:examScope.rows,assignments:assignmentScope.rows,
+      })) {
+        await client.query('ROLLBACK')
+        return res.status(403).json({
+          success:false,
+          code:'EXAM_MARKS_TEACHER_ASSIGNMENT_REQUIRED',
+          message:'Marks entry requires an active teacher assignment matching each student class, section and subject.',
+        })
+      }
     }
 
     for (const row of normalized) {
