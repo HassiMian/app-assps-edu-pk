@@ -106,14 +106,15 @@ function StudentCard({ mode, student, palette, schoolName, logoUrl, classLabel, 
 export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLessonPlanId = '', initialContext = null }) {
   const { activeClasses, subjectsForClass, sectionsForClass }=useAcademicStore()
   const { paperSettings }=usePaperStore()
-  const [mode,setMode]=useState(initialMode === 'lesson' ? 'lesson' : 'diary')
-  const [classLevel,setClassLevel]=useState('')
-  const [section,setSection]=useState('')
-  const [date,setDate]=useState(today())
-  const [rows,setRows]=useState(DEFAULT_ROWS)
-  const [cardsPerPage,setCardsPerPage]=useState(4)
-  const [paletteId,setPaletteId]=useState(1)
-  const [footerText,setFooterText]=useState('Please review the assigned work and keep this card in the notebook.')
+  const [initialDraft]=useState(()=>{try{const raw=getTenantStorageItem(DRAFT_KEY);const draft=raw?JSON.parse(raw):{};return draft&&typeof draft==='object'&&!Array.isArray(draft)?draft:{}}catch{return {}}})
+  const [mode,setMode]=useState(initialMode === 'lesson' ? 'lesson' : (initialDraft.mode||'diary'))
+  const [classLevel,setClassLevel]=useState(initialDraft.classLevel||'')
+  const [section,setSection]=useState(initialDraft.section||'')
+  const [date,setDate]=useState(initialDraft.date||today())
+  const [rows,setRows]=useState(Array.isArray(initialDraft.rows)?initialDraft.rows:DEFAULT_ROWS)
+  const [cardsPerPage,setCardsPerPage]=useState(CARD_COUNTS.includes(Number(initialDraft.cardsPerPage))?Number(initialDraft.cardsPerPage):4)
+  const [paletteId,setPaletteId]=useState(PALETTES.some(p=>p.id===Number(initialDraft.paletteId))?Number(initialDraft.paletteId):1)
+  const [footerText,setFooterText]=useState(initialDraft.footerText||'Please review the assigned work and keep this card in the notebook.')
   const [pasteText,setPasteText]=useState('')
   const [students,setStudents]=useState([])
   const [selectedStudentIds,setSelectedStudentIds]=useState([])
@@ -147,23 +148,30 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   const pages=useMemo(()=>chunk(cardPopulation,cardsPerPage),[cardPopulation,cardsPerPage])
   const overflowWarning=useMemo(()=>estimateOverflow(previewRows,cardsPerPage),[previewRows,cardsPerPage])
 
-  useEffect(()=>{try{const raw=getTenantStorageItem(DRAFT_KEY);if(!raw)return;const draft=JSON.parse(raw);if(draft.classLevel)setClassLevel(draft.classLevel);if(draft.section)setSection(draft.section);if(draft.date)setDate(draft.date);if(Array.isArray(draft.rows))setRows(draft.rows);if(CARD_COUNTS.includes(Number(draft.cardsPerPage)))setCardsPerPage(Number(draft.cardsPerPage));if(PALETTES.some(p=>p.id===Number(draft.paletteId)))setPaletteId(Number(draft.paletteId));if(draft.footerText)setFooterText(draft.footerText);if(draft.mode)setMode(draft.mode)}catch{}},[])
-  useEffect(()=>{try{setTenantStorageItem(DRAFT_KEY,JSON.stringify({mode,classLevel,section,date,rows,cardsPerPage,paletteId,footerText}))}catch{}},[mode,classLevel,section,date,rows,cardsPerPage,paletteId,footerText])
+  useEffect(()=>{try{setTenantStorageItem(DRAFT_KEY,JSON.stringify({mode,classLevel,section,date,rows,cardsPerPage,paletteId,footerText}))}catch{ /* Preserve current diary editor state if storage is unavailable. */ }},[mode,classLevel,section,date,rows,cardsPerPage,paletteId,footerText])
   useEffect(()=>{
-    if(initialMode==='lesson') setMode('lesson')
-    if(initialContext?.classLevel) setClassLevel(initialContext.classLevel)
-    if(initialContext?.section) setSection(initialContext.section)
-    if(initialContext?.date) setDate(initialContext.date)
-  },[initialMode,initialContext?.nonce])
+    let cancelled=false
+    queueMicrotask(()=>{
+      if(cancelled)return
+      if(initialMode==='lesson') setMode('lesson')
+      if(initialContext?.classLevel) setClassLevel(initialContext.classLevel)
+      if(initialContext?.section) setSection(initialContext.section)
+      if(initialContext?.date) setDate(initialContext.date)
+    })
+    return()=>{cancelled=true}
+  },[initialMode,initialContext?.nonce,initialContext?.classLevel,initialContext?.section,initialContext?.date])
   useEffect(()=>{
     if(!initialLessonPlanId || !lessonPlans.length) return
     const plan=lessonPlans.find(item=>String(item.id)===String(initialLessonPlanId))
-    if(plan){setLessonPlanId(String(initialLessonPlanId));setLessonDoc(normalizeLessonPlanDocument(plan));setMode('lesson')}
+    if(!plan)return
+    let cancelled=false
+    queueMicrotask(()=>{if(!cancelled){setLessonPlanId(String(initialLessonPlanId));setLessonDoc(normalizeLessonPlanDocument(plan));setMode('lesson')}})
+    return()=>{cancelled=true}
   },[initialLessonPlanId,lessonPlans])
 
   useEffect(()=>{
-    if(!classLevel){setStudents([]);setSelectedStudentIds([]);return}
-    let cancelled=false;setRosterStatus('Loading roster…')
+    if(!classLevel){let cancelled=false;queueMicrotask(()=>{if(!cancelled){setStudents([]);setSelectedStudentIds([])}});return()=>{cancelled=true}}
+    let cancelled=false;queueMicrotask(()=>{if(!cancelled)setRosterStatus('Loading roster…')})
     api.get('/api/students',{params:{class:classLabel},skipCache:true}).then(response=>{if(cancelled)return;const list=Array.isArray(response.data?.data)?response.data.data:Array.isArray(response.data)?response.data:[];const scoped=section?list.filter(student=>!studentSection(student)||studentSection(student).toLowerCase()===section.toLowerCase()):list;setStudents(scoped);setSelectedStudentIds(scoped.map(studentId));setRosterStatus(`${scoped.length} students loaded`) }).catch(error=>{if(cancelled)return;setRosterStatus(error?.response?.data?.message||'Student roster unavailable. Existing selection preserved.')}).finally(()=>{})
     return()=>{cancelled=true}
   },[classLevel,section,classLabel])
