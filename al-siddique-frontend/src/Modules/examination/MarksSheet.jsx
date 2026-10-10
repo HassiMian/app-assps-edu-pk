@@ -4,6 +4,8 @@ import api from '../../services/api'
 import { C, card, btnPrimary, btnSecondary, input, select, labelStyle, sectionHeader } from '../moduleStyles'
 import { usePaperStore } from '../Paper-Generator/usePaperStore'
 import { useAcademicStore } from '../../services/useAcademicStore'
+import { marksEntryReadiness, retainNewerMarkEdits } from './marksEntryReadiness'
+import { escapeMarksPrintHtml, approvedMarksLogoUrl, countRecordedMarks } from './marksBlankPrint'
 import {
  normalizeMarksClass, normalizeMarksExam, matchesMarksExam, pickMarksExam,
  marksEntryClasses, marksSubjectsForClass, marksClassQueryAliases, mergeMarksRoster, validateMarksBatch
@@ -16,7 +18,6 @@ function classLabel(value) {
 }
 
 const normalizeClass = normalizeMarksClass
-const typeLabel = value => value === 'TE' ? 'Term Exam' : value === 'AS' ? 'Assessment' : String(value || '')
 
 export default function MarksSheet() {
  const { classNames, subjectsForClass } = useAcademicStore()
@@ -30,6 +31,7 @@ export default function MarksSheet() {
  const [totalMarks, setTotalMarks] = useState('')
  const [passMarks, setPassMarks] = useState('')
  const [marks, setMarks] = useState({})
+ const [savedMarks, setSavedMarks] = useState({})
  const [editedMarks, setEditedMarks] = useState({})
  const [saving, setSaving] = useState(false)
  const [loadingData, setLoadingData] = useState(false)
@@ -72,12 +74,14 @@ export default function MarksSheet() {
  const classes = marksEntryClasses(classNames, exams)
  const matchingExams = exams.filter(exam => matchesMarksExam(exam,selectedExamType,selectedClass))
  const selectedExam = matchingExams.find(exam => String(exam.id) === selectedExamId) || null
+ const entryStatus = marksEntryReadiness(students, savedMarks, editedMarks)
 
  const resetRoster = () => {
  rosterFetchSeq.current += 1
  marksEditRevision.current += 1
  setStudents([])
  setMarks({})
+ setSavedMarks({})
  setEditedMarks({})
  setMarksLoaded(false)
  setMessage('')
@@ -131,12 +135,14 @@ export default function MarksSheet() {
  setLoadingData(true)
  setMessage('')
  setMarksLoaded(false)
+ setSavedMarks({})
  try {
  const studentsForClass = await loadRoster(selectedClass)
  if (request !== rosterFetchSeq.current) return
  setStudents(studentsForClass)
  if (!studentsForClass.length) {
  setMarks({})
+ setSavedMarks({})
  setMessage(`No authorized registered students found in Class ${selectedClass}. Check Admissions, academic class labels, or teacher class assignments.`)
  return
  }
@@ -148,18 +154,20 @@ export default function MarksSheet() {
  const allowed = new Set(studentsForClass.map(student=>String(student.id)))
  const loaded = {}
  for (const row of result.data.data) {
- if (String(row.subject).trim() === selectedSubject && allowed.has(String(row.student_id)))
+ if (String(row.subject).trim() === selectedSubject && allowed.has(String(row.student_id)) && row.marks_obtained !== null && row.marks_obtained !== undefined && String(row.marks_obtained).trim() !== '' && Number.isFinite(Number(row.marks_obtained)))
  loaded[row.student_id] = row.marks_obtained
  }
  setMarks(loaded)
+ setSavedMarks(loaded)
  setEditedMarks({})
  setMarksLoaded(true)
  setTotalMarks(selectedExam.total_marks ?? '')
  setPassMarks(selectedExam.pass_marks ?? '')
- setMessage(`Loaded ${studentsForClass.length} students for ${selectedExam.name || 'saved exam'}. Existing entered marks were restored.`)
+ setMessage(`Loaded ${studentsForClass.length} students for ${selectedExam.name || 'saved exam'}: ${countRecordedMarks(result.data.data,selectedSubject,studentsForClass)} marks saved, ${studentsForClass.length-countRecordedMarks(result.data.data,selectedSubject,studentsForClass)} pending. ${Object.keys(loaded).length ? 'Saved marks restored.' : 'No marks entered yet; you can start with any student tomorrow.'}`)
  } catch (err) {
  if (request !== rosterFetchSeq.current) return
  setMarks({})
+ setSavedMarks({})
  setMessage(`Students loaded, but saved marks could not be verified: ${err.response?.data?.message || err.message}. Saving is disabled until you search again.`)
  }
  } catch (err) {
@@ -197,10 +205,11 @@ export default function MarksSheet() {
  if (response.data?.success !== true || Number(response.data?.savedCount) !== rows.length)
  throw new Error('Save acknowledgement did not match the submitted marks. Refresh before retrying.')
  if (submittedScope === rosterFetchSeq.current) {
- if (submittedRevision === marksEditRevision.current) {
- setEditedMarks({})
+ setSavedMarks(previous => ({...previous,...Object.fromEntries(rows.map(row=>[row.student_id,row.marks_obtained]))}))
+ setEditedMarks(current=>retainNewerMarkEdits(current,rows))
+ if (submittedRevision === marksEditRevision.current)
  setMessage(`Saved ${rows.length} edited student mark${rows.length===1?'':'s'} in ${selectedExam.name}. Other marks were left unchanged.`)
- } else setMessage('Earlier edits saved; newer unsaved changes remain in the editor.')
+ else setMessage('Earlier edits saved; newer unsaved changes remain in the editor.')
  }
  } catch (err) {
  if (submittedScope === rosterFetchSeq.current)
@@ -232,30 +241,37 @@ export default function MarksSheet() {
  const addr = paperSettings.address || ''
  const phone = paperSettings.phone || ''
  const columns = mode === 'subject'
- ? [selectedSubject || 'Subject Marks']
+ ? (selectedSubject ? [selectedSubject] : [])
  : mode === 'all_subjects'
- ? (subjectsForClass(classLabel(selectedClass))?.length ? subjectsForClass(classLabel(selectedClass)) : ['Subject 1', 'Subject 2'])
- : (matchingExams.length ? matchingExams.map((exam, index) => exam.name || `${typeLabel(exam.type)} ${index + 1}`) : ['Assessment 1', 'Assessment 2', 'Assessment 3', 'Assessment 4', 'Assessment 5'])
+ ? marksSubjectsForClass({exam:selectedExam,className:selectedClass,academicSubjects:subjectsForClass(selectedClass)})
+ : matchingExams.map(exam=>exam.name).filter(Boolean)
+ if (!columns.length) {
+  setMessage('Cannot create a blank marks sheet without the saved exam subject list. Select a saved exam and subject, or configure official subjects first.')
+  return
+ }
  const title = mode === 'subject'
  ? `${selectedSubject || 'Subject'} Blank Mark Sheet`
  : mode === 'all_subjects'
  ? 'All Subjects Blank Mark Sheet'
  : 'All Assessments Blank Mark Sheet'
- const headCells = columns.map(col => `<th>${col}<br><small>${totalMarks || 100}</small></th>`).join('')
- const rows = list.map((student, i) => `<tr><td>${i + 1}</td><td>${student.name || ''}</td><td>${student.gr_number || '-'}</td><td>${student.father_name || '-'}</td>${columns.map(() => '<td class="mark"></td>').join('')}</tr>`).join('')
- const logoHtml = logo ? `<img src="${logo.startsWith('http') || logo.startsWith('blob:') || logo.startsWith('data:') ? logo : (logo.startsWith('/') ? 'https://api.assps.edu.pk' + logo : 'https://api.assps.edu.pk/' + logo)}" alt="logo">` : `<div class="logo-fallback">A</div>`
+ const escape = escapeMarksPrintHtml
+ const headCells = columns.map(col => `<th>${escape(col)}<br><small>${escape(totalMarks || 100)}</small></th>`).join('')
+ const rows = list.map((student, i) => `<tr><td>${i + 1}</td><td>${escape(student.name || '')}</td><td>${escape(student.gr_number || '-')}</td><td>${escape(student.father_name || '-')}</td>${columns.map(() => '<td class="mark"></td>').join('')}</tr>`).join('')
+ const safeLogo = approvedMarksLogoUrl(logo)
+ const logoHtml = safeLogo ? `<img src="${escape(safeLogo)}" alt="Official school logo">` : `<span class="logo-fallback" role="note">Logo not configured</span>`
  const w = window.open('', '_blank', 'width=1100,height=760')
- w.document.write(`<!doctype html><html><head><meta charset="UTF-8"><title>${title}</title><style>
+ if (!w) { setMessage('Browser blocked the blank mark-sheet print window. Please allow pop-ups for this school site and try again.'); return }
+ w.document.write(`<!doctype html><html><head><meta charset="UTF-8"><title>${escape(title)}</title><style>
  *{box-sizing:border-box}body{font-family:Arial,sans-serif;margin:0;background:#eef2f7;color:#111;-webkit-print-color-adjust:exact;print-color-adjust:exact}
  @page{size:A4 landscape;margin:8mm}@media print{body{background:white}.no-print{display:none!important;height:0!important;overflow:hidden!important}}
  .bar.no-print{background:#256FE8;color:white;padding:12px 18px;display:flex;gap:12px;align-items:center}.bar button{margin-left:auto;background:#C8991A;border:0;border-radius:8px;padding:9px 18px;font-weight:800;cursor:pointer}
  .page{background:white;margin:14px auto;padding:16px;max-width:1120px;box-shadow:0 12px 30px rgba(15,23,42,.16)}
  .head{display:flex;align-items:center;gap:14px;border-bottom:3px solid #13224A;padding-bottom:10px;margin-bottom:10px}
  .head img,.logo-fallback{width:62px;height:62px;object-fit:contain;border:1px solid #CBD5E1;border-radius:50%;padding:5px;display:grid;place-items:center;font-weight:900;color:#13224A}
- h1{margin:0;font-size:22px;line-height:1}.sub{font-size:12px;color:#475569;margin-top:4px}.meta{margin-left:auto;text-align:right;font-size:12px;color:#334155;line-height:1.6}
- table{width:100%;border-collapse:collapse;font-size:11px}th,td{border:1px solid #334155;padding:6px 7px;text-align:left}th{background:#13224A;color:white;text-transform:uppercase;font-size:10px}th small{color:#FACC15}.mark{height:30px;min-width:74px}
- </style></head><body><div class="bar no-print"><strong>${title}</strong><button onclick="window.print()">Print / Save PDF</button></div><section class="page">
- <div class="head">${logoHtml}<div><h1>${schoolName}</h1><div class="sub">${addr}${phone ? ` | ${phone}` : ''}</div></div><div class="meta"><b>${title}</b><br>Class ${selectedClass}<br>${selectedExamType || 'All Exam Types'}${selectedSubject ? ` | ${selectedSubject}` : ''}</div></div>
+ .logo-fallback{width:75px;height:62px;font-size:8px;text-align:center;font-weight:600;color:#475569}h1{margin:0;font-size:22px;line-height:1.18}.sub{font-size:12px;color:#475569;margin-top:4px}.meta{margin-left:auto;text-align:right;font-size:12px;color:#334155;line-height:1.6}
+ table{width:100%;border-collapse:collapse;font-size:11px}thead{display:table-header-group}tr{break-inside:avoid;page-break-inside:avoid}th,td{border:1px solid #334155;padding:6px 7px;text-align:left}th{background:#13224A;color:white;text-transform:uppercase;font-size:10px}th small{color:#FACC15}.mark{height:30px;min-width:74px}
+ </style></head><body><div class="bar no-print"><strong>${escape(title)}</strong><button onclick="window.print()">Print / Save PDF</button></div><section class="page">
+ <div class="head">${logoHtml}<div><h1>${escape(schoolName)}</h1><div class="sub">${escape(addr)}${phone ? ` | ${escape(phone)}` : ''}</div></div><div class="meta"><b>${escape(title)}</b><br>Class ${escape(selectedClass)}<br>${escape(selectedExamType || 'All Exam Types')}${selectedSubject ? ` | ${escape(selectedSubject)}` : ''}</div></div>
  <table><thead><tr><th>#</th><th>Student</th><th>GR No</th><th>Father Name</th>${headCells}</tr></thead><tbody>${rows}</tbody></table>
  </section></body></html>`)
  w.document.close()
@@ -345,6 +361,12 @@ export default function MarksSheet() {
 
  {message && <div className="super-module-card" style={{ ...card, borderColor: message.includes('failed') || message.includes('could not') || message.includes('Please') ? C.red : C.green, color: message.includes('failed') || message.includes('could not') || message.includes('Please') ? C.red : C.green }}>{message}</div>}
 
+ {students.length > 0 && <div className="super-module-card" role="status" style={{...card,display:'flex',flexWrap:'wrap',alignItems:'center',justifyContent:'space-between',gap:12}}>
+  <div><strong>Marks readiness · {selectedSubject}</strong><div style={{color:C.muted,fontSize:12,marginTop:4}}>No marks entered yet is a normal starting state. Blank fields are pending, never zero.</div></div>
+  <div style={{display:'flex',gap:16,fontWeight:800,fontSize:13}}>
+   <span>{entryStatus.saved} saved</span><span>{entryStatus.pending} pending</span><span>{entryStatus.edited} unsaved edits</span>
+  </div>
+ </div>}
  <div className="super-module-card" style={{ ...card, overflowX: 'auto' }}>
  {students.length === 0 ? (
  <div style={{ padding: 40, textAlign: 'center', color: C.muted }}>
