@@ -74,7 +74,7 @@ function PublisherInput({ value, onChange, suggestions = [] }) {
 
 export default function HandwrittenScannerTab({ onProceedToPreview }) {
  const store = usePaperStore()
- const { paperSettings, updatePaperSettings, addQuestion: storeAddQ } = store
+ const { paperSettings, updatePaperSettings,  } = store
  const { activeClasses, subjectsForClass } = useAcademicStore()
 
  //  Config state 

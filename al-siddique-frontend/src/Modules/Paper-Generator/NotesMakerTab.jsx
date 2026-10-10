@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef } from 'react'
+import { useState, useMemo } from 'react'
 import ReactDOM from 'react-dom'
 import { usePaperStore } from './usePaperStore'
 import { classLevelsMatch, useAcademicStore } from '../../services/useAcademicStore'
