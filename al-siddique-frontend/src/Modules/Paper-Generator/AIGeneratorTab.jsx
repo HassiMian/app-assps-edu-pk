@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { usePaperStore } from './usePaperStore'
 import { classLevelLabel, classLevelsMatch, useAcademicStore } from '../../services/useAcademicStore'
 import { useAuth } from '../../context/AuthContext'
+import { currentSchoolDate } from './schoolCalendarDate.js'
 import { DEFAULT_MODEL, generateWithGemini, getAiConfig, testAiConnection } from './geminiService'
 
 const C = {
@@ -96,13 +97,8 @@ export default function AIGeneratorTab({ onProceedToPreview }) {
   const [medium, setMedium] = useState('english')
   const [autoBalance, setAutoBalance] = useState(true)
   const [priority, setPriority] = useState('all')
-<<<<<<< HEAD
-  const [paperCode, setPaperCode] = useState(String(Math.floor(1000 + Math.random() * 9000)))
-  const [examDate, setExamDate] = useState(new Date().toISOString().slice(0, 10))
-=======
   const [paperCode, setPaperCode] = useState(() => String(Math.floor(1000 + Math.random() * 9000)))
   const [examDate, setExamDate] = useState(currentSchoolDate())
->>>>>>> 422340f0 (fix(paper): stabilize workspace preview components and wizard typography)
   const [instructions, setInstructions] = useState('')
   const [qCounts, setQCounts] = useState({ mcq: 10, short: 5, long: 2 })
   const [qMarks, setQMarks] = useState({ mcq: 1, short: 2, long: 5 })
