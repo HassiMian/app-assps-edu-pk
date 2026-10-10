@@ -49,6 +49,7 @@ export function ProfessionalParametersModal({ cards, student, exam, studentMarks
   if (!dataList.length) { window.alert('No result cards are ready for printing.'); return }
   if (batchInfo.absentLogo) { window.alert(`${batchInfo.absentLogo} result card(s) have no school logo configured. Set the correct logo in SaaS School/Paper Settings before printing.`); return }
   if (batchInfo.missingStudent || batchInfo.missingSubject) { window.alert('A student identity or subject name is missing from the authenticated result records. Verify the saved records before printing.'); return }
+  if (batchInfo.unscoredCards) { window.alert(`${batchInfo.unscoredCards} result card(s) have no recorded complete subject marks. Enter actual student marks first; blank worksheets can be printed from Marks Sheet without inventing result grades.`); return }
   if (batchInfo.ungraded) { window.alert(`${batchInfo.ungraded} complete subject result(s) have no matching school grade band. Review the school's approved grade settings before printing.`); return }
   if (data?.options?.template && ['signature-editorial','swiss-grid','data-atelier','regal-linework','young-scholars','academic-heritage','airframe-geometry','corporate-ledger','examination-dossier'].includes(data.options.template)) {
    const renderedSchoolLogo = previewRef.current?.querySelector('.result-card-a4 img[data-result-school-logo]')
@@ -83,7 +84,7 @@ export function ProfessionalParametersModal({ cards, student, exam, studentMarks
  <div className="result-modal-head no-print" style={{ flexShrink:0 }}>
  <div>
  <h2>Professional Result Card Designer</h2>
- <p>Select template, choose marks columns, preview, then print or save as PDF. {dataList.length > 1 ? `${dataList.length} result cards ready.` : ''}</p>
+ <p>Select template, choose marks columns, preview, then print or save as PDF. {dataList.length > 1 ? `${dataList.length} result cards in preview.` : ''}</p>
  </div>
  <button onClick={onClose}>Close</button>
  </div>

@@ -65,6 +65,7 @@ try{
  assert.match(invalidLogoAlert,/logo configured in SaaS settings has not loaded/i)
  console.log('BROKEN_SAAS_LOGO_PREFLIGHT_DENIED_PASS')
  for(const [flag,expectedMessage] of [
+  ['noMarks',/no recorded complete subject marks/i],
   ['ungraded',/no matching school grade band/i],
   ['missingSubject',/subject name is missing/i],
   ['missingStudent',/student identity or subject name is missing/i],

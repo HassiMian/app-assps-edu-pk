@@ -17,11 +17,13 @@ export function resolveResultPrintOptions(options = {}, exam = {}) {
  return { ...options, ...flags }
 }
 export function summarizePrintBatch(cards = []) {
- const summary = { cards:cards.length, scored:0, pending:0, absentLogo:0, missingSubject:0, ungraded:0, missingStudent:0 }
+ const summary = { cards:cards.length, scored:0, pending:0, absentLogo:0, missingSubject:0, ungraded:0, missingStudent:0, unscoredCards:0 }
  for (const card of cards) {
   if (!card?.school?.logo) summary.absentLogo++
   if (!card?.student?.name || card.student.name === '—') summary.missingStudent++
-  for (const row of card?.result?.subjects || []) {
+  const subjects = card?.result?.subjects || []
+  if (!subjects.some(row => typeof row.isComplete === 'boolean' ? row.isComplete : row.hasMarks)) summary.unscoredCards++
+  for (const row of subjects) {
    if (!row.subjectName || row.subjectName === '—') summary.missingSubject++
    if (typeof row.isComplete === 'boolean' ? row.isComplete : row.hasMarks) summary.scored++
    else summary.pending++

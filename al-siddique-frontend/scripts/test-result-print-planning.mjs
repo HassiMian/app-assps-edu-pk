@@ -6,5 +6,5 @@ for(const [name,key] of expectations){const out=resolveResultPrintOptions({autoT
 const manual=resolveResultPrintOptions({autoTermColumns:false,includeFirstTerm:true,includeSecondTerm:true},{name:'Final Term'})
 assert.equal(manual.includeFirstTerm,true);assert.equal(manual.includeSecondTerm,true)
 const info=summarizePrintBatch([{school:{logo:'/api/uploads/logo.png'},result:{subjects:[{subjectName:'English',hasMarks:true},{subjectName:'Urdu',hasMarks:false}]}},{school:{logo:null},result:{subjects:[{subjectName:'—',hasMarks:false}]}}])
-assert.deepEqual(info,{cards:2,scored:1,pending:2,absentLogo:1,missingSubject:1,ungraded:0,missingStudent:2})
+assert.deepEqual(info,{cards:2,scored:1,pending:2,absentLogo:1,missingSubject:1,ungraded:0,missingStudent:2,unscoredCards:1})
 console.log('RESULT_PRINT_PLANNING_PASS 8 exam names, automatic/manual mixed terms, missing logo/marks summary')
