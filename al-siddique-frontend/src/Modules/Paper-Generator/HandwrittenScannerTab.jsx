@@ -175,21 +175,6 @@ export default function HandwrittenScannerTab({ onProceedToPreview }) {
  publisher,
  }), [resolvedSubjectName, classLevel, publisher])
 
- // When class changes, reset subject if it no longer matches
- useEffect(() => {
- if (subjectId && selectedSubject && classLevel && !classLevelsMatch(selectedSubject.classLevel, classLevel)) {
- setSubjectId('')
- }
- setSubjectName('')
- }, [classLevel])
-
- // When subject changes, pre-fill publisher only if field is empty
- useEffect(() => {
- if (selectedSubject?.publisher && !publisher) {
- setPublisher(selectedSubject.publisher)
- }
- }, [subjectId])
-
  //  Image management 
  const addImages = (files) => {
  const imgs = Array.from(files).filter(f => f.type.startsWith('image/'))
@@ -335,7 +320,7 @@ export default function HandwrittenScannerTab({ onProceedToPreview }) {
  <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
 
  {/* Class */}
- <Sel label="Class" value={classLevel} onChange={e => { setClassLevel(e.target.value); setSubjectId('') }}>
+ <Sel label="Class" value={classLevel} onChange={e => { setClassLevel(e.target.value); setSubjectId(''); setSubjectName('') }}>
  <option value="">All Classes</option>
  {allClassOptions.map(c => (
  <option key={c.value} value={c.value}>{c.label}</option>
@@ -360,6 +345,7 @@ export default function HandwrittenScannerTab({ onProceedToPreview }) {
  const nextSubject = filteredSubjects.find(s => s.id === nextId)
  setSubjectId(nextId)
  setSubjectName(nextSubject?.isAcademicOnly ? nextSubject.name : '')
+ if(nextSubject?.publisher) setPublisher(current=>current||nextSubject.publisher)
  }}
  style={{
  width:'100%', background:'rgba(11,44,77,0.7)',
