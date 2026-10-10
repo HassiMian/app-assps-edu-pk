@@ -47,3 +47,21 @@
 .result-premium-shell .result-print-readiness { margin:5px 0 11px; padding:9px 10px; background:#F2F8FA; border:1px solid #D8E7EF; color:#275B72; font-size:11px; font-weight:700; border-radius:7px; line-height:1.45; }
 .result-premium-shell .premium-chart-policy label { display:flex; align-items:center; gap:7px; }
 .result-premium-shell .premium-chart-policy input { accent-color:#267B9D; }
+/* Nine independent preview signatures: structured typography and low-ink accents. */
+.result-premium-shell .premium-featured-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:7px; }
+.result-premium-shell .premium-featured-tile { min-height:99px; transition:border-color .12s ease,background .12s ease; }
+.result-premium-shell .premium-tile-thumbnail { height:55px; }
+.result-premium-shell .premium-featured-tile.regal-linework .premium-tile-thumbnail { border:1px double #BBA477; border-top:3px double #B9A071; }
+.result-premium-shell .premium-featured-tile.regal-linework .premium-tile-thumbnail i:first-child { background:#A58D57; margin-inline:auto; }
+.result-premium-shell .premium-featured-tile.young-scholars .premium-tile-thumbnail { border-top:4px solid #46B4B7; border-radius:3px 3px 0 0; }
+.result-premium-shell .premium-featured-tile.young-scholars .premium-tile-thumbnail i:first-child { background:#4CA2B4; border-radius:5px; }
+.result-premium-shell .premium-featured-tile.academic-heritage .premium-tile-thumbnail { border:2px double #63926D; border-top:3px double #63926D; }
+.result-premium-shell .premium-featured-tile.academic-heritage .premium-tile-thumbnail i:first-child { background:#46825D; margin-inline:auto; }
+.result-premium-shell .premium-featured-tile.airframe-geometry .premium-tile-thumbnail { border:0; border-left:4px solid #368FAE; border-top:1px dashed #B0D0DC; }
+.result-premium-shell .premium-featured-tile.airframe-geometry .premium-tile-thumbnail i:first-child { background:#3288A6; width:85%; }
+.result-premium-shell .premium-featured-tile.corporate-ledger .premium-tile-thumbnail { border-top:3px solid #55687C; border-radius:0; }
+.result-premium-shell .premium-featured-tile.corporate-ledger .premium-tile-thumbnail i { background:#CAD4DB; }
+.result-premium-shell .premium-featured-tile.corporate-ledger .premium-tile-thumbnail i:first-child { background:#596E82; }
+.result-premium-shell .premium-featured-tile.examination-dossier .premium-tile-thumbnail { border:1px solid #AEC6D8; border-top:4px solid #356D96; }
+.result-premium-shell .premium-featured-tile.examination-dossier .premium-tile-thumbnail i:first-child { background:#356D96; }
+@media(max-width:390px) { .result-premium-shell .premium-featured-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }

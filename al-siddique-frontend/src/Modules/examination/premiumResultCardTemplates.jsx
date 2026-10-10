@@ -1,6 +1,6 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { resolveAssetUrl } from '../../services/api'
-import { resolveResultPrintOptions } from './resultPrintPlanning'
+import { inferExamTermKey, resolveResultPrintOptions } from './resultPrintPlanning'
 import { RESULT_TEMPLATES as LEGACY_TEMPLATES, DEFAULT_RESULT_OPTIONS, ResultCardPreview as LegacyPreview, ResultCardTemplateSelector as LegacySelector, ResultCardPrintToolbar as LegacyToolbar, buildResultCardData as legacyBuilder, resultCardPrintCss as legacyCss, ResultStudentInfoBlock, ResultSignatureFooter } from './resultCardTemplates'
 
 export { DEFAULT_RESULT_OPTIONS }
@@ -8,8 +8,14 @@ export const RESULT_TEMPLATES = [LEGACY_TEMPLATES[0],
  {id:'signature-editorial',label:'Flagship 01',name:'Signature Editorial'},
  {id:'swiss-grid',label:'Flagship 02',name:'Swiss Grid'},
  {id:'data-atelier',label:'Flagship 03',name:'Data Atelier'},
+ {id:'regal-linework',label:'Signature 04',name:'Regal Linework'},
+ {id:'young-scholars',label:'Signature 05',name:'Young Scholars'},
+ {id:'academic-heritage',label:'Signature 06',name:'Academic Heritage'},
+ {id:'airframe-geometry',label:'Signature 07',name:'Airframe Geometry'},
+ {id:'corporate-ledger',label:'Signature 08',name:'Corporate Ledger'},
+ {id:'examination-dossier',label:'Signature 09',name:'Examination Dossier'},
  ...LEGACY_TEMPLATES.slice(1)]
-const PREMIUM_IDS = new Set(['signature-editorial','swiss-grid','data-atelier'])
+const PREMIUM_IDS = new Set(['signature-editorial','swiss-grid','data-atelier','regal-linework','young-scholars','academic-heritage','airframe-geometry','corporate-ledger','examination-dossier'])
 
 const termFields = [
  ['includeAssessment', 'assessmentMarks', 'Assessment'],
@@ -26,12 +32,8 @@ export function gradeLabel(pct, bands = []) {
 }
 
 function currentTermField(exam = {}) {
- const text = `${exam.name || ''} ${exam.type || ''}`.toLowerCase()
- if (text.includes('assessment') || text.includes('monthly') || text.includes('quiz')) return 'assessmentMarks'
- if (text.includes('first') || text.includes('1st')) return 'firstTermMarks'
- if (text.includes('second') || text.includes('2nd')) return 'secondTermMarks'
- if (text.includes('third') || text.includes('3rd')) return 'thirdTermMarks'
- return 'finalTermMarks'
+ const key = inferExamTermKey(exam)
+ return ({includeAssessment:'assessmentMarks',includeFirstTerm:'firstTermMarks',includeSecondTerm:'secondTermMarks',includeThirdTerm:'thirdTermMarks',includeFinalTerm:'finalTermMarks'})[key] || 'finalTermMarks'
 }
 
 function numberOrNull(value) {
@@ -41,7 +43,7 @@ function numberOrNull(value) {
 }
 
 function buildPremiumResultCardData({ student, exam, studentMarks, options, school }) {
- const opts = resolveResultPrintOptions({ ...DEFAULT_RESULT_OPTIONS, ...options, includeCharts:true, orientation:'portrait' }, exam)
+ const opts = resolveResultPrintOptions({ ...DEFAULT_RESULT_OPTIONS, ...options, autoTermColumns: options?.autoTermColumns !== false, includeCharts:true, orientation:'portrait' }, exam)
  const activeTerms = termFields.filter(([key]) => opts[key])
  const slot = currentTermField(exam)
  const subjects = (studentMarks || []).map((row) => {
@@ -66,24 +68,30 @@ function buildPremiumResultCardData({ student, exam, studentMarks, options, scho
  if (subject[slot] === null && activeTerms.some(([, field]) => field === slot)) subject[slot] = storedCurrentTerm
  const selectedMarks = activeTerms.map(([, field]) => subject[field]).filter(v => v !== null)
  const hasMarks = selectedMarks.length > 0 || (activeTerms.length === 0 && storedCurrentTerm !== null)
- const obtainedMarks = selectedMarks.length ? selectedMarks.reduce((s, v) => s + v, 0) : (activeTerms.length === 0 ? (storedCurrentTerm ?? 0) : 0)
- const totalMarks = perTermTotal === null ? 0 : (selectedMarks.length ? selectedMarks.length * perTermTotal : perTermTotal)
- const percentage = hasMarks && totalMarks > 0 ? Math.round((obtainedMarks / totalMarks) * 100) : null
+ const isComplete = perTermTotal !== null && (activeTerms.length ? selectedMarks.length === activeTerms.length : storedCurrentTerm !== null)
+ const obtainedMarks = selectedMarks.length ? selectedMarks.reduce((sum, value) => sum + value, 0) : (activeTerms.length === 0 ? (storedCurrentTerm ?? 0) : 0)
+ const totalMarks = perTermTotal === null ? 0 : ((activeTerms.length || 1) * perTermTotal)
+ const rawPercentage = isComplete && totalMarks > 0 ? (obtainedMarks / totalMarks) * 100 : null
+ const percentage = rawPercentage === null ? null : Math.round(rawPercentage * 10) / 10
  return {
  ...subject,
  totalMarks,
  obtainedMarks: hasMarks ? obtainedMarks : null,
  hasMarks,
+ isComplete,
+ pending: !isComplete,
  percentage,
- grade: percentage === null ? '—' : (gradeLabel(percentage, opts.gradeBands) || '—'),
- remarks: row.remarks || '',
+ grade: rawPercentage === null ? '—' : (gradeLabel(rawPercentage, opts.gradeBands) || '—'),
+ remarks: row.remarks || (!isComplete ? 'Pending marks' : ''),
  }
  })
 
- const scoredSubjects = subjects.filter(row => row.hasMarks)
- const totalMarks = scoredSubjects.reduce((s, r) => s + r.totalMarks, 0)
- const obtainedMarks = scoredSubjects.reduce((s, r) => s + r.obtainedMarks, 0)
- const percentage = totalMarks > 0 ? Math.round((obtainedMarks / totalMarks) * 100) : null
+ const scoredSubjects = subjects.filter(row => row.isComplete)
+ const pendingCount = subjects.filter(row => row.pending).length
+ const totalMarks = scoredSubjects.reduce((sum, row) => sum + row.totalMarks, 0)
+ const obtainedMarks = scoredSubjects.reduce((sum, row) => sum + row.obtainedMarks, 0)
+ const rawPercentage = pendingCount === 0 && totalMarks > 0 ? (obtainedMarks / totalMarks) * 100 : null
+ const percentage = rawPercentage === null ? null : Math.round(rawPercentage * 10) / 10
  const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
 
  return {
@@ -120,8 +128,9 @@ function buildPremiumResultCardData({ student, exam, studentMarks, options, scho
  principalRemarks: exam?.principalRemarks || '',
  totalMarks,
  obtainedMarks,
+ pendingCount,
  percentage,
- grade: percentage === null ? '—' : (gradeLabel(percentage, opts.gradeBands) || '—'),
+ grade: rawPercentage === null ? '—' : (gradeLabel(rawPercentage, opts.gradeBands) || '—'),
  },
  options: opts,
  }
@@ -195,7 +204,7 @@ function PremiumMarksTable({ data }) {
  <td>{data.result.obtainedMarks}</td>
  <td>{data.result.percentage === null ? '—' : data.result.percentage + '%'}</td>
  <td>{data.result.grade}</td>
- <td>{data.result.percentage === null ? 'Pending marks' : 'Recorded'}</td>
+ <td>{data.result.pendingCount ? `${data.result.pendingCount} pending` : data.result.percentage === null ? 'Pending marks' : 'Recorded'}</td>
  </tr>
  </tbody>
  </table>
@@ -256,7 +265,7 @@ function PremiumSummaryDonut({ data }) {
    <text x="21" y="20" textAnchor="middle" className="premium-donut-value">{pct === null ? '—' : pct + '%'}</text>
    <text x="21" y="25" textAnchor="middle" className="premium-donut-label">{pct === null ? 'PENDING' : 'OVERALL'}</text>
   </svg>
-  <div className="premium-chart-caption">{data.result.obtainedMarks} / {data.result.totalMarks} recorded marks</div>
+  <div className="premium-chart-caption">{data.result.pendingCount ? `${data.result.pendingCount} subject(s) pending · ` : ''}{data.result.obtainedMarks} / {data.result.totalMarks} verified marks</div>
  </div>
 }
 function PremiumInsights({ data, reverse = false }) {
@@ -306,8 +315,94 @@ export function ResultCardTemplateDataAtelier({ data }) {
  </BaseTemplate>
 }
 
+// Independent compositions share the same verified scores, not copied sample values.
+export function ResultCardTemplateRegalLinework({ data }) {
+ return <BaseTemplate data={data} templateClass="premium-card premium-regal">
+  <div className="premium-regal-crown">ACADEMIC EXCELLENCE <span>OFFICIAL · {data.result.session}</span></div>
+  <PremiumSchoolHeader data={data} title="Scholastic Achievement Record" />
+  <div className="premium-regal-heading">INDIVIDUAL SCHOLAR RECORD <span>{data.result.term}</span></div>
+  <ResultStudentInfoBlock data={data} />
+  <PremiumMarksTable data={data} />
+  <PremiumInsights data={data} reverse />
+  <Remarks data={data} />
+  <ResultSignatureFooter data={data} />
+ </BaseTemplate>
+}
+
+export function ResultCardTemplateYoungScholars({ data }) {
+ return <BaseTemplate data={data} templateClass="premium-card premium-young">
+  <div className="premium-young-tokens"><span>LEARN</span><span>EXPLORE</span><span>ACHIEVE</span></div>
+  <PremiumSchoolHeader data={data} title="Learning Journey · Progress Report" />
+  <div className="premium-young-section"><b>01</b> Our learner</div>
+  <ResultStudentInfoBlock data={data} />
+  <div className="premium-young-section"><b>02</b> Subject achievements</div>
+  <PremiumMarksTable data={data} />
+  <div className="premium-young-section"><b>03</b> How I'm progressing</div>
+  <PremiumInsights data={data} />
+  <Remarks data={data} />
+  <ResultSignatureFooter data={data} />
+ </BaseTemplate>
+}
+
+export function ResultCardTemplateAcademicHeritage({ data }) {
+ return <BaseTemplate data={data} templateClass="premium-card premium-heritage">
+  <div className="premium-heritage-seal">ACADEMIC YEAR <strong>{data.result.session}</strong></div>
+  <PremiumSchoolHeader data={data} title="Official Academic Transcript" />
+  <div className="premium-heritage-rule">SCHOLAR'S PARTICULARS</div>
+  <ResultStudentInfoBlock data={data} />
+  <div className="premium-heritage-rule">EXAMINATION REGISTER</div>
+  <PremiumMarksTable data={data} />
+  <PremiumInsights data={data} reverse />
+  <Remarks data={data} />
+  <ResultSignatureFooter data={data} />
+ </BaseTemplate>
+}
+
+export function ResultCardTemplateAirframeGeometry({ data }) {
+ return <BaseTemplate data={data} templateClass="premium-card premium-airframe">
+  <div className="premium-airframe-axis"><span>ASSPS / REPORT SYSTEM</span><span>R—{data.result.session}</span></div>
+  <PremiumSchoolHeader data={data} title="Student Performance Overview" />
+  <div className="premium-airframe-title">STUDENT <b>01—</b></div>
+  <ResultStudentInfoBlock data={data} />
+  <div className="premium-airframe-title">RESULTS <b>02—</b></div>
+  <PremiumMarksTable data={data} />
+  <PremiumInsights data={data} />
+  <Remarks data={data} />
+  <ResultSignatureFooter data={data} />
+ </BaseTemplate>
+}
+
+export function ResultCardTemplateCorporateLedger({ data }) {
+ return <BaseTemplate data={data} templateClass="premium-card premium-ledger">
+  <div className="premium-ledger-top"><span>INSTITUTIONAL PERFORMANCE</span><b>REPORT / {data.result.session}</b></div>
+  <PremiumSchoolHeader data={data} title="Academic Performance Statement" />
+  <div className="premium-ledger-overview"><span>RESULT PROFILE</span><b>{data.result.term}</b></div>
+  <ResultStudentInfoBlock data={data} />
+  <PremiumMarksTable data={data} />
+  <div className="premium-ledger-overview"><span>ANALYTICS</span><b>SUBJECT DISTRIBUTION</b></div>
+  <PremiumInsights data={data} reverse />
+  <Remarks data={data} />
+  <ResultSignatureFooter data={data} />
+ </BaseTemplate>
+}
+
+export function ResultCardTemplateExaminationDossier({ data }) {
+ return <BaseTemplate data={data} templateClass="premium-card premium-dossier">
+  <div className="premium-dossier-top"><b>ASSESSMENT DOSSIER</b><span>SESSION {data.result.session}</span></div>
+  <PremiumSchoolHeader data={data} title="Official Examination Result" />
+  <div className="premium-dossier-label">SECTION A — CANDIDATE INFORMATION</div>
+  <ResultStudentInfoBlock data={data} />
+  <div className="premium-dossier-label">SECTION B — RECORDED MARKS</div>
+  <PremiumMarksTable data={data} />
+  <div className="premium-dossier-label">SECTION C — PERFORMANCE ANALYSIS</div>
+  <PremiumInsights data={data} />
+  <Remarks data={data} />
+  <ResultSignatureFooter data={data} />
+ </BaseTemplate>
+}
+
 export function ResultCardPreview({data}) {
- const premium = {'signature-editorial':ResultCardTemplateSignatureEditorial,'swiss-grid':ResultCardTemplateSwissGrid,'data-atelier':ResultCardTemplateDataAtelier}
+ const premium = {'signature-editorial':ResultCardTemplateSignatureEditorial,'swiss-grid':ResultCardTemplateSwissGrid,'data-atelier':ResultCardTemplateDataAtelier,'regal-linework':ResultCardTemplateRegalLinework,'young-scholars':ResultCardTemplateYoungScholars,'academic-heritage':ResultCardTemplateAcademicHeritage,'airframe-geometry':ResultCardTemplateAirframeGeometry,'corporate-ledger':ResultCardTemplateCorporateLedger,'examination-dossier':ResultCardTemplateExaminationDossier}
  const Template = premium[data.options.template]
  return Template ? <Template data={{...data, options:{...data.options,includeCharts:true,orientation:'portrait'}}}/> : <LegacyPreview data={data}/>
 }
@@ -366,6 +461,61 @@ export const resultCardPrintCss = legacyCss + `
  .premium-atelier .rc-student-info div { background:#F3F8F8; border:0; padding:2mm; }
  .premium-atelier .rc-marks-table th { background:#EAF5F5; color:#20525B; }
  .premium-section-label { margin:1mm 0 2mm; font-size:7pt; font-weight:800; letter-spacing:1px; color:#247785; }
+ /* Six independent premium editorial architectures — economical white-page ink */
+ .premium-regal { --accent:#9D8250; --navy:#283950; font-family:Georgia,'Times New Roman',serif; border:0.25mm solid #C8B78B; border-top:0.75mm double #B29A63; }
+ .premium-regal .rc-school-name { font-family:Georgia,'Times New Roman',serif; font-weight:700; font-size:18.4pt; letter-spacing:-.2px; }
+ .premium-regal .rc-standard-header { border-bottom:0.25mm solid #CEBB90; padding-bottom:2mm; }
+ .premium-regal .rc-marks-table th { background:#F9F6EF; border-color:#D1C5A8; }
+ .premium-regal .rc-chart-card { border-color:#E5DCCA; }
+ .premium-regal-crown,.premium-regal-heading { display:flex; justify-content:space-between; font-size:7.1pt; letter-spacing:1.1px; font-weight:700; color:#775F34; padding:1.3mm 1.5mm; }
+ .premium-regal-crown { border-bottom:0.2mm solid #D9CBAB; margin-bottom:3mm; }
+ .premium-regal-heading { border-left:0.9mm solid #AE925D; background:#FAF8F3; margin-bottom:2mm; }
+ .premium-young { --accent:#189EA5; --navy:#19445E; font-family:Arial,Helvetica,sans-serif; border-top:1mm solid #4AB7C0; }
+ .premium-young .rc-school-name { font-size:18.7pt; font-weight:850; }
+ .premium-young .rc-report-title { color:#14848F; }
+ .premium-young .rc-student-info div { background:#F5FBFB; border-radius:1.4mm; border:0.2mm solid #DAEBEC; }
+ .premium-young .rc-marks-table th { background:#E9F7F6; }
+ .premium-young .rc-chart-card { border-radius:2mm; border-color:#D4E9E9; }
+ .premium-young .rc-student-info { margin-bottom:2mm; }
+ .premium-young .rc-student-info div { min-height:6.8mm; padding:0.7mm 1mm; }
+ .premium-young-tokens { display:flex; gap:2mm; margin-bottom:1.2mm; font-size:6pt; font-weight:800; letter-spacing:0.7px; }
+ .premium-young-tokens span { padding:0.7mm 2.4mm; border-radius:4mm; border:0.2mm solid #D7E8E7; color:#2B8590; }
+ .premium-young-tokens span:nth-child(2) { color:#C47E5F; border-color:#F0E2D7; }
+ .premium-young-tokens span:nth-child(3) { color:#628E66; border-color:#D8E9DB; }
+ .premium-young-section { margin:0.4mm 0 0.7mm; display:flex; gap:2.6mm; align-items:center; font-size:7.3pt; font-weight:800; color:#266D7F; }
+ .premium-young-section b { padding:0.8mm 1.5mm; border:0.2mm solid #9FCED0; border-radius:1mm; }
+ .premium-heritage { --accent:#3C7657; --navy:#234434; font-family:Georgia,'Times New Roman',serif; border:0.4mm double #99B5A0; }
+ .premium-heritage .rc-school-name { font-family:Georgia,serif; font-size:18.5pt; color:#254B38; }
+ .premium-heritage .rc-standard-header { justify-content:center; border-bottom:0.3mm double #9FB6A7; padding-bottom:2mm; }
+ .premium-heritage .rc-marks-table th { background:#F1F7F2; color:#2A5840; border-color:#ABC3B2; }
+ .premium-heritage .rc-chart-card { border:0; border-top:0.2mm solid #B8D2C2; }
+ .premium-heritage-seal { display:flex; gap:3mm; justify-content:center; align-items:center; font-size:7.3pt; letter-spacing:1px; color:#507C5A; margin:0 0 2.5mm; }
+ .premium-heritage-rule { font-size:7pt; font-weight:700; letter-spacing:0.7px; text-align:center; border-bottom:0.2mm solid #A5C0AE; padding:1mm; margin-bottom:2mm; color:#426B4D; }
+ .premium-airframe { --accent:#368AAB; --navy:#254257; font-family:Arial,Helvetica,sans-serif; border-left:0.4mm solid #CFDFE9; border-top:0; }
+ .premium-airframe .rc-standard-header { padding-left:3mm; border-left:1mm solid #368AAB; }
+ .premium-airframe .rc-school-name { font-size:19.5pt; font-weight:900; letter-spacing:-0.45px; }
+ .premium-airframe .rc-marks-table th { background:#F1F7FA; border-top:0; }
+ .premium-airframe .premium-bar-fill { border-radius:0; }
+ .premium-airframe-axis { display:flex; justify-content:space-between; border-bottom:0.2mm dashed #B4CAD5; font-size:6.6pt; color:#527F9D; letter-spacing:1.15px; margin-bottom:4mm; padding-bottom:1.5mm; }
+ .premium-airframe-title { display:flex; justify-content:space-between; font-size:7.3pt; font-weight:800; letter-spacing:1.5px; color:#287C9A; margin:1.5mm 0 2mm; }
+ .premium-airframe-title b { color:#AAC5D6; }
+ .premium-ledger { --accent:#657488; --navy:#223244; font-family:'Helvetica Neue',Arial,sans-serif; border:0.2mm solid #BBC8D2; }
+ .premium-ledger .rc-school-name { font-size:18.8pt; font-weight:900; color:#243A50; }
+ .premium-ledger .rc-report-title { text-transform:uppercase; letter-spacing:1.4px; }
+ .premium-ledger .rc-marks-table th { background:#EEF2F5; border-color:#BDCBD5; text-transform:uppercase; }
+ .premium-ledger .rc-marks-table td { border-bottom:0.2mm dotted #C8D4DD; }
+ .premium-ledger .rc-chart-card { border:0; border-left:0.3mm solid #BDCBD5; }
+ .premium-ledger-top,.premium-ledger-overview { display:flex; justify-content:space-between; align-items:center; text-transform:uppercase; letter-spacing:0.75px; font-size:7pt; color:#5A6B79; }
+ .premium-ledger-top { border-bottom:0.4mm solid #485D72; padding-bottom:2mm; margin-bottom:3mm; }
+ .premium-ledger-overview { background:#F0F4F6; padding:1.7mm 2mm; margin:1mm 0 2mm; }
+ .premium-dossier { --accent:#356E95; --navy:#193E5A; font-family:Arial,Helvetica,sans-serif; border:0.4mm solid #A5BFD1; }
+ .premium-dossier .rc-school-name { font-size:18.7pt; font-weight:800; }
+ .premium-dossier .rc-standard-header { background:#F8FAFC; border:0.2mm solid #E0E9F0; padding:1mm; }
+ .premium-dossier .rc-marks-table th { background:#E8F2F8; color:#204F70; }
+ .premium-dossier .rc-student-info div { border-left:0.5mm solid #B3CAD9; padding-left:2mm; }
+ .premium-dossier .rc-chart-card { border:0.2mm dashed #B3C9D8; }
+ .premium-dossier-top { display:flex; justify-content:space-between; border-bottom:0.55mm solid #376D91; padding-bottom:2mm; margin-bottom:3mm; letter-spacing:1px; font-size:7pt; color:#285C7C; }
+ .premium-dossier-label { padding:0.65mm 1.5mm; margin:0.2mm 0 0.7mm; font-size:7pt; font-weight:800; letter-spacing:.9px; color:#305D7C; border-left:1mm solid #6394B4; background:#F1F7FB; }
  /* Dense multi-subject A4: compact without removing labels or records */
  .premium-card .rc-marks-table td { padding:1.1mm 0.8mm; font-size:7.25pt; line-height:1.12; }
  .premium-card .rc-marks-table th { padding:1.35mm 0.8mm; line-height:1.12; }

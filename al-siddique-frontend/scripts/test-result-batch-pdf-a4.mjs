@@ -13,7 +13,7 @@ try {
  const students=Array.from({length:Number(process.env.CARDS||3)},(_,i)=>{
   const exam={name:exams[i%3],total_marks:100,session:'2026–2027'}
   const rows=Array.from({length:12},(_,s)=>({subject:['English','Mathematics','Science','Urdu','Computer','Islamiyat','Social Studies','General Knowledge','Physics','Chemistry','Biology','Geography'][s],marks_obtained:65+((s+i)%31),total_marks:100}))
-  return m.buildResultCardData({student:{name:`Fixture Student ${String(i+1).padStart(3,'0')}`,father_name:'Fixture Parent',className:'Nine',roll_number:String(i+1)},exam,studentMarks:rows,school:{name:'Fixture School (test only)',logo:fixturePixel,address:'Example street'},options:{...m.DEFAULT_RESULT_OPTIONS,template:['signature-editorial','swiss-grid','data-atelier'][i%3],autoTermColumns:true,gradeBands:[{from:0,to:39,label:'F'},{from:40,to:100,label:'P'}]}})
+  return m.buildResultCardData({student:{name:`Fixture Student ${String(i+1).padStart(3,'0')}`,father_name:'Fixture Parent',className:'Nine',roll_number:String(i+1)},exam,studentMarks:rows,school:{name:'Fixture School (test only)',logo:fixturePixel,address:'Example street'},options:{...m.DEFAULT_RESULT_OPTIONS,template:['signature-editorial','swiss-grid','data-atelier','regal-linework','young-scholars','academic-heritage','airframe-geometry','corporate-ledger','examination-dossier'][i%9],autoTermColumns:true,gradeBands:[{from:0,to:39,label:'F'},{from:40,to:100,label:'P'}]}})
  })
  for (const [i,card] of students.entries()) {
   const expected=['includeFirstTerm','includeSecondTerm','includeFinalTerm'][i%3]
@@ -35,13 +35,15 @@ try {
  const status=await page.locator('#result-print-status').innerText()
  assert.equal(status,'','Fixture logo should load before printing')
  assert.equal(await page.locator('.result-card-a4').count(),students.length)
+ const usedThemes=await page.locator('.result-card-a4').evaluateAll(nodes=>[...new Set(nodes.map(el=>el.className.split(' ').find(c=>c.startsWith('premium-')&&c!=='premium-card')))])
+ if(students.length>=9) assert.equal(usedThemes.length,9,'Batch output must include all nine distinct template architectures')
  for (const [i,student] of students.entries()) {
   const text=await page.locator('.result-card-a4').nth(i).innerText()
   assert.ok(text.includes(student.student.name),'Student '+(i+1)+' must appear on its own card')
   const headers=await page.locator('.result-card-a4').nth(i).locator('th').allInnerTexts()
   const termLabel=['First Term','Second Term','Final Term'][i%3]
-  assert.ok(headers.some(x=>x.includes(termLabel)),'Current exam '+termLabel+' column is present')
-  assert.equal(headers.filter(x=>/^(First Term|Second Term|Final Term|Assessment|Third Term)$/.test(x.trim())).length,1,'No extra unused term columns')
+  assert.ok(headers.some(x=>x.toLowerCase().includes(termLabel.toLowerCase())),'Card '+i+' '+students[i].options.template+' current '+termLabel+' headers '+JSON.stringify(headers))
+  assert.equal(headers.filter(x=>/^(First Term|Second Term|Final Term|Assessment|Third Term)$/i.test(x.trim())).length,1,'No extra unused term columns')
  }
  const buffer=await page.pdf({format:'A4',printBackground:true,preferCSSPageSize:true})
  const pdfText=Buffer.from(buffer).toString('latin1')

@@ -16,7 +16,7 @@ try {
  const base = {student:{name:'Muhammad Test Student',fatherName:'Test Father',className:'Nine',rollNo:'009'}, exam:{name:'First Term',total_marks:100,session:'2026–2027'}, studentMarks:marks, school:{name:'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL',logo,address:'Sharif Chowk, Rayya Khas, Narowal'}, options:{...m.DEFAULT_RESULT_OPTIONS}}
  const page = await browser.newPage({viewport:{width:1200,height:1400}})
  await page.emulateMedia({media:'print'})
- for (const id of ['signature-editorial','swiss-grid','data-atelier']) {
+ for (const id of ['signature-editorial','swiss-grid','data-atelier','regal-linework','young-scholars','academic-heritage','airframe-geometry','corporate-ledger','examination-dossier']) {
   const data = m.buildResultCardData({...base,options:{...base.options,template:id}})
   const markup = renderToStaticMarkup(createElement(m.ResultCardPreview,{data}))
   await page.setContent('<!doctype html><html><head><meta charset="UTF-8"><style>'+m.resultCardPrintCss+'</style></head><body>'+markup+'</body></html>')
@@ -38,7 +38,9 @@ try {
   assert.ok(box.scrollHeight <= box.height + 2, id+' must not clip page '+JSON.stringify(box))
   }
   await page.screenshot({path:'/tmp/assps-premium-'+id+'-20261009.png'})
-  await page.pdf({path:'/tmp/assps-premium-'+id+'-20261009.pdf',format:'A4',printBackground:true,preferCSSPageSize:true})
+  const pdf=await page.pdf({path:'/tmp/assps-premium-'+id+'-20261009.pdf',format:'A4',printBackground:true,preferCSSPageSize:true})
+  const pdfPages=(pdf.toString('latin1').match(/\/Type\s*\/Page\b/g)||[]).length
+  assert.equal(pdfPages,1,id+' must print precisely one A4 PDF page')
   if (process.env.RESULT_DIAG !== '1') console.log('A4 CHROMIUM PASS',id,JSON.stringify(box))
  }
  await page.close()

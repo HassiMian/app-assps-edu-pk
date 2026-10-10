@@ -22,7 +22,7 @@ export function summarizePrintBatch(cards = []) {
   if (!card?.school?.logo) summary.absentLogo++
   for (const row of card?.result?.subjects || []) {
    if (!row.subjectName || row.subjectName === '—') summary.missingSubject++
-   if (row.hasMarks) summary.scored++
+   if (typeof row.isComplete === 'boolean' ? row.isComplete : row.hasMarks) summary.scored++
    else summary.pending++
   }
  }

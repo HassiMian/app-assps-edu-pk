@@ -15,11 +15,12 @@ try {
  assert.equal(one.result.subjects[0].secondTermMarks, null)
  console.log('PASS zero-score vs missing terms, marks denominator, grade calculation')
  const mixed = m.buildResultCardData({ ...base, options:{...opts,template:'signature-editorial'}, studentMarks: [{ subject: 'English Language', marks_obtained: 92 }, { subject: 'Science', marks_obtained: null }] })
- assert.equal(mixed.result.totalMarks, 100, 'Pending subjects must not contaminate weighted percentages')
- assert.equal(mixed.result.percentage, 92)
+ assert.equal(mixed.result.totalMarks, 100, 'Pending subjects must not contaminate recorded totals')
+ assert.equal(mixed.result.percentage, null, 'Missing subject must never manufacture an official overall grade')
  assert.equal(mixed.result.subjects[1].percentage, null)
+ assert.equal(mixed.result.pendingCount,1)
  console.log('PASS pending marks and weighted totals')
- const mismatchedTerm = m.buildResultCardData({ ...base, studentMarks:[{subject:'English',marks_obtained:90}], options:{...opts,template:'signature-editorial',includeFirstTerm:false,includeSecondTerm:true,includeAssessment:false,includeThirdTerm:false,includeFinalTerm:false} })
+ const mismatchedTerm = m.buildResultCardData({ ...base, studentMarks:[{subject:'English',marks_obtained:90}], options:{...opts,template:'signature-editorial',autoTermColumns:false,includeFirstTerm:false,includeSecondTerm:true,includeAssessment:false,includeThirdTerm:false,includeFinalTerm:false} })
  assert.equal(mismatchedTerm.result.percentage,null,'A first-term result must not leak into second term selection')
  const explicitZero=m.buildResultCardData({...base,studentMarks:[{subject:'English',firstTermMarks:0}],options:{...opts,template:'signature-editorial'}})
  assert.equal(explicitZero.result.percentage,0,'Explicit zero is a scored result, not missing')
@@ -30,7 +31,7 @@ try {
  const noMax = m.buildResultCardData({...base,exam:{name:'First Term'},studentMarks:[{subject:'Science',marks_obtained:24}],options:{...opts,template:'signature-editorial'}})
  assert.equal(noMax.result.percentage,null,'Unknown max must not silently default to 100')
  console.log('PASS invalid-score and unknown-maximum fail-closed')
- const ids = ['signature-editorial','swiss-grid','data-atelier']
+ const ids = ['signature-editorial','swiss-grid','data-atelier','regal-linework','young-scholars','academic-heritage','airframe-geometry','corporate-ledger','examination-dossier']
  for (const id of ids) {
   const data = { ...mixed, options: { ...mixed.options, template: id } }
   const html = renderToStaticMarkup(createElement(m.ResultCardPreview, { data }))
@@ -39,7 +40,7 @@ try {
   assert.ok(html.includes('premium-bar-item'), id)
   assert.ok(html.includes('English Language'), id)
   assert.ok(html.includes('Science'), id)
-  assert.ok(html.includes('92%'), id)
+  assert.ok(html.includes('92'),id)
   assert.ok(html.includes('—'), 'Pending data must have dash')
   console.log('PASS rendered flagship', id, html.length)
  }
@@ -50,6 +51,7 @@ try {
  const selector = renderToStaticMarkup(createElement(m.ResultCardTemplateSelector,{value:'signature-editorial',onChange:()=>{}}))
  assert.ok(selector.includes('aria-pressed="true"') && selector.includes('Signature Editorial'))
  assert.ok(selector.includes('Reference Clone') && selector.includes('Minimal Corporate'))
+ assert.equal((selector.match(/premium-featured-tile/g)||[]).length,9,'Exactly nine premium thumbnails')
  const mandatory = renderToStaticMarkup(createElement(m.ResultCardPreview,{data:{...mixed,options:{...mixed.options,template:'data-atelier',includeCharts:false,orientation:'landscape'}}}))
  assert.ok(mandatory.includes('premium-donut') && mandatory.includes('premium-bar-item'),'Mandatory premium analytics cannot be hidden')
  assert.ok(!mandatory.includes('result-card-a4 landscape'),'Uncertified landscape cannot be selected silently')

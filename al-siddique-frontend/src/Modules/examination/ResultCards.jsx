@@ -48,7 +48,7 @@ export function ProfessionalParametersModal({ cards, student, exam, studentMarks
  const printBatch = (pdf = false) => {
   if (!dataList.length) { window.alert('No result cards are ready for printing.'); return }
   if (batchInfo.absentLogo) { window.alert(`${batchInfo.absentLogo} result card(s) have no school logo configured. Set the correct logo in SaaS School/Paper Settings before printing.`); return }
-  if (data?.options?.template && ['signature-editorial','swiss-grid','data-atelier'].includes(data.options.template)) {
+  if (data?.options?.template && ['signature-editorial','swiss-grid','data-atelier','regal-linework','young-scholars','academic-heritage','airframe-geometry','corporate-ledger','examination-dossier'].includes(data.options.template)) {
    const renderedSchoolLogo = previewRef.current?.querySelector('.result-card-a4 img[data-result-school-logo]')
    if (!renderedSchoolLogo?.complete || !renderedSchoolLogo.naturalWidth) {
     window.alert('The school logo configured in SaaS settings has not loaded. Check the school logo URL and retry. Print was stopped to prevent incorrect result cards.')
