@@ -30,12 +30,7 @@ const shiftDate = (value, days) => {
   date.setUTCDate(date.getUTCDate() + days)
   return date.toISOString().slice(0, 10)
 }
-const clean = value => String(value ?? '').trim()
 const planTypeLabel = type => PLANNING_TYPES.find(item => item.key === type)?.short || 'Daily'
-
-function clone(value) {
-  return JSON.parse(JSON.stringify(value))
-}
 
 function normalizeClassSelection(activeClasses, value) {
   return activeClasses.find(item => String(item.level) === String(value) || item.name === value) || null
@@ -136,14 +131,14 @@ export default function LessonPlanningWorkspace() {
   },[subjectsForClass,document.classLevel,selectedClass?.level,context,document.subjects])
   const sectionOptions = useMemo(()=>selectedClass ? sectionsForClass(selectedClass.name) : [],[selectedClass,sectionsForClass])
 
-  useEffect(()=>{ try { setTenantStorageItem(DRAFT_KEY,JSON.stringify(document)) } catch {} },[document])
+  useEffect(()=>{ try { setTenantStorageItem(DRAFT_KEY,JSON.stringify(document)) } catch { /* Keep the working draft in memory if browser storage is unavailable. */ } },[document])
   useEffect(()=>{ listLessonPlans({limit:200}).then(data=>setSavedPlans(Array.isArray(data)?data:[])).catch(()=>{}) },[])
   useEffect(()=>{
     if(!document.classLevel)return
     let cancelled=false
     getLessonPlanningContext({ classLevel:document.classLevel,section:document.section,subjects:selectedSubjects.join(',') }).then(data=>{if(!cancelled)setContext(data)}).catch(()=>{if(!cancelled)setContext(null)})
     return()=>{cancelled=true}
-  },[document.classLevel,document.section,selectedSubjects.join('|')])
+  },[document.classLevel,document.section,selectedSubjects])
 
   const patch = updates => setDocument(current=>normalizeLessonPlanDocument({ ...current,...updates }))
   const changeType = type => {
@@ -153,14 +148,14 @@ export default function LessonPlanningWorkspace() {
     if(type==='term' && end===start) end=sessionEnd||shiftDate(start,84)
     patch({planningType:type,endDate:end,termLabel:type==='term'?(document.termLabel||'Term') : document.termLabel})
   }
-  const toggleSubject = subject => setSelectedSubjects(current=>current.includes(subject)?current.filter(item=>item!==subject):[...current,subject])
-  const syncSelectedSubjectsIntoDocument = () => {
+  const toggleSubject = subject => {
+    const nextSubjects=selectedSubjects.includes(subject)?selectedSubjects.filter(item=>item!==subject):[...selectedSubjects,subject]
+    setSelectedSubjects(nextSubjects)
     setDocument(current=>{
       const existing=new Map(current.subjects.map(item=>[item.subject.toLowerCase(),item]))
-      return normalizeLessonPlanDocument({ ...current,subjects:selectedSubjects.map(name=>existing.get(name.toLowerCase())||{subject:name,units:[],lessons:[],status:'draft'}) })
+      return normalizeLessonPlanDocument({ ...current,subjects:nextSubjects.map(name=>existing.get(name.toLowerCase())||{subject:name,units:[],lessons:[],status:'draft'}) })
     })
   }
-  useEffect(syncSelectedSubjectsIntoDocument,[selectedSubjects.join('|')])
 
   const generate = async () => {
     if(!document.classLevel){setStatus('Select a class first.');return}

@@ -1,4 +1,5 @@
 import { test } from 'node:test'
+import process from 'node:process'
 import assert from 'node:assert/strict'
 import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
@@ -13,8 +14,6 @@ const here = path.dirname(fileURLToPath(import.meta.url))
 const frontendRoot = path.resolve(here, '../../../../..')
 const backendSrc = path.resolve(frontendRoot, '../al-siddique-backend/src')
 const require = createRequire(import.meta.url)
-const { Pool } = require(path.resolve(backendSrc, '../node_modules/pg'))
-const bcrypt = require(path.resolve(backendSrc, '../node_modules/bcryptjs'))
 const FRONTEND_PORT = Number(process.env.ASSPS_PHASE2_FRONTEND_PORT || 5389)
 const BACKEND_PORT = Number(process.env.ASSPS_PHASE2_BACKEND_PORT || 5388)
 const dbName = String(process.env.DB_NAME || '')
@@ -30,6 +29,8 @@ function fetchStatus(port, pathname) {
 }
 
 test('genuine teacher login reaches canonical Paper Studio without mock authentication', { timeout: 140000 }, async t => {
+  // An unauthenticated/default environment is not an isolated database.
+  if (!dbName) { t.skip('Requires an explicitly named disposable teacher E2E database and credentials.'); return }
   // Never synthesize school identities against the live database or live ports.
   assert.match(dbName, /^assps_phase2_teacher_e2e_[a-z0-9_]+$/)
   assert.notEqual(BACKEND_PORT, 5000)
@@ -37,6 +38,8 @@ test('genuine teacher login reaches canonical Paper Studio without mock authenti
   assert.notEqual(BACKEND_PORT, FRONTEND_PORT)
   assert.ok(process.env.DB_PASSWORD)
   assert.ok(process.env.JWT_SECRET)
+  const { Pool } = require(path.resolve(backendSrc, '../node_modules/pg'))
+  const bcrypt = require(path.resolve(backendSrc, '../node_modules/bcryptjs'))
 
   const pool = new Pool({
     host: process.env.DB_HOST || '127.0.0.1',
