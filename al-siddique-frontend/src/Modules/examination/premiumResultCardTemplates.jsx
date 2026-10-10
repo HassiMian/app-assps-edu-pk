@@ -165,8 +165,9 @@ export function ResultCardPrintToolbar(props) {
    {!props.options.autoTermColumns && [['includeAssessment','Assessment Marks'],['includeFirstTerm','First Term'],['includeSecondTerm','Second Term'],['includeThirdTerm','Third Term'],['includeFinalTerm','Final Term']].map(([key,label])=><label key={key}><input type="checkbox" checked={!!props.options[key]} onChange={()=>toggle(key)}/>{label}</label>)}
    {[['includeAttendance','Attendance'],['includeTeacherRemarks','Teacher Feedback']].map(([key,label])=><label key={key}><input type="checkbox" checked={!!props.options[key]} onChange={()=>toggle(key)}/>{label}</label>)}
   </div>
-  <div className="premium-chart-policy" role="note">Subject performance + percentage chart are always included. For PDF choose “Save as PDF” in your browser print dialog.</div>
-  <div className="toolbar-actions"><button type="button" onClick={props.onPrint}>Print</button><button type="button" onClick={props.onExportPdf}>Save as PDF</button></div>
+  <div className="premium-chart-policy" role="note">Both analytics charts are included on every card. Every printed student uses one A4 portrait sheet.</div>
+  <div className="premium-printer-guide" role="note"><strong>Choose your connected printer</strong> — select any installed USB, Wi-Fi, or shared/network printer in the system Print dialog. Check A4 / Portrait / Actual Size (100%). No printer model is locked to this template.</div>
+  <div className="toolbar-actions"><button type="button" onClick={props.onPrint}>Print · Choose Printer</button><button type="button" onClick={props.onExportPdf}>Save as PDF</button></div>
  </div>
 }
 
@@ -658,6 +659,12 @@ export function openResultPrintWindow(data, exportMode = false) {
     blocked('Result card '+(badCard+1)+' exceeds its A4 print area. No content will be silently cropped. Reduce unusually long feedback or use fewer printed term columns, then reopen print.');
     return;
    }
+   if(typeof window.print!=='function'){
+    blocked('No system print service is available in this browser. Open the result card on a computer with a configured USB or network printer, or use a browser with Print support.');
+    return;
+   }
+   // Browser/operating system owns the printer picker and driver; never hardcode
+   // a school printer, fabricate a device list, or silently spool a job remotely.
    finished=true;window.focus();window.print();
   }
   var logoError='School logo could not load from SaaS settings. Check the configured logo link, then reopen the result card. Printing was paused to avoid incorrect cards.';
