@@ -1,5 +1,6 @@
 import { renderToStaticMarkup } from 'react-dom/server'
-import { RESULT_TEMPLATES as LEGACY_TEMPLATES, DEFAULT_RESULT_OPTIONS, ResultCardPreview as LegacyPreview, ResultCardTemplateSelector as LegacySelector, ResultCardPrintToolbar as LegacyToolbar, buildResultCardData as legacyBuilder, resultCardPrintCss as legacyCss, StandardReportHeader, ResultStudentInfoBlock, ResultSignatureFooter } from './resultCardTemplates'
+import { resolveAssetUrl } from '../../services/api'
+import { RESULT_TEMPLATES as LEGACY_TEMPLATES, DEFAULT_RESULT_OPTIONS, ResultCardPreview as LegacyPreview, ResultCardTemplateSelector as LegacySelector, ResultCardPrintToolbar as LegacyToolbar, buildResultCardData as legacyBuilder, resultCardPrintCss as legacyCss, ResultStudentInfoBlock, ResultSignatureFooter } from './resultCardTemplates'
 
 export { DEFAULT_RESULT_OPTIONS }
 export const RESULT_TEMPLATES = [LEGACY_TEMPLATES[0],
@@ -211,6 +212,25 @@ function BaseTemplate({ data, templateClass, children }) {
  )
 }
 
+function PremiumSchoolHeader({ data, title }) {
+ const school = data.school || {}
+ const student = data.student || {}
+ // Only the tenant's saved SaaS settings provide school branding. Never replace
+ // it with APEX's product identity or with a generated/hardcoded school crest.
+ const configuredLogo = resolveAssetUrl(school.logo)
+ const schoolName = school.name || '—'
+ return <header className="rc-standard-header">
+  <div className="rc-header-logo">{configuredLogo ? <img src={configuredLogo} alt="School emblem configured in SaaS settings" /> : <div className="logo-fallback" aria-label="School logo not configured" />}</div>
+  <div className="rc-header-center">
+   {school.slogan && <div className="rc-urdu-title">{school.slogan}</div>}
+   <h1 className="rc-school-name">{schoolName}</h1>
+   <div className="rc-school-address">{school.address}{school.phone ? ` | ${school.phone}` : ''}</div>
+   <div className="rc-report-title">{title}</div>
+  </div>
+  <div className="rc-header-photo"><div className="rc-photo">{student.photo ? <img src={student.photo} alt="Student photograph"/> : <span>Photo</span>}</div></div>
+ </header>
+}
+
 function PremiumSubjectBars({ data }) {
  return <div className="rc-chart-card premium-subject-chart">
   <h3>Subject-wise Performance</h3>
@@ -246,7 +266,7 @@ function PremiumInsights({ data, reverse = false }) {
 export function ResultCardTemplateSignatureEditorial({ data }) {
  return <BaseTemplate data={data} templateClass="premium-card premium-signature">
   <div className="premium-topline">AL ILMUL IKHLAQ <span>OFFICIAL ACADEMIC RECORD</span></div>
-  <StandardReportHeader data={data} title="Student Report Card" />
+  <PremiumSchoolHeader data={data} title="Student Report Card" />
   <ResultStudentInfoBlock data={data} />
   <PremiumMarksTable data={data} />
   <PremiumInsights data={data} />
@@ -258,7 +278,7 @@ export function ResultCardTemplateSignatureEditorial({ data }) {
 export function ResultCardTemplateSwissGrid({ data }) {
  return <BaseTemplate data={data} templateClass="premium-card premium-swiss">
   <div className="premium-topline">ASSPS / ASSESSMENT STUDIO <span>{data.result.session}</span></div>
-  <StandardReportHeader data={data} title="Academic Performance Record" />
+  <PremiumSchoolHeader data={data} title="Academic Performance Record" />
   <div className="premium-swiss-band">01 / STUDENT PROFILE</div>
   <ResultStudentInfoBlock data={data} />
   <div className="premium-swiss-band">02 / VERIFIED MARKS REGISTER</div>
@@ -272,7 +292,7 @@ export function ResultCardTemplateSwissGrid({ data }) {
 export function ResultCardTemplateDataAtelier({ data }) {
  return <BaseTemplate data={data} templateClass="premium-card premium-atelier">
   <div className="premium-topline">THE ACADEMIC INDEX <span>{data.result.session}</span></div>
-  <StandardReportHeader data={data} title="Student Learning Report" />
+  <PremiumSchoolHeader data={data} title="Student Learning Report" />
   <ResultStudentInfoBlock data={data} />
   <div className="premium-section-label">A / VALIDATED MARKS</div>
   <PremiumMarksTable data={data} />
