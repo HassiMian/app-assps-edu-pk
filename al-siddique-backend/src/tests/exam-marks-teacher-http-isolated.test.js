@@ -77,8 +77,11 @@ test('actual examRoutes enforces assignment scoped reads and transactional write
     return {status:res.status,data:await res.json()}
   }
   const payload={results:[{exam_id:9,student_id:101,subject:'English',marks_obtained:67,total_marks:100}]}
+  // Before tomorrow's first marks, an authorized teacher receives a valid
+  // empty result list (200), not a 404/500 and never fabricated zero marks.
   let reply=await request('GET','/api/exams/results/9')
   assert.equal(reply.status,200)
+  assert.deepEqual(reply.data,{success:true,data:[]},'First Term exam with zero recorded marks must be an empty success')
   let select=queries.filter(q=>q.sql.includes('FROM exam_results')).at(-1)
   assert.ok(select.sql.includes('EXISTS'))
   assert.ok(select.sql.includes('tca.subject'))
@@ -89,6 +92,7 @@ test('actual examRoutes enforces assignment scoped reads and transactional write
 
   reply=await request('GET','/api/exams/results?exam_ids=9')
   assert.equal(reply.status,200)
+  assert.deepEqual(reply.data,{success:true,data:[]},'Bulk results list before marks must be an empty success')
   select=queries.filter(q=>q.sql.includes('FROM exam_results')).at(-1)
   assert.ok(select.sql.includes('tca.teacher_user_id'))
   assert.ok(select.sql.includes('er.subject'))
