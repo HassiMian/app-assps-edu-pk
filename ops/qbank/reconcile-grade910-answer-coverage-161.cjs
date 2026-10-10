@@ -15,6 +15,7 @@ const boardYear=require('./attest-grade910-board-and-session-applicability.cjs')
 const proposedMcqReview=require('./propose-grade910-mcq-reversible-key-balance.cjs')
 const subjectProvenance=require('./attest-grade910-original-subject-provenance.cjs')
 const applicableClaims=require('./attest-grade910-grade-medium-edition-claims.cjs')
+const originalPageEvidence=require('./attest-grade910-original-page-exercise-evidence.cjs')
 const author=require('./author-chemistry9-ch13-five-original-answers.cjs')
 const DOC=path.resolve(__dirname,'../../docs/question-bank')
 const PACKET='ASSPS_CHEMISTRY9_CH13_FIVE_LONG_MODEL_ANSWER_DRAFTS_20261009.json'
@@ -37,6 +38,7 @@ function reconcile({old,raw,registry,packet}){
  proposedMcqReview.assertFrozen(proposedMcqReview.inputs())
  subjectProvenance.assertFrozen(subjectProvenance.loadInputs())
  applicableClaims.assertFrozen(applicableClaims.loadInputs())
+ originalPageEvidence.assertFrozen(originalPageEvidence.loadInputs())
  const inherited=freeze.attest(freeze.loadInputs())
  if(inherited.sourceCryptographicallyMatchedOriginalIds!==156||
   inherited.sourceAuthenticMarkingPointProposals!==798||
