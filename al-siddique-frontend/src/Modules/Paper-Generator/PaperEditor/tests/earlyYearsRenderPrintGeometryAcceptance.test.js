@@ -1,6 +1,7 @@
 // earlyYearsRenderPrintGeometryAcceptance.test.js
 // Final Render-Fidelity, Print Media, and Geometry QA Gate for Early Years Worksheets
 import { test, before, after } from 'node:test'
+import process from 'node:process'
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import os from 'node:os'
@@ -474,8 +475,9 @@ test('EY-RENDER-08: Real PaperGenerator Route Print: Chrome Hidden, PDFs Generat
   assert.equal(navDisplay, 'none', 'Paper Generator module navigation strip must have display: none in print')
 
   // B. Early Years editor top header: display === none
-  const headerDisplay = await page.locator('header.no-print').evaluate((el) => window.getComputedStyle(el).display)
-  assert.equal(headerDisplay, 'none', 'Early Years editor top header must have display: none in print')
+  const headerDisplays = await page.locator('header.no-print').evaluateAll(elements => elements.map(el => window.getComputedStyle(el).display))
+  assert.ok(headerDisplays.length >= 1, 'At least one non-printing editor or Studio header must be present')
+  assert.ok(headerDisplays.every(display => display === 'none'), 'All Studio and Early Years editor headers must be hidden in print')
 
   // C. Inspector: display === none
   const inspectorDisplay = await page.locator('.early-years-inspector').evaluate((el) => window.getComputedStyle(el).display)
