@@ -18,7 +18,11 @@
 | Frontend production build | `npm run build`, `/tmp/assps-rc-frontend-build.log` | PASS exit 0 |
 | Paper Lesson Planning source parity | `/tmp/assps-rc-parity-committed.log` | PASS exit 0 |
 | Lesson Planning real Chromium/Vite | 8 distinct browser files: workspace, late failure, late refresh race, newer row, refresh failure, stale list, stale row, late save | **8/8 PASS**, exit 0 each |
-| Protected original First Term papers | `/tmp/assps-rc-paper43.log`, `/tmp/assps-rc-paper43.exit`: **43/43 distinct documents**, render versus print text; TAP 1/1 | PASS exit 0 |
+| Historic First Term paper preservation (not future paper content requirement) | `/tmp/assps-rc-paper43.log`, `/tmp/assps-rc-paper43.exit`: **43/43 distinct archived originals**, render versus print text; TAP 1/1 | PASS exit 0; historical regression only |
+| Structure-first Paper Workspace editor, rules, semantic sections and nested scoring | `/tmp/assps-rc-structure40.log`: four test files, **40/40 checks** | PASS exit 0 |
+| Paper Workspace formatting/selection real Chromium | `/tmp/assps-rc-paper-selection-v12.log`: **8/8** | PASS exit 0 |
+| Urdu Workspace visual real Chromium | `/tmp/assps-rc-paper-urdu-v13.log`: **5/5** | PASS exit 0 |
+| Urdu Workspace UI/RTL/print real Chromium | `/tmp/assps-rc-paper-urdu-browser.log`: **9/9** | PASS exit 0 |
 | DOCX model/binary/math | `/tmp/assps-rc-docx-root-tests.log`: six checks | **6/6 PASS** exit 0 |
 | DOCX real browser (including Urdu RTL OOXML) | `/tmp/assps-rc-docx-browser.log`: two checks | **2/2 PASS** exit 0 |
 | Backend auth/RLS and payment-proof contract tests | `/tmp/assps-rc-backend-suite.log` | **24/24 PASS** exit 0 |
@@ -33,15 +37,17 @@
 
 Initial DOCX invocation ran with incorrect nested frontend working directory and failed 2/6 (ENOENT fixture path); corrected root-directory invocation passed 6/6. The combined long Lesson Planning browser command also reached the remote command timeout; six individual exit-0 logs were recovered and the two remaining tests were separately confirmed exit 0. These initial harness execution issues are not concealed.
 
+**Current Paper Studio policy:** GitHub issue #4 Phase42 clarifies the 43 completed First Term papers are historical protection/reference material, not a prerequisite for authoring future papers. Therefore the **62/62 structure-first editor and Urdu browser checks** above (40+8+5+9), rather than the archived corpus, are the primary Paper Workspace functional release evidence. This is still synthetic/browser acceptance, not a completed physical printer proof.
+
 ## Explicit gates still NOT certified
 
 1. **P0 — Signed Node + PostgreSQL + JWT end-to-end:** The actual `saas-core-signed-context-real-db.test.js` and authenticated school/teacher/guardian/student matrix are not executable under an independent password-authenticated restricted login yet. Disposable `assps_core_test_login` on port 55432 has `LOGIN=true`, `BYPASSRLS=false`, `SUPERUSER=false`, but **no password configured**; TCP `pg_hba.conf` requires SCRAM-SHA-256. Credential provisioning was blocked by execution safety controls and MUST NOT be bypassed. SQL-clone role assertions and Node signing unit tests are evidence for narrower properties only.
 2. **P0 — Live Nginx private upload ingress:** `/etc/nginx/sites-enabled` **FAILS exit 2**, five unsafe private-upload aliases remain across four live site configs. Staged 7-site candidate `/var/tmp/assps-core-live-reconciled-candidate-20261009` passes syntax and 35/35 host tests, but has NOT replaced live Nginx. **Production remains exposed until a controlled, independently authorized cutover**. No reload/restart was done.
 3. **P0 — Production tenant/RLS and migration certification:** The 77-table policy safety and RLS activation have been proven ONLY on disposable clone(s), not production. No prod migration, schema changes, sensitive grants, tenant access tests or direct DB inspection undertaken here. Release cannot assume staging catalog equals live catalog.
 4. **P1 — Full authentication/teacher/finance/attendance browser and HTTP acceptance:** Synthetic Chromium Lesson Planning and private HTTP tests cannot replace authenticated SaaS role/tenant workflows, student/guardian isolation, fee ledger transactions and exact live acceptance evidence. Production write acceptance is prohibited until backup/snapshot and release authorization.
-5. **P1 — Complete owner integration review:** Paper Studio's scoped Lesson Planning fix and protected documents are reconciled. Separate Result Card print-ready, Grade IX–X academic provenance/approval and APEX Connect integration contracts must be independently reconciled against latest appropriate source and owner evidence before any integrated production release. No other agents' branches were overwritten.
+5. **P1 — Complete owner integration review:** Paper Studio's scoped Lesson Planning fix and protected documents are reconciled. Separate Result Card print-ready, Grade IX–X academic provenance/approval and APEX Connect integration contracts must be independently reconciled against latest appropriate source and owner evidence before any integrated production release. At issue #4 latest checkpoint, Grade IX–X Academic reports 875 original MCQ integrity coverage but **0 academically approved / 0 published**, so no question-bank release import is authorized. APEX Connect v45 source was reported **VPS-local only** and is not present in this Core Git history or authorized upstream source; any Connect integration must await independently verifiable publication and API contract review. Result Card Phase8 remains owner-scoped rather than silently assumed merged. No other agents' branches were overwritten.
 6. **P1 — Existing module lint debt:** `eslint` of LessonPlanningWorkspace.jsx produced **4 errors / 4 warnings** at lines 33, 36, 139, 163 (the selectively integrated source change is at line 197). Browser fixtures lint PASS. No unrelated owner-owned Lesson Planning code was silently rewritten to achieve artificial green status.
-7. **P1 — Physical print/Urdu acceptance:** Browser DOCX Urdu RTL and 43-paper print parity pass; on-prem printer output, real school-specific documents, and final authorized print proof remain unverified.
+7. **P1 — Physical print/Urdu acceptance:** Browser DOCX Urdu RTL, structure-first Urdu Workspace and 43-paper historic print parity pass; on-prem printer output, real school-specific documents, and final authorized print proof remain unverified.
 
 ## Backup and controlled deployment prerequisites
 
