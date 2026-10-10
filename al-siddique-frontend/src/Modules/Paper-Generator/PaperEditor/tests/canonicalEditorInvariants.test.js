@@ -9,19 +9,9 @@ import { fileURLToPath } from 'node:url'
 import {
   EditorWorkingStore,
 } from '../editorV2/editorWorkingStore.js'
-import {
-  EditorFieldRegistry,
-  buildFieldKey,
-} from '../editorV2/EditorFieldRegistry.js'
-import {
-  canonicalTextToTiptapDoc,
-  extractPlainTextFromTiptap,
-  computeFieldDirtyState,
-} from '../editorV2/editorProjection.js'
-import {
-  resolvePaperEditorRoute,
-  isPristineOfficialV13Paper,
-} from '../editorV2/canonicalRouteGuards.js'
+import { buildFieldKey } from '../editorV2/EditorFieldRegistry.js';
+import { canonicalTextToTiptapDoc, computeFieldDirtyState } from '../editorV2/editorProjection.js';
+import { resolvePaperEditorRoute } from '../editorV2/canonicalRouteGuards.js';
 import {
   getB3NodeEditability,
   B3_RENDER_STRATEGY as NODE_EDITABILITY_STRATEGY,

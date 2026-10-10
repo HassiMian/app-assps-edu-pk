@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client'
 import PaperEditorRouter from '../editorV2/PaperEditorRouter.jsx'
 import canonicalCorpusData from '../migration/data/canonical-first-term-2026-paperdoc-v2-schema3.json'

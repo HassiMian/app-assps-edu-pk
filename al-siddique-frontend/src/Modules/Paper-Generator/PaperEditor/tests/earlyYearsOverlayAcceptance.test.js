@@ -1,3 +1,4 @@
+import process from 'node:process'
 // earlyYearsOverlayAcceptance.test.js — Comprehensive E2E tests for Overlay Wiring, Slot Selection, Uploads, Pre Classes UI, and 9-Paper Screenshot QA
 import { test, before, after } from 'node:test'
 import assert from 'node:assert/strict'

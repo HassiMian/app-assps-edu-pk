@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import { useState, useRef } from 'react';
 import { useReactToPrint } from 'react-to-print'
 import { Printer, Edit3, Check, ArrowLeft, Trash2, Plus } from 'lucide-react'
 

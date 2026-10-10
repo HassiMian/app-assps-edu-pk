@@ -1,3 +1,4 @@
+import process from 'node:process'
 // canonicalEditorBrowserAcceptance.test.js — Browser E2E Acceptance Test Suite for Canonical Editor V2 (Rule 48: B3-01 to B3-17)
 import { test, before, after } from 'node:test'
 import assert from 'node:assert'

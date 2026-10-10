@@ -1,11 +1,7 @@
 // CanonicalPaperRibbonToolbar.jsx — Dedicated Ribbon Toolbar for Canonical Paper Editor V2 (Rules 14, 18, 41, 42)
-import React, { useState, useEffect } from 'react'
-import {
-  Undo2, Redo2, Bold, Italic, Underline, Strikethrough,
-  Superscript, Subscript, AlignLeft, AlignCenter, AlignRight,
-  AlignJustify, ArrowLeft, ArrowRight, Highlighter, RemoveFormatting,
-  Save, Edit3, CheckCircle2, Printer, FileDown
-} from 'lucide-react'
+// CanonicalPaperRibbonToolbar.jsx — Dedicated Ribbon Toolbar for Canonical Paper Editor V2 (Rules 14, 18, 41, 42)
+import { useState, useEffect } from 'react';
+import { Undo2, Redo2, Bold, Italic, Underline, Strikethrough, Superscript, Subscript, AlignLeft, AlignCenter, AlignRight, AlignJustify, ArrowLeft, ArrowRight, RemoveFormatting, Save, Edit3, CheckCircle2, Printer, FileDown } from 'lucide-react';
 import {
   SUPPORTED_FONTS,
   SUPPORTED_SIZES,

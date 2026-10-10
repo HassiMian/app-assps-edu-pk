@@ -1,3 +1,4 @@
+import { Buffer } from 'node:buffer'
 // migrationV2_43.test.js — 43-Paper Canonical V2 Verification Suite
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
@@ -6,34 +7,9 @@ import path from 'node:path'
 import crypto from 'node:crypto'
 import { fileURLToPath } from 'node:url'
 
-import {
-  CANONICAL_FORMAT,
-  CANONICAL_DOCUMENT_MODEL,
-  CANONICAL_SCHEMA_VERSION,
-  DocumentLanguage,
-  DocumentDirection,
-  AttemptRule,
-  AttemptRuleOrigin,
-  PaperMarksStatus,
-  PaperTotalOrigin,
-  SectionMarksOrigin,
-  NodeMarksOrigin,
-  VALID_NODE_MARKS_ORIGINS,
-  ClassificationCertainty,
-  VALID_CLASSIFICATION_CERTAINTIES,
-  CoverageStatus,
-  CanonicalNodeType,
-  LabelOrigin,
-  createCanonicalPaperDocument,
-  createShortQuestionNode,
-  validateCanonicalPaperDocument,
-} from '../core/PaperDocumentV2.js'
+import { CANONICAL_FORMAT, CANONICAL_DOCUMENT_MODEL, CANONICAL_SCHEMA_VERSION, DocumentLanguage, DocumentDirection, AttemptRule, PaperMarksStatus, PaperTotalOrigin, SectionMarksOrigin, NodeMarksOrigin, VALID_NODE_MARKS_ORIGINS, ClassificationCertainty, VALID_CLASSIFICATION_CERTAINTIES, CoverageStatus, CanonicalNodeType, LabelOrigin, createCanonicalPaperDocument, createShortQuestionNode, validateCanonicalPaperDocument } from '../core/PaperDocumentV2.js';
 
-import {
-  generateCanonicalV2Corpus,
-  migrateOfficialPaperToV2,
-  stitchItemsToFullCoverage,
-} from '../migration/migrateOfficialPaperToV2.js'
+import { generateCanonicalV2Corpus, stitchItemsToFullCoverage } from '../migration/migrateOfficialPaperToV2.js';
 
 import {
   verifyFieldCoverageInvariants,

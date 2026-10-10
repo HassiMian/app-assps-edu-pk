@@ -1,3 +1,4 @@
+import { Buffer } from 'node:buffer'
 // editorV2B4StructuredOverlay.test.js — Regression & Invariant Tests for B4 Structured Node Editing
 import { test } from 'node:test'
 import assert from 'node:assert'
@@ -11,77 +12,21 @@ import {
   resolveWorkingSectionNodes,
   parseVerticalNumeric,
 } from '../editorV2/structured/structuredNodeProjection.js'
-import {
-  StructuredIdAllocator,
-  deriveBaselineSegmentId,
-  deriveBaselineGrammarRowId,
-  deriveBaselineOperandId,
-  extractMaxSequenceFromUserId,
-} from '../editorV2/structured/structuredIdAllocator.js'
+import { deriveBaselineSegmentId, deriveBaselineGrammarRowId, deriveBaselineOperandId, extractMaxSequenceFromUserId } from '../editorV2/structured/structuredIdAllocator.js';
 import { validateV2StructuredBlock } from '../editorV2/structured/structuredPatchValidator.js'
 import {
   createDefaultInsertedNode,
   generateNextOptionLabel,
 } from '../editorV2/structured/structuredNodeDefaults.js'
-import {
-  CMD,
-  cmdUpdateMcqOptionText,
-  cmdAddMcqOption,
-  cmdRemoveMcqOption,
-  cmdReorderMcqOptions,
-  cmdUpdateTfStatement,
-  cmdUpdateTfIndicator,
-  cmdUpdateFillSegmentText,
-  cmdInsertFillSegment,
-  cmdRemoveFillSegment,
-  cmdReorderFillSegments,
-  cmdUpdateWordBank,
-  cmdUpdateMatchingSide,
-  cmdAddMatchingItem,
-  cmdRemoveMatchingItem,
-  cmdReorderMatchingSide,
-  cmdUpdateGrammarHeaders,
-  cmdUpdateGrammarCell,
-  cmdToggleGrammarBlank,
-  cmdAddGrammarRow,
-  cmdRemoveGrammarRow,
-  cmdReorderGrammarRows,
-  cmdUpdateVerticalOperand,
-  cmdAddVerticalOperand,
-  cmdRemoveVerticalOperand,
-  cmdReorderVerticalOperands,
-  cmdUpdateVerticalOperator,
-  cmdSetVerticalResult,
-  cmdRemoveVerticalResult,
-  cmdInsertNode,
-  cmdDeleteNode,
-  cmdDuplicateNode,
-  cmdMoveNode,
-} from '../editorV2/structured/structuredCommands.js'
+import { cmdUpdateMcqOptionText, cmdAddMcqOption, cmdRemoveMcqOption, cmdReorderMcqOptions, cmdUpdateTfStatement, cmdUpdateTfIndicator, cmdUpdateFillSegmentText, cmdInsertFillSegment, cmdRemoveFillSegment, cmdUpdateWordBank, cmdUpdateMatchingSide, cmdAddMatchingItem, cmdRemoveMatchingItem, cmdUpdateGrammarHeaders, cmdUpdateGrammarCell, cmdAddGrammarRow, cmdRemoveGrammarRow, cmdUpdateVerticalOperand, cmdAddVerticalOperand, cmdRemoveVerticalOperand, cmdUpdateVerticalOperator, cmdSetVerticalResult, cmdInsertNode, cmdDeleteNode, cmdDuplicateNode, cmdMoveNode } from '../editorV2/structured/structuredCommands.js';
 import { StructuredCommandHistory } from '../editorV2/structured/StructuredCommandHistory.js'
 import {
   INTERACTION_MODE,
   buildStructuredControlKey,
   parseStructuredControlKey,
 } from '../editorV2/structured/structuredFocusHelpers.js'
-import {
-  exportStructuredBlock,
-  validateDraftStructuredBlock,
-  computeMaxSequenceFromStructured,
-} from '../editorV2/structured/structuredDraftV2.js'
-import {
-  createMcqPatch,
-  createTrueFalsePatch,
-  createFillBlankPatch,
-  createMatchingPatch,
-  createGrammarPatch,
-  createVerticalMathPatch,
-  createInsertedOption,
-  createInsertedSegment,
-  createInsertedMatchingItem,
-  createInsertedGrammarRow,
-  createInsertedOperand,
-} from '../editorV2/structured/structuredNodeModel.js'
+import '../editorV2/structured/structuredDraftV2.js';
+import { createMcqPatch, createInsertedOption, createInsertedSegment, createInsertedMatchingItem, createInsertedGrammarRow, createInsertedOperand } from '../editorV2/structured/structuredNodeModel.js';
 import { EditorWorkingStore } from '../editorV2/editorWorkingStore.js'
 import {
   saveWorkingDraft,

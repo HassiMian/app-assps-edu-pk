@@ -1,3 +1,4 @@
+import process from 'node:process'
 // earlyYearsBrowserAcceptance.test.js — Browser E2E Acceptance Test Suite for Early Years Worksheets
 import { test, before, after } from 'node:test'
 import assert from 'node:assert'

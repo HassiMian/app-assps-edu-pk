@@ -16,7 +16,7 @@ import { fileURLToPath } from 'node:url'
 
 import { resolvePaperRoute } from '../../resolvePaperRoute.js'
 import { EditorWorkingStore } from '../editorV2/editorWorkingStore.js'
-import { EditorFieldRegistry } from '../editorV2/EditorFieldRegistry.js'
+import '../editorV2/EditorFieldRegistry.js';
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)

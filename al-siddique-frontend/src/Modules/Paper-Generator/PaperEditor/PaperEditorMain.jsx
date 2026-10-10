@@ -1,5 +1,6 @@
 // PaperEditorMain.jsx — Central Word-like Editor for ASSPS Paper Generator
-import React, { useState, useRef, useEffect, useMemo } from 'react'
+// PaperEditorMain.jsx — Central Word-like Editor for ASSPS Paper Generator
+import { useState, useRef, useEffect } from 'react';
 import { useEditor } from '@tiptap/react'
 import { getPaperEditorExtensions, createTiptapDocFromText } from './extensions/PaperEditorExtensions.js'
 import PaperRibbonToolbar from './toolbar/PaperRibbonToolbar.jsx'
@@ -8,7 +9,7 @@ import { executePaperPrint } from './printing/PrintEngine.js'
 import { migrateLegacyPaper } from './migration/migrateLegacyPaper.js'
 import { clonePaperDocument } from './core/PaperDocument.js'
 import { usePaperStore } from '../usePaperStore.js'
-import { ZoomIn, ZoomOut, Maximize2, Minimize2, Edit3, CheckCircle2, ArrowLeft } from 'lucide-react'
+import { ZoomIn, ZoomOut, Edit3, CheckCircle2, ArrowLeft } from 'lucide-react';
 
 export default function PaperEditorMain({
   loadedPaper = null,

@@ -19,7 +19,7 @@ function storage({ quotaKeys = new Set(), genericErrorKeys = new Set() } = {}) {
 test('tenant storage falls back to sessionStorage on local quota and prefers emergency copy',()=>{
   const local=storage()
   const session=storage()
-  global.window={localStorage:local,sessionStorage:session}
+  globalThis.window={localStorage:local,sessionStorage:session}
   const user={tenant_id:'assps',school_id:1,email:'admin@example.invalid'}
   local.setItem('al_siddique_user',JSON.stringify(user))
   const key=tenantStorageKey('paper-store',user)
@@ -27,7 +27,7 @@ test('tenant storage falls back to sessionStorage on local quota and prefers eme
   const quotaLocal=storage({quotaKeys:new Set([key])})
   quotaLocal.data.set('al_siddique_user',JSON.stringify(user))
   quotaLocal.data.set(key,'stale-local')
-  global.window.localStorage=quotaLocal
+  globalThis.window.localStorage=quotaLocal
 
   assert.equal(setTenantStorageItem('paper-store','fresh-emergency'),'session')
   assert.equal(session.getItem(key),'fresh-emergency')
@@ -36,18 +36,18 @@ test('tenant storage falls back to sessionStorage on local quota and prefers eme
   removeTenantStorageItem('paper-store')
   assert.equal(session.getItem(key),null)
   assert.equal(quotaLocal.getItem(key),null)
-  delete global.window
+  delete globalThis.window
 })
 
 test('tenant storage does not hide non-quota storage failures',()=>{
   const local=storage()
   const session=storage()
-  global.window={localStorage:local,sessionStorage:session}
+  globalThis.window={localStorage:local,sessionStorage:session}
   const user={tenant_id:'assps'}
   local.setItem('al_siddique_user',JSON.stringify(user))
   const key=tenantStorageKey('paper-store',user)
-  global.window.localStorage=storage({genericErrorKeys:new Set([key])})
-  global.window.localStorage.data.set('al_siddique_user',JSON.stringify(user))
+  globalThis.window.localStorage=storage({genericErrorKeys:new Set([key])})
+  globalThis.window.localStorage.data.set('al_siddique_user',JSON.stringify(user))
   assert.throws(()=>setTenantStorageItem('paper-store','x'),/storage failed/)
-  delete global.window
+  delete globalThis.window
 })

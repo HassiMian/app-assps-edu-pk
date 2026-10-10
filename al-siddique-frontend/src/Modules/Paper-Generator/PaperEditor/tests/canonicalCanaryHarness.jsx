@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import { Suspense } from 'react';
 import ReactDOM from 'react-dom/client'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from '@/context/AuthContext.jsx'

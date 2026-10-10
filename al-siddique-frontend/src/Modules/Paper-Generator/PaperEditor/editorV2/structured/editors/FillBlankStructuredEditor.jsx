@@ -2,7 +2,11 @@
 // Renders token segments (text / blanks) and optional word bank.
 // Dispatches granular structural commands for undo/redo tracking.
 
-import React, { useState } from 'react'
+// FillBlankStructuredEditor.jsx — In-place structured editor for Fill-in-the-Blank nodes (B4-C).
+// Renders token segments (text / blanks) and optional word bank.
+// Dispatches granular structural commands for undo/redo tracking.
+
+import { useState } from 'react';
 import FillBlankSegmentEditor from '../components/FillBlankSegmentEditor.jsx'
 import {
   cmdUpdateFillSegmentText,

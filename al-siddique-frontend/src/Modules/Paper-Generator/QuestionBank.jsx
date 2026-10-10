@@ -10,16 +10,9 @@ import { useState, useRef, useMemo, useCallback, useEffect } from 'react'
 import Portal from '../../components/Portal'
 import { usePaperStore } from './usePaperStore'
 import { classLevelLabel, classLevelsMatch, normalizeClassLevel, sortClassLevels, useAcademicStore } from '../../services/useAcademicStore'
-import {
- BookOpen, Plus, Trash2, Edit2, Search, Upload,
- X, Save, FileText, List, AlignLeft, Image, Download,
- Sparkles, ToggleLeft, Columns, PenLine, FileUp, CheckSquare,
- Square, Eye, EyeOff, RefreshCw, ChevronDown, ChevronUp,
- // New icons for advanced question types
- ArrowLeftRight, Repeat, Shuffle, BookMarked, Scissors,
- MessageSquare, Globe, ScrollText, Mail, Zap, HelpCircle,
- Calculator, BarChart3, Tag,
-} from 'lucide-react'
+import { BookOpen, Plus, Trash2, Edit2, Search, Upload, X, Save, FileText, List, AlignLeft, Image, Download, Sparkles, ToggleLeft, Columns, PenLine, FileUp, CheckSquare, Square, Eye, EyeOff, RefreshCw, ChevronDown, ChevronUp,
+// New icons for advanced question types
+ArrowLeftRight, Repeat, Shuffle, BookMarked, Scissors, MessageSquare, Globe, ScrollText, Mail, Zap, HelpCircle, Calculator, Tag } from 'lucide-react';
 import { REGISTRY_MAP, STRUCTURED_DATA_FORM_TYPES, URDU_DEFAULT_TYPES, SHOW_ANSWER_FIELD } from './data/questionTypeRegistry'
 
 //  Design tokens 
