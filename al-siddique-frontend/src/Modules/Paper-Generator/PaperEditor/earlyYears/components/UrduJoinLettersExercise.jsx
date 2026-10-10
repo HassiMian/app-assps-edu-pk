@@ -1,5 +1,4 @@
 // UrduJoinLettersExercise.jsx — Split letters with plus signs and large writing lines for Urdu word formation
-import React from 'react'
 import { TYPOGRAPHY_TOKENS } from '../tokens/typographyTokens.js'
 import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
 

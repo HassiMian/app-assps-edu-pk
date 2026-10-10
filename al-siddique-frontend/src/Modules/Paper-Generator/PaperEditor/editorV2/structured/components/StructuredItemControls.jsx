@@ -1,7 +1,6 @@
 // StructuredItemControls.jsx — Keyboard-accessible item controls (Move Up, Move Down, Delete).
 // RULE: No drag-and-drop npm packages. Keyboard-accessible buttons with aria-labels.
 
-import React from 'react'
 
 export default function StructuredItemControls({
   onMoveUp,

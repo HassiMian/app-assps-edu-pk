@@ -1,5 +1,4 @@
 // DrawingResponseArea.jsx — Empty outlined canvas area for child drawings
-import React from 'react'
 
 export default function DrawingResponseArea({
   height = '60mm',

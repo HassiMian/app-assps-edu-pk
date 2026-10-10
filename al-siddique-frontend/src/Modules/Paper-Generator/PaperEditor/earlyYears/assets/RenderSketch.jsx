@@ -1,5 +1,4 @@
 // RenderSketch.jsx — React presentation component for rendering Early Years sketches
-import React from 'react'
 import { getSketchAsset } from './SketchAssetRegistry.js'
 import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
 

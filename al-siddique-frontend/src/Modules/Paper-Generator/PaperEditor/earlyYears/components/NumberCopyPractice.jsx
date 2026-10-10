@@ -1,5 +1,4 @@
 // NumberCopyPractice.jsx — Top reference row with spacious blank cells below for number copy practice
-import React from 'react'
 import { TYPOGRAPHY_TOKENS } from '../tokens/typographyTokens.js'
 import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
 
