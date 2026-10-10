@@ -1,0 +1,93 @@
+import assert from 'node:assert/strict'
+import {spawn} from 'node:child_process'
+import {setTimeout as sleep} from 'node:timers/promises'
+import {chromium} from 'playwright'
+const port=5958,host=`http://127.0.0.1:${port}`
+const child=spawn(process.execPath,['node_modules/vite/bin/vite.js','--host','127.0.0.1','--port',String(port),'--strictPort'],{cwd:process.cwd(),stdio:['ignore','pipe','pipe']})
+let output=''
+for(const s of [child.stdout,child.stderr])s.on('data',v=>{output+=v.toString()})
+let browser
+try{
+ let ready=false
+ for(let i=0;i<60;i++) { try{const r=await fetch(host+'/scripts/fixtures/result-designer.html',{signal:AbortSignal.timeout(900)});if(r.ok){ready=true;break}}catch{} await sleep(250)}
+ assert.ok(ready,output.slice(-900))
+ browser=await chromium.launch({headless:true,args:['--no-sandbox']})
+ const page=await browser.newPage({viewport:{width:1440,height:1000}})
+ await page.context().addInitScript(()=>{window.print=()=>{window.__printInvoked=(window.__printInvoked||0)+1}})
+ await page.route('**/*',r=>new URL(r.request().url()).hostname==='127.0.0.1'?r.continue():r.abort())
+ await page.goto(host+'/scripts/fixtures/result-designer.html',{waitUntil:'domcontentloaded'})
+ await page.getByText('Professional Result Card Designer').waitFor({timeout:30000})
+ assert.equal(await page.locator('.premium-featured-tile').count(),9)
+ assert.equal(await page.locator('.premium-featured-tile[aria-pressed=true]').count(),1)
+ assert.equal(await page.locator('.result-card-a4').count(),1)
+ assert.ok((await page.locator('.result-card-a4').innerText()).includes('Fixture Student 1'))
+ await page.getByRole('button',{name:/Swiss Grid/}).click()
+ assert.equal(await page.locator('.premium-featured-tile.swiss-grid').getAttribute('aria-pressed'),'true')
+ assert.ok((await page.locator('.result-card-a4').getAttribute('class')).includes('premium-swiss'))
+ await page.getByRole('button',{name:/Examination Dossier/}).click()
+ assert.ok((await page.locator('.result-card-a4').getAttribute('class')).includes('premium-dossier'))
+ await page.getByRole('button',{name:/Academic Heritage/}).click()
+ assert.ok((await page.locator('.result-card-a4').getAttribute('class')).includes('premium-heritage'))
+ assert.equal(await page.getByText(/3 card\(s\)/).count()>0,true)
+ assert.equal(await page.getByText('Auto-match each card to its exam term').count(),1)
+ await page.getByRole('button',{name:'Print · Choose Printer'}).waitFor()
+ assert.ok((await page.getByText(/Choose your connected printer/).innerText()).includes('Choose your connected printer'))
+ const [printPop] = await Promise.all([page.waitForEvent('popup'),page.getByRole('button',{name:'Print · Choose Printer'}).click()])
+ await printPop.locator('.result-card-a4').first().waitFor()
+ assert.equal(await printPop.locator('.result-card-a4').count(),3,'System printer route must support whole-school batch')
+ const printCss=await printPop.locator('style').first().textContent()
+ assert.match(printCss,/@page\s*\{\s*size:\s*A4 portrait/,'OS printer must receive A4 Portrait CSS')
+ await printPop.close()
+ const [pop] = await Promise.all([page.waitForEvent('popup'),page.getByRole('button',{name:'Save as PDF'}).click()])
+ await pop.locator('.result-card-a4').first().waitFor()
+ assert.equal(await pop.locator('.result-card-a4').count(),3)
+ const text=await pop.locator('body').innerText()
+ assert.ok(text.includes('Fixture Student 1') && text.includes('Fixture Student 2') && text.includes('Fixture Student 3'))
+ const first=await pop.locator('.result-card-a4').first().innerText()
+ const second=await pop.locator('.result-card-a4').nth(1).innerText()
+ assert.ok(first.includes('First Term') && second.includes('Second Term'))
+ assert.equal(await pop.locator('img[data-result-school-logo]').count(),3)
+ const readyStatus=await pop.locator('#result-print-status').innerText()
+ assert.equal(readyStatus,'')
+ await pop.close()
+ await page.goto(host+'/scripts/fixtures/result-designer.html?missingLogo=1',{waitUntil:'domcontentloaded'})
+ await page.getByText('Professional Result Card Designer').waitFor()
+ let missingMessage=''
+ page.once('dialog',async dialog=>{missingMessage=dialog.message();await dialog.accept()})
+ await page.getByRole('button',{name:'Save as PDF'}).click()
+ assert.match(missingMessage,/no school logo configured/i)
+ await page.context().route('**/api/uploads/fixture-404.png',r=>r.abort())
+ await page.goto(host+'/scripts/fixtures/result-designer.html?brokenLogo=1',{waitUntil:'domcontentloaded'})
+ await page.getByText('Professional Result Card Designer').waitFor()
+ let invalidLogoAlert=''
+ page.once('dialog',async dialog=>{invalidLogoAlert=dialog.message();await dialog.accept()})
+ await page.getByRole('button',{name:'Save as PDF'}).click()
+ assert.match(invalidLogoAlert,/logo configured in SaaS settings has not loaded/i)
+ console.log('BROKEN_SAAS_LOGO_PREFLIGHT_DENIED_PASS')
+ for(const [flag,expectedMessage] of [
+  ['noMarks',/no recorded complete subject marks/i],
+  ['ungraded',/no matching school grade band/i],
+  ['missingSubject',/subject name is missing/i],
+  ['missingStudent',/student identity or subject name is missing/i],
+ ]){
+  await page.goto(host+'/scripts/fixtures/result-designer.html?'+flag+'=1',{waitUntil:'domcontentloaded'})
+  await page.getByText('Professional Result Card Designer').waitFor()
+  let text=''
+  page.once('dialog',async dialog=>{text=dialog.message();await dialog.accept()})
+  await page.getByRole('button',{name:'Save as PDF'}).click()
+  assert.match(text,expectedMessage,flag+' must fail closed before print')
+ }
+ console.log('AUTHENTICATED_RESULT_PREFLIGHT_FIXTURES_PASS ungraded fractional, missing subject and student identity denied')
+ await page.goto(host+'/scripts/fixtures/result-designer.html?remarksSource=1',{waitUntil:'domcontentloaded'})
+ await page.getByText('Professional Result Card Designer').waitFor()
+ assert.ok((await page.locator('.result-card-a4').innerText()).includes('Original saved exam feedback for student 1.'))
+ await page.getByRole('button',{name:/Teacher Remarks/}).click()
+ const feedback=page.locator('textarea')
+ assert.equal(await feedback.inputValue(),'Original saved exam feedback for student 1.')
+ await feedback.fill('Teacher-approved updated remarks for printing.')
+ await page.getByText('Teacher-approved updated remarks for printing.').first().waitFor()
+ assert.ok((await page.locator('.result-card-a4').innerText()).includes('Teacher-approved updated remarks for printing.'))
+ console.log('TEACHER_FEEDBACK_BROWSER_PASS saved exam remarks preserved, editing updates preview')
+ console.log('RESULT_DESIGNER_BROWSER_PASS generic OS printer picker, PDF popup, A4 3-card batch, no/broken SaaS logo blocks print')
+ await page.close()
+}finally{if(browser)await browser.close();child.kill('SIGTERM');await sleep(500);if(!child.killed)child.kill('SIGKILL')}
