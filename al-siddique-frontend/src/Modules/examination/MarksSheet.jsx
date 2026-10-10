@@ -1,9 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { RefreshCw, Save, Search } from 'lucide-react'
 import api from '../../services/api'
 import { C, card, btnPrimary, btnSecondary, input, select, labelStyle, sectionHeader } from '../moduleStyles'
 import { usePaperStore } from '../Paper-Generator/usePaperStore'
 import { useAcademicStore } from '../../services/useAcademicStore'
+import {
+ normalizeMarksClass, normalizeMarksExam, matchesMarksExam, pickMarksExam,
+ marksEntryClasses, marksSubjectsForClass, filterMarksStudents, validateMarksBatch
+} from './marksEntryModel'
 
 const FALLBACK_EXAM_TYPES = ['Term Exam', 'Assessment', 'Quiz', 'Annual Exam', 'Monthly Test']
 
@@ -11,28 +15,11 @@ function classLabel(value) {
  return value ? `Class ${value}` : 'Select class'
 }
 
-function normalizeClass(value) {
- return String(value || '').replace(/^Class\s+/i, '')
-}
-
-function typeLabel(value) {
- if (value === 'TE') return 'Term Exam'
- if (value === 'AS') return 'Assessment'
- return value || ''
-}
-
-function normalizeExam(exam) {
- return {
- ...exam,
- type: typeLabel(exam.type),
- class: exam.class === 'All Classes' ? exam.class : normalizeClass(exam.class),
- session: exam.session || '',
- }
-}
+const normalizeClass = normalizeMarksClass
+const typeLabel = value => value === 'TE' ? 'Term Exam' : value === 'AS' ? 'Assessment' : String(value || '')
 
 export default function MarksSheet() {
- const { classNames, subjectsForClass, sessionStart, sessionEnd } = useAcademicStore()
- const activeSession = sessionStart && sessionEnd ? `${String(sessionStart).slice(0,4)}-${String(sessionEnd).slice(0,4)}` : ''
+ const { classNames, subjectsForClass } = useAcademicStore()
  const { paperSettings } = usePaperStore()
  const [exams, setExams] = useState([])
  const [students, setStudents] = useState([])
@@ -43,178 +30,192 @@ export default function MarksSheet() {
  const [totalMarks, setTotalMarks] = useState('')
  const [passMarks, setPassMarks] = useState('')
  const [marks, setMarks] = useState({})
+ const [editedMarks, setEditedMarks] = useState({})
  const [saving, setSaving] = useState(false)
  const [loadingData, setLoadingData] = useState(false)
  const [refreshing, setRefreshing] = useState(false)
  const [message, setMessage] = useState('')
+ const [marksLoaded, setMarksLoaded] = useState(false)
+ const examFetchSeq = useRef(0)
+ const rosterFetchSeq = useRef(0)
+ const marksEditRevision = useRef(0)
 
  const loadExams = async () => {
+ const request = ++examFetchSeq.current
  setRefreshing(true)
  try {
  const res = await api.get('/api/exams')
- const list = (res.data.data || []).map(normalizeExam)
+ if (!Array.isArray(res.data?.data)) throw new Error('Exam catalog did not return a valid list.')
+ const list = res.data.data.map(normalizeMarksExam)
+ if (request !== examFetchSeq.current) return false
  setExams(list)
- if (!selectedExamType && list.length) setSelectedExamType(list[0].type || FALLBACK_EXAM_TYPES[0])
+ const preferred = list.find(e => /\bfirst\s+term\b/i.test(e.name || '')) || list[0]
+ setSelectedExamType(old => old && list.some(e=>e.type===old) ? old : (preferred?.type || ''))
+ setSelectedExamId(old => list.some(e=>String(e.id)===old) ? old : (preferred ? String(preferred.id) : ''))
  return true
- } catch {
- setMessage('Refresh failed. Existing loaded exams were preserved; please check the backend connection.')
+ } catch (err) {
+ if (request === examFetchSeq.current)
+ setMessage(err?.response?.data?.message || err?.message || 'Cannot load exams. Existing data preserved.')
  return false
  } finally {
- setRefreshing(false)
+ if (request === examFetchSeq.current) setRefreshing(false)
  }
  }
 
  useEffect(() => {
- // eslint-disable-next-line react-hooks/set-state-in-effect
- loadExams()
- // eslint-disable-next-line react-hooks/exhaustive-deps
+ let active = true
+ queueMicrotask(() => { if (active) void loadExams() })
+ return () => { active = false; examFetchSeq.current += 1; rosterFetchSeq.current += 1 }
  }, [])
 
- const examTypes = Array.from(new Set([...FALLBACK_EXAM_TYPES, ...exams.map(exam => exam.type).filter(Boolean)]))
- const matchingExams = exams.filter(exam => {
- const typeOk = !selectedExamType || exam.type === selectedExamType
- const classOk = !selectedClass || normalizeClass(exam.class) === selectedClass || exam.class === 'All Classes'
- return typeOk && classOk
- })
- const selectedExam = exams.find(exam => String(exam.id) === String(selectedExamId)) || matchingExams[0]
+ const examTypes = Array.from(new Set([...exams.map(exam=>exam.type).filter(Boolean),...FALLBACK_EXAM_TYPES]))
+ const classes = marksEntryClasses(classNames, exams)
+ const matchingExams = exams.filter(exam => matchesMarksExam(exam,selectedExamType,selectedClass))
+ const selectedExam = matchingExams.find(exam => String(exam.id) === selectedExamId) || null
 
- const syncExamDefaults = (nextExam) => {
+ const resetRoster = () => {
+ rosterFetchSeq.current += 1
+ marksEditRevision.current += 1
  setStudents([])
  setMarks({})
+ setEditedMarks({})
+ setMarksLoaded(false)
+ setMessage('')
+ }
+ const syncExamDefaults = nextExam => {
+ resetRoster()
  setSelectedExamId(nextExam ? String(nextExam.id) : '')
- if (nextExam) {
- setTotalMarks(nextExam.total_marks ?? '')
- setPassMarks(nextExam.pass_marks ?? '')
+ setTotalMarks(nextExam?.total_marks ?? '')
+ setPassMarks(nextExam?.pass_marks ?? '')
  }
- }
-
- const changeExamType = (value) => {
- const nextExam = exams.find(exam => exam.type === value && (!selectedClass || normalizeClass(exam.class) === selectedClass || exam.class === 'All Classes'))
+ const changeExamType = value => {
  setSelectedExamType(value)
- syncExamDefaults(nextExam)
+ syncExamDefaults(pickMarksExam(exams,value,selectedClass))
  }
-
- const changeClass = (value) => {
- const nextExam = exams.find(exam => (!selectedExamType || exam.type === selectedExamType) && (normalizeClass(exam.class) === value || exam.class === 'All Classes'))
+ const changeClass = value => {
  setSelectedClass(value)
- syncExamDefaults(nextExam)
+ setSelectedSubject('')
+ syncExamDefaults(pickMarksExam(exams,selectedExamType,value))
+ }
+ const changeSavedExam = value => {
+ syncExamDefaults(matchingExams.find(e=>String(e.id)===value))
  }
 
  const refreshData = async () => {
- setMessage('')
  const refreshed = await loadExams()
- if (refreshed) {
- setStudents([])
- setMarks({})
- }
+ if (refreshed) resetRoster()
  }
 
-  const searchStudents = async () => {
-  if (!selectedExamType || !selectedClass || !selectedSubject) {
-  setMessage('Please select exam type, class, and subject first.')
-  return
-  }
+ const loadRoster = async canonicalClass => {
+ // Tenant/teacher restrictions remain enforced by the backend on BOTH requests.
+ const response = await api.get('/api/students', { params: { class: canonicalClass } })
+ if (!Array.isArray(response.data?.data)) throw new Error('Student roster response was invalid.')
+ let list = filterMarksStudents(response.data.data,canonicalClass)
+ if (!list.length) {
+ // The legacy database can hold 'Class One' alongside 'One'. Backend
+ // equality on the filtered request misses those rows. Search only within
+ // the SAME authenticated tenant/teacher-scoped API, never another tenant.
+ const fallback = await api.get('/api/students')
+ if (!Array.isArray(fallback.data?.data)) throw new Error('Student roster fallback response was invalid.')
+ list = filterMarksStudents(fallback.data.data,canonicalClass)
+ }
+ return list
+ }
 
-  setLoadingData(true)
-  setMessage('')
-  try {
-  const queryClass = selectedClass.startsWith('Class ') ? selectedClass : 'Class ' + selectedClass
-  const exam = selectedExam
-  const [studRes, markRes] = await Promise.all([
-  api.get('/api/students', { params: { class: queryClass } }),
-  exam ? api.get(`/api/exams/results/${exam.id}`) : Promise.resolve({ data: { data: [] } }),
-  ])
-  const studentList = studRes.data.data || []
-  setStudents(studentList)
-  if (studentList.length === 0) {
-  setMessage(`No students found registered in ${queryClass}. Please add students first.`)
-  } else {
-  setMessage('')
-  }
-  const loaded = {}
-  for (const row of (markRes.data.data || [])) {
-  if (row.subject === selectedSubject) loaded[row.student_id] = row.marks_obtained
-  }
-  setMarks(loaded)
-  if (exam) {
-  setTotalMarks(exam.total_marks ?? '')
-  setPassMarks(exam.pass_marks ?? '')
-  }
-  } catch (err) {
-  const errMsg = err.response?.data?.message || err.message || 'Server error.'
-  setMessage(`Search failed: ${errMsg}. Existing loaded students and marks were preserved.`)
-  } finally {
-  setLoadingData(false)
-  }
-  }
-
-  const updateMark = (studentId, value) => {
-    const cleaned = typeof value === 'string' ? value.replace(/^0+(?=\d)/, '') : value
-    setMarks(prev => ({ ...prev, [studentId]: cleaned }))
-  }
-
-  const saveMarks = async () => {
-  if (!selectedExamType || !selectedClass || !selectedSubject || !students.length) return
- if (!Number.isFinite(Number(totalMarks)) || Number(totalMarks) <= 0 || !Number.isFinite(Number(passMarks)) || Number(passMarks) < 0 || Number(passMarks) > Number(totalMarks)) {
- setMessage('Enter valid total marks and passing marks before saving.')
+ const searchStudents = async () => {
+ if (!selectedExam || !selectedClass || !selectedSubject) {
+ setMessage('Select a saved exam, class, and subject before searching students.')
  return
  }
+ const request = ++rosterFetchSeq.current
+ setLoadingData(true)
+ setMessage('')
+ setMarksLoaded(false)
+ try {
+ const studentsForClass = await loadRoster(selectedClass)
+ if (request !== rosterFetchSeq.current) return
+ setStudents(studentsForClass)
+ if (!studentsForClass.length) {
+ setMarks({})
+ setMessage(`No authorized registered students found in Class ${selectedClass}. Check Admissions, academic class labels, or teacher class assignments.`)
+ return
+ }
+ // Do not discard a valid roster if a separate results query fails.
+ try {
+ const result = await api.get(`/api/exams/results/${selectedExam.id}`)
+ if (request !== rosterFetchSeq.current) return
+ if (!Array.isArray(result.data?.data)) throw new Error('Saved marks response was invalid.')
+ const allowed = new Set(studentsForClass.map(student=>String(student.id)))
+ const loaded = {}
+ for (const row of result.data.data) {
+ if (String(row.subject).trim() === selectedSubject && allowed.has(String(row.student_id)))
+ loaded[row.student_id] = row.marks_obtained
+ }
+ setMarks(loaded)
+ setEditedMarks({})
+ setMarksLoaded(true)
+ setTotalMarks(selectedExam.total_marks ?? '')
+ setPassMarks(selectedExam.pass_marks ?? '')
+ setMessage(`Loaded ${studentsForClass.length} students for ${selectedExam.name || 'saved exam'}. Existing entered marks were restored.`)
+ } catch (err) {
+ if (request !== rosterFetchSeq.current) return
+ setMarks({})
+ setMessage(`Students loaded, but saved marks could not be verified: ${err.response?.data?.message || err.message}. Saving is disabled until you search again.`)
+ }
+ } catch (err) {
+ if (request !== rosterFetchSeq.current) return
+ setMessage(`Student search failed: ${err.response?.data?.message || err.message || 'Server unavailable'}`)
+ } finally {
+ if (request === rosterFetchSeq.current) setLoadingData(false)
+ }
+ }
 
-  setSaving(true)
-  setMessage('')
-  try {
-  const exam = selectedExam
-  let examId = exam?.id
-  if (!examId) {
-  let resolvedType = selectedExamType
-  if (selectedExamType === 'Term Exam') resolvedType = 'TE'
-  else if (selectedExamType === 'Assessment') resolvedType = 'AS'
-
-  const created = await api.post('/api/exams', {
-  name: `${selectedExamType} - Class ${selectedClass}`,
-  type: resolvedType,
-  class: selectedClass,
-  session: activeSession,
-  total_marks: Number(totalMarks),
-  pass_marks: Number(passMarks),
-  })
-  examId = created.data.data?.id
-  await loadExams()
+ const updateMark = (studentId, value) => {
+    marksEditRevision.current += 1
+    setMessage('')
+    const cleaned = typeof value === 'string' ? value.replace(/^0+(?=\d)/, '') : value
+    setMarks(prev => ({ ...prev, [studentId]: cleaned }))
+    setEditedMarks(prev => ({ ...prev, [studentId]: cleaned }))
   }
 
-  const results = students
-  .filter(student => marks[student.id] !== undefined && marks[student.id] !== '')
-  .map(student => ({
-  exam_id: Number(examId),
-  student_id: student.id,
-  student_name: student.name,
-  subject: selectedSubject,
-  marks_obtained: Number(marks[student.id]),
-  total_marks: Number(totalMarks),
-  pass_marks: Number(passMarks),
-  }))
+ const saveMarks = async () => {
+ if (saving) return
+ if (!marksLoaded) {
+ setMessage('Load the student roster and existing marks before saving.')
+ return
+ }
+ const {error,rows} = validateMarksBatch({
+ exam:selectedExam, selectedClass, students, subject:selectedSubject, marks:editedMarks, totalMarks, passMarks
+ })
+ if (error) {setMessage(error);return}
+ const submittedRevision=marksEditRevision.current
+ const submittedScope=rosterFetchSeq.current
+ setSaving(true)
+ setMessage('')
+ try {
+ const response = await api.post('/api/exams/results', {results:rows})
+ if (response.data?.success !== true || Number(response.data?.savedCount) !== rows.length)
+ throw new Error('Save acknowledgement did not match the submitted marks. Refresh before retrying.')
+ if (submittedScope === rosterFetchSeq.current) {
+ if (submittedRevision === marksEditRevision.current) {
+ setEditedMarks({})
+ setMessage(`Saved ${rows.length} edited student mark${rows.length===1?'':'s'} in ${selectedExam.name}. Other marks were left unchanged.`)
+ } else setMessage('Earlier edits saved; newer unsaved changes remain in the editor.')
+ }
+ } catch (err) {
+ if (submittedScope === rosterFetchSeq.current)
+ setMessage(err.response?.data?.message || err.message || 'Failed to save marks. Existing records have not been cleared.')
+ } finally {
+ setSaving(false)
+ }
+ }
 
- await api.post('/api/exams/results', { results })
- setMessage('Marks saved successfully.')
- setTimeout(() => setMessage(''), 3000)
-  } catch (err) {
-  setMessage(err.response?.data?.message || 'Failed to save marks.')
-  } finally {
-  setSaving(false)
-  }
-  }
-
-  const fetchClassStudents = async () => {
-  if (students.length) return students
-  if (!selectedClass) return []
-  try {
-  const queryClass = selectedClass.startsWith('Class ') ? selectedClass : 'Class ' + selectedClass
-  const res = await api.get('/api/students', { params: { class: queryClass } })
-  return res.data.data || []
-  } catch {
-  return []
-  }
-  }
+ const fetchClassStudents = async () => {
+ if (students.length) return students
+ if (!selectedClass) return []
+ try { return await loadRoster(selectedClass) }
+ catch { return [] }
+ }
 
  const printBlankSheet = async (mode) => {
  if (!selectedClass) {
@@ -276,7 +277,7 @@ export default function MarksSheet() {
  <button type="button" style={btnSecondary} onClick={() => printBlankSheet('subject')}>Print Blank Subject Sheet</button>
  <button type="button" style={btnSecondary} onClick={() => printBlankSheet('all_subjects')}>Print Blank All Subjects</button>
  <button type="button" style={btnSecondary} onClick={() => printBlankSheet('all')}>Print Blank All Assessments</button>
- <button style={btnPrimary} onClick={saveMarks} disabled={saving || !students.length}>
+ <button style={btnPrimary} onClick={saveMarks} disabled={saving || !marksLoaded || !selectedExam || !students.length}>
  <Save size={16} style={{ marginRight: 8, verticalAlign: 'middle' }} />
  {saving ? 'Saving...' : 'Save All Marks'}
  </button>
@@ -284,7 +285,7 @@ export default function MarksSheet() {
  </div>
 
  <div className="super-module-card" style={{ ...card, display: 'grid', gap: 18 }}>
- <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 16 }}>
+ <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 16 }}>
  <div>
  <label style={labelStyle}>Exam Type</label>
  <select style={select} value={selectedExamType} onChange={e => changeExamType(e.target.value)}>
@@ -296,14 +297,26 @@ export default function MarksSheet() {
  <label style={labelStyle}>Class</label>
  <select style={select} value={selectedClass} onChange={e => changeClass(e.target.value)}>
  <option value="">Select class</option>
- {classNames.map(cls => <option key={normalizeClass(cls)} value={normalizeClass(cls)}>{cls}</option>)}
+ {classes.map(cls => <option key={cls} value={cls}>{classLabel(cls)}</option>)}
  </select>
  </div>
  <div>
+ <label style={labelStyle}>Saved Exam / Term</label>
+ <select name="savedExam" style={select} value={selectedExamId} onChange={e => changeSavedExam(e.target.value)}>
+ <option value="">Select an existing exam</option>
+ {matchingExams.map(ex => (
+ <option key={ex.id} value={ex.id}>{ex.name} · {ex.session || 'Session not set'} · {ex.class || 'All Classes'}</option>
+ ))}
+ </select>
+ {!matchingExams.length && <div style={{ color:C.red, fontSize:12, marginTop:5 }}>
+ No saved exam matches this class/type. Create or verify the First Term Exam in Manage Exams; marks entry will not create duplicates.
+ </div>}
+ </div>
+ <div>
  <label style={labelStyle}>Subject</label>
- <select style={select} value={selectedSubject} onChange={e => { setSelectedSubject(e.target.value); setStudents([]); setMarks({}) }}>
+ <select style={select} value={selectedSubject} onChange={e => { resetRoster(); setSelectedSubject(e.target.value) }}>
  <option value="">Select subject</option>
- {(selectedClass ? subjectsForClass(classLabel(selectedClass)) : []).map(subject => <option key={subject} value={subject}>{subject}</option>)}
+ {(selectedClass ? marksSubjectsForClass({exam:selectedExam,className:selectedClass,academicSubjects:subjectsForClass(selectedClass)}) : []).map(subject => <option key={subject} value={subject}>{subject}</option>)}
  </select>
  </div>
  </div>
@@ -317,7 +330,7 @@ export default function MarksSheet() {
  <label style={labelStyle}>Passing Marks</label>
  <input type="number" min="0" style={input} value={passMarks} onChange={e => setPassMarks(e.target.value)} />
  </div>
- <button type="button" onClick={searchStudents} disabled={loadingData} style={{ ...btnPrimary, display: 'inline-flex', alignItems: 'center', gap: 8, justifyContent: 'center', minHeight: 46 }}>
+ <button type="button" onClick={searchStudents} disabled={loadingData || !selectedExam || !selectedClass || !selectedSubject} style={{ ...btnPrimary, display: 'inline-flex', alignItems: 'center', gap: 8, justifyContent: 'center', minHeight: 46 }}>
  <Search size={17} />
  {loadingData ? 'Searching...' : 'Search Students'}
  </button>
@@ -335,7 +348,7 @@ export default function MarksSheet() {
  <div className="super-module-card" style={{ ...card, overflowX: 'auto' }}>
  {students.length === 0 ? (
  <div style={{ padding: 40, textAlign: 'center', color: C.muted }}>
- Select exam type, class, and subject, then click Search Students.
+ Select the saved First Term Exam, class and subject, then click Search Students. Blank marks will not be saved as zero.
  </div>
  ) : (
  <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 680 }}>
