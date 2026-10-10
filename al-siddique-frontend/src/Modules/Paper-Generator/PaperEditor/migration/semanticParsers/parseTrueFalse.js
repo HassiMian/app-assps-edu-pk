@@ -21,7 +21,7 @@ export function parseTrueFalse(content, context = {}) {
   const direction = context.direction || DocumentDirection.AUTO
 
   // Match statement line boundaries
-  const lineRegex = /^[ \t]*(?:(?:[0-9]+|[ivxIVX]+|[a-zA-Z]|[الف-ي])[\.\)\-:]|\([0-9]+\)|\([a-zA-Z]\)|\([الف-ي]\))[ \t]+/gm
+  const lineRegex = /^[ \t]*(?:(?:[0-9]+|[ivxIVX]+|[a-zA-Z]|[الف-ي])[.)\-:]|\([0-9]+\)|\([a-zA-Z]\)|\([الف-ي]\))[ \t]+/gm
   const matches = []
   let match
   while ((match = lineRegex.exec(content)) !== null) {
@@ -111,7 +111,7 @@ function parseSingleTfLine(rawText, nodeId, defaultDirection) {
   let statement = rawText.trim()
 
   // Remove leading numbering
-  statement = statement.replace(/^[ \t]*(?:[0-9]+|[ivxIVX]+|[a-zA-Z]|[الف-ي])[\.\)\-:][ \t]*/, '')
+  statement = statement.replace(/^[ \t]*(?:[0-9]+|[ivxIVX]+|[a-zA-Z]|[الف-ي])[.)\-:][ \t]*/, '')
 
   // Detect indicator box
   const hasIndicatorBox = /[□☐]|\[\s*\]|\(T\/F\)|\(True\/False\)|_{3,}/.test(statement)

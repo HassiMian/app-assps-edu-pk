@@ -1,18 +1,16 @@
 // NodeStructureControls.jsx — Per-node contextual controls for insert, delete, duplicate, reorder (B4-E).
 // RULE: No window.alert(). Inline confirmation for delete. Keyboard accessible buttons.
 
-import React, { useState } from 'react'
+import { useState } from 'react'
 import AddStructuredNodeMenu from './AddStructuredNodeMenu.jsx'
 
 export default function NodeStructureControls({
-  nodeId,
   canMoveUp = true,
   canMoveDown = true,
   onMoveUp,
   onMoveDown,
   onDelete,
   onDuplicate,
-  onInsertAbove,
   onInsertBelow,
 }) {
   const [confirmingDelete, setConfirmingDelete] = useState(false)
