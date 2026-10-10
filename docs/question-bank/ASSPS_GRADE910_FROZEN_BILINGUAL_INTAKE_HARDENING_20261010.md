@@ -34,8 +34,10 @@ All changes in three Academic-owned paths only: this report, the intake validato
 | Academic group 4a | 38/38 PASS, exit 0 |
 | Academic disjoint group 6 | 42/42 PASS, exit 0 |
 | Academic disjoint group 7 | 27/27 PASS, exit 0 |
-| Full unbatched suite, group 4/4b and group 5 | TIMED OUT / INCOMPLETE; do not count as passing |
+| Academic group 4b, longer bounded retry | 38/38 complete TAP, 0 fail/skip; shell exit not captured after 50-second control-interface disconnect |
+| Academic group 5, longer bounded retry | 44/44 complete TAP, 0 fail/skip; shell exit not captured after 50-second control-interface disconnect |
+| Unsplit 34-file run | Timed out under original time limit; subsequently replaced by eight complete disjoint TAP group summaries |
 
-The six completed disjoint academic groups represent **263 passing tests**. Two incomplete disjoint sets are not certified. Some dedicated/publisher tests overlap the disjoint group coverage, so do not add their totals to the 263 as independent tests. Tool command timeouts are not evidence of academic defects or of successful tests; isolate expensive suites in a capable CI/runner before final green claim.
+All eight disjoint groups now have **345/345 TAP-passing tests**, 0 failed, 0 skipped, each full TAP footer verified from the persisted VPS logs. Six groups (263 tests) also captured explicit shell exit 0; the two slower subsets (38+44 tests) have complete zero-failure TAP footers but their shell exit codes were not captured because the remote control interface disconnected at 50 seconds while the test child continued. Some dedicated/publisher tests overlap these groups and must not be added as distinct coverage. This is strong test evidence, **not** an independent release CI exit-code certificate for the two slower subsets. Original unrestricted single-process run exceeded its bounded limit and is not counted.
 
 No physical school adoption, qualified faculty signatures, actual 2027 ALP adoption, verified printable exercise refs, authorized production data or deployment observed. Approval and paper selection HOLD.
