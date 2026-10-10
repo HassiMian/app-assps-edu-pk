@@ -395,7 +395,7 @@ router.get('/results', protect, canReadResults, async (req, res) => {
 router.get('/results/:exam_id', protect, canReadResults, async (req, res) => {
   try {
     let sql = `
-      SELECT er.*, s.name, s.gr_number, s.roll_number, s.father_name, s.photo
+      SELECT er.*, s.name, s.class AS student_class, s.section AS student_section, s.gr_number, s.roll_number, s.father_name, s.photo
       FROM exam_results er
       JOIN exams e ON er.exam_id = e.id
       JOIN students s ON er.student_id = s.id AND s.school_id = e.school_id

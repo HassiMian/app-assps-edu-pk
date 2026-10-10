@@ -2,6 +2,7 @@ import './premiumResultCardDesigner.css'
 import { summarizeResultRows, formatResultCell, meetsResultPassMark } from './resultPreviewIntegrity'
 import { getResultLogoDiagnostic } from './resultLogoDiagnostics'
 import { summarizePrintBatch } from './resultPrintPlanning'
+import { buildResultStudents } from './resultStudentIdentity'
 import { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import api from '../../services/api'
@@ -216,26 +217,8 @@ export default function ResultCards() {
  // eslint-disable-next-line react-hooks/exhaustive-deps
  }, [selectedExam])
 
- const buildStudentsFromRows = (rows = []) => {
-  const map = new Map()
-  rows.forEach(r => {
-  const id = String(r.student_id)
-  if (!map.has(id)) {
-  map.set(id, {
-  id: r.student_id,
-  name: r.name || r.student_name || r.studentName || `Student #${r.student_id}`,
-  gr_number: r.gr_number || r.gr || '',
-  roll_number: r.roll_number || r.rollNo || '',
-  father_name: r.father_name || r.fatherName || '',
-  photo: r.photo || '',
-  subjectsCount: 0,
-  })
-  }
-  map.get(id).subjectsCount += 1
-  })
-  return [...map.values()]
-  }
- const buildPrintCards = (rows = results, examObj = exam, scopeStudents = buildStudentsFromRows(rows)) =>
+
+ const buildPrintCards = (rows = results, examObj = exam, scopeStudents = buildResultStudents(rows)) =>
  scopeStudents.map(s => ({
  student: s,
  exam: examObj,
@@ -243,7 +226,7 @@ export default function ResultCards() {
  })).filter(item => item.studentMarks.length > 0)
 
  const activeResults = String(loadedExamId) === String(selectedExam) ? results : []
- const students = buildStudentsFromRows(activeResults)
+ const students = buildResultStudents(activeResults)
  const studentMarks = activeResults.filter(r => String(r.student_id) === selectedStudent)
  const student = students.find(s => String(s.id) === selectedStudent)
  const exam = exams.find(e => String(e.id) === selectedExam)
@@ -297,7 +280,7 @@ export default function ResultCards() {
  })
  const flat = exams.flatMap(item => {
  const examRows = byExam.get(String(item.id)) || []
- return buildPrintCards(examRows, item, buildStudentsFromRows(examRows))
+ return buildPrintCards(examRows, item, buildResultStudents(examRows))
  })
  if (!flat.length) return alert('No marks found in any class/exam')
  setPrintCards(flat)

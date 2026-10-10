@@ -91,7 +91,7 @@ function buildPremiumResultCardData({ student, exam, studentMarks, options, scho
  name: student?.name || '—',
  fatherName: student?.fatherName || student?.father_name || '—',
  rollNo: student?.rollNo || student?.roll_number || student?.gr_number || student?.admissionNo || '—',
- className: student?.className || exam?.class || '—',
+ className: student?.className || student?.class || (/^all\s+classes$/i.test(String(exam?.class || '')) ? '—' : (exam?.class || '—')),
  section: student?.section || '-',
  photo: student?.photo || student?.image || student?.profile_photo || student?.profileImage || student?.profile_image || student?.photo_url || student?.image_url || '',
  admissionNo: student?.admissionNo || student?.gr_number || '',
