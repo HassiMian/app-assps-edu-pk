@@ -97,7 +97,7 @@ export default function AIGeneratorTab({ onProceedToPreview }) {
   const [medium, setMedium] = useState('english')
   const [autoBalance, setAutoBalance] = useState(true)
   const [priority, setPriority] = useState('all')
-  const [paperCode, setPaperCode] = useState(String(Math.floor(1000 + Math.random() * 9000)))
+  const [paperCode, setPaperCode] = useState(() => String(Math.floor(1000 + Math.random() * 9000)))
   const [examDate, setExamDate] = useState(currentSchoolDate())
   const [instructions, setInstructions] = useState('')
   const [qCounts, setQCounts] = useState({ mcq: 10, short: 5, long: 2 })

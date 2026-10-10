@@ -1,3 +1,4 @@
+import process from 'node:process'
 // earlyYearsRenderPrintGeometryAcceptance.test.js
 // Final Render-Fidelity, Print Media, and Geometry QA Gate for Early Years Worksheets
 import { test, before, after } from 'node:test'

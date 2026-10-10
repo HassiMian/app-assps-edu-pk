@@ -2,6 +2,7 @@
 import { useState, useMemo, useEffect } from 'react'
 import { usePaperStore } from './usePaperStore'
 import { classLevelsMatch } from '../../services/useAcademicStore'
+import { resolveWizardInkColor, resolveWizardBodyWeight } from './PaperEditor/layouts/paperWizardTypography.js'
 
 const C = {
  navy:'#071e34', dark:'#0b1e33', card:'rgba(11,44,77,0.6)',
@@ -72,6 +73,7 @@ function buildPaperHTML({ selections={}, questionTypes=[], subject, classVal, me
  })
 
  const bdr = borderSt !== 'No Border' ? '1px solid #333' : 'none'
+ const inkColor = resolveWizardInkColor(fontColor)
 
  //  Type-aware question body renderer 
  function renderQuestionBody(q, typeValue) {
@@ -261,7 +263,7 @@ function buildPaperHTML({ selections={}, questionTypes=[], subject, classVal, me
 <style>
 @page{size:A4 portrait;margin:14mm 12mm}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Noto Sans',Arial,sans-serif;font-size:${engFS}pt;color:${fontColor.toLowerCase()};line-height:${lineH};background:#fff}
+body{font-family:'Noto Sans',Arial,sans-serif;font-size:${engFS}pt;color:${inkColor};font-weight:${resolveWizardBodyWeight(fontBold)};line-height:${lineH};background:#fff}
 .urdu,.ur-h,.urd-col{font-family:'Noto Nastaliq Urdu',serif;font-size:${urduFS}pt;direction:rtl}
 .school-hdr{text-align:center;padding-bottom:8px;margin-bottom:8px;border-bottom:2px solid #333}
 .s-name{font-size:20pt;font-weight:bold;color:#cc0000}
@@ -516,7 +518,7 @@ function ChaptersStep({ classVal, subject, chapters, selChaps, setSelChaps, syll
 
 //  Step 4: Question Selection 
 function QuestionsStep({
- classVal, subject, chapters, syllabusId, selChaps, questionTypes=[],
+ classVal, subject, syllabusId, selChaps, questionTypes=[],
  qType, setQType, priority, setPriority, medium, setMedium,
  required, setRequired, ignore, setIgnore, qMarks, setQMarks,
  blankLines, setBlankLines, perLine2, setPerLine2, longParts, setLongParts,
@@ -531,14 +533,7 @@ function QuestionsStep({
  const currentSel = selections[qType] || []
  const totalAll = Object.values(selections).reduce((acc, curr) => acc + curr.length, 0)
 
- const Inp2 = (props) => (
- <input {...props} style={{ width:'100%', background:'rgba(11,44,77,0.7)', border:`1px solid ${C.border}`, borderRadius:8, color:C.silver, padding:'7px 10px', fontSize:13, outline:'none', ...props.style }} />
- )
- const Sel2 = ({ children, ...props }) => (
- <select {...props} style={{ width:'100%', background:'#0a1e35', border:`1px solid ${C.border}`, borderRadius:8, color:C.silver, padding:'7px 10px', fontSize:13, outline:'none', cursor:'pointer', ...props.style }}>
- {children}
- </select>
- )
+
 
  return (
  <div>
@@ -692,6 +687,31 @@ function QuestionsStep({
  )
 }
 
+const Inp2 = (props) => (
+ <input {...props} style={{ width:'100%', background:'rgba(11,44,77,0.7)', border:`1px solid ${C.border}`, borderRadius:8, color:C.silver, padding:'7px 10px', fontSize:13, outline:'none', ...props.style }} />
+ )
+ const Sel2 = ({ children, ...props }) => (
+ <select {...props} style={{ width:'100%', background:'#0a1e35', border:`1px solid ${C.border}`, borderRadius:8, color:C.silver, padding:'7px 10px', fontSize:13, outline:'none', cursor:'pointer', ...props.style }}>
+ {children}
+ </select>
+ )
+
+const Sel3 = ({ children, value, onChange }) => (
+ <select value={value} onChange={onChange} style={{ background:'#0a1e35', border:`1px solid ${C.border}`, borderRadius:6, color:C.silver, padding:'4px 8px', fontSize:12, outline:'none', cursor:'pointer' }}>
+ {children}
+ </select>
+ )
+ const Num3 = ({ value, onChange }) => (
+ <input type="number" value={value} onChange={onChange} style={{ width:52, background:'#0a1e35', border:`1px solid ${C.border}`, borderRadius:6, color:C.silver, padding:'4px 6px', fontSize:12, outline:'none', textAlign:'center' }} />
+ )
+ const SideItem = ({ icon, label, onClick, color=C.silver }) => (
+ <div onClick={onClick} style={{ display:'flex', alignItems:'center', gap:8, padding:'11px 16px', cursor:'pointer', color, fontSize:13, fontWeight:600, borderBottom:`1px solid rgba(200,153,26,0.1)`, transition:'background 0.12s' }}
+ onMouseEnter={e=>e.currentTarget.style.background='rgba(200,153,26,0.08)'}
+ onMouseLeave={e=>e.currentTarget.style.background='transparent'}>
+ <span>{icon}</span>{label}
+ </div>
+ )
+
 //  Step 5: Preview & Print 
 function PreviewStep({
  selections, questionTypes, subject, classVal, medium, selChaps,
@@ -713,25 +733,12 @@ function PreviewStep({
  const html = buildPaperHTML(paperParams)
  const blob = new Blob([html], { type:'text/html' })
  const url = URL.createObjectURL(blob)
- setIframeSrc(url)
- return () => URL.revokeObjectURL(url)
+ let cancelled = false
+ queueMicrotask(() => { if (!cancelled) setIframeSrc(url) })
+ return () => { cancelled = true; URL.revokeObjectURL(url) }
  }, [paperParams])
 
- const Sel3 = ({ children, value, onChange }) => (
- <select value={value} onChange={onChange} style={{ background:'#0a1e35', border:`1px solid ${C.border}`, borderRadius:6, color:C.silver, padding:'4px 8px', fontSize:12, outline:'none', cursor:'pointer' }}>
- {children}
- </select>
- )
- const Num3 = ({ value, onChange }) => (
- <input type="number" value={value} onChange={onChange} style={{ width:52, background:'#0a1e35', border:`1px solid ${C.border}`, borderRadius:6, color:C.silver, padding:'4px 6px', fontSize:12, outline:'none', textAlign:'center' }} />
- )
- const SideItem = ({ icon, label, onClick, color=C.silver }) => (
- <div onClick={onClick} style={{ display:'flex', alignItems:'center', gap:8, padding:'11px 16px', cursor:'pointer', color, fontSize:13, fontWeight:600, borderBottom:`1px solid rgba(200,153,26,0.1)`, transition:'background 0.12s' }}
- onMouseEnter={e=>e.currentTarget.style.background='rgba(200,153,26,0.08)'}
- onMouseLeave={e=>e.currentTarget.style.background='transparent'}>
- <span>{icon}</span>{label}
- </div>
- )
+
 
  return (
  <div className="super-module-card" style={{ display:'flex', height:'calc(100vh - 180px)', minHeight:600, borderRadius:14, overflow:'hidden', border:`1px solid ${C.border}` }}>

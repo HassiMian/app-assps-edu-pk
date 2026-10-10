@@ -136,7 +136,7 @@ export default function LessonPlanningWorkspace() {
   },[subjectsForClass,document.classLevel,selectedClass?.level,context,document.subjects])
   const sectionOptions = useMemo(()=>selectedClass ? sectionsForClass(selectedClass.name) : [],[selectedClass,sectionsForClass])
 
-  useEffect(()=>{ try { setTenantStorageItem(DRAFT_KEY,JSON.stringify(document)) } catch {} },[document])
+  useEffect(()=>{ try { setTenantStorageItem(DRAFT_KEY,JSON.stringify(document)) } catch { /* Preserve the current lesson in memory when local draft storage is unavailable. */ } },[document])
   useEffect(()=>{ listLessonPlans({limit:200}).then(data=>setSavedPlans(Array.isArray(data)?data:[])).catch(()=>{}) },[])
   useEffect(()=>{
     if(!document.classLevel)return
