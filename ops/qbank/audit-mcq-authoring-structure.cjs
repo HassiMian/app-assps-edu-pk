@@ -55,13 +55,33 @@ function auditMcqs(documents){
      if(/^[A-D]$/.test(x.key))converted.push({type:'mcq',id:q.id,correctOption:x.key,options:['A','B','C','D']})
    }
    const patterns=inspectMcqs(converted).findings.filter(x=>x.type==='PREDICTABLE_MCQ_KEY_SEQUENCE')
+   // Previously reported only as metadata, while flagCount incorrectly returned ZERO.
+   for(const pattern of patterns){
+     findings.push({file,id:pattern.firstQuestionId,code:'PREDICTABLE_MCQ_KEY_SEQUENCE',
+       period:pattern.period,length:pattern.length,endingQuestionId:pattern.lastQuestionId})
+   }
    byFile.push({file,mcqs:qs.length,editorialKeyPatterns:patterns})
+ }
+ const countsForFour='ABCD'.split('').map(k=>counts[k]||0)
+ const dominantKeyTotal=Math.max(0,...countsForFour)
+ const dominantKeyShare=total?dominantKeyTotal/total:0
+ const globalEditorialRisk=total>=40&&dominantKeyShare>0.65
+ if(globalEditorialRisk){
+   findings.push({file:null,id:null,code:'EXCESSIVE_GLOBAL_CORRECT_OPTION_CONCENTRATION',
+      dominantKey:'ABCD'[countsForFour.indexOf(dominantKeyTotal)],
+      dominantKeyCount:dominantKeyTotal,totalMcqs:total})
  }
  return{
    schemaVersion:'assps-grade910-mcq-authoring-structure-qa-v2',
    scope:'RESEARCH_EDITORIAL_INSPECTION_NO_INDEPENDENT_ANSWER_VERIFICATION',
    totalMcqs:total,bilingualQuestions:bilingual,exactTextDerivedLegacyKeys:inferredFromAnswer,
    optionKeyDistribution:counts,flagCount:findings.length,flagSamples:findings.slice(0,60),
+   predictableKeyPatternCount:byFile.reduce((n,x)=>n+x.editorialKeyPatterns.length,0),
+   dominantCorrectKeyShare:dominantKeyShare,
+   globalCorrectKeyConcentrationRequiresReview:globalEditorialRisk,
+   independentMcqEditorialReviewRequired:findings.length>0,
+   academicallyVerifiedMcqSelectionReady:false,
+   publicationDecision:'DENY_VERIFIED_PUBLICATION_AND_PRODUCTION_IMPORT',
    predictablePatternFileCount:byFile.filter(x=>x.editorialKeyPatterns.length).length,
    filesWithPatterns:byFile.filter(x=>x.editorialKeyPatterns.length),
    originalQuestionTextsReproduced:false,autoReorderedOptions:false,academicallyApproved:0,published:0
