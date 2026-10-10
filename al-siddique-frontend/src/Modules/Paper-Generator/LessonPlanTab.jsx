@@ -928,7 +928,7 @@ function PlanPreview({ plan, onBack, settings }) {
  doc.close()
  setTimeout(() => {
  try { iframe.contentWindow.focus(); iframe.contentWindow.print() }
- catch(e) {}
+ catch(e) { /* Browser print or font readiness may be unavailable; retain the printable preview. */ }
  setTimeout(() => { if (document.body.contains(iframe)) iframe.remove() }, 3000)
  }, 800)
  }

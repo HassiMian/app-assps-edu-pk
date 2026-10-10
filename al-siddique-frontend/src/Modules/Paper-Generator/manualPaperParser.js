@@ -60,8 +60,8 @@ function isWatermarkOrHeader(line) {
 function cleanQuestionLine(line) {
   return norm(normalizeDigits(line))
     .replace(/\bFGSTUDY\.?COM\b/gi, '')
-    .replace(/^\s*(?:q(?:uestion)?\.?\s*|سوال\s*نمبر\s*)?\d+\s*[\).:\-–—]?\s*/i, '')
-    .replace(/^\s*(?:\([ivxlcdm]+\)|[ivxlcdm]+[\).:-])\s*/i, '')
+    .replace(/^\s*(?:q(?:uestion)?\.?\s*|سوال\s*نمبر\s*)?\d+\s*[).:\-–—]?\s*/i, '')
+    .replace(/^\s*(?:\([ivxlcdm]+\)|[ivxlcdm]+[).:-])\s*/i, '')
     .replace(/^\s*[-•*]\s*/, '')
     .replace(/\s{2,}/g, ' ')
     .trim()
@@ -131,7 +131,7 @@ function parseInlineOptions(text) {
 
 function isQuestionStart(line) {
   const clean = normalizeDigits(line)
-  return /^\s*(?:q(?:uestion)?\.?\s*)?\d+\s*[\).:\-–—]\s*/i.test(clean)
+  return /^\s*(?:q(?:uestion)?\.?\s*)?\d+\s*[).:\-–—]\s*/i.test(clean)
     || /^\s*سوال\s*نمبر\s*\d+/i.test(clean)
     || /^\s*\([ivxlcdm]+\)\s+/i.test(clean)
 }

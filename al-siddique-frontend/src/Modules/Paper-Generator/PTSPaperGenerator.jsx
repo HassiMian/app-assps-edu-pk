@@ -1194,7 +1194,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
     bookletNodes.push({member,wrapper,clone})
    })
 
-   try { await Promise.race([doc.fonts?.ready || Promise.resolve(), new Promise(resolve=>setTimeout(resolve,1800))]) } catch (_) {}
+   try { await Promise.race([doc.fonts?.ready || Promise.resolve(), new Promise(resolve=>setTimeout(resolve,1800))]) } catch (_) { /* Browser print or font readiness may be unavailable; retain the printable preview. */ }
    bookletNodes.forEach(({member,wrapper,clone})=>{
     const contentHeight=Math.max(1,clone.scrollHeight || clone.getBoundingClientRect().height || printablePageHeight)
     const pages=Math.max(1,Math.ceil((contentHeight-2)/printablePageHeight))

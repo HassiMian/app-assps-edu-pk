@@ -154,7 +154,7 @@ test('Phase 18: Saved Papers opens all 43 official V13 papers in the unified Pap
       console.log(`PHASE18 ${index + 1}/43 FAIL ${paper.id}: ${error.message}`)
       try {
         await openSavedPapers()
-      } catch {}
+      } catch { /* Expected optional probe failure; the assertion after this block remains authoritative. */ }
     }
   }
 

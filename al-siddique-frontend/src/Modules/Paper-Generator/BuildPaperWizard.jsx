@@ -332,7 +332,7 @@ body{font-family:'Noto Sans',Arial,sans-serif;font-size:${engFS}pt;color:${fontC
 </table>
 ${bubbleHtml}
 ${sectionsHtml}${answerHtml}
-<`+'scr'+'ipt>window.onload=()=>setTimeout(()=>window.print(),300)<\/scr'+'ipt>'+`
+<`+'scr'+'ipt>window.onload=()=>setTimeout(()=>window.print(),300)</scr'+'ipt>'+`
 </body></html>`
 }
 

@@ -62,7 +62,7 @@ export default function EarlyYearsActivityBuilder() {
   const result=validateUserEarlyYearsPaper(paper)
   if(!paper.id){setError('Save your paper before printing.');return}
   if(!result.valid){setError('Printing blocked until review issues are corrected: '+result.issues.join(' | '));return}
-  try{await document.fonts?.ready}catch{};requestAnimationFrame(()=>window.print())}
+  try{await document.fonts?.ready}catch{ /* This optional operation may fail; preserve the existing editor state and fallback behavior. */ };requestAnimationFrame(()=>window.print())}
  const meta=(name,value)=>setPaper(p=>({...p,[name]:value}))
  const header=(name,value)=>setPaper(p=>({...p,headerSource:{...p.headerSource,[name]:value}}))
  return <section data-user-early-years-studio style={{display:'flex',flexDirection:'column',flex:'1 1 auto',minHeight:0,overflow:'hidden',background:'#081b30',color:'#e2e8f0'}}>

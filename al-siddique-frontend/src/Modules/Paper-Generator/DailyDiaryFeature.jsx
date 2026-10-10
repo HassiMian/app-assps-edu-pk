@@ -98,7 +98,7 @@ const inlineFont = (value) => fontValue(value).replace(/"/g, "'")
 const normalizeDateInput = (value) => {
   const iso = value.match(/\b(\d{4}-\d{2}-\d{2})\b/)
   if (iso) return iso[1]
-  const dmy = value.match(/\b(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{2,4})\b/)
+  const dmy = value.match(/\b(\d{1,2})[/.-](\d{1,2})[/.-](\d{2,4})\b/)
   if (!dmy) return ''
   const day = dmy[1].padStart(2, '0')
   const month = dmy[2].padStart(2, '0')
@@ -114,15 +114,15 @@ const parseDiaryText = (text) => {
   const rows = []
   for (const line of lines) {
     if (!detectedDate) {
-      const dateHit = line.match(/(?:date|day)\s*[:\-]\s*(.+)$/i) || line.match(/\b\d{4}-\d{2}-\d{2}\b|\b\d{1,2}[\/.-]\d{1,2}[\/.-]\d{2,4}\b/)
+      const dateHit = line.match(/(?:date|day)\s*[:-]\s*(.+)$/i) || line.match(/\b\d{4}-\d{2}-\d{2}\b|\b\d{1,2}[/.-]\d{1,2}[/.-]\d{2,4}\b/)
       if (dateHit) detectedDate = normalizeDateInput(dateHit[1] || dateHit[0])
     }
     if (!detectedClass) {
-      const classHit = line.match(/(?:class|grade)\s*[:\-]\s*(.+)$/i)
+      const classHit = line.match(/(?:class|grade)\s*[:-]\s*(.+)$/i)
       if (classHit) detectedClass = classHit[1].trim()
     }
     if (!detectedFooter) {
-      const footerHit = line.match(/^(?:footer|note|dua|parent note)\s*[:\-]\s*(.+)$/i)
+      const footerHit = line.match(/^(?:footer|note|dua|parent note)\s*[:-]\s*(.+)$/i)
       if (footerHit) detectedFooter = footerHit[1].trim()
     }
     const parts = line.split(/\s*[:|–—-]\s+/)
@@ -151,7 +151,7 @@ const robustParseDiaryText = (text, subjectHints = []) => {
   }
 
   for (const line of lines) {
-    if (/^(date|day|class|grade|footer|note|dua|parent note)\s*[:\-]/i.test(line)) continue
+    if (/^(date|day|class|grade|footer|note|dua|parent note)\s*[:-]/i.test(line)) continue
 
     const subjectMatch = subjectPattern?.exec(line)
     if (subjectMatch) {
@@ -339,7 +339,7 @@ export default function DailyDiaryFeature() {
           const parsed = JSON.parse(local)
           if (!cancelled) hydrateDiary(parsed)
         }
-      } catch {}
+      } catch { /* This optional operation may fail; preserve the existing editor state and fallback behavior. */ }
 
       try {
         const publicParams = paperSettings?.schoolCode ? { school_code: paperSettings.schoolCode } : undefined
@@ -348,7 +348,7 @@ export default function DailyDiaryFeature() {
         if (cancelled) return
         if (settings.school_name) setSchoolName(String(settings.school_name))
         if (settings.school_logo) setLogoUrl(resolveAssetUrl(String(settings.school_logo)))
-      } catch {}
+      } catch { /* This optional operation may fail; preserve the existing editor state and fallback behavior. */ }
 
       try {
         const diaries = await loadSavedDiaries()
@@ -361,7 +361,7 @@ export default function DailyDiaryFeature() {
             if (parsed.id && !diaries.some((d) => Number(d.id) === Number(parsed.id))) {
               setSavedDiaryId(null)
             }
-          } catch {}
+          } catch { /* This optional operation may fail; preserve the existing editor state and fallback behavior. */ }
         } else if (diaries[0]) {
           hydrateDiary(diaries[0])
         }
@@ -629,7 +629,7 @@ export default function DailyDiaryFeature() {
                 delete draft.id
                 setTenantStorageItem('dailyDiaryDraft', JSON.stringify(draft))
               }
-            } catch {}
+            } catch { /* This optional operation may fail; preserve the existing editor state and fallback behavior. */ }
           }
         }
       }
