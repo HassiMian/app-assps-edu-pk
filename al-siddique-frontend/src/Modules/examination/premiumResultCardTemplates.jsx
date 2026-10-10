@@ -124,7 +124,7 @@ function buildPremiumResultCardData({ student, exam, studentMarks, options, scho
  attended: exam?.attended ?? '—',
  absent: exam?.absent ?? '—',
  },
- teacherRemarks: opts.teacherRemarks || exam?.teacherRemarks || DEFAULT_RESULT_OPTIONS.teacherRemarks,
+ teacherRemarks: options?.teacherRemarksEdited === true ? String(options.teacherRemarks ?? '') : String(exam?.teacherRemarks ?? exam?.teacher_remarks ?? options?.teacherRemarks ?? DEFAULT_RESULT_OPTIONS.teacherRemarks),
  principalRemarks: exam?.principalRemarks || '',
  totalMarks,
  obtainedMarks,
@@ -172,12 +172,14 @@ export function ResultCardPrintToolbar(props) {
 
 function PremiumMarksTable({ data }) {
  const activeTerms = termFields.filter(([key]) => data.options[key])
+ const compact = activeTerms.length >= 3
+ const columnName = (label) => compact ? ({'Assessment':'Assess.','First Term':'Term 1','Second Term':'Term 2','Third Term':'Term 3','Final Term':'Final'})[label] || label : label
  return (
  <table className="rc-marks-table">
  <thead>
  <tr>
  <th>Subject</th>
- {activeTerms.map(([, , label]) => <th key={label}>{label}</th>)}
+ {activeTerms.map(([, , label]) => <th key={label} title={label}>{columnName(label)}</th>)}
  <th>Total</th>
  <th>Obtained</th>
  <th>%</th>
@@ -219,9 +221,11 @@ function Remarks({ data }) {
 function BaseTemplate({ data, templateClass, children }) {
  const rows = data.result.subjects || []
  const lengthy = rows.some(row => String(row.subjectName || '').length > 23)
- const dense = rows.length >= 10 && (lengthy || String(data.student?.name || '').length > 36)
+ const dense = (rows.length >= 7 && lengthy) || (rows.length >= 10 && String(data.student?.name || '').length > 36)
+ const ultraDense = rows.length >= 17 || (rows.length >= 13 && String(data.result?.teacherRemarks || '').length > 300)
+ const multiTerm = termFields.filter(([key])=>data.options[key]).length >= 3
  return (
- <section className={`result-card-a4 ${data.options.orientation === 'landscape' ? 'landscape' : ''} ${templateClass}${dense ? ' premium-dense' : ''}`}>
+ <section className={`result-card-a4 ${data.options.orientation === 'landscape' ? 'landscape' : ''} ${templateClass}${dense || ultraDense ? ' premium-dense' : ''}${ultraDense ? ' premium-ultra-dense' : ''}${multiTerm ? ' premium-multi-term' : ''}`}>
 
  {children}
  </section>
@@ -416,6 +420,7 @@ export const resultCardPrintCss = legacyCss + `
  .premium-card { --navy:#19364D; --silver:#DDE5EB; --accent:#2E7B9D; border:0.2mm solid #E0E8EE; padding:11mm 12mm; color:#19364D; }
  .premium-card .premium-topline { display:flex; justify-content:space-between; gap:2mm; margin-bottom:5mm; padding-bottom:2mm; border-bottom:0.2mm solid #DBE5EB; font-size:7pt; font-weight:700; letter-spacing:1px; color:var(--accent); }
  .premium-card .rc-standard-header { align-items:center; gap:4mm; margin-bottom:5mm; }
+ .premium-card .rc-urdu-title { direction:rtl; unicode-bidi:isolate; align-self:stretch; text-align:center; line-height:1.65; font-size:10.2pt; margin-bottom:1mm; overflow:visible; }
  .premium-card .rc-header-center { align-items:flex-start; text-align:left; }
  .premium-card .rc-header-logo { width:26mm; height:26mm; background:transparent; }
  .premium-card .rc-header-logo img { background:transparent; object-fit:contain; border:0; }
@@ -558,6 +563,43 @@ export const resultCardPrintCss = legacyCss + `
  .premium-card.premium-dense .premium-ledger-overview,
  .premium-card.premium-dense .premium-dossier-label,
  .premium-card.premium-dense .premium-young-section { padding-top:0.5mm; padding-bottom:0.5mm; margin-top:0; margin-bottom:0.5mm; }
+ /* Five simultaneous term columns: meaningful compact labels and readable cells. */
+ .premium-card.premium-multi-term .rc-marks-table th { letter-spacing:0; overflow-wrap:anywhere; padding-inline:0.4mm; font-size:6.3pt; }
+ .premium-card.premium-multi-term .rc-marks-table td { padding-inline:0.4mm; font-variant-numeric:tabular-nums; }
+ .premium-card.premium-multi-term .rc-marks-table th:first-child,
+ .premium-card.premium-multi-term .rc-marks-table td:first-child { width:31mm; }
+ .premium-card.premium-multi-term.premium-dense .rc-marks-table th:first-child,
+ .premium-card.premium-multi-term.premium-dense .rc-marks-table td:first-child { width:39mm; }
+ /* Very large subject tables stay readable and complete; no content is hidden. */
+ .premium-card.premium-ultra-dense { padding:6mm 8mm; }
+ .premium-card.premium-ultra-dense .rc-standard-header { margin-bottom:1mm; gap:2mm; }
+ .premium-card.premium-ultra-dense .rc-header-logo { width:16mm; height:16mm; }
+ .premium-card.premium-ultra-dense .rc-photo { width:15mm; height:18mm; }
+ .premium-card.premium-ultra-dense .rc-school-name { font-size:14.5pt; line-height:1.05; }
+ .premium-card.premium-ultra-dense .rc-school-address { font-size:6.2pt; margin:1mm 0; }
+ .premium-card.premium-ultra-dense .rc-report-title { font-size:7pt; padding:2px 9px; margin-top:0.5mm; }
+ .premium-card.premium-ultra-dense .rc-student-info { margin-bottom:1mm; gap:0.25mm; }
+ .premium-card.premium-ultra-dense .rc-student-info div { min-height:5.3mm; padding:0.4mm 0.8mm; }
+ .premium-card.premium-ultra-dense .rc-student-info span { font-size:5.8pt; margin-bottom:0.3mm; }
+ .premium-card.premium-ultra-dense .rc-student-info strong { font-size:7pt; line-height:1.05; }
+ .premium-card.premium-ultra-dense .rc-marks-table { margin-bottom:1.2mm; }
+ .premium-card.premium-ultra-dense .rc-marks-table th { font-size:6pt; padding:0.5mm 0.4mm; line-height:1; }
+ .premium-card.premium-ultra-dense .rc-marks-table td { font-size:6.3pt; padding:0.3mm 0.4mm; line-height:1; }
+ .premium-card.premium-ultra-dense .premium-analytics { margin-bottom:0.6mm; gap:0.8mm; }
+ .premium-card.premium-ultra-dense .rc-chart-card { padding:0.7mm; min-height:20mm; }
+ .premium-card.premium-ultra-dense .rc-chart-card h3 { font-size:6.2pt; margin-bottom:0.4mm; }
+ .premium-card.premium-ultra-dense .premium-bar-list { gap:0.1mm; }
+ .premium-card.premium-ultra-dense .premium-bar-item { font-size:5.9pt; grid-template-columns:47mm minmax(12mm,1fr) 8mm; gap:0.6mm; line-height:1.04; }
+ .premium-card.premium-ultra-dense .premium-bar-item b { font-size:6pt; }
+ .premium-card.premium-ultra-dense .premium-donut { width:24mm; height:24mm; }
+ .premium-card.premium-ultra-dense .premium-chart-caption { font-size:5.9pt; line-height:1.1; }
+ .premium-card.premium-ultra-dense .rc-remarks { padding:0.5mm 1mm; margin-bottom:0.7mm; }
+ .premium-card.premium-ultra-dense .rc-remarks strong { font-size:7pt; }
+ .premium-card.premium-ultra-dense .rc-remarks p { font-size:6.5pt; line-height:1.14; margin:0.4mm 0 0; }
+ .premium-card.premium-ultra-dense .rc-signatures { gap:3mm; padding:0 2mm; margin-bottom:0.8mm; }
+ .premium-card.premium-ultra-dense .rc-signatures span { font-size:7pt; padding-top:0.5mm; }
+ .premium-card.premium-ultra-dense .rc-signatures span > div[style] { max-height:25px; }
+ .premium-card.premium-ultra-dense .rc-footer p { font-size:6.1pt; padding-top:0.3mm; border-top-width:0.8mm; }
  /* Dense multi-subject A4: compact without removing labels or records */
  .premium-card .rc-marks-table td { padding:1.1mm 0.8mm; font-size:7.25pt; line-height:1.12; }
  .premium-card .rc-marks-table th { padding:1.35mm 0.8mm; line-height:1.12; }
@@ -602,6 +644,18 @@ export function openResultPrintWindow(data, exportMode = false) {
    var logos=Array.from(document.querySelectorAll('img[data-result-school-logo]'));
    if(logos.some(function(img){return !img.complete||img.naturalWidth===0;})){
     blocked('School logo could not load from SaaS settings. Check the configured logo link, then reopen the result card. Printing was paused to avoid incorrect cards.');
+    return;
+   }
+   var cards=Array.from(document.querySelectorAll('.result-card-a4'));
+   var badCard=cards.findIndex(function(card){
+    if(card.scrollHeight>card.clientHeight+2||card.scrollWidth>card.clientWidth+2)return true;
+    var footer=card.querySelector('.rc-footer');
+    if(footer&&footer.getBoundingClientRect().bottom>card.getBoundingClientRect().bottom+1)return true;
+    var fields=Array.from(card.querySelectorAll('.rc-marks-table th,.rc-marks-table td,.rc-student-info strong,.premium-bar-name,.rc-remarks p'));
+    return fields.some(function(field){return field.scrollWidth>field.clientWidth+2||field.scrollHeight>field.clientHeight+2;});
+   });
+   if(badCard!==-1){
+    blocked('Result card '+(badCard+1)+' exceeds its A4 print area. No content will be silently cropped. Reduce unusually long feedback or use fewer printed term columns, then reopen print.');
     return;
    }
    finished=true;window.focus();window.print();

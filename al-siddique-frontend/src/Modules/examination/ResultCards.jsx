@@ -99,11 +99,11 @@ export function ProfessionalParametersModal({ cards, student, exam, studentMarks
  onPrint={() => printBatch(false)}
  onExportPdf={() => printBatch(true)}
  />
- <div style={{ marginTop:14, border:'1px solid rgba(148,163,184,0.18)', borderRadius:14, overflow:'hidden', background:'var(--apex-bg-subtle)' }}>
+ <div style={{ marginTop:14, border:'1px solid #DCE6EE', borderRadius:11, overflow:'hidden', background:'#F9FBFC' }}>
  <button
  type="button"
  onClick={() => setRemarksOpen(v => !v)}
- style={{ width:'100%', display:'flex', justifyContent:'space-between', alignItems:'center', gap:10, padding:'11px 13px', border:'none', background:'transparent', color:'#C8991A', cursor:'pointer', fontWeight:900, fontSize:12 }}
+ style={{ width:'100%', display:'flex', justifyContent:'space-between', alignItems:'center', gap:10, padding:'11px 13px', border:'none', background:'transparent', color:'#265D79', cursor:'pointer', fontWeight:900, fontSize:12 }}
  >
  Teacher Remarks
  <span style={{ color:'#8892A4' }}>{remarksOpen ? 'Hide' : 'Edit'}</span>
@@ -115,22 +115,22 @@ export function ProfessionalParametersModal({ cards, student, exam, studentMarks
  <button
  type="button"
  key={text}
- onClick={() => setOptions(prev => ({ ...prev, includeTeacherRemarks:true, teacherRemarks:text }))}
- style={{ textAlign:'left', padding:'8px 10px', borderRadius:10, border:'1px solid rgba(148,163,184,0.14)', background: options.teacherRemarks === text ? 'rgba(200,153,26,0.16)' : 'rgba(15,23,42,0.42)', color:'#C0C8D8', cursor:'pointer', fontSize:11, lineHeight:1.4 }}
+ onClick={() => setOptions(prev => ({ ...prev, includeTeacherRemarks:true, teacherRemarks:text, teacherRemarksEdited:true }))}
+ style={{ textAlign:'left', padding:'8px 10px', borderRadius:10, border:'1px solid #DAE6ED', background: (options.teacherRemarksEdited ? options.teacherRemarks : data?.result?.teacherRemarks) === text ? '#E9F5FA' : '#FFFFFF', color:'#27465C', cursor:'pointer', fontSize:11, lineHeight:1.4 }}
  >
  {text}
  </button>
  ))}
  </div>
  <textarea
- value={options.teacherRemarks || ''}
- onChange={e => setOptions(prev => ({ ...prev, teacherRemarks:e.target.value }))}
+ value={options.teacherRemarksEdited ? (options.teacherRemarks ?? '') : (data?.result?.teacherRemarks ?? options.teacherRemarks ?? '')}
+ onChange={e => setOptions(prev => ({ ...prev, teacherRemarks:e.target.value,teacherRemarksEdited:true }))}
  placeholder="Write custom teacher remarks..."
  rows={4}
- style={{ width:'100%', resize:'vertical', borderRadius:10, border:'1px solid rgba(148,163,184,0.18)', background:'var(--apex-bg-surface-solid)', color:'var(--apex-text-primary)', padding:'10px 12px', outline:'none', fontSize:12, lineHeight:1.5 }}
+ style={{ width:'100%', resize:'vertical', borderRadius:10, border:'1px solid #C9DCE7', background:'#FFFFFF', color:'#23465D', padding:'10px 12px', outline:'none', fontSize:12, lineHeight:1.5 }}
  />
  <div style={{ color:'#8892A4', fontSize:11, lineHeight:1.5 }}>
- Rule-based presets. No AI required, and this text can be fully customized before print.
+ {dataList.length > 1 ? `Editing teacher feedback here applies to all ${dataList.length} printed cards. Leave unchanged to preserve each exam's original remarks.` : 'Original exam feedback is preserved unless you edit it. Presets are optional.'}
  </div>
  </div>
  )}

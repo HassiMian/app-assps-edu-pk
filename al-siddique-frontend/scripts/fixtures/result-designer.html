@@ -8,13 +8,13 @@ import '../../src/index.css'
 const pixel='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIHWP4////fwAJ+wP9Cgd6ZQAAAABJRU5ErkJggg=='
 const terms=['First Term Exam','Second Term Exam','Annual Final Exam']
 const subjects=['English','Mathematics','Science','Urdu','Computer','Islamiyat','Social Studies','General Knowledge']
+const query=new URLSearchParams(location.search)
 const cards=terms.map((name,i)=>({
  student:{name:'Fixture Student '+(i+1),father_name:'Fixture Father',roll_number:String(i+1),gr_number:'GR-XYZ'},
- exam:{name,total_marks:100,session:'2026-2027',class:'Eight'},
+ exam:{name,total_marks:100,session:'2026-2027',class:'Eight',...(query.has('remarksSource')?{teacherRemarks:'Original saved exam feedback for student '+(i+1)+'.'}:{})},
  studentMarks:subjects.map((subject,j)=>({subject,marks_obtained:75+j,total_marks:100})),
 }))
 window.__fixtureCards=cards
-const query=new URLSearchParams(location.search)
 const configuredLogo=query.has('missingLogo')?'':query.has('brokenLogo')?'/api/uploads/fixture-404.png':pixel
 const school={name:'Fixture Institution',logo:configuredLogo,address:'Synthetic address only',phone:'00000',academicYear:'2026-2027'}
 window.__fixtureRoot=createRoot(document.getElementById('root'))
