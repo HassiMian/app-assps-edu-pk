@@ -173,7 +173,7 @@ const mathAssetsPaper = {
  ],
 }
 
-function ThemeFixture() {
+export function ThemeFixture() {
  const { theme, setTheme, toggleTheme } = useTheme()
  const { savedPapers } = usePaperStore()
  const params = new URLSearchParams(window.location.search)

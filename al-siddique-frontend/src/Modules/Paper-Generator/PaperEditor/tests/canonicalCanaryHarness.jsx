@@ -6,7 +6,7 @@ import { ThemeProvider } from '@/context/ThemeContext.jsx'
 import PaperGenerator from '../../PaperGenerator.jsx'
 import '@/index.css'
 
-function CanaryHarnessApp() {
+export function CanaryHarnessApp() {
   const params = new URLSearchParams(window.location.search)
   const forwarded = new URLSearchParams()
   if (params.get('canonicalCanary') === '1') forwarded.set('canonicalCanary', '1')

@@ -58,7 +58,9 @@ export default function PaperAiJobsPanel({ title = 'AI Job History' }) {
  }
 
  useEffect(() => {
- loadJobs()
+ let cancelled = false
+ queueMicrotask(() => { if (!cancelled) loadJobs() })
+ return () => { cancelled = true }
  }, [])
 
  useEffect(() => {

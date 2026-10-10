@@ -10,7 +10,7 @@ import '@/index.css'
 import '../earlyYears/earlyYearsPrint.css'
 
 
-function EarlyYearsHarnessApp() {
+export function EarlyYearsHarnessApp() {
   const [paperId, setPaperId] = useState('ey-starter-english-2026')
   const [mode, setMode] = useState('editor')
 
@@ -22,13 +22,14 @@ function EarlyYearsHarnessApp() {
     // Read initial mode from URL search param if present
     const params = new URLSearchParams(window.location.search)
     const m = params.get('mode')
-    if (m === 'generator' || m === 'real-product') {
-      setMode('generator')
-    }
     const paperParam = params.get('paper')
-    if (paperParam) {
-      setPaperId(paperParam)
-    }
+    let cancelled = false
+    queueMicrotask(() => {
+      if (cancelled) return
+      if (m === 'generator' || m === 'real-product') setMode('generator')
+      if (paperParam) setPaperId(paperParam)
+    })
+    return () => { cancelled = true }
   }, [])
 
   if (mode === 'generator') {

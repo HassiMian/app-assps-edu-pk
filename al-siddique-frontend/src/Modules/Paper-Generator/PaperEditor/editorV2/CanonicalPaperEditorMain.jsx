@@ -48,6 +48,9 @@ export default function CanonicalPaperEditorMain({
 
   // 3. Attempt to load existing compact draft on initial mount (Rule 39)
   useEffect(() => {
+    let cancelled = false
+    queueMicrotask(() => {
+      if (cancelled) return
     const draftResult = loadWorkingDraft(loadedPaper)
     if (draftResult?.status === 'OK' && draftResult.draft) {
       const applyRes = store.applyCompactDraft(draftResult.draft)
@@ -64,6 +67,8 @@ export default function CanonicalPaperEditorMain({
     } else if (draftResult?.status === 'CORRUPTED') {
       setSaveStatus('Saved draft could not be loaded safely; source paper was left unchanged.')
     }
+    })
+    return () => { cancelled = true }
   }, [loadedPaper, store])
 
   // 4. Save Draft Handler (Rules 9, 10, 38)

@@ -27,7 +27,6 @@ const SIZES = [8, 9, 10, 11, 12, 13, 14, 16, 18, 20, 24, 28, 32, 36]
 const COLORS = ['#111827', '#374151', '#b91c1c', '#b45309', '#15803d', '#1d4ed8', '#7e22ce']
 const HIGHLIGHTS = ['#fef08a', '#bbf7d0', '#bfdbfe', '#fecaca', '#e9d5ff']
 const BLOCKS = new Set(['doc', 'paragraph', 'heading', 'bulletList', 'orderedList', 'listItem', 'blockquote', 'codeBlock', 'horizontalRule', 'table', 'tableRow', 'tableCell', 'tableHeader'])
-const LEAVES = new Set(['text', 'hardBreak', 'horizontalRule'])
 const MARKS = new Set(['bold', 'italic', 'underline', 'strike', 'superscript', 'subscript', 'code', 'textStyle', 'highlight'])
 
 const safeDirection = value => value === 'rtl' || value === 'ltr' ? value : null

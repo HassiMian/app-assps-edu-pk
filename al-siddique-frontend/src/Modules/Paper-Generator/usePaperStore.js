@@ -514,7 +514,9 @@ function loadStore() {
  if (def) t.labelUrdu = def.labelUrdu
  }
  })
- const { geminiApiKey: _legacyGeminiKey, ...persistedPaperSettings } = parsed.paperSettings || {}
+ const persistedPaperSettings = { ...(parsed.paperSettings || {}) }
+ // Never restore a legacy locally persisted AI API secret into tenant Paper settings.
+ delete persistedPaperSettings.geminiApiKey
  const safePaperSettings = {
  ...defaultStore.paperSettings,
  ...persistedPaperSettings,

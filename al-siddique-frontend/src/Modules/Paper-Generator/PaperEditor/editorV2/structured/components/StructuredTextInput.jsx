@@ -25,7 +25,9 @@ export default function StructuredTextInput({
 
   // Sync external value updates
   useEffect(() => {
-    setLocalVal(value ?? '')
+    let cancelled = false
+    queueMicrotask(() => { if (!cancelled) setLocalVal(value ?? '') })
+    return () => { cancelled = true }
   }, [value])
 
   // Cleanup on unmount if this control had focus (Rule 19)

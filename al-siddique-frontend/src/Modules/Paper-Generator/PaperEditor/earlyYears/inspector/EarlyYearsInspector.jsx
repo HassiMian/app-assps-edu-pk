@@ -108,8 +108,14 @@ export default function EarlyYearsInspector({
   useEffect(() => {
     if (!selectedQuestion || !currentPaper?.id) return
     const saved = getOverlay(currentPaper.id, selectedQuestion.id)
-    setContentDraft(JSON.stringify(saved.contentOverride ?? selectedQuestion.content ?? {}, null, 2))
-    setContentError('')
+    const nextContent = JSON.stringify(saved.contentOverride ?? selectedQuestion.content ?? {}, null, 2)
+    let cancelled = false
+    queueMicrotask(() => {
+      if (cancelled) return
+      setContentDraft(nextContent)
+      setContentError('')
+    })
+    return () => { cancelled = true }
   }, [currentPaper?.id, selectedQuestion?.id])
 
   function saveEditableContent() {

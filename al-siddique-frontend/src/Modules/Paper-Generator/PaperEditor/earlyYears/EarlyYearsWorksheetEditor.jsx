@@ -47,9 +47,10 @@ export default function EarlyYearsWorksheetEditor({
   const templatePreset = useMemo(() => getEarlyYearsTemplatePreset(templateId), [templateId])
 
   useEffect(() => {
-    if (initialPaperId) {
-      setSelectedPaperId(initialPaperId)
-    }
+    if (!initialPaperId) return
+    let cancelled = false
+    queueMicrotask(() => { if (!cancelled) setSelectedPaperId(initialPaperId) })
+    return () => { cancelled = true }
   }, [initialPaperId])
 
   useEffect(() => {
@@ -83,7 +84,9 @@ export default function EarlyYearsWorksheetEditor({
       saved[currentPaper.id] = next
       writeTemplateMap(saved)
     }
-    setTemplateId(next)
+    let cancelled = false
+    queueMicrotask(() => { if (!cancelled) setTemplateId(next) })
+    return () => { cancelled = true }
   }, [currentPaper?.id, currentPaper?.classStage])
 
   useEffect(() => {
@@ -98,7 +101,7 @@ export default function EarlyYearsWorksheetEditor({
     const saved = readTemplateMap()
     saved[currentPaper.id] = normalized
     writeTemplateMap(saved)
-  }, [currentPaper?.id])
+  }, [currentPaper?.id, setTemplateId])
 
   const selectPaper = useCallback((nextId) => {
     if (!nextId || nextId === selectedPaperId) return

@@ -120,32 +120,39 @@ export default function AIGeneratorTab({ onProceedToPreview }) {
     return [...new Set([...academicSubs, ...bankSubs])]
   }, [subjects, classLevel, subjectsForClass])
 
-  const availableChapters = useMemo(() => getChaptersForSubject(subject, classLevel), [subject, classLevel, questions])
+  const availableChapters = useMemo(() => getChaptersForSubject(subject, classLevel), [subject, classLevel, questions, getChaptersForSubject])
   const availableTypes = useMemo(() => {
     const filtered = getFilteredQuestionTypes?.(subject) || questionTypes || []
     return filtered.length ? filtered : questionTypes || []
   }, [subject, questionTypes, getFilteredQuestionTypes])
 
   useEffect(() => {
-    if (!availableTypes.some(t => t.value === activeType)) {
-      setActiveType(availableTypes[0]?.value || 'mcq')
-    }
+    if (availableTypes.some(t => t.value === activeType)) return
+    let cancelled = false
+    const fallback = availableTypes[0]?.value || 'mcq'
+    queueMicrotask(() => { if (!cancelled) setActiveType(fallback) })
+    return () => { cancelled = true }
   }, [availableTypes, activeType])
 
   useEffect(() => {
-    setQCounts(prev => {
-      const next = { ...prev }
-      ;(questionTypes || []).forEach(t => { if (next[t.value] === undefined) next[t.value] = ['mcq','short','long'].includes(t.value) ? next[t.value] || 0 : 0 })
-      return next
+    let cancelled = false
+    queueMicrotask(() => {
+      if (cancelled) return
+      setQCounts(prev => {
+        const next = { ...prev }
+        ;(questionTypes || []).forEach(t => { if (next[t.value] === undefined) next[t.value] = 0 })
+        return next
+      })
+      setQMarks(prev => {
+        const next = { ...prev }
+        ;(questionTypes || []).forEach(t => { if (next[t.value] === undefined) next[t.value] = Number(t.marks || 2) })
+        return next
+      })
     })
-    setQMarks(prev => {
-      const next = { ...prev }
-      ;(questionTypes || []).forEach(t => { if (next[t.value] === undefined) next[t.value] = Number(t.marks || 2) })
-      return next
-    })
+    return () => { cancelled = true }
   }, [questionTypes])
 
-  const bankPool = useMemo(() => getQuestionsForPaper({ subjectName: subject, classLevel, chapters, priority }), [subject, classLevel, chapters, priority, questions])
+  const bankPool = useMemo(() => getQuestionsForPaper({ subjectName: subject, classLevel, chapters, priority }), [subject, classLevel, chapters, priority, questions, getQuestionsForPaper])
   const bankStats = useMemo(() => {
     const stats = { total: bankPool.length }
     availableTypes.forEach(t => { stats[t.value] = bankPool.filter(q => q.type === t.value).length })

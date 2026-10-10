@@ -103,7 +103,12 @@ export default function ManualPaperTab({ onProceedToPreview }) {
   }, [activeClasses])
 
   useEffect(() => {
-    if (!titleTouched) setTitle(buildManualPaperTitle({ classLevel, subject, publisher }))
+    if (titleTouched) return
+    let cancelled = false
+    queueMicrotask(() => {
+      if (!cancelled) setTitle(buildManualPaperTitle({ classLevel, subject, publisher }))
+    })
+    return () => { cancelled = true }
   }, [classLevel, subject, publisher, titleTouched])
 
   useEffect(() => {

@@ -29,12 +29,7 @@ const shiftDate = (value, days) => {
   date.setUTCDate(date.getUTCDate() + days)
   return date.toISOString().slice(0, 10)
 }
-const clean = value => String(value ?? '').trim()
 const planTypeLabel = type => PLANNING_TYPES.find(item => item.key === type)?.short || 'Daily'
-
-function clone(value) {
-  return JSON.parse(JSON.stringify(value))
-}
 
 function normalizeClassSelection(activeClasses, value) {
   return activeClasses.find(item => String(item.level) === String(value) || item.name === value) || null
@@ -153,13 +148,17 @@ export default function LessonPlanningWorkspace() {
     patch({planningType:type,endDate:end,termLabel:type==='term'?(document.termLabel||'Term') : document.termLabel})
   }
   const toggleSubject = subject => setSelectedSubjects(current=>current.includes(subject)?current.filter(item=>item!==subject):[...current,subject])
-  const syncSelectedSubjectsIntoDocument = () => {
-    setDocument(current=>{
-      const existing=new Map(current.subjects.map(item=>[item.subject.toLowerCase(),item]))
-      return normalizeLessonPlanDocument({ ...current,subjects:selectedSubjects.map(name=>existing.get(name.toLowerCase())||{subject:name,units:[],lessons:[],status:'draft'}) })
+  useEffect(()=>{
+    let cancelled=false
+    queueMicrotask(()=>{
+      if(cancelled)return
+      setDocument(current=>{
+        const existing=new Map(current.subjects.map(item=>[item.subject.toLowerCase(),item]))
+        return normalizeLessonPlanDocument({ ...current,subjects:selectedSubjects.map(name=>existing.get(name.toLowerCase())||{subject:name,units:[],lessons:[],status:'draft'}) })
+      })
     })
-  }
-  useEffect(syncSelectedSubjectsIntoDocument,[selectedSubjects.join('|')])
+    return()=>{cancelled=true}
+  },[selectedSubjects])
 
   const generate = async () => {
     if(!document.classLevel){setStatus('Select a class first.');return}
