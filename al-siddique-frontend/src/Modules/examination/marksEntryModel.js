@@ -47,8 +47,11 @@ export const marksEntryClasses = (academicClasses=[], exams=[]) => {
 export const filterMarksStudents = (rows, className) =>
   (Array.isArray(rows)?rows:[]).filter(row=>equivalentMarksClass(row.class,className))
 
-export const validateMarksBatch = ({exam, students, subject, marks, totalMarks, passMarks}) => {
-  if (!exam?.id) return {error:'Select the saved First Term Exam record before entering marks.',rows:[]}
+export const validateMarksBatch = ({exam, selectedClass, students, subject, marks, totalMarks, passMarks}) => {
+  if (!Number.isSafeInteger(Number(exam?.id)) || Number(exam?.id) <= 0)
+    return {error:'Select a valid saved First Term Exam record before entering marks.',rows:[]}
+  if (selectedClass && !matchesMarksExam(exam,exam.type,selectedClass))
+    return {error:'Selected exam does not belong to the chosen class. Refresh the examination list.',rows:[]}
   if (!String(subject||'').trim()) return {error:'Select a subject before saving.',rows:[]}
   const total=Number(totalMarks), pass=Number(passMarks)
   if (String(totalMarks).trim()==='' || !Number.isFinite(total) || total<=0 ||
@@ -58,6 +61,10 @@ export const validateMarksBatch = ({exam, students, subject, marks, totalMarks, 
   for(const student of students||[]){
     const entered=marks?.[student.id]
     if(entered===undefined || entered===null || String(entered).trim()==='')continue
+    if (!Number.isSafeInteger(Number(student.id)) || Number(student.id) <= 0)
+      return {error:'Student record has an invalid ID. Refresh the roster before saving.',rows:[]}
+    if (selectedClass && !equivalentMarksClass(student.class,selectedClass))
+      return {error:'Student class differs from the selected class. Refresh the roster before saving.',rows:[]}
     const value=Number(entered)
     if(!Number.isFinite(value) || value<0 || value>total){
       return {error:`Invalid marks for ${student.name || 'student'}: enter 0 to ${total}.`,rows:[]}

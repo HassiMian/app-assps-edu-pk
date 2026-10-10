@@ -185,7 +185,7 @@ export default function MarksSheet() {
  return
  }
  const {error,rows} = validateMarksBatch({
- exam:selectedExam, students, subject:selectedSubject, marks:editedMarks, totalMarks, passMarks
+ exam:selectedExam, selectedClass, students, subject:selectedSubject, marks:editedMarks, totalMarks, passMarks
  })
  if (error) {setMessage(error);return}
  const submittedRevision=marksEditRevision.current
