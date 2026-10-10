@@ -82,6 +82,7 @@ test('actual examRoutes enforces assignment scoped reads and transactional write
   let select=queries.filter(q=>q.sql.includes('FROM exam_results')).at(-1)
   assert.ok(select.sql.includes('EXISTS'))
   assert.ok(select.sql.includes('tca.subject'))
+  assert.ok(select.sql.includes('s.class AS student_class, s.section AS student_section'), 'result cards require real student class/section projections')
   assert.ok(select.params.includes(77))
   assert.ok(select.params.includes(21))
   assert.ok(select.sql.includes('s.school_id = $'),'authenticated teacher school bound')
