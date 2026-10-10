@@ -27,8 +27,8 @@ export function parseMcqSection(content, context = {}) {
   //   (1) option (2) option    -> NOT a question boundary
   //   الف) Question text       -> Urdu question boundary
   //   ☐ الف) option            -> NOT a question boundary
-  const numericQuestionStart = /^[ \t]*(?:(?:Q\s*\d+|[0-9]+|[ivxIVX]+)[\.\)\-:]|\([0-9]+\)|\([ivxIVX]+\))[ \t]+/
-  const urduQuestionStart = /^[ \t]*(?:(?:الف|ا|ب|ج|د|ہ|و|ز|ح)[\.\)\-:]|\((?:الف|ا|ب|ج|د|ہ|و|ز|ح)\))[ \t]+/
+  const numericQuestionStart = /^[ \t]*(?:(?:Q\s*\d+|[0-9]+|[ivxIVX]+)[.)\-:]|\([0-9]+\)|\([ivxIVX]+\))[ \t]+/
+  const urduQuestionStart = /^[ \t]*(?:(?:الف|ا|ب|ج|د|ہ|و|ز|ح)[.)\-:]|\((?:الف|ا|ب|ج|د|ہ|و|ز|ح)\))[ \t]+/
   const lineEntries = []
   let cursor = 0
   for (const rawLine of content.split('\n')) {
@@ -41,6 +41,12 @@ export function parseMcqSection(content, context = {}) {
     return tokens.length >= 2
   }
   const isCheckboxOptionRow = (line = '') => /^\s*☐/.test(String(line))
+  // Urdu questions may start with الف) or ب), but a row containing several
+  // labelled answers is never another question heading.
+  const isUrduInlineOptionRow = (line = '') => {
+    const optionLabels = String(line).match(/(?:^|[ \t]+)(?:الف|ا|ب|ج|د|ہ|و|ز|ح)[.)][ \t]+/g) || []
+    return optionLabels.length >= 2
+  }
 
   const numericCandidates = lineEntries
     .map(entry => ({ ...entry, match: entry.line.match(numericQuestionStart) }))
@@ -49,7 +55,7 @@ export function parseMcqSection(content, context = {}) {
   const matches = []
 
   for (const entry of lineEntries) {
-    if (isCheckboxOptionRow(entry.line) || isNumericOptionRow(entry.line)) continue
+    if (isCheckboxOptionRow(entry.line) || isNumericOptionRow(entry.line) || isUrduInlineOptionRow(entry.line)) continue
     const boundary = entry.line.match(hasNumericQuestions ? numericQuestionStart : urduQuestionStart)
     if (!boundary) continue
     matches.push({ index: entry.index + boundary.index, text: boundary[0] })
@@ -151,7 +157,7 @@ function parseSingleMcqBlock(rawText, nodeId, defaultDirection) {
   // a) / A) / (a) / a.
   // الف) / ب) / ج) / د)
   // 1) / 2) / 3) / (1)
-  const optMarkerRegex = /(?:^|[ \t]+)(?:☐|\(T\/F\)|\[\s*\])?\s*(?:([a-dA-D]|الف|ا|ب|ج|د|ہ|و|ز|ح|[1-8])[\.\)\-:]|\(([a-dA-D]|الف|ا|ب|ج|د|ہ|و|ز|ح|[1-8])\))[ \t]+/g
+  const optMarkerRegex = /(?:^|[ \t]+)(?:☐|\(T\/F\)|\[\s*\])?\s*(?:([a-dA-D]|الف|ا|ب|ج|د|ہ|و|ز|ح|[1-8])[.)\-:]|\(([a-dA-D]|الف|ا|ب|ج|د|ہ|و|ز|ح|[1-8])\))[ \t]+/g
 
   for (let lIdx = 0; lIdx < lines.length; lIdx++) {
     const line = lines[lIdx].trim()
@@ -214,7 +220,7 @@ function parseSingleMcqBlock(rawText, nodeId, defaultDirection) {
     // Check unlabeled options row (Class 5 Islamiyat Version B: "1200   1300   1400   1500")
     if (lIdx > 0) {
       const parts = line.split(/[ \t]{3,}/).map(s => s.trim()).filter(Boolean)
-      if (parts.length >= 3 && parts.every(p => !p.match(/^[0-9]+[\.\)]/))) {
+      if (parts.length >= 3 && parts.every(p => !p.match(/^[0-9]+[.)]/))) {
         foundOptions = true
         parts.forEach((p) => {
           const canonicalLabel = optLetters[options.length] || String(options.length + 1)
@@ -240,7 +246,7 @@ function parseSingleMcqBlock(rawText, nodeId, defaultDirection) {
 
   // Strip question number prefix from stem if present
   let stemText = stemLines.join(' ')
-  stemText = stemText.replace(/^[ \t]*(?:Q\s*\d+|[0-9]+|[ivxIVX]+|[a-zA-Z]|الف|ا|ب|ج|د|ہ|و|ز|ح)[\.\)\-:][ \t]*/, '').trim()
+  stemText = stemText.replace(/^[ \t]*(?:Q\s*\d+|[0-9]+|[ivxIVX]+|[a-zA-Z]|الف|ا|ب|ج|د|ہ|و|ز|ح)[.)\-:][ \t]*/, '').trim()
 
   // Ensure at least 2 options for valid MCQ contract
   if (options.length < 2) {

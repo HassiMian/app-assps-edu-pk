@@ -209,11 +209,11 @@ export function countActualItems(content = '', heading = '') {
   if (lines.length === 0) return 0
 
   // 1. Numbered lines (e.g. "1.", "1)", "(1)")
-  const numbered = lines.filter(l => /^(\d+[\.\)]|\(\d+\))/.test(l))
+  const numbered = lines.filter(l => /^(\d+[.)]|\(\d+\))/.test(l))
   if (numbered.length > 0) return numbered.length
 
   // 2. Urdu / Arabic numbered lines (e.g. "۱.", "۲.")
-  const urduNumbered = lines.filter(l => /^[۱-۹1-9][\.\)]/.test(l))
+  const urduNumbered = lines.filter(l => /^[۱-۹1-9][.)]/.test(l))
   if (urduNumbered.length > 0) return urduNumbered.length
 
   // 3. Comma-separated lists in single lines (e.g., Urdu vocabulary words separated by commas)
