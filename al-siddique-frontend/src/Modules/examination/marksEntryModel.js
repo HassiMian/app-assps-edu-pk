@@ -1,4 +1,5 @@
 // Pure marks-entry contract. No production writes or fake examination records.
+import { OFFICIAL_FIRST_TERM_SUBJECTS_2026 } from './officialFirstTerm2026Subjects.js'
 const CLASS_ORDINALS = {
   '1':'One','2':'Two','3':'Three','4':'Four','5':'Five',
   '6':'Six','7':'Seven','8':'Eight','9':'Nine','10':'Ten',
@@ -42,6 +43,17 @@ export const marksEntryClasses = (academicClasses=[], exams=[]) => {
  const configured=uniqueMarksClasses(academicClasses,exams)
  return configured.length ? configured :
    exams.some(ex=>/\bfirst\s+term\b/i.test(String(ex.name||''))) ? OFFICIAL_FIRST_TERM_CLASSES : []
+}
+
+export const marksSubjectsForClass = ({exam, className, academicSubjects=[]}) => {
+  const name = String(exam?.name || '').trim().replace(/\s+/g,' ').toLowerCase()
+  const session = String(exam?.session || '').trim()
+  const type = String(exam?.type || '')
+  if (name === 'first term exam' && session === '2026-2027' && (type === 'Term Exam' || type === 'TE')) {
+    const official = OFFICIAL_FIRST_TERM_SUBJECTS_2026[normalizeMarksClass(className)]
+    if (Array.isArray(official) && official.length) return official
+  }
+  return Array.isArray(academicSubjects) ? academicSubjects : []
 }
 
 export const filterMarksStudents = (rows, className) =>

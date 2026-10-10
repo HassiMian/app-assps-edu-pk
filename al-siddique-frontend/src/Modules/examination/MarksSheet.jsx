@@ -6,7 +6,7 @@ import { usePaperStore } from '../Paper-Generator/usePaperStore'
 import { useAcademicStore } from '../../services/useAcademicStore'
 import {
  normalizeMarksClass, normalizeMarksExam, matchesMarksExam, pickMarksExam,
- marksEntryClasses, filterMarksStudents, validateMarksBatch
+ marksEntryClasses, marksSubjectsForClass, filterMarksStudents, validateMarksBatch
 } from './marksEntryModel'
 
 const FALLBACK_EXAM_TYPES = ['Term Exam', 'Assessment', 'Quiz', 'Annual Exam', 'Monthly Test']
@@ -316,7 +316,7 @@ export default function MarksSheet() {
  <label style={labelStyle}>Subject</label>
  <select style={select} value={selectedSubject} onChange={e => { resetRoster(); setSelectedSubject(e.target.value) }}>
  <option value="">Select subject</option>
- {(selectedClass ? subjectsForClass(selectedClass) : []).map(subject => <option key={subject} value={subject}>{subject}</option>)}
+ {(selectedClass ? marksSubjectsForClass({exam:selectedExam,className:selectedClass,academicSubjects:subjectsForClass(selectedClass)}) : []).map(subject => <option key={subject} value={subject}>{subject}</option>)}
  </select>
  </div>
  </div>

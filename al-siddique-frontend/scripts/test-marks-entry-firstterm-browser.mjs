@@ -29,7 +29,7 @@ try{
   const path=url.pathname
   if(path==='/api/academic/setup')return json(route,{success:true,configured:true,data:{
    classes:[{name:'Class One',level:'1',active:true,sections:['A']},{name:'Two',level:'2',active:true,sections:['A']}],
-   subjects:[{name:'English',classes:['1','2']},{name:'Mathematics',classes:['1','2']}],
+   subjects:[],
    sessionStart:'2026-04-01',sessionEnd:'2027-03-31'}})
   if(path==='/api/exams' && request.method()==='GET')return json(route,{success:true,data:[
    {id:9,name:'First Term Exam',type:'TE',class:'All Classes',session:'2026-2027',total_marks:100,pass_marks:33},
@@ -58,6 +58,12 @@ try{
  assert.ok((await examSelect.innerText()).includes('First Term Exam'))
  console.log('MARKS_BROWSER_PASS First Term Exam is visible and selected by persisted ID')
  await page.locator('select').nth(1).selectOption('One')
+const subjectSelect=page.locator('select').nth(3)
+const listed=await subjectSelect.locator('option').allTextContents()
+assert.deepEqual(listed.filter(x=>x!=='Select subject'),[
+ 'English','Mathematics','Urdu','Science','Islamiyat','Quran / Nazra'
+])
+console.log('MARKS_BROWSER_PASS official First Term 2026-2027 subjects visible despite empty academic setup')
  await page.locator('select').nth(3).selectOption('English')
  await page.getByRole('button',{name:'Search Students'}).click()
  await page.getByText('Synthetic One A').waitFor({timeout:12000})

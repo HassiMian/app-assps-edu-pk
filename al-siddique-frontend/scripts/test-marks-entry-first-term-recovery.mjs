@@ -1,10 +1,14 @@
 import assert from 'node:assert/strict'
 import {
   normalizeMarksClass, equivalentMarksClass, normalizeMarksExam,
-  matchesMarksExam, pickMarksExam, uniqueMarksClasses, marksEntryClasses,
+  matchesMarksExam, pickMarksExam, uniqueMarksClasses, marksEntryClasses, marksSubjectsForClass,
   filterMarksStudents, validateMarksBatch
 } from '../src/Modules/examination/marksEntryModel.js'
 import {readFileSync} from 'node:fs'
+import {createRequire} from 'node:module'
+import {OFFICIAL_FIRST_TERM_SUBJECTS_2026} from '../src/Modules/examination/officialFirstTerm2026Subjects.js'
+const require=createRequire(import.meta.url)
+const canonical=require('../../al-siddique-backend/src/config/firstTermExam2026.js')
 const exams=[
  {id:9,name:'First Term Exam',type:'TE',class:'All Classes',session:'2026-2027',total_marks:100,pass_marks:33},
  {id:18,name:'Monthly Assessment',type:'AS',class:'Class One',session:'2026-2027'},
@@ -25,6 +29,18 @@ assert.deepEqual(uniqueMarksClasses(['Class One','Two'],exams),['One','Two'])
 assert.deepEqual(marksEntryClasses([],exams.filter(e=>e.id===9)).slice(0,5),['Starter','Mover','Flyer','One','Two'])
 assert.deepEqual(marksEntryClasses([],[]),[])
 console.log('PASS actual First Term Exam ID9 discovery, exact selection, class/type filtering')
+for (const cls of Object.values(canonical.CLASS_LEVEL_TO_NAME)) {
+ const expected=[...new Set(canonical.subjectsForClass(cls).map(x=>x.subject))]
+ assert.deepEqual(OFFICIAL_FIRST_TERM_SUBJECTS_2026[cls],expected,cls)
+ assert.deepEqual(marksSubjectsForClass({exam:exams[0],className:cls,academicSubjects:[]}),expected)
+}
+assert.equal(canonical.officialRows().length,75)
+assert.deepEqual(marksSubjectsForClass({exam:exams[0],className:'Class One',academicSubjects:[]}),[
+ 'English','Mathematics','Urdu','Science','Islamiyat','Quran / Nazra'
+])
+assert.deepEqual(marksSubjectsForClass({exam:{...exams[0],session:'2027-2028'},className:'One',academicSubjects:['Math']}),['Math'])
+assert.deepEqual(marksSubjectsForClass({exam:exams[1],className:'One',academicSubjects:['Assessment English']}),['Assessment English'])
+console.log('PASS 75 official First Term papers, 11 class subject lists, no future-session/assessment invention')
 const students=[{id:1,name:'A',class:'One'}, {id:2,name:'B',class:'Class One'}, {id:3,name:'C',class:'Two'}]
 assert.deepEqual(filterMarksStudents(students,'Class One').map(x=>x.id),[1,2])
 console.log('PASS canonical roster filtered within authorized response')
