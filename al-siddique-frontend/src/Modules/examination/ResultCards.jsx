@@ -1,3 +1,8 @@
+import './premiumResultCardDesigner.css'
+import { summarizeResultRows, formatResultCell, meetsResultPassMark } from './resultPreviewIntegrity'
+import { getResultLogoDiagnostic } from './resultLogoDiagnostics'
+import { summarizePrintBatch } from './resultPrintPlanning'
+import { buildResultStudents } from './resultStudentIdentity'
 import { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import api from '../../services/api'
@@ -11,7 +16,7 @@ import {
  buildResultCardData,
  openResultPrintWindow,
  resultCardPrintCss,
-} from './resultCardTemplates'
+} from './premiumResultCardTemplates'
 
 function gradeLabel(pct, bands = []) {
  const value = Math.max(0, Math.min(100, Number(pct) || 0))
@@ -29,8 +34,8 @@ const TEACHER_REMARK_PRESETS = [
 ]
 
 //  Main Component 
-function ProfessionalParametersModal({ cards, student, exam, studentMarks, school, gradeBands, onClose }) {
- const [options, setOptions] = useState(DEFAULT_RESULT_OPTIONS)
+export function ProfessionalParametersModal({ cards, student, exam, studentMarks, school, gradeBands, onClose }) {
+ const [options, setOptions] = useState(() => ({...DEFAULT_RESULT_OPTIONS, template:'signature-editorial', autoTermColumns:true}))
  const [remarksOpen, setRemarksOpen] = useState(false)
  const previewRef = useRef(null)
  const [scale, setScale] = useState(1)
@@ -39,6 +44,20 @@ function ProfessionalParametersModal({ cards, student, exam, studentMarks, schoo
  .filter(item => item?.student && item?.exam && item?.studentMarks?.length)
  .map(item => buildResultCardData({ ...item, options: { ...options, gradeBands }, school }))
  const data = dataList[0]
+ const batchInfo = summarizePrintBatch(dataList)
+ const printBatch = (pdf = false) => {
+  if (!dataList.length) { window.alert('No result cards are ready for printing.'); return }
+  if (batchInfo.absentLogo) { window.alert(`${batchInfo.absentLogo} result card(s) have no school logo configured. Set the correct logo in SaaS School/Paper Settings before printing.`); return }
+  if (data?.options?.template && ['signature-editorial','swiss-grid','data-atelier','regal-linework','young-scholars','academic-heritage','airframe-geometry','corporate-ledger','examination-dossier'].includes(data.options.template)) {
+   const renderedSchoolLogo = previewRef.current?.querySelector('.result-card-a4 img[data-result-school-logo]')
+   if (!renderedSchoolLogo?.complete || !renderedSchoolLogo.naturalWidth) {
+    window.alert('The school logo configured in SaaS settings has not loaded. Check the school logo URL and retry. Print was stopped to prevent incorrect result cards.')
+    return
+   }
+  }
+  if (batchInfo.pending && !window.confirm(`${batchInfo.pending} subject result(s) are missing or invalid and will display Pending/—. Verify marks before printing ${batchInfo.cards} card(s). Continue?`)) return
+  openResultPrintWindow(dataList, pdf)
+ }
 
  useEffect(() => {
  const el = previewRef.current
@@ -56,8 +75,8 @@ function ProfessionalParametersModal({ cards, student, exam, studentMarks, schoo
  return createPortal(
  <div onMouseDown={(e) => { if (e.target === e.currentTarget) onClose() }}
  style={{ position:'fixed', inset:0, background:'var(--apex-bg-overlay)', backdropFilter:'blur(10px)', zIndex:9999, display:'flex', alignItems:'center', justifyContent:'center', padding:'22px' }}>
- <div onMouseDown={(e) => e.stopPropagation()}
- style={{ width:'min(1320px, 100%)', maxHeight:'calc(100vh - 44px)', background:'#0D2C4A', border:'1px solid rgba(200,153,26,0.25)', borderRadius:18, boxShadow:'0 24px 60px rgba(0,0,0,0.6)', display:'flex', flexDirection:'column', overflow:'hidden' }}>
+ <div className="result-premium-shell" onMouseDown={(e) => e.stopPropagation()}
+ style={{ width:'min(1320px, 100%)', maxHeight:'calc(100vh - 44px)', background:'#F6F8FA', border:'1px solid #DFE7EC', borderRadius:18, boxShadow:'0 24px 60px rgba(0,0,0,0.6)', display:'flex', flexDirection:'column', overflow:'hidden' }}>
  <style>{resultCardPrintCss}</style>
  <div className="result-modal-head no-print" style={{ flexShrink:0 }}>
  <div>
@@ -70,19 +89,21 @@ function ProfessionalParametersModal({ cards, student, exam, studentMarks, schoo
  <div className="result-designer no-print" style={{ flex:1, minHeight:0 }}>
  <aside className="result-options-panel">
  <h3>Templates</h3>
+ {getResultLogoDiagnostic(school?.logo) && <p className="result-logo-diagnostic" role="status">{getResultLogoDiagnostic(school?.logo)}</p>}
  <ResultCardTemplateSelector value={options.template} onChange={(template) => setOptions(prev => ({ ...prev, template }))} />
  <h3>Marks & Print Options</h3>
+ <p className="result-print-readiness" role="status">{batchInfo.cards} card(s) · {batchInfo.scored} recorded subject(s){batchInfo.pending ? ` · ${batchInfo.pending} pending/invalid` : ''}{batchInfo.absentLogo ? ` · ${batchInfo.absentLogo} missing SaaS school logo` : ''}</p>
  <ResultCardPrintToolbar
  options={options}
  setOptions={setOptions}
- onPrint={() => openResultPrintWindow(dataList)}
- onExportPdf={() => openResultPrintWindow(dataList, true)}
+ onPrint={() => printBatch(false)}
+ onExportPdf={() => printBatch(true)}
  />
- <div style={{ marginTop:14, border:'1px solid rgba(148,163,184,0.18)', borderRadius:14, overflow:'hidden', background:'var(--apex-bg-subtle)' }}>
+ <div style={{ marginTop:14, border:'1px solid #DCE6EE', borderRadius:11, overflow:'hidden', background:'#F9FBFC' }}>
  <button
  type="button"
  onClick={() => setRemarksOpen(v => !v)}
- style={{ width:'100%', display:'flex', justifyContent:'space-between', alignItems:'center', gap:10, padding:'11px 13px', border:'none', background:'transparent', color:'#C8991A', cursor:'pointer', fontWeight:900, fontSize:12 }}
+ style={{ width:'100%', display:'flex', justifyContent:'space-between', alignItems:'center', gap:10, padding:'11px 13px', border:'none', background:'transparent', color:'#265D79', cursor:'pointer', fontWeight:900, fontSize:12 }}
  >
  Teacher Remarks
  <span style={{ color:'#8892A4' }}>{remarksOpen ? 'Hide' : 'Edit'}</span>
@@ -94,22 +115,22 @@ function ProfessionalParametersModal({ cards, student, exam, studentMarks, schoo
  <button
  type="button"
  key={text}
- onClick={() => setOptions(prev => ({ ...prev, includeTeacherRemarks:true, teacherRemarks:text }))}
- style={{ textAlign:'left', padding:'8px 10px', borderRadius:10, border:'1px solid rgba(148,163,184,0.14)', background: options.teacherRemarks === text ? 'rgba(200,153,26,0.16)' : 'rgba(15,23,42,0.42)', color:'#C0C8D8', cursor:'pointer', fontSize:11, lineHeight:1.4 }}
+ onClick={() => setOptions(prev => ({ ...prev, includeTeacherRemarks:true, teacherRemarks:text, teacherRemarksEdited:true }))}
+ style={{ textAlign:'left', padding:'8px 10px', borderRadius:10, border:'1px solid #DAE6ED', background: (options.teacherRemarksEdited ? options.teacherRemarks : data?.result?.teacherRemarks) === text ? '#E9F5FA' : '#FFFFFF', color:'#27465C', cursor:'pointer', fontSize:11, lineHeight:1.4 }}
  >
  {text}
  </button>
  ))}
  </div>
  <textarea
- value={options.teacherRemarks || ''}
- onChange={e => setOptions(prev => ({ ...prev, teacherRemarks:e.target.value }))}
+ value={options.teacherRemarksEdited ? (options.teacherRemarks ?? '') : (data?.result?.teacherRemarks ?? options.teacherRemarks ?? '')}
+ onChange={e => setOptions(prev => ({ ...prev, teacherRemarks:e.target.value,teacherRemarksEdited:true }))}
  placeholder="Write custom teacher remarks..."
  rows={4}
- style={{ width:'100%', resize:'vertical', borderRadius:10, border:'1px solid rgba(148,163,184,0.18)', background:'var(--apex-bg-surface-solid)', color:'var(--apex-text-primary)', padding:'10px 12px', outline:'none', fontSize:12, lineHeight:1.5 }}
+ style={{ width:'100%', resize:'vertical', borderRadius:10, border:'1px solid #C9DCE7', background:'#FFFFFF', color:'#23465D', padding:'10px 12px', outline:'none', fontSize:12, lineHeight:1.5 }}
  />
  <div style={{ color:'#8892A4', fontSize:11, lineHeight:1.5 }}>
- Rule-based presets. No AI required, and this text can be fully customized before print.
+ {dataList.length > 1 ? `Editing teacher feedback here applies to all ${dataList.length} printed cards. Leave unchanged to preserve each exam's original remarks.` : 'Original exam feedback is preserved unless you edit it. Presets are optional.'}
  </div>
  </div>
  )}
@@ -150,6 +171,7 @@ export default function ResultCards() {
  const [showParams, setShowParams] = useState(false)
  const [gradeBands, setGradeBands] = useState([])
  const [loadError, setLoadError] = useState('')
+ const latestResultRequest = useRef(0)
  const { paperSettings } = usePaperStore()
 
  useEffect(() => {
@@ -169,21 +191,25 @@ export default function ResultCards() {
  const loadResults = () => {
  if (!selectedExam) return
  const requestExamId = String(selectedExam)
+ const requestId = ++latestResultRequest.current
  setLoading(true)
  setSelectedStudent('')
  setLoadError('')
  api.get(`/api/exams/results/${requestExamId}`)
  .then(r => {
- const list = r.data.data || []
+ if (latestResultRequest.current !== requestId) return
+ if (r.data?.success === false || !Array.isArray(r.data?.data)) throw new Error('Invalid result response')
+ const list = r.data.data
  setResults(list)
  setLoadedExamId(requestExamId)
  const ids = [...new Set(list.map(r => r.student_id))]
  if (ids.length) setSelectedStudent(String(ids[0]))
  })
  .catch(err => {
+ if (latestResultRequest.current !== requestId) return
  setLoadError(err.response?.data?.message || 'Exam results could not be loaded. Existing loaded results were preserved for their original exam.')
  })
- .finally(() => setLoading(false))
+ .finally(() => { if (latestResultRequest.current === requestId) setLoading(false) })
  }
 
  useEffect(() => {
@@ -191,26 +217,8 @@ export default function ResultCards() {
  // eslint-disable-next-line react-hooks/exhaustive-deps
  }, [selectedExam])
 
- const buildStudentsFromRows = (rows = []) => {
-  const map = new Map()
-  rows.forEach(r => {
-  const id = String(r.student_id)
-  if (!map.has(id)) {
-  map.set(id, {
-  id: r.student_id,
-  name: r.name || r.student_name || r.studentName || `Student #${r.student_id}`,
-  gr_number: r.gr_number || r.gr || '',
-  roll_number: r.roll_number || r.rollNo || '',
-  father_name: r.father_name || r.fatherName || '',
-  photo: r.photo || '',
-  subjectsCount: 0,
-  })
-  }
-  map.get(id).subjectsCount += 1
-  })
-  return [...map.values()]
-  }
- const buildPrintCards = (rows = results, examObj = exam, scopeStudents = buildStudentsFromRows(rows)) =>
+
+ const buildPrintCards = (rows = results, examObj = exam, scopeStudents = buildResultStudents(rows)) =>
  scopeStudents.map(s => ({
  student: s,
  exam: examObj,
@@ -218,14 +226,12 @@ export default function ResultCards() {
  })).filter(item => item.studentMarks.length > 0)
 
  const activeResults = String(loadedExamId) === String(selectedExam) ? results : []
- const students = buildStudentsFromRows(activeResults)
+ const students = buildResultStudents(activeResults)
  const studentMarks = activeResults.filter(r => String(r.student_id) === selectedStudent)
  const student = students.find(s => String(s.id) === selectedStudent)
  const exam = exams.find(e => String(e.id) === selectedExam)
  const classPrintCards = buildPrintCards(activeResults, exam, students)
- const totalObtained = studentMarks.reduce((s, r) => s + Number(r.marks_obtained || 0), 0)
- const totalPossible = studentMarks.reduce((s, r) => s + Number(r.total_marks || exam?.total_marks || 100), 0)
- const pct = totalPossible > 0 ? Math.round((totalObtained / totalPossible) * 100) : 0
+ const { obtained: totalObtained, possible: totalPossible, percentage: pct, pending: pendingSubjects } = summarizeResultRows(studentMarks, exam)
  const selectedStudentLabel = student
  ? `${student.name}${student.gr_number ? ` - ${student.gr_number}` : student.roll_number ? ` - Roll ${student.roll_number}` : ''}`
  : ''
@@ -274,7 +280,7 @@ export default function ResultCards() {
  })
  const flat = exams.flatMap(item => {
  const examRows = byExam.get(String(item.id)) || []
- return buildPrintCards(examRows, item, buildStudentsFromRows(examRows))
+ return buildPrintCards(examRows, item, buildResultStudents(examRows))
  })
  if (!flat.length) return alert('No marks found in any class/exam')
  setPrintCards(flat)
@@ -308,6 +314,8 @@ export default function ResultCards() {
  urdu: paperSettings.schoolUrdu,
  address: paperSettings.address,
  phone: paperSettings.phone,
+ email: paperSettings.email,
+ academicYear: paperSettings.examYear,
  logo: paperSettings.logo,
  principalSignature: paperSettings.principalSignature,
  showUrduHeader: paperSettings.showUrduHeader !== false,
@@ -337,7 +345,7 @@ export default function ResultCards() {
  <div className="super-module-card" style={{ ...card, display:'flex', flexDirection:'column', gap:12 }}>
  <div style={{ color:C.gold, fontSize:13, fontWeight:900 }}>1. Exam / Term</div>
  <div style={{ color:C.muted, fontSize:12 }}>Select the exam whose saved marks should appear on result cards.</div>
- <select style={select} value={selectedExam} onChange={e=>{ setSelectedExam(e.target.value); setSelectedStudent(''); setLoadError('') }}>
+ <select style={select} value={selectedExam} onChange={e=>{ latestResultRequest.current += 1; setSelectedExam(e.target.value); setSelectedStudent(''); setLoadError('') }}>
  <option value="">Select exam</option>
  {exams.map(e=><option key={e.id} value={e.id}>{e.name} - {e.class}</option>)}
  </select>
@@ -397,11 +405,11 @@ export default function ResultCards() {
  <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:10 }}>
  <div style={{ padding:12, borderRadius:14, background:'rgba(48,209,88,0.08)' }}>
  <div style={{ color:C.muted, fontSize:10, fontWeight:800 }}>OBTAINED</div>
- <div style={{ color:C.green, fontSize:20, fontWeight:900 }}>{outputMode === 'single' ? (totalObtained || '-') : outputMode === 'class' ? classPrintCards.length : 'All'}</div>
+ <div style={{ color:C.green, fontSize:20, fontWeight:900 }}>{outputMode === 'single' ? (totalPossible ? totalObtained : '—') : outputMode === 'class' ? classPrintCards.length : 'All'}</div>
  </div>
  <div style={{ padding:12, borderRadius:14, background:'rgba(200,153,26,0.08)' }}>
  <div style={{ color:C.muted, fontSize:10, fontWeight:800 }}>PERCENT</div>
- <div style={{ color:C.gold, fontSize:20, fontWeight:900 }}>{outputMode === 'single' ? (totalPossible ? `${pct}%` : '-') : outputMode === 'class' ? 'Cards' : 'Classes'}</div>
+ <div style={{ color:C.gold, fontSize:20, fontWeight:900 }}>{outputMode === 'single' ? (pct === null ? 'Pending' : `${pct}%`) : outputMode === 'class' ? 'Cards' : 'Classes'}</div>
  </div>
  </div>
  <button style={{ ...btnPrimary, marginTop:'auto', justifyContent:'center', opacity: canPrint ? 1 : 0.55, cursor: canPrint ? 'pointer' : 'not-allowed' }} onClick={openDesigner} disabled={!canPrint || loading}>
@@ -413,7 +421,7 @@ export default function ResultCards() {
  <div className="super-module-card" style={{ display:'none' }}>
  <div style={{ flex:'1 1 240px' }}>
  <div style={{ color:C.muted, fontSize:12, fontWeight:700, marginBottom:8 }}>Select Exam</div>
- <select style={select} value={selectedExam} onChange={e=>{ setSelectedExam(e.target.value); setSelectedStudent(''); setLoadError('') }}>
+ <select style={select} value={selectedExam} onChange={e=>{ latestResultRequest.current += 1; setSelectedExam(e.target.value); setSelectedStudent(''); setLoadError('') }}>
  {exams.map(e=><option key={e.id} value={e.id}>{e.name} ({e.class})</option>)}
  </select>
  </div>
@@ -451,17 +459,17 @@ export default function ResultCards() {
  {studentMarks.map(row=>(
  <div key={row.id || row.subject} style={{ display:'flex', justifyContent:'space-between', alignItems:'center', padding:'11px 14px', borderRadius:12, background:'rgba(255,255,255,0.04)' }}>
  <span style={{ color:C.silver }}>{row.subject}</span>
- <span style={{ color:Number.isFinite(Number(exam?.pass_marks)) && Number(row.marks_obtained) >= Number(exam.pass_marks)?C.green:C.red, fontWeight:700 }}>
- {row.marks_obtained} / {row.total_marks || exam?.total_marks || 100}
+ <span style={{ color:meetsResultPassMark(row.marks_obtained, exam?.pass_marks) === null ? C.muted : meetsResultPassMark(row.marks_obtained, exam?.pass_marks) ? C.green : C.red, fontWeight:700 }}>
+ {formatResultCell(row.marks_obtained)} / {formatResultCell(row.total_marks ?? exam?.total_marks)}
  </span>
  </div>
  ))}
  </div>
  <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', padding:16, borderRadius:20, background:'rgba(255,255,255,0.08)' }}>
- <div><div style={{ color:C.gold, fontWeight:800 }}>Total</div><div style={{ color:C.silver }}>{totalObtained} / {totalPossible}</div></div>
+ <div><div style={{ color:C.gold, fontWeight:800 }}>Total</div><div style={{ color:C.silver }}>{totalPossible ? `${totalObtained} / ${totalPossible}` : 'Pending marks'}</div></div>
  <div style={{ textAlign:'right' }}>
- <div style={{ color:Number.isFinite(Number(exam?.pass_marks)) && studentMarks.every(row => Number(row.marks_obtained) >= Number(exam.pass_marks))?C.green:C.red, fontSize:32, fontWeight:800 }}>{pct}%</div>
- <div style={{ color:C.muted }}>Grade: {gradeLabel(pct, gradeBands)}</div>
+ <div style={{ color:pct === null || pendingSubjects || studentMarks.some(row => meetsResultPassMark(row.marks_obtained, exam?.pass_marks) === null) ? C.muted : studentMarks.every(row => meetsResultPassMark(row.marks_obtained, exam?.pass_marks)) ? C.green : C.red, fontSize:32, fontWeight:800 }}>{pct === null ? 'Pending' : `${pct}%`}</div>
+ <div style={{ color:C.muted }}>Grade: {pct === null ? '—' : gradeLabel(pct, gradeBands)}{pendingSubjects ? ` · ${pendingSubjects} subject(s) pending` : ''}</div>
  </div>
  </div>
  </div>
