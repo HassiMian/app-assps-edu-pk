@@ -332,6 +332,28 @@ async function connectForContext() {
         throw error
       }
     }
+    // A FORCE RLS flag does not enable row security. Refuse signed-mode
+    // connections unless the complete expected clone/prod protected catalog
+    // is both enabled and covered by the restrictive signed policy.
+    if (signedTenantGate) {
+      const gate = await client.query(`
+        SELECT count(*)::int AS forced,
+               count(*) FILTER (WHERE c.relrowsecurity)::int AS enabled,
+               count(*) FILTER (WHERE p.policyname IS NOT NULL)::int AS signed
+        FROM pg_class c
+        JOIN pg_namespace n ON n.oid=c.relnamespace
+        LEFT JOIN pg_policies p ON p.schemaname=n.nspname
+          AND p.tablename=c.relname AND p.policyname='core_signed_tenant_guard'
+          AND p.permissive='RESTRICTIVE' AND 'apex_app_runtime'=ANY(p.roles)
+        WHERE c.relkind='r' AND n.nspname='public' AND c.relforcerowsecurity
+      `)
+      const state = gate.rows[0]
+      if (!state || state.forced !== 77 || state.enabled !== 77 || state.signed !== 77) {
+        const error = new Error('Signed tenant RLS requires 77 enabled, forced, restrictive-policy tables')
+        error.code = 'DB_SIGNED_RLS_CATALOG_INCOMPLETE'
+        throw error
+      }
+    }
     const prepared = await prepareRuntimeClient(client)
     if (process.env.DB_ENFORCE_LEAST_PRIVILEGE_LOGIN === 'true') {
       const active = await prepared.query(
