@@ -9,7 +9,7 @@ RESTORED=pathlib.Path('/var/tmp/assps-marks-rollback-rehearsal-20261010')
 DEPLOYED_F='24cbcae33b96f1bb058ad9b005f0eb8bfe5eac92'
 DEPLOYED_B='16ab8f346ba27aa6b2e29a8f03c68db32a326cb9'
 CANDIDATE_F='2ec5ae597e9f50772cf443b0392b442b7fa037db'
-CANDIDATE_B='322c8262dbad947df8b54b0145d431b65983aad8'
+CANDIDATE_B='0923ddcd1f5a923123d45396bbeab16f372be7b1'
 def call(label,cmd,cwd=None):
     p=subprocess.run(cmd,cwd=cwd,capture_output=True,text=True,timeout=45,
         env={**os.environ,'ASSPS_TEST_BACKEND_SOURCE':str(BACK/'al-siddique-backend/src/routes/examRoutes.js')})
@@ -31,7 +31,7 @@ def check_live_meta(path,expected,label):
     print('PREFLIGHT_PASS '+label+'_RELEASE_METADATA',flush=True)
 def main():
     phase=sys.argv[1] if len(sys.argv)>1 else 'all'
-    if phase not in ('static','functional','premium','all'):
+    if phase not in ('static','functional','premium','signed','all'):
         raise RuntimeError('UNKNOWN_CHECK_PHASE')
     if phase in ('static','all'):
         check_live_meta(pathlib.Path('/var/www/apex-os/release-meta.json'),DEPLOYED_F,'FRONTEND')
@@ -39,6 +39,8 @@ def main():
         check_branch(FRONT,'release/core-marks-nine-results-livebase-20261010',CANDIDATE_F,DEPLOYED_F)
         check_branch(BACK,'release/marks-firstterm-backend-livebase-20261010',CANDIDATE_B,DEPLOYED_B)
         call('ARTIFACT_BACKUPS_SHA256',['sha256sum','-c',str(ARCH/'sha256sums.txt')])
+        call('REAL_PRODUCTION_DATABASE_CUSTOM_BACKUP_SHA256',['sha256sum','-c',str(ARCH/'production-apexos-pre-signed-rls-20261010.dump.sha256')])
+        call('PROD_DATABASE_BACKUP_RESTORE_INVENTORY',['pg_restore','--list',str(ARCH/'production-apexos-pre-signed-rls-20261010.dump')])
         call('FRONTEND_RESTORE_REHEARSAL_BYTES',['diff','-qr','/var/www/apex-os',str(RESTORED/'apex-os')])
         # Argus monitoring writes this single JSON state file during normal runtime.
         # Original bytes are backed up and SHA verified. Permit ONLY this exact
@@ -69,6 +71,9 @@ def main():
             raise RuntimeError('SIGNED_MARKS_SQL_FAIL '+marks.stderr[-250:])
         print('PREFLIGHT_PASS SIGNED_MARKS_CLONE_READ_UPDATE_ISOLATION',flush=True)
         call('REAL_SIGNED_JWT_MARKS_HTTP_CLONE',['python3',str(OPS/'ops/security/run-isolated-signed-actor-acceptance-20261010.py'),'marks'])
+        call('OFFICIAL_PHASE6_SYNTHETIC_SIGNED_FIXTURES',['python3',str(OPS/'ops/security/verify-core-phase6-signed-clone-fixtures-20261010.py')])
+        call('ASSESSMENT_RESULTS_SIGNED_HTTP_REAL_PG',['python3',str(OPS/'ops/security/run-isolated-signed-actor-acceptance-20261010.py'),'assessment'])
+        call('PAPER_LESSON_DIARY_SIGNED_HTTP_REAL_PG',['python3',str(OPS/'ops/security/run-isolated-signed-actor-acceptance-20261010.py'),'paper'])
         # Actual production DB_USER must be an explicit NOBYPASS login and
         # signed tenant flags enabled. Source/clone PASS does not waive this.
         call('REAL_PRODUCTION_RUNTIME_NONBYPASS_SIGNED_GATE',['python3',str(OPS/'ops/release/verify-prod-signed-runtime-identity-20261010.py')])
@@ -76,9 +81,11 @@ def main():
         print('STATIC_PREFLIGHT_PASS; RELEASE_CERTIFICATION_NOT_GRANTED',flush=True)
         return 0
     if phase in ('functional','all'):
-        call('BACKEND_14_FOCUSED_CONTRACT_TESTS',['node','--test',
+        call('BACKEND_24_CORE_SECURITY_AND_MARKS_TESTS',['node','--test',
           'tests/database-tenant-context.test.js','tests/exam-marks-teacher-scope.test.js',
-          'tests/exam-marks-teacher-http-isolated.test.js','tests/exam-workflow-v1.test.js'],
+          'tests/exam-marks-teacher-http-isolated.test.js','tests/exam-workflow-v1.test.js',
+          'tests/core-signed-envelope-contract.test.js','tests/saas-core-phase18-db-scope-strict.test.js',
+          'tests/signed-runtime-catalog-contract.test.js'],
           BACK/'al-siddique-backend/src')
         f=FRONT/'al-siddique-frontend'
         call('FRONTEND_OFFICIAL_FIRST_TERM_75_PAPERS',['node','scripts/test-marks-entry-first-term-recovery.mjs'],f)
@@ -96,6 +103,14 @@ def main():
             'src/Modules/examination/resultStudentIdentity.js'],f)
         call('FIRSTDAY_NINE_RESULT_CARD_INTEGRATION',['node','scripts/test-marks-to-nine-cards-firstday.mjs'],f)
         call('RESULT_STUDENT_IDENTITY_COMPANION_BACKEND',['node','scripts/test-result-student-identity.mjs'],f)
+    if phase=='signed':
+        call('SIGNED_SCHEMA_SHADOW_MIGRATION_CATALOG_77_POLICIES',['python3',str(OPS/'ops/security/verify-signed-migration-rehearsal-catalog-20261010.py')])
+        call('OFFICIAL_SIGNED_SYNTHETIC_FIXTURE_PARITY',['python3',str(OPS/'ops/security/verify-core-phase6-signed-clone-fixtures-20261010.py')])
+        runner=str(OPS/'ops/security/run-isolated-signed-actor-acceptance-20261010.py')
+        for suite in ('db-next','marks-next','assessment-next','paper-next'):
+            call('SIGNED_PRODUCTION_BASE_BACKEND_'+suite.upper(),['python3',runner,suite])
+        print('SIGNED_BACKEND_CLONE_GATE_PASS; ACTUAL_PRODUCTION_ROLE_STILL_NOT_CERTIFIED',flush=True)
+        return 0
     if phase=='premium':
         f=FRONT/'al-siddique-frontend'
         call('NINE_CARD_RENDER_AND_REFERENCE',['node','scripts/test-premium-result-cards.mjs'],f)
@@ -106,8 +121,8 @@ def main():
         print('PREMIUM_SOURCE_GATE_PASS; PRODUCTION_ROLE_RELEASE_NOT_CERTIFIED',flush=True)
         return 0
     print('PREFLIGHT_HOLD ACTUAL_SCHOOL_AUTHENTICATED_PROD_TEACHER_JWT_RLS_NOT_CERTIFIED',flush=True)
-    print('PREFLIGHT_HOLD ASSESSMENT_RESULTS_CLONE_HTTP_FIXTURES_MISSING',flush=True)
-    print('PREFLIGHT_HOLD PAPER_STUDIO_SIGNED_HTTP_TIMEOUT_NOT_CLOSED',flush=True)
+    print('PREFLIGHT_HOLD INDEPENDENT_PAPER_STUDIO_PRODUCTION_OWNER_ACCEPTANCE_NOT_CERTIFIED',flush=True)
+    print('PREFLIGHT_HOLD ACTUAL_PRODUCTION_SIGNED_RUNTIME_POLICY_AND_CREDENTIALS_NOT_READY',flush=True)
     print('PREFLIGHT_HOLD LIVE_MARKS_ENTRY_AFTER_DEPLOYMENT_NOT_YET_TESTABLE',flush=True)
     print('NO_DEPLOYMENT_EXECUTED; RELEASE_CERTIFIED=FALSE',flush=True)
     return 2
