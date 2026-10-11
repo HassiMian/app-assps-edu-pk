@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ASSPS Promote Demote Browser Acceptance</title>
+  <style>
+    :root {
+      --apex-shell-gradient: #0f172a;
+      --apex-bg-surface: #1e293b;
+      --apex-bg-surface-solid: #1e293b;
+      --apex-bg-subtle: rgba(255, 255, 255, 0.04);
+      --apex-action-primary: #3b82f6;
+      --apex-action-highlight: #f59e0b;
+      --apex-action-success: #10b981;
+      --apex-action-danger: #ef4444;
+      --apex-text-primary: #f8fafc;
+      --apex-text-secondary: #cbd5e1;
+      --apex-text-tertiary: #94a3b8;
+      --apex-border-default: #334155;
+      --apex-radius-lg: 16px;
+      --apex-radius-sm: 8px;
+      --apex-shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--apex-shell-gradient);
+      color: var(--apex-text-primary);
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module">
+    import React from 'react'
+    import { createRoot } from 'react-dom/client'
+    import PromoteDemote from '../../src/Modules/students/PromoteDemote.jsx'
+    window.__promoteRoot = createRoot(document.getElementById('root'))
+    window.__promoteRoot.render(React.createElement(PromoteDemote))
+  </script>
+</body>
+</html>

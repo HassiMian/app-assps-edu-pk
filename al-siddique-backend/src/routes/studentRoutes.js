@@ -1,4 +1,4 @@
-﻿const crypto = require('crypto')
+const crypto = require('crypto')
 const express = require('express')
 const router  = express.Router()
 const { pool, query, applyTenantContext } = require('../config/database')
@@ -60,6 +60,8 @@ const CLASS_ALIASES = {
   seven: 'Seven',
   eight: 'Eight',
   'pre nine': 'Pre Nine',
+  nine: 'Nine',
+  ten: 'Ten',
   'hifaz class': 'Hifaz Class',
 }
 
@@ -788,16 +790,24 @@ router.post('/bulk-class-assignment', protect, adminOnly, async (req, res) => {
   }
 
   const schoolId = currentSchoolId(req)
+  if (!schoolId) {
+    return res.status(403).json({ success: false, message: 'School context is required.' })
+  }
+
+  const sourceClass = req.body?.source_class ? normalizeClassName(req.body.source_class) : null
+  const reason = String(req.body?.reason || 'Principal bulk class assignment').trim().slice(0, 255)
+  const movedBy = req.user?.username || req.user?.email || (req.user?.id ? `user_${req.user.id}` : 'ADMIN')
+
   const normalized = []
   const seen = new Set()
   try {
     for (const [index, item] of assignments.entries()) {
       const studentId = Number(item?.student_id || item?.id)
       if (!Number.isInteger(studentId) || studentId <= 0) {
-        return res.status(422).json({ success:false, message:`Row ${index + 1}: valid student id is required.` })
+        return res.status(422).json({ success: false, message: `Row ${index + 1}: valid student id is required.` })
       }
       if (seen.has(studentId)) {
-        return res.status(422).json({ success:false, message:`Row ${index + 1}: duplicate student id.` })
+        return res.status(422).json({ success: false, message: `Row ${index + 1}: duplicate student id.` })
       }
       seen.add(studentId)
       const assignment = await resolveAcademicAssignment({
@@ -805,11 +815,11 @@ router.post('/bulk-class-assignment', protect, adminOnly, async (req, res) => {
         className: normalizeClassName(item?.class),
         section: String(item?.section || '').trim(),
       })
-      normalized.push({ studentId, className:assignment.className, section:assignment.section })
+      normalized.push({ studentId, className: assignment.className, section: assignment.section })
     }
   } catch (err) {
-    if (err.status === 422) return res.status(422).json({ success:false, code:err.code, message:err.message, details:err.details })
-    return res.status(500).json({ success:false, message:'Academic assignment validation failed.' })
+    if (err.status === 422) return res.status(422).json({ success: false, code: err.code, message: err.message, details: err.details })
+    return res.status(500).json({ success: false, message: 'Academic assignment validation failed.' })
   }
 
   const client = await pool.connect()
@@ -817,14 +827,63 @@ router.post('/bulk-class-assignment', protect, adminOnly, async (req, res) => {
     await client.query('BEGIN')
     await applyTenantContext(client)
     const ids = normalized.map(item => item.studentId)
-    const existing = await client.query('SELECT id FROM students WHERE school_id = $1 AND id = ANY($2::int[]) FOR UPDATE', [schoolId, ids])
+    const existing = await client.query(
+      'SELECT id, name, class, section FROM students WHERE school_id = $1 AND id = ANY($2::int[]) FOR UPDATE',
+      [schoolId, ids]
+    )
     if (existing.rowCount !== normalized.length) {
       await client.query('ROLLBACK')
-      return res.status(404).json({ success:false, message:'One or more selected students were not found in this school.' })
+      return res.status(404).json({ success: false, message: 'One or more selected students were not found in this school.' })
     }
+
+    const existingMap = new Map(existing.rows.map(row => [row.id, row]))
+
+    // Concurrency/stale roster check: if source_class specified, verify every student is currently in source_class
+    if (sourceClass) {
+      for (const item of normalized) {
+        const current = existingMap.get(item.studentId)
+        if (current && normalizeClassName(current.class) !== sourceClass) {
+          await client.query('ROLLBACK')
+          return res.status(409).json({
+            success: false,
+            code: 'STALE_ROSTER',
+            message: `Stale roster: student ${current.name} is currently in class "${current.class}", not "${sourceClass}". Please refresh before applying.`,
+          })
+        }
+      }
+    }
+
+    // Ensure student_class_movement_audit exists
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS public.student_class_movement_audit (
+        id SERIAL PRIMARY KEY,
+        school_id INT NOT NULL,
+        student_id INT NOT NULL,
+        source_class VARCHAR(50) NOT NULL,
+        source_section VARCHAR(50) NOT NULL,
+        target_class VARCHAR(50) NOT NULL,
+        target_section VARCHAR(50) NOT NULL,
+        reason VARCHAR(255) NOT NULL,
+        moved_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+        moved_by VARCHAR(100) NOT NULL,
+        reversal_sql TEXT NOT NULL
+      );
+    `)
 
     const updated = []
     for (const item of normalized) {
+      const prev = existingMap.get(item.studentId)
+      const prevClass = prev?.class || ''
+      const prevSection = prev?.section || ''
+      const reversalSql = `UPDATE students SET class = '${String(prevClass).replace(/'/g, "''")}', section = '${String(prevSection).replace(/'/g, "''")}', updated_at = NOW() WHERE id = ${item.studentId} AND school_id = ${schoolId};`
+
+      // Log movement to audit table
+      await client.query(`
+        INSERT INTO public.student_class_movement_audit 
+          (school_id, student_id, source_class, source_section, target_class, target_section, reason, moved_by, reversal_sql)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+      `, [schoolId, item.studentId, prevClass, prevSection, item.className, item.section, reason, movedBy, reversalSql])
+
       const result = await client.query(`
         UPDATE students
         SET class = $1, section = $2, updated_at = NOW()
@@ -833,12 +892,18 @@ router.post('/bulk-class-assignment', protect, adminOnly, async (req, res) => {
       `, [item.className, item.section, item.studentId, schoolId])
       updated.push(result.rows[0])
     }
+
     await client.query('COMMIT')
-    res.json({ success:true, count:updated.length, data:updated, message:`${updated.length} student assignments updated.` })
+    res.json({
+      success: true,
+      count: updated.length,
+      data: updated,
+      message: `${updated.length} student assignment${updated.length === 1 ? '' : 's'} updated successfully.`,
+    })
   } catch (err) {
     await client.query('ROLLBACK').catch(() => {})
     console.error('Bulk student class assignment error:', err.message)
-    res.status(500).json({ success:false, message:'Student class assignments could not be updated.' })
+    res.status(500).json({ success: false, message: 'Student class assignments could not be updated.' })
   } finally {
     client.release()
   }

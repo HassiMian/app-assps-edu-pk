@@ -26,8 +26,9 @@ const CLASS_LEVEL_ALIASES = {
  starter: ['starter', 'playgroup', 'play-group', 'play group', 'pg'],
  mover: ['mover', 'nursery'],
  flyer: ['flyer', 'prep', 'kg'],
- '9': ['9', 'nine', 'class 9', 'pre-nine', 'pre nine', 'prenine', '10', 'ten', 'class 10'],
- 'pre-nine': ['9', 'nine', 'class 9', 'pre-nine', 'pre nine', 'prenine', '10', 'ten', 'class 10'],
+ 'pre-nine': ['pre-nine', 'pre nine', 'prenine'],
+ '9': ['9', 'nine', 'class 9'],
+ '10': ['10', 'ten', 'class 10'],
  hifaz: ['hifaz', 'hifaz class', 'hifz'],
 }
 
@@ -43,12 +44,13 @@ const CLASS_LEVEL_LABELS = {
  '6': 'Six',
  '7': 'Seven',
  '8': 'Eight',
+ 'pre-nine': 'Pre Nine',
  '9': 'Nine',
- 'pre-nine': 'Nine',
+ '10': 'Ten',
  hifaz: 'Hifaz Class',
 }
 
-export const CANONICAL_CLASS_ORDER = ['starter','mover','flyer','1','2','3','4','5','6','7','8','9','pre-nine','hifaz']
+export const CANONICAL_CLASS_ORDER = ['starter','mover','flyer','1','2','3','4','5','6','7','8','pre-nine','9','10','hifaz']
 
 function cleanClassLevel(value) {
  return String(value || '').trim().toLowerCase()
@@ -57,7 +59,7 @@ function cleanClassLevel(value) {
 export function normalizeClassLevel(value) {
  const clean = cleanClassLevel(value)
  if (!clean) return ''
- const classNumber = clean.match(/^class\s+([1-8])$/)
+ const classNumber = clean.match(/^class\s+([1-9]|10)$/)
  if (classNumber) return classNumber[1]
  const byLabel = Object.entries(CLASS_LEVEL_LABELS).find(([, label]) => cleanClassLevel(label) === clean)
  if (byLabel) return byLabel[0]
