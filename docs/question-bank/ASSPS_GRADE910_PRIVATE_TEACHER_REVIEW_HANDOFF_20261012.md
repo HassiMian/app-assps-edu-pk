@@ -60,3 +60,17 @@ node ops/qbank/build-grade910-blind-faculty-packets.cjs \
 ## Academic release verdict
 
 **Prepared for real teachers' independent review, not academically completed**. This work closes the missing practical secure full-bank review-material delivery path. Actual authorized textbook adoption, physical page/exercise proof where appropriate, independently qualified teacher answer correctness/marks/equivalence signatures and ASSPS institutional review are still **unverified**. **Approved=0, verified published=0, verified teacher-selectable=0**. Paper Studio and SaaS Core publication/deployment remain HOLD. Code/test passing or packet delivery cannot manufacture actual school authority signatures.
+
+## Final whole-mission regression evidence on the exact pushed source
+
+After committing the Academic-only changes at `8067abec54eba670886602a4644e9c60ebc8b03c` and verifying that GitHub origin equals the clean local SHA, the **actual complete one-command, non-scheduled mission** was executed to process exit **0**, with source identity verification and the private reviewer-readiness check included in the same active run.
+
+- **16 of 16 full execution gates PASS**, no aborted stages, no skips and no test failures.
+- 5 real on-source preliminary stages: 2,581 original SHA-frozen source and publication-denial attestation, original 2,581-ID faculty source worklist, entire original MCQ/long/numerical answer/editorial audit, unified all-original teacher review priority docket, new private-blind teacher handoff readiness check. All exit 0.
+- 111 original staging/curriculum Paper Studio test files: **168 + 175 + 167 = 510/510 PASS**, every group exit 0.
+- 47 original and newly created Grade IX–X Academic test files: **51 + 48 + 67 + 59 + 70 + 26 + 38 + 46 = 405/405 PASS**, every group exit 0. This includes restricted actual 2,580-ID archive-export and review-form integrity, signed source/authority, Urdu, option, number, source and publication-hold checks.
+- **Combined unique full mission test count: 915/915 PASS; 0 failed; 0 skipped.** Every test batch has an explicit complete TAP report and captured process exit 0.
+- Exact machine audit is preserved in the isolated VPS at `/tmp/grade910-private-teacher-fullmission-20261012/mission-audit.json`; individual stage logs reside in the same directory. The audit says `qualityGatesPassed=true`, `deployment=false`, `academicallyApproved=0` and `verifiedPublished=0`.
+- The real privately generated `/root/secure-archive/grade910-academic-review-packets/assps-full-faculty-stage-20261012` was independently revalidated against every original source/question SHA and the private `INDEX.json` SHA. **2,580 distinct packets prepared for humans, 167 batches, 1 faculty-held original excluded, 0 teacher reviews or school approvals claimed**.
+
+This confirms completion of a concrete and reproducible Academic-owned engineering/review-material mission. It does **not** complete independent qualified faculty source/answer approval or ASSPS-adopted textbook/session certification; no database publication or SaaS Core deployment is authorized by this outcome.
