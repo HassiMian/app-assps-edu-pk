@@ -21,6 +21,13 @@ class Contract(unittest.TestCase):
   self.assertIn('location ~ ^/api/exams/results/[1-9][0-9]*$',LOC)
   self.assertNotIn('location /api/',LOC)
   self.assertEqual(MAPS.count('127.0.0.1:5091'),4)
+ def test_host_specific_legacy_upstream_is_preserved(self):
+  # Inspected live on 11 October: API host uses 3000, app host uses 5000.
+  self.assertIn('map $host $assps_marks_legacy_upstream',MAPS)
+  self.assertIn('api.assps.edu.pk http://127.0.0.1:3000;',MAPS)
+  self.assertIn('app.assps.edu.pk http://127.0.0.1:5000;',MAPS)
+  self.assertEqual(MAPS.count('default $assps_marks_legacy_upstream;'),3)
+  self.assertNotIn('default http://127.0.0.1:5000;',MAPS)
  def test_marks_saves_loads_and_grades(self):
   for path,method in [('/api/exams','GET'),('/api/exams/results','GET'),('/api/exams/results','POST'),('/api/exams/results/9','GET'),('/api/exams/grade-settings','GET')]:
    self.assertEqual(target(path,method),'green')
