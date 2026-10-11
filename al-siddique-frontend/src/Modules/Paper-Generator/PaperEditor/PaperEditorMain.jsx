@@ -1,6 +1,6 @@
 // PaperEditorMain.jsx — Central Word-like Editor for ASSPS Paper Generator
 // PaperEditorMain.jsx — Central Word-like Editor for ASSPS Paper Generator
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { useEditor } from '@tiptap/react'
 import { getPaperEditorExtensions, createTiptapDocFromText } from './extensions/PaperEditorExtensions.js'
 import PaperRibbonToolbar from './toolbar/PaperRibbonToolbar.jsx'
@@ -39,7 +39,8 @@ export default function PaperEditorMain({
   // Document history stack for multi-level Undo / Redo
   const historyStackRef = useRef([clonePaperDocument(paper)])
   const historyIndexRef = useRef(0)
-  const [historyRev, setHistoryRev] = useState(0)
+  // Toolbar availability is reactive UI state; refs remain event-only history storage.
+  const [historyAvailability, setHistoryAvailability] = useState({ canUndo: false, canRedo: false })
 
   const printContainerRef = useRef(null)
 
@@ -51,33 +52,36 @@ export default function PaperEditorMain({
   })
 
   const effectiveEditor = activeEditor || editor
-  const canUndo = historyIndexRef.current > 0
-  const canRedo = historyIndexRef.current < historyStackRef.current.length - 1
+  const updateHistoryAvailability = useCallback(() => {
+    const index = historyIndexRef.current
+    const lastIndex = historyStackRef.current.length - 1
+    setHistoryAvailability({ canUndo: index > 0, canRedo: index < lastIndex })
+  }, [])
 
   const recordHistory = (newPaper) => {
     historyStackRef.current = historyStackRef.current.slice(0, historyIndexRef.current + 1)
     historyStackRef.current.push(clonePaperDocument(newPaper))
     historyIndexRef.current = historyStackRef.current.length - 1
-    setHistoryRev(r => r + 1)
+    updateHistoryAvailability()
   }
 
-  const handleUndo = () => {
+  const handleUndo = useCallback(() => {
     if (historyIndexRef.current > 0) {
       historyIndexRef.current -= 1
       const prevPaper = clonePaperDocument(historyStackRef.current[historyIndexRef.current])
       setPaper(prevPaper)
-      setHistoryRev(r => r + 1)
+      updateHistoryAvailability()
     }
-  }
+  }, [updateHistoryAvailability])
 
-  const handleRedo = () => {
+  const handleRedo = useCallback(() => {
     if (historyIndexRef.current < historyStackRef.current.length - 1) {
       historyIndexRef.current += 1
       const nextPaper = clonePaperDocument(historyStackRef.current[historyIndexRef.current])
       setPaper(nextPaper)
-      setHistoryRev(r => r + 1)
+      updateHistoryAvailability()
     }
-  }
+  }, [updateHistoryAvailability])
 
   // Keyboard shortcut listener for Ctrl+Z / Ctrl+Y with capture phase
   useEffect(() => {
@@ -94,7 +98,7 @@ export default function PaperEditorMain({
     }
     window.addEventListener('keydown', handleKeyDown, true)
     return () => window.removeEventListener('keydown', handleKeyDown, true)
-  }, [paper])
+  }, [handleUndo, handleRedo])
 
   // Handle document updates
   const handleUpdatePaper = (changes) => {
@@ -198,8 +202,8 @@ export default function PaperEditorMain({
         onPrint={handlePrint}
         onUndo={handleUndo}
         onRedo={handleRedo}
-        canUndo={canUndo}
-        canRedo={canRedo}
+        canUndo={historyAvailability.canUndo}
+        canRedo={historyAvailability.canRedo}
         saving={isSaving}
       />
 

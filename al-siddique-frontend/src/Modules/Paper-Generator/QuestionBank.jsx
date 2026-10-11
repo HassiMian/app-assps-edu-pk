@@ -65,13 +65,7 @@ const TYPE_CONFIG = {
 const getTypeCfg = type => TYPE_CONFIG[type] || TYPE_CONFIG.short
 
 // Type group colours for the type selector in QuestionModal
-const TYPE_GROUP_COLOR = {
- objective: '#0A84FF',
- subjective: '#30D158',
- science: '#64D2FF',
- urdu: '#BF5AF2',
- english: '#FF9F0A',
-}
+
 
 const PRIORITY_CFG = {
  exercise: { label: 'Exercise', color: C.green, icon: <BookOpen size={13} /> },
@@ -812,18 +806,7 @@ PRI: exercise`
 
 //  AI Textbook Import Modal (star feature) 
 
-const AI_MESSAGES = [
- 'Analyzing document structure...',
- 'Reading all chapters and sections...',
- 'Identifying MCQ questions...',
- 'Extracting short answer questions...',
- 'Finding fill-in-the-blank items...',
- 'Detecting True/False statements...',
- 'Processing match-the-column exercises...',
- 'Classifying exercise vs past paper questions...',
- 'Adding chapter and priority tags...',
- 'Organizing final question bank...',
-]
+
 
 function AITextbookModal({ subjectId, subjectClassLevel, subjects, questionTypes, onImported, onClose }) {
  const { paperSettings, updatePaperSettings } = usePaperStore()
@@ -982,7 +965,7 @@ function AITextbookModal({ subjectId, subjectClassLevel, subjects, questionTypes
        medium,
      }
      
-     const { result, model } = await generateWithGemini(config, paperSettings.geminiModel || DEFAULT_MODEL)
+     const { result } = await generateWithGemini(config, paperSettings.geminiModel || DEFAULT_MODEL)
      
      setProgress({ msg: 'Formatting generated questions...', pct: 85 })
      
@@ -1086,17 +1069,6 @@ function AITextbookModal({ subjectId, subjectClassLevel, subjects, questionTypes
  })
  }
 
- function selectByType(type) {
- if (type === 'all') {
- setSelected(new Set(filtered.map(q => q.id)))
- } else {
- setSelected(prev => {
- const s = new Set(prev)
- filtered.filter(q => q.type === type).forEach(q => s.add(q.id))
- return s
- })
- }
- }
 
  function deselectAll() { setSelected(new Set()) }
  function selectAll() { setSelected(new Set(extracted.map(q => q.id))) }
@@ -1587,23 +1559,9 @@ function AITextbookModal({ subjectId, subjectClassLevel, subjects, questionTypes
  )
 }
 
-function readFileAsBase64(file) {
- return new Promise((resolve, reject) => {
- const reader = new FileReader()
- reader.onload = ev => resolve(ev.target.result.split(',')[1])
- reader.onerror = reject
- reader.readAsDataURL(file)
- })
-}
 
-function readFileAsText(file) {
- return new Promise((resolve, reject) => {
- const reader = new FileReader()
- reader.onload = ev => resolve(ev.target.result)
- reader.onerror = reject
- reader.readAsText(file)
- })
-}
+
+
 
 //  Structured Data Editor 
 // Renders type-specific structured field editors inside QuestionModal.
