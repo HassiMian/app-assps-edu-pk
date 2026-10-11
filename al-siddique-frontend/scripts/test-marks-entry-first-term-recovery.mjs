@@ -7,7 +7,10 @@ import {
 import {readFileSync} from 'node:fs'
 import {createRequire} from 'node:module'
 import {OFFICIAL_FIRST_TERM_SUBJECTS_2026} from '../src/Modules/examination/officialFirstTerm2026Subjects.js'
+import {sortSchoolClasses} from '../src/services/schoolClassOrder.js'
 const require=createRequire(import.meta.url)
+assert.deepEqual(sortSchoolClasses(['Nine','Pre Nine','Eight','One','Flyer','Ten','Starter']),
+  ['Starter','Flyer','One','Eight','Pre Nine','Nine','Ten'])
 const canonical=require('../../al-siddique-backend/src/config/firstTermExam2026.js')
 const exams=[
  {id:9,name:'First Term Exam',type:'TE',class:'All Classes',session:'2026-2027',total_marks:100,pass_marks:33},
@@ -26,6 +29,20 @@ assert.equal(pickMarksExam(exams,'Term Exam','Nine')?.id,9)
 assert.equal(pickMarksExam(exams,'Assessment','Two'),null)
 assert.equal(matchesMarksExam(exams[1],'Assessment','Two'),false)
 assert.deepEqual(uniqueMarksClasses(['Class One','Two'],exams),['One','Two'])
+assert.deepEqual(marksEntryClasses(['Five'],[exams[0]]),
+  ['Starter','Mover','Flyer','One','Two','Three','Four','Five','Six','Seven','Eight'])
+assert.equal(normalizeMarksClass('Class Pre-Nine'),'Pre Nine')
+assert.deepEqual(uniqueMarksClasses(['Nine','Seven','Pre Nine','Class 1','Starter','Ten','Flyer'],exams),
+  ['Starter','Flyer','One','Two','Seven','Pre Nine','Nine','Ten'])
+const storedExam={...exams[0],subject_offerings:[
+  {class_name:'One',section:'Blue',subject:'English'},
+  {class_name:'One',section:'Yellow',subject:'English'},
+  {class_name:'One',section:'Blue',subject:'Mathematics'},
+  {class_name:'Eight',section:'Blue',subject:'Science'}
+]}
+assert.deepEqual(marksSubjectsForClass({exam:storedExam,className:'One',academicSubjects:[]}),['English','Mathematics'])
+assert.deepEqual(marksSubjectsForClass({exam:storedExam,className:'Nine',academicSubjects:['Unapproved Course']}),[],
+  'Authoritative absence cannot invent Grade Nine or Pre Nine offerings')
 assert.deepEqual(marksEntryClasses([],exams.filter(e=>e.id===9)).slice(0,5),['Starter','Mover','Flyer','One','Two'])
 assert.deepEqual(marksEntryClasses([],[]),[])
 console.log('PASS actual First Term Exam ID9 discovery, exact selection, class/type filtering')

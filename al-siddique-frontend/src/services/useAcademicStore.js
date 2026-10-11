@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import api from './api'
+import { compareSchoolClasses, sortSchoolClasses } from './schoolClassOrder.js'
 
 let academicSetupInflight = null
 
@@ -188,8 +189,9 @@ export function useAcademicStore() {
     }
   }, [refreshAcademic])
 
-  const activeClasses = useMemo(() => data.classes.filter(c => c.active !== false), [data.classes])
-  const classNames = useMemo(() => activeClasses.map(c => c.name), [activeClasses])
+  const activeClasses = useMemo(() => data.classes.filter(c => c.active !== false)
+    .sort((a,b)=>compareSchoolClasses(a.name,b.name)), [data.classes])
+  const classNames = useMemo(() => sortSchoolClasses(activeClasses.map(c => c.name)), [activeClasses])
   const subjectNames = useMemo(() => data.subjects.map(s => s.name), [data.subjects])
   const periodsPerDay = Number.isInteger(Number(data.periodsPerDay))
     ? Math.min(12, Math.max(1, Number(data.periodsPerDay)))

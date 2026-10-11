@@ -1,11 +1,13 @@
 // Pure marks-entry contract. No production writes or fake examination records.
 import { OFFICIAL_FIRST_TERM_SUBJECTS_2026 } from './officialFirstTerm2026Subjects.js'
+import { compareSchoolClasses } from '../../services/schoolClassOrder.js'
 const CLASS_ORDINALS = {
   '1':'One','2':'Two','3':'Three','4':'Four','5':'Five',
   '6':'Six','7':'Seven','8':'Eight','9':'Nine','10':'Ten',
 }
 export const normalizeMarksClass = value => {
-  const raw = String(value ?? '').trim().replace(/^class\s+/i,'').replace(/\s+/g,' ')
+  const raw = String(value ?? '').trim().replace(/^class\s+/i,'').replace(/[_-]/g,' ').replace(/\s+/g,' ')
+  if (/^pre nine$/i.test(raw)) return 'Pre Nine'
   return CLASS_ORDINALS[raw] || raw
 }
 export const equivalentMarksClass = (a,b) =>
@@ -34,18 +36,38 @@ export const uniqueMarksClasses = (academicClasses=[], exams=[]) => {
   return [...academicClasses,...exams.map(e=>e.class)].map(normalizeMarksClass)
     .filter(name=>name && !/^all classes$/i.test(name))
     .filter(name=>{const key=name.toLocaleLowerCase('en');if(seen.has(key))return false;seen.add(key);return true})
+    .sort(compareSchoolClasses)
 }
 
 export const OFFICIAL_FIRST_TERM_CLASSES = [
  'Starter','Mover','Flyer','One','Two','Three','Four','Five','Six','Seven','Eight'
 ]
 export const marksEntryClasses = (academicClasses=[], exams=[]) => {
- const configured=uniqueMarksClasses(academicClasses,exams)
- return configured.length ? configured :
-   exams.some(ex=>/\bfirst\s+term\b/i.test(String(ex.name||''))) ? OFFICIAL_FIRST_TERM_CLASSES : []
+ // Even when academic setup is only partially configured, do not hide the
+ // already-approved Starter–Eight First Term paper classes. Other enrolled
+ // classes remain visible only when genuinely configured, never fabricated.
+ const isFirstTerm=exams.some(ex=>/\bfirst\s+term\b/i.test(String(ex.name||'')))
+ return uniqueMarksClasses([
+   ...academicClasses, ...(isFirstTerm ? OFFICIAL_FIRST_TERM_CLASSES : [])
+ ], exams)
 }
 
 export const marksSubjectsForClass = ({exam, className, academicSubjects=[]}) => {
+  // An explicit empty offering list from the signed school API means NO subject
+  // configured. Do not invent a hardcoded subject or silently use an unrelated
+  // academic setup; keep the section records intact in exam.subject_offerings.
+  if (Array.isArray(exam?.subject_offerings)) {
+    const seen = new Set()
+    return exam.subject_offerings
+      .filter(row => equivalentMarksClass(row.class_name,className))
+      .map(row => String(row.subject || '').trim())
+      .filter(subject => {
+        const key=subject.toLowerCase()
+        if (!key || seen.has(key)) return false
+        seen.add(key)
+        return true
+      })
+  }
   const name = String(exam?.name || '').trim().replace(/\s+/g,' ').toLowerCase()
   const session = String(exam?.session || '').trim()
   const type = String(exam?.type || '')

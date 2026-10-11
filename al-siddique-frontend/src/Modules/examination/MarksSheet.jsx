@@ -46,7 +46,7 @@ export default function MarksSheet() {
  const request = ++examFetchSeq.current
  setRefreshing(true)
  try {
- const res = await api.get('/api/exams')
+ const res = await api.get('/api/exams', { params:{ include_subjects:'1' } })
  if (!Array.isArray(res.data?.data)) throw new Error('Exam catalog did not return a valid list.')
  const list = res.data.data.map(normalizeMarksExam)
  if (request !== examFetchSeq.current) return false
@@ -325,7 +325,7 @@ export default function MarksSheet() {
  ))}
  </select>
  {!matchingExams.length && <div style={{ color:C.red, fontSize:12, marginTop:5 }}>
- No saved exam matches this class/type. Create or verify the First Term Exam in Manage Exams; marks entry will not create duplicates.
+ No saved exam matches this class/type. Check the saved examination catalog; marks entry will not create duplicate exams.
  </div>}
  </div>
  <div>
@@ -334,6 +334,12 @@ export default function MarksSheet() {
  <option value="">Select subject</option>
  {(selectedClass ? marksSubjectsForClass({exam:selectedExam,className:selectedClass,academicSubjects:subjectsForClass(selectedClass)}) : []).map(subject => <option key={subject} value={subject}>{subject}</option>)}
  </select>
+ {selectedExam && selectedClass &&
+   Array.isArray(selectedExam.subject_offerings) &&
+   !marksSubjectsForClass({exam:selectedExam,className:selectedClass,academicSubjects:[]}).length &&
+   <div style={{ color:C.red, fontSize:12, marginTop:5 }}>
+     No active subjects are configured for this exam and class. Ask school administration to verify the section-specific exam schedule.
+   </div>}
  </div>
  </div>
 

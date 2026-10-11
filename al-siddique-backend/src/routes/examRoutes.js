@@ -148,6 +148,36 @@ router.get('/', protect, requireScopeForServiceOnly('school.results.read'), asyn
     const tenant = await tenantClause(req, { table: 'exams', paramIndex: 1 })
     sql += tenant.clause + ' ORDER BY created_at DESC'
     const result = await query(sql, tenant.params)
+    // Optional authoritative class/section-specific exam subject catalog.
+    // Existing clients continue receiving the original exam records. Results
+    // stay school-scoped by BOTH the validated JWT and FORCE RLS policies.
+    if (req.query.include_subjects === '1' && result.rows.length) {
+      const role = String(req.user?.role || '').toLowerCase()
+      if (!['principal','admin','super_admin','teacher'].includes(role) &&
+          !(req.user?.account_type === 'service' && hasServiceScope(req,'school.results.read'))) {
+        return res.status(403).json({success:false,code:'EXAM_SUBJECT_CATALOG_PERMISSION_DENIED'})
+      }
+      const schoolId = currentSchoolId(req)
+      if (!Number.isSafeInteger(Number(schoolId)) || Number(schoolId) <= 0)
+        return res.status(403).json({success:false,code:'EXAM_SUBJECT_CATALOG_SCHOOL_REQUIRED'})
+      const examIds = result.rows.map(row => Number(row.id))
+        .filter(id => Number.isSafeInteger(id) && id > 0)
+      const offerings = examIds.length ? await query(`
+        SELECT exam_id, class_name, section, subject, sort_order, total_marks, pass_marks
+        FROM exam_subjects
+        WHERE school_id = $1 AND exam_id = ANY($2::integer[]) AND is_active = true
+        ORDER BY exam_id, class_name, section, sort_order NULLS LAST, id
+      `, [schoolId, examIds]) : { rows: [] }
+      const byExam = new Map()
+      for (const offering of offerings.rows) {
+        const key = Number(offering.exam_id)
+        if (!byExam.has(key)) byExam.set(key, [])
+        byExam.get(key).push(offering)
+      }
+      return res.json({ success:true, data:result.rows.map(row => ({
+        ...row, subject_offerings:byExam.get(Number(row.id)) || []
+      })) })
+    }
     res.json({ success: true, data: result.rows })
   } catch (err) {
     console.error('Exam list error:', err.message)

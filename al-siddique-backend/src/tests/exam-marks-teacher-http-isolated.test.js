@@ -35,6 +35,13 @@ test('actual examRoutes enforces assignment scoped reads and transactional write
       queries.push({sql:String(sql),params})
       if (sql.includes('to_regclass'))return {rows:[{table_name:'grade_settings'}]}
       if (sql.includes('FROM grade_settings'))return {rows:[{label:'A',min_percentage:0,max_percentage:100}]}
+      if (sql.includes('SELECT * FROM exams WHERE 1=1'))return {rows:[{id:9,name:'First Term Exam',type:'TE',class:'All Classes',school_id:21}]}
+      if (sql.includes('FROM exam_subjects'))return {rows:[
+        {exam_id:9,class_name:'One',section:'Blue',subject:'English',sort_order:1},
+        {exam_id:9,class_name:'One',section:'Yellow',subject:'English',sort_order:1},
+        {exam_id:9,class_name:'One',section:'Blue',subject:'Mathematics',sort_order:2},
+        {exam_id:9,class_name:'Eight',section:'Blue',subject:'Science',sort_order:3},
+      ]}
       return {rows:[],rowCount:0}
     },
   }
@@ -76,6 +83,23 @@ test('actual examRoutes enforces assignment scoped reads and transactional write
     const res=await fetch(base+route,{method,headers:{'content-type':'application/json'},body:body?JSON.stringify(body):undefined})
     return {status:res.status,data:await res.json()}
   }
+  let catalog = await request('GET','/api/exams?include_subjects=1')
+  assert.equal(catalog.status,200)
+  assert.equal(catalog.data.data[0].id,9)
+  assert.equal(catalog.data.data[0].subject_offerings.length,4)
+  assert.deepEqual(catalog.data.data[0].subject_offerings.filter(x=>x.class_name==='One').map(x=>x.section),['Blue','Yellow','Blue'])
+  let subjectQuery=queries.find(q=>q.sql.includes('FROM exam_subjects'))
+  assert.deepEqual(subjectQuery.params,[21,[9]],'subject catalog must be bound to authenticated school and real saved exam IDs')
+  assert.match(subjectQuery.sql,/is_active = true/)
+  actor={role:'student',id:88,school_id:21}
+  const denied=await request('GET','/api/exams?include_subjects=1')
+  assert.equal(denied.status,403,'student cannot enumerate section-specific admin marks subject catalog')
+  assert.equal(denied.data.code,'EXAM_SUBJECT_CATALOG_PERMISSION_DENIED')
+  actor={role:'teacher',id:77,school_id:21}
+  catalog = await request('GET','/api/exams')
+  assert.equal(catalog.status,200)
+  assert.equal('subject_offerings' in catalog.data.data[0],false,'unrelated exam consumers keep old response shape')
+  console.log('REAL_EXPRESS_HTTP_PASS optional signed school/section-specific First Term subject catalog')
   const payload={results:[{exam_id:9,student_id:101,subject:'English',marks_obtained:67,total_marks:100}]}
   let reply=await request('GET','/api/exams/results/9')
   assert.equal(reply.status,200)
