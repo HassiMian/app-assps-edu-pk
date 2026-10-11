@@ -95,6 +95,27 @@ test('EY-BROWSER-PREMIUM: premium child templates and Paper Workspace classics c
   assert.ok(options.includes('Pencil & Paper'))
 })
 
+test('EY-BROWSER-TEMPLATE-SCOPE: switching Starter and Mover never overwrites either paper template', async () => {
+  await page.goto(`${BASE_URL}?paper=ey-starter-english-2026`, { waitUntil: 'domcontentloaded' })
+  const paperSelector = page.getByLabel('Select Early Years paper')
+  const templateSelector = page.getByLabel('Early Years template')
+  const sheet = page.locator('.early-years-sheet-a4')
+  await page.waitForSelector('.early-years-sheet-a4', { timeout: 10000 })
+
+  await templateSelector.selectOption('coral-creative')
+  await paperSelector.selectOption('ey-mover-english-2026')
+  await page.waitForFunction(() => document.querySelector('.early-years-sheet-a4')?.getAttribute('data-template-id') === document.querySelector('[aria-label="Early Years template"]')?.value)
+  await templateSelector.selectOption('workspace-academic')
+  await paperSelector.selectOption('ey-starter-english-2026')
+  await page.waitForFunction(() => document.querySelector('[aria-label="Early Years template"]')?.value === 'coral-creative')
+  assert.equal(await sheet.getAttribute('data-template-id'), 'coral-creative')
+  await paperSelector.selectOption('ey-mover-english-2026')
+  await page.waitForFunction(() => document.querySelector('[aria-label="Early Years template"]')?.value === 'workspace-academic')
+  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem('assps-early-years-template-map-v1') || '{}'))
+  assert.equal(saved['ey-starter-english-2026'], 'coral-creative')
+  assert.equal(saved['ey-mover-english-2026'], 'workspace-academic')
+})
+
 test('EY-BROWSER-SKETCH-V2: every sketch used by the 9 Early Years papers resolves to professional-v2 line art', async () => {
   const usedSketchIds = [
     'sketch.apple.v1','sketch.banana.v1','sketch.butterfly.v1','sketch.caterpillar.v1',

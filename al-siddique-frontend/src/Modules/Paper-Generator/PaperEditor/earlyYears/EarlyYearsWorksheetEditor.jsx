@@ -101,7 +101,7 @@ export default function EarlyYearsWorksheetEditor({
     const saved = readTemplateMap()
     saved[currentPaper.id] = normalized
     writeTemplateMap(saved)
-  }, [currentPaper?.id, setTemplateId])
+  }, [currentPaper])
 
   const selectPaper = useCallback((nextId) => {
     if (!nextId || nextId === selectedPaperId) return
@@ -109,7 +109,8 @@ export default function EarlyYearsWorksheetEditor({
     setSelectedPaperId(nextId)
   }, [selectedPaperId])
 
-  const marksState = useMemo(() => resolveEarlyYearsMarks(currentPaper), [currentPaper, presentationRevision])
+  // Marks overlays are external mutable editor state; recompute from the current overlay on each render.
+  const marksState = resolveEarlyYearsMarks(currentPaper)
   const hasConflict = marksState.hasConflict
   const hasAmbiguity = qaFindings.length > 0 && !hasConflict
 

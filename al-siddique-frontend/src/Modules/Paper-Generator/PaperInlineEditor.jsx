@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 export const INLINE_FONTS = [
  ['Default',''], ['Times New Roman','Times New Roman'], ['Arial','Arial'],
@@ -191,7 +191,8 @@ export function InlineEditable(props) {
   rememberSelection,
  })
  const handleGetter=useRef(currentHandle)
- handleGetter.current=currentHandle
+ // Register the committed handle to avoid mutating React refs during render.
+ useLayoutEffect(()=>{handleGetter.current=currentHandle})
  useEffect(()=>{
   const el=ref.current
   if(!el||!editMode) return
