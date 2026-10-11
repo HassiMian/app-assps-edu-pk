@@ -25,8 +25,8 @@ BACK_SOURCE='580111e8ee92fa13ee672578461927294cfada6b'
 FRONT_EXPECTED=['al-siddique-frontend/src/Modules/examination/MarksSheet.jsx','al-siddique-frontend/src/Modules/examination/ResultCards.jsx','al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/PaperEditorMain.jsx']
 BACK_EXPECTED=['al-siddique-backend/src/config/database.js','al-siddique-backend/src/routes/examRoutes.js','al-siddique-backend/src/middleware/auth.js']
 
-def call(argv,cwd,timeout=90):
-    try: return subprocess.run(argv,cwd=str(cwd),text=True,capture_output=True,timeout=timeout)
+def call(argv,cwd,timeout=90,env=None):
+    try: return subprocess.run(argv,cwd=str(cwd),text=True,capture_output=True,timeout=timeout,env=env)
     except subprocess.TimeoutExpired:return None
 
 def committed_sha(filename):
@@ -66,7 +66,8 @@ def main():
     ok=check_provenance()
     if args.full and ok:
         for name,cwd,cmd,timeout in SUITES:
-            test=call(cmd,cwd,timeout)
+            suite_env={**os.environ,'CARDS':'25'} if name=='twentyfive_a4' else None
+            test=call(cmd,cwd,timeout,env=suite_env)
             success=bool(test and test.returncode==0 and ('# fail 0' in test.stdout if 'browser' in name and name not in ('firstday_browser','results_browser') else True))
             if name=='firstday_browser':success=success and 'MARKS_BROWSER_ZERO_PASS first real zero saved' in test.stdout
             if name=='results_browser':success=success and 'RESULT_DESIGNER_BROWSER_PASS' in test.stdout
@@ -76,7 +77,7 @@ def main():
                 # transient. Retry once without modifying any actual assertion.
                 print('SOURCE_'+name.upper()+'_FIRST_ATTEMPT_FAILED_RETRY_ONCE',flush=True)
                 time.sleep(2)
-                test=call(cmd,cwd,timeout)
+                test=call(cmd,cwd,timeout,env=suite_env)
                 success=bool(test and test.returncode==0 and ('# fail 0' in test.stdout if name in ('early_years_browser','urdu_paper_browser') else True))
                 if name=='firstday_browser':success=success and 'MARKS_BROWSER_ZERO_PASS first real zero saved' in test.stdout
                 if name=='results_browser':success=success and 'RESULT_DESIGNER_BROWSER_PASS' in test.stdout
