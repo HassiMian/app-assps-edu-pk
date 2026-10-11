@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "assps-grade910-consolidated-prepublication-v1",
+  "decision": "BLOCK_PUBLICATION",
+  "sourceFrozen": true,
+  "questionCandidates": 2581,
+  "sourceFiles": 73,
+  "sourceRevisionSetSha256": "9a967ab8ccc89a69a8ee23e024e6610ebb5966f7e0d9f0eb2abf20dad94ded3d",
+  "types": {
+    "mcq": 875,
+    "short": 908,
+    "long": 564,
+    "numerical": 91,
+    "grammar": 31,
+    "comprehension": 25,
+    "essay": 29,
+    "translation": 2,
+    "wahid_jama": 10,
+    "mutradif": 10,
+    "mutzad": 10,
+    "muhawara": 10,
+    "sentence_correction": 10,
+    "application": 4,
+    "letter": 2
+  },
+  "mcq": 875,
+  "mcqCorrectKeyCounts": {
+    "A": 785,
+    "B": 50,
+    "C": 33,
+    "D": 7
+  },
+  "mcqEditorRiskFiles": 53,
+  "sourcePageClaimsUnverified": 1393,
+  "missingSourcePageClaims": 1188,
+  "verifiedOriginalExercisePagePairs": 0,
+  "sourceApplicabilityReviewCandidates": 1135,
+  "sourceSubjectClaimMissing": 44,
+  "originalMediumClaims": {
+    "english": 1512,
+    "urdu": 971,
+    "dual": 48,
+    "missing": 50
+  },
+  "researchCoverageGroups": 406,
+  "unapprovedSupplementalAnswerResearchIds": 165,
+  "newlyAuthoredConceptualLongDrafts": 4,
+  "facultyHeldOriginalLongAnswerSlots": 1,
+  "independentOverlapPairsPending": 3,
+  "certifiedSchoolTextbookAdoptionEvidence": 0,
+  "authenticatedIndependentFacultyApprovals": 0,
+  "verifiedPublished": 0,
+  "paperStudioAcademicallyVerifiedSelectable": 0,
+  "nextGates": [
+    {
+      "owner": "ASSPS authorized textbook coordinator",
+      "required": "Actual adopted textbook title, edition, medium, session and board document"
+    },
+    {
+      "owner": "Independent curriculum specialist",
+      "required": "Exact original topic/chapter and conceptual exercise-origin attribution; physical exercise page only when claimed as exercise"
+    },
+    {
+      "owner": "Independent subject teachers",
+      "required": "Scientific, answer/MCQ options, difficulty, marks, six flagged overlap candidates, remaining faculty-held long answer"
+    },
+    {
+      "owner": "Independent Urdu specialist",
+      "required": "Bilingual equivalence and four incomplete Urdu research drafts"
+    },
+    {
+      "owner": "School academic approval authority",
+      "required": "Authenticated signatures bound to exact question AND answer SHA revisions"
+    },
+    {
+      "owner": "Paper Studio & SaaS Core",
+      "required": "Approved-only tenant-isolated selection, independent security acceptance and authorized production release"
+    }
+  ],
+  "noDeployment": true,
+  "autonomousApprovalPermitted": false
+}
