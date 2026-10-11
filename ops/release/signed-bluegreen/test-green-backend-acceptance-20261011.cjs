@@ -57,6 +57,12 @@ function makeRequest(port, path, method = 'GET', token = null, body = null) {
 }
 
 async function main() {
+  // This historical production acceptance fixture performs real INSERT/UPDATE
+  // and DELETE. Never rerun on school data without independent, explicit
+  // fixture-write authorization and a separate pre-existing-record check.
+  assert.equal(process.env.ASSPS_GREEN_APPROVED_RECORD_WRITE_TEST,
+    'AUTHORIZED_RELEASE_DBA_FIXTURE',
+    'Production marks fixture writes require separately approved DBA test window')
   const fixture = getFixture()
   const port = Number(fixture.port || 5091)
   const jwtSecret = fixture.jwtSecret
@@ -120,10 +126,19 @@ async function main() {
   const examId = fixture.examId || 9
   const studentId = fixture.testStudentId || 763
   const subject = fixture.testSubject || 'English'
-
+  for (const [label,value] of Object.entries({schoolId,teacherId,examId,studentId})) {
+    assert.ok(Number.isSafeInteger(Number(value)) && Number(value)>0 && String(value).match(/^[1-9][0-9]*$/),
+      'Invalid approved fixture identifier: '+label)
+  }
+  assert.match(subject,/^[A-Za-z][A-Za-z .-]{0,70}$/,'Invalid test-only subject')
+  const existing=psql(`SELECT (SELECT count(*) FROM exam_results WHERE school_id=${schoolId} AND exam_id=${examId} AND student_id=${studentId} AND subject='${subject}')::text||'|'||(SELECT count(*) FROM teacher_class_assignments WHERE school_id=${schoolId} AND teacher_user_id=${teacherId} AND class_name='Nine' AND section='Fatima' AND subject='${subject}')::text`)
+  assert.equal(existing,'0|0','Refuse test: matching genuine marks or assignment exists; no school row may be overwritten or deleted')
+  let insertedAssignmentId=null
   try {
-    // 1. Insert temporary active assignment
-    psql(`INSERT INTO teacher_class_assignments (school_id, teacher_user_id, class_name, section, subject, is_active) VALUES (${schoolId}, ${teacherId}, 'Nine', 'Fatima', '${subject}', true) ON CONFLICT DO NOTHING;`)
+    // Insert only a uniquely tracked temporary fixture; never delete a preexisting row.
+    const assignment=psql(`INSERT INTO teacher_class_assignments (school_id, teacher_user_id, class_name, section, subject, is_active) VALUES (${schoolId}, ${teacherId}, 'Nine', 'Fatima', '${subject}', true) ON CONFLICT DO NOTHING RETURNING id;`)
+    assert.match(assignment,/^[1-9][0-9]*$/,'Temporary teacher assignment was not uniquely created')
+    insertedAssignmentId=Number(assignment)
 
     // 2. Perform teacher marks save (88/100)
     const saveRes = await makeRequest(port, '/api/exams/results', 'POST', s1TeacherToken, {
@@ -173,7 +188,9 @@ async function main() {
   } finally {
     // 6. Cleanup test row and assignment to preserve school records
     psql(`DELETE FROM exam_results WHERE school_id = ${schoolId} AND exam_id = ${examId} AND student_id = ${studentId} AND subject = '${subject}';`)
-    psql(`DELETE FROM teacher_class_assignments WHERE school_id = ${schoolId} AND teacher_user_id = ${teacherId} AND class_name = 'Nine' AND section = 'Fatima' AND subject = '${subject}';`)
+    if(insertedAssignmentId) {
+      psql(`DELETE FROM teacher_class_assignments WHERE id=${insertedAssignmentId} AND school_id=${schoolId} AND teacher_user_id=${teacherId} AND class_name='Nine' AND section='Fatima' AND subject='${subject}';`)
+    }
     console.log('PASS: Cleaned up temporary test result row and assignment (records preserved)')
   }
 
