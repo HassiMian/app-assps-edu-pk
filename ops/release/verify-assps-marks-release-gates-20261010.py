@@ -105,6 +105,9 @@ def main():
         call('RESULT_STUDENT_IDENTITY_COMPANION_BACKEND',['node','scripts/test-result-student-identity.mjs'],f)
     if phase=='signed':
         call('SIGNED_SCHEMA_SHADOW_MIGRATION_CATALOG_77_POLICIES',['python3',str(OPS/'ops/security/verify-signed-migration-rehearsal-catalog-20261010.py')])
+        call('SCHEMA_EXACT_77_TABLES_212_PRODUCTION_POLICIES',['python3',str(OPS/'ops/security/verify-production-shadow-policy-parity-20261011.py')])
+        call('RUNTIME_TABLE_AND_SEQUENCE_GRANTS_EXACT_PRODUCTION',['python3',str(OPS/'ops/security/verify-production-shadow-runtime-grants-20261011.py')])
+        call('ISOLATED_BLUEGREEN_OLD_NEW_ROLE_COEXISTENCE',['python3',str(OPS/'ops/security/verify-bluegreen-signed-role-coexistence-20261011.py')])
         call('OFFICIAL_SIGNED_SYNTHETIC_FIXTURE_PARITY',['python3',str(OPS/'ops/security/verify-core-phase6-signed-clone-fixtures-20261010.py')])
         runner=str(OPS/'ops/security/run-isolated-signed-actor-acceptance-20261010.py')
         for suite in ('db-next','marks-next','assessment-next','paper-next'):
