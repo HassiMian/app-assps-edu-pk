@@ -17,13 +17,18 @@ export function buildResultStudents(rows = []) {
     gr_number:filled(row.gr_number,row.gr),
     roll_number:filled(row.roll_number,row.rollNo),
     father_name:filled(row.father_name,row.fatherName),
-    className:safeClass, section,
+    className:safeClass,
+    class:safeClass,
+    section,
     photo:filled(row.photo), subjectsCount:0,
    }
    students.set(id, student)
   } else {
    // Some subject rows may omit metadata while later rows have it.
-   if (!student.className && safeClass) student.className=safeClass
+   if (!student.className && safeClass) {
+    student.className=safeClass
+    student.class=safeClass
+   }
    if (!student.section && section) student.section=section
    if (!student.roll_number) student.roll_number=filled(row.roll_number,row.rollNo)
    if (!student.father_name) student.father_name=filled(row.father_name,row.fatherName)
