@@ -1,0 +1,135 @@
+{
+  "schemaVersion": "assps-grade910-three-sha-frozen-original-overlap-review-v1",
+  "originalResearchQuestionCandidates": 2581,
+  "overlapPairsToReview": 3,
+  "uniqueOriginalQuestionIdsToReview": 6,
+  "confirmedDuplicatePairs": 0,
+  "independentFacultyPairDecisions": 0,
+  "academicallyApproved": 0,
+  "verifiedPublished": 0,
+  "autoDeletionsOrRewrites": 0,
+  "publisherSelectable": false,
+  "notes": "Semantics are editorial research suggestions only; teacher must approve/reject each precise question revision. No source candidate rewritten.",
+  "pairs": [
+    {
+      "pairId": "IX-CHEM-2025-C07-T05-L01|IX-CHEM-2025-C10-T3-01L",
+      "originals": [
+        {
+          "id": "IX-CHEM-2025-C07-T05-L01",
+          "originalQuestionRevisionSha256": "082c79da0a3b26cdb191c974768550196856dcc34628930022070621f0f95ab3",
+          "originalSourceFile": "chemistry9Chapter7EnglishDrafts2026.json",
+          "originalSourceFileSha256": "f14cbe295b714aff61d5e4d2876c1c7a015245caf79477520e18d866072dcf88",
+          "grade": 9,
+          "subjectId": "chemistry",
+          "chapter": 7,
+          "topicId": "7.5",
+          "marks": 5,
+          "originalMedium": "english"
+        },
+        {
+          "id": "IX-CHEM-2025-C10-T3-01L",
+          "originalQuestionRevisionSha256": "99c2af555e06b6af3dc15262b6835ac85a5afe75c3904b13977effe8fe01c6d0",
+          "originalSourceFile": "chemistry9Chapter10EnglishDrafts2026.json",
+          "originalSourceFileSha256": "c61a997c4da221578b2e3a0c38ac2c02aeab7d72a615be97ccd6250f10a52655",
+          "grade": 9,
+          "subjectId": "chemistry",
+          "chapter": 10,
+          "topicId": "10.3",
+          "marks": 5,
+          "originalMedium": "english"
+        }
+      ],
+      "preliminaryResearchRisk": "substantial shared concept; original objectives include acid-rain formation/effects",
+      "potentialDifferentiatingLearningOutcome": "Chapter 7 candidate includes specified control considerations and broader consequences; Chapter 10 focuses on formation and effects.",
+      "qualifiedFacultyReviewQuestion": "Check actual marks objectives and topic relevance; revise the final independently reviewed version or retain separate items only if genuinely different assessed outcomes are demonstrated.",
+      "algorithmicDuplicateVerdict": "NOT_DETERMINED",
+      "academicIndependentReviewer": null,
+      "authenticatedReviewerSignature": null,
+      "finalQuestionRevisionsToApprove": [],
+      "approvedAsDistinct": false,
+      "academicallyApproved": false,
+      "published": false,
+      "decision": "HOLD_FOR_QUALIFIED_INDEPENDENT_SUBJECT_REVIEW"
+    },
+    {
+      "pairId": "IX-CHEM-2025-C11-T1-01L|IX-CHEM-2025-C11-T1-02L",
+      "originals": [
+        {
+          "id": "IX-CHEM-2025-C11-T1-01L",
+          "originalQuestionRevisionSha256": "e27b32d26f5b525510cc31e1064984c06e093a8978feacbc98a1678b630b2de7",
+          "originalSourceFile": "chemistry9Chapter11EnglishDrafts2026.json",
+          "originalSourceFileSha256": "e27178c2fabc7fc63fed68f12fdaeb8c1e7dfb085e9962fd3e7ab1e410c4825b",
+          "grade": 9,
+          "subjectId": "chemistry",
+          "chapter": 11,
+          "topicId": "11.1",
+          "marks": 5,
+          "originalMedium": "english"
+        },
+        {
+          "id": "IX-CHEM-2025-C11-T1-02L",
+          "originalQuestionRevisionSha256": "753bd30fc715b812db4a72382acf87a706e5474f3cca8ce83a9766f02dbf27ac",
+          "originalSourceFile": "chemistry9Chapter11EnglishDrafts2026.json",
+          "originalSourceFileSha256": "e27178c2fabc7fc63fed68f12fdaeb8c1e7dfb085e9962fd3e7ab1e410c4825b",
+          "grade": 9,
+          "subjectId": "chemistry",
+          "chapter": 11,
+          "topicId": "11.1",
+          "marks": 5,
+          "originalMedium": "english"
+        }
+      ],
+      "preliminaryResearchRisk": "potential duplicate assessment objective: hydrocarbon saturation and bonding",
+      "potentialDifferentiatingLearningOutcome": "First candidate frames family classification; second frames saturated-versus-unsaturated comparison, but much of the marking scheme overlaps.",
+      "qualifiedFacultyReviewQuestion": "Teacher to compare final revision wording, distinct content/marks, and reasonable candidate selection policy; do not publish both as independently verified without an originality decision.",
+      "algorithmicDuplicateVerdict": "NOT_DETERMINED",
+      "academicIndependentReviewer": null,
+      "authenticatedReviewerSignature": null,
+      "finalQuestionRevisionsToApprove": [],
+      "approvedAsDistinct": false,
+      "academicallyApproved": false,
+      "published": false,
+      "decision": "HOLD_FOR_QUALIFIED_INDEPENDENT_SUBJECT_REVIEW"
+    },
+    {
+      "pairId": "IX-CHEM-2025-C11-T3-01L|IX-CHEM-2025-C11-T3-02L",
+      "originals": [
+        {
+          "id": "IX-CHEM-2025-C11-T3-01L",
+          "originalQuestionRevisionSha256": "a6586ba4adb55365888364e31fa69167184a0f5634bbd0255312fb9e8da9b14b",
+          "originalSourceFile": "chemistry9Chapter11EnglishDrafts2026.json",
+          "originalSourceFileSha256": "e27178c2fabc7fc63fed68f12fdaeb8c1e7dfb085e9962fd3e7ab1e410c4825b",
+          "grade": 9,
+          "subjectId": "chemistry",
+          "chapter": 11,
+          "topicId": "11.3",
+          "marks": 5,
+          "originalMedium": "english"
+        },
+        {
+          "id": "IX-CHEM-2025-C11-T3-02L",
+          "originalQuestionRevisionSha256": "fea19a3baa0eca6a4f4a4e2d6c3eb54bb5ad73c432f6a1f4cfe382227766b6d5",
+          "originalSourceFile": "chemistry9Chapter11EnglishDrafts2026.json",
+          "originalSourceFileSha256": "e27178c2fabc7fc63fed68f12fdaeb8c1e7dfb085e9962fd3e7ab1e410c4825b",
+          "grade": 9,
+          "subjectId": "chemistry",
+          "chapter": 11,
+          "topicId": "11.3",
+          "marks": 5,
+          "originalMedium": "english"
+        }
+      ],
+      "preliminaryResearchRisk": "potential duplicate assessment objective: IUPAC naming rules for simple alkanes",
+      "potentialDifferentiatingLearningOutcome": "First candidate asks nomenclature procedure; second emphasizes structure-to-name reasoning. Current answer criteria closely overlap.",
+      "qualifiedFacultyReviewQuestion": "Independent teacher to inspect whether a worked structural interpretation outcome is distinct; otherwise suggest revision or exclusion with a recorded qualified reviewer decision.",
+      "algorithmicDuplicateVerdict": "NOT_DETERMINED",
+      "academicIndependentReviewer": null,
+      "authenticatedReviewerSignature": null,
+      "finalQuestionRevisionsToApprove": [],
+      "approvedAsDistinct": false,
+      "academicallyApproved": false,
+      "published": false,
+      "decision": "HOLD_FOR_QUALIFIED_INDEPENDENT_SUBJECT_REVIEW"
+    }
+  ]
+}
