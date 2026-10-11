@@ -250,8 +250,15 @@ async function bootstrap() {
     }
   }
 
+  // A signed Marks green service must be reachable only through the reverse
+  // proxy. The existing legacy server keeps its historical bind unchanged.
+  // No automatic schema migration is permitted under signed green credentials.
+  if (process.env.DB_SIGNED_TENANT_RLS_ENABLED === 'true' && autoMigrate) {
+    throw new Error('SIGNED_GREEN_AUTO_MIGRATION_REFUSED')
+  }
   const PORT = process.env.PORT || 3001
-  app.listen(PORT, '0.0.0.0', () => {
+  const BIND_HOST = process.env.DB_SIGNED_TENANT_RLS_ENABLED === 'true' ? '127.0.0.1' : '0.0.0.0'
+  app.listen(PORT, BIND_HOST, () => {
     console.log('\n=====================================')
     console.log('  AL SIDDIQUE SMART SCHOOL OS')
     console.log(`  Server: http://localhost:${PORT}`)

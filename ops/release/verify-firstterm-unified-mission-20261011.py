@@ -18,7 +18,11 @@ import time
 ROOT=Path(__file__).resolve().parents[2]
 F=ROOT/'al-siddique-frontend'
 B=ROOT/'al-siddique-backend'
-LIVE_PROBE=Path('/root/workspace/assps-core-marks-teacher-assignment-security-20261010/ops/release/verify-prod-signed-runtime-identity-20261010.py')
+# Blue/green keeps the legacy login alive; auditing only the legacy backend
+# DB_USER would forever fail even after a safe, independent signed marks cutover.
+# Check the *dedicated* protected role and policy catalog separately.
+LIVE_SIGNED_PROBE=ROOT/'ops/release/signed-bluegreen/verify-live-signed-precutover-20261011.py'
+MIGRATION_CONTRACT=ROOT/'ops/release/signed-bluegreen/test-migration-static-contract-20261011.py'
 NGINX_CHECK=Path('/root/workspace/assps-core-marks-teacher-assignment-security-20261010/ops/security/check-nginx-private-uploads.sh')
 FRONT_SOURCE='bfc7806f9a2ac08dc1f5ccf5845436ac5a3056cb'
 BACK_SOURCE='580111e8ee92fa13ee672578461927294cfada6b'
@@ -95,12 +99,27 @@ def main():
         nginx=bool(check and check.returncode==0 and 'NGINX_PRIVATE_UPLOAD_ALIAS_GATE_PASS' in check.stdout)
     else:nginx=False
     print('LIVE_PRIVATE_MEDIA_'+('PASS' if nginx else 'FAIL'),flush=True)
-    if LIVE_PROBE.exists():
-        probe=call(['python3',str(LIVE_PROBE)],ROOT,25)
-        signed=bool(probe and probe.returncode==0 and 'PRODUCTION_SIGNED_RUNTIME_IDENTITY_PREFLIGHT_PASS' in probe.stdout)
+    # This static contract is required even when --full is not requested.
+    contract=call(['python3',str(MIGRATION_CONTRACT)],ROOT,15) if MIGRATION_CONTRACT.is_file() else None
+    contract_pass=bool(contract and contract.returncode==0 and 'Ran 4 tests' in contract.stderr and 'OK' in contract.stderr)
+    print('V2_ISOLATED_MIGRATION_SOURCE_CONTRACT_'+('PASS' if contract_pass else 'FAIL'),flush=True)
+    ok=ok and contract_pass
+    if LIVE_SIGNED_PROBE.is_file():
+        probe=call(['python3',str(LIVE_SIGNED_PROBE)],ROOT,30)
+        signed=bool(probe and probe.returncode==0 and 'SECURITY_PRECUTOVER=PASS' in probe.stdout)
+        if probe:
+            for line in probe.stdout.splitlines():
+                if line.startswith(('SIGNED_RESTRICTIVE_POLICIES_', 'SIGNED_PERMISSIVE_POLICIES_',
+                     'SIGNED_PROTECTED_SCHEMA=', 'SIGNED_RESTRICTED_RUNTIME=',
+                     'SIGNED_LOGIN_NONBYPASS=', 'UNPROTECTED_PUBLIC_TABLES_DENIED=')):
+                    print('CORE_SECURITY_'+line,flush=True)
     else:signed=False
-    print('LIVE_SIGNED_NONBYPASS_RUNTIME_'+('PASS' if signed else 'FAIL'),flush=True)
+    print('LIVE_SIGNED_BLUEGREEN_PRECUTOVER_'+('PASS' if signed else 'FAIL'),flush=True)
     print('SOURCE_CANDIDATE_'+('PASS' if ok else 'FAIL'),flush=True)
+    # The signed green bootstrap must be explicitly routed: new NOINHERIT
+    # login intentionally cannot query public.users before verifying a JWT.
+    # Preserve old /auth routes or provide independently reviewed alternative.
+    print('LIVE_MARKS_ONLY_AUTH_INGRESS_SEPARATION=UNVERIFIED',flush=True)
     # Never claim automatic certification after an identity probe. Real live
     # authorized school JWT negative matrix and restoration verification are
     # an independent release authority, not discoverable from synthetic tests.
