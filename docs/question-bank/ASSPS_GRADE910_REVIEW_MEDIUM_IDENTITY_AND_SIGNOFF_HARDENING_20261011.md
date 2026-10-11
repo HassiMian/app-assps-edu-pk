@@ -31,3 +31,11 @@ Official source links:
 - Previously completed 345 Grade IX–X academic TAP tests on the preceding SHA remain historical regression evidence, **not** falsely presented as rerun on this new code.
 
 Publication remains HOLD. Production deployment belongs exclusively to SaaS Core; 43 completed legacy papers are reference/compatibility content rather than live question-approval gates.
+
+## Read-only 50-source-language faculty handoff — new research evidence
+
+An additional deterministic, frozen-source-backed review packet now exists at `ASSPS_GRADE910_50_UNRESOLVED_MEDIUM_SOURCE_REVIEW_20261011.json`. It exports only immutable original IDs, source/revision hashes, source catalogue identifiers, abstract language-presence metadata and explicit HUMAN REVIEW HOLD decisions; it never publishes question text, answers, original copyrighted content or impersonated signed approval. The generation command `node ops/qbank/prepare-grade910-missing-medium-review.cjs --write` is deliberate, not invoked implicitly by a production build. `node --test ops/tests/grade910-unresolved-frozen-source-medium-review.test.cjs` verifies exact JSON reproducibility and original SHA identity.
+
+Source-shape audit found 50 originals without question-level medium metadata in exactly two frozen research files: 44 standalone English Grade IX competency items, and 6 Biology IX source research questions. Among those six Biology drafts, **two** have an Urdu-language stem and **four** have no usable Urdu stem. The presence of an Urdu research draft is NOT independent semantic equivalence or permission to mark the source `dual`. No frozen source is edited. All 50 need a qualified explicit subject/medium/provenance decision and any necessary authored revised record, with its own new revision and review. Original human approval remains zero.
+
+Two additional read-only manifest tests: **2/2 PASS**, exit0. No new deployment or school operational dataset changes.
