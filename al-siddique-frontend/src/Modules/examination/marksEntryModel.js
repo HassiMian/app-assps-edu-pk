@@ -53,12 +53,17 @@ export const marksEntryClasses = (academicClasses=[], exams=[]) => {
 }
 
 export const marksSubjectsForClass = ({exam, className, academicSubjects=[]}) => {
+  const name = String(exam?.name || '').trim().replace(/\s+/g,' ').toLowerCase()
+  const session = String(exam?.session || '').trim()
+  const type = String(exam?.type || '')
+  const officialTerm = name === 'first term exam' && session === '2026-2027' &&
+    (type === 'Term Exam' || type === 'TE')
   // An explicit empty offering list from the signed school API means NO subject
   // configured. Do not invent a hardcoded subject or silently use an unrelated
   // academic setup; keep the section records intact in exam.subject_offerings.
   if (Array.isArray(exam?.subject_offerings)) {
     const seen = new Set()
-    return exam.subject_offerings
+    const subjects = exam.subject_offerings
       .filter(row => equivalentMarksClass(row.class_name,className))
       .map(row => String(row.subject || '').trim())
       .filter(subject => {
@@ -67,11 +72,12 @@ export const marksSubjectsForClass = ({exam, className, academicSubjects=[]}) =>
         seen.add(key)
         return true
       })
+    // Preserve legacy assessments that have no exam_subjects records at all:
+    // only the official First Term exam's explicit missing class mapping is a
+    // hard block. Do not erase configured ordinary assessment subjects.
+    if (subjects.length || officialTerm) return subjects
   }
-  const name = String(exam?.name || '').trim().replace(/\s+/g,' ').toLowerCase()
-  const session = String(exam?.session || '').trim()
-  const type = String(exam?.type || '')
-  if (name === 'first term exam' && session === '2026-2027' && (type === 'Term Exam' || type === 'TE')) {
+  if (officialTerm) {
     const official = OFFICIAL_FIRST_TERM_SUBJECTS_2026[normalizeMarksClass(className)]
     if (Array.isArray(official) && official.length) return official
   }

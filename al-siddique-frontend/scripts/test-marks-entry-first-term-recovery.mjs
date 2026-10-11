@@ -43,6 +43,9 @@ const storedExam={...exams[0],subject_offerings:[
 assert.deepEqual(marksSubjectsForClass({exam:storedExam,className:'One',academicSubjects:[]}),['English','Mathematics'])
 assert.deepEqual(marksSubjectsForClass({exam:storedExam,className:'Nine',academicSubjects:['Unapproved Course']}),[],
   'Authoritative absence cannot invent Grade Nine or Pre Nine offerings')
+assert.deepEqual(marksSubjectsForClass({exam:{...exams[1],subject_offerings:[]},
+  className:'One',academicSubjects:['Assessment English']}),['Assessment English'],
+  'Legacy assessment without registered offerings must retain academic subjects')
 assert.deepEqual(marksEntryClasses([],exams.filter(e=>e.id===9)).slice(0,5),['Starter','Mover','Flyer','One','Two'])
 assert.deepEqual(marksEntryClasses([],[]),[])
 console.log('PASS actual First Term Exam ID9 discovery, exact selection, class/type filtering')

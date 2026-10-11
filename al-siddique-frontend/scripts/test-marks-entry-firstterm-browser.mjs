@@ -33,10 +33,21 @@ try{
    classes:[{name:'Class One',level:'1',active:true,sections:['A']},{name:'Two',level:'2',active:true,sections:['A']}],
    subjects:[],
    sessionStart:'2026-04-01',sessionEnd:'2027-03-31'}})
-  if(path==='/api/exams' && request.method()==='GET')return json(route,{success:true,data:[
-   {id:9,name:'First Term Exam',type:'TE',class:'All Classes',session:'2026-2027',total_marks:100,pass_marks:33},
+  if(path==='/api/exams' && request.method()==='GET'){
+   assert.equal(url.searchParams.get('include_subjects'),'1',
+     'Marks Sheet must request signed authoritative exam subject offerings')
+   return json(route,{success:true,data:[
+   {id:9,name:'First Term Exam',type:'TE',class:'All Classes',session:'2026-2027',total_marks:100,pass_marks:33,
+    subject_offerings:[
+      ...['English','Mathematics','Urdu','Science','Islamiyat','Quran / Nazra'].map((subject,i)=>
+        ({exam_id:9,class_name:'One',section:'Blue',subject,sort_order:i+1})),
+      ...['English','Mathematics','Urdu','Science','Islamiyat','Quran / Nazra'].map((subject,i)=>
+        ({exam_id:9,class_name:'One',section:'Yellow',subject,sort_order:i+1})),
+      {exam_id:9,class_name:'Eight',section:'Blue',subject:'Computer',sort_order:4}
+    ]},
    {id:20,name:'Monthly Assessment',type:'AS',class:'Class One',session:'2026-2027',total_marks:20,pass_marks:7}
   ]})
+  }
   if(path==='/api/students' && request.method()==='GET'){
    const cls=url.searchParams.get('class')
    // Reproduce legacy admissions mixed class storage. Unfiltered roster
@@ -72,7 +83,7 @@ const listed=await subjectSelect.locator('option').allTextContents()
 assert.deepEqual(listed.filter(x=>x!=='Select subject'),[
  'English','Mathematics','Urdu','Science','Islamiyat','Quran / Nazra'
 ])
-console.log('MARKS_BROWSER_PASS official First Term 2026-2027 subjects visible despite empty academic setup')
+console.log('MARKS_BROWSER_PASS signed Exam9 Blue/Yellow subject offerings visible, sections preserved, no duplicates or empty academic setup dependency')
  await page.locator('select').nth(3).selectOption('English')
  await page.getByRole('button',{name:'Search Students'}).click()
  await page.getByText('Synthetic One A').waitFor({timeout:12000})
