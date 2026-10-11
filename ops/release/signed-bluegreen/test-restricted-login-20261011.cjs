@@ -2,16 +2,25 @@
 /** Authenticated password/SCRAM signed PostgreSQL acceptance on isolated restored DB ONLY. */
 const assert=require('node:assert/strict')
 const {Pool}=require('/var/www/apex-backend/node_modules/pg')
+const {readFileSync}=require('node:fs')
 const {applySignedTenantContext}=require('../../../al-siddique-backend/src/services/security/coreSignedTenantContext')
+function getFixture(){
+  assert.equal(process.env.ASSPS_CLONE_INPUT_STDIN,'1',
+    'Restricted login rehearsal requires protected stdin fixture; no credential environment variables')
+  const fixture=JSON.parse(readFileSync(0,'utf8'))
+  assert.ok(fixture && typeof fixture==='object' && !Array.isArray(fixture))
+  return fixture
+}
 async function main(){
-  assert.equal(process.env.ASSPS_CLONE_DB_NAME,'assps_backup_restore_check_20261011')
-  assert.equal(process.env.ASSPS_CLONE_DB_PORT,'55432')
-  assert.equal(process.env.ASSPS_CLONE_DB_USER,'assps_marks_signed_login')
-  assert.ok(String(process.env.ASSPS_CLONE_DB_PASSWORD||'').length>=32)
-  assert.ok(String(process.env.ASSPS_CLONE_SIGNING_KEY||'').length>=32)
-  assert.match(String(process.env.ASSPS_CLONE_SCHOOL_ID||''),/^[1-9][0-9]*$/)
-  const pool=new Pool({host:'127.0.0.1',port:55432,database:process.env.ASSPS_CLONE_DB_NAME,
-    user:process.env.ASSPS_CLONE_DB_USER,password:process.env.ASSPS_CLONE_DB_PASSWORD,
+  const fixture=getFixture()
+  assert.equal(fixture.database,'assps_backup_restore_check_20261011')
+  assert.equal(String(fixture.port),'55432')
+  assert.equal(fixture.user,'assps_marks_signed_login')
+  assert.match(String(fixture.password||''),/^[a-f0-9]{64,}$/)
+  assert.match(String(fixture.signingKey||''),/^[a-f0-9]{64,}$/)
+  assert.match(String(fixture.schoolId||''),/^[1-9][0-9]*$/)
+  const pool=new Pool({host:'127.0.0.1',port:55432,database:fixture.database,
+    user:fixture.user,password:fixture.password,
     max:1,connectionTimeoutMillis:2500})
   try {
     const client=await pool.connect()
@@ -24,11 +33,11 @@ async function main(){
       await client.query('BEGIN')
       try {
         await client.query('SET ROLE assps_marks_signed_runtime')
-        await applySignedTenantContext(client,{tenantId:process.env.ASSPS_CLONE_SCHOOL_ID,
-          tenantKey:'disposable_scope',actorId:999998,secret:process.env.ASSPS_CLONE_SIGNING_KEY,
+        await applySignedTenantContext(client,{tenantId:fixture.schoolId,
+          tenantKey:'disposable_scope',actorId:999998,secret:fixture.signingKey,
           expectedLogin:'assps_marks_signed_login'})
-        const allowed=await client.query('SELECT COUNT(*)::int AS n FROM public.schools WHERE id=$1',[Number(process.env.ASSPS_CLONE_SCHOOL_ID)])
-        const denied=await client.query('SELECT COUNT(*)::int AS n FROM public.schools WHERE id<>$1',[Number(process.env.ASSPS_CLONE_SCHOOL_ID)])
+        const allowed=await client.query('SELECT COUNT(*)::int AS n FROM public.schools WHERE id=$1',[Number(fixture.schoolId)])
+        const denied=await client.query('SELECT COUNT(*)::int AS n FROM public.schools WHERE id<>$1',[Number(fixture.schoolId)])
         assert.equal(allowed.rows[0].n,1)
         assert.equal(denied.rows[0].n,0)
         console.log('REAL_PASSWORD_LOGIN_SIGNED_OWN_SCHOOL_PASS CROSS_SCHOOL_DENIED_PASS')

@@ -17,6 +17,12 @@ class SignedMigrationContract(unittest.TestCase):
   self.assertIn("n.nspname='public' AND c.relkind='r' AND c.relforcerowsecurity",self.up)
   self.assertNotIn('GRANT apex_app_runtime TO assps_marks_signed_runtime',self.up)
   self.assertNotIn('FOR ALL TO apex_app_runtime',self.up)
+ def test_scram_fixture_requires_protected_stdin(self):
+  fixture=(ROOT/'test-restricted-login-20261011.cjs').read_text()
+  self.assertIn("process.env.ASSPS_CLONE_INPUT_STDIN,'1'",fixture)
+  self.assertIn("JSON.parse(readFileSync(0,'utf8'))",fixture)
+  self.assertNotIn('process.env.ASSPS_CLONE_DB_PASSWORD',fixture)
+  self.assertNotIn('process.env.ASSPS_CLONE_SIGNING_KEY',fixture)
  def test_role_and_nonrls_fail_closed_postflight(self):
   self.assertIn('Refusing pre-existing signed role with unverified global grants',self.up)
   self.assertIn("policyname IN ('core_signed_tenant_guard','core_signed_tenant_allow')",self.up)
