@@ -1,4 +1,5 @@
 -- Reversible additive security artifact rollback, NOT application/source rollback.
+-- Dedicated signing role is revoked and dropped only after exclusive safety guards.
 -- Does NOT drop or revoke apex_app_runtime, apexos_user, Paper owners or table data.
 -- Run only after reverting green backend and verifying no signed-runtime sessions.
 \set ON_ERROR_STOP on
@@ -42,11 +43,30 @@ DROP FUNCTION core_security.signed_tenant_key_allowed(TEXT) RESTRICT;
 DROP FUNCTION core_security.valid_signed_context() RESTRICT;
 DROP TABLE core_security.signing_key RESTRICT;
 DROP SCHEMA core_security RESTRICT;
+-- New dedicated runtime was provisioned by our additive migration; release
+-- its exact grants and delete it to restore the old role catalog. Never touch
+-- apex_app_runtime or any Paper-owned role. DROP ROLE is RESTRICT by default:
+-- any unexpected membership/dependency will abort and roll back everything.
+DO $role_guard$
+BEGIN
+ IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname='assps_marks_signed_runtime'
+    AND NOT rolcanlogin AND NOT rolbypassrls AND NOT rolsuper)
+ OR EXISTS (SELECT 1 FROM pg_auth_members a JOIN pg_roles r ON a.member=r.oid
+            WHERE r.rolname='assps_marks_signed_runtime')
+ OR EXISTS (SELECT 1 FROM pg_auth_members a JOIN pg_roles r ON a.roleid=r.oid
+            WHERE r.rolname='assps_marks_signed_runtime')
+ THEN RAISE EXCEPTION 'Refuse dedicated runtime cleanup: role or memberships changed'; END IF;
+END $role_guard$;
+REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA public FROM assps_marks_signed_runtime;
+REVOKE ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public FROM assps_marks_signed_runtime;
+REVOKE USAGE ON SCHEMA public FROM assps_marks_signed_runtime;
+DROP ROLE assps_marks_signed_runtime;
 DO $post$
 BEGIN
  IF (SELECT count(*) FROM pg_policies WHERE schemaname='public')<>212
  OR (SELECT count(*) FROM pg_policies WHERE policyname IN ('core_signed_tenant_guard','core_signed_tenant_allow'))<>0
  OR (SELECT count(*) FROM pg_namespace WHERE nspname='core_security')<>0
+ OR (SELECT count(*) FROM pg_roles WHERE rolname='assps_marks_signed_runtime')<>0
  THEN RAISE EXCEPTION 'Incomplete signed rollback'; END IF;
 END $post$;
 COMMIT;
