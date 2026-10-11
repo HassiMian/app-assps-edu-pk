@@ -18,7 +18,6 @@ const DailyDiaryFeature = lazy(() => import('./DailyDiaryWorkspace'))
 const PaperEditorRouter = lazy(() => import('./PaperEditor/editorV2/PaperEditorRouter'))
 const EarlyYearsStudio = lazy(() => import('./PaperEditor/earlyYears/EarlyYearsStudio'))
 
-export { resolvePaperRoute }
 
 const C = {
   gold:'#C8991A',

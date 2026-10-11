@@ -4,23 +4,8 @@
 // StructuredFocusContext.jsx — Tracks whether focus is in a Tiptap field or a structured control.
 // Provides history-routing context via React context API.
 
-import { createContext, useContext, useRef, useCallback, useMemo } from 'react';
-
-// Re-export pure JS helpers (no JSX) so both this file and node:test can use them.
-
-// Re-export pure JS helpers (no JSX) so both this file and node:test can use them.
-export {
-  INTERACTION_MODE,
-  buildStructuredControlKey,
-  parseStructuredControlKey,
-} from './structuredFocusHelpers.js'
-
-const StructuredFocusCtx = createContext({
-  getMode: () => 'NONE',
-  setMode: () => {},
-  getActiveStructuredKey: () => null,
-  setActiveStructuredKey: () => {},
-})
+import { useRef, useCallback, useMemo, useLayoutEffect } from 'react';
+import { StructuredFocusCtx } from './structuredFocusState.js';
 
 /**
  * Provider: wraps the editor container.
@@ -36,8 +21,10 @@ export function StructuredFocusProvider({ children, onModeChange, onActiveStruct
   // callback in refs so context methods stay identity-stable across provider
   // renders. Otherwise StructuredTextInput cleanup effects can run on an ordinary
   // re-render and incorrectly clear STRUCTURED interaction mode.
-  onModeChangeRef.current = onModeChange
-  onActiveStructuredKeyChangeRef.current = onActiveStructuredKeyChange
+  useLayoutEffect(() => {
+    onModeChangeRef.current = onModeChange
+    onActiveStructuredKeyChangeRef.current = onActiveStructuredKeyChange
+  }, [onModeChange, onActiveStructuredKeyChange])
 
   const setMode = useCallback((mode) => {
     modeRef.current = mode
@@ -70,8 +57,4 @@ export function StructuredFocusProvider({ children, onModeChange, onActiveStruct
       {children}
     </StructuredFocusCtx.Provider>
   )
-}
-
-export function useStructuredFocus() {
-  return useContext(StructuredFocusCtx)
 }

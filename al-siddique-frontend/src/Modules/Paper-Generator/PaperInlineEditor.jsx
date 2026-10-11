@@ -1,11 +1,11 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 
-export const INLINE_FONTS = [
+const INLINE_FONTS = [
  ['Default',''], ['Times New Roman','Times New Roman'], ['Arial','Arial'],
  ['Georgia','Georgia'], ['Cambria Math','Cambria Math'],
  ['Jameel Noori Nastaleeq','Jameel Noori Nastaleeq'], ['Noto Nastaliq Urdu','Noto Nastaliq Urdu'],
 ]
-export const INLINE_SIZES = [8,9,10,11,12,13,14,16,18,20,22,24,28,32]
+const INLINE_SIZES = [8,9,10,11,12,13,14,16,18,20,22,24,28,32]
 const selectionCache = new Map()
 const liveFieldHandles = new WeakMap()
 let lastActualSelection = null
@@ -77,7 +77,7 @@ function safeStyleValue(name,value='') {
  if(name==='transform') return /^skewX\(-8deg\)$/i.test(clean)?'skewX(-8deg)':''
  return ''
 }
-export function sanitizeInlineHtml(html='') {
+function sanitizeInlineHtml(html='') {
  if(typeof document==='undefined') return escapeHtml(String(html).replace(/<[^>]*>/g,''))
  const template=document.createElement('template'); template.innerHTML=String(html)
  const cleanNode=node=>{
@@ -109,7 +109,7 @@ export function sanitizeInlineHtml(html='') {
  cleanNode(template.content)
  return template.innerHTML
 }
-export function htmlToPlainText(html='') {
+function htmlToPlainText(html='') {
  if(typeof document==='undefined') return String(html).replace(/<br\s*\/?\s*>/gi,'\n').replace(/<[^>]*>/g,'')
  const div=document.createElement('div'); div.innerHTML=sanitizeInlineHtml(html)
  return (div.innerText||div.textContent||'').replace(/\u00a0/g,' ').trim()
@@ -140,6 +140,8 @@ function findActiveElement(active){
  return [...document.querySelectorAll('[data-paper-inline-editable]')].find(el=>String(el.dataset.sectionId||'')===section&&String(el.dataset.editField||'')===field)||null
 }
 
+function sanitizeLiveEditableElement(el,safe){ if(el.innerHTML!==safe) el.innerHTML=safe }
+
 export function InlineEditable(props) {
  const { text='', richHtml='', editMode=false, direction='ltr', className='', style,
   fieldKey='', sectionId='', onCommit, onActivate, as='span', singleLine=true, ariaLabel='' }=props
@@ -151,7 +153,7 @@ export function InlineEditable(props) {
   if(ref.current.innerHTML!==html) ref.current.innerHTML=html
   lastCommittedHtml.current=html
  },[html])
- const rememberSelection=()=>{
+ const rememberSelection=useCallback(()=>{
   const el=ref.current; const selection=window.getSelection?.()
   if(!el||!selection||!selection.rangeCount||selection.isCollapsed) return
   const range=selection.getRangeAt(0); const snapshot=selectionOffsets(el,range)
@@ -168,18 +170,18 @@ export function InlineEditable(props) {
     window.dispatchEvent?.(new CustomEvent('paper-inline-selection-saved',{detail:{sectionId,fieldKey,start:snapshot.start,end:snapshot.end}}))
    }
   }
- }
+ },[sectionId,fieldKey])
  useEffect(()=>{
   if(!editMode) { savedSelection.current=null; selectionCache.delete(cacheKey(sectionId,fieldKey)); return }
   const handler=()=>rememberSelection()
   document.addEventListener('selectionchange',handler)
   return ()=>document.removeEventListener('selectionchange',handler)
- },[editMode,sectionId,fieldKey])
+ },[editMode,sectionId,fieldKey,rememberSelection])
  const commitElement=target=>{
   const el=target||ref.current
   if(!el) return
   const safe=sanitizeInlineHtml(el.innerHTML)
-  if(el.innerHTML!==safe) el.innerHTML=safe
+  sanitizeLiveEditableElement(el,safe)
   if(safe===lastCommittedHtml.current) return
   lastCommittedHtml.current=safe
   if(onCommit) onCommit({ text:htmlToPlainText(safe), html:safe })
@@ -241,7 +243,7 @@ function ownerOfSelectionNode(node) {
  const el=node?.nodeType===Node.ELEMENT_NODE?node:node?.parentElement
  return el?.closest?.('[data-paper-inline-editable]')||null
 }
-function resolveActionTarget(active) {
+function resolveActionTarget() {
  const selection=window.getSelection?.()
  if(selection?.rangeCount&&!selection.isCollapsed){
   const range=selection.getRangeAt(0)
@@ -263,12 +265,9 @@ function resolveActionTarget(active) {
  const range=rangeFromOffsets(previous.element,previous.snapshot)
  return range?{el:previous.element,handle,range,snapshot:previous.snapshot}:null
 }
-function resolveActiveRange(active) {
- return resolveActionTarget(active)?.range||null
-}
 function exec(active,command,value=null,requireSelection=true) {
  if((command==='undo'||command==='redo')&&replaySemanticHistory(active,command))return
- const target=resolveActionTarget(active)
+ const target=resolveActionTarget()
  const el=target?.el||(!requireSelection?findActiveElement(active):null)
  const handle=target?.handle||active
  if(!el||requireSelection&&!target) return
@@ -403,7 +402,7 @@ function splitAndToggleMark(el,snapshot,mark) {
 }
 function toggleSemanticMark(active,command) {
  if(!MARK_NAMES.includes(command))return null
- const target=resolveActionTarget(active)
+ const target=resolveActionTarget()
  if(!target)return null
  const {el,handle,snapshot}=target
  let result=splitAndToggleMark(el,snapshot,command)
@@ -434,7 +433,7 @@ function toggleSemanticMark(active,command) {
  return result
 }
 function replaySemanticHistory(active,direction) {
- const target=resolveActionTarget(active)
+ const target=resolveActionTarget()
  if(!target)return false
  const {el,handle,snapshot}=target
  const history=semanticHistory.get(el)
@@ -456,7 +455,7 @@ function replaySemanticHistory(active,direction) {
  return true
 }
 function applyRangeStyle(active,styles={}) {
- const target=resolveActionTarget(active)
+ const target=resolveActionTarget()
  if(!target)return
  const {el,handle,range,snapshot}=target
  const selection=window.getSelection?.()
@@ -481,7 +480,7 @@ export function PaperSelectionToolbar({editMode=false,active=null}) {
  const toggleMark=command=>{
   const next=toggleSemanticMark(active,command)
   if(next!==null){
-   const target=resolveActionTarget(active)
+   const target=resolveActionTarget()
    setMarks(target?selectedMarkStates(target.el,target.snapshot):previous=>({...previous,[command]:next}))
   }
  }
@@ -499,7 +498,7 @@ export function PaperSelectionToolbar({editMode=false,active=null}) {
     String(detail.fieldKey||'')===String(active.fieldKey||'')
    )) {
     setSelectionRev(value=>value+1)
-    const target=resolveActionTarget(active)
+    const target=resolveActionTarget()
     if(target){
      const section=String(detail.sectionId||'')
      const field=String(detail.fieldKey||'')
@@ -515,7 +514,7 @@ export function PaperSelectionToolbar({editMode=false,active=null}) {
  if(!editMode) return null
  const title=active?.fieldKey?'Editing: '+active.fieldKey:'Click text to edit'
  return <div className="no-print" data-inline-selection-toolbar data-selection-revision={selectionRev} data-selection-saved={active?.getSelectionSnapshot?.()?'true':'false'}
-  onMouseDownCapture={()=>resolveActionTarget(active)}
+  onMouseDownCapture={()=>resolveActionTarget()}
   style={{position:'fixed',left:'50%',bottom:18,transform:'translateX(-50%)',zIndex:12000,display:'flex',alignItems:'center',gap:5,padding:'7px 9px',border:'1px solid var(--pg-panel-border,#ef4444)',borderRadius:10,background:'var(--pg-panel-bg,rgba(7,25,48,.97))',color:'var(--pg-text,#f8fafc)',boxShadow:'var(--pg-panel-shadow,0 8px 26px rgba(0,0,0,.35))',fontFamily:'Arial,sans-serif',direction:'ltr'}}>
   <span style={{fontSize:11,fontWeight:900,color:'var(--pg-gold,#fca5a5)',padding:'0 5px'}}>{title}</span>
   <TButton label="B" pressed={marks.bold} disabled={!active?.element} onClick={()=>toggleMark('bold')} />
