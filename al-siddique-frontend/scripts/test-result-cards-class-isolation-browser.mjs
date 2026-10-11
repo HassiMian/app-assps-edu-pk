@@ -109,6 +109,8 @@ try {
     { student_id: 701, name: 'Bilal Seven', student_class: 'Seven', student_section: 'Blue', gr_number: 'GR-701', roll_number: '5', subject: 'English', marks_obtained: 65, total_marks: 100 },
     // Class One - Section A
     { student_id: 101, name: 'Ayesha One', student_class: 'One', student_section: 'A', gr_number: 'GR-101', roll_number: '10', subject: 'English', marks_obtained: 95, total_marks: 100 },
+    // Synthetic malformed record: no authenticated enrolled class.
+    { student_id: 990, name: 'Unknown Class Synthetic', student_class: '', student_section: '', gr_number: 'GR-990', roll_number: '99', subject: 'English', marks_obtained: 90, total_marks: 100 },
     // Pre Nine - MUST BE EXCLUDED from Exam 9
     { student_id: 901, name: 'PreNine Student', student_class: 'Pre Nine', student_section: 'A', gr_number: 'GR-901', roll_number: '20', subject: 'English', marks_obtained: 70, total_marks: 100 },
     // Nine - MUST BE EXCLUDED from Exam 9
@@ -158,6 +160,7 @@ try {
   // Verify Pre Nine and Nine students are EXCLUDED from Exam 9
   assert.ok(!optionsText.includes('PreNine Student'), 'Pre Nine student must not be present for Exam 9')
   assert.ok(!optionsText.includes('Nine Student'), 'Nine student must not be present for Exam 9')
+  assert.ok(!optionsText.includes('Unknown Class Synthetic'), 'Missing student class must fail closed for Exam 9')
   assert.ok(optionsText.includes('Tariq Eight-Blue'), 'Class Eight student must be present')
   assert.ok(optionsText.includes('Bilal Seven'), 'Class Seven student must be present')
   assert.ok(optionsText.includes('Ayesha One'), 'Class One student must be present')

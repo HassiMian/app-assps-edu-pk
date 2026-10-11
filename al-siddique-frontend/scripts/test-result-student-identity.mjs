@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import {readFileSync} from 'node:fs'
-import {buildResultStudents} from '../src/Modules/examination/resultStudentIdentity.js'
+import {buildResultStudents,resolveResultStudentClass} from '../src/Modules/examination/resultStudentIdentity.js'
 import {createServer} from 'vite'
 import {createElement} from 'react'
 import {renderToStaticMarkup} from 'react-dom/server'
@@ -20,6 +20,11 @@ assert.equal(students[1].className,'Class Seven')
 assert.equal(students[1].section,'A')
 assert.equal(buildResultStudents([{student_id:1,student_class:'All Classes'}])[0].className,'')
 assert.equal(buildResultStudents([{subject:'orphan'}]).length,0)
+assert.equal(resolveResultStudentClass({className:'All Classes'},{class:'All Classes'}),'—')
+assert.equal(resolveResultStudentClass({className:'All Classes',class:'Eight'},{class:'All Classes'}),'Eight')
+assert.equal(resolveResultStudentClass({className:'Eight'},{class:'All Classes'}),'Eight')
+assert.equal(resolveResultStudentClass({}, {class:'Seven'}),'Seven')
+
 // A production-frontend-based candidate can pair with a separate independently
 // release-verified backend source. Never infer deployed backend from frontend git.
 const backendSourceFile=process.env.ASSPS_TEST_BACKEND_SOURCE || '../al-siddique-backend/src/routes/examRoutes.js'
@@ -39,5 +44,11 @@ try {
  assert.ok(!html.includes('All Classes'))
  const noClass=m.buildResultCardData({student:{name:'No Class'},exam:{name:'First Term',class:'All Classes',total_marks:100},studentMarks:[{subject:'Math',marks_obtained:80,total_marks:100}],options:{...m.DEFAULT_RESULT_OPTIONS,template:'signature-editorial'}})
  assert.equal(noClass.student.className,'—')
+ for (const template of ['signature-editorial','reference']) {
+  const ambiguous=m.buildResultCardData({student:{name:'Ambiguous Synthetic',className:'All Classes',class:'All Classes'},exam:{name:'First Term',class:'All Classes',total_marks:100},studentMarks:[{subject:'Math',marks_obtained:0,total_marks:100}],options:{...m.DEFAULT_RESULT_OPTIONS,template}})
+  assert.equal(ambiguous.student.className,'—',template+' must reject All Classes as student class')
+  const markup=renderToStaticMarkup(createElement(m.ResultCardPreview,{data:ambiguous}))
+  assert.ok(!markup.includes('All Classes'),template+' must not expose the broad exam filter as student class')
+ }
 } finally {await vite.close()}
 console.log('RESULT_STUDENT_IDENTITY: 15 checks PASS including real SSR of class/section and roll number')

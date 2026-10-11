@@ -37,3 +37,15 @@ export function buildResultStudents(rows = []) {
  }
  return [...students.values()]
 }
+
+// Print/render boundary: the exam's broad 'All Classes' scope must never be
+// substituted for a student's actual enrolled class. Legacy and premium
+// templates share this fail-closed helper, including direct-builder callers.
+export function resolveResultStudentClass(student = {}, exam = {}) {
+ const candidates = [student?.className, student?.class, exam?.class]
+ const label = candidates.find(value => {
+  const raw=String(value ?? '').trim()
+  return raw && raw !== '—' && !/^all\s+classes$/i.test(raw)
+ })
+ return String(label ?? '—').trim()
+}

@@ -3,12 +3,13 @@ import { summarizeResultRows, formatResultCell, meetsResultPassMark } from './re
 import { getResultLogoDiagnostic } from './resultLogoDiagnostics'
 import { summarizePrintBatch } from './resultPrintPlanning'
 import { buildResultStudents } from './resultStudentIdentity'
-import { useState, useEffect, useRef, useMemo } from 'react'
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import api from '../../services/api'
 import { usePaperStore } from '../Paper-Generator/usePaperStore'
 import { useAcademicStore } from '../../services/useAcademicStore'
 import { sortSchoolClasses, schoolClassOrderKey } from '../../services/schoolClassOrder'
+import { isFirstTermExamNine, isClassAllowedForExam } from './resultClassPrintScope.js'
 import { C, card, btnPrimary, btnSecondary, select, sectionHeader } from '../moduleStyles'
 import {
   ResultCardPreview, ResultCardPrintToolbar, ResultCardTemplateSelector,
@@ -30,25 +31,9 @@ const TEACHER_REMARK_PRESETS = [
   'Irregular preparation affected performance. Regular homework and revision are required.',
 ]
 
-const FIRST_TERM_EXAM_9_ORDER_KEYS = new Set([
-  'starter', 'mover', 'flyer', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'
-])
 const CANONICAL_STARTER_TO_EIGHT = [
   'Starter', 'Mover', 'Flyer', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight'
 ]
-
-export function isFirstTermExamNine(examObj) {
-  if (!examObj) return false
-  const idNum = Number(examObj.id)
-  return idNum === 9 || (idNum === 9 && /first\s+term/i.test(String(examObj.name || '')))
-}
-
-export function isClassAllowedForExam(examObj, className) {
-  if (!isFirstTermExamNine(examObj)) return true
-  if (!className) return false
-  const key = schoolClassOrderKey(className)
-  return FIRST_TERM_EXAM_9_ORDER_KEYS.has(key)
-}
 
 // Modal Component
 export function ProfessionalParametersModal({ cards, student, exam, studentMarks, school, gradeBands, onClose }) {
@@ -240,6 +225,7 @@ export default function ResultCards() {
   }
 
   const handleExamChange = (examId) => {
+    latestResultRequest.current += 1 // invalidate the previous exam immediately
     setSelectedExam(examId)
     setSelectedStudent('')
     setSelectedPrintClass('')
@@ -250,11 +236,8 @@ export default function ResultCards() {
   }
 
   useEffect(() => {
-    setSelectedStudent('')
-    setSelectedPrintClass('')
-    setSelectedPrintSection('')
-    setPrintCards([])
-    setShowParams(false)
+    // All selection resets happen in handleExamChange. Do not synchronously
+    // cascade state updates from an effect (React compiler + stale requests).
     const scheduled = window.setTimeout(() => {
       if (selectedExam) loadResults()
     }, 0)
@@ -265,7 +248,7 @@ export default function ResultCards() {
   const exam = exams.find(e => String(e.id) === String(selectedExam))
   const isExamNine = isFirstTermExamNine(exam)
 
-  const activeResults = String(loadedExamId) === String(selectedExam) ? results : []
+  const activeResults = useMemo(() => String(loadedExamId) === String(selectedExam) ? results : [], [loadedExamId, selectedExam, results])
   const allLoadedStudents = useMemo(() => buildResultStudents(activeResults), [activeResults])
   const students = useMemo(() => {
     if (!isExamNine) return allLoadedStudents
@@ -275,13 +258,16 @@ export default function ResultCards() {
   const availablePrintClasses = useMemo(() => {
     if (isExamNine) {
       const found = new Set()
-      ;(academicClassNames || []).forEach(c => {
-        if (isClassAllowedForExam(exam, c)) found.add(c)
-      })
-      students.forEach(s => {
-        const c = s.className || s.class
-        if (c && isClassAllowedForExam(exam, c)) found.add(c)
-      })
+      // Academic setup can contain 'Class Eight' while enrollment uses
+      // 'Eight'. Normalize aliases into one official print target.
+      const addOfficialClass = value => {
+        if (!isClassAllowedForExam(exam, value)) return
+        const key = schoolClassOrderKey(value)
+        const canonical = CANONICAL_STARTER_TO_EIGHT.find(name => schoolClassOrderKey(name) === key)
+        if (canonical) found.add(canonical)
+      }
+      ;(academicClassNames || []).forEach(addOfficialClass)
+      students.forEach(s => addOfficialClass(s.className || s.class))
       if (found.size === 0) return CANONICAL_STARTER_TO_EIGHT
       return sortSchoolClasses(Array.from(found))
     }
@@ -301,12 +287,10 @@ export default function ResultCards() {
   const availableSections = useMemo(() => {
     if (!selectedPrintClass) return []
     const sectionSet = new Set()
-    try {
-      const storeSections = typeof sectionsForClass === 'function' ? sectionsForClass(selectedPrintClass) : []
-      ;(storeSections || []).forEach(sec => {
-        if (sec && sec !== 'All') sectionSet.add(sec)
-      })
-    } catch {}
+    const storeSections = typeof sectionsForClass === 'function' ? sectionsForClass(selectedPrintClass) : []
+    ;(storeSections || []).forEach(sec => {
+      if (sec && sec !== 'All') sectionSet.add(sec)
+    })
     const targetKey = schoolClassOrderKey(selectedPrintClass)
     students.forEach(s => {
       const sKey = schoolClassOrderKey(s.className || s.class)
@@ -317,10 +301,12 @@ export default function ResultCards() {
     return Array.from(sectionSet).sort()
   }, [selectedPrintClass, sectionsForClass, students])
 
-  const buildPrintCards = (rows = activeResults, examObj = exam, scopeStudents = students) =>
+  const buildPrintCards = useCallback((rows = activeResults, examObj = exam, scopeStudents = students) =>
     scopeStudents.map(s => {
       const authenticatedClass = s.className || s.class || ''
       const safeClass = /^all\s+classes$/i.test(authenticatedClass.trim()) ? '' : authenticatedClass
+      if (!safeClass) return null // incomplete identity must not be printed
+      if (!isClassAllowedForExam(examObj, safeClass)) return null
       const sanitizedStudent = {
         ...s,
         className: safeClass,
@@ -331,7 +317,7 @@ export default function ResultCards() {
         exam: examObj,
         studentMarks: rows.filter(r => String(r.student_id) === String(s.id)),
       }
-    }).filter(item => item.studentMarks.length > 0)
+    }).filter(item => item && item.studentMarks.length > 0), [activeResults, exam, students])
 
   const classPrintCards = useMemo(() => {
     if (outputMode !== 'class' || !selectedPrintClass) return []
@@ -345,11 +331,11 @@ export default function ResultCards() {
       return true
     })
     return buildPrintCards(activeResults, exam, matchingStudents)
-  }, [outputMode, selectedPrintClass, selectedPrintSection, students, activeResults, exam])
+  }, [outputMode, selectedPrintClass, selectedPrintSection, students, activeResults, exam, buildPrintCards])
 
   const allExamPrintCards = useMemo(() => {
     return buildPrintCards(activeResults, exam, students)
-  }, [activeResults, exam, students])
+  }, [activeResults, exam, students, buildPrintCards])
 
   const studentMarks = activeResults.filter(r => String(r.student_id) === selectedStudent)
   const student = students.find(s => String(s.id) === selectedStudent)

@@ -1,3 +1,4 @@
+import { resolveResultStudentClass } from './resultStudentIdentity.js'
 import { inferExamTermKey, resolveResultPrintOptions } from './resultPrintPlanning'
 import { RESULT_TEMPLATES as LEGACY_TEMPLATES, DEFAULT_RESULT_OPTIONS, buildResultCardData as legacyBuilder } from './resultCardTemplates'
 
@@ -97,7 +98,7 @@ function buildPremiumResultCardData({ student, exam, studentMarks, options, scho
  name: student?.name || '—',
  fatherName: student?.fatherName || student?.father_name || '—',
  rollNo: student?.rollNo || student?.roll_number || student?.gr_number || student?.admissionNo || '—',
- className: student?.className || student?.class || (/^all\s+classes$/i.test(String(exam?.class || '')) ? '—' : (exam?.class || '—')),
+ className: resolveResultStudentClass(student, exam),
  section: student?.section || '-',
  photo: student?.photo || student?.image || student?.profile_photo || student?.profileImage || student?.profile_image || student?.photo_url || student?.image_url || '',
  admissionNo: student?.admissionNo || student?.gr_number || '',
@@ -135,5 +136,11 @@ function buildPremiumResultCardData({ student, exam, studentMarks, options, scho
 }
 
 export function buildResultCardData(args) {
- return PREMIUM_IDS.has(args.options?.template) ? buildPremiumResultCardData(args) : legacyBuilder(args)
+ // Normalize student class at the common boundary. The separately owned
+ // protected legacy template source stays byte-identical to its approved SHA.
+ const safeClass = resolveResultStudentClass(args.student, args.exam)
+ const scopedArgs = {...args, student:{...args.student,className:safeClass,class:safeClass}}
+ return PREMIUM_IDS.has(args.options?.template)
+  ? buildPremiumResultCardData(scopedArgs)
+  : legacyBuilder(scopedArgs)
 }
