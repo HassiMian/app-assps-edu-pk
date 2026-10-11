@@ -105,6 +105,18 @@ def main():
     contract_pass=bool(contract and contract.returncode==0 and re.search(r'Ran ([5-9]|[1-9][0-9]+) tests?', contract.stderr) and re.search(r'^OK$', contract.stderr, re.MULTILINE))
     print('V2_ISOLATED_MIGRATION_SOURCE_CONTRACT_'+('PASS' if contract_pass else 'FAIL'),flush=True)
     ok=ok and contract_pass
+    # All checks below are read-only: they neither provision the V2 role nor
+    # constitute authenticated database, teacher or rollback certification.
+    rehearsal=ROOT/'ops/release/signed-bluegreen/authorized-clone-rehearsal-20261011.py'
+    plan=call(['python3',str(rehearsal)],ROOT,15) if rehearsal.is_file() else None
+    plan_pass=bool(plan and plan.returncode==0 and 'PLAN_ONLY; NO_DATABASE_CONNECTION_OR_MUTATION' in plan.stdout)
+    print('V2_AUTHORIZED_DBA_RUNNER_PLAN_'+('PASS' if plan_pass else 'FAIL'),flush=True)
+    ok=ok and plan_pass
+    restored=ROOT/'ops/release/signed-bluegreen/verify-restored-clone-parity-20261011.py'
+    comparison=call(['python3',str(restored)],ROOT,50) if restored.is_file() else None
+    parity_pass=bool(comparison and comparison.returncode==0 and 'RESTORED_CLONE_212_LEGACY_POLICIES_EXACT_MATCH_PASS' in comparison.stdout)
+    print('READONLY_LIVE_VS_RESTORED_CLONE_PARITY_'+('PASS' if parity_pass else 'FAIL'),flush=True)
+    ok=ok and parity_pass
     if LIVE_SIGNED_PROBE.is_file():
         probe=call(['python3',str(LIVE_SIGNED_PROBE)],ROOT,30)
         signed=bool(probe and probe.returncode==0 and 'SECURITY_PRECUTOVER=PASS' in probe.stdout)

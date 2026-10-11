@@ -1,4 +1,4 @@
--- ASSPS signed blue/green additive security, migration candidate v1.
+-- ASSPS signed blue/green additive security, hardened V2 candidate.
 -- Execute ONLY with independent backup, permissioned isolated acceptance and
 -- explicit DB identity target. NEVER apply clone-only phase7 SQL to production.
 \set ON_ERROR_STOP on
@@ -37,7 +37,7 @@ BEGIN
  END IF;
  CREATE ROLE assps_marks_signed_runtime NOLOGIN NOINHERIT NOBYPASSRLS NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION;
 END $create_signed_role$;
--- Only the NEW blue/green runtime inherits old runtime privileges.
+-- New runtime has direct explicit protected-object privileges ONLY; it does NOT inherit legacy role membership.
 -- No revocation or policy edit on apex_app_runtime, apex_paper_owner, apex_paper_runtime, or apexos_user.
 -- IMPORTANT: no membership in old apex_app_runtime. Direct grants only.
 -- The old role can reach six unprotected administrative tables; never inherit those privileges.
