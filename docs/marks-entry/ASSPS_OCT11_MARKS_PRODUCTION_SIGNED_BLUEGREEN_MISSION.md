@@ -1,0 +1,36 @@
+# ASSPS Monday 12 October 2026 Marks Entry | Single-mission signed blue/green cutover dossier
+
+## Verdict (do not confuse with isolated tests)
+**RELEASE_CERTIFIED=FALSE; LIVE_DEPLOYMENT_HOLD.** Never represent a successful restored-clone test as live RLS migration or acceptance. Deployment did not take place in this mission checkpoint. This report covers **SaaS Core only**; Paper Studio, APEX Connect and unapproved Grade IX-X research are out of scope.
+
+## Source pins and current production boundary
+- Existing live frontend: `24cbcae33b96f1bb058ad9b005f0eb8bfe5eac92` (last independently documented production commit); intended Marks+nine Result Cards frontend `2ec5ae597e9f50772cf443b0392b442b7fa037db`, verified descendant of that pin.
+- Existing live backend: `16ab8f346ba27aa6b2e29a8f03c68db32a326cb9` (last independently documented production commit); intended signed candidate `580111e8ee92fa13ee672578461927294cfada6b`, verified descendant of `0923ddcd1f5a923123d45396bbeab16f372be7b1` including dynamic `DB_RUNTIME_ROLE` policy coverage fix.
+- Live PM2 `apex-backend`, `apex-connect` online; `apex-connect-green` stopped at checkpoint. No services or routing changed. Live database `apexos`, port5432, legacy `apexos_user` has LOGIN+BYPASSRLS; `core_security` absent, signed restrictive/permissive guards 0. 77 protected FORCE-RLS tables/212 legacy policies. Legacy role additionally inherits two Paper-related memberships.
+- Disk changed from ~4.7 GB to ~3.8 GB free during this active window (93% used). No deletion of other owners' source, backups, worktrees or services attempted.
+
+## Existing immutable backup
+Backup `/root/assps-release-backups/firstterm-20261011T073058Z/apexos.dump` (0600) SHA-256 verified. Actual restore to isolated PostgreSQL port55432 `assps_backup_restore_check_20261011` exit0, public tables 87, exact 77 protected tables/212 original policy entries. Restore originally specified `--no-acl`; **therefore privileges were not present**, not a genuine security bug. Targeted `reconcile-isolated-grants-20261011.py` recovered *exact production role effective grants* on the isolated restore: 75 CRUD protected tables, two Paper exceptions, 73 full/4 withheld sequences. No production grants changed. Backup file encryption independently unverified.
+
+## Completed disposable signed experiment V1, DO NOT PROMOTE
+On the recovered clone only, original old-runtime-INHERITING role design generated 77 new restrictive guards, total 289 policies; per-school positive, foreign-school denial and forged tenant denial passed with transaction ROLLBACK. Separate authenticated SCRAM login `assps_marks_signed_login` proved actual non-BYPASS login + signed HMAC via Node signing service against restored data: correct school PASS, foreign school DENIED, forged/unsigned context DENIED. These are NOT real principal/teacher HTTP acceptance. V1 schema rollback successful, leaving 212 legacy policies and no `core_security`. Test login subsequently removed from isolated cluster and its temporary password file securely removed. **V1 was rejected for production because inheritance of `apex_app_runtime` made six non-RLS tables accessible with CRUD (`admin_block_audit_log`, `ai_jobs`, `ai_queue_events`, `ai_queue_state`, `campuses`, `organizations`).** Those six had no PUBLIC ACL grants, but the inherited old runtime role was overprivileged for the new signed boundary.
+
+## Hardened V2 production-target SOURCE candidate (NOT EXECUTED)
+`ops/release/signed-bluegreen/` now contains:
+1. `01-additive-schema-policies.sql`: strict database/port and protected table/policy catalog guard; independent `assps_marks_signed_runtime` NOLOGIN/NOINHERIT/NOBYPASS, **no membership in legacy runtime**; exact direct 75-table/73-sequence grants, two Paper table exceptions/four sequence exceptions; signed HMAC key schema + 77 role-only permissive **and** 77 restrictive signed policies, both for dedicated role; exact postflight; transactional SQL.
+2. `04-provision-isolated-login.sql`: separately gated NOINHERIT/non-BYPASS SCRAM login with zero direct public-table privileges and SET-only membership in new runtime; secret supplied out of band, never committed to Git.
+3. `05-backout-isolated-login.sql` then `03-additive-security-rollback.sql`: only after green service stop and zero active signed connections; remove dedicated login first, then exact signed policies/functions/schema; **do not drop Paper roles or shared `apex_app_runtime`, do not execute `DROP OWNED`.** Old routes and old runtime remain operational during additive install.
+4. `02-isolated-signed-acceptance.sql`, `test-restricted-login-20261011.cjs` and exact ACL-clone utility: test fixtures; ONLY allowed on named disposable port55432 restored database.
+5. `verify-live-signed-precutover-20261011.py`: new actual read-only production release prerequisites. Current execution **EXIT2**; backup identity and legacy schema pass, signed role/login/policies/schema/unprotected-denial fail (not provisioned).
+6. `test-migration-static-contract-20261011.py`: **4/4 PASS**, SQL role/policy/rollback source checks, Python compile and Node syntax PASS, git diff whitespace PASS.
+
+**Hard evidence limit:** Attempt to apply hardened V2 to isolated port55432 was **blocked by host safety checks**. Its SQL has NOT been dynamically executed or rollback-rehearsed, and green backend with new V2 login has NOT passed startup/HTTP. A separate attempt at authentic backend database-module startup was also blocked by host safety authorization. Do not bypass or relabel. V1 SCRAM tests cannot certify V2.
+
+## Remaining release gates (strict order)
+1. Independent security/DBA review of hardened V2 plus safe authorized isolated execution/rollback, explicit test that new role has **zero** access to 10 unprotected public tables and no inherited old role permissions, full signed actor/tenant replay/spoof/denial and Paper exceptions.
+2. Reconcile bootstrap/auth routes to independent NOINHERIT login. Direct pre-auth `users` SELECT permission is absent by design; **full backend auth endpoints may fail**, so do not blindly swap entire backend. Either establish safe reviewed limited bootstrap function/role or authorize and browser-test marks-only ingress split, preserving old authentication routes.
+3. Production-approved fresh DB backup/restore validation, actual production role/key provisioning into new isolated green backend secret storage, release candidate commit pin, exact owner grants, stable disk headroom, monitored automatic rollback triggers.
+4. Real school principal and assigned teacher (and negative unauthorized teacher/other school) authenticated HTTP/PG acceptance for First Term Exam 9; validate school, section, subject/student roster, save/reload/edit/zero marks, authorized results and **nine** Result Card render/print. No fake school records or production writes under fake users.
+5. Paper Studio saved-paper owner regression signoff (without copying/merging its branch), frontend/backend build and live browser smoke, then controlled independent cutover with immediate rollback if any security/marks regression.
+
+**NEVER deploy while `verify-live-signed-precutover-20261011.py` EXIT2.** The current objective (marks live operational by Monday) is not yet achieved; no schedule/automation was created.
