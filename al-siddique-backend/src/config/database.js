@@ -344,9 +344,9 @@ async function connectForContext() {
         JOIN pg_namespace n ON n.oid=c.relnamespace
         LEFT JOIN pg_policies p ON p.schemaname=n.nspname
           AND p.tablename=c.relname AND p.policyname='core_signed_tenant_guard'
-          AND p.permissive='RESTRICTIVE' AND 'apex_app_runtime'=ANY(p.roles)
+          AND p.permissive='RESTRICTIVE' AND $1::name=ANY(p.roles)
         WHERE c.relkind='r' AND n.nspname='public' AND c.relforcerowsecurity
-      `)
+      `, [configuredRuntimeRole()])
       const state = gate.rows[0]
       if (!state || state.forced !== 77 || state.enabled !== 77 || state.signed !== 77) {
         const error = new Error('Signed tenant RLS requires 77 enabled, forced, restrictive-policy tables')
