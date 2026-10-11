@@ -6,6 +6,15 @@ const frozen=source.assertFrozen(source.loadInputs())
 const indexed=mod.indexOriginals(frozen)
 const original=[...indexed.values()][0]
 const hex='a'.repeat(64),answerHash='b'.repeat(64)
+const bilingualOriginal=[...indexed.values()].find(q=>q.requiresUrduParityReview)
+const dualValid=()=>{
+ const r=valid()
+ r.originalQuestionId=bilingualOriginal.originalQuestionId
+ r.originalQuestionRevisionSha256=bilingualOriginal.originalQuestionRevisionSha256
+ r.originalFileSha256=bilingualOriginal.sourceSha
+ r.medium='dual'
+ return r
+}
 const valid=()=>({
  originalQuestionId:original.originalQuestionId,
  originalQuestionRevisionSha256:original.originalQuestionRevisionSha256,
@@ -63,7 +72,7 @@ test('eight complete revision-specific checks mandatory',()=>{
  assert.throws(()=>mod.run({reviews:[r]}),/CHECKS_INCOMPLETE/)
 })
 test('dual language requests separate independent Urdu teacher review',()=>{
- let r=valid();r.medium='dual'
+ let r=dualValid()
  assert.throws(()=>mod.run({reviews:[r]}),/INDEPENDENT_URDU_REVIEW_MISSING/)
  r.urduTranslationReviewerId='teacherUrdu3'
  r.urduTranslationReviewEvidenceRef='ur/3'
@@ -96,4 +105,63 @@ test('malformed review checks fail closed with stable academic error',()=>{
   const r=valid();r.checks[0]=invalid
   assert.throws(()=>mod.run({reviews:[r]}),/ACADEMIC_REVIEW_INTAKE_REQUIRED_SIGNED_REVISION_SPECIFIC_CHECKS_INCOMPLETE/)
  }
+})
+
+test('dual-medium review requires a distinct qualified Urdu reviewer identity',()=>{
+ const r=dualValid()
+ r.urduTranslationReviewerId=r.independentReviewerId
+ r.urduTranslationReviewEvidenceRef='urdu/qualified'
+ assert.throws(()=>mod.run({reviews:[r]}),/DUAL_LANGUAGE_INDEPENDENT_URDU_REVIEW_MISSING/)
+ r.urduTranslationReviewerId=' teacherUrdu3 '
+ assert.throws(()=>mod.run({reviews:[r]}),/DUAL_LANGUAGE_INDEPENDENT_URDU_REVIEW_MISSING/)
+ r.urduTranslationReviewerId='teacherUrdu3'
+ assert.equal(mod.run({reviews:[r]}).authenticatedAcademicApprovals,0)
+})
+test('non-string blank evidence and actor IDs never pass evidence intake',()=>{
+ for(const key of ['reviewerSubjectQualificationRef','schoolAdoptionEvidenceRef',
+  'reviewerSignatureEvidenceRef','schoolAcademicApprovalEvidenceRef']){
+  for(const invalid of ['  ', {path:'fake'}, ['fake']]){
+   const r=valid();r[key]=invalid
+   assert.throws(()=>mod.run({reviews:[r]}),/ACADEMIC_REVIEW_INTAKE_/)
+  }
+ }
+ for(const key of ['authorId','independentReviewerId']){
+  const r=valid();r[key]='  '
+  assert.throws(()=>mod.run({reviews:[r]}),/REVIEWER_IDENTITY_MISSING_OR_NOT_INDEPENDENT/)
+ }
+ const r=valid();r.checks[0].evidenceRef={url:'fake'}
+ assert.throws(()=>mod.run({reviews:[r]}),/CHECKS_INCOMPLETE/)
+})
+test('signed faculty review chronology must be a real canonical UTC timestamp',()=>{
+ for(const bad of ['2026-02-30T12:00:00Z','yesterday','2026-10-10','2026-10-10T12:00:00+05:00']){
+  const r=valid();r.reviewedAt=bad
+  assert.throws(()=>mod.run({reviews:[r]}),/SIGNED_REVIEW_OR_SCHOOL_APPROVAL_MISSING/)
+ }
+ const r=valid();r.approvedAt='2026-10-10T11:59:59Z'
+ assert.throws(()=>mod.run({reviews:[r]}),/SIGNED_REVIEW_OR_SCHOOL_APPROVAL_MISSING/)
+})
+
+test('medium identity for all 2581 frozen originals is not reviewer-editable',()=>{
+ const totals={}
+ for(const q of indexed.values())totals[q.sourceMedium]=(totals[q.sourceMedium]||0)+1
+ assert.deepEqual(totals,{english:1512,urdu:971,dual:48,'':50})
+ const originalUrdu=[...indexed.values()].find(q=>q.sourceMedium==='urdu')
+ const r=valid()
+ r.originalQuestionId=originalUrdu.originalQuestionId
+ r.originalQuestionRevisionSha256=originalUrdu.originalQuestionRevisionSha256
+ r.originalFileSha256=originalUrdu.sourceSha
+ assert.throws(()=>mod.run({reviews:[r]}),/FROZEN_ORIGINAL_MEDIUM_MISMATCH/)
+ r.medium='urdu'
+ assert.equal(mod.run({reviews:[r]}).authenticatedAcademicApprovals,0)
+ const unknown=[...indexed.values()].find(q=>q.sourceMedium==='')
+ r.originalQuestionId=unknown.originalQuestionId
+ r.originalQuestionRevisionSha256=unknown.originalQuestionRevisionSha256
+ r.originalFileSha256=unknown.sourceSha
+ assert.throws(()=>mod.run({reviews:[r]}),/FROZEN_ORIGINAL_MEDIUM_UNRESOLVED/)
+})
+test('single-language original cannot be relabelled dual by packet alone',()=>{
+ const r=valid();r.medium='dual'
+ r.urduTranslationReviewerId='independentUrduReviewer'
+ r.urduTranslationReviewEvidenceRef='evidence/urdu'
+ assert.throws(()=>mod.run({reviews:[r]}),/FROZEN_ORIGINAL_MEDIUM_MISMATCH/)
 })
