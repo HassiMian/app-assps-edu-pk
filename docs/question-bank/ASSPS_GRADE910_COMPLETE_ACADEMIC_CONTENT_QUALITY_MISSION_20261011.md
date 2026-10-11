@@ -56,3 +56,26 @@ The revised Grade IX 07 November 2025 notification explicitly states applicabili
 School subject/medium adoption and exact edition/board exam-year applicability need authorized ASSPS certification. Then independent qualified subject specialists must check scientific facts, numerical reasoning, English/Urdu equivalence, correct options/distractors, conceptual originality, marks and finalized answer revisions. Exactly three potential original overlap pairs remain unresolved, plus one faculty-held original long-answer content slot. Cryptographically verified independent subject, Urdu and school-approval signatures must be bound to actual final question AND answer revisions. The prior simulated test keys are not real teacher signatures.
 
 **Current truthful release decision:** 2,581 provisional candidates, 0 independently academically approved, 0 academically verified published, 0 teacher-selectable as VERIFIED in Paper Studio. Production deployment, tenant/RLS and paper rendering remain SaaS Core/Paper Studio owned. Academic QA passing cannot alone turn provisional research into genuine school-approved questions.
+
+## Final full integrated one-command execution — actual verified process evidence
+
+After committing and remotely publishing the Academic source at `a8678e1a4adfa8f0bcef74b7fb28c6e36c3b3da3`, the real **non-scheduled** one-command mission was executed completely on that exact clean worktree. It returned **process exit0**, with `qualityGatesPassed=true` in `/tmp/grade910-all-content-mission-one-run-20261011/mission-audit.json`.
+
+All **15/15** mission gates passed, with zero failed/skipped TAP tests:
+
+- Full SHA-frozen 2,581-original source/authority publication-hold attestor: exit0.
+- Full 2,581-ID existing academic applicability/teacher/source worklist regeneration: exit0.
+- New full 2,581-original MCQ/long/numerical/essay editorial audit: exit0.
+- New single 2,581-original signed-source priority faculty worklist: exit0.
+- Original 111 curriculum/Paper Studio staging test files in three disjoint batches: **168 + 175 + 167 = 510/510 PASS**, all shell exit0.
+- The full set of **46 Grade IX–X Academic test files**, including the newly integrated source-locked content, qualified teacher approval boundary, Urdu medium and numeric answer checks, in eight disjoint batches: **49 + 59 + 65 + 72 + 36 + 36 + 40 + 44 = 401/401 PASS**, all shell exit0.
+- **Total: 911/911 unique executable checks passed, 0 failures, 0 skipped.** All 11 test batches emitted complete TAP summaries and explicit process exit0. The other 4 evidence-generation gates ran against actual frozen original source files with exit0.
+
+Full test evidence: `/tmp/grade910-all-content-mission-one-run-20261011/mission-audit.json` and the associated per-gate `.log` files. No clock-triggered automation was scheduled; the execution finished in the current interactive session.
+
+Reproducible source SHA256 for the new human research artifacts:
+
+- `ASSPS_GRADE910_ALL_2581_CONTENT_ANSWER_EDITORIAL_REVIEW_20261011.json` = `56dba2b08b69f31f7ae93cbf28099983918fb175919625257608f4192f0efc97`
+- `ASSPS_GRADE910_UNIFIED_2581_FACULTY_CONTENT_REVIEW_PRIORITIES_20261011.json` = `24fe5da2a69c6e139aa7c444ec34e657811a0f1f6a7454800917c40374fec5bd`
+
+**Actual academic approval remains 0. Academically verified published remains 0. The release remains HOLD and is NOT otherwise represented as production-ready.** A teacher's validated final answer correctness and ASSPS-adopted 2026–27 textbook evidence are still genuine external human/institutional requirements, and only SaaS Core may approve production deployment.
