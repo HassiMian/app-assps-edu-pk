@@ -46,8 +46,9 @@ export function isUrduScriptPaper(paper = {}) {
 
 export function resolvePaperRoute(paper, targetTab = null, routingPolicy = {}) {
   if (!paper) return targetTab || 'build'
+  // Legacy routing option is accepted for API compatibility but cannot bypass the canonical editor.
+  void routingPolicy
 
-  const forceOfficialLegacyRoute = routingPolicy?.forceOfficialLegacyRoute === true
 
   const id = String(paper.id || '')
   const corpusId = String(paper.corpusId || '')

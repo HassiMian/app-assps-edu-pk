@@ -36,7 +36,6 @@ export default function EditableQuestionStem({
     <ActiveStemEditor
       question={question}
       sectionId={sectionId}
-      isUrdu={isUrdu}
       secDir={secDir}
       fallbackText={fallbackText}
       onUpdateQuestion={onUpdateQuestion}
@@ -50,7 +49,6 @@ export default function EditableQuestionStem({
 function ActiveStemEditor({
   question,
   sectionId,
-  isUrdu,
   secDir,
   fallbackText,
   onUpdateQuestion,

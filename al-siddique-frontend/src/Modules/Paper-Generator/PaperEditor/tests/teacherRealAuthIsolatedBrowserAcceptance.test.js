@@ -14,8 +14,6 @@ const here = path.dirname(fileURLToPath(import.meta.url))
 const frontendRoot = path.resolve(here, '../../../../..')
 const backendSrc = path.resolve(frontendRoot, '../al-siddique-backend/src')
 const require = createRequire(import.meta.url)
-const { Pool } = require(path.resolve(backendSrc, '../node_modules/pg'))
-const bcrypt = require(path.resolve(backendSrc, '../node_modules/bcryptjs'))
 const FRONTEND_PORT = Number(process.env.ASSPS_PHASE2_FRONTEND_PORT || 5389)
 const BACKEND_PORT = Number(process.env.ASSPS_PHASE2_BACKEND_PORT || 5388)
 const dbName = String(process.env.DB_NAME || '')
@@ -32,12 +30,22 @@ function fetchStatus(port, pathname) {
 
 test('genuine teacher login reaches canonical Paper Studio without mock authentication', { timeout: 140000 }, async t => {
   // Never synthesize school identities against the live database or live ports.
+  // These genuine-actor tests require an explicitly named disposable clone and scoped fixtures.
+  // An unprovisioned build should report SKIPPED, not crash while importing pg.
+  if (!dbName && !process.env.DB_PASSWORD) {
+    t.skip('Disposable teacher E2E database, backend packages and scoped credentials are not provisioned')
+    return
+  }
   assert.match(dbName, /^assps_phase2_teacher_e2e_[a-z0-9_]+$/)
   assert.notEqual(BACKEND_PORT, 5000)
   assert.notEqual(FRONTEND_PORT, 5173)
   assert.notEqual(BACKEND_PORT, FRONTEND_PORT)
   assert.ok(process.env.DB_PASSWORD)
   assert.ok(process.env.JWT_SECRET)
+
+  // Load backend dependencies only after the disposable-database fail-closed gates.
+  const { Pool } = require(path.resolve(backendSrc, '../node_modules/pg'))
+  const bcrypt = require(path.resolve(backendSrc, '../node_modules/bcryptjs'))
 
   const pool = new Pool({
     host: process.env.DB_HOST || '127.0.0.1',

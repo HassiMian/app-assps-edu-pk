@@ -314,9 +314,6 @@ const GoBack = ({ onClick }) => (
  }}>← Go Back</button>
 )
 
-const pbStyle = `1px solid ${D.border}`
-const dinp = { background:'var(--pg-input-bg,rgba(11,44,77,0.6))', border: pbStyle, borderRadius:9,
- color:D.silver, padding:'9px 12px', fontSize:14, outline:'none', boxSizing:'border-box', width:'100%' }
 
 //  Step 1  Syllabus 
 function SyllabusStep({ onSelect }) {
@@ -1199,7 +1196,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
     bookletNodes.push({member,wrapper,clone})
    })
 
-   try { await Promise.race([doc.fonts?.ready || Promise.resolve(), new Promise(resolve=>setTimeout(resolve,1800))]) } catch (_) { /* Browser print or font readiness may be unavailable; retain the printable preview. */ }
+   try { await Promise.race([doc.fonts?.ready || Promise.resolve(), new Promise(resolve=>setTimeout(resolve,1800))]) } catch { /* Browser print or font readiness may be unavailable; retain the printable preview. */ }
    bookletNodes.forEach(({member,wrapper,clone})=>{
     const contentHeight=Math.max(1,clone.scrollHeight || clone.getBoundingClientRect().height || printablePageHeight)
     const pages=Math.max(1,Math.ceil((contentHeight-2)/printablePageHeight))
@@ -2132,7 +2129,7 @@ function paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp=0, wordSp=0 }) {
 }
 
 //  Template 1: AS Classic (exact PDF replica) 
-function ClassicTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
+function ClassicTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
  const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
@@ -2186,7 +2183,7 @@ function ClassicTemplate({ paper, cfg, printBubble, printAns, half, editMode=fal
  <div style={{ borderBottom:'1px solid #ccc', marginTop:`${6*fs}px` }} />
  </div>
  )}
- {questionTypes.map((type, idx) => {
+ {questionTypes.map((type) => {
  const qs = paper[type.value] || []
  if (qs.length === 0) return null
  qn++
@@ -2199,7 +2196,7 @@ function ClassicTemplate({ paper, cfg, printBubble, printAns, half, editMode=fal
 }
 
 //  Template 2: Modern Pro 
-function ModernTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
+function ModernTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
  const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
@@ -2234,7 +2231,7 @@ function ModernTemplate({ paper, cfg, printBubble, printAns, half, editMode=fals
  </div>
  </div>
  )}
- {questionTypes.map((type, idx) => {
+ {questionTypes.map((type) => {
  const qs = paper[type.value] || []
  if (qs.length === 0) return null
  qn++
@@ -2247,7 +2244,7 @@ function ModernTemplate({ paper, cfg, printBubble, printAns, half, editMode=fals
 }
 
 //  Template 3: Elite Premium 
-function EliteTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
+function EliteTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
  const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
@@ -2283,7 +2280,7 @@ function EliteTemplate({ paper, cfg, printBubble, printAns, half, editMode=false
  </div>
  </div>
  )}
- {questionTypes.map((type, idx) => {
+ {questionTypes.map((type) => {
  const qs = paper[type.value] || []
  if (qs.length === 0) return null
  qn++
@@ -2296,7 +2293,7 @@ function EliteTemplate({ paper, cfg, printBubble, printAns, half, editMode=false
 }
 
 //  Template 4: Emerald Green 
-function EmeraldTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
+function EmeraldTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
  const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
@@ -2323,7 +2320,7 @@ function EmeraldTemplate({ paper, cfg, printBubble, printAns, half, editMode=fal
  </div>
  </div>
  )}
- {questionTypes.map((type, idx) => {
+ {questionTypes.map((type) => {
  const qs = paper[type.value] || []
  if (qs.length === 0) return null
  qn++
@@ -2420,24 +2417,22 @@ function AcademicClassicTemplate(props) {
 }
 
 //  Template 5: Docx Assessment 
-function DocxAssessmentTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[] , pbStyle, onQuestionChange }) {
+function DocxAssessmentTemplate({ paper, cfg, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, qBorderStyle='none', showUrduHeaders=false, questionTypes=[] , pbStyle, onQuestionChange }) {
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
  const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
  const fs = (half ? 0.82 : 1) * (baseFontSz / 11)
- const hFs = (half ? 0.82 : 1) * (headFontSz / 11)
   const qFs = 11 * fs
  const qFsSm = Math.max(7, 10 * fs)
  const qFsHead = 12 * fs
  const editStyle = editMode ? { outline:'1px dashed #444', minWidth:20, display:'inline-block' } : {}
  let qn = 0
- const mcqs = paper['mcq'] || []
 
  return (
  <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'white', color: fontColor, fontFamily: isUrdu ? URDU_FONT_STACK : (fontFamily || "'Times New Roman', Times, serif"), fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'8mm 6mm':'12mm 15mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp, wordSp }) }}>
  <div style={{ borderBottom:'2px solid #000', paddingBottom:5, marginBottom:15 }}><div style={{ fontSize:`${(half?18:24)*fs}px`, fontWeight:700, textAlign:'center' }}>ASSESSMENT PAPER</div><div style={{ display:'flex', justifyContent:'space-between', marginTop:10, fontWeight:700, fontSize:`${11*fs}px` }}><span>Subject: {cfg.subjectName}</span><span>Class: {cfg.className}</span><span>Marks: {total}</span></div></div>
  <div style={{ marginBottom:15, display:'flex', justifyContent:'space-between', fontSize:`${10*fs}px` }}><span>Student Name: <span data-personalization-field="student.name">__________________________</span> &nbsp; Roll No: <span data-personalization-field="student.rollNumber">__________</span></span><span>Date: {cfg.examDate}</span></div>
- {questionTypes.map((type, idx) => {
+ {questionTypes.map((type) => {
  const qs = paper[type.value] || []
  if (qs.length === 0) return null
  qn++

@@ -22,10 +22,6 @@ function parseNumberedLines(content = '') {
   }).filter(Boolean)
 }
 
-function itemSerialText(serial, isUrdu) {
-  const value=String(serial||'').replace(/[().]/g,'').trim()
-  return isUrdu && /^(?:الف|ب|ج|د|ہ|و|ز|ح)$/.test(value) ? value : value + '.'
-}
 function ItemSerial({ serial, isUrdu, color='currentColor' }) {
   const value=String(serial||'').replace(/[().]/g,'').trim()
   const urduLetter=isUrdu && /^(?:الف|ب|ج|د|ہ|و|ز|ح)$/.test(value)
@@ -438,7 +434,7 @@ function renderContent({ content, kind, isUrdu, qFs, fs, themeColor, mcqLayout, 
 
 export default function OfficialSectionRenderer({
  questions = [], isUrdu = false, editMode = false, fs = 1, qFs = 13, headingFs = null,
- themeColor = '#123b67', onQuestionChange, onDeleteSection, onDuplicateSection, onMoveSection, onAddSection, onSelectSection, selectedSectionId = '', onActiveEditable,
+ themeColor = '#123b67', onQuestionChange, onSelectSection, selectedSectionId = '', onActiveEditable,
  qBorderStyle = 'none', mcqLayout = 'matrix-table', shortLayout = '1-column', showAnsLines = false,
  showSectionLine = true, urdLineH = 2, engLineH = 1.5, letterSp = 0,
  wordSp = 0, textAlign = 'start', fontFamily = '', fontBold = false, fontItalic = false,

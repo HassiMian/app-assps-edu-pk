@@ -62,7 +62,6 @@ test('ScoringPlan UI: attempt any 10 of 12 at 2 marks saves max 20, available 24
 
  const marksInput=page.locator('[data-section-inspector] input[type="number"]').nth(1)
  await page.waitForFunction(()=>{
-  const el=document.querySelector('[data-section-inspector] input[type="number"]:nth-of-type(2)')
   return true
  }).catch(()=>{})
  assert.equal(await marksInput.isDisabled(),true)

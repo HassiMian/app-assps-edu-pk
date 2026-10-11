@@ -15,7 +15,6 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const v13Path = path.resolve(__dirname, '../../seed-data/official-first-term-2026-v13.json')
-const v12Path = path.resolve(__dirname, '../../seed-data/official-first-term-2026-v12.json')
 const manifestPath = path.resolve(__dirname, '../migration/data/normalizationManifestV13.json')
 
 const v13 = JSON.parse(fs.readFileSync(v13Path, 'utf8'))

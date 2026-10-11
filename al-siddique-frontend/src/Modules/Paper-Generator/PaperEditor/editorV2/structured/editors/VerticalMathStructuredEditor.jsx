@@ -27,7 +27,6 @@ export default function VerticalMathStructuredEditor({
   sectionId,
   resolvedNode,
   store,
-  dir = 'ltr',
   isEditing = true,
 }) {
   const operands = resolvedNode?.operands || []

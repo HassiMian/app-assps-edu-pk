@@ -108,7 +108,6 @@ test('B3-02: Select exactly one word. Bold. Only selected word changes', async (
 })
 
 test('B3-03: Select another word. Set 18pt. Only selected word changes', async () => {
-  const firstField = page.locator('.canonical-editable-field').first()
 
   // Select second word
   const selectedWord = await page.evaluate(() => {

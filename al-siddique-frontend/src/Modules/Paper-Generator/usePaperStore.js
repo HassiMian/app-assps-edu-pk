@@ -11,7 +11,6 @@ import { buildRecoverySavedPapers } from './seed-data/examNightRecoveryAdapter.j
 
 const STORE_KEY = 'al_siddique_paper_store'
 const NOTIFICATIONS_KEY = 'saas_admin_notifications'
-const STORE_SYNC_EVENT = 'al_siddique_paper_store_updated'
 let quotaFallbackNotified = false
 const ASSPS_QBANK_SEED_VERSION = 'class4-7-8-2026-06'
 const OFFICIAL_EXAM_DATA_VERSION = 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13'

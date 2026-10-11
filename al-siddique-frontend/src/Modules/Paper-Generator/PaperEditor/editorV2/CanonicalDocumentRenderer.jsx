@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CanonicalEditableText from './CanonicalEditableText.jsx'
 import CanonicalStaticNode from './CanonicalStaticNode.jsx'
 import CanonicalOptionLabel from './CanonicalOptionLabel.jsx'
@@ -33,14 +33,15 @@ export default function CanonicalDocumentRenderer({
   isEditing = true,
   store,
   registry,
-  activeFieldKey,
   onFocusField,
   externalRevisionToken = 1,
 }) {
-  // Performance diagnostics tracking (test-only, zero production overhead, Rule 27)
-  if (typeof window !== 'undefined' && window.__B3_DIAGNOSTICS__) {
-    window.__B3_DIAGNOSTICS__.documentRendererRenderCount = (window.__B3_DIAGNOSTICS__.documentRendererRenderCount || 0) + 1
-  }
+  // Diagnostics update after commit, never mutate shared objects during React render.
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.__B3_DIAGNOSTICS__) {
+      window.__B3_DIAGNOSTICS__.documentRendererRenderCount = (window.__B3_DIAGNOSTICS__.documentRendererRenderCount || 0) + 1
+    }
+  })
 
   // Tenant paperSettings for presentation only (Rule 18)
   const { paperSettings } = usePaperStore()

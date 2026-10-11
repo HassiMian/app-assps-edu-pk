@@ -212,8 +212,8 @@ function AutoGenModal({ onGenerate, onClose }) {
  const [period, setPeriod] = useState('1st')
  const [duration, setDuration] = useState(40)
 
- const availChapters = useMemo(() => getChaptersForSubject(subject, classLevel), [subject, classLevel])
- const subjects = useMemo(() => subjectsForClass(classLevel), [classLevel])
+ const availChapters = useMemo(() => getChaptersForSubject(subject, classLevel), [subject, classLevel, getChaptersForSubject])
+ const subjects = useMemo(() => subjectsForClass(classLevel), [classLevel, subjectsForClass])
 
  const chaptersToUse = selChapters.length > 0 ? selChapters : availChapters
  const scheduleDates = useMemo(() => buildPlanDates(startDate, frequency, weeks), [startDate, frequency, weeks])
@@ -400,7 +400,7 @@ function PlanCard({ plan, onEdit, onPreview, onDelete, onSendPortal }) {
 }
 
 //  Mini Plan Card (for Weekly view) 
-function MiniPlanCard({ plan, onPreview, onEdit }) {
+function MiniPlanCard({ plan, onPreview }) {
  return (
  <div onClick={() => onPreview(plan)} style={{ background:'rgba(10,132,255,0.08)', border:'1px solid rgba(10,132,255,0.2)', borderRadius:8, padding:'8px 10px', cursor:'pointer', marginBottom:4 }}
  onMouseEnter={e => e.currentTarget.style.background = 'rgba(10,132,255,0.15)'}
@@ -416,7 +416,7 @@ function MiniPlanCard({ plan, onPreview, onEdit }) {
 }
 
 //  Weekly View 
-function WeeklyView({ plans, onEdit, onPreview, onSendPortal, onNew }) {
+function WeeklyView({ plans, onPreview, onNew }) {
  const [weekOffset, setWeekOffset] = useState(0)
 
  const weekStart = useMemo(() => {
@@ -475,7 +475,7 @@ function WeeklyView({ plans, onEdit, onPreview, onSendPortal, onNew }) {
  </div>
  {/* Plans */}
  {dayPlans.map(p => (
- <MiniPlanCard key={p.id} plan={p} onPreview={onPreview} onEdit={onEdit} />
+ <MiniPlanCard key={p.id} plan={p} onPreview={onPreview} />
  ))}
  {/* Add button */}
  <button onClick={() => onNew(dateStr)}
@@ -491,7 +491,7 @@ function WeeklyView({ plans, onEdit, onPreview, onSendPortal, onNew }) {
 }
 
 //  Annual View 
-function AnnualView({ plans, onPreview, onNew }) {
+function AnnualView({ plans, onPreview }) {
  const [year, setYear] = useState(new Date().getFullYear())
 
  const plansByDate = useMemo(() => {
@@ -928,7 +928,7 @@ function PlanPreview({ plan, onBack, settings }) {
  doc.close()
  setTimeout(() => {
  try { iframe.contentWindow.focus(); iframe.contentWindow.print() }
- catch(e) { /* Browser print or font readiness may be unavailable; retain the printable preview. */ }
+ catch { /* Browser print or font readiness may be unavailable; retain the printable preview. */ }
  setTimeout(() => { if (document.body.contains(iframe)) iframe.remove() }, 3000)
  }, 800)
  }

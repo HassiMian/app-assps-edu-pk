@@ -120,7 +120,6 @@ test('TEST 38: 100% Gapless, Non-Overlapping Source Coverage across all 43 Paper
 
     for (let sIdx = 0; sIdx < v13Paper.official_section.length; sIdx++) {
       const sourceSec = v13Paper.official_section[sIdx]
-      const canonicalSec = doc.sections[sIdx]
 
       const secHeading = typeof sourceSec.heading === 'string' ? sourceSec.heading : ''
       const secContent = typeof sourceSec.content === 'string' ? sourceSec.content : ''

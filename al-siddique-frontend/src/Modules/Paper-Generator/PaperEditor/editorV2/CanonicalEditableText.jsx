@@ -14,12 +14,14 @@ function CanonicalEditableText({
   isEditing = true,
   externalRevisionToken = 1,
 }) {
-  // Test-only diagnostics tracking (zero production overhead, Rule 27)
-  if (typeof window !== 'undefined' && window.__B3_DIAGNOSTICS__) {
-    const d = window.__B3_DIAGNOSTICS__
-    d.fieldRenderCounts = d.fieldRenderCounts || {}
-    d.fieldRenderCounts[fieldKey] = (d.fieldRenderCounts[fieldKey] || 0) + 1
-  }
+  // Count committed field renders for diagnostics without mutating state in render.
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.__B3_DIAGNOSTICS__) {
+      const d = window.__B3_DIAGNOSTICS__
+      d.fieldRenderCounts = d.fieldRenderCounts || {}
+      d.fieldRenderCounts[fieldKey] = (d.fieldRenderCounts[fieldKey] || 0) + 1
+    }
+  })
 
   const dir = direction === 'rtl' ? 'rtl' : (direction === 'ltr' ? 'ltr' : 'auto')
 

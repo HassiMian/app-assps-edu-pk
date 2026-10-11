@@ -6,7 +6,7 @@
 // RULE: Never use Tiptap for individual MCQ options, grammar cells, or fill-blank tokens.
 // Preserves exact string input without automatic trim(). Supports dir and keyboard shortcuts.
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useStructuredFocus, INTERACTION_MODE } from '../StructuredFocusContext.jsx'
 
 export default function StructuredTextInput({
@@ -25,7 +25,6 @@ export default function StructuredTextInput({
 }) {
   const [localVal, setLocalVal] = useState(value ?? '')
   const { setMode, setActiveStructuredKey, getActiveStructuredKey } = useStructuredFocus()
-  const isCommittedRef = useRef(false)
 
   // Sync external value updates
   useEffect(() => {

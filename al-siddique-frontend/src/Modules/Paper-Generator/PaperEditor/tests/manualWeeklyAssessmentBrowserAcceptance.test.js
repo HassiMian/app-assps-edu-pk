@@ -9,10 +9,6 @@ import { createServer } from 'vite'
 const here=path.dirname(fileURLToPath(import.meta.url))
 const root=path.resolve(here,'../../../../..')
 
-function savedManualPapers() {
- return [...Object.keys(localStorage)]
-}
-
 test('Manual Weekly Assessment: no Question Bank -> canonical save -> finalize -> reopen -> print', {timeout:90000}, async t=>{
  const server=await createServer({root,server:{port:5241,strictPort:true},appType:'spa'})
  await server.listen()

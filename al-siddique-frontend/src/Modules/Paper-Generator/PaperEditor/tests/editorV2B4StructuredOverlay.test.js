@@ -1304,7 +1304,6 @@ test('B4-SIX-TYPES-ROUNDTRIP-01: Independent deep round-trip fixture for all six
     const node = sec.nodes.find(n => n.type === t)
 
     const store = new EditorWorkingStore(doc)
-    const allocator = store.getIdAllocator()
 
     // Apply structured modification according to type
     if (t === 'mcq') {

@@ -58,7 +58,7 @@ async function selectHeadingWord() {
 
 test('V11-01: select in question heading and Bold toggles ON/OFF/ON without formatting marks', async () => {
   await page.getByRole('button',{name:'Edit Paper'}).click()
-  const { heading, text }=await selectHeadingWord()
+  const { heading }=await selectHeadingWord()
   const toolbar=page.locator('[data-inline-selection-toolbar]')
   const marks=page.getByLabel('Edit question 1 marks')
   const originalMarks=await marks.innerHTML()
@@ -98,8 +98,6 @@ test('V11-03: Light Mode defaults on, toolbar and inspector have readable light 
   const shell=page.locator('.pts-paper-generator-shell')
   assert.equal(await shell.getAttribute('data-paper-theme'),'light')
   await page.getByRole('button',{name:'Edit Paper'}).click()
-  const toolbar=page.locator('[data-inline-selection-toolbar]')
-  const inspector=page.locator('[data-section-inspector]')
   if(process.env.ASSPS_V11_SCREENSHOT){
     await page.screenshot({path:path.join(process.env.TEMP||'.','assps-editor-v11-light.png'),fullPage:false})
   }
@@ -135,7 +133,6 @@ test('V11-03: Light Mode defaults on, toolbar and inspector have readable light 
 
 test('V11-04: Urdu MCQ bracket is optically compact and ordered in preview and print', async () => {
   const option=page.locator('[data-option-label][data-language="urdu"]').first()
-  const label=option.locator('[data-option-label-text]')
   const bracket=option.locator('[data-option-bracket]')
   assert.equal((await bracket.textContent()).trim(),')')
   const metrics=await option.evaluate(el=>{

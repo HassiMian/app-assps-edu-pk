@@ -30,7 +30,6 @@ export default function EarlyYearsQuestionBlock({
   question = {},
   isUrdu = false,
   paperId = null,
-  presentationRevision = 0,
   templatePreset = {}
 }) {
   const {

@@ -17,10 +17,12 @@ export default function CanonicalPaperEditorMain({
   loadedPaper,
   onReturnToSource = null,
 }) {
-  // Performance diagnostics tracking (test-only, zero production overhead, Rule 27)
-  if (typeof window !== 'undefined' && window.__B3_DIAGNOSTICS__) {
-    window.__B3_DIAGNOSTICS__.rootRenderCount = (window.__B3_DIAGNOSTICS__.rootRenderCount || 0) + 1
-  }
+  // Diagnostics count committed renders, not speculative React render executions.
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.__B3_DIAGNOSTICS__) {
+      window.__B3_DIAGNOSTICS__.rootRenderCount = (window.__B3_DIAGNOSTICS__.rootRenderCount || 0) + 1
+    }
+  })
 
   // 1. Initialize stable EditorWorkingStore and EditorFieldRegistry
   const store = useMemo(() => new EditorWorkingStore(loadedPaper), [loadedPaper])
