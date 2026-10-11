@@ -10,6 +10,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -101,7 +102,7 @@ def main():
     print('LIVE_PRIVATE_MEDIA_'+('PASS' if nginx else 'FAIL'),flush=True)
     # This static contract is required even when --full is not requested.
     contract=call(['python3',str(MIGRATION_CONTRACT)],ROOT,15) if MIGRATION_CONTRACT.is_file() else None
-    contract_pass=bool(contract and contract.returncode==0 and 'Ran 4 tests' in contract.stderr and 'OK' in contract.stderr)
+    contract_pass=bool(contract and contract.returncode==0 and re.search(r'Ran ([5-9]|[1-9][0-9]+) tests?', contract.stderr) and re.search(r'^OK$', contract.stderr, re.MULTILINE))
     print('V2_ISOLATED_MIGRATION_SOURCE_CONTRACT_'+('PASS' if contract_pass else 'FAIL'),flush=True)
     ok=ok and contract_pass
     if LIVE_SIGNED_PROBE.is_file():

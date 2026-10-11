@@ -24,7 +24,7 @@ BEGIN
  SELECT count(*) INTO forced_count FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace
  WHERE c.relkind='r' AND c.relforcerowsecurity AND n.nspname='public';
  SELECT count(*) INTO legacy_count FROM pg_policies WHERE schemaname='public' AND policyname NOT IN ('core_signed_tenant_guard','core_signed_tenant_allow');
- SELECT count(*) INTO signed_count FROM pg_policies WHERE schemaname='public' AND policyname='core_signed_tenant_guard';
+ SELECT count(*) INTO signed_count FROM pg_policies WHERE schemaname='public' AND policyname IN ('core_signed_tenant_guard','core_signed_tenant_allow');
  IF forced_count<>77 OR legacy_count<>212 OR signed_count<>0
     OR NOT EXISTS(SELECT 1 FROM pg_roles WHERE rolname='apex_app_runtime' AND NOT rolcanlogin AND NOT rolbypassrls)
     OR EXISTS(SELECT 1 FROM pg_namespace WHERE nspname='core_security')
@@ -33,12 +33,9 @@ END $preflight$;
 DO $create_signed_role$
 BEGIN
  IF EXISTS(SELECT 1 FROM pg_roles WHERE rolname='assps_marks_signed_runtime') THEN
-   IF EXISTS(SELECT 1 FROM pg_roles WHERE rolname='assps_marks_signed_runtime' AND (rolcanlogin OR rolbypassrls OR rolsuper)) THEN
-     RAISE EXCEPTION 'Existing signed role is not restricted';
-   END IF;
- ELSE
-   CREATE ROLE assps_marks_signed_runtime NOLOGIN NOINHERIT NOBYPASSRLS NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION;
+   RAISE EXCEPTION 'Refusing pre-existing signed role with unverified global grants or dependencies';
  END IF;
+ CREATE ROLE assps_marks_signed_runtime NOLOGIN NOINHERIT NOBYPASSRLS NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION;
 END $create_signed_role$;
 -- Only the NEW blue/green runtime inherits old runtime privileges.
 -- No revocation or policy edit on apex_app_runtime, apex_paper_owner, apex_paper_runtime, or apexos_user.
@@ -194,7 +191,18 @@ BEGIN
  IF (SELECT count(*) FROM pg_policies WHERE schemaname='public' AND policyname='core_signed_tenant_guard' AND roles=ARRAY['assps_marks_signed_runtime']::name[])<>77
  OR (SELECT count(*) FROM pg_policies WHERE schemaname='public' AND policyname NOT IN ('core_signed_tenant_guard','core_signed_tenant_allow'))<>212
  OR (SELECT count(*) FROM pg_policies WHERE schemaname='public' AND policyname='core_signed_tenant_allow' AND roles=ARRAY['assps_marks_signed_runtime']::name[])<>77
- OR (SELECT count(*) FROM pg_roles WHERE rolname='assps_marks_signed_runtime' AND NOT rolcanlogin AND NOT rolbypassrls AND NOT rolsuper)<>1
- THEN RAISE EXCEPTION 'ASSPS signed postflight policy or role coverage mismatch'; END IF;
+ OR (SELECT count(*) FROM pg_roles WHERE rolname='assps_marks_signed_runtime' AND NOT rolcanlogin AND NOT rolinherit AND NOT rolbypassrls AND NOT rolsuper)<>1
+ OR (SELECT count(*) FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace
+     WHERE n.nspname='public' AND c.relkind='r' AND c.relforcerowsecurity AND c.relrowsecurity)<>77
+ OR EXISTS(SELECT 1 FROM pg_auth_members m JOIN pg_roles r ON r.oid=m.member WHERE r.rolname='assps_marks_signed_runtime')
+ OR EXISTS(SELECT 1 FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace
+     WHERE n.nspname='public' AND c.relkind='r' AND NOT c.relforcerowsecurity
+     AND (has_table_privilege('assps_marks_signed_runtime',c.oid,'SELECT')
+       OR has_table_privilege('assps_marks_signed_runtime',c.oid,'INSERT')
+       OR has_table_privilege('assps_marks_signed_runtime',c.oid,'UPDATE')
+       OR has_table_privilege('assps_marks_signed_runtime',c.oid,'DELETE')))
+ OR has_table_privilege('assps_marks_signed_runtime','public.paper_documents','SELECT')
+ OR has_table_privilege('assps_marks_signed_runtime','public.paper_revisions','SELECT')
+ THEN RAISE EXCEPTION 'ASSPS signed postflight policy/privilege/role isolation mismatch'; END IF;
 END $postflight$;
 COMMIT;
