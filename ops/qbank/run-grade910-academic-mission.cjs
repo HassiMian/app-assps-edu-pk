@@ -39,7 +39,11 @@ function execute(){
  const bins=[{id:'frozen-current-source-prepublication',exec:process.execPath,
    argv:['ops/qbank/attest-grade910-prepublication-gates.cjs','--write'],maxMs:240000},
    {id:'frozen-current-original-faculty-worklist',exec:process.execPath,
-    argv:['ops/qbank/build-grade910-authoritative-faculty-intake.cjs','--write'],maxMs:240000}]
+    argv:['ops/qbank/build-grade910-authoritative-faculty-intake.cjs','--write'],maxMs:240000},
+   {id:'frozen-all-content-editorial-qa',exec:process.execPath,
+    argv:['ops/qbank/build-grade910-all-content-review-docket.cjs','--write'],maxMs:240000},
+   {id:'all-source-academic-teacher-priority-worklist',exec:process.execPath,
+    argv:['ops/qbank/build-grade910-one-faculty-quality-worklist.cjs','--write'],maxMs:240000}]
  for(const batch of [...bins,...x.batches]){
   const args=batch.argv||['--test','--test-concurrency=4',...batch.files]
   const p=cp.spawnSync(batch.exec||process.execPath,args,{cwd:ROOT,timeout:batch.maxMs||300000,encoding:'utf8',maxBuffer:32*1024*1024})
