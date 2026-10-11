@@ -45,8 +45,8 @@ GRANT USAGE ON SCHEMA public TO assps_marks_signed_runtime;
 DO $restricted_grants$
 DECLARE r record; granted_tables int:=0; denied_tables int:=0; granted_seq int:=0; denied_seq int:=0;
 BEGIN
- IF EXISTS(SELECT 1 FROM pg_auth_members a JOIN pg_roles r ON r.oid=a.member
-  WHERE r.rolname='assps_marks_signed_runtime')
+ IF EXISTS(SELECT 1 FROM pg_auth_members a JOIN pg_roles parent_role ON parent_role.oid=a.member
+  WHERE parent_role.rolname='assps_marks_signed_runtime')
  THEN RAISE EXCEPTION 'New signed runtime unexpectedly inherits existing roles'; END IF;
  FOR r IN SELECT c.oid,c.relname FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace
    WHERE n.nspname='public' AND c.relkind='r' AND c.relforcerowsecurity ORDER BY c.relname LOOP
