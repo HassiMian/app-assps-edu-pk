@@ -21,6 +21,10 @@ class Contract(unittest.TestCase):
   self.assertIn('location ~ ^/api/exams/results/[1-9][0-9]*$',LOC)
   self.assertNotIn('location /api/',LOC)
   self.assertEqual(MAPS.count('127.0.0.1:5091'),4)
+ def test_app_only_no_connect_ingress_override(self):
+  self.assertIn('ONLY inside `app.assps.edu.pk`',LOC)
+  self.assertIn('Connect host MUST remain entirely unchanged',LOC)
+  self.assertNotIn('INSIDE both',LOC)
  def test_host_specific_legacy_upstream_is_preserved(self):
   # Inspected live on 11 October: API host uses 3000, app host uses 5000.
   self.assertIn('map $host $assps_marks_legacy_upstream',MAPS)
