@@ -7,7 +7,8 @@
 // Preserves exact string input without automatic trim(). Supports dir and keyboard shortcuts.
 
 import { useState, useEffect } from 'react';
-import { useStructuredFocus, INTERACTION_MODE } from '../StructuredFocusContext.jsx'
+import { useStructuredFocus } from '../structuredFocusState.js'
+import { INTERACTION_MODE } from '../structuredFocusHelpers.js'
 
 export default function StructuredTextInput({
   value = '',

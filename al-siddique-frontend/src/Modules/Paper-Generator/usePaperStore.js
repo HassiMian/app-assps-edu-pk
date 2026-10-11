@@ -849,13 +849,15 @@ export function markPaperServerRecovered(serverPaperId, serverRevision) {
  return saveStore({ ...store, savedPapers })
 }
 
-export function usePaperStore() {
-  // Initialize global store on first use if null
-  if (!globalStore) {
-    globalStore = loadStore();
-  }
+// Lazy singleton initialization belongs to the state initializer, not React render.
+// Keep the existing tenant-scoped load timing: never hydrate before first hook use.
+function getInitializedPaperStore() {
+  if (!globalStore) globalStore = loadStore()
+  return globalStore
+}
 
-  const [store, setStore] = useState(globalStore);
+export function usePaperStore() {
+  const [store, setStore] = useState(getInitializedPaperStore);
 
   useEffect(() => {
     const handler = () => setStore(globalStore);
