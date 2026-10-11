@@ -63,3 +63,23 @@ If any required input is missing, malformed, untrusted, self-signed with a wrong
 The Academic Master may independently validate a real correctly signed faculty packet when it eventually exists. **That alone never auto-publishes it.** Paper Studio owns server-side verified-question picker, paper layouts, marks, Urdu RTL, print/export and approved-only snapshot selection. SaaS Core owns the privileged school/tenant RLS release gate and production deployment. Any approved final question/answer revision change must invalidate earlier signoffs, trigger independent re-review and new edition/exam applicability checks.
 
 Do not bypass missing school evidence by seeding provisional questions or treating public textbook PDF hashes/AI-generated model answers as signed teacher approvals. The academic release must remain **HOLD**.
+
+## Final actual one-run independent regression evidence — 11 October 2026
+
+Following implementation and publishing of Academic-only source commit `0f4fccb437d7048d6ad3d596de4414c4216643ab`, the existing **one-command, non-scheduled Academic master mission** was executed on that exact clean worktree:
+
+```bash
+ASSPS_GRADE910_EVIDENCE_DIR=/tmp/assps910-crypto-fullmission-20261011 \
+  node ops/qbank/run-grade910-academic-mission.cjs
+```
+
+It finished **process exit 0**, and its `mission-audit.json` records `qualityGatesPassed=true`, **all 13/13 execution stages PASS** and individual complete TAP summaries plus captured exit0 on every test batch:
+
+- 2 live original-revision source-freeze and all-2,581 original-ID evidence-queue rebuilds, both exit0.
+- 3 original Grade IX–X curricular staging batches: 168 + 175 + 167 = **510/510 PASS**, zero failed or skipped.
+- 8 Academic regression batches (including the new institutional Ed25519, adversarial source/tenant/school review tests): 58 + 73 + 48 + 42 + 46 + 35 + 50 + 41 = **393/393 PASS**, zero failed or skipped.
+- **Unique one-invocation total: 903/903 tests passed**, all actual process exit0, zero failed or skipped.
+
+Evidence file: `/tmp/assps910-crypto-fullmission-20261011/mission-audit.json`; signed hash input and per-batch temporary TAP logs reside alongside it on the authorized isolated VPS. Existing 73 original source files and 2,581 question/answer revisions are untouched; no production student data, Paper Studio editor, tenancy RLS, historic papers or official school assessment papers changed. Production deployment remains exclusively SaaS Core-owned.
+
+The full one-run suite proves engineering contracts, NOT the actual content correctness/approval of 2,581 provisional questions. Institution-issued school trust root/tenant credentials, authentic textbook adoption and human qualified reviewer signatures **are not installed**; current **actual academic approvals 0, verified published 0, teacher-selectable verified questions 0**. The offline signature verifier intentionally denies default use without all required out-of-band school authority records and cannot publish even a synthetically signed test receipt.
