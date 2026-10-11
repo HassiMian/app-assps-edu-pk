@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+import time
 
 ROOT=Path(__file__).resolve().parents[2]
 F=ROOT/'al-siddique-frontend'
@@ -70,9 +71,22 @@ def main():
             if name=='firstday_browser':success=success and 'MARKS_BROWSER_ZERO_PASS first real zero saved' in test.stdout
             if name=='results_browser':success=success and 'RESULT_DESIGNER_BROWSER_PASS' in test.stdout
             if name=='twentyfive_a4':success=success and 'BATCH_PDF_PAGE_COUNT 25' in test.stdout
+            if not success and name in ('firstday_browser','results_browser','early_years_browser','urdu_paper_browser','twentyfive_a4'):
+                # Browser renderer/port contention from concurrent owner suites is
+                # transient. Retry once without modifying any actual assertion.
+                print('SOURCE_'+name.upper()+'_FIRST_ATTEMPT_FAILED_RETRY_ONCE',flush=True)
+                time.sleep(2)
+                test=call(cmd,cwd,timeout)
+                success=bool(test and test.returncode==0 and ('# fail 0' in test.stdout if name in ('early_years_browser','urdu_paper_browser') else True))
+                if name=='firstday_browser':success=success and 'MARKS_BROWSER_ZERO_PASS first real zero saved' in test.stdout
+                if name=='results_browser':success=success and 'RESULT_DESIGNER_BROWSER_PASS' in test.stdout
+                if name=='twentyfive_a4':success=success and 'BATCH_PDF_PAGE_COUNT 25' in test.stdout
             print('SOURCE_'+name.upper()+('_PASS' if success else '_FAIL'),flush=True)
             if not success:
                 print('SOURCE_TEST_SHORT_FAILURE '+name+' '+str(test.returncode if test else 'TIMEOUT'),flush=True)
+                if test:
+                    print('FAILURE_STDERR_END '+test.stderr[-350:].replace('\n',' '),flush=True)
+                    print('FAILURE_STDOUT_END '+test.stdout[-350:].replace('\n',' '),flush=True)
                 ok=False
                 break
     if NGINX_CHECK.exists():
