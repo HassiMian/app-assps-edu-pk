@@ -25,3 +25,4 @@ uploads/
 *.pfx
 *.sql.gz
 runtime/server-snapshots/
+al-siddique-backend/node_modules
