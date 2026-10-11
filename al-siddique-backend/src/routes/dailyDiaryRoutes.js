@@ -4,6 +4,7 @@ const router = express.Router()
 const { query } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId, tenantClause } = require('../middleware/tenant')
+const { isSchoolDocumentManager, canAccessAuthoredDocument } = require('../services/teacherDocumentAccess')
 
 const canManageDiary = requireRoles('super_admin', 'admin', 'school_admin', 'principal', 'teacher')
 
@@ -44,6 +45,19 @@ function normalizeText(value, fallback = '') {
   return str || fallback
 }
 
+function normalizeDiaryDate(value) {
+  let text
+  if (value instanceof Date) {
+    if (!Number.isFinite(value.getTime())) return null
+    text = value.toISOString().slice(0, 10)
+  } else {
+    text = String(value ?? '').trim()
+  }
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(text)) return null
+  const calendarDate = new Date(`${text}T12:00:00Z`)
+  return !Number.isNaN(calendarDate.getTime()) && calendarDate.toISOString().slice(0, 10) === text ? text : null
+}
+
 function normalizePayload(body = {}) {
   const templateId = Number(body.template_id ?? body.templateId ?? 1) || 1
   const slipsPerPage = Number(body.slips_per_page ?? body.slipsPerPage ?? 8) || 8
@@ -58,13 +72,32 @@ function normalizePayload(body = {}) {
     logo_url: normalizeText(body.logo_url ?? body.logoUrl, ''),
     class_level: normalizeText(body.class_level ?? body.classLevel, ''),
     class_name: normalizeText(body.class_name ?? body.className, ''),
-    diary_date: normalizeText(body.diary_date ?? body.diaryDate, new Date().toISOString().slice(0, 10)),
+    diary_date: normalizeDiaryDate(body.diary_date ?? body.diaryDate ?? new Date()),
     slips_per_page: [2, 3, 4, 5, 6, 8, 10, 12, 14].includes(slipsPerPage) ? slipsPerPage : 4,
     footer_text: normalizeText(body.footer_text ?? body.footerText, ''),
     footer_is_urdu: footerIsUrdu,
     rows,
     style_settings: styleSettings,
   }
+}
+
+// A stored row uses snake_case. Browser edits may send camelCase; patch values
+// must take precedence over the old row (without discarding omitted fields).
+function mergeDiaryEdit(current, body = {}) {
+  const update = body && typeof body === 'object' && !Array.isArray(body) ? body : {}
+  const merged = { ...current, ...update }
+  const fields = [
+    ['template_id','templateId'], ['logo_url','logoUrl'], ['class_level','classLevel'],
+    ['class_name','className'], ['diary_date','diaryDate'], ['slips_per_page','slipsPerPage'],
+    ['footer_text','footerText'], ['footer_is_urdu','footerIsUrdu'],
+    ['style_settings','styleSettings'],
+  ]
+  for (const [column, alias] of fields) {
+    if (Object.prototype.hasOwnProperty.call(update, alias) && !Object.prototype.hasOwnProperty.call(update, column)) {
+      merged[column] = update[alias]
+    }
+  }
+  return merged
 }
 
 function mapDiaryRow(row) {
@@ -75,7 +108,10 @@ function mapDiaryRow(row) {
   }
 }
 
-router.use(protect, canManageDiary)
+router.use(protect, canManageDiary, (req, res, next) => {
+  if (!isSchoolDocumentManager(req.user) && (!Number.isSafeInteger(Number(req.user?.id)) || Number(req.user?.id) <= 0)) return res.status(403).json({ success:false, message:'A verified teacher identity is required.' })
+  next()
+})
 
 router.get('/', async (req, res) => {
   try {
@@ -87,19 +123,10 @@ router.get('/', async (req, res) => {
     if (!isSuperAdmin && !schoolId) return res.status(400).json({ success: false, message: 'School context is required.' })
 
     const result = isSuperAdmin
-      ? await query(
-        `SELECT * FROM daily_diaries
-         ORDER BY created_at DESC
-         LIMIT $1`,
-        [limit]
-      )
-      : await query(
-        `SELECT * FROM daily_diaries
-         WHERE school_id = $1
-         ORDER BY created_at DESC
-         LIMIT $2`,
-        [schoolId, limit]
-      )
+      ? await query(`SELECT * FROM daily_diaries ORDER BY created_at DESC LIMIT $1`, [limit])
+      : isSchoolDocumentManager(req.user)
+        ? await query(`SELECT * FROM daily_diaries WHERE school_id = $1 ORDER BY created_at DESC LIMIT $2`, [schoolId, limit])
+        : await query(`SELECT * FROM daily_diaries WHERE school_id = $1 AND created_by = $2 ORDER BY created_at DESC LIMIT $3`, [schoolId, Number(req.user.id), limit])
 
     res.json({
       success: true,
@@ -127,8 +154,8 @@ router.get('/:id', async (req, res) => {
     }
 
     const userSchoolId = resolveDiarySchoolId(req)
-    if (req.user?.role !== 'super_admin' && diary.school_id !== userSchoolId) {
-      return res.status(403).json({ success: false, message: 'Unauthorized.' })
+    if (!canAccessAuthoredDocument(req.user, diary, userSchoolId)) {
+      return res.status(404).json({ success: false, message: 'Daily diary not found.' })
     }
 
     res.json({
@@ -148,6 +175,7 @@ router.post('/', async (req, res) => {
     const schoolId = resolveDiarySchoolId(req)
     if (!schoolId) return res.status(400).json({ success: false, message: 'School context is required.' })
     const payload = normalizePayload(req.body || {})
+    if (!payload.diary_date) return res.status(422).json({ success:false, code:'DAILY_DIARY_DATE_INVALID', message:'A valid diary date is required.' })
     const canonicalSchoolName = await resolveDiarySchoolName(schoolId)
     if (!canonicalSchoolName) return res.status(422).json({ success: false, message: 'School identity is not configured for this diary.' })
     payload.school_name = canonicalSchoolName
@@ -208,11 +236,12 @@ router.put('/:id', async (req, res) => {
     }
 
     const userSchoolId = resolveDiarySchoolId(req)
-    if (req.user?.role !== 'super_admin' && current.school_id !== userSchoolId) {
-      return res.status(403).json({ success: false, message: 'Unauthorized.' })
+    if (!canAccessAuthoredDocument(req.user, current, userSchoolId)) {
+      return res.status(404).json({ success: false, message: 'Daily diary not found.' })
     }
 
-    const payload = normalizePayload({ ...current, ...(req.body || {}) })
+    const payload = normalizePayload(mergeDiaryEdit(current, req.body))
+    if (!payload.diary_date) return res.status(422).json({ success:false, code:'DAILY_DIARY_DATE_INVALID', message:'A valid diary date is required.' })
     const canonicalSchoolName = await resolveDiarySchoolName(Number(current.school_id))
     if (!canonicalSchoolName) return res.status(422).json({ success: false, message: 'School identity is not configured for this diary.' })
     payload.school_name = canonicalSchoolName
@@ -231,7 +260,7 @@ router.put('/:id', async (req, res) => {
         rows = $11::jsonb,
         style_settings = $12::jsonb,
         updated_at = CURRENT_TIMESTAMP
-      WHERE id = $13 AND school_id = $14
+      WHERE id = $13 AND school_id = $14 AND ($15::boolean OR created_by = $16)
       RETURNING *`,
       [
         payload.template_id,
@@ -248,9 +277,12 @@ router.put('/:id', async (req, res) => {
         JSON.stringify(payload.style_settings),
         id,
         Number(current.school_id),
+        isSchoolDocumentManager(req.user),
+        Number(req.user?.id) || -1,
       ]
     )
 
+    if (!result.rows[0]) return res.status(409).json({ success: false, message: 'The diary changed during this update. Reload it before retrying.' })
     res.json({
       success: true,
       data: mapDiaryRow(result.rows[0]),
@@ -271,17 +303,17 @@ router.delete('/:id', async (req, res) => {
       return res.status(400).json({ success: false, message: 'Invalid diary id.' })
     }
 
-    const existing = await query('SELECT id, school_id FROM daily_diaries WHERE id = $1 LIMIT 1', [id])
+    const existing = await query('SELECT id, school_id, created_by FROM daily_diaries WHERE id = $1 LIMIT 1', [id])
     const diary = existing.rows[0]
     if (!diary) {
       return res.status(404).json({ success: false, message: 'Daily diary not found.' })
     }
     const userSchoolId = resolveDiarySchoolId(req)
-    if (req.user?.role !== 'super_admin' && diary.school_id !== userSchoolId) {
-      return res.status(403).json({ success: false, message: 'Unauthorized.' })
+    if (!canAccessAuthoredDocument(req.user, diary, userSchoolId)) {
+      return res.status(404).json({ success: false, message: 'Daily diary not found.' })
     }
 
-    await query('DELETE FROM daily_diaries WHERE id = $1 AND school_id = $2', [id, Number(diary.school_id)])
+    await query('DELETE FROM daily_diaries WHERE id = $1 AND school_id = $2 AND ($3::boolean OR created_by = $4)', [id, Number(diary.school_id), isSchoolDocumentManager(req.user), Number(req.user?.id) || -1])
     res.json({ success: true, message: 'Daily diary deleted successfully.' })
   } catch (error) {
     console.error('Daily diary delete error:', error)

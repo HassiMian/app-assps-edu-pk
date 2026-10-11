@@ -1,0 +1,100 @@
+#!/usr/bin/env python3
+"""One-command integrated ASSPS Marks+9 Results+Paper source and live release gate.
+
+It never deploys, migrates, deletes, changes DB roles, rotates passwords,
+reads actual student records or restarts a service. --full runs source tests
+before the final readonly production security probes. Production GO is always
+conditional on independently signed live actor/printer/backups acceptance.
+"""
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+
+ROOT=Path(__file__).resolve().parents[2]
+F=ROOT/'al-siddique-frontend'
+B=ROOT/'al-siddique-backend'
+LIVE_PROBE=Path('/root/workspace/assps-core-marks-teacher-assignment-security-20261010/ops/release/verify-prod-signed-runtime-identity-20261010.py')
+NGINX_CHECK=Path('/root/workspace/assps-core-marks-teacher-assignment-security-20261010/ops/security/check-nginx-private-uploads.sh')
+FRONT_SOURCE='bfc7806f9a2ac08dc1f5ccf5845436ac5a3056cb'
+BACK_SOURCE='580111e8ee92fa13ee672578461927294cfada6b'
+FRONT_EXPECTED=['al-siddique-frontend/src/Modules/examination/MarksSheet.jsx','al-siddique-frontend/src/Modules/examination/ResultCards.jsx','al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/PaperEditorMain.jsx']
+BACK_EXPECTED=['al-siddique-backend/src/config/database.js','al-siddique-backend/src/routes/examRoutes.js','al-siddique-backend/src/middleware/auth.js']
+
+def call(argv,cwd,timeout=90):
+    try: return subprocess.run(argv,cwd=str(cwd),text=True,capture_output=True,timeout=timeout)
+    except subprocess.TimeoutExpired:return None
+
+def committed_sha(filename):
+    r=call(['git','show','HEAD:'+filename],ROOT,15)
+    return hashlib.sha256(r.stdout.encode()).hexdigest() if r and r.returncode==0 else None
+
+def check_provenance():
+    for source,paths in [(FRONT_SOURCE,FRONT_EXPECTED),(BACK_SOURCE,BACK_EXPECTED)]:
+        for p in paths:
+            remote=call(['git','show',source+':'+p],ROOT,15)
+            actual=ROOT/p
+            ok=bool(remote and remote.returncode==0 and actual.is_file() and remote.stdout==actual.read_text())
+            print('SOURCE_PROVENANCE_'+p.rsplit('/',1)[-1].upper()+('_PASS' if ok else '_FAIL'),flush=True)
+            if not ok:return False
+    return True
+
+SUITES=[
+ ('backend_security',B,['node','--test','src/tests/bluegreen-signed-policy-role-binding.test.cjs','src/tests/signed-runtime-catalog-contract.test.js','src/tests/core-signed-envelope-contract.test.js','src/tests/exam-marks-teacher-http-isolated.test.js','src/tests/exam-marks-teacher-scope.test.js','src/tests/database-tenant-context.test.js'],75),
+ ('marks_firstday',F,['node','scripts/test-marks-entry-first-term-recovery.mjs'],45),
+ ('marks_zero',F,['node','scripts/test-marks-zero-state-and-blank-print.mjs'],45),
+ ('marks_nine',F,['node','scripts/test-marks-to-nine-cards-firstday.mjs'],50),
+ ('nine_grades',F,['node','scripts/test-nine-premium-mark-accuracy.mjs'],60),
+ ('original_template_integrity',F,['npm','run','verify:templates'],40),
+ ('firstday_browser',F,['node','scripts/test-marks-entry-firstterm-browser.mjs'],95),
+ ('results_browser',F,['node','scripts/test-result-designer-real-browser.mjs'],85),
+ ('early_years_browser',F,['node','--test','src/Modules/Paper-Generator/PaperEditor/tests/earlyYearsBrowserAcceptance.test.js'],100),
+ ('urdu_paper_browser',F,['node','--test','src/Modules/Paper-Generator/PaperEditor/tests/paperWorkspaceUrduBrowserAcceptance.test.js'],125),
+ ('twentyfive_a4',F,['node','scripts/test-result-batch-pdf-a4.mjs'],100),
+]
+
+def main():
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--full',action='store_true',help='Re-run full synthetic/sandbox source acceptance before release probe')
+    args=parser.parse_args()
+    print('ASSPS_FIRSTTERM_MISSION_START '+('FULL' if args.full else 'PREFLIGHT'),flush=True)
+    print('LIVE_DB_AND_STUDENT_DATA_WRITES=DISABLED BY DESIGN',flush=True)
+    ok=check_provenance()
+    if args.full and ok:
+        for name,cwd,cmd,timeout in SUITES:
+            test=call(cmd,cwd,timeout)
+            success=bool(test and test.returncode==0 and ('# fail 0' in test.stdout if 'browser' in name and name not in ('firstday_browser','results_browser') else True))
+            if name=='firstday_browser':success=success and 'MARKS_BROWSER_ZERO_PASS first real zero saved' in test.stdout
+            if name=='results_browser':success=success and 'RESULT_DESIGNER_BROWSER_PASS' in test.stdout
+            if name=='twentyfive_a4':success=success and 'BATCH_PDF_PAGE_COUNT 25' in test.stdout
+            print('SOURCE_'+name.upper()+('_PASS' if success else '_FAIL'),flush=True)
+            if not success:
+                print('SOURCE_TEST_SHORT_FAILURE '+name+' '+str(test.returncode if test else 'TIMEOUT'),flush=True)
+                ok=False
+                break
+    if NGINX_CHECK.exists():
+        check=call(['bash',str(NGINX_CHECK),'/etc/nginx/sites-enabled'],ROOT,20)
+        nginx=bool(check and check.returncode==0 and 'NGINX_PRIVATE_UPLOAD_ALIAS_GATE_PASS' in check.stdout)
+    else:nginx=False
+    print('LIVE_PRIVATE_MEDIA_'+('PASS' if nginx else 'FAIL'),flush=True)
+    if LIVE_PROBE.exists():
+        probe=call(['python3',str(LIVE_PROBE)],ROOT,25)
+        signed=bool(probe and probe.returncode==0 and 'PRODUCTION_SIGNED_RUNTIME_IDENTITY_PREFLIGHT_PASS' in probe.stdout)
+    else:signed=False
+    print('LIVE_SIGNED_NONBYPASS_RUNTIME_'+('PASS' if signed else 'FAIL'),flush=True)
+    print('SOURCE_CANDIDATE_'+('PASS' if ok else 'FAIL'),flush=True)
+    # Never claim automatic certification after an identity probe. Real live
+    # authorized school JWT negative matrix and restoration verification are
+    # an independent release authority, not discoverable from synthetic tests.
+    print('LIVE_AUTHENTICATED_SCHOOL_ROLE_ACCEPTANCE=UNVERIFIED',flush=True)
+    print('LIVE_DEPLOYMENT_ROLLBACK_SIGNOFF=UNVERIFIED',flush=True)
+    print('RELEASE_CERTIFIED=FALSE; PRODUCTION_DEPLOYMENT=HOLD',flush=True)
+    return 2
+if __name__=='__main__':
+    try:sys.exit(main())
+    except Exception as exc:
+        print('GATE_FAIL_CLOSED '+type(exc).__name__,flush=True)
+        sys.exit(2)

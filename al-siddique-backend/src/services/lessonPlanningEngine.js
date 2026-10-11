@@ -473,6 +473,8 @@ module.exports = {
   normalizeClassKey,
   classMatches,
   enumerateDates,
+  parseIsoDate,
+  MAX_RANGE_DAYS,
   buildTimetableSlots,
   buildUnitsForSubject,
   buildDeterministicPlan,

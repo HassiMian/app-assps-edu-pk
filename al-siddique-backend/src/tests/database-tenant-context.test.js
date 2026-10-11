@@ -21,7 +21,7 @@ test('applyTenantContext is exported and applies tenant RLS settings', async () 
   const applied = await tenantContext.run({ rlsEnabled: true, tenantId: 42, isSuperAdmin: false }, () => applyTenantContext(client))
   assert.equal(applied, true)
   assert.ok(client.calls.some(call => call.text.includes("app.rls_enabled") && call.text.includes("true")))
-  assert.ok(client.calls.some(call => call.text.includes("app.is_super_admin") && call.text.includes("false")))
+  assert.ok(client.calls.some(call => call.text.includes("app.is_super_admin") && call.params[0] === 'false'))
   assert.ok(client.calls.some(call => call.text.includes("app.tenant_id") && call.params[0] === '42'))
 })
 
@@ -29,8 +29,28 @@ test('applyTenantContext uses explicit super-admin context without tenant bindin
   const client = fakeClient()
   const applied = await tenantContext.run({ rlsEnabled: true, tenantId: 42, isSuperAdmin: true }, () => applyTenantContext(client))
   assert.equal(applied, true)
-  assert.ok(client.calls.some(call => call.text.includes("app.is_super_admin") && call.text.includes("true")))
-  assert.ok(client.calls.some(call => call.text.includes("app.tenant_id") && call.params.length === 0))
+  assert.ok(client.calls.some(call => call.text.includes("app.is_super_admin") && call.params[0] === 'true'))
+  assert.ok(client.calls.some(call => call.text.includes("app.tenant_id") && call.params.length === 1 && call.params[0] === ''))
+})
+
+test('invalid or missing school tenant context fails before issuing any query', async () => {
+  for (const tenantId of [null, '', 0, -1, 'invalid']) {
+    const client = fakeClient()
+    await assert.rejects(
+      tenantContext.run({ rlsEnabled: true, tenantId, isSuperAdmin: false }, () => applyTenantContext(client)),
+      { code: 'TENANT_CONTEXT_REQUIRED' }
+    )
+    assert.equal(client.calls.length, 0, 'no query before validated school context')
+  }
+})
+
+test('tenant key is parameter-bound and super-admin key is explicitly blank', async () => {
+  const regular = fakeClient()
+  await tenantContext.run({ rlsEnabled: true, tenantId: 42, tenantKey: 'school-a', isSuperAdmin: false }, () => applyTenantContext(regular))
+  assert.ok(regular.calls.some(call => call.text.includes('app.tenant_key') && call.params[0] === 'school-a'))
+  const platform = fakeClient()
+  await tenantContext.run({ rlsEnabled: true, tenantId: 42, tenantKey: 'school-a', isSuperAdmin: true }, () => applyTenantContext(platform))
+  assert.ok(platform.calls.some(call => call.text.includes('app.tenant_key') && call.params[0] === ''))
 })
 
 test('applyTenantContext is a no-op outside RLS context', async () => {
