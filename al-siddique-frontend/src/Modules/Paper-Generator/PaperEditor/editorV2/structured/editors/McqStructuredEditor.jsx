@@ -14,7 +14,7 @@ import {
 } from '../structuredCommands.js'
 import { createInsertedOption } from '../structuredNodeModel.js'
 import { generateNextOptionLabel } from '../structuredNodeDefaults.js'
-import { buildStructuredControlKey } from '../StructuredFocusContext.jsx'
+import { buildStructuredControlKey } from '../structuredFocusHelpers.js'
 
 export default function McqStructuredEditor({
   nodeId,

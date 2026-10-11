@@ -13,7 +13,7 @@ import {
   cmdReorderGrammarRows,
 } from '../structuredCommands.js'
 import { createInsertedGrammarRow } from '../structuredNodeModel.js'
-import { buildStructuredControlKey } from '../StructuredFocusContext.jsx'
+import { buildStructuredControlKey } from '../structuredFocusHelpers.js'
 
 export default function GrammarTableStructuredEditor({
   nodeId,

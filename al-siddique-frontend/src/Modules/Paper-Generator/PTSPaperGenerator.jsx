@@ -1,5 +1,5 @@
 // PTSPaperGenerator.jsx — PTS clone, dark SaaS theme
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useLayoutEffect, useState, useRef } from 'react'
 import { useTheme } from '../../context/ThemeContext.jsx'
 
 function createManualSectionId(paperId) {
@@ -644,20 +644,32 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const [personalizedPreparing, setPersonalizedPreparing] = useState(false)
  const [personalizedStatus, setPersonalizedStatus] = useState('')
 
+ // Offline reconciliation must keep the current tenant/paper handler without
+ // re-registering an online event listener on every editor render.
+ const offlinePaperChangeRef = useRef(onPaperChange)
+ const offlineUpdateSavedPaperRef = useRef(updateSavedPaper)
+ useLayoutEffect(() => {
+  offlinePaperChangeRef.current = onPaperChange
+  offlineUpdateSavedPaperRef.current = updateSavedPaper
+ }, [onPaperChange, updateSavedPaper])
+ const offlineServerPaperId = loadedPaper?.serverPaperId || paper?.serverPaperId || loadedPaper?.canonicalDocument?.id
+
  useEffect(() => {
   if (!isUserAuthoredPaper) return undefined
+  let cancelled = false
   const retry = () => flushAssessmentOfflineQueue().then(result => {
-   const serverPaperId = loadedPaper?.serverPaperId || paper?.serverPaperId || loadedPaper?.canonicalDocument?.id
+   if (cancelled) return
+   const serverPaperId = offlineServerPaperId
    const synced = result.synced?.find(item =>
     (item.localPaperId && String(item.localPaperId)===String(persistedPaperIdRef.current)) ||
     (serverPaperId && item.paperId===serverPaperId)
    )
    if (synced && persistedPaperIdRef.current) {
-    const recovered = updateSavedPaper(persistedPaperIdRef.current, {
+    const recovered = offlineUpdateSavedPaperRef.current(persistedPaperIdRef.current, {
      serverRevision:Number(synced.data?.currentRevision || 0), serverContentHash:synced.data?.contentHash || null,
      persistenceAuthority:'SERVER_REVISION_SOURCE_OF_TRUTH', persistenceMode:'ONLINE', syncConflict:false,
     })
-    if (recovered) onPaperChange(current => ({ ...current, serverRevision:recovered.serverRevision, serverContentHash:recovered.serverContentHash, persistenceAuthority:recovered.persistenceAuthority, persistenceMode:recovered.persistenceMode }))
+    if (recovered) offlinePaperChangeRef.current?.(current => ({ ...current, serverRevision:recovered.serverRevision, serverContentHash:recovered.serverContentHash, persistenceAuthority:recovered.persistenceAuthority, persistenceMode:recovered.persistenceMode }))
    }
    if (result.scopeChanged) setPersistenceNotice('Account changed during sync. Offline drafts were kept for their original account.')
    else if (result.conflicts) setPersistenceNotice('Queued save needs conflict resolution before server sync.')
@@ -666,8 +678,8 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   }).catch(() => {})
   retry()
   window.addEventListener('online', retry)
-  return () => window.removeEventListener('online', retry)
- }, [isUserAuthoredPaper])
+  return () => { cancelled = true; window.removeEventListener('online', retry) }
+ }, [isUserAuthoredPaper, offlineServerPaperId])
 
  const [qType, setQType] = useState(questionTypes[0]?.value || 'mcq')
  const [priority, setPriority] = useState('all')
@@ -1802,28 +1814,6 @@ function parseOfficialContentBlocks(content = '') {
  return blocks.filter(block => block.type === 'table' ? block.rows.length : block.text.trim())
 }
 
-function parseMcqRows(content = '') {
- const lines = String(content).split(/\r?\n/).map(line => line.trim()).filter(Boolean)
- const rows = []
- for (let lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {
-  const line = lines[lineIndex]
-  const questionMatch = line.match(/^(\d+)[.)]\s*(.*)$/)
-  if (!questionMatch) continue
-  const optionPattern = /(?:^|\s)(?:\(([a-dA-Dا-د])\)|([a-dA-Dا-د])[.)])\s*/g
-  const inlineOptions = [...questionMatch[2].matchAll(optionPattern)]
-  const optionSource = inlineOptions.length >= 2 ? questionMatch[2] : lines[lineIndex + 1] || ''
-  const matches = [...optionSource.matchAll(optionPattern)]
-  if (matches.length < 2) continue
-  const prompt = optionSource === questionMatch[2] ? questionMatch[2].slice(0, matches[0].index).trim() : questionMatch[2]
-  const options = matches.map((match, index) => ({
-   label:(match[1] || match[2]).toUpperCase(),
-   text:optionSource.slice(match.index + match[0].length, matches[index + 1]?.index).trim(),
-  }))
-  rows.push({ number:questionMatch[1], prompt, options })
-  if (optionSource !== questionMatch[2]) lineIndex += 1
- }
- return rows.length ? rows : []
-}
 
 function parseVerticalSums(content = '') {
  const lines = String(content).split(/\r?\n/)
@@ -1854,7 +1844,7 @@ function TrueFalseGrid({ content, isUrdu, fs, qFs, themeColor }) {
  return <table data-true-false-grid style={{ width:'100%', borderCollapse:'collapse', tableLayout:'fixed', direction:isUrdu?'rtl':'ltr', fontSize:`${qFs}px` }}><thead><tr style={{ background:`${themeColor}12`, color:themeColor }}><th style={{ width:38, border:`1px solid ${themeColor}77`, padding:5 }}>#</th><th style={{ border:`1px solid ${themeColor}77`, padding:5, textAlign:isUrdu?'right':'left' }}>{isUrdu?'بیان':'Statement'}</th><th style={{ width:64, border:`1px solid ${themeColor}77`, padding:5 }}>T / F</th></tr></thead><tbody>{rows.map(row => <tr key={row.number}><td style={{ border:`1px solid ${themeColor}77`, padding:6, textAlign:'center', fontWeight:700 }}>{row.number}</td><td style={{ border:`1px solid ${themeColor}77`, padding:`${6*fs}px ${8*fs}px` }}>{row.text}</td><td aria-label="Write T or F" style={{ height:42, border:`1.5px solid ${themeColor}`, background:'#fff' }} /></tr>)}</tbody></table>
 }
 
-function MultiplicationTableGrid({ heading, content, fs, qFs, themeColor }) {
+function MultiplicationTableGrid({ heading, fs, qFs, themeColor }) {
  const tablePhrase = String(heading).match(/tables?\s+(?:of\s+)?(.+?)(?:\.|\(|$)/i)?.[1] || ''
  const values = [...tablePhrase.matchAll(/\b(\d+)\b/g)].map(match => Number(match[1])).filter(number => number > 0 && number < 20)
  const numbers = [...new Set(values)]
@@ -1944,7 +1934,7 @@ function StructuredOfficialContent({ question, blocks, isUrdu, fs, qFs, themeCol
   : <div key={blockIndex} style={{ whiteSpace:'pre-wrap', fontSize:`${qFs}px`, lineHeight:isUrdu?1.9:1.5, marginBottom:`${5*fs}px`, textAlign:isUrdu?'right':'left' }}><TextWithAnswerLines text={block.text} /></div>)
 }
 
-function OfficialSections({ questions, isUrdu, editMode, fs, qFs, themeColor, onQuestionChange, mcqLayout='matrix-table', shortLayout='1-column', qBorderStyle='none', showAnsLines=false, showSectionLine=true }) {
+export function OfficialSections({ questions, isUrdu, editMode, fs, qFs, themeColor, onQuestionChange, mcqLayout='matrix-table', shortLayout='1-column', qBorderStyle='none', showAnsLines=false, showSectionLine=true }) {
  const ordered = [...questions].sort((a,b) => Number(a.sourceOrder || 0) - Number(b.sourceOrder || 0))
  return <div style={{ direction:isUrdu?'rtl':'ltr' }}>{ordered.map((question,index) => {
   const blocks = parseOfficialContentBlocks(question.content)
@@ -2196,7 +2186,7 @@ function ClassicTemplate({ paper, cfg, printBubble, printAns, half, editMode=fal
 }
 
 //  Template 2: Modern Pro 
-function ModernTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
+export function ModernTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
  const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
@@ -2244,7 +2234,7 @@ function ModernTemplate({ paper, cfg, printBubble, printAns, half, editMode=fals
 }
 
 //  Template 3: Elite Premium 
-function EliteTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
+export function EliteTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
  const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
@@ -2293,7 +2283,7 @@ function EliteTemplate({ paper, cfg, printBubble, printAns, half, editMode=false
 }
 
 //  Template 4: Emerald Green 
-function EmeraldTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
+export function EmeraldTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
  const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
@@ -2412,12 +2402,12 @@ function PremiumPaperTemplate({ variant='academic', paper, cfg, printBubble, pri
  </div>
 }
 
-function AcademicClassicTemplate(props) {
+export function AcademicClassicTemplate(props) {
  return <ClassicTemplate {...props} qBorderStyle={props.qBorderStyle === 'none' ? 'table' : props.qBorderStyle} fontFamily={props.fontFamily || "'Times New Roman', serif"} fontColor={props.fontColor || '#111827'} />
 }
 
 //  Template 5: Docx Assessment 
-function DocxAssessmentTemplate({ paper, cfg, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, qBorderStyle='none', showUrduHeaders=false, questionTypes=[] , pbStyle, onQuestionChange }) {
+export function DocxAssessmentTemplate({ paper, cfg, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, qBorderStyle='none', showUrduHeaders=false, questionTypes=[] , pbStyle, onQuestionChange }) {
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
  const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
@@ -2465,7 +2455,7 @@ const OFFICIAL_TEMPLATE_THEMES = [
  { id:'emerald', label:'Emerald', accent:'#06695b', soft:'#e6f7f3', border:'#88c9bc' },
 ]
 
-function OfficialExamPaperEditor({ loadedPaper, onReturnToSource }) {
+export function OfficialExamPaperEditor({ loadedPaper, onReturnToSource }) {
  const { paperSettings, updateSavedPaper } = usePaperStore()
  const [draft, setDraft] = useState(() => structuredClone(loadedPaper))
  const [template, setTemplate] = useState('academic')

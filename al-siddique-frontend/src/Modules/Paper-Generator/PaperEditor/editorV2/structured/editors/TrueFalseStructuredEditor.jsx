@@ -6,7 +6,7 @@ import {
   cmdUpdateTfStatement,
   cmdUpdateTfIndicator,
 } from '../structuredCommands.js'
-import { buildStructuredControlKey } from '../StructuredFocusContext.jsx'
+import { buildStructuredControlKey } from '../structuredFocusHelpers.js'
 
 export default function TrueFalseStructuredEditor({
   nodeId,
