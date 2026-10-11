@@ -795,6 +795,7 @@ router.post('/bulk-class-assignment', protect, adminOnly, async (req, res) => {
   }
 
   const sourceClass = req.body?.source_class ? normalizeClassName(req.body.source_class) : null
+  const sourceSection = String(req.body?.source_section || '').trim()
   const reason = String(req.body?.reason || 'Principal bulk class assignment').trim().slice(0, 255)
   const movedBy = req.user?.username || req.user?.email || (req.user?.id ? `user_${req.user.id}` : 'ADMIN')
 
@@ -826,6 +827,24 @@ router.post('/bulk-class-assignment', protect, adminOnly, async (req, res) => {
   try {
     await client.query('BEGIN')
     await applyTenantContext(client)
+    // Fail closed before locking/changing any student: new movement history is
+    // a signed, FORCE-RLS database migration, not runtime application DDL.
+    const auditSecurity = await client.query(`
+      SELECT c.relrowsecurity AS enabled, c.relforcerowsecurity AS forced,
+        has_table_privilege(current_user, c.oid, 'INSERT') AS can_insert,
+        (SELECT count(*)::int FROM pg_policies p WHERE p.schemaname='public'
+          AND p.tablename='student_class_movement_audit'
+          AND p.policyname IN ('assps_audit_tenant_allow','assps_audit_tenant_guard')
+          AND 'assps_marks_signed_runtime'::name=ANY(p.roles)) AS signed_policies
+      FROM pg_class c WHERE c.oid=to_regclass('public.student_class_movement_audit')
+    `)
+    const auditState = auditSecurity.rows[0]
+    if (!auditState || !auditState.enabled || !auditState.forced ||
+        !auditState.can_insert || Number(auditState.signed_policies)!==2) {
+      await client.query('ROLLBACK')
+      return res.status(503).json({success:false,code:'STUDENT_MOVEMENT_AUDIT_SECURITY_NOT_READY',
+        message:'Student movement security is not available. No assignments were changed.'})
+    }
     const ids = normalized.map(item => item.studentId)
     const existing = await client.query(
       'SELECT id, name, class, section FROM students WHERE school_id = $1 AND id = ANY($2::int[]) FOR UPDATE',
@@ -842,34 +861,21 @@ router.post('/bulk-class-assignment', protect, adminOnly, async (req, res) => {
     if (sourceClass) {
       for (const item of normalized) {
         const current = existingMap.get(item.studentId)
-        if (current && normalizeClassName(current.class) !== sourceClass) {
+        if (current && (normalizeClassName(current.class) !== sourceClass ||
+            (sourceSection && String(current.section || '').trim() !== sourceSection))) {
           await client.query('ROLLBACK')
           return res.status(409).json({
             success: false,
             code: 'STALE_ROSTER',
-            message: `Stale roster: student ${current.name} is currently in class "${current.class}", not "${sourceClass}". Please refresh before applying.`,
+            message: 'Selected class or section has changed. Please refresh the roster and select again.',
           })
         }
       }
     }
 
-    // Ensure student_class_movement_audit exists
-    await client.query(`
-      CREATE TABLE IF NOT EXISTS public.student_class_movement_audit (
-        id SERIAL PRIMARY KEY,
-        school_id INT NOT NULL,
-        student_id INT NOT NULL,
-        source_class VARCHAR(50) NOT NULL,
-        source_section VARCHAR(50) NOT NULL,
-        target_class VARCHAR(50) NOT NULL,
-        target_section VARCHAR(50) NOT NULL,
-        reason VARCHAR(255) NOT NULL,
-        moved_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
-        moved_by VARCHAR(100) NOT NULL,
-        reversal_sql TEXT NOT NULL
-      );
-    `)
-
+    // The audit table MUST be provisioned separately by an approved,
+    // tenant-isolated database migration. Never create schemas/tables from a
+    // signed restricted HTTP request, or silently bypass security checks.
     const updated = []
     for (const item of normalized) {
       const prev = existingMap.get(item.studentId)

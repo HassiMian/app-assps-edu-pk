@@ -346,6 +346,7 @@ async function connectForContext() {
           AND p.tablename=c.relname AND p.policyname='core_signed_tenant_guard'
           AND p.permissive='RESTRICTIVE' AND $1::name=ANY(p.roles)
         WHERE c.relkind='r' AND n.nspname='public' AND c.relforcerowsecurity
+          AND c.relname <> 'student_class_movement_audit'
       `, [configuredRuntimeRole()])
       const state = gate.rows[0]
       if (!state || state.forced !== 77 || state.enabled !== 77 || state.signed !== 77) {

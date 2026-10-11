@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, useCallback } from 'react'
+import { useMemo, useState, useCallback } from 'react'
 import api from '../../services/api'
 import { C, card, btnPrimary, btnSecondary, labelStyle, select, input, sectionHeader } from '../moduleStyles'
 import { useAcademicStore } from '../../services/useAcademicStore'
@@ -43,11 +43,10 @@ export default function PromoteDemote() {
   const { activeClasses, loading: academicLoading } = useAcademicStore()
 
   // ── Source Class & Loading State ───────────────────────────────────────────
-  const [fromClass, setFromClass] = useState('')
-  const [fromSection, setFromSection] = useState('')
+  const [fromClassSelection, setFromClass] = useState('')
+  const [fromSectionSelection, setFromSection] = useState('')
   const [students, setStudents] = useState([])
   const [loadingRoster, setLoadingRoster] = useState(false)
-  const [hasLoaded, setHasLoaded] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
 
   // ── Selection State ────────────────────────────────────────────────────────
@@ -55,7 +54,7 @@ export default function PromoteDemote() {
 
   // ── Target Destination State ───────────────────────────────────────────────
   const [targetClass, setTargetClass] = useState('')
-  const [targetSection, setTargetSection] = useState('')
+  const [targetSectionSelection, setTargetSection] = useState('')
   const [reason, setReason] = useState('Principal authorized cohort transition')
 
   // ── Execution & Verification State ─────────────────────────────────────────
@@ -73,12 +72,8 @@ export default function PromoteDemote() {
     return sortSchoolClasses(canonicalClasses.map(c => c.name))
   }, [canonicalClasses])
 
-  // Set default fromClass and targetClass once canonical classes load
-  useEffect(() => {
-    if (canonicalClasses.length > 0 && !fromClass) {
-      setFromClass(canonicalClasses[0].name)
-    }
-  }, [canonicalClasses, fromClass])
+  // Derived defaults avoid synchronous setState-in-effect render cascades.
+  const fromClass = fromClassSelection || canonicalClasses[0]?.name || ''
 
   // Sections available for source class
   const fromClassSections = useMemo(() => {
@@ -86,12 +81,7 @@ export default function PromoteDemote() {
     return found?.sections || []
   }, [canonicalClasses, fromClass])
 
-  // Reset fromSection if it's not valid for selected fromClass
-  useEffect(() => {
-    if (fromSection && !fromClassSections.includes(fromSection)) {
-      setFromSection('')
-    }
-  }, [fromClassSections, fromSection])
+  const fromSection = fromClassSections.includes(fromSectionSelection) ? fromSectionSelection : ''
 
   // Target class object and its configured sections
   const selectedTargetObj = useMemo(() => {
@@ -102,16 +92,9 @@ export default function PromoteDemote() {
     return selectedTargetObj?.sections || []
   }, [selectedTargetObj])
 
-  // Ensure targetSection defaults cleanly when targetClass changes
-  useEffect(() => {
-    if (targetClassSections.length > 0) {
-      if (!targetClassSections.includes(targetSection)) {
-        setTargetSection(targetClassSections[0])
-      }
-    } else {
-      setTargetSection('')
-    }
-  }, [targetClassSections, targetSection])
+  const targetSection = targetClassSections.length
+    ? (targetClassSections.includes(targetSectionSelection) ? targetSectionSelection : targetClassSections[0])
+    : ''
 
   // ── 1. LOAD STUDENTS WORKFLOW ──────────────────────────────────────────────
   const loadRoster = useCallback(async (cls = fromClass, sec = fromSection, options = {}) => {
@@ -127,7 +110,6 @@ export default function PromoteDemote() {
       const res = await api.get('/api/students', { params, skipCache: true })
       const list = res.data?.data || []
       setStudents(list)
-      setHasLoaded(true)
       if (list.length === 0 && !options.keepAlert) {
         setAlert({ 
           type: 'info', 
@@ -144,12 +126,8 @@ export default function PromoteDemote() {
     }
   }, [fromClass, fromSection])
 
-  // Auto-load on initial class assignment
-  useEffect(() => {
-    if (fromClass && !hasLoaded) {
-      void loadRoster(fromClass, fromSection)
-    }
-  }, [fromClass, hasLoaded, loadRoster, fromSection])
+  // Roster fetch is explicit: Class → Section → Load Students.
+  // Changing selection never implicitly exposes an unrelated class roster.
 
   // ── 2. SELECTION HANDLERS ──────────────────────────────────────────────────
   const filteredStudents = useMemo(() => {
@@ -169,11 +147,13 @@ export default function PromoteDemote() {
   }
 
   const toggleAll = () => {
-    if (selectedIds.length === filteredStudents.length && filteredStudents.length > 0) {
-      setSelectedIds([])
-    } else {
-      setSelectedIds(filteredStudents.map(s => s.id))
-    }
+    const visibleIds=filteredStudents.map(s=>s.id)
+    if (!visibleIds.length) return
+    const current=new Set(selectedIds)
+    const everyVisible=visibleIds.every(id=>current.has(id))
+    setSelectedIds(everyVisible
+      ? selectedIds.filter(id=>!visibleIds.includes(id))
+      : [...new Set([...selectedIds,...visibleIds])])
   }
 
   const selectAll = () => setSelectedIds(students.map(s => s.id))
@@ -245,6 +225,7 @@ export default function PromoteDemote() {
     try {
       const payload = {
         source_class: fromClass,
+        source_section: fromSection,
         reason: reason.trim() || 'Principal bulk class assignment',
         assignments,
       }
@@ -413,7 +394,9 @@ export default function PromoteDemote() {
                   value={fromClass} 
                   onChange={e => {
                     setFromClass(e.target.value)
-                    setHasLoaded(false)
+                    setFromSection('')
+                    setStudents([])
+                    setSelectedIds([])
                   }}
                   disabled={loadingRoster || academicLoading}
                 >
@@ -430,7 +413,8 @@ export default function PromoteDemote() {
                   value={fromSection} 
                   onChange={e => {
                     setFromSection(e.target.value)
-                    setHasLoaded(false)
+                    setStudents([])
+                    setSelectedIds([])
                   }}
                   disabled={loadingRoster || academicLoading}
                 >

@@ -22,7 +22,7 @@ def main():
   backup_ok=real in SHA.read_text() and (BACKUP.stat().st_mode&0o077)==0
  check('RECOVERY_BACKUP_HASH_AND_PERMISSIONS',backup_ok)
  check('PRODUCTION_DATABASE_IDENTITY',sql("SELECT current_database()||'|'||current_setting('port')")=='apexos|5432')
- check('PRODUCTION_PROTECTED_FORCE_RLS_77',sql("SELECT count(*) FROM pg_class c WHERE c.relnamespace='public'::regnamespace AND c.relkind='r' AND c.relforcerowsecurity")=='77')
+ check('PRODUCTION_PROTECTED_FORCE_RLS_77',sql("SELECT count(*) FROM pg_class c WHERE c.relnamespace='public'::regnamespace AND c.relkind='r' AND c.relforcerowsecurity AND c.relname<>'student_class_movement_audit'")=='77')
  check('PRODUCTION_LEGACY_POLICY_212',sql("SELECT count(*) FROM pg_policies WHERE schemaname='public' AND policyname NOT IN ('core_signed_tenant_guard','core_signed_tenant_allow')")=='212')
  check('SIGNED_RESTRICTIVE_POLICIES_77',sql("SELECT count(*) FROM pg_policies WHERE policyname='core_signed_tenant_guard' AND roles=ARRAY['assps_marks_signed_runtime']::name[]")=='77')
  check('SIGNED_PERMISSIVE_POLICIES_77',sql("SELECT count(*) FROM pg_policies WHERE policyname='core_signed_tenant_allow' AND roles=ARRAY['assps_marks_signed_runtime']::name[]")=='77')

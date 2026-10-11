@@ -41,6 +41,7 @@ test('Promote/Demote Full Repair Test Suite', { timeout: 30000 }, async (t) => {
     { name: 'Ten', level: 10, sections: ['A'], active: true },
   ]
 
+  let auditReady = true
   const tx = { begins: 0, commits: 0, rollbacks: 0, updates: [], auditInserts: [] }
 
   const mockClient = {
@@ -59,6 +60,9 @@ test('Promote/Demote Full Repair Test Suite', { timeout: 30000 }, async (t) => {
       if (sqlStr === 'ROLLBACK') {
         tx.rollbacks++
         return { rowCount: 0 }
+      }
+      if (sqlStr.includes('STUDENT_MOVEMENT_AUDIT') || sqlStr.includes('signed_policies')) {
+        return {rows:[{enabled:auditReady,forced:auditReady,can_insert:auditReady,signed_policies:auditReady?2:0}],rowCount:1}
       }
       if (sqlStr.includes('FOR UPDATE')) {
         const ids = params[1] || []
@@ -233,6 +237,36 @@ test('Promote/Demote Full Repair Test Suite', { timeout: 30000 }, async (t) => {
   })
 
   // ── TEST 3: Stale Roster / Concurrency Conflict Guard ──────────────────────
+  await t.test('Rejects missing signed audit-RLS protection BEFORE any student update or audit insert', async () => {
+    currentUser = {id:42,role:'principal',username:'principal_assps',school_id:1}
+    const prevUpdates=tx.updates.length, prevInserts=tx.auditInserts.length, prevRollback=tx.rollbacks
+    auditReady=false
+    try {
+      const refused=await post('/bulk-class-assignment', {
+        source_class:'Eight',source_section:'Blue',
+        assignments:[{student_id:643,class:'Nine',section:'Fatima'}]
+      })
+      assert.equal(refused.status,503)
+      assert.equal(refused.data.code,'STUDENT_MOVEMENT_AUDIT_SECURITY_NOT_READY')
+      assert.equal(tx.updates.length,prevUpdates)
+      assert.equal(tx.auditInserts.length,prevInserts)
+      assert.ok(tx.rollbacks>prevRollback)
+    } finally {auditReady=true}
+  })
+
+  await t.test('Rejects stale section changes even when class is unchanged', async () => {
+    currentUser = {id:42,role:'principal',username:'principal_assps',school_id:1}
+    const prevUpdates=tx.updates.length, prevInserts=tx.auditInserts.length
+    const refused=await post('/bulk-class-assignment', {
+      source_class:'Eight',source_section:'Different Section',
+      assignments:[{student_id:643,class:'Nine',section:'Fatima'}]
+    })
+    assert.equal(refused.status,409)
+    assert.equal(refused.data.code,'STALE_ROSTER')
+    assert.equal(tx.updates.length,prevUpdates)
+    assert.equal(tx.auditInserts.length,prevInserts)
+  })
+
   await t.test('Rejects stale roster with 409 STALE_ROSTER when current class does not match source_class', async () => {
     currentUser = { id: 42, role: 'principal', username: 'principal_assps', school_id: 1 }
     tx.rollbacks = 0
