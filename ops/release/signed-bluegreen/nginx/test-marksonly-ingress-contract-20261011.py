@@ -14,6 +14,7 @@ def target(path,method):
   return 'green' if method=='GET' else 'legacy'
  if path=='/api/exams/results':return 'green' if method in ('GET','POST') else 'legacy'
  if re.fullmatch(r'/api/exams/results/[1-9][0-9]*',path):return 'green' if method=='GET' else 'legacy'
+ if path=='/api/students/bulk-class-assignment':return 'green' if method=='POST' else 'deny'
  return 'legacy'
 class Contract(unittest.TestCase):
  def test_exact_whitelist(self):
@@ -21,6 +22,13 @@ class Contract(unittest.TestCase):
   self.assertIn('location ~ ^/api/exams/results/[1-9][0-9]*$',LOC)
   self.assertNotIn('location /api/',LOC)
   self.assertEqual(MAPS.count('127.0.0.1:5091'),4)
+ def test_exact_audited_student_movement_only(self):
+  self.assertIn('location = /api/students/bulk-class-assignment {',LOC)
+  self.assertIn('if ($request_method != POST) { return 405; }',LOC)
+  self.assertEqual(target('/api/students/bulk-class-assignment','POST'),'green')
+  self.assertEqual(target('/api/students/bulk-class-assignment','GET'),'deny')
+  for u in ['/api/students','/api/students/123','/api/fees','/api/auth/login','/api/paper']:
+   self.assertEqual(target(u,'POST'),'legacy')
  def test_app_only_no_connect_ingress_override(self):
   self.assertIn('ONLY inside `app.assps.edu.pk`',LOC)
   self.assertIn('Connect host MUST remain entirely unchanged',LOC)

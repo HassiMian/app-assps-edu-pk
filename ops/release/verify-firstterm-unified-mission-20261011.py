@@ -25,10 +25,17 @@ B=ROOT/'al-siddique-backend'
 LIVE_SIGNED_PROBE=ROOT/'ops/release/signed-bluegreen/verify-live-signed-precutover-20261011.py'
 MIGRATION_CONTRACT=ROOT/'ops/release/signed-bluegreen/test-migration-static-contract-20261011.py'
 NGINX_CHECK=Path('/root/workspace/assps-core-marks-teacher-assignment-security-20261010/ops/security/check-nginx-private-uploads.sh')
-FRONT_SOURCE='bfc7806f9a2ac08dc1f5ccf5845436ac5a3056cb'
-BACK_SOURCE='580111e8ee92fa13ee672578461927294cfada6b'
-FRONT_EXPECTED=['al-siddique-frontend/src/Modules/examination/MarksSheet.jsx','al-siddique-frontend/src/Modules/examination/ResultCards.jsx','al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/PaperEditorMain.jsx']
-BACK_EXPECTED=['al-siddique-backend/src/config/database.js','al-siddique-backend/src/routes/examRoutes.js','al-siddique-backend/src/middleware/auth.js']
+# Immutable per-file provenance, preserving protected Paper/Results while
+# acknowledging approved Core Marks/Exam/API and signed-runtime development.
+# One blanket historical source SHA is invalid after reviewed forward-ports.
+PROVENANCE = [
+ ('al-siddique-frontend/src/Modules/examination/MarksSheet.jsx','006e224eb49074ffd0bf70aba92bec167973eb39'),
+ ('al-siddique-frontend/src/Modules/examination/ResultCards.jsx','bfc7806f9a2ac08dc1f5ccf5845436ac5a3056cb'),
+ ('al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/PaperEditorMain.jsx','bfc7806f9a2ac08dc1f5ccf5845436ac5a3056cb'),
+ ('al-siddique-backend/src/config/database.js','32108d479f7543274d4117b365d6b7db6fdc26f7'),
+ ('al-siddique-backend/src/routes/examRoutes.js','006e224eb49074ffd0bf70aba92bec167973eb39'),
+ ('al-siddique-backend/src/middleware/auth.js','580111e8ee92fa13ee672578461927294cfada6b'),
+]
 
 def call(argv,cwd,timeout=90,env=None):
     try: return subprocess.run(argv,cwd=str(cwd),text=True,capture_output=True,timeout=timeout,env=env)
@@ -39,14 +46,14 @@ def committed_sha(filename):
     return hashlib.sha256(r.stdout.encode()).hexdigest() if r and r.returncode==0 else None
 
 def check_provenance():
-    for source,paths in [(FRONT_SOURCE,FRONT_EXPECTED),(BACK_SOURCE,BACK_EXPECTED)]:
-        for p in paths:
-            remote=call(['git','show',source+':'+p],ROOT,15)
-            actual=ROOT/p
-            ok=bool(remote and remote.returncode==0 and actual.is_file() and remote.stdout==actual.read_text())
-            print('SOURCE_PROVENANCE_'+p.rsplit('/',1)[-1].upper()+('_PASS' if ok else '_FAIL'),flush=True)
-            if not ok:return False
-    return True
+    verified=True
+    for p,source in PROVENANCE:
+        remote=call(['git','show',source+':'+p],ROOT,15)
+        actual=ROOT/p
+        ok=bool(remote and remote.returncode==0 and actual.is_file() and remote.stdout==actual.read_text())
+        print('SOURCE_PROVENANCE_'+p.rsplit('/',1)[-1].upper()+('_PASS' if ok else '_FAIL'),flush=True)
+        verified=verified and ok
+    return verified
 
 SUITES=[
  ('backend_security',B,['node','--test','src/tests/bluegreen-signed-policy-role-binding.test.cjs','src/tests/signed-runtime-catalog-contract.test.js','src/tests/core-signed-envelope-contract.test.js','src/tests/exam-marks-teacher-http-isolated.test.js','src/tests/exam-marks-teacher-scope.test.js','src/tests/database-tenant-context.test.js'],75),

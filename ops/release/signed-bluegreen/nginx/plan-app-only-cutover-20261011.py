@@ -13,7 +13,7 @@ import sys
 BASE=Path(__file__).resolve().parent
 APP=Path('/etc/nginx/sites-enabled/apex-app-ssl')
 API=Path('/etc/nginx/sites-enabled/apex-api-ssl')
-STAGE=Path('/var/www/assps-firstterm-preview-da5a8a39')
+STAGE=Path('/var/www/assps-firstterm-promo-reviewed-64220e11')
 OUT=Path('/tmp/assps-firstterm-app-only-nginx-dryrun-20261011.conf')
 
 def expect(cond,msg):

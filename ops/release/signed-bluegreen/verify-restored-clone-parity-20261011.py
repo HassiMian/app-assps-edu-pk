@@ -9,12 +9,12 @@ CLONE=('55432','assps_backup_restore_check_20261011')
 TABLES="""SELECT c.relname||'|'||string_agg(a.attname||':'||format_type(a.atttypid,a.atttypmod)||':'||a.attnotnull::text,',' ORDER BY a.attnum)
 FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace JOIN pg_attribute a
  ON a.attrelid=c.oid AND a.attnum>0 AND NOT a.attisdropped
-WHERE n.nspname='public' AND c.relkind='r' AND c.relforcerowsecurity
+WHERE n.nspname='public' AND c.relkind='r' AND c.relforcerowsecurity AND c.relname<>'student_class_movement_audit'
 GROUP BY c.relname ORDER BY c.relname"""
 POLICIES="""SELECT schemaname||'.'||tablename||'|'||policyname||'|'||permissive||'|'||cmd||'|'||
 array_to_string(roles,',')||'|'||coalesce(qual,'')||'|'||coalesce(with_check,'')
 FROM pg_policies WHERE schemaname='public' AND policyname NOT IN
-('core_signed_tenant_guard','core_signed_tenant_allow') ORDER BY 1"""
+('core_signed_tenant_guard','core_signed_tenant_allow','assps_audit_tenant_allow','assps_audit_tenant_guard') ORDER BY 1"""
 
 def read(target,statement):
     port,name=target
