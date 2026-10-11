@@ -1078,40 +1078,7 @@ function parseSmartPasteV2(rawText, config) {
   })
 }
 
-function parseSmartPaste(rawText, config) {
-  const raw = String(rawText || '').replace(/\r/g, '').trim()
-  if (!raw) return []
-  const chunks = raw
-    .split(/\n{2,}|(?=\n?\s*(?:Q\.?\s*\d+|سوال\s*\d+|\d+\s*[.)]))/i)
-    .map(x => x.trim())
-    .filter(Boolean)
-  const items = chunks.length ? chunks : [raw]
-  return items.map((text, index) => {
-    const type = normalizeType(text)
-    const confidence = /[?؟]|(?:^|\n)\s*(?:[A-D]\)|\(A\)|الف|ب|ج|د)/.test(text) ? 0.78 : 0.48
-    return {
-      id: safeId('review'),
-      text,
-      answer: '',
-      type,
-      category: guessCategory(text, config.subject),
-      marks: type === 'MCQ' ? 1 : type === 'Long Question' || type === 'Essay' ? 5 : 2,
-      chapter: '',
-      topic: '',
-      source: 'Manual Paste',
-      confidence,
-      reviewStatus: confidence >= 0.7 ? 'Ready' : 'Needs Review',
-      duplicateHash: duplicateHash(text),
-      language: isUrduText(text) ? 'urdu' : 'english',
-      medium: config.medium,
-      classLevel: config.classLevel,
-      subject: config.subject,
-      board: config.board,
-      createdAt: new Date().toISOString(),
-      order: index + 1,
-    }
-  })
-}
+
 
 function itemQuestionText(item = {}) {
   return String(item.text || item.en || item.ur || item.question || '').trim()
@@ -1432,32 +1399,11 @@ function extractedQuestionToReviewItem(question, source, config) {
   }
 }
 
-function parseDurationMinutes(value) {
-  const text = String(value || '').toLowerCase()
-  const hourMatch = text.match(/(\d+(?:\.\d+)?)\s*(?:hour|hr|h)/)
-  const minuteMatch = text.match(/(\d+(?:\.\d+)?)\s*(?:minute|min|m)/)
-  if (hourMatch || minuteMatch) {
-    return Math.round(Number(hourMatch?.[1] || 0) * 60 + Number(minuteMatch?.[1] || 0))
-  }
-  const numeric = Number(text.replace(/[^\d.]/g, ''))
-  return Number.isFinite(numeric) && numeric > 0 ? numeric : 120
-}
 
-function normalizeLegacyOptions(text = '') {
-  const lines = String(text || '').split('\n')
-  const optionLines = lines.filter(line => /^\s*(?:[A-D][.)]|\([A-D]\))\s*/i.test(line))
-  return optionLines.map((line, index) => {
-    const clean = line.replace(/^\s*(?:[A-D][.)]|\([A-D]\))\s*/i, '').trim()
-    return { key: String.fromCharCode(65 + index), label: String.fromCharCode(65 + index), text: clean }
-  })
-}
 
-function legacyBucketForQuestion(question = {}) {
-  const type = String(question.type || question.category || '').toLowerCase()
-  if (type.includes('mcq') || type.includes('objective') || type.includes('correct answer')) return 'mcq'
-  if (type.includes('long') || type.includes('essay') || type.includes('letter') || type.includes('application') || type.includes('explanation') || type.includes('comprehension')) return 'long'
-  return 'short'
-}
+
+
+
 
 function mapUnifiedQuestionType(question = {}) {
   const text = `${question.type || ''} ${question.category || ''} ${question.text || ''}`.toLowerCase()
@@ -1477,57 +1423,13 @@ function mapUnifiedQuestionType(question = {}) {
   return 'short'
 }
 
-function adaptUnifiedForPaperStudio(config, sections) {
-  const selectedMCQ = []
-  const selectedShort = []
-  const selectedLong = []
-  sections.forEach(section => {
-    ;(section.questions || []).filter(q => String(q.text || '').trim()).forEach((q, index) => {
-      const item = {
-        id: q.id || safeId('legacy_q'),
-        text: q.text || '',
-        textUrdu: isUrduText(q.text) ? q.text : '',
-        answer: q.answer || '',
-        marks: Number(q.marks || section.marksEach || 1),
-        options: Array.isArray(q.options) && q.options.length ? q.options : normalizeLegacyOptions(q.text),
-        type: q.type || section.type,
-        category: q.category || section.title,
-        chapter: q.chapter || '',
-        source: q.source || 'Unified Paper Generator',
-        order: index + 1,
-      }
-      const bucket = legacyBucketForQuestion(item)
-      if (bucket === 'mcq') selectedMCQ.push(item)
-      else if (bucket === 'long') selectedLong.push(item)
-      else selectedShort.push(item)
-    })
-  })
-  const language = config.medium === 'Urdu' ? 'urdu' : config.medium === 'Dual Medium' ? 'mixed' : 'english'
-  return {
-    config: {
-      title: `${config.subject || 'Paper'} ${config.paperType || ''}`.trim(),
-      classLevel: config.classLevel,
-      subject: config.subject,
-      examType: config.paperType || config.intent || 'Paper',
-      duration: parseDurationMinutes(config.time),
-      totalMarks: config.totalMarks,
-      language,
-      instructions: sections?.[0]?.instructions || '',
-      paperCode: '',
-      examDate: new Date().toISOString().slice(0, 10),
-    },
-    selectedMCQ,
-    selectedShort,
-    selectedLong,
-    selectedChapters: String(config.chapters || '').split(/[,\n]+/).map(x => x.trim()).filter(Boolean),
-  }
-}
+
 
 function adaptUnifiedForPTS(config, sections) {
   const grouped = {}
   const marksByType = {}
   sections.forEach(section => {
-    ;(section.questions || []).filter(q => String(q.text || '').trim()).forEach((q, index) => {
+    ;(section.questions || []).filter(q => String(q.text || '').trim()).forEach((q) => {
       const typeId = mapUnifiedQuestionType(q)
       const medium = config.medium === 'Urdu' ? 'urdu' : config.medium === 'Dual Medium' ? 'dual' : 'english'
       const en = q.text || ''
@@ -1668,7 +1570,7 @@ function PaperSheet({ config, pattern, sections, setSections }) {
 }
 
 export default function UnifiedPaperGenerator() {
-  const { subjects = [], questions = [], paperSettings = {}, importPaperQuestionsToBank } = usePaperStore()
+  const { subjects = [], questions = [], importPaperQuestionsToBank } = usePaperStore()
   const [active, setActive] = useState('Create Paper')
   const [manualText, setManualText] = useState('')
   const [reviewItems, setReviewItems] = useState([])
@@ -1696,7 +1598,7 @@ export default function UnifiedPaperGenerator() {
     sets:1,
   })
 
-  const pattern = useMemo(() => findUnifiedPattern(config), [config.classLevel, config.subject, config.medium, config.intent, config.paperType])
+  const pattern = useMemo(() => findUnifiedPattern(config), [config])
   const bankItems = useMemo(() => {
     const ids = new Set(selectedBankIds)
     return questions.filter(q => ids.has(q.id)).map(q => ({
@@ -1716,10 +1618,9 @@ export default function UnifiedPaperGenerator() {
       subject: q.subject || q.subjectName || config.subject,
       board: q.board || config.board,
     }))
-  }, [questions, selectedBankIds])
+  }, [questions, selectedBankIds, config.board, config.classLevel, config.medium, config.subject])
   const [sections, setSections] = useState(() => buildSectionsFromPattern(findUnifiedPattern({ classLevel:'9', subject:'Biology', medium:'English' }), config))
   const warnings = useMemo(() => validatePaper(config, pattern, sections, reviewItems), [config, pattern, sections, reviewItems])
-  const paperStudioPreview = useMemo(() => adaptUnifiedForPaperStudio(config, sections), [config, sections])
   const ptsLoadedPaper = useMemo(() => adaptUnifiedForPTS(config, sections), [config, sections])
   const questionBankMatches = useMemo(() => questions.filter(q => {
     const subject = String(q.subject || q.subjectName || '').toLowerCase()

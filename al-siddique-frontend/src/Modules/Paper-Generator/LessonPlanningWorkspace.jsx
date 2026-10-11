@@ -116,6 +116,7 @@ export default function LessonPlanningWorkspace() {
   })
   const [savedPlans,setSavedPlans] = useState([])
   const [selectedSubjects,setSelectedSubjects] = useState(()=>document.subjects.map(item=>item.subject))
+  const selectedSubjectsCsv = selectedSubjects.join(',')
   const [context,setContext] = useState(null)
   const [aiState,setAiState] = useState(null)
   const [busy,setBusy] = useState('')
@@ -135,9 +136,9 @@ export default function LessonPlanningWorkspace() {
   useEffect(()=>{
     if(!document.classLevel)return
     let cancelled=false
-    getLessonPlanningContext({ classLevel:document.classLevel,section:document.section,subjects:selectedSubjects.join(',') }).then(data=>{if(!cancelled)setContext(data)}).catch(()=>{if(!cancelled)setContext(null)})
+    getLessonPlanningContext({ classLevel:document.classLevel,section:document.section,subjects:selectedSubjectsCsv }).then(data=>{if(!cancelled)setContext(data)}).catch(()=>{if(!cancelled)setContext(null)})
     return()=>{cancelled=true}
-  },[document.classLevel,document.section,selectedSubjects.join('|')])
+  },[document.classLevel,document.section,selectedSubjectsCsv])
 
   const patch = updates => setDocument(current=>normalizeLessonPlanDocument({ ...current,...updates }))
   const changeType = type => {

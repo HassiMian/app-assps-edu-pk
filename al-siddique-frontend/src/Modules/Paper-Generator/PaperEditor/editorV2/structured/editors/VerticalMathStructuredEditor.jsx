@@ -20,7 +20,7 @@ import {
 } from '../structuredCommands.js'
 import { createInsertedOperand } from '../structuredNodeModel.js'
 import { parseVerticalNumeric } from '../structuredNodeProjection.js'
-import { buildStructuredControlKey } from '../StructuredFocusContext.jsx'
+import { buildStructuredControlKey } from '../structuredFocusHelpers.js'
 
 export default function VerticalMathStructuredEditor({
   nodeId,

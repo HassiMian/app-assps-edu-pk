@@ -382,7 +382,7 @@ export default function DailyDiaryFeature() {
     }
     void restore()
     return () => { cancelled = true }
-  }, [])
+  }, [paperSettings?.schoolCode])
 
   const updateRow = (id, key, value) => setRows((prev) => prev.map((row) => (row.id === id ? { ...row, [key]: value } : row)))
   const setRowFontFamily = (id, value) => setRows((prev) => prev.map((row) => (row.id === id ? { ...row, fontFamily: value } : row)))
@@ -477,13 +477,6 @@ export default function DailyDiaryFeature() {
       setSaving(false)
       window.setTimeout(() => setStatus(''), 4000)
     }
-  }
-
-  const handleLogoUpload = (file) => {
-    if (!file) return
-    const reader = new FileReader()
-    reader.onload = () => setLogoUrl(String(reader.result))
-    reader.readAsDataURL(file)
   }
 
   const handlePrintDiary = () => {

@@ -11,7 +11,7 @@ import {
   cmdReorderMatchingSide,
 } from '../structuredCommands.js'
 import { createInsertedMatchingItem } from '../structuredNodeModel.js'
-import { buildStructuredControlKey } from '../StructuredFocusContext.jsx'
+import { buildStructuredControlKey } from '../structuredFocusHelpers.js'
 
 export default function MatchingColumnsStructuredEditor({
   nodeId,

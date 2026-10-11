@@ -9,7 +9,8 @@ import {
   saveWorkingDraft,
   loadWorkingDraft,
 } from './workingDraftStorage.js'
-import { StructuredFocusProvider, INTERACTION_MODE } from './structured/StructuredFocusContext.jsx'
+import { StructuredFocusProvider } from './structured/StructuredFocusContext.jsx'
+import { INTERACTION_MODE } from './structured/structuredFocusHelpers.js'
 import { downloadCanonicalDocx } from '../export/canonicalDocxExport.js'
 import { ZoomIn, ZoomOut, ArrowLeft } from 'lucide-react'
 
