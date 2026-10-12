@@ -70,7 +70,7 @@ def evaluate(facts):
     checks=[]
     def add(name, status, detail): checks.append({'name':name,'status':status,'detail':detail})
     percent=facts['disk_percent']; free=facts['disk_free_gib']
-    add('filesystem_capacity', 'HOLD' if free < 1.5 else 'WARN' if percent >= 90 else 'PASS',
+    add('filesystem_capacity', 'HOLD' if free < 1.5 else 'WARN' if percent >= 90 or free < 6.0 else 'PASS',
         f'{percent}% used; {free:.2f} GiB free; protected caches/worktrees never auto-deleted')
     add('canonical_release_source', 'PASS' if facts['git_equal'] and facts['git_clean'] else 'HOLD',
         'Clean Core candidate HEAD must exactly match remote release branch')

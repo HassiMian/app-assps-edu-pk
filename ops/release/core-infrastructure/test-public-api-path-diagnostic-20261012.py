@@ -32,4 +32,16 @@ class ApiPathTests(unittest.TestCase):
         checks=healthy();checks['edge_ipv6']=[]
         self.assertEqual(m.assess(checks)['verdict'],'HOLD')
 
+
+    def test_valid_curl_phase_fields_are_parsed(self):
+        a=m.parse_curl_timings('200|5.665828|0.02|0.16|0.37|5.665754',0)
+        self.assertEqual(a['http'],200)
+        self.assertEqual(a['seconds'],5.666)
+        self.assertEqual(a['tls_s'],0.37)
+        self.assertEqual(a['ttfb_s'],5.666)
+    def test_malformed_curl_timing_fields_fail_closed(self):
+        a=m.parse_curl_timings('200|missing',28)
+        self.assertEqual(a['http'],0)
+        self.assertIsNone(a['seconds'])
+
 if __name__=='__main__':unittest.main()

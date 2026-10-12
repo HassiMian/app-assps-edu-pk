@@ -1,4 +1,5 @@
 const crypto = require('crypto')
+const { strictPositiveSchoolId } = require('../services/security/strictSchoolIdentity')
 const jwt = require('jsonwebtoken')
 const { query, tenantContext } = require('../config/database')
 
@@ -94,7 +95,7 @@ async function authenticateServiceToken(token, req) {
 
   const serviceIdentity = configuredIdentity || 'JARVIS_SCHOOL_SERVICE'
   const tenantId = configuredTenantId || 'assps'
-  const schoolId = Number.parseInt(configuredSchoolId || '1', 10)
+  const schoolId = strictPositiveSchoolId(configuredSchoolId || '1')
   if (!Number.isFinite(schoolId) || schoolId <= 0) {
     return { errorStatus: 403, message: 'Service school claim is invalid.' }
   }
@@ -144,8 +145,7 @@ function isSchoolActive(school) {
 }
 
 function normalizeSchoolId(value) {
-  const parsed = Number.parseInt(value, 10)
-  return Number.isFinite(parsed) && parsed > 0 ? parsed : null
+  return strictPositiveSchoolId(value)
 }
 
 function activateRequestRlsContext(req) {
@@ -174,8 +174,8 @@ function buildUserContext(user, school = null) {
 }
 
 async function fetchActiveUserById(userId) {
-  const parsedId = Number.parseInt(userId, 10)
-  if (!Number.isFinite(parsedId)) return null
+  const parsedId = strictPositiveSchoolId(userId)
+  if (parsedId === null) return null
   const result = await query(
     `SELECT id, school_id, tenant_id, name, email, role, designation
      FROM users

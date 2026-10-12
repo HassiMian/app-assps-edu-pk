@@ -16,15 +16,30 @@ PATHS = {
     'local_upstream': ('http://127.0.0.1:3000/health',),
 }
 
+def parse_curl_timings(raw, curl_exit):
+    """Bounded, source-neutral timing breakdown; no headers/tokens/PII."""
+    try:
+        fields = raw.strip().split('|')
+        if len(fields) != 6:
+            raise ValueError('expected six curl timing columns')
+        code = int(fields[0])
+        timing = [round(float(x), 3) for x in fields[1:]]
+        if any(value < 0 for value in timing):
+            raise ValueError('negative transport interval')
+        total, dns, connect, tls, first_byte = timing
+        return {'http':code,'seconds':total,'dns_s':dns,'connect_s':connect,
+                'tls_s':tls,'ttfb_s':first_byte,'curl_exit':curl_exit}
+    except (TypeError, ValueError):
+        return {'http':0,'seconds':None,'dns_s':None,'connect_s':None,
+                'tls_s':None,'ttfb_s':None,'curl_exit':curl_exit}
+
+
 def probe(args):
     cmd = ['curl', '--silent', '--show-error', '--connect-timeout', '3',
-           '--max-time', '6', '--output', '/dev/null', '--write-out', '%{http_code}|%{time_total}']
+           '--max-time', '6', '--output', '/dev/null',
+           '--write-out', '%{http_code}|%{time_total}|%{time_namelookup}|%{time_connect}|%{time_appconnect}|%{time_starttransfer}']
     completed = subprocess.run(cmd + list(args), capture_output=True, text=True, timeout=8)
-    try:
-        code, elapsed = completed.stdout.strip().split('|', 1)
-        return {'http':int(code), 'seconds':round(float(elapsed), 3), 'curl_exit':completed.returncode}
-    except (ValueError, TypeError):
-        return {'http':0, 'seconds':None, 'curl_exit':completed.returncode}
+    return parse_curl_timings(completed.stdout, completed.returncode)
 
 def assess(results, threshold=2.0):
     problems=[]

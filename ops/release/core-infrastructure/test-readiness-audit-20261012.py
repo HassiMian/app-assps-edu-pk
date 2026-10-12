@@ -30,6 +30,9 @@ class AuditTests(unittest.TestCase):
   self.assertEqual(status(m.evaluate(f),'filesystem_capacity'),'WARN')
   f['disk_free_gib']=1.1
   self.assertEqual(status(m.evaluate(f),'filesystem_capacity'),'HOLD')
+ def test_low_absolute_headroom_warns_even_before_90_percent(self):
+  f=fixtures();f.update(disk_percent=89.2,disk_free_gib=5.0)
+  self.assertEqual(status(m.evaluate(f),'filesystem_capacity'),'WARN')
  def test_direct_ports_warn_when_no_local_firewall(self):
   f=fixtures();f['listeners']['5000']=['0.0.0.0'];f['host_firewall_active']=False;f['node_direct_ports_v4_restricted']=False;f['node_direct_ports_v6_restricted']=False
   self.assertEqual(status(m.evaluate(f),'legacy_direct_listener_exposure'),'HOLD')
