@@ -1,6 +1,8 @@
 'use strict'
 const { test } = require('node:test')
 const assert = require('node:assert/strict')
+const {validateDisposableTarget} = require('./helpers/require-disposable-pg-target.cjs')
+validateDisposableTarget('assps_jarvis_provenance_qa_20261008')
 const { pool } = require('../config/database')
 const { manageStudent } = require('../services/whatsapp/jarvisCognitiveTools')
 

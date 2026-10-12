@@ -4,6 +4,8 @@ const assert=require('node:assert/strict')
 const crypto=require('node:crypto')
 const http=require('node:http')
 const bcrypt=require('bcryptjs')
+const {validateDisposableTarget} = require('./helpers/require-disposable-pg-target.cjs')
+validateDisposableTarget('assps_qbank_intake_stage_phase4_20261008')
 const {pool}=require('../config/database')
 const PORT=Number(process.env.STAGE_API_PORT || 5483)
 const DB='assps_qbank_intake_stage_phase4_20261008'
