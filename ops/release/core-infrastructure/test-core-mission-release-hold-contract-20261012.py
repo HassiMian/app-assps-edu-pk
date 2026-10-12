@@ -27,6 +27,8 @@ class RunnerContract(unittest.TestCase):
   self.assertIn('run_gate anonymous_school_boundary',s)
  def test_fresh_checked_backup_required_but_not_release_approval(self):
   self.assertIn('run_gate fresh_backup_chain',s)
+ def test_paper_forwardport_never_assumed_merged_and_deployed(self):
+  self.assertIn('run_gate paper_core_forwardport',s)
  def test_mutating_prod_migration_not_invoked(self):
   self.assertNotIn('pg_restore -c',s)
   self.assertNotIn('ALTER ROLE apexos_user',s)
