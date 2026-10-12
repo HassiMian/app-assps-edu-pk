@@ -26,3 +26,8 @@ test('unavailable external private directory is not considered reviewed',()=>{
  ASSPS_QBANK_PRIVATE_PRINT_RUN:'offline-print'
  }),/ENOENT/)
 })
+
+test('private editable teacher templates cannot be claimed verified without real school archive',()=>{
+ assert.throws(()=>m.validate({ASSPS_QBANK_PRIVATE_EDITABLE_TEMPLATES_RUN:'forged-school-form'}),
+ /PRIVATE_EDITABLE_TEMPLATES_REQUIRE_ARCHIVE_CONFIGURATION/)
+})
