@@ -50,3 +50,18 @@ Several Grade IX and X textbook editions/media appear on these portals; the publ
 - Production seeding, protected school tenant/RLS, printing release, and deployment: NOT attempted, and remain independently owned by Paper Studio and SaaS Core.
 
 Private packets are ready for **actual qualified teachers to review**, not falsely declared independently verified by a machine or a synthetic test credential. No scheduled or delayed task was created.
+
+## Final actual end-to-end in-session execution certificate — 12 October 2026
+
+After committing and pushing Academic-only source commit d27f5cee33599791cb31e830b214a5e0923d7dc4, the exact clean worktree executed the complete non-scheduled single-command Grade IX-X Academic Master regression mission to process exit **0**. It was configured to verify the actual ASSPS VPS secure private teacher-review archive and printable offline HTML sheets, not just a synthetic file or source-ready flag.
+
+- **17/17 genuine execution gates PASSED**, all process exit code 0 and all TAP batch summaries complete.
+- Six actual frozen source/handoff gate checks: all original 2,581 source revisions intact; authoritative academic publication-denial attestor; all-original 2,581 faculty worklist; all-content MCQ/long/numerical editorial QA; unified 2,581-ID subject/faculty priority review queue; blind private 2,580-ID source readiness; new ACTUAL external protected private source + 501 HTML file SHA256 validation.
+- **111 Paper Studio IX–X staging/curriculum test files** in 3 disjoint runs: 168 + 175 + 167 = **510/510 PASS**, 0 fail, 0 skipped, all exit0.
+- **49 Grade IX-X Academic automated test files** in 8 disjoint runs: 61 + 36 + 51 + 77 + 63 + 25 + 61 + 38 = **412/412 PASS**, 0 fail, 0 skipped, all exit0. Includes exact source, option/answer, Ed25519 non-impersonation review evidence, 2,580-source private QA, printable HTML all-original temp export, injection/escaping, Urdu RTL, marks, outside-Git confidential file isolation and tampered index rejection.
+- **TOTAL ACTUAL ONE-RUN TEST CASES: 922/922 PASS**, 0 failed, 0 skipped, across 17 successful source evidence and test execution gates. This is reproducible engineering/candidate-format coverage, not human textbook/answer academic correctness proof.
+- Full per-stage TAP and exit logs saved privately at /tmp/assps-grade910-20261012-full-print-mission with machine file mission-audit.json. It recorded qualityGatesPassed=true, academicallyApproved=0, verifiedPublished=0, deployment=false. Actual school review archive SHA and private HTML render archive were source-bound and verified. Local source and GitHub origin commit matched, worktree clean.
+
+### Independent human and school owner boundary, no fabricated closure
+
+Private content has been rendered and mechanically validated but **NOT distributed to teachers and NOT independently faculty-approved**. There are no qualified teacher identities, adopted school-book/physical exercise-page certifications, Urdu semantic acceptance signatures, three overlap-pair adjudications, or principal review signatures in the provided records. The original 875 answer-key skew (A=785) also still needs independent editorial and subject review; it is not permission to auto-change or label any original answer correct. All 2,581 original research candidates remain provisional. **Publication HOLD** stays in place until real authorized school and human evidence is verified and Paper Studio/SaaS Core tenant-security/release owners separately accept a versioned approved snapshot.
