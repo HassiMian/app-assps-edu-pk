@@ -52,7 +52,31 @@ run_source backend_security env NODE_PATH=/var/www/apex-backend/node_modules \
 run_source protected_templates node "$FRONT/scripts/verify-protected-templates.mjs"
 run_source marks_zero_state node "$FRONT/scripts/test-marks-zero-state-and-blank-print.mjs"
 # Browser scripts rely on frontend cwd and provide LOCAL synthetic API fixtures.
-run_source browser_marks bash -c 'cd "$1" && node scripts/test-marks-entry-firstterm-browser.mjs' -- "$FRONT"
+# Vite fixture occasionally loses its loopback listener mid-suite. Only retry
+# a transport-refused failure once; never retry / conceal a test assertion.
+run_marks_fixture() {
+  local tmp rc=0
+  tmp="$(mktemp -t assps-marks-browser-XXXXXX)" || return 2
+  if (cd "$FRONT" && node scripts/test-marks-entry-firstterm-browser.mjs) >"$tmp" 2>&1; then
+    cat "$tmp"; rm -f "$tmp"; return 0
+  else
+    rc=$?
+  fi
+  cat "$tmp"
+  if [ "$rc" -ne 0 ] && grep -q 'net::ERR_CONNECTION_REFUSED at http://127.0.0.1:' "$tmp"; then
+    echo '[QA_TRANSPORT_RETRY] Marks fixture local listener failed; one fresh isolated rerun.'
+    rm -f "$tmp"
+    if (cd "$FRONT" && node scripts/test-marks-entry-firstterm-browser.mjs); then
+      echo '[QA_TRANSPORT_RECOVERED] First attempt failed; do not count first attempt as passing.'
+      return 0
+    fi
+    echo '[QA_TRANSPORT_RETRY_FAILED]'
+    return 1
+  fi
+  rm -f "$tmp"
+  return "$rc"
+}
+run_source browser_marks run_marks_fixture
 run_source browser_result_cards bash -c 'cd "$1" && node scripts/test-result-cards-class-isolation-browser.mjs' -- "$FRONT"
 run_source vite_build bash -c 'cd "$1" && npm run build' -- "$FRONT"
 run_source diff_integrity git -C "$ROOT" diff --check
@@ -65,6 +89,8 @@ run_gate tenant_key_consistency python3 "$OPS/core-infrastructure/tenant-key-con
 run_gate school_data_integrity python3 "$OPS/core-infrastructure/school-data-integrity-20261012.py"
 run_gate fee_ledger_reconciliation python3 "$OPS/core-infrastructure/fee-ledger-reconciliation-20261012.py"
 run_gate unsigned_rpl_runtime python3 "$OPS/core-infrastructure/unsigned-rls-role-denial-audit-20261012.py"
+run_gate staged_core_guard_clone python3 "$OPS/core-infrastructure/verify-core-clone-signed-app-guard-20261012.py"
+run_gate legacy_backend_bypass python3 "$OPS/core-infrastructure/legacy-backend-bypass-cutover-gate-20261012.py"
 run_gate infrastructure_readiness python3 "$OPS/core-infrastructure/readiness-audit-20261012.py" --strict
 run_gate public_api_path python3 "$OPS/core-infrastructure/public-api-path-diagnostic-20261012.py" --samples 2
 
@@ -77,5 +103,9 @@ if [ "$SOURCE_FAIL" -ne 0 ] || [ "$read_only_hold" -ne 0 ]; then
   echo 'production_change=NONE'
   exit 2
 fi
-echo 'full_backend_release=ELIGIBILITY_TESTS_PASS_NOT_A_DEPLOYMENT_AUTHORIZATION'
+echo 'full_backend_release=HOLD_PENDING_AUTHENTICATED_ROUTE_ACCEPTANCE_AND_RELEASE_CERTIFICATION'
 echo 'production_change=NONE'
+# A source/infra GREEN is never authorization to replace live backend; until
+# exact authenticated route signatures and live release certification exist,
+# keep an explicit nonzero release status for automation and human operators.
+exit 2
