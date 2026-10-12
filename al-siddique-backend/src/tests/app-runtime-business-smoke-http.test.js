@@ -3,6 +3,8 @@ const assert = require('node:assert/strict')
 const crypto = require('node:crypto')
 const http = require('node:http')
 const bcrypt = require('bcryptjs')
+const {validateDisposableTarget} = require('./helpers/require-disposable-pg-target.cjs')
+validateDisposableTarget('assps_synthetic_runtime_qa_20261012', {stagePortVariable:'STAGE_API_PORT'})
 const { pool } = require('../config/database')
 
 const PORT = Number(process.env.STAGE_API_PORT || 5039)

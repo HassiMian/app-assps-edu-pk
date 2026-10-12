@@ -5,7 +5,7 @@ const fs=require('node:fs')
 const path=require('node:path')
 const {validateDisposableTarget}=require('./helpers/require-disposable-pg-target.cjs')
 
-const expected='assps_attendance_qa_disposable_20261012'
+const expected='assps_synthetic_attendance_qa_20261012'
 const base={NODE_ENV:'test',ASSPS_ISOLATED_TEST_AUTHORIZED:'YES_DISPOSABLE_CLONE',
  DB_NAME:expected,DB_HOST:'127.0.0.1',DB_PORT:'55432',TEST_API_URL:'http://127.0.0.1:5561'}
 function authorize(env,extra={httpVariable:'TEST_API_URL'}){return validateDisposableTarget(expected,extra,env)}
@@ -36,13 +36,25 @@ test('legacy production backend and signed green HTTP endpoints forbidden',()=>{
  denied({...base,TEST_API_URL:'https://app.assps.edu.pk'})
  denied({...base,TEST_API_URL:'http://0.0.0.0:5561'})
 })
-test('all four mutating Core suites enforce guard BEFORE first DB Pool import',()=>{
+test('all ten mutating Core suites enforce guard BEFORE first DB Pool import',()=>{
  for(const file of ['attendance-active-roster-hotfix.test.js','attendance-integrity.test.js',
-   'fee-payment-phase4-http.test.js','jarvis-student-admission-atomicity.test.js']){
+   'fee-payment-phase4-http.test.js','jarvis-student-admission-atomicity.test.js',
+   'app-runtime-business-smoke-http.test.js','identity-issuance-http.test.js',
+   'identity-provisioning-preservation.test.js','portal-role-isolation.test.js',
+   'tenant-isolation-adversarial.test.js','verified-proxy-cookie.test.js']){
   const src=fs.readFileSync(path.join(__dirname,file),'utf8')
   assert.ok(src.indexOf("validateDisposableTarget('")>=0,file)
   assert.ok(src.indexOf('validateDisposableTarget(')<src.indexOf("require('../config/database')"),file)
  }
+})
+test('non-synthetic copy-like school database is refused even when claimed as expected',()=>{
+ for(const db of ['assps_backup_restore_check_20261011','assps_qbank_intake_stage_phase4_20261008','apexos'])
+  assert.throws(()=>validateDisposableTarget(db,{}, {...base,DB_NAME:db}), e=>e.code==='ASSPS_MUTATING_QA_NOT_AUTHORIZED')
+})
+test('staged API port is mandatory and must be independently isolated',()=>{
+ assert.throws(()=>authorize({...base},{stagePortVariable:'STAGE_API_PORT'}))
+ assert.throws(()=>authorize({...base,STAGE_API_PORT:'5000'},{stagePortVariable:'STAGE_API_PORT'}))
+ assert.equal(authorize({...base,STAGE_API_PORT:'5483'},{stagePortVariable:'STAGE_API_PORT'}).authorized,true)
 })
 test('helper source never silently changes database, Nginx, tenant, or runtime service',()=>{
  const source=fs.readFileSync(path.join(__dirname,'helpers/require-disposable-pg-target.cjs'),'utf8')

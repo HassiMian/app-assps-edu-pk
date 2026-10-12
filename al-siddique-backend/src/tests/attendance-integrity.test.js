@@ -4,7 +4,7 @@ const assert = require('assert')
 const http = require('http')
 const jwt = require('jsonwebtoken')
 const {validateDisposableTarget} = require('./helpers/require-disposable-pg-target.cjs')
-validateDisposableTarget('assps_attendance_qa_disposable_20261012', {httpVariable:'TEST_API_URL'})
+validateDisposableTarget('assps_synthetic_attendance_qa_20261012', {httpVariable:'TEST_API_URL'})
 const { pool } = require('../config/database')
 
 const JWT_SECRET = process.env.JWT_SECRET || 'CHANGE_THIS_TO_A_LONG_RANDOM_SECRET_KEY_MIN_32_CHARS'

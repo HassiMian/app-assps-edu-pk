@@ -4,6 +4,8 @@ const http=require('node:http')
 const https=require('node:https')
 const crypto=require('node:crypto')
 const bcrypt=require('bcryptjs')
+const {validateDisposableTarget} = require('./helpers/require-disposable-pg-target.cjs')
+validateDisposableTarget('assps_synthetic_isolation_qa_20261012', {httpVariable:'TEST_CONNECT_URL'})
 const {pool}=require('../config/database')
 const BASE=new URL(process.env.TEST_CONNECT_URL || 'https://api.assps.edu.pk')
 const CONNECT_HOST=process.env.TEST_CONNECT_HOST || BASE.host

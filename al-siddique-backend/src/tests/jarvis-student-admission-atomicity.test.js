@@ -2,11 +2,11 @@
 const { test } = require('node:test')
 const assert = require('node:assert/strict')
 const {validateDisposableTarget} = require('./helpers/require-disposable-pg-target.cjs')
-validateDisposableTarget('assps_jarvis_provenance_qa_20261008')
+validateDisposableTarget('assps_synthetic_admissions_qa_20261012')
 const { pool } = require('../config/database')
 const { manageStudent } = require('../services/whatsapp/jarvisCognitiveTools')
 
-const DB = 'assps_jarvis_provenance_qa_20261008'
+const DB = 'assps_synthetic_admissions_qa_20261012'
 const SCHOOL_ID = Number(process.env.WHATSAPP_SCHOOL_ID)
 const tag = `ATOMIC_QA_${Date.now().toString(36)}`
 const count = async () => {

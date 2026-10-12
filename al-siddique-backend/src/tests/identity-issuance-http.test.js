@@ -3,6 +3,8 @@ const assert=require('node:assert/strict')
 const http=require('node:http')
 const crypto=require('node:crypto')
 const jwt=require('jsonwebtoken')
+const {validateDisposableTarget} = require('./helpers/require-disposable-pg-target.cjs')
+validateDisposableTarget('assps_synthetic_identity_qa_20261012', {httpVariable:'TEST_API_URL'})
 const {pool}=require('../config/database')
 const base=process.env.TEST_API_URL || 'http://127.0.0.1:5000'
 function httpReq(method,path,token,body) { return new Promise((resolve,reject)=>{

@@ -1,0 +1,18 @@
+[Unit]
+Description=ASSPS reversible external direct Node port 3000/5000 isolation
+Documentation=https://github.com/HassiMian/app-assps-edu-pk/issues/4
+After=network-pre.target
+Before=network.target
+Wants=network-pre.target
+ConditionPathExists=/usr/local/sbin/assps-private-node-ports
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/sbin/assps-private-node-ports --apply
+ExecStop=/usr/local/sbin/assps-private-node-ports --rollback
+TimeoutStartSec=15
+TimeoutStopSec=15
+
+[Install]
+WantedBy=multi-user.target

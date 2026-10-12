@@ -93,9 +93,9 @@ def evaluate(facts):
     add('private_upload_paths', 'PASS' if all(s==404 for s in facts['upload_codes'].values()) else 'HOLD',
         'HTTPS private upload paths must deny anonymous access')
     legacy_public = any(public_bind(facts['listeners'].get(p,[])) for p in ('3000','5000'))
-    # A local-only hairpin is not an independent internet-origin proof.
-    add('legacy_direct_listener_exposure','WARN' if legacy_public and not facts['host_firewall_active'] else 'PASS',
-        'Legacy app bound to public interface; UFW inactive; external Hostinger firewall UNVERIFIED; no auto firewall/restart')
+    verified_filter = facts.get('node_direct_ports_v4_restricted',False) and facts.get('node_direct_ports_v6_restricted',False)
+    add('legacy_direct_listener_exposure', 'HOLD' if legacy_public and not verified_filter else 'PASS',
+        'External direct TCP 3000/5000 confirmed via independent cloud browser on 12 Oct; '        'require BOTH IPv4+IPv6 ingress deny rules, not just UFW active; no automatic firewall modifications')
     return checks
 
 
@@ -127,6 +127,15 @@ def gather():
     if dump.is_file() and manifest.is_file():
         expected=manifest.read_text().split()[0]
         backup_ok=(sha(dump)==expected and (dump.stat().st_mode & 0o077)==0)
+    # Exact source-owned firewall rules, never infer coverage from a service being
+    # active: a blanket UFW active status could still explicitly allow 3000/5000.
+    def direct_port_rule_present(binary):
+        rule=[binary,'-w','-C','INPUT','-i','eth0','-p','tcp','-m','multiport',
+              '--dports','3000,5000','-j','REJECT','--reject-with','tcp-reset']
+        try:
+            return subprocess.run(rule,capture_output=True,timeout=6).returncode==0
+        except (OSError,subprocess.TimeoutExpired):
+            return False
     uploads={path:http_status('https://app.assps.edu.pk'+path) for path in (
         '/uploads/payment-screenshots/assps-deny-probe.txt',
         '/uploads/identity/assps-deny-probe.txt',
@@ -141,6 +150,8 @@ def gather():
        'connect':http_status('https://api.assps.edu.pk/health'),
        'green':http_status('http://127.0.0.1:5091/health/ready'),
        'listeners':listeners,'host_firewall_active':'Status: active' in status,
+       'node_direct_ports_v4_restricted':direct_port_rule_present('iptables'),
+       'node_direct_ports_v6_restricted':direct_port_rule_present('ip6tables'),
        'policy_count':int(pg[0]),'eight_count':int(pg[1]),'pre_nine_count':int(pg[2]),
        'backup_ok':backup_ok,'upload_codes':uploads
     }

@@ -15,7 +15,7 @@ def fixtures():
   'connect_sha_ok':True,'public_app':200,'connect':200,'green':200,
   'listeners':{'5432':['127.0.0.1','::1'],'55432':['127.0.0.1','::1'],'5091':['127.0.0.1'],
                '3000':['127.0.0.1'],'5000':['127.0.0.1']},
-  'host_firewall_active':True,'policy_count':368,'eight_count':11,'pre_nine_count':0,
+  'host_firewall_active':True,'node_direct_ports_v4_restricted':True,'node_direct_ports_v6_restricted':True, 'policy_count':368,'eight_count':11,'pre_nine_count':0,
   'backup_ok':True,'upload_codes':{'payment':404,'private':404,'identity':404}
  }
 
@@ -31,8 +31,17 @@ class AuditTests(unittest.TestCase):
   f['disk_free_gib']=1.1
   self.assertEqual(status(m.evaluate(f),'filesystem_capacity'),'HOLD')
  def test_direct_ports_warn_when_no_local_firewall(self):
-  f=fixtures();f['listeners']['5000']=['0.0.0.0'];f['host_firewall_active']=False
-  self.assertEqual(status(m.evaluate(f),'legacy_direct_listener_exposure'),'WARN')
+  f=fixtures();f['listeners']['5000']=['0.0.0.0'];f['host_firewall_active']=False;f['node_direct_ports_v4_restricted']=False;f['node_direct_ports_v6_restricted']=False
+  self.assertEqual(status(m.evaluate(f),'legacy_direct_listener_exposure'),'HOLD')
+ def test_legacy_ports_need_both_firewall_families_even_when_ufw_active(self):
+  f=fixtures();f['listeners']['5000']=['0.0.0.0']
+  f['listeners']['3000']=['::']
+  f['node_direct_ports_v4_restricted']=True
+  f['node_direct_ports_v6_restricted']=False
+  f['host_firewall_active']=True
+  self.assertEqual(status(m.evaluate(f),'legacy_direct_listener_exposure'),'HOLD')
+  f['node_direct_ports_v6_restricted']=True
+  self.assertEqual(status(m.evaluate(f),'legacy_direct_listener_exposure'),'PASS')
  def test_green_all_interfaces_fails_closed(self):
   f=fixtures();f['listeners']['5091']=['0.0.0.0']
   self.assertEqual(status(m.evaluate(f),'signed_green'),'HOLD')

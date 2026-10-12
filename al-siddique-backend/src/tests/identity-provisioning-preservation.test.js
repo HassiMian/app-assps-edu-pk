@@ -1,5 +1,7 @@
 require('dotenv').config()
 const assert = require('node:assert/strict')
+const {validateDisposableTarget} = require('./helpers/require-disposable-pg-target.cjs')
+validateDisposableTarget('assps_synthetic_identity_qa_20261012', {})
 const {pool} = require('../config/database')
 const {provisionStudentIdentities} = require('../services/portalIdentityService')
 

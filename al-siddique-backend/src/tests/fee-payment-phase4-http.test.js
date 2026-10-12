@@ -5,10 +5,10 @@ const crypto=require('node:crypto')
 const http=require('node:http')
 const bcrypt=require('bcryptjs')
 const {validateDisposableTarget} = require('./helpers/require-disposable-pg-target.cjs')
-validateDisposableTarget('assps_qbank_intake_stage_phase4_20261008')
+validateDisposableTarget('assps_synthetic_finance_qa_20261012', {stagePortVariable:'STAGE_API_PORT'})
 const {pool}=require('../config/database')
 const PORT=Number(process.env.STAGE_API_PORT || 5483)
-const DB='assps_qbank_intake_stage_phase4_20261008'
+const DB='assps_synthetic_finance_qa_20261012'
 function request(path,{method='GET',body,cookie=''}={}) {
  return new Promise((resolve,reject)=>{
   const bytes=body?Buffer.from(JSON.stringify(body)):null
