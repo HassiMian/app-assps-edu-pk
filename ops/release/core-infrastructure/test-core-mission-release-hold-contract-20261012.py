@@ -32,6 +32,9 @@ class RunnerContract(unittest.TestCase):
  def test_database_restore_must_check_access_roles_not_just_dump_hash(self):
   self.assertIn('run_gate restored_acl_readiness',s)
   self.assertIn('run_gate restored_global_roles',s)
+ def test_hardened_recovery_candidate_cannot_replace_live_release(self):
+  self.assertIn('run_gate hardened_recovery_candidate',s)
+  self.assertTrue(s.rstrip().endswith('exit 2'))
  def test_mutating_prod_migration_not_invoked(self):
   self.assertNotIn('pg_restore -c',s)
   self.assertNotIn('ALTER ROLE apexos_user',s)

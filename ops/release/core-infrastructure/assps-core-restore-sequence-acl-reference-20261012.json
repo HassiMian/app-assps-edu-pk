@@ -1,0 +1,554 @@
+{
+  "references": [
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "academic_session_versions_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "academic_sessions_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "admin_block_audit_log_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "admissions_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "ai_queue_events_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "assessment_paper_revisions_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "assessment_papers_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "assessment_print_jobs_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "assessment_releases_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "assessment_result_records_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "assessment_result_revisions_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "assessment_roster_snapshots_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "attendance_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "campuses_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "cards_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "classes_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "curriculum_migration_plans_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "curriculum_profile_versions_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "curriculum_profiles_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "daily_diaries_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "date_sheet_records_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "demo_requests_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "employee_attendance_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "employees_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "events_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "exam_class_enrollments_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "exam_results_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "exam_subjects_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "exams_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "expenses_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "family_groups_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "fee_challans_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "fee_class_settings_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "fee_discount_applications_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "fee_discount_packages_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "fee_payment_transactions_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "grade_settings_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "invoices_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "learning_scope_identities_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "learning_scope_versions_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "lesson_plans_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "library_books_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "message_drafts_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "notices_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "notification_log_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "online_classes_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "online_exam_attempts_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "online_exams_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "organizations_id_seq"
+    },
+    {
+      "app_read": false,
+      "app_usage": false,
+      "marks_read": false,
+      "marks_usage": false,
+      "sequence": "paper_documents_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "paper_vault_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "payments_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "portal_identity_handoffs_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "publishers_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "question_capture_requests_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "question_mappings_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "question_masters_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "question_revisions_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "resource_books_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "resource_scope_mappings_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "resource_series_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "resource_set_items_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "resource_sets_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "resource_versions_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "schools_id_seq"
+    },
+    {
+      "app_read": false,
+      "app_usage": false,
+      "marks_read": false,
+      "marks_usage": false,
+      "sequence": "semantic_learning_evaluations_id_seq"
+    },
+    {
+      "app_read": false,
+      "app_usage": false,
+      "marks_read": false,
+      "marks_usage": false,
+      "sequence": "semantic_learning_promotions_id_seq"
+    },
+    {
+      "app_read": false,
+      "app_usage": false,
+      "marks_read": false,
+      "marks_usage": false,
+      "sequence": "semantic_learning_versions_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "settings_id_seq"
+    },
+    {
+      "app_read": false,
+      "app_usage": false,
+      "marks_read": false,
+      "marks_usage": true,
+      "sequence": "student_class_movement_audit_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "students_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "subject_offerings_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "subscription_requests_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "teacher_class_assignments_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "timetable_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "transport_routes_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "users_id_seq"
+    },
+    {
+      "app_read": true,
+      "app_usage": true,
+      "marks_read": true,
+      "marks_usage": true,
+      "sequence": "whatsapp_inbound_events_id_seq"
+    }
+  ],
+  "safe_test_clone": "assps_core_restore_verified_20261012",
+  "source_db": "apexos",
+  "source_port": 5432,
+  "source_role_flags_only": true
+}
