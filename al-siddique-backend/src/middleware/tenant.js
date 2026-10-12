@@ -30,24 +30,38 @@ async function hasColumn(tableName, columnName) {
 
 function resolveSchoolId(...values) {
   for (const value of values) {
-    const numeric = Number.parseInt(value, 10)
-    if (Number.isFinite(numeric) && numeric > 0) {
-      return numeric
+    // parseInt("2forged") and Number("2e3") do not validate identity claims.
+    // Permit only a complete positive decimal school ID from a trusted source.
+    let parsed = null
+    if (typeof value === 'number' && Number.isSafeInteger(value)) {
+      parsed = value
+    } else if (typeof value === 'string' && /^[1-9][0-9]*$/.test(value.trim())) {
+      const numeric = Number(value.trim())
+      if (Number.isSafeInteger(numeric)) parsed = numeric
     }
+    if (parsed !== null && parsed > 0) return parsed
   }
   return null
 }
 
 function currentSchoolId(req) {
-  return resolveSchoolId(
-    req?.school_id,
-    req?.tenantSchoolId,
-    req?.user?.school_id,
-    req?.user?.schoolId,
-    req?.query?.school_id,
-    req?.query?.schoolId,
-    req?.headers?.['x-school-id']
-  )
+  const role = req?.user?.role
+  const isPlatform = role === 'super_admin' || role === 'platform_owner'
+  if (req?.user && !isPlatform) {
+    // Signed user claims win over mutable request fields. Scoped roles cannot
+    // select another school through query parameters or proxy headers.
+    return resolveSchoolId(req.user.school_id, req.user.schoolId,
+      req.school_id, req.tenantSchoolId)
+  }
+  if (!req?.user) {
+    // Unauthenticated query strings and headers are never school authority.
+    return resolveSchoolId(req?.school_id, req?.tenantSchoolId)
+  }
+  // Platform actors may explicitly select a school only after authentication;
+  // authorization for the requested operation remains the route's responsibility.
+  return resolveSchoolId(req.school_id, req.tenantSchoolId,
+    req.user.school_id, req.user.schoolId,
+    req.query?.school_id, req.query?.schoolId, req.headers?.['x-school-id'])
 }
 
 function currentTenantId(req) {

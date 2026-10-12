@@ -79,7 +79,7 @@ def evaluate(facts):
     add('nginx_connect_preservation', 'PASS' if facts['nginx_syntax'] and facts['connect_sha_ok'] else 'HOLD',
         'NGINX syntax and separate APEX Connect vhost SHA')
     add('tls_app_and_connect', 'PASS' if facts['public_app']==200 and facts['connect']==200 else 'HOLD',
-        'HTTPS app and Connect /health endpoints HTTP200')
+        f'HTTPS app status={facts["public_app"]}; Connect /health status={facts["connect"]}; both require HTTP200')
     add('signed_green', 'PASS' if facts['green']==200 and loopback_only(facts['listeners'].get('5091',[])) else 'HOLD',
         'Private signed green healthy and bound to loopback')
     add('postgres_loopback', 'PASS' if all(loopback_only(facts['listeners'].get(p,[])) for p in ('5432','55432')) else 'HOLD',

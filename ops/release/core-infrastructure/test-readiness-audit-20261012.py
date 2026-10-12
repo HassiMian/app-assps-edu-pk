@@ -66,6 +66,13 @@ class AuditTests(unittest.TestCase):
  def test_shared_dirty_source_fails_even_when_git_sha_matches_remote(self):
   f=fixtures();f['git_clean']=False
   self.assertEqual(status(m.evaluate(f),'canonical_release_source'),'HOLD')
+ def test_which_public_https_endpoint_failed_is_reported(self):
+  f=fixtures();f['public_app']=200;f['connect']=None
+  rows=m.evaluate(f)
+  self.assertEqual(status(rows,'tls_app_and_connect'),'HOLD')
+  detail=next(x['detail'] for x in rows if x['name']=='tls_app_and_connect')
+  self.assertIn('app status=200',detail)
+  self.assertIn('Connect /health status=None',detail)
  def test_socket_parsing_loopback_and_public(self):
   info=m.parse_ss('LISTEN 0 511 0.0.0.0:5000 0.0.0.0:*\nLISTEN 0 200 127.0.0.1:5432 0.0.0.0:*\nLISTEN 0 200 [::1]:5432 [::]:*')
   self.assertEqual(info['5000'],['0.0.0.0'])
