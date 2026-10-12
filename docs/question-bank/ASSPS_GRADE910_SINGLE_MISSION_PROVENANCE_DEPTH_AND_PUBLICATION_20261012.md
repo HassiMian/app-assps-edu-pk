@@ -38,3 +38,11 @@ https://pectaa.edu.pk/books-and-publications/
 https://pectaa.edu.pk/uploads/Revised%20ALP%20Notification%2007.11.2025.pdf
 
 Academic approved 0; verified published 0; Paper Studio teacher verified-selectable 0; production deployments 0. This mission never schedules background automation.
+
+## Final whole-mission QA certificate — exact committed source
+
+The complete current non-scheduled Academic Master regression ran against previously committed and pushed source 37ebee97a78057395050d4794c03f403965a4aa0, exact matching GitHub origin. Actual process exit code **0**; machine report qualityGatesPassed = true. **25/25 real source and test execution gates PASS**: 14 original frozen source, faculty, school adoption, protected physical evidence, official link/archive provenance, complete original chapter-depth and Paper Studio publication-denial gates (each exit0), 3 Paper Studio/curriculum staging batches **168+175+167 = 510/510 PASS**, and 8 Academic test batches **80+48+60+67+56+30+55+63 = 459/459 PASS**.
+
+**Combined 969/969 unique automated tests passed; 0 failed; 0 skipped; all test batch TAP footers and shell exit codes complete**. Machine audit and individual stage logs are preserved in protected school VPS directory /tmp/assps910-source-depth-single-mission-20261012/mission-audit.json. Every new 2,581-original source link/archival-provenance and chapter-depth report was generated and cross-checked with the identical frozen original question and source revision records, without copying original question/answer text into public GitHub.
+
+Real signed school text-book adoption certificates: 0; independently authorized qualified teacher answer/revision approvals: 0; academically verified teacher-selectable questions: 0; published: 0; deployment: FALSE. **Technical research/verification mission successful; authenticated human textbook/answer approval remains the genuine blocker.**
