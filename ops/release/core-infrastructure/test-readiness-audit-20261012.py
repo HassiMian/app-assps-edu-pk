@@ -11,7 +11,7 @@ spec.loader.exec_module(m)
 def fixtures():
  return {
   'disk_percent':75.0,'disk_free_gib':10.0,
-  'git_equal':True,'app_root_exists':True,'meta_source_valid':True,'nginx_syntax':True,
+  'git_equal':True,'git_clean':True,'app_root_exists':True,'meta_source_valid':True,'nginx_syntax':True,
   'connect_sha_ok':True,'public_app':200,'connect':200,'green':200,
   'listeners':{'5432':['127.0.0.1','::1'],'55432':['127.0.0.1','::1'],'5091':['127.0.0.1'],
                '3000':['127.0.0.1'],'5000':['127.0.0.1']},
@@ -63,6 +63,9 @@ class AuditTests(unittest.TestCase):
   f=fixtures();f['git_equal']=False;f['connect_sha_ok']=False
   self.assertEqual(status(m.evaluate(f),'canonical_release_source'),'HOLD')
   self.assertEqual(status(m.evaluate(f),'nginx_connect_preservation'),'HOLD')
+ def test_shared_dirty_source_fails_even_when_git_sha_matches_remote(self):
+  f=fixtures();f['git_clean']=False
+  self.assertEqual(status(m.evaluate(f),'canonical_release_source'),'HOLD')
  def test_socket_parsing_loopback_and_public(self):
   info=m.parse_ss('LISTEN 0 511 0.0.0.0:5000 0.0.0.0:*\nLISTEN 0 200 127.0.0.1:5432 0.0.0.0:*\nLISTEN 0 200 [::1]:5432 [::]:*')
   self.assertEqual(info['5000'],['0.0.0.0'])

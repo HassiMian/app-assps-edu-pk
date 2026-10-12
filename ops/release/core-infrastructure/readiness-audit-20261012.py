@@ -17,7 +17,7 @@ from pathlib import Path
 APP = Path('/etc/nginx/sites-enabled/apex-app-ssl')
 CONNECT = Path('/etc/nginx/sites-enabled/apex-api-ssl')
 BACKUP = Path('/root/assps-release-backups/promote-audit-post-live-20261012')
-CORE_SOURCE = Path('/root/workspace/assps-resultcards-core-review-20261012')
+CORE_SOURCE = Path('/root/workspace/assps-core-candidate-00da1e29-clean')
 EXPECTED_CONNECT_SHA = '835cc09f775e6f329af7996769a43b4e83060b92e0c953b0778db2b609df8c5b'
 
 
@@ -72,8 +72,8 @@ def evaluate(facts):
     percent=facts['disk_percent']; free=facts['disk_free_gib']
     add('filesystem_capacity', 'HOLD' if free < 1.5 else 'WARN' if percent >= 90 else 'PASS',
         f'{percent}% used; {free:.2f} GiB free; protected caches/worktrees never auto-deleted')
-    add('canonical_release_source', 'PASS' if facts['git_equal'] else 'HOLD',
-        'Core source HEAD must exactly match remote release branch')
+    add('canonical_release_source', 'PASS' if facts['git_equal'] and facts['git_clean'] else 'HOLD',
+        'Clean Core candidate HEAD must exactly match remote release branch')
     add('frontend_artifact', 'PASS' if facts['app_root_exists'] and facts['meta_source_valid'] else 'HOLD',
         'Active Nginx root must exist and its exact frontend SHA must be canonical ancestry')
     add('nginx_connect_preservation', 'PASS' if facts['nginx_syntax'] and facts['connect_sha_ok'] else 'HOLD',
@@ -99,7 +99,7 @@ def evaluate(facts):
     return checks
 
 
-def gather():
+def gather(core_source=CORE_SOURCE):
     vfs=os.statvfs('/')
     total=vfs.f_blocks*vfs.f_frsize
     free=vfs.f_bavail*vfs.f_frsize
@@ -112,11 +112,12 @@ def gather():
         try:
             artifact_sha=json.loads(meta.read_text()).get('frontend_commit')
         except (OSError,ValueError): pass
-    head=command(['git','-C',str(CORE_SOURCE),'rev-parse','HEAD']).strip()
-    upstream=command(['git','-C',str(CORE_SOURCE),'ls-remote','origin','refs/heads/release/firstterm-core-security-unified-20261011']).split()[0]
+    head=command(['git','-C',str(core_source),'rev-parse','HEAD']).strip()
+    clean=not command(['git','-C',str(core_source),'status','--porcelain']).strip()
+    upstream=command(['git','-C',str(core_source),'ls-remote','origin','refs/heads/release/firstterm-core-security-unified-20261011']).split()[0]
     active_ancestor=False
     if artifact_sha and re.fullmatch(r'[a-f0-9]{40}',artifact_sha):
-        active_ancestor=subprocess.run(['git','-C',str(CORE_SOURCE),'merge-base','--is-ancestor',artifact_sha,head],capture_output=True,timeout=8).returncode==0
+        active_ancestor=subprocess.run(['git','-C',str(core_source),'merge-base','--is-ancestor',artifact_sha,head],capture_output=True,timeout=8).returncode==0
     listeners=parse_ss(command(['ss','-H','-ltn']))
     status=command(['ufw','status']) if shutil.which('ufw') else 'unknown'
     sql="SELECT (SELECT count(*) FROM pg_policies WHERE schemaname='public')||'|'||(SELECT count(*) FROM students WHERE school_id=1 AND class='Eight' AND section='Blue')||'|'||(SELECT count(*) FROM students WHERE school_id=1 AND class='Pre Nine');"
@@ -142,7 +143,7 @@ def gather():
         '/uploads/private/assps-deny-probe.txt')}
     return {
        'disk_percent':round(100*(1-free/total),1), 'disk_free_gib':free/1024**3,
-       'git_equal':head==upstream, 'source_sha':head, 'active_frontend_sha':artifact_sha,
+       'git_equal':head==upstream, 'git_clean':clean, 'source_sha':head, 'active_frontend_sha':artifact_sha,
        'app_root_exists':(root/'index.html').is_file(), 'meta_source_valid':active_ancestor,
        'nginx_syntax':subprocess.run(['nginx','-t'],capture_output=True,timeout=10).returncode==0,
        'connect_sha_ok':sha(CONNECT)==EXPECTED_CONNECT_SHA,
@@ -160,9 +161,11 @@ def gather():
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--json',action='store_true')
+    p.add_argument('--core-source',type=Path,default=CORE_SOURCE,
+                   help='Verified clean Core-only release worktree; never a shared dirty owner worktree')
     p.add_argument('--strict',action='store_true',help='Nonzero when any infrastructure HOLD/WARN remains')
     args=p.parse_args()
-    facts=gather()
+    facts=gather(args.core_source)
     checks=evaluate(facts)
     if args.json:
         print(json.dumps({'source_sha':facts['source_sha'],'active_frontend_sha':facts['active_frontend_sha'],
