@@ -137,7 +137,9 @@ function run(){
   tenantId:e.ASSPS_ACADEMIC_SCHOOL_TENANT_ID,
   at:e.ASSPS_ACADEMIC_REVIEW_VERIFICATION_AT,
   evidenceObjectDirectory:e.ASSPS_ACADEMIC_EVIDENCE_OBJECT_DIR}
- const schoolValues=Object.entries(inputs).filter(([k,v])=>k!=='privateTeacherDirectory'&&typeof v==='string'&&v.length)
+ const schoolValues=Object.entries(inputs).filter(([k,v])=>
+  k!=='privateTeacherDirectory'&&k!=='evidenceObjectDirectory'&&
+  typeof v==='string'&&v.length)
  if(schoolValues.length===0){
   if(inputs.privateTeacherDirectory){
    const initial=unsigned.aggregate({reviewDir:inputs.privateTeacherDirectory})
@@ -147,7 +149,8 @@ function run(){
   return {schoolSignedBundleConfigured:false,privateTeacherResponses:0,
    validSignedQuestionRevisions:0,academicApprovals:0,published:0,releaseDecision:'HOLD'}
  }
- if(schoolValues.length!==6||!inputs.privateTeacherDirectory)
+ if(schoolValues.length!==5||!inputs.evidenceObjectDirectory||
+  !inputs.privateTeacherDirectory)
   deny('INCOMPLETE_REAL_SCHOOL_SIGNED_EVIDENCE_CONFIGURATION')
  return loadReconciled(inputs)
 }

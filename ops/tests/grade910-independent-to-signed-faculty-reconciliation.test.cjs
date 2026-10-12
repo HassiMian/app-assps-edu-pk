@@ -104,6 +104,8 @@ test('actual school private submissions directory with no signed school authorit
   assert.equal(a.validSignedQuestionRevisions,0)
   assert.equal(a.academicApprovals,0)
   process.env.ASSPS_ACADEMIC_EVIDENCE_OBJECT_DIR=dir
+  assert.equal(r.run().validSignedQuestionRevisions,0)
+  process.env.ASSPS_ACADEMIC_REVIEW_VERIFICATION_AT='2026-10-12T12:05:00Z'
   assert.throws(()=>r.run(),/INCOMPLETE_REAL_SCHOOL_SIGNED_EVIDENCE_CONFIGURATION/)
  }finally{
   if(old==null)delete process.env.ASSPS_QBANK_FACULTY_SUBMISSIONS_DIR
