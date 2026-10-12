@@ -52,6 +52,8 @@ function execute(){
     argv:['ops/qbank/attest-grade910-original-pdf-lineage.cjs','--write'],maxMs:240000},
    {id:'restricted-qualified-faculty-decision-intake-without-false-approval',exec:process.execPath,
     argv:['ops/qbank/aggregate-grade910-offline-faculty-decisions.cjs'],maxMs:240000},
+   {id:'all-50-legacy-original-grade-medium-and-mcq-key-research-proposals',exec:process.execPath,
+    argv:['ops/qbank/propose-grade910-original-metadata-remediation.cjs','--write'],maxMs:240000},
    {id:'paper-studio-approved-only-original-revision-contract',exec:process.execPath,
     argv:['ops/qbank/attest-grade910-paper-studio-publisher-boundary.cjs','--write'],maxMs:240000}]
  for(const batch of [...bins,...x.batches]){

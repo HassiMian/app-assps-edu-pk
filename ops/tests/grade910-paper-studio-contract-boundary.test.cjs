@@ -42,3 +42,16 @@ test('materialized stable academic/Paper Studio owner handoff equals frozen gene
  assert.deepEqual(x,read())
  assert.equal(fs.readFileSync(m.REPORT,'utf8'),m.render(read()))
 })
+
+test('50 grade/medium correction PROPOSALS stay research-only; two Biology Urdu+English items recognized',()=>{
+ const x=read()
+ assert.equal(x.researchMetadataProposalsAwaitIndependentReview,50)
+ assert.equal(x.originalLegacyMcqPositionProposalsAwaitTeacherReview,24)
+ assert.equal(x.originalBilingualBiologyQuestionProposalsAwaitUrduReview,2)
+ const proposed=x.rows.filter(q=>q.pendingHumanLegacyMetadataProposal)
+ assert.equal(proposed.length,50)
+ assert.equal(proposed.filter(q=>q.pendingHumanLegacyMetadataProposal.tentativeLegacyMcqPosition).length,24)
+ assert.equal(proposed.filter(q=>q.pendingHumanLegacyMetadataProposal.medium==='dual').length,2)
+ assert.ok(proposed.every(q=>q.pendingHumanLegacyMetadataProposal.automaticallyAppliesToPaperStudio===false))
+ assert.ok(proposed.every(q=>q.authenticatedSchoolAcademicApproval===false))
+})

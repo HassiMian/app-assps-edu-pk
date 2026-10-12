@@ -7,6 +7,9 @@
   "allOriginalRevisionSetSha256": "801e32a26b5063ac852205001dd22161be9fd079af8f81d681354ed3ee48b9b0",
   "questionPdfDigestByteMatching": 2537,
   "questionPdfDigestUnstated": 44,
+  "researchMetadataProposalsAwaitIndependentReview": 50,
+  "originalLegacyMcqPositionProposalsAwaitTeacherReview": 24,
+  "originalBilingualBiologyQuestionProposalsAwaitUrduReview": 2,
   "trustedHumanApprovals": 0,
   "academicallyApproved": 0,
   "academicallyPublished": 0,
@@ -5388,7 +5391,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "biology",
+        "medium": "dual",
+        "tentativeLegacyMcqPosition": null,
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-BIO-EM-RESEARCH-C01-T0101-M02",
@@ -5406,7 +5417,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "biology",
+        "medium": "dual",
+        "tentativeLegacyMcqPosition": null,
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-BIO-EM-RESEARCH-C01-T0101-S01",
@@ -5424,7 +5443,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "biology",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": null,
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-BIO-EM-RESEARCH-C01-T0101-S02",
@@ -5442,7 +5469,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "biology",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": null,
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-BIO-EM-RESEARCH-C01-T0101-S03",
@@ -5460,7 +5495,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "biology",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": null,
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-BIO-EM-RESEARCH-C01-T0101-S04",
@@ -5478,7 +5521,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "biology",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": null,
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-BIO-UR-C01-L01",
@@ -17988,7 +18039,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": null,
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-C002",
@@ -18006,7 +18065,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": null,
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-C003",
@@ -18024,7 +18091,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": null,
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-C004",
@@ -18042,7 +18117,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": null,
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-G001",
@@ -18060,7 +18143,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": null,
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-G002",
@@ -18078,7 +18169,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": null,
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-G003",
@@ -18096,7 +18195,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": null,
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-G004",
@@ -18114,7 +18221,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": null,
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-G005",
@@ -18132,7 +18247,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": null,
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-G006",
@@ -18150,7 +18273,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": null,
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-G007",
@@ -18168,7 +18299,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": null,
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-G008",
@@ -18186,7 +18325,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": null,
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-G009",
@@ -18204,7 +18351,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": null,
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-G010",
@@ -18222,7 +18377,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": null,
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-M001",
@@ -18240,7 +18403,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": "B",
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-M002",
@@ -18258,7 +18429,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": "C",
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-M003",
@@ -18276,7 +18455,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": "C",
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-M004",
@@ -18294,7 +18481,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": "B",
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-M005",
@@ -18312,7 +18507,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": "C",
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-M006",
@@ -18330,7 +18533,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": "C",
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-M007",
@@ -18348,7 +18559,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": "B",
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-M008",
@@ -18366,7 +18585,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": "B",
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-M009",
@@ -18384,7 +18611,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": "B",
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-M010",
@@ -18402,7 +18637,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": "B",
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-M011",
@@ -18420,7 +18663,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": "B",
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-M012",
@@ -18438,7 +18689,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": "B",
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-M013",
@@ -18456,7 +18715,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": "B",
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-M014",
@@ -18474,7 +18741,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": "B",
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-M015",
@@ -18492,7 +18767,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": "B",
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-M016",
@@ -18510,7 +18793,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": "B",
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-M017",
@@ -18528,7 +18819,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": "C",
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-M018",
@@ -18546,7 +18845,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": "B",
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-M019",
@@ -18564,7 +18871,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": "B",
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-M020",
@@ -18582,7 +18897,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": "C",
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-M021",
@@ -18600,7 +18923,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": "B",
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-M022",
@@ -18618,7 +18949,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": "B",
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-M023",
@@ -18636,7 +18975,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": "B",
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-M024",
@@ -18654,7 +19001,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": "C",
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-T001",
@@ -18672,7 +19027,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": null,
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-T002",
@@ -18690,7 +19053,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": null,
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-W001",
@@ -18708,7 +19079,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": null,
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-W002",
@@ -18726,7 +19105,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": null,
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-W003",
@@ -18744,7 +19131,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": null,
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-ENG-ORIG-20261008-W004",
@@ -18762,7 +19157,15 @@
       "independentQualifiedAnswerCorrectnessVerified": false,
       "authenticatedSchoolAcademicApproval": false,
       "paperStudioVerifiedSelectable": false,
-      "academicPublished": false
+      "academicPublished": false,
+      "pendingHumanLegacyMetadataProposal": {
+        "grade": 9,
+        "subject": "english",
+        "medium": "english",
+        "tentativeLegacyMcqPosition": null,
+        "independentReviewerRequired": true,
+        "automaticallyAppliesToPaperStudio": false
+      }
     },
     {
       "originalQuestionId": "IX-FASH-C01-L01",

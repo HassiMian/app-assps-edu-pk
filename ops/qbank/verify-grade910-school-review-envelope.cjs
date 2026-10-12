@@ -8,14 +8,30 @@ const auth=require('./verify-grade910-institutional-signatures.cjs')
 const ROOT=path.resolve(__dirname,'../..')
 const reject=x=>{throw Error('GRADE910_SCHOOL_REVIEW_ENVELOPE_'+x)}
 function inside(a,b){const rel=path.relative(b,a);return rel===''||(!rel.startsWith('..'+path.sep)&&rel!=='..'&&!path.isAbsolute(rel))}
+function verifyExternalFile(p,{sensitive=false,maxBytes=32*1024*1024}={}){
+ if(typeof p!=='string'||!path.isAbsolute(p))reject('SCHOOL_TRUST_FILE_MUST_BE_ABSOLUTE')
+ const full=path.resolve(p)
+ if(inside(full,ROOT))reject('SCHOOL_AUTHORITY_EVIDENCE_MUST_BE_OUTSIDE_GIT_WORKTREE')
+ const resolved=fs.realpathSync(full)
+ if(resolved!==full)reject('SCHOOL_REVIEW_SYMLINK_OR_ALIAS_NOT_ALLOWED')
+ const stat=fs.lstatSync(full)
+ if(!stat.isFile()||stat.isSymbolicLink()||stat.uid!==process.getuid()||
+  stat.size<1||stat.size>maxBytes||(stat.mode&0o022)!==0||
+  (sensitive&&(stat.mode&0o077)!==0))reject('SCHOOL_TRUST_FILE_UNSAFE_OWNER_MODE_OR_SIZE')
+ if(sensitive){
+  const parent=path.dirname(full),parentStat=fs.lstatSync(parent)
+  if(!parentStat.isDirectory()||parentStat.isSymbolicLink()||
+   parentStat.uid!==process.getuid()||(parentStat.mode&0o077)!==0)
+   reject('SCHOOL_REVIEW_PARENT_FOLDER_NOT_PRIVATE')
+ }
+ return full
+}
 function loadExternal({rootPublicKeyFile,reviewBundleFile,rootFingerprint,tenantId,at}){
  if(!rootPublicKeyFile||!reviewBundleFile||!rootFingerprint||!tenantId||!at)
   reject('MISSING_OUT_OF_BAND_SCHOOL_AUTHORITY_CONFIGURATION')
- const full=path.resolve(reviewBundleFile),pk=path.resolve(rootPublicKeyFile)
- // Never put signed faculty credentials, names, review papers or live security material in git.
- if(inside(full,ROOT)||inside(pk,ROOT))reject('SCHOOL_AUTHORITY_EVIDENCE_MUST_BE_OUTSIDE_GIT_WORKTREE')
+ const full=verifyExternalFile(reviewBundleFile,{sensitive:true,maxBytes:32*1024*1024})
+ const pk=verifyExternalFile(rootPublicKeyFile,{sensitive:false,maxBytes:128*1024})
  const bytes=fs.readFileSync(full)
- if(bytes.length>32*1024*1024)reject('INSTITUTIONAL_REVIEW_BATCH_EXCEEDS_LIMIT')
  let signed
  try{signed=JSON.parse(bytes.toString('utf8'))}catch(_){reject('REVIEW_BUNDLE_NOT_JSON')}
  if(signed?.schemaVersion!=='assps-grade910-signed-faculty-batch-v1'||
@@ -49,4 +65,4 @@ if(require.main===module){
   process.exitCode=2
  }
 }
-module.exports={loadExternal,inside}
+module.exports={loadExternal,inside,verifyExternalFile}
