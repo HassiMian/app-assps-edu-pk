@@ -100,6 +100,9 @@ run_gate dual_runtime_crud_clone python3 "$OPS/core-infrastructure/verify-dual-r
 run_gate dual_runtime_crud_live python3 "$OPS/core-infrastructure/verify-dual-runtime-crud-boundary-20261012.py" --target production
 run_gate anonymous_school_boundary python3 "$OPS/core-infrastructure/verify-live-anonymous-school-boundaries-20261012.py"
 run_gate fresh_backup_chain python3 "$OPS/core-infrastructure/verify-fresh-core-certification-backup-20261012.py"
+# A data/schema restore does not prove ACL or global-role restore readiness.
+run_gate restored_acl_readiness python3 "$OPS/core-infrastructure/verify-fresh-restore-acl-parity-20261012.py"
+run_gate restored_global_roles python3 "$OPS/core-infrastructure/verify-fresh-restore-global-roles-20261012.py"
 # The Core/Paper forward-port is verified as an independently sourced gate.
 # Its clean-worktree requirement intentionally HOLDs during uncommitted edits.
 run_gate paper_core_forwardport python3 "$OPS/core-infrastructure/verify-paper-core-forwardport-boundary-20261012.py"
