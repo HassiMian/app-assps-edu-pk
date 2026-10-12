@@ -9,6 +9,7 @@ const adoption=require('./build-grade910-school-adoption-verification-matrix.cjs
 const upstream=require('./audit-grade910-official-vs-archive-source-provenance.cjs')
 const assessment=require('./audit-grade910-original-assessment-depth.cjs')
 const schoolSession=require('./audit-grade910-school-session-edition-claims.cjs')
+const optionIntegrity=require('./audit-grade910-mcq-medium-option-integrity.cjs')
 const HOME=path.resolve(__dirname,'../../docs/question-bank')
 const OUT=path.join(HOME,'ASSPS_GRADE910_PAPER_STUDIO_PENDING_SIGNATURE_CONTRACT_20261012.json')
 const REPORT=path.join(HOME,'ASSPS_GRADE910_PAPER_STUDIO_REVIEW_GATE_HANDOFF_20261012.md')
@@ -35,7 +36,7 @@ function build(){
  const source=faculty.build(),lineage=JSON.parse(fs.readFileSync(pdf.OUT,'utf8')),
   proposals=legacy.build(),books=adoption.build(),
   upstreamSources=upstream.make(),assessmentDepth=assessment.build(),
-  applicableYear=schoolSession.make()
+  applicableYear=schoolSession.make(),mcqAudit=optionIntegrity.build()
  if(source.researchOriginalCandidates!==2581||source.independentlyApproved!==0||
   lineage.originalCandidates!==2581||
   lineage.candidateStatusCounts.ORIGINAL_PDF_SHA_EXACT_BYTE_VERIFIED!==2537||
@@ -47,9 +48,11 @@ function build(){
   assessmentDepth.authoredGradeSubjectChapterBuckets!==396||
   assessmentDepth.originalQuestionCount!==2581||
   applicableYear.originalQuestionsWithGradeIXCatalog2025_26Label!==844||
-  applicableYear.onlyPublicationIssuerLabel2026_27NotSchoolAdoption!==599)
+  applicableYear.onlyPublicationIssuerLabel2026_27NotSchoolAdoption!==599||
+  mcqAudit.originalMCQs!==875||mcqAudit.bilingualOriginalEnglishUrduResearchPairs!==18)
   fail('SOURCE_DEPTH_SESSION_OR_PROVENANCE_CHANGED')
  const byUpstream=new Map(upstreamSources.records.map(x=>[x.catalogId,x]))
+ const byMcq=new Map(mcqAudit.rows.map(x=>[x.originalQuestionId,x]))
  const byBook=new Map(books.rows.map(b=>[b.catalogId,b]))
  const bySession=new Map(applicableYear.records.map(b=>[b.catalogId,b]))
  const byId=new Map(proposals.rows.map(p=>[p.originalQuestionId,p]))
@@ -67,6 +70,15 @@ function build(){
   r.sourceOfficialCatalogProvenanceNotActualAdoption=true
   r.originalBookEditionApplicabilityCategory=year.catalogEditionClassification
   r.independentFacultyReviewToSignedSchoolPacketRevisionChainVerified=false
+  const originalMcq=byMcq.get(r.originalQuestionId)
+  if(r.type==='mcq'&&!originalMcq)fail('ORIGINAL_MCQ_OPTION_QUALITY_MISSING')
+  if(originalMcq){
+   if(originalMcq.originalQuestionRevisionSha256!==r.originalQuestionRevisionSha256||
+      originalMcq.originalSourceFileSha256!==r.originalSourceFileSha256)
+     fail('ORIGINAL_MCQ_OPTION_QUALITY_SOURCE_SHA_CHANGED')
+   r.pendingOriginalMcqLanguageReviewFlags=originalMcq.researchReviewFlags
+   r.englishUrduMCQTeacherEquivalenceVerified=false
+  }
   r.sourceEvidenceObjectBytesIndependentlyVerifiedForQuestion=false
   if(p){
    if(p.originalQuestionRevisionSha256!==r.originalQuestionRevisionSha256||
@@ -88,6 +100,10 @@ function build(){
   catalogEntriesAwaitingRealASSPSBookAdoption:56,
   originalQuestionsWithExplicit2026_27PublisherLabelNotSchoolAdoption:599,
   originalQuestionsWith2025_26IXPublisherLabelApplicabilityUnknown:844,
+  originalMCQsAwaitingQualifiedAnswerKeyReview:875,
+  originalBilingualMCQsAwaitingUrduSemanticEquivalenceReview:18,
+  legacyMCQsWithoutCanonicalKey:24,
+  originalEmptyHindiFieldsMustNeverRenderInEnUrPapers:16,
   independentFacultyResponseToSchoolSignedPacketRevisionBridgeAuthenticated:0,
   requireIndependentFacultyResponseMatchedToAuthenticatedSignedSchoolPacket:true,
   originalCandidateSourceRefsWithOfficialCatalogAnchorClaim:2377,
@@ -126,6 +142,7 @@ function render(r){
   'This does not prove physical printed exercise/page mapping or school adoption and does not validate answer correctness.',
   'Source transparency: 2,377 original candidates reference catalog-linked source assets; 204 were recovered from archives without exact official asset link evidence. A Google Drive external PDF host can still be linked on the PECTAA official catalogue and does NOT alone imply unofficial publication.',
   '599 source question references have issuer/publisher edition labels 2026-27 and 844 original Grade IX references have publisher labels 2025-26; neither status alone verifies actual ASSPS school textbook adoption or Annual Examination 2027 applicability.',
+  '875 original MCQs remain unreviewed research: 24 legacy missing canonical key labels, 18 bilingual English/Urdu options requiring real equivalence approval, and 16 empty Hindi placeholders that MUST NOT print in English/Urdu school paper. Mechanical option-text equality is not scientific answer correctness.',
   'Unsigned qualified faculty response must independently reconcile to the final institutionally authenticated signed review packet, including exact original question+answer revision, reviewer actor, academic session and eight evidence digests; an unsigned form alone cannot confer approval.',
   'The 396 original grade/subject/chapter authoring buckets do NOT prove complete adopted Grade IX–X syllabus or verified assessment quality; 44 legacy original grade/chapter claims are unassigned.',
   '56 used source catalog books have zero ASSPS-certified textbook adoption records. One shared-grade Urdu writing source supports 70 original questions and needs exact grade applicability verification.',

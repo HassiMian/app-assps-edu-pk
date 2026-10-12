@@ -100,3 +100,18 @@ test('2026-27 edition and independent unsigned-to-signed school academic chain a
  assert.ok(x.rows.every(r=>r.schoolAdoptedEditionAndExamYearVerified===false))
  assert.equal(x.teacherVerifiedSelectable,0)
 })
+
+test('all original 875 MCQ source-bound language, option-key risks are visible but unapproved in Paper Studio handoff',()=>{
+ const x=read()
+ assert.equal(x.originalMCQsAwaitingQualifiedAnswerKeyReview,875)
+ assert.equal(x.originalBilingualMCQsAwaitingUrduSemanticEquivalenceReview,18)
+ assert.equal(x.legacyMCQsWithoutCanonicalKey,24)
+ assert.equal(x.originalEmptyHindiFieldsMustNeverRenderInEnUrPapers,16)
+ const mcqs=x.rows.filter(r=>r.type==='mcq')
+ assert.equal(mcqs.length,875)
+ assert.ok(mcqs.every(r=>Array.isArray(r.pendingOriginalMcqLanguageReviewFlags)))
+ assert.ok(mcqs.every(r=>r.englishUrduMCQTeacherEquivalenceVerified===false))
+ assert.ok(mcqs.every(r=>r.paperStudioVerifiedSelectable===false))
+ assert.equal(mcqs.filter(r=>r.pendingOriginalMcqLanguageReviewFlags.includes('ORIGINAL_CORRECT_OPTION_ID_NOT_CANONICAL')).length,24)
+ assert.equal(mcqs.filter(r=>r.pendingOriginalMcqLanguageReviewFlags.includes('EMPTY_HINDI_PLACEHOLDER_MUST_NOT_RENDER')).length,16)
+})
