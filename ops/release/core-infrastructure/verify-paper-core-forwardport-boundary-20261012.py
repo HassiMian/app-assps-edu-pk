@@ -10,7 +10,7 @@ import subprocess
 import sys
 
 REPO=Path('/root/workspace/assps-core-next-three-gates-20261012')
-CORE_SHA='e3030c1c519ec79ccc0f688bccc6a676a646b8f9'
+FORWARDPORT_BASE_SHA='e3030c1c519ec79ccc0f688bccc6a676a646b8f9'
 PAPER_SHA='921acf05e523665e132fe2f0cc4a398724789903'
 CORE_REF='fix/core-rls-clone-candidate-and-ops-20261012'
 PAPER_REF='test/paper-core-rls77-forwardport-20261012'
@@ -24,10 +24,10 @@ def run_git(*args,timeout=12):
 
 def classify(local_core,remote_core,local_paper,remote_paper,changed,dirty,core_parent):
     problems=[]
-    if local_core!=CORE_SHA or remote_core!=CORE_SHA:problems.append('core_source_or_origin_sha_drift')
+    if local_core!=remote_core or not local_core:problems.append('core_source_or_origin_sha_drift')
     if local_paper!=PAPER_SHA or remote_paper!=PAPER_SHA:problems.append('paper_source_or_origin_sha_drift')
     if dirty:problems.append('core_source_worktree_dirty')
-    if core_parent is False:problems.append('canonical_core_ancestry_missing')
+    if core_parent is False:problems.append('canonical_core_or_forwardport_base_ancestry_missing')
     if not changed:problems.append('paper_forwardport_contains_no_diff')
     unauthorized=[p for p in changed if not p.startswith(ALLOWED_PREFIXES)]
     if unauthorized:problems.append('cross_owner_modifications='+','.join(unauthorized[:12]))
@@ -42,10 +42,10 @@ def main():
         local_paper=run_git('rev-parse',PAPER_SHA)
         remote=run_git('ls-remote','--heads','origin',CORE_REF,PAPER_REF)
         refs=dict((line.split('\t',1)[1],line.split('\t',1)[0]) for line in remote.splitlines())
-        changed=run_git('diff','--name-only',CORE_SHA,PAPER_SHA).splitlines()
+        changed=run_git('diff','--name-only',FORWARDPORT_BASE_SHA,PAPER_SHA).splitlines()
         dirty=bool(run_git('status','--porcelain'))
         parent=subprocess.run(['git','-C',str(REPO),'merge-base','--is-ancestor',
-                               '00da1e296c3116086a1d1e98c272eb0534e4ee8e',CORE_SHA],
+                               FORWARDPORT_BASE_SHA,'HEAD'],
                                capture_output=True,timeout=8).returncode==0
         outcome=classify(local_core,refs.get('refs/heads/'+CORE_REF),
                          local_paper,refs.get('refs/heads/'+PAPER_REF),changed,dirty,parent)

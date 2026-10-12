@@ -7,7 +7,7 @@ spec=importlib.util.spec_from_file_location('paper_core',p)
 m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
 class IntegrationTests(unittest.TestCase):
  def check(self,changed=None,**k):
-  d={'local_core':m.CORE_SHA,'remote_core':m.CORE_SHA,
+  d={'local_core':'4283eb8694cde16a0fd1ffea01755759af229683','remote_core':'4283eb8694cde16a0fd1ffea01755759af229683',
       'local_paper':m.PAPER_SHA,'remote_paper':m.PAPER_SHA,
       'changed':['docs/coordination/PAPER_STUDIO_A.md'],
       'dirty':False,'core_parent':True}
