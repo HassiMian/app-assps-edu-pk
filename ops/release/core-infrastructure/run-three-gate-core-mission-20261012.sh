@@ -65,6 +65,8 @@ run_gate tenant_key_consistency python3 "$OPS/core-infrastructure/tenant-key-con
 run_gate school_data_integrity python3 "$OPS/core-infrastructure/school-data-integrity-20261012.py"
 run_gate fee_ledger_reconciliation python3 "$OPS/core-infrastructure/fee-ledger-reconciliation-20261012.py"
 run_gate unsigned_rpl_runtime python3 "$OPS/core-infrastructure/unsigned-rls-role-denial-audit-20261012.py"
+run_gate app_runtime_signed_guard_prod python3 "$OPS/core-infrastructure/app-runtime-policy-readiness-20261012.py" --database production
+run_gate app_runtime_signed_guard_clone python3 "$OPS/core-infrastructure/app-runtime-policy-readiness-20261012.py" --database clone
 run_gate infrastructure_readiness python3 "$OPS/core-infrastructure/readiness-audit-20261012.py" --strict
 run_gate public_api_path python3 "$OPS/core-infrastructure/public-api-path-diagnostic-20261012.py" --samples 2
 
