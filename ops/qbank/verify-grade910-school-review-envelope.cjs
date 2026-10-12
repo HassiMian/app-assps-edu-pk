@@ -2,7 +2,7 @@
 'use strict'
 // Offline read-only authenticated *evidence* ingestion; NO production import or publication.
 // The institutional trust root/fingerprint must be provisioned out of band by ASSPS.
-const fs=require('node:fs'),path=require('node:path')
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto')
 const original=require('./attest-grade910-all-original-candidate-revisions.cjs')
 const auth=require('./verify-grade910-institutional-signatures.cjs')
 const physical=require('./verify-grade910-physical-evidence-objects.cjs')
@@ -51,6 +51,7 @@ function loadExternal({rootPublicKeyFile,reviewBundleFile,rootFingerprint,tenant
  if(result.publisherSelectable!==false||result.academicallyPublished!==0)
   reject('UNAUTHENTICATED_RELEASE_DOWNGRADE')
  return{reviewEvidencePackets:result.reviewEvidencePackets,verifiedSignatureReceipts:result.receipts,
+  verifiedSignedBundleFileSha256:crypto.createHash('sha256').update(bytes).digest('hex'),
   physicalEvidenceSha256ObjectsVerified:proof.uniquePhysicalEvidenceObjectsVerified,
   schoolAdoptionAuthorityStillRequiresIndependentHumanCertification:true,
   releaseDecision:'HOLD_PENDING_SCHOOL_REVIEW_AND_PAPER_STUDIO_SAAS_CORE_CERTIFICATION',

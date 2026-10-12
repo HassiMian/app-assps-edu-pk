@@ -8,6 +8,7 @@ const legacy=require('./propose-grade910-original-metadata-remediation.cjs')
 const adoption=require('./build-grade910-school-adoption-verification-matrix.cjs')
 const upstream=require('./audit-grade910-official-vs-archive-source-provenance.cjs')
 const assessment=require('./audit-grade910-original-assessment-depth.cjs')
+const schoolSession=require('./audit-grade910-school-session-edition-claims.cjs')
 const HOME=path.resolve(__dirname,'../../docs/question-bank')
 const OUT=path.join(HOME,'ASSPS_GRADE910_PAPER_STUDIO_PENDING_SIGNATURE_CONTRACT_20261012.json')
 const REPORT=path.join(HOME,'ASSPS_GRADE910_PAPER_STUDIO_REVIEW_GATE_HANDOFF_20261012.md')
@@ -33,7 +34,8 @@ function row(q){
 function build(){
  const source=faculty.build(),lineage=JSON.parse(fs.readFileSync(pdf.OUT,'utf8')),
   proposals=legacy.build(),books=adoption.build(),
-  upstreamSources=upstream.make(),assessmentDepth=assessment.build()
+  upstreamSources=upstream.make(),assessmentDepth=assessment.build(),
+  applicableYear=schoolSession.make()
  if(source.researchOriginalCandidates!==2581||source.independentlyApproved!==0||
   lineage.originalCandidates!==2581||
   lineage.candidateStatusCounts.ORIGINAL_PDF_SHA_EXACT_BYTE_VERIFIED!==2537||
@@ -43,20 +45,28 @@ function build(){
    books.catalogReferencedByOriginals!==56)fail('INSTITUTIONAL_ADOPTION_CERTIFICATION_NOT_PRESENT')
  if(upstreamSources.originalQuestionRefsWithArchiveRecoveredSource!==204||
   assessmentDepth.authoredGradeSubjectChapterBuckets!==396||
-  assessmentDepth.originalQuestionCount!==2581)fail('SOURCE_DEPTH_PROVENANCE_RESEARCH_CHANGED')
+  assessmentDepth.originalQuestionCount!==2581||
+  applicableYear.originalQuestionsWithGradeIXCatalog2025_26Label!==844||
+  applicableYear.onlyPublicationIssuerLabel2026_27NotSchoolAdoption!==599)
+  fail('SOURCE_DEPTH_SESSION_OR_PROVENANCE_CHANGED')
  const byUpstream=new Map(upstreamSources.records.map(x=>[x.catalogId,x]))
  const byBook=new Map(books.rows.map(b=>[b.catalogId,b]))
+ const bySession=new Map(applicableYear.records.map(b=>[b.catalogId,b]))
  const byId=new Map(proposals.rows.map(p=>[p.originalQuestionId,p]))
  const rows=source.rows.map(q=>{
   const r=row(q),p=byId.get(r.originalQuestionId),book=byBook.get(r.originalCatalogRecordId),
-   upstreamRecord=byUpstream.get(r.originalCatalogRecordId)
-  if(!upstreamRecord)fail('SOURCE_OFFICIAL_LINK_TRACE_MISSING')
+   upstreamRecord=byUpstream.get(r.originalCatalogRecordId),
+   year=bySession.get(r.originalCatalogRecordId)
+  if(!upstreamRecord||!year||year.ASSPS2026_27AdoptedEditionVerified!==false)
+   fail('SOURCE_OFFICIAL_LINK_OR_SESSION_TRACE_MISSING')
   if(!book||book.actualSchoolAdoptedBookVerified!==false)
    fail('UNREVIEWED_SCHOOL_BOOK_AUTO_ACCEPTED')
   r.schoolAdoptionCatalogGradeUnassigned=book.gradeCatalogClaim===0
   r.originalSourceAcquisitionClass=upstreamRecord.sourceAcquisitionCategory
   r.originalAssetHost=upstreamRecord.observedExternalAssetHost
   r.sourceOfficialCatalogProvenanceNotActualAdoption=true
+  r.originalBookEditionApplicabilityCategory=year.catalogEditionClassification
+  r.independentFacultyReviewToSignedSchoolPacketRevisionChainVerified=false
   r.sourceEvidenceObjectBytesIndependentlyVerifiedForQuestion=false
   if(p){
    if(p.originalQuestionRevisionSha256!==r.originalQuestionRevisionSha256||
@@ -76,6 +86,10 @@ function build(){
   tenantAndProductionOwner:'SaaS Core & Production Master',
   originalQuestionCount:2581,allOriginalRevisionSetSha256:digest,
   catalogEntriesAwaitingRealASSPSBookAdoption:56,
+  originalQuestionsWithExplicit2026_27PublisherLabelNotSchoolAdoption:599,
+  originalQuestionsWith2025_26IXPublisherLabelApplicabilityUnknown:844,
+  independentFacultyResponseToSchoolSignedPacketRevisionBridgeAuthenticated:0,
+  requireIndependentFacultyResponseMatchedToAuthenticatedSignedSchoolPacket:true,
   originalCandidateSourceRefsWithOfficialCatalogAnchorClaim:2377,
   originalCandidateSourceRefsRecoveredFromArchiveNotExactOfficialLink:204,
   authoringGradeSubjectChapterBucketsResearchOnly:396,
@@ -111,6 +125,8 @@ function render(r){
   '','2,537 questions explicitly match original-source PDF SHA hashes against locally byte-reverified PDFs; 44 legacy English originals lack question-level PDF hash claims.',
   'This does not prove physical printed exercise/page mapping or school adoption and does not validate answer correctness.',
   'Source transparency: 2,377 original candidates reference catalog-linked source assets; 204 were recovered from archives without exact official asset link evidence. A Google Drive external PDF host can still be linked on the PECTAA official catalogue and does NOT alone imply unofficial publication.',
+  '599 source question references have issuer/publisher edition labels 2026-27 and 844 original Grade IX references have publisher labels 2025-26; neither status alone verifies actual ASSPS school textbook adoption or Annual Examination 2027 applicability.',
+  'Unsigned qualified faculty response must independently reconcile to the final institutionally authenticated signed review packet, including exact original question+answer revision, reviewer actor, academic session and eight evidence digests; an unsigned form alone cannot confer approval.',
   'The 396 original grade/subject/chapter authoring buckets do NOT prove complete adopted Grade IX–X syllabus or verified assessment quality; 44 legacy original grade/chapter claims are unassigned.',
   '56 used source catalog books have zero ASSPS-certified textbook adoption records. One shared-grade Urdu writing source supports 70 original questions and needs exact grade applicability verification.',
   'Signed school academic packet evidence SHA claims must match actual owner-private content-addressed evidence bytes before school review can pass; content hashes are not independent human correctness or authority.',

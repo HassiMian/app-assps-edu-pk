@@ -83,3 +83,20 @@ test('all 2581 research candidates retain official-link versus archive source di
  assert.ok(x.rows.every(q=>q.sourceOfficialCatalogProvenanceNotActualAdoption===true))
  assert.equal(x.teacherVerifiedSelectable,0)
 })
+
+test('2026-27 edition and independent unsigned-to-signed school academic chain are required before publisher picker',()=>{
+ const x=read()
+ assert.equal(x.originalQuestionsWithExplicit2026_27PublisherLabelNotSchoolAdoption,599)
+ assert.equal(x.originalQuestionsWith2025_26IXPublisherLabelApplicabilityUnknown,844)
+ assert.equal(x.independentFacultyResponseToSchoolSignedPacketRevisionBridgeAuthenticated,0)
+ assert.equal(x.requireIndependentFacultyResponseMatchedToAuthenticatedSignedSchoolPacket,true)
+ const catalog2025=x.rows.filter(r=>r.originalBookEditionApplicabilityCategory===
+  'CATALOG_LABEL_2025_26_ASSPS_2026_27_APPLICABILITY_UNKNOWN')
+ const catalog2026=x.rows.filter(r=>r.originalBookEditionApplicabilityCategory===
+  'CATALOG_LABEL_EXPLICIT_2026_27_BUT_ASSPS_ADOPTION_UNKNOWN')
+ assert.equal(catalog2025.length,844)
+ assert.equal(catalog2026.length,599)
+ assert.ok(x.rows.every(r=>r.independentFacultyReviewToSignedSchoolPacketRevisionChainVerified===false))
+ assert.ok(x.rows.every(r=>r.schoolAdoptedEditionAndExamYearVerified===false))
+ assert.equal(x.teacherVerifiedSelectable,0)
+})
