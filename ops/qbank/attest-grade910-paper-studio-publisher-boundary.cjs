@@ -5,6 +5,7 @@ const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypt
 const faculty=require('./build-grade910-one-faculty-quality-worklist.cjs')
 const pdf=require('./attest-grade910-original-pdf-lineage.cjs')
 const legacy=require('./propose-grade910-original-metadata-remediation.cjs')
+const adoption=require('./build-grade910-school-adoption-verification-matrix.cjs')
 const HOME=path.resolve(__dirname,'../../docs/question-bank')
 const OUT=path.join(HOME,'ASSPS_GRADE910_PAPER_STUDIO_PENDING_SIGNATURE_CONTRACT_20261012.json')
 const REPORT=path.join(HOME,'ASSPS_GRADE910_PAPER_STUDIO_REVIEW_GATE_HANDOFF_20261012.md')
@@ -28,15 +29,23 @@ function row(q){
   paperStudioVerifiedSelectable:false,academicPublished:false}
 }
 function build(){
- const source=faculty.build(),lineage=JSON.parse(fs.readFileSync(pdf.OUT,'utf8')),proposals=legacy.build()
+ const source=faculty.build(),lineage=JSON.parse(fs.readFileSync(pdf.OUT,'utf8')),
+  proposals=legacy.build(),books=adoption.build()
  if(source.researchOriginalCandidates!==2581||source.independentlyApproved!==0||
   lineage.originalCandidates!==2581||
   lineage.candidateStatusCounts.ORIGINAL_PDF_SHA_EXACT_BYTE_VERIFIED!==2537||
   lineage.candidateStatusCounts.ORIGINAL_QUESTION_PDF_SHA_NOT_DECLARED!==44)
   fail('FROZEN_SOURCE_AND_PDF_EVIDENCE_DRIFT')
+ if(books.originalCandidates!==2581||books.schoolAdoptionCertificatesAuthenticated!==0||
+   books.catalogReferencedByOriginals!==56)fail('INSTITUTIONAL_ADOPTION_CERTIFICATION_NOT_PRESENT')
+ const byBook=new Map(books.rows.map(b=>[b.catalogId,b]))
  const byId=new Map(proposals.rows.map(p=>[p.originalQuestionId,p]))
  const rows=source.rows.map(q=>{
-  const r=row(q),p=byId.get(r.originalQuestionId)
+  const r=row(q),p=byId.get(r.originalQuestionId),book=byBook.get(r.originalCatalogRecordId)
+  if(!book||book.actualSchoolAdoptedBookVerified!==false)
+   fail('UNREVIEWED_SCHOOL_BOOK_AUTO_ACCEPTED')
+  r.schoolAdoptionCatalogGradeUnassigned=book.gradeCatalogClaim===0
+  r.sourceEvidenceObjectBytesIndependentlyVerifiedForQuestion=false
   if(p){
    if(p.originalQuestionRevisionSha256!==r.originalQuestionRevisionSha256||
       p.originalSourceFileSha256!==r.originalSourceFileSha256)fail('LEGACY_SOURCE_PROPOSAL_SHA_DRIFT')
@@ -54,6 +63,10 @@ function build(){
   academicOwner:'ASSPS Grade IX-X Academic Master',paperStudioOwner:'Paper Studio Master',
   tenantAndProductionOwner:'SaaS Core & Production Master',
   originalQuestionCount:2581,allOriginalRevisionSetSha256:digest,
+  catalogEntriesAwaitingRealASSPSBookAdoption:56,
+  crossGradeUrduOriginalsAwaitingTextbookGradeResolution:70,
+  realSchoolAdoptionObjectBytesIndependentlyAuthorized:0,
+  requireActualShaVerifiedPrivateEvidenceObjects:true,
   questionPdfDigestByteMatching:2537,questionPdfDigestUnstated:44,
   researchMetadataProposalsAwaitIndependentReview:50,
   originalLegacyMcqPositionProposalsAwaitTeacherReview:24,
@@ -81,6 +94,8 @@ function render(r){
   '','Original question ID + revision SHA + original source file SHA set: '+r.allOriginalRevisionSetSha256,
   '','2,537 questions explicitly match original-source PDF SHA hashes against locally byte-reverified PDFs; 44 legacy English originals lack question-level PDF hash claims.',
   'This does not prove physical printed exercise/page mapping or school adoption and does not validate answer correctness.',
+  '56 used source catalog books have zero ASSPS-certified textbook adoption records. One shared-grade Urdu writing source supports 70 original questions and needs exact grade applicability verification.',
+  'Signed school academic packet evidence SHA claims must match actual owner-private content-addressed evidence bytes before school review can pass; content hashes are not independent human correctness or authority.',
   'Exactly 50 SHA-bound original language/medium/grade metadata correction proposals are pending independent review, including 24 legacy option-position proposals and two bilingual Biology originals. All proposals are explicitly nonapplicable to the verified question picker without signed qualified review.',
   '','Paper Studio owner must enforce an approved-only server-side tenant-scoped snapshot contract. Client-supplied approved booleans, URL source metadata and synthetic signatures may not authorize verified publication.',
   '','The signed institution review remains an external human and school authority gate. Real approvals = 0; verified published = 0; production deployment = false.',

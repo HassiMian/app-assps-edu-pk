@@ -6,6 +6,8 @@ Original question ID + revision SHA + original source file SHA set: 801e32a26b50
 
 2,537 questions explicitly match original-source PDF SHA hashes against locally byte-reverified PDFs; 44 legacy English originals lack question-level PDF hash claims.
 This does not prove physical printed exercise/page mapping or school adoption and does not validate answer correctness.
+56 used source catalog books have zero ASSPS-certified textbook adoption records. One shared-grade Urdu writing source supports 70 original questions and needs exact grade applicability verification.
+Signed school academic packet evidence SHA claims must match actual owner-private content-addressed evidence bytes before school review can pass; content hashes are not independent human correctness or authority.
 Exactly 50 SHA-bound original language/medium/grade metadata correction proposals are pending independent review, including 24 legacy option-position proposals and two bilingual Biology originals. All proposals are explicitly nonapplicable to the verified question picker without signed qualified review.
 
 Paper Studio owner must enforce an approved-only server-side tenant-scoped snapshot contract. Client-supplied approved booleans, URL source metadata and synthetic signatures may not authorize verified publication.

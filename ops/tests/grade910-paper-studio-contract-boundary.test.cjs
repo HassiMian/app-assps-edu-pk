@@ -55,3 +55,16 @@ test('50 grade/medium correction PROPOSALS stay research-only; two Biology Urdu+
  assert.ok(proposed.every(q=>q.pendingHumanLegacyMetadataProposal.automaticallyAppliesToPaperStudio===false))
  assert.ok(proposed.every(q=>q.authenticatedSchoolAcademicApproval===false))
 })
+
+test('school adopted edition and original cross-grade Urdu source remain an explicit publisher HOLD',()=>{
+ const x=read()
+ assert.equal(x.catalogEntriesAwaitingRealASSPSBookAdoption,56)
+ assert.equal(x.crossGradeUrduOriginalsAwaitingTextbookGradeResolution,70)
+ assert.equal(x.realSchoolAdoptionObjectBytesIndependentlyAuthorized,0)
+ assert.equal(x.requireActualShaVerifiedPrivateEvidenceObjects,true)
+ const cross=x.rows.filter(r=>r.schoolAdoptionCatalogGradeUnassigned)
+ assert.equal(cross.length,70)
+ assert.ok(cross.every(r=>r.schoolAdoptedEditionAndExamYearVerified===false))
+ assert.ok(cross.every(r=>r.sourceEvidenceObjectBytesIndependentlyVerifiedForQuestion===false))
+ assert.equal(x.teacherVerifiedSelectable,0)
+})

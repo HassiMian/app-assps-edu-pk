@@ -54,6 +54,10 @@ function execute(){
     argv:['ops/qbank/aggregate-grade910-offline-faculty-decisions.cjs'],maxMs:240000},
    {id:'all-50-legacy-original-grade-medium-and-mcq-key-research-proposals',exec:process.execPath,
     argv:['ops/qbank/propose-grade910-original-metadata-remediation.cjs','--write'],maxMs:240000},
+   {id:'all-111-catalog-assps-school-adoption-uncertainty-matrix',exec:process.execPath,
+    argv:['ops/qbank/build-grade910-school-adoption-verification-matrix.cjs','--write'],maxMs:240000},
+   {id:'restricted-academic-review-original-physical-evidence-store-integrity',exec:process.execPath,
+    argv:['ops/qbank/verify-grade910-physical-evidence-objects.cjs'],maxMs:240000},
    {id:'paper-studio-approved-only-original-revision-contract',exec:process.execPath,
     argv:['ops/qbank/attest-grade910-paper-studio-publisher-boundary.cjs','--write'],maxMs:240000}]
  for(const batch of [...bins,...x.batches]){

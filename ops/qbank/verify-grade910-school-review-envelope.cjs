@@ -5,6 +5,7 @@
 const fs=require('node:fs'),path=require('node:path')
 const original=require('./attest-grade910-all-original-candidate-revisions.cjs')
 const auth=require('./verify-grade910-institutional-signatures.cjs')
+const physical=require('./verify-grade910-physical-evidence-objects.cjs')
 const ROOT=path.resolve(__dirname,'../..')
 const reject=x=>{throw Error('GRADE910_SCHOOL_REVIEW_ENVELOPE_'+x)}
 function inside(a,b){const rel=path.relative(b,a);return rel===''||(!rel.startsWith('..'+path.sep)&&rel!=='..'&&!path.isAbsolute(rel))}
@@ -26,7 +27,7 @@ function verifyExternalFile(p,{sensitive=false,maxBytes=32*1024*1024}={}){
  }
  return full
 }
-function loadExternal({rootPublicKeyFile,reviewBundleFile,rootFingerprint,tenantId,at}){
+function loadExternal({rootPublicKeyFile,reviewBundleFile,rootFingerprint,tenantId,at,evidenceObjectDirectory}){
  if(!rootPublicKeyFile||!reviewBundleFile||!rootFingerprint||!tenantId||!at)
   reject('MISSING_OUT_OF_BAND_SCHOOL_AUTHORITY_CONFIGURATION')
  const full=verifyExternalFile(reviewBundleFile,{sensitive:true,maxBytes:32*1024*1024})
@@ -43,9 +44,15 @@ function loadExternal({rootPublicKeyFile,reviewBundleFile,rootFingerprint,tenant
   schoolRootPublicKeyPem:fs.readFileSync(pk,'utf8'),
   trustedSchoolRootFingerprint:rootFingerprint,expectedTenantId:tenantId,at,
   originalsIndex,records:signed.records})
+ if(!evidenceObjectDirectory)reject('SCHOOL_REVIEW_EVIDENCE_OBJECT_DIRECTORY_REQUIRED')
+ const proof=physical.verify({directory:evidenceObjectDirectory,records:signed.records})
+ if(!proof.sha256MatchesAll||proof.schoolAdoptionAuthorityVerifiedByByteCheck!==false)
+  reject('EVIDENCE_BYTE_ATTESTATION_INCORRECTLY_GRANTS_AUTHORITY')
  if(result.publisherSelectable!==false||result.academicallyPublished!==0)
   reject('UNAUTHENTICATED_RELEASE_DOWNGRADE')
  return{reviewEvidencePackets:result.reviewEvidencePackets,verifiedSignatureReceipts:result.receipts,
+  physicalEvidenceSha256ObjectsVerified:proof.uniquePhysicalEvidenceObjectsVerified,
+  schoolAdoptionAuthorityStillRequiresIndependentHumanCertification:true,
   releaseDecision:'HOLD_PENDING_SCHOOL_REVIEW_AND_PAPER_STUDIO_SAAS_CORE_CERTIFICATION',
   schoolRootPublicKeyFingerprint:rootFingerprint,schoolTenantId:tenantId,
   paperStudioPublisherSelectable:false,productionChanged:false}
@@ -57,7 +64,8 @@ if(require.main===module){
    reviewBundleFile:process.env.ASSPS_ACADEMIC_SIGNED_REVIEW_BUNDLE_PATH,
    rootFingerprint:process.env.ASSPS_ACADEMIC_TRUSTED_ROOT_SPKI_SHA256,
    tenantId:process.env.ASSPS_ACADEMIC_SCHOOL_TENANT_ID,
-   at:process.env.ASSPS_ACADEMIC_REVIEW_VERIFICATION_AT
+   at:process.env.ASSPS_ACADEMIC_REVIEW_VERIFICATION_AT,
+   evidenceObjectDirectory:process.env.ASSPS_ACADEMIC_EVIDENCE_OBJECT_DIR
   })
   console.log(JSON.stringify(r,null,2))
  }catch(e){
