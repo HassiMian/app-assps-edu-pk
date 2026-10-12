@@ -96,6 +96,10 @@ run_gate legacy_backend_bypass python3 "$OPS/core-infrastructure/legacy-backend-
 run_gate infrastructure_readiness python3 "$OPS/core-infrastructure/readiness-audit-20261012.py" --strict
 run_gate public_api_path python3 "$OPS/core-infrastructure/public-api-path-diagnostic-20261012.py" --samples 2
 run_gate live_marks_method_contract python3 "$OPS/core-infrastructure/verify-live-marks-methods-20261012.py"
+run_gate dual_runtime_crud_clone python3 "$OPS/core-infrastructure/verify-dual-runtime-crud-boundary-20261012.py" --target guarded_clone
+run_gate dual_runtime_crud_live python3 "$OPS/core-infrastructure/verify-dual-runtime-crud-boundary-20261012.py" --target production
+run_gate anonymous_school_boundary python3 "$OPS/core-infrastructure/verify-live-anonymous-school-boundaries-20261012.py"
+run_gate fresh_backup_chain python3 "$OPS/core-infrastructure/verify-fresh-core-certification-backup-20261012.py"
 
 printf '\n[ASSPS_THREE_GATE_FINAL]\n'
 echo "python_unit_suites=$python_count"

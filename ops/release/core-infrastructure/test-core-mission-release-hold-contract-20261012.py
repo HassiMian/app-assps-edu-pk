@@ -20,6 +20,13 @@ class RunnerContract(unittest.TestCase):
   self.assertIn('run_gate full77_live_production',s)
  def test_active_nginx_method_scope_must_be_verified(self):
   self.assertIn('run_gate live_marks_method_contract',s)
+ def test_role_write_privileges_on_guarded_clone_and_live_are_distinct_gates(self):
+  self.assertIn('run_gate dual_runtime_crud_clone',s)
+  self.assertIn('run_gate dual_runtime_crud_live',s)
+ def test_unauthenticated_live_denial_is_its_own_gate(self):
+  self.assertIn('run_gate anonymous_school_boundary',s)
+ def test_fresh_checked_backup_required_but_not_release_approval(self):
+  self.assertIn('run_gate fresh_backup_chain',s)
  def test_mutating_prod_migration_not_invoked(self):
   self.assertNotIn('pg_restore -c',s)
   self.assertNotIn('ALTER ROLE apexos_user',s)
