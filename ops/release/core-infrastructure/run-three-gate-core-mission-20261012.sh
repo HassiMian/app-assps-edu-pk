@@ -90,9 +90,12 @@ run_gate school_data_integrity python3 "$OPS/core-infrastructure/school-data-int
 run_gate fee_ledger_reconciliation python3 "$OPS/core-infrastructure/fee-ledger-reconciliation-20261012.py"
 run_gate unsigned_rpl_runtime python3 "$OPS/core-infrastructure/unsigned-rls-role-denial-audit-20261012.py"
 run_gate staged_core_guard_clone python3 "$OPS/core-infrastructure/verify-core-clone-signed-app-guard-20261012.py"
+run_gate full77_combined_signed_clone python3 "$OPS/core-infrastructure/full-app-signed-77-policy-gate-20261012.py" --target guarded_combined_clone
+run_gate full77_live_production python3 "$OPS/core-infrastructure/full-app-signed-77-policy-gate-20261012.py" --target production
 run_gate legacy_backend_bypass python3 "$OPS/core-infrastructure/legacy-backend-bypass-cutover-gate-20261012.py"
 run_gate infrastructure_readiness python3 "$OPS/core-infrastructure/readiness-audit-20261012.py" --strict
 run_gate public_api_path python3 "$OPS/core-infrastructure/public-api-path-diagnostic-20261012.py" --samples 2
+run_gate live_marks_method_contract python3 "$OPS/core-infrastructure/verify-live-marks-methods-20261012.py"
 
 printf '\n[ASSPS_THREE_GATE_FINAL]\n'
 echo "python_unit_suites=$python_count"

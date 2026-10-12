@@ -15,6 +15,11 @@ class RunnerContract(unittest.TestCase):
  def test_synthetic_browser_failures_can_never_be_silently_ignored(self):
   self.assertIn("[QA_TRANSPORT_RETRY_FAILED]",s)
   self.assertIn('run_source browser_marks run_marks_fixture',s)
+ def test_all77_guarded_clone_and_production_have_independent_gates(self):
+  self.assertIn('run_gate full77_combined_signed_clone',s)
+  self.assertIn('run_gate full77_live_production',s)
+ def test_active_nginx_method_scope_must_be_verified(self):
+  self.assertIn('run_gate live_marks_method_contract',s)
  def test_mutating_prod_migration_not_invoked(self):
   self.assertNotIn('pg_restore -c',s)
   self.assertNotIn('ALTER ROLE apexos_user',s)
