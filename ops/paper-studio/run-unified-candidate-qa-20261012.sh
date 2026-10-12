@@ -3,6 +3,24 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 FRONT="$ROOT/al-siddique-frontend"
+# The bounded-session selector is fail-closed: never report PASS for an unknown
+# or duplicated gate, or for an empty/no-op gate selection.
+VALID_GATES=" protected-templates guard-fixtures structured-migration canonical-editor-browser early-years-browser early-years-print-geometry selection-identity-browser urdu-workspace-browser docx-binary-export docx-browser-export print-a4-a5 diary-lesson-browser official-print-browser first-term-marks-browser paper-owned-eslint vite-build "
+if [[ -n "${ASSPS_PAPER_QA_ONLY:-}" ]]; then
+  if [[ ! "${ASSPS_PAPER_QA_ONLY}" =~ ^[a-z0-9-]+(,[a-z0-9-]+)*$ ]]; then
+    echo "HOLD: malformed gate selection." >&2
+    exit 2
+  fi
+  declare -A requested_seen=()
+  IFS=',' read -r -a requested <<< "${ASSPS_PAPER_QA_ONLY}"
+  for selection in "${requested[@]}"; do
+    if [[ "$VALID_GATES" != *" $selection "* || -n "${requested_seen[$selection]:-}" ]]; then
+      echo "HOLD: unknown or duplicated QA gate: $selection" >&2
+      exit 2
+    fi
+    requested_seen[$selection]=1
+  done
+fi
 EVIDENCE="${ASSPS_PAPER_EVIDENCE_DIR:-/tmp/assps-paper-core-unified-qa-$(date -u +%Y%m%dT%H%M%SZ)-$$}"
 if [[ -e "$EVIDENCE" ]]; then
   echo "HOLD: pre-existing evidence directory; will not overwrite prior tests." >&2
@@ -23,6 +41,9 @@ fi
 gate() {
   local label="$1"
   shift
+  if [[ -n "${ASSPS_PAPER_QA_ONLY:-}" ]] && [[ ",${ASSPS_PAPER_QA_ONLY}," != *",$label,"* ]]; then
+    return 0
+  fi
   printf 'BEGIN %s\n' "$label"
   if (cd "$FRONT" && "$@") > "$EVIDENCE/$label.log" 2>&1; then
     printf 'PASS %s\n' "$label" | tee -a "$EVIDENCE/summary.txt"
@@ -38,12 +59,20 @@ gate guard-fixtures node --test ../ops/tests/paper-rls-role-gate.test.cjs ../ops
 gate structured-migration node --test src/Modules/Paper-Generator/PaperEditor/tests/migrationV2_43.test.js src/Modules/Paper-Generator/PaperEditor/tests/normalization43.test.js src/Modules/Paper-Generator/PaperEditor/tests/urduMcqInlineOptionBoundary.test.js src/Modules/Paper-Generator/PaperEditor/tests/canonicalDocxModel.test.js
 gate canonical-editor-browser node --test src/Modules/Paper-Generator/PaperEditor/tests/canonicalEditorBrowserAcceptance.test.js
 gate early-years-browser node --test src/Modules/Paper-Generator/PaperEditor/tests/earlyYearsBrowserAcceptance.test.js
+gate early-years-print-geometry node --test src/Modules/Paper-Generator/PaperEditor/tests/earlyYearsRenderPrintGeometryAcceptance.test.js
 gate selection-identity-browser node --test src/Modules/Paper-Generator/PaperEditor/tests/paperWorkspaceSelectionRegressionV12.test.js src/Modules/Paper-Generator/PaperEditor/tests/paperWorkspaceSelectionThemeV11.test.js
 gate urdu-workspace-browser node --test src/Modules/Paper-Generator/PaperEditor/tests/paperWorkspaceUrduBrowserAcceptance.test.js src/Modules/Paper-Generator/PaperEditor/tests/canonicalEnglishUrduA4PdfAcceptance.test.js
+gate docx-binary-export node --test src/Modules/Paper-Generator/PaperEditor/tests/canonicalDocxBinary.test.js src/Modules/Paper-Generator/PaperEditor/tests/canonicalDocxMathAssets.test.js
+gate docx-browser-export node --test src/Modules/Paper-Generator/PaperEditor/tests/canonicalDocxBrowserAcceptance.test.js
+gate print-a4-a5 node --test src/Modules/Paper-Generator/PaperEditor/tests/printEngineA5Chromium.test.js src/Modules/Paper-Generator/PaperEditor/tests/printEnginePaperSize.test.js
 gate diary-lesson-browser node --test src/Modules/Paper-Generator/PaperEditor/tests/dailyDiaryWorkspaceBrowserAcceptance.test.js src/Modules/Paper-Generator/PaperEditor/tests/lessonPlanningWorkspaceBrowserAcceptance.test.js
 gate official-print-browser node --test src/Modules/Paper-Generator/PaperEditor/tests/unifiedWorkspaceOfficialBrowserAcceptance.test.js
 gate first-term-marks-browser node scripts/test-marks-entry-firstterm-browser.mjs
 gate paper-owned-eslint ./node_modules/.bin/eslint src/Modules/Paper-Generator --format json
 gate vite-build npm run build
-printf 'ALL_AUTOMATED_PAPER_CANDIDATE_GATES_PASS\n' | tee -a "$EVIDENCE/summary.txt"
+if [[ -z "${ASSPS_PAPER_QA_ONLY:-}" ]]; then
+  printf 'ALL_AUTOMATED_PAPER_CANDIDATE_GATES_PASS\n' | tee -a "$EVIDENCE/summary.txt"
+else
+  printf 'ONLY_SELECTED_GATES_PASS selection=%s\n' "$ASSPS_PAPER_QA_ONLY" | tee -a "$EVIDENCE/summary.txt"
+fi
 printf 'HOLD: genuine signed teacher+cross-tenant acceptance, physical Nastaleeq print/PDF/DOCX, Grade IX/X human approval, and SaaS Core network/deployment certification are outside this offline suite.\n' >> "$EVIDENCE/summary.txt"
