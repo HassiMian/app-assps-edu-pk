@@ -45,7 +45,9 @@ function execute(){
    {id:'all-source-academic-teacher-priority-worklist',exec:process.execPath,
     argv:['ops/qbank/build-grade910-one-faculty-quality-worklist.cjs','--write'],maxMs:240000},
    {id:'frozen-private-blind-faculty-review-readiness',exec:process.execPath,
-    argv:['ops/qbank/build-grade910-blind-faculty-packets.cjs'],maxMs:240000}]
+    argv:['ops/qbank/build-grade910-blind-faculty-packets.cjs'],maxMs:240000},
+   {id:'restricted-human-readable-private-faculty-validation',exec:process.execPath,
+    argv:['ops/qbank/attest-grade910-private-offline-faculty-readiness.cjs'],maxMs:240000}]
  for(const batch of [...bins,...x.batches]){
   const args=batch.argv||['--test','--test-concurrency=4',...batch.files]
   const p=cp.spawnSync(batch.exec||process.execPath,args,{cwd:ROOT,timeout:batch.maxMs||300000,encoding:'utf8',maxBuffer:32*1024*1024})
