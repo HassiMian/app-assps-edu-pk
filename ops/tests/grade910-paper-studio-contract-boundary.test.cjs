@@ -68,3 +68,18 @@ test('school adopted edition and original cross-grade Urdu source remain an expl
  assert.ok(cross.every(r=>r.sourceEvidenceObjectBytesIndependentlyVerifiedForQuestion===false))
  assert.equal(x.teacherVerifiedSelectable,0)
 })
+
+test('all 2581 research candidates retain official-link versus archive source distinction in approved-only handoff',()=>{
+ const x=read()
+ assert.equal(x.originalCandidateSourceRefsWithOfficialCatalogAnchorClaim,2377)
+ assert.equal(x.originalCandidateSourceRefsRecoveredFromArchiveNotExactOfficialLink,204)
+ assert.equal(x.authoringGradeSubjectChapterBucketsResearchOnly,396)
+ assert.equal(x.originalCandidateGradeOrChapterUnassigned,44)
+ const a=x.rows.filter(q=>q.originalSourceAcquisitionClass===
+  'ARCHIVE_RECOVERED_NOT_EXACT_OFFICIAL_ASSET_LINK')
+ assert.equal(a.length,204)
+ assert.ok(a.every(q=>q.paperStudioVerifiedSelectable===false))
+ assert.ok(a.every(q=>q.sourceOfficialCatalogProvenanceNotActualAdoption===true))
+ assert.ok(x.rows.every(q=>q.sourceOfficialCatalogProvenanceNotActualAdoption===true))
+ assert.equal(x.teacherVerifiedSelectable,0)
+})

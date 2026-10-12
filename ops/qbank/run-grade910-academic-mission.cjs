@@ -58,6 +58,10 @@ function execute(){
     argv:['ops/qbank/build-grade910-school-adoption-verification-matrix.cjs','--write'],maxMs:240000},
    {id:'restricted-academic-review-original-physical-evidence-store-integrity',exec:process.execPath,
     argv:['ops/qbank/verify-grade910-physical-evidence-objects.cjs'],maxMs:240000},
+   {id:'verified-pectaa-catalog-link-versus-archive-source-provenance',exec:process.execPath,
+    argv:['ops/qbank/audit-grade910-official-vs-archive-source-provenance.cjs','--write'],maxMs:240000},
+   {id:'all-2581-original-grade-subject-chapter-assessment-depth-evidence',exec:process.execPath,
+    argv:['ops/qbank/audit-grade910-original-assessment-depth.cjs','--write'],maxMs:240000},
    {id:'paper-studio-approved-only-original-revision-contract',exec:process.execPath,
     argv:['ops/qbank/attest-grade910-paper-studio-publisher-boundary.cjs','--write'],maxMs:240000}]
  for(const batch of [...bins,...x.batches]){
