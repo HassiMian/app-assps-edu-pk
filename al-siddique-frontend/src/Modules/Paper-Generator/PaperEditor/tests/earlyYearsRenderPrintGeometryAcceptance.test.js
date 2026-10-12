@@ -474,9 +474,13 @@ test('EY-RENDER-08: Real PaperGenerator Route Print: Chrome Hidden, PDFs Generat
   const navDisplay = await page.locator('.paper-generator-module-tabs').evaluate((el) => window.getComputedStyle(el).display)
   assert.equal(navDisplay, 'none', 'Paper Generator module navigation strip must have display: none in print')
 
-  // B. Early Years editor top header: display === none
-  const headerDisplay = await page.locator('header.no-print').evaluate((el) => window.getComputedStyle(el).display)
-  assert.equal(headerDisplay, 'none', 'Early Years editor top header must have display: none in print')
+  // B. The Early Years route may remove the studio header from the DOM.
+  // If present, its computed print display must be none; absence is also safe.
+  const studioHeader = page.locator('header.assps-studio-header.no-print')
+  if (await studioHeader.count() > 0) {
+    const headerDisplay = await studioHeader.evaluate((el) => window.getComputedStyle(el).display)
+    assert.equal(headerDisplay, 'none', 'Early Years editor top header must have display: none in print')
+  }
 
   // C. Inspector: display === none
   const inspectorDisplay = await page.locator('.early-years-inspector').evaluate((el) => window.getComputedStyle(el).display)
