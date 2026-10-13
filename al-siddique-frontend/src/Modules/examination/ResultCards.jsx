@@ -14,7 +14,7 @@ import { C, card, btnPrimary, btnSecondary, select, sectionHeader } from '../mod
 import {
   ResultCardPreview, ResultCardPrintToolbar, ResultCardTemplateSelector,
 } from './premiumResultCardTemplates'
-import {DEFAULT_RESULT_OPTIONS, buildResultCardData} from './premiumResultCardData'
+import {DEFAULT_RESULT_OPTIONS, buildResultCardData, PREMIUM_IDS} from './premiumResultCardData'
 import {openResultPrintWindow, resultCardPrintCss} from './premiumResultCardPrint'
 
 function gradeLabel(pct, bands = []) {
@@ -45,10 +45,20 @@ export function ProfessionalParametersModal({ cards, student, exam, studentMarks
   const dataList = sourceCards
     .filter(item => item?.student && item?.exam && item?.studentMarks?.length)
     .map(item => buildResultCardData({ ...item, options: { ...options, gradeBands }, school }))
+  const hasNonScoredStatus = sourceCards.some(item => (item.studentMarks || []).some(row => {
+    const status = String(row?.result_status ?? row?.exam_result_status ?? '').trim().toUpperCase()
+    return status && status !== 'SCORED'
+  }))
   const data = dataList[0]
   const batchInfo = summarizePrintBatch(dataList)
   const printBatch = (pdf = false) => {
     if (!dataList.length) { window.alert('No result cards are ready for printing.'); return }
+    // Protected legacy templates do not understand AB/EX/Pending. Never let
+    // them print an absent subject as zero or a numeric failed grade.
+    if (hasNonScoredStatus && !PREMIUM_IDS.has(options.template)) {
+      window.alert('This result includes AB / EX / Pending. Select a premium result template that preserves subject status before printing.')
+      return
+    }
     if (batchInfo.absentLogo) { window.alert(`${batchInfo.absentLogo} result card(s) have no school logo configured. Set the correct logo in SaaS School/Paper Settings before printing.`); return }
     if (batchInfo.missingStudent || batchInfo.missingSubject) { window.alert('A student identity or subject name is missing from the authenticated result records. Verify the saved records before printing.'); return }
     if (batchInfo.unscoredCards) { window.alert(`${batchInfo.unscoredCards} result card(s) have no recorded complete subject marks. Enter actual student marks first; blank worksheets can be printed from Marks Sheet without inventing result grades.`); return }

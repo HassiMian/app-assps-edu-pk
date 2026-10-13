@@ -5,6 +5,8 @@ const { protect, requireRoles, requireScopeForServiceOnly, hasServiceScope } = r
 const { tenantClause, currentSchoolId, hasColumn } = require('../middleware/tenant')
 const { isTeacher, validateTeacherMarksWrite, teacherResultReadScope } = require('../services/examMarksTeacherScope')
 const { parseExactMarksNumber } = require('../services/examMarksInputValidation')
+const { validatePaperMaxima } = require('../services/examMarksSubjectMaximum')
+const { validateResultState } = require('../services/examResultStatus')
 
 const canManageExams = requireRoles('super_admin', 'admin', 'principal')
 const canWriteMarks = requireRoles('super_admin', 'admin', 'principal', 'teacher')
@@ -295,12 +297,20 @@ router.post('/results', protect, canWriteMarks, async (req, res) => {
     const examId = Number(row?.exam_id)
     const studentId = Number(row?.student_id)
     const subject = String(row?.subject || '').trim().slice(0, 160)
-    const marksObtained = parseExactMarksNumber(row?.marks_obtained)
+    const parsedState = validateResultState(row, req.user?.role)
+    if (parsedState.error) {
+      return res.status(parsedState.error === 'EXCUSED_REQUIRES_PRINCIPAL' ? 403 : 422)
+        .json({success:false,code:parsedState.error,
+          message:'Exam subject status and numeric marks are inconsistent or unauthorized.'})
+    }
+    const marksObtained = parsedState.marks
     const totalMarks = parseExactMarksNumber(row?.total_marks)
     if (!Number.isInteger(examId) || examId <= 0 || !Number.isInteger(studentId) || studentId <= 0 || !subject) {
       return res.status(422).json({ success: false, message: 'Valid exam_id, student_id and subject are required for every result.' })
     }
-    if (!Number.isFinite(marksObtained) || !Number.isFinite(totalMarks) || totalMarks <= 0 || marksObtained < 0 || marksObtained > totalMarks) {
+    if (!Number.isFinite(totalMarks) || totalMarks <= 0 ||
+        (parsedState.status === 'SCORED' &&
+        (!Number.isFinite(marksObtained) || marksObtained < 0 || marksObtained > totalMarks))) {
       return res.status(422).json({ success: false, message: 'Marks must be numeric, total marks must be greater than zero, and obtained marks cannot exceed total marks.' })
     }
     normalized.push({
@@ -309,7 +319,8 @@ router.post('/results', protect, canWriteMarks, async (req, res) => {
       subject,
       marksObtained,
       totalMarks,
-      grade: gradeFromBands(marksObtained, totalMarks, gradeBands),
+      resultStatus:parsedState.status,
+      grade:parsedState.status === 'SCORED' ? gradeFromBands(marksObtained, totalMarks, gradeBands) : null,
     })
   }
 
@@ -355,17 +366,42 @@ router.post('/results', protect, canWriteMarks, async (req, res) => {
       }
     }
 
+    // A school-published subject catalog, not the exam's general 100-mark
+    // ceiling, must authorize every teacher write and every Exam 9 write.
+    // Check within the same transaction to prevent TOCTOU catalog drift.
+    if (isTeacher(req) || normalized.some(row => row.examId === 9)) {
+      const offerings = await client.query(`
+        SELECT x.exam_id, x.school_id, x.class_name, x.section, x.subject,
+          x.total_marks, x.is_active, x.approval_status, x.approval_revision,
+          x.approved_by_user_id, x.approved_at,
+          (u.id IS NOT NULL AND u.is_active=true AND u.school_id=x.school_id
+           AND u.role IN ('principal','admin')) AS reviewer_valid
+        FROM exam_subjects x
+        LEFT JOIN users u ON u.id=x.approved_by_user_id
+        WHERE x.school_id = $1 AND x.exam_id = ANY($2::int[]) AND x.is_active = true
+      `, [schoolId, examIds])
+      const guardedRows = normalized.filter(row => isTeacher(req) || row.examId === 9)
+      if (!validatePaperMaxima({
+        schoolId, results:guardedRows, students:studentScope.rows, offerings:offerings.rows
+      })) {
+        await client.query('ROLLBACK')
+        return res.status(422).json({success:false,code:'EXAM_SUBJECT_MAXIMUM_NOT_APPROVED',
+          message:'A unique approved class/section/subject maximum is required. Existing results were not changed.'})
+      }
+    }
+
     for (const row of normalized) {
       await client.query(`
-        INSERT INTO exam_results (school_id, exam_id, student_id, subject, marks_obtained, total_marks, grade)
-        VALUES ($1,$2,$3,$4,$5,$6,$7)
+        INSERT INTO exam_results (school_id, exam_id, student_id, subject, marks_obtained, total_marks, grade, result_status)
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
         ON CONFLICT (exam_id, student_id, subject)
         DO UPDATE SET
           school_id = EXCLUDED.school_id,
           marks_obtained = EXCLUDED.marks_obtained,
           total_marks = EXCLUDED.total_marks,
-          grade = EXCLUDED.grade
-      `, [schoolId, row.examId, row.studentId, row.subject, row.marksObtained, row.totalMarks, row.grade])
+          grade = EXCLUDED.grade,
+          result_status = EXCLUDED.result_status
+      `, [schoolId, row.examId, row.studentId, row.subject, row.marksObtained, row.totalMarks, row.grade, row.resultStatus])
     }
     await client.query('COMMIT')
     return res.json({ success: true, savedCount: normalized.length, message: 'Results saved successfully.' })

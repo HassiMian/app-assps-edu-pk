@@ -52,6 +52,7 @@ test('actual numeric zero allowed; missing, blank, false and invalid marks do no
  assert.equal(parseExactMarksNumber('25.5'),25.5)
  for(const value of [null,undefined,'','  ',false,true,{},[],Number.NaN,Infinity,'absent','1e100'])
   assert.ok(Number.isNaN(parseExactMarksNumber(value)),String(value))
- assert.match(routes,/parseExactMarksNumber\(row\?\.marks_obtained\)/)
+ assert.match(routes,/validateResultState\(row, req.user\?\.role\)/)
+ assert.match(fs.readFileSync(path.join(__dirname,'../services/examResultStatus.js'),'utf8'),/parseExactMarksNumber\(raw\)/)
  assert.match(routes,/parseExactMarksNumber\(row\?\.total_marks\)/)
 })

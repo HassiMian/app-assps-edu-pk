@@ -1,4 +1,5 @@
 import { resolveResultStudentClass } from './resultStudentIdentity.js'
+import { interpretSubjectResult } from './resultSubjectState.js'
 import { inferExamTermKey, resolveResultPrintOptions } from './resultPrintPlanning'
 import { RESULT_TEMPLATES as LEGACY_TEMPLATES, DEFAULT_RESULT_OPTIONS, buildResultCardData as legacyBuilder } from './resultCardTemplates'
 
@@ -46,6 +47,7 @@ function buildPremiumResultCardData({ student, exam, studentMarks, options, scho
  const activeTerms = termFields.filter(([key]) => opts[key])
  const slot = currentTermField(exam)
  const subjects = (studentMarks || []).map((row) => {
+ const resultState = interpretSubjectResult(row)
  const rawTotal = row.total_marks ?? exam?.total_marks
  const perTermTotal = rawTotal === null || rawTotal === undefined || rawTotal === '' || !Number.isFinite(Number(rawTotal)) || Number(rawTotal) <= 0 ? null : Number(rawTotal)
  const subject = {
@@ -66,14 +68,23 @@ function buildPremiumResultCardData({ student, exam, studentMarks, options, scho
  const storedCurrentTerm = perTermTotal !== null && currentRaw !== null && currentRaw >= 0 && currentRaw <= perTermTotal ? currentRaw : null
  if (subject[slot] === null && activeTerms.some(([, field]) => field === slot)) subject[slot] = storedCurrentTerm
  const selectedMarks = activeTerms.map(([, field]) => subject[field]).filter(v => v !== null)
- const hasMarks = selectedMarks.length > 0 || (activeTerms.length === 0 && storedCurrentTerm !== null)
- const isComplete = perTermTotal !== null && (activeTerms.length ? selectedMarks.length === activeTerms.length : storedCurrentTerm !== null)
+ // Older approved term-by-term records may legitimately have term slots
+ // without a separate marks_obtained field. Preserve that historical format
+ // while never overriding an EXPLICIT AB/EX/Pending status with a mark.
+ const explicitlyStated = row.result_status != null && row.result_status !== '' ||
+   row.exam_result_status != null && row.exam_result_status !== ''
+ const validStatus = resultState.status === 'SCORED' || (!explicitlyStated && selectedMarks.length > 0)
+ const inconsistent = resultState.status === 'INVALID' || (explicitlyStated && !validStatus && selectedMarks.length > 0)
+ const hasMarks = validStatus && !inconsistent && (selectedMarks.length > 0 || (activeTerms.length === 0 && storedCurrentTerm !== null))
+ const isComplete = hasMarks && perTermTotal !== null && (activeTerms.length ? selectedMarks.length === activeTerms.length : storedCurrentTerm !== null)
  const obtainedMarks = selectedMarks.length ? selectedMarks.reduce((sum, value) => sum + value, 0) : (activeTerms.length === 0 ? (storedCurrentTerm ?? 0) : 0)
  const totalMarks = perTermTotal === null ? 0 : ((activeTerms.length || 1) * perTermTotal)
  const rawPercentage = isComplete && totalMarks > 0 ? (obtainedMarks / totalMarks) * 100 : null
  const percentage = rawPercentage === null ? null : Math.round(rawPercentage * 10) / 10
  return {
  ...subject,
+ resultStatus:inconsistent ? 'INVALID' : validStatus ? 'SCORED' : resultState.status,
+ displayMarks: inconsistent ? '—' : validStatus ? (hasMarks ? String(obtainedMarks) : '—') : resultState.label,
  totalMarks,
  obtainedMarks: hasMarks ? obtainedMarks : null,
  hasMarks,
@@ -81,7 +92,10 @@ function buildPremiumResultCardData({ student, exam, studentMarks, options, scho
  pending: !isComplete,
  percentage,
  grade: rawPercentage === null ? '—' : (gradeLabel(rawPercentage, opts.gradeBands) || '—'),
- remarks: row.remarks || (!isComplete ? 'Pending marks' : ''),
+ remarks: row.remarks || (inconsistent ? 'Invalid examination result' :
+   resultState.status === 'ABSENT' ? 'Absent from examination' :
+   resultState.status === 'EXCUSED' ? 'Approved deferral' :
+   !isComplete ? 'Pending marks' : ''),
  }
  })
 

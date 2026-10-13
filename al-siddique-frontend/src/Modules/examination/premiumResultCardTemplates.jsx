@@ -56,7 +56,7 @@ function PremiumMarksTable({ data }) {
  <td>{row.subjectName}</td>
  {activeTerms.map(([, field]) => <td key={field}>{row[field] ?? '—'}</td>)}
  <td>{row.totalMarks > 0 ? row.totalMarks : '—'}</td>
- <td>{row.obtainedMarks ?? '—'}</td>
+ <td>{row.displayMarks ?? row.obtainedMarks ?? '—'}</td>
  <td>{row.percentage === null ? '—' : row.percentage + '%'}</td>
  <td><b>{row.grade}</b></td>
  <td>{row.remarks}</td>

@@ -13,12 +13,14 @@ test('actual examRoutes enforces assignment scoped reads and transactional write
   let actor={role:'teacher',id:77,school_id:21}
   let assignments=[{school_id:21,teacher_user_id:77,class_name:'One',section:'A',subject:'English',is_active:true}]
   const students=[{id:101,class:'One',section:'A'}]
+  let publishedOfferings=[{exam_id:9,school_id:21,class_name:'One',section:'A',subject:'English',total_marks:100,is_active:true,approval_status:'approved',approval_revision:1,approved_by_user_id:90,approved_at:'2026-10-13T17:00:00Z',reviewer_valid:true}]
   const exams=[{id:9,class:'All Classes'}]
   const transaction={writes:0,commits:0,rollbacks:0}
   const client={
     async query(sql,params=[]){
       queries.push({sql:String(sql),params})
       if (sql.includes('FROM teacher_class_assignments'))return {rows:assignments}
+      if (sql.includes('FROM exam_subjects'))return {rows:publishedOfferings}
       if (sql.includes('FROM students WHERE school_id'))return {rows:students}
       if (sql.includes('FROM exams WHERE school_id'))return {rows:exams}
       if (sql.includes('INSERT INTO exam_results')) {transaction.writes++;return {rowCount:1}}
@@ -131,6 +133,51 @@ test('actual examRoutes enforces assignment scoped reads and transactional write
   assert.equal(transaction.writes,1)
   assert.equal(transaction.commits,1)
   console.log('REAL_EXPRESS_HTTP_PASS assigned teacher authorized mark committed')
+  // Official maximum is not the general exam maximum; no guessed paper limit.
+  let beforeProtected=transaction.writes
+  reply=await request('POST','/api/exams/results',{results:[{...payload.results[0],marks_obtained:24,total_marks:25}]})
+  assert.equal(reply.status,422)
+  assert.equal(reply.data.code,'EXAM_SUBJECT_MAXIMUM_NOT_APPROVED')
+  assert.equal(transaction.writes,beforeProtected)
+  publishedOfferings=[]
+  reply=await request('POST','/api/exams/results',payload)
+  assert.equal(reply.status,422)
+  assert.equal(reply.data.code,'EXAM_SUBJECT_MAXIMUM_NOT_APPROVED')
+  assert.equal(transaction.writes,beforeProtected)
+  publishedOfferings=[{exam_id:9,school_id:21,class_name:'One',section:'A',subject:'English',total_marks:100,is_active:true,approval_status:'pending',approval_revision:1,approved_by_user_id:90,approved_at:'2026-10-13T17:00:00Z',reviewer_valid:true}]
+  reply=await request('POST','/api/exams/results',payload)
+  assert.equal(reply.status,422,'unapproved school subject must not be writable')
+  assert.equal(reply.data.code,'EXAM_SUBJECT_MAXIMUM_NOT_APPROVED')
+  assert.equal(transaction.writes,beforeProtected)
+  publishedOfferings=[{...publishedOfferings[0],approval_status:'approved',reviewer_valid:false}]
+  reply=await request('POST','/api/exams/results',payload)
+  assert.equal(reply.status,422,'forged or inactive reviewer approval must fail')
+  publishedOfferings=[{...publishedOfferings[0],approval_status:'approved',reviewer_valid:true}]
+  reply=await request('POST','/api/exams/results',{results:[{...payload.results[0],marks_obtained:false}]})
+  assert.equal(reply.status,422,'boolean false must not be silently converted to zero')
+  reply=await request('POST','/api/exams/results',{results:[{...payload.results[0],marks_obtained:null}]})
+  assert.equal(reply.status,422)
+  assert.equal(reply.data.code,'EXAM_MARKS_UNMARKED_NOT_ZERO')
+  reply=await request('POST','/api/exams/results',{results:[{...payload.results[0],marks_obtained:''}]})
+  assert.equal(reply.status,422)
+  assert.equal(reply.data.code,'EXAM_MARKS_UNMARKED_NOT_ZERO')
+  assert.equal(transaction.writes,beforeProtected)
+  console.log('REAL_EXPRESS_HTTP_PASS absent/pending never converted to zero; unapproved paper maximum denies save')
+  reply=await request('POST','/api/exams/results',{results:[{
+    ...payload.results[0],result_status:'ABSENT',marks_obtained:null
+  }]})
+  assert.equal(reply.status,200,JSON.stringify(reply))
+  const absentWrite=queries.filter(q=>q.sql.includes('INSERT INTO exam_results')).at(-1)
+  assert.equal(absentWrite.params[4],null,'absent mark must persist NULL, not numeric 0')
+  assert.equal(absentWrite.params[6],null,'absent grade must be NULL')
+  assert.equal(absentWrite.params[7],'ABSENT')
+  reply=await request('POST','/api/exams/results',{results:[{
+    ...payload.results[0],result_status:'EXCUSED',marks_obtained:null
+  }]})
+  assert.equal(reply.status,403,'teacher may not approve excused absence')
+  console.log('REAL_EXPRESS_HTTP_PASS teacher explicit AB numeric-null persisted; EX requires principal')
+
+
 
   const rejects=[
     [{...assignments[0],subject:'Urdu'},'subject'],
@@ -148,7 +195,7 @@ test('actual examRoutes enforces assignment scoped reads and transactional write
     assert.equal(reply.data.code,'EXAM_MARKS_TEACHER_ASSIGNMENT_REQUIRED',label)
     assert.equal(transaction.writes,before,'write must not happen '+label)
   }
-  assert.equal(transaction.rollbacks,6)
+  assert.ok(transaction.rollbacks>=6)
   console.log('REAL_EXPRESS_HTTP_PASS 6 forbidden teacher mark writes rejected before SQL UPSERT')
 
   actor={role:'teacher',id:77,school_id:22}
