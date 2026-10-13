@@ -10,6 +10,7 @@ const cors    = require('cors')
 const helmet  = require('helmet')
 const morgan  = require('morgan')
 const rateLimit = require('express-rate-limit')
+const { guardAuthAttempts } = require('./middleware/authRateLimitPolicy')
 const { query, tenantContext } = require('./config/database')
 const { migrate } = require('./config/migrate')
 const { migrateSubscriptionSchema } = require('./config/subscription_migrate')
@@ -212,7 +213,9 @@ const registerRoutes = (router) => {
 const apiRouter = express.Router()
 registerRoutes(apiRouter)
 
-app.use(['/api/auth', '/api/admin/auth'], authLimiter)
+// Read-only signed-session introspection must never consume the strict login-attempt
+// allowance. Authenticated GET /me still runs the standard auth protection.
+app.use(['/api/auth', '/api/admin/auth'], guardAuthAttempts(authLimiter))
 app.use('/api', apiRouter)
 app.use('/api/admin', apiRouter) // Alias for Super App
 // ─── 404 Handler ──────────────────────────────────────────────────────────────
