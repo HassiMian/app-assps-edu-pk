@@ -37,6 +37,13 @@ function inspectClaim(x,source,evidenceDir){
      x.boardExamYearClaim<2026||x.boardExamYearClaim>2035||
      !SHA.test(String(x.schoolAdoptionEvidenceSha256||'')))
    fail('ADOPTED_BOOK_CLAIM_FIELDS_INCOMPLETE');
+  if(x.schoolSubjectClaim.trim().toLowerCase()!==source.subjectCatalogClaim.trim().toLowerCase())
+    fail('SOURCE_CATALOG_SUBJECT_MISMATCH');
+  const originalMedium=String(source.mediumCatalogClaim||'').trim().toLowerCase();
+  if(['english','urdu'].includes(originalMedium)&&x.schoolMediumClaim!==originalMedium)
+    fail('SOURCE_CATALOG_MEDIUM_MISMATCH');
+  if(x.boardExamYearClaim!==2027)fail('SCHOOL_2026_27_BOARD_EXAM_YEAR_MISMATCH');
+  // Missing original medium and cross-grade labels remain unresolved, not auto-certified.
   // Archived or cross-grade source labels cannot establish session/grade applicability.
   // An adoption claim with genuine evidence bytes stays UNAUTHENTICATED until real staff signing.
   if(!evidenceDir)fail('ACTUAL_PRIVATE_EVIDENCE_BYTES_REQUIRED');
@@ -47,6 +54,8 @@ function inspectClaim(x,source,evidenceDir){
  return {catalogId:source.catalogId,claimDisposition:x.claimDisposition,
   sourceResearchCandidateReferences:source.originalResearchCandidateCount,
   adoptionEvidenceBytesMatched:adopted,
+  originalCatalogGradeUnassigned:source.gradeCatalogClaim===0,
+  originalCatalogMediumUnspecified:!["English","Urdu"].includes(source.mediumCatalogClaim),
   realSchoolAdoptionAuthorityAuthenticated:false,
   independentTeacherApprovalAuthenticated:false,
   academicallyApproved:0,paperStudioVerifiedSelectable:false};

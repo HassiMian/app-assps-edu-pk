@@ -22,7 +22,7 @@ function fakeAdopted(objects){
   originalQuestionRevisionSetSha256:source.originalQuestionRevisionSetSha256,
   schoolSessionUnderReview:'2026-27',claimDisposition:'adopted',
   schoolGradeClaim:source.gradeCatalogClaim,schoolSubjectClaim:source.subjectCatalogClaim||'Test subject',
-  schoolMediumClaim:'english',schoolBookTitleClaim:'SYNTHETIC TEST BOOK',
+  schoolMediumClaim:String(source.mediumCatalogClaim).toLowerCase(),schoolBookTitleClaim:'SYNTHETIC TEST BOOK',
   schoolPrintedEditionClaim:'SYNTHETIC 2026-27',boardExamYearClaim:2027,
   schoolAdoptionEvidenceSha256:digest};
 }
@@ -44,6 +44,34 @@ test('source-locked claim with physically verified synthetic bytes stays researc
  assert.equal(r.schoolAdoptionCertificatesAuthenticated,0);
  assert.equal(r.paperStudioVerifiedSelectable,0);
  assert.equal(r.productionWrite,false);
+});
+test('source-catalog subject mismatch rejected even when evidence bytes match',t=>{
+ const {claims,objects}=setup(t),x=fakeAdopted(objects);
+ x.schoolSubjectClaim='NOT THE ORIGINAL SUBJECT';put(claims,x);
+ assert.throws(()=>mod.aggregate({claimDirectory:claims,evidenceDirectory:objects}),/SOURCE_CATALOG_SUBJECT_MISMATCH/);
+});
+test('source-catalog explicit language mismatch rejected',t=>{
+ const {claims,objects}=setup(t),x=fakeAdopted(objects);
+ x.schoolMediumClaim=source.mediumCatalogClaim==='English'?'urdu':'english';put(claims,x);
+ assert.throws(()=>mod.aggregate({claimDirectory:claims,evidenceDirectory:objects}),/SOURCE_CATALOG_MEDIUM_MISMATCH/);
+});
+test('old annual-exam 2026 year cannot automatically authorize school 2026-27 board claim',t=>{
+ const {claims,objects}=setup(t),x=fakeAdopted(objects);
+ x.boardExamYearClaim=2026;put(claims,x);
+ assert.throws(()=>mod.aggregate({claimDirectory:claims,evidenceDirectory:objects}),/SCHOOL_2026_27_BOARD_EXAM_YEAR_MISMATCH/);
+});
+test('catalog shared-grade Urdu references stay visibly grade-unassigned',t=>{
+ const shared=books.build().rows.find(x=>x.gradeCatalogClaim===0&&x.originalResearchCandidateCount>0);
+ assert.equal(shared.catalogId,'pectaa-catalog-107');
+ const {objects}=setup(t),x=fakeAdopted(objects);
+ x.sourceCatalogRecordId=shared.catalogId;
+ x.sourceCatalogPdfSha256=shared.sourcePdfSha256;
+ x.originalQuestionRevisionSetSha256=shared.originalQuestionRevisionSetSha256;
+ x.schoolSubjectClaim=shared.subjectCatalogClaim;x.schoolMediumClaim='urdu';
+ const r=mod.inspectClaim(x,shared,objects);
+ assert.equal(r.originalCatalogGradeUnassigned,true);
+ assert.equal(r.realSchoolAdoptionAuthorityAuthenticated,false);
+ assert.equal(r.academicallyApproved,0);
 });
 test('tampered private evidence bytes rejected',t=>{
  const {claims,objects}=setup(t),x=fakeAdopted(objects);
