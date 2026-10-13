@@ -35,6 +35,10 @@ class RunnerContract(unittest.TestCase):
  def test_hardened_recovery_candidate_cannot_replace_live_release(self):
   self.assertIn('run_gate hardened_recovery_candidate',s)
   self.assertTrue(s.rstrip().endswith('exit 2'))
+ def test_hostinger100gb_provider_allocation_mandatory(self):
+  self.assertIn('run_gate hostinger_100gb_disk',s)
+ def test_paper_global_owner_and_legacy_db_login_independent_hold(self):
+  self.assertIn('run_gate legacy_paper_global_role',s)
  def test_mutating_prod_migration_not_invoked(self):
   self.assertNotIn('pg_restore -c',s)
   self.assertNotIn('ALTER ROLE apexos_user',s)

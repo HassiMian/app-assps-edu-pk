@@ -104,6 +104,8 @@ run_gate fresh_backup_chain python3 "$OPS/core-infrastructure/verify-fresh-core-
 run_gate restored_acl_readiness python3 "$OPS/core-infrastructure/verify-fresh-restore-acl-parity-20261012.py"
 run_gate restored_global_roles python3 "$OPS/core-infrastructure/verify-fresh-restore-global-roles-20261012.py"
 run_gate hardened_recovery_candidate python3 "$OPS/core-infrastructure/verify-safe-core-recovery-candidate-20261012.py"
+run_gate hostinger_100gb_disk python3 "$OPS/core-infrastructure/hostinger-100gb-capacity-preflight-20261013.py"
+run_gate legacy_paper_global_role python3 "$OPS/core-infrastructure/verify-legacy-role-paper-boundary-20261013.py"
 # The Core/Paper forward-port is verified as an independently sourced gate.
 # Its clean-worktree requirement intentionally HOLDs during uncommitted edits.
 run_gate paper_core_forwardport python3 "$OPS/core-infrastructure/verify-paper-core-forwardport-boundary-20261012.py"
