@@ -114,10 +114,14 @@ def main():
                 # Actual production has a legacy BYPASS role. The disposable clone
                 # does not; materialize an equivalent NOLOGIN negative target ONLY
                 # here to prove restricted login cannot SET ROLE to BYPASSRLS.
-                if sql("SELECT count(*) FROM pg_roles WHERE rolname='apexos_user'")!='0':
-                    raise RuntimeError('Clone legacy role unexpectedly already exists')
-                sql('CREATE ROLE apexos_user NOLOGIN BYPASSRLS')
+                # Clone may already contain a nonprivileged legacy compatibility role.
+                # Test a freshly named BYPASSRLS negative target without changing it.
+                if sql("SELECT count(*) FROM pg_roles WHERE rolname='assps_clone_bypass_negative'")!='0':
+                    raise RuntimeError('Disposable negative role collision')
+                sql('CREATE ROLE assps_clone_bypass_negative NOLOGIN BYPASSRLS')
                 temporary_legacy_role=True
+                if sql("SELECT pg_has_role('assps_core_test_login','assps_clone_bypass_negative','MEMBER')::int")!='0':
+                    raise RuntimeError('Restricted login can inherit negative BYPASS role')
             env=os.environ.copy()
             env.update({
                 'DB_HOST':'127.0.0.1','DB_PORT':PORT,'DB_NAME':DB,'DB_USER':ROLE,
@@ -165,8 +169,8 @@ def main():
                     sql('REVOKE SELECT ON TABLE '+','.join('public.'+t for t in grant_tables)+' FROM apex_app_runtime')
                     print('DISPOSABLE_'+args.suite.upper()+'_CLONE_ONLY_GRANTS_REVOKED',flush=True)
                 if temporary_legacy_role:
-                    sql('DROP ROLE apexos_user')
-                    print('TEMPORARY_CLONE_ONLY_LEGACY_BYPASS_NEGATIVE_TARGET_DROPPED',flush=True)
+                    sql('DROP ROLE assps_clone_bypass_negative')
+                    print('TEMPORARY_CLONE_ONLY_BYPASS_NEGATIVE_TARGET_DROPPED',flush=True)
             finally:
                 sql('ALTER ROLE '+ROLE+' PASSWORD NULL')
                 if sql("SELECT (rolpassword IS NULL)::int FROM pg_authid WHERE rolname='"+ROLE+"'")!='1':
