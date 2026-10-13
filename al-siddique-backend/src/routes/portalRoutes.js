@@ -353,6 +353,18 @@ router.get('/timetable', protect, async (req, res) => {
 router.get('/teaching-options', protect, async (req, res) => {
   try {
     const schoolId = currentSchoolId(req)
+    if (String(req.user?.role || '').toLowerCase() === 'teacher') {
+      const { ensureTeacherAssignmentSchema, getTeacherAssignments } = require('../services/teacherAssignmentService')
+      const { buildTeacherTeachingOptions } = require('../services/teacherTeachingOptions')
+      await ensureTeacherAssignmentSchema()
+      const assignmentRows = await getTeacherAssignments({ schoolId, teacherUserId: req.user?.id })
+      const classes = buildTeacherTeachingOptions(assignmentRows, schoolId, req.user?.id)
+      return res.json({
+        success: true,
+        assignment_required: classes.length === 0,
+        data: { classes, timezone: 'Asia/Karachi' },
+      })
+    }
     const result = await query(`
       SELECT class, section
       FROM students

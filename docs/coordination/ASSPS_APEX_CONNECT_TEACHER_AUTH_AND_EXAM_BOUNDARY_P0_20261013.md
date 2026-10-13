@@ -1,0 +1,26 @@
+# ASSPS — Scoped Core backend remedy for APEX Teacher P0
+13 Oct 2026. Governance: GitHub Issue #4. SaaS Core is the ONLY production deployment and tenant-security authority; Connect Master owns Next frontend.
+
+## Root cause and architecture
+1. APEX Connect Next authentication and legacy Express auth are separate boundaries. Earlier Connect proxy checked Next-issued cookies against Express /auth/me. Express global auth-attempt rate limit 10/15 min applied to every /api/auth call including GET /me: real 429, causing redirects. Existing isolated Core middleware (parent 22dbd5cd) excludes ONLY GET/HEAD /me from strict login attempt bucket and retains general limiter and all authentication checks. Connect must self-verify its own issued session; Core hotfix by itself is not sufficient.
+2. SaaS Employee Management is account authority. Teacher assigned school_id does NOT mean school_admin. Connect owner login candidate 7772755 accepts username or email, enforces DB role and no login DDL. New Connect child a4135d8 adds local Next canonical session check, no DDL in introspection, first-password-change guard and existing-exam-only marks UI. Do not use outdated versions.
+3. Core legacy /portal/teaching-options previously returned all student classes to any protected teacher; this leaks choices and misleads teachers into thinking they are assigned. **Fix here**: teacher reads ONLY authenticated school+teacher's teacher_class_assignments with explicit class, section and nonempty subject, grouped/deduplicated; zero mappings return assignment_required:true with empty classes. Admin behavior unchanged.
+4. GET /api/exams previously included every exam in the school for teachers. **Fix here**: visible teacher exams are filtered to the teacher's active assigned classes (including official All Classes exam only IF there is at least one valid teacher assignment). Existing Core protected POST /api/exams/results already has validateTeacherMarksWrite on both student and assigned class/section/subject; GET result reads use teacherResultReadScope SQL. Reuse these audited guards; do not rewrite them or relax them for the marks deadline.
+5. Official Exam ID9 ALREADY contains 301 results, 87 students, 6 subjects and 36 recorded zeros; preserving these records is mandatory. Legacy Teacher UI created a new exam during Save; Connect child eliminates POST new-exam from marks flow, selects existing exact exam and requires read-back after write.
+6. All 19 active teacher-role accounts are school+tenant-bound; 18 require first temporary password change; 18 have usernames. Zero valid teacher_class_assignments, and timetable zero. No teacher permissions can be inferred from old schedules or roles alone. Principal must approve and insert assignments through authorized school operations.
+
+## Verified source-level execution
+- Isolated Core branch fix/core-auth-me-rate-limit-loop-20261013, original source based on ac5275fce89c4831a6b84fa7b18b171535151b62. No dirty owner release checkout modified.
+- New services/teacherTeachingOptions.js and unit tests; new teacher-specific conditional in portalRoutes.js; teacher-specific exam catalog filter in examRoutes.js; one existing mock HTTP test updated to exercise zero-assignment fail-closed.
+- Existing login rate limiter regression tests preserved, including real ephemeral Express network GET /me x26 without exhausting POST login quota.
+- Targeted Core test suites PASS: 14/14, including real HTTP synthetic fixtures, teacher read/write isolation and HMAC tenant signed guards; Node syntax checks pass, diff --check clean. These tests do not issue a genuine school teacher session.
+- No production DB writes, role grants, school marks edits, PM2/Nginx restart, passwords or deployment.
+
+## Strict release acceptance, single controlled mission
+A. Connect Master reviews actual latest Connect source and both owner commits 7772755+a4135d8; genuine teacher enters correct Login ID in Login ID field (not the one-time password), current temporary password in Password field, performs mandatory reset. Rotate any previously exposed temp password privately with SaaS Secure Reset. Don't send passwords/tokens to external agents.
+B. SaaS Core reviews Core branch, composes exact latest green release with verified backup and rollback, confirms teacher-specific assignments only and no 403/429 regressions. Genuine Principal+Teacher JWT tests, same school allowed vs peer school denied; cookie flags and auth persist after refresh. Never give teacher SaaS admin roles.
+C. Authorized Principal maps actual classes/sections/subjects to verified teacher_user_ids. Before assignment, marks control returns NO assigned classes and no exams. Validate one real assigned class at a time.
+D. Staff marks existing school exam with exact verified exam_id, zero-vs-blank and section/student checks; POST transaction receipt and GET same exam read-back; Result Cards. Do not invent fake marks or create exam during Save.
+E. Only after above and Core full production security/rollback gates PASS may SaaS Core approve controlled cutover. Preserve old runtime as rollback. Otherwise explicit NO-GO.
+
+**Verdict:** CORE_AUTH_QA=PASS_SOURCE; TEACHER_OPTIONS_SCOPE=PASS_SOURCE; TEACHER_EXAM_SCOPE=PASS_SOURCE; REAL_ASSIGNMENTS=0/HOLD; REAL_CONNECT_LOGIN=PENDING; MARKS_E2E=PENDING; PROD_DEPLOYMENT=HOLD.

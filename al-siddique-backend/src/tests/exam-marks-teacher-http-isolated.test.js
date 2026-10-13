@@ -36,6 +36,7 @@ test('actual examRoutes enforces assignment scoped reads and transactional write
       if (sql.includes('to_regclass'))return {rows:[{table_name:'grade_settings'}]}
       if (sql.includes('FROM grade_settings'))return {rows:[{label:'A',min_percentage:0,max_percentage:100}]}
       if (sql.includes('SELECT * FROM exams WHERE 1=1'))return {rows:[{id:9,name:'First Term Exam',type:'TE',class:'All Classes',school_id:21}]}
+      if (sql.includes('FROM teacher_class_assignments'))return {rows:assignments}
       if (sql.includes('FROM exam_subjects'))return {rows:[
         {exam_id:9,class_name:'One',section:'Blue',subject:'English',sort_order:1},
         {exam_id:9,class_name:'One',section:'Yellow',subject:'English',sort_order:1},
@@ -99,6 +100,15 @@ test('actual examRoutes enforces assignment scoped reads and transactional write
   catalog = await request('GET','/api/exams')
   assert.equal(catalog.status,200)
   assert.equal('subject_offerings' in catalog.data.data[0],false,'unrelated exam consumers keep old response shape')
+  // An unassigned teacher must see NO official exams, even when the school
+  // has a broad 'All Classes' Exam 9 and historical marks saved.
+  const priorAssignments=assignments
+  assignments=[]
+  const unassignedCatalog=await request('GET','/api/exams')
+  assert.equal(unassignedCatalog.status,200)
+  assert.deepEqual(unassignedCatalog.data.data,[])
+  assignments=priorAssignments
+  console.log('REAL_EXPRESS_HTTP_PASS unassigned teacher cannot enumerate existing exam catalog')
   console.log('REAL_EXPRESS_HTTP_PASS optional signed school/section-specific First Term subject catalog')
   const payload={results:[{exam_id:9,student_id:101,subject:'English',marks_obtained:67,total_marks:100}]}
   let reply=await request('GET','/api/exams/results/9')

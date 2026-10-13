@@ -3,7 +3,7 @@ const router  = express.Router()
 const { pool, query, applyTenantContext } = require('../config/database')
 const { protect, requireRoles, requireScopeForServiceOnly, hasServiceScope } = require('../middleware/auth')
 const { tenantClause, currentSchoolId, hasColumn } = require('../middleware/tenant')
-const { isTeacher, validateTeacherMarksWrite, teacherResultReadScope } = require('../services/examMarksTeacherScope')
+const { isTeacher, examMatchesStudent, validateTeacherMarksWrite, teacherResultReadScope } = require('../services/examMarksTeacherScope')
 
 const canManageExams = requireRoles('super_admin', 'admin', 'principal', 'teacher')
 function canReadResults(req, res, next) {
@@ -148,10 +148,26 @@ router.get('/', protect, requireScopeForServiceOnly('school.results.read'), asyn
     const tenant = await tenantClause(req, { table: 'exams', paramIndex: 1 })
     sql += tenant.clause + ' ORDER BY created_at DESC'
     const result = await query(sql, tenant.params)
+    let visibleRows = result.rows
+    if (isTeacher(req)) {
+      const { buildTeacherTeachingOptions } = require('../services/teacherTeachingOptions')
+      const schoolId = Number(currentSchoolId(req))
+      const teacherId = Number(req.user?.id)
+      const assignmentResult = Number.isSafeInteger(schoolId) && schoolId > 0 &&
+        Number.isSafeInteger(teacherId) && teacherId > 0
+        ? await query(
+          'SELECT school_id, teacher_user_id, class_name, section, subject FROM teacher_class_assignments WHERE school_id=$1 AND teacher_user_id=$2 AND is_active=true',
+          [schoolId, teacherId])
+        : {rows:[]}
+      const assigned = buildTeacherTeachingOptions(assignmentResult.rows,schoolId,teacherId)
+      visibleRows = assigned.length
+        ? visibleRows.filter(exam => assigned.some(cls => examMatchesStudent(exam,{class:cls.class_name})))
+        : []
+    }
     // Optional authoritative class/section-specific exam subject catalog.
     // Existing clients continue receiving the original exam records. Results
     // stay school-scoped by BOTH the validated JWT and FORCE RLS policies.
-    if (req.query.include_subjects === '1' && result.rows.length) {
+    if (req.query.include_subjects === '1' && visibleRows.length) {
       const role = String(req.user?.role || '').toLowerCase()
       if (!['principal','admin','super_admin','teacher'].includes(role) &&
           !(req.user?.account_type === 'service' && hasServiceScope(req,'school.results.read'))) {
@@ -160,7 +176,7 @@ router.get('/', protect, requireScopeForServiceOnly('school.results.read'), asyn
       const schoolId = currentSchoolId(req)
       if (!Number.isSafeInteger(Number(schoolId)) || Number(schoolId) <= 0)
         return res.status(403).json({success:false,code:'EXAM_SUBJECT_CATALOG_SCHOOL_REQUIRED'})
-      const examIds = result.rows.map(row => Number(row.id))
+      const examIds = visibleRows.map(row => Number(row.id))
         .filter(id => Number.isSafeInteger(id) && id > 0)
       const offerings = examIds.length ? await query(`
         SELECT exam_id, class_name, section, subject, sort_order, total_marks, pass_marks
@@ -174,11 +190,11 @@ router.get('/', protect, requireScopeForServiceOnly('school.results.read'), asyn
         if (!byExam.has(key)) byExam.set(key, [])
         byExam.get(key).push(offering)
       }
-      return res.json({ success:true, data:result.rows.map(row => ({
+      return res.json({ success:true, data:visibleRows.map(row => ({
         ...row, subject_offerings:byExam.get(Number(row.id)) || []
       })) })
     }
-    res.json({ success: true, data: result.rows })
+    res.json({ success: true, data: visibleRows })
   } catch (err) {
     console.error('Exam list error:', err.message)
     return res.status(503).json({ success: false, message: 'Database unavailable. Exams could not be loaded.' })
