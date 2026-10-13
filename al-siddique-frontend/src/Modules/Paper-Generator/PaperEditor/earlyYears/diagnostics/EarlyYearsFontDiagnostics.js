@@ -1,45 +1,51 @@
-// EarlyYearsFontDiagnostics.js — Checks runtime font availability and reports fallback status
+// EarlyYearsFontDiagnostics.js — Conservative browser Jameel font readiness check
 import { TYPOGRAPHY_TOKENS } from '../tokens/typographyTokens.js'
 
-/**
- * Checks if Jameel Noori Nastaleeq is available in the browser runtime
+/*
+ * FontFaceSet.check() alone is not proof that a system font exists: browsers
+ * can return true when a CSS family is unknown and no webfont load is needed.
+ * Report JAMEEL_ACTIVE only if an actual declared Jameel face is LOADED and
+ * the font set check agrees. This does not replace PDF or physical signoff.
  */
 export function checkUrduFontAvailability() {
+  const fallback = {
+    jameelLoaded: false,
+    activeFamily: 'Noto Nastaliq Urdu',
+    cssFamily: TYPOGRAPHY_TOKENS.fontFamilies.urduPrimary,
+    fallbackActive: true,
+    fallbackVerified: false,
+    status: 'JAMEEL_UNVERIFIED',
+    warning: 'Jameel Noori Nastaleeq has not been confirmed as a loaded browser font. Urdu may use a fallback; verify the PDF embedded font and physical print before official use.'
+  }
+
   if (typeof document === 'undefined' || !document.fonts) {
-    return {
-      jameelLoaded: false,
-      activeFamily: 'Noto Nastaliq Urdu',
-      reason: 'Server/Node environment - document.fonts not available'
-    }
+    return { ...fallback, reason: 'Server/Node environment - document.fonts not available' }
   }
 
   try {
-    // Check if 'Jameel Noori Nastaleeq' is available in the browser font set
-    const isJameelAvailable = document.fonts.check("16px 'Jameel Noori Nastaleeq'")
+    const fontSet = document.fonts
+    if (typeof fontSet.check !== 'function' || typeof fontSet[Symbol.iterator] !== 'function') {
+      return { ...fallback, reason: 'Browser FontFaceSet lacks verifiable face inventory' }
+    }
 
-    if (isJameelAvailable) {
+    const declaredLoaded = Array.from(fontSet).some((face) => {
+      const name = String(face?.family ?? '').replace(/^['"]|['"]$/g, '').trim().toLowerCase()
+      return (name === 'jameel noori nastaleeq' || name === 'assps jameel noori') &&
+        face.status === 'loaded'
+    })
+    const fontCheck = fontSet.check("16px 'Jameel Noori Nastaleeq'", 'اردو')
+    if (declaredLoaded && fontCheck) {
       return {
         jameelLoaded: true,
         activeFamily: 'Jameel Noori Nastaleeq',
         cssFamily: TYPOGRAPHY_TOKENS.fontFamilies.urduPrimary,
-        status: 'JAMEEL_ACTIVE'
+        status: 'JAMEEL_FACE_LOADED',
+        physicalPrintVerified: false
       }
     }
 
-    return {
-      jameelLoaded: false,
-      activeFamily: 'Noto Nastaliq Urdu',
-      cssFamily: TYPOGRAPHY_TOKENS.fontFamilies.urduPrimary,
-      fallbackActive: true,
-      status: 'FALLBACK_NOTO',
-      warning: "Jameel Noori Nastaleeq is not installed locally; using verified fallback 'Noto Nastaliq Urdu'. Unlicensed font files are not automatically downloaded."
-    }
-  } catch (err) {
-    return {
-      jameelLoaded: false,
-      activeFamily: 'Noto Nastaliq Urdu',
-      status: 'FALLBACK_NOTO',
-      warning: `Font check error: ${err.message}`
-    }
+    return { ...fallback, reason: declaredLoaded ? 'FontFaceSet.check did not confirm Jameel' : 'No loaded Jameel FontFace declaration found' }
+  } catch (error) {
+    return { ...fallback, reason: 'FontFaceSet check failed', warning: `Font check failed (${error instanceof Error ? error.message : 'unknown error'}); verify the Urdu font and print output before use.` }
   }
 }
