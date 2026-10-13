@@ -22,8 +22,9 @@ def main():
   backup_ok=real in SHA.read_text() and (BACKUP.stat().st_mode&0o077)==0
  check('RECOVERY_BACKUP_HASH_AND_PERMISSIONS',backup_ok)
  check('PRODUCTION_DATABASE_IDENTITY',sql("SELECT current_database()||'|'||current_setting('port')")=='apexos|5432')
- check('PRODUCTION_PROTECTED_FORCE_RLS_77',sql("SELECT count(*) FROM pg_class c WHERE c.relnamespace='public'::regnamespace AND c.relkind='r' AND c.relforcerowsecurity")=='77')
- check('PRODUCTION_LEGACY_POLICY_212',sql("SELECT count(*) FROM pg_policies WHERE schemaname='public' AND policyname NOT IN ('core_signed_tenant_guard','core_signed_tenant_allow')")=='212')
+ check('PRODUCTION_PROTECTED_FORCE_RLS_77',sql("SELECT count(*) FROM pg_class c WHERE c.relnamespace='public'::regnamespace AND c.relkind='r' AND c.relforcerowsecurity")=='78')
+ check('PRODUCTION_LEGACY_POLICY_214',sql("SELECT count(*) FROM pg_policies WHERE schemaname='public' AND policyname NOT IN ('core_signed_tenant_guard','core_signed_tenant_allow')")=='214')
+ check('SEPARATE_STUDENT_MOVEMENT_AUDIT_RLS',sql("SELECT (c.relforcerowsecurity AND (SELECT count(*) FROM pg_policies p WHERE p.schemaname='public' AND p.tablename='student_class_movement_audit' AND p.policyname IN ('assps_audit_tenant_allow','assps_audit_tenant_guard'))=2)::int FROM pg_class c WHERE c.oid='public.student_class_movement_audit'::regclass")=='1')
  check('SIGNED_RESTRICTIVE_POLICIES_77',sql("SELECT count(*) FROM pg_policies WHERE policyname='core_signed_tenant_guard' AND roles=ARRAY['assps_marks_signed_runtime']::name[]")=='77')
  check('SIGNED_PERMISSIVE_POLICIES_77',sql("SELECT count(*) FROM pg_policies WHERE policyname='core_signed_tenant_allow' AND roles=ARRAY['assps_marks_signed_runtime']::name[]")=='77')
  check('SIGNED_PROTECTED_SCHEMA',sql("SELECT count(*) FROM pg_namespace WHERE nspname='core_security'")=='1')
