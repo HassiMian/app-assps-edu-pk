@@ -6,6 +6,7 @@ const router  = express.Router()
 const { query } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
+const { buildTeachingOptionsQuery } = require('../services/teacherTeachingOptionsScope')
 
 function toSafeDate(value) {
   const date = new Date(value)
@@ -353,13 +354,11 @@ router.get('/timetable', protect, async (req, res) => {
 router.get('/teaching-options', protect, async (req, res) => {
   try {
     const schoolId = currentSchoolId(req)
-    const result = await query(`
-      SELECT class, section
-      FROM students
-      WHERE school_id = $1 AND (is_active = true OR is_active IS NULL)
-      GROUP BY class, section
-      ORDER BY class::text ASC, section::text ASC
-    `, [schoolId])
+    const plan = buildTeachingOptionsQuery({
+      schoolId, role:req.user?.role, teacherId:req.user?.id, actorSchoolId:req.user?.school_id,
+    })
+    if (!plan) return res.status(403).json({success:false,code:'TEACHING_OPTIONS_ASSIGNMENT_SCOPE_REQUIRED'})
+    const result = await query(plan.sql, plan.params)
 
     const classes = result.rows
       .map(row => ({
