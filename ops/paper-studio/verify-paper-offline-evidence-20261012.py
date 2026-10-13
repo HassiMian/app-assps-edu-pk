@@ -38,7 +38,7 @@ def regular_bytes(path):
     return data
 
 
-def verify(directory, expected_commit):
+def verify(directory, expected_commit, expected_eslint_files=270):
     root = pathlib.Path(directory)
     if not root.is_dir() or root.is_symlink():
         raise ValueError("Evidence directory missing or symlinked")
@@ -75,8 +75,8 @@ def verify(directory, expected_commit):
             raise ValueError("Protected Result Card templates unverified")
         if gate == "paper-owned-eslint":
             raw = json.loads(body)
-            if not isinstance(raw, list) or len(raw) != 270:
-                raise ValueError("Expected exactly 270 Paper-owned ESLint file results")
+            if not isinstance(raw, list) or len(raw) != expected_eslint_files:
+                raise ValueError(f"Expected exactly {expected_eslint_files} Paper-owned ESLint file results")
             if sum(it.get("errorCount", 0) for it in raw) or sum(it.get("warningCount", 0) for it in raw) != 4:
                 raise ValueError("Paper ESLint must report 0 errors and 4 reviewed warnings")
         if gate == "vite-build" and not re.search(r"(?:built in|✓ built in)\s+[0-9.]+", body):
@@ -92,6 +92,7 @@ def verify(directory, expected_commit):
         "branch_at_capture": fields["source_branch"],
         "started_utc": fields["utc_started"],
         "gates": len(entries),
+        "eslint_files_expected": expected_eslint_files,
         "log_sha256": entries,
         "limitations": [
             "The original runner exit is evidenced by its completion marker, not an independent signed process receipt",
@@ -107,9 +108,12 @@ def main():
     p.add_argument("--evidence-dir", required=True)
     p.add_argument("--code-sha", required=True)
     p.add_argument("--output")
+    p.add_argument("--eslint-files", type=int, default=270, help="Exact reviewed Paper-owned ESLint file count (default legacy: 270)")
     a = p.parse_args()
     try:
-        report = verify(a.evidence_dir, a.code_sha)
+        if a.eslint_files < 270:
+            raise ValueError("ESLint audited-file count may not shrink below the protected baseline")
+        report = verify(a.evidence_dir, a.code_sha, a.eslint_files)
         content = json.dumps(report, indent=2) + "\n"
         if a.output:
             out = pathlib.Path(a.output)

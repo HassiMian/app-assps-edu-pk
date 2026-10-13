@@ -42,6 +42,15 @@ class TestEvidenceChecks(unittest.TestCase):
         result = module.verify(self.root, SHA)
         self.assertEqual(result["gates"], 16)
 
+    def test_added_paper_test_can_be_attested_with_explicit_count(self):
+        existing = json.loads((self.root / "paper-owned-eslint.log").read_text())
+        existing.append({"errorCount": 0, "warningCount": 0})
+        self.write("paper-owned-eslint.log", json.dumps(existing))
+        with self.assertRaisesRegex(ValueError, "Expected exactly 270"):
+            module.verify(self.root, SHA)
+        result = module.verify(self.root, SHA, 271)
+        self.assertEqual(result["eslint_files_expected"], 271)
+
     def test_wrong_commit_refused(self):
         with self.assertRaisesRegex(ValueError, "SHA differs"):
             module.verify(self.root, "b" * 40)
