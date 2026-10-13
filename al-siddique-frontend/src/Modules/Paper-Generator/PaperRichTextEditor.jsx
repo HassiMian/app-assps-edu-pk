@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { TextStyle } from '@tiptap/extension-text-style'
@@ -81,7 +81,7 @@ function cleanNode(node, depth = 0) {
   return { type: node.type, ...(Object.keys(attrs).length ? { attrs } : {}), ...(children.length ? { content: children } : {}) }
 }
 
-export function sanitizePaperRichText(value) {
+function sanitizePaperRichText(value) {
   if (!value || value.type !== 'doc' || !Array.isArray(value.content)) return null
   const doc = cleanNode(value)
   return doc?.content?.length ? doc : { type: 'doc', content: [{ type: 'paragraph' }] }
@@ -202,7 +202,8 @@ function ToolButton({ label, icon: Icon, onClick, disabled, active }) {
 
 export default function PaperRichTextEditor({ value = null, onChange, fallbackText = '', direction = 'ltr', ariaLabel = 'Paper content' }) {
   const onChangeRef = useRef(onChange)
-  onChangeRef.current = onChange
+  // Keep Tiptap's stable onUpdate callback fresh after React commits the latest prop.
+  useLayoutEffect(() => { onChangeRef.current = onChange }, [onChange])
   const [revision, setRevision] = useState(0)
   const editor = useEditor({
     extensions: EXTENSIONS,

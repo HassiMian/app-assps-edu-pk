@@ -34,7 +34,7 @@ export default function UrduFontNotice() {
       }}
     >
       <span>
-        ⚠️ <strong>Urdu Typography Diagnostic:</strong> Jameel Noori Nastaleeq is not detected in browser; rendering using verified system fallback <code>'Noto Nastaliq Urdu', serif</code>.
+        ⚠️ <strong>Urdu Typography Diagnostic:</strong> Jameel Noori Nastaleeq is not detected in browser; a loaded Jameel font face is not verified. A Noto Nastaliq Urdu fallback may render instead, but is not verified. Check PDF font embedding and physical print before official use.
       </span>
       <span style={{ fontSize: '10px', color: '#b45309' }}>Non-printable Notice</span>
     </div>

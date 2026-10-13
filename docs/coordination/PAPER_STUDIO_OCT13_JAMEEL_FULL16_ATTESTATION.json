@@ -1,0 +1,96 @@
+{
+  "status": "OFFLINE_SOURCE_QA_EVIDENCE_VERIFIED",
+  "code_commit": "027702c21cda8ab6f34ea9036077dc92c72c5f10",
+  "branch_at_capture": "test/paper-core-f64-urdu-acceptance-20261012",
+  "started_utc": "2026-10-13T01:02:07Z",
+  "gates": 16,
+  "eslint_files_expected": 271,
+  "log_sha256": [
+    {
+      "gate": "protected-templates",
+      "bytes": 148,
+      "sha256": "0b3d4f22dc52a90bbe19830955204785f0a973be81c2fac827c05d01da4b8c48"
+    },
+    {
+      "gate": "guard-fixtures",
+      "bytes": 1018,
+      "sha256": "58b99e24e3190b63b2590c035c0079b6b4fb0fc0fde5c009cbf1ff365ffad038"
+    },
+    {
+      "gate": "structured-migration",
+      "bytes": 9645,
+      "sha256": "039c023e46893892124f919c85da13c6a1cb8d5df4c18ef59b8c8e5049192279"
+    },
+    {
+      "gate": "canonical-editor-browser",
+      "bytes": 5974,
+      "sha256": "8fccae4f835475b0d692c4b4c77225eaea47357b4fa542fde4bae7494c153790"
+    },
+    {
+      "gate": "early-years-browser",
+      "bytes": 3293,
+      "sha256": "3235f8cd5a259a62fd604b0d7a8f058ab5ceb3d1aed28588df0b9ffa56783e28"
+    },
+    {
+      "gate": "early-years-print-geometry",
+      "bytes": 1893,
+      "sha256": "dcb2a580563e05bb2a1608fd3787c89011e17b3906d534a52a879941ccbac48f"
+    },
+    {
+      "gate": "selection-identity-browser",
+      "bytes": 3040,
+      "sha256": "e1bd74884e0a6133f5a0fd1ff920c654b4c9b0cb0068f5479da367d923844ca2"
+    },
+    {
+      "gate": "urdu-workspace-browser",
+      "bytes": 2693,
+      "sha256": "8f607f6b9ed6a8a0ae07490781fe30866c13a4c2662557eab323cf29e2f0ffde"
+    },
+    {
+      "gate": "docx-binary-export",
+      "bytes": 1093,
+      "sha256": "70fb1d241dcb24a30a403fcd9c107a3989265d751276f2281a6f4001aad905c2"
+    },
+    {
+      "gate": "docx-browser-export",
+      "bytes": 577,
+      "sha256": "5e1621ca68b6178fa55d7b0c290c5f2271c674b91e6e7b34b672f490507c4f0e"
+    },
+    {
+      "gate": "print-a4-a5",
+      "bytes": 1192,
+      "sha256": "667eb2f55fdc2bcb8d9e4dbeb704c9e1e5761b4505e8885a0313b2e2de7c4076"
+    },
+    {
+      "gate": "diary-lesson-browser",
+      "bytes": 746,
+      "sha256": "f0e636a2f15383efc5d15382fc14df47a69603840eeda45d78dda6c20de7d5e4"
+    },
+    {
+      "gate": "official-print-browser",
+      "bytes": 325,
+      "sha256": "4caf5e4da92428f6ceb9371b5920629e4cec67fc08c3d70bf85e4c5b1d0cd3d8"
+    },
+    {
+      "gate": "first-term-marks-browser",
+      "bytes": 1052,
+      "sha256": "e9894c918c77bc7f5900700bdb621f40072a51a0531ed8f378a7fbcf8d7933df"
+    },
+    {
+      "gate": "paper-owned-eslint",
+      "bytes": 168362,
+      "sha256": "63cab19a764c6abf2ad51808e8b75afe8fb5ac0524725a034dad479da84261e3"
+    },
+    {
+      "gate": "vite-build",
+      "bytes": 7188,
+      "sha256": "8c6d766e25a43e29c29e0455054994c9aef19e3efbef3d219f4c387802950590"
+    }
+  ],
+  "limitations": [
+    "The original runner exit is evidenced by its completion marker, not an independent signed process receipt",
+    "No genuine school-staff marks or tenant-role production acceptance is certified",
+    "No actual connected-printer or academic-human approval is certified",
+    "No SaaS Core full-app production RLS or deployment authorization is certified"
+  ]
+}
