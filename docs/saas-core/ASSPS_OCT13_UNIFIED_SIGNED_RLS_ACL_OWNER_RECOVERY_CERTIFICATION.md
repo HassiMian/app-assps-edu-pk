@@ -48,3 +48,24 @@ Real **operator-generated synthetic signed** read-only transactions on the SAME 
 4. **Live cutover & rollback drill:** after all independent gates PASS, fresh release-time protected backup + restore/ACL/global-role tests, app/backend builds, exact current release SHA, deliberate maintenance/rollback owner, canary metrics, HTTP smoke, printer/Paper regressions. The current live backend must remain intact until then.
 
 **Final authority:** `HOSTINGER_STORAGE=RESOLVED`; `FULL_GLOBAL_AND_PAPER_OWNER_ACL_CLONE=PASS`; `UNIFIED_DUAL_SIGNED_RLS_AND_OWNER_ACL_CLONE=PASS`; `SIGNED_BACKEND_CATALOG_SOURCE_HARDENING=PASS_SOURCE_ONLY`; `FULL_BACKEND_PRODUCTION_DEPLOYMENT=NONE`; `FULL_PRODUCTION_SECURITY_CERTIFIED=FALSE`; `LIVE_SCHOOL_DATA_MUTATION=NONE`; `AUTOMATIONS=NONE`.
+
+## Post-commit authoritative integrated runner receipt
+
+After Core source commit `d1abdd535d2c0ec1e515ad387e41c12f25cfc3ee` was pushed and local+origin matched with a clean worktree, the full existing source/QA runner `run-three-gate-core-mission-20261012.sh` was run against that exact isolated source. **Exit 2 intentionally signals a release HOLD**, not failure to perform QA.
+
+| Actual automated evidence | Result |
+|---|---|
+| Python unit suites | **40 suites, 281/281 PASS** |
+| Backend Node security | **10 modules, 52/52 PASS** |
+| Protected frontend templates, Marks Entry Chromium, class Result Cards Chromium, zero-vs-blank print | **PASS** |
+| Vite production build and source diff integrity | **PASS**, source artifacts not deployed |
+| Independent read-only live/QA release gates | **26 total: 20 PASS, 6 HOLD** |
+| Hostinger 100 GiB actual VPS/root filesystem | **PASS**, approximately 53 GiB free |
+| Isolated combined signed RLS + Paper/legacy ACL and ownership on PG55432 | **PASS** |
+| Complete production backend cutover | **HOLD** (`production_change=NONE`) |
+
+Six read-only HOLD gates were: `unsigned_rpl_runtime` (untouched baseline clone), `full77_live_production`, `legacy_backend_bypass`, `dual_runtime_crud_live`, `restored_global_roles` (still requires review of unsafe original live privileged role), and `legacy_paper_global_role` (live Paper membership/owner approval). These represent related barriers, not six distinct exploitable incidents. **No authentic signed staff principal+teacher HTTP credentialed acceptance or full production rollback/print certification was performed or claimed**. Existing Paper forward-port gate certifies the pinned predecessor Paper-only file set (36 owner-owned paths); the newest Paper candidate `cc0af16b` still requires its independent owner acceptance and reconciliation with this newer Core candidate before live integration.
+
+Private complete QA log `/root/secure-archive/assps-core-rls-qa-20261012/unified-full-core-mission-final-20261013.private.log` SHA256 `fee5a5d00648b32cdc93b28e6acf052f0b08e476c954c434cd636304f6638362` has a root-only 0600 verification manifest. Other protected QA SHA256 evidence manifests for operator-signed read-only proof and ACL replay are in the same private archive. No school/student identifiers, secrets, role credentials or private logs are published to Git.
+
+**Live post-run verification:** frontend/API/green Marks endpoints HTTP200; root `/dev/sda1` ext4 96 GiB, 45% used, 53 GiB free; PostgreSQL5432 `exam_results` still **2**, total RLS policies **368**, deployed `apexos_user` still `BYPASSRLS=true`. Real student marks, official existing papers, fees, school records and production services preserved.
