@@ -4,8 +4,10 @@ const { pool, query, applyTenantContext } = require('../config/database')
 const { protect, requireRoles, requireScopeForServiceOnly, hasServiceScope } = require('../middleware/auth')
 const { tenantClause, currentSchoolId, hasColumn } = require('../middleware/tenant')
 const { isTeacher, validateTeacherMarksWrite, teacherResultReadScope } = require('../services/examMarksTeacherScope')
+const { parseExactMarksNumber } = require('../services/examMarksInputValidation')
 
-const canManageExams = requireRoles('super_admin', 'admin', 'principal', 'teacher')
+const canManageExams = requireRoles('super_admin', 'admin', 'principal')
+const canWriteMarks = requireRoles('super_admin', 'admin', 'principal', 'teacher')
 function canReadResults(req, res, next) {
   if (req.user?.account_type === 'service') {
     if (hasServiceScope(req, 'school.results.read')) return next()
@@ -257,7 +259,7 @@ router.delete('/:id', protect, canManageExams, async (req, res) => {
 })
 
 // POST /api/exams/results — tenant-scoped, transactional bulk result save
-router.post('/results', protect, canManageExams, async (req, res) => {
+router.post('/results', protect, canWriteMarks, async (req, res) => {
   const { results = [] } = req.body
   if (!Array.isArray(results) || !results.length) {
     return res.status(400).json({ success: false, message: 'results must be a non-empty array' })
@@ -293,8 +295,8 @@ router.post('/results', protect, canManageExams, async (req, res) => {
     const examId = Number(row?.exam_id)
     const studentId = Number(row?.student_id)
     const subject = String(row?.subject || '').trim().slice(0, 160)
-    const marksObtained = Number(row?.marks_obtained)
-    const totalMarks = Number(row?.total_marks)
+    const marksObtained = parseExactMarksNumber(row?.marks_obtained)
+    const totalMarks = parseExactMarksNumber(row?.total_marks)
     if (!Number.isInteger(examId) || examId <= 0 || !Number.isInteger(studentId) || studentId <= 0 || !subject) {
       return res.status(422).json({ success: false, message: 'Valid exam_id, student_id and subject are required for every result.' })
     }
