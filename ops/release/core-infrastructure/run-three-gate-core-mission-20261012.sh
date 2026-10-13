@@ -103,7 +103,10 @@ run_gate fresh_backup_chain python3 "$OPS/core-infrastructure/verify-fresh-core-
 # A data/schema restore does not prove ACL or global-role restore readiness.
 run_gate restored_acl_readiness python3 "$OPS/core-infrastructure/verify-fresh-restore-acl-parity-20261012.py"
 run_gate restored_global_roles python3 "$OPS/core-infrastructure/verify-fresh-restore-global-roles-20261012.py"
+run_gate isolated_full_acl_owner_recovery python3 "$OPS/core-infrastructure/verify-private-global-owner-acl-replay-20261013.py"
+run_gate isolated_paper_owner_mapping python3 "$OPS/core-infrastructure/verify-paper-owner-recovery-contract-20261013.py"
 run_gate hardened_recovery_candidate python3 "$OPS/core-infrastructure/verify-safe-core-recovery-candidate-20261012.py"
+run_gate unified_owner_acl_signed_recovery python3 "$OPS/core-infrastructure/verify-unified-private-recovery-security-20261013.py"
 run_gate hostinger_100gb_disk python3 "$OPS/core-infrastructure/hostinger-100gb-capacity-preflight-20261013.py"
 run_gate legacy_paper_global_role python3 "$OPS/core-infrastructure/verify-legacy-role-paper-boundary-20261013.py"
 # The Core/Paper forward-port is verified as an independently sourced gate.

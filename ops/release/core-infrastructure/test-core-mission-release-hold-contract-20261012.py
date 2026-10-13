@@ -39,6 +39,12 @@ class RunnerContract(unittest.TestCase):
   self.assertIn('run_gate hostinger_100gb_disk',s)
  def test_paper_global_owner_and_legacy_db_login_independent_hold(self):
   self.assertIn('run_gate legacy_paper_global_role',s)
+ def test_full_acl_recovery_is_only_a_clone_gate(self):
+  self.assertIn('run_gate isolated_full_acl_owner_recovery',s)
+  self.assertIn('run_gate isolated_paper_owner_mapping',s)
+ def test_unified_signed_acl_owner_clone_is_independent_from_production_auth_gate(self):
+  self.assertIn('run_gate unified_owner_acl_signed_recovery',s)
+  self.assertTrue(s.rstrip().endswith('exit 2'))
  def test_mutating_prod_migration_not_invoked(self):
   self.assertNotIn('pg_restore -c',s)
   self.assertNotIn('ALTER ROLE apexos_user',s)

@@ -339,7 +339,14 @@ async function connectForContext() {
       const gate = await client.query(`
         SELECT count(*)::int AS forced,
                count(*) FILTER (WHERE c.relrowsecurity)::int AS enabled,
-               count(*) FILTER (WHERE p.policyname IS NOT NULL)::int AS signed
+               count(*) FILTER (WHERE p.policyname IS NOT NULL)::int AS signed,
+               count(*) FILTER (WHERE p.qual IN (
+                 'core_security.signed_school_allowed(id)',
+                 'core_security.signed_school_allowed(school_id)'
+               ) AND p.qual=p.with_check)::int AS signed_school,
+               count(*) FILTER (WHERE p.qual=
+                 'core_security.signed_tenant_key_allowed((tenant_id)::text)'
+                 AND p.qual=p.with_check)::int AS signed_tenant
         FROM pg_class c
         JOIN pg_namespace n ON n.oid=c.relnamespace
         LEFT JOIN pg_policies p ON p.schemaname=n.nspname
@@ -349,8 +356,9 @@ async function connectForContext() {
           AND c.relname <> 'student_class_movement_audit'
       `, [configuredRuntimeRole()])
       const state = gate.rows[0]
-      if (!state || state.forced !== 77 || state.enabled !== 77 || state.signed !== 77) {
-        const error = new Error('Signed tenant RLS requires 77 enabled, forced, restrictive-policy tables')
+      if (!state || state.forced !== 77 || state.enabled !== 77 || state.signed !== 77 ||
+          state.signed_school !== 73 || state.signed_tenant !== 4) {
+        const error = new Error('Signed tenant RLS requires 77 enabled, forced, exact restrictive USING/WITH CHECK policies (73 school + 4 tenant)')
         error.code = 'DB_SIGNED_RLS_CATALOG_INCOMPLETE'
         throw error
       }

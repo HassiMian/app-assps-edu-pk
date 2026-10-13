@@ -13,3 +13,18 @@ test('signed runtime cannot enter tenant setup before verifying RLS ENABLE plus 
  assert.match(gate, /`\s*, \[configuredRuntimeRole\(\)\]\)/)
  assert.match(source.slice(prepare),/await client\.release\(error\)/)
 })
+test('signed mode rejects same-name RLS policies whose actual predicates or write checks are unsafe',()=>{
+ const begin=source.indexOf('if (signedTenantGate) {',source.indexOf('async function connectForContext'))
+ const finish=source.indexOf('const prepared = await prepareRuntimeClient(client)',begin)
+ const gate=source.slice(begin,finish)
+ for(const marker of [
+  'p.qual=p.with_check',
+  'core_security.signed_school_allowed(id)',
+  'core_security.signed_school_allowed(school_id)',
+  'core_security.signed_tenant_key_allowed((tenant_id)::text)',
+  'AS signed_school','AS signed_tenant',
+  'state.signed_school !== 73','state.signed_tenant !== 4'
+ ]) assert.ok(gate.includes(marker),'fail-closed exact signed policy predicate '+marker)
+ assert.match(gate,/p\.permissive='RESTRICTIVE'/)
+ assert.match(gate,/DB_SIGNED_RLS_CATALOG_INCOMPLETE/)
+})
