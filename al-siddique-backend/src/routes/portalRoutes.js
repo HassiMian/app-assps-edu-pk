@@ -6,6 +6,7 @@ const router  = express.Router()
 const { query } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
+const { requestedPolicy, policyMatches, assignmentMatches } = require('../services/approvedExamSubjectPolicy')
 const { buildTeachingOptionsQuery } = require('../services/teacherTeachingOptionsScope')
 
 function toSafeDate(value) {
@@ -347,6 +348,68 @@ router.get('/timetable', protect, async (req, res) => {
   } catch (error) {
     console.error('Timetable error:', error)
     res.status(500).json({ success: false, message: 'Failed to fetch timetable' })
+  }
+})
+
+// GET /api/portal/assessment-subject-policy — approved exact teacher Marks ceiling.
+// Additive migration is required; missing approval fails closed. No writes.
+router.get('/assessment-subject-policy', protect, async (req, res) => {
+  const actorSchoolId = Number(req.user?.school_id)
+  const actorUserId = Number(req.user?.id)
+  const role = String(req.user?.role || '').toLowerCase()
+  const schoolId = Number(currentSchoolId(req))
+  const requested = requestedPolicy(req.query)
+  if (!requested) return res.status(422).json({ success:false, code:'INVALID_SUBJECT_POLICY_REQUEST' })
+  if (!Number.isSafeInteger(schoolId) || schoolId <= 0 ||
+      actorSchoolId !== schoolId ||
+      !['teacher','admin','principal'].includes(role) ||
+      !Number.isSafeInteger(actorUserId) || actorUserId <= 0) {
+    return res.status(403).json({success:false,code:'STAFF_SCHOOL_CONTEXT_REQUIRED'})
+  }
+  try {
+    const schema = await query(`SELECT COUNT(*)::int AS columns_ready
+      FROM information_schema.columns WHERE table_schema='public'
+      AND table_name='exam_subjects'
+      AND column_name IN ('approval_status','approval_revision','approved_by_user_id','approved_at')`)
+    if (Number(schema.rows?.[0]?.columns_ready) !== 4) {
+      return res.status(503).json({success:false,code:'SUBJECT_POLICY_APPROVAL_SCHEMA_REQUIRED'})
+    }
+    if (role === 'teacher') {
+      const assigned = await query(`SELECT school_id,teacher_user_id,is_active,class_name,section,subject
+        FROM teacher_class_assignments WHERE school_id=$1 AND teacher_user_id=$2
+        AND is_active=true AND LOWER(TRIM(class_name))=LOWER($3)
+        AND LOWER(TRIM(COALESCE(section,'')))=LOWER($4)
+        AND LOWER(TRIM(COALESCE(subject,'')))=LOWER($5)
+        LIMIT 2`, [schoolId,actorUserId,requested.cls,requested.section,requested.subject])
+      if (assigned.rows?.length !== 1 ||
+          !assignmentMatches(assigned.rows[0],requested,actorUserId,schoolId)) {
+        return res.status(403).json({success:false,code:'TEACHER_SUBJECT_ASSIGNMENT_REQUIRED'})
+      }
+    }
+    const {rows} = await query(`SELECT x.school_id,x.exam_id,x.class_name,x.section,x.subject,
+      x.total_marks,x.is_active,x.approval_status,x.approval_revision,
+      x.approved_by_user_id,x.approved_at,
+      (u.id IS NOT NULL AND u.is_active=true AND u.school_id=x.school_id
+        AND u.role IN ('admin','principal')) AS reviewer_valid
+      FROM exam_subjects x
+      JOIN exams e ON e.id=x.exam_id AND e.school_id=x.school_id
+      LEFT JOIN users u ON u.id=x.approved_by_user_id
+      WHERE x.school_id=$1 AND x.exam_id=$2
+        AND LOWER(TRIM(x.class_name))=LOWER($3)
+        AND LOWER(TRIM(COALESCE(x.section,'')))=LOWER($4)
+        AND LOWER(TRIM(x.subject))=LOWER($5)
+      LIMIT 2`,[schoolId,requested.examId,requested.cls,requested.section,requested.subject])
+    if (rows?.length !== 1 || !policyMatches(rows[0],requested,schoolId)) {
+      return res.status(409).json({success:false,code:'SUBJECT_POLICY_UNAPPROVED_OR_AMBIGUOUS'})
+    }
+    const row=rows[0]
+    return res.json({success:true,data:{exam_id:row.exam_id,
+      class_name:row.class_name,section:row.section,subject:row.subject,
+      total_marks:row.total_marks,revision:row.approval_revision,
+      approval_status:'approved',is_active:true}})
+  } catch (err) {
+    console.error('Approved subject policy unavailable:',err.code || 'QUERY_FAILED')
+    return res.status(503).json({success:false,code:'SUBJECT_POLICY_UNAVAILABLE'})
   }
 })
 
