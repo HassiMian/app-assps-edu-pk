@@ -6,11 +6,11 @@ const path = require('node:path')
 const backend = path.resolve(__dirname, '../../../al-siddique-backend')
 async function main() {
   assert.equal(process.env.DB_PORT, '55432')
-  assert.equal(process.env.DB_NAME, 'assps_core_cutover_login_qa_20261013')
+  assert.ok(['assps_core_cutover_login_qa_20261013','assps_core_green77_qa_20261013'].includes(process.env.DB_NAME))
   assert.equal(process.env.DB_ENFORCE_LEAST_PRIVILEGE_LOGIN, 'true')
   assert.equal(process.env.DB_AUTH_USE_SIGNED_TENANT_CONTEXT, 'true')
   assert.equal(process.env.DB_SIGNED_TENANT_RLS_ENABLED, 'true')
-  assert.match(process.env.DB_USER || '', /^assps_core_cutover_qa_login_20261013$/)
+  assert.ok(['assps_core_cutover_qa_login_20261013','assps_core_green77_login_qa_20261013'].includes(process.env.DB_USER))
   assert.match(process.env.DB_SIGNED_TENANT_HMAC_KEY || '', /^[a-f0-9]{64}$/)
   const config = require(path.join(backend, 'src/config/database'))
   const { query, tenantContext, pool } = config
@@ -32,14 +32,14 @@ async function main() {
     let forgedCount = null
     try {
       await unsigned.query('BEGIN')
-      await unsigned.query('SET LOCAL ROLE apex_app_runtime')
+      await unsigned.query(`SET LOCAL ROLE ${process.env.DB_RUNTIME_ROLE}`)
       await unsigned.query("SELECT set_config('app.rls_enabled','true',true),set_config('app.tenant_id','1',true),set_config('app.is_super_admin','true',true)")
       forgedCount = Number((await unsigned.query('SELECT count(*)::int AS n FROM public.students')).rows[0].n)
       await unsigned.query('ROLLBACK')
     } finally { unsigned.release() }
     assert.equal(forgedCount,0,'client-forged tenant/superadmin must read zero')
     // A runtime login must not be able to SET ROLE into privileged legacy or Paper ownership.
-    for (const disallowed of ['apexos_user','apex_paper_owner','postgres']) {
+    for (const disallowed of ['apexos_user','apex_paper_owner','postgres', ...(process.env.DB_RUNTIME_ROLE==='assps_core_green_runtime'?['apex_app_runtime']:[])]) {
       let denied=false
       try { await direct.query(`SET ROLE ${disallowed}`) } catch (e) { denied=e.code==='42501' }
       assert.equal(denied,true,`privileged role ${disallowed} must be unavailable`)

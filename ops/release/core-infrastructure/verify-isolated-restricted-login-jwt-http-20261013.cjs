@@ -9,7 +9,7 @@ const backend=path.resolve(__dirname,'../../../al-siddique-backend/src')
 async function main() {
   assert.equal(process.env.NODE_ENV,'production')
   assert.equal(process.env.DB_PORT,'55432')
-  assert.equal(process.env.DB_NAME,'assps_core_cutover_login_qa_20261013')
+  assert.ok(['assps_core_cutover_login_qa_20261013','assps_core_green77_qa_20261013'].includes(process.env.DB_NAME))
   assert.equal(process.env.DB_ENFORCE_LEAST_PRIVILEGE_LOGIN,'true')
   assert.equal(process.env.DB_AUTH_USE_SIGNED_TENANT_CONTEXT,'true')
   const {query,tenantContext,pool}=require(path.join(backend,'config/database'))
