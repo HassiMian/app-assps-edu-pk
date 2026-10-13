@@ -32,3 +32,10 @@ SaaS Core owns production RLS, release approval and database identity. This docu
 - Source ancestry and production frontend/backend physical build provenance need SaaS Core validation; protect the concurrently dirty Paper-owned worktree and all school academic records.
 
 **Decision:** retain currently working signed scoped Marks route, do not force-disable the legacy login, do not promote the entire backend, and do not claim production full-release certification until genuine principal/teacher, peer-school, Paper/Marks regressions and a live-safe switch/rollback plan pass under SaaS Core control.
+
+## Nginx rollback evidence supplement (~14:11 UTC)
+
+- Historic `firstterm-20261011T1430Z/nginx-app-before-firstterm.private.conf` was found to be a symbolic link to a live config path, **not** a self-contained immutable backup; do not treat that historical path as a reliable old-config restore.
+- Created fresh private **real-file (non-symlink)** snapshots of current `apex-app-ssl`, `apex-api-ssl`, and `assps-firstterm-app-maps.conf` under `/root/assps-release-backups/core-signed-oct13-2026-final/nginx-snapshot/`, restrictive 0700/0600 permissions, each SHA256 verified. These are current-state recovery copies, **not** an approved previous ingress baseline for a traffic switch.
+- Existing signed-bluegreen Marks ingress configuration contract tests: **8/8 PASS** (`ops/release/signed-bluegreen/nginx/test-marksonly-ingress-contract-20261011.py` in the Core rehearsal owner worktree). Active `nginx -t` remains green. No Nginx reload/route change performed.
+- True live rollback requires exact one-service routing demotion and principal/teacher authenticated verification; generic full-config restore may overwrite unrelated Oct13 frontend/login hotfixes and must not be used.
