@@ -8,9 +8,10 @@ const faculty=require('./aggregate-grade910-offline-faculty-decisions.cjs')
 const signed=require('./reconcile-grade910-teacher-response-to-signed-school-packet.cjs')
 const adoption=require('./build-grade910-school-adoption-verification-matrix.cjs')
 const paper=require('./attest-grade910-paper-studio-publisher-boundary.cjs')
+const coreObservation=require('./attest-grade910-core-live-readonly-observation.cjs')
 const ROOT=path.resolve(__dirname,'../..')
-const OUT=path.join(ROOT,'docs/question-bank/ASSPS_GRADE910_AUTHENTIC_INSTITUTIONAL_PUBLICATION_NO_GO_20261012.json')
-const REPORT=path.join(ROOT,'docs/question-bank/ASSPS_GRADE910_ACTUAL_SCHOOL_REVIEW_PRODUCTION_ACCEPTANCE_20261012.md')
+const OUT=path.join(ROOT,'docs/question-bank/ASSPS_GRADE910_AUTHENTIC_INSTITUTIONAL_PUBLICATION_NO_GO_20261013.json')
+const REPORT=path.join(ROOT,'docs/question-bank/ASSPS_GRADE910_ACTUAL_SCHOOL_REVIEW_PRODUCTION_ACCEPTANCE_20261013.md')
 const deny=x=>{throw Error('ASSPS_GRADE910_INSTITUTIONAL_RELEASE_'+x)}
 function ready(env=process.env){
  const baseline=original.loadInputs()
@@ -58,6 +59,8 @@ function ready(env=process.env){
  const adopted=used.filter(x=>x.actualSchoolAdoptedBookVerified===true||
    x.schoolAdoptionEvidenceSha256!==null)
  if(adopted.length!==0)deny('UNTRUSTED_LOCAL_SCHOOL_ADOPTION_SELF_ASSERTION')
+ const coreEvidence=env.ASSPS_QBANK_CORE_READONLY_OBSERVATION_PATH?
+  coreObservation.inspect(env.ASSPS_QBANK_CORE_READONLY_OBSERVATION_PATH):null
  const blockers=[
   {id:'ASSPS_ADOPTED_TEXTBOOK_EDITION_AND_MEDIUM',
    status:'UNVERIFIED',count:used.length,
@@ -77,9 +80,9 @@ function ready(env=process.env){
    owner:'Paper Studio Master',
    evidenceNeeded:'Tenant-scoped approved immutable revision selector, authenticated teacher Save/Open/Print and Urdu parity certification'},
   {id:'SAAS_CORE_LIVE_PRODUCTION_RLS_RELEASE_CERTIFICATE',
-   status:'NO_GO_LAST_VERIFIED_CORE_REPORT',count:1,
+   status:coreEvidence?'HOLD_FRESH_STAGED_GREEN_BUT_NOT_ACTIVE':'HOLD_UNVERIFIED_CORE_RELEASE_CERTIFICATE',count:1,
    owner:'SaaS Core & Production Master',
-   evidenceNeeded:'Full 77 signed production RLS guards, no bypass role, restore roles/ACL parity, verified actual school signed roles, safe rollback, certified deploy release'}
+   evidenceNeeded:'Core must independently certify active non-bypass signed runtime 77/77, tenant school JWT acceptance, Paper owner/restore ACL and rollback, real staff signoff and actual production cutover. Dormant green77 is not live cutover.'}
  ]
  return{schemaVersion:'assps-grade910-authentic-school-publication-gate-v1',
   auditedAsOf:'2026-10-12',originalImmutableCandidates:2581,
@@ -91,8 +94,14 @@ function ready(env=process.env){
   paperStudioAcademicallyVerifiedSelectable:0,
   academicQuestionPublished:0,
   deployedByThisTask:false,
-  productionSecurityLastIndependentIssueComment:'https://github.com/HassiMian/app-assps-edu-pk/issues/4#issuecomment-6129891175',
-  productionSecurityReportedSignedGuards:'0/77 (as of latest separately verified SaaS Core issue comment; not rechecked by Academic Master)',
+  productionSecurityLastIndependentIssueComment:'https://github.com/HassiMian/app-assps-edu-pk/issues/4#issuecomment-6137957891',
+  currentCoreObservationEvidence:coreEvidence,
+  coreLiveStagedGreenGuards:coreEvidence?.greenCoreSignedStagedGuards??null,
+  coreActiveLegacyRuntimeSignedGuards:coreEvidence?.activeLegacyCoreSignedGuards??null,
+  coreActiveLegacyLoginBypassRlsObserved:coreEvidence?.activeLegacyDbLoginHasBypassRls??null,
+  productionSecurityReportedSignedGuards:coreEvidence?
+   `active=${coreEvidence.activeLegacyCoreSignedGuards}/77; staged_green=${coreEvidence.greenCoreSignedStagedGuards}/77; released=false`:
+   'UNVERIFIED_FROM_FRESH_PRIVATE_CORE_OBSERVATION; HOLD',
   releaseStatus:'DENIED_AUTHENTIC_HUMAN_AND_CORE_RELEASE_EVIDENCE_MISSING',
   gateAllowedToPromoteDrafts:false,
   machineQASuccessCannotOverrideInstitutionalBlocks:true,
@@ -102,14 +111,14 @@ function ready(env=process.env){
 }
 function markdown(x){
  return ['# ASSPS Grade IX-X — Actual institution-level final publication certification','',
-  '**RELEASE DENIED.** Earlier successful 991/991 engineering QA is not qualified school textbook adoption, independent teacher academic approval or safe production certification.',
+  '**RELEASE DENIED.** Green engineering QA is not qualified school textbook adoption, independent teacher academic approval or safe production certification.',
   '','Immutable original research questions: **'+x.originalImmutableCandidates+
   '**. ASSPS textbook-source catalog decision groups: **'+x.sourceCatalogsRequiringASSPSDecision+
   '**. School adoption certificates verified: **0**.',
   'Independent private teacher submissions received: **'+x.realFacultyResponsesSubmitted+
   '**. Cryptographically bound signed school subject-review receipts: **'+x.signedSchoolCryptographicAndEvidenceByteReceipts+
   '**. Final academically approved revisions: **0**. Published: **0**.',
-  '','Latest separate SaaS Core owner certification is **NO-GO**, with production signed school/tenant guards 0/77 and deployed legacy login BYPASSRLS=true. This cannot be repaired or overridden by the Academic Master; Core must certify its own production RLS, rollback and actual staff role tests before release.',
+  '','Latest 13 October 2026 Core read-only observation (if configured): '+x.productionSecurityReportedSignedGuards+'. The staged green runtime may have 77/77 restrictive signed guards and the legacy login BYPASSRLS flag may have been cleared, but signed guards on the still-active runtime remain 0/77 and production routing/real authorized staff acceptance remain pending. This is observation, NOT a signed Core owner release certificate.',
   '','Actual remaining owner gates:','',
   ...x.blockers.map(b=>'- '+b.id+' — **'+b.status+'** — '+b.owner+': '+b.evidenceNeeded),
   '','Real adoption book certificates and actual independent teacher-signing credentials are not in the available school project/Drive records; generic permission does not substitute for qualified individual verification.',

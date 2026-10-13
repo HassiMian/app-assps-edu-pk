@@ -24,7 +24,7 @@ test('production Core owner NO-GO and actual school review hold cannot be bypass
   ASSPS_QBANK_RELEASE_APPROVED:'true',ASSPS_ACADEMIC_APPROVAL_OVERRIDE:'true',
   ASSPS_SAAS_CORE_SECURITY_CERTIFIED:'true'})
  assert.equal(x.releaseStatus,'DENIED_AUTHENTIC_HUMAN_AND_CORE_RELEASE_EVIDENCE_MISSING')
- assert.ok(x.productionSecurityLastIndependentIssueComment.includes('issuecomment-6129891175'))
+ assert.ok(x.productionSecurityLastIndependentIssueComment.includes('issuecomment-6137957891'))
  assert.equal(x.actualAdoptedCatalogDocumentsVerified,0)
  assert.equal(x.academicQuestionPublished,0)
  assert.equal(x.blockers.length,5)
@@ -58,4 +58,32 @@ test('real standalone release command deliberately exits nonzero on absent schoo
  assert.equal(row.academicallyApproved,0)
  assert.equal(row.verifiedPublished,0)
  assert.equal(row.safeRelease,false)
+})
+
+test('fresh stage77 observation is evidence, NEVER a full Core release certificate or question publication permission',()=>{
+ const dir=fs.mkdtempSync(path.join(os.tmpdir(),'assps910-core-stage-only-'))
+ fs.chmodSync(dir,0o700)
+ const file=path.join(dir,'core.json')
+ const v={schemaVersion:'assps-academic-external-core-live-readonly-observation-v1',
+  capturedAt:new Date().toISOString(),sourceOwner:'SaaS Core & Production Master',
+  sourceVerifierGit:'synthetic-source-not-owner-release',
+  sourceVerifierSha256:'a'.repeat(64),observedJsonSha256:'b'.repeat(64),
+  sourceVerifierExitCode:2,authorizesDeployment:false,
+  coreOwnerCertifiedProductionRelease:false,paperOwnerApprovedPickerRelease:false,
+  schoolStaffSessionAccepted:false,verifierPayload:{status:'HOLD',
+   facts:{marks_signed_guards:77,green_signed_guards:77,
+    legacy_app_signed_guards:0,legacy_bypass_still_active:false},
+   authenticated_real_staff:false,prod_app_switched:false,production_release_certified:false}}
+ try{
+  fs.writeFileSync(file,JSON.stringify(v),{mode:0o600})
+  const x=m.ready({ASSPS_QBANK_FACULTY_SUBMISSIONS_DIR:PRIVATE,
+   ASSPS_QBANK_CORE_READONLY_OBSERVATION_PATH:file})
+  assert.equal(x.coreLiveStagedGreenGuards,77)
+  assert.equal(x.coreActiveLegacyRuntimeSignedGuards,0)
+  assert.equal(x.coreActiveLegacyLoginBypassRlsObserved,false)
+  assert.equal(x.currentCoreObservationEvidence.coreOwnerCertifiedRelease,false)
+  assert.equal(x.actuallyApprovedAcademicQuestionRevisions,0)
+  assert.equal(x.academicQuestionPublished,0)
+  assert.equal(x.deployedByThisTask,false)
+ }finally{fs.rmSync(dir,{recursive:true,force:true})}
 })
