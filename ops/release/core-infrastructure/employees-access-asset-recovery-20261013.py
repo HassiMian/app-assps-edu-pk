@@ -31,24 +31,18 @@ def fixed(old):
  check(s.count(OLD_INIT)==1,'unexpected React import/initializer')
  check(s.count('useCallback(')==2 and s.count('btnPrimary')==2 and s.count('btnSecondary')==8,'unexpected pre-fix crash signatures')
  return (PREFIX+s.replace(OLD_INIT,NEW_INIT,1)).encode()
-def preflight():
+def assert_live_target():
  check(ASSET.exists() and STYLES.exists() and INDEX.exists() and HTML.exists(),'missing live artifacts')
  check(sha(STYLES.read_bytes())==STYLE_SHA,'shared style module changed')
- check(sha(INDEX.read_bytes())==INDEX_SHA,'application chunk index changed')
+ check(sha(INDEX.read_bytes())==INDEX_SHA,'application index changed')
  check(sha(HTML.read_bytes())==HTML_SHA,'application html changed')
  style=STYLES.read_text()
  check('n={minHeight:40' in style and 'r={minHeight:40' in style and 'n,o,r,s,e as t' in style,'button exports differ')
- check(INDEX.read_text().count(ASSET.name)==2,'employees lazy chunk reference changed')
- check('assets/index-DNRtetyK.js' in HTML.read_text(),'unexpected served index')
+ check(INDEX.read_text().count(ASSET.name)==2,'employees lazy module changed')
+ check('assets/index-DNRtetyK.js' in HTML.read_text(),'unexpected application index')
  nginx=run('nginx','-T')
- check(nginx.returncode==0 and 'root /var/www/assps-resultcards-class-isolation-8b5d370e;' in nginx.stdout,'active Nginx release does not match expected')
- meta=json.loads(METADATA.read_text())
- check(meta['frontend_commit'] in (SOURCE_BASE,os.environ.get('ASSPS_HOTFIX_SHA')),'release metadata drift')
- current=ASSET.read_bytes()
- before=sha(current)==ASSET_BEFORE_SHA
- after=sha(current)==sha(fixed_bytes_from_known_original()) if not before else False
- check(before or after,'Employees chunk changed; fail closed')
- return before,meta,current
+ check(nginx.returncode==0 and 'root /var/www/assps-resultcards-class-isolation-8b5d370e;' in nginx.stdout,'active Nginx root differs')
+ check(json.loads(METADATA.read_text())['frontend_commit']==SOURCE_BASE,'release metadata changed unexpectedly')
 def fixed_bytes_from_known_original():
  check((BACKUP/'EmployeesModule.before.js').exists(),'original backup missing')
  orig=(BACKUP/'EmployeesModule.before.js').read_bytes()
@@ -65,6 +59,7 @@ def atomic_write(dest,payload):
   except OSError:pass
   raise
 def do_verify():
+ assert_live_target()
  check(sha(ASSET.read_bytes())==ASSET_BEFORE_SHA,'live original differs')
  check(sha(STYLES.read_bytes())==STYLE_SHA,'styles changed')
  check(sha(INDEX.read_bytes())==INDEX_SHA,'import map changed')
