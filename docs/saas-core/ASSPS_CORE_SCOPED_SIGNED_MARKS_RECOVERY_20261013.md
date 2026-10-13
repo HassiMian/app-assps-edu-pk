@@ -1,0 +1,34 @@
+# ASSPS SaaS Core — Production Signed Marks Release Verification (13 October 2026)
+
+## Authority and release outcome
+
+SaaS Core owns production RLS, release approval and database identity. This document records executed probes, not independent staff acceptance. **Scoped signed Marks routing: read-only technical gates PASS. Full SaaS backend signed conversion and genuine principal/teacher acceptance: HOLD.** No production credentials, user sessions or student records are included here.
+
+## Verified production identities and topology
+
+- PostgreSQL live `apexos` on 5432. All three LOGIN roles (`apexos_user`, `assps_marks_signed_login`, `assps_core_green_login`) have `BYPASSRLS=false`, `SUPERUSER=false` as observed 13 October ~14:00Z. `apexos_user` is still the legacy backend login; removal of BYPASSRLS is not equivalent to full signed-context rollout.
+- 78 tables have FORCE RLS (77 signed-guard tables plus separately protected `student_class_movement_audit`); 77 restrictive signed guards and separately scoped login-lookup policies. The live catalog contained 370 total public policies at the backup snapshot.
+- Public `apex-backend` on port 5000 remains online, uses legacy `apexos_user` and does **not** configure the three signed tenant-context flags. Do **not** enable these blindly.
+- Private `assps-marks-green` on localhost 5091 is online; **actual process environment** uses `assps_marks_signed_login`, runtime role `assps_marks_signed_runtime`, all three signed flags true, and nonempty HMAC/DB credentials. Secrets were neither extracted nor logged.
+- Active Nginx maps selected authenticated GET `/api/exams`, GET `/api/exams/grade-settings`, GET/POST `/api/exams/results`, GET detail, and reviewed POST bulk-class-assignment to signed green. Other traffic keeps its host-specific legacy routing; no broad backend promotion was made here.
+- Live health probes for 5000 and 5091 returned 200; public app and private green anonymous Marks result reads returned 401; `nginx -t` passed.
+- Green process worktree `fix/core-promote-demote-security-review-20261011` at `1b0541af75526b2840e7403bc8193cd1c540a811` (verified clean); main `/var/www/apex-backend` is not a Git worktree, so exact deployed full-backend source commit cannot be certified via `git rev-parse`.
+
+## Recovery and rollback executed
+
+1. Fresh protected production database archive (`pg_dump -Fc`) and PostgreSQL globals SQL were created at `/root/assps-release-backups/core-signed-oct13-2026-final/`, mode 0600, SHA256 both verified. Do **not** publish these files; globals may contain password hashes.
+2. Fresh network-disabled PostgreSQL 16 cluster on disposable port 55433, with synthetic NOLOGIN NOBYPASSRLS global role names and *no production passwords*, restored the archive. Initial existing 55432 recovery attempt encountered missing `assps_core_green_runtime`; that incomplete disposable attempt was not counted as a pass and was deleted.
+3. Independent restore on 55433 matched live **370/370 policy definitions** (fingerprint `6080649cc29453ae`) and **1,097/1,097 table-column schema entries** (fingerprint `612dd19218f43152`).
+4. In the disposable restored DB only, a transaction rehearsed 77 restrictive policy roles: single-role baseline -> two-role V2 addition -> SAVEPOINT rollback -> full ROLLBACK. Each 77-policy stage was asserted and post-rollback policy fingerprint matched (`c8633aeaed252c4d`). **This proves a controlled policy-membership transaction rollback, NOT comprehensive real HTTP/network/credential rollback.**
+5. The entire private 55433 cluster and our incomplete QA database in 55432 were removed after evidence collection. Existing 5432/55432 services and school data untouched.
+6. The preexisting signed isolated test harness (55432) was rerun: assessment-next 1/1, paper-next 1/1, marks-next 1/1, db-next 13/13 passed, temporary QA login password reset to NULL and test BYPASS target absent.
+7. New reproducible read-only gate `ops/release/verify-scoped-signed-marks-live-20261013.py` passed all 11 technical checks; prints explicit staff/full-app holds and never claims certified signed HTTP actors.
+
+## Outstanding release gates — MUST NOT be waived
+
+- Browser reached `https://app.assps.edu.pk/login`, not an authorized staff session. **No genuine Principal or Teacher sign-in/password-backed JWT session available here**; therefore authentic authorized-school positives, cross-tenant denials and real Marks Save → Reload → Result Card → Print are not certified. Prior `jsonwebtoken.sign()` fixture tests simulate tokens and are NOT substitutes for genuine login.
+- Full production backend still reports signed flags NOT_CONFIGURED and uses the legacy login (though NOBYPASSRLS). Its independent secure cutover, route migrations, startup compatibility and production acceptance are not certified.
+- No independently proven live Nginx rollback during signed staff traffic, no post-switch full-app authenticated regression or Paper owner sign-off. The 77-policy QA transaction rehearsal must not be represented as full-scale blue-green rollback acceptance.
+- Source ancestry and production frontend/backend physical build provenance need SaaS Core validation; protect the concurrently dirty Paper-owned worktree and all school academic records.
+
+**Decision:** retain currently working signed scoped Marks route, do not force-disable the legacy login, do not promote the entire backend, and do not claim production full-release certification until genuine principal/teacher, peer-school, Paper/Marks regressions and a live-safe switch/rollback plan pass under SaaS Core control.
