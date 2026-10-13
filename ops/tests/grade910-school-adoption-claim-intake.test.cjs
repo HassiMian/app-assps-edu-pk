@@ -105,6 +105,51 @@ test('symlink in claim inbox rejected',t=>{
  fs.symlinkSync(target,path.join(claims,source.catalogId+'.school-adoption-claim.json'));
  assert.throws(()=>mod.aggregate({claimDirectory:claims,evidenceDirectory:objects}),/UNTRUSTED_PRIVATE_CLAIM_FILE/);
 });
+test('all 56 original used catalog and recovered source identities are ingestible as UNTRUSTED claims',t=>{
+ const {claims}=setup(t);
+ const used=books.build().rows.filter(x=>x.originalResearchCandidateCount>0);
+ assert.equal(used.length,56);
+ assert.equal(used.filter(x=>x.catalogId.startsWith('pectaa-recovered-')).length,4);
+ assert.equal(used.filter(x=>x.catalogId.startsWith('pectaa-recovered-'))
+   .reduce((n,x)=>n+x.originalResearchCandidateCount,0),204);
+ for(const s of used){
+  fs.writeFileSync(path.join(claims,s.catalogId+'.school-adoption-claim.json'),JSON.stringify({
+   schemaVersion:'assps-grade910-school-adoption-claim-v1',
+   sourceCatalogRecordId:s.catalogId,
+   sourceCatalogPdfSha256:s.sourcePdfSha256,
+   originalQuestionRevisionSetSha256:s.originalQuestionRevisionSetSha256,
+   schoolSessionUnderReview:'2026-27',
+   claimDisposition:'needs-evidence'
+  })+'\n',{mode:0o600,flag:'wx'});
+ }
+ const out=mod.aggregate({claimDirectory:claims});
+ assert.equal(out.adoptionClaimFilesReceived,56);
+ assert.equal(out.unresolvedSchoolBookDecisions,0);
+ assert.equal(out.untrustedClaimDispositions['needs-evidence'],56);
+ assert.equal(out.sourceBoundRows.reduce((n,x)=>n+x.sourceResearchCandidateReferences,0),2581);
+ assert.equal(out.academicallyApproved,0);
+ assert.equal(out.schoolAdoptionCertificatesAuthenticated,0);
+ assert.equal(out.paperStudioVerifiedSelectable,0);
+ assert.match(out.releaseDecision,/HOLD/);
+});
+test('recovered-source fake name or swapped original ID is rejected',t=>{
+ const {claims}=setup(t);
+ const rec=books.build().rows.find(x=>x.catalogId.startsWith('pectaa-recovered-'));
+ fs.writeFileSync(path.join(claims,rec.catalogId+'.school-adoption-claim.json'),JSON.stringify({
+  schemaVersion:'assps-grade910-school-adoption-claim-v1',
+  sourceCatalogRecordId:'pectaa-catalog-002',
+  sourceCatalogPdfSha256:rec.sourcePdfSha256,
+  originalQuestionRevisionSetSha256:rec.originalQuestionRevisionSetSha256,
+  schoolSessionUnderReview:'2026-27',
+  claimDisposition:'needs-evidence'
+ })+'\n',{mode:0o600});
+ assert.throws(()=>mod.aggregate({claimDirectory:claims}),/ORIGINAL_CATALOG_SHA_OR_SESSION_MISMATCH/);
+});
+test('path traversal and unknown source names stay denied',t=>{
+ const {claims}=setup(t);
+ fs.writeFileSync(path.join(claims,'pectaa-recovered-unknown.school-adoption-claim.json'),'{}',{mode:0o600});
+ assert.throws(()=>mod.aggregate({claimDirectory:claims}),/UNREFERENCED_OR_DUPLICATE_SOURCE_CATALOG/);
+});
 test('no evidence store configured means adopted claim fail-closed',t=>{
  const {claims,objects}=setup(t);put(claims,fakeAdopted(objects));
  assert.throws(()=>mod.aggregate({claimDirectory:claims}),/ACTUAL_PRIVATE_EVIDENCE_BYTES_REQUIRED/);

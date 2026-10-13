@@ -66,10 +66,14 @@ function aggregate({claimDirectory,evidenceDirectory}){
  const list=fs.readdirSync(dir,{withFileTypes:true}),records=[],seen=new Set();
  if(list.length>56)fail('TOO_MANY_OR_UNKNOWN_ADOPTION_CLAIMS');
  for(const ent of list){
+  const suffix='.school-adoption-claim.json';
+  // A frozen source may have a pectaa-catalog-NNN ID OR a catalog-approved
+  // pectaa-recovered-* ID. Use exact canonical ID lookup, NEVER a filename prefix.
   if(!ent.isFile()||ent.isSymbolicLink()||
-    !/^pectaa-catalog-[0-9]{3}\.school-adoption-claim\.json$/.test(ent.name))
+     !/^[A-Za-z0-9][A-Za-z0-9_-]{2,110}\.school-adoption-claim\.json$/.test(ent.name)||
+     !ent.name.endsWith(suffix))
    fail('UNTRUSTED_PRIVATE_CLAIM_FILE');
-  const expectedId=ent.name.slice(0,18),source=byId.get(expectedId);
+  const expectedId=ent.name.slice(0,-suffix.length),source=byId.get(expectedId);
   if(!source||seen.has(expectedId))fail('UNREFERENCED_OR_DUPLICATE_SOURCE_CATALOG');
   seen.add(expectedId);
   const name=path.join(dir,ent.name),stat=fs.lstatSync(name);
