@@ -1,0 +1,4183 @@
+{
+  "schemaVersion": "assps-grade910-66-mcq-curated-corrections-safe-draft-v1",
+  "sourceIntegrityLedgerSha256": "e4bda211398fafd0dc2c89cb30a13793bd9602a110891823b06bdd3ee7263b49",
+  "originalResearchCandidateCount": 2581,
+  "originalFlaggedMCQCount": 68,
+  "originalStrongCorrectOptionLengthCues": 66,
+  "curatedProposalCount": 66,
+  "newlyAuthoredWrongDistractorTexts": 198,
+  "proposedOriginalReferenceAnswerPreserved": 66,
+  "proposedAnswerKeyPositionDistribution": {
+    "A": 17,
+    "B": 17,
+    "C": 16,
+    "D": 16
+  },
+  "remainingStrongLengthOutliersAfterProposals": 0,
+  "proposedKeyStillStrictlyLongestCount": 15,
+  "realQualifiedSubjectAndUrduReviewerCount": 0,
+  "verifiedQuestionAnswerCount": 0,
+  "academicallyApproved": 0,
+  "published": 0,
+  "reviewerWarning": "Draft options are independently written and the reference answer text is unchanged; neither the original answer nor new distractors are certified against an adopted school textbook. A teacher must verify each distractor remains unambiguously wrong in the actual question context. This is not an approved question bank export.",
+  "rows": [
+    {
+      "originalId": "IX-AGRI-TECH-ENGLISH-C05-I01",
+      "originalRevisionSha256": "2c9e3622d63dc0c8f5d32ce4129d74023e3ebba55b1d54adaf17567655cc5f62",
+      "originalSourceFile": "agriTech9EnglishStarter2026.json",
+      "originalSourceFileSha256": "fa90a74076340c6293d3ba2d051329aa51cfed044953840c935ad0bbb85b55df",
+      "originalOptions": [
+        "Maintaining protective vegetation/contour-based management",
+        "Leaving soil permanently bare",
+        "Removing all field boundaries",
+        "Increasing runoff"
+      ],
+      "originalReferenceAnswerText": "Maintaining protective vegetation/contour-based management",
+      "originalOptionLengthRatio": 2.32,
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
+      "newOptionLengthRatio": 0.8923,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-AGRI-TECH-ENGLISH-C05-I01",
+        "parentOriginalRevisionSha256": "2c9e3622d63dc0c8f5d32ce4129d74023e3ebba55b1d54adaf17567655cc5f62",
+        "grade": 9,
+        "subject": "agriculture-sciences-tech",
+        "medium": "english",
+        "originalStem": "Which practice helps reduce soil erosion?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Maintaining protective vegetation/contour-based management"
+          },
+          {
+            "id": "B",
+            "text": "Keeping the ground uncovered so water can travel quickly downhill"
+          },
+          {
+            "id": "C",
+            "text": "Using straight downhill furrows to channel stormwater more rapidly"
+          },
+          {
+            "id": "D",
+            "text": "Removing plant cover between fields to expose the topsoil evenly"
+          }
+        ],
+        "proposedCorrectOptionId": "A",
+        "proposedAnswerText": "Maintaining protective vegetation/contour-based management",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "e8432d0bf95a6fb1dcdbf19706d55f8a2e08bbadda2537dedcec979a92ae3cea",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-AGRI-TECH-ENGLISH-C08-I01",
+      "originalRevisionSha256": "02310906a58ebec5a384c89d0efe5503686a5d0fb8eb1ab928ae4ba1653e87ea",
+      "originalSourceFile": "agriTech9EnglishStarter2026.json",
+      "originalSourceFileSha256": "fa90a74076340c6293d3ba2d051329aa51cfed044953840c935ad0bbb85b55df",
+      "originalOptions": [
+        "Health, nutrition, welfare and suitable housing",
+        "Neglecting clean water",
+        "Ignoring disease signs",
+        "Overcrowding"
+      ],
+      "originalReferenceAnswerText": "Health, nutrition, welfare and suitable housing",
+      "originalOptionLengthRatio": 2.518,
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
+      "newOptionLengthRatio": 0.6912,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-AGRI-TECH-ENGLISH-C08-I01",
+        "parentOriginalRevisionSha256": "02310906a58ebec5a384c89d0efe5503686a5d0fb8eb1ab928ae4ba1653e87ea",
+        "grade": 9,
+        "subject": "agriculture-sciences-tech",
+        "medium": "english",
+        "originalStem": "Good farm-animal management should prioritize?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Maximizing herd numbers before checking whether sufficient space exists"
+          },
+          {
+            "id": "B",
+            "text": "Health, nutrition, welfare and suitable housing"
+          },
+          {
+            "id": "C",
+            "text": "Focusing on production figures while overlooking daily welfare checks"
+          },
+          {
+            "id": "D",
+            "text": "Providing the same feed and shelter regardless of animals' needs"
+          }
+        ],
+        "proposedCorrectOptionId": "B",
+        "proposedAnswerText": "Health, nutrition, welfare and suitable housing",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "c7840349dac20323c0be11a35eaa5fd840a6bc739e30ff41ea21d36f5d5949f7",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-AGRI-TECH-ENGLISH-C10-I01",
+      "originalRevisionSha256": "d5c5667cd810c46a1e9b3f5f24d4df323c8ac48ede2d71c902117ea2599c3994",
+      "originalSourceFile": "agriTech9EnglishStarter2026.json",
+      "originalSourceFileSha256": "fa90a74076340c6293d3ba2d051329aa51cfed044953840c935ad0bbb85b55df",
+      "originalOptions": [
+        "Clean housing, suitable feed/water and health monitoring",
+        "Overcrowding",
+        "No ventilation",
+        "Ignoring sick birds"
+      ],
+      "originalReferenceAnswerText": "Clean housing, suitable feed/water and health monitoring",
+      "originalOptionLengthRatio": 3.733,
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
+      "newOptionLengthRatio": 0.8116,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-AGRI-TECH-ENGLISH-C10-I01",
+        "parentOriginalRevisionSha256": "d5c5667cd810c46a1e9b3f5f24d4df323c8ac48ede2d71c902117ea2599c3994",
+        "grade": 9,
+        "subject": "agriculture-sciences-tech",
+        "medium": "english",
+        "originalStem": "Good poultry husbandry requires?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Keeping as many birds together as possible without checking ventilation"
+          },
+          {
+            "id": "B",
+            "text": "Giving feed without regularly evaluating flock cleanliness or health"
+          },
+          {
+            "id": "C",
+            "text": "Clean housing, suitable feed/water and health monitoring"
+          },
+          {
+            "id": "D",
+            "text": "Using cramped housing while assuming routine cleaning is unnecessary"
+          }
+        ],
+        "proposedCorrectOptionId": "C",
+        "proposedAnswerText": "Clean housing, suitable feed/water and health monitoring",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "39b1ea6a9608bf293c4a34f2e8a5842cedbec69f9dacc74ff7bdccdc00748a07",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-AGRI-TECH-URDU-C08-I01",
+      "originalRevisionSha256": "30e69993a6c26790a36f12dc4a86ee1aa34e83c63bb68c4c9cc7b84f5d57ab5a",
+      "originalSourceFile": "agriTech9UrduStarter2026.json",
+      "originalSourceFileSha256": "4368b848189c852bfbd0e66190b5e29d94b3df588dec2ea5427e247da769bf10",
+      "originalOptions": [
+        "Health، nutrition، welfare اور suitable housing",
+        "clean water ignore کرنا",
+        "disease signs ignore کرنا",
+        "overcrowding"
+      ],
+      "originalReferenceAnswerText": "Health، nutrition، welfare اور suitable housing",
+      "originalOptionLengthRatio": 2.35,
+      "draftNewOptionCorrectIndex": 3,
+      "draftAnswerPosition": "D",
+      "newOptionLengthRatio": 0.8812,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-AGRI-TECH-URDU-C08-I01",
+        "parentOriginalRevisionSha256": "30e69993a6c26790a36f12dc4a86ee1aa34e83c63bb68c4c9cc7b84f5d57ab5a",
+        "grade": 9,
+        "subject": "agriculture-sciences-tech",
+        "medium": "urdu",
+        "originalStem": "Responsible farm-animal management میں priority کیا ہونی چاہیے؟",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "جانوروں کی ضروریات دیکھے بغیر تعداد بڑھانے کو ترجیح دینا"
+          },
+          {
+            "id": "B",
+            "text": "خوراک کی مقدار کو صحت اور آرام سے زیادہ اہم سمجھنا"
+          },
+          {
+            "id": "C",
+            "text": "موسم اور جانور کی حالت سے قطع نظر ایک جیسی رہائش رکھنا"
+          },
+          {
+            "id": "D",
+            "text": "Health، nutrition، welfare اور suitable housing"
+          }
+        ],
+        "proposedCorrectOptionId": "D",
+        "proposedAnswerText": "Health، nutrition، welfare اور suitable housing",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "8bcc74f9d19eb6051a3a0365bce4177dcc4c68b67ca727a7da9a1fc4728acdd0",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-AGRI-TECH-URDU-C10-I01",
+      "originalRevisionSha256": "f64be889231e2353f611f2ce12b5cbdedf8df7536c4e65cfa7ed6bc865220b5b",
+      "originalSourceFile": "agriTech9UrduStarter2026.json",
+      "originalSourceFileSha256": "4368b848189c852bfbd0e66190b5e29d94b3df588dec2ea5427e247da769bf10",
+      "originalOptions": [
+        "Clean housing، suitable feed/water اور health monitoring",
+        "overcrowding",
+        "no ventilation",
+        "sick birds ignore کرنا"
+      ],
+      "originalReferenceAnswerText": "Clean housing، suitable feed/water اور health monitoring",
+      "originalOptionLengthRatio": 3.5,
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
+      "newOptionLengthRatio": 1.0435,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-AGRI-TECH-URDU-C10-I01",
+        "parentOriginalRevisionSha256": "f64be889231e2353f611f2ce12b5cbdedf8df7536c4e65cfa7ed6bc865220b5b",
+        "grade": 9,
+        "subject": "agriculture-sciences-tech",
+        "medium": "urdu",
+        "originalStem": "Good poultry husbandry میں کیا ضروری ہے؟",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Clean housing، suitable feed/water اور health monitoring"
+          },
+          {
+            "id": "B",
+            "text": "پرندوں کی تعداد بڑھا کر ہوا کی آمد و رفت کو غیر اہم سمجھنا"
+          },
+          {
+            "id": "C",
+            "text": "خوراک دینا مگر پرندوں کی صحت کی باقاعدہ نگرانی نہ کرنا"
+          },
+          {
+            "id": "D",
+            "text": "رہائش میں صفائی اور مناسب جگہ کو غیر ضروری سمجھنا"
+          }
+        ],
+        "proposedCorrectOptionId": "A",
+        "proposedAnswerText": "Clean housing، suitable feed/water اور health monitoring",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "994e5f1597b89f0aa13c9b48367263cdc5f0238ccf50945dc23de8c6859989db",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-BIO-2025-C07-B01-M01",
+      "originalRevisionSha256": "6c7c70f318fe60af54f7d8106158c1b0a67f89e367d04b65d66e2b25225fa5fb",
+      "originalSourceFile": "biology9EnglishStarter2026.json",
+      "originalSourceFileSha256": "e36217adade79b13c5a275c256373929b616219d37a399181d619e016f3e1a4e",
+      "originalOptions": [
+        "To speed a specific biochemical reaction without being consumed",
+        "To supply chromosomes",
+        "To store all genetic information",
+        "To form cell walls only"
+      ],
+      "originalReferenceAnswerText": "To speed a specific biochemical reaction without being consumed",
+      "originalOptionLengthRatio": 2.487,
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
+      "newOptionLengthRatio": 0.9692,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-BIO-2025-C07-B01-M01",
+        "parentOriginalRevisionSha256": "6c7c70f318fe60af54f7d8106158c1b0a67f89e367d04b65d66e2b25225fa5fb",
+        "grade": 9,
+        "subject": "biology",
+        "medium": "english",
+        "originalStem": "What is the main role of an enzyme?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "To provide the genetic instructions used to build every cell structure"
+          },
+          {
+            "id": "B",
+            "text": "To speed a specific biochemical reaction without being consumed"
+          },
+          {
+            "id": "C",
+            "text": "To permanently raise the temperature of all biochemical mixtures"
+          },
+          {
+            "id": "D",
+            "text": "To act as the main stored source of energy inside chromosomes"
+          }
+        ],
+        "proposedCorrectOptionId": "B",
+        "proposedAnswerText": "To speed a specific biochemical reaction without being consumed",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "0f4e97e2cbcc569ce0d5f353774f9dbb4dddaa91f63c857b8263154fa3f5a8a7",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-BIO-2025-C09-B02-M01",
+      "originalRevisionSha256": "ec7ae0c16402476ab567b572bc5d74d3f8096dc04bd3e85280e1dbbf0f67af0d",
+      "originalSourceFile": "biology9EnglishStarter2026.json",
+      "originalSourceFileSha256": "e36217adade79b13c5a275c256373929b616219d37a399181d619e016f3e1a4e",
+      "originalOptions": [
+        "Loss of water vapour from aerial plant surfaces, mainly through stomata",
+        "Movement of sugar in phloem only",
+        "Cell division in roots",
+        "Formation of pollen only"
+      ],
+      "originalReferenceAnswerText": "Loss of water vapour from aerial plant surfaces, mainly through stomata",
+      "originalOptionLengthRatio": 2.731,
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
+      "newOptionLengthRatio": 1.0867,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": true,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-BIO-2025-C09-B02-M01",
+        "parentOriginalRevisionSha256": "ec7ae0c16402476ab567b572bc5d74d3f8096dc04bd3e85280e1dbbf0f67af0d",
+        "grade": 9,
+        "subject": "biology",
+        "medium": "english",
+        "originalStem": "What is transpiration?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Movement of dissolved sugars from photosynthetic leaves through phloem"
+          },
+          {
+            "id": "B",
+            "text": "Absorption of liquid water from moist soil by growing root hairs"
+          },
+          {
+            "id": "C",
+            "text": "Loss of water vapour from aerial plant surfaces, mainly through stomata"
+          },
+          {
+            "id": "D",
+            "text": "Release of oxygen from chloroplasts during photosynthesis only"
+          }
+        ],
+        "proposedCorrectOptionId": "C",
+        "proposedAnswerText": "Loss of water vapour from aerial plant surfaces, mainly through stomata",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "7ac7e6cc3fa507129e4f64e1157d6be877ea4700d0adf6f2af862c38b61e7943",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-BIO-2025-C11-B01-M01",
+      "originalRevisionSha256": "b85c4933209f6ac014900f10dec7c9db672758c14d4bbc2bdddb0d0378acf843",
+      "originalSourceFile": "biology9EnglishStarter2026.json",
+      "originalSourceFileSha256": "e36217adade79b13c5a275c256373929b616219d37a399181d619e016f3e1a4e",
+      "originalOptions": [
+        "Sum of observations divided by number of observations",
+        "Most frequent value only",
+        "Middle value only",
+        "Largest value minus smallest value"
+      ],
+      "originalReferenceAnswerText": "Sum of observations divided by number of observations",
+      "originalOptionLengthRatio": 2.12,
+      "draftNewOptionCorrectIndex": 3,
+      "draftAnswerPosition": "D",
+      "newOptionLengthRatio": 0.8368,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-BIO-2025-C11-B01-M01",
+        "parentOriginalRevisionSha256": "b85c4933209f6ac014900f10dec7c9db672758c14d4bbc2bdddb0d0378acf843",
+        "grade": 9,
+        "subject": "biology",
+        "medium": "english",
+        "originalStem": "What is the arithmetic mean?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Number that appears most often within the collected observations"
+          },
+          {
+            "id": "B",
+            "text": "Observation found halfway through the values after sorting them"
+          },
+          {
+            "id": "C",
+            "text": "Difference between the greatest and least recorded observations"
+          },
+          {
+            "id": "D",
+            "text": "Sum of observations divided by number of observations"
+          }
+        ],
+        "proposedCorrectOptionId": "D",
+        "proposedAnswerText": "Sum of observations divided by number of observations",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "dc3763029ea060568f557d526f1432882672284c66f64c829725e254f66e82ee",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-BIO-UR-C03-M01",
+      "originalRevisionSha256": "dca4751c9e5b7c46eac65e25ee546e91537dc2dd8595dd727d023fc3b29930d5",
+      "originalSourceFile": "biology9UrduStarter2026.json",
+      "originalSourceFileSha256": "26784a13d6e22cb79c9fffb98b31c768e165a5999871b76bbecf61d6ef814d1f",
+      "originalOptions": [
+        "cell میں substances کی آمد و رفت کو regulate کرنا",
+        "صرف رنگ دینا",
+        "DNA کو ختم کرنا",
+        "صرف حرکت پیدا کرنا"
+      ],
+      "originalReferenceAnswerText": "cell میں substances کی آمد و رفت کو regulate کرنا",
+      "originalOptionLengthRatio": 3.267,
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
+      "newOptionLengthRatio": 0.7861,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-BIO-UR-C03-M01",
+        "parentOriginalRevisionSha256": "dca4751c9e5b7c46eac65e25ee546e91537dc2dd8595dd727d023fc3b29930d5",
+        "grade": 9,
+        "subject": "biology",
+        "medium": "urdu",
+        "originalStem": "Cell membrane کا بنیادی کام کیا ہے؟",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "cell میں substances کی آمد و رفت کو regulate کرنا"
+          },
+          {
+            "id": "B",
+            "text": "cell کے اندر موجود تمام DNA کو نقل کر کے اگلے خلیے تک پہنچانا"
+          },
+          {
+            "id": "C",
+            "text": "cell میں توانائی پیدا کرنے والے تمام reactions خود انجام دینا"
+          },
+          {
+            "id": "D",
+            "text": "cell کے nucleus میں chromosomes کی ترتیب کو براہ راست کنٹرول کرنا"
+          }
+        ],
+        "proposedCorrectOptionId": "A",
+        "proposedAnswerText": "cell میں substances کی آمد و رفت کو regulate کرنا",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "8b3016c755e107332879f36c1bdf5c53e74f4662840d0b861ccda03e05633eb5",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-BIO-UR-C10-M01",
+      "originalRevisionSha256": "e8c294153a5bc57ffc6e7fc5b4d5e6625da8d7ea64094ddec12246919f649547",
+      "originalSourceFile": "biology9UrduStarter2026.json",
+      "originalSourceFileSha256": "26784a13d6e22cb79c9fffb98b31c768e165a5999871b76bbecf61d6ef814d1f",
+      "originalOptions": [
+        "pollen کا مناسب reproductive surface تک transfer",
+        "seed کا germination",
+        "root کا growth",
+        "leaf کا fall"
+      ],
+      "originalReferenceAnswerText": "pollen کا مناسب reproductive surface تک transfer",
+      "originalOptionLengthRatio": 3.2,
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
+      "newOptionLengthRatio": 0.8889,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-BIO-UR-C10-M01",
+        "parentOriginalRevisionSha256": "e8c294153a5bc57ffc6e7fc5b4d5e6625da8d7ea64094ddec12246919f649547",
+        "grade": 9,
+        "subject": "biology",
+        "medium": "urdu",
+        "originalStem": "Pollination سے کیا مراد ہے؟",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "pollen کا anther میں تیار ہونا اور grains کی تعداد بڑھنا"
+          },
+          {
+            "id": "B",
+            "text": "pollen کا مناسب reproductive surface تک transfer"
+          },
+          {
+            "id": "C",
+            "text": "seed کا مناسب حالات میں جڑ نکال کر نشوونما شروع کرنا"
+          },
+          {
+            "id": "D",
+            "text": "fertilization کے بعد ovule کا مکمل seed میں تبدیل ہونا"
+          }
+        ],
+        "proposedCorrectOptionId": "B",
+        "proposedAnswerText": "pollen کا مناسب reproductive surface تک transfer",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "48a62d1af2e4b642be35073e76e9ee6d9e0e0022943eb9ac69bdf9ec8784f73d",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-BIOLOGY-TECH-ENGLISH-C02-M01",
+      "originalRevisionSha256": "92142ffe8fbf3d76082a6aecd7f2ca901beabfb4def0cd0cff673ea371650a7a",
+      "originalSourceFile": "bioTech9emStarter2026.json",
+      "originalSourceFileSha256": "998493bae8aa6739b166ec19124a20f74a976b6ce3504fec6716649b05282e41",
+      "originalOptions": [
+        "The variety of living organisms and biological variation",
+        "Only one species",
+        "Only climate variation",
+        "Only mineral diversity"
+      ],
+      "originalReferenceAnswerText": "The variety of living organisms and biological variation",
+      "originalOptionLengthRatio": 2.8,
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
+      "newOptionLengthRatio": 0.84,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-BIOLOGY-TECH-ENGLISH-C02-M01",
+        "parentOriginalRevisionSha256": "92142ffe8fbf3d76082a6aecd7f2ca901beabfb4def0cd0cff673ea371650a7a",
+        "grade": 9,
+        "subject": "biology-tech",
+        "medium": "english",
+        "originalStem": "Biodiversity refers to?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "The physical conditions of a habitat considered without living organisms"
+          },
+          {
+            "id": "B",
+            "text": "The number of individuals belonging to one selected species alone"
+          },
+          {
+            "id": "C",
+            "text": "The variety of living organisms and biological variation"
+          },
+          {
+            "id": "D",
+            "text": "The range of soil minerals found in a particular rock formation"
+          }
+        ],
+        "proposedCorrectOptionId": "C",
+        "proposedAnswerText": "The variety of living organisms and biological variation",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "731620a338fb804f8e2d32ae3349aa851312ac606d7286a02fb5ac39d738c54e",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-CHEM-2025-C13-13T5-M01",
+      "originalRevisionSha256": "3e289093484a3504c0bfa95577f19becc47f95f426c182a84e1473c283d0c150",
+      "originalSourceFile": "chemistry9Chapter13EnglishDrafts2026.json",
+      "originalSourceFileSha256": "c328c074b6caa9632712fa3007a7e457eac87a62e9bd5085114f35842463dc69",
+      "originalOptions": [
+        "Alert the responsible teacher and follow the emergency procedure",
+        "Hide the incident",
+        "Continue the experiment",
+        "Leave hazards unreported"
+      ],
+      "originalReferenceAnswerText": "Alert the responsible teacher and follow the emergency procedure",
+      "originalOptionLengthRatio": 3,
+      "draftNewOptionCorrectIndex": 3,
+      "draftAnswerPosition": "D",
+      "newOptionLengthRatio": 0.9697,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-CHEM-2025-C13-13T5-M01",
+        "parentOriginalRevisionSha256": "3e289093484a3504c0bfa95577f19becc47f95f426c182a84e1473c283d0c150",
+        "grade": 9,
+        "subject": "chemistry",
+        "medium": "english",
+        "originalStem": "If a laboratory accident occurs, what is the best immediate general response?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Keep observations private and complete the lesson before reporting"
+          },
+          {
+            "id": "B",
+            "text": "Record the event at the end without first alerting a responsible adult"
+          },
+          {
+            "id": "C",
+            "text": "Treat unexpected problems as routine and continue the activity"
+          },
+          {
+            "id": "D",
+            "text": "Alert the responsible teacher and follow the emergency procedure"
+          }
+        ],
+        "proposedCorrectOptionId": "D",
+        "proposedAnswerText": "Alert the responsible teacher and follow the emergency procedure",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "fd1b6dadd04c54700aeaf5699da293ad404c441a88431cc23ce5510f9b950c57",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-CHEM-UR-C12-M01",
+      "originalRevisionSha256": "bfe1ff5ceb431b1c87291893f65d1c6f715ee1d0cc7da1e4c926da5c719f5e7e",
+      "originalSourceFile": "chemistry9UrduStarter2026.json",
+      "originalSourceFileSha256": "0993bd684e10497b63e0792a23698046470c9433bca944b06e71f5849ef54cc5",
+      "originalOptions": [
+        "random variation کا اندازہ اور reliability بہتر کرنا",
+        "ہر غلطی ختم ہونا لازمی",
+        "units کی ضرورت ختم کرنا",
+        "data کو چھپانا"
+      ],
+      "originalReferenceAnswerText": "random variation کا اندازہ اور reliability بہتر کرنا",
+      "originalOptionLengthRatio": 2.644,
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
+      "newOptionLengthRatio": 0.8432,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-CHEM-UR-C12-M01",
+        "parentOriginalRevisionSha256": "bfe1ff5ceb431b1c87291893f65d1c6f715ee1d0cc7da1e4c926da5c719f5e7e",
+        "grade": 9,
+        "subject": "chemistry",
+        "medium": "urdu",
+        "originalStem": "Repeated measurements کا ایک فائدہ کیا ہے؟",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "random variation کا اندازہ اور reliability بہتر کرنا"
+          },
+          {
+            "id": "B",
+            "text": "بار بار پڑھنے سے پیمائش کی تمام ممکنہ غلطیاں لازماً ختم ہو جاتی ہیں"
+          },
+          {
+            "id": "C",
+            "text": "تکرار کے بعد پیمائش کی اکائی بیان کرنا غیر ضروری ہو جاتا ہے"
+          },
+          {
+            "id": "D",
+            "text": "متعدد observations رکھنے سے اصل data چھپانا آسان ہو جاتا ہے"
+          }
+        ],
+        "proposedCorrectOptionId": "A",
+        "proposedAnswerText": "random variation کا اندازہ اور reliability بہتر کرنا",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "9dec8076c22d6791b107106f3f4b601a7b1e1a04c847c9386da930e9801ced23",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-CHEMISTRY-TECH-ENGLISH-C01-M01",
+      "originalRevisionSha256": "0cca4ecc6e6721b074bbe18e04760f08dd09fa034959b146236e9e10ac2fe122",
+      "originalSourceFile": "chemTech9emStarter2026.json",
+      "originalSourceFileSha256": "6d9f045b9a6a9bd155570a16b8e20a520eab107ad8a49b6376b8cfbcedafa1f0",
+      "originalOptions": [
+        "They are closely packed and vibrate around fixed positions",
+        "They are absent",
+        "They move completely freely at all times",
+        "They are always ions"
+      ],
+      "originalReferenceAnswerText": "They are closely packed and vibrate around fixed positions",
+      "originalOptionLengthRatio": 2.32,
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
+      "newOptionLengthRatio": 1.0058,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-CHEMISTRY-TECH-ENGLISH-C01-M01",
+        "parentOriginalRevisionSha256": "0cca4ecc6e6721b074bbe18e04760f08dd09fa034959b146236e9e10ac2fe122",
+        "grade": 9,
+        "subject": "chemistry-tech",
+        "medium": "english",
+        "originalStem": "Which statement best describes particles in a solid?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "They are widely spaced and move without any fixed neighbours"
+          },
+          {
+            "id": "B",
+            "text": "They are closely packed and vibrate around fixed positions"
+          },
+          {
+            "id": "C",
+            "text": "They stay completely motionless and cannot vibrate at all"
+          },
+          {
+            "id": "D",
+            "text": "They always carry an electric charge as free-moving ions"
+          }
+        ],
+        "proposedCorrectOptionId": "B",
+        "proposedAnswerText": "They are closely packed and vibrate around fixed positions",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "ee5c7e85cfdf64ca6fa9493de8965bd366a11440b5cde7d23cad3db0ec157fe4",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-CHEMISTRY-TECH-ENGLISH-C03-M01",
+      "originalRevisionSha256": "dd722bfce37c0c1a6e4174a8dcad5477f1ae49892dc6ec47d9279939992b5e9c",
+      "originalSourceFile": "chemTech9emStarter2026.json",
+      "originalSourceFileSha256": "6d9f045b9a6a9bd155570a16b8e20a520eab107ad8a49b6376b8cfbcedafa1f0",
+      "originalOptions": [
+        "Electron transfer and attraction between oppositely charged ions",
+        "Proton sharing",
+        "Neutron transfer",
+        "No particle interaction"
+      ],
+      "originalReferenceAnswerText": "Electron transfer and attraction between oppositely charged ions",
+      "originalOptionLengthRatio": 3.623,
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
+      "newOptionLengthRatio": 1.0052,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-CHEMISTRY-TECH-ENGLISH-C03-M01",
+        "parentOriginalRevisionSha256": "dd722bfce37c0c1a6e4174a8dcad5477f1ae49892dc6ec47d9279939992b5e9c",
+        "grade": 9,
+        "subject": "chemistry-tech",
+        "medium": "english",
+        "originalStem": "Ionic bonding mainly involves?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Sharing pairs of neutrons equally between neighbouring atomic nuclei"
+          },
+          {
+            "id": "B",
+            "text": "Attraction among uncharged atoms without any electron transfer"
+          },
+          {
+            "id": "C",
+            "text": "Electron transfer and attraction between oppositely charged ions"
+          },
+          {
+            "id": "D",
+            "text": "Transferring protons directly between the nuclei of two atoms"
+          }
+        ],
+        "proposedCorrectOptionId": "C",
+        "proposedAnswerText": "Electron transfer and attraction between oppositely charged ions",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "a84441587209d4985284489247be65c1ff03d3d082202d4dad6e1d41f1617153",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-CHEMISTRY-TECH-ENGLISH-C12-M01",
+      "originalRevisionSha256": "3efc8fba6c2d44990f628ad41958aca3c77ba12f5d5683438d7758e63c49ee4d",
+      "originalSourceFile": "chemTech9emStarter2026.json",
+      "originalSourceFileSha256": "6d9f045b9a6a9bd155570a16b8e20a520eab107ad8a49b6376b8cfbcedafa1f0",
+      "originalOptions": [
+        "Estimate random variation and improve reliability",
+        "Remove the need for units",
+        "Guarantee no error",
+        "Hide data"
+      ],
+      "originalReferenceAnswerText": "Estimate random variation and improve reliability",
+      "originalOptionLengthRatio": 2.827,
+      "draftNewOptionCorrectIndex": 3,
+      "draftAnswerPosition": "D",
+      "newOptionLengthRatio": 0.8122,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-CHEMISTRY-TECH-ENGLISH-C12-M01",
+        "parentOriginalRevisionSha256": "3efc8fba6c2d44990f628ad41958aca3c77ba12f5d5683438d7758e63c49ee4d",
+        "grade": 9,
+        "subject": "chemistry-tech",
+        "medium": "english",
+        "originalStem": "Repeated measurements can help?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Ensure all experimental errors disappear after enough repeats"
+          },
+          {
+            "id": "B",
+            "text": "Make the measurement units unnecessary when reporting a result"
+          },
+          {
+            "id": "C",
+            "text": "Replace the need to keep and compare the original readings"
+          },
+          {
+            "id": "D",
+            "text": "Estimate random variation and improve reliability"
+          }
+        ],
+        "proposedCorrectOptionId": "D",
+        "proposedAnswerText": "Estimate random variation and improve reliability",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "859cd9a4e095ad73fb3dd62f04b647aebb76ac252b6e3df2c0801430c92fe745",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-CHEMISTRY-TECH-ENGLISH-C13-M01",
+      "originalRevisionSha256": "fbe860743089f9db951077795a5a677971eab34cfa15ffde5982131ba411dbdd",
+      "originalSourceFile": "chemTech9emStarter2026.json",
+      "originalSourceFileSha256": "6d9f045b9a6a9bd155570a16b8e20a520eab107ad8a49b6376b8cfbcedafa1f0",
+      "originalOptions": [
+        "Follow instructions and use suitable protective equipment",
+        "Taste unknown chemicals",
+        "Leave samples unlabeled",
+        "Ignore safety rules"
+      ],
+      "originalReferenceAnswerText": "Follow instructions and use suitable protective equipment",
+      "originalOptionLengthRatio": 2.631,
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
+      "newOptionLengthRatio": 0.8814,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-CHEMISTRY-TECH-ENGLISH-C13-M01",
+        "parentOriginalRevisionSha256": "fbe860743089f9db951077795a5a677971eab34cfa15ffde5982131ba411dbdd",
+        "grade": 9,
+        "subject": "chemistry-tech",
+        "medium": "english",
+        "originalStem": "A basic laboratory safety practice is to?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Follow instructions and use suitable protective equipment"
+          },
+          {
+            "id": "B",
+            "text": "Rely on memory alone rather than reviewing written safety guidance"
+          },
+          {
+            "id": "C",
+            "text": "Assume correct labels and appropriate supervision are unnecessary"
+          },
+          {
+            "id": "D",
+            "text": "Choose equipment without checking whether it suits the activity"
+          }
+        ],
+        "proposedCorrectOptionId": "A",
+        "proposedAnswerText": "Follow instructions and use suitable protective equipment",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "e460e1eaf5ff3a045b24040c93fd7742ad9c415a9fd8fe65a6872368778b2dea",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-CHEMISTRY-TECH-URDU-C01-M01",
+      "originalRevisionSha256": "5813d9a663a98895ebc0b47705b1c22b28f73d8103a23a74e5e97edd0b494c09",
+      "originalSourceFile": "chemTech9urStarter2026.json",
+      "originalSourceFileSha256": "eaee9eec640f4f840996217d5ea9fff45830f02e4dc7e5b7d855defb1a06ff5f",
+      "originalOptions": [
+        "قریب packed اور fixed positions کے گرد vibration",
+        "particles موجود نہیں",
+        "ہر وقت مکمل آزاد حرکت",
+        "ہمیشہ ions"
+      ],
+      "originalReferenceAnswerText": "قریب packed اور fixed positions کے گرد vibration",
+      "originalOptionLengthRatio": 2.824,
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
+      "newOptionLengthRatio": 0.8324,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-CHEMISTRY-TECH-URDU-C01-M01",
+        "parentOriginalRevisionSha256": "5813d9a663a98895ebc0b47705b1c22b28f73d8103a23a74e5e97edd0b494c09",
+        "grade": 9,
+        "subject": "chemistry-tech",
+        "medium": "urdu",
+        "originalStem": "Solid میں particles کی عام arrangement کیا ہوتی ہے؟",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "ذرات ایک دوسرے سے بہت دور ہوں اور آزادانہ مسلسل حرکت کریں"
+          },
+          {
+            "id": "B",
+            "text": "قریب packed اور fixed positions کے گرد vibration"
+          },
+          {
+            "id": "C",
+            "text": "ذرات اپنی مقررہ جگہ پر موجود ہوں لیکن بالکل vibration نہ کریں"
+          },
+          {
+            "id": "D",
+            "text": "تمام solids کے ذرات ہمیشہ صرف آزاد ions کی صورت میں ہوں"
+          }
+        ],
+        "proposedCorrectOptionId": "B",
+        "proposedAnswerText": "قریب packed اور fixed positions کے گرد vibration",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "12abb90d249cb9103b658280b3626956636da396f9f3582736d9614c8f60e342",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-CHEMISTRY-TECH-URDU-C03-M01",
+      "originalRevisionSha256": "9933ae831d3d3ad3dbba4f2ae13af0ae4fa8a27cffbdb8f5e5d6f64db8999772",
+      "originalSourceFile": "chemTech9urStarter2026.json",
+      "originalSourceFileSha256": "eaee9eec640f4f840996217d5ea9fff45830f02e4dc7e5b7d855defb1a06ff5f",
+      "originalOptions": [
+        "Electron transfer اور opposite ions کی attraction",
+        "Proton sharing",
+        "Neutron transfer",
+        "کوئی interaction نہیں"
+      ],
+      "originalReferenceAnswerText": "Electron transfer اور opposite ions کی attraction",
+      "originalOptionLengthRatio": 2.882,
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
+      "newOptionLengthRatio": 0.9245,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-CHEMISTRY-TECH-URDU-C03-M01",
+        "parentOriginalRevisionSha256": "9933ae831d3d3ad3dbba4f2ae13af0ae4fa8a27cffbdb8f5e5d6f64db8999772",
+        "grade": 9,
+        "subject": "chemistry-tech",
+        "medium": "urdu",
+        "originalStem": "Ionic bonding میں بنیادی طور پر کیا ہوتا ہے؟",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "atoms کے nuclei کے درمیان protons کا براہ راست تبادلہ ہونا"
+          },
+          {
+            "id": "B",
+            "text": "electrons کے بغیر neutral particles کا محض مل جانا"
+          },
+          {
+            "id": "C",
+            "text": "Electron transfer اور opposite ions کی attraction"
+          },
+          {
+            "id": "D",
+            "text": "atoms کے درمیان صرف neutrons کی مشترکہ pairing ہونا"
+          }
+        ],
+        "proposedCorrectOptionId": "C",
+        "proposedAnswerText": "Electron transfer اور opposite ions کی attraction",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "ff704f3df6232461305a3c20cd6cf1e230d4f057e6f7ae6b61d24b33dca35d17",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-CHEMISTRY-TECH-URDU-C12-M01",
+      "originalRevisionSha256": "8f4a2ae19f9ee6b4193f04c698fab4e5dcb19f6ecc25e64b5b6ac2dcedbf0ad4",
+      "originalSourceFile": "chemTech9urStarter2026.json",
+      "originalSourceFileSha256": "eaee9eec640f4f840996217d5ea9fff45830f02e4dc7e5b7d855defb1a06ff5f",
+      "originalOptions": [
+        "Random variation estimate اور reliability بہتر کرنا",
+        "Units کی ضرورت ختم کرنا",
+        "ہر error ختم کرنا",
+        "Data چھپانا"
+      ],
+      "originalReferenceAnswerText": "Random variation estimate اور reliability بہتر کرنا",
+      "originalOptionLengthRatio": 3,
+      "draftNewOptionCorrectIndex": 3,
+      "draftAnswerPosition": "D",
+      "newOptionLengthRatio": 0.8644,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-CHEMISTRY-TECH-URDU-C12-M01",
+        "parentOriginalRevisionSha256": "8f4a2ae19f9ee6b4193f04c698fab4e5dcb19f6ecc25e64b5b6ac2dcedbf0ad4",
+        "grade": 9,
+        "subject": "chemistry-tech",
+        "medium": "urdu",
+        "originalStem": "Repeated measurements کا فائدہ کیا ہے؟",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "کافی بار ناپنے سے ہر systematic error کا ہمیشہ ختم ہو جانا"
+          },
+          {
+            "id": "B",
+            "text": "زیادہ readings حاصل کرنے کے بعد units لکھنے کی ضرورت نہ رہنا"
+          },
+          {
+            "id": "C",
+            "text": "repeated observations کے باعث اصل measurements کو چھوڑ دینا"
+          },
+          {
+            "id": "D",
+            "text": "Random variation estimate اور reliability بہتر کرنا"
+          }
+        ],
+        "proposedCorrectOptionId": "D",
+        "proposedAnswerText": "Random variation estimate اور reliability بہتر کرنا",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "503d446317952a4a933b92e5d1de8b1aed392d5acacd0b20e9815c101e2d3ba7",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-CHEMISTRY-TECH-URDU-C13-M01",
+      "originalRevisionSha256": "71af4d5a9f4face3c4580347f2cff426068e71a1188b9b7a55936edb46de51c7",
+      "originalSourceFile": "chemTech9urStarter2026.json",
+      "originalSourceFileSha256": "eaee9eec640f4f840996217d5ea9fff45830f02e4dc7e5b7d855defb1a06ff5f",
+      "originalOptions": [
+        "Instructions follow کرنا اور suitable protective equipment استعمال کرنا",
+        "Unknown chemicals چکھنا",
+        "Samples unlabeled چھوڑنا",
+        "Safety rules ignore کرنا"
+      ],
+      "originalReferenceAnswerText": "Instructions follow کرنا اور suitable protective equipment استعمال کرنا",
+      "originalOptionLengthRatio": 3,
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
+      "newOptionLengthRatio": 1.1768,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": true,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-CHEMISTRY-TECH-URDU-C13-M01",
+        "parentOriginalRevisionSha256": "71af4d5a9f4face3c4580347f2cff426068e71a1188b9b7a55936edb46de51c7",
+        "grade": 9,
+        "subject": "chemistry-tech",
+        "medium": "urdu",
+        "originalStem": "Basic laboratory safety practice کون سی ہے؟",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Instructions follow کرنا اور suitable protective equipment استعمال کرنا"
+          },
+          {
+            "id": "B",
+            "text": "تحریری safety guidance کی جگہ صرف اپنی یادداشت پر بھروسہ کرنا"
+          },
+          {
+            "id": "C",
+            "text": "استعمال ہونے والے سامان کی موزونیت چیک کرنے کو غیر اہم سمجھنا"
+          },
+          {
+            "id": "D",
+            "text": "سامان کی پہچان اور ذمہ دار supervisor سے بات کرنا چھوڑ دینا"
+          }
+        ],
+        "proposedCorrectOptionId": "A",
+        "proposedAnswerText": "Instructions follow کرنا اور suitable protective equipment استعمال کرنا",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "f2ac670ec97fb8403ab908beab8084a407a37f4519e24e3027d8e03f1567aa45",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-COMP-U07-M02",
+      "originalRevisionSha256": "cffd66ec7fdeb2fb085c10046d168b72245a0b6f3fb2f766e70c073559052c27",
+      "originalSourceFile": "computer9Starter2026.json",
+      "originalSourceFileSha256": "1e685088636d6124c5ce9f6dffc3d480defc54dbfff001c8425b4da3b896d52a",
+      "originalOptions": [
+        "A finite ordered set of steps for solving a problem",
+        "A hardware port",
+        "A network cable",
+        "A file extension"
+      ],
+      "originalReferenceAnswerText": "A finite ordered set of steps for solving a problem",
+      "originalOptionLengthRatio": 3.326,
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
+      "newOptionLengthRatio": 0.8361,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-COMP-U07-M02",
+        "parentOriginalRevisionSha256": "cffd66ec7fdeb2fb085c10046d168b72245a0b6f3fb2f766e70c073559052c27",
+        "grade": 9,
+        "subject": "computer",
+        "medium": "english",
+        "originalStem": "An algorithm is?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "A permanent list of the physical components inside a computer"
+          },
+          {
+            "id": "B",
+            "text": "A finite ordered set of steps for solving a problem"
+          },
+          {
+            "id": "C",
+            "text": "A collection of unrelated files saved without a defined order"
+          },
+          {
+            "id": "D",
+            "text": "A network address identifying the machine that runs a program"
+          }
+        ],
+        "proposedCorrectOptionId": "B",
+        "proposedAnswerText": "A finite ordered set of steps for solving a problem",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "63768dbf7ff65c416cca3a093c3edce418ffc9f4246fe735f3505dccbb6bb1db",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-COMP-U10-M01",
+      "originalRevisionSha256": "5cb6100dfe325aedaa72a8b742412cd7dc059cb143841d3e7e8421da516a3ef9",
+      "originalSourceFile": "computer9Starter2026.json",
+      "originalSourceFileSha256": "1e685088636d6124c5ce9f6dffc3d480defc54dbfff001c8425b4da3b896d52a",
+      "originalOptions": [
+        "Learning, reasoning or pattern-based decision support",
+        "Only printing",
+        "Only electricity generation",
+        "Only file naming"
+      ],
+      "originalReferenceAnswerText": "Learning, reasoning or pattern-based decision support",
+      "originalOptionLengthRatio": 2.839,
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
+      "newOptionLengthRatio": 0.8281,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-COMP-U10-M01",
+        "parentOriginalRevisionSha256": "5cb6100dfe325aedaa72a8b742412cd7dc059cb143841d3e7e8421da516a3ef9",
+        "grade": 9,
+        "subject": "computer",
+        "medium": "english",
+        "originalStem": "Artificial intelligence broadly refers to computer systems designed to perform tasks involving?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Creating documents by operating a printer without interpreting input"
+          },
+          {
+            "id": "B",
+            "text": "Transferring electrical power from a source to a machine only"
+          },
+          {
+            "id": "C",
+            "text": "Learning, reasoning or pattern-based decision support"
+          },
+          {
+            "id": "D",
+            "text": "Assigning file names and folders without analysis or prediction"
+          }
+        ],
+        "proposedCorrectOptionId": "C",
+        "proposedAnswerText": "Learning, reasoning or pattern-based decision support",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "f4893d415c68345dd4438ead80622195edb8cff4f182c083d0e1ad08348d6893",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-COMP-U12-M01",
+      "originalRevisionSha256": "e131f172e3275e00041141fcd45558ebb5a496017d23cb1ee5ee2e52fa4240d5",
+      "originalSourceFile": "computer9Starter2026.json",
+      "originalSourceFileSha256": "1e685088636d6124c5ce9f6dffc3d480defc54dbfff001c8425b4da3b896d52a",
+      "originalOptions": [
+        "Why a product or service is useful to a target customer",
+        "Only its file size",
+        "Only its colour",
+        "Only its password"
+      ],
+      "originalReferenceAnswerText": "Why a product or service is useful to a target customer",
+      "originalOptionLengthRatio": 3.3,
+      "draftNewOptionCorrectIndex": 3,
+      "draftAnswerPosition": "D",
+      "newOptionLengthRatio": 0.8549,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-COMP-U12-M01",
+        "parentOriginalRevisionSha256": "e131f172e3275e00041141fcd45558ebb5a496017d23cb1ee5ee2e52fa4240d5",
+        "grade": 9,
+        "subject": "computer",
+        "medium": "english",
+        "originalStem": "A value proposition explains?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Which computer files and software licences were used to create it"
+          },
+          {
+            "id": "B",
+            "text": "How many pages appear in the advertising design and user manual"
+          },
+          {
+            "id": "C",
+            "text": "The technical details of the founder's personal login credentials"
+          },
+          {
+            "id": "D",
+            "text": "Why a product or service is useful to a target customer"
+          }
+        ],
+        "proposedCorrectOptionId": "D",
+        "proposedAnswerText": "Why a product or service is useful to a target customer",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "5804352e9b185cc41c64fba8fe8d1bfe9876cb02c6e9417c612f6270fb053cef",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-COMPENT-TECH-ENGLISH-C10-I01",
+      "originalRevisionSha256": "c9dab69230ed4b8a1337a800cadaea307750d96dec107ca1fae591d9419d88e2",
+      "originalSourceFile": "compEntTech9EnglishStarter2026.json",
+      "originalSourceFileSha256": "ee3bad52e0894d7049d6e4e5e97f7b55ec31c4e795b59314b3bc05e573aae06c",
+      "originalOptions": [
+        "Why a product or service is useful to a target customer",
+        "Only the file name",
+        "Only the founder age",
+        "Only the screen size"
+      ],
+      "originalReferenceAnswerText": "Why a product or service is useful to a target customer",
+      "originalOptionLengthRatio": 2.845,
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
+      "newOptionLengthRatio": 0.8919,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-COMPENT-TECH-ENGLISH-C10-I01",
+        "parentOriginalRevisionSha256": "c9dab69230ed4b8a1337a800cadaea307750d96dec107ca1fae591d9419d88e2",
+        "grade": 9,
+        "subject": "computer-science-entrepreneurship-tech",
+        "medium": "english",
+        "originalStem": "A value proposition explains what?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Why a product or service is useful to a target customer"
+          },
+          {
+            "id": "B",
+            "text": "The size and format of the files stored by the new business"
+          },
+          {
+            "id": "C",
+            "text": "The age and school background of the person founding the venture"
+          },
+          {
+            "id": "D",
+            "text": "The screen resolution selected for advertising the new service"
+          }
+        ],
+        "proposedCorrectOptionId": "A",
+        "proposedAnswerText": "Why a product or service is useful to a target customer",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "1b2c0382abc2ca792bd63ff16b4b3d021983255d8f3f4cb99aa3a13fb9e4c44e",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-COMPENT-TECH-URDU-C01-I01",
+      "originalRevisionSha256": "b78e835260c1d5c2b6e28643e4a7f8f60ad0503ed692f7bfea470ee211c73e66",
+      "originalSourceFile": "compEntTech9UrduStarter2026.json",
+      "originalSourceFileSha256": "a257a07290ddbd5f7a33fee0d4f5fa2c11dcf68795b846505f12e7c7d731ae6d",
+      "originalOptions": [
+        "باہم مربوط اجزا جو کسی مقصد کے لیے مل کر کام کریں",
+        "صرف ایک غیر متعلق شے",
+        "صرف keyboard",
+        "بے ترتیب فہرست"
+      ],
+      "originalReferenceAnswerText": "باہم مربوط اجزا جو کسی مقصد کے لیے مل کر کام کریں",
+      "originalOptionLengthRatio": 3.196,
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
+      "newOptionLengthRatio": 0.9423,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-COMPENT-TECH-URDU-C01-I01",
+        "parentOriginalRevisionSha256": "b78e835260c1d5c2b6e28643e4a7f8f60ad0503ed692f7bfea470ee211c73e66",
+        "grade": 9,
+        "subject": "computer-science-entrepreneurship-tech",
+        "medium": "urdu",
+        "originalStem": "سسٹم کی بہتر تعریف کون سی ہے؟",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "آپس میں غیر متعلق اشیا جن کا کوئی مشترکہ مقصد نہ ہو"
+          },
+          {
+            "id": "B",
+            "text": "باہم مربوط اجزا جو کسی مقصد کے لیے مل کر کام کریں"
+          },
+          {
+            "id": "C",
+            "text": "کمپیوٹر کے صرف ایک input device کو مکمل سسٹم سمجھنا"
+          },
+          {
+            "id": "D",
+            "text": "بے ترتیب معلومات کی فہرست جس میں کوئی باہمی تعلق نہ ہو"
+          }
+        ],
+        "proposedCorrectOptionId": "B",
+        "proposedAnswerText": "باہم مربوط اجزا جو کسی مقصد کے لیے مل کر کام کریں",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "24e31429de83a7d33034ff396cff2b706da30eaf56c5185a5f60d57a2c8fbb0a",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-COMPENT-TECH-URDU-C10-I01",
+      "originalRevisionSha256": "5dfd4caa156402174b9c3ad1c9dd9b5424818639b29c82f1bc6e8e7e88051e62",
+      "originalSourceFile": "compEntTech9UrduStarter2026.json",
+      "originalSourceFileSha256": "a257a07290ddbd5f7a33fee0d4f5fa2c11dcf68795b846505f12e7c7d731ae6d",
+      "originalOptions": [
+        "Product یا service target user کے لیے کیوں useful ہے",
+        "صرف file name",
+        "صرف founder کی عمر",
+        "صرف screen size"
+      ],
+      "originalReferenceAnswerText": "Product یا service target user کے لیے کیوں useful ہے",
+      "originalOptionLengthRatio": 3.391,
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
+      "newOptionLengthRatio": 0.9398,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-COMPENT-TECH-URDU-C10-I01",
+        "parentOriginalRevisionSha256": "5dfd4caa156402174b9c3ad1c9dd9b5424818639b29c82f1bc6e8e7e88051e62",
+        "grade": 9,
+        "subject": "computer-science-entrepreneurship-tech",
+        "medium": "urdu",
+        "originalStem": "Value proposition کیا واضح کرتی ہے؟",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "نئے کاروبار کی files کے نام اور folders کو بیان کرنا"
+          },
+          {
+            "id": "B",
+            "text": "بانی کی عمر اور ذاتی معلومات کو کاروبار کا فائدہ بتانا"
+          },
+          {
+            "id": "C",
+            "text": "Product یا service target user کے لیے کیوں useful ہے"
+          },
+          {
+            "id": "D",
+            "text": "service کے اشتہار میں استعمال ہونے والے screen size کو بتانا"
+          }
+        ],
+        "proposedCorrectOptionId": "C",
+        "proposedAnswerText": "Product یا service target user کے لیے کیوں useful ہے",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "ee0fcc2290fe72863b099e49e64a00d72ab117b744c9a327a4eda642dcb0ab0a",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-FASH-C01-M01",
+      "originalRevisionSha256": "02af41a3df064cc0a0c8bc087ecc2d7204fd8adec9b94ee555fb7d04a5990819",
+      "originalSourceFile": "fashionDesigning9TechStarter2026.json",
+      "originalSourceFileSha256": "6316e7da32f11a19f7b1b3a0d9092753e3968ed0b5349150c590c786cb466f04",
+      "originalOptions": [
+        "A style or way of dressing that becomes popular in a social or cultural context",
+        "Only a sewing tool",
+        "Only one historical costume",
+        "A mathematical formula"
+      ],
+      "originalReferenceAnswerText": "A style or way of dressing that becomes popular in a social or cultural context",
+      "originalOptionLengthRatio": 3.537,
+      "draftNewOptionCorrectIndex": 3,
+      "draftAnswerPosition": "D",
+      "newOptionLengthRatio": 1.228,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": true,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-FASH-C01-M01",
+        "parentOriginalRevisionSha256": "02af41a3df064cc0a0c8bc087ecc2d7204fd8adec9b94ee555fb7d04a5990819",
+        "grade": 9,
+        "subject": "fashion-designing-tech",
+        "medium": "english",
+        "originalStem": "Fashion is best understood as?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "A fixed technical definition of every garment regardless of culture"
+          },
+          {
+            "id": "B",
+            "text": "One specific piece of stitching equipment used in workshops"
+          },
+          {
+            "id": "C",
+            "text": "A mathematical rule for calculating patterns without social context"
+          },
+          {
+            "id": "D",
+            "text": "A style or way of dressing that becomes popular in a social or cultural context"
+          }
+        ],
+        "proposedCorrectOptionId": "D",
+        "proposedAnswerText": "A style or way of dressing that becomes popular in a social or cultural context",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "bef399804289f5d7e7ed8377e3d84ace4ea0197dd505a643d56a1ae6a04987ce",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-FASH-C05-M01",
+      "originalRevisionSha256": "7ac1512d7201a6c4f48cb2b2d6831a39ce3e3f8543d654885aecc7b8c715db7f",
+      "originalSourceFile": "fashionDesigning9TechStarter2026.json",
+      "originalSourceFileSha256": "6316e7da32f11a19f7b1b3a0d9092753e3968ed0b5349150c590c786cb466f04",
+      "originalOptions": [
+        "A locally developed skill or decorative tradition linked with community and culture",
+        "Only a factory machine",
+        "Only a foreign logo",
+        "A random measurement"
+      ],
+      "originalReferenceAnswerText": "A locally developed skill or decorative tradition linked with community and culture",
+      "originalOptionLengthRatio": 4.082,
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
+      "newOptionLengthRatio": 1.2513,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": true,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-FASH-C05-M01",
+        "parentOriginalRevisionSha256": "7ac1512d7201a6c4f48cb2b2d6831a39ce3e3f8543d654885aecc7b8c715db7f",
+        "grade": 9,
+        "subject": "fashion-designing-tech",
+        "medium": "english",
+        "originalStem": "A regional craft is best described as?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "A locally developed skill or decorative tradition linked with community and culture"
+          },
+          {
+            "id": "B",
+            "text": "A standard imported logo that appears on identical mass-produced goods"
+          },
+          {
+            "id": "C",
+            "text": "A machine-built component whose design never reflects local customs"
+          },
+          {
+            "id": "D",
+            "text": "A measurement system that is applied to every textile industry"
+          }
+        ],
+        "proposedCorrectOptionId": "A",
+        "proposedAnswerText": "A locally developed skill or decorative tradition linked with community and culture",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "b250d1690ee2e6afa120249ca82d65d04d774c18fbc534b08e8cf4bf992413b1",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-FASH-C07-M01",
+      "originalRevisionSha256": "92431ab8b2ded5a355b2f82af9a482ad30bfc634751ee8ec6747fdf195774f29",
+      "originalSourceFile": "fashionDesigning9TechStarter2026.json",
+      "originalSourceFileSha256": "6316e7da32f11a19f7b1b3a0d9092753e3968ed0b5349150c590c786cb466f04",
+      "originalOptions": [
+        "A simplified figure template used for design sketching",
+        "A sewing-machine part",
+        "A fabric fibre",
+        "A colour pigment"
+      ],
+      "originalReferenceAnswerText": "A simplified figure template used for design sketching",
+      "originalOptionLengthRatio": 3.176,
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
+      "newOptionLengthRatio": 0.8663,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-FASH-C07-M01",
+        "parentOriginalRevisionSha256": "92431ab8b2ded5a355b2f82af9a482ad30bfc634751ee8ec6747fdf195774f29",
+        "grade": 9,
+        "subject": "fashion-designing-tech",
+        "medium": "english",
+        "originalStem": "A croquis in fashion is primarily?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "A mechanical attachment that joins two pieces of fabric together"
+          },
+          {
+            "id": "B",
+            "text": "A simplified figure template used for design sketching"
+          },
+          {
+            "id": "C",
+            "text": "A special fibre selected to make a fabric more water-resistant"
+          },
+          {
+            "id": "D",
+            "text": "A colour mixture used to dye a garment after its construction"
+          }
+        ],
+        "proposedCorrectOptionId": "B",
+        "proposedAnswerText": "A simplified figure template used for design sketching",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "3db21f4e4b8c999b4a263b847fd6de9662c2144f995bfb2163317957fe93a3df",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-FASH-C08-M02",
+      "originalRevisionSha256": "f2263d4ee3c523c6d2b1b994cb0b795603d479f1d8c8b03eaf7bea78687fdea5",
+      "originalSourceFile": "fashionDesigning9TechStarter2026.json",
+      "originalSourceFileSha256": "6316e7da32f11a19f7b1b3a0d9092753e3968ed0b5349150c590c786cb466f04",
+      "originalOptions": [
+        "It influences properties such as comfort, drape and care",
+        "It determines only the garment name",
+        "It has no effect",
+        "It changes body height"
+      ],
+      "originalReferenceAnswerText": "It influences properties such as comfort, drape and care",
+      "originalOptionLengthRatio": 2.301,
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
+      "newOptionLengthRatio": 0.8116,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-FASH-C08-M02",
+        "parentOriginalRevisionSha256": "f2263d4ee3c523c6d2b1b994cb0b795603d479f1d8c8b03eaf7bea78687fdea5",
+        "grade": 9,
+        "subject": "fashion-designing-tech",
+        "medium": "english",
+        "originalStem": "Why does fibre type matter in clothing design?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "It determines the social popularity of every garment regardless of use"
+          },
+          {
+            "id": "B",
+            "text": "It changes the designer's body measurements rather than the fabric"
+          },
+          {
+            "id": "C",
+            "text": "It influences properties such as comfort, drape and care"
+          },
+          {
+            "id": "D",
+            "text": "It fixes the price of every finished garment regardless of construction"
+          }
+        ],
+        "proposedCorrectOptionId": "C",
+        "proposedAnswerText": "It influences properties such as comfort, drape and care",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "224799a47298b55124e07a862075b3cea998222c97c8e0831a04b92466be02db",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-FASH-C09-M01",
+      "originalRevisionSha256": "c22755f706fb7edbc18ad8343084e0cf0c93372baa8dd44316bfecb0a6987a44",
+      "originalSourceFile": "fashionDesigning9TechStarter2026.json",
+      "originalSourceFileSha256": "6316e7da32f11a19f7b1b3a0d9092753e3968ed0b5349150c590c786cb466f04",
+      "originalOptions": [
+        "Follow teacher instructions and keep tools stored and handled carefully",
+        "Rush to finish",
+        "Ignore damaged equipment",
+        "Leave sharp tools loose"
+      ],
+      "originalReferenceAnswerText": "Follow teacher instructions and keep tools stored and handled carefully",
+      "originalOptionLengthRatio": 3.492,
+      "draftNewOptionCorrectIndex": 3,
+      "draftAnswerPosition": "D",
+      "newOptionLengthRatio": 1.065,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": true,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-FASH-C09-M01",
+        "parentOriginalRevisionSha256": "c22755f706fb7edbc18ad8343084e0cf0c93372baa8dd44316bfecb0a6987a44",
+        "grade": 9,
+        "subject": "fashion-designing-tech",
+        "medium": "english",
+        "originalStem": "Which is the safest classroom principle when using sewing tools?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Select sewing equipment quickly without examining its condition first"
+          },
+          {
+            "id": "B",
+            "text": "Leave tools in shared spaces without agreed storage procedures"
+          },
+          {
+            "id": "C",
+            "text": "Prioritize the appearance of a result over the classroom safety rules"
+          },
+          {
+            "id": "D",
+            "text": "Follow teacher instructions and keep tools stored and handled carefully"
+          }
+        ],
+        "proposedCorrectOptionId": "D",
+        "proposedAnswerText": "Follow teacher instructions and keep tools stored and handled carefully",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "9f1f09a401901945cf22aae6acc95cc2e64d8aa1dcfe1cb9f0884aa4ab84018b",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-GENSCI-TECH-ENGLISH-C05-I01",
+      "originalRevisionSha256": "ab988264bab2c7fab12e9a58d9f6d10b75fcf2e1f806b2c0d3914dde7e980b9d",
+      "originalSourceFile": "generalScienceTech9EnglishStarter2026.json",
+      "originalSourceFileSha256": "f416811d516304e6474be5ef6abada74d700667888a56f6638d4d6d96a808c0b",
+      "originalOptions": [
+        "Good hygiene and appropriate vaccination where recommended",
+        "Sharing contaminated items",
+        "Ignoring symptoms",
+        "Avoiding all medical advice"
+      ],
+      "originalReferenceAnswerText": "Good hygiene and appropriate vaccination where recommended",
+      "originalOptionLengthRatio": 2.486,
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
+      "newOptionLengthRatio": 0.8969,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-GENSCI-TECH-ENGLISH-C05-I01",
+        "parentOriginalRevisionSha256": "ab988264bab2c7fab12e9a58d9f6d10b75fcf2e1f806b2c0d3914dde7e980b9d",
+        "grade": 9,
+        "subject": "general-science-tech",
+        "medium": "english",
+        "originalStem": "Which is a general disease-prevention principle?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Good hygiene and appropriate vaccination where recommended"
+          },
+          {
+            "id": "B",
+            "text": "Relying on one person's immunity instead of basic community hygiene"
+          },
+          {
+            "id": "C",
+            "text": "Skipping routine prevention because visible symptoms are absent"
+          },
+          {
+            "id": "D",
+            "text": "Assuming vaccines make clean food and water entirely unnecessary"
+          }
+        ],
+        "proposedCorrectOptionId": "A",
+        "proposedAnswerText": "Good hygiene and appropriate vaccination where recommended",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "7b5731ffb6eb2dadce8388f9f046fc9682173d918a90ebb53a6fa1016b2f1c8e",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-GENSCI-TECH-ENGLISH-C10-I01",
+      "originalRevisionSha256": "5b2058bd33da6e865b7b5cf0c80b2dbc8b79dbf5ec92157e92d393f2959c45f4",
+      "originalSourceFile": "generalScienceTech9EnglishStarter2026.json",
+      "originalSourceFileSha256": "f416811d516304e6474be5ef6abada74d700667888a56f6638d4d6d96a808c0b",
+      "originalOptions": [
+        "Application of knowledge and tools to solve practical problems",
+        "Only theoretical memorization",
+        "A process without users",
+        "Only old machines"
+      ],
+      "originalReferenceAnswerText": "Application of knowledge and tools to solve practical problems",
+      "originalOptionLengthRatio": 2.696,
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
+      "newOptionLengthRatio": 0.9588,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-GENSCI-TECH-ENGLISH-C10-I01",
+        "parentOriginalRevisionSha256": "5b2058bd33da6e865b7b5cf0c80b2dbc8b79dbf5ec92157e92d393f2959c45f4",
+        "grade": 9,
+        "subject": "general-science-tech",
+        "medium": "english",
+        "originalStem": "Technology is best understood as?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Collecting scientific terms without applying them to any human need"
+          },
+          {
+            "id": "B",
+            "text": "Application of knowledge and tools to solve practical problems"
+          },
+          {
+            "id": "C",
+            "text": "A theory that cannot be used to build solutions or make decisions"
+          },
+          {
+            "id": "D",
+            "text": "The study of machinery without considering the user or purpose"
+          }
+        ],
+        "proposedCorrectOptionId": "B",
+        "proposedAnswerText": "Application of knowledge and tools to solve practical problems",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "01050e02318cfb105fca0e7f79517ade2c3a1fb9f41900698fa7c4a05d9912d9",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-GENSCI-TECH-ENGLISH-C11-I01",
+      "originalRevisionSha256": "9d12b673c98699b3ded439caed0da406526a24bc4bb74f87049c4f921f3311bb",
+      "originalSourceFile": "generalScienceTech9EnglishStarter2026.json",
+      "originalSourceFileSha256": "f416811d516304e6474be5ef6abada74d700667888a56f6638d4d6d96a808c0b",
+      "originalOptions": [
+        "Communication, Earth observation and scientific research",
+        "Only road painting",
+        "Only food storage",
+        "No scientific work"
+      ],
+      "originalReferenceAnswerText": "Communication, Earth observation and scientific research",
+      "originalOptionLengthRatio": 3.17,
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
+      "newOptionLengthRatio": 0.8442,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-GENSCI-TECH-ENGLISH-C11-I01",
+        "parentOriginalRevisionSha256": "9d12b673c98699b3ded439caed0da406526a24bc4bb74f87049c4f921f3311bb",
+        "grade": 9,
+        "subject": "general-science-tech",
+        "medium": "english",
+        "originalStem": "A national space programme can support?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Replacing local weather observations with unrelated guessing games"
+          },
+          {
+            "id": "B",
+            "text": "Converting all laboratory investigations into road construction work"
+          },
+          {
+            "id": "C",
+            "text": "Communication, Earth observation and scientific research"
+          },
+          {
+            "id": "D",
+            "text": "Eliminating the need for all ground-based scientific measurements"
+          }
+        ],
+        "proposedCorrectOptionId": "C",
+        "proposedAnswerText": "Communication, Earth observation and scientific research",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "4a39ce9f0df9bdbec8da498ab316b2c512800cce083da2ffa53a397aac62fa32",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-GENSCI-TECH-URDU-C01-I01",
+      "originalRevisionSha256": "c56864fc3284aec0b46df1f15d273fcfea51d98ef56858144b898ef5da9d384f",
+      "originalSourceFile": "generalScienceTech9UrduStarter2026.json",
+      "originalSourceFileSha256": "bbf47fed029c7fd67bf9f4a47711bf5afb5c2229d0144beef5d77b5472c1934a",
+      "originalOptions": [
+        "مشاہدے، evidence اور testing پر مبنی منظم مطالعہ",
+        "صرف ذاتی رائے",
+        "صرف نام یاد کرنا",
+        "بغیر evidence کے نتیجہ"
+      ],
+      "originalReferenceAnswerText": "مشاہدے، evidence اور testing پر مبنی منظم مطالعہ",
+      "originalOptionLengthRatio": 2.824,
+      "draftNewOptionCorrectIndex": 3,
+      "draftAnswerPosition": "D",
+      "newOptionLengthRatio": 0.8521,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-GENSCI-TECH-URDU-C01-I01",
+        "parentOriginalRevisionSha256": "c56864fc3284aec0b46df1f15d273fcfea51d98ef56858144b898ef5da9d384f",
+        "grade": 9,
+        "subject": "general-science-tech",
+        "medium": "urdu",
+        "originalStem": "Science کی بہتر تعریف کیا ہے؟",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "مشاہدہ اور جانچ کے بغیر صرف ذاتی رائے کو حتمی نتیجہ ماننا"
+          },
+          {
+            "id": "B",
+            "text": "معلومات کے شواہد کو چھوڑ کر صرف نام یاد کرنے پر انحصار کرنا"
+          },
+          {
+            "id": "C",
+            "text": "تجربے سے پہلے ہی ہر سوال کا جواب ہمیشہ درست سمجھ لینا"
+          },
+          {
+            "id": "D",
+            "text": "مشاہدے، evidence اور testing پر مبنی منظم مطالعہ"
+          }
+        ],
+        "proposedCorrectOptionId": "D",
+        "proposedAnswerText": "مشاہدے، evidence اور testing پر مبنی منظم مطالعہ",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "6827aca1e172accc1db7b6e86a395a4834ac2bb985bea85f03844ee8bc74f801",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-GENSCI-TECH-URDU-C09-I01",
+      "originalRevisionSha256": "0585c1438d295a9bad13b8d77b1670a7a8a508fbb54a1657b00f5953c19a9dec",
+      "originalSourceFile": "generalScienceTech9UrduStarter2026.json",
+      "originalSourceFileSha256": "bbf47fed029c7fd67bf9f4a47711bf5afb5c2229d0144beef5d77b5472c1934a",
+      "originalOptions": [
+        "Current کو ایک direction میں زیادہ آسانی سے گزرنے دینا",
+        "food store کرنا",
+        "body mass measure کرنا",
+        "rainfall بنانا"
+      ],
+      "originalReferenceAnswerText": "Current کو ایک direction میں زیادہ آسانی سے گزرنے دینا",
+      "originalOptionLengthRatio": 3.176,
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
+      "newOptionLengthRatio": 0.9153,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-GENSCI-TECH-URDU-C09-I01",
+        "parentOriginalRevisionSha256": "0585c1438d295a9bad13b8d77b1670a7a8a508fbb54a1657b00f5953c19a9dec",
+        "grade": 9,
+        "subject": "general-science-tech",
+        "medium": "urdu",
+        "originalStem": "Diode کا بنیادی کام کیا ہے؟",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Current کو ایک direction میں زیادہ آسانی سے گزرنے دینا"
+          },
+          {
+            "id": "B",
+            "text": "کمپیوٹر کی یادداشت میں مسلسل تمام data کو مستقل محفوظ رکھنا"
+          },
+          {
+            "id": "C",
+            "text": "circuit میں ہر direction کی current کو یکساں آسانی سے گزرنے دینا"
+          },
+          {
+            "id": "D",
+            "text": "بغیر sensor کے ماحول کے تمام درجہ حرارت کی پیمائش کرنا"
+          }
+        ],
+        "proposedCorrectOptionId": "A",
+        "proposedAnswerText": "Current کو ایک direction میں زیادہ آسانی سے گزرنے دینا",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "19370c0f7e63b324d50e4b87a8a3b2713ae020139e1523e5c976779bb4d7549c",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-GENSCI-TECH-URDU-C10-I01",
+      "originalRevisionSha256": "5bb81f35978d1206b805654551087f7dc626c78335f487f716a26152b2e10c70",
+      "originalSourceFile": "generalScienceTech9UrduStarter2026.json",
+      "originalSourceFileSha256": "bbf47fed029c7fd67bf9f4a47711bf5afb5c2229d0144beef5d77b5472c1934a",
+      "originalOptions": [
+        "Knowledge اور tools کا practical problems حل کرنے کے لیے استعمال",
+        "صرف theoretical memorization",
+        "users کے بغیر process",
+        "صرف old machines"
+      ],
+      "originalReferenceAnswerText": "Knowledge اور tools کا practical problems حل کرنے کے لیے استعمال",
+      "originalOptionLengthRatio": 2.954,
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
+      "newOptionLengthRatio": 1.28,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": true,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-GENSCI-TECH-URDU-C10-I01",
+        "parentOriginalRevisionSha256": "5bb81f35978d1206b805654551087f7dc626c78335f487f716a26152b2e10c70",
+        "grade": 9,
+        "subject": "general-science-tech",
+        "medium": "urdu",
+        "originalStem": "Technology کی بہتر تعریف کیا ہے؟",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "علم کو عملی مسائل سے الگ رکھ کر صرف تعریفیں یاد کرنا"
+          },
+          {
+            "id": "B",
+            "text": "Knowledge اور tools کا practical problems حل کرنے کے لیے استعمال"
+          },
+          {
+            "id": "C",
+            "text": "اوزار اور صارف کی ضروریات سے بے تعلق نظریات جمع کرنا"
+          },
+          {
+            "id": "D",
+            "text": "موجودہ مسائل حل کیے بغیر صرف آلات کے نام بتانا"
+          }
+        ],
+        "proposedCorrectOptionId": "B",
+        "proposedAnswerText": "Knowledge اور tools کا practical problems حل کرنے کے لیے استعمال",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "b5bcdd7832a37b24051221ef0521cd7b89b88addc649acb482887d273c47bc70",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-GENSCI-TECH-URDU-C11-I01",
+      "originalRevisionSha256": "7aed02ec274c19a4fdf9976fedb027f7fea91772843cae30af76600a72efc4ca",
+      "originalSourceFile": "generalScienceTech9UrduStarter2026.json",
+      "originalSourceFileSha256": "bbf47fed029c7fd67bf9f4a47711bf5afb5c2229d0144beef5d77b5472c1934a",
+      "originalOptions": [
+        "Communication، Earth observation اور scientific research",
+        "صرف road painting",
+        "صرف food storage",
+        "کوئی scientific work نہیں"
+      ],
+      "originalReferenceAnswerText": "Communication، Earth observation اور scientific research",
+      "originalOptionLengthRatio": 2.897,
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
+      "newOptionLengthRatio": 1.1053,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": true,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-GENSCI-TECH-URDU-C11-I01",
+        "parentOriginalRevisionSha256": "7aed02ec274c19a4fdf9976fedb027f7fea91772843cae30af76600a72efc4ca",
+        "grade": 9,
+        "subject": "general-science-tech",
+        "medium": "urdu",
+        "originalStem": "National space programme کس کام میں مدد دے سکتا ہے؟",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "سڑکوں کی رنگائی اور عمارتوں کی صرف آرائشی منصوبہ بندی"
+          },
+          {
+            "id": "B",
+            "text": "طبی معلومات کو خلائی مشاہدے سے ہمیشہ مکمل الگ رکھنا"
+          },
+          {
+            "id": "C",
+            "text": "Communication، Earth observation اور scientific research"
+          },
+          {
+            "id": "D",
+            "text": "زمین سے متعلق ہر سائنسی پیمائش کی ضرورت ختم کرنا"
+          }
+        ],
+        "proposedCorrectOptionId": "C",
+        "proposedAnswerText": "Communication، Earth observation اور scientific research",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "c19acd5c38a5607913ba29790766938935a93f186c103d3daa705d724a7be47a",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-HS-C03-M02",
+      "originalRevisionSha256": "2b3c567214cfa39a91f2192f761b100a9adf28ea5aed21b2ca6a973ea8f7bddd",
+      "originalSourceFile": "healthSciences9TechStarter2026.json",
+      "originalSourceFileSha256": "03990ab80d396a47b45e4e0064712a5f1de4c15ab245a1f8225733e2750ea0dc",
+      "originalOptions": [
+        "Recommended vaccination and good respiratory hygiene",
+        "Sharing used tissues",
+        "Ignoring indoor ventilation",
+        "Smoking more"
+      ],
+      "originalReferenceAnswerText": "Recommended vaccination and good respiratory hygiene",
+      "originalOptionLengthRatio": 2.644,
+      "draftNewOptionCorrectIndex": 3,
+      "draftAnswerPosition": "D",
+      "newOptionLengthRatio": 0.7839,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-HS-C03-M02",
+        "parentOriginalRevisionSha256": "2b3c567214cfa39a91f2192f761b100a9adf28ea5aed21b2ca6a973ea8f7bddd",
+        "grade": 9,
+        "subject": "health-sciences-tech",
+        "medium": "english",
+        "originalStem": "Which public-health action can reduce risk from some respiratory infections?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Using unverified advice instead of recommended preventive guidance"
+          },
+          {
+            "id": "B",
+            "text": "Assuming that indoor air quality has no effect on respiratory risks"
+          },
+          {
+            "id": "C",
+            "text": "Considering visible symptoms the only possible source of infection"
+          },
+          {
+            "id": "D",
+            "text": "Recommended vaccination and good respiratory hygiene"
+          }
+        ],
+        "proposedCorrectOptionId": "D",
+        "proposedAnswerText": "Recommended vaccination and good respiratory hygiene",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "b571c2a8d63a68650cb3fed64df0c5568c6562313f95bfd1242fa577fcc3021c",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-HS-C06-M01",
+      "originalRevisionSha256": "870b4d57bb9d9b9818a407a3584f038ecbaea9a042cd63b3df69476422dbcc58",
+      "originalSourceFile": "healthSciences9TechStarter2026.json",
+      "originalSourceFileSha256": "03990ab80d396a47b45e4e0064712a5f1de4c15ab245a1f8225733e2750ea0dc",
+      "originalOptions": [
+        "Provide immediate basic support until trained help is available",
+        "Replace professional medical care",
+        "Perform surgery",
+        "Diagnose every condition"
+      ],
+      "originalReferenceAnswerText": "Provide immediate basic support until trained help is available",
+      "originalOptionLengthRatio": 2.625,
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
+      "newOptionLengthRatio": 0.9643,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-HS-C06-M01",
+        "parentOriginalRevisionSha256": "870b4d57bb9d9b9818a407a3584f038ecbaea9a042cd63b3df69476422dbcc58",
+        "grade": 9,
+        "subject": "health-sciences-tech",
+        "medium": "english",
+        "originalStem": "The main purpose of first aid is to?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Provide immediate basic support until trained help is available"
+          },
+          {
+            "id": "B",
+            "text": "Replace all professional medical assessment with personal guesses"
+          },
+          {
+            "id": "C",
+            "text": "Make a final diagnosis of every condition before seeking assistance"
+          },
+          {
+            "id": "D",
+            "text": "Offer permanent treatment for complex medical conditions at home"
+          }
+        ],
+        "proposedCorrectOptionId": "A",
+        "proposedAnswerText": "Provide immediate basic support until trained help is available",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "a7a8b0593f38713a3cdb24ce077ec357c85694a872b0407cae0d7ac9ca1528dc",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-HS-C07-M02",
+      "originalRevisionSha256": "aff887ec481d39ed3ad2eb19a367a6d1dcdaa87cf20c43b6395243794e7ae4a0",
+      "originalSourceFile": "healthSciences9TechStarter2026.json",
+      "originalSourceFileSha256": "03990ab80d396a47b45e4e0064712a5f1de4c15ab245a1f8225733e2750ea0dc",
+      "originalOptions": [
+        "Appropriate warm-up, technique, hydration and stopping if unwell or injured",
+        "Ignoring pain",
+        "Exercising through serious injury",
+        "Skipping recovery every time"
+      ],
+      "originalReferenceAnswerText": "Appropriate warm-up, technique, hydration and stopping if unwell or injured",
+      "originalOptionLengthRatio": 3.041,
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
+      "newOptionLengthRatio": 1.1598,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": true,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-HS-C07-M02",
+        "parentOriginalRevisionSha256": "aff887ec481d39ed3ad2eb19a367a6d1dcdaa87cf20c43b6395243794e7ae4a0",
+        "grade": 9,
+        "subject": "health-sciences-tech",
+        "medium": "english",
+        "originalStem": "Which practice supports safer physical activity?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Continue a demanding routine even when clear discomfort develops"
+          },
+          {
+            "id": "B",
+            "text": "Appropriate warm-up, technique, hydration and stopping if unwell or injured"
+          },
+          {
+            "id": "C",
+            "text": "Use the same activity intensity for every person without adjustment"
+          },
+          {
+            "id": "D",
+            "text": "Treat recovery, technique and appropriate hydration as optional"
+          }
+        ],
+        "proposedCorrectOptionId": "B",
+        "proposedAnswerText": "Appropriate warm-up, technique, hydration and stopping if unwell or injured",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "977b9d5d7d5e7970329fab9ba0ede3ce9b3ef0e2ce7419468dfaec8cdab09a0f",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-HS-C08-M02",
+      "originalRevisionSha256": "6cca091f43c48c19a31b61da9bf0a500f89db8ac099263280edc9d8a7c60a455",
+      "originalSourceFile": "healthSciences9TechStarter2026.json",
+      "originalSourceFileSha256": "03990ab80d396a47b45e4e0064712a5f1de4c15ab245a1f8225733e2750ea0dc",
+      "originalOptions": [
+        "Normal formation and function of oxygen-carrying blood components",
+        "Only hair colour",
+        "Only bone length",
+        "Only skin temperature"
+      ],
+      "originalReferenceAnswerText": "Normal formation and function of oxygen-carrying blood components",
+      "originalOptionLengthRatio": 3.679,
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
+      "newOptionLengthRatio": 1.0894,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": true,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-HS-C08-M02",
+        "parentOriginalRevisionSha256": "6cca091f43c48c19a31b61da9bf0a500f89db8ac099263280edc9d8a7c60a455",
+        "grade": 9,
+        "subject": "health-sciences-tech",
+        "medium": "english",
+        "originalStem": "Iron is important because it contributes to?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Determine the exact length of every bone during adolescence"
+          },
+          {
+            "id": "B",
+            "text": "Provide a direct substitute for all dietary energy in the body"
+          },
+          {
+            "id": "C",
+            "text": "Normal formation and function of oxygen-carrying blood components"
+          },
+          {
+            "id": "D",
+            "text": "Control the natural colour of the hair in every individual"
+          }
+        ],
+        "proposedCorrectOptionId": "C",
+        "proposedAnswerText": "Normal formation and function of oxygen-carrying blood components",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "37b03510145f292142a7af60dd49529357727af78920ea953614db4203eff553",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-ICT-C03-M02",
+      "originalRevisionSha256": "217d4ae2db645b9d4ad668ec799e16faf5f677364b3569adf7b874987f6a104c",
+      "originalSourceFile": "ict9TechStarter2026.json",
+      "originalSourceFileSha256": "e1e8043b475e2edd7592ab100a01427a4fce392bab795a0ccfd708ec07773ce4",
+      "originalOptions": [
+        "More than one media form such as text, image, audio or video",
+        "Only numbers",
+        "Only plain text",
+        "Only hardware"
+      ],
+      "originalReferenceAnswerText": "More than one media form such as text, image, audio or video",
+      "originalOptionLengthRatio": 4.5,
+      "draftNewOptionCorrectIndex": 3,
+      "draftAnswerPosition": "D",
+      "newOptionLengthRatio": 0.9137,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-ICT-C03-M02",
+        "parentOriginalRevisionSha256": "217d4ae2db645b9d4ad668ec799e16faf5f677364b3569adf7b874987f6a104c",
+        "grade": 9,
+        "subject": "ict-tech",
+        "medium": "english",
+        "originalStem": "Multimedia commonly combines?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "A collection of unrelated numerical values without media components"
+          },
+          {
+            "id": "B",
+            "text": "Written text alone presented without sound, image or video elements"
+          },
+          {
+            "id": "C",
+            "text": "The physical cables connecting devices instead of media content"
+          },
+          {
+            "id": "D",
+            "text": "More than one media form such as text, image, audio or video"
+          }
+        ],
+        "proposedCorrectOptionId": "D",
+        "proposedAnswerText": "More than one media form such as text, image, audio or video",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "0dd7ec7e792708a722d750f930a845aece5db20be558ee2b7db4537d85fed8c8",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-ISL-U07-M01",
+      "originalRevisionSha256": "c33d2cdbee14f3069970e3b9583463f64dafb416e7d8ef85e59978e55ccbbc1f",
+      "originalSourceFile": "islamiyat9Starter2026.json",
+      "originalSourceFileSha256": "89683922a220b7c056d2c6d0af1085bbbf28bd142e756c63d1b91a9c8af06430",
+      "originalOptions": [
+        "صلاحیت پر اعتماد کے ساتھ ذمہ داری اور اللہ پر توکل",
+        "تکبر اور دوسروں کی تحقیر",
+        "مشورہ نہ لینا",
+        "غلطی نہ ماننا"
+      ],
+      "originalReferenceAnswerText": "صلاحیت پر اعتماد کے ساتھ ذمہ داری اور اللہ پر توکل",
+      "originalOptionLengthRatio": 3,
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
+      "newOptionLengthRatio": 1.0067,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-ISL-U07-M01",
+        "parentOriginalRevisionSha256": "c33d2cdbee14f3069970e3b9583463f64dafb416e7d8ef85e59978e55ccbbc1f",
+        "grade": 9,
+        "subject": "islamiat",
+        "medium": "urdu",
+        "originalStem": "خود اعتمادی کا متوازن مفہوم کیا ہے؟",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "صلاحیت پر اعتماد کے ساتھ ذمہ داری اور اللہ پر توکل"
+          },
+          {
+            "id": "B",
+            "text": "اپنی صلاحیت پر یقین کے بجائے دوسروں کی تحقیر کرنا"
+          },
+          {
+            "id": "C",
+            "text": "مشورہ اور اصلاح کو ہمیشہ اپنی کمزوری سمجھ کر رد کرنا"
+          },
+          {
+            "id": "D",
+            "text": "غلطی قبول نہ کرنا اور ذمہ داری سے مکمل گریز کرنا"
+          }
+        ],
+        "proposedCorrectOptionId": "A",
+        "proposedAnswerText": "صلاحیت پر اعتماد کے ساتھ ذمہ داری اور اللہ پر توکل",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "211ff1eb0b07470dfdb4e23c02658fb1ed2db00c2a5a926cfaa5c94cca0a3fbe",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-PHT-U-C07-M01",
+      "originalRevisionSha256": "ef37c30802d8dc6df78e5698cb51937299676f06ce7b986838b3092b04ea425c",
+      "originalSourceFile": "physicsTech9DualStarter2026.json",
+      "originalSourceFileSha256": "36e0d30bc2bd57b192ba41d6f2b8261ae87e21b66b4652e0b27074bca6320135",
+      "originalOptions": [
+        "Thermal state / particles کی average kinetic energy",
+        "صرف substance کی مقدار",
+        "magnetic pole strength",
+        "momentum only"
+      ],
+      "originalReferenceAnswerText": "Thermal state / particles کی average kinetic energy",
+      "originalOptionLengthRatio": 2.684,
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
+      "newOptionLengthRatio": 0.9623,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-PHT-U-C07-M01",
+        "parentOriginalRevisionSha256": "ef37c30802d8dc6df78e5698cb51937299676f06ce7b986838b3092b04ea425c",
+        "grade": 9,
+        "subject": "physics-tech",
+        "medium": "urdu",
+        "originalStem": "Temperature بنیادی طور پر کس چیز سے متعلق ہے؟",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "کسی مادے کے ذرات کی مجموعی تعداد کو براہ راست ظاہر کرنا"
+          },
+          {
+            "id": "B",
+            "text": "Thermal state / particles کی average kinetic energy"
+          },
+          {
+            "id": "C",
+            "text": "کسی مادے پر عمل کرنے والی مجموعی قوت کو ظاہر کرنا"
+          },
+          {
+            "id": "D",
+            "text": "جسم کی مقناطیسی خاصیت کو کسی اضافی پیمائش کے بغیر بتانا"
+          }
+        ],
+        "proposedCorrectOptionId": "B",
+        "proposedAnswerText": "Thermal state / particles کی average kinetic energy",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "c799cb2699a1ace57cd7184d83e50c3d2d11949fee45ec0479e9426be13e84d4",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-PHT-U-C08-M02",
+      "originalRevisionSha256": "e023fad7fdf6e1c623a33f911828d45c0a433bf9f99ef19807fcc5d84a3ff918",
+      "originalSourceFile": "physicsTech9DualStarter2026.json",
+      "originalSourceFileSha256": "36e0d30bc2bd57b192ba41d6f2b8261ae87e21b66b4652e0b27074bca6320135",
+      "originalOptions": [
+        "Electric current magnetic field پیدا کرتا ہے",
+        "صرف gravity",
+        "صرف heat",
+        "صرف pressure"
+      ],
+      "originalReferenceAnswerText": "Electric current magnetic field پیدا کرتا ہے",
+      "originalOptionLengthRatio": 4.258,
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
+      "newOptionLengthRatio": 0.7765,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-PHT-U-C08-M02",
+        "parentOriginalRevisionSha256": "e023fad7fdf6e1c623a33f911828d45c0a433bf9f99ef19807fcc5d84a3ff918",
+        "grade": 9,
+        "subject": "physics-tech",
+        "medium": "urdu",
+        "originalStem": "Electromagnet کس principle پر کام کرتا ہے؟",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "کسی current کے بغیر صرف pressure سے magnetic field پیدا ہونا"
+          },
+          {
+            "id": "B",
+            "text": "بغیر electric current کے کششِ ثقل سے coil کا magnet بننا"
+          },
+          {
+            "id": "C",
+            "text": "Electric current magnetic field پیدا کرتا ہے"
+          },
+          {
+            "id": "D",
+            "text": "محض temperature کی موجودگی سے تار کا ہمیشہ magnet بننا"
+          }
+        ],
+        "proposedCorrectOptionId": "C",
+        "proposedAnswerText": "Electric current magnetic field پیدا کرتا ہے",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "8bbba0b80ee8d23ca6368b84194340fa5bdc8e58429b4f193bae53d40dab39dc",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-PHY-2025-C07-M01",
+      "originalRevisionSha256": "03356fcde0b7173d1382cbf24ffc1c0303d9aa9e38b8519c0b8e5a441c15abbb",
+      "originalSourceFile": "physics9EnglishStarter2026.json",
+      "originalSourceFileSha256": "1a882970fc2548f50bc001691d6de990ce156690cfa252f3f5355d8d63a6dc16",
+      "originalOptions": [
+        "Temperature measures thermal state while heat is energy transferred due to temperature difference",
+        "They are identical quantities",
+        "Heat is measured in kelvin",
+        "Temperature is measured in joules"
+      ],
+      "originalReferenceAnswerText": "Temperature measures thermal state while heat is energy transferred due to temperature difference",
+      "originalOptionLengthRatio": 3.307,
+      "draftNewOptionCorrectIndex": 3,
+      "draftAnswerPosition": "D",
+      "newOptionLengthRatio": 1.1781,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-PHY-2025-C07-M01",
+        "parentOriginalRevisionSha256": "03356fcde0b7173d1382cbf24ffc1c0303d9aa9e38b8519c0b8e5a441c15abbb",
+        "grade": 9,
+        "subject": "physics",
+        "medium": "english",
+        "originalStem": "Which statement best distinguishes temperature from heat?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Heat measures the total amount of matter in an object while temperature describes the force acting upon its molecules"
+          },
+          {
+            "id": "B",
+            "text": "Temperature and heat both represent exactly the same stored energy"
+          },
+          {
+            "id": "C",
+            "text": "Temperature is energy transferred and heat is measured in kelvin"
+          },
+          {
+            "id": "D",
+            "text": "Temperature measures thermal state while heat is energy transferred due to temperature difference"
+          }
+        ],
+        "proposedCorrectOptionId": "D",
+        "proposedAnswerText": "Temperature measures thermal state while heat is energy transferred due to temperature difference",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "91ad9e5b5bef71b836696440290ef3c0b8cf54f4f872475d2fd8671d2e5de759",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "IX-PHY-UR-C07-M01",
+      "originalRevisionSha256": "bbabe6e71ce976113122af6746684aacb4b2fd258fa41c3cf8379481fbcb7297",
+      "originalSourceFile": "physics9UrduStarter2026.json",
+      "originalSourceFileSha256": "d53522d5709e778d1610015cfdb5b51d75f9a2ca5f61b02a55ef682eb4e877fd",
+      "originalOptions": [
+        "1 kg مادے کا temperature 1 K بڑھانے کے لیے درکار energy",
+        "مادے کی density",
+        "مادے کی speed",
+        "مقناطیسی قوت"
+      ],
+      "originalReferenceAnswerText": "1 kg مادے کا temperature 1 K بڑھانے کے لیے درکار energy",
+      "originalOptionLengthRatio": 4.125,
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
+      "newOptionLengthRatio": 0.9322,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "IX-PHY-UR-C07-M01",
+        "parentOriginalRevisionSha256": "bbabe6e71ce976113122af6746684aacb4b2fd258fa41c3cf8379481fbcb7297",
+        "grade": 9,
+        "subject": "physics",
+        "medium": "urdu",
+        "originalStem": "Specific heat capacity کس چیز کی پیمائش ہے؟",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "1 kg مادے کا temperature 1 K بڑھانے کے لیے درکار energy"
+          },
+          {
+            "id": "B",
+            "text": "تمام مادوں کی mass اور volume کے نسبت کو براہ راست ظاہر کرنا"
+          },
+          {
+            "id": "C",
+            "text": "ہر مادے میں موجود مجموعی thermal energy کو mass سے الگ بتانا"
+          },
+          {
+            "id": "D",
+            "text": "temperature بدلے بغیر ذرات کی حرکت کی average speed بتانا"
+          }
+        ],
+        "proposedCorrectOptionId": "A",
+        "proposedAnswerText": "1 kg مادے کا temperature 1 K بڑھانے کے لیے درکار energy",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "7beba9377e13c53a19cabe2bf4204a5774ff59420c2c73dc6474c9bd6dcd4c25",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "X-BIO-2026-C06-B02-M01",
+      "originalRevisionSha256": "1fbfc5891b00f4d234b4f40ddbcbe8ac1d189775dab5ad535b88eff3b130276e",
+      "originalSourceFile": "biology10EnglishStarter2026.json",
+      "originalSourceFileSha256": "d440792276f216e6696b134dde0c4b4cd2dca745eee84826af3c4ff18bda93ff",
+      "originalOptions": [
+        "They regulate development of reproductive organs and secondary sexual characteristics",
+        "They digest proteins",
+        "They filter blood in nephrons",
+        "They carry oxygen"
+      ],
+      "originalReferenceAnswerText": "They regulate development of reproductive organs and secondary sexual characteristics",
+      "originalOptionLengthRatio": 3.864,
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
+      "newOptionLengthRatio": 1.3212,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": true,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "X-BIO-2026-C06-B02-M01",
+        "parentOriginalRevisionSha256": "1fbfc5891b00f4d234b4f40ddbcbe8ac1d189775dab5ad535b88eff3b130276e",
+        "grade": 10,
+        "subject": "biology",
+        "medium": "english",
+        "originalStem": "Which general role do reproductive hormones have during puberty?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "They act only as digestive substances that break down food proteins"
+          },
+          {
+            "id": "B",
+            "text": "They regulate development of reproductive organs and secondary sexual characteristics"
+          },
+          {
+            "id": "C",
+            "text": "They directly filter metabolic wastes through kidney nephrons"
+          },
+          {
+            "id": "D",
+            "text": "They replace haemoglobin in transporting oxygen through the blood"
+          }
+        ],
+        "proposedCorrectOptionId": "B",
+        "proposedAnswerText": "They regulate development of reproductive organs and secondary sexual characteristics",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "f9c03c5a59315a4d9bcb9fc41351d5d085df8cc1f5fa713237838010de31ebc8",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "X-BIO-2026-C08-B02-M01",
+      "originalRevisionSha256": "6ca986e14fe1c7362a3be6561a018111e002f485bfe176058ca04a541d523787",
+      "originalSourceFile": "biology10EnglishStarter2026.json",
+      "originalSourceFileSha256": "d440792276f216e6696b134dde0c4b4cd2dca745eee84826af3c4ff18bda93ff",
+      "originalOptions": [
+        "Using microorganisms or engineered cells to make useful products",
+        "Measuring body temperature only",
+        "Filtering sand from water only",
+        "Drawing a food web"
+      ],
+      "originalReferenceAnswerText": "Using microorganisms or engineered cells to make useful products",
+      "originalOptionLengthRatio": 2.43,
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
+      "newOptionLengthRatio": 1.0323,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": true,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "X-BIO-2026-C08-B02-M01",
+        "parentOriginalRevisionSha256": "6ca986e14fe1c7362a3be6561a018111e002f485bfe176058ca04a541d523787",
+        "grade": 10,
+        "subject": "biology",
+        "medium": "english",
+        "originalStem": "Which is an example of biotechnology?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Using a measuring device only to record the outside temperature"
+          },
+          {
+            "id": "B",
+            "text": "Separating sand from water using only a simple physical filter"
+          },
+          {
+            "id": "C",
+            "text": "Using microorganisms or engineered cells to make useful products"
+          },
+          {
+            "id": "D",
+            "text": "Drawing the feeding connections among species in an ecosystem"
+          }
+        ],
+        "proposedCorrectOptionId": "C",
+        "proposedAnswerText": "Using microorganisms or engineered cells to make useful products",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "9c793e3235302afc025906ff00a9112114ae600db764267b31bf07d7d020b155",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "X-BIO-TECH-C07-M01",
+      "originalRevisionSha256": "52e641bac523e3a07a93bbaa3c28684637d849fa1a7e1f3669fdb2a41aa124b7",
+      "originalSourceFile": "biologyTech10EnglishStarter2026.json",
+      "originalSourceFileSha256": "382b08bf37c911661aa51001b74a94d952e2e5f3648afa6621948af278e9d54e",
+      "originalOptions": [
+        "A DNA sequence associated with a functional product or trait",
+        "A whole organ",
+        "A blood vessel",
+        "A mineral"
+      ],
+      "originalReferenceAnswerText": "A DNA sequence associated with a functional product or trait",
+      "originalOptionLengthRatio": 5,
+      "draftNewOptionCorrectIndex": 3,
+      "draftAnswerPosition": "D",
+      "newOptionLengthRatio": 0.9524,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "X-BIO-TECH-C07-M01",
+        "parentOriginalRevisionSha256": "52e641bac523e3a07a93bbaa3c28684637d849fa1a7e1f3669fdb2a41aa124b7",
+        "grade": 10,
+        "subject": "biology-tech",
+        "medium": "english",
+        "originalStem": "A gene is best described as?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "A single whole organ that performs every inherited body function"
+          },
+          {
+            "id": "B",
+            "text": "A mineral substance that can replace DNA in every cell nucleus"
+          },
+          {
+            "id": "C",
+            "text": "A blood vessel that delivers oxygen directly to all chromosomes"
+          },
+          {
+            "id": "D",
+            "text": "A DNA sequence associated with a functional product or trait"
+          }
+        ],
+        "proposedCorrectOptionId": "D",
+        "proposedAnswerText": "A DNA sequence associated with a functional product or trait",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "2144e1a672f5719373582b0e91115c406cb986ffe6aa1ab9721eef43243df259",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "X-BIO-UR-C10-M02",
+      "originalRevisionSha256": "718a7c704a89303e317660f96d49a1481ffaf38a9221e784f020b742ff5fecda",
+      "originalSourceFile": "biology10UrduStarter2026.json",
+      "originalSourceFileSha256": "91182fae98e3e7ec18077cac805292a67c47ecc28c84f2d81543037aacc9b266",
+      "originalOptions": [
+        "Selection کے لیے heritable differences فراہم کرتی ہے",
+        "تمام individuals کو identical بناتی ہے",
+        "Genes ختم کرتی ہے",
+        "Environment کو ثابت رکھتی ہے"
+      ],
+      "originalReferenceAnswerText": "Selection کے لیے heritable differences فراہم کرتی ہے",
+      "originalOptionLengthRatio": 1.88,
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
+      "newOptionLengthRatio": 0.9341,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "X-BIO-UR-C10-M02",
+        "parentOriginalRevisionSha256": "718a7c704a89303e317660f96d49a1481ffaf38a9221e784f020b742ff5fecda",
+        "grade": 10,
+        "subject": "biology",
+        "medium": "urdu",
+        "originalStem": "Evolution کے لیے variation کیوں اہم ہے؟",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Selection کے لیے heritable differences فراہم کرتی ہے"
+          },
+          {
+            "id": "B",
+            "text": "تمام organisms کو genes کے اعتبار سے مکمل identical بنانا"
+          },
+          {
+            "id": "C",
+            "text": "وراثتی differences کو ختم کر کے ہر نسل کو ایک جیسا رکھنا"
+          },
+          {
+            "id": "D",
+            "text": "ماحولیاتی حالات کو ہمیشہ مستقل اور غیر تبدیل شدہ رکھنا"
+          }
+        ],
+        "proposedCorrectOptionId": "A",
+        "proposedAnswerText": "Selection کے لیے heritable differences فراہم کرتی ہے",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "d08cb783b9f8df58474a37a392c2dd3b67147bfb521b232c3729b44271fbca6b",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "X-CHEM-C18-M01",
+      "originalRevisionSha256": "bdb53683b8ada2c2fa3f4a3b433d57f16f2598b31d140830544667fc6ad008d3",
+      "originalSourceFile": "chemistry10Starter2026.json",
+      "originalSourceFileSha256": "ef2917a8fc5ea030992d5f15df2493b7422954463ee4d54c25414fc81af706a1",
+      "originalOptions": [
+        "An ionic compound containing cations and anions",
+        "Any neutral molecule",
+        "Only sodium chloride",
+        "Any gas"
+      ],
+      "originalReferenceAnswerText": "An ionic compound containing cations and anions",
+      "originalOptionLengthRatio": 3,
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
+      "newOptionLengthRatio": 0.7622,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "X-CHEM-C18-M01",
+        "parentOriginalRevisionSha256": "bdb53683b8ada2c2fa3f4a3b433d57f16f2598b31d140830544667fc6ad008d3",
+        "grade": 10,
+        "subject": "chemistry",
+        "medium": "english",
+        "originalStem": "A salt is best described as?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "A pure molecular compound that contains only uncharged particles"
+          },
+          {
+            "id": "B",
+            "text": "An ionic compound containing cations and anions"
+          },
+          {
+            "id": "C",
+            "text": "A substance formed only when sodium and chlorine react together"
+          },
+          {
+            "id": "D",
+            "text": "A gaseous element that can never contain charged particles"
+          }
+        ],
+        "proposedCorrectOptionId": "B",
+        "proposedAnswerText": "An ionic compound containing cations and anions",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "9aca6f0a3faca32b398422bf6c4b4249c200370d53119ed60c828c1d6a347b73",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "X-CHEM-C25-M02",
+      "originalRevisionSha256": "d4004a78533fafad4bb8fc11f015b189e009a84b66febea0d1f7b182822324d5",
+      "originalSourceFile": "chemistry10Starter2026.json",
+      "originalSourceFileSha256": "ef2917a8fc5ea030992d5f15df2493b7422954463ee4d54c25414fc81af706a1",
+      "originalOptions": [
+        "Important energy sources and structural materials",
+        "Only genetic information",
+        "Only catalysts",
+        "Only gases"
+      ],
+      "originalReferenceAnswerText": "Important energy sources and structural materials",
+      "originalOptionLengthRatio": 3.063,
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
+      "newOptionLengthRatio": 0.7903,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "X-CHEM-C25-M02",
+        "parentOriginalRevisionSha256": "d4004a78533fafad4bb8fc11f015b189e009a84b66febea0d1f7b182822324d5",
+        "grade": 10,
+        "subject": "chemistry",
+        "medium": "english",
+        "originalStem": "Carbohydrates commonly serve as?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Carrying the complete hereditary instructions of every organism"
+          },
+          {
+            "id": "B",
+            "text": "Functioning only as biological catalysts without an energy role"
+          },
+          {
+            "id": "C",
+            "text": "Important energy sources and structural materials"
+          },
+          {
+            "id": "D",
+            "text": "Existing exclusively as gases under everyday room conditions"
+          }
+        ],
+        "proposedCorrectOptionId": "C",
+        "proposedAnswerText": "Important energy sources and structural materials",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "82cbbc6d612fa240c1bc3214225d86241eb1ff85c076bf2b3736b1b19dc994a2",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "X-COMMS-TECH-C08-M01",
+      "originalRevisionSha256": "944e35af6c0281a5f438e6990e7ea9a70d37b3c241cb2c8688ea38da2fa947aa",
+      "originalSourceFile": "communicationSkills10TechStarter2026.json",
+      "originalSourceFileSha256": "d350087872151e00477f398ba357dde6026f3ea26217232dd3d48d6dde21b123",
+      "originalOptions": [
+        "Authentic skills, conduct and consistent values",
+        "False claims",
+        "Private data oversharing",
+        "Copying another person’s identity"
+      ],
+      "originalReferenceAnswerText": "Authentic skills, conduct and consistent values",
+      "originalOptionLengthRatio": 2.043,
+      "draftNewOptionCorrectIndex": 3,
+      "draftAnswerPosition": "D",
+      "newOptionLengthRatio": 0.6779,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "X-COMMS-TECH-C08-M01",
+        "parentOriginalRevisionSha256": "944e35af6c0281a5f438e6990e7ea9a70d37b3c241cb2c8688ea38da2fa947aa",
+        "grade": 10,
+        "subject": "communication-skills-tech",
+        "medium": "english",
+        "originalStem": "A responsible personal brand should be based mainly on?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Presenting exaggerated claims without evidence about personal skills"
+          },
+          {
+            "id": "B",
+            "text": "Sharing confidential details as the primary proof of professional value"
+          },
+          {
+            "id": "C",
+            "text": "Copying another person's public identity instead of showing real work"
+          },
+          {
+            "id": "D",
+            "text": "Authentic skills, conduct and consistent values"
+          }
+        ],
+        "proposedCorrectOptionId": "D",
+        "proposedAnswerText": "Authentic skills, conduct and consistent values",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "53515e00e9aef88f04d721fc47dcdc885bef528a67cd03493a3f463bea0e61bc",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "X-COMMS-TECH-C09-M01",
+      "originalRevisionSha256": "e504642af6f524fd3d8735cae335db5fc945753afdd2c0681b960b9e21ff311f",
+      "originalSourceFile": "communicationSkills10TechStarter2026.json",
+      "originalSourceFileSha256": "d350087872151e00477f398ba357dde6026f3ea26217232dd3d48d6dde21b123",
+      "originalOptions": [
+        "Appropriate variety and amounts of essential nutrients",
+        "Only one food group",
+        "Skipping meals routinely",
+        "Avoiding water"
+      ],
+      "originalReferenceAnswerText": "Appropriate variety and amounts of essential nutrients",
+      "originalOptionLengthRatio": 2.842,
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
+      "newOptionLengthRatio": 0.802,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "X-COMMS-TECH-C09-M01",
+        "parentOriginalRevisionSha256": "e504642af6f524fd3d8735cae335db5fc945753afdd2c0681b960b9e21ff311f",
+        "grade": 10,
+        "subject": "communication-skills-tech",
+        "medium": "english",
+        "originalStem": "A balanced diet is best described as?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Appropriate variety and amounts of essential nutrients"
+          },
+          {
+            "id": "B",
+            "text": "Relying on just one type of food to supply every required nutrient"
+          },
+          {
+            "id": "C",
+            "text": "Avoiding water because food alone always supplies sufficient fluids"
+          },
+          {
+            "id": "D",
+            "text": "Choosing foods only by their appearance without considering nutrients"
+          }
+        ],
+        "proposedCorrectOptionId": "A",
+        "proposedAnswerText": "Appropriate variety and amounts of essential nutrients",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "5b7fb60d6a95ecf5f8ed59244a61ecfa4742892f68e273afca20602a5d7f8128",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "X-COMP-C02-M01",
+      "originalRevisionSha256": "8129ef5a87f46c0cd26ac633403d9153274929aadb94c7193a73c65e6695e9d1",
+      "originalSourceFile": "computer10UrduStarter2026.json",
+      "originalSourceFileSha256": "9268f2863ff830f4153df16c77ba6b36ff9ed49e5c648a0e25049b5ce458808a",
+      "originalOptions": [
+        "System settings کو پہلے کے working state پر واپس لانا",
+        "تمام data لازماً delete کرنا",
+        "CPU تبدیل کرنا",
+        "monitor کی resolution بڑھانا"
+      ],
+      "originalReferenceAnswerText": "System settings کو پہلے کے working state پر واپس لانا",
+      "originalOptionLengthRatio": 2.271,
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
+      "newOptionLengthRatio": 0.8595,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "X-COMP-C02-M01",
+        "parentOriginalRevisionSha256": "8129ef5a87f46c0cd26ac633403d9153274929aadb94c7193a73c65e6695e9d1",
+        "grade": 10,
+        "subject": "computer-science",
+        "medium": "urdu",
+        "originalStem": "System Restore کا مقصد عام طور پر کیا ہوتا ہے؟",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "کمپیوٹر کے تمام personal files کو لازماً مستقل طور پر delete کرنا"
+          },
+          {
+            "id": "B",
+            "text": "System settings کو پہلے کے working state پر واپس لانا"
+          },
+          {
+            "id": "C",
+            "text": "کمپیوٹر کی hardware processing unit کو نئے model سے بدلنا"
+          },
+          {
+            "id": "D",
+            "text": "monitor کی physical size اور resolution کو خودکار طور پر بڑھانا"
+          }
+        ],
+        "proposedCorrectOptionId": "B",
+        "proposedAnswerText": "System settings کو پہلے کے working state پر واپس لانا",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "ac08d5d0af737f8402c3da202b122863e96e713518e80a60355f29110c1bc3bd",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "X-COMP-C06-M01",
+      "originalRevisionSha256": "3e3eea8e400a4b9de4b8d1363fcc341226331cefa4edf08d8de061ae66ca7921",
+      "originalSourceFile": "computer10UrduStarter2026.json",
+      "originalSourceFileSha256": "9268f2863ff830f4153df16c77ba6b36ff9ed49e5c648a0e25049b5ce458808a",
+      "originalOptions": [
+        "ایسے systems بنانا جو learning/reasoning جیسے tasks انجام دے سکیں",
+        "صرف text print کرنا",
+        "صرف cables جوڑنا",
+        "صرف storage بڑھانا"
+      ],
+      "originalReferenceAnswerText": "ایسے systems بنانا جو learning/reasoning جیسے tasks انجام دے سکیں",
+      "originalOptionLengthRatio": 3.679,
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
+      "newOptionLengthRatio": 1.1017,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": true,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "X-COMP-C06-M01",
+        "parentOriginalRevisionSha256": "3e3eea8e400a4b9de4b8d1363fcc341226331cefa4edf08d8de061ae66ca7921",
+        "grade": 10,
+        "subject": "computer-science",
+        "medium": "urdu",
+        "originalStem": "Artificial Intelligence کا عمومی مقصد کیا ہے؟",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "صرف text documents کی printing کو intelligent reasoning کہنا"
+          },
+          {
+            "id": "B",
+            "text": "صرف network cables کو جوڑنے کا کام AI کا بنیادی مقصد ماننا"
+          },
+          {
+            "id": "C",
+            "text": "ایسے systems بنانا جو learning/reasoning جیسے tasks انجام دے سکیں"
+          },
+          {
+            "id": "D",
+            "text": "صرف digital storage میں اضافہ کرنے کو machine learning کہنا"
+          }
+        ],
+        "proposedCorrectOptionId": "C",
+        "proposedAnswerText": "ایسے systems بنانا جو learning/reasoning جیسے tasks انجام دے سکیں",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "f46279ad4b1007e23a340497f3f51bc487ec7fa216fb20b545e45bc1bb07df8c",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "X-COMP-C07-M02",
+      "originalRevisionSha256": "38f8af109940997b174e7572a679e6a0d674724333c675b4d3c5ef49682603c4",
+      "originalSourceFile": "computer10UrduStarter2026.json",
+      "originalSourceFileSha256": "9268f2863ff830f4153df16c77ba6b36ff9ed49e5c648a0e25049b5ce458808a",
+      "originalOptions": [
+        "Human language کو computer کے ذریعے process/understand کرنا",
+        "صرف image printing",
+        "network wiring",
+        "disk formatting"
+      ],
+      "originalReferenceAnswerText": "Human language کو computer کے ذریعے process/understand کرنا",
+      "originalOptionLengthRatio": 3.766,
+      "draftNewOptionCorrectIndex": 3,
+      "draftAnswerPosition": "D",
+      "newOptionLengthRatio": 1.0599,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": true,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "X-COMP-C07-M02",
+        "parentOriginalRevisionSha256": "38f8af109940997b174e7572a679e6a0d674724333c675b4d3c5ef49682603c4",
+        "grade": 10,
+        "subject": "computer-science",
+        "medium": "urdu",
+        "originalStem": "NLP کا تعلق بنیادی طور پر کس سے ہے؟",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "images کو print کرنے کے لیے hardware کی wiring تیار کرنا"
+          },
+          {
+            "id": "B",
+            "text": "network کے physical cables کی length اور speed معلوم کرنا"
+          },
+          {
+            "id": "C",
+            "text": "disk کو format کر کے تمام program files کی ترتیب بدلنا"
+          },
+          {
+            "id": "D",
+            "text": "Human language کو computer کے ذریعے process/understand کرنا"
+          }
+        ],
+        "proposedCorrectOptionId": "D",
+        "proposedAnswerText": "Human language کو computer کے ذریعے process/understand کرنا",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "264151f56eb5aa950ced4caa81af07844654d34ba06029813a67762671158877",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "X-COMP-U01-M01",
+      "originalRevisionSha256": "d835fcb53369851f51eeffcf11c8dc0d43b05fac93a93e7a1f496c5d4f35d66e",
+      "originalSourceFile": "computer10Starter2026.json",
+      "originalSourceFileSha256": "c6a01619ae6c7ca8adb387fe89777826e1dd13536b2ceb6649bb466969c86c72",
+      "originalOptions": [
+        "An interface and resource manager between users, software and hardware",
+        "A spreadsheet file",
+        "A network cable",
+        "A printer driver only"
+      ],
+      "originalReferenceAnswerText": "An interface and resource manager between users, software and hardware",
+      "originalOptionLengthRatio": 3.889,
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
+      "newOptionLengthRatio": 1.0938,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": true,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "X-COMP-U01-M01",
+        "parentOriginalRevisionSha256": "d835fcb53369851f51eeffcf11c8dc0d43b05fac93a93e7a1f496c5d4f35d66e",
+        "grade": 10,
+        "subject": "computer-science",
+        "medium": "english",
+        "originalStem": "An operating system mainly acts as?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "An interface and resource manager between users, software and hardware"
+          },
+          {
+            "id": "B",
+            "text": "A single spreadsheet document stored in the user’s home folder"
+          },
+          {
+            "id": "C",
+            "text": "A communication cable carrying data between two connected devices"
+          },
+          {
+            "id": "D",
+            "text": "A printer-only utility that has no role in other system resources"
+          }
+        ],
+        "proposedCorrectOptionId": "A",
+        "proposedAnswerText": "An interface and resource manager between users, software and hardware",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "a5939498e2bce70f82d577de0c64b8a4d8735cc8c4b1e40b05b2ae7a5354c170",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "X-COMP-U07-M02",
+      "originalRevisionSha256": "240781a0ee27e5b3010a02cc533609a38ae1595c47e7749c0b3056e11229c75c",
+      "originalSourceFile": "computer10Starter2026.json",
+      "originalSourceFileSha256": "c6a01619ae6c7ca8adb387fe89777826e1dd13536b2ceb6649bb466969c86c72",
+      "originalOptions": [
+        "Accuracy, privacy, fairness and human oversight",
+        "Only speed",
+        "Only appearance",
+        "No evaluation"
+      ],
+      "originalReferenceAnswerText": "Accuracy, privacy, fairness and human oversight",
+      "originalOptionLengthRatio": 3.711,
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
+      "newOptionLengthRatio": 0.7382,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "X-COMP-U07-M02",
+        "parentOriginalRevisionSha256": "240781a0ee27e5b3010a02cc533609a38ae1595c47e7749c0b3056e11229c75c",
+        "grade": 10,
+        "subject": "computer-science",
+        "medium": "english",
+        "originalStem": "Responsible AI use should consider?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Making speed the only measure of a system's social acceptability"
+          },
+          {
+            "id": "B",
+            "text": "Accuracy, privacy, fairness and human oversight"
+          },
+          {
+            "id": "C",
+            "text": "Judging output by its appearance without checking truth or bias"
+          },
+          {
+            "id": "D",
+            "text": "Replacing meaningful human review with automatic decisions alone"
+          }
+        ],
+        "proposedCorrectOptionId": "B",
+        "proposedAnswerText": "Accuracy, privacy, fairness and human oversight",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "18bb9f8a60cdbba352d75872631e74471b7b2196d2c3c7df4c5adb5a85d0c51d",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "X-HS-TECH-C14-M01",
+      "originalRevisionSha256": "49d26900c26c3af5dfa8c5383a671758410594e67ca3cae52f2de5cd2f9d3b06",
+      "originalSourceFile": "healthSciences10TechStarter2026.json",
+      "originalSourceFileSha256": "544e7b9b1dfc157e9b1199606bf5a84d52120534d993b1249f9064c403244a74",
+      "originalOptions": [
+        "Eliminate all viable microorganisms from an item",
+        "Make an item look cleaner only",
+        "Add fragrance",
+        "Replace hand hygiene"
+      ],
+      "originalReferenceAnswerText": "Eliminate all viable microorganisms from an item",
+      "originalOptionLengthRatio": 2.286,
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
+      "newOptionLengthRatio": 0.7461,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "X-HS-TECH-C14-M01",
+        "parentOriginalRevisionSha256": "49d26900c26c3af5dfa8c5383a671758410594e67ca3cae52f2de5cd2f9d3b06",
+        "grade": 10,
+        "subject": "health-sciences-tech",
+        "medium": "english",
+        "originalStem": "Sterilization aims to?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "Making a surface appear visibly clean without evaluating microbes"
+          },
+          {
+            "id": "B",
+            "text": "Adding a pleasant scent without checking microbial contamination"
+          },
+          {
+            "id": "C",
+            "text": "Eliminate all viable microorganisms from an item"
+          },
+          {
+            "id": "D",
+            "text": "Reducing visible stains while assuming pathogens are all removed"
+          }
+        ],
+        "proposedCorrectOptionId": "C",
+        "proposedAnswerText": "Eliminate all viable microorganisms from an item",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "4d421ff41e30866543ce6070db0ce8b8e3b76ffd7f3456713e5c6643b933f46b",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "X-MATH-C10-M01",
+      "originalRevisionSha256": "f95e1e3591c7e1fb0be32a3538f5a36049552dbe8b1b6ea7a4896a3e95bc1320",
+      "originalSourceFile": "mathematics10Starter2026.json",
+      "originalSourceFileSha256": "3bdd9eeb76c6e29d57178fda83e0ceee1fe7b4f8ceeae62b956af6122d150f9a",
+      "originalOptions": [
+        "Perpendicular bisectors of two joining segments",
+        "Angle bisectors only",
+        "Tangents only",
+        "Any medians"
+      ],
+      "originalReferenceAnswerText": "Perpendicular bisectors of two joining segments",
+      "originalOptionLengthRatio": 3.205,
+      "draftNewOptionCorrectIndex": 3,
+      "draftAnswerPosition": "D",
+      "newOptionLengthRatio": 0.7663,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "X-MATH-C10-M01",
+        "parentOriginalRevisionSha256": "f95e1e3591c7e1fb0be32a3538f5a36049552dbe8b1b6ea7a4896a3e95bc1320",
+        "grade": 10,
+        "subject": "mathematics",
+        "medium": "english",
+        "originalStem": "A circle through three non-collinear points has centre at intersection of?",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "The internal angle bisectors of any two corners in the triangle"
+          },
+          {
+            "id": "B",
+            "text": "The tangents drawn at two arbitrary points along the circle"
+          },
+          {
+            "id": "C",
+            "text": "The medians intersecting at the centroid of the given triangle"
+          },
+          {
+            "id": "D",
+            "text": "Perpendicular bisectors of two joining segments"
+          }
+        ],
+        "proposedCorrectOptionId": "D",
+        "proposedAnswerText": "Perpendicular bisectors of two joining segments",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "518a61387295b9eeed3ad4be0229ecfd4a3c07e1a723d7c18980ec424ffed5a3",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "X-PAK-UR-C01-M01",
+      "originalRevisionSha256": "0aeb1985f9128a6b5cdb290f88f5c00bcf037a238cbd21a69ecbbfa3fecbc428",
+      "originalSourceFile": "pakistanStudies10UrduStarter2026.json",
+      "originalSourceFileSha256": "9e5987872f910fed4d567b4a14323346d3249a52049a2a54ca6a52732ca508db",
+      "originalOptions": [
+        "ایسے بنیادی خیالات اور اقدار جو اجتماعی سمت متعین کریں",
+        "صرف موسم کی رپورٹ",
+        "صرف نقشہ",
+        "صرف معاشی عدد"
+      ],
+      "originalReferenceAnswerText": "ایسے بنیادی خیالات اور اقدار جو اجتماعی سمت متعین کریں",
+      "originalOptionLengthRatio": 4.263,
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
+      "newOptionLengthRatio": 0.9529,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": false,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "X-PAK-UR-C01-M01",
+        "parentOriginalRevisionSha256": "0aeb1985f9128a6b5cdb290f88f5c00bcf037a238cbd21a69ecbbfa3fecbc428",
+        "grade": 10,
+        "subject": "pakistan-studies",
+        "medium": "urdu",
+        "originalStem": "نظریہ سے عمومی طور پر کیا مراد ہے؟",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "ایسے بنیادی خیالات اور اقدار جو اجتماعی سمت متعین کریں"
+          },
+          {
+            "id": "B",
+            "text": "کسی علاقے کی روزانہ بدلتی ہوئی موسم کی پیش گوئی کا مجموعہ"
+          },
+          {
+            "id": "C",
+            "text": "صرف نقشے کی پیمائش اور جغرافیائی علامات کی ترتیب کا نام"
+          },
+          {
+            "id": "D",
+            "text": "معاشی اعداد کی مختصر فہرست جس میں مشترکہ اقدار شامل نہ ہوں"
+          }
+        ],
+        "proposedCorrectOptionId": "A",
+        "proposedAnswerText": "ایسے بنیادی خیالات اور اقدار جو اجتماعی سمت متعین کریں",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "b170058d83ea22a765d94ab970bd21a8b6f639ca6eb1f29d2ef3c24d20cdff88",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    },
+    {
+      "originalId": "X-PAK-UR-C08-M02",
+      "originalRevisionSha256": "b4eed6e623053cb5b69f6704079fe6058b9165b96449eeb586a4ebd9fb87faeb",
+      "originalSourceFile": "pakistanStudies10UrduStarter2026.json",
+      "originalSourceFileSha256": "9e5987872f910fed4d567b4a14323346d3249a52049a2a54ca6a52732ca508db",
+      "originalOptions": [
+        "یہ skills، health awareness اور economic participation بڑھا سکتی ہے",
+        "یہ literacy کم کرتی ہے",
+        "یہ employment روکتی ہے",
+        "یہ civic participation ختم کرتی ہے"
+      ],
+      "originalReferenceAnswerText": "یہ skills، health awareness اور economic participation بڑھا سکتی ہے",
+      "originalOptionLengthRatio": 2.577,
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
+      "newOptionLengthRatio": 1.1686,
+      "residualStrongLengthCue": false,
+      "correctOptionStillStrictlyLongest": true,
+      "proposal": {
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "parentId": "X-PAK-UR-C08-M02",
+        "parentOriginalRevisionSha256": "b4eed6e623053cb5b69f6704079fe6058b9165b96449eeb586a4ebd9fb87faeb",
+        "grade": 10,
+        "subject": "pakistan-studies",
+        "medium": "urdu",
+        "originalStem": "خواتین کی تعلیم ترقی سے کیوں جڑی ہے؟",
+        "questionType": "mcq",
+        "marks": 1,
+        "options": [
+          {
+            "id": "A",
+            "text": "یہ تعلیمی رسائی کم کر کے خواندگی کے مواقع محدود کر دیتی ہے"
+          },
+          {
+            "id": "B",
+            "text": "یہ skills، health awareness اور economic participation بڑھا سکتی ہے"
+          },
+          {
+            "id": "C",
+            "text": "یہ خواتین کی معاشی شرکت اور روزگار کے امکانات ختم کرتی ہے"
+          },
+          {
+            "id": "D",
+            "text": "یہ سماجی آگاہی اور ذمہ دارانہ شرکت کو کم کرنے کا ذریعہ ہے"
+          }
+        ],
+        "proposedCorrectOptionId": "B",
+        "proposedAnswerText": "یہ skills، health awareness اور economic participation بڑھا سکتی ہے",
+        "sourceCorrectOptionTextUnchanged": true,
+        "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
+        "shiftedAnswerPositionFromOriginalA": true,
+        "noAnswerFactsIndependentlySourceVerified": true,
+        "languageAndSubjectReviewerRequired": true,
+        "actualSchoolTextbookEditionVerified": false,
+        "teacherApproved": false,
+        "principalApproved": false,
+        "academicallyApproved": false,
+        "published": false,
+        "paperStudioSelectable": false
+      },
+      "proposalSha256": "5c66ce10468023ed3caccdc0b7ce6468b35ec9c8f888310b4e86ebf78c1cc2d7",
+      "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
+    }
+  ]
+}
