@@ -258,7 +258,7 @@ export default function ResultCards() {
   const exam = exams.find(e => String(e.id) === String(selectedExam))
   const isExamNine = isFirstTermExamNine(exam)
 
-  const activeResults = useMemo(() => String(loadedExamId) === String(selectedExam) ? results : [], [loadedExamId, selectedExam, results])
+  const activeResults = String(loadedExamId) === String(selectedExam) ? results : []
   const allLoadedStudents = useMemo(() => buildResultStudents(activeResults), [activeResults])
   const students = useMemo(() => {
     if (!isExamNine) return allLoadedStudents

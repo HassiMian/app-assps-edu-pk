@@ -60,11 +60,13 @@ export function adaptVerifiedPaperRecord(record,scope){
  const marks=Number(q.marks)
  if(!Number.isFinite(marks)||marks<=0||marks>100)throw Error('VERIFIED_MARKS_NOT_SIGNED')
  const uid='verified_ixx_'+record.originalQuestionId.replace(/[^a-zA-Z0-9_-]/g,'_')+'_r'+record.revision
+ const isDraft = record.tier === 'institutional-draft'
  const result={id:uid,type:q.type,medium:record.medium,
-  en,ur,marks,priority:'approved-source',chapterId:clean(q.chapter||q.chapterId),options,
+  en,ur,marks,priority:isDraft?'institutional-draft':'approved-source',chapterId:clean(q.chapter||q.chapterId),options,
   verifiedAcademicRef:{originalQuestionId:record.originalQuestionId,revision:Number(record.revision),
    questionSha:record.questionSha,answerSha:record.answerSha,
-   publicationGrantSha:record.publicationGrantSha,grade:Number(scope.grade),subject:clean(scope.subject),section:clean(scope.section)}
+   publicationGrantSha:record.publicationGrantSha,grade:Number(scope.grade),subject:clean(scope.subject),section:clean(scope.section),
+   tier:record.tier||'approved',academicallyApproved:record.academicallyApproved===true}
  }
  result.verifiedAcademicRef.contentSnapshot=verifiedQuestionContent(result)
  return result
@@ -82,15 +84,17 @@ export function createGrade910ApprovedSection(q,ordinal){
  const options=q.type==='mcq'?'\n'+q.options.map(o=>'('+o.key+') '+(q.medium==='urdu'?o.ur:o.en)).join('\n'):''
  const answer=q.type==='mcq'?q.options.find(o=>o.correct)?.key:null
  if(q.type==='mcq'&&!answer)throw Error('SIGNED_MCQ_ANSWER_REQUIRED')
- const heading=q.medium==='urdu'?'سوال نمبر '+ordinal+': ('+q.marks+' نمبر)':'Q'+ordinal+'. ('+q.marks+' marks)'
+ const isDraft = ref.tier === 'institutional-draft'
+ const draftHeading = q.medium==='urdu'?'سوال نمبر '+ordinal+' (مسودہ): ('+q.marks+' نمبر)':'Q'+ordinal+' [Draft Candidate · AI Advisory]: ('+q.marks+' marks)'
+ const heading = isDraft ? draftHeading : (q.medium==='urdu'?'سوال نمبر '+ordinal+': ('+q.marks+' نمبر)':'Q'+ordinal+'. ('+q.marks+' marks)')
  const section={
-  id:'signed-grade910-'+ref.originalQuestionId.replace(/[^a-zA-Z0-9_-]/g,'_')+'-r'+ref.revision,
+  id:(isDraft?'draft-grade910-':'signed-grade910-')+ref.originalQuestionId.replace(/[^a-zA-Z0-9_-]/g,'_')+'-r'+ref.revision,
   type:'official_section',layoutPreset:q.type,
   sectionKind:q.type,sourceOrder:ordinal,medium:q.medium,
   heading,text:heading,textUrdu:q.medium==='urdu'?heading:'',
   content:'1. '+stem+options,
   marks:q.marks,answerKey:answer?{'1':answer}:null,
-  priority:'verified-academic',verifiedAcademicRef:{...ref}
+  priority:isDraft?'institutional-draft':'verified-academic',verifiedAcademicRef:{...ref}
  }
  section.verifiedRenderSnapshot=verifiedRenderedSectionSnapshot(section)
  return section

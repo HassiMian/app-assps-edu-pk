@@ -119,7 +119,7 @@ export default function PromoteDemote() {
     } catch (err) {
       setAlert({ 
         type: 'error', 
-        message: err.response?.data?.message || err.message || 'Failed to load students for selected class.' 
+        message: err.response?.data?.message || err.message || 'Student roster could not be loaded for promotion/demotion.' 
       })
     } finally {
       setLoadingRoster(false)

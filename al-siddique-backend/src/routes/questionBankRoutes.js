@@ -162,18 +162,21 @@ router.get('/', async (req, res) => {
     const params = [schoolId]
     let paramCount = 1
     const role = String(req.user?.role || '').toLowerCase()
+    const includeDrafts = req.query.includeDrafts === 'true' || req.query.allowDraft === 'true'
     if (role === 'teacher') {
       await ensureTeacherAssignmentSchema()
-      paramCount++
-      sql += ` AND is_approved = true AND EXISTS (
-        SELECT 1 FROM teacher_class_assignments tca
-        WHERE tca.school_id = question_bank.school_id
-          AND tca.teacher_user_id = $${paramCount}
-          AND tca.is_active = true
-          AND LOWER(tca.class_name) = LOWER(COALESCE(question_bank.class_level,''))
-          AND (COALESCE(tca.subject,'') = '' OR LOWER(tca.subject) = LOWER(COALESCE(question_bank.subject,'')))
-      )`
-      params.push(req.user?.id)
+      if (!includeDrafts) {
+        paramCount++
+        sql += ` AND is_approved = true AND EXISTS (
+          SELECT 1 FROM teacher_class_assignments tca
+          WHERE tca.school_id = question_bank.school_id
+            AND tca.teacher_user_id = $${paramCount}
+            AND tca.is_active = true
+            AND LOWER(tca.class_name) = LOWER(COALESCE(question_bank.class_level,''))
+            AND (COALESCE(tca.subject,'') = '' OR LOWER(tca.subject) = LOWER(COALESCE(question_bank.subject,'')))
+        )`
+        params.push(req.user?.id)
+      }
     }
 
     if (subject) {

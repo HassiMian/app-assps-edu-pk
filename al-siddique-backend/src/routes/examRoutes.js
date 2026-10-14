@@ -287,7 +287,7 @@ router.post('/results', protect, canWriteMarks, async (req, res) => {
 
   let gradeBands
   try {
-    gradeBands = await loadGradeBandsForSchool(schoolId, {previewDefaults:false})
+    gradeBands = await loadGradeBandsForSchool(schoolId)
   } catch (err) {
     console.error('Grade policy load error:', err.message)
     return res.status(500).json({ success: false, message: 'School grading policy could not be loaded.' })
