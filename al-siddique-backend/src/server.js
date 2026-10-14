@@ -190,6 +190,7 @@ const registerRoutes = (router) => {
   mount('/assessment-studio', './routes/assessmentStudioRoutes')
   mount('/question-bank', './routes/questionBankRoutes')
   mount('/grade910-signoffs', './routes/grade910HumanSignoffRoutes')
+  mount('/grade910-verified-picker', './routes/grade910VerifiedPickerRoutes')
   mount('/timetable',  './routes/timetableRoutes')
   mount('/global-search', './routes/globalSearchRoutes')
   mount('/admissions', './routes/admissionRoutes')
