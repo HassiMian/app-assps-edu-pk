@@ -75,6 +75,51 @@ async function withTenantTransaction(req, schoolId, fn) {
   }
 }
 
+
+async function recheckVerifiedSnapshot({snapshot,storedHash,schoolId,req,lookup=query}) {
+  // Manual and historical documents remain supported without claiming verified provenance.
+  if (!snapshot?.academicVerifiedSelections) return {verifiedReferences:0}
+  if (!snapshot || !storedHash || hashDocument(snapshot) !== String(storedHash)) {
+    const e = new Error('VERIFIED_STORED_SNAPSHOT_CONTENT_HASH_MISMATCH')
+    e.status = 409
+    e.code = 'VERIFIED_STORED_SNAPSHOT_CONTENT_HASH_MISMATCH'
+    throw e
+  }
+  return assertVerifiedPaperDocument({
+    document:snapshot,schoolId,actor:req.user,lookup
+  })
+}
+
+async function recheckPrintJob({schoolId,printJobId,req,lookup=query}) {
+  const found = await lookup(
+    `SELECT ar.snapshot_json,ar.content_hash
+       FROM assessment_print_jobs j JOIN assessment_releases ar
+         ON ar.school_id=j.school_id AND ar.release_id=j.release_id
+      WHERE j.school_id=$1 AND j.print_job_id=$2 LIMIT 1`,
+    [schoolId,printJobId]
+  )
+  if (!found.rows?.length) {
+    const error = Error('PRINT_JOB_SIGNED_RELEASE_MISSING')
+    error.code = 'PRINT_JOB_SIGNED_RELEASE_MISSING'
+    error.status = 409
+    throw error
+  }
+  await recheckVerifiedSnapshot({snapshot:found.rows[0].snapshot_json,
+    storedHash:found.rows[0].content_hash,schoolId,req,lookup})
+  return true
+}
+function respondVerifiedReadFailure(res,error,operation) {
+  const status=Number(error.status)
+  if (status===403||status===409||status===422) {
+    return res.status(status).json({
+      success:false,code:error.code||'VERIFIED_PAPER_RECHECK_BLOCKED',
+      message:'Verified paper requires a fresh authorized server revision check.'
+    })
+  }
+  console.error(operation, error.code||error.message)
+  return res.status(503).json({success:false,code:'VERIFIED_RECHECK_UNAVAILABLE'})
+}
+
 router.use(protect, canAuthorAssessments)
 
 router.get('/papers', async (req, res) => {
@@ -115,10 +160,10 @@ router.get('/papers/:paperId', async (req, res) => {
       [schoolId, publicId]
     )
     if (!result.rowCount) return res.status(404).json({ success:false, message:'Assessment paper not found.' })
+    await recheckVerifiedSnapshot({snapshot:result.rows[0].document_json,storedHash:result.rows[0].content_hash,schoolId,req})
     return res.json({ success:true, data:result.rows[0] })
   } catch (error) {
-    console.error('Assessment Studio read error:', error.message)
-    return res.status(500).json({ success:false, message:'Could not read assessment paper.' })
+    return respondVerifiedReadFailure(res,error,'Assessment Studio read failed')
   }
 })
 
@@ -390,10 +435,10 @@ router.get('/print-jobs/:printJobId', async (req, res) => {
       [schoolId,printJobId]
     )
     if (!result.rowCount) return res.status(404).json({ success:false, message:'Print job not found.' })
+    await recheckPrintJob({schoolId,printJobId,req})
     return res.json({ success:true, data:result.rows[0] })
   } catch (error) {
-    console.error('Assessment Studio print job read error:', error.message)
-    return res.status(500).json({ success:false, message:'Could not read print job.' })
+    return respondVerifiedReadFailure(res,error,'Assessment Studio print job read failed')
   }
 })
 
@@ -407,6 +452,7 @@ router.patch('/print-jobs/:printJobId/status', async (req, res) => {
     const data = await withTenantTransaction(req, schoolId, async client => {
       const current = (await client.query(`SELECT status,attempt_count FROM assessment_print_jobs WHERE school_id=$1 AND print_job_id=$2 FOR UPDATE`,[schoolId,printJobId])).rows[0]
       if (!current) return { missing:true }
+      if (target !== 'FAILED') await recheckPrintJob({schoolId,printJobId,req,lookup:(sql,params)=>client.query(sql,params)})
       let transition
       try { transition = printJobTransition(current.status,target,current.attempt_count) }
       catch (error) { return { invalid:error.message, currentStatus:current.status } }
@@ -422,8 +468,7 @@ router.patch('/print-jobs/:printJobId/status', async (req, res) => {
     if (data.invalid) return res.status(409).json({ success:false, code:'INVALID_PRINT_JOB_TRANSITION', message:data.invalid, currentStatus:data.currentStatus })
     return res.json({ success:true, data:data.printJob })
   } catch (error) {
-    console.error('Assessment Studio print job status error:', error.message)
-    return res.status(500).json({ success:false, message:'Could not update print job status.' })
+    return respondVerifiedReadFailure(res,error,'Assessment Studio print job status failed')
   }
 })
 
@@ -448,6 +493,7 @@ router.get('/print-jobs/:printJobId/student-projection/:studentId', async (req, 
         [schoolId, printJobId]
       )).rows[0]
       if (!row) return { missing:true }
+      await recheckVerifiedSnapshot({snapshot:row.snapshot_json,storedHash:row.content_hash,schoolId,req,lookup:(sql,params)=>client.query(sql,params)})
       if (!row.personalized || !row.students_json) return { notPersonalized:true }
       if (sha256(row.snapshot_json || {}) !== String(row.content_hash || '')) return { releaseHashMismatch:true }
       const rosterEnvelope = { context: row.context_json || {}, students: row.students_json || [] }
@@ -502,6 +548,7 @@ router.get('/print-jobs/:printJobId/answer-key', async (req, res) => {
         [schoolId, printJobId]
       )).rows[0]
       if (!row) return { missing:true }
+      await recheckVerifiedSnapshot({snapshot:row.snapshot_json,storedHash:row.content_hash,schoolId,req,lookup:(sql,params)=>client.query(sql,params)})
       if (sha256(row.snapshot_json || {}) !== String(row.content_hash || '')) return { releaseHashMismatch:true }
       return { projection:buildStaffAnswerKeyProjection(row.snapshot_json || {}, { role:req.user?.role }) }
     })
@@ -533,10 +580,10 @@ router.get('/papers/:paperId/releases/latest', async (req, res) => {
       [schoolId, publicId]
     )
     if (!result.rowCount) return res.status(404).json({ success:false, message:'No release found.' })
+    await recheckVerifiedSnapshot({snapshot:result.rows[0].snapshot_json,storedHash:result.rows[0].content_hash,schoolId,req})
     return res.json({ success:true, data:result.rows[0] })
   } catch (error) {
-    console.error('Assessment Studio release read error:', error.message)
-    return res.status(500).json({ success:false, message:'Could not read assessment release.' })
+    return respondVerifiedReadFailure(res,error,'Assessment Studio release read failed')
   }
 })
 
