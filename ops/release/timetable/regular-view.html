@@ -32,6 +32,7 @@ footer{margin-top:22px;text-align:center;font-size:12px;color:var(--muted)}
 #error{display:none;margin-bottom:15px;padding:14px;border:1px solid #fac1c1;background:#fff1f1;color:#922d35;border-radius:10px}
 #print{display:none}#loading{color:#436081}
 @media print{
+#staff{display:none!important}
 @page{size:A4 portrait;margin:11mm}
 body{background:white;color:black;font-size:11px}
 header{background:white;color:#092c57;box-shadow:none;padding:8px 0 15px}
@@ -52,15 +53,20 @@ footer{display:none}
 <div class="meta"><span class="chip">Academic Session 2026–27</span><span class="chip">8:00 AM–1:30 PM</span><span class="chip">25-minute break after 6th lecture</span></div>
 </header>
 <main>
-<div class="toolbar"><div><strong>Current uploaded reference</strong><div class="small">Classes 4, 5, 6, 7 and Pre-Nine • School-day pattern</div></div>
+<div class="toolbar"><div><strong>Current uploaded reference</strong><div class="small">Classes 4–7, Pre-Nine and Class IX (Usman/Fatima) • Regular day</div></div>
 <div style="display:flex;gap:8px;flex-wrap:wrap"><a class="action alt" href="/timetable">Open Timetable Manager</a><button id="print" type="button">Print all classes</button></div></div>
 <div id="error" role="alert"></div>
 <div id="loading" role="status">Loading the saved school timetable securely…</div>
-<div class="notice">This is the regular-day timetable supplied on 14 October 2026. A separate Friday schedule is not specified. Teacher names are displayed as reference only; account permissions are not automatically assigned.</div>
+<div class="notice">Regular day from the 14 October image and recovered Class IX 2026–27 document. Friday schedule not specified. Teacher names are displayed as reference only; account permissions are not automatically assigned.</div>
 <div id="conflict" class="notice" style="background:#fff0d9;border-left-color:#bb7817" hidden></div>
 <section id="bells" class="bells" aria-label="School bell times"></section>
 <section id="cards" class="grid" aria-label="Class timetable"></section>
-<footer>AL SIDDIQUE SCHOLARS PUBLIC SCHOOL • Sharif Chowk, Rayya Khas, Narowal<br>Uploaded reference image is marked Academic Year 2024–2025; displayed under the user-requested 2026–27 session, pending final staff identity reconciliation.</footer>
+<section id="staff" style="margin-top:22px;display:none" aria-label="Employee subjects and departments">
+<h2>Employee Teaching Subjects & Departments</h2>
+<p class="small">Timetable-observed only; not a qualification or marks-entry authorization.</p>
+<div id="staffcards" class="grid"></div>
+</section>
+<footer>AL SIDDIQUE SCHOLARS PUBLIC SCHOOL • Sharif Chowk, Rayya Khas, Narowal<br>Class 4–7/Pre-Nine photo footer says 2024–25; Class IX source is 2026–27. Staff identities await formal reconciliation.</footer>
 </main>
 <script>
 'use strict'
@@ -70,7 +76,9 @@ const PERIODS=[
  ['4th','10:05–10:40'],['5th','10:40–11:15'],['6th','11:15–11:50'],
  ['Break','11:50–12:15'],['7th','12:15–12:50'],['8th','12:50–1:30']
 ]
-const CLASSES=[['Four','Class 4th'],['Five','Class 5th'],['Six','Class 6th'],['Seven','Class 7th'],['Pre-Nine','Class Pre-Nine']]
+const CLASSES=[['Four','Class 4th',''],['Five','Class 5th',''],['Six','Class 6th',''],['Seven','Class 7th',''],
+['Pre-Nine','Class Pre-Nine',''],['Nine','Class IX — Boys / Usman','Usman'],
+['Nine','Class IX — Girls / Fatima','Fatima']]
 const e=(tag,text)=>{const node=document.createElement(tag);node.textContent=String(text??'');return node}
 const displayTime=t=>{const [h,m]=String(t).split(':').map(Number);if(!Number.isFinite(h)||!Number.isFinite(m))return '—';return (h>12?h-12:h)+':'+String(m).padStart(2,'0')}
 function draw(rows){
@@ -96,8 +104,9 @@ function draw(rows){
   const node=e('div','');node.className='bell'+(name==='Break'?' break':'')
   node.append(e('b',name),e('span',time));bells.append(node)
  }
- for(const [className,title] of CLASSES){
-  const entries=rows.filter(row=>row.class_name===className)
+ for(const [className,title,section] of CLASSES){
+  const entries=rows.filter(row=>row.class_name===className&&(row.section||'')===section)
+  if(!entries.length)continue
   if(entries.length!==8)throw Error('Incomplete class schedule.')
   const card=e('article','');card.className='card'
   card.append(e('h2',title))
@@ -116,6 +125,40 @@ function draw(rows){
   table.append(body);card.append(table);cards.append(card)
  }
 }
+async function showStaffMatrix(token){
+ try{
+  const r=await fetch('/api/timetable/staff-subjects',{headers:{Authorization:'Bearer '+token,Accept:'application/json'},cache:'no-store'})
+  if(!r.ok)return
+  const json=await r.json()
+  if(!json.success||json.authorizationIssued!==false||!Array.isArray(json.records)||json.records.length!==56)return
+  const groups=new Map()
+  for(const row of json.records){
+   const id=row.employee_id===null?'unmatched:'+row.teacher_label:'emp:'+row.employee_id
+   if(!groups.has(id))groups.set(id,{name:row.official_employee_name||row.teacher_label,
+    statuses:new Set(),departments:new Set(),subjects:new Set(),classes:new Set()})
+   const g=groups.get(id);g.statuses.add(row.identity_status)
+   g.departments.add(row.teaching_department);g.subjects.add(row.canonical_subject)
+   g.classes.add(row.class_name+(row.section?' / '+row.section:''))
+  }
+  const container=document.getElementById('staffcards')
+  for(const g of groups.values()){
+   const card=e('article','');card.className='card';card.append(e('h2',g.name))
+   const inner=document.createElement('div');inner.style.padding='12px 16px'
+   const statuses=Array.from(g.statuses)
+   const verdict=statuses.includes('unresolved_employee_identity')?'Account match unresolved — HOLD':
+     statuses.includes('provisional_active_name_inactive_homonym')?'Provisional; inactive historical same-name record':
+     'Unique active employee match; not a credential-backed approval'
+   for(const [head,txt] of [['Departments',Array.from(g.departments).sort().join(' • ')],
+    ['Subjects',Array.from(g.subjects).sort().join(', ')],
+    ['Scheduled Classes',Array.from(g.classes).join(', ')],
+    ['Identity Review',verdict]]){
+    const line=document.createElement('p');line.append(e('strong',head+': '),e('span',txt));inner.append(line)
+   }
+   card.append(inner);container.append(card)
+  }
+  document.getElementById('staff').style.display='block'
+ }catch(err){ /* Admin-only matrix must never interfere with class timetable. */ }
+}
 async function start(){
  const token=localStorage.getItem('al_siddique_token')
  if(!token){document.getElementById('loading').hidden=true;const b=document.getElementById('error');b.style.display='block';b.textContent='Please sign in to the school SaaS to view the saved timetable.';return}
@@ -123,9 +166,10 @@ async function start(){
   const res=await fetch('/api/timetable/reference',{headers:{Authorization:'Bearer '+token,Accept:'application/json'},cache:'no-store',credentials:'same-origin'})
   if(!res.ok)throw Error(res.status===401?'Session expired. Please sign in again.':res.status===403?'Your account cannot view the school timetable.':'Timetable service is temporarily unavailable.')
   const json=await res.json()
-  if(!json.success||!Array.isArray(json.data)||json.data.length!==42)throw Error('Timetable data is incomplete.')
+  if(!json.success||!Array.isArray(json.data)||![42,58].includes(json.data.length))throw Error('Timetable data is incomplete.')
   draw(json.data)
   document.getElementById('print').style.display='inline-block'
+  void showStaffMatrix(token)
  }catch(error){const b=document.getElementById('error');b.style.display='block';b.textContent=error.message}
  finally{document.getElementById('loading').hidden=true}
 }
