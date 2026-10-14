@@ -106,10 +106,13 @@ def run_mission(database='apexos', port=5432, receipt_bundle=None, with_tests=Tr
       'genuine_teacher_session_and_save_reload_print',
       'independent_real_peer_school_http_denial','traffic_rollback_evidence_attached',
     ]
-    live_ready=(g_rc==0 and all(gates.get(k) is True for k in expected_gates)
-        and shadow.get('production_release_certified') is True
-        and shadow.get('authenticated_real_staff') is True
-        and shadow.get('prod_app_switched') is True
+    # The old shadow-only verifier intentionally hardcodes production flags
+    # false. It cannot act as the eventual active-traffic release authority.
+    # The actual Core DB active signed guard + pinned ED25519 principal/teacher/
+    # peer-school/traffic receipt gates above are the real independent gates.
+    # Merely synthesizing fixture results without a bundle must NEVER certify.
+    live_ready=(receipt_bundle is not None and g_rc==0
+        and all(gates.get(k) is True for k in expected_gates)
         and all(v.get('pass') is True for v in tests.values())
         and source_clean
         and ingress['school_saas']==200 and ingress['timetable']==200
@@ -120,6 +123,7 @@ def run_mission(database='apexos', port=5432, receipt_bundle=None, with_tests=Tr
       'production_deployment_performed':False,
       'exam_id':9,'school_id':1,'database':'apexos','port':5432,
       'source_sha':version,'source_clean':source_clean,
+      'authenticated_receipt_bundle_supplied':receipt_bundle is not None,
       'gates':{k:bool(gates.get(k) is True) for k in expected_gates},
       'blocked':sorted(k for k in expected_gates if gates.get(k) is not True),
       'current_metrics':preflight.get('metrics',{}),

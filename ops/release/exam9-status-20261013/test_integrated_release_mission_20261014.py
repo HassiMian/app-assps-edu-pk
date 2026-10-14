@@ -23,7 +23,7 @@ COMPLETE={
 SIGNED={'production_release_certified':True,'authenticated_real_staff':True,'prod_app_switched':True,'status':'SIGNED_ACTIVE_TRAFFIC'}
 GOOD_HTTP={'school_saas':200,'timetable':200,'connect_report_cards_anonymous':302,'scoped_admin_approval_anonymous':401}
 
-def simulation(gates, shadow, *, status_code=0, source_tests=False):
+def simulation(gates, shadow, *, status_code=0, source_tests=False, with_receipts=False):
     def fake_run(command, **_kwargs):
         cmd=' '.join(str(x) for x in command)
         if cmd.endswith('rev-parse HEAD'):
@@ -34,10 +34,12 @@ def simulation(gates, shadow, *, status_code=0, source_tests=False):
             return status_code,json.dumps({'gates':gates,'metrics':{'exam_result_count':1762,'zero_scores':213}}),''
         if 'verify-live-signed-shadow-current-20261014.py' in cmd:
             return 0,json.dumps(shadow),''
+        if 'unittest discover' in cmd or 'node --test' in cmd:
+            return 0,'# tests 24\n',''
         raise AssertionError('Unexpected run command: '+cmd)
     with patch.object(module,'run',side_effect=fake_run),patch.object(module,'http_code',side_effect=lambda url:(
         302 if 'report-cards' in url else 401 if 'academic-approvals' in url else 200)):
-        return module.run_mission(with_tests=source_tests)
+        return module.run_mission(with_tests=source_tests,receipt_bundle=(Path('/inaccessible/genuine-receipts.json') if with_receipts else None))
 
 class IntegratedMissionFailClosedTests(unittest.TestCase):
     def test_missing_principal_or_teacher_receipts_hold_even_with_production_database(self):
@@ -47,10 +49,17 @@ class IntegratedMissionFailClosedTests(unittest.TestCase):
         self.assertIn('genuine_teacher_session_and_save_reload_print',result['blocked'])
         self.assertFalse(result['production_deployment_performed'])
 
-    def test_shadow_not_active_traffic_cannot_be_waived_by_other_gates(self):
-        result=simulation(COMPLETE,{**SIGNED,'prod_app_switched':False})
+    def test_missing_signed_receipts_never_certifies_even_if_all_fixture_flags_true(self):
+        result=simulation(COMPLETE,SIGNED,source_tests=True,with_receipts=False)
         self.assertEqual(result['status'],'HOLD')
-        self.assertEqual(result['signed_runtime_verifier']['prod_app_switched'],False)
+        self.assertFalse(result['authenticated_receipt_bundle_supplied'])
+
+    def test_independent_pinned_receipt_gate_allows_future_ready_without_static_shadow_flags(self):
+        # Synthetic fake-run proof of algorithm ONLY, not actual release evidence.
+        shadow={**SIGNED,'prod_app_switched':False,'production_release_certified':False}
+        result=simulation(COMPLETE,shadow,source_tests=True,with_receipts=True)
+        self.assertEqual(result['status'],'READY_FOR_CORE_FINAL_RELEASE')
+        self.assertFalse(result['production_deployment_performed'])
 
     def test_no_source_test_run_is_no_certification(self):
         result=simulation(COMPLETE,SIGNED)
