@@ -42,6 +42,7 @@ class LoginOnlyCoreFailClosed(unittest.TestCase):
           'backup_good':True,'offhost_recovery':True,
           'catalog':'PASS_WITH_INDEPENDENT_LIVE_ACCEPTANCE_REQUIRED',
           'signed_transport':True,'global_worker_ready':True,
+          'worker_catalog':True,'worker_code_parity':True,
           'peer_school_denial':True,'marks_preserved':True,
           'rollback_good':True,'nginx_valid':True,'owner_key':True}
     def sign(self,c,private=None):
@@ -56,6 +57,11 @@ class LoginOnlyCoreFailClosed(unittest.TestCase):
         r=M.evaluate(self.facts,RID)
         self.assertEqual(r['status'],'READY_FOR_LOGIN_ONLY_CORE')
         self.assertFalse(r['production_deployment_performed'])
+    def test_deployed_backend_must_match_reviewed_worker_adapter(self):
+        result=M.evaluate({**self.facts,'worker_code_parity':False},RID)
+        self.assertIn('exact_reviewed_ai_worker_adapter_deployed',result['blocked'])
+    def test_actual_deployed_backend_adapter_missing(self):
+        self.assertFalse(M.deployed_worker_source_parity())
     def test_real_live_must_have_signed_runtime(self):
         self.assertEqual(M.evaluate({**self.facts,'signed_transport':False},RID)['status'],'HOLD')
     def test_offhost_backup_absent_requires_hold(self):
@@ -77,6 +83,34 @@ class LoginOnlyCoreFailClosed(unittest.TestCase):
     def test_six_table_current_catalog_holds(self):
         self.assertIn('production_signed_catalog_safe',
           M.evaluate({**self.facts,'catalog':'HOLD'},RID)['blocked'])
+    def test_live_worker_catalog_absent_even_with_signed_receipts_holds(self):
+        r=M.evaluate({**self.facts,'worker_catalog':False},RID)
+        self.assertIn('live_worker_role_and_inherited_grants_verified',r['blocked'])
+    def test_worker_config_rejects_same_school_user(self):
+        e={'DB_AI_WORKER_USER':'apexos_user', 'DB_USER':'apexos_user',
+            'DB_AI_WORKER_PORT':'5432','DB_AI_WORKER_NAME':'apexos',
+            'DB_AI_WORKER_HOST':'localhost','DB_AI_WORKER_PASSWORD':'test-only'}
+        self.assertFalse(M.worker_config_present(e))
+    def test_worker_config_rejects_qa_database_target(self):
+        e={'DB_AI_WORKER_USER':'assps_core_ai_login', 'DB_USER':'apexos_user',
+            'DB_AI_WORKER_PORT':'55477','DB_AI_WORKER_NAME':'apexos',
+            'DB_AI_WORKER_HOST':'localhost','DB_AI_WORKER_PASSWORD':'test-only'}
+        self.assertFalse(M.worker_config_present(e))
+    def test_worker_config_rejects_empty_credentials(self):
+        e={'DB_AI_WORKER_USER':'assps_core_ai_login', 'DB_USER':'apexos_user',
+            'DB_AI_WORKER_PORT':'5432','DB_AI_WORKER_NAME':'apexos',
+            'DB_AI_WORKER_HOST':'localhost','DB_AI_WORKER_PASSWORD':''}
+        self.assertFalse(M.worker_config_present(e))
+    def test_worker_config_accepts_separate_synthetic_qa_fixture(self):
+        e={'DB_AI_WORKER_USER':'assps_core_ai_login', 'DB_USER':'apexos_user',
+            'DB_AI_WORKER_PORT':'5432','DB_AI_WORKER_NAME':'apexos',
+            'DB_AI_WORKER_HOST':'localhost','DB_AI_WORKER_PASSWORD':'synthetic_fixture'}
+        self.assertTrue(M.worker_config_present(e))
+    def test_catalog_reader_rejects_arbitrary_role_sql_injection(self):
+        self.assertFalse(M.inspect_worker_catalog('postgres;DROP TABLE students'))
+        self.assertFalse(M.inspect_worker_catalog('apexos_user'))
+    def test_read_only_actual_catalog_absent_worker_fails(self):
+        self.assertFalse(M.inspect_worker_catalog('assps_core_ai_login_nonexistent'))
     def test_no_authenticated_worker_receipt_holds(self):
         self.assertIn('global_worker_separated_and_authenticated',
           M.evaluate({**self.facts,'global_worker_ready':False},RID)['blocked'])

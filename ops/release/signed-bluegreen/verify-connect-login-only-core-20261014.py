@@ -147,6 +147,100 @@ def verify_signed_recovery_receipt(bundle, key, release_id, source_sha, build_id
         except Exception:continue
     return False
 
+def deployed_worker_source_parity():
+    """Read-only exact backend adapter and caller bytes, not just claimed SHA.
+
+    An old production service may have worker DB credentials/roles without
+    actually running the reviewed fail-closed adapter. That MUST remain HOLD.
+    """
+    reviewed=ROOT/'al-siddique-backend/src'
+    deployed=Path('/var/www/apex-backend/src')
+    required=('services/ai/aiQueueWorkerDatabase.js',
+              'services/ai/paperAiQueue.js',
+              'routes/opsRoutes.js')
+    try:
+        for rel in required:
+            source=reviewed/rel
+            active=deployed/rel
+            if (not source.is_file() or not active.is_file() or
+                    hashlib.sha256(source.read_bytes()).digest()!=
+                    hashlib.sha256(active.read_bytes()).digest()):
+                return False
+        return True
+    except OSError:
+        return False
+
+
+def worker_config_present(env):
+    """Boolean-only validation: never return/print connection credentials."""
+    worker=str(env.get('DB_AI_WORKER_USER') or '')
+    dbuser=str(env.get('DB_USER') or '')
+    if not re.fullmatch('[a-z_][a-z0-9_]{0,62}',worker):return False
+    if worker in ('postgres','apexos_user','assps_core_green_login',dbuser):return False
+    if (str(env.get('DB_AI_WORKER_ROLE') or 'assps_core_ai_worker')!=
+            'assps_core_ai_worker'):return False
+    if str(env.get('DB_AI_WORKER_PORT'))!='5432':return False
+    if str(env.get('DB_AI_WORKER_NAME'))!='apexos':return False
+    return all(bool(str(env.get(k) or '').strip()) for k in
+        ('DB_AI_WORKER_HOST','DB_AI_WORKER_PASSWORD'))
+
+
+def inspect_worker_catalog(worker_login):
+    """READ-ONLY effective role privileges; no worker login/password attempted.
+
+    This supplements but NEVER replaces the genuinely authenticated signed
+    Core worker receipt. No live role or ACL is modified by this function.
+    """
+    if not re.fullmatch('[a-z_][a-z0-9_]{0,62}',worker_login):return False
+    if worker_login in ('postgres','apexos_user','assps_core_green_login'):
+        return False
+    # Every effective privilege is checked, not only SELECT. Otherwise an
+    # unauthorized Green user could retain UPDATE/DELETE on an invisible row.
+    global_tables=('admin_block_audit_log','ai_jobs','ai_queue_events',
+                   'ai_queue_state','campuses','organizations')
+    denied_to_green=''.join(
+        "AND NOT has_table_privilege('assps_core_green_runtime',"+
+        "'public."+table+"','"+priv+"') "
+        for table in global_tables for priv in ('SELECT','INSERT','UPDATE','DELETE'))
+    denied_worker_global=''.join(
+        "AND NOT has_table_privilege(worker.oid,'public."+table+
+        "','"+priv+"') "
+        for table in ('organizations','campuses','admin_block_audit_log')
+        for priv in ('SELECT','INSERT','UPDATE','DELETE'))
+    # The role identifier is character-class validated before SQL literal use.
+    sql=(
+      'BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY;'
+      "SELECT EXISTS (SELECT 1 FROM pg_roles worker, pg_roles account "
+      "WHERE worker.rolname='assps_core_ai_worker' "
+      "AND account.rolname='"+worker_login+"' "
+      'AND NOT worker.rolcanlogin AND NOT worker.rolsuper '
+      'AND NOT worker.rolbypassrls AND NOT worker.rolinherit '
+      'AND account.rolcanlogin AND NOT account.rolsuper '
+      'AND NOT account.rolbypassrls '
+      "AND pg_has_role(account.oid,worker.oid,'USAGE') "
+      "AND NOT pg_has_role('assps_core_green_runtime','assps_core_ai_worker','USAGE') "
+      "AND NOT pg_has_role('assps_core_green_runtime','assps_core_ai_worker','MEMBER') "
+      "AND NOT pg_has_role('assps_core_green_login','assps_core_ai_worker','MEMBER') "
+      "AND has_table_privilege(worker.oid,'public.ai_jobs','SELECT') "
+      "AND has_table_privilege(worker.oid,'public.ai_queue_events','INSERT') "
+      "AND has_table_privilege(worker.oid,'public.ai_queue_state','UPDATE') "
+      "AND NOT has_table_privilege(worker.oid,'public.organizations','SELECT') "
+      "AND NOT has_table_privilege(worker.oid,'public.campuses','SELECT') "
+      "AND NOT has_table_privilege(worker.oid,'public.admin_block_audit_log','SELECT') "
+      "AND NOT has_table_privilege('assps_core_green_runtime','public.ai_jobs','SELECT') "
+      "AND NOT has_table_privilege('assps_core_green_runtime','public.ai_queue_events','SELECT') "
+      "AND NOT has_table_privilege('assps_core_green_runtime','public.ai_queue_state','SELECT') "
+      "AND NOT has_table_privilege('assps_core_green_runtime','public.organizations','SELECT') "
+      "AND NOT has_table_privilege('assps_core_green_runtime','public.campuses','SELECT') "
+      "AND NOT has_table_privilege('assps_core_green_runtime','public.admin_block_audit_log','SELECT') "
+      +denied_to_green+denied_worker_global+
+      ');COMMIT;')
+    rc,text=run(['runuser','-u','postgres','--','psql','-p5432','-d','apexos',
+      '-X','-q','-t','-A','-v','ON_ERROR_STOP=1','-c',sql],timeout=18)
+    # Transaction's SELECT returns only one isolated boolean line.
+    return rc==0 and text.splitlines()==['t']
+
+
 def evaluate(facts, release_id):
     checks={
       'release_id_pinned':bool(re.fullmatch('[a-zA-Z0-9._-]{8,160}',release_id)),
@@ -154,7 +248,9 @@ def evaluate(facts, release_id):
       'independent_offhost_current_recovery_certified':facts.get('offhost_recovery') is True,
       'production_signed_catalog_safe':facts.get('catalog') == 'PASS_WITH_INDEPENDENT_LIVE_ACCEPTANCE_REQUIRED',
       'production_restricted_signed_transport_enabled':facts.get('signed_transport') is True,
+      'exact_reviewed_ai_worker_adapter_deployed':facts.get('worker_code_parity') is True,
       'global_worker_separated_and_authenticated':facts.get('global_worker_ready') is True,
+      'live_worker_role_and_inherited_grants_verified':facts.get('worker_catalog') is True,
       'real_signed_peer_school_and_subject_denial':facts.get('peer_school_denial') is True,
       'original_school_marks_integrity_preserved':facts.get('marks_preserved') is True,
       'current_blue_rollback_archive_verified':facts.get('rollback_good') is True,
@@ -184,10 +280,13 @@ def current_facts(release_id,sha,build):
     except (ValueError,TypeError):cat_state='HOLD'
     rc,raw=run(['pm2','jlist'],timeout=15)
     signed=False
+    worker_env={}
     try:
         for node in json.loads(raw) if rc==0 else []:
             if node.get('name')=='apex-backend' and node.get('pm2_env',{}).get('status')=='online':
                 env=node['pm2_env']
+                # Keep only boolean/username-safe worker metadata, not secrets.
+                worker_env=env
                 signed=(env.get('DB_SIGNED_TENANT_RLS_ENABLED')=='true' and
                         env.get('DB_AUTH_USE_SIGNED_TENANT_CONTEXT')=='true' and
                         env.get('DB_ENFORCE_LEAST_PRIVILEGE_LOGIN')=='true')
@@ -218,13 +317,17 @@ def current_facts(release_id,sha,build):
     public_key=verified_owner_key()
     try: receipts=json.loads(RECEIPTS.read_text())
     except (OSError,ValueError):receipts=None
-    global_worker_ready=(isolated_worker_role and
+    worker_login=str(worker_env.get('DB_AI_WORKER_USER') or '')
+    worker_catalog=worker_config_present(worker_env) and inspect_worker_catalog(worker_login)
+    global_worker_ready=(isolated_worker_role and worker_catalog and
         verify_signed_worker_receipt(receipts,public_key,release_id,sha,build))
     return {
       'backup_good':valid_backup,
       'offhost_recovery':verify_signed_recovery_receipt(receipts,public_key,release_id,sha,build),
       'catalog':cat_state,'signed_transport':signed,
+      'worker_code_parity':deployed_worker_source_parity(),
       'global_worker_ready':global_worker_ready,
+      'worker_catalog':worker_catalog,
       'peer_school_denial':verify_signed_peer_tenant_receipt(receipts,public_key,release_id,sha,build),
       'marks_preserved':marks,'rollback_good':rollback,'nginx_valid':rc==0,
       'owner_key':public_key is not None,
