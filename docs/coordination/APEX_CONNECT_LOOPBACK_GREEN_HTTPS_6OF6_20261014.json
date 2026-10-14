@@ -1,0 +1,52 @@
+{
+  "type": "ISOLATED_BLUE_GREEN_NGINX_HTTPS_ROLLBACK_REHEARSAL",
+  "scope": "loopback_only_not_live_production",
+  "old_blue_dashboard_response": "307 /admin (prior observation)",
+  "green_dashboard_response": "307 /login?next=%2Fadmin",
+  "green_live_routes": [
+    {
+      "path": "/login",
+      "expected": 200,
+      "status": 200,
+      "location": null,
+      "pass_": true
+    },
+    {
+      "path": "/dashboard",
+      "expected": 307,
+      "status": 307,
+      "location": "/login?next=%2Fadmin",
+      "pass_": true
+    },
+    {
+      "path": "/teacher",
+      "expected": 302,
+      "status": 302,
+      "location": "/login?next=%2Fteacher",
+      "pass_": true
+    },
+    {
+      "path": "/api/auth/me",
+      "expected": 401,
+      "status": 401,
+      "location": null,
+      "pass_": true
+    },
+    {
+      "path": "/auth/change-password",
+      "expected": 200,
+      "status": 200,
+      "location": null,
+      "pass_": true
+    },
+    {
+      "path": "/teacher/assessments/report-cards",
+      "expected": 302,
+      "status": 302,
+      "location": "/login?next=%2Fteacher%2Fassessments%2Freport-cards",
+      "pass_": true
+    }
+  ],
+  "green_6_of_6": true,
+  "production_cutover_performed": false
+}
