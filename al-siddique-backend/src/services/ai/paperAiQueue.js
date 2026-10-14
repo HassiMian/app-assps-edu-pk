@@ -2,7 +2,7 @@ const crypto = require('crypto')
 const fs = require('fs')
 const path = require('path')
 const os = require('os')
-const { query } = require('../../config/database')
+const { query } = require('./aiQueueWorkerDatabase')
 
 const JOB_TTL_MS = 1000 * 60 * 60 * 24
 const QUEUE_EVENT_TTL_MS = 1000 * 60 * 60 * 24 * 14
