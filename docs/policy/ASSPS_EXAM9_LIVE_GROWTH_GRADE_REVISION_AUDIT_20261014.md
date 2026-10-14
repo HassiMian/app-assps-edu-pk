@@ -13,7 +13,7 @@
 - At first pass, 105 full Exam9 score rows in the 40–49% bracket carried an 'F' label; 42 were in original 301-row subset.
 - During the same safe read-only audit, school 1 grade_settings changed from 0 rows to six explicit bands: A+90–100, A80–89, B70–79, C60–69, D40–59, F0–39. A fresh query found **0** grade-F/40–49% conflicts after this concurrent change.
 - User separately specifies **passing threshold 40%**, not a universal per-subject maximum. No historical score/denominator was rewritten by this branch.
-- Whether an authenticated school reviewer approved these concurrent grade updates and whether an immutable previous/new audit event exists **has not been independently proved**; gate remains HOLD pending that evidence.
+- The concurrent live table `assps_grade_revision_audit_20261014` contains **112 grade change rows** (105 F→D, 1 A+→A, six previously blank grades now A/C/D), all **112/112 match** current numeric marks, totals and stored new grades. Every row has a textual `policy_source` reference and timestamp, but the table has **no authenticated school actor/reviewer ID, signed session receipt or independent approval revision**. Therefore change provenance is traceable but not credential-backed school acceptance; gate remains HOLD.
 
 ## Engineering fix
 `ops/release/exam9-status-20261013/verify_exam9_release_gate_20261014.py` now distinguishes:
