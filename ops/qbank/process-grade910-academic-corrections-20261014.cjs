@@ -285,7 +285,12 @@ function processP2Item(docketRow, stagingData) {
   return correctedDraft
 }
 
+// SECURITY/ACADEMIC QUALITY STOP: historical v1 output remains in Git for provenance,
+ // but generated numerical verification, option-balancing and "verified" answer claims
+ // were not substantiated. The corrected v2 queue is built using the separate,
+ // source-hash-bound verifier below. Never regenerate this misleading packet.
 function processAll() {
+ throw new Error('GRADE910_UNSAFE_V1_CLAIMS_SUPERSEDED_BY_CORRECTION_INTEGRITY_V2')
   console.log('Loading AI Advisory Correction Docket...');
   const docketRaw = fs.readFileSync(DOCKET_FILE, 'utf8')
   const docket = JSON.parse(docketRaw)
