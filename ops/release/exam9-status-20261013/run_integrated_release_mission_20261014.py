@@ -59,6 +59,12 @@ def run_mission(database='apexos', port=5432, receipt_bundle=None, with_tests=Tr
         preflight=json.loads(g_out)
     except (ValueError,TypeError):
         preflight={'verdict':'HOLD','gates':{},'error':(g_err or 'verification not JSON')[:150]}
+    paper_src_command=[sys.executable,str(HERE/'verify_exam9_printed_paper_sources_20261014.py')]
+    ps_rc, ps_out, ps_err=run(paper_src_command,timeout=35)
+    try:
+        paper_sources=json.loads(ps_out)
+    except (ValueError,TypeError):
+        paper_sources={'status':'HOLD','reason':(ps_err or 'source scan was not JSON')[:150]}
     if STANDALONE_SHADOW.exists():
         s_rc,s_out,s_err=run([sys.executable,str(STANDALONE_SHADOW)],timeout=35)
         try:
@@ -127,6 +133,7 @@ def run_mission(database='apexos', port=5432, receipt_bundle=None, with_tests=Tr
       'gates':{k:bool(gates.get(k) is True) for k in expected_gates},
       'blocked':sorted(k for k in expected_gates if gates.get(k) is not True),
       'current_metrics':preflight.get('metrics',{}),
+      'exam9_paper_source_review':paper_sources,
       'source_tests':tests,
       'signed_runtime_verifier':shadow,
       'ingress':ingress,

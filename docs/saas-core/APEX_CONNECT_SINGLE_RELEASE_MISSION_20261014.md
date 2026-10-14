@@ -36,3 +36,27 @@ Result if missing identity/approval evidence: HOLD. No full academic publication
 At independent preflight on 14 Oct 2026, the expected pinned trusted release attestation public key at /etc/assps/release-evidence-ed25519.pub was **absent**. This is a real blocker before any genuine Ed25519 signed browser/cross-school/rollback receipt can be accepted. The public key must be provisioned from a verified, independently owned SaaS Core attestor trust anchor, with recorded source fingerprint and secure rotation/recovery procedure. Do not mint a new private key merely to pass this gate, treat ephemeral test keys as institutional production keys, or sign staff approval on behalf of real users.
 
 The standalone shadow-only verifier deliberately reports false for active full-traffic deployment and signed-staff verification even after the production guard migrates, so the unified gate never treats that static shadow status as future live traffic authority. Real active application RLS signed-policy proof and independent owner-signed traffic/peer HTTP/real browser receipts are required by the underlying canonical release verifier. No receipts means HOLD even if synthetic fixture unit tests return success.
+
+## Verified original paper maximum source gap (production 2026-10-14)
+
+New read-only candidate source classifier:
+ops/release/exam9-status-20261013/verify_exam9_printed_paper_sources_20261014.py.
+
+Live school1 Paper Vault currently has exactly **5 records marked approved**, but
+NONE is First Term: their examType fields are **Chapter Test, Monthly
+Assessment or Monthly Test**, with printed maxima 20 or 25. Separate
+assessment_papers count2 are Print HTTP Test fixtures, not actual First Term
+papers. Therefore official Exam9 paper maxima cannot be certified from this
+live stored Paper Vault. The 1,762 historical genuine scores have observed
+denominators **25 (360), 50 (649), 60 (274), 75 (305), 100 (174)**;
+these describe existing results, NOT independently approved paper policies.
+The original 301 scores are separately hash-protected. Never auto-write
+these historical denominators or unrelated monthly paper maxima into
+exam_subjects.total_marks, and do not infer Class Nine has a First Term exam.
+
+The genuine approval flow must ingest *current school First Term source
+documents* with unique class/section/subject/revision/digest, check explicit
+marks totals and inconsistencies, present them to authenticated school Admin
+or Principal, and store the actual authorized reviewer session identity,
+approval revision and timestamp. Paper Vault status=approved by itself is
+not an institution-signed exam maximum.

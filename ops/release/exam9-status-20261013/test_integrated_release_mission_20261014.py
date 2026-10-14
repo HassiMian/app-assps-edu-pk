@@ -32,6 +32,10 @@ def simulation(gates, shadow, *, status_code=0, source_tests=False, with_receipt
             return 0,'',''
         if 'verify_exam9_release_gate_20261014.py' in cmd:
             return status_code,json.dumps({'gates':gates,'metrics':{'exam_result_count':1762,'zero_scores':213}}),''
+        if 'verify_exam9_printed_paper_sources_20261014.py' in cmd:
+            return 0,json.dumps({'status':'NO_FIRST_TERM_PAPER_SOURCES_IN_CURRENT_VAULT',
+                    'vault_papers_total':5,'wrong_assessment_type':5,
+                    'first_term_reference_candidates':0}),''
         if 'verify-live-signed-shadow-current-20261014.py' in cmd:
             return 0,json.dumps(shadow),''
         if 'unittest discover' in cmd or 'node --test' in cmd:
@@ -60,6 +64,11 @@ class IntegratedMissionFailClosedTests(unittest.TestCase):
         result=simulation(COMPLETE,shadow,source_tests=True,with_receipts=True)
         self.assertEqual(result['status'],'READY_FOR_CORE_FINAL_RELEASE')
         self.assertFalse(result['production_deployment_performed'])
+
+    def test_missing_first_term_paper_source_remains_visible_not_automatically_approved(self):
+        result=simulation(COMPLETE,SIGNED,source_tests=True,with_receipts=False)
+        self.assertEqual(result['exam9_paper_source_review']['first_term_reference_candidates'],0)
+        self.assertEqual(result['status'],'HOLD')
 
     def test_no_source_test_run_is_no_certification(self):
         result=simulation(COMPLETE,SIGNED)
