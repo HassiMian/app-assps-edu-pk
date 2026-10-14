@@ -1,0 +1,17 @@
+PASS anonymous blocked
+PASS temporary credential accepted for change only
+PASS no auth cookies before password rotation
+PASS local temporary-password form route
+PASS temporary-password form renders
+PASS password-change operation succeeds
+PASS original temporary credential revoked
+PASS new password gives signed teacher response
+PASS real HttpOnly session cookies issued
+PASS session-backed identity matches QA teacher
+PASS authenticated teacher portal accessible
+ADMIN_STATUS 307 TARGET /teacher
+PASS teacher cannot access admin portal
+DASH_STATUS 307 TARGET /teacher
+PASS legacy dashboard respects teacher role
+PASS password-reset flag revokes prior session
+CONNECT_SYNTHETIC_SIGNED_TEACHER_LOGIN 14/14 PASS

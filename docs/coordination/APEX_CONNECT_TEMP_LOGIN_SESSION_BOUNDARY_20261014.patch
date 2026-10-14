@@ -1,16 +1,67 @@
-From b231fa7808f512b0ea71d91572ba81dda88fe7c2 Mon Sep 17 00:00:00 2001
-From: root <root@srv1769723.hstgr.cloud>
-Date: Wed, 14 Oct 2026 14:49:22 +0000
-Subject: [PATCH] fix(connect): bind teacher login to verified session and
- preserve temporary password challenge
-
----
- ...porary-login-session-boundary-20261014.cjs | 70 +++++++++++++++++++
- src/components/LoginClient.tsx                | 42 ++++++++---
- src/lib/server/auth-user.ts                   |  3 +-
- 3 files changed, 105 insertions(+), 10 deletions(-)
- create mode 100644 scripts/connect/test-temporary-login-session-boundary-20261014.cjs
-
+diff --git a/scripts/connect/test-synthetic-signed-teacher-http-20261014.cjs b/scripts/connect/test-synthetic-signed-teacher-http-20261014.cjs
+new file mode 100644
+index 0000000..97be739
+--- /dev/null
++++ b/scripts/connect/test-synthetic-signed-teacher-http-20261014.cjs
+@@ -0,0 +1,58 @@
++'use strict';
++// QA ONLY: Requires an already-running isolated Next test app at 127.0.0.1:3013
++// and a disposable PostgreSQL cluster at 127.0.0.1:55443. Never target real school DB.
++if (process.env.CONNECT_ISOLATED_QA !== 'yes') throw Error('Isolated QA opt-in required');
++const assert=require('node:assert/strict');
++const crypto=require('node:crypto');
++const {createRequire}=require('node:module');
++const r=createRequire('/root/workspace/assps-connect-temp-login-mission-20261014/package.json');
++const {Client}=r('pg'),bcrypt=r('bcryptjs');
++const origin='http://127.0.0.1:3013';
++const secretA=crypto.randomBytes(20).toString('hex');
++const secretB=crypto.randomBytes(20).toString('hex');
++function target(res){const loc=res.headers.get('location'); return loc ? new URL(loc,origin).pathname : null;}
++let passed=0;
++function check(label,ok){assert(ok,label);console.log('PASS '+label);passed++;}
++async function request(p,options){return fetch(origin+p,{redirect:'manual',...options});}
++async function submit(p,body){const res=await request(p,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});return {res,data:await res.json().catch(()=>({}))};}
++async function main(){
++const db=new Client({host:'127.0.0.1',port:55443,database:'postgres',user:'postgres'});
++await db.connect();
++try {
++const scope=await db.query("SELECT code,tenant_id FROM schools WHERE id=9901 AND code='QA-ONLY' AND tenant_id='qa-tenant-9901'");
++if (scope.rowCount !== 1) throw Error('Expected synthetic-only database marker missing');
++const hash=await bcrypt.hash(secretA,10);
++await db.query('INSERT INTO users(id,name,email,username,password,role,is_active,must_change_password,school_id,tenant_id) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) ON CONFLICT (id) DO UPDATE SET password=EXCLUDED.password, must_change_password=true',[9901,'Synthetic Teacher','synthetic@example.invalid','QA-T-001',hash,'teacher',true,true,9901,'qa-tenant-9901']);
++let res=await request('/teacher');
++check('anonymous blocked',res.status===302);
++let attempt=await submit('/api/auth/login',{email:'QA-T-001',password:secretA,role:'teacher'});
++check('temporary credential accepted for change only',attempt.res.status===200&&attempt.data.mustChangePassword===true&&attempt.data.token==='');
++check('no auth cookies before password rotation',!(attempt.res.headers.get('set-cookie')));
++check('local temporary-password form route',attempt.data.redirectTo==='/auth/change-password?userId=9901');
++res=await request(attempt.data.redirectTo);
++check('temporary-password form renders',res.status===200);
++let rotation=await submit('/api/auth/change-temporary-password',{userId:'9901',currentPassword:secretA,newPassword:secretB});
++check('password-change operation succeeds',rotation.res.status===200&&rotation.data.success===true);
++attempt=await submit('/api/auth/login',{email:'QA-T-001',password:secretA,role:'teacher'});
++check('original temporary credential revoked',attempt.res.status===401);
++attempt=await submit('/api/auth/login',{email:'QA-T-001',password:secretB,role:'teacher'});
++check('new password gives signed teacher response',attempt.res.status===200&&attempt.data.success===true&&attempt.data.user?.role==='teacher');
++const setCookies=attempt.res.headers.getSetCookie();
++const cookie=setCookies.map(s=>s.split(';')[0]).join('; ');
++check('real HttpOnly session cookies issued',setCookies.some(s=>s.startsWith('authToken=')&&s.includes('HttpOnly'))&&cookie.includes('userId='));
++res=await request('/api/auth/me',{headers:{Cookie:cookie}});
++const me=await res.json();
++check('session-backed identity matches QA teacher',res.status===200&&String(me.user?.id)==='9901'&&me.user?.role==='teacher');
++res=await request('/teacher',{headers:{Cookie:cookie}});
++check('authenticated teacher portal accessible',res.status===200);
++res=await request('/admin',{headers:{Cookie:cookie}}); console.log('ADMIN_STATUS',res.status,'TARGET',target(res));
++check('teacher cannot access admin portal',res.status===307&&target(res)==='/teacher');
++res=await request('/dashboard',{headers:{Cookie:cookie}}); console.log('DASH_STATUS',res.status,'TARGET',target(res));
++check('legacy dashboard respects teacher role',res.status===307&&target(res)==='/teacher');
++await db.query('UPDATE users SET must_change_password=true WHERE id=9901');
++res=await request('/api/auth/me',{headers:{Cookie:cookie}});
++check('password-reset flag revokes prior session',res.status===401);
++console.log('CONNECT_SYNTHETIC_SIGNED_TEACHER_LOGIN '+passed+'/'+passed+' PASS');
++} finally { await db.end(); }
++}
++main().catch(e=>{console.error('CONNECT_SYNTHETIC_SIGNED_TEACHER_LOGIN FAIL '+e.message);process.exitCode=2;});
 diff --git a/scripts/connect/test-temporary-login-session-boundary-20261014.cjs b/scripts/connect/test-temporary-login-session-boundary-20261014.cjs
 new file mode 100644
 index 0000000..fce2e4e
@@ -156,6 +207,3 @@ index d337548..ea32b28 100644
  
    const normalizedRole = String(row.role || "").toLowerCase() === "super_admin"
      ? "SAAS_ADMIN"
--- 
-2.43.0
-
