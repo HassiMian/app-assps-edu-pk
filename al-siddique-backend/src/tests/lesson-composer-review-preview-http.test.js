@@ -45,12 +45,12 @@ const payload=()=>({reviewBatch:{
  source_zip_sha256:sha('zip'),source_txt_sha256:sha('txt'),
  candidates:[candidate()],unassigned_evidence:['WA14-L1719']
 }})
-async function request(actor,body){
+async function request(actor,body,path='/planner/composer-review-preview',method='POST'){
  const data=JSON.stringify(body)
  const port=server.address().port
  return new Promise((resolve,reject)=>{
-  const req=http.request({host:'127.0.0.1',port,path:'/api/lesson-plans/planner/composer-review-preview',
-   method:'POST',headers:{'content-type':'application/json','content-length':Buffer.byteLength(data),'x-test-actor':actor}},res=>{
+  const req=http.request({host:'127.0.0.1',port,path:'/api/lesson-plans'+path,
+   method,headers:{'content-type':'application/json','content-length':Buffer.byteLength(data),'x-test-actor':actor}},res=>{
     let raw='';res.on('data',x=>raw+=x);res.on('end',()=>{
       try{resolve({status:res.statusCode,body:JSON.parse(raw)})}catch(err){reject(err)}
     })
@@ -74,6 +74,33 @@ test('isolated HTTP negative gates for composer review (mock actor; NOT live JWT
  r=await request('principal',publish);assert.equal(r.status,422);assert.equal(r.body.code,'UNSAFE_PUBLICATION_STATE')
  const owner=payload();owner.reviewBatch.candidates[0].teacher_user_id=4191
  r=await request('principal',owner);assert.equal(r.status,422);assert.equal(r.body.code,'UNVERIFIED_ASSIGNMENT_OR_APPROVAL')
+})
+test('import release gate denies simulated teacher and manager by default',async()=>{
+ const c=payload()
+ let r=await request('teacher',c,'/planner/composer-review-import')
+ assert.equal(r.status,403)
+ assert.equal(r.body.code,'COMPOSER_REVIEW_MANAGER_REQUIRED')
+ r=await request('principal',c,'/planner/composer-review-import')
+ assert.equal(r.status,503)
+ assert.equal(r.body.code,'COMPOSER_IMPORT_RELEASE_HOLD')
+})
+test('correction route requires school manager and stays release-disabled',async()=>{
+ const c={sourceId:'WA14-L2847',changeType:'DATE_PROPOSAL',
+  proposedText:'Proposed 2027-01-05',rationale:'Source date is inconsistent with school calendar',
+  expectedRevision:1}
+ const url='/planner/composer-review-correction/LPREVIEW-20261014-starter-english'
+ let r=await request('teacher',c,url)
+ assert.equal(r.status,403)
+ assert.equal(r.body.code,'COMPOSER_CORRECTION_MANAGER_REQUIRED')
+ r=await request('principal',c,url)
+ assert.equal(r.status,503)
+ assert.equal(r.body.code,'COMPOSER_CORRECTION_RELEASE_HOLD')
+})
+test('source and class list are management-only',async()=>{
+ let r=await request('teacher',{},'/planner/composer-review-classes','GET')
+ assert.equal(r.status,403)
+ r=await request('teacher',{},'/planner/composer-review-source/LPREVIEW-20261014-starter-english','GET')
+ assert.equal(r.status,403)
 })
 after(async()=>{if(server)await new Promise(resolve=>server.close(resolve))})
 

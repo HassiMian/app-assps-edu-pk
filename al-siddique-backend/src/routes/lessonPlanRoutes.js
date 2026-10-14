@@ -8,6 +8,8 @@ const { currentSchoolId } = require('../middleware/tenant')
 const { isSchoolDocumentManager, canAccessAuthoredDocument } = require('../services/teacherDocumentAccess')
 const { loadPlanningContext } = require('../services/lessonPlanningContext')
 const { prepareReviewBatch } = require('../services/lessonComposerIntake')
+const { persistReviewBatch, listReviewGroups, readReviewSource } = require('../services/lessonComposerReviewStore')
+const {appendCorrection} = require('../services/lessonComposerCorrection')
 const { buildDeterministicPlan, enhancePlanWithAi, parseSmartPlanningText, parseIsoDate, MAX_RANGE_DAYS } = require('../services/lessonPlanningEngine')
 
 const canManageLessonPlans = requireRoles('super_admin', 'admin', 'school_admin', 'principal', 'teacher')
@@ -174,6 +176,75 @@ router.post('/planner/composer-review-preview', (req, res) => {
   }
 })
 
+// Persist private, unapproved composer-source drafts, using existing tenant RLS.
+// Feature-disabled by default: launch requires isolated testing and release gates.
+router.post('/planner/composer-review-import', async (req, res) => {
+  if (!isSchoolDocumentManager(req.user)) return res.status(403).json({success:false,code:'COMPOSER_REVIEW_MANAGER_REQUIRED'})
+  if (process.env.ACADEMIC_COMPOSER_REVIEW_IMPORT_ENABLED !== 'true') return res.status(503).json({success:false,code:'COMPOSER_IMPORT_RELEASE_HOLD'})
+  try {
+    const schoolId=resolveSchoolId(req)
+    if (!schoolId) return res.status(403).json({success:false,code:'COMPOSER_REVIEW_SCHOOL_REQUIRED'})
+    const data=await withTenantTransaction(req,schoolId,client=>persistReviewBatch(client,req.body?.reviewBatch,schoolId))
+    return res.status(200).json({success:true,data})
+  } catch(error) {
+    const status=error.code==='REVIEW_IMPORT_CONFLICT_NO_OVERWRITE'?409:
+      Number(error.status || 422)===409?409:422
+    if(error.code?.startsWith('LESSON_PLAN_SIGNED_')) return res.status(403).json({success:false,code:error.code})
+    if(!error.code) {
+      console.error('Composer safe import failed',error)
+      return res.status(500).json({success:false,code:'COMPOSER_REVIEW_IMPORT_FAILED'})
+    }
+    return res.status(status).json({success:false,code:error.code,message:'Review import blocked by provenance, identity or conflict gate.'})
+  }
+})
+// Append-only correction proposals; never converts drafts into approvals.
+// Feature-disabled in production until genuine role/RLS release certification.
+router.post('/planner/composer-review-correction/:id',async(req,res)=>{
+  if(!isSchoolDocumentManager(req.user))
+    return res.status(403).json({success:false,code:'COMPOSER_CORRECTION_MANAGER_REQUIRED'})
+  if(process.env.ACADEMIC_COMPOSER_REVIEW_CORRECTIONS_ENABLED!=='true')
+    return res.status(503).json({success:false,code:'COMPOSER_CORRECTION_RELEASE_HOLD'})
+  try{
+    const schoolId=resolveSchoolId(req)
+    if(!schoolId) return res.status(403).json({success:false,code:'COMPOSER_CORRECTION_SCHOOL_REQUIRED'})
+    const actorId=Number(req.user?.id)
+    const revision=expectedRevision(req)
+    if(!revision) return res.status(428).json({success:false,code:'CORRECTION_REVISION_REQUIRED'})
+    const data=await withTenantTransaction(req,schoolId,client=>appendCorrection(client,{
+      schoolId,id:req.params.id,revision,actorId,input:req.body
+    }))
+    return res.json({success:true,data,publicationAllowed:false})
+  }catch(error){
+    if(error.code) return res.status(Number(error.status||422)).json({success:false,code:error.code})
+    console.error('Composer correction failed',error)
+    return res.status(500).json({success:false,code:'COMPOSER_CORRECTION_FAILED'})
+  }
+})
+router.get('/planner/composer-review-classes',async(req,res)=>{
+  if (!isSchoolDocumentManager(req.user)) return res.status(403).json({success:false,code:'COMPOSER_REVIEW_MANAGER_REQUIRED'})
+  try {
+    const schoolId=resolveSchoolId(req)
+    if (!schoolId) return res.status(403).json({success:false,code:'COMPOSER_REVIEW_SCHOOL_REQUIRED'})
+    const data=await withTenantTransaction(req,schoolId,client=>listReviewGroups(client,schoolId))
+    return res.json({success:true,data,publicationAllowed:false})
+  }catch(error){
+    return res.status(Number(error.status||500)).json({success:false,code:error.code||'COMPOSER_REVIEW_LIST_FAILED'})
+  }
+})
+router.get('/planner/composer-review-source/:id',async(req,res)=>{
+  if(!isSchoolDocumentManager(req.user)) return res.status(403).json({success:false,code:'COMPOSER_REVIEW_MANAGER_REQUIRED'})
+  try {
+    const schoolId=resolveSchoolId(req)
+    if(!schoolId) return res.status(403).json({success:false,code:'COMPOSER_REVIEW_SCHOOL_REQUIRED'})
+    const data=await withTenantTransaction(req,schoolId,client=>readReviewSource(client,schoolId,req.params.id))
+    if(!data) return res.status(404).json({success:false,code:'COMPOSER_REVIEW_SOURCE_NOT_FOUND'})
+    res.set('Cache-Control','private, no-store')
+    return res.json({success:true,data,publicationAllowed:false})
+  }catch(error){
+    return res.status(Number(error.status||500)).json({success:false,code:error.code||'COMPOSER_REVIEW_SOURCE_FAILED'})
+  }
+})
+
 router.get('/planner/context', async (req, res) => {
   try {
     const schoolId = resolveSchoolId(req)
@@ -263,6 +334,13 @@ router.post('/', async (req, res) => {
     const schoolId = resolveSchoolId(req)
     if (!schoolId) return res.status(400).json({ success:false, message:'School context is required.' })
     const plan = normalizePlan(req.body || {})
+    // Reserved immutable intake IDs must only enter through signed provenance
+    // import, never the ordinary teacher/editor draft creation endpoint.
+    if (plan.publicId.startsWith('LPREVIEW-') ||
+        ['lp_c5_sst_adiba_20261014','lp_c6_pakstudies_adiba_20261014','lp_primary_4assessment_adiba_20261014'].includes(plan.publicId) ||
+        req.body?.composerIntake === true) {
+      return res.status(422).json({success:false,code:'COMPOSER_REVIEW_SOURCE_RESERVED'})
+    }
     const data = await withTenantTransaction(req, schoolId, async client => {
       const result = await client.query(`
         INSERT INTO lesson_plans (
@@ -307,6 +385,8 @@ router.put('/:id', async (req, res) => {
           plan_date=$6::date,planning_scope=$7,plan_range_label=$8,end_date=$9::date,
           period=$10,duration=$11,sent_to_portal=$12,payload=$13::jsonb,updated_at=NOW()
         WHERE school_id=$14 AND public_id=$15 AND revision=$16 AND ($17::boolean OR created_by=$18) AND ($17::boolean OR sent_to_portal=false)
+          AND (payload->>'composerIntake' IS DISTINCT FROM 'true')
+          AND public_id NOT IN ('lp_c5_sst_adiba_20261014','lp_c6_pakstudies_adiba_20261014','lp_primary_4assessment_adiba_20261014')
         RETURNING *
       `, [
         plan.title, plan.subject, plan.classLevel, plan.chapter, plan.teacher, plan.planDate,
@@ -337,7 +417,9 @@ router.delete('/:id', async (req, res) => {
     const revision = expectedRevision(req)
     if (!revision) return res.status(428).json({ success:false, code:'LESSON_PLAN_REVISION_REQUIRED', message:'Current lesson plan revision is required.' })
     const data = await withTenantTransaction(req, schoolId, async client => {
-      const result = await client.query('DELETE FROM lesson_plans WHERE school_id=$1 AND public_id=$2 AND revision=$3 AND ($4::boolean OR created_by=$5) AND ($4::boolean OR sent_to_portal=false) RETURNING public_id', [schoolId, id, revision, isSchoolDocumentManager(req.user), Number(req.user?.id) || -1])
+      const result = await client.query(`DELETE FROM lesson_plans WHERE school_id=$1 AND public_id=$2 AND revision=$3 AND ($4::boolean OR created_by=$5) AND ($4::boolean OR sent_to_portal=false)
+        AND (payload->>'composerIntake' IS DISTINCT FROM 'true')
+        AND public_id NOT IN ('lp_c5_sst_adiba_20261014','lp_c6_pakstudies_adiba_20261014','lp_primary_4assessment_adiba_20261014') RETURNING public_id`, [schoolId, id, revision, isSchoolDocumentManager(req.user), Number(req.user?.id) || -1])
       if (result.rowCount) return { deleted:true }
       const current = await client.query('SELECT revision, school_id, created_by, sent_to_portal FROM lesson_plans WHERE school_id=$1 AND public_id=$2 LIMIT 1', [schoolId, id])
       if (current.rows[0] && (!canAccessAuthoredDocument(req.user, current.rows[0], schoolId) || (!isSchoolDocumentManager(req.user) && current.rows[0].sent_to_portal))) return { missing:true }
@@ -364,6 +446,11 @@ router.post('/:id/share', async (req, res) => {
     const data = await withTenantTransaction(req, schoolId, async client => {
       const row = (await client.query('SELECT * FROM lesson_plans WHERE school_id=$1 AND public_id=$2 LIMIT 1', [schoolId, id])).rows[0]
       if (!row || !canAccessAuthoredDocument(req.user, row, schoolId)) return { missing:true }
+      // No academic publication or parent notification from imported/incorrect WhatsApp source.
+      if (row.payload?.composerIntake ||
+          ['lp_c5_sst_adiba_20261014','lp_c6_pakstudies_adiba_20261014','lp_primary_4assessment_adiba_20261014'].includes(id)) {
+        return { reviewHold:true }
+      }
       if (!isSchoolDocumentManager(req.user)) return { forbidden:true }
       if (Number(row.revision) !== revision) return { conflict:true, currentRevision:Number(row.revision) }
 
@@ -402,6 +489,7 @@ router.post('/:id/share', async (req, res) => {
     })
 
     if (data.missing) return res.status(404).json({ success:false, code:'LESSON_PLAN_NOT_FOUND', message:'Lesson plan not found.' })
+    if (data.reviewHold) return res.status(409).json({ success:false, code:'COMPOSER_ACADEMIC_PUBLICATION_HOLD' })
     if (data.forbidden) return res.status(403).json({ success:false, code:'LESSON_PLAN_SHARE_REVIEW_REQUIRED', message:'A school administrator must review and share this lesson plan.' })
     if (data.conflict) return res.status(409).json({ success:false, code:'LESSON_PLAN_REVISION_CONFLICT', currentRevision:data.currentRevision, message:'Lesson plan changed in another session. Reopen it before sharing.' })
     res.json({ success:true, data:data.plan, delivery:{ students:data.studentCount, notifications:data.notifications } })

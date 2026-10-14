@@ -41,3 +41,19 @@ Only an authorized school manager can preview. Output: \`{success:true, data:{cl
 
 Never cherry-pick directly over another agent's dirty worktree. Core must reconcile this clean candidate against current canonical and live frontend/backend versions; run auth/tenant cross-school regression, protect Exam9 marks and finance/student records, verify backup and rollback, then consider controlled rollout. Until that point **source QA PASS; PRODUCTION CERTIFICATION HOLD**.
 
+
+
+## Resumed mission checkpoint — 14 October 2026 (isolated source, no production deployment)
+
+Original ZIP/TXT fingerprints matched independently against user-uploaded bytes. Private 59-candidate manifest transferred to root-only VPS evidence directory; no WhatsApp source text uploaded to GitHub. Original archive: one TXT and 26 attachments.
+
+Trusted candidate hashes: src/services/data/adiba20261014TrustedHashes.json contains 59 SHA256 review candidate digests, original ZIP/TXT SHA and pinned manifest SHA b8ebd7de77753d5fba31ac35bb5594d138e063896d2f4fa77774dbab8abdfa3f. The verifier rejects tampered text, extra candidate IDs or forged ZIP hashes. These hashes prove alignment with the original source, NOT academic approval.
+
+Backend review import is manager-only, gated by ACADEMIC_COMPOSER_REVIEW_IMPORT_ENABLED=true (default disabled), accepts <=12 candidates/atomic transaction, writes school-scoped private evidence with NULL author and actual teacher, unpublished, no parent/student notices. Full original source preserved; identical imports idempotent, conflicts fail closed. Management-only class list and original-source inspection routes remain protected.
+
+Correction proposals: manager-only POST /planner/composer-review-correction/:id (gated by ACADEMIC_COMPOSER_REVIEW_CORRECTIONS_ENABLED=true, default disabled) requires authenticated actor ID, expected revision, document source ID and evidence. It appends hash-chained proposed correction events to the separate corrections JSON array without touching the immutable original source, academic teacher identity, section, term, published status or school marks. Such proposals are NOT approvals. Legacy create/update/delete/share operations block composer-source IDs and three existing incorrect drafts.
+
+Independent read-only validator: node al-siddique-backend/ops/release/validate-composer-manifest.js /root/secure-archive/composer-review-20261014/manifest_private.json. Full 59/59 original manifest staged inside isolated port 55432 PostgreSQL transaction and rolled back; 0 teacher assignments, 0 publication and 0 notifications. Real PostgreSQL append-only correction rehearsal, source-preservation and rollback PASS. Candidate source/role/tenant/unit/static/mock HTTP/planner tests: 50/50 PASS. QA role is not real production signed RLS; mock HTTP does not establish genuine Principal acceptance.
+
+Outstanding production release requirements: Paper Studio class-wise teacher-facing UI, authentic principal and actual subject teacher assignment, school review of date and textbook provenance ambiguities, genuine signed RLS cross-school HTTP, independent Save/Reopen/Edit/Print browser and Urdu checks, verified backup/rollback, integration on current deployment ancestry. Flags must remain OFF in production until gates pass. Production marks, results and existing three Adiba drafts were not changed in this mission.
+
