@@ -16,3 +16,9 @@
 - Genuine signed school account must validate names against active employees before teacher permissions or exam marks scopes can be issued.
 - No subject maxima, results, exams, Paper Studio, APEX Connect or unrelated academic timetable records were modified.
 - Full official school publication/RLS cutover and school-authenticated Save→Reload→Print gates are independent.
+
+## Live simultaneous teacher check (do not invent substitute assignments)
+- Period 3: **Miss Isma appears in Class Four and Class Six simultaneously**, distinct cohorts. Conflict flagged in the authenticated viewer; original uploaded source preserved.
+- Period 5: Miss Sumaira appears in Class Four and Class Five; earlier school room policy combines Four and Five, so no automatic conflict or double-grant was inferred.
+- Period 8: Qari Imran appears in Class Four and Class Five; same combined-room caveat.
+- Active employee lookup did not find exact active `Afsa` or `Asma` staff-name matches; separately the older docx named `Miss Asma` for Class Six Period 3. Do not secretly replace the user's uploaded Miss Isma with a different person, nor map inactive staff accounts.

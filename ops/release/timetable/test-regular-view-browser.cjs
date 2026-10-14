@@ -27,6 +27,7 @@ const srv=http.createServer((req,res)=>{
   assert.equal(await page.locator('tbody tr.breakrow').count(),5)
   assert.equal(await page.locator('.card tbody tr').count(),45)
   assert.equal(await page.locator('.bell.break').count(),1)
+  assert.match(await page.locator('#conflict').innerText(),/Miss Isma.*Four and Six.*Period 3/i)
   const sixth=await page.locator('.card').first().locator('tbody tr').nth(5).innerText()
   const br=await page.locator('.card').first().locator('tbody tr').nth(6).innerText()
   const seventh=await page.locator('.card').first().locator('tbody tr').nth(7).innerText()

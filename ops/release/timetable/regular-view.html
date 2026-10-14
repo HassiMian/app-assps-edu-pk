@@ -57,6 +57,7 @@ footer{display:none}
 <div id="error" role="alert"></div>
 <div id="loading" role="status">Loading the saved school timetable securely…</div>
 <div class="notice">This is the regular-day timetable supplied on 14 October 2026. A separate Friday schedule is not specified. Teacher names are displayed as reference only; account permissions are not automatically assigned.</div>
+<div id="conflict" class="notice" style="background:#fff0d9;border-left-color:#bb7817" hidden></div>
 <section id="bells" class="bells" aria-label="School bell times"></section>
 <section id="cards" class="grid" aria-label="Class timetable"></section>
 <footer>AL SIDDIQUE SCHOLARS PUBLIC SCHOOL • Sharif Chowk, Rayya Khas, Narowal<br>Uploaded reference image is marked Academic Year 2024–2025; displayed under the user-requested 2026–27 session, pending final staff identity reconciliation.</footer>
@@ -73,6 +74,23 @@ const CLASSES=[['Four','Class 4th'],['Five','Class 5th'],['Six','Class 6th'],['S
 const e=(tag,text)=>{const node=document.createElement(tag);node.textContent=String(text??'');return node}
 const displayTime=t=>{const [h,m]=String(t).split(':').map(Number);if(!Number.isFinite(h)||!Number.isFinite(m))return '—';return (h>12?h-12:h)+':'+String(m).padStart(2,'0')}
 function draw(rows){
+ const overlaps=new Map()
+ for(const row of rows.filter(v=>v.class_name!=='School-wide'&&v.teacher_display_name)){
+  const key=row.period_label+'|'+row.teacher_display_name.trim().toLowerCase()
+  overlaps.set(key,[...(overlaps.get(key)||[]),row.class_name])
+ }
+ const warnings=[]
+ for(const [key,classes] of overlaps.entries()){
+  if(classes.length<=1)continue
+  if(classes.length===2&&classes.includes('Four')&&classes.includes('Five'))continue
+  const [period,teacher]=key.split('|')
+  warnings.push(teacher+' appears in '+classes.join(' and ')+' during '+period)
+ }
+ if(warnings.length){
+  const warn=document.getElementById('conflict')
+  warn.textContent='Teacher allocation review required: '+warnings.join('; ')+'. Original uploaded entries are preserved until corrected.'
+  warn.hidden=false
+ }
  const bells=document.getElementById('bells'),cards=document.getElementById('cards')
  for(const [name,time] of PERIODS){
   const node=e('div','');node.className='bell'+(name==='Break'?' break':'')
