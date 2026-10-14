@@ -1,0 +1,56 @@
+diff --git a/scripts/connect/test-real-browser-password-challenge-20261014.cjs b/scripts/connect/test-real-browser-password-challenge-20261014.cjs
+index 2e4e9b4..dbdb2f3 100644
+--- a/scripts/connect/test-real-browser-password-challenge-20261014.cjs
++++ b/scripts/connect/test-real-browser-password-challenge-20261014.cjs
+@@ -20,7 +20,11 @@ if (!Number.isInteger(browserPort)||browserPort<3000||browserPort>3999 ||
+     (fullClone && dbName!=='apexos')) {
+   throw Error('Refusing non-isolated QA browser/database configuration');
+ }
+-const origin='http://127.0.0.1:'+browserPort;
++// Optional genuine TLS + reverse-proxy browser verification.  Only a
++// dedicated loopback-mapped HTTPS port may be used: never production port443.
++const tlsProxy=process.env.CONNECT_QA_HTTPS_LOOPBACK==='yes';
++if(tlsProxy && browserPort!==3019)throw Error('TLS QA must use isolated port 3019');
++const origin=tlsProxy?'https://api.assps.edu.pk:3019':'http://127.0.0.1:'+browserPort;
+ const temp=crypto.randomBytes(20).toString('hex'),next=crypto.randomBytes(20).toString('hex');
+ let browser,client;let count=0;
+ function pass(label,condition){assert(condition,label);count++;console.log('PASS '+label);}
+@@ -30,9 +34,14 @@ function pass(label,condition){assert(condition,label);count++;console.log('PASS
+  assert.equal(marker.rowCount,1,'Synthetic DB marker not present');
+  const hash=await bcrypt.hash(temp,10);
+  await client.query("INSERT INTO users(id,name,email,username,password,role,is_active,must_change_password,school_id,tenant_id) VALUES(9901,'Synthetic Browser Teacher','browser.qa@example.invalid','QA-BROWSER-001',$1,'teacher',true,true,9901,'qa-tenant-9901') ON CONFLICT (id) DO UPDATE SET password=excluded.password,must_change_password=true",[hash]);
+- browser=await chromium.launch({headless:true,executablePath:process.env.CONNECT_CHROMIUM_PATH||'/root/.cache/ms-playwright/chromium-1148/chrome-linux/chrome',args:['--no-sandbox']});
+- const page=await browser.newPage();
++ browser=await chromium.launch({headless:true,executablePath:process.env.CONNECT_CHROMIUM_PATH||'/root/.cache/ms-playwright/chromium-1148/chrome-linux/chrome',args:tlsProxy?['--no-sandbox','--host-resolver-rules=MAP api.assps.edu.pk 127.0.0.1, EXCLUDE localhost']:['--no-sandbox']});
++ const page=await browser.newPage({ignoreHTTPSErrors:tlsProxy});
+  const faults=[];page.on('pageerror',e=>faults.push(e.message));page.on('response',r=>{if(r.status()===401||r.status()===403){try{console.log('AUTH_HTTP',r.status(),new URL(r.url()).pathname)}catch{}}});page.on('framenavigated',f=>{if(f===page.mainFrame()){try{console.log('BROWSER_NAV',new URL(f.url()).pathname)}catch{}}});
++ if (tlsProxy) {
++   const probe=await page.request.get(origin+'/dashboard',{maxRedirects:0,ignoreHTTPSErrors:true});
++   pass('real HTTPS ingress never forces anonymous teacher to admin',probe.status()===307 &&
++     new URL(probe.headers()['location'],origin).pathname==='/login');
++ }
+  await page.goto(origin+'/login?school_code=QA-ONLY&role=teacher',{waitUntil:'domcontentloaded'});
+  await page.locator('input[autocomplete="username"]').waitFor({timeout:15000});
+  pass('real Chromium opens scoped teacher form',await page.getByText('Teacher Login').count()>0);
+@@ -52,6 +61,11 @@ function pass(label,condition){assert(condition,label);count++;console.log('PASS
+  await page.getByText('Password changed successfully. Please login again.').waitFor({timeout:15000});
+  pass('real browser submits password rotation successfully',true);
+  await page.waitForURL(/\/login/,{timeout:15000});
++ if (tlsProxy) {
++   const probe=await page.request.get(origin+'/dashboard',{maxRedirects:0,ignoreHTTPSErrors:true});
++   pass('real HTTPS ingress never forces anonymous teacher to admin',probe.status()===307 &&
++     new URL(probe.headers()['location'],origin).pathname==='/login');
++ }
+  await page.goto(origin+'/login?school_code=QA-ONLY&role=teacher',{waitUntil:'domcontentloaded'});
+  await page.locator('input[autocomplete="username"]').waitFor({timeout:15000});
+  await page.locator('input[autocomplete="username"]').fill('QA-BROWSER-001');
+@@ -59,6 +73,9 @@ function pass(label,condition){assert(condition,label);count++;console.log('PASS
+  await page.getByRole('button',{name:/secure login/i}).click();
+  await page.waitForURL(/\/teacher(?:\/|$)/,{timeout:15000});
+  pass('real Chromium reaches authenticated teacher dashboard',new URL(page.url()).pathname==='/teacher');
++ if (tlsProxy) {
++   pass('browser session is on isolated real HTTPS host',new URL(page.url()).host==='api.assps.edu.pk:3019');
++ }
+  const cookies=await page.context().cookies();
+  pass('verified browser holds signed HttpOnly cookie',cookies.some(c=>c.name==='authToken'&&c.httpOnly));
+  const me=await page.evaluate(async()=>{const r=await fetch('/api/auth/me',{credentials:'include',cache:'no-store'});return {status:r.status,data:await r.json().catch(()=>({}))}});
