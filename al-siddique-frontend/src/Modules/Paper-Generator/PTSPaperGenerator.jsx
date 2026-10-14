@@ -1360,6 +1360,11 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  return (
  <div className="pts-generator-surface" style={{ display:'flex', flexDirection:'column', minHeight:'calc(100vh - 82px)', height:'calc(100vh - 82px)', width:'100%', position:'relative', ...themeVars(uiTheme) }}>
  <style>{`.pts-generator-surface select option, .pts-generator-surface select optgroup { background: var(--pg-option-bg, #0a1e35); color: var(--pg-option-text, #e6eef8); }`}</style>
+ <div data-grade910-approved-only-workspace-handoff style={{padding:'8px 18px',borderBottom:'1px solid rgba(101,180,221,.5)',background:'rgba(13,49,83,.95)',color:'#e7f3ff',fontSize:12,display:'flex',gap:12,flexWrap:'wrap',alignItems:'center'}}>
+   <span><strong>Grade IX–X verified question selection:</strong> use the separately authenticated, approved-only revision picker. A locally created/imported or edited paper is not automatically academically approved.</span>
+   <a href="/academic/grade910-verified-picker" style={{border:'1px solid #78cce7',borderRadius:7,color:'#fff',padding:'6px 10px',textDecoration:'none',fontWeight:800}}>Open approved-only picker</a>
+   <span style={{opacity:.85}}>Only server-verified source and answer revisions are eligible for certified publication. Existing manual-paper editing/printing remains a separate workflow.</span>
+ </div>
  <div data-paper-controls style={{ background:'var(--pg-toolbar, rgba(7,25,48,0.97))', backdropFilter:blur, borderBottom:`1px solid ${D.border}`, padding:'12px 20px', flexShrink:0 }}>
  <div style={{ display:'flex', gap:8, marginBottom:12, flexWrap:'wrap', alignItems:'center' }}>
  <div style={{display:'flex',alignItems:'center',gap:7}}>
