@@ -7,6 +7,7 @@ const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
 const { isSchoolDocumentManager, canAccessAuthoredDocument } = require('../services/teacherDocumentAccess')
 const { loadPlanningContext } = require('../services/lessonPlanningContext')
+const { prepareReviewBatch } = require('../services/lessonComposerIntake')
 const { buildDeterministicPlan, enhancePlanWithAi, parseSmartPlanningText, parseIsoDate, MAX_RANGE_DAYS } = require('../services/lessonPlanningEngine')
 
 const canManageLessonPlans = requireRoles('super_admin', 'admin', 'school_admin', 'principal', 'teacher')
@@ -150,6 +151,27 @@ function expectedRevision(req) {
 router.use(protect, canManageLessonPlans, (req, res, next) => {
   if (!isSchoolDocumentManager(req.user) && (!Number.isSafeInteger(Number(req.user?.id)) || Number(req.user?.id) <= 0)) return res.status(403).json({ success:false, code:'LESSON_PLAN_ACTOR_REQUIRED', message:'Verified teacher identity is required.' })
   next()
+})
+
+// An administrative, read-only preview of composer-forwarded curriculum.
+// No database writes, owner assignment, approval, student notification or sharing.
+// This is NOT a replacement for the versioned school adoption workflow.
+router.post('/planner/composer-review-preview', (req, res) => {
+  if (!isSchoolDocumentManager(req.user)) {
+    return res.status(403).json({ success:false, code:'COMPOSER_REVIEW_MANAGER_REQUIRED' })
+  }
+  try {
+    const schoolId = resolveSchoolId(req)
+    if (!schoolId) return res.status(403).json({ success:false, code:'COMPOSER_REVIEW_SCHOOL_REQUIRED' })
+    const review = prepareReviewBatch(req.body?.reviewBatch, schoolId)
+    return res.json({ success:true, data:review, publicationAllowed:false })
+  } catch (error) {
+    if (error && typeof error.code === 'string') {
+      return res.status(422).json({ success:false, code:error.code, message:'Academic submission needs source and authorization review.' })
+    }
+    console.error('Composer review preview failure', error?.message || error)
+    return res.status(500).json({ success:false, code:'COMPOSER_REVIEW_PREVIEW_FAILED' })
+  }
 })
 
 router.get('/planner/context', async (req, res) => {
