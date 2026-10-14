@@ -7,6 +7,7 @@ const { isTeacher, validateTeacherMarksWrite, teacherResultReadScope } = require
 const { parseExactMarksNumber } = require('../services/examMarksInputValidation')
 const { validatePaperMaxima } = require('../services/examMarksSubjectMaximum')
 const { validateResultState } = require('../services/examResultStatus')
+const { selectGradeBand } = require('../services/gradeBandAssignment')
 
 const canManageExams = requireRoles('super_admin', 'admin', 'principal')
 const canWriteMarks = requireRoles('super_admin', 'admin', 'principal', 'teacher')
@@ -62,9 +63,9 @@ function gradeFromBands(obtained, total, bands = DEFAULT_GRADE_SETTINGS) {
   const totalValue = Number(total)
   if (!Number.isFinite(obtainedValue) || !Number.isFinite(totalValue) || totalValue <= 0) return ''
   const pct = Math.max(0, Math.min(100, (obtainedValue / totalValue) * 100))
-  const match = (Array.isArray(bands) && bands.length ? bands : DEFAULT_GRADE_SETTINGS)
-    .find(row => pct >= Number(row.from) && pct <= Number(row.to))
-  return match?.label || ''
+  const candidate = Array.isArray(bands) && bands.length ? bands : DEFAULT_GRADE_SETTINGS
+  const normalized = candidate.map(row => ({ label: String(row.label), from: Number(row.from), to: Number(row.to) }))
+  return selectGradeBand(pct, normalized)?.label || ''
 }
 
 async function loadGradeBandsForSchool(schoolId, {previewDefaults = true} = {}) {
