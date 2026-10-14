@@ -1,0 +1,393 @@
+diff --git a/docs/coordination/APEX_CONNECT_SEPARATED_SIGNED_PRE_POSTCUTOVER_GATE_20261014.md b/docs/coordination/APEX_CONNECT_SEPARATED_SIGNED_PRE_POSTCUTOVER_GATE_20261014.md
+new file mode 100644
+index 0000000..c81e701
+--- /dev/null
++++ b/docs/coordination/APEX_CONNECT_SEPARATED_SIGNED_PRE_POSTCUTOVER_GATE_20261014.md
+@@ -0,0 +1,97 @@
++# APEX Connect — signed login-only PRE/POST cutover execution boundary
++
++**Date:** 14 October 2026. **Engineering status:** Source complete; production NO-GO.
++**Scope:** APEX Connect teacher login only. No academic mark publication, no
++Principal impersonation, and no credential extraction or real data writes.
++
++## Permanent architecture
++
++The existing login-only release verifier historically required all THREE
++real postflight receipts before traffic promotion:
++1. Existing authorized teacher signed live browser acceptance.
++2. Independent signed live cross-school and unauthorized subject HTTP denial.
++3. Actual live traffic rollback executed under SaaS Core release ownership.
++
++The third item is inherently POST-cutover evidence and must not be forged
++or called complete before traffic has ever been switched. It remains a
++required FINAL CERTIFICATION, never a permission to bypass safe preflight.
++
++A new strictly read-only PRE-CUTOVER verifier has been implemented at:
++scripts/connect/verify-signed-precutover-contract-20261014.cjs
++
++It validates, in one coordinated review:
++- Source SHA of reviewed auth proxy and actual compiled candidate BUILD_ID.
++- Exact live Blue Nginx SHA, preserved old dashboard intercept baseline.
++- Green Nginx file private loopback upstream, removal of both unconditional
++  dashboard-to-admin locations, no old Next config redirect.
++- Actual root-private full database backup exact SHA.
++- Independently recorded SaaS Core **login-only** safety gate, whose status
++  must be READY_FOR_LOGIN_ONLY_CORE, signed tenant runtime security must be
++  certified, and official academic results must remain unpublished.
++- A genuine owner-pinned root-owned Ed25519 public key under
++  /etc/assps/release-evidence-ed25519.pub (no local fake key installed).
++- Core-release-owner signed, non-stale attestation over EXACT release ID,
++  source SHA, Next build ID, origin, Blue+Green Nginx hashes, backup digest
++  and Core status artifact digest. It must expressly verify signed tenant
++  and peer-school denial, correct compiled artifacts, recovery rehearsal,
++  unchanged marks and no academic result publication.
++
++The verifier NEVER switches traffic, signs a human receipt, obtains passwords,
++modifies production records or certifies final public release. Its positive
++result is only READY_FOR_SAAS_CORE_CONTROLLED_SWITCH, not RELEASE_CERTIFIED.
++
++The original existing post-release signed verifier remains separately required
++for real authenticated teacher browser session, peer-school/subject denials,
++compiled deployed build and **actual completed live traffic rollback**.
++A source or synthetic test pass is not post-release actor certification.
++
++## Actual source and live evidence
++
++Previous combined real TLS Chromium acceptance on restored school PostgreSQL,
++with synthetic teacher and isolated browser HTTPS ingress: 15/15 PASS. That
++is genuine browser code testing, not genuine existing Muhammad Imran login.
++
++New negative tests:
++- PRE-cutover signed source/actor/rollback artifact: 15/15 PASS.
++- Older signed-release negative suite: 10/10 PASS.
++- Nginx Blue/Green routing negatives: 9/9 PASS.
++- Existing teacher postlogin redirect: 19/19 PASS.
++- Auth path exclusions: 12/12 PASS.
++- Canonical role / fake Host boundaries: 9/9 PASS.
++
++A NEW actual read-only source/live preflight was executed with the currently
++reviewed compiled Next candidate ONDwxEIZlx5onDIKY7wYf and a PRIVATE
++staged corrected copy of the ACTUAL production Nginx virtual host. Current
++Nginx and PostgreSQL production files were NOT modified or reloaded.
++
++**Actual PRE result: HOLD.** Source SHA, compiled candidate BUILD_ID, exact
++Blue Nginx, isolated Green candidate and full backup digest all PASS.
++Core independently signed live runtime acceptance, genuinely owner-pinned
++public key and genuine signed Core-owner receipt remain MISSING/FAIL.
++
++The existing public Next BUILD_ID remains XI7EvxpUMkKOxK5ByM2BH; live
++/dashboard still 307 to /admin. Corrected app has not reached public users.
++
++## Core owner release sequence with no fabricated institutional decisions
++
++A. Prepare and verify current Core signed tenant runtime, distinct global
++worker and independent real peer-school HTTP denial; preserve Blue, full
++current backup and off-host recovery under established owner custody.
++Core must issue an independently genuine status artifact and trusted root.
++
++B. With these actual artifacts, run the new PRE verifier against reviewed
++compiled Next and private Green Nginx. PASS is a necessary, not sufficient,
++condition for an authorized atomic Next + Nginx traffic switch.
++
++C. After a successful controlled cutover, obtain actual teacher temporary
++password rotation / new login / signed session behavior, independent
++cross-tenant denial, and Core-owned real traffic rollback evidence, then
++run the original POST verifier. Revert to Blue on failures and recheck
++ExamID9 protected marks. Mark LIVE release certified only with genuine
++postflight evidence, not synthetic actor/signature proofs.
++
++Official subject maximum mark approvals and published results are entirely
++separate release tracks, never auto-approved to unblock login.
++
++**No production service, staff credential, API token, RLS policy, teacher
++assignment, marks or school records changed in this source mission.**
+diff --git a/scripts/connect/test-signed-precutover-contract-20261014.cjs b/scripts/connect/test-signed-precutover-contract-20261014.cjs
+new file mode 100644
+index 0000000..5dfaf07
+--- /dev/null
++++ b/scripts/connect/test-signed-precutover-contract-20261014.cjs
+@@ -0,0 +1,136 @@
++#!/usr/bin/env node
++'use strict';
++const assert=require('node:assert/strict');
++const fs=require('node:fs');
++const path=require('node:path');
++const os=require('node:os');
++const crypto=require('node:crypto');
++const {evaluate,signedPreflight,PRE_KIND,REQUIRED}=
++  require('./verify-signed-precutover-contract-20261014.cjs');
++const sha=x=>crypto.createHash('sha256').update(x).digest('hex');
++const temp=fs.mkdtempSync(path.join(os.tmpdir(),'assps-precutover-qa-'));
++try {
++  const candidate=path.join(temp,'candidate');
++  fs.mkdirSync(path.join(candidate,'.next'),{recursive:true});
++  fs.mkdirSync(path.join(candidate,'src'),{recursive:true});
++  const proxy=Buffer.from('// reviewed Connect auth route; synthetic QA only');
++  const build='ONDwxEIZlx5onDIKY7wYf';
++  const blue=Buffer.from("location = /dashboard { return 307 /admin; }\nlocation ^~ /dashboard/ { return 307 /admin; }\nlocation / { proxy_pass http://127.0.0.1:3000; }");
++  const green=Buffer.from("listen 127.0.0.1:3017 ssl http2;\nlocation / { proxy_pass http://127.0.0.1:3016; }");
++  const backup=Buffer.alloc(101000,7); // synthetic QA bytes, never real DB
++  const preCore={status:'READY_FOR_LOGIN_ONLY_CORE',
++    signed_runtime_security_certified:true,
++    academic_results_published:false,
++    exact_release_id:'QA_PRE_CUTOVER_20261014'};
++  const core=Buffer.from(JSON.stringify(preCore));
++  const f={blue:path.join(temp,'blue.conf'),green:path.join(temp,'green.conf'),
++    backup:path.join(temp,'backup.dump'),core:path.join(temp,'core.json')};
++  fs.writeFileSync(path.join(candidate,'.next/BUILD_ID'),build);
++  fs.writeFileSync(path.join(candidate,'src/proxy.ts'),proxy);
++  fs.writeFileSync(path.join(candidate,'next.config.ts'),'export default {}');
++  fs.writeFileSync(f.blue,blue);
++  fs.writeFileSync(f.green,green);
++  fs.writeFileSync(f.backup,backup);
++  fs.writeFileSync(f.core,core);
++  const expected={sourceSha:sha(proxy),buildId:build,
++    releaseId:preCore.exact_release_id,origin:'https://api.assps.edu.pk',
++    blueSha:sha(blue),greenSha:sha(green),
++    backupSha:sha(backup),coreSha:sha(core)};
++  const {publicKey,privateKey}=crypto.generateKeyPairSync('ed25519');
++  const now=Date.now();
++  const claim={
++    kind:PRE_KIND,issuer:'SAAS_CORE',environment:'production',
++    school_id:1,actor_role:'core_release_owner',
++    release_scope:'CONNECT_LOGIN_ONLY',
++    release_id:expected.releaseId,
++    source_sha256:expected.sourceSha,
++    build_id:expected.buildId,
++    origin:expected.origin,
++    nginx_blue_sha256:expected.blueSha,
++    nginx_green_sha256:expected.greenSha,
++    backup_sha256:expected.backupSha,
++    core_signed_runtime_evidence_sha256:expected.coreSha,
++    academic_results_published:false,
++    status:'PASS',evidence_digest:'b'.repeat(64),
++    observed_at:new Date(now).toISOString(),
++  };
++  for(const k of REQUIRED)claim[k]=true;
++  function sign(body,key=privateKey) {
++    const bytes=Buffer.from(JSON.stringify(body));
++    return {payload_b64:bytes.toString('base64'),
++      signature_b64:crypto.sign(null,bytes,key).toString('base64')};
++  }
++  function result(overrides={}) {
++    return evaluate({candidateRoot:candidate,blueNginx:f.blue,
++      greenNginx:f.green,backupFile:f.backup,coreFile:f.core,
++      expected,ownerKey:publicKey,receipt:sign(claim),now,...overrides});
++  }
++  let passed=0;
++  function test(name,fn){fn();passed++;console.log('PASS '+name);}
++  test('synthetic positive fixture proves PRE code branch only',()=>{
++    const x=result();assert.equal(x.status,'READY_FOR_SAAS_CORE_CONTROLLED_SWITCH');
++    assert.equal(x.productionDeploymentPerformed,false);
++    assert.equal(x.realStaffPostCutoverAcceptanceCompleted,false);
++    assert.equal(x.liveRollbackCompleted,false);
++  });
++  test('without owner-pinned key always HOLD',()=>{
++    assert.equal(result({ownerKey:null}).status,'HOLD');
++  });
++  test('unsigned fake preflight not accepted',()=>{
++    assert.equal(result({receipt:null}).status,'HOLD');
++  });
++  test('distinct signer cannot forge ownership',()=>{
++    const other=crypto.generateKeyPairSync('ed25519');
++    assert.equal(result({receipt:sign(claim,other.privateKey)}).status,'HOLD');
++  });
++  test('signed owner claim must assert verified result and evidence digest',()=>{
++    assert.equal(result({receipt:sign({...claim,status:'HOLD'})}).status,'HOLD');
++    assert.equal(result({receipt:sign({...claim,evidence_digest:'invalid'})}).status,'HOLD');
++  });
++  test('foreign school claim rejected',()=>{
++    assert.equal(result({receipt:sign({...claim,school_id:2})}).status,'HOLD');
++  });
++  test('academic publication true rejected',()=>{
++    assert.equal(result({receipt:sign({...claim,academic_results_published:true})}).status,'HOLD');
++  });
++  test('any missing signed signed-tenant result rejected',()=>{
++    assert.equal(result({receipt:sign({...claim,signed_runtime_school_tenant_verified:false})}).status,'HOLD');
++  });
++  test('stale production receipt rejected',()=>{
++    const stale={...claim,observed_at:new Date(now-7200000).toISOString()};
++    assert.equal(result({receipt:sign(stale)}).status,'HOLD');
++  });
++  test('future attestation beyond skew rejected',()=>{
++    const future={...claim,observed_at:new Date(now+3600000).toISOString()};
++    assert.equal(result({receipt:sign(future)}).status,'HOLD');
++  });
++  test('stale old compiled Next candidate denied',()=>{
++    fs.writeFileSync(path.join(candidate,'.next/BUILD_ID'),'OLD_COMPILED_BUILD');
++    assert.equal(result().status,'HOLD');
++    fs.writeFileSync(path.join(candidate,'.next/BUILD_ID'),build);
++  });
++  test('blue redirect retained in GREEN denied',()=>{
++    fs.writeFileSync(f.green,Buffer.concat([green,Buffer.from('\nlocation = /dashboard { return 307 /admin; }')]));
++    assert.equal(result().status,'HOLD');
++    fs.writeFileSync(f.green,green);
++  });
++  test('tampered original backup denied',()=>{
++    fs.appendFileSync(f.backup,'tamper');
++    assert.equal(result().status,'HOLD');
++    fs.writeFileSync(f.backup,backup);
++  });
++  test('Core gate forged status denied even if signed hash expected fixture',()=>{
++    fs.writeFileSync(f.core,JSON.stringify({...preCore,status:'HOLD'}));
++    assert.equal(result().status,'HOLD');
++    fs.writeFileSync(f.core,core);
++  });
++  test('Next config unconditional dashboard redirect blocked',()=>{
++    fs.writeFileSync(path.join(candidate,'next.config.ts'),
++      "async redirects(){return [{source:'/dashboard', destination:'/admin', permanent:false}]}");
++    assert.equal(result().status,'HOLD');
++  });
++  assert.equal(passed,15);
++  console.log('CONNECT_PRECUTOVER_SIGNED_RELEASE_NEGATIVES '+passed+'/'+passed+' PASS');
++} finally {
++  fs.rmSync(temp,{recursive:true,force:true});
++}
+diff --git a/scripts/connect/verify-signed-precutover-contract-20261014.cjs b/scripts/connect/verify-signed-precutover-contract-20261014.cjs
+new file mode 100644
+index 0000000..a026cff
+--- /dev/null
++++ b/scripts/connect/verify-signed-precutover-contract-20261014.cjs
+@@ -0,0 +1,142 @@
++#!/usr/bin/env node
++'use strict';
++// Authenticated, source-pinned preflight for SaaS Core's LOGIN-ONLY cutover.
++// This script NEVER deploys, signs evidence, reads passwords or grants roles.
++// Genuine teacher LIVE acceptance and traffic rollback are POST-cutover gates.
++const fs=require('node:fs');
++const path=require('node:path');
++const crypto=require('node:crypto');
++const {check}=require('./check-nginx-bluegreen-routing-20261014.cjs');
++const TRUST='/etc/assps/release-evidence-ed25519.pub';
++const sha=x=>crypto.createHash('sha256').update(x).digest('hex');
++const HEX=/^[0-9a-f]{64}$/;
++const PRE_KIND='precutover_core_owner_signed_release_acceptance';
++const REQUIRED=['backup_integrity_verified','compiled_artifact_and_nginx_reviewed',
++  'signed_runtime_school_tenant_verified','independent_peer_school_denied',
++  'unauthorized_subject_denied','rollback_rehearsed_without_data_mutation',
++  'academic_results_published_false'];
++function selectArg(args,name,defaultValue='') {
++  const k=args.indexOf(name);
++  return k<0?defaultValue:args[k+1];
++}
++function signedPreflight(receipt,key,expected,now=Date.now()) {
++  if (!key || !receipt || typeof receipt.payload_b64!=='string' ||
++      typeof receipt.signature_b64!=='string') return null;
++  try {
++    const data=Buffer.from(receipt.payload_b64,'base64');
++    const signature=Buffer.from(receipt.signature_b64,'base64');
++    if(data.length<64||data.length>16384||signature.length!==64 ||
++      !crypto.verify(null,data,key,signature)) return null;
++    const c=JSON.parse(data.toString('utf8'));
++    if(!c||c.kind!==PRE_KIND||c.issuer!=='SAAS_CORE'||
++      c.environment!=='production'||c.school_id!==1||
++      c.actor_role!=='core_release_owner'||c.release_scope!=='CONNECT_LOGIN_ONLY'||
++      c.release_id!==expected.releaseId||
++      c.source_sha256!==expected.sourceSha||
++      c.build_id!==expected.buildId||
++      c.origin!==expected.origin||
++      c.nginx_blue_sha256!==expected.blueSha||
++      c.nginx_green_sha256!==expected.greenSha||
++      c.backup_sha256!==expected.backupSha ||
++      c.core_signed_runtime_evidence_sha256!==expected.coreSha ||
++      c.academic_results_published!==false || c.status!=='PASS' ||
++      typeof c.evidence_digest!=='string' || !HEX.test(c.evidence_digest)) return null;
++    if(REQUIRED.some(k=>c[k]!==true)) return null;
++    const ts=Date.parse(c.observed_at);
++    if(!Number.isFinite(ts)||ts>now+300000||ts<now-3600000) return null;
++    return c;
++  } catch { return null; }
++}
++function verifiedOwnerKeyFromSystem() {
++  try {
++    const st=fs.lstatSync(TRUST);
++    if(!st.isFile()||st.uid!==0||(st.mode&0o022)!==0)return null;
++    const key=crypto.createPublicKey(fs.readFileSync(TRUST));
++    return key.asymmetricKeyType==='ed25519'?key:null;
++  } catch{return null;}
++}
++function evaluate({candidateRoot,blueNginx,greenNginx,backupFile,coreFile,
++  expected,ownerKey,receipt,now=Date.now()}) {
++  const checks=[];
++  const add=(name,passed)=>checks.push({name,pass:!!passed});
++  let blue='',green='',next='',proxy='',build='',backup='',core='';
++  try { blue=fs.readFileSync(blueNginx,'utf8'); }catch {}
++  try { green=fs.readFileSync(greenNginx,'utf8'); }catch {}
++  try { next=fs.readFileSync(path.join(candidateRoot,'next.config.ts'),'utf8'); }catch {}
++  try { proxy=fs.readFileSync(path.join(candidateRoot,'src/proxy.ts')); }catch {}
++  try { build=fs.readFileSync(path.join(candidateRoot,'.next/BUILD_ID'),'utf8').trim(); }catch {}
++  try { backup=fs.readFileSync(backupFile); }catch {}
++  try { core=fs.readFileSync(coreFile); }catch {}
++  const route=check({blue,green,greenNext:next});
++  add('reviewed_auth_source_hash',sha(proxy)===expected.sourceSha);
++  add('reviewed_candidate_compiled_build',build===expected.buildId);
++  add('current_blue_ingress_pinned',route.blueExpectedBaseline&&
++    route.blueSourceSha256===expected.blueSha);
++  add('isolated_green_ingress_ready',route.greenNoNginxDashboardOverride&&
++    route.greenUsesIsolatedCandidatePort&&route.greenHasNoUnconditionalNextDashboardRedirect&&
++    route.greenBoundToLoopback&&route.greenSourceSha256===expected.greenSha);
++  add('original_backup_hash_pinned',backup.length>100000&&
++    sha(backup)===expected.backupSha);
++  let proof=null;
++  try{proof=JSON.parse(core.toString('utf8'));}catch{}
++  add('core_runtime_acceptance_payload_valid',!!proof&&
++      proof.status==='READY_FOR_LOGIN_ONLY_CORE'&&
++      proof.signed_runtime_security_certified===true&&
++      proof.academic_results_published===false&&
++      proof.exact_release_id===expected.releaseId&&
++      sha(core)===expected.coreSha);
++  add('trusted_owner_pinned_ed25519_root',!!ownerKey);
++  add('genuine_signed_core_owner_preflight',
++    !!signedPreflight(receipt,ownerKey,expected,now));
++  return {
++    phase:'PRE_CUTOVER',status:checks.every(x=>x.pass)?
++      'READY_FOR_SAAS_CORE_CONTROLLED_SWITCH':'HOLD',
++    checks,blocked:checks.filter(x=>!x.pass).map(x=>x.name),
++    productionDeploymentPerformed:false,
++    realStaffPostCutoverAcceptanceCompleted:false,
++    liveRollbackCompleted:false,
++    academicResultsPublished:false,
++  };
++}
++function main(argv=process.argv.slice(2)) {
++  const expected={
++    sourceSha:selectArg(argv,'--approved-proxy-sha256'),
++    buildId:selectArg(argv,'--approved-build-id'),
++    releaseId:selectArg(argv,'--approved-release-id'),
++    origin:selectArg(argv,'--origin','https://api.assps.edu.pk'),
++    blueSha:selectArg(argv,'--blue-nginx-sha256'),
++    greenSha:selectArg(argv,'--green-nginx-sha256'),
++    backupSha:selectArg(argv,'--backup-sha256'),
++    coreSha:selectArg(argv,'--core-acceptance-sha256'),
++  };
++  const valid=[expected.sourceSha,expected.blueSha,expected.greenSha,
++    expected.backupSha,expected.coreSha].every(x=>HEX.test(x));
++  if(!valid||!/^[A-Za-z0-9_-]{8,128}$/.test(expected.buildId)||
++    !/^[A-Za-z0-9._-]{8,160}$/.test(expected.releaseId)||
++    !/^https:\/\/[^/?#@]+$/.test(expected.origin))
++    throw Error('Explicit exact approved source, Nginx, backup and Core release identifiers required');
++  const root=selectArg(argv,'--candidate-root');
++  const blue=selectArg(argv,'--blue-nginx');
++  const green=selectArg(argv,'--green-nginx');
++  const backup=selectArg(argv,'--backup-file');
++  const core=selectArg(argv,'--core-acceptance-file');
++  const receiptFile=selectArg(argv,'--signed-receipts',
++    '/etc/assps/connect-precutover-signed-receipts.json');
++  if([root,blue,green,backup,core,receiptFile].some(x=>!path.isAbsolute(x)))
++    throw Error('Absolute source/evidence files required');
++  let bundle;
++  try{bundle=JSON.parse(fs.readFileSync(receiptFile,'utf8'))}catch{}
++  const ownerKey=verifiedOwnerKeyFromSystem();
++  const result=evaluate({
++    candidateRoot:root,blueNginx:blue,greenNginx:green,
++    backupFile:backup,coreFile:core,expected,ownerKey,
++    receipt:(bundle?.receipts||[]).find(x=>x?.kind===PRE_KIND)||
++      (bundle?.receipts||[])[0],
++  });
++  console.log(JSON.stringify(result,null,2));
++  process.exitCode=result.status==='READY_FOR_SAAS_CORE_CONTROLLED_SWITCH'?0:2;
++}
++if(require.main===module)try{main()}catch(e){
++  console.error('CONNECT_PRE_CUTOVER_HOLD '+e.message);process.exitCode=3;
++}
++module.exports={evaluate,signedPreflight,PRE_KIND,REQUIRED,main};
