@@ -6,6 +6,7 @@ const { pool, query } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId, tenantClause } = require('../middleware/tenant')
 const { createPrintJobBinding, printJobTransition, buildStudentSafeProjection, buildStaffAnswerKeyProjection, sha256 } = require('../services/assessmentPrintJobs')
+const { assertVerifiedPaperDocument } = require('../services/grade910PaperWorkspaceReleaseGuard')
 
 const canAuthorAssessments = requireRoles('super_admin', 'admin', 'school_admin', 'principal', 'teacher')
 
@@ -132,6 +133,11 @@ router.post('/papers/:paperId/revisions', async (req, res) => {
   if (!schoolId) return res.status(400).json({ success:false, message:'School context required.' })
   if (!Number.isInteger(expectedRevision) || expectedRevision < 0) return res.status(400).json({ success:false, message:'expectedRevision must be a non-negative integer.' })
   if (validationError) return res.status(400).json({ success:false, message:validationError })
+  try{
+    await assertVerifiedPaperDocument({document,schoolId,actor:req.user,lookup:query})
+  }catch(error){
+    return res.status(error.status||503).json({success:false,code:error.code||'CERTIFIED_RELEASE_CHECK_UNAVAILABLE'})
+  }
 
   try {
     const data = await withTenantTransaction(req, schoolId, async client => {
@@ -215,6 +221,12 @@ router.post('/papers/:paperId/releases', async (req, res) => {
       if (hashDocument(release.snapshot) !== serverHash) {
         return { hashMismatch:true, serverHash }
       }
+      // Signed Grade IX/X question publication must be rechecked AT SERVER
+      // before irrevocably creating a finalized assessment release.
+      await assertVerifiedPaperDocument({
+        document:revision.document_json,schoolId,actor:req.user,
+        lookup:(sql,params)=>client.query(sql,params)
+      })
 
       const releaseId = safePublicId(release.releaseId) || `release-${publicId}-r${expectedRevision}`
       const rendererVersion = String(release.rendererVersion || 'assessment-studio-v1').slice(0, 120)
@@ -245,6 +257,10 @@ router.post('/papers/:paperId/releases', async (req, res) => {
     if (data.hashMismatch) return res.status(409).json({ success:false, code:'RELEASE_HASH_MISMATCH', serverHash:data.serverHash, message:'Release snapshot does not match the current server revision.' })
     return res.status(201).json({ success:true, data })
   } catch (error) {
+    if(error?.code?.startsWith('CERTIFIED_')||error?.code?.startsWith('CANONICAL_')||
+       error?.code==='CORE_SIGNED_PUBLICATION_TRUST_NOT_CONFIGURED'||
+       error?.code==='AUTHENTIC_SIGNED_SCHOOL_ACTOR_REQUIRED')
+      return res.status(error.status||409).json({success:false,code:error.code})
     console.error('Assessment Studio release error:', error.message)
     return res.status(500).json({ success:false, message:'Could not finalize assessment release.' })
   }
@@ -271,12 +287,16 @@ router.post('/papers/:paperId/print-jobs', async (req, res) => {
       if (reprintMode === 'REPRINT_ORIGINAL') {
         if (!parentPrintJobId) return { invalid:'parentPrintJobId is required for REPRINT_ORIGINAL.' }
         const parent = (await client.query(
-          `SELECT j.* FROM assessment_print_jobs j
+          `SELECT j.*,ar.snapshot_json AS signed_release_document FROM assessment_print_jobs j
              JOIN assessment_releases ar ON ar.school_id=j.school_id AND ar.release_id=j.release_id
             WHERE j.school_id=$1 AND j.print_job_id=$2 AND ar.paper_id=$3 LIMIT 1`,
           [schoolId, parentPrintJobId, paper.id]
         )).rows[0]
         if (!parent) return { missingParent:true }
+        await assertVerifiedPaperDocument({
+          document:parent.signed_release_document,schoolId,actor:req.user,
+          lookup:(sql,params)=>client.query(sql,params)
+        })
         const inserted = (await client.query(
           `INSERT INTO assessment_print_jobs
             (school_id,print_job_id,release_id,roster_snapshot_id,binding_snapshot_json,render_settings_json,copy_count,personalized,duplex,student_boundary_policy,reprint_mode,parent_print_job_id,status,attempt_count,created_by_key)
@@ -308,11 +328,15 @@ router.post('/papers/:paperId/print-jobs', async (req, res) => {
         if (!parent) return { missingParent:true }
       }
       const release = (await client.query(
-        `SELECT ar.release_id FROM assessment_releases ar
+        `SELECT ar.release_id,ar.snapshot_json AS signed_release_document FROM assessment_releases ar
            WHERE ar.school_id=$1 AND ar.paper_id=$2 AND ar.release_id=$3 LIMIT 1`,
         [schoolId,paper.id,binding.releaseId]
       )).rows[0]
       if (!release) return { missingRelease:true }
+      await assertVerifiedPaperDocument({
+        document:release.signed_release_document,schoolId,actor:req.user,
+        lookup:(sql,params)=>client.query(sql,params)
+      })
 
       let rosterSnapshotId = null
       if (binding.personalized) {
@@ -341,6 +365,10 @@ router.post('/papers/:paperId/print-jobs', async (req, res) => {
     return res.status(201).json({ success:true, data })
   } catch (error) {
     if (error?.code === '23505') return res.status(409).json({ success:false, message:'Print job id already exists.' })
+    if(error?.code?.startsWith('CERTIFIED_')||error?.code?.startsWith('CANONICAL_')||
+       error?.code==='CORE_SIGNED_PUBLICATION_TRUST_NOT_CONFIGURED'||
+       error?.code==='AUTHENTIC_SIGNED_SCHOOL_ACTOR_REQUIRED')
+      return res.status(error.status||409).json({success:false,code:error.code})
     console.error('Assessment Studio print job create error:', error.message)
     return res.status(500).json({ success:false, message:'Could not create print job.' })
   }

@@ -34,6 +34,7 @@ async function up(options={}){
     school_book_certificate_sha CHAR(64) NOT NULL CHECK(school_book_certificate_sha~'^[0-9a-f]{64}$'),
     principal_approval_sha CHAR(64) NOT NULL CHECK(principal_approval_sha~'^[0-9a-f]{64}$'),
     publication_grant_sha CHAR(64) NOT NULL CHECK(publication_grant_sha~'^[0-9a-f]{64}$'),
+    publication_signature_base64 VARCHAR(88) NOT NULL CHECK(publication_signature_base64~'^[A-Za-z0-9+/]{86}==$'),
     academic_approval_verified BOOLEAN NOT NULL DEFAULT false CHECK(academic_approval_verified=true),
     paper_studio_acceptance_verified BOOLEAN NOT NULL DEFAULT false CHECK(paper_studio_acceptance_verified=true),
     core_restricted_release_verified BOOLEAN NOT NULL DEFAULT false CHECK(core_restricted_release_verified=true),

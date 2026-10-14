@@ -16,10 +16,15 @@ require.cache[authPath]={id:authPath,filename:authPath,loaded:true,exports:{
  },
  requireRoles:(...roles)=>(req,res,next)=>roles.includes(req.user?.role)?next():res.status(403).end()
 }}
-const {sha}=require('../../al-siddique-backend/src/services/grade910VerifiedPublicationContract')
+const crypto=require('node:crypto')
+const {sha,publicationMessage}=require('../../al-siddique-backend/src/services/grade910VerifiedPublicationContract')
+const ephemeral=crypto.generateKeyPairSync('ed25519')
+process.env.ASSPS_GRADE910_PUBLISHER_PUBLIC_KEY_PEM=ephemeral.publicKey.export({type:'spki',format:'pem'})
+process.env.ASSPS_GRADE910_PUBLISHER_TRUST_FINGERPRINT_SHA256=crypto.createHash('sha256')
+ .update(ephemeral.publicKey.export({type:'spki',format:'der'})).digest('hex')
 const payload={originalQuestionId:'IX-BIO-01',questionRevision:7,finalQuestion:{text:'A verified and reviewed question'},finalAnswer:{answer:'Verified answer'}}
 const SQL=[],H='a'.repeat(64)
-const row=(overrides={})=>({
+const unsignedRow=()=>({
  school_id:1,original_question_id:'IX-BIO-01',question_revision:7,question_sha:sha(payload.finalQuestion),answer_sha:sha(payload.finalAnswer),
  grade:9,subject:'Biology',medium:'english',
  original_source_pdf_sha:H,catalog_id:'pectaa-catalog-009',
@@ -27,8 +32,12 @@ const row=(overrides={})=>({
  principal_approval_sha:H,publication_grant_sha:H,
  academic_approval_verified:true,paper_studio_acceptance_verified:true,core_restricted_release_verified:true,
  published_at:'2026-10-14T00:00:00Z',revoked_at:null,paper_payload:payload,
- ...overrides
 })
+const row=(overrides={})=>{
+ const r=unsignedRow()
+ r.publication_signature_base64=crypto.sign(null,publicationMessage(r),ephemeral.privateKey).toString('base64')
+ return {...r,...overrides}
+}
 let responseRows=[]
 const dbPath=require.resolve('../../al-siddique-backend/src/config/database')
 require.cache[dbPath]={id:dbPath,filename:dbPath,loaded:true,exports:{query:async(sql,args)=>{
@@ -44,6 +53,19 @@ test('positive synthetic row requires all independent certificates and published
   {qualified_faculty_receipt_sha:null},{publication_grant_sha:'fake'}, {published_at:null}, {answer_sha:'0'.repeat(64)},
   {paper_payload:{...payload,finalQuestion:{text:'tampered revision'}}}])
   assert.equal(eligible(row(diff)),false)
+})
+test('release fails closed without out-of-band school-root fingerprint',()=>{
+ const old=process.env.ASSPS_GRADE910_PUBLISHER_TRUST_FINGERPRINT_SHA256
+ process.env.ASSPS_GRADE910_PUBLISHER_TRUST_FINGERPRINT_SHA256='0'.repeat(64)
+ assert.equal(eligible(row()),false)
+ process.env.ASSPS_GRADE910_PUBLISHER_TRUST_FINGERPRINT_SHA256=old
+})
+test('changing signed school and reviewer digest defeats forged approved booleans',()=>{
+ const signed=row()
+ assert.equal(eligible(signed),true)
+ assert.equal(eligible({...signed,school_id:22}),false)
+ assert.equal(eligible({...signed,qualified_faculty_receipt_sha:'c'.repeat(64)}),false)
+ assert.equal(eligible({...signed,publication_signature_base64:'a'.repeat(88)}),false)
 })
 test('actual HTTP picker enforces school, teacher assignment SQL, immutable resolve and zero unpublished',async t=>{
  const app=express();app.use('/api/grade910-verified-picker',route)

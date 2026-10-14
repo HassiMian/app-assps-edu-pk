@@ -200,6 +200,26 @@ export function createManualAssessmentDocument({ paper = {}, config = {}, paperS
     maximumObtainableMarks: questionTotal,
     questionMarksTotal: questionTotal,
   }
+  // Preserve source-bound verified questions IN THE ACTUAL PERSISTED canonical
+  // PaperDocument, not merely in browser-local q arrays or a detached manifest.
+  // This is provenance data, not independent proof of academic approval.
+  const verifiedSections=sections.filter(section=>section.verifiedAcademicRef)
+  if (verifiedSections.length) {
+    const questions=['mcq','short','long'].flatMap(type=>paper[type]||[])
+    doc.academicVerifiedSelections={
+      schemaVersion:'assps-grade910-canonical-approved-revisions-v1',
+      alwaysRequireServerReverification:true,
+      rows:verifiedSections.map(section=>{
+        const ref=section.verifiedAcademicRef
+        const question=questions.find(q=>q.verifiedAcademicRef?.originalQuestionId===ref.originalQuestionId
+          &&q.verifiedAcademicRef?.revision===ref.revision)
+        return {originalQuestionId:ref.originalQuestionId,revision:ref.revision,
+          questionSha:ref.questionSha,answerSha:ref.answerSha,
+          publicationGrantSha:ref.publicationGrantSha,
+          section:clone(section),question:question?clone(question):null}
+      })
+    }
+  }
   return doc
 }
 

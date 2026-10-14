@@ -17,6 +17,7 @@ function cleanText(value, max = 160) {
 
 const FORBIDDEN_ANSWER_KEYS = new Set([
   'answer','answers','answerkey','answer_key','correctanswer','correct_answer','correctoption','correct_option',
+  'correct','academicverifiedselections','verifiedacademicref',
   'correctmappings','correct_mappings','iscorrect','is_correct','explanation','explanations','solution','solutions',
   'markingscheme','marking_scheme','teachernotes','teacher_notes',
 ])

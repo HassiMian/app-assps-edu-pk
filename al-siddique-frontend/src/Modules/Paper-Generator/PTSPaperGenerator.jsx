@@ -5,6 +5,9 @@ import { Maximize, Minimize, ZoomIn, ZoomOut } from 'lucide-react'
 import Portal from '../../components/Portal'
 import { SYLLABI, CLASSES, SUBJECTS, CHAPTERS, QUESTIONS } from './data/questionBank'
 import { usePaperStore } from './usePaperStore'
+import api from '../../services/api'
+import Grade910WorkspaceApprovedInsert from './Grade910WorkspaceApprovedInsert.jsx'
+import { grade910ClassNumber, verifyWorkspaceApprovedImports, createGrade910ApprovedSection, rehydrateGrade910VerifiedPaper } from './grade910PaperWorkspaceVerifiedBridge.js'
 import PaperRichTextEditor, { PaperRichTextRenderer } from './PaperRichTextEditor'
 import { PaperSelectionToolbar } from './PaperInlineEditor.jsx'
 import './PaperEditor/paperWorkspaceLight.css'
@@ -743,6 +746,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  }
  const subjectName = headerSubject || derivedSubjectName
  const className = headerClass || derivedClassName
+ const grade910ExactClass = grade910ClassNumber(className)
  const cfg = {
     ...(overrideConfig || {}),
     title: headerTitle || overrideConfig?.title || '',
@@ -948,7 +952,41 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  setSelIds(n)
  }
 
+ async function verifyRealAcademicPaperSelection() {
+  const verifiedCount=['mcq','short','long'].reduce((n,type)=>n+(paper[type]||[]).filter(q=>q.verifiedAcademicRef).length,0)
+  if(!verifiedCount)return true // Existing manually authored drafts are NOT represented as verified.
+  const scope={grade:grade910ExactClass,subject:subjectName}
+  try {
+   if(!scope.grade)throw Error('This paper is not Grade IX/X.')
+   await verifyWorkspaceApprovedImports(paper,scope,params=>
+    api.get('/api/grade910-verified-picker/resolve-revision',{
+     params,headers:{'Cache-Control':'no-store'}
+    })
+   )
+   return true
+  }catch(error){
+   alert('ACADEMICALLY VERIFIED PAPER OPERATION BLOCKED — '+(error?.response?.data?.code||error.message))
+   return false
+  }
+ }
+ function insertVerifiedIntoWorkspace(question) {
+  onPaperChange(current => {
+   const items=current[question.type]||[]
+   if(items.some(q=>String(q.id)===String(question.id)))return current
+   const previousMarks=Number(current[question.type+'_marks'])
+   if(items.length && previousMarks>0 && previousMarks!==question.marks){
+    alert('VERIFIED MARKS CONFLICT — this section already uses '+previousMarks+' marks per question. Use a separate paper/section.')
+    return current
+   }
+   const sections=[...(current.official_section||[])]
+   const ordinal=sections.filter(s=>s.layoutPreset!=='marker').length+1
+   const officialSection=createGrade910ApprovedSection(question,ordinal)
+   return {...current,[question.type]:[...items,question],[question.type+'_marks']:question.marks,
+    official_section:[...sections,officialSection]}
+  })
+ }
  async function doSave(options = {}) {
+  if(!await verifyRealAcademicPaperSelection())return null
  const silent = options?.silent === true
  if (!totalQs && !isUserAuthoredPaper) return
  const name = `${subjectName} ${className} — ${new Date().toLocaleDateString('en-GB')}`
@@ -1087,6 +1125,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  }
 
  async function doPersonalizedPrint() {
+  if(!await verifyRealAcademicPaperSelection())return
   const release = paper?.assessmentRelease || loadedPaper?.assessmentRelease
   const releaseId = release?.releaseId
   const activeCanonicalDocument = paper?.canonicalDocument || loadedPaper?.canonicalDocument || release?.snapshot || null
@@ -1266,6 +1305,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  }
 
  async function doPrint() {
+  if(!await verifyRealAcademicPaperSelection())return
  if (isUserAuthoredPaper && totalQs===0) {
   alert('PRINT BLOCKED — please add at least one question. Your empty draft can still be saved.')
   return
@@ -1409,6 +1449,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <GoldBtn onClick={doPrint} style={{ padding:'8px 20px', fontSize:13 }}> Print</GoldBtn>
  </div>
  </div>
+ {grade910ExactClass && !isOfficialPaper && <Grade910WorkspaceApprovedInsert grade={grade910ExactClass} subject={subjectName} onInsert={insertVerifiedIntoWorkspace}/>}
  <details data-paper-metadata-editor style={{ marginTop:8 }}>
  <summary style={{ cursor:'pointer', color:D.gold, fontSize:12, fontWeight:800, userSelect:'none' }}>Paper Information — edit all header fields</summary>
  <div style={{ display:'grid', gridTemplateColumns:'2fr 1.4fr 1fr', gap:10, marginTop:8, alignItems:'end' }}>
@@ -2630,7 +2671,7 @@ function PTSPaperGeneratorCore({ loadedPaper, onReturnToSource = null, onOpenSav
  else p[`${t.value}_marks`] = t.marks || 1
  }
  })
- return p
+ return rehydrateGrade910VerifiedPaper(p)
  }
  const initial = {}
  questionTypes.forEach(t => { initial[t.value] = []; initial[`${t.value}_marks`] = t.marks || 1 })
