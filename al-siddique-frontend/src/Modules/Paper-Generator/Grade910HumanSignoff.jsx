@@ -49,7 +49,7 @@ function SignatureCanvas({onDraw}) {
 
 export default function Grade910HumanSignoff() {
  const actor=getAuthUser()||{}, role=String(actor.role||'').toLowerCase()
- const permitted=role==='principal'||role==='teacher'
+ const permitted=['principal','teacher','admin','school_admin'].includes(role)
  const [action,setAction]=useState(role==='teacher'?'subject_review':'book_adoption')
  const [catalogId,setCatalogId]=useState(index.rows[0].catalogId)
  const [decision,setDecision]=useState('needs-evidence')
@@ -58,19 +58,21 @@ export default function Grade910HumanSignoff() {
  const [questionHash,setQuestionHash]=useState('')
  const [answerHash,setAnswerHash]=useState('')
  const [evidenceHash,setEvidenceHash]=useState('')
+ const [evidenceFileName,setEvidenceFileName]=useState('')
  const [teacherReceipt,setTeacherReceipt]=useState('')
  const [reviewChecks,setReviewChecks]=useState([])
  const [signature,setSignature]=useState('')
  const [confirmed,setConfirmed]=useState(false)
  const [message,setMessage]=useState('')
  const source=index.rows.find(x=>x.catalogId===catalogId)||index.rows[0]
- const actions=role==='principal'?['book_adoption','principal_approval']:['subject_review','urdu_review']
+ const actions=role==='principal'?['book_adoption','principal_approval']:
+  role==='admin'||role==='school_admin'?['book_adoption']:['subject_review','urdu_review']
  const mode=actions.includes(action)?action:actions[0]
  const isBook=mode==='book_adoption',isTeacher=mode==='subject_review'||mode==='urdu_review'
  const confirmAndExport=async()=>{
   const signedAt=new Date().toISOString()
   setMessage('')
-  if(!permitted||!actor.id||!confirmed){setMessage('Use your own authenticated teacher/principal account and accept the declaration.');return}
+  if(!permitted||!actor.id||!confirmed){setMessage('Use your own authenticated school teacher, Principal or admin account and accept the declaration.');return}
   if(!signature.startsWith('data:image/png;base64,')){setMessage('Draw or upload your OWN signature.');return}
   const bytes=Uint8Array.from(atob(signature.split(',')[1]),c=>c.charCodeAt(0))
   if(bytes.length>120*1024){setMessage('Signature must be under 120 KB.');return}
@@ -108,10 +110,8 @@ export default function Grade910HumanSignoff() {
    setMessage('Secure upload failed: NO server receipt. Nothing has been academically approved or published.')
    return
   }
-  const blob=new Blob([JSON.stringify(packet,null,2)],{type:'application/json'})
-  const url=URL.createObjectURL(blob),a=document.createElement('a')
-  a.href=url;a.download='ASSPS_grade910_'+source.catalogId+'_'+mode+'_'+signedAt.slice(0,10)+'.json'
-  a.click();setTimeout(()=>URL.revokeObjectURL(url),5000)
+  // Private signature data stays encrypted on the school server; no automatic browser download.
+
 
  }
  const label=(title,value,fn,placeholder='')=><label style={{display:'block',marginTop:12}}>{title}
@@ -120,11 +120,12 @@ export default function Grade910HumanSignoff() {
 
  return <main style={{maxWidth:960,padding:24,margin:'auto',color:'#102f50'}}>
   <h1>Grade IX–X · Teacher / Principal Signatures</h1>
+  {(role==='admin'||role==='school_admin')&&<p role="status"><strong>School administrator account:</strong> You may personally sign and submit only a pending textbook-adoption evidence claim as yourself. This is not a Principal signature, independent teacher review, or final academic approval. The actual Principal must use their own authenticated role to certify Principal-only decisions.</p>}
   <p>This workspace lets real school staff prepare their own evidence. Handwriting alone does not verify legal identity or academic correctness. Every submission remains held until the independent school-review chain authenticates its actor and the exact question/answer revisions.</p>
   <section style={cardStyle}>
    <div style={titleStyle}>1. Staff identity and source</div>
    <p>Signed-in account ID: {String(actor.id||'missing')}. Account role: {role||'missing'}.</p>
-   {!permitted&&<p role="alert">A genuinely authenticated teacher or principal account is required.</p>}
+   {!permitted&&<p role="alert">An authenticated school staff account with the correct signoff permissions is required.</p>}
    <label>Signoff type
     <select style={inputStyle} value={mode} onChange={e=>{setAction(e.target.value);setSignature('');setConfirmed(false)}}>
      {actions.map(x=><option value={x} key={x}>{x.replaceAll('_',' ')}</option>)}
@@ -152,6 +153,25 @@ export default function Grade910HumanSignoff() {
      {label('Exact final answer / MCQ key SHA-256',answerHash,setAnswerHash)}
      {mode==='principal_approval'&&label('Independent teacher review receipt SHA-256',teacherReceipt,setTeacherReceipt)}
     </>}
+   <label style={{display:'block',marginTop:10}}>Select your actual supporting evidence file to calculate its SHA-256 locally (optional PDF/PNG/JPG, up to 15 MB)
+    <input type="file" accept=".pdf,.png,.jpg,.jpeg,application/pdf,image/png,image/jpeg"
+      style={{display:'block',marginTop:5}}
+      onChange={async e=>{
+       const file=e.target.files?.[0];e.target.value=''
+       if(!file)return
+       if(file.size<1||file.size>15*1024*1024||
+         !['application/pdf','image/png','image/jpeg'].includes(file.type)){
+        setMessage('Evidence must be your own genuine PDF/PNG/JPG file under 15 MB.')
+        return
+       }
+       try{
+        const hashed=await digest(await file.arrayBuffer())
+        setEvidenceHash(hashed);setEvidenceFileName(file.name)
+        setMessage('Computed evidence SHA-256 from the selected file. Keep the original evidence file available for authorized school verification. Its contents are NOT automatically uploaded.')
+       }catch{setMessage('Could not calculate evidence hash. Please select the file again.')}
+      }}/>
+   </label>
+   {evidenceFileName&&<p style={{fontSize:12}}>Evidence used for digest: {evidenceFileName} (file contents remain on your device)</p>}
    {label('Physical evidence object SHA-256 (real bytes, not a guessed reference)',evidenceHash,setEvidenceHash)}
    {isTeacher&&<><h3>Independent academic checks (personally verified)</h3>
     {checks.map(c=><label key={c} style={{display:'block',padding:4}}>

@@ -11,6 +11,7 @@ require.cache[authPath]={id:authPath,filename:authPath,loaded:true,exports:{
  if(!who)return res.status(401).json({success:false})
  req.user=who==='teacher'?{id:50,school_id:1,role:'teacher'}:
   who==='principal'?{id:10,school_id:1,role:'principal'}:
+  who==='admin'?{id:5,school_id:1,role:'admin'}:
   {id:51,school_id:2,role:'teacher'}
  return next()
  },
@@ -23,6 +24,7 @@ process.env.ASSPS_GRADE910_PUBLISHER_PUBLIC_KEY_PEM=ephemeral.publicKey.export({
 process.env.ASSPS_GRADE910_PUBLISHER_TRUST_FINGERPRINT_SHA256=crypto.createHash('sha256')
  .update(ephemeral.publicKey.export({type:'spki',format:'der'})).digest('hex')
 const payload={originalQuestionId:'IX-BIO-01',questionRevision:7,finalQuestion:{text:'A verified and reviewed question'},finalAnswer:{answer:'Verified answer'}}
+let signedReady=true
 const SQL=[],H='a'.repeat(64)
 const unsignedRow=()=>({
  school_id:1,original_question_id:'IX-BIO-01',question_revision:7,question_sha:sha(payload.finalQuestion),answer_sha:sha(payload.finalAnswer),
@@ -41,6 +43,7 @@ const row=(overrides={})=>{
 let responseRows=[]
 const dbPath=require.resolve('../../al-siddique-backend/src/config/database')
 require.cache[dbPath]={id:dbPath,filename:dbPath,loaded:true,exports:{query:async(sql,args)=>{
+ if(sql.includes('core_security.signed_school_allowed'))return {rows:[{allowed:signedReady}]}
  SQL.push({sql,args})
  return{rows:responseRows}
 }}}
@@ -95,4 +98,10 @@ test('actual HTTP picker enforces school, teacher assignment SQL, immutable reso
  const peer=await fetch(base+'/approved-only?grade=9&subject=Biology&section=Usman',{headers:{'x-qa-role':'other'}})
  assert.equal(peer.status,200);assert.equal((await peer.json()).verifiedCount,0)
  assert.equal(SQL.at(-1).args[0],2)
+ signedReady=false
+ const unsigned=await fetch(base+'/approved-only?grade=9&subject=Biology',{
+  headers:{'x-qa-role':'admin'}})
+ assert.equal(unsigned.status,503)
+ assert.equal((await unsigned.json()).code,'CORE_SIGNED_SCHOOL_CONTEXT_REQUIRED')
+ signedReady=true
 })

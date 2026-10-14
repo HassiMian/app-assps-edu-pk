@@ -350,8 +350,8 @@ function AppRoutes() {
 
  <Route path="/timetable" element={<W roles={ROLES.academicStaff} permKey="timetable"><TimetableModule /></W>} />
  <Route path="/question-bank" element={<W roles={ROLES.academicStaff} permKey="question_bank"><QuestionBank /></W>} />
- <Route path="/academic/grade910-signoffs" element={<W roles={ROLES.academicStaff} permKey="question_bank"><Grade910HumanSignoff /></W>} />
- <Route path="/academic/grade910-verified-picker" element={<W roles={ROLES.academicStaff} permKey="question_bank"><Grade910ApprovedOnlyPicker /></W>} />
+ <Route path="/academic/grade910-signoffs" element={<W roles={[...ROLES.academicStaff, 'school_admin']} permKey="question_bank"><Grade910HumanSignoff /></W>} />
+ <Route path="/academic/grade910-verified-picker" element={<W roles={[...ROLES.academicStaff, 'school_admin']} permKey="question_bank"><Grade910ApprovedOnlyPicker /></W>} />
  <Route path="/employees" element={<W roles={ROLES.leadership} permKey="employees"><EmployeesModule /></W>} />
  <Route path="/employees/*" element={<W roles={ROLES.leadership} permKey="employees"><EmployeesModule /></W>} />
  <Route path="/notifications" element={<W roles={ROLES.schoolStaff} permKey="notifications"><NotificationModule /></W>} />

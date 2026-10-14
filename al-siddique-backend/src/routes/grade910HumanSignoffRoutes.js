@@ -3,7 +3,8 @@ const express=require('express'),router=express.Router()
 const {protect,requireRoles}=require('../middleware/auth')
 const {query}=require('../config/database')
 const {storeClaim,catalog}=require('../services/grade910HumanSignoffService')
-router.use(protect,requireRoles('teacher','principal'))
+const {requireSignedSchool}=require('../services/grade910SignedSchoolGate')
+router.use(protect,requireRoles('teacher','principal','admin','school_admin'))
 function actor(req){
  const id=Number(req.user?.id),schoolId=Number(req.user?.school_id)
  if(!Number.isSafeInteger(id)||id<1||!Number.isSafeInteger(schoolId)||schoolId<1||
@@ -14,6 +15,7 @@ function handled(fn){return async(req,res)=>{
  try{
  const a=actor(req)
  if(!a)return res.status(403).json({success:false,code:'REAL_SCHOOL_STAFF_CONTEXT_REQUIRED'})
+ await requireSignedSchool(a.schoolId,query)
  if(!process.env.DB_RUNTIME_ROLE||!process.env.ASSPS_QBANK_SIGNATURE_ENCRYPTION_KEY)
   return res.status(503).json({success:false,code:'SIGNED_TENANT_OR_SIGNATURE_CRYPTO_NOT_CONFIGURED'})
  await fn(req,res,a)

@@ -3,20 +3,22 @@ const express=require('express'),router=express.Router()
 const {protect,requireRoles}=require('../middleware/auth')
 const {query}=require('../config/database')
 const {eligible}=require('../services/grade910VerifiedPublicationContract')
+const {requireSignedSchool}=require('../services/grade910SignedSchoolGate')
 const HASH=/^[0-9a-f]{64}$/
 function session(req){
  const id=Number(req.user?.id),school=Number(req.user?.school_id)
  const role=String(req.user?.role||'')
  if(![id,school].every(x=>Number.isSafeInteger(x)&&x>0)||
-   (role!=='teacher'&&role!=='principal')||
+   (!['teacher','principal','admin','school_admin'].includes(role))||
    (req.school_id!=null&&Number(req.school_id)!==school))return null
  return {id,school,role}
 }
-router.use(protect,requireRoles('teacher','principal'))
+router.use(protect,requireRoles('teacher','principal','admin','school_admin'))
 async function picker(req,res,exact=false){
  const actor=session(req)
  if(!actor)return res.status(403).json({success:false,code:'SCHOOL_IDENTITY_REQUIRED'})
  if(!process.env.DB_RUNTIME_ROLE)return res.status(503).json({success:false,code:'SIGNED_CORE_RUNTIME_NOT_CONFIGURED'})
+ try{await requireSignedSchool(actor.school,query)}catch(e){return res.status(e.status||503).json({success:false,code:e.code||'SIGNED_CORE_SCHOOL_UNAVAILABLE'})}
  const grade=Number(req.query.grade)
  const subject=String(req.query.subject||'').trim()
  const section=String(req.query.section||'').trim()

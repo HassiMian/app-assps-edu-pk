@@ -4,7 +4,8 @@ const catalog=require('../data/grade910CatalogIndex.json')
 const SHA=/^[0-9a-f]{64}$/
 const checks=['Curriculum and session','Actual book edition and exercise page','Question correctness',
  'Answer and MCQ key','Marks and difficulty','English/Urdu correctness','Duplicates','Original source provenance']
-const roles={teacher:['subject_review','urdu_review'],principal:['book_adoption','principal_approval']}
+const roles={teacher:['subject_review','urdu_review'],principal:['book_adoption','principal_approval'],
+ admin:['book_adoption'],school_admin:['book_adoption']}
 function fail(code,status=422){const e=Error(code);e.code=code;e.status=status;throw e}
 const digest=bytes=>crypto.createHash('sha256').update(bytes).digest('hex')
 const valid=x=>typeof x==='string'&&SHA.test(x)

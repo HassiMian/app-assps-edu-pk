@@ -42,7 +42,7 @@ async function assertVerifiedPaperDocument({document,schoolId,actor,lookup}){
   block('CORE_SIGNED_PUBLICATION_TRUST_NOT_CONFIGURED',503)
  const userId=Number(actor?.id),sId=Number(schoolId)
  if(!Number.isSafeInteger(userId)||userId<1||!Number.isSafeInteger(sId)||sId<1||
-    !['teacher','principal'].includes(norm(actor.role)))
+    !['teacher','principal','admin','school_admin'].includes(norm(actor.role)))
   block('AUTHENTIC_SIGNED_SCHOOL_ACTOR_REQUIRED',403)
  const grade=gradeOf(document?.metadata?.className||document?.metadata?.classLevel)
  const subject=norm(document?.metadata?.subjectName||document?.metadata?.subject)

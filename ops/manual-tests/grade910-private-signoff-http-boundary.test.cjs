@@ -12,6 +12,7 @@ require.cache[authPath]={id:authPath,filename:authPath,loaded:true,exports:{
   if(!who)return res.status(401).json({success:false})
   req.user=who==='teacher'?{id:5432,school_id:11,role:'teacher'}:
   who==='principal'?{id:6,school_id:11,role:'principal'}:
+  who==='admin'?{id:246,school_id:11,role:'admin'}:
   {id:843,school_id:22,role:'teacher'}
   return next()
  },
@@ -19,7 +20,9 @@ require.cache[authPath]={id:authPath,filename:authPath,loaded:true,exports:{
 }}
 const dbPath=require.resolve('../../al-siddique-backend/src/config/database')
 const records=[]
+let signedReady=true
 require.cache[dbPath]={id:dbPath,filename:dbPath,loaded:true,exports:{query:async(sql,args)=>{
+ if(sql.includes('core_security.signed_school_allowed'))return {rows:[{allowed:signedReady}]}
  if(sql.includes('INSERT INTO grade910_human_signoff_evidence')){
   records.push({id:records.length+1,schoolId:args[0],actorId:args[1],action:args[3]})
   return {rows:[{id:records.length}]}
@@ -64,4 +67,14 @@ test('actual HTTP route requires authenticated staff, stores private claim, and 
  const cross=await other.json();assert.equal(cross.records.length,0)
  const ready=await fetch(base+'/publication-readiness',{headers:{'x-qa-staff':'principal'}})
  const state=await ready.json();assert.equal(state.published,0)
+ signedReady=false
+ const count=records.length
+ const unsignedPost=await fetch(base+'/submissions',{method:'POST',
+  headers:{'content-type':'application/json','x-qa-staff':'teacher'},body:JSON.stringify(claim())})
+ assert.equal(unsignedPost.status,503)
+ assert.equal((await unsignedPost.json()).code,'CORE_SIGNED_SCHOOL_CONTEXT_REQUIRED')
+ assert.equal(records.length,count)
+ const unsignedCatalog=await fetch(base+'/catalog',{headers:{'x-qa-staff':'admin'}})
+ assert.equal(unsignedCatalog.status,503)
+ signedReady=true
 })

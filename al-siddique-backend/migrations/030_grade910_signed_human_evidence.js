@@ -18,7 +18,7 @@ async function up(options={}) {
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     school_id INTEGER NOT NULL REFERENCES schools(id),
     actor_user_id INTEGER NOT NULL REFERENCES users(id),
-    actor_role VARCHAR(24) NOT NULL CHECK (actor_role IN ('teacher','principal')),
+    actor_role VARCHAR(24) NOT NULL CHECK (actor_role IN ('teacher','principal','admin','school_admin')),
     action VARCHAR(32) NOT NULL CHECK(action IN ('subject_review','urdu_review','book_adoption','principal_approval')),
     catalog_id VARCHAR(128) NOT NULL,
     original_catalog_pdf_sha CHAR(64) NOT NULL,
