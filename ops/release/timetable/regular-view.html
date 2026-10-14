@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ASSPS • Regular Class Timetable</title>
+<style>
+:root{--navy:#092c57;--blue:#164d8b;--teal:#0b9195;--ink:#122b4e;--muted:#526783;--line:#ccd9e8;--paper:#fff;--bg:#f0f5fb}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.45 ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:var(--ink)}
+header{background:linear-gradient(125deg,#082747,#123e70);color:white;padding:28px 22px;box-shadow:0 8px 23px #0a234728}
+main{max-width:1160px;margin:0 auto;padding:22px 18px 42px}
+.school{font-size:clamp(19px,3.4vw,30px);font-weight:850;letter-spacing:.01em;text-align:center}
+.subtitle{text-align:center;color:#d6e8fb;font-size:16px;margin-top:2px}
+.meta{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.chip{border:1px solid #ffffff55;border-radius:30px;padding:4px 12px;font-size:12px}
+.toolbar{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:16px 18px;background:white;border:1px solid var(--line);border-radius:12px;margin-bottom:16px}
+button,.action{background:var(--navy);color:#fff;font:inherit;font-weight:700;border:0;border-radius:9px;padding:10px 15px;cursor:pointer;text-decoration:none;display:inline-block}
+button:disabled{opacity:.5;cursor:not-allowed}.action.alt{background:#eef5fd;color:var(--navy);border:1px solid #abc0d9}
+.small{font-size:12px;color:var(--muted)}
+.notice{background:#e3effe;padding:12px 15px;border-left:4px solid var(--blue);border-radius:8px;margin-bottom:18px;color:#214468}
+.bells{display:grid;grid-template-columns:repeat(auto-fit,minmax(172px,1fr));gap:9px;margin-bottom:20px}
+.bell{background:white;border:1px solid var(--line);border-radius:9px;padding:10px 14px;display:flex;justify-content:space-between;gap:8px}
+.bell b{font-size:13px}.bell span{font-size:12px;color:#446383}.bell.break{background:#e3f9f6;border-color:#6bcbc6}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:18px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:13px;overflow:hidden;break-inside:avoid;box-shadow:0 5px 20px #102b4709}
+.card h2{background:var(--navy);color:#fff;margin:0;padding:12px 17px;font-size:18px}
+table{width:100%;border-collapse:collapse}th{background:#e9f1fb;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#315072}
+td,th{border-bottom:1px solid #e0e9f2;padding:10px 12px;text-align:left}
+td:first-child{font-weight:750;color:var(--blue);white-space:nowrap}td:nth-child(2){white-space:nowrap;color:#436081}
+tr:last-child td{border-bottom:0}tr.breakrow td{background:#e3f9f6;color:#006b73;font-weight:750;text-align:center}
+footer{margin-top:22px;text-align:center;font-size:12px;color:var(--muted)}
+#error{display:none;margin-bottom:15px;padding:14px;border:1px solid #fac1c1;background:#fff1f1;color:#922d35;border-radius:10px}
+#print{display:none}#loading{color:#436081}
+@media print{
+@page{size:A4 portrait;margin:11mm}
+body{background:white;color:black;font-size:11px}
+header{background:white;color:#092c57;box-shadow:none;padding:8px 0 15px}
+.subtitle,.meta{color:#234772}.chip{border-color:#dae2ea}
+main{padding:0}.toolbar,.notice,#error,#loading{display:none!important}
+.bells{grid-template-columns:repeat(5,1fr);gap:4px}.bell{padding:5px;font-size:9px;break-inside:avoid}.bell span{font-size:9px}
+.grid{display:block}.card{border-radius:0;box-shadow:none;margin:0 0 15mm;page-break-inside:avoid;page-break-after:always}
+.card h2{background:#092c57!important;color:white!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+th,td{padding:6px 8px}.breakrow td{background:#e3f9f6!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+footer{display:none}
+}
+</style>
+</head>
+<body>
+<header>
+<div class="school">AL SIDDIQUE SCHOLARS PUBLIC SCHOOL</div>
+<div class="subtitle">Regular Class Time Table</div>
+<div class="meta"><span class="chip">Academic Session 2026–27</span><span class="chip">8:00 AM–1:30 PM</span><span class="chip">25-minute break after 6th lecture</span></div>
+</header>
+<main>
+<div class="toolbar"><div><strong>Current uploaded reference</strong><div class="small">Classes 4, 5, 6, 7 and Pre-Nine • School-day pattern</div></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><a class="action alt" href="/timetable">Open Timetable Manager</a><button id="print" type="button">Print all classes</button></div></div>
+<div id="error" role="alert"></div>
+<div id="loading" role="status">Loading the saved school timetable securely…</div>
+<div class="notice">This is the regular-day timetable supplied on 14 October 2026. A separate Friday schedule is not specified. Teacher names are displayed as reference only; account permissions are not automatically assigned.</div>
+<section id="bells" class="bells" aria-label="School bell times"></section>
+<section id="cards" class="grid" aria-label="Class timetable"></section>
+<footer>AL SIDDIQUE SCHOLARS PUBLIC SCHOOL • Sharif Chowk, Rayya Khas, Narowal<br>Uploaded reference image is marked Academic Year 2024–2025; displayed under the user-requested 2026–27 session, pending final staff identity reconciliation.</footer>
+</main>
+<script>
+'use strict'
+const PERIODS=[
+ ['Assembly','8:00–8:15'],
+ ['1st','8:15–8:55'],['2nd','8:55–9:30'],['3rd','9:30–10:05'],
+ ['4th','10:05–10:40'],['5th','10:40–11:15'],['6th','11:15–11:50'],
+ ['Break','11:50–12:15'],['7th','12:15–12:50'],['8th','12:50–1:30']
+]
+const CLASSES=[['Four','Class 4th'],['Five','Class 5th'],['Six','Class 6th'],['Seven','Class 7th'],['Pre-Nine','Class Pre-Nine']]
+const e=(tag,text)=>{const node=document.createElement(tag);node.textContent=String(text??'');return node}
+const displayTime=t=>{const [h,m]=String(t).split(':').map(Number);if(!Number.isFinite(h)||!Number.isFinite(m))return '—';return (h>12?h-12:h)+':'+String(m).padStart(2,'0')}
+function draw(rows){
+ const bells=document.getElementById('bells'),cards=document.getElementById('cards')
+ for(const [name,time] of PERIODS){
+  const node=e('div','');node.className='bell'+(name==='Break'?' break':'')
+  node.append(e('b',name),e('span',time));bells.append(node)
+ }
+ for(const [className,title] of CLASSES){
+  const entries=rows.filter(row=>row.class_name===className)
+  if(entries.length!==8)throw Error('Incomplete class schedule.')
+  const card=e('article','');card.className='card'
+  card.append(e('h2',title))
+  const table=document.createElement('table'),thead=document.createElement('thead'),top=document.createElement('tr')
+  for(const key of ['Lecture','Time','Subject','Teacher'])top.append(e('th',key))
+  thead.append(top);table.append(thead)
+  const body=document.createElement('tbody')
+  for(let i=0;i<8;i++){
+   if(i===6){const tr=e('tr','');tr.className='breakrow';const td=e('td','Break • 11:50 AM – 12:15 PM (25 minutes)');td.colSpan=4;tr.append(td);body.append(tr)}
+   const row=entries.find(v=>v.period_label==='Period '+(i+1))
+   if(!row)throw Error('Missing lecture order.')
+   const tr=document.createElement('tr')
+   tr.append(e('td','Period '+(i+1)),e('td',displayTime(row.start_time)+'–'+displayTime(row.end_time)),e('td',row.subject),e('td',row.teacher_display_name||'Unassigned'))
+   body.append(tr)
+  }
+  table.append(body);card.append(table);cards.append(card)
+ }
+}
+async function start(){
+ const token=localStorage.getItem('al_siddique_token')
+ if(!token){document.getElementById('loading').hidden=true;const b=document.getElementById('error');b.style.display='block';b.textContent='Please sign in to the school SaaS to view the saved timetable.';return}
+ try{
+  const res=await fetch('/api/timetable/reference',{headers:{Authorization:'Bearer '+token,Accept:'application/json'},cache:'no-store',credentials:'same-origin'})
+  if(!res.ok)throw Error(res.status===401?'Session expired. Please sign in again.':res.status===403?'Your account cannot view the school timetable.':'Timetable service is temporarily unavailable.')
+  const json=await res.json()
+  if(!json.success||!Array.isArray(json.data)||json.data.length!==42)throw Error('Timetable data is incomplete.')
+  draw(json.data)
+  document.getElementById('print').style.display='inline-block'
+ }catch(error){const b=document.getElementById('error');b.style.display='block';b.textContent=error.message}
+ finally{document.getElementById('loading').hidden=true}
+}
+document.getElementById('print').addEventListener('click',()=>window.print())
+void start()
+</script>
+</body></html>

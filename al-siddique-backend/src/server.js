@@ -193,6 +193,7 @@ const registerRoutes = (router) => {
   mount('/assessment-results', './routes/assessmentResultRoutes')
   mount('/question-bank', './routes/questionBankRoutes')
   mount('/timetable',  './routes/timetableRoutes')
+  mount('/timetable',  './routes/timetableReferenceRoutes')
   mount('/global-search', './routes/globalSearchRoutes')
   mount('/admissions', './routes/admissionRoutes')
   mount('/demo-requests', './routes/demoRequestRoutes')
