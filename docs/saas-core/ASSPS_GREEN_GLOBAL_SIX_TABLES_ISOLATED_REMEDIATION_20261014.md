@@ -78,3 +78,29 @@ missing marks to zero.
 The user requested no routine approval interruptions. Source implementation,
 safe isolated checks and coordination can continue autonomously. Real staff
 sessions and formal Core release authority cannot be impersonated.
+
+## Dedicated global AI worker QA contract extension
+
+The isolated staged SQL now defines assps_qa_global_job_worker, a NOLOGIN,
+NOINHERIT, NOSUPERUSER, NOBYPASSRLS role. Its explicit grants cover exactly
+the three AI queue relations and the event sequence, not school organization,
+campus or global audit relations. Scoped permissive policies permit required
+AI worker actions, while restrictive green-specific policies continue to
+deny all six school-unsafe global accesses. Existing legacy access is retained
+only in this disposable QA rehearsal.
+
+New runtime acceptance on exact restored PostgreSQL source:
+- Worker SELECT access on ai_jobs, ai_queue_events, ai_queue_state PASS.
+- Worker transactional INSERT into ai_queue_state and ai_queue_events PASS,
+  then rolled back; no QA test rows retained.
+- Worker SELECT of organizations DENIED.
+- Worker role is removed in the exact inverse QA transaction.
+- Six-table green denial, legacy access, schema rollback and real marks
+  restore invariants all PASS.
+- Additional static contract tests assert no-login worker scope and exact
+  worker removal on rollback.
+
+A production worker login/service principal and application transport
+binding have NOT been provisioned. This is a source-ready tested pattern
+for SaaS Core to integrate under authenticated least-privilege rollout,
+not proof that live global worker segregation is installed.

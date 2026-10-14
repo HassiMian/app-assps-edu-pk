@@ -16,10 +16,22 @@ BEGIN
          'assps_qa_green_unscoped_deny_v1'))<>2
    THEN RAISE EXCEPTION 'QA % missing expected policies',rel;END IF;
    IF (SELECT count(*) FROM pg_policies WHERE schemaname='public'
-      AND tablename=rel)<>2
+      AND tablename=rel)<>
+      (CASE WHEN rel IN ('ai_jobs','ai_queue_events','ai_queue_state')
+            THEN 3 ELSE 2 END)
    THEN RAISE EXCEPTION 'QA % unexpected additional policies',rel;END IF;
  END LOOP;
 END $guard$;
+-- Remove QA worker scope and identity before reverting global RLS changes.
+DROP POLICY assps_qa_global_worker_service_v1 ON public.ai_jobs;
+DROP POLICY assps_qa_global_worker_service_v1 ON public.ai_queue_events;
+DROP POLICY assps_qa_global_worker_service_v1 ON public.ai_queue_state;
+REVOKE USAGE,SELECT ON SEQUENCE public.ai_queue_events_id_seq FROM assps_qa_global_job_worker;
+REVOKE SELECT,INSERT,UPDATE,DELETE ON public.ai_jobs FROM assps_qa_global_job_worker;
+REVOKE SELECT,INSERT,DELETE ON public.ai_queue_events FROM assps_qa_global_job_worker;
+REVOKE SELECT,INSERT,UPDATE ON public.ai_queue_state FROM assps_qa_global_job_worker;
+REVOKE USAGE ON SCHEMA public FROM assps_qa_global_job_worker;
+DROP ROLE assps_qa_global_job_worker;
 DO $rollback$
 DECLARE rel text;
 BEGIN

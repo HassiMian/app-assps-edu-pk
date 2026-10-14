@@ -58,6 +58,23 @@ runuser -u postgres -- psql -X -q -v ON_ERROR_STOP=1 -p55483 -d apexos -c "BEGIN
 roll=$(runuser -u postgres -- psql -X -q -t -A -p55483 -d apexos -c "SELECT count(*) FROM public.ai_queue_state WHERE key='QA_LEGACY_TRANSACTION_ROLLBACK_20261014';")
 test "$roll" = 0 || { echo LEGACY_TEST_RECORD_NOT_ROLLED_BACK;exit 4; }
 echo QA_LEGACY_QUEUE_SYNTHETIC_DML_ROLLBACK_PASS
+# Separate non-login worker can perform only necessary global AI operations.
+worker_status=$(runuser -u postgres -- psql -X -q -t -A -p55483 -d apexos -c "SELECT rolcanlogin::text||':'||rolbypassrls::text FROM pg_roles WHERE rolname='assps_qa_global_job_worker';")
+test "$worker_status" = false:false || { echo QA_WORKER_PRIVILEGED;exit 5; }
+for table in ai_jobs ai_queue_events ai_queue_state;do
+  count=$(runuser -u postgres -- psql -X -q -t -A -p55483 -d apexos -c "BEGIN READ ONLY;SET LOCAL ROLE assps_qa_global_job_worker;SELECT count(*) FROM public.$table;ROLLBACK;" | head -1)
+  echo "$count" | grep -Eq '^[0-9]+$' || { echo "QA_WORKER_AI_TABLE_DENIED_$table";exit 5; }
+  echo "QA_WORKER_SCOPED_READ_PASS $table"
+done
+# A real background service would authenticate through its own approved
+# credential path. These test actions are QA-only transactions, rolled back.
+runuser -u postgres -- psql -X -q -v ON_ERROR_STOP=1 -p55483 -d apexos -c "BEGIN;SET LOCAL ROLE assps_qa_global_job_worker;INSERT INTO public.ai_queue_state(key,value) VALUES('QA_WORKER_ONLY_20261014','test');INSERT INTO public.ai_queue_events(event_type,message,meta) VALUES('QA_WORKER_ONLY','test','{}'::jsonb);ROLLBACK;" >/dev/null
+set +e
+runuser -u postgres -- psql -X -q -v ON_ERROR_STOP=1 -p55483 -d apexos -c "BEGIN READ ONLY; SET LOCAL ROLE assps_qa_global_job_worker; SELECT count(*) FROM public.organizations; ROLLBACK;" >/dev/null 2>&1
+worker_scope_rc=$?
+set -e
+test "$worker_scope_rc" -ne 0 || { echo QA_WORKER_ORGANIZATION_SCOPE_BYPASS;exit 5; }
+echo QA_WORKER_SCOPED_DML_AND_UNAUTHORIZED_TABLE_DENIAL_PASS
 runuser -u postgres -- psql -X -q -v ON_ERROR_STOP=1 -p55483 -d apexos < "$SRC/qa-green-global-rls-rollback-20261014.sql" >/dev/null
 for table in $TABLES;do
  state=$(runuser -u postgres -- psql -X -q -t -A -p55483 -d apexos -c "SELECT c.relrowsecurity::text||':'||c.relforcerowsecurity::text||':'||(SELECT count(*) FROM pg_policies WHERE tablename=c.relname) FROM pg_class c WHERE c.oid='public.$table'::regclass;")

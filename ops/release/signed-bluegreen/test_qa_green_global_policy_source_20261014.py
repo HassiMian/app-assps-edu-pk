@@ -26,7 +26,7 @@ class SixGlobalPolicyContract(unittest.TestCase):
         self.assertIn("inet_server_addr()", ROLLBACK)
     def test_guard_is_restrictive_false_not_bypass(self):
         self.assertRegex(STAGE,r'AS RESTRICTIVE FOR ALL TO assps_core_green_runtime USING \(false\) WITH CHECK \(false\)')
-        self.assertNotIn('BYPASSRLS', STAGE)
+        self.assertNotRegex(STAGE,r'\bBYPASSRLS\b')  # NOBYPASSRLS is mandatory
         self.assertNotIn('DISABLE ROW LEVEL SECURITY', STAGE)
     def test_legacy_path_keeps_explicit_policy(self):
         self.assertIn("TO apex_app_runtime,apexos_user USING (true) WITH CHECK (true)",STAGE)
@@ -46,6 +46,16 @@ class SixGlobalPolicyContract(unittest.TestCase):
         self.assertIn("QA_LEGACY_QUEUE_SYNTHETIC_DML_ROLLBACK_PASS", RUNNER)
         self.assertIn("ALL_SIX_QA_ROLLBACK_PASS", RUNNER)
         self.assertIn("OFFICIAL_MARKS_CLONE_INTACT_PASS", RUNNER)
+    def test_global_worker_is_non_login_and_separately_scoped(self):
+        self.assertIn('CREATE ROLE assps_qa_global_job_worker NOLOGIN',STAGE)
+        for table in ('ai_jobs','ai_queue_events','ai_queue_state'):
+            self.assertIn('ON public.'+table+' TO assps_qa_global_job_worker',STAGE)
+        for table in ('organizations','campuses','admin_block_audit_log'):
+            self.assertNotIn('ON public.'+table+' TO assps_qa_global_job_worker',STAGE)
+        self.assertIn('QA_WORKER_SCOPED_DML_AND_UNAUTHORIZED_TABLE_DENIAL_PASS',RUNNER)
+    def test_global_worker_role_is_removed_during_exact_rollback(self):
+        self.assertIn('DROP POLICY assps_qa_global_worker_service_v1',ROLLBACK)
+        self.assertIn('DROP ROLE assps_qa_global_job_worker;',ROLLBACK)
     def test_live_prod_port_not_used_for_staging(self):
         self.assertIn("-p5432 -d postgres -c", RUNNER)  # role name inventory ONLY
         self.assertNotIn("-p5432 -d apexos", RUNNER)

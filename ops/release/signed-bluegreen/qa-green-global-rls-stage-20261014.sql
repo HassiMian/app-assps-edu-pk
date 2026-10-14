@@ -16,6 +16,9 @@ BEGIN
      ('apexos_user','apex_app_runtime','assps_core_green_runtime')) <> 3 THEN
     RAISE EXCEPTION 'APPROVED QA ROLES MISSING';
  END IF;
+ IF EXISTS(SELECT 1 FROM pg_roles
+   WHERE rolname='assps_qa_global_job_worker') THEN
+   RAISE EXCEPTION 'QA worker role preexists'; END IF;
  IF NOT EXISTS (
    SELECT 1 FROM pg_auth_members m
    JOIN pg_roles child ON child.oid=m.member
@@ -34,6 +37,14 @@ BEGIN
        AND tablename=rel) THEN RAISE EXCEPTION 'QA % unexpected policies',rel;END IF;
  END LOOP;
 END $guard$;
+-- A separate NOLOGIN global job worker role on QA, never a teacher role.
+-- Grant only worker SQL operations seen in paperAiQueue.js.
+CREATE ROLE assps_qa_global_job_worker NOLOGIN NOINHERIT NOSUPERUSER NOBYPASSRLS;
+GRANT USAGE ON SCHEMA public TO assps_qa_global_job_worker;
+GRANT SELECT,INSERT,UPDATE,DELETE ON public.ai_jobs TO assps_qa_global_job_worker;
+GRANT SELECT,INSERT,DELETE ON public.ai_queue_events TO assps_qa_global_job_worker;
+GRANT SELECT,INSERT,UPDATE ON public.ai_queue_state TO assps_qa_global_job_worker;
+GRANT USAGE,SELECT ON SEQUENCE public.ai_queue_events_id_seq TO assps_qa_global_job_worker;
 DO $create$
 DECLARE rel text;
 BEGIN
@@ -47,6 +58,12 @@ BEGIN
    EXECUTE format('CREATE POLICY assps_qa_green_unscoped_deny_v1 ON public.%I AS RESTRICTIVE FOR ALL TO assps_core_green_runtime USING (false) WITH CHECK (false)',rel);
  END LOOP;
 END $create$;
+CREATE POLICY assps_qa_global_worker_service_v1 ON public.ai_jobs
+ AS PERMISSIVE FOR ALL TO assps_qa_global_job_worker USING (true) WITH CHECK (true);
+CREATE POLICY assps_qa_global_worker_service_v1 ON public.ai_queue_events
+ AS PERMISSIVE FOR ALL TO assps_qa_global_job_worker USING (true) WITH CHECK (true);
+CREATE POLICY assps_qa_global_worker_service_v1 ON public.ai_queue_state
+ AS PERMISSIVE FOR ALL TO assps_qa_global_job_worker USING (true) WITH CHECK (true);
 DO $assert$
 DECLARE rel text;
 BEGIN
