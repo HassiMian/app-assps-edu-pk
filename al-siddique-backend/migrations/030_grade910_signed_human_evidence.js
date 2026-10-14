@@ -46,6 +46,23 @@ async function up(options={}) {
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     UNIQUE(school_id,actor_user_id,claim_sha)
    );
+   -- Upgrade existing early QA tables as well: CREATE IF NOT EXISTS does not
+   -- retroactively install a new actor/action constraint.
+   DO $grade910$
+   BEGIN
+     IF NOT EXISTS (
+       SELECT 1 FROM pg_constraint
+       WHERE conrelid='grade910_human_signoff_evidence'::regclass
+       AND conname='grade910_actor_action_scope'
+     ) THEN
+       ALTER TABLE grade910_human_signoff_evidence
+       ADD CONSTRAINT grade910_actor_action_scope CHECK (
+         (actor_role='teacher' AND action IN ('subject_review','urdu_review'))
+         OR (actor_role='principal' AND action IN ('book_adoption','principal_approval'))
+         OR (actor_role IN ('admin','school_admin') AND action='book_adoption')
+       );
+     END IF;
+   END $grade910$;
    ALTER TABLE grade910_human_signoff_evidence ENABLE ROW LEVEL SECURITY;
    ALTER TABLE grade910_human_signoff_evidence FORCE ROW LEVEL SECURITY;
    REVOKE ALL ON grade910_human_signoff_evidence FROM PUBLIC;
