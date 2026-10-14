@@ -31,7 +31,7 @@ test('authorized assigned teacher can write only matching school/class/section/s
 test('assignment must be active, in same tenant, same teacher and matching scope',()=>{
  for (const mutation of [
   {school_id:22},{teacher_user_id:88},{is_active:false},
-  {class_name:'Two'},{section:'B'},{subject:'Urdu'},
+  {class_name:'Two'},{section:'B'},{section:''},{section:null},{subject:'Urdu'},{subject:''},{subject:null},
  ]) {
   assert.equal(check([row()],{assignments:[{...assignments[0],...mutation}]}),false,JSON.stringify(mutation))
  }
@@ -49,7 +49,11 @@ test('legacy class names and class-all term exams can match without broadening a
  assert.equal(examMatchesStudent({class:'1'},students[0]),true)
  assert.equal(examMatchesStudent({class:'All Classes'},students[0]),true)
  assert.equal(examMatchesStudent({class:'Class Two'},students[0]),false)
- assert.equal(hasTeacherAssignment([{...assignments[0],section:'',subject:''}],21,77,students[0],'Urdu'),true)
+ assert.equal(hasTeacherAssignment([{...assignments[0],section:'',subject:''}],21,77,students[0],'Urdu'),false)
+ assert.equal(hasTeacherAssignment([{...assignments[0],section:null,subject:'English'}],21,77,students[0],'English'),false)
+ assert.equal(hasTeacherAssignment([{...assignments[0],section:'A',subject:null}],21,77,students[0],'English'),false)
+ assert.equal(hasTeacherAssignment([{...assignments[0],section:'   ',subject:'English'}],21,77,students[0],'English'),false)
+ assert.equal(hasTeacherAssignment([{...assignments[0],section:'A',subject:'   '}],21,77,students[0],'English'),false)
  assert.equal(hasTeacherAssignment([{...assignments[0],section:'B',subject:''}],21,77,students[0],'Urdu'),false)
 })
 
@@ -57,8 +61,10 @@ test('teacher result reads use DB-level EXISTS for school, class, section, subje
  const scope=teacherResultReadScope({user},'s','er',4)
  assert.deepEqual(scope.params,[77,21])
  assert.equal(scope.nextIndex,6)
+ assert.equal(scope.clause.includes("COALESCE(tca.section,'') = ''"),false)
+ assert.equal(scope.clause.includes("COALESCE(tca.subject,'') = ''"),false)
  for(const token of ['teacher_class_assignments','s.school_id = $5','tca.school_id = s.school_id','tca.teacher_user_id = $4',
-   'tca.is_active = true',"LOWER(tca.class_name)","LOWER(tca.section)","LOWER(tca.subject)","er.subject"])
+   'tca.is_active = true',"LOWER(tca.class_name)","LOWER(BTRIM(tca.section))","LOWER(BTRIM(tca.subject))","NULLIF(BTRIM(COALESCE(tca.section,'')),'') IS NOT NULL","NULLIF(BTRIM(COALESCE(tca.subject,'')),'') IS NOT NULL","er.subject"])
   assert.ok(scope.clause.includes(token),token)
  const invalid=teacherResultReadScope({user:{role:'teacher',id:null,school_id:21}},'s','er',1)
  assert.equal(invalid.clause,' AND 1=0')

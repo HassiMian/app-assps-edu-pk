@@ -35,10 +35,12 @@ function hasTeacherAssignment(assignments, schoolId, teacherId, student, subject
     validId(a.school_id) === validId(schoolId) &&
     validId(a.teacher_user_id) === validId(teacherId) &&
     a.is_active === true &&
-    // Match existing student roster teacher-assignment rule exactly.
+    // Blank section/subject are never wildcard grants. A formal school
+    // assignment must name exactly one existing student section and subject.
+    !!norm(a.section) && !!norm(a.subject) &&
     norm(a.class_name) === norm(student?.class) &&
-    (!norm(a.section) || norm(a.section) === norm(student?.section)) &&
-    (!norm(a.subject) || norm(a.subject) === norm(subject))
+    norm(a.section) === norm(student?.section) &&
+    norm(a.subject) === norm(subject)
   )
 }
 function validateTeacherMarksWrite({user, schoolId, results, students, exams, assignments}) {
@@ -74,10 +76,10 @@ function teacherResultReadScope(req, studentAlias='s', resultAlias='er', index=1
         AND tca.teacher_user_id = $${index}
         AND tca.is_active = true
         AND LOWER(tca.class_name) = LOWER(COALESCE(${column('class')},''))
-        AND (COALESCE(tca.section,'') = ''
-          OR LOWER(tca.section) = LOWER(COALESCE(${column('section')},'')))
-        AND (COALESCE(tca.subject,'') = ''
-          OR LOWER(tca.subject) = LOWER(COALESCE(${resultAlias}.subject,'')))
+        AND NULLIF(BTRIM(COALESCE(tca.section,'')),'') IS NOT NULL
+        AND LOWER(BTRIM(tca.section)) = LOWER(BTRIM(COALESCE(${column('section')},'')))
+        AND NULLIF(BTRIM(COALESCE(tca.subject,'')),'') IS NOT NULL
+        AND LOWER(BTRIM(tca.subject)) = LOWER(BTRIM(COALESCE(${resultAlias}.subject,'')))
     )`,
     params:[teacherId,actorSchoolId],
     nextIndex:index+2,
