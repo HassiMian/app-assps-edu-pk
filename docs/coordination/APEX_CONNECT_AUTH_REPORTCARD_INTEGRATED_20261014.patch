@@ -1,0 +1,290 @@
+diff --git a/scripts/connect/test-synthetic-signed-teacher-http-20261014.cjs b/scripts/connect/test-synthetic-signed-teacher-http-20261014.cjs
+new file mode 100644
+index 0000000..97be739
+--- /dev/null
++++ b/scripts/connect/test-synthetic-signed-teacher-http-20261014.cjs
+@@ -0,0 +1,58 @@
++'use strict';
++// QA ONLY: Requires an already-running isolated Next test app at 127.0.0.1:3013
++// and a disposable PostgreSQL cluster at 127.0.0.1:55443. Never target real school DB.
++if (process.env.CONNECT_ISOLATED_QA !== 'yes') throw Error('Isolated QA opt-in required');
++const assert=require('node:assert/strict');
++const crypto=require('node:crypto');
++const {createRequire}=require('node:module');
++const r=createRequire('/root/workspace/assps-connect-temp-login-mission-20261014/package.json');
++const {Client}=r('pg'),bcrypt=r('bcryptjs');
++const origin='http://127.0.0.1:3013';
++const secretA=crypto.randomBytes(20).toString('hex');
++const secretB=crypto.randomBytes(20).toString('hex');
++function target(res){const loc=res.headers.get('location'); return loc ? new URL(loc,origin).pathname : null;}
++let passed=0;
++function check(label,ok){assert(ok,label);console.log('PASS '+label);passed++;}
++async function request(p,options){return fetch(origin+p,{redirect:'manual',...options});}
++async function submit(p,body){const res=await request(p,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});return {res,data:await res.json().catch(()=>({}))};}
++async function main(){
++const db=new Client({host:'127.0.0.1',port:55443,database:'postgres',user:'postgres'});
++await db.connect();
++try {
++const scope=await db.query("SELECT code,tenant_id FROM schools WHERE id=9901 AND code='QA-ONLY' AND tenant_id='qa-tenant-9901'");
++if (scope.rowCount !== 1) throw Error('Expected synthetic-only database marker missing');
++const hash=await bcrypt.hash(secretA,10);
++await db.query('INSERT INTO users(id,name,email,username,password,role,is_active,must_change_password,school_id,tenant_id) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) ON CONFLICT (id) DO UPDATE SET password=EXCLUDED.password, must_change_password=true',[9901,'Synthetic Teacher','synthetic@example.invalid','QA-T-001',hash,'teacher',true,true,9901,'qa-tenant-9901']);
++let res=await request('/teacher');
++check('anonymous blocked',res.status===302);
++let attempt=await submit('/api/auth/login',{email:'QA-T-001',password:secretA,role:'teacher'});
++check('temporary credential accepted for change only',attempt.res.status===200&&attempt.data.mustChangePassword===true&&attempt.data.token==='');
++check('no auth cookies before password rotation',!(attempt.res.headers.get('set-cookie')));
++check('local temporary-password form route',attempt.data.redirectTo==='/auth/change-password?userId=9901');
++res=await request(attempt.data.redirectTo);
++check('temporary-password form renders',res.status===200);
++let rotation=await submit('/api/auth/change-temporary-password',{userId:'9901',currentPassword:secretA,newPassword:secretB});
++check('password-change operation succeeds',rotation.res.status===200&&rotation.data.success===true);
++attempt=await submit('/api/auth/login',{email:'QA-T-001',password:secretA,role:'teacher'});
++check('original temporary credential revoked',attempt.res.status===401);
++attempt=await submit('/api/auth/login',{email:'QA-T-001',password:secretB,role:'teacher'});
++check('new password gives signed teacher response',attempt.res.status===200&&attempt.data.success===true&&attempt.data.user?.role==='teacher');
++const setCookies=attempt.res.headers.getSetCookie();
++const cookie=setCookies.map(s=>s.split(';')[0]).join('; ');
++check('real HttpOnly session cookies issued',setCookies.some(s=>s.startsWith('authToken=')&&s.includes('HttpOnly'))&&cookie.includes('userId='));
++res=await request('/api/auth/me',{headers:{Cookie:cookie}});
++const me=await res.json();
++check('session-backed identity matches QA teacher',res.status===200&&String(me.user?.id)==='9901'&&me.user?.role==='teacher');
++res=await request('/teacher',{headers:{Cookie:cookie}});
++check('authenticated teacher portal accessible',res.status===200);
++res=await request('/admin',{headers:{Cookie:cookie}}); console.log('ADMIN_STATUS',res.status,'TARGET',target(res));
++check('teacher cannot access admin portal',res.status===307&&target(res)==='/teacher');
++res=await request('/dashboard',{headers:{Cookie:cookie}}); console.log('DASH_STATUS',res.status,'TARGET',target(res));
++check('legacy dashboard respects teacher role',res.status===307&&target(res)==='/teacher');
++await db.query('UPDATE users SET must_change_password=true WHERE id=9901');
++res=await request('/api/auth/me',{headers:{Cookie:cookie}});
++check('password-reset flag revokes prior session',res.status===401);
++console.log('CONNECT_SYNTHETIC_SIGNED_TEACHER_LOGIN '+passed+'/'+passed+' PASS');
++} finally { await db.end(); }
++}
++main().catch(e=>{console.error('CONNECT_SYNTHETIC_SIGNED_TEACHER_LOGIN FAIL '+e.message);process.exitCode=2;});
+diff --git a/scripts/connect/test-temporary-login-session-boundary-20261014.cjs b/scripts/connect/test-temporary-login-session-boundary-20261014.cjs
+new file mode 100644
+index 0000000..fce2e4e
+--- /dev/null
++++ b/scripts/connect/test-temporary-login-session-boundary-20261014.cjs
+@@ -0,0 +1,70 @@
++'use strict';
++const assert = require('node:assert/strict');
++const fs = require('node:fs');
++const path = require('node:path');
++const vm = require('node:vm');
++const ts = require('typescript');
++
++const source = fs.readFileSync(path.join(__dirname, '../../src/lib/server/auth-user.ts'), 'utf8');
++const login = fs.readFileSync(path.join(__dirname, '../../src/components/LoginClient.tsx'), 'utf8');
++let tests = 0;
++function pass(label) { tests++; console.log('PASS ' + label); }
++function assertSourceOrder() {
++  const start = login.indexOf('if (data.success) {');
++  const temporary = login.indexOf('if (data.mustChangePassword)', start);
++  const verification = login.indexOf("fetchWithTimeout('/api/auth/me'", start);
++  const hydration = login.indexOf("contextLogin('', null, verifiedUser)", start);
++  assert(start >= 0 && temporary > start && verification > temporary && hydration > verification);
++  pass('temporary-password response cannot hydrate authenticated context');
++  assert(login.includes("String(verifiedUser.id) !== String(data.user?.id)") &&
++         login.includes('verifiedPortal !== responsePortal') &&
++         login.includes("verifiedPortal.startsWith('/login')"));
++  pass('login requires canonical signed user and role agreement');
++  assert(login.includes("!/^\\/auth\\/change-password\\?userId=\\d+$/.test(redirect)"));
++  pass('temporary password redirects restricted to local challenge URL');
++}
++
++function loadModule(data) {
++  const out = { exports: {} };
++  const mockDb = { queries: [], async query(sql,params) {
++    this.queries.push(String(sql));
++    return { rows: [data] };
++  }};
++  const mocks = {
++    'next/headers': { cookies: async () => ({get: name => name === 'authToken' ? {value:'qa-signed'} : name === 'userId' ? {value:'9901'} : undefined}) },
++    'jsonwebtoken': { verify: () => ({id:9901}) },
++    '@/lib/server/db': { getPool: () => mockDb },
++    '@/lib/server/env': { requireEnv: () => 'qa-only' }
++  };
++  const js = ts.transpileModule(source, {compilerOptions: {module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,esModuleInterop:true}}).outputText;
++  const sandbox = {module:out,exports:out.exports, require(name) {
++    assert(Object.hasOwn(mocks,name), 'unexpected dependency '+name);
++    return mocks[name];
++  }, String,Number,Boolean,Error};
++  vm.runInNewContext(js,sandbox,{filename:'auth-user.ts'});
++  return {getCurrentUser:out.exports.getCurrentUser, queries:mockDb.queries};
++}
++
++const base = {
++  id:9901,name:'Isolated QA Teacher',email:'qa@example.invalid',role:'teacher',
++  tenant_id:'tenant-qa',school_id:1,school_tenant_id:'tenant-qa',is_active:true,
++  school_name:'QA',tenant_name:'QA',tenant_type:'REAL',
++  branding_logo_url:null,branding_primary_color:null,branding_secondary_color:null
++};
++(async () => {
++  assertSourceOrder();
++  const temporary = loadModule({...base,must_change_password:true});
++  assert.equal(await temporary.getCurrentUser(),null);
++  assert(temporary.queries.length === 1 && /^SELECT\b/i.test(temporary.queries[0].trim()));
++  pass('reset-marked teacher JWT rejected without request-time DDL');
++  const complete = loadModule({...base,must_change_password:false});
++  const actor = await complete.getCurrentUser();
++  assert.equal(actor?.id,'9901');
++  assert.equal(actor?.role,'teacher');
++  assert.equal(actor?.tenantId,'tenant-qa');
++  pass('legitimate signed teacher read retains tenant and role');
++  const disabled = loadModule({...base,must_change_password:false,is_active:false});
++  assert.equal(await disabled.getCurrentUser(),null);
++  pass('disabled staff access remains denied');
++  console.log('CONNECT_TEMP_LOGIN_SESSION_BOUNDARY '+tests+'/'+tests+' PASS');
++})().catch(e => {console.error(e.stack);process.exitCode=2});
+diff --git a/scripts/test-report-card-release-hold-20261014.mjs b/scripts/test-report-card-release-hold-20261014.mjs
+new file mode 100644
+index 0000000..52448be
+--- /dev/null
++++ b/scripts/test-report-card-release-hold-20261014.mjs
+@@ -0,0 +1,26 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import { readFileSync } from 'node:fs';
++
++const source = readFileSync(new URL('../src/app/teacher/assessments/report-cards/page.tsx', import.meta.url), 'utf8');
++
++test('saved-record print is visibly a draft and not falsely school-certified', () => {
++  assert.match(source, /Saved assessment record — academic certification pending/);
++  assert.match(source, /DRAFT PREVIEW — Not an official published result/);
++  assert.match(source, /print:text-black/);
++  assert.doesNotMatch(source, /School-verified assessment record/);
++  assert.match(source, /Print Draft Preview/);
++});
++
++test('unconfigured grading policy cannot project stored, potentially incorrect grades', () => {
++  assert.match(source, /gradeBands\.length > 0 && displayExamResult\(res\)\.status === 'SCORED'/);
++  assert.match(source, /gradeBands\.length > 0 && String\(res.grade \|\| ''\)\.includes\('F'\)/);
++  assert.match(source, /res\.data\?\.configured !== true/);
++});
++
++test('print dialog remains a user-initiated action, never auto-printing on load', () => {
++  assert.match(source, /const printReport = \(\) => \{/);
++  assert.match(source, /if\(resultsLoading\|\|resultsError\|\|!results\.length\)return/);
++  assert.match(source, /window\.print\(\)/);
++  assert.match(source, /onClick=\{printReport\}/);
++});
+diff --git a/src/app/teacher/assessments/report-cards/page.tsx b/src/app/teacher/assessments/report-cards/page.tsx
+index 29c4f11..2fe7f3c 100644
+--- a/src/app/teacher/assessments/report-cards/page.tsx
++++ b/src/app/teacher/assessments/report-cards/page.tsx
+@@ -147,7 +147,7 @@ export default function ReportCards() {
+ 
+   return (
+     <DashboardLayout role="teacher" title="Automated Report Cards">
+-      <div className="print:hidden"><PortalModuleHeading eyebrow="OFFICIAL ACADEMIC REPORTING" title="Report cards" description="Browse verified school-linked assessment records. Printing is available only when real saved results have loaded."/>
++      <div className="print:hidden"><PortalModuleHeading eyebrow="OFFICIAL ACADEMIC REPORTING" title="Report cards" description="Browse verified school-linked assessment records. The print preview is not an approved academic release; it requires real saved results and never certifies grading policy."/>
+       {rosterError&&<div role="alert" className="cw-error mb-5 flex flex-wrap items-center justify-between gap-3"><span>{rosterError}</span><button type="button" onClick={fetchStudents} className="cw-module-secondary">Retry roster</button></div>}
+       {resultsError&&<div role="alert" className="cw-error mb-5 flex flex-wrap items-center justify-between gap-3"><span>{resultsError}</span>{selectedStudent&&<button type="button" onClick={()=>loadStudentResults(selectedStudent)} className="cw-module-secondary">Retry results</button>}</div>}
+       </div>
+@@ -223,7 +223,7 @@ export default function ReportCards() {
+                   disabled={resultsLoading||!!resultsError||!results.length}
+                   className="flex items-center gap-2 px-4 py-2 bg-emerald-700 hover:bg-emerald-800 disabled:opacity-40 disabled:cursor-not-allowed text-white rounded-lg transition-colors font-semibold text-sm"
+                 >
+-                  <Printer className="w-4 h-4" /> Print Report Card
++                  <Printer className="w-4 h-4" /> Print Draft Preview
+                 </button>
+               </div>
+ 
+@@ -231,7 +231,10 @@ export default function ReportCards() {
+               <div className="glass-card p-8 bg-slate-900 border-slate-700 print:border-none print:shadow-none print:p-0">
+                 <div className="text-center mb-8 border-b border-slate-700 pb-6 print:border-slate-300">
+                   <h1 className="text-3xl font-black text-white print:text-black uppercase tracking-wider">Student Academic Profile</h1>
+-                  <p className="text-slate-400 print:text-slate-600 mt-2">School-verified assessment record</p>
++                  <p className="text-slate-400 print:text-slate-600 mt-2">Saved assessment record — academic certification pending</p>
++                  <p className="mt-3 text-xs font-semibold text-amber-300 print:text-black">
++                    DRAFT PREVIEW — Not an official published result. Subject maxima and grading approval must be verified separately.
++                  </p>
+                 </div>
+ 
+                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+@@ -332,11 +335,11 @@ export default function ReportCards() {
+                                   <td className="px-5 py-3 font-mono text-slate-500 print:text-slate-500">{res.total_marks}</td>
+                                   <td className="px-5 py-3 text-right">
+                                     <span className={`px-2 py-1 rounded text-xs font-bold print:bg-transparent print:border print:border-slate-300 ${
+-                                      String(res.grade || '').includes('A') ? 'bg-emerald-500/10 text-emerald-400' :
+-                                      String(res.grade || '').includes('F') ? 'bg-red-500/10 text-red-400' :
++                                      gradeBands.length > 0 && String(res.grade || '').includes('A') ? 'bg-emerald-500/10 text-emerald-400' :
++                                      gradeBands.length > 0 && String(res.grade || '').includes('F') ? 'bg-red-500/10 text-red-400' :
+                                       'bg-blue-500/10 text-blue-400'
+                                     }`}>
+-                                      {displayExamResult(res).status === 'SCORED' ? (res.grade || '—') : '—'}
++                                      {gradeBands.length > 0 && displayExamResult(res).status === 'SCORED' ? (res.grade || '—') : '—'}
+                                     </span>
+                                   </td>
+                                 </tr>
+diff --git a/src/components/LoginClient.tsx b/src/components/LoginClient.tsx
+index e357b35..7e75611 100644
+--- a/src/components/LoginClient.tsx
++++ b/src/components/LoginClient.tsx
+@@ -248,17 +248,41 @@ export default function LoginClient() {
+       }
+ 
+       if (data.success) {
+-        contextLogin(data.token || '', null, data.user);
+-        if (data.mustChangePassword && data.redirectTo) {
+-          window.location.replace(
+-            coerceConnectRedirect(String(data.redirectTo), data.user?.role, selectedRole || undefined)
+-          );
++        // A temporary-password challenge is NOT an authenticated portal session.
++        // Hydrating AuthContext here races its signed-session check and can bounce
++        // the browser back to the role chooser before the challenge is completed.
++        if (data.mustChangePassword) {
++          const redirect = String(data.redirectTo || '');
++          if (!/^\/auth\/change-password\?userId=\d+$/.test(redirect)) {
++            setError('Unable to start the secure password-change flow.');
++            setLoading(false);
++            return;
++          }
++          window.location.replace(redirect);
+           return;
+         }
+-        const portal = getConnectPortalPath(
+-          data.user?.role || selectedRole || "admin",
+-          selectedRole || undefined
+-        );
++
++        // Never navigate on a merely optimistic login payload. The next page
++        // requires the server-issued HttpOnly cookie, independently checked here.
++        const meRes = await fetchWithTimeout('/api/auth/me', {
++          method: 'GET',
++          credentials: 'include',
++          cache: 'no-store',
++        }, 8000);
++        const me = await meRes.json().catch(() => ({}));
++        const verifiedUser = me?.user;
++        const verifiedPortal = getConnectPortalPath(verifiedUser?.role);
++        const responsePortal = getConnectPortalPath(data.user?.role);
++        if (!meRes.ok || !me?.success || !verifiedUser?.id ||
++            String(verifiedUser.id) !== String(data.user?.id) ||
++            verifiedPortal.startsWith('/login') ||
++            verifiedPortal !== responsePortal) {
++          setError('Secure session could not be verified. Please try signing in again.');
++          setLoading(false);
++          return;
++        }
++        contextLogin('', null, verifiedUser);
++        const portal = verifiedPortal;
+         if (portal.startsWith("http")) {
+           window.location.replace(portal);
+         } else {
+diff --git a/src/lib/server/auth-user.ts b/src/lib/server/auth-user.ts
+index d337548..ea32b28 100644
+--- a/src/lib/server/auth-user.ts
++++ b/src/lib/server/auth-user.ts
+@@ -72,7 +72,8 @@ export async function getCurrentUser(): Promise<AuthUser | null> {
+   );
+ 
+   const row = result.rows[0];
+-  if (!row || !row.is_active) return null;
++  // A newly reset password revokes every older portal token immediately.
++  if (!row || !row.is_active || row.must_change_password) return null;
+ 
+   const normalizedRole = String(row.role || "").toLowerCase() === "super_admin"
+     ? "SAAS_ADMIN"
