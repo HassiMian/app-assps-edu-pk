@@ -16,6 +16,8 @@ test('actual examRoutes enforces assignment scoped reads and transactional write
   let publishedOfferings=[{exam_id:9,school_id:21,class_name:'One',section:'A',subject:'English',total_marks:100,is_active:true,approval_status:'approved',approval_revision:1,approved_by_user_id:90,approved_at:'2026-10-13T17:00:00Z',reviewer_valid:true}]
   const exams=[{id:9,class:'All Classes'}]
   const transaction={writes:0,commits:0,rollbacks:0}
+  // School has no officially configured grade bands: never invent F/A grades.
+  const configuredGradeRows=[]
   let existingRecords=[]
   let simulateConcurrentInsert=false
   const client={
@@ -42,7 +44,7 @@ test('actual examRoutes enforces assignment scoped reads and transactional write
     async query(sql,params=[]){
       queries.push({sql:String(sql),params})
       if (sql.includes('to_regclass'))return {rows:[{table_name:'grade_settings'}]}
-      if (sql.includes('FROM grade_settings'))return {rows:[{label:'A',min_percentage:0,max_percentage:100}]}
+      if (sql.includes('FROM grade_settings'))return {rows:configuredGradeRows,rowCount:configuredGradeRows.length}
       if (sql.includes('SELECT * FROM exams WHERE 1=1'))return {rows:[{id:9,name:'First Term Exam',type:'TE',class:'All Classes',school_id:21}]}
       if (sql.includes('FROM exam_subjects'))return {rows:[
         {exam_id:9,class_name:'One',section:'Blue',subject:'English',sort_order:1},
@@ -143,6 +145,7 @@ test('actual examRoutes enforces assignment scoped reads and transactional write
   const firstInsert=queries.find(q=>q.sql.includes('INSERT INTO exam_results'))
   const [savedSchool,savedExam,savedStudent,savedSubject,savedMark,savedTotal,savedGrade,savedStatus]=firstInsert.params
   assert.equal(savedSchool,21)
+  assert.equal(savedGrade,null,'unconfigured school grade bands must not stamp an invented grade')
   existingRecords=[{exam_id:savedExam,student_id:savedStudent,subject:savedSubject,
     marks_obtained:savedMark,total_marks:savedTotal,grade:savedGrade,result_status:savedStatus}]
   reply=await request('POST','/api/exams/results',payload)

@@ -67,7 +67,7 @@ function gradeFromBands(obtained, total, bands = DEFAULT_GRADE_SETTINGS) {
   return match?.label || ''
 }
 
-async function loadGradeBandsForSchool(schoolId) {
+async function loadGradeBandsForSchool(schoolId, {previewDefaults = true} = {}) {
   await ensureGradeSettingsSchema()
   const result = await query(`
     SELECT label, min_percentage, max_percentage
@@ -77,7 +77,7 @@ async function loadGradeBandsForSchool(schoolId) {
   `, [schoolId])
   return result.rowCount
     ? result.rows.map(row => ({ label: row.label, from: Number(row.min_percentage), to: Number(row.max_percentage) }))
-    : DEFAULT_GRADE_SETTINGS
+    : (previewDefaults ? DEFAULT_GRADE_SETTINGS : [])
 }
 
 function validateGradeSettings(rows) {
@@ -286,7 +286,7 @@ router.post('/results', protect, canWriteMarks, async (req, res) => {
 
   let gradeBands
   try {
-    gradeBands = await loadGradeBandsForSchool(schoolId)
+    gradeBands = await loadGradeBandsForSchool(schoolId, {previewDefaults:false})
   } catch (err) {
     console.error('Grade policy load error:', err.message)
     return res.status(500).json({ success: false, message: 'School grading policy could not be loaded.' })
@@ -320,7 +320,7 @@ router.post('/results', protect, canWriteMarks, async (req, res) => {
       marksObtained,
       totalMarks,
       resultStatus:parsedState.status,
-      grade:parsedState.status === 'SCORED' ? gradeFromBands(marksObtained, totalMarks, gradeBands) : null,
+      grade:parsedState.status === 'SCORED' && gradeBands.length > 0 ? gradeFromBands(marksObtained, totalMarks, gradeBands) : null,
     })
   }
 

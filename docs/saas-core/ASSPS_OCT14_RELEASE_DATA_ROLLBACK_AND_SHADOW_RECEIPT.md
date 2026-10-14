@@ -22,3 +22,7 @@ Status: production academic release HOLD. Full signed app traffic and human auth
 
 ## Release decision
 Genuine actor-backed admin/teacher/peer-school HTTP, real paper maxima evidence, exact teacher role assignment source, signed mainstream runtime and actual official Save -> Reload -> OS print-window acceptance remain unmet. Keep marks publication HOLD until full live evidence exists. Do not invent approvals, impersonate staff, mutate results or force-push another agent's branch.
+
+## Additional Core mark-grading fix
+
+Exact teacher-authorized SCORED marks save may remain valid before official school grade bands are published; however it must NOT stamp a manufactured grade letter. In isolated backend source, POST /api/exams/results now requests only explicitly configured grade bands; when none exist it persists `grade=NULL`, preserving the real numeric score and withholding the official grade. GET grade-settings may still display defaults as unconfigured suggestions through the existing `configured=false` response. Synthetic Express HTTP source regression confirms the first authorized save has a null grade and protects replay/overwrite. This was NOT deployed to live.
