@@ -17,6 +17,7 @@ Executed independently as local PostgreSQL OS user against live `apexos` on Post
 ## Focused and full QA
 - Existing 30/30 source+staging mission on precise predecessor `8285c82`: **19 source gates + Paper Studio 510/510 + Academic 568/568 = 1,078/1,078 PASS, 0 failed, 0 skipped**. Private audit `/tmp/assps-grade910-principal-final-audit-20261014/mission-audit.json`. Latest branch should rerun this after probe addition.
 - New five adversarial read-only live-probe tests PASS (real missing tables, synthetic table count not real certification, absent Core signed guard, failing SQL ROLLBACK, unknown school pre-query refusal).
+- **Final exact follow-up branch regression COMPLETE:** 30/30 stages; 19 source/control gates, Paper Studio 510/510, Academic 573/573; total **1,083/1,083 tests PASS, 0 failures, 0 skips**, QA quality gates true. Private audit path `/tmp/assps-grade910-readonly-gate-final-20261014/mission-audit.json`, SHA256 `8a03b1a98a70fe7b63e5bd85519e162d01e838ca407ffa2a694c6691a379a979`. This confirms source/test outcomes, not actual production staff or publisher authorization.
 - Previously passed isolated PostgreSQL source migrations, per-school FORCE RLS, 120-KB AES-256-GCM signature storage, no publisher INSERT grant, enforced faculty/Principal identity separation and private browser signature upload.
 - SaaS Core controls the release window and a full **non-destructive** live rollback. Historic database backups must never overwrite newer marks. Manual papers and original Grade IX/X research questions remain unchanged.
 
