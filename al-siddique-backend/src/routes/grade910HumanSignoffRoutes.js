@@ -3,6 +3,7 @@ const express=require('express'),router=express.Router()
 const {protect,requireRoles}=require('../middleware/auth')
 const {query}=require('../config/database')
 const {storeClaim,catalog}=require('../services/grade910HumanSignoffService')
+const {storeEvidence,decryptEvidence}=require('../services/grade910EvidenceObjectService')
 const {requireSignedSchool}=require('../services/grade910SignedSchoolGate')
 router.use(protect,requireRoles('teacher','principal','admin','school_admin'))
 function actor(req){
@@ -32,6 +33,36 @@ router.post('/submissions',handled(async(req,res,a)=>{
  const out=await storeClaim({payload:req.body,actor:a,query,encryptionKey:process.env.ASSPS_QBANK_SIGNATURE_ENCRYPTION_KEY})
  res.set('Cache-Control','no-store')
  res.status(out.created?201:200).json({success:true,data:out})
+}))
+
+// Real supporting PDF/PNG/JPEG bytes: binary upload is separately bounded to 15 MB,
+// SHA-bound to the signed receipt, AES-GCM encrypted, immutable and signed-RLS school-scoped.
+router.post('/submissions/:id/evidence',express.raw({type:'application/octet-stream',limit:'15mb'}),handled(async(req,res,a)=>{
+ const out=await storeEvidence({actor:a,submissionId:req.params.id,body:req.body,
+  query,encryptionKey:process.env.ASSPS_QBANK_SIGNATURE_ENCRYPTION_KEY})
+ res.set('Cache-Control','private,no-store')
+ res.status(201).json({success:true,data:out})
+}))
+
+// Download requires an explicit authenticated request by the original signer or real Principal.
+// School admins may inspect only their own records. Neither drafts nor a download imply approval.
+router.get('/submissions/:id/evidence',handled(async(req,res,a)=>{
+ const id=String(req.params.id||'')
+ if(!/^[1-9][0-9]{0,17}$/.test(id))
+  return res.status(400).json({success:false,code:'INVALID_EVIDENCE_RECEIPT'})
+ const principal=a.role==='principal'
+ const found=await query(`SELECT e.file_sha,e.mime_type,e.byte_size,e.ciphertext,e.nonce,e.auth_tag,
+   s.evidence_sha FROM grade910_supporting_evidence_objects e
+   INNER JOIN grade910_human_signoff_evidence s
+    ON s.id=e.submission_id AND s.school_id=e.school_id AND s.actor_user_id=e.actor_user_id
+   WHERE e.school_id=$1 AND e.submission_id=$2 `+(principal?'':'AND e.actor_user_id=$3'),
+   principal?[a.schoolId,id]:[a.schoolId,id,a.id])
+ if(found.rows.length!==1)return res.status(404).json({success:false,code:'EVIDENCE_NOT_FOUND_OR_ACCESS_DENIED'})
+ const row=found.rows[0],bytes=decryptEvidence(row,process.env.ASSPS_QBANK_SIGNATURE_ENCRYPTION_KEY,row.evidence_sha)
+ const extension=row.mime_type==='application/pdf'?'pdf':row.mime_type==='image/png'?'png':'jpg'
+ return res.set('Cache-Control','private,no-store').set('X-Content-Type-Options','nosniff')
+  .set('Content-Security-Policy',"sandbox").set('Content-Disposition','attachment; filename="grade910-evidence-'+id+'.'+extension+'"')
+  .type('application/octet-stream').send(bytes)
 }))
 
 router.get('/submissions',handled(async(req,res,a)=>{
