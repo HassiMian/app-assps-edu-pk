@@ -23,7 +23,7 @@ COMPLETE={
 SIGNED={'production_release_certified':True,'authenticated_real_staff':True,'prod_app_switched':True,'status':'SIGNED_ACTIVE_TRAFFIC'}
 GOOD_HTTP={'school_saas':200,'timetable':200,'connect_report_cards_anonymous':302,'scoped_admin_approval_anonymous':401}
 
-def simulation(gates, shadow, *, status_code=0, source_tests=False, with_receipts=False, coverage_override=None):
+def simulation(gates, shadow, *, status_code=0, source_tests=False, with_receipts=False, coverage_override=None, catalog_ok=True):
     def fake_run(command, **_kwargs):
         cmd=' '.join(str(x) for x in command)
         if cmd.endswith('rev-parse HEAD'):
@@ -45,6 +45,15 @@ def simulation(gates, shadow, *, status_code=0, source_tests=False, with_receipt
                     'first_term_reference_candidates':0}),''
         if 'verify-live-signed-shadow-current-20261014.py' in cmd:
             return 0,json.dumps(shadow),''
+        if 'audit-current-signed-catalog-20261014.py' in cmd:
+            catalog={'catalog_preflight':(
+                        'PASS_WITH_INDEPENDENT_LIVE_ACCEPTANCE_REQUIRED'
+                        if catalog_ok else 'HOLD'),
+                     'production_release_certified':False,
+                     'unforced_academic_unsigned_zero_visible':True,
+                     'signed_guard_tables':77,
+                     'issues':[] if catalog_ok else ['UNFORCED_ACCESS_HIGH_RISK:ai_jobs']}
+            return (0 if catalog_ok else 2),json.dumps(catalog),''
         if 'unittest discover' in cmd or 'node --test' in cmd:
             return 0,'# tests 24\n',''
         raise AssertionError('Unexpected run command: '+cmd)
@@ -70,6 +79,14 @@ class IntegratedMissionFailClosedTests(unittest.TestCase):
         shadow={**SIGNED,'prod_app_switched':False,'production_release_certified':False}
         result=simulation(COMPLETE,shadow,source_tests=True,with_receipts=True)
         self.assertEqual(result['status'],'READY_FOR_CORE_FINAL_RELEASE')
+        self.assertFalse(result['production_deployment_performed'])
+
+    def test_signed_catalog_unscoped_runtime_dml_forces_hold_even_with_receipts(self):
+        result=simulation(COMPLETE,SIGNED,source_tests=True,with_receipts=True,
+                          catalog_ok=False)
+        self.assertEqual(result['status'],'HOLD')
+        self.assertIn('signed_runtime_catalog_unscoped_grants_cleared',result['blocked'])
+        self.assertEqual(result['signed_runtime_catalog']['status'],'HOLD')
         self.assertFalse(result['production_deployment_performed'])
 
     def test_missing_first_term_paper_source_remains_visible_not_automatically_approved(self):

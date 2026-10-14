@@ -114,13 +114,29 @@ def run_mission(database='apexos', port=5432, receipt_bundle=None, with_tests=Tr
                 tests[name]['error']=(err or out)[-180:]
     else:
         tests={'not_run':{'pass':False,'reason':'Source tests explicitly skipped'}}
-    gates=preflight.get('gates') or {}
+    # Independent fail-closed CURRENT catalog guard: a historical numeric
+    # policy count is not equivalent to actual signed tenant protection.
+    # This read-only check adds a gate; it never overrides Core approvals.
+    catalog_verifier=ROOT/'ops/release/signed-bluegreen/audit-current-signed-catalog-20261014.py'
+    cat_rc,cat_out,_=run([sys.executable,str(catalog_verifier)],timeout=35)
+    try:
+        catalog=json.loads(cat_out)
+    except (ValueError,TypeError):
+        catalog={'catalog_preflight':'HOLD','issues':['UNAVAILABLE']}
+    signed_catalog_ok=(
+        cat_rc==0 and catalog.get('catalog_preflight')==
+          'PASS_WITH_INDEPENDENT_LIVE_ACCEPTANCE_REQUIRED'
+        and catalog.get('production_release_certified') is False
+        and catalog.get('unforced_academic_unsigned_zero_visible') is True)
+    gates=dict(preflight.get('gates') or {})
+    gates['signed_runtime_catalog_unscoped_grants_cleared']=signed_catalog_ok
     expected_gates=[
       'original_exam_scores_preserved','current_exam9_rows_integrity',
       'original_grade_snapshot_unchanged_or_signed_revision',
       'pass40_F_grade_conflicts_reviewed',
       'exact_active_teacher_assignments','all_offerings_independently_approved',
       'grade_policy_explicitly_configured','active_app_runtime_signed',
+      'signed_runtime_catalog_unscoped_grants_cleared',
       'genuine_teacher_session_and_save_reload_print',
       'independent_real_peer_school_http_denial','traffic_rollback_evidence_attached',
     ]
@@ -152,6 +168,12 @@ def run_mission(database='apexos', port=5432, receipt_bundle=None, with_tests=Tr
       'exam9_paper_source_review':paper_sources,
       'source_tests':tests,
       'signed_runtime_verifier':shadow,
+      'signed_runtime_catalog':{
+        'status':catalog.get('catalog_preflight','HOLD'),
+        'issues':catalog.get('issues',[]),
+        'unforced_granted_tables_review':catalog.get('unforced_granted_tables_review',[]),
+        'signed_guards':catalog.get('signed_guard_tables',0)
+      },
       'ingress':ingress,
       'note':'Full production release is not certified by green shadow, anonymous HTTP, or synthetic role fixtures. Requires actual source-pinned production signed session/traffic/rollback evidence.'
     }
