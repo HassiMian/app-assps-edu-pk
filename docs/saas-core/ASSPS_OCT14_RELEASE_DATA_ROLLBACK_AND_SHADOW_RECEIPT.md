@@ -26,3 +26,15 @@ Genuine actor-backed admin/teacher/peer-school HTTP, real paper maxima evidence,
 ## Additional Core mark-grading fix
 
 Exact teacher-authorized SCORED marks save may remain valid before official school grade bands are published; however it must NOT stamp a manufactured grade letter. In isolated backend source, POST /api/exams/results now requests only explicitly configured grade bands; when none exist it persists `grade=NULL`, preserving the real numeric score and withholding the official grade. GET grade-settings may still display defaults as unconfigured suggestions through the existing `configured=false` response. Synthetic Express HTTP source regression confirms the first authorized save has a null grade and protects replay/overwrite. This was NOT deployed to live.
+
+## Narrow signed reviewer RLS policy — independent PostgreSQL55432 tests
+
+The initial candidate audit RLS direct cross-table users lookup failed with PERMISSION DENIED on restricted green runtime, correctly revealing an unusable authorization path. Rather than broaden green SELECT on all staff users, candidate now uses `public.assps_academic_reviewer_authorized(school_id,actor_user_id)`: a boolean-only SECURITY DEFINER function with fixed search_path, explicit school+actor bind, active role principal/admin requirement, and cryptographic signed-school context; EXECUTE grant only to signed Core green and signed Marks roles. The audit table is FORCE RLS; direct legacy apex_app_runtime INSERT and public EXECUTE are DENIED.
+
+QA PostgreSQL accepted one **synthetic cryptographically signed school1 admin** audit INSERT and then ROLLBACK, while validly signed teacher-origin, school1-signed attempt to write school2, and signed actor-id forgery each raised RLS ERROR. No QA audit events persisted and live data was not modified. **This is synthetic signed-database session security acceptance, NOT genuine Principal login/production HTTP acceptance.**
+
+Fresh final ACL QA clone `assps_signed_reviewer_acl_final_qa_20261014`: legacy_can_insert=false, green_can_insert=true, signed_marks_can_insert=true, public_can_execute=false. Another disposable QA clone applied and fully rolled back the latest migration including security-definer function, approval journal, index and four columns; original 301 results / 36 genuine numeric zeros retained.
+
+Source QA scripts 003 through 006 hard-fail on any database name except disposable `assps_signed_reviewer_fn_qa_20261014`; signing key in that disposable cloned database was replaced by a synthetic random test key (its value was never committed). QA-only SQL script 007 refuses to reverse any schema outside its exact test database and if approval events exist. Do not execute these destructive/authorization fixture scripts on production.
+
+**Go/no-go unchanged:** only source and isolated DB gates passed; official paper review, linked staff identities, authenticated production Save/Reload/Print and active app RLS traffic/rollback remain HOLD.
