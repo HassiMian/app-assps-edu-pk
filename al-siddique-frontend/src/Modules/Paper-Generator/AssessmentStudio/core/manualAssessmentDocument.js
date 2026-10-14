@@ -186,6 +186,14 @@ export function createManualAssessmentDocument({ paper = {}, config = {}, paperS
     updatedAt: new Date().toISOString(),
   })
 
+  if(paper.grade910Verified?.refs?.length){
+    doc.grade910Verified={
+      grade:Number(paper.grade910Verified.grade),
+      subject:String(paper.grade910Verified.subject||''),
+      section:String(paper.grade910Verified.section||''),
+      refs:paper.grade910Verified.refs.map(x=>({...x})),
+    }
+  }
   doc.assessment = {
     creationMode: 'MANUAL',
     assessmentType: text(paper.assessmentType || config.assessmentType || config.examType) || 'Weekly Assessment',

@@ -23,6 +23,8 @@ import { createBlankPaperDraft } from './paperCreationDraft.js'
 import { createAssessmentRelease, createManualAssessmentDocument, validateManualAssessmentForRelease } from './AssessmentStudio/core/manualAssessmentDocument.js'
 import { AssessmentRevisionConflictError, bindQueuedAssessmentSave, finalizeAssessmentRelease, flushAssessmentOfflineQueue, saveAssessmentRevision } from './AssessmentStudio/core/assessmentPersistence.js'
 import { createAssessmentPrintJob, fetchActivePrintRosterStudents, transitionAssessmentPrintJob } from './AssessmentStudio/core/printJobClient.js'
+import { gradeOf, toVerifiedPaperSection, fetchVerifiedPaperQuestions, verifyPaperDocumentOnline } from './AssessmentStudio/core/grade910VerifiedPaperClient.js'
+import { loadAssessmentPaper } from './AssessmentStudio/core/assessmentPersistence.js'
 
 function storeQToTemplate(q) {
  return {
@@ -637,6 +639,11 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const blockAddMenuRef = useRef(null)
  const [finalizing, setFinalizing] = useState(false)
  const [persistenceNotice, setPersistenceNotice] = useState('')
+ const [verifiedPickerRows,setVerifiedPickerRows]=useState([])
+ const [verifiedPickerStatus,setVerifiedPickerStatus]=useState('')
+ const [verifiedPickerSection,setVerifiedPickerSection]=useState(()=>String(loadedPaper?.grade910Verified?.section||overrideConfig?.section||''))
+ const [verifiedReopenStatus,setVerifiedReopenStatus]=useState('NOT_CHECKED')
+
  const [personalizedDuplex, setPersonalizedDuplex] = useState(true)
  const [personalizedPreparing, setPersonalizedPreparing] = useState(false)
  const [personalizedStatus, setPersonalizedStatus] = useState('')
@@ -759,6 +766,72 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
     subject: subjectName,
     totalMarks: Number(headerTotalMarks || 0),
   }
+ async function loadApprovedGrade910(){
+  if(!isUserAuthoredPaper){
+   setVerifiedPickerStatus('Certified question import is available only in a user-created editable paper.')
+   return
+  }
+  const grade=gradeOf(className)
+  if(!grade||!subjectName?.trim()){
+   setVerifiedPickerStatus('Select Grade IX/X and a subject in Paper Information first.')
+   return
+  }
+  setVerifiedPickerStatus('Checking server-certified question revisions…')
+  setVerifiedPickerRows([])
+  try{
+   const rows=await fetchVerifiedPaperQuestions({grade,subject:subjectName,section:verifiedPickerSection})
+   setVerifiedPickerRows(rows)
+   setVerifiedPickerStatus(rows.length?rows.length+' verified question revision(s) available.':'No academically published questions currently available. Provisional drafts remain hidden.')
+  }catch(e){
+   setVerifiedPickerStatus('Verified questions unavailable: '+(e?.response?.data?.code||e?.message||'Authentication or signed Core release missing.'))
+  }
+ }
+ async function importApprovedGrade910(record){
+  if(!isUserAuthoredPaper)return
+  try{
+   // Recheck the EXACT current revision, SHA and grant immediately before insertion.
+   const verified=await fetchVerifiedPaperQuestions({grade:gradeOf(className),subject:subjectName,section:verifiedPickerSection})
+   const fresh=verified.find(q=>q.originalQuestionId===record.originalQuestionId&&q.revision===record.revision&&
+     q.questionSha===record.questionSha&&q.answerSha===record.answerSha&&q.publicationGrantSha===record.publicationGrantSha)
+   if(!fresh)throw Error('Selected question changed or its publication was revoked.')
+   const {section,ref}=toVerifiedPaperSection(fresh)
+   if(paper.grade910Verified?.refs?.some(x=>x.sectionId===ref.sectionId))
+    throw Error('Question revision is already in this paper.')
+   if(paper.grade910Verified&&(Number(paper.grade910Verified.grade)!==gradeOf(className)||
+      paper.grade910Verified.subject?.toLowerCase()!==subjectName.toLowerCase()||
+      paper.grade910Verified.section!==verifiedPickerSection))
+    throw Error('Grade, subject or section changed. A paper cannot combine different certified scopes.')
+   onPaperChange(current=>{
+    const existing=current.grade910Verified
+    if(existing?.refs?.some(x=>x.sectionId===ref.sectionId))return current
+    if(existing&&(Number(existing.grade)!==gradeOf(className)||existing.subject?.toLowerCase()!==subjectName.toLowerCase()||existing.section!==verifiedPickerSection))
+     return current
+    const sections=[...(current.official_section||[]),{...section,sourceOrder:(current.official_section||[]).length+1}]
+    return {...current,official_section:sections,grade910Verified:{
+      grade:gradeOf(className),subject:subjectName,section:verifiedPickerSection,
+      refs:[...(existing?.refs||[]),ref]
+    }}
+   })
+   setVerifiedPickerStatus('Revision '+ref.originalQuestionId+' inserted. Save and Print will revalidate with the server.')
+   setEditMode(true)
+  }catch(e){setVerifiedPickerStatus('Import blocked: '+(e?.response?.data?.code||e.message))}
+ }
+ useEffect(()=>{
+  if(!loadedPaper?.grade910Verified?.refs?.length)return
+  let live=true
+  setVerifiedReopenStatus('REVALIDATING')
+  const id=loadedPaper.serverPaperId
+  if(!id){setVerifiedReopenStatus('BLOCKED_NO_SERVER_SAVED_REVISION');return}
+  loadAssessmentPaper(id).then(async remote=>{
+   if(!live)return
+   const document=remote?.document_json||remote?.documentJson
+   if(!document?.grade910Verified?.refs?.length)throw Error('Server paper has no certified question references.')
+   await verifyPaperDocumentOnline(document)
+   if(live)setVerifiedReopenStatus('REVALIDATED')
+  }).catch(()=>{if(live)setVerifiedReopenStatus('BLOCKED_REVISION_AUTHORITY_UNAVAILABLE')})
+  return()=>{live=false}
+ },[loadedPaper?.serverPaperId,loadedPaper?.id])
+
  const liveAuditPaper = {
   ...(loadedPaper || {}),
   ...paper,
@@ -969,12 +1042,20 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   : null
  let persistence = null
  let serverPaperId = loadedPaper?.serverPaperId || paper.serverPaperId || null
+ if (canonicalDocument?.grade910Verified?.refs?.length){
+  try{await verifyPaperDocumentOnline(canonicalDocument)}
+  catch(e){
+   setPersistenceNotice('VERIFIED SAVE BLOCKED — school/server revision authentication failed. No academically certified save was performed.')
+   if(!silent)alert('VERIFIED SAVE BLOCKED — '+(e?.response?.data?.code||e.message))
+   return null
+  }
+ }
  if (canonicalDocument) {
   const paperId = serverPaperId || canonicalDocument.id
   serverPaperId = paperId
   const expectedRevision = Number(paper.serverRevision ?? loadedPaper?.serverRevision ?? 0)
   try {
-   persistence = await saveAssessmentRevision({ paperId, expectedRevision, title:name, document:canonicalDocument })
+   persistence = await saveAssessmentRevision({ paperId, expectedRevision, title:name, document:canonicalDocument, allowQueue:!canonicalDocument.grade910Verified?.refs?.length })
    if (persistence.degraded) setPersistenceNotice('Offline/degraded mode — saved locally and queued for server recovery.')
    else setPersistenceNotice(`Server revision ${persistence.data.currentRevision} saved.`)
   } catch (error) {
@@ -1043,7 +1124,9 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   classLevel: overrideConfig?.classLevel || className || '',
   publisher: overrideConfig?.publisher || (storeSubjectInfo?.publisher || ''),
  }
+ // Never downgrade a source-verified revision into generic unverified local bank content.
  const shouldImport = Boolean(loadedPaper?.importToQuestionBank || overrideConfig?.importToQuestionBank)
+   && !paper.grade910Verified?.refs?.length
  if (shouldImport) {
   importPaperQuestionsToBank({
    subjectId: loadedPaper?.questionBankSubjectId || overrideConfig?.questionBankSubjectId || '', subjectMeta: questionBankMeta,
@@ -1266,6 +1349,21 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  }
 
  async function doPrint() {
+ if(paper.grade910Verified?.refs?.length){
+  if(!isUserAuthoredPaper){
+   alert('VERIFIED PRINT BLOCKED — only a server-revalidated canonical user paper can carry Grade IX–X verified questions.')
+   return
+  }
+  const latest=createManualAssessmentDocument({paper:{...loadedPaper,...paper},config:cfg,paperSettings})
+  try{
+   await verifyPaperDocumentOnline(latest)
+   setVerifiedReopenStatus('REVALIDATED')
+  }catch(e){
+   setVerifiedReopenStatus('BLOCKED_REVISION_AUTHORITY_UNAVAILABLE')
+   alert('VERIFIED PRINT BLOCKED — '+(e?.response?.data?.code||e.message))
+   return
+  }
+ }
  if (isUserAuthoredPaper && totalQs===0) {
   alert('PRINT BLOCKED — please add at least one question. Your empty draft can still be saved.')
   return
@@ -1363,7 +1461,27 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <div data-grade910-approved-only-workspace-handoff style={{padding:'8px 18px',borderBottom:'1px solid rgba(101,180,221,.5)',background:'rgba(13,49,83,.95)',color:'#e7f3ff',fontSize:12,display:'flex',gap:12,flexWrap:'wrap',alignItems:'center'}}>
    <span><strong>Grade IX–X verified question selection:</strong> use the separately authenticated, approved-only revision picker. A locally created/imported or edited paper is not automatically academically approved.</span>
    <a href="/academic/grade910-verified-picker" style={{border:'1px solid #78cce7',borderRadius:7,color:'#fff',padding:'6px 10px',textDecoration:'none',fontWeight:800}}>Open approved-only picker</a>
+   <a href="/academic/grade910-signoffs" style={{border:'1px solid #b6d0df',borderRadius:7,color:'#fff',padding:'6px 10px',textDecoration:'none'}}>Principal: upload your own signature</a>
+   <span style={{opacity:.85}}>Teacher signatures remain pending by school choice. A Principal signature alone does not publish an unreviewed question.</span>
    <span style={{opacity:.85}}>Only server-verified source and answer revisions are eligible for certified publication. Existing manual-paper editing/printing remains a separate workflow.</span>
+   {isUserAuthoredPaper&&<>
+     <label style={{display:'flex',gap:5,alignItems:'center'}}>Section
+       <input aria-label="Verified picker section" value={verifiedPickerSection}
+        onChange={e=>setVerifiedPickerSection(e.target.value)} maxLength={50}
+        style={{width:95,padding:'6px',borderRadius:6,border:'1px solid #77b4cc'}} />
+     </label>
+     <button type="button" data-verified-import-load onClick={loadApprovedGrade910}
+      style={{border:'1px solid #80dcf3',borderRadius:6,background:'#146092',padding:'7px 11px',color:'#fff',cursor:'pointer'}}>Load certified revisions</button>
+     {verifiedPickerStatus&&<span role="status">{verifiedPickerStatus}</span>}
+     {verifiedPickerRows.map(r=><button key={r.originalQuestionId+':'+r.revision} type="button" data-verified-import-add
+      onClick={()=>importApprovedGrade910(r)} style={{border:'1px solid #80dcf3',borderRadius:6,padding:'7px 9px',background:'#143d50',color:'white',cursor:'pointer'}}>
+      Add {r.originalQuestionId} · Rev {r.revision}
+     </button>)}
+   </>}
+   {paper.grade910Verified?.refs?.length>0&&<span role="status" style={{border:'1px solid #77b4cc',borderRadius:6,padding:5}}>
+    Verified refs: {paper.grade910Verified.refs.length} · Reopen: {verifiedReopenStatus}. Save/Print always recheck server.
+   </span>}
+
  </div>
  <div data-paper-controls style={{ background:'var(--pg-toolbar, rgba(7,25,48,0.97))', backdropFilter:blur, borderBottom:`1px solid ${D.border}`, padding:'12px 20px', flexShrink:0 }}>
  <div style={{ display:'flex', gap:8, marginBottom:12, flexWrap:'wrap', alignItems:'center' }}>

@@ -7,6 +7,8 @@ const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId, tenantClause } = require('../middleware/tenant')
 const { createPrintJobBinding, printJobTransition, buildStudentSafeProjection, buildStaffAnswerKeyProjection, sha256 } = require('../services/assessmentPrintJobs')
 
+const {verifyDocument:verifyGrade910Paper}=require('../services/grade910PaperWorkspaceVerification')
+
 const canAuthorAssessments = requireRoles('super_admin', 'admin', 'school_admin', 'principal', 'teacher')
 
 function stable(value) {
@@ -21,6 +23,13 @@ function hashDocument(document) {
   return crypto.createHash('sha256').update(JSON.stringify(stable(document)), 'utf8').digest('hex')
 }
 
+function verifiedBlockResponse(res,error){
+ if(typeof error?.code==='string'&&error.code.startsWith('VERIFIED_')){
+  return res.status(error.status||409).json({success:false,code:error.code,
+   message:'Academic verified revision authorization failed; stored school paper preserved.'})
+ }
+ return null
+}
 function safePublicId(value) {
   const id = String(value || '').trim()
   if (!id || id.length > 220 || !/^[A-Za-z0-9._:-]+$/.test(id)) return null
@@ -41,6 +50,28 @@ function schoolIdForRequest(req, body = {}) {
   return null
 }
 
+async function reverifyGrade910ReleasedPaper(client,schoolId,paperId,releaseId,req){
+ if(!releaseId)return
+ const result=await client.query(
+  'SELECT snapshot_json FROM assessment_releases WHERE school_id=$1 AND paper_id=$2 AND release_id=$3 LIMIT 1',
+  [schoolId,paperId,releaseId]
+ )
+ if(!result.rows.length)return
+ const snapshot=result.rows[0].snapshot_json
+ if(snapshot?.grade910Verified)
+  await verifyGrade910Paper({document:snapshot,schoolId,
+   actorId:Number(req.user?.id),actorRole:req.user?.role,client})
+}
+
+async function reverifyGrade910PrintJob(client,schoolId,jobId,req){
+ const result=await client.query(
+  `SELECT ar.snapshot_json FROM assessment_print_jobs j
+   JOIN assessment_releases ar ON ar.school_id=j.school_id AND ar.release_id=j.release_id
+   WHERE j.school_id=$1 AND j.print_job_id=$2 LIMIT 1`,[schoolId,jobId])
+ if(result.rows[0]?.snapshot_json?.grade910Verified)
+  await verifyGrade910Paper({document:result.rows[0].snapshot_json,schoolId,
+    actorId:Number(req.user?.id),actorRole:req.user?.role,client})
+}
 function validatePaperDocument(document) {
   if (!document || typeof document !== 'object') return 'document must be an object'
   if (document.format !== 'assps-canonical-paper') return 'document.format must be assps-canonical-paper'
@@ -114,10 +145,35 @@ router.get('/papers/:paperId', async (req, res) => {
       [schoolId, publicId]
     )
     if (!result.rowCount) return res.status(404).json({ success:false, message:'Assessment paper not found.' })
+    if(result.rows[0]?.document_json?.grade910Verified){
+      await withTenantTransaction(req,schoolId,client=>verifyGrade910Paper({
+       document:result.rows[0].document_json,schoolId,actorId:Number(req.user?.id),
+       actorRole:req.user?.role,client
+      }))
+    }
     return res.json({ success:true, data:result.rows[0] })
   } catch (error) {
+    const verifiedBlocked=verifiedBlockResponse(res,error)
+    if(verifiedBlocked)return verifiedBlocked
     console.error('Assessment Studio read error:', error.message)
     return res.status(500).json({ success:false, message:'Could not read assessment paper.' })
+  }
+})
+
+router.post('/verify-grade910-paper',async(req,res)=>{
+  const schoolId=schoolIdForRequest(req)
+  const document=req.body?.document
+  if(!schoolId||!document?.grade910Verified)
+   return res.status(422).json({success:false,code:'VERIFIED_PAPER_DOCUMENT_REQUIRED'})
+  try{
+   const data=await withTenantTransaction(req,schoolId,client=>verifyGrade910Paper({
+    document,schoolId,actorId:Number(req.user?.id),actorRole:req.user?.role,client
+   }))
+   res.set('Cache-Control','no-store')
+   res.json({success:true,certificateStatus:'REVISION_REVALIDATED_NOT_INSTITUTIONAL_RELEASE',data})
+  }catch(e){
+   const status=Number(e.status)||(e.code?.startsWith('VERIFIED_')?409:503)
+   res.status(status).json({success:false,code:e.code||'VERIFIED_AUTHORITY_NOT_AVAILABLE'})
   }
 })
 
@@ -154,6 +210,9 @@ router.post('/papers/:paperId/revisions', async (req, res) => {
         return { conflict:true, currentRevision:Number(paper.current_revision) }
       }
 
+      if(document.grade910Verified)await verifyGrade910Paper({
+       document,schoolId,actorId:Number(req.user?.id),actorRole:req.user?.role,client
+      })
       const nextRevision = expectedRevision + 1
       const contentHash = hashDocument(document)
       await client.query(
@@ -176,6 +235,8 @@ router.post('/papers/:paperId/revisions', async (req, res) => {
     }
     return res.status(201).json({ success:true, data })
   } catch (error) {
+    const verifiedBlocked=verifiedBlockResponse(res,error)
+    if(verifiedBlocked)return verifiedBlocked
     console.error('Assessment Studio revision save error:', error.message)
     return res.status(500).json({ success:false, message:'Could not save assessment revision.' })
   }
@@ -207,6 +268,9 @@ router.post('/papers/:paperId/releases', async (req, res) => {
       )).rows[0]
       if (!revision) throw new Error('Current paper revision is missing.')
 
+      if(revision.document_json?.grade910Verified)
+       await verifyGrade910Paper({document:revision.document_json,schoolId,
+        actorId:Number(req.user?.id),actorRole:req.user?.role,client})
       const serverHash = hashDocument(revision.document_json)
       if (serverHash !== revision.content_hash) throw new Error('Stored revision hash mismatch.')
       if (String(release.contentHash || '') !== serverHash) {
@@ -245,6 +309,8 @@ router.post('/papers/:paperId/releases', async (req, res) => {
     if (data.hashMismatch) return res.status(409).json({ success:false, code:'RELEASE_HASH_MISMATCH', serverHash:data.serverHash, message:'Release snapshot does not match the current server revision.' })
     return res.status(201).json({ success:true, data })
   } catch (error) {
+    const verifiedBlocked=verifiedBlockResponse(res,error)
+    if(verifiedBlocked)return verifiedBlocked
     console.error('Assessment Studio release error:', error.message)
     return res.status(500).json({ success:false, message:'Could not finalize assessment release.' })
   }
@@ -277,6 +343,7 @@ router.post('/papers/:paperId/print-jobs', async (req, res) => {
           [schoolId, parentPrintJobId, paper.id]
         )).rows[0]
         if (!parent) return { missingParent:true }
+        await reverifyGrade910ReleasedPaper(client,schoolId,paper.id,parent.release_id,req)
         const inserted = (await client.query(
           `INSERT INTO assessment_print_jobs
             (school_id,print_job_id,release_id,roster_snapshot_id,binding_snapshot_json,render_settings_json,copy_count,personalized,duplex,student_boundary_policy,reprint_mode,parent_print_job_id,status,attempt_count,created_by_key)
@@ -307,6 +374,7 @@ router.post('/papers/:paperId/print-jobs', async (req, res) => {
         const parent = (await client.query(`SELECT 1 FROM assessment_print_jobs WHERE school_id=$1 AND print_job_id=$2 LIMIT 1`, [schoolId,binding.parentPrintJobId])).rows[0]
         if (!parent) return { missingParent:true }
       }
+      await reverifyGrade910ReleasedPaper(client,schoolId,paper.id,binding.releaseId,req)
       const release = (await client.query(
         `SELECT ar.release_id FROM assessment_releases ar
            WHERE ar.school_id=$1 AND ar.paper_id=$2 AND ar.release_id=$3 LIMIT 1`,
@@ -340,6 +408,8 @@ router.post('/papers/:paperId/print-jobs', async (req, res) => {
     if (data.invalid) return res.status(400).json({ success:false, message:data.invalid })
     return res.status(201).json({ success:true, data })
   } catch (error) {
+    const verifiedBlocked=verifiedBlockResponse(res,error)
+    if(verifiedBlocked)return verifiedBlocked
     if (error?.code === '23505') return res.status(409).json({ success:false, message:'Print job id already exists.' })
     console.error('Assessment Studio print job create error:', error.message)
     return res.status(500).json({ success:false, message:'Could not create print job.' })
@@ -353,6 +423,8 @@ router.get('/print-jobs/:printJobId', async (req, res) => {
     if (!printJobId) return res.status(400).json({ success:false, message:'Invalid print job id.' })
     if (!schoolId) return res.status(400).json({ success:false, message:'School context required.' })
     await tenantClause(req, { table:'assessment_print_jobs' })
+    await withTenantTransaction(req,schoolId,client=>reverifyGrade910PrintJob(client,schoolId,printJobId,req))
+
     const result = await query(
       `SELECT j.print_job_id,j.release_id,j.copy_count,j.personalized,j.duplex,j.student_boundary_policy,j.reprint_mode,j.parent_print_job_id,j.status,j.attempt_count,j.last_error,j.created_at,j.updated_at,
               r.snapshot_id AS roster_snapshot_id,r.student_count,r.roster_hash,r.context_json AS roster_context
@@ -364,6 +436,8 @@ router.get('/print-jobs/:printJobId', async (req, res) => {
     if (!result.rowCount) return res.status(404).json({ success:false, message:'Print job not found.' })
     return res.json({ success:true, data:result.rows[0] })
   } catch (error) {
+    const verifiedBlocked=verifiedBlockResponse(res,error)
+    if(verifiedBlocked)return verifiedBlocked
     console.error('Assessment Studio print job read error:', error.message)
     return res.status(500).json({ success:false, message:'Could not read print job.' })
   }
@@ -379,6 +453,7 @@ router.patch('/print-jobs/:printJobId/status', async (req, res) => {
     const data = await withTenantTransaction(req, schoolId, async client => {
       const current = (await client.query(`SELECT status,attempt_count FROM assessment_print_jobs WHERE school_id=$1 AND print_job_id=$2 FOR UPDATE`,[schoolId,printJobId])).rows[0]
       if (!current) return { missing:true }
+      if(target!=='FAILED')await reverifyGrade910PrintJob(client,schoolId,printJobId,req)
       let transition
       try { transition = printJobTransition(current.status,target,current.attempt_count) }
       catch (error) { return { invalid:error.message, currentStatus:current.status } }
@@ -420,6 +495,10 @@ router.get('/print-jobs/:printJobId/student-projection/:studentId', async (req, 
         [schoolId, printJobId]
       )).rows[0]
       if (!row) return { missing:true }
+      if(row.snapshot_json?.grade910Verified)
+       await verifyGrade910Paper({document:row.snapshot_json,schoolId,actorId:Number(req.user?.id),
+        actorRole:req.user?.role,client})
+
       if (!row.personalized || !row.students_json) return { notPersonalized:true }
       if (sha256(row.snapshot_json || {}) !== String(row.content_hash || '')) return { releaseHashMismatch:true }
       const rosterEnvelope = { context: row.context_json || {}, students: row.students_json || [] }
@@ -474,6 +553,10 @@ router.get('/print-jobs/:printJobId/answer-key', async (req, res) => {
         [schoolId, printJobId]
       )).rows[0]
       if (!row) return { missing:true }
+      if(row.snapshot_json?.grade910Verified)
+       await verifyGrade910Paper({document:row.snapshot_json,schoolId,actorId:Number(req.user?.id),
+        actorRole:req.user?.role,client})
+
       if (sha256(row.snapshot_json || {}) !== String(row.content_hash || '')) return { releaseHashMismatch:true }
       return { projection:buildStaffAnswerKeyProjection(row.snapshot_json || {}, { role:req.user?.role }) }
     })
@@ -505,8 +588,15 @@ router.get('/papers/:paperId/releases/latest', async (req, res) => {
       [schoolId, publicId]
     )
     if (!result.rowCount) return res.status(404).json({ success:false, message:'No release found.' })
+    if(result.rows[0]?.snapshot_json?.grade910Verified)
+      await withTenantTransaction(req,schoolId,client=>verifyGrade910Paper({
+       document:result.rows[0].snapshot_json,schoolId,actorId:Number(req.user?.id),
+       actorRole:req.user?.role,client
+      }))
     return res.json({ success:true, data:result.rows[0] })
   } catch (error) {
+    const verifiedBlocked=verifiedBlockResponse(res,error)
+    if(verifiedBlocked)return verifiedBlocked
     console.error('Assessment Studio release read error:', error.message)
     return res.status(500).json({ success:false, message:'Could not read assessment release.' })
   }
