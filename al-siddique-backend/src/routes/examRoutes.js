@@ -390,21 +390,65 @@ router.post('/results', protect, canWriteMarks, async (req, res) => {
       }
     }
 
+    // A result is an academic record, not a mutable scratchpad. A normal
+    // teacher/admin save may insert a new score or repeat the exact same save,
+    // but it must never inflate an already saved score to force a pass.
+    // Any real change requires a separate Principal-reviewed revision with
+    // an immutable previous/new value audit trail, not this bulk POST.
+    const keys = normalized.map(row => `${row.examId}|${row.studentId}|${row.subject}`)
+    if (new Set(keys).size !== keys.length) {
+      await client.query('ROLLBACK')
+      return res.status(422).json({success:false,code:'DUPLICATE_MARKS_ROW'})
+    }
+    const existing = await client.query(`
+      WITH requested (exam_id,student_id,subject) AS (
+        SELECT * FROM UNNEST($2::int[], $3::int[], $4::text[])
+      )
+      SELECT er.exam_id,er.student_id,er.subject,er.marks_obtained,
+        er.total_marks,er.grade,er.result_status
+      FROM exam_results er
+      JOIN requested r ON r.exam_id=er.exam_id
+        AND r.student_id=er.student_id AND r.subject=er.subject
+      WHERE er.school_id=$1
+      FOR UPDATE OF er
+    `,[schoolId,normalized.map(row=>row.examId),normalized.map(row=>row.studentId),normalized.map(row=>row.subject)])
+    const prior = new Map(existing.rows.map(row=>[
+      `${row.exam_id}|${row.student_id}|${row.subject}`,row,
+    ]))
+    const sameScore = (oldRow,newRow) =>
+      (oldRow.marks_obtained === null ? newRow.marksObtained === null : Number(oldRow.marks_obtained) === newRow.marksObtained) &&
+      Number(oldRow.total_marks) === newRow.totalMarks &&
+      (oldRow.grade ?? null) === (newRow.grade ?? null) &&
+      (oldRow.result_status ?? 'SCORED') === newRow.resultStatus
+    for(const row of normalized) {
+      const key=`${row.examId}|${row.studentId}|${row.subject}`
+      const before=prior.get(key)
+      if(before && !sameScore(before,row)) {
+        await client.query('ROLLBACK')
+        return res.status(409).json({success:false,code:'OFFICIAL_MARKS_REVISION_REQUIRED',
+          message:'Previously saved marks cannot be changed without an audited Principal revision.'})
+      }
+    }
+    let insertedCount=0
     for (const row of normalized) {
-      await client.query(`
+      const key=`${row.examId}|${row.studentId}|${row.subject}`
+      if(prior.has(key)) continue // Exact replay; do not alter DB row or timestamp.
+      const inserted=await client.query(`
         INSERT INTO exam_results (school_id, exam_id, student_id, subject, marks_obtained, total_marks, grade, result_status)
         VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
-        ON CONFLICT (exam_id, student_id, subject)
-        DO UPDATE SET
-          school_id = EXCLUDED.school_id,
-          marks_obtained = EXCLUDED.marks_obtained,
-          total_marks = EXCLUDED.total_marks,
-          grade = EXCLUDED.grade,
-          result_status = EXCLUDED.result_status
-      `, [schoolId, row.examId, row.studentId, row.subject, row.marksObtained, row.totalMarks, row.grade, row.resultStatus])
+        ON CONFLICT (exam_id, student_id, subject) DO NOTHING
+        RETURNING id
+      `,[schoolId,row.examId,row.studentId,row.subject,row.marksObtained,row.totalMarks,row.grade,row.resultStatus])
+      // Concurrent insert: fail the whole transaction instead of overwriting.
+      if(inserted.rowCount!==1) {
+        await client.query('ROLLBACK')
+        return res.status(409).json({success:false,code:'OFFICIAL_MARKS_WRITE_CONFLICT'})
+      }
+      insertedCount++
     }
     await client.query('COMMIT')
-    return res.json({ success: true, savedCount: normalized.length, message: 'Results saved successfully.' })
+    return res.json({success:true,savedCount:normalized.length,insertedCount,
+      unchangedCount:normalized.length-insertedCount,message:'Results accepted without rewriting prior marks.'})
   } catch (err) {
     await client.query('ROLLBACK').catch(() => {})
     console.error('Exam result save error:', err.message)

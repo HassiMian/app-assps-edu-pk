@@ -16,6 +16,8 @@ test('actual examRoutes enforces assignment scoped reads and transactional write
   let publishedOfferings=[{exam_id:9,school_id:21,class_name:'One',section:'A',subject:'English',total_marks:100,is_active:true,approval_status:'approved',approval_revision:1,approved_by_user_id:90,approved_at:'2026-10-13T17:00:00Z',reviewer_valid:true}]
   const exams=[{id:9,class:'All Classes'}]
   const transaction={writes:0,commits:0,rollbacks:0}
+  let existingRecords=[]
+  let simulateConcurrentInsert=false
   const client={
     async query(sql,params=[]){
       queries.push({sql:String(sql),params})
@@ -23,7 +25,11 @@ test('actual examRoutes enforces assignment scoped reads and transactional write
       if (sql.includes('FROM exam_subjects'))return {rows:publishedOfferings}
       if (sql.includes('FROM students WHERE school_id'))return {rows:students}
       if (sql.includes('FROM exams WHERE school_id'))return {rows:exams}
-      if (sql.includes('INSERT INTO exam_results')) {transaction.writes++;return {rowCount:1}}
+      if (sql.includes('FROM exam_results er') && sql.includes('FOR UPDATE OF er'))return {rows:existingRecords}
+      if (sql.includes('INSERT INTO exam_results')) {
+        if(simulateConcurrentInsert)return {rowCount:0}
+        transaction.writes++;return {rowCount:1}
+      }
       if (sql==='COMMIT') transaction.commits++
       if (sql==='ROLLBACK') transaction.rollbacks++
       return {rows:[],rowCount:0}
@@ -133,6 +139,38 @@ test('actual examRoutes enforces assignment scoped reads and transactional write
   assert.equal(transaction.writes,1)
   assert.equal(transaction.commits,1)
   console.log('REAL_EXPRESS_HTTP_PASS assigned teacher authorized mark committed')
+  // Actual HTTP replay does NOT overwrite saved marks or change timestamps.
+  const firstInsert=queries.find(q=>q.sql.includes('INSERT INTO exam_results'))
+  const [savedSchool,savedExam,savedStudent,savedSubject,savedMark,savedTotal,savedGrade,savedStatus]=firstInsert.params
+  assert.equal(savedSchool,21)
+  existingRecords=[{exam_id:savedExam,student_id:savedStudent,subject:savedSubject,
+    marks_obtained:savedMark,total_marks:savedTotal,grade:savedGrade,result_status:savedStatus}]
+  reply=await request('POST','/api/exams/results',payload)
+  assert.equal(reply.status,200,JSON.stringify(reply))
+  assert.equal(reply.data.insertedCount,0)
+  assert.equal(reply.data.unchangedCount,1)
+  assert.equal(transaction.writes,1,'identical save must not update a saved row')
+
+  // Changed score, same teacher and assignment: requires separate reviewed revision.
+  reply=await request('POST','/api/exams/results',{results:[{...payload.results[0],marks_obtained:99}]})
+  assert.equal(reply.status,409,JSON.stringify(reply))
+  assert.equal(reply.data.code,'OFFICIAL_MARKS_REVISION_REQUIRED')
+  assert.equal(transaction.writes,1,'grade-inflating overwrite must be denied')
+
+  reply=await request('POST','/api/exams/results',{results:[payload.results[0],payload.results[0]]})
+  assert.equal(reply.status,422,'same student/exam/subject cannot appear twice in a batch')
+  assert.equal(reply.data.code,'DUPLICATE_MARKS_ROW')
+  assert.equal(transaction.writes,1)
+
+  // Concurrent insert must reject rather than replace the other actor's row.
+  existingRecords=[];simulateConcurrentInsert=true
+  reply=await request('POST','/api/exams/results',payload)
+  assert.equal(reply.status,409)
+  assert.equal(reply.data.code,'OFFICIAL_MARKS_WRITE_CONFLICT')
+  assert.equal(transaction.writes,1)
+  simulateConcurrentInsert=false
+  console.log('REAL_EXPRESS_HTTP_PASS immutable saved score + idempotent retry + race rollback')
+
   // Official maximum is not the general exam maximum; no guessed paper limit.
   let beforeProtected=transaction.writes
   reply=await request('POST','/api/exams/results',{results:[{...payload.results[0],marks_obtained:24,total_marks:25}]})
