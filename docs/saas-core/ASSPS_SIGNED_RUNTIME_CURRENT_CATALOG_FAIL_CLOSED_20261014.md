@@ -79,3 +79,23 @@ python3 ops/release/signed-bluegreen/audit-current-signed-catalog-20261014.py
 
 Exit 2/HOLD on the live checker is expected until catalog risks are
 resolved, and **a diagnostic PASS is never a production release receipt**.
+
+## Source integration — fail-closed Core release runner
+
+The isolated branch also integrates the new read-only verifier into
+ops/release/exam9-status-20261013/run_integrated_release_mission_20261014.py
+as a **new mandatory gate**:
+signed_runtime_catalog_unscoped_grants_cleared.
+
+This gate defaults FALSE for missing/failed catalog output and cannot be
+satisfied by a synthetic Principal signature or an existing Ed25519
+receipt alone. The integrated runner requires the signed runtime catalog
+to be independently safe IN ADDITION to all previous eleven Core gates,
+genuine staff identity and authentic institutional evidence.
+
+Updated release-unit fixtures cover both success and fail-closed paths:
+even when older fixture approvals and receipt markers are set TRUE,
+a fixture with an unsafe unforced AI table must return HOLD.
+This is a source-only defense-in-depth implementation on an isolated
+branch; SaaS Core must review/forward-port it before promoting ANY
+production release. No live schema, permissions or service changed.
