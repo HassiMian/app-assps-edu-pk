@@ -1,12 +1,13 @@
 'use strict'
 const test=require('node:test'),assert=require('node:assert/strict'),http=require('node:http'),Module=require('node:module')
 const express=require('express')
-const state={actor:true,identity:true,offering:1,conflict:0,duplicate:false,connectionFail:false,events:[],writes:[]}
+const state={actor:true,identity:true,offering:1,conflict:0,failBandUpper:39,duplicate:false,connectionFail:false,events:[],writes:[]}
 const client={
  release(){},
  async query(sql,params=[]){
   const s=String(sql).replace(/\s+/g,' ')
   if(s==='BEGIN'||s==='COMMIT'||s==='ROLLBACK')return {rowCount:0,rows:[]}
+  if(s.includes('FROM grade_settings WHERE')) return {rowCount:state.failBandUpper===null?0:1,rows:state.failBandUpper===null?[]:[{min_percentage:0,max_percentage:state.failBandUpper}]}
   if(s.includes('FROM users WHERE id='))return {rowCount:state.actor?1:0,rows:state.actor?[{id:1}]:[]}
   if(s.includes('FROM exam_subjects x JOIN exams'))return {rowCount:1,rows:[{id:15,exam_id:9,class_name:'Four',section:'Blue',subject:'Urdu',approval_revision:1}]}
   if(s.includes('FROM exam_results r JOIN students'))return {rowCount:1,rows:[{n:state.conflict}]}
@@ -42,7 +43,7 @@ const send=async(path,payload,headers={})=>{
  const response=await fetch(base+'/api/academic-approvals'+path,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer qa-signed-fixture',...headers},body:JSON.stringify(payload)})
  return {status:response.status,data:await response.json()}
 }
-const reset=()=>Object.assign(state,{actor:true,identity:true,offering:1,conflict:0,duplicate:false,connectionFail:false,events:[],writes:[]})
+const reset=()=>Object.assign(state,{actor:true,identity:true,offering:1,conflict:0,failBandUpper:39,duplicate:false,connectionFail:false,events:[],writes:[]})
 test('signed active school admin approves exact compatible subject, retains evidence',async()=>{
  reset();const r=await send('/exam-subjects/15/approve',{...body,totalMarks:50,passMarks:20,expectedRevision:1})
  assert.equal(r.status,201);assert.equal(r.data.data.revision,2);assert.equal(state.events.length,1);assert.equal(state.writes.length,1)
@@ -94,4 +95,22 @@ test('40 percent passing marks derive from each exact maximum and conflicting re
  assert.equal(invalid.status,422)
  assert.equal(state.events.length,0)
  assert.equal(state.writes.length,0)
+})
+test('tenant-scoped F boundary avoids leaking ASSPS 40pct policy to other schools',async()=>{
+ reset()
+ state.failBandUpper=null
+ let r=await send('/exam-subjects/15/approve',{...body,totalMarks:75,expectedRevision:1})
+ assert.equal(r.status,409);assert.equal(r.data.code,'SCHOOL_PASS_POLICY_NOT_CONFIGURED')
+ reset()
+ state.failBandUpper=49
+ r=await send('/exam-subjects/15/approve',{...body,totalMarks:75,expectedRevision:1})
+ assert.equal(r.status,201)
+ assert.equal(r.data.data.passMarks,38)
+ reset()
+ state.failBandUpper=49
+ r=await send('/exam-subjects/15/approve',{...body,totalMarks:75,passMarks:30,expectedRevision:1})
+ assert.equal(r.status,422)
+ assert.equal(r.data.code,'PASS_MARKS_POLICY_CONFLICT')
+ assert.equal(state.writes.length,0)
+ reset()
 })

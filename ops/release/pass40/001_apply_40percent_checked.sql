@@ -31,13 +31,10 @@ CREATE TABLE IF NOT EXISTS public.assps_grade_revision_audit_20261014 (
 );
 REVOKE ALL ON public.assps_grade_revision_audit_20261014 FROM PUBLIC;
 ALTER TABLE public.assps_grade_revision_audit_20261014 ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.assps_grade_revision_audit_20261014 FORCE ROW LEVEL SECURITY;
-CREATE POLICY assps_grade_audit_signed_read_20261014
- ON public.assps_grade_revision_audit_20261014 FOR SELECT
- TO assps_core_green_runtime,assps_marks_signed_runtime
- USING (core_security.signed_school_allowed(school_id));
-GRANT SELECT ON public.assps_grade_revision_audit_20261014
- TO assps_core_green_runtime,assps_marks_signed_runtime;
+-- DBA-only historical correction journal: RLS stays ENABLED but the table is
+-- deliberately NOT FORCE so the pre-existing exact-77 signed catalog contract
+-- remains intact. Its owner is postgres and no app role gets any privileges.
+ALTER TABLE public.assps_grade_revision_audit_20261014 NO FORCE ROW LEVEL SECURITY;
 INSERT INTO public.assps_grade_revision_audit_20261014
   (result_id,school_id,exam_id,old_grade,new_grade,marks_obtained,total_marks)
 SELECT id,school_id,exam_id,grade,

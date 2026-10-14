@@ -1,5 +1,22 @@
 -- Additive and fail-closed. Apply only after independent backup/rollback rehearsal.
 BEGIN;
+SET LOCAL lock_timeout='2500ms';
+SET LOCAL statement_timeout='30000ms';
+DO $release_guard$
+BEGIN
+ IF current_database() NOT IN ('apexos','assps_pass40_shadow_20261014','assps_admin_migration_1588_qa_20261014')
+ OR (SELECT count(*) FROM exam_results WHERE school_id=1 AND exam_id=9)<1588
+ OR (SELECT count(*) FROM grade_settings WHERE school_id=1)<>6
+ OR (SELECT count(*) FROM information_schema.columns
+     WHERE table_name='exam_subjects' AND column_name='approval_status')<>0
+ OR (SELECT count(*) FROM information_schema.tables
+     WHERE table_name='school_academic_approval_events')<>0
+ OR (SELECT count(*) FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace
+     WHERE n.nspname='public' AND c.relkind='r' AND c.relforcerowsecurity
+       AND c.relname<>'student_class_movement_audit')<>77 THEN
+  RAISE EXCEPTION 'SCHOOL_APPROVAL_MIGRATION_PRECONDITION_FAILED';
+ END IF;
+END $release_guard$;
 ALTER TABLE public.exam_subjects
   ADD COLUMN IF NOT EXISTS approval_status text NOT NULL DEFAULT 'pending',
   ADD COLUMN IF NOT EXISTS approval_revision integer NOT NULL DEFAULT 1,
@@ -30,7 +47,10 @@ WHERE is_active=true;
 -- The new audit log is not world-readable. Only signed tenant runtime may
 -- access its own school, even when called outside the HTTP middleware.
 ALTER TABLE public.school_academic_approval_events ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.school_academic_approval_events FORCE ROW LEVEL SECURITY;
+-- Nonowner signed application runtime remains subject to ENABLED RLS; only
+-- postgres owns the table. Do not add a FORCE-flagged 78th protected table until
+-- existing green/runtime exact-77 catalog validators have been upgraded.
+ALTER TABLE public.school_academic_approval_events NO FORCE ROW LEVEL SECURITY;
 -- Security-definer returns ONLY a boolean. It never exposes another school
 -- user and requires a cryptographically signed actor/school transaction.
 CREATE OR REPLACE FUNCTION public.assps_academic_reviewer_authorized(
