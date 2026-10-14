@@ -39,6 +39,13 @@ await page.route('**/api/lesson-plans/planner/**',async route=>{
  const request=route.request(),url=request.url(),method=request.method()
  const reply=(data,status=200)=>route.fulfill({status,contentType:'application/json',
    headers:{'Access-Control-Allow-Origin':'*'},body:JSON.stringify(data)})
+ if(url.includes('/composer-review-readiness')){
+   return reply({success:true,data:{
+     releaseStatus:'HOLD',publishAllowed:false,
+     counts:{expected:2,privatelyStaged:stored.length,verifiedTeacherIdentity:0,
+       principalSourceInspections:0,academicPublications:0}
+   }})
+ }
  if(url.includes('/composer-review-classes'))return reply({success:true,data:stored})
  if(url.includes('/composer-review-preview'))return reply({success:true,data:{
    candidateCount:2,classes:[{className:'Starter'},{className:'Mover'}],published:false
@@ -77,6 +84,7 @@ await page.route('**/api/lesson-plans/planner/**',async route=>{
 try{
  await page.goto(base+'/composer-review-test.html',{waitUntil:'networkidle'})
  await page.getByRole('heading',{name:'Class-wise Second Term Syllabus Review'}).waitFor()
+ await page.getByText('Academic release readiness: HOLD — none of these sources are published').waitFor()
  await page.getByRole('button',{name:/Original Source Import/}).click()
  await page.locator('#composer-manifest').setInputFiles({name:'review.json',mimeType:'application/json',
    buffer:Buffer.from(JSON.stringify(manifest))})

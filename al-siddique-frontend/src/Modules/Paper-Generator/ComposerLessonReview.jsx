@@ -2,7 +2,7 @@ import {useCallback,useEffect,useMemo,useState} from 'react'
 import {BookOpen,FileInput,LockKeyhole,Printer,RefreshCw,Save,ShieldAlert} from 'lucide-react'
 import {
   appendComposerReviewCorrection,appendPrincipalSourceInspection,getComposerTeacherEvidence,getComposerReviewSource,importComposerReview,
-  listComposerReview,previewComposerReview
+  listComposerReview,getComposerReviewReadiness,previewComposerReview
 } from './lessonPlanClient'
 import {CLASS_ORDER,LABELS,classPrintHtml,classSubjectGroups,extractOriginalEvidence} from './composerReviewDomain'
 import './ComposerLessonReview.css'
@@ -54,6 +54,7 @@ function printGroups(popup,groups){
 }
 export default function ComposerLessonReview(){
  const [records,setRecords]=useState([])
+ const [readiness,setReadiness]=useState(null)
  const [manifest,setManifest]=useState(null)
  const [preview,setPreview]=useState(null)
  const [selectedClass,setSelectedClass]=useState('')
@@ -69,12 +70,16 @@ export default function ComposerLessonReview(){
  const fetchList=useCallback(async()=>{
    const data=await listComposerReview()
    setRecords(Array.isArray(data)?data:[])
+   const readinessData=await getComposerReviewReadiness().catch(()=>null)
+   setReadiness(readinessData)
    return data
  },[])
  useEffect(()=>{
    let live=true
    listComposerReview().then(data=>{if(live)setRecords(Array.isArray(data)?data:[])})
      .catch(error=>{if(live)setStatus(errorMessage(error))})
+   getComposerReviewReadiness().then(data=>{if(live)setReadiness(data)})
+     .catch(()=>{if(live)setReadiness(null)})
    return()=>{live=false}
  },[])
  const previewItems=useMemo(()=>manifest?.candidates?.map(c=>({
@@ -228,6 +233,13 @@ export default function ComposerLessonReview(){
        <p>Miss Adiba is the composer. Subject teachers and academic approval must be verified separately.</p></div>
      <span className="composer-status"><LockKeyhole size={15}/> PRIVATE · NOT PUBLISHED</span>
    </div>
+   {readiness&&<div className="composer-readiness" role="status" data-composer-readiness>
+     <strong>Academic release readiness: HOLD — none of these sources are published</strong>
+     <span>Groups privately staged: {readiness.counts?.privatelyStaged??0} / {readiness.counts?.expected??0}</span>
+     <span>Teacher identities verified: {readiness.counts?.verifiedTeacherIdentity??0}</span>
+     <span>Principal source inspections: {readiness.counts?.principalSourceInspections??0}</span>
+     <small>Review source and teacher evidence before requesting institutional publication approval.</small>
+   </div>}
    <div className="composer-toolbar">
      <button onClick={()=>setShowImport(v=>!v)}><FileInput size={15}/> Original Source Import</button>
      <button onClick={()=>fetchList().then(()=>setStatus('Current school-only review list reloaded.')).catch(error=>setProblem(errorMessage(error)))}><RefreshCw size={15}/> Reload Review</button>

@@ -102,4 +102,11 @@ test('source and class list are management-only',async()=>{
  r=await request('teacher',{},'/planner/composer-review-source/LPREVIEW-20261014-starter-english','GET')
  assert.equal(r.status,403)
 })
+test('composer readiness summary denies unauthenticated and teacher actors',async()=>{
+ let r=await request('',{},'/planner/composer-review-readiness','GET')
+ assert.equal(r.status,401)
+ r=await request('teacher',{},'/planner/composer-review-readiness','GET')
+ assert.equal(r.status,403)
+ assert.equal(r.body.code,'COMPOSER_READINESS_MANAGER_REQUIRED')
+})
 after(async()=>{if(server)await new Promise(resolve=>server.close(resolve))})

@@ -95,3 +95,7 @@ export async function appendPrincipalSourceInspection(id,expectedRevision,source
     expectedRevision:Number(expectedRevision),sourceDigest,declaration
   }))
 }
+
+export async function getComposerReviewReadiness() {
+  return unwrap(await api.get('/api/lesson-plans/planner/composer-review-readiness'))
+}

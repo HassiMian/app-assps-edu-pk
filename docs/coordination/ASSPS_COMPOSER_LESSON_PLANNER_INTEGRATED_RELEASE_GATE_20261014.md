@@ -13,3 +13,16 @@ RESTORE: Private custom dump of live lesson_plans SHA256 10ab9f8992988f0cbc7f72f
 FEATURE GATES: composer private import, proposed corrections and Principal source inspection remain OFF in deployed production. Genuine teacher assignment, academic/source adoption review, true staff HTTP/RLS acceptance, physical Urdu/A4 print, full regression and rollback remain mandatory.
 
 RELEASE DECISION: SOURCE READY FOR INTEGRATION REVIEW; PRODUCTION HOLD. Do not fabricate staff signatures, teacher roles, or academic approvals.
+
+
+## Follow-up mission — release-readiness dashboard and source re-attestation
+
+The new manager-only, tenant-bound GET `/api/lesson-plans/planner/composer-review-readiness` returns a fail-closed 59-source academic checklist. It does **not** return WhatsApp verbatim excerpts, does not assign teachers, does not initiate an approval, and does not publish. The UI shows total private imports, missing sources, verified teacher evidence and Principal inspection receipts with an explicit HOLD label.
+
+The readiness service recomputes each stored record's original source digest from exact SHA256 of each source and original WhatsApp excerpt line triples. It compares those to the separately pinned 59-candidate source hashes. A database-side modification of the original Urdu/English excerpts is detected and marked NOT VERIFIED, even if the stored declared digest was not changed. An unregistered or cross-school candidate cannot be admitted into the verified matrix. All 59 untouched private source candidate digests were independently recomputed and matched the originals.
+
+Independent approval remains a hard requirement even if an active teacher identity, Principal inspection and textbook adoption become available. Genuine signed Principal HTTPS session, teacher assignments and student/parent publication approval are not synthesized or granted. Feature flags for private import, correction proposal and source inspection remain OFF on production.
+
+Coordinator: Other ongoing APEX/Core workstream is investigating Next+Nginx login and six global PostgreSQL tables with separate QA-only migrations. Never apply those experimental SQL scripts or overwrite the owner's worktree. Integrate only clean, verified source-only release gates onto the latest appropriate canonical ancestry, test the result, and preserve all Exam9 marks including numeric-zero vs blank.
+
+Acceptance: source-unit tests, negative HTTP actor tests, isolated Chromium source browse/print, frontend build and source-only Core release gate. These cannot replace genuine live signed RLS/HTTP or institutional academic approvals.

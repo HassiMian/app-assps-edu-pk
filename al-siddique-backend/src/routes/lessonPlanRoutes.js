@@ -11,6 +11,7 @@ const { prepareReviewBatch } = require('../services/lessonComposerIntake')
 const { persistReviewBatch, listReviewGroups, readReviewSource } = require('../services/lessonComposerReviewStore')
 const {appendCorrection} = require('../services/lessonComposerCorrection')
 const {teacherAssignmentEvidence,appendPrincipalEvidenceReview} = require('../services/lessonComposerPrincipalEvidence')
+const {lessonComposerReadiness}=require('../services/lessonComposerReadiness')
 const { buildDeterministicPlan, enhancePlanWithAi, parseSmartPlanningText, parseIsoDate, MAX_RANGE_DAYS } = require('../services/lessonPlanningEngine')
 
 const canManageLessonPlans = requireRoles('super_admin', 'admin', 'school_admin', 'principal', 'teacher')
@@ -260,6 +261,25 @@ router.post('/planner/composer-review-principal-inspection/:id',async(req,res)=>
     if(error.code)return res.status(Number(error.status||422)).json({success:false,code:error.code})
     console.error('Principal evidence review error',error)
     return res.status(500).json({success:false,code:'PRINCIPAL_SOURCE_INSPECTION_FAILED'})
+  }
+})
+
+// Read-only class and subject readiness matrix for genuine institutional review.
+// No source text, teacher passwords, automatic approval or publication.
+router.get('/planner/composer-review-readiness',async(req,res)=>{
+  if(!isSchoolDocumentManager(req.user))
+    return res.status(403).json({success:false,code:'COMPOSER_READINESS_MANAGER_REQUIRED'})
+  try {
+    const schoolId=resolveSchoolId(req)
+    if(!schoolId)return res.status(403).json({success:false,code:'COMPOSER_READINESS_SCHOOL_REQUIRED'})
+    const data=await withTenantTransaction(req,schoolId,
+      client=>lessonComposerReadiness(client,schoolId))
+    res.set('Cache-Control','private, no-store')
+    return res.json({success:true,data,publicationAllowed:false})
+  }catch(error){
+    if(error.code)return res.status(Number(error.status||403)).json({success:false,code:error.code})
+    console.error('Composer readiness inspection failed',error?.code||'READINESS_QUERY_FAILED')
+    return res.status(503).json({success:false,code:'COMPOSER_READINESS_UNAVAILABLE'})
   }
 })
 
