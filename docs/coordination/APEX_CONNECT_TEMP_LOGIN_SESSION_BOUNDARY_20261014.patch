@@ -1,0 +1,161 @@
+From b231fa7808f512b0ea71d91572ba81dda88fe7c2 Mon Sep 17 00:00:00 2001
+From: root <root@srv1769723.hstgr.cloud>
+Date: Wed, 14 Oct 2026 14:49:22 +0000
+Subject: [PATCH] fix(connect): bind teacher login to verified session and
+ preserve temporary password challenge
+
+---
+ ...porary-login-session-boundary-20261014.cjs | 70 +++++++++++++++++++
+ src/components/LoginClient.tsx                | 42 ++++++++---
+ src/lib/server/auth-user.ts                   |  3 +-
+ 3 files changed, 105 insertions(+), 10 deletions(-)
+ create mode 100644 scripts/connect/test-temporary-login-session-boundary-20261014.cjs
+
+diff --git a/scripts/connect/test-temporary-login-session-boundary-20261014.cjs b/scripts/connect/test-temporary-login-session-boundary-20261014.cjs
+new file mode 100644
+index 0000000..fce2e4e
+--- /dev/null
++++ b/scripts/connect/test-temporary-login-session-boundary-20261014.cjs
+@@ -0,0 +1,70 @@
++'use strict';
++const assert = require('node:assert/strict');
++const fs = require('node:fs');
++const path = require('node:path');
++const vm = require('node:vm');
++const ts = require('typescript');
++
++const source = fs.readFileSync(path.join(__dirname, '../../src/lib/server/auth-user.ts'), 'utf8');
++const login = fs.readFileSync(path.join(__dirname, '../../src/components/LoginClient.tsx'), 'utf8');
++let tests = 0;
++function pass(label) { tests++; console.log('PASS ' + label); }
++function assertSourceOrder() {
++  const start = login.indexOf('if (data.success) {');
++  const temporary = login.indexOf('if (data.mustChangePassword)', start);
++  const verification = login.indexOf("fetchWithTimeout('/api/auth/me'", start);
++  const hydration = login.indexOf("contextLogin('', null, verifiedUser)", start);
++  assert(start >= 0 && temporary > start && verification > temporary && hydration > verification);
++  pass('temporary-password response cannot hydrate authenticated context');
++  assert(login.includes("String(verifiedUser.id) !== String(data.user?.id)") &&
++         login.includes('verifiedPortal !== responsePortal') &&
++         login.includes("verifiedPortal.startsWith('/login')"));
++  pass('login requires canonical signed user and role agreement');
++  assert(login.includes("!/^\\/auth\\/change-password\\?userId=\\d+$/.test(redirect)"));
++  pass('temporary password redirects restricted to local challenge URL');
++}
++
++function loadModule(data) {
++  const out = { exports: {} };
++  const mockDb = { queries: [], async query(sql,params) {
++    this.queries.push(String(sql));
++    return { rows: [data] };
++  }};
++  const mocks = {
++    'next/headers': { cookies: async () => ({get: name => name === 'authToken' ? {value:'qa-signed'} : name === 'userId' ? {value:'9901'} : undefined}) },
++    'jsonwebtoken': { verify: () => ({id:9901}) },
++    '@/lib/server/db': { getPool: () => mockDb },
++    '@/lib/server/env': { requireEnv: () => 'qa-only' }
++  };
++  const js = ts.transpileModule(source, {compilerOptions: {module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,esModuleInterop:true}}).outputText;
++  const sandbox = {module:out,exports:out.exports, require(name) {
++    assert(Object.hasOwn(mocks,name), 'unexpected dependency '+name);
++    return mocks[name];
++  }, String,Number,Boolean,Error};
++  vm.runInNewContext(js,sandbox,{filename:'auth-user.ts'});
++  return {getCurrentUser:out.exports.getCurrentUser, queries:mockDb.queries};
++}
++
++const base = {
++  id:9901,name:'Isolated QA Teacher',email:'qa@example.invalid',role:'teacher',
++  tenant_id:'tenant-qa',school_id:1,school_tenant_id:'tenant-qa',is_active:true,
++  school_name:'QA',tenant_name:'QA',tenant_type:'REAL',
++  branding_logo_url:null,branding_primary_color:null,branding_secondary_color:null
++};
++(async () => {
++  assertSourceOrder();
++  const temporary = loadModule({...base,must_change_password:true});
++  assert.equal(await temporary.getCurrentUser(),null);
++  assert(temporary.queries.length === 1 && /^SELECT\b/i.test(temporary.queries[0].trim()));
++  pass('reset-marked teacher JWT rejected without request-time DDL');
++  const complete = loadModule({...base,must_change_password:false});
++  const actor = await complete.getCurrentUser();
++  assert.equal(actor?.id,'9901');
++  assert.equal(actor?.role,'teacher');
++  assert.equal(actor?.tenantId,'tenant-qa');
++  pass('legitimate signed teacher read retains tenant and role');
++  const disabled = loadModule({...base,must_change_password:false,is_active:false});
++  assert.equal(await disabled.getCurrentUser(),null);
++  pass('disabled staff access remains denied');
++  console.log('CONNECT_TEMP_LOGIN_SESSION_BOUNDARY '+tests+'/'+tests+' PASS');
++})().catch(e => {console.error(e.stack);process.exitCode=2});
+diff --git a/src/components/LoginClient.tsx b/src/components/LoginClient.tsx
+index e357b35..7e75611 100644
+--- a/src/components/LoginClient.tsx
++++ b/src/components/LoginClient.tsx
+@@ -248,17 +248,41 @@ export default function LoginClient() {
+       }
+ 
+       if (data.success) {
+-        contextLogin(data.token || '', null, data.user);
+-        if (data.mustChangePassword && data.redirectTo) {
+-          window.location.replace(
+-            coerceConnectRedirect(String(data.redirectTo), data.user?.role, selectedRole || undefined)
+-          );
++        // A temporary-password challenge is NOT an authenticated portal session.
++        // Hydrating AuthContext here races its signed-session check and can bounce
++        // the browser back to the role chooser before the challenge is completed.
++        if (data.mustChangePassword) {
++          const redirect = String(data.redirectTo || '');
++          if (!/^\/auth\/change-password\?userId=\d+$/.test(redirect)) {
++            setError('Unable to start the secure password-change flow.');
++            setLoading(false);
++            return;
++          }
++          window.location.replace(redirect);
+           return;
+         }
+-        const portal = getConnectPortalPath(
+-          data.user?.role || selectedRole || "admin",
+-          selectedRole || undefined
+-        );
++
++        // Never navigate on a merely optimistic login payload. The next page
++        // requires the server-issued HttpOnly cookie, independently checked here.
++        const meRes = await fetchWithTimeout('/api/auth/me', {
++          method: 'GET',
++          credentials: 'include',
++          cache: 'no-store',
++        }, 8000);
++        const me = await meRes.json().catch(() => ({}));
++        const verifiedUser = me?.user;
++        const verifiedPortal = getConnectPortalPath(verifiedUser?.role);
++        const responsePortal = getConnectPortalPath(data.user?.role);
++        if (!meRes.ok || !me?.success || !verifiedUser?.id ||
++            String(verifiedUser.id) !== String(data.user?.id) ||
++            verifiedPortal.startsWith('/login') ||
++            verifiedPortal !== responsePortal) {
++          setError('Secure session could not be verified. Please try signing in again.');
++          setLoading(false);
++          return;
++        }
++        contextLogin('', null, verifiedUser);
++        const portal = verifiedPortal;
+         if (portal.startsWith("http")) {
+           window.location.replace(portal);
+         } else {
+diff --git a/src/lib/server/auth-user.ts b/src/lib/server/auth-user.ts
+index d337548..ea32b28 100644
+--- a/src/lib/server/auth-user.ts
++++ b/src/lib/server/auth-user.ts
+@@ -72,7 +72,8 @@ export async function getCurrentUser(): Promise<AuthUser | null> {
+   );
+ 
+   const row = result.rows[0];
+-  if (!row || !row.is_active) return null;
++  // A newly reset password revokes every older portal token immediately.
++  if (!row || !row.is_active || row.must_change_password) return null;
+ 
+   const normalizedRole = String(row.role || "").toLowerCase() === "super_admin"
+     ? "SAAS_ADMIN"
+-- 
+2.43.0
+
