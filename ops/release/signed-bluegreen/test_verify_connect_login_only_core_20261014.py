@@ -74,12 +74,41 @@ class LoginOnlyCoreFailClosed(unittest.TestCase):
             'complete_acl_restore_verified':True,
             'offsite_encrypted_copy_verified':True,
             'offsite_decryption_rehearsed':True,
-            'application_blue_restore_verified':True}
+            'application_blue_restore_verified':True,
+            'backup_sha256':M.APPROVED_BACKUP_SHA256,
+            'blue_archive_sha256':M.APPROVED_BLUE_ARCHIVE_SHA256}
         self.assertTrue(M.verify_signed_recovery_receipt(
-            {'receipts':[self.sign(receipt)]},self.pub,RID,SOURCE,BUILD,self.now))
+            {'receipts':[self.sign(receipt)]},self.pub,RID,SOURCE,BUILD,M.APPROVED_BACKUP_SHA256,M.APPROVED_BLUE_ARCHIVE_SHA256,self.now))
         self.assertFalse(M.verify_signed_recovery_receipt(
             {'receipts':[self.sign({**receipt,'offsite_decryption_rehearsed':False})]},
-            self.pub,RID,SOURCE,BUILD,self.now))
+            self.pub,RID,SOURCE,BUILD,M.APPROVED_BACKUP_SHA256,M.APPROVED_BLUE_ARCHIVE_SHA256,self.now))
+    def test_signed_recovery_cannot_be_reused_for_another_backup_or_blue_archive(self):
+        receipt={**self.common,'kind':'offhost_encrypted_recovery_certified',
+            'actor_role':'disaster_recovery_reviewer',
+            'backup_sha256':M.APPROVED_BACKUP_SHA256,
+            'blue_archive_sha256':M.APPROVED_BLUE_ARCHIVE_SHA256,
+            'backup_includes_all_current_marks':True,
+            'complete_acl_restore_verified':True,
+            'offsite_encrypted_copy_verified':True,
+            'offsite_decryption_rehearsed':True,
+            'application_blue_restore_verified':True}
+        evidence={'receipts':[self.sign(receipt)]}
+        self.assertFalse(M.verify_signed_recovery_receipt(
+          evidence,self.pub,RID,SOURCE,BUILD,'f'*64,M.APPROVED_BLUE_ARCHIVE_SHA256,self.now))
+        self.assertFalse(M.verify_signed_recovery_receipt(
+          evidence,self.pub,RID,SOURCE,BUILD,M.APPROVED_BACKUP_SHA256,'e'*64,self.now))
+        self.assertFalse(M.verify_signed_recovery_receipt(
+          evidence,self.pub,RID,SOURCE,BUILD,'bad-hex',M.APPROVED_BLUE_ARCHIVE_SHA256,self.now))
+    def test_signed_recovery_requires_correct_actual_file_binding_even_if_signature_valid(self):
+        receipt={**self.common,'kind':'offhost_encrypted_recovery_certified',
+            'actor_role':'disaster_recovery_reviewer',
+            'backup_sha256':'a'*64,'blue_archive_sha256':'b'*64,
+            'backup_includes_all_current_marks':True,'complete_acl_restore_verified':True,
+            'offsite_encrypted_copy_verified':True,'offsite_decryption_rehearsed':True,
+            'application_blue_restore_verified':True}
+        self.assertFalse(M.verify_signed_recovery_receipt(
+          {'receipts':[self.sign(receipt)]},self.pub,RID,SOURCE,BUILD,
+           M.APPROVED_BACKUP_SHA256,M.APPROVED_BLUE_ARCHIVE_SHA256,self.now))
     def test_six_table_current_catalog_holds(self):
         self.assertIn('production_signed_catalog_safe',
           M.evaluate({**self.facts,'catalog':'HOLD'},RID)['blocked'])

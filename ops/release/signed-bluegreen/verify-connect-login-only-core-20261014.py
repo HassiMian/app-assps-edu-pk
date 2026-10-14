@@ -18,8 +18,11 @@ from datetime import datetime, timezone, timedelta
 ROOT=Path(__file__).resolve().parents[3]
 TRUST=Path('/etc/assps/release-evidence-ed25519.pub')
 RECEIPTS=Path('/etc/assps/connect-login-precutover-core-receipts.json')
-BACKUP=Path('/root/assps-release-backups/connect-full-recovery-20261014T170713Z/apexos-full.dump')
-ROLLBACK=Path('/var/backups/apex-connect-build-XI7EvxpUMkKOxK5ByM2BH.tar.gz')
+BACKUP=Path('/root/assps-release-backups/offsite-staging-20261015/apexos-latest-fullacl.dump')
+ROLLBACK=Path('/root/assps-release-backups/core-login-blue-artifacts-20261014T1855Z/apex-connect-blue-and-nginx.tgz')
+APPROVED_BACKUP_SHA256='6c9bfb8b1c06680c4eca6852fd7a903e0349a9539d0d502b46b496ac390eb445'
+APPROVED_BLUE_ARCHIVE_SHA256='950f6c7449ae0f5ad4947518caf8bec8b40cad0126df8d951ab8766a721cfc7c'
+
 CATALOG=ROOT/'ops/release/signed-bluegreen/audit-current-signed-catalog-20261014.py'
 MARKS=ROOT/'ops/release/exam9-status-20261013/verify_exam9_active_roster_coverage_20261014.py'
 
@@ -113,9 +116,11 @@ def verify_signed_worker_receipt(bundle, key, release_id, source_sha, build_id, 
             continue
     return False
 
-def verify_signed_recovery_receipt(bundle, key, release_id, source_sha, build_id, now=None):
+def verify_signed_recovery_receipt(bundle, key, release_id, source_sha, build_id, backup_sha256, blue_archive_sha256, now=None):
     """Require independently signed off-VPS encrypted recovery and rollback."""
-    if key is None or not isinstance(bundle,dict):return False
+    if (key is None or not isinstance(bundle,dict) or
+        not re.fullmatch('[0-9a-f]{64}',backup_sha256 or '') or
+        not re.fullmatch('[0-9a-f]{64}',blue_archive_sha256 or '')):return False
     now=now or datetime.now(timezone.utc)
     for item in bundle.get('receipts',[]):
         try:
@@ -133,6 +138,8 @@ def verify_signed_recovery_receipt(bundle, key, release_id, source_sha, build_id
                 c.get('release_id')==release_id and
                 c.get('source_sha256')==source_sha and
                 c.get('build_id')==build_id and
+                c.get('backup_sha256')==backup_sha256 and
+                c.get('blue_archive_sha256')==blue_archive_sha256 and
                 c.get('school_id')==1 and
                 c.get('actor_role')=='disaster_recovery_reviewer' and
                 c.get('status')=='PASS' and
@@ -268,12 +275,17 @@ def evaluate(facts, release_id):
 
 def current_facts(release_id,sha,build):
     valid_backup=False
+    backup_sha256=''
     try:
-        st=BACKUP.stat();valid_backup=st.st_size>1000000 and st.st_mode & 0o077 == 0
+        st=BACKUP.stat()
+        age=datetime.now(timezone.utc).timestamp()-st.st_mtime
+        valid_backup=(st.st_size>1000000 and (st.st_mode & 0o077)==0
+                      and 0<=age<=86400)
         if valid_backup:
             with BACKUP.open('rb') as stream:
                 h=hashlib.file_digest(stream,'sha256').hexdigest()
-            valid_backup=h=='a357602e36ddb58fa24b2eb6584c4291942444c179bbfa2ea787be7f13655877'
+            valid_backup=h==APPROVED_BACKUP_SHA256
+            if valid_backup:backup_sha256=h
     except OSError:pass
     cat_rc,cat=run([sys.executable,str(CATALOG)],timeout=35)
     try:cat_state=json.loads(cat).get('catalog_preflight') if cat_rc==0 else 'HOLD'
@@ -307,11 +319,17 @@ def current_facts(release_id,sha,build):
             m.get('integrity',{}).get('invalid_bounds')==0)
     except (ValueError,TypeError):marks=False
     rollback=False
+    blue_archive_sha256=''
     try:
-        st=ROLLBACK.stat();rollback=st.st_size>5000000 and st.st_mode&0o077==0
+        st=ROLLBACK.stat();rollback=st.st_size>5000000 and (st.st_mode&0o077)==0
         if rollback:
             rc,_=run(['tar','-tzf',str(ROLLBACK)],timeout=25)
             rollback=rc==0
+            if rollback:
+                with ROLLBACK.open('rb') as stream:
+                    blue_digest=hashlib.file_digest(stream,'sha256').hexdigest()
+                rollback=blue_digest==APPROVED_BLUE_ARCHIVE_SHA256
+                if rollback:blue_archive_sha256=blue_digest
     except OSError:pass
     rc,_=run(['nginx','-t'],timeout=10)
     public_key=verified_owner_key()
@@ -323,7 +341,7 @@ def current_facts(release_id,sha,build):
         verify_signed_worker_receipt(receipts,public_key,release_id,sha,build))
     return {
       'backup_good':valid_backup,
-      'offhost_recovery':verify_signed_recovery_receipt(receipts,public_key,release_id,sha,build),
+      'offhost_recovery':(valid_backup and rollback and verify_signed_recovery_receipt(receipts,public_key,release_id,sha,build,backup_sha256,blue_archive_sha256)),
       'catalog':cat_state,'signed_transport':signed,
       'worker_code_parity':deployed_worker_source_parity(),
       'global_worker_ready':global_worker_ready,
