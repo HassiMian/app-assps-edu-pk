@@ -34,6 +34,18 @@ def main():
       'exam_result_count', (SELECT COUNT(*) FROM exam_results WHERE exam_id={exam} AND school_id={school}),
       'zero_scores', (SELECT COUNT(*) FROM exam_results WHERE exam_id={exam} AND school_id={school} AND marks_obtained=0),
       'teacher_assignments', (SELECT COUNT(*) FROM teacher_class_assignments WHERE school_id={school} AND is_active),
+      'active_cohorts', (SELECT COUNT(*) FROM
+         (SELECT class, section FROM students WHERE school_id={school} AND is_active GROUP BY class,section) cohorts),
+      'unmapped_cohorts', (SELECT COUNT(*) FROM
+         (SELECT class, section FROM students WHERE school_id={school} AND is_active GROUP BY class,section) cohorts
+          WHERE NOT EXISTS (SELECT 1 FROM teacher_class_assignments a
+             WHERE a.school_id={school} AND a.is_active
+               AND LOWER(BTRIM(a.class_name))=LOWER(BTRIM(cohorts.class))
+               AND LOWER(BTRIM(a.section))=LOWER(BTRIM(cohorts.section)))),
+      'duplicate_assignment_grants', (SELECT COUNT(*) FROM
+          (SELECT teacher_user_id,class_name,section,subject
+           FROM teacher_class_assignments WHERE school_id={school} AND is_active
+           GROUP BY teacher_user_id,class_name,section,subject HAVING COUNT(*)>1) duplicates),
       'invalid_assignments', (SELECT COUNT(*) FROM teacher_class_assignments a WHERE a.school_id={school} AND a.is_active
         AND (NULLIF(BTRIM(a.section),'') IS NULL OR NULLIF(BTRIM(a.subject),'') IS NULL OR
           NOT EXISTS (SELECT 1 FROM users u WHERE u.id=a.teacher_user_id AND u.school_id={school} AND u.is_active AND u.role='teacher'))),
@@ -63,7 +75,7 @@ def main():
     metrics['approval_schema_complete'] = approval_ready
     gates = {
        'original_exam_results_preserved': metrics['exam_result_count'] >= 301 and metrics['zero_scores'] >= 36,
-       'exact_active_teacher_assignments': metrics['teacher_assignments']>0 and metrics['invalid_assignments']==0,
+       'exact_active_teacher_assignments': metrics['teacher_assignments']>0 and metrics['invalid_assignments']==0 and metrics['unmapped_cohorts']==0 and metrics['duplicate_assignment_grants']==0,
        'all_offerings_independently_approved': approval_ready and metrics['exam_subjects']>0 and valid==metrics['exam_subjects'],
        'grade_policy_explicitly_configured': metrics['grade_bands']>0,
        'active_app_runtime_signed': metrics['app_signed_guards']>0,
