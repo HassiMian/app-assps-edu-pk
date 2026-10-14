@@ -146,3 +146,28 @@ authorized SaaS Core evidence, and is only the first PRE-cutover condition.
 After real traffic promotion, Connect's separate true teacher and real
 rollback postflight remains mandatory. No signing key, staff credential or
 human institutional approval is synthesized by this code.
+
+## Final reconciliation with the newer canonical multi-workstream Core candidate
+
+After the first two-parent integration was verified, Issue #4 reported a newer
+Core+Paper Studio+Grade IX-X+composer integration branch at exact source
+b54c4d3de4d9c2b1e14598bf67675a231168f136. A NEW isolated worktree
+was created from this newer source and ONLY the previously proven Core
+login-only release gate / independent full-ACL QA runner commit f288878 was
+forward-ported without changing any parent worktree. This preserved all
+latest composer-safe class/source content and the original Core global
+worker implementation already present in the newer integrated source.
+
+This new source lineage independently repeated:
+- FULL actual restored full-ACL PostgreSQL16 55477 QA role isolation 14/14 PASS.
+- New signed login-only and existing signed catalog/security source 41/41 PASS.
+- Core global queue worker configuration and separation 5/5 PASS.
+- Authoritative Core policy/regression 66/66 PASS (backend22/Python39/frontend5).
+- Live cutover still exit2/HOLD because the real SaaS runtime has not yet
+  received reviewed signed worker/tenant DB migration, authentic existing
+  staff/peer-school HTTP denials, trusted Core release evidence or live rollback.
+
+No lesson plans were imported, edited or published; no Principal or teacher
+identity was impersonated, and no source branch was force pushed. This newer
+candidate is the preferred forward-port for coordination, not evidence that
+production has been deployed.
