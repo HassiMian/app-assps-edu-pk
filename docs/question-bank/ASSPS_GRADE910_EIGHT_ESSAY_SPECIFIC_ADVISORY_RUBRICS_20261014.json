@@ -1,0 +1,364 @@
+{
+  "schemaVersion": "assps-grade910-8-context-specific-original-essay-rubrics-v1",
+  "exactOriginalShaValidated": 8,
+  "sourceEnglishItems": 4,
+  "sourceUrduItems": 4,
+  "rubricTotalMatchesQuestionMarks": 8,
+  "facultyReviewed": 0,
+  "approved": 0,
+  "published": 0,
+  "warning": "A writing rubric evaluates different acceptable responses; this is not a single answer key. Real independent faculty and edition applicability reviews remain mandatory.",
+  "rows": [
+    {
+      "originalId": "IX-ENG-ORIG-20261008-W001",
+      "originalStem": "Write a 120-150 word paragraph explaining how a student can serve the community without spending money.",
+      "originalReferenceAnswer": "Open response; evaluate against the rubric.",
+      "originalRevisionSha256": "64f46730bf0308e1aea3d551d3e517c1e3375b8016cf166256ce9dba5cc12afa",
+      "originalFileSha256": "0d01efa8f39e7db9c2998974bb82ed91a2119511b6c520cb63d8337453083380",
+      "medium": "english",
+      "questionType": "essay",
+      "originalQuestionMarks": 8,
+      "proposedCriteria": [
+        {
+          "marks": 3,
+          "topicSpecificCriterion": "Describe practical ways students can serve the community without spending money, such as helping someone learn or organizing a clean-up.",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 2,
+          "topicSpecificCriterion": "Explain a clear benefit to another person or the community with relevant concrete examples.",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 2,
+          "topicSpecificCriterion": "Provide a connected, coherent paragraph within the requested 120–150 words.",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 1,
+          "topicSpecificCriterion": "Use accurate and understandable English grammar, vocabulary and punctuation.",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        }
+      ],
+      "proposedTotalMarks": 8,
+      "multipleValidStudentAnswersAllowed": true,
+      "existingOriginalQuestionUntouched": true,
+      "independentQualifiedTeacherReviewed": false,
+      "questionCorrectnessCertified": false,
+      "textbookExerciseEvidenceVerified": false,
+      "principalSigned": false,
+      "academicallyApproved": false,
+      "published": false,
+      "paperStudioSelectable": false
+    },
+    {
+      "originalId": "IX-ENG-ORIG-20261008-W002",
+      "originalStem": "Write a short persuasive paragraph arguing for or against a student-run school exhibition.",
+      "originalReferenceAnswer": "Open response; evaluate against the rubric.",
+      "originalRevisionSha256": "dc554d95cd5efb4565d166474418146e185ce92ee251a3673266e187dcafb29e",
+      "originalFileSha256": "0d01efa8f39e7db9c2998974bb82ed91a2119511b6c520cb63d8337453083380",
+      "medium": "english",
+      "questionType": "essay",
+      "originalQuestionMarks": 8,
+      "proposedCriteria": [
+        {
+          "marks": 2,
+          "topicSpecificCriterion": "State a clear position either for OR against holding a student-run school exhibition.",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 3,
+          "topicSpecificCriterion": "Offer at least two relevant reasons about learning, teamwork, workload or resources, supporting the chosen position.",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 1,
+          "topicSpecificCriterion": "Acknowledge one practical trade-off or address a reasonable counterargument.",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 2,
+          "topicSpecificCriterion": "Use persuasive, coherent paragraph organization and clear grammatical English.",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        }
+      ],
+      "proposedTotalMarks": 8,
+      "multipleValidStudentAnswersAllowed": true,
+      "existingOriginalQuestionUntouched": true,
+      "independentQualifiedTeacherReviewed": false,
+      "questionCorrectnessCertified": false,
+      "textbookExerciseEvidenceVerified": false,
+      "principalSigned": false,
+      "academicallyApproved": false,
+      "published": false,
+      "paperStudioSelectable": false
+    },
+    {
+      "originalId": "IX-ENG-ORIG-20261008-W003",
+      "originalStem": "Prepare a one-minute speech explaining why equal access to learning resources matters.",
+      "originalReferenceAnswer": "Open response; evaluate against the rubric.",
+      "originalRevisionSha256": "338481f963447035e239340d15662329a5312ebcc4fed849a0ef69e3fd8e91ba",
+      "originalFileSha256": "0d01efa8f39e7db9c2998974bb82ed91a2119511b6c520cb63d8337453083380",
+      "medium": "english",
+      "questionType": "essay",
+      "originalQuestionMarks": 8,
+      "proposedCriteria": [
+        {
+          "marks": 1,
+          "topicSpecificCriterion": "Open with an appropriate greeting or engaging statement for a student audience.",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 3,
+          "topicSpecificCriterion": "Explain why fair access to books, connectivity or learning support matters to student opportunity.",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 2,
+          "topicSpecificCriterion": "Offer at least one workable inclusive action or example without inventing evidence.",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 1,
+          "topicSpecificCriterion": "Conclude with a clear appeal or memorable closing thought.",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 1,
+          "topicSpecificCriterion": "Use accessible, coherent spoken English suitable for approximately one minute.",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        }
+      ],
+      "proposedTotalMarks": 8,
+      "multipleValidStudentAnswersAllowed": true,
+      "existingOriginalQuestionUntouched": true,
+      "independentQualifiedTeacherReviewed": false,
+      "questionCorrectnessCertified": false,
+      "textbookExerciseEvidenceVerified": false,
+      "principalSigned": false,
+      "academicallyApproved": false,
+      "published": false,
+      "paperStudioSelectable": false
+    },
+    {
+      "originalId": "IX-ENG-ORIG-20261008-W004",
+      "originalStem": "Write a dialogue of 8-10 exchanges between two students planning a wildlife-awareness event.",
+      "originalReferenceAnswer": "Open response; evaluate against the rubric.",
+      "originalRevisionSha256": "7fbbd0dda70830b899169c9e84def7c44fb889649bcf2fcbc434dcc86fdace77",
+      "originalFileSha256": "0d01efa8f39e7db9c2998974bb82ed91a2119511b6c520cb63d8337453083380",
+      "medium": "english",
+      "questionType": "essay",
+      "originalQuestionMarks": 8,
+      "proposedCriteria": [
+        {
+          "marks": 2,
+          "topicSpecificCriterion": "Write 8–10 clearly identifiable exchanges with two consistent student speakers.",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 2,
+          "topicSpecificCriterion": "Convey accurate, respectful wildlife awareness and why habitat protection matters.",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 2,
+          "topicSpecificCriterion": "Plan a feasible school activity, including audience, communication or role allocation.",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 1,
+          "topicSpecificCriterion": "Ensure dialogue turns respond naturally to the other speaker.",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 1,
+          "topicSpecificCriterion": "Use correct and age-appropriate English language and punctuation.",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        }
+      ],
+      "proposedTotalMarks": 8,
+      "multipleValidStudentAnswersAllowed": true,
+      "existingOriginalQuestionUntouched": true,
+      "independentQualifiedTeacherReviewed": false,
+      "questionCorrectnessCertified": false,
+      "textbookExerciseEvidenceVerified": false,
+      "principalSigned": false,
+      "academicallyApproved": false,
+      "published": false,
+      "paperStudioSelectable": false
+    },
+    {
+      "originalId": "IX-URDU-GR-ESS01",
+      "originalStem": "عنوان ”اتحاد میں برکت“ پر ایک مختصر اصل کہانی لکھیں۔",
+      "originalReferenceAnswer": "کہانی میں واضح آغاز، باہمی تعاون پر مبنی واقعہ، مسئلے کا حل اور اتحاد کی اہمیت پر نتیجہ شامل ہو۔",
+      "originalRevisionSha256": "468e440c17322ce31d7c6ac8c10935252142b9ebccf5c389072935d224fd6952",
+      "originalFileSha256": "66ea53386b2f3bee5afc02d635ad0185251c0967e49d654c63031c7b269f0acc",
+      "medium": "urdu",
+      "questionType": "essay",
+      "originalQuestionMarks": 5,
+      "proposedCriteria": [
+        {
+          "marks": 1,
+          "topicSpecificCriterion": "کہانی کا واضح آغاز اور مسئلے یا صورتحال کا تعارف شامل ہو۔",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 2,
+          "topicSpecificCriterion": "کرداروں کا باہمی تعاون اور مسئلہ حل کرنے کا مربوط واقعہ پیش کیا جائے۔",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 1,
+          "topicSpecificCriterion": "اختتام میں اتحاد اور تعاون کی اہمیت مناسب انداز میں ظاہر ہو۔",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 1,
+          "topicSpecificCriterion": "اصل انداز، رواں اردو اور قابلِ فہم جملوں کا استعمال ہو۔",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        }
+      ],
+      "proposedTotalMarks": 5,
+      "multipleValidStudentAnswersAllowed": true,
+      "existingOriginalQuestionUntouched": true,
+      "independentQualifiedTeacherReviewed": false,
+      "questionCorrectnessCertified": false,
+      "textbookExerciseEvidenceVerified": false,
+      "principalSigned": false,
+      "academicallyApproved": false,
+      "published": false,
+      "paperStudioSelectable": false
+    },
+    {
+      "originalId": "IX-URDU-GR-ESS02",
+      "originalStem": "طالب علم اور استاد کے درمیان وقت کی پابندی کے موضوع پر مختصر مکالمہ لکھیں۔",
+      "originalReferenceAnswer": "مکالمے میں دونوں کرداروں کی واضح باری، وقت کی اہمیت، ایک عملی مشورہ اور قدرتی اختتام شامل ہو۔",
+      "originalRevisionSha256": "285132ed8bec01694f552b915ad99fdf5bdf77de96c7a218217b7b132e9d2ed8",
+      "originalFileSha256": "66ea53386b2f3bee5afc02d635ad0185251c0967e49d654c63031c7b269f0acc",
+      "medium": "urdu",
+      "questionType": "essay",
+      "originalQuestionMarks": 5,
+      "proposedCriteria": [
+        {
+          "marks": 1,
+          "topicSpecificCriterion": "طالب علم اور استاد کے کردار اور ان کی باری واضح ہوں۔",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 1,
+          "topicSpecificCriterion": "وقت کی پابندی کی اہمیت کو مکالمے میں درست طور پر بیان کیا جائے۔",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 1,
+          "topicSpecificCriterion": "تاخیر سے بچنے کی ایک قابلِ عمل تجویز شامل ہو۔",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 1,
+          "topicSpecificCriterion": "گفتگو فطری، مربوط اور مناسب اختتام کے ساتھ ہو۔",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 1,
+          "topicSpecificCriterion": "زبان، املا اور تہذیب پر مبنی انداز درست ہو۔",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        }
+      ],
+      "proposedTotalMarks": 5,
+      "multipleValidStudentAnswersAllowed": true,
+      "existingOriginalQuestionUntouched": true,
+      "independentQualifiedTeacherReviewed": false,
+      "questionCorrectnessCertified": false,
+      "textbookExerciseEvidenceVerified": false,
+      "principalSigned": false,
+      "academicallyApproved": false,
+      "published": false,
+      "paperStudioSelectable": false
+    },
+    {
+      "originalId": "X-URDU-GR-ESS01",
+      "originalStem": "عنوان ”محنت کامیابی کی کنجی ہے“ پر مختصر مضمون لکھیں۔",
+      "originalReferenceAnswer": "مضمون میں واضح تمہید، محنت کی اہمیت، ایک یا دو عملی مثالیں اور مربوط نتیجہ شامل ہو۔",
+      "originalRevisionSha256": "369075b29eb73f0390f7ed1ef4cc7e089c48ebdfce8b7cfbe11d87fdd84bab32",
+      "originalFileSha256": "22004448a329c0b64ac6043761ac893ca6b52bf02565185ad5fbaba0343c8c0c",
+      "medium": "urdu",
+      "questionType": "essay",
+      "originalQuestionMarks": 5,
+      "proposedCriteria": [
+        {
+          "marks": 1,
+          "topicSpecificCriterion": "عنوان ”محنت کامیابی کی کنجی ہے“ کے مطابق مناسب تمہید ہو۔",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 2,
+          "topicSpecificCriterion": "محنت، مسلسل کوشش اور ذمہ داری کی اہمیت واضح دلیل سے سمجھائی جائے۔",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 1,
+          "topicSpecificCriterion": "ایک یا دو موضوع سے متعلق عملی مثالیں دی جائیں۔",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 1,
+          "topicSpecificCriterion": "مربوط اختتام، زبان کی روانی اور درست املا شامل ہو۔",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        }
+      ],
+      "proposedTotalMarks": 5,
+      "multipleValidStudentAnswersAllowed": true,
+      "existingOriginalQuestionUntouched": true,
+      "independentQualifiedTeacherReviewed": false,
+      "questionCorrectnessCertified": false,
+      "textbookExerciseEvidenceVerified": false,
+      "principalSigned": false,
+      "academicallyApproved": false,
+      "published": false,
+      "paperStudioSelectable": false
+    },
+    {
+      "originalId": "X-URDU-GR-ESS02",
+      "originalStem": "دو طلبہ کے درمیان سوشل میڈیا کے ذمہ دارانہ استعمال پر مختصر مکالمہ لکھیں۔",
+      "originalReferenceAnswer": "مکالمے میں وقت کی حد، معلومات کی تصدیق، رازداری اور تعلیمی استعمال پر متوازن گفتگو شامل ہو۔",
+      "originalRevisionSha256": "e59a9bfbb93d9541bd6a2f8cf0ed2ed1e4284a75084bcb02eda99ccd7ff5fbbd",
+      "originalFileSha256": "22004448a329c0b64ac6043761ac893ca6b52bf02565185ad5fbaba0343c8c0c",
+      "medium": "urdu",
+      "questionType": "essay",
+      "originalQuestionMarks": 5,
+      "proposedCriteria": [
+        {
+          "marks": 1,
+          "topicSpecificCriterion": "دو طلبہ کے درمیان فطری اور باری باری گفتگو ہو۔",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 2,
+          "topicSpecificCriterion": "سوشل میڈیا استعمال میں وقت کی حد اور تعلیمی و غیرتعلیمی استعمال کے توازن پر بات ہو۔",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 1,
+          "topicSpecificCriterion": "غلط معلومات کی تصدیق اور ذاتی رازداری کے قابلِ عمل اصول بیان ہوں۔",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        },
+        {
+          "marks": 1,
+          "topicSpecificCriterion": "مناسب اختتام، احترام پر مبنی زبان اور درست املا ہو۔",
+          "reviewStatus": "AI_PROPOSAL_NOT_QUALIFIED_TEACHER"
+        }
+      ],
+      "proposedTotalMarks": 5,
+      "multipleValidStudentAnswersAllowed": true,
+      "existingOriginalQuestionUntouched": true,
+      "independentQualifiedTeacherReviewed": false,
+      "questionCorrectnessCertified": false,
+      "textbookExerciseEvidenceVerified": false,
+      "principalSigned": false,
+      "academicallyApproved": false,
+      "published": false,
+      "paperStudioSelectable": false
+    }
+  ]
+}
