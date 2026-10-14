@@ -1,0 +1,86 @@
+diff --git a/scripts/connect/test-real-browser-password-challenge-20261014.cjs b/scripts/connect/test-real-browser-password-challenge-20261014.cjs
+new file mode 100644
+index 0000000..31e03d7
+--- /dev/null
++++ b/scripts/connect/test-real-browser-password-challenge-20261014.cjs
+@@ -0,0 +1,60 @@
++'use strict';
++// Genuine Chromium UI + isolated PostgreSQL/Next.js only. No production service.
++const crypto=require('node:crypto'),assert=require('node:assert/strict'),path=require('node:path');
++if(process.env.CONNECT_ISOLATED_QA!=='yes')throw Error('Isolated QA opt-in required');
++const {createRequire}=require('node:module');
++const requireApp=createRequire(path.resolve(__dirname,'../../package.json'));
++const pg=requireApp('pg'),bcrypt=requireApp('bcryptjs');
++const browserRoot=process.env.CONNECT_BROWSER_TOOLING_ROOT;
++if(!browserRoot)throw Error('CONNECT_BROWSER_TOOLING_ROOT required');
++const {chromium}=require(path.join(browserRoot,'node_modules/playwright'));
++const origin='http://127.0.0.1:'+Number(process.env.CONNECT_ISOLATED_PORT||3014);
++const temp=crypto.randomBytes(20).toString('hex'),next=crypto.randomBytes(20).toString('hex');
++let browser,client;let count=0;
++function pass(label,condition){assert(condition,label);count++;console.log('PASS '+label);}
++(async()=>{
++ client=new pg.Client({host:'127.0.0.1',port:55443,database:'postgres',user:'postgres'});await client.connect();
++ const marker=await client.query("select 1 from schools where id=9901 and code='QA-ONLY' and tenant_id='qa-tenant-9901'");
++ assert.equal(marker.rowCount,1,'Synthetic DB marker not present');
++ const hash=await bcrypt.hash(temp,10);
++ await client.query("INSERT INTO users(id,name,email,username,password,role,is_active,must_change_password,school_id,tenant_id) VALUES(9901,'Synthetic Browser Teacher','browser.qa@example.invalid','QA-BROWSER-001',$1,'teacher',true,true,9901,'qa-tenant-9901') ON CONFLICT (id) DO UPDATE SET password=excluded.password,must_change_password=true",[hash]);
++ browser=await chromium.launch({headless:true,executablePath:process.env.CONNECT_CHROMIUM_PATH||'/root/.cache/ms-playwright/chromium-1148/chrome-linux/chrome',args:['--no-sandbox']});
++ const page=await browser.newPage();
++ const faults=[];page.on('pageerror',e=>faults.push(e.message));page.on('response',r=>{if(r.status()===401||r.status()===403){try{console.log('AUTH_HTTP',r.status(),new URL(r.url()).pathname)}catch{}}});page.on('framenavigated',f=>{if(f===page.mainFrame()){try{console.log('BROWSER_NAV',new URL(f.url()).pathname)}catch{}}});
++ await page.goto(origin+'/login?school_code=QA-ONLY&role=teacher',{waitUntil:'domcontentloaded'});
++ await page.locator('input[autocomplete="username"]').waitFor({timeout:15000});
++ pass('real Chromium opens scoped teacher form',await page.getByText('Teacher Login').count()>0);
++ await page.locator('input[autocomplete="username"]').fill('QA-BROWSER-001');
++ await page.locator('input[autocomplete="current-password"]').fill(temp);
++ await page.getByRole('button',{name:/secure login/i}).click();
++ await page.waitForURL(/\/auth\/change-password\?userId=9901/,{timeout:15000});
++ pass('real Chromium reaches temporary password challenge',page.url().includes('auth/change-password?userId=9901'));
++ const stored=await page.evaluate(()=>localStorage.getItem('user'));
++ pass('temporary password never populates authenticated browser identity',!stored);
++ await page.waitForTimeout(1100);
++ pass('late anonymous /auth/me cannot eject password challenge',new URL(page.url()).pathname==='/auth/change-password');
++ await page.getByLabel('Temporary password',{exact:true}).fill(temp);
++ await page.getByLabel('New password',{exact:true}).fill(next);
++ await page.getByLabel('Confirm new password',{exact:true}).fill(next);
++ await page.getByRole('button',{name:'Update Password'}).click();
++ await page.getByText('Password changed successfully. Please login again.').waitFor({timeout:15000});
++ pass('real browser submits password rotation successfully',true);
++ await page.waitForURL(/\/login/,{timeout:15000});
++ await page.goto(origin+'/login?school_code=QA-ONLY&role=teacher',{waitUntil:'domcontentloaded'});
++ await page.locator('input[autocomplete="username"]').waitFor({timeout:15000});
++ await page.locator('input[autocomplete="username"]').fill('QA-BROWSER-001');
++ await page.locator('input[autocomplete="current-password"]').fill(next);
++ await page.getByRole('button',{name:/secure login/i}).click();
++ await page.waitForURL(/\/teacher(?:\/|$)/,{timeout:15000});
++ pass('real Chromium reaches authenticated teacher dashboard',new URL(page.url()).pathname==='/teacher');
++ const cookies=await page.context().cookies();
++ pass('verified browser holds signed HttpOnly cookie',cookies.some(c=>c.name==='authToken'&&c.httpOnly));
++ const me=await page.evaluate(async()=>{const r=await fetch('/api/auth/me',{credentials:'include',cache:'no-store'});return {status:r.status,data:await r.json().catch(()=>({}))}});
++ console.log('BROWSER_ME_STATUS',me.status,'ROLE',me.data?.user?.role||'none');
++ pass('auth me has canonical teacher actor',me.status===200&&me.data?.user?.role==='teacher');
++ await page.goto(origin+'/admin',{waitUntil:'domcontentloaded'});
++ await page.waitForURL(/\/teacher(?:\/|$)/,{timeout:15000});
++ pass('real teacher browser denied admin',new URL(page.url()).pathname==='/teacher');
++ pass('no uncaught browser JS exception',faults.length===0);
++ console.log('CONNECT_BROWSER_AUTHENTICATED_TEMP_PASSWORD '+count+'/'+count+' PASS');
++})().catch(e=>{console.error('CONNECT_BROWSER_AUTHENTICATED_TEMP_PASSWORD FAIL '+e.stack);process.exitCode=2}).finally(async()=>{try{await browser?.close()}catch{};try{await client?.end()}catch{}});
+diff --git a/src/utils/api.ts b/src/utils/api.ts
+index 02b3505..d0307b7 100644
+--- a/src/utils/api.ts
++++ b/src/utils/api.ts
+@@ -29,7 +29,14 @@ api.interceptors.response.use(
+     // the actual logout revocation endpoint must never refresh/retry.
+     const requestPathname = new URL(requestUrl, 'http://connect.invalid').pathname;
+     const isAuthEndpoint = /^\/(?:api\/)?auth\/(?:login|refresh|logout)\/?$/.test(requestPathname);
+-    if (error.response?.status === 401 && !isAuthEndpoint) {
++    // The public login and temporary-password pages legitimately receive a
++    // 401 from /auth/me before a signed session exists. A stale /auth/me
++    // promise can also settle AFTER navigation from login to password change.
++    // It must never trigger a global logout redirect from either screen.
++    const currentPage = typeof window === 'undefined' ? '' : window.location.pathname;
++    const isPublicAuthScreen = /^\/(?:login(?:\/.*)?|auth\/change-password\/?|apex\/?)$/.test(currentPage);
++    const isPublicSettings = /^\/(?:api\/)?settings\/public\/?$/.test(requestPathname);
++    if (error.response?.status === 401 && !isAuthEndpoint && !isPublicAuthScreen && !isPublicSettings) {
+       originalRequest._retry = true;
+       if (!refreshPromise) {
+         refreshPromise = axios.post(`${API_BASE}/auth/refresh`, {}, {
