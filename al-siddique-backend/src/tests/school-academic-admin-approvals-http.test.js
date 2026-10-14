@@ -81,3 +81,17 @@ test('database connection failure returns controlled 503 without committing appr
  assert.equal(state.events.length,0);assert.equal(state.writes.length,0)
  reset()
 })
+test('40 percent passing marks derive from each exact maximum and conflicting requests fail',async()=>{
+ for(const [total,expected] of [[25,10],[50,20],[60,24],[75,30],[100,40]]){
+  reset()
+  const reply=await send('/exam-subjects/15/approve',{...body,totalMarks:total,expectedRevision:1})
+  assert.equal(reply.status,201,JSON.stringify(reply))
+  assert.equal(reply.data.data.passMarks,expected)
+  assert.equal(state.events.length,1)
+ }
+ reset()
+ const invalid=await send('/exam-subjects/15/approve',{...body,totalMarks:75,passMarks:20,expectedRevision:1})
+ assert.equal(invalid.status,422)
+ assert.equal(state.events.length,0)
+ assert.equal(state.writes.length,0)
+})

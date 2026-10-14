@@ -1,8 +1,9 @@
 'use strict'
 const {router,protect,id,withApproval,audit}=require('./schoolAcademicApprovalCore')
 router.post('/exam-subjects/:id/approve',protect,(req,res)=>withApproval(req,res,async(c,actor)=>{
- const key=id(req.params.id),total=id(req.body?.totalMarks),passing=Number(req.body?.passMarks),revision=id(req.body?.expectedRevision)
- if(!key||!total||total>1000||!Number.isSafeInteger(passing)||passing<0||passing>total||!revision)
+ const key=id(req.params.id),total=id(req.body?.totalMarks),passing=Math.ceil(total*40/100),revision=id(req.body?.expectedRevision)
+ if(!key||!total||total>1000||!revision||
+    (req.body?.passMarks!==undefined && Number(req.body.passMarks)!==passing))
   return {error:'INVALID_EXACT_SUBJECT_MAXIMUM',status:422}
  const {rows}=await c.query("SELECT x.id,x.school_id,x.exam_id,x.class_name,x.section,x.subject,x.approval_revision FROM exam_subjects x JOIN exams e ON e.id=x.exam_id AND e.school_id=x.school_id WHERE x.id=$1 AND x.school_id=$2 AND x.is_active=true FOR UPDATE OF x",[key,actor.school])
  if(rows.length!==1)return {error:'SUBJECT_NOT_FOUND_IN_SCHOOL',status:404}
