@@ -180,6 +180,8 @@ const registerRoutes = (router) => {
   mount('/library',    './routes/libraryRoutes')
   mount('/date-sheets', './routes/dateSheetRoutes')
   mount('/exams',      './routes/examRoutes')
+  mount('/academic-approvals', './routes/schoolAcademicApprovalRoutes')
+  mount('/academic-approvals', './routes/schoolAcademicAssignmentRoutes')
   mount('/employees',  './routes/employeeRoutes')
   mount('/settings',   './routes/settingsRoutes')
   mount('/schools',    './routes/schoolRoutes')
