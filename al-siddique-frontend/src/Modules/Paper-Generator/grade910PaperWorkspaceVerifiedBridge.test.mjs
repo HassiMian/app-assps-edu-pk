@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import {
- grade910ClassNumber,adaptVerifiedPaperRecord,verifyWorkspaceApprovedImports,requireVerifiedResolution,createGrade910ApprovedSection,rehydrateGrade910VerifiedPaper
+ grade910ClassNumber,adaptVerifiedPaperRecord,verifyWorkspaceApprovedImports,requireVerifiedResolution,createGrade910ApprovedSection,rehydrateGrade910VerifiedPaper,paperForCanonicalVerifiedRendering
 } from './grade910PaperWorkspaceVerifiedBridge.js'
 import { createManualAssessmentDocument } from './AssessmentStudio/core/manualAssessmentDocument.js'
 const H='a'.repeat(64),J='b'.repeat(64),K='c'.repeat(64)
@@ -134,4 +134,28 @@ test('tampered canonical paper reload fails closed instead of silently allowing 
  const restored=rehydrateGrade910VerifiedPaper({canonicalDocument,official_section:[],mcq:[],short:[],long:[]})
  assert.equal(restored.academicVerifiedRestoreError,'CANONICAL_SIGNED_REFERENCE_TAMPERED')
  await assert.rejects(verifyWorkspaceApprovedImports(restored,scope,()=>envelope(accepted)),/CANONICAL_SIGNED_REFERENCE_TAMPERED/)
+})
+
+test('actual printable projection renders certified canonical section exactly once',()=>{
+ const verified=adaptVerifiedPaperRecord(accepted,scope)
+ const other={id:'teacher-owned-draft',en:'Independently authored',type:'short'}
+ const paper={...withSection(verified),short:[other],short_marks:2}
+ const projected=paperForCanonicalVerifiedRendering(paper)
+ assert.equal(projected.mcq.length,0)
+ assert.equal(projected.short.length,1)
+ assert.equal(projected.official_section.length,1)
+ assert.equal(paper.mcq.length,1)
+})
+
+test('legacy and protected completed papers render identically when no verified revisions are present',()=>{
+ const unchanged={
+  documentFormat:'official-v12',
+  mcq:[{id:'existing-mcq',en:'A completed historical question',marks:1}],
+  short:[{id:'old-short',en:'Preserve school paper',marks:2}],
+  official_section:[{id:'old-official',content:'Original printed paper',marks:6}],
+  long:[{id:'old-long',en:'Teacher source',marks:4}],
+ }
+ const result=paperForCanonicalVerifiedRendering(unchanged)
+ assert.deepEqual(result,unchanged)
+ assert.deepEqual(result.official_section,unchanged.official_section)
 })

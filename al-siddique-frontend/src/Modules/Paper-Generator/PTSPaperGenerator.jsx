@@ -7,7 +7,7 @@ import { SYLLABI, CLASSES, SUBJECTS, CHAPTERS, QUESTIONS } from './data/question
 import { usePaperStore } from './usePaperStore'
 import api from '../../services/api'
 import Grade910WorkspaceApprovedInsert from './Grade910WorkspaceApprovedInsert.jsx'
-import { grade910ClassNumber, verifyWorkspaceApprovedImports, createGrade910ApprovedSection, rehydrateGrade910VerifiedPaper } from './grade910PaperWorkspaceVerifiedBridge.js'
+import { grade910ClassNumber, verifyWorkspaceApprovedImports, createGrade910ApprovedSection, rehydrateGrade910VerifiedPaper, paperForCanonicalVerifiedRendering } from './grade910PaperWorkspaceVerifiedBridge.js'
 import PaperRichTextEditor, { PaperRichTextRenderer } from './PaperRichTextEditor'
 import { PaperSelectionToolbar } from './PaperInlineEditor.jsx'
 import './PaperEditor/paperWorkspaceLight.css'
@@ -603,8 +603,8 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  ? { name: storeSubjectInfo?.name || '', color: D.gold, emoji: '', edition: storeSubjectInfo?.publisher || '' }
  : SUBJECTS.find(s=>s.id===subjectId)
  
- const isOfficialPaper = Boolean(loadedPaper?.documentFormat === 'pts-native-v13' || loadedPaper?.documentFormat === 'official-v12' || loadedPaper?.official_section?.length)
  const isUserAuthoredPaper = Boolean(paper?.userAuthored || loadedPaper?.userAuthored || overrideConfig?.userAuthored)
+ const isOfficialPaper = !isUserAuthoredPaper && Boolean(loadedPaper?.documentFormat === 'pts-native-v13' || loadedPaper?.documentFormat === 'official-v12' || loadedPaper?.official_section?.length)
  let questionTypes = getFilteredQuestionTypes(subject?.name || '')
  // Ensure that any type with active questions is always shown, even if filtered out by subject
  if (paper && allQuestionTypes) {
@@ -763,9 +763,10 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
     subject: subjectName,
     totalMarks: Number(headerTotalMarks || 0),
   }
+ const paperRenderProjection = paperForCanonicalVerifiedRendering(paper)
  const liveAuditPaper = {
   ...(loadedPaper || {}),
-  ...paper,
+  ...paperRenderProjection,
   config: cfg,
   official_section: paper.official_section || loadedPaper?.official_section || [],
   printReadiness: marksAuthorityEdited ? 'READY' : loadedPaper?.printReadiness,
@@ -787,7 +788,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   setZoomPercent(Math.max(50, Math.min(175, Math.round(previewZoom * 100 / 10) * 10 + step)))
   setZoomMode('custom')
  }
- const totalQs = questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0), 0)
+ const totalQs = questionTypes.reduce((sum, t) => sum + (paperRenderProjection[t.value]?.length || 0), 0)
  const pageFrameStyles = {
   none:{ border:'none' },
   thin:{ border:'1px solid #9aaabd' },
@@ -914,7 +915,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   }
   updateSelectedSection(patch)
  }
- const tplProps = { paper, cfg, printBubble:printBub, printAns, half, editMode, letterSp, wordSp, engLineH, urdLineH, showAnsLines, fontColor, fontFamily, baseFontSz, headFontSz, fontBold, fontItalic, fontUnderline, textAlign, qBorderStyle, showUrduHeaders, showSectionLine, questionTypes, settings: paperSettings, pbStyle: pageBorderStyle, pageFrameStyle, onQuestionChange:updatePaperQuestion, onDeleteSection:deleteOfficialSection, onDuplicateSection:duplicateOfficialSection, onMoveSection:moveOfficialSection, onAddSection:addOfficialSection, onSelectSection:setSelectedSectionId, selectedSectionId, onActiveEditable:activateEditable, mcqLayout, shortLayout }
+ const tplProps = { paper:paperRenderProjection, cfg, printBubble:printBub, printAns, half, editMode, letterSp, wordSp, engLineH, urdLineH, showAnsLines, fontColor, fontFamily, baseFontSz, headFontSz, fontBold, fontItalic, fontUnderline, textAlign, qBorderStyle, showUrduHeaders, showSectionLine, questionTypes, settings: paperSettings, pbStyle: pageBorderStyle, pageFrameStyle, onQuestionChange:updatePaperQuestion, onDeleteSection:deleteOfficialSection, onDuplicateSection:duplicateOfficialSection, onMoveSection:moveOfficialSection, onAddSection:addOfficialSection, onSelectSection:setSelectedSectionId, selectedSectionId, onActiveEditable:activateEditable, mcqLayout, shortLayout }
 
  function doSearch() {
  const addedIds = new Set((paper[qType]||[]).map(q=>q.id))

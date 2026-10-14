@@ -95,6 +95,16 @@ export function createGrade910ApprovedSection(q,ordinal){
  section.verifiedRenderSnapshot=verifiedRenderedSectionSnapshot(section)
  return section
 }
+export function paperForCanonicalVerifiedRendering(paper={}){
+ // Render the real canonical official_section once, not its legacy q-array
+ // verification mirror a second time. The source mirror is kept for review guards.
+ return {
+  ...paper,
+  mcq:(paper.mcq||[]).filter(q=>!q.verifiedAcademicRef),
+  short:(paper.short||[]).filter(q=>!q.verifiedAcademicRef),
+  long:(paper.long||[]).filter(q=>!q.verifiedAcademicRef)
+ }
+}
 export function rehydrateGrade910VerifiedPaper(paper){
  const meta=paper?.canonicalDocument?.academicVerifiedSelections
  if(!meta)return paper
