@@ -21,6 +21,7 @@ import {
   normalizeLessonPlanDocument,
   toLessonPlanPersistencePayload,
 } from './lessonPlanDomain'
+import ComposerLessonReviewLocal from './ComposerLessonReviewLocal'
 import './LessonPlanningWorkspace.css'
 
 const DRAFT_KEY = 'assps_lesson_planner_v2_draft'
@@ -111,6 +112,7 @@ function SubjectPlanner({ subjectPlan, planningType, onChange, onRemove }) {
 }
 
 export default function LessonPlanningWorkspace() {
+  const [openOriginalReview,setOpenOriginalReview]=useState(false)
   const { activeClasses, subjectsForClass, sectionsForClass, sessionStart, sessionEnd } = useAcademicStore()
   const [document,setDocument] = useState(()=>{
     try { const raw=getTenantStorageItem(DRAFT_KEY); return raw?normalizeLessonPlanDocument(JSON.parse(raw)):createEmptyLessonPlanDocument({startDate:today()}) } catch { return createEmptyLessonPlanDocument({startDate:today()}) }
@@ -206,9 +208,10 @@ export default function LessonPlanningWorkspace() {
   return <div className="lesson-planning-workspace" data-lesson-planning-workspace>
     <div className="lp-topbar">
       <div><div className="lp-eyebrow">ASSPS Academic Planning</div><h2>Lesson Planning Workspace</h2><p>Plan once. Reuse across term, daily lessons, diary cards and assessments.</p></div>
-      <div className="lp-actions"><button className="ghost" onClick={reset}><Plus size={16}/> New</button><button className="ghost" onClick={()=>setShowPaste(true)}><WandSparkles size={16}/> Smart Paste</button><button className="ghost" onClick={printPlan}><Printer size={16}/> Print</button><button className="ghost" onClick={()=>window.dispatchEvent(new CustomEvent('assps-open-diary-lesson-plan',{detail:{planId:document.id||'',classLevel:document.classLevel,section:document.section,date:document.startDate}}))}><Users size={16}/> Student Cards</button><button data-save-plan className="primary" onClick={save} disabled={busy==='save'}>{busy==='save'?<RefreshCw className="spin" size={16}/>:<Save size={16}/>} Save Draft</button></div>
+      <div className="lp-actions"><button className="ghost" aria-expanded={openOriginalReview} onClick={()=>setOpenOriginalReview(v=>!v)}><FileText size={16}/> Second Term Source Review</button><button className="ghost" onClick={reset}><Plus size={16}/> New</button><button className="ghost" onClick={()=>setShowPaste(true)}><WandSparkles size={16}/> Smart Paste</button><button className="ghost" onClick={printPlan}><Printer size={16}/> Print</button><button className="ghost" onClick={()=>window.dispatchEvent(new CustomEvent('assps-open-diary-lesson-plan',{detail:{planId:document.id||'',classLevel:document.classLevel,section:document.section,date:document.startDate}}))}><Users size={16}/> Student Cards</button><button data-save-plan className="primary" onClick={save} disabled={busy==='save'}>{busy==='save'?<RefreshCw className="spin" size={16}/>:<Save size={16}/>} Save Draft</button></div>
     </div>
 
+    {openOriginalReview&&<ComposerLessonReviewLocal/>}
     {status && <div className="lp-status" role="status"><CheckCircle2 size={15}/>{status}<button onClick={()=>setStatus('')}><X size={14}/></button></div>}
 
     <div className="lp-shell">
