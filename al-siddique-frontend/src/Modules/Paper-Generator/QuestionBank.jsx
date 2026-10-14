@@ -2048,6 +2048,7 @@ export default function QuestionBank() {
 
  return (
  <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #071e34 0%, #0B2C4D 100%)', color: '#fff', fontFamily: 'system-ui, sans-serif' }}>
+ <a href="/academic/grade910-signoffs" style={{display:"inline-block",margin:16,padding:"10px 16px",border:"1px solid #65c9ef",borderRadius:10,color:"#f1faff",background:"#123b60"}}>Grade IX-X: Teacher / Principal Signatures (unverified evidence)</a>
 
  {/* Modals */}
  {subjectModal && (
