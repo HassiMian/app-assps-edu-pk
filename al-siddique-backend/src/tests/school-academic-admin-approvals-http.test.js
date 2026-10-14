@@ -1,7 +1,7 @@
 'use strict'
 const test=require('node:test'),assert=require('node:assert/strict'),http=require('node:http'),Module=require('node:module')
 const express=require('express')
-const state={actor:true,identity:true,offering:1,conflict:0,duplicate:false,events:[],writes:[]}
+const state={actor:true,identity:true,offering:1,conflict:0,duplicate:false,connectionFail:false,events:[],writes:[]}
 const client={
  release(){},
  async query(sql,params=[]){
@@ -22,7 +22,7 @@ const client={
 const original=Module._load
 Module._load=function(request,parent,isMain){
  if(parent?.filename?.includes('schoolAcademicApprovalCore.js') && request==='../config/database')
-  return {pool:{connect:async()=>client},applyTenantContext:async()=>{}}
+  return {pool:{connect:async()=>{if(state.connectionFail)throw Error('QA_CONNECTION_FAILURE');return client}},applyTenantContext:async()=>{}}
  if(parent?.filename?.includes('schoolAcademicApprovalCore.js') && request==='../middleware/auth')
   return {protect:(req,res,next)=>{
    req.user={id:1,role:req.headers['x-test-role']||'admin',school_id:Number(req.headers['x-test-actor-school']||1)}
@@ -42,7 +42,7 @@ const send=async(path,payload,headers={})=>{
  const response=await fetch(base+'/api/academic-approvals'+path,{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer qa-signed-fixture',...headers},body:JSON.stringify(payload)})
  return {status:response.status,data:await response.json()}
 }
-const reset=()=>Object.assign(state,{actor:true,identity:true,offering:1,conflict:0,duplicate:false,events:[],writes:[]})
+const reset=()=>Object.assign(state,{actor:true,identity:true,offering:1,conflict:0,duplicate:false,connectionFail:false,events:[],writes:[]})
 test('signed active school admin approves exact compatible subject, retains evidence',async()=>{
  reset();const r=await send('/exam-subjects/15/approve',{...body,totalMarks:50,passMarks:20,expectedRevision:1})
  assert.equal(r.status,201);assert.equal(r.data.data.revision,2);assert.equal(state.events.length,1);assert.equal(state.writes.length,1)
@@ -72,4 +72,12 @@ test('teacher identity, missing offering, duplicate and blank section deny assig
  reset();state.duplicate=true;assert.equal((await send('/teacher-assignments',d)).status,409)
  reset();assert.equal((await send('/teacher-assignments',{...d,section:''})).status,422)
  assert.equal(state.events.length,0);assert.equal(state.writes.length,0)
+})
+
+test('database connection failure returns controlled 503 without committing approvals',async()=>{
+ reset();state.connectionFail=true
+ const r=await send('/exam-subjects/15/approve',{...body,totalMarks:50,passMarks:20,expectedRevision:1})
+ assert.equal(r.status,503);assert.equal(r.data.code,'ACADEMIC_APPROVAL_UNAVAILABLE')
+ assert.equal(state.events.length,0);assert.equal(state.writes.length,0)
+ reset()
 })
