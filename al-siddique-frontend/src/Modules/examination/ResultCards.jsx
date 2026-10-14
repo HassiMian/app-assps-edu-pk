@@ -539,6 +539,10 @@ export default function ResultCards() {
                 return <option key={s.id} value={`student:${s.id}`}>Student - {s.name}{classLabel} - {suffix}</option>
               })}
             </select>
+            <div style={{display:'flex',flexWrap:'wrap',gap:8}}>
+              <button type="button" style={btnSecondary} disabled={!students.length || loading} onClick={()=>handlePrintTargetChange('class')}>Print Whole Class</button>
+              <button type="button" style={btnSecondary} disabled={!students.length || loading} onClick={()=>handlePrintTargetChange('all')}>Print All Classes</button>
+            </div>
 
             {outputMode === 'class' && (
               <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(130px, 1fr))', gap:10, marginTop:4, padding:12, borderRadius:14, background:'rgba(255,255,255,0.03)', border:'1px solid rgba(255,255,255,0.08)' }}>

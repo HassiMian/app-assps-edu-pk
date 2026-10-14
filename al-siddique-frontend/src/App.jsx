@@ -56,6 +56,7 @@ const FeeSettings = lazyRetry(() => import('./Modules/fees/FeeSettings'), 'FeeSe
 const ExaminationModule = lazyRetry(() => import('./Modules/examination/ExaminationModule'), 'ExaminationModule')
 const ManageExams = lazyRetry(() => import('./Modules/examination/ManageExams'), 'ManageExams')
 const MarksSheet = lazyRetry(() => import('./Modules/examination/MarksSheet'), 'MarksSheet')
+const MarksRegister = lazyRetry(() => import('./Modules/examination/MarksRegister'), 'MarksRegister')
 const ResultCards = lazyRetry(() => import('./Modules/examination/ResultCards'), 'ResultCards')
 const GradeSettings = lazyRetry(() => import('./Modules/examination/GradeSettings'), 'GradeSettings')
 const TimetableModule = lazyRetry(() => import('./Modules/timetable/TimetableModule'), 'TimetableModule')
@@ -343,6 +344,7 @@ function AppRoutes() {
  <Route path="/examination/cards" element={<W roles={ROLES.academicStaff} permKey="exams_results"><ResultCards /></W>} />
  <Route path="/exams" element={<W roles={ROLES.academicStaff} permKey="exams_manage"><ManageExams /></W>} />
  <Route path="/exams/marks" element={<W roles={ROLES.academicStaff} permKey="exams_marks"><MarksSheet /></W>} />
+ <Route path="/exams/marks/view" element={<W roles={ROLES.leadership} permKey="exams_marks"><MarksRegister /></W>} />
  <Route path="/exams/results" element={<W roles={ROLES.academicStaff} permKey="exams_results"><ResultCards /></W>} />
  <Route path="/exams/grades" element={<W roles={ROLES.leadership} permKey="exams_grades"><GradeSettings /></W>} />
 

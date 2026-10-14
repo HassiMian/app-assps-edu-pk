@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { RefreshCw, Save, Search } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext'
 import api from '../../services/api'
 import { C, card, btnPrimary, btnSecondary, input, select, labelStyle, sectionHeader } from '../moduleStyles'
 import { usePaperStore } from '../Paper-Generator/usePaperStore'
@@ -20,6 +22,8 @@ function classLabel(value) {
 const normalizeClass = normalizeMarksClass
 
 export default function MarksSheet() {
+ const { user } = useAuth()
+ const canBrowseMarks = ['principal','admin','super_admin','school_admin'].includes(String(user?.role || '').toLowerCase())
  const { classNames, subjectsForClass } = useAcademicStore()
  const { paperSettings } = usePaperStore()
  const [exams, setExams] = useState([])
@@ -283,6 +287,7 @@ export default function MarksSheet() {
  <div className="super-module-card" style={{ ...card, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: 16 }}>
  <div>
  <h1 style={sectionHeader}>Marks Sheet</h1>
+ {canBrowseMarks && <Link to="/exams/marks/view" style={{...btnSecondary, display:'inline-block',marginTop:8,textDecoration:'none'}}>View &amp; Print Saved Marks</Link>}
  <p style={{ color: C.muted, marginTop: 8 }}>Select exam type, class, and subject, then add marks student by student.</p>
  </div>
  <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
