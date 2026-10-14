@@ -11,6 +11,26 @@ import './DailyDiaryWorkspace.css'
 
 const DRAFT_KEY = 'assps_daily_diary_workspace_v2'
 const CARD_COUNTS = [2,3,4,5,6,8,10]
+const SUBJECT_FONT_OPTIONS = [
+  { value:'Inter, Arial, sans-serif', label:'Inter (Modern)' },
+  { value:'Arial, sans-serif', label:'Arial' },
+  { value:'Georgia, serif', label:'Georgia' },
+  { value:'Times New Roman, serif', label:'Times New Roman' },
+]
+const DEFAULT_CARD_STYLE = { subjectTitleSize:8, subjectTitleFont:'Inter, Arial, sans-serif', subjectTitleBold:true, subjectWidth:26, rowHeight:18, headerScale:100 }
+const bounded = (value,min,max,fallback) => Number.isFinite(Number(value)) && value!==null && value!=='' ? Math.min(max,Math.max(min,Number(value))) : fallback
+const normalCardStyle = source => {
+  const value=source && typeof source==='object' && !Array.isArray(source)?source:{}
+  return {
+    subjectTitleSize:bounded(value.subjectTitleSize,6,18,DEFAULT_CARD_STYLE.subjectTitleSize),
+    subjectTitleFont:SUBJECT_FONT_OPTIONS.some(option=>option.value===value.subjectTitleFont)?value.subjectTitleFont:DEFAULT_CARD_STYLE.subjectTitleFont,
+    subjectTitleBold:typeof value.subjectTitleBold==='boolean'?value.subjectTitleBold:DEFAULT_CARD_STYLE.subjectTitleBold,
+    subjectWidth:bounded(value.subjectWidth,18,46,DEFAULT_CARD_STYLE.subjectWidth),
+    rowHeight:bounded(value.rowHeight,14,42,DEFAULT_CARD_STYLE.rowHeight),
+    headerScale:bounded(value.headerScale,70,160,DEFAULT_CARD_STYLE.headerScale),
+  }
+}
+
 const PALETTES = [
   { id:1, name:'Navy Signature', accent:'#0b2a4a', soft:'#edf3f8', line:'#c9d7e4', ink:'#102538' },
   { id:2, name:'Royal Blue', accent:'#1769aa', soft:'#edf6fc', line:'#c7dcec', ink:'#12314a' },
@@ -82,12 +102,12 @@ function estimateOverflow(rows,cardsPerPage) {
   return chars>threshold ? `Content is dense for ${cardsPerPage} cards per page. Use fewer cards or shorten text for best readability.` : ''
 }
 
-function StudentCard({ mode, student, palette, schoolName, logoUrl, classLabel, section, date, rows, footerText, cardsPerPage, indexInPage }) {
+function StudentCard({ mode, student, palette, schoolName, logoUrl, classLabel, section, date, rows, footerText, cardsPerPage, indexInPage, cardStyle }) {
   const layout=computeA4Layout(cardsPerPage)
   const identity=student?`${studentName(student)}${studentRoll(student)?` · Roll ${studentRoll(student)}`:''}`:'Student Name · Roll No.'
   const studentSec=studentSection(student)||section
   const logo=logoUrl?resolveAssetUrl(logoUrl):''
-  return <article className={`dd-card ${layout.lastSpan&&cardsPerPage===5&&indexInPage===4?'span-last':''}`} style={{'--accent':palette.accent,'--soft':palette.soft,'--line':palette.line,'--ink':palette.ink,'--scale':layout.scale}} data-student-card>
+  return <article className={`dd-card ${layout.lastSpan&&cardsPerPage===5&&indexInPage===4?'span-last':''}`} style={{'--accent':palette.accent,'--soft':palette.soft,'--line':palette.line,'--ink':palette.ink,'--scale':layout.scale,'--head-scale':layout.scale*cardStyle.headerScale/100,'--subject-width':`${cardStyle.subjectWidth}%`,'--subject-title-font':cardStyle.subjectTitleFont,'--subject-title-size':`${cardStyle.subjectTitleSize*layout.scale}px`,'--subject-title-weight':cardStyle.subjectTitleBold?800:500,'--row-height':`${cardStyle.rowHeight*layout.scale}px`}} data-student-card>
     <div className="dd-card-accent"/>
     <header className="dd-card-head">
       <div className="dd-logo">{logo?<img src={logo} alt="ASSPS logo"/>:<span>ASSPS</span>}</div>
@@ -112,6 +132,8 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   const [rows,setRows]=useState(Array.isArray(initialDraft.rows)?initialDraft.rows:DEFAULT_ROWS)
   const [cardsPerPage,setCardsPerPage]=useState(CARD_COUNTS.includes(Number(initialDraft.cardsPerPage))?Number(initialDraft.cardsPerPage):4)
   const [paletteId,setPaletteId]=useState(PALETTES.some(p=>p.id===Number(initialDraft.paletteId))?Number(initialDraft.paletteId):1)
+  const [cardStyle,setCardStyle]=useState(()=>normalCardStyle(initialDraft.cardStyle))
+  const editCardStyle=(name,value)=>setCardStyle(current=>normalCardStyle({...current,[name]:value}))
   const [footerText,setFooterText]=useState(initialDraft.footerText||'Please review the assigned work and keep this card in the notebook.')
   const [pasteText,setPasteText]=useState('')
   const [students,setStudents]=useState([])
@@ -146,7 +168,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   const pages=useMemo(()=>chunk(cardPopulation,cardsPerPage),[cardPopulation,cardsPerPage])
   const overflowWarning=useMemo(()=>estimateOverflow(previewRows,cardsPerPage),[previewRows,cardsPerPage])
 
-  useEffect(()=>{try{setTenantStorageItem(DRAFT_KEY,JSON.stringify({mode,classLevel,section,date,rows,cardsPerPage,paletteId,footerText}))}catch{ /* Preserve current diary editor state if storage is unavailable. */ }},[mode,classLevel,section,date,rows,cardsPerPage,paletteId,footerText])
+  useEffect(()=>{try{setTenantStorageItem(DRAFT_KEY,JSON.stringify({mode,classLevel,section,date,rows,cardsPerPage,paletteId,footerText,cardStyle}))}catch{ /* Preserve current diary editor state if storage is unavailable. */ }},[mode,classLevel,section,date,rows,cardsPerPage,paletteId,footerText,cardStyle])
   useEffect(()=>{
     let cancelled=false
     queueMicrotask(()=>{
@@ -222,17 +244,48 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
       if(CARD_COUNTS.includes(Number(saved.slips_per_page)))setCardsPerPage(Number(saved.slips_per_page))
       if(PALETTES.some(p=>p.id===Number(saved.style_settings?.paletteId)))setPaletteId(Number(saved.style_settings.paletteId))
       if(typeof saved.footer_text==='string')setFooterText(saved.footer_text)
+      if(saved.style_settings?.cardStyle)setCardStyle(normalCardStyle(saved.style_settings.cardStyle))
       savedDiaryIdentities.current.set(JSON.stringify([classLevel,section,date]),id)
       setStatus('Saved diary reopened and verified. Changes will update its original record.')
     }catch(error){setStatus(error?.response?.data?.message||error?.message||'Saved diary could not be reopened. Local editor remains intact.')}
     finally{setBusy('')}
   }
 
-  const saveDiary=async()=>{const saveGeneration=diaryScopeGeneration.current;setSaving(true);try{const payload={template_id:paletteId,school_name:schoolName,tagline:'',logo_url:logoUrl,class_level:classLevel,class_name:classLabel,diary_date:date,slips_per_page:cardsPerPage,footer_text:footerText,footer_is_urdu:/[\u0600-\u06ff]/.test(footerText),rows,style_settings:{workspaceVersion:2,section,paletteId,mode:'diary'}};const scopeKey=JSON.stringify([classLevel,section,date]);const updateId=savedDiaryIdentities.current.get(scopeKey)||null;const response=updateId?await api.put(`/api/daily-diary/${updateId}`,payload):await api.post('/api/daily-diary',payload);const saved=response.data?.data;if(response.data?.success!==true||!Number.isSafeInteger(saved?.id)||saved.id<=0)throw new Error('Unverified Diary Save response');if(updateId&&Number(saved.id)!==Number(updateId))throw new Error('Diary Save returned a different record identity');if((saved.class_level!=null&&String(saved.class_level)!==String(classLevel))||(saved.diary_date!=null&&String(saved.diary_date).slice(0,10)!==date)||(saved.style_settings?.section!=null&&String(saved.style_settings.section)!==String(section)))throw new Error('Diary Save returned a different school-day selection');savedDiaryIdentities.current.set(scopeKey,Number(saved.id));setStatus(diaryScopeGeneration.current===saveGeneration?'Daily diary saved safely.':'Previous diary selection was saved. Current editor selection was not saved.')}catch(error){setStatus(diaryScopeGeneration.current===saveGeneration?(error?.response?.data?.message||'Daily diary save failed. Local recovery draft remains available.'):'Previous diary selection could not be saved. Current editor selection was not submitted.')}finally{setSaving(false)}}
+  const saveDiary=async()=>{const saveGeneration=diaryScopeGeneration.current;setSaving(true);try{const payload={template_id:paletteId,school_name:schoolName,tagline:'',logo_url:logoUrl,class_level:classLevel,class_name:classLabel,diary_date:date,slips_per_page:cardsPerPage,footer_text:footerText,footer_is_urdu:/[\u0600-\u06ff]/.test(footerText),rows,style_settings:{workspaceVersion:2,section,paletteId,mode:'diary',cardStyle}};const scopeKey=JSON.stringify([classLevel,section,date]);const updateId=savedDiaryIdentities.current.get(scopeKey)||null;const response=updateId?await api.put(`/api/daily-diary/${updateId}`,payload):await api.post('/api/daily-diary',payload);const saved=response.data?.data;if(response.data?.success!==true||!Number.isSafeInteger(saved?.id)||saved.id<=0)throw new Error('Unverified Diary Save response');if(updateId&&Number(saved.id)!==Number(updateId))throw new Error('Diary Save returned a different record identity');if((saved.class_level!=null&&String(saved.class_level)!==String(classLevel))||(saved.diary_date!=null&&String(saved.diary_date).slice(0,10)!==date)||(saved.style_settings?.section!=null&&String(saved.style_settings.section)!==String(section)))throw new Error('Diary Save returned a different school-day selection');savedDiaryIdentities.current.set(scopeKey,Number(saved.id));setStatus(diaryScopeGeneration.current===saveGeneration?'Daily diary saved safely.':'Previous diary selection was saved. Current editor selection was not saved.')}catch(error){setStatus(diaryScopeGeneration.current===saveGeneration?(error?.response?.data?.message||'Daily diary save failed. Local recovery draft remains available.'):'Previous diary selection could not be saved. Current editor selection was not submitted.')}finally{setSaving(false)}}
   const toggleStudent=id=>setSelectedStudentIds(current=>current.includes(id)?current.filter(value=>value!==id):[...current,id])
   const selectAll=()=>setSelectedStudentIds(students.map(studentId))
   const clearStudents=()=>setSelectedStudentIds([])
-  const print=()=>window.print()
+  const print=async()=>{
+    const sheets=document.querySelectorAll('.dd-workspace [data-a4-page]')
+    if(!sheets.length){setStatus('Nothing to print. Select students and add diary content.');return}
+    const frame=document.createElement('iframe')
+    frame.setAttribute('title','ASSPS Diary Print — A4 sheets only')
+    frame.setAttribute('data-diary-print-frame','')
+    frame.style.cssText='position:fixed;width:0;height:0;border:0;right:0;bottom:0;opacity:0;pointer-events:none'
+    document.body.appendChild(frame)
+    try{
+      const doc=frame.contentDocument
+      const head=doc.head
+      const charset=doc.createElement('meta');charset.setAttribute('charset','utf-8');head.appendChild(charset)
+      for(const source of document.head.querySelectorAll('link[rel="stylesheet"], style'))head.appendChild(source.cloneNode(true))
+      const root=doc.createElement('div');root.className='dd-workspace dd-print-root'
+      const stage=doc.createElement('div');stage.className='dd-page-stage'
+      for(const sheet of sheets)stage.appendChild(doc.importNode(sheet,true))
+      root.appendChild(stage);doc.body.appendChild(root)
+      const override=doc.createElement('style')
+      override.textContent='@page{size:A4 portrait;margin:0}html,body{margin:0!important;padding:0!important;width:210mm!important;height:auto!important;overflow:visible!important;background:white!important}.dd-print-root{width:210mm!important;margin:0!important;padding:0!important;min-height:0!important}.dd-print-root .dd-page-stage{display:block!important;padding:0!important;margin:0!important;height:auto!important;max-height:none!important;overflow:visible!important;background:white!important}.dd-print-root [data-a4-page]{width:210mm!important;height:297mm!important;min-height:297mm!important;margin:0!important;padding:5mm!important;transform:none!important;box-shadow:none!important;break-after:page!important;page-break-after:always!important}.dd-print-root [data-a4-page]:last-child{break-after:auto!important;page-break-after:auto!important}.dd-print-root .dd-card{break-inside:avoid!important;page-break-inside:avoid!important;print-color-adjust:exact!important;-webkit-print-color-adjust:exact!important}'
+      head.appendChild(override)
+      await Promise.all(Array.from(head.querySelectorAll('link[rel="stylesheet"]')).map(link=>new Promise(resolve=>{if(link.sheet){resolve();return}link.addEventListener('load',resolve,{once:true});link.addEventListener('error',resolve,{once:true});setTimeout(resolve,2500)})))
+      if(doc.fonts?.ready)await Promise.race([doc.fonts.ready,new Promise(resolve=>setTimeout(resolve,2500))])
+      await Promise.all(Array.from(doc.images).map(image=>image.complete?Promise.resolve():new Promise(resolve=>{image.addEventListener('load',resolve,{once:true});image.addEventListener('error',resolve,{once:true});setTimeout(resolve,2500)})))
+      if(!frame.isConnected)return
+      const cleanup=()=>{if(frame.isConnected)frame.remove()}
+      frame.contentWindow.addEventListener('afterprint',()=>setTimeout(cleanup,1500),{once:true})
+      setTimeout(cleanup,120000)
+      frame.contentWindow.focus()
+      frame.contentWindow.print()
+    }catch(error){frame.remove();setStatus(`Print failed: ${error?.message||'Unable to open the isolated A4 print window.'}`)}
+  }
 
   return <div className="dd-workspace" data-diary-workspace>
     <div className="dd-toolbar no-print">
@@ -249,12 +302,22 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
 
         {mode==='diary'?<section data-diary-editor><div className="dd-section-title">Diary content</div><div className="dd-paste"><textarea value={pasteText} onChange={e=>setPasteText(e.target.value)} placeholder={'Paste the whole diary at once:\nEnglish: Page 21 reading practice\nUrdu: Page 25 writing\nMath: Exercise 4'}/><button onClick={applyDiaryPaste}><WandSparkles size={14}/> Auto Arrange</button></div><div className="dd-row-editors">{rows.map((row,index)=><div className="dd-row-editor" key={row.id||index}><div className="dd-row-top"><input value={row.subject||''} onChange={e=>updateRow(index,{subject:e.target.value,isUrdu:/urdu|اردو/i.test(e.target.value)})} placeholder="Subject"/><button onClick={()=>removeRow(index)}><X size={13}/></button></div><textarea className={row.isUrdu?'urdu':''} value={row.diary||''} onChange={e=>updateRow(index,{diary:e.target.value})} placeholder="Diary / home task"/><div className="dd-format"><button className={row.isBold?'active':''} onClick={()=>updateRow(index,{isBold:!row.isBold})}>B</button><button onClick={()=>updateRow(index,{fontSize:Math.max(9,(row.fontSize||11)-1)})}><Minus size={12}/></button><span>{row.fontSize||11}px</span><button onClick={()=>updateRow(index,{fontSize:Math.min(18,(row.fontSize||11)+1)})}><Plus size={12}/></button><select value={row.textAlign||'left'} onChange={e=>updateRow(index,{textAlign:e.target.value})}><option value="left">Left</option><option value="center">Center</option><option value="right">Right</option></select></div></div>)}</div><button className="dd-add-row" onClick={addRow}><Plus size={14}/> Add Subject</button></section>:<section data-lesson-card-editor><div className="dd-section-title">Lesson Plan source</div><label><span>Existing plan</span><select value={lessonPlanId} onChange={e=>selectPlan(e.target.value)}><option value="">Quick / new daily plan</option>{lessonPlans.map(plan=><option key={plan.id} value={plan.id}>{plan.title||'Lesson Plan'} · {plan.plan_date||plan.date||''}</option>)}</select></label><button data-auto-plan-today className="dd-ai-button" onClick={autoPlanToday} disabled={busy==='generate'}>{busy==='generate'?<RefreshCw className="spin" size={15}/>:<Sparkles size={15}/>} Auto Plan This Day</button><div className="dd-paste"><textarea value={lessonPaste} onChange={e=>setLessonPaste(e.target.value)} placeholder={'Paste all subjects together:\nEnglish: Reading comprehension\nHomework: Exercise 4\n\nScience: Photosynthesis\nActivity: Diagram work'}/><button onClick={arrangeLessonPaste} disabled={busy==='parse'}><WandSparkles size={14}/> Arrange Plan</button></div><div className="dd-lesson-summary">{lessonDoc.subjects.length?lessonDoc.subjects.map(subject=><div key={subject.subject}><b>{subject.subject}</b><span>{subject.lessons.filter(lesson=>!date||lesson.date===date).length||subject.lessons.length} lesson slot(s)</span></div>):<p>No lesson-plan content yet.</p>}</div></section>}
 
-        <section><div className="dd-section-title">A4 layout & style</div><label><span>Cards per A4 page</span><div className="dd-counts">{CARD_COUNTS.map(count=><button key={count} data-card-count={count} className={cardsPerPage===count?'active':''} onClick={()=>setCardsPerPage(count)}>{count}</button>)}</div></label><label><span>Palette</span><div className="dd-palettes">{PALETTES.map(item=><button key={item.id} className={paletteId===item.id?'active':''} onClick={()=>setPaletteId(item.id)}><i style={{background:item.accent}}/><span>{item.name}</span></button>)}</div></label><label><span>Footer note</span><input value={footerText} onChange={e=>setFooterText(e.target.value)} /></label>{overflowWarning&&<div className="dd-overflow-warning">{overflowWarning}</div>}</section>
+        <section><div className="dd-section-title">A4 layout & style</div><label><span>Cards per A4 page</span><div className="dd-counts">{CARD_COUNTS.map(count=><button key={count} data-card-count={count} className={cardsPerPage===count?'active':''} onClick={()=>setCardsPerPage(count)}>{count}</button>)}</div></label><div className="dd-section-title">Card typography & dimensions</div>
+        <div className="dd-style-grid">
+          <label><span>Subject font</span><select aria-label="Subject title font family" value={cardStyle.subjectTitleFont} onChange={e=>editCardStyle('subjectTitleFont',e.target.value)}>{SUBJECT_FONT_OPTIONS.map(option=><option key={option.value} value={option.value}>{option.label}</option>)}</select></label>
+          <label><span>Subject title size ({cardStyle.subjectTitleSize}px)</span><input aria-label="Subject title font size" type="range" min="6" max="18" step="1" value={cardStyle.subjectTitleSize} onChange={e=>editCardStyle('subjectTitleSize',Number(e.target.value))}/></label>
+          <label className="dd-style-toggle"><input aria-label="Bold subject titles" type="checkbox" checked={cardStyle.subjectTitleBold} onChange={e=>editCardStyle('subjectTitleBold',e.target.checked)}/> Bold subject names</label>
+          <label><span>Subject column width ({cardStyle.subjectWidth}%)</span><input aria-label="Subject column width" type="range" min="18" max="46" step="1" value={cardStyle.subjectWidth} onChange={e=>editCardStyle('subjectWidth',Number(e.target.value))}/></label>
+          <label><span>Row height ({cardStyle.rowHeight}px)</span><input aria-label="Diary row height" type="range" min="14" max="42" step="1" value={cardStyle.rowHeight} onChange={e=>editCardStyle('rowHeight',Number(e.target.value))}/></label>
+          <label><span>Header size ({cardStyle.headerScale}%)</span><input aria-label="Diary card header size" type="range" min="70" max="160" step="5" value={cardStyle.headerScale} onChange={e=>editCardStyle('headerScale',Number(e.target.value))}/></label>
+        </div>
+        <button type="button" className="dd-style-reset" onClick={()=>setCardStyle(normalCardStyle(DEFAULT_CARD_STYLE))}>Reset card sizing</button>
+        <label><span>Palette</span><div className="dd-palettes">{PALETTES.map(item=><button key={item.id} className={paletteId===item.id?'active':''} onClick={()=>setPaletteId(item.id)}><i style={{background:item.accent}}/><span>{item.name}</span></button>)}</div></label><label><span>Footer note</span><input value={footerText} onChange={e=>setFooterText(e.target.value)} /></label>{overflowWarning&&<div className="dd-overflow-warning">{overflowWarning}</div>}</section>
       </aside>
 
       <section className="dd-preview-wrap">
         <div className="dd-preview-toolbar no-print"><div><b>Live A4 Preview</b><span>{selectedStudents.length?`${selectedStudents.length} personalized card${selectedStudents.length===1?'':'s'}`:`Generic preview · ${cardsPerPage} cards`}</span></div><div><button onClick={()=>setPreviewZoom(z=>Math.max(.4,+(z-.08).toFixed(2)))}><Minus size={13}/></button><span>{Math.round(previewZoom*100)}%</span><button onClick={()=>setPreviewZoom(z=>Math.min(1,+(z+.08).toFixed(2)))}><Plus size={13}/></button><button onClick={()=>setPreviewZoom(.68)}>Fit</button></div></div>
-        <div className="dd-page-stage" style={{'--preview-zoom':previewZoom}}>{pages.map((page,pageIndex)=>{const layout=computeA4Layout(cardsPerPage);return <div className="dd-a4-page" key={pageIndex} style={{'--cols':layout.cols,'--rows':layout.rows,'--gap-mm':`${layout.gap}mm`}} data-a4-page>{page.map((student,index)=><StudentCard key={student.__generic!==undefined?`generic-${pageIndex}-${index}`:studentId(student)} mode={mode} student={student.__generic!==undefined?null:student} palette={palette} schoolName={schoolName} logoUrl={logoUrl} classLabel={classLabel} section={section} date={date} rows={previewRows} footerText={footerText} cardsPerPage={cardsPerPage} indexInPage={index}/>)}</div>})}</div>
+        <div className="dd-page-stage" style={{'--preview-zoom':previewZoom}}>{pages.map((page,pageIndex)=>{const layout=computeA4Layout(cardsPerPage);return <div className="dd-a4-page" key={pageIndex} style={{'--cols':layout.cols,'--rows':layout.rows,'--gap-mm':`${layout.gap}mm`}} data-a4-page>{page.map((student,index)=><StudentCard key={student.__generic!==undefined?`generic-${pageIndex}-${index}`:studentId(student)} mode={mode} student={student.__generic!==undefined?null:student} palette={palette} schoolName={schoolName} logoUrl={logoUrl} classLabel={classLabel} section={section} date={date} rows={previewRows} footerText={footerText} cardsPerPage={cardsPerPage} indexInPage={index} cardStyle={cardStyle}/>)}</div>})}</div>
       </section>
     </div>
   </div>
