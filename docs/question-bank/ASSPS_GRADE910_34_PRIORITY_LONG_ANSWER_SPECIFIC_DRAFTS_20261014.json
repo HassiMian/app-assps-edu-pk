@@ -9,6 +9,7 @@
   "rows": [
     {
       "originalId": "IX-AGRI-TECH-ENGLISH-C01-I03",
+      "originalStem": "Explain how agriculture contributes to food security, employment and the economy of Pakistan.",
       "originalRevisionSha256": "e03833c2554c649a7929d16b268e5e074f4fa045090b16afaee128942f9d8187",
       "originalSourceFileSha256": "fa90a74076340c6293d3ba2d051329aa51cfed044953840c935ad0bbb85b55df",
       "medium": "english",
@@ -34,6 +35,7 @@
     },
     {
       "originalId": "IX-AGRI-TECH-ENGLISH-C03-I03",
+      "originalStem": "Explain how seed quality, soil condition, irrigation planning and timely field operations affect Kharif crop productivity.",
       "originalRevisionSha256": "28ca35e82e3ee59d50693e2446540bd488a67bd64a754c0397a131603514f461",
       "originalSourceFileSha256": "fa90a74076340c6293d3ba2d051329aa51cfed044953840c935ad0bbb85b55df",
       "medium": "english",
@@ -59,6 +61,7 @@
     },
     {
       "originalId": "IX-AGRI-TECH-ENGLISH-C09-I03",
+      "originalStem": "Describe how hygiene, animal health, cooling and quality control support a safe dairy industry.",
       "originalRevisionSha256": "62a6960928a56682d0a2849755eadbaa3fc0e4f5a6a4fa7e0abbf6e0117bc759",
       "originalSourceFileSha256": "fa90a74076340c6293d3ba2d051329aa51cfed044953840c935ad0bbb85b55df",
       "medium": "english",
@@ -84,6 +87,7 @@
     },
     {
       "originalId": "IX-AGRI-TECH-URDU-C01-I03",
+      "originalStem": "پاکستان میں food security، employment اور economy میں زراعت کا کردار بیان کریں۔",
       "originalRevisionSha256": "c099ba9e33f3fef1070a25f341847912f4634e69b05a2cc9726718e8bc2ed341",
       "originalSourceFileSha256": "4368b848189c852bfbd0e66190b5e29d94b3df588dec2ea5427e247da769bf10",
       "medium": "urdu",
@@ -109,6 +113,7 @@
     },
     {
       "originalId": "IX-AGRI-TECH-URDU-C02-I03",
+      "originalStem": "Crop production planning کے اہم عوامل بیان کریں، hazardous chemical-use instructions کے بغیر۔",
       "originalRevisionSha256": "ef79879dc35d4529f32f9fd8324fd56838c325e3ea4c68a51ce44fd664b297be",
       "originalSourceFileSha256": "4368b848189c852bfbd0e66190b5e29d94b3df588dec2ea5427e247da769bf10",
       "medium": "urdu",
@@ -134,6 +139,7 @@
     },
     {
       "originalId": "IX-AGRI-TECH-URDU-C03-I03",
+      "originalStem": "Seed quality، soil condition، irrigation planning اور timely field operations Kharif productivity کو کیسے متاثر کرتے ہیں؟",
       "originalRevisionSha256": "5116b5b51f15c8fcf8cab996171f579fed7fa466acc2b7c6b2b517ae15f5cba9",
       "originalSourceFileSha256": "4368b848189c852bfbd0e66190b5e29d94b3df588dec2ea5427e247da769bf10",
       "medium": "urdu",
@@ -159,6 +165,7 @@
     },
     {
       "originalId": "IX-AGRI-TECH-URDU-C04-I03",
+      "originalStem": "Crop rotation soil fertility، pest management اور farm resilience کو کیسے support کرتی ہے؟",
       "originalRevisionSha256": "d097a29842609a2b781b7aed20e83aefb0524fbe24342174eb1ad63774fc37f3",
       "originalSourceFileSha256": "4368b848189c852bfbd0e66190b5e29d94b3df588dec2ea5427e247da769bf10",
       "medium": "urdu",
@@ -184,6 +191,7 @@
     },
     {
       "originalId": "IX-AGRI-TECH-URDU-C09-I03",
+      "originalStem": "Hygiene، animal health، cooling اور quality control safe dairy industry کو کیسے support کرتے ہیں؟",
       "originalRevisionSha256": "399656c925b58a0766a81d39b10445a0396c5fc10e17cce12a94f7e4cab9990f",
       "originalSourceFileSha256": "4368b848189c852bfbd0e66190b5e29d94b3df588dec2ea5427e247da769bf10",
       "medium": "urdu",
@@ -209,6 +217,7 @@
     },
     {
       "originalId": "IX-BIO-UR-C05-L01",
+      "originalStem": "Biological organization کی levels کو cell سے organ system تک مثال کے بغیر اصولی ترتیب میں بیان کریں۔",
       "originalRevisionSha256": "36f5a62ad0794b417efa2384df725c7163889bd4f3dae6cea04e9a2d36355ac8",
       "originalSourceFileSha256": "26784a13d6e22cb79c9fffb98b31c768e165a5999871b76bbecf61d6ef814d1f",
       "medium": "urdu",
@@ -234,6 +243,7 @@
     },
     {
       "originalId": "IX-BIOLOGY-TECH-URDU-C04-L01",
+      "originalStem": "Growth اور tissue repair میں mitosis کی اہمیت بیان کریں۔",
       "originalRevisionSha256": "f00b8308452e02a6344e6701d8244d06a7c8dcf0fadd4727c0fdf1bb6f33e412",
       "originalSourceFileSha256": "99b8886f40f8a5f2fa254c6d86a95fbdefec545e2eaa88eae85e5347646b5c8f",
       "medium": "urdu",
@@ -259,6 +269,7 @@
     },
     {
       "originalId": "IX-BIOLOGY-TECH-URDU-C05-L01",
+      "originalStem": "Cells سے organ systems تک organization کی hierarchy بیان کریں۔",
       "originalRevisionSha256": "4c5f718d6324565420b6e5b0d62337548cdb0cd024197ac2ac510428fcf39a81",
       "originalSourceFileSha256": "99b8886f40f8a5f2fa254c6d86a95fbdefec545e2eaa88eae85e5347646b5c8f",
       "medium": "urdu",
@@ -284,6 +295,7 @@
     },
     {
       "originalId": "IX-CHEM-2025-C10-T4-02L",
+      "originalStem": "Relate fossil-fuel use and deforestation to climate change and mitigation.",
       "originalRevisionSha256": "397a2bca484b68398e845a6713cf31ec9e8afaf5696b46c59484fef0a395be56",
       "originalSourceFileSha256": "c61a997c4da221578b2e3a0c38ac2c02aeab7d72a615be97ccd6250f10a52655",
       "medium": "english",
@@ -309,6 +321,7 @@
     },
     {
       "originalId": "IX-CHEM-2025-C11-T1-02L",
+      "originalStem": "Compare saturated and unsaturated hydrocarbons.",
       "originalRevisionSha256": "753bd30fc715b812db4a72382acf87a706e5474f3cca8ce83a9766f02dbf27ac",
       "originalSourceFileSha256": "e27178c2fabc7fc63fed68f12fdaeb8c1e7dfb085e9962fd3e7ab1e410c4825b",
       "medium": "english",
@@ -334,6 +347,7 @@
     },
     {
       "originalId": "IX-CHEMISTRY-TECH-URDU-C05-L01",
+      "originalStem": "Exothermic اور endothermic reactions کا تقابل کریں۔",
       "originalRevisionSha256": "d2be9e6842181ad43ff2fd839604b500fbacfd9feeb37abe27bc649a01097a4b",
       "originalSourceFileSha256": "eaee9eec640f4f840996217d5ea9fff45830f02e4dc7e5b7d855defb1a06ff5f",
       "medium": "urdu",
@@ -359,6 +373,7 @@
     },
     {
       "originalId": "IX-CHEMISTRY-TECH-URDU-C08-L01",
+      "originalStem": "Periodic table میں position سے properties کی prediction کیسے ہوتی ہے؟",
       "originalRevisionSha256": "3914b8b0b50cce50d352b969c735558543ab8722d47d5333d05f391b13f2f4f9",
       "originalSourceFileSha256": "eaee9eec640f4f840996217d5ea9fff45830f02e4dc7e5b7d855defb1a06ff5f",
       "medium": "urdu",
@@ -384,6 +399,7 @@
     },
     {
       "originalId": "IX-CHEMISTRY-TECH-URDU-C09-L01",
+      "originalStem": "Group 1 اور Group 17 کی general tendencies compare کریں۔",
       "originalRevisionSha256": "86c58f4be45900dd521aaed0592a45537de6e178c5b2f35f88b2cbd4e7e99210",
       "originalSourceFileSha256": "eaee9eec640f4f840996217d5ea9fff45830f02e4dc7e5b7d855defb1a06ff5f",
       "medium": "urdu",
@@ -409,6 +425,7 @@
     },
     {
       "originalId": "IX-CHEMISTRY-TECH-URDU-C11-L01",
+      "originalStem": "Alkanes اور alkenes کی bonding اور reactivity compare کریں۔",
       "originalRevisionSha256": "3a5f33f3d5ba5c97dc867c9f2774ee8c5b49c804540f9626a40af637cd27f5c5",
       "originalSourceFileSha256": "eaee9eec640f4f840996217d5ea9fff45830f02e4dc7e5b7d855defb1a06ff5f",
       "medium": "urdu",
@@ -434,6 +451,7 @@
     },
     {
       "originalId": "IX-COMP-U11-L01",
+      "originalStem": "Explain how privacy, copyright, respectful communication, data security and accessibility contribute to ethical computer use.",
       "originalRevisionSha256": "4807ca4f2c54554455a02060e2940900636e09307bb8a42fbd30ceab2ed4dd63",
       "originalSourceFileSha256": "1e685088636d6124c5ce9f6dffc3d480defc54dbfff001c8425b4da3b896d52a",
       "medium": "english",
@@ -460,6 +478,7 @@
     },
     {
       "originalId": "IX-COMPENT-TECH-URDU-C01-I03",
+      "originalStem": "Input، process، output اور feedback کی مدد سے ایک سادہ information system کا تجزیہ کریں۔",
       "originalRevisionSha256": "fdeabc17b3825fa838524f853ab5f411e2c4e7e31860485efc24e61a5b0a3b5b",
       "originalSourceFileSha256": "a257a07290ddbd5f7a33fee0d4f5fa2c11dcf68795b846505f12e7c7d731ae6d",
       "medium": "urdu",
@@ -485,6 +504,7 @@
     },
     {
       "originalId": "IX-COMPENT-TECH-URDU-C03-I03",
+      "originalStem": "Basic logic gates کو decision rules represent کرنے کے لیے کیسے combine کیا جا سکتا ہے؟",
       "originalRevisionSha256": "e21f076d83a9d0e2a7a0a35a078f6084f5ceeb0cd99b4a5fce2b76156e231812",
       "originalSourceFileSha256": "a257a07290ddbd5f7a33fee0d4f5fa2c11dcf68795b846505f12e7c7d731ae6d",
       "medium": "urdu",
@@ -510,6 +530,7 @@
     },
     {
       "originalId": "IX-COMPENT-TECH-URDU-C06-I03",
+      "originalStem": "Decomposition، pattern recognition، abstraction اور algorithm design کی وضاحت کریں۔",
       "originalRevisionSha256": "804a4a7b8448123d95e41ec14f1d8bec3d2b0f9af140f6a69ae324d6a411a75d",
       "originalSourceFileSha256": "a257a07290ddbd5f7a33fee0d4f5fa2c11dcf68795b846505f12e7c7d731ae6d",
       "medium": "urdu",
@@ -535,6 +556,7 @@
     },
     {
       "originalId": "IX-COMPENT-TECH-URDU-C09-I03",
+      "originalStem": "Privacy، copyright، cyberbullying اور responsible account use کو ethical/legal concerns کے طور پر بیان کریں۔",
       "originalRevisionSha256": "f96acad47b25f7db43b33a6b2a503a066599f0c1ed532d338c98c0de4da58f5b",
       "originalSourceFileSha256": "a257a07290ddbd5f7a33fee0d4f5fa2c11dcf68795b846505f12e7c7d731ae6d",
       "medium": "urdu",
@@ -560,6 +582,7 @@
     },
     {
       "originalId": "IX-GENSCI-TECH-ENGLISH-C04-I03",
+      "originalStem": "Explain how nutrition, hygiene, exercise, rest and preventive care work together to support health.",
       "originalRevisionSha256": "cafe0f96a274c7790c2935deffe9baf9be0e0e67c39ffb0f4ce797c82ab423ea",
       "originalSourceFileSha256": "f416811d516304e6474be5ef6abada74d700667888a56f6638d4d6d96a808c0b",
       "medium": "english",
@@ -585,6 +608,7 @@
     },
     {
       "originalId": "IX-GENSCI-TECH-ENGLISH-C07-I03",
+      "originalStem": "Compare renewable and non-renewable energy sources in terms of availability, environmental impact and sustainability.",
       "originalRevisionSha256": "89d76954bdf07d0477ede24fdc545052aa930f1af148743d44de3ef8cd109397",
       "originalSourceFileSha256": "f416811d516304e6474be5ef6abada74d700667888a56f6638d4d6d96a808c0b",
       "medium": "english",
@@ -610,6 +634,7 @@
     },
     {
       "originalId": "IX-GENSCI-TECH-ENGLISH-C09-I03",
+      "originalStem": "Describe how components such as resistors, diodes and transistors contribute to simple electronic systems.",
       "originalRevisionSha256": "fe21e216eff874f8a8486390b97f46c57e8b41e9acdbb8bf2ba4d23376fcf29a",
       "originalSourceFileSha256": "f416811d516304e6474be5ef6abada74d700667888a56f6638d4d6d96a808c0b",
       "medium": "english",
@@ -635,6 +660,7 @@
     },
     {
       "originalId": "IX-GENSCI-TECH-ENGLISH-C10-I03",
+      "originalStem": "Explain how science and technology influence society and how society can guide responsible innovation.",
       "originalRevisionSha256": "116f5f4de4cadbd1b2efaa19c2a10f67301089b7f12bf99979cb37208d93b327",
       "originalSourceFileSha256": "f416811d516304e6474be5ef6abada74d700667888a56f6638d4d6d96a808c0b",
       "medium": "english",
@@ -660,6 +686,7 @@
     },
     {
       "originalId": "IX-GENSCI-TECH-URDU-C04-I03",
+      "originalStem": "Nutrition، hygiene، exercise، rest اور preventive care مل کر health کو کیسے support کرتے ہیں؟",
       "originalRevisionSha256": "e7efc28ed522012471a9f6be45032f1673e75c5b65a26053412bc3b50ecc7bb4",
       "originalSourceFileSha256": "bbf47fed029c7fd67bf9f4a47711bf5afb5c2229d0144beef5d77b5472c1934a",
       "medium": "urdu",
@@ -685,6 +712,7 @@
     },
     {
       "originalId": "IX-GENSCI-TECH-URDU-C07-I03",
+      "originalStem": "Renewable اور non-renewable energy sources کا availability، environmental impact اور sustainability کے لحاظ سے تقابل کریں۔",
       "originalRevisionSha256": "4db881d3dadd76b0efbec07c7a33f44708639aa07edf484f8dead3e0641e0c70",
       "originalSourceFileSha256": "bbf47fed029c7fd67bf9f4a47711bf5afb5c2229d0144beef5d77b5472c1934a",
       "medium": "urdu",
@@ -710,6 +738,7 @@
     },
     {
       "originalId": "IX-GENSCI-TECH-URDU-C10-I03",
+      "originalStem": "Science اور technology society کو کیسے متاثر کرتے ہیں اور society responsible innovation کو کیسے guide کر سکتی ہے؟",
       "originalRevisionSha256": "66cad77a4525e6517c314e480e71930d7efaa0bf200542f9876f0ffa0de7fb14",
       "originalSourceFileSha256": "bbf47fed029c7fd67bf9f4a47711bf5afb5c2229d0144beef5d77b5472c1934a",
       "medium": "urdu",
@@ -735,6 +764,7 @@
     },
     {
       "originalId": "IX-ISL-U06-L01",
+      "originalStem": "صحابہ، صحابیات، علماء، مفکرین اور صوفیاء کی زندگیوں سے حاصل ہونے والے پانچ عملی اسباق بیان کریں۔",
       "originalRevisionSha256": "fbb160dd30de721d8300ca14c4ea2fe30aba5c31c816b4ad3d169de8ba4045f3",
       "originalSourceFileSha256": "89683922a220b7c056d2c6d0af1085bbbf28bd142e756c63d1b91a9c8af06430",
       "medium": "urdu",
@@ -761,6 +791,7 @@
     },
     {
       "originalId": "IX-MATH-C08-L01",
+      "originalStem": "Construct the truth values of p∧q for all combinations of p and q.",
       "originalRevisionSha256": "03df5cff662a173af237514a4222f14d437a515ddf9d36b5f44daf4679d8d479",
       "originalSourceFileSha256": "617b9e67f9150799753a9ba8fa5830f8550d6f47e23536576bd697f5048d7635",
       "medium": "english",
@@ -786,6 +817,7 @@
     },
     {
       "originalId": "IX-MATH-UR-C08-L01",
+      "originalStem": "p∧q کی مکمل truth table بیان کریں۔",
       "originalRevisionSha256": "8364aaa9694dc627df768e910594dc5678e905f6bcc1a407f33d827d39e8c1f7",
       "originalSourceFileSha256": "f91e678d3b98107a9fd152eaf6607bfa5a976ce702f0b634ce8274129834fe08",
       "medium": "urdu",
@@ -811,6 +843,7 @@
     },
     {
       "originalId": "X-BIO-2026-C05-B02-L01",
+      "originalStem": "Compare nervous and endocrine coordination using signal type, route, speed, duration and target specificity.",
       "originalRevisionSha256": "f190d440de9c22cafdede4d702eeeab7bbf5858c8d453d6a647a774549cf6d7b",
       "originalSourceFileSha256": "d440792276f216e6696b134dde0c4b4cd2dca745eee84826af3c4ff18bda93ff",
       "medium": "english",
@@ -837,6 +870,7 @@
     },
     {
       "originalId": "X-PHY-C16-L03",
+      "originalStem": "A 9 V source is connected across a 3 Ω resistor. Calculate the current, power and electrical energy transferred in 10 s.",
       "originalRevisionSha256": "3ecb254557e6b17d85cff38534006cc2387125784867c23f63a214ec116915b1",
       "originalSourceFileSha256": "a214d121e4a6b21fa7e41f7b6d7d7207968b7e7ab0b71145ea68cd9ef4ac5255",
       "medium": "english",

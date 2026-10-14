@@ -192,10 +192,16 @@ function draft(){
   const bound=index.get(id),points=R[id]
   if(!bound||!Array.isArray(points)||points.length<4||points.some(p=>p.length<25))
    throw Error('INCOMPLETE_CONCEPT_SPECIFIC_RUBRIC:'+id)
+  const sourceFile=path.join(STAGING,bound.sourceFile)
+  const sourceDocument=JSON.parse(fs.readFileSync(sourceFile))
+  const q=(sourceDocument.drafts||sourceDocument.questions||sourceDocument.items||[]).find(item=>item.id===id)
+  if(!q)throw Error('MISSING_SOURCE_QUESTION_'+id)
+  const originalStem=String(q.stem||q.content?.en?.stem||q.content?.ur?.stem||'')
+  if(!originalStem.trim())throw Error('MISSING_SOURCE_STEM_'+id)
   const originalReference=bound.originalReferenceAnswer
   const alreadySufficient=['IX-MATH-C08-L01','IX-MATH-UR-C08-L01','X-PHY-C16-L03'].includes(id)
   return{
-   originalId:id,originalRevisionSha256:bound.originalRevisionSha256,
+   originalId:id,originalStem,originalRevisionSha256:bound.originalRevisionSha256,
    originalSourceFileSha256:bound.sourceFileSha256,medium:bound.medium,type:bound.type,
    sourceOriginalReference:originalReference,
    sourceFlag:'LONG_REFERENCE_EXTREMELY_BRIEF',

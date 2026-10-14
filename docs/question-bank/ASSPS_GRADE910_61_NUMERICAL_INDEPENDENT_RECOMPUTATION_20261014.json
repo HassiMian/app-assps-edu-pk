@@ -12,6 +12,8 @@
   "rows": [
     {
       "originalId": "IX-BIO-UR-C11-N01",
+      "originalStem": "Data 5، 7، 9، 11 کا mean معلوم کریں۔",
+      "originalStemSha256": "a68d0a23b9c0197db3d655410abf455de982e78993ebcef43d962ae5c1cee924",
       "originalRevisionSha256": "8c16a2d2fba8731cf1d344557c15656c41a0555d0722e8d83ddb4c32e427387d",
       "sourceFileSha256": "26784a13d6e22cb79c9fffb98b31c768e165a5999871b76bbecf61d6ef814d1f",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -36,6 +38,8 @@
     },
     {
       "originalId": "IX-CHEM-UR-C04-N01",
+      "originalStem": "اگر H₂O کا molar mass 18 g mol⁻¹ ہو تو 18 g پانی کتنے moles ہے؟",
+      "originalStemSha256": "cffa03d4e92d058f9ea5f56ce566612d90045dc0a9975cc616f448c753142604",
       "originalRevisionSha256": "8c2a804493ebf1d24c62d6949c1d7cdc289582c53e8569e8fedeb19f1ff7d1ff",
       "sourceFileSha256": "0993bd684e10497b63e0792a23698046470c9433bca944b06e71f5849ef54cc5",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -58,6 +62,8 @@
     },
     {
       "originalId": "IX-MATH-C01-N01",
+      "originalStem": "Simplify √50.",
+      "originalStemSha256": "71cb144934e7d93b7f68f2b56245b8317ff55347be162b44a9fb3393197ccadb",
       "originalRevisionSha256": "0bca13bea7c7923c562e6d7cd23d145d5db7c15fd2b429fa65858c1410681a7b",
       "sourceFileSha256": "617b9e67f9150799753a9ba8fa5830f8550d6f47e23536576bd697f5048d7635",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -79,6 +85,8 @@
     },
     {
       "originalId": "IX-MATH-C02-N01",
+      "originalStem": "Evaluate log₁₀(1000) + log₁₀(0.1).",
+      "originalStemSha256": "83c82716e6328daa6b0c149562af1801cb66af507bb510f0de2f37066187da28",
       "originalRevisionSha256": "cd8edd680e821c6924e68c6246d4a8888e689063d1704d843217b01a0fa2d516",
       "sourceFileSha256": "617b9e67f9150799753a9ba8fa5830f8550d6f47e23536576bd697f5048d7635",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -101,6 +109,8 @@
     },
     {
       "originalId": "IX-MATH-C03-N01",
+      "originalStem": "If n(A)=18, n(B)=15 and n(A∩B)=6, find n(A∪B).",
+      "originalStemSha256": "d2e8458ee823b3ab03a0caa2f0f601820ff4427c80385d102d8393ff265416cd",
       "originalRevisionSha256": "b4cb347977b5372def27c5744cc3d0a45366cd504c209d548df6b2656e4cc826",
       "sourceFileSha256": "617b9e67f9150799753a9ba8fa5830f8550d6f47e23536576bd697f5048d7635",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -124,6 +134,8 @@
     },
     {
       "originalId": "IX-MATH-C04-N01",
+      "originalStem": "Factorize x²+5x+6.",
+      "originalStemSha256": "625dc083a8abfe7b7baab55ba1bdb50d28a8200efbed1e45c2fb8c00b8505e5d",
       "originalRevisionSha256": "627b20f7fcd4fe872b1446a546aeaf4b8b15dd119e36a05cc42cbc4a51ad4c15",
       "sourceFileSha256": "617b9e67f9150799753a9ba8fa5830f8550d6f47e23536576bd697f5048d7635",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -149,6 +161,8 @@
     },
     {
       "originalId": "IX-MATH-C06-N01",
+      "originalStem": "A right triangle has legs 6 cm and 8 cm. Find the hypotenuse.",
+      "originalStemSha256": "331d48e0d8b65355250c516b4fd9d134aa61c60e0e3a919a5daaa5ded6bed6cc",
       "originalRevisionSha256": "4e69fe5a1196fdd9d9177201338fdaa8e8a54f539851e20be7ffd198371d2bc8",
       "sourceFileSha256": "617b9e67f9150799753a9ba8fa5830f8550d6f47e23536576bd697f5048d7635",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -171,6 +185,8 @@
     },
     {
       "originalId": "IX-MATH-C07-N01",
+      "originalStem": "Find the slope through (1,2) and (5,10).",
+      "originalStemSha256": "26625e5979c254c6de6511eaf50e3dd3d519c7f2a11acaab8c9f0447101ff787",
       "originalRevisionSha256": "257d5d35c4cf8625fe253d732e2a4994df455f08925939e1dfa01adec8da88bf",
       "sourceFileSha256": "617b9e67f9150799753a9ba8fa5830f8550d6f47e23536576bd697f5048d7635",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -195,6 +211,8 @@
     },
     {
       "originalId": "IX-MATH-C10-N01",
+      "originalStem": "For y=3x-4, find y when x=5.",
+      "originalStemSha256": "70848df9eb44b6e10390bd84dd6e4ab49f6faca877d091d3fb4ad18ee936228e",
       "originalRevisionSha256": "709ebf0cf37a1bf8ae6a4c6299f8c5507d13fc2c8b4953271ff1ce91722314ea",
       "sourceFileSha256": "617b9e67f9150799753a9ba8fa5830f8550d6f47e23536576bd697f5048d7635",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -218,6 +236,8 @@
     },
     {
       "originalId": "IX-MATH-C12-N01",
+      "originalStem": "Find the mean of 4,6,8,12.",
+      "originalStemSha256": "9afe1d60f36a835f5c23fbff9d228046c234e08b93bd0f9675cc4fd95f421e91",
       "originalRevisionSha256": "b62d478f0ed252c74ae57cec44945ec68db51c733ce635e68e25d981e61e57ce",
       "sourceFileSha256": "617b9e67f9150799753a9ba8fa5830f8550d6f47e23536576bd697f5048d7635",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -242,6 +262,8 @@
     },
     {
       "originalId": "IX-MATH-UR-C01-N01",
+      "originalStem": "√72 کو سادہ کریں۔",
+      "originalStemSha256": "36a96d85c511d9fcf08c9185bf736d79bde86241ba6c068033854df99c97251f",
       "originalRevisionSha256": "12d3ded65e24d1da646ecf92ec5bd31f29f16d1ff3b3e0ee7051e2f30ff75e55",
       "sourceFileSha256": "f91e678d3b98107a9fd152eaf6607bfa5a976ce702f0b634ce8274129834fe08",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -263,6 +285,8 @@
     },
     {
       "originalId": "IX-MATH-UR-C02-N01",
+      "originalStem": "log₁₀(100)+log₁₀(0.01) معلوم کریں۔",
+      "originalStemSha256": "7a7260713f0957057c784ee6bc2ae3b445c396cc82c80de8b8b721c5d274377f",
       "originalRevisionSha256": "bd0e51e1d7652e9ae42fa6f34772f3ba63c76f40753f2c4c7628b79a72283997",
       "sourceFileSha256": "f91e678d3b98107a9fd152eaf6607bfa5a976ce702f0b634ce8274129834fe08",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -285,6 +309,8 @@
     },
     {
       "originalId": "IX-MATH-UR-C03-N01",
+      "originalStem": "اگر n(A)=18، n(B)=15 اور n(A∩B)=6 ہو تو n(A∪B) معلوم کریں۔",
+      "originalStemSha256": "6e0177e066a332faea5feae810dc44dbd77d2a405aee401feb91fdff25c6424c",
       "originalRevisionSha256": "67205919e76e914f4023a5dbfdbf926f5fc0ecdf5542c3c28ed9ccdf6f9d994c",
       "sourceFileSha256": "f91e678d3b98107a9fd152eaf6607bfa5a976ce702f0b634ce8274129834fe08",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -308,6 +334,8 @@
     },
     {
       "originalId": "IX-MATH-UR-C04-N01",
+      "originalStem": "x²+7x+12 کو factorize کریں۔",
+      "originalStemSha256": "a4cad5e756b1ca92b6ca42a7f51ccdd85be91502e8cb4d8470815b5ee08aff74",
       "originalRevisionSha256": "3cd49cb949c16b40672aa5086dbe553b2e4f960dfbbb622982016b5e2e2ae64e",
       "sourceFileSha256": "f91e678d3b98107a9fd152eaf6607bfa5a976ce702f0b634ce8274129834fe08",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -333,6 +361,8 @@
     },
     {
       "originalId": "IX-MATH-UR-C06-N01",
+      "originalStem": "ایک قائمہ مثلث کے قائم ضلع 5 cm اور 12 cm ہیں۔ وتر معلوم کریں۔",
+      "originalStemSha256": "44ab57d820a6f2705eb45fa0926c73536e86d2c32706b7758f279d7f900e18ee",
       "originalRevisionSha256": "0cc46f7f941c92af707c62d2003854c02a53e455944960cae9e71be842a48e20",
       "sourceFileSha256": "f91e678d3b98107a9fd152eaf6607bfa5a976ce702f0b634ce8274129834fe08",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -355,6 +385,8 @@
     },
     {
       "originalId": "IX-MATH-UR-C07-N01",
+      "originalStem": "points (1,2) اور (5,10) سے گزرنے والی line کی slope معلوم کریں۔",
+      "originalStemSha256": "61c700f6be93e4b4eb3f12285f276e77778c73795964b0641fd9b96dab0e706a",
       "originalRevisionSha256": "fa3e77ed2efa7f3ad9e7931db6b412ccba24d50eb0762206163183dabd550219",
       "sourceFileSha256": "f91e678d3b98107a9fd152eaf6607bfa5a976ce702f0b634ce8274129834fe08",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -379,6 +411,8 @@
     },
     {
       "originalId": "IX-MATH-UR-C09-N01",
+      "originalStem": "دو مشابہ مثلثوں کا scale factor 3 ہے۔ چھوٹے مثلث کی ایک side 5 cm ہو تو بڑی corresponding side معلوم کریں۔",
+      "originalStemSha256": "6eac324d6e46015d90ecaad6384b9de76264d3a7de509825b7e0fc1da8ff0f50",
       "originalRevisionSha256": "aa00457270fae6812b6e495ac75476e0ad587029ad44c0060e5ea30db7db0db6",
       "sourceFileSha256": "f91e678d3b98107a9fd152eaf6607bfa5a976ce702f0b634ce8274129834fe08",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -401,6 +435,8 @@
     },
     {
       "originalId": "IX-MATH-UR-C10-N01",
+      "originalStem": "اگر y=3x−4 ہو تو x=5 پر y معلوم کریں۔",
+      "originalStemSha256": "b59b4d21d8a72adaf0fb3e83769b48d54070821ff6af0b205803b91e0f1a1e1e",
       "originalRevisionSha256": "b112dd317b56adfc5097fbc3ea3a96079ac61bc6823e8985b1c8e325e0587762",
       "sourceFileSha256": "f91e678d3b98107a9fd152eaf6607bfa5a976ce702f0b634ce8274129834fe08",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -424,6 +460,8 @@
     },
     {
       "originalId": "IX-MATH-UR-C12-N01",
+      "originalStem": "4، 6، 8، 12 کا mean معلوم کریں۔",
+      "originalStemSha256": "8ce180f8c0ad365ef1c7d24022e41fda9fa83f2f0b5904b8febcce96ccbabe1c",
       "originalRevisionSha256": "c3817f610411b7c29d62c3c5d2212f55684c4b07943e5e2bb7ea62cdc015b5d5",
       "sourceFileSha256": "f91e678d3b98107a9fd152eaf6607bfa5a976ce702f0b634ce8274129834fe08",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -448,6 +486,8 @@
     },
     {
       "originalId": "IX-PHT-E-C01-N01",
+      "originalStem": "Write 0.00045 in scientific notation.",
+      "originalStemSha256": "9851e1e76dfbc1a3447ce893250203c75e47a8180bbfb3bfb36516489533736e",
       "originalRevisionSha256": "617fe88aa4b9c049af132a9282f8f8687cbbb68518fb42059d3cd30546259025",
       "sourceFileSha256": "36e0d30bc2bd57b192ba41d6f2b8261ae87e21b66b4652e0b27074bca6320135",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -469,6 +509,8 @@
     },
     {
       "originalId": "IX-PHT-E-C02-N01",
+      "originalStem": "A body covers 150 m in 15 s. Find average speed.",
+      "originalStemSha256": "87fcdf749038c8d3368d74fbf789ab70c98d48f6558216ff4869ff9c23c2d281",
       "originalRevisionSha256": "0c0215fb50befaf7b46ebb21ed728dc5ede83b8caaa92b5e487cc71bd9503cf4",
       "sourceFileSha256": "36e0d30bc2bd57b192ba41d6f2b8261ae87e21b66b4652e0b27074bca6320135",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -491,6 +533,8 @@
     },
     {
       "originalId": "IX-PHT-E-C03-N01",
+      "originalStem": "Find the force on a 4 kg mass accelerating at 2 m/s².",
+      "originalStemSha256": "f0eddd82ea47934b0b8551c5134f2ffb130eb119c5dbd8d488ee391503529f08",
       "originalRevisionSha256": "98faf200ddff40d408aae248be674a33a0e8944de8b99a88ad7292aa83c7f345",
       "sourceFileSha256": "36e0d30bc2bd57b192ba41d6f2b8261ae87e21b66b4652e0b27074bca6320135",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -513,6 +557,8 @@
     },
     {
       "originalId": "IX-PHT-E-C04-N01",
+      "originalStem": "A 12 N force acts 0.5 m perpendicular from a pivot. Find the moment.",
+      "originalStemSha256": "f3b026c7dee7be8d01dd04e3c574eb48bc142c537793744705ff82b2c3e5a608",
       "originalRevisionSha256": "3d9a97342b018fc2c57c0db358dff80162e0f689972ea2709f80629dd1f0c047",
       "sourceFileSha256": "36e0d30bc2bd57b192ba41d6f2b8261ae87e21b66b4652e0b27074bca6320135",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -535,6 +581,8 @@
     },
     {
       "originalId": "IX-PHT-E-C05-N01",
+      "originalStem": "A machine does 300 J of work in 15 s. Find power.",
+      "originalStemSha256": "5fe415b8d4059a598e6e50373fc62225d69dead08fec79b3362325d518c32834",
       "originalRevisionSha256": "5921a65cb46c353142985c1a9b88705b723837456d726406a94d57c3547933e7",
       "sourceFileSha256": "36e0d30bc2bd57b192ba41d6f2b8261ae87e21b66b4652e0b27074bca6320135",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -557,6 +605,8 @@
     },
     {
       "originalId": "IX-PHT-E-C06-N01",
+      "originalStem": "A 600 g sample occupies 300 cm³. Find density.",
+      "originalStemSha256": "60a7ceba715f68a8f3990410eb4df90295cd92ef1e4d5734ac7f72ac7b73970f",
       "originalRevisionSha256": "93061d3778676fb3eed934c9f29752082fac58390d34addff59da0e6bb4004c9",
       "sourceFileSha256": "36e0d30bc2bd57b192ba41d6f2b8261ae87e21b66b4652e0b27074bca6320135",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -579,6 +629,8 @@
     },
     {
       "originalId": "IX-PHT-U-C01-N01",
+      "originalStem": "0.00045 کو scientific notation میں لکھیں۔",
+      "originalStemSha256": "8180c16963fb658552345307886248a436f9c9eeaa0845e6fb2447f3fb928db5",
       "originalRevisionSha256": "65b9fe406c2133a3943a080df73b59542f3ae3fb90052c19072079e609b60cf4",
       "sourceFileSha256": "36e0d30bc2bd57b192ba41d6f2b8261ae87e21b66b4652e0b27074bca6320135",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -600,6 +652,8 @@
     },
     {
       "originalId": "IX-PHT-U-C02-N01",
+      "originalStem": "ایک جسم 150 m فاصلہ 15 s میں طے کرتا ہے۔ average speed معلوم کریں۔",
+      "originalStemSha256": "36cf97bf700f362812d7db81494bdb371a1221316fbb64e2466b7b405b0f0714",
       "originalRevisionSha256": "7718cf5a51217838fe50916813c133f6226635b2b4a5fac8067e1202c45b6307",
       "sourceFileSha256": "36e0d30bc2bd57b192ba41d6f2b8261ae87e21b66b4652e0b27074bca6320135",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -622,6 +676,8 @@
     },
     {
       "originalId": "IX-PHT-U-C03-N01",
+      "originalStem": "4 kg mass کو 2 m/s² acceleration ملے تو force معلوم کریں۔",
+      "originalStemSha256": "3a9f21e0ef1667ad52b6712ba54956e1a8009aa7a2276eaa5f98a157e67f779e",
       "originalRevisionSha256": "7ec4ffc89addda986817c3cafec296239c70ee5a40d63d965d975b1ecc425ae6",
       "sourceFileSha256": "36e0d30bc2bd57b192ba41d6f2b8261ae87e21b66b4652e0b27074bca6320135",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -644,6 +700,8 @@
     },
     {
       "originalId": "IX-PHT-U-C04-N01",
+      "originalStem": "12 N force pivot سے 0.5 m perpendicular distance پر لگے تو moment معلوم کریں۔",
+      "originalStemSha256": "3fb985d7bdee93530d042c813f7444ba75ad9577e94c060961d7a1429773d2c4",
       "originalRevisionSha256": "8642fc5e90801377f786920b9126ca6d5134f3f2a07d6a532cf27797efcabbf5",
       "sourceFileSha256": "36e0d30bc2bd57b192ba41d6f2b8261ae87e21b66b4652e0b27074bca6320135",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -666,6 +724,8 @@
     },
     {
       "originalId": "IX-PHT-U-C05-N01",
+      "originalStem": "ایک machine 300 J work، 15 s میں کرتی ہے۔ power معلوم کریں۔",
+      "originalStemSha256": "dbef6561b68701ed6ffe7925ae67fe6ca785f92b2a3e8bda99f9fa4b30e5f98e",
       "originalRevisionSha256": "9d5130affccd0c9c7e68b8a187f427793b8693b36bd33af19fb3469f149d863d",
       "sourceFileSha256": "36e0d30bc2bd57b192ba41d6f2b8261ae87e21b66b4652e0b27074bca6320135",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -688,6 +748,8 @@
     },
     {
       "originalId": "IX-PHT-U-C06-N01",
+      "originalStem": "600 g sample کا volume 300 cm³ ہو تو density معلوم کریں۔",
+      "originalStemSha256": "2d753107786f2a15f0e02457593bb4e4150205f3e8cdd14718645a5393c235ef",
       "originalRevisionSha256": "a4a7094f687b4a08b9e694377eacdc96c19c109da7f5ce029cd8812b4ac5c5e4",
       "sourceFileSha256": "36e0d30bc2bd57b192ba41d6f2b8261ae87e21b66b4652e0b27074bca6320135",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -710,6 +772,8 @@
     },
     {
       "originalId": "IX-PHY-2025-C01-N01",
+      "originalStem": "Write 0.00072 m in scientific notation.",
+      "originalStemSha256": "888c8dce7e4e8250b621bc2e3a2fb6ffcae05daf965737b0aabbf072246db81b",
       "originalRevisionSha256": "76c84aa8f20d3881824d0a1111a9ddae7f407361790e141fee9a050ecaf49acb",
       "sourceFileSha256": "1a882970fc2548f50bc001691d6de990ce156690cfa252f3f5355d8d63a6dc16",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -731,6 +795,8 @@
     },
     {
       "originalId": "IX-PHY-2025-C03-N01",
+      "originalStem": "What net force is required to accelerate a 4 kg object at 3 m/s²?",
+      "originalStemSha256": "7107bfe4c97bd7f7f8b9c459b2e0def226ee971f1b5709e77e84e6f8b3809fed",
       "originalRevisionSha256": "3cefff6ffe9f29044a5331d991723f0446d68449763a7637b4cc3b99b2191cea",
       "sourceFileSha256": "1a882970fc2548f50bc001691d6de990ce156690cfa252f3f5355d8d63a6dc16",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -753,6 +819,8 @@
     },
     {
       "originalId": "IX-PHY-2025-C05-N01",
+      "originalStem": "A machine does 1200 J of work in 6 s. Calculate its power.",
+      "originalStemSha256": "18a117b5c799a77c07acc884b539a323878ae78b39226105147bbd9937d3c633",
       "originalRevisionSha256": "751a47a83c99cc241dfd93ecc446a571843388dd6fa5e0148ded9c365e4cb5aa",
       "sourceFileSha256": "1a882970fc2548f50bc001691d6de990ce156690cfa252f3f5355d8d63a6dc16",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -775,6 +843,8 @@
     },
     {
       "originalId": "IX-PHY-2025-C06-N01",
+      "originalStem": "A force of 600 N acts normally on an area of 0.20 m². Calculate pressure.",
+      "originalStemSha256": "aa82b9f04f71e6844f9affc1e77d8cee975055e10b0cf2b78798fe7f8218d9c6",
       "originalRevisionSha256": "0edd628c1cab17074c160e10b317304c7b937f8f8da9a588d714049af6e58efd",
       "sourceFileSha256": "1a882970fc2548f50bc001691d6de990ce156690cfa252f3f5355d8d63a6dc16",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -797,6 +867,8 @@
     },
     {
       "originalId": "IX-PHY-2025-C07-N01",
+      "originalStem": "Convert 27 °C to kelvin using K = °C + 273.",
+      "originalStemSha256": "cc0040c294427395ff09a64b1be32c5f11c07abd2ff79fe915ae614f0a19401e",
       "originalRevisionSha256": "9e6b440f72c1d57b4ab8890aa79be270f0f818b5b27154d0859b5209a085a567",
       "sourceFileSha256": "1a882970fc2548f50bc001691d6de990ce156690cfa252f3f5355d8d63a6dc16",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -819,6 +891,8 @@
     },
     {
       "originalId": "IX-PHY-UR-C01-N01",
+      "originalStem": "250 cm کو metre میں تبدیل کریں۔",
+      "originalStemSha256": "b2a1021829923df4bbfa604a445dab13f3c835fb177953f6c66c094580859c8d",
       "originalRevisionSha256": "623c5c5ab2bd1d8604c17c8357f53a9da03a65e30bc17c4106dc3ee346b986cc",
       "sourceFileSha256": "d53522d5709e778d1610015cfdb5b51d75f9a2ca5f61b02a55ef682eb4e877fd",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -840,6 +914,8 @@
     },
     {
       "originalId": "IX-PHY-UR-C02-N01",
+      "originalStem": "120 m فاصلہ 10 s میں طے کیا جائے تو average speed معلوم کریں۔",
+      "originalStemSha256": "6bc2ab68b3b0c3608d6267a6052a3be9388788bdc1b18232d793a6be9c1b0bb8",
       "originalRevisionSha256": "99b9f9db6cb51714a176e6b5f3ec332a9c3ee0cb5a25a4354bc5edf2140ca236",
       "sourceFileSha256": "d53522d5709e778d1610015cfdb5b51d75f9a2ca5f61b02a55ef682eb4e877fd",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -862,6 +938,8 @@
     },
     {
       "originalId": "IX-PHY-UR-C03-N01",
+      "originalStem": "2 kg mass کو 3 m/s² acceleration دینے کے لیے force معلوم کریں۔",
+      "originalStemSha256": "2e34ab8929f8041b82d2a8529cf3dce7045a5b8e23c8fd1dfbdd94dd31c2be70",
       "originalRevisionSha256": "5ff52df324735c0da55dfdc2b3d3385394b72c3b95d3bf692e30f4d03b3c5ddd",
       "sourceFileSha256": "d53522d5709e778d1610015cfdb5b51d75f9a2ca5f61b02a55ef682eb4e877fd",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -884,6 +962,8 @@
     },
     {
       "originalId": "IX-PHY-UR-C04-N01",
+      "originalStem": "10 N force pivot سے 0.5 m عمودی فاصلے پر لگے تو moment معلوم کریں۔",
+      "originalStemSha256": "95f85e324e6564e7e5f6435012c4b4f948334b768f09693d8ba3363a68c31fed",
       "originalRevisionSha256": "08f2ad4f34e956e354b79810d807711b8e22e68da7b29c2cb4d5f26aea5f8028",
       "sourceFileSha256": "d53522d5709e778d1610015cfdb5b51d75f9a2ca5f61b02a55ef682eb4e877fd",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -906,6 +986,8 @@
     },
     {
       "originalId": "IX-PHY-UR-C05-N01",
+      "originalStem": "200 J کام 10 s میں ہو تو power معلوم کریں۔",
+      "originalStemSha256": "91601c4a46cb959503ac5f9095ab3895fafea457a3337e891435f4355f598f3b",
       "originalRevisionSha256": "528fe3eb8f568583878417ab95529ae34890a3a7e0020e65b4d41d5d969a3cca",
       "sourceFileSha256": "d53522d5709e778d1610015cfdb5b51d75f9a2ca5f61b02a55ef682eb4e877fd",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -928,6 +1010,8 @@
     },
     {
       "originalId": "IX-PHY-UR-C06-N01",
+      "originalStem": "400 g mass کا volume 200 cm³ ہو تو density معلوم کریں۔",
+      "originalStemSha256": "ec5ab801bd049aa730a8a58759dab8e37061b42135ad6545d4869f6fc8621cc5",
       "originalRevisionSha256": "5bd0c4dfc2cf330f4e727130736070b05a3ed535834d81c2fe1af762fd904459",
       "sourceFileSha256": "d53522d5709e778d1610015cfdb5b51d75f9a2ca5f61b02a55ef682eb4e877fd",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -950,6 +1034,8 @@
     },
     {
       "originalId": "IX-PHY-UR-C07-N01",
+      "originalStem": "2 kg مادے کی specific heat 500 J kg⁻¹ K⁻¹ ہو اور temperature 3 K بڑھے تو Q معلوم کریں۔",
+      "originalStemSha256": "199674f7e073946d4e32b61b46636e73704e890980deddaeb9ffd1173cf4e131",
       "originalRevisionSha256": "4f2973cc06d16cafffd705c7653722eb61b1cedb802e85a2bb8b489524a025da",
       "sourceFileSha256": "d53522d5709e778d1610015cfdb5b51d75f9a2ca5f61b02a55ef682eb4e877fd",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -973,6 +1059,8 @@
     },
     {
       "originalId": "X-MATH-C01-N01",
+      "originalStem": "Simplify (3+2i)+(4-5i).",
+      "originalStemSha256": "905adae477ecca79a3368c17471cb7604e82dadb1975ad5b50940e5e82a227f1",
       "originalRevisionSha256": "280c444a46587c22d3f28e25cbbfc9e7aa12039ca6d61613caa559f17d40c41f",
       "sourceFileSha256": "3bdd9eeb76c6e29d57178fda83e0ceee1fe7b4f8ceeae62b956af6122d150f9a",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -1000,6 +1088,8 @@
     },
     {
       "originalId": "X-MATH-C01-N02",
+      "originalStem": "Calculate (2+3i)(1-2i) in standard complex form.",
+      "originalStemSha256": "f5cd299f82d9bc8bb5c69ed5bbd275c1bfc0302e0c94d118f474b8ffa301c371",
       "originalRevisionSha256": "27a7f46f5678d0462ef84bc443f9a804483bec25643bc0b9840a6e909dbf0068",
       "sourceFileSha256": "22f5a6f7e85346d295e624b5f39ea6471d5bfddb90f3a6b0f429e347dd475986",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -1027,6 +1117,8 @@
     },
     {
       "originalId": "X-MATH-C02-N01",
+      "originalStem": "Solve x²-5x+6=0.",
+      "originalStemSha256": "d887b4d2a33a9464553c48bfbb409667149114e1a2207f8c1cb1cb23dbac6d88",
       "originalRevisionSha256": "9f70f3ecb0c8ea7f6a9db6db7cb3a8037ed136f89b385bdc31306526752973c0",
       "sourceFileSha256": "3bdd9eeb76c6e29d57178fda83e0ceee1fe7b4f8ceeae62b956af6122d150f9a",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -1052,6 +1144,8 @@
     },
     {
       "originalId": "X-MATH-C03-N01",
+      "originalStem": "Find det[[2,3],[1,4]].",
+      "originalStemSha256": "98514c0ab53bd3a6887649964c819171268ce7e85c1167a702865249d3c218dd",
       "originalRevisionSha256": "ef843cc41735c20a568ba25e2937b0a94ac7e70ede9bfc424dd0b3670ed351d8",
       "sourceFileSha256": "3bdd9eeb76c6e29d57178fda83e0ceee1fe7b4f8ceeae62b956af6122d150f9a",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -1076,6 +1170,8 @@
     },
     {
       "originalId": "X-MATH-C04-N01",
+      "originalStem": "If f(x)=2x²-3, find f(2).",
+      "originalStemSha256": "dbf33824e1ca64c5be01cc63f25042f89ad365b7fd6b3d66988baf76997b7a85",
       "originalRevisionSha256": "20919760601c461c7c49b9d0ec3a4f53146c262f01cb5903a2e7606afb6db2f2",
       "sourceFileSha256": "3bdd9eeb76c6e29d57178fda83e0ceee1fe7b4f8ceeae62b956af6122d150f9a",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -1099,6 +1195,8 @@
     },
     {
       "originalId": "X-MATH-C05-N01",
+      "originalStem": "Simplify 1/x + 1/(2x), x≠0.",
+      "originalStemSha256": "a25e06404745e84a708fdb62dcbadc5a69c9a3230160761e7d529098c5bb7c1c",
       "originalRevisionSha256": "6f0919382d1009dce1b37ee489e2d8cdf774ee84b085d8a1071d0c49c6a32b61",
       "sourceFileSha256": "3bdd9eeb76c6e29d57178fda83e0ceee1fe7b4f8ceeae62b956af6122d150f9a",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -1122,6 +1220,8 @@
     },
     {
       "originalId": "X-MATH-C06-N01",
+      "originalStem": "If a=(2,-1) and b=(3,4), find a+b.",
+      "originalStemSha256": "aba9a32b700655d221e1fe533531a9c045ca777330239facc9c8b4a69c9bfe56",
       "originalRevisionSha256": "47125cde861c13e068fac987c0c12391724278b6aa9bf9434b49d54d2aa5ea72",
       "sourceFileSha256": "3bdd9eeb76c6e29d57178fda83e0ceee1fe7b4f8ceeae62b956af6122d150f9a",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -1149,6 +1249,8 @@
     },
     {
       "originalId": "X-MATH-C09-N01",
+      "originalStem": "From external point P, tangents PA and PB touch a circle. If PA=7 cm, find PB.",
+      "originalStemSha256": "c6c1dd224a78d4bd558d70293c48df736ded1135aee52500da4e4b85d6e9ce99",
       "originalRevisionSha256": "b5f2e660241821c8cb7872403fb7150e684098dd65dd9e0537bb592cab459a3c",
       "sourceFileSha256": "3bdd9eeb76c6e29d57178fda83e0ceee1fe7b4f8ceeae62b956af6122d150f9a",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -1170,6 +1272,8 @@
     },
     {
       "originalId": "X-MATH-C09-N02",
+      "originalStem": "From point P, OP=17 cm and circle radius OA=8 cm. Find tangent PA.",
+      "originalStemSha256": "1899a613209466201a8533449e8e96b326bb5069808af0a43ac43e65b1e89d23",
       "originalRevisionSha256": "66728e29f2f0bc1528edc3ae066ba2cac5ae7afdcffddd1ffb36d56193ab2fde",
       "sourceFileSha256": "22f5a6f7e85346d295e624b5f39ea6471d5bfddb90f3a6b0f429e347dd475986",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -1192,6 +1296,8 @@
     },
     {
       "originalId": "X-MATH-C11-N01",
+      "originalStem": "Find the mean of 5,7,8,10,10.",
+      "originalStemSha256": "34523037bffe82307a7578d9dce2db547ba3598654c534aaa466b8f13e1d95d7",
       "originalRevisionSha256": "d3b34588f0e69e465fc61d3e8e69b82cd078fbb12e535bba4a325b68a66db4dd",
       "sourceFileSha256": "3bdd9eeb76c6e29d57178fda83e0ceee1fe7b4f8ceeae62b956af6122d150f9a",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -1217,6 +1323,8 @@
     },
     {
       "originalId": "X-MATH-C12-N01",
+      "originalStem": "A bag has 3 red and 5 blue balls. Find probability of red on one random draw.",
+      "originalStemSha256": "9a4dc2ab06f2299c699215fa7b69f0e8884d3836e8df32c71ca186ec2973930e",
       "originalRevisionSha256": "3b081f69d2ae0375f5c12a9a2627edc86a31a4f8e77b071450989d0ad6f562e3",
       "sourceFileSha256": "3bdd9eeb76c6e29d57178fda83e0ceee1fe7b4f8ceeae62b956af6122d150f9a",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -1239,6 +1347,8 @@
     },
     {
       "originalId": "X-PHY-C10-N01",
+      "originalStem": "How much energy is needed to raise 2 kg of water by 5 K if c=4200 J kg⁻¹ K⁻¹?",
+      "originalStemSha256": "253ec0856ede3b0a8a17a1f06fb34a4a9bf84383cb84ad039e9e8d9495d3d627",
       "originalRevisionSha256": "7a321c3d8897b8b312b894dff9f47eb8804cd13726f0bf65918d32f60a87aaf2",
       "sourceFileSha256": "cc25a3b4d00fb9233d711f9cdafd19960d5b1c2a7f72a48005ec8677ab26c416",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -1262,6 +1372,8 @@
     },
     {
       "originalId": "X-PHY-C12-N01",
+      "originalStem": "A wave has frequency 50 Hz and wavelength 2 m. Find its speed.",
+      "originalStemSha256": "55b3e2c7ada690b65e7e59b6881e1e6280cd5ce90c183fa77c16c66bf7b64c8f",
       "originalRevisionSha256": "c8706fe255e13bb98314240ed50b8fed3ef84e78a7c2f6ff2e1420f34881022d",
       "sourceFileSha256": "cc25a3b4d00fb9233d711f9cdafd19960d5b1c2a7f72a48005ec8677ab26c416",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -1284,6 +1396,8 @@
     },
     {
       "originalId": "X-PHY-C16-N01",
+      "originalStem": "A 12 V supply drives 3 A through a resistor. Find R.",
+      "originalStemSha256": "cc58f43a06368d52c49c437c8bdbb307d23d2faafb0d1e366081d05f6c58dfa8",
       "originalRevisionSha256": "f0eb312ab0ef62035aa9481b3893f8e8f508eadabc2b9e9e206b56baa2b52449",
       "sourceFileSha256": "cc25a3b4d00fb9233d711f9cdafd19960d5b1c2a7f72a48005ec8677ab26c416",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -1306,6 +1420,8 @@
     },
     {
       "originalId": "X-PHY-TECH-C10-X01",
+      "originalStem": "A 2 kg material with c=500 J kg⁻¹ K⁻¹ warms by 4 K. Calculate energy supplied.",
+      "originalStemSha256": "f8adbc54fbd9b418bf0135536e612d1e3b8513cade7b2adc7b82f53bf02a5c62",
       "originalRevisionSha256": "0e86e2d1cf7587394a4272ad9cb969745322bed1f321f24ea1e576b4c723c409",
       "sourceFileSha256": "4accf005bbbd69363d4e7947001844a92b9dddcf02b526cf5d642116741e4423",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -1329,6 +1445,8 @@
     },
     {
       "originalId": "X-PHY-TECH-C12-X01",
+      "originalStem": "A wave has frequency 25 Hz and wavelength 4 m. Find its speed.",
+      "originalStemSha256": "fefca68fb3551caef8e03f345526f21c1e01a11e1749b751b863689e7076c76d",
       "originalRevisionSha256": "9168b1c618c4963931e71024a1c50f1b0dfb9b16df3ab9e92618d7568326b040",
       "sourceFileSha256": "4accf005bbbd69363d4e7947001844a92b9dddcf02b526cf5d642116741e4423",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -1351,6 +1469,8 @@
     },
     {
       "originalId": "X-PHY-TECH-C14-X01",
+      "originalStem": "Light travels at 2.0×10⁸ m/s in a medium. Find refractive index using c=3.0×10⁸ m/s.",
+      "originalStemSha256": "8f4885961719053d1baba1cfba39b99f133379d4da12aeec07bf92d0bfbe55e9",
       "originalRevisionSha256": "1b372ea1572fcd2f13fd7ff20cc613ae1800a50fb6471274537c5669fcce2a57",
       "sourceFileSha256": "4accf005bbbd69363d4e7947001844a92b9dddcf02b526cf5d642116741e4423",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",
@@ -1373,6 +1493,8 @@
     },
     {
       "originalId": "X-PHY-TECH-C16-X01",
+      "originalStem": "A 12 V supply drives 2 A through a resistor. Find resistance.",
+      "originalStemSha256": "cd87a5057ea9d9b6f333ce637b4ead27190b03c1a80058dcf29b4b3711dfe0c8",
       "originalRevisionSha256": "0b64a826b7cc7b79a4aa246f727025c730ca9b6c926bc48f001bd4f16c5ca400",
       "sourceFileSha256": "4accf005bbbd69363d4e7947001844a92b9dddcf02b526cf5d642116741e4423",
       "checkType": "INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM",

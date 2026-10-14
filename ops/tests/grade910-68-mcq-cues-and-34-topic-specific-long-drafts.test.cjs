@@ -33,6 +33,7 @@ test('34 priority long answer drafting notes are topic-specific, revisable and N
  assert.equal(x.referenceMayAlreadyBeSufficientButFlaggedOnlyByLength,3)
  assert.equal(x.qualifiedTeacherReviewed,0)
  assert.equal(x.verifiedPublished,0)
+ assert.ok(x.rows.every(r=>r.originalStem.length>=25))
  assert.ok(x.rows.every(r=>r.substantiveDraftPoints.length>=4))
  assert.ok(x.rows.every(r=>r.substantiveDraftPoints.every(t=>t.length>=25)))
  assert.ok(x.rows.every(r=>r.existingQuestionUnchanged&&!r.academicallyApproved&&!r.published))

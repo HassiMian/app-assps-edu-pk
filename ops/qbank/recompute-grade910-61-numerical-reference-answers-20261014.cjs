@@ -151,12 +151,20 @@ function verify(){
  for(const q of numerical){
   const v=S[q.originalId]
   if(!v)throw Error('UNMAPPED_ORIGINAL_'+q.originalId)
+  const original=originalIntegrity.rows.find(item=>item.originalId===q.originalId)
+  if(!original||!original.sourceFile)throw Error('MISSING_SOURCE_FILE_MAPPING_'+q.originalId)
+  const file=path.join(ROOT,'al-siddique-frontend/src/Modules/Paper-Generator/seed-data/grade9-10-staging',original.sourceFile)
+  const data=JSON.parse(fs.readFileSync(file))
+  const originalQuestion=(data.drafts||data.questions||data.items||[]).find(item=>item.id===q.originalId)
+  if(!originalQuestion)throw Error('MISSING_ORIGINAL_STEM_'+q.originalId)
+  const originalStem=String(originalQuestion.stem||originalQuestion.content?.en?.stem||originalQuestion.content?.ur?.stem||'')
+  if(!originalStem.trim())throw Error('EMPTY_ORIGINAL_STEM_'+q.originalId)
   const [kind,inputs]=v
   const computed=compute(kind,inputs)
   const checked=matchSourceAnswer(kind,inputs,computed,q.originalReferenceAnswer)
   if(!checked)throw Error('ANSWER_COMPUTATION_DISAGREEMENT:'+q.originalId)
   results.push({
-   originalId:q.originalId,originalRevisionSha256:q.originalRevisionSha256,
+   originalId:q.originalId,originalStem,originalStemSha256:hash(originalStem),originalRevisionSha256:q.originalRevisionSha256,
    sourceFileSha256:q.sourceFileSha256,
    checkType:'INDEPENDENT_ARITHMETIC_OR_SYMBOLIC_RECALCULATION_FROM_LOCKED_STEM',
    computationalMethod:computed.method,inputs,computedValue:computed.value,

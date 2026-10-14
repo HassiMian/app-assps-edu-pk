@@ -13,6 +13,7 @@ test('61 original numerical stems are integrity-bound and independently re-evalu
  assert.equal(r.published,0)
  assert.ok(r.rows.every(x=>x.independentComputationAgreesWithSourceReference))
  assert.ok(r.rows.every(x=>/^[a-f0-9]{64}$/.test(x.originalRevisionSha256)))
+ assert.ok(r.rows.every(x=>x.originalStem.length>10 && sha(x.originalStem)===x.originalStemSha256))
  assert.ok(r.rows.every(x=>x.curriculumAndExercisePageCertified===false))
  assert.deepEqual(JSON.parse(fs.readFileSync(numerical.OUTPUT)),r)
 })
