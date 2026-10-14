@@ -179,7 +179,10 @@ async function showPromotionPlan(token){
    ' subjects with complete mark entries • Printing not confirmed: '+(!p.printedResultCardsVerified?'YES':'NO')
   const detail=document.getElementById('promotionDetails')
   const missing=info.missingSubjects.length?info.missingSubjects.join(', '):'None'
-  detail.append(e('div','Pending subjects: '+missing),e('div','Next class: Pre-Nine (section pending)'),
+  detail.append(e('div','Pending subjects: '+missing),
+   e('div','Original Class Eight roster: '+String(p.frozenOriginalCohortCount??0)+'/'+String(p.rosterAtPlanning??p.enrolledStudents)+
+     ' preserved; '+String(p.historicalLinkedScoreCount??0)+' linked historic score entries'),
+   e('div','Next class: Pre-Nine (section pending)'),
    e('div','Promotion decision: '+(p.canPromoteNow?'Ready for signed institutional workflow':'HOLD until printed cards and academic review')))
   document.getElementById('promotion').style.display='block'
  }catch(err){ /* Optional admin-only preflight. Never infer print completion. */ }

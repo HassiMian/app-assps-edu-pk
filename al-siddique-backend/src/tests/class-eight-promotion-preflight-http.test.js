@@ -4,7 +4,7 @@ const assert=require('node:assert/strict')
 const http=require('node:http')
 const Module=require('node:module')
 const express=require('express')
-let school=1,role='admin',missingPolicy=false,failedDb=false,ready=false
+let school=1,role='admin',missingPolicy=false,failedDb=false,ready=false,rosterMatch=true
 const trace=[]
 const policy=()=>({id:1,exam_id:9,source_class:'Eight',source_section:'Blue',
  destination_class:'Pre-Nine',destination_section:ready?'Blue':null,
@@ -27,6 +27,8 @@ Module._load=function(name,parent,isMain){
     return {rows:missingPolicy||school!==1?[]:[policy()]}
    if(sql.includes('FROM public.students WHERE'))
     return {rows:[{n:11}]}
+   if(sql.includes('FROM public.school_class_promotion_source_roster'))
+    return {rows:[{captured:11,still_source:rosterMatch?11:10,historical_score_rows:55}]}
    if(sql.includes('FROM public.exam_subjects es'))
     return {rows:subjectRows()}
    throw Error('Unrecognized SQL fixture')
@@ -50,12 +52,15 @@ const request=async(auth=true)=>{
  const body=await response.json().catch(()=>null)
  return {status:response.status,body}
 }
-const reset=()=>{school=1;role='admin';missingPolicy=false;failedDb=false;ready=false;trace.length=0}
+const reset=()=>{school=1;role='admin';missingPolicy=false;failedDb=false;ready=false;rosterMatch=true;trace.length=0}
 test('authentic school role fixture sees pending print and missing Science, never promotes',async()=>{
  reset()
  const r=await request()
  assert.equal(r.status,200)
  assert.equal(r.body.plan.enrolledStudents,11)
+ assert.equal(r.body.plan.frozenOriginalCohortCount,11)
+ assert.equal(r.body.plan.historicalLinkedScoreCount,55)
+ assert.equal(r.body.plan.originalCohortPreserved,true)
  assert.equal(r.body.plan.originalExamName,'First Term Exam')
  assert.equal(r.body.plan.sourceClass,'Eight')
  assert.equal(r.body.plan.targetClass,'Pre-Nine')
@@ -87,4 +92,15 @@ test('print approval alone cannot bypass missing scores or maxima',async()=>{
 test('database failure fails closed with 503 and no writes',async()=>{
  reset();failedDb=true
  assert.equal((await request()).status,503)
+})
+
+test('live number of students alone is insufficient if original cohort membership changed',async()=>{
+ reset()
+ rosterMatch=false
+ const r=await request()
+ assert.equal(r.status,200)
+ assert.equal(r.body.plan.enrolledStudents,11)
+ assert.equal(r.body.plan.originalCohortPreserved,false)
+ assert.equal(r.body.plan.canPromoteNow,false)
+ assert.ok(r.body.releaseHoldReasons.includes('HISTORICAL_CLASS_EIGHT_ROSTER_NOT_VERIFIED'))
 })

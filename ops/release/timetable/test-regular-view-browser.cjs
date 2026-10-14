@@ -10,7 +10,7 @@ const srv=http.createServer((req,res)=>{
   if(req.headers.authorization!=='Bearer synthetic-ui-token'){res.writeHead(401);res.end();return}
   res.writeHead(200,{'Content-Type':'application/json'})
   res.end(JSON.stringify({success:true,readOnly:true,
-   plan:{sourceClass:'Eight',enrolledStudents:11,passingPercentage:40,expectedSubjectCount:7,
+   plan:{sourceClass:'Eight',enrolledStudents:11,rosterAtPlanning:11,frozenOriginalCohortCount:11,historicalLinkedScoreCount:55,originalCohortPreserved:true,passingPercentage:40,expectedSubjectCount:7,
    printedResultCardsVerified:false,canPromoteNow:false},
    missingSubjects:['Science','Quran / Nazra'],
    subjectProgress:['Computer','English','Islamiyat','Mathematics','Urdu'].map(subject=>({subject,missing:0}))
@@ -49,6 +49,7 @@ const srv=http.createServer((req,res)=>{
   await page.locator('#promotion').waitFor({state:'visible'})
   assert.match(await page.locator('#promotion').innerText(),/Science/)
   assert.match(await page.locator('#promotion').innerText(),/Pre-Nine/)
+  assert.match(await page.locator('#promotion').innerText(),/11\/11 preserved/)
   assert.match(await page.locator('#promotion').innerText(),/HOLD/)
   assert.equal(await page.locator('#staff .card').count()>=10,true)
   assert.match(await page.locator('#cards').innerText(),/Boys \/ Usman/)

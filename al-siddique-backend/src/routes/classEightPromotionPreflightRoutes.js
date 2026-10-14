@@ -44,6 +44,25 @@ router.get('/eight-to-pre-nine/preflight',protect,requireScopeForServiceOnly('sc
       AND es.section=$4 AND es.is_active=true
    GROUP BY es.id,es.subject ORDER BY es.subject`,
     [school,p.exam_id,p.source_class,p.source_section,p.passing_percentage])
+  // Frozen original class membership survives the later update to students.class.
+  // No names, scores or roster IDs are returned through this endpoint.
+  const frozen=await query(`SELECT
+    COUNT(DISTINCT snap.student_id)::int AS captured,
+    COUNT(DISTINCT CASE WHEN s.school_id=$1 AND s.class=$3 AND s.section=$4
+      AND s.is_active THEN snap.student_id END)::int AS still_source,
+    COUNT(DISTINCT r.id)::int AS historical_score_rows
+    FROM public.school_class_promotion_source_roster snap
+    JOIN public.students s ON s.id=snap.student_id
+    LEFT JOIN public.exam_results r ON r.school_id=snap.school_id
+      AND r.student_id=snap.student_id AND r.exam_id=$5
+    WHERE snap.school_id=$1 AND snap.plan_id=$2`,
+    [school,p.id,p.source_class,p.source_section,p.exam_id])
+  const snapshot=frozen.rows[0]
+  const captured=Number(snapshot?.captured||0)
+  const stillSource=Number(snapshot?.still_source||0)
+  const historicalScoreRows=Number(snapshot?.historical_score_rows||0)
+  const originalCohortPreserved=captured===Number(p.baseline_student_count)
+    && stillSource===captured
   const subjects=offerings.rows.map(x=>({
     subject:x.subject,entered:Number(x.entered),missing:Math.max(total-Number(x.entered),0),
     belowPassing:Number(x.below_passing),invalid:Number(x.invalid),
@@ -57,7 +76,7 @@ router.get('/eight-to-pre-nine/preflight',protect,requireScopeForServiceOnly('sc
   const schoolApproved=Boolean(p.academic_approved_at)
   const sameRoster=total===Number(p.baseline_student_count)
   const canPromote=!noMatch&&missing.length===0&&!bad&&unapprovedMaxima.length===0&&
-    printed&&schoolApproved&&sameRoster&&Boolean(p.destination_section)&&
+    printed&&schoolApproved&&sameRoster&&originalCohortPreserved&&Boolean(p.destination_section)&&
     p.status==='READY_FOR_APPROVED_PROMOTION'
   return res.json({success:true,
    plan:{id:p.id,schoolId:school,sourceExamId:p.exam_id,
@@ -67,6 +86,8 @@ router.get('/eight-to-pre-nine/preflight',protect,requireScopeForServiceOnly('sc
      targetClass:p.destination_class,targetSection:p.destination_section,
      promotionStatus:p.status,passingPercentage:Number(p.passing_percentage),
      enrolledStudents:total,rosterAtPlanning:Number(p.baseline_student_count),
+     frozenOriginalCohortCount:captured,historicalLinkedScoreCount:historicalScoreRows,
+     originalCohortPreserved,
      officialSubjectCount:subjects.length,expectedSubjectCount:Number(p.expected_subject_count),
      printedResultCardsVerified:printed,principalAcademicApproval:schoolApproved,
      completedPromotion:Boolean(p.executed_at),canPromoteNow:canPromote},
@@ -74,6 +95,7 @@ router.get('/eight-to-pre-nine/preflight',protect,requireScopeForServiceOnly('sc
    maximaPending:unapprovedMaxima,rosterChanged:!sameRoster,
    releaseHoldReasons:[
      ...(noMatch?['SUBJECT_OFFERINGS_CHANGED']:[]),
+     ...(!originalCohortPreserved?['HISTORICAL_CLASS_EIGHT_ROSTER_NOT_VERIFIED']:[]),
      ...(missing.length?['SCHEDULED_MARKS_INCOMPLETE']:[]),
      ...(bad?['INVALID_SAVED_MARKS']:[]),
      ...(unapprovedMaxima.length?['PAPER_MAXIMA_NOT_APPROVED']:[]),
@@ -83,7 +105,7 @@ router.get('/eight-to-pre-nine/preflight',protect,requireScopeForServiceOnly('sc
      ...(!p.destination_section?['PRE_NINE_SECTION_NOT_ASSIGNED']:[])
    ],
    readOnly:true,noStudentClassChanged:true,
-   note:'Class Eight First Term exam is final assessment for its promotion only. It is not a Class IX exam. Original scores and historical class reporting must be snapshotted before future student transfers.'})
+   note:'Class Eight First Term exam is final assessment for its promotion only. It is not a Class IX exam. Original class Eight cohort is preserved for historical results, but final marks and printed result-card batch still require their own signed post-examination evidence before transfers.'})
  }catch(err){
   console.error('Grade Eight promotion preflight',err.code||'QUERY_FAILED')
   return res.status(503).json({success:false,code:'PROMOTION_PREFLIGHT_UNAVAILABLE'})
