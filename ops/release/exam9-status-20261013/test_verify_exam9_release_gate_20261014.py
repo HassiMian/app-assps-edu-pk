@@ -62,7 +62,7 @@ class ReleaseGateTests(TestCase):
         self.assertEqual(code,2)
         self.assertTrue(result['gates']['original_exam_scores_preserved'])
         self.assertTrue(result['gates']['current_exam9_rows_integrity'])
-        self.assertFalse(result['gates']['original_grade_snapshot_unchanged'])
+        self.assertFalse(result['gates']['original_grade_snapshot_unchanged_or_signed_revision'])
         self.assertTrue(result['gates']['pass40_F_grade_conflicts_reviewed'])
 
     def test_rejects_numeric_grade_or_maximum_tampering(self):
