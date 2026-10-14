@@ -32,7 +32,7 @@ footer{margin-top:22px;text-align:center;font-size:12px;color:var(--muted)}
 #error{display:none;margin-bottom:15px;padding:14px;border:1px solid #fac1c1;background:#fff1f1;color:#922d35;border-radius:10px}
 #print{display:none}#loading{color:#436081}
 @media print{
-#staff{display:none!important}
+#staff,#promotion{display:none!important}
 @page{size:A4 portrait;margin:11mm}
 body{background:white;color:black;font-size:11px}
 header{background:white;color:#092c57;box-shadow:none;padding:8px 0 15px}
@@ -61,6 +61,12 @@ footer{display:none}
 <div id="conflict" class="notice" style="background:#fff0d9;border-left-color:#bb7817" hidden></div>
 <section id="bells" class="bells" aria-label="School bell times"></section>
 <section id="cards" class="grid" aria-label="Class timetable"></section>
+<section id="promotion" style="margin-top:20px;display:none" aria-label="Class Eight to Pre-Nine planning">
+<h2>Class Eight Blue → Pre-Nine — Result & Promotion Readiness</h2>
+<div id="promotionStatus" class="notice"></div>
+<div id="promotionDetails" class="toolbar"></div>
+<p class="small">Class Eight First Term is final for this promotion only. No Class IX First Term exam was held. This screen is read-only: printing or opening it does not promote students or record print completion.</p>
+</section>
 <section id="staff" style="margin-top:22px;display:none" aria-label="Employee subjects and departments">
 <h2>Employee Teaching Subjects & Departments</h2>
 <p class="small">Timetable-observed only; not a qualification or marks-entry authorization.</p>
@@ -159,6 +165,25 @@ async function showStaffMatrix(token){
   document.getElementById('staff').style.display='block'
  }catch(err){ /* Admin-only matrix must never interfere with class timetable. */ }
 }
+async function showPromotionPlan(token){
+ try{
+  const response=await fetch('/api/academic-promotions/eight-to-pre-nine/preflight',{
+   headers:{Authorization:'Bearer '+token,Accept:'application/json'},cache:'no-store'})
+  if(!response.ok)return
+  const info=await response.json()
+  if(!info.success||!info.readOnly||!info.plan||info.plan.sourceClass!=='Eight')return
+  const p=info.plan
+  const status=document.getElementById('promotionStatus')
+  status.textContent=p.enrolledStudents+' Class Eight Blue students • '+p.passingPercentage+
+   '% passing • '+info.subjectProgress.filter(v=>v.missing===0).length+'/'+p.expectedSubjectCount+
+   ' subjects with complete mark entries • Printing not confirmed: '+(!p.printedResultCardsVerified?'YES':'NO')
+  const detail=document.getElementById('promotionDetails')
+  const missing=info.missingSubjects.length?info.missingSubjects.join(', '):'None'
+  detail.append(e('div','Pending subjects: '+missing),e('div','Next class: Pre-Nine (section pending)'),
+   e('div','Promotion decision: '+(p.canPromoteNow?'Ready for signed institutional workflow':'HOLD until printed cards and academic review')))
+  document.getElementById('promotion').style.display='block'
+ }catch(err){ /* Optional admin-only preflight. Never infer print completion. */ }
+}
 async function start(){
  const token=localStorage.getItem('al_siddique_token')
  if(!token){document.getElementById('loading').hidden=true;const b=document.getElementById('error');b.style.display='block';b.textContent='Please sign in to the school SaaS to view the saved timetable.';return}
@@ -170,6 +195,7 @@ async function start(){
   draw(json.data)
   document.getElementById('print').style.display='inline-block'
   void showStaffMatrix(token)
+  void showPromotionPlan(token)
  }catch(error){const b=document.getElementById('error');b.style.display='block';b.textContent=error.message}
  finally{document.getElementById('loading').hidden=true}
 }

@@ -6,6 +6,17 @@ const data=JSON.parse(fs.readFileSync('/tmp/assps-timetable-9-fixture.json','utf
 const staff=JSON.parse(fs.readFileSync('/tmp/assps-timetable-staff-fixture.json','utf8'))
 const srv=http.createServer((req,res)=>{
  if(req.url==='/timetable/regular'){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});res.end(html);return}
+ if(req.url==='/api/academic-promotions/eight-to-pre-nine/preflight'){
+  if(req.headers.authorization!=='Bearer synthetic-ui-token'){res.writeHead(401);res.end();return}
+  res.writeHead(200,{'Content-Type':'application/json'})
+  res.end(JSON.stringify({success:true,readOnly:true,
+   plan:{sourceClass:'Eight',enrolledStudents:11,passingPercentage:40,expectedSubjectCount:7,
+   printedResultCardsVerified:false,canPromoteNow:false},
+   missingSubjects:['Science','Quran / Nazra'],
+   subjectProgress:['Computer','English','Islamiyat','Mathematics','Urdu'].map(subject=>({subject,missing:0}))
+    .concat([{subject:'Science',missing:11},{subject:'Quran / Nazra',missing:11}])}))
+  return
+ }
  if(req.url==='/api/timetable/staff-subjects'){
   if(req.headers.authorization!=='Bearer synthetic-ui-token'){res.writeHead(401);res.end();return}
   res.writeHead(200,{'Content-Type':'application/json'})
@@ -35,6 +46,10 @@ const srv=http.createServer((req,res)=>{
   assert.equal(await page.locator('#cards .card tbody tr').count(),63)
   assert.equal(await page.locator('.bell.break').count(),1)
   await page.locator('#staff .card').first().waitFor()
+  await page.locator('#promotion').waitFor({state:'visible'})
+  assert.match(await page.locator('#promotion').innerText(),/Science/)
+  assert.match(await page.locator('#promotion').innerText(),/Pre-Nine/)
+  assert.match(await page.locator('#promotion').innerText(),/HOLD/)
   assert.equal(await page.locator('#staff .card').count()>=10,true)
   assert.match(await page.locator('#cards').innerText(),/Boys \/ Usman/)
   assert.match(await page.locator('#cards').innerText(),/Girls \/ Fatima/)
