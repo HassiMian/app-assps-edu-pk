@@ -4,6 +4,7 @@ const {protect,requireRoles}=require('../middleware/auth')
 const {query}=require('../config/database')
 const {storeClaim,catalog}=require('../services/grade910HumanSignoffService')
 const {storeEvidence,decryptEvidence}=require('../services/grade910EvidenceObjectService')
+const personalSignatures=require('../services/grade910PersonalSignatureService')
 const {requireSignedSchool}=require('../services/grade910SignedSchoolGate')
 router.use(protect,requireRoles('teacher','principal','admin','school_admin'))
 function actor(req){
@@ -25,6 +26,28 @@ function handled(fn){return async(req,res)=>{
  return res.status(status).json({success:false,code:e.status?e.code:'SIGNOFF_SERVICE_UNAVAILABLE'})
  }
 }}
+// Private personal-signature vault: staff uploads ONLY their own signature,
+// under the authenticated role. A personal asset never certifies a review or approval.
+router.post('/personal-signatures',express.raw({type:'image/png',limit:'120kb'}),handled(async(req,res,a)=>{
+ const result=await personalSignatures.upload({actor:a,bytes:req.body,query,
+  key:process.env.ASSPS_QBANK_SIGNATURE_ENCRYPTION_KEY})
+ res.set('Cache-Control','private,no-store')
+ res.status(result.created?201:200).json({success:true,data:result})
+}))
+router.get('/personal-signatures',handled(async(req,res,a)=>{
+ const rows=await personalSignatures.list({actor:a,query})
+ res.set('Cache-Control','private,no-store')
+ res.json({success:true,records:rows,academicallyApproved:0,published:0})
+}))
+router.get('/personal-signatures/:id/preview',handled(async(req,res,a)=>{
+ const bytes=await personalSignatures.preview({actor:a,id:req.params.id,query,
+  key:process.env.ASSPS_QBANK_SIGNATURE_ENCRYPTION_KEY})
+ res.set('Cache-Control','private,no-store').set('X-Content-Type-Options','nosniff')
+  .set('Content-Security-Policy','sandbox')
+  .set('Content-Disposition','attachment; filename="personal-signature.png"')
+  .type('image/png').send(bytes)
+}))
+
 router.get('/catalog',handled(async(req,res)=>{
  res.set('Cache-Control','private,no-store')
  res.json({success:true,rows:catalog.rows})

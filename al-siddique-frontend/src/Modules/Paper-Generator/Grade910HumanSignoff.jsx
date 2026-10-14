@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import api, { getAuthUser } from '../../services/api'
 import index from './data/grade910AdoptionCatalogIndex.json'
 import { detectSchoolEvidenceMime } from './grade910EvidenceByteProof.mjs'
+import Grade910PersonalSignatureVault from './Grade910PersonalSignatureVault.jsx'
 
 const SHA = /^[0-9a-f]{64}$/
 const checks = ['Curriculum and session','Actual book edition and exercise page','Question correctness','Answer and MCQ key','Marks and difficulty','English/Urdu correctness','Duplicates','Original source provenance']
@@ -165,6 +166,7 @@ export default function Grade910HumanSignoff() {
   <h1>Grade IX–X · Teacher / Principal Signatures</h1>
   {(role==='admin'||role==='school_admin')&&<p role="status"><strong>School administrator account:</strong> You may personally sign and submit only a pending textbook-adoption evidence claim as yourself. This is not a Principal signature, independent teacher review, or final academic approval. The actual Principal must use their own authenticated role to certify Principal-only decisions.</p>}
   <p>This workspace lets real school staff prepare their own evidence. Handwriting alone does not verify legal identity or academic correctness. Every submission remains held until the independent school-review chain authenticates its actor and the exact question/answer revisions.</p>
+  <Grade910PersonalSignatureVault actorRole={role} onUseSignature={value=>{setSignature(value);setConfirmed(false)}}/>
   <section style={cardStyle}>
    <div style={titleStyle}>1. Staff identity and source</div>
    <p>Signed-in account ID: {String(actor.id||'missing')}. Account role: {role||'missing'}.</p>
@@ -240,6 +242,7 @@ export default function Grade910HumanSignoff() {
    <div style={titleStyle}>3. Add your personal signature</div>
    <p>Use mouse, stylus, finger or your own uploaded PNG. No AI-generated signatures, copied teacher signatures or delegated signatures.</p>
    <SignatureCanvas onDraw={setSignature}/>
+   {signature.startsWith('data:image/png;base64,')&&<div style={{background:'#fff',padding:10,borderRadius:8,marginTop:10}}><img src={signature} alt="Your selected personal signature, not yet a certified approval" style={{maxWidth:'100%',maxHeight:120}}/></div>}
    <label style={{display:'block',marginTop:14}}>
     <input type="checkbox" checked={confirmed} onChange={e=>setConfirmed(e.target.checked)}/> I am the actual named staff account holder, have personally verified the stated information, and understand this file is evidence pending verification—not approval.
    </label>
