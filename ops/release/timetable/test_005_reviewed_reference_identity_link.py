@@ -2,6 +2,7 @@ import pathlib
 import unittest
 
 SQL = (pathlib.Path(__file__).parent / '005_reviewed_reference_identity_link_20261014.sql').read_text()
+READONLY_GATE = (pathlib.Path(__file__).parent / '007_readonly_reconciliation_gate_20261014.sql').read_text()
 
 class TimetableReferenceGuardTests(unittest.TestCase):
     def test_exact_original_and_current_year_provenance(self):
@@ -36,6 +37,15 @@ class TimetableReferenceGuardTests(unittest.TestCase):
         self.assertIn("SET LOCAL statement_timeout", SQL)
         self.assertIn("RAISE EXCEPTION", SQL)
         self.assertTrue(SQL.rstrip().endswith("COMMIT;"))
+
+    def test_live_gate_explicitly_holds_unreleased_reference_data(self):
+        self.assertIn('BEGIN TRANSACTION READ ONLY;', READONLY_GATE)
+        self.assertIn('HOLD_REFERENCE_METADATA_RECONCILIATION', READONLY_GATE)
+        self.assertIn('PASS_REFERENCE_ONLY_NOT_TEACHER_AUTHORIZATION', READONLY_GATE)
+        self.assertIn("'full_academic_release_certified',false", READONLY_GATE)
+        self.assertIn("count(*) FILTER(WHERE marks_obtained=0)", READONLY_GATE)
+        self.assertNotIn('UPDATE public.', READONLY_GATE)
+        self.assertNotIn('INSERT INTO public.', READONLY_GATE)
 
 if __name__ == '__main__':
     unittest.main()

@@ -28,3 +28,21 @@ Scope: School 1 reference timetable only. This does not approve, grant, or publi
 - NO production SQL DML, teacher grant, role/password update, result overwrite, security weakening, Nginx switch or release was performed by this candidate.
 
 Publication blocker: source patch is VPS-local until genuine Core repo write authorization succeeds. GH issue #4 is the central coordination record.
+
+## Safe operator-run live acceptance (added after forward-port to current Core)
+
+`ops/release/timetable/007_readonly_reconciliation_gate_20261014.sql` has
+`BEGIN TRANSACTION READ ONLY` and returns a truthful
+`HOLD_REFERENCE_METADATA_RECONCILIATION` before metadata promotion, or
+`PASS_REFERENCE_ONLY_NOT_TEACHER_AUTHORIZATION` if exactly the reviewed 43
+reference identities/32 unique enrolled Blue sections are present with no
+official teacher grants. It never issues an academic release certificate.
+It reports *dynamic* currently saved Exam9 scores and genuine numeric zeros,
+rather than assuming the school's marks uploads are frozen.
+
+First verify Core current HEAD, live source revisions and staff evidence,
+obtain SaaS Core release authority and latest consistent backup, and review
+the two SQL scripts on isolated copy. Only Core deployment owner may execute
+005 on live DB. The reference-only gate 007 is useful both before and after,
+but DOES NOT replace signed Principal/teacher sessions, approved paper maxima,
+final role/school isolation, and Class Eight protected result-card workflow.
