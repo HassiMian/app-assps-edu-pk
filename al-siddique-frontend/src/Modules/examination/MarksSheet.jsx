@@ -5,6 +5,7 @@ import { C, card, btnPrimary, btnSecondary, input, select, labelStyle, sectionHe
 import { usePaperStore } from '../Paper-Generator/usePaperStore'
 import { useAcademicStore } from '../../services/useAcademicStore'
 import { marksEntryReadiness, retainNewerMarkEdits } from './marksEntryReadiness'
+import { classPassingThreshold, DEFAULT_REQUESTED_PASS_PERCENT } from './classPassingThreshold'
 import { escapeMarksPrintHtml, approvedMarksLogoUrl, countRecordedMarks } from './marksBlankPrint'
 import {
  normalizeMarksClass, normalizeMarksExam, matchesMarksExam, pickMarksExam,
@@ -30,6 +31,8 @@ export default function MarksSheet() {
  const [selectedExamId, setSelectedExamId] = useState('')
  const [totalMarks, setTotalMarks] = useState('')
  const [passMarks, setPassMarks] = useState('')
+ const [passMode, setPassMode] = useState('percentage')
+ const [passPercentage, setPassPercentage] = useState(String(DEFAULT_REQUESTED_PASS_PERCENT))
  const [marks, setMarks] = useState({})
  const [savedMarks, setSavedMarks] = useState({})
  const [editedMarks, setEditedMarks] = useState({})
@@ -75,6 +78,14 @@ export default function MarksSheet() {
  const matchingExams = exams.filter(exam => matchesMarksExam(exam,selectedExamType,selectedClass))
  const selectedExam = matchingExams.find(exam => String(exam.id) === selectedExamId) || null
  const entryStatus = marksEntryReadiness(students, savedMarks, editedMarks)
+ const passPreview = classPassingThreshold({
+   totalMarks, mode: passMode, value: passMode === 'percentage' ? passPercentage : passMarks
+ })
+ const switchPassMode = mode => {
+   if (mode === 'marks') setPassMarks(passPreview ? String(passPreview.marks) : '')
+   if (mode === 'percentage') setPassPercentage(passPreview ? String(passPreview.percentage) : String(DEFAULT_REQUESTED_PASS_PERCENT))
+   setPassMode(mode)
+ }
 
  const resetRoster = () => {
  rosterFetchSeq.current += 1
@@ -91,6 +102,8 @@ export default function MarksSheet() {
  setSelectedExamId(nextExam ? String(nextExam.id) : '')
  setTotalMarks(nextExam?.total_marks ?? '')
  setPassMarks(nextExam?.pass_marks ?? '')
+ setPassMode('percentage')
+ setPassPercentage(String(DEFAULT_REQUESTED_PASS_PERCENT))
  }
  const changeExamType = value => {
  setSelectedExamType(value)
@@ -161,8 +174,8 @@ export default function MarksSheet() {
  setSavedMarks(loaded)
  setEditedMarks({})
  setMarksLoaded(true)
- setTotalMarks(selectedExam.total_marks ?? '')
- setPassMarks(selectedExam.pass_marks ?? '')
+ // Preserve the selected subject total and class-level threshold on roster refresh.
+ // Backend remains authoritative for official paper maximum and grading.
  setMessage(`Loaded ${studentsForClass.length} students for ${selectedExam.name || 'saved exam'}: ${countRecordedMarks(result.data.data,selectedSubject,studentsForClass)} marks saved, ${studentsForClass.length-countRecordedMarks(result.data.data,selectedSubject,studentsForClass)} pending. ${Object.keys(loaded).length ? 'Saved marks restored.' : 'No marks entered yet; you can start with any student tomorrow.'}`)
  } catch (err) {
  if (request !== rosterFetchSeq.current) return
@@ -193,7 +206,7 @@ export default function MarksSheet() {
  return
  }
  const {error,rows} = validateMarksBatch({
- exam:selectedExam, selectedClass, students, subject:selectedSubject, marks:editedMarks, totalMarks, passMarks
+ exam:selectedExam, selectedClass, students, subject:selectedSubject, marks:editedMarks, totalMarks, passMarks:passPreview?.marks ?? ''
  })
  if (error) {setMessage(error);return}
  const submittedRevision=marksEditRevision.current
@@ -343,14 +356,25 @@ export default function MarksSheet() {
  </div>
  </div>
 
- <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: 16, alignItems: 'end' }}>
+ <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 16, alignItems: 'end' }}>
  <div>
  <label style={labelStyle}>Total Marks</label>
  <input type="number" min="1" style={input} value={totalMarks} onChange={e => setTotalMarks(e.target.value)} />
  </div>
  <div>
- <label style={labelStyle}>Passing Marks</label>
- <input type="number" min="0" style={input} value={passMarks} onChange={e => setPassMarks(e.target.value)} />
+ <label style={labelStyle}>Class passing format</label>
+ <select aria-label="Class passing format" style={select} value={passMode} onChange={e => switchPassMode(e.target.value)}>
+  <option value="percentage">Percentage (%)</option>
+  <option value="marks">Marks</option>
+ </select>
+ </div>
+ <div>
+ <label style={labelStyle}>{passMode === 'percentage' ? 'Passing percentage (%)' : 'Passing marks'}</label>
+ <input aria-label={passMode === 'percentage' ? 'Passing percentage for selected class' : 'Passing marks for selected class'}
+  type="number" min="0" max={passMode === 'percentage' ? 100 : Number(totalMarks) || undefined}
+  step="any" style={input}
+  value={passMode === 'percentage' ? passPercentage : passMarks}
+  onChange={e => passMode === 'percentage' ? setPassPercentage(e.target.value) : setPassMarks(e.target.value)} />
  </div>
  <button type="button" onClick={searchStudents} disabled={loadingData || !selectedExam || !selectedClass || !selectedSubject} style={{ ...btnPrimary, display: 'inline-flex', alignItems: 'center', gap: 8, justifyContent: 'center', minHeight: 46 }}>
  <Search size={17} />
@@ -365,6 +389,17 @@ export default function MarksSheet() {
  )}
  </div>
 
+ {selectedClass && selectedSubject && (
+ <div className="super-module-card" role="status" style={{...card, borderColor:C.border}}>
+  <strong style={{color:C.gold}}>Class {selectedClass} · {selectedSubject} · Passing threshold</strong>
+  <div style={{marginTop:5,fontSize:14}}>
+   {passPreview ? `${passPreview.percentage}% · ${passPreview.marks} marks out of ${passPreview.total}` : 'Select a valid total and passing threshold.'}
+  </div>
+  <div style={{fontSize:12,color:C.muted,marginTop:4}}>
+   Displayed once per class/subject. This is an entry-screen setting, not an approved change to the school's official grading policy.
+  </div>
+ </div>
+ )}
  {message && <div className="super-module-card" style={{ ...card, borderColor: message.includes('failed') || message.includes('could not') || message.includes('Please') ? C.red : C.green, color: message.includes('failed') || message.includes('could not') || message.includes('Please') ? C.red : C.green }}>{message}</div>}
 
  {students.length > 0 && <div className="super-module-card" role="status" style={{...card,display:'flex',flexWrap:'wrap',alignItems:'center',justifyContent:'space-between',gap:12}}>
