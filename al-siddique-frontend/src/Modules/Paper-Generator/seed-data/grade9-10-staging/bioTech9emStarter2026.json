@@ -1,0 +1,1999 @@
+{
+  "schemaVersion": "assps-bioTech9em-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-031",
+  "sourcePdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+  "scope": "GRADE9_MATRIC_TECH_CURRENT_CHAPTER_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C01-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C01",
+        "number": 1
+      },
+      "topicId": "biology as science",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "The Science of Biology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Which statement best describes biology?",
+          "answer": "The scientific study of life and living organisms",
+          "options": [
+            {
+              "id": "A",
+              "text": "The scientific study of life and living organisms"
+            },
+            {
+              "id": "B",
+              "text": "Only the study of rocks"
+            },
+            {
+              "id": "C",
+              "text": "Only the study of machines"
+            },
+            {
+              "id": "D",
+              "text": "Only weather forecasting"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C01-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C01",
+        "number": 1
+      },
+      "topicId": "biology as science",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "The Science of Biology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Why is the scientific method useful in biology?",
+          "answer": "It provides a systematic way to ask questions, test explanations with evidence, and revise conclusions."
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C01-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C01",
+        "number": 1
+      },
+      "topicId": "biology as science",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "The Science of Biology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain how observation, hypothesis, experiment and evidence work together in biological inquiry.",
+          "answer": "A complete answer links observation to a testable hypothesis, controlled investigation, data collection, evidence-based conclusion and revision when needed."
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C02-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C02",
+        "number": 2
+      },
+      "topicId": "biodiversity",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Biodiversity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Biodiversity refers to?",
+          "answer": "The variety of living organisms and biological variation",
+          "options": [
+            {
+              "id": "A",
+              "text": "The variety of living organisms and biological variation"
+            },
+            {
+              "id": "B",
+              "text": "Only one species"
+            },
+            {
+              "id": "C",
+              "text": "Only climate variation"
+            },
+            {
+              "id": "D",
+              "text": "Only mineral diversity"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C02-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C02",
+        "number": 2
+      },
+      "topicId": "biodiversity",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Biodiversity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Why is classification useful in biology?",
+          "answer": "It organizes organisms by shared and differing features, helping identification and study of relationships."
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C02-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C02",
+        "number": 2
+      },
+      "topicId": "biodiversity",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Biodiversity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain why conserving biodiversity is important.",
+          "answer": "Discuss ecosystem stability, genetic resources, food webs, useful biological resources and responsible habitat protection."
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C03-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C03",
+        "number": 3
+      },
+      "topicId": "cell",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "The Cell"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Which structure controls movement of many substances into and out of a cell?",
+          "answer": "Cell membrane",
+          "options": [
+            {
+              "id": "A",
+              "text": "Cell membrane"
+            },
+            {
+              "id": "B",
+              "text": "Cell wall only"
+            },
+            {
+              "id": "C",
+              "text": "Chromosome only"
+            },
+            {
+              "id": "D",
+              "text": "Vacuole only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C03-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C03",
+        "number": 3
+      },
+      "topicId": "cell",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "The Cell"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "State one major function of mitochondria.",
+          "answer": "Mitochondria are important sites of cellular respiration and ATP production."
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C03-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C03",
+        "number": 3
+      },
+      "topicId": "cell",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "The Cell"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Compare plant and animal cells at a basic structural level.",
+          "answer": "Include shared structures such as membrane, cytoplasm and nucleus, plus plant features such as cell wall, chloroplasts and a large central vacuole."
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C04-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C04",
+        "number": 4
+      },
+      "topicId": "cell cycle",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Cell Cycle"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Mitosis mainly produces?",
+          "answer": "Genetically similar daughter cells",
+          "options": [
+            {
+              "id": "A",
+              "text": "Genetically similar daughter cells"
+            },
+            {
+              "id": "B",
+              "text": "Four unrelated organisms"
+            },
+            {
+              "id": "C",
+              "text": "Only gametes"
+            },
+            {
+              "id": "D",
+              "text": "Cells with no DNA"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C04-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C04",
+        "number": 4
+      },
+      "topicId": "cell cycle",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Cell Cycle"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "What is the cell cycle?",
+          "answer": "The ordered sequence of cell growth, DNA replication and division."
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C04-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C04",
+        "number": 4
+      },
+      "topicId": "cell cycle",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Cell Cycle"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain the importance of mitosis in growth and tissue repair.",
+          "answer": "Mitosis increases cell number, replaces damaged or worn cells and maintains chromosome number in daughter cells."
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C05-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C05",
+        "number": 5
+      },
+      "topicId": "organization",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Tissues, Organs, and Organ Systems"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "A group of similar cells performing a common function is a?",
+          "answer": "Tissue",
+          "options": [
+            {
+              "id": "A",
+              "text": "Tissue"
+            },
+            {
+              "id": "B",
+              "text": "Molecule"
+            },
+            {
+              "id": "C",
+              "text": "Species"
+            },
+            {
+              "id": "D",
+              "text": "Gene"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C05-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C05",
+        "number": 5
+      },
+      "topicId": "organization",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Tissues, Organs, and Organ Systems"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Differentiate tissue and organ.",
+          "answer": "A tissue is a group of similar cells with a common role; an organ contains multiple tissues working together for a larger function."
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C05-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C05",
+        "number": 5
+      },
+      "topicId": "organization",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Tissues, Organs, and Organ Systems"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain the hierarchy from cells to organ systems.",
+          "answer": "Cells form tissues, tissues combine into organs, and organs cooperate in organ systems; each higher level depends on coordinated lower levels."
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C06-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C06",
+        "number": 6
+      },
+      "topicId": "enzyme",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Enzyme"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Enzymes are best described as?",
+          "answer": "Biological catalysts",
+          "options": [
+            {
+              "id": "A",
+              "text": "Biological catalysts"
+            },
+            {
+              "id": "B",
+              "text": "Stored genes"
+            },
+            {
+              "id": "C",
+              "text": "Mineral salts only"
+            },
+            {
+              "id": "D",
+              "text": "Structural lipids only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C06-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C06",
+        "number": 6
+      },
+      "topicId": "enzyme",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Enzyme"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "What is an enzyme active site?",
+          "answer": "It is the region where a specific substrate binds and catalysis occurs."
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C06-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C06",
+        "number": 6
+      },
+      "topicId": "enzyme",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Enzyme"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain how temperature and pH can affect enzyme activity.",
+          "answer": "Activity rises toward suitable conditions but extreme temperature or pH can alter enzyme structure/active site and reduce activity."
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C07-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C07",
+        "number": 7
+      },
+      "topicId": "bioenergetics",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Bioenergetics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "ATP is mainly important because it?",
+          "answer": "Transfers usable energy within cells",
+          "options": [
+            {
+              "id": "A",
+              "text": "Transfers usable energy within cells"
+            },
+            {
+              "id": "B",
+              "text": "Stores hereditary information"
+            },
+            {
+              "id": "C",
+              "text": "Forms cell walls only"
+            },
+            {
+              "id": "D",
+              "text": "Acts as a mineral"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C07-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C07",
+        "number": 7
+      },
+      "topicId": "bioenergetics",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Bioenergetics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Differentiate photosynthesis and cellular respiration by energy role.",
+          "answer": "Photosynthesis stores captured light energy in chemical form; respiration releases chemical energy to help make ATP."
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C07-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C07",
+        "number": 7
+      },
+      "topicId": "bioenergetics",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Bioenergetics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain why energy transformation is essential for living cells.",
+          "answer": "Cells need usable energy for synthesis, transport, movement, growth and maintenance; bioenergetic processes convert energy into usable forms."
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C08-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C08",
+        "number": 8
+      },
+      "topicId": "plant physiology",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Plant Physiology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Which tissue mainly transports water upward in plants?",
+          "answer": "Xylem",
+          "options": [
+            {
+              "id": "A",
+              "text": "Xylem"
+            },
+            {
+              "id": "B",
+              "text": "Phloem only"
+            },
+            {
+              "id": "C",
+              "text": "Epidermis only"
+            },
+            {
+              "id": "D",
+              "text": "Meristem only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C08-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C08",
+        "number": 8
+      },
+      "topicId": "plant physiology",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Plant Physiology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "What is transpiration?",
+          "answer": "The loss of water vapour mainly from aerial parts of plants, especially through stomata."
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C08-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C08",
+        "number": 8
+      },
+      "topicId": "plant physiology",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Plant Physiology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain the relationship among root absorption, xylem transport and transpiration.",
+          "answer": "Roots absorb water/minerals, xylem carries them upward, and transpiration helps maintain the water movement gradient through the plant."
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C09-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C09",
+        "number": 9
+      },
+      "topicId": "plant reproduction",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Reproduction in Plants"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Pollination is the transfer of?",
+          "answer": "Pollen to a suitable reproductive surface",
+          "options": [
+            {
+              "id": "A",
+              "text": "Pollen to a suitable reproductive surface"
+            },
+            {
+              "id": "B",
+              "text": "Water to roots"
+            },
+            {
+              "id": "C",
+              "text": "Food through xylem"
+            },
+            {
+              "id": "D",
+              "text": "Seeds into fruits"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C09-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C09",
+        "number": 9
+      },
+      "topicId": "plant reproduction",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Reproduction in Plants"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "State one advantage of sexual reproduction in plants.",
+          "answer": "It can generate genetic variation in offspring."
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C09-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-ENGLISH-C09",
+        "number": 9
+      },
+      "topicId": "plant reproduction",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-031",
+        "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Reproduction in Plants"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Describe the sequence from pollination to seed formation in general terms.",
+          "answer": "Pollen transfer is followed by gamete delivery and fertilization; the fertilized ovule develops into a seed under suitable conditions."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 27,
+    "mcq": 9,
+    "short": 9,
+    "long": 9,
+    "chapters": 9
+  }
+}

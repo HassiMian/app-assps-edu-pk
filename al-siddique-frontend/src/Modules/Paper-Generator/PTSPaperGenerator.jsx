@@ -10,6 +10,9 @@ import { Maximize, Minimize, ZoomIn, ZoomOut } from 'lucide-react'
 import Portal from '../../components/Portal'
 import { SYLLABI, CLASSES, SUBJECTS, CHAPTERS, QUESTIONS } from './data/questionBank'
 import { usePaperStore } from './usePaperStore'
+import api from '../../services/api'
+import Grade910WorkspaceApprovedInsert from './Grade910WorkspaceApprovedInsert.jsx'
+import { grade910ClassNumber, verifyWorkspaceApprovedImports, createGrade910ApprovedSection, rehydrateGrade910VerifiedPaper, paperForCanonicalVerifiedRendering } from './grade910PaperWorkspaceVerifiedBridge.js'
 import PaperRichTextEditor, { PaperRichTextRenderer } from './PaperRichTextEditor'
 import { PaperSelectionToolbar } from './PaperInlineEditor.jsx'
 import './PaperEditor/paperWorkspaceLight.css'
@@ -603,8 +606,8 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  ? { name: storeSubjectInfo?.name || '', color: D.gold, emoji: '', edition: storeSubjectInfo?.publisher || '' }
  : SUBJECTS.find(s=>s.id===subjectId)
  
- const isOfficialPaper = Boolean(loadedPaper?.documentFormat === 'pts-native-v13' || loadedPaper?.documentFormat === 'official-v12' || loadedPaper?.official_section?.length)
  const isUserAuthoredPaper = Boolean(paper?.userAuthored || loadedPaper?.userAuthored || overrideConfig?.userAuthored)
+ const isOfficialPaper = !isUserAuthoredPaper && Boolean(loadedPaper?.documentFormat === 'pts-native-v13' || loadedPaper?.documentFormat === 'official-v12' || loadedPaper?.official_section?.length)
  let questionTypes = getFilteredQuestionTypes(subject?.name || '')
  // Ensure that any type with active questions is always shown, even if filtered out by subject
  if (paper && allQuestionTypes) {
@@ -760,6 +763,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  }
  const subjectName = headerSubject || derivedSubjectName
  const className = headerClass || derivedClassName
+ const grade910ExactClass = grade910ClassNumber(className)
  const cfg = {
     ...(overrideConfig || {}),
     title: headerTitle || overrideConfig?.title || '',
@@ -776,9 +780,10 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
     subject: subjectName,
     totalMarks: Number(headerTotalMarks || 0),
   }
+ const paperRenderProjection = paperForCanonicalVerifiedRendering(paper)
  const liveAuditPaper = {
   ...(loadedPaper || {}),
-  ...paper,
+  ...paperRenderProjection,
   config: cfg,
   official_section: paper.official_section || loadedPaper?.official_section || [],
   printReadiness: marksAuthorityEdited ? 'READY' : loadedPaper?.printReadiness,
@@ -800,7 +805,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   setZoomPercent(Math.max(50, Math.min(175, Math.round(previewZoom * 100 / 10) * 10 + step)))
   setZoomMode('custom')
  }
- const totalQs = questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0), 0)
+ const totalQs = questionTypes.reduce((sum, t) => sum + (paperRenderProjection[t.value]?.length || 0), 0)
  const pageFrameStyles = {
   none:{ border:'none' },
   thin:{ border:'1px solid #9aaabd' },
@@ -927,7 +932,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   }
   updateSelectedSection(patch)
  }
- const tplProps = { paper, cfg, printBubble:printBub, printAns, half, editMode, letterSp, wordSp, engLineH, urdLineH, showAnsLines, fontColor, fontFamily, baseFontSz, headFontSz, fontBold, fontItalic, fontUnderline, textAlign, qBorderStyle, showUrduHeaders, showSectionLine, questionTypes, settings: paperSettings, pbStyle: pageBorderStyle, pageFrameStyle, onQuestionChange:updatePaperQuestion, onDeleteSection:deleteOfficialSection, onDuplicateSection:duplicateOfficialSection, onMoveSection:moveOfficialSection, onAddSection:addOfficialSection, onSelectSection:setSelectedSectionId, selectedSectionId, onActiveEditable:activateEditable, mcqLayout, shortLayout }
+ const tplProps = { paper:paperRenderProjection, cfg, printBubble:printBub, printAns, half, editMode, letterSp, wordSp, engLineH, urdLineH, showAnsLines, fontColor, fontFamily, baseFontSz, headFontSz, fontBold, fontItalic, fontUnderline, textAlign, qBorderStyle, showUrduHeaders, showSectionLine, questionTypes, settings: paperSettings, pbStyle: pageBorderStyle, pageFrameStyle, onQuestionChange:updatePaperQuestion, onDeleteSection:deleteOfficialSection, onDuplicateSection:duplicateOfficialSection, onMoveSection:moveOfficialSection, onAddSection:addOfficialSection, onSelectSection:setSelectedSectionId, selectedSectionId, onActiveEditable:activateEditable, mcqLayout, shortLayout }
 
  function doSearch() {
  const addedIds = new Set((paper[qType]||[]).map(q=>q.id))
@@ -965,7 +970,41 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  setSelIds(n)
  }
 
+ async function verifyRealAcademicPaperSelection() {
+  const verifiedCount=['mcq','short','long'].reduce((n,type)=>n+(paper[type]||[]).filter(q=>q.verifiedAcademicRef).length,0)
+  if(!verifiedCount)return true // Existing manually authored drafts are NOT represented as verified.
+  const scope={grade:grade910ExactClass,subject:subjectName}
+  try {
+   if(!scope.grade)throw Error('This paper is not Grade IX/X.')
+   await verifyWorkspaceApprovedImports(paper,scope,params=>
+    api.get('/api/grade910-verified-picker/resolve-revision',{
+     params,headers:{'Cache-Control':'no-store'}
+    })
+   )
+   return true
+  }catch(error){
+   alert('ACADEMICALLY VERIFIED PAPER OPERATION BLOCKED — '+(error?.response?.data?.code||error.message))
+   return false
+  }
+ }
+ function insertVerifiedIntoWorkspace(question) {
+  onPaperChange(current => {
+   const items=current[question.type]||[]
+   if(items.some(q=>String(q.id)===String(question.id)))return current
+   const previousMarks=Number(current[question.type+'_marks'])
+   if(items.length && previousMarks>0 && previousMarks!==question.marks){
+    alert('VERIFIED MARKS CONFLICT — this section already uses '+previousMarks+' marks per question. Use a separate paper/section.')
+    return current
+   }
+   const sections=[...(current.official_section||[])]
+   const ordinal=sections.filter(s=>s.layoutPreset!=='marker').length+1
+   const officialSection=createGrade910ApprovedSection(question,ordinal)
+   return {...current,[question.type]:[...items,question],[question.type+'_marks']:question.marks,
+    official_section:[...sections,officialSection]}
+  })
+ }
  async function doSave(options = {}) {
+  if(!await verifyRealAcademicPaperSelection())return null
  const silent = options?.silent === true
  if (!totalQs && !isUserAuthoredPaper) return
  const name = `${subjectName} ${className} — ${new Date().toLocaleDateString('en-GB')}`
@@ -1104,6 +1143,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  }
 
  async function doPersonalizedPrint() {
+  if(!await verifyRealAcademicPaperSelection())return
   const release = paper?.assessmentRelease || loadedPaper?.assessmentRelease
   const releaseId = release?.releaseId
   const activeCanonicalDocument = paper?.canonicalDocument || loadedPaper?.canonicalDocument || release?.snapshot || null
@@ -1283,6 +1323,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  }
 
  async function doPrint() {
+  if(!await verifyRealAcademicPaperSelection())return
  if (isUserAuthoredPaper && totalQs===0) {
   alert('PRINT BLOCKED — please add at least one question. Your empty draft can still be saved.')
   return
@@ -1426,10 +1467,11 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <GoldBtn onClick={doPrint} style={{ padding:'8px 20px', fontSize:13 }}> Print / Save PDF</GoldBtn>
  </div>
  </div>
- <details data-printer-destination-help style={{ marginTop:8 }}>
+<details data-printer-destination-help style={{ marginTop:8 }}>
   <summary>Printer / PDF destination — use any connected printer</summary>
   <p>The Print / Save PDF button opens the browser print dialog on this computer. Choose any Ready local, USB, Wi-Fi or shared printer. No Ricoh, Samsung or other printer is hardcoded. If none is connected, select Save as PDF to print later from a connected PC. Printer connection is controlled by this computer, not the school website.</p>
  </details>
+ {grade910ExactClass && !isOfficialPaper && <Grade910WorkspaceApprovedInsert grade={grade910ExactClass} subject={subjectName} onInsert={insertVerifiedIntoWorkspace}/>}
  <details data-paper-metadata-editor style={{ marginTop:8 }}>
  <summary style={{ cursor:'pointer', color:D.gold, fontSize:12, fontWeight:800, userSelect:'none' }}>Paper Information — edit all header fields</summary>
  <div style={{ display:'grid', gridTemplateColumns:'2fr 1.4fr 1fr', gap:10, marginTop:8, alignItems:'end' }}>
@@ -2633,7 +2675,7 @@ function PTSPaperGeneratorCore({ loadedPaper, onReturnToSource = null, onOpenSav
  else p[`${t.value}_marks`] = t.marks || 1
  }
  })
- return p
+ return rehydrateGrade910VerifiedPaper(p)
  }
  const initial = {}
  questionTypes.forEach(t => { initial[t.value] = []; initial[`${t.value}_marks`] = t.marks || 1 })

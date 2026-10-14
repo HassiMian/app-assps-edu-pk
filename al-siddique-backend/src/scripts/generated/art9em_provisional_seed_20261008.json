@@ -1,0 +1,814 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "IX-ART-EN-C01-M01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Introduction to Art and Drawing",
+      "topic_name": "art fundamentals",
+      "category": "mcq",
+      "question_text": "Which approach best supports effective work in Introduction to Art and Drawing?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Use visual choices deliberately to support the intended idea"
+        },
+        {
+          "id": "B",
+          "text": "Ignore proportion, context and audience"
+        },
+        {
+          "id": "C",
+          "text": "Copy an existing work exactly"
+        },
+        {
+          "id": "D",
+          "text": "Treat every material and technique as identical"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Use visual choices deliberately to support the intended idea",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 1",
+      "tags": [
+        "grade9",
+        "art-model-drawing",
+        "english",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "art fundamentals"
+      ]
+    },
+    {
+      "id": "IX-ART-EN-C01-S01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Introduction to Art and Drawing",
+      "topic_name": "art fundamentals",
+      "category": "short",
+      "question_text": "Name two important considerations when studying or practising Introduction to Art and Drawing.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Any two well-explained considerations connected to line, shape, form, tone, texture and observation, with clear relevance to the chapter context.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 1",
+      "tags": [
+        "grade9",
+        "art-model-drawing",
+        "english",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "art fundamentals"
+      ]
+    },
+    {
+      "id": "IX-ART-EN-C01-L01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Introduction to Art and Drawing",
+      "topic_name": "art fundamentals",
+      "category": "long",
+      "question_text": "Explain how visual decisions in Introduction to Art and Drawing can combine skill, meaning and context.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A strong answer should discuss at least three relevant dimensions from line, shape, form, tone, texture and observation, explain how they interact, and connect technique with purpose or context without copying a textbook passage or artwork.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 1",
+      "tags": [
+        "grade9",
+        "art-model-drawing",
+        "english",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "art fundamentals"
+      ]
+    },
+    {
+      "id": "IX-ART-EN-C02-M01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Drawing and Sketching-I",
+      "topic_name": "drawing and sketching",
+      "category": "mcq",
+      "question_text": "Which approach best supports effective work in Drawing and Sketching-I?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Treat every material and technique as identical"
+        },
+        {
+          "id": "B",
+          "text": "Use visual choices deliberately to support the intended idea"
+        },
+        {
+          "id": "C",
+          "text": "Ignore proportion, context and audience"
+        },
+        {
+          "id": "D",
+          "text": "Copy an existing work exactly"
+        }
+      ],
+      "correct_option": "B",
+      "answer": "Use visual choices deliberately to support the intended idea",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 2",
+      "tags": [
+        "grade9",
+        "art-model-drawing",
+        "english",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "drawing and sketching"
+      ]
+    },
+    {
+      "id": "IX-ART-EN-C02-S01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Drawing and Sketching-I",
+      "topic_name": "drawing and sketching",
+      "category": "short",
+      "question_text": "Name two important considerations when studying or practising Drawing and Sketching-I.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Any two well-explained considerations connected to proportion, contour, observation and composition, with clear relevance to the chapter context.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 2",
+      "tags": [
+        "grade9",
+        "art-model-drawing",
+        "english",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "drawing and sketching"
+      ]
+    },
+    {
+      "id": "IX-ART-EN-C02-L01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Drawing and Sketching-I",
+      "topic_name": "drawing and sketching",
+      "category": "long",
+      "question_text": "Explain how visual decisions in Drawing and Sketching-I can combine skill, meaning and context.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A strong answer should discuss at least three relevant dimensions from proportion, contour, observation and composition, explain how they interact, and connect technique with purpose or context without copying a textbook passage or artwork.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 2",
+      "tags": [
+        "grade9",
+        "art-model-drawing",
+        "english",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "drawing and sketching"
+      ]
+    },
+    {
+      "id": "IX-ART-EN-C03-M01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Painting Practice-I",
+      "topic_name": "painting practice",
+      "category": "mcq",
+      "question_text": "Which approach best supports effective work in Painting Practice-I?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Copy an existing work exactly"
+        },
+        {
+          "id": "B",
+          "text": "Treat every material and technique as identical"
+        },
+        {
+          "id": "C",
+          "text": "Use visual choices deliberately to support the intended idea"
+        },
+        {
+          "id": "D",
+          "text": "Ignore proportion, context and audience"
+        }
+      ],
+      "correct_option": "C",
+      "answer": "Use visual choices deliberately to support the intended idea",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 3",
+      "tags": [
+        "grade9",
+        "art-model-drawing",
+        "english",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "painting practice"
+      ]
+    },
+    {
+      "id": "IX-ART-EN-C03-S01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Painting Practice-I",
+      "topic_name": "painting practice",
+      "category": "short",
+      "question_text": "Name two important considerations when studying or practising Painting Practice-I.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Any two well-explained considerations connected to colour relationships, brush control, layering and composition, with clear relevance to the chapter context.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 3",
+      "tags": [
+        "grade9",
+        "art-model-drawing",
+        "english",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "painting practice"
+      ]
+    },
+    {
+      "id": "IX-ART-EN-C03-L01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Painting Practice-I",
+      "topic_name": "painting practice",
+      "category": "long",
+      "question_text": "Explain how visual decisions in Painting Practice-I can combine skill, meaning and context.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A strong answer should discuss at least three relevant dimensions from colour relationships, brush control, layering and composition, explain how they interact, and connect technique with purpose or context without copying a textbook passage or artwork.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 3",
+      "tags": [
+        "grade9",
+        "art-model-drawing",
+        "english",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "painting practice"
+      ]
+    },
+    {
+      "id": "IX-ART-EN-C04-M01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "An Introduction to Graphic Design",
+      "topic_name": "graphic design",
+      "category": "mcq",
+      "question_text": "Which approach best supports effective work in An Introduction to Graphic Design?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ignore proportion, context and audience"
+        },
+        {
+          "id": "B",
+          "text": "Copy an existing work exactly"
+        },
+        {
+          "id": "C",
+          "text": "Treat every material and technique as identical"
+        },
+        {
+          "id": "D",
+          "text": "Use visual choices deliberately to support the intended idea"
+        }
+      ],
+      "correct_option": "D",
+      "answer": "Use visual choices deliberately to support the intended idea",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 4",
+      "tags": [
+        "grade9",
+        "art-model-drawing",
+        "english",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "graphic design"
+      ]
+    },
+    {
+      "id": "IX-ART-EN-C04-S01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "An Introduction to Graphic Design",
+      "topic_name": "graphic design",
+      "category": "short",
+      "question_text": "Name two important considerations when studying or practising An Introduction to Graphic Design.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Any two well-explained considerations connected to visual hierarchy, typography, balance and communication, with clear relevance to the chapter context.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 4",
+      "tags": [
+        "grade9",
+        "art-model-drawing",
+        "english",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "graphic design"
+      ]
+    },
+    {
+      "id": "IX-ART-EN-C04-L01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "An Introduction to Graphic Design",
+      "topic_name": "graphic design",
+      "category": "long",
+      "question_text": "Explain how visual decisions in An Introduction to Graphic Design can combine skill, meaning and context.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A strong answer should discuss at least three relevant dimensions from visual hierarchy, typography, balance and communication, explain how they interact, and connect technique with purpose or context without copying a textbook passage or artwork.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 4",
+      "tags": [
+        "grade9",
+        "art-model-drawing",
+        "english",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "graphic design"
+      ]
+    },
+    {
+      "id": "IX-ART-EN-C05-M01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "History of Architecture in Pakistan",
+      "topic_name": "architecture in Pakistan",
+      "category": "mcq",
+      "question_text": "Which approach best supports effective work in History of Architecture in Pakistan?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Use visual choices deliberately to support the intended idea"
+        },
+        {
+          "id": "B",
+          "text": "Ignore proportion, context and audience"
+        },
+        {
+          "id": "C",
+          "text": "Copy an existing work exactly"
+        },
+        {
+          "id": "D",
+          "text": "Treat every material and technique as identical"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Use visual choices deliberately to support the intended idea",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 5",
+      "tags": [
+        "grade9",
+        "art-model-drawing",
+        "english",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "architecture in Pakistan"
+      ]
+    },
+    {
+      "id": "IX-ART-EN-C05-S01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "History of Architecture in Pakistan",
+      "topic_name": "architecture in Pakistan",
+      "category": "short",
+      "question_text": "Name two important considerations when studying or practising History of Architecture in Pakistan.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Any two well-explained considerations connected to form, function, materials, regional identity and historical context, with clear relevance to the chapter context.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 5",
+      "tags": [
+        "grade9",
+        "art-model-drawing",
+        "english",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "architecture in Pakistan"
+      ]
+    },
+    {
+      "id": "IX-ART-EN-C05-L01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "History of Architecture in Pakistan",
+      "topic_name": "architecture in Pakistan",
+      "category": "long",
+      "question_text": "Explain how visual decisions in History of Architecture in Pakistan can combine skill, meaning and context.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A strong answer should discuss at least three relevant dimensions from form, function, materials, regional identity and historical context, explain how they interact, and connect technique with purpose or context without copying a textbook passage or artwork.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 5",
+      "tags": [
+        "grade9",
+        "art-model-drawing",
+        "english",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "architecture in Pakistan"
+      ]
+    },
+    {
+      "id": "IX-ART-EN-C06-M01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "History of Painting in South Asia",
+      "topic_name": "painting in South Asia",
+      "category": "mcq",
+      "question_text": "Which approach best supports effective work in History of Painting in South Asia?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Treat every material and technique as identical"
+        },
+        {
+          "id": "B",
+          "text": "Use visual choices deliberately to support the intended idea"
+        },
+        {
+          "id": "C",
+          "text": "Ignore proportion, context and audience"
+        },
+        {
+          "id": "D",
+          "text": "Copy an existing work exactly"
+        }
+      ],
+      "correct_option": "B",
+      "answer": "Use visual choices deliberately to support the intended idea",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 6",
+      "tags": [
+        "grade9",
+        "art-model-drawing",
+        "english",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "painting in South Asia"
+      ]
+    },
+    {
+      "id": "IX-ART-EN-C06-S01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "History of Painting in South Asia",
+      "topic_name": "painting in South Asia",
+      "category": "short",
+      "question_text": "Name two important considerations when studying or practising History of Painting in South Asia.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Any two well-explained considerations connected to style, context, visual language and historical development, with clear relevance to the chapter context.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 6",
+      "tags": [
+        "grade9",
+        "art-model-drawing",
+        "english",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "painting in South Asia"
+      ]
+    },
+    {
+      "id": "IX-ART-EN-C06-L01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "History of Painting in South Asia",
+      "topic_name": "painting in South Asia",
+      "category": "long",
+      "question_text": "Explain how visual decisions in History of Painting in South Asia can combine skill, meaning and context.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A strong answer should discuss at least three relevant dimensions from style, context, visual language and historical development, explain how they interact, and connect technique with purpose or context without copying a textbook passage or artwork.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 6",
+      "tags": [
+        "grade9",
+        "art-model-drawing",
+        "english",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "painting in South Asia"
+      ]
+    },
+    {
+      "id": "IX-ART-EN-C07-M01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Master Calligraphists of Pakistan",
+      "topic_name": "calligraphy in Pakistan",
+      "category": "mcq",
+      "question_text": "Which approach best supports effective work in Master Calligraphists of Pakistan?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Copy an existing work exactly"
+        },
+        {
+          "id": "B",
+          "text": "Treat every material and technique as identical"
+        },
+        {
+          "id": "C",
+          "text": "Use visual choices deliberately to support the intended idea"
+        },
+        {
+          "id": "D",
+          "text": "Ignore proportion, context and audience"
+        }
+      ],
+      "correct_option": "C",
+      "answer": "Use visual choices deliberately to support the intended idea",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 7",
+      "tags": [
+        "grade9",
+        "art-model-drawing",
+        "english",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "calligraphy in Pakistan"
+      ]
+    },
+    {
+      "id": "IX-ART-EN-C07-S01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Master Calligraphists of Pakistan",
+      "topic_name": "calligraphy in Pakistan",
+      "category": "short",
+      "question_text": "Name two important considerations when studying or practising Master Calligraphists of Pakistan.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Any two well-explained considerations connected to letterform, rhythm, balance, discipline and cultural context, with clear relevance to the chapter context.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 7",
+      "tags": [
+        "grade9",
+        "art-model-drawing",
+        "english",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "calligraphy in Pakistan"
+      ]
+    },
+    {
+      "id": "IX-ART-EN-C07-L01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Master Calligraphists of Pakistan",
+      "topic_name": "calligraphy in Pakistan",
+      "category": "long",
+      "question_text": "Explain how visual decisions in Master Calligraphists of Pakistan can combine skill, meaning and context.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A strong answer should discuss at least three relevant dimensions from letterform, rhythm, balance, discipline and cultural context, explain how they interact, and connect technique with purpose or context without copying a textbook passage or artwork.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 7",
+      "tags": [
+        "grade9",
+        "art-model-drawing",
+        "english",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "calligraphy in Pakistan"
+      ]
+    },
+    {
+      "id": "IX-ART-EN-C08-M01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Textiles: Weaving, Printing and Embroidery",
+      "topic_name": "textile arts",
+      "category": "mcq",
+      "question_text": "Which approach best supports effective work in Textiles: Weaving, Printing and Embroidery?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ignore proportion, context and audience"
+        },
+        {
+          "id": "B",
+          "text": "Copy an existing work exactly"
+        },
+        {
+          "id": "C",
+          "text": "Treat every material and technique as identical"
+        },
+        {
+          "id": "D",
+          "text": "Use visual choices deliberately to support the intended idea"
+        }
+      ],
+      "correct_option": "D",
+      "answer": "Use visual choices deliberately to support the intended idea",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 8",
+      "tags": [
+        "grade9",
+        "art-model-drawing",
+        "english",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "textile arts"
+      ]
+    },
+    {
+      "id": "IX-ART-EN-C08-S01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Textiles: Weaving, Printing and Embroidery",
+      "topic_name": "textile arts",
+      "category": "short",
+      "question_text": "Name two important considerations when studying or practising Textiles: Weaving, Printing and Embroidery.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Any two well-explained considerations connected to weaving, printing, embroidery, pattern and craft traditions, with clear relevance to the chapter context.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 8",
+      "tags": [
+        "grade9",
+        "art-model-drawing",
+        "english",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "textile arts"
+      ]
+    },
+    {
+      "id": "IX-ART-EN-C08-L01",
+      "class_level": "9th",
+      "subject": "Art & Model Drawing",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Textiles: Weaving, Printing and Embroidery",
+      "topic_name": "textile arts",
+      "category": "long",
+      "question_text": "Explain how visual decisions in Textiles: Weaving, Printing and Embroidery can combine skill, meaning and context.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A strong answer should discuss at least three relevant dimensions from weaving, printing, embroidery, pattern and craft traditions, explain how they interact, and connect technique with purpose or context without copying a textbook passage or artwork.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-065 | 4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356 | chapter 8",
+      "tags": [
+        "grade9",
+        "art-model-drawing",
+        "english",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "textile arts"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1817 @@
+{
+  "schemaVersion": "assps-chemistry9-ch3-english-drafts-v1",
+  "createdOn": "2026-10-06",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-007",
+  "sourcePdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+  "actualPaperEvidence": "multanGrade9ScienceActual2026Evidence.json",
+  "patternAuthority": "officialGrade9CorePattern2026.json",
+  "scope": "CURRENT_TEXTBOOK_FULL_BOOK_NON_EXERCISE_CONCEPTUAL",
+  "topicCoverage": [
+    {
+      "topicId": "3.1",
+      "draftCount": 3
+    },
+    {
+      "topicId": "3.2",
+      "draftCount": 3
+    },
+    {
+      "topicId": "3.3",
+      "draftCount": 3
+    },
+    {
+      "topicId": "3.4",
+      "draftCount": 3
+    },
+    {
+      "topicId": "3.5",
+      "draftCount": 3
+    },
+    {
+      "topicId": "3.6",
+      "draftCount": 3
+    },
+    {
+      "topicId": "3.7",
+      "draftCount": 3
+    },
+    {
+      "topicId": "3.8",
+      "draftCount": 3
+    }
+  ],
+  "drafts": [
+    {
+      "id": "IX-CHEM-2025-C03-T01-M01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "3.1",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 37,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Why do atoms form chemical bonds?"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Which reason best explains why two atoms may form a chemical bond?",
+          "answer": "The bonded arrangement can have lower energy than the separate atoms.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Bonding always adds an electron to each nucleus."
+            },
+            {
+              "id": "B",
+              "text": "The bonded arrangement can have lower energy than the separate atoms."
+            },
+            {
+              "id": "C",
+              "text": "All atoms must become positively charged."
+            },
+            {
+              "id": "D",
+              "text": "Bonding removes every electron from both atoms."
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft from the current rendered Chapter 3 source. No reviewer or approval is claimed. Urdu source parity and answer review remain outstanding."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Single-concept recall/application.",
+      "correctOptionId": "B"
+    },
+    {
+      "id": "IX-CHEM-2025-C03-T01-S02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "3.1",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 37,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Why do atoms form chemical bonds?"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Explain how a more stable electron arrangement can favour chemical bonding.",
+          "answer": "When atoms bond they can reach a lower-energy, more stable arrangement of electrons; the bonding interaction is favourable when its formation lowers the overall energy."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft from the current rendered Chapter 3 source. No reviewer or approval is claimed. Urdu source parity and answer review remain outstanding."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires explanation, interpretation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C03-T01-S03",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "3.1",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 37,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Why do atoms form chemical bonds?"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Why are atoms with complete outer electron shells often less reactive than atoms with incomplete shells?",
+          "answer": "A filled valence shell is relatively stable; such atoms have less tendency to gain, lose or share electrons to reach a stable configuration."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft from the current rendered Chapter 3 source. No reviewer or approval is claimed. Urdu source parity and answer review remain outstanding."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires explanation, interpretation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C03-T02-M04",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "3.2",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 37,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Chemical Bond"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Which interaction is the clearest example of ionic bond formation?",
+          "answer": "An electron is transferred from one atom to another, producing oppositely charged ions.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Two nonmetal atoms share one electron pair."
+            },
+            {
+              "id": "B",
+              "text": "A metal atom releases free electrons into a solid lattice."
+            },
+            {
+              "id": "C",
+              "text": "An electron is transferred from one atom to another, producing oppositely charged ions."
+            },
+            {
+              "id": "D",
+              "text": "Two neutral molecules attract through temporary dipoles."
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft from the current rendered Chapter 3 source. No reviewer or approval is claimed. Urdu source parity and answer review remain outstanding."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Single-concept recall/application.",
+      "correctOptionId": "C"
+    },
+    {
+      "id": "IX-CHEM-2025-C03-T02-S05",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "3.2",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 37,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Chemical Bond"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Compare the electron movement in the formation of sodium chloride and a hydrogen molecule.",
+          "answer": "Sodium chloride forms by electron transfer to produce Na+ and Cl- ions held by electrostatic attraction; H2 forms when two H atoms share an electron pair."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft from the current rendered Chapter 3 source. No reviewer or approval is claimed. Urdu source parity and answer review remain outstanding."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires explanation, interpretation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C03-T02-L06",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "3.2",
+      "type": "long",
+      "origin": "conceptual",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 37,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Chemical Bond"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Explain ionic and coordinate covalent bond formation using electron transfer and electron-pair donation.",
+          "answer": "Ionic bond: one atom transfers electron(s) to another, giving oppositely charged ions whose electrostatic attraction holds them together (2 marks). Coordinate covalent bond: a shared pair is supplied initially by one donor atom to an electron-pair acceptor (2 marks). Explain that the coordinate bond behaves as a covalent bond once formed (1 mark)."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft from the current rendered Chapter 3 source. No reviewer or approval is claimed. Urdu source parity and answer review remain outstanding."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires explanation, interpretation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C03-T03-M07",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "3.3",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 45,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Metallic Bond"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "What directly allows a piece of metal to conduct electricity when it is still solid?",
+          "answer": "Delocalised electrons can move through its lattice.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Positive metal ions move out of the solid."
+            },
+            {
+              "id": "B",
+              "text": "Electrons are completely trapped in isolated pairs."
+            },
+            {
+              "id": "C",
+              "text": "Delocalised electrons can move through its lattice."
+            },
+            {
+              "id": "D",
+              "text": "Each metal atom first becomes a gas."
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft from the current rendered Chapter 3 source. No reviewer or approval is claimed. Urdu source parity and answer review remain outstanding."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Single-concept recall/application.",
+      "correctOptionId": "C"
+    },
+    {
+      "id": "IX-CHEM-2025-C03-T03-S08",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "3.3",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 45,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Metallic Bond"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Use metallic bonding to explain why copper conducts electrical current without melting.",
+          "answer": "Mobile, delocalised electrons carry charge through the fixed lattice of positive metal ions while the solid metal structure remains intact."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft from the current rendered Chapter 3 source. No reviewer or approval is claimed. Urdu source parity and answer review remain outstanding."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires explanation, interpretation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C03-T03-L09",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "3.3",
+      "type": "long",
+      "origin": "conceptual",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 45,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Metallic Bond"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Relate metallic bonding to electrical conduction and the ability of metals to be shaped.",
+          "answer": "Metallic bonding consists of positive metal ions attracted to delocalised electrons (2 marks). The mobile electrons carry charge through the solid (1 mark). Layers of ions can shift while the electron cloud continues to provide bonding, allowing malleability/ductility (2 marks)."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft from the current rendered Chapter 3 source. No reviewer or approval is claimed. Urdu source parity and answer review remain outstanding."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires explanation, interpretation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C03-T04-M10",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "3.4",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 47,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electropositive Character of Metals"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "A metal atom that loses its outer electron readily is described as having which tendency?",
+          "answer": "Electropositive character",
+          "options": [
+            {
+              "id": "A",
+              "text": "Electropositive character"
+            },
+            {
+              "id": "B",
+              "text": "Strong electron-pair acceptance without ion formation"
+            },
+            {
+              "id": "C",
+              "text": "Negative ionic charge after losing an electron"
+            },
+            {
+              "id": "D",
+              "text": "Only covalent behaviour"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft from the current rendered Chapter 3 source. No reviewer or approval is claimed. Urdu source parity and answer review remain outstanding."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Single-concept recall/application.",
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C03-T04-S11",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "3.4",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 47,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electropositive Character of Metals"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Describe how a sodium atom becomes a positive ion and connect this to its electropositive character.",
+          "answer": "Sodium loses one outer-shell electron to form Na+. A tendency to lose electrons and form cations is characteristic of an electropositive element."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft from the current rendered Chapter 3 source. No reviewer or approval is claimed. Urdu source parity and answer review remain outstanding."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires explanation, interpretation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C03-T04-S12",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "3.4",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 47,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electropositive Character of Metals"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "How does the low energy needed to remove an outer electron generally affect a metal’s electropositive character?",
+          "answer": "A relatively small ionisation energy makes electron loss easier; this is consistent with stronger electropositive behaviour."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft from the current rendered Chapter 3 source. No reviewer or approval is claimed. Urdu source parity and answer review remain outstanding."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires explanation, interpretation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C03-T05-M13",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "3.5",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 47,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electronegative character of Non-metals"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "When hydrogen and chlorine share electrons, why is their bond polar?",
+          "answer": "Chlorine attracts the shared pair more strongly than hydrogen.",
+          "options": [
+            {
+              "id": "A",
+              "text": "The shared electrons stop moving completely."
+            },
+            {
+              "id": "B",
+              "text": "Both atoms have exactly the same attraction for the shared pair."
+            },
+            {
+              "id": "C",
+              "text": "Chlorine attracts the shared pair more strongly than hydrogen."
+            },
+            {
+              "id": "D",
+              "text": "Hydrogen transfers both of its electrons to chlorine."
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft from the current rendered Chapter 3 source. No reviewer or approval is claimed. Urdu source parity and answer review remain outstanding."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Single-concept recall/application.",
+      "correctOptionId": "C"
+    },
+    {
+      "id": "IX-CHEM-2025-C03-T05-S14",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "3.5",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 47,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electronegative character of Non-metals"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Define electronegativity in the context of a covalent bond.",
+          "answer": "Electronegativity is the tendency of a bonded atom to attract the shared electrons towards itself."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft from the current rendered Chapter 3 source. No reviewer or approval is claimed. Urdu source parity and answer review remain outstanding."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires explanation, interpretation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C03-T05-S15",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "3.5",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 47,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electronegative character of Non-metals"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Describe the partial charges expected on H and Cl in a hydrogen chloride molecule.",
+          "answer": "Chlorine attracts the bonding electrons more strongly and develops a partial negative charge (δ−); hydrogen develops a partial positive charge (δ+)."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft from the current rendered Chapter 3 source. No reviewer or approval is claimed. Urdu source parity and answer review remain outstanding."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires explanation, interpretation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C03-T06-M16",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "3.6",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 48,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Compare the properties of ionic and covalent compounds"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Which sample is expected to conduct electricity because its ions are free to move?",
+          "answer": "Molten sodium chloride",
+          "options": [
+            {
+              "id": "A",
+              "text": "Solid dry sodium chloride"
+            },
+            {
+              "id": "B",
+              "text": "Molten sodium chloride"
+            },
+            {
+              "id": "C",
+              "text": "Pure solid sugar"
+            },
+            {
+              "id": "D",
+              "text": "Dry covalent wax"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft from the current rendered Chapter 3 source. No reviewer or approval is claimed. Urdu source parity and answer review remain outstanding."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Single-concept recall/application.",
+      "correctOptionId": "B"
+    },
+    {
+      "id": "IX-CHEM-2025-C03-T06-S17",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "3.6",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 48,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Compare the properties of ionic and covalent compounds"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Why can a molten ionic compound conduct electricity while the same compound may not conduct as a rigid solid?",
+          "answer": "In the solid the ions occupy fixed lattice positions; on melting they can move and transport electric charge."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft from the current rendered Chapter 3 source. No reviewer or approval is claimed. Urdu source parity and answer review remain outstanding."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires explanation, interpretation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C03-T06-L18",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "3.6",
+      "type": "long",
+      "origin": "conceptual",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 48,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Compare the properties of ionic and covalent compounds"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Compare a typical ionic compound and a simple molecular covalent compound in bonding, melting behaviour and electrical conduction.",
+          "answer": "Ionic compound: electrostatic attraction among cations/anions (1), usually higher melting point due to strong lattice forces (1), molten or dissolved state can conduct through mobile ions (1). Simple molecular covalent compound: atoms share electrons (1); it usually has weaker intermolecular attractions and is a poor electrical conductor because it lacks mobile charged particles (1)."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft from the current rendered Chapter 3 source. No reviewer or approval is claimed. Urdu source parity and answer review remain outstanding."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires explanation, interpretation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C03-T07-M19",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "3.7",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 48,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Intermolecular Forces of Attraction"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Which interaction is most directly responsible for the unusually strong attraction between nearby water molecules?",
+          "answer": "Hydrogen bonding",
+          "options": [
+            {
+              "id": "A",
+              "text": "Metallic bonding"
+            },
+            {
+              "id": "B",
+              "text": "Hydrogen bonding"
+            },
+            {
+              "id": "C",
+              "text": "Transfer of electrons from one water molecule to another"
+            },
+            {
+              "id": "D",
+              "text": "Formation of an ionic lattice of water molecules"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft from the current rendered Chapter 3 source. No reviewer or approval is claimed. Urdu source parity and answer review remain outstanding."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Single-concept recall/application.",
+      "correctOptionId": "B"
+    },
+    {
+      "id": "IX-CHEM-2025-C03-T07-S20",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "3.7",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 48,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Intermolecular Forces of Attraction"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Distinguish the covalent O–H bond within a water molecule from hydrogen bonding between water molecules.",
+          "answer": "The O–H bond is an intramolecular covalent bond formed by sharing electrons; a hydrogen bond is an intermolecular attraction between suitable polar molecules."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft from the current rendered Chapter 3 source. No reviewer or approval is claimed. Urdu source parity and answer review remain outstanding."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires explanation, interpretation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C03-T07-L21",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "3.7",
+      "type": "long",
+      "origin": "conceptual",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 48,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Intermolecular Forces of Attraction"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Explain why water can have a higher boiling point than a similar small molecular hydride that cannot form strong hydrogen bonds.",
+          "answer": "Water has polar O–H bonds (1) and forms a network of intermolecular hydrogen bonds (2). More energy is needed to overcome these attractions when liquid water vaporises (1), raising its boiling point relative to a comparable hydride with weaker attractions (1)."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft from the current rendered Chapter 3 source. No reviewer or approval is claimed. Urdu source parity and answer review remain outstanding."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires explanation, interpretation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C03-T08-M22",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "3.8",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 50,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Nature of Bonding and Properties"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Why can graphite conduct electricity along its layers?",
+          "answer": "Some electrons are mobile within the layered carbon structure.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Every carbon atom becomes a free positive ion."
+            },
+            {
+              "id": "B",
+              "text": "All covalent bonds disappear in graphite."
+            },
+            {
+              "id": "C",
+              "text": "Some electrons are mobile within the layered carbon structure."
+            },
+            {
+              "id": "D",
+              "text": "Graphite is made of molten ionic crystals."
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft from the current rendered Chapter 3 source. No reviewer or approval is claimed. Urdu source parity and answer review remain outstanding."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Single-concept recall/application.",
+      "correctOptionId": "C"
+    },
+    {
+      "id": "IX-CHEM-2025-C03-T08-S23",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "3.8",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 50,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Nature of Bonding and Properties"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Explain how the bonding arrangement of graphite differs from that of diamond in a way that affects conductivity.",
+          "answer": "Graphite has layers containing electrons that can move within the sheets, allowing conduction; diamond forms a three-dimensional covalent network in which bonding electrons are localised, so diamond does not normally conduct."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft from the current rendered Chapter 3 source. No reviewer or approval is claimed. Urdu source parity and answer review remain outstanding."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires explanation, interpretation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C03-T08-S24",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "3.8",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 50,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Nature of Bonding and Properties"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Explain why an ionic crystal is often brittle when stress shifts its layers.",
+          "answer": "A shift can bring ions of the same charge opposite one another; strong repulsion then causes the lattice to fracture instead of deforming plastically."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft from the current rendered Chapter 3 source. No reviewer or approval is claimed. Urdu source parity and answer review remain outstanding."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires explanation, interpretation or comparative reasoning."
+    }
+  ],
+  "totals": {
+    "drafts": 24,
+    "approved": 0,
+    "mcq": 8,
+    "short": 12,
+    "long": 4,
+    "englishOnly": 24,
+    "exercise": 0
+  }
+}

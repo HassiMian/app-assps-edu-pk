@@ -1,0 +1,1779 @@
+{
+  "schemaVersion": "assps-art9ur-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-068",
+  "sourcePdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+  "scope": "CURRENT_ART_CHAPTER_ALIGNED_ORIGINAL_CONCEPTUAL_STARTER",
+  "drafts": [
+    {
+      "id": "IX-ART-UR-C01-M01",
+      "chapter": {
+        "id": "IX-ART-UR-C01-CH",
+        "number": 1
+      },
+      "topicId": "art fundamentals",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-068",
+        "pdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_VERIFIED_CHAPTER_SEQUENCE_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Art and Drawing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-9-ART-URDU",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Art & Model Drawing conceptual starter. No textbook passage, artwork reproduction, or copied exercise stem is included."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original art-concept question aligned to verified chapter title.",
+      "content": {
+        "ur": {
+          "stem": "باب ”Introduction to Art and Drawing“ میں مؤثر کام کے لیے کون سا approach زیادہ مناسب ہے؟",
+          "answer": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا",
+          "options": [
+            {
+              "id": "A",
+              "text": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا"
+            },
+            {
+              "id": "B",
+              "text": "تناسب، context اور audience کو نظر انداز کرنا"
+            },
+            {
+              "id": "C",
+              "text": "کسی موجودہ کام کو لفظ بہ لفظ/عین اسی طرح نقل کرنا"
+            },
+            {
+              "id": "D",
+              "text": "ہر material اور technique کو بالکل ایک جیسا سمجھنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ART-UR-C01-S01",
+      "chapter": {
+        "id": "IX-ART-UR-C01-CH",
+        "number": 1
+      },
+      "topicId": "art fundamentals",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-068",
+        "pdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_VERIFIED_CHAPTER_SEQUENCE_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Art and Drawing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-9-ART-URDU",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Art & Model Drawing conceptual starter. No textbook passage, artwork reproduction, or copied exercise stem is included."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original art-concept question aligned to verified chapter title.",
+      "content": {
+        "ur": {
+          "stem": "”Introduction to Art and Drawing“ کے مطالعے یا practice میں دو اہم considerations بیان کریں۔",
+          "answer": "جواب میں line, shape, form, tone, texture and observation سے متعلق کوئی دو مناسب نکات واضح کیے جائیں اور chapter context سے ان کا تعلق بتایا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ART-UR-C01-L01",
+      "chapter": {
+        "id": "IX-ART-UR-C01-CH",
+        "number": 1
+      },
+      "topicId": "art fundamentals",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-068",
+        "pdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_VERIFIED_CHAPTER_SEQUENCE_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Art and Drawing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-9-ART-URDU",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Art & Model Drawing conceptual starter. No textbook passage, artwork reproduction, or copied exercise stem is included."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original art-concept question aligned to verified chapter title.",
+      "content": {
+        "ur": {
+          "stem": "”Introduction to Art and Drawing“ میں skill، meaning اور context کو visual decisions کے ذریعے کیسے جوڑا جا سکتا ہے؟",
+          "answer": "جواب میں line, shape, form, tone, texture and observation سے کم از کم تین متعلقہ پہلو، ان کا باہمی تعلق، اور technique کو purpose/context سے جوڑنے کی وضاحت شامل ہو؛ textbook عبارت یا artwork کو نقل نہ کیا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ART-UR-C02-M01",
+      "chapter": {
+        "id": "IX-ART-UR-C02-CH",
+        "number": 2
+      },
+      "topicId": "drawing and sketching",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-068",
+        "pdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_VERIFIED_CHAPTER_SEQUENCE_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Drawing and Sketching-I"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-9-ART-URDU",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Art & Model Drawing conceptual starter. No textbook passage, artwork reproduction, or copied exercise stem is included."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original art-concept question aligned to verified chapter title.",
+      "content": {
+        "ur": {
+          "stem": "باب ”Drawing and Sketching-I“ میں مؤثر کام کے لیے کون سا approach زیادہ مناسب ہے؟",
+          "answer": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا",
+          "options": [
+            {
+              "id": "A",
+              "text": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا"
+            },
+            {
+              "id": "B",
+              "text": "تناسب، context اور audience کو نظر انداز کرنا"
+            },
+            {
+              "id": "C",
+              "text": "کسی موجودہ کام کو لفظ بہ لفظ/عین اسی طرح نقل کرنا"
+            },
+            {
+              "id": "D",
+              "text": "ہر material اور technique کو بالکل ایک جیسا سمجھنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ART-UR-C02-S01",
+      "chapter": {
+        "id": "IX-ART-UR-C02-CH",
+        "number": 2
+      },
+      "topicId": "drawing and sketching",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-068",
+        "pdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_VERIFIED_CHAPTER_SEQUENCE_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Drawing and Sketching-I"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-9-ART-URDU",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Art & Model Drawing conceptual starter. No textbook passage, artwork reproduction, or copied exercise stem is included."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original art-concept question aligned to verified chapter title.",
+      "content": {
+        "ur": {
+          "stem": "”Drawing and Sketching-I“ کے مطالعے یا practice میں دو اہم considerations بیان کریں۔",
+          "answer": "جواب میں proportion, contour, observation and composition سے متعلق کوئی دو مناسب نکات واضح کیے جائیں اور chapter context سے ان کا تعلق بتایا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ART-UR-C02-L01",
+      "chapter": {
+        "id": "IX-ART-UR-C02-CH",
+        "number": 2
+      },
+      "topicId": "drawing and sketching",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-068",
+        "pdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_VERIFIED_CHAPTER_SEQUENCE_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Drawing and Sketching-I"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-9-ART-URDU",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Art & Model Drawing conceptual starter. No textbook passage, artwork reproduction, or copied exercise stem is included."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original art-concept question aligned to verified chapter title.",
+      "content": {
+        "ur": {
+          "stem": "”Drawing and Sketching-I“ میں skill، meaning اور context کو visual decisions کے ذریعے کیسے جوڑا جا سکتا ہے؟",
+          "answer": "جواب میں proportion, contour, observation and composition سے کم از کم تین متعلقہ پہلو، ان کا باہمی تعلق، اور technique کو purpose/context سے جوڑنے کی وضاحت شامل ہو؛ textbook عبارت یا artwork کو نقل نہ کیا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ART-UR-C03-M01",
+      "chapter": {
+        "id": "IX-ART-UR-C03-CH",
+        "number": 3
+      },
+      "topicId": "painting practice",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-068",
+        "pdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_VERIFIED_CHAPTER_SEQUENCE_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Painting Practice-I"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-9-ART-URDU",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Art & Model Drawing conceptual starter. No textbook passage, artwork reproduction, or copied exercise stem is included."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original art-concept question aligned to verified chapter title.",
+      "content": {
+        "ur": {
+          "stem": "باب ”Painting Practice-I“ میں مؤثر کام کے لیے کون سا approach زیادہ مناسب ہے؟",
+          "answer": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا",
+          "options": [
+            {
+              "id": "A",
+              "text": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا"
+            },
+            {
+              "id": "B",
+              "text": "تناسب، context اور audience کو نظر انداز کرنا"
+            },
+            {
+              "id": "C",
+              "text": "کسی موجودہ کام کو لفظ بہ لفظ/عین اسی طرح نقل کرنا"
+            },
+            {
+              "id": "D",
+              "text": "ہر material اور technique کو بالکل ایک جیسا سمجھنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ART-UR-C03-S01",
+      "chapter": {
+        "id": "IX-ART-UR-C03-CH",
+        "number": 3
+      },
+      "topicId": "painting practice",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-068",
+        "pdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_VERIFIED_CHAPTER_SEQUENCE_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Painting Practice-I"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-9-ART-URDU",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Art & Model Drawing conceptual starter. No textbook passage, artwork reproduction, or copied exercise stem is included."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original art-concept question aligned to verified chapter title.",
+      "content": {
+        "ur": {
+          "stem": "”Painting Practice-I“ کے مطالعے یا practice میں دو اہم considerations بیان کریں۔",
+          "answer": "جواب میں colour relationships, brush control, layering and composition سے متعلق کوئی دو مناسب نکات واضح کیے جائیں اور chapter context سے ان کا تعلق بتایا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ART-UR-C03-L01",
+      "chapter": {
+        "id": "IX-ART-UR-C03-CH",
+        "number": 3
+      },
+      "topicId": "painting practice",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-068",
+        "pdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_VERIFIED_CHAPTER_SEQUENCE_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Painting Practice-I"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-9-ART-URDU",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Art & Model Drawing conceptual starter. No textbook passage, artwork reproduction, or copied exercise stem is included."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original art-concept question aligned to verified chapter title.",
+      "content": {
+        "ur": {
+          "stem": "”Painting Practice-I“ میں skill، meaning اور context کو visual decisions کے ذریعے کیسے جوڑا جا سکتا ہے؟",
+          "answer": "جواب میں colour relationships, brush control, layering and composition سے کم از کم تین متعلقہ پہلو، ان کا باہمی تعلق، اور technique کو purpose/context سے جوڑنے کی وضاحت شامل ہو؛ textbook عبارت یا artwork کو نقل نہ کیا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ART-UR-C04-M01",
+      "chapter": {
+        "id": "IX-ART-UR-C04-CH",
+        "number": 4
+      },
+      "topicId": "graphic design",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-068",
+        "pdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_VERIFIED_CHAPTER_SEQUENCE_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "An Introduction to Graphic Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-9-ART-URDU",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Art & Model Drawing conceptual starter. No textbook passage, artwork reproduction, or copied exercise stem is included."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original art-concept question aligned to verified chapter title.",
+      "content": {
+        "ur": {
+          "stem": "باب ”An Introduction to Graphic Design“ میں مؤثر کام کے لیے کون سا approach زیادہ مناسب ہے؟",
+          "answer": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا",
+          "options": [
+            {
+              "id": "A",
+              "text": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا"
+            },
+            {
+              "id": "B",
+              "text": "تناسب، context اور audience کو نظر انداز کرنا"
+            },
+            {
+              "id": "C",
+              "text": "کسی موجودہ کام کو لفظ بہ لفظ/عین اسی طرح نقل کرنا"
+            },
+            {
+              "id": "D",
+              "text": "ہر material اور technique کو بالکل ایک جیسا سمجھنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ART-UR-C04-S01",
+      "chapter": {
+        "id": "IX-ART-UR-C04-CH",
+        "number": 4
+      },
+      "topicId": "graphic design",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-068",
+        "pdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_VERIFIED_CHAPTER_SEQUENCE_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "An Introduction to Graphic Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-9-ART-URDU",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Art & Model Drawing conceptual starter. No textbook passage, artwork reproduction, or copied exercise stem is included."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original art-concept question aligned to verified chapter title.",
+      "content": {
+        "ur": {
+          "stem": "”An Introduction to Graphic Design“ کے مطالعے یا practice میں دو اہم considerations بیان کریں۔",
+          "answer": "جواب میں visual hierarchy, typography, balance and communication سے متعلق کوئی دو مناسب نکات واضح کیے جائیں اور chapter context سے ان کا تعلق بتایا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ART-UR-C04-L01",
+      "chapter": {
+        "id": "IX-ART-UR-C04-CH",
+        "number": 4
+      },
+      "topicId": "graphic design",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-068",
+        "pdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_VERIFIED_CHAPTER_SEQUENCE_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "An Introduction to Graphic Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-9-ART-URDU",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Art & Model Drawing conceptual starter. No textbook passage, artwork reproduction, or copied exercise stem is included."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original art-concept question aligned to verified chapter title.",
+      "content": {
+        "ur": {
+          "stem": "”An Introduction to Graphic Design“ میں skill، meaning اور context کو visual decisions کے ذریعے کیسے جوڑا جا سکتا ہے؟",
+          "answer": "جواب میں visual hierarchy, typography, balance and communication سے کم از کم تین متعلقہ پہلو، ان کا باہمی تعلق، اور technique کو purpose/context سے جوڑنے کی وضاحت شامل ہو؛ textbook عبارت یا artwork کو نقل نہ کیا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ART-UR-C05-M01",
+      "chapter": {
+        "id": "IX-ART-UR-C05-CH",
+        "number": 5
+      },
+      "topicId": "architecture in Pakistan",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-068",
+        "pdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_VERIFIED_CHAPTER_SEQUENCE_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "History of Architecture in Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-9-ART-URDU",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Art & Model Drawing conceptual starter. No textbook passage, artwork reproduction, or copied exercise stem is included."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original art-concept question aligned to verified chapter title.",
+      "content": {
+        "ur": {
+          "stem": "باب ”History of Architecture in Pakistan“ میں مؤثر کام کے لیے کون سا approach زیادہ مناسب ہے؟",
+          "answer": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا",
+          "options": [
+            {
+              "id": "A",
+              "text": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا"
+            },
+            {
+              "id": "B",
+              "text": "تناسب، context اور audience کو نظر انداز کرنا"
+            },
+            {
+              "id": "C",
+              "text": "کسی موجودہ کام کو لفظ بہ لفظ/عین اسی طرح نقل کرنا"
+            },
+            {
+              "id": "D",
+              "text": "ہر material اور technique کو بالکل ایک جیسا سمجھنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ART-UR-C05-S01",
+      "chapter": {
+        "id": "IX-ART-UR-C05-CH",
+        "number": 5
+      },
+      "topicId": "architecture in Pakistan",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-068",
+        "pdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_VERIFIED_CHAPTER_SEQUENCE_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "History of Architecture in Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-9-ART-URDU",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Art & Model Drawing conceptual starter. No textbook passage, artwork reproduction, or copied exercise stem is included."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original art-concept question aligned to verified chapter title.",
+      "content": {
+        "ur": {
+          "stem": "”History of Architecture in Pakistan“ کے مطالعے یا practice میں دو اہم considerations بیان کریں۔",
+          "answer": "جواب میں form, function, materials, regional identity and historical context سے متعلق کوئی دو مناسب نکات واضح کیے جائیں اور chapter context سے ان کا تعلق بتایا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ART-UR-C05-L01",
+      "chapter": {
+        "id": "IX-ART-UR-C05-CH",
+        "number": 5
+      },
+      "topicId": "architecture in Pakistan",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-068",
+        "pdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_VERIFIED_CHAPTER_SEQUENCE_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "History of Architecture in Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-9-ART-URDU",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Art & Model Drawing conceptual starter. No textbook passage, artwork reproduction, or copied exercise stem is included."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original art-concept question aligned to verified chapter title.",
+      "content": {
+        "ur": {
+          "stem": "”History of Architecture in Pakistan“ میں skill، meaning اور context کو visual decisions کے ذریعے کیسے جوڑا جا سکتا ہے؟",
+          "answer": "جواب میں form, function, materials, regional identity and historical context سے کم از کم تین متعلقہ پہلو، ان کا باہمی تعلق، اور technique کو purpose/context سے جوڑنے کی وضاحت شامل ہو؛ textbook عبارت یا artwork کو نقل نہ کیا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ART-UR-C06-M01",
+      "chapter": {
+        "id": "IX-ART-UR-C06-CH",
+        "number": 6
+      },
+      "topicId": "painting in South Asia",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-068",
+        "pdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_VERIFIED_CHAPTER_SEQUENCE_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "History of Painting in South Asia"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-9-ART-URDU",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Art & Model Drawing conceptual starter. No textbook passage, artwork reproduction, or copied exercise stem is included."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original art-concept question aligned to verified chapter title.",
+      "content": {
+        "ur": {
+          "stem": "باب ”History of Painting in South Asia“ میں مؤثر کام کے لیے کون سا approach زیادہ مناسب ہے؟",
+          "answer": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا",
+          "options": [
+            {
+              "id": "A",
+              "text": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا"
+            },
+            {
+              "id": "B",
+              "text": "تناسب، context اور audience کو نظر انداز کرنا"
+            },
+            {
+              "id": "C",
+              "text": "کسی موجودہ کام کو لفظ بہ لفظ/عین اسی طرح نقل کرنا"
+            },
+            {
+              "id": "D",
+              "text": "ہر material اور technique کو بالکل ایک جیسا سمجھنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ART-UR-C06-S01",
+      "chapter": {
+        "id": "IX-ART-UR-C06-CH",
+        "number": 6
+      },
+      "topicId": "painting in South Asia",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-068",
+        "pdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_VERIFIED_CHAPTER_SEQUENCE_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "History of Painting in South Asia"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-9-ART-URDU",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Art & Model Drawing conceptual starter. No textbook passage, artwork reproduction, or copied exercise stem is included."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original art-concept question aligned to verified chapter title.",
+      "content": {
+        "ur": {
+          "stem": "”History of Painting in South Asia“ کے مطالعے یا practice میں دو اہم considerations بیان کریں۔",
+          "answer": "جواب میں style, context, visual language and historical development سے متعلق کوئی دو مناسب نکات واضح کیے جائیں اور chapter context سے ان کا تعلق بتایا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ART-UR-C06-L01",
+      "chapter": {
+        "id": "IX-ART-UR-C06-CH",
+        "number": 6
+      },
+      "topicId": "painting in South Asia",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-068",
+        "pdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_VERIFIED_CHAPTER_SEQUENCE_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "History of Painting in South Asia"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-9-ART-URDU",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Art & Model Drawing conceptual starter. No textbook passage, artwork reproduction, or copied exercise stem is included."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original art-concept question aligned to verified chapter title.",
+      "content": {
+        "ur": {
+          "stem": "”History of Painting in South Asia“ میں skill، meaning اور context کو visual decisions کے ذریعے کیسے جوڑا جا سکتا ہے؟",
+          "answer": "جواب میں style, context, visual language and historical development سے کم از کم تین متعلقہ پہلو، ان کا باہمی تعلق، اور technique کو purpose/context سے جوڑنے کی وضاحت شامل ہو؛ textbook عبارت یا artwork کو نقل نہ کیا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ART-UR-C07-M01",
+      "chapter": {
+        "id": "IX-ART-UR-C07-CH",
+        "number": 7
+      },
+      "topicId": "calligraphy in Pakistan",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-068",
+        "pdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_VERIFIED_CHAPTER_SEQUENCE_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Master Calligraphists of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-9-ART-URDU",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Art & Model Drawing conceptual starter. No textbook passage, artwork reproduction, or copied exercise stem is included."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original art-concept question aligned to verified chapter title.",
+      "content": {
+        "ur": {
+          "stem": "باب ”Master Calligraphists of Pakistan“ میں مؤثر کام کے لیے کون سا approach زیادہ مناسب ہے؟",
+          "answer": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا",
+          "options": [
+            {
+              "id": "A",
+              "text": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا"
+            },
+            {
+              "id": "B",
+              "text": "تناسب، context اور audience کو نظر انداز کرنا"
+            },
+            {
+              "id": "C",
+              "text": "کسی موجودہ کام کو لفظ بہ لفظ/عین اسی طرح نقل کرنا"
+            },
+            {
+              "id": "D",
+              "text": "ہر material اور technique کو بالکل ایک جیسا سمجھنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ART-UR-C07-S01",
+      "chapter": {
+        "id": "IX-ART-UR-C07-CH",
+        "number": 7
+      },
+      "topicId": "calligraphy in Pakistan",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-068",
+        "pdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_VERIFIED_CHAPTER_SEQUENCE_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Master Calligraphists of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-9-ART-URDU",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Art & Model Drawing conceptual starter. No textbook passage, artwork reproduction, or copied exercise stem is included."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original art-concept question aligned to verified chapter title.",
+      "content": {
+        "ur": {
+          "stem": "”Master Calligraphists of Pakistan“ کے مطالعے یا practice میں دو اہم considerations بیان کریں۔",
+          "answer": "جواب میں letterform, rhythm, balance, discipline and cultural context سے متعلق کوئی دو مناسب نکات واضح کیے جائیں اور chapter context سے ان کا تعلق بتایا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ART-UR-C07-L01",
+      "chapter": {
+        "id": "IX-ART-UR-C07-CH",
+        "number": 7
+      },
+      "topicId": "calligraphy in Pakistan",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-068",
+        "pdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_VERIFIED_CHAPTER_SEQUENCE_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Master Calligraphists of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-9-ART-URDU",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Art & Model Drawing conceptual starter. No textbook passage, artwork reproduction, or copied exercise stem is included."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original art-concept question aligned to verified chapter title.",
+      "content": {
+        "ur": {
+          "stem": "”Master Calligraphists of Pakistan“ میں skill، meaning اور context کو visual decisions کے ذریعے کیسے جوڑا جا سکتا ہے؟",
+          "answer": "جواب میں letterform, rhythm, balance, discipline and cultural context سے کم از کم تین متعلقہ پہلو، ان کا باہمی تعلق، اور technique کو purpose/context سے جوڑنے کی وضاحت شامل ہو؛ textbook عبارت یا artwork کو نقل نہ کیا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ART-UR-C08-M01",
+      "chapter": {
+        "id": "IX-ART-UR-C08-CH",
+        "number": 8
+      },
+      "topicId": "textile arts",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-068",
+        "pdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_VERIFIED_CHAPTER_SEQUENCE_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Textiles: Weaving, Printing and Embroidery"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-9-ART-URDU",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Art & Model Drawing conceptual starter. No textbook passage, artwork reproduction, or copied exercise stem is included."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original art-concept question aligned to verified chapter title.",
+      "content": {
+        "ur": {
+          "stem": "باب ”Textiles: Weaving, Printing and Embroidery“ میں مؤثر کام کے لیے کون سا approach زیادہ مناسب ہے؟",
+          "answer": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا",
+          "options": [
+            {
+              "id": "A",
+              "text": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا"
+            },
+            {
+              "id": "B",
+              "text": "تناسب، context اور audience کو نظر انداز کرنا"
+            },
+            {
+              "id": "C",
+              "text": "کسی موجودہ کام کو لفظ بہ لفظ/عین اسی طرح نقل کرنا"
+            },
+            {
+              "id": "D",
+              "text": "ہر material اور technique کو بالکل ایک جیسا سمجھنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ART-UR-C08-S01",
+      "chapter": {
+        "id": "IX-ART-UR-C08-CH",
+        "number": 8
+      },
+      "topicId": "textile arts",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-068",
+        "pdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_VERIFIED_CHAPTER_SEQUENCE_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Textiles: Weaving, Printing and Embroidery"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-9-ART-URDU",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Art & Model Drawing conceptual starter. No textbook passage, artwork reproduction, or copied exercise stem is included."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original art-concept question aligned to verified chapter title.",
+      "content": {
+        "ur": {
+          "stem": "”Textiles: Weaving, Printing and Embroidery“ کے مطالعے یا practice میں دو اہم considerations بیان کریں۔",
+          "answer": "جواب میں weaving, printing, embroidery, pattern and craft traditions سے متعلق کوئی دو مناسب نکات واضح کیے جائیں اور chapter context سے ان کا تعلق بتایا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-ART-UR-C08-L01",
+      "chapter": {
+        "id": "IX-ART-UR-C08-CH",
+        "number": 8
+      },
+      "topicId": "textile arts",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-068",
+        "pdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_VERIFIED_CHAPTER_SEQUENCE_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Textiles: Weaving, Printing and Embroidery"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "art-model-drawing",
+        "edition": "2023-24",
+        "textbookId": "PECTAA-9-ART-URDU",
+        "syllabusVersion": "2023-24"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Art & Model Drawing conceptual starter. No textbook passage, artwork reproduction, or copied exercise stem is included."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original art-concept question aligned to verified chapter title.",
+      "content": {
+        "ur": {
+          "stem": "”Textiles: Weaving, Printing and Embroidery“ میں skill، meaning اور context کو visual decisions کے ذریعے کیسے جوڑا جا سکتا ہے؟",
+          "answer": "جواب میں weaving, printing, embroidery, pattern and craft traditions سے کم از کم تین متعلقہ پہلو، ان کا باہمی تعلق، اور technique کو purpose/context سے جوڑنے کی وضاحت شامل ہو؛ textbook عبارت یا artwork کو نقل نہ کیا جائے۔"
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 24,
+    "mcq": 8,
+    "short": 8,
+    "long": 8,
+    "chapters": 8
+  }
+}

@@ -1,0 +1,2463 @@
+{
+  "schemaVersion": "assps-urdu10-grammar-starter-v1",
+  "createdOn": "2026-10-07",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-107",
+  "sourcePdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+  "scope": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_ORIGINAL_PROVISIONAL_STARTER",
+  "grade10PatternState": "PENDING_CURRENT_OFFICIAL_PATTERN_CONFIRMATION",
+  "drafts": [
+    {
+      "id": "X-URDU-GR-M01",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "معروضی قواعد",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "لفظ ”قانون“ کی جمع کیا ہے؟",
+          "answer": "قوانین",
+          "options": [
+            {
+              "id": "A",
+              "text": "قوانین"
+            },
+            {
+              "id": "B",
+              "text": "قانونات"
+            },
+            {
+              "id": "C",
+              "text": "قانونیں"
+            },
+            {
+              "id": "D",
+              "text": "قانوں"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-URDU-GR-M02",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "معروضی قواعد",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "”آزادی“ کا مترادف کیا ہے؟",
+          "answer": "حریت",
+          "options": [
+            {
+              "id": "A",
+              "text": "حریت"
+            },
+            {
+              "id": "B",
+              "text": "غلامی"
+            },
+            {
+              "id": "C",
+              "text": "قید"
+            },
+            {
+              "id": "D",
+              "text": "رکاوٹ"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-URDU-GR-M03",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "معروضی قواعد",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "”عروج“ کی ضد کیا ہے؟",
+          "answer": "زوال",
+          "options": [
+            {
+              "id": "A",
+              "text": "زوال"
+            },
+            {
+              "id": "B",
+              "text": "بلندی"
+            },
+            {
+              "id": "C",
+              "text": "کمال"
+            },
+            {
+              "id": "D",
+              "text": "ترقی"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-URDU-GR-M04",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "معروضی قواعد",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "محاورہ ”کمر کسنا“ کا مفہوم کیا ہے؟",
+          "answer": "پوری تیاری کرنا",
+          "options": [
+            {
+              "id": "A",
+              "text": "پوری تیاری کرنا"
+            },
+            {
+              "id": "B",
+              "text": "آرام کرنا"
+            },
+            {
+              "id": "C",
+              "text": "خاموش رہنا"
+            },
+            {
+              "id": "D",
+              "text": "سفر ختم کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-URDU-GR-M05",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "معروضی قواعد",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "درست جملہ منتخب کریں۔",
+          "answer": "طلبہ نے اپنا کام مکمل کر لیا۔",
+          "options": [
+            {
+              "id": "A",
+              "text": "طلبہ نے اپنا کام مکمل کر لیا۔"
+            },
+            {
+              "id": "B",
+              "text": "طلبہ نے اپنا کام مکمل کر لی۔"
+            },
+            {
+              "id": "C",
+              "text": "طلبہ اپنا کام مکمل کر لیا ہے تھے۔"
+            },
+            {
+              "id": "D",
+              "text": "طلبہ نے اپنے کام مکمل کیا ہیں۔"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-URDU-GR-WJ01",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "واحد جمع",
+      "type": "wahid_jama",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "لفظ ”قانون“ کی جمع لکھیں۔",
+          "answer": "قوانین"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-WJ02",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "واحد جمع",
+      "type": "wahid_jama",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "لفظ ”تحقیق“ کی جمع لکھیں۔",
+          "answer": "تحقیقات"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-WJ03",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "واحد جمع",
+      "type": "wahid_jama",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "لفظ ”تجربہ“ کی جمع لکھیں۔",
+          "answer": "تجربات"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-WJ04",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "واحد جمع",
+      "type": "wahid_jama",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "لفظ ”واقعہ“ کی جمع لکھیں۔",
+          "answer": "واقعات"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-WJ05",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "واحد جمع",
+      "type": "wahid_jama",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "لفظ ”مضمون“ کی جمع لکھیں۔",
+          "answer": "مضامین"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-MT01",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "مترادف",
+      "type": "mutradif",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "لفظ ”علم“ کا مترادف لکھیں۔",
+          "answer": "دانش"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-MT02",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "مترادف",
+      "type": "mutradif",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "لفظ ”کوشش“ کا مترادف لکھیں۔",
+          "answer": "سعی"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-MT03",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "مترادف",
+      "type": "mutradif",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "لفظ ”آزادی“ کا مترادف لکھیں۔",
+          "answer": "حریت"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-MT04",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "مترادف",
+      "type": "mutradif",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "لفظ ”وطن“ کا مترادف لکھیں۔",
+          "answer": "ملک"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-MT05",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "مترادف",
+      "type": "mutradif",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "لفظ ”مشکل“ کا مترادف لکھیں۔",
+          "answer": "دشواری"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-MZ01",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "متضاد",
+      "type": "mutzad",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "لفظ ”عروج“ کی ضد لکھیں۔",
+          "answer": "زوال"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-MZ02",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "متضاد",
+      "type": "mutzad",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "لفظ ”اتفاق“ کی ضد لکھیں۔",
+          "answer": "اختلاف"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-MZ03",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "متضاد",
+      "type": "mutzad",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "لفظ ”حاضر“ کی ضد لکھیں۔",
+          "answer": "غائب"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-MZ04",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "متضاد",
+      "type": "mutzad",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "لفظ ”وسیع“ کی ضد لکھیں۔",
+          "answer": "تنگ"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-MZ05",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "متضاد",
+      "type": "mutzad",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "لفظ ”عارضی“ کی ضد لکھیں۔",
+          "answer": "مستقل"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-MH01",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "محاورات",
+      "type": "muhawara",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "محاورہ ”آسمان سر پر اٹھانا“ کا مفہوم لکھیں۔",
+          "answer": "بہت شور کرنا"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-MH02",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "محاورات",
+      "type": "muhawara",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "محاورہ ”پانی پانی ہونا“ کا مفہوم لکھیں۔",
+          "answer": "بہت شرمندہ ہونا"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-MH03",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "محاورات",
+      "type": "muhawara",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "محاورہ ”کان بھرنا“ کا مفہوم لکھیں۔",
+          "answer": "کسی کے خلاف بھڑکانا"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-MH04",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "محاورات",
+      "type": "muhawara",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "محاورہ ”کمر کسنا“ کا مفہوم لکھیں۔",
+          "answer": "پوری تیاری کرنا"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-MH05",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "محاورات",
+      "type": "muhawara",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "محاورہ ”دل چھوٹا کرنا“ کا مفہوم لکھیں۔",
+          "answer": "ہمت ہار دینا"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-SC01",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "جملوں کی اصلاح",
+      "type": "sentence_correction",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "درج ذیل جملے کی اصلاح کریں: ”ہم کل میوزیم گیا تھا۔“",
+          "answer": "ہم کل میوزیم گئے تھے۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-SC02",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "جملوں کی اصلاح",
+      "type": "sentence_correction",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "درج ذیل جملے کی اصلاح کریں: ”طلبہ نے اپنی کتاب کھولا۔“",
+          "answer": "طلبہ نے اپنی کتاب کھولی۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-SC03",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "جملوں کی اصلاح",
+      "type": "sentence_correction",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "درج ذیل جملے کی اصلاح کریں: ”وہ دونوں طالب علم محنت کرتا ہے۔“",
+          "answer": "وہ دونوں طالب علم محنت کرتے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-SC04",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "جملوں کی اصلاح",
+      "type": "sentence_correction",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "درج ذیل جملے کی اصلاح کریں: ”مجھے یہ خبریں معلوم نہیں تھا۔“",
+          "answer": "مجھے یہ خبریں معلوم نہیں تھیں۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-SC05",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "جملوں کی اصلاح",
+      "type": "sentence_correction",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "درج ذیل جملے کی اصلاح کریں: ”اساتذہ نے طلبہ کو نصیحت کی اور چلا گیا۔“",
+          "answer": "اساتذہ نے طلبہ کو نصیحت کی اور چلے گئے۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-APP01",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "درخواست",
+      "type": "application",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "اسکول میں سائنسی نمائش منعقد کرنے کی اجازت کے لیے پرنسپل کے نام درخواست لکھیں۔",
+          "answer": "درخواست میں مقصد، مجوزہ سرگرمی، تعلیمی فائدہ، انتظامی تعاون کی گزارش اور مؤدبانہ اختتام شامل ہوں۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-APP02",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "درخواست",
+      "type": "application",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "کردار سرٹیفکیٹ کے حصول کے لیے پرنسپل کے نام درخواست لکھیں۔",
+          "answer": "درخواست میں طالب علم کا تعارف، سرٹیفکیٹ کی ضرورت، مؤدبانہ گزارش اور نام/جماعت شامل ہوں۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-LTR01",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "خط",
+      "type": "letter",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "اپنے چھوٹے بھائی یا بہن کو مطالعے کی اچھی عادات کے بارے میں خط لکھیں۔",
+          "answer": "خط میں باقاعدہ مطالعہ، نوٹس، دہرائی، آرام اور وقت کی تقسیم سے متعلق واضح مشورے اور مناسب اختتام شامل ہوں۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-ESS01",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "مضمون",
+      "type": "essay",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "عنوان ”محنت کامیابی کی کنجی ہے“ پر مختصر مضمون لکھیں۔",
+          "answer": "مضمون میں واضح تمہید، محنت کی اہمیت، ایک یا دو عملی مثالیں اور مربوط نتیجہ شامل ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-GR-ESS02",
+      "chapter": {
+        "id": "10-URDU-GRAMMAR-2023-24",
+        "number": 1
+      },
+      "topicId": "مکالمہ",
+      "type": "essay",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-107",
+        "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "OFFICIAL_SHARED_GRAMMAR_AUTHORITY_IDENTITY_PLUS_VERIFIED_TASK_TAXONOMY",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Urdu quaid-e-insha 2023-24"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2023-24-shared-grammar",
+        "textbookId": "PECTAA-IX-X-URDU-QUAID-E-INSHA-2023-24",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "اصل اردو قواعد و انشا کا عبوری سوال۔ جماعت دہم کے موجودہ 2026-27 نصاب کے لیے مواد عارضی اندرونی استعمال تک محدود ہے؛ حتمی بورڈ پیٹرن ابھی منسوب نہیں کیا گیا۔"
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "grammar-composition",
+        "alpStatus": "not-applicable"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "اصل قواعد/انشا مشق؛ منظوری سے پہلے عبوری اندرونی استعمال۔",
+      "content": {
+        "ur": {
+          "stem": "دو طلبہ کے درمیان سوشل میڈیا کے ذمہ دارانہ استعمال پر مختصر مکالمہ لکھیں۔",
+          "answer": "مکالمے میں وقت کی حد، معلومات کی تصدیق، رازداری اور تعلیمی استعمال پر متوازن گفتگو شامل ہو۔"
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 35,
+    "mcq": 5,
+    "wahid_jama": 5,
+    "mutradif": 5,
+    "mutzad": 5,
+    "muhawara": 5,
+    "sentence_correction": 5,
+    "writing": 5
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "assps-pakstudies10-urdu-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-018",
+  "sourcePdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+  "sourceByteLength": 90106592,
+  "pageCount": 148,
+  "identity": [
+    "Mutalia Pakistan 10 Urdu Medium",
+    "PECTAA current catalogue asset"
+  ],
+  "chapterParityStatus": "CURRENT_URDU_SOURCE_8_CHAPTER_STRUCTURE_CROSS_VERIFIED_AGAINST_CURRENT_EM_COUNTERPART",
+  "chapters": [
+    {
+      "number": 1,
+      "titleUrdu": "نظریاتی اساسِ پاکستان",
+      "titleEnglish": "Ideological Basis of Pakistan",
+      "status": "CURRENT_CROSS_MEDIUM_CHAPTER_PARITY_EXACT_URDU_PAGE_PENDING"
+    },
+    {
+      "number": 2,
+      "titleUrdu": "تحریکِ پاکستان",
+      "titleEnglish": "Pakistan Movement",
+      "status": "CURRENT_CROSS_MEDIUM_CHAPTER_PARITY_EXACT_URDU_PAGE_PENDING"
+    },
+    {
+      "number": 3,
+      "titleUrdu": "تاریخِ پاکستان اور آئینی ارتقا",
+      "titleEnglish": "History of Pakistan and Constitutional Development",
+      "status": "CURRENT_CROSS_MEDIUM_CHAPTER_PARITY_EXACT_URDU_PAGE_PENDING"
+    },
+    {
+      "number": 4,
+      "titleUrdu": "جغرافیۂ پاکستان",
+      "titleEnglish": "Geography of Pakistan",
+      "status": "CURRENT_CROSS_MEDIUM_CHAPTER_PARITY_EXACT_URDU_PAGE_PENDING"
+    },
+    {
+      "number": 5,
+      "titleUrdu": "پاکستان اور بین الاقوامی امور",
+      "titleEnglish": "Pakistan and International Affairs",
+      "status": "CURRENT_CROSS_MEDIUM_CHAPTER_PARITY_EXACT_URDU_PAGE_PENDING"
+    },
+    {
+      "number": 6,
+      "titleUrdu": "وسائل اور معاشی ترقی",
+      "titleEnglish": "Resources and Economic Development of Pakistan",
+      "status": "CURRENT_CROSS_MEDIUM_CHAPTER_PARITY_EXACT_URDU_PAGE_PENDING"
+    },
+    {
+      "number": 7,
+      "titleUrdu": "آبادی، معاشرہ اور ثقافتی تنوع",
+      "titleEnglish": "Population, Society and Cultural Diversity in Pakistan",
+      "status": "CURRENT_CROSS_MEDIUM_CHAPTER_PARITY_EXACT_URDU_PAGE_PENDING"
+    },
+    {
+      "number": 8,
+      "titleUrdu": "پاکستان میں خواتین کا بااختیار ہونا",
+      "titleEnglish": "Women Empowerment in Pakistan",
+      "status": "CURRENT_CROSS_MEDIUM_CHAPTER_PARITY_EXACT_URDU_PAGE_PENDING"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "exactUrduPageBoundariesPending": true
+  }
+}

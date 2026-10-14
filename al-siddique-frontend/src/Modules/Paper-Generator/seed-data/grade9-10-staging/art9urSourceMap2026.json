@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "assps-art9ur-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-068",
+  "sourcePdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+  "sourceByteLength": 79919447,
+  "pageCount": 220,
+  "identity": [
+    "Art & Model Drawing",
+    "Grade 9",
+    "Urdu",
+    "2023-24"
+  ],
+  "resolvedMedium": "Urdu",
+  "chapterMapState": "OFFICIAL_BYTES_HASHED_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_BOUNDARIES_PENDING",
+  "chapterEvidence": {
+    "officialCatalogRecordId": "pectaa-catalog-068",
+    "sourceCacheRef": "20261006/elective9-art-ur.pdf",
+    "crossCheckUrls": [
+      "https://freebooks.pk/school-books/class-9/art-and-model-drawing-class-9-urdu-medium-pdf-download-punjab-board-pctb/"
+    ]
+  },
+  "chapters": [
+    {
+      "number": 1,
+      "titleLocal": "فن اور ڈرائنگ کا تعارف",
+      "titleEnglish": "Introduction to Art and Drawing",
+      "focus": "فن کے عناصر، بنیادی اشکال اور اصول",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 2,
+      "titleLocal": "ڈرائنگ اور خاکہ کشی-I",
+      "titleEnglish": "Drawing and Sketching-I",
+      "focus": "مشاہدہ، line، form، proportion اور sketching",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 3,
+      "titleLocal": "پینٹنگ کی مشق-I",
+      "titleEnglish": "Painting Practice-I",
+      "focus": "رنگ، painting media اور visual expression",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 4,
+      "titleLocal": "گرافک ڈیزائن کا تعارف",
+      "titleEnglish": "An Introduction to Graphic Design",
+      "focus": "خطاطی، poster، pattern اور visual communication",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 5,
+      "titleLocal": "پاکستان میں فنِ تعمیر کی تاریخ",
+      "titleEnglish": "History of Architecture in Pakistan",
+      "focus": "پاکستانی architectural heritage کے منتخب نمونے",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 6,
+      "titleLocal": "جنوبی ایشیا میں مصوری کی تاریخ",
+      "titleEnglish": "History of Painting in South Asia",
+      "focus": "South Asian painting traditions اور پاکستانی painters",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 7,
+      "titleLocal": "پاکستان کے نامور خطاط",
+      "titleEnglish": "Master Calligraphists of Pakistan",
+      "focus": "خطاطی بطور بصری فن اور پاکستانی calligraphists",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 8,
+      "titleLocal": "پارچہ بافی: بُنائی، چھپائی اور کڑھائی",
+      "titleEnglish": "Textiles: Weaving, Printing and Embroidery",
+      "focus": "weaving، printing، embroidery اور textile crafts",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "exactPageBoundariesPending": true,
+    "safetyBoundary": "NO_DANGEROUS_PROCEDURE_STEPS_NO_RESTRICTIVE_DIET_FRAMING"
+  }
+}

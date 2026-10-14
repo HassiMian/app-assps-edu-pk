@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "assps-biology9Urdu-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-010",
+  "sourcePdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+  "sourceByteLength": 84697797,
+  "pageCount": 212,
+  "identity": [
+    "Biology Grade IX Urdu Medium",
+    "PECTAA/PCTB current official catalogue asset 2026-09-03"
+  ],
+  "chapterParityStatus": "NEWER_URDU_EDITION_TOC_COUNT_AND_SEQUENCE_VERIFIED_AGAINST_CURRENT_CONCEPT_MAP",
+  "chapters": [
+    {
+      "number": 1,
+      "titleUrdu": "علمِ حیاتیات",
+      "titleEnglish": "The Science of Biology",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 2,
+      "titleUrdu": "حیاتیاتی تنوع",
+      "titleEnglish": "Biodiversity",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 3,
+      "titleUrdu": "خلیہ",
+      "titleEnglish": "The Cell",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 4,
+      "titleUrdu": "سیل سائیکل",
+      "titleEnglish": "Cell Cycle",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 5,
+      "titleUrdu": "ٹشوز، اعضا اور نظامِ اعضا",
+      "titleEnglish": "Tissues, Organs, and Organ Systems",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 6,
+      "titleUrdu": "بایومالی کیولز",
+      "titleEnglish": "Biomolecules",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 7,
+      "titleUrdu": "انزائمز",
+      "titleEnglish": "Enzymes",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 8,
+      "titleUrdu": "بایوانرجیٹکس",
+      "titleEnglish": "Bioenergetics",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 9,
+      "titleUrdu": "نباتاتی فعلیات",
+      "titleEnglish": "Plant Physiology",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 10,
+      "titleUrdu": "پودوں میں تولید",
+      "titleEnglish": "Reproduction in Plants",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 11,
+      "titleUrdu": "بایواسٹیٹسٹکس",
+      "titleEnglish": "Biostatistics",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "exactUrduPageBoundariesPending": true,
+    "urduLanguageConvention": "NATURAL_URDU_WITH_FAMILIAR_SCIENTIFIC_TERMS"
+  }
+}

@@ -1,0 +1,1814 @@
+{
+  "schemaVersion": "assps-chemistry9-ch2-english-drafts-v1",
+  "createdOn": "2026-10-06",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "DRAFT_ENGLISH_ONLY_URDU_AND_INDEPENDENT_ACADEMIC_REVIEW_PENDING",
+  "sourceRecordId": "pectaa-catalog-007",
+  "sourcePdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+  "actualPaperEvidence": "multanGrade9ScienceActual2026Evidence.json",
+  "patternAuthority": "officialGrade9CorePattern2026.json",
+  "scope": "Grade IX Chemistry 2025-26 Chapter 2 all four visually verified numbered topics; original English-medium additional/conceptual batch only.",
+  "topicCoverage": [
+    {
+      "topicId": "2.1",
+      "title": "Structure of Atom",
+      "sourcePdfPage": 23,
+      "draftCount": 6,
+      "coverageStatus": "FIRST_AUTHORING_BATCH_NOT_EXHAUSTIVE"
+    },
+    {
+      "topicId": "2.2",
+      "title": "Atomic Number and Mass Number",
+      "sourcePdfPage": 26,
+      "draftCount": 6,
+      "coverageStatus": "FIRST_AUTHORING_BATCH_NOT_EXHAUSTIVE"
+    },
+    {
+      "topicId": "2.3",
+      "title": "Isotopes and their Masses",
+      "sourcePdfPage": 28,
+      "draftCount": 6,
+      "coverageStatus": "FIRST_AUTHORING_BATCH_NOT_EXHAUSTIVE"
+    },
+    {
+      "topicId": "2.4",
+      "title": "Relative Atomic Mass",
+      "sourcePdfPage": 30,
+      "draftCount": 6,
+      "coverageStatus": "FIRST_AUTHORING_BATCH_NOT_EXHAUSTIVE"
+    }
+  ],
+  "drafts": [
+    {
+      "id": "IX-CHEM-2025-C02-T21-M01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "2.1",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 23,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Structure of Atom"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Which subatomic particle carries a negative charge?",
+          "answer": "Electron",
+          "options": [
+            {
+              "id": "A",
+              "text": "Electron"
+            },
+            {
+              "id": "B",
+              "text": "Proton"
+            },
+            {
+              "id": "C",
+              "text": "Neutron"
+            },
+            {
+              "id": "D",
+              "text": "Nucleus"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 2 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Recall/direct concept",
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C02-T21-M02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "2.1",
+      "type": "mcq",
+      "origin": "conceptual",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 23,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Structure of Atom"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "In the Bohr model, an electron farther from the nucleus generally has what kind of energy?",
+          "answer": "Higher energy",
+          "options": [
+            {
+              "id": "A",
+              "text": "Higher energy"
+            },
+            {
+              "id": "B",
+              "text": "Lower energy only"
+            },
+            {
+              "id": "C",
+              "text": "Zero energy"
+            },
+            {
+              "id": "D",
+              "text": "The same energy in every shell"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 2 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation, calculation or application of a verified chapter concept.",
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C02-T21-S03",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "2.1",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 23,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Structure of Atom"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "State the relative charges of an electron, proton and neutron.",
+          "answer": "Electron: -1, proton: +1, neutron: 0."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 2 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Recall/direct concept"
+    },
+    {
+      "id": "IX-CHEM-2025-C02-T21-S04",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "2.1",
+      "type": "short",
+      "origin": "conceptual",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 23,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Structure of Atom"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Why is the nucleus responsible for almost all of an atom’s mass?",
+          "answer": "Protons and neutrons are located in the nucleus and each has far greater mass than an electron, so almost all atomic mass is concentrated there."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 2 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation, calculation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C02-T21-S05",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "2.1",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 23,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Structure of Atom"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "What is meant by an electron shell or energy level?",
+          "answer": "It is a permitted region/energy level around the nucleus associated with electrons of a particular range of energy."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 2 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation, calculation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C02-T21-L06",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "2.1",
+      "type": "long",
+      "origin": "conceptual",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 23,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Structure of Atom"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Describe the main features of an atom using the nucleus, protons, neutrons, electrons and electron shells.",
+          "answer": "A complete answer should identify the small dense nucleus containing protons and neutrons, electrons outside the nucleus in energy levels/shells, the relative charges of the particles, and the concentration of most atomic mass in the nucleus."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 2 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation, calculation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C02-T22-M07",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "2.2",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 26,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Atomic Number and Mass Number"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "What does the atomic number of an element equal?",
+          "answer": "The number of protons in its nucleus",
+          "options": [
+            {
+              "id": "A",
+              "text": "The number of protons in its nucleus"
+            },
+            {
+              "id": "B",
+              "text": "The number of neutrons only"
+            },
+            {
+              "id": "C",
+              "text": "The total number of protons and neutrons"
+            },
+            {
+              "id": "D",
+              "text": "The number of electron shells"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 2 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Recall/direct concept",
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C02-T22-M08",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "2.2",
+      "type": "mcq",
+      "origin": "conceptual",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 26,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Atomic Number and Mass Number"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "An atom has mass number 31 and atomic number 15. How many neutrons does it contain?",
+          "answer": "16",
+          "options": [
+            {
+              "id": "A",
+              "text": "16"
+            },
+            {
+              "id": "B",
+              "text": "15"
+            },
+            {
+              "id": "C",
+              "text": "31"
+            },
+            {
+              "id": "D",
+              "text": "46"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 2 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation, calculation or application of a verified chapter concept.",
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C02-T22-S09",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "2.2",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 26,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Atomic Number and Mass Number"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Differentiate between atomic number and mass number.",
+          "answer": "Atomic number is the number of protons. Mass number is the total number of protons plus neutrons."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 2 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Recall/direct concept"
+    },
+    {
+      "id": "IX-CHEM-2025-C02-T22-S10",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "2.2",
+      "type": "short",
+      "origin": "conceptual",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 26,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Atomic Number and Mass Number"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Why does changing the number of protons change the identity of an element?",
+          "answer": "The proton number is the atomic number, and each element has a unique atomic number. Changing it produces a different element."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 2 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation, calculation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C02-T22-N11",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "2.2",
+      "type": "numerical",
+      "origin": "conceptual",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 26,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Atomic Number and Mass Number"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "An atom has atomic number 17 and mass number 37. Calculate its numbers of protons, neutrons and electrons if it is neutral.",
+          "answer": "Protons = 17; neutrons = 37 - 17 = 20; electrons = 17."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 2 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation, calculation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C02-T22-L12",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "2.2",
+      "type": "long",
+      "origin": "conceptual",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 26,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Atomic Number and Mass Number"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Explain how atomic number and mass number are used to describe an atom, and show how the number of neutrons is found from them.",
+          "answer": "A complete answer should define atomic number Z as proton count, mass number A as proton plus neutron count, note that neutral atoms have electrons equal to protons, and use N = A - Z to obtain neutrons."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 2 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation, calculation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C02-T23-M13",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "2.3",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 28,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Isotopes and their Masses"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Isotopes of the same element have the same number of which particle?",
+          "answer": "Protons",
+          "options": [
+            {
+              "id": "A",
+              "text": "Protons"
+            },
+            {
+              "id": "B",
+              "text": "Neutrons"
+            },
+            {
+              "id": "C",
+              "text": "Nucleons"
+            },
+            {
+              "id": "D",
+              "text": "Electron shells in every ion"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 2 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Recall/direct concept",
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C02-T23-M14",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "2.3",
+      "type": "mcq",
+      "origin": "conceptual",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 28,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Isotopes and their Masses"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Two neutral atoms have the same atomic number but different mass numbers. What are they?",
+          "answer": "Isotopes of the same element",
+          "options": [
+            {
+              "id": "A",
+              "text": "Isotopes of the same element"
+            },
+            {
+              "id": "B",
+              "text": "Different ions of different elements"
+            },
+            {
+              "id": "C",
+              "text": "Identical atoms in every respect"
+            },
+            {
+              "id": "D",
+              "text": "Two compounds"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 2 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation, calculation or application of a verified chapter concept.",
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C02-T23-S15",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "2.3",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 28,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Isotopes and their Masses"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Define isotopes.",
+          "answer": "Isotopes are atoms of the same element with the same proton number but different numbers of neutrons and therefore different mass numbers."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 2 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Recall/direct concept"
+    },
+    {
+      "id": "IX-CHEM-2025-C02-T23-S16",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "2.3",
+      "type": "short",
+      "origin": "conceptual",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 28,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Isotopes and their Masses"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Why do isotopes of one element usually have very similar chemical properties?",
+          "answer": "They have the same proton number and, for neutral atoms, the same electron arrangement, which mainly determines chemical behaviour."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 2 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation, calculation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C02-T23-S17",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "2.3",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 28,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Isotopes and their Masses"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Distinguish between forming an ion and forming a different isotope of the same element.",
+          "answer": "Ion formation changes the number of electrons, while a different isotope has a different number of neutrons without changing the proton number."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 2 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation, calculation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C02-T23-L18",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "2.3",
+      "type": "long",
+      "origin": "conceptual",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 28,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Isotopes and their Masses"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Explain how isotopes can differ in mass while remaining the same element. Include proton number, neutron number and chemical identity.",
+          "answer": "A complete answer should explain that isotopes share the same proton number/atomic number, so they are the same element, but contain different neutron numbers, giving different mass numbers while leaving their basic chemical identity largely unchanged."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 2 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation, calculation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C02-T24-M19",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "2.4",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 30,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Relative Atomic Mass"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Why is the relative atomic mass of many elements not a whole number?",
+          "answer": "It is a weighted average of naturally occurring isotopes",
+          "options": [
+            {
+              "id": "A",
+              "text": "It is a weighted average of naturally occurring isotopes"
+            },
+            {
+              "id": "B",
+              "text": "Every atom contains half a proton"
+            },
+            {
+              "id": "C",
+              "text": "Atomic number is always fractional"
+            },
+            {
+              "id": "D",
+              "text": "Electrons have no charge"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 2 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Recall/direct concept",
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C02-T24-M20",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "2.4",
+      "type": "mcq",
+      "origin": "conceptual",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 30,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Relative Atomic Mass"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "An element has 75% isotope X-10 and 25% isotope X-12. What is its relative atomic mass?",
+          "answer": "10.5",
+          "options": [
+            {
+              "id": "A",
+              "text": "10.5"
+            },
+            {
+              "id": "B",
+              "text": "11.0"
+            },
+            {
+              "id": "C",
+              "text": "10.0"
+            },
+            {
+              "id": "D",
+              "text": "12.0"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 2 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation, calculation or application of a verified chapter concept.",
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C02-T24-S21",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "2.4",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 30,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Relative Atomic Mass"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "What is meant by relative atomic mass?",
+          "answer": "It is the weighted average mass of the atoms of an element relative to one-twelfth of the mass of a carbon-12 atom."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 2 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Recall/direct concept"
+    },
+    {
+      "id": "IX-CHEM-2025-C02-T24-S22",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "2.4",
+      "type": "short",
+      "origin": "conceptual",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 30,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Relative Atomic Mass"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Why must isotopic abundance be considered when calculating relative atomic mass?",
+          "answer": "Different isotopes occur in different proportions, so each isotope must contribute to the average according to its abundance."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 2 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation, calculation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C02-T24-N23",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "2.4",
+      "type": "numerical",
+      "origin": "conceptual",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 30,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Relative Atomic Mass"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "An element consists of 60% atoms of mass 20 and 40% atoms of mass 22. Calculate its relative atomic mass.",
+          "answer": "(20 x 0.60) + (22 x 0.40) = 12.0 + 8.8 = 20.8."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 2 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation, calculation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C02-T24-L24",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "2.4",
+      "type": "long",
+      "origin": "conceptual",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 30,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Relative Atomic Mass"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Describe how relative atomic mass is calculated from isotopic masses and percentage abundances.",
+          "answer": "A complete answer should explain that each isotopic mass is multiplied by its fractional or percentage abundance, the contributions are added, and the result is the weighted average relative to the carbon-12 reference."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 2 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation, calculation or application of a verified chapter concept."
+    }
+  ],
+  "totals": {
+    "drafts": 24,
+    "approved": 0,
+    "mcq": 8,
+    "short": 10,
+    "numerical": 2,
+    "long": 4,
+    "englishOnly": 24,
+    "exercise": 0
+  }
+}

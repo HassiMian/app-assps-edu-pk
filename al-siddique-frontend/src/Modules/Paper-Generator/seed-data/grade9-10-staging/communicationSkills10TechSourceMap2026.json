@@ -1,0 +1,110 @@
+{
+  "schemaVersion": "assps-communicationSkills10Tech-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-049",
+  "sourcePdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+  "sourceByteLength": 37886356,
+  "pageCount": 108,
+  "identity": [
+    "Communication Skills & Personal Grooming-Tech Grade X Matric-Tech",
+    "PECTAA current source 2026-27",
+    "native text layer verified"
+  ],
+  "chapters": [
+    {
+      "number": 1,
+      "title": "Advanced Communication Techniques",
+      "chapterStartPdfPage": 4,
+      "exercisePages": [
+        11
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 2,
+      "title": "Professional Dressing and Grooming",
+      "chapterStartPdfPage": 13,
+      "exercisePages": [
+        19
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 3,
+      "title": "Interview Skills",
+      "chapterStartPdfPage": 20,
+      "exercisePages": [
+        27
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 4,
+      "title": "Self-Awareness",
+      "chapterStartPdfPage": 29,
+      "exercisePages": [
+        32,
+        33,
+        35,
+        40
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 5,
+      "title": "Emotional Intelligence",
+      "chapterStartPdfPage": 42,
+      "exercisePages": [
+        49
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 6,
+      "title": "Interpersonal Skills",
+      "chapterStartPdfPage": 51,
+      "exercisePages": [
+        62
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 7,
+      "title": "Thinking Skills",
+      "chapterStartPdfPage": 64,
+      "exercisePages": [
+        73,
+        75
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 8,
+      "title": "Personal Branding and Social Media Presence",
+      "chapterStartPdfPage": 77,
+      "exercisePages": [
+        86
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 9,
+      "title": "Health and Nutrition",
+      "chapterStartPdfPage": 88,
+      "exercisePages": [
+        97,
+        98
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    }
+  ],
+  "exerciseIndexStatus": "PARTIAL_VERIFIED_NATIVE_TEXT_LAYER",
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "dangerousPracticalInstructionsAllowed": false
+  }
+}

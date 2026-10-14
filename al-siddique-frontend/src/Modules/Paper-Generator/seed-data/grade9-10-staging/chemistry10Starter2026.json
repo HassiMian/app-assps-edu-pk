@@ -1,0 +1,4868 @@
+{
+  "schemaVersion": "assps-chemistry10-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-recovered-chemistry10-en-2026",
+  "sourcePdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+  "scope": "CURRENT_PECTAA_2026_ENGLISH_TEXTBOOK_CHAPTER_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "X-CHEM-C14-M01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C14",
+        "number": 14
+      },
+      "topicId": "kinetic particle theory",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "States of Matter and Phase Changes"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Which statement best matches kinetic particle theory?",
+          "answer": "Particles are in continuous motion",
+          "options": [
+            {
+              "id": "A",
+              "text": "Particles are in continuous motion"
+            },
+            {
+              "id": "B",
+              "text": "Particles have no energy"
+            },
+            {
+              "id": "C",
+              "text": "Particles never collide"
+            },
+            {
+              "id": "D",
+              "text": "Matter contains no spaces"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-CHEM-C14-M02",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C14",
+        "number": 14
+      },
+      "topicId": "phase changes",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "States of Matter and Phase Changes"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "During melting of a pure solid, supplied energy mainly helps to?",
+          "answer": "Overcome intermolecular attractions",
+          "options": [
+            {
+              "id": "A",
+              "text": "Overcome intermolecular attractions"
+            },
+            {
+              "id": "B",
+              "text": "Destroy all atoms"
+            },
+            {
+              "id": "C",
+              "text": "Lower particle energy"
+            },
+            {
+              "id": "D",
+              "text": "Remove all mass"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-CHEM-C14-S01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C14",
+        "number": 14
+      },
+      "topicId": "evaporation and boiling",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "States of Matter and Phase Changes"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Differentiate evaporation and boiling.",
+          "answer": "Evaporation occurs at the surface over a range of temperatures, while boiling occurs throughout a liquid at its boiling point when vapour pressure matches external pressure."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C14-S02",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C14",
+        "number": 14
+      },
+      "topicId": "heating curve",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "States of Matter and Phase Changes"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Why can temperature remain constant during a phase change despite heating?",
+          "answer": "The supplied energy is used mainly to overcome intermolecular attractions rather than increase average kinetic energy."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C14-L01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C14",
+        "number": 14
+      },
+      "topicId": "states of matter",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "States of Matter and Phase Changes"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Explain solid, liquid and gas behavior using particle arrangement, motion, attractions and response to heating.",
+          "answer": "Award marks for arrangement, particle motion, relative attractive forces, compressibility/shape differences, and effect of heating/phase change."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C15-M01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C15",
+        "number": 15
+      },
+      "topicId": "mole concept",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 19,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Stoichiometry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "One mole contains approximately how many particles?",
+          "answer": "6.02×10^23",
+          "options": [
+            {
+              "id": "A",
+              "text": "6.02×10^23"
+            },
+            {
+              "id": "B",
+              "text": "6.02×10^3"
+            },
+            {
+              "id": "C",
+              "text": "3.00×10^8"
+            },
+            {
+              "id": "D",
+              "text": "9.81"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-CHEM-C15-M02",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C15",
+        "number": 15
+      },
+      "topicId": "molar gas volume",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 19,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Stoichiometry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "The textbook uses approximately what molar gas volume at room temperature and pressure?",
+          "answer": "24 dm³ mol⁻¹",
+          "options": [
+            {
+              "id": "A",
+              "text": "24 dm³ mol⁻¹"
+            },
+            {
+              "id": "B",
+              "text": "2.4 dm³ mol⁻¹"
+            },
+            {
+              "id": "C",
+              "text": "240 dm³ mol⁻¹"
+            },
+            {
+              "id": "D",
+              "text": "1 dm³ mol⁻¹"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-CHEM-C15-S01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C15",
+        "number": 15
+      },
+      "topicId": "stoichiometric ratios",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 19,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Stoichiometry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Why must a chemical equation be balanced before stoichiometric calculations?",
+          "answer": "Balanced coefficients provide the mole ratios required to relate amounts of reactants and products consistently with conservation of atoms."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C15-S02",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C15",
+        "number": 15
+      },
+      "topicId": "concentration",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 19,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Stoichiometry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Define molar concentration.",
+          "answer": "Molar concentration is amount of solute in moles per unit volume of solution, commonly mol dm⁻³."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C15-L01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C15",
+        "number": 15
+      },
+      "topicId": "stoichiometry workflow",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 19,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Stoichiometry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Describe a reliable method for solving a mass-to-mass stoichiometry problem.",
+          "answer": "Award marks for balancing the equation, converting known mass to moles, using mole ratio, converting target moles to mass, and checking units/significant reasonableness."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C16-M01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C16",
+        "number": 16
+      },
+      "topicId": "redox",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 34,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electrochemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Oxidation can be described as?",
+          "answer": "Loss of electrons",
+          "options": [
+            {
+              "id": "A",
+              "text": "Loss of electrons"
+            },
+            {
+              "id": "B",
+              "text": "Gain of electrons"
+            },
+            {
+              "id": "C",
+              "text": "No electron change"
+            },
+            {
+              "id": "D",
+              "text": "Only dissolution"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-CHEM-C16-M02",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C16",
+        "number": 16
+      },
+      "topicId": "electrolysis",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 34,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electrochemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "In electrolysis, positive ions move toward the?",
+          "answer": "Cathode",
+          "options": [
+            {
+              "id": "A",
+              "text": "Cathode"
+            },
+            {
+              "id": "B",
+              "text": "Anode"
+            },
+            {
+              "id": "C",
+              "text": "Salt bridge only"
+            },
+            {
+              "id": "D",
+              "text": "Gas outlet"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-CHEM-C16-S01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C16",
+        "number": 16
+      },
+      "topicId": "oxidation state",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 34,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electrochemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "What is an oxidation state used for?",
+          "answer": "It is a bookkeeping number used to track electron distribution and identify oxidation/reduction changes in compounds and ions."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C16-S02",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C16",
+        "number": 16
+      },
+      "topicId": "electrochemical cells",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 34,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electrochemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Differentiate a voltaic cell and an electrolytic cell.",
+          "answer": "A voltaic cell converts spontaneous chemical energy to electrical energy; an electrolytic cell uses electrical energy to drive a non-spontaneous chemical change."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C16-L01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C16",
+        "number": 16
+      },
+      "topicId": "redox and cells",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 34,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electrochemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Explain oxidation, reduction, electron transfer and electrode roles in a simple electrochemical process.",
+          "answer": "Award marks for oxidation as electron loss, reduction as gain, electron flow, anode/cathode roles, and relation to overall redox reaction."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C17-M01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C17",
+        "number": 17
+      },
+      "topicId": "collision theory",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 58,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Reaction Kinetics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "For a reaction to occur, colliding particles generally need?",
+          "answer": "Sufficient energy and suitable orientation",
+          "options": [
+            {
+              "id": "A",
+              "text": "Sufficient energy and suitable orientation"
+            },
+            {
+              "id": "B",
+              "text": "Zero kinetic energy"
+            },
+            {
+              "id": "C",
+              "text": "No contact"
+            },
+            {
+              "id": "D",
+              "text": "Identical mass"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-CHEM-C17-M02",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C17",
+        "number": 17
+      },
+      "topicId": "catalyst",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 58,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Reaction Kinetics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "A catalyst increases reaction rate mainly by?",
+          "answer": "Providing a lower-activation-energy pathway",
+          "options": [
+            {
+              "id": "A",
+              "text": "Providing a lower-activation-energy pathway"
+            },
+            {
+              "id": "B",
+              "text": "Increasing product mass"
+            },
+            {
+              "id": "C",
+              "text": "Changing equilibrium permanently"
+            },
+            {
+              "id": "D",
+              "text": "Being consumed completely"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-CHEM-C17-S01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C17",
+        "number": 17
+      },
+      "topicId": "rate factors",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 58,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Reaction Kinetics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "How can increasing temperature increase reaction rate?",
+          "answer": "Particles move faster, collide more frequently and a larger fraction of collisions have enough energy to overcome activation energy."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C17-S02",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C17",
+        "number": 17
+      },
+      "topicId": "surface area",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 58,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Reaction Kinetics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Why can powdered solid react faster than a large lump of the same mass?",
+          "answer": "Powdering increases exposed surface area, giving more available collision sites per unit time."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C17-L01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C17",
+        "number": 17
+      },
+      "topicId": "kinetics",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 58,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Reaction Kinetics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Explain how concentration, temperature, surface area and catalysts affect reaction rate using collision theory.",
+          "answer": "Award one mark for each factor and one mark for linking all effects to frequency/effectiveness of collisions or activation energy."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C18-M01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C18",
+        "number": 18
+      },
+      "topicId": "salt definition",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 70,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Salts"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "A salt is best described as?",
+          "answer": "An ionic compound containing cations and anions",
+          "options": [
+            {
+              "id": "A",
+              "text": "An ionic compound containing cations and anions"
+            },
+            {
+              "id": "B",
+              "text": "Any neutral molecule"
+            },
+            {
+              "id": "C",
+              "text": "Only sodium chloride"
+            },
+            {
+              "id": "D",
+              "text": "Any gas"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-CHEM-C18-M02",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C18",
+        "number": 18
+      },
+      "topicId": "salt preparation",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 70,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Salts"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Which method is suitable for preparing a soluble salt from an acid and an insoluble base?",
+          "answer": "Add excess base, filter, then crystallize",
+          "options": [
+            {
+              "id": "A",
+              "text": "Add excess base, filter, then crystallize"
+            },
+            {
+              "id": "B",
+              "text": "Distil air"
+            },
+            {
+              "id": "C",
+              "text": "Electroplate metal"
+            },
+            {
+              "id": "D",
+              "text": "Burn the acid"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-CHEM-C18-S01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C18",
+        "number": 18
+      },
+      "topicId": "solubility",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 70,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Salts"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Why is solubility information important when choosing a salt-preparation method?",
+          "answer": "It determines whether precipitation, neutralization with excess solid, or another separation/crystallization route is suitable."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C18-S02",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C18",
+        "number": 18
+      },
+      "topicId": "crystallization",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 70,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Salts"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "What is the purpose of crystallization in salt preparation?",
+          "answer": "It separates purified solid crystals from a concentrated solution as solvent is removed or the solution cools."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C18-L01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C18",
+        "number": 18
+      },
+      "topicId": "salt preparation",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 70,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Salts"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Compare methods for preparing a soluble salt and an insoluble salt in the laboratory.",
+          "answer": "Award marks for choosing reactants, reaction/neutralization or precipitation, filtration where needed, concentration/crystallization for soluble salt, and washing/drying precipitate for insoluble salt."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C19-M01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C19",
+        "number": 19
+      },
+      "topicId": "nitrogen cycle",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 77,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Nitrogen and Sulphur"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Nitrogen fixation converts atmospheric nitrogen into?",
+          "answer": "More reactive nitrogen compounds",
+          "options": [
+            {
+              "id": "A",
+              "text": "More reactive nitrogen compounds"
+            },
+            {
+              "id": "B",
+              "text": "Pure oxygen"
+            },
+            {
+              "id": "C",
+              "text": "Only carbon dioxide"
+            },
+            {
+              "id": "D",
+              "text": "Water vapour"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-CHEM-C19-M02",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C19",
+        "number": 19
+      },
+      "topicId": "air pollutants",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 77,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Nitrogen and Sulphur"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Oxides of nitrogen can contribute to?",
+          "answer": "Photochemical smog and acid-forming pollution",
+          "options": [
+            {
+              "id": "A",
+              "text": "Photochemical smog and acid-forming pollution"
+            },
+            {
+              "id": "B",
+              "text": "Only pure rainwater"
+            },
+            {
+              "id": "C",
+              "text": "Removal of all ozone"
+            },
+            {
+              "id": "D",
+              "text": "Formation of sodium chloride"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-CHEM-C19-S01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C19",
+        "number": 19
+      },
+      "topicId": "nitrogen compounds",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 77,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Nitrogen and Sulphur"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Why is nitrogen important to living organisms?",
+          "answer": "Nitrogen is needed to build amino acids/proteins, nucleic acids and other essential biological molecules."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C19-S02",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C19",
+        "number": 19
+      },
+      "topicId": "sulphur compounds",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 77,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Nitrogen and Sulphur"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "State one environmental concern associated with sulphur dioxide.",
+          "answer": "It can contribute to acid deposition and respiratory/environmental harm when present as an air pollutant."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C19-L01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C19",
+        "number": 19
+      },
+      "topicId": "nitrogen sulphur chemistry",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 77,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Nitrogen and Sulphur"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Discuss useful roles and environmental impacts of important nitrogen and sulphur compounds.",
+          "answer": "Award marks for fertilizer/industrial uses, nitrogen biological importance, nitrogen-oxide pollution, sulphur compound uses, and sulphur-dioxide/acid-deposition concerns."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C20-M01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C20",
+        "number": 20
+      },
+      "topicId": "water testing",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 90,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Water"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Anhydrous copper(II) sulfate can be used to test for?",
+          "answer": "Water",
+          "options": [
+            {
+              "id": "A",
+              "text": "Water"
+            },
+            {
+              "id": "B",
+              "text": "Hydrogen gas"
+            },
+            {
+              "id": "C",
+              "text": "Chloride only"
+            },
+            {
+              "id": "D",
+              "text": "Carbon monoxide"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-CHEM-C20-M02",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C20",
+        "number": 20
+      },
+      "topicId": "hard water",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 90,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Water"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Hard water commonly contains significant amounts of?",
+          "answer": "Calcium and magnesium ions",
+          "options": [
+            {
+              "id": "A",
+              "text": "Calcium and magnesium ions"
+            },
+            {
+              "id": "B",
+              "text": "Only sodium ions"
+            },
+            {
+              "id": "C",
+              "text": "Only hydrogen ions"
+            },
+            {
+              "id": "D",
+              "text": "Only nitrate molecules"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-CHEM-C20-S01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C20",
+        "number": 20
+      },
+      "topicId": "water treatment",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 90,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Water"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Why is water treated before public supply?",
+          "answer": "Treatment removes or reduces suspended matter, harmful microorganisms and undesirable contaminants so water is safer and more suitable for use."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C20-S02",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C20",
+        "number": 20
+      },
+      "topicId": "hardness",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 90,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Water"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "State one disadvantage and one possible advantage of hard water.",
+          "answer": "Disadvantage: scale/soap wastage. Possible advantage: calcium and magnesium ions can contribute useful dietary minerals."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C20-L01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C20",
+        "number": 20
+      },
+      "topicId": "water quality",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 90,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Water"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Explain sources of water contamination and major steps used to improve water quality for human use.",
+          "answer": "Award marks for contamination sources, sedimentation/filtration, disinfection, chemical/quality monitoring, and responsible pollution prevention."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C21-M01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C21",
+        "number": 21
+      },
+      "topicId": "organic compounds",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 102,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Organic Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Organic chemistry mainly studies compounds of?",
+          "answer": "Carbon",
+          "options": [
+            {
+              "id": "A",
+              "text": "Carbon"
+            },
+            {
+              "id": "B",
+              "text": "Neon"
+            },
+            {
+              "id": "C",
+              "text": "Helium only"
+            },
+            {
+              "id": "D",
+              "text": "Sodium only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-CHEM-C21-M02",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C21",
+        "number": 21
+      },
+      "topicId": "structural formulae",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 102,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Organic Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "A structural formula shows?",
+          "answer": "How atoms are connected in a molecule",
+          "options": [
+            {
+              "id": "A",
+              "text": "How atoms are connected in a molecule"
+            },
+            {
+              "id": "B",
+              "text": "Only total molecular mass"
+            },
+            {
+              "id": "C",
+              "text": "Only physical colour"
+            },
+            {
+              "id": "D",
+              "text": "Only sample volume"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-CHEM-C21-S01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C21",
+        "number": 21
+      },
+      "topicId": "homologous series",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 102,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Organic Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "What is a homologous series?",
+          "answer": "A family of organic compounds with the same functional group and general formula, similar chemical properties and a gradual change in physical properties."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C21-S02",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C21",
+        "number": 21
+      },
+      "topicId": "isomerism",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 102,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Organic Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "What are structural isomers?",
+          "answer": "Compounds with the same molecular formula but different structural arrangements of atoms."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C21-L01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C21",
+        "number": 21
+      },
+      "topicId": "organic classification",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 102,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Organic Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Explain how functional groups, homologous series and structural formulae help organize organic chemistry.",
+          "answer": "Award marks for each concept, relation to chemical properties, general formula/patterns, and an original example."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C22-M01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C22",
+        "number": 22
+      },
+      "topicId": "hydrocarbons",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 119,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Hydrocarbons"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "A hydrocarbon contains only?",
+          "answer": "Carbon and hydrogen",
+          "options": [
+            {
+              "id": "A",
+              "text": "Carbon and hydrogen"
+            },
+            {
+              "id": "B",
+              "text": "Carbon and oxygen only"
+            },
+            {
+              "id": "C",
+              "text": "Hydrogen and nitrogen only"
+            },
+            {
+              "id": "D",
+              "text": "All elements"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-CHEM-C22-M02",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C22",
+        "number": 22
+      },
+      "topicId": "alkenes",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 119,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Hydrocarbons"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Alkenes contain at least one?",
+          "answer": "Carbon-carbon double bond",
+          "options": [
+            {
+              "id": "A",
+              "text": "Carbon-carbon double bond"
+            },
+            {
+              "id": "B",
+              "text": "Ionic bond only"
+            },
+            {
+              "id": "C",
+              "text": "Metal atom"
+            },
+            {
+              "id": "D",
+              "text": "Carboxyl group"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-CHEM-C22-S01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C22",
+        "number": 22
+      },
+      "topicId": "alkanes and alkenes",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 119,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Hydrocarbons"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Differentiate saturated and unsaturated hydrocarbons.",
+          "answer": "Saturated hydrocarbons contain only carbon-carbon single bonds; unsaturated hydrocarbons contain one or more carbon-carbon multiple bonds."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C22-S02",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C22",
+        "number": 22
+      },
+      "topicId": "combustion",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 119,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Hydrocarbons"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Why can incomplete combustion of hydrocarbons be harmful?",
+          "answer": "It can produce carbon monoxide and soot, wasting fuel and causing serious health/air-quality hazards."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C22-L01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C22",
+        "number": 22
+      },
+      "topicId": "hydrocarbon reactions",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 119,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Hydrocarbons"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Compare alkanes and alkenes in bonding, general reactivity and one characteristic reaction.",
+          "answer": "Award marks for saturation difference, single vs double bond, relative reactivity, substitution for alkanes, and addition for alkenes."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C23-M01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C23",
+        "number": 23
+      },
+      "topicId": "alcohol functional group",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 129,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Monohydroxy Alkanes or Alcohols"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "The functional group of an alcohol is?",
+          "answer": "–OH",
+          "options": [
+            {
+              "id": "A",
+              "text": "–OH"
+            },
+            {
+              "id": "B",
+              "text": "–COOH"
+            },
+            {
+              "id": "C",
+              "text": "–CHO only"
+            },
+            {
+              "id": "D",
+              "text": "–NH2 only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-CHEM-C23-M02",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C23",
+        "number": 23
+      },
+      "topicId": "ethanol production",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 129,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Monohydroxy Alkanes or Alcohols"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Fermentation can produce ethanol from?",
+          "answer": "Sugars using microorganisms such as yeast",
+          "options": [
+            {
+              "id": "A",
+              "text": "Sugars using microorganisms such as yeast"
+            },
+            {
+              "id": "B",
+              "text": "Pure sodium chloride"
+            },
+            {
+              "id": "C",
+              "text": "Nitrogen gas only"
+            },
+            {
+              "id": "D",
+              "text": "Metal oxides only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-CHEM-C23-S01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C23",
+        "number": 23
+      },
+      "topicId": "alcohol properties",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 129,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Monohydroxy Alkanes or Alcohols"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Why are lower alcohols often soluble in water?",
+          "answer": "Their hydroxyl group can form hydrogen bonds with water; solubility generally decreases as the hydrocarbon chain becomes larger."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C23-S02",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C23",
+        "number": 23
+      },
+      "topicId": "ethanol oxidation",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 129,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Monohydroxy Alkanes or Alcohols"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "What type of compound can ethanol form on oxidation under suitable conditions?",
+          "answer": "It can be oxidized toward an aldehyde and further to a carboxylic acid such as ethanoic acid."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C23-L01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C23",
+        "number": 23
+      },
+      "topicId": "ethanol chemistry",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 129,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Monohydroxy Alkanes or Alcohols"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Describe preparation, important properties and selected reactions/uses of ethanol.",
+          "answer": "Award marks for fermentation or another valid preparation route, physical property, combustion, oxidation or other reaction, and a responsible industrial/use example."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C24-M01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C24",
+        "number": 24
+      },
+      "topicId": "carboxyl group",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 137,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Carboxylic Acids"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "The carboxylic-acid functional group is?",
+          "answer": "–COOH",
+          "options": [
+            {
+              "id": "A",
+              "text": "–COOH"
+            },
+            {
+              "id": "B",
+              "text": "–OH only"
+            },
+            {
+              "id": "C",
+              "text": "C=C only"
+            },
+            {
+              "id": "D",
+              "text": "–NH2"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-CHEM-C24-M02",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C24",
+        "number": 24
+      },
+      "topicId": "acid reaction",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 137,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Carboxylic Acids"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "A carboxylic acid reacting with a carbonate typically produces salt, water and?",
+          "answer": "Carbon dioxide",
+          "options": [
+            {
+              "id": "A",
+              "text": "Carbon dioxide"
+            },
+            {
+              "id": "B",
+              "text": "Hydrogen chloride"
+            },
+            {
+              "id": "C",
+              "text": "Nitrogen"
+            },
+            {
+              "id": "D",
+              "text": "Methane only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-CHEM-C24-S01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C24",
+        "number": 24
+      },
+      "topicId": "carboxylic acids",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 137,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Carboxylic Acids"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Why do carboxylic acids show acidic behavior?",
+          "answer": "The carboxyl group can donate a proton in aqueous conditions, producing carboxylate ions."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C24-S02",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C24",
+        "number": 24
+      },
+      "topicId": "esterification",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 137,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Carboxylic Acids"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "What is formed when a carboxylic acid reacts with a suitable alcohol under esterification conditions?",
+          "answer": "An ester and water are formed."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C24-L01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C24",
+        "number": 24
+      },
+      "topicId": "carboxylic acid reactions",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 137,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Carboxylic Acids"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Explain reactions of carboxylic acids with metals, bases, carbonates and alcohols.",
+          "answer": "Award marks for correct product patterns for the first three acid reactions, ester formation with alcohol, and representative equations/naming without copying textbook examples."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C25-M01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C25",
+        "number": 25
+      },
+      "topicId": "biomolecules",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 145,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Biochemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Proteins are built from?",
+          "answer": "Amino acids",
+          "options": [
+            {
+              "id": "A",
+              "text": "Amino acids"
+            },
+            {
+              "id": "B",
+              "text": "Monosaccharides only"
+            },
+            {
+              "id": "C",
+              "text": "Nucleotides only"
+            },
+            {
+              "id": "D",
+              "text": "Fatty acids only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-CHEM-C25-M02",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C25",
+        "number": 25
+      },
+      "topicId": "carbohydrates",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 145,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Biochemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Carbohydrates commonly serve as?",
+          "answer": "Important energy sources and structural materials",
+          "options": [
+            {
+              "id": "A",
+              "text": "Important energy sources and structural materials"
+            },
+            {
+              "id": "B",
+              "text": "Only genetic information"
+            },
+            {
+              "id": "C",
+              "text": "Only catalysts"
+            },
+            {
+              "id": "D",
+              "text": "Only gases"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-CHEM-C25-S01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C25",
+        "number": 25
+      },
+      "topicId": "lipids",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 145,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Biochemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "State two biological roles of lipids.",
+          "answer": "They can store energy, form cell membranes, provide insulation and participate in signaling; any two."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C25-S02",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C25",
+        "number": 25
+      },
+      "topicId": "nutrition",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 145,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Biochemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Why is a balanced diet important?",
+          "answer": "It supplies appropriate amounts of energy, essential nutrients, vitamins, minerals, water and fibre needed for growth, repair and healthy body function."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C25-L01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C25",
+        "number": 25
+      },
+      "topicId": "biochemistry",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 145,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Biochemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Compare carbohydrates, proteins, lipids and nucleic acids in terms of basic building units and major roles.",
+          "answer": "Award one mark for each biomolecule group plus one mark for a clear comparison linking structure/building units to function."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C26-M01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C26",
+        "number": 26
+      },
+      "topicId": "polymers",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 156,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Polymers"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "A polymer is made from many smaller units called?",
+          "answer": "Monomers",
+          "options": [
+            {
+              "id": "A",
+              "text": "Monomers"
+            },
+            {
+              "id": "B",
+              "text": "Isotopes"
+            },
+            {
+              "id": "C",
+              "text": "Electrodes"
+            },
+            {
+              "id": "D",
+              "text": "Catalysts"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-CHEM-C26-M02",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C26",
+        "number": 26
+      },
+      "topicId": "polymerization",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 156,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Polymers"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Addition polymerization commonly involves monomers containing?",
+          "answer": "Carbon-carbon double bonds",
+          "options": [
+            {
+              "id": "A",
+              "text": "Carbon-carbon double bonds"
+            },
+            {
+              "id": "B",
+              "text": "Only ionic lattices"
+            },
+            {
+              "id": "C",
+              "text": "Noble gases"
+            },
+            {
+              "id": "D",
+              "text": "Metal oxides"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-CHEM-C26-S01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C26",
+        "number": 26
+      },
+      "topicId": "natural and synthetic polymers",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 156,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Polymers"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Give one natural polymer and one synthetic polymer.",
+          "answer": "Examples: cellulose or protein as natural; poly(ethene), nylon or PVC as synthetic."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C26-S02",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C26",
+        "number": 26
+      },
+      "topicId": "polymer waste",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 156,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Polymers"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Why can some synthetic polymers create environmental problems?",
+          "answer": "Many degrade very slowly, accumulate as waste and can fragment into persistent particles unless reduced, reused, recycled or managed responsibly."
+        }
+      }
+    },
+    {
+      "id": "X-CHEM-C26-L01",
+      "chapter": {
+        "id": "X-CHEM-2026-EM-C26",
+        "number": 26
+      },
+      "topicId": "polymer chemistry",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-chemistry10-en-2026",
+        "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+        "page": 156,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Polymers"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "chemistry",
+        "edition": "2026",
+        "textbookId": "PECTAA-X-CHEMISTRY-EM-2026",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Chemistry X starter aligned to hash-verified PECTAA 2026 English textbook. Academic review and current board-pattern extraction remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Explain monomers, polymerization, repeating units and responsible management of polymer materials.",
+          "answer": "Award marks for defining monomer/polymer, polymerization, repeating unit concept, useful material properties/applications, and waste/recycling considerations."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 65,
+    "mcq": 26,
+    "short": 26,
+    "long": 13,
+    "chapters": 13
+  }
+}

@@ -1,0 +1,1153 @@
+{
+  "schemaVersion": "assps-chemistry9-ch12-english-drafts-v1",
+  "createdOn": "2026-10-07",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-007",
+  "sourcePdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+  "actualPaperEvidence": "multanGrade9ScienceActual2026Evidence.json",
+  "patternAuthority": "officialGrade9CorePattern2026.json",
+  "scope": "CURRENT_TEXTBOOK_FULL_BOOK_NON_EXERCISE_CONCEPTUAL",
+  "topicCoverage": [
+    {
+      "topicId": "12.1",
+      "draftCount": 5
+    },
+    {
+      "topicId": "12.2",
+      "draftCount": 5
+    },
+    {
+      "topicId": "12.3",
+      "draftCount": 5
+    }
+  ],
+  "drafts": [
+    {
+      "id": "IX-CHEM-2025-C12-12T1-M01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C12",
+        "number": 12
+      },
+      "topicId": "12.1",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 163,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "SI Units in Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Which SI unit is used for amount of substance?",
+          "answer": "mole",
+          "options": [
+            {
+              "id": "A",
+              "text": "metre"
+            },
+            {
+              "id": "B",
+              "text": "mole"
+            },
+            {
+              "id": "C",
+              "text": "kelvin per mole"
+            },
+            {
+              "id": "D",
+              "text": "gram"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 12. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "correctOptionId": "B"
+    },
+    {
+      "id": "IX-CHEM-2025-C12-12T1-M02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C12",
+        "number": 12
+      },
+      "topicId": "12.1",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 163,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "SI Units in Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Why are standard units important in chemistry?",
+          "answer": "They make measurements comparable",
+          "options": [
+            {
+              "id": "A",
+              "text": "They make measurements comparable"
+            },
+            {
+              "id": "B",
+              "text": "They remove all experimental error"
+            },
+            {
+              "id": "C",
+              "text": "They replace numerical values"
+            },
+            {
+              "id": "D",
+              "text": "They are only used in laboratories"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 12. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C12-12T1-S01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C12",
+        "number": 12
+      },
+      "topicId": "12.1",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 163,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "SI Units in Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "What is meant by an SI unit?",
+          "answer": "An SI unit is a standardized unit from the International System of Units used so measurements can be communicated and compared consistently."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 12. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application."
+    },
+    {
+      "id": "IX-CHEM-2025-C12-12T1-S02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C12",
+        "number": 12
+      },
+      "topicId": "12.1",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 164,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "SI Units in Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Why are prefixes such as milli- and micro- useful in chemical measurements?",
+          "answer": "They provide convenient ways to express very small or large quantities without repeatedly writing many zeros."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 12. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application."
+    },
+    {
+      "id": "IX-CHEM-2025-C12-12T1-L01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C12",
+        "number": 12
+      },
+      "topicId": "12.1",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 163,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "SI Units in Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Explain why standardized units, prefixes and correct unit symbols are essential in chemistry.",
+          "answer": "Award 1 mark for standardization, 1 for comparison/reproducibility, 1 for correct unit symbols, 1 for prefixes handling scale, and 1 for a suitable chemical measurement example."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 12. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application."
+    },
+    {
+      "id": "IX-CHEM-2025-C12-12T2-M01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C12",
+        "number": 12
+      },
+      "topicId": "12.2",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 166,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Tools and Techniques to Manage Accuracy and Precision"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Which practice best improves the reliability of repeated volume measurements?",
+          "answer": "Reading the scale at eye level",
+          "options": [
+            {
+              "id": "A",
+              "text": "Reading the scale at eye level"
+            },
+            {
+              "id": "B",
+              "text": "Changing instruments every trial"
+            },
+            {
+              "id": "C",
+              "text": "Rounding before measuring"
+            },
+            {
+              "id": "D",
+              "text": "Ignoring the meniscus"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 12. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C12-12T2-M02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C12",
+        "number": 12
+      },
+      "topicId": "12.2",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 166,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Tools and Techniques to Manage Accuracy and Precision"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Which action is most likely to reduce avoidable measurement error?",
+          "answer": "Using a suitable calibrated instrument",
+          "options": [
+            {
+              "id": "A",
+              "text": "Using a suitable calibrated instrument"
+            },
+            {
+              "id": "B",
+              "text": "Estimating every value by eye"
+            },
+            {
+              "id": "C",
+              "text": "Recording fewer significant figures than observed"
+            },
+            {
+              "id": "D",
+              "text": "Mixing different unit systems without conversion"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 12. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C12-12T2-S01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C12",
+        "number": 12
+      },
+      "topicId": "12.2",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 166,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Tools and Techniques to Manage Accuracy and Precision"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "State two good practices when taking a liquid-volume reading.",
+          "answer": "Use an appropriate graduated instrument and read the meniscus at eye level, avoiding parallax."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 12. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application."
+    },
+    {
+      "id": "IX-CHEM-2025-C12-12T2-S02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C12",
+        "number": 12
+      },
+      "topicId": "12.2",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 166,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Tools and Techniques to Manage Accuracy and Precision"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Why should the measuring instrument be chosen according to the required precision?",
+          "answer": "Different instruments have different scale divisions and uncertainties, so an instrument must be precise enough for the measurement purpose."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 12. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application."
+    },
+    {
+      "id": "IX-CHEM-2025-C12-12T2-L01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C12",
+        "number": 12
+      },
+      "topicId": "12.2",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 166,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Tools and Techniques to Manage Accuracy and Precision"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Describe five practical steps that can improve the quality of laboratory measurements.",
+          "answer": "Award 1 mark each for five valid practices such as choosing a suitable calibrated instrument, reading scales correctly, repeating measurements, recording units/significant digits carefully, and controlling experimental conditions."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 12. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application."
+    },
+    {
+      "id": "IX-CHEM-2025-C12-12T3-M01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C12",
+        "number": 12
+      },
+      "topicId": "12.3",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 167,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Accuracy and Precision"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "A set of measurements clustered closely together but far from the accepted value is best described as what?",
+          "answer": "Precise but not accurate",
+          "options": [
+            {
+              "id": "A",
+              "text": "Precise but not accurate"
+            },
+            {
+              "id": "B",
+              "text": "Accurate but not precise"
+            },
+            {
+              "id": "C",
+              "text": "Both accurate and precise"
+            },
+            {
+              "id": "D",
+              "text": "Neither measured nor recorded"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 12. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C12-12T3-M02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C12",
+        "number": 12
+      },
+      "topicId": "12.3",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 167,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Accuracy and Precision"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "A consistent offset in every measurement is most characteristic of which type of error?",
+          "answer": "Systematic error",
+          "options": [
+            {
+              "id": "A",
+              "text": "Systematic error"
+            },
+            {
+              "id": "B",
+              "text": "Random error"
+            },
+            {
+              "id": "C",
+              "text": "No error"
+            },
+            {
+              "id": "D",
+              "text": "Unit conversion only"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 12. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C12-12T3-S01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C12",
+        "number": 12
+      },
+      "topicId": "12.3",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 167,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Accuracy and Precision"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Differentiate between accuracy and precision.",
+          "answer": "Accuracy describes closeness to an accepted or true value; precision describes closeness of repeated measurements to one another."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 12. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application."
+    },
+    {
+      "id": "IX-CHEM-2025-C12-12T3-S02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C12",
+        "number": 12
+      },
+      "topicId": "12.3",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 167,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Accuracy and Precision"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Differentiate between systematic and random error.",
+          "answer": "Systematic error shifts measurements consistently in one direction, whereas random error causes unpredictable scatter among repeated measurements."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 12. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application."
+    },
+    {
+      "id": "IX-CHEM-2025-C12-12T3-L01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C12",
+        "number": 12
+      },
+      "topicId": "12.3",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 167,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Accuracy and Precision"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Explain accuracy, precision, systematic error and random error using one measurement example.",
+          "answer": "Award 1 mark for accuracy, 1 for precision, 1 for systematic error, 1 for random error, and 1 for a coherent example showing how these ideas affect repeated measurements."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 12. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application."
+    }
+  ],
+  "totals": {
+    "drafts": 15,
+    "mcq": 6,
+    "short": 6,
+    "long": 3
+  }
+}

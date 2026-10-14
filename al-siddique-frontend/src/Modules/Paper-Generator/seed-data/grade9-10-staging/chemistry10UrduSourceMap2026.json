@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "assps-chemistry10-urdu-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-022",
+  "sourcePdfSha256": "09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6",
+  "sourceByteLength": 81906216,
+  "pageCount": 156,
+  "identity": [
+    "Chemistry 10 UM (2026-27)",
+    "PECTAA",
+    "Urdu Medium"
+  ],
+  "chapterMapState": "CURRENT_EDITION_PARITY_VERIFIED_EXACT_URDU_PAGE_BOUNDARIES_PENDING",
+  "chapters": [
+    {
+      "number": 14,
+      "title": "States of Matter and Phase Changes",
+      "status": "CURRENT_EDITION_PARITY_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 15,
+      "title": "Stoichiometry",
+      "status": "CURRENT_EDITION_PARITY_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 16,
+      "title": "Electrochemistry",
+      "status": "CURRENT_EDITION_PARITY_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 17,
+      "title": "Reaction Kinetics",
+      "status": "CURRENT_EDITION_PARITY_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 18,
+      "title": "Salts",
+      "status": "CURRENT_EDITION_PARITY_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 19,
+      "title": "Nitrogen and Sulphur",
+      "status": "CURRENT_EDITION_PARITY_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 20,
+      "title": "Water",
+      "status": "CURRENT_EDITION_PARITY_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 21,
+      "title": "Organic Chemistry",
+      "status": "CURRENT_EDITION_PARITY_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 22,
+      "title": "Hydrocarbons",
+      "status": "CURRENT_EDITION_PARITY_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 23,
+      "title": "Monohydroxy Alkanes or Alcohols",
+      "status": "CURRENT_EDITION_PARITY_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 24,
+      "title": "Carboxylic Acids",
+      "status": "CURRENT_EDITION_PARITY_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 25,
+      "title": "Biochemistry",
+      "status": "CURRENT_EDITION_PARITY_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 26,
+      "title": "Polymers",
+      "status": "CURRENT_EDITION_PARITY_VERIFIED_PAGE_BOUNDARY_PENDING"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "exactUrduPageBoundariesPending": true,
+    "urduLanguageConvention": "NATURAL_URDU_WITH_FAMILIAR_SCIENTIFIC_ENGLISH_TERMS"
+  }
+}

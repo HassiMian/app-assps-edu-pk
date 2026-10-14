@@ -1,0 +1,2000 @@
+{
+  "schemaVersion": "assps-healthSciences10Tech-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-054",
+  "sourcePdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+  "scope": "CURRENT_GRADE_X_TECH_TEXT_LAYER_CHAPTER_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "X-HS-TECH-C09-M01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C09",
+        "number": 9
+      },
+      "topicId": "nervous system",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Central Nervous System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "The central nervous system mainly consists of?",
+          "answer": "Brain and spinal cord",
+          "options": [
+            {
+              "id": "A",
+              "text": "Brain and spinal cord"
+            },
+            {
+              "id": "B",
+              "text": "Heart and lungs"
+            },
+            {
+              "id": "C",
+              "text": "Bones and joints"
+            },
+            {
+              "id": "D",
+              "text": "Kidneys and bladder"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-HS-TECH-C09-S01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C09",
+        "number": 9
+      },
+      "topicId": "nervous system",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Central Nervous System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "What is the general role of the central nervous system?",
+          "answer": "It receives and processes information and coordinates responses through communication with the rest of the body."
+        }
+      }
+    },
+    {
+      "id": "X-HS-TECH-C09-L01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C09",
+        "number": 9
+      },
+      "topicId": "nervous system",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Central Nervous System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Explain the difference between voluntary and reflex responses at a conceptual level.",
+          "answer": "Voluntary responses involve conscious processing, while reflex responses are rapid automatic protective responses organized through a reflex pathway."
+        }
+      }
+    },
+    {
+      "id": "X-HS-TECH-C10-M01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C10",
+        "number": 10
+      },
+      "topicId": "musculoskeletal system",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 21,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Musculoskeletal System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "A tendon connects?",
+          "answer": "Muscle to bone",
+          "options": [
+            {
+              "id": "A",
+              "text": "Muscle to bone"
+            },
+            {
+              "id": "B",
+              "text": "Bone to bone"
+            },
+            {
+              "id": "C",
+              "text": "Nerve to gland"
+            },
+            {
+              "id": "D",
+              "text": "Artery to vein"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-HS-TECH-C10-S01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C10",
+        "number": 10
+      },
+      "topicId": "musculoskeletal system",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 21,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Musculoskeletal System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "What is the main function of a joint?",
+          "answer": "A joint connects bones and, depending on its type, permits movement while contributing to stability."
+        }
+      }
+    },
+    {
+      "id": "X-HS-TECH-C10-L01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C10",
+        "number": 10
+      },
+      "topicId": "musculoskeletal system",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 21,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Musculoskeletal System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Explain how bones, joints and muscles work together to produce movement.",
+          "answer": "Bones provide support/levers, joints provide controlled movement points, and muscles contract to pull through tendons and move bones."
+        }
+      }
+    },
+    {
+      "id": "X-HS-TECH-C11-M01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C11",
+        "number": 11
+      },
+      "topicId": "endocrine system",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 35,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Endocrine System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Hormones are chemical messengers released mainly by?",
+          "answer": "Endocrine glands",
+          "options": [
+            {
+              "id": "A",
+              "text": "Endocrine glands"
+            },
+            {
+              "id": "B",
+              "text": "Bones only"
+            },
+            {
+              "id": "C",
+              "text": "Red blood cells only"
+            },
+            {
+              "id": "D",
+              "text": "Teeth"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-HS-TECH-C11-S01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C11",
+        "number": 11
+      },
+      "topicId": "endocrine system",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 35,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Endocrine System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Why is hormonal regulation important for homeostasis?",
+          "answer": "Hormones help coordinate processes such as growth, metabolism and fluid or glucose balance over time."
+        }
+      }
+    },
+    {
+      "id": "X-HS-TECH-C11-L01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C11",
+        "number": 11
+      },
+      "topicId": "endocrine system",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 35,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Endocrine System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Compare nervous and endocrine coordination.",
+          "answer": "Nervous signaling is generally rapid and electrical/chemical through neurons; endocrine signaling uses hormones in blood and often acts more slowly with longer effects."
+        }
+      }
+    },
+    {
+      "id": "X-HS-TECH-C12-M01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C12",
+        "number": 12
+      },
+      "topicId": "pediatrics",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 51,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Pediatrics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Pediatrics focuses on the health of?",
+          "answer": "Children and adolescents",
+          "options": [
+            {
+              "id": "A",
+              "text": "Children and adolescents"
+            },
+            {
+              "id": "B",
+              "text": "Plants"
+            },
+            {
+              "id": "C",
+              "text": "Only athletes"
+            },
+            {
+              "id": "D",
+              "text": "Only older adults"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-HS-TECH-C12-S01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C12",
+        "number": 12
+      },
+      "topicId": "pediatrics",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 51,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Pediatrics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Why are growth and development monitored in children?",
+          "answer": "Monitoring helps identify whether development follows expected patterns and whether further professional assessment may be needed."
+        }
+      }
+    },
+    {
+      "id": "X-HS-TECH-C12-L01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C12",
+        "number": 12
+      },
+      "topicId": "pediatrics",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 51,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Pediatrics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Explain age-appropriate, respectful care principles for children.",
+          "answer": "Use clear communication, involve a responsible caregiver, respect privacy, provide reassurance, follow professional guidance and adapt explanations to developmental level."
+        }
+      }
+    },
+    {
+      "id": "X-HS-TECH-C13-M01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C13",
+        "number": 13
+      },
+      "topicId": "first aid safety",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 62,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "First Aid - II"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "The first priority in a first-aid situation is to?",
+          "answer": "Check scene safety and seek appropriate help",
+          "options": [
+            {
+              "id": "A",
+              "text": "Check scene safety and seek appropriate help"
+            },
+            {
+              "id": "B",
+              "text": "Rush into danger"
+            },
+            {
+              "id": "C",
+              "text": "Give unknown medicine"
+            },
+            {
+              "id": "D",
+              "text": "Hide the incident"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-HS-TECH-C13-S01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C13",
+        "number": 13
+      },
+      "topicId": "first aid safety",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 62,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "First Aid - II"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Why should a first-aider avoid actions beyond their training?",
+          "answer": "Untrained interventions can worsen harm; the safer role is to protect the scene, call qualified help and provide only trained basic support."
+        }
+      }
+    },
+    {
+      "id": "X-HS-TECH-C13-L01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C13",
+        "number": 13
+      },
+      "topicId": "first aid safety",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 62,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "First Aid - II"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Describe a safe high-level emergency response sequence.",
+          "answer": "Ensure scene safety, alert a responsible adult/emergency service, assess responsiveness and breathing without unnecessary movement, provide only trained basic aid, and monitor until help arrives."
+        }
+      }
+    },
+    {
+      "id": "X-HS-TECH-C14-M01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C14",
+        "number": 14
+      },
+      "topicId": "infection control",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 72,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Sterilization"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Sterilization aims to?",
+          "answer": "Eliminate all viable microorganisms from an item",
+          "options": [
+            {
+              "id": "A",
+              "text": "Eliminate all viable microorganisms from an item"
+            },
+            {
+              "id": "B",
+              "text": "Make an item look cleaner only"
+            },
+            {
+              "id": "C",
+              "text": "Add fragrance"
+            },
+            {
+              "id": "D",
+              "text": "Replace hand hygiene"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-HS-TECH-C14-S01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C14",
+        "number": 14
+      },
+      "topicId": "infection control",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 72,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Sterilization"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Differentiate cleaning, disinfection and sterilization conceptually.",
+          "answer": "Cleaning removes soil, disinfection reduces many harmful microorganisms, while sterilization is a validated process intended to eliminate all viable microorganisms."
+        }
+      }
+    },
+    {
+      "id": "X-HS-TECH-C14-L01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C14",
+        "number": 14
+      },
+      "topicId": "infection control",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 72,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Sterilization"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Explain why infection-control procedures require correct method selection and documentation.",
+          "answer": "The method must fit the item and risk level, follow validated instructions, protect staff/users and be documented so effectiveness and traceability can be checked."
+        }
+      }
+    },
+    {
+      "id": "X-HS-TECH-C15-M01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C15",
+        "number": 15
+      },
+      "topicId": "elderly care",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 83,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Nursing and Elderly Care"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Respectful elderly care should prioritize?",
+          "answer": "Dignity, safety and independence where possible",
+          "options": [
+            {
+              "id": "A",
+              "text": "Dignity, safety and independence where possible"
+            },
+            {
+              "id": "B",
+              "text": "Ignoring preferences"
+            },
+            {
+              "id": "C",
+              "text": "Unnecessary restriction"
+            },
+            {
+              "id": "D",
+              "text": "Speaking about the person as if absent"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-HS-TECH-C15-S01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C15",
+        "number": 15
+      },
+      "topicId": "elderly care",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 83,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Nursing and Elderly Care"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Why is person-centered care important for older adults?",
+          "answer": "It considers the individual’s preferences, abilities, culture, comfort and goals rather than treating everyone the same."
+        }
+      }
+    },
+    {
+      "id": "X-HS-TECH-C15-L01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C15",
+        "number": 15
+      },
+      "topicId": "elderly care",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 83,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Nursing and Elderly Care"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Discuss safe support principles for an older adult with reduced mobility.",
+          "answer": "Promote dignity and independence, reduce environmental hazards, use approved assistance methods, encourage appropriate activity, and seek trained help for transfers or medical concerns."
+        }
+      }
+    },
+    {
+      "id": "X-HS-TECH-C16-M01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C16",
+        "number": 16
+      },
+      "topicId": "behavioral science",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 89,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Behavioral Science"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Behavioral science examines?",
+          "answer": "Human behavior and factors influencing it",
+          "options": [
+            {
+              "id": "A",
+              "text": "Human behavior and factors influencing it"
+            },
+            {
+              "id": "B",
+              "text": "Only bone structure"
+            },
+            {
+              "id": "C",
+              "text": "Only chemistry equations"
+            },
+            {
+              "id": "D",
+              "text": "Weather forecasting"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-HS-TECH-C16-S01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C16",
+        "number": 16
+      },
+      "topicId": "behavioral science",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 89,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Behavioral Science"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "How can stress affect behavior and decision making?",
+          "answer": "Stress can influence attention, emotion, sleep and judgment, so healthy coping and support can improve decision quality."
+        }
+      }
+    },
+    {
+      "id": "X-HS-TECH-C16-L01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C16",
+        "number": 16
+      },
+      "topicId": "behavioral science",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 89,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Behavioral Science"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Explain how respectful communication and observation can support behavioral wellbeing.",
+          "answer": "Listen without judgment, notice meaningful changes, maintain privacy, encourage healthy routines and refer concerns to qualified adults/professionals when needed."
+        }
+      }
+    },
+    {
+      "id": "X-HS-TECH-C17-M01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C17",
+        "number": 17
+      },
+      "topicId": "life skills",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 102,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Essential Life Skills"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Which is a core life skill?",
+          "answer": "Problem solving",
+          "options": [
+            {
+              "id": "A",
+              "text": "Problem solving"
+            },
+            {
+              "id": "B",
+              "text": "Avoiding all decisions"
+            },
+            {
+              "id": "C",
+              "text": "Ignoring consequences"
+            },
+            {
+              "id": "D",
+              "text": "Refusing communication"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-HS-TECH-C17-S01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C17",
+        "number": 17
+      },
+      "topicId": "life skills",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 102,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Essential Life Skills"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Why is decision making improved by considering consequences?",
+          "answer": "Considering likely benefits, risks and effects on others supports more responsible choices."
+        }
+      }
+    },
+    {
+      "id": "X-HS-TECH-C17-L01",
+      "chapter": {
+        "id": "X-HEALTH-SCIENCES-TECH-C17",
+        "number": 17
+      },
+      "topicId": "life skills",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-054",
+        "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+        "page": 102,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Essential Life Skills"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "health-sciences-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-HEALTH-SCIENCES-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Explain how communication, decision making, problem solving and stress management work together in daily life.",
+          "answer": "These skills help a person understand a situation, communicate needs, compare options, choose responsibly, act safely and adapt after reviewing results."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 27,
+    "mcq": 9,
+    "short": 9,
+    "numerical": 0,
+    "long": 9,
+    "chapters": 9
+  }
+}

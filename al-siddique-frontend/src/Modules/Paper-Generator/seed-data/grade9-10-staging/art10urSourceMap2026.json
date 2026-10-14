@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "assps-art10ur-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-071",
+  "sourcePdfSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+  "sourceByteLength": 24877022,
+  "pageCount": 216,
+  "identity": [
+    "Art & Model Drawing",
+    "Grade 10",
+    "Urdu",
+    "2023-24"
+  ],
+  "resolvedMedium": "Urdu",
+  "chapterMapState": "OFFICIAL_BYTES_HASHED_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_BOUNDARIES_PENDING",
+  "chapterEvidence": {
+    "officialCatalogRecordId": "pectaa-catalog-071",
+    "sourceCacheRef": "20261006/elective10-art-ur.pdf",
+    "crossCheckUrls": [
+      "https://www.ilmkidunya.com/10th-class/books/art_and_drawing-punjab-board"
+    ]
+  },
+  "chapters": [
+    {
+      "number": 1,
+      "titleLocal": "ڈرائنگ اور خاکہ کشی",
+      "titleEnglish": "Drawing and Sketching",
+      "focus": "مشاہدہ، structure، proportion اور expressive drawing",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 2,
+      "titleLocal": "پینٹنگ کی مشق",
+      "titleEnglish": "Painting Practice",
+      "focus": "رنگ، composition، media اور painting decisions",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 3,
+      "titleLocal": "گرافک ڈیزائن",
+      "titleEnglish": "Graphic Design",
+      "focus": "visual communication، layout اور lettering",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 4,
+      "titleLocal": "مجسمہ سازی",
+      "titleEnglish": "Sculpture Making",
+      "focus": "three-dimensional form، modelling اور safe material handling",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 5,
+      "titleLocal": "پاکستان میں مجسمہ سازی اور Architectural Relief کی تاریخ",
+      "titleEnglish": "History of Sculpture and Architectural Relief in Pakistan",
+      "focus": "پاکستانی sculpture/relief heritage",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 6,
+      "titleLocal": "پاکستان میں برتن سازی اور Ceramics کی تاریخ",
+      "titleEnglish": "History of Pottery and Ceramics in Pakistan",
+      "focus": "pottery/ceramic traditions، form اور decoration",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 7,
+      "titleLocal": "پاکستانی دستکاری",
+      "titleEnglish": "Craft of Pakistan",
+      "focus": "regional crafts، materials، function اور cultural value",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "exactPageBoundariesPending": true,
+    "safetyBoundary": "NO_DANGEROUS_PROCEDURE_STEPS_NO_RESTRICTIVE_DIET_FRAMING"
+  }
+}

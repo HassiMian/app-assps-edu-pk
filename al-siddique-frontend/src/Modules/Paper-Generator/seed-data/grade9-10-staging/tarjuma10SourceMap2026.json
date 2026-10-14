@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "assps-tarjuma10-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-recovered-tarjuma10-current",
+  "sourcePdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+  "sourceByteLength": 46877847,
+  "pageCount": 240,
+  "identity": [
+    "Class 10 Tarjuma-tul-Quran",
+    "Punjab textbook continuing edition",
+    "Urdu Medium"
+  ],
+  "provenance": {
+    "officialCatalogRecordId": "pectaa-catalog-014",
+    "officialCatalogState": "AMBIGUOUS_REPEATED_LABEL",
+    "archiveEvidenceUrl": "https://www.taleem360.com/10th-class-tarjuma-tul-quran-punjab-textbook-2023-24-ths",
+    "independentChecksumEvidence": "https://textbookevidence.com/books/pctb-mutalea-quran-10-ur/",
+    "hashMatchVerified": true,
+    "current2026UsageCrossChecked": true
+  },
+  "chapters": [
+    {
+      "number": 1,
+      "title": "سورۃ الانعام",
+      "status": "CURRENT_CONTINUING_SURAH_SEQUENCE_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 2,
+      "title": "سورۃ الاعراف",
+      "status": "CURRENT_CONTINUING_SURAH_SEQUENCE_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 3,
+      "title": "سورۃ یونس",
+      "status": "CURRENT_CONTINUING_SURAH_SEQUENCE_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 4,
+      "title": "سورۃ ہود",
+      "status": "CURRENT_CONTINUING_SURAH_SEQUENCE_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 5,
+      "title": "سورۃ الرعد",
+      "status": "CURRENT_CONTINUING_SURAH_SEQUENCE_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 6,
+      "title": "سورۃ ابراہیم",
+      "status": "CURRENT_CONTINUING_SURAH_SEQUENCE_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 7,
+      "title": "سورۃ الحجر",
+      "status": "CURRENT_CONTINUING_SURAH_SEQUENCE_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 8,
+      "title": "سورۃ النحل",
+      "status": "CURRENT_CONTINUING_SURAH_SEQUENCE_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 9,
+      "title": "سورۃ بنی اسرائیل",
+      "status": "CURRENT_CONTINUING_SURAH_SEQUENCE_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 10,
+      "title": "سورۃ الکہف",
+      "status": "CURRENT_CONTINUING_SURAH_SEQUENCE_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 11,
+      "title": "سورۃ المؤمنون",
+      "status": "CURRENT_CONTINUING_SURAH_SEQUENCE_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 12,
+      "title": "سورۃ الزمر",
+      "status": "CURRENT_CONTINUING_SURAH_SEQUENCE_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 13,
+      "title": "سورۃ المؤمن/غافر",
+      "status": "CURRENT_CONTINUING_SURAH_SEQUENCE_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 14,
+      "title": "سورۃ حم السجدہ/فصلت",
+      "status": "CURRENT_CONTINUING_SURAH_SEQUENCE_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 15,
+      "title": "سورۃ الشوریٰ",
+      "status": "CURRENT_CONTINUING_SURAH_SEQUENCE_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyQuranVerses": false,
+    "copyTextbookTranslation": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "exactAyahRangesPending": true
+  }
+}

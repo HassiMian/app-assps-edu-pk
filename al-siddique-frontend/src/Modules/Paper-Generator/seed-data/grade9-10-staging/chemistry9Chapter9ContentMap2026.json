@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "assps-chemistry9-ch9-content-map-v1",
+  "checkedOn": "2026-10-06",
+  "sourceRecordId": "pectaa-catalog-007",
+  "sourcePdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+  "chapter": {
+    "number": 9,
+    "title": "Group Properties and Elements",
+    "printedPages": [
+      119,
+      128
+    ],
+    "pdfPages": [
+      123,
+      132
+    ],
+    "textLayer": "IMAGE_ONLY_BUT_RENDERED"
+  },
+  "topics": [
+    {
+      "topicId": "9.1",
+      "title": "Properties of Group 1 Elements",
+      "pdfStartPage": 124,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    },
+    {
+      "topicId": "9.2",
+      "title": "Properties of Group 17 Elements",
+      "pdfStartPage": 125,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    },
+    {
+      "topicId": "9.3",
+      "title": "Group Properties of Transition Elements",
+      "pdfStartPage": 126,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    },
+    {
+      "topicId": "9.4",
+      "title": "Properties of Noble Gases",
+      "pdfStartPage": 127,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    },
+    {
+      "topicId": "9.5",
+      "title": "Physical Properties of Metals and Non-metals",
+      "pdfStartPage": 128,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    }
+  ],
+  "verifiedConceptFamilies": [
+    "Group 1 alkali-metal reactivity trend down the group",
+    "Group 1 physical-property trends",
+    "Group 17 halogen reactivity and oxidizing trend",
+    "halogen displacement and halide formation",
+    "transition-element metallic properties and catalytic behavior",
+    "Group 18 noble gases as monatomic and generally unreactive",
+    "comparison of metal and non-metal physical properties"
+  ],
+  "exerciseFamilies": {
+    "pdfPages": [
+      131,
+      132
+    ],
+    "families": [
+      "Multiple Choice Questions",
+      "Questions for Short Answers",
+      "Constructed Response Questions",
+      "Descriptive Questions",
+      "Investigative Questions"
+    ],
+    "itemLevelExerciseMap": "PENDING"
+  },
+  "authoring": {
+    "originalAdditionalConceptualAllowed": true,
+    "exerciseOriginAllowed": false,
+    "copyTextbookPassages": false,
+    "copyPastPaperStems": false,
+    "publicationAllowed": false,
+    "urduCounterpartStatus": "BLOCKED_PENDING_CURRENT_URDU_SOURCE_VERIFICATION",
+    "chapterCompletionEligible": false,
+    "ocrMayLocateHeadingsButNotApproveQuestionContent": true
+  }
+}

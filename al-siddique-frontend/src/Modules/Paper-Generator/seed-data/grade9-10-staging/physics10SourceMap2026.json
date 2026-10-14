@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "assps-physics10-source-map-v1",
+  "checkedOn": "2026-10-07",
+  "sourceRecordId": "pectaa-catalog-024",
+  "sourcePdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+  "sourceByteLength": 122695379,
+  "pageCount": 204,
+  "identity": [
+    "PHYSICS 10",
+    "Updated/Revised National Curriculum of Pakistan 2023",
+    "PECTAA",
+    "January 2026 print metadata"
+  ],
+  "chapters": [
+    {
+      "number": 10,
+      "title": "Thermal Physics",
+      "tocPdfPage": 3,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 11,
+      "title": "Transfer of Thermal Energy",
+      "tocPdfPage": 3,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 12,
+      "title": "Waves",
+      "tocPdfPage": 3,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 13,
+      "title": "Sound",
+      "tocPdfPage": 3,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 14,
+      "title": "Light",
+      "tocPdfPage": 3,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 15,
+      "title": "Electrostatics",
+      "tocPdfPage": 3,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 16,
+      "title": "Electricity",
+      "tocPdfPage": 3,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 17,
+      "title": "Electromagnetism",
+      "tocPdfPage": 3,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 18,
+      "title": "Electromagnetic Induction and Electromagnetic Waves",
+      "tocPdfPage": 3,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 19,
+      "title": "Electronics",
+      "tocPdfPage": 3,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 20,
+      "title": "Atomic and Nuclear Physics",
+      "tocPdfPage": 3,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 21,
+      "title": "Space and Environment",
+      "tocPdfPage": 3,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    }
+  ],
+  "grade10PatternState": "PENDING_CURRENT_OFFICIAL_ANNUAL_PATTERN_CONFIRMATION",
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookExercises": false,
+    "copyPastPaperStems": false,
+    "fullBookDefault": true,
+    "oldGrade10PapersPatternOnly": true
+  }
+}

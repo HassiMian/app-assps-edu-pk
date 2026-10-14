@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "assps-math9-source-map-v1",
+  "checkedOn": "2026-10-07",
+  "sourceRecordId": "pectaa-catalog-005",
+  "sourcePdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+  "sourceByteLength": 113912128,
+  "pageCount": 288,
+  "identity": [
+    "MATHEMATICS 9",
+    "National Curriculum of Pakistan 2023",
+    "Punjab Curriculum and Textbook Board, Lahore"
+  ],
+  "chapters": [
+    {
+      "number": 1,
+      "title": "Real Numbers",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 2,
+      "title": "Logarithms",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 3,
+      "title": "Set and Functions",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 4,
+      "title": "Factorization and Algebraic Manipulation",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 5,
+      "title": "Linear Equations and Inequalities",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 6,
+      "title": "Trigonometry",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 7,
+      "title": "Coordinate Geometry",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 8,
+      "title": "Logic",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 9,
+      "title": "Similar Figures",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 10,
+      "title": "Graphs of Functions",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 11,
+      "title": "Loci and Construction",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 12,
+      "title": "Information Handling",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 13,
+      "title": "Probability",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    }
+  ],
+  "patternAuthority": "officialGrade9CorePattern2026.json",
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookExercises": false,
+    "copyPastPaperStems": false,
+    "fullBookDefault": true
+  }
+}

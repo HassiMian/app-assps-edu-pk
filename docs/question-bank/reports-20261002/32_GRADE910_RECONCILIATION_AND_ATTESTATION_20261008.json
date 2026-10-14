@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "assps-grade910-reconciliation-evidence-v1",
+  "scope": "ISOLATED_RECONCILIATION_NO_ACADEMIC_APPROVAL_NO_PRODUCTION_CHANGE",
+  "generatedAt": "2026-10-08T12:56:24.749Z",
+  "workingBranch": "feat/grade910-completion-reconcile-20261008",
+  "startingHead": "7c619a45b1bcdef4c92d553a2cb2526121277222",
+  "protectedProductionHead": "68a158e067e8bbcb0f35514abaff8d580a6435be",
+  "sourceAttestation": {
+    "officialCatalogRecords": 111,
+    "knownHashMatchedCachedRecords": 110,
+    "cacheFilesScanned": 145,
+    "checkpoint12": [
+      {
+        "recordId": "pectaa-catalog-047",
+        "subject": "Chemistry-Tech",
+        "medium": "English",
+        "hash": "1120794a943a815308719b135add2da3989d25487aa527a3666d1824b6758e41",
+        "bytes": 49205838,
+        "pages": 140,
+        "status": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
+        "cacheRef": "20261008/tech10-science/chem10em.pdf"
+      },
+      {
+        "recordId": "pectaa-catalog-048",
+        "subject": "Chemistry-Tech",
+        "medium": "Urdu",
+        "hash": "1ede957841933ef417e576592eeb98698e2c3ec073c0f20058efda72fe20c1fe",
+        "bytes": 42634064,
+        "pages": 135,
+        "status": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
+        "cacheRef": "20261008/tech10-science/chem10ur.pdf"
+      },
+      {
+        "recordId": "pectaa-catalog-056",
+        "subject": "Physics-Tech",
+        "medium": "Urdu",
+        "hash": "97fdcd6b9dfdbfa4ae4e8d5be3314adbafe83e590c66cea30a0291def0a51356",
+        "bytes": 68053111,
+        "pages": 120,
+        "status": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
+        "cacheRef": "20261008/tech10-science/phys10ur.pdf"
+      },
+      {
+        "recordId": "pectaa-catalog-057",
+        "subject": "Physics-Tech",
+        "medium": "English",
+        "hash": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "bytes": 12167534,
+        "pages": 136,
+        "status": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
+        "cacheRef": "20261008/tech10-science/phys10em.pdf"
+      },
+      {
+        "recordId": "pectaa-catalog-074",
+        "subject": "Farsi",
+        "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+        "hash": "316d84fd54d9c5bac9ee4ef79b2ec69b1e206669f5d96e9f8687d036fb746da8",
+        "bytes": 5880385,
+        "pages": 132,
+        "status": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
+        "cacheRef": "20261008/farsi910.pdf"
+      },
+      {
+        "recordId": "pectaa-catalog-075",
+        "subject": "Economics",
+        "medium": "Urdu",
+        "hash": "4a20e5cf2ef57eca9bd2c21164cf4c3cef5d325cbdfef457f8755c2de2b6962e",
+        "bytes": 64254218,
+        "pages": 132,
+        "status": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
+        "cacheRef": "20261008/econum910.pdf"
+      },
+      {
+        "recordId": "pectaa-catalog-076",
+        "subject": "Economics",
+        "medium": "English",
+        "hash": "cd9f01b1c32e7c929e25eb89e7ff7c16d4fa25c4f5c1de9bd5268627bf682df3",
+        "bytes": 109263930,
+        "pages": 120,
+        "status": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
+        "cacheRef": "20261008/econem910.pdf"
+      },
+      {
+        "recordId": "pectaa-catalog-077",
+        "subject": "Punjabi Ikhtari",
+        "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+        "hash": "d597903f5a7e47199dba6f972caf3d6c7a156a48098e9a9cca73ee48c4b0cdf6",
+        "bytes": 26801881,
+        "pages": 96,
+        "status": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
+        "cacheRef": "20261008/punjabi910.pdf"
+      },
+      {
+        "recordId": "pectaa-catalog-078",
+        "subject": "Zari Pedawar Workbook",
+        "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+        "hash": "64c4de1e013ad47028305c5800192cceaa1a0e5f9854f4298ab4b845a9678253",
+        "bytes": 14669271,
+        "pages": 358,
+        "status": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
+        "cacheRef": "20261008/zari910.pdf"
+      },
+      {
+        "recordId": "pectaa-catalog-079",
+        "subject": "Health & Physical Education",
+        "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+        "hash": "b5535990ac7c19e320d3e4786f54e5b7d836b936ddf365a41045ca764647cd31",
+        "bytes": 4251922,
+        "pages": 84,
+        "status": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
+        "cacheRef": "20261008/hpe910.pdf"
+      },
+      {
+        "recordId": "pectaa-catalog-080",
+        "subject": "Education",
+        "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+        "hash": "fce267423eb36454bc33e179c33b3ca975146c57909473270b472330f26aa09b",
+        "bytes": 42093805,
+        "pages": 76,
+        "status": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
+        "cacheRef": "20261008/education910.pdf"
+      },
+      {
+        "recordId": "pectaa-catalog-081",
+        "subject": "Civics",
+        "medium": "Urdu",
+        "hash": "4594b16697040e6bd1ab6616af012ff3f32a849b5345132519548dea92858d57",
+        "bytes": 11227925,
+        "pages": 96,
+        "status": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
+        "cacheRef": "20261008/civicsum910.pdf"
+      }
+    ],
+    "missingUnhashedRecord": "pectaa-catalog-037",
+    "missingSourceReason": "Official PECTAA catalog points to a PCTB asset which timed out on both the VPS and web retrieval; source bytes and hash remain unverified",
+    "sourceRefRelocationsWithHistory": 38,
+    "correctHashMatchedSourceRefs": 110,
+    "remainingInvalidOrStaleKnownHashRefs": 0,
+    "pdfTextLayer": {
+      "manifestRecords": 111,
+      "hashAttested": 110,
+      "integrityVerified": 110,
+      "textLayerGood": 17,
+      "textLayerPartial": 13,
+      "imageHeavy": 80,
+      "candidateMapEligible": 17,
+      "sourceUnresolved": 1,
+      "integrityFailures": 0
+    }
+  },
+  "authoredInventory": {
+    "generatedFiles": 56,
+    "generatedQuestions": 2411,
+    "fullAuthoringFiles": 73,
+    "fullAuthoringQuestions": 2581,
+    "fullAuthoringDuplicateIds": 0,
+    "starterFiles": 55,
+    "starterQuestions": 2096,
+    "stagedSourceRecords": 55,
+    "authoringOutsideStarterQuestions": 485,
+    "mcqs": 809,
+    "mcqBiasFlaggedFiles": 0,
+    "approvedQuestions": 0,
+    "publicationEnabledQuestions": 0,
+    "missingPageQuestions": 1144,
+    "manifestEntries": 111,
+    "grade9Entries": 52,
+    "grade10Entries": 46,
+    "sharedEntries": 13,
+    "cachedHashVerifiedRecords": 110,
+    "missingKnownSources": 0,
+    "missingLedgerHashes": 1,
+    "exerciseVerifiedRecords": 0,
+    "recordsWithStaging": 55,
+    "recordsWithoutStaging": 56
+  },
+  "academicRelease": {
+    "academicReady": false,
+    "sourceHashDoesNotProveChapterOrExercise": true,
+    "verifiedExerciseIndices": 0,
+    "questionsWithoutPhysicalPage": 1144,
+    "academicallyApproved": 0,
+    "provisionalPublicationEnabled": 0
+  },
+  "gates": {
+    "sourceAndGovernanceTests": "24/24 PASS",
+    "grade9And10StagingTests": "510/510 PASS",
+    "productionSafety": "PASS",
+    "verifyLocal": "PASS",
+    "protectedTemplates": "PASS (6 unchanged)",
+    "gitDiffCheck": "PASS"
+  },
+  "appliedEngineering": [
+    "Content-preserving positional rebalance of 25 MCQ choices in four newly introduced Grade X Tech provisional files; original answers unchanged",
+    "Fixed stale snapshot assertions and deferred database dependency loading for offline-safe pure unit testing",
+    "Reconciled 38 stale cached-source references strictly using current SHA-256 inventory matches; preserved previous references in sourceCacheRefHistory",
+    "Added fail-closed source-cache-reference reconciliation script and three unit tests",
+    "Refreshed existing Grade IX-X staging completion readiness report"
+  ],
+  "hardBlockers": [
+    "Independent academic source-page and exercise inspection remains pending; 0 of 111 exercise indices verified",
+    "56 catalog identities have no starter staging; includes electives, supplements, Matric Tech and practical sources",
+    "1,144 starter questions have no verified physical source-page evidence",
+    "80 source PDFs are image-heavy/no useful text; 13 have partial text layer; OCR or visual/manual inspection required",
+    "547 prior heading/page candidate anchors must not be promoted without physical inspection",
+    "Academic answer correctness, bilingual parity, originality and teacher/expert approval are outstanding",
+    "No approved automatic paper-generator release is authorized"
+  ],
+  "productionWritesPerformed": false,
+  "importPerformed": false,
+  "deploymentPerformed": false
+}

@@ -39,6 +39,8 @@ const AIAnalytics = lazyRetry(() => import('./pages/AIAnalytics'), 'AIAnalytics'
 const PaperGenerator = lazyRetry(() => import('./Modules/Paper-Generator/PaperGenerator'), 'PaperGenerator')
 const OnlineTest = lazyRetry(() => import('./Modules/Paper-Generator/OnlineTest'), 'OnlineTest')
 const QuestionBank = lazyRetry(() => import('./Modules/Paper-Generator/QuestionBank'), 'QuestionBank')
+const Grade910HumanSignoff = lazyRetry(() => import('./Modules/Paper-Generator/Grade910HumanSignoff'), 'Grade910HumanSignoff')
+const Grade910ApprovedOnlyPicker = lazyRetry(() => import('./Modules/Paper-Generator/Grade910ApprovedOnlyPicker'), 'Grade910ApprovedOnlyPicker')
 const StudentModule = lazyRetry(() => import('./Modules/students/StudentModule'), 'StudentModule')
 const AdmissionsModule = lazyRetry(() => import('./Modules/students/AdmissionsModule'), 'AdmissionsModule')
 const StudentReports = lazyRetry(() => import('./Modules/students/StudentReports'), 'StudentReports')
@@ -348,6 +350,8 @@ function AppRoutes() {
 
  <Route path="/timetable" element={<W roles={ROLES.academicStaff} permKey="timetable"><TimetableModule /></W>} />
  <Route path="/question-bank" element={<W roles={ROLES.academicStaff} permKey="question_bank"><QuestionBank /></W>} />
+ <Route path="/academic/grade910-signoffs" element={<W roles={[...ROLES.academicStaff, 'school_admin']} permKey="question_bank"><Grade910HumanSignoff /></W>} />
+ <Route path="/academic/grade910-verified-picker" element={<W roles={[...ROLES.academicStaff, 'school_admin']} permKey="question_bank"><Grade910ApprovedOnlyPicker /></W>} />
  <Route path="/employees" element={<W roles={ROLES.leadership} permKey="employees"><EmployeesModule /></W>} />
  <Route path="/employees/*" element={<W roles={ROLES.leadership} permKey="employees"><EmployeesModule /></W>} />
  <Route path="/notifications" element={<W roles={ROLES.schoolStaff} permKey="notifications"><NotificationModule /></W>} />

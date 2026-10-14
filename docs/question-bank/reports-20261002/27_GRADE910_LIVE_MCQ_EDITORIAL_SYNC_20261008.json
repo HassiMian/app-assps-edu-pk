@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "assps-g910-live-mcq-editorial-sync-v1",
+  "scope": "CONTENT_PRESERVING_OPTION_ORDER_REBALANCE_NO_APPROVAL",
+  "generatedAt": "2026-10-08T09:35:00Z",
+  "schoolId": 1,
+  "packageRows": 2303,
+  "mcqRows": 773,
+  "semanticAnswerIdentity": {
+    "package": "773/773",
+    "live": "773/773"
+  },
+  "sync": {
+    "mode": "APPLY",
+    "database": "apexos",
+    "school": {
+      "id": 1,
+      "name": "AL SIDDIQUE SCHOLARS PUBLIC SCHOOL",
+      "code": "assps"
+    },
+    "packageRows": 2303,
+    "liveRows": 2303,
+    "candidates": 376,
+    "approvedMatches": 0,
+    "missing": 0,
+    "answerMismatch": 0,
+    "sourceFileHistoricalMismatch": 1608,
+    "beforeKeys": {
+      "A": 557,
+      "B": 84,
+      "C": 76,
+      "D": 56,
+      "OTHER": 0
+    },
+    "expectedAfterKeys": {
+      "A": 211,
+      "B": 199,
+      "C": 187,
+      "D": 176,
+      "OTHER": 0
+    },
+    "updated": 376,
+    "postMismatches": 0,
+    "afterKeys": {
+      "A": 211,
+      "B": 199,
+      "C": 187,
+      "D": 176,
+      "OTHER": 0
+    }
+  },
+  "postSync": {
+    "mode": "DRY_RUN",
+    "database": "apexos",
+    "school": {
+      "id": 1,
+      "name": "AL SIDDIQUE SCHOLARS PUBLIC SCHOOL",
+      "code": "assps"
+    },
+    "packageRows": 2303,
+    "liveRows": 2303,
+    "candidates": 0,
+    "approvedMatches": 0,
+    "missing": 0,
+    "answerMismatch": 0,
+    "sourceFileHistoricalMismatch": 1608,
+    "beforeKeys": {
+      "A": 211,
+      "B": 199,
+      "C": 187,
+      "D": 176,
+      "OTHER": 0
+    },
+    "expectedAfterKeys": {
+      "A": 211,
+      "B": 199,
+      "C": 187,
+      "D": 176,
+      "OTHER": 0
+    },
+    "updated": 0,
+    "postMismatches": null
+  },
+  "historicalSourceFileIdsPreserved": true,
+  "backup": "/var/backups/assps-qbank-g910-presync-20261008T092954Z"
+}

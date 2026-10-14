@@ -1,0 +1,2 @@
+# SHA256-bound evidence JSON must have canonical LF bytes on Windows and Linux.
+*.json text eol=lf

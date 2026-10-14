@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "assps-mathematics9Urdu-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-006",
+  "sourcePdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+  "sourceByteLength": 97707720,
+  "pageCount": 288,
+  "identity": [
+    "Mathematics Grade IX Urdu Medium",
+    "PECTAA/PCTB current official catalogue asset 2025-26"
+  ],
+  "chapterParityStatus": "STRONG_SAME_EDITION_SAME_PAGECOUNT_AND_SEQUENCE_AS_EM",
+  "chapters": [
+    {
+      "number": 1,
+      "titleUrdu": "حقیقی اعداد",
+      "titleEnglish": "Real Numbers",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 2,
+      "titleUrdu": "لوگارتھم",
+      "titleEnglish": "Logarithms",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 3,
+      "titleUrdu": "سیٹس اور فنکشنز",
+      "titleEnglish": "Set and Functions",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 4,
+      "titleUrdu": "فیکٹرائزیشن اور الجبری عمل",
+      "titleEnglish": "Factorization and Algebraic Manipulation",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 5,
+      "titleUrdu": "خطی مساوات اور عدم مساوات",
+      "titleEnglish": "Linear Equations and Inequalities",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 6,
+      "titleUrdu": "مثلثیات",
+      "titleEnglish": "Trigonometry",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 7,
+      "titleUrdu": "محددی جیومیٹری",
+      "titleEnglish": "Coordinate Geometry",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 8,
+      "titleUrdu": "منطق",
+      "titleEnglish": "Logic",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 9,
+      "titleUrdu": "مشابہ اشکال",
+      "titleEnglish": "Similar Figures",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 10,
+      "titleUrdu": "فنکشنز کے گراف",
+      "titleEnglish": "Graphs of Functions",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 11,
+      "titleUrdu": "لوکس اور تعمیرات",
+      "titleEnglish": "Loci and Construction",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 12,
+      "titleUrdu": "معلومات کی تنظیم",
+      "titleEnglish": "Information Handling",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 13,
+      "titleUrdu": "احتمال",
+      "titleEnglish": "Probability",
+      "status": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARY_PENDING"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "exactUrduPageBoundariesPending": true,
+    "urduLanguageConvention": "NATURAL_URDU_WITH_FAMILIAR_SCIENTIFIC_TERMS"
+  }
+}

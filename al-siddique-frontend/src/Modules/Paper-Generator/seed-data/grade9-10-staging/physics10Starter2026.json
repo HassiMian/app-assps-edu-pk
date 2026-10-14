@@ -1,0 +1,4496 @@
+{
+  "schemaVersion": "assps-physics10-starter-v1",
+  "createdOn": "2026-10-07",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-024",
+  "sourcePdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+  "scope": "CURRENT_TEXTBOOK_CHAPTER_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "X-PHY-C10-M01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C10",
+        "number": 10
+      },
+      "topicId": "thermal expansion",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Thermal Physics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "When most solids are heated, their dimensions generally?",
+          "answer": "Increase",
+          "options": [
+            {
+              "id": "A",
+              "text": "Increase"
+            },
+            {
+              "id": "B",
+              "text": "Become zero"
+            },
+            {
+              "id": "C",
+              "text": "Remain exactly fixed"
+            },
+            {
+              "id": "D",
+              "text": "Reverse sign"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C10-M02",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C10",
+        "number": 10
+      },
+      "topicId": "specific heat capacity",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Thermal Physics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Specific heat capacity is the energy required to raise the temperature of what mass by 1 K?",
+          "answer": "1 kg",
+          "options": [
+            {
+              "id": "A",
+              "text": "1 kg"
+            },
+            {
+              "id": "B",
+              "text": "1 g only"
+            },
+            {
+              "id": "C",
+              "text": "10 kg"
+            },
+            {
+              "id": "D",
+              "text": "Any mass with no reference"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C10-S01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C10",
+        "number": 10
+      },
+      "topicId": "thermal expansion",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Thermal Physics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Why are expansion gaps left in bridges or railway structures?",
+          "answer": "They allow materials to expand when heated without producing damaging stresses or buckling."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C10-S02",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C10",
+        "number": 10
+      },
+      "topicId": "latent heat",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Thermal Physics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "What is latent heat?",
+          "answer": "Energy absorbed or released during a change of state without a temperature change at that stage."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C10-N01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C10",
+        "number": 10
+      },
+      "topicId": "specific heat capacity",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Thermal Physics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "How much energy is needed to raise 2 kg of water by 5 K if c=4200 J kg⁻¹ K⁻¹?",
+          "answer": "Q=mcΔT=2×4200×5=42,000 J."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C11-M01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C11",
+        "number": 11
+      },
+      "topicId": "conduction",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Transfer of Thermal Energy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Which heat-transfer process dominates through a metal rod?",
+          "answer": "Conduction",
+          "options": [
+            {
+              "id": "A",
+              "text": "Conduction"
+            },
+            {
+              "id": "B",
+              "text": "Convection only"
+            },
+            {
+              "id": "C",
+              "text": "Radiation only"
+            },
+            {
+              "id": "D",
+              "text": "Evaporation only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C11-M02",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C11",
+        "number": 11
+      },
+      "topicId": "radiation",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Transfer of Thermal Energy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Thermal radiation can travel through?",
+          "answer": "Vacuum",
+          "options": [
+            {
+              "id": "A",
+              "text": "Vacuum"
+            },
+            {
+              "id": "B",
+              "text": "Solids only"
+            },
+            {
+              "id": "C",
+              "text": "Liquids only"
+            },
+            {
+              "id": "D",
+              "text": "Air only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C11-S01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C11",
+        "number": 11
+      },
+      "topicId": "convection",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Transfer of Thermal Energy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Why does warm fluid tend to rise?",
+          "answer": "Heating usually lowers its density, so buoyancy causes the warmer fluid to rise while cooler denser fluid sinks."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C11-S02",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C11",
+        "number": 11
+      },
+      "topicId": "insulation",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Transfer of Thermal Energy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "How does trapped air help thermal insulation?",
+          "answer": "Trapped air is a poor conductor and, when prevented from circulating, also limits convection."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C11-L01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C11",
+        "number": 11
+      },
+      "topicId": "heat transfer",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Transfer of Thermal Energy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Compare conduction, convection and radiation.",
+          "answer": "Award marks for particle/electron transfer in conduction, bulk fluid movement in convection, electromagnetic transfer in radiation, media requirements, and one suitable example of each."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C12-M01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C12",
+        "number": 12
+      },
+      "topicId": "wave quantities",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Waves"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Wave speed equals frequency multiplied by?",
+          "answer": "Wavelength",
+          "options": [
+            {
+              "id": "A",
+              "text": "Wavelength"
+            },
+            {
+              "id": "B",
+              "text": "Amplitude"
+            },
+            {
+              "id": "C",
+              "text": "Period squared"
+            },
+            {
+              "id": "D",
+              "text": "Energy"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C12-M02",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C12",
+        "number": 12
+      },
+      "topicId": "wave types",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Waves"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "In a transverse wave, particle vibration is?",
+          "answer": "Perpendicular to wave travel",
+          "options": [
+            {
+              "id": "A",
+              "text": "Perpendicular to wave travel"
+            },
+            {
+              "id": "B",
+              "text": "Parallel to wave travel"
+            },
+            {
+              "id": "C",
+              "text": "Always circular"
+            },
+            {
+              "id": "D",
+              "text": "Absent"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C12-S01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C12",
+        "number": 12
+      },
+      "topicId": "frequency and period",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Waves"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "State the relation between frequency and period.",
+          "answer": "f=1/T and T=1/f."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C12-S02",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C12",
+        "number": 12
+      },
+      "topicId": "wave behavior",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Waves"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "What happens to frequency when a wave enters another medium but the source is unchanged?",
+          "answer": "The frequency remains the same; speed and wavelength may change."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C12-N01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C12",
+        "number": 12
+      },
+      "topicId": "wave equation",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Waves"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "A wave has frequency 50 Hz and wavelength 2 m. Find its speed.",
+          "answer": "v=fλ=50×2=100 m/s."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C13-M01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C13",
+        "number": 13
+      },
+      "topicId": "sound waves",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Sound"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Sound in air is mainly what type of wave?",
+          "answer": "Longitudinal",
+          "options": [
+            {
+              "id": "A",
+              "text": "Longitudinal"
+            },
+            {
+              "id": "B",
+              "text": "Transverse electromagnetic"
+            },
+            {
+              "id": "C",
+              "text": "Stationary electric"
+            },
+            {
+              "id": "D",
+              "text": "Gravitational"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C13-M02",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C13",
+        "number": 13
+      },
+      "topicId": "pitch",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Sound"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Pitch depends mainly on?",
+          "answer": "Frequency",
+          "options": [
+            {
+              "id": "A",
+              "text": "Frequency"
+            },
+            {
+              "id": "B",
+              "text": "Amplitude"
+            },
+            {
+              "id": "C",
+              "text": "Speed only"
+            },
+            {
+              "id": "D",
+              "text": "Distance only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C13-S01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C13",
+        "number": 13
+      },
+      "topicId": "loudness",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Sound"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "How is loudness related to wave amplitude?",
+          "answer": "Greater amplitude generally corresponds to greater sound intensity and perceived loudness."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C13-S02",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C13",
+        "number": 13
+      },
+      "topicId": "echo",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Sound"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "What condition is needed to hear a distinct echo?",
+          "answer": "Reflected sound must arrive after a sufficient time delay so it can be distinguished from the original sound."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C13-N01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C13",
+        "number": 13
+      },
+      "topicId": "echo",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Sound"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "An echo returns 0.40 s after a shout. If sound speed is 340 m/s, how far away is the reflecting wall?",
+          "answer": "Round-trip distance=340×0.40=136 m, so one-way distance=68 m."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C14-M01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C14",
+        "number": 14
+      },
+      "topicId": "reflection",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Light"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "The angle of reflection is equal to?",
+          "answer": "Angle of incidence",
+          "options": [
+            {
+              "id": "A",
+              "text": "Angle of incidence"
+            },
+            {
+              "id": "B",
+              "text": "Twice the incidence angle"
+            },
+            {
+              "id": "C",
+              "text": "Zero always"
+            },
+            {
+              "id": "D",
+              "text": "90° always"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C14-M02",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C14",
+        "number": 14
+      },
+      "topicId": "refraction",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Light"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Refraction occurs because light changes what when entering another medium?",
+          "answer": "Speed",
+          "options": [
+            {
+              "id": "A",
+              "text": "Speed"
+            },
+            {
+              "id": "B",
+              "text": "Frequency source"
+            },
+            {
+              "id": "C",
+              "text": "Charge"
+            },
+            {
+              "id": "D",
+              "text": "Mass"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C14-S01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C14",
+        "number": 14
+      },
+      "topicId": "lenses",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Light"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Differentiate converging and diverging lenses.",
+          "answer": "A converging lens brings parallel rays toward a focus; a diverging lens spreads parallel rays as if from a focus."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C14-S02",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C14",
+        "number": 14
+      },
+      "topicId": "refractive index",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Light"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "What does refractive index indicate?",
+          "answer": "It relates light speed in vacuum to its speed in a medium: n=c/v, and indicates how strongly the medium slows/refracts light."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C14-N01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C14",
+        "number": 14
+      },
+      "topicId": "refractive index",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Light"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Light travels at 2.0×10⁸ m/s in a medium. Find n using c=3.0×10⁸ m/s.",
+          "answer": "n=c/v=(3.0×10⁸)/(2.0×10⁸)=1.5."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C15-M01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C15",
+        "number": 15
+      },
+      "topicId": "electric charge",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electrostatics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Like electric charges?",
+          "answer": "Repel",
+          "options": [
+            {
+              "id": "A",
+              "text": "Repel"
+            },
+            {
+              "id": "B",
+              "text": "Attract"
+            },
+            {
+              "id": "C",
+              "text": "Always neutralize"
+            },
+            {
+              "id": "D",
+              "text": "Produce sound only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C15-M02",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C15",
+        "number": 15
+      },
+      "topicId": "electric field",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electrostatics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Electric field direction is defined as the direction of force on a?",
+          "answer": "Positive test charge",
+          "options": [
+            {
+              "id": "A",
+              "text": "Positive test charge"
+            },
+            {
+              "id": "B",
+              "text": "Negative test charge only"
+            },
+            {
+              "id": "C",
+              "text": "Neutron"
+            },
+            {
+              "id": "D",
+              "text": "Mass"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C15-S01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C15",
+        "number": 15
+      },
+      "topicId": "charging",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electrostatics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "What is charging by induction?",
+          "answer": "Producing charge separation and a net charge without direct charge transfer from the inducing body by contact."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C15-S02",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C15",
+        "number": 15
+      },
+      "topicId": "potential difference",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electrostatics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "What is electric potential difference?",
+          "answer": "Work done or energy transferred per unit charge between two points."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C15-L01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C15",
+        "number": 15
+      },
+      "topicId": "electrostatics",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electrostatics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Explain charging by friction, contact and induction.",
+          "answer": "Award marks for electron transfer by friction, charge sharing by contact, charge separation during induction, role of grounding in induction, and conservation of charge."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C16-M01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C16",
+        "number": 16
+      },
+      "topicId": "Ohm law",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electricity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Ohm’s law is expressed as?",
+          "answer": "V=IR",
+          "options": [
+            {
+              "id": "A",
+              "text": "V=IR"
+            },
+            {
+              "id": "B",
+              "text": "P=VI only"
+            },
+            {
+              "id": "C",
+              "text": "Q=mcΔT"
+            },
+            {
+              "id": "D",
+              "text": "F=ma"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C16-M02",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C16",
+        "number": 16
+      },
+      "topicId": "series circuits",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electricity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "In a series circuit, current through components is?",
+          "answer": "The same",
+          "options": [
+            {
+              "id": "A",
+              "text": "The same"
+            },
+            {
+              "id": "B",
+              "text": "Always zero"
+            },
+            {
+              "id": "C",
+              "text": "Different at every point"
+            },
+            {
+              "id": "D",
+              "text": "Infinite"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C16-S01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C16",
+        "number": 16
+      },
+      "topicId": "resistance",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electricity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "State two factors affecting resistance of a wire.",
+          "answer": "Length, cross-sectional area, material/resistivity and temperature are relevant factors; any two."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C16-S02",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C16",
+        "number": 16
+      },
+      "topicId": "parallel circuits",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electricity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "What is a key advantage of connecting household devices in parallel?",
+          "answer": "Each device receives the supply potential difference and can operate independently of the others."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C16-N01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C16",
+        "number": 16
+      },
+      "topicId": "Ohm law",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electricity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "A 12 V supply drives 3 A through a resistor. Find R.",
+          "answer": "R=V/I=12/3=4 Ω."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C17-M01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C17",
+        "number": 17
+      },
+      "topicId": "magnetic effect of current",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electromagnetism"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "A current-carrying wire produces what around it?",
+          "answer": "Magnetic field",
+          "options": [
+            {
+              "id": "A",
+              "text": "Magnetic field"
+            },
+            {
+              "id": "B",
+              "text": "Gravitational field only"
+            },
+            {
+              "id": "C",
+              "text": "No field"
+            },
+            {
+              "id": "D",
+              "text": "Sound field only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C17-M02",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C17",
+        "number": 17
+      },
+      "topicId": "motor effect",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electromagnetism"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "A current-carrying conductor in a magnetic field can experience?",
+          "answer": "Force",
+          "options": [
+            {
+              "id": "A",
+              "text": "Force"
+            },
+            {
+              "id": "B",
+              "text": "Only cooling"
+            },
+            {
+              "id": "C",
+              "text": "Only charging"
+            },
+            {
+              "id": "D",
+              "text": "Mass loss"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C17-S01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C17",
+        "number": 17
+      },
+      "topicId": "electromagnet",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electromagnetism"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "How can an electromagnet be made stronger?",
+          "answer": "Increase current, increase coil turns, and/or use a suitable soft-iron core."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C17-S02",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C17",
+        "number": 17
+      },
+      "topicId": "motor principle",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electromagnetism"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "State the basic motor principle.",
+          "answer": "A current-carrying conductor placed in a magnetic field experiences a force whose direction depends on current and field directions."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C17-L01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C17",
+        "number": 17
+      },
+      "topicId": "electric motor",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electromagnetism"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Explain the working principle of a simple d.c. motor.",
+          "answer": "Award marks for magnetic field, current in coil, opposing forces/turning effect, split-ring commutator reversing current each half-turn, and continuous rotation."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C18-M01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C18",
+        "number": 18
+      },
+      "topicId": "induction",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electromagnetic Induction and Electromagnetic Waves"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "An emf is induced when magnetic flux linking a circuit?",
+          "answer": "Changes",
+          "options": [
+            {
+              "id": "A",
+              "text": "Changes"
+            },
+            {
+              "id": "B",
+              "text": "Is permanently zero only"
+            },
+            {
+              "id": "C",
+              "text": "Never changes"
+            },
+            {
+              "id": "D",
+              "text": "Has no relation to time"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C18-M02",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C18",
+        "number": 18
+      },
+      "topicId": "transformers",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electromagnetic Induction and Electromagnetic Waves"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "A transformer operates using?",
+          "answer": "Electromagnetic induction",
+          "options": [
+            {
+              "id": "A",
+              "text": "Electromagnetic induction"
+            },
+            {
+              "id": "B",
+              "text": "Electrostatic charging only"
+            },
+            {
+              "id": "C",
+              "text": "Nuclear fission"
+            },
+            {
+              "id": "D",
+              "text": "Thermal expansion"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C18-S01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C18",
+        "number": 18
+      },
+      "topicId": "Lenz law",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electromagnetic Induction and Electromagnetic Waves"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "What does Lenz’s law state qualitatively?",
+          "answer": "The induced current/emf acts in a direction that opposes the change in magnetic flux that produced it."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C18-S02",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C18",
+        "number": 18
+      },
+      "topicId": "electromagnetic spectrum",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electromagnetic Induction and Electromagnetic Waves"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Name two electromagnetic waves with frequencies higher than visible light.",
+          "answer": "Ultraviolet, X-rays and gamma rays are valid; any two."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C18-N01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C18",
+        "number": 18
+      },
+      "topicId": "transformer ratio",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electromagnetic Induction and Electromagnetic Waves"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "An ideal transformer has Np=500, Ns=100 and Vp=240 V. Find Vs.",
+          "answer": "Vs/Vp=Ns/Np=100/500=0.2, so Vs=48 V."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C19-M01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C19",
+        "number": 19
+      },
+      "topicId": "semiconductors",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electronics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "A semiconductor has conductivity generally?",
+          "answer": "Between conductors and insulators",
+          "options": [
+            {
+              "id": "A",
+              "text": "Between conductors and insulators"
+            },
+            {
+              "id": "B",
+              "text": "Exactly zero"
+            },
+            {
+              "id": "C",
+              "text": "Infinite"
+            },
+            {
+              "id": "D",
+              "text": "Unrelated to temperature"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C19-M02",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C19",
+        "number": 19
+      },
+      "topicId": "diodes",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electronics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "A diode is mainly used to allow current?",
+          "answer": "Preferentially in one direction",
+          "options": [
+            {
+              "id": "A",
+              "text": "Preferentially in one direction"
+            },
+            {
+              "id": "B",
+              "text": "Equally in every direction"
+            },
+            {
+              "id": "C",
+              "text": "Only when cold"
+            },
+            {
+              "id": "D",
+              "text": "Only in vacuum"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C19-S01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C19",
+        "number": 19
+      },
+      "topicId": "transistor",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electronics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "State one use of a transistor.",
+          "answer": "It can be used as an electronic switch or amplifier."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C19-S02",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C19",
+        "number": 19
+      },
+      "topicId": "logic circuits",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electronics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "What is the output of an AND gate when both inputs are 1?",
+          "answer": "The output is 1."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C19-L01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C19",
+        "number": 19
+      },
+      "topicId": "electronics",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electronics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Explain the roles of a diode, transistor and one logic gate in electronic systems.",
+          "answer": "Award marks for diode one-way conduction/rectification, transistor switching/amplification, correct logic-gate behavior, one example application, and clear distinction among components."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C20-M01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C20",
+        "number": 20
+      },
+      "topicId": "atomic nucleus",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Atomic and Nuclear Physics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "The nucleus contains?",
+          "answer": "Protons and neutrons",
+          "options": [
+            {
+              "id": "A",
+              "text": "Protons and neutrons"
+            },
+            {
+              "id": "B",
+              "text": "Electrons only"
+            },
+            {
+              "id": "C",
+              "text": "Photons only"
+            },
+            {
+              "id": "D",
+              "text": "Ions only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C20-M02",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C20",
+        "number": 20
+      },
+      "topicId": "radioactivity",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Atomic and Nuclear Physics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Radioactive decay is best described as?",
+          "answer": "Spontaneous nuclear change",
+          "options": [
+            {
+              "id": "A",
+              "text": "Spontaneous nuclear change"
+            },
+            {
+              "id": "B",
+              "text": "Ordinary chemical combustion"
+            },
+            {
+              "id": "C",
+              "text": "Mechanical vibration"
+            },
+            {
+              "id": "D",
+              "text": "Thermal expansion"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C20-S01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C20",
+        "number": 20
+      },
+      "topicId": "isotopes",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Atomic and Nuclear Physics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "What are isotopes?",
+          "answer": "Atoms of the same element with the same proton number but different neutron numbers."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C20-S02",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C20",
+        "number": 20
+      },
+      "topicId": "half life",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Atomic and Nuclear Physics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Define half-life.",
+          "answer": "The time required for the number of undecayed nuclei or activity in a radioactive sample to fall to half its initial value."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C20-N01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C20",
+        "number": 20
+      },
+      "topicId": "half life",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Atomic and Nuclear Physics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "A sample starts with 800 undecayed nuclei. How many remain after three half-lives?",
+          "answer": "800→400→200→100, so 100 remain."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C21-M01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C21",
+        "number": 21
+      },
+      "topicId": "solar system",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Space and Environment"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "A planet remains in orbit primarily because gravity provides?",
+          "answer": "Centripetal acceleration",
+          "options": [
+            {
+              "id": "A",
+              "text": "Centripetal acceleration"
+            },
+            {
+              "id": "B",
+              "text": "Thermal insulation"
+            },
+            {
+              "id": "C",
+              "text": "Electric resistance"
+            },
+            {
+              "id": "D",
+              "text": "Sound pressure"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C21-M02",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C21",
+        "number": 21
+      },
+      "topicId": "stars",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Space and Environment"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "A star produces much of its energy through?",
+          "answer": "Nuclear fusion",
+          "options": [
+            {
+              "id": "A",
+              "text": "Nuclear fusion"
+            },
+            {
+              "id": "B",
+              "text": "Friction only"
+            },
+            {
+              "id": "C",
+              "text": "Chemical burning only"
+            },
+            {
+              "id": "D",
+              "text": "Electrostatic discharge only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-C21-S01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C21",
+        "number": 21
+      },
+      "topicId": "satellites",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Space and Environment"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Differentiate natural and artificial satellites.",
+          "answer": "Natural satellites occur naturally in orbit, such as moons; artificial satellites are human-made objects placed in orbit for communication, observation, navigation or science."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C21-S02",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C21",
+        "number": 21
+      },
+      "topicId": "environment",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Space and Environment"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "State one environmental concern related to space activity.",
+          "answer": "Space debris can threaten satellites and future missions; launch emissions and re-entry materials can also create environmental concerns."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-C21-L01",
+      "chapter": {
+        "id": "X-PHY-2026-EM-C21",
+        "number": 21
+      },
+      "topicId": "space science",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-024",
+        "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Space and Environment"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-PHYSICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics X starter aligned to current 2026-27 textbook. No current annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Explain how gravity, orbital motion and satellite technology are connected.",
+          "answer": "Award marks for gravity as attractive force, orbital centripetal requirement, suitable orbital speed, artificial-satellite placement, and practical uses such as communication, weather or navigation."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 60,
+    "mcq": 24,
+    "short": 24,
+    "numerical": 7,
+    "long": 5,
+    "chapters": 12
+  }
+}

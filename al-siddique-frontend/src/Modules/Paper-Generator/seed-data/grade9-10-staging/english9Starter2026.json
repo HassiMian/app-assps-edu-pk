@@ -1,0 +1,3917 @@
+{
+  "schemaVersion": "assps-english9-starter-v1",
+  "createdOn": "2026-10-07",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-004",
+  "sourcePdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+  "scope": "CURRENT_TEXTBOOK_COMPETENCY_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "IX-ENG-2025-U01-M01",
+      "chapter": {
+        "id": "IX-ENG-2025-U01",
+        "number": 1
+      },
+      "topicId": "reading and critical thinking",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "reading and critical thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "When answering a question about ethics, justice, trust and self-discipline, which response is strongest?",
+          "answer": "A clear response supported by a relevant reason",
+          "options": [
+            {
+              "id": "A",
+              "text": "A clear response supported by a relevant reason"
+            },
+            {
+              "id": "B",
+              "text": "An unrelated sentence"
+            },
+            {
+              "id": "C",
+              "text": "A copied line with no explanation"
+            },
+            {
+              "id": "D",
+              "text": "A response that ignores the question"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ENG-2025-U01-S01",
+      "chapter": {
+        "id": "IX-ENG-2025-U01",
+        "number": 1
+      },
+      "topicId": "theme response",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "theme response"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "State one constructive idea connected with ethics, justice, trust and self-discipline.",
+          "answer": "A just person protects the rights of others and keeps trust even when no reward is expected."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U01-G01",
+      "chapter": {
+        "id": "IX-ENG-2025-U01",
+        "number": 1
+      },
+      "topicId": "parts of speech",
+      "type": "grammar",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "parts of speech"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Identify the adjective in: “The careful student checked every answer.”",
+          "answer": "careful"
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U01-C01",
+      "chapter": {
+        "id": "IX-ENG-2025-U01",
+        "number": 1
+      },
+      "topicId": "original comprehension",
+      "type": "comprehension",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "original comprehension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Read this original statement: “A just person protects the rights of others and keeps trust even when no reward is expected.” What is its central idea?",
+          "answer": "A just person protects the rights of others and keeps trust even when no reward is expected."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U01-E01",
+      "chapter": {
+        "id": "IX-ENG-2025-U01",
+        "number": 1
+      },
+      "topicId": "paragraph writing",
+      "type": "essay",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "paragraph writing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Write a short, well-organized paragraph on ethics, justice, trust and self-discipline.",
+          "answer": "A strong response should include a clear topic sentence, relevant supporting points, logical linking, correct grammar and a concluding sentence."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U02-M01",
+      "chapter": {
+        "id": "IX-ENG-2025-U02",
+        "number": 2
+      },
+      "topicId": "reading and critical thinking",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "reading and critical thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "When answering a question about patriotism and responsible citizenship, which response is strongest?",
+          "answer": "A clear response supported by a relevant reason",
+          "options": [
+            {
+              "id": "A",
+              "text": "A clear response supported by a relevant reason"
+            },
+            {
+              "id": "B",
+              "text": "An unrelated sentence"
+            },
+            {
+              "id": "C",
+              "text": "A copied line with no explanation"
+            },
+            {
+              "id": "D",
+              "text": "A response that ignores the question"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ENG-2025-U02-S01",
+      "chapter": {
+        "id": "IX-ENG-2025-U02",
+        "number": 2
+      },
+      "topicId": "theme response",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "theme response"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "State one constructive idea connected with patriotism and responsible citizenship.",
+          "answer": "Responsible patriotism combines love for one’s country with honest service and respect for fellow citizens."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U02-G01",
+      "chapter": {
+        "id": "IX-ENG-2025-U02",
+        "number": 2
+      },
+      "topicId": "tenses",
+      "type": "grammar",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "tenses"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Change to the present perfect: “She completes the project.”",
+          "answer": "She has completed the project."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U02-C01",
+      "chapter": {
+        "id": "IX-ENG-2025-U02",
+        "number": 2
+      },
+      "topicId": "original comprehension",
+      "type": "comprehension",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "original comprehension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Read this original statement: “Responsible patriotism combines love for one’s country with honest service and respect for fellow citizens.” What is its central idea?",
+          "answer": "Responsible patriotism combines love for one’s country with honest service and respect for fellow citizens."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U02-E01",
+      "chapter": {
+        "id": "IX-ENG-2025-U02",
+        "number": 2
+      },
+      "topicId": "paragraph writing",
+      "type": "essay",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "paragraph writing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Write a short, well-organized paragraph on patriotism and responsible citizenship.",
+          "answer": "A strong response should include a clear topic sentence, relevant supporting points, logical linking, correct grammar and a concluding sentence."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U03-M01",
+      "chapter": {
+        "id": "IX-ENG-2025-U03",
+        "number": 3
+      },
+      "topicId": "reading and critical thinking",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "reading and critical thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "When answering a question about nature, wonder and poetic expression, which response is strongest?",
+          "answer": "A clear response supported by a relevant reason",
+          "options": [
+            {
+              "id": "A",
+              "text": "A clear response supported by a relevant reason"
+            },
+            {
+              "id": "B",
+              "text": "An unrelated sentence"
+            },
+            {
+              "id": "C",
+              "text": "A copied line with no explanation"
+            },
+            {
+              "id": "D",
+              "text": "A response that ignores the question"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ENG-2025-U03-S01",
+      "chapter": {
+        "id": "IX-ENG-2025-U03",
+        "number": 3
+      },
+      "topicId": "theme response",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "theme response"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "State one constructive idea connected with nature, wonder and poetic expression.",
+          "answer": "Careful observation of nature can inspire reflection, imagery and a sense of wonder."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U03-G01",
+      "chapter": {
+        "id": "IX-ENG-2025-U03",
+        "number": 3
+      },
+      "topicId": "figurative language",
+      "type": "grammar",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "figurative language"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Identify the figure of speech: “The stars danced above the field.”",
+          "answer": "Personification."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U03-C01",
+      "chapter": {
+        "id": "IX-ENG-2025-U03",
+        "number": 3
+      },
+      "topicId": "original comprehension",
+      "type": "comprehension",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "original comprehension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Read this original statement: “Careful observation of nature can inspire reflection, imagery and a sense of wonder.” What is its central idea?",
+          "answer": "Careful observation of nature can inspire reflection, imagery and a sense of wonder."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U03-E01",
+      "chapter": {
+        "id": "IX-ENG-2025-U03",
+        "number": 3
+      },
+      "topicId": "paragraph writing",
+      "type": "essay",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "paragraph writing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Write a short, well-organized paragraph on nature, wonder and poetic expression.",
+          "answer": "A strong response should include a clear topic sentence, relevant supporting points, logical linking, correct grammar and a concluding sentence."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U04-M01",
+      "chapter": {
+        "id": "IX-ENG-2025-U04",
+        "number": 4
+      },
+      "topicId": "reading and critical thinking",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "reading and critical thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "When answering a question about trust, courage, self-discipline and respect, which response is strongest?",
+          "answer": "A clear response supported by a relevant reason",
+          "options": [
+            {
+              "id": "A",
+              "text": "A clear response supported by a relevant reason"
+            },
+            {
+              "id": "B",
+              "text": "An unrelated sentence"
+            },
+            {
+              "id": "C",
+              "text": "A copied line with no explanation"
+            },
+            {
+              "id": "D",
+              "text": "A response that ignores the question"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ENG-2025-U04-S01",
+      "chapter": {
+        "id": "IX-ENG-2025-U04",
+        "number": 4
+      },
+      "topicId": "theme response",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "theme response"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "State one constructive idea connected with trust, courage, self-discipline and respect.",
+          "answer": "Courage often appears through calm decisions, loyalty and self-discipline during pressure."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U04-G01",
+      "chapter": {
+        "id": "IX-ENG-2025-U04",
+        "number": 4
+      },
+      "topicId": "verbals",
+      "type": "grammar",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "verbals"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Identify the gerund in: “Reading improves concentration.”",
+          "answer": "Reading."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U04-C01",
+      "chapter": {
+        "id": "IX-ENG-2025-U04",
+        "number": 4
+      },
+      "topicId": "original comprehension",
+      "type": "comprehension",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "original comprehension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Read this original statement: “Courage often appears through calm decisions, loyalty and self-discipline during pressure.” What is its central idea?",
+          "answer": "Courage often appears through calm decisions, loyalty and self-discipline during pressure."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U04-E01",
+      "chapter": {
+        "id": "IX-ENG-2025-U04",
+        "number": 4
+      },
+      "topicId": "paragraph writing",
+      "type": "essay",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "paragraph writing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Write a short, well-organized paragraph on trust, courage, self-discipline and respect.",
+          "answer": "A strong response should include a clear topic sentence, relevant supporting points, logical linking, correct grammar and a concluding sentence."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U05-M01",
+      "chapter": {
+        "id": "IX-ENG-2025-U05",
+        "number": 5
+      },
+      "topicId": "reading and critical thinking",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "reading and critical thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "excluded"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "When answering a question about entrepreneurship, opportunity and women empowerment, which response is strongest?",
+          "answer": "A clear response supported by a relevant reason",
+          "options": [
+            {
+              "id": "A",
+              "text": "A clear response supported by a relevant reason"
+            },
+            {
+              "id": "B",
+              "text": "An unrelated sentence"
+            },
+            {
+              "id": "C",
+              "text": "A copied line with no explanation"
+            },
+            {
+              "id": "D",
+              "text": "A response that ignores the question"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ENG-2025-U05-S01",
+      "chapter": {
+        "id": "IX-ENG-2025-U05",
+        "number": 5
+      },
+      "topicId": "theme response",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "theme response"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "excluded"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "State one constructive idea connected with entrepreneurship, opportunity and women empowerment.",
+          "answer": "Entrepreneurship can create opportunities when people have access to skills, confidence and fair support."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U05-G01",
+      "chapter": {
+        "id": "IX-ENG-2025-U05",
+        "number": 5
+      },
+      "topicId": "idiom",
+      "type": "grammar",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "idiom"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "excluded"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Explain the idiom “a fresh start” in a sentence about learning.",
+          "answer": "It means beginning again with a new opportunity or improved approach."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U05-C01",
+      "chapter": {
+        "id": "IX-ENG-2025-U05",
+        "number": 5
+      },
+      "topicId": "original comprehension",
+      "type": "comprehension",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "original comprehension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "excluded"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Read this original statement: “Entrepreneurship can create opportunities when people have access to skills, confidence and fair support.” What is its central idea?",
+          "answer": "Entrepreneurship can create opportunities when people have access to skills, confidence and fair support."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U05-E01",
+      "chapter": {
+        "id": "IX-ENG-2025-U05",
+        "number": 5
+      },
+      "topicId": "paragraph writing",
+      "type": "essay",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "paragraph writing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "excluded"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Write a short, well-organized paragraph on entrepreneurship, opportunity and women empowerment.",
+          "answer": "A strong response should include a clear topic sentence, relevant supporting points, logical linking, correct grammar and a concluding sentence."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U06-M01",
+      "chapter": {
+        "id": "IX-ENG-2025-U06",
+        "number": 6
+      },
+      "topicId": "reading and critical thinking",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "reading and critical thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "When answering a question about time management and responsible use of time, which response is strongest?",
+          "answer": "A clear response supported by a relevant reason",
+          "options": [
+            {
+              "id": "A",
+              "text": "A clear response supported by a relevant reason"
+            },
+            {
+              "id": "B",
+              "text": "An unrelated sentence"
+            },
+            {
+              "id": "C",
+              "text": "A copied line with no explanation"
+            },
+            {
+              "id": "D",
+              "text": "A response that ignores the question"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ENG-2025-U06-S01",
+      "chapter": {
+        "id": "IX-ENG-2025-U06",
+        "number": 6
+      },
+      "topicId": "theme response",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "theme response"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "State one constructive idea connected with time management and responsible use of time.",
+          "answer": "Time becomes useful when priorities are clear and work is balanced with rest."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U06-G01",
+      "chapter": {
+        "id": "IX-ENG-2025-U06",
+        "number": 6
+      },
+      "topicId": "punctuation",
+      "type": "grammar",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "punctuation"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Correct: “Time is valuable therefore we should plan carefully”",
+          "answer": "Time is valuable; therefore, we should plan carefully."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U06-C01",
+      "chapter": {
+        "id": "IX-ENG-2025-U06",
+        "number": 6
+      },
+      "topicId": "original comprehension",
+      "type": "comprehension",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "original comprehension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Read this original statement: “Time becomes useful when priorities are clear and work is balanced with rest.” What is its central idea?",
+          "answer": "Time becomes useful when priorities are clear and work is balanced with rest."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U06-E01",
+      "chapter": {
+        "id": "IX-ENG-2025-U06",
+        "number": 6
+      },
+      "topicId": "paragraph writing",
+      "type": "essay",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "paragraph writing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Write a short, well-organized paragraph on time management and responsible use of time.",
+          "answer": "A strong response should include a clear topic sentence, relevant supporting points, logical linking, correct grammar and a concluding sentence."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U07-M01",
+      "chapter": {
+        "id": "IX-ENG-2025-U07",
+        "number": 7
+      },
+      "topicId": "reading and critical thinking",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "reading and critical thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "When answering a question about bravery, resilience and poetic expression, which response is strongest?",
+          "answer": "A clear response supported by a relevant reason",
+          "options": [
+            {
+              "id": "A",
+              "text": "A clear response supported by a relevant reason"
+            },
+            {
+              "id": "B",
+              "text": "An unrelated sentence"
+            },
+            {
+              "id": "C",
+              "text": "A copied line with no explanation"
+            },
+            {
+              "id": "D",
+              "text": "A response that ignores the question"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ENG-2025-U07-S01",
+      "chapter": {
+        "id": "IX-ENG-2025-U07",
+        "number": 7
+      },
+      "topicId": "theme response",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "theme response"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "State one constructive idea connected with bravery, resilience and poetic expression.",
+          "answer": "Resilience means continuing with sound judgment when circumstances become difficult."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U07-G01",
+      "chapter": {
+        "id": "IX-ENG-2025-U07",
+        "number": 7
+      },
+      "topicId": "paraphrase",
+      "type": "grammar",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "paraphrase"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Paraphrase: “Patience helps a person remain steady during difficulty.”",
+          "answer": "A patient person can stay calm and consistent when facing difficulties."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U07-C01",
+      "chapter": {
+        "id": "IX-ENG-2025-U07",
+        "number": 7
+      },
+      "topicId": "original comprehension",
+      "type": "comprehension",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "original comprehension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Read this original statement: “Resilience means continuing with sound judgment when circumstances become difficult.” What is its central idea?",
+          "answer": "Resilience means continuing with sound judgment when circumstances become difficult."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U07-E01",
+      "chapter": {
+        "id": "IX-ENG-2025-U07",
+        "number": 7
+      },
+      "topicId": "paragraph writing",
+      "type": "essay",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "paragraph writing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Write a short, well-organized paragraph on bravery, resilience and poetic expression.",
+          "answer": "A strong response should include a clear topic sentence, relevant supporting points, logical linking, correct grammar and a concluding sentence."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U08-M01",
+      "chapter": {
+        "id": "IX-ENG-2025-U08",
+        "number": 8
+      },
+      "topicId": "reading and critical thinking",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "reading and critical thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "excluded"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "When answering a question about globalisation, culture and economy, which response is strongest?",
+          "answer": "A clear response supported by a relevant reason",
+          "options": [
+            {
+              "id": "A",
+              "text": "A clear response supported by a relevant reason"
+            },
+            {
+              "id": "B",
+              "text": "An unrelated sentence"
+            },
+            {
+              "id": "C",
+              "text": "A copied line with no explanation"
+            },
+            {
+              "id": "D",
+              "text": "A response that ignores the question"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ENG-2025-U08-S01",
+      "chapter": {
+        "id": "IX-ENG-2025-U08",
+        "number": 8
+      },
+      "topicId": "theme response",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "theme response"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "excluded"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "State one constructive idea connected with globalisation, culture and economy.",
+          "answer": "Globalisation can increase exchange of ideas while also influencing local culture and economic choices."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U08-G01",
+      "chapter": {
+        "id": "IX-ENG-2025-U08",
+        "number": 8
+      },
+      "topicId": "transition words",
+      "type": "grammar",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "transition words"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "excluded"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Join with a suitable transition: “Technology connects markets. It can also increase cultural pressure.”",
+          "answer": "Technology connects markets; however, it can also increase cultural pressure."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U08-C01",
+      "chapter": {
+        "id": "IX-ENG-2025-U08",
+        "number": 8
+      },
+      "topicId": "original comprehension",
+      "type": "comprehension",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "original comprehension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "excluded"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Read this original statement: “Globalisation can increase exchange of ideas while also influencing local culture and economic choices.” What is its central idea?",
+          "answer": "Globalisation can increase exchange of ideas while also influencing local culture and economic choices."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U08-E01",
+      "chapter": {
+        "id": "IX-ENG-2025-U08",
+        "number": 8
+      },
+      "topicId": "paragraph writing",
+      "type": "essay",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "paragraph writing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "excluded"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Write a short, well-organized paragraph on globalisation, culture and economy.",
+          "answer": "A strong response should include a clear topic sentence, relevant supporting points, logical linking, correct grammar and a concluding sentence."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U09-M01",
+      "chapter": {
+        "id": "IX-ENG-2025-U09",
+        "number": 9
+      },
+      "topicId": "reading and critical thinking",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "reading and critical thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "When answering a question about quality education and sustainable development, which response is strongest?",
+          "answer": "A clear response supported by a relevant reason",
+          "options": [
+            {
+              "id": "A",
+              "text": "A clear response supported by a relevant reason"
+            },
+            {
+              "id": "B",
+              "text": "An unrelated sentence"
+            },
+            {
+              "id": "C",
+              "text": "A copied line with no explanation"
+            },
+            {
+              "id": "D",
+              "text": "A response that ignores the question"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ENG-2025-U09-S01",
+      "chapter": {
+        "id": "IX-ENG-2025-U09",
+        "number": 9
+      },
+      "topicId": "theme response",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "theme response"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "State one constructive idea connected with quality education and sustainable development.",
+          "answer": "Quality education develops knowledge, skills and opportunities that can benefit individuals and communities."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U09-G01",
+      "chapter": {
+        "id": "IX-ENG-2025-U09",
+        "number": 9
+      },
+      "topicId": "context clues",
+      "type": "grammar",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "context clues"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "In “Education can be transformative, changing lives and opportunities,” what does “transformative” mean?",
+          "answer": "It means capable of producing major positive change."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U09-C01",
+      "chapter": {
+        "id": "IX-ENG-2025-U09",
+        "number": 9
+      },
+      "topicId": "original comprehension",
+      "type": "comprehension",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "original comprehension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Read this original statement: “Quality education develops knowledge, skills and opportunities that can benefit individuals and communities.” What is its central idea?",
+          "answer": "Quality education develops knowledge, skills and opportunities that can benefit individuals and communities."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U09-E01",
+      "chapter": {
+        "id": "IX-ENG-2025-U09",
+        "number": 9
+      },
+      "topicId": "paragraph writing",
+      "type": "essay",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "paragraph writing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Write a short, well-organized paragraph on quality education and sustainable development.",
+          "answer": "A strong response should include a clear topic sentence, relevant supporting points, logical linking, correct grammar and a concluding sentence."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U10-M01",
+      "chapter": {
+        "id": "IX-ENG-2025-U10",
+        "number": 10
+      },
+      "topicId": "reading and critical thinking",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "reading and critical thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "excluded"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "When answering a question about wildlife, conservation and natural resources, which response is strongest?",
+          "answer": "A clear response supported by a relevant reason",
+          "options": [
+            {
+              "id": "A",
+              "text": "A clear response supported by a relevant reason"
+            },
+            {
+              "id": "B",
+              "text": "An unrelated sentence"
+            },
+            {
+              "id": "C",
+              "text": "A copied line with no explanation"
+            },
+            {
+              "id": "D",
+              "text": "A response that ignores the question"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ENG-2025-U10-S01",
+      "chapter": {
+        "id": "IX-ENG-2025-U10",
+        "number": 10
+      },
+      "topicId": "theme response",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "theme response"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "excluded"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "State one constructive idea connected with wildlife, conservation and natural resources.",
+          "answer": "Wildlife conservation protects species, habitats and the ecological relationships on which biodiversity depends."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U10-G01",
+      "chapter": {
+        "id": "IX-ENG-2025-U10",
+        "number": 10
+      },
+      "topicId": "descriptive language",
+      "type": "grammar",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "descriptive language"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "excluded"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Improve: “The animal moved in the mountains.”",
+          "answer": "Example: “The alert animal moved quietly across the rocky mountain slope.”"
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U10-C01",
+      "chapter": {
+        "id": "IX-ENG-2025-U10",
+        "number": 10
+      },
+      "topicId": "original comprehension",
+      "type": "comprehension",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "original comprehension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "excluded"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Read this original statement: “Wildlife conservation protects species, habitats and the ecological relationships on which biodiversity depends.” What is its central idea?",
+          "answer": "Wildlife conservation protects species, habitats and the ecological relationships on which biodiversity depends."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U10-E01",
+      "chapter": {
+        "id": "IX-ENG-2025-U10",
+        "number": 10
+      },
+      "topicId": "paragraph writing",
+      "type": "essay",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "paragraph writing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "excluded"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Write a short, well-organized paragraph on wildlife, conservation and natural resources.",
+          "answer": "A strong response should include a clear topic sentence, relevant supporting points, logical linking, correct grammar and a concluding sentence."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U11-M01",
+      "chapter": {
+        "id": "IX-ENG-2025-U11",
+        "number": 11
+      },
+      "topicId": "reading and critical thinking",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "reading and critical thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "When answering a question about human relationships, character and drama, which response is strongest?",
+          "answer": "A clear response supported by a relevant reason",
+          "options": [
+            {
+              "id": "A",
+              "text": "A clear response supported by a relevant reason"
+            },
+            {
+              "id": "B",
+              "text": "An unrelated sentence"
+            },
+            {
+              "id": "C",
+              "text": "A copied line with no explanation"
+            },
+            {
+              "id": "D",
+              "text": "A response that ignores the question"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ENG-2025-U11-S01",
+      "chapter": {
+        "id": "IX-ENG-2025-U11",
+        "number": 11
+      },
+      "topicId": "theme response",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "theme response"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "State one constructive idea connected with human relationships, character and drama.",
+          "answer": "Family and social relationships can be understood by examining what characters say, do and value."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U11-G01",
+      "chapter": {
+        "id": "IX-ENG-2025-U11",
+        "number": 11
+      },
+      "topicId": "indirect narration",
+      "type": "grammar",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "indirect narration"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Change to indirect speech: Sara said, “I am preparing for the play.”",
+          "answer": "Sara said that she was preparing for the play."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U11-C01",
+      "chapter": {
+        "id": "IX-ENG-2025-U11",
+        "number": 11
+      },
+      "topicId": "original comprehension",
+      "type": "comprehension",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "original comprehension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Read this original statement: “Family and social relationships can be understood by examining what characters say, do and value.” What is its central idea?",
+          "answer": "Family and social relationships can be understood by examining what characters say, do and value."
+        }
+      }
+    },
+    {
+      "id": "IX-ENG-2025-U11-E01",
+      "chapter": {
+        "id": "IX-ENG-2025-U11",
+        "number": 11
+      },
+      "topicId": "paragraph writing",
+      "type": "essay",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-004",
+        "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "paragraph writing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "english",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-ENGLISH-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX English starter aligned to current unit/skills map. No textbook passage, poem line or play dialogue is reproduced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "included"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to current curriculum.",
+      "content": {
+        "en": {
+          "stem": "Write a short, well-organized paragraph on human relationships, character and drama.",
+          "answer": "A strong response should include a clear topic sentence, relevant supporting points, logical linking, correct grammar and a concluding sentence."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 55,
+    "mcq": 11,
+    "short": 11,
+    "grammar": 11,
+    "comprehension": 11,
+    "essay": 11,
+    "units": 11,
+    "alpIncluded": 40,
+    "alpExcluded": 15
+  }
+}

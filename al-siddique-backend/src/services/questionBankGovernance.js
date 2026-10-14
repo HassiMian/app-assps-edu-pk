@@ -4,18 +4,7 @@ const {assertIndependentReviewReady}=require('./grade910AcademicReviewGate')
 const text = value => String(value ?? '').trim().replace(/\s+/g, ' ')
 const lower = value => text(value).toLowerCase()
 
-function stable(value) {
-  if (Array.isArray(value)) return value.map(stable)
-  if (value && typeof value === 'object') {
-    return Object.fromEntries(Object.keys(value).sort().map(key => [key, stable(value[key])]))
-  }
-  return value
-}
-
-function sha256(value) {
-  const payload = typeof value === 'string' ? value : JSON.stringify(stable(value))
-  return crypto.createHash('sha256').update(payload).digest('hex')
-}
+const {stable,sha256}=require('./questionGovernanceHash')
 
 function normalizeOptions(options) {
   if (!Array.isArray(options)) return []

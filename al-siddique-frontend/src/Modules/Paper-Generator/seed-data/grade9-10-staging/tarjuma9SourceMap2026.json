@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "assps-tarjuma9-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-recovered-tarjuma9-2026",
+  "sourcePdfSha256": "e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66",
+  "sourceByteLength": 30238182,
+  "pageCount": 220,
+  "identity": [
+    "Class 9 Tarjuma-tul-Quran",
+    "Punjab Board current 2026 resource copy",
+    "Urdu Medium"
+  ],
+  "provenance": {
+    "officialCatalogRecordId": "pectaa-catalog-001",
+    "officialCatalogState": "AMBIGUOUS_REPEATED_LABEL",
+    "archiveEvidenceUrl": "https://studyplusplus.com/punjab-board/books/9/tarjama-tul-quran",
+    "archiveDriveId": "1iJ2oR0WD5V_IAfXKRnqaMDeNAgVnL8jA",
+    "currentChapterListCrossChecked": true
+  },
+  "chapters": [
+    {
+      "number": 1,
+      "title": "سورۃ مریم",
+      "status": "CURRENT_2026_SURAH_SEQUENCE_CROSS_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 2,
+      "title": "سورۃ طٰہٰ",
+      "status": "CURRENT_2026_SURAH_SEQUENCE_CROSS_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 3,
+      "title": "سورۃ الانبیاء",
+      "status": "CURRENT_2026_SURAH_SEQUENCE_CROSS_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 4,
+      "title": "سورۃ الحج",
+      "status": "CURRENT_2026_SURAH_SEQUENCE_CROSS_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 5,
+      "title": "سورۃ الفرقان",
+      "status": "CURRENT_2026_SURAH_SEQUENCE_CROSS_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 6,
+      "title": "سورۃ الشعراء",
+      "status": "CURRENT_2026_SURAH_SEQUENCE_CROSS_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 7,
+      "title": "سورۃ النمل",
+      "status": "CURRENT_2026_SURAH_SEQUENCE_CROSS_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 8,
+      "title": "سورۃ القصص",
+      "status": "CURRENT_2026_SURAH_SEQUENCE_CROSS_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 9,
+      "title": "سورۃ العنکبوت",
+      "status": "CURRENT_2026_SURAH_SEQUENCE_CROSS_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 10,
+      "title": "سورۃ الروم",
+      "status": "CURRENT_2026_SURAH_SEQUENCE_CROSS_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 11,
+      "title": "سورۃ لقمان",
+      "status": "CURRENT_2026_SURAH_SEQUENCE_CROSS_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 12,
+      "title": "سورۃ السجدہ",
+      "status": "CURRENT_2026_SURAH_SEQUENCE_CROSS_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 13,
+      "title": "سورۃ سبا",
+      "status": "CURRENT_2026_SURAH_SEQUENCE_CROSS_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 14,
+      "title": "سورۃ فاطر",
+      "status": "CURRENT_2026_SURAH_SEQUENCE_CROSS_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 15,
+      "title": "سورۃ یٰسین",
+      "status": "CURRENT_2026_SURAH_SEQUENCE_CROSS_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 16,
+      "title": "سورۃ الصافات",
+      "status": "CURRENT_2026_SURAH_SEQUENCE_CROSS_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 17,
+      "title": "سورۃ ص",
+      "status": "CURRENT_2026_SURAH_SEQUENCE_CROSS_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    },
+    {
+      "number": 18,
+      "title": "سورۃ الاحقاف",
+      "status": "CURRENT_2026_SURAH_SEQUENCE_CROSS_VERIFIED_EXACT_AYAH_RANGE_PENDING"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyQuranVerses": false,
+    "copyTextbookTranslation": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "exactAyahRangesPending": true
+  }
+}

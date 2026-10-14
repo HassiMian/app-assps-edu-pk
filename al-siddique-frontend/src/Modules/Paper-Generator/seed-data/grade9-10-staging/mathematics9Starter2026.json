@@ -1,0 +1,4869 @@
+{
+  "schemaVersion": "assps-math9-starter-v1",
+  "createdOn": "2026-10-07",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-005",
+  "sourcePdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+  "scope": "CURRENT_TEXTBOOK_CHAPTER_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "IX-MATH-C01-M01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "real numbers",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Real Numbers"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Which number is irrational?",
+          "answer": "√2",
+          "options": [
+            {
+              "id": "A",
+              "text": "√2"
+            },
+            {
+              "id": "B",
+              "text": "0.75"
+            },
+            {
+              "id": "C",
+              "text": "3/5"
+            },
+            {
+              "id": "D",
+              "text": "-4"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-C01-M02",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "real-number properties",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Real Numbers"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Which property is shown by a+b=b+a?",
+          "answer": "Commutative property of addition",
+          "options": [
+            {
+              "id": "A",
+              "text": "Commutative property of addition"
+            },
+            {
+              "id": "B",
+              "text": "Associative property"
+            },
+            {
+              "id": "C",
+              "text": "Distributive property"
+            },
+            {
+              "id": "D",
+              "text": "Identity property"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-C01-S01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "rational and irrational numbers",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Real Numbers"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Differentiate rational and irrational numbers.",
+          "answer": "A rational number can be written as p/q with integers p,q and q≠0; an irrational number cannot be written in that form and has a non-terminating non-recurring decimal expansion."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C01-S02",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "recurring decimals",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Real Numbers"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Is 0.333... rational? Explain.",
+          "answer": "Yes. Let x=0.333... Then 10x=3.333..., so 9x=3 and x=1/3."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C01-N01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "surds",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Real Numbers"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Simplify √50.",
+          "answer": "√50 = √(25×2) = 5√2."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C02-M01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "logarithms",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Logarithms"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "If 10²=100, then log₁₀(100)=?",
+          "answer": "2",
+          "options": [
+            {
+              "id": "A",
+              "text": "2"
+            },
+            {
+              "id": "B",
+              "text": "10"
+            },
+            {
+              "id": "C",
+              "text": "100"
+            },
+            {
+              "id": "D",
+              "text": "1"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-C02-M02",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "log laws",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Logarithms"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Which law is correct?",
+          "answer": "log(ab)=log a + log b",
+          "options": [
+            {
+              "id": "A",
+              "text": "log(ab)=log a + log b"
+            },
+            {
+              "id": "B",
+              "text": "log(ab)=log a × log b"
+            },
+            {
+              "id": "C",
+              "text": "log(a/b)=log a + log b"
+            },
+            {
+              "id": "D",
+              "text": "log(a^n)=log a + n"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-C02-S01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "definition of logarithm",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Logarithms"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Express a^b=c in logarithmic form.",
+          "answer": "log_a(c)=b, where a>0, a≠1 and c>0."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C02-S02",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "log laws",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Logarithms"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "State the quotient law of logarithms.",
+          "answer": "log_a(x/y)=log_a x - log_a y for positive x,y."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C02-N01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "log evaluation",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Logarithms"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Evaluate log₁₀(1000) + log₁₀(0.1).",
+          "answer": "3 + (-1) = 2."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C03-M01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "sets",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Set and Functions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "If A={1,2,3} and B={3,4}, what is A∩B?",
+          "answer": "{3}",
+          "options": [
+            {
+              "id": "A",
+              "text": "{3}"
+            },
+            {
+              "id": "B",
+              "text": "{1,2,4}"
+            },
+            {
+              "id": "C",
+              "text": "{1,2,3,4}"
+            },
+            {
+              "id": "D",
+              "text": "∅"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-C03-M02",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "functions",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Set and Functions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "A function assigns each input how many outputs?",
+          "answer": "Exactly one",
+          "options": [
+            {
+              "id": "A",
+              "text": "Exactly one"
+            },
+            {
+              "id": "B",
+              "text": "At least two"
+            },
+            {
+              "id": "C",
+              "text": "No outputs"
+            },
+            {
+              "id": "D",
+              "text": "Infinitely many only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-C03-S01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "set operations",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Set and Functions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Differentiate union and intersection of sets.",
+          "answer": "Union contains elements in either set or both; intersection contains only elements common to both sets."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C03-S02",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "functions",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Set and Functions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "What is the domain of a function?",
+          "answer": "The domain is the set of allowed input values for the function."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C03-N01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "set counting",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Set and Functions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "If n(A)=18, n(B)=15 and n(A∩B)=6, find n(A∪B).",
+          "answer": "n(A∪B)=18+15-6=27."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C04-M01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "factorization",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Factorization and Algebraic Manipulation"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Which is a factorization of x²-9?",
+          "answer": "(x-3)(x+3)",
+          "options": [
+            {
+              "id": "A",
+              "text": "(x-3)(x+3)"
+            },
+            {
+              "id": "B",
+              "text": "(x-9)(x+1)"
+            },
+            {
+              "id": "C",
+              "text": "(x-3)²"
+            },
+            {
+              "id": "D",
+              "text": "x(x-9)"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-C04-M02",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "algebraic identities",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Factorization and Algebraic Manipulation"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "(a+b)² equals?",
+          "answer": "a²+2ab+b²",
+          "options": [
+            {
+              "id": "A",
+              "text": "a²+2ab+b²"
+            },
+            {
+              "id": "B",
+              "text": "a²+b²"
+            },
+            {
+              "id": "C",
+              "text": "a²-2ab+b²"
+            },
+            {
+              "id": "D",
+              "text": "2a+2b"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-C04-S01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "common factors",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Factorization and Algebraic Manipulation"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Factorize 6x²+9x.",
+          "answer": "3x(2x+3)."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C04-S02",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "algebraic simplification",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Factorization and Algebraic Manipulation"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Simplify (x²-4)/(x-2), x≠2.",
+          "answer": "(x-2)(x+2)/(x-2)=x+2."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C04-N01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "factorization",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Factorization and Algebraic Manipulation"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Factorize x²+5x+6.",
+          "answer": "x²+5x+6=(x+2)(x+3)."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C05-M01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "linear equations",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Linear Equations and Inequalities"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Solve 2x+3=11.",
+          "answer": "4",
+          "options": [
+            {
+              "id": "A",
+              "text": "4"
+            },
+            {
+              "id": "B",
+              "text": "7"
+            },
+            {
+              "id": "C",
+              "text": "5"
+            },
+            {
+              "id": "D",
+              "text": "3"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-C05-M02",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "inequalities",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Linear Equations and Inequalities"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "If x+2>5, then?",
+          "answer": "x>3",
+          "options": [
+            {
+              "id": "A",
+              "text": "x>3"
+            },
+            {
+              "id": "B",
+              "text": "x<3"
+            },
+            {
+              "id": "C",
+              "text": "x>7"
+            },
+            {
+              "id": "D",
+              "text": "x<7"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-C05-S01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "equation solving",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Linear Equations and Inequalities"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Why must the same operation be applied to both sides of an equation?",
+          "answer": "To preserve equality; changing only one side generally changes the solution set."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C05-S02",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "inequality sign",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Linear Equations and Inequalities"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "What happens to an inequality sign when both sides are multiplied by a negative number?",
+          "answer": "The inequality direction reverses."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C05-N01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "simultaneous equations",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Linear Equations and Inequalities"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Solve x+y=9 and x-y=3.",
+          "answer": "Adding gives 2x=12 so x=6; then y=3."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C06-M01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "trigonometric ratios",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Trigonometry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "In a right triangle, sin θ equals?",
+          "answer": "opposite/hypotenuse",
+          "options": [
+            {
+              "id": "A",
+              "text": "opposite/hypotenuse"
+            },
+            {
+              "id": "B",
+              "text": "adjacent/hypotenuse"
+            },
+            {
+              "id": "C",
+              "text": "opposite/adjacent"
+            },
+            {
+              "id": "D",
+              "text": "hypotenuse/opposite"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-C06-M02",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "trigonometric ratios",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Trigonometry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "tan θ equals?",
+          "answer": "opposite/adjacent",
+          "options": [
+            {
+              "id": "A",
+              "text": "opposite/adjacent"
+            },
+            {
+              "id": "B",
+              "text": "adjacent/opposite"
+            },
+            {
+              "id": "C",
+              "text": "hypotenuse/adjacent"
+            },
+            {
+              "id": "D",
+              "text": "opposite/hypotenuse"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-C06-S01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "right triangles",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Trigonometry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "State Pythagoras’ theorem.",
+          "answer": "In a right triangle, the square of the hypotenuse equals the sum of the squares of the other two sides: c²=a²+b²."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C06-S02",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "trig ratios",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Trigonometry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "How are tan θ, sin θ and cos θ related?",
+          "answer": "tan θ = sin θ / cos θ, provided cos θ ≠ 0."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C06-N01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "right triangles",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Trigonometry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "A right triangle has legs 6 cm and 8 cm. Find the hypotenuse.",
+          "answer": "c=√(6²+8²)=√100=10 cm."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C07-M01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C07",
+        "number": 7
+      },
+      "topicId": "coordinate plane",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Coordinate Geometry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "What are the coordinates of the origin?",
+          "answer": "(0,0)",
+          "options": [
+            {
+              "id": "A",
+              "text": "(0,0)"
+            },
+            {
+              "id": "B",
+              "text": "(1,0)"
+            },
+            {
+              "id": "C",
+              "text": "(0,1)"
+            },
+            {
+              "id": "D",
+              "text": "(1,1)"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-C07-M02",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C07",
+        "number": 7
+      },
+      "topicId": "slope",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Coordinate Geometry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Slope of a horizontal line is?",
+          "answer": "0",
+          "options": [
+            {
+              "id": "A",
+              "text": "0"
+            },
+            {
+              "id": "B",
+              "text": "1"
+            },
+            {
+              "id": "C",
+              "text": "undefined"
+            },
+            {
+              "id": "D",
+              "text": "-1"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-C07-S01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C07",
+        "number": 7
+      },
+      "topicId": "distance formula",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Coordinate Geometry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "State the distance formula between (x₁,y₁) and (x₂,y₂).",
+          "answer": "d=√[(x₂-x₁)²+(y₂-y₁)²]."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C07-S02",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C07",
+        "number": 7
+      },
+      "topicId": "midpoint",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Coordinate Geometry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "State the midpoint formula.",
+          "answer": "((x₁+x₂)/2,(y₁+y₂)/2)."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C07-N01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C07",
+        "number": 7
+      },
+      "topicId": "slope",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Coordinate Geometry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Find the slope through (1,2) and (5,10).",
+          "answer": "m=(10-2)/(5-1)=8/4=2."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C08-M01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "logic",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Logic"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "The negation of “p is true” is?",
+          "answer": "p is not true",
+          "options": [
+            {
+              "id": "A",
+              "text": "p is not true"
+            },
+            {
+              "id": "B",
+              "text": "p and q"
+            },
+            {
+              "id": "C",
+              "text": "p or q"
+            },
+            {
+              "id": "D",
+              "text": "p implies q"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-C08-M02",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "truth values",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Logic"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "A conjunction p∧q is true when?",
+          "answer": "Both p and q are true",
+          "options": [
+            {
+              "id": "A",
+              "text": "Both p and q are true"
+            },
+            {
+              "id": "B",
+              "text": "At least one is true"
+            },
+            {
+              "id": "C",
+              "text": "Both are false only"
+            },
+            {
+              "id": "D",
+              "text": "p is false"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-C08-S01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "statements",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Logic"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "What is a mathematical statement?",
+          "answer": "A declarative sentence that has a definite truth value: true or false."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C08-S02",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "implication",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Logic"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "What does p→q mean?",
+          "answer": "It means “if p, then q,” where p is the antecedent and q the consequent."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C08-L01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "truth tables",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Logic"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Construct the truth values of p∧q for all combinations of p and q.",
+          "answer": "TT→T, TF→F, FT→F, FF→F. The conjunction is true only when both component statements are true."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C09-M01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "similarity",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Similar Figures"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Similar figures have corresponding angles that are?",
+          "answer": "Equal",
+          "options": [
+            {
+              "id": "A",
+              "text": "Equal"
+            },
+            {
+              "id": "B",
+              "text": "Supplementary only"
+            },
+            {
+              "id": "C",
+              "text": "Always 90°"
+            },
+            {
+              "id": "D",
+              "text": "Unrelated"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-C09-M02",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "scale factor",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Similar Figures"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "If the scale factor is 2, corresponding lengths become?",
+          "answer": "Twice as large",
+          "options": [
+            {
+              "id": "A",
+              "text": "Twice as large"
+            },
+            {
+              "id": "B",
+              "text": "Half as large"
+            },
+            {
+              "id": "C",
+              "text": "Unchanged"
+            },
+            {
+              "id": "D",
+              "text": "Four times as large"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-C09-S01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "similar triangles",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Similar Figures"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "State one criterion for triangle similarity.",
+          "answer": "AA similarity: if two corresponding angles are equal, the triangles are similar."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C09-S02",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "area scale",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Similar Figures"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "If similar figures have length scale factor k, what is their area scale factor?",
+          "answer": "k²."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C09-N01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "similarity",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Similar Figures"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Two similar triangles have corresponding sides 4 cm and 10 cm. If another side of the smaller is 6 cm, find the corresponding larger side.",
+          "answer": "Scale factor=10/4=2.5; larger side=6×2.5=15 cm."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C10-M01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C10",
+        "number": 10
+      },
+      "topicId": "function graphs",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Graphs of Functions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "The graph of y=mx+c is a?",
+          "answer": "Straight line",
+          "options": [
+            {
+              "id": "A",
+              "text": "Straight line"
+            },
+            {
+              "id": "B",
+              "text": "Circle"
+            },
+            {
+              "id": "C",
+              "text": "Parabola only"
+            },
+            {
+              "id": "D",
+              "text": "Hyperbola only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-C10-M02",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C10",
+        "number": 10
+      },
+      "topicId": "intercepts",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Graphs of Functions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "The y-intercept of y=2x+5 is?",
+          "answer": "5",
+          "options": [
+            {
+              "id": "A",
+              "text": "5"
+            },
+            {
+              "id": "B",
+              "text": "2"
+            },
+            {
+              "id": "C",
+              "text": "-5"
+            },
+            {
+              "id": "D",
+              "text": "0"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-C10-S01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C10",
+        "number": 10
+      },
+      "topicId": "graph interpretation",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Graphs of Functions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "What does the gradient of a straight-line graph represent?",
+          "answer": "The rate of change of y with respect to x."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C10-S02",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C10",
+        "number": 10
+      },
+      "topicId": "intercepts",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Graphs of Functions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "How do you find the x-intercept of a graph y=f(x)?",
+          "answer": "Set y=0 and solve f(x)=0."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C10-N01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C10",
+        "number": 10
+      },
+      "topicId": "linear graphs",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Graphs of Functions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "For y=3x-4, find y when x=5.",
+          "answer": "y=3(5)-4=11."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C11-M01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C11",
+        "number": 11
+      },
+      "topicId": "loci",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Loci and Construction"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "A locus is best described as?",
+          "answer": "A set of points satisfying a given condition",
+          "options": [
+            {
+              "id": "A",
+              "text": "A set of points satisfying a given condition"
+            },
+            {
+              "id": "B",
+              "text": "A single random point"
+            },
+            {
+              "id": "C",
+              "text": "Any polygon"
+            },
+            {
+              "id": "D",
+              "text": "A numerical sequence"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-C11-M02",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C11",
+        "number": 11
+      },
+      "topicId": "perpendicular bisector",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Loci and Construction"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Points on the perpendicular bisector of a segment are?",
+          "answer": "Equidistant from its endpoints",
+          "options": [
+            {
+              "id": "A",
+              "text": "Equidistant from its endpoints"
+            },
+            {
+              "id": "B",
+              "text": "Closer to one endpoint"
+            },
+            {
+              "id": "C",
+              "text": "Always on a circle"
+            },
+            {
+              "id": "D",
+              "text": "Never collinear"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-C11-S01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C11",
+        "number": 11
+      },
+      "topicId": "construction",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Loci and Construction"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "What instruments are typically used in classical geometric construction?",
+          "answer": "A straightedge/ruler and compass."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C11-S02",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C11",
+        "number": 11
+      },
+      "topicId": "angle bisector",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Loci and Construction"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "What locus is defined by points equidistant from the sides of an angle?",
+          "answer": "The angle bisector."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C11-L01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C11",
+        "number": 11
+      },
+      "topicId": "construction",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Loci and Construction"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Describe how to construct the perpendicular bisector of a line segment AB.",
+          "answer": "With equal compass radius greater than half AB, draw arcs from A and B above and below the segment; join the two arc-intersection points. This line is perpendicular to AB and passes through its midpoint."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C12-M01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C12",
+        "number": 12
+      },
+      "topicId": "mean",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Information Handling"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "The arithmetic mean is?",
+          "answer": "sum of values divided by number of values",
+          "options": [
+            {
+              "id": "A",
+              "text": "sum of values divided by number of values"
+            },
+            {
+              "id": "B",
+              "text": "middle value only"
+            },
+            {
+              "id": "C",
+              "text": "most frequent value only"
+            },
+            {
+              "id": "D",
+              "text": "largest minus smallest"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-C12-M02",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C12",
+        "number": 12
+      },
+      "topicId": "median",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Information Handling"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "For ordered data 2,4,7,9,11, the median is?",
+          "answer": "7",
+          "options": [
+            {
+              "id": "A",
+              "text": "7"
+            },
+            {
+              "id": "B",
+              "text": "4"
+            },
+            {
+              "id": "C",
+              "text": "9"
+            },
+            {
+              "id": "D",
+              "text": "6"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-C12-S01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C12",
+        "number": 12
+      },
+      "topicId": "central tendency",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Information Handling"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Differentiate mean and mode.",
+          "answer": "Mean is the arithmetic average; mode is the value occurring most frequently."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C12-S02",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C12",
+        "number": 12
+      },
+      "topicId": "range",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Information Handling"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "What is the range of a dataset?",
+          "answer": "Maximum value minus minimum value."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C12-N01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C12",
+        "number": 12
+      },
+      "topicId": "mean",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Information Handling"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Find the mean of 4,6,8,12.",
+          "answer": "(4+6+8+12)/4=30/4=7.5."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C13-M01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C13",
+        "number": 13
+      },
+      "topicId": "probability",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Probability"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Probability of an impossible event is?",
+          "answer": "0",
+          "options": [
+            {
+              "id": "A",
+              "text": "0"
+            },
+            {
+              "id": "B",
+              "text": "1"
+            },
+            {
+              "id": "C",
+              "text": "1/2"
+            },
+            {
+              "id": "D",
+              "text": "-1"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-C13-M02",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C13",
+        "number": 13
+      },
+      "topicId": "probability",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Probability"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "Probability of a certain event is?",
+          "answer": "1",
+          "options": [
+            {
+              "id": "A",
+              "text": "1"
+            },
+            {
+              "id": "B",
+              "text": "0"
+            },
+            {
+              "id": "C",
+              "text": "2"
+            },
+            {
+              "id": "D",
+              "text": "-1"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-MATH-C13-S01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C13",
+        "number": 13
+      },
+      "topicId": "sample space",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Probability"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "What is a sample space?",
+          "answer": "The set of all possible outcomes of a random experiment."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C13-S02",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C13",
+        "number": 13
+      },
+      "topicId": "complement",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Probability"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "If P(A)=0.35, what is P(A′)?",
+          "answer": "P(A′)=1-0.35=0.65."
+        }
+      }
+    },
+    {
+      "id": "IX-MATH-C13-N01",
+      "chapter": {
+        "id": "IX-MATH-2025-EM-C13",
+        "number": 13
+      },
+      "topicId": "simple probability",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-005",
+        "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Probability"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "mathematics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-MATHEMATICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics IX starter aligned to current textbook chapter map. No exercise or past-paper stem copied; academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter item aligned to current chapter scope.",
+      "content": {
+        "en": {
+          "stem": "A fair die is rolled. Find the probability of getting an even number.",
+          "answer": "Even outcomes are {2,4,6}: 3/6=1/2."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 65,
+    "mcq": 26,
+    "short": 26,
+    "numerical": 11,
+    "long": 2,
+    "chapters": 13
+  }
+}

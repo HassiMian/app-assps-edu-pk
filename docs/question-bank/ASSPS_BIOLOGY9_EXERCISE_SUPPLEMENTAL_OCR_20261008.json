@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "assps-bio9-supplemental-exercise-ocr-evidence-v1",
+  "sourceRecordId": "pectaa-catalog-009",
+  "sourceSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+  "sourceType": "PDFIUM_RENDERED_SCANNED_OFFICIAL_CACHED_SOURCE",
+  "method": "PDFIUM_SCALE_1.7_TESSERACT_ENGLISH_PSM_6",
+  "questionsReproduced": false,
+  "academicApprovalGranted": false,
+  "manualPageImageVerificationRequired": true,
+  "supplementalExerciseHeadingCandidates": [
+    {
+      "chapter": 6,
+      "pdfPhysicalPage": 106,
+      "printedPageCandidate": 102,
+      "recognizedExerciseMarker": "EXERCISE",
+      "ocrEvidenceOnly": true,
+      "manualPageImageVerificationRequired": true
+    },
+    {
+      "chapter": 11,
+      "pdfPhysicalPage": 174,
+      "printedPageCandidate": 170,
+      "recognizedExerciseMarker": "EXERCISE",
+      "ocrEvidenceOnly": true,
+      "manualPageImageVerificationRequired": true
+    }
+  ]
+}

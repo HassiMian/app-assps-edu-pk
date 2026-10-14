@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "assps-home9-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-066",
+  "sourcePdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+  "sourceByteLength": 73281846,
+  "pageCount": 212,
+  "identity": [
+    "Home Economics",
+    "Grade 9",
+    "Urdu",
+    "CURRENT_CATALOG_LABEL_NO_SESSION"
+  ],
+  "resolvedMedium": "Urdu",
+  "chapterMapState": "OFFICIAL_BYTES_HASHED_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_BOUNDARIES_PENDING",
+  "chapterEvidence": {
+    "officialCatalogRecordId": "pectaa-catalog-066",
+    "sourceCacheRef": "20261006/elective9-homeeconomics.pdf",
+    "crossCheckUrls": [
+      "https://www.ilmkidunya.com/9th-class/books/home_economics-punjab-board"
+    ]
+  },
+  "chapters": [
+    {
+      "number": 1,
+      "titleLocal": "Home Economics کا تعارف",
+      "titleEnglish": "Introduction to Home Economics",
+      "focus": "گھر، فرد، خاندان اور وسائل کے بہتر استعمال میں Home Economics کا کردار",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 2,
+      "titleLocal": "غذا اور غذائیت کا تعارف",
+      "titleEnglish": "Introduction to Food and Nutrition",
+      "focus": "غذا اور غذائیت کے بنیادی تصورات اور صحت سے تعلق",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 3,
+      "titleLocal": "غذا اور خوراک کو سمجھنا",
+      "titleEnglish": "Understanding Food",
+      "focus": "food groups، quality، hygiene اور informed food choices",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 4,
+      "titleLocal": "کھانوں کی تیاری",
+      "titleEnglish": "Food Preparation",
+      "focus": "محفوظ، صاف اور منظم food preparation کے بنیادی اصول",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 5,
+      "titleLocal": "بچوں کی نگہداشت اور نشوونما کا تعارف",
+      "titleEnglish": "Introduction to Child Care and Development",
+      "focus": "بچوں کی نگہداشت، محفوظ ماحول اور holistic development کی بنیادی ضروریات",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 6,
+      "titleLocal": "نشوونمائی خصوصیات",
+      "titleEnglish": "Developmental Characteristics",
+      "focus": "عمر کے ساتھ physical, social, emotional اور cognitive development میں تبدیلیاں",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 7,
+      "titleLocal": "بچوں کے رویوں کے مسائل",
+      "titleEnglish": "Child Behaviour Concerns",
+      "focus": "بچوں کے رویوں کو سمجھنے میں صبر، consistency اور age-appropriate guidance",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 8,
+      "titleLocal": "انسانی نشوونما میں خاندان اور معاشرے کا کردار",
+      "titleEnglish": "Family and Society in Human Development",
+      "focus": "خاندان، school اور community کے supportive کردار",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "exactPageBoundariesPending": true,
+    "safetyBoundary": "NO_DANGEROUS_PROCEDURE_STEPS_NO_RESTRICTIVE_DIET_FRAMING"
+  }
+}

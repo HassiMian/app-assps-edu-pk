@@ -1,0 +1,713 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "X-ART-UR-C01-M01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Drawing and Sketching",
+      "topic_name": "drawing and sketching",
+      "category": "mcq",
+      "question_text": "باب ”Drawing and Sketching“ میں مؤثر کام کے لیے کون سا approach زیادہ مناسب ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا"
+        },
+        {
+          "id": "B",
+          "text": "تناسب، context اور audience کو نظر انداز کرنا"
+        },
+        {
+          "id": "C",
+          "text": "کسی موجودہ کام کو لفظ بہ لفظ/عین اسی طرح نقل کرنا"
+        },
+        {
+          "id": "D",
+          "text": "ہر material اور technique کو بالکل ایک جیسا سمجھنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 1",
+      "tags": [
+        "grade10",
+        "art-model-drawing",
+        "urdu",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "drawing and sketching"
+      ]
+    },
+    {
+      "id": "X-ART-UR-C01-S01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Drawing and Sketching",
+      "topic_name": "drawing and sketching",
+      "category": "short",
+      "question_text": "”Drawing and Sketching“ کے مطالعے یا practice میں دو اہم considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں observation, perspective, proportion and expressive line سے متعلق کوئی دو مناسب نکات واضح کیے جائیں اور chapter context سے ان کا تعلق بتایا جائے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 1",
+      "tags": [
+        "grade10",
+        "art-model-drawing",
+        "urdu",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "drawing and sketching"
+      ]
+    },
+    {
+      "id": "X-ART-UR-C01-L01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Drawing and Sketching",
+      "topic_name": "drawing and sketching",
+      "category": "long",
+      "question_text": "”Drawing and Sketching“ میں skill، meaning اور context کو visual decisions کے ذریعے کیسے جوڑا جا سکتا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں observation, perspective, proportion and expressive line سے کم از کم تین متعلقہ پہلو، ان کا باہمی تعلق، اور technique کو purpose/context سے جوڑنے کی وضاحت شامل ہو؛ textbook عبارت یا artwork کو نقل نہ کیا جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 1",
+      "tags": [
+        "grade10",
+        "art-model-drawing",
+        "urdu",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "drawing and sketching"
+      ]
+    },
+    {
+      "id": "X-ART-UR-C02-M01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Painting Practice",
+      "topic_name": "painting practice",
+      "category": "mcq",
+      "question_text": "باب ”Painting Practice“ میں مؤثر کام کے لیے کون سا approach زیادہ مناسب ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہر material اور technique کو بالکل ایک جیسا سمجھنا"
+        },
+        {
+          "id": "B",
+          "text": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا"
+        },
+        {
+          "id": "C",
+          "text": "تناسب، context اور audience کو نظر انداز کرنا"
+        },
+        {
+          "id": "D",
+          "text": "کسی موجودہ کام کو لفظ بہ لفظ/عین اسی طرح نقل کرنا"
+        }
+      ],
+      "correct_option": "B",
+      "answer": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 2",
+      "tags": [
+        "grade10",
+        "art-model-drawing",
+        "urdu",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "painting practice"
+      ]
+    },
+    {
+      "id": "X-ART-UR-C02-S01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Painting Practice",
+      "topic_name": "painting practice",
+      "category": "short",
+      "question_text": "”Painting Practice“ کے مطالعے یا practice میں دو اہم considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں colour, surface, composition and technique سے متعلق کوئی دو مناسب نکات واضح کیے جائیں اور chapter context سے ان کا تعلق بتایا جائے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 2",
+      "tags": [
+        "grade10",
+        "art-model-drawing",
+        "urdu",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "painting practice"
+      ]
+    },
+    {
+      "id": "X-ART-UR-C02-L01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Painting Practice",
+      "topic_name": "painting practice",
+      "category": "long",
+      "question_text": "”Painting Practice“ میں skill، meaning اور context کو visual decisions کے ذریعے کیسے جوڑا جا سکتا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں colour, surface, composition and technique سے کم از کم تین متعلقہ پہلو، ان کا باہمی تعلق، اور technique کو purpose/context سے جوڑنے کی وضاحت شامل ہو؛ textbook عبارت یا artwork کو نقل نہ کیا جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 2",
+      "tags": [
+        "grade10",
+        "art-model-drawing",
+        "urdu",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "painting practice"
+      ]
+    },
+    {
+      "id": "X-ART-UR-C03-M01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Graphic Design",
+      "topic_name": "graphic design",
+      "category": "mcq",
+      "question_text": "باب ”Graphic Design“ میں مؤثر کام کے لیے کون سا approach زیادہ مناسب ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "کسی موجودہ کام کو لفظ بہ لفظ/عین اسی طرح نقل کرنا"
+        },
+        {
+          "id": "B",
+          "text": "ہر material اور technique کو بالکل ایک جیسا سمجھنا"
+        },
+        {
+          "id": "C",
+          "text": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا"
+        },
+        {
+          "id": "D",
+          "text": "تناسب، context اور audience کو نظر انداز کرنا"
+        }
+      ],
+      "correct_option": "C",
+      "answer": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 3",
+      "tags": [
+        "grade10",
+        "art-model-drawing",
+        "urdu",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "graphic design"
+      ]
+    },
+    {
+      "id": "X-ART-UR-C03-S01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Graphic Design",
+      "topic_name": "graphic design",
+      "category": "short",
+      "question_text": "”Graphic Design“ کے مطالعے یا practice میں دو اہم considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں message, audience, typography, layout and visual identity سے متعلق کوئی دو مناسب نکات واضح کیے جائیں اور chapter context سے ان کا تعلق بتایا جائے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 3",
+      "tags": [
+        "grade10",
+        "art-model-drawing",
+        "urdu",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "graphic design"
+      ]
+    },
+    {
+      "id": "X-ART-UR-C03-L01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Graphic Design",
+      "topic_name": "graphic design",
+      "category": "long",
+      "question_text": "”Graphic Design“ میں skill، meaning اور context کو visual decisions کے ذریعے کیسے جوڑا جا سکتا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں message, audience, typography, layout and visual identity سے کم از کم تین متعلقہ پہلو، ان کا باہمی تعلق، اور technique کو purpose/context سے جوڑنے کی وضاحت شامل ہو؛ textbook عبارت یا artwork کو نقل نہ کیا جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 3",
+      "tags": [
+        "grade10",
+        "art-model-drawing",
+        "urdu",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "graphic design"
+      ]
+    },
+    {
+      "id": "X-ART-UR-C04-M01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Sculpture Making",
+      "topic_name": "sculpture making",
+      "category": "mcq",
+      "question_text": "باب ”Sculpture Making“ میں مؤثر کام کے لیے کون سا approach زیادہ مناسب ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "تناسب، context اور audience کو نظر انداز کرنا"
+        },
+        {
+          "id": "B",
+          "text": "کسی موجودہ کام کو لفظ بہ لفظ/عین اسی طرح نقل کرنا"
+        },
+        {
+          "id": "C",
+          "text": "ہر material اور technique کو بالکل ایک جیسا سمجھنا"
+        },
+        {
+          "id": "D",
+          "text": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا"
+        }
+      ],
+      "correct_option": "D",
+      "answer": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 4",
+      "tags": [
+        "grade10",
+        "art-model-drawing",
+        "urdu",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "sculpture making"
+      ]
+    },
+    {
+      "id": "X-ART-UR-C04-S01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Sculpture Making",
+      "topic_name": "sculpture making",
+      "category": "short",
+      "question_text": "”Sculpture Making“ کے مطالعے یا practice میں دو اہم considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں three-dimensional form, volume, balance and material awareness سے متعلق کوئی دو مناسب نکات واضح کیے جائیں اور chapter context سے ان کا تعلق بتایا جائے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 4",
+      "tags": [
+        "grade10",
+        "art-model-drawing",
+        "urdu",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "sculpture making"
+      ]
+    },
+    {
+      "id": "X-ART-UR-C04-L01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Sculpture Making",
+      "topic_name": "sculpture making",
+      "category": "long",
+      "question_text": "”Sculpture Making“ میں skill، meaning اور context کو visual decisions کے ذریعے کیسے جوڑا جا سکتا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں three-dimensional form, volume, balance and material awareness سے کم از کم تین متعلقہ پہلو، ان کا باہمی تعلق، اور technique کو purpose/context سے جوڑنے کی وضاحت شامل ہو؛ textbook عبارت یا artwork کو نقل نہ کیا جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 4",
+      "tags": [
+        "grade10",
+        "art-model-drawing",
+        "urdu",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "sculpture making"
+      ]
+    },
+    {
+      "id": "X-ART-UR-C05-M01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "History of Sculpture and Architectural Relief in Pakistan",
+      "topic_name": "sculpture and architectural relief in Pakistan",
+      "category": "mcq",
+      "question_text": "باب ”History of Sculpture and Architectural Relief in Pakistan“ میں مؤثر کام کے لیے کون سا approach زیادہ مناسب ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا"
+        },
+        {
+          "id": "B",
+          "text": "تناسب، context اور audience کو نظر انداز کرنا"
+        },
+        {
+          "id": "C",
+          "text": "کسی موجودہ کام کو لفظ بہ لفظ/عین اسی طرح نقل کرنا"
+        },
+        {
+          "id": "D",
+          "text": "ہر material اور technique کو بالکل ایک جیسا سمجھنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 5",
+      "tags": [
+        "grade10",
+        "art-model-drawing",
+        "urdu",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "sculpture and architectural relief in Pakistan"
+      ]
+    },
+    {
+      "id": "X-ART-UR-C05-S01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "History of Sculpture and Architectural Relief in Pakistan",
+      "topic_name": "sculpture and architectural relief in Pakistan",
+      "category": "short",
+      "question_text": "”History of Sculpture and Architectural Relief in Pakistan“ کے مطالعے یا practice میں دو اہم considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں form, relief, context, material and heritage سے متعلق کوئی دو مناسب نکات واضح کیے جائیں اور chapter context سے ان کا تعلق بتایا جائے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 5",
+      "tags": [
+        "grade10",
+        "art-model-drawing",
+        "urdu",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "sculpture and architectural relief in Pakistan"
+      ]
+    },
+    {
+      "id": "X-ART-UR-C05-L01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "History of Sculpture and Architectural Relief in Pakistan",
+      "topic_name": "sculpture and architectural relief in Pakistan",
+      "category": "long",
+      "question_text": "”History of Sculpture and Architectural Relief in Pakistan“ میں skill، meaning اور context کو visual decisions کے ذریعے کیسے جوڑا جا سکتا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں form, relief, context, material and heritage سے کم از کم تین متعلقہ پہلو، ان کا باہمی تعلق، اور technique کو purpose/context سے جوڑنے کی وضاحت شامل ہو؛ textbook عبارت یا artwork کو نقل نہ کیا جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 5",
+      "tags": [
+        "grade10",
+        "art-model-drawing",
+        "urdu",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "sculpture and architectural relief in Pakistan"
+      ]
+    },
+    {
+      "id": "X-ART-UR-C06-M01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "History of Pottery and Ceramics in Pakistan",
+      "topic_name": "pottery and ceramics in Pakistan",
+      "category": "mcq",
+      "question_text": "باب ”History of Pottery and Ceramics in Pakistan“ میں مؤثر کام کے لیے کون سا approach زیادہ مناسب ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ہر material اور technique کو بالکل ایک جیسا سمجھنا"
+        },
+        {
+          "id": "B",
+          "text": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا"
+        },
+        {
+          "id": "C",
+          "text": "تناسب، context اور audience کو نظر انداز کرنا"
+        },
+        {
+          "id": "D",
+          "text": "کسی موجودہ کام کو لفظ بہ لفظ/عین اسی طرح نقل کرنا"
+        }
+      ],
+      "correct_option": "B",
+      "answer": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 6",
+      "tags": [
+        "grade10",
+        "art-model-drawing",
+        "urdu",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "pottery and ceramics in Pakistan"
+      ]
+    },
+    {
+      "id": "X-ART-UR-C06-S01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "History of Pottery and Ceramics in Pakistan",
+      "topic_name": "pottery and ceramics in Pakistan",
+      "category": "short",
+      "question_text": "”History of Pottery and Ceramics in Pakistan“ کے مطالعے یا practice میں دو اہم considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں clay form, surface, function, firing awareness and heritage سے متعلق کوئی دو مناسب نکات واضح کیے جائیں اور chapter context سے ان کا تعلق بتایا جائے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 6",
+      "tags": [
+        "grade10",
+        "art-model-drawing",
+        "urdu",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "pottery and ceramics in Pakistan"
+      ]
+    },
+    {
+      "id": "X-ART-UR-C06-L01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "History of Pottery and Ceramics in Pakistan",
+      "topic_name": "pottery and ceramics in Pakistan",
+      "category": "long",
+      "question_text": "”History of Pottery and Ceramics in Pakistan“ میں skill، meaning اور context کو visual decisions کے ذریعے کیسے جوڑا جا سکتا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں clay form, surface, function, firing awareness and heritage سے کم از کم تین متعلقہ پہلو، ان کا باہمی تعلق، اور technique کو purpose/context سے جوڑنے کی وضاحت شامل ہو؛ textbook عبارت یا artwork کو نقل نہ کیا جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 6",
+      "tags": [
+        "grade10",
+        "art-model-drawing",
+        "urdu",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "pottery and ceramics in Pakistan"
+      ]
+    },
+    {
+      "id": "X-ART-UR-C07-M01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Craft of Pakistan",
+      "topic_name": "craft of Pakistan",
+      "category": "mcq",
+      "question_text": "باب ”Craft of Pakistan“ میں مؤثر کام کے لیے کون سا approach زیادہ مناسب ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "کسی موجودہ کام کو لفظ بہ لفظ/عین اسی طرح نقل کرنا"
+        },
+        {
+          "id": "B",
+          "text": "ہر material اور technique کو بالکل ایک جیسا سمجھنا"
+        },
+        {
+          "id": "C",
+          "text": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا"
+        },
+        {
+          "id": "D",
+          "text": "تناسب، context اور audience کو نظر انداز کرنا"
+        }
+      ],
+      "correct_option": "C",
+      "answer": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 7",
+      "tags": [
+        "grade10",
+        "art-model-drawing",
+        "urdu",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "craft of Pakistan"
+      ]
+    },
+    {
+      "id": "X-ART-UR-C07-S01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Craft of Pakistan",
+      "topic_name": "craft of Pakistan",
+      "category": "short",
+      "question_text": "”Craft of Pakistan“ کے مطالعے یا practice میں دو اہم considerations بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں materials, regional traditions, function, design and cultural identity سے متعلق کوئی دو مناسب نکات واضح کیے جائیں اور chapter context سے ان کا تعلق بتایا جائے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 7",
+      "tags": [
+        "grade10",
+        "art-model-drawing",
+        "urdu",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "craft of Pakistan"
+      ]
+    },
+    {
+      "id": "X-ART-UR-C07-L01",
+      "class_level": "10th",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Craft of Pakistan",
+      "topic_name": "craft of Pakistan",
+      "category": "long",
+      "question_text": "”Craft of Pakistan“ میں skill، meaning اور context کو visual decisions کے ذریعے کیسے جوڑا جا سکتا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں materials, regional traditions, function, design and cultural identity سے کم از کم تین متعلقہ پہلو، ان کا باہمی تعلق، اور technique کو purpose/context سے جوڑنے کی وضاحت شامل ہو؛ textbook عبارت یا artwork کو نقل نہ کیا جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-071 | 72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf | chapter 7",
+      "tags": [
+        "grade10",
+        "art-model-drawing",
+        "urdu",
+        "elective",
+        "internal-provisional",
+        "original-draft",
+        "craft of Pakistan"
+      ]
+    }
+  ]
+}

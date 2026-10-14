@@ -1,0 +1,817 @@
+{
+  "schemaVersion": "assps-grade910-mcq-authoring-structure-qa-v2",
+  "scope": "RESEARCH_EDITORIAL_INSPECTION_NO_INDEPENDENT_ANSWER_VERIFICATION",
+  "totalMcqs": 875,
+  "bilingualQuestions": 18,
+  "exactTextDerivedLegacyKeys": 24,
+  "optionKeyDistribution": {
+    "A": 785,
+    "C": 33,
+    "B": 50,
+    "D": 7
+  },
+  "flagCount": 0,
+  "flagSamples": [],
+  "predictablePatternFileCount": 53,
+  "filesWithPatterns": [
+    {
+      "file": "agriTech9EnglishStarter2026.json",
+      "mcqs": 10,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 10,
+          "period": 1,
+          "firstQuestionId": "IX-AGRI-TECH-ENGLISH-C01-I01",
+          "lastQuestionId": "IX-AGRI-TECH-ENGLISH-C10-I01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "agriTech9UrduStarter2026.json",
+      "mcqs": 10,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 10,
+          "period": 1,
+          "firstQuestionId": "IX-AGRI-TECH-URDU-C01-I01",
+          "lastQuestionId": "IX-AGRI-TECH-URDU-C10-I01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "art9emStarter2026.json",
+      "mcqs": 8,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 8,
+          "period": 1,
+          "firstQuestionId": "IX-ART-EN-C01-M01",
+          "lastQuestionId": "IX-ART-EN-C08-M01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "art9urStarter2026.json",
+      "mcqs": 8,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 8,
+          "period": 1,
+          "firstQuestionId": "IX-ART-UR-C01-M01",
+          "lastQuestionId": "IX-ART-UR-C08-M01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "bioTech9emStarter2026.json",
+      "mcqs": 9,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 9,
+          "period": 1,
+          "firstQuestionId": "IX-BIOLOGY-TECH-ENGLISH-C01-M01",
+          "lastQuestionId": "IX-BIOLOGY-TECH-ENGLISH-C09-M01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "bioTech9urStarter2026.json",
+      "mcqs": 9,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 9,
+          "period": 1,
+          "firstQuestionId": "IX-BIOLOGY-TECH-URDU-C01-M01",
+          "lastQuestionId": "IX-BIOLOGY-TECH-URDU-C09-M01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "biology10EnglishStarter2026.json",
+      "mcqs": 20,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 20,
+          "period": 1,
+          "firstQuestionId": "X-BIO-2026-C01-B01-M01",
+          "lastQuestionId": "X-BIO-2026-C10-B02-M01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "biology10UrduStarter2026.json",
+      "mcqs": 20,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 20,
+          "period": 1,
+          "firstQuestionId": "X-BIO-UR-C01-M01",
+          "lastQuestionId": "X-BIO-UR-C10-M02",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "biology9EnglishStarter2026.json",
+      "mcqs": 22,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 22,
+          "period": 1,
+          "firstQuestionId": "IX-BIO-2025-C01-B01-M01",
+          "lastQuestionId": "IX-BIO-2025-C11-B02-M01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "biology9UrduStarter2026.json",
+      "mcqs": 11,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 11,
+          "period": 1,
+          "firstQuestionId": "IX-BIO-UR-C01-M01",
+          "lastQuestionId": "IX-BIO-UR-C11-M01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "biologyTech10EnglishStarter2026.json",
+      "mcqs": 8,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 8,
+          "period": 1,
+          "firstQuestionId": "X-BIO-TECH-C01-M01",
+          "lastQuestionId": "X-BIO-TECH-C08-M01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "chemTech9emStarter2026.json",
+      "mcqs": 13,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 13,
+          "period": 1,
+          "firstQuestionId": "IX-CHEMISTRY-TECH-ENGLISH-C01-M01",
+          "lastQuestionId": "IX-CHEMISTRY-TECH-ENGLISH-C13-M01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "chemTech9urStarter2026.json",
+      "mcqs": 13,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 13,
+          "period": 1,
+          "firstQuestionId": "IX-CHEMISTRY-TECH-URDU-C01-M01",
+          "lastQuestionId": "IX-CHEMISTRY-TECH-URDU-C13-M01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "chemistry10Starter2026.json",
+      "mcqs": 26,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 26,
+          "period": 1,
+          "firstQuestionId": "X-CHEM-C14-M01",
+          "lastQuestionId": "X-CHEM-C26-M02",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "chemistry10UrduStarter2026.json",
+      "mcqs": 13,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 13,
+          "period": 1,
+          "firstQuestionId": "X-CHEM-UR-C14-M01",
+          "lastQuestionId": "X-CHEM-UR-C26-M01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "chemistry9Chapter10EnglishDrafts2026.json",
+      "mcqs": 10,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 10,
+          "period": 1,
+          "firstQuestionId": "IX-CHEM-2025-C10-T1-01M",
+          "lastQuestionId": "IX-CHEM-2025-C10-T5-02M",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "chemistry9Chapter11EnglishDrafts2026.json",
+      "mcqs": 8,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 8,
+          "period": 1,
+          "firstQuestionId": "IX-CHEM-2025-C11-T1-01M",
+          "lastQuestionId": "IX-CHEM-2025-C11-T4-02M",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "chemistry9Chapter13EnglishDrafts2026.json",
+      "mcqs": 10,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 10,
+          "period": 1,
+          "firstQuestionId": "IX-CHEM-2025-C13-13T1-M01",
+          "lastQuestionId": "IX-CHEM-2025-C13-13T5-M02",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "chemistry9Chapter1EnglishDrafts2026.json",
+      "mcqs": 12,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 12,
+          "period": 1,
+          "firstQuestionId": "IX-CHEM-2025-C01-T11-M01",
+          "lastQuestionId": "IX-CHEM-2025-C01-T16-M32",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "chemistry9Chapter2EnglishDrafts2026.json",
+      "mcqs": 8,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 8,
+          "period": 1,
+          "firstQuestionId": "IX-CHEM-2025-C02-T21-M01",
+          "lastQuestionId": "IX-CHEM-2025-C02-T24-M20",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "chemistry9Chapter5EnglishDrafts2026.json",
+      "mcqs": 10,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 1,
+          "length": 9,
+          "period": 4,
+          "firstQuestionId": "IX-CHEM-2025-C05-T01-M02",
+          "lastQuestionId": "IX-CHEM-2025-C05-T05-M22",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "chemistry9Chapter9EnglishDrafts2026.json",
+      "mcqs": 10,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 10,
+          "period": 1,
+          "firstQuestionId": "IX-CHEM-2025-C09-T01-M01",
+          "lastQuestionId": "IX-CHEM-2025-C09-T05-M02",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "chemistry9UrduStarter2026.json",
+      "mcqs": 13,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 13,
+          "period": 1,
+          "firstQuestionId": "IX-CHEM-UR-C01-M01",
+          "lastQuestionId": "IX-CHEM-UR-C13-M01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "communicationSkills10TechStarter2026.json",
+      "mcqs": 9,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 9,
+          "period": 1,
+          "firstQuestionId": "X-COMMS-TECH-C01-M01",
+          "lastQuestionId": "X-COMMS-TECH-C09-M01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "compEntTech9EnglishStarter2026.json",
+      "mcqs": 10,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 10,
+          "period": 1,
+          "firstQuestionId": "IX-COMPENT-TECH-ENGLISH-C01-I01",
+          "lastQuestionId": "IX-COMPENT-TECH-ENGLISH-C10-I01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "compEntTech9UrduStarter2026.json",
+      "mcqs": 10,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 10,
+          "period": 1,
+          "firstQuestionId": "IX-COMPENT-TECH-URDU-C01-I01",
+          "lastQuestionId": "IX-COMPENT-TECH-URDU-C10-I01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "computer10Starter2026.json",
+      "mcqs": 16,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 16,
+          "period": 1,
+          "firstQuestionId": "X-COMP-U01-M01",
+          "lastQuestionId": "X-COMP-U08-M02",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "computer10UrduStarter2026.json",
+      "mcqs": 16,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 16,
+          "period": 1,
+          "firstQuestionId": "X-COMP-C01-M01",
+          "lastQuestionId": "X-COMP-C08-M02",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "computer9Starter2026.json",
+      "mcqs": 24,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 24,
+          "period": 1,
+          "firstQuestionId": "IX-COMP-U01-M01",
+          "lastQuestionId": "IX-COMP-U12-M02",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "english10Starter2026.json",
+      "mcqs": 10,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 10,
+          "period": 1,
+          "firstQuestionId": "X-ENG-2026-U01-M01",
+          "lastQuestionId": "X-ENG-2026-U10-M01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "english9CompetencyOriginals2026.json",
+      "mcqs": 24,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 6,
+          "length": 10,
+          "period": 1,
+          "firstQuestionId": "IX-ENG-ORIG-20261008-M007",
+          "lastQuestionId": "IX-ENG-ORIG-20261008-M016",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "english9Starter2026.json",
+      "mcqs": 11,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 11,
+          "period": 1,
+          "firstQuestionId": "IX-ENG-2025-U01-M01",
+          "lastQuestionId": "IX-ENG-2025-U11-M01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "fashionDesigning9TechStarter2026.json",
+      "mcqs": 18,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 18,
+          "period": 1,
+          "firstQuestionId": "IX-FASH-C01-M01",
+          "lastQuestionId": "IX-FASH-C09-M02",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "generalScienceTech9EnglishStarter2026.json",
+      "mcqs": 11,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 11,
+          "period": 1,
+          "firstQuestionId": "IX-GENSCI-TECH-ENGLISH-C01-I01",
+          "lastQuestionId": "IX-GENSCI-TECH-ENGLISH-C11-I01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "generalScienceTech9UrduStarter2026.json",
+      "mcqs": 11,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 11,
+          "period": 1,
+          "firstQuestionId": "IX-GENSCI-TECH-URDU-C01-I01",
+          "lastQuestionId": "IX-GENSCI-TECH-URDU-C11-I01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "healthSciences10TechStarter2026.json",
+      "mcqs": 9,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 9,
+          "period": 1,
+          "firstQuestionId": "X-HS-TECH-C09-M01",
+          "lastQuestionId": "X-HS-TECH-C17-M01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "healthSciences9TechStarter2026.json",
+      "mcqs": 16,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 16,
+          "period": 1,
+          "firstQuestionId": "IX-HS-C01-M01",
+          "lastQuestionId": "IX-HS-C08-M02",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "home9Starter2026.json",
+      "mcqs": 8,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 8,
+          "period": 1,
+          "firstQuestionId": "HOME9-C01-M01",
+          "lastQuestionId": "HOME9-C08-M01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "ict9TechStarter2026.json",
+      "mcqs": 12,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 12,
+          "period": 1,
+          "firstQuestionId": "IX-ICT-C01-M01",
+          "lastQuestionId": "IX-ICT-C06-M02",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "islamiyat9Starter2026.json",
+      "mcqs": 14,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 14,
+          "period": 1,
+          "firstQuestionId": "IX-ISL-U01-M01",
+          "lastQuestionId": "IX-ISL-U07-M02",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "mathematics10OriginalReasoningBatch2026.json",
+      "mcqs": 12,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 8,
+          "period": 4,
+          "firstQuestionId": "X-MATH-C01-M03",
+          "lastQuestionId": "X-MATH-C08-M03",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "mathematics10Starter2026.json",
+      "mcqs": 24,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 24,
+          "period": 1,
+          "firstQuestionId": "X-MATH-C01-M01",
+          "lastQuestionId": "X-MATH-C12-M02",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "mathematics9Starter2026.json",
+      "mcqs": 26,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 26,
+          "period": 1,
+          "firstQuestionId": "IX-MATH-C01-M01",
+          "lastQuestionId": "IX-MATH-C13-M02",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "mathematics9UrduStarter2026.json",
+      "mcqs": 13,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 13,
+          "period": 1,
+          "firstQuestionId": "IX-MATH-UR-C01-M01",
+          "lastQuestionId": "IX-MATH-UR-C13-M01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "pakistanStudies10Starter2026.json",
+      "mcqs": 16,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 16,
+          "period": 1,
+          "firstQuestionId": "X-PAKS-C01-M01",
+          "lastQuestionId": "X-PAKS-C08-M02",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "pakistanStudies10UrduStarter2026.json",
+      "mcqs": 16,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 16,
+          "period": 1,
+          "firstQuestionId": "X-PAK-UR-C01-M01",
+          "lastQuestionId": "X-PAK-UR-C08-M02",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "physics10Starter2026.json",
+      "mcqs": 24,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 24,
+          "period": 1,
+          "firstQuestionId": "X-PHY-C10-M01",
+          "lastQuestionId": "X-PHY-C21-M02",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "physics9EnglishStarter2026.json",
+      "mcqs": 18,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 18,
+          "period": 1,
+          "firstQuestionId": "IX-PHY-2025-C01-M01",
+          "lastQuestionId": "IX-PHY-2025-C09-M02",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "physics9UrduStarter2026.json",
+      "mcqs": 9,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 9,
+          "period": 1,
+          "firstQuestionId": "IX-PHY-UR-C01-M01",
+          "lastQuestionId": "IX-PHY-UR-C09-M01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "physicsTech10EnglishStarter2026.json",
+      "mcqs": 10,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 10,
+          "period": 1,
+          "firstQuestionId": "X-PHY-TECH-C10-M01",
+          "lastQuestionId": "X-PHY-TECH-C19-M01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "physicsTech9DualStarter2026.json",
+      "mcqs": 32,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 32,
+          "period": 1,
+          "firstQuestionId": "IX-PHT-E-C01-M01",
+          "lastQuestionId": "IX-PHT-U-C08-M02",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "tarjuma10Starter2026.json",
+      "mcqs": 15,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 15,
+          "period": 1,
+          "firstQuestionId": "X-TTQ-C01-M01",
+          "lastQuestionId": "X-TTQ-C15-M01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    },
+    {
+      "file": "tarjuma9Starter2026.json",
+      "mcqs": 18,
+      "editorialKeyPatterns": [
+        {
+          "type": "PREDICTABLE_MCQ_KEY_SEQUENCE",
+          "startIndex": 0,
+          "length": 18,
+          "period": 1,
+          "firstQuestionId": "IX-TTQ-C01-M01",
+          "lastQuestionId": "IX-TTQ-C18-M01",
+          "note": "Editorial concern only; reordering options changes the question revision hash and requires re-review."
+        }
+      ]
+    }
+  ],
+  "originalQuestionTextsReproduced": false,
+  "autoReorderedOptions": false,
+  "academicallyApproved": 0,
+  "published": 0
+}

@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "assps-grade910-authentic-school-publication-gate-v1",
+  "auditedAsOf": "2026-10-12",
+  "originalImmutableCandidates": 2581,
+  "sourceCatalogsRequiringASSPSDecision": 56,
+  "actualAdoptedCatalogDocumentsVerified": 0,
+  "realFacultyResponsesSubmitted": 0,
+  "signedSchoolCryptographicAndEvidenceByteReceipts": 0,
+  "actuallyApprovedAcademicQuestionRevisions": 0,
+  "paperStudioAcademicallyVerifiedSelectable": 0,
+  "academicQuestionPublished": 0,
+  "deployedByThisTask": false,
+  "productionSecurityLastIndependentIssueComment": "https://github.com/HassiMian/app-assps-edu-pk/issues/4#issuecomment-6129891175",
+  "productionSecurityReportedSignedGuards": "0/77 (as of latest separately verified SaaS Core issue comment; not rechecked by Academic Master)",
+  "releaseStatus": "DENIED_AUTHENTIC_HUMAN_AND_CORE_RELEASE_EVIDENCE_MISSING",
+  "gateAllowedToPromoteDrafts": false,
+  "machineQASuccessCannotOverrideInstitutionalBlocks": true,
+  "blockers": [
+    {
+      "id": "ASSPS_ADOPTED_TEXTBOOK_EDITION_AND_MEDIUM",
+      "status": "UNVERIFIED",
+      "count": 56,
+      "owner": "Actual ASSPS academic coordinator/principal",
+      "evidenceNeeded": "Signed institution-specific 2026-27 grade, subject, medium, edition and physical chapter/page adoption record"
+    },
+    {
+      "id": "QUALIFIED_INDEPENDENT_SUBJECT_AND_URDU_REVIEW",
+      "status": "NOT_AUTHENTICATED_FOR_COMPLETE_2581_COHORT",
+      "count": 2581,
+      "owner": "Independent qualified subject and Urdu teachers",
+      "evidenceNeeded": "Question-by-question reviewed final answer/MCQ key, marks, grade, translation, source correctness and authentic revision-bound school signature"
+    },
+    {
+      "id": "ORIGINALS_HELD_OR_WITH_MISSING_METADATA",
+      "status": "OPEN",
+      "count": 1,
+      "owner": "Specialist subject teacher",
+      "evidenceNeeded": "Separately held original Chemistry review; additionally resolve 44 grade/chapter and 50 medium source claims"
+    },
+    {
+      "id": "PAPER_STUDIO_RUNTIME_VERIFIED_ONLY_ACCEPTANCE",
+      "status": "OWNER_ACCEPTANCE_NOT_INDEPENDENTLY_EVIDENCED",
+      "count": 1,
+      "owner": "Paper Studio Master",
+      "evidenceNeeded": "Tenant-scoped approved immutable revision selector, authenticated teacher Save/Open/Print and Urdu parity certification"
+    },
+    {
+      "id": "SAAS_CORE_LIVE_PRODUCTION_RLS_RELEASE_CERTIFICATE",
+      "status": "NO_GO_LAST_VERIFIED_CORE_REPORT",
+      "count": 1,
+      "owner": "SaaS Core & Production Master",
+      "evidenceNeeded": "Full 77 signed production RLS guards, no bypass role, restore roles/ACL parity, verified actual school signed roles, safe rollback, certified deploy release"
+    }
+  ],
+  "note": "A signed test fixture, empty teacher form, official web textbook link, privately computed PDF SHA, or externally unverified boolean can never create real human academic approval. Academic Master cannot certify SaaS Core live RLS."
+}

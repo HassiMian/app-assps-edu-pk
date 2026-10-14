@@ -1,0 +1,3319 @@
+{
+  "schemaVersion": "assps-tarjuma10-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-recovered-tarjuma10-current",
+  "sourcePdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+  "scope": "CURRENT_15_SURAH_CONCEPTUAL_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "X-TTQ-C01-M01",
+      "chapter": {
+        "id": "X-TTQ-C01",
+        "number": 1
+      },
+      "topicId": "توحید اور ذمہ داری",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ الانعام"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ الانعام کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+          "answer": "ہدایت اور عملی اصلاح",
+          "options": [
+            {
+              "id": "A",
+              "text": "ہدایت اور عملی اصلاح"
+            },
+            {
+              "id": "B",
+              "text": "صرف نام یاد کرنا"
+            },
+            {
+              "id": "C",
+              "text": "صرف عددی حساب"
+            },
+            {
+              "id": "D",
+              "text": "صرف جغرافیائی معلومات"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-TTQ-C01-S01",
+      "chapter": {
+        "id": "X-TTQ-C01",
+        "number": 1
+      },
+      "topicId": "توحید اور ذمہ داری",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ الانعام"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ الانعام سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+          "answer": "اللہ کی وحدانیت، حلال و حرام میں ذمہ داری اور شرک سے اجتناب کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C01-L01",
+      "chapter": {
+        "id": "X-TTQ-C01",
+        "number": 1
+      },
+      "topicId": "توحید اور ذمہ داری",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ الانعام"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ الانعام کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+          "answer": "جواب میں اللہ کی وحدانیت، حلال و حرام میں ذمہ داری اور شرک سے اجتناب کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C02-M01",
+      "chapter": {
+        "id": "X-TTQ-C02",
+        "number": 2
+      },
+      "topicId": "ہدایت اور جواب دہی",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ الاعراف"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ الاعراف کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+          "answer": "ہدایت اور عملی اصلاح",
+          "options": [
+            {
+              "id": "A",
+              "text": "ہدایت اور عملی اصلاح"
+            },
+            {
+              "id": "B",
+              "text": "صرف نام یاد کرنا"
+            },
+            {
+              "id": "C",
+              "text": "صرف عددی حساب"
+            },
+            {
+              "id": "D",
+              "text": "صرف جغرافیائی معلومات"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-TTQ-C02-S01",
+      "chapter": {
+        "id": "X-TTQ-C02",
+        "number": 2
+      },
+      "topicId": "ہدایت اور جواب دہی",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ الاعراف"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ الاعراف سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+          "answer": "انسانی اختیار، شیطان کے فتنوں سے بچاؤ اور آخرت کی جواب دہی کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C02-L01",
+      "chapter": {
+        "id": "X-TTQ-C02",
+        "number": 2
+      },
+      "topicId": "ہدایت اور جواب دہی",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ الاعراف"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ الاعراف کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+          "answer": "جواب میں انسانی اختیار، شیطان کے فتنوں سے بچاؤ اور آخرت کی جواب دہی کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C03-M01",
+      "chapter": {
+        "id": "X-TTQ-C03",
+        "number": 3
+      },
+      "topicId": "ایمان و توکل",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ یونس"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ یونس کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+          "answer": "ہدایت اور عملی اصلاح",
+          "options": [
+            {
+              "id": "A",
+              "text": "ہدایت اور عملی اصلاح"
+            },
+            {
+              "id": "B",
+              "text": "صرف نام یاد کرنا"
+            },
+            {
+              "id": "C",
+              "text": "صرف عددی حساب"
+            },
+            {
+              "id": "D",
+              "text": "صرف جغرافیائی معلومات"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-TTQ-C03-S01",
+      "chapter": {
+        "id": "X-TTQ-C03",
+        "number": 3
+      },
+      "topicId": "ایمان و توکل",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ یونس"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ یونس سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+          "answer": "اللہ پر بھروسا، رسالت کی تصدیق اور مشکل میں ثابت قدمی کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C03-L01",
+      "chapter": {
+        "id": "X-TTQ-C03",
+        "number": 3
+      },
+      "topicId": "ایمان و توکل",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ یونس"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ یونس کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+          "answer": "جواب میں اللہ پر بھروسا، رسالت کی تصدیق اور مشکل میں ثابت قدمی کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C04-M01",
+      "chapter": {
+        "id": "X-TTQ-C04",
+        "number": 4
+      },
+      "topicId": "استقامت اور انجام",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ ہود"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ ہود کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+          "answer": "ہدایت اور عملی اصلاح",
+          "options": [
+            {
+              "id": "A",
+              "text": "ہدایت اور عملی اصلاح"
+            },
+            {
+              "id": "B",
+              "text": "صرف نام یاد کرنا"
+            },
+            {
+              "id": "C",
+              "text": "صرف عددی حساب"
+            },
+            {
+              "id": "D",
+              "text": "صرف جغرافیائی معلومات"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-TTQ-C04-S01",
+      "chapter": {
+        "id": "X-TTQ-C04",
+        "number": 4
+      },
+      "topicId": "استقامت اور انجام",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ ہود"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ ہود سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+          "answer": "انبیاء کی دعوت، قوموں کے رویّے اور اعمال کے نتائج کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C04-L01",
+      "chapter": {
+        "id": "X-TTQ-C04",
+        "number": 4
+      },
+      "topicId": "استقامت اور انجام",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ ہود"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ ہود کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+          "answer": "جواب میں انبیاء کی دعوت، قوموں کے رویّے اور اعمال کے نتائج کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C05-M01",
+      "chapter": {
+        "id": "X-TTQ-C05",
+        "number": 5
+      },
+      "topicId": "قدرت اور تبدیلی",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ الرعد"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ الرعد کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+          "answer": "ہدایت اور عملی اصلاح",
+          "options": [
+            {
+              "id": "A",
+              "text": "ہدایت اور عملی اصلاح"
+            },
+            {
+              "id": "B",
+              "text": "صرف نام یاد کرنا"
+            },
+            {
+              "id": "C",
+              "text": "صرف عددی حساب"
+            },
+            {
+              "id": "D",
+              "text": "صرف جغرافیائی معلومات"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-TTQ-C05-S01",
+      "chapter": {
+        "id": "X-TTQ-C05",
+        "number": 5
+      },
+      "topicId": "قدرت اور تبدیلی",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ الرعد"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ الرعد سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+          "answer": "اللہ کی قدرت، کائناتی نشانیاں اور اچھے عمل سے تبدیلی کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C05-L01",
+      "chapter": {
+        "id": "X-TTQ-C05",
+        "number": 5
+      },
+      "topicId": "قدرت اور تبدیلی",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ الرعد"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ الرعد کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+          "answer": "جواب میں اللہ کی قدرت، کائناتی نشانیاں اور اچھے عمل سے تبدیلی کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C06-M01",
+      "chapter": {
+        "id": "X-TTQ-C06",
+        "number": 6
+      },
+      "topicId": "شکر اور دعا",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ ابراہیم"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ ابراہیم کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+          "answer": "ہدایت اور عملی اصلاح",
+          "options": [
+            {
+              "id": "A",
+              "text": "ہدایت اور عملی اصلاح"
+            },
+            {
+              "id": "B",
+              "text": "صرف نام یاد کرنا"
+            },
+            {
+              "id": "C",
+              "text": "صرف عددی حساب"
+            },
+            {
+              "id": "D",
+              "text": "صرف جغرافیائی معلومات"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-TTQ-C06-S01",
+      "chapter": {
+        "id": "X-TTQ-C06",
+        "number": 6
+      },
+      "topicId": "شکر اور دعا",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ ابراہیم"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ ابراہیم سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+          "answer": "نعمتوں پر شکر، دعا اور حق پر استقامت کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C06-L01",
+      "chapter": {
+        "id": "X-TTQ-C06",
+        "number": 6
+      },
+      "topicId": "شکر اور دعا",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ ابراہیم"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ ابراہیم کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+          "answer": "جواب میں نعمتوں پر شکر، دعا اور حق پر استقامت کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C07-M01",
+      "chapter": {
+        "id": "X-TTQ-C07",
+        "number": 7
+      },
+      "topicId": "حفاظت وحی",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ الحجر"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ الحجر کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+          "answer": "ہدایت اور عملی اصلاح",
+          "options": [
+            {
+              "id": "A",
+              "text": "ہدایت اور عملی اصلاح"
+            },
+            {
+              "id": "B",
+              "text": "صرف نام یاد کرنا"
+            },
+            {
+              "id": "C",
+              "text": "صرف عددی حساب"
+            },
+            {
+              "id": "D",
+              "text": "صرف جغرافیائی معلومات"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-TTQ-C07-S01",
+      "chapter": {
+        "id": "X-TTQ-C07",
+        "number": 7
+      },
+      "topicId": "حفاظت وحی",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ الحجر"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ الحجر سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+          "answer": "اللہ کی قدرت، وحی کی حفاظت اور تکبر سے اجتناب کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C07-L01",
+      "chapter": {
+        "id": "X-TTQ-C07",
+        "number": 7
+      },
+      "topicId": "حفاظت وحی",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ الحجر"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ الحجر کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+          "answer": "جواب میں اللہ کی قدرت، وحی کی حفاظت اور تکبر سے اجتناب کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C08-M01",
+      "chapter": {
+        "id": "X-TTQ-C08",
+        "number": 8
+      },
+      "topicId": "نعمت اور عدل",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ النحل"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ النحل کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+          "answer": "ہدایت اور عملی اصلاح",
+          "options": [
+            {
+              "id": "A",
+              "text": "ہدایت اور عملی اصلاح"
+            },
+            {
+              "id": "B",
+              "text": "صرف نام یاد کرنا"
+            },
+            {
+              "id": "C",
+              "text": "صرف عددی حساب"
+            },
+            {
+              "id": "D",
+              "text": "صرف جغرافیائی معلومات"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-TTQ-C08-S01",
+      "chapter": {
+        "id": "X-TTQ-C08",
+        "number": 8
+      },
+      "topicId": "نعمت اور عدل",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ النحل"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ النحل سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+          "answer": "نعمتوں کی پہچان، عدل، احسان اور ذمہ دارانہ زندگی کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C08-L01",
+      "chapter": {
+        "id": "X-TTQ-C08",
+        "number": 8
+      },
+      "topicId": "نعمت اور عدل",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ النحل"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ النحل کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+          "answer": "جواب میں نعمتوں کی پہچان، عدل، احسان اور ذمہ دارانہ زندگی کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C09-M01",
+      "chapter": {
+        "id": "X-TTQ-C09",
+        "number": 9
+      },
+      "topicId": "والدین اور اخلاق",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ بنی اسرائیل"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ بنی اسرائیل کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+          "answer": "ہدایت اور عملی اصلاح",
+          "options": [
+            {
+              "id": "A",
+              "text": "ہدایت اور عملی اصلاح"
+            },
+            {
+              "id": "B",
+              "text": "صرف نام یاد کرنا"
+            },
+            {
+              "id": "C",
+              "text": "صرف عددی حساب"
+            },
+            {
+              "id": "D",
+              "text": "صرف جغرافیائی معلومات"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-TTQ-C09-S01",
+      "chapter": {
+        "id": "X-TTQ-C09",
+        "number": 9
+      },
+      "topicId": "والدین اور اخلاق",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ بنی اسرائیل"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ بنی اسرائیل سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+          "answer": "والدین کے حقوق، اعتدال، وعدہ، عدل اور پاکیزہ معاشرت کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C09-L01",
+      "chapter": {
+        "id": "X-TTQ-C09",
+        "number": 9
+      },
+      "topicId": "والدین اور اخلاق",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ بنی اسرائیل"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ بنی اسرائیل کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+          "answer": "جواب میں والدین کے حقوق، اعتدال، وعدہ، عدل اور پاکیزہ معاشرت کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C10-M01",
+      "chapter": {
+        "id": "X-TTQ-C10",
+        "number": 10
+      },
+      "topicId": "ایمان کی آزمائش",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ الکہف"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ الکہف کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+          "answer": "ہدایت اور عملی اصلاح",
+          "options": [
+            {
+              "id": "A",
+              "text": "ہدایت اور عملی اصلاح"
+            },
+            {
+              "id": "B",
+              "text": "صرف نام یاد کرنا"
+            },
+            {
+              "id": "C",
+              "text": "صرف عددی حساب"
+            },
+            {
+              "id": "D",
+              "text": "صرف جغرافیائی معلومات"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-TTQ-C10-S01",
+      "chapter": {
+        "id": "X-TTQ-C10",
+        "number": 10
+      },
+      "topicId": "ایمان کی آزمائش",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ الکہف"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ الکہف سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+          "answer": "ایمان، آزمائش، علم اور دنیاوی ظواہر کے پیچھے حکمت کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C10-L01",
+      "chapter": {
+        "id": "X-TTQ-C10",
+        "number": 10
+      },
+      "topicId": "ایمان کی آزمائش",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ الکہف"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ الکہف کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+          "answer": "جواب میں ایمان، آزمائش، علم اور دنیاوی ظواہر کے پیچھے حکمت کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C11-M01",
+      "chapter": {
+        "id": "X-TTQ-C11",
+        "number": 11
+      },
+      "topicId": "اہل ایمان کی صفات",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ المؤمنون"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ المؤمنون کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+          "answer": "ہدایت اور عملی اصلاح",
+          "options": [
+            {
+              "id": "A",
+              "text": "ہدایت اور عملی اصلاح"
+            },
+            {
+              "id": "B",
+              "text": "صرف نام یاد کرنا"
+            },
+            {
+              "id": "C",
+              "text": "صرف عددی حساب"
+            },
+            {
+              "id": "D",
+              "text": "صرف جغرافیائی معلومات"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-TTQ-C11-S01",
+      "chapter": {
+        "id": "X-TTQ-C11",
+        "number": 11
+      },
+      "topicId": "اہل ایمان کی صفات",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ المؤمنون"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ المؤمنون سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+          "answer": "نماز، امانت، پاکدامنی، ذمہ داری اور آخرت کا یقین کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C11-L01",
+      "chapter": {
+        "id": "X-TTQ-C11",
+        "number": 11
+      },
+      "topicId": "اہل ایمان کی صفات",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ المؤمنون"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ المؤمنون کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+          "answer": "جواب میں نماز، امانت، پاکدامنی، ذمہ داری اور آخرت کا یقین کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C12-M01",
+      "chapter": {
+        "id": "X-TTQ-C12",
+        "number": 12
+      },
+      "topicId": "اخلاص اور رجوع",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ الزمر"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ الزمر کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+          "answer": "ہدایت اور عملی اصلاح",
+          "options": [
+            {
+              "id": "A",
+              "text": "ہدایت اور عملی اصلاح"
+            },
+            {
+              "id": "B",
+              "text": "صرف نام یاد کرنا"
+            },
+            {
+              "id": "C",
+              "text": "صرف عددی حساب"
+            },
+            {
+              "id": "D",
+              "text": "صرف جغرافیائی معلومات"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-TTQ-C12-S01",
+      "chapter": {
+        "id": "X-TTQ-C12",
+        "number": 12
+      },
+      "topicId": "اخلاص اور رجوع",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ الزمر"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ الزمر سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+          "answer": "خالص بندگی، امید، توبہ اور اللہ کی طرف رجوع کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C12-L01",
+      "chapter": {
+        "id": "X-TTQ-C12",
+        "number": 12
+      },
+      "topicId": "اخلاص اور رجوع",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ الزمر"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ الزمر کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+          "answer": "جواب میں خالص بندگی، امید، توبہ اور اللہ کی طرف رجوع کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C13-M01",
+      "chapter": {
+        "id": "X-TTQ-C13",
+        "number": 13
+      },
+      "topicId": "دعوت اور مغفرت",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ المؤمن/غافر"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ المؤمن/غافر کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+          "answer": "ہدایت اور عملی اصلاح",
+          "options": [
+            {
+              "id": "A",
+              "text": "ہدایت اور عملی اصلاح"
+            },
+            {
+              "id": "B",
+              "text": "صرف نام یاد کرنا"
+            },
+            {
+              "id": "C",
+              "text": "صرف عددی حساب"
+            },
+            {
+              "id": "D",
+              "text": "صرف جغرافیائی معلومات"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-TTQ-C13-S01",
+      "chapter": {
+        "id": "X-TTQ-C13",
+        "number": 13
+      },
+      "topicId": "دعوت اور مغفرت",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ المؤمن/غافر"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ المؤمن/غافر سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+          "answer": "توحید کی دعوت، دعا، صبر اور مغفرت کی امید کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C13-L01",
+      "chapter": {
+        "id": "X-TTQ-C13",
+        "number": 13
+      },
+      "topicId": "دعوت اور مغفرت",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ المؤمن/غافر"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ المؤمن/غافر کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+          "answer": "جواب میں توحید کی دعوت، دعا، صبر اور مغفرت کی امید کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C14-M01",
+      "chapter": {
+        "id": "X-TTQ-C14",
+        "number": 14
+      },
+      "topicId": "واضح آیات اور کردار",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ حم السجدہ/فصلت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ حم السجدہ/فصلت کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+          "answer": "ہدایت اور عملی اصلاح",
+          "options": [
+            {
+              "id": "A",
+              "text": "ہدایت اور عملی اصلاح"
+            },
+            {
+              "id": "B",
+              "text": "صرف نام یاد کرنا"
+            },
+            {
+              "id": "C",
+              "text": "صرف عددی حساب"
+            },
+            {
+              "id": "D",
+              "text": "صرف جغرافیائی معلومات"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-TTQ-C14-S01",
+      "chapter": {
+        "id": "X-TTQ-C14",
+        "number": 14
+      },
+      "topicId": "واضح آیات اور کردار",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ حم السجدہ/فصلت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ حم السجدہ/فصلت سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+          "answer": "وحی کی وضاحت، حق کی قبولیت اور نیک کردار کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C14-L01",
+      "chapter": {
+        "id": "X-TTQ-C14",
+        "number": 14
+      },
+      "topicId": "واضح آیات اور کردار",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ حم السجدہ/فصلت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ حم السجدہ/فصلت کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+          "answer": "جواب میں وحی کی وضاحت، حق کی قبولیت اور نیک کردار کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C15-M01",
+      "chapter": {
+        "id": "X-TTQ-C15",
+        "number": 15
+      },
+      "topicId": "مشاورت اور اجتماعی اخلاق",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ الشوریٰ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ الشوریٰ کے مطالعے کا بنیادی تعلیمی مقصد کیا ہونا چاہیے؟",
+          "answer": "ہدایت اور عملی اصلاح",
+          "options": [
+            {
+              "id": "A",
+              "text": "ہدایت اور عملی اصلاح"
+            },
+            {
+              "id": "B",
+              "text": "صرف نام یاد کرنا"
+            },
+            {
+              "id": "C",
+              "text": "صرف عددی حساب"
+            },
+            {
+              "id": "D",
+              "text": "صرف جغرافیائی معلومات"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-TTQ-C15-S01",
+      "chapter": {
+        "id": "X-TTQ-C15",
+        "number": 15
+      },
+      "topicId": "مشاورت اور اجتماعی اخلاق",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ الشوریٰ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ الشوریٰ سے متعلق ایک بنیادی ایمانی یا اخلاقی سبق بیان کریں۔",
+          "answer": "مشاورت، معافی، اعتدال، عدل اور اجتماعی ذمہ داری کے بارے میں فہم پیدا کرنا اور اسے عملی زندگی سے جوڑنا اہم سبق ہے۔"
+        }
+      }
+    },
+    {
+      "id": "X-TTQ-C15-L01",
+      "chapter": {
+        "id": "X-TTQ-C15",
+        "number": 15
+      },
+      "topicId": "مشاورت اور اجتماعی اخلاق",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-tarjuma10-current",
+        "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_SURAH_SEQUENCE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سورۃ الشوریٰ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "tarjuma-tul-quran",
+        "edition": "CONTINUING_CURRENT",
+        "textbookId": "PECTAA-X-TARJUMA-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original conceptual Tarjuma-tul-Quran X starter. No Quranic verse or textbook translation is reproduced. Exact ayah-range and scholarly review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "current-prescribed-surahs",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "سورۃ الشوریٰ کے مرکزی پیغام کو روزمرہ فردی اور معاشرتی زندگی سے مربوط کر کے بیان کریں۔",
+          "answer": "جواب میں مشاورت، معافی، اعتدال، عدل اور اجتماعی ذمہ داری کی وضاحت، فرد کی ذمہ داری، معاشرتی اثر اور ایک مناسب عملی مثال شامل ہونی چاہیے۔"
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 45,
+    "mcq": 15,
+    "short": 15,
+    "long": 15,
+    "chapters": 15
+  }
+}

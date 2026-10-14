@@ -1,0 +1,97 @@
+'use strict'
+const test=require('node:test'),assert=require('node:assert/strict')
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto')
+const {build,markdown,ANSWERS,ORIGINAL_SHA}=require('../qbank/author-physics9-eleven-long-answers.cjs')
+const ROOT=path.resolve(__dirname,'../..')
+const INPUT=path.join(ROOT,'al-siddique-frontend/src/Modules/Paper-Generator/seed-data/grade9-10-staging/physics9EnglishStarter2026.json')
+const bytes=fs.readFileSync(INPUT),source=JSON.parse(bytes)
+const registry=JSON.parse(fs.readFileSync(path.join(ROOT,'al-siddique-backend/src/data/verifiedGrade910SourceRegistry.json')))
+const sha=b=>crypto.createHash('sha256').update(b).digest('hex')
+const run=(b=bytes,s=source,r=registry)=>build({bytes:b,source:s,registry:r})
+test('real original Physics IX corpus produces exactly 11/11 separate 5-mark long-answer drafts',()=>{
+ const d=run()
+ assert.equal(sha(bytes),ORIGINAL_SHA)
+ assert.equal(d.originalResearchQuestionCount,54)
+ assert.equal(d.originalLongRubricOnlyCount,11)
+ assert.equal(d.newSeparateAnswerDrafts,11)
+ assert.equal(d.newSeparateMarkingCriteria,55)
+ assert.deepEqual(d.items.map(q=>q.questionId),source.drafts.filter(q=>q.type==='long').map(q=>q.id))
+ assert.equal(new Set(d.items.map(q=>q.questionId)).size,11)
+ assert.equal(d.academicApproved,0);assert.equal(d.academicallyPublished,0)
+})
+test('all 11 explanations are original non-rubric prose with separate complete marking points and immutable original fingerprints',()=>{
+ const d=run()
+ const byId=new Map(source.drafts.map(q=>[q.id,q]))
+ assert.equal(Object.keys(ANSWERS).length,11)
+ for(const item of d.items){
+  const q=byId.get(item.questionId)
+  assert.ok(q)
+  assert.equal(item.chapterNo,q.chapter.number)
+  assert.equal(item.topicId,q.topicId)
+  assert.equal(item.marks,5)
+  assert.ok(item.proposedEnglishModelAnswer.length>=180)
+  assert.notEqual(item.proposedEnglishModelAnswer,q.content.en.answer)
+  assert.ok(!/^\s*(award|credit)\s+marks?/i.test(item.proposedEnglishModelAnswer))
+  assert.equal(item.proposedSeparateMarkingPoints.length,5)
+  assert.equal(new Set(item.proposedSeparateMarkingPoints).size,5)
+  assert.equal(item.originalQuestionSha256,sha(JSON.stringify(q)))
+  assert.equal(item.originalAnswerSha256,sha(q.content.en.answer))
+  assert.equal(item.originalSourceFileSha256,ORIGINAL_SHA)
+  assert.equal(item.independentReviewerId,null)
+  assert.equal(item.approvedQuestionRevisionId,null)
+  assert.equal(item.teacherScientificAnswerVerified,false)
+  assert.equal(item.schoolEditionAndPhysicalPageVerified,false)
+  assert.equal(item.independentEnglishUrduEquivalenceReviewed,false)
+  assert.equal(item.academicallyApproved,false)
+  assert.equal(item.published,false)
+ }
+})
+test('key motion concepts correctly distinguish velocity-time signed area and Newton third law forces on different bodies',()=>{
+ const d=run(),map=new Map(d.items.map(q=>[q.questionId,q.proposedEnglishModelAnswer]))
+ assert.match(map.get('IX-PHY-2025-C02-L01'),/signed area/i)
+ assert.match(map.get('IX-PHY-2025-C02-L01'),/acceleration/i)
+ assert.match(map.get('IX-PHY-2025-C03-L01'),/different objects/i)
+ assert.match(map.get('IX-PHY-2025-C05-L01'),/air resistance/i)
+ assert.match(map.get('IX-PHY-2025-C06-L01'),/energy is created/)
+})
+test('synthetically changed original long answer and unrelated original MCQ both invalidate full source snapshot',()=>{
+ for(const id of ['IX-PHY-2025-C02-L01','IX-PHY-2025-C01-M01']){
+  const changed=structuredClone(source)
+  const q=changed.drafts.find(q=>q.id===id)
+  assert.ok(q,id)
+  q.content.en.answer='A changed answer that has not been reviewed'
+  assert.throws(()=>run(Buffer.from(JSON.stringify(changed)),changed),/PHY9_SOURCE_SNAPSHOT_CHANGED/)
+ }
+})
+test('forged in-memory source cannot reuse pinned original bytes',()=>{
+ const changed=structuredClone(source)
+ changed.drafts[0].content.en.answer='Changed without changing file bytes'
+ assert.throws(()=>run(bytes,changed),/PHY9_SOURCE_SNAPSHOT_CHANGED/)
+})
+test('wrong canonical textbook PDF identity prevents a misleading reviewer packet',()=>{
+ const changed=structuredClone(registry)
+ changed.entries.find(x=>x.recordId===source.sourceRecordId).pdfSha256='0'.repeat(64)
+ assert.throws(()=>run(bytes,source,changed),/PHY9_SOURCE_CATALOG_DRIFT/)
+})
+test('missing Grade IX original source registry entry fails closed',()=>{
+ const changed=structuredClone(registry)
+ changed.entries=changed.entries.filter(x=>x.recordId!==source.sourceRecordId)
+ assert.throws(()=>run(bytes,source,changed),/PHY9_SOURCE_CATALOG_DRIFT/)
+})
+test('no independent approval is invented by answer-generation metadata and readable faculty packet',()=>{
+ const d=run(),text=markdown(d)
+ assert.match(text,/Independent verified 0/)
+ assert.match(text,/production HOLD/)
+ assert.ok(d.items.every(x=>x.originalQuestionAnswerUnmodified&&
+    x.status==='AUTHOR_DRAFT_AWAITING_INDEPENDENT_PHYSICS_IX_REVIEW'&&
+    !x.academicallyApproved&&!x.published))
+ assert.equal(d.qualifiedScientificHumanReviewed,0)
+})
+test('all 11 source question IDs maintain exact original corpus and no additional published question identifiers',()=>{
+ const d=run()
+ const originalLong=new Set(source.drafts.filter(q=>q.type==='long').map(x=>x.id))
+ assert.equal(originalLong.size,11)
+ assert.ok(d.items.every(x=>originalLong.has(x.questionId)))
+ assert.equal(d.originalResearchQuestionCount,54)
+ assert.equal(d.newSeparateAnswerDrafts,11)
+})

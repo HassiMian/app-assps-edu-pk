@@ -1,0 +1,1994 @@
+{
+  "schemaVersion": "assps-chemistry9-mcq-ch10-ch13-editorial-rev2-v1",
+  "scope": "20_ORIGINAL_MCQS_OPTION_REORDER_CANDIDATES_HUMAN_ANSWER_REVIEW_PENDING",
+  "originalFiles": [
+    {
+      "file": "chemistry9Chapter10EnglishDrafts2026.json",
+      "fileSha256": "c61a997c4da221578b2e3a0c38ac2c02aeab7d72a615be97ccd6250f10a52655",
+      "sourceRecordId": "pectaa-catalog-007",
+      "questionCount": 30,
+      "mcqCount": 10,
+      "chapter": 10
+    },
+    {
+      "file": "chemistry9Chapter13EnglishDrafts2026.json",
+      "fileSha256": "c328c074b6caa9632712fa3007a7e457eac87a62e9bd5085114f35842463dc69",
+      "sourceRecordId": "pectaa-catalog-007",
+      "questionCount": 25,
+      "mcqCount": 10,
+      "chapter": 13
+    }
+  ],
+  "originalUniqueIdsPreserved": true,
+  "newQuestionCount": 0,
+  "editedExistingQuestionCount": 20,
+  "grade": 9,
+  "subject": "chemistry",
+  "medium": "english",
+  "chapters": [
+    10,
+    13
+  ],
+  "academicSourcePageVerified": false,
+  "schoolAdoptedEditionCertified": false,
+  "independentlyReviewed": false,
+  "approved": false,
+  "published": false,
+  "releaseEligible": false,
+  "liveImportAllowed": false,
+  "originalKeyDistribution": {
+    "A": 20,
+    "B": 0,
+    "C": 0,
+    "D": 0
+  },
+  "proposedKeyDistribution": {
+    "A": 5,
+    "B": 5,
+    "C": 5,
+    "D": 5
+  },
+  "originalOptionsPreserved": true,
+  "questions": [
+    {
+      "id": "IX-CHEM-2025-C10-T1-01M",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C10",
+        "number": 10
+      },
+      "topicId": "10.1",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 135,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Composition of Atmosphere"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in rendered current textbook source. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Which gas makes up the largest fraction of dry air?",
+          "answer": "Nitrogen",
+          "options": [
+            {
+              "id": "A",
+              "text": "Oxygen"
+            },
+            {
+              "id": "B",
+              "text": "Carbon dioxide"
+            },
+            {
+              "id": "C",
+              "text": "Hydrogen"
+            },
+            {
+              "id": "D",
+              "text": "Nitrogen"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "D",
+      "editorialCandidate": {
+        "revision": 2,
+        "sourceQuestionSha256": "8705662f5306b2aa1d70bd46cddfebbf67ac68350ec3957a3a4a9146813c77b1",
+        "reason": "CORRECT_OPTION_POSITION_DISTRIBUTION_REVIEW",
+        "independentAnswerReviewRequired": true,
+        "sourcePageReviewRequired": true,
+        "schoolAdoptionVerified": false,
+        "academicApproval": false,
+        "publicationAllowed": false,
+        "liveImportAllowed": false
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C10-T1-02M",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C10",
+        "number": 10
+      },
+      "topicId": "10.1",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 135,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Composition of Atmosphere"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in rendered current textbook source. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Which atmospheric gas is directly used by green plants in photosynthesis?",
+          "answer": "Carbon dioxide",
+          "options": [
+            {
+              "id": "A",
+              "text": "Argon"
+            },
+            {
+              "id": "B",
+              "text": "Carbon dioxide"
+            },
+            {
+              "id": "C",
+              "text": "Neon"
+            },
+            {
+              "id": "D",
+              "text": "Helium"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "B",
+      "editorialCandidate": {
+        "revision": 2,
+        "sourceQuestionSha256": "00c4a8088f2b0ad983fecaf11dda7acfa2b8ca15bc988338625f2401cd97819c",
+        "reason": "CORRECT_OPTION_POSITION_DISTRIBUTION_REVIEW",
+        "independentAnswerReviewRequired": true,
+        "sourcePageReviewRequired": true,
+        "schoolAdoptionVerified": false,
+        "academicApproval": false,
+        "publicationAllowed": false,
+        "liveImportAllowed": false
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C10-T2-01M",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C10",
+        "number": 10
+      },
+      "topicId": "10.2",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 135,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Air Pollutants"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in rendered current textbook source. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Which term describes tiny solid or liquid particles suspended in air?",
+          "answer": "Particulate matter",
+          "options": [
+            {
+              "id": "A",
+              "text": "Distilled water"
+            },
+            {
+              "id": "B",
+              "text": "Alkali"
+            },
+            {
+              "id": "C",
+              "text": "Particulate matter"
+            },
+            {
+              "id": "D",
+              "text": "Noble gas"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "C",
+      "editorialCandidate": {
+        "revision": 2,
+        "sourceQuestionSha256": "57746741247649020fdd5d2173770c10a7c473ec14e80a4cf279ac5d729a8641",
+        "reason": "CORRECT_OPTION_POSITION_DISTRIBUTION_REVIEW",
+        "independentAnswerReviewRequired": true,
+        "sourcePageReviewRequired": true,
+        "schoolAdoptionVerified": false,
+        "academicApproval": false,
+        "publicationAllowed": false,
+        "liveImportAllowed": false
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C10-T2-02M",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C10",
+        "number": 10
+      },
+      "topicId": "10.2",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 135,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Air Pollutants"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in rendered current textbook source. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Incomplete combustion can increase emission of which harmful gas?",
+          "answer": "Carbon monoxide",
+          "options": [
+            {
+              "id": "A",
+              "text": "Carbon monoxide"
+            },
+            {
+              "id": "B",
+              "text": "Oxygen"
+            },
+            {
+              "id": "C",
+              "text": "Helium"
+            },
+            {
+              "id": "D",
+              "text": "Argon"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A",
+      "editorialCandidate": {
+        "revision": 2,
+        "sourceQuestionSha256": "7a5ec2f18056db82338c272ddac3dfcf59e576aa46f05a7c1cc9f74e6ac05c62",
+        "reason": "CORRECT_OPTION_POSITION_DISTRIBUTION_REVIEW",
+        "independentAnswerReviewRequired": true,
+        "sourcePageReviewRequired": true,
+        "schoolAdoptionVerified": false,
+        "academicApproval": false,
+        "publicationAllowed": false,
+        "liveImportAllowed": false
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C10-T3-01M",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C10",
+        "number": 10
+      },
+      "topicId": "10.3",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 138,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Acid Rain"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in rendered current textbook source. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Acid rain forms when certain pollutant gases react in the atmosphere to produce what?",
+          "answer": "Acidic substances",
+          "options": [
+            {
+              "id": "A",
+              "text": "Metal atoms"
+            },
+            {
+              "id": "B",
+              "text": "Acidic substances"
+            },
+            {
+              "id": "C",
+              "text": "Only oxygen"
+            },
+            {
+              "id": "D",
+              "text": "Pure nitrogen"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "B",
+      "editorialCandidate": {
+        "revision": 2,
+        "sourceQuestionSha256": "7cd135714af838efe1097abff230bcefd67b559bc2604a606602fc200d8b590b",
+        "reason": "CORRECT_OPTION_POSITION_DISTRIBUTION_REVIEW",
+        "independentAnswerReviewRequired": true,
+        "sourcePageReviewRequired": true,
+        "schoolAdoptionVerified": false,
+        "academicApproval": false,
+        "publicationAllowed": false,
+        "liveImportAllowed": false
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C10-T3-02M",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C10",
+        "number": 10
+      },
+      "topicId": "10.3",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 138,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Acid Rain"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in rendered current textbook source. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Reducing sulfur-containing fuel emissions would most directly help reduce which problem?",
+          "answer": "Acid rain",
+          "options": [
+            {
+              "id": "A",
+              "text": "Noble-gas formation"
+            },
+            {
+              "id": "B",
+              "text": "Water electrolysis"
+            },
+            {
+              "id": "C",
+              "text": "Atomic number"
+            },
+            {
+              "id": "D",
+              "text": "Acid rain"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "D",
+      "editorialCandidate": {
+        "revision": 2,
+        "sourceQuestionSha256": "fc6d2f5785efac77f082e9f0a8be3d223f4df4794622da46b9e62d7c8c90083d",
+        "reason": "CORRECT_OPTION_POSITION_DISTRIBUTION_REVIEW",
+        "independentAnswerReviewRequired": true,
+        "sourcePageReviewRequired": true,
+        "schoolAdoptionVerified": false,
+        "academicApproval": false,
+        "publicationAllowed": false,
+        "liveImportAllowed": false
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C10-T4-01M",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C10",
+        "number": 10
+      },
+      "topicId": "10.4",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 140,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Global Warming (Greenhouse Effect)"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in rendered current textbook source. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Which process warms Earth when certain atmospheric gases absorb and re-emit infrared radiation?",
+          "answer": "Greenhouse effect",
+          "options": [
+            {
+              "id": "A",
+              "text": "Greenhouse effect"
+            },
+            {
+              "id": "B",
+              "text": "Neutralization"
+            },
+            {
+              "id": "C",
+              "text": "Electrolysis"
+            },
+            {
+              "id": "D",
+              "text": "Sublimation"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A",
+      "editorialCandidate": {
+        "revision": 2,
+        "sourceQuestionSha256": "77f08acac40283e95fb1d84dc79c596ebbbe27bb419e7c219ea0a833bdc37a44",
+        "reason": "CORRECT_OPTION_POSITION_DISTRIBUTION_REVIEW",
+        "independentAnswerReviewRequired": true,
+        "sourcePageReviewRequired": true,
+        "schoolAdoptionVerified": false,
+        "academicApproval": false,
+        "publicationAllowed": false,
+        "liveImportAllowed": false
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C10-T4-02M",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C10",
+        "number": 10
+      },
+      "topicId": "10.4",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 140,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Global Warming (Greenhouse Effect)"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in rendered current textbook source. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Which human activity can increase atmospheric carbon dioxide?",
+          "answer": "Burning fossil fuels",
+          "options": [
+            {
+              "id": "A",
+              "text": "Freezing pure water"
+            },
+            {
+              "id": "B",
+              "text": "Filtering sand"
+            },
+            {
+              "id": "C",
+              "text": "Burning fossil fuels"
+            },
+            {
+              "id": "D",
+              "text": "Using noble gases"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "C",
+      "editorialCandidate": {
+        "revision": 2,
+        "sourceQuestionSha256": "8393ac0610bb32db71f6cf0bcf277f01a63bd96766e7535733747df7b3a3669e",
+        "reason": "CORRECT_OPTION_POSITION_DISTRIBUTION_REVIEW",
+        "independentAnswerReviewRequired": true,
+        "sourcePageReviewRequired": true,
+        "schoolAdoptionVerified": false,
+        "academicApproval": false,
+        "publicationAllowed": false,
+        "liveImportAllowed": false
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C10-T5-01M",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C10",
+        "number": 10
+      },
+      "topicId": "10.5",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 143,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Strategies to Reduce Environmental Issues"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in rendered current textbook source. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "What is a main purpose of a catalytic converter in vehicle exhaust?",
+          "answer": "Reduce harmful exhaust pollutants",
+          "options": [
+            {
+              "id": "A",
+              "text": "Increase fuel sulfur"
+            },
+            {
+              "id": "B",
+              "text": "Produce lead particles"
+            },
+            {
+              "id": "C",
+              "text": "Stop all gas flow"
+            },
+            {
+              "id": "D",
+              "text": "Reduce harmful exhaust pollutants"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "D",
+      "editorialCandidate": {
+        "revision": 2,
+        "sourceQuestionSha256": "bfd5f257f743dc6fd27a7869a93608b597a739cb188747d245b3f6a8cc695584",
+        "reason": "CORRECT_OPTION_POSITION_DISTRIBUTION_REVIEW",
+        "independentAnswerReviewRequired": true,
+        "sourcePageReviewRequired": true,
+        "schoolAdoptionVerified": false,
+        "academicApproval": false,
+        "publicationAllowed": false,
+        "liveImportAllowed": false
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C10-T5-02M",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C10",
+        "number": 10
+      },
+      "topicId": "10.5",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 143,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Strategies to Reduce Environmental Issues"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in rendered current textbook source. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Replacing some fossil-fuel electricity with renewable energy can directly reduce what?",
+          "answer": "Combustion-related emissions",
+          "options": [
+            {
+              "id": "A",
+              "text": "Water molecules"
+            },
+            {
+              "id": "B",
+              "text": "Combustion-related emissions"
+            },
+            {
+              "id": "C",
+              "text": "Atomic numbers"
+            },
+            {
+              "id": "D",
+              "text": "Noble-gas stability"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "B",
+      "editorialCandidate": {
+        "revision": 2,
+        "sourceQuestionSha256": "cd4c731f316b011cefcdf3816cdb8d0e2b66fef42deb8d71714dfda8a1329313",
+        "reason": "CORRECT_OPTION_POSITION_DISTRIBUTION_REVIEW",
+        "independentAnswerReviewRequired": true,
+        "sourcePageReviewRequired": true,
+        "schoolAdoptionVerified": false,
+        "academicApproval": false,
+        "publicationAllowed": false,
+        "liveImportAllowed": false
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C13-13T1-M01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C13",
+        "number": 13
+      },
+      "topicId": "13.1",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 171,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Chemical Hazards in the Laboratory"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "What should be done first before using an unfamiliar laboratory chemical?",
+          "answer": "Read its hazard information and instructions",
+          "options": [
+            {
+              "id": "A",
+              "text": "Smell it directly"
+            },
+            {
+              "id": "B",
+              "text": "Mix it with water automatically"
+            },
+            {
+              "id": "C",
+              "text": "Transfer it to an unlabelled container"
+            },
+            {
+              "id": "D",
+              "text": "Read its hazard information and instructions"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 13. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "correctOptionId": "D",
+      "editorialCandidate": {
+        "revision": 2,
+        "sourceQuestionSha256": "b927fece89ff61ce13a7e3ff09a969348c31340eba2c7a017d02b20b7d71fa6e",
+        "reason": "CORRECT_OPTION_POSITION_DISTRIBUTION_REVIEW",
+        "independentAnswerReviewRequired": true,
+        "sourcePageReviewRequired": true,
+        "schoolAdoptionVerified": false,
+        "academicApproval": false,
+        "publicationAllowed": false,
+        "liveImportAllowed": false
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C13-13T1-M02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C13",
+        "number": 13
+      },
+      "topicId": "13.1",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 172,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Chemical Hazards in the Laboratory"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Why must chemical containers remain clearly labelled?",
+          "answer": "To identify contents and hazards",
+          "options": [
+            {
+              "id": "A",
+              "text": "To remove the need for PPE"
+            },
+            {
+              "id": "B",
+              "text": "To guarantee the chemical is harmless"
+            },
+            {
+              "id": "C",
+              "text": "To identify contents and hazards"
+            },
+            {
+              "id": "D",
+              "text": "To make glassware heavier"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 13. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "correctOptionId": "C",
+      "editorialCandidate": {
+        "revision": 2,
+        "sourceQuestionSha256": "08ae480943131780bdff89a2176434cca60b9c43954b59222a4036f9fc8e8089",
+        "reason": "CORRECT_OPTION_POSITION_DISTRIBUTION_REVIEW",
+        "independentAnswerReviewRequired": true,
+        "sourcePageReviewRequired": true,
+        "schoolAdoptionVerified": false,
+        "academicApproval": false,
+        "publicationAllowed": false,
+        "liveImportAllowed": false
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C13-13T2-M01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C13",
+        "number": 13
+      },
+      "topicId": "13.2",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 175,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Hazard Signs"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "What is the main purpose of a hazard symbol on a chemical label?",
+          "answer": "To communicate a specific risk quickly",
+          "options": [
+            {
+              "id": "A",
+              "text": "To indicate the price of the chemical"
+            },
+            {
+              "id": "B",
+              "text": "To show the chemical is safe to taste"
+            },
+            {
+              "id": "C",
+              "text": "To replace all written instructions"
+            },
+            {
+              "id": "D",
+              "text": "To communicate a specific risk quickly"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 13. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "correctOptionId": "D",
+      "editorialCandidate": {
+        "revision": 2,
+        "sourceQuestionSha256": "6b34b6e28db3a0ffe70b24d857261f090ef75d4b9cc81cdfde0d1faba05e6471",
+        "reason": "CORRECT_OPTION_POSITION_DISTRIBUTION_REVIEW",
+        "independentAnswerReviewRequired": true,
+        "sourcePageReviewRequired": true,
+        "schoolAdoptionVerified": false,
+        "academicApproval": false,
+        "publicationAllowed": false,
+        "liveImportAllowed": false
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C13-13T2-M02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C13",
+        "number": 13
+      },
+      "topicId": "13.2",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 175,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Hazard Signs"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "A flammable warning indicates that the material should be kept away from what?",
+          "answer": "Ignition sources",
+          "options": [
+            {
+              "id": "A",
+              "text": "Safety data"
+            },
+            {
+              "id": "B",
+              "text": "Ignition sources"
+            },
+            {
+              "id": "C",
+              "text": "Labels"
+            },
+            {
+              "id": "D",
+              "text": "Measuring cylinders"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 13. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "correctOptionId": "B",
+      "editorialCandidate": {
+        "revision": 2,
+        "sourceQuestionSha256": "d6353b2a199d535b4ef3cb4b4925eb4c9ba9595bc7e858505d3ed4c49688fd8e",
+        "reason": "CORRECT_OPTION_POSITION_DISTRIBUTION_REVIEW",
+        "independentAnswerReviewRequired": true,
+        "sourcePageReviewRequired": true,
+        "schoolAdoptionVerified": false,
+        "academicApproval": false,
+        "publicationAllowed": false,
+        "liveImportAllowed": false
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C13-13T3-M01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C13",
+        "number": 13
+      },
+      "topicId": "13.3",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 176,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Personal Protective Equipment (PPE)"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Which item is designed primarily to protect the eyes in a chemistry laboratory?",
+          "answer": "Safety goggles",
+          "options": [
+            {
+              "id": "A",
+              "text": "Safety goggles"
+            },
+            {
+              "id": "B",
+              "text": "Open sandals"
+            },
+            {
+              "id": "C",
+              "text": "Notebook"
+            },
+            {
+              "id": "D",
+              "text": "Glass stirring rod"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 13. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "correctOptionId": "A",
+      "editorialCandidate": {
+        "revision": 2,
+        "sourceQuestionSha256": "cea82c7deef22dc13c982aecc67e37c02e9a0abbb10bcad44b245fc852c2ec11",
+        "reason": "CORRECT_OPTION_POSITION_DISTRIBUTION_REVIEW",
+        "independentAnswerReviewRequired": true,
+        "sourcePageReviewRequired": true,
+        "schoolAdoptionVerified": false,
+        "academicApproval": false,
+        "publicationAllowed": false,
+        "liveImportAllowed": false
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C13-13T3-M02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C13",
+        "number": 13
+      },
+      "topicId": "13.3",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 176,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Personal Protective Equipment (PPE)"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Why is a laboratory coat useful during practical work?",
+          "answer": "It provides a protective barrier for clothing and skin",
+          "options": [
+            {
+              "id": "A",
+              "text": "It prevents every chemical reaction"
+            },
+            {
+              "id": "B",
+              "text": "It removes the need to wash hands"
+            },
+            {
+              "id": "C",
+              "text": "It provides a protective barrier for clothing and skin"
+            },
+            {
+              "id": "D",
+              "text": "It replaces eye protection"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 13. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "correctOptionId": "C",
+      "editorialCandidate": {
+        "revision": 2,
+        "sourceQuestionSha256": "f68c04203d52cf6718dfd25ad41aa88ff4fb412ff48d2b56b4cd808824cb975b",
+        "reason": "CORRECT_OPTION_POSITION_DISTRIBUTION_REVIEW",
+        "independentAnswerReviewRequired": true,
+        "sourcePageReviewRequired": true,
+        "schoolAdoptionVerified": false,
+        "academicApproval": false,
+        "publicationAllowed": false,
+        "liveImportAllowed": false
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C13-13T4-M01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C13",
+        "number": 13
+      },
+      "topicId": "13.4",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 176,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Location and Operation of Safety Equipment"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Why should students know the location of safety equipment before practical work begins?",
+          "answer": "So it can be reached quickly in an emergency",
+          "options": [
+            {
+              "id": "A",
+              "text": "So it can be reached quickly in an emergency"
+            },
+            {
+              "id": "B",
+              "text": "So it can be moved randomly"
+            },
+            {
+              "id": "C",
+              "text": "So experiments can avoid instructions"
+            },
+            {
+              "id": "D",
+              "text": "So labels are unnecessary"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 13. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "correctOptionId": "A",
+      "editorialCandidate": {
+        "revision": 2,
+        "sourceQuestionSha256": "d7e6a4bf59d89e6639f3092bce05627caecf0f351f9b5b0fbcec735e779d8761",
+        "reason": "CORRECT_OPTION_POSITION_DISTRIBUTION_REVIEW",
+        "independentAnswerReviewRequired": true,
+        "sourcePageReviewRequired": true,
+        "schoolAdoptionVerified": false,
+        "academicApproval": false,
+        "publicationAllowed": false,
+        "liveImportAllowed": false
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C13-13T4-M02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C13",
+        "number": 13
+      },
+      "topicId": "13.4",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 177,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Location and Operation of Safety Equipment"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Which principle is most important when using emergency safety equipment?",
+          "answer": "Use the correct equipment for the type of emergency",
+          "options": [
+            {
+              "id": "A",
+              "text": "Ignore teacher instructions"
+            },
+            {
+              "id": "B",
+              "text": "Block access to the equipment"
+            },
+            {
+              "id": "C",
+              "text": "Use the correct equipment for the type of emergency"
+            },
+            {
+              "id": "D",
+              "text": "Use every device at once"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 13. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "correctOptionId": "C",
+      "editorialCandidate": {
+        "revision": 2,
+        "sourceQuestionSha256": "f8e7c60cd00f738768e1d8401390d8cd3ab77911aecdab40a902225e41c8eeef",
+        "reason": "CORRECT_OPTION_POSITION_DISTRIBUTION_REVIEW",
+        "independentAnswerReviewRequired": true,
+        "sourcePageReviewRequired": true,
+        "schoolAdoptionVerified": false,
+        "academicApproval": false,
+        "publicationAllowed": false,
+        "liveImportAllowed": false
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C13-13T5-M01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C13",
+        "number": 13
+      },
+      "topicId": "13.5",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 176,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Emergency Situation in the Lab"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "If a laboratory accident occurs, what is the best immediate general response?",
+          "answer": "Alert the responsible teacher and follow the emergency procedure",
+          "options": [
+            {
+              "id": "A",
+              "text": "Leave hazards unreported"
+            },
+            {
+              "id": "B",
+              "text": "Alert the responsible teacher and follow the emergency procedure"
+            },
+            {
+              "id": "C",
+              "text": "Hide the incident"
+            },
+            {
+              "id": "D",
+              "text": "Continue the experiment"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 13. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "correctOptionId": "B",
+      "editorialCandidate": {
+        "revision": 2,
+        "sourceQuestionSha256": "3e289093484a3504c0bfa95577f19becc47f95f426c182a84e1473c283d0c150",
+        "reason": "CORRECT_OPTION_POSITION_DISTRIBUTION_REVIEW",
+        "independentAnswerReviewRequired": true,
+        "sourcePageReviewRequired": true,
+        "schoolAdoptionVerified": false,
+        "academicApproval": false,
+        "publicationAllowed": false,
+        "liveImportAllowed": false
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C13-13T5-M02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C13",
+        "number": 13
+      },
+      "topicId": "13.5",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 178,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Emergency Situation in the Lab"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Why are emergency drills useful in a laboratory?",
+          "answer": "They help people respond quickly and correctly",
+          "options": [
+            {
+              "id": "A",
+              "text": "They help people respond quickly and correctly"
+            },
+            {
+              "id": "B",
+              "text": "They eliminate all hazards permanently"
+            },
+            {
+              "id": "C",
+              "text": "They replace safety equipment"
+            },
+            {
+              "id": "D",
+              "text": "They are only for record keeping"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 13. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261007",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "correctOptionId": "A",
+      "editorialCandidate": {
+        "revision": 2,
+        "sourceQuestionSha256": "dda03170e8babdf3488e57cc61ff787695cf56eb6e2d4b5d3471c8b00dff3c86",
+        "reason": "CORRECT_OPTION_POSITION_DISTRIBUTION_REVIEW",
+        "independentAnswerReviewRequired": true,
+        "sourcePageReviewRequired": true,
+        "schoolAdoptionVerified": false,
+        "academicApproval": false,
+        "publicationAllowed": false,
+        "liveImportAllowed": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "assps-math10-source-map-v1",
+  "checkedOn": "2026-10-07",
+  "sourceRecordId": "pectaa-catalog-017",
+  "sourcePdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+  "sourceByteLength": 103679382,
+  "pageCount": 248,
+  "identity": [
+    "MATHEMATICS 10",
+    "Updated/Revised National Curriculum of Pakistan 2023",
+    "PECTAA",
+    "January 2026 print metadata"
+  ],
+  "chapters": [
+    {
+      "number": 1,
+      "title": "Complex Numbers",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 2,
+      "title": "Quadratic Equations and Inequalities",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 3,
+      "title": "Matrices and Determinants",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 4,
+      "title": "Functions and Graphs",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 5,
+      "title": "Algebraic Fractions",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 6,
+      "title": "Vectors in Plane",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 7,
+      "title": "Trigonometry",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 8,
+      "title": "Chords and Arcs of a Circle",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 9,
+      "title": "Tangent and Angles of a Circle",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 10,
+      "title": "Practical Geometry of Circles",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 11,
+      "title": "Information Handling",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 12,
+      "title": "Probability",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    }
+  ],
+  "grade10PatternState": "PENDING_CURRENT_OFFICIAL_ANNUAL_PATTERN_CONFIRMATION",
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookExercises": false,
+    "copyPastPaperStems": false,
+    "fullBookDefault": true
+  }
+}

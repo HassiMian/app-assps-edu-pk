@@ -1,0 +1,3003 @@
+{
+  "schemaVersion": "assps-pakstudies10-starter-v1",
+  "createdOn": "2026-10-07",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-019",
+  "sourcePdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+  "scope": "CURRENT_TEXTBOOK_CHAPTER_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "X-PAKS-C01-M01",
+      "chapter": {
+        "id": "X-PAKS-EM-C01",
+        "number": 1
+      },
+      "topicId": "ideology",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Ideological Basis of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "The term ideology most nearly means?",
+          "answer": "A coherent system of ideas and values",
+          "options": [
+            {
+              "id": "A",
+              "text": "A coherent system of ideas and values"
+            },
+            {
+              "id": "B",
+              "text": "A weather pattern"
+            },
+            {
+              "id": "C",
+              "text": "A trade route only"
+            },
+            {
+              "id": "D",
+              "text": "A map scale"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAKS-C01-M02",
+      "chapter": {
+        "id": "X-PAKS-EM-C01",
+        "number": 1
+      },
+      "topicId": "two nation theory",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Ideological Basis of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "The Two-Nation Theory emphasized distinct identity primarily between?",
+          "answer": "Muslims and Hindus of British India",
+          "options": [
+            {
+              "id": "A",
+              "text": "Muslims and Hindus of British India"
+            },
+            {
+              "id": "B",
+              "text": "Farmers and traders"
+            },
+            {
+              "id": "C",
+              "text": "Cities and villages"
+            },
+            {
+              "id": "D",
+              "text": "Mountains and plains"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAKS-C01-S01",
+      "chapter": {
+        "id": "X-PAKS-EM-C01",
+        "number": 1
+      },
+      "topicId": "ideology",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Ideological Basis of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "Why is ideology important in nation-building?",
+          "answer": "It provides shared principles, goals and a framework that can guide collective political and social action."
+        }
+      }
+    },
+    {
+      "id": "X-PAKS-C01-S02",
+      "chapter": {
+        "id": "X-PAKS-EM-C01",
+        "number": 1
+      },
+      "topicId": "ideological basis",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Ideological Basis of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "State one way the social and political experience of Muslims in British India contributed to the demand for a separate homeland.",
+          "answer": "Many Muslims feared political marginalization and sought constitutional safeguards and political space to protect their religious, cultural and social identity."
+        }
+      }
+    },
+    {
+      "id": "X-PAKS-C01-L01",
+      "chapter": {
+        "id": "X-PAKS-EM-C01",
+        "number": 1
+      },
+      "topicId": "ideological basis",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Ideological Basis of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "Explain the major ideas that contributed to the ideological basis of Pakistan.",
+          "answer": "Award marks for Muslim identity, political safeguards, Islamic social values, the Two-Nation Theory, and connection between these ideas and the demand for a separate homeland."
+        }
+      }
+    },
+    {
+      "id": "X-PAKS-C02-M01",
+      "chapter": {
+        "id": "X-PAKS-EM-C02",
+        "number": 2
+      },
+      "topicId": "Pakistan Movement",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Pakistan Movement"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "The Lahore Resolution was adopted in which year?",
+          "answer": "1940",
+          "options": [
+            {
+              "id": "A",
+              "text": "1940"
+            },
+            {
+              "id": "B",
+              "text": "1930"
+            },
+            {
+              "id": "C",
+              "text": "1947"
+            },
+            {
+              "id": "D",
+              "text": "1956"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAKS-C02-M02",
+      "chapter": {
+        "id": "X-PAKS-EM-C02",
+        "number": 2
+      },
+      "topicId": "leadership",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Pakistan Movement"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "Who led the All-India Muslim League during the final phase of the Pakistan Movement?",
+          "answer": "Muhammad Ali Jinnah",
+          "options": [
+            {
+              "id": "A",
+              "text": "Muhammad Ali Jinnah"
+            },
+            {
+              "id": "B",
+              "text": "Sir Syed Ahmad Khan"
+            },
+            {
+              "id": "C",
+              "text": "Allama Iqbal only"
+            },
+            {
+              "id": "D",
+              "text": "Liaquat Ali Khan alone"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAKS-C02-S01",
+      "chapter": {
+        "id": "X-PAKS-EM-C02",
+        "number": 2
+      },
+      "topicId": "Lahore Resolution",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Pakistan Movement"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "Why was the Lahore Resolution important?",
+          "answer": "It gave a clear political direction to the Muslim demand for autonomous or independent Muslim-majority regions and became a major milestone toward Pakistan."
+        }
+      }
+    },
+    {
+      "id": "X-PAKS-C02-S02",
+      "chapter": {
+        "id": "X-PAKS-EM-C02",
+        "number": 2
+      },
+      "topicId": "political mobilization",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Pakistan Movement"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "How did political organization help the Pakistan Movement?",
+          "answer": "It enabled Muslims to coordinate leadership, communicate demands, contest elections and build public support across different regions."
+        }
+      }
+    },
+    {
+      "id": "X-PAKS-C02-L01",
+      "chapter": {
+        "id": "X-PAKS-EM-C02",
+        "number": 2
+      },
+      "topicId": "Pakistan Movement",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Pakistan Movement"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "Trace major developments from Muslim political awakening to the creation of Pakistan in 1947.",
+          "answer": "Award marks for early Muslim political organization, intellectual contributions, the Muslim League, Lahore Resolution 1940, and the final constitutional/political developments leading to independence in 1947."
+        }
+      }
+    },
+    {
+      "id": "X-PAKS-C03-M01",
+      "chapter": {
+        "id": "X-PAKS-EM-C03",
+        "number": 3
+      },
+      "topicId": "constitutional history",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "History of Pakistan (1947-Uptill Now) and Constitutional Development in Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "Pakistan’s first constitution came into force in?",
+          "answer": "1956",
+          "options": [
+            {
+              "id": "A",
+              "text": "1956"
+            },
+            {
+              "id": "B",
+              "text": "1947"
+            },
+            {
+              "id": "C",
+              "text": "1962"
+            },
+            {
+              "id": "D",
+              "text": "1973"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAKS-C03-M02",
+      "chapter": {
+        "id": "X-PAKS-EM-C03",
+        "number": 3
+      },
+      "topicId": "1973 Constitution",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "History of Pakistan (1947-Uptill Now) and Constitutional Development in Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "The Constitution currently forming the basic constitutional framework of Pakistan was adopted in?",
+          "answer": "1973",
+          "options": [
+            {
+              "id": "A",
+              "text": "1973"
+            },
+            {
+              "id": "B",
+              "text": "1956"
+            },
+            {
+              "id": "C",
+              "text": "1962"
+            },
+            {
+              "id": "D",
+              "text": "1949"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAKS-C03-S01",
+      "chapter": {
+        "id": "X-PAKS-EM-C03",
+        "number": 3
+      },
+      "topicId": "Objectives Resolution",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "History of Pakistan (1947-Uptill Now) and Constitutional Development in Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "What was the constitutional significance of the Objectives Resolution of 1949?",
+          "answer": "It set out guiding principles for Pakistan’s constitutional development, including representative government, fundamental values and the role of Islamic principles."
+        }
+      }
+    },
+    {
+      "id": "X-PAKS-C03-S02",
+      "chapter": {
+        "id": "X-PAKS-EM-C03",
+        "number": 3
+      },
+      "topicId": "constitution",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "History of Pakistan (1947-Uptill Now) and Constitutional Development in Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "Why is a constitution important for a state?",
+          "answer": "It defines institutions, distributes powers, protects rights, sets legal procedures and establishes the relationship between state organs and citizens."
+        }
+      }
+    },
+    {
+      "id": "X-PAKS-C03-L01",
+      "chapter": {
+        "id": "X-PAKS-EM-C03",
+        "number": 3
+      },
+      "topicId": "constitutional development",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "History of Pakistan (1947-Uptill Now) and Constitutional Development in Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "Compare the broad constitutional milestones of 1956, 1962 and 1973.",
+          "answer": "Award marks for identifying each constitution, noting major changes in governmental structure, constitutional continuity/disruption, representative institutions, and why the 1973 Constitution remains central to the current framework."
+        }
+      }
+    },
+    {
+      "id": "X-PAKS-C04-M01",
+      "chapter": {
+        "id": "X-PAKS-EM-C04",
+        "number": 4
+      },
+      "topicId": "physical geography",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Geography of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "The Indus River system is most important to Pakistan for?",
+          "answer": "Irrigation and agriculture",
+          "options": [
+            {
+              "id": "A",
+              "text": "Irrigation and agriculture"
+            },
+            {
+              "id": "B",
+              "text": "Ocean tides only"
+            },
+            {
+              "id": "C",
+              "text": "Volcanic activity"
+            },
+            {
+              "id": "D",
+              "text": "Polar transport"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAKS-C04-M02",
+      "chapter": {
+        "id": "X-PAKS-EM-C04",
+        "number": 4
+      },
+      "topicId": "location",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Geography of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "Pakistan has coastline along the?",
+          "answer": "Arabian Sea",
+          "options": [
+            {
+              "id": "A",
+              "text": "Arabian Sea"
+            },
+            {
+              "id": "B",
+              "text": "Red Sea"
+            },
+            {
+              "id": "C",
+              "text": "Mediterranean Sea"
+            },
+            {
+              "id": "D",
+              "text": "Black Sea"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAKS-C04-S01",
+      "chapter": {
+        "id": "X-PAKS-EM-C04",
+        "number": 4
+      },
+      "topicId": "geography",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Geography of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "Name two major physical regions of Pakistan.",
+          "answer": "Examples include the northern mountains, Indus plain, Balochistan Plateau, deserts and coastal areas; any two valid regions."
+        }
+      }
+    },
+    {
+      "id": "X-PAKS-C04-S02",
+      "chapter": {
+        "id": "X-PAKS-EM-C04",
+        "number": 4
+      },
+      "topicId": "climate",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Geography of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "Why does Pakistan experience regional variation in climate?",
+          "answer": "Differences in latitude, altitude, distance from the sea, relief and monsoon/western weather systems produce regional climate variation."
+        }
+      }
+    },
+    {
+      "id": "X-PAKS-C04-L01",
+      "chapter": {
+        "id": "X-PAKS-EM-C04",
+        "number": 4
+      },
+      "topicId": "geography",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Geography of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "Explain how relief, rivers and climate influence settlement and economic activity in Pakistan.",
+          "answer": "Award marks for relief constraints/opportunities, Indus irrigation, fertile plains, climate effects on agriculture/water, and links to population/transport/economic concentration."
+        }
+      }
+    },
+    {
+      "id": "X-PAKS-C05-M01",
+      "chapter": {
+        "id": "X-PAKS-EM-C05",
+        "number": 5
+      },
+      "topicId": "foreign relations",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Pakistan and International Affairs"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "A basic aim of foreign policy is to protect a state’s?",
+          "answer": "National interests",
+          "options": [
+            {
+              "id": "A",
+              "text": "National interests"
+            },
+            {
+              "id": "B",
+              "text": "Weather only"
+            },
+            {
+              "id": "C",
+              "text": "School timetable"
+            },
+            {
+              "id": "D",
+              "text": "Local road map"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAKS-C05-M02",
+      "chapter": {
+        "id": "X-PAKS-EM-C05",
+        "number": 5
+      },
+      "topicId": "international organizations",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Pakistan and International Affairs"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "Pakistan is a member of which global organization?",
+          "answer": "United Nations",
+          "options": [
+            {
+              "id": "A",
+              "text": "United Nations"
+            },
+            {
+              "id": "B",
+              "text": "European Union"
+            },
+            {
+              "id": "C",
+              "text": "ASEAN only"
+            },
+            {
+              "id": "D",
+              "text": "Arctic Council only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAKS-C05-S01",
+      "chapter": {
+        "id": "X-PAKS-EM-C05",
+        "number": 5
+      },
+      "topicId": "foreign policy",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Pakistan and International Affairs"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "State two factors that can influence Pakistan’s foreign policy.",
+          "answer": "Geography, security, economic interests, historical ties, international law and regional/global developments can influence foreign policy; any two."
+        }
+      }
+    },
+    {
+      "id": "X-PAKS-C05-S02",
+      "chapter": {
+        "id": "X-PAKS-EM-C05",
+        "number": 5
+      },
+      "topicId": "international cooperation",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Pakistan and International Affairs"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "Why are international organizations important for states?",
+          "answer": "They provide forums for diplomacy, cooperation, conflict management, development, humanitarian action and rule-based international engagement."
+        }
+      }
+    },
+    {
+      "id": "X-PAKS-C05-L01",
+      "chapter": {
+        "id": "X-PAKS-EM-C05",
+        "number": 5
+      },
+      "topicId": "international affairs",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Pakistan and International Affairs"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "Explain how geography, security and economic interests shape Pakistan’s international relations.",
+          "answer": "Award marks for location, regional security, trade/energy needs, diplomatic cooperation, and participation in international organizations, without requiring current officeholder names."
+        }
+      }
+    },
+    {
+      "id": "X-PAKS-C06-M01",
+      "chapter": {
+        "id": "X-PAKS-EM-C06",
+        "number": 6
+      },
+      "topicId": "resources",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Resources and Economic Development of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "Which resource is renewable when managed sustainably?",
+          "answer": "Solar energy",
+          "options": [
+            {
+              "id": "A",
+              "text": "Solar energy"
+            },
+            {
+              "id": "B",
+              "text": "Natural gas"
+            },
+            {
+              "id": "C",
+              "text": "Coal"
+            },
+            {
+              "id": "D",
+              "text": "Metal ore"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAKS-C06-M02",
+      "chapter": {
+        "id": "X-PAKS-EM-C06",
+        "number": 6
+      },
+      "topicId": "economic sectors",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Resources and Economic Development of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "Agriculture belongs mainly to which sector?",
+          "answer": "Primary sector",
+          "options": [
+            {
+              "id": "A",
+              "text": "Primary sector"
+            },
+            {
+              "id": "B",
+              "text": "Secondary sector"
+            },
+            {
+              "id": "C",
+              "text": "Tertiary sector only"
+            },
+            {
+              "id": "D",
+              "text": "Quaternary sector only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAKS-C06-S01",
+      "chapter": {
+        "id": "X-PAKS-EM-C06",
+        "number": 6
+      },
+      "topicId": "economic development",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Resources and Economic Development of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "How can education contribute to economic development?",
+          "answer": "It improves skills, productivity, innovation and employability, helping workers and institutions use resources more effectively."
+        }
+      }
+    },
+    {
+      "id": "X-PAKS-C06-S02",
+      "chapter": {
+        "id": "X-PAKS-EM-C06",
+        "number": 6
+      },
+      "topicId": "resources",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Resources and Economic Development of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "Why is sustainable resource management important?",
+          "answer": "It helps meet present needs while reducing depletion, environmental damage and risks to future generations."
+        }
+      }
+    },
+    {
+      "id": "X-PAKS-C06-L01",
+      "chapter": {
+        "id": "X-PAKS-EM-C06",
+        "number": 6
+      },
+      "topicId": "economic development",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Resources and Economic Development of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "Discuss the roles of agriculture, industry, services and human capital in Pakistan’s economic development.",
+          "answer": "Award marks for each major sector, interdependence among sectors, human skills/education, infrastructure/resource efficiency, and balanced sustainable growth."
+        }
+      }
+    },
+    {
+      "id": "X-PAKS-C07-M01",
+      "chapter": {
+        "id": "X-PAKS-EM-C07",
+        "number": 7
+      },
+      "topicId": "population",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Population, Society and Cultural Diversity in Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "Population density means?",
+          "answer": "Number of people per unit area",
+          "options": [
+            {
+              "id": "A",
+              "text": "Number of people per unit area"
+            },
+            {
+              "id": "B",
+              "text": "Birth rate only"
+            },
+            {
+              "id": "C",
+              "text": "Total land area only"
+            },
+            {
+              "id": "D",
+              "text": "Number of cities only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAKS-C07-M02",
+      "chapter": {
+        "id": "X-PAKS-EM-C07",
+        "number": 7
+      },
+      "topicId": "cultural diversity",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Population, Society and Cultural Diversity in Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "Cultural diversity includes differences in?",
+          "answer": "Languages, traditions and regional practices",
+          "options": [
+            {
+              "id": "A",
+              "text": "Languages, traditions and regional practices"
+            },
+            {
+              "id": "B",
+              "text": "Gravity only"
+            },
+            {
+              "id": "C",
+              "text": "Latitude only"
+            },
+            {
+              "id": "D",
+              "text": "Currency notes only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAKS-C07-S01",
+      "chapter": {
+        "id": "X-PAKS-EM-C07",
+        "number": 7
+      },
+      "topicId": "population",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Population, Society and Cultural Diversity in Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "State one opportunity and one challenge created by a large young population.",
+          "answer": "Opportunity: a large future workforce; challenge: strong demand for education, health, skills and jobs."
+        }
+      }
+    },
+    {
+      "id": "X-PAKS-C07-S02",
+      "chapter": {
+        "id": "X-PAKS-EM-C07",
+        "number": 7
+      },
+      "topicId": "society",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Population, Society and Cultural Diversity in Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "How can cultural diversity strengthen national society?",
+          "answer": "It can enrich languages, arts, traditions and perspectives when combined with mutual respect, equal citizenship and social inclusion."
+        }
+      }
+    },
+    {
+      "id": "X-PAKS-C07-L01",
+      "chapter": {
+        "id": "X-PAKS-EM-C07",
+        "number": 7
+      },
+      "topicId": "population and society",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Population, Society and Cultural Diversity in Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "Explain how population trends, urbanization and cultural diversity affect development.",
+          "answer": "Award marks for population growth/age structure, urbanization pressures, services/jobs, cultural diversity, and need for inclusive planning and social cohesion."
+        }
+      }
+    },
+    {
+      "id": "X-PAKS-C08-M01",
+      "chapter": {
+        "id": "X-PAKS-EM-C08",
+        "number": 8
+      },
+      "topicId": "women empowerment",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Women Empowerment in Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "Women empowerment includes improved access to?",
+          "answer": "Education, health, economic and civic opportunities",
+          "options": [
+            {
+              "id": "A",
+              "text": "Education, health, economic and civic opportunities"
+            },
+            {
+              "id": "B",
+              "text": "Only household chores"
+            },
+            {
+              "id": "C",
+              "text": "Only one occupation"
+            },
+            {
+              "id": "D",
+              "text": "No decision-making role"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAKS-C08-M02",
+      "chapter": {
+        "id": "X-PAKS-EM-C08",
+        "number": 8
+      },
+      "topicId": "participation",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Women Empowerment in Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "Increasing women’s participation in education and work can contribute to?",
+          "answer": "Broader social and economic development",
+          "options": [
+            {
+              "id": "A",
+              "text": "Broader social and economic development"
+            },
+            {
+              "id": "B",
+              "text": "Lower skill levels by definition"
+            },
+            {
+              "id": "C",
+              "text": "Less human capital"
+            },
+            {
+              "id": "D",
+              "text": "No effect on society"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAKS-C08-S01",
+      "chapter": {
+        "id": "X-PAKS-EM-C08",
+        "number": 8
+      },
+      "topicId": "women empowerment",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Women Empowerment in Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "What is meant by women empowerment?",
+          "answer": "It means expanding women’s ability to access rights, education, resources, opportunities, safety and meaningful participation in decisions affecting their lives."
+        }
+      }
+    },
+    {
+      "id": "X-PAKS-C08-S02",
+      "chapter": {
+        "id": "X-PAKS-EM-C08",
+        "number": 8
+      },
+      "topicId": "development",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Women Empowerment in Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "Why is girls’ education important for national development?",
+          "answer": "It expands human capital, improves health and family outcomes, increases economic opportunity and supports informed civic participation."
+        }
+      }
+    },
+    {
+      "id": "X-PAKS-C08-L01",
+      "chapter": {
+        "id": "X-PAKS-EM-C08",
+        "number": 8
+      },
+      "topicId": "women empowerment",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-019",
+        "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/books-and-publications/",
+        "anchor": "Women Empowerment in Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "current-catalog-label",
+        "textbookId": "PECTAA-X-PAKSTUDIES-EM-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X starter grounded in current official chapter map. No review approval or current political-officeholder claim is made."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original chapter-aligned starter item; academic review pending.",
+      "content": {
+        "en": {
+          "stem": "Discuss major ways societies can support women empowerment in Pakistan.",
+          "answer": "Award marks for education, legal rights/equal protection, health and safety, economic opportunity, and meaningful social/civic participation."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 40,
+    "mcq": 16,
+    "short": 16,
+    "long": 8,
+    "chapters": 8
+  }
+}

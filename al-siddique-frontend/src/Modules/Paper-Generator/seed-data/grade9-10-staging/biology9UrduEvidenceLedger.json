@@ -1,0 +1,282 @@
+{
+  "schemaVersion": "assps-ix-biology-um-source-evidence-ledger-v1",
+  "recordStatus": "FIRST_PASS_VISUAL_NOT_IN_APPROVED_BANK",
+  "createdOn": "2026-10-02",
+  "curriculum": {
+    "authority": "PECTAA_OFFICIAL_CATALOG",
+    "grade": 9,
+    "subject": "Biology",
+    "medium": "ur",
+    "catalogLabel": "Biology 9 (UM) 03.09.26",
+    "editionReview": "PENDING_INDEPENDENT_EQUIVALENCE_REVIEW",
+    "relationToEnglish": "11_CHAPTER_SEQUENCE_VERIFIED; CHAPTER_1_TOPIC_MAP_VERIFIED; FULL_TOPIC_EQUIVALENCE_PENDING"
+  },
+  "source": {
+    "catalogRecordId": "pectaa-catalog-010",
+    "assetUrl": "https://drive.google.com/file/d/1LxUO75kyWQQWZZPTpg9oGYetAgYAjql3/view?usp=sharing",
+    "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+    "pdfBytes": 84697797,
+    "pdfPages": 212,
+    "sourceCacheRef": "IX/biology9_um_catalog010.pdf",
+    "extractionMethod": "DIRECT_VISUAL_REVIEW_PLUS_LOCAL_PDF_RENDER_NO_OCR"
+  },
+  "glossary": {
+    "verifiedPhysicalStartPage": 204,
+    "status": "VISUALLY_CHECKED"
+  },
+  "chapters": [
+    {
+      "id": "IX-BIO-UM-C01",
+      "number": 1,
+      "titleEnglishPrinted": "The Science of Biology",
+      "verifiedPhysicalStartPage": 4,
+      "startPageEvidence": "CHAPTER_OPENING_VISUALLY_CHECKED",
+      "mappingStatus": "TOPICS_AND_EXERCISE_FIRST_PASS_VERIFIED",
+      "topics": [
+        {
+          "id": "1.1",
+          "titleEnglishPrinted": "Biology and Its Branches",
+          "verifiedPhysicalStartPage": 5,
+          "verifiedPhysicalEndPage": 8,
+          "pageAuditStatus": "VISUALLY_CHECKED",
+          "pageBoundaryNote": "Inclusive physical page range; a boundary page may contain adjacent topics. Use the exact subheading/paragraph evidence."
+        },
+        {
+          "id": "1.2",
+          "titleEnglishPrinted": "Relation of Biology with Other Sciences",
+          "verifiedPhysicalStartPage": 8,
+          "verifiedPhysicalEndPage": 9,
+          "pageAuditStatus": "VISUALLY_CHECKED",
+          "pageBoundaryNote": "Inclusive physical page range; a boundary page may contain adjacent topics. Use the exact subheading/paragraph evidence."
+        },
+        {
+          "id": "1.3",
+          "titleEnglishPrinted": "Careers in Biology",
+          "verifiedPhysicalStartPage": 9,
+          "verifiedPhysicalEndPage": 11,
+          "pageAuditStatus": "VISUALLY_CHECKED",
+          "pageBoundaryNote": "Inclusive physical page range; a boundary page may contain adjacent topics. Use the exact subheading/paragraph evidence."
+        },
+        {
+          "id": "1.4",
+          "titleEnglishPrinted": "Quranic Instructions to Reveal the Study of Life",
+          "verifiedPhysicalStartPage": 12,
+          "verifiedPhysicalEndPage": 13,
+          "pageAuditStatus": "VISUALLY_CHECKED",
+          "pageBoundaryNote": "Inclusive physical page range; a boundary page may contain adjacent topics. Use the exact subheading/paragraph evidence."
+        },
+        {
+          "id": "1.5",
+          "titleEnglishPrinted": "Science as a Collaborative Field",
+          "verifiedPhysicalStartPage": 13,
+          "verifiedPhysicalEndPage": 14,
+          "pageAuditStatus": "VISUALLY_CHECKED",
+          "pageBoundaryNote": "Inclusive physical page range; a boundary page may contain adjacent topics. Use the exact subheading/paragraph evidence."
+        },
+        {
+          "id": "1.6",
+          "titleEnglishPrinted": "Scientific Method",
+          "verifiedPhysicalStartPage": 14,
+          "verifiedPhysicalEndPage": 17,
+          "pageAuditStatus": "VISUALLY_CHECKED",
+          "pageBoundaryNote": "Inclusive physical page range; a boundary page may contain adjacent topics. Use the exact subheading/paragraph evidence."
+        },
+        {
+          "id": "1.7",
+          "titleEnglishPrinted": "Theory and Law (Principle)",
+          "verifiedPhysicalStartPage": 17,
+          "verifiedPhysicalEndPage": 17,
+          "pageAuditStatus": "VISUALLY_CHECKED",
+          "pageBoundaryNote": "Inclusive physical page range; a boundary page may contain adjacent topics. Use the exact subheading/paragraph evidence."
+        },
+        {
+          "id": "1.8",
+          "titleEnglishPrinted": "Malaria — An Example of Biological Method",
+          "verifiedPhysicalStartPage": 18,
+          "verifiedPhysicalEndPage": 21,
+          "pageAuditStatus": "VISUALLY_CHECKED",
+          "pageBoundaryNote": "Inclusive physical page range; a boundary page may contain adjacent topics. Use the exact subheading/paragraph evidence."
+        }
+      ],
+      "exercise": {
+        "firstPhysicalPage": 23,
+        "lastPhysicalPage": 25,
+        "reviewState": "FIRST_PASS_VISUAL",
+        "sections": [
+          {
+            "label": "A",
+            "type": "mcq",
+            "count": 10,
+            "firstPhysicalPage": 23,
+            "lastPhysicalPage": 24,
+            "questionSourceRefs": [
+              "UM-EX-C01-A-Q01",
+              "UM-EX-C01-A-Q02",
+              "UM-EX-C01-A-Q03",
+              "UM-EX-C01-A-Q04",
+              "UM-EX-C01-A-Q05",
+              "UM-EX-C01-A-Q06",
+              "UM-EX-C01-A-Q07",
+              "UM-EX-C01-A-Q08",
+              "UM-EX-C01-A-Q09",
+              "UM-EX-C01-A-Q10"
+            ],
+            "questionTextIncluded": false,
+            "reviewState": "FIRST_PASS_VISUAL"
+          },
+          {
+            "label": "B",
+            "type": "short",
+            "count": 6,
+            "firstPhysicalPage": 25,
+            "lastPhysicalPage": 25,
+            "questionSourceRefs": [
+              "UM-EX-C01-B-Q01",
+              "UM-EX-C01-B-Q02",
+              "UM-EX-C01-B-Q03",
+              "UM-EX-C01-B-Q04",
+              "UM-EX-C01-B-Q05",
+              "UM-EX-C01-B-Q06"
+            ],
+            "questionTextIncluded": false,
+            "reviewState": "FIRST_PASS_VISUAL"
+          },
+          {
+            "label": "C",
+            "type": "long",
+            "count": 7,
+            "firstPhysicalPage": 25,
+            "lastPhysicalPage": 25,
+            "questionSourceRefs": [
+              "UM-EX-C01-C-Q01",
+              "UM-EX-C01-C-Q02",
+              "UM-EX-C01-C-Q03",
+              "UM-EX-C01-C-Q04",
+              "UM-EX-C01-C-Q05",
+              "UM-EX-C01-C-Q06",
+              "UM-EX-C01-C-Q07"
+            ],
+            "questionTextIncluded": false,
+            "reviewState": "FIRST_PASS_VISUAL"
+          },
+          {
+            "label": "D",
+            "type": "inquisitive",
+            "count": 2,
+            "firstPhysicalPage": 25,
+            "lastPhysicalPage": 25,
+            "questionSourceRefs": [
+              "UM-EX-C01-D-Q01",
+              "UM-EX-C01-D-Q02"
+            ],
+            "questionTextIncluded": false,
+            "reviewState": "FIRST_PASS_VISUAL"
+          }
+        ]
+      },
+      "summaryEvidence": {
+        "physicalPage": 22,
+        "status": "VISUALLY_CHECKED",
+        "scope": "CHAPTER_WIDE_KEY_POINTS_NOT_EXCLUSIVE_TO_TOPIC_1_8"
+      },
+      "topicBoundaryAudit": {
+        "date": "2026-10-02",
+        "status": "VISUALLY_RECHECKED_SHARED_PAGE_BOUNDARIES",
+        "independentAcademicApproval": false,
+        "method": "Direct page rendering; end pages include continuation up to the next heading."
+      }
+    },
+    {
+      "id": "IX-BIO-UM-C02",
+      "number": 2,
+      "titleEnglishPrinted": "Biodiversity",
+      "verifiedPhysicalStartPage": 26,
+      "startPageEvidence": "CHAPTER_OPENING_VISUALLY_CHECKED",
+      "mappingStatus": "CHAPTER_START_ONLY"
+    },
+    {
+      "id": "IX-BIO-UM-C03",
+      "number": 3,
+      "titleEnglishPrinted": "The Cell",
+      "verifiedPhysicalStartPage": 44,
+      "startPageEvidence": "CHAPTER_OPENING_VISUALLY_CHECKED",
+      "mappingStatus": "CHAPTER_START_ONLY"
+    },
+    {
+      "id": "IX-BIO-UM-C04",
+      "number": 4,
+      "titleEnglishPrinted": "Cell Cycle",
+      "verifiedPhysicalStartPage": 69,
+      "startPageEvidence": "CHAPTER_OPENING_VISUALLY_CHECKED",
+      "mappingStatus": "CHAPTER_START_ONLY"
+    },
+    {
+      "id": "IX-BIO-UM-C05",
+      "number": 5,
+      "titleEnglishPrinted": "Tissues, Organs, and Organ Systems",
+      "verifiedPhysicalStartPage": 87,
+      "startPageEvidence": "CHAPTER_OPENING_VISUALLY_CHECKED",
+      "mappingStatus": "CHAPTER_START_ONLY"
+    },
+    {
+      "id": "IX-BIO-UM-C06",
+      "number": 6,
+      "titleEnglishPrinted": "Biomolecules",
+      "verifiedPhysicalStartPage": 104,
+      "startPageEvidence": "CHAPTER_OPENING_VISUALLY_CHECKED",
+      "mappingStatus": "CHAPTER_START_ONLY"
+    },
+    {
+      "id": "IX-BIO-UM-C07",
+      "number": 7,
+      "titleEnglishPrinted": "Enzymes",
+      "verifiedPhysicalStartPage": 124,
+      "startPageEvidence": "CHAPTER_OPENING_VISUALLY_CHECKED",
+      "mappingStatus": "CHAPTER_START_ONLY"
+    },
+    {
+      "id": "IX-BIO-UM-C08",
+      "number": 8,
+      "titleEnglishPrinted": "Bioenergetics",
+      "verifiedPhysicalStartPage": 136,
+      "startPageEvidence": "CHAPTER_OPENING_VISUALLY_CHECKED",
+      "mappingStatus": "CHAPTER_START_ONLY"
+    },
+    {
+      "id": "IX-BIO-UM-C09",
+      "number": 9,
+      "titleEnglishPrinted": "Plant Physiology",
+      "verifiedPhysicalStartPage": 152,
+      "startPageEvidence": "CHAPTER_OPENING_VISUALLY_CHECKED",
+      "mappingStatus": "CHAPTER_START_ONLY"
+    },
+    {
+      "id": "IX-BIO-UM-C10",
+      "number": 10,
+      "titleEnglishPrinted": "Reproduction in Plants",
+      "verifiedPhysicalStartPage": 173,
+      "startPageEvidence": "CHAPTER_OPENING_VISUALLY_CHECKED",
+      "mappingStatus": "CHAPTER_START_ONLY"
+    },
+    {
+      "id": "IX-BIO-UM-C11",
+      "number": 11,
+      "titleEnglishPrinted": "Biostatistics",
+      "verifiedPhysicalStartPage": 192,
+      "startPageEvidence": "CHAPTER_OPENING_VISUALLY_CHECKED",
+      "mappingStatus": "CHAPTER_START_ONLY"
+    }
+  ],
+  "release": {
+    "realApprovedQuestionCount": 0,
+    "tenantSeedAction": "NEVER_RUN",
+    "academicAnswerReview": "PENDING",
+    "bilingualSemanticReview": "PENDING",
+    "examYearAlpMapping": "PENDING"
+  },
+  "totals": {
+    "chapterStartsVerified": 11,
+    "chapter1TopicsVerified": 8,
+    "chapter1ExerciseSourceRefs": 25
+  }
+}

@@ -1,0 +1,2257 @@
+{
+  "schemaVersion": "assps-ict9-tech-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-043",
+  "sourcePdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+  "scope": "CURRENT_GRADE9_ICT_TECH_SIX_CHAPTER_STARTER",
+  "drafts": [
+    {
+      "id": "IX-ICT-C01-M01",
+      "chapter": {
+        "id": "IX-ICT-TECH-C01",
+        "number": 1
+      },
+      "topicId": "word processing",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Mastering Microsoft Word and PowerPoint"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Which application is primarily used to create and format text documents?",
+          "answer": "Microsoft Word",
+          "options": [
+            {
+              "id": "A",
+              "text": "Microsoft Word"
+            },
+            {
+              "id": "B",
+              "text": "A calculator only"
+            },
+            {
+              "id": "C",
+              "text": "A file compressor"
+            },
+            {
+              "id": "D",
+              "text": "A network cable"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ICT-C01-M02",
+      "chapter": {
+        "id": "IX-ICT-TECH-C01",
+        "number": 1
+      },
+      "topicId": "presentations",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Mastering Microsoft Word and PowerPoint"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "A slide layout in presentation software mainly helps to?",
+          "answer": "Organize content consistently",
+          "options": [
+            {
+              "id": "A",
+              "text": "Organize content consistently"
+            },
+            {
+              "id": "B",
+              "text": "Increase processor temperature"
+            },
+            {
+              "id": "C",
+              "text": "Replace all text with code"
+            },
+            {
+              "id": "D",
+              "text": "Disable formatting"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ICT-C01-S01",
+      "chapter": {
+        "id": "IX-ICT-TECH-C01",
+        "number": 1
+      },
+      "topicId": "document formatting",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Mastering Microsoft Word and PowerPoint"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "State two benefits of using styles or consistent formatting in a document.",
+          "answer": "They improve readability and visual consistency, and they make large documents easier to update and organize."
+        }
+      }
+    },
+    {
+      "id": "IX-ICT-C01-S02",
+      "chapter": {
+        "id": "IX-ICT-TECH-C01",
+        "number": 1
+      },
+      "topicId": "presentation design",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Mastering Microsoft Word and PowerPoint"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Why should a presentation avoid overcrowding each slide?",
+          "answer": "Clear, limited content improves readability and helps the audience focus on the main idea."
+        }
+      }
+    },
+    {
+      "id": "IX-ICT-C01-L01",
+      "chapter": {
+        "id": "IX-ICT-TECH-C01",
+        "number": 1
+      },
+      "topicId": "office productivity",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Mastering Microsoft Word and PowerPoint"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain how word-processing and presentation tools support school communication.",
+          "answer": "Award marks for document creation, formatting, tables/images, presentation structure, visual communication and responsible use of templates/media."
+        }
+      }
+    },
+    {
+      "id": "IX-ICT-C02-M01",
+      "chapter": {
+        "id": "IX-ICT-TECH-C02",
+        "number": 2
+      },
+      "topicId": "microcontroller",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Exploring Arduino Basics – Circuits, Code and Projects"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "An Arduino board is commonly described as a platform built around a?",
+          "answer": "Microcontroller",
+          "options": [
+            {
+              "id": "A",
+              "text": "Microcontroller"
+            },
+            {
+              "id": "B",
+              "text": "Printer cartridge"
+            },
+            {
+              "id": "C",
+              "text": "Hard-disk platter"
+            },
+            {
+              "id": "D",
+              "text": "Projector lens"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ICT-C02-M02",
+      "chapter": {
+        "id": "IX-ICT-TECH-C02",
+        "number": 2
+      },
+      "topicId": "digital logic",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Exploring Arduino Basics – Circuits, Code and Projects"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "A digital signal is commonly represented using?",
+          "answer": "Discrete states such as 0 and 1",
+          "options": [
+            {
+              "id": "A",
+              "text": "Discrete states such as 0 and 1"
+            },
+            {
+              "id": "B",
+              "text": "Only paragraph styles"
+            },
+            {
+              "id": "C",
+              "text": "Only colours"
+            },
+            {
+              "id": "D",
+              "text": "Only file names"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ICT-C02-S01",
+      "chapter": {
+        "id": "IX-ICT-TECH-C02",
+        "number": 2
+      },
+      "topicId": "input output",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Exploring Arduino Basics – Circuits, Code and Projects"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Differentiate an input and an output in a microcontroller system.",
+          "answer": "An input provides information to the controller, while an output is a response or signal produced by the controller."
+        }
+      }
+    },
+    {
+      "id": "IX-ICT-C02-S02",
+      "chapter": {
+        "id": "IX-ICT-TECH-C02",
+        "number": 2
+      },
+      "topicId": "hardware safety",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Exploring Arduino Basics – Circuits, Code and Projects"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Why should beginner electronics work be done only with teacher-approved low-voltage classroom equipment?",
+          "answer": "Supervision and approved low-voltage equipment reduce risk, prevent damage and ensure components are used within safe limits."
+        }
+      }
+    },
+    {
+      "id": "IX-ICT-C02-L01",
+      "chapter": {
+        "id": "IX-ICT-TECH-C02",
+        "number": 2
+      },
+      "topicId": "embedded systems",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Exploring Arduino Basics – Circuits, Code and Projects"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain the basic input-process-output model of a microcontroller project without describing wiring steps.",
+          "answer": "Award marks for identifying input/sensor data, program logic, controller processing, output/action and the importance of safe supervised hardware use."
+        }
+      }
+    },
+    {
+      "id": "IX-ICT-C03-M01",
+      "chapter": {
+        "id": "IX-ICT-TECH-C03",
+        "number": 3
+      },
+      "topicId": "raster vector",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Graphic Designing and Multimedia"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Which type of graphic is defined mainly by mathematical shapes and paths?",
+          "answer": "Vector graphic",
+          "options": [
+            {
+              "id": "A",
+              "text": "Vector graphic"
+            },
+            {
+              "id": "B",
+              "text": "Raster photo only"
+            },
+            {
+              "id": "C",
+              "text": "Audio file"
+            },
+            {
+              "id": "D",
+              "text": "Spreadsheet formula"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ICT-C03-M02",
+      "chapter": {
+        "id": "IX-ICT-TECH-C03",
+        "number": 3
+      },
+      "topicId": "multimedia",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Graphic Designing and Multimedia"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Multimedia commonly combines?",
+          "answer": "More than one media form such as text, image, audio or video",
+          "options": [
+            {
+              "id": "A",
+              "text": "More than one media form such as text, image, audio or video"
+            },
+            {
+              "id": "B",
+              "text": "Only numbers"
+            },
+            {
+              "id": "C",
+              "text": "Only plain text"
+            },
+            {
+              "id": "D",
+              "text": "Only hardware"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ICT-C03-S01",
+      "chapter": {
+        "id": "IX-ICT-TECH-C03",
+        "number": 3
+      },
+      "topicId": "design principles",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Graphic Designing and Multimedia"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Why are contrast and alignment useful in graphic design?",
+          "answer": "Contrast helps important elements stand out; alignment creates order and visual relationships between elements."
+        }
+      }
+    },
+    {
+      "id": "IX-ICT-C03-S02",
+      "chapter": {
+        "id": "IX-ICT-TECH-C03",
+        "number": 3
+      },
+      "topicId": "image quality",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Graphic Designing and Multimedia"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Why can enlarging a low-resolution raster image reduce visual quality?",
+          "answer": "Raster images are made of pixels; strong enlargement can make individual pixels visible and reduce sharpness."
+        }
+      }
+    },
+    {
+      "id": "IX-ICT-C03-L01",
+      "chapter": {
+        "id": "IX-ICT-TECH-C03",
+        "number": 3
+      },
+      "topicId": "multimedia communication",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Graphic Designing and Multimedia"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Describe a good workflow for planning a school multimedia poster or presentation.",
+          "answer": "Award marks for purpose/audience, content planning, layout, appropriate media, readability/accessibility and copyright-responsible use of assets."
+        }
+      }
+    },
+    {
+      "id": "IX-ICT-C04-M01",
+      "chapter": {
+        "id": "IX-ICT-TECH-C04",
+        "number": 4
+      },
+      "topicId": "web structure",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Fundamentals of Web Development and e-Commerce"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "HTML is mainly used to?",
+          "answer": "Structure web-page content",
+          "options": [
+            {
+              "id": "A",
+              "text": "Structure web-page content"
+            },
+            {
+              "id": "B",
+              "text": "Repair computer hardware"
+            },
+            {
+              "id": "C",
+              "text": "Compress every file"
+            },
+            {
+              "id": "D",
+              "text": "Replace all databases"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ICT-C04-M02",
+      "chapter": {
+        "id": "IX-ICT-TECH-C04",
+        "number": 4
+      },
+      "topicId": "ecommerce",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Fundamentals of Web Development and e-Commerce"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "An online shopping cart is mainly used to?",
+          "answer": "Track items a customer may purchase",
+          "options": [
+            {
+              "id": "A",
+              "text": "Track items a customer may purchase"
+            },
+            {
+              "id": "B",
+              "text": "Format a hard drive"
+            },
+            {
+              "id": "C",
+              "text": "Draw electrical circuits"
+            },
+            {
+              "id": "D",
+              "text": "Edit operating-system kernels"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ICT-C04-S01",
+      "chapter": {
+        "id": "IX-ICT-TECH-C04",
+        "number": 4
+      },
+      "topicId": "web design",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Fundamentals of Web Development and e-Commerce"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Differentiate web-page content and presentation.",
+          "answer": "Content is the information or structure of a page; presentation concerns how that content is visually styled and arranged."
+        }
+      }
+    },
+    {
+      "id": "IX-ICT-C04-S02",
+      "chapter": {
+        "id": "IX-ICT-TECH-C04",
+        "number": 4
+      },
+      "topicId": "ecommerce safety",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Fundamentals of Web Development and e-Commerce"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "State two responsible practices for an e-commerce website.",
+          "answer": "Examples include clear product information, secure handling of user data, honest pricing, accessible design and transparent return/contact information."
+        }
+      }
+    },
+    {
+      "id": "IX-ICT-C04-L01",
+      "chapter": {
+        "id": "IX-ICT-TECH-C04",
+        "number": 4
+      },
+      "topicId": "web ecommerce",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Fundamentals of Web Development and e-Commerce"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain the basic components of a small responsible e-commerce website.",
+          "answer": "Award marks for product/content pages, navigation, cart/order flow, privacy/security awareness, accurate information and user-friendly design."
+        }
+      }
+    },
+    {
+      "id": "IX-ICT-C05-M01",
+      "chapter": {
+        "id": "IX-ICT-TECH-C05",
+        "number": 5
+      },
+      "topicId": "troubleshooting",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "System Troubleshooting and Maintenance"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "A good first troubleshooting step is usually to?",
+          "answer": "Identify and record the symptoms",
+          "options": [
+            {
+              "id": "A",
+              "text": "Identify and record the symptoms"
+            },
+            {
+              "id": "B",
+              "text": "Delete all files immediately"
+            },
+            {
+              "id": "C",
+              "text": "Replace every component"
+            },
+            {
+              "id": "D",
+              "text": "Ignore the problem"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ICT-C05-M02",
+      "chapter": {
+        "id": "IX-ICT-TECH-C05",
+        "number": 5
+      },
+      "topicId": "maintenance",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "System Troubleshooting and Maintenance"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Preventive maintenance aims to?",
+          "answer": "Reduce avoidable failures and keep systems reliable",
+          "options": [
+            {
+              "id": "A",
+              "text": "Reduce avoidable failures and keep systems reliable"
+            },
+            {
+              "id": "B",
+              "text": "Create faults deliberately"
+            },
+            {
+              "id": "C",
+              "text": "Remove all backups"
+            },
+            {
+              "id": "D",
+              "text": "Disable updates forever"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ICT-C05-S01",
+      "chapter": {
+        "id": "IX-ICT-TECH-C05",
+        "number": 5
+      },
+      "topicId": "diagnosis",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "System Troubleshooting and Maintenance"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Why should troubleshooting change one factor at a time when possible?",
+          "answer": "It makes it easier to identify which change affected the problem and reduces unnecessary modifications."
+        }
+      }
+    },
+    {
+      "id": "IX-ICT-C05-S02",
+      "chapter": {
+        "id": "IX-ICT-TECH-C05",
+        "number": 5
+      },
+      "topicId": "data protection",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "System Troubleshooting and Maintenance"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Why should important data be backed up before major recovery work?",
+          "answer": "A backup helps protect user files if recovery or repair fails or changes the system unexpectedly."
+        }
+      }
+    },
+    {
+      "id": "IX-ICT-C05-L01",
+      "chapter": {
+        "id": "IX-ICT-TECH-C05",
+        "number": 5
+      },
+      "topicId": "safe troubleshooting",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "System Troubleshooting and Maintenance"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Describe a safe troubleshooting workflow for a school computer.",
+          "answer": "Award marks for documenting symptoms, backing up data, checking simple causes first, using non-destructive diagnostics, applying the least-invasive fix and verifying/recording the result."
+        }
+      }
+    },
+    {
+      "id": "IX-ICT-C06-M01",
+      "chapter": {
+        "id": "IX-ICT-TECH-C06",
+        "number": 6
+      },
+      "topicId": "artificial intelligence",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "AI Technologies"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "AI systems are commonly designed to perform tasks involving?",
+          "answer": "Pattern recognition, prediction or reasoning",
+          "options": [
+            {
+              "id": "A",
+              "text": "Pattern recognition, prediction or reasoning"
+            },
+            {
+              "id": "B",
+              "text": "Only cable storage"
+            },
+            {
+              "id": "C",
+              "text": "Only page margins"
+            },
+            {
+              "id": "D",
+              "text": "Only battery charging"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ICT-C06-M02",
+      "chapter": {
+        "id": "IX-ICT-TECH-C06",
+        "number": 6
+      },
+      "topicId": "machine learning",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "AI Technologies"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Machine learning mainly allows a system to?",
+          "answer": "Learn useful patterns from data for a task",
+          "options": [
+            {
+              "id": "A",
+              "text": "Learn useful patterns from data for a task"
+            },
+            {
+              "id": "B",
+              "text": "Ignore all data"
+            },
+            {
+              "id": "C",
+              "text": "Remove all software"
+            },
+            {
+              "id": "D",
+              "text": "Increase screen size"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-ICT-C06-S01",
+      "chapter": {
+        "id": "IX-ICT-TECH-C06",
+        "number": 6
+      },
+      "topicId": "training data",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "AI Technologies"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Why does training-data quality matter in machine learning?",
+          "answer": "Poor, biased or unrepresentative data can produce unreliable or unfair model behavior."
+        }
+      }
+    },
+    {
+      "id": "IX-ICT-C06-S02",
+      "chapter": {
+        "id": "IX-ICT-TECH-C06",
+        "number": 6
+      },
+      "topicId": "responsible AI",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "AI Technologies"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Name two principles of responsible AI use.",
+          "answer": "Examples include privacy, fairness, accuracy checking, transparency, safety and human oversight; any two."
+        }
+      }
+    },
+    {
+      "id": "IX-ICT-C06-L01",
+      "chapter": {
+        "id": "IX-ICT-TECH-C06",
+        "number": 6
+      },
+      "topicId": "ai applications",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-043",
+        "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_CONTENTS_PAGE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "AI Technologies"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "ict-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-ICT-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original ICT IX Tech starter aligned to verified six-chapter contents. Academic review pending; no textbook/exercise wording copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Discuss three useful AI applications and the safeguards needed for responsible use.",
+          "answer": "Award marks for three valid applications plus discussion of privacy, fairness, accuracy/security and appropriate human oversight."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 30,
+    "mcq": 12,
+    "short": 12,
+    "long": 6,
+    "chapters": 6
+  }
+}

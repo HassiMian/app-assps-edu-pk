@@ -1,0 +1,4419 @@
+{
+  "schemaVersion": "assps-biology10-english-starter-v1",
+  "createdOn": "2026-10-07",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-020",
+  "sourcePdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+  "scope": "CURRENT_TEXTBOOK_RAPID_PROVISIONAL_STARTER",
+  "drafts": [
+    {
+      "id": "X-BIO-2026-C01-B01-M01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C01",
+        "number": 1
+      },
+      "topicId": "Nutrition and its Importance",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 5,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Nutrition and its Importance"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Which process breaks large food molecules into smaller absorbable units?",
+          "answer": "Digestion",
+          "options": [
+            {
+              "id": "A",
+              "text": "Digestion"
+            },
+            {
+              "id": "B",
+              "text": "Excretion"
+            },
+            {
+              "id": "C",
+              "text": "Ventilation"
+            },
+            {
+              "id": "D",
+              "text": "Transpiration"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-2026-C01-B01-S01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C01",
+        "number": 1
+      },
+      "topicId": "Nutrition and its Importance",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 5,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Nutrition and its Importance"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Differentiate ingestion and absorption.",
+          "answer": "Ingestion is taking food into the body; absorption is the movement of digested nutrients into blood or lymph."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C01-B01-L01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C01",
+        "number": 1
+      },
+      "topicId": "Nutrition and its Importance",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 5,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Nutrition and its Importance"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Describe the major stages by which food is processed and nutrients become available to body cells.",
+          "answer": "Award 1 mark each for ingestion, digestion, absorption, assimilation/use by cells, and egestion of undigested material."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C01-B02-M01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C01",
+        "number": 1
+      },
+      "topicId": "Human Digestive System",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 5,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Digestive System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Where does most nutrient absorption occur?",
+          "answer": "Small intestine",
+          "options": [
+            {
+              "id": "A",
+              "text": "Small intestine"
+            },
+            {
+              "id": "B",
+              "text": "Oesophagus"
+            },
+            {
+              "id": "C",
+              "text": "Large intestine"
+            },
+            {
+              "id": "D",
+              "text": "Mouth"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-2026-C01-B02-S01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C01",
+        "number": 1
+      },
+      "topicId": "Human Digestive System",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 5,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Digestive System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "State one function of the stomach and one of the small intestine.",
+          "answer": "The stomach mixes food and begins important digestion; the small intestine completes much digestion and absorbs most nutrients."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C01-B02-L01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C01",
+        "number": 1
+      },
+      "topicId": "Human Digestive System",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 5,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Digestive System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain how the structure and functions of the alimentary canal support digestion and absorption.",
+          "answer": "Award marks for sequential transport, mechanical/chemical digestion, enzyme action, absorption surface, and movement of nutrients into circulation."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C02-B01-M01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C02",
+        "number": 2
+      },
+      "topicId": "Human Respiratory System",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 16,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Respiratory System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Which structure is the main site of gas exchange in the lungs?",
+          "answer": "Alveoli",
+          "options": [
+            {
+              "id": "A",
+              "text": "Alveoli"
+            },
+            {
+              "id": "B",
+              "text": "Trachea"
+            },
+            {
+              "id": "C",
+              "text": "Larynx"
+            },
+            {
+              "id": "D",
+              "text": "Diaphragm"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-2026-C02-B01-S01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C02",
+        "number": 2
+      },
+      "topicId": "Human Respiratory System",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 16,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Respiratory System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Why are alveoli suitable for gas exchange?",
+          "answer": "They provide a large, thin, moist surface with a rich blood supply, allowing rapid diffusion of gases."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C02-B01-L01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C02",
+        "number": 2
+      },
+      "topicId": "Human Respiratory System",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 16,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Respiratory System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain inhalation, exhalation and gas exchange in the human respiratory system.",
+          "answer": "Award marks for rib/diaphragm changes during inhalation, pressure/volume change, reverse changes during exhalation, alveolar diffusion, and blood transport of gases."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C02-B02-M01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C02",
+        "number": 2
+      },
+      "topicId": "The Mechanism of Breathing",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 16,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "The Mechanism of Breathing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "During inhalation, what happens to the diaphragm?",
+          "answer": "It contracts and flattens",
+          "options": [
+            {
+              "id": "A",
+              "text": "It contracts and flattens"
+            },
+            {
+              "id": "B",
+              "text": "It relaxes and rises"
+            },
+            {
+              "id": "C",
+              "text": "It closes the trachea"
+            },
+            {
+              "id": "D",
+              "text": "It stops moving permanently"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-2026-C02-B02-S01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C02",
+        "number": 2
+      },
+      "topicId": "The Mechanism of Breathing",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 16,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "The Mechanism of Breathing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "How does contraction of the diaphragm help air enter the lungs?",
+          "answer": "Contraction flattens the diaphragm, increasing thoracic volume and lowering pressure so air moves into the lungs."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C02-B02-L01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C02",
+        "number": 2
+      },
+      "topicId": "The Mechanism of Breathing",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 16,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "The Mechanism of Breathing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Compare inhalation and exhalation in terms of muscle action, thoracic volume and pressure.",
+          "answer": "Award marks for diaphragm action, rib movement, volume change, pressure change, and resulting direction of airflow."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C03-B01-M01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C03",
+        "number": 3
+      },
+      "topicId": "Blood and its Components",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 28,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Blood and its Components"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Which blood component is mainly responsible for oxygen transport?",
+          "answer": "Red blood cells",
+          "options": [
+            {
+              "id": "A",
+              "text": "Red blood cells"
+            },
+            {
+              "id": "B",
+              "text": "Platelets"
+            },
+            {
+              "id": "C",
+              "text": "Plasma proteins only"
+            },
+            {
+              "id": "D",
+              "text": "White blood cells"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-2026-C03-B01-S01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C03",
+        "number": 3
+      },
+      "topicId": "Blood and its Components",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 28,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Blood and its Components"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "State one function each of red blood cells and platelets.",
+          "answer": "Red blood cells transport oxygen; platelets help blood clot."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C03-B01-L01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C03",
+        "number": 3
+      },
+      "topicId": "Blood and its Components",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 28,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Blood and its Components"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Describe the major components of blood and explain how each supports transport or protection.",
+          "answer": "Award marks for plasma, red blood cells, white blood cells, platelets, and an accurate function for each."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C03-B02-M01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C03",
+        "number": 3
+      },
+      "topicId": "Human Heart",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 28,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Heart"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Which chamber pumps oxygenated blood into the systemic circulation?",
+          "answer": "Left ventricle",
+          "options": [
+            {
+              "id": "A",
+              "text": "Left ventricle"
+            },
+            {
+              "id": "B",
+              "text": "Right ventricle"
+            },
+            {
+              "id": "C",
+              "text": "Right atrium"
+            },
+            {
+              "id": "D",
+              "text": "Left atrium"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-2026-C03-B02-S01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C03",
+        "number": 3
+      },
+      "topicId": "Human Heart",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 28,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Heart"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Why is the wall of the left ventricle thicker than that of the right ventricle?",
+          "answer": "It must generate higher pressure to pump blood through the whole body."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C03-B02-L01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C03",
+        "number": 3
+      },
+      "topicId": "Human Heart",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 28,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Heart"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Trace blood flow through the four chambers of the heart and the pulmonary/systemic circuits.",
+          "answer": "Award marks for right atrium, right ventricle to lungs, return to left atrium, left ventricle to body, and correct valve/major-vessel direction."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C04-B01-M01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C04",
+        "number": 4
+      },
+      "topicId": "Functioning of the Kidney",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 42,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Functioning of the Kidney"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "What is the functional unit of the kidney?",
+          "answer": "Nephron",
+          "options": [
+            {
+              "id": "A",
+              "text": "Nephron"
+            },
+            {
+              "id": "B",
+              "text": "Alveolus"
+            },
+            {
+              "id": "C",
+              "text": "Neuron"
+            },
+            {
+              "id": "D",
+              "text": "Villus"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-2026-C04-B01-S01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C04",
+        "number": 4
+      },
+      "topicId": "Functioning of the Kidney",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 42,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Functioning of the Kidney"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "What is selective reabsorption in a nephron?",
+          "answer": "It is the return of useful substances such as glucose, needed ions and much water from the filtrate to the blood."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C04-B01-L01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C04",
+        "number": 4
+      },
+      "topicId": "Functioning of the Kidney",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 42,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Functioning of the Kidney"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain how filtration, selective reabsorption and secretion contribute to urine formation.",
+          "answer": "Award marks for filtration, useful-substance reabsorption, water/ion regulation, secretion of selected wastes/ions, and formation of final urine."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C04-B02-M01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C04",
+        "number": 4
+      },
+      "topicId": "Human Urinary System",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 42,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Urinary System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Which tube carries urine from a kidney to the urinary bladder?",
+          "answer": "Ureter",
+          "options": [
+            {
+              "id": "A",
+              "text": "Ureter"
+            },
+            {
+              "id": "B",
+              "text": "Urethra"
+            },
+            {
+              "id": "C",
+              "text": "Renal artery"
+            },
+            {
+              "id": "D",
+              "text": "Vena cava"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-2026-C04-B02-S01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C04",
+        "number": 4
+      },
+      "topicId": "Human Urinary System",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 42,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Urinary System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Differentiate the ureter and urethra.",
+          "answer": "A ureter carries urine from a kidney to the bladder; the urethra carries urine from the bladder to the outside."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C04-B02-L01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C04",
+        "number": 4
+      },
+      "topicId": "Human Urinary System",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 42,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Urinary System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Describe the pathway of urine from its formation in the kidneys to elimination.",
+          "answer": "Award marks for nephron formation, collecting ducts/renal pelvis, ureters, bladder storage, and urethral elimination."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C05-B01-M01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C05",
+        "number": 5
+      },
+      "topicId": "Neurons - The Units of Nervous System",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 52,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Neurons - The Units of Nervous System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Which part of a neuron normally carries impulses away from the cell body?",
+          "answer": "Axon",
+          "options": [
+            {
+              "id": "A",
+              "text": "Axon"
+            },
+            {
+              "id": "B",
+              "text": "Dendrite"
+            },
+            {
+              "id": "C",
+              "text": "Nucleus"
+            },
+            {
+              "id": "D",
+              "text": "Receptor only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-2026-C05-B01-S01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C05",
+        "number": 5
+      },
+      "topicId": "Neurons - The Units of Nervous System",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 52,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Neurons - The Units of Nervous System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "State the roles of dendrites and axon.",
+          "answer": "Dendrites receive signals toward the cell body; the axon carries impulses away from the cell body."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C05-B01-L01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C05",
+        "number": 5
+      },
+      "topicId": "Neurons - The Units of Nervous System",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 52,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Neurons - The Units of Nervous System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain how a nervous response can pass from receptor to effector.",
+          "answer": "Award marks for receptor, sensory neuron, central processing/relay, motor neuron, and effector response."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C05-B02-M01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C05",
+        "number": 5
+      },
+      "topicId": "Endocrine System",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 52,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Endocrine System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Hormones are released into which transport medium?",
+          "answer": "Blood",
+          "options": [
+            {
+              "id": "A",
+              "text": "Blood"
+            },
+            {
+              "id": "B",
+              "text": "Digestive lumen"
+            },
+            {
+              "id": "C",
+              "text": "Bone marrow cavity only"
+            },
+            {
+              "id": "D",
+              "text": "Alveolar air"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-2026-C05-B02-S01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C05",
+        "number": 5
+      },
+      "topicId": "Endocrine System",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 52,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Endocrine System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "How does endocrine coordination differ from nervous coordination?",
+          "answer": "Endocrine control uses hormones carried in blood and is often slower/longer lasting; nervous control uses electrical impulses and is usually faster/more targeted."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C05-B02-L01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C05",
+        "number": 5
+      },
+      "topicId": "Endocrine System",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 52,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Endocrine System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Compare nervous and endocrine coordination using signal type, route, speed, duration and target specificity.",
+          "answer": "Award one mark for each accurate comparison of signal, route, speed, duration and targeting."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C06-B01-M01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C06",
+        "number": 6
+      },
+      "topicId": "Formation of Gametes and Fertilization",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 68,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Formation of Gametes and Fertilization"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "What is fertilization?",
+          "answer": "Fusion of male and female gametes",
+          "options": [
+            {
+              "id": "A",
+              "text": "Fusion of male and female gametes"
+            },
+            {
+              "id": "B",
+              "text": "Formation of identical body cells"
+            },
+            {
+              "id": "C",
+              "text": "Release of urine"
+            },
+            {
+              "id": "D",
+              "text": "Digestion of food"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-2026-C06-B01-S01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C06",
+        "number": 6
+      },
+      "topicId": "Formation of Gametes and Fertilization",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 68,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Formation of Gametes and Fertilization"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Why are gametes haploid?",
+          "answer": "They contain one set of chromosomes so fertilization restores the diploid chromosome number rather than doubling it each generation."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C06-B01-L01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C06",
+        "number": 6
+      },
+      "topicId": "Formation of Gametes and Fertilization",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 68,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Formation of Gametes and Fertilization"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain how gamete formation and fertilization maintain chromosome number across generations.",
+          "answer": "Award marks for meiosis, haploid gametes, fusion at fertilization, diploid zygote restoration, and genetic variation/parental contribution."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C06-B02-M01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C06",
+        "number": 6
+      },
+      "topicId": "Role of Hormones in Sexual Development",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 68,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Role of Hormones in Sexual Development"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Which general role do reproductive hormones have during puberty?",
+          "answer": "They regulate development of reproductive organs and secondary sexual characteristics",
+          "options": [
+            {
+              "id": "A",
+              "text": "They regulate development of reproductive organs and secondary sexual characteristics"
+            },
+            {
+              "id": "B",
+              "text": "They digest proteins"
+            },
+            {
+              "id": "C",
+              "text": "They filter blood in nephrons"
+            },
+            {
+              "id": "D",
+              "text": "They carry oxygen"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-2026-C06-B02-S01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C06",
+        "number": 6
+      },
+      "topicId": "Role of Hormones in Sexual Development",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 68,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Role of Hormones in Sexual Development"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "State one reason hormonal regulation is important in reproduction.",
+          "answer": "Hormones coordinate development and timing of reproductive functions such as gamete production and reproductive cycles."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C06-B02-L01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C06",
+        "number": 6
+      },
+      "topicId": "Role of Hormones in Sexual Development",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 68,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Role of Hormones in Sexual Development"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Describe how hormonal signals coordinate major reproductive changes during adolescence and adulthood.",
+          "answer": "Award marks for endocrine source, target tissues, puberty changes, gamete/reproductive function regulation, and feedback/coordination concept."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C07-B01-M01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C07",
+        "number": 7
+      },
+      "topicId": "Structure of Chromosome",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 77,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Structure of Chromosome"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "What molecule carries most hereditary information in chromosomes?",
+          "answer": "DNA",
+          "options": [
+            {
+              "id": "A",
+              "text": "DNA"
+            },
+            {
+              "id": "B",
+              "text": "Glycogen"
+            },
+            {
+              "id": "C",
+              "text": "Cellulose"
+            },
+            {
+              "id": "D",
+              "text": "Triglyceride"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-2026-C07-B01-S01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C07",
+        "number": 7
+      },
+      "topicId": "Structure of Chromosome",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 77,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Structure of Chromosome"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Define a gene in relation to DNA.",
+          "answer": "A gene is a functional segment of DNA that carries information contributing to a biological product or inherited characteristic."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C07-B01-L01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C07",
+        "number": 7
+      },
+      "topicId": "Structure of Chromosome",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 77,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Structure of Chromosome"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Relate chromosomes, DNA and genes to the transmission of hereditary information.",
+          "answer": "Award marks for chromosomes containing DNA, DNA structure/information role, genes as DNA segments, replication/transmission, and inheritance through gametes."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C07-B02-M01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C07",
+        "number": 7
+      },
+      "topicId": "Mendel’s Laws of Inheritance",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 77,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Mendel’s Laws of Inheritance"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "What term describes alternative forms of the same gene?",
+          "answer": "Alleles",
+          "options": [
+            {
+              "id": "A",
+              "text": "Alleles"
+            },
+            {
+              "id": "B",
+              "text": "Organs"
+            },
+            {
+              "id": "C",
+              "text": "Enzymes"
+            },
+            {
+              "id": "D",
+              "text": "Lipids"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-2026-C07-B02-S01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C07",
+        "number": 7
+      },
+      "topicId": "Mendel’s Laws of Inheritance",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 77,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Mendel’s Laws of Inheritance"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Differentiate genotype and phenotype.",
+          "answer": "Genotype is the allele combination/genetic constitution; phenotype is the observable characteristic produced by genotype together with environmental effects."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C07-B02-L01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C07",
+        "number": 7
+      },
+      "topicId": "Mendel’s Laws of Inheritance",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 77,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Mendel’s Laws of Inheritance"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain a simple monohybrid inheritance pattern using alleles, dominance, genotype and phenotype.",
+          "answer": "Award marks for allele symbols, parental genotypes, gametes, offspring genotype combinations, and correct phenotype interpretation."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C08-B01-M01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C08",
+        "number": 8
+      },
+      "topicId": "Genetic Engineering",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 90,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Genetic Engineering"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Genetic engineering directly involves what?",
+          "answer": "Deliberate modification or transfer of genetic material",
+          "options": [
+            {
+              "id": "A",
+              "text": "Deliberate modification or transfer of genetic material"
+            },
+            {
+              "id": "B",
+              "text": "Only selective feeding"
+            },
+            {
+              "id": "C",
+              "text": "Only mechanical digestion"
+            },
+            {
+              "id": "D",
+              "text": "Only blood clotting"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-2026-C08-B01-S01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C08",
+        "number": 8
+      },
+      "topicId": "Genetic Engineering",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 90,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Genetic Engineering"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "What is meant by genetic engineering?",
+          "answer": "It is the deliberate manipulation of genetic material to introduce, remove or alter genetic information for a desired purpose."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C08-B01-L01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C08",
+        "number": 8
+      },
+      "topicId": "Genetic Engineering",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 90,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Genetic Engineering"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Describe a general sequence by which a useful gene can be identified, transferred and expressed in a host organism.",
+          "answer": "Award marks for gene identification/isolation, vector or delivery method, insertion into host, selection/verification, and expression/use of the product."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C08-B02-M01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C08",
+        "number": 8
+      },
+      "topicId": "Applications of Biotechnology",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 90,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Applications of Biotechnology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Which is an example of biotechnology?",
+          "answer": "Using microorganisms or engineered cells to make useful products",
+          "options": [
+            {
+              "id": "A",
+              "text": "Using microorganisms or engineered cells to make useful products"
+            },
+            {
+              "id": "B",
+              "text": "Measuring body temperature only"
+            },
+            {
+              "id": "C",
+              "text": "Filtering sand from water only"
+            },
+            {
+              "id": "D",
+              "text": "Drawing a food web"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-2026-C08-B02-S01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C08",
+        "number": 8
+      },
+      "topicId": "Applications of Biotechnology",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 90,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Applications of Biotechnology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "State one benefit and one potential concern associated with biotechnology.",
+          "answer": "A benefit can be production of medicines or improved crops; a concern can involve environmental, ethical or biosafety risks that require assessment."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C08-B02-L01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C08",
+        "number": 8
+      },
+      "topicId": "Applications of Biotechnology",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 90,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Applications of Biotechnology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Evaluate biotechnology by describing two applications, two potential benefits and one risk-management consideration.",
+          "answer": "Award marks for two valid applications, two relevant benefits, and one thoughtful risk/biosafety/ethical consideration."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C09-B01-M01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C09",
+        "number": 9
+      },
+      "topicId": "Pathogens",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 100,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Pathogens"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "A pathogen is best defined as what?",
+          "answer": "A disease-causing biological agent",
+          "options": [
+            {
+              "id": "A",
+              "text": "A disease-causing biological agent"
+            },
+            {
+              "id": "B",
+              "text": "Any nutrient"
+            },
+            {
+              "id": "C",
+              "text": "A red blood cell"
+            },
+            {
+              "id": "D",
+              "text": "A digestive enzyme"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-2026-C09-B01-S01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C09",
+        "number": 9
+      },
+      "topicId": "Pathogens",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 100,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Pathogens"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Name two broad types of pathogens.",
+          "answer": "Examples include viruses, bacteria, fungi and protozoan parasites; any two valid groups earn credit."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C09-B01-L01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C09",
+        "number": 9
+      },
+      "topicId": "Pathogens",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 100,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Pathogens"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain how pathogens cause disease and how transmission can be reduced.",
+          "answer": "Award marks for pathogen entry, multiplication/action, host damage or symptoms, transmission route, and a matching prevention/control method."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C09-B02-M01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C09",
+        "number": 9
+      },
+      "topicId": "Immunity",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 100,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Immunity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "What is the main purpose of an immune response?",
+          "answer": "To recognize and control harmful foreign agents",
+          "options": [
+            {
+              "id": "A",
+              "text": "To recognize and control harmful foreign agents"
+            },
+            {
+              "id": "B",
+              "text": "To digest food"
+            },
+            {
+              "id": "C",
+              "text": "To pump blood"
+            },
+            {
+              "id": "D",
+              "text": "To produce urine"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-2026-C09-B02-S01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C09",
+        "number": 9
+      },
+      "topicId": "Immunity",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 100,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Immunity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Differentiate innate and adaptive immunity.",
+          "answer": "Innate immunity provides rapid non-specific defenses; adaptive immunity develops specific responses and can generate immunological memory."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C09-B02-L01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C09",
+        "number": 9
+      },
+      "topicId": "Immunity",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 100,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Immunity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Compare innate and adaptive immunity and explain how vaccination can strengthen protection.",
+          "answer": "Award marks for innate features, adaptive specificity, lymphocyte/antibody or cellular response concept, memory, and vaccination stimulating protective memory without causing the full disease."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C10-B01-M01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C10",
+        "number": 10
+      },
+      "topicId": "Theory of Evolution by Natural Selection",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 110,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Theory of Evolution by Natural Selection"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Natural selection acts most directly on what?",
+          "answer": "Heritable variation affecting survival or reproduction",
+          "options": [
+            {
+              "id": "A",
+              "text": "Heritable variation affecting survival or reproduction"
+            },
+            {
+              "id": "B",
+              "text": "All acquired habits equally"
+            },
+            {
+              "id": "C",
+              "text": "Only non-heritable changes"
+            },
+            {
+              "id": "D",
+              "text": "Random choice by organisms"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-2026-C10-B01-S01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C10",
+        "number": 10
+      },
+      "topicId": "Theory of Evolution by Natural Selection",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 110,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Theory of Evolution by Natural Selection"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "What role does variation play in natural selection?",
+          "answer": "Heritable variation creates differences among individuals; variants that improve survival or reproduction can become more common over generations."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C10-B01-L01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C10",
+        "number": 10
+      },
+      "topicId": "Theory of Evolution by Natural Selection",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 110,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Theory of Evolution by Natural Selection"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain natural selection from variation to change in a population over generations.",
+          "answer": "Award marks for heritable variation, environmental selection pressure, differential survival/reproduction, inheritance of advantageous variants, and changing trait/allele frequencies over generations."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C10-B02-M01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C10",
+        "number": 10
+      },
+      "topicId": "Evidences of Evolution",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 110,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Evidences of Evolution"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Which type of evidence can support common ancestry?",
+          "answer": "Comparative anatomy and molecular similarities",
+          "options": [
+            {
+              "id": "A",
+              "text": "Comparative anatomy and molecular similarities"
+            },
+            {
+              "id": "B",
+              "text": "Only daily weather"
+            },
+            {
+              "id": "C",
+              "text": "Only individual exercise"
+            },
+            {
+              "id": "D",
+              "text": "Only soil colour"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-2026-C10-B02-S01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C10",
+        "number": 10
+      },
+      "topicId": "Evidences of Evolution",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 110,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Evidences of Evolution"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "State two kinds of evidence used to study evolution.",
+          "answer": "Examples include fossils, comparative anatomy, embryological patterns, biogeography and molecular/DNA similarities; any two valid forms earn credit."
+        }
+      }
+    },
+    {
+      "id": "X-BIO-2026-C10-B02-L01",
+      "chapter": {
+        "id": "X-BIO-2026-EM-C10",
+        "number": 10
+      },
+      "topicId": "Evidences of Evolution",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-020",
+        "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+        "page": 110,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Evidences of Evolution"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Biology starter draft grounded in current 2026-27 textbook chapter/topic map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain how multiple independent lines of evidence can support evolutionary relationships.",
+          "answer": "Award marks for fossil evidence, anatomical/homologous evidence, molecular/DNA evidence, biogeography or embryology, and synthesis showing agreement among independent evidence sources."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 60,
+    "mcq": 20,
+    "short": 20,
+    "long": 20,
+    "chapters": 10
+  }
+}

@@ -1,0 +1,670 @@
+{
+  "schemaVersion": "assps-english9-original-competency-batch-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-004",
+  "sourcePdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+  "sourceMap": "english9SourceMap2026.json",
+  "officialTextbookUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+  "boardPatternAuthority": "officialGrade9LanguageModelHierarchy2026.json",
+  "boardActualEvidence": "grade9LanguageActualPaperDiscovery2026.json",
+  "sourcePagePolicy": "Only verified TOC/skills page 2/3. Original questions are NOT copied textbook or actual paper questions. Exact textbook exercise references are not asserted.",
+  "fullBookDefault": true,
+  "alpOptionalOnly": true,
+  "items": [
+    {
+      "id": "IX-ENG-ORIG-20261008-M001",
+      "unit": 1,
+      "category": "verb-form",
+      "skill": "verb-form",
+      "type": "mcq",
+      "marks": 1,
+      "stem": "By the time the assembly began, the volunteers ___ the chairs.",
+      "options": [
+        "arranged",
+        "had arranged",
+        "are arranging",
+        "will arrange"
+      ],
+      "answer": "had arranged",
+      "explanation": "The past perfect shows completion before another past event."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M002",
+      "unit": 2,
+      "category": "verb-form",
+      "skill": "verb-form",
+      "type": "mcq",
+      "marks": 1,
+      "stem": "If the library opens early tomorrow, I ___ my book before class.",
+      "options": [
+        "returned",
+        "return",
+        "will return",
+        "had returned"
+      ],
+      "answer": "will return",
+      "explanation": "A real future condition takes the present simple in the if-clause and will in the result."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M003",
+      "unit": 3,
+      "category": "verb-form",
+      "skill": "verb-form",
+      "type": "mcq",
+      "marks": 1,
+      "stem": "Look! The clouds ___ across the valley.",
+      "options": [
+        "moved",
+        "move",
+        "are moving",
+        "had moved"
+      ],
+      "answer": "are moving",
+      "explanation": "Look signals an action in progress."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M004",
+      "unit": 4,
+      "category": "verb-form",
+      "skill": "verb-form",
+      "type": "mcq",
+      "marks": 1,
+      "stem": "She ___ the report when the lights went out.",
+      "options": [
+        "edits",
+        "was editing",
+        "has edited",
+        "will edit"
+      ],
+      "answer": "was editing",
+      "explanation": "The past continuous describes an interrupted past activity."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M005",
+      "unit": 5,
+      "category": "verb-form",
+      "skill": "verb-form",
+      "type": "mcq",
+      "marks": 1,
+      "stem": "The club ___ three workshops since January.",
+      "options": [
+        "organises",
+        "had organised",
+        "has organised",
+        "will organise"
+      ],
+      "answer": "has organised",
+      "explanation": "Since January connects a period continuing to the present."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M006",
+      "unit": 6,
+      "category": "verb-form",
+      "skill": "verb-form",
+      "type": "mcq",
+      "marks": 1,
+      "stem": "By next Friday, the class ___ its reading project.",
+      "options": [
+        "completes",
+        "completed",
+        "will have completed",
+        "has completed"
+      ],
+      "answer": "will have completed",
+      "explanation": "The future perfect marks completion before a future deadline."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M007",
+      "unit": 7,
+      "category": "spelling",
+      "skill": "spelling",
+      "type": "mcq",
+      "marks": 1,
+      "stem": "Choose the correctly spelled word for the ability to recover after difficulty.",
+      "options": [
+        "resiliance",
+        "resilience",
+        "resillience",
+        "resilence"
+      ],
+      "answer": "resilience",
+      "explanation": "Resilience is the standard spelling."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M008",
+      "unit": 8,
+      "category": "spelling",
+      "skill": "spelling",
+      "type": "mcq",
+      "marks": 1,
+      "stem": "Which spelling correctly names a connection between people or places?",
+      "options": [
+        "relashionship",
+        "relationship",
+        "relationchip",
+        "relatioship"
+      ],
+      "answer": "relationship",
+      "explanation": "Relationship contains the sequence -tion- and the ending -ship."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M009",
+      "unit": 9,
+      "category": "spelling",
+      "skill": "spelling",
+      "type": "mcq",
+      "marks": 1,
+      "stem": "Select the correct spelling of the noun meaning careful protection of nature.",
+      "options": [
+        "conservasion",
+        "conservation",
+        "conservetion",
+        "conserrvation"
+      ],
+      "answer": "conservation",
+      "explanation": "Conservation is spelled with -vation."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M010",
+      "unit": 10,
+      "category": "spelling",
+      "skill": "spelling",
+      "type": "mcq",
+      "marks": 1,
+      "stem": "Which word is spelled correctly?",
+      "options": [
+        "oppertunity",
+        "opportunity",
+        "opportiunity",
+        "oportunity"
+      ],
+      "answer": "opportunity",
+      "explanation": "Opportunity has double p and ends in -tunity."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M011",
+      "unit": 11,
+      "category": "vocabulary-context",
+      "skill": "vocabulary-context",
+      "type": "mcq",
+      "marks": 1,
+      "stem": "In the sentence 'The committee reached a fair decision,' fair most nearly means ___.",
+      "options": [
+        "pale",
+        "just",
+        "temporary",
+        "ordinary"
+      ],
+      "answer": "just",
+      "explanation": "Fair describes an impartial or just decision."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M012",
+      "unit": 1,
+      "category": "vocabulary-context",
+      "skill": "vocabulary-context",
+      "type": "mcq",
+      "marks": 1,
+      "stem": "In 'The mentor offered practical guidance,' practical means ___.",
+      "options": [
+        "imaginary",
+        "useful in real situations",
+        "very expensive",
+        "hard to explain"
+      ],
+      "answer": "useful in real situations",
+      "explanation": "Practical guidance can be applied to real tasks."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M013",
+      "unit": 2,
+      "category": "vocabulary-context",
+      "skill": "vocabulary-context",
+      "type": "mcq",
+      "marks": 1,
+      "stem": "In 'The team remained united despite setbacks,' setbacks are ___.",
+      "options": [
+        "awards",
+        "difficulties that delay progress",
+        "celebrations",
+        "instructions"
+      ],
+      "answer": "difficulties that delay progress",
+      "explanation": "A setback temporarily hinders progress."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M014",
+      "unit": 5,
+      "category": "vocabulary-context",
+      "skill": "vocabulary-context",
+      "type": "mcq",
+      "marks": 1,
+      "stem": "In 'Her small venture became sustainable,' sustainable means ___.",
+      "options": [
+        "impossible to measure",
+        "able to continue over time",
+        "always profitable",
+        "completed yesterday"
+      ],
+      "answer": "able to continue over time",
+      "explanation": "Sustainable describes something that can be maintained."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M015",
+      "unit": 10,
+      "category": "vocabulary-context",
+      "skill": "vocabulary-context",
+      "type": "mcq",
+      "marks": 1,
+      "stem": "In 'The habitat is fragile,' fragile suggests ___.",
+      "options": [
+        "unusually loud",
+        "easily damaged",
+        "perfectly safe",
+        "extremely large"
+      ],
+      "answer": "easily damaged",
+      "explanation": "Fragile describes vulnerability to harm."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M016",
+      "unit": 3,
+      "category": "grammar",
+      "skill": "grammar",
+      "type": "mcq",
+      "marks": 1,
+      "stem": "Which sentence uses an apostrophe correctly to show plural possession?",
+      "options": [
+        "The student's notebooks were collected.",
+        "The students' notebooks were collected.",
+        "The students notebooks' were collected.",
+        "The student notebooks were collected."
+      ],
+      "answer": "The students' notebooks were collected.",
+      "explanation": "Students' shows that the notebooks belong to multiple students."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M017",
+      "unit": 4,
+      "category": "grammar",
+      "skill": "grammar",
+      "type": "mcq",
+      "marks": 1,
+      "stem": "Identify the gerund in 'Reading regularly improves concentration.'",
+      "options": [
+        "regularly",
+        "improves",
+        "Reading",
+        "concentration"
+      ],
+      "answer": "Reading",
+      "explanation": "Reading functions as the subject of the sentence."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M018",
+      "unit": 5,
+      "category": "grammar",
+      "skill": "grammar",
+      "type": "mcq",
+      "marks": 1,
+      "stem": "Choose the correct reported speech: Sara said, 'I am preparing a plan.'",
+      "options": [
+        "Sara said that I am preparing a plan.",
+        "Sara said that she was preparing a plan.",
+        "Sara said that she prepares a plan tomorrow.",
+        "Sara says that she had preparing a plan."
+      ],
+      "answer": "Sara said that she was preparing a plan.",
+      "explanation": "Backshift am preparing to was preparing in past reporting."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M019",
+      "unit": 6,
+      "category": "grammar",
+      "skill": "grammar",
+      "type": "mcq",
+      "marks": 1,
+      "stem": "Which sentence uses the semicolon correctly?",
+      "options": [
+        "The task; was difficult the team completed it.",
+        "The task was difficult; the team completed it.",
+        "The task was; difficult, the team completed it.",
+        "The task was difficult the; team completed it."
+      ],
+      "answer": "The task was difficult; the team completed it.",
+      "explanation": "A semicolon can join closely related independent clauses."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M020",
+      "unit": 7,
+      "category": "grammar",
+      "skill": "grammar",
+      "type": "mcq",
+      "marks": 1,
+      "stem": "In 'The bright idea spread quickly,' quickly is a(n) ___.",
+      "options": [
+        "adjective",
+        "noun",
+        "adverb",
+        "preposition"
+      ],
+      "answer": "adverb",
+      "explanation": "Quickly modifies the verb spread."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M021",
+      "unit": 8,
+      "category": "grammar",
+      "skill": "grammar",
+      "type": "mcq",
+      "marks": 1,
+      "stem": "Choose the sentence with correct subject-verb agreement.",
+      "options": [
+        "Each of the students have a notebook.",
+        "Each of the students has a notebook.",
+        "Each of the students are having a notebook.",
+        "Each of the students were a notebook."
+      ],
+      "answer": "Each of the students has a notebook.",
+      "explanation": "Each is singular and takes has."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M022",
+      "unit": 9,
+      "category": "grammar",
+      "skill": "grammar",
+      "type": "mcq",
+      "marks": 1,
+      "stem": "Which is a correct example of the first conditional?",
+      "options": [
+        "If we practised, we improve.",
+        "If we practise, we will improve.",
+        "If we will practise, we improved.",
+        "If we had practised, we improve."
+      ],
+      "answer": "If we practise, we will improve.",
+      "explanation": "The first conditional pairs if + present simple with will + base verb."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M023",
+      "unit": 10,
+      "category": "grammar",
+      "skill": "grammar",
+      "type": "mcq",
+      "marks": 1,
+      "stem": "Which sentence uses the passive voice?",
+      "options": [
+        "The volunteers planted the seedlings.",
+        "The seedlings were planted by the volunteers.",
+        "The volunteers are planting seedlings.",
+        "The volunteers will plant seedlings."
+      ],
+      "answer": "The seedlings were planted by the volunteers.",
+      "explanation": "Were planted is a passive verb phrase."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-M024",
+      "unit": 11,
+      "category": "grammar",
+      "skill": "grammar",
+      "type": "mcq",
+      "marks": 1,
+      "stem": "Choose the best connector: 'The proposal was clear; ___, it needed stronger evidence.'",
+      "options": [
+        "therefore",
+        "for example",
+        "however",
+        "similarly"
+      ],
+      "answer": "however",
+      "explanation": "However introduces a contrast between clarity and insufficient evidence."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-G001",
+      "unit": 1,
+      "category": "grammar",
+      "skill": "punctuation",
+      "type": "grammar",
+      "marks": 2,
+      "stem": "Rewrite with correct punctuation: although it rained the event continued",
+      "answer": "Although it rained, the event continued.",
+      "rubric": "Capitalise the opening word and use a comma after the introductory dependent clause."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-G002",
+      "unit": 2,
+      "category": "grammar",
+      "skill": "direct and indirect narration",
+      "type": "grammar",
+      "marks": 2,
+      "stem": "Change to reported speech: Ali said, 'I will help the group.'",
+      "answer": "Ali said that he would help the group.",
+      "rubric": "Award for correct pronoun shift and will-to-would backshift."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-G003",
+      "unit": 3,
+      "category": "grammar",
+      "skill": "figurative language",
+      "type": "grammar",
+      "marks": 2,
+      "stem": "Identify the figure of speech in the original sentence: 'The wind whispered through the trees.'",
+      "answer": "Personification.",
+      "rubric": "The wind is given the human action of whispering."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-G004",
+      "unit": 4,
+      "category": "grammar",
+      "skill": "tenses and verbals",
+      "type": "grammar",
+      "marks": 2,
+      "stem": "Combine using a present participle: 'The child smiled. The child carried a handmade card.'",
+      "answer": "Smiling, the child carried a handmade card.",
+      "rubric": "Accept an equivalent grammatical participial clause with the same subject."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-G005",
+      "unit": 5,
+      "category": "grammar",
+      "skill": "idioms and proverbs",
+      "type": "grammar",
+      "marks": 2,
+      "stem": "Explain 'learn the ropes' in the sentence: 'The new volunteer needed time to learn the ropes.'",
+      "answer": "To learn how a task or activity is done.",
+      "rubric": "Award for the idiomatic meaning, not a literal explanation of ropes."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-G006",
+      "unit": 6,
+      "category": "grammar",
+      "skill": "summary/paraphrase/precis",
+      "type": "grammar",
+      "marks": 2,
+      "stem": "Paraphrase without changing meaning: 'A short, focused plan can save considerable time.'",
+      "answer": "A brief, clear plan can prevent a great deal of wasted time.",
+      "rubric": "Accept an accurate original paraphrase preserving focus, brevity and time saved."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-G007",
+      "unit": 7,
+      "category": "grammar",
+      "skill": "dictionary/context use",
+      "type": "grammar",
+      "marks": 2,
+      "stem": "Use context to explain 'persistent' in: 'Despite repeated errors, the persistent learner kept practising.'",
+      "answer": "Continuing with effort despite difficulty.",
+      "rubric": "Accept determined or persevering with a supporting clue from the sentence."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-G008",
+      "unit": 8,
+      "category": "grammar",
+      "skill": "punctuation",
+      "type": "grammar",
+      "marks": 2,
+      "stem": "Insert suitable punctuation: the guide asked are we ready to begin",
+      "answer": "The guide asked, 'Are we ready to begin?'",
+      "rubric": "Accept double quotation marks; award for comma, capitalisation and question mark inside quotation."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-G009",
+      "unit": 9,
+      "category": "grammar",
+      "skill": "tenses and verbals",
+      "type": "grammar",
+      "marks": 2,
+      "stem": "Correct the verb in: 'Neither of the explanations are complete.'",
+      "answer": "Neither of the explanations is complete.",
+      "rubric": "Neither is singular in this construction, so is is required."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-G010",
+      "unit": 11,
+      "category": "grammar",
+      "skill": "direct and indirect narration",
+      "type": "grammar",
+      "marks": 2,
+      "stem": "Change to direct speech: The coach advised the team to remain calm.",
+      "answer": "The coach said to the team, 'Remain calm.'",
+      "rubric": "Accept an equivalent imperative quotation retaining the advice."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-W001",
+      "unit": 2,
+      "category": "composition",
+      "skill": "paragraph and essay writing",
+      "type": "essay",
+      "marks": 8,
+      "stem": "Write a 120-150 word paragraph explaining how a student can serve the community without spending money.",
+      "answer": "Open response; evaluate against the rubric.",
+      "rubric": [
+        "clear central idea",
+        "two feasible examples",
+        "logical sequencing",
+        "accurate language"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-W002",
+      "unit": 5,
+      "category": "composition",
+      "skill": "paragraph and essay writing",
+      "type": "essay",
+      "marks": 8,
+      "stem": "Write a short persuasive paragraph arguing for or against a student-run school exhibition.",
+      "answer": "Open response; evaluate against the rubric.",
+      "rubric": [
+        "clear position",
+        "two relevant reasons",
+        "one anticipated objection",
+        "coherent conclusion"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-W003",
+      "unit": 9,
+      "category": "composition",
+      "skill": "speech/book review/dialogue",
+      "type": "essay",
+      "marks": 8,
+      "stem": "Prepare a one-minute speech explaining why equal access to learning resources matters.",
+      "answer": "Open response; evaluate against the rubric.",
+      "rubric": [
+        "purpose and audience",
+        "two supported points",
+        "effective opening and closing",
+        "clear expression"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-W004",
+      "unit": 10,
+      "category": "composition",
+      "skill": "speech/book review/dialogue",
+      "type": "essay",
+      "marks": 8,
+      "stem": "Write a dialogue of 8-10 exchanges between two students planning a wildlife-awareness event.",
+      "answer": "Open response; evaluate against the rubric.",
+      "rubric": [
+        "natural turn-taking",
+        "accurate conservation message",
+        "practical action plan",
+        "correct punctuation"
+      ]
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-C001",
+      "unit": 6,
+      "category": "comprehension",
+      "skill": "reading and critical thinking",
+      "type": "comprehension",
+      "marks": 3,
+      "passage": "A class agreed to test two revision plans. One group studied for three hours without a break; the other used shorter sessions with a brief review at the end. Both groups covered the same topics. At the end of the week, the teacher asked them to explain what they remembered and how tired they felt.",
+      "stem": "What variable differed between the two groups?",
+      "answer": "The organisation of study time: one long session versus shorter sessions with review.",
+      "rubric": "Award for an accurate response supported by the original passage."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-C002",
+      "unit": 6,
+      "category": "comprehension",
+      "skill": "reading and critical thinking",
+      "type": "comprehension",
+      "marks": 3,
+      "passage": "A class agreed to test two revision plans. One group studied for three hours without a break; the other used shorter sessions with a brief review at the end. Both groups covered the same topics. At the end of the week, the teacher asked them to explain what they remembered and how tired they felt.",
+      "stem": "Why was it useful for both groups to study the same topics?",
+      "answer": "It controlled the topic content, making the study plans easier to compare.",
+      "rubric": "Award for an accurate response supported by the original passage."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-C003",
+      "unit": 9,
+      "category": "comprehension",
+      "skill": "reading and critical thinking",
+      "type": "comprehension",
+      "marks": 3,
+      "passage": "The school library introduced a lending box for students who could not visit during the regular break. Volunteers recorded every borrowed book and asked readers to suggest new titles. After a month, more students were borrowing books, but some popular titles had long waiting lists.",
+      "stem": "State one benefit and one challenge described in the passage.",
+      "answer": "Benefit: more students could borrow books; challenge: popular books had long waiting lists.",
+      "rubric": "Award for an accurate response supported by the original passage."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-C004",
+      "unit": 9,
+      "category": "comprehension",
+      "skill": "reading and critical thinking",
+      "type": "comprehension",
+      "marks": 3,
+      "passage": "The school library introduced a lending box for students who could not visit during the regular break. Volunteers recorded every borrowed book and asked readers to suggest new titles. After a month, more students were borrowing books, but some popular titles had long waiting lists.",
+      "stem": "Suggest one reasonable response to the waiting-list problem and justify it.",
+      "answer": "For example, purchase extra copies of the most requested titles because demand exceeds supply.",
+      "rubric": "Award for an accurate response supported by the original passage."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-T001",
+      "unit": 1,
+      "category": "translation",
+      "skill": "translation",
+      "type": "translation",
+      "marks": 3,
+      "stem": "Translate this original English sentence into natural Urdu: 'A trustworthy leader listens carefully before making a decision.'",
+      "answer": "ایک قابلِ اعتماد رہنما فیصلہ کرنے سے پہلے غور سے سنتا ہے۔",
+      "rubric": "Accept a faithful natural Urdu translation conveying trustworthy, careful listening and before deciding."
+    },
+    {
+      "id": "IX-ENG-ORIG-20261008-T002",
+      "unit": 9,
+      "category": "translation",
+      "skill": "translation",
+      "type": "translation",
+      "marks": 3,
+      "stem": "Translate this original English sentence into natural Urdu: 'Students learn more when they ask thoughtful questions and discuss different ideas.'",
+      "answer": "طلبہ اس وقت زیادہ سیکھتے ہیں جب وہ سوچ سمجھ کر سوال کرتے ہیں اور مختلف خیالات پر گفتگو کرتے ہیں۔",
+      "rubric": "Accept an equivalent natural Urdu translation preserving both conditions."
+    }
+  ]
+}

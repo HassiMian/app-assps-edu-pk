@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "assps-fashion9-tech-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-042",
+  "sourcePdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+  "sourceByteLength": 49659005,
+  "pageCount": 88,
+  "identity": [
+    "Fashion Designing Grade IX (Matric-Tech)",
+    "PCTB/PECTAA current prescribed textbook",
+    "Theory Part-I 40 marks"
+  ],
+  "patternEvidence": {
+    "biseLahoreSyllabus": "SYLLABI AND COURSES OF READING 2025-27",
+    "pectaaPairing": "Grade-9 Fashion Designing pairing/model scheme",
+    "objectiveMarks": 10,
+    "subjectiveMarks": 30,
+    "totalMarks": 40
+  },
+  "chapters": [
+    {
+      "number": 1,
+      "title": "Introduction to Fashion Designing",
+      "status": "CURRENT_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED"
+    },
+    {
+      "number": 2,
+      "title": "Elements of Design",
+      "status": "CURRENT_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED"
+    },
+    {
+      "number": 3,
+      "title": "Principles of Design",
+      "status": "CURRENT_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED"
+    },
+    {
+      "number": 4,
+      "title": "Historical Aspects of Fashion Design",
+      "status": "CURRENT_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED"
+    },
+    {
+      "number": 5,
+      "title": "Crafts of Pakistan",
+      "status": "CURRENT_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED"
+    },
+    {
+      "number": 6,
+      "title": "Basic Drawing and Anatomy",
+      "status": "CURRENT_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED"
+    },
+    {
+      "number": 7,
+      "title": "Fashion Drawing and Design Detail",
+      "status": "CURRENT_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED"
+    },
+    {
+      "number": 8,
+      "title": "Basics of Textiles",
+      "status": "CURRENT_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED"
+    },
+    {
+      "number": 9,
+      "title": "Basics of Sewing",
+      "status": "CURRENT_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "safetyBoundary": "CONCEPTUAL_ONLY_FOR_TOOLS_AND_SEWING_NO_UNSUPERVISED_HAZARDOUS_OPERATION"
+  }
+}

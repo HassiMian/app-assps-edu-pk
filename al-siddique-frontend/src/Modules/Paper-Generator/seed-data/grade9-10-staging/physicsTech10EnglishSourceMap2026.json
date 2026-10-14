@@ -1,0 +1,110 @@
+{
+  "schemaVersion": "assps-physicsTech10English-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-057",
+  "sourcePdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+  "sourceByteLength": 38105739,
+  "pageCount": 136,
+  "identity": [
+    "Physics-Tech Grade X Matric-Tech",
+    "PECTAA current source CURRENT_CATALOG",
+    "native text layer verified"
+  ],
+  "chapters": [
+    {
+      "number": 10,
+      "title": "Thermal Physics",
+      "chapterStartPdfPage": 4,
+      "exercisePages": [
+        14
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 11,
+      "title": "Transfer of Thermal Energy",
+      "chapterStartPdfPage": 16,
+      "exercisePages": [
+        26
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 12,
+      "title": "Waves",
+      "chapterStartPdfPage": 28,
+      "exercisePages": [
+        36
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 13,
+      "title": "Sound",
+      "chapterStartPdfPage": 38,
+      "exercisePages": [
+        49
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 14,
+      "title": "Light",
+      "chapterStartPdfPage": 51,
+      "exercisePages": [
+        63
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 15,
+      "title": "Electrostatics",
+      "chapterStartPdfPage": 65,
+      "exercisePages": [],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 16,
+      "title": "Electricity",
+      "chapterStartPdfPage": 77,
+      "exercisePages": [],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 17,
+      "title": "Electromagnetism",
+      "chapterStartPdfPage": 95,
+      "exercisePages": [
+        102
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 18,
+      "title": "Electromagnetic Induction",
+      "chapterStartPdfPage": 104,
+      "exercisePages": [
+        112
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 19,
+      "title": "Nuclear Physics",
+      "chapterStartPdfPage": 114,
+      "exercisePages": [
+        130
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    }
+  ],
+  "exerciseIndexStatus": "PARTIAL_VERIFIED_NATIVE_TEXT_LAYER",
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "dangerousPracticalInstructionsAllowed": false
+  }
+}

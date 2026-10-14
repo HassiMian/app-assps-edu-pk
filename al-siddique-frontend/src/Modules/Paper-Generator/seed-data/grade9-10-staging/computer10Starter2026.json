@@ -1,0 +1,3003 @@
+{
+  "schemaVersion": "assps-computer10-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-recovered-computer10-en-2026",
+  "sourcePdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+  "scope": "CURRENT_2026_27_COMPUTER_EM_UNIT_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "X-COMP-U01-M01",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U01",
+        "number": 1
+      },
+      "topicId": "operating system",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Operating Systems: Structure and Services"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "An operating system mainly acts as?",
+          "answer": "An interface and resource manager between users, software and hardware",
+          "options": [
+            {
+              "id": "A",
+              "text": "An interface and resource manager between users, software and hardware"
+            },
+            {
+              "id": "B",
+              "text": "A spreadsheet file"
+            },
+            {
+              "id": "C",
+              "text": "A network cable"
+            },
+            {
+              "id": "D",
+              "text": "A printer driver only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-COMP-U01-M02",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U01",
+        "number": 1
+      },
+      "topicId": "process scheduling",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Operating Systems: Structure and Services"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "FCFS scheduling serves processes primarily in order of?",
+          "answer": "Arrival",
+          "options": [
+            {
+              "id": "A",
+              "text": "Arrival"
+            },
+            {
+              "id": "B",
+              "text": "Shortest name"
+            },
+            {
+              "id": "C",
+              "text": "Largest file size"
+            },
+            {
+              "id": "D",
+              "text": "Highest screen resolution"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-COMP-U01-S01",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U01",
+        "number": 1
+      },
+      "topicId": "kernel and shell",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Operating Systems: Structure and Services"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Differentiate the kernel and the shell.",
+          "answer": "The kernel is the core OS component that manages hardware/resources; the shell provides a user or command interface that requests OS services."
+        }
+      }
+    },
+    {
+      "id": "X-COMP-U01-S02",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U01",
+        "number": 1
+      },
+      "topicId": "process and thread",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Operating Systems: Structure and Services"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Differentiate a process and a thread.",
+          "answer": "A process is an executing program with its own resources; a thread is a smaller execution path within a process and typically shares process resources with other threads."
+        }
+      }
+    },
+    {
+      "id": "X-COMP-U01-L01",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U01",
+        "number": 1
+      },
+      "topicId": "os services",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": 1,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Operating Systems: Structure and Services"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Explain how process management, memory management, file systems, system calls and device drivers cooperate in an operating system.",
+          "answer": "Award marks for each named service and one coherent explanation of how they support safe execution and user requests."
+        }
+      }
+    },
+    {
+      "id": "X-COMP-U02-M01",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U02",
+        "number": 2
+      },
+      "topicId": "recovery",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "System Recovery and Advanced Maintenance"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Which is a sensible first step before a major recovery operation?",
+          "answer": "Back up important data where possible",
+          "options": [
+            {
+              "id": "A",
+              "text": "Back up important data where possible"
+            },
+            {
+              "id": "B",
+              "text": "Delete all user files"
+            },
+            {
+              "id": "C",
+              "text": "Disable every safety control"
+            },
+            {
+              "id": "D",
+              "text": "Format every drive immediately"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-COMP-U02-M02",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U02",
+        "number": 2
+      },
+      "topicId": "maintenance",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "System Recovery and Advanced Maintenance"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Preventive maintenance aims to?",
+          "answer": "Reduce avoidable failures and keep systems reliable",
+          "options": [
+            {
+              "id": "A",
+              "text": "Reduce avoidable failures and keep systems reliable"
+            },
+            {
+              "id": "B",
+              "text": "Create faults deliberately"
+            },
+            {
+              "id": "C",
+              "text": "Remove all software"
+            },
+            {
+              "id": "D",
+              "text": "Ignore updates forever"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-COMP-U02-S01",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U02",
+        "number": 2
+      },
+      "topicId": "system restore",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "System Recovery and Advanced Maintenance"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "What is the purpose of a restore point or recovery snapshot?",
+          "answer": "It provides a known system state that can help reverse certain configuration/software changes without rebuilding everything from scratch."
+        }
+      }
+    },
+    {
+      "id": "X-COMP-U02-S02",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U02",
+        "number": 2
+      },
+      "topicId": "diagnostics",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "System Recovery and Advanced Maintenance"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Why should hardware and software causes be isolated separately during troubleshooting?",
+          "answer": "Separating possible causes makes diagnosis more reliable and avoids unnecessary changes or replacements."
+        }
+      }
+    },
+    {
+      "id": "X-COMP-U02-L01",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U02",
+        "number": 2
+      },
+      "topicId": "safe recovery",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "System Recovery and Advanced Maintenance"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Describe a safe recovery workflow for an unstable school computer while protecting student data.",
+          "answer": "Award marks for documenting symptoms, backing up data, using non-destructive diagnostics, applying least-invasive repair/recovery steps, and verifying/recording the result."
+        }
+      }
+    },
+    {
+      "id": "X-COMP-U03-M01",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U03",
+        "number": 3
+      },
+      "topicId": "python variables",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Python Programming"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "A variable in Python is used to?",
+          "answer": "Refer to a value in a program",
+          "options": [
+            {
+              "id": "A",
+              "text": "Refer to a value in a program"
+            },
+            {
+              "id": "B",
+              "text": "Physically cool a CPU"
+            },
+            {
+              "id": "C",
+              "text": "Route network packets"
+            },
+            {
+              "id": "D",
+              "text": "Format a hard disk automatically"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-COMP-U03-M02",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U03",
+        "number": 3
+      },
+      "topicId": "python output",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Python Programming"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Which built-in function displays output in basic Python?",
+          "answer": "print()",
+          "options": [
+            {
+              "id": "A",
+              "text": "print()"
+            },
+            {
+              "id": "B",
+              "text": "inputfile()"
+            },
+            {
+              "id": "C",
+              "text": "route()"
+            },
+            {
+              "id": "D",
+              "text": "compilebook()"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-COMP-U03-S01",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U03",
+        "number": 3
+      },
+      "topicId": "data types",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Python Programming"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Name three common Python data types.",
+          "answer": "Examples include int, float, str and bool; any three appropriate basic types."
+        }
+      }
+    },
+    {
+      "id": "X-COMP-U03-S02",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U03",
+        "number": 3
+      },
+      "topicId": "input",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Python Programming"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "What is the purpose of input() in Python?",
+          "answer": "It reads user input as text so the program can store or process the entered value, often after conversion to another type when needed."
+        }
+      }
+    },
+    {
+      "id": "X-COMP-U03-L01",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U03",
+        "number": 3
+      },
+      "topicId": "python fundamentals",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Python Programming"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Explain variables, expressions, input, output and basic data types using a simple original example.",
+          "answer": "Award marks for correct definitions, data flow from input to variable/expression, type awareness, output, and a valid original example."
+        }
+      }
+    },
+    {
+      "id": "X-COMP-U04-M01",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U04",
+        "number": 4
+      },
+      "topicId": "selection",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Control Structures in Python"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Which Python structure is used for conditional selection?",
+          "answer": "if/elif/else",
+          "options": [
+            {
+              "id": "A",
+              "text": "if/elif/else"
+            },
+            {
+              "id": "B",
+              "text": "import only"
+            },
+            {
+              "id": "C",
+              "text": "comment only"
+            },
+            {
+              "id": "D",
+              "text": "file name only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-COMP-U04-M02",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U04",
+        "number": 4
+      },
+      "topicId": "loops",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Control Structures in Python"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "A loop is useful when a program needs to?",
+          "answer": "Repeat an action under defined conditions",
+          "options": [
+            {
+              "id": "A",
+              "text": "Repeat an action under defined conditions"
+            },
+            {
+              "id": "B",
+              "text": "Change hardware voltage"
+            },
+            {
+              "id": "C",
+              "text": "Draw only one character"
+            },
+            {
+              "id": "D",
+              "text": "Remove all variables"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-COMP-U04-S01",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U04",
+        "number": 4
+      },
+      "topicId": "if statement",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Control Structures in Python"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "What is the purpose of a condition in an if statement?",
+          "answer": "It evaluates to a truth value that determines whether a block of code should run."
+        }
+      }
+    },
+    {
+      "id": "X-COMP-U04-S02",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U04",
+        "number": 4
+      },
+      "topicId": "for and while",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Control Structures in Python"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Differentiate a for loop and a while loop in basic use.",
+          "answer": "A for loop is often used for iterating over a known sequence/range; a while loop repeats while a condition remains true."
+        }
+      }
+    },
+    {
+      "id": "X-COMP-U04-L01",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U04",
+        "number": 4
+      },
+      "topicId": "control flow",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Control Structures in Python"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Design the logic for a program that reads a score, classifies it into categories and repeats for several students.",
+          "answer": "Award marks for input, conditional selection, valid boundaries, iteration, output, and handling an invalid score safely."
+        }
+      }
+    },
+    {
+      "id": "X-COMP-U05-M01",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U05",
+        "number": 5
+      },
+      "topicId": "data science",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Data Science"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Data science combines data with methods for?",
+          "answer": "Analysis, interpretation and decision support",
+          "options": [
+            {
+              "id": "A",
+              "text": "Analysis, interpretation and decision support"
+            },
+            {
+              "id": "B",
+              "text": "Only screen design"
+            },
+            {
+              "id": "C",
+              "text": "Only keyboard repair"
+            },
+            {
+              "id": "D",
+              "text": "Only file naming"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-COMP-U05-M02",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U05",
+        "number": 5
+      },
+      "topicId": "data quality",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Data Science"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Which characteristic improves trust in a dataset?",
+          "answer": "Accuracy",
+          "options": [
+            {
+              "id": "A",
+              "text": "Accuracy"
+            },
+            {
+              "id": "B",
+              "text": "Random duplication"
+            },
+            {
+              "id": "C",
+              "text": "Missing context"
+            },
+            {
+              "id": "D",
+              "text": "Unknown source"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-COMP-U05-S01",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U05",
+        "number": 5
+      },
+      "topicId": "structured data",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Data Science"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "What is structured data?",
+          "answer": "Data organized according to a defined schema such as rows/columns and fields, making it easier to query and analyze."
+        }
+      }
+    },
+    {
+      "id": "X-COMP-U05-S02",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U05",
+        "number": 5
+      },
+      "topicId": "data cleaning",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Data Science"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Why is data cleaning important?",
+          "answer": "It identifies and corrects or handles errors, duplicates, missing values and inconsistencies so analysis is more reliable."
+        }
+      }
+    },
+    {
+      "id": "X-COMP-U05-L01",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U05",
+        "number": 5
+      },
+      "topicId": "data workflow",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Data Science"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Outline a responsible data-science workflow for analyzing school attendance.",
+          "answer": "Award marks for clear question, lawful/minimal data collection, cleaning, analysis/visualization, interpretation, and privacy-aware reporting."
+        }
+      }
+    },
+    {
+      "id": "X-COMP-U06-M01",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U06",
+        "number": 6
+      },
+      "topicId": "artificial intelligence",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Artificial Intelligence (AI) and Machine Learning (ML)"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "AI systems are designed to perform tasks involving?",
+          "answer": "Pattern recognition, reasoning or prediction",
+          "options": [
+            {
+              "id": "A",
+              "text": "Pattern recognition, reasoning or prediction"
+            },
+            {
+              "id": "B",
+              "text": "Only paper printing"
+            },
+            {
+              "id": "C",
+              "text": "Only file deletion"
+            },
+            {
+              "id": "D",
+              "text": "Only electrical wiring"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-COMP-U06-M02",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U06",
+        "number": 6
+      },
+      "topicId": "machine learning",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Artificial Intelligence (AI) and Machine Learning (ML)"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Machine learning primarily enables a system to?",
+          "answer": "Learn patterns from data for a task",
+          "options": [
+            {
+              "id": "A",
+              "text": "Learn patterns from data for a task"
+            },
+            {
+              "id": "B",
+              "text": "Replace all operating systems"
+            },
+            {
+              "id": "C",
+              "text": "Ignore data"
+            },
+            {
+              "id": "D",
+              "text": "Increase monitor size"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-COMP-U06-S01",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U06",
+        "number": 6
+      },
+      "topicId": "training data",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Artificial Intelligence (AI) and Machine Learning (ML)"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Why is training-data quality important in machine learning?",
+          "answer": "Poor, biased or unrepresentative data can lead to unreliable or unfair model behavior."
+        }
+      }
+    },
+    {
+      "id": "X-COMP-U06-S02",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U06",
+        "number": 6
+      },
+      "topicId": "model evaluation",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Artificial Intelligence (AI) and Machine Learning (ML)"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "What is the purpose of evaluating an ML model on data not used for training?",
+          "answer": "It helps estimate how well the model generalizes to new examples rather than merely memorizing training data."
+        }
+      }
+    },
+    {
+      "id": "X-COMP-U06-L01",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U06",
+        "number": 6
+      },
+      "topicId": "ai and ml",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Artificial Intelligence (AI) and Machine Learning (ML)"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Compare rule-based programming and machine learning, including one strength and one limitation of each.",
+          "answer": "Award marks for rule-based explicit instructions, ML learned patterns, a strength of each, a limitation of each, and appropriate-use distinction."
+        }
+      }
+    },
+    {
+      "id": "X-COMP-U07-M01",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U07",
+        "number": 7
+      },
+      "topicId": "AI application",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Applications of AI"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Which is a common benign application of AI?",
+          "answer": "Image classification or language assistance",
+          "options": [
+            {
+              "id": "A",
+              "text": "Image classification or language assistance"
+            },
+            {
+              "id": "B",
+              "text": "Randomly corrupting files"
+            },
+            {
+              "id": "C",
+              "text": "Disabling backups"
+            },
+            {
+              "id": "D",
+              "text": "Deleting safety logs"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-COMP-U07-M02",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U07",
+        "number": 7
+      },
+      "topicId": "responsible AI",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Applications of AI"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Responsible AI use should consider?",
+          "answer": "Accuracy, privacy, fairness and human oversight",
+          "options": [
+            {
+              "id": "A",
+              "text": "Accuracy, privacy, fairness and human oversight"
+            },
+            {
+              "id": "B",
+              "text": "Only speed"
+            },
+            {
+              "id": "C",
+              "text": "Only appearance"
+            },
+            {
+              "id": "D",
+              "text": "No evaluation"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-COMP-U07-S01",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U07",
+        "number": 7
+      },
+      "topicId": "recommendation systems",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Applications of AI"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "What does a recommendation system do?",
+          "answer": "It uses available information or learned patterns to rank or suggest items likely to be relevant to a user or context."
+        }
+      }
+    },
+    {
+      "id": "X-COMP-U07-S02",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U07",
+        "number": 7
+      },
+      "topicId": "human oversight",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Applications of AI"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Why is human oversight important for high-impact AI decisions?",
+          "answer": "AI can make errors or reflect bias; human review helps check context, accountability and consequences before action."
+        }
+      }
+    },
+    {
+      "id": "X-COMP-U07-L01",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U07",
+        "number": 7
+      },
+      "topicId": "ai applications",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Applications of AI"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Discuss three useful AI applications and the safeguards needed for responsible use.",
+          "answer": "Award marks for three valid applications plus privacy/fairness/accuracy/security/human-oversight safeguards and a clear conclusion."
+        }
+      }
+    },
+    {
+      "id": "X-COMP-U08-M01",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U08",
+        "number": 8
+      },
+      "topicId": "digital entrepreneurship",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Digital Entrepreneurship"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "A value proposition explains?",
+          "answer": "Why a digital product is useful to a target user",
+          "options": [
+            {
+              "id": "A",
+              "text": "Why a digital product is useful to a target user"
+            },
+            {
+              "id": "B",
+              "text": "Only the program file name"
+            },
+            {
+              "id": "C",
+              "text": "Only the founder’s age"
+            },
+            {
+              "id": "D",
+              "text": "Only computer memory size"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-COMP-U08-M02",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U08",
+        "number": 8
+      },
+      "topicId": "minimum viable product",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Digital Entrepreneurship"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "An MVP is mainly built to?",
+          "answer": "Test core value with limited essential features",
+          "options": [
+            {
+              "id": "A",
+              "text": "Test core value with limited essential features"
+            },
+            {
+              "id": "B",
+              "text": "Contain every possible feature immediately"
+            },
+            {
+              "id": "C",
+              "text": "Avoid user feedback"
+            },
+            {
+              "id": "D",
+              "text": "Skip problem definition"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-COMP-U08-S01",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U08",
+        "number": 8
+      },
+      "topicId": "market research",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Digital Entrepreneurship"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Why is market research useful before building a digital product?",
+          "answer": "It helps understand user needs, alternatives, demand and constraints before investing heavily in development."
+        }
+      }
+    },
+    {
+      "id": "X-COMP-U08-S02",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U08",
+        "number": 8
+      },
+      "topicId": "digital business ethics",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Digital Entrepreneurship"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "State two ethical considerations for a student digital business.",
+          "answer": "Examples include user privacy, honest claims, copyright compliance, fair pricing, accessibility and data security; any two."
+        }
+      }
+    },
+    {
+      "id": "X-COMP-U08-L01",
+      "chapter": {
+        "id": "X-COMP-2026-EM-U08",
+        "number": 8
+      },
+      "topicId": "startup planning",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-recovered-computer10-en-2026",
+        "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Digital Entrepreneurship"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "computer-science",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMPUTER-EM-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer X starter aligned to current 2026-27 unit structure. Archive-recovered EM source identity verified; exact chapter-start pages remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Outline a simple digital entrepreneurship plan from problem discovery to launch.",
+          "answer": "Award marks for problem/user research, value proposition, MVP, testing/feedback, basic cost/revenue plan, and responsible privacy/legal launch practices."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 40,
+    "mcq": 16,
+    "short": 16,
+    "long": 8,
+    "units": 8
+  }
+}

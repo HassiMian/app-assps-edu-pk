@@ -1,0 +1,5699 @@
+{
+  "schemaVersion": "assps-grade910-sha-frozen-original-research-coverage-v1",
+  "originalResearchCandidates": 2581,
+  "filesShaFrozen": 73,
+  "withoutExplicitGrade": 44,
+  "withoutQuestionLevelSubject": 44,
+  "withoutNumericChapter": 0,
+  "coverageGroupCount": 406,
+  "researchOnly": true,
+  "schoolAdoptionProven": false,
+  "independentTeacherReviewCount": 0,
+  "academicallyApprovedCount": 0,
+  "verifiedPublishedCount": 0,
+  "publisherSelectable": false,
+  "releaseDecision": "DENY",
+  "note": "Subject/chapter grouping is original research metadata, not confirmed school textbook applicability or exercise coverage.",
+  "coverage": [
+    {
+      "grade": 9,
+      "subjectId": "agriculture-sciences-tech",
+      "chapter": "1",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "agriculture-sciences-tech",
+      "chapter": "2",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "agriculture-sciences-tech",
+      "chapter": "3",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "agriculture-sciences-tech",
+      "chapter": "4",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "agriculture-sciences-tech",
+      "chapter": "5",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "agriculture-sciences-tech",
+      "chapter": "6",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "agriculture-sciences-tech",
+      "chapter": "7",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "agriculture-sciences-tech",
+      "chapter": "8",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "agriculture-sciences-tech",
+      "chapter": "9",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "agriculture-sciences-tech",
+      "chapter": "10",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "art-model-drawing",
+      "chapter": "1",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "art-model-drawing",
+      "chapter": "2",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "art-model-drawing",
+      "chapter": "3",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "art-model-drawing",
+      "chapter": "4",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "art-model-drawing",
+      "chapter": "5",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "art-model-drawing",
+      "chapter": "6",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "art-model-drawing",
+      "chapter": "7",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "art-model-drawing",
+      "chapter": "8",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "biology",
+      "chapter": "1",
+      "questionCount": 63,
+      "questionTypes": {
+        "mcq": 21,
+        "short": 33,
+        "long": 9
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "biology",
+      "chapter": "2",
+      "questionCount": 9,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 3
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "biology",
+      "chapter": "3",
+      "questionCount": 9,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 3
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "biology",
+      "chapter": "4",
+      "questionCount": 9,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 3
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "biology",
+      "chapter": "5",
+      "questionCount": 9,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 3
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "biology",
+      "chapter": "6",
+      "questionCount": 9,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 3
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "biology",
+      "chapter": "7",
+      "questionCount": 9,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 3
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "biology",
+      "chapter": "8",
+      "questionCount": 9,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 3
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "biology",
+      "chapter": "9",
+      "questionCount": 9,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 3
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "biology",
+      "chapter": "10",
+      "questionCount": 9,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 3
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "biology",
+      "chapter": "11",
+      "questionCount": 9,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 2,
+        "numerical": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "biology-tech",
+      "chapter": "1",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "biology-tech",
+      "chapter": "2",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "biology-tech",
+      "chapter": "3",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "biology-tech",
+      "chapter": "4",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "biology-tech",
+      "chapter": "5",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "biology-tech",
+      "chapter": "6",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "biology-tech",
+      "chapter": "7",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "biology-tech",
+      "chapter": "8",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "biology-tech",
+      "chapter": "9",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "chemistry",
+      "chapter": "1",
+      "questionCount": 39,
+      "questionTypes": {
+        "mcq": 13,
+        "short": 19,
+        "long": 7
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "chemistry",
+      "chapter": "2",
+      "questionCount": 27,
+      "questionTypes": {
+        "mcq": 9,
+        "short": 11,
+        "long": 5,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "chemistry",
+      "chapter": "3",
+      "questionCount": 27,
+      "questionTypes": {
+        "mcq": 9,
+        "short": 13,
+        "long": 5
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "chemistry",
+      "chapter": "4",
+      "questionCount": 30,
+      "questionTypes": {
+        "mcq": 10,
+        "short": 10,
+        "numerical": 6,
+        "long": 4
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "chemistry",
+      "chapter": "5",
+      "questionCount": 28,
+      "questionTypes": {
+        "mcq": 11,
+        "short": 11,
+        "long": 6
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "chemistry",
+      "chapter": "6",
+      "questionCount": 18,
+      "questionTypes": {
+        "mcq": 7,
+        "short": 7,
+        "long": 4
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "chemistry",
+      "chapter": "7",
+      "questionCount": 28,
+      "questionTypes": {
+        "mcq": 11,
+        "short": 11,
+        "long": 6
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "chemistry",
+      "chapter": "8",
+      "questionCount": 23,
+      "questionTypes": {
+        "mcq": 9,
+        "short": 9,
+        "long": 5
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "chemistry",
+      "chapter": "9",
+      "questionCount": 28,
+      "questionTypes": {
+        "mcq": 11,
+        "short": 11,
+        "long": 6
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "chemistry",
+      "chapter": "10",
+      "questionCount": 33,
+      "questionTypes": {
+        "mcq": 11,
+        "short": 11,
+        "long": 11
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "chemistry",
+      "chapter": "11",
+      "questionCount": 27,
+      "questionTypes": {
+        "mcq": 9,
+        "short": 9,
+        "long": 9
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "chemistry",
+      "chapter": "12",
+      "questionCount": 18,
+      "questionTypes": {
+        "mcq": 7,
+        "short": 7,
+        "long": 4
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "chemistry",
+      "chapter": "13",
+      "questionCount": 28,
+      "questionTypes": {
+        "mcq": 11,
+        "short": 11,
+        "long": 6
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "chemistry-tech",
+      "chapter": "1",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "chemistry-tech",
+      "chapter": "2",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "chemistry-tech",
+      "chapter": "3",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "chemistry-tech",
+      "chapter": "4",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "chemistry-tech",
+      "chapter": "5",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "chemistry-tech",
+      "chapter": "6",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "chemistry-tech",
+      "chapter": "7",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "chemistry-tech",
+      "chapter": "8",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "chemistry-tech",
+      "chapter": "9",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "chemistry-tech",
+      "chapter": "10",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "chemistry-tech",
+      "chapter": "11",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "chemistry-tech",
+      "chapter": "12",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "chemistry-tech",
+      "chapter": "13",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "computer",
+      "chapter": "1",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "computer",
+      "chapter": "2",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "computer",
+      "chapter": "3",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "computer",
+      "chapter": "4",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "computer",
+      "chapter": "5",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "computer",
+      "chapter": "6",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "computer",
+      "chapter": "7",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "computer",
+      "chapter": "8",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "computer",
+      "chapter": "9",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "computer",
+      "chapter": "10",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "computer",
+      "chapter": "11",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "computer",
+      "chapter": "12",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "computer-science-entrepreneurship-tech",
+      "chapter": "1",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "computer-science-entrepreneurship-tech",
+      "chapter": "2",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "computer-science-entrepreneurship-tech",
+      "chapter": "3",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "computer-science-entrepreneurship-tech",
+      "chapter": "4",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "computer-science-entrepreneurship-tech",
+      "chapter": "5",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "computer-science-entrepreneurship-tech",
+      "chapter": "6",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "computer-science-entrepreneurship-tech",
+      "chapter": "7",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "computer-science-entrepreneurship-tech",
+      "chapter": "8",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "computer-science-entrepreneurship-tech",
+      "chapter": "9",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "computer-science-entrepreneurship-tech",
+      "chapter": "10",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "english",
+      "chapter": "1",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "grammar": 1,
+        "comprehension": 1,
+        "essay": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "english",
+      "chapter": "2",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "grammar": 1,
+        "comprehension": 1,
+        "essay": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "english",
+      "chapter": "3",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "grammar": 1,
+        "comprehension": 1,
+        "essay": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "english",
+      "chapter": "4",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "grammar": 1,
+        "comprehension": 1,
+        "essay": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "english",
+      "chapter": "5",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "grammar": 1,
+        "comprehension": 1,
+        "essay": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "english",
+      "chapter": "6",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "grammar": 1,
+        "comprehension": 1,
+        "essay": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "english",
+      "chapter": "7",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "grammar": 1,
+        "comprehension": 1,
+        "essay": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "english",
+      "chapter": "8",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "grammar": 1,
+        "comprehension": 1,
+        "essay": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "english",
+      "chapter": "9",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "grammar": 1,
+        "comprehension": 1,
+        "essay": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "english",
+      "chapter": "10",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "grammar": 1,
+        "comprehension": 1,
+        "essay": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "english",
+      "chapter": "11",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "grammar": 1,
+        "comprehension": 1,
+        "essay": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "fashion-designing-tech",
+      "chapter": "1",
+      "questionCount": 4,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "fashion-designing-tech",
+      "chapter": "2",
+      "questionCount": 4,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "fashion-designing-tech",
+      "chapter": "3",
+      "questionCount": 4,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "fashion-designing-tech",
+      "chapter": "4",
+      "questionCount": 4,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "fashion-designing-tech",
+      "chapter": "5",
+      "questionCount": 4,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "fashion-designing-tech",
+      "chapter": "6",
+      "questionCount": 4,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "fashion-designing-tech",
+      "chapter": "7",
+      "questionCount": 4,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "fashion-designing-tech",
+      "chapter": "8",
+      "questionCount": 4,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "fashion-designing-tech",
+      "chapter": "9",
+      "questionCount": 4,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "general-science-tech",
+      "chapter": "1",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "general-science-tech",
+      "chapter": "2",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "general-science-tech",
+      "chapter": "3",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "general-science-tech",
+      "chapter": "4",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "general-science-tech",
+      "chapter": "5",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "general-science-tech",
+      "chapter": "6",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "general-science-tech",
+      "chapter": "7",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "general-science-tech",
+      "chapter": "8",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "general-science-tech",
+      "chapter": "9",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "general-science-tech",
+      "chapter": "10",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "general-science-tech",
+      "chapter": "11",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "ghiza-aur-ghizayat",
+      "chapter": "1",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "ghiza-aur-ghizayat",
+      "chapter": "2",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "ghiza-aur-ghizayat",
+      "chapter": "3",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "ghiza-aur-ghizayat",
+      "chapter": "4",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "ghiza-aur-ghizayat",
+      "chapter": "5",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "health-sciences-tech",
+      "chapter": "1",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "health-sciences-tech",
+      "chapter": "2",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "health-sciences-tech",
+      "chapter": "3",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "health-sciences-tech",
+      "chapter": "4",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "health-sciences-tech",
+      "chapter": "5",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "health-sciences-tech",
+      "chapter": "6",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "health-sciences-tech",
+      "chapter": "7",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "health-sciences-tech",
+      "chapter": "8",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "home-economics",
+      "chapter": "1",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "home-economics",
+      "chapter": "2",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "home-economics",
+      "chapter": "3",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "home-economics",
+      "chapter": "4",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "home-economics",
+      "chapter": "5",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "home-economics",
+      "chapter": "6",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "home-economics",
+      "chapter": "7",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "home-economics",
+      "chapter": "8",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "ict-tech",
+      "chapter": "1",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "ict-tech",
+      "chapter": "2",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "ict-tech",
+      "chapter": "3",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "ict-tech",
+      "chapter": "4",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "ict-tech",
+      "chapter": "5",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "ict-tech",
+      "chapter": "6",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "islamiat",
+      "chapter": "1",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "islamiat",
+      "chapter": "2",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "islamiat",
+      "chapter": "3",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "islamiat",
+      "chapter": "4",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "islamiat",
+      "chapter": "5",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "islamiat",
+      "chapter": "6",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "islamiat",
+      "chapter": "7",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "mathematics",
+      "chapter": "1",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "mathematics",
+      "chapter": "2",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "mathematics",
+      "chapter": "3",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "mathematics",
+      "chapter": "4",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "mathematics",
+      "chapter": "5",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "mathematics",
+      "chapter": "6",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "mathematics",
+      "chapter": "7",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "mathematics",
+      "chapter": "8",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "mathematics",
+      "chapter": "9",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "mathematics",
+      "chapter": "10",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "mathematics",
+      "chapter": "11",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "mathematics",
+      "chapter": "12",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "mathematics",
+      "chapter": "13",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "parcha-bafi-(textile-and-clothing)",
+      "chapter": "1",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "parcha-bafi-(textile-and-clothing)",
+      "chapter": "2",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "parcha-bafi-(textile-and-clothing)",
+      "chapter": "3",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "parcha-bafi-(textile-and-clothing)",
+      "chapter": "4",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "parcha-bafi-(textile-and-clothing)",
+      "chapter": "5",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "parcha-bafi-(textile-and-clothing)",
+      "chapter": "6",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "parcha-bafi-(textile-and-clothing)",
+      "chapter": "7",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "physics",
+      "chapter": "1",
+      "questionCount": 9,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "physics",
+      "chapter": "2",
+      "questionCount": 9,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "physics",
+      "chapter": "3",
+      "questionCount": 9,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "physics",
+      "chapter": "4",
+      "questionCount": 9,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "physics",
+      "chapter": "5",
+      "questionCount": 9,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "physics",
+      "chapter": "6",
+      "questionCount": 9,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "physics",
+      "chapter": "7",
+      "questionCount": 9,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "physics",
+      "chapter": "8",
+      "questionCount": 9,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 3
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "physics",
+      "chapter": "9",
+      "questionCount": 9,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 3
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "physics-tech",
+      "chapter": "1",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 2,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "physics-tech",
+      "chapter": "2",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 2,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "physics-tech",
+      "chapter": "3",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 2,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "physics-tech",
+      "chapter": "4",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 2,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "physics-tech",
+      "chapter": "5",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 2,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "physics-tech",
+      "chapter": "6",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 2,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "physics-tech",
+      "chapter": "7",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "physics-tech",
+      "chapter": "8",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "1",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "2",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "3",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "4",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "5",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "6",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "7",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "8",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "9",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "10",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "11",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "12",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "13",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "14",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "15",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "16",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "17",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "18",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "urdu",
+      "chapter": "1",
+      "questionCount": 38,
+      "questionTypes": {
+        "mcq": 5,
+        "wahid_jama": 5,
+        "mutradif": 5,
+        "mutzad": 5,
+        "muhawara": 5,
+        "sentence_correction": 5,
+        "application": 2,
+        "letter": 1,
+        "essay": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "urdu",
+      "chapter": "2",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "urdu",
+      "chapter": "3",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "urdu",
+      "chapter": "4",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "urdu",
+      "chapter": "5",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "urdu",
+      "chapter": "6",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "urdu",
+      "chapter": "7",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "urdu",
+      "chapter": "8",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "urdu",
+      "chapter": "9",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "urdu",
+      "chapter": "10",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "urdu",
+      "chapter": "11",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "urdu",
+      "chapter": "12",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "urdu",
+      "chapter": "13",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "urdu",
+      "chapter": "14",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "urdu",
+      "chapter": "15",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "urdu",
+      "chapter": "16",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "urdu",
+      "chapter": "17",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "urdu",
+      "chapter": "18",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 9,
+      "subjectId": "urdu",
+      "chapter": "19",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "art-model-drawing",
+      "chapter": "1",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "art-model-drawing",
+      "chapter": "2",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "art-model-drawing",
+      "chapter": "3",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "art-model-drawing",
+      "chapter": "4",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "art-model-drawing",
+      "chapter": "5",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "art-model-drawing",
+      "chapter": "6",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "art-model-drawing",
+      "chapter": "7",
+      "questionCount": 6,
+      "questionTypes": {
+        "mcq": 2,
+        "short": 2,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "biology",
+      "chapter": "1",
+      "questionCount": 10,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 3,
+        "long": 3
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "biology",
+      "chapter": "2",
+      "questionCount": 10,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 3,
+        "long": 3
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "biology",
+      "chapter": "3",
+      "questionCount": 10,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 3,
+        "long": 3
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "biology",
+      "chapter": "4",
+      "questionCount": 10,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 3,
+        "long": 3
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "biology",
+      "chapter": "5",
+      "questionCount": 10,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 3,
+        "long": 3
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "biology",
+      "chapter": "6",
+      "questionCount": 10,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 3,
+        "long": 3
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "biology",
+      "chapter": "7",
+      "questionCount": 10,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 3,
+        "long": 3
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "biology",
+      "chapter": "8",
+      "questionCount": 10,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 3,
+        "long": 3
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "biology",
+      "chapter": "9",
+      "questionCount": 10,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 3,
+        "long": 3
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "biology",
+      "chapter": "10",
+      "questionCount": 10,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 3,
+        "long": 3
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "biology-tech",
+      "chapter": "1",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "biology-tech",
+      "chapter": "2",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "biology-tech",
+      "chapter": "3",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "biology-tech",
+      "chapter": "4",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "biology-tech",
+      "chapter": "5",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "biology-tech",
+      "chapter": "6",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "biology-tech",
+      "chapter": "7",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "biology-tech",
+      "chapter": "8",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "chemistry",
+      "chapter": "14",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "chemistry",
+      "chapter": "15",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "chemistry",
+      "chapter": "16",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "chemistry",
+      "chapter": "17",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "chemistry",
+      "chapter": "18",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "chemistry",
+      "chapter": "19",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "chemistry",
+      "chapter": "20",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "chemistry",
+      "chapter": "21",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "chemistry",
+      "chapter": "22",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "chemistry",
+      "chapter": "23",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "chemistry",
+      "chapter": "24",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "chemistry",
+      "chapter": "25",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "chemistry",
+      "chapter": "26",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "communication-skills-tech",
+      "chapter": "1",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "communication-skills-tech",
+      "chapter": "2",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "communication-skills-tech",
+      "chapter": "3",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "communication-skills-tech",
+      "chapter": "4",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "communication-skills-tech",
+      "chapter": "5",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "communication-skills-tech",
+      "chapter": "6",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "communication-skills-tech",
+      "chapter": "7",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "communication-skills-tech",
+      "chapter": "8",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "communication-skills-tech",
+      "chapter": "9",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "computer-science",
+      "chapter": "1",
+      "questionCount": 10,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 4,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "computer-science",
+      "chapter": "2",
+      "questionCount": 10,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 4,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "computer-science",
+      "chapter": "3",
+      "questionCount": 10,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 4,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "computer-science",
+      "chapter": "4",
+      "questionCount": 10,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 4,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "computer-science",
+      "chapter": "5",
+      "questionCount": 10,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 4,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "computer-science",
+      "chapter": "6",
+      "questionCount": 10,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 4,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "computer-science",
+      "chapter": "7",
+      "questionCount": 10,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 4,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "computer-science",
+      "chapter": "8",
+      "questionCount": 10,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 4,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "english",
+      "chapter": "1",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "grammar": 1,
+        "comprehension": 1,
+        "essay": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "english",
+      "chapter": "2",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "grammar": 1,
+        "comprehension": 1,
+        "essay": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "english",
+      "chapter": "3",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "grammar": 1,
+        "comprehension": 1,
+        "essay": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "english",
+      "chapter": "4",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "grammar": 1,
+        "comprehension": 1,
+        "essay": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "english",
+      "chapter": "5",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "grammar": 1,
+        "comprehension": 1,
+        "essay": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "english",
+      "chapter": "6",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "grammar": 1,
+        "comprehension": 1,
+        "essay": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "english",
+      "chapter": "7",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "grammar": 1,
+        "comprehension": 1,
+        "essay": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "english",
+      "chapter": "8",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "grammar": 1,
+        "comprehension": 1,
+        "essay": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "english",
+      "chapter": "9",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "grammar": 1,
+        "comprehension": 1,
+        "essay": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "english",
+      "chapter": "10",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "grammar": 1,
+        "comprehension": 1,
+        "essay": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "ghiza-aur-ghizayat",
+      "chapter": "1",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "ghiza-aur-ghizayat",
+      "chapter": "2",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "ghiza-aur-ghizayat",
+      "chapter": "3",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "ghiza-aur-ghizayat",
+      "chapter": "4",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "ghiza-aur-ghizayat",
+      "chapter": "5",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "health-sciences-tech",
+      "chapter": "9",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "health-sciences-tech",
+      "chapter": "10",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "health-sciences-tech",
+      "chapter": "11",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "health-sciences-tech",
+      "chapter": "12",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "health-sciences-tech",
+      "chapter": "13",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "health-sciences-tech",
+      "chapter": "14",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "health-sciences-tech",
+      "chapter": "15",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "health-sciences-tech",
+      "chapter": "16",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "health-sciences-tech",
+      "chapter": "17",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "home-economics",
+      "chapter": "1",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "home-economics",
+      "chapter": "2",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "home-economics",
+      "chapter": "3",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "home-economics",
+      "chapter": "4",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "home-economics",
+      "chapter": "5",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "home-economics",
+      "chapter": "6",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "home-economics",
+      "chapter": "7",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "mathematics",
+      "chapter": "1",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "mathematics",
+      "chapter": "2",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "mathematics",
+      "chapter": "3",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "mathematics",
+      "chapter": "4",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "mathematics",
+      "chapter": "5",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "mathematics",
+      "chapter": "6",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "mathematics",
+      "chapter": "7",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "mathematics",
+      "chapter": "8",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "mathematics",
+      "chapter": "9",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "mathematics",
+      "chapter": "10",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "mathematics",
+      "chapter": "11",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "mathematics",
+      "chapter": "12",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "numerical": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "pakistan-studies",
+      "chapter": "1",
+      "questionCount": 10,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 4,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "pakistan-studies",
+      "chapter": "2",
+      "questionCount": 10,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 4,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "pakistan-studies",
+      "chapter": "3",
+      "questionCount": 10,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 4,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "pakistan-studies",
+      "chapter": "4",
+      "questionCount": 10,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 4,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "pakistan-studies",
+      "chapter": "5",
+      "questionCount": 10,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 4,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "pakistan-studies",
+      "chapter": "6",
+      "questionCount": 10,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 4,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "pakistan-studies",
+      "chapter": "7",
+      "questionCount": 10,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 4,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "pakistan-studies",
+      "chapter": "8",
+      "questionCount": 10,
+      "questionTypes": {
+        "mcq": 4,
+        "short": 4,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "parcha-bafi-(textile-and-clothing)",
+      "chapter": "1",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "parcha-bafi-(textile-and-clothing)",
+      "chapter": "2",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "parcha-bafi-(textile-and-clothing)",
+      "chapter": "3",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "parcha-bafi-(textile-and-clothing)",
+      "chapter": "4",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "parcha-bafi-(textile-and-clothing)",
+      "chapter": "5",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "parcha-bafi-(textile-and-clothing)",
+      "chapter": "6",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "parcha-bafi-(textile-and-clothing)",
+      "chapter": "7",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "physics",
+      "chapter": "10",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 1,
+        "numerical": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "physics",
+      "chapter": "11",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "physics",
+      "chapter": "12",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 1,
+        "numerical": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "physics",
+      "chapter": "13",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 1,
+        "numerical": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "physics",
+      "chapter": "14",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 1,
+        "numerical": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "physics",
+      "chapter": "15",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "physics",
+      "chapter": "16",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 1,
+        "numerical": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "physics",
+      "chapter": "17",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "physics",
+      "chapter": "18",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 1,
+        "numerical": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "physics",
+      "chapter": "19",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "physics",
+      "chapter": "20",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 1,
+        "numerical": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "physics",
+      "chapter": "21",
+      "questionCount": 8,
+      "questionTypes": {
+        "mcq": 3,
+        "short": 3,
+        "long": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "physics-tech",
+      "chapter": "10",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "numerical": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "physics-tech",
+      "chapter": "11",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "physics-tech",
+      "chapter": "12",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "numerical": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "physics-tech",
+      "chapter": "13",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "numerical": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "physics-tech",
+      "chapter": "14",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "numerical": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "physics-tech",
+      "chapter": "15",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "physics-tech",
+      "chapter": "16",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "numerical": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "physics-tech",
+      "chapter": "17",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "physics-tech",
+      "chapter": "18",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "physics-tech",
+      "chapter": "19",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "numerical": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "1",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "2",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "3",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "4",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "5",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "6",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "7",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "8",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "9",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "10",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "11",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "12",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "13",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "14",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "tarjuma-tul-quran",
+      "chapter": "15",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 1,
+        "short": 1,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "urdu",
+      "chapter": "1",
+      "questionCount": 38,
+      "questionTypes": {
+        "mcq": 5,
+        "wahid_jama": 5,
+        "mutradif": 5,
+        "mutzad": 5,
+        "muhawara": 5,
+        "sentence_correction": 5,
+        "application": 2,
+        "letter": 1,
+        "essay": 2,
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "urdu",
+      "chapter": "2",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "urdu",
+      "chapter": "3",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "urdu",
+      "chapter": "4",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "urdu",
+      "chapter": "5",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "urdu",
+      "chapter": "6",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "urdu",
+      "chapter": "7",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "urdu",
+      "chapter": "8",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "urdu",
+      "chapter": "9",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "urdu",
+      "chapter": "10",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "urdu",
+      "chapter": "11",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "urdu",
+      "chapter": "12",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "urdu",
+      "chapter": "13",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "urdu",
+      "chapter": "14",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "urdu",
+      "chapter": "15",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "urdu",
+      "chapter": "16",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "urdu",
+      "chapter": "17",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "urdu",
+      "chapter": "18",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "urdu",
+      "chapter": "19",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": 10,
+      "subjectId": "urdu",
+      "chapter": "20",
+      "questionCount": 3,
+      "questionTypes": {
+        "short": 2,
+        "long": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": null,
+      "subjectId": null,
+      "chapter": "1",
+      "questionCount": 4,
+      "questionTypes": {
+        "mcq": 2,
+        "grammar": 1,
+        "translation": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": null,
+      "subjectId": null,
+      "chapter": "2",
+      "questionCount": 4,
+      "questionTypes": {
+        "mcq": 2,
+        "grammar": 1,
+        "essay": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": null,
+      "subjectId": null,
+      "chapter": "3",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 2,
+        "grammar": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": null,
+      "subjectId": null,
+      "chapter": "4",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 2,
+        "grammar": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": null,
+      "subjectId": null,
+      "chapter": "5",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 3,
+        "grammar": 1,
+        "essay": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": null,
+      "subjectId": null,
+      "chapter": "6",
+      "questionCount": 5,
+      "questionTypes": {
+        "mcq": 2,
+        "grammar": 1,
+        "comprehension": 2
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": null,
+      "subjectId": null,
+      "chapter": "7",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 2,
+        "grammar": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": null,
+      "subjectId": null,
+      "chapter": "8",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 2,
+        "grammar": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": null,
+      "subjectId": null,
+      "chapter": "9",
+      "questionCount": 7,
+      "questionTypes": {
+        "mcq": 2,
+        "grammar": 1,
+        "essay": 1,
+        "comprehension": 2,
+        "translation": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": null,
+      "subjectId": null,
+      "chapter": "10",
+      "questionCount": 4,
+      "questionTypes": {
+        "mcq": 3,
+        "essay": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    },
+    {
+      "grade": null,
+      "subjectId": null,
+      "chapter": "11",
+      "questionCount": 3,
+      "questionTypes": {
+        "mcq": 2,
+        "grammar": 1
+      },
+      "academicallyApproved": 0,
+      "verifiedPublished": 0
+    }
+  ],
+  "originalSources": [
+    {
+      "file": "agriTech9EnglishStarter2026.json",
+      "originalFileSha256": "fa90a74076340c6293d3ba2d051329aa51cfed044953840c935ad0bbb85b55df",
+      "questionCount": 30
+    },
+    {
+      "file": "agriTech9UrduStarter2026.json",
+      "originalFileSha256": "4368b848189c852bfbd0e66190b5e29d94b3df588dec2ea5427e247da769bf10",
+      "questionCount": 30
+    },
+    {
+      "file": "art10emStarter2026.json",
+      "originalFileSha256": "c6b85646f4acaf37192f425ec7198fa3624908dd61855876dd4ce6858cee2500",
+      "questionCount": 21
+    },
+    {
+      "file": "art10urStarter2026.json",
+      "originalFileSha256": "f854e848821e91d77cab13b1ead702a4b2a648ee1538340b6280294e78190292",
+      "questionCount": 21
+    },
+    {
+      "file": "art9emStarter2026.json",
+      "originalFileSha256": "0fda1d0ed86d8a259625fa64eba4c39ee186cf2c27d04734055ba61b7537aa69",
+      "questionCount": 24
+    },
+    {
+      "file": "art9urStarter2026.json",
+      "originalFileSha256": "af54f55fbbd0dd4f79e6fff2c2a4f22cdc6637c99e25778d84c015e51c106b92",
+      "questionCount": 24
+    },
+    {
+      "file": "biology10EnglishStarter2026.json",
+      "originalFileSha256": "d440792276f216e6696b134dde0c4b4cd2dca745eee84826af3c4ff18bda93ff",
+      "questionCount": 60
+    },
+    {
+      "file": "biology10UrduStarter2026.json",
+      "originalFileSha256": "91182fae98e3e7ec18077cac805292a67c47ecc28c84f2d81543037aacc9b266",
+      "questionCount": 40
+    },
+    {
+      "file": "biology9Chapter1TopicDrafts.json",
+      "originalFileSha256": "a247320e736c5f6304a17faeac85f277589bfd9746edb2be12da6f0e9f792a37",
+      "questionCount": 48
+    },
+    {
+      "file": "biology9EnglishStarter2026.json",
+      "originalFileSha256": "e36217adade79b13c5a275c256373929b616219d37a399181d619e016f3e1a4e",
+      "questionCount": 66
+    },
+    {
+      "file": "biology9TopicResearchDrafts.json",
+      "originalFileSha256": "d7afb8f8feda76162600ff7b8e3c09cb38e4dc51d9862dd321898f8e5749372a",
+      "questionCount": 6
+    },
+    {
+      "file": "biology9UrduStarter2026.json",
+      "originalFileSha256": "26784a13d6e22cb79c9fffb98b31c768e165a5999871b76bbecf61d6ef814d1f",
+      "questionCount": 33
+    },
+    {
+      "file": "biologyTech10EnglishStarter2026.json",
+      "originalFileSha256": "382b08bf37c911661aa51001b74a94d952e2e5f3648afa6621948af278e9d54e",
+      "questionCount": 24
+    },
+    {
+      "file": "bioTech9emStarter2026.json",
+      "originalFileSha256": "998493bae8aa6739b166ec19124a20f74a976b6ce3504fec6716649b05282e41",
+      "questionCount": 27
+    },
+    {
+      "file": "bioTech9urStarter2026.json",
+      "originalFileSha256": "99b8886f40f8a5f2fa254c6d86a95fbdefec545e2eaa88eae85e5347646b5c8f",
+      "questionCount": 27
+    },
+    {
+      "file": "chemistry10Starter2026.json",
+      "originalFileSha256": "ef2917a8fc5ea030992d5f15df2493b7422954463ee4d54c25414fc81af706a1",
+      "questionCount": 65
+    },
+    {
+      "file": "chemistry10UrduStarter2026.json",
+      "originalFileSha256": "5c89d545299e106ef13671202f72c920a03669e59123dfd296a283f9e97b6da3",
+      "questionCount": 39
+    },
+    {
+      "file": "chemistry9Chapter10EnglishDrafts2026.json",
+      "originalFileSha256": "c61a997c4da221578b2e3a0c38ac2c02aeab7d72a615be97ccd6250f10a52655",
+      "questionCount": 30
+    },
+    {
+      "file": "chemistry9Chapter11EnglishDrafts2026.json",
+      "originalFileSha256": "e27178c2fabc7fc63fed68f12fdaeb8c1e7dfb085e9962fd3e7ab1e410c4825b",
+      "questionCount": 24
+    },
+    {
+      "file": "chemistry9Chapter12EnglishDrafts2026.json",
+      "originalFileSha256": "b566e7b515abb2770106fb49893364189b4d116125cc0630aaa979cafd6300bd",
+      "questionCount": 15
+    },
+    {
+      "file": "chemistry9Chapter13EnglishDrafts2026.json",
+      "originalFileSha256": "c328c074b6caa9632712fa3007a7e457eac87a62e9bd5085114f35842463dc69",
+      "questionCount": 25
+    },
+    {
+      "file": "chemistry9Chapter1EnglishDrafts2026.json",
+      "originalFileSha256": "5a61dcd4aa0089e387473400bd8ba5a5ca727a802e66a48ea751531553c8a751",
+      "questionCount": 36
+    },
+    {
+      "file": "chemistry9Chapter2EnglishDrafts2026.json",
+      "originalFileSha256": "d77aa2550ec03a0a5ecf0ba0c4d63505180e338e0f2a905eaae097e109d22d6f",
+      "questionCount": 24
+    },
+    {
+      "file": "chemistry9Chapter3EnglishDrafts2026.json",
+      "originalFileSha256": "47baf65f4c3101fd7aba59e0412bee2430e144285a10c04b73b0411c28c70ae8",
+      "questionCount": 24
+    },
+    {
+      "file": "chemistry9Chapter4EnglishDrafts2026.json",
+      "originalFileSha256": "00b6179560a6687f8279c9f92e9911763b7b6cea0735cff0aaeda7f0516fb87e",
+      "questionCount": 27
+    },
+    {
+      "file": "chemistry9Chapter5EnglishDrafts2026.json",
+      "originalFileSha256": "00003f08320bb3781d91d9e67a5f497918ada98155d1fa59b9604512b5d6216d",
+      "questionCount": 25
+    },
+    {
+      "file": "chemistry9Chapter6EnglishDrafts2026.json",
+      "originalFileSha256": "f0c65a021ec52c24b2b69879f2fdb34008a94b40e50ad0a04f6391988c7df427",
+      "questionCount": 15
+    },
+    {
+      "file": "chemistry9Chapter7EnglishDrafts2026.json",
+      "originalFileSha256": "f14cbe295b714aff61d5e4d2876c1c7a015245caf79477520e18d866072dcf88",
+      "questionCount": 25
+    },
+    {
+      "file": "chemistry9Chapter8EnglishDrafts2026.json",
+      "originalFileSha256": "39663931ec358ec088a258cc4aecd7d057bce6d5873cbb6857a48706e905cdef",
+      "questionCount": 20
+    },
+    {
+      "file": "chemistry9Chapter9EnglishDrafts2026.json",
+      "originalFileSha256": "59f4914435b0e1fd542dc8d0adb9579afdff0e73777f6218cdd17ad015895884",
+      "questionCount": 25
+    },
+    {
+      "file": "chemistry9UrduStarter2026.json",
+      "originalFileSha256": "0993bd684e10497b63e0792a23698046470c9433bca944b06e71f5849ef54cc5",
+      "questionCount": 39
+    },
+    {
+      "file": "chemTech9emStarter2026.json",
+      "originalFileSha256": "6d9f045b9a6a9bd155570a16b8e20a520eab107ad8a49b6376b8cfbcedafa1f0",
+      "questionCount": 39
+    },
+    {
+      "file": "chemTech9urStarter2026.json",
+      "originalFileSha256": "eaee9eec640f4f840996217d5ea9fff45830f02e4dc7e5b7d855defb1a06ff5f",
+      "questionCount": 39
+    },
+    {
+      "file": "communicationSkills10TechStarter2026.json",
+      "originalFileSha256": "d350087872151e00477f398ba357dde6026f3ea26217232dd3d48d6dde21b123",
+      "questionCount": 27
+    },
+    {
+      "file": "compEntTech9EnglishStarter2026.json",
+      "originalFileSha256": "ee3bad52e0894d7049d6e4e5e97f7b55ec31c4e795b59314b3bc05e573aae06c",
+      "questionCount": 30
+    },
+    {
+      "file": "compEntTech9UrduStarter2026.json",
+      "originalFileSha256": "a257a07290ddbd5f7a33fee0d4f5fa2c11dcf68795b846505f12e7c7d731ae6d",
+      "questionCount": 30
+    },
+    {
+      "file": "computer10Starter2026.json",
+      "originalFileSha256": "c6a01619ae6c7ca8adb387fe89777826e1dd13536b2ceb6649bb466969c86c72",
+      "questionCount": 40
+    },
+    {
+      "file": "computer10UrduStarter2026.json",
+      "originalFileSha256": "9268f2863ff830f4153df16c77ba6b36ff9ed49e5c648a0e25049b5ce458808a",
+      "questionCount": 40
+    },
+    {
+      "file": "computer9Starter2026.json",
+      "originalFileSha256": "1e685088636d6124c5ce9f6dffc3d480defc54dbfff001c8425b4da3b896d52a",
+      "questionCount": 60
+    },
+    {
+      "file": "english10Starter2026.json",
+      "originalFileSha256": "eb8b356c4b3dd797451b245cbdd732a2d1dee2e9e1fe5135708fef1fca6d054c",
+      "questionCount": 50
+    },
+    {
+      "file": "english9CompetencyOriginals2026.json",
+      "originalFileSha256": "0d01efa8f39e7db9c2998974bb82ed91a2119511b6c520cb63d8337453083380",
+      "questionCount": 44
+    },
+    {
+      "file": "english9Starter2026.json",
+      "originalFileSha256": "af6619575af1ccd0bcad45997da63369b8d9768865d34b80cebf2a2e6ca0941f",
+      "questionCount": 55
+    },
+    {
+      "file": "fashionDesigning9TechStarter2026.json",
+      "originalFileSha256": "6316e7da32f11a19f7b1b3a0d9092753e3968ed0b5349150c590c786cb466f04",
+      "questionCount": 36
+    },
+    {
+      "file": "generalScienceTech9EnglishStarter2026.json",
+      "originalFileSha256": "f416811d516304e6474be5ef6abada74d700667888a56f6638d4d6d96a808c0b",
+      "questionCount": 33
+    },
+    {
+      "file": "generalScienceTech9UrduStarter2026.json",
+      "originalFileSha256": "bbf47fed029c7fd67bf9f4a47711bf5afb5c2229d0144beef5d77b5472c1934a",
+      "questionCount": 33
+    },
+    {
+      "file": "ghiza10Starter2026.json",
+      "originalFileSha256": "21b999e8c016b48cbe56c3f1465774b20e286bd2dcef4ccaab7beaa1f3bd00aa",
+      "questionCount": 15
+    },
+    {
+      "file": "ghiza9Starter2026.json",
+      "originalFileSha256": "88b35634ab01223929d040e430ea75e9a31fb38f9051fa4b245516014e544cf8",
+      "questionCount": 15
+    },
+    {
+      "file": "healthSciences10TechStarter2026.json",
+      "originalFileSha256": "544e7b9b1dfc157e9b1199606bf5a84d52120534d993b1249f9064c403244a74",
+      "questionCount": 27
+    },
+    {
+      "file": "healthSciences9TechStarter2026.json",
+      "originalFileSha256": "03990ab80d396a47b45e4e0064712a5f1de4c15ab245a1f8225733e2750ea0dc",
+      "questionCount": 40
+    },
+    {
+      "file": "home10Starter2026.json",
+      "originalFileSha256": "8cfdd007787be1690118f10b77550ab5720d4324e6940898a8663a736a5b68df",
+      "questionCount": 21
+    },
+    {
+      "file": "home9Starter2026.json",
+      "originalFileSha256": "97c33957a8a2fcd45ec80ed943422488d4350b382edaf86f24ce974fedda262b",
+      "questionCount": 24
+    },
+    {
+      "file": "ict9TechStarter2026.json",
+      "originalFileSha256": "e1e8043b475e2edd7592ab100a01427a4fce392bab795a0ccfd708ec07773ce4",
+      "questionCount": 30
+    },
+    {
+      "file": "islamiyat9Starter2026.json",
+      "originalFileSha256": "89683922a220b7c056d2c6d0af1085bbbf28bd142e756c63d1b91a9c8af06430",
+      "questionCount": 35
+    },
+    {
+      "file": "mathematics10OriginalReasoningBatch2026.json",
+      "originalFileSha256": "22f5a6f7e85346d295e624b5f39ea6471d5bfddb90f3a6b0f429e347dd475986",
+      "questionCount": 36
+    },
+    {
+      "file": "mathematics10Starter2026.json",
+      "originalFileSha256": "3bdd9eeb76c6e29d57178fda83e0ceee1fe7b4f8ceeae62b956af6122d150f9a",
+      "questionCount": 60
+    },
+    {
+      "file": "mathematics9Starter2026.json",
+      "originalFileSha256": "617b9e67f9150799753a9ba8fa5830f8550d6f47e23536576bd697f5048d7635",
+      "questionCount": 65
+    },
+    {
+      "file": "mathematics9UrduStarter2026.json",
+      "originalFileSha256": "f91e678d3b98107a9fd152eaf6607bfa5a976ce702f0b634ce8274129834fe08",
+      "questionCount": 39
+    },
+    {
+      "file": "pakistanStudies10Starter2026.json",
+      "originalFileSha256": "cf03d48d57698e8d0827e628132b8becd801cb127b9e3789df30e1fe87b12dae",
+      "questionCount": 40
+    },
+    {
+      "file": "pakistanStudies10UrduStarter2026.json",
+      "originalFileSha256": "9e5987872f910fed4d567b4a14323346d3249a52049a2a54ca6a52732ca508db",
+      "questionCount": 40
+    },
+    {
+      "file": "physics10OriginalApplicationBatch2026.json",
+      "originalFileSha256": "a214d121e4a6b21fa7e41f7b6d7d7207968b7e7ab0b71145ea68cd9ef4ac5255",
+      "questionCount": 36
+    },
+    {
+      "file": "physics10Starter2026.json",
+      "originalFileSha256": "cc25a3b4d00fb9233d711f9cdafd19960d5b1c2a7f72a48005ec8677ab26c416",
+      "questionCount": 60
+    },
+    {
+      "file": "physics9EnglishStarter2026.json",
+      "originalFileSha256": "1a882970fc2548f50bc001691d6de990ce156690cfa252f3f5355d8d63a6dc16",
+      "questionCount": 54
+    },
+    {
+      "file": "physics9UrduStarter2026.json",
+      "originalFileSha256": "d53522d5709e778d1610015cfdb5b51d75f9a2ca5f61b02a55ef682eb4e877fd",
+      "questionCount": 27
+    },
+    {
+      "file": "physicsTech10EnglishStarter2026.json",
+      "originalFileSha256": "4accf005bbbd69363d4e7947001844a92b9dddcf02b526cf5d642116741e4423",
+      "questionCount": 30
+    },
+    {
+      "file": "physicsTech9DualStarter2026.json",
+      "originalFileSha256": "36e0d30bc2bd57b192ba41d6f2b8261ae87e21b66b4652e0b27074bca6320135",
+      "questionCount": 64
+    },
+    {
+      "file": "tarjuma10Starter2026.json",
+      "originalFileSha256": "c7c16bdd42e4b2fb1879b178df01c031cd333aa13d8647cac37d9fd4495a6390",
+      "questionCount": 45
+    },
+    {
+      "file": "tarjuma9Starter2026.json",
+      "originalFileSha256": "428e0158c11d8fc233875d3254bfacfcfdba469b16a66b30e7cc4d582ca15885",
+      "questionCount": 54
+    },
+    {
+      "file": "textile10Starter2026.json",
+      "originalFileSha256": "6e46a40a3939ca38d98947a4da3b6cae36422a49ca937d8b46e24dd81c0b5491",
+      "questionCount": 21
+    },
+    {
+      "file": "textile9Starter2026.json",
+      "originalFileSha256": "453734ea1b9820fea8eca7ccab51fb1aca25c56e5f3977f840336ebda2e0a282",
+      "questionCount": 21
+    },
+    {
+      "file": "urdu10GrammarStarter2026.json",
+      "originalFileSha256": "22004448a329c0b64ac6043761ac893ca6b52bf02565185ad5fbaba0343c8c0c",
+      "questionCount": 35
+    },
+    {
+      "file": "urdu10LiteratureStarter2026.json",
+      "originalFileSha256": "7dc183c6bb84f8cf37d44b60210f4a30718290c7d20417a57d64ca957f4792c4",
+      "questionCount": 60
+    },
+    {
+      "file": "urdu9GrammarStarter2026.json",
+      "originalFileSha256": "66ea53386b2f3bee5afc02d635ad0185251c0967e49d654c63031c7b269f0acc",
+      "questionCount": 35
+    },
+    {
+      "file": "urdu9LiteratureStarter2026.json",
+      "originalFileSha256": "3fcdb266dcbe2e6e9f9e564d98bfaaa3238ba3d14c8acdb0d74235c21ca9e537",
+      "questionCount": 57
+    }
+  ]
+}

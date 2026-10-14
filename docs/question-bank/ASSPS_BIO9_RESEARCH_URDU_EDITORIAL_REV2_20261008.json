@@ -1,0 +1,328 @@
+{
+  "schemaVersion": "assps-bio9-research-urdu-editorial-rev2-v1",
+  "parentAuthoringFile": "al-siddique-frontend/src/Modules/Paper-Generator/seed-data/grade9-10-staging/biology9TopicResearchDrafts.json",
+  "parentAuthoringSha256": "d7afb8f8feda76162600ff7b8e3c09cb38e4dc51d9862dd321898f8e5749372a",
+  "revisionType": "TRANSLATION_COMPLETION_CANDIDATE_ONLY",
+  "originalQuestionCount": 6,
+  "uniqueQuestionsAdded": 0,
+  "schoolAdoptedBookVerified": false,
+  "sourcePrintedPageVerified": false,
+  "translationIndependentlyReviewed": false,
+  "academicallyApproved": false,
+  "releaseEligible": false,
+  "liveImportAllowed": false,
+  "questions": [
+    {
+      "id": "IX-BIO-EM-RESEARCH-C01-T0101-S01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.1",
+      "type": "short",
+      "origin": "conceptual",
+      "marks": 2,
+      "difficulty": "medium",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 6,
+        "exerciseRef": null,
+        "topicIndexEvidence": "TABLE_OF_CONTENTS_FIRST_PASS"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "languageSource": "en"
+      },
+      "correctOptionId": null,
+      "content": {
+        "en": {
+          "stem": "A scientist investigates microscopic fungi, while another studies the behaviour of animals. Identify the two relevant fields and explain how their scopes differ.",
+          "answer": "Microbiology examines microorganisms, including microscopic fungi. Zoology studies animals, their structure, functions, behaviour and diversity."
+        },
+        "ur": {
+          "stem": "ایک سائنس دان خردبینی پھپھوندیوں کا مطالعہ کرتا ہے، جبکہ دوسرا جانوروں کے رویّے پر تحقیق کرتا ہے۔ دونوں متعلقہ حیاتیاتی شعبوں کی نشاندہی کریں اور ان کے دائرۂ کار میں فرق بیان کریں۔",
+          "answer": "خرد حیاتیات (مائیکرو بایولوجی) میں خردبینی جانداروں، جن میں بعض خردبینی پھپھوندیاں بھی شامل ہیں، کا مطالعہ کیا جاتا ہے۔ حیوانیات (زوالوجی) میں جانوروں کی ساخت، افعال، رویّے اور تنوع کا مطالعہ کیا جاتا ہے۔"
+        },
+        "hi": {
+          "stem": "",
+          "answer": ""
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "syllabus": false,
+          "duplicate": false,
+          "hindi": false
+        }
+      },
+      "syllabusScope": {
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "editorialRevision": {
+        "type": "INDEPENDENT_HUMAN_REVIEW_REQUIRED",
+        "revision": 2,
+        "parentQuestionSha256": "3e67ea9fd0de659f72dd4bdb27314f07ae364163fb42214c5c0630115a75c0e3",
+        "translationAuthorType": "AI_EDITORIAL_PROPOSAL_NOT_INDEPENDENT_REVIEWER",
+        "questionOrigin": "ORIGINAL_CONCEPTUAL_NOT_TEXTBOOK_EXERCISE",
+        "schoolAdoptedBookVerified": false,
+        "physicalPageVerified": false,
+        "terminologyReviewPending": true,
+        "semanticEquivalencePending": true,
+        "note": "Subject reviewer must confirm scope of microbiology versus mycology for the fungi example."
+      }
+    },
+    {
+      "id": "IX-BIO-EM-RESEARCH-C01-T0101-S02",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.1",
+      "type": "short",
+      "origin": "conceptual",
+      "marks": 2,
+      "difficulty": "medium",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 7,
+        "exerciseRef": null,
+        "topicIndexEvidence": "TABLE_OF_CONTENTS_FIRST_PASS"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "languageSource": "en"
+      },
+      "correctOptionId": null,
+      "content": {
+        "en": {
+          "stem": "A report investigates cell structures and division, while another explains how a body part works. Which branches of biology are most directly involved?",
+          "answer": "Cytology is concerned with cells and processes such as their division. Physiology deals with the functioning of body parts."
+        },
+        "ur": {
+          "stem": "ایک تحقیقی رپورٹ خلیوں کی ساخت اور تقسیم کا جائزہ لیتی ہے، جبکہ دوسری بیان کرتی ہے کہ جسم کا کوئی حصہ کیسے کام کرتا ہے۔ حیاتیات کی کون سی شاخیں ان مطالعات سے براہِ راست متعلق ہیں؟",
+          "answer": "خلویات (سائٹولوجی) میں خلیوں اور ان کی تقسیم جیسے عمل کا مطالعہ کیا جاتا ہے۔ فعلیات (فزیالوجی) میں جسم کے حصوں کے افعال کا مطالعہ کیا جاتا ہے۔"
+        },
+        "hi": {
+          "stem": "",
+          "answer": ""
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "syllabus": false,
+          "duplicate": false,
+          "hindi": false
+        }
+      },
+      "syllabusScope": {
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "editorialRevision": {
+        "type": "INDEPENDENT_HUMAN_REVIEW_REQUIRED",
+        "revision": 2,
+        "parentQuestionSha256": "751772d086b98a578ff20c514fed2700e3359add203449cbff96fa160c138878",
+        "translationAuthorType": "AI_EDITORIAL_PROPOSAL_NOT_INDEPENDENT_REVIEWER",
+        "questionOrigin": "ORIGINAL_CONCEPTUAL_NOT_TEXTBOOK_EXERCISE",
+        "schoolAdoptedBookVerified": false,
+        "physicalPageVerified": false,
+        "terminologyReviewPending": true,
+        "semanticEquivalencePending": true,
+        "note": "Subject and Urdu language reviewers must verify vocabulary and meaning."
+      }
+    },
+    {
+      "id": "IX-BIO-EM-RESEARCH-C01-T0101-S03",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.1",
+      "type": "short",
+      "origin": "conceptual",
+      "marks": 2,
+      "difficulty": "medium",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 6,
+        "exerciseRef": null,
+        "topicIndexEvidence": "TABLE_OF_CONTENTS_FIRST_PASS"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "languageSource": "en"
+      },
+      "correctOptionId": null,
+      "content": {
+        "en": {
+          "stem": "How do morphology and anatomy offer different but complementary views of an organism?",
+          "answer": "Morphology describes form and structural features, including appearance; anatomy concentrates on internal physical organization. Together they help describe an organism more fully."
+        },
+        "ur": {
+          "stem": "شکلیات (مورفولوجی) اور تشریح الاعضا (اناٹومی) کسی جاندار کے متعلق مختلف لیکن ایک دوسرے کی تکمیل کرنے والی معلومات کیسے فراہم کرتی ہیں؟",
+          "answer": "شکلیات (مورفولوجی) جاندار کی شکل و صورت اور ظاہری ساختی خصوصیات بیان کرتی ہے، جبکہ تشریح الاعضا (اناٹومی) اس کی اندرونی جسمانی ساخت کا مطالعہ کرتی ہے۔ دونوں شعبے مل کر جاندار کی ساخت کو زیادہ مکمل طور پر سمجھنے میں مدد دیتے ہیں۔"
+        },
+        "hi": {
+          "stem": "",
+          "answer": ""
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "syllabus": false,
+          "duplicate": false,
+          "hindi": false
+        }
+      },
+      "syllabusScope": {
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "editorialRevision": {
+        "type": "INDEPENDENT_HUMAN_REVIEW_REQUIRED",
+        "revision": 2,
+        "parentQuestionSha256": "99f48e48c1df29705c17165bee770c1d241d7040b757659c41add3d45b37d50c",
+        "translationAuthorType": "AI_EDITORIAL_PROPOSAL_NOT_INDEPENDENT_REVIEWER",
+        "questionOrigin": "ORIGINAL_CONCEPTUAL_NOT_TEXTBOOK_EXERCISE",
+        "schoolAdoptedBookVerified": false,
+        "physicalPageVerified": false,
+        "terminologyReviewPending": true,
+        "semanticEquivalencePending": true,
+        "note": "Subject and Urdu language reviewers must verify vocabulary and meaning."
+      }
+    },
+    {
+      "id": "IX-BIO-EM-RESEARCH-C01-T0101-S04",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.1",
+      "type": "short",
+      "origin": "conceptual",
+      "marks": 2,
+      "difficulty": "medium",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 7,
+        "exerciseRef": null,
+        "topicIndexEvidence": "TABLE_OF_CONTENTS_FIRST_PASS"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "languageSource": "en"
+      },
+      "correctOptionId": null,
+      "content": {
+        "en": {
+          "stem": "Why is taxonomy useful when biologists need to compare unfamiliar living organisms?",
+          "answer": "Taxonomy organizes organisms into groups by their similarities and differences, helping scientists compare diversity and investigate relationships."
+        },
+        "ur": {
+          "stem": "جب ماہرینِ حیاتیات کو غیر مانوس جانداروں کا آپس میں موازنہ کرنا ہو تو درجہ بندی (ٹیکسانومی) کیوں مفید ہوتی ہے؟",
+          "answer": "درجہ بندی (ٹیکسانومی) جانداروں کو ان کی مماثلتوں اور اختلافات کی بنیاد پر گروہوں میں منظم کرتی ہے۔ اس سے ماہرین جانداروں کے تنوع کا موازنہ اور ان کے باہمی تعلقات کا مطالعہ کر سکتے ہیں۔"
+        },
+        "hi": {
+          "stem": "",
+          "answer": ""
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "syllabus": false,
+          "duplicate": false,
+          "hindi": false
+        }
+      },
+      "syllabusScope": {
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "editorialRevision": {
+        "type": "INDEPENDENT_HUMAN_REVIEW_REQUIRED",
+        "revision": 2,
+        "parentQuestionSha256": "5a2b5ffb30e1e82e27ca5b6d6a3bc3671688d1c15ed06aadd865f90cdb7c5079",
+        "translationAuthorType": "AI_EDITORIAL_PROPOSAL_NOT_INDEPENDENT_REVIEWER",
+        "questionOrigin": "ORIGINAL_CONCEPTUAL_NOT_TEXTBOOK_EXERCISE",
+        "schoolAdoptedBookVerified": false,
+        "physicalPageVerified": false,
+        "terminologyReviewPending": true,
+        "semanticEquivalencePending": true,
+        "note": "Subject and Urdu language reviewers must verify vocabulary and meaning."
+      }
+    }
+  ]
+}

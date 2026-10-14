@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
+const d=JSON.parse(fs.readFileSync(new URL('./chemistry9Chapter10ContentMap2026.json',import.meta.url),'utf8'));
+test('Environmental Chemistry chapter map covers five verified source headings',()=>{assert.deepEqual(d.chapter.pdfPages,[133,148]);assert.deepEqual(d.topics.map(x=>x.topicId),['10.1','10.2','10.3','10.4','10.5']);assert(d.topics.every(x=>x.status==='RENDERED_PAGE_HEADING_REVIEWED'));});
+test('concept families cover atmosphere pollutants acid rain greenhouse warming and controls',()=>{for(const k of ['major and minor constituents of atmosphere','sources and harmful effects of major air pollutants','formation and environmental effects of acid rain','greenhouse gases and greenhouse effect','pollution-control strategies including catalytic converters'])assert(d.verifiedConceptFamilies.includes(k));});
+test('exercise origin remains blocked pending item mapping',()=>{assert.equal(d.exerciseFamilies.itemLevelExerciseMap,'PENDING');assert.equal(d.authoring.exerciseOriginAllowed,false);assert.equal(d.authoring.publicationAllowed,false);});

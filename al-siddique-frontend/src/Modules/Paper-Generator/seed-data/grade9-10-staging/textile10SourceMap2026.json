@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "assps-textile10-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-070",
+  "sourcePdfSha256": "81829814fdbc6005d89b3c91672610a5a0ac274f9d70a43d6c4e9a7da6ce5902",
+  "sourceByteLength": 41978736,
+  "pageCount": 141,
+  "identity": [
+    "Parcha Bafi (Textile and Clothing)",
+    "Grade 10",
+    "Urdu",
+    "CURRENT_CATALOG_LABEL_NO_SESSION"
+  ],
+  "resolvedMedium": "Urdu",
+  "chapterMapState": "OFFICIAL_BYTES_HASHED_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_BOUNDARIES_PENDING",
+  "chapterEvidence": {
+    "officialCatalogRecordId": "pectaa-catalog-070",
+    "sourceCacheRef": "20261006/elective10-textile.pdf",
+    "crossCheckUrls": [
+      "https://www.ilmkidunya.com/10th-class/books/clothing_and_textile-punjab-board"
+    ]
+  },
+  "chapters": [
+    {
+      "number": 1,
+      "titleLocal": "Fashion اور بننا سنورنا",
+      "titleEnglish": "Fashion and Grooming",
+      "focus": "fashion trends کو comfort, identity, context اور responsible choices کے ساتھ سمجھنا",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 2,
+      "titleLocal": "کپڑوں کی منصوبہ بندی کے اصول",
+      "titleEnglish": "Principles of Clothing Planning",
+      "focus": "wardrobe planning, needs, budget, versatility اور sustainability",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 3,
+      "titleLocal": "کپڑوں کی حفاظت اور ذخیرہ",
+      "titleEnglish": "Clothing Care and Storage",
+      "focus": "clean, dry, organized storage اور fabric-appropriate care",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 4,
+      "titleLocal": "داغ دھبے دور کرنا",
+      "titleEnglish": "Stain Management",
+      "focus": "fabric label, prompt safe treatment اور professional help when appropriate",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 5,
+      "titleLocal": "Textile اور لباس میں کاروبار کے مواقع اور پیشے",
+      "titleEnglish": "Careers and Enterprise in Textiles",
+      "focus": "textile/clothing careers, entrepreneurship, quality, ethics اور customer needs",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 6,
+      "titleLocal": "سلائی کا تعارف",
+      "titleEnglish": "Introduction to Sewing",
+      "focus": "measurement, tools, safe workspace اور basic construction planning",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 7,
+      "titleLocal": "لباس بنانا",
+      "titleEnglish": "Garment Making",
+      "focus": "design-to-garment workflow, fit, finishing, quality and safe tool use",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "exactPageBoundariesPending": true,
+    "safetyBoundary": "NO_DANGEROUS_PROCEDURE_STEPS_NO_RESTRICTIVE_DIET_FRAMING"
+  }
+}

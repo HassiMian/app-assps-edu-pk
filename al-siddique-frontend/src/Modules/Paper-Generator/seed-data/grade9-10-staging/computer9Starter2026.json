@@ -1,0 +1,4495 @@
+{
+  "schemaVersion": "assps-computer9-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-013",
+  "sourcePdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+  "scope": "CURRENT_TEXTBOOK_UNIT_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "IX-COMP-U01-M01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U01",
+        "number": 1
+      },
+      "topicId": "systems",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Systems"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "A system is best described as?",
+          "answer": "Interacting components working toward an objective",
+          "options": [
+            {
+              "id": "A",
+              "text": "Interacting components working toward an objective"
+            },
+            {
+              "id": "B",
+              "text": "A single unrelated object only"
+            },
+            {
+              "id": "C",
+              "text": "A random list with no purpose"
+            },
+            {
+              "id": "D",
+              "text": "Only a computer program"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMP-U01-M02",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U01",
+        "number": 1
+      },
+      "topicId": "computer system",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Systems"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Which component primarily executes instructions?",
+          "answer": "CPU",
+          "options": [
+            {
+              "id": "A",
+              "text": "CPU"
+            },
+            {
+              "id": "B",
+              "text": "Monitor"
+            },
+            {
+              "id": "C",
+              "text": "Keyboard"
+            },
+            {
+              "id": "D",
+              "text": "Printer"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMP-U01-S01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U01",
+        "number": 1
+      },
+      "topicId": "system components",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Systems"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Differentiate input, processing and output in a computing system.",
+          "answer": "Input supplies data/instructions, processing transforms them according to rules, and output presents or communicates the result."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U01-S02",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U01",
+        "number": 1
+      },
+      "topicId": "von Neumann model",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Systems"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "State the basic idea of the stored-program concept.",
+          "answer": "Instructions and data are stored in memory so the CPU can fetch and execute instructions from memory."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U01-L01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U01",
+        "number": 1
+      },
+      "topicId": "system interaction",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Systems"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Explain how CPU, memory, storage, input and output devices cooperate when a computer performs a task.",
+          "answer": "Award marks for input, memory holding data/instructions, CPU fetch-decode-execute, storage for longer-term data, and output/results."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U02-M01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U02",
+        "number": 2
+      },
+      "topicId": "binary",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Number Systems"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Which digits are used in binary?",
+          "answer": "0 and 1",
+          "options": [
+            {
+              "id": "A",
+              "text": "0 and 1"
+            },
+            {
+              "id": "B",
+              "text": "0 to 7"
+            },
+            {
+              "id": "C",
+              "text": "0 to 9"
+            },
+            {
+              "id": "D",
+              "text": "A to F only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMP-U02-M02",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U02",
+        "number": 2
+      },
+      "topicId": "hexadecimal",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Number Systems"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Hexadecimal uses how many distinct digit symbols?",
+          "answer": "16",
+          "options": [
+            {
+              "id": "A",
+              "text": "16"
+            },
+            {
+              "id": "B",
+              "text": "2"
+            },
+            {
+              "id": "C",
+              "text": "8"
+            },
+            {
+              "id": "D",
+              "text": "10"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMP-U02-S01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U02",
+        "number": 2
+      },
+      "topicId": "place value",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Number Systems"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Why is place value important in a positional number system?",
+          "answer": "The value of each digit depends on both the digit itself and its position, which corresponds to a power of the base."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U02-S02",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U02",
+        "number": 2
+      },
+      "topicId": "conversion",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Number Systems"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Convert binary 1010 to decimal.",
+          "answer": "1×8 + 0×4 + 1×2 + 0×1 = 10."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U02-L01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U02",
+        "number": 2
+      },
+      "topicId": "number systems",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Number Systems"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Compare decimal, binary, octal and hexadecimal number systems and explain why binary and hexadecimal are useful in computing.",
+          "answer": "Award marks for bases 10,2,8,16, binary matching digital states, hexadecimal compactly representing binary, and a correct conversion example."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U03-M01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U03",
+        "number": 3
+      },
+      "topicId": "logic gates",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Digital Systems and Logic Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "An AND gate outputs 1 when?",
+          "answer": "All required inputs are 1",
+          "options": [
+            {
+              "id": "A",
+              "text": "All required inputs are 1"
+            },
+            {
+              "id": "B",
+              "text": "Any one input is 1"
+            },
+            {
+              "id": "C",
+              "text": "All inputs are 0"
+            },
+            {
+              "id": "D",
+              "text": "Input values are ignored"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMP-U03-M02",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U03",
+        "number": 3
+      },
+      "topicId": "NOT gate",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Digital Systems and Logic Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "A NOT gate does what?",
+          "answer": "Inverts its input",
+          "options": [
+            {
+              "id": "A",
+              "text": "Inverts its input"
+            },
+            {
+              "id": "B",
+              "text": "Adds two inputs"
+            },
+            {
+              "id": "C",
+              "text": "Stores a file"
+            },
+            {
+              "id": "D",
+              "text": "Routes network packets"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMP-U03-S01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U03",
+        "number": 3
+      },
+      "topicId": "truth tables",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Digital Systems and Logic Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "What is the purpose of a truth table?",
+          "answer": "It lists all possible input combinations for a logic expression or circuit and shows the corresponding output for each combination."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U03-S02",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U03",
+        "number": 3
+      },
+      "topicId": "digital systems",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Digital Systems and Logic Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Why are binary states suitable for digital electronic systems?",
+          "answer": "Electronic circuits can reliably represent two distinct states such as low/high voltage, making storage and logic operations robust."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U03-L01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U03",
+        "number": 3
+      },
+      "topicId": "logic design",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Digital Systems and Logic Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Explain how AND, OR and NOT gates can be combined to represent decision logic.",
+          "answer": "Award marks for correct behavior of each gate, combining outputs as inputs, use of truth tables, a simple original condition, and explaining resulting decision output."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U04-M01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U04",
+        "number": 4
+      },
+      "topicId": "troubleshooting",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "System Troubleshooting"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "What should usually be done first when troubleshooting a system problem?",
+          "answer": "Identify and describe the problem clearly",
+          "options": [
+            {
+              "id": "A",
+              "text": "Identify and describe the problem clearly"
+            },
+            {
+              "id": "B",
+              "text": "Replace every component"
+            },
+            {
+              "id": "C",
+              "text": "Delete all data"
+            },
+            {
+              "id": "D",
+              "text": "Ignore symptoms"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMP-U04-M02",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U04",
+        "number": 4
+      },
+      "topicId": "diagnosis",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "System Troubleshooting"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "A good troubleshooting step should be?",
+          "answer": "Testable and reversible where possible",
+          "options": [
+            {
+              "id": "A",
+              "text": "Testable and reversible where possible"
+            },
+            {
+              "id": "B",
+              "text": "Random and undocumented"
+            },
+            {
+              "id": "C",
+              "text": "Destructive by default"
+            },
+            {
+              "id": "D",
+              "text": "Based only on guessing"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMP-U04-S01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U04",
+        "number": 4
+      },
+      "topicId": "troubleshooting process",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "System Troubleshooting"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Why is it useful to change one variable at a time during troubleshooting?",
+          "answer": "It helps isolate cause and effect so the source of the problem can be identified more reliably."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U04-S02",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U04",
+        "number": 4
+      },
+      "topicId": "documentation",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "System Troubleshooting"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Why should troubleshooting actions and results be documented?",
+          "answer": "Documentation prevents repeated work, records what changed, supports rollback and helps others understand the diagnosis."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U04-L01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U04",
+        "number": 4
+      },
+      "topicId": "safe troubleshooting",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "System Troubleshooting"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Describe a safe troubleshooting workflow for a computer that does not start normally.",
+          "answer": "Award marks for observing symptoms, checking power/connections, using non-destructive diagnostics, isolating one cause at a time, and documenting/restoring changes while protecting user data."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U05-M01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U05",
+        "number": 5
+      },
+      "topicId": "software types",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Software System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Which is system software?",
+          "answer": "Operating system",
+          "options": [
+            {
+              "id": "A",
+              "text": "Operating system"
+            },
+            {
+              "id": "B",
+              "text": "Word-processing document"
+            },
+            {
+              "id": "C",
+              "text": "Photo file"
+            },
+            {
+              "id": "D",
+              "text": "Presentation slide"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMP-U05-M02",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U05",
+        "number": 5
+      },
+      "topicId": "operating system",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Software System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "An operating system primarily manages?",
+          "answer": "Hardware resources and software services",
+          "options": [
+            {
+              "id": "A",
+              "text": "Hardware resources and software services"
+            },
+            {
+              "id": "B",
+              "text": "Only printed pages"
+            },
+            {
+              "id": "C",
+              "text": "Only web colours"
+            },
+            {
+              "id": "D",
+              "text": "Only passwords"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMP-U05-S01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U05",
+        "number": 5
+      },
+      "topicId": "system vs application",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Software System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Differentiate system software and application software.",
+          "answer": "System software manages hardware and provides a platform; application software helps users perform specific tasks."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U05-S02",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U05",
+        "number": 5
+      },
+      "topicId": "files and processes",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Software System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "State one role of an operating system in file management and one in process management.",
+          "answer": "It organizes/accesses stored files and allocates CPU/resources among running processes."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U05-L01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U05",
+        "number": 5
+      },
+      "topicId": "software system",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Software System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Explain five important functions of an operating system.",
+          "answer": "Possible marks: user interface, process/CPU management, memory management, file/storage management, device management, security/access control; any five with explanation."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U06-M01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U06",
+        "number": 6
+      },
+      "topicId": "networks",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Computer Networks"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "A LAN typically covers?",
+          "answer": "A limited local area such as a school or office",
+          "options": [
+            {
+              "id": "A",
+              "text": "A limited local area such as a school or office"
+            },
+            {
+              "id": "B",
+              "text": "The entire world only"
+            },
+            {
+              "id": "C",
+              "text": "One CPU register"
+            },
+            {
+              "id": "D",
+              "text": "A single file"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMP-U06-M02",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U06",
+        "number": 6
+      },
+      "topicId": "network devices",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Computer Networks"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Which device commonly forwards data between different networks?",
+          "answer": "Router",
+          "options": [
+            {
+              "id": "A",
+              "text": "Router"
+            },
+            {
+              "id": "B",
+              "text": "Keyboard"
+            },
+            {
+              "id": "C",
+              "text": "Scanner"
+            },
+            {
+              "id": "D",
+              "text": "Speaker"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMP-U06-S01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U06",
+        "number": 6
+      },
+      "topicId": "network benefits",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Computer Networks"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "State two benefits of computer networks.",
+          "answer": "Examples include sharing resources, communication, centralized services, collaborative work and shared internet access; any two."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U06-S02",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U06",
+        "number": 6
+      },
+      "topicId": "internet",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Computer Networks"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Differentiate a local network and the Internet.",
+          "answer": "A local network connects devices within a limited organization/location; the Internet is a global network of interconnected networks."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U06-L01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U06",
+        "number": 6
+      },
+      "topicId": "network design",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Computer Networks"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Describe the main components and considerations for a small school network.",
+          "answer": "Award marks for end devices, switches/access points, router/internet gateway, addressing/connectivity, and security/reliability/resource-sharing considerations."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U07-M01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U07",
+        "number": 7
+      },
+      "topicId": "decomposition",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Computational Thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Breaking a large problem into smaller parts is called?",
+          "answer": "Decomposition",
+          "options": [
+            {
+              "id": "A",
+              "text": "Decomposition"
+            },
+            {
+              "id": "B",
+              "text": "Encryption"
+            },
+            {
+              "id": "C",
+              "text": "Compression"
+            },
+            {
+              "id": "D",
+              "text": "Rendering"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMP-U07-M02",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U07",
+        "number": 7
+      },
+      "topicId": "algorithm",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Computational Thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "An algorithm is?",
+          "answer": "A finite ordered set of steps for solving a problem",
+          "options": [
+            {
+              "id": "A",
+              "text": "A finite ordered set of steps for solving a problem"
+            },
+            {
+              "id": "B",
+              "text": "A hardware port"
+            },
+            {
+              "id": "C",
+              "text": "A network cable"
+            },
+            {
+              "id": "D",
+              "text": "A file extension"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMP-U07-S01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U07",
+        "number": 7
+      },
+      "topicId": "abstraction",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Computational Thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "What is abstraction in computational thinking?",
+          "answer": "Focusing on relevant features of a problem while hiding or ignoring unnecessary detail."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U07-S02",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U07",
+        "number": 7
+      },
+      "topicId": "pattern recognition",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Computational Thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "How does pattern recognition help problem solving?",
+          "answer": "Recognizing similarities lets a solver reuse strategies, generalize solutions and reduce repeated work."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U07-L01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U07",
+        "number": 7
+      },
+      "topicId": "computational thinking",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Computational Thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Apply decomposition, pattern recognition, abstraction and algorithm design to planning a school attendance program.",
+          "answer": "Award marks for decomposing tasks, identifying repeated data/actions, selecting essential data fields, defining an ordered attendance workflow, and explaining testing/refinement."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U08-M01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U08",
+        "number": 8
+      },
+      "topicId": "HTML",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Web Development with HTML, CSS and JavaScript"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "HTML is mainly used to define?",
+          "answer": "Structure and content of a web page",
+          "options": [
+            {
+              "id": "A",
+              "text": "Structure and content of a web page"
+            },
+            {
+              "id": "B",
+              "text": "Only network routing"
+            },
+            {
+              "id": "C",
+              "text": "Only database passwords"
+            },
+            {
+              "id": "D",
+              "text": "CPU instructions"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMP-U08-M02",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U08",
+        "number": 8
+      },
+      "topicId": "CSS",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Web Development with HTML, CSS and JavaScript"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "CSS is mainly used for?",
+          "answer": "Presentation and styling of web content",
+          "options": [
+            {
+              "id": "A",
+              "text": "Presentation and styling of web content"
+            },
+            {
+              "id": "B",
+              "text": "Replacing the operating system"
+            },
+            {
+              "id": "C",
+              "text": "Converting decimal to binary"
+            },
+            {
+              "id": "D",
+              "text": "Managing CPU registers"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMP-U08-S01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U08",
+        "number": 8
+      },
+      "topicId": "JavaScript",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Web Development with HTML, CSS and JavaScript"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "What role can JavaScript play on a web page?",
+          "answer": "It can add client-side behavior and interactivity, such as responding to user actions and updating page content."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U08-S02",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U08",
+        "number": 8
+      },
+      "topicId": "web separation",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Web Development with HTML, CSS and JavaScript"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Why is separating HTML structure, CSS style and JavaScript behavior useful?",
+          "answer": "It improves organization, maintainability, reuse and clarity because each technology has a distinct responsibility."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U08-L01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U08",
+        "number": 8
+      },
+      "topicId": "web development",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Web Development with HTML, CSS and JavaScript"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Describe how HTML, CSS and JavaScript cooperate to create a simple interactive school information page.",
+          "answer": "Award marks for HTML structure, CSS presentation, JavaScript interaction, linking the files correctly, and testing accessibility/usability without copying textbook code."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U09-M01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U09",
+        "number": 9
+      },
+      "topicId": "data",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Data Science and Data Gathering"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Data becomes information when it is?",
+          "answer": "Processed and interpreted meaningfully",
+          "options": [
+            {
+              "id": "A",
+              "text": "Processed and interpreted meaningfully"
+            },
+            {
+              "id": "B",
+              "text": "Deleted"
+            },
+            {
+              "id": "C",
+              "text": "Disconnected from context"
+            },
+            {
+              "id": "D",
+              "text": "Randomized without purpose"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMP-U09-M02",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U09",
+        "number": 9
+      },
+      "topicId": "data collection",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Data Science and Data Gathering"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Which is a primary data-collection method?",
+          "answer": "Conducting a survey directly",
+          "options": [
+            {
+              "id": "A",
+              "text": "Conducting a survey directly"
+            },
+            {
+              "id": "B",
+              "text": "Copying an unrelated old chart"
+            },
+            {
+              "id": "C",
+              "text": "Guessing values"
+            },
+            {
+              "id": "D",
+              "text": "Ignoring observations"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMP-U09-S01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U09",
+        "number": 9
+      },
+      "topicId": "data quality",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Data Science and Data Gathering"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "State two characteristics of good-quality data.",
+          "answer": "Accuracy, completeness, relevance, consistency and timeliness are examples; any two."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U09-S02",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U09",
+        "number": 9
+      },
+      "topicId": "bias",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Data Science and Data Gathering"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "What is sampling bias?",
+          "answer": "It occurs when the selected sample systematically fails to represent the target population, leading to distorted conclusions."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U09-L01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U09",
+        "number": 9
+      },
+      "topicId": "data project",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Data Science and Data Gathering"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Outline a responsible data-gathering project to study students’ preferred library hours.",
+          "answer": "Award marks for clear question, target population/sample, unbiased collection method, privacy/minimal data, analysis/visualization, and cautious interpretation."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U10-M01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U10",
+        "number": 10
+      },
+      "topicId": "emerging technologies",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Emerging Technologies in Computer Science"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Artificial intelligence broadly refers to computer systems designed to perform tasks involving?",
+          "answer": "Learning, reasoning or pattern-based decision support",
+          "options": [
+            {
+              "id": "A",
+              "text": "Learning, reasoning or pattern-based decision support"
+            },
+            {
+              "id": "B",
+              "text": "Only printing"
+            },
+            {
+              "id": "C",
+              "text": "Only electricity generation"
+            },
+            {
+              "id": "D",
+              "text": "Only file naming"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMP-U10-M02",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U10",
+        "number": 10
+      },
+      "topicId": "cloud computing",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Emerging Technologies in Computer Science"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Cloud computing commonly provides?",
+          "answer": "Computing resources/services over networks on demand",
+          "options": [
+            {
+              "id": "A",
+              "text": "Computing resources/services over networks on demand"
+            },
+            {
+              "id": "B",
+              "text": "Only local paper storage"
+            },
+            {
+              "id": "C",
+              "text": "Only offline calculators"
+            },
+            {
+              "id": "D",
+              "text": "Only physical keyboards"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMP-U10-S01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U10",
+        "number": 10
+      },
+      "topicId": "IoT",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Emerging Technologies in Computer Science"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "What is the Internet of Things (IoT)?",
+          "answer": "A network of physical devices with sensors/software/connectivity that can collect, exchange or act on data."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U10-S02",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U10",
+        "number": 10
+      },
+      "topicId": "technology evaluation",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Emerging Technologies in Computer Science"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Why should emerging technologies be evaluated for benefits and risks?",
+          "answer": "New technologies can improve efficiency and capability but may also create privacy, security, fairness, environmental or social concerns."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U10-L01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U10",
+        "number": 10
+      },
+      "topicId": "emerging technology",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Emerging Technologies in Computer Science"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Compare AI, cloud computing and IoT in terms of purpose, one application and one responsible-use concern for each.",
+          "answer": "Award marks for accurate purpose of each technology, applications, and concerns such as privacy, reliability, fairness, security or dependence on connectivity."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U11-M01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U11",
+        "number": 11
+      },
+      "topicId": "digital ethics",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Ethical, Social, and Legal Concerns in Computer Usage"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Which action best respects digital privacy?",
+          "answer": "Collecting only necessary personal data with appropriate permission",
+          "options": [
+            {
+              "id": "A",
+              "text": "Collecting only necessary personal data with appropriate permission"
+            },
+            {
+              "id": "B",
+              "text": "Sharing private data publicly without consent"
+            },
+            {
+              "id": "C",
+              "text": "Using someone else’s password"
+            },
+            {
+              "id": "D",
+              "text": "Publishing confidential records"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMP-U11-M02",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U11",
+        "number": 11
+      },
+      "topicId": "copyright",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Ethical, Social, and Legal Concerns in Computer Usage"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Copyright mainly protects?",
+          "answer": "Original creative works and their authorized use",
+          "options": [
+            {
+              "id": "A",
+              "text": "Original creative works and their authorized use"
+            },
+            {
+              "id": "B",
+              "text": "Any random fact forever"
+            },
+            {
+              "id": "C",
+              "text": "Only computer hardware"
+            },
+            {
+              "id": "D",
+              "text": "Only passwords"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMP-U11-S01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U11",
+        "number": 11
+      },
+      "topicId": "digital citizenship",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Ethical, Social, and Legal Concerns in Computer Usage"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "What is responsible digital citizenship?",
+          "answer": "Using digital technologies safely, ethically and respectfully while considering privacy, security, law and the wellbeing of others."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U11-S02",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U11",
+        "number": 11
+      },
+      "topicId": "plagiarism",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Ethical, Social, and Legal Concerns in Computer Usage"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "What is plagiarism?",
+          "answer": "Presenting another person’s words, ideas or work as one’s own without proper acknowledgement."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U11-L01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U11",
+        "number": 11
+      },
+      "topicId": "ethical computing",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Ethical, Social, and Legal Concerns in Computer Usage"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Explain how privacy, copyright, respectful communication, data security and accessibility contribute to ethical computer use.",
+          "answer": "Award one mark for each area with a clear responsible-use principle or example."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U12-M01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U12",
+        "number": 12
+      },
+      "topicId": "digital entrepreneurship",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Entrepreneurship in Digital Age"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "A value proposition explains?",
+          "answer": "Why a product or service is useful to a target customer",
+          "options": [
+            {
+              "id": "A",
+              "text": "Why a product or service is useful to a target customer"
+            },
+            {
+              "id": "B",
+              "text": "Only its file size"
+            },
+            {
+              "id": "C",
+              "text": "Only its colour"
+            },
+            {
+              "id": "D",
+              "text": "Only its password"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMP-U12-M02",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U12",
+        "number": 12
+      },
+      "topicId": "business planning",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Entrepreneurship in Digital Age"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Market research helps an entrepreneur understand?",
+          "answer": "Customer needs and competing solutions",
+          "options": [
+            {
+              "id": "A",
+              "text": "Customer needs and competing solutions"
+            },
+            {
+              "id": "B",
+              "text": "Only CPU temperature"
+            },
+            {
+              "id": "C",
+              "text": "Only binary arithmetic"
+            },
+            {
+              "id": "D",
+              "text": "Only screen resolution"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMP-U12-S01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U12",
+        "number": 12
+      },
+      "topicId": "digital product",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Entrepreneurship in Digital Age"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Give one example of a responsible digital product or service a student team could design.",
+          "answer": "Examples include a school event planner, study-reminder tool, local information site or simple educational app that respects privacy and school rules."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U12-S02",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U12",
+        "number": 12
+      },
+      "topicId": "cost and revenue",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Entrepreneurship in Digital Age"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Differentiate cost and revenue.",
+          "answer": "Cost is money/resources spent to create and operate a product or service; revenue is money earned from sales or service delivery."
+        }
+      }
+    },
+    {
+      "id": "IX-COMP-U12-L01",
+      "chapter": {
+        "id": "IX-COMP-2025-EM-U12",
+        "number": 12
+      },
+      "topicId": "entrepreneurship",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-013",
+        "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Entrepreneurship in Digital Age"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-COMPUTER-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Computer IX starter aligned to current textbook unit map. No exercise or past-paper stem copied; review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Outline a simple plan for a small digital service from problem identification to responsible launch.",
+          "answer": "Award marks for identifying a real need, defining target users/value proposition, planning features/resources/costs, testing with feedback, and responsible launch including privacy/legal considerations."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 60,
+    "mcq": 24,
+    "short": 24,
+    "long": 12,
+    "units": 12
+  }
+}

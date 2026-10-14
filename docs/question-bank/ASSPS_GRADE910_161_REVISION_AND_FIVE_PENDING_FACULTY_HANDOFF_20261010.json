@@ -1,0 +1,206 @@
+{
+  "schemaVersion": "assps-grade910-161-faculty-review-handoff-source-locked-v1",
+  "inheritedAnswerRevisionPins": 156,
+  "newAnswerRevisionPins": 5,
+  "distinctExistingOriginalIdsWithSupplementalResearch": 161,
+  "proposedMarkingCriteria": 823,
+  "originalCandidateCountUnchanged": 2581,
+  "originalRubricOnlyCountUnchanged": 166,
+  "originalSourceCohorts": 20,
+  "unansweredOriginalIds": 5,
+  "originalV14LedgerSha256": "7f34937013f7e88240e572221dc10925168ce29f1644121c33645f259ff72a89",
+  "newChapter13PacketSha256": "f546c208ef76c70ffab518e4e1173f7f98857bbaa8367aabd4d4df903d8bcfbd",
+  "previous156FrozenManifest": "ASSPS_GRADE910_156_PROPOSED_ANSWER_REVISION_PINS_20261009.json",
+  "schoolTextbookAdoptedPhysicalPageVerified": false,
+  "qualifiedIndependentFacultyReviewed": false,
+  "qualifiedUrduEquivalenceReviewed": false,
+  "academicApprovals": 0,
+  "verifiedPublished": 0,
+  "releaseDecision": "DENY_VERIFIED_PUBLICATION_AND_PRODUCTION_IMPORT",
+  "newAnswerDraftRevisionPins": [
+    {
+      "questionId": "IX-CHEM-2025-C13-13T1-L01",
+      "proposedRevisionSha256": "f3489536864250157ec05f9f4518a6b536ef4635e53e0b5b9b2b66307e4643b3",
+      "originalQuestionSha256": "b8d6193ebd6b4826e44a331c0806bd9bbda1c1becc24d1a5492fee8127ab5506",
+      "oldAnswerSha256": "01ab280d5411cf92545ed7cc91b739bbddab4527916dd7ade0ed99b8e825a2d8",
+      "marks": 5,
+      "independentReviewerId": null,
+      "approvedRevisionId": null,
+      "approved": false,
+      "published": false
+    },
+    {
+      "questionId": "IX-CHEM-2025-C13-13T2-L01",
+      "proposedRevisionSha256": "f820a88c1c21f86295b931165a61cef416a8a1ef3c055cbb495b5dac7a2ecf35",
+      "originalQuestionSha256": "a035246cb3256c5659c08fdece957d8676d38187e7c4da905f4060e9780e8543",
+      "oldAnswerSha256": "e41592739801fdb16b6cf908acb943c8f78cbe5dc8ca6f3d7b5474c1bd9f2399",
+      "marks": 5,
+      "independentReviewerId": null,
+      "approvedRevisionId": null,
+      "approved": false,
+      "published": false
+    },
+    {
+      "questionId": "IX-CHEM-2025-C13-13T3-L01",
+      "proposedRevisionSha256": "c71833ce186f919ef70af0a8289fa1a86f3b13ad7fb086eed021e7392fedf65d",
+      "originalQuestionSha256": "246eb8c5d9ff1944be9cc6ce8d67ec063056b89ce8afaa0ad138c2108f5a6af3",
+      "oldAnswerSha256": "921cba5528b6ba678ebcc34289e7c715c38ee81cf1d4265d7fba6317b7b8efb2",
+      "marks": 5,
+      "independentReviewerId": null,
+      "approvedRevisionId": null,
+      "approved": false,
+      "published": false
+    },
+    {
+      "questionId": "IX-CHEM-2025-C13-13T4-L01",
+      "proposedRevisionSha256": "514e7d3a1002c9a51dc91b749de179f40b9ed42f8b9db56b91a5338cfae851d0",
+      "originalQuestionSha256": "01db4ac580fe8f2e6cbdf02cf0f7ac7c4a9d60de410ca2b278ef04dcebfea1c6",
+      "oldAnswerSha256": "a793e22d1ffb45ae3dbb095bb8cfc2759fca9ae3b3917a1416fd9fcdb7a723d9",
+      "marks": 5,
+      "independentReviewerId": null,
+      "approvedRevisionId": null,
+      "approved": false,
+      "published": false
+    },
+    {
+      "questionId": "IX-CHEM-2025-C13-13T5-L01",
+      "proposedRevisionSha256": "be93dddedb2844478f5ef7823014639251e19886c200a0ab96907a956dea8e54",
+      "originalQuestionSha256": "1c351333a25690cd66213b0a62fa2235ed7625eb9da0a89fac39f14c496ac701",
+      "oldAnswerSha256": "42c6e7aaed404e74b0e2f8100452952d3963118ad8b448e256483a914ad1af4a",
+      "marks": 5,
+      "independentReviewerId": null,
+      "approvedRevisionId": null,
+      "approved": false,
+      "published": false
+    }
+  ],
+  "originalFiveFacultyReviewDocket": [
+    {
+      "questionId": "IX-CHEM-2025-C11-T4-01L",
+      "sourceFile": "chemistry9Chapter11EnglishDrafts2026.json",
+      "sourceFileSha256": "e27178c2fabc7fc63fed68f12fdaeb8c1e7dfb085e9962fd3e7ab1e410c4825b",
+      "originalQuestionRevisionSha256": "01ae76899ed9dcf0d489c40bf60352c5fc76d9912606ea26580bcdaee8c0e107",
+      "originalRubricSha256": "33eb302b9f5059cb71deedc1edfc0eb818ed2c67ccd98fd4018c8af06e1139a5",
+      "originalPageClaimNOTVerified": 155,
+      "catalogRecordClaim": "pectaa-catalog-007",
+      "claimedPdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+      "marks": 5,
+      "additionalExplanationExists": false,
+      "schoolEditionPageVerified": false,
+      "qualifiedSubjectReviewed": false,
+      "urduEquivalenceReviewed": false,
+      "independentReviewerId": null,
+      "approvedRevisionId": null,
+      "academicallyApproved": false,
+      "verifiedPublished": false
+    },
+    {
+      "questionId": "IX-CHEM-2025-C11-T4-02L",
+      "sourceFile": "chemistry9Chapter11EnglishDrafts2026.json",
+      "sourceFileSha256": "e27178c2fabc7fc63fed68f12fdaeb8c1e7dfb085e9962fd3e7ab1e410c4825b",
+      "originalQuestionRevisionSha256": "6cb67b7e4ff907be2d6e6a8a8de0281e9bd9e34e2ddf352bd115d9899fb0ca2d",
+      "originalRubricSha256": "461a8f0342c58474a5acedcbe1039bfac8f64f9c9f3f4a0731520b831c1cb758",
+      "originalPageClaimNOTVerified": 155,
+      "catalogRecordClaim": "pectaa-catalog-007",
+      "claimedPdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+      "marks": 5,
+      "additionalExplanationExists": false,
+      "schoolEditionPageVerified": false,
+      "qualifiedSubjectReviewed": false,
+      "urduEquivalenceReviewed": false,
+      "independentReviewerId": null,
+      "approvedRevisionId": null,
+      "academicallyApproved": false,
+      "verifiedPublished": false
+    },
+    {
+      "questionId": "X-CHEM-C18-L01",
+      "sourceFile": "chemistry10Starter2026.json",
+      "sourceFileSha256": "ef2917a8fc5ea030992d5f15df2493b7422954463ee4d54c25414fc81af706a1",
+      "originalQuestionRevisionSha256": "8ac535a58c95bd6cebd8bd1107fe77b90c4c4a13852e4ffa2aa7ab35edd14d74",
+      "originalRubricSha256": "25885d0159a97d7c03905abdebd9a2726b743c297176a0556d82f316a478ab0e",
+      "originalPageClaimNOTVerified": 70,
+      "catalogRecordClaim": "pectaa-recovered-chemistry10-en-2026",
+      "claimedPdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+      "marks": 5,
+      "additionalExplanationExists": false,
+      "schoolEditionPageVerified": false,
+      "qualifiedSubjectReviewed": false,
+      "urduEquivalenceReviewed": false,
+      "independentReviewerId": null,
+      "approvedRevisionId": null,
+      "academicallyApproved": false,
+      "verifiedPublished": false
+    },
+    {
+      "questionId": "X-CHEM-C23-L01",
+      "sourceFile": "chemistry10Starter2026.json",
+      "sourceFileSha256": "ef2917a8fc5ea030992d5f15df2493b7422954463ee4d54c25414fc81af706a1",
+      "originalQuestionRevisionSha256": "360a3227b3720e98810a1311601bfded8f9aae720402281658b405a18cab2c5b",
+      "originalRubricSha256": "6197a80108c0ef61c68050f8c4b534f508ad6c43b3ff3319eb2ffceddad29595",
+      "originalPageClaimNOTVerified": 129,
+      "catalogRecordClaim": "pectaa-recovered-chemistry10-en-2026",
+      "claimedPdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+      "marks": 5,
+      "additionalExplanationExists": false,
+      "schoolEditionPageVerified": false,
+      "qualifiedSubjectReviewed": false,
+      "urduEquivalenceReviewed": false,
+      "independentReviewerId": null,
+      "approvedRevisionId": null,
+      "academicallyApproved": false,
+      "verifiedPublished": false
+    },
+    {
+      "questionId": "X-CHEM-C24-L01",
+      "sourceFile": "chemistry10Starter2026.json",
+      "sourceFileSha256": "ef2917a8fc5ea030992d5f15df2493b7422954463ee4d54c25414fc81af706a1",
+      "originalQuestionRevisionSha256": "d57c07f91d6c1fb6ec37f7c2a550f318a61049502f1fef305128efd6743b1518",
+      "originalRubricSha256": "55b11659bc81a5b8ccee38591747d6a47573f778fd7c976437ab8a6890dfd3d3",
+      "originalPageClaimNOTVerified": 137,
+      "catalogRecordClaim": "pectaa-recovered-chemistry10-en-2026",
+      "claimedPdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+      "marks": 5,
+      "additionalExplanationExists": false,
+      "schoolEditionPageVerified": false,
+      "qualifiedSubjectReviewed": false,
+      "urduEquivalenceReviewed": false,
+      "independentReviewerId": null,
+      "approvedRevisionId": null,
+      "academicallyApproved": false,
+      "verifiedPublished": false
+    }
+  ],
+  "unresolvedPotentialSemanticOverlaps": [
+    {
+      "sourceQuestionIds": [
+        "IX-CHEM-2025-C07-T05-L01",
+        "IX-CHEM-2025-C10-T3-01L"
+      ],
+      "flag": "POTENTIAL_SEMANTIC_OVERLAP_NOT_CONFIRMED_DUPLICATE",
+      "separateOriginalQuestionIds": true,
+      "independentFacultyDuplicateReview": false,
+      "note": "Ch7 asks acid-rain formation and consequences; Ch10 also asks formation/effects. Keep both existing originals unapproved and require independent faculty originality review before publication."
+    },
+    {
+      "sourceQuestionIds": [
+        "IX-CHEM-2025-C11-T1-01L",
+        "IX-CHEM-2025-C11-T1-02L"
+      ],
+      "flag": "POTENTIAL_CONCEPTUAL_OVERLAP_NOT_CONFIRMED_DUPLICATE",
+      "separateOriginalQuestionIds": true,
+      "independentFacultyDuplicateReview": false,
+      "note": "Adjacent Chapter 11 original stems share hydrocarbon classification or structure-to-naming objectives; independent subject reviewer must distinguish assessment targets before any approved publication."
+    },
+    {
+      "sourceQuestionIds": [
+        "IX-CHEM-2025-C11-T3-01L",
+        "IX-CHEM-2025-C11-T3-02L"
+      ],
+      "flag": "POTENTIAL_CONCEPTUAL_OVERLAP_NOT_CONFIRMED_DUPLICATE",
+      "separateOriginalQuestionIds": true,
+      "independentFacultyDuplicateReview": false,
+      "note": "Adjacent Chapter 11 original stems share hydrocarbon classification or structure-to-naming objectives; independent subject reviewer must distinguish assessment targets before any approved publication."
+    }
+  ]
+}

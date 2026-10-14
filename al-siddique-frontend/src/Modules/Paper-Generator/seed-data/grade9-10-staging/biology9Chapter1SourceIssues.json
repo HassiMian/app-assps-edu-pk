@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "assps-academic-source-conflicts-v1",
+  "reviewedOn": "2026-10-02",
+  "status": "OPEN_REQUIRES_ACADEMIC_AND_CURRICULUM_RESOLUTION",
+  "sourcePdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+  "urduSourcePdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+  "policy": "Do not author disputed claims into a correct answer key. Retain prescribed textbook evidence separately; external fact checks are errata evidence, not replacement curriculum or ALP evidence.",
+  "issues": [
+    {
+      "id": "BIO9-C1-THEORY-LAW-001",
+      "topicId": "1.7",
+      "status": "OPEN",
+      "englishPages": [
+        17
+      ],
+      "urduPages": [
+        17
+      ],
+      "textbookFinding": "The paragraph presents repeated testing as a route by which a theory becomes a law or principle.",
+      "primaryFactCheck": {
+        "url": "https://www.nsta.org/nstas-official-positions/nature-science",
+        "retrievedOn": "2026-10-02",
+        "finding": "The NSTA official position distinguishes explanatory theories from descriptive laws and rejects a theory-to-law progression.",
+        "binaryDownloadVerified": false
+      },
+      "draftTreatment": "No new question endorses the progression claim. Drafts ask about evidence, continued testing and the named examples of laws.",
+      "requiredResolution": "Named academic review and any relevant PECTAA clarification; retain the source conflict as visible review evidence."
+    },
+    {
+      "id": "BIO9-C1-MALARIA-CHRONOLOGY-002",
+      "topicId": "1.8",
+      "status": "OPEN",
+      "englishPages": [
+        18,
+        19
+      ],
+      "urduPages": [
+        18,
+        20
+      ],
+      "textbookFinding": "The source gives 1878 for Laveran research and places Ross experiments in the 1880s.",
+      "primaryFactCheck": {
+        "url": "https://archive.cdc.gov/www_cdc_gov/grand-rounds/pp/2010/20101118-presentation-malaria-eradication-H.pdf",
+        "retrievedOn": "2026-10-02",
+        "finding": "CDC scientific-milestones presentation identifies Laveran parasite demonstration in 1880 and Ross mosquito-vector discovery in 1897.",
+        "binaryDownloadVerified": false
+      },
+      "draftTreatment": "New malaria prompts do not test disputed historical years or provide treatment instructions; they examine the prescribed hypothesis, prediction and comparison example.",
+      "requiredResolution": "Named history/academic review and any relevant official errata before date-based question authoring."
+    }
+  ]
+}

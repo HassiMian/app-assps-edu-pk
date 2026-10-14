@@ -1,0 +1,1514 @@
+{
+  "schemaVersion": "assps-grade910-adoption-evidence-docket-v1",
+  "scope": "READ_ONLY_STARTER2026_SUBSET_NO_APPROVAL",
+  "input": {
+    "starterFiles": 55,
+    "sourceRegistryRecords": 110,
+    "schoolAdoptionCertified": false,
+    "physicalPageCertified": false,
+    "teachingSession": "2026-27"
+  },
+  "totals": {
+    "starterDraftQuestions": 2096,
+    "distinctQuestionIds": 2096,
+    "referencedSourceRecords": 55,
+    "nonExplicitEditionDrafts": 877,
+    "draftEditionSourceDisagreements": 433,
+    "unresolvedSourceGradeDrafts": 70,
+    "unresolvedSourceMediumDrafts": 310,
+    "humanSourceVerified": 0,
+    "humanReviewed": 0,
+    "approved": 0,
+    "publishedVerified": 0
+  },
+  "caveat": "Overlapping blocker counts are not additive. Starter2026 subset is NOT the full 2,581 candidate corpus. A source PDF hash and syntactically valid edition label are NOT school adoption or human verification.",
+  "cohorts": [
+    {
+      "sourceRecordId": "pectaa-catalog-107",
+      "grade": 0,
+      "subject": "Urdu Quaid-e-Insha",
+      "medium": "Urdu",
+      "editionLabel": "2023-24",
+      "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+      "stagedDrafts": 70,
+      "files": [
+        {
+          "filename": "urdu10GrammarStarter2026.json",
+          "sha256": "22004448a329c0b64ac6043761ac893ca6b52bf02565185ad5fbaba0343c8c0c"
+        },
+        {
+          "filename": "urdu9GrammarStarter2026.json",
+          "sha256": "66ea53386b2f3bee5afc02d635ad0185251c0967e49d654c63031c7b269f0acc"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": true,
+      "sourceGradeNeedsResolution": true,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "DRAFT_EDITION_SOURCE_LABEL_DISAGREES",
+        "SOURCE_GRADE_UNRESOLVED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-009",
+      "grade": 9,
+      "subject": "Biology",
+      "medium": "English",
+      "editionLabel": "2025-26",
+      "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+      "stagedDrafts": 66,
+      "files": [
+        {
+          "filename": "biology9EnglishStarter2026.json",
+          "sha256": "e36217adade79b13c5a275c256373929b616219d37a399181d619e016f3e1a4e"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-005",
+      "grade": 9,
+      "subject": "Mathematics",
+      "medium": "English",
+      "editionLabel": "2025-26",
+      "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+      "stagedDrafts": 65,
+      "files": [
+        {
+          "filename": "mathematics9Starter2026.json",
+          "sha256": "617b9e67f9150799753a9ba8fa5830f8550d6f47e23536576bd697f5048d7635"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-recovered-chemistry10-en-2026",
+      "grade": 10,
+      "subject": "Chemistry",
+      "medium": "English",
+      "editionLabel": "2026",
+      "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+      "stagedDrafts": 65,
+      "files": [
+        {
+          "filename": "chemistry10Starter2026.json",
+          "sha256": "ef2917a8fc5ea030992d5f15df2493b7422954463ee4d54c25414fc81af706a1"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-013",
+      "grade": 9,
+      "subject": "Computer",
+      "medium": "English",
+      "editionLabel": "2025-26",
+      "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+      "stagedDrafts": 60,
+      "files": [
+        {
+          "filename": "computer9Starter2026.json",
+          "sha256": "1e685088636d6124c5ce9f6dffc3d480defc54dbfff001c8425b4da3b896d52a"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-015",
+      "grade": 10,
+      "subject": "Urdu",
+      "medium": "Urdu",
+      "editionLabel": "2026-27",
+      "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+      "stagedDrafts": 60,
+      "files": [
+        {
+          "filename": "urdu10LiteratureStarter2026.json",
+          "sha256": "7dc183c6bb84f8cf37d44b60210f4a30718290c7d20417a57d64ca957f4792c4"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-017",
+      "grade": 10,
+      "subject": "Mathematics",
+      "medium": "English",
+      "editionLabel": "2026-27",
+      "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+      "stagedDrafts": 60,
+      "files": [
+        {
+          "filename": "mathematics10Starter2026.json",
+          "sha256": "3bdd9eeb76c6e29d57178fda83e0ceee1fe7b4f8ceeae62b956af6122d150f9a"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-020",
+      "grade": 10,
+      "subject": "Biology",
+      "medium": "English",
+      "editionLabel": "2026-27",
+      "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+      "stagedDrafts": 60,
+      "files": [
+        {
+          "filename": "biology10EnglishStarter2026.json",
+          "sha256": "d440792276f216e6696b134dde0c4b4cd2dca745eee84826af3c4ff18bda93ff"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-024",
+      "grade": 10,
+      "subject": "Physics",
+      "medium": "English",
+      "editionLabel": "2026-27",
+      "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+      "stagedDrafts": 60,
+      "files": [
+        {
+          "filename": "physics10Starter2026.json",
+          "sha256": "cc25a3b4d00fb9233d711f9cdafd19960d5b1c2a7f72a48005ec8677ab26c416"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-003",
+      "grade": 9,
+      "subject": "Urdu",
+      "medium": "Urdu",
+      "editionLabel": "2025-26",
+      "pdfSha256": "426ec0e75e3952e0a5a0372f2021ada9ca9ce477f0aabf870cedd27eaf61705e",
+      "stagedDrafts": 57,
+      "files": [
+        {
+          "filename": "urdu9LiteratureStarter2026.json",
+          "sha256": "3fcdb266dcbe2e6e9f9e564d98bfaaa3238ba3d14c8acdb0d74235c21ca9e537"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-004",
+      "grade": 9,
+      "subject": "English",
+      "medium": "English",
+      "editionLabel": "2025-26",
+      "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+      "stagedDrafts": 55,
+      "files": [
+        {
+          "filename": "english9Starter2026.json",
+          "sha256": "af6619575af1ccd0bcad45997da63369b8d9768865d34b80cebf2a2e6ca0941f"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-011",
+      "grade": 9,
+      "subject": "Physics",
+      "medium": "English",
+      "editionLabel": "2025-26",
+      "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+      "stagedDrafts": 54,
+      "files": [
+        {
+          "filename": "physics9EnglishStarter2026.json",
+          "sha256": "1a882970fc2548f50bc001691d6de990ce156690cfa252f3f5355d8d63a6dc16"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-recovered-tarjuma9-2026",
+      "grade": 9,
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "editionLabel": "CURRENT_2026_RESOURCE",
+      "pdfSha256": "e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66",
+      "stagedDrafts": 54,
+      "files": [
+        {
+          "filename": "tarjuma9Starter2026.json",
+          "sha256": "428e0158c11d8fc233875d3254bfacfcfdba469b16a66b30e7cc4d582ca15885"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-016",
+      "grade": 10,
+      "subject": "English",
+      "medium": "English",
+      "editionLabel": "2026-27",
+      "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+      "stagedDrafts": 50,
+      "files": [
+        {
+          "filename": "english10Starter2026.json",
+          "sha256": "eb8b356c4b3dd797451b245cbdd732a2d1dee2e9e1fe5135708fef1fca6d054c"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-recovered-tarjuma10-current",
+      "grade": 10,
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "editionLabel": "CONTINUING_CURRENT",
+      "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+      "stagedDrafts": 45,
+      "files": [
+        {
+          "filename": "tarjuma10Starter2026.json",
+          "sha256": "c7c16bdd42e4b2fb1879b178df01c031cd333aa13d8647cac37d9fd4495a6390"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-018",
+      "grade": 10,
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "editionLabel": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+      "stagedDrafts": 40,
+      "files": [
+        {
+          "filename": "pakistanStudies10UrduStarter2026.json",
+          "sha256": "9e5987872f910fed4d567b4a14323346d3249a52049a2a54ca6a52732ca508db"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-019",
+      "grade": 10,
+      "subject": "Pakistan Studies",
+      "medium": "English",
+      "editionLabel": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+      "stagedDrafts": 40,
+      "files": [
+        {
+          "filename": "pakistanStudies10Starter2026.json",
+          "sha256": "cf03d48d57698e8d0827e628132b8becd801cb127b9e3789df30e1fe87b12dae"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": true,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT",
+        "DRAFT_EDITION_SOURCE_LABEL_DISAGREES"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-021",
+      "grade": 10,
+      "subject": "Biology",
+      "medium": "Urdu",
+      "editionLabel": "2026-27",
+      "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+      "stagedDrafts": 40,
+      "files": [
+        {
+          "filename": "biology10UrduStarter2026.json",
+          "sha256": "91182fae98e3e7ec18077cac805292a67c47ecc28c84f2d81543037aacc9b266"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-025",
+      "grade": 10,
+      "subject": "Computer Science",
+      "medium": "Urdu",
+      "editionLabel": "2026-27",
+      "pdfSha256": "acefc9ba9e8c60baa66df7f222db169def63a93b69df3f664c14841ac009474a",
+      "stagedDrafts": 40,
+      "files": [
+        {
+          "filename": "computer10UrduStarter2026.json",
+          "sha256": "9268f2863ff830f4153df16c77ba6b36ff9ed49e5c648a0e25049b5ce458808a"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-044",
+      "grade": 9,
+      "subject": "Health Sciences-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "editionLabel": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+      "stagedDrafts": 40,
+      "files": [
+        {
+          "filename": "healthSciences9TechStarter2026.json",
+          "sha256": "03990ab80d396a47b45e4e0064712a5f1de4c15ab245a1f8225733e2750ea0dc"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": true,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": true,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT",
+        "DRAFT_EDITION_SOURCE_LABEL_DISAGREES",
+        "SOURCE_MEDIUM_UNRESOLVED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-recovered-computer10-en-2026",
+      "grade": 10,
+      "subject": "Computer Science",
+      "medium": "English",
+      "editionLabel": "2026-27",
+      "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+      "stagedDrafts": 40,
+      "files": [
+        {
+          "filename": "computer10Starter2026.json",
+          "sha256": "c6a01619ae6c7ca8adb387fe89777826e1dd13536b2ceb6649bb466969c86c72"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-006",
+      "grade": 9,
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "editionLabel": "2025-26",
+      "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+      "stagedDrafts": 39,
+      "files": [
+        {
+          "filename": "mathematics9UrduStarter2026.json",
+          "sha256": "f91e678d3b98107a9fd152eaf6607bfa5a976ce702f0b634ce8274129834fe08"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-008",
+      "grade": 9,
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "editionLabel": "2026-09-03",
+      "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+      "stagedDrafts": 39,
+      "files": [
+        {
+          "filename": "chemistry9UrduStarter2026.json",
+          "sha256": "0993bd684e10497b63e0792a23698046470c9433bca944b06e71f5849ef54cc5"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-022",
+      "grade": 10,
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "editionLabel": "2026-27",
+      "pdfSha256": "09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6",
+      "stagedDrafts": 39,
+      "files": [
+        {
+          "filename": "chemistry10UrduStarter2026.json",
+          "sha256": "5c89d545299e106ef13671202f72c920a03669e59123dfd296a283f9e97b6da3"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-035",
+      "grade": 9,
+      "subject": "Chemistry-Tech",
+      "medium": "English",
+      "editionLabel": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+      "stagedDrafts": 39,
+      "files": [
+        {
+          "filename": "chemTech9emStarter2026.json",
+          "sha256": "6d9f045b9a6a9bd155570a16b8e20a520eab107ad8a49b6376b8cfbcedafa1f0"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": true,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT",
+        "DRAFT_EDITION_SOURCE_LABEL_DISAGREES"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-036",
+      "grade": 9,
+      "subject": "Chemistry-Tech",
+      "medium": "Urdu",
+      "editionLabel": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "pdfSha256": "55d9ccb3642f8ac7d7728707646db806dd033d4e7d5e0d172546993667a18083",
+      "stagedDrafts": 39,
+      "files": [
+        {
+          "filename": "chemTech9urStarter2026.json",
+          "sha256": "eaee9eec640f4f840996217d5ea9fff45830f02e4dc7e5b7d855defb1a06ff5f"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": true,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT",
+        "DRAFT_EDITION_SOURCE_LABEL_DISAGREES"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-042",
+      "grade": 9,
+      "subject": "Fashion Designing-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "editionLabel": "2025",
+      "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+      "stagedDrafts": 36,
+      "files": [
+        {
+          "filename": "fashionDesigning9TechStarter2026.json",
+          "sha256": "6316e7da32f11a19f7b1b3a0d9092753e3968ed0b5349150c590c786cb466f04"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": true,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_MEDIUM_UNRESOLVED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-002",
+      "grade": 9,
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "editionLabel": "2025-26",
+      "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+      "stagedDrafts": 35,
+      "files": [
+        {
+          "filename": "islamiyat9Starter2026.json",
+          "sha256": "89683922a220b7c056d2c6d0af1085bbbf28bd142e756c63d1b91a9c8af06430"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-010",
+      "grade": 9,
+      "subject": "Biology",
+      "medium": "Urdu",
+      "editionLabel": "2026-09-03",
+      "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+      "stagedDrafts": 33,
+      "files": [
+        {
+          "filename": "biology9UrduStarter2026.json",
+          "sha256": "26784a13d6e22cb79c9fffb98b31c768e165a5999871b76bbecf61d6ef814d1f"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-032",
+      "grade": 9,
+      "subject": "General Science-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "editionLabel": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "pdfSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+      "stagedDrafts": 33,
+      "files": [
+        {
+          "filename": "generalScienceTech9EnglishStarter2026.json",
+          "sha256": "f416811d516304e6474be5ef6abada74d700667888a56f6638d4d6d96a808c0b"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": true,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT",
+        "SOURCE_MEDIUM_UNRESOLVED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-038",
+      "grade": 9,
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "editionLabel": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "pdfSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+      "stagedDrafts": 33,
+      "files": [
+        {
+          "filename": "generalScienceTech9UrduStarter2026.json",
+          "sha256": "bbf47fed029c7fd67bf9f4a47711bf5afb5c2229d0144beef5d77b5472c1934a"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-045",
+      "grade": 9,
+      "subject": "Physics-Tech",
+      "medium": "English",
+      "editionLabel": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+      "stagedDrafts": 32,
+      "files": [
+        {
+          "filename": "physicsTech9DualStarter2026.json",
+          "sha256": "36e0d30bc2bd57b192ba41d6f2b8261ae87e21b66b4652e0b27074bca6320135"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": true,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT",
+        "DRAFT_EDITION_SOURCE_LABEL_DISAGREES"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-046",
+      "grade": 9,
+      "subject": "Physics-Tech",
+      "medium": "Urdu",
+      "editionLabel": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+      "stagedDrafts": 32,
+      "files": [
+        {
+          "filename": "physicsTech9DualStarter2026.json",
+          "sha256": "36e0d30bc2bd57b192ba41d6f2b8261ae87e21b66b4652e0b27074bca6320135"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": true,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT",
+        "DRAFT_EDITION_SOURCE_LABEL_DISAGREES"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-033",
+      "grade": 9,
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "editionLabel": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+      "stagedDrafts": 30,
+      "files": [
+        {
+          "filename": "compEntTech9UrduStarter2026.json",
+          "sha256": "a257a07290ddbd5f7a33fee0d4f5fa2c11dcf68795b846505f12e7c7d731ae6d"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-034",
+      "grade": 9,
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "English",
+      "editionLabel": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "pdfSha256": "393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b",
+      "stagedDrafts": 30,
+      "files": [
+        {
+          "filename": "compEntTech9EnglishStarter2026.json",
+          "sha256": "ee3bad52e0894d7049d6e4e5e97f7b55ec31c4e795b59314b3bc05e573aae06c"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-039",
+      "grade": 9,
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "English",
+      "editionLabel": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+      "stagedDrafts": 30,
+      "files": [
+        {
+          "filename": "agriTech9EnglishStarter2026.json",
+          "sha256": "fa90a74076340c6293d3ba2d051329aa51cfed044953840c935ad0bbb85b55df"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-040",
+      "grade": 9,
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "editionLabel": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "pdfSha256": "4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224",
+      "stagedDrafts": 30,
+      "files": [
+        {
+          "filename": "agriTech9UrduStarter2026.json",
+          "sha256": "4368b848189c852bfbd0e66190b5e29d94b3df588dec2ea5427e247da769bf10"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-043",
+      "grade": 9,
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "editionLabel": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+      "stagedDrafts": 30,
+      "files": [
+        {
+          "filename": "ict9TechStarter2026.json",
+          "sha256": "e1e8043b475e2edd7592ab100a01427a4fce392bab795a0ccfd708ec07773ce4"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": true,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": true,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT",
+        "DRAFT_EDITION_SOURCE_LABEL_DISAGREES",
+        "SOURCE_MEDIUM_UNRESOLVED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-057",
+      "grade": 10,
+      "subject": "Physics-Tech",
+      "medium": "English",
+      "editionLabel": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+      "stagedDrafts": 30,
+      "files": [
+        {
+          "filename": "physicsTech10EnglishStarter2026.json",
+          "sha256": "4accf005bbbd69363d4e7947001844a92b9dddcf02b526cf5d642116741e4423"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": true,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT",
+        "DRAFT_EDITION_SOURCE_LABEL_DISAGREES"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-012",
+      "grade": 9,
+      "subject": "Physics",
+      "medium": "Urdu",
+      "editionLabel": "VERIFY",
+      "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+      "stagedDrafts": 27,
+      "files": [
+        {
+          "filename": "physics9UrduStarter2026.json",
+          "sha256": "d53522d5709e778d1610015cfdb5b51d75f9a2ca5f61b02a55ef682eb4e877fd"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": true,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT",
+        "DRAFT_EDITION_SOURCE_LABEL_DISAGREES"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-030",
+      "grade": 9,
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "editionLabel": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+      "stagedDrafts": 27,
+      "files": [
+        {
+          "filename": "bioTech9urStarter2026.json",
+          "sha256": "99b8886f40f8a5f2fa254c6d86a95fbdefec545e2eaa88eae85e5347646b5c8f"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": true,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT",
+        "DRAFT_EDITION_SOURCE_LABEL_DISAGREES"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-031",
+      "grade": 9,
+      "subject": "Biology-Tech",
+      "medium": "English",
+      "editionLabel": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "pdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+      "stagedDrafts": 27,
+      "files": [
+        {
+          "filename": "bioTech9emStarter2026.json",
+          "sha256": "998493bae8aa6739b166ec19124a20f74a976b6ce3504fec6716649b05282e41"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": true,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT",
+        "DRAFT_EDITION_SOURCE_LABEL_DISAGREES"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-049",
+      "grade": 10,
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "editionLabel": "2026-27",
+      "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+      "stagedDrafts": 27,
+      "files": [
+        {
+          "filename": "communicationSkills10TechStarter2026.json",
+          "sha256": "d350087872151e00477f398ba357dde6026f3ea26217232dd3d48d6dde21b123"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": true,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_MEDIUM_UNRESOLVED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-054",
+      "grade": 10,
+      "subject": "Health Sciences-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "editionLabel": "2026-27",
+      "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+      "stagedDrafts": 27,
+      "files": [
+        {
+          "filename": "healthSciences10TechStarter2026.json",
+          "sha256": "544e7b9b1dfc157e9b1199606bf5a84d52120534d993b1249f9064c403244a74"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": true,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_MEDIUM_UNRESOLVED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-062",
+      "grade": 10,
+      "subject": "Biology-Tech",
+      "medium": "English",
+      "editionLabel": "2026-27",
+      "pdfSha256": "170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818",
+      "stagedDrafts": 24,
+      "files": [
+        {
+          "filename": "biologyTech10EnglishStarter2026.json",
+          "sha256": "382b08bf37c911661aa51001b74a94d952e2e5f3648afa6621948af278e9d54e"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-065",
+      "grade": 9,
+      "subject": "Art & Model Drawing",
+      "medium": "English",
+      "editionLabel": "2024-25",
+      "pdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+      "stagedDrafts": 24,
+      "files": [
+        {
+          "filename": "art9emStarter2026.json",
+          "sha256": "0fda1d0ed86d8a259625fa64eba4c39ee186cf2c27d04734055ba61b7537aa69"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-066",
+      "grade": 9,
+      "subject": "Home Economics",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "editionLabel": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "pdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+      "stagedDrafts": 24,
+      "files": [
+        {
+          "filename": "home9Starter2026.json",
+          "sha256": "97c33957a8a2fcd45ec80ed943422488d4350b382edaf86f24ce974fedda262b"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": true,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT",
+        "SOURCE_MEDIUM_UNRESOLVED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-068",
+      "grade": 9,
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "editionLabel": "2023-24",
+      "pdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+      "stagedDrafts": 24,
+      "files": [
+        {
+          "filename": "art9urStarter2026.json",
+          "sha256": "af54f55fbbd0dd4f79e6fff2c2a4f22cdc6637c99e25778d84c015e51c106b92"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-067",
+      "grade": 9,
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "editionLabel": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "pdfSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+      "stagedDrafts": 21,
+      "files": [
+        {
+          "filename": "textile9Starter2026.json",
+          "sha256": "453734ea1b9820fea8eca7ccab51fb1aca25c56e5f3977f840336ebda2e0a282"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": true,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT",
+        "SOURCE_MEDIUM_UNRESOLVED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-070",
+      "grade": 10,
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "editionLabel": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "pdfSha256": "81829814fdbc6005d89b3c91672610a5a0ac274f9d70a43d6c4e9a7da6ce5902",
+      "stagedDrafts": 21,
+      "files": [
+        {
+          "filename": "textile10Starter2026.json",
+          "sha256": "6e46a40a3939ca38d98947a4da3b6cae36422a49ca937d8b46e24dd81c0b5491"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": true,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT",
+        "SOURCE_MEDIUM_UNRESOLVED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-071",
+      "grade": 10,
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "editionLabel": "2023-24",
+      "pdfSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+      "stagedDrafts": 21,
+      "files": [
+        {
+          "filename": "art10urStarter2026.json",
+          "sha256": "f854e848821e91d77cab13b1ead702a4b2a648ee1538340b6280294e78190292"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-072",
+      "grade": 10,
+      "subject": "Art & Model Drawing",
+      "medium": "English",
+      "editionLabel": "2023-24",
+      "pdfSha256": "d88ff4dd8f1e87791bf580dff1ccb3bb5af5d6360cf487e8ad8ca4a6d12e4bd7",
+      "stagedDrafts": 21,
+      "files": [
+        {
+          "filename": "art10emStarter2026.json",
+          "sha256": "c6b85646f4acaf37192f425ec7198fa3624908dd61855876dd4ce6858cee2500"
+        }
+      ],
+      "editionLabelNeedsVerification": false,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": false,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-073",
+      "grade": 10,
+      "subject": "Home Economics",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "editionLabel": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "pdfSha256": "1cb7bb3c1847880cd4e22fb6d1ef6247ade6018528784a040f1bdf084f995483",
+      "stagedDrafts": 21,
+      "files": [
+        {
+          "filename": "home10Starter2026.json",
+          "sha256": "8cfdd007787be1690118f10b77550ab5720d4324e6940898a8663a736a5b68df"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": true,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT",
+        "SOURCE_MEDIUM_UNRESOLVED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-064",
+      "grade": 9,
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "editionLabel": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "pdfSha256": "277bd11cb59f8e424c519572f8db727349cabb131d60e1e8be57753f60562c6c",
+      "stagedDrafts": 15,
+      "files": [
+        {
+          "filename": "ghiza9Starter2026.json",
+          "sha256": "88b35634ab01223929d040e430ea75e9a31fb38f9051fa4b245516014e544cf8"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": true,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT",
+        "SOURCE_MEDIUM_UNRESOLVED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    },
+    {
+      "sourceRecordId": "pectaa-catalog-069",
+      "grade": 10,
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "editionLabel": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "pdfSha256": "05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722",
+      "stagedDrafts": 15,
+      "files": [
+        {
+          "filename": "ghiza10Starter2026.json",
+          "sha256": "21b999e8c016b48cbe56c3f1465774b20e286bd2dcef4ccaab7beaa1f3bd00aa"
+        }
+      ],
+      "editionLabelNeedsVerification": true,
+      "draftEditionDisagrees": false,
+      "sourceGradeNeedsResolution": false,
+      "sourceMediumNeedsResolution": true,
+      "blockers": [
+        "INDEPENDENT_HUMAN_ANSWER_AND_TEXTBOOK_REVIEW_REQUIRED",
+        "SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED",
+        "PHYSICAL_PRINTED_PDF_PAGE_NOT_CERTIFIED",
+        "SOURCE_EDITION_LABEL_NOT_EXPLICIT",
+        "SOURCE_MEDIUM_UNRESOLVED"
+      ],
+      "verifiedQuestionCount": 0,
+      "approvedQuestionCount": 0
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "assps-pakstudies10-source-map-v1",
+  "checkedOn": "2026-10-07",
+  "sourceRecordId": "pectaa-catalog-019",
+  "sourcePdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+  "sourceByteLength": 103176678,
+  "pageCount": 156,
+  "identity": [
+    "PAKISTAN STUDIES 10 (English Medium)",
+    "PECTAA current official catalogue asset"
+  ],
+  "chapters": [
+    {
+      "number": 1,
+      "title": "Ideological Basis of Pakistan",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 2,
+      "title": "Pakistan Movement",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 3,
+      "title": "History of Pakistan (1947-Uptill Now) and Constitutional Development in Pakistan",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 4,
+      "title": "Geography of Pakistan",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 5,
+      "title": "Pakistan and International Affairs",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 6,
+      "title": "Resources and Economic Development of Pakistan",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 7,
+      "title": "Population, Society and Cultural Diversity in Pakistan",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 8,
+      "title": "Women Empowerment in Pakistan",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyPastPaperStems": false,
+    "avoidTimeSensitivePoliticalOfficeholderClaims": true
+  }
+}

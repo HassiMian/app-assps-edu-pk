@@ -1,0 +1,161 @@
+{
+  "schemaVersion": "assps-biology10-source-map-v1",
+  "checkedOn": "2026-10-07",
+  "sourceRecordId": "pectaa-catalog-020",
+  "sourcePdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+  "sourceByteLength": 51021585,
+  "pageCount": 132,
+  "identity": [
+    "BIOLOGY 10",
+    "Revised National Curriculum of Pakistan 2023",
+    "PECTAA"
+  ],
+  "chapters": [
+    {
+      "number": 1,
+      "title": "Human Digestive System",
+      "printedStartPage": 1,
+      "pdfStartPage": 5,
+      "topics": [
+        "Nutrition and its Importance",
+        "Human Digestive System",
+        "Disorders of the Digestive System"
+      ],
+      "status": "TOC_AND_SOURCE_PAGE_BOUND"
+    },
+    {
+      "number": 2,
+      "title": "Human Respiratory System",
+      "printedStartPage": 12,
+      "pdfStartPage": 16,
+      "topics": [
+        "Human Respiratory System",
+        "The Mechanism of Breathing",
+        "Respiratory Disorders"
+      ],
+      "status": "TOC_AND_SOURCE_PAGE_BOUND"
+    },
+    {
+      "number": 3,
+      "title": "Human Blood Circulatory System",
+      "printedStartPage": 24,
+      "pdfStartPage": 28,
+      "topics": [
+        "Blood and its Components",
+        "Human Heart",
+        "Blood Vessels",
+        "Arterial System",
+        "Cardiovascular Disorders"
+      ],
+      "status": "TOC_AND_SOURCE_PAGE_BOUND"
+    },
+    {
+      "number": 4,
+      "title": "Human Urinary System",
+      "printedStartPage": 38,
+      "pdfStartPage": 42,
+      "topics": [
+        "Human Urinary System",
+        "Functioning of the Kidney",
+        "Disorders of Kidney"
+      ],
+      "status": "TOC_AND_SOURCE_PAGE_BOUND"
+    },
+    {
+      "number": 5,
+      "title": "Coordination",
+      "printedStartPage": 48,
+      "pdfStartPage": 52,
+      "topics": [
+        "Neurons - The Units of Nervous System",
+        "Divisions of the Nervous System",
+        "Endocrine System"
+      ],
+      "status": "TOC_AND_SOURCE_PAGE_BOUND"
+    },
+    {
+      "number": 6,
+      "title": "Reproduction",
+      "printedStartPage": 64,
+      "pdfStartPage": 68,
+      "topics": [
+        "Formation of Gametes and Fertilization",
+        "Role of Hormones in Sexual Development",
+        "Reproductive Systems",
+        "Sexually Transmitted Diseases"
+      ],
+      "status": "TOC_AND_SOURCE_PAGE_BOUND"
+    },
+    {
+      "number": 7,
+      "title": "Inheritance",
+      "printedStartPage": 73,
+      "pdfStartPage": 77,
+      "topics": [
+        "Structure of Chromosome",
+        "DNA and RNA",
+        "Mendel’s Laws of Inheritance"
+      ],
+      "status": "TOC_AND_SOURCE_PAGE_BOUND"
+    },
+    {
+      "number": 8,
+      "title": "Biotechnology",
+      "printedStartPage": 86,
+      "pdfStartPage": 90,
+      "topics": [
+        "Introduction of Biotechnology",
+        "Genetic Engineering",
+        "Applications of Biotechnology",
+        "Potential Risks of Biotechnology"
+      ],
+      "status": "TOC_AND_SOURCE_PAGE_BOUND"
+    },
+    {
+      "number": 9,
+      "title": "Diseases and Immunity",
+      "printedStartPage": 96,
+      "pdfStartPage": 100,
+      "topics": [
+        "Disease",
+        "Pathogens",
+        "Immunity"
+      ],
+      "status": "TOC_AND_SOURCE_PAGE_BOUND"
+    },
+    {
+      "number": 10,
+      "title": "Evolution",
+      "printedStartPage": 106,
+      "pdfStartPage": 110,
+      "topics": [
+        "Darwin's Observations",
+        "Theory of Evolution by Natural Selection",
+        "Species and Speciation",
+        "Sources of Variation",
+        "Evidences of Evolution"
+      ],
+      "status": "TOC_AND_SOURCE_PAGE_BOUND"
+    }
+  ],
+  "embeddedPattern": {
+    "pairingSchemePrintedPage": 121,
+    "pairingSchemePdfPage": 125,
+    "modelPaperPrintedPage": 122,
+    "modelPaperPdfStartPage": 126,
+    "totalMarks": 60,
+    "durationMinutes": 120,
+    "objectiveMarks": 12,
+    "subjectiveMarks": 48,
+    "shortStructure": "Q2-Q4 each attempt 5 of 8, 2 marks each",
+    "longStructure": "Attempt 2 of 3 detailed questions, 9 marks each, split 5+4",
+    "chapterDistributionState": "PARTIAL_PENDING_TABLE_CELL_REVIEW"
+  },
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyModelPaperStems": false,
+    "currentTextbookRequired": true
+  }
+}

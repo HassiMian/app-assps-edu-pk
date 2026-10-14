@@ -1,0 +1,10 @@
+{
+  "schemaVersion":"assps-multan-grade9-10-actual-2026-index-evidence-v1",
+  "checkedOn":"2026-10-07",
+  "authority":"BISE Multan",
+  "classification":"OFFICIAL_BOARD_2026_ACTUAL_PAPER_INDEX",
+  "grade9":{"exam":"SSC Part-I (9th) 1st Annual 2026","indexUrl":"https://web.bisemultan.edu.pk/question-papers-with-key-ssc-part-i-9th-1st-annual-2026-examination/","subjectsConfirmedAtIndex":["Biology","Chemistry","Computer Science","Computer Science and Entrepreneurship","English","Islamic Studies","Mathematics","Pakistan Studies","Physics","Urdu"]},
+  "grade10":{"exam":"SSC Part-II (10th) 1st Annual 2026","indexUrl":"https://web.bisemultan.edu.pk/question-papers-with-key-ssc-part-ii-10th-1st-annual-2026-examination/","subjectsConfirmedAtIndex":["Biology","Chemistry","Computer Science","English","Islamic Studies","Mathematics","Pakistan Studies","Physics","Urdu"]},
+  "evidenceLevel":"INDEX_OCCURRENCE_ONLY_UNTIL_EACH_LINKED_ARTIFACT_IS_DOWNLOADED_HASHED_AND_VISUALLY_CLASSIFIED",
+  "guards":{"copyQuestionStems":false,"copyAnswerKeys":false,"inferPatternFromIndexOnly":false,"inferImportanceFromSinglePaper":false,"textbooksRemainAcademicContentAuthority":true}
+}

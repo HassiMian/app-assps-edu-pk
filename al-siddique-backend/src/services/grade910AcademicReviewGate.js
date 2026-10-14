@@ -1,27 +1,25 @@
 'use strict'
-const { createHash } = require('node:crypto')
+const {sha256}=require('./questionGovernanceHash')
+const {rubricOnlyLongAnswer}=require('./grade910ModelAnswerPolicy')
 const { isDeepStrictEqual } = require('node:util')
 const SOURCE_REGISTRY = require('../data/verifiedGrade910SourceRegistry.json')
+const {requireAdoptedSource}=require('./grade910SchoolAdoptionGate')
+const {requirePhysicalPageProof}=require('./grade910PhysicalPageGate')
 
-const ACADEMIC_REVIEW_VERSION = 'assps-grade910-independent-review-v1'
+const ACADEMIC_REVIEW_VERSION = 'assps-grade910-independent-review-v2'
 const ATTESTATIONS = Object.freeze([
   'sourceImageChecked','editionChecked','chapterMatchChecked',
   'curriculumChecked','answerKeyChecked','languageChecked','originalityChecked',
 ])
+const GRADE_PATTERN = /^(?:9|10)(?:th)?$/i
 const normalizeGrade = value => {
-  const grade = String(value||'').trim().toLowerCase()
-    .replace(/^(?:class|grade)\s*[:.-]?\s*/,'')
-  if (/^(?:09|9|9th|ix|nine)$/.test(grade)) return 9
-  if (/^(?:10|10th|x|ten)$/.test(grade)) return 10
-  return null
+  const grade = String(value||'').trim()
+  return GRADE_PATTERN.test(grade) ? parseInt(grade,10) : null
 }
-const looksLikeHighSchoolGrade = value =>
-  /^(?:(?:class|grade)\s*[:.-]?\s*)?(?:0?9(?:th)?|10(?:th)?|ix|x|nine|ten)$/i
-    .test(String(value||'').trim())
 function error(code,message,status=409){
   const e=new Error(message);e.code=code;e.status=status;return e
 }
-function normalizeEvidence(evidence, question) {
+function normalizeEvidence(evidence, question, context={}) {
   if (!evidence || typeof evidence!=='object'||Array.isArray(evidence))
     throw error('ACADEMIC_EVIDENCE_REQUIRED','Independent academic review evidence is required.',422)
   if (evidence.schemaVersion!==ACADEMIC_REVIEW_VERSION)
@@ -37,7 +35,7 @@ function normalizeEvidence(evidence, question) {
   )
   if(!source)throw error('UNVERIFIED_SOURCE_IDENTITY','Exact official source hash, grade, subject and medium must match the source registry.',422)
   const edition=String(evidence.edition||'').trim()
-  if(source.edition==='UNCONFIRMED'||edition!==source.edition)
+  if(!/^[12][0-9]{3}(-[0-9]{2,4})?$/.test(edition)||edition!==source.edition)
     throw error('UNVERIFIED_SOURCE_EDITION','A matching verified textbook edition is required.',422)
   if(String(evidence.chapterNo||'').trim()!==String(question.chapterNo||'').trim() ||
      !String(question.chapterNo||'').trim())
@@ -57,8 +55,13 @@ function normalizeEvidence(evidence, question) {
       throw error('ACADEMIC_ATTESTATION_INCOMPLETE','Missing explicit review attestation: '+key,422)
   if(String(evidence.editorialNotes||'').trim().length<45)
     throw error('ACADEMIC_REVIEW_NOTES_REQUIRED','Provide substantive independent review notes.',422)
+  requireGrade910McqIntegrity(question)
+  const school=requireAdoptedSource({tenantId:context.tenantId,source,evidence,grade,question})
+  const physical=requirePhysicalPageProof({source,evidence,question,mode})
   return {
     schemaVersion:ACADEMIC_REVIEW_VERSION,
+    ...school,
+    ...physical,
     questionOrigin:mode,sourceRecordId:source.recordId,
     sourcePdfSha256:source.pdfSha256,edition:source.edition,
     chapterNo:String(evidence.chapterNo).trim(),
@@ -95,9 +98,158 @@ function canonicalComparedContent(value = {}, legacy = false) {
     marks:Number(value.marks),
   }
 }
+// Matching legacy source and revision can both share invalid question content.
+function grade910MinimumQuestionIntegrityIssues(value,legacy=false){
+  const q=canonicalComparedContent(value,legacy)
+  const findings=[]
+  if(!q.questionType)findings.push('MISSING_QUESTION_TYPE')
+  if(!q.questionText&&!q.questionTextUrdu)findings.push('EMPTY_QUESTION_STEM')
+  if(!q.answer)findings.push('EMPTY_QUESTION_ANSWER')
+  if(!Number.isSafeInteger(q.marks)||q.marks<1)findings.push('INVALID_QUESTION_MARKS')
+  return findings
+}
+function requireGrade910MinimumQuestionIntegrity(value){
+  const findings=grade910MinimumQuestionIntegrityIssues(value)
+  if(findings.length)
+    throw error('ACADEMIC_QUESTION_INCOMPLETE',
+      'Review requires a nonempty question and answer with positive integral marks: '+findings.join(','),422)
+  return true
+}
+// An English marking instruction is a rubric hint, not a verified answer
+// explaining the long question. Do not sign or publish an answer field that
+// only tells teachers to award marks. The actual answer needs its own reviewed
+// revision; rubric metadata may be kept separately without becoming the answer.
+function grade910ModelAnswerIssues(value){
+  const q=canonicalComparedContent(value)
+  if(q.questionType!=='long')return []
+  return rubricOnlyLongAnswer(q.questionType,q.answer)?['RUBRIC_DIRECTIVE_WITHOUT_MODEL_ANSWER']:[]
+}
+function requireGrade910ModelAnswer(value){
+  const issues=grade910ModelAnswerIssues(value)
+  if(issues.length)
+    throw error('ACADEMIC_MODEL_ANSWER_REQUIRED',
+      'Academic long-answer signoff requires a verified explanatory answer, not grading directions alone.',422)
+  return true
+}
+
+// Structural checking cannot certify scientific correctness. It prevents
+// a self-consistent but malformed MCQ from inheriting an academic sign-off.
+const normalizedChoice = value => String(value??'').normalize('NFKC')
+  .trim().replace(/\s+/g,' ').toLowerCase().replace(/[.،۔!?؟]+$/g,'').trim()
+function grade910McqIntegrityIssues(value,legacy=false){
+  const c=canonicalComparedContent(value,legacy)
+  if(c.questionType!=='mcq')return []
+  const findings=[]
+  if(!c.questionText)findings.push('EMPTY_QUESTION_STEM')
+  if(c.options.length!==4||c.options.map(x=>x.label).join('')!=='ABCD'||
+     c.options.some(x=>!normalizedChoice(x.text)))
+    findings.push('MCQ_OPTIONS_OR_LABELS_INVALID')
+  const texts=c.options.map(x=>normalizedChoice(x.text))
+  if(new Set(texts).size!==4)findings.push('MCQ_OPTIONS_NOT_DISTINCT')
+  if(!/^[A-D]$/.test(c.correctOption))findings.push('MCQ_KEY_INVALID')
+  const selected=c.options['ABCD'.indexOf(c.correctOption)]
+  const answer=normalizedChoice(c.answer)
+  if(!answer||!selected||normalizedChoice(selected.text)!==answer||
+     texts.filter(x=>x===answer).length!==1)
+    findings.push('MCQ_STORED_ANSWER_NOT_SELECTED_OPTION')
+  return findings
+}
+function requireGrade910McqIntegrity(value){
+  const findings=grade910McqIntegrityIssues(value)
+  if(findings.length)
+    throw error('ACADEMIC_MCQ_ANSWER_OPTION_INCONSISTENT',
+      'MCQ requires four unique labeled choices and a selected option equal to the stored answer: '+findings.join(','),422)
+  return true
+}
 function approvedSourceMatchesRevision(source,revision){
+  if(grade910MinimumQuestionIntegrityIssues(source,true).length||
+     grade910MinimumQuestionIntegrityIssues(revision).length)return false
+  if(grade910McqIntegrityIssues(source,true).length||
+     grade910McqIntegrityIssues(revision,false).length)return false
   return JSON.stringify(canonicalComparedContent(source,true))===
     JSON.stringify(canonicalComparedContent(revision,false))
+}
+
+// A status='reviewed' is insufficient proof that the claimed reviewer actually
+// recorded the tenant-local review mapping. Recording sets both columns and NOW().
+function assertGrade910ReviewSignature(mapping,reviewerId){
+  const actor=Number(reviewerId)
+  const creator=Number(mapping?.created_by)
+  if(!Number.isSafeInteger(actor)||actor<1||
+     !Number.isSafeInteger(creator)||creator!==actor)
+    throw error('REVIEW_SIGNOFF_ORIGINATOR_MISMATCH',
+      'The academic review mapping originator must equal its independent reviewer.',403)
+  const raw=mapping?.reviewed_at
+  const time=raw instanceof Date
+    ?(Number.isFinite(raw.getTime())?raw.toISOString():null)
+    :raw
+  if(typeof time!=='string'||!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/.test(time)||
+     !Number.isFinite(Date.parse(time)))
+    throw error('REVIEW_SIGNOFF_TIMESTAMP_MISSING',
+      'An independently recorded review timestamp is required.',422)
+  return true
+}
+
+// is_duplicate is a nullable legacy flag. An uncertain state is NOT cleared
+// by reviewer signatures, matching revisions, or a client-side review claim.
+function requireUnflaggedGrade910Source(source){
+  if(source?.is_duplicate!==false)
+    throw error('REVIEW_DUPLICATE_STATUS_UNRESOLVED',
+      'An original Question Bank row flagged duplicate or lacking explicit duplicate clearance cannot be academically reviewed.',409)
+  return true
+}
+
+// Revision hashes alone do not prove that the original school Question Bank
+// row is filed under the same adopted board, textbook chapter and topic.
+// Unattributed topic/chapter metadata is not human-verified curriculum mapping.
+function requireGrade910CurriculumMapping(source,revision){
+  const normalized=value=>String(value??'').normalize('NFKC').trim().replace(/\s+/g,' ').toLowerCase()
+  const fields=[
+    ['board','board'],
+    ['chapter_name','chapterName'],
+    ['topic_name','topicName'],
+  ]
+  const drift=fields.filter(([legacy,governed])=>{
+    const a=normalized(source?.[legacy]),b=normalized(revision?.[governed])
+    return !a||!b||a!==b
+  }).map(([legacy])=>legacy)
+  if(drift.length)
+    throw error('ACADEMIC_CURRICULUM_TOPIC_DRIFT',
+      'Original school board, textbook chapter and topic must match the reviewed revision: '+drift.join(','),409)
+  return true
+}
+
+function requireGrade910SourceClassification(source,revision){
+  const label=v=>String(v??'').normalize('NFKC').trim().replace(/\s+/g,' ').toLowerCase()
+  const fields=[['difficulty','difficulty'],['priority','priority'],['source_type','sourceType']]
+  const failed=fields.filter(([a,b])=>!label(source?.[a])||label(source?.[a])!==label(revision?.[b])).map(([a])=>a)
+  const file=v=>String(v??'').trim()
+  if(!file(source?.source_file_id)||file(source?.source_file_id)!==file(revision?.sourceFileId))failed.push('source_file_id')
+  const a=source?.source_page_no,b=revision?.sourcePageNo
+  const pageOk=v=>v==null||(Number.isSafeInteger(v)&&v>0)
+  if(!pageOk(a)||!pageOk(b)||(a??null)!==(b??null))failed.push('source_page_no')
+  if(failed.length)throw error('ACADEMIC_SOURCE_CLASSIFICATION_DRIFT',
+    'Original assessment classification and file/page provenance differ: '+failed.join(','),409)
+  return true
+}
+
+// Recheck the stored JSONB using the SAME canonical SHA-256 as governance capture.
+function assertGrade910ImmutableRevisionHash(revision){
+  const payload=revision?.content_json
+  const recorded=String(revision?.content_hash??'').trim().toLowerCase()
+  if(!payload||typeof payload!=='object'||Array.isArray(payload)||
+     !/^[a-f0-9]{64}$/.test(recorded))
+    throw error('ACADEMIC_REVISION_HASH_CONTENT_DRIFT',
+      'Academic review requires an intact question revision JSON and SHA-256.',409)
+  let actual
+  try { actual=sha256(payload) } catch (_) {
+    throw error('ACADEMIC_REVISION_HASH_CONTENT_DRIFT',
+      'Immutable review content cannot be canonically SHA-256 hashed.',409)
+  }
+  if(actual!==recorded)
+    throw error('ACADEMIC_REVISION_HASH_CONTENT_DRIFT',
+      'Stored revision content does not match its immutable SHA-256.',409)
+  return true
 }
 
 async function assertIndependentReviewReady(client,{schoolId,master,actorId}){
@@ -106,26 +258,27 @@ async function assertIndependentReviewReady(client,{schoolId,master,actorId}){
     [schoolId,master.id,master.current_revision]
   )
   if(latest.rowCount!==1)throw error('MISSING_REVIEWED_REVISION','Exact current revision was not found.')
-  const rev=latest.rows[0],grade=normalizeGrade(rev.content_json?.classLevel)
+  const rev=latest.rows[0]
+  const grade=normalizeGrade(rev.content_json?.classLevel)
   const linked=master.source_question_bank_id
     ? await client.query(
-      'SELECT id,school_id,class_level,subject,medium,chapter_no,question_type,question_text,question_text_urdu,options,correct_option,answer,explanation,marks,is_approved,metadata FROM question_bank WHERE school_id=$1 AND id=$2 FOR UPDATE',
+      'SELECT id,school_id,class_level,subject,medium,chapter_no,question_type,question_text,question_text_urdu,options,correct_option,answer,explanation,marks,is_approved,is_duplicate,metadata,created_by,board,chapter_name,topic_name,difficulty,priority,source_type,source_file_id,source_page_no FROM question_bank WHERE school_id=$1 AND id=$2 FOR UPDATE',
       [schoolId,master.source_question_bank_id])
     : {rowCount:0,rows:[]}
   const sourceGrade=linked.rowCount===1?normalizeGrade(linked.rows[0].class_level):null
-  if(!grade&&!sourceGrade){
-    if(looksLikeHighSchoolGrade(rev.content_json?.classLevel) ||
-       looksLikeHighSchoolGrade(linked.rows[0]?.class_level))
-      throw error('UNRECOGNIZED_HIGH_SCHOOL_GRADE','High-school class representation must be unambiguous.')
-    return {grade:null,legacyRecord:null,review:null,revision:rev}
-  }
+  if(!grade&&!sourceGrade)return {grade:null,legacyRecord:null,review:null,revision:rev}
   if(grade!==sourceGrade)
     throw error('ACADEMIC_GRADE_MISMATCH','Governed revision and linked Question Bank grade disagree.')
+  assertGrade910ImmutableRevisionHash(rev)
+  requireUnflaggedGrade910Source(linked.rows[0])
+  requireGrade910CurriculumMapping(linked.rows[0],rev.content_json)
+  requireGrade910SourceClassification(linked.rows[0],rev.content_json)
+  requireGrade910ModelAnswer(rev.content_json)
 
   const hash=String(rev.content_hash||'').trim().toLowerCase()
   const key=reviewMappingKey(Number(rev.revision_number),hash)
   const review=await client.query(
-    "SELECT mapping_status,metadata,created_by,reviewed_by FROM question_mappings WHERE school_id=$1 AND question_master_id=$2 AND mapping_type='grade910_independent_academic_review' AND mapping_key=$3",
+    "SELECT mapping_status,metadata,created_by,reviewed_by,reviewed_at FROM question_mappings WHERE school_id=$1 AND question_master_id=$2 AND mapping_type='grade910_independent_academic_review' AND mapping_key=$3",
     [schoolId,master.id,key]
   )
   if(review.rowCount!==1||review.rows[0].mapping_status!=='reviewed')
@@ -136,12 +289,30 @@ async function assertIndependentReviewReady(client,{schoolId,master,actorId}){
      !Number.isInteger(Number(rev.created_by))||Number(rev.created_by)===reviewer ||
      !Number.isInteger(Number(master.created_by))||Number(master.created_by)===reviewer)
     throw error('REVIEW_INDEPENDENCE_REQUIRED','An identified independent academic reviewer, different from author and releaser, is mandatory.')
+  assertGrade910ReviewSignature(signed,reviewer)
+  // Saved review mappings are not permanent authorization: independently
+  // recheck the signing user's CURRENT school, active status and allowed role.
+  const activeReviewer=await client.query(
+    'SELECT id,role,is_active FROM users WHERE id=$1 AND school_id=$2 FOR SHARE',
+    [reviewer,schoolId]
+  )
+  if(activeReviewer.rowCount!==1||activeReviewer.rows[0].is_active!==true||
+     !['admin','principal','super_admin'].includes(activeReviewer.rows[0].role))
+    throw error('ACADEMIC_REVIEWER_NO_LONGER_AUTHORIZED',
+      'The independent academic reviewer must remain active and authorized in this school.',403)
+  // Release must independently recheck who created the linked original, not just
+  // the governed wrapper/revision author or an untrusted saved reviewer checkbox.
+  const sourceCreator=Number(linked.rows[0]?.created_by)
+  if(!Number.isSafeInteger(sourceCreator)||sourceCreator<1)
+    throw error('REVIEW_SOURCE_CREATOR_UNKNOWN','Cannot establish original Question Bank author provenance.',422)
+  if(sourceCreator===reviewer)
+    throw error('REVIEW_SOURCE_CREATOR_NOT_INDEPENDENT','The source row creator cannot independently review that same question.',403)
   if(signed.metadata?.currentRevision!==Number(rev.revision_number)||
      signed.metadata?.contentHash!==hash ||
      signed.metadata?.reviewerUserId!==reviewer ||
      signed.metadata?.schoolId!==Number(schoolId))
     throw error('STALE_ACADEMIC_REVIEW','Review evidence is not bound to current school/revision/hash.')
-  const normalized=normalizeEvidence(signed.metadata?.sourceEvidence,rev.content_json)
+  const normalized=normalizeEvidence(signed.metadata?.sourceEvidence,rev.content_json,{tenantId:schoolId})
   if(!isDeepStrictEqual(normalized,signed.metadata?.sourceEvidence))
     throw error('TAMPERED_ACADEMIC_EVIDENCE','Academic review metadata failed source registry verification.')
   if(!master.source_question_bank_id)
@@ -164,3 +335,14 @@ async function assertIndependentReviewReady(client,{schoolId,master,actorId}){
 module.exports.assertIndependentReviewReady=assertIndependentReviewReady
 
 module.exports.approvedSourceMatchesRevision=approvedSourceMatchesRevision
+module.exports.grade910McqIntegrityIssues=grade910McqIntegrityIssues
+module.exports.requireGrade910McqIntegrity=requireGrade910McqIntegrity
+module.exports.assertGrade910ReviewSignature=assertGrade910ReviewSignature
+module.exports.requireUnflaggedGrade910Source=requireUnflaggedGrade910Source
+module.exports.requireGrade910CurriculumMapping=requireGrade910CurriculumMapping
+module.exports.requireGrade910SourceClassification=requireGrade910SourceClassification
+module.exports.assertGrade910ImmutableRevisionHash=assertGrade910ImmutableRevisionHash
+module.exports.grade910MinimumQuestionIntegrityIssues=grade910MinimumQuestionIntegrityIssues
+module.exports.requireGrade910MinimumQuestionIntegrity=requireGrade910MinimumQuestionIntegrity
+module.exports.grade910ModelAnswerIssues=grade910ModelAnswerIssues
+module.exports.requireGrade910ModelAnswer=requireGrade910ModelAnswer

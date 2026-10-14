@@ -1,0 +1,22 @@
+{
+  "schemaVersion":"assps-chemistry9-ch4-content-map-v1",
+  "checkedOn":"2026-10-06",
+  "sourceRecordId":"pectaa-catalog-007",
+  "sourcePdfSha256":"05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+  "chapter":{"number":4,"title":"Stoichiometry","printedPages":[52,66],"pdfPages":[56,70],"textLayer":"IMAGE_ONLY_BUT_RENDERED"},
+  "topics":[
+    {"topicId":"4.1","title":"Chemical formula","pdfStartPage":57,"status":"RENDERED_PAGE_HEADING_REVIEWED"},
+    {"topicId":"4.2","title":"Empirical Formula","pdfStartPage":57,"status":"RENDERED_PAGE_HEADING_REVIEWED"},
+    {"topicId":"4.3","title":"Chemical Formulas of Binary Ionic Compounds","pdfStartPage":58,"status":"RENDERED_PAGE_HEADING_REVIEWED"},
+    {"topicId":"4.4","title":"Chemical Formulas of Compounds","pdfStartPage":59,"status":"RENDERED_PAGE_HEADING_REVIEWED"},
+    {"topicId":"4.5","title":"Deduce the molecular formula from the structural formula","pdfStartPage":60,"status":"RENDERED_PAGE_HEADING_REVIEWED"},
+    {"topicId":"4.6","title":"Avogadro's Number","pdfStartPage":61,"status":"RENDERED_PAGE_HEADING_REVIEWED"},
+    {"topicId":"4.7","title":"The Mole and Molar Mass","pdfStartPage":62,"status":"RENDERED_PAGE_HEADING_REVIEWED"},
+    {"topicId":"4.8","title":"Chemical Equations and Chemical Reactions","pdfStartPage":64,"status":"RENDERED_PAGE_HEADING_REVIEWED"},
+    {"topicId":"4.9","title":"Calculations Based on Chemical Equation","pdfStartPage":65,"status":"RENDERED_PAGE_HEADING_REVIEWED"}
+  ],
+  "verifiedConceptFamilies":["chemical formula notation and atom counts","empirical ratios compared with molecular formulas","charge-neutral binary ionic compounds","determining formulas from symbols and structure","Avogadro constant and particle counts","moles and molar mass","conservation of matter and balanced equations","stoichiometric coefficients as mole ratios","mass-to-moles and product-yield calculations"],
+  "exerciseFamilies":{"pdfPages":[68,69,70],"families":["Multiple Choice Questions","Questions for Short Answers","Constructed Response Questions","Descriptive Questions","Investigative Questions"],"itemLevelExerciseMap":"PENDING"},
+  "actual2026Evidence":{"artifact":"multanGrade9ScienceActual2026Evidence.json","gate":"SATISFIED_FOR_GROUP_I_TOP_LEVEL_PATTERN_ONLY"},
+  "authoring":{"originalAdditionalConceptualAllowed":true,"exerciseOriginAllowed":false,"copyTextbookPassages":false,"copyPastPaperStems":false,"publicationAllowed":false,"urduCounterpartStatus":"BLOCKED_PENDING_CURRENT_URDU_SOURCE_VERIFICATION","ocrMayLocateHeadingsButNotApproveQuestionContent":true}
+}

@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "assps-grade910-board-public-evidence-and-session-applicability-v1",
+  "evidenceResearchedOn": "2026-10-10",
+  "schoolLocationForBoardAssessment": "Narowal District, Punjab",
+  "likelyRegionalBoard": "BISE Gujranwala",
+  "specificSchoolBoardAffiliationIndependentlyCertified": false,
+  "schoolTeachingSession": "2026-27",
+  "schoolSpecificExamYearForGrade9Verified": false,
+  "schoolSpecificExamYearForGrade10Verified": false,
+  "officialWebEvidenceClassification": "PUBLIC_AUTHORITATIVE_WEB_LISTINGS_NO_CRYPTOGRAPHIC_PDF_REVALIDATION",
+  "publicOfficialEvidenceCount": 6,
+  "publicAuthoritySources": [
+    {
+      "id": "gujranwala-board-official",
+      "authority": "BISE Gujranwala",
+      "url": "https://www.bisegrw.online/",
+      "kind": "BOARD_OFFICIAL_EXAM_SITE",
+      "scope": "Regional examination board public portal",
+      "evidenceYear": 2026,
+      "officialPdfSha256": null,
+      "actualSchoolAffiliationProven": false,
+      "schoolTextbookAdoptionProven": false
+    },
+    {
+      "id": "punjab-geographic-administration",
+      "authority": "Government of Punjab",
+      "url": "https://lgcd.punjab.gov.pk/node/629",
+      "kind": "GOVERNMENT_DIVISION_DISTRICT_DIRECTORY",
+      "scope": "Narowal listed under Gujranwala Division",
+      "evidenceYear": null,
+      "officialPdfSha256": null,
+      "actualSchoolAffiliationProven": false,
+      "schoolTextbookAdoptionProven": false
+    },
+    {
+      "id": "pectaa-official-textbook-catalog",
+      "authority": "PECTAA",
+      "url": "https://pectaa.edu.pk/books-and-publications/",
+      "kind": "OFFICIAL_TEXTBOOK_LISTING",
+      "scope": "Multiple Grade IX/X book titles and edition labels; not school adoption",
+      "evidenceYear": null,
+      "officialPdfSha256": null,
+      "actualSchoolAffiliationProven": false,
+      "schoolTextbookAdoptionProven": false
+    },
+    {
+      "id": "pectaa-2026-27-publication-session",
+      "authority": "PECTAA",
+      "url": "https://pectaa.edu.pk/downloads-2-2/",
+      "kind": "PUBLIC_SESSION_PUBLICATION_NOTICE",
+      "scope": "PECTAA notices include 2026-27 textbooks/publisher allocation, not ASSPS adoption",
+      "evidenceYear": null,
+      "officialPdfSha256": null,
+      "actualSchoolAffiliationProven": false,
+      "schoolTextbookAdoptionProven": false
+    },
+    {
+      "id": "pectaa-grade9-2026-alp",
+      "authority": "PECTAA",
+      "url": "https://pectaa.edu.pk/uploads/Revised%20ALP%20Notification%2007.11.2025.pdf",
+      "kind": "YEAR_SCOPED_SMART_SYLLABUS_NOTIFICATION",
+      "scope": "Grade IX forthcoming Annual Examination 2026 only; cannot auto-extend to 2027 or 2028",
+      "evidenceYear": 2026,
+      "grade": 9,
+      "notificationDate": "2025-11-07",
+      "officialPdfSha256": null,
+      "actualSchoolAffiliationProven": false,
+      "schoolTextbookAdoptionProven": false
+    },
+    {
+      "id": "lahore-board-2025-27-not-gujranwala-proof",
+      "authority": "BISE Lahore",
+      "url": "https://biselahore.com/notifications",
+      "kind": "DIFFERENT_BOARD_NOTIFICATION_INDEX",
+      "scope": "BISE Lahore public notifications cannot by themselves prove a school in Narowal adopted their 2025-27 scheme",
+      "evidenceYear": null,
+      "officialPdfSha256": null,
+      "actualSchoolAffiliationProven": false,
+      "schoolTextbookAdoptionProven": false
+    }
+  ],
+  "separatelyTestedApplicabilityClaims": [
+    {
+      "sourceId": "pectaa-grade9-2026-alp",
+      "grade": 9,
+      "examYear": 2026,
+      "result": {
+        "decision": "PUBLIC_NOTIFICATION_YEAR_MATCH_ONLY_SCHOOL_APPLICABILITY_UNVERIFIED",
+        "requiresIndependentBoardConfirmation": true
+      }
+    },
+    {
+      "sourceId": "pectaa-grade9-2026-alp",
+      "grade": 9,
+      "examYear": 2027,
+      "result": {
+        "decision": "DENY_WRONG_GRADE_OR_EXAM_YEAR_AUTO_APPLICATION",
+        "requiresIndependentBoardConfirmation": true
+      }
+    },
+    {
+      "sourceId": "lahore-board-2025-27-not-gujranwala-proof",
+      "grade": 10,
+      "examYear": 2027,
+      "result": {
+        "decision": "DENY_CROSS_BOARD_AUTO_APPLICABILITY",
+        "requiresIndependentBoardConfirmation": true
+      }
+    }
+  ],
+  "actualAdoptedTextbookEvidenceRecords": 0,
+  "independentPhysicalExercisePageVerifications": 0,
+  "independentQualifiedSubjectTeacherRevisionApprovals": 0,
+  "sourceQuestionCandidateRevisionsPreserved": 2581,
+  "academicallyApproved": 0,
+  "verifiedPublished": 0,
+  "releaseDecision": "DENY_VERIFIED_PUBLICATION_AND_PRODUCTION_IMPORT",
+  "actionNeeded": "Signed ASSPS adoption and actual exam-cohort/board documents, licensed/physical book edition-page proof and independent qualified question revision review; public links alone cannot supply these facts."
+}

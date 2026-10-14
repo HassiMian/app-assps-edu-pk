@@ -1,0 +1,12 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {validateTextbookTermEvidence,validateUrduQuestionTerminology} from './urduMediumTerminologyGuard.mjs';
+const H='a'.repeat(64);
+const base={conceptId:'chem.reversible',englishTerm:'reversible reaction',verifiedTextbookForm:'Reversible Reaction',renderingMode:'LATIN_TERM_RETAINED',dictionaryGenerated:false,inventedPureUrdu:false,evidence:{catalogRecordId:'pectaa-catalog-008',pdfSha256:H,physicalPage:42,anchor:'reaction heading',reviewStatus:'VISUALLY_VERIFIED'}};
+test('optional evidence-backed glossary verifies a complete source record',()=>assert.equal(validateTextbookTermEvidence(base).valid,true));
+test('optional glossary can represent textbook transliteration without pure Urdu',()=>{const x={...base,verifiedTextbookForm:'ہائپوتھیسس',renderingMode:'TEXTBOOK_URDU_TRANSLITERATION'};assert.equal(validateTextbookTermEvidence(x).valid,true)});
+test('optional glossary refuses invented dictionary terms',()=>{assert.equal(validateTextbookTermEvidence({...base,inventedPureUrdu:true}).valid,false);assert.equal(validateTextbookTermEvidence({...base,dictionaryGenerated:true}).valid,false)});
+test('asserted visual textbook evidence still needs an exact page and anchor',()=>{const x=structuredClone(base);x.evidence.anchor='';assert.equal(validateTextbookTermEvidence(x).valid,false)});
+test('question style accepts recognized English term without per-word page proof',()=>assert.equal(validateUrduQuestionTerminology({subject:'Chemistry',stemUr:'Reversible Reaction کی مثال بیان کریں۔',containsTechnicalVocabulary:true,technicalTerms:[{conceptId:'reversible reaction',preferredForm:'Reversible Reaction'}]}).valid,true));
+test('unannotated scientific text needs review, not mandatory glossary proof',()=>{const x=validateUrduQuestionTerminology({subject:'Biology',stemUr:'Hypothesis کی وضاحت کریں۔',containsTechnicalVocabulary:true,technicalTerms:[]});assert.equal(x.valid,true);assert.equal(x.needsLanguageReview,true);assert.equal(x.academicApprovalGranted,false)});
+test('explicit invented pure-Urdu marker fails closed',()=>assert.equal(validateUrduQuestionTerminology({subject:'Biology',stemUr:'Genetics کا تعارف دیں۔',technicalTerms:[{conceptId:'genetics',displayForm:'Genetics',inventedPureUrdu:true,preferredForm:'Genetics'}]}).valid,false));

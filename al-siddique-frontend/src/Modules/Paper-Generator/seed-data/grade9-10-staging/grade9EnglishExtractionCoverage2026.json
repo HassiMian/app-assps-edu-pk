@@ -1,0 +1,24 @@
+{
+  "schemaVersion":"assps-grade9-english-extraction-coverage-v1",
+  "sourceId":"G9-ENGLISH-TEXTBOOK-2025-26",
+  "purpose":"Fail-closed authoring readiness by unit; extraction gaps are not treated as absent competencies.",
+  "units":[
+    {"unit":1,"textLayer":"IMAGE_ONLY_RANGE","skillMapStatus":"VISUAL_OCR_REVIEW_REQUIRED"},
+    {"unit":2,"textLayer":"EMBEDDED_TEXT","skillMapStatus":"DISCOVERY_READY"},
+    {"unit":3,"textLayer":"EMBEDDED_TEXT","skillMapStatus":"DISCOVERY_READY"},
+    {"unit":4,"textLayer":"IMAGE_ONLY_RANGE","skillMapStatus":"VISUAL_OCR_REVIEW_REQUIRED"},
+    {"unit":5,"textLayer":"IMAGE_ONLY_RANGE","skillMapStatus":"VISUAL_OCR_REVIEW_REQUIRED"},
+    {"unit":6,"textLayer":"EMBEDDED_TEXT","skillMapStatus":"DISCOVERY_READY"},
+    {"unit":7,"textLayer":"EMBEDDED_TEXT","skillMapStatus":"DISCOVERY_READY"},
+    {"unit":8,"textLayer":"EMBEDDED_TEXT","skillMapStatus":"DISCOVERY_READY"},
+    {"unit":9,"textLayer":"EMBEDDED_TEXT","skillMapStatus":"DISCOVERY_READY"},
+    {"unit":10,"textLayer":"EMBEDDED_TEXT","skillMapStatus":"DISCOVERY_READY"},
+    {"unit":11,"textLayer":"EMBEDDED_TEXT","skillMapStatus":"DISCOVERY_READY"}
+  ],
+  "discoveryTaxonomy":["listening_speaking","reading_comprehension","vocabulary","grammar_language","writing_composition","literary_analysis","critical_thinking"],
+  "rules":{
+    "missingTextLayerMeansNoCompetency":false,
+    "ocrCanApproveAcademicContent":false,
+    "unitAuthoringRequiresReviewedContentMap":true
+  }
+}

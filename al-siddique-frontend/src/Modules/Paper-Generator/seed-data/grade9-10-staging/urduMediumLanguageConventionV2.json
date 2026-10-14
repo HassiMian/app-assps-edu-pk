@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "assps-urdu-medium-language-convention-v2",
+  "createdOn": "2026-10-03",
+  "checkpointParent": "21d8fd54820eb9de9b13b5ca6de591e3e7a7775f",
+  "status": "FOUR_SUBJECT_REPRESENTATIVE_STYLE_REVIEW_COMPLETE_STAGING_QA",
+  "goal": "Learn natural Urdu-medium science/Math language convention from official PECTAA textbook samples, not literal word-by-word technical translation.",
+  "completionScope": "Representative four-subject language review and staging implementation only; complete textbook academic audit and production release remain separate and blocked.",
+  "officialCatalog": "https://pectaa.edu.pk/curriculum-compliance/",
+  "bookReviewMatrix": [
+    {
+      "subject": "Biology",
+      "grade": 9,
+      "catalogId": "pectaa-catalog-010",
+      "catalogLabel": "Biology 9 (UM) 03.09.26",
+      "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+      "sourceLengthBytes": 84697797,
+      "sourceAccess": "FULL_BINARY_PREVIOUSLY_SHA_VERIFIED",
+      "visuallyReviewedPdfPages": [
+        5,
+        15,
+        16
+      ],
+      "representativeStyleReviewComplete": true,
+      "fullBookContentAuditComplete": false,
+      "observedPatterns": [
+        "English/Urdu paired headings",
+        "qualitative and quantitative English label in parentheses with Urdu explanation",
+        "Hypothesis and Deduction technical headings"
+      ]
+    },
+    {
+      "subject": "Mathematics",
+      "grade": 9,
+      "catalogId": "pectaa-catalog-006",
+      "catalogLabel": "Math (UM) 2025-26",
+      "pdfSha256": null,
+      "sourceLengthBytes": 97707720,
+      "sourceAccess": "OFFICIAL_CATALOG_ASSET_HTTP_206_RANGE_PARTIAL_ONLY",
+      "visuallyReviewedPdfPages": [
+        5,
+        15
+      ],
+      "representativeStyleReviewComplete": true,
+      "fullBookContentAuditComplete": false,
+      "observedPatterns": [
+        "Combination of Rational and Irrational Numbers bilingual heading",
+        "Rationalization of Denominator bilingual heading",
+        "roots, variables, equations and symbolic notation unchanged"
+      ]
+    },
+    {
+      "subject": "Chemistry",
+      "grade": 9,
+      "catalogId": "pectaa-catalog-008",
+      "catalogLabel": "Chemistry 9 (UM) 03.09.26",
+      "pdfSha256": null,
+      "sourceLengthBytes": 165433794,
+      "sourceAccess": "OFFICIAL_CATALOG_ASSET_HTTP_206_RANGE_PARTIAL_ONLY",
+      "visuallyReviewedPdfPages": [
+        5,
+        15,
+        36
+      ],
+      "representativeStyleReviewComplete": true,
+      "fullBookContentAuditComplete": false,
+      "observedPatterns": [
+        "Physical Chemistry and other bilingual branch labels",
+        "Saturated/Unsaturated/Solubility terms",
+        "Octet/Duplet Rule and Chemical Bond names",
+        "chemical symbols and formulas unchanged"
+      ]
+    },
+    {
+      "subject": "Physics",
+      "grade": 9,
+      "catalogId": "pectaa-catalog-012",
+      "catalogLabel": "Physics 9 (UM)",
+      "pdfSha256": null,
+      "sourceLengthBytes": 86790350,
+      "sourceAccess": "OFFICIAL_CATALOG_ASSET_HTTP_206_RANGE_PARTIAL_ONLY",
+      "visuallyReviewedPdfPages": [
+        15,
+        36
+      ],
+      "representativeStyleReviewComplete": true,
+      "fullBookContentAuditComplete": false,
+      "observedPatterns": [
+        "Length Measuring Instruments",
+        "Metre Rule, Vernier Callipers, Least Count, Parallax Error",
+        "Rest and Motion, Types of Motion",
+        "vector diagrams, SI notation and exponents unchanged"
+      ],
+      "pdfPagesVisuallyInspected": [
+        15,
+        36
+      ],
+      "patterns": [
+        "Rest and Motion, Types of Motion bilingual headings",
+        "Vectors and physical-unit notation preserved"
+      ]
+    }
+  ],
+  "userPreferredTechnicalIdentities": [
+    "Genetics",
+    "Gene",
+    "Qualitative Observation",
+    "Quantitative Observation",
+    "Hypothesis",
+    "Deduction",
+    "Plasmodium"
+  ],
+  "authoringRules": [
+    "Natural Urdu grammar for question instructions and explanations",
+    "Retain user-familiar Latin scientific nouns or recognizable Urdu-script transliterations without inventing pure-Urdu names",
+    "Preserve formulae, variables, units, proper scientific names and option identities",
+    "Use direction-isolated LTR Latin spans within RTL Urdu text",
+    "Term-by-term exact page provenance is optional for language style; a claim about a specific textbook quotation still requires provenance",
+    "Separate style checks from academic question source/topic/answer/edition/ALP and independent review",
+    "Never use style review to grant academic release."
+  ],
+  "goalComplete": true,
+  "representativeFourSubjectStyleReviewComplete": true,
+  "fullBookContentAuditComplete": false,
+  "independentHumanAcademicSignoff": "PENDING",
+  "stagingRegressionObserved": {
+    "testFiles": 21,
+    "tests": 128,
+    "passed": 128,
+    "failed": 0,
+    "source": "remote isolated Windows worktree test run on 2026-10-03"
+  },
+  "academicApprovedQuestionCountDelta": 0,
+  "productionWriteAllowed": false,
+  "releaseApprovalGranted": false,
+  "pendingProjectAction": [
+    "Restore Desktop Commander usage or authorized GitHub write scope",
+    "Apply final .gitattributes and updated policy/report to isolated worktree",
+    "Rerun full staging regression",
+    "Commit/push only intended v2 files; do not include original pinned JSON evidence ledgers"
+  ]
+}

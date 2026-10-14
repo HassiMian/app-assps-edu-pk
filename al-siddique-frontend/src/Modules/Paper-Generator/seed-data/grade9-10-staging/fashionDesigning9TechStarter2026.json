@@ -1,0 +1,2773 @@
+{
+  "schemaVersion": "assps-fashion9-tech-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-042",
+  "sourcePdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+  "scope": "CURRENT_GRADE9_FASHION_TECH_FULL_CHAPTER_STARTER",
+  "drafts": [
+    {
+      "id": "IX-FASH-C01-M01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C01",
+        "number": 1
+      },
+      "topicId": "fashion definition",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Fashion Designing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Fashion is best understood as?",
+          "answer": "A style or way of dressing that becomes popular in a social or cultural context",
+          "options": [
+            {
+              "id": "A",
+              "text": "A style or way of dressing that becomes popular in a social or cultural context"
+            },
+            {
+              "id": "B",
+              "text": "Only a sewing tool"
+            },
+            {
+              "id": "C",
+              "text": "Only one historical costume"
+            },
+            {
+              "id": "D",
+              "text": "A mathematical formula"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-FASH-C01-M02",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C01",
+        "number": 1
+      },
+      "topicId": "fashion influences",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Fashion Designing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Which factor can influence fashion trends?",
+          "answer": "Culture and lifestyle",
+          "options": [
+            {
+              "id": "A",
+              "text": "Culture and lifestyle"
+            },
+            {
+              "id": "B",
+              "text": "Only gravity"
+            },
+            {
+              "id": "C",
+              "text": "Only rainfall"
+            },
+            {
+              "id": "D",
+              "text": "Only age of a building"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-FASH-C01-S01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C01",
+        "number": 1
+      },
+      "topicId": "fashion importance",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Fashion Designing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Why is fashion design more than simply decorating clothes?",
+          "answer": "It combines function, comfort, aesthetics, cultural meaning and user or market needs in planned clothing design."
+        }
+      }
+    },
+    {
+      "id": "IX-FASH-C01-L01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C01",
+        "number": 1
+      },
+      "topicId": "fashion context",
+      "type": "long",
+      "origin": "additional",
+      "marks": 7,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Fashion Designing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain how culture, lifestyle, market segment and personal identity can influence fashion choices.",
+          "answer": "Award marks for defining each influence and explaining how designers balance social context, user needs and visual identity without copying textbook examples."
+        }
+      }
+    },
+    {
+      "id": "IX-FASH-C02-M01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C02",
+        "number": 2
+      },
+      "topicId": "line",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Elements of Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "In design, line can strongly affect the viewer’s sense of?",
+          "answer": "Direction and movement",
+          "options": [
+            {
+              "id": "A",
+              "text": "Direction and movement"
+            },
+            {
+              "id": "B",
+              "text": "Chemical composition only"
+            },
+            {
+              "id": "C",
+              "text": "Weight only"
+            },
+            {
+              "id": "D",
+              "text": "Temperature only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-FASH-C02-M02",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C02",
+        "number": 2
+      },
+      "topicId": "colour theory",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Elements of Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Colour theory mainly helps a designer understand?",
+          "answer": "Relationships and effects of colours",
+          "options": [
+            {
+              "id": "A",
+              "text": "Relationships and effects of colours"
+            },
+            {
+              "id": "B",
+              "text": "Only fabric price"
+            },
+            {
+              "id": "C",
+              "text": "Only sewing speed"
+            },
+            {
+              "id": "D",
+              "text": "Only body height"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-FASH-C02-S01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C02",
+        "number": 2
+      },
+      "topicId": "elements of design",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Elements of Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Name four elements of design used in fashion.",
+          "answer": "Any four appropriate elements such as line, shape, form, space, texture, colour, pattern or silhouette."
+        }
+      }
+    },
+    {
+      "id": "IX-FASH-C02-L01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C02",
+        "number": 2
+      },
+      "topicId": "design elements",
+      "type": "long",
+      "origin": "additional",
+      "marks": 7,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Elements of Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain how line, shape, colour and texture can work together in a clothing design.",
+          "answer": "Award marks for each element and for explaining their combined effect on appearance, emphasis, proportion or visual mood."
+        }
+      }
+    },
+    {
+      "id": "IX-FASH-C03-M01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C03",
+        "number": 3
+      },
+      "topicId": "balance",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Principles of Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Which principle is concerned with visual stability in a composition?",
+          "answer": "Balance",
+          "options": [
+            {
+              "id": "A",
+              "text": "Balance"
+            },
+            {
+              "id": "B",
+              "text": "Fibre content"
+            },
+            {
+              "id": "C",
+              "text": "Thread count"
+            },
+            {
+              "id": "D",
+              "text": "Pressing"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-FASH-C03-M02",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C03",
+        "number": 3
+      },
+      "topicId": "rhythm",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Principles of Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Repetition of visual features can create?",
+          "answer": "Rhythm",
+          "options": [
+            {
+              "id": "A",
+              "text": "Rhythm"
+            },
+            {
+              "id": "B",
+              "text": "Only weight"
+            },
+            {
+              "id": "C",
+              "text": "Only heat"
+            },
+            {
+              "id": "D",
+              "text": "Only seam allowance"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-FASH-C03-S01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C03",
+        "number": 3
+      },
+      "topicId": "principles",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Principles of Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Differentiate contrast and harmony in design.",
+          "answer": "Contrast creates noticeable difference and emphasis; harmony creates visual agreement or coherence among design elements."
+        }
+      }
+    },
+    {
+      "id": "IX-FASH-C03-L01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C03",
+        "number": 3
+      },
+      "topicId": "design principles",
+      "type": "long",
+      "origin": "additional",
+      "marks": 7,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Principles of Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Discuss balance, rhythm, proportion, emphasis and unity as principles for evaluating a fashion design.",
+          "answer": "Award marks for accurate explanations of all five principles and a coherent description of how they guide design decisions."
+        }
+      }
+    },
+    {
+      "id": "IX-FASH-C04-M01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C04",
+        "number": 4
+      },
+      "topicId": "historical dress",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Historical Aspects of Fashion Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Studying historical dress is useful because it helps designers understand?",
+          "answer": "How culture, technology and society shaped clothing",
+          "options": [
+            {
+              "id": "A",
+              "text": "How culture, technology and society shaped clothing"
+            },
+            {
+              "id": "B",
+              "text": "Only modern brand names"
+            },
+            {
+              "id": "C",
+              "text": "Only machine maintenance"
+            },
+            {
+              "id": "D",
+              "text": "Only garment prices"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-FASH-C04-M02",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C04",
+        "number": 4
+      },
+      "topicId": "Indus heritage",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Historical Aspects of Fashion Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Harappa and Mohenjo-Daro are associated with?",
+          "answer": "Indus Valley Civilization",
+          "options": [
+            {
+              "id": "A",
+              "text": "Indus Valley Civilization"
+            },
+            {
+              "id": "B",
+              "text": "Roman Empire only"
+            },
+            {
+              "id": "C",
+              "text": "Industrial Revolution only"
+            },
+            {
+              "id": "D",
+              "text": "Modern Paris fashion week"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-FASH-C04-S01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C04",
+        "number": 4
+      },
+      "topicId": "fashion history",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Historical Aspects of Fashion Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Why can historical costume study inspire contemporary design without directly copying it?",
+          "answer": "Historical forms, materials, motifs and social meanings can inform new interpretations while a designer develops an original modern solution."
+        }
+      }
+    },
+    {
+      "id": "IX-FASH-C04-L01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C04",
+        "number": 4
+      },
+      "topicId": "historical influence",
+      "type": "long",
+      "origin": "additional",
+      "marks": 7,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Historical Aspects of Fashion Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain how ancient regional civilizations can be studied as sources of fashion knowledge.",
+          "answer": "Award marks for context, clothing traditions, materials or ornament, cultural meaning, and responsible reinterpretation in original design."
+        }
+      }
+    },
+    {
+      "id": "IX-FASH-C05-M01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C05",
+        "number": 5
+      },
+      "topicId": "regional crafts",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Crafts of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "A regional craft is best described as?",
+          "answer": "A locally developed skill or decorative tradition linked with community and culture",
+          "options": [
+            {
+              "id": "A",
+              "text": "A locally developed skill or decorative tradition linked with community and culture"
+            },
+            {
+              "id": "B",
+              "text": "Only a factory machine"
+            },
+            {
+              "id": "C",
+              "text": "Only a foreign logo"
+            },
+            {
+              "id": "D",
+              "text": "A random measurement"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-FASH-C05-M02",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C05",
+        "number": 5
+      },
+      "topicId": "craft identity",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Crafts of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Why are Pakistani crafts important to fashion design?",
+          "answer": "They can express regional heritage and design vocabulary",
+          "options": [
+            {
+              "id": "A",
+              "text": "They can express regional heritage and design vocabulary"
+            },
+            {
+              "id": "B",
+              "text": "They remove all need for design planning"
+            },
+            {
+              "id": "C",
+              "text": "They make every garment identical"
+            },
+            {
+              "id": "D",
+              "text": "They replace all materials"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-FASH-C05-S01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C05",
+        "number": 5
+      },
+      "topicId": "craft diversity",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Crafts of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Name four regions of Pakistan represented by distinct craft traditions.",
+          "answer": "Any four of Punjab, Sindh, Balochistan, Khyber Pakhtunkhwa, Azad Kashmir and Gilgit-Baltistan."
+        }
+      }
+    },
+    {
+      "id": "IX-FASH-C05-L01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C05",
+        "number": 5
+      },
+      "topicId": "crafts and fashion",
+      "type": "long",
+      "origin": "additional",
+      "marks": 7,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Crafts of Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Discuss how a designer can draw inspiration from regional crafts while respecting cultural identity and originality.",
+          "answer": "Award marks for research, attribution/respect, selective use of motifs/material ideas, original transformation, and avoiding misleading cultural representation."
+        }
+      }
+    },
+    {
+      "id": "IX-FASH-C06-M01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C06",
+        "number": 6
+      },
+      "topicId": "drawing basics",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Basic Drawing and Anatomy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Basic shape drawing mainly helps a fashion student develop?",
+          "answer": "Observation and proportion skills",
+          "options": [
+            {
+              "id": "A",
+              "text": "Observation and proportion skills"
+            },
+            {
+              "id": "B",
+              "text": "Only fabric washing"
+            },
+            {
+              "id": "C",
+              "text": "Only marketing"
+            },
+            {
+              "id": "D",
+              "text": "Only costing"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-FASH-C06-M02",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C06",
+        "number": 6
+      },
+      "topicId": "anatomy drawing",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Basic Drawing and Anatomy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Human anatomy drawing in fashion is mainly used to support?",
+          "answer": "Figure proportion and garment visualization",
+          "options": [
+            {
+              "id": "A",
+              "text": "Figure proportion and garment visualization"
+            },
+            {
+              "id": "B",
+              "text": "Medical diagnosis"
+            },
+            {
+              "id": "C",
+              "text": "Chemical testing"
+            },
+            {
+              "id": "D",
+              "text": "Machine repair"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-FASH-C06-S01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C06",
+        "number": 6
+      },
+      "topicId": "sketching",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Basic Drawing and Anatomy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Why is observation important in object and figure drawing?",
+          "answer": "Careful observation improves proportion, placement, shape relationships and visual accuracy."
+        }
+      }
+    },
+    {
+      "id": "IX-FASH-C06-L01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C06",
+        "number": 6
+      },
+      "topicId": "drawing workflow",
+      "type": "long",
+      "origin": "additional",
+      "marks": 7,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Basic Drawing and Anatomy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Describe a safe classroom workflow for developing a fashion sketch from simple shapes to a clear figure.",
+          "answer": "Award marks for observation, light construction shapes, proportion checks, refinement, clean presentation and safe ordinary drawing-tool use."
+        }
+      }
+    },
+    {
+      "id": "IX-FASH-C07-M01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C07",
+        "number": 7
+      },
+      "topicId": "croquis",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Fashion Drawing and Design Detail"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "A croquis in fashion is primarily?",
+          "answer": "A simplified figure template used for design sketching",
+          "options": [
+            {
+              "id": "A",
+              "text": "A simplified figure template used for design sketching"
+            },
+            {
+              "id": "B",
+              "text": "A sewing-machine part"
+            },
+            {
+              "id": "C",
+              "text": "A fabric fibre"
+            },
+            {
+              "id": "D",
+              "text": "A colour pigment"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-FASH-C07-M02",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C07",
+        "number": 7
+      },
+      "topicId": "garment details",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Fashion Drawing and Design Detail"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Necklines, collars and sleeves are examples of?",
+          "answer": "Garment design details",
+          "options": [
+            {
+              "id": "A",
+              "text": "Garment design details"
+            },
+            {
+              "id": "B",
+              "text": "Textile fibres"
+            },
+            {
+              "id": "C",
+              "text": "Marketing segments"
+            },
+            {
+              "id": "D",
+              "text": "Body measurements only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-FASH-C07-S01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C07",
+        "number": 7
+      },
+      "topicId": "technical drawing",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Fashion Drawing and Design Detail"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Why should a technical fashion drawing communicate garment details clearly?",
+          "answer": "It helps others understand construction-relevant features, shape, seams and design details without relying only on artistic styling."
+        }
+      }
+    },
+    {
+      "id": "IX-FASH-C07-L01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C07",
+        "number": 7
+      },
+      "topicId": "fashion drawing",
+      "type": "long",
+      "origin": "additional",
+      "marks": 7,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Fashion Drawing and Design Detail"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain the difference between expressive fashion illustration and technical garment drawing.",
+          "answer": "Award marks for purpose, level of detail, proportion/style, communication of construction features, and appropriate use in the design process."
+        }
+      }
+    },
+    {
+      "id": "IX-FASH-C08-M01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C08",
+        "number": 8
+      },
+      "topicId": "fibres",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Basics of Textiles"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Cotton is classified as?",
+          "answer": "A natural fibre",
+          "options": [
+            {
+              "id": "A",
+              "text": "A natural fibre"
+            },
+            {
+              "id": "B",
+              "text": "A metal"
+            },
+            {
+              "id": "C",
+              "text": "A ceramic"
+            },
+            {
+              "id": "D",
+              "text": "A synthetic dye only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-FASH-C08-M02",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C08",
+        "number": 8
+      },
+      "topicId": "textile choice",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Basics of Textiles"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Why does fibre type matter in clothing design?",
+          "answer": "It influences properties such as comfort, drape and care",
+          "options": [
+            {
+              "id": "A",
+              "text": "It influences properties such as comfort, drape and care"
+            },
+            {
+              "id": "B",
+              "text": "It determines only the garment name"
+            },
+            {
+              "id": "C",
+              "text": "It has no effect"
+            },
+            {
+              "id": "D",
+              "text": "It changes body height"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-FASH-C08-S01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C08",
+        "number": 8
+      },
+      "topicId": "natural man-made",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Basics of Textiles"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Differentiate natural and man-made fibres.",
+          "answer": "Natural fibres come from plant, animal or mineral sources; man-made fibres are produced through industrial processes from regenerated or synthetic materials."
+        }
+      }
+    },
+    {
+      "id": "IX-FASH-C08-L01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C08",
+        "number": 8
+      },
+      "topicId": "textile selection",
+      "type": "long",
+      "origin": "additional",
+      "marks": 7,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Basics of Textiles"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain how comfort, drape, durability, care and intended use influence textile selection.",
+          "answer": "Award marks for each criterion and for connecting material properties to the garment’s purpose and user needs."
+        }
+      }
+    },
+    {
+      "id": "IX-FASH-C09-M01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C09",
+        "number": 9
+      },
+      "topicId": "sewing safety",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Basics of Sewing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Which is the safest classroom principle when using sewing tools?",
+          "answer": "Follow teacher instructions and keep tools stored and handled carefully",
+          "options": [
+            {
+              "id": "A",
+              "text": "Follow teacher instructions and keep tools stored and handled carefully"
+            },
+            {
+              "id": "B",
+              "text": "Rush to finish"
+            },
+            {
+              "id": "C",
+              "text": "Ignore damaged equipment"
+            },
+            {
+              "id": "D",
+              "text": "Leave sharp tools loose"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-FASH-C09-M02",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C09",
+        "number": 9
+      },
+      "topicId": "pressing",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Basics of Sewing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Pressing in garment work is mainly used to?",
+          "answer": "Shape and neaten fabric during construction",
+          "options": [
+            {
+              "id": "A",
+              "text": "Shape and neaten fabric during construction"
+            },
+            {
+              "id": "B",
+              "text": "Measure colour theory"
+            },
+            {
+              "id": "C",
+              "text": "Create fibre chemically"
+            },
+            {
+              "id": "D",
+              "text": "Replace pattern planning"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-FASH-C09-S01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C09",
+        "number": 9
+      },
+      "topicId": "sewing tools",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Basics of Sewing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Why should sewing tools and equipment be checked before classroom use?",
+          "answer": "A quick condition and setup check reduces mistakes and helps ensure tools are used safely and appropriately under supervision."
+        }
+      }
+    },
+    {
+      "id": "IX-FASH-C09-L01",
+      "chapter": {
+        "id": "IX-FASHION-TECH-C09",
+        "number": 9
+      },
+      "topicId": "sewing workflow",
+      "type": "long",
+      "origin": "additional",
+      "marks": 7,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-042",
+        "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_SYLLABUS_AND_TEXTBOOK_CHAPTER_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Basics of Sewing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "fashion-designing-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-FASHION-DESIGN-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Fashion Designing-Tech starter aligned to verified current chapter structure and pairing scheme; textbook/exercise stems are not copied."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Describe the principles of a safe, organized beginner sewing workspace without giving machine-operation instructions.",
+          "answer": "Award marks for supervision, tidy layout, safe storage of sharp items, checking equipment condition, suitable posture/lighting, careful fabric handling and stopping when equipment appears unsafe."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 36,
+    "mcq": 18,
+    "short": 9,
+    "long": 9,
+    "chapters": 9
+  }
+}

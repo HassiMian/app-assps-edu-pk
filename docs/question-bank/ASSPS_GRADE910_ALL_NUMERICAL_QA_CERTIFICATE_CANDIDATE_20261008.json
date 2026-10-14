@@ -1,0 +1,772 @@
+{
+  "schemaVersion": "assps-grade910-numerical-full-corpus-qa-v1",
+  "scope": "AUTOMATED_ARITHMETIC_SPOT_AND_SAVED_ANSWER_CROSSCHECK_NOT_ACADEMIC_APPROVAL",
+  "sourceUniverse": "73 ORIGINAL AUTHORING FILES (NO EDITORIAL DERIVATIVE DOUBLE_COUNT)",
+  "counts": {
+    "authoredNumericals": 91,
+    "covered": 91,
+    "arithmeticPassed": 91,
+    "arithmeticFailed": 0,
+    "sourceVerifiedByPhysicalPage": 0,
+    "independentlyHumanReviewed": 0,
+    "approved": 0,
+    "published": 0
+  },
+  "byGrade": {
+    "IX": 57,
+    "X": 34
+  },
+  "bySourceFile": {
+    "physics9EnglishStarter2026.json": 7,
+    "physics9UrduStarter2026.json": 7,
+    "physics10Starter2026.json": 7,
+    "mathematics9Starter2026.json": 11,
+    "mathematics9UrduStarter2026.json": 11,
+    "physicsTech9DualStarter2026.json": 12,
+    "physicsTech10EnglishStarter2026.json": 6,
+    "mathematics10Starter2026.json": 10,
+    "chemistry9Chapter4EnglishDrafts2026.json": 5,
+    "chemistry9Chapter2EnglishDrafts2026.json": 2,
+    "biology9UrduStarter2026.json": 1,
+    "chemistry9UrduStarter2026.json": 1,
+    "mathematics10OriginalReasoningBatch2026.json": 11
+  },
+  "evidenceSources": [
+    "ASSPS_GRADE910_CORE_NUMERICAL_ARITHMETIC_QA_20261008.json",
+    "ASSPS_GRADE910_REMAINING_NUMERICAL_ARITHMETIC_QA_20261008.json",
+    "ASSPS_MATH10_NUMERICAL_INDEPENDENT_MECHANICAL_QA_20261008.json"
+  ],
+  "schoolBookAdoptionEvidenceCertified": false,
+  "questionLanguageEquivalenceIndependentlyCertified": false,
+  "academicReleaseGranted": false,
+  "records": [
+    {
+      "questionId": "IX-PHY-2025-C01-N01",
+      "sourceFile": "physics9EnglishStarter2026.json",
+      "questionContentSha256": "76c84aa8f20d3881824d0a1111a9ddae7f407361790e141fee9a050ecaf49acb",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-PHY-2025-C02-N01",
+      "sourceFile": "physics9EnglishStarter2026.json",
+      "questionContentSha256": "21970bda446ecb7e6cd0920a64e261c8d4094663ab1b5661a67602f30a5656ad",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-PHY-2025-C03-N01",
+      "sourceFile": "physics9EnglishStarter2026.json",
+      "questionContentSha256": "3cefff6ffe9f29044a5331d991723f0446d68449763a7637b4cc3b99b2191cea",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-PHY-2025-C04-N01",
+      "sourceFile": "physics9EnglishStarter2026.json",
+      "questionContentSha256": "61c1ec02002393aa40d4512023315e20e6d0ab53fa2e5125d3a34622ec235e4a",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-PHY-2025-C05-N01",
+      "sourceFile": "physics9EnglishStarter2026.json",
+      "questionContentSha256": "751a47a83c99cc241dfd93ecc446a571843388dd6fa5e0148ded9c365e4cb5aa",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-PHY-2025-C06-N01",
+      "sourceFile": "physics9EnglishStarter2026.json",
+      "questionContentSha256": "0edd628c1cab17074c160e10b317304c7b937f8f8da9a588d714049af6e58efd",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-PHY-2025-C07-N01",
+      "sourceFile": "physics9EnglishStarter2026.json",
+      "questionContentSha256": "9e6b440f72c1d57b4ab8890aa79be270f0f818b5b27154d0859b5209a085a567",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-PHY-UR-C01-N01",
+      "sourceFile": "physics9UrduStarter2026.json",
+      "questionContentSha256": "623c5c5ab2bd1d8604c17c8357f53a9da03a65e30bc17c4106dc3ee346b986cc",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-PHY-UR-C02-N01",
+      "sourceFile": "physics9UrduStarter2026.json",
+      "questionContentSha256": "99b9f9db6cb51714a176e6b5f3ec332a9c3ee0cb5a25a4354bc5edf2140ca236",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-PHY-UR-C03-N01",
+      "sourceFile": "physics9UrduStarter2026.json",
+      "questionContentSha256": "5ff52df324735c0da55dfdc2b3d3385394b72c3b95d3bf692e30f4d03b3c5ddd",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-PHY-UR-C04-N01",
+      "sourceFile": "physics9UrduStarter2026.json",
+      "questionContentSha256": "08f2ad4f34e956e354b79810d807711b8e22e68da7b29c2cb4d5f26aea5f8028",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-PHY-UR-C05-N01",
+      "sourceFile": "physics9UrduStarter2026.json",
+      "questionContentSha256": "528fe3eb8f568583878417ab95529ae34890a3a7e0020e65b4d41d5d969a3cca",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-PHY-UR-C06-N01",
+      "sourceFile": "physics9UrduStarter2026.json",
+      "questionContentSha256": "5bd0c4dfc2cf330f4e727130736070b05a3ed535834d81c2fe1af762fd904459",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-PHY-UR-C07-N01",
+      "sourceFile": "physics9UrduStarter2026.json",
+      "questionContentSha256": "4f2973cc06d16cafffd705c7653722eb61b1cedb802e85a2bb8b489524a025da",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-PHY-C10-N01",
+      "sourceFile": "physics10Starter2026.json",
+      "questionContentSha256": "7a321c3d8897b8b312b894dff9f47eb8804cd13726f0bf65918d32f60a87aaf2",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-PHY-C12-N01",
+      "sourceFile": "physics10Starter2026.json",
+      "questionContentSha256": "c8706fe255e13bb98314240ed50b8fed3ef84e78a7c2f6ff2e1420f34881022d",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-PHY-C13-N01",
+      "sourceFile": "physics10Starter2026.json",
+      "questionContentSha256": "f635c84aef9f9343c792ab085609ad3a9d6a16bec55c875f9ce9fda0667a53d5",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-PHY-C14-N01",
+      "sourceFile": "physics10Starter2026.json",
+      "questionContentSha256": "099464dc5222a43dd3d04fdfd1218f33014e8bb09631b86456ca4d70474541ae",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-PHY-C16-N01",
+      "sourceFile": "physics10Starter2026.json",
+      "questionContentSha256": "f0eb312ab0ef62035aa9481b3893f8e8f508eadabc2b9e9e206b56baa2b52449",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-PHY-C18-N01",
+      "sourceFile": "physics10Starter2026.json",
+      "questionContentSha256": "acb790beb22ea40bad97cb4b58b3ef5830914eb8c52f468d34f04a88c95c3a14",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-PHY-C20-N01",
+      "sourceFile": "physics10Starter2026.json",
+      "questionContentSha256": "4d00a1e457ff1b700705756343c47d252d695a56be2c564ec16d97178af9f68c",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-MATH-C01-N01",
+      "sourceFile": "mathematics9Starter2026.json",
+      "questionContentSha256": "0bca13bea7c7923c562e6d7cd23d145d5db7c15fd2b429fa65858c1410681a7b",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-MATH-C02-N01",
+      "sourceFile": "mathematics9Starter2026.json",
+      "questionContentSha256": "cd8edd680e821c6924e68c6246d4a8888e689063d1704d843217b01a0fa2d516",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-MATH-C03-N01",
+      "sourceFile": "mathematics9Starter2026.json",
+      "questionContentSha256": "b4cb347977b5372def27c5744cc3d0a45366cd504c209d548df6b2656e4cc826",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-MATH-C04-N01",
+      "sourceFile": "mathematics9Starter2026.json",
+      "questionContentSha256": "627b20f7fcd4fe872b1446a546aeaf4b8b15dd119e36a05cc42cbc4a51ad4c15",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-MATH-C05-N01",
+      "sourceFile": "mathematics9Starter2026.json",
+      "questionContentSha256": "3e5e5108b501145dfd58851e56143f5e2ec4e9544da385673dde99d101af520b",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-MATH-C06-N01",
+      "sourceFile": "mathematics9Starter2026.json",
+      "questionContentSha256": "4e69fe5a1196fdd9d9177201338fdaa8e8a54f539851e20be7ffd198371d2bc8",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-MATH-C07-N01",
+      "sourceFile": "mathematics9Starter2026.json",
+      "questionContentSha256": "257d5d35c4cf8625fe253d732e2a4994df455f08925939e1dfa01adec8da88bf",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-MATH-C09-N01",
+      "sourceFile": "mathematics9Starter2026.json",
+      "questionContentSha256": "ed2427e50023f6a71cb60fdac73d3915956ec230b7a884ee899c27cd3df9fd15",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-MATH-C10-N01",
+      "sourceFile": "mathematics9Starter2026.json",
+      "questionContentSha256": "709ebf0cf37a1bf8ae6a4c6299f8c5507d13fc2c8b4953271ff1ce91722314ea",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-MATH-C12-N01",
+      "sourceFile": "mathematics9Starter2026.json",
+      "questionContentSha256": "b62d478f0ed252c74ae57cec44945ec68db51c733ce635e68e25d981e61e57ce",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-MATH-C13-N01",
+      "sourceFile": "mathematics9Starter2026.json",
+      "questionContentSha256": "430bebc76fbf023244134233acc55aa6cd708cd0ebaa0895ddbbbcc0ad0a5c7d",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-MATH-UR-C01-N01",
+      "sourceFile": "mathematics9UrduStarter2026.json",
+      "questionContentSha256": "12d3ded65e24d1da646ecf92ec5bd31f29f16d1ff3b3e0ee7051e2f30ff75e55",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-MATH-UR-C02-N01",
+      "sourceFile": "mathematics9UrduStarter2026.json",
+      "questionContentSha256": "bd0e51e1d7652e9ae42fa6f34772f3ba63c76f40753f2c4c7628b79a72283997",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-MATH-UR-C03-N01",
+      "sourceFile": "mathematics9UrduStarter2026.json",
+      "questionContentSha256": "67205919e76e914f4023a5dbfdbf926f5fc0ecdf5542c3c28ed9ccdf6f9d994c",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-MATH-UR-C04-N01",
+      "sourceFile": "mathematics9UrduStarter2026.json",
+      "questionContentSha256": "3cd49cb949c16b40672aa5086dbe553b2e4f960dfbbb622982016b5e2e2ae64e",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-MATH-UR-C05-N01",
+      "sourceFile": "mathematics9UrduStarter2026.json",
+      "questionContentSha256": "3c4a82fadacaeafefca331c1267c4c493b8fbe6e97a0d96ddc9ddaf7341c899a",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-MATH-UR-C06-N01",
+      "sourceFile": "mathematics9UrduStarter2026.json",
+      "questionContentSha256": "0cc46f7f941c92af707c62d2003854c02a53e455944960cae9e71be842a48e20",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-MATH-UR-C07-N01",
+      "sourceFile": "mathematics9UrduStarter2026.json",
+      "questionContentSha256": "fa3e77ed2efa7f3ad9e7931db6b412ccba24d50eb0762206163183dabd550219",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-MATH-UR-C09-N01",
+      "sourceFile": "mathematics9UrduStarter2026.json",
+      "questionContentSha256": "aa00457270fae6812b6e495ac75476e0ad587029ad44c0060e5ea30db7db0db6",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-MATH-UR-C10-N01",
+      "sourceFile": "mathematics9UrduStarter2026.json",
+      "questionContentSha256": "b112dd317b56adfc5097fbc3ea3a96079ac61bc6823e8985b1c8e325e0587762",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-MATH-UR-C12-N01",
+      "sourceFile": "mathematics9UrduStarter2026.json",
+      "questionContentSha256": "c3817f610411b7c29d62c3c5d2212f55684c4b07943e5e2bb7ea62cdc015b5d5",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-MATH-UR-C13-N01",
+      "sourceFile": "mathematics9UrduStarter2026.json",
+      "questionContentSha256": "1537f5ef2865799190f2d4dd906c1147ab9e744235db8c9adffd86b697fed1a1",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-PHT-E-C01-N01",
+      "sourceFile": "physicsTech9DualStarter2026.json",
+      "questionContentSha256": "617fe88aa4b9c049af132a9282f8f8687cbbb68518fb42059d3cd30546259025",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-PHT-E-C02-N01",
+      "sourceFile": "physicsTech9DualStarter2026.json",
+      "questionContentSha256": "0c0215fb50befaf7b46ebb21ed728dc5ede83b8caaa92b5e487cc71bd9503cf4",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-PHT-E-C03-N01",
+      "sourceFile": "physicsTech9DualStarter2026.json",
+      "questionContentSha256": "98faf200ddff40d408aae248be674a33a0e8944de8b99a88ad7292aa83c7f345",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-PHT-E-C04-N01",
+      "sourceFile": "physicsTech9DualStarter2026.json",
+      "questionContentSha256": "3d9a97342b018fc2c57c0db358dff80162e0f689972ea2709f80629dd1f0c047",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-PHT-E-C05-N01",
+      "sourceFile": "physicsTech9DualStarter2026.json",
+      "questionContentSha256": "5921a65cb46c353142985c1a9b88705b723837456d726406a94d57c3547933e7",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-PHT-E-C06-N01",
+      "sourceFile": "physicsTech9DualStarter2026.json",
+      "questionContentSha256": "93061d3778676fb3eed934c9f29752082fac58390d34addff59da0e6bb4004c9",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-PHT-U-C01-N01",
+      "sourceFile": "physicsTech9DualStarter2026.json",
+      "questionContentSha256": "65b9fe406c2133a3943a080df73b59542f3ae3fb90052c19072079e609b60cf4",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-PHT-U-C02-N01",
+      "sourceFile": "physicsTech9DualStarter2026.json",
+      "questionContentSha256": "7718cf5a51217838fe50916813c133f6226635b2b4a5fac8067e1202c45b6307",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-PHT-U-C03-N01",
+      "sourceFile": "physicsTech9DualStarter2026.json",
+      "questionContentSha256": "7ec4ffc89addda986817c3cafec296239c70ee5a40d63d965d975b1ecc425ae6",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-PHT-U-C04-N01",
+      "sourceFile": "physicsTech9DualStarter2026.json",
+      "questionContentSha256": "8642fc5e90801377f786920b9126ca6d5134f3f2a07d6a532cf27797efcabbf5",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-PHT-U-C05-N01",
+      "sourceFile": "physicsTech9DualStarter2026.json",
+      "questionContentSha256": "9d5130affccd0c9c7e68b8a187f427793b8693b36bd33af19fb3469f149d863d",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-PHT-U-C06-N01",
+      "sourceFile": "physicsTech9DualStarter2026.json",
+      "questionContentSha256": "a4a7094f687b4a08b9e694377eacdc96c19c109da7f5ce029cd8812b4ac5c5e4",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-PHY-TECH-C10-X01",
+      "sourceFile": "physicsTech10EnglishStarter2026.json",
+      "questionContentSha256": "0e86e2d1cf7587394a4272ad9cb969745322bed1f321f24ea1e576b4c723c409",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-PHY-TECH-C12-X01",
+      "sourceFile": "physicsTech10EnglishStarter2026.json",
+      "questionContentSha256": "9168b1c618c4963931e71024a1c50f1b0dfb9b16df3ab9e92618d7568326b040",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-PHY-TECH-C13-X01",
+      "sourceFile": "physicsTech10EnglishStarter2026.json",
+      "questionContentSha256": "aacb4cb70b5c106a75f46661c9b2288f29123c5c812c56454bc78304124dd390",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-PHY-TECH-C14-X01",
+      "sourceFile": "physicsTech10EnglishStarter2026.json",
+      "questionContentSha256": "1b372ea1572fcd2f13fd7ff20cc613ae1800a50fb6471274537c5669fcce2a57",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-PHY-TECH-C16-X01",
+      "sourceFile": "physicsTech10EnglishStarter2026.json",
+      "questionContentSha256": "0b64a826b7cc7b79a4aa246f727025c730ca9b6c926bc48f001bd4f16c5ca400",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-PHY-TECH-C19-X01",
+      "sourceFile": "physicsTech10EnglishStarter2026.json",
+      "questionContentSha256": "bf7ce8006b948ba7ad0c11545f6df78e3539cecdf5c2bd91ab25c9d74111c8bf",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-MATH-C01-N01",
+      "sourceFile": "mathematics10Starter2026.json",
+      "questionContentSha256": "280c444a46587c22d3f28e25cbbfc9e7aa12039ca6d61613caa559f17d40c41f",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-MATH-C02-N01",
+      "sourceFile": "mathematics10Starter2026.json",
+      "questionContentSha256": "9f70f3ecb0c8ea7f6a9db6db7cb3a8037ed136f89b385bdc31306526752973c0",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-MATH-C03-N01",
+      "sourceFile": "mathematics10Starter2026.json",
+      "questionContentSha256": "ef843cc41735c20a568ba25e2937b0a94ac7e70ede9bfc424dd0b3670ed351d8",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-MATH-C04-N01",
+      "sourceFile": "mathematics10Starter2026.json",
+      "questionContentSha256": "20919760601c461c7c49b9d0ec3a4f53146c262f01cb5903a2e7606afb6db2f2",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-MATH-C05-N01",
+      "sourceFile": "mathematics10Starter2026.json",
+      "questionContentSha256": "6f0919382d1009dce1b37ee489e2d8cdf774ee84b085d8a1071d0c49c6a32b61",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-MATH-C06-N01",
+      "sourceFile": "mathematics10Starter2026.json",
+      "questionContentSha256": "47125cde861c13e068fac987c0c12391724278b6aa9bf9434b49d54d2aa5ea72",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-MATH-C07-N01",
+      "sourceFile": "mathematics10Starter2026.json",
+      "questionContentSha256": "45b11e18565d871b7aebf36f76ddc2ad09041ff972f9a3651a72e1a385f137cf",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-MATH-C09-N01",
+      "sourceFile": "mathematics10Starter2026.json",
+      "questionContentSha256": "b5f2e660241821c8cb7872403fb7150e684098dd65dd9e0537bb592cab459a3c",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-MATH-C11-N01",
+      "sourceFile": "mathematics10Starter2026.json",
+      "questionContentSha256": "d3b34588f0e69e465fc61d3e8e69b82cd078fbb12e535bba4a325b68a66db4dd",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-MATH-C12-N01",
+      "sourceFile": "mathematics10Starter2026.json",
+      "questionContentSha256": "3b081f69d2ae0375f5c12a9a2627edc86a31a4f8e77b071450989d0ad6f562e3",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-CHEM-2025-C04-T01-N03",
+      "sourceFile": "chemistry9Chapter4EnglishDrafts2026.json",
+      "questionContentSha256": "482eb07fae0390611329a0aeed5058bcddb2994d928f797319b4717104db8234",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-CHEM-2025-C04-T02-N06",
+      "sourceFile": "chemistry9Chapter4EnglishDrafts2026.json",
+      "questionContentSha256": "a2af58302acca03bf0b472b012128d4f4bbfa9c37b719478a2abd8abf83cfbfc",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-CHEM-2025-C04-T06-N17",
+      "sourceFile": "chemistry9Chapter4EnglishDrafts2026.json",
+      "questionContentSha256": "2e2b9dac968b5889ee443e9b9a7f7f22f8d2dac4f3ec329e4a2fc50ea8cafdeb",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-CHEM-2025-C04-T07-N20",
+      "sourceFile": "chemistry9Chapter4EnglishDrafts2026.json",
+      "questionContentSha256": "e760073d2f1e3201ee14ccc60fbe3398eaaf169dbc18ddddb05544a98d842b55",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-CHEM-2025-C04-T09-N26",
+      "sourceFile": "chemistry9Chapter4EnglishDrafts2026.json",
+      "questionContentSha256": "0e1ff610d567b899fdadedabbc07820d8fbba0aa0a2b73d91690994fd41ed416",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-CHEM-2025-C02-T22-N11",
+      "sourceFile": "chemistry9Chapter2EnglishDrafts2026.json",
+      "questionContentSha256": "52b54e0f0d2eaf15dfb8d5e2d1a7acd78a81e9b34419655cfea5d297dc5d0309",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-CHEM-2025-C02-T24-N23",
+      "sourceFile": "chemistry9Chapter2EnglishDrafts2026.json",
+      "questionContentSha256": "be2db198e22860eb56e0bef51558e9695dea7613fd08721464ee5d64c7e755c0",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-BIO-UR-C11-N01",
+      "sourceFile": "biology9UrduStarter2026.json",
+      "questionContentSha256": "8c16a2d2fba8731cf1d344557c15656c41a0555d0722e8d83ddb4c32e427387d",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "IX-CHEM-UR-C04-N01",
+      "sourceFile": "chemistry9UrduStarter2026.json",
+      "questionContentSha256": "8c2a804493ebf1d24c62d6949c1d7cdc289582c53e8569e8fedeb19f1ff7d1ff",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-MATH-C01-N02",
+      "sourceFile": "mathematics10OriginalReasoningBatch2026.json",
+      "questionContentSha256": "27a7f46f5678d0462ef84bc443f9a804483bec25643bc0b9840a6e909dbf0068",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-MATH-C02-N02",
+      "sourceFile": "mathematics10OriginalReasoningBatch2026.json",
+      "questionContentSha256": "35adc9243730f78dd9d4f958a27e45ed82151c73ab223568dbd9776bce582400",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-MATH-C03-N02",
+      "sourceFile": "mathematics10OriginalReasoningBatch2026.json",
+      "questionContentSha256": "9bcd33fde1949314d4488518b6611a756988247bc0cf765998244127f012f6f4",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-MATH-C04-N02",
+      "sourceFile": "mathematics10OriginalReasoningBatch2026.json",
+      "questionContentSha256": "c81af8367308a4a8ce9a14898b5d935015a04fa2429bcab1fc7e2b941409a867",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-MATH-C05-N02",
+      "sourceFile": "mathematics10OriginalReasoningBatch2026.json",
+      "questionContentSha256": "90f486fa73d8d62eb7c4c891697f3a91730183f5742e18abfd3895d4aa220d6f",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-MATH-C06-N02",
+      "sourceFile": "mathematics10OriginalReasoningBatch2026.json",
+      "questionContentSha256": "1ebb10057810fde747dcc8fa3b8dba00e03a98897423b93d0340f7140afe6bf1",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-MATH-C07-N02",
+      "sourceFile": "mathematics10OriginalReasoningBatch2026.json",
+      "questionContentSha256": "03bbe2f5c4a1acb099be630808b69686af99e048000bf9268fb3caa14c13def4",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-MATH-C08-N01",
+      "sourceFile": "mathematics10OriginalReasoningBatch2026.json",
+      "questionContentSha256": "ba8a2193054701a2bdc0e4f5e5afcfd58b7db81bbc1a437b6984062ef5918a22",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-MATH-C09-N02",
+      "sourceFile": "mathematics10OriginalReasoningBatch2026.json",
+      "questionContentSha256": "66728e29f2f0bc1528edc3ae066ba2cac5ae7afdcffddd1ffb36d56193ab2fde",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-MATH-C11-N02",
+      "sourceFile": "mathematics10OriginalReasoningBatch2026.json",
+      "questionContentSha256": "ad1724dc2517534587a9807a7d7be396e55b678500784ac6e1b9b5d8fc10a502",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    },
+    {
+      "questionId": "X-MATH-C12-N02",
+      "sourceFile": "mathematics10OriginalReasoningBatch2026.json",
+      "questionContentSha256": "230ef62cc144bc334df68d3043a4cd6a533f4b568087d2b78176ba9ec9926af0",
+      "passed": true,
+      "mathematicalRecomputationPass": true,
+      "storedAnswerPass": true
+    }
+  ]
+}

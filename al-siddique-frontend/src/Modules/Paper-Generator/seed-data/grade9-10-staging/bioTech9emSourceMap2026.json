@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "assps-bioTech9em-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-031",
+  "sourcePdfSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+  "sourceByteLength": 31934898,
+  "pageCount": 108,
+  "identity": [
+    "Biology-Tech",
+    "Grade 9",
+    "Matric-Tech",
+    "English"
+  ],
+  "chapterMapStatus": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_FROM_RENDERED_TOC_AND_BOARD_PATTERN",
+  "chapters": [
+    {
+      "number": 1,
+      "titleEnglish": "The Science of Biology",
+      "titleUrdu": "علمِ حیاتیات",
+      "status": "CHAPTER_SEQUENCE_VERIFIED_EXACT_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 2,
+      "titleEnglish": "Biodiversity",
+      "titleUrdu": "حیاتیاتی تنوع",
+      "status": "CHAPTER_SEQUENCE_VERIFIED_EXACT_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 3,
+      "titleEnglish": "The Cell",
+      "titleUrdu": "خلیہ",
+      "status": "CHAPTER_SEQUENCE_VERIFIED_EXACT_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 4,
+      "titleEnglish": "Cell Cycle",
+      "titleUrdu": "سیل سائیکل",
+      "status": "CHAPTER_SEQUENCE_VERIFIED_EXACT_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 5,
+      "titleEnglish": "Tissues, Organs, and Organ Systems",
+      "titleUrdu": "ٹشوز، اعضا اور نظامِ اعضا",
+      "status": "CHAPTER_SEQUENCE_VERIFIED_EXACT_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 6,
+      "titleEnglish": "Enzyme",
+      "titleUrdu": "انزائم",
+      "status": "CHAPTER_SEQUENCE_VERIFIED_EXACT_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 7,
+      "titleEnglish": "Bioenergetics",
+      "titleUrdu": "بایوانرجیٹکس",
+      "status": "CHAPTER_SEQUENCE_VERIFIED_EXACT_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 8,
+      "titleEnglish": "Plant Physiology",
+      "titleUrdu": "نباتاتی فعلیات",
+      "status": "CHAPTER_SEQUENCE_VERIFIED_EXACT_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 9,
+      "titleEnglish": "Reproduction in Plants",
+      "titleUrdu": "پودوں میں تولید",
+      "status": "CHAPTER_SEQUENCE_VERIFIED_EXACT_PAGE_BOUNDARY_PENDING"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "exactPageBoundariesPending": true,
+    "assessmentPatternUse": "CATEGORY_AND_HIERARCHY_ONLY"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "assps-g910-readiness-completion-seal-v1",
+  "scope": "READINESS_AUTOMATION_COMPLETE_ACADEMIC_APPROVAL_FAIL_CLOSED",
+  "generatedAt": "2026-10-08T10:35:00Z",
+  "liveProvisionalBank": {
+    "questions": 2303,
+    "approved": 0,
+    "duplicateGroups": 0,
+    "mcqs": 773,
+    "mcqKeyDistribution": {"A":211,"B":199,"C":187,"D":176},
+    "mcqEditorialBiasFlag": false
+  },
+  "sourceEvidence": {
+    "manifestRecords": 111,
+    "hashAttested": 110,
+    "integrityVerified": 110,
+    "integrityFailures": 0,
+    "sourceUnresolved": 1,
+    "sourceUnresolvedRecordIds": ["pectaa-catalog-037"],
+    "sourceUnresolvedReason": "Current official catalog listing exists but source PDF bytes were not reachable from the legacy PCTB asset endpoint during audit; no substitute hash was invented."
+  },
+  "textLayerReadiness": {
+    "good": 17,
+    "partial": 13,
+    "imageHeavyOrNoText": 80,
+    "candidateMapEligible": 17,
+    "reviewOnlyCandidateMaps": 17,
+    "recordsWithCandidateAnchors": 13,
+    "candidateAnchors": 547,
+    "verifiedChapterMapsGranted": 0,
+    "verifiedExerciseIndicesGranted": 0,
+    "ocrUsed": false
+  },
+  "academicReadiness": {
+    "manifestExerciseIndicesVerified": 0,
+    "starterQuestionsWithoutVerifiedPhysicalPage": 1144,
+    "manifestRecordsWithoutStaging": 60,
+    "chaptersInspected": 359,
+    "provisionalStructurallyReadyChapters": 13,
+    "structuralDeficit": {"mcq":1085,"short":1052,"long":55,"total":2192},
+    "readyChapters": 0,
+    "coverageReady": false,
+    "academicReady": false,
+    "publicationReady": false
+  },
+  "completedAutomation": [
+    "2,303 provisional Grade IX-X questions reconciled into one governed live staging inventory",
+    "zero auto-approval and zero publication enablement retained",
+    "MCQ answer-key positional bias editorially rebalanced and synchronized live",
+    "58/58 known-hash missing sources recovered exactly; cache audit now has all known hashes present",
+    "110/111 manifest records hash-attested and integrity-verified",
+    "all 110 attested PDFs classified for text-layer capability without OCR",
+    "17 text-layer-good sources routed to review-only candidate map extraction",
+    "547 short heading/page anchors produced for reviewer use without auto-verification",
+    "Grade IX-X staging corpus structural/governance suite passed 500/500 before final source-classification tooling changes"
+  ],
+  "remainingHumanGates": [
+    "independent academic answer/key review",
+    "physical page and exercise-index verification",
+    "visual/manual review for 80 image-heavy/no-text PDFs",
+    "review of 13 partial text-layer PDFs",
+    "review and acceptance of 547 candidate anchors",
+    "source-byte attestation for pectaa-catalog-037 when the official asset becomes reachable",
+    "source-grounded authoring to close the 2,192 structural-density deficit where curriculum coverage is required",
+    "teacher/subject-expert signoff before approval or publication"
+  ],
+  "completionDecision": "AUTOMATION_AND_ENGINEERING_READINESS_COMPLETE_ACADEMIC_APPROVAL_BLOCKED"
+}

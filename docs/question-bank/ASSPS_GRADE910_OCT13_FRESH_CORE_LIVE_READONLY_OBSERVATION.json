@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "assps-grade910-oct13-core-live-observation-v1",
+  "observedAt": "2026-10-13T13:33:59.050Z",
+  "verifiedPrivateObservationFileSha256": "f077be225e1d003c4f40f17d87b6829bb99936be206e2e2e8d57a3d3d5831a71",
+  "coreVerifierScriptSha256": "aa54ba08432a06f0ea1c9781beb517e5e0c5edb10ee304f783d70ef0196d9023",
+  "coreSourceBranchObservedCommit": "cef192a67a47e499903fbf6332b4599ec369127b",
+  "verifierSourceExitCode": 2,
+  "coreSourceStatus": "HOLD",
+  "currentLiveSignedMarksGuards": 77,
+  "greenCoreSignedStagedGuards": 77,
+  "activeLegacyCoreSignedGuards": 0,
+  "activeLegacyDbLoginHasBypassRls": false,
+  "legacyCoreVerifierExpectedBypassFlagNowOutdated": true,
+  "greenRuntimeHasActualAuthenticatedStaffSession": false,
+  "productionAppSwitchedToGreenRuntime": false,
+  "coreOwnerCertifiedRelease": false,
+  "paperStudioOwnerAcceptedAcademicPickerRelease": false,
+  "certifiedAcademicPublication": false,
+  "observationOnlyNotIndependentlySignedOwnerAuthority": true,
+  "decision": "HOLD_UNTIL_REAL_AUTHENTICATED_SCHOOL_STAFF_AND_CORE_CERTIFIED_SWITCH"
+}

@@ -1,0 +1,41 @@
+# ASSPS Grade IX–X Academic Master — Health Sciences IX eight safe original answer drafts, 109 distinct unapproved answer proposals
+
+**9 October 2026 — isolated Academic-owner development only; production deployment HOLD.**
+
+## Recovered checkpoint and ownership boundaries
+Read newest GitHub issue #4 and checked the existing Academic-owned `feat/grade910-academic-master-evidence-20261008` worktree: initially clean, local/origin SHA `525776fa2c70f3b2131fcf51f023d2d60115eaa8`. No previously completed Biology, Physics, Computer, ICT, Pakistan Studies or Fashion nine-answer work repeated. Preserve all existing original 2,581 authored research candidates, 166 rubric-only original long answer fields, 101 separate previous answer research drafts and 523 proposed marking criteria. The previous 101-ID ledger is retained unchanged; only new evidence is added. No official saved papers, student medical records, school source adoption registers, Paper Studio, SaaS Core/Connect owner code, live tenant database, migrations or production touched.
+
+## Genuinely NEW academic authoring: original Health Sciences IX
+The actual original `healthSciences9TechStarter2026.json` contains **40 provisional Grade IX Health Sciences-Tech questions** (16 MCQ, 16 short and **eight five-mark long questions**). All eight long original `content.en.answer` fields are grading rubric directives. Independently authored **8 distinct English explanatory answer RESEARCH CANDIDATES**, one for each original stable long-question ID across chapters 1–8, with **40 separately proposed five-mark evaluation points**. Topics: prevention/community health indicators/health professional roles, general digestive system and safe hygiene, respiratory gas exchange and general prevention, circulation and tissue supply, urinary function and internal balance, safe first-aid responsibility without treatment procedures, inclusive age-appropriate physical activity without extreme performance or appearance ideals, and varied adequate nutrition without restrictive dieting or weight targets.
+
+Authentic original file SHA256: `03990ab80d396a47b45e4e0064712a5f1de4c15ab245a1f8225733e2750ea0dc`. Registry `pectaa-catalog-044`, claimed PDF SHA256 `548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b`; original catalog explicitly **medium `UNSPECIFIED_BY_CATALOG_LABEL` and edition `CURRENT_CATALOG_LABEL_NO_SESSION`**, `academicApproval:false`. Source catalog PDF digest is NOT independently verified school-approved title/edition/medium, real exam year or physical textbook exercise page.
+
+NEW `ops/qbank/author-health9-eight-long-answer-candidates.cjs` validates exact original source bytes SHA and parsed object identity, 40/8 count and original question stable IDs, chapter/topic/five marks, original individual question and answer SHA, original rubric-only status and unapproved catalog record/medium/session/PDF identity. Emits `docs/question-bank/ASSPS_HEALTH9_EIGHT_LONG_MODEL_ANSWER_DRAFTS_20261009.{json,md}`. Every proposed answer has five distinct points and retains `schoolAdoptedEditionSessionVerified:false`, `originalPrintedExercisePageVerified:false`, `qualifiedIndependentSubjectReviewed:false`, `urduEquivalenceReviewed:false`, `independentReviewerId:null`, `approvedRevisionId:null`, `academicallyApproved:false`, `verifiedPublished:false`. No source field/answer key/question revision or actual school record was modified.
+
+## NEW completeness & integrity reconciliation
+Previous authoritative 101-ID research-only snapshot is preserved. Updated `ops/qbank/reconcile-grade910-authored-answer-coverage.cjs` validates now **10** separate original-authoring subject files/packets. Every distinct original question ID, original source file SHA, source-question SHA and source-answer SHA, real chapter/topic/marks, exactly one criterion per awarded mark, and no duplicate/unauthorized reviewer/falsely approved content are checked. The new metadata-only `ASSPS_GRADE910_109_DISTINCT_UNAPPROVED_ANSWER_PROPOSALS_20261009.{json,md}` proves:
+
+- **2,581** original Grade IX/X question research candidates and original source files unchanged; **564** existing original long questions.
+- **166** rubric-only original long-answer fields unchanged; **109 distinct** existing original IDs now have **separate new explanatory answer RESEARCH drafts**, including eight NEW Health Sciences IX.
+- **563** separately proposed marking criteria (prior 523 plus eight times five).
+- **57** original rubric-only question IDs still have NO separate explanatory research draft, listed by stable ID only in companion JSON.
+- Human verified book/printed exercise page **0**, qualified independently reviewed answers **0**, academic approvals **0**, academically verified published **0**. Authored drafts are not approved questions or production imports.
+
+## Actual test evidence and limitations
+- New Health IX source-exact 40/8, SHA, non-procedural first-aid, inclusive balanced nutrition/movement, no forged textbook adoption or academic approval: **9/9 PASS**, zero failure/skip/cancel; `/tmp/assps-health9-eight-targeted-20261009.tap`.
+- Updated ten-batch uniqueness/original fingerprints/7-mark Fashion + 5-mark Health/fake approval and duplicates: **10/10 PASS**; `/tmp/assps-health9-crossbatch-targeted-20261009.tap`.
+- Combined all subject authoring packets and existing real independent reviewer/publisher/source safety tests **164/164 PASS**, independent process exit **0**, zero failure/skip/cancel; `/tmp/assps-grade910-health9-final-combined-20261009.tap` plus `.exit`.
+- Full inherited original Academic Grade IX–X focused regression and full 510-case staging authoring/contract tests have been freshly launched on these source files. Their final `.exit` codes must be checked and appended below before commit.
+- Automated isolated tests are NOT independent academic correctness signoff, original PECTAA physical PDF/page validation, actual ASSPS textbook adoption/exam year, Urdu equivalence certification or live restricted-role PostgreSQL RLS/production release acceptance.
+
+## Remaining real blockers
+Qualified school authority must confirm whether Health Sciences-Tech is actually taught/assessed in ASSPS Grade IX, the approved school textbook edition/medium/session/exam year and original printed exercise/physical PDF page. A separate qualified Health Sciences faculty reviewer must independently verify every medical/scientific explanation, marks and appropriateness before creating and signing corrected immutable question revisions. Core owns tenant/RLS security and production certification; Paper Studio owns verified question selection and only approved versioned content may become verified selectable. **No production seeding, official paper changes or deployment.**
+
+## FINAL source-code tests and process exit evidence
+
+- Health Sciences IX real-source SHA and 8 distinct conceptual answer tests **9/9 PASS**, zero failed/skipped/cancelled; `/tmp/assps-health9-eight-targeted-20261009.tap`.
+- Ten-source packet duplicate/fingerprint/criteria=marks/false approval tests **10/10 PASS**; `/tmp/assps-health9-crossbatch-targeted-20261009.tap`.
+- Combined all Academic subject-source, original answer proposals, approved/publisher restriction and source-ledger suites **164/164 PASS**, process **exit 0**; `/tmp/assps-grade910-health9-final-combined-20261009.tap` and matching `.exit`; no failures/skips/cancelled.
+- Entire inherited Grade IX–X Academic focused suite **184/184 PASS**, independent process **exit 0**, zero failed/skipped/cancelled, duration **4.954 s**; `/tmp/assps-grade910-health9-focused-20261009.tap` and matching `.exit`.
+- Complete original Grade IX–X staging source/authoring and contract suite **510/510 PASS**, independent process **exit 0**, zero failed/skipped/cancelled, duration **11.519 s**; `/tmp/assps-grade910-health9-staging-20261009.tap` and matching `.exit`.
+- JS syntax, original 40-question source file digest and staging Git whitespace checked separately at commit; exact clean local/GitHub remote SHA checked after push. These are code/data tests, NOT licensed medical consultation, original physical textbook source verification or real independent faculty review.

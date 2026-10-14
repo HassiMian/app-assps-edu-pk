@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "assps-textile9-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-067",
+  "sourcePdfSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+  "sourceByteLength": 37045794,
+  "pageCount": 100,
+  "identity": [
+    "Parcha Bafi (Textile and Clothing)",
+    "Grade 9",
+    "Urdu",
+    "CURRENT_CATALOG_LABEL_NO_SESSION"
+  ],
+  "resolvedMedium": "Urdu",
+  "chapterMapState": "OFFICIAL_BYTES_HASHED_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_BOUNDARIES_PENDING",
+  "chapterEvidence": {
+    "officialCatalogRecordId": "pectaa-catalog-067",
+    "sourceCacheRef": "20261006/elective9-textile.pdf",
+    "crossCheckUrls": [
+      "https://www.ilmkidunya.com/9th-class/books/textile_industry-punjab-board"
+    ]
+  },
+  "chapters": [
+    {
+      "number": 1,
+      "titleLocal": "پارچہ بافی اور لباس",
+      "titleEnglish": "Textiles and Clothing",
+      "focus": "textiles, clothing اور ان کے روزمرہ/معاشی کردار",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 2,
+      "titleLocal": "پارچہ بافی کے ریشے",
+      "titleEnglish": "Textile Fibres",
+      "focus": "natural/synthetic fibres کی عمومی خصوصیات اور انتخاب",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 3,
+      "titleLocal": "پاکستان میں پارچہ بافی کی صنعت",
+      "titleEnglish": "Textile Industry in Pakistan",
+      "focus": "پاکستانی textile sector کا معاشی/روزگار کردار",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 4,
+      "titleLocal": "ریشوں کی شناخت",
+      "titleEnglish": "Fibre Identification",
+      "focus": "fibres کی observable properties اور responsible identification",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 5,
+      "titleLocal": "پارچہ بافی کے طریقے",
+      "titleEnglish": "Textile Construction Methods",
+      "focus": "weaving/other fabric construction کے بنیادی تصورات",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 6,
+      "titleLocal": "Textile Design",
+      "titleEnglish": "Textile Design",
+      "focus": "pattern, colour, function اور design planning",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 7,
+      "titleLocal": "لباس کا انتخاب",
+      "titleEnglish": "Clothing Selection",
+      "focus": "comfort, purpose, climate, durability اور budget-aware selection",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "exactPageBoundariesPending": true,
+    "safetyBoundary": "NO_DANGEROUS_PROCEDURE_STEPS_NO_RESTRICTIVE_DIET_FRAMING"
+  }
+}

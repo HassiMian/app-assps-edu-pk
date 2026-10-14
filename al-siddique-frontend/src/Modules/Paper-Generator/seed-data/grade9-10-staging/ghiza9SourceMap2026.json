@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "assps-ghiza9-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-064",
+  "sourcePdfSha256": "277bd11cb59f8e424c519572f8db727349cabb131d60e1e8be57753f60562c6c",
+  "sourceByteLength": 24415067,
+  "pageCount": 124,
+  "identity": [
+    "Ghiza aur Ghizayat",
+    "Grade 9",
+    "Urdu",
+    "CURRENT_CATALOG_LABEL_NO_SESSION"
+  ],
+  "resolvedMedium": "Urdu",
+  "chapterMapState": "OFFICIAL_BYTES_HASHED_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_BOUNDARIES_PENDING",
+  "chapterEvidence": {
+    "officialCatalogRecordId": "pectaa-catalog-064",
+    "sourceCacheRef": "20261006/elective9-ghiza.pdf",
+    "crossCheckUrls": [
+      "https://freebooks.pk/school-books/class-9/ghiza-aur-ghizaiyat-food-and-nutrition-class-9-pdf-download-punjab-board-pctb/"
+    ]
+  },
+  "chapters": [
+    {
+      "number": 1,
+      "titleLocal": "غذا اور غذائیت کا تعارف",
+      "titleEnglish": "Introduction to Food and Nutrition",
+      "focus": "غذا، غذائیت، صحت اور روزمرہ خوراک کے بنیادی تصورات",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 2,
+      "titleLocal": "توانائی اور غذائی اجزا",
+      "titleEnglish": "Energy and Nutrients",
+      "focus": "جسم کو توانائی دینے اور نشوونما/صحت میں مدد دینے والے مختلف غذائی اجزا",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 3,
+      "titleLocal": "متوازن غذا",
+      "titleEnglish": "Balanced Diet",
+      "focus": "متنوع اور متوازن غذا، مناسب food groups اور صحت مند عادات",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 4,
+      "titleLocal": "غذاؤں کے اجزائے ترکیبی",
+      "titleEnglish": "Composition of Food Ingredients",
+      "focus": "غذائی اشیا کے بنیادی اجزا اور ان کے غذائی کردار",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    },
+    {
+      "number": 5,
+      "titleLocal": "اشیائے خوردنی کی خریداری اور ذخیرہ",
+      "titleEnglish": "Purchasing and Storing Food Items",
+      "focus": "محفوظ خریداری، label/quality checks اور مناسب storage",
+      "status": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_PENDING"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "exactPageBoundariesPending": true,
+    "safetyBoundary": "NO_DANGEROUS_PROCEDURE_STEPS_NO_RESTRICTIVE_DIET_FRAMING"
+  }
+}

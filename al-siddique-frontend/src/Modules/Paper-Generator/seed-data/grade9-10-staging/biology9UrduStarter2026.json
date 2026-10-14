@@ -1,0 +1,2440 @@
+{
+  "schemaVersion": "assps-biology9Urdu-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-010",
+  "sourcePdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+  "scope": "CURRENT_URDU_MEDIUM_CHAPTER_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "IX-BIO-UR-C01-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C01",
+        "number": 1
+      },
+      "topicId": "biology",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "علمِ حیاتیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Biology بنیادی طور پر کس چیز کا سائنسی مطالعہ ہے؟",
+          "answer": "زندگی اور جانداروں کا",
+          "options": [
+            {
+              "id": "A",
+              "text": "زندگی اور جانداروں کا"
+            },
+            {
+              "id": "B",
+              "text": "صرف پتھروں کا"
+            },
+            {
+              "id": "C",
+              "text": "صرف موسم کا"
+            },
+            {
+              "id": "D",
+              "text": "صرف ستاروں کا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-UR-C01-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C01",
+        "number": 1
+      },
+      "topicId": "scientific inquiry",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "علمِ حیاتیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Biology میں hypothesis اور experiment کا تعلق بیان کریں۔",
+          "answer": "Hypothesis ایک قابلِ آزمائش explanation ہوتی ہے؛ experiment/data کے ذریعے اسے test کیا جاتا ہے اور evidence کے مطابق قبول، رد یا revise کیا جاتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-UR-C01-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C01",
+        "number": 1
+      },
+      "topicId": "biology as science",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "علمِ حیاتیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Biology کو collaborative science کیوں کہا جا سکتا ہے؟",
+          "answer": "Biology میں مختلف شعبے، researchers، observations، data sharing اور دوسرے علوم جیسے chemistry/physics کے concepts مل کر biological مسائل سمجھنے میں مدد دیتے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-UR-C02-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C02",
+        "number": 2
+      },
+      "topicId": "biodiversity",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "حیاتیاتی تنوع"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Biodiversity سے کیا مراد ہے؟",
+          "answer": "جانداروں کی مختلف اقسام اور حیاتیاتی تنوع",
+          "options": [
+            {
+              "id": "A",
+              "text": "جانداروں کی مختلف اقسام اور حیاتیاتی تنوع"
+            },
+            {
+              "id": "B",
+              "text": "صرف ایک species"
+            },
+            {
+              "id": "C",
+              "text": "صرف پانی"
+            },
+            {
+              "id": "D",
+              "text": "صرف temperature"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-UR-C02-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C02",
+        "number": 2
+      },
+      "topicId": "classification",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "حیاتیاتی تنوع"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Classification جانداروں کے مطالعے میں کیوں مفید ہے؟",
+          "answer": "یہ similarities/differences کی بنیاد پر جانداروں کو منظم groups میں رکھتی ہے، جس سے شناخت، تقابل اور تعلقات سمجھنا آسان ہوتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-UR-C02-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C02",
+        "number": 2
+      },
+      "topicId": "conservation",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "حیاتیاتی تنوع"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Biodiversity کے تحفظ کی اہمیت بیان کریں۔",
+          "answer": "Biodiversity ecosystem stability، food webs، genetic resources اور انسانی ضروریات کے لیے اہم ہے؛ habitat protection اور responsible resource use تحفظ میں مدد دیتے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-UR-C03-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C03",
+        "number": 3
+      },
+      "topicId": "cell membrane",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "خلیہ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Cell membrane کا بنیادی کام کیا ہے؟",
+          "answer": "cell میں substances کی آمد و رفت کو regulate کرنا",
+          "options": [
+            {
+              "id": "A",
+              "text": "cell میں substances کی آمد و رفت کو regulate کرنا"
+            },
+            {
+              "id": "B",
+              "text": "صرف رنگ دینا"
+            },
+            {
+              "id": "C",
+              "text": "DNA کو ختم کرنا"
+            },
+            {
+              "id": "D",
+              "text": "صرف حرکت پیدا کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-UR-C03-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C03",
+        "number": 3
+      },
+      "topicId": "organelles",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "خلیہ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Mitochondria کا بنیادی کردار بیان کریں۔",
+          "answer": "Mitochondria cellular respiration کے ذریعے قابلِ استعمال energy/ATP کی پیداوار میں اہم کردار ادا کرتے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-UR-C03-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C03",
+        "number": 3
+      },
+      "topicId": "plant animal cells",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "خلیہ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Plant cell اور animal cell کی اہم مماثلتیں اور اختلافات بیان کریں۔",
+          "answer": "دونوں میں membrane، cytoplasm، nucleus وغیرہ ہوتے ہیں؛ plant cells میں عموماً cell wall، chloroplasts اور بڑی central vacuole نمایاں ہوتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-UR-C04-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C04",
+        "number": 4
+      },
+      "topicId": "mitosis",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سیل سائیکل"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Mitosis کا اہم نتیجہ کیا ہے؟",
+          "answer": "genetically similar daughter cells",
+          "options": [
+            {
+              "id": "A",
+              "text": "genetically similar daughter cells"
+            },
+            {
+              "id": "B",
+              "text": "ہمیشہ چار مختلف cells"
+            },
+            {
+              "id": "C",
+              "text": "DNA کا مکمل خاتمہ"
+            },
+            {
+              "id": "D",
+              "text": "صرف gametes"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-UR-C04-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C04",
+        "number": 4
+      },
+      "topicId": "cell cycle",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سیل سائیکل"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Cell cycle سے کیا مراد ہے؟",
+          "answer": "Cell کی growth، DNA replication اور division پر مشتمل منظم sequence کو cell cycle کہتے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-UR-C04-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C04",
+        "number": 4
+      },
+      "topicId": "mitosis significance",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سیل سائیکل"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Mitosis کی growth اور tissue repair میں اہمیت بیان کریں۔",
+          "answer": "Mitosis cell number بڑھاتا ہے، growth اور damaged/worn-out cells کی replacement میں مدد دیتا ہے اور chromosome number کو برقرار رکھتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-UR-C05-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C05",
+        "number": 5
+      },
+      "topicId": "tissue",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ٹشوز، اعضا اور نظامِ اعضا"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "ایک جیسے کام کرنے والے مشابہ cells کا group کیا کہلاتا ہے؟",
+          "answer": "tissue",
+          "options": [
+            {
+              "id": "A",
+              "text": "tissue"
+            },
+            {
+              "id": "B",
+              "text": "organism"
+            },
+            {
+              "id": "C",
+              "text": "molecule"
+            },
+            {
+              "id": "D",
+              "text": "gene"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-UR-C05-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C05",
+        "number": 5
+      },
+      "topicId": "levels of organization",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ٹشوز، اعضا اور نظامِ اعضا"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Tissue، organ اور organ system میں تعلق بیان کریں۔",
+          "answer": "مشابہ cells مل کر tissue، مختلف tissues مل کر organ، اور کئی organs مل کر مخصوص کام کے لیے organ system بناتے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-UR-C05-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C05",
+        "number": 5
+      },
+      "topicId": "organization",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ٹشوز، اعضا اور نظامِ اعضا"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Biological organization کی levels کو cell سے organ system تک مثال کے بغیر اصولی ترتیب میں بیان کریں۔",
+          "answer": "Cell → tissue → organ → organ system؛ ہر بلند level پچھلے levels کے منظم interaction سے بنتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-UR-C06-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C06",
+        "number": 6
+      },
+      "topicId": "proteins",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "بایومالی کیولز"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Proteins کی بنیادی building units کیا ہیں؟",
+          "answer": "amino acids",
+          "options": [
+            {
+              "id": "A",
+              "text": "amino acids"
+            },
+            {
+              "id": "B",
+              "text": "fatty acids only"
+            },
+            {
+              "id": "C",
+              "text": "nucleotides only"
+            },
+            {
+              "id": "D",
+              "text": "minerals only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-UR-C06-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C06",
+        "number": 6
+      },
+      "topicId": "carbohydrates",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "بایومالی کیولز"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Carbohydrates کا ایک بنیادی حیاتیاتی کردار بیان کریں۔",
+          "answer": "Carbohydrates اہم energy source ہو سکتے ہیں اور بعض صورتوں میں structural role بھی رکھتے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-UR-C06-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C06",
+        "number": 6
+      },
+      "topicId": "biomolecules",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "بایومالی کیولز"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Carbohydrates، proteins، lipids اور nucleic acids کے بنیادی کرداروں کا تقابل کریں۔",
+          "answer": "Carbohydrates energy/structure، proteins structure/enzymes/functions، lipids energy storage/membranes، nucleic acids genetic information اور protein synthesis سے متعلق ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-UR-C07-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C07",
+        "number": 7
+      },
+      "topicId": "enzymes",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "انزائمز"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Enzymes عموماً کیا ہوتے ہیں؟",
+          "answer": "biological catalysts",
+          "options": [
+            {
+              "id": "A",
+              "text": "biological catalysts"
+            },
+            {
+              "id": "B",
+              "text": "simple minerals"
+            },
+            {
+              "id": "C",
+              "text": "DNA کی تمام اقسام"
+            },
+            {
+              "id": "D",
+              "text": "صرف lipids"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-UR-C07-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C07",
+        "number": 7
+      },
+      "topicId": "active site",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "انزائمز"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Enzyme کے active site کا کردار کیا ہے؟",
+          "answer": "Active site substrate کے ساتھ مخصوص binding اور reaction کی catalysis کے لیے مناسب جگہ فراہم کرتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-UR-C07-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C07",
+        "number": 7
+      },
+      "topicId": "enzyme factors",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "انزائمز"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Temperature اور pH enzyme activity کو کس طرح متاثر کر سکتے ہیں؟",
+          "answer": "ہر enzyme کی مناسب temperature/pH range ہوتی ہے؛ بہت زیادہ تبدیلی enzyme structure یا active site کو متاثر کر کے activity کم کر سکتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-UR-C08-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C08",
+        "number": 8
+      },
+      "topicId": "ATP",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "بایوانرجیٹکس"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Cell میں فوری قابلِ استعمال energy transfer سے سب سے زیادہ متعلق molecule کون سا ہے؟",
+          "answer": "ATP",
+          "options": [
+            {
+              "id": "A",
+              "text": "ATP"
+            },
+            {
+              "id": "B",
+              "text": "cellulose"
+            },
+            {
+              "id": "C",
+              "text": "DNA only"
+            },
+            {
+              "id": "D",
+              "text": "water only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-UR-C08-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C08",
+        "number": 8
+      },
+      "topicId": "photosynthesis respiration",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "بایوانرجیٹکس"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Photosynthesis اور cellular respiration کے energy roles میں فرق بیان کریں۔",
+          "answer": "Photosynthesis light energy کو chemical energy میں محفوظ کرنے والے organic molecules بناتی ہے؛ respiration ان molecules سے energy release کر کے ATP بنانے میں مدد دیتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-UR-C08-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C08",
+        "number": 8
+      },
+      "topicId": "bioenergetics",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "بایوانرجیٹکس"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "جانداروں میں energy transformation کی اہمیت بیان کریں۔",
+          "answer": "Cells کو growth، transport، synthesis اور دوسری activities کے لیے usable energy چاہیے؛ photosynthesis/respiration جیسے processes energy کو قابلِ استعمال forms میں تبدیل کرتے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-UR-C09-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C09",
+        "number": 9
+      },
+      "topicId": "xylem",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "نباتاتی فعلیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "پودوں میں پانی کی اوپر transport سے بنیادی طور پر کون سا tissue متعلق ہے؟",
+          "answer": "xylem",
+          "options": [
+            {
+              "id": "A",
+              "text": "xylem"
+            },
+            {
+              "id": "B",
+              "text": "phloem only"
+            },
+            {
+              "id": "C",
+              "text": "epidermis only"
+            },
+            {
+              "id": "D",
+              "text": "meristem only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-UR-C09-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C09",
+        "number": 9
+      },
+      "topicId": "stomata",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "نباتاتی فعلیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Stomata کا ایک اہم کردار بیان کریں۔",
+          "answer": "Stomata gas exchange کو regulate کرتے ہیں اور transpiration کے ذریعے water loss کو بھی متاثر کرتے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-UR-C09-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C09",
+        "number": 9
+      },
+      "topicId": "plant transport",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "نباتاتی فعلیات"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "پودوں میں water transport اور transpiration کے باہمی تعلق کی وضاحت کریں۔",
+          "answer": "Roots water absorb کرتے ہیں، xylem اسے اوپر لے جاتا ہے، اور leaves سے transpiration water potential gradient/transport stream کو برقرار رکھنے میں مدد دیتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-UR-C10-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C10",
+        "number": 10
+      },
+      "topicId": "pollination",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پودوں میں تولید"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Pollination سے کیا مراد ہے؟",
+          "answer": "pollen کا مناسب reproductive surface تک transfer",
+          "options": [
+            {
+              "id": "A",
+              "text": "pollen کا مناسب reproductive surface تک transfer"
+            },
+            {
+              "id": "B",
+              "text": "seed کا germination"
+            },
+            {
+              "id": "C",
+              "text": "root کا growth"
+            },
+            {
+              "id": "D",
+              "text": "leaf کا fall"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-UR-C10-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C10",
+        "number": 10
+      },
+      "topicId": "sexual reproduction",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پودوں میں تولید"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "پودوں میں sexual reproduction کا بنیادی فائدہ کیا ہو سکتا ہے؟",
+          "answer": "Genetic variation پیدا ہو سکتی ہے، جو populations کو بدلتے ماحول میں adaptation کے مواقع دیتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-UR-C10-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C10",
+        "number": 10
+      },
+      "topicId": "plant reproduction",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پودوں میں تولید"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Pollination، fertilization اور seed formation کے باہمی sequence کو اصولی طور پر بیان کریں۔",
+          "answer": "Pollen transfer کے بعد male gamete reproductive pathway سے ovule تک پہنچتا ہے، fertilization سے zygote بنتا ہے اور بعد کے development سے seed تشکیل پاتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-UR-C11-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C11",
+        "number": 11
+      },
+      "topicId": "mean",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "بایواسٹیٹسٹکس"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "4، 6 اور 8 کا arithmetic mean کیا ہے؟",
+          "answer": "6",
+          "options": [
+            {
+              "id": "A",
+              "text": "6"
+            },
+            {
+              "id": "B",
+              "text": "5"
+            },
+            {
+              "id": "C",
+              "text": "7"
+            },
+            {
+              "id": "D",
+              "text": "18"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-UR-C11-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C11",
+        "number": 11
+      },
+      "topicId": "range",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "بایواسٹیٹسٹکس"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Biological data میں range کیسے معلوم کیا جاتا ہے؟",
+          "answer": "Maximum value سے minimum value منفی کی جاتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-UR-C11-N01",
+      "chapter": {
+        "id": "IX-BIOLOGY-UR-C11",
+        "number": 11
+      },
+      "topicId": "mean",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-010",
+        "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_TOC_SEQUENCE_VERIFIED_PAGE_BOUNDARIES_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "بایواسٹیٹسٹکس"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2026-09-03",
+        "textbookId": "PECTAA-IX-BIOLOGY-UR-CURRENT",
+        "syllabusVersion": "ix-2026-09-03"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Urdu-medium Grade IX starter aligned to current official Urdu textbook chapter sequence. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل سوال؛ موجودہ اردو میڈیم باب کے تصور سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Data 5، 7، 9، 11 کا mean معلوم کریں۔",
+          "answer": "(5+7+9+11)/4=32/4=8۔"
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 33,
+    "mcq": 11,
+    "short": 11,
+    "numerical": 1,
+    "long": 10,
+    "chapters": 11
+  }
+}

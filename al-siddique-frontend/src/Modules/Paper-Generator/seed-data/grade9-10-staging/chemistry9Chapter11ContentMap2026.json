@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "assps-chemistry9-ch11-content-map-v1",
+  "checkedOn": "2026-10-07",
+  "sourceRecordId": "pectaa-catalog-007",
+  "sourcePdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+  "chapter": {
+    "number": 11,
+    "title": "Hydrocarbons",
+    "printedPages": [
+      145,
+      156
+    ],
+    "pdfPages": [
+      149,
+      160
+    ],
+    "textLayer": "IMAGE_ONLY_BUT_RENDERED"
+  },
+  "topics": [
+    {
+      "topicId": "11.1",
+      "title": "Hydrocarbons",
+      "pdfStartPage": 150,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    },
+    {
+      "topicId": "11.2",
+      "title": "Alkanes",
+      "pdfStartPage": 151,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    },
+    {
+      "topicId": "11.3",
+      "title": "Preparation of Alkanes",
+      "pdfStartPage": 154,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    },
+    {
+      "topicId": "11.4",
+      "title": "Important Reactions",
+      "pdfStartPage": 155,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    }
+  ],
+  "verifiedConceptFamilies": [
+    "classification of hydrocarbons",
+    "alkanes as saturated hydrocarbons",
+    "general formula and homologous series of alkanes",
+    "IUPAC naming of simple alkanes",
+    "structural and electron representations of alkanes",
+    "preparation of alkanes by hydrogenation/reduction",
+    "substitution reactions of alkanes",
+    "combustion of alkanes"
+  ],
+  "exerciseFamilies": {
+    "pdfPages": [
+      158,
+      159,
+      160
+    ],
+    "families": [
+      "Multiple Choice Questions",
+      "Questions for Short Answers",
+      "Constructed Response Questions",
+      "Descriptive Questions",
+      "Investigative Questions"
+    ],
+    "itemLevelExerciseMap": "PENDING"
+  },
+  "authoring": {
+    "originalAdditionalConceptualAllowed": true,
+    "exerciseOriginAllowed": false,
+    "copyTextbookPassages": false,
+    "copyPastPaperStems": false,
+    "publicationAllowed": false,
+    "urduCounterpartStatus": "BLOCKED_PENDING_CURRENT_URDU_SOURCE_VERIFICATION",
+    "chapterCompletionEligible": false,
+    "ocrMayLocateHeadingsButNotApproveQuestionContent": true
+  }
+}

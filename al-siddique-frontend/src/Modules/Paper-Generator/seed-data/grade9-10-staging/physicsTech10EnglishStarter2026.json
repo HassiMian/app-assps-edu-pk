@@ -1,0 +1,2220 @@
+{
+  "schemaVersion": "assps-physicsTech10English-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-057",
+  "sourcePdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+  "scope": "CURRENT_GRADE_X_TECH_TEXT_LAYER_CHAPTER_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "X-PHY-TECH-C10-M01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C10",
+        "number": 10
+      },
+      "topicId": "specific heat",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Thermal Physics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Specific heat capacity is energy needed to raise the temperature of?",
+          "answer": "1 kg of a substance by 1 K",
+          "options": [
+            {
+              "id": "A",
+              "text": "1 kg of a substance by 1 K"
+            },
+            {
+              "id": "B",
+              "text": "Any mass by 100 K"
+            },
+            {
+              "id": "C",
+              "text": "1 m of wire"
+            },
+            {
+              "id": "D",
+              "text": "1 C of charge"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-TECH-C10-S01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C10",
+        "number": 10
+      },
+      "topicId": "specific heat",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Thermal Physics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Differentiate heat and temperature.",
+          "answer": "Heat is energy transferred because of a temperature difference; temperature indicates thermal state and relates to average particle kinetic energy."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-TECH-C10-X01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C10",
+        "number": 10
+      },
+      "topicId": "specific heat",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Thermal Physics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "A 2 kg material with c=500 J kg⁻¹ K⁻¹ warms by 4 K. Calculate energy supplied.",
+          "answer": "Q=mcΔT=2×500×4=4000 J."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-TECH-C11-M01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C11",
+        "number": 11
+      },
+      "topicId": "heat transfer",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 16,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Transfer of Thermal Energy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Heat transfer through a solid metal is mainly?",
+          "answer": "Conduction",
+          "options": [
+            {
+              "id": "A",
+              "text": "Conduction"
+            },
+            {
+              "id": "B",
+              "text": "Convection only"
+            },
+            {
+              "id": "C",
+              "text": "Evaporation only"
+            },
+            {
+              "id": "D",
+              "text": "Nuclear decay"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-TECH-C11-S01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C11",
+        "number": 11
+      },
+      "topicId": "heat transfer",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 16,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Transfer of Thermal Energy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Why does trapped air help insulation?",
+          "answer": "Air is a poor conductor and, when trapped, cannot circulate enough for strong convection."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-TECH-C11-X01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C11",
+        "number": 11
+      },
+      "topicId": "heat transfer",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 16,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Transfer of Thermal Energy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Compare conduction, convection and radiation.",
+          "answer": "Conduction transfers energy through particle/electron interactions, convection by bulk fluid motion, and radiation by electromagnetic waves that can cross a vacuum."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-TECH-C12-M01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C12",
+        "number": 12
+      },
+      "topicId": "waves",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 28,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Waves"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Wave speed equals?",
+          "answer": "frequency × wavelength",
+          "options": [
+            {
+              "id": "A",
+              "text": "frequency × wavelength"
+            },
+            {
+              "id": "B",
+              "text": "frequency/wavelength"
+            },
+            {
+              "id": "C",
+              "text": "amplitude × time"
+            },
+            {
+              "id": "D",
+              "text": "period × mass"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-TECH-C12-S01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C12",
+        "number": 12
+      },
+      "topicId": "waves",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 28,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Waves"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "State the relation between frequency and period.",
+          "answer": "f=1/T."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-TECH-C12-X01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C12",
+        "number": 12
+      },
+      "topicId": "waves",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 28,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Waves"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "A wave has frequency 25 Hz and wavelength 4 m. Find its speed.",
+          "answer": "v=fλ=25×4=100 m/s."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-TECH-C13-M01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C13",
+        "number": 13
+      },
+      "topicId": "sound",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 38,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Sound"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Pitch mainly depends on sound wave?",
+          "answer": "Frequency",
+          "options": [
+            {
+              "id": "A",
+              "text": "Frequency"
+            },
+            {
+              "id": "B",
+              "text": "Amplitude only"
+            },
+            {
+              "id": "C",
+              "text": "Distance only"
+            },
+            {
+              "id": "D",
+              "text": "Mass"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-TECH-C13-S01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C13",
+        "number": 13
+      },
+      "topicId": "sound",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 38,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Sound"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Why cannot sound travel through a vacuum?",
+          "answer": "Mechanical sound waves require particles in a medium to transmit vibrations."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-TECH-C13-X01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C13",
+        "number": 13
+      },
+      "topicId": "sound",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 38,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Sound"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "An echo returns after 0.50 s at 340 m/s. Find distance to the reflector.",
+          "answer": "Round trip=340×0.50=170 m; one-way distance=85 m."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-TECH-C14-M01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C14",
+        "number": 14
+      },
+      "topicId": "light",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 51,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Light"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "The angle of reflection equals?",
+          "answer": "Angle of incidence",
+          "options": [
+            {
+              "id": "A",
+              "text": "Angle of incidence"
+            },
+            {
+              "id": "B",
+              "text": "Twice the incidence angle"
+            },
+            {
+              "id": "C",
+              "text": "Zero always"
+            },
+            {
+              "id": "D",
+              "text": "90° always"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-TECH-C14-S01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C14",
+        "number": 14
+      },
+      "topicId": "light",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 51,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Light"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "What causes refraction when light enters another medium?",
+          "answer": "Its speed changes at the boundary, changing direction unless it enters along the normal."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-TECH-C14-X01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C14",
+        "number": 14
+      },
+      "topicId": "light",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 51,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Light"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Light travels at 2.0×10⁸ m/s in a medium. Find refractive index using c=3.0×10⁸ m/s.",
+          "answer": "n=c/v=1.5."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-TECH-C15-M01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C15",
+        "number": 15
+      },
+      "topicId": "electrostatics",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 65,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electrostatics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Like electric charges?",
+          "answer": "Repel",
+          "options": [
+            {
+              "id": "A",
+              "text": "Repel"
+            },
+            {
+              "id": "B",
+              "text": "Attract"
+            },
+            {
+              "id": "C",
+              "text": "Always disappear"
+            },
+            {
+              "id": "D",
+              "text": "Have no force"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-TECH-C15-S01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C15",
+        "number": 15
+      },
+      "topicId": "electrostatics",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 65,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electrostatics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Define electric field direction.",
+          "answer": "It is the direction of force that a positive test charge would experience."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-TECH-C15-X01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C15",
+        "number": 15
+      },
+      "topicId": "electrostatics",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 65,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electrostatics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Explain charging by induction conceptually.",
+          "answer": "A nearby charged object separates charges in a conductor; with suitable grounding and sequence, a net charge can remain without direct contact with the inducing object."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-TECH-C16-M01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C16",
+        "number": 16
+      },
+      "topicId": "electricity",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 77,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electricity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Ohm’s law is?",
+          "answer": "V=IR",
+          "options": [
+            {
+              "id": "A",
+              "text": "V=IR"
+            },
+            {
+              "id": "B",
+              "text": "F=ma"
+            },
+            {
+              "id": "C",
+              "text": "P=W/t only"
+            },
+            {
+              "id": "D",
+              "text": "Q=mcΔT"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-TECH-C16-S01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C16",
+        "number": 16
+      },
+      "topicId": "electricity",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 77,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electricity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Why are household devices usually connected in parallel?",
+          "answer": "Each receives the supply potential difference and can operate independently."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-TECH-C16-X01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C16",
+        "number": 16
+      },
+      "topicId": "electricity",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 77,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electricity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "A 12 V supply drives 2 A through a resistor. Find resistance.",
+          "answer": "R=V/I=12/2=6 Ω."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-TECH-C17-M01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C17",
+        "number": 17
+      },
+      "topicId": "electromagnetism",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 95,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electromagnetism"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "A current-carrying conductor produces?",
+          "answer": "A magnetic field",
+          "options": [
+            {
+              "id": "A",
+              "text": "A magnetic field"
+            },
+            {
+              "id": "B",
+              "text": "Only heat with no field"
+            },
+            {
+              "id": "C",
+              "text": "Gravity only"
+            },
+            {
+              "id": "D",
+              "text": "No effect"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-TECH-C17-S01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C17",
+        "number": 17
+      },
+      "topicId": "electromagnetism",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 95,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electromagnetism"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "How can an electromagnet be strengthened safely?",
+          "answer": "Increase coil turns, use a suitable soft-iron core, and use current only within designed safe limits."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-TECH-C17-X01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C17",
+        "number": 17
+      },
+      "topicId": "electromagnetism",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 95,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electromagnetism"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Explain the motor effect.",
+          "answer": "A current-carrying conductor in a magnetic field can experience a force whose direction depends on current and field directions."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-TECH-C18-M01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C18",
+        "number": 18
+      },
+      "topicId": "electromagnetic induction",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 104,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electromagnetic Induction"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "An induced emf is produced when magnetic flux linkage?",
+          "answer": "Changes",
+          "options": [
+            {
+              "id": "A",
+              "text": "Changes"
+            },
+            {
+              "id": "B",
+              "text": "Is permanently constant"
+            },
+            {
+              "id": "C",
+              "text": "Is absent in all cases"
+            },
+            {
+              "id": "D",
+              "text": "Has no time dependence"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-TECH-C18-S01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C18",
+        "number": 18
+      },
+      "topicId": "electromagnetic induction",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 104,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electromagnetic Induction"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "State Lenz’s law qualitatively.",
+          "answer": "The induced effect acts in a direction that opposes the change that produced it."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-TECH-C18-X01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C18",
+        "number": 18
+      },
+      "topicId": "electromagnetic induction",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 104,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Electromagnetic Induction"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Explain the principle of a transformer at a high level.",
+          "answer": "Alternating current creates changing magnetic flux in the core, inducing voltage in a secondary coil; turns ratio determines ideal voltage ratio."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-TECH-C19-M01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C19",
+        "number": 19
+      },
+      "topicId": "nuclear physics",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 114,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Nuclear Physics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Radioactive decay is?",
+          "answer": "A spontaneous nuclear change",
+          "options": [
+            {
+              "id": "A",
+              "text": "A spontaneous nuclear change"
+            },
+            {
+              "id": "B",
+              "text": "Ordinary melting"
+            },
+            {
+              "id": "C",
+              "text": "Mechanical vibration"
+            },
+            {
+              "id": "D",
+              "text": "Chemical neutralization"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PHY-TECH-C19-S01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C19",
+        "number": 19
+      },
+      "topicId": "nuclear physics",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 114,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Nuclear Physics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Define half-life.",
+          "answer": "The time for the number of undecayed nuclei or activity to fall to half its initial value."
+        }
+      }
+    },
+    {
+      "id": "X-PHY-TECH-C19-X01",
+      "chapter": {
+        "id": "X-PHYSICS-TECH-C19",
+        "number": 19
+      },
+      "topicId": "nuclear physics",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-057",
+        "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+        "page": 114,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Nuclear Physics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "physics-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-X-PHYSICS-TECH-CURRENT",
+        "syllabusVersion": "x-CURRENT_CATALOG"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "A sample has 800 undecayed nuclei. How many remain after three half-lives?",
+          "answer": "800→400→200→100, so 100 remain."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 30,
+    "mcq": 10,
+    "short": 10,
+    "numerical": 6,
+    "long": 4,
+    "chapters": 10
+  }
+}

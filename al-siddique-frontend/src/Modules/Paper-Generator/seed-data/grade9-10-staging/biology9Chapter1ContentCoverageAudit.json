@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "assps-bio9-c1-content-coverage-audit-v1",
+  "createdOn": "2026-10-03",
+  "status": "SOURCE_UNIT_AUDIT_COMPLETE_AUTHORING_GAPS_OPEN",
+  "currentDraftCount": 48,
+  "policy": "A topic is not complete merely because it has MCQ/short/long drafts. Every distinct prescribed source unit must be covered or explicitly blocked with a reason.",
+  "source": {"enCatalogRecordId":"pectaa-catalog-009","enPdfSha256":"f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5","urCatalogRecordId":"pectaa-catalog-010","urPdfSha256":"7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd"},
+  "topics": [
+    {"topicId":"1.1","englishPages":[6,7,8],"covered":["botany","microbiology","histology","cytology","genetics","ecology","immunology","pharmacology"],"gaps":[
+      {"concept":"biology-definition-and-scope","enPages":[6],"status":"MISSING_DRAFT"},
+      {"concept":"zoology","enPages":[6],"status":"MISSING_DRAFT"},
+      {"concept":"morphology","enPages":[6],"status":"MISSING_DRAFT"},
+      {"concept":"anatomy","enPages":[6],"status":"MISSING_DRAFT"},
+      {"concept":"physiology","enPages":[7],"status":"MISSING_DRAFT"},
+      {"concept":"molecular-biology","enPages":[7],"status":"MISSING_DRAFT"},
+      {"concept":"embryology","enPages":[7],"status":"MISSING_DRAFT"},
+      {"concept":"palaeontology","enPages":[7],"status":"MISSING_DRAFT"},
+      {"concept":"taxonomy","enPages":[7],"status":"MISSING_DRAFT"},
+      {"concept":"marine-biology","enPages":[8],"status":"MISSING_DRAFT"},
+      {"concept":"pathology","enPages":[8],"status":"MISSING_DRAFT"}]},
+    {"topicId":"1.2","englishPages":[8,9,10],"covered":["biochemistry","biophysics","computational-biology","biogeography","biostatistics","bio-economics"],"gaps":[
+      {"concept":"biotechnology","enPages":[9],"status":"MISSING_DRAFT"}]},
+    {"topicId":"1.3","englishPages":[10,11,12],"covered":["dentistry","physiotherapy","agriculture","animal-husbandry","horticulture","forestry","forensics","public-health","biomedical-engineering"],"gaps":[
+      {"concept":"medicine-and-surgery","enPages":[10],"status":"MISSING_DRAFT"},
+      {"concept":"pharmacology-career","enPages":[10,11],"status":"MISSING_DRAFT"},
+      {"concept":"fisheries-and-wildlife","enPages":[11],"status":"MISSING_DRAFT"},
+      {"concept":"farming","enPages":[11],"status":"MISSING_DRAFT"},
+      {"concept":"biotechnology-career","enPages":[12],"status":"MISSING_DRAFT"},
+      {"concept":"veterinary-medicine","enPages":[10],"status":"MISSING_DRAFT"},
+      {"concept":"environmental-science-career","enPages":[10],"status":"MISSING_DRAFT"},
+      {"concept":"microbiology-career","enPages":[10],"status":"MISSING_DRAFT"},
+      {"concept":"genetic-counselling","enPages":[10],"status":"MISSING_DRAFT"},
+      {"concept":"nutrition-and-dietetics","enPages":[10],"status":"MISSING_DRAFT"},
+      {"concept":"bioinformatics","enPages":[10],"status":"MISSING_DRAFT"}]},
+    {"topicId":"1.4","englishPages":[12,13],"covered":["water-and-life","animal-origin-and-movement","surah-an-nur-reference"],"gaps":[
+      {"concept":"human-development-reflection","enPages":[12,13],"status":"MISSING_DRAFT_REQUIRES_RELIGIOUS_EDITORIAL_REVIEW"},
+      {"concept":"clay-reference-and-human-origin-discussion","enPages":[12],"status":"MISSING_DRAFT_REQUIRES_RELIGIOUS_EDITORIAL_REVIEW"}]},
+    {"topicId":"1.5","englishPages":[13,14],"covered":["human-genome-project","climate-change-research","robotics-and-ai","collaboration-principle"],"gaps":[
+      {"concept":"medical-research-collaboration","enPages":[14],"status":"MISSING_DRAFT"},
+      {"concept":"space-exploration-collaboration","enPages":[14],"status":"MISSING_DRAFT"}]},
+    {"topicId":"1.6","englishPages":[14,15,16],"covered":["qualitative-observation","quantitative-observation","hypothesis","deduction","experiment-general","results-and-reporting"],"gaps":[
+      {"concept":"recognition-and-definition-of-scientific-problem","enPages":[14,15],"status":"MISSING_DRAFT"},
+      {"concept":"experimental-group-and-control-group","enPages":[16],"status":"MISSING_DRAFT"}]},
+    {"topicId":"1.7","englishPages":[16,17],"covered":["theory-evidence","continued-testing","examples-of-biological-laws"],"gaps":[],"blockedClaims":[
+      {"concept":"theory-becomes-law-progression","sourceIssueId":"BIO9-C1-THEORY-LAW-001","status":"DO_NOT_AUTHOR_AS_SCIENTIFIC_FACT_PENDING_RESOLUTION"}]},
+    {"topicId":"1.8","englishPages":[17,18,19,20],"covered":["plasmodium-cause-hypothesis","blood-comparison","mosquito-transmission-hypothesis","mosquito-transmission-deduction"],"gaps":[
+      {"concept":"initial-malaria-observations-marsh-water-quinine","enPages":[17,18],"status":"MISSING_DRAFT","riskFlags":["BIO9-C1-MALARIA-CHRONOLOGY-002"]},
+      {"concept":"outdoor-net-and-smoke-observations","enPages":[19],"status":"MISSING_DRAFT"},
+      {"concept":"ross-evidence-chain-with-nonhuman-model","enPages":[19,20],"status":"MISSING_DRAFT","riskFlags":["BIO9-C1-MALARIA-CHRONOLOGY-002","KEEP_HISTORICAL_AND_NON_PROCEDURAL"]},
+      {"concept":"historical-confirmation-conclusion","enPages":[20],"status":"MISSING_DRAFT","riskFlags":["KEEP_HISTORICAL_AND_NON_PROCEDURAL"]}]}
+  ],
+  "summary": {
+    "topicCount": 8,
+    "openGapCount": 33,
+    "blockedClaimCount": 1,
+    "formalChapterCompleteness": false,
+    "formalBilingualEditionEquivalence": false,
+    "newQuestionPublicationAllowed": false,
+    "nextGate": "Verify exact Urdu source pages/anchors for every open unit, then author original bilingual drafts and independently review them."
+  }
+}

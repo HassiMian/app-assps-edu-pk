@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "assps-chemistry9-ch6-content-map-v1",
+  "checkedOn": "2026-10-06",
+  "sourceRecordId": "pectaa-catalog-007",
+  "sourcePdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+  "chapter": {
+    "number": 6,
+    "title": "Equilibria",
+    "printedPages": [
+      83,
+      92
+    ],
+    "pdfPages": [
+      87,
+      96
+    ],
+    "textLayer": "IMAGE_ONLY_BUT_RENDERED"
+  },
+  "topics": [
+    {
+      "topicId": "6.INTRO",
+      "title": "Reversible and irreversible chemical reactions",
+      "pdfStartPage": 87,
+      "status": "RENDERED_PAGE_CONCEPT_REVIEWED_NUMBERING_UNRESOLVED"
+    },
+    {
+      "topicId": "6.2",
+      "title": "Dynamic Equilibrium",
+      "pdfStartPage": 89,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    },
+    {
+      "topicId": "6.3",
+      "title": "Changing the Physical Conditions of a Chemical Reaction",
+      "pdfStartPage": 90,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    }
+  ],
+  "unresolved": [
+    "Exact 6.1 numbered heading not visually established; introductory reversible/irreversible concepts are recorded without inventing a section label."
+  ],
+  "verifiedConceptFamilies": [
+    "irreversible versus reversible chemical change",
+    "reversible physical changes and hydration/dehydration",
+    "dynamic equilibrium as equal forward and reverse reaction rates",
+    "constant macroscopic concentrations at dynamic equilibrium",
+    "closed-system requirement for equilibrium",
+    "effect of changing concentration on equilibrium position",
+    "effect of temperature on equilibrium position",
+    "effect of pressure in gaseous equilibria",
+    "effect of catalyst on time to attain equilibrium rather than equilibrium composition",
+    "industrial yield control in reversible reactions",
+    "closed-system reaction equilibrium"
+  ],
+  "exerciseFamilies": {
+    "pdfPages": [
+      94,
+      95,
+      96
+    ],
+    "families": [
+      "Multiple Choice Questions",
+      "Questions for Short Answers",
+      "Constructed Response Questions",
+      "Descriptive Questions",
+      "Investigate"
+    ],
+    "itemLevelExerciseMap": "PENDING"
+  },
+  "authoring": {
+    "originalAdditionalConceptualAllowed": true,
+    "exerciseOriginAllowed": false,
+    "copyTextbookPassages": false,
+    "copyPastPaperStems": false,
+    "publicationAllowed": false,
+    "urduCounterpartStatus": "BLOCKED_PENDING_CURRENT_URDU_SOURCE_VERIFICATION",
+    "chapterCompletionEligible": false,
+    "ocrMayLocateHeadingsButNotApproveQuestionContent": true
+  }
+}

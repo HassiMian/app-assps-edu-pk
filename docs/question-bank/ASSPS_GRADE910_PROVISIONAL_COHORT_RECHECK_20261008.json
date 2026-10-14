@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "assps-grade910-read-only-production-cohort-check-v1",
+  "snapshotDateUtc": "2026-10-08",
+  "source": "read-only aggregate SQL against current production database; no question text extracted",
+  "safety": {
+    "academicApprovalsGranted": 0,
+    "productionImportsByThisAudit": 0,
+    "tenantTransfersByThisAudit": 0,
+    "queriesWereReadOnly": true,
+    "automaticPaperGenerationReadiness": false
+  },
+  "operationalSchool": {
+    "schoolId": 1,
+    "schoolCode": "assps",
+    "sourceType": "json_seed",
+    "reviewState": "provisional_internal",
+    "firstObservedCreatedAtUtc": "2026-10-08T07:31:19.541744Z",
+    "totalProvisional": 1608,
+    "approved": 0,
+    "grades": {
+      "9th": {
+        "totalProvisional": 934,
+        "subjects": {
+          "Biology": 99,
+          "Chemistry": 354,
+          "Computer": 60,
+          "English": 55,
+          "Islamiat": 35,
+          "Mathematics": 104,
+          "Physics": 81,
+          "Tarjuma-tul-Quran": 54,
+          "Urdu": 92
+        }
+      },
+      "10th": {
+        "totalProvisional": 674,
+        "subjects": {
+          "Biology": 100,
+          "Chemistry": 104,
+          "Computer Science": 80,
+          "English": 50,
+          "Mathematics": 60,
+          "Pakistan Studies": 80,
+          "Physics": 60,
+          "Tarjuma-tul-Quran": 45,
+          "Urdu": 95
+        }
+      }
+    }
+  },
+  "otherUnlinkedStagingSchool": {
+    "schoolId": 5,
+    "schoolCode": "al-siddique",
+    "totalProvisional": 2645,
+    "approved": 0,
+    "grade9th": 1635,
+    "grade10th": 1010
+  },
+  "assessment": "The operational tenant now contains a newly ingested provisional cohort, unlike an earlier zero-record audit. None of these items is academically approved or publishable. Source chapter/exercise OCR candidates do not approve individual questions."
+}

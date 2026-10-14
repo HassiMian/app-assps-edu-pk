@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "assps-math10-numerical-mechanical-qa-v1",
+  "scope": "INDEPENDENT_ARITHMETIC_AND_SAVED_ANSWER_SPOT_CHECK_NOT_SOURCE_OR_HUMAN_CERTIFICATION",
+  "originalFile": "mathematics10OriginalReasoningBatch2026.json",
+  "originalFileSha256": "22f5a6f7e85346d295e624b5f39ea6471d5bfddb90f3a6b0f429e347dd475986",
+  "numericalDraftCount": 11,
+  "checked": 11,
+  "passed": 11,
+  "failed": 0,
+  "uncheckedNumericalIds": [],
+  "academicApproved": 0,
+  "published": 0,
+  "results": [
+    {
+      "questionId": "X-MATH-C01-N02",
+      "questionContentSha256": "27a7f46f5678d0462ef84bc443f9a804483bec25643bc0b9840a6e909dbf0068",
+      "numericalDerivationValid": true,
+      "savedAnswerCrosscheckPassed": true,
+      "mechanicalCheckPassed": true,
+      "independentlyHumanReviewed": false,
+      "sourcePageVerified": false,
+      "approved": false
+    },
+    {
+      "questionId": "X-MATH-C02-N02",
+      "questionContentSha256": "35adc9243730f78dd9d4f958a27e45ed82151c73ab223568dbd9776bce582400",
+      "numericalDerivationValid": true,
+      "savedAnswerCrosscheckPassed": true,
+      "mechanicalCheckPassed": true,
+      "independentlyHumanReviewed": false,
+      "sourcePageVerified": false,
+      "approved": false
+    },
+    {
+      "questionId": "X-MATH-C03-N02",
+      "questionContentSha256": "9bcd33fde1949314d4488518b6611a756988247bc0cf765998244127f012f6f4",
+      "numericalDerivationValid": true,
+      "savedAnswerCrosscheckPassed": true,
+      "mechanicalCheckPassed": true,
+      "independentlyHumanReviewed": false,
+      "sourcePageVerified": false,
+      "approved": false
+    },
+    {
+      "questionId": "X-MATH-C04-N02",
+      "questionContentSha256": "c81af8367308a4a8ce9a14898b5d935015a04fa2429bcab1fc7e2b941409a867",
+      "numericalDerivationValid": true,
+      "savedAnswerCrosscheckPassed": true,
+      "mechanicalCheckPassed": true,
+      "independentlyHumanReviewed": false,
+      "sourcePageVerified": false,
+      "approved": false
+    },
+    {
+      "questionId": "X-MATH-C05-N02",
+      "questionContentSha256": "90f486fa73d8d62eb7c4c891697f3a91730183f5742e18abfd3895d4aa220d6f",
+      "numericalDerivationValid": true,
+      "savedAnswerCrosscheckPassed": true,
+      "mechanicalCheckPassed": true,
+      "independentlyHumanReviewed": false,
+      "sourcePageVerified": false,
+      "approved": false
+    },
+    {
+      "questionId": "X-MATH-C06-N02",
+      "questionContentSha256": "1ebb10057810fde747dcc8fa3b8dba00e03a98897423b93d0340f7140afe6bf1",
+      "numericalDerivationValid": true,
+      "savedAnswerCrosscheckPassed": true,
+      "mechanicalCheckPassed": true,
+      "independentlyHumanReviewed": false,
+      "sourcePageVerified": false,
+      "approved": false
+    },
+    {
+      "questionId": "X-MATH-C07-N02",
+      "questionContentSha256": "03bbe2f5c4a1acb099be630808b69686af99e048000bf9268fb3caa14c13def4",
+      "numericalDerivationValid": true,
+      "savedAnswerCrosscheckPassed": true,
+      "mechanicalCheckPassed": true,
+      "independentlyHumanReviewed": false,
+      "sourcePageVerified": false,
+      "approved": false
+    },
+    {
+      "questionId": "X-MATH-C08-N01",
+      "questionContentSha256": "ba8a2193054701a2bdc0e4f5e5afcfd58b7db81bbc1a437b6984062ef5918a22",
+      "numericalDerivationValid": true,
+      "savedAnswerCrosscheckPassed": true,
+      "mechanicalCheckPassed": true,
+      "independentlyHumanReviewed": false,
+      "sourcePageVerified": false,
+      "approved": false
+    },
+    {
+      "questionId": "X-MATH-C09-N02",
+      "questionContentSha256": "66728e29f2f0bc1528edc3ae066ba2cac5ae7afdcffddd1ffb36d56193ab2fde",
+      "numericalDerivationValid": true,
+      "savedAnswerCrosscheckPassed": true,
+      "mechanicalCheckPassed": true,
+      "independentlyHumanReviewed": false,
+      "sourcePageVerified": false,
+      "approved": false
+    },
+    {
+      "questionId": "X-MATH-C11-N02",
+      "questionContentSha256": "ad1724dc2517534587a9807a7d7be396e55b678500784ac6e1b9b5d8fc10a502",
+      "numericalDerivationValid": true,
+      "savedAnswerCrosscheckPassed": true,
+      "mechanicalCheckPassed": true,
+      "independentlyHumanReviewed": false,
+      "sourcePageVerified": false,
+      "approved": false
+    },
+    {
+      "questionId": "X-MATH-C12-N02",
+      "questionContentSha256": "230ef62cc144bc334df68d3043a4cd6a533f4b568087d2b78176ba9ec9926af0",
+      "numericalDerivationValid": true,
+      "savedAnswerCrosscheckPassed": true,
+      "mechanicalCheckPassed": true,
+      "independentlyHumanReviewed": false,
+      "sourcePageVerified": false,
+      "approved": false
+    }
+  ]
+}

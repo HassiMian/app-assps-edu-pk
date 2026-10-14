@@ -1,0 +1,282 @@
+{
+  "schemaVersion": "assps-qbank-source-authority-v1",
+  "checkedOn": "2026-10-06",
+  "purpose": "Fail-closed authority and edition routing before any Grade IX/X question authoring.",
+  "rules": {
+    "academicContentAuthority": "CURRENT_OFFICIAL_TEXTBOOK_OR_AUTHORIZED_GRAMMAR_ONLY",
+    "assessmentPatternAuthority": "OFFICIAL_CURRENT_MODEL_PAIRING_OR_VISUALLY_INSPECTED_ACTUAL_PAPER",
+    "alpRole": "OPTIONAL_EXAM_FILTER_NEVER_CANONICAL_CORPUS_DELETION",
+    "actualPaperContentUse": "SKILL_TAXONOMY_ONLY_NO_STEM_PASSAGE_ANSWER_COPY",
+    "grade10NewEditionRule": "OLDER_ACTUAL_PAPERS_STRUCTURE_ONLY_UNTIL_CURRENT_OFFICIAL_PATTERN_EXISTS",
+    "liveUrlRule": "A dead origin URL does not erase previously hashed evidence; preserve hash, retrieval date and availability state.",
+    "identityFields": [
+      "grade",
+      "subject",
+      "curriculumTrack",
+      "medium",
+      "editionOrSession"
+    ]
+  },
+  "authorities": [
+    {
+      "id": "PECTAA-G9-2026-REVISED-ALP",
+      "authority": "PECTAA",
+      "grade": 9,
+      "artifactType": "REVISED_ALP_PAIRING_MODEL_PACKAGE",
+      "session": "Annual Examination 2026",
+      "notification": "PECTAA/C&C Unit/2025/376",
+      "date": "2025-11-07",
+      "supersedes": "PECTAA/C&C Unit/2025/325 dated 2025-10-24",
+      "url": "https://pectaa.edu.pk/uploads/Revised%20ALP%20Notification%2007.11.2025.pdf",
+      "status": "OFFICIAL_CURRENT_AUTHORITY",
+      "contentUse": "ASSESSMENT_PATTERN_AND_OPTIONAL_ALP_FILTER"
+    },
+    {
+      "id": "PECTAA-CURRICULUM-CATALOG",
+      "authority": "PECTAA",
+      "artifactType": "CURRENT_CURRICULUM_CATALOG",
+      "url": "https://pectaa.edu.pk/curriculum-compliance/",
+      "status": "OFFICIAL_LIVE_CATALOG",
+      "contentUse": "EDITION_MEDIUM_TRACK_RESOLUTION"
+    },
+    {
+      "id": "PECTAA-G9-TECH-PRACTICAL-2026",
+      "authority": "PECTAA",
+      "grade": 9,
+      "curriculumTrack": "MATRIC_TECH",
+      "artifactType": "PRACTICAL_PAIRING_LIST_MODEL_PACKAGE",
+      "notification": "PECTAA/C&C Unit/2026/551",
+      "date": "2026-01-08",
+      "url": "https://pectaa.edu.pk/wp-content/uploads/2026/01/Pairing-Scheme-List-of-Practicals-and-Model-Papers-of-Agriculture-Sciences-Health-Sciences-Fashion-Designing-ICT-Grade-9-2.pdf",
+      "status": "OFFICIAL_LIVE_ARTIFACT",
+      "subjects": [
+        "Agriculture Sciences",
+        "Health Sciences",
+        "Fashion Designing",
+        "ICT"
+      ],
+      "contentUse": "PRACTICAL_TAXONOMY_AND_BLUEPRINT"
+    }
+  ],
+  "trackSeparation": {
+    "required": true,
+    "rule": "Never merge MAINSTREAM and MATRIC_TECH because labels are similar.",
+    "examples": [
+      "Physics / MAINSTREAM != Physics / MATRIC_TECH",
+      "Computer Science & Entrepreneurship / MAINSTREAM != Computer & Entrepreneurship-Tech / MATRIC_TECH"
+    ]
+  },
+  "releaseGuards": [
+    "BLOCK_AUTHORING_IF_CURRENT_TEXTBOOK_EDITION_UNRESOLVED",
+    "BLOCK_PAGE_METADATA_IF_PAGE_NOT_VISUALLY_VERIFIED",
+    "BLOCK_PATTERN_APPROVAL_IF_ONLY_THIRD_PARTY_REPRODUCTION_EXISTS",
+    "BLOCK_UNIVERSAL_COMPLETION_IF_ANY_IN_SCOPE_TRACK_OR_MEDIUM_IS_MISSING",
+    "BLOCK_ACADEMIC_REVIEW_CLAIM_WITHOUT_REVIEW_EVIDENCE"
+  ],
+  "sourcePromotionStates": [
+    "DISCOVERED",
+    "OFFICIAL_CATALOG_LINK_VERIFIED",
+    "BYTES_HASHED",
+    "VISUALLY_INSPECTED",
+    "CONTENT_MAP_VERIFIED",
+    "AUTHORING_ELIGIBLE"
+  ],
+  "promotionRules": {
+    "DISCOVERED->OFFICIAL_CATALOG_LINK_VERIFIED": "authority page directly links the artifact and grade/subject/edition identity is resolved",
+    "OFFICIAL_CATALOG_LINK_VERIFIED->BYTES_HASHED": "artifact bytes acquired and SHA-256 recorded",
+    "BYTES_HASHED->VISUALLY_INSPECTED": "relevant pages visually inspected; document identity and page anchors verified",
+    "VISUALLY_INSPECTED->CONTENT_MAP_VERIFIED": "chapter/grammar competency map built without copying protected passages",
+    "CONTENT_MAP_VERIFIED->AUTHORING_ELIGIBLE": "required source anchors exist and no unresolved edition/medium conflict remains"
+  },
+  "currentAcquisitionQueue": [
+    {
+      "id": "G9-ENGLISH-TEXTBOOK-2025-26",
+      "grade": 9,
+      "subject": "English",
+      "editionOrSession": "2025-26",
+      "requiredRole": "ACADEMIC_CONTENT",
+      "state": "VISUALLY_INSPECTED",
+      "nextGate": "CONTENT_MAP_VERIFIED",
+      "sha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+      "byteLength": 19576377,
+      "hashedOn": "2026-10-06",
+      "byteSignature": "%PDF-",
+      "pageCount": 168,
+      "embeddedTextPages": 168,
+      "identityAnchors": [
+        "ENGLISH 9",
+        "PUNJAB CURRICULUM AND TEXTBOOK BOARD, LAHORE",
+        "Aligned with Revised/Updated NCP-2023"
+      ],
+      "inspectionPages": [
+        1,
+        2,
+        3,
+        4,
+        168
+      ]
+    },
+    {
+      "id": "G9-URDU-TEXTBOOK-2025-26",
+      "grade": 9,
+      "subject": "Urdu",
+      "editionOrSession": "2025-26",
+      "requiredRole": "ACADEMIC_CONTENT",
+      "state": "BYTES_HASHED",
+      "nextGate": "VISUALLY_INSPECTED",
+      "sha256": "426ec0e75e3952e0a5a0372f2021ada9ca9ce477f0aabf870cedd27eaf61705e",
+      "byteLength": 10242198,
+      "hashedOn": "2026-10-06",
+      "byteSignature": "%PDF-",
+      "pageCount": 144,
+      "embeddedTextPages": 0,
+      "identityAnchors": [
+        "visual identity inspection required; image-only/no extractable text"
+      ],
+      "inspectionPages": [
+        1,
+        2,
+        3,
+        4,
+        144
+      ]
+    },
+    {
+      "id": "G9-10-ENGLISH-GRAMMAR-2023-24",
+      "gradeRange": "9-10",
+      "subject": "English Grammar & Composition",
+      "editionOrSession": "2023-24",
+      "requiredRole": "ACADEMIC_CONTENT",
+      "state": "VISUALLY_INSPECTED",
+      "nextGate": "CONTENT_MAP_VERIFIED",
+      "sha256": "f9d449a6075b17282831c95521f060ac246c422f7169a1bc80cf6568fd185a62",
+      "byteLength": 57906765,
+      "hashedOn": "2026-10-06",
+      "byteSignature": "%PDF-",
+      "pageCount": 200,
+      "embeddedTextPages": 199,
+      "identityAnchors": [
+        "Vocabulary",
+        "Forms of verb",
+        "Tenses",
+        "Parts of Speech",
+        "Story Writing",
+        "Paragraph Writing",
+        "Writing an Essay"
+      ],
+      "inspectionPages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        200
+      ]
+    },
+    {
+      "id": "G9-10-URDU-QUAID-E-INSHA-2023-24",
+      "gradeRange": "9-10",
+      "subject": "Urdu Quaid-e-Insha",
+      "editionOrSession": "2023-24",
+      "requiredRole": "ACADEMIC_CONTENT",
+      "state": "BYTES_HASHED",
+      "nextGate": "VISUALLY_INSPECTED",
+      "sha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+      "byteLength": 131046901,
+      "hashedOn": "2026-10-06",
+      "byteSignature": "%PDF-",
+      "pageCount": 160,
+      "embeddedTextPages": 0,
+      "identityAnchors": [
+        "visual identity inspection required; image-only/no extractable text"
+      ],
+      "inspectionPages": [
+        1,
+        2,
+        3,
+        4,
+        160
+      ]
+    },
+    {
+      "id": "G9-2026-MULTAN-ENGLISH-ACTUAL",
+      "grade": 9,
+      "subject": "English",
+      "board": "Multan",
+      "exam": "First Annual 2026",
+      "requiredRole": "ACTUAL_PAPER_SKILL_TAXONOMY",
+      "state": "VISUALLY_INSPECTED",
+      "nextGate": "CONTENT_PATTERN_CROSSCHECK",
+      "sha256": "35060a1bea551ac2908526c41759d8aa5941eceaef8894d6bf90738d8e3f2173",
+      "byteLength": 1635062,
+      "hashedOn": "2026-10-06",
+      "byteSignature": "%PDF-",
+      "structuralPreflight": {
+        "creator": "Canon",
+        "creationDate": "2026-06-16T14:58:07+05:00",
+        "scanMode": "IMAGE_ONLY_CCITT_FAX",
+        "visualInspectionStatus": "RENDERED_AND_INSPECTED"
+      },
+      "artifactClassification": "OFFICIAL_ACTUAL_PAPER_AND_OBJECTIVE_KEY_BUNDLE",
+      "renderedPageCount": 24,
+      "inspectionOutcome": "CONTAINS_AUTHENTIC_2026_ACTUAL_OBJECTIVE_AND_SUBJECTIVE_PAPER_PAGES_PLUS_KEY_PAGES",
+      "patternHierarchyEligible": true,
+      "actualPaperPagesPresent": true,
+      "actualPaperEvidencePages": {
+        "subjective": [
+          2
+        ],
+        "objective": [
+          24
+        ]
+      },
+      "hierarchyInspectionState": "TOP_LEVEL_OBJECTIVE_AND_SUBJECTIVE_CONFIRMED"
+    },
+    {
+      "id": "G9-2026-MULTAN-URDU-ACTUAL",
+      "grade": 9,
+      "subject": "Urdu",
+      "board": "Multan",
+      "exam": "First Annual 2026",
+      "requiredRole": "ACTUAL_PAPER_SKILL_TAXONOMY",
+      "state": "VISUALLY_INSPECTED",
+      "nextGate": "SUBJECTIVE_PAGE_HIERARCHY_INSPECTION",
+      "sha256": "5f932f7c6331bda19338cf087641081bec5df5aaa45096a05cd14cc883ab8e13",
+      "byteLength": 932229,
+      "hashedOn": "2026-10-06",
+      "byteSignature": "%PDF-",
+      "structuralPreflight": {
+        "creator": "Canon",
+        "creationDate": "2026-06-17T09:33:16+05:00",
+        "scanMode": "IMAGE_ONLY_CCITT_FAX",
+        "visualInspectionStatus": "RENDERED_AND_INSPECTED"
+      },
+      "artifactClassification": "OFFICIAL_ACTUAL_PAPER_AND_OBJECTIVE_KEY_BUNDLE",
+      "renderedPageCount": 25,
+      "inspectionOutcome": "CONTAINS_AUTHENTIC_2026_ACTUAL_OBJECTIVE_PAPER_PAGES_PLUS_KEY_PAGES_SUBJECTIVE_HIERARCHY_PENDING",
+      "patternHierarchyEligible": false,
+      "partialPatternTaxonomyEligible": true,
+      "actualPaperPagesPresent": true,
+      "actualPaperEvidencePages": {
+        "objective": [
+          3,
+          4,
+          5,
+          6,
+          9,
+          18,
+          24
+        ]
+      },
+      "hierarchyInspectionState": "OBJECTIVE_CONFIRMED_SUBJECTIVE_PENDING"
+    }
+  ],
+  "visualInspectionPolicy": {
+    "rule": "Image-only scans cannot be promoted from BYTES_HASHED using strings/OCR guesses. Render pages and inspect visible board/year/group/objective-subjective hierarchy before VISUALLY_INSPECTED.",
+    "ocrRole": "DISCOVERY_AID_ONLY_NOT_AUTHORITY",
+    "pageAnchorRule": "Store exact inspected page number and visible anchor for every promoted hierarchy claim."
+  },
+  "actualPaperClassificationRule": "A board-hosted bundle may contain both answer-key pages and authentic question-paper pages. Classify page roles independently after visible inspection; key pages never invalidate verified actual-paper pages, and full-hierarchy authority requires both objective and subjective question-paper evidence.",
+  "textExtractionRule": "Embedded PDF text may support indexing and competency discovery, but page/edition claims still require visible-page inspection; image-only Urdu sources remain blocked until visual inspection."
+}

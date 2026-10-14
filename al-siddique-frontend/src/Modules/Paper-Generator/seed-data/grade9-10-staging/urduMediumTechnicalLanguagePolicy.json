@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "assps-urdu-medium-technical-language-policy-v1",
+  "createdOn": "2026-10-03",
+  "status": "SUPERSEDED_FOR_DEFAULT_URDU_AUTHORING_BY_V2",
+  "supersededBy": "urduMediumLanguageConventionV2.json",
+  "note": "Historical v1 strict exact-term source requirements now apply only when asserting a specific visually verified textbook-term provenance claim, not every familiar scientific word. Complete questions still require separate academic source/reviewer validation.",
+  "scope": "Optional exact textbook terminology provenance, not the default language-style gate",
+  "rules": {
+    "preserveStandardScientificIdentity": true,
+    "preserveMixedEnglishUrduPattern": true,
+    "inventPureUrduSynonym": false,
+    "dictionaryWordForWordTranslation": false,
+    "perOccurrenceTextbookPageRequiredForStandardScientificTerm": false,
+    "exactTermSourceEvidenceRequiredWhenClaimingSpecificVerifiedQuotation": true,
+    "academicQuestionEvidenceStillRequired": true,
+    "defaultLanguagePolicy": "urduMediumLanguageConventionV2.json"
+  },
+  "optionalEvidenceRequiredForExactVerifiedTermClaim": ["catalogRecordId", "pdfSha256", "physicalPage", "anchor", "verifiedTextbookForm", "renderingMode", "reviewStatus"],
+  "publicationAllowed": false
+}

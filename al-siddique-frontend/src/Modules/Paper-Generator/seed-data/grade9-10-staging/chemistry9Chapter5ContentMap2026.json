@@ -1,0 +1,18 @@
+{
+  "schemaVersion":"assps-chemistry9-ch5-content-map-v1",
+  "checkedOn":"2026-10-06",
+  "sourceRecordId":"pectaa-catalog-007",
+  "sourcePdfSha256":"05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+  "chapter":{"number":5,"title":"Energetics","printedPages":[67,82],"pdfPages":[71,86],"textLayer":"IMAGE_ONLY_BUT_RENDERED"},
+  "topics":[
+    {"topicId":"5.1","title":"System and Surrounding","pdfStartPage":72,"status":"RENDERED_PAGE_HEADING_REVIEWED"},
+    {"topicId":"5.2","title":"Enthalpy","pdfStartPage":73,"status":"RENDERED_PAGE_HEADING_REVIEWED"},
+    {"topicId":"5.3","title":"Exothermic and Endothermic Reactions","pdfStartPage":74,"status":"RENDERED_PAGE_HEADING_REVIEWED"},
+    {"topicId":"5.4","title":"How does a Reaction take place?","pdfStartPage":79,"status":"RENDERED_PAGE_HEADING_REVIEWED"},
+    {"topicId":"5.5","title":"Aerobic and Anaerobic Respiration","pdfStartPage":81,"status":"RENDERED_PAGE_HEADING_REVIEWED"}
+  ],
+  "verifiedConceptFamilies":["system surroundings and heat transfer","enthalpy change and sign convention","exothermic versus endothermic reaction profiles","energy required for bond breaking versus bond formation","activation energy and catalytic pathway","aerobic and anaerobic respiration as energy processes"],
+  "exerciseFamilies":{"pdfPages":[84,85,86],"families":["Multiple Choice Questions","Questions for Short Answers","Constructed Response Questions","Descriptive Questions","Investigative Questions"],"itemLevelExerciseMap":"PENDING"},
+  "actual2026Evidence":{"artifact":"multanGrade9ScienceActual2026Evidence.json","gate":"SATISFIED_FOR_GROUP_I_TOP_LEVEL_PATTERN_ONLY"},
+  "authoring":{"originalAdditionalConceptualAllowed":true,"exerciseOriginAllowed":false,"copyTextbookPassages":false,"copyPastPaperStems":false,"publicationAllowed":false,"urduCounterpartStatus":"BLOCKED_PENDING_CURRENT_URDU_SOURCE_VERIFICATION","ocrMayLocateHeadingsButNotApproveQuestionContent":true}
+}

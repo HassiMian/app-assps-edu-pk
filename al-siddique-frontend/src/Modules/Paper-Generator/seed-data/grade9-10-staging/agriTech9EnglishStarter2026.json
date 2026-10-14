@@ -1,0 +1,2219 @@
+{
+  "schemaVersion": "assps-agriTech9-english-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-039",
+  "sourcePdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+  "scope": "GRADE9_MATRIC_TECH_CURRENT_TOC_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C01-I01",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C01",
+        "number": 1
+      },
+      "topicId": "agriculture role",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Agriculture in Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "Which statement best reflects agriculture’s national role?",
+          "answer": "It supports food supply, livelihoods and related industries",
+          "options": [
+            {
+              "id": "A",
+              "text": "It supports food supply, livelihoods and related industries"
+            },
+            {
+              "id": "B",
+              "text": "It only produces office software"
+            },
+            {
+              "id": "C",
+              "text": "It has no link to the economy"
+            },
+            {
+              "id": "D",
+              "text": "It only concerns city roads"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C01-I02",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C01",
+        "number": 1
+      },
+      "topicId": "agriculture branches",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Agriculture in Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "Name two major branches or components of agriculture.",
+          "answer": "Examples include crop husbandry, animal husbandry, poultry, fisheries and forestry; any two."
+        }
+      }
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C01-I03",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C01",
+        "number": 1
+      },
+      "topicId": "agriculture significance",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Agriculture in Pakistan"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "Explain how agriculture contributes to food security, employment and the economy of Pakistan.",
+          "answer": "A strong answer links farm output, jobs, raw materials, rural income and food availability."
+        }
+      }
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C02-I01",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C02",
+        "number": 2
+      },
+      "topicId": "crop choice",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Crop Production and Farming System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "Which factor should influence crop selection?",
+          "answer": "Climate and soil suitability",
+          "options": [
+            {
+              "id": "A",
+              "text": "Climate and soil suitability"
+            },
+            {
+              "id": "B",
+              "text": "Random choice only"
+            },
+            {
+              "id": "C",
+              "text": "Screen brightness"
+            },
+            {
+              "id": "D",
+              "text": "Keyboard layout"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C02-I02",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C02",
+        "number": 2
+      },
+      "topicId": "farming system",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Crop Production and Farming System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "What is meant by a farming system?",
+          "answer": "The organized combination of crops, livestock, resources and management practices used on a farm."
+        }
+      }
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C02-I03",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C02",
+        "number": 2
+      },
+      "topicId": "crop production",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Crop Production and Farming System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "Describe the main planning factors in crop production without giving hazardous chemical-use instructions.",
+          "answer": "Discuss climate, soil, water availability, seed choice, timing, labour, market and safe resource management."
+        }
+      }
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C03-I01",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C03",
+        "number": 3
+      },
+      "topicId": "kharif crops",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Production Technologies and Kharif Crops"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "Kharif crops are mainly associated with which season?",
+          "answer": "Warm/monsoon growing season",
+          "options": [
+            {
+              "id": "A",
+              "text": "Warm/monsoon growing season"
+            },
+            {
+              "id": "B",
+              "text": "Only freezing conditions"
+            },
+            {
+              "id": "C",
+              "text": "No growing season"
+            },
+            {
+              "id": "D",
+              "text": "Only indoor storage"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C03-I02",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C03",
+        "number": 3
+      },
+      "topicId": "production technology",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Production Technologies and Kharif Crops"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "Why is timely sowing important in crop production?",
+          "answer": "It helps match crop growth with suitable temperature, moisture and seasonal conditions."
+        }
+      }
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C03-I03",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C03",
+        "number": 3
+      },
+      "topicId": "kharif management",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Production Technologies and Kharif Crops"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "Explain how seed quality, soil condition, irrigation planning and timely field operations affect Kharif crop productivity.",
+          "answer": "Cover each factor conceptually and connect it to germination, growth, resource use and yield."
+        }
+      }
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C04-I01",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C04",
+        "number": 4
+      },
+      "topicId": "crop rotation",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Crop Rotation and Cropping Pattern"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "A major purpose of crop rotation is to?",
+          "answer": "Improve long-term soil and crop management",
+          "options": [
+            {
+              "id": "A",
+              "text": "Improve long-term soil and crop management"
+            },
+            {
+              "id": "B",
+              "text": "Grow the same crop forever"
+            },
+            {
+              "id": "C",
+              "text": "Remove all soil organisms"
+            },
+            {
+              "id": "D",
+              "text": "Eliminate planning"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C04-I02",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C04",
+        "number": 4
+      },
+      "topicId": "cropping pattern",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Crop Rotation and Cropping Pattern"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "What is a cropping pattern?",
+          "answer": "The sequence and proportion of crops grown on a farm or in an area over time."
+        }
+      }
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C04-I03",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C04",
+        "number": 4
+      },
+      "topicId": "rotation benefits",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Crop Rotation and Cropping Pattern"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "Discuss how crop rotation can support soil fertility, pest management and farm resilience.",
+          "answer": "Explain nutrient balance, breaking pest/disease cycles, diversity and risk distribution without prescribing chemicals."
+        }
+      }
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C05-I01",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C05",
+        "number": 5
+      },
+      "topicId": "soil conservation",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Soil and Water Conservation"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "Which practice helps reduce soil erosion?",
+          "answer": "Maintaining protective vegetation/contour-based management",
+          "options": [
+            {
+              "id": "A",
+              "text": "Maintaining protective vegetation/contour-based management"
+            },
+            {
+              "id": "B",
+              "text": "Leaving soil permanently bare"
+            },
+            {
+              "id": "C",
+              "text": "Removing all field boundaries"
+            },
+            {
+              "id": "D",
+              "text": "Increasing runoff"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C05-I02",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C05",
+        "number": 5
+      },
+      "topicId": "water conservation",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Soil and Water Conservation"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "Why is water conservation important in farming?",
+          "answer": "It protects a limited resource, reduces waste and helps sustain crop production during variable supply."
+        }
+      }
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C05-I03",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C05",
+        "number": 5
+      },
+      "topicId": "resource conservation",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Soil and Water Conservation"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "Explain principles of soil and water conservation on farms.",
+          "answer": "Discuss erosion control, ground cover, careful land shaping, water storage/efficient use and monitoring."
+        }
+      }
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C06-I01",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C06",
+        "number": 6
+      },
+      "topicId": "waterlogging",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Management of Water Problems"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "Waterlogging mainly means?",
+          "answer": "Excess water saturating the root zone",
+          "options": [
+            {
+              "id": "A",
+              "text": "Excess water saturating the root zone"
+            },
+            {
+              "id": "B",
+              "text": "Complete absence of water in all cases"
+            },
+            {
+              "id": "C",
+              "text": "Only high wind"
+            },
+            {
+              "id": "D",
+              "text": "Only low light"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C06-I02",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C06",
+        "number": 6
+      },
+      "topicId": "salinity",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Management of Water Problems"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "How can salinity affect crops?",
+          "answer": "Excess salts can reduce water uptake, damage plants and lower productivity."
+        }
+      }
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C06-I03",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C06",
+        "number": 6
+      },
+      "topicId": "water problems",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Management of Water Problems"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "Explain how drainage, efficient irrigation and monitoring help manage farm water problems.",
+          "answer": "A good answer covers avoiding excess water, reducing losses, checking soil/water conditions and adapting irrigation to crop need."
+        }
+      }
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C07-I01",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C07",
+        "number": 7
+      },
+      "topicId": "agroforestry",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Farm Forestry / Agro Forestry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "Agroforestry combines trees with?",
+          "answer": "Agricultural crops and/or livestock systems",
+          "options": [
+            {
+              "id": "A",
+              "text": "Agricultural crops and/or livestock systems"
+            },
+            {
+              "id": "B",
+              "text": "Only office buildings"
+            },
+            {
+              "id": "C",
+              "text": "Only roads"
+            },
+            {
+              "id": "D",
+              "text": "No land use"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C07-I02",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C07",
+        "number": 7
+      },
+      "topicId": "farm forestry",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Farm Forestry / Agro Forestry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "State two potential benefits of farm forestry.",
+          "answer": "Examples: shelter, fuel/wood, soil protection, biodiversity, shade or additional farm income; any two."
+        }
+      }
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C07-I03",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C07",
+        "number": 7
+      },
+      "topicId": "agroforestry value",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Farm Forestry / Agro Forestry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "Discuss environmental and economic benefits of integrating suitable trees into farms.",
+          "answer": "Include soil/water protection, microclimate, biodiversity, products/income and careful species/site selection."
+        }
+      }
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C08-I01",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C08",
+        "number": 8
+      },
+      "topicId": "animal production",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Production of Farm Animals"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "Good farm-animal management should prioritize?",
+          "answer": "Health, nutrition, welfare and suitable housing",
+          "options": [
+            {
+              "id": "A",
+              "text": "Health, nutrition, welfare and suitable housing"
+            },
+            {
+              "id": "B",
+              "text": "Neglecting clean water"
+            },
+            {
+              "id": "C",
+              "text": "Ignoring disease signs"
+            },
+            {
+              "id": "D",
+              "text": "Overcrowding"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C08-I02",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C08",
+        "number": 8
+      },
+      "topicId": "animal welfare",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Production of Farm Animals"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "Why is clean water important for farm animals?",
+          "answer": "It supports hydration, digestion, temperature regulation, health and productivity."
+        }
+      }
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C08-I03",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C08",
+        "number": 8
+      },
+      "topicId": "livestock management",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Production of Farm Animals"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "Explain the principles of responsible farm-animal production.",
+          "answer": "Cover balanced nutrition, clean water, housing, hygiene, welfare, observation and veterinary support when needed."
+        }
+      }
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C09-I01",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C09",
+        "number": 9
+      },
+      "topicId": "dairy quality",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Dairy Industry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "Milk quality is strongly supported by?",
+          "answer": "Clean handling and cold-chain hygiene",
+          "options": [
+            {
+              "id": "A",
+              "text": "Clean handling and cold-chain hygiene"
+            },
+            {
+              "id": "B",
+              "text": "Unclean containers"
+            },
+            {
+              "id": "C",
+              "text": "Long exposure to heat"
+            },
+            {
+              "id": "D",
+              "text": "Ignoring sanitation"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C09-I02",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C09",
+        "number": 9
+      },
+      "topicId": "dairy industry",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Dairy Industry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "Name two stages in the dairy value chain.",
+          "answer": "Examples: milk production, collection, chilling, processing, packaging, transport or retail; any two."
+        }
+      }
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C09-I03",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C09",
+        "number": 9
+      },
+      "topicId": "dairy management",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Dairy Industry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "Describe how hygiene, animal health, cooling and quality control support a safe dairy industry.",
+          "answer": "Explain each factor conceptually and link it to product safety, shelf life and consumer trust."
+        }
+      }
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C10-I01",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C10",
+        "number": 10
+      },
+      "topicId": "poultry welfare",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Poultry Husbandry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "Good poultry husbandry requires?",
+          "answer": "Clean housing, suitable feed/water and health monitoring",
+          "options": [
+            {
+              "id": "A",
+              "text": "Clean housing, suitable feed/water and health monitoring"
+            },
+            {
+              "id": "B",
+              "text": "Overcrowding"
+            },
+            {
+              "id": "C",
+              "text": "No ventilation"
+            },
+            {
+              "id": "D",
+              "text": "Ignoring sick birds"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C10-I02",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C10",
+        "number": 10
+      },
+      "topicId": "poultry environment",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Poultry Husbandry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "Why is ventilation important in poultry housing?",
+          "answer": "It helps control heat, moisture and air quality, supporting bird comfort and health."
+        }
+      }
+    },
+    {
+      "id": "IX-AGRI-TECH-ENGLISH-C10-I03",
+      "chapter": {
+        "id": "IX-AGRI-TECH-ENGLISH-C10",
+        "number": 10
+      },
+      "topicId": "poultry husbandry",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-039",
+        "pdfSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Poultry Husbandry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "agriculture-sciences-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-AGRI-TECH-ENGLISH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Agriculture-Tech conceptual starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Agriculture-Tech concept item.",
+      "content": {
+        "en": {
+          "stem": "Explain the principles of responsible poultry husbandry from housing to health monitoring.",
+          "answer": "Cover space, ventilation, feed/water, cleanliness, welfare, observation and professional disease control."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 30,
+    "mcq": 10,
+    "short": 10,
+    "long": 10,
+    "chapters": 10
+  }
+}

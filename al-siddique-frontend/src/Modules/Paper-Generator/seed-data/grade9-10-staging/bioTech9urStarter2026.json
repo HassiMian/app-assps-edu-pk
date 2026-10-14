@@ -1,0 +1,1999 @@
+{
+  "schemaVersion": "assps-bioTech9ur-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-030",
+  "sourcePdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+  "scope": "GRADE9_MATRIC_TECH_CURRENT_CHAPTER_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C01-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C01",
+        "number": 1
+      },
+      "topicId": "biology as science",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "The Science of Biology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Biology بنیادی طور پر کیا ہے؟",
+          "answer": "زندگی اور جانداروں کا سائنسی مطالعہ",
+          "options": [
+            {
+              "id": "A",
+              "text": "زندگی اور جانداروں کا سائنسی مطالعہ"
+            },
+            {
+              "id": "B",
+              "text": "صرف چٹانوں کا مطالعہ"
+            },
+            {
+              "id": "C",
+              "text": "صرف مشینوں کا مطالعہ"
+            },
+            {
+              "id": "D",
+              "text": "صرف موسم کی پیش گوئی"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C01-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C01",
+        "number": 1
+      },
+      "topicId": "biology as science",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "The Science of Biology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Biology میں scientific method کیوں مفید ہے؟",
+          "answer": "یہ سوال، قابلِ آزمائش explanation، evidence اور نتیجے کو منظم انداز میں جوڑتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C01-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C01",
+        "number": 1
+      },
+      "topicId": "biology as science",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "The Science of Biology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Biological inquiry میں observation، hypothesis، experiment اور evidence کے باہمی تعلق کی وضاحت کریں۔",
+          "answer": "Observation سے سوال بنتا ہے، hypothesis قابلِ آزمائش explanation دیتی ہے، experiment/data اسے test کرتے ہیں اور evidence کے مطابق نتیجہ revise کیا جاتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C02-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C02",
+        "number": 2
+      },
+      "topicId": "biodiversity",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Biodiversity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Biodiversity سے کیا مراد ہے؟",
+          "answer": "جانداروں اور حیاتیاتی variation کی مختلف صورتیں",
+          "options": [
+            {
+              "id": "A",
+              "text": "جانداروں اور حیاتیاتی variation کی مختلف صورتیں"
+            },
+            {
+              "id": "B",
+              "text": "صرف ایک species"
+            },
+            {
+              "id": "C",
+              "text": "صرف موسم کا فرق"
+            },
+            {
+              "id": "D",
+              "text": "صرف minerals کا فرق"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C02-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C02",
+        "number": 2
+      },
+      "topicId": "biodiversity",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Biodiversity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Classification کیوں مفید ہے؟",
+          "answer": "یہ organisms کو similarities/differences کی بنیاد پر منظم کرتی ہے اور identification/relationships سمجھنے میں مدد دیتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C02-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C02",
+        "number": 2
+      },
+      "topicId": "biodiversity",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Biodiversity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Biodiversity کے تحفظ کی اہمیت بیان کریں۔",
+          "answer": "Ecosystem stability، genetic resources، food webs اور useful biological resources کے ساتھ habitat protection کی اہمیت بیان کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C03-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C03",
+        "number": 3
+      },
+      "topicId": "cell",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "The Cell"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Cell میں substances کی آمد و رفت کو regulate کرنے والی اہم structure کون سی ہے؟",
+          "answer": "Cell membrane",
+          "options": [
+            {
+              "id": "A",
+              "text": "Cell membrane"
+            },
+            {
+              "id": "B",
+              "text": "صرف cell wall"
+            },
+            {
+              "id": "C",
+              "text": "صرف chromosome"
+            },
+            {
+              "id": "D",
+              "text": "صرف vacuole"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C03-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C03",
+        "number": 3
+      },
+      "topicId": "cell",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "The Cell"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Mitochondria کا ایک اہم function لکھیں۔",
+          "answer": "Cellular respiration اور ATP production میں اہم کردار ادا کرتے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C03-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C03",
+        "number": 3
+      },
+      "topicId": "cell",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "The Cell"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Plant cell اور animal cell کا بنیادی structural comparison کریں۔",
+          "answer": "دونوں میں membrane، cytoplasm، nucleus وغیرہ؛ plant cell میں cell wall، chloroplasts اور بڑی central vacuole نمایاں ہو سکتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C04-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C04",
+        "number": 4
+      },
+      "topicId": "cell cycle",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Cell Cycle"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Mitosis کا بنیادی نتیجہ کیا ہے؟",
+          "answer": "Genetically similar daughter cells",
+          "options": [
+            {
+              "id": "A",
+              "text": "Genetically similar daughter cells"
+            },
+            {
+              "id": "B",
+              "text": "چار غیر متعلق organisms"
+            },
+            {
+              "id": "C",
+              "text": "صرف gametes"
+            },
+            {
+              "id": "D",
+              "text": "DNA کے بغیر cells"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C04-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C04",
+        "number": 4
+      },
+      "topicId": "cell cycle",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Cell Cycle"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Cell cycle کیا ہے؟",
+          "answer": "Cell growth، DNA replication اور division کی منظم sequence۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C04-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C04",
+        "number": 4
+      },
+      "topicId": "cell cycle",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Cell Cycle"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Growth اور tissue repair میں mitosis کی اہمیت بیان کریں۔",
+          "answer": "Mitosis cell number بڑھاتا، damaged/worn cells replace کرتا اور chromosome number برقرار رکھتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C05-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C05",
+        "number": 5
+      },
+      "topicId": "organization",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Tissues, Organs, and Organ Systems"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "مشابہ cells کا common function والا group کیا کہلاتا ہے؟",
+          "answer": "Tissue",
+          "options": [
+            {
+              "id": "A",
+              "text": "Tissue"
+            },
+            {
+              "id": "B",
+              "text": "Molecule"
+            },
+            {
+              "id": "C",
+              "text": "Species"
+            },
+            {
+              "id": "D",
+              "text": "Gene"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C05-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C05",
+        "number": 5
+      },
+      "topicId": "organization",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Tissues, Organs, and Organ Systems"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Tissue اور organ میں فرق لکھیں۔",
+          "answer": "Tissue مشابہ cells کا group ہے؛ organ مختلف tissues کا مجموعہ ہے جو بڑا function انجام دیتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C05-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C05",
+        "number": 5
+      },
+      "topicId": "organization",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Tissues, Organs, and Organ Systems"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Cells سے organ systems تک organization کی hierarchy بیان کریں۔",
+          "answer": "Cells → tissues → organs → organ systems؛ ہر level coordinated lower levels سے بنتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C06-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C06",
+        "number": 6
+      },
+      "topicId": "enzyme",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Enzyme"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Enzymes کیا ہوتے ہیں؟",
+          "answer": "Biological catalysts",
+          "options": [
+            {
+              "id": "A",
+              "text": "Biological catalysts"
+            },
+            {
+              "id": "B",
+              "text": "Stored genes"
+            },
+            {
+              "id": "C",
+              "text": "صرف mineral salts"
+            },
+            {
+              "id": "D",
+              "text": "صرف structural lipids"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C06-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C06",
+        "number": 6
+      },
+      "topicId": "enzyme",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Enzyme"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Enzyme active site کیا ہے؟",
+          "answer": "وہ region جہاں substrate bind کرتا اور catalysis ہوتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C06-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C06",
+        "number": 6
+      },
+      "topicId": "enzyme",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Enzyme"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Temperature اور pH enzyme activity کو کیسے متاثر کرتے ہیں؟",
+          "answer": "مناسب range تک activity بہتر ہو سکتی ہے، جبکہ extreme conditions structure/active site متاثر کر کے activity کم کر سکتی ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C07-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C07",
+        "number": 7
+      },
+      "topicId": "bioenergetics",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Bioenergetics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "ATP کی اہمیت کیا ہے؟",
+          "answer": "Cells میں usable energy transfer کرتا ہے",
+          "options": [
+            {
+              "id": "A",
+              "text": "Cells میں usable energy transfer کرتا ہے"
+            },
+            {
+              "id": "B",
+              "text": "صرف hereditary information رکھتا ہے"
+            },
+            {
+              "id": "C",
+              "text": "صرف cell wall بناتا ہے"
+            },
+            {
+              "id": "D",
+              "text": "صرف mineral ہے"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C07-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C07",
+        "number": 7
+      },
+      "topicId": "bioenergetics",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Bioenergetics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Photosynthesis اور cellular respiration کے energy roles میں فرق لکھیں۔",
+          "answer": "Photosynthesis light energy کو chemical energy میں store کرتی ہے، respiration chemical energy release کر کے ATP بنانے میں مدد دیتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C07-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C07",
+        "number": 7
+      },
+      "topicId": "bioenergetics",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Bioenergetics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Living cells کے لیے energy transformation کیوں ضروری ہے؟",
+          "answer": "Synthesis، transport، movement، growth اور maintenance کے لیے usable energy چاہیے؛ bioenergetic processes energy کو usable forms میں بدلتے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C08-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C08",
+        "number": 8
+      },
+      "topicId": "plant physiology",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Plant Physiology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Plants میں water transport سے بنیادی طور پر کون سا tissue متعلق ہے؟",
+          "answer": "Xylem",
+          "options": [
+            {
+              "id": "A",
+              "text": "Xylem"
+            },
+            {
+              "id": "B",
+              "text": "صرف phloem"
+            },
+            {
+              "id": "C",
+              "text": "صرف epidermis"
+            },
+            {
+              "id": "D",
+              "text": "صرف meristem"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C08-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C08",
+        "number": 8
+      },
+      "topicId": "plant physiology",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Plant Physiology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Transpiration کیا ہے؟",
+          "answer": "Plants کے aerial parts سے water vapour کا loss، خاص طور پر stomata کے ذریعے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C08-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C08",
+        "number": 8
+      },
+      "topicId": "plant physiology",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Plant Physiology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Root absorption، xylem transport اور transpiration کا تعلق بیان کریں۔",
+          "answer": "Roots water/minerals absorb کرتے، xylem اوپر پہنچاتا اور transpiration water movement gradient برقرار رکھنے میں مدد دیتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C09-M01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C09",
+        "number": 9
+      },
+      "topicId": "plant reproduction",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Reproduction in Plants"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Pollination کس transfer کو کہتے ہیں؟",
+          "answer": "Pollen کا مناسب reproductive surface تک transfer",
+          "options": [
+            {
+              "id": "A",
+              "text": "Pollen کا مناسب reproductive surface تک transfer"
+            },
+            {
+              "id": "B",
+              "text": "Water کا roots تک transfer"
+            },
+            {
+              "id": "C",
+              "text": "Food کا xylem سے transfer"
+            },
+            {
+              "id": "D",
+              "text": "Seeds کا fruits میں transfer"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C09-S01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C09",
+        "number": 9
+      },
+      "topicId": "plant reproduction",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Reproduction in Plants"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Sexual reproduction in plants کا ایک فائدہ لکھیں۔",
+          "answer": "Offspring میں genetic variation پیدا ہو سکتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C09-L01",
+      "chapter": {
+        "id": "IX-BIOLOGY-TECH-URDU-C09",
+        "number": 9
+      },
+      "topicId": "plant reproduction",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-030",
+        "pdfSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Reproduction in Plants"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-BIOLOGY-TECH-URDU-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "ur": {
+          "stem": "Pollination سے seed formation تک عمومی sequence بیان کریں۔",
+          "answer": "Pollen transfer کے بعد gamete delivery اور fertilization ہوتی ہے، پھر fertilized ovule seed میں develop ہوتا ہے۔"
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 27,
+    "mcq": 9,
+    "short": 9,
+    "long": 9,
+    "chapters": 9
+  }
+}

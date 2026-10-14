@@ -1,0 +1,45 @@
+{
+  "schemaVersion":"assps-multan-grade9-science-actual-2026-evidence-v1",
+  "checkedOn":"2026-10-06",
+  "authority":"BISE Multan",
+  "indexUrl":"https://web.bisemultan.edu.pk/question-papers-with-key-ssc-part-i-9th-1st-annual-2026-examination/",
+  "classification":"OFFICIAL_BOARD_2026_ACTUAL_PAPER_BUNDLES_WITH_KEYS",
+  "subjects":[
+    {
+      "subject":"Chemistry",
+      "artifact":{"driveId":"1WCLOtSE_8byj2_7Q5cIvyS1ya9_LU025","sha256":"89fb178f4668f0ecb2ad064423abc01f3dbcab20c4bfab6188032dbabd09a90f","byteLength":1631294,"pageCount":30},
+      "verifiedPages":[
+        {"page":1,"role":"OBJECTIVE_KEY","exam":"SSC 1st Annual 2026"},
+        {"page":2,"role":"SUBJECTIVE_ACTUAL","session":"2025-2027","course":"NEW COURSE","group":"GROUP-I","subjectiveMarks":48,"subjectiveMinutes":105},
+        {"page":3,"role":"OBJECTIVE_ACTUAL","session":"2025-2027","course":"NEW COURSE","group":"GROUP-I","objectiveMarks":12,"objectiveMinutes":15},
+        {"page":30,"role":"TECH_OBJECTIVE_ACTUAL","subject":"Chemistry-Tech","objectiveMarks":10,"objectiveMinutes":15}
+      ],
+      "actualPaperGate":"SATISFIED_FOR_GROUP_I_TOP_LEVEL_PATTERN",
+      "modelCrossCheck":"OFFICIAL_PECTAA_2026_PAIRING_MATCHES_12_PLUS_48_AND_120_MINUTES"
+    },
+    {
+      "subject":"Biology",
+      "artifact":{"driveId":"1u_o_kMI-_8_lc602TkkIBTEC1fQoHaJU","sha256":"b4de9b2993f4c94117047dbcd8d6662cf0e3174c5a7508f7183a9b31845c54aa","byteLength":1786387,"pageCount":30},
+      "verifiedPages":[
+        {"page":1,"role":"OBJECTIVE_KEY","exam":"SSC 1st Annual 2026"},
+        {"page":2,"role":"SUBJECTIVE_ACTUAL","session":"2025-2027","course":"NEW COURSE","subjectiveMinutes":105,"marksReadState":"VISUALLY_PRESENT_OCR_NOT_RELIABLE_ENOUGH_TO_ENCODE"},
+        {"page":3,"role":"OBJECTIVE_ACTUAL","session":"2025-2027","course":"NEW COURSE","group":"GROUP-I","objectiveMarks":12,"objectiveMinutes":15},
+        {"page":30,"role":"TECH_OBJECTIVE_ACTUAL","subject":"Biology-Tech","objectiveMarks":10,"objectiveMinutes":15}
+      ],
+      "actualPaperGate":"SATISFIED_FOR_GROUP_I_OBJECTIVE_AND_CURRENT_SUBJECTIVE_OCCURRENCE",
+      "modelCrossCheck":"TOP_LEVEL_STRUCTURE_CONSISTENT_WITH_OFFICIAL_PECTAA_2026_PAIRING"
+    },
+    {
+      "subject":"Mathematics",
+      "artifact":{"driveId":"1ChKeuzYmsdT04srD-5sGc_gWOFl8P9Id","sha256":"671ba8d6a4979f08aa03e53767e58e0bcd2cd0acd50f7fdb03d4d3b82b6cae5a","byteLength":1362745,"pageCount":28},
+      "verifiedPages":[
+        {"page":1,"role":"OBJECTIVE_KEY","exam":"SSC 1st Annual 2026"},
+        {"page":2,"role":"SUBJECTIVE_ACTUAL","session":"2025-2027","course":"NEW COURSE","group":"GROUP-I","subjectiveMarks":60,"subjectiveMinutes":130},
+        {"page":28,"role":"OBJECTIVE_ACTUAL","sessions":["2022-2024","2024-2026"],"course":"OLD COURSE","group":"GROUP-II","objectiveMarks":15,"objectiveMinutes":20}
+      ],
+      "actualPaperGate":"SATISFIED_FOR_CURRENT_GROUP_I_SUBJECTIVE_OCCURRENCE_ONLY",
+      "guard":"Do not use page 28 old-course objective paper as content evidence for the current 2025-2027 new course."
+    }
+  ],
+  "guards":{"copyQuestionStems":false,"copyAnswerKeys":false,"useForPatternAndOccurrenceOnly":true,"textbooksRemainAcademicContentAuthority":true,"mixedCourseBundlesRequirePageLevelRoleClassification":true}
+}

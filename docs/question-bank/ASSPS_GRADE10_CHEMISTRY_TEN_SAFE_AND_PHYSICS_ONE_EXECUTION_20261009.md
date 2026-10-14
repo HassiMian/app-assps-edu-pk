@@ -1,0 +1,48 @@
+# ASSPS Grade IX–X Academic Master — ten Chemistry X concept answer drafts and remaining Physics X original long-answer draft
+9 October 2026 — Academic-only, isolated source evidence. No production deployment.
+
+## Exact recovery and preservation
+Read latest GitHub issue #4, verified Academic owner worktree clean at prior local/remote SHA 181bc39e6a0517321109e13a7fe99401abb943aa on feat/grade910-academic-master-evidence-20261008. Existing 2,581 authored research question candidates, original 166 rubric-only long answer fields, academic source/adoption/page ledgers, 109 earlier separate authored answer research drafts, 563 earlier proposed marks, historical snapshots, real independent-review and publisher gates, protected official papers, tenant DB, SaaS Core, Paper Studio and Connect owner code are preserved untouched.
+
+## NEW academic-only Chemistry X content
+The authentic original chemistry10Starter2026.json has 65 provisional original grade X Chemistry question records (26 MCQ, 26 short and 13 long, each five marks). All 13 original long answer fields contain grading guidance. Independently authored TEN separate English explanatory conceptual model-answer RESEARCH CANDIDATES covering Chapters 14, 15, 16, 17, 19, 20, 21, 22, 25 and 26, with FIFTY separate five-mark evaluation criteria. Topics: particle model and phase-change heat; mole-to-mass stoichiometric reasoning; redox anode/cathode without building electrical apparatus; collision theory and reaction rate; nitrogen and sulphur compounds and responsible pollution context; broad professional water-quality management without unsafe household treatment claims; functional groups, homologous-series CH2 increments and structural formulae; alkane/alkene structural differences; carbohydrates/proteins/lipids/nucleic acids; monomers, polymerization and responsible waste management.
+
+Original Chemistry X source whole-file SHA256 ef2917a8fc5ea030992d5f15df2493b7422954463ee4d54c25414fc81af706a1. Exact existing catalog source pectaa-recovered-chemistry10-en-2026, PDF declared SHA256 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6, edition label 2026, medium English, academicApproval false. This existing catalog entry is NOT ASSPS adopted school textbook edition/session/exam year, independently inspected original printed question/exercise page or professional faculty source correctness verification. Existing separate six-point Chemistry X conceptual EDITORIAL review packet and human-review flags are preserved; these new 10 candidate answers are not replies from an authorized qualified Chemistry teacher.
+
+**Exactly THREE Chemistry X original long question IDs are explicitly NOT counted as explanatory model-answer proposals**: X-CHEM-C18-L01 (laboratory soluble/insoluble salt preparation), X-CHEM-C23-L01 (ethanol preparation/reactions) and X-CHEM-C24-L01 (carboxylic acid laboratory reactions). Their original rubrics remain unchanged; practical/procedural subject content requires qualified subject teacher and safety assessment, not synthesized lab instructions. Authored only non-procedural conceptual content for the ten additional real original question IDs.
+
+## NEW Physics X original-ID closure
+The authentic existing physics10OriginalApplicationBatch2026.json contains 36 provisional source questions (12 MCQ, 12 short and 12 long). Exactly one long field X-PHY-C17-L03 (five marks) remained grading-rubric-only, asking for five meaningful comparisons of permanent magnets and electromagnets. Added one distinct source-pinned Grade X English explanatory conceptual original answer research candidate, with five suggested evaluation criteria and no electrical hardware operating/building directions. This is a different authentic Grade X original ID from the earlier completed Physics IX magnet topic; it does not duplicate or rewrite the original Physics IX answer.
+
+Original Physics X source whole-file SHA256 a214d121e4a6b21fa7e41f7b6d7d7207968b7e7ab0b71145ea68cd9ef4ac5255; existing catalog pectaa-catalog-024; declared PDF SHA256 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f; catalog English 2026-27, academicApproval false, source page evidence only textbook TOC not physical original question exercise page.
+
+All new proposed entries record the real stable question ID, original source file SHA, whole original question SHA, original answer SHA, chapter/topic/marks, distinct proposed marking criteria; subject-qualified human verification=false, actual school-adopted textbook/printed page=false, Urdu equivalence=false, independentReviewerId=null, approvedRevisionId=null, academicApproved=false, verifiedPublished=false. Original question-answer fields and official papers are unchanged.
+
+## Independent public terminology references — NOT school book verification
+- IUPAC Gold Book, "anode" DOI 10.1351/goldbook.A00370 https://goldbook.iupac.org/terms/view/A00370 ; oxidation at the anode.
+- IUPAC Gold Book, "cathode" DOI 10.1351/goldbook.C00905 https://goldbook.iupac.org/terms/view/C00905 ; reduction at the cathode.
+- IUPAC Gold Book, "homologous" https://goldbook.iupac.org/terms/view/10807 ; compounds in a series share functional groups with a fixed structural difference.
+- IUPAC Gold Book, "monomer molecule" https://goldbook.iupac.org/terms/view/M04019 and "polymerization" https://goldbook.iupac.org/terms/view/P04740 ; basic terms independently checked.
+These factual background links do NOT certify ASSPS book adoption, textbook printing, exact physical exercise page, school academic year, answer correctness of each full draft or actual qualified independent faculty approval. No external copyrighted collection reproduced.
+
+## NEW full-corpus anti-inflation and safe backlog
+Updated ops/qbank/reconcile-grade910-authored-answer-coverage.cjs to reconcile 12 separate subject original files and SHA-bound research packets, each counted exact distinct original long-question ID, raw original source SHA, full original question SHA, original rubric-answer SHA, original source chapter/topic/marks, number of separate marking criteria equal to authentic awarded marks, and absence of fabricated reviewer/approval/publication. Past 109-ID versioned evidence from previous commit stays untouched.
+
+Final metadata-only new docs/question-bank/ASSPS_GRADE910_120_DISTINCT_UNAPPROVED_ANSWER_PROPOSALS_20261009.{json,md} proves:
+- Original provisional authored question corpus 2,581 unchanged, 564 original long, 166 original rubric-only long-answer fields unchanged.
+- 120 distinct original question IDs with separately authored unapproved explanatory research answers (previous 109 + ten Chemistry X + one Physics X).
+- 618 proposed distinct marking points (previous 563 + Chemistry X 50 + Physics X 5).
+- 46 original rubric-only long question IDs remain without independent full-answer draft: 43 Chemistry IX originals, three explicitly deferred Chemistry X practical/procedural questions. ZERO source/page human verified, ZERO independently human academically reviewed, ZERO approved, ZERO verified published.
+- These 120 are proposed answer documents only; not an increase in the original 2,581 questions and never published to Paper Studio.
+
+## Original executed test evidence and safety limits
+- Chemistry X 10 source-bound authored model answer and three-excluded practical topics, exact catalog/hash and chemistry facts 9/9 PASS: /tmp/assps-chem10-ten-targeted-final-20261009.tap, 0 failed/skipped/cancelled.
+- Physics X single authentic original question, five conceptual comparisons and exact authoring/provenance 6/6 PASS: /tmp/assps-phys10-single-targeted-final-20261009.tap, 0 failed/skipped/cancelled.
+- 12-cohort anti-duplication/metadata tampering/5-versus-7-mark and three Chemistry X deferrals 12/12 PASS: /tmp/assps-grade910-120-coverage-targeted-20261009.tap.
+- Full combined original signed reviewer/publisher/answer policy and new subject authoring tests 181/181 PASS process exit 0, no fail/skip/cancel: /tmp/assps-grade910-chemphys10-final-combined-20261009.tap and matching .exit.
+- Original entire Academic focused suite 184/184 PASS process exit 0, 0 failed/skipped/cancel: /tmp/assps-grade910-chemphys10-focused-20261009.tap and matching .exit.
+- Original complete Grade IX/X staging suite 510/510 PASS process exit 0, 0 failed/skipped/cancel: /tmp/assps-grade910-chemphys10-staging-20261009.tap and matching .exit.
+- Original SHA pins, JS syntax, clean staging diff, exact GitHub remote source SHA/worktree cleanliness checked before/after committing. All unit tests are isolated mock/data integrity tests, NOT actual qualified teacher independent Chemistry/Physics answer verification, textbook adoption/physical PDF exercise-page evidence, school Urdu equivalence review, live restricted-role PostgreSQL RLS acceptance or SaaS Core release authorization.
+
+## Authentic remaining academic blockers and coordination
+The remaining 43 Chemistry IX long-answer IDs need safe source-verified research; original three Chemistry X procedure-related questions need qualified teacher-led concept/safety suitability decisions, not autogenerated laboratory operations. School actual Grade IX/X adopted titles, edition/medium/session/board exam year, original printed/exercise page and PDF-byte evidence missing. For all 120 proposals, separate qualified faculty must review answer and proposed marks, correct as needed in new immutable approved question revisions, with independent authorized reviewer signoff and source provenance. Paper Studio verified Grade IX/X selector remains EMPTY until approval. SaaS Core solely owns restricted-role tenant RLS/security, release certification and production deployment. **Production HOLD.**

@@ -1,0 +1,904 @@
+{
+  "schemaVersion": "assps-grade910-cached-pdf-byte-reattest-v1",
+  "scope": "ACTUAL_READ_ONLY_CACHE_FILE_BYTE_SHA_NO_OFFICIAL_SESSION_PAGE_OR_ACADEMIC_CERTIFICATION",
+  "cacheRootAlias": "ASSPS_PRIVATE_SOURCE_CACHE",
+  "manifestCount": 111,
+  "verifiedSourceCount": 110,
+  "uncheckedSourceCount": 1,
+  "mismatches": 0,
+  "summary": {
+    "BYTE_SHA256_MATCH": 110,
+    "NO_OFFICIAL_SHA_QUARANTINED": 1
+  },
+  "bytesRead": 5408429581,
+  "sourceApproved": 0,
+  "questionSourceVerified": 0,
+  "humanReviewApproved": 0,
+  "published": 0,
+  "results": [
+    {
+      "recordId": "pectaa-catalog-001",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "1308a2ea8cd8460a96161d99b66c8e809f60f4856f917061134be7d92c6b8fd8",
+      "expectedSha256": "1308a2ea8cd8460a96161d99b66c8e809f60f4856f917061134be7d92c6b8fd8",
+      "bytes": 35605320,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-002",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+      "expectedSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+      "bytes": 25011563,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-003",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "426ec0e75e3952e0a5a0372f2021ada9ca9ce477f0aabf870cedd27eaf61705e",
+      "expectedSha256": "426ec0e75e3952e0a5a0372f2021ada9ca9ce477f0aabf870cedd27eaf61705e",
+      "bytes": 10242198,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-004",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+      "expectedSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+      "bytes": 19576377,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-005",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+      "expectedSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+      "bytes": 113912128,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-006",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+      "expectedSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+      "bytes": 97707720,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-007",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+      "expectedSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+      "bytes": 56635737,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-008",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+      "expectedSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+      "bytes": 165433794,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-009",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+      "expectedSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+      "bytes": 31362949,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-010",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+      "expectedSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+      "bytes": 84697797,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-011",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+      "expectedSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+      "bytes": 51384536,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-012",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+      "expectedSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+      "bytes": 86790350,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-013",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+      "expectedSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+      "bytes": 17968456,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-014",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "b215a77d0209bfba751082c90c7c58af3414f7859fd87a8b164b5adc258a13ee",
+      "expectedSha256": "b215a77d0209bfba751082c90c7c58af3414f7859fd87a8b164b5adc258a13ee",
+      "bytes": 166991816,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-015",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+      "expectedSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+      "bytes": 86277897,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-016",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+      "expectedSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+      "bytes": 48593549,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-017",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+      "expectedSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+      "bytes": 103679382,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-018",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+      "expectedSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+      "bytes": 90106592,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-019",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+      "expectedSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+      "bytes": 103176678,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-020",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+      "expectedSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+      "bytes": 51021585,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-021",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+      "expectedSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+      "bytes": 68159705,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-022",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6",
+      "expectedSha256": "09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6",
+      "bytes": 81906216,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-023",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "0205c32c3d65df5270c2b4cdb32739276cae5ea67670e5f8749591bb0260d8ae",
+      "expectedSha256": "0205c32c3d65df5270c2b4cdb32739276cae5ea67670e5f8749591bb0260d8ae",
+      "bytes": 11056539,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-024",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+      "expectedSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+      "bytes": 122695379,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-025",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "acefc9ba9e8c60baa66df7f222db169def63a93b69df3f664c14841ac009474a",
+      "expectedSha256": "acefc9ba9e8c60baa66df7f222db169def63a93b69df3f664c14841ac009474a",
+      "bytes": 94367319,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-026",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "f9d449a6075b17282831c95521f060ac246c422f7169a1bc80cf6568fd185a62",
+      "expectedSha256": "f9d449a6075b17282831c95521f060ac246c422f7169a1bc80cf6568fd185a62",
+      "bytes": 57906765,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-027",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+      "expectedSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+      "bytes": 131046901,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-028",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "c807ef42eaf178de8e4eafdff0dc2443ea130702b592b440ad8c7c76baf6542b",
+      "expectedSha256": "c807ef42eaf178de8e4eafdff0dc2443ea130702b592b440ad8c7c76baf6542b",
+      "bytes": 48338065,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-029",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "8b9153a12a97ad03684cb609cea0069fa41843960157e06edbb11d9ecb9a2a17",
+      "expectedSha256": "8b9153a12a97ad03684cb609cea0069fa41843960157e06edbb11d9ecb9a2a17",
+      "bytes": 57610400,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-030",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+      "expectedSha256": "52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7",
+      "bytes": 52197765,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-031",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+      "expectedSha256": "5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704",
+      "bytes": 31934898,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-032",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+      "expectedSha256": "0d96a5e43d1eb5af51f1cc1066d0f1276463c48fe1f47e200768c13cbe59b76d",
+      "bytes": 25496898,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-033",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+      "expectedSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+      "bytes": 71954190,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-034",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b",
+      "expectedSha256": "393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b",
+      "bytes": 57233966,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-035",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+      "expectedSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+      "bytes": 41978721,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-036",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "55d9ccb3642f8ac7d7728707646db806dd033d4e7d5e0d172546993667a18083",
+      "expectedSha256": "55d9ccb3642f8ac7d7728707646db806dd033d4e7d5e0d172546993667a18083",
+      "bytes": 55632180,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-037",
+      "status": "NO_OFFICIAL_SHA_QUARANTINED"
+    },
+    {
+      "recordId": "pectaa-catalog-038",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+      "expectedSha256": "73f368fc6de9dffb19abe729251b0ff5db71452d454353993c39b1e4b6b29382",
+      "bytes": 73276320,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-039",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+      "expectedSha256": "f6a31afdc845e5e9d738f3486d06f2bb450f6ec22e895a5d2e90557931f0b6bf",
+      "bytes": 39467610,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-040",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224",
+      "expectedSha256": "4ef990c8f5e98f79d856f22c02390a6c8f8a59e29e8a7a7e2c66ff9c144be224",
+      "bytes": 63814197,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-041",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "f5e528a423503b67894702472a8070a1230ab839a4cef14258b109e0a585436a",
+      "expectedSha256": "f5e528a423503b67894702472a8070a1230ab839a4cef14258b109e0a585436a",
+      "bytes": 31571565,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-042",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+      "expectedSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
+      "bytes": 49659005,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-043",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+      "expectedSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+      "bytes": 37880122,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-044",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+      "expectedSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+      "bytes": 28683619,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-045",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+      "expectedSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+      "bytes": 44625210,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-046",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+      "expectedSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+      "bytes": 55864300,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-047",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "1120794a943a815308719b135add2da3989d25487aa527a3666d1824b6758e41",
+      "expectedSha256": "1120794a943a815308719b135add2da3989d25487aa527a3666d1824b6758e41",
+      "bytes": 49205838,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-048",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "1ede957841933ef417e576592eeb98698e2c3ec073c0f20058efda72fe20c1fe",
+      "expectedSha256": "1ede957841933ef417e576592eeb98698e2c3ec073c0f20058efda72fe20c1fe",
+      "bytes": 42634064,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-049",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+      "expectedSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+      "bytes": 6687147,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-050",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "6defe274fd12fa2ae36e8f9b9d4d088f53a5f371a36f243cd0fbe2ba6f59efe5",
+      "expectedSha256": "6defe274fd12fa2ae36e8f9b9d4d088f53a5f371a36f243cd0fbe2ba6f59efe5",
+      "bytes": 16588678,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-051",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "47f06eff98adfb392bd21c7c25037469fea130a8eb7a1a9c1de35a364685a15a",
+      "expectedSha256": "47f06eff98adfb392bd21c7c25037469fea130a8eb7a1a9c1de35a364685a15a",
+      "bytes": 39948122,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-052",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "65d03c8b2d214f4bf434ed2c352cd78c8b259d51c8c243cdb6b33a41b0e19f4d",
+      "expectedSha256": "65d03c8b2d214f4bf434ed2c352cd78c8b259d51c8c243cdb6b33a41b0e19f4d",
+      "bytes": 20024321,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-053",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "e8df5b79e7e2874e76b965d13e50e3ead09945f7d3df23be9191f2e5e7aeeb7c",
+      "expectedSha256": "e8df5b79e7e2874e76b965d13e50e3ead09945f7d3df23be9191f2e5e7aeeb7c",
+      "bytes": 43257753,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-054",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+      "expectedSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+      "bytes": 11586177,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-055",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "85faf38e9d8a1ebe78cb1629d775ac8a50bd95e4714146851aa0668fb44dd08a",
+      "expectedSha256": "85faf38e9d8a1ebe78cb1629d775ac8a50bd95e4714146851aa0668fb44dd08a",
+      "bytes": 71169714,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-056",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "97fdcd6b9dfdbfa4ae4e8d5be3314adbafe83e590c66cea30a0291def0a51356",
+      "expectedSha256": "97fdcd6b9dfdbfa4ae4e8d5be3314adbafe83e590c66cea30a0291def0a51356",
+      "bytes": 68053111,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-057",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+      "expectedSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+      "bytes": 12167534,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-058",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "626c7b941b0bfc57d2fbdc8d8adce51789e29678e8c3f89330faa62d0501ddba",
+      "expectedSha256": "626c7b941b0bfc57d2fbdc8d8adce51789e29678e8c3f89330faa62d0501ddba",
+      "bytes": 44465010,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-059",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "ff0705323317800c3cb6345bdb17decf624b913cef5677aada234d6d7e23c512",
+      "expectedSha256": "ff0705323317800c3cb6345bdb17decf624b913cef5677aada234d6d7e23c512",
+      "bytes": 36154836,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-060",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "3e7bd9bdf9405d0601138b10e44d4bb3677d0c3ddaaad052518c0155025c3b6f",
+      "expectedSha256": "3e7bd9bdf9405d0601138b10e44d4bb3677d0c3ddaaad052518c0155025c3b6f",
+      "bytes": 5494237,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-061",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "a8d0b0ee36a86ca8dae168fc584e42cbf8d4a9aff92b700ef49a2f03ad4dfae5",
+      "expectedSha256": "a8d0b0ee36a86ca8dae168fc584e42cbf8d4a9aff92b700ef49a2f03ad4dfae5",
+      "bytes": 51460049,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-062",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818",
+      "expectedSha256": "170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818",
+      "bytes": 7754740,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-063",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "ba0d9da1868fa1abc4cb762832e335c98362be43741cdbb95e7b102ff9a64616",
+      "expectedSha256": "ba0d9da1868fa1abc4cb762832e335c98362be43741cdbb95e7b102ff9a64616",
+      "bytes": 37358155,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-064",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "277bd11cb59f8e424c519572f8db727349cabb131d60e1e8be57753f60562c6c",
+      "expectedSha256": "277bd11cb59f8e424c519572f8db727349cabb131d60e1e8be57753f60562c6c",
+      "bytes": 24415067,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-065",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+      "expectedSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+      "bytes": 79217551,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-066",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+      "expectedSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+      "bytes": 73281846,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-067",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+      "expectedSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+      "bytes": 37045794,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-068",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+      "expectedSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+      "bytes": 79919447,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-069",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722",
+      "expectedSha256": "05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722",
+      "bytes": 41407239,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-070",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "81829814fdbc6005d89b3c91672610a5a0ac274f9d70a43d6c4e9a7da6ce5902",
+      "expectedSha256": "81829814fdbc6005d89b3c91672610a5a0ac274f9d70a43d6c4e9a7da6ce5902",
+      "bytes": 41978736,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-071",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+      "expectedSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+      "bytes": 24877022,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-072",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "d88ff4dd8f1e87791bf580dff1ccb3bb5af5d6360cf487e8ad8ca4a6d12e4bd7",
+      "expectedSha256": "d88ff4dd8f1e87791bf580dff1ccb3bb5af5d6360cf487e8ad8ca4a6d12e4bd7",
+      "bytes": 46304515,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-073",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "1cb7bb3c1847880cd4e22fb6d1ef6247ade6018528784a040f1bdf084f995483",
+      "expectedSha256": "1cb7bb3c1847880cd4e22fb6d1ef6247ade6018528784a040f1bdf084f995483",
+      "bytes": 57225410,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-074",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "316d84fd54d9c5bac9ee4ef79b2ec69b1e206669f5d96e9f8687d036fb746da8",
+      "expectedSha256": "316d84fd54d9c5bac9ee4ef79b2ec69b1e206669f5d96e9f8687d036fb746da8",
+      "bytes": 5880385,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-075",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "4a20e5cf2ef57eca9bd2c21164cf4c3cef5d325cbdfef457f8755c2de2b6962e",
+      "expectedSha256": "4a20e5cf2ef57eca9bd2c21164cf4c3cef5d325cbdfef457f8755c2de2b6962e",
+      "bytes": 64254218,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-076",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "cd9f01b1c32e7c929e25eb89e7ff7c16d4fa25c4f5c1de9bd5268627bf682df3",
+      "expectedSha256": "cd9f01b1c32e7c929e25eb89e7ff7c16d4fa25c4f5c1de9bd5268627bf682df3",
+      "bytes": 109263930,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-077",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "d597903f5a7e47199dba6f972caf3d6c7a156a48098e9a9cca73ee48c4b0cdf6",
+      "expectedSha256": "d597903f5a7e47199dba6f972caf3d6c7a156a48098e9a9cca73ee48c4b0cdf6",
+      "bytes": 26801881,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-078",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "64c4de1e013ad47028305c5800192cceaa1a0e5f9854f4298ab4b845a9678253",
+      "expectedSha256": "64c4de1e013ad47028305c5800192cceaa1a0e5f9854f4298ab4b845a9678253",
+      "bytes": 14669271,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-079",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "b5535990ac7c19e320d3e4786f54e5b7d836b936ddf365a41045ca764647cd31",
+      "expectedSha256": "b5535990ac7c19e320d3e4786f54e5b7d836b936ddf365a41045ca764647cd31",
+      "bytes": 4251922,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-080",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "fce267423eb36454bc33e179c33b3ca975146c57909473270b472330f26aa09b",
+      "expectedSha256": "fce267423eb36454bc33e179c33b3ca975146c57909473270b472330f26aa09b",
+      "bytes": 42093805,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-081",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "4594b16697040e6bd1ab6616af012ff3f32a849b5345132519548dea92858d57",
+      "expectedSha256": "4594b16697040e6bd1ab6616af012ff3f32a849b5345132519548dea92858d57",
+      "bytes": 11227925,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-082",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "dc2ee57a1dc58434328693a64fa47b39f6f3579f045a2bdcac3ed2162a181fdd",
+      "expectedSha256": "dc2ee57a1dc58434328693a64fa47b39f6f3579f045a2bdcac3ed2162a181fdd",
+      "bytes": 12840789,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-083",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "0e5ce4ef4da1bca0dba68b831585ffd73e416a875171e7a5aea7a6746904c60a",
+      "expectedSha256": "0e5ce4ef4da1bca0dba68b831585ffd73e416a875171e7a5aea7a6746904c60a",
+      "bytes": 15000489,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-084",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "2a41067fe406de71df31e6c50cc5ab42bec24f504acb7f291f399b1176e63b3b",
+      "expectedSha256": "2a41067fe406de71df31e6c50cc5ab42bec24f504acb7f291f399b1176e63b3b",
+      "bytes": 93253312,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-085",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "21a2d2013764e48e417dea35e7d969f1ce83ab2253d7200c14cc95bcbac61643",
+      "expectedSha256": "21a2d2013764e48e417dea35e7d969f1ce83ab2253d7200c14cc95bcbac61643",
+      "bytes": 93708804,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-086",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "d20c6092caef1131b313e96f480d8cc03171a3b013a86701a83d4d7ba3acaa61",
+      "expectedSha256": "d20c6092caef1131b313e96f480d8cc03171a3b013a86701a83d4d7ba3acaa61",
+      "bytes": 26736978,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-087",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "80f56b6b572036d610778357e01b2a092689df3195d676589f55cc4642fbde69",
+      "expectedSha256": "80f56b6b572036d610778357e01b2a092689df3195d676589f55cc4642fbde69",
+      "bytes": 22527776,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-088",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "3033aab932fe8699906d9d6fcb86a103018ce2c5e8050b5f97cd2aaeb1972834",
+      "expectedSha256": "3033aab932fe8699906d9d6fcb86a103018ce2c5e8050b5f97cd2aaeb1972834",
+      "bytes": 33639090,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-089",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "f4adaf475b6e3416137e650a485ee9ea64118c07b88b0d03f39478f60eafd1c7",
+      "expectedSha256": "f4adaf475b6e3416137e650a485ee9ea64118c07b88b0d03f39478f60eafd1c7",
+      "bytes": 30605595,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-090",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "c1573c76d3daf16343fa54b29cccdf09331f8043f404d09b183cd37cbb67a765",
+      "expectedSha256": "c1573c76d3daf16343fa54b29cccdf09331f8043f404d09b183cd37cbb67a765",
+      "bytes": 86052084,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-091",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "456853055d77ffa9ad82461fb66853943adb6eee0429cfb2a152100b926f5956",
+      "expectedSha256": "456853055d77ffa9ad82461fb66853943adb6eee0429cfb2a152100b926f5956",
+      "bytes": 45410618,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-092",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "c5b89332059c43188dd4f4333185f841cbf34e01b96483e562d478f2b2fc6023",
+      "expectedSha256": "c5b89332059c43188dd4f4333185f841cbf34e01b96483e562d478f2b2fc6023",
+      "bytes": 30406148,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-093",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "3721b434b30f8cb35f0e5537cdf47ee698b4cd8f21ed232da2f677305e8fe20c",
+      "expectedSha256": "3721b434b30f8cb35f0e5537cdf47ee698b4cd8f21ed232da2f677305e8fe20c",
+      "bytes": 12615930,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-094",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "0ef82349de7b814598083f73ac309a87f8736a8bda597e4f3dad728b0656d6e1",
+      "expectedSha256": "0ef82349de7b814598083f73ac309a87f8736a8bda597e4f3dad728b0656d6e1",
+      "bytes": 21935667,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-095",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "f6eb776bfd63238a83c11e20d25ad84c63a48bfc5149db4e162ce81c9c009f64",
+      "expectedSha256": "f6eb776bfd63238a83c11e20d25ad84c63a48bfc5149db4e162ce81c9c009f64",
+      "bytes": 14888309,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-096",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "859aa7195cf0695c28b9b0bf35486bb5271154f1998dd2b961768d73821d65ea",
+      "expectedSha256": "859aa7195cf0695c28b9b0bf35486bb5271154f1998dd2b961768d73821d65ea",
+      "bytes": 16918809,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-097",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "a6ba1e3fd45c3b1bc48cf895e115f53d6d99b35e81b3aba60f9945edadbba6ab",
+      "expectedSha256": "a6ba1e3fd45c3b1bc48cf895e115f53d6d99b35e81b3aba60f9945edadbba6ab",
+      "bytes": 10084869,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-098",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "922f7532e108782749ac5b3486455bac6a4915df274e5b25b78586d0c076cfe9",
+      "expectedSha256": "922f7532e108782749ac5b3486455bac6a4915df274e5b25b78586d0c076cfe9",
+      "bytes": 46343956,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-099",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "046d1179ab0a663ae32d2c82d70f957d797c64cfe4c58eb4d4ff42b86a2ad0d6",
+      "expectedSha256": "046d1179ab0a663ae32d2c82d70f957d797c64cfe4c58eb4d4ff42b86a2ad0d6",
+      "bytes": 48364564,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-100",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "f5836efe7dbf9a57e32e1e8ff33e5ebfd9f62fa0b128fcdbc29613939cc727e3",
+      "expectedSha256": "f5836efe7dbf9a57e32e1e8ff33e5ebfd9f62fa0b128fcdbc29613939cc727e3",
+      "bytes": 20523507,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-101",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "643fa945970d973e7560950208a82c845a0baa53f9eb32f43e1d11eed662fd87",
+      "expectedSha256": "643fa945970d973e7560950208a82c845a0baa53f9eb32f43e1d11eed662fd87",
+      "bytes": 21049450,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-102",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "913f53ae554f51b86f7cb90a1cd6f38f82bb95a72d2954cadc5c76f0f9ff950c",
+      "expectedSha256": "913f53ae554f51b86f7cb90a1cd6f38f82bb95a72d2954cadc5c76f0f9ff950c",
+      "bytes": 23189630,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-103",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "433398ab9521ba45e6439d2c0e110a2241fe25bd51a17cf5ed9ad482f8a242a1",
+      "expectedSha256": "433398ab9521ba45e6439d2c0e110a2241fe25bd51a17cf5ed9ad482f8a242a1",
+      "bytes": 73066750,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-104",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "fd1decd56dbdde2014e699a017533738414fdd798c9a7a062c9b665537e14ee5",
+      "expectedSha256": "fd1decd56dbdde2014e699a017533738414fdd798c9a7a062c9b665537e14ee5",
+      "bytes": 37650945,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-105",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "6d503735e51a4a3f1fe5d4d44b232c97ab3a8e622ba9d42e3276ccdac01df58e",
+      "expectedSha256": "6d503735e51a4a3f1fe5d4d44b232c97ab3a8e622ba9d42e3276ccdac01df58e",
+      "bytes": 37053063,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-106",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "2906adcad1301a0008d251e89735310bdfe70fd71965879dee7dc42b6185d7a7",
+      "expectedSha256": "2906adcad1301a0008d251e89735310bdfe70fd71965879dee7dc42b6185d7a7",
+      "bytes": 36739272,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-catalog-107",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+      "expectedSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+      "bytes": 131046901,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-recovered-chemistry10-en-2026",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+      "expectedSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+      "bytes": 21483930,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-recovered-computer10-en-2026",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+      "expectedSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+      "bytes": 39516588,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-recovered-tarjuma9-2026",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66",
+      "expectedSha256": "e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66",
+      "bytes": 30238182,
+      "pdfMagic": true
+    },
+    {
+      "recordId": "pectaa-recovered-tarjuma10-current",
+      "status": "BYTE_SHA256_MATCH",
+      "actualSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+      "expectedSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+      "bytes": 46877847,
+      "pdfMagic": true
+    }
+  ]
+}

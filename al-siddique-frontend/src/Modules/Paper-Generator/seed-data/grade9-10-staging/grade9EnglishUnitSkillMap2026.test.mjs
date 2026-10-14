@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
+const d=JSON.parse(fs.readFileSync(new URL('./grade9EnglishUnitSkillMap2026.json',import.meta.url),'utf8'));
+test('all Grade IX English units have page-bound skill evidence',()=>{assert.equal(d.units.length,11);for(const u of d.units){assert(u.unit>=1&&u.unit<=11);assert(u.title);assert(Object.keys(u.skills).length>=5);for(const pages of Object.values(u.skills)){assert(pages.length>0);assert(pages.every(Number.isInteger));}}});
+test('OCR-only units are explicit and cannot silently become content authority',()=>{assert.deepEqual(d.units.filter(x=>x.evidenceMode==='RENDERED_PAGE_OCR_REVIEW').map(x=>x.unit),[1,4,5]);assert.match(d.evidencePolicy,/cannot approve question content/i);});
+test('actual annual paper gate remains closed despite textbook skill mapping',()=>{assert.equal(d.releaseGuards.actual2026PaperArtifactStillRequired,true);assert.equal(d.releaseGuards.authoringEligible,false);assert.equal(d.releaseGuards.copyTextbookPassages,false);assert.equal(d.releaseGuards.copyPastPaperStems,false);});
