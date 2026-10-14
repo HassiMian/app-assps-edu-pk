@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { getAuthUser } from '../../services/api'
+import api, { getAuthUser } from '../../services/api'
 import index from './data/grade910AdoptionCatalogIndex.json'
 
 const SHA = /^[0-9a-f]{64}$/
@@ -100,11 +100,19 @@ export default function Grade910HumanSignoff() {
    verificationStatus:'UNTRUSTED_CLAIM_PENDING_SCHOOL_AUTHENTICATION',
    academicallyApproved:false,paperStudioSelectable:false,published:false
   }
+  try {
+   const receipt=await api.post('/api/grade910-signoffs/submissions', packet)
+   if(!receipt?.data?.success||!receipt.data.data?.id)throw Error('No receipt')
+   setMessage('Secure server receipt #'+receipt.data.data.id+' stored. Academic status: pending independent verification.')
+  } catch {
+   setMessage('Secure upload failed: NO server receipt. Nothing has been academically approved or published.')
+   return
+  }
   const blob=new Blob([JSON.stringify(packet,null,2)],{type:'application/json'})
   const url=URL.createObjectURL(blob),a=document.createElement('a')
   a.href=url;a.download='ASSPS_grade910_'+source.catalogId+'_'+mode+'_'+signedAt.slice(0,10)+'.json'
   a.click();setTimeout(()=>URL.revokeObjectURL(url),5000)
-  setMessage('Private signed-evidence file exported; send via authorized school evidence intake. This is NOT final approval or publication.')
+
  }
  const label=(title,value,fn,placeholder='')=><label style={{display:'block',marginTop:12}}>{title}
   <input style={inputStyle} value={value} onChange={e=>fn(e.target.value)} placeholder={placeholder}/>
@@ -159,7 +167,7 @@ export default function Grade910HumanSignoff() {
     <input type="checkbox" checked={confirmed} onChange={e=>setConfirmed(e.target.checked)}/> I am the actual named staff account holder, have personally verified the stated information, and understand this file is evidence pending verification—not approval.
    </label>
    <button type="button" onClick={confirmAndExport} disabled={!permitted} style={{padding:'12px 22px',marginTop:15,border:0,borderRadius:9,background:'#0a84ce',color:'#fff',fontWeight:700}}>
-     Export private signed evidence
+     Upload personal signoff securely
    </button>
    {message&&<p role="status">{message}</p>}
    <p style={{fontSize:13}}>Sensitive signature files are kept on the signer's device for controlled upload; never post signatures in school groups or public issues. No production database publication is performed by this screen.</p>
