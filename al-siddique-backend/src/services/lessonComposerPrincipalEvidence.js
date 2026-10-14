@@ -17,14 +17,20 @@ async function teacherAssignmentEvidence(client,schoolId,id){
  if(!scope.rowCount)throw reviewError('COMPOSER_SOURCE_NOT_FOUND',404)
  const row=scope.rows[0]
  const sql=[
-  'SELECT a.teacher_user_id,a.employee_id,a.section,a.class_name,a.subject,',
+  'SELECT a.teacher_user_id,a.employee_id,a.section,a.class_name,a.subject,a.source,',
   'e.is_active AS employee_active,u.is_active AS user_active,u.role AS user_role,',
   'EXISTS (SELECT 1 FROM timetable t WHERE t.school_id=a.school_id',
   'AND lower(trim(t.class_name))=lower(trim(a.class_name))',
   'AND lower(trim(t.subject))=lower(trim(a.subject))',
   "AND lower(trim(COALESCE(t.section,'')))=lower(trim(COALESCE(a.section,'')))",
   'AND t.teacher_id=a.teacher_user_id AND t.staff_identity_reviewed=true)',
-  'AS reviewed_timetable FROM teacher_class_assignments a',
+  'AS reviewed_timetable,',
+  'EXISTS (SELECT 1 FROM school_academic_approval_events ev',
+  "WHERE ev.school_id=a.school_id AND ev.action='teacher_assignment'",
+  'AND ev.object_id=a.id AND ev.actor_user_id IN',
+  "(SELECT id FROM users WHERE school_id=a.school_id AND role IN ('admin','principal') AND is_active=true)",
+  "AND ev.evidence_sha256 ~ '^[a-f0-9]{64}$') AS signed_assignment_audit",
+  'FROM teacher_class_assignments a',
   'JOIN employees e ON e.school_id=a.school_id AND e.id=a.employee_id',
   'AND e.user_id=a.teacher_user_id AND e.is_active=true',
   'JOIN users u ON u.school_id=a.school_id AND u.id=a.teacher_user_id',
@@ -35,15 +41,25 @@ async function teacherAssignmentEvidence(client,schoolId,id){
   'ORDER BY a.section,a.teacher_user_id'
  ].join(' ')
  const q=await client.query(sql,[schoolId,row.class_level,row.subject])
- const verified=q.rows.filter(a=>a.reviewed_timetable===true)
+ const suggestions=await client.query(
+  'SELECT DISTINCT class_name,section,subject,teacher_id,teacher_display_name,staff_identity_reviewed FROM timetable '+
+  'WHERE school_id=$1 AND lower(trim(class_name))=lower(trim($2)) '+
+  'AND lower(trim(subject))=lower(trim($3)) ORDER BY section,teacher_display_name',
+  [schoolId,row.class_level,row.subject])
+ const verified=q.rows.filter(a=>a.reviewed_timetable===true ||
+   (a.source==='signed-admin-review' && a.signed_assignment_audit===true))
  return {
    sourceId:id,classLevel:row.class_level,subject:row.subject,
    assignmentCandidates:q.rows.length,verifiedCount:verified.length,
    // Verified teacher identity alone does not certify textbook, schedule or Principal signature.
    readyForAcademicApproval:false,
    verificationStatus:verified.length?'MATCHED_IDENTITY_REQUIRES_ACADEMIC_REVIEW':'ASSIGNMENT_EVIDENCE_REQUIRED',
+   provisionalTimetableSuggestions:suggestions.rows.map(t=>({section:t.section,
+     teacherDisplayName:t.teacher_display_name||'(not recorded)',
+     teacherUserId:t.teacher_id||null,identityReviewed:t.staff_identity_reviewed===true,
+     notAssignment:true})),
    candidates:verified.map(a=>({teacherUserId:a.teacher_user_id,employeeId:a.employee_id,
-     section:a.section,verifiedTimetable:true}))
+     section:a.section,verifiedVia:a.reviewed_timetable===true?'REVIEWED_TIMETABLE':'SIGNED_ADMIN_ASSIGNMENT_EVENT'}))
  }
 }
 async function appendPrincipalEvidenceReview(client,{schoolId,id,user,expectedRevision,sourceDigest,declaration}){

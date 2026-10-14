@@ -271,6 +271,13 @@ export default function ComposerLessonReview(){
          Teacher ownership: {assignments?.verifiedCount>0?String(assignments.verifiedCount)+' verified institutional assignment(s)':'NOT VERIFIED'} ·
          Section: {assignments?.verifiedCount>0?'Verified options below':'NOT VERIFIED'}
          </div>
+         {(assignments?.provisionalTimetableSuggestions||[]).length>0&&<div className="composer-issues">
+           <b>Timetable references — unverified, NOT teacher assignments</b>
+           <ul>{assignments.provisionalTimetableSuggestions.map((candidate,i)=><li key={i}>
+             {candidate.teacherDisplayName}, section {candidate.section||'unspecified'} ·
+             identity reviewed: {candidate.identityReviewed?'yes':'NO'} · school assignment not verified
+           </li>)}</ul>
+         </div>}
          {assignments?.candidates?.length>0&&<div className="composer-issues">
            <b>Verified assignment evidence (not academic approval)</b>
            <ul>{assignments.candidates.map(a=><li key={String(a.teacherUserId)+'-'+String(a.section)}>

@@ -8,7 +8,7 @@ function db(){
  const state={revision:1,payload:{composerIntake:true,sourceDigest,sourceSubmissions:[{verbatim:'immutable source'}]},
     created_by:null,sent_to_portal:false}
  const sql=[]
- return {state,sql,async query(statement,params){
+ const d={state,sql,assignmentRows:[],suggestionRows:[],async query(statement,params){
   sql.push(statement)
   if(statement.includes("FROM users WHERE id=$1")){
    if((params[0]===9||params[0]===11)&&params[1]===1)return {rowCount:1,rows:[{id:params[0]}]}
@@ -21,15 +21,16 @@ function db(){
    return {rowCount:1,rows:[{public_id:'LPREVIEW-20261014-starter-english',
       class_level:'Starter',subject:'English',payload:state.payload}]}
   }
+  if(statement.includes('FROM timetable WHERE school_id=$1'))return {rowCount:this.suggestionRows.length,rows:this.suggestionRows}
   if(statement.includes('FROM teacher_class_assignments')){
-   return {rowCount:0,rows:[]}
+   return {rowCount:this.assignmentRows.length,rows:this.assignmentRows}
   }
   if(statement.startsWith('UPDATE lesson_plans SET')){
    state.payload.principalReviews=JSON.parse(params[0]);state.revision++
    return {rowCount:1,rows:[{revision:state.revision}]}
   }
   throw Error('UNKNOWN_SQL: '+statement)
- }}
+ }};return d
 }
 const actor={id:9,role:'principal',school_id:1}
 const call=(d,overrides={})=>appendPrincipalEvidenceReview(d,{
@@ -94,4 +95,27 @@ test('school admin designated Principal may sign only if its active user row is 
  assert.equal(r.approved,false)
  assert.equal(d.state.payload.principalReviews[0].reviewedByPrincipalUserId,11)
  assert.ok(d.sql.some(q=>q.includes('lower(trim(designation))')))
+})
+
+test('signed academic assignment needs real source event, not a forged source string',async()=>{
+ const d=db()
+ d.assignmentRows=[{teacher_user_id:123,employee_id:45,section:'Blue',source:'signed-admin-review',reviewed_timetable:false,signed_assignment_audit:false}]
+ let r=await teacherAssignmentEvidence(d,1,'LPREVIEW-20261014-starter-english')
+ assert.equal(r.verifiedCount,0)
+ d.assignmentRows[0].signed_assignment_audit=true
+ r=await teacherAssignmentEvidence(d,1,'LPREVIEW-20261014-starter-english')
+ assert.equal(r.verifiedCount,1)
+ assert.equal(r.candidates[0].verifiedVia,'SIGNED_ADMIN_ASSIGNMENT_EVENT')
+ assert.equal(r.readyForAcademicApproval,false)
+})
+
+test('timetable staff names remain explicitly provisional without signed identity approval',async()=>{
+ const d=db()
+ d.suggestionRows=[{section:'Blue',teacher_id:4194,teacher_display_name:'Teacher candidate',staff_identity_reviewed:false}]
+ const r=await teacherAssignmentEvidence(d,1,'LPREVIEW-20261014-starter-english')
+ assert.equal(r.verifiedCount,0)
+ assert.equal(r.provisionalTimetableSuggestions.length,1)
+ assert.equal(r.provisionalTimetableSuggestions[0].notAssignment,true)
+ assert.equal(r.provisionalTimetableSuggestions[0].identityReviewed,false)
+ assert.equal(r.readyForAcademicApproval,false)
 })
