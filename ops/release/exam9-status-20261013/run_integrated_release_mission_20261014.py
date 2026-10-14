@@ -65,6 +65,18 @@ def run_mission(database='apexos', port=5432, receipt_bundle=None, with_tests=Tr
         paper_sources=json.loads(ps_out)
     except (ValueError,TypeError):
         paper_sources={'status':'HOLD','reason':(ps_err or 'source scan was not JSON')[:150]}
+    cr, co, ce=run([sys.executable,str(HERE/'verify_exam9_active_roster_coverage_20261014.py')],timeout=35)
+    try:
+        coverage=json.loads(co)
+    except (ValueError,TypeError):
+        coverage={'status':'HOLD','error':(ce or 'roster coverage evidence missing')[:150]}
+    cover_integrity=coverage.get('integrity',{})
+    coverage_safe=(cr==0 and coverage.get('original_score_snapshot_intact') is True
+        and cover_integrity.get('invalid_bounds') == 0
+        and cover_integrity.get('duplicate_student_subject') == 0
+        and coverage.get('no_saved_subject_offerings') == 0
+        and coverage.get('partially_saved_subject_offerings') == 0
+        and not coverage.get('unmatched_saved_subjects'))
     if STANDALONE_SHADOW.exists():
         s_rc,s_out,s_err=run([sys.executable,str(STANDALONE_SHADOW)],timeout=35)
         try:
@@ -119,6 +131,7 @@ def run_mission(database='apexos', port=5432, receipt_bundle=None, with_tests=Tr
     # Merely synthesizing fixture results without a bundle must NEVER certify.
     live_ready=(receipt_bundle is not None and g_rc==0
         and all(gates.get(k) is True for k in expected_gates)
+        and coverage_safe
         and all(v.get('pass') is True for v in tests.values())
         and source_clean
         and ingress['school_saas']==200 and ingress['timetable']==200
@@ -131,7 +144,10 @@ def run_mission(database='apexos', port=5432, receipt_bundle=None, with_tests=Tr
       'source_sha':version,'source_clean':source_clean,
       'authenticated_receipt_bundle_supplied':receipt_bundle is not None,
       'gates':{k:bool(gates.get(k) is True) for k in expected_gates},
-      'blocked':sorted(k for k in expected_gates if gates.get(k) is not True),
+      'blocked':sorted([k for k in expected_gates if gates.get(k) is not True] +
+                      ([] if coverage_safe else ['current_exam9_mark_coverage_independently_resolved'])),
+      'mark_coverage_review_complete':coverage_safe,
+      'current_exam9_mark_coverage':coverage,
       'current_metrics':preflight.get('metrics',{}),
       'exam9_paper_source_review':paper_sources,
       'source_tests':tests,

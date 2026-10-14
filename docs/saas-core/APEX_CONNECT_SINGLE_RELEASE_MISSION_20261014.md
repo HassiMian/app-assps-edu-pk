@@ -60,3 +60,7 @@ marks totals and inconsistencies, present them to authenticated school Admin
 or Principal, and store the actual authorized reviewer session identity,
 approval revision and timestamp. Paper Vault status=approved by itself is
 not an institution-signed exam maximum.
+
+## Current active-roster marks coverage and recovery gate
+
+Integrated the repeatable, read-only live coverage scanner ops/release/exam9-status-20261013/verify_exam9_active_roster_coverage_20261014.py into the one-shot mission. Incomplete current roster coverage, unmatched saved subject or original-score hash drift now block full release. Its current audit finds 11 zero-saved offerings, 2 partial offerings and 1 unmatched saved Mover Computer subject, with 284 unrecorded places against current active roster, many Quran/Nazra. These are institutional review flags, never numeric zeros, and do not include Grade Nine as it had no First Term. See docs/saas-core/ASSPS_EXAM9_MARKS_READONLY_PROTECTION_20261014.md for consistent root-restricted backup and independently successful isolated PostgreSQL restore. No production scores were touched.

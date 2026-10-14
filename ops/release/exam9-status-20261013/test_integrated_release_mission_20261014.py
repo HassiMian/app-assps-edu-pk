@@ -23,7 +23,7 @@ COMPLETE={
 SIGNED={'production_release_certified':True,'authenticated_real_staff':True,'prod_app_switched':True,'status':'SIGNED_ACTIVE_TRAFFIC'}
 GOOD_HTTP={'school_saas':200,'timetable':200,'connect_report_cards_anonymous':302,'scoped_admin_approval_anonymous':401}
 
-def simulation(gates, shadow, *, status_code=0, source_tests=False, with_receipts=False):
+def simulation(gates, shadow, *, status_code=0, source_tests=False, with_receipts=False, coverage_override=None):
     def fake_run(command, **_kwargs):
         cmd=' '.join(str(x) for x in command)
         if cmd.endswith('rev-parse HEAD'):
@@ -32,6 +32,13 @@ def simulation(gates, shadow, *, status_code=0, source_tests=False, with_receipt
             return 0,'',''
         if 'verify_exam9_release_gate_20261014.py' in cmd:
             return status_code,json.dumps({'gates':gates,'metrics':{'exam_result_count':1762,'zero_scores':213}}),''
+        if 'verify_exam9_active_roster_coverage_20261014.py' in cmd:
+            return 0,json.dumps(coverage_override if coverage_override is not None else {
+                    'status':'READ_ONLY_REVIEW_REQUIRED',
+                    'original_score_snapshot_intact':True,
+                    'integrity':{'invalid_bounds':0,'duplicate_student_subject':0},
+                    'no_saved_subject_offerings':0,'partially_saved_subject_offerings':0,
+                    'unmatched_saved_subjects':[]}), ''
         if 'verify_exam9_printed_paper_sources_20261014.py' in cmd:
             return 0,json.dumps({'status':'NO_FIRST_TERM_PAPER_SOURCES_IN_CURRENT_VAULT',
                     'vault_papers_total':5,'wrong_assessment_type':5,
@@ -69,6 +76,31 @@ class IntegratedMissionFailClosedTests(unittest.TestCase):
         result=simulation(COMPLETE,SIGNED,source_tests=True,with_receipts=False)
         self.assertEqual(result['exam9_paper_source_review']['first_term_reference_candidates'],0)
         self.assertEqual(result['status'],'HOLD')
+
+    def test_incomplete_current_roster_is_not_silent_zero_or_published_score(self):
+        fake_coverage={'status':'READ_ONLY_REVIEW_REQUIRED',
+            'original_score_snapshot_intact':True,
+            'integrity':{'invalid_bounds':0,'duplicate_student_subject':0},
+            'no_saved_subject_offerings':11,'partially_saved_subject_offerings':2,
+            'unmatched_saved_subjects':[{'class_name':'Mover','subject':'Computer','count':1}]}
+        result=simulation(COMPLETE,SIGNED,source_tests=True,with_receipts=True,
+                          coverage_override=fake_coverage)
+        self.assertEqual(result['status'],'HOLD')
+        self.assertFalse(result['mark_coverage_review_complete'])
+        self.assertIn('current_exam9_mark_coverage_independently_resolved',
+                      result['blocked'])
+        self.assertFalse(result['production_deployment_performed'])
+
+    def test_original_score_digest_tamper_fails_coverage(self):
+        fake_coverage={'status':'READ_ONLY_REVIEW_REQUIRED',
+            'original_score_snapshot_intact':False,
+            'integrity':{'invalid_bounds':0,'duplicate_student_subject':0},
+            'no_saved_subject_offerings':0,'partially_saved_subject_offerings':0,
+            'unmatched_saved_subjects':[]}
+        result=simulation(COMPLETE,SIGNED,source_tests=True,with_receipts=True,
+                          coverage_override=fake_coverage)
+        self.assertEqual(result['status'],'HOLD')
+        self.assertFalse(result['mark_coverage_review_complete'])
 
     def test_no_source_test_run_is_no_certification(self):
         result=simulation(COMPLETE,SIGNED)
