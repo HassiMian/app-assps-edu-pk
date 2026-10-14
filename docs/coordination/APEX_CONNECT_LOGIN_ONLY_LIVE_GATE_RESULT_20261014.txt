@@ -1,0 +1,109 @@
+{
+  "gate": "CONNECT_LOGIN_ONLY_PRODUCTION_VERIFICATION_20261014",
+  "status": "HOLD",
+  "productionDeploymentPerformed": false,
+  "academicResultsPublicationAuthorized": false,
+  "productionWrites": false,
+  "observedAt": "2026-10-14T16:46:35.140Z",
+  "reviewedRelease": "CORE_RELEASE_NOT_YET_APPROVED",
+  "checks": [
+    {
+      "name": "deployed_reviewed_auth_proxy_sha",
+      "pass": true,
+      "details": {
+        "observed": "2d4d9be579952c780d09f8ed66f9981a6c6fef40af4042fb842ca9aa38414193",
+        "expected": "2d4d9be579952c780d09f8ed66f9981a6c6fef40af4042fb842ca9aa38414193"
+      }
+    },
+    {
+      "name": "deployed_reviewed_next_build_id",
+      "pass": false,
+      "details": {
+        "observed": "XI7EvxpUMkKOxK5ByM2BH",
+        "expected": "ONDwxEIZlx5onDIKY7wYf"
+      }
+    },
+    {
+      "name": "live_anonymous_/login",
+      "pass": true,
+      "details": {
+        "status": 200,
+        "location": null,
+        "next": null
+      }
+    },
+    {
+      "name": "live_anonymous_/dashboard",
+      "pass": false,
+      "details": {
+        "status": 307,
+        "location": "/admin",
+        "next": null
+      }
+    },
+    {
+      "name": "live_anonymous_/teacher",
+      "pass": true,
+      "details": {
+        "status": 302,
+        "location": "/login",
+        "next": "/teacher"
+      }
+    },
+    {
+      "name": "live_anonymous_/api/auth/me",
+      "pass": true,
+      "details": {
+        "status": 401,
+        "location": null,
+        "next": null
+      }
+    },
+    {
+      "name": "live_anonymous_/auth/change-password",
+      "pass": true,
+      "details": {
+        "status": 200,
+        "location": null,
+        "next": null
+      }
+    },
+    {
+      "name": "live_anonymous_/teacher/assessments/report-cards",
+      "pass": true,
+      "details": {
+        "status": 302,
+        "location": "/login",
+        "next": "/teacher/assessments/report-cards"
+      }
+    },
+    {
+      "name": "saas_core_pinned_trusted_public_key",
+      "pass": false,
+      "details": {
+        "trustRoot": "/etc/assps/release-evidence-ed25519.pub",
+        "present": false
+      }
+    },
+    {
+      "name": "verified_authorized_teacher_live_browser",
+      "pass": false
+    },
+    {
+      "name": "verified_signed_peer_tenant_denial",
+      "pass": false
+    },
+    {
+      "name": "verified_live_traffic_rollback",
+      "pass": false
+    }
+  ],
+  "blocked": [
+    "deployed_reviewed_next_build_id",
+    "live_anonymous_/dashboard",
+    "saas_core_pinned_trusted_public_key",
+    "verified_authorized_teacher_live_browser",
+    "verified_signed_peer_tenant_denial",
+    "verified_live_traffic_rollback"
+  ]
+}

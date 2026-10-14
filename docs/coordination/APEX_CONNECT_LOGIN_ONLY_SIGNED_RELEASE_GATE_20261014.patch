@@ -1,0 +1,272 @@
+diff --git a/docs/coordination/APEX_CONNECT_LOGIN_ONLY_PRODUCTION_RELEASE_GATE_20261014.md b/docs/coordination/APEX_CONNECT_LOGIN_ONLY_PRODUCTION_RELEASE_GATE_20261014.md
+new file mode 100644
+index 0000000..938d4c9
+--- /dev/null
++++ b/docs/coordination/APEX_CONNECT_LOGIN_ONLY_PRODUCTION_RELEASE_GATE_20261014.md
+@@ -0,0 +1,51 @@
++# APEX Connect — independent login-only production certification (14 October 2026)
++
++**Coordination:** [ASSPS issue #4](https://github.com/HassiMian/app-assps-edu-pk/issues/4).
++**Authority:** SaaS Core exclusively owns release promotion and rollback; Paper Studio/Connect provides reviewed source and independent evidence. This does not replace Core's signed tenant-security checks or approve First Term marks publication.
++
++## Verified source line, current release drift
++
++Standalone Connect Next.js source `fix/connect-browser-auth-challenge-bounce-20261014`, commit `a67e29ca8c3956e4fbc250f82c7e572294a2a84a`, includes functional browser 401 bounce correction `5bd6124` and previous integrated login/report-card privacy `1db504e`. Reviewed auth proxy SHA256 `2d4d9be579952c780d09f8ed66f9981a6c6fef40af4042fb842ca9aa38414193`; compiled QA build ID `ONDwxEIZlx5onDIKY7wYf`. Restored production-schema synthetic QA Chromium flow (including signed-school isolation and teacher denied admin inventory) was **12/12 PASS** and test-only incremental source patch is in existing coordination branch `fix/connect-browser-auth-redirect-handoff-20261014`.
++
++The production online Next.js server on `api.assps.edu.pk` was read-only probed: stored `src/proxy.ts` has the SAME SHA256 as the reviewed proxy, but **running/deployed build ID is still `XI7EvxpUMkKOxK5ByM2BH`**, which is different from the reviewed compiled candidate. Its `/dashboard` still 307-redirects to `/admin`, preempting canonical anonymous `/login?next=/admin`. This is a **source/build release artifact mismatch**, not proof a teacher credential is wrong. Do not fix this by blindly patching source or restarting a stale build.
++
++## Dedicated read-only gate
++
++`scripts/connect/verify-login-only-production-release-20261014.cjs` does NOT deploy, restart, modify credentials, query or update student records, sign evidence or publish results. It compares the **deployed** auth proxy SHA and Next BUILD_ID to an explicitly reviewed candidate, sends six anonymous HTTPS route probes and verifies **three independently signed production receipts** using the SaaS Core owner-pinned Ed25519 key at `/etc/assps/release-evidence-ed25519.pub`.
++
++Exact command after Core has reviewed/approved the candidate and supplied the legitimate build ID, release ID, and signed receipts:
++
++```bash
++node scripts/connect/verify-login-only-production-release-20261014.cjs \
++  --deployed-root /var/www/apex-connect \
++  --origin https://api.assps.edu.pk \
++  --approved-proxy-sha256 <REVIEWED_64_CHAR_SHA256> \
++  --approved-build-id <REVIEWED_NEXT_BUILD_ID> \
++  --approved-release-id <SAAS_CORE_APPROVED_RELEASE_ID> \
++  --signed-receipts /etc/assps/connect-login-release-receipts.json
++```
++
++The supported real receipts are *authorized_teacher_live_browser*, *signed_peer_tenant_denial*, and *live_traffic_rollback*. Each must be independently signed by the already-pinned SaaS Core Ed25519 attestor, be less than 24 hours old, and bind to the exact origin, build ID, auth proxy SHA, Core release ID, production school ID1, login-only scope and original evidence SHA. The teacher receipt must prove a **real authorized existing teacher**, temporary-password challenge and HttpOnly session; security reviewer must attest other-school and unassigned-subject denial; Core release owner must attest real traffic rollback drill, original build restorability and unchanged records. The receipt rejects `academic_results_published:true`: login-only cannot silently publish First Term results. No self-created trust key or synthetic teacher acceptance may be substituted for genuine receipts.
++
++An independently executed read-only preview using the candidate build ID and a clearly **unapproved placeholder release ID** found exactly **six passing and six blocked checks**; final exit code `2/HOLD`. Six blocked:
++1. Deployed Next BUILD_ID mismatches reviewed candidate.
++2. Actual live anonymous `/dashboard` redirect is incorrect.
++3. Owner-pinned Ed25519 release trust root is absent.
++4. Real staff browser acceptance receipt absent.
++5. Independent production peer-school tenant and unassigned-subject signed denial absent.
++6. Production rollback signed evidence absent.
++
++The deployed auth proxy SOURCE sha **matches**; five other anonymous HTTPS routes PASS. Baseline school marks remain separate from the Connect login-only release: live Core Exam9 school1 snapshot count 1,762 with 213 genuine numeric zero marks; no auto-generated missing zeroes, teacher permissions, paper maxima, Principal approvals or school data mutations are permitted.
++
++## Mandatory deployment transaction (Core ownership; not executed in this checkpoint)
++
++1. Re-verify latest active Core and standalone Connect Git heads, current deployed PM2 cwd, Nginx ingress, exact build artifact hash, working trees and concurrent issue #4 commits. Do not forward-port a stale source tree over a newer live release.
++2. Use fresh read-only exam/results fingerprint plus encrypted/root-restricted current PostgreSQL backup, and rehearse **actual** isolated restore. Freeze deployment scope to APEX Connect login UI and session, not full academic marks or SaaS DB migrations.
++3. Stage integrated corrected Connect build with role-aware `/dashboard` proxy first. Repeat source/compiled auth matrix, real Chromium 12/12 with synthetic cloned school and negative role/tenant checks. Test both anonymous and authenticated flows on same exact build.
++4. Have genuine already-authorized school teacher complete their own temporary-password change and session in secure browser. Accept no password extraction, synthetic live account, impersonation, cookie fabrication or old password reuse. Test assigned vs unassigned subjects and cross-tenant denial under Core-signed server policy.
++5. Independently certify rollback on the exact staged candidate; have SaaS Core's genuine owner-issued/pinned attestations signed; promote with atomic traffic switch ONLY when scoped source/runtime evidence is complete. Run above read-only gate on live after cutover. If any failure, restore previously proven build and verify saved mark fingerprint unchanged.
++6. Run First Term academic paper maxima, outstanding score coverage and academic institutional approval as a **different** release. Neither this script nor its evidence authorizes publication.
++
++## Negative verification
++
++`node scripts/connect/test-login-only-production-release-gate-20261014.cjs`: **10/10 PASS**. Unit keys are **synthetic transient test fixtures**, never written to `/etc/assps` and never accepted by production gate. Tests reject unsigned/stale/wrong signer, wrong teacher/tenant, wrong source/Next build/release, wrong scope and fake academic publication. Production GO is explicitly NOT asserted by a test.
+diff --git a/scripts/connect/test-login-only-production-release-gate-20261014.cjs b/scripts/connect/test-login-only-production-release-gate-20261014.cjs
+new file mode 100644
+index 0000000..46c2549
+--- /dev/null
++++ b/scripts/connect/test-login-only-production-release-gate-20261014.cjs
+@@ -0,0 +1,63 @@
++'use strict';
++// All signer keys and claims in THIS UNIT TEST are disposable synthetic fixtures.
++// Production CLI accepts ONLY SaaS Core's owner-pinned trust root, never this key.
++const assert=require('node:assert/strict');
++const crypto=require('node:crypto');
++const {verifyReceipt,verifyReceipts,REQUIRED_KINDS}=require('./verify-login-only-production-release-20261014.cjs');
++let n=0;
++function check(name,fn){fn();console.log('PASS '+name);n++}
++const {privateKey,publicKey}=crypto.generateKeyPairSync('ed25519');
++const expected={sourceSha:'a'.repeat(64),buildId:'SYNTHETIC_QA_BUILD_ONLY',releaseId:'SYNTHETIC_QA_RELEASE_ONLY',origin:'https://qa.invalid'};
++const observedAt='2026-10-14T12:00:00.000Z',now=Date.parse(observedAt);
++const claims={
++  authorized_teacher_live_browser:{actor_role:'teacher',existing_school_actor_verified:true,temporary_password_rotation_tested:true,http_only_session_verified:true},
++  signed_peer_tenant_denial:{actor_role:'security_reviewer',cross_tenant_denial_tested:true,unassigned_subject_denial_tested:true},
++  live_traffic_rollback:{actor_role:'release_owner',rollback_executed:true,original_build_restorable:true,data_integrity_preserved:true},
++};
++function receipt(kind,updates={}){
++  const payload={issuer:'SAAS_CORE',release_scope:'CONNECT_LOGIN_ONLY',environment:'production',
++    school_id:1,status:'PASS',source_sha256:expected.sourceSha,build_id:expected.buildId,
++    origin:expected.origin,release_id:expected.releaseId,academic_results_published:false,
++    evidence_digest:'b'.repeat(64),observed_at:observedAt,
++    kind,...claims[kind],...updates};
++  const raw=Buffer.from(JSON.stringify(payload));
++  return {payload_b64:raw.toString('base64'),signature_b64:crypto.sign(null,raw,privateKey).toString('base64')};
++}
++check('three synthetic verified signatures satisfy isolated verifier',()=>{
++  const proof={receipts:REQUIRED_KINDS.map(k=>receipt(k))};
++  assert(verifyReceipts(proof,publicKey,expected,now).every(x=>x.pass));
++});
++check('unsigned bundle always rejects',()=>{
++  const x=receipt(REQUIRED_KINDS[0]);x.signature_b64=Buffer.alloc(64).toString('base64');
++  assert.equal(verifyReceipt(x,publicKey,expected,now),null);
++});
++check('wrong signing authority key rejected',()=>{
++  const another=crypto.generateKeyPairSync('ed25519');
++  assert.equal(verifyReceipt(receipt(REQUIRED_KINDS[0]),another.publicKey,expected,now),null);
++});
++check('historical/stale evidence rejected',()=>{
++  assert.equal(verifyReceipt(receipt(REQUIRED_KINDS[0],{observed_at:'2026-10-11T12:00:00.000Z'}),publicKey,expected,now),null);
++});
++check('wrong actor school and role rejected',()=>{
++  assert.equal(verifyReceipt(receipt(REQUIRED_KINDS[0],{school_id:2}),publicKey,expected,now),null);
++  assert.equal(verifyReceipt(receipt(REQUIRED_KINDS[0],{actor_role:'student'}),publicKey,expected,now),null);
++});
++check('wrong source/build/release binding rejected',()=>{
++  assert.equal(verifyReceipt(receipt(REQUIRED_KINDS[0],{source_sha256:'c'.repeat(64)}),publicKey,expected,now),null);
++  assert.equal(verifyReceipt(receipt(REQUIRED_KINDS[0],{build_id:'UNVERIFIED_BUILD'}),publicKey,expected,now),null);
++  assert.equal(verifyReceipt(receipt(REQUIRED_KINDS[0],{release_id:'SYNTHETIC_OLD_RELEASE'}),publicKey,expected,now),null);
++});
++check('academic-results publication cannot piggyback login-only gate',()=>{
++  assert.equal(verifyReceipt(receipt(REQUIRED_KINDS[0],{academic_results_published:true}),publicKey,expected,now),null);
++});
++check('fake temporary actor not equivalent to real teacher acceptance',()=>{
++  assert.equal(verifyReceipt(receipt(REQUIRED_KINDS[0],{existing_school_actor_verified:false}),publicKey,expected,now),null);
++});
++check('invalid tenant denial and absent original build restoration fail',()=>{
++  assert.equal(verifyReceipt(receipt('signed_peer_tenant_denial',{cross_tenant_denial_tested:false}),publicKey,expected,now),null);
++  assert.equal(verifyReceipt(receipt('live_traffic_rollback',{original_build_restorable:false}),publicKey,expected,now),null);
++});
++check('missing evidence or owner public key leaves every gate on hold',()=>{
++  assert(verifyReceipts(null,null,expected,now).every(x=>!x.pass));
++});
++console.log('CONNECT_LOGIN_ONLY_SIGNED_RELEASE_EVIDENCE_TEST '+n+'/'+n+' PASS; SYNTHETIC_TEST_ONLY');
+diff --git a/scripts/connect/verify-login-only-production-release-20261014.cjs b/scripts/connect/verify-login-only-production-release-20261014.cjs
+new file mode 100644
+index 0000000..6923d21
+--- /dev/null
++++ b/scripts/connect/verify-login-only-production-release-20261014.cjs
+@@ -0,0 +1,140 @@
++#!/usr/bin/env node
++'use strict';
++// Read-only supplementary SaaS Core-owned login-only release gate.
++// Does not deploy, sign evidence, touch staff credentials, write scores or override the Core release gate.
++const fs = require('node:fs');
++const path = require('node:path');
++const crypto = require('node:crypto');
++const {URL} = require('node:url');
++
++const TRUST_ROOT = '/etc/assps/release-evidence-ed25519.pub';
++const REQUIRED_KINDS = ['authorized_teacher_live_browser','signed_peer_tenant_denial','live_traffic_rollback'];
++const HEX = /^[a-f0-9]{64}$/;
++const sha = body => crypto.createHash('sha256').update(body).digest('hex');
++
++function verifyReceipt(receipt, publicKey, expected, now = Date.now()) {
++  if (!receipt || typeof receipt.payload_b64 !== 'string' ||
++      !/^[a-zA-Z0-9+/]+={0,2}$/.test(receipt.payload_b64) ||
++      typeof receipt.signature_b64 !== 'string' ||
++      !/^[a-zA-Z0-9+/]+={0,2}$/.test(receipt.signature_b64)) return null;
++  try {
++    const data = Buffer.from(receipt.payload_b64,'base64');
++    const signature = Buffer.from(receipt.signature_b64,'base64');
++    if (data.length < 30 || data.length > 16384 || signature.length !== 64 ||
++        !crypto.verify(null,data,publicKey,signature)) return null;
++    const c = JSON.parse(data.toString('utf8'));
++    if (!c || c.issuer !== 'SAAS_CORE' ||
++        c.release_scope !== 'CONNECT_LOGIN_ONLY' ||
++        c.environment !== 'production' ||
++        c.school_id !== 1 || c.status !== 'PASS' ||
++        c.source_sha256 !== expected.sourceSha ||
++        c.build_id !== expected.buildId ||
++        c.origin !== expected.origin ||
++        c.release_id !== expected.releaseId ||
++        c.academic_results_published !== false ||
++        typeof c.evidence_digest !== 'string' || !HEX.test(c.evidence_digest)) return null;
++    const ts = Date.parse(c.observed_at);
++    if (!Number.isFinite(ts) || ts > now + 300000 || ts < now-86400000) return null;
++    if (!REQUIRED_KINDS.includes(c.kind)) return null;
++    if (c.kind === 'authorized_teacher_live_browser' &&
++      !(c.actor_role === 'teacher' && c.existing_school_actor_verified === true &&
++        c.temporary_password_rotation_tested === true && c.http_only_session_verified === true)) return null;
++    if (c.kind === 'signed_peer_tenant_denial' &&
++      !(c.actor_role === 'security_reviewer' && c.cross_tenant_denial_tested === true &&
++        c.unassigned_subject_denial_tested === true)) return null;
++    if (c.kind === 'live_traffic_rollback' &&
++      !(c.actor_role === 'release_owner' && c.rollback_executed === true &&
++        c.original_build_restorable === true && c.data_integrity_preserved === true)) return null;
++    return c;
++  } catch { return null; }
++}
++
++function verifyReceipts(bundle, publicKey, expected, now=Date.now()) {
++  const claims = {};
++  for (const item of (Array.isArray(bundle?.receipts) ? bundle.receipts : [])) {
++    const c = verifyReceipt(item,publicKey,expected,now);
++    if (c && !claims[c.kind]) claims[c.kind]=c;
++  }
++  return REQUIRED_KINDS.map(name=>({name:'verified_'+name,pass:!!claims[name]}));
++}
++
++function arg(name,fallback) {
++  const i = process.argv.indexOf(name);
++  return i>=0 ? process.argv[i+1] : fallback;
++}
++
++async function main() {
++  const root = path.resolve(arg('--deployed-root','/var/www/apex-connect'));
++  const origin = arg('--origin','https://api.assps.edu.pk');
++  const expected = {
++    sourceSha:arg('--approved-proxy-sha256',''),
++    buildId:arg('--approved-build-id',''),
++    releaseId:arg('--approved-release-id',''),
++    origin,
++  };
++  if (!HEX.test(expected.sourceSha) || !/^[a-zA-Z0-9_-]{8,128}$/.test(expected.buildId) ||
++      !/^[a-zA-Z0-9._-]{8,160}$/.test(expected.releaseId) ||
++      !/^https:\/\/[^/@?#]+$/.test(origin)) {
++    throw Error('Exact reviewed source SHA, built artifact ID, approved release ID and HTTPS origin required.');
++  }
++  const checked = [];
++  function add(name,pass,details) { checked.push({name,pass,details}); }
++  const proxy=path.join(root,'src/proxy.ts');
++  const build=path.join(root,'.next/BUILD_ID');
++  const sourceHash=fs.existsSync(proxy)?sha(fs.readFileSync(proxy)):'MISSING';
++  const buildId=fs.existsSync(build)?fs.readFileSync(build,'utf8').trim():'MISSING';
++  add('deployed_reviewed_auth_proxy_sha',sourceHash===expected.sourceSha,
++    {observed:sourceHash,expected:expected.sourceSha});
++  add('deployed_reviewed_next_build_id',buildId===expected.buildId,
++    {observed:buildId,expected:expected.buildId});
++
++  const routes=[
++    ['/login',200],
++    ['/dashboard',307,'/login','/admin'],
++    ['/teacher',302,'/login','/teacher'],
++    ['/api/auth/me',401],
++    ['/auth/change-password',200],
++    ['/teacher/assessments/report-cards',302,'/login'],
++  ];
++  for (const [url,status,target,next] of routes) {
++    try {
++      const response=await fetch(origin+url,{redirect:'manual',signal:AbortSignal.timeout(5500),
++        headers:{'Cache-Control':'no-cache'}});
++      const location=response.headers.get('location');
++      const destination=location?new URL(location,origin):null;
++      const pass=response.status===status && (!target ||
++        (destination && destination.origin===origin && destination.pathname===target &&
++         (next===undefined || destination.searchParams.get('next')===next)));
++      add('live_anonymous_'+url,!!pass,{
++        status:response.status,location:destination?.pathname||null,
++        next:destination?.searchParams.get('next')||null
++      });
++    } catch(e) { add('live_anonymous_'+url,false,{error:e.name}); }
++  }
++  let trusted=null;
++  try {
++    const stat=fs.statSync(TRUST_ROOT);
++    if(stat.uid!==0 || !stat.isFile() || (stat.mode&0o022)!==0)throw Error('untrusted public key permissions');
++    trusted=crypto.createPublicKey(fs.readFileSync(TRUST_ROOT));
++    if(trusted.asymmetricKeyType!=='ed25519')trusted=null;
++  } catch {}
++  add('saas_core_pinned_trusted_public_key',!!trusted,{trustRoot:TRUST_ROOT,present:!!trusted});
++  let bundle;
++  try{bundle=JSON.parse(fs.readFileSync(arg('--signed-receipts','/etc/assps/connect-login-release-receipts.json'),'utf8'))}catch{}
++  for(const result of verifyReceipts(bundle,trusted,expected))add(result.name,result.pass);
++  const pass=checked.every(v=>v.pass);
++  console.log(JSON.stringify({
++    gate:'CONNECT_LOGIN_ONLY_PRODUCTION_VERIFICATION_20261014',
++    status:pass?'READY_FOR_CORE_RELEASE_OWNER_FINAL_ATTESTATION':'HOLD',
++    productionDeploymentPerformed:false,
++    academicResultsPublicationAuthorized:false,
++    productionWrites:false,
++    observedAt:new Date().toISOString(),
++    reviewedRelease:expected.releaseId,
++    checks:checked,
++    blocked:checked.filter(x=>!x.pass).map(x=>x.name),
++  },null,2));
++  process.exitCode=pass?0:2;
++}
++if(require.main===module)main().catch(e=>{console.error('CONNECT_LOGIN_ONLY_RELEASE_GATE BLOCK '+e.message);process.exitCode=3});
++module.exports={verifyReceipt,verifyReceipts,REQUIRED_KINDS};
