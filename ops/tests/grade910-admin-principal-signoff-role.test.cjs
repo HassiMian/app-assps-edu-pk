@@ -42,6 +42,8 @@ test('schema and UI expose adoption-only admin role, never approval shortcuts',(
  const sql=fs.readFileSync(path.join(root,'migrations/030_grade910_signed_human_evidence.js'),'utf8')
  const ui=fs.readFileSync(path.resolve(__dirname,'../../al-siddique-frontend/src/Modules/Paper-Generator/Grade910HumanSignoff.jsx'),'utf8')
  assert.match(sql,/actor_role IN \('teacher','principal','admin','school_admin'\)/)
+ assert.match(sql,/grade910_actor_action_scope/)
+ assert.match(sql,/actor_role IN \('admin','school_admin'\) AND action='book_adoption'/)
  assert.match(ui,/role==='admin'\|\|role==='school_admin'\?\['book_adoption'\]/)
 })
 

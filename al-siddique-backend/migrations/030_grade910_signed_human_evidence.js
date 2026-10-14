@@ -20,6 +20,11 @@ async function up(options={}) {
     actor_user_id INTEGER NOT NULL REFERENCES users(id),
     actor_role VARCHAR(24) NOT NULL CHECK (actor_role IN ('teacher','principal','admin','school_admin')),
     action VARCHAR(32) NOT NULL CHECK(action IN ('subject_review','urdu_review','book_adoption','principal_approval')),
+    CONSTRAINT grade910_actor_action_scope CHECK (
+     (actor_role='teacher' AND action IN ('subject_review','urdu_review'))
+     OR (actor_role='principal' AND action IN ('book_adoption','principal_approval'))
+     OR (actor_role IN ('admin','school_admin') AND action='book_adoption')
+    ),
     catalog_id VARCHAR(128) NOT NULL,
     original_catalog_pdf_sha CHAR(64) NOT NULL,
     original_question_set_sha CHAR(64) NOT NULL,
