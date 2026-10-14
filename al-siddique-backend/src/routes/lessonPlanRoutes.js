@@ -10,6 +10,7 @@ const { loadPlanningContext } = require('../services/lessonPlanningContext')
 const { prepareReviewBatch } = require('../services/lessonComposerIntake')
 const { persistReviewBatch, listReviewGroups, readReviewSource } = require('../services/lessonComposerReviewStore')
 const {appendCorrection} = require('../services/lessonComposerCorrection')
+const {teacherAssignmentEvidence,appendPrincipalEvidenceReview} = require('../services/lessonComposerPrincipalEvidence')
 const { buildDeterministicPlan, enhancePlanWithAi, parseSmartPlanningText, parseIsoDate, MAX_RANGE_DAYS } = require('../services/lessonPlanningEngine')
 
 const canManageLessonPlans = requireRoles('super_admin', 'admin', 'school_admin', 'principal', 'teacher')
@@ -220,6 +221,48 @@ router.post('/planner/composer-review-correction/:id',async(req,res)=>{
     return res.status(500).json({success:false,code:'COMPOSER_CORRECTION_FAILED'})
   }
 })
+// Teacher ownership is verified from ACTIVE school assignment records and a
+// reviewed timetable identity, NEVER inferred from the WhatsApp composer.
+router.get('/planner/composer-review-assignment-evidence/:id',async(req,res)=>{
+  if(!isSchoolDocumentManager(req.user))
+    return res.status(403).json({success:false,code:'COMPOSER_ASSIGNMENT_MANAGER_REQUIRED'})
+  try{
+    const schoolId=resolveSchoolId(req)
+    if(!schoolId)return res.status(403).json({success:false,code:'COMPOSER_ASSIGNMENT_SCHOOL_REQUIRED'})
+    const data=await withTenantTransaction(req,schoolId,
+      client=>teacherAssignmentEvidence(client,schoolId,req.params.id))
+    res.set('Cache-Control','private, no-store')
+    return res.json({success:true,data})
+  }catch(error){
+    return res.status(Number(error.status||500)).json({
+      success:false,code:error.code||'COMPOSER_ASSIGNMENT_EVIDENCE_FAILED'
+    })
+  }
+})
+// A genuine active Principal account may log an inspection acknowledgment.
+// This does NOT approve curriculum or distribute it to students.
+router.post('/planner/composer-review-principal-inspection/:id',async(req,res)=>{
+  if(!['principal','admin'].includes(req.user?.role))
+    return res.status(403).json({success:false,code:'ACADEMIC_PRINCIPAL_REAL_ROLE_REQUIRED'})
+  if(process.env.ACADEMIC_COMPOSER_PRINCIPAL_REVIEW_ENABLED!=='true')
+    return res.status(503).json({success:false,code:'COMPOSER_PRINCIPAL_REVIEW_RELEASE_HOLD'})
+  try{
+    const schoolId=resolveSchoolId(req)
+    if(!schoolId)return res.status(403).json({success:false,code:'COMPOSER_PRINCIPAL_SCHOOL_REQUIRED'})
+    const expected=expectedRevision(req)
+    if(!expected)return res.status(428).json({success:false,code:'PRINCIPAL_REVIEW_REVISION_REQUIRED'})
+    const data=await withTenantTransaction(req,schoolId,client=>appendPrincipalEvidenceReview(client,{
+      schoolId,id:req.params.id,user:req.user,expectedRevision:expected,
+      sourceDigest:req.body?.sourceDigest,declaration:req.body?.declaration
+    }))
+    return res.json({success:true,data,publicationAllowed:false})
+  }catch(error){
+    if(error.code)return res.status(Number(error.status||422)).json({success:false,code:error.code})
+    console.error('Principal evidence review error',error)
+    return res.status(500).json({success:false,code:'PRINCIPAL_SOURCE_INSPECTION_FAILED'})
+  }
+})
+
 router.get('/planner/composer-review-classes',async(req,res)=>{
   if (!isSchoolDocumentManager(req.user)) return res.status(403).json({success:false,code:'COMPOSER_REVIEW_MANAGER_REQUIRED'})
   try {
