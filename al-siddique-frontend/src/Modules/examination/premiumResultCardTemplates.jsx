@@ -29,7 +29,7 @@ export function ResultCardPrintToolbar(props) {
   </div>
   <div className="premium-chart-policy" role="note">Both analytics charts are included on every card. Every printed student uses one A4 portrait sheet.</div>
   <div className="premium-printer-guide" role="note"><strong>Choose your connected printer</strong> — select any installed USB, Wi-Fi, or shared/network printer in the system Print dialog. Check A4 / Portrait / Actual Size (100%). No printer model is locked to this template.</div>
-  <div className="toolbar-actions"><button type="button" onClick={props.onPrint}>Print · Choose Printer</button><button type="button" onClick={props.onExportPdf}>Save as PDF</button></div>
+  <div className="toolbar-actions"><button type="button" onClick={props.onPrint}>{props.cardCount > 1 ? `Print All ${props.cardCount} Cards` : 'Print · Choose Printer'}</button><button type="button" onClick={props.onExportPdf}>{props.cardCount > 1 ? 'Save All as PDF' : 'Save as PDF'}</button></div>
  </div>
 }
 

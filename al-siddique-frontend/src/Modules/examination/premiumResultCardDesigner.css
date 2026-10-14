@@ -68,3 +68,33 @@
 
 .result-premium-shell .premium-printer-guide { padding:9px 10px; margin:7px 0; border-radius:7px; border:1px solid #C9DDE8; background:#F4FAFD; color:#28556A; font-size:11px; line-height:1.55; }
 .result-premium-shell .premium-printer-guide strong { color:#153F58; }
+
+/* Batch A4 review: the student-card page stack is screen-only.
+   The separate print-window renderer retains its certified A4 rules. */
+.result-premium-shell .result-batch-head-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.result-premium-shell .result-modal-head .result-print-all-primary{background:#177D69;color:white;padding:11px 17px;border:0;border-radius:8px;font-size:13px;font-weight:900}
+.result-premium-shell .result-batch-pages-panel{overflow-y:auto;overscroll-behavior:contain;scroll-behavior:smooth}
+.result-premium-shell .result-batch-pages-toolbar{position:sticky;top:-18px;z-index:3;display:flex;gap:11px;justify-content:space-between;align-items:center;flex-wrap:wrap;padding:12px;background:#F6FAFD;border:1px solid #D8E5EF;border-radius:9px;margin-bottom:16px;box-shadow:0 2px 7px #19364D0D}
+.result-premium-shell .result-batch-pages-title{display:flex;flex-direction:column;gap:4px;color:#21435D}
+.result-premium-shell .result-batch-pages-title strong{font-size:14px}
+.result-premium-shell .result-batch-pages-title span{font-size:11px;color:#637B8D}
+.result-premium-shell .result-batch-pages-controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.result-premium-shell .result-batch-preview-toggle{display:flex;background:#E6EEF3;border-radius:8px;padding:3px;gap:3px}
+.result-premium-shell .result-batch-preview-toggle button{background:transparent;color:#24455D;border:0;border-radius:6px;padding:7px 10px;font-size:11px;font-weight:800;cursor:pointer}
+.result-premium-shell .result-batch-preview-toggle button[aria-pressed="true"]{background:#1C6587;color:#fff}
+.result-premium-shell .result-batch-pages-controls label{font-size:11px;font-weight:800;display:flex;gap:6px;align-items:center;color:#395C70}
+.result-premium-shell .result-batch-pages-controls select{width:min(178px,42vw);max-width:190px;background:white;color:#233C51;border:1px solid #C9D8E1;border-radius:7px;padding:7px}
+.result-premium-shell .result-batch-page-list{display:flex;flex-direction:column;gap:18px;align-items:center}
+.result-premium-shell .result-batch-preview-page{display:flex;flex-direction:column;align-items:center;scroll-margin-top:105px;width:fit-content;max-width:100%;border-radius:12px;background:#F9FBFC;padding:9px;box-shadow:0 5px 18px rgba(20,45,64,.08);border:1px solid #D8E4EC;contain:layout style}
+.result-premium-shell .result-batch-page-label{width:100%;display:flex;justify-content:space-between;gap:8px;align-items:center;color:#224760;font-size:11px;padding:6px 4px 10px}
+.result-premium-shell .result-batch-page-label strong{font-weight:900}
+.result-premium-shell .result-batch-page-label span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:52%;font-weight:750}
+.result-premium-shell .result-batch-page-label small{color:#637F90}
+.result-premium-shell .result-batch-card-viewport{overflow:hidden;background:white;max-width:100%}
+.result-premium-shell .result-batch-card-viewport .result-card-a4{margin:0;box-shadow:none}
+.result-premium-shell .result-batch-bottom-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;padding:18px;background:#fff;border:1px solid #D9E6EF;border-radius:9px;margin-top:16px}
+.result-premium-shell .result-batch-bottom-actions strong{font-size:12px;color:#21465C;flex:1 1 100%}
+.result-premium-shell .result-batch-bottom-actions button{border:0;background:#1C6587;color:white;padding:10px 15px;border-radius:7px;cursor:pointer;font-weight:850;font-size:12px}
+.result-premium-shell .result-batch-bottom-actions button:nth-of-type(2){background:#247B6B}
+.result-premium-shell .result-batch-empty{padding:30px;text-align:center;color:#31516B}
+@media(max-width:900px){.result-premium-shell .result-batch-pages-toolbar{position:static}}

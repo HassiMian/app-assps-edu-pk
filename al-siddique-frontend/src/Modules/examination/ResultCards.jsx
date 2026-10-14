@@ -12,10 +12,11 @@ import { sortSchoolClasses, schoolClassOrderKey } from '../../services/schoolCla
 import { isFirstTermExamNine, isClassAllowedForExam } from './resultClassPrintScope.js'
 import { C, card, btnPrimary, btnSecondary, select, sectionHeader } from '../moduleStyles'
 import {
-  ResultCardPreview, ResultCardPrintToolbar, ResultCardTemplateSelector,
+  ResultCardPrintToolbar, ResultCardTemplateSelector,
 } from './premiumResultCardTemplates'
 import {DEFAULT_RESULT_OPTIONS, buildResultCardData} from './premiumResultCardData'
 import {openResultPrintWindow, resultCardPrintCss} from './premiumResultCardPrint'
+import ResultBatchPagesPreview from './ResultBatchPagesPreview'
 
 function gradeLabel(pct, bands = []) {
   const value = Math.max(0, Math.min(100, Number(pct) || 0))
@@ -41,12 +42,15 @@ export function ProfessionalParametersModal({ cards, student, exam, studentMarks
   const [remarksOpen, setRemarksOpen] = useState(false)
   const previewRef = useRef(null)
   const [scale, setScale] = useState(1)
-  const sourceCards = cards?.length ? cards : [{ student, exam, studentMarks }]
-  const dataList = sourceCards
-    .filter(item => item?.student && item?.exam && item?.studentMarks?.length)
-    .map(item => buildResultCardData({ ...item, options: { ...options, gradeBands }, school }))
+  const dataList = useMemo(() => {
+    const sourceCards = cards?.length ? cards : [{ student, exam, studentMarks }]
+    return sourceCards
+      .filter(item => item?.student && item?.exam && item?.studentMarks?.length)
+      .map(item => buildResultCardData({ ...item, options: { ...options, gradeBands }, school }))
+  }, [cards, student, exam, studentMarks, options, gradeBands, school])
   const data = dataList[0]
-  const batchInfo = summarizePrintBatch(dataList)
+  const batchInfo = useMemo(() => summarizePrintBatch(dataList), [dataList])
+  const printAllLabel = dataList.length > 1 ? `Print All ${dataList.length} Cards` : 'Print Result Card'
   const printBatch = (pdf = false) => {
     if (!dataList.length) { window.alert('No result cards are ready for printing.'); return }
     if (batchInfo.absentLogo) { window.alert(`${batchInfo.absentLogo} result card(s) have no school logo configured. Set the correct logo in SaaS School/Paper Settings before printing.`); return }
@@ -86,9 +90,12 @@ export function ProfessionalParametersModal({ cards, student, exam, studentMarks
         <div className="result-modal-head no-print" style={{ flexShrink:0 }}>
           <div>
             <h2>Professional Result Card Designer</h2>
-            <p>Select template, choose marks columns, preview, then print or save as PDF. {dataList.length > 1 ? `${dataList.length} result cards in preview.` : ''}</p>
+            <p>One A4 page per student. Review all {dataList.length} page{dataList.length === 1 ? '' : 's'} below, then print the entire batch with one command.</p>
           </div>
-          <button onClick={onClose}>Close</button>
+          <div className="result-batch-head-actions">
+            <button type="button" className="result-print-all-primary" onClick={() => printBatch(false)} aria-label={printAllLabel}>{printAllLabel}</button>
+            <button type="button" onClick={onClose}>Close</button>
+          </div>
         </div>
 
         <div className="result-designer no-print" style={{ flex:1, minHeight:0 }}>
@@ -103,6 +110,7 @@ export function ProfessionalParametersModal({ cards, student, exam, studentMarks
               setOptions={setOptions}
               onPrint={() => printBatch(false)}
               onExportPdf={() => printBatch(true)}
+              cardCount={dataList.length}
             />
             <div style={{ marginTop:14, border:'1px solid #DCE6EE', borderRadius:11, overflow:'hidden', background:'#F9FBFC' }}>
               <button
@@ -141,21 +149,14 @@ export function ProfessionalParametersModal({ cards, student, exam, studentMarks
               )}
             </div>
           </aside>
-          <main className="result-preview-panel" ref={previewRef}>
-            {data ? (
-              <>
-                {dataList.length > 1 && (
-                  <div style={{ marginBottom:12, color:'#C8991A', fontWeight:800, textAlign:'center' }}>
-                    Previewing first card. Print/PDF will include all {dataList.length} cards.
-                  </div>
-                )}
-                <div className="result-preview-scale" style={{ transform:`scale(${scale})`, transformOrigin:'top left', width:'794px' }}>
-                  <ResultCardPreview data={data} />
-                </div>
-              </>
-            ) : (
-              <div style={{ color:'#C0C8D8', padding:24 }}>No printable result cards found.</div>
-            )}
+          <main className="result-preview-panel result-batch-pages-panel" ref={previewRef} aria-label="Result cards page preview">
+            <ResultBatchPagesPreview
+              cards={dataList}
+              scale={scale}
+              previewRef={previewRef}
+              onPrintAll={() => printBatch(false)}
+              onSavePdf={() => printBatch(true)}
+            />
           </main>
         </div>
       </div>
