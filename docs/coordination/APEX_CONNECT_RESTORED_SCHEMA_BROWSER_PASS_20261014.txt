@@ -1,0 +1,32 @@
+BROWSER_NAV /login
+BROWSER_NAV /login
+AUTH_HTTP 401 /api/auth/me
+PASS real Chromium opens scoped teacher form
+BROWSER_NAV /auth/change-password
+BROWSER_NAV /auth/change-password
+PASS real Chromium reaches temporary password challenge
+AUTH_HTTP 401 /api/auth/me
+PASS temporary password never populates authenticated browser identity
+PASS late anonymous /auth/me cannot eject password challenge
+PASS real browser submits password rotation successfully
+BROWSER_NAV /login
+BROWSER_NAV /login
+AUTH_HTTP 401 /api/auth/me
+AUTH_HTTP 401 /api/auth/refresh
+BROWSER_NAV /login
+BROWSER_NAV /login
+AUTH_HTTP 401 /api/auth/me
+BROWSER_NAV /teacher
+PASS real Chromium reaches authenticated teacher dashboard
+BROWSER_NAV /teacher
+PASS verified browser holds signed HttpOnly cookie
+BROWSER_ME_STATUS 200 ROLE teacher
+PASS auth me has canonical teacher actor
+PASS client cannot change signed school via school_id/tenant_id parameters
+AUTH_HTTP 403 /api/saas-admin/schools
+PASS teacher cannot read SaaS admin school inventory
+BROWSER_NAV /teacher
+PASS real teacher browser denied admin
+PASS no uncaught browser JS exception
+CONNECT_BROWSER_AUTHENTICATED_TEMP_PASSWORD 12/12 PASS
+BROWSER_NAV /teacher

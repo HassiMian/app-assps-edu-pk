@@ -1,0 +1,54 @@
+diff --git a/scripts/connect/test-real-browser-password-challenge-20261014.cjs b/scripts/connect/test-real-browser-password-challenge-20261014.cjs
+index 31e03d7..2e4e9b4 100644
+--- a/scripts/connect/test-real-browser-password-challenge-20261014.cjs
++++ b/scripts/connect/test-real-browser-password-challenge-20261014.cjs
+@@ -8,12 +8,24 @@ const pg=requireApp('pg'),bcrypt=requireApp('bcryptjs');
+ const browserRoot=process.env.CONNECT_BROWSER_TOOLING_ROOT;
+ if(!browserRoot)throw Error('CONNECT_BROWSER_TOOLING_ROOT required');
+ const {chromium}=require(path.join(browserRoot,'node_modules/playwright'));
+-const origin='http://127.0.0.1:'+Number(process.env.CONNECT_ISOLATED_PORT||3014);
++const browserPort=Number(process.env.CONNECT_ISOLATED_PORT||3014);
++const dbPort=Number(process.env.CONNECT_ISOLATED_DB_PORT||55443);
++const dbHost=process.env.CONNECT_ISOLATED_DB_HOST||'127.0.0.1';
++const dbName=process.env.CONNECT_ISOLATED_DB_NAME||'postgres';
++const fullClone=process.env.CONNECT_QA_CLONED_SCHEMA==='yes';
++if (!Number.isInteger(browserPort)||browserPort<3000||browserPort>3999 ||
++    !Number.isInteger(dbPort)||dbPort<55000||dbPort>56000 ||
++    !['127.0.0.1','/var/run/postgresql'].includes(dbHost) ||
++    !['postgres','apexos'].includes(dbName) ||
++    (fullClone && dbName!=='apexos')) {
++  throw Error('Refusing non-isolated QA browser/database configuration');
++}
++const origin='http://127.0.0.1:'+browserPort;
+ const temp=crypto.randomBytes(20).toString('hex'),next=crypto.randomBytes(20).toString('hex');
+ let browser,client;let count=0;
+ function pass(label,condition){assert(condition,label);count++;console.log('PASS '+label);}
+ (async()=>{
+- client=new pg.Client({host:'127.0.0.1',port:55443,database:'postgres',user:'postgres'});await client.connect();
++ client=new pg.Client({host:dbHost,port:dbPort,database:dbName,user:'postgres'});await client.connect();
+  const marker=await client.query("select 1 from schools where id=9901 and code='QA-ONLY' and tenant_id='qa-tenant-9901'");
+  assert.equal(marker.rowCount,1,'Synthetic DB marker not present');
+  const hash=await bcrypt.hash(temp,10);
+@@ -52,6 +64,22 @@ function pass(label,condition){assert(condition,label);count++;console.log('PASS
+  const me=await page.evaluate(async()=>{const r=await fetch('/api/auth/me',{credentials:'include',cache:'no-store'});return {status:r.status,data:await r.json().catch(()=>({}))}});
+  console.log('BROWSER_ME_STATUS',me.status,'ROLE',me.data?.user?.role||'none');
+  pass('auth me has canonical teacher actor',me.status===200&&me.data?.user?.role==='teacher');
++ if (fullClone) {
++   const isolatedSchool=await page.evaluate(async()=>{
++     const r=await fetch('/api/school/settings/current?school_id=1&tenant_id=assps',{credentials:'include'});
++     return {status:r.status,data:await r.json().catch(()=>({}))};
++   });
++   pass('client cannot change signed school via school_id/tenant_id parameters',
++     isolatedSchool.status===200&&
++     String(isolatedSchool.data?.data?.schoolId)==='9901'&&
++     isolatedSchool.data?.data?.tenantId==='qa-tenant-9901');
++   const adminInventory=await page.evaluate(async()=>{
++     const r=await fetch('/api/saas-admin/schools',{credentials:'include'});
++     return r.status;
++   });
++   pass('teacher cannot read SaaS admin school inventory',
++     [401,403,404].includes(adminInventory));
++ }
+  await page.goto(origin+'/admin',{waitUntil:'domcontentloaded'});
+  await page.waitForURL(/\/teacher(?:\/|$)/,{timeout:15000});
+  pass('real teacher browser denied admin',new URL(page.url()).pathname==='/teacher');
