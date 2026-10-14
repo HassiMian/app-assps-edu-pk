@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from 'react'
+import { currentSchoolDate } from './schoolCalendarDate.js'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { BookOpen, BrainCircuit, CalendarDays, CheckCircle2, ChevronDown, ChevronUp, Copy, FileText, Plus, Printer, RefreshCw, Save, Sparkles, Trash2, WandSparkles, X, Users } from 'lucide-react'
 import { useAcademicStore } from '../../services/useAcademicStore'
 import { getTenantStorageItem, setTenantStorageItem } from '../../services/tenantStorage'
@@ -20,16 +21,22 @@ import {
   normalizeLessonPlanDocument,
   toLessonPlanPersistencePayload,
 } from './lessonPlanDomain'
+import ComposerLessonReview from './ComposerLessonReview'
 import './LessonPlanningWorkspace.css'
 
 const DRAFT_KEY = 'assps_lesson_planner_v2_draft'
-const today = () => new Date().toISOString().slice(0, 10)
+const today = currentSchoolDate
 const shiftDate = (value, days) => {
   const date = new Date(`${value || today()}T12:00:00Z`)
   date.setUTCDate(date.getUTCDate() + days)
   return date.toISOString().slice(0, 10)
 }
+const clean = value => String(value ?? '').trim()
 const planTypeLabel = type => PLANNING_TYPES.find(item => item.key === type)?.short || 'Daily'
+
+function clone(value) {
+  return JSON.parse(JSON.stringify(value))
+}
 
 function normalizeClassSelection(activeClasses, value) {
   return activeClasses.find(item => String(item.level) === String(value) || item.name === value) || null
@@ -110,13 +117,13 @@ function SubjectPlanner({ subjectPlan, planningType, onChange, onRemove }) {
 }
 
 export default function LessonPlanningWorkspace() {
+  const [showComposerReview,setShowComposerReview]=useState(false)
   const { activeClasses, subjectsForClass, sectionsForClass, sessionStart, sessionEnd } = useAcademicStore()
   const [document,setDocument] = useState(()=>{
     try { const raw=getTenantStorageItem(DRAFT_KEY); return raw?normalizeLessonPlanDocument(JSON.parse(raw)):createEmptyLessonPlanDocument({startDate:today()}) } catch { return createEmptyLessonPlanDocument({startDate:today()}) }
   })
   const [savedPlans,setSavedPlans] = useState([])
   const [selectedSubjects,setSelectedSubjects] = useState(()=>document.subjects.map(item=>item.subject))
-  const selectedSubjectsCsv = selectedSubjects.join(',')
   const [context,setContext] = useState(null)
   const [aiState,setAiState] = useState(null)
   const [busy,setBusy] = useState('')
@@ -131,14 +138,14 @@ export default function LessonPlanningWorkspace() {
   },[subjectsForClass,document.classLevel,selectedClass?.level,context,document.subjects])
   const sectionOptions = useMemo(()=>selectedClass ? sectionsForClass(selectedClass.name) : [],[selectedClass,sectionsForClass])
 
-  useEffect(()=>{ try { setTenantStorageItem(DRAFT_KEY,JSON.stringify(document)) } catch { /* Preserve the current lesson in memory when local draft storage is unavailable. */ } },[document])
+  useEffect(()=>{ try { setTenantStorageItem(DRAFT_KEY,JSON.stringify(document)) } catch {} },[document])
   useEffect(()=>{ listLessonPlans({limit:200}).then(data=>setSavedPlans(Array.isArray(data)?data:[])).catch(()=>{}) },[])
   useEffect(()=>{
     if(!document.classLevel)return
     let cancelled=false
-    getLessonPlanningContext({ classLevel:document.classLevel,section:document.section,subjects:selectedSubjectsCsv }).then(data=>{if(!cancelled)setContext(data)}).catch(()=>{if(!cancelled)setContext(null)})
+    getLessonPlanningContext({ classLevel:document.classLevel,section:document.section,subjects:selectedSubjects.join(',') }).then(data=>{if(!cancelled)setContext(data)}).catch(()=>{if(!cancelled)setContext(null)})
     return()=>{cancelled=true}
-  },[document.classLevel,document.section,selectedSubjectsCsv])
+  },[document.classLevel,document.section,selectedSubjects.join('|')])
 
   const patch = updates => setDocument(current=>normalizeLessonPlanDocument({ ...current,...updates }))
   const changeType = type => {
@@ -149,17 +156,13 @@ export default function LessonPlanningWorkspace() {
     patch({planningType:type,endDate:end,termLabel:type==='term'?(document.termLabel||'Term') : document.termLabel})
   }
   const toggleSubject = subject => setSelectedSubjects(current=>current.includes(subject)?current.filter(item=>item!==subject):[...current,subject])
-  useEffect(()=>{
-    let cancelled=false
-    queueMicrotask(()=>{
-      if(cancelled)return
-      setDocument(current=>{
-        const existing=new Map(current.subjects.map(item=>[item.subject.toLowerCase(),item]))
-        return normalizeLessonPlanDocument({ ...current,subjects:selectedSubjects.map(name=>existing.get(name.toLowerCase())||{subject:name,units:[],lessons:[],status:'draft'}) })
-      })
+  const syncSelectedSubjectsIntoDocument = () => {
+    setDocument(current=>{
+      const existing=new Map(current.subjects.map(item=>[item.subject.toLowerCase(),item]))
+      return normalizeLessonPlanDocument({ ...current,subjects:selectedSubjects.map(name=>existing.get(name.toLowerCase())||{subject:name,units:[],lessons:[],status:'draft'}) })
     })
-    return()=>{cancelled=true}
-  },[selectedSubjects])
+  }
+  useEffect(syncSelectedSubjectsIntoDocument,[selectedSubjects.join('|')])
 
   const generate = async () => {
     if(!document.classLevel){setStatus('Select a class first.');return}
@@ -184,14 +187,17 @@ export default function LessonPlanningWorkspace() {
     finally{setBusy('')}
   }
 
+  const latestDocumentRef=useRef(document)
+  useEffect(()=>{latestDocumentRef.current=document},[document])
   const save = async () => {
+    const submittedDocument=JSON.stringify(document)
     setBusy('save')
     try{
       const payload=toLessonPlanPersistencePayload(document)
       const saved=document.id?await updateLessonPlan(payload):await createLessonPlan(payload)
-      const normalized=normalizeLessonPlanDocument(saved);setDocument(normalized);setSelectedSubjects(normalized.subjects.map(item=>item.subject))
-      const all=await listLessonPlans({limit:200});setSavedPlans(Array.isArray(all)?all:[]);setStatus('Lesson plan saved safely.')
-    }catch(error){const code=error?.response?.data?.code;if(code==='LESSON_PLAN_REVISION_CONFLICT')setStatus('This plan changed in another session. Reopen it before saving again.');else setStatus(error?.response?.data?.message||error?.message||'Save failed. Recovery draft remains on this device.')}
+      const unchanged=JSON.stringify(latestDocumentRef.current)===submittedDocument;const normalized=normalizeLessonPlanDocument(saved);if(unchanged){setDocument(normalized);setSelectedSubjects(normalized.subjects.map(item=>item.subject))}
+      try{const all=await listLessonPlans({limit:200});setSavedPlans(Array.isArray(all)?(all.some(item=>String(item.id)===String(saved.id))?all.map(item=>String(item.id)===String(saved.id)?(Number(item.serverRevision??item.revision??0)>Number(saved.serverRevision??saved.revision??0)?item:saved):item):[saved,...all]):[saved])}catch{setSavedPlans(current=>[saved,...current.filter(item=>String(item.id)!==String(saved.id))])}setStatus(unchanged&&JSON.stringify(latestDocumentRef.current)===JSON.stringify(normalized)?'Lesson plan saved safely.':'Previous lesson plan selection was saved. Current editor selection was not saved.')
+    }catch(error){if(JSON.stringify(latestDocumentRef.current)!==submittedDocument){setStatus('Previous lesson plan selection could not be saved. Current editor selection was not submitted.');return}const code=error?.response?.data?.code;if(code==='LESSON_PLAN_REVISION_CONFLICT')setStatus('This plan changed in another session. Reopen it before saving again.');else setStatus(error?.response?.data?.message||error?.message||'Save failed. Recovery draft remains on this device.')}
     finally{setBusy('')}
   }
   const openPlan = plan => {const next=normalizeLessonPlanDocument(plan);setDocument(next);setSelectedSubjects(next.subjects.map(item=>item.subject));setAiState(null);setStatus('Saved plan reopened.')}
@@ -207,8 +213,10 @@ export default function LessonPlanningWorkspace() {
   return <div className="lesson-planning-workspace" data-lesson-planning-workspace>
     <div className="lp-topbar">
       <div><div className="lp-eyebrow">ASSPS Academic Planning</div><h2>Lesson Planning Workspace</h2><p>Plan once. Reuse across term, daily lessons, diary cards and assessments.</p></div>
-      <div className="lp-actions"><button className="ghost" onClick={reset}><Plus size={16}/> New</button><button className="ghost" onClick={()=>setShowPaste(true)}><WandSparkles size={16}/> Smart Paste</button><button className="ghost" onClick={printPlan}><Printer size={16}/> Print</button><button className="ghost" onClick={()=>window.dispatchEvent(new CustomEvent('assps-open-diary-lesson-plan',{detail:{planId:document.id||'',classLevel:document.classLevel,section:document.section,date:document.startDate}}))}><Users size={16}/> Student Cards</button><button data-save-plan className="primary" onClick={save} disabled={busy==='save'}>{busy==='save'?<RefreshCw className="spin" size={16}/>:<Save size={16}/>} Save Draft</button></div>
+      <div className="lp-actions"><button className="ghost" aria-expanded={showComposerReview} onClick={()=>setShowComposerReview(v=>!v)}><FileText size={16}/> Original Syllabus Review</button><button className="ghost" onClick={reset}><Plus size={16}/> New</button><button className="ghost" onClick={()=>setShowPaste(true)}><WandSparkles size={16}/> Smart Paste</button><button className="ghost" onClick={printPlan}><Printer size={16}/> Print</button><button className="ghost" onClick={()=>window.dispatchEvent(new CustomEvent('assps-open-diary-lesson-plan',{detail:{planId:document.id||'',classLevel:document.classLevel,section:document.section,date:document.startDate}}))}><Users size={16}/> Student Cards</button><button data-save-plan className="primary" onClick={save} disabled={busy==='save'}>{busy==='save'?<RefreshCw className="spin" size={16}/>:<Save size={16}/>} Save Draft</button></div>
     </div>
+
+    {showComposerReview && <ComposerLessonReview/>}
 
     {status && <div className="lp-status" role="status"><CheckCircle2 size={15}/>{status}<button onClick={()=>setStatus('')}><X size={14}/></button></div>}
 

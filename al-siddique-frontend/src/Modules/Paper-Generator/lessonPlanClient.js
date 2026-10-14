@@ -59,3 +59,39 @@ export async function generateLessonPlanDraft(input) {
     context: response?.data?.context || {},
   }
 }
+
+
+// Composer-forwarded WhatsApp evidence is managed independently of ordinary
+// teacher lesson documents. The server enforces identity, tenant and review state.
+export async function previewComposerReview(reviewBatch) {
+  return unwrap(await api.post('/api/lesson-plans/planner/composer-review-preview', {reviewBatch}))
+}
+export async function importComposerReview(reviewBatch) {
+  return unwrap(await api.post('/api/lesson-plans/planner/composer-review-import', {reviewBatch}))
+}
+export async function listComposerReview() {
+  return unwrap(await api.get('/api/lesson-plans/planner/composer-review-classes')) || []
+}
+export async function getComposerReviewSource(id) {
+  if (!/^LPREVIEW-[A-Za-z0-9-]{8,95}$/.test(String(id||''))) throw new Error('Invalid source review identity')
+  return unwrap(await api.get('/api/lesson-plans/planner/composer-review-source/' + encodeURIComponent(id)))
+}
+export async function appendComposerReviewCorrection(id,expectedRevision,change) {
+  if (!Number.isInteger(Number(expectedRevision)) || Number(expectedRevision)<1) throw new Error('Current revision required')
+  return unwrap(await api.post('/api/lesson-plans/planner/composer-review-correction/' + encodeURIComponent(id),{
+    ...change,expectedRevision:Number(expectedRevision)
+  }))
+}
+
+
+export async function getComposerTeacherEvidence(id) {
+  return unwrap(await api.get('/api/lesson-plans/planner/composer-review-assignment-evidence/' + encodeURIComponent(id)))
+}
+export async function appendPrincipalSourceInspection(id,expectedRevision,sourceDigest) {
+  if(!Number.isInteger(Number(expectedRevision))||Number(expectedRevision)<1)throw Error('Current server revision required')
+  if(!/^[a-f0-9]{64}$/.test(String(sourceDigest)))throw Error('Original source hash required')
+  const declaration='I reviewed the original lesson syllabus evidence and its correction flags.'
+  return unwrap(await api.post('/api/lesson-plans/planner/composer-review-principal-inspection/'+encodeURIComponent(id),{
+    expectedRevision:Number(expectedRevision),sourceDigest,declaration
+  }))
+}

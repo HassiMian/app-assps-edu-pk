@@ -1,0 +1,47 @@
+.assps-composer-review{--ac:#132e56;--border:#d5dfeb;--muted:#66798d;border:1px solid var(--border);border-radius:18px;padding:22px;margin:18px 0;background:#f9fbff;color:#183454}
+.composer-heading{display:flex;justify-content:space-between;align-items:start;gap:16px}
+.composer-heading h3{font-size:20px;margin:4px 0;font-weight:750}
+.composer-heading p{font-size:13px;line-height:1.6;color:var(--muted);margin:0 0 16px}
+.composer-kicker{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#24819a;font-weight:750}
+.composer-status{display:inline-flex;align-items:center;gap:6px;border:1px solid #cbb898;color:#835a19;background:#fbf6e9;padding:7px 10px;border-radius:40px;white-space:nowrap;font-size:11px;font-weight:700}
+.composer-toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 14px}
+.assps-composer-review button{cursor:pointer;border:1px solid #cedae7;border-radius:9px;background:white;color:#143456;padding:9px 11px;font:600 12px/1.3 system-ui,sans-serif;display:inline-flex;gap:7px;align-items:center}
+.assps-composer-review button:hover{background:#f0f6fe}
+.assps-composer-review button:disabled{opacity:.48;cursor:not-allowed}
+.assps-composer-review button:focus-visible,.assps-composer-review input:focus-visible,.assps-composer-review textarea:focus-visible,.assps-composer-review select:focus-visible{outline:3px solid #2d9bb9;outline-offset:2px}
+.composer-import{border:1px dashed #86b6c7;border-radius:10px;background:white;padding:14px;margin-bottom:14px}
+.composer-import label,.composer-edit label{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:600}
+.composer-import input{margin:7px 0;display:block}
+.composer-import small{display:block;color:#5a7388;margin-bottom:10px;font-size:11px}
+.composer-message,.composer-error,.composer-warning{font-size:12px;line-height:1.6;padding:10px 12px;border-radius:8px;margin:8px 0 12px}
+.composer-message{color:#285b4d;background:#eaf7f2;border:1px solid #a6d8c6}
+.composer-error{display:flex;align-items:center;gap:6px;color:#88302a;background:#fff0ed;border:1px solid #e5b5b3}
+.composer-warning{color:#775719;background:#fff6e7;border:1px solid #e6d0a4}
+.composer-layout{display:grid;grid-template-columns:165px 185px minmax(0,1fr);gap:11px;align-items:start}
+.composer-class-list,.composer-subject-list,.composer-source{background:white;border:1px solid var(--border);border-radius:10px;padding:13px;min-width:0;min-height:230px}
+.composer-class-list strong,.composer-subject-list strong{font-size:11px;color:#40566f;display:block;border-bottom:1px solid #e5eaf0;padding-bottom:9px;margin-bottom:8px}
+.composer-class-list button,.composer-subject-list button{width:100%;text-align:left;justify-content:space-between;margin:3px 0;border:0;padding:10px 7px;background:transparent}
+.composer-class-list button span,.composer-subject-list small{color:#75869a;font-size:10px;white-space:nowrap}
+.composer-subject-list button{justify-content:start;flex-wrap:wrap}.composer-subject-list small{width:100%;margin-left:20px}
+.composer-class-list button.selected,.composer-subject-list button.selected{background:#e8f3fc;border:1px solid #acd2e7;color:#0b567d}
+.composer-source-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.composer-source-head h4{font-size:17px;margin:1px 0 8px}
+.composer-source-head span,.composer-metadata{font-size:11px;color:var(--muted)}
+.composer-source h5{font-size:13px;margin:16px 0 8px}
+.composer-excerpt{padding:12px;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:9px;background:#fff}
+.composer-excerpt small{color:#687b90;font-size:10px}
+.composer-excerpt p{white-space:pre-wrap;unicode-bidi:plaintext;font-family:"Jameel Noori Nastaleeq","Times New Roman",serif;line-height:2;font-size:15px;margin:8px 0}
+.composer-issues{border-left:3px solid #c09a4a;background:#fffaf0;padding:8px 12px}
+.composer-issues ul{margin:6px 0 2px;padding-left:20px;font-size:12px;line-height:1.7}
+.composer-proposal{border-left:3px solid #70a5d4;padding:8px 12px;margin-bottom:8px;background:#f5f9fd}
+.composer-proposal p{white-space:pre-wrap;font-size:12px}.composer-proposal small{color:#6b7890}
+.composer-edit{margin-top:14px;padding:14px;border:1px solid #c6d4e0;border-radius:9px;background:#f7fafc;display:grid;gap:10px}
+.composer-edit textarea,.composer-edit select{width:100%;box-sizing:border-box;min-height:34px;border:1px solid #bfcedb;background:white;border-radius:6px;padding:8px;font:12px system-ui}
+.composer-edit textarea{min-height:60px;resize:vertical}
+@media(max-width:1000px){.composer-layout{grid-template-columns:130px minmax(0,1fr)}.composer-source{grid-column:1/-1}}
+@media(max-width:600px){.assps-composer-review{padding:12px}.composer-heading{display:block}.composer-status{margin:8px 0}.composer-layout{grid-template-columns:1fr}.composer-source{grid-column:auto}.composer-class-list,.composer-subject-list{min-height:auto}.composer-class-list button{width:auto;margin-right:5px}}
+@media print{.assps-composer-review{display:none}}
+
+.composer-principal{margin:14px 0;border:1px solid #b5cadb;background:#eff7ff;border-radius:9px;padding:12px}
+.composer-principal p{font-size:12px;color:#4f6074;line-height:1.5}
+.composer-principal label{display:flex;gap:9px;align-items:center;font-size:12px;margin:10px 0;line-height:1.5}
