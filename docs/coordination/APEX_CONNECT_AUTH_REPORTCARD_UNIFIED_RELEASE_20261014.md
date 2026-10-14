@@ -39,3 +39,22 @@ Coordinator: HassiMian/app-assps-edu-pk issue #4. SaaS Core owns final productio
 7. Core production owner captures fresh signed current backup, tests restore and zero-risk rollback; canary with exact source and API; release only when every active gate passes. Record actual post-cutover BUILD_ID, owner approval events, full school isolation and browser acceptance in issue #4.
 
 **Status: SAFELY PREPARED AND TESTED SOURCE; FULL PRODUCTION CUTOVER HOLD.**
+
+## Real compiled Next production-build anonymous HTTP canary — additional independent acceptance
+
+Independently served the ACTUAL optimized candidate build (not a mocked proxy)
+on loopback `127.0.0.1:3019` with `next start`, while live public Nginx and
+PM2 production routes remained unchanged. HTTP smoke:
+
+- `/login` -> **200**
+- `/dashboard` -> **307** to `/login?next=/admin` (**correct**, unlike current live extra `/admin` redirect)
+- `/teacher` -> **302** to `/login?next=/teacher`
+- `/api/auth/me` -> **401** anonymous
+- `/teacher/assessments/report-cards` -> **302** to `/login?next=/teacher/assessments/report-cards`
+- `/auth/change-password` -> **200**
+
+**6/6 anonymous compiled-route acceptance PASS**. This verifies the login
+boundary and absence of the live routing drift in the tested compiled
+candidate; it is *not* a genuine teacher login, school RLS, enrolled marks
+entry or actual OS Print Window acceptance. The temporary Next canary was
+stopped, TCP 3019 listener closure verified; production services unchanged.
