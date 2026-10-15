@@ -161,6 +161,13 @@ def main():
     ingress_live=Path('/etc/nginx/conf.d/assps-firstterm-app-maps.conf')
     if ingress_live.exists() and ingress_live.read_text().count('GET     $assps_marks_legacy_upstream;')!=3:
         raise RuntimeError('FAIL_CLOSED: live marks GET route diverges from login-compatible backend')
+    # Protect the deployed ten distinct premium Result Cards templates and
+    # whole-class/section print selector against old-source production cutovers.
+    results_guard=HERE/'verify-resultcards-v2-active-20261015.cjs'
+    results_check=run(['node',str(results_guard),'--dist',str(dist)])
+    if results_check.returncode!=0:
+        raise RuntimeError('FAIL_CLOSED: active whole-class Result Cards V2 or a premium template missing: '
+                           +(results_check.stderr or results_check.stdout).strip()[:500])
     marks_guard=HERE/'verify-marks-register-ui-20261015.cjs'
     marks_check=run(['node',str(marks_guard),'--dist',str(dist)])
     if marks_check.returncode!=0:

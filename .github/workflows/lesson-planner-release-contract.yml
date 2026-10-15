@@ -16,6 +16,8 @@ on:
       - "ops/release/check-preserved-companion-features.py"
       - "ops/release/verify-diary-controls-in-active-bundle-20261015.cjs"
       - "ops/release/verify-marks-register-ui-20261015.cjs"
+      - "ops/release/verify-resultcards-v2-active-20261015.cjs"
+      - "ops/tests/resultcards-v2-immutable-release-20261015.test.cjs"
       - "ops/release/signed-bluegreen/nginx/**"
       - "al-siddique-backend/src/routes/examRoutes.js"
       - "al-siddique-backend/src/services/examOfficialMarksRevision.js"
@@ -49,6 +51,8 @@ on:
       - "ops/release/check-preserved-companion-features.py"
       - "ops/release/verify-diary-controls-in-active-bundle-20261015.cjs"
       - "ops/release/verify-marks-register-ui-20261015.cjs"
+      - "ops/release/verify-resultcards-v2-active-20261015.cjs"
+      - "ops/tests/resultcards-v2-immutable-release-20261015.test.cjs"
       - "ops/release/signed-bluegreen/nginx/**"
       - "al-siddique-backend/src/routes/examRoutes.js"
       - "al-siddique-backend/src/services/examOfficialMarksRevision.js"
@@ -98,6 +102,10 @@ jobs:
         run: node ops/release/verify-marks-register-ui-20261015.cjs --dist al-siddique-frontend/dist
       - name: Block marks-read cross-backend 401 logout loop in release ingress
         run: python3 ops/release/signed-bluegreen/nginx/test-marksonly-ingress-contract-20261011.py -v
+      - name: Verify entire-class Result Cards V2 and all 10 premium themes from active module
+        run: node ops/release/verify-resultcards-v2-active-20261015.cjs --dist al-siddique-frontend/dist
+      - name: Reject orphan, missing-class, or regressed nine-theme result releases
+        run: ASSPS_RESULT_CARDS_DIST=al-siddique-frontend/dist node --test ops/tests/resultcards-v2-immutable-release-20261015.test.cjs
       - name: Reject absent-or-orphan marks review and print bundles
         run: ASSPS_MARKS_REGISTER_DIST=al-siddique-frontend/dist node --test ops/tests/marks-register-live-nonregression.test.cjs
       - name: Verify principal-only immutable exam-mark correction contract (source-only)
