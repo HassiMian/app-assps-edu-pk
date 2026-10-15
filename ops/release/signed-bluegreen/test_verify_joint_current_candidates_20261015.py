@@ -83,6 +83,9 @@ class CombinedCandidateTests(unittest.TestCase):
     def test_reset_token_revocation_drift_fails(self):
         (self.nxt/"src/lib/server/auth-user.ts").write_text("ACCEPT_RESET_MARKED_COOKIE")
         self.assertFalse(self.probe()["reviewed_auth_src_lib_server_auth-user.ts"])
+    def test_anonymous_401_interceptor_drift_fails(self):
+        (self.nxt/"src/utils/api.ts").write_text("FORCE_REDIRECT_PUBLIC_CHALLENGE")
+        self.assertFalse(self.probe()["reviewed_auth_src_utils_api.ts"])
     def test_missing_compiled_binary_fails(self):
         (self.nxt/".next/BUILD_ID").unlink()
         self.assertFalse(self.probe()["new_next_compiled_build_id"])

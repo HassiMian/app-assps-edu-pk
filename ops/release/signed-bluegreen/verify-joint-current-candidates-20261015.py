@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read-only reconciliation of CURRENT Core 278 and Connect 17097 release candidates.
+"""Read-only reconciliation of CURRENT Core 278 and Connect 98f6df release candidates.
 
 Never deploys, signs, authenticates people, changes staff credentials, or writes SQL.
 The official Core release verifier remains the exclusive production gate.
@@ -12,9 +12,9 @@ import subprocess
 import sys
 
 CORE_BASE = "2782179f6ed0d3658ed8d7025cd5a7908b7ebdd0"
-CONNECT_SHA = "859ee13f367db8e755a8b4e88c4ca65b6dd5feac"
+CONNECT_SHA = "98f6dfcff72fbe9d46d227d5c1200d388300d3d5"
 WORKER_SHA = "97090fee75c77283375141e21d572d52a1a9fe58952ff16a4584ca9f308592cc"
-CONNECT_BUILD = "1C7EPZhqltxUUzTMiDTwQ"
+CONNECT_BUILD = "rc1vIlE6prAQ8pHrw7ohX"
 CONNECT_PROXY_SHA = "7978b360f2ccc235a086283463851f0c5a8c98390efd57b17476cc32b21fd015"
 BLUE_BUILD = "ONDwxEIZlx5onDIKY7wYf"
 BLUE_ARCHIVE_SHA = "844430b88e1b12906ef00945f8a382a69905f5a0a05727e35e0729452466947e"
@@ -34,6 +34,7 @@ AUTH_HASHES = {
  "src/components/LoginClient.tsx":"3d45699280a63c0089b5b35a629b307306fc74f69eee684b5b3ac66c34f965b8",
  "src/app/auth/change-password/page.tsx":"4f1087fae2f6d2c6d9457e8ea255ea1085b6b87002bb5a521b1e5eaea21860f6",
  "src/lib/server/auth-user.ts":"06c47ef8ff003f7425f9204ad08b4e5a6e25a13c3d6cde45cd07bfb46166cc90",
+ "src/utils/api.ts":"9e2a2d314374da65f92d4d8b873197c937005204c5aeb83de0d5edf1b5431332",
 }
 
 
