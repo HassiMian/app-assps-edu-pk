@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "assps-grade910-66-mcq-curated-corrections-safe-draft-v1",
+  "schemaVersion": "assps-grade910-66-mcq-curated-corrections-safe-draft-v2",
   "sourceIntegrityLedgerSha256": "e4bda211398fafd0dc2c89cb30a13793bd9602a110891823b06bdd3ee7263b49",
   "originalResearchCandidateCount": 2581,
   "originalFlaggedMCQCount": 68,
@@ -13,6 +13,7 @@
     "C": 16,
     "D": 16
   },
+  "choicePermutationStrategy": "SHA256_QUESTION_REVISION_RANK_BALANCED_THEN_SHA256_LOCAL_DISTRACTOR_PERMUTATION_V2",
   "remainingStrongLengthOutliersAfterProposals": 0,
   "proposedKeyStillStrictlyLongestCount": 15,
   "realQualifiedSubjectAndUrduReviewerCount": 0,
@@ -40,7 +41,7 @@
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-AGRI-TECH-ENGLISH-C05-I01",
         "parentOriginalRevisionSha256": "2c9e3622d63dc0c8f5d32ce4129d74023e3ebba55b1d54adaf17567655cc5f62",
         "grade": 9,
@@ -56,11 +57,11 @@
           },
           {
             "id": "B",
-            "text": "Keeping the ground uncovered so water can travel quickly downhill"
+            "text": "Using straight downhill furrows to channel stormwater more rapidly"
           },
           {
             "id": "C",
-            "text": "Using straight downhill furrows to channel stormwater more rapidly"
+            "text": "Keeping the ground uncovered so water can travel quickly downhill"
           },
           {
             "id": "D",
@@ -71,7 +72,7 @@
         "proposedAnswerText": "Maintaining protective vegetation/contour-based management",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
-        "shiftedAnswerPositionFromOriginalA": true,
+        "shiftedAnswerPositionFromOriginalA": false,
         "noAnswerFactsIndependentlySourceVerified": true,
         "languageAndSubjectReviewerRequired": true,
         "actualSchoolTextbookEditionVerified": false,
@@ -81,7 +82,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "e8432d0bf95a6fb1dcdbf19706d55f8a2e08bbadda2537dedcec979a92ae3cea",
+      "proposalSha256": "a31c35d5279b2cc8b8b75bd48e008ea3b0d6570d98cd2d9042faddfd2ed3ed07",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -97,13 +98,13 @@
       ],
       "originalReferenceAnswerText": "Health, nutrition, welfare and suitable housing",
       "originalOptionLengthRatio": 2.518,
-      "draftNewOptionCorrectIndex": 1,
-      "draftAnswerPosition": "B",
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
       "newOptionLengthRatio": 0.6912,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-AGRI-TECH-ENGLISH-C08-I01",
         "parentOriginalRevisionSha256": "02310906a58ebec5a384c89d0efe5503686a5d0fb8eb1ab928ae4ba1653e87ea",
         "grade": 9,
@@ -115,11 +116,11 @@
         "options": [
           {
             "id": "A",
-            "text": "Maximizing herd numbers before checking whether sufficient space exists"
+            "text": "Health, nutrition, welfare and suitable housing"
           },
           {
             "id": "B",
-            "text": "Health, nutrition, welfare and suitable housing"
+            "text": "Maximizing herd numbers before checking whether sufficient space exists"
           },
           {
             "id": "C",
@@ -130,11 +131,11 @@
             "text": "Providing the same feed and shelter regardless of animals' needs"
           }
         ],
-        "proposedCorrectOptionId": "B",
+        "proposedCorrectOptionId": "A",
         "proposedAnswerText": "Health, nutrition, welfare and suitable housing",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
-        "shiftedAnswerPositionFromOriginalA": true,
+        "shiftedAnswerPositionFromOriginalA": false,
         "noAnswerFactsIndependentlySourceVerified": true,
         "languageAndSubjectReviewerRequired": true,
         "actualSchoolTextbookEditionVerified": false,
@@ -144,7 +145,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "c7840349dac20323c0be11a35eaa5fd840a6bc739e30ff41ea21d36f5d5949f7",
+      "proposalSha256": "5319b8c5679c5b2fff75d6d8b06ec0af3b69cdc43462b66216246decb2adfdf7",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -160,13 +161,13 @@
       ],
       "originalReferenceAnswerText": "Clean housing, suitable feed/water and health monitoring",
       "originalOptionLengthRatio": 3.733,
-      "draftNewOptionCorrectIndex": 2,
-      "draftAnswerPosition": "C",
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
       "newOptionLengthRatio": 0.8116,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-AGRI-TECH-ENGLISH-C10-I01",
         "parentOriginalRevisionSha256": "d5c5667cd810c46a1e9b3f5f24d4df323c8ac48ede2d71c902117ea2599c3994",
         "grade": 9,
@@ -178,22 +179,22 @@
         "options": [
           {
             "id": "A",
-            "text": "Keeping as many birds together as possible without checking ventilation"
+            "text": "Using cramped housing while assuming routine cleaning is unnecessary"
           },
           {
             "id": "B",
-            "text": "Giving feed without regularly evaluating flock cleanliness or health"
-          },
-          {
-            "id": "C",
             "text": "Clean housing, suitable feed/water and health monitoring"
           },
           {
+            "id": "C",
+            "text": "Keeping as many birds together as possible without checking ventilation"
+          },
+          {
             "id": "D",
-            "text": "Using cramped housing while assuming routine cleaning is unnecessary"
+            "text": "Giving feed without regularly evaluating flock cleanliness or health"
           }
         ],
-        "proposedCorrectOptionId": "C",
+        "proposedCorrectOptionId": "B",
         "proposedAnswerText": "Clean housing, suitable feed/water and health monitoring",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -207,7 +208,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "39b1ea6a9608bf293c4a34f2e8a5842cedbec69f9dacc74ff7bdccdc00748a07",
+      "proposalSha256": "3d770a8875666312f8d897d6e0a655fd682868ea3faeb2f83ed0bbe6fb9d11f4",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -223,13 +224,13 @@
       ],
       "originalReferenceAnswerText": "Health، nutrition، welfare اور suitable housing",
       "originalOptionLengthRatio": 2.35,
-      "draftNewOptionCorrectIndex": 3,
-      "draftAnswerPosition": "D",
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
       "newOptionLengthRatio": 0.8812,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-AGRI-TECH-URDU-C08-I01",
         "parentOriginalRevisionSha256": "30e69993a6c26790a36f12dc4a86ee1aa34e83c63bb68c4c9cc7b84f5d57ab5a",
         "grade": 9,
@@ -241,11 +242,11 @@
         "options": [
           {
             "id": "A",
-            "text": "جانوروں کی ضروریات دیکھے بغیر تعداد بڑھانے کو ترجیح دینا"
+            "text": "خوراک کی مقدار کو صحت اور آرام سے زیادہ اہم سمجھنا"
           },
           {
             "id": "B",
-            "text": "خوراک کی مقدار کو صحت اور آرام سے زیادہ اہم سمجھنا"
+            "text": "Health، nutrition، welfare اور suitable housing"
           },
           {
             "id": "C",
@@ -253,10 +254,10 @@
           },
           {
             "id": "D",
-            "text": "Health، nutrition، welfare اور suitable housing"
+            "text": "جانوروں کی ضروریات دیکھے بغیر تعداد بڑھانے کو ترجیح دینا"
           }
         ],
-        "proposedCorrectOptionId": "D",
+        "proposedCorrectOptionId": "B",
         "proposedAnswerText": "Health، nutrition، welfare اور suitable housing",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -270,7 +271,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "8bcc74f9d19eb6051a3a0365bce4177dcc4c68b67ca727a7da9a1fc4728acdd0",
+      "proposalSha256": "8243f0057472ccbb96cbb264e9dd34395a601f99034c9a2688fa75a636bdbe41",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -286,13 +287,13 @@
       ],
       "originalReferenceAnswerText": "Clean housing، suitable feed/water اور health monitoring",
       "originalOptionLengthRatio": 3.5,
-      "draftNewOptionCorrectIndex": 0,
-      "draftAnswerPosition": "A",
+      "draftNewOptionCorrectIndex": 3,
+      "draftAnswerPosition": "D",
       "newOptionLengthRatio": 1.0435,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-AGRI-TECH-URDU-C10-I01",
         "parentOriginalRevisionSha256": "f64be889231e2353f611f2ce12b5cbdedf8df7536c4e65cfa7ed6bc865220b5b",
         "grade": 9,
@@ -304,22 +305,22 @@
         "options": [
           {
             "id": "A",
-            "text": "Clean housing، suitable feed/water اور health monitoring"
+            "text": "رہائش میں صفائی اور مناسب جگہ کو غیر ضروری سمجھنا"
           },
           {
             "id": "B",
-            "text": "پرندوں کی تعداد بڑھا کر ہوا کی آمد و رفت کو غیر اہم سمجھنا"
-          },
-          {
-            "id": "C",
             "text": "خوراک دینا مگر پرندوں کی صحت کی باقاعدہ نگرانی نہ کرنا"
           },
           {
+            "id": "C",
+            "text": "پرندوں کی تعداد بڑھا کر ہوا کی آمد و رفت کو غیر اہم سمجھنا"
+          },
+          {
             "id": "D",
-            "text": "رہائش میں صفائی اور مناسب جگہ کو غیر ضروری سمجھنا"
+            "text": "Clean housing، suitable feed/water اور health monitoring"
           }
         ],
-        "proposedCorrectOptionId": "A",
+        "proposedCorrectOptionId": "D",
         "proposedAnswerText": "Clean housing، suitable feed/water اور health monitoring",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -333,7 +334,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "994e5f1597b89f0aa13c9b48367263cdc5f0238ccf50945dc23de8c6859989db",
+      "proposalSha256": "3e3d86906f6f7c1c1d72302bc1468039f469920d4613aa459c5d8ce979b78149",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -355,7 +356,7 @@
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-BIO-2025-C07-B01-M01",
         "parentOriginalRevisionSha256": "6c7c70f318fe60af54f7d8106158c1b0a67f89e367d04b65d66e2b25225fa5fb",
         "grade": 9,
@@ -367,7 +368,7 @@
         "options": [
           {
             "id": "A",
-            "text": "To provide the genetic instructions used to build every cell structure"
+            "text": "To permanently raise the temperature of all biochemical mixtures"
           },
           {
             "id": "B",
@@ -375,7 +376,7 @@
           },
           {
             "id": "C",
-            "text": "To permanently raise the temperature of all biochemical mixtures"
+            "text": "To provide the genetic instructions used to build every cell structure"
           },
           {
             "id": "D",
@@ -396,7 +397,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "0f4e97e2cbcc569ce0d5f353774f9dbb4dddaa91f63c857b8263154fa3f5a8a7",
+      "proposalSha256": "39df8a62d04942c2e7b92e7e983bbfab86abe8058bf700c43d984353fca52d6b",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -412,13 +413,13 @@
       ],
       "originalReferenceAnswerText": "Loss of water vapour from aerial plant surfaces, mainly through stomata",
       "originalOptionLengthRatio": 2.731,
-      "draftNewOptionCorrectIndex": 2,
-      "draftAnswerPosition": "C",
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
       "newOptionLengthRatio": 1.0867,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": true,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-BIO-2025-C09-B02-M01",
         "parentOriginalRevisionSha256": "ec7ae0c16402476ab567b572bc5d74d3f8096dc04bd3e85280e1dbbf0f67af0d",
         "grade": 9,
@@ -430,7 +431,7 @@
         "options": [
           {
             "id": "A",
-            "text": "Movement of dissolved sugars from photosynthetic leaves through phloem"
+            "text": "Loss of water vapour from aerial plant surfaces, mainly through stomata"
           },
           {
             "id": "B",
@@ -438,18 +439,18 @@
           },
           {
             "id": "C",
-            "text": "Loss of water vapour from aerial plant surfaces, mainly through stomata"
+            "text": "Movement of dissolved sugars from photosynthetic leaves through phloem"
           },
           {
             "id": "D",
             "text": "Release of oxygen from chloroplasts during photosynthesis only"
           }
         ],
-        "proposedCorrectOptionId": "C",
+        "proposedCorrectOptionId": "A",
         "proposedAnswerText": "Loss of water vapour from aerial plant surfaces, mainly through stomata",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
-        "shiftedAnswerPositionFromOriginalA": true,
+        "shiftedAnswerPositionFromOriginalA": false,
         "noAnswerFactsIndependentlySourceVerified": true,
         "languageAndSubjectReviewerRequired": true,
         "actualSchoolTextbookEditionVerified": false,
@@ -459,7 +460,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "7ac7e6cc3fa507129e4f64e1157d6be877ea4700d0adf6f2af862c38b61e7943",
+      "proposalSha256": "c88a2cff6e974d8260e61776b3bbf25f9c41f48aa7bc60bb8449b91ae432e538",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -481,7 +482,7 @@
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-BIO-2025-C11-B01-M01",
         "parentOriginalRevisionSha256": "b85c4933209f6ac014900f10dec7c9db672758c14d4bbc2bdddb0d0378acf843",
         "grade": 9,
@@ -497,11 +498,11 @@
           },
           {
             "id": "B",
-            "text": "Observation found halfway through the values after sorting them"
+            "text": "Difference between the greatest and least recorded observations"
           },
           {
             "id": "C",
-            "text": "Difference between the greatest and least recorded observations"
+            "text": "Observation found halfway through the values after sorting them"
           },
           {
             "id": "D",
@@ -522,7 +523,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "dc3763029ea060568f557d526f1432882672284c66f64c829725e254f66e82ee",
+      "proposalSha256": "4c8a54817a394b4dbf1c85904a33f0be753eda7d56492199a40b5ec9083eae87",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -544,7 +545,7 @@
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-BIO-UR-C03-M01",
         "parentOriginalRevisionSha256": "dca4751c9e5b7c46eac65e25ee546e91537dc2dd8595dd727d023fc3b29930d5",
         "grade": 9,
@@ -564,18 +565,18 @@
           },
           {
             "id": "C",
-            "text": "cell میں توانائی پیدا کرنے والے تمام reactions خود انجام دینا"
+            "text": "cell کے nucleus میں chromosomes کی ترتیب کو براہ راست کنٹرول کرنا"
           },
           {
             "id": "D",
-            "text": "cell کے nucleus میں chromosomes کی ترتیب کو براہ راست کنٹرول کرنا"
+            "text": "cell میں توانائی پیدا کرنے والے تمام reactions خود انجام دینا"
           }
         ],
         "proposedCorrectOptionId": "A",
         "proposedAnswerText": "cell میں substances کی آمد و رفت کو regulate کرنا",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
-        "shiftedAnswerPositionFromOriginalA": true,
+        "shiftedAnswerPositionFromOriginalA": false,
         "noAnswerFactsIndependentlySourceVerified": true,
         "languageAndSubjectReviewerRequired": true,
         "actualSchoolTextbookEditionVerified": false,
@@ -585,7 +586,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "8b3016c755e107332879f36c1bdf5c53e74f4662840d0b861ccda03e05633eb5",
+      "proposalSha256": "3e0dce8e71ee5338a644ce35115d73035f89068100d298f8f5709942786d5cfd",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -601,13 +602,13 @@
       ],
       "originalReferenceAnswerText": "pollen کا مناسب reproductive surface تک transfer",
       "originalOptionLengthRatio": 3.2,
-      "draftNewOptionCorrectIndex": 1,
-      "draftAnswerPosition": "B",
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
       "newOptionLengthRatio": 0.8889,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-BIO-UR-C10-M01",
         "parentOriginalRevisionSha256": "e8c294153a5bc57ffc6e7fc5b4d5e6625da8d7ea64094ddec12246919f649547",
         "grade": 9,
@@ -619,22 +620,22 @@
         "options": [
           {
             "id": "A",
-            "text": "pollen کا anther میں تیار ہونا اور grains کی تعداد بڑھنا"
+            "text": "fertilization کے بعد ovule کا مکمل seed میں تبدیل ہونا"
           },
           {
             "id": "B",
-            "text": "pollen کا مناسب reproductive surface تک transfer"
+            "text": "pollen کا anther میں تیار ہونا اور grains کی تعداد بڑھنا"
           },
           {
             "id": "C",
-            "text": "seed کا مناسب حالات میں جڑ نکال کر نشوونما شروع کرنا"
+            "text": "pollen کا مناسب reproductive surface تک transfer"
           },
           {
             "id": "D",
-            "text": "fertilization کے بعد ovule کا مکمل seed میں تبدیل ہونا"
+            "text": "seed کا مناسب حالات میں جڑ نکال کر نشوونما شروع کرنا"
           }
         ],
-        "proposedCorrectOptionId": "B",
+        "proposedCorrectOptionId": "C",
         "proposedAnswerText": "pollen کا مناسب reproductive surface تک transfer",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -648,7 +649,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "48a62d1af2e4b642be35073e76e9ee6d9e0e0022943eb9ac69bdf9ec8784f73d",
+      "proposalSha256": "f4c7fcce2dfe4b7fceaebc622d7405a9bf6a0a7920652320f8d003642bffb967",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -664,13 +665,13 @@
       ],
       "originalReferenceAnswerText": "The variety of living organisms and biological variation",
       "originalOptionLengthRatio": 2.8,
-      "draftNewOptionCorrectIndex": 2,
-      "draftAnswerPosition": "C",
+      "draftNewOptionCorrectIndex": 3,
+      "draftAnswerPosition": "D",
       "newOptionLengthRatio": 0.84,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-BIOLOGY-TECH-ENGLISH-C02-M01",
         "parentOriginalRevisionSha256": "92142ffe8fbf3d76082a6aecd7f2ca901beabfb4def0cd0cff673ea371650a7a",
         "grade": 9,
@@ -682,22 +683,22 @@
         "options": [
           {
             "id": "A",
-            "text": "The physical conditions of a habitat considered without living organisms"
+            "text": "The range of soil minerals found in a particular rock formation"
           },
           {
             "id": "B",
-            "text": "The number of individuals belonging to one selected species alone"
+            "text": "The physical conditions of a habitat considered without living organisms"
           },
           {
             "id": "C",
-            "text": "The variety of living organisms and biological variation"
+            "text": "The number of individuals belonging to one selected species alone"
           },
           {
             "id": "D",
-            "text": "The range of soil minerals found in a particular rock formation"
+            "text": "The variety of living organisms and biological variation"
           }
         ],
-        "proposedCorrectOptionId": "C",
+        "proposedCorrectOptionId": "D",
         "proposedAnswerText": "The variety of living organisms and biological variation",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -711,7 +712,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "731620a338fb804f8e2d32ae3349aa851312ac606d7286a02fb5ac39d738c54e",
+      "proposalSha256": "fb6544c387a99c8aa42dd45e90d6e524c8626663d53ca7ba19ba5651fd327a33",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -727,13 +728,13 @@
       ],
       "originalReferenceAnswerText": "Alert the responsible teacher and follow the emergency procedure",
       "originalOptionLengthRatio": 3,
-      "draftNewOptionCorrectIndex": 3,
-      "draftAnswerPosition": "D",
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
       "newOptionLengthRatio": 0.9697,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-CHEM-2025-C13-13T5-M01",
         "parentOriginalRevisionSha256": "3e289093484a3504c0bfa95577f19becc47f95f426c182a84e1473c283d0c150",
         "grade": 9,
@@ -745,7 +746,7 @@
         "options": [
           {
             "id": "A",
-            "text": "Keep observations private and complete the lesson before reporting"
+            "text": "Alert the responsible teacher and follow the emergency procedure"
           },
           {
             "id": "B",
@@ -757,14 +758,14 @@
           },
           {
             "id": "D",
-            "text": "Alert the responsible teacher and follow the emergency procedure"
+            "text": "Keep observations private and complete the lesson before reporting"
           }
         ],
-        "proposedCorrectOptionId": "D",
+        "proposedCorrectOptionId": "A",
         "proposedAnswerText": "Alert the responsible teacher and follow the emergency procedure",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
-        "shiftedAnswerPositionFromOriginalA": true,
+        "shiftedAnswerPositionFromOriginalA": false,
         "noAnswerFactsIndependentlySourceVerified": true,
         "languageAndSubjectReviewerRequired": true,
         "actualSchoolTextbookEditionVerified": false,
@@ -774,7 +775,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "fd1b6dadd04c54700aeaf5699da293ad404c441a88431cc23ce5510f9b950c57",
+      "proposalSha256": "ceae275d7127078bfce5c3a2b2a31c31164c2844bffefe643e53c56c5f08df99",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -790,13 +791,13 @@
       ],
       "originalReferenceAnswerText": "random variation کا اندازہ اور reliability بہتر کرنا",
       "originalOptionLengthRatio": 2.644,
-      "draftNewOptionCorrectIndex": 0,
-      "draftAnswerPosition": "A",
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
       "newOptionLengthRatio": 0.8432,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-CHEM-UR-C12-M01",
         "parentOriginalRevisionSha256": "bfe1ff5ceb431b1c87291893f65d1c6f715ee1d0cc7da1e4c926da5c719f5e7e",
         "grade": 9,
@@ -808,22 +809,22 @@
         "options": [
           {
             "id": "A",
-            "text": "random variation کا اندازہ اور reliability بہتر کرنا"
-          },
-          {
-            "id": "B",
-            "text": "بار بار پڑھنے سے پیمائش کی تمام ممکنہ غلطیاں لازماً ختم ہو جاتی ہیں"
-          },
-          {
-            "id": "C",
             "text": "تکرار کے بعد پیمائش کی اکائی بیان کرنا غیر ضروری ہو جاتا ہے"
           },
           {
-            "id": "D",
+            "id": "B",
             "text": "متعدد observations رکھنے سے اصل data چھپانا آسان ہو جاتا ہے"
+          },
+          {
+            "id": "C",
+            "text": "random variation کا اندازہ اور reliability بہتر کرنا"
+          },
+          {
+            "id": "D",
+            "text": "بار بار پڑھنے سے پیمائش کی تمام ممکنہ غلطیاں لازماً ختم ہو جاتی ہیں"
           }
         ],
-        "proposedCorrectOptionId": "A",
+        "proposedCorrectOptionId": "C",
         "proposedAnswerText": "random variation کا اندازہ اور reliability بہتر کرنا",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -837,7 +838,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "9dec8076c22d6791b107106f3f4b601a7b1e1a04c847c9386da930e9801ced23",
+      "proposalSha256": "1a6d67737432288e684c2ec432ff5b16447c3ec1bf758861cb29051e6459bb5d",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -853,13 +854,13 @@
       ],
       "originalReferenceAnswerText": "They are closely packed and vibrate around fixed positions",
       "originalOptionLengthRatio": 2.32,
-      "draftNewOptionCorrectIndex": 1,
-      "draftAnswerPosition": "B",
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
       "newOptionLengthRatio": 1.0058,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-CHEMISTRY-TECH-ENGLISH-C01-M01",
         "parentOriginalRevisionSha256": "0cca4ecc6e6721b074bbe18e04760f08dd09fa034959b146236e9e10ac2fe122",
         "grade": 9,
@@ -875,18 +876,18 @@
           },
           {
             "id": "B",
-            "text": "They are closely packed and vibrate around fixed positions"
+            "text": "They always carry an electric charge as free-moving ions"
           },
           {
             "id": "C",
-            "text": "They stay completely motionless and cannot vibrate at all"
+            "text": "They are closely packed and vibrate around fixed positions"
           },
           {
             "id": "D",
-            "text": "They always carry an electric charge as free-moving ions"
+            "text": "They stay completely motionless and cannot vibrate at all"
           }
         ],
-        "proposedCorrectOptionId": "B",
+        "proposedCorrectOptionId": "C",
         "proposedAnswerText": "They are closely packed and vibrate around fixed positions",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -900,7 +901,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "ee5c7e85cfdf64ca6fa9493de8965bd366a11440b5cde7d23cad3db0ec157fe4",
+      "proposalSha256": "22de27cd1613be64bb2d36c4920f1bb0c9af7e161aae5692ee25b22105769e38",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -916,13 +917,13 @@
       ],
       "originalReferenceAnswerText": "Electron transfer and attraction between oppositely charged ions",
       "originalOptionLengthRatio": 3.623,
-      "draftNewOptionCorrectIndex": 2,
-      "draftAnswerPosition": "C",
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
       "newOptionLengthRatio": 1.0052,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-CHEMISTRY-TECH-ENGLISH-C03-M01",
         "parentOriginalRevisionSha256": "dd722bfce37c0c1a6e4174a8dcad5477f1ae49892dc6ec47d9279939992b5e9c",
         "grade": 9,
@@ -934,7 +935,7 @@
         "options": [
           {
             "id": "A",
-            "text": "Sharing pairs of neutrons equally between neighbouring atomic nuclei"
+            "text": "Electron transfer and attraction between oppositely charged ions"
           },
           {
             "id": "B",
@@ -942,18 +943,18 @@
           },
           {
             "id": "C",
-            "text": "Electron transfer and attraction between oppositely charged ions"
+            "text": "Transferring protons directly between the nuclei of two atoms"
           },
           {
             "id": "D",
-            "text": "Transferring protons directly between the nuclei of two atoms"
+            "text": "Sharing pairs of neutrons equally between neighbouring atomic nuclei"
           }
         ],
-        "proposedCorrectOptionId": "C",
+        "proposedCorrectOptionId": "A",
         "proposedAnswerText": "Electron transfer and attraction between oppositely charged ions",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
-        "shiftedAnswerPositionFromOriginalA": true,
+        "shiftedAnswerPositionFromOriginalA": false,
         "noAnswerFactsIndependentlySourceVerified": true,
         "languageAndSubjectReviewerRequired": true,
         "actualSchoolTextbookEditionVerified": false,
@@ -963,7 +964,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "a84441587209d4985284489247be65c1ff03d3d082202d4dad6e1d41f1617153",
+      "proposalSha256": "04432481f4bf1b5a5020dda6625413180f5b9adc251307f13284cc0289036b4a",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -979,13 +980,13 @@
       ],
       "originalReferenceAnswerText": "Estimate random variation and improve reliability",
       "originalOptionLengthRatio": 2.827,
-      "draftNewOptionCorrectIndex": 3,
-      "draftAnswerPosition": "D",
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
       "newOptionLengthRatio": 0.8122,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-CHEMISTRY-TECH-ENGLISH-C12-M01",
         "parentOriginalRevisionSha256": "3efc8fba6c2d44990f628ad41958aca3c77ba12f5d5683438d7758e63c49ee4d",
         "grade": 9,
@@ -997,22 +998,22 @@
         "options": [
           {
             "id": "A",
-            "text": "Ensure all experimental errors disappear after enough repeats"
-          },
-          {
-            "id": "B",
-            "text": "Make the measurement units unnecessary when reporting a result"
-          },
-          {
-            "id": "C",
             "text": "Replace the need to keep and compare the original readings"
           },
           {
-            "id": "D",
+            "id": "B",
+            "text": "Ensure all experimental errors disappear after enough repeats"
+          },
+          {
+            "id": "C",
             "text": "Estimate random variation and improve reliability"
+          },
+          {
+            "id": "D",
+            "text": "Make the measurement units unnecessary when reporting a result"
           }
         ],
-        "proposedCorrectOptionId": "D",
+        "proposedCorrectOptionId": "C",
         "proposedAnswerText": "Estimate random variation and improve reliability",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -1026,7 +1027,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "859cd9a4e095ad73fb3dd62f04b647aebb76ac252b6e3df2c0801430c92fe745",
+      "proposalSha256": "e0655826f35b3481b198f9087afaec539b06ce98169aa55203fba1fbaca3ebc6",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -1042,13 +1043,13 @@
       ],
       "originalReferenceAnswerText": "Follow instructions and use suitable protective equipment",
       "originalOptionLengthRatio": 2.631,
-      "draftNewOptionCorrectIndex": 0,
-      "draftAnswerPosition": "A",
+      "draftNewOptionCorrectIndex": 3,
+      "draftAnswerPosition": "D",
       "newOptionLengthRatio": 0.8814,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-CHEMISTRY-TECH-ENGLISH-C13-M01",
         "parentOriginalRevisionSha256": "fbe860743089f9db951077795a5a677971eab34cfa15ffde5982131ba411dbdd",
         "grade": 9,
@@ -1060,11 +1061,11 @@
         "options": [
           {
             "id": "A",
-            "text": "Follow instructions and use suitable protective equipment"
+            "text": "Rely on memory alone rather than reviewing written safety guidance"
           },
           {
             "id": "B",
-            "text": "Rely on memory alone rather than reviewing written safety guidance"
+            "text": "Choose equipment without checking whether it suits the activity"
           },
           {
             "id": "C",
@@ -1072,10 +1073,10 @@
           },
           {
             "id": "D",
-            "text": "Choose equipment without checking whether it suits the activity"
+            "text": "Follow instructions and use suitable protective equipment"
           }
         ],
-        "proposedCorrectOptionId": "A",
+        "proposedCorrectOptionId": "D",
         "proposedAnswerText": "Follow instructions and use suitable protective equipment",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -1089,7 +1090,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "e460e1eaf5ff3a045b24040c93fd7742ad9c415a9fd8fe65a6872368778b2dea",
+      "proposalSha256": "97b4a7eec9cba114717d68f81c6550a83f89f51a06714f6a80e5e5b281b80b4a",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -1105,13 +1106,13 @@
       ],
       "originalReferenceAnswerText": "قریب packed اور fixed positions کے گرد vibration",
       "originalOptionLengthRatio": 2.824,
-      "draftNewOptionCorrectIndex": 1,
-      "draftAnswerPosition": "B",
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
       "newOptionLengthRatio": 0.8324,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-CHEMISTRY-TECH-URDU-C01-M01",
         "parentOriginalRevisionSha256": "5813d9a663a98895ebc0b47705b1c22b28f73d8103a23a74e5e97edd0b494c09",
         "grade": 9,
@@ -1123,26 +1124,26 @@
         "options": [
           {
             "id": "A",
-            "text": "ذرات ایک دوسرے سے بہت دور ہوں اور آزادانہ مسلسل حرکت کریں"
-          },
-          {
-            "id": "B",
             "text": "قریب packed اور fixed positions کے گرد vibration"
           },
           {
+            "id": "B",
+            "text": "ذرات ایک دوسرے سے بہت دور ہوں اور آزادانہ مسلسل حرکت کریں"
+          },
+          {
             "id": "C",
-            "text": "ذرات اپنی مقررہ جگہ پر موجود ہوں لیکن بالکل vibration نہ کریں"
+            "text": "تمام solids کے ذرات ہمیشہ صرف آزاد ions کی صورت میں ہوں"
           },
           {
             "id": "D",
-            "text": "تمام solids کے ذرات ہمیشہ صرف آزاد ions کی صورت میں ہوں"
+            "text": "ذرات اپنی مقررہ جگہ پر موجود ہوں لیکن بالکل vibration نہ کریں"
           }
         ],
-        "proposedCorrectOptionId": "B",
+        "proposedCorrectOptionId": "A",
         "proposedAnswerText": "قریب packed اور fixed positions کے گرد vibration",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
-        "shiftedAnswerPositionFromOriginalA": true,
+        "shiftedAnswerPositionFromOriginalA": false,
         "noAnswerFactsIndependentlySourceVerified": true,
         "languageAndSubjectReviewerRequired": true,
         "actualSchoolTextbookEditionVerified": false,
@@ -1152,7 +1153,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "12abb90d249cb9103b658280b3626956636da396f9f3582736d9614c8f60e342",
+      "proposalSha256": "9a99a4c257b237d691c62beafe2ec9e5bf9533cb7cb4b65245d78f7036d9c2e4",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -1168,13 +1169,13 @@
       ],
       "originalReferenceAnswerText": "Electron transfer اور opposite ions کی attraction",
       "originalOptionLengthRatio": 2.882,
-      "draftNewOptionCorrectIndex": 2,
-      "draftAnswerPosition": "C",
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
       "newOptionLengthRatio": 0.9245,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-CHEMISTRY-TECH-URDU-C03-M01",
         "parentOriginalRevisionSha256": "9933ae831d3d3ad3dbba4f2ae13af0ae4fa8a27cffbdb8f5e5d6f64db8999772",
         "grade": 9,
@@ -1186,22 +1187,22 @@
         "options": [
           {
             "id": "A",
-            "text": "atoms کے nuclei کے درمیان protons کا براہ راست تبادلہ ہونا"
-          },
-          {
-            "id": "B",
             "text": "electrons کے بغیر neutral particles کا محض مل جانا"
           },
           {
-            "id": "C",
+            "id": "B",
             "text": "Electron transfer اور opposite ions کی attraction"
+          },
+          {
+            "id": "C",
+            "text": "atoms کے nuclei کے درمیان protons کا براہ راست تبادلہ ہونا"
           },
           {
             "id": "D",
             "text": "atoms کے درمیان صرف neutrons کی مشترکہ pairing ہونا"
           }
         ],
-        "proposedCorrectOptionId": "C",
+        "proposedCorrectOptionId": "B",
         "proposedAnswerText": "Electron transfer اور opposite ions کی attraction",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -1215,7 +1216,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "ff704f3df6232461305a3c20cd6cf1e230d4f057e6f7ae6b61d24b33dca35d17",
+      "proposalSha256": "cd51edbcf2f66130d278a06c062b963db7fc619e8c47648cb285927b1dacd091",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -1237,7 +1238,7 @@
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-CHEMISTRY-TECH-URDU-C12-M01",
         "parentOriginalRevisionSha256": "8f4a2ae19f9ee6b4193f04c698fab4e5dcb19f6ecc25e64b5b6ac2dcedbf0ad4",
         "grade": 9,
@@ -1249,7 +1250,7 @@
         "options": [
           {
             "id": "A",
-            "text": "کافی بار ناپنے سے ہر systematic error کا ہمیشہ ختم ہو جانا"
+            "text": "repeated observations کے باعث اصل measurements کو چھوڑ دینا"
           },
           {
             "id": "B",
@@ -1257,7 +1258,7 @@
           },
           {
             "id": "C",
-            "text": "repeated observations کے باعث اصل measurements کو چھوڑ دینا"
+            "text": "کافی بار ناپنے سے ہر systematic error کا ہمیشہ ختم ہو جانا"
           },
           {
             "id": "D",
@@ -1278,7 +1279,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "503d446317952a4a933b92e5d1de8b1aed392d5acacd0b20e9815c101e2d3ba7",
+      "proposalSha256": "eae03a6a2658d103e494cb8629f1adb85f0fbafe9e3b6a53682cf0af02f38e12",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -1300,7 +1301,7 @@
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": true,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-CHEMISTRY-TECH-URDU-C13-M01",
         "parentOriginalRevisionSha256": "71af4d5a9f4face3c4580347f2cff426068e71a1188b9b7a55936edb46de51c7",
         "grade": 9,
@@ -1316,11 +1317,11 @@
           },
           {
             "id": "B",
-            "text": "تحریری safety guidance کی جگہ صرف اپنی یادداشت پر بھروسہ کرنا"
+            "text": "استعمال ہونے والے سامان کی موزونیت چیک کرنے کو غیر اہم سمجھنا"
           },
           {
             "id": "C",
-            "text": "استعمال ہونے والے سامان کی موزونیت چیک کرنے کو غیر اہم سمجھنا"
+            "text": "تحریری safety guidance کی جگہ صرف اپنی یادداشت پر بھروسہ کرنا"
           },
           {
             "id": "D",
@@ -1331,7 +1332,7 @@
         "proposedAnswerText": "Instructions follow کرنا اور suitable protective equipment استعمال کرنا",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
-        "shiftedAnswerPositionFromOriginalA": true,
+        "shiftedAnswerPositionFromOriginalA": false,
         "noAnswerFactsIndependentlySourceVerified": true,
         "languageAndSubjectReviewerRequired": true,
         "actualSchoolTextbookEditionVerified": false,
@@ -1341,7 +1342,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "f2ac670ec97fb8403ab908beab8084a407a37f4519e24e3027d8e03f1567aa45",
+      "proposalSha256": "93669d126d6207931c6193f2ff2412c6ab3a408f1813c062ae97dd962cf92a7d",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -1363,7 +1364,7 @@
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-COMP-U07-M02",
         "parentOriginalRevisionSha256": "cffd66ec7fdeb2fb085c10046d168b72245a0b6f3fb2f766e70c073559052c27",
         "grade": 9,
@@ -1404,7 +1405,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "63768dbf7ff65c416cca3a093c3edce418ffc9f4246fe735f3505dccbb6bb1db",
+      "proposalSha256": "9493fb2364553dcfc4fc160f7fac79ae19e943e23c17c0780be184f5f3424de5",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -1420,13 +1421,13 @@
       ],
       "originalReferenceAnswerText": "Learning, reasoning or pattern-based decision support",
       "originalOptionLengthRatio": 2.839,
-      "draftNewOptionCorrectIndex": 2,
-      "draftAnswerPosition": "C",
+      "draftNewOptionCorrectIndex": 3,
+      "draftAnswerPosition": "D",
       "newOptionLengthRatio": 0.8281,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-COMP-U10-M01",
         "parentOriginalRevisionSha256": "5cb6100dfe325aedaa72a8b742412cd7dc059cb143841d3e7e8421da516a3ef9",
         "grade": 9,
@@ -1438,7 +1439,7 @@
         "options": [
           {
             "id": "A",
-            "text": "Creating documents by operating a printer without interpreting input"
+            "text": "Assigning file names and folders without analysis or prediction"
           },
           {
             "id": "B",
@@ -1446,14 +1447,14 @@
           },
           {
             "id": "C",
-            "text": "Learning, reasoning or pattern-based decision support"
+            "text": "Creating documents by operating a printer without interpreting input"
           },
           {
             "id": "D",
-            "text": "Assigning file names and folders without analysis or prediction"
+            "text": "Learning, reasoning or pattern-based decision support"
           }
         ],
-        "proposedCorrectOptionId": "C",
+        "proposedCorrectOptionId": "D",
         "proposedAnswerText": "Learning, reasoning or pattern-based decision support",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -1467,7 +1468,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "f4893d415c68345dd4438ead80622195edb8cff4f182c083d0e1ad08348d6893",
+      "proposalSha256": "f24360fd531b6146274f30a2b7057112f4afea254fa9f580d27f9a6608bd20a8",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -1489,7 +1490,7 @@
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-COMP-U12-M01",
         "parentOriginalRevisionSha256": "e131f172e3275e00041141fcd45558ebb5a496017d23cb1ee5ee2e52fa4240d5",
         "grade": 9,
@@ -1505,11 +1506,11 @@
           },
           {
             "id": "B",
-            "text": "How many pages appear in the advertising design and user manual"
+            "text": "The technical details of the founder's personal login credentials"
           },
           {
             "id": "C",
-            "text": "The technical details of the founder's personal login credentials"
+            "text": "How many pages appear in the advertising design and user manual"
           },
           {
             "id": "D",
@@ -1530,7 +1531,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "5804352e9b185cc41c64fba8fe8d1bfe9876cb02c6e9417c612f6270fb053cef",
+      "proposalSha256": "18234a6569ef1406f7c3109bfe08bb5bab500e36c0c8253adf60375b27acecab",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -1546,13 +1547,13 @@
       ],
       "originalReferenceAnswerText": "Why a product or service is useful to a target customer",
       "originalOptionLengthRatio": 2.845,
-      "draftNewOptionCorrectIndex": 0,
-      "draftAnswerPosition": "A",
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
       "newOptionLengthRatio": 0.8919,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-COMPENT-TECH-ENGLISH-C10-I01",
         "parentOriginalRevisionSha256": "c9dab69230ed4b8a1337a800cadaea307750d96dec107ca1fae591d9419d88e2",
         "grade": 9,
@@ -1564,11 +1565,11 @@
         "options": [
           {
             "id": "A",
-            "text": "Why a product or service is useful to a target customer"
+            "text": "The size and format of the files stored by the new business"
           },
           {
             "id": "B",
-            "text": "The size and format of the files stored by the new business"
+            "text": "Why a product or service is useful to a target customer"
           },
           {
             "id": "C",
@@ -1579,7 +1580,7 @@
             "text": "The screen resolution selected for advertising the new service"
           }
         ],
-        "proposedCorrectOptionId": "A",
+        "proposedCorrectOptionId": "B",
         "proposedAnswerText": "Why a product or service is useful to a target customer",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -1593,7 +1594,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "1b2c0382abc2ca792bd63ff16b4b3d021983255d8f3f4cb99aa3a13fb9e4c44e",
+      "proposalSha256": "1a4925f6818368920ba91b2aaaa9dfe8702b6d1791336ea2d4175414f76b0a5b",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -1609,13 +1610,13 @@
       ],
       "originalReferenceAnswerText": "باہم مربوط اجزا جو کسی مقصد کے لیے مل کر کام کریں",
       "originalOptionLengthRatio": 3.196,
-      "draftNewOptionCorrectIndex": 1,
-      "draftAnswerPosition": "B",
+      "draftNewOptionCorrectIndex": 3,
+      "draftAnswerPosition": "D",
       "newOptionLengthRatio": 0.9423,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-COMPENT-TECH-URDU-C01-I01",
         "parentOriginalRevisionSha256": "b78e835260c1d5c2b6e28643e4a7f8f60ad0503ed692f7bfea470ee211c73e66",
         "grade": 9,
@@ -1627,22 +1628,22 @@
         "options": [
           {
             "id": "A",
-            "text": "آپس میں غیر متعلق اشیا جن کا کوئی مشترکہ مقصد نہ ہو"
-          },
-          {
-            "id": "B",
-            "text": "باہم مربوط اجزا جو کسی مقصد کے لیے مل کر کام کریں"
-          },
-          {
-            "id": "C",
             "text": "کمپیوٹر کے صرف ایک input device کو مکمل سسٹم سمجھنا"
           },
           {
-            "id": "D",
+            "id": "B",
             "text": "بے ترتیب معلومات کی فہرست جس میں کوئی باہمی تعلق نہ ہو"
+          },
+          {
+            "id": "C",
+            "text": "آپس میں غیر متعلق اشیا جن کا کوئی مشترکہ مقصد نہ ہو"
+          },
+          {
+            "id": "D",
+            "text": "باہم مربوط اجزا جو کسی مقصد کے لیے مل کر کام کریں"
           }
         ],
-        "proposedCorrectOptionId": "B",
+        "proposedCorrectOptionId": "D",
         "proposedAnswerText": "باہم مربوط اجزا جو کسی مقصد کے لیے مل کر کام کریں",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -1656,7 +1657,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "24e31429de83a7d33034ff396cff2b706da30eaf56c5185a5f60d57a2c8fbb0a",
+      "proposalSha256": "90b9a5e6beb2e568a11e5cd9a5fb982036c035888224905f21d07176e070e73f",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -1672,13 +1673,13 @@
       ],
       "originalReferenceAnswerText": "Product یا service target user کے لیے کیوں useful ہے",
       "originalOptionLengthRatio": 3.391,
-      "draftNewOptionCorrectIndex": 2,
-      "draftAnswerPosition": "C",
+      "draftNewOptionCorrectIndex": 3,
+      "draftAnswerPosition": "D",
       "newOptionLengthRatio": 0.9398,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-COMPENT-TECH-URDU-C10-I01",
         "parentOriginalRevisionSha256": "5dfd4caa156402174b9c3ad1c9dd9b5424818639b29c82f1bc6e8e7e88051e62",
         "grade": 9,
@@ -1690,22 +1691,22 @@
         "options": [
           {
             "id": "A",
-            "text": "نئے کاروبار کی files کے نام اور folders کو بیان کرنا"
+            "text": "service کے اشتہار میں استعمال ہونے والے screen size کو بتانا"
           },
           {
             "id": "B",
-            "text": "بانی کی عمر اور ذاتی معلومات کو کاروبار کا فائدہ بتانا"
+            "text": "نئے کاروبار کی files کے نام اور folders کو بیان کرنا"
           },
           {
             "id": "C",
-            "text": "Product یا service target user کے لیے کیوں useful ہے"
+            "text": "بانی کی عمر اور ذاتی معلومات کو کاروبار کا فائدہ بتانا"
           },
           {
             "id": "D",
-            "text": "service کے اشتہار میں استعمال ہونے والے screen size کو بتانا"
+            "text": "Product یا service target user کے لیے کیوں useful ہے"
           }
         ],
-        "proposedCorrectOptionId": "C",
+        "proposedCorrectOptionId": "D",
         "proposedAnswerText": "Product یا service target user کے لیے کیوں useful ہے",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -1719,7 +1720,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "ee0fcc2290fe72863b099e49e64a00d72ab117b744c9a327a4eda642dcb0ab0a",
+      "proposalSha256": "d40f05fa80c43a4a2b814a8a503563a17312a58b861cb19ebc87eefe665cd3b3",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -1741,7 +1742,7 @@
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": true,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-FASH-C01-M01",
         "parentOriginalRevisionSha256": "02af41a3df064cc0a0c8bc087ecc2d7204fd8adec9b94ee555fb7d04a5990819",
         "grade": 9,
@@ -1753,15 +1754,15 @@
         "options": [
           {
             "id": "A",
-            "text": "A fixed technical definition of every garment regardless of culture"
-          },
-          {
-            "id": "B",
             "text": "One specific piece of stitching equipment used in workshops"
           },
           {
-            "id": "C",
+            "id": "B",
             "text": "A mathematical rule for calculating patterns without social context"
+          },
+          {
+            "id": "C",
+            "text": "A fixed technical definition of every garment regardless of culture"
           },
           {
             "id": "D",
@@ -1782,7 +1783,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "bef399804289f5d7e7ed8377e3d84ace4ea0197dd505a643d56a1ae6a04987ce",
+      "proposalSha256": "892279980e6d1656f5e2feeccc7ebb4e86dab67ac771740ceecda2d9bf69ba2c",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -1804,7 +1805,7 @@
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": true,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-FASH-C05-M01",
         "parentOriginalRevisionSha256": "7ac1512d7201a6c4f48cb2b2d6831a39ce3e3f8543d654885aecc7b8c715db7f",
         "grade": 9,
@@ -1820,7 +1821,7 @@
           },
           {
             "id": "B",
-            "text": "A standard imported logo that appears on identical mass-produced goods"
+            "text": "A measurement system that is applied to every textile industry"
           },
           {
             "id": "C",
@@ -1828,14 +1829,14 @@
           },
           {
             "id": "D",
-            "text": "A measurement system that is applied to every textile industry"
+            "text": "A standard imported logo that appears on identical mass-produced goods"
           }
         ],
         "proposedCorrectOptionId": "A",
         "proposedAnswerText": "A locally developed skill or decorative tradition linked with community and culture",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
-        "shiftedAnswerPositionFromOriginalA": true,
+        "shiftedAnswerPositionFromOriginalA": false,
         "noAnswerFactsIndependentlySourceVerified": true,
         "languageAndSubjectReviewerRequired": true,
         "actualSchoolTextbookEditionVerified": false,
@@ -1845,7 +1846,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "b250d1690ee2e6afa120249ca82d65d04d774c18fbc534b08e8cf4bf992413b1",
+      "proposalSha256": "74835e0005eb56d37fdf37906e1b92ba0de910b311b0c03507e562d1b4911c34",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -1861,13 +1862,13 @@
       ],
       "originalReferenceAnswerText": "A simplified figure template used for design sketching",
       "originalOptionLengthRatio": 3.176,
-      "draftNewOptionCorrectIndex": 1,
-      "draftAnswerPosition": "B",
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
       "newOptionLengthRatio": 0.8663,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-FASH-C07-M01",
         "parentOriginalRevisionSha256": "92431ab8b2ded5a355b2f82af9a482ad30bfc634751ee8ec6747fdf195774f29",
         "grade": 9,
@@ -1879,11 +1880,11 @@
         "options": [
           {
             "id": "A",
-            "text": "A mechanical attachment that joins two pieces of fabric together"
+            "text": "A simplified figure template used for design sketching"
           },
           {
             "id": "B",
-            "text": "A simplified figure template used for design sketching"
+            "text": "A mechanical attachment that joins two pieces of fabric together"
           },
           {
             "id": "C",
@@ -1894,11 +1895,11 @@
             "text": "A colour mixture used to dye a garment after its construction"
           }
         ],
-        "proposedCorrectOptionId": "B",
+        "proposedCorrectOptionId": "A",
         "proposedAnswerText": "A simplified figure template used for design sketching",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
-        "shiftedAnswerPositionFromOriginalA": true,
+        "shiftedAnswerPositionFromOriginalA": false,
         "noAnswerFactsIndependentlySourceVerified": true,
         "languageAndSubjectReviewerRequired": true,
         "actualSchoolTextbookEditionVerified": false,
@@ -1908,7 +1909,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "3db21f4e4b8c999b4a263b847fd6de9662c2144f995bfb2163317957fe93a3df",
+      "proposalSha256": "fa83c080a5b644d5c4e86d278cdc78bd77aa70e6da859d70f8ee0474d374bee8",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -1930,7 +1931,7 @@
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-FASH-C08-M02",
         "parentOriginalRevisionSha256": "f2263d4ee3c523c6d2b1b994cb0b795603d479f1d8c8b03eaf7bea78687fdea5",
         "grade": 9,
@@ -1971,7 +1972,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "224799a47298b55124e07a862075b3cea998222c97c8e0831a04b92466be02db",
+      "proposalSha256": "ba7a319777ebb31eaabaeb0820bba35f001aa43adc079bf02954b15f708cef50",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -1987,13 +1988,13 @@
       ],
       "originalReferenceAnswerText": "Follow teacher instructions and keep tools stored and handled carefully",
       "originalOptionLengthRatio": 3.492,
-      "draftNewOptionCorrectIndex": 3,
-      "draftAnswerPosition": "D",
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
       "newOptionLengthRatio": 1.065,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": true,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-FASH-C09-M01",
         "parentOriginalRevisionSha256": "c22755f706fb7edbc18ad8343084e0cf0c93372baa8dd44316bfecb0a6987a44",
         "grade": 9,
@@ -2009,18 +2010,18 @@
           },
           {
             "id": "B",
-            "text": "Leave tools in shared spaces without agreed storage procedures"
+            "text": "Follow teacher instructions and keep tools stored and handled carefully"
           },
           {
             "id": "C",
-            "text": "Prioritize the appearance of a result over the classroom safety rules"
+            "text": "Leave tools in shared spaces without agreed storage procedures"
           },
           {
             "id": "D",
-            "text": "Follow teacher instructions and keep tools stored and handled carefully"
+            "text": "Prioritize the appearance of a result over the classroom safety rules"
           }
         ],
-        "proposedCorrectOptionId": "D",
+        "proposedCorrectOptionId": "B",
         "proposedAnswerText": "Follow teacher instructions and keep tools stored and handled carefully",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -2034,7 +2035,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "9f1f09a401901945cf22aae6acc95cc2e64d8aa1dcfe1cb9f0884aa4ab84018b",
+      "proposalSha256": "ae782cda6c964b50d451b46b2414cee8b0746de373cfb7cc2297ad166b365f64",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -2056,7 +2057,7 @@
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-GENSCI-TECH-ENGLISH-C05-I01",
         "parentOriginalRevisionSha256": "ab988264bab2c7fab12e9a58d9f6d10b75fcf2e1f806b2c0d3914dde7e980b9d",
         "grade": 9,
@@ -2072,7 +2073,7 @@
           },
           {
             "id": "B",
-            "text": "Relying on one person's immunity instead of basic community hygiene"
+            "text": "Assuming vaccines make clean food and water entirely unnecessary"
           },
           {
             "id": "C",
@@ -2080,14 +2081,14 @@
           },
           {
             "id": "D",
-            "text": "Assuming vaccines make clean food and water entirely unnecessary"
+            "text": "Relying on one person's immunity instead of basic community hygiene"
           }
         ],
         "proposedCorrectOptionId": "A",
         "proposedAnswerText": "Good hygiene and appropriate vaccination where recommended",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
-        "shiftedAnswerPositionFromOriginalA": true,
+        "shiftedAnswerPositionFromOriginalA": false,
         "noAnswerFactsIndependentlySourceVerified": true,
         "languageAndSubjectReviewerRequired": true,
         "actualSchoolTextbookEditionVerified": false,
@@ -2097,7 +2098,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "7b5731ffb6eb2dadce8388f9f046fc9682173d918a90ebb53a6fa1016b2f1c8e",
+      "proposalSha256": "61fc285c90c69ce72723bc2e5ee727c7d5d3201cdaf33dd9731276aabbfa94b2",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -2113,13 +2114,13 @@
       ],
       "originalReferenceAnswerText": "Application of knowledge and tools to solve practical problems",
       "originalOptionLengthRatio": 2.696,
-      "draftNewOptionCorrectIndex": 1,
-      "draftAnswerPosition": "B",
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
       "newOptionLengthRatio": 0.9588,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-GENSCI-TECH-ENGLISH-C10-I01",
         "parentOriginalRevisionSha256": "5b2058bd33da6e865b7b5cf0c80b2dbc8b79dbf5ec92157e92d393f2959c45f4",
         "grade": 9,
@@ -2131,22 +2132,22 @@
         "options": [
           {
             "id": "A",
-            "text": "Collecting scientific terms without applying them to any human need"
+            "text": "The study of machinery without considering the user or purpose"
           },
           {
             "id": "B",
-            "text": "Application of knowledge and tools to solve practical problems"
-          },
-          {
-            "id": "C",
             "text": "A theory that cannot be used to build solutions or make decisions"
           },
           {
+            "id": "C",
+            "text": "Application of knowledge and tools to solve practical problems"
+          },
+          {
             "id": "D",
-            "text": "The study of machinery without considering the user or purpose"
+            "text": "Collecting scientific terms without applying them to any human need"
           }
         ],
-        "proposedCorrectOptionId": "B",
+        "proposedCorrectOptionId": "C",
         "proposedAnswerText": "Application of knowledge and tools to solve practical problems",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -2160,7 +2161,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "01050e02318cfb105fca0e7f79517ade2c3a1fb9f41900698fa7c4a05d9912d9",
+      "proposalSha256": "e3f17b79b5cadbdf88d3269e03e2ca73f52e5e2da345ddeb3c4a721acb426e67",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -2176,13 +2177,13 @@
       ],
       "originalReferenceAnswerText": "Communication, Earth observation and scientific research",
       "originalOptionLengthRatio": 3.17,
-      "draftNewOptionCorrectIndex": 2,
-      "draftAnswerPosition": "C",
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
       "newOptionLengthRatio": 0.8442,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-GENSCI-TECH-ENGLISH-C11-I01",
         "parentOriginalRevisionSha256": "9d12b673c98699b3ded439caed0da406526a24bc4bb74f87049c4f921f3311bb",
         "grade": 9,
@@ -2194,22 +2195,22 @@
         "options": [
           {
             "id": "A",
-            "text": "Replacing local weather observations with unrelated guessing games"
+            "text": "Eliminating the need for all ground-based scientific measurements"
           },
           {
             "id": "B",
-            "text": "Converting all laboratory investigations into road construction work"
-          },
-          {
-            "id": "C",
             "text": "Communication, Earth observation and scientific research"
           },
           {
+            "id": "C",
+            "text": "Converting all laboratory investigations into road construction work"
+          },
+          {
             "id": "D",
-            "text": "Eliminating the need for all ground-based scientific measurements"
+            "text": "Replacing local weather observations with unrelated guessing games"
           }
         ],
-        "proposedCorrectOptionId": "C",
+        "proposedCorrectOptionId": "B",
         "proposedAnswerText": "Communication, Earth observation and scientific research",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -2223,7 +2224,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "4a39ce9f0df9bdbec8da498ab316b2c512800cce083da2ffa53a397aac62fa32",
+      "proposalSha256": "5bb99cdd73a15b3db9c5523c9e527fa6fe71c3428f8630b31b7350c1bb7fcbdf",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -2245,7 +2246,7 @@
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-GENSCI-TECH-URDU-C01-I01",
         "parentOriginalRevisionSha256": "c56864fc3284aec0b46df1f15d273fcfea51d98ef56858144b898ef5da9d384f",
         "grade": 9,
@@ -2286,7 +2287,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "6827aca1e172accc1db7b6e86a395a4834ac2bb985bea85f03844ee8bc74f801",
+      "proposalSha256": "6c131b9d48f48fc085026384c7390e9260e358a8aecf4c6207d0cb2822eafb39",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -2302,13 +2303,13 @@
       ],
       "originalReferenceAnswerText": "Current کو ایک direction میں زیادہ آسانی سے گزرنے دینا",
       "originalOptionLengthRatio": 3.176,
-      "draftNewOptionCorrectIndex": 0,
-      "draftAnswerPosition": "A",
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
       "newOptionLengthRatio": 0.9153,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-GENSCI-TECH-URDU-C09-I01",
         "parentOriginalRevisionSha256": "0585c1438d295a9bad13b8d77b1670a7a8a508fbb54a1657b00f5953c19a9dec",
         "grade": 9,
@@ -2320,22 +2321,22 @@
         "options": [
           {
             "id": "A",
-            "text": "Current کو ایک direction میں زیادہ آسانی سے گزرنے دینا"
-          },
-          {
-            "id": "B",
             "text": "کمپیوٹر کی یادداشت میں مسلسل تمام data کو مستقل محفوظ رکھنا"
           },
           {
+            "id": "B",
+            "text": "بغیر sensor کے ماحول کے تمام درجہ حرارت کی پیمائش کرنا"
+          },
+          {
             "id": "C",
-            "text": "circuit میں ہر direction کی current کو یکساں آسانی سے گزرنے دینا"
+            "text": "Current کو ایک direction میں زیادہ آسانی سے گزرنے دینا"
           },
           {
             "id": "D",
-            "text": "بغیر sensor کے ماحول کے تمام درجہ حرارت کی پیمائش کرنا"
+            "text": "circuit میں ہر direction کی current کو یکساں آسانی سے گزرنے دینا"
           }
         ],
-        "proposedCorrectOptionId": "A",
+        "proposedCorrectOptionId": "C",
         "proposedAnswerText": "Current کو ایک direction میں زیادہ آسانی سے گزرنے دینا",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -2349,7 +2350,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "19370c0f7e63b324d50e4b87a8a3b2713ae020139e1523e5c976779bb4d7549c",
+      "proposalSha256": "6b7b9119df5b993aaae0cc0371c00eefcb1094bb87044893d5d3d1d27e787991",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -2365,13 +2366,13 @@
       ],
       "originalReferenceAnswerText": "Knowledge اور tools کا practical problems حل کرنے کے لیے استعمال",
       "originalOptionLengthRatio": 2.954,
-      "draftNewOptionCorrectIndex": 1,
-      "draftAnswerPosition": "B",
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
       "newOptionLengthRatio": 1.28,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": true,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-GENSCI-TECH-URDU-C10-I01",
         "parentOriginalRevisionSha256": "5bb81f35978d1206b805654551087f7dc626c78335f487f716a26152b2e10c70",
         "grade": 9,
@@ -2383,22 +2384,22 @@
         "options": [
           {
             "id": "A",
-            "text": "علم کو عملی مسائل سے الگ رکھ کر صرف تعریفیں یاد کرنا"
+            "text": "اوزار اور صارف کی ضروریات سے بے تعلق نظریات جمع کرنا"
           },
           {
             "id": "B",
-            "text": "Knowledge اور tools کا practical problems حل کرنے کے لیے استعمال"
+            "text": "علم کو عملی مسائل سے الگ رکھ کر صرف تعریفیں یاد کرنا"
           },
           {
             "id": "C",
-            "text": "اوزار اور صارف کی ضروریات سے بے تعلق نظریات جمع کرنا"
+            "text": "Knowledge اور tools کا practical problems حل کرنے کے لیے استعمال"
           },
           {
             "id": "D",
             "text": "موجودہ مسائل حل کیے بغیر صرف آلات کے نام بتانا"
           }
         ],
-        "proposedCorrectOptionId": "B",
+        "proposedCorrectOptionId": "C",
         "proposedAnswerText": "Knowledge اور tools کا practical problems حل کرنے کے لیے استعمال",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -2412,7 +2413,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "b5bcdd7832a37b24051221ef0521cd7b89b88addc649acb482887d273c47bc70",
+      "proposalSha256": "3f552cbb96cf1728e9d769f94eec96f5758885f7b307bdd63f23be3737fd3056",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -2434,7 +2435,7 @@
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": true,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-GENSCI-TECH-URDU-C11-I01",
         "parentOriginalRevisionSha256": "7aed02ec274c19a4fdf9976fedb027f7fea91772843cae30af76600a72efc4ca",
         "grade": 9,
@@ -2446,11 +2447,11 @@
         "options": [
           {
             "id": "A",
-            "text": "سڑکوں کی رنگائی اور عمارتوں کی صرف آرائشی منصوبہ بندی"
+            "text": "طبی معلومات کو خلائی مشاہدے سے ہمیشہ مکمل الگ رکھنا"
           },
           {
             "id": "B",
-            "text": "طبی معلومات کو خلائی مشاہدے سے ہمیشہ مکمل الگ رکھنا"
+            "text": "سڑکوں کی رنگائی اور عمارتوں کی صرف آرائشی منصوبہ بندی"
           },
           {
             "id": "C",
@@ -2475,7 +2476,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "c19acd5c38a5607913ba29790766938935a93f186c103d3daa705d724a7be47a",
+      "proposalSha256": "4a79a6235f5d4519868bf0ebf3bd8e9b17b51838aa15a3d68d2c7c35ad0f9a53",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -2491,13 +2492,13 @@
       ],
       "originalReferenceAnswerText": "Recommended vaccination and good respiratory hygiene",
       "originalOptionLengthRatio": 2.644,
-      "draftNewOptionCorrectIndex": 3,
-      "draftAnswerPosition": "D",
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
       "newOptionLengthRatio": 0.7839,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-HS-C03-M02",
         "parentOriginalRevisionSha256": "2b3c567214cfa39a91f2192f761b100a9adf28ea5aed21b2ca6a973ea8f7bddd",
         "grade": 9,
@@ -2509,26 +2510,26 @@
         "options": [
           {
             "id": "A",
-            "text": "Using unverified advice instead of recommended preventive guidance"
+            "text": "Recommended vaccination and good respiratory hygiene"
           },
           {
             "id": "B",
-            "text": "Assuming that indoor air quality has no effect on respiratory risks"
+            "text": "Using unverified advice instead of recommended preventive guidance"
           },
           {
             "id": "C",
-            "text": "Considering visible symptoms the only possible source of infection"
+            "text": "Assuming that indoor air quality has no effect on respiratory risks"
           },
           {
             "id": "D",
-            "text": "Recommended vaccination and good respiratory hygiene"
+            "text": "Considering visible symptoms the only possible source of infection"
           }
         ],
-        "proposedCorrectOptionId": "D",
+        "proposedCorrectOptionId": "A",
         "proposedAnswerText": "Recommended vaccination and good respiratory hygiene",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
-        "shiftedAnswerPositionFromOriginalA": true,
+        "shiftedAnswerPositionFromOriginalA": false,
         "noAnswerFactsIndependentlySourceVerified": true,
         "languageAndSubjectReviewerRequired": true,
         "actualSchoolTextbookEditionVerified": false,
@@ -2538,7 +2539,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "b571c2a8d63a68650cb3fed64df0c5568c6562313f95bfd1242fa577fcc3021c",
+      "proposalSha256": "e1f3aae92ab6cf3e601f2f2b8d34638f9577a1e4ac40d68445dcdfe243090cbb",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -2554,13 +2555,13 @@
       ],
       "originalReferenceAnswerText": "Provide immediate basic support until trained help is available",
       "originalOptionLengthRatio": 2.625,
-      "draftNewOptionCorrectIndex": 0,
-      "draftAnswerPosition": "A",
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
       "newOptionLengthRatio": 0.9643,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-HS-C06-M01",
         "parentOriginalRevisionSha256": "870b4d57bb9d9b9818a407a3584f038ecbaea9a042cd63b3df69476422dbcc58",
         "grade": 9,
@@ -2572,22 +2573,22 @@
         "options": [
           {
             "id": "A",
-            "text": "Provide immediate basic support until trained help is available"
+            "text": "Make a final diagnosis of every condition before seeking assistance"
           },
           {
             "id": "B",
-            "text": "Replace all professional medical assessment with personal guesses"
+            "text": "Provide immediate basic support until trained help is available"
           },
           {
             "id": "C",
-            "text": "Make a final diagnosis of every condition before seeking assistance"
+            "text": "Replace all professional medical assessment with personal guesses"
           },
           {
             "id": "D",
             "text": "Offer permanent treatment for complex medical conditions at home"
           }
         ],
-        "proposedCorrectOptionId": "A",
+        "proposedCorrectOptionId": "B",
         "proposedAnswerText": "Provide immediate basic support until trained help is available",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -2601,7 +2602,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "a7a8b0593f38713a3cdb24ce077ec357c85694a872b0407cae0d7ac9ca1528dc",
+      "proposalSha256": "eb2c12deb6ad8c99e8b3ca88fd06a13b3a007be7a5f0fc85af63c57343a30b9f",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -2617,13 +2618,13 @@
       ],
       "originalReferenceAnswerText": "Appropriate warm-up, technique, hydration and stopping if unwell or injured",
       "originalOptionLengthRatio": 3.041,
-      "draftNewOptionCorrectIndex": 1,
-      "draftAnswerPosition": "B",
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
       "newOptionLengthRatio": 1.1598,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": true,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-HS-C07-M02",
         "parentOriginalRevisionSha256": "aff887ec481d39ed3ad2eb19a367a6d1dcdaa87cf20c43b6395243794e7ae4a0",
         "grade": 9,
@@ -2635,22 +2636,22 @@
         "options": [
           {
             "id": "A",
-            "text": "Continue a demanding routine even when clear discomfort develops"
-          },
-          {
-            "id": "B",
-            "text": "Appropriate warm-up, technique, hydration and stopping if unwell or injured"
-          },
-          {
-            "id": "C",
             "text": "Use the same activity intensity for every person without adjustment"
           },
           {
-            "id": "D",
+            "id": "B",
             "text": "Treat recovery, technique and appropriate hydration as optional"
+          },
+          {
+            "id": "C",
+            "text": "Appropriate warm-up, technique, hydration and stopping if unwell or injured"
+          },
+          {
+            "id": "D",
+            "text": "Continue a demanding routine even when clear discomfort develops"
           }
         ],
-        "proposedCorrectOptionId": "B",
+        "proposedCorrectOptionId": "C",
         "proposedAnswerText": "Appropriate warm-up, technique, hydration and stopping if unwell or injured",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -2664,7 +2665,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "977b9d5d7d5e7970329fab9ba0ede3ce9b3ef0e2ce7419468dfaec8cdab09a0f",
+      "proposalSha256": "553b2f525e1895f267b9590e5f17c12396909a2f7694fe555b15ec794eb88143",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -2680,13 +2681,13 @@
       ],
       "originalReferenceAnswerText": "Normal formation and function of oxygen-carrying blood components",
       "originalOptionLengthRatio": 3.679,
-      "draftNewOptionCorrectIndex": 2,
-      "draftAnswerPosition": "C",
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
       "newOptionLengthRatio": 1.0894,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": true,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-HS-C08-M02",
         "parentOriginalRevisionSha256": "6cca091f43c48c19a31b61da9bf0a500f89db8ac099263280edc9d8a7c60a455",
         "grade": 9,
@@ -2698,22 +2699,22 @@
         "options": [
           {
             "id": "A",
-            "text": "Determine the exact length of every bone during adolescence"
-          },
-          {
-            "id": "B",
             "text": "Provide a direct substitute for all dietary energy in the body"
           },
           {
-            "id": "C",
+            "id": "B",
             "text": "Normal formation and function of oxygen-carrying blood components"
           },
           {
-            "id": "D",
+            "id": "C",
             "text": "Control the natural colour of the hair in every individual"
+          },
+          {
+            "id": "D",
+            "text": "Determine the exact length of every bone during adolescence"
           }
         ],
-        "proposedCorrectOptionId": "C",
+        "proposedCorrectOptionId": "B",
         "proposedAnswerText": "Normal formation and function of oxygen-carrying blood components",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -2727,7 +2728,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "37b03510145f292142a7af60dd49529357727af78920ea953614db4203eff553",
+      "proposalSha256": "4e01b78b797229b094d8c6aadcee290626308b72a86b15c769aa3f5afd2428ce",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -2743,13 +2744,13 @@
       ],
       "originalReferenceAnswerText": "More than one media form such as text, image, audio or video",
       "originalOptionLengthRatio": 4.5,
-      "draftNewOptionCorrectIndex": 3,
-      "draftAnswerPosition": "D",
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
       "newOptionLengthRatio": 0.9137,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-ICT-C03-M02",
         "parentOriginalRevisionSha256": "217d4ae2db645b9d4ad668ec799e16faf5f677364b3569adf7b874987f6a104c",
         "grade": 9,
@@ -2765,7 +2766,7 @@
           },
           {
             "id": "B",
-            "text": "Written text alone presented without sound, image or video elements"
+            "text": "More than one media form such as text, image, audio or video"
           },
           {
             "id": "C",
@@ -2773,10 +2774,10 @@
           },
           {
             "id": "D",
-            "text": "More than one media form such as text, image, audio or video"
+            "text": "Written text alone presented without sound, image or video elements"
           }
         ],
-        "proposedCorrectOptionId": "D",
+        "proposedCorrectOptionId": "B",
         "proposedAnswerText": "More than one media form such as text, image, audio or video",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -2790,7 +2791,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "0dd7ec7e792708a722d750f930a845aece5db20be558ee2b7db4537d85fed8c8",
+      "proposalSha256": "4122a43940d961599a558c0679bb38fdfbccc8dd8aaa64ab55f7ce1038440b69",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -2806,13 +2807,13 @@
       ],
       "originalReferenceAnswerText": "صلاحیت پر اعتماد کے ساتھ ذمہ داری اور اللہ پر توکل",
       "originalOptionLengthRatio": 3,
-      "draftNewOptionCorrectIndex": 0,
-      "draftAnswerPosition": "A",
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
       "newOptionLengthRatio": 1.0067,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-ISL-U07-M01",
         "parentOriginalRevisionSha256": "c33d2cdbee14f3069970e3b9583463f64dafb416e7d8ef85e59978e55ccbbc1f",
         "grade": 9,
@@ -2824,7 +2825,7 @@
         "options": [
           {
             "id": "A",
-            "text": "صلاحیت پر اعتماد کے ساتھ ذمہ داری اور اللہ پر توکل"
+            "text": "غلطی قبول نہ کرنا اور ذمہ داری سے مکمل گریز کرنا"
           },
           {
             "id": "B",
@@ -2832,14 +2833,14 @@
           },
           {
             "id": "C",
-            "text": "مشورہ اور اصلاح کو ہمیشہ اپنی کمزوری سمجھ کر رد کرنا"
+            "text": "صلاحیت پر اعتماد کے ساتھ ذمہ داری اور اللہ پر توکل"
           },
           {
             "id": "D",
-            "text": "غلطی قبول نہ کرنا اور ذمہ داری سے مکمل گریز کرنا"
+            "text": "مشورہ اور اصلاح کو ہمیشہ اپنی کمزوری سمجھ کر رد کرنا"
           }
         ],
-        "proposedCorrectOptionId": "A",
+        "proposedCorrectOptionId": "C",
         "proposedAnswerText": "صلاحیت پر اعتماد کے ساتھ ذمہ داری اور اللہ پر توکل",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -2853,7 +2854,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "211ff1eb0b07470dfdb4e23c02658fb1ed2db00c2a5a926cfaa5c94cca0a3fbe",
+      "proposalSha256": "6eb2265da6202c23a303e41ff568b617ab1188332e8c03de92f0d92ad7063ba3",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -2875,7 +2876,7 @@
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-PHT-U-C07-M01",
         "parentOriginalRevisionSha256": "ef37c30802d8dc6df78e5698cb51937299676f06ce7b986838b3092b04ea425c",
         "grade": 9,
@@ -2895,11 +2896,11 @@
           },
           {
             "id": "C",
-            "text": "کسی مادے پر عمل کرنے والی مجموعی قوت کو ظاہر کرنا"
+            "text": "جسم کی مقناطیسی خاصیت کو کسی اضافی پیمائش کے بغیر بتانا"
           },
           {
             "id": "D",
-            "text": "جسم کی مقناطیسی خاصیت کو کسی اضافی پیمائش کے بغیر بتانا"
+            "text": "کسی مادے پر عمل کرنے والی مجموعی قوت کو ظاہر کرنا"
           }
         ],
         "proposedCorrectOptionId": "B",
@@ -2916,7 +2917,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "c799cb2699a1ace57cd7184d83e50c3d2d11949fee45ec0479e9426be13e84d4",
+      "proposalSha256": "07a70981a16f4d9688c4be103a31e0668b184e71669756a8affe320a5e4962da",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -2932,13 +2933,13 @@
       ],
       "originalReferenceAnswerText": "Electric current magnetic field پیدا کرتا ہے",
       "originalOptionLengthRatio": 4.258,
-      "draftNewOptionCorrectIndex": 2,
-      "draftAnswerPosition": "C",
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
       "newOptionLengthRatio": 0.7765,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-PHT-U-C08-M02",
         "parentOriginalRevisionSha256": "e023fad7fdf6e1c623a33f911828d45c0a433bf9f99ef19807fcc5d84a3ff918",
         "grade": 9,
@@ -2950,22 +2951,22 @@
         "options": [
           {
             "id": "A",
-            "text": "کسی current کے بغیر صرف pressure سے magnetic field پیدا ہونا"
+            "text": "محض temperature کی موجودگی سے تار کا ہمیشہ magnet بننا"
           },
           {
             "id": "B",
-            "text": "بغیر electric current کے کششِ ثقل سے coil کا magnet بننا"
-          },
-          {
-            "id": "C",
             "text": "Electric current magnetic field پیدا کرتا ہے"
           },
           {
+            "id": "C",
+            "text": "بغیر electric current کے کششِ ثقل سے coil کا magnet بننا"
+          },
+          {
             "id": "D",
-            "text": "محض temperature کی موجودگی سے تار کا ہمیشہ magnet بننا"
+            "text": "کسی current کے بغیر صرف pressure سے magnetic field پیدا ہونا"
           }
         ],
-        "proposedCorrectOptionId": "C",
+        "proposedCorrectOptionId": "B",
         "proposedAnswerText": "Electric current magnetic field پیدا کرتا ہے",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -2979,7 +2980,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "8bbba0b80ee8d23ca6368b84194340fa5bdc8e58429b4f193bae53d40dab39dc",
+      "proposalSha256": "85be309741023ff736fd68008f5238832389de41048bc28aff193e747a8cdeff",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -2995,13 +2996,13 @@
       ],
       "originalReferenceAnswerText": "Temperature measures thermal state while heat is energy transferred due to temperature difference",
       "originalOptionLengthRatio": 3.307,
-      "draftNewOptionCorrectIndex": 3,
-      "draftAnswerPosition": "D",
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
       "newOptionLengthRatio": 1.1781,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-PHY-2025-C07-M01",
         "parentOriginalRevisionSha256": "03356fcde0b7173d1382cbf24ffc1c0303d9aa9e38b8519c0b8e5a441c15abbb",
         "grade": 9,
@@ -3013,7 +3014,7 @@
         "options": [
           {
             "id": "A",
-            "text": "Heat measures the total amount of matter in an object while temperature describes the force acting upon its molecules"
+            "text": "Temperature measures thermal state while heat is energy transferred due to temperature difference"
           },
           {
             "id": "B",
@@ -3021,18 +3022,18 @@
           },
           {
             "id": "C",
-            "text": "Temperature is energy transferred and heat is measured in kelvin"
+            "text": "Heat measures the total amount of matter in an object while temperature describes the force acting upon its molecules"
           },
           {
             "id": "D",
-            "text": "Temperature measures thermal state while heat is energy transferred due to temperature difference"
+            "text": "Temperature is energy transferred and heat is measured in kelvin"
           }
         ],
-        "proposedCorrectOptionId": "D",
+        "proposedCorrectOptionId": "A",
         "proposedAnswerText": "Temperature measures thermal state while heat is energy transferred due to temperature difference",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
-        "shiftedAnswerPositionFromOriginalA": true,
+        "shiftedAnswerPositionFromOriginalA": false,
         "noAnswerFactsIndependentlySourceVerified": true,
         "languageAndSubjectReviewerRequired": true,
         "actualSchoolTextbookEditionVerified": false,
@@ -3042,7 +3043,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "91ad9e5b5bef71b836696440290ef3c0b8cf54f4f872475d2fd8671d2e5de759",
+      "proposalSha256": "71f42d70ff58fd328eb8f6dc0d2a391fae9020990b97b240518f0b24e11332a2",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -3058,13 +3059,13 @@
       ],
       "originalReferenceAnswerText": "1 kg مادے کا temperature 1 K بڑھانے کے لیے درکار energy",
       "originalOptionLengthRatio": 4.125,
-      "draftNewOptionCorrectIndex": 0,
-      "draftAnswerPosition": "A",
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
       "newOptionLengthRatio": 0.9322,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "IX-PHY-UR-C07-M01",
         "parentOriginalRevisionSha256": "bbabe6e71ce976113122af6746684aacb4b2fd258fa41c3cf8379481fbcb7297",
         "grade": 9,
@@ -3076,22 +3077,22 @@
         "options": [
           {
             "id": "A",
-            "text": "1 kg مادے کا temperature 1 K بڑھانے کے لیے درکار energy"
+            "text": "temperature بدلے بغیر ذرات کی حرکت کی average speed بتانا"
           },
           {
             "id": "B",
-            "text": "تمام مادوں کی mass اور volume کے نسبت کو براہ راست ظاہر کرنا"
-          },
-          {
-            "id": "C",
             "text": "ہر مادے میں موجود مجموعی thermal energy کو mass سے الگ بتانا"
           },
           {
+            "id": "C",
+            "text": "1 kg مادے کا temperature 1 K بڑھانے کے لیے درکار energy"
+          },
+          {
             "id": "D",
-            "text": "temperature بدلے بغیر ذرات کی حرکت کی average speed بتانا"
+            "text": "تمام مادوں کی mass اور volume کے نسبت کو براہ راست ظاہر کرنا"
           }
         ],
-        "proposedCorrectOptionId": "A",
+        "proposedCorrectOptionId": "C",
         "proposedAnswerText": "1 kg مادے کا temperature 1 K بڑھانے کے لیے درکار energy",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -3105,7 +3106,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "7beba9377e13c53a19cabe2bf4204a5774ff59420c2c73dc6474c9bd6dcd4c25",
+      "proposalSha256": "61bf63ad324be967c068d88ec3f78fa50a794d1f036e02386df18704d9914789",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -3121,13 +3122,13 @@
       ],
       "originalReferenceAnswerText": "They regulate development of reproductive organs and secondary sexual characteristics",
       "originalOptionLengthRatio": 3.864,
-      "draftNewOptionCorrectIndex": 1,
-      "draftAnswerPosition": "B",
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
       "newOptionLengthRatio": 1.3212,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": true,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "X-BIO-2026-C06-B02-M01",
         "parentOriginalRevisionSha256": "1fbfc5891b00f4d234b4f40ddbcbe8ac1d189775dab5ad535b88eff3b130276e",
         "grade": 10,
@@ -3139,22 +3140,22 @@
         "options": [
           {
             "id": "A",
-            "text": "They act only as digestive substances that break down food proteins"
+            "text": "They replace haemoglobin in transporting oxygen through the blood"
           },
           {
             "id": "B",
-            "text": "They regulate development of reproductive organs and secondary sexual characteristics"
-          },
-          {
-            "id": "C",
             "text": "They directly filter metabolic wastes through kidney nephrons"
           },
           {
+            "id": "C",
+            "text": "They regulate development of reproductive organs and secondary sexual characteristics"
+          },
+          {
             "id": "D",
-            "text": "They replace haemoglobin in transporting oxygen through the blood"
+            "text": "They act only as digestive substances that break down food proteins"
           }
         ],
-        "proposedCorrectOptionId": "B",
+        "proposedCorrectOptionId": "C",
         "proposedAnswerText": "They regulate development of reproductive organs and secondary sexual characteristics",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -3168,7 +3169,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "f9c03c5a59315a4d9bcb9fc41351d5d085df8cc1f5fa713237838010de31ebc8",
+      "proposalSha256": "53b83444672846f36ac0634a1df2cb9898355326f696afcbd652699fdc287005",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -3184,13 +3185,13 @@
       ],
       "originalReferenceAnswerText": "Using microorganisms or engineered cells to make useful products",
       "originalOptionLengthRatio": 2.43,
-      "draftNewOptionCorrectIndex": 2,
-      "draftAnswerPosition": "C",
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
       "newOptionLengthRatio": 1.0323,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": true,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "X-BIO-2026-C08-B02-M01",
         "parentOriginalRevisionSha256": "6ca986e14fe1c7362a3be6561a018111e002f485bfe176058ca04a541d523787",
         "grade": 10,
@@ -3202,7 +3203,7 @@
         "options": [
           {
             "id": "A",
-            "text": "Using a measuring device only to record the outside temperature"
+            "text": "Using microorganisms or engineered cells to make useful products"
           },
           {
             "id": "B",
@@ -3210,18 +3211,18 @@
           },
           {
             "id": "C",
-            "text": "Using microorganisms or engineered cells to make useful products"
+            "text": "Drawing the feeding connections among species in an ecosystem"
           },
           {
             "id": "D",
-            "text": "Drawing the feeding connections among species in an ecosystem"
+            "text": "Using a measuring device only to record the outside temperature"
           }
         ],
-        "proposedCorrectOptionId": "C",
+        "proposedCorrectOptionId": "A",
         "proposedAnswerText": "Using microorganisms or engineered cells to make useful products",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
-        "shiftedAnswerPositionFromOriginalA": true,
+        "shiftedAnswerPositionFromOriginalA": false,
         "noAnswerFactsIndependentlySourceVerified": true,
         "languageAndSubjectReviewerRequired": true,
         "actualSchoolTextbookEditionVerified": false,
@@ -3231,7 +3232,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "9c793e3235302afc025906ff00a9112114ae600db764267b31bf07d7d020b155",
+      "proposalSha256": "3d8419c08a9d0296bdd7e3319385bcfb1ac4697fa05d532fcf2c429d3ca15abc",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -3247,13 +3248,13 @@
       ],
       "originalReferenceAnswerText": "A DNA sequence associated with a functional product or trait",
       "originalOptionLengthRatio": 5,
-      "draftNewOptionCorrectIndex": 3,
-      "draftAnswerPosition": "D",
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
       "newOptionLengthRatio": 0.9524,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "X-BIO-TECH-C07-M01",
         "parentOriginalRevisionSha256": "52e641bac523e3a07a93bbaa3c28684637d849fa1a7e1f3669fdb2a41aa124b7",
         "grade": 10,
@@ -3265,22 +3266,22 @@
         "options": [
           {
             "id": "A",
-            "text": "A single whole organ that performs every inherited body function"
-          },
-          {
-            "id": "B",
             "text": "A mineral substance that can replace DNA in every cell nucleus"
           },
           {
+            "id": "B",
+            "text": "A DNA sequence associated with a functional product or trait"
+          },
+          {
             "id": "C",
-            "text": "A blood vessel that delivers oxygen directly to all chromosomes"
+            "text": "A single whole organ that performs every inherited body function"
           },
           {
             "id": "D",
-            "text": "A DNA sequence associated with a functional product or trait"
+            "text": "A blood vessel that delivers oxygen directly to all chromosomes"
           }
         ],
-        "proposedCorrectOptionId": "D",
+        "proposedCorrectOptionId": "B",
         "proposedAnswerText": "A DNA sequence associated with a functional product or trait",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -3294,7 +3295,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "2144e1a672f5719373582b0e91115c406cb986ffe6aa1ab9721eef43243df259",
+      "proposalSha256": "f98a23ea5898113bc58e187f6a594bc2aea28fa95d979261cea073ddd89286b4",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -3310,13 +3311,13 @@
       ],
       "originalReferenceAnswerText": "Selection کے لیے heritable differences فراہم کرتی ہے",
       "originalOptionLengthRatio": 1.88,
-      "draftNewOptionCorrectIndex": 0,
-      "draftAnswerPosition": "A",
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
       "newOptionLengthRatio": 0.9341,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "X-BIO-UR-C10-M02",
         "parentOriginalRevisionSha256": "718a7c704a89303e317660f96d49a1481ffaf38a9221e784f020b742ff5fecda",
         "grade": 10,
@@ -3328,22 +3329,22 @@
         "options": [
           {
             "id": "A",
-            "text": "Selection کے لیے heritable differences فراہم کرتی ہے"
-          },
-          {
-            "id": "B",
             "text": "تمام organisms کو genes کے اعتبار سے مکمل identical بنانا"
           },
           {
+            "id": "B",
+            "text": "Selection کے لیے heritable differences فراہم کرتی ہے"
+          },
+          {
             "id": "C",
-            "text": "وراثتی differences کو ختم کر کے ہر نسل کو ایک جیسا رکھنا"
+            "text": "ماحولیاتی حالات کو ہمیشہ مستقل اور غیر تبدیل شدہ رکھنا"
           },
           {
             "id": "D",
-            "text": "ماحولیاتی حالات کو ہمیشہ مستقل اور غیر تبدیل شدہ رکھنا"
+            "text": "وراثتی differences کو ختم کر کے ہر نسل کو ایک جیسا رکھنا"
           }
         ],
-        "proposedCorrectOptionId": "A",
+        "proposedCorrectOptionId": "B",
         "proposedAnswerText": "Selection کے لیے heritable differences فراہم کرتی ہے",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -3357,7 +3358,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "d08cb783b9f8df58474a37a392c2dd3b67147bfb521b232c3729b44271fbca6b",
+      "proposalSha256": "7515e2eece979ac8d398e88528fa88b63c6ee77d7358fc381e09878426907b11",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -3373,13 +3374,13 @@
       ],
       "originalReferenceAnswerText": "An ionic compound containing cations and anions",
       "originalOptionLengthRatio": 3,
-      "draftNewOptionCorrectIndex": 1,
-      "draftAnswerPosition": "B",
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
       "newOptionLengthRatio": 0.7622,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "X-CHEM-C18-M01",
         "parentOriginalRevisionSha256": "bdb53683b8ada2c2fa3f4a3b433d57f16f2598b31d140830544667fc6ad008d3",
         "grade": 10,
@@ -3391,26 +3392,26 @@
         "options": [
           {
             "id": "A",
-            "text": "A pure molecular compound that contains only uncharged particles"
-          },
-          {
-            "id": "B",
             "text": "An ionic compound containing cations and anions"
           },
           {
+            "id": "B",
+            "text": "A gaseous element that can never contain charged particles"
+          },
+          {
             "id": "C",
-            "text": "A substance formed only when sodium and chlorine react together"
+            "text": "A pure molecular compound that contains only uncharged particles"
           },
           {
             "id": "D",
-            "text": "A gaseous element that can never contain charged particles"
+            "text": "A substance formed only when sodium and chlorine react together"
           }
         ],
-        "proposedCorrectOptionId": "B",
+        "proposedCorrectOptionId": "A",
         "proposedAnswerText": "An ionic compound containing cations and anions",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
-        "shiftedAnswerPositionFromOriginalA": true,
+        "shiftedAnswerPositionFromOriginalA": false,
         "noAnswerFactsIndependentlySourceVerified": true,
         "languageAndSubjectReviewerRequired": true,
         "actualSchoolTextbookEditionVerified": false,
@@ -3420,7 +3421,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "9aca6f0a3faca32b398422bf6c4b4249c200370d53119ed60c828c1d6a347b73",
+      "proposalSha256": "78bea2d1c238374028d97c3a04f73e6342d6c5570e1ef170214f5cae6ee043a7",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -3436,13 +3437,13 @@
       ],
       "originalReferenceAnswerText": "Important energy sources and structural materials",
       "originalOptionLengthRatio": 3.063,
-      "draftNewOptionCorrectIndex": 2,
-      "draftAnswerPosition": "C",
+      "draftNewOptionCorrectIndex": 3,
+      "draftAnswerPosition": "D",
       "newOptionLengthRatio": 0.7903,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "X-CHEM-C25-M02",
         "parentOriginalRevisionSha256": "d4004a78533fafad4bb8fc11f015b189e009a84b66febea0d1f7b182822324d5",
         "grade": 10,
@@ -3454,22 +3455,22 @@
         "options": [
           {
             "id": "A",
-            "text": "Carrying the complete hereditary instructions of every organism"
-          },
-          {
-            "id": "B",
             "text": "Functioning only as biological catalysts without an energy role"
           },
           {
+            "id": "B",
+            "text": "Existing exclusively as gases under everyday room conditions"
+          },
+          {
             "id": "C",
-            "text": "Important energy sources and structural materials"
+            "text": "Carrying the complete hereditary instructions of every organism"
           },
           {
             "id": "D",
-            "text": "Existing exclusively as gases under everyday room conditions"
+            "text": "Important energy sources and structural materials"
           }
         ],
-        "proposedCorrectOptionId": "C",
+        "proposedCorrectOptionId": "D",
         "proposedAnswerText": "Important energy sources and structural materials",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -3483,7 +3484,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "82cbbc6d612fa240c1bc3214225d86241eb1ff85c076bf2b3736b1b19dc994a2",
+      "proposalSha256": "50697c06256535691b65dd62566ba6b2962c94f7669375525b0b78f5f6869fc4",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -3505,7 +3506,7 @@
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "X-COMMS-TECH-C08-M01",
         "parentOriginalRevisionSha256": "944e35af6c0281a5f438e6990e7ea9a70d37b3c241cb2c8688ea38da2fa947aa",
         "grade": 10,
@@ -3517,11 +3518,11 @@
         "options": [
           {
             "id": "A",
-            "text": "Presenting exaggerated claims without evidence about personal skills"
+            "text": "Sharing confidential details as the primary proof of professional value"
           },
           {
             "id": "B",
-            "text": "Sharing confidential details as the primary proof of professional value"
+            "text": "Presenting exaggerated claims without evidence about personal skills"
           },
           {
             "id": "C",
@@ -3546,7 +3547,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "53515e00e9aef88f04d721fc47dcdc885bef528a67cd03493a3f463bea0e61bc",
+      "proposalSha256": "932ceae4670f6dd1b205f086d3e0b30ddb2db0482297273d1031b54887aac3ea",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -3562,13 +3563,13 @@
       ],
       "originalReferenceAnswerText": "Appropriate variety and amounts of essential nutrients",
       "originalOptionLengthRatio": 2.842,
-      "draftNewOptionCorrectIndex": 0,
-      "draftAnswerPosition": "A",
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
       "newOptionLengthRatio": 0.802,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "X-COMMS-TECH-C09-M01",
         "parentOriginalRevisionSha256": "e504642af6f524fd3d8735cae335db5fc945753afdd2c0681b960b9e21ff311f",
         "grade": 10,
@@ -3580,22 +3581,22 @@
         "options": [
           {
             "id": "A",
-            "text": "Appropriate variety and amounts of essential nutrients"
-          },
-          {
-            "id": "B",
             "text": "Relying on just one type of food to supply every required nutrient"
           },
           {
+            "id": "B",
+            "text": "Choosing foods only by their appearance without considering nutrients"
+          },
+          {
             "id": "C",
-            "text": "Avoiding water because food alone always supplies sufficient fluids"
+            "text": "Appropriate variety and amounts of essential nutrients"
           },
           {
             "id": "D",
-            "text": "Choosing foods only by their appearance without considering nutrients"
+            "text": "Avoiding water because food alone always supplies sufficient fluids"
           }
         ],
-        "proposedCorrectOptionId": "A",
+        "proposedCorrectOptionId": "C",
         "proposedAnswerText": "Appropriate variety and amounts of essential nutrients",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -3609,7 +3610,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "5b7fb60d6a95ecf5f8ed59244a61ecfa4742892f68e273afca20602a5d7f8128",
+      "proposalSha256": "fc6184a10b2fe0540dc127952a243d097a5e2e13c46f44051fb9530a2b1409e6",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -3625,13 +3626,13 @@
       ],
       "originalReferenceAnswerText": "System settings کو پہلے کے working state پر واپس لانا",
       "originalOptionLengthRatio": 2.271,
-      "draftNewOptionCorrectIndex": 1,
-      "draftAnswerPosition": "B",
+      "draftNewOptionCorrectIndex": 2,
+      "draftAnswerPosition": "C",
       "newOptionLengthRatio": 0.8595,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "X-COMP-C02-M01",
         "parentOriginalRevisionSha256": "8129ef5a87f46c0cd26ac633403d9153274929aadb94c7193a73c65e6695e9d1",
         "grade": 10,
@@ -3647,18 +3648,18 @@
           },
           {
             "id": "B",
-            "text": "System settings کو پہلے کے working state پر واپس لانا"
+            "text": "monitor کی physical size اور resolution کو خودکار طور پر بڑھانا"
           },
           {
             "id": "C",
-            "text": "کمپیوٹر کی hardware processing unit کو نئے model سے بدلنا"
+            "text": "System settings کو پہلے کے working state پر واپس لانا"
           },
           {
             "id": "D",
-            "text": "monitor کی physical size اور resolution کو خودکار طور پر بڑھانا"
+            "text": "کمپیوٹر کی hardware processing unit کو نئے model سے بدلنا"
           }
         ],
-        "proposedCorrectOptionId": "B",
+        "proposedCorrectOptionId": "C",
         "proposedAnswerText": "System settings کو پہلے کے working state پر واپس لانا",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -3672,7 +3673,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "ac08d5d0af737f8402c3da202b122863e96e713518e80a60355f29110c1bc3bd",
+      "proposalSha256": "bed2c8e24efa3866c2cfd34ba0221c740d5c5285ee405d37c3c695c57e6170a0",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -3688,13 +3689,13 @@
       ],
       "originalReferenceAnswerText": "ایسے systems بنانا جو learning/reasoning جیسے tasks انجام دے سکیں",
       "originalOptionLengthRatio": 3.679,
-      "draftNewOptionCorrectIndex": 2,
-      "draftAnswerPosition": "C",
+      "draftNewOptionCorrectIndex": 3,
+      "draftAnswerPosition": "D",
       "newOptionLengthRatio": 1.1017,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": true,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "X-COMP-C06-M01",
         "parentOriginalRevisionSha256": "3e3eea8e400a4b9de4b8d1363fcc341226331cefa4edf08d8de061ae66ca7921",
         "grade": 10,
@@ -3706,22 +3707,22 @@
         "options": [
           {
             "id": "A",
-            "text": "صرف text documents کی printing کو intelligent reasoning کہنا"
-          },
-          {
-            "id": "B",
             "text": "صرف network cables کو جوڑنے کا کام AI کا بنیادی مقصد ماننا"
           },
           {
+            "id": "B",
+            "text": "صرف digital storage میں اضافہ کرنے کو machine learning کہنا"
+          },
+          {
             "id": "C",
-            "text": "ایسے systems بنانا جو learning/reasoning جیسے tasks انجام دے سکیں"
+            "text": "صرف text documents کی printing کو intelligent reasoning کہنا"
           },
           {
             "id": "D",
-            "text": "صرف digital storage میں اضافہ کرنے کو machine learning کہنا"
+            "text": "ایسے systems بنانا جو learning/reasoning جیسے tasks انجام دے سکیں"
           }
         ],
-        "proposedCorrectOptionId": "C",
+        "proposedCorrectOptionId": "D",
         "proposedAnswerText": "ایسے systems بنانا جو learning/reasoning جیسے tasks انجام دے سکیں",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -3735,7 +3736,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "f46279ad4b1007e23a340497f3f51bc487ec7fa216fb20b545e45bc1bb07df8c",
+      "proposalSha256": "0ee9beb032dbf67ee6389f2866969eb2259ed3abbb314c8a4b698cd660b20506",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -3751,13 +3752,13 @@
       ],
       "originalReferenceAnswerText": "Human language کو computer کے ذریعے process/understand کرنا",
       "originalOptionLengthRatio": 3.766,
-      "draftNewOptionCorrectIndex": 3,
-      "draftAnswerPosition": "D",
+      "draftNewOptionCorrectIndex": 1,
+      "draftAnswerPosition": "B",
       "newOptionLengthRatio": 1.0599,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": true,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "X-COMP-C07-M02",
         "parentOriginalRevisionSha256": "38f8af109940997b174e7572a679e6a0d674724333c675b4d3c5ef49682603c4",
         "grade": 10,
@@ -3773,7 +3774,7 @@
           },
           {
             "id": "B",
-            "text": "network کے physical cables کی length اور speed معلوم کرنا"
+            "text": "Human language کو computer کے ذریعے process/understand کرنا"
           },
           {
             "id": "C",
@@ -3781,10 +3782,10 @@
           },
           {
             "id": "D",
-            "text": "Human language کو computer کے ذریعے process/understand کرنا"
+            "text": "network کے physical cables کی length اور speed معلوم کرنا"
           }
         ],
-        "proposedCorrectOptionId": "D",
+        "proposedCorrectOptionId": "B",
         "proposedAnswerText": "Human language کو computer کے ذریعے process/understand کرنا",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -3798,7 +3799,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "264151f56eb5aa950ced4caa81af07844654d34ba06029813a67762671158877",
+      "proposalSha256": "09d16e1ebd81b9bd30f930cf9a3fc0ce346cddd6b25078cb9aa43b5936df777d",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -3814,13 +3815,13 @@
       ],
       "originalReferenceAnswerText": "An interface and resource manager between users, software and hardware",
       "originalOptionLengthRatio": 3.889,
-      "draftNewOptionCorrectIndex": 0,
-      "draftAnswerPosition": "A",
+      "draftNewOptionCorrectIndex": 3,
+      "draftAnswerPosition": "D",
       "newOptionLengthRatio": 1.0938,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": true,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "X-COMP-U01-M01",
         "parentOriginalRevisionSha256": "d835fcb53369851f51eeffcf11c8dc0d43b05fac93a93e7a1f496c5d4f35d66e",
         "grade": 10,
@@ -3832,11 +3833,11 @@
         "options": [
           {
             "id": "A",
-            "text": "An interface and resource manager between users, software and hardware"
+            "text": "A single spreadsheet document stored in the user’s home folder"
           },
           {
             "id": "B",
-            "text": "A single spreadsheet document stored in the user’s home folder"
+            "text": "A printer-only utility that has no role in other system resources"
           },
           {
             "id": "C",
@@ -3844,10 +3845,10 @@
           },
           {
             "id": "D",
-            "text": "A printer-only utility that has no role in other system resources"
+            "text": "An interface and resource manager between users, software and hardware"
           }
         ],
-        "proposedCorrectOptionId": "A",
+        "proposedCorrectOptionId": "D",
         "proposedAnswerText": "An interface and resource manager between users, software and hardware",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -3861,7 +3862,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "a5939498e2bce70f82d577de0c64b8a4d8735cc8c4b1e40b05b2ae7a5354c170",
+      "proposalSha256": "2acde3339da4e369b1fe10bfab1e81013fe49e13453041d5428853b2d6a36237",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -3877,13 +3878,13 @@
       ],
       "originalReferenceAnswerText": "Accuracy, privacy, fairness and human oversight",
       "originalOptionLengthRatio": 3.711,
-      "draftNewOptionCorrectIndex": 1,
-      "draftAnswerPosition": "B",
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
       "newOptionLengthRatio": 0.7382,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "X-COMP-U07-M02",
         "parentOriginalRevisionSha256": "240781a0ee27e5b3010a02cc533609a38ae1595c47e7749c0b3056e11229c75c",
         "grade": 10,
@@ -3895,26 +3896,26 @@
         "options": [
           {
             "id": "A",
-            "text": "Making speed the only measure of a system's social acceptability"
-          },
-          {
-            "id": "B",
             "text": "Accuracy, privacy, fairness and human oversight"
           },
           {
-            "id": "C",
+            "id": "B",
             "text": "Judging output by its appearance without checking truth or bias"
+          },
+          {
+            "id": "C",
+            "text": "Making speed the only measure of a system's social acceptability"
           },
           {
             "id": "D",
             "text": "Replacing meaningful human review with automatic decisions alone"
           }
         ],
-        "proposedCorrectOptionId": "B",
+        "proposedCorrectOptionId": "A",
         "proposedAnswerText": "Accuracy, privacy, fairness and human oversight",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
-        "shiftedAnswerPositionFromOriginalA": true,
+        "shiftedAnswerPositionFromOriginalA": false,
         "noAnswerFactsIndependentlySourceVerified": true,
         "languageAndSubjectReviewerRequired": true,
         "actualSchoolTextbookEditionVerified": false,
@@ -3924,7 +3925,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "18bb9f8a60cdbba352d75872631e74471b7b2196d2c3c7df4c5adb5a85d0c51d",
+      "proposalSha256": "1a61325c99cf633a5048746303a3b8e1ca6c027c15f3f5d9d2581c1e68e7d0d6",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -3946,7 +3947,7 @@
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "X-HS-TECH-C14-M01",
         "parentOriginalRevisionSha256": "49d26900c26c3af5dfa8c5383a671758410594e67ca3cae52f2de5cd2f9d3b06",
         "grade": 10,
@@ -3958,7 +3959,7 @@
         "options": [
           {
             "id": "A",
-            "text": "Making a surface appear visibly clean without evaluating microbes"
+            "text": "Reducing visible stains while assuming pathogens are all removed"
           },
           {
             "id": "B",
@@ -3970,7 +3971,7 @@
           },
           {
             "id": "D",
-            "text": "Reducing visible stains while assuming pathogens are all removed"
+            "text": "Making a surface appear visibly clean without evaluating microbes"
           }
         ],
         "proposedCorrectOptionId": "C",
@@ -3987,7 +3988,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "4d421ff41e30866543ce6070db0ce8b8e3b76ffd7f3456713e5c6643b933f46b",
+      "proposalSha256": "c4da95669366e3de1b30060eb0ba3c1a6539a69a2421bad6d99b993eeaaf4bfe",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -4003,13 +4004,13 @@
       ],
       "originalReferenceAnswerText": "Perpendicular bisectors of two joining segments",
       "originalOptionLengthRatio": 3.205,
-      "draftNewOptionCorrectIndex": 3,
-      "draftAnswerPosition": "D",
+      "draftNewOptionCorrectIndex": 0,
+      "draftAnswerPosition": "A",
       "newOptionLengthRatio": 0.7663,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "X-MATH-C10-M01",
         "parentOriginalRevisionSha256": "f95e1e3591c7e1fb0be32a3538f5a36049552dbe8b1b6ea7a4896a3e95bc1320",
         "grade": 10,
@@ -4021,26 +4022,26 @@
         "options": [
           {
             "id": "A",
-            "text": "The internal angle bisectors of any two corners in the triangle"
+            "text": "Perpendicular bisectors of two joining segments"
           },
           {
             "id": "B",
-            "text": "The tangents drawn at two arbitrary points along the circle"
-          },
-          {
-            "id": "C",
             "text": "The medians intersecting at the centroid of the given triangle"
           },
           {
+            "id": "C",
+            "text": "The internal angle bisectors of any two corners in the triangle"
+          },
+          {
             "id": "D",
-            "text": "Perpendicular bisectors of two joining segments"
+            "text": "The tangents drawn at two arbitrary points along the circle"
           }
         ],
-        "proposedCorrectOptionId": "D",
+        "proposedCorrectOptionId": "A",
         "proposedAnswerText": "Perpendicular bisectors of two joining segments",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
-        "shiftedAnswerPositionFromOriginalA": true,
+        "shiftedAnswerPositionFromOriginalA": false,
         "noAnswerFactsIndependentlySourceVerified": true,
         "languageAndSubjectReviewerRequired": true,
         "actualSchoolTextbookEditionVerified": false,
@@ -4050,7 +4051,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "518a61387295b9eeed3ad4be0229ecfd4a3c07e1a723d7c18980ec424ffed5a3",
+      "proposalSha256": "b615a446300d86e4e3ceebfddf679a18e594144751ea04340b04aca67c02a072",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -4066,13 +4067,13 @@
       ],
       "originalReferenceAnswerText": "ایسے بنیادی خیالات اور اقدار جو اجتماعی سمت متعین کریں",
       "originalOptionLengthRatio": 4.263,
-      "draftNewOptionCorrectIndex": 0,
-      "draftAnswerPosition": "A",
+      "draftNewOptionCorrectIndex": 3,
+      "draftAnswerPosition": "D",
       "newOptionLengthRatio": 0.9529,
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": false,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "X-PAK-UR-C01-M01",
         "parentOriginalRevisionSha256": "0aeb1985f9128a6b5cdb290f88f5c00bcf037a238cbd21a69ecbbfa3fecbc428",
         "grade": 10,
@@ -4084,22 +4085,22 @@
         "options": [
           {
             "id": "A",
-            "text": "ایسے بنیادی خیالات اور اقدار جو اجتماعی سمت متعین کریں"
-          },
-          {
-            "id": "B",
             "text": "کسی علاقے کی روزانہ بدلتی ہوئی موسم کی پیش گوئی کا مجموعہ"
           },
           {
-            "id": "C",
+            "id": "B",
             "text": "صرف نقشے کی پیمائش اور جغرافیائی علامات کی ترتیب کا نام"
           },
           {
-            "id": "D",
+            "id": "C",
             "text": "معاشی اعداد کی مختصر فہرست جس میں مشترکہ اقدار شامل نہ ہوں"
+          },
+          {
+            "id": "D",
+            "text": "ایسے بنیادی خیالات اور اقدار جو اجتماعی سمت متعین کریں"
           }
         ],
-        "proposedCorrectOptionId": "A",
+        "proposedCorrectOptionId": "D",
         "proposedAnswerText": "ایسے بنیادی خیالات اور اقدار جو اجتماعی سمت متعین کریں",
         "sourceCorrectOptionTextUnchanged": true,
         "originalOtherDistractorsReplacedWithManuallyWrittenAlternatives": true,
@@ -4113,7 +4114,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "b170058d83ea22a765d94ab970bd21a8b6f639ca6eb1f29d2ef3c24d20cdff88",
+      "proposalSha256": "62393cd99eca4feffde056d99bb7e50773185902c6edae9f7da9372a63ae89a4",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     },
     {
@@ -4135,7 +4136,7 @@
       "residualStrongLengthCue": false,
       "correctOptionStillStrictlyLongest": true,
       "proposal": {
-        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v1",
+        "schemaVersion": "assps-grade910-66-curated-mcq-revision-proposal-v2",
         "parentId": "X-PAK-UR-C08-M02",
         "parentOriginalRevisionSha256": "b4eed6e623053cb5b69f6704079fe6058b9165b96449eeb586a4ebd9fb87faeb",
         "grade": 10,
@@ -4147,7 +4148,7 @@
         "options": [
           {
             "id": "A",
-            "text": "یہ تعلیمی رسائی کم کر کے خواندگی کے مواقع محدود کر دیتی ہے"
+            "text": "یہ خواتین کی معاشی شرکت اور روزگار کے امکانات ختم کرتی ہے"
           },
           {
             "id": "B",
@@ -4155,7 +4156,7 @@
           },
           {
             "id": "C",
-            "text": "یہ خواتین کی معاشی شرکت اور روزگار کے امکانات ختم کرتی ہے"
+            "text": "یہ تعلیمی رسائی کم کر کے خواندگی کے مواقع محدود کر دیتی ہے"
           },
           {
             "id": "D",
@@ -4176,7 +4177,7 @@
         "published": false,
         "paperStudioSelectable": false
       },
-      "proposalSha256": "5c66ce10468023ed3caccdc0b7ce6468b35ec9c8f888310b4e86ebf78c1cc2d7",
+      "proposalSha256": "10183883d572a1aa4e3401a909bf662e934a49274cabd77ffa6047113c319da5",
       "status": "AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED"
     }
   ]

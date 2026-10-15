@@ -55,6 +55,7 @@ function build({curatedBytes}={}){
  const originals=candidateSource(new Set(targets.map(t=>t.originalId)))
  const curated=loadCurated(curatedBytes===undefined?undefined:curatedBytes)
  if(curated.size!==targets.length)fail('CURATED_COUNT_NOT_66')
+ const assigned=new Map([...targets].sort((a,b)=>SHA('V2|'+a.originalId+'|'+a.originalRevisionSha256).localeCompare(SHA('V2|'+b.originalId+'|'+b.originalRevisionSha256))).map((v,i)=>[v.originalId,i%4]))
  const balanced={A:0,B:0,C:0,D:0},rows=[]
  let residualLengthCues=0,originalStrong=0,correctStrictLongest=0
  for(let i=0;i<targets.length;i++){
@@ -73,8 +74,8 @@ function build({curatedBytes}={}){
   const variants=[originalAnswer,...wrong]
   if(new Set(variants.map(x=>x.toLocaleLowerCase('en'))).size!==4)
    fail('PROPOSED_DUPLICATE_OPTIONS_'+id)
-  const correctIndex=i%4
-  const rotated=[...wrong]
+  const correctIndex=assigned.get(id)
+  const rotated=[...wrong].sort((a,b)=>SHA('V2_DISTRACTOR|'+id+'|'+a).localeCompare(SHA('V2_DISTRACTOR|'+id+'|'+b)))
   rotated.splice(correctIndex,0,originalAnswer)
   const options=rotated.map((value,j)=>({id:'ABCD'[j],text:value}))
   const key='ABCD'[correctIndex]
@@ -92,7 +93,7 @@ function build({curatedBytes}={}){
   if(!target.correctLongerThanOthersByAtLeast50Percent)fail('NOT_A_STRONG_ORIGINAL')
   originalStrong++
   const revision={
-   schemaVersion:'assps-grade910-66-curated-mcq-revision-proposal-v1',
+   schemaVersion:'assps-grade910-66-curated-mcq-revision-proposal-v2',
    parentId:id,parentOriginalRevisionSha256:bound.originalRevisionSha256,
    grade:bound.grade,subject:bound.subject,medium:bound.medium,
    originalStem:q.stem||q.content?.en?.stem||q.content?.ur?.stem||'',
@@ -100,7 +101,7 @@ function build({curatedBytes}={}){
    options,proposedCorrectOptionId:key,proposedAnswerText:originalAnswer,
    sourceCorrectOptionTextUnchanged:true,
    originalOtherDistractorsReplacedWithManuallyWrittenAlternatives:true,
-   shiftedAnswerPositionFromOriginalA:true,
+   shiftedAnswerPositionFromOriginalA:correctIndex!==0,
    noAnswerFactsIndependentlySourceVerified:true,
    languageAndSubjectReviewerRequired:true,
    actualSchoolTextbookEditionVerified:false,teacherApproved:false,
@@ -123,13 +124,14 @@ function build({curatedBytes}={}){
  if(Math.max(...Object.values(balanced))-Math.min(...Object.values(balanced))>1)
   fail('DRAFT_POSITION_DISTRIBUTION_UNBALANCED')
  return{
-  schemaVersion:'assps-grade910-66-mcq-curated-corrections-safe-draft-v1',
+  schemaVersion:'assps-grade910-66-mcq-curated-corrections-safe-draft-v2',
   sourceIntegrityLedgerSha256:SHA(fs.readFileSync(SOURCE)),
   originalResearchCandidateCount:2581,originalFlaggedMCQCount:68,
   originalStrongCorrectOptionLengthCues:originalStrong,curatedProposalCount:rows.length,
   newlyAuthoredWrongDistractorTexts:rows.length*3,
   proposedOriginalReferenceAnswerPreserved:rows.length,
   proposedAnswerKeyPositionDistribution:balanced,
+  choicePermutationStrategy:'SHA256_QUESTION_REVISION_RANK_BALANCED_THEN_SHA256_LOCAL_DISTRACTOR_PERMUTATION_V2',
   remainingStrongLengthOutliersAfterProposals:residualLengthCues,
   proposedKeyStillStrictlyLongestCount:correctStrictLongest,
   realQualifiedSubjectAndUrduReviewerCount:0,

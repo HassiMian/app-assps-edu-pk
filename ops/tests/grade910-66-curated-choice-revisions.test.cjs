@@ -61,3 +61,17 @@ test('AI proposal cannot impersonate authorized academic publication',()=>{
  assert.equal(r.published,0)
  assert.ok(r.rows.every(x=>x.status==='AI_EDITORIAL_DRAFT_NOT_FACT_CHECKED_NOT_APPROVED'))
 })
+test('key placements are source SHA shuffled, not a predictable A-B-C-D cycle',()=>{
+ const rows=author.build().rows
+ const lexicalCycleMatches=rows.filter((r,i)=>r.draftAnswerPosition==='ABCD'[i%4]).length
+ assert.ok(lexicalCycleMatches<30,'Question-ID order must not expose a repeated A-D answer cycle')
+ assert.ok(rows.some((r,i)=>r.draftAnswerPosition!=='ABCD'[i%4]))
+ for(const r of rows)
+  assert.equal(r.proposal.shiftedAnswerPositionFromOriginalA,r.draftAnswerPosition!=='A')
+})
+test('stable source SHA-bound shuffled placements are reproducible without random test drift',()=>{
+ const rows=author.build().rows
+ assert.equal(rows.length,66)
+ assert.deepEqual(rows.map(x=>x.draftAnswerPosition),author.build().rows.map(x=>x.draftAnswerPosition))
+ assert.ok(rows.every(x=>x.proposal.schemaVersion.endsWith('-v2')))
+})

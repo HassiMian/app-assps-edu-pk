@@ -1,0 +1,1934 @@
+{
+  "schema": "assps-grade910-66-residual-editorial-choice-cue-audit-v1",
+  "aggregate": {
+    "total": 66,
+    "sourceSha256": "e85a51db35f08e39c54b61a689b82862447d584fc803c0e50fc3c16270370ee4",
+    "alternativesChecked": 198,
+    "incorrectOptionsWithAbsoluteWordCue": 102,
+    "referenceAnswersWithAbsoluteWordCue": 2,
+    "questionsWithAnySuchDistractorCue": 54,
+    "questionsWithTwoOrMoreSuchDistractors": 34,
+    "correctOptionStillStrictlyLongest": 15,
+    "originalStrongLengthOutliers": 66,
+    "newStrongLengthOutliers": 0,
+    "caution": "Token-level polarity or exclusive-word cues do NOT prove option factual incorrectness or poor quality. Disproportionate rates identify content requiring a real independent human reviewer.",
+    "independentlyQualifiedAcademicApprovals": 0,
+    "published": 0
+  },
+  "rows": [
+    {
+      "originalId": "IX-AGRI-TECH-ENGLISH-C05-I01",
+      "originalRevisionSha256": "2c9e3622d63dc0c8f5d32ce4129d74023e3ebba55b1d54adaf17567655cc5f62",
+      "proposalSha256": "a31c35d5279b2cc8b8b75bd48e008ea3b0d6570d98cd2d9042faddfd2ed3ed07",
+      "medium": "english",
+      "subject": "agriculture-sciences-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 0,
+      "individualDistractorFlags": [
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-AGRI-TECH-ENGLISH-C08-I01",
+      "originalRevisionSha256": "02310906a58ebec5a384c89d0efe5503686a5d0fb8eb1ab928ae4ba1653e87ea",
+      "proposalSha256": "5319b8c5679c5b2fff75d6d8b06ec0af3b69cdc43462b66216246decb2adfdf7",
+      "medium": "english",
+      "subject": "agriculture-sciences-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 0,
+      "individualDistractorFlags": [
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-AGRI-TECH-ENGLISH-C10-I01",
+      "originalRevisionSha256": "d5c5667cd810c46a1e9b3f5f24d4df323c8ac48ede2d71c902117ea2599c3994",
+      "proposalSha256": "3d770a8875666312f8d897d6e0a655fd682868ea3faeb2f83ed0bbe6fb9d11f4",
+      "medium": "english",
+      "subject": "agriculture-sciences-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 2,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-AGRI-TECH-URDU-C08-I01",
+      "originalRevisionSha256": "30e69993a6c26790a36f12dc4a86ee1aa34e83c63bb68c4c9cc7b84f5d57ab5a",
+      "proposalSha256": "8243f0057472ccbb96cbb264e9dd34395a601f99034c9a2688fa75a636bdbe41",
+      "medium": "urdu",
+      "subject": "agriculture-sciences-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 1,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-AGRI-TECH-URDU-C10-I01",
+      "originalRevisionSha256": "f64be889231e2353f611f2ce12b5cbdedf8df7536c4e65cfa7ed6bc865220b5b",
+      "proposalSha256": "3e3d86906f6f7c1c1d72302bc1468039f469920d4613aa459c5d8ce979b78149",
+      "medium": "urdu",
+      "subject": "agriculture-sciences-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 0,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-BIO-2025-C07-B01-M01",
+      "originalRevisionSha256": "6c7c70f318fe60af54f7d8106158c1b0a67f89e367d04b65d66e2b25225fa5fb",
+      "proposalSha256": "39df8a62d04942c2e7b92e7e983bbfab86abe8058bf700c43d984353fca52d6b",
+      "medium": "english",
+      "subject": "biology",
+      "sourceReferenceCorrectHasAbsoluteCue": true,
+      "distractorsWithAbsoluteCue": 2,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-BIO-2025-C09-B02-M01",
+      "originalRevisionSha256": "ec7ae0c16402476ab567b572bc5d74d3f8096dc04bd3e85280e1dbbf0f67af0d",
+      "proposalSha256": "c88a2cff6e974d8260e61776b3bbf25f9c41f48aa7bc60bb8449b91ae432e538",
+      "medium": "english",
+      "subject": "biology",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 1,
+      "individualDistractorFlags": [
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": true,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-BIO-2025-C11-B01-M01",
+      "originalRevisionSha256": "b85c4933209f6ac014900f10dec7c9db672758c14d4bbc2bdddb0d0378acf843",
+      "proposalSha256": "4c8a54817a394b4dbf1c85904a33f0be753eda7d56492199a40b5ec9083eae87",
+      "medium": "english",
+      "subject": "biology",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 0,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-BIO-UR-C03-M01",
+      "originalRevisionSha256": "dca4751c9e5b7c46eac65e25ee546e91537dc2dd8595dd727d023fc3b29930d5",
+      "proposalSha256": "3e0dce8e71ee5338a644ce35115d73035f89068100d298f8f5709942786d5cfd",
+      "medium": "urdu",
+      "subject": "biology",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 0,
+      "individualDistractorFlags": [
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-BIO-UR-C10-M01",
+      "originalRevisionSha256": "e8c294153a5bc57ffc6e7fc5b4d5e6625da8d7ea64094ddec12246919f649547",
+      "proposalSha256": "f4c7fcce2dfe4b7fceaebc622d7405a9bf6a0a7920652320f8d003642bffb967",
+      "medium": "urdu",
+      "subject": "biology",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 1,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-BIOLOGY-TECH-ENGLISH-C02-M01",
+      "originalRevisionSha256": "92142ffe8fbf3d76082a6aecd7f2ca901beabfb4def0cd0cff673ea371650a7a",
+      "proposalSha256": "fb6544c387a99c8aa42dd45e90d6e524c8626663d53ca7ba19ba5651fd327a33",
+      "medium": "english",
+      "subject": "biology-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 1,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-CHEM-2025-C13-13T5-M01",
+      "originalRevisionSha256": "3e289093484a3504c0bfa95577f19becc47f95f426c182a84e1473c283d0c150",
+      "proposalSha256": "ceae275d7127078bfce5c3a2b2a31c31164c2844bffefe643e53c56c5f08df99",
+      "medium": "english",
+      "subject": "chemistry",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 1,
+      "individualDistractorFlags": [
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-CHEM-UR-C12-M01",
+      "originalRevisionSha256": "bfe1ff5ceb431b1c87291893f65d1c6f715ee1d0cc7da1e4c926da5c719f5e7e",
+      "proposalSha256": "1a6d67737432288e684c2ec432ff5b16447c3ec1bf758861cb29051e6459bb5d",
+      "medium": "urdu",
+      "subject": "chemistry",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 1,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-CHEMISTRY-TECH-ENGLISH-C01-M01",
+      "originalRevisionSha256": "0cca4ecc6e6721b074bbe18e04760f08dd09fa034959b146236e9e10ac2fe122",
+      "proposalSha256": "22de27cd1613be64bb2d36c4920f1bb0c9af7e161aae5692ee25b22105769e38",
+      "medium": "english",
+      "subject": "chemistry-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 3,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-CHEMISTRY-TECH-ENGLISH-C03-M01",
+      "originalRevisionSha256": "dd722bfce37c0c1a6e4174a8dcad5477f1ae49892dc6ec47d9279939992b5e9c",
+      "proposalSha256": "04432481f4bf1b5a5020dda6625413180f5b9adc251307f13284cc0289036b4a",
+      "medium": "english",
+      "subject": "chemistry-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 1,
+      "individualDistractorFlags": [
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-CHEMISTRY-TECH-ENGLISH-C12-M01",
+      "originalRevisionSha256": "3efc8fba6c2d44990f628ad41958aca3c77ba12f5d5683438d7758e63c49ee4d",
+      "proposalSha256": "e0655826f35b3481b198f9087afaec539b06ce98169aa55203fba1fbaca3ebc6",
+      "medium": "english",
+      "subject": "chemistry-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 1,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-CHEMISTRY-TECH-ENGLISH-C13-M01",
+      "originalRevisionSha256": "fbe860743089f9db951077795a5a677971eab34cfa15ffde5982131ba411dbdd",
+      "proposalSha256": "97b4a7eec9cba114717d68f81c6550a83f89f51a06714f6a80e5e5b281b80b4a",
+      "medium": "english",
+      "subject": "chemistry-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 1,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-CHEMISTRY-TECH-URDU-C01-M01",
+      "originalRevisionSha256": "5813d9a663a98895ebc0b47705b1c22b28f73d8103a23a74e5e97edd0b494c09",
+      "proposalSha256": "9a99a4c257b237d691c62beafe2ec9e5bf9533cb7cb4b65245d78f7036d9c2e4",
+      "medium": "urdu",
+      "subject": "chemistry-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 1,
+      "individualDistractorFlags": [
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-CHEMISTRY-TECH-URDU-C03-M01",
+      "originalRevisionSha256": "9933ae831d3d3ad3dbba4f2ae13af0ae4fa8a27cffbdb8f5e5d6f64db8999772",
+      "proposalSha256": "cd51edbcf2f66130d278a06c062b963db7fc619e8c47648cb285927b1dacd091",
+      "medium": "urdu",
+      "subject": "chemistry-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 2,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-CHEMISTRY-TECH-URDU-C12-M01",
+      "originalRevisionSha256": "8f4a2ae19f9ee6b4193f04c698fab4e5dcb19f6ecc25e64b5b6ac2dcedbf0ad4",
+      "proposalSha256": "eae03a6a2658d103e494cb8629f1adb85f0fbafe9e3b6a53682cf0af02f38e12",
+      "medium": "urdu",
+      "subject": "chemistry-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 1,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-CHEMISTRY-TECH-URDU-C13-M01",
+      "originalRevisionSha256": "71af4d5a9f4face3c4580347f2cff426068e71a1188b9b7a55936edb46de51c7",
+      "proposalSha256": "93669d126d6207931c6193f2ff2412c6ab3a408f1813c062ae97dd962cf92a7d",
+      "medium": "urdu",
+      "subject": "chemistry-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 1,
+      "individualDistractorFlags": [
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": true,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-COMP-U07-M02",
+      "originalRevisionSha256": "cffd66ec7fdeb2fb085c10046d168b72245a0b6f3fb2f766e70c073559052c27",
+      "proposalSha256": "9493fb2364553dcfc4fc160f7fac79ae19e943e23c17c0780be184f5f3424de5",
+      "medium": "english",
+      "subject": "computer",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 1,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-COMP-U10-M01",
+      "originalRevisionSha256": "5cb6100dfe325aedaa72a8b742412cd7dc059cb143841d3e7e8421da516a3ef9",
+      "proposalSha256": "f24360fd531b6146274f30a2b7057112f4afea254fa9f580d27f9a6608bd20a8",
+      "medium": "english",
+      "subject": "computer",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 3,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-COMP-U12-M01",
+      "originalRevisionSha256": "e131f172e3275e00041141fcd45558ebb5a496017d23cb1ee5ee2e52fa4240d5",
+      "proposalSha256": "18234a6569ef1406f7c3109bfe08bb5bab500e36c0c8253adf60375b27acecab",
+      "medium": "english",
+      "subject": "computer",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 0,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-COMPENT-TECH-ENGLISH-C10-I01",
+      "originalRevisionSha256": "c9dab69230ed4b8a1337a800cadaea307750d96dec107ca1fae591d9419d88e2",
+      "proposalSha256": "1a4925f6818368920ba91b2aaaa9dfe8702b6d1791336ea2d4175414f76b0a5b",
+      "medium": "english",
+      "subject": "computer-science-entrepreneurship-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 0,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-COMPENT-TECH-URDU-C01-I01",
+      "originalRevisionSha256": "b78e835260c1d5c2b6e28643e4a7f8f60ad0503ed692f7bfea470ee211c73e66",
+      "proposalSha256": "90b9a5e6beb2e568a11e5cd9a5fb982036c035888224905f21d07176e070e73f",
+      "medium": "urdu",
+      "subject": "computer-science-entrepreneurship-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 2,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-COMPENT-TECH-URDU-C10-I01",
+      "originalRevisionSha256": "5dfd4caa156402174b9c3ad1c9dd9b5424818639b29c82f1bc6e8e7e88051e62",
+      "proposalSha256": "d40f05fa80c43a4a2b814a8a503563a17312a58b861cb19ebc87eefe665cd3b3",
+      "medium": "urdu",
+      "subject": "computer-science-entrepreneurship-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 0,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-FASH-C01-M01",
+      "originalRevisionSha256": "02af41a3df064cc0a0c8bc087ecc2d7204fd8adec9b94ee555fb7d04a5990819",
+      "proposalSha256": "892279980e6d1656f5e2feeccc7ebb4e86dab67ac771740ceecda2d9bf69ba2c",
+      "medium": "english",
+      "subject": "fashion-designing-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 2,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": true,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-FASH-C05-M01",
+      "originalRevisionSha256": "7ac1512d7201a6c4f48cb2b2d6831a39ce3e3f8543d654885aecc7b8c715db7f",
+      "proposalSha256": "74835e0005eb56d37fdf37906e1b92ba0de910b311b0c03507e562d1b4911c34",
+      "medium": "english",
+      "subject": "fashion-designing-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 2,
+      "individualDistractorFlags": [
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": true,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-FASH-C07-M01",
+      "originalRevisionSha256": "92431ab8b2ded5a355b2f82af9a482ad30bfc634751ee8ec6747fdf195774f29",
+      "proposalSha256": "fa83c080a5b644d5c4e86d278cdc78bd77aa70e6da859d70f8ee0474d374bee8",
+      "medium": "english",
+      "subject": "fashion-designing-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 0,
+      "individualDistractorFlags": [
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-FASH-C08-M02",
+      "originalRevisionSha256": "f2263d4ee3c523c6d2b1b994cb0b795603d479f1d8c8b03eaf7bea78687fdea5",
+      "proposalSha256": "ba7a319777ebb31eaabaeb0820bba35f001aa43adc079bf02954b15f708cef50",
+      "medium": "english",
+      "subject": "fashion-designing-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 2,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-FASH-C09-M01",
+      "originalRevisionSha256": "c22755f706fb7edbc18ad8343084e0cf0c93372baa8dd44316bfecb0a6987a44",
+      "proposalSha256": "ae782cda6c964b50d451b46b2414cee8b0746de373cfb7cc2297ad166b365f64",
+      "medium": "english",
+      "subject": "fashion-designing-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 2,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": true,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-GENSCI-TECH-ENGLISH-C05-I01",
+      "originalRevisionSha256": "ab988264bab2c7fab12e9a58d9f6d10b75fcf2e1f806b2c0d3914dde7e980b9d",
+      "proposalSha256": "61fc285c90c69ce72723bc2e5ee727c7d5d3201cdaf33dd9731276aabbfa94b2",
+      "medium": "english",
+      "subject": "general-science-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 1,
+      "individualDistractorFlags": [
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-GENSCI-TECH-ENGLISH-C10-I01",
+      "originalRevisionSha256": "5b2058bd33da6e865b7b5cf0c80b2dbc8b79dbf5ec92157e92d393f2959c45f4",
+      "proposalSha256": "e3f17b79b5cadbdf88d3269e03e2ca73f52e5e2da345ddeb3c4a721acb426e67",
+      "medium": "english",
+      "subject": "general-science-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 2,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-GENSCI-TECH-ENGLISH-C11-I01",
+      "originalRevisionSha256": "9d12b673c98699b3ded439caed0da406526a24bc4bb74f87049c4f921f3311bb",
+      "proposalSha256": "5bb99cdd73a15b3db9c5523c9e527fa6fe71c3428f8630b31b7350c1bb7fcbdf",
+      "medium": "english",
+      "subject": "general-science-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 2,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-GENSCI-TECH-URDU-C01-I01",
+      "originalRevisionSha256": "c56864fc3284aec0b46df1f15d273fcfea51d98ef56858144b898ef5da9d384f",
+      "proposalSha256": "6c131b9d48f48fc085026384c7390e9260e358a8aecf4c6207d0cb2822eafb39",
+      "medium": "urdu",
+      "subject": "general-science-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 3,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-GENSCI-TECH-URDU-C09-I01",
+      "originalRevisionSha256": "0585c1438d295a9bad13b8d77b1670a7a8a508fbb54a1657b00f5953c19a9dec",
+      "proposalSha256": "6b7b9119df5b993aaae0cc0371c00eefcb1094bb87044893d5d3d1d27e787991",
+      "medium": "urdu",
+      "subject": "general-science-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 2,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-GENSCI-TECH-URDU-C10-I01",
+      "originalRevisionSha256": "5bb81f35978d1206b805654551087f7dc626c78335f487f716a26152b2e10c70",
+      "proposalSha256": "3f552cbb96cf1728e9d769f94eec96f5758885f7b307bdd63f23be3737fd3056",
+      "medium": "urdu",
+      "subject": "general-science-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 2,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": true,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-GENSCI-TECH-URDU-C11-I01",
+      "originalRevisionSha256": "7aed02ec274c19a4fdf9976fedb027f7fea91772843cae30af76600a72efc4ca",
+      "proposalSha256": "4a79a6235f5d4519868bf0ebf3bd8e9b17b51838aa15a3d68d2c7c35ad0f9a53",
+      "medium": "urdu",
+      "subject": "general-science-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 3,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": true,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-HS-C03-M02",
+      "originalRevisionSha256": "2b3c567214cfa39a91f2192f761b100a9adf28ea5aed21b2ca6a973ea8f7bddd",
+      "proposalSha256": "e1f3aae92ab6cf3e601f2f2b8d34638f9577a1e4ac40d68445dcdfe243090cbb",
+      "medium": "english",
+      "subject": "health-sciences-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 2,
+      "individualDistractorFlags": [
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-HS-C06-M01",
+      "originalRevisionSha256": "870b4d57bb9d9b9818a407a3584f038ecbaea9a042cd63b3df69476422dbcc58",
+      "proposalSha256": "eb2c12deb6ad8c99e8b3ca88fd06a13b3a007be7a5f0fc85af63c57343a30b9f",
+      "medium": "english",
+      "subject": "health-sciences-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 2,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-HS-C07-M02",
+      "originalRevisionSha256": "aff887ec481d39ed3ad2eb19a367a6d1dcdaa87cf20c43b6395243794e7ae4a0",
+      "proposalSha256": "553b2f525e1895f267b9590e5f17c12396909a2f7694fe555b15ec794eb88143",
+      "medium": "english",
+      "subject": "health-sciences-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 1,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": true,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-HS-C08-M02",
+      "originalRevisionSha256": "6cca091f43c48c19a31b61da9bf0a500f89db8ac099263280edc9d8a7c60a455",
+      "proposalSha256": "4e01b78b797229b094d8c6aadcee290626308b72a86b15c769aa3f5afd2428ce",
+      "medium": "english",
+      "subject": "health-sciences-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 3,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": true,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-ICT-C03-M02",
+      "originalRevisionSha256": "217d4ae2db645b9d4ad668ec799e16faf5f677364b3569adf7b874987f6a104c",
+      "proposalSha256": "4122a43940d961599a558c0679bb38fdfbccc8dd8aaa64ab55f7ce1038440b69",
+      "medium": "english",
+      "subject": "ict-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 2,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-ISL-U07-M01",
+      "originalRevisionSha256": "c33d2cdbee14f3069970e3b9583463f64dafb416e7d8ef85e59978e55ccbbc1f",
+      "proposalSha256": "6eb2265da6202c23a303e41ff568b617ab1188332e8c03de92f0d92ad7063ba3",
+      "medium": "urdu",
+      "subject": "islamiat",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 2,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-PHT-U-C07-M01",
+      "originalRevisionSha256": "ef37c30802d8dc6df78e5698cb51937299676f06ce7b986838b3092b04ea425c",
+      "proposalSha256": "07a70981a16f4d9688c4be103a31e0668b184e71669756a8affe320a5e4962da",
+      "medium": "urdu",
+      "subject": "physics-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 3,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-PHT-U-C08-M02",
+      "originalRevisionSha256": "e023fad7fdf6e1c623a33f911828d45c0a433bf9f99ef19807fcc5d84a3ff918",
+      "proposalSha256": "85be309741023ff736fd68008f5238832389de41048bc28aff193e747a8cdeff",
+      "medium": "urdu",
+      "subject": "physics-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 3,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-PHY-2025-C07-M01",
+      "originalRevisionSha256": "03356fcde0b7173d1382cbf24ffc1c0303d9aa9e38b8519c0b8e5a441c15abbb",
+      "proposalSha256": "71f42d70ff58fd328eb8f6dc0d2a391fae9020990b97b240518f0b24e11332a2",
+      "medium": "english",
+      "subject": "physics",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 1,
+      "individualDistractorFlags": [
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "IX-PHY-UR-C07-M01",
+      "originalRevisionSha256": "bbabe6e71ce976113122af6746684aacb4b2fd258fa41c3cf8379481fbcb7297",
+      "proposalSha256": "61bf63ad324be967c068d88ec3f78fa50a794d1f036e02386df18704d9914789",
+      "medium": "urdu",
+      "subject": "physics",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 3,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "X-BIO-2026-C06-B02-M01",
+      "originalRevisionSha256": "1fbfc5891b00f4d234b4f40ddbcbe8ac1d189775dab5ad535b88eff3b130276e",
+      "proposalSha256": "53b83444672846f36ac0634a1df2cb9898355326f696afcbd652699fdc287005",
+      "medium": "english",
+      "subject": "biology",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 1,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": true,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "X-BIO-2026-C08-B02-M01",
+      "originalRevisionSha256": "6ca986e14fe1c7362a3be6561a018111e002f485bfe176058ca04a541d523787",
+      "proposalSha256": "3d8419c08a9d0296bdd7e3319385bcfb1ac4697fa05d532fcf2c429d3ca15abc",
+      "medium": "english",
+      "subject": "biology",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 2,
+      "individualDistractorFlags": [
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": true,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "X-BIO-TECH-C07-M01",
+      "originalRevisionSha256": "52e641bac523e3a07a93bbaa3c28684637d849fa1a7e1f3669fdb2a41aa124b7",
+      "proposalSha256": "f98a23ea5898113bc58e187f6a594bc2aea28fa95d979261cea073ddd89286b4",
+      "medium": "english",
+      "subject": "biology-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 3,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "X-BIO-UR-C10-M02",
+      "originalRevisionSha256": "718a7c704a89303e317660f96d49a1481ffaf38a9221e784f020b742ff5fecda",
+      "proposalSha256": "7515e2eece979ac8d398e88528fa88b63c6ee77d7358fc381e09878426907b11",
+      "medium": "urdu",
+      "subject": "biology",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 3,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "X-CHEM-C18-M01",
+      "originalRevisionSha256": "bdb53683b8ada2c2fa3f4a3b433d57f16f2598b31d140830544667fc6ad008d3",
+      "proposalSha256": "78bea2d1c238374028d97c3a04f73e6342d6c5570e1ef170214f5cae6ee043a7",
+      "medium": "english",
+      "subject": "chemistry",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 3,
+      "individualDistractorFlags": [
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "X-CHEM-C25-M02",
+      "originalRevisionSha256": "d4004a78533fafad4bb8fc11f015b189e009a84b66febea0d1f7b182822324d5",
+      "proposalSha256": "50697c06256535691b65dd62566ba6b2962c94f7669375525b0b78f5f6869fc4",
+      "medium": "english",
+      "subject": "chemistry",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 2,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "X-COMMS-TECH-C08-M01",
+      "originalRevisionSha256": "944e35af6c0281a5f438e6990e7ea9a70d37b3c241cb2c8688ea38da2fa947aa",
+      "proposalSha256": "932ceae4670f6dd1b205f086d3e0b30ddb2db0482297273d1031b54887aac3ea",
+      "medium": "english",
+      "subject": "communication-skills-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 1,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "X-COMMS-TECH-C09-M01",
+      "originalRevisionSha256": "e504642af6f524fd3d8735cae335db5fc945753afdd2c0681b960b9e21ff311f",
+      "proposalSha256": "fc6184a10b2fe0540dc127952a243d097a5e2e13c46f44051fb9530a2b1409e6",
+      "medium": "english",
+      "subject": "communication-skills-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 3,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "X-COMP-C02-M01",
+      "originalRevisionSha256": "8129ef5a87f46c0cd26ac633403d9153274929aadb94c7193a73c65e6695e9d1",
+      "proposalSha256": "bed2c8e24efa3866c2cfd34ba0221c740d5c5285ee405d37c3c695c57e6170a0",
+      "medium": "urdu",
+      "subject": "computer-science",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 1,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "X-COMP-C06-M01",
+      "originalRevisionSha256": "3e3eea8e400a4b9de4b8d1363fcc341226331cefa4edf08d8de061ae66ca7921",
+      "proposalSha256": "0ee9beb032dbf67ee6389f2866969eb2259ed3abbb314c8a4b698cd660b20506",
+      "medium": "urdu",
+      "subject": "computer-science",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 3,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": true,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "X-COMP-C07-M02",
+      "originalRevisionSha256": "38f8af109940997b174e7572a679e6a0d674724333c675b4d3c5ef49682603c4",
+      "proposalSha256": "09d16e1ebd81b9bd30f930cf9a3fc0ce346cddd6b25078cb9aa43b5936df777d",
+      "medium": "urdu",
+      "subject": "computer-science",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 0,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": true,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "X-COMP-U01-M01",
+      "originalRevisionSha256": "d835fcb53369851f51eeffcf11c8dc0d43b05fac93a93e7a1f496c5d4f35d66e",
+      "proposalSha256": "2acde3339da4e369b1fe10bfab1e81013fe49e13453041d5428853b2d6a36237",
+      "medium": "english",
+      "subject": "computer-science",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 1,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": true,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "X-COMP-U07-M02",
+      "originalRevisionSha256": "240781a0ee27e5b3010a02cc533609a38ae1595c47e7749c0b3056e11229c75c",
+      "proposalSha256": "1a61325c99cf633a5048746303a3b8e1ca6c027c15f3f5d9d2581c1e68e7d0d6",
+      "medium": "english",
+      "subject": "computer-science",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 2,
+      "individualDistractorFlags": [
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "X-HS-TECH-C14-M01",
+      "originalRevisionSha256": "49d26900c26c3af5dfa8c5383a671758410594e67ca3cae52f2de5cd2f9d3b06",
+      "proposalSha256": "c4da95669366e3de1b30060eb0ba3c1a6539a69a2421bad6d99b993eeaaf4bfe",
+      "medium": "english",
+      "subject": "health-sciences-tech",
+      "sourceReferenceCorrectHasAbsoluteCue": true,
+      "distractorsWithAbsoluteCue": 3,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "X-MATH-C10-M01",
+      "originalRevisionSha256": "f95e1e3591c7e1fb0be32a3538f5a36049552dbe8b1b6ea7a4896a3e95bc1320",
+      "proposalSha256": "b615a446300d86e4e3ceebfddf679a18e594144751ea04340b04aca67c02a072",
+      "medium": "english",
+      "subject": "mathematics",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 0,
+      "individualDistractorFlags": [
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "X-PAK-UR-C01-M01",
+      "originalRevisionSha256": "0aeb1985f9128a6b5cdb290f88f5c00bcf037a238cbd21a69ecbbfa3fecbc428",
+      "proposalSha256": "62393cd99eca4feffde056d99bb7e50773185902c6edae9f7da9372a63ae89a4",
+      "medium": "urdu",
+      "subject": "pakistan-studies",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 2,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "B",
+          "lexicalAbsoluteCue": true
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": true
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": true,
+      "correctOptionStrictlyLongest": false,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    },
+    {
+      "originalId": "X-PAK-UR-C08-M02",
+      "originalRevisionSha256": "b4eed6e623053cb5b69f6704079fe6058b9165b96449eeb586a4ebd9fb87faeb",
+      "proposalSha256": "10183883d572a1aa4e3401a909bf662e934a49274cabd77ffa6047113c319da5",
+      "medium": "urdu",
+      "subject": "pakistan-studies",
+      "sourceReferenceCorrectHasAbsoluteCue": false,
+      "distractorsWithAbsoluteCue": 0,
+      "individualDistractorFlags": [
+        {
+          "option": "A",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "C",
+          "lexicalAbsoluteCue": false
+        },
+        {
+          "option": "D",
+          "lexicalAbsoluteCue": false
+        }
+      ],
+      "multipleIncorrectOptionsCarryExclusiveOrAbsolutePhrasing": false,
+      "correctOptionStrictlyLongest": true,
+      "questionNeedsRealSourceAndMeaningReview": true,
+      "sourceAnswerCorrectnessAndTranslationNotVerified": true,
+      "academicallyApproved": false,
+      "published": false
+    }
+  ]
+}

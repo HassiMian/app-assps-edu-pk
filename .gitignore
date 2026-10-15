@@ -26,3 +26,6 @@ uploads/
 *.sql.gz
 runtime/server-snapshots/
 al-siddique-backend/node_modules
+
+# Private, permission-restricted faculty review printouts. NEVER commit these files.
+.assps-private-reviews/
