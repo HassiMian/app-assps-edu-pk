@@ -105,6 +105,15 @@ jobs:
         run: node --test al-siddique-frontend/src/Modules/Paper-Generator/tests/printMarksLedgerParity.test.mjs
       - name: Preserve Grade IX/X verified Paper Workspace authorization bridge
         run: node --test al-siddique-frontend/src/Modules/Paper-Generator/grade910PaperWorkspaceVerifiedBridge.test.mjs
+      - name: Install headless browser for protected Diary and Marks acceptance
+        run: npx playwright install --with-deps chromium
+        working-directory: al-siddique-frontend
+      - name: Verify saved Marks Register, zero-versus-blank and denied printing
+        run: node --test src/Modules/examination/tests/MarksRegisterBrowser.test.js
+        working-directory: al-siddique-frontend
+      - name: Verify Diary exact-scope Save Reopen and cross-tenant denial in Chromium
+        run: node --test src/Modules/Paper-Generator/PaperEditor/tests/dailyDiaryExplicitReopenBrowser.test.js
+        working-directory: al-siddique-frontend
       - name: Verify safe rollout and original source boundaries
         run: python3 -m unittest discover -s ops/release/tests -p test_lesson_rollout_guard.py -v
       - name: Require all three Paper Studio routes to survive real postflight

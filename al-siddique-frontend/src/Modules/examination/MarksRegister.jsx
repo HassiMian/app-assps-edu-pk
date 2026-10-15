@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Eye, Printer, RefreshCw, Search, Pencil, ShieldCheck, FileSpreadsheet, ArrowRight, AlertCircle } from 'lucide-react'
 import api from '../../services/api'
@@ -20,7 +20,6 @@ const stableName = row => text(row?.student_name || row?.name || row?.student_id
 const classKey = row => text(row?.class || row?.student_class)
 const sectionKey = row => text(row?.section || row?.student_section)
 const idKey = row => text(row?.student_id)
-const rowKey = row => idKey(row)+'|'+text(row?.subject).toLocaleLowerCase()
 function sortStudents(a,b) {
  const c=classKey(a).localeCompare(classKey(b),undefined,{numeric:true})
  if(c) return c
@@ -78,6 +77,21 @@ export default function MarksRegister(){
  const [search,setSearch]=useState('')
  const request=useRef(0)
  const [refreshSeq,setRefreshSeq]=useState(0)
+ // Immediately discard stale exam data before starting a different authorized read.
+ // The request epoch rejects responses from previous selections or refreshes.
+ const selectExam=useCallback(id=>{
+  request.current++
+  setRows([]);setError('')
+  setClassFilter('');setSectionFilter('');setSubjectFilter('')
+  setLoading(Boolean(id))
+  setExamId(id)
+ },[])
+ const refreshMarks=()=>{
+  if(!examId)return
+  request.current++
+  setRows([]);setError('');setLoading(true)
+  setRefreshSeq(x=>x+1)
+ }
 
  useEffect(()=>{
   let live=true
@@ -85,15 +99,13 @@ export default function MarksRegister(){
    if(!live)return
    if(!Array.isArray(r.data?.data))throw new Error('Exam catalog unavailable.')
    setExams(r.data.data)
-   setExamId(text(r.data.data[0]?.id))
+   selectExam(text(r.data.data[0]?.id))
   }).catch(err=>live&&setError(err?.response?.data?.message||err?.message||'Could not load exams.')).finally(()=>live&&setLoadingExams(false))
   return()=>{live=false}
- },[])
+ },[selectExam])
  useEffect(()=>{
   const token=++request.current
-  setRows([]);setError('');setClassFilter('');setSectionFilter('');setSubjectFilter('')
   if(!examId)return
-  setLoading(true)
   api.get('/api/exams/results',{params:{exam_ids:examId}}).then(r=>{
    if(token!==request.current)return
    if(!Array.isArray(r.data?.data))throw new Error('Saved marks response was invalid.')
@@ -130,12 +142,12 @@ export default function MarksRegister(){
   </div>
   <div className="mr-info"><ShieldCheck size={16}/> Read-only review never changes a student's saved score. Corrections use the protected marks workflow; an existing official score requires audited Principal revision.</div>
   <div className="mr-controls">
-   <label>Examination<select value={examId} onChange={e=>setExamId(e.target.value)} disabled={loadingExams}><option value="">Select examination</option>{exams.map(e=><option key={e.id} value={e.id}>{e.name} {e.session?'· '+e.session:''}</option>)}</select></label>
+   <label>Examination<select value={examId} onChange={e=>selectExam(e.target.value)} disabled={loadingExams}><option value="">Select examination</option>{exams.map(e=><option key={e.id} value={e.id}>{e.name} {e.session?'· '+e.session:''}</option>)}</select></label>
    <label>Class<select value={classFilter} onChange={e=>{setClassFilter(e.target.value);setSectionFilter('');setSubjectFilter('')}}><option value="">All classes</option>{classes.map(x=><option key={x}>{x}</option>)}</select></label>
    <label>Section<select value={sectionFilter} onChange={e=>{setSectionFilter(e.target.value);setSubjectFilter('')}}><option value="">All sections</option>{sections.map(x=><option key={x}>{x}</option>)}</select></label>
    <label>Subject<select value={subjectFilter} onChange={e=>setSubjectFilter(e.target.value)}><option value="">All subjects</option>{subjects.map(x=><option key={x}>{x}</option>)}</select></label>
    <label>Student / roll #<div className="mr-search"><Search size={15}/><input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search saved entries"/></div></label>
-   <button title="Refresh saved data" className="mr-icon" onClick={()=>setRefreshSeq(x=>x+1)} disabled={loading}><RefreshCw size={18}/></button>
+   <button title="Refresh saved data" className="mr-icon" onClick={refreshMarks} disabled={loading||!examId}><RefreshCw size={18}/></button>
   </div>
   {error&&<div className="mr-error"><AlertCircle size={17}/>{error}</div>}
   <div className="mr-stats">
