@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
-import { RefreshCw, Save, Search } from 'lucide-react'
+import { RefreshCw, Save, Search, Eye } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import api from '../../services/api'
 import { C, card, btnPrimary, btnSecondary, input, select, labelStyle, sectionHeader } from '../moduleStyles'
 import { usePaperStore } from '../Paper-Generator/usePaperStore'
@@ -21,6 +22,7 @@ function classLabel(value) {
 const normalizeClass = normalizeMarksClass
 
 export default function MarksSheet() {
+ const navigate = useNavigate()
  const { classNames, subjectsForClass } = useAcademicStore()
  const { paperSettings } = usePaperStore()
  const [exams, setExams] = useState([])
@@ -54,7 +56,10 @@ export default function MarksSheet() {
  const list = res.data.data.map(normalizeMarksExam)
  if (request !== examFetchSeq.current) return false
  setExams(list)
- const preferred = list.find(e => /\bfirst\s+term\b/i.test(e.name || '')) || list[0]
+ const params = new URLSearchParams(window.location.search)
+ const linked = list.find(e=>String(e.id)===params.get('exam_id'))
+ const preferred = linked || list.find(e => /\bfirst\s+term\b/i.test(e.name || '')) || list[0]
+ if(linked){setSelectedClass(params.get('class') || '');setSelectedSubject(params.get('subject') || '')}
  setSelectedExamType(old => old && list.some(e=>e.type===old) ? old : (preferred?.type || ''))
  setSelectedExamId(old => list.some(e=>String(e.id)===old) ? old : (preferred ? String(preferred.id) : ''))
  return true
@@ -299,6 +304,7 @@ export default function MarksSheet() {
  <p style={{ color: C.muted, marginTop: 8 }}>Select exam type, class, and subject, then add marks student by student.</p>
  </div>
  <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+ <button type="button" style={btnSecondary} onClick={()=>navigate('/exams/marks/review')}><Eye size={16} style={{marginRight:8,verticalAlign:'middle'}}/>View / Print Saved Marks</button>
  <button type="button" style={btnSecondary} onClick={refreshData} disabled={refreshing}>
  <RefreshCw size={16} style={{ marginRight: 8, verticalAlign: 'middle' }} />
  {refreshing ? 'Refreshing...' : 'Refresh Data'}

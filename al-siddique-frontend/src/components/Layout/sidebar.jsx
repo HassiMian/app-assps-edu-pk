@@ -76,6 +76,7 @@ const MENU_GROUPS = [
  { icon: Sparkles, label: 'Examinations', color: '#BF5AF2', roles: ROLE_SETS.academicStaff, permKey: 'exams_manage', children: [
  { label: 'Manage Exams', path: '/exams', roles: ROLE_SETS.academicStaff, permKey: 'exams_manage' },
  { label: 'Marks Entry', path: '/exams/marks', roles: ROLE_SETS.academicStaff, permKey: 'exams_marks' },
+ { label: 'View & Print Marks', path: '/exams/marks/review', roles: ROLE_SETS.academicStaff, permKey: 'exams_marks' },
  { label: 'Result Cards', path: '/exams/results', roles: ROLE_SETS.academicStaff, permKey: 'exams_results' },
  { label: 'Grade Setup', path: '/exams/grades', roles: ROLE_SETS.leadership, permKey: 'exams_grades' },
  ]},
