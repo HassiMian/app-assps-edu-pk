@@ -215,6 +215,7 @@ export function createManualAssessmentDocument({ paper = {}, config = {}, paperS
         return {originalQuestionId:ref.originalQuestionId,revision:ref.revision,
           questionSha:ref.questionSha,answerSha:ref.answerSha,
           publicationGrantSha:ref.publicationGrantSha,
+          tier:ref.tier||question?.verifiedAcademicRef?.tier||'approved',
           section:clone(section),question:question?clone(question):null}
       })
     }

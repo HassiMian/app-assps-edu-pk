@@ -76,7 +76,7 @@ async function withTenantTransaction(req, schoolId, fn) {
 }
 
 
-async function recheckVerifiedSnapshot({snapshot,storedHash,schoolId,req,lookup=query}) {
+async function recheckVerifiedSnapshot({snapshot,storedHash,schoolId,req,lookup=query,isRelease=false}) {
   // Manual and historical documents remain supported without claiming verified provenance.
   if (!snapshot?.academicVerifiedSelections) return {verifiedReferences:0}
   if (!snapshot || !storedHash || hashDocument(snapshot) !== String(storedHash)) {
@@ -86,7 +86,7 @@ async function recheckVerifiedSnapshot({snapshot,storedHash,schoolId,req,lookup=
     throw e
   }
   return assertVerifiedPaperDocument({
-    document:snapshot,schoolId,actor:req.user,lookup
+    document:snapshot,schoolId,actor:req.user,lookup,isRelease
   })
 }
 
@@ -105,7 +105,7 @@ async function recheckPrintJob({schoolId,printJobId,req,lookup=query}) {
     throw error
   }
   await recheckVerifiedSnapshot({snapshot:found.rows[0].snapshot_json,
-    storedHash:found.rows[0].content_hash,schoolId,req,lookup})
+    storedHash:found.rows[0].content_hash,schoolId,req,lookup,isRelease:true})
   return true
 }
 function respondVerifiedReadFailure(res,error,operation) {
@@ -179,7 +179,7 @@ router.post('/papers/:paperId/revisions', async (req, res) => {
   if (!Number.isInteger(expectedRevision) || expectedRevision < 0) return res.status(400).json({ success:false, message:'expectedRevision must be a non-negative integer.' })
   if (validationError) return res.status(400).json({ success:false, message:validationError })
   try{
-    await assertVerifiedPaperDocument({document,schoolId,actor:req.user,lookup:query})
+    await assertVerifiedPaperDocument({document,schoolId,actor:req.user,lookup:query,isRelease:false})
   }catch(error){
     return res.status(error.status||503).json({success:false,code:error.code||'CERTIFIED_RELEASE_CHECK_UNAVAILABLE'})
   }
@@ -270,7 +270,8 @@ router.post('/papers/:paperId/releases', async (req, res) => {
       // before irrevocably creating a finalized assessment release.
       await assertVerifiedPaperDocument({
         document:revision.document_json,schoolId,actor:req.user,
-        lookup:(sql,params)=>client.query(sql,params)
+        lookup:(sql,params)=>client.query(sql,params),
+        isRelease:true
       })
 
       const releaseId = safePublicId(release.releaseId) || `release-${publicId}-r${expectedRevision}`
@@ -340,7 +341,8 @@ router.post('/papers/:paperId/print-jobs', async (req, res) => {
         if (!parent) return { missingParent:true }
         await assertVerifiedPaperDocument({
           document:parent.signed_release_document,schoolId,actor:req.user,
-          lookup:(sql,params)=>client.query(sql,params)
+          lookup:(sql,params)=>client.query(sql,params),
+          isRelease:true
         })
         const inserted = (await client.query(
           `INSERT INTO assessment_print_jobs
@@ -380,7 +382,8 @@ router.post('/papers/:paperId/print-jobs', async (req, res) => {
       if (!release) return { missingRelease:true }
       await assertVerifiedPaperDocument({
         document:release.signed_release_document,schoolId,actor:req.user,
-        lookup:(sql,params)=>client.query(sql,params)
+        lookup:(sql,params)=>client.query(sql,params),
+        isRelease:true
       })
 
       let rosterSnapshotId = null

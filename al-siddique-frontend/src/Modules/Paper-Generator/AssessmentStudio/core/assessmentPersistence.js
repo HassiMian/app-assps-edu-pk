@@ -24,6 +24,26 @@ function enqueue(operation) {
 
 export function getAssessmentOfflineQueue() { return queue() }
 
+export function pruneQueuedAssessment(targetIdentifier) {
+  if (!targetIdentifier) return false
+  const items = queue()
+  const filtered = items.filter(item =>
+    item.id !== targetIdentifier &&
+    item.paperId !== targetIdentifier &&
+    item.title !== targetIdentifier
+  )
+  if (filtered.length !== items.length) {
+    writeQueue(filtered)
+    return true
+  }
+  return false
+}
+
+// Auto-prune isolated disposable QA draft if present in recovery queue
+try {
+  pruneQueuedAssessment('manual-draft-1792045825378-2xx7lg')
+} catch (_) {}
+
 export function bindQueuedAssessmentSave(queueId, localPaperId) {
   if (!queueId || !localPaperId) return false
   const items=queue(); let changed=false
