@@ -4,7 +4,7 @@
 // inherits AI queue/global directory/audit tables from apex_app_runtime.
 // Blue/legacy behaviour stays unchanged unless signed Green is explicitly on.
 const { Pool } = require('pg')
-const { query: legacyQuery } = require('../../config/database')
+// Load Blue database only in Blue; Green must not inherit canonical tenant credentials.
 
 const signedGreen = process.env.DB_SIGNED_TENANT_RLS_ENABLED === 'true'
 let aiPool = null
@@ -41,7 +41,7 @@ function validatedConfig(env = process.env) {
 }
 
 async function workerQuery(statement, parameters) {
-  if (!signedGreen) return legacyQuery(statement, parameters)
+  if (!signedGreen) return require('../../config/database').query(statement, parameters)
   const config = validatedConfig()
   if (!aiPool) {
     const { workerRole, ...options } = config
