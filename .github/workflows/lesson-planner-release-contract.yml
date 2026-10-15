@@ -16,6 +16,7 @@ on:
       - "ops/release/check-preserved-companion-features.py"
       - "ops/release/verify-diary-controls-in-active-bundle-20261015.cjs"
       - "ops/release/verify-marks-register-ui-20261015.cjs"
+      - "ops/release/signed-bluegreen/nginx/**"
       - "al-siddique-backend/src/routes/examRoutes.js"
       - "al-siddique-backend/src/services/examOfficialMarksRevision.js"
       - "al-siddique-backend/migrations/034_exam_marks_revision_history.js"
@@ -48,6 +49,7 @@ on:
       - "ops/release/check-preserved-companion-features.py"
       - "ops/release/verify-diary-controls-in-active-bundle-20261015.cjs"
       - "ops/release/verify-marks-register-ui-20261015.cjs"
+      - "ops/release/signed-bluegreen/nginx/**"
       - "al-siddique-backend/src/routes/examRoutes.js"
       - "al-siddique-backend/src/services/examOfficialMarksRevision.js"
       - "al-siddique-backend/migrations/034_exam_marks_revision_history.js"
@@ -94,6 +96,8 @@ jobs:
         run: ASSPS_DIARY_CANDIDATE_DIST=al-siddique-frontend/dist node --test ops/tests/paper-diary-active-controller-immutable-release-gate-20261015.test.cjs
       - name: Verify saved-marks register and printable sheets from active router
         run: node ops/release/verify-marks-register-ui-20261015.cjs --dist al-siddique-frontend/dist
+      - name: Block marks-read cross-backend 401 logout loop in release ingress
+        run: python3 ops/release/signed-bluegreen/nginx/test-marksonly-ingress-contract-20261011.py -v
       - name: Reject absent-or-orphan marks review and print bundles
         run: ASSPS_MARKS_REGISTER_DIST=al-siddique-frontend/dist node --test ops/tests/marks-register-live-nonregression.test.cjs
       - name: Verify principal-only immutable exam-mark correction contract (source-only)

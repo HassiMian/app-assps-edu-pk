@@ -151,6 +151,16 @@ def main():
     companions=companion_module.evaluate(repo,companions_contract,dist)
     # Protect current production Exam Marks Review and printable sheets.
     # Old branches with no reachable MarksRegister UI must not replace live.
+    # Authentication must be verified by the same backend that issued login.
+    # Prevent an older marks-green GET canary from invalidating whole sessions.
+    ingress=repo/'ops/release/signed-bluegreen/nginx/test-marksonly-ingress-contract-20261011.py'
+    ingress_check=run(['python3',str(ingress)])
+    if ingress_check.returncode!=0:
+        raise RuntimeError('FAIL_CLOSED: Marks Review GET authentication upstream regression: '
+                           +(ingress_check.stderr or ingress_check.stdout).strip()[:500])
+    ingress_live=Path('/etc/nginx/conf.d/assps-firstterm-app-maps.conf')
+    if ingress_live.exists() and ingress_live.read_text().count('GET     $assps_marks_legacy_upstream;')!=3:
+        raise RuntimeError('FAIL_CLOSED: live marks GET route diverges from login-compatible backend')
     marks_guard=HERE/'verify-marks-register-ui-20261015.cjs'
     marks_check=run(['node',str(marks_guard),'--dist',str(dist)])
     if marks_check.returncode!=0:
