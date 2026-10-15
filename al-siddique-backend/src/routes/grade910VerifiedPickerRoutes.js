@@ -4,6 +4,7 @@ const {protect,requireRoles}=require('../middleware/auth')
 const {query}=require('../config/database')
 const {eligible}=require('../services/grade910VerifiedPublicationContract')
 const {requireSignedSchool}=require('../services/grade910SignedSchoolGate')
+const {rowBelongsToRequest}=require('../services/grade910PickerResponseScope')
 const HASH=/^[0-9a-f]{64}$/
 function session(req){
  const id=Number(req.user?.id),school=Number(req.user?.school_id)
@@ -58,7 +59,10 @@ async function picker(req,res,exact=false){
  ORDER BY p.original_question_id ASC,p.question_revision DESC LIMIT $${bind+1}`
  try {
   const db=await query(sql,params)
-  const safe=(db.rows||[]).filter(eligible).map(r=>({
+  const request={grade,subject,exact,originalQuestionId:requested,
+      revision,questionSha:sha}
+  const safe=(db.rows||[]).filter(r=>
+    rowBelongsToRequest(r,actor,request)&&eligible(r)).map(r=>({
    originalQuestionId:r.original_question_id,revision:Number(r.question_revision),
    questionSha:r.question_sha,answerSha:r.answer_sha,
    grade:Number(r.grade),subject:r.subject,medium:r.medium,
@@ -81,3 +85,4 @@ router.get('/resolve-revision',(req,res)=>picker(req,res,true))
 module.exports=router
 module.exports.eligible=eligible
 module.exports.session=session
+module.exports.rowBelongsToRequest=rowBelongsToRequest

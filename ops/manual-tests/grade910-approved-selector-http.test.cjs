@@ -40,6 +40,13 @@ const row=(overrides={})=>{
  r.publication_signature_base64=crypto.sign(null,publicationMessage(r),ephemeral.privateKey).toString('base64')
  return {...r,...overrides}
 }
+// Sign post-mutation test fixtures so a properly signed peer-school publication
+// still fails the RESPONSE-SIDE tenant/grade/subject/revision boundary.
+const authenticallySigned=(overrides={})=>{
+ const r={...unsignedRow(),...overrides}
+ r.publication_signature_base64=crypto.sign(null,publicationMessage(r),ephemeral.privateKey).toString('base64')
+ return r
+}
 let responseRows=[]
 const dbPath=require.resolve('../../al-siddique-backend/src/config/database')
 require.cache[dbPath]={id:dbPath,filename:dbPath,loaded:true,exports:{query:async(sql,args)=>{
@@ -94,6 +101,27 @@ test('actual HTTP picker enforces school, teacher assignment SQL, immutable reso
  assert.equal(resolved.status,200);assert.equal((await resolved.json()).records.length,1)
  assert.match(SQL.at(-1).sql,/p\.question_revision=/)
  assert.equal((await fetch(base+'/resolve-revision?grade=9&subject=Biology&revision=7&questionSha='+sha(payload.finalQuestion),{headers:{'x-qa-role':'principal'}})).status,422)
+ for(const signedMismatch of [
+   authenticallySigned({school_id:2}),
+   authenticallySigned({grade:10}),
+   authenticallySigned({subject:'Physics'})]){
+  assert.equal(eligible(signedMismatch),true)
+  responseRows=[signedMismatch]
+  const response=await fetch(base+'/approved-only?grade=9&subject=Biology',{
+   headers:{'x-qa-role':'principal'}})
+  assert.equal(response.status,200)
+  assert.equal((await response.json()).verifiedCount,0)
+ }
+ const differingId='IX-BIO-02'
+ const signedOtherRevision=authenticallySigned({
+  original_question_id:differingId,
+  paper_payload:{...payload,originalQuestionId:differingId}})
+ assert.equal(eligible(signedOtherRevision),true)
+ responseRows=[signedOtherRevision]
+ const exactReplay=await fetch(base+'/resolve-revision?grade=9&subject=Biology&originalQuestionId=IX-BIO-01&revision=7&questionSha='+sha(payload.finalQuestion),{
+  headers:{'x-qa-role':'principal'}})
+ assert.equal(exactReplay.status,200)
+ assert.equal((await exactReplay.json()).verifiedCount,0)
  responseRows=[]
  const peer=await fetch(base+'/approved-only?grade=9&subject=Biology&section=Usman',{headers:{'x-qa-role':'other'}})
  assert.equal(peer.status,200);assert.equal((await peer.json()).verifiedCount,0)
