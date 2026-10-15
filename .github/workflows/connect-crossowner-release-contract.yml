@@ -1,0 +1,27 @@
+name: Connect cross-owner release evidence contracts
+on:
+  push:
+    paths:
+      - 'ops/connect/verify_joint_frontend_connect_core_20261015.py'
+      - 'ops/connect/test_verify_joint_frontend_connect_core_20261015.py'
+      - '.github/workflows/connect-crossowner-release-contract.yml'
+  pull_request:
+    paths:
+      - 'ops/connect/verify_joint_frontend_connect_core_20261015.py'
+      - 'ops/connect/test_verify_joint_frontend_connect_core_20261015.py'
+      - '.github/workflows/connect-crossowner-release-contract.yml'
+permissions:
+  contents: read
+jobs:
+  fail-closed-source-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify synthetic negative release contracts
+        run: python3 -m unittest discover -v -s ops/connect -p 'test_verify_joint_frontend_connect_core_20261015.py'
+      - name: Compile preflight without external services
+        run: python3 -m py_compile ops/connect/verify_joint_frontend_connect_core_20261015.py
