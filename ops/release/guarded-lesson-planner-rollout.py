@@ -40,7 +40,7 @@ HTML_ROOT_RE = re.compile(r'^([ \t]*root[ \t]+)(/var/www/assps-[^\s;]+)(;[ \t]*)
 
 def verify_full_paper_studio_postflight(dist, repo, lesson_checker, lesson_contract,
                                         companion_checker, companion_contract,
-                                        diary_guard, runner=None):
+                                        diary_guard, runner=None, marks_guard=None):
     """Fail closed if promoted Diary, Term/Weekly/Daily Lesson or Early Years regresses."""
     if runner is None:
         runner = run
@@ -52,6 +52,8 @@ def verify_full_paper_studio_postflight(dist, repo, lesson_checker, lesson_contr
         raise RuntimeError('FAIL_CLOSED: Early Years / Diary companion contract failed postflight')
     if runner(['node', str(diary_guard), '--dist', str(dist)]).returncode != 0:
         raise RuntimeError('FAIL_CLOSED: active Diary controller contract failed postflight')
+    if marks_guard is not None and runner(['node', str(marks_guard), '--dist', str(dist)]).returncode != 0:
+        raise RuntimeError('FAIL_CLOSED: active Marks Register View/Edit/Print contract failed postflight')
     return True
 
 
@@ -171,6 +173,11 @@ def main():
     diary_guard=HERE/'verify-diary-controls-in-active-bundle-20261015.cjs'
     if run(['node',str(diary_guard),'--dist',str(dist)]).returncode!=0:
         raise RuntimeError('FAIL_CLOSED: active Diary controller import graph incomplete in release candidate')
+    # Preserve the live institutional Marks Register View/Edit/Print route.
+    # Never declare whole-system readiness based on a Diary-only frontend.
+    marks_guard=HERE/'verify-marks-register-active-bundle-20261015.cjs'
+    if run(['node',str(marks_guard),'--dist',str(dist)]).returncode!=0:
+        raise RuntimeError('FAIL_CLOSED: active Marks Register review/print import graph incomplete')
     newroot=OUTPUT_ROOT/('assps-lesson-planner-'+commit[:12])
     expected_new=sha(dist/'index.html')
     plan={'decision':'READY_FOR_CORE_GATE' if not args.apply else 'CORE_GATE_CHECK_REQUIRED',
@@ -178,6 +185,7 @@ def main():
           'candidate_root':str(newroot),'new_html_sha':expected_new,
           'candidate_git_sha':commit,'ui_contract':'PASS',
           'active_diary_controller_contract':'PASS',
+          'active_marks_review_print_contract':'PASS',
           'production_changed':False}
     if not args.apply:
         print(json.dumps(plan,indent=2))
@@ -237,7 +245,7 @@ def main():
             # promoted root, not only Diary. Any regression triggers rollback.
             verify_full_paper_studio_postflight(
                 newroot, repo, mod, contract, companion_module,
-                companions_contract, diary_guard)
+                companions_contract, diary_guard, marks_guard=marks_guard)
             success=True
             plan.update(decision='FRONTEND_ONLY_PROMOTED_CORE_VERIFIED',
                         production_changed=True,rollback_config=str(backup/'apex-app-ssl.pre-change'))

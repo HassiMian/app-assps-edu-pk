@@ -1,4 +1,4 @@
-import React from 'react'
+/* eslint-disable react-refresh/only-export-components -- Test-only Vite bootstrap is not a hot-reloaded component. */
 import {createRoot} from 'react-dom/client'
 import {MemoryRouter,Routes,Route,useLocation} from 'react-router-dom'
 import MarksRegister from '../MarksRegister'
