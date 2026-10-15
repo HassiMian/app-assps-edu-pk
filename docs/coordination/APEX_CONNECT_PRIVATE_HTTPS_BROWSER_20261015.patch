@@ -1,0 +1,255 @@
+diff --git a/docs/coordination/APEX_CONNECT_PRIVATE_TLS_NGINX_NEXT_CHROMIUM_20261015.md b/docs/coordination/APEX_CONNECT_PRIVATE_TLS_NGINX_NEXT_CHROMIUM_20261015.md
+new file mode 100644
+index 0000000..c35bca8
+--- /dev/null
++++ b/docs/coordination/APEX_CONNECT_PRIVATE_TLS_NGINX_NEXT_CHROMIUM_20261015.md
+@@ -0,0 +1,81 @@
++# APEX Connect — Private TLS Nginx + role-neutral Next + real Chromium acceptance
++
++Date: 2026-10-15. Owner: APEX Connect Master.
++Status: COMPLETE isolated security/runtime QA; LIVE production cutover NOT certified.
++
++## Exact code provenance
++
++This branch starts from the independently reviewed role-neutral Next source
++and tested private-browser guard child SHA
++de5aaa651727dca1068dd0036f4fb8bb78f7aca6.
++Reviewed Next application parent source SHA
++492429340504224a8984a33403d585c747d38fde.
++Actual private compiled artifact BUILD_ID aMD_UNZVOSO2lpyRO0-RO.
++
++Public current Next BUILD_ID ONDwxEIZlx5onDIKY7wYf from a concurrent
++operator is intentionally never overwritten.
++
++## New executable release rehearsal
++
++Added reproducible root-only private TLS acceptance source:
++- scripts/connect/replay-private-https-loginonly-20261015.sh
++- scripts/connect/test-private-https-loginonly-20261015.cjs
++- scripts/connect/test-private-https-source-guard-20261015.cjs
++
++The script reads the installed real public Let's Encrypt certificate/key from
++their original root-protected path, NEVER copies the private key. OpenSSL
++verifies certificate hostname api.assps.edu.pk and 24-hour non-expiration,
++and Chromium independently validates TLS with ignoreHTTPSErrors=false.
++
++The private Nginx process is launched under a fresh isolated session with
++ONLY loopback 127.0.0.1:3017 SSL, proxying an independently isolated Next
++instance 127.0.0.1:3016. It does NOT reload/replace live Nginx or PM2.
++All hostnames in Chromium api.assps.edu.pk:3017 map to localhost, preserving
++actual Host-routing without sending a request to public 443. Chromium blocks
++ALL off-host requests and never receives real employee cookies or passwords.
++Both process groups are killed via an EXIT trap, and temporary Nginx files
++are deleted after the run.
++
++## Actual test evidence — repeated end-to-end
++
++- Standalone HTTPS Nginx configuration syntax and certificate CHECK PASS.
++- Actual Chromium through private **HTTPS Nginx → real compiled Next**:
++  9/9 PASS, repeated with strict actual certificate validation.
++- /login HTTP200 HTTPS; anonymous dashboard and nested dashboard resolve
++  directly to role-neutral login with no forced next=/admin; protected
++  /teacher resolves to /login?next=/teacher; /api/auth/me rejects anonymous
++  with 401; browser has no JS exceptions.
++- Final run recorded 64 private browser requests and four blocked outside
++  requests; neither production identity/session nor public traffic accessed.
++- Added 12/12 fail-closed static source guard tests, pinning exact Next
++  source and compiled BUILD_ID, ports, loopback TLS, cert host/expiry,
++  external network blocking, non-production DB, routing and cleanup.
++- Existing independent role-neutral public HTTP negative guard 10/10 PASS.
++- After test both private ports 3016 and 3017 CLOSED. No orphan Next or
++  private Nginx process survived.
++
++## Current public release decision
++
++Previously independently verified live HTTPS still serves public build
++ONDwxEIZlx5onDIKY7wYf and returns /dashboard -> /login?next=/admin
++(incorrect anonymous administrator bias). The corrected candidate has NOT
++replaced it. Genuine teacher session / temporary-password challenge,
++independent peer-tenant signed access negative, actual RUNNING production
++AI worker adapter/role-safe application deployment, reviewer-signed current
++recovery receipt and actual traffic rollback remain unverified or blocked.
++Existing latest SaaS Core reports real PostgreSQL signed RLS 77/77 and
++technical production restricted worker login, but real running backend
++worker adapter source remains absent.
++
++This HTTPS browser PASS is not valid real employee authentication or
++production Core security acceptance. Atomic Next+Nginx promotion must
++require independent genuine PRE-CUTOVER Core clearance, preserve the
++current Blue OND archive and today's full-ACL database backup, and run
++actual existing teacher POST acceptance and rollback. It is forbidden to
++fabricate signatures, employ other teachers' credentials or write official
++results to satisfy the gate.
++
++Live school records are not used in these synthetic anonymous rehearsals.
++Latest read-only Core school1 Exam ID9 snapshot: 1,762 genuine marks,
++213 numeric zeros, baseline digest intact. No student/teacher, PostgreSQL,
++Nginx, PM2 or Paper Studio production modification was made by this task.
+diff --git a/scripts/connect/replay-private-https-loginonly-20261015.sh b/scripts/connect/replay-private-https-loginonly-20261015.sh
+new file mode 100755
+index 0000000..f59c564
+--- /dev/null
++++ b/scripts/connect/replay-private-https-loginonly-20261015.sh
+@@ -0,0 +1,91 @@
++#!/usr/bin/env bash
++# Private HTTPS Nginx->reviewed compiled Next->Chromium. NO PM2/public ingress.
++set -Eeuo pipefail
++umask 077
++NEXT=/root/workspace/assps-connect-role-neutral-dashboard-20261015
++TOOLS=/opt/assps-editor-worker/repo/al-siddique-frontend
++EXPECTED=aMD_UNZVOSO2lpyRO0-RO
++[[ "$(git -C "$NEXT" rev-parse HEAD)" == 492429340504224a8984a33403d585c747d38fde ]] || { echo UNREVIEWED_NEXT_SOURCE;exit 3; }
++[[ "$(cat "$NEXT/.next/BUILD_ID")" == "$EXPECTED" ]] || { echo UNREVIEWED_COMPILED_NEXT;exit 3; }
++for port in 3016 3017;do
++ ! ss -lnt | grep -q ":$port " || { echo PRIVATE_PORT_IN_USE;exit 3; }
++done
++# Reject any certificate that does not actually validate the intended host
++# or will expire too soon; Chrome must also independently validate TLS.
++openssl x509 -in /etc/letsencrypt/live/www.assps.edu.pk/fullchain.pem   -noout -checkhost api.assps.edu.pk | grep -q 'does match certificate' || { echo PRIVATE_TLS_CERT_HOST_INVALID;exit 3; }
++openssl x509 -in /etc/letsencrypt/live/www.assps.edu.pk/fullchain.pem   -noout -checkend 86400 >/dev/null || { echo PRIVATE_TLS_CERT_NEAR_EXPIRY;exit 3; }
++CONFROOT=$(mktemp -d /tmp/assps-next-https-20261015-XXXXXX)
++chmod 700 "$CONFROOT"
++nextpid='' nextgroup='' nginxpid='' nginxgroup=''
++cleanup(){
++ for pair in "$nginxgroup:$nginxpid" "$nextgroup:$nextpid";do
++  group=$(printf '%s' "$pair" | cut -d: -f1)
++  pid=$(printf '%s' "$pair" | cut -d: -f2)
++  if [[ -n "$group" && "$group" =~ ^[0-9]+$ && "$group" == "$pid" ]];then
++    kill -- "-$group" >/dev/null 2>&1 || :
++  elif [[ -n "$pid" ]];then kill "$pid" >/dev/null 2>&1 || :;fi
++ done
++ for pid in "$nginxpid" "$nextpid";do
++  [[ -z "$pid" ]] || wait "$pid" >/dev/null 2>&1 || :
++ done
++ rm -rf -- "$CONFROOT"
++}
++trap cleanup EXIT
++cat > "$CONFROOT/nginx.conf" <<CONF
++pid $CONFROOT/nginx.pid;
++error_log $CONFROOT/nginx-error.log warn;
++worker_processes 1;
++events { worker_connections 96; }
++http {
++  access_log off;
++  server {
++    listen 127.0.0.1:3017 ssl;
++    server_name api.assps.edu.pk;
++    ssl_certificate /etc/letsencrypt/live/www.assps.edu.pk/fullchain.pem;
++    ssl_certificate_key /etc/letsencrypt/live/www.assps.edu.pk/privkey.pem;
++    location / {
++      proxy_pass http://127.0.0.1:3016;
++      proxy_http_version 1.1;
++      proxy_set_header Host api.assps.edu.pk;
++      proxy_set_header X-Forwarded-Proto https;
++      proxy_set_header X-Forwarded-Host api.assps.edu.pk:3017;
++      proxy_set_header X-Forwarded-Port 3017;
++      proxy_set_header X-Real-IP 127.0.0.1;
++      proxy_set_header X-Forwarded-For 127.0.0.1;
++      proxy_set_header Connection "";
++    }
++  }
++}
++CONF
++nginx -t -p "$CONFROOT/" -c nginx.conf 2>&1 | tail -2
++setsid bash -c '
++ cd "$1"
++ exec env NODE_ENV=production PORT=3016 HOSTNAME=127.0.0.1 \
++ node node_modules/next/dist/bin/next start --hostname 127.0.0.1 --port 3016
++' bash "$NEXT" > "$CONFROOT/next.log" 2>&1 &
++nextpid=$!
++nextgroup=$(ps -p "$nextpid" -o pgid= | tr -d ' ')
++[[ "$nextgroup" == "$nextpid" ]] || { echo NEXT_PROCESS_GROUP_UNSAFE;exit 3; }
++ready=no
++for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15;do
++ if curl -sS -o /dev/null --max-time 2 --resolve 'api.assps.edu.pk:3016:127.0.0.1' \
++  'http://api.assps.edu.pk:3016/login' 2>/dev/null;then ready=yes;break;fi
++ sleep 1
++done
++[[ "$ready" == yes ]] || { echo PRIVATE_NEXT_NOT_READY;exit 3; }
++setsid nginx -p "$CONFROOT/" -c nginx.conf -g 'daemon off; master_process off;' \
++ > "$CONFROOT/nginx-out.log" 2>&1 &
++nginxpid=$!
++nginxgroup=$(ps -p "$nginxpid" -o pgid= | tr -d ' ')
++[[ "$nginxgroup" == "$nginxpid" ]] || { echo NGINX_PROCESS_GROUP_UNSAFE;exit 3; }
++https_ready=no
++for i in 1 2 3 4 5 6 7 8 9 10;do
++ if curl --silent --show-error -k --max-time 2 -o /dev/null \
++ --resolve 'api.assps.edu.pk:3017:127.0.0.1' \
++ 'https://api.assps.edu.pk:3017/login' 2>/dev/null;then https_ready=yes;break;fi
++ sleep 1
++done
++[[ "$https_ready" == yes ]] || { echo PRIVATE_TLS_NGINX_NOT_READY;tail -8 "$CONFROOT/nginx-error.log";exit 3; }
++CONNECT_ISOLATED_QA=yes CONNECT_BROWSER_TOOLING_ROOT="$TOOLS" \
++ node "$(cd "$(dirname "$0")" && pwd)/test-private-https-loginonly-20261015.cjs"
++echo PRIVATE_HTTPS_NGINX_NEXT_SHUTDOWN_ARMED
+diff --git a/scripts/connect/test-private-https-loginonly-20261015.cjs b/scripts/connect/test-private-https-loginonly-20261015.cjs
+new file mode 100644
+index 0000000..6a9fc5f
+--- /dev/null
++++ b/scripts/connect/test-private-https-loginonly-20261015.cjs
+@@ -0,0 +1,39 @@
++'use strict';
++const assert=require('node:assert/strict');
++const fs=require('node:fs');
++const path=require('node:path');
++if(process.env.CONNECT_ISOLATED_QA!=='yes')throw Error('ISOLATED_ONLY');
++const {chromium}=require(path.join(process.env.CONNECT_BROWSER_TOOLING_ROOT,'node_modules/playwright'));
++const port=3017, host='api.assps.edu.pk';
++const hostname='https://'+host+':'+port;
++let browser, requests=0, rejected=0, count=0;
++function check(msg,condition){assert.ok(condition,msg);count++;console.log('PASS '+msg)}
++(async()=>{
++ browser=await chromium.launch({headless:true,executablePath:'/root/.cache/ms-playwright/chromium-1148/chrome-linux/chrome',
++  args:['--no-sandbox','--disable-dev-shm-usage','--host-resolver-rules=MAP '+host+' 127.0.0.1, EXCLUDE localhost']});
++ const ctx=await browser.newContext({ignoreHTTPSErrors:false});
++ await ctx.route('**/*',route=>{
++   const u=new URL(route.request().url());
++   if(u.hostname===host&&u.port===String(port)&&u.protocol==='https:'){requests++;return route.continue();}
++   rejected++;return route.abort('blockedbyclient');
++ });
++ const page=await ctx.newPage();
++ const errors=[];
++ page.on('pageerror',x=>errors.push(x.message));
++ const login=await page.goto(hostname+'/login',{waitUntil:'domcontentloaded',timeout:20000});
++ check('Nginx HTTPS login returns 200',login.status()===200);
++ check('login reached HTTPS loopback transport',page.url().startsWith(hostname+'/login'));
++ const dashboard=await page.goto(hostname+'/dashboard',{waitUntil:'domcontentloaded',timeout:20000});
++ check('anonymous legacy dashboard has role-neutral login',new URL(page.url()).pathname==='/login'&&new URL(page.url()).searchParams.get('next')===null);
++ const nested=await page.goto(hostname+'/dashboard/history',{waitUntil:'domcontentloaded',timeout:20000});
++ check('nested legacy dashboard has role-neutral login',new URL(page.url()).pathname==='/login'&&new URL(page.url()).searchParams.get('next')===null);
++ const teacher=await page.goto(hostname+'/teacher',{waitUntil:'domcontentloaded',timeout:20000});
++ check('teacher protected route redirects to login',new URL(page.url()).pathname==='/login');
++ check('teacher next points to teacher, never admin',new URL(page.url()).searchParams.get('next')==='/teacher');
++ const me=await page.evaluate(async()=>{const r=await fetch('/api/auth/me',{credentials:'omit'});return r.status;});
++ check('anonymous /api/auth/me remains unauthorized',me===401);
++ check('no uncaught HTTPS browser JavaScript errors',errors.length===0);
++ check('all observed browser requests private, outside blocked',requests>0);
++ console.log('HTTPS_PRIVATE_BROWSER_REQ='+requests+' OUTSIDE_BLOCKED='+rejected);
++ console.log('CONNECT_PRIVATE_HTTPS_NGINX_NEXT_BROWSER '+count+'/'+count+' PASS');
++})().catch(e=>{console.error('CONNECT_PRIVATE_HTTPS_FAIL '+e.message);process.exitCode=2;}).finally(async()=>{if(browser)await browser.close()});
+diff --git a/scripts/connect/test-private-https-source-guard-20261015.cjs b/scripts/connect/test-private-https-source-guard-20261015.cjs
+new file mode 100644
+index 0000000..711c8fd
+--- /dev/null
++++ b/scripts/connect/test-private-https-source-guard-20261015.cjs
+@@ -0,0 +1,20 @@
++'use strict';
++const fs=require('node:fs'),assert=require('node:assert/strict'),path=require('node:path');
++const root=path.resolve(__dirname,'../..');
++const runner=fs.readFileSync(path.join(root,'scripts/connect/replay-private-https-loginonly-20261015.sh'),'utf8');
++const browser=fs.readFileSync(path.join(root,'scripts/connect/test-private-https-loginonly-20261015.cjs'),'utf8');
++let count=0;
++function pass(name,fn){fn();count++;console.log('PASS '+name)}
++pass('exact reviewed Next source pinned',()=>assert(runner.includes('492429340504224a8984a33403d585c747d38fde')));
++pass('exact reviewed compiled Next build pinned',()=>assert(runner.includes('aMD_UNZVOSO2lpyRO0-RO')));
++pass('private Next only loopback',()=>assert(runner.includes('--hostname 127.0.0.1 --port 3016')));
++pass('Nginx binds private loopback exclusively',()=>assert(runner.includes('listen 127.0.0.1:3017 ssl;')));
++pass('TLS cert hostname and expiration preflight',()=>{assert(runner.includes('openssl x509'));assert(runner.includes('-checkhost api.assps.edu.pk'));assert(runner.includes('-checkend 86400'))});
++pass('actual Chromium verifies certificate',()=>assert(browser.includes('ignoreHTTPSErrors:false')));
++pass('Chromium disallows outside host traffic',()=>{assert(browser.includes("route.abort('blockedbyclient')"));assert(browser.includes("u.port===String(port)&&u.protocol==='https:'"));});
++pass('no actual teacher creds or production records',()=>{assert(!runner.includes('pg_restore'));assert(!runner.includes('pm2 restart'));assert(!browser.includes('password='));});
++pass('anonymous teacher login destination verified',()=>assert(browser.includes("searchParams.get('next')==='/teacher'")));
++pass('anonymous identity protection verified',()=>assert(browser.includes('me===401')));
++pass('process groups and cleanup trap enforce safe isolation',()=>{assert(runner.includes('setsid'));assert(runner.includes('trap cleanup EXIT'));assert(runner.includes('kill -- "-$group"'))});
++pass('current live build not used as candidate',()=>assert(!runner.includes('ONDwxEIZlx5onDIKY7wYf')));
++console.log('PRIVATE_HTTPS_SOURCE_ADVERSARIAL '+count+'/'+count+' PASS');
