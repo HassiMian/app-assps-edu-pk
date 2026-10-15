@@ -16,6 +16,7 @@ import {
   normalizeEarlyYearsTemplateId
 } from './earlyYearsTemplates.js'
 import './earlyYearsPrint.css'
+import { printEarlyYearsPaper } from './printEarlyYearsPaper.js'
 
 const TEMPLATE_STORAGE_KEY = 'assps-early-years-template-map-v1'
 
@@ -122,24 +123,7 @@ export default function EarlyYearsWorksheetEditor({
     }
     if (hasConflict && allowDraft && !window.confirm('Print this paper as an explicitly labelled DRAFT with unresolved marks? The discrepancy will be visible on the paper.')) return
     document.activeElement?.blur?.()
-    try {
-      if (document.fonts) {
-        if (currentPaper?.language === 'urdu' || currentPaper?.subject === 'urdu') {
-          await Promise.race([
-            Promise.all([
-              document.fonts.load("18px 'Jameel Noori Nastaleeq'"),
-              document.fonts.ready,
-            ]),
-            new Promise(resolve => setTimeout(resolve, 2000)),
-          ])
-        } else {
-          await document.fonts.ready
-        }
-      }
-    } catch (error) {
-      console.warn('Early Years print font preload warning:', error)
-    }
-    requestAnimationFrame(() => window.print())
+    await printEarlyYearsPaper(currentPaper)
   }, [hasConflict, currentPaper, marksState])
 
   return (

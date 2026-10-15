@@ -6,6 +6,7 @@ import { ACTIVITY_TYPES, createUserEarlyYearsPaper, addUserActivity, updateUserA
  displayActivityContent, renumber, validateUserEarlyYearsPaper, listUserEarlyYearsPapers, saveUserEarlyYearsPaper,
  duplicateUserEarlyYearsPaper, deleteUserEarlyYearsPaper } from './earlyYearsUserPapers.js'
 import './earlyYearsPrint.css'
+import { printEarlyYearsPaper } from './printEarlyYearsPaper.js'
 const panel={background:'#122943',color:'#e2e8f0',border:'1px solid #37516d',borderRadius:10,padding:12}
 const input={width:'100%',boxSizing:'border-box',border:'1px solid #52708c',borderRadius:6,background:'#0a1d34',color:'#fff',padding:'7px 9px',fontSize:13}
 const btn={border:'1px solid #52708c',borderRadius:7,background:'#193c5d',color:'#f8fafc',cursor:'pointer',padding:'7px 10px',fontSize:12}
@@ -67,7 +68,7 @@ export default function EarlyYearsActivityBuilder() {
   const result=validateUserEarlyYearsPaper(paper)
   if(!paper.id){setError('Save your paper before printing.');return}
   if(!result.valid){setError('Printing blocked until review issues are corrected: '+result.issues.join(' | '));return}
-  try{await document.fonts?.ready}catch{ /* This optional operation may fail; preserve the existing editor state and fallback behavior. */ };requestAnimationFrame(()=>window.print())}
+  await printEarlyYearsPaper(paper)}
  const meta=(name,value)=>setPaper(p=>({...p,[name]:value}))
  const header=(name,value)=>setPaper(p=>({...p,headerSource:{...p.headerSource,[name]:value}}))
  return <section data-user-early-years-studio style={{display:'flex',flexDirection:'column',flex:'1 1 auto',minHeight:0,overflow:'hidden',background:'#081b30',color:'#e2e8f0'}}>
