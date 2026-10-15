@@ -163,6 +163,11 @@ def main():
         raise RuntimeError('FAIL_CLOSED: live marks GET route diverges from login-compatible backend')
     # Protect the deployed ten distinct premium Result Cards templates and
     # whole-class/section print selector against old-source production cutovers.
+    academic_v3_guard=HERE/'verify-resultcards-v3-active-20261015.cjs'
+    academic_v3_check=run(['node',str(academic_v3_guard),'--dist',str(dist)])
+    if academic_v3_check.returncode!=0:
+        raise RuntimeError('FAIL_CLOSED: current Result Cards missing subject roster, DRAFT disclosure or shared print safety: '
+                           +(academic_v3_check.stderr or academic_v3_check.stdout).strip()[:500])
     results_guard=HERE/'verify-resultcards-v2-active-20261015.cjs'
     results_check=run(['node',str(results_guard),'--dist',str(dist)])
     if results_check.returncode!=0:
