@@ -1,0 +1,17 @@
+# Core + Connect genuine-actor handoff — source-bound, unsigned, fail closed
+
+**Parent reviewed head:** `068d029a49f90c3333caf28a5d6670997429ea73` (descends from Core `2782179f6ed0d3658ed8d7025cd5a7908b7ebdd0`). **Connect candidate:** `17097ce5107d4a9495b83cdb75fdc6fc145b2650`, reviewed private Next build `bHxqXQ_9RXKfTeWRZ0lCs`, worker source SHA256 `97090fee75c77283375141e21d572d52a1a9fe58952ff16a4584ca9f308592cc`. Coordinate on GitHub issue #4; retain newest actual running production, old public OND build, protected marks and Weekly Notebook routes.
+
+## Executed technical handoff
+
+Source `ops/release/signed-bluegreen/build-actor-handoff-20261015.py` independently interrogates the current 16 technical candidate checks (source, staged files, private build, current Blue and DB archive) and writes **one nonoverwriting owner-only mode0600 JSON** at `/root/assps-release-evidence/20261015-genuine-actor-handoff/unsigned-human-request.json`. On real current source all 16/16 checks passed. Request is **explicitly UNSIGNED / HOLD**, with five separate actor tasks and nothing asserting an actual teacher session, production deployment or institutional signature. SHA256 of actual generated request `d7406538eeb861c5f559d4afd716be95212c7d4c875cc6389e25cc607a83dd2d`. Six synthetic negative/policy tests `test_build_actor_handoff_20261015.py` PASS, including all-green-can-never-approve, no credential/token fields and all human actions unverified. Never place real credentials, cookies, JWTs, teacher private messages or Ed25519 signing key in the request or Git.
+
+## Real actors only (in one coordinated release)
+
+1. Teacher Muhammad Imran personally logs into `https://api.assps.edu.pk/login` with his school-issued temporary credential, changes password himself and performs fresh Teacher-role login. Capture redacted role/tenant/time/route proof with NO authentication secrets. Account metadata 10/10 PASS is not proof of this step.
+2. Separately authorized real School1/School2 actors and independent security reviewer verify authenticated cross-tenant and unassigned-subject denial on safe read-only paths/isolated fixture. Historical write-capable test scripts and fixture-signed JWT cannot certify real peer actor identity.
+3. Core security reviewer personally verifies the **actually deployed** worker runtime (not staged-only Node QA), signed Green role separation, worker queue allow, organization/audit and tenant impersonation denial, and evidence integrity before authorized Ed25519 receipt.
+4. Independent disaster recovery reviewer examines genuine laptop-side 4/4 AES-GCM/offsite technical recovery and current full ACL PG clone and Blue restore fingerprints before independently signing honest recovery claim.
+5. SaaS Core release owner reruns exact source/host/preflight gate with valid genuine reviewer receipts, then and only then performs one rollback-ready current-live-derived worker+role-neutral Next/Nginx cutover with real teacher, peer and grade-integrity postflight and actual traffic rollback.
+
+**Full release remains HOLD.** No script, source tests, unsigned request, reviewer packet or agent authority may substitute for genuine staff action, independent reviewer signature, true live deployment or traffic rollback. School1 Exam9 1762 real records, 213 numeric zeros, 0 NULLs preserved. School1 active students 318; 322 is an all-tenant count. The candidate and handoff do not modify production roles, user credentials, marks, PM2, Nginx, or active Next.
