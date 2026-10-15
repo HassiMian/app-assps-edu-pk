@@ -14,6 +14,9 @@ const generated={schemaVersion:2,documentType:'ASSPS_LESSON_PLAN',planningType:'
 test('mode-driven Lesson Planning generates multi-subject term plan, saves and opens student-card bridge',{timeout:90000},async()=>{
  const server=await createServer({root,server:{port:PORT,strictPort:true}});await server.listen();const browser=await chromium.launch({headless:true,executablePath:installedChrome,args:['--no-sandbox','--disable-setuid-sandbox']});const context=await browser.newContext({viewport:{width:1540,height:1000}})
  await context.addInitScript(()=>{localStorage.setItem('al_siddique_token','mock-jwt-token');localStorage.setItem('al_siddique_login_at',String(Date.now()));localStorage.setItem('al_siddique_user',JSON.stringify({id:999,role:'admin',school_id:1,tenant_id:'assps'}))})
+ // Synthetic QA must not reach the real SaaS API. Register the generic
+ // default first: later exact route mocks win under Playwright LIFO.
+ await context.route('**/api/**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:[]})}))
  await context.route('**/api/academic/setup',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify(academic)}))
  await context.route('**/api/lesson-plans/planner/context**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:{availableSubjects:['English','Science','Math'],timetable:[],curriculumScopes:[],questionBankSignals:[],warnings:[]}})}))
  await context.route('**/api/lesson-plans/planner/generate',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:generated,analysis:generated.analysis,ai:{configured:true,used:true,model:'test-model'},context:{availableSubjects:['English','Science'],warnings:[]}})}))
@@ -21,6 +24,9 @@ test('mode-driven Lesson Planning generates multi-subject term plan, saves and o
  await context.route('**/api/lesson-plans',async r=>{if(r.request().method()!=='POST')return r.fallback();const body=await r.request().postDataJSON();return r.fulfill({status:201,contentType:'application/json',body:JSON.stringify({success:true,data:{...body,id:'lp-browser-1',revision:1,serverRevision:1}})})})
  const page=await context.newPage();try{
   await page.goto(URL,{waitUntil:'domcontentloaded'});await page.locator('[data-lesson-planning-workspace]').waitFor({state:'visible',timeout:12000})
+  // The current UI opens Weekly Notebook first. Select the distinct Advanced
+  // Lesson Editor before looking for its planning-type controls.
+  await page.getByRole('button',{name:'Advanced Lesson Editor'}).click()
   await page.locator('[data-planning-type="term"]').click();await page.locator('[data-lp-class]').selectOption('8');await page.locator('[data-lp-section]').selectOption('Blue')
   await page.getByRole('button',{name:'English',exact:true}).click();await page.getByRole('button',{name:'Science',exact:true}).click()
   await page.locator('[data-generate-plan]').click();await page.locator('[data-subject-plan="English"]').waitFor({state:'visible',timeout:10000});await page.locator('[data-subject-plan="Science"]').waitFor({state:'visible'})
