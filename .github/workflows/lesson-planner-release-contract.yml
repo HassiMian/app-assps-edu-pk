@@ -85,6 +85,11 @@ jobs:
         run: node ops/release/verify-marks-register-active-bundle-20261015.cjs --dist al-siddique-frontend/dist
       - name: Reject missing, stale, or unauthorized Marks Register release bundles
         run: node --test ops/tests/marks-register-active-bundle-20261015.test.cjs
+      - name: Guard existing marks against refresh-failure data loss
+        run: node --test ops/tests/marks-sheet-data-truth.test.js
+      - name: Lint newly introduced saved Marks Register source and test harness
+        run: npx eslint src/Modules/examination/MarksRegister.jsx src/Modules/examination/tests/MarksRegisterBrowser.test.js src/Modules/examination/tests/MarksRegisterHarness.jsx
+        working-directory: al-siddique-frontend
       - name: Verify immutable candidate and adversarial missing-controller detection
         run: ASSPS_DIARY_CANDIDATE_DIST=al-siddique-frontend/dist node --test ops/tests/paper-diary-active-controller-immutable-release-gate-20261015.test.cjs
       - name: Verify stale-but-present chunks cannot bypass regression check

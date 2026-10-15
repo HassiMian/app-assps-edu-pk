@@ -18,7 +18,7 @@ No shared branch/worktree overwritten, no force push, no production source/datab
 - This has **not** been merged or authorized by official SaaS Core and Paper owners; submit/forward-port through issue #4.
 
 ## Executed new QA
-- Fresh optimized `npm run build`: **PASS**. Exact merged preview `dist/index.html` SHA256 `02c57b9fee908f705a8074b0018bd7fb23a0437e6327aa04b27ac3e1593476d4`.
+- Fresh optimized `npm run build`: **PASS**. Exact merged preview `dist/index.html` SHA256 `968a66357697b4113150e13ed8d2164e617e1d81db3246c11f0be29ba176edfe`.
 - Reachable rich Diary active import graph: **11/11 PASS**.
 - Reachable reviewed Marks Register View/Edit/Print route: **PASS**, active `assets/MarksRegister-CUCraSgG.js`.
 - V5 Lesson Planner Term/Weekly/Daily contract: **PASS**.
@@ -34,3 +34,6 @@ Core full-stack signed Ed25519 receipt intake was absent, reviewed worker module
 Protected School1 Exam9 read-only invariant: **1,762** numeric rows, **213** true zero marks, **0** NULL, last checked after concurrent Marks P0; no record updated by this agent.
 School1 saved diary date `2026-10-16`: **0** rows (15 Oct has 3). Do not fabricate homework or re-date previous Diary. Owner must have authentic 16 Oct Diary content saved and physically printed before claiming end-to-end acceptance.
 Emergency production release only under SaaS Core's genuine signed gate, approved backup/rollback, current Nginx root hash check, independent peer-school/role HTTP security and real authenticated Diary Save→Reopen→Print; after promotion run **all four** reachable-feature postflight checks and verify current Marks P0 functionality.
+
+## Additional genuine no-data-loss fix after first release build
+Current MarksSheet source had an obsolete regression test and a real failed-reverification risk. The `searchStudents` network error branch cleared `marks` and `savedMarks` after a failed saved-results read; search initialization also discarded last-known savedMarks before read success. Fixed both in isolated source without any production SQL: preserve the same-exam/class/subject in-memory marks and unsaved edits when backend is unavailable; `marksLoaded=false` keeps Save disabled until re-verification succeeds. Scope changes already invoke `resetRoster()`, preserving cross-class/tenant isolation. Test adapted to the refactored `resetRoster()` abstraction and real failed-GET policy, **2/2 PASS**; reviewed teacher assignment/subject maximum tests **6/6 PASS**. Updated CI to require no-loss test and targeted Marks Register lint **0 errors** (full historical tree lint is still not certified). Rebuilt frontend optimized **PASS**, new exact HTML SHA256 `968a66357697b4113150e13ed8d2164e617e1d81db3246c11f0be29ba176edfe`; new Marks Browser Chromium **2/2 PASS**. These are QA-source and synthetic sessions only, not authenticated production acceptance.
