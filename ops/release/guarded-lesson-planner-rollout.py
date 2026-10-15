@@ -266,6 +266,8 @@ def main():
                  ['node',str(results_guard),'--dist',str(newroot)]),
                 ('Result Cards V3 roster/grade/print integrity',
                  ['node',str(academic_v3_guard),'--dist',str(newroot)]),
+                ('Owner-accepted Result Cards and Employees local source',
+                 ['node','--test',str(owner_acceptance_contract)]),
                 ('Daily Diary 11-controller preservation',
                  ['node',str(diary_guard),'--dist',str(newroot)]),
             ):

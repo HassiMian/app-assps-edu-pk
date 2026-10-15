@@ -12,6 +12,7 @@ EXPECTED = (
     "Saved Marks View/Print",
     "Ten premium Result Cards templates",
     "Result Cards V3 roster/grade/print integrity",
+    "Owner-accepted Result Cards and Employees local source",
     "Daily Diary 11-controller preservation",
 )
 
@@ -31,7 +32,8 @@ def exercise(*, failed_label=None, lesson_ok=True, companion_ok=True):
             or "verify-marks-register-ui" in str(argv) and x == EXPECTED[1]
             or "verify-resultcards-v2" in str(argv) and x == EXPECTED[2]
             or "verify-resultcards-v3" in str(argv) and x == EXPECTED[3]
-            or "verify-diary-controls" in str(argv) and x == EXPECTED[4]
+            or "resultcards-owner-acceptance-and-employee-source" in str(argv) and x == EXPECTED[4]
+            or "verify-diary-controls" in str(argv) and x == EXPECTED[5]
         )), None)
         if label is None:
             raise AssertionError(f"Unexpected postflight command: {argv}")
