@@ -79,3 +79,36 @@ test('switching to a denied examination clears previously visible marks before 4
  assert.equal(await page.getByRole('button',{name:'Print Marks Sheet'}).isDisabled(),true)
  console.log('MARKS_EXAM_SWITCH_DENIAL_PURGES_STALE_ROWS_PASS')
 })
+for(const [caseName,deniedRoute,port] of [
+ ['catalog','/api/exams',5875],
+ ['saved-results','/api/exams/results',5876]
+]){
+ test('Marks Review '+caseName+' HTTP401 is a scoped error and NEVER destroys login session',{timeout:65000},async t=>{
+  const vite=await createServer({root,server:{port,strictPort:true}})
+  await vite.listen()
+  const browser=await chromium.launch({headless:true,args:['--no-sandbox']})
+  t.after(async()=>{await browser.close();await vite.close()})
+  const context=await browser.newContext()
+  await context.addInitScript(()=>{
+   localStorage.setItem('al_siddique_token','synthetic-private-browser-fixture-not-a-real-jwt')
+   localStorage.setItem('al_siddique_user',JSON.stringify({id:10,school_id:101,role:'principal'}))
+  })
+  await context.route('**/api/exams/results*',r=>{
+   return r.fulfill({status:deniedRoute==='/api/exams/results'?401:200,contentType:'application/json',
+    body:JSON.stringify(deniedRoute==='/api/exams/results'?{success:false,message:'Results read authentication mismatch'}:{success:true,data:[]})})
+  })
+  await context.route('**/api/exams*',r=>{
+   return r.fulfill({status:deniedRoute==='/api/exams'?401:200,contentType:'application/json',
+    body:JSON.stringify(deniedRoute==='/api/exams'?{success:false,message:'Catalog authentication mismatch'}:{success:true,data:[{id:9,name:'First Term'}]})})
+  })
+  const page=await context.newPage()
+  await page.goto('http://127.0.0.1:'+port+'/marks-register-test.html')
+  const errorName=deniedRoute==='/api/exams'?'Catalog authentication mismatch':'Results read authentication mismatch'
+  await page.getByText(errorName,{exact:true}).waitFor({timeout:17000})
+  assert.equal(new URL(page.url()).pathname,'/marks-register-test.html')
+  assert.equal(await page.evaluate(()=>localStorage.getItem('al_siddique_token')),'synthetic-private-browser-fixture-not-a-real-jwt')
+  assert.equal(await page.locator('tbody tr').count(),0)
+  assert.equal(await page.getByRole('button',{name:'Print Marks Sheet'}).isDisabled(),true)
+  console.log('MARKS_READ_401_SESSION_RETAINED_NO_PRINT_'+caseName.toUpperCase().replace('-','_'))
+ })
+}

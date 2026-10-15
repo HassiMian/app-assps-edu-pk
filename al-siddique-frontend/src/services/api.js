@@ -142,7 +142,15 @@ api.interceptors.response.use(
     const config = err.config || {}
     const method = (config.method || 'get').toLowerCase()
 
-    if (err.response?.status === 401) {
+    // A module-specific failed READ is not proof that the user's login expired.
+    // Marks Review must show its own error instead of destroying a valid session
+    // when a canary/router wrongly returns 401. All other authentication
+    // failures retain the existing global sign-out behavior.
+    const exactReadPath = String(config.url || '').split('?')[0]
+    const marksReviewReadDenied = config.marksReviewReadOnly401 === true &&
+      method === 'get' &&
+      (exactReadPath === '/api/exams' || exactReadPath === '/api/exams/results')
+    if (err.response?.status === 401 && !marksReviewReadDenied) {
       clearAuthSession()
       if (typeof window !== 'undefined' && window.location.pathname !== '/login') window.location.href = '/login'
       return Promise.reject(err)
