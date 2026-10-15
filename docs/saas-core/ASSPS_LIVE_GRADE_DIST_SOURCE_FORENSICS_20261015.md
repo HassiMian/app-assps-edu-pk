@@ -86,3 +86,19 @@ worker and release receipts; SaaS Core must then approve/test running
 restricted worker, verified database RLS, independent recovery, controlled
 rollback-ready Next/Nginx cutover and live postflight. Synthetic identities,
 mock signatures and ignored source drift cannot replace these.
+
+## Additional root-private preservation after source association
+
+To prevent loss of possible concurrent agent edits during later owner
+reconciliation, exported the **current eight modified tracked UI file diffs**
+from the associated local Git worktree to a root-private evidence copy:
+`/root/assps-release-backups/grade-live-origin-forensics-20261015/uncommitted-source-ui-review.patch`.
+SHA256 `3e209fc0319189009665015c2d48e22ce032438b22cc05bd3a120d2ebc4c9913`;
+44,310 bytes, file mode 0600 and containing directory mode 0700.
+Recorded the eight modified paths and local/remote Git heads separately.
+The source patch is NOT published in GitHub, is NOT a production change, and
+does not establish which edits produced the `dist` binaries. Original
+uncommitted worktree remains untouched. The current public static snapshot
+archive SHA256 `2cfa671d73aebd2120e5c911b1ec668c31faa1b5c2db7b3cb6f794844d2701c1`
+was independently rechecked via SHA256SUMS. Neither archive is offsite or
+human-certified recovery.
