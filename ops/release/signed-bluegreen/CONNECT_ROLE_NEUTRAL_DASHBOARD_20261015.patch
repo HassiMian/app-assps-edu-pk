@@ -1,0 +1,101 @@
+From 492429340504224a8984a33403d585c747d38fde Mon Sep 17 00:00:00 2001
+From: root <root@srv1769723.hstgr.cloud>
+Date: Thu, 15 Oct 2026 02:02:54 +0000
+Subject: [PATCH] fix(connect): route legacy dashboard by authenticated actor,
+ not admin fallback
+
+---
+ .../test-role-neutral-dashboard-20261015.cjs  | 23 +++++++++++++++++++
+ src/app/dashboard/page.tsx                    |  2 +-
+ src/lib/roleRoutes.ts                         |  5 +++-
+ src/proxy.ts                                  |  7 ++++--
+ 4 files changed, 33 insertions(+), 4 deletions(-)
+ create mode 100644 scripts/connect/test-role-neutral-dashboard-20261015.cjs
+
+diff --git a/scripts/connect/test-role-neutral-dashboard-20261015.cjs b/scripts/connect/test-role-neutral-dashboard-20261015.cjs
+new file mode 100644
+index 0000000..e223493
+--- /dev/null
++++ b/scripts/connect/test-role-neutral-dashboard-20261015.cjs
+@@ -0,0 +1,23 @@
++'use strict'
++const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
++const ts=require('typescript');
++const base=path.resolve(__dirname,'../..');
++const roles=fs.readFileSync(path.join(base,'src/lib/roleRoutes.ts'),'utf8');
++const mod={exports:{}};
++const compiled=ts.transpileModule(roles,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
++vm.runInNewContext(compiled,{exports:mod.exports,module:mod,require,console},{timeout:2000});
++const {coerceRedirectPath,getLoginRedirectForRole}=mod.exports;
++const result=[];
++function test(name,body){body();result.push(name);console.log('PASS',name)}
++test('teacher legacy dashboard routes to teacher, not admin',()=>assert.equal(coerceRedirectPath('/dashboard','teacher'),'/teacher'));
++test('teacher nested dashboard routes to teacher',()=>assert.equal(coerceRedirectPath('/dashboard/history','teacher'),'/teacher'));
++test('parent legacy dashboard routes to parent',()=>assert.equal(coerceRedirectPath('/dashboard?next=/admin','parent'),'/parent'));
++test('student legacy dashboard routes to student',()=>assert.equal(coerceRedirectPath('/dashboard','student'),'/student'));
++test('administrator still receives real admin portal',()=>assert.equal(coerceRedirectPath('/dashboard','school_admin'),'/admin'));
++test('existing teacher login role map is preserved',()=>assert.equal(getLoginRedirectForRole('teacher'),'/teacher'));
++test('malicious external redirect never accepted as portal path',()=>assert.notEqual(coerceRedirectPath('https://example.invalid','teacher'),'https://example.invalid'));
++const proxy=fs.readFileSync(path.join(base,'src/proxy.ts'),'utf8');
++test('anonymous dashboard does not assume admin next',()=>{const block=proxy.split('if (isDashboardPath) {')[1].split('if (isPortalRoute')[0];assert(!block.includes('loginUrl.searchParams.set("next", "/admin")'));assert(block.includes('new URL("/login", req.url)'))});
++test('legacy login next sanitization discards forced admin',()=>{const block=proxy.split('if (next === "/dashboard"')[1].split('if (userId')[0];assert(block.includes('loginUrl.searchParams.delete("next")'));assert(!block.includes('loginUrl.searchParams.set("next", "/admin")'))});
++test('dashboard client cannot force admin for unknown role',()=>{const s=fs.readFileSync(path.join(base,'src/app/dashboard/page.tsx'),'utf8');assert(s.includes('window.location.replace("/login")'));assert(!s.includes('window.location.replace("/login?next=/admin")'))});
++console.log('ROLE_NEUTRAL_DASHBOARD_SOURCE_TESTS',result.length+'/'+result.length);
+diff --git a/src/app/dashboard/page.tsx b/src/app/dashboard/page.tsx
+index c4d8bec..594cc93 100644
+--- a/src/app/dashboard/page.tsx
++++ b/src/app/dashboard/page.tsx
+@@ -38,7 +38,7 @@ export default function DashboardPage() {
+       } catch {
+         /* fall through */
+       }
+-      window.location.replace("/login?next=/admin");
++      window.location.replace("/login");
+     };
+     go();
+   }, []);
+diff --git a/src/lib/roleRoutes.ts b/src/lib/roleRoutes.ts
+index ccdd1ff..a67f790 100644
+--- a/src/lib/roleRoutes.ts
++++ b/src/lib/roleRoutes.ts
+@@ -30,10 +30,13 @@ export function coerceRedirectPath(path: string, roleFallback?: string): string
+     "/saas-admin": "/admin",
+     "/school_admin": "/admin",
+     "/schooladmin": "/admin",
+-    "/dashboard": "/admin",
++    // Legacy dashboard target must resolve from authenticated DB role.
+   };
+ 
+   const base = raw.split("?")[0].replace(/\/+$/, "") || "/";
++  if (base === "/dashboard" || base.startsWith("/dashboard/")) {
++    return getPortalPathForRole(roleFallback || "admin");
++  }
+   if (legacy[base]) return legacy[base];
+ 
+   if (base.startsWith("/saas_admin") || base.startsWith("/saas-admin")) {
+diff --git a/src/proxy.ts b/src/proxy.ts
+index a6c3014..693324c 100644
+--- a/src/proxy.ts
++++ b/src/proxy.ts
+@@ -171,8 +171,9 @@ export async function proxy(req: NextRequest) {
+     if (userId && role) {
+       return redirectTo(req, connectPortal(role), 307);
+     }
++    // Unknown actor role: do not plant admin destination before login.
++    // The authenticated DB role decides the destination after login.
+     const loginUrl = new URL("/login", req.url);
+-    loginUrl.searchParams.set("next", "/admin");
+     return NextResponse.redirect(loginUrl, 307);
+   }
+ 
+@@ -216,7 +217,9 @@ export async function proxy(req: NextRequest) {
+     const next = req.nextUrl.searchParams.get("next") || "";
+     if (next === "/dashboard" || next.startsWith("/dashboard/") || next.startsWith("/saas-admin")) {
+       const loginUrl = req.nextUrl.clone();
+-      loginUrl.searchParams.set("next", "/admin");
++      // Discard legacy dashboard/saas-admin target rather than elevate
++      // anonymous user into an admin-intended destination.
++      loginUrl.searchParams.delete("next");
+       return NextResponse.redirect(loginUrl, 307);
+     }
+     if (userId && req.nextUrl.searchParams.get("force") !== "1") {
