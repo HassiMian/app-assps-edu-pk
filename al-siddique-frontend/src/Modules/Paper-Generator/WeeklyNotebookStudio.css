@@ -153,5 +153,13 @@
 .wn-dense .wn-assessment-table th,.wn-dense .wn-assessment-table td{padding:.35mm .5mm}
 .wn-card-table tbody tr{height:var(--wn-row-min)}
 
-.wn-card-table tbody th{font-size:var(--wn-subject-name-size,var(--wn-font))}
+.wn-card-table tbody th{font-size:var(--wn-subject-name-size,var(--wn-font));font-weight:var(--wn-subject-name-weight,700)}
 .wn-rtl .wn-task{font-family:var(--wn-urdu-font,"Jameel Noori Nastaleeq"),"Jameel Noori Nastaleeq","Noto Nastaliq Urdu",serif}
+
+/* V4 subject typography controls; shared Week / Daily card editor */
+.wn-subject-typography-controls{display:grid;gap:7px;margin:8px 0;padding:10px;border:1px solid #dce8ef;border-radius:9px;background:#f7fbfd}
+.wn-subject-typography-controls>span{font-size:11px;color:#173f60;font-weight:750}
+.wn-subject-size-stepper{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.wn-subject-size-stepper button{min-width:36px;min-height:34px;border:1px solid #b8d2df;border-radius:6px;background:white;color:#173f60;font-weight:800;cursor:pointer}
+.wn-subject-size-stepper output{min-width:40px;text-align:center;font-weight:800;color:#124b71}
+.wn-subject-typography-controls input[type=range]{width:100%}

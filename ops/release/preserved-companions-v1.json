@@ -5,15 +5,50 @@
   "owner_review_required_to_change_contract": true,
   "required_files": {
     "al-siddique-frontend/src/Modules/Paper-Generator/DailyDiaryWorkspace.jsx": [
-      "globalSubjectFontSize", "globalDiaryFontSize", "globalSubjectBold", "footerFontSize", "logoSizeMm"
+      "globalSubjectFontSize",
+      "globalDiaryFontSize",
+      "globalSubjectBold",
+      "footerFontSize",
+      "logoSizeMm",
+      "Subject Font & Bold",
+      "Increase subject font size",
+      "Decrease subject font size",
+      "Toggle all subjects bold",
+      "Diary Font Size",
+      "Increase diary font size",
+      "Decrease diary font size",
+      "Save Diary",
+      "Saved Diaries",
+      "style_settings"
     ],
-    "al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/earlyYears/EarlyYearsWorksheetEditor.jsx": ["printEarlyYearsPaper"],
-    "al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/earlyYears/printEarlyYearsPaper.js": ["export async function printEarlyYearsPaper"]
+    "al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/earlyYears/EarlyYearsWorksheetEditor.jsx": [
+      "printEarlyYearsPaper"
+    ],
+    "al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/earlyYears/printEarlyYearsPaper.js": [
+      "export async function printEarlyYearsPaper"
+    ]
   },
   "tracked_existing_enhancements": [
-    "DailyDiaryWorkspace.css", "DailyDiaryWorkspace.jsx", "EarlyYearsActivityBuilder.jsx",
-    "EarlyYearsWorksheetEditor.jsx", "earlyYearsPrint.css", "AppLayout.jsx", "topbar.jsx", "index.css"
+    "DailyDiaryWorkspace.css",
+    "DailyDiaryWorkspace.jsx",
+    "EarlyYearsActivityBuilder.jsx",
+    "EarlyYearsWorksheetEditor.jsx",
+    "earlyYearsPrint.css",
+    "AppLayout.jsx",
+    "topbar.jsx",
+    "index.css"
   ],
   "untracked_source_reference": "EarlyYears print module remains in a separate owner dirty worktree; do not overwrite it directly",
-  "status": "BLOCK_CANDIDATES_THAT_OMIT_CURRENT_LIVE_FEATURES_UNTIL_RECONCILED"
+  "status": "BLOCK_CANDIDATES_THAT_OMIT_CURRENT_LIVE_FEATURES_UNTIL_RECONCILED",
+  "required_visible_diary_controls": [
+    "Subject Font & Bold",
+    "Increase subject font size",
+    "Decrease subject font size",
+    "Toggle all subjects bold",
+    "Diary Font Size",
+    "Increase diary font size",
+    "Decrease diary font size",
+    "Save Diary",
+    "Saved Diaries"
+  ]
 }

@@ -45,7 +45,7 @@
 .term-print-document th,.term-print-document td{border:1px solid #b7c9d7;padding:7px;vertical-align:top;overflow-wrap:anywhere}
 .term-print-document thead th{background:#edf3f7;color:#173f60;font:700 calc(var(--term-text-size) - 1px) Arial,sans-serif}
 .term-print-subjects th:first-child{width:var(--term-subject-width)}
-.term-print-subjects tbody th{font:700 var(--term-subject-name) Arial,sans-serif;text-align:left}
+.term-print-subjects tbody th{font:var(--term-subject-weight,700) var(--term-subject-name) Arial,sans-serif;text-align:left}
 .term-print-subjects tbody tr,.term-print-assessments tbody tr{min-height:var(--term-row-height);height:var(--term-row-height)}
 .term-print-subjects tbody td{white-space:pre-wrap;line-height:1.7}
 .term-urdu-content{direction:rtl;text-align:right;white-space:pre-wrap;font-family:var(--term-urdu-font,"Jameel Noori Nastaleeq"),"Jameel Noori Nastaleeq","Noto Nastaliq Urdu","Noto Naskh Arabic",serif;unicode-bidi:plaintext}
@@ -73,3 +73,11 @@
 .term-small-action{font-size:9px!important;padding:4px 6px!important;margin-top:4px}
 
 .term-print-unsourced{font:700 11px Arial,sans-serif;color:#85632b;border:1px solid #d2b875;padding:7px;text-align:center;break-inside:avoid}
+
+/* Term master print controls: same persisted design fields as Week/Day. */
+.term-subject-typography-controls{display:grid;gap:7px;border:1px solid #dce8ef;border-radius:9px;padding:10px;background:#f7fbfd}
+.term-subject-typography-controls>span{font-size:11px;font-weight:750;color:#173f60}
+.term-subject-size-stepper{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.term-subject-size-stepper button{min-width:36px;min-height:34px;border:1px solid #b8d2df;border-radius:6px;background:white;color:#173f60;font-weight:800;cursor:pointer}
+.term-subject-size-stepper output{min-width:40px;text-align:center;font-weight:800;color:#124b71}
+.term-subject-typography-controls input[type=range]{width:100%}

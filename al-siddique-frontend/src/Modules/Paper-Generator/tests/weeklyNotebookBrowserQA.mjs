@@ -72,6 +72,14 @@ try{
  await page.getByText('3 authorized students loaded').waitFor()
  await page.waitForFunction(()=>document.querySelectorAll('[data-lesson-student-card]').length===3)
  assert.equal(await page.locator('[data-lesson-student-card]').count(),3)
+ const beforeWeekSize=Number((await page.locator('[data-lesson-student-card]').first().evaluate(
+    x=>getComputedStyle(x).getPropertyValue('--wn-subject-name-size').trim())).replace('px',''))
+ await page.getByRole('button',{name:'Increase planner subject size'}).click()
+ const afterWeekSize=Number((await page.locator('[data-lesson-student-card]').first().evaluate(
+    x=>getComputedStyle(x).getPropertyValue('--wn-subject-name-size').trim())).replace('px',''))
+ assert.equal(afterWeekSize,beforeWeekSize+1)
+ await page.getByRole('button',{name:'Toggle planner subject bold'}).click()
+ assert.equal(await page.getByRole('button',{name:'Toggle planner subject bold'}).getAttribute('aria-pressed'),'false')
  await page.getByLabel('Student cards / page').selectOption('1')
  assert.equal(await page.locator('.wn-paper').count(),3)
  await page.getByLabel('Student cards / page').selectOption('2')
@@ -100,6 +108,9 @@ try{
  await item.waitFor()
  await item.click()
  await page.locator('.wn-editline').first().locator('textarea').waitFor()
+ assert.equal(await page.getByRole('button',{name:'Toggle planner subject bold'}).getAttribute('aria-pressed'),'false')
+ assert.equal(await page.locator('.wn-card').first().evaluate(n=>
+   getComputedStyle(n).getPropertyValue('--wn-subject-name-size').trim()),afterWeekSize+'px')
  assert.equal(await page.locator('.wn-editline').first().locator('textarea').inputValue(),
   'Unit #7 — Verb; pages #29–32. Practise briefly.')
  await page.locator('.wn-editline').first().locator('textarea').fill('Unit #7 — Verb; pages #29–32. Revised weekly work.')
@@ -123,6 +134,12 @@ try{
  assert.ok((await popup.locator('body').innerText()).includes('Unit #7'))
  assert.ok(printed.includes('ASSESSMENT'))
  assert.ok(printed.includes('school-logo.svg'))
+ const printedSubjectStyle=await popup.locator('.wn-card').first().evaluate(n=>({
+   size:getComputedStyle(n).getPropertyValue('--wn-subject-name-size').trim(),
+   weight:getComputedStyle(n).getPropertyValue('--wn-subject-name-weight').trim()
+ }))
+ assert.equal(printedSubjectStyle.size,afterWeekSize+'px')
+ assert.equal(Number(printedSubjectStyle.weight),450)
  const layout=await popup.evaluate(()=>{
    const p=document.querySelector('.wn-paper'),cards=[...document.querySelectorAll('.wn-card')]
    return {paper:p?{offsetW:p.offsetWidth,offsetH:p.offsetHeight,scrollH:p.scrollHeight,
@@ -154,6 +171,8 @@ try{
  assert.equal(errors.length,0,JSON.stringify(errors))
  await popup.close()
  await page.getByRole('button',{name:'3. Daily Student Cards'}).click()
+ assert.equal(await page.locator('.wn-card').first().evaluate(n=>
+   getComputedStyle(n).getPropertyValue('--wn-subject-name-size').trim()),afterWeekSize+'px')
  await page.locator('.wn-daily-date input[type=date]').fill('2026-11-10')
  await page.waitForTimeout(90)
  assert.ok((await page.locator('.wn-card-week').first().innerText()).includes('10 Nov 2026'))

@@ -1,4 +1,5 @@
 import {useEffect,useMemo,useState} from 'react'
+import { changeSubjectTypography, normalizeSubjectTypography } from './plannerSubjectTypography.js'
 import {BookOpen,CalendarDays,FileInput,Printer,Save,Download} from 'lucide-react'
 import api from '../../services/api'
 import {getTenantStorageItem,setTenantStorageItem} from '../../services/tenantStorage'
@@ -43,7 +44,7 @@ const studentClass=s=>s?.class||s?.class_name||s?.classLevel||s?.class_level||''
 
 const chunk=(arr,n)=>Array.from({length:Math.ceil(arr.length/n)},(_,i)=>arr.slice(i*n,(i+1)*n))
 const PAGE_OPTIONS=[1,2,3,4,6,8]
-const defaultDesign={cardsPerPage:3,fontSize:10,headerSize:13,schoolNameSize:17,subjectNameSize:12,
+const defaultDesign={cardsPerPage:3,fontSize:10,headerSize:13,schoolNameSize:17,subjectNameSize:14,subjectNameBold:true,
  subjectWidth:25,assessmentWidth:55,rowHeight:22,fontFamily:'Times New Roman',
  urduFontFamily:'Jameel Noori Nastaleeq',palette:'navy',zoom:72}
 const dateLabel=s=>{if(!s)return '';const d=new Date(s+'T12:00:00Z');return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric',timeZone:'UTC'})}
@@ -66,7 +67,8 @@ function Card({student,rows,klass,section,teacher,week,design,cardIndex,viewMode
  return <article className="wn-card" data-lesson-student-card
    style={{'--wn-title':design.headerSize+'px',
      '--wn-name-size':design.schoolNameSize+'px',
-     '--wn-subject-name-size':design.subjectNameSize+'px',
+     '--wn-subject-name-size':normalizeSubjectTypography(design).subjectNameSize+'px',
+     '--wn-subject-name-weight':normalizeSubjectTypography(design).subjectNameBold ? 750 : 450,
      '--wn-urdu-font':design.urduFontFamily,
      '--wn-font':design.fontSize+'px','--wn-text-family':design.fontFamily,
      '--wn-subject-width':design.subjectWidth+'%',
@@ -649,8 +651,22 @@ export default function WeeklyNotebookStudio(){
        <label>Urdu font<select value={design.urduFontFamily} onChange={e=>patchDesign('urduFontFamily',e.target.value)}>
          <option>Jameel Noori Nastaleeq</option><option>Noto Nastaliq Urdu</option><option>Noto Naskh Arabic</option>
        </select></label>
-       <label>Subject name <b>{design.subjectNameSize}px</b><input type="range" min="10" max="23"
-         value={design.subjectNameSize} onChange={e=>patchDesign('subjectNameSize',Number(e.target.value))}/></label>
+       <div className="wn-subject-typography-controls" aria-label="Weekly and Daily subject typography">
+         <span>Subject name size &amp; bold</span>
+         <div className="wn-subject-size-stepper">
+           <button type="button" aria-label="Decrease planner subject size"
+             onClick={()=>setDesign(old=>changeSubjectTypography(old,'smaller'))}>−</button>
+           <output aria-live="polite">{normalizeSubjectTypography(design).subjectNameSize}px</output>
+           <button type="button" aria-label="Increase planner subject size"
+             onClick={()=>setDesign(old=>changeSubjectTypography(old,'larger'))}>+</button>
+           <button type="button" aria-pressed={normalizeSubjectTypography(design).subjectNameBold}
+             aria-label="Toggle planner subject bold"
+             onClick={()=>setDesign(old=>changeSubjectTypography(old,'toggleBold'))}>B</button>
+         </div>
+         <input type="range" min="10" max="23" aria-label="Planner subject font size slider"
+           value={normalizeSubjectTypography(design).subjectNameSize}
+           onChange={e=>patchDesign('subjectNameSize',Number(e.target.value))}/>
+       </div>
        <label>Assessment column <b>{design.assessmentWidth}%</b><input type="range" min="35" max="70"
          value={design.assessmentWidth} onChange={e=>patchDesign('assessmentWidth',Number(e.target.value))}/></label>
        <label>Subject column <b>{design.subjectWidth}%</b><input type="range" min="17" max="45"

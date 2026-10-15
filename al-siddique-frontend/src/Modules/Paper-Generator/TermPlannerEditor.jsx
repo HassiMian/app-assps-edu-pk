@@ -1,5 +1,6 @@
 import {Save,Printer,Plus,RotateCcw,BookOpen} from 'lucide-react'
 import {termAssessmentRows} from './termPlanningModel.js'
+import { changeSubjectTypography, normalizeSubjectTypography } from './plannerSubjectTypography.js'
 import './TermPlannerEditor.css'
 
 const fonts=['Times New Roman','Arial','Georgia','Inter']
@@ -14,7 +15,8 @@ export default function TermPlannerEditor({klass,section,term,start,end,setTerm,
     '--term-text-size':design.fontSize+'px',
     '--term-head-size':design.headerSize+'px',
     '--term-school-name':(design.schoolNameSize||17)+'px',
-    '--term-subject-name':(design.subjectNameSize||12)+'px',
+    '--term-subject-name':normalizeSubjectTypography(design).subjectNameSize+'px',
+    '--term-subject-weight':normalizeSubjectTypography(design).subjectNameBold ? 750 : 450,
     '--term-urdu-font':design.urduFontFamily||'Jameel Noori Nastaleeq',
     '--term-row-height':design.rowHeight+'px',
     '--term-subject-width':design.subjectWidth+'%',
@@ -92,7 +94,7 @@ export default function TermPlannerEditor({klass,section,term,start,end,setTerm,
             </select></label>
           {[
             ['fontSize','Body text size',9,20,'px'],
-            ['subjectNameSize','Subject name size',10,23,'px'],
+
             ['headerSize','Section heading',11,26,'px'],
             ['schoolNameSize','School name/header',12,30,'px'],
             ['rowHeight','Row minimum height',22,80,'px'],
@@ -104,6 +106,22 @@ export default function TermPlannerEditor({klass,section,term,start,end,setTerm,
               value={design[name]||({subjectNameSize:12,schoolNameSize:17,assessmentWidth:55}[name])}
               onChange={e=>onChangeDesign(name,Number(e.target.value))}/>
           </label>)}
+          <div className="term-subject-typography-controls" aria-label="Term subject typography">
+            <span>Subject name size &amp; bold</span>
+            <div className="term-subject-size-stepper">
+              <button type="button" aria-label="Decrease term subject size"
+                onClick={()=>onChangeDesign('subjectNameSize',changeSubjectTypography(design,'smaller').subjectNameSize)}>−</button>
+              <output aria-live="polite">{normalizeSubjectTypography(design).subjectNameSize}px</output>
+              <button type="button" aria-label="Increase term subject size"
+                onClick={()=>onChangeDesign('subjectNameSize',changeSubjectTypography(design,'larger').subjectNameSize)}>+</button>
+              <button type="button" aria-label="Toggle term subject bold"
+                aria-pressed={normalizeSubjectTypography(design).subjectNameBold}
+                onClick={()=>onChangeDesign('subjectNameBold',!normalizeSubjectTypography(design).subjectNameBold)}>B</button>
+            </div>
+            <input type="range" aria-label="Term subject font size slider" min="10" max="23"
+              value={normalizeSubjectTypography(design).subjectNameSize}
+              onChange={e=>onChangeDesign('subjectNameSize',Number(e.target.value))}/>
+          </div>
           <button onClick={onResetDesign}><RotateCcw size={13}/> Reset formatting</button>
         </div>
         <h4>Server-saved term plans</h4>

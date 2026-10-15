@@ -26,7 +26,7 @@ from importlib.util import module_from_spec, spec_from_file_location
 
 HERE = Path(__file__).resolve().parent
 CHECKER = HERE/'check-lesson-planner-ui.py'
-CONTRACT = HERE/'lesson-planner-ui-contract-v3.json'
+CONTRACT = HERE/'lesson-planner-ui-contract-v4.json'
 NGINX_SITE = Path('/etc/nginx/sites-enabled/apex-app-ssl')
 APP_DOMAIN = 'app.assps.edu.pk'
 CORE_VERIFIER = Path('/root/workspace/assps-core-real-actor-acceptance-handoff-20261015'

@@ -71,6 +71,15 @@ try{
  await page.getByLabel('English page from').fill('31')
  await page.getByLabel('English page to').fill('65')
  await page.getByLabel('Term English font').selectOption('Georgia')
+ // Real V4 term subject + / - and bold controls affect the rendered A4 master.
+ const beforeTermSize=Number((await page.locator('.term-print-document').evaluate(
+   x=>getComputedStyle(x).getPropertyValue('--term-subject-name').trim())).replace('px',''))
+ await page.getByRole('button',{name:'Increase term subject size'}).click()
+ const afterTermSize=Number((await page.locator('.term-print-document').evaluate(
+   x=>getComputedStyle(x).getPropertyValue('--term-subject-name').trim())).replace('px',''))
+ assert.equal(afterTermSize,beforeTermSize+1)
+ await page.getByRole('button',{name:'Toggle term subject bold'}).click()
+ assert.equal(await page.getByRole('button',{name:'Toggle term subject bold'}).getAttribute('aria-pressed'),'false')
  await page.locator('.term-controls input[type=range]').first().fill('16')
  const updatedDate='2026-10-30'
  await page.getByLabel('Assessment 1 date').fill(updatedDate)
@@ -103,6 +112,12 @@ try{
  const printedFont=await popup.locator('.term-print-document').evaluate(n=>
   getComputedStyle(n).getPropertyValue('--term-text-family').trim())
  assert.equal(printedFont,'Georgia')
+ const printedTermHeading=await popup.locator('.term-print-document').evaluate(n=>({
+    size:getComputedStyle(n).getPropertyValue('--term-subject-name').trim(),
+    weight:getComputedStyle(n).getPropertyValue('--term-subject-weight').trim()
+ }))
+ assert.equal(printedTermHeading.size,afterTermSize+'px')
+ assert.equal(Number(printedTermHeading.weight),450)
  const pdf='/tmp/assps-term-browser-private-synthetic-a4.pdf'
  await popup.pdf({path:pdf,format:'A4',printBackground:true})
  const bytes=fs.statSync(pdf).size
@@ -118,6 +133,9 @@ try{
  assert.equal(await page.getByLabel('English page from').inputValue(),'31')
  assert.equal(await page.getByLabel('English page to').inputValue(),'65')
  assert.equal(await page.getByLabel('Term English font').inputValue(),'Georgia')
+ assert.equal(await page.getByRole('button',{name:'Toggle term subject bold'}).getAttribute('aria-pressed'),'false')
+ assert.equal(await page.locator('.term-print-document').evaluate(x=>
+   getComputedStyle(x).getPropertyValue('--term-subject-name').trim()),afterTermSize+'px')
  assert.equal(await page.getByLabel('Assessment 1 date').inputValue(),updatedDate)
  await page.getByLabel('English term coverage').fill(detailed+' EDITED')
  await page.getByRole('button',{name:'Save Term'}).click()

@@ -62,7 +62,7 @@ def evaluate(source, contract, dist=None):
                 runtime[name]={'chunks':files,'status':'MISSING_OR_AMBIGUOUS'}
                 continue
             filetext=(assets/files[0]).read_text(errors='replace')
-            required={'rich_diary':['globalSubjectFontSize','globalDiaryFontSize','globalSubjectBold','footerFontSize','logoSizeMm'],
+            required={'rich_diary':['globalSubjectFontSize','globalDiaryFontSize','globalSubjectBold','footerFontSize','logoSizeMm',*contract.get('required_visible_diary_controls',[])],
                       'early_years_editor':['printEarlyYearsPaper'],
                       'early_years_printer':['early-years-sheet-a4','iframe','4mm']}
             absent=[m for m in required[name] if m not in filetext]

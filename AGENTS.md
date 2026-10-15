@@ -65,3 +65,21 @@ ban. Owners can improve or intentionally replace the Diary/printing design,
 then update the reviewed feature contract and its adversarial tests.
 The final built index/chunk graph, protected backend guard and genuine Core
 release certificates remain separately required.
+
+## Product design contract — Independent Diary and Planning modes V4
+
+Read docs/coordination/ASSPS_UNIFIED_DIARY_LESSON_PLANNER_V4_20261015.md
+before modifying Daily Diary, Term Planner, Weekly Planner, Daily Lesson
+Planner, student roster printing or the associated layout/typography controls.
+
+Operational Daily Diary is a separate daily-use editor/library/print surface;
+Term, Weekly and Daily Lesson Planning are separate planning document types
+and must have independent Save/Reopen scopes. Do not misrepresent a Weekly-
+derived Daily Student Card view as completed persisted Daily Lesson Planning.
+Every printed subject heading must offer size + / -, visible numeric/slider
+and Bold, and preserve saved styling and actual A4 PDF/print parity. Existing
+Daily Diary controllers cannot disappear after unrelated frontend release.
+The v4 UI contract, live companion contract, school tenant/RLS, real printer
+and Core signed rollback gates must all pass before promoting frontend.
+A legitimate future redesign may update reviewed versioned contracts/tests;
+never hard-freeze one Git SHA or overwrite a newer owner dirty worktree.
