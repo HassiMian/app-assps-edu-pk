@@ -1,0 +1,30 @@
+'use strict'
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto')
+const dir=path.resolve(__dirname,'../../docs/question-bank')
+const receipt=JSON.parse(fs.readFileSync(path.join(dir,'ASSPS_GRADE910_COMPLETE_PRIVATE_FACULTY_WORKBENCH_ATTESTATION_20261015.json')))
+const SHA=v=>crypto.createHash('sha256').update(v).digest('hex')
+test('public-safe summary fingerprints existing 2581-source crosswalk instead of new AI-generated questions',()=>{
+ assert.equal(receipt.originalResearchCandidates,2581)
+ assert.equal(receipt.originalsNeedingHumanReview,2580)
+ assert.equal(receipt.groups,56)
+ assert.equal(receipt.heldOriginalId,'X-CHEM-C23-L01')
+ assert.equal(receipt.originalPublicCrosswalkSha256,SHA(fs.readFileSync(path.join(dir,'ASSPS_GRADE910_2581_PUBLIC_SAFE_REVIEW_CROSSWALK_20261015.json'))))
+})
+test('all questions have exact independent blind, teacher review and textbook evidence links',()=>{
+ assert.equal(receipt.blindWorksheetLinks,2580)
+ assert.equal(receipt.unsignedTeacherFormLinks,2580)
+ assert.equal(receipt.unsignedBookEvidenceFormLinks,2580)
+ assert.equal(receipt.uniqueExistingPrivateFilesReferenced,2756)
+ assert.equal(receipt.groupCounts.length,56)
+ assert.equal(new Set(receipt.groupCounts.map(x=>x.groupKey)).size,56)
+ assert.equal(receipt.groupCounts.reduce((sum,x)=>sum+x.candidates,0),2580)
+ assert.match(receipt.offlineWorkbenchSha256,/^[0-9a-f]{64}$/)
+})
+test('no offline index receipt can be interpreted as institution-authorized signoff or production publication',()=>{
+ for(const name of ['authenticIndependentTeacherReviews','realBookAdoptionsConfirmed',
+  'schoolPrincipalAuthenticatedApprovals','academicallyApproved','published','productionWrites'])
+  assert.equal(receipt[name],0)
+ assert.match(receipt.releaseDecision,/HOLD/)
+ for(const name of ['questionText','questionOptions','correctAnswer','studentName','reviewerName','signedCertificate','privateDirectory'])
+  assert.equal(Object.hasOwn(receipt,name),false)
+})

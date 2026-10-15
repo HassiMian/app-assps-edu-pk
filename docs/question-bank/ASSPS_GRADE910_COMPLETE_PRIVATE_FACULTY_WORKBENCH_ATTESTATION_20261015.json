@@ -1,0 +1,249 @@
+{
+  "schema": "assps-grade910-complete-owner-only-2580-faculty-review-workbench-v1",
+  "session": "2026-27",
+  "originalResearchCandidates": 2581,
+  "originalsNeedingHumanReview": 2580,
+  "groups": 56,
+  "heldOriginalId": "X-CHEM-C23-L01",
+  "blindWorksheetLinks": 2580,
+  "unsignedTeacherFormLinks": 2580,
+  "unsignedBookEvidenceFormLinks": 2580,
+  "uniqueExistingPrivateFilesReferenced": 2756,
+  "maxEditorialPriority": 410,
+  "groupCounts": [
+    {
+      "groupKey": "9~agriculture-sciences-tech~english",
+      "candidates": 30
+    },
+    {
+      "groupKey": "9~agriculture-sciences-tech~urdu",
+      "candidates": 30
+    },
+    {
+      "groupKey": "9~art-model-drawing~english",
+      "candidates": 24
+    },
+    {
+      "groupKey": "9~art-model-drawing~urdu",
+      "candidates": 24
+    },
+    {
+      "groupKey": "9~biology~dual",
+      "candidates": 48
+    },
+    {
+      "groupKey": "9~biology~english",
+      "candidates": 72
+    },
+    {
+      "groupKey": "9~biology~urdu",
+      "candidates": 33
+    },
+    {
+      "groupKey": "9~biology-tech~english",
+      "candidates": 27
+    },
+    {
+      "groupKey": "9~biology-tech~urdu",
+      "candidates": 27
+    },
+    {
+      "groupKey": "9~chemistry~english",
+      "candidates": 315
+    },
+    {
+      "groupKey": "9~chemistry~urdu",
+      "candidates": 39
+    },
+    {
+      "groupKey": "9~chemistry-tech~english",
+      "candidates": 39
+    },
+    {
+      "groupKey": "9~chemistry-tech~urdu",
+      "candidates": 39
+    },
+    {
+      "groupKey": "9~computer~english",
+      "candidates": 60
+    },
+    {
+      "groupKey": "9~computer-science-entrepreneurship-tech~english",
+      "candidates": 30
+    },
+    {
+      "groupKey": "9~computer-science-entrepreneurship-tech~urdu",
+      "candidates": 30
+    },
+    {
+      "groupKey": "9~english~english",
+      "candidates": 99
+    },
+    {
+      "groupKey": "9~fashion-designing-tech~english",
+      "candidates": 36
+    },
+    {
+      "groupKey": "9~general-science-tech~english",
+      "candidates": 33
+    },
+    {
+      "groupKey": "9~general-science-tech~urdu",
+      "candidates": 33
+    },
+    {
+      "groupKey": "9~ghiza-aur-ghizayat~urdu",
+      "candidates": 15
+    },
+    {
+      "groupKey": "9~health-sciences-tech~english",
+      "candidates": 40
+    },
+    {
+      "groupKey": "9~home-economics~urdu",
+      "candidates": 24
+    },
+    {
+      "groupKey": "9~ict-tech~english",
+      "candidates": 30
+    },
+    {
+      "groupKey": "9~islamiat~urdu",
+      "candidates": 35
+    },
+    {
+      "groupKey": "9~mathematics~english",
+      "candidates": 65
+    },
+    {
+      "groupKey": "9~mathematics~urdu",
+      "candidates": 39
+    },
+    {
+      "groupKey": "9~parcha-bafi-(textile-and-clothing)~urdu",
+      "candidates": 21
+    },
+    {
+      "groupKey": "9~physics~english",
+      "candidates": 54
+    },
+    {
+      "groupKey": "9~physics~urdu",
+      "candidates": 27
+    },
+    {
+      "groupKey": "9~physics-tech~english",
+      "candidates": 32
+    },
+    {
+      "groupKey": "9~physics-tech~urdu",
+      "candidates": 32
+    },
+    {
+      "groupKey": "9~tarjuma-tul-quran~urdu",
+      "candidates": 54
+    },
+    {
+      "groupKey": "9~urdu~urdu",
+      "candidates": 92
+    },
+    {
+      "groupKey": "10~art-model-drawing~english",
+      "candidates": 21
+    },
+    {
+      "groupKey": "10~art-model-drawing~urdu",
+      "candidates": 21
+    },
+    {
+      "groupKey": "10~biology~english",
+      "candidates": 60
+    },
+    {
+      "groupKey": "10~biology~urdu",
+      "candidates": 40
+    },
+    {
+      "groupKey": "10~biology-tech~english",
+      "candidates": 24
+    },
+    {
+      "groupKey": "10~chemistry~english",
+      "candidates": 64
+    },
+    {
+      "groupKey": "10~chemistry~urdu",
+      "candidates": 39
+    },
+    {
+      "groupKey": "10~communication-skills-tech~english",
+      "candidates": 27
+    },
+    {
+      "groupKey": "10~computer-science~english",
+      "candidates": 40
+    },
+    {
+      "groupKey": "10~computer-science~urdu",
+      "candidates": 40
+    },
+    {
+      "groupKey": "10~english~english",
+      "candidates": 50
+    },
+    {
+      "groupKey": "10~ghiza-aur-ghizayat~urdu",
+      "candidates": 15
+    },
+    {
+      "groupKey": "10~health-sciences-tech~english",
+      "candidates": 27
+    },
+    {
+      "groupKey": "10~home-economics~urdu",
+      "candidates": 21
+    },
+    {
+      "groupKey": "10~mathematics~english",
+      "candidates": 96
+    },
+    {
+      "groupKey": "10~pakistan-studies~english",
+      "candidates": 40
+    },
+    {
+      "groupKey": "10~pakistan-studies~urdu",
+      "candidates": 40
+    },
+    {
+      "groupKey": "10~parcha-bafi-(textile-and-clothing)~urdu",
+      "candidates": 21
+    },
+    {
+      "groupKey": "10~physics~english",
+      "candidates": 96
+    },
+    {
+      "groupKey": "10~physics-tech~english",
+      "candidates": 30
+    },
+    {
+      "groupKey": "10~tarjuma-tul-quran~urdu",
+      "candidates": 45
+    },
+    {
+      "groupKey": "10~urdu~urdu",
+      "candidates": 95
+    }
+  ],
+  "originalPublicCrosswalkSha256": "a67852e7e03cfd0ad7bb9c4cd50138a6a0a68a078624ff65356a8bf25657186b",
+  "originalPrivateRiskPrioritySha256": "d0737b5b0c543fc227d48ab1fdd1818b9e3d15a0e5e5ed2e4d1b0179f7f29101",
+  "offlineWorkbenchSha256": "adc6a748424552caa4faa1240566ff732dd82ea2c217a85a91a648bfa86ec265",
+  "authenticIndependentTeacherReviews": 0,
+  "realBookAdoptionsConfirmed": 0,
+  "schoolPrincipalAuthenticatedApprovals": 0,
+  "academicallyApproved": 0,
+  "published": 0,
+  "productionWrites": 0,
+  "releaseDecision": "HOLD_AUTHENTIC_SCHOOL_ACADEMIC_EVIDENCE"
+}
