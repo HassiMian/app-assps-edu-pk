@@ -16,6 +16,7 @@ import os
 from pathlib import Path
 import re
 import shutil
+import stat as statmod
 import subprocess
 import sys
 import tempfile
@@ -33,6 +34,7 @@ CORE_VERIFIER = Path('/root/workspace/assps-core-real-actor-acceptance-handoff-2
 LOCK = Path('/run/lock/assps-frontend-release.lock')
 BACKUP_ROOT = Path('/root/assps-release-backups')
 OUTPUT_ROOT = Path('/var/www')
+RUNNING_BACKEND = Path('/var/www/apex-backend')
 HTML_ROOT_RE = re.compile(r'^([ \t]*root[ \t]+)(/var/www/assps-[^\s;]+)(;[ \t]*)$', re.M)
 
 
@@ -73,6 +75,35 @@ def check_core(args):
     if not all(checks.get(item) is True for item in essential):
         raise RuntimeError('Signed school actors, rollback or runtime worker gate missing')
     return result
+
+
+
+def check_running_backend_provenance(repo, backend=RUNNING_BACKEND):
+    """Require the published private academic guard before exposing its UI.
+
+    Pinned to the exact reviewed *candidate source*, not a historical fixed
+    hash. A newer audited descendant is deployable through the same path.
+    Other backend routes may evolve, so inspect guarded endpoint invariants
+    instead of requiring a stale complete backend file hash.
+    """
+    reviewed=Path(repo)/'al-siddique-backend/src/services/lessonPlanningPublicationGuard.js'
+    running=Path(backend)/'src/services/lessonPlanningPublicationGuard.js'
+    if not reviewed.is_file() or not running.is_file():
+        raise RuntimeError('Protected academic lesson backend guard is NOT live; Core must promote the reviewed guard first')
+    if sha(reviewed)!=sha(running):
+        raise RuntimeError('Running academic guard differs from candidate; reviewed backend parity required')
+    route=Path(backend)/'src/routes/lessonPlanRoutes.js'
+    if not route.is_file():
+        raise RuntimeError('Running backend lesson plan route missing')
+    text=route.read_text(encoding='utf-8',errors='replace')
+    required=('lessonPlanningPublicationGuard',
+              'mustHoldLessonPublication',
+              'privateLessonMutationAllowed',
+              'LESSON_PLAN_ACADEMIC_APPROVAL_REQUIRED',
+              'LESSON_PLAN_ACADEMIC_SOURCE_LOCKED')
+    if any(item not in text for item in required):
+        raise RuntimeError('Running backend lacks the approved publication/update/delete protections')
+    return True
 
 
 def main():
@@ -121,6 +152,7 @@ def main():
         return 0
     # Gate before touching any /var/www or nginx production files.
     check_core(args)
+    check_running_backend_provenance(repo)
     with LOCK.open('a+') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX | fcntl.LOCK_NB)
         now=NGINX_SITE.read_text(encoding='utf-8')
@@ -153,10 +185,14 @@ def main():
             raise RuntimeError('Cannot precisely replace one root directive')
         success=False
         try:
-            tmp=NGINX_SITE.with_name(NGINX_SITE.name+'.lesson-staged-'+str(os.getpid()))
+            target_config=NGINX_SITE.resolve(strict=True)
+            original_mode=statmod.S_IMODE(target_config.stat().st_mode)
+            tmp=target_config.with_name(target_config.name+'.lesson-staged-'+str(os.getpid()))
             tmp.write_text(newcfg)
-            tmp.chmod(0o644)
-            os.replace(tmp,NGINX_SITE)
+            tmp.chmod(original_mode)
+            # Preserve a sites-enabled symlink by atomically replacing its
+            # resolved target, never by silently replacing the symlink.
+            os.replace(tmp,target_config)
             if run(['nginx','-t']).returncode!=0:raise RuntimeError('Nginx syntax invalid')
             if run(['systemctl','reload','nginx']).returncode!=0:raise RuntimeError('Nginx reload failed')
             p=run(['curl','-fsS','--max-time','15','--resolve',
@@ -170,7 +206,7 @@ def main():
             return 0
         finally:
             if not success:
-                shutil.copy2(backup/'apex-app-ssl.pre-change',NGINX_SITE)
+                shutil.copy2(backup/'apex-app-ssl.pre-change',NGINX_SITE.resolve(strict=True))
                 run(['nginx','-t'])
                 run(['systemctl','reload','nginx'])
 

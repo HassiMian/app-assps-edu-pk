@@ -5,6 +5,7 @@ on:
     paths:
       - "al-siddique-frontend/**"
       - "ops/release/check-lesson-planner-ui.py"
+      - "ops/release/guarded-lesson-planner-rollout.py"
       - "ops/release/lesson-planner-ui-contract-*.json"
       - "ops/release/tests/test_lesson_planner_ui_contract.py"
       - ".github/workflows/lesson-planner-release-contract.yml"
@@ -18,6 +19,7 @@ on:
     paths:
       - "al-siddique-frontend/**"
       - "ops/release/check-lesson-planner-ui.py"
+      - "ops/release/guarded-lesson-planner-rollout.py"
       - "ops/release/lesson-planner-ui-contract-*.json"
       - "ops/release/tests/test_lesson_planner_ui_contract.py"
       - ".github/workflows/lesson-planner-release-contract.yml"
@@ -50,3 +52,5 @@ jobs:
         run: python3 ops/release/check-lesson-planner-ui.py --dist al-siddique-frontend/dist
       - name: Verify stale-but-present chunks cannot bypass regression check
         run: python3 -m unittest discover -s ops/release/tests -p test_lesson_planner_ui_contract.py -v
+      - name: Verify safe rollout and original source boundaries
+        run: python3 -m unittest discover -s ops/release/tests -p test_lesson_rollout_guard.py -v

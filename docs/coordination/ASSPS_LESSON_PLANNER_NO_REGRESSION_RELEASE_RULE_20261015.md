@@ -42,3 +42,21 @@ The tool preserves the existing live frontend directory, creates a new commit-na
 - Publication, tenant-RLS/worker and real staff acceptance still require independent SaaS Core release verification. Technical source passing alone is NOT public certification.
 
 Status: regression verified and recovery candidate prepared; no public cutover was performed merely by authoring this documentation.
+
+## Additional approved-cutover checks
+
+The release candidate must match the reviewed academic publication/update/
+delete backend guard as genuinely installed in the running backend. This is
+source parity, not a permanent hard-coded SHA. Subsequent reviewed versions
+remain deployable by updating the reviewed candidate and tests.
+
+The live backend currently lacks that security module. Without a signed Core
+release, --apply correctly returns HOLD before any production copy/switch.
+A future approved promotion preserves Nginx configuration mode and symlink,
+pre-change static root, checksum and a rollback copy.
+
+Root AGENTS.md directs all parallel agent workstreams through the actual
+index-reachable Lesson Planner regression test. The GitHub workflow runs
+automatically for changed frontend/contract paths. Its status needs required
+branch protection by a GitHub repository administrator to prevent manual
+out-of-band bypass; workflow presence alone cannot prove that protection.
