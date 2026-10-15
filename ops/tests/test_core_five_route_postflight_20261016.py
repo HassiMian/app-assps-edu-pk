@@ -51,6 +51,7 @@ def exercise(*, failed_label=None, lesson_ok=True, companion_ok=True):
         marks_guard=Path("/synthetic/verify-marks-register-ui-20261015.cjs"),
         results_guard=Path("/synthetic/verify-resultcards-v2-active-20261015.cjs"),
         academic_v3_guard=Path("/synthetic/verify-resultcards-v3-active-20261015.cjs"),
+        owner_acceptance_contract=Path("/synthetic/resultcards-owner-acceptance-and-employee-source-20261016.test.cjs"),
         diary_guard=Path("/synthetic/verify-diary-controls-in-active-bundle-20261015.cjs"),
         run=fake_run,
     )
