@@ -250,8 +250,29 @@ def main():
                 raise RuntimeError('Local TLS frontend postflight failed')
             # Never mark success until the exact promoted root passes the same
             # active-entrypoint protection; failure triggers original-config rollback.
-            if run(['node',str(diary_guard),'--dist',str(newroot)]).returncode!=0:
-                raise RuntimeError('FAIL_CLOSED: active Diary controller contract failed postflight')
+            # Verify ALL protected teacher-facing routes on the staged, now-live
+            # root. Preflight on dist alone cannot certify the copied live assets.
+            # A failure in ANY of these checks enters the existing Nginx rollback.
+            if not mod.validate(newroot,contract,repo)['pass']:
+                raise RuntimeError('FAIL_CLOSED: Lesson Planner V5 postflight failed')
+            if companion_module.evaluate(repo,companions_contract,newroot)['result']!='PASS':
+                raise RuntimeError('FAIL_CLOSED: Diary or Early Years printer postflight failed')
+            for title, command in (
+                ('Marks GET tenant/session routing',
+                 ['python3',str(ingress)]),
+                ('Saved Marks View/Print',
+                 ['node',str(marks_guard),'--dist',str(newroot)]),
+                ('Ten premium Result Cards templates',
+                 ['node',str(results_guard),'--dist',str(newroot)]),
+                ('Result Cards V3 roster/grade/print integrity',
+                 ['node',str(academic_v3_guard),'--dist',str(newroot)]),
+                ('Daily Diary 11-controller preservation',
+                 ['node',str(diary_guard),'--dist',str(newroot)]),
+            ):
+                check=run(command)
+                if check.returncode!=0:
+                    raise RuntimeError('FAIL_CLOSED: '+title+' postflight failed: '+
+                                       (check.stderr or check.stdout).strip()[:400])
             success=True
             plan.update(decision='FRONTEND_ONLY_PROMOTED_CORE_VERIFIED',
                         production_changed=True,rollback_config=str(backup/'apex-app-ssl.pre-change'))
