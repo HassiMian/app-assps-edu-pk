@@ -151,12 +151,16 @@ def main():
     companions=companion_module.evaluate(repo,companions_contract,dist)
     if companions['result']!='PASS':
         raise RuntimeError('Current live Diary / Early Years capabilities missing: reconcile reviewed owner changes first')
+    diary_guard=HERE/'verify-diary-controls-in-active-bundle-20261015.cjs'
+    if run(['node',str(diary_guard),'--dist',str(dist)]).returncode!=0:
+        raise RuntimeError('FAIL_CLOSED: active Diary controller import graph incomplete in release candidate')
     newroot=OUTPUT_ROOT/('assps-lesson-planner-'+commit[:12])
     expected_new=sha(dist/'index.html')
     plan={'decision':'READY_FOR_CORE_GATE' if not args.apply else 'CORE_GATE_CHECK_REQUIRED',
           'current_root':str(oldroot),'live_sha':old_index_sha,
           'candidate_root':str(newroot),'new_html_sha':expected_new,
           'candidate_git_sha':commit,'ui_contract':'PASS',
+          'active_diary_controller_contract':'PASS',
           'production_changed':False}
     if not args.apply:
         print(json.dumps(plan,indent=2))
@@ -210,6 +214,10 @@ def main():
                    APP_DOMAIN+':443:127.0.0.1','https://'+APP_DOMAIN+'/'])
             if p.returncode!=0 or hashlib.sha256(p.stdout.encode()).hexdigest()!=expected_new:
                 raise RuntimeError('Local TLS frontend postflight failed')
+            # Never mark success until the exact promoted root passes the same
+            # active-entrypoint protection; failure triggers original-config rollback.
+            if run(['node',str(diary_guard),'--dist',str(newroot)]).returncode!=0:
+                raise RuntimeError('FAIL_CLOSED: active Diary controller contract failed postflight')
             success=True
             plan.update(decision='FRONTEND_ONLY_PROMOTED_CORE_VERIFIED',
                         production_changed=True,rollback_config=str(backup/'apex-app-ssl.pre-change'))

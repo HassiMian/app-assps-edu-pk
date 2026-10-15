@@ -7,6 +7,8 @@ on:
       - "ops/release/check-lesson-planner-ui.py"
       - "ops/release/guarded-lesson-planner-rollout.py"
       - "ops/release/check-preserved-companion-features.py"
+      - "ops/release/verify-diary-controls-in-active-bundle-20261015.cjs"
+      - "ops/tests/paper-diary-active-controller-immutable-release-gate-20261015.test.cjs"
       - "ops/release/preserved-companions-v1.json"
       - "ops/release/tests/test_preserved_companions.py"
       - "ops/release/lesson-planner-ui-contract-*.json"
@@ -24,6 +26,8 @@ on:
       - "ops/release/check-lesson-planner-ui.py"
       - "ops/release/guarded-lesson-planner-rollout.py"
       - "ops/release/check-preserved-companion-features.py"
+      - "ops/release/verify-diary-controls-in-active-bundle-20261015.cjs"
+      - "ops/tests/paper-diary-active-controller-immutable-release-gate-20261015.test.cjs"
       - "ops/release/preserved-companions-v1.json"
       - "ops/release/tests/test_preserved_companions.py"
       - "ops/release/lesson-planner-ui-contract-*.json"
@@ -58,6 +62,10 @@ jobs:
         run: python3 ops/release/check-lesson-planner-ui.py --dist al-siddique-frontend/dist
       - name: Preserve live Diary / Early Years functionality before frontend cutover
         run: python3 ops/release/check-preserved-companion-features.py --dist al-siddique-frontend/dist
+      - name: Enforce actual active Diary controller import graph in built release artifact
+        run: node ops/release/verify-diary-controls-in-active-bundle-20261015.cjs --dist al-siddique-frontend/dist
+      - name: Verify immutable candidate and adversarial missing-controller detection
+        run: ASSPS_DIARY_CANDIDATE_DIST=al-siddique-frontend/dist node --test ops/tests/paper-diary-active-controller-immutable-release-gate-20261015.test.cjs
       - name: Verify stale-but-present chunks cannot bypass regression check
         run: python3 -m unittest discover -s ops/release/tests -p test_lesson_planner_ui_contract.py -v
       - name: Verify V4 subject-font controls and layout-model regression
