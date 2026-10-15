@@ -11,9 +11,9 @@ LOC=(ROOT/'assps-marks-only-locations.conf').read_text()
 def target(path,method):
  path=urlsplit(path).path
  if path in ('/api/exams','/api/exams/grade-settings'):
-  return 'green' if method=='GET' else 'legacy'
- if path=='/api/exams/results':return 'green' if method in ('GET','POST') else 'legacy'
- if re.fullmatch(r'/api/exams/results/[1-9][0-9]*',path):return 'green' if method=='GET' else 'legacy'
+  return 'legacy'
+ if path=='/api/exams/results':return 'green' if method=='POST' else 'legacy'
+ if re.fullmatch(r'/api/exams/results/[1-9][0-9]*',path):return 'legacy'
  if path=='/api/students/bulk-class-assignment':return 'green' if method=='POST' else 'deny'
  return 'legacy'
 class Contract(unittest.TestCase):
@@ -21,7 +21,8 @@ class Contract(unittest.TestCase):
   self.assertEqual(LOC.count('location = /api/exams'),3)
   self.assertIn('location ~ ^/api/exams/results/[1-9][0-9]*$',LOC)
   self.assertNotIn('location /api/',LOC)
-  self.assertEqual(MAPS.count('127.0.0.1:5091'),4)
+  self.assertEqual(MAPS.count('127.0.0.1:5091'),1)
+  self.assertEqual(MAPS.count('GET     $assps_marks_legacy_upstream;'),3)
  def test_exact_audited_student_movement_only(self):
   self.assertIn('location = /api/students/bulk-class-assignment {',LOC)
   self.assertIn('if ($request_method != POST) { return 405; }',LOC)
@@ -40,9 +41,10 @@ class Contract(unittest.TestCase):
   self.assertIn('app.assps.edu.pk http://127.0.0.1:5000;',MAPS)
   self.assertEqual(MAPS.count('default $assps_marks_legacy_upstream;'),3)
   self.assertNotIn('default http://127.0.0.1:5000;',MAPS)
- def test_marks_saves_loads_and_grades(self):
-  for path,method in [('/api/exams','GET'),('/api/exams/results','GET'),('/api/exams/results','POST'),('/api/exams/results/9','GET'),('/api/exams/grade-settings','GET')]:
-   self.assertEqual(target(path,method),'green')
+ def test_authenticated_reads_use_same_backend_as_login(self):
+  for path,method in [('/api/exams','GET'),('/api/exams/results','GET'),('/api/exams/results/9','GET'),('/api/exams/grade-settings','GET')]:
+   self.assertEqual(target(path,method),'legacy')
+  self.assertEqual(target('/api/exams/results','POST'),'green')
  def test_legacy_and_mutations_stay_old(self):
   for path,method in [('/api/auth/login','POST'),('/api/students','GET'),('/api/paper/save','POST'),('/api/fees','GET'),('/api/exams','POST'),('/api/exams/9','DELETE'),('/api/exams/grade-settings','PUT'),('/api/exams/results/9','POST'),('/api/exams/results/x','GET')]:
    self.assertEqual(target(path,method),'legacy')
