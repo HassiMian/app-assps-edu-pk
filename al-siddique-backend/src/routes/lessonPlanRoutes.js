@@ -1,5 +1,6 @@
 const express = require('express')
 const crypto = require('node:crypto')
+const fs = require('node:fs/promises')
 const router = express.Router()
 
 const { pool, tenantContext, applyTenantContext } = require('../config/database')
@@ -150,6 +151,39 @@ function expectedRevision(req) {
 router.use(protect, canManageLessonPlans, (req, res, next) => {
   if (!isSchoolDocumentManager(req.user) && (!Number.isSafeInteger(Number(req.user?.id)) || Number(req.user?.id) <= 0)) return res.status(403).json({ success:false, code:'LESSON_PLAN_ACTOR_REQUIRED', message:'Verified teacher identity is required.' })
   next()
+})
+
+// Server-held immutable academic source. Only a genuine active school Principal
+// may retrieve the class/subject archive. This route DOES NOT create/publish plans.
+router.get('/planner/private-source-bundle', async (req, res) => {
+  if (Number(resolveSchoolId(req)) !== 1 ||
+      !isSchoolDocumentManager(req.user) ||
+      !['admin','school_admin','principal'].includes(String(req.user?.role||'').toLowerCase()) ||
+      String(req.user?.designation||'').trim().toLowerCase() !== 'principal')
+    return res.status(403).json({ success:false,code:'PRINCIPAL_SOURCE_ACCESS_DENIED' })
+  try {
+    const schoolId=resolveSchoolId(req)
+    const actor=await withTenantTransaction(req,schoolId,client=>client.query(
+      'SELECT id FROM users WHERE id=$1 AND school_id=$2 AND is_active=true '+
+      "AND lower(trim(designation))='principal' AND lower(role) IN ('admin','school_admin','principal') LIMIT 1",
+      [Number(req.user.id),schoolId]))
+    if (actor.rowCount!==1)
+      return res.status(403).json({success:false,code:'PRINCIPAL_IDENTITY_NOT_VERIFIED'})
+    const file=await fs.readFile('/root/secure-archive/composer-review-20261014/manifest_plus_classone_private.json')
+    if (crypto.createHash('sha256').update(file).digest('hex')!=='4d2ccdce5ec644750a530c890df5a0a41eaee5b76f1e4ba47d912617db5c0cda')
+      return res.status(503).json({success:false,code:'ORIGINAL_SOURCE_INTEGRITY_ERROR'})
+    const manifest=JSON.parse(file.toString('utf8'))
+    if (manifest.schema!=='assps.lesson_plan.review_import.v1' ||
+        manifest.candidates?.length!==59 ||
+        manifest.class_one_image_review?.weeks?.length!==18)
+      return res.status(503).json({success:false,code:'ORIGINAL_SOURCE_SCHEMA_ERROR'})
+    res.set('Cache-Control','private, no-store')
+    res.set('Vary','Authorization, Cookie')
+    return res.json({success:true,data:manifest})
+  } catch (error) {
+    console.error('Academic source-bundle unavailable:', error?.code||'UNAVAILABLE')
+    return res.status(503).json({success:false,code:'ORIGINAL_SOURCE_UNAVAILABLE'})
+  }
 })
 
 router.get('/planner/context', async (req, res) => {
