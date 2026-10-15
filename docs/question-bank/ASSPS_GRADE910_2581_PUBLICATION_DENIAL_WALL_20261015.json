@@ -1,0 +1,27 @@
+{
+  "schema": "assps-grade910-2581-source-academic-release-wall-v1",
+  "originalQuestions": 2581,
+  "subjectMediumReviewGroups": 56,
+  "researchCandidatesWithPreReviewEvidence": 584,
+  "unflaggedOriginals": 1997,
+  "revisedMcqProposals": 66,
+  "actualSchoolAdoptionEvidenceVerified": 0,
+  "independentQualifiedTeacherApprovalVerified": 0,
+  "principalGenuineRevisionSignoffsVerified": 0,
+  "paperStudioVerifiedSelectorReady": 0,
+  "answerBearingFacultyReviewsTrackedInPublicSource": 0,
+  "approved": 0,
+  "published": 0,
+  "productionWrites": 0,
+  "decision": "HOLD_SOURCE_ONLY_NO_PAPER_STUDIO_APPROVED_QUESTION_EXPORT",
+  "crosswalkSha256": "a67852e7e03cfd0ad7bb9c4cd50138a6a0a68a078624ff65356a8bf25657186b",
+  "signoff": "NONE_EXPECTED_OR_PRESENT",
+  "unresolvedEvidence": [
+    "ASSPS_APPROVED_PRINTED_TEXTBOOK_EDITION",
+    "YEAR_2027_BOARD_NOTIFIED_SCHEME_APPLICABLE_TO_ASSPS",
+    "SUBJECT_AND_URDU_QUALIFIED_INDEPENDENT_TEACHER_REVIEW",
+    "AUTHENTICATED_PRINCIPAL_PERSONAL_SIGNATURE_TO_EXACT_QUESTION_REVISION",
+    "SAAS_CORE_RLS_BACKUP_ROLLBACK_AND_REAL_TENANT_ACCEPTANCE",
+    "PAPER_STUDIO_LIVE_SAVE_REOPEN_EDIT_PRINT_REVISION_REAUTHENTICATION"
+  ]
+}
