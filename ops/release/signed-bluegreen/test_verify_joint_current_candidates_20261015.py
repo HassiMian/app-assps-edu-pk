@@ -33,9 +33,15 @@ class CombinedCandidateTests(unittest.TestCase):
         (self.nxt/"src"/"proxy.ts").write_text("qa_proxy")
         self.hash=m.sha(self.stage/"src"/m.REVIEWED[0])
         self.proxy=m.sha(self.nxt/"src"/"proxy.ts")
+        self.auth_hashes={}
+        for fname in m.AUTH_HASHES:
+            f=self.nxt/fname
+            f.parent.mkdir(parents=True,exist_ok=True)
+            f.write_text("auth-reviewed-"+fname)
+            self.auth_hashes[fname]=m.sha(f)
 
     def probe(self):
-        return m.artifacts(self.src,self.stage,self.live,self.nxt,self.hash,"QA_BUILD",self.proxy)
+        return m.artifacts(self.src,self.stage,self.live,self.nxt,self.hash,"QA_BUILD",self.proxy,self.auth_hashes)
 
     def test_good_readonly_fixture(self):
         self.assertTrue(all(self.probe().values()))
@@ -68,6 +74,15 @@ class CombinedCandidateTests(unittest.TestCase):
     def test_wrong_proxy_fails(self):
         (self.nxt/"src/proxy.ts").write_text("ADMIN BIAS")
         self.assertFalse(self.probe()["new_next_proxy_matches_review"])
+    def test_login_challenge_source_drift_fails(self):
+        (self.nxt/"src/components/LoginClient.tsx").write_text("EARLY_ADMIN_CONTEXT_LOGIN")
+        self.assertFalse(self.probe()["reviewed_auth_src_components_LoginClient.tsx"])
+    def test_password_change_ui_source_drift_fails(self):
+        (self.nxt/"src/app/auth/change-password/page.tsx").write_text("LOST_VISIBILITY_UI")
+        self.assertFalse(self.probe()["reviewed_auth_src_app_auth_change-password_page.tsx"])
+    def test_reset_token_revocation_drift_fails(self):
+        (self.nxt/"src/lib/server/auth-user.ts").write_text("ACCEPT_RESET_MARKED_COOKIE")
+        self.assertFalse(self.probe()["reviewed_auth_src_lib_server_auth-user.ts"])
     def test_missing_compiled_binary_fails(self):
         (self.nxt/".next/BUILD_ID").unlink()
         self.assertFalse(self.probe()["new_next_compiled_build_id"])

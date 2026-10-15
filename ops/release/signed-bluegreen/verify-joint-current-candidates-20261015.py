@@ -12,9 +12,9 @@ import subprocess
 import sys
 
 CORE_BASE = "2782179f6ed0d3658ed8d7025cd5a7908b7ebdd0"
-CONNECT_SHA = "17097ce5107d4a9495b83cdb75fdc6fc145b2650"
+CONNECT_SHA = "859ee13f367db8e755a8b4e88c4ca65b6dd5feac"
 WORKER_SHA = "97090fee75c77283375141e21d572d52a1a9fe58952ff16a4584ca9f308592cc"
-CONNECT_BUILD = "bHxqXQ_9RXKfTeWRZ0lCs"
+CONNECT_BUILD = "1C7EPZhqltxUUzTMiDTwQ"
 CONNECT_PROXY_SHA = "7978b360f2ccc235a086283463851f0c5a8c98390efd57b17476cc32b21fd015"
 BLUE_BUILD = "ONDwxEIZlx5onDIKY7wYf"
 BLUE_ARCHIVE_SHA = "844430b88e1b12906ef00945f8a382a69905f5a0a05727e35e0729452466947e"
@@ -23,13 +23,19 @@ DB_DUMP_SHA = "a989b0ef674014109f1f30108a56e9fe4555027712ede8aaed9f82a397f7169a"
 CORE_DIR = Path(__file__).resolve().parents[3]
 CONNECT_DIR = Path("/root/workspace/assps-connect-current-live-role-neutral-ingress-20261015")
 BACKEND_STAGE = Path("/root/assps-release-candidates/apex-backend-core278-current-live-20261015")
-NEXT_STAGE = Path("/root/assps-release-candidates/apex-connect-role-neutral-current-live-20261015")
+NEXT_STAGE = Path("/root/assps-release-candidates/apex-connect-login-challenge-current-live-20261015")
 LIVE_BACKEND = Path("/var/www/apex-backend")
 LIVE_NEXT = Path("/var/www/apex-connect")
 BLUE_ARCHIVE = Path("/root/assps-release-backups/connect-current-ond-blue-20261015T0209Z/current-next-nginx-blue.tar.zst")
 DB_DUMP = Path("/root/assps-release-backups/core-login-ond-post-worker-20261015/apexos-full-current.dump")
 REVIEWED = ("services/ai/aiQueueWorkerDatabase.js","services/ai/paperAiQueue.js","routes/opsRoutes.js")
 PRESERVE = ("server.js","routes/lessonPlanRoutes.js")
+AUTH_HASHES = {
+ "src/components/LoginClient.tsx":"3d45699280a63c0089b5b35a629b307306fc74f69eee684b5b3ac66c34f965b8",
+ "src/app/auth/change-password/page.tsx":"4f1087fae2f6d2c6d9457e8ea255ea1085b6b87002bb5a521b1e5eaea21860f6",
+ "src/lib/server/auth-user.ts":"06c47ef8ff003f7425f9204ad08b4e5a6e25a13c3d6cde45cd07bfb46166cc90",
+}
+
 
 def sha(p):
     return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -38,7 +44,7 @@ def same(a,b):
     return a.is_file() and b.is_file() and sha(a)==sha(b)
 
 def artifacts(core_src, backend_stage, live_backend, next_stage, expected_worker=WORKER_SHA,
-              expected_build=CONNECT_BUILD, expected_proxy=CONNECT_PROXY_SHA):
+              expected_build=CONNECT_BUILD, expected_proxy=CONNECT_PROXY_SHA, expected_auth=AUTH_HASHES):
     checks={}
     for f in REVIEWED:
         checks["reviewed_"+f.replace("/","_")] = same(core_src/f, backend_stage/"src"/f)
@@ -49,6 +55,9 @@ def artifacts(core_src, backend_stage, live_backend, next_stage, expected_worker
     checks["new_next_compiled_build_id"]=(next_stage/".next"/"BUILD_ID").is_file() and (next_stage/".next"/"BUILD_ID").read_text().strip()==expected_build
     checks["new_next_proxy_matches_review"]=(next_stage/"src/proxy.ts").is_file() and sha(next_stage/"src/proxy.ts")==expected_proxy
     checks["no_private_next_env_in_stage"]=not (next_stage/".env").exists()
+    for fname,digest in expected_auth.items():
+        f=next_stage/fname
+        checks["reviewed_auth_"+fname.replace("/","_")]=f.is_file() and sha(f)==digest
     return checks
 
 def run(args, timeout=18):
