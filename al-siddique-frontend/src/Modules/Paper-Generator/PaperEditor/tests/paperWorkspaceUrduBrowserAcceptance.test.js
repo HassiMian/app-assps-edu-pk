@@ -37,6 +37,23 @@ before(async () => {
   })
 
   const context = await browser.newContext({ viewport: { width: 1600, height: 1100 } })
+  // This is a visual editor acceptance fixture, not a login acceptance test.
+  // Provide an explicitly synthetic local actor so auth redirects do not
+  // prevent Urdu/marks/print assertions from actually running.
+  await context.addInitScript(() => {
+    localStorage.setItem('al_siddique_token', 'synthetic-visual-qa-token')
+    localStorage.setItem('al_siddique_user', JSON.stringify({
+      id: 99901, role: 'admin', school_id: 1, designation: 'QA Principal',
+    }))
+    localStorage.setItem('al_siddique_login_at', String(Date.now()))
+  })
+  // Keep the visual harness independent of real school API credentials or DB.
+  // Auth/tenant denial is exercised by separate HTTP security suites.
+  await context.route('**/api/**', route => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({ success: true, data: [] }),
+  }))
   await context.route('**/api/settings/public**', route => route.fulfill({
     status: 200,
     contentType: 'application/json',
