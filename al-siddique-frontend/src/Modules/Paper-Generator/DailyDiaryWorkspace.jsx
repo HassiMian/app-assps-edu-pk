@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import {
   Archive,
   ArrowLeft,
@@ -453,7 +453,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   }, [classLevel, date, mode])
 
   // Load Saved Diaries Library from API
-  const fetchSavedDiaries = async (page = 1) => {
+  const fetchSavedDiaries = useCallback(async (page = 1) => {
     setSavedDiariesLoading(true)
     try {
       const params = {
@@ -474,17 +474,14 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
     } finally {
       setSavedDiariesLoading(false)
     }
-  }
+  }, [libraryFilterClass, libraryFilterDate, librarySearch, libraryViewArchived])
 
-  // Existing filtered library reload is async and preserves user-visible pagination.
   useEffect(() => {
-    if (activeTab === 'library') {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      fetchSavedDiaries(1)
-    }
-  // Legacy async reload depends on changing filter state by design.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeTab, libraryFilterClass, libraryFilterDate, librarySearch, libraryViewArchived])
+    if (activeTab !== 'library') return undefined
+    let cancelled = false
+    queueMicrotask(() => { if (!cancelled) void fetchSavedDiaries(1) })
+    return () => { cancelled = true }
+  }, [activeTab, fetchSavedDiaries])
 
   const updateRow = (index, patch) => setRows(current => current.map((row, i) => i === index ? { ...row, ...patch } : row))
   const addRow = () => setRows(current => [...current, { id: `row-${Date.now()}`, subject: '', diary: '', isUrdu: false, isBold: false, fontSize: 12, textAlign: 'left', subjectFontSize: 0, subjectBold: false }])
@@ -553,7 +550,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   const reopenSavedDiary = async () => {
     if (!classLevel || !date) { setStatus('Select a class and date before reopening a saved diary.'); return }
     let schoolId = 0
-    try { const user = JSON.parse(window.localStorage.getItem('al_siddique_user') || '{}'); schoolId = Number(user.school_id || user.schoolId || 0) } catch { /* Invalid cached user payload; reject by scope check below. */ }
+    try { const user = JSON.parse(window.localStorage.getItem('al_siddique_user') || '{}'); schoolId = Number(user.school_id || user.schoolId || 0) } catch { /* Reject unverified school identity below. */ }
     if (!Number.isSafeInteger(schoolId) || schoolId <= 0) { setStatus('Current school identity could not be verified. Sign in to reopen a diary.'); return }
     const openGeneration = diaryScopeGeneration.current
     const stillCurrent = () => diaryScopeGeneration.current === openGeneration
@@ -1168,7 +1165,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
                       {record.footer_text && <p className="dd-lib-footer-snippet">“{record.footer_text}”</p>}
                     </div>
                     <div className="dd-lib-card-meta">
-                      <span><Clock size={11} /> {record.created_at ? new Date(record.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '—'}</span>
+                      <span><Clock size={11} /> {record.created_at ? new Date(record.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Not recorded'}</span>
                       <span>{record.slips_per_page || 6} slips/page</span>
                     </div>
                     <div className="dd-lib-card-actions">

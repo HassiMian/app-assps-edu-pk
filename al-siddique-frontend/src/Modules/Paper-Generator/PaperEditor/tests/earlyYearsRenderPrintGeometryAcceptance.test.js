@@ -453,6 +453,9 @@ test('EY-RENDER-07: Real Geometry QA: 0 clipping and 0 overlap across all 9 pape
 // ─────────────────────────────────────────────────────────────
 
 test('EY-RENDER-08: Real PaperGenerator Route Print: Chrome Hidden, PDFs Generated, Screen Clean', async () => {
+  // Each synthetic product test owns its media state. Previous print tests
+  // must not leave the no-print navigation hidden when this test clicks it.
+  await page.emulateMedia({ media: 'screen' })
   // 1. Open real PaperGenerator route
   await page.goto(`${BASE_URL}?mode=generator`, { waitUntil: 'domcontentloaded' })
 

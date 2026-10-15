@@ -7,8 +7,13 @@ import { fileURLToPath } from 'node:url'
 import vm from 'node:vm'
 
 const source=fs.readFileSync(process.env.PAPER_DIARY_SOURCE_FILE||path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../DailyDiaryWorkspace.jsx'),'utf8')
-const start=source.indexOf('  const saveLessonPlan=async()=>{')
-const end=source.indexOf('  // Explicit teacher action:',start)
+// Accept both original compact and richer Diary Workspace implementations.
+// The extracted REAL handler is executed below against delayed server promises.
+const handlerMatch = /^\s*const saveLessonPlan\s*=\s*async\s*\(\s*\)\s*=>\s*\{/m.exec(source)
+const start=handlerMatch?.index ?? -1
+const boundaries=['  // Explicit teacher action:', '  const changeGlobalDiaryFontSize =']
+  .map(marker=>source.indexOf(marker,start)).filter(pos=>start>=0&&pos>start)
+const end=boundaries.length?Math.min(...boundaries):-1
 assert.ok(start>=0&&end>start,'real production save handler must be extracted')
 const handler=source.slice(start,end)
 
