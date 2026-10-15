@@ -1,0 +1,52 @@
+name: Protect Lesson Planner Releases
+
+on:
+  pull_request:
+    paths:
+      - "al-siddique-frontend/**"
+      - "ops/release/check-lesson-planner-ui.py"
+      - "ops/release/lesson-planner-ui-contract-*.json"
+      - "ops/release/tests/test_lesson_planner_ui_contract.py"
+      - ".github/workflows/lesson-planner-release-contract.yml"
+  push:
+    branches:
+      - main
+      - "feat/**"
+      - "fix/**"
+      - "integration/**"
+      - "release/**"
+    paths:
+      - "al-siddique-frontend/**"
+      - "ops/release/check-lesson-planner-ui.py"
+      - "ops/release/lesson-planner-ui-contract-*.json"
+      - "ops/release/tests/test_lesson_planner_ui_contract.py"
+      - ".github/workflows/lesson-planner-release-contract.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  production-ui-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout full ancestry
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Node.js for frontend build
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: al-siddique-frontend/package-lock.json
+      - name: Reproducible frontend install
+        run: npm ci --no-audit --no-fund
+        working-directory: al-siddique-frontend
+      - name: Build actual deployable frontend
+        run: npm run build
+        working-directory: al-siddique-frontend
+      - name: Verify active Lesson Planner from index import graph
+        run: python3 ops/release/check-lesson-planner-ui.py --dist al-siddique-frontend/dist
+      - name: Verify stale-but-present chunks cannot bypass regression check
+        run: python3 -m unittest discover -s ops/release/tests -p test_lesson_planner_ui_contract.py -v
