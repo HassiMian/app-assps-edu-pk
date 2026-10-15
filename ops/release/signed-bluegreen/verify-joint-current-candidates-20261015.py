@@ -2,6 +2,10 @@
 """Read-only reconciliation of CURRENT Core 278 and Connect 98f6df release candidates.
 
 Never deploys, signs, authenticates people, changes staff credentials, or writes SQL.
+Exit 0 only signifies source-only candidate checks and never a production GO.
+When --with-core-gate is requested, exit 2 while this tool has not certified
+genuine authenticated staff/peer actors, independent human signatures and
+actual public cutover/recovery. The Core owner is the sole release authority.
 The official Core release verifier remains the exclusive production gate.
 """
 import argparse
@@ -88,6 +92,18 @@ def official_core_gate():
     except json.JSONDecodeError:
         return {"status":"HOLD","blocked":["official_verifier_invalid_output"],"exit_code":p.returncode}
 
+def release_exit_code(technical, with_core_gate, result):
+    """Keep source-QA success separate from authenticated release approval.
+
+    Human actor, independent reviewer and post-deployment proofs are explicitly
+    NOT certified here, regardless of what an upstream technical gate reports.
+    A production preflight MUST NOT exit zero on a HOLD decision.
+    """
+    if not technical or result.get("overall_production_release") != "HOLD":
+        return 2
+    return 2 if with_core_gate else 0
+
+
 def main():
     a=argparse.ArgumentParser()
     a.add_argument("--with-core-gate",action="store_true",help="execute the official read-only Core release verifier")
@@ -106,7 +122,7 @@ def main():
             "public_cutover_performed_by_this_script":False,
             "overall_production_release":"HOLD"}
     print(json.dumps(result,indent=2,sort_keys=True))
-    return 0 if technical and (not opts.with_core_gate or coregate["status"]=="HOLD" and coregate.get("exit_code")==2) else 2
+    return release_exit_code(technical, opts.with_core_gate, result)
 
 if __name__=="__main__":
     sys.exit(main())

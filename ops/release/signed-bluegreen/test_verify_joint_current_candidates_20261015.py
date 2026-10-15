@@ -90,5 +90,19 @@ class CombinedCandidateTests(unittest.TestCase):
         (self.nxt/".next/BUILD_ID").unlink()
         self.assertFalse(self.probe()["new_next_compiled_build_id"])
 
+class ProductionGateExitTests(unittest.TestCase):
+    def test_isolated_source_check_only_can_exit_zero(self):
+        self.assertEqual(m.release_exit_code(True,False,{"overall_production_release":"HOLD"}),0)
+    def test_official_hold_must_exit_nonzero(self):
+        self.assertEqual(m.release_exit_code(True,True,{"overall_production_release":"HOLD","core_official_gate":{"status":"HOLD","exit_code":2}}),2)
+    def test_forged_upstream_ready_cannot_erase_missing_human_acceptance(self):
+        self.assertEqual(m.release_exit_code(True,True,{"overall_production_release":"HOLD","core_official_gate":{"status":"READY","exit_code":0}}),2)
+    def test_mismatched_source_always_holds(self):
+        self.assertEqual(m.release_exit_code(False,False,{"overall_production_release":"HOLD"}),2)
+    def test_missing_production_status_holds(self):
+        self.assertEqual(m.release_exit_code(True,False,{}),2)
+    def test_arbitrary_claimed_release_status_cannot_get_zero(self):
+        self.assertEqual(m.release_exit_code(True,True,{"overall_production_release":"READY"}),2)
+
 if __name__=="__main__":
     unittest.main(verbosity=2)
