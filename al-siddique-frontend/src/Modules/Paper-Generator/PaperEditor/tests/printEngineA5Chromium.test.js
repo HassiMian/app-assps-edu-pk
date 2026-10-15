@@ -14,7 +14,15 @@ test('real Chromium renders A4 and half-size A5 PDF from the print iframe', { ti
   const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] })
   t.after(async () => { await browser.close(); await server.close() })
   const page = await browser.newPage()
-  await page.goto('http://127.0.0.1:5773/paper-workspace-test.html', { waitUntil: 'domcontentloaded' })
+  // Print layout has no dependency on the interactive React workspace. Loading that
+  // harness races against Vite optimizer reloads and can destroy the test context.
+  // Keep this acceptance on the same Vite origin, but with a stable document.
+  await page.route('**/__print_contract_test__.html', route => route.fulfill({
+    status: 200,
+    contentType: 'text/html',
+    body: '<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Print contract</title></head><body></body></html>',
+  }))
+  await page.goto('http://127.0.0.1:5773/__print_contract_test__.html', { waitUntil: 'domcontentloaded' })
   for (const [isHalf, width, height] of [[false, 595, 842], [true, 420, 595]]) {
     const html = await page.evaluate(async half => {
       const module = await import('/src/Modules/Paper-Generator/PaperEditor/printing/PrintEngine.js')
