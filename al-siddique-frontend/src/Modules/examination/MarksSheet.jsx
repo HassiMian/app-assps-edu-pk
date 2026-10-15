@@ -152,8 +152,9 @@ export default function MarksSheet() {
  const request = ++rosterFetchSeq.current
  setLoadingData(true)
  setMessage('')
+ // Fail closed on writes during re-verification without discarding the
+ // last known-good saved state or unsaved in-memory edits.
  setMarksLoaded(false)
- setSavedMarks({})
  try {
  const studentsForClass = await loadRoster(selectedClass)
  if (request !== rosterFetchSeq.current) return
@@ -184,9 +185,9 @@ export default function MarksSheet() {
  setMessage(`Loaded ${studentsForClass.length} students for ${selectedExam.name || 'saved exam'}: ${countRecordedMarks(result.data.data,selectedSubject,studentsForClass)} marks saved, ${studentsForClass.length-countRecordedMarks(result.data.data,selectedSubject,studentsForClass)} pending. ${Object.keys(loaded).length ? 'Saved marks restored.' : 'No marks entered yet; you can start with any student tomorrow.'}`)
  } catch (err) {
  if (request !== rosterFetchSeq.current) return
- setMarks({})
- setSavedMarks({})
- setMessage(`Students loaded, but saved marks could not be verified: ${err.response?.data?.message || err.message}. Saving is disabled until you search again.`)
+ // Preserve the same-scope last-known-good marks and unsaved edits; never
+ // treat an unavailable API as blank or zero. marksLoaded remains false.
+ setMessage(`Students loaded, but saved marks could not be verified: ${err.response?.data?.message || err.message}. Existing displayed marks and unsaved edits were preserved. Saving is disabled until you search again.`)
  }
  } catch (err) {
  if (request !== rosterFetchSeq.current) return
