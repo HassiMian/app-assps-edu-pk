@@ -34,3 +34,14 @@ A NEW local disposable PostgreSQL database `assps_marks_revision_isolated_202610
 * The real separate production academic database was observed READ ONLY after this exercise: **1,763 original exam-results rows**, **213 recorded numeric zeros**, two school tenants; this is unchanged relative to the earlier snapshot. No password, child name, or school-private result row was copied into the synthetic database.
 
 **Do not conflate this synthetic-restricted PostgreSQL rehearsal with genuine Core signer/worker/offsite recovery certification.** The official signed intake `/etc/assps/connect-login-precutover-core-receipts.json` is absent and independent authenticated Principal/School-2 live acceptance plus physical paper printing are not yet evidenced. Therefore the score-editing backend and additive migration stay source-only and the working public View/Print frontend stays live.
+
+
+## Current production schema drift found by READ-ONLY probe (15 October 2026)
+
+The active backend configuration points to local PostgreSQL database `apexos`; this is the same live data count previously reported by the Hostinger DB interface. A read-only `information_schema` probe proves **`public.exam_results.result_status` does not yet exist**, while the current `/api/exams/results` POST references `er.result_status` and INSERTs the new column. Therefore do not assert that new ABSENT/PENDING/EXCUSED writes can succeed; the full-stack Core release must reconcile the pre-existing schema migration before certifying future Marks Entry writes.
+
+Current live table also has `marks_obtained DEFAULT 0`; this is unsafe for distinguishing an omitted score from a genuine zero. Read-only aggregate: 1,763 exam-result rows, 213 zeros, 0 NULL numeric scores, 0 negative, 0 above denominator, 0 invalid denominators, two rows with missing grade, two schools.
+
+An **already-existing review-only additive migration** was found at `ops/release/exam9-status-20261013/001_exam_results_status_additive.sql`. It was tested exclusively in the two-school isolated PostgreSQL fixture: before/after count = 2, marks sum = 116.50 in both snapshots, default zero removed, all pre-existing scored records acquire logical `SCORED` state, no score/grade/denominator change. This does not certify its production deployment or the completeness of historical score-state metadata. Before promoting it, restore the real approved release in a secure isolated DB, reconcile actual school-adopted status definitions, test signed restricted roles and independent peer-school denial, and stage a rollback receipt. **Do not directly edit this table or apply migration on production from this Academic/feature worktree.**
+
+The live Marks Register print is able to display existing numeric scored records without requiring the new status column; records without numeric marks are not fabricated as zeros. The print release remains stable and usable.
