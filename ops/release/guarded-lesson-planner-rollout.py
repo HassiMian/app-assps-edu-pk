@@ -163,6 +163,11 @@ def main():
         raise RuntimeError('FAIL_CLOSED: live marks GET route diverges from login-compatible backend')
     # Protect the deployed ten distinct premium Result Cards templates and
     # whole-class/section print selector against old-source production cutovers.
+    owner_acceptance_contract=repo/'ops/tests/resultcards-owner-acceptance-and-employee-source-20261016.test.cjs'
+    owner_contract_check=run(['node','--test',str(owner_acceptance_contract)])
+    if owner_contract_check.returncode!=0:
+        raise RuntimeError('FAIL_CLOSED: School owner approval carry-forward or Employees local source repairs missing: '
+                           +(owner_contract_check.stderr or owner_contract_check.stdout).strip()[:500])
     academic_v3_guard=HERE/'verify-resultcards-v3-active-20261015.cjs'
     academic_v3_check=run(['node',str(academic_v3_guard),'--dist',str(dist)])
     if academic_v3_check.returncode!=0:

@@ -19,6 +19,8 @@ on:
       - "ops/release/verify-resultcards-v2-active-20261015.cjs"
       - "ops/release/verify-resultcards-v3-active-20261015.cjs"
       - "ops/tests/resultcards-v3-immutable-20261015.test.cjs"
+      - "ops/tests/resultcards-owner-acceptance-and-employee-source-20261016.test.cjs"
+      - "al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx"
       - "al-siddique-frontend/src/Modules/examination/resultCardIntegrityGate.js"
       - "al-siddique-frontend/src/Modules/examination/tests/resultCardIntegrityGate.test.js"
       - "ops/tests/resultcards-v2-immutable-release-20261015.test.cjs"
@@ -58,6 +60,8 @@ on:
       - "ops/release/verify-resultcards-v2-active-20261015.cjs"
       - "ops/release/verify-resultcards-v3-active-20261015.cjs"
       - "ops/tests/resultcards-v3-immutable-20261015.test.cjs"
+      - "ops/tests/resultcards-owner-acceptance-and-employee-source-20261016.test.cjs"
+      - "al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx"
       - "al-siddique-frontend/src/Modules/examination/resultCardIntegrityGate.js"
       - "al-siddique-frontend/src/Modules/examination/tests/resultCardIntegrityGate.test.js"
       - "ops/tests/resultcards-v2-immutable-release-20261015.test.cjs"
@@ -116,6 +120,8 @@ jobs:
         run: node ops/release/verify-resultcards-v3-active-20261015.cjs --dist al-siddique-frontend/dist
       - name: Fail closed on stale V2 academic content or unprotected print
         run: ASSPS_RESULT_CARDS_V3_DIST=al-siddique-frontend/dist node --test ops/tests/resultcards-v3-immutable-20261015.test.cjs
+      - name: Preserve accepted school-owner card status and Employees source hotfix
+        run: node --test ops/tests/resultcards-owner-acceptance-and-employee-source-20261016.test.cjs
       - name: Verify unfilled subjects remain pending and fractional grade boundaries match Core
         run: node --test al-siddique-frontend/src/Modules/examination/tests/resultCardIntegrityGate.test.js
       - name: Reject orphan, missing-class, or regressed nine-theme result releases
