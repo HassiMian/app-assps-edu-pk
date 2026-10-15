@@ -1,0 +1,116 @@
+import fs from 'node:fs'
+import assert from 'node:assert/strict'
+import {createServer} from 'vite'
+import {chromium} from 'playwright'
+const host='127.0.0.1',port=5199
+const dev=await createServer({configFile:'vite.config.js',server:{host,port,strictPort:true,hmr:false}})
+await dev.listen()
+const browser=await chromium.launch({headless:true,
+ executablePath:'/root/.cache/ms-playwright/chromium-1148/chrome-linux/chrome',
+ args:['--no-sandbox','--disable-setuid-sandbox','--disable-dev-shm-usage']})
+const page=await browser.newPage({viewport:{width:1460,height:940},acceptDownloads:true})
+const errors=[]
+const source='/root/secure-archive/composer-review-20261014/manifest_plus_classone_private.json'
+await page.addInitScript(()=>{
+ localStorage.setItem('al_siddique_user',JSON.stringify({id:92001,role:'admin',designation:'Principal',school_id:1}))
+})
+const students=[
+ {id:9001,name:'QA Student Alpha',roll_number:'QA01',section:'Blue',class:'Four'},
+ {id:9002,name:'QA Student Beta',roll_number:'QA02',section:'Blue',class:'Four'},
+ {id:9003,name:'QA Student Gamma',roll_number:'QA03',section:'Blue',class:'Four'}
+]
+page.on('pageerror',e=>errors.push(e.message))
+await page.route('**/api/students*',route=>route.fulfill({status:200,
+ contentType:'application/json',body:JSON.stringify({data:students})}))
+await page.route('**/api/**',route=>{
+ const isStudent=route.request().url().includes('/api/students')
+ return route.fulfill({status:200,contentType:'application/json',
+   body:JSON.stringify(isStudent?{data:students}:{success:true,data:[]})})
+})
+try{
+ await page.goto('http://'+host+':'+port+'/weekly-notebook-test.html',{waitUntil:'networkidle'})
+ await page.getByRole('heading',{name:'Weekly Lesson Planning'}).waitFor()
+ await page.locator('input[type=file]').first().setInputFiles(source)
+ await page.getByText('59 source groups verified in 12 classes').waitFor({timeout:18000})
+ await page.locator('[data-wn-class]').selectOption('Four')
+ await page.getByText('3 authorized students loaded').waitFor()
+ await page.waitForFunction(()=>document.querySelectorAll('[data-lesson-student-card]').length===3)
+ assert.equal(await page.locator('[data-lesson-student-card]').count(),3)
+ await page.getByLabel('Student cards / page').selectOption('1')
+ assert.equal(await page.locator('.wn-paper').count(),3)
+ await page.getByLabel('Student cards / page').selectOption('2')
+ assert.equal(await page.locator('.wn-paper').count(),2)
+ await page.getByLabel('Student cards / page').selectOption('3')
+ assert.equal(await page.locator('.wn-paper').count(),1)
+ assert.equal(await page.locator('[data-wn-pages] .wn-paper').count(),1)
+ assert.equal(await page.locator('.wn-subjects label').count(),6)
+ assert.ok((await page.locator('.wn-card-identity').first().innerText()).includes('QA Student Alpha'))
+ const weekOptions=await page.locator('[data-wn-week] option').allTextContents()
+ const i=weekOptions.findIndex(x=>x.includes('09 Nov'))
+ assert.ok(i>=0)
+ await page.locator('[data-wn-week]').selectOption(String(i))
+ await page.waitForTimeout(200)
+ assert.ok((await page.locator('.wn-assess-chip').first().innerText()).includes('14 Nov 2026'))
+ const task=page.locator('.wn-editline').first().locator('textarea')
+ await task.fill('Unit #7 — Verb; pages #29–32. Practise briefly.')
+ await page.getByRole('button',{name:'Save Week'}).click()
+ await page.getByText('Weekly class plan saved locally').waitFor()
+ await page.reload({waitUntil:'networkidle'})
+ await page.getByRole('heading',{name:'Weekly Lesson Planning'}).waitFor()
+ await page.getByText('Stored original source automatically reopened').waitFor({timeout:18000})
+ await page.locator('[data-wn-class]').selectOption('Four')
+ const item=page.locator('.wn-saved button').first()
+ await item.waitFor()
+ await item.click()
+ await page.locator('.wn-editline').first().locator('textarea').waitFor()
+ assert.equal(await page.locator('.wn-editline').first().locator('textarea').inputValue(),
+  'Unit #7 — Verb; pages #29–32. Practise briefly.')
+ assert.equal(await page.locator('[data-lesson-student-card]').count(),3)
+ await page.getByText('Class in-charge (Principal-provided):').waitFor()
+ const popupPromise=page.waitForEvent('popup',{timeout:8000})
+ await page.getByRole('button',{name:'Print Selected Students'}).click()
+ const popup=await popupPromise
+ await popup.waitForLoadState('domcontentloaded')
+ const printed=await popup.content()
+ assert.ok(printed.includes('QA Student Alpha'))
+ assert.ok((await popup.locator('body').innerText()).includes('Unit #7'))
+ assert.ok(printed.includes('Assessment / جائزہ'))
+ assert.ok(printed.includes('school-logo.svg'))
+ const layout=await popup.evaluate(()=>{
+   const p=document.querySelector('.wn-paper'),cards=[...document.querySelectorAll('.wn-card')]
+   return {paper:p?{offsetW:p.offsetWidth,offsetH:p.offsetHeight,scrollH:p.scrollHeight,
+     display:getComputedStyle(p).display,height:getComputedStyle(p).height,
+     transform:getComputedStyle(p).transform}:null,
+     cardSizes:cards.map(c=>({h:c.offsetHeight,scroll:c.scrollHeight})),
+     styleCount:document.querySelectorAll('style').length,
+     linkCount:document.querySelectorAll('link[rel=stylesheet]').length}
+ })
+ console.log('PDF_LAYOUT_DIAGNOSTIC',JSON.stringify(layout))
+ const pdf='/tmp/assps-weekly-notebook-qa-20261015.pdf'
+ await popup.pdf({path:pdf,format:'A4',printBackground:true})
+ console.log('WEEKLY_NOTEBOOK_PDF_BYTES',fs.statSync(pdf).size)
+ await page.locator('[data-wn-class]').selectOption('One')
+ await page.waitForTimeout(200)
+ assert.equal(await page.locator('.wn-card-identity').filter({hasText:'QA Student Alpha'}).count(),0)
+ assert.equal(await page.locator('.wn-card-identity').filter({hasText:'QA Student Beta'}).count(),0)
+ assert.equal(await page.locator('.wn-card-identity').filter({hasText:'QA Student Gamma'}).count(),0)
+ await page.waitForTimeout(160)
+ assert.equal(await page.locator('[data-wn-week] option').count(),18)
+ const firstWeek=await page.locator('.wn-editline').allInnerTexts()
+ assert.ok(firstWeek.some(x=>x.includes('English-A')))
+ assert.ok((await page.locator('.wn-editline').first().locator('textarea').inputValue()).includes('Pages 36–38'))
+ assert.ok((await page.locator('.wn-panel').first().innerText()).includes('Miss Amna'))
+ await page.locator('[data-wn-week]').selectOption('16')
+ await page.waitForTimeout(160)
+ assert.ok((await page.locator('.wn-assess-chip').first().innerText()).includes('10 Feb 2027'))
+ console.log('CLASS_ONE_IMAGE_REVIEW: verified 18 weeks, visual source W1 pages and W17 test review PASS')
+ assert.equal(errors.length,0,JSON.stringify(errors))
+ await popup.close()
+ console.log('WEEKLY_NOTEBOOK_CHROMIUM: original59/59 + roster3 + 3cards A4 + assessed14Nov + local Save/Reopen + print PASS')
+ console.log('NO_PRODUCTION_DB_WRITES: mock actor and synthetic students only')
+}catch(e){
+ console.error('WEEKLY_NOTEBOOK_BROWSER_FAILED',e.message)
+ console.error('TEXT',String(await page.locator('body').innerText()).slice(0,1700))
+ console.error('JS_ERRORS',errors)
+ process.exitCode=1
+}finally{await browser.close();await dev.close()}

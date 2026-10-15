@@ -1,5 +1,5 @@
 import trusted from './composerTrustedSourceHashes.json'
-import {CLASS_ORDER} from './composerReviewDomain'
+import {CLASS_ORDER} from './composerReviewDomain.js'
 
 const shaRe=/^[a-f0-9]{64}$/
 const aliases={play:'Starter',playgroup:'Starter',starter:'Starter',
@@ -12,6 +12,33 @@ const sha256=async source=>{
   const bytes=new TextEncoder().encode(source)
   const digest=await crypto.subtle.digest('SHA-256',bytes)
   return [...new Uint8Array(digest)].map(x=>x.toString(16).padStart(2,'0')).join('')
+}
+const IMAGE_TRANSCRIPT_SHA='c1a5ed12b5c73624f988c5fca45acab00370f79dba30459905d291349f785a59'
+const IMAGE_SOURCE_SHA='53c56ed4acf6eb6d1fe3882c4314ef3e8d5c5682a641f5d07938e6d8a2efd7f6'
+async function verifyClassOneImageReview(manifest){
+ const extra=manifest.class_one_image_review
+ if(extra===undefined)return {available:false}
+ if(extra?.schema!=='assps.class_one.image_review.v1'||
+    extra.source_image_sha256!==IMAGE_SOURCE_SHA||
+    extra.transcript_sha256!==IMAGE_TRANSCRIPT_SHA||
+    extra.review_state!=='VISUAL_TRANSCRIPTION_REQUIRES_INDEPENDENT_ACADEMIC_CONFIRMATION'||
+    !Array.isArray(extra.weeks)||extra.weeks.length!==18)
+   throw Error('Class One source image transcript is not the trusted review copy.')
+ const digest=await sha256(JSON.stringify(extra.weeks))
+ if(digest!==IMAGE_TRANSCRIPT_SHA)throw Error('Class One week table differs from the original provisional transcription.')
+ const allowed=new Set(['English-A','Urdu-A','Mathematics','English-B','Urdu-B','Islamiyat','Science','Grammar','all'])
+ for(let i=0;i<extra.weeks.length;i++){
+  const row=extra.weeks[i],work=row?.work
+  if(row?.week!==i+1||!/^202[67]-\d\d-\d\d$/.test(row.start)||
+     !/^202[67]-\d\d-\d\d$/.test(row.end)||row.start>row.end||
+     !work||typeof work!=='object'||Array.isArray(work))
+    throw Error('Class One date/week sequence requires review.')
+  for(const [subject,text] of Object.entries(work)){
+   if(!allowed.has(subject)||typeof text!=='string'||!text.trim()||text.length>180)
+    throw Error('Class One subject transcript contains an unknown source entry.')
+  }
+ }
+ return {available:true,reviewState:extra.review_state}
 }
 export async function validateLocalComposerSource(manifest){
   if(!globalThis.crypto?.subtle)throw Error('Secure browser crypto verification is required.')
@@ -73,6 +100,7 @@ export async function validateLocalComposerSource(manifest){
   const proposals=manifest.local_review_proposals
   if(proposals!==undefined&&(!proposals||typeof proposals!=='object'||Array.isArray(proposals)))
     throw Error('Invalid saved review proposals.')
-  return {verified:true,classes:byClass.size,candidates:seen.size,unassigned:1,
+  const classOneImage=await verifyClassOneImageReview(manifest)
+  return {verified:true,classes:byClass.size,candidates:seen.size,unassigned:1,classOneImage,
     digest:combined,proposals:proposals||{}}
 }
