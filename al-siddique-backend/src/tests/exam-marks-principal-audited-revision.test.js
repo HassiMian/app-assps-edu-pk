@@ -3,9 +3,10 @@ const test=require('node:test'),assert=require('node:assert/strict')
 const {RevisionError,parseRequest,deriveGrade,reviseExamScore}=require('../services/examOfficialMarksRevision')
 const valid={expected_marks:0,expected_total_marks:75,expected_grade:'F',proposed_marks:55.5,reason:'Paper checked against master answer key.'}
 const bands=[{label:'A',min_percentage:80,max_percentage:100},{label:'F',min_percentage:0,max_percentage:79}]
-function mock({school=1,result=true,revisionTable=true,failAudit=false,oldMarks='0',oldGrade='F',status='SCORED'}={}){
+function mock({school=1,result=true,revisionTable=true,failAudit=false,oldMarks='0',oldGrade='F',status='SCORED',actorActive=true}={}){
  const queries=[],client={query:async(sql,values)=>{
   queries.push({sql:String(sql),values})
+  if(/SELECT id FROM users WHERE id=/.test(sql))return {rowCount:actorActive?1:0,rows:actorActive?[{id:4}]:[]}
   if(/SELECT er.id/.test(sql)){
    return result?{rowCount:1,rows:[{id:12,school_id:school,exam_id:9,student_id:104,subject:'English',
     marks_obtained:oldMarks,total_marks:75,grade:oldGrade,result_status:status,
@@ -51,6 +52,12 @@ test('teacher cannot reach database or create revision',async()=>{
  const m=mock()
  await assert.rejects(()=>execute(m,{actor:{id:9,role:'teacher'}}),e=>e.status===403)
  assert.equal(m.queries.length,0)
+})
+test('revoked or disabled principal cannot edit a saved official mark',async()=>{
+ const m=mock({actorActive:false})
+ await assert.rejects(()=>execute(m),e=>e.code==='PRINCIPAL_SCHOOL_MEMBERSHIP_NO_LONGER_ACTIVE')
+ assert.equal(m.queries.filter(x=>/UPDATE exam_results/.test(x.sql)).length,0)
+ assert.equal(m.queries.filter(x=>x.sql==='ROLLBACK').length,1)
 })
 test('missing principal signed school context denies before connection',async()=>{
  const m=mock()

@@ -14,10 +14,12 @@ async function up(options={}){
   if(actor.rows.length!==1||actor.rows[0].rolsuper||actor.rows[0].rolbypassrls)
    throw Error('EXAM_MARKS_REVISION_BYPASS_ROLE_FORBIDDEN')
   await client.query(`
+    CREATE UNIQUE INDEX IF NOT EXISTS exam_results_school_record_key
+      ON public.exam_results(school_id,id);
     CREATE TABLE IF NOT EXISTS public.exam_marks_revision_history (
       id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
       school_id integer NOT NULL REFERENCES public.schools(id),
-      exam_result_id integer NOT NULL REFERENCES public.exam_results(id),
+      exam_result_id integer NOT NULL,
       exam_id integer NOT NULL,
       student_id integer NOT NULL,
       subject text NOT NULL,
@@ -31,8 +33,25 @@ async function up(options={}){
       created_at timestamptz NOT NULL DEFAULT now(),
       CHECK (old_marks >= 0 AND old_marks <= total_marks),
       CHECK (new_marks >= 0 AND new_marks <= total_marks),
-      CHECK (old_marks <> new_marks)
+      CHECK (old_marks <> new_marks),
+      CONSTRAINT exam_marks_revision_result_school_fk
+        FOREIGN KEY(school_id,exam_result_id) REFERENCES public.exam_results(school_id,id)
     );
+    -- Also upgrade existing isolated/staged ledgers without truncating rows.
+    DO $guard$
+    BEGIN
+      IF NOT EXISTS (
+        SELECT 1 FROM pg_constraint
+         WHERE conname='exam_marks_revision_result_school_fk'
+           AND conrelid='public.exam_marks_revision_history'::regclass
+      ) THEN
+        ALTER TABLE public.exam_marks_revision_history
+          ADD CONSTRAINT exam_marks_revision_result_school_fk
+          FOREIGN KEY(school_id,exam_result_id)
+          REFERENCES public.exam_results(school_id,id);
+      END IF;
+    END
+    $guard$;
     CREATE INDEX IF NOT EXISTS idx_exam_marks_revision_school_result
       ON public.exam_marks_revision_history(school_id,exam_result_id,created_at DESC);
     ALTER TABLE public.exam_marks_revision_history ENABLE ROW LEVEL SECURITY;
@@ -42,6 +61,7 @@ async function up(options={}){
       FOR ALL USING (core_security.signed_school_allowed(school_id))
       WITH CHECK (core_security.signed_school_allowed(school_id));
   `)
+  await client.query('REVOKE ALL ON public.exam_marks_revision_history FROM PUBLIC')
   await client.query('GRANT SELECT,INSERT ON public.exam_marks_revision_history TO "'+role+'"')
   await client.query('GRANT USAGE,SELECT ON SEQUENCE public.exam_marks_revision_history_id_seq TO "'+role+'"')
   const check=await client.query(`SELECT c.relrowsecurity,c.relforcerowsecurity,

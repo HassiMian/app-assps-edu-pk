@@ -19,3 +19,18 @@ Public school-facing `/exams/marks/review`: View/Print active; exact index and r
 ## Important production accuracy boundary
 
 Do not label the current Edit button as functioning official marks correction. The public static deployment supports live View/Print and navigates to existing marks entry, whose backend rightly refuses overwrites. The new audited mutation is staged **source-only**. Production Core security receipts and physical printer/user validation are distinct blockers; user-chat blanket approval cannot replace independent tenant-security proof.
+
+## Independent PostgreSQL isolated rehearsal (15 October 2026, after source checkpoint)
+
+A NEW local disposable PostgreSQL database `assps_marks_revision_isolated_20261015` was created, with exactly two synthetic schools and two synthetic result records. The Core signing function in this test is **only a controlled synthetic fixture** indexed by backend PID. It is **not a real signed Core attestation** and cannot certify production authorization.
+
+* Migration executed twice with the existing restricted `assps_marks_signed_runtime` role; it created additive audit schema without touching original marks; `relrowsecurity=true` and `relforcerowsecurity=true` verified.
+* School 101's restricted database connection could read one row, but could not read school 202's row.
+* Audit INSERT under School 101 with `school_id=202` was denied by PostgreSQL RLS.
+* Added database-level unique composite result key and `FOREIGN KEY (school_id,exam_result_id)`. Tampered School 101 audit referencing School 202's original result was rejected by composite FK, independently of application code. Neither change deletes existing rows.
+* The **actual** staged `reviseExamScore` service ran in the restricted database role, from an active synthetic Principal, and atomically changed only School 101's recorded **0** score while appending exactly one immutable audit revision. Repeated stale edits, School 202 result ID, teacher actor, auditor UPDATE and auditor DELETE were all denied. School 202's existing score remained unmodified.
+* The tightened service rechecks Principal/Admin role, `users.school_id`, and `users.is_active=true` **inside the transaction**; it runs at `REPEATABLE READ` to hold a consistent grading-policy snapshot. A deactivated synthetic Principal was independently denied before changing any record.
+* Latest source-only test suites: 12/12 Principal authorization/transaction mocks, 5/5 migration policy mocks, 7/7 actual restricted-Postgres transaction/access checks, one explicit cross-school RLS denial, one composite-FK denial, one disabled-Principal denial, 2/2 browser mocks, and 5/5 active compiled frontend negative guards.
+* The real separate production academic database was observed READ ONLY after this exercise: **1,763 original exam-results rows**, **213 recorded numeric zeros**, two school tenants; this is unchanged relative to the earlier snapshot. No password, child name, or school-private result row was copied into the synthetic database.
+
+**Do not conflate this synthetic-restricted PostgreSQL rehearsal with genuine Core signer/worker/offsite recovery certification.** The official signed intake `/etc/assps/connect-login-precutover-core-receipts.json` is absent and independent authenticated Principal/School-2 live acceptance plus physical paper printing are not yet evidenced. Therefore the score-editing backend and additive migration stay source-only and the working public View/Print frontend stays live.

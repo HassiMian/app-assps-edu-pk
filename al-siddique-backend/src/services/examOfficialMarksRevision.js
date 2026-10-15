@@ -38,8 +38,15 @@ async function reviseExamScore({pool,applyTenantContext,actor,schoolId,resultId,
  const requested=parseRequest(body)
  const client=await pool.connect()
  try{
-  await client.query('BEGIN')
+  await client.query('BEGIN ISOLATION LEVEL REPEATABLE READ')
   await applyTenantContext(client)
+  // Never accept a stale authenticated claim as continuing school authority.
+  // A principal who has left, been disabled, or changed role cannot revise.
+  const currentActor=await client.query(
+    'SELECT id FROM users WHERE id=$1 AND school_id=$2 AND role IN ($3,$4) AND is_active=true',
+    [actorId,schoolId,'principal','admin'])
+  if(currentActor.rowCount!==1)
+    throw new RevisionError('PRINCIPAL_SCHOOL_MEMBERSHIP_NO_LONGER_ACTIVE',403)
   const lookup=await client.query(
    `SELECT er.id,er.school_id,er.exam_id,er.student_id,er.subject,er.marks_obtained,
            er.total_marks,er.grade,er.remarks,
