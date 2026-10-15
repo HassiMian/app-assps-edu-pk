@@ -175,6 +175,16 @@ def main():
         raise RuntimeError('FAIL_CLOSED: active Diary controller import graph incomplete in release candidate')
     # Preserve the live institutional Marks Register View/Edit/Print route.
     # Never declare whole-system readiness based on a Diary-only frontend.
+    ingress=repo/'ops/release/signed-bluegreen/nginx/test-marksonly-ingress-contract-20261011.py'
+    if not ingress.is_file() or run(['python3',str(ingress)]).returncode != 0:
+        raise RuntimeError('FAIL_CLOSED: Marks GET ingress policy mismatch')
+    ingress_live=Path('/etc/nginx/conf.d/assps-firstterm-app-maps.conf')
+    if not ingress_live.is_file() or ingress_live.read_text().count('GET     $assps_marks_legacy_upstream;') != 3:
+        raise RuntimeError('FAIL_CLOSED: live Marks GET route differs from login backend')
+    marks_src=(repo/'al-siddique-frontend/src/Modules/examination/MarksRegister.jsx').read_text()
+    api_src=(repo/'al-siddique-frontend/src/services/api.js').read_text()
+    if marks_src.count('marksReviewReadOnly401:true') != 2 or 'marksReviewReadDenied' not in api_src:
+        raise RuntimeError('FAIL_CLOSED: candidate Marks 401 scoped fallback absent')
     marks_guard=HERE/'verify-marks-register-active-bundle-20261015.cjs'
     if run(['node',str(marks_guard),'--dist',str(dist)]).returncode!=0:
         raise RuntimeError('FAIL_CLOSED: active Marks Register review/print import graph incomplete')
