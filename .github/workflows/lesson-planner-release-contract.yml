@@ -18,6 +18,7 @@ on:
       - "ops/tests/paper-diary-active-controller-immutable-release-gate-20261015.test.cjs"
       - "ops/release/preserved-companions-v1.json"
       - "ops/release/tests/test_preserved_companions.py"
+      - "ops/release/tests/test_paper_studio_full_postflight.py"
       - "ops/release/lesson-planner-ui-contract-*.json"
       - "ops/release/tests/test_lesson_planner_ui_contract.py"
       - ".github/workflows/lesson-planner-release-contract.yml"
@@ -27,6 +28,7 @@ on:
       - "feat/**"
       - "fix/**"
       - "integration/**"
+      - "qa/**"
       - "release/**"
     paths:
       - "al-siddique-frontend/**"
@@ -44,6 +46,7 @@ on:
       - "ops/tests/paper-diary-active-controller-immutable-release-gate-20261015.test.cjs"
       - "ops/release/preserved-companions-v1.json"
       - "ops/release/tests/test_preserved_companions.py"
+      - "ops/release/tests/test_paper_studio_full_postflight.py"
       - "ops/release/lesson-planner-ui-contract-*.json"
       - "ops/release/tests/test_lesson_planner_ui_contract.py"
       - ".github/workflows/lesson-planner-release-contract.yml"
