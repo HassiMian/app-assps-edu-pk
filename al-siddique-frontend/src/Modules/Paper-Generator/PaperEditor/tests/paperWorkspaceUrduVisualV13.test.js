@@ -21,6 +21,8 @@ before(async () => {
  await server.listen()
  browser = await chromium.launch({ headless:true, executablePath, args:['--no-sandbox'] })
  context = await browser.newContext({viewport:{width:1640,height:1000},deviceScaleFactor:1})
+ await context.addInitScript(()=>{localStorage.setItem("al_siddique_token","mock-jwt-token");localStorage.setItem("al_siddique_login_at",String(Date.now()));localStorage.setItem("al_siddique_user",JSON.stringify({id:999,role:"admin",school_id:1,tenant_id:"assps"}))})
+ await context.route("**/api/**",r=>r.fulfill({status:200,contentType:"application/json",body:JSON.stringify({success:true,data:[]})}))
  await context.route('**/api/settings/public**',r=>r.fulfill({status:200,contentType:'application/json',body:'{}'}))
  page = await context.newPage()
 })
