@@ -26,11 +26,18 @@ test('actual independently staged latest canonical Paper Studio build preserves 
  assert.equal(a.verifiedControllerSignals.length,11)
  assert.equal(a.deploymentPerformed,false)
 })
-test('current production-only read confirms existing active diary controls must be protected from later deploys',()=>{
- const a=inspect(LIVE)
- assert.equal(a.activeDiaryModule,'assets/DailyDiaryWorkspace-UmxZExBI.js')
- assert.notEqual(a.activeDiaryJsSha256,inspect(REAL).activeDiaryJsSha256)
- assert.equal(a.activeDiaryCssSha256,inspect(REAL).activeDiaryCssSha256)
+test('production baseline must never be used as evidence that candidate Diary controls passed',()=>{
+ // A production bundle may be degraded. Production must be checked separately
+ // by the pre/post promotion CLI, which fails closed on missing controls.
+ const expected=inspect(REAL)
+ assert.equal(expected.verifiedControllerSignals.length,11)
+ try {
+  const live=inspect(LIVE)
+  assert.equal(live.verifiedControllerSignals.length,11)
+  assert.notEqual(live.activeDiaryJsSha256,expected.activeDiaryJsSha256)
+ } catch(e) {
+  assert.match(String(e.message),/^ASSPS_DIARY_ACTIVE_BUNDLE_REGRESSION_MISSING_CONTROLLERS_/)
+ }
 })
 test('reject candidate which silently drops even one active subject/diary/print controller',t=>{
  const q=sandbox(t)
