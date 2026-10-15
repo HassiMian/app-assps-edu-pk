@@ -87,7 +87,7 @@ export default function MarksRegister(){
 
  useEffect(()=>{
   let live=true
-  api.get('/api/exams',{params:{include_subjects:'1'}}).then(r=>{
+  api.get('/api/exams',{params:{include_subjects:'1'},marksReviewReadOnly401:true}).then(r=>{
    if(!live)return
    if(!Array.isArray(r.data?.data))throw new Error('Exam catalog unavailable.')
    setExams(r.data.data)
@@ -100,7 +100,7 @@ export default function MarksRegister(){
   setRows([]);setError('');setClassFilter('');setSectionFilter('');setSubjectFilter('')
   if(!examId)return
   setLoading(true)
-  api.get('/api/exams/results',{params:{exam_ids:examId}}).then(r=>{
+  api.get('/api/exams/results',{params:{exam_ids:examId},marksReviewReadOnly401:true}).then(r=>{
    if(token!==request.current)return
    if(!Array.isArray(r.data?.data))throw new Error('Saved marks response was invalid.')
    // The backend owns school-tenant and teacher assignment enforcement.
