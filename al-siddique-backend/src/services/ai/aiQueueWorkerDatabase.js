@@ -4,7 +4,8 @@
 // inherits AI queue/global directory/audit tables from apex_app_runtime.
 // Blue/legacy behaviour stays unchanged unless signed Green is explicitly on.
 const { Pool } = require('pg')
-const { query: legacyQuery } = require('../../config/database')
+// Lazy legacy import: signed worker must not load the broad tenant DB pool.
+const legacyQuery = (...args) => require('../../config/database').query(...args)
 
 const signedGreen = process.env.DB_SIGNED_TENANT_RLS_ENABLED === 'true'
 let aiPool = null

@@ -5,7 +5,7 @@ Does not claim the old running Blue backend is a deployed signed worker service.
 import hashlib,json,os,pathlib,re,subprocess,sys
 CREDS=pathlib.Path('/etc/assps/ai-worker-credentials.env')
 SRC=pathlib.Path(__file__).resolve().parents[3]/'al-siddique-backend/src'
-CANARY=pathlib.Path('/root/assps-release-candidates/apex-backend-ai-worker-20261015/src')
+CANARY=pathlib.Path('/root/assps-release-candidates/apex-backend-worker-live-reconciled-verified-20261015/src')
 LIVE=pathlib.Path('/var/www/apex-backend/src')
 FILES=['services/ai/aiQueueWorkerDatabase.js','services/ai/paperAiQueue.js','routes/opsRoutes.js']
 SIX=['admin_block_audit_log','ai_jobs','ai_queue_events','ai_queue_state','campuses','organizations']
