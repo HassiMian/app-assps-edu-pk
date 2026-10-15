@@ -20,7 +20,7 @@ import subprocess
 import sys
 
 HERE = Path(__file__).resolve().parent
-DEFAULT_CONTRACT = HERE / "lesson-planner-ui-contract-v4.json"
+DEFAULT_CONTRACT = HERE / "lesson-planner-ui-contract-v5.json"
 DEFAULT_REPO = HERE.parents[1]
 ASSET_PATTERN = re.compile(r"(?<![\w.-])([A-Za-z0-9_-]+\.(?:js|css))")
 HTML_PATTERN = re.compile(r'(?:src|href)="\/assets\/([^"]+\.(?:js|css))"')

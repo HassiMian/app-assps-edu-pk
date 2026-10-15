@@ -1,5 +1,5 @@
 'use strict'
-const PRIVATE_MARKERS=new Set(['ASSPS_WEEKLY_NOTEBOOK_V1','ASSPS_TERM_NOTEBOOK_V1'])
+const PRIVATE_MARKERS=new Set(['ASSPS_WEEKLY_NOTEBOOK_V1','ASSPS_TERM_NOTEBOOK_V1','ASSPS_DAILY_LESSON_NOTEBOOK_V1'])
 const LOCKED_SOURCE_IDS=new Set([
  'lp_c5_sst_adiba_20261014',
  'lp_c6_pakstudies_adiba_20261014',
@@ -32,7 +32,7 @@ function privateLessonMutationAllowed(existing,proposed,id){
  if(!mustHoldLessonPublication(proposed,id))return false
  const previous=documentOf(existing),next=documentOf(proposed)
  const a=provenanceOf(existing),b=provenanceOf(proposed)
- for(const key of ['marker','sourceZipSha256','weeklyKey','termKey','sourceArchiveScope','sourceApplicability','academicPublication']){
+ for(const key of ['marker','sourceZipSha256','weeklyKey','termKey','dailyKey','sourceArchiveScope','sourceApplicability','academicPublication']){
    if(String(a[key]||'')!==String(b[key]||''))return false
  }
  if(String(b.academicPublication||'').toUpperCase()!=='BLOCKED')return false

@@ -13,11 +13,22 @@ spec.loader.exec_module(module)
 contract=json.loads((ROOT/'ops/release/preserved-companions-v1.json').read_text())
 
 class CompanionTests(unittest.TestCase):
-    def test_actual_older_recovered_candidate_must_not_claim_live_parity(self):
-        evidence=module.evaluate(ROOT,contract)
-        self.assertEqual(evidence['result'],'HOLD')
+    def test_current_integrated_candidate_preserves_live_diary_and_early_print(self):
+        evidence=module.evaluate(ROOT,contract,ROOT/'al-siddique-frontend/dist')
+        self.assertEqual(evidence['result'],'PASS',evidence)
         self.assertFalse(evidence['public_release_authorized'])
-        self.assertIn('globalSubjectFontSize',evidence['missing'][next(x for x in contract['required_files'] if x.endswith('DailyDiaryWorkspace.jsx'))])
+        self.assertTrue(evidence['checks']['runtime_rich_diary_feature_proof'])
+        self.assertTrue(evidence['checks']['runtime_early_years_printer_present'])
+
+    def test_legacy_source_missing_current_live_controls_is_rejected(self):
+        with tempfile.TemporaryDirectory(prefix='assps-synthetic-legacy-') as temp:
+            source=Path(temp)
+            f=source/'al-siddique-frontend/src/Modules/Paper-Generator/DailyDiaryWorkspace.jsx'
+            f.parent.mkdir(parents=True,exist_ok=True)
+            f.write_text('old daily-diary editor without protected subject buttons')
+            evidence=module.evaluate(source,contract)
+            self.assertEqual(evidence['result'],'HOLD')
+            self.assertFalse(evidence['checks'][next(x for x in contract['required_files'] if x.endswith('DailyDiaryWorkspace.jsx'))])
 
     def test_reviewed_compatible_newer_design_can_pass_without_a_sha_lock(self):
         with tempfile.TemporaryDirectory() as td:

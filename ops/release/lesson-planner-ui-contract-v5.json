@@ -1,0 +1,89 @@
+{
+  "schema": "ASSPS_LESSON_PLANNER_UI_CONTRACT",
+  "version": 5,
+  "owner": "Paper Studio Master",
+  "protected_runtime_entry": "LessonPlanModule",
+  "protected_route_entry": "PaperGenerator",
+  "term_integration": "TermPlannerEditor",
+  "required_lesson_module_markers": [
+    "Weekly Notebook",
+    "1. Term Syllabus",
+    "Save Week",
+    "Server Saved Weeks",
+    "Term-wise Syllabus & Assessment Planner",
+    "Save Term",
+    "Assessment",
+    "Date",
+    "Print Selected Students",
+    "Increase planner subject size",
+    "Decrease planner subject size",
+    "Toggle planner subject bold",
+    "Increase term subject size",
+    "Decrease term subject size",
+    "Toggle term subject bold",
+    "3. Daily Lesson Plan",
+    "Save Day to School Server",
+    "Server Saved Days",
+    "Daily lesson statements",
+    "Learning objectives",
+    "Teacher activities / resources",
+    "Homework / follow-up",
+    "Daily assessment (optional)"
+  ],
+  "required_source_files": [
+    "al-siddique-frontend/src/Modules/Paper-Generator/LessonPlanModule.jsx",
+    "al-siddique-frontend/src/Modules/Paper-Generator/LessonPlanningWorkspace.jsx",
+    "al-siddique-frontend/src/Modules/Paper-Generator/WeeklyNotebookStudio.jsx",
+    "al-siddique-frontend/src/Modules/Paper-Generator/TermPlannerEditor.jsx",
+    "al-siddique-frontend/src/Modules/Paper-Generator/termPlanningModel.js",
+    "al-siddique-frontend/src/Modules/Paper-Generator/weeklyServerPersistence.js",
+    "al-siddique-frontend/src/Modules/Paper-Generator/termServerPersistence.js",
+    "al-siddique-frontend/src/Modules/Paper-Generator/plannerSubjectTypography.js",
+    "al-siddique-frontend/src/Modules/Paper-Generator/dailyServerPayload.js",
+    "al-siddique-frontend/src/Modules/Paper-Generator/dailyServerPersistence.js",
+    "al-siddique-backend/src/services/lessonPlanningPublicationGuard.js",
+    "al-siddique-backend/src/tests/lesson-publication-guard.test.js"
+  ],
+  "protected_ancestor_shas": [
+    "b18a8aae1a5d60c0ed8086ac56d313b67f750f21",
+    "3282ca7c9543f4b858fb09ce852e88f537495981"
+  ],
+  "required_source_markers": {
+    "al-siddique-frontend/src/Modules/Paper-Generator/LessonPlanningWorkspace.jsx": [
+      "WeeklyNotebookStudio",
+      "Advanced Lesson Editor"
+    ],
+    "al-siddique-frontend/src/Modules/Paper-Generator/WeeklyNotebookStudio.jsx": [
+      "TermPlannerEditor",
+      "Server Saved Weeks",
+      "Save Week",
+      "1. Term Syllabus",
+      "plannerSubjectTypography",
+      "subjectNameBold",
+      "saveDaily",
+      "openSavedDay",
+      "listDailyServerPlans",
+      "dailyDetailsByKey",
+      "Save Day to School Server",
+      "Server Saved Days"
+    ],
+    "al-siddique-frontend/src/Modules/Paper-Generator/TermPlannerEditor.jsx": [
+      "changeSubjectTypography",
+      "normalizeSubjectTypography",
+      "subjectNameBold",
+      "Save Term"
+    ],
+    "al-siddique-frontend/src/Modules/Paper-Generator/dailyServerPayload.js": [
+      "ASSPS_DAILY_LESSON_NOTEBOOK_V1",
+      "dailyIdentity",
+      "academicPublication",
+      "dailyDetailsById",
+      "TEACHER_REVIEW_REQUIRED"
+    ],
+    "al-siddique-backend/src/services/lessonPlanningPublicationGuard.js": [
+      "ASSPS_DAILY_LESSON_NOTEBOOK_V1",
+      "dailyKey",
+      "privateLessonMutationAllowed"
+    ]
+  }
+}

@@ -261,7 +261,7 @@ export default function Topbar({ onMenuToggle, isMobile }) {
  const ThemeIcon = isLight ? Moon : Sun
 
  return (
- <header className="super-topbar" style={{
+ <header className="super-topbar no-print" style={{
  display: 'flex',
  alignItems: 'center',
  gap: isMobile ? 10 : 20,

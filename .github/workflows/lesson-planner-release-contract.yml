@@ -63,6 +63,8 @@ jobs:
       - name: Verify V4 subject-font controls and layout-model regression
         run: |
           node --test al-siddique-frontend/src/Modules/Paper-Generator/tests/plannerSubjectTypography.test.mjs
+          node --test al-siddique-frontend/src/Modules/Paper-Generator/tests/dailyServerPayload.test.mjs
           python3 -m unittest discover -s ops/release/tests -p test_lesson_v4_subject_controls.py -v
+          python3 -m unittest discover -s ops/release/tests -p test_lesson_v5_daily_controls.py -v
       - name: Verify safe rollout and original source boundaries
         run: python3 -m unittest discover -s ops/release/tests -p test_lesson_rollout_guard.py -v

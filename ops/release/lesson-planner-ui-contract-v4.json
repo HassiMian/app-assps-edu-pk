@@ -21,7 +21,7 @@
     "Increase term subject size",
     "Decrease term subject size",
     "Toggle term subject bold",
-    "3. Daily Student Cards"
+    "3. Daily Lesson Plan"
   ],
   "required_source_files": [
     "al-siddique-frontend/src/Modules/Paper-Generator/LessonPlanModule.jsx",

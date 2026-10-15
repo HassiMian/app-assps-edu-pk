@@ -5,7 +5,7 @@ import {createServer} from 'vite'
 import path from 'node:path'
 import {fileURLToPath} from 'node:url'
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../../../..')
-const PORT=5831
+const PORT=5831, FAIL_CLOSED_PORT=5582
 const saved={id:201,school_id:1,created_by:999,class_level:'8',class_name:'Eight',diary_date:'2026-10-09T00:00:00.000Z',slips_per_page:5,footer_text:'Original saved footer',style_settings:{section:'Blue',paletteId:2},rows:[{id:'english',subject:'ENGLISH',diary:'Original saved English homework',isUrdu:false,isBold:true,fontSize:11,textAlign:'left'}]}
 
 test('teacher explicitly reopens only authenticated exact-scope saved Diary after reload; preserves ID for subsequent PUT',{timeout:90000},async t=>{
@@ -14,6 +14,13 @@ test('teacher explicitly reopens only authenticated exact-scope saved Diary afte
  t.after(async()=>{await browser.close();await vite.close()})
  const ctx=await browser.newContext({viewport:{width:1550,height:1000},timezoneId:'Asia/Karachi'})
  await ctx.addInitScript(()=>{localStorage.setItem('al_siddique_token','mock-jwt-token');localStorage.setItem('al_siddique_user',JSON.stringify({id:999,role:'teacher',school_id:1,tenant_id:'assps'}));localStorage.setItem('al_siddique_login_at',String(Date.now()))})
+ // Synthetic browser must never contact real SaaS APIs. Specific route mocks
+ // registered subsequently take priority in Playwright's LIFO routing.
+ await ctx.route('**/api/**',r=>{
+  console.log('QA_UNEXPECTED_API',new URL(r.request().url()).pathname)
+  return r.fulfill({status:200,contentType:'application/json',
+   body:'{"success":true,"data":[]}'})
+ })
  const academic={success:true,configured:true,data:{periodsPerDay:8,classes:[{level:'8',name:'Eight',active:true,sections:['Blue','Green']}],subjects:[{name:'English',classes:['8']}]}}
  const calls=[]
  await ctx.route('**/api/academic/setup',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify(academic)}))
@@ -21,7 +28,7 @@ test('teacher explicitly reopens only authenticated exact-scope saved Diary afte
  await ctx.route('**/api/students**',r=>r.fulfill({status:200,contentType:'application/json',body:'{"success":true,"data":[{"id":801,"name":"Synthetic Student","roll_number":"01","class":"Eight","section":"Blue"}]}'}))
  await ctx.route('**/api/lesson-plans**',r=>r.fulfill({status:200,contentType:'application/json',body:'{"success":true,"data":[]}'}))
  await ctx.route(/\/api\/daily-diary(?:\/|\?|$)/,r=>{
-  const req=r.request();const pathname=new URL(req.url()).pathname;calls.push({method:req.method(),pathname})
+  const req=r.request();const pathname=new URL(req.url()).pathname;calls.push({method:req.method(),pathname,body:req.method()==='PUT'?req.postDataJSON():null})
   if(req.method()==='GET'&&pathname==='/api/daily-diary')return r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:[{...saved,school_id:2,id:999},saved]})})
   if(req.method()==='GET'&&pathname==='/api/daily-diary/201')return r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:saved})})
   if(req.method()==='PUT'&&pathname==='/api/daily-diary/201')return r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:{...saved,...req.postDataJSON()}})})
@@ -42,21 +49,39 @@ test('teacher explicitly reopens only authenticated exact-scope saved Diary afte
   await page.getByRole('button',{name:'Reopen Saved Diary'}).click()
   await page.getByText('Saved diary reopened',{exact:false}).waitFor({timeout:17000})
   assert.match(await page.locator('[data-diary-editor]').textContent(),/Original saved English homework/)
+  // Real UI: visible heading font controls affect every named student A4 card.
+  const subjectCell=page.locator('.dd-sub-cell').first()
+  await subjectCell.waitFor({timeout:10000})
+  const initialSize=await subjectCell.evaluate(n=>parseFloat(getComputedStyle(n).fontSize))
+  await page.getByTitle('Increase subject font size').first().click()
+  const increased=await subjectCell.evaluate(n=>parseFloat(getComputedStyle(n).fontSize))
+  assert.ok(increased>initialSize,'+ must enlarge actually printed subject text')
+  await page.getByTitle('Toggle all subjects bold').first().click()
+  const boldWeight=await subjectCell.evaluate(n=>parseInt(getComputedStyle(n).fontWeight))
+  assert.ok(boldWeight>=700,'Bold must visibly affect printed subject text')
   assert.ok(calls.some(c=>c.method==='GET'&&c.pathname==='/api/daily-diary/201'),'saved record authorized GET by ID required')
   assert.ok(!calls.some(c=>c.pathname==='/api/daily-diary/999'),'wrong-school same-scope record must never be selected')
   const [response]=await Promise.all([page.waitForResponse(x=>x.url().includes('/api/daily-diary/201')&&x.request().method()==='PUT',{timeout:13000}),page.getByRole('button',{name:'Save Diary'}).click()])
   assert.equal(response.status(),200)
   assert.equal(calls.at(-1).pathname,'/api/daily-diary/201')
+  assert.ok(Number(calls.at(-1).body?.style_settings?.globalSubjectFontSize)>0)
+  assert.equal(calls.at(-1).body?.style_settings?.globalSubjectBold,true)
+  console.log('DIARY_CONTROLLERS_SAVE_PERSISTENCE_PREVIEW_PASS')
   console.log('EXPLICIT_REOPEN_HTTP',JSON.stringify(calls))
  }finally{await ctx.close()}
 })
 
 test('reopen fails closed on duplicate records, wrong school, and detail substitution without changing draft',{timeout:115000},async t=>{
- const v=await createServer({root,server:{port:5582,strictPort:true}});await v.listen()
+ const v=await createServer({root,server:{port:FAIL_CLOSED_PORT,strictPort:true}});await v.listen()
  const b=await chromium.launch({headless:true,args:['--no-sandbox','--disable-setuid-sandbox']})
  t.after(async()=>{await b.close();await v.close()})
  const ctx=await b.newContext({viewport:{width:1450,height:900}})
  await ctx.addInitScript(()=>{localStorage.setItem('al_siddique_token','mock-jwt-token');localStorage.setItem('al_siddique_user',JSON.stringify({id:999,role:'teacher',school_id:1}));localStorage.setItem('al_siddique_login_at',String(Date.now()))})
+ // Playwright installs routes LIFO; later scoped diary mocks override this.
+ // The second synthetic actor must get the same authenticated fixture as
+ // the first test, otherwise the real SPA intentionally redirects to /login.
+ await ctx.route('**/api/**',r=>r.fulfill({status:200,contentType:'application/json',
+   body:JSON.stringify({success:true,data:[]})}))
  let mode='duplicate', detailFetches=0
  await ctx.route('**/api/academic/setup',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,configured:true,data:{classes:[{level:'8',name:'Eight',active:true,sections:['Blue']}],subjects:[{name:'English',classes:['8']}]}})}))
  await ctx.route('**/api/settings',r=>r.fulfill({status:200,contentType:'application/json',body:'{"success":true,"data":{}}'}))
@@ -73,7 +98,7 @@ test('reopen fails closed on duplicate records, wrong school, and detail substit
  })
  const p=await ctx.newPage();p.on('dialog',dialog=>dialog.accept())
  try{
-  await p.goto('http://127.0.0.1:5582/daily-diary-workspace-test.html',{waitUntil:'domcontentloaded',timeout:35000})
+  await p.goto(`http://127.0.0.1:${FAIL_CLOSED_PORT}/daily-diary-workspace-test.html`,{waitUntil:'domcontentloaded',timeout:35000})
   await p.locator('[data-diary-workspace]').waitFor({state:'visible',timeout:15000})
   await p.locator('[data-dd-class]').selectOption('8');await p.locator('[data-dd-section]').selectOption('Blue');await p.locator('[data-dd-date]').fill('2026-10-09')
   await p.getByRole('button',{name:'Reopen Saved Diary'}).click()

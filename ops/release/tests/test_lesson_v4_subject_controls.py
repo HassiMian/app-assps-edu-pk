@@ -20,7 +20,7 @@ class LessonV4ContractTests(unittest.TestCase):
         for marker in ('Increase planner subject size','Decrease planner subject size',
                        'Toggle planner subject bold','Increase term subject size',
                        'Decrease term subject size','Toggle term subject bold',
-                       '3. Daily Student Cards'):
+                       '3. Daily Lesson Plan'):
             self.assertTrue(actual['details']['runtime_markers'][marker])
 
     def test_missing_any_one_visible_control_denies_release(self):

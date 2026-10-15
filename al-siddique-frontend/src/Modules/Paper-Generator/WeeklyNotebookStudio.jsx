@@ -3,6 +3,7 @@ import { changeSubjectTypography, normalizeSubjectTypography } from './plannerSu
 import {BookOpen,CalendarDays,FileInput,Printer,Save,Download} from 'lucide-react'
 import api from '../../services/api'
 import {getTenantStorageItem,setTenantStorageItem} from '../../services/tenantStorage'
+import {currentSchoolDate} from './schoolCalendarDate.js'
 import {CLASS_ORDER,LABELS} from './composerReviewDomain'
 import {validateLocalComposerSource,normalizeClass} from './composerLocalVerifier'
 import {CLASS_INCHARGES} from './lessonWeeklyEngine'
@@ -10,6 +11,7 @@ import {termWeeks,notebookModel,planWeekRows} from './weeklyNotebookModel'
 import TermPlannerEditor from './TermPlannerEditor'
 import {termKey,buildTermOverview,termAssessmentRows,validateTermContent} from './termPlanningModel'
 import {listTermServerPlans,saveTermServerPlan} from './termServerPersistence'
+import {dailyIdentity,listDailyServerPlans,saveDailyServerPlan} from './dailyServerPersistence'
 import {loadPrincipalSourceLibrary,listWeeklyServerPlans,saveWeeklyServerPlan,
  weeklyIdentity} from './weeklyServerPersistence'
 import './WeeklyNotebookStudio.css'
@@ -87,6 +89,11 @@ function Card({student,rows,klass,section,teacher,week,design,cardIndex,viewMode
        <th>{r.subject}</th>
        <td className={/Urdu|Islamiyat|Islamiat|Pakistan Studies|اردو/i.test(r.subject)?'wn-rtl':''}>
          <div dir="auto" className="wn-task"><MixedDirection text={r.task}/></div>
+         {viewMode==='daily'&&[
+          ['Objectives',r.objectives],['Activity',r.activitiesText],['Homework',r.homework]
+         ].filter(([,value])=>value).map(([label,value])=>
+          <div className="wn-activity" key={label}><b>{label}:</b>
+            <div dir="auto"><MixedDirection text={value}/></div></div>)}
          {(r.activities||[]).map((a,i)=><div className="wn-activity" key={a.date+'-'+i}>
            <b>Application / Activity</b> <bdi dir="ltr">{dateLabel(a.date)}</bdi>
            <small>Proposed teaching date</small>
@@ -124,13 +131,18 @@ export default function WeeklyNotebookStudio(){
  const [termStatus,setTermStatus]=useState('')
  const [termCacheReady,setTermCacheReady]=useState(false)
  const [termDraftSource,setTermDraftSource]=useState('')
- const [dailyDate,setDailyDate]=useState('2026-10-15')
+ const [dailyDate,setDailyDate]=useState(()=>currentSchoolDate())
  const [section,setSection]=useState('')
  const [start,setStart]=useState('2026-10-15')
  const [end,setEnd]=useState('2027-02-15')
  const [weekIndex,setWeekIndex]=useState(0)
  const [chosenSubjects,setChosenSubjects]=useState(null)
  const [remotePlans,setRemotePlans]=useState([])
+ const [dailyServerPlans,setDailyServerPlans]=useState([])
+ const [dailySavedId,setDailySavedId]=useState(null)
+ const [dailySaving,setDailySaving]=useState(false)
+ const [dailyNotesByKey,setDailyNotesByKey]=useState({})
+ const [dailyDetailsByKey,setDailyDetailsByKey]=useState({})
  const [currentServerId,setCurrentServerId]=useState(null)
  const [remoteError,setRemoteError]=useState('')
  const [savingToServer,setSavingToServer]=useState(false)
@@ -164,6 +176,19 @@ export default function WeeklyNotebookStudio(){
    ...r.assessments,...(extraAssessments[r.id]||[])
   ].filter((a,i,list)=>list.findIndex(x=>x.date===a.date&&x.origin===a.origin)===i)}))
  },[candidates,klass,activeWeek,start,end,manifest,edits,includedIds,extraAssessments])
+ const effectiveDailyDate=dailyDate
+ const activeDailyKey=dailyIdentity(klass,section,effectiveDailyDate)
+ const dayNotes=dailyNotesByKey[activeDailyKey]||{}
+ const dayDetails=dailyDetailsByKey[activeDailyKey]||{}
+ const activeRows=viewMode==='daily'?rows.map(row=>({
+  ...row,task:Object.prototype.hasOwnProperty.call(dayNotes,row.id)?dayNotes[row.id]:row.task,
+  objectives:dayDetails[row.id]?.objectives||'',
+  activitiesText:dayDetails[row.id]?.activities||'',
+  homework:dayDetails[row.id]?.homework||'',
+  assessments:dayDetails[row.id]?.assessment?[
+   {date:effectiveDailyDate,label:dayDetails[row.id].assessment,origin:'MANUAL_PROPOSAL'}
+  ]:[]
+ })):rows
  const activeTermKey=termKey(klass,section,termName,start)
  const termEdits=(termDraftSource===manifest?.source_zip_sha256?termDrafts[activeTermKey]?.edits:null)||EMPTY_TERM_EDITS
  const termManualAssessments=(termDraftSource===manifest?.source_zip_sha256?termDrafts[activeTermKey]?.assessments:null)||EMPTY_TERM_ASSESSMENTS
@@ -236,6 +261,9 @@ export default function WeeklyNotebookStudio(){
   Promise.resolve().then(()=>listWeeklyServerPlans()).then(data=>{
     if(live){setRemotePlans(data);setRemoteError('')}
   }).catch(()=>{if(live)setRemoteError('Saved school plans could not be loaded. No server write was attempted.')})
+  Promise.resolve().then(()=>listDailyServerPlans()).then(data=>{
+    if(live)setDailyServerPlans(data)
+  }).catch(()=>{if(live)setRemoteError('Saved Days unavailable; no daily record changed.')})
   queueMicrotask(()=>{if(live)setSourceLoading(true)})
   loadPrincipalSourceLibrary().then(async bundle=>{
     const proof=await validateLocalComposerSource(bundle)
@@ -322,6 +350,49 @@ export default function WeeklyNotebookStudio(){
     setError('Server save FAILED; nothing published. '+(ex?.response?.data?.message||ex.message||'Please retry.'))
   }finally{setSavingToServer(false)}
  }
+ async function saveDaily(){
+  if(!manifest?.source_zip_sha256||!activeRows.length||
+   !weeks.some(w=>effectiveDailyDate>=w.start&&effectiveDailyDate<=w.end)){
+   setError('Verified source, school-calendar date and at least one subject required before Save Day.');return
+  }
+  setDailySaving(true);setError('')
+  try{
+   const existing=dailyServerPlans.find(doc=>doc.id===dailySavedId &&
+      doc.provenance?.dailyKey===activeDailyKey)
+   const saved=await saveDailyServerPlan({
+    klass,section,date:effectiveDailyDate,rows:activeRows,teacherLabel:teacher,
+    sourceZipSha256:manifest.source_zip_sha256,existing,design
+   })
+   if(!saved?.id)throw Error('School server returned no Daily Plan ID')
+   setDailySavedId(saved.id)
+   setDailyServerPlans(await listDailyServerPlans())
+   setStatus('Saved Day as private school-server draft. Reopen from Saved Days.')
+  }catch(ex){
+   setError('Save Day FAILED; no weekly plan or Daily Diary overwritten. '+
+     (ex?.response?.data?.message||ex.message||'Retry without changing source data.'))
+  }finally{setDailySaving(false)}
+ }
+ function openSavedDay(doc){
+  if(!doc?.id||doc.provenance?.academicPublication!=='BLOCKED'||
+   doc.provenance?.sourceZipSha256!==manifest?.source_zip_sha256){
+   setError('Saved Daily Plan source differs from verified current source.');return
+  }
+  if(!CLASS_ORDER.includes(doc.classLevel)||
+     !doc.startDate||doc.startDate!==doc.endDate){
+   setError('Saved Daily Plan class/date invalid.');return
+  }
+  const applicable=weeks.findIndex(w=>doc.startDate>=w.start&&doc.startDate<=w.end)
+  if(doc.classLevel!==klass||applicable<0||doc.section!==(section||'')){
+   setError('Select saved Day class, section and applicable term week first.');return
+  }
+  setWeekIndex(applicable);setDailyDate(doc.startDate)
+  const identity=dailyIdentity(doc.classLevel,doc.section,doc.startDate)
+  setDailyNotesByKey(old=>({...old,[identity]:doc.provenance.dailyStatementById||{}}))
+  setDailyDetailsByKey(old=>({...old,[identity]:doc.provenance.dailyDetailsById||{}}))
+  setDesign({...defaultDesign,...(doc.layoutSettings||{})})
+  setDailySavedId(doc.id);setViewMode('daily')
+  setStatus('Saved Day reopened privately at revision '+doc.serverRevision+'.')
+ }
  function openServerPlan(plan){
   const doc=plan
   setCurrentServerId(plan.id)
@@ -384,7 +455,7 @@ export default function WeeklyNotebookStudio(){
  }
  function printCards(){
   if(klass==='One'&&!manifest?.class_one_image_review){setError('Class One requires the verified original 18-week image transcript. Open the updated school source JSON first.');return}
-  if(!rows.length){setError('Select subjects to print a week.');return}
+  if(!activeRows.length){setError('Select subjects for this lesson plan before printing.');return}
   if(activeRoster.length&&!selectedStudents.length){setError('Select at least one student before printing.');return}
   const copy=document.getElementById('wn-print-pages')
   if(!copy)return
@@ -524,7 +595,9 @@ export default function WeeklyNotebookStudio(){
    <nav className="wn-stage-switch" aria-label="Term weekly daily lesson views">
     <button className={viewMode==='term'?'selected':''} onClick={()=>setViewMode('term')}>1. Term Syllabus</button>
     <button className={viewMode==='weekly'?'selected':''} onClick={()=>setViewMode('weekly')}>2. Weekly Plan</button>
-    <button className={viewMode==='daily'?'selected':''} onClick={()=>setViewMode('daily')}>3. Daily Student Cards</button>
+    <button className={viewMode==='daily'?'selected':''}
+      onClick={()=>{setViewMode('daily');const i=weeks.findIndex(w=>dailyDate>=w.start&&dailyDate<=w.end);if(i>=0)setWeekIndex(i)}}>
+      3. Daily Lesson Plan</button>
    </nav>
    <div className="wn-topbar">
     <label>Class<select data-wn-class value={klass} onChange={e=>selectClass(e.target.value)}>
@@ -533,15 +606,17 @@ export default function WeeklyNotebookStudio(){
     <label>Section<input data-wn-section value={section} onChange={e=>{setSection(e.target.value);setCurrentServerId(null);setRosterScope('')}} placeholder="All / Section"/></label>
     <label>Term begins<input type="date" value={start} onChange={e=>{setStart(e.target.value);setWeekIndex(0);setCurrentServerId(null)}}/></label>
     <label>Term ends<input type="date" value={end} min={start} onChange={e=>{setEnd(e.target.value);setWeekIndex(0);setCurrentServerId(null)}}/></label>
-    {viewMode!=='term'&&<label>Week<select data-wn-week value={Math.min(weekIndex,Math.max(0,weeks.length-1))}
+    {viewMode==='weekly'&&<label>Week<select data-wn-week value={Math.min(weekIndex,Math.max(0,weeks.length-1))}
       onChange={e=>{setWeekIndex(Number(e.target.value));setCurrentServerId(null)}}>
       {weeks.map((w,i)=><option value={i} key={w.start}>Week {w.index} · {dateLabel(w.start)}–{dateLabel(w.end)}</option>)}
     </select></label>}
    </div>
-   {viewMode==='daily'&&<label className="wn-daily-date">Daily diary date
-      <input type="date" min={activeWeek?.start} max={activeWeek?.end}
-       value={dailyDate>=activeWeek?.start&&dailyDate<=activeWeek?.end?dailyDate:activeWeek?.start||dailyDate}
-       onChange={e=>setDailyDate(e.target.value)}/>
+   {viewMode==='daily'&&<label className="wn-daily-date">Daily lesson date
+      <input type="date" min={start} max={end}
+       value={effectiveDailyDate}
+       onChange={e=>{const d=e.target.value;setDailyDate(d);setDailySavedId(null);
+        const i=weeks.findIndex(w=>d>=w.start&&d<=w.end);
+        if(i>=0)setWeekIndex(i)}}/>
       <small>Daily statements are editable weekly-derived proposals until teacher confirmation.</small>
    </label>}
    {viewMode==='term'&&<TermPlannerEditor
@@ -556,7 +631,10 @@ export default function WeeklyNotebookStudio(){
      onOpenSaved={openSavedTerm} status={termStatus}/>}
    {viewMode!=='term'&&<>
    <div className="wn-actions">
-    <button onClick={saveCurrent} disabled={savingToServer||!rows.length}><Save size={15}/> {savingToServer?'Saving to School Server...':'Save Week to School Server'}</button>
+    <button onClick={viewMode==='daily'?saveDaily:saveCurrent}
+      disabled={(viewMode==='daily'?dailySaving:savingToServer)||!activeRows.length}><Save size={15}/>
+       {viewMode==='daily'?(dailySaving?'Saving Day...':'Save Day to School Server'):
+        (savingToServer?'Saving to School Server...':'Save Week to School Server')}</button>
     <button onClick={()=>saveDownload({schema:'assps.weekly_learning_plan.private.v1',
       sourceZipSha256:manifest.source_zip_sha256,classLevel:klass,section,
       week:activeWeek,edits,extraAssessments},'ASSPS-'+klass+'-week-'+(activeWeek?.index||1)+'.json')}>
@@ -588,12 +666,28 @@ export default function WeeklyNotebookStudio(){
      <p className="wn-hint">Original 18-week image timetable: provisional visual transcription, not academic approval. Week dates are preserved exactly.</p>}
     <p className="wn-hint">Class in-charge (Principal-provided): <b>{teacher}</b>. This does not grant teacher account access.</p>
       </section>
-      <section className="wn-panel"><h4>Weekly teaching statements</h4>
+      <section className="wn-panel"><h4>{viewMode==='daily'?'Daily lesson statements':'Weekly teaching statements'}</h4>
        <p className="wn-hint">Short, editable notes. Source-derived / proposed dates stay separate.</p>
-       {rows.map(row=><div className="wn-editline" key={row.id}>
+       {activeRows.map(row=><div className="wn-editline" key={row.id}>
          <label>{row.subject} <small>{row.sourceStatus}</small></label>
          <textarea dir="auto" rows={2} maxLength={6000} value={row.task}
-           onChange={e=>setEdits(old=>({...old,[row.id]:e.target.value}))}/>
+           onChange={e=>viewMode==='daily'?
+            setDailyNotesByKey(old=>({...old,[activeDailyKey]:{
+             ...(old[activeDailyKey]||{}),[row.id]:e.target.value}})):
+            setEdits(old=>({...old,[row.id]:e.target.value}))}/>
+         {viewMode==='daily'&&<div className="wn-daily-teaching-details">
+          {[
+            ['objectives','Learning objectives'],['activities','Teacher activities / resources'],
+            ['homework','Homework / follow-up'],['assessment','Daily assessment (optional)']
+           ].map(([field,label])=><label key={field}>{label} · {row.subject}
+             <textarea rows={2} maxLength={900} aria-label={label+' '+row.subject}
+               value={dayDetails[row.id]?.[field]||''}
+               onChange={e=>setDailyDetailsByKey(old=>({...old,
+                 [activeDailyKey]:{...(old[activeDailyKey]||{}),
+                  [row.id]:{...(old[activeDailyKey]?.[row.id]||{}),[field]:e.target.value}}
+                }))}/>
+            </label>)}
+         </div>}
          {row.assessments.map(a=><p className="wn-assess-chip" key={a.date+a.origin}>
            Assessment: <bdi dir="ltr">{dateLabel(a.date)}</bdi> · {a.origin==='ORIGINAL_SOURCE'?'source':'proposed'}
          </p>)}
@@ -601,7 +695,7 @@ export default function WeeklyNotebookStudio(){
        </div>)}
        {!rows.length&&<p className="wn-hint">Select at least one subject to create a weekly plan.</p>}
       </section>
-      <section className="wn-panel"><h4>Assessment planner</h4>
+      {viewMode==='weekly'&&<section className="wn-panel"><h4>Assessment planner</h4>
        <p className="wn-hint">Original assessment dates appear automatically. Add only proposed assessments here.</p>
        <select value={assessmentInput.subject} onChange={e=>setAssessmentInput(x=>({...x,subject:e.target.value}))}>
         <option value="">Choose subject</option>
@@ -610,7 +704,7 @@ export default function WeeklyNotebookStudio(){
        <input type="date" min={activeWeek?.start} max={activeWeek?.end}
          value={assessmentInput.date} onChange={e=>setAssessmentInput(x=>({...x,date:e.target.value}))}/>
        <button onClick={addAssessment}>+ Propose Assessment Date</button>
-      </section>
+      </section>}
 
       <section className="wn-panel">
        <h4>Student roster <small>{selectedStudents.length} selected</small></h4>
@@ -676,9 +770,17 @@ export default function WeeklyNotebookStudio(){
        <label>Preview zoom <b>{design.zoom}%</b><input type="range" min="45" max="100"
          value={design.zoom} onChange={e=>patchDesign('zoom',Number(e.target.value))}/></label>
        <button onClick={()=>setDesign(defaultDesign)}>Reset print settings</button>
-       {originalPageWarning(rows,design.cardsPerPage)&&<p className="wn-warning">Long tasks may overflow. Use fewer cards or shorten each statement.</p>}
+       {originalPageWarning(activeRows,design.cardsPerPage)&&<p className="wn-warning">Long tasks may overflow. Use fewer cards or shorten each statement.</p>}
       </section>
-      <section className="wn-panel"><h4>Server Saved Weeks <small>{remotePlans.filter(p=>p.classLevel===klass).length}</small></h4>
+      {viewMode==='daily'&&<section className="wn-panel" aria-label="Server Saved Days">
+       <h4>Server Saved Days <small>{dailyServerPlans.filter(p=>p.classLevel===klass).length}</small></h4>
+       <p className="wn-hint">Independent school-server daily lesson drafts. Operational Daily Diary remains separate.</p>
+       <div className="wn-saved">{dailyServerPlans.filter(doc=>doc.classLevel===klass)
+        .sort((a,b)=>b.startDate.localeCompare(a.startDate))
+        .map(doc=><button key={doc.id} type="button" onClick={()=>openSavedDay(doc)}>
+         <BookOpen size={13}/>{dateLabel(doc.startDate)} · {doc.subjects.length} subjects</button>)}</div>
+      </section>}
+      {viewMode==='weekly'&&<section className="wn-panel"><h4>Server Saved Weeks <small>{remotePlans.filter(p=>p.classLevel===klass).length}</small></h4>
        {remoteError&&<p className="wn-warning" role="alert">{remoteError}</p>}
        <p className="wn-hint">Private, authenticated school database drafts. These are NOT published to student portals.</p>
        <div className="wn-saved">
@@ -688,7 +790,7 @@ export default function WeeklyNotebookStudio(){
          </button>)}
        </div>
        {!remotePlans.some(p=>p.classLevel===klass)&&<p className="wn-hint">No school-server weekly draft saved yet. Choose a week and click Save Week to School Server.</p>}
-      </section>
+      </section>}
       <section className="wn-panel"><h4>Saved lesson plans</h4>
        <p className="wn-hint">Older local working copies retained on this device. Use Server Saved Weeks above for centrally saved plans.</p>
        <div className="wn-saved">
@@ -717,9 +819,9 @@ export default function WeeklyNotebookStudio(){
             '--wn-grid-rows':design.cardsPerPage>=4?Math.ceil(design.cardsPerPage/2):design.cardsPerPage,
             '--wn-zoom':design.zoom/100}}>
           {people.map((st,j)=><Card key={st?studentId(st):'generic-'+i+'-'+j}
-            student={st} rows={rows} klass={klass} section={section} teacher={teacher}
+            student={st} rows={activeRows} klass={klass} section={section} teacher={teacher}
             week={activeWeek||{index:0,start:'',end:''}} design={design}
-            cardIndex={i*design.cardsPerPage+j} viewMode={viewMode} dailyDate={dailyDate}/>)}
+            cardIndex={i*design.cardsPerPage+j} viewMode={viewMode} dailyDate={effectiveDailyDate}/>)}
         </section>)}
        </div>
       </div>

@@ -24,28 +24,52 @@
 }
 @page {
   size: A4 portrait;
-  margin: 0;
+  margin: 4mm;
 }
 @media print {
-  body.early-years-mode {
-    margin: 0 !important;
-    padding: 0 !important;
-    background: #fff !important;
-  }
+  /* Complete shell and navigation chrome suppression */
   body.early-years-mode .app-sidebar-slot,
   body.early-years-mode .app-topbar-slot,
+  body.early-years-mode .super-topbar,
+  body.early-years-mode header.super-topbar,
   body.early-years-mode .paper-generator-module-tabs,
   body.early-years-mode .early-years-editor-root > header,
   body.early-years-mode .early-years-inspector,
   body.early-years-mode .no-print {
     display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
+
+  /* Root & body overflow unconstraint */
+  html:has(body.early-years-mode),
+  body.early-years-mode,
+  body.early-years-mode #root {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+  }
+
+  /* Unconstrain all parent containers */
   body.early-years-mode .app-shell,
   body.early-years-mode .app-main-column,
   body.early-years-mode .super-module-viewport,
   body.early-years-mode .paper-generator-module-wrap,
   body.early-years-mode .early-years-module-wrap,
   body.early-years-mode .early-years-editor-root,
+  body.early-years-mode [data-early-years-workspace-body],
+  body.early-years-mode [data-early-years-scroll-region],
   body.early-years-mode .early-years-paper-viewport {
     display: block !important;
     position: static !important;
@@ -60,11 +84,16 @@
     transform: none !important;
     animation: none !important;
     background: #fff !important;
+    border: none !important;
+    box-shadow: none !important;
   }
+
+  /* Exact A4 Sheet rendering */
   body.early-years-mode .early-years-sheet-a4 {
     display: block !important;
-    width: 210mm !important;
-    min-height: 297mm !important;
+    width: 100% !important;
+    max-width: 202mm !important;
+    min-height: 289mm !important;
     height: auto !important;
     margin: 0 auto !important;
     box-shadow: none !important;
@@ -75,85 +104,94 @@
     background: #fff !important;
     color: #000 !important;
     page-break-after: auto !important;
+    box-sizing: border-box !important;
+    padding: 5mm 6mm !important;
   }
+
   body.early-years-mode .early-years-question-block {
     break-inside: avoid !important;
     page-break-inside: avoid !important;
+    margin-bottom: 6px !important;
   }
+
+  body.early-years-mode .early-years-question-block > div:first-child {
+    margin-bottom: 3px !important;
+    padding-bottom: 2px !important;
+  }
+
+  body.early-years-mode .early-years-worksheet-header {
+    margin-bottom: 6px !important;
+    padding: 5px 8px !important;
+  }
+
+  body.early-years-mode .early-years-sketch {
+    max-width: 28mm !important;
+    max-height: 28mm !important;
+  }
+
+  body.early-years-mode .early-years-colouring-area {
+    padding: 5px 4px !important;
+  }
+
+  body.early-years-mode .early-years-picture-coloring-block,
+  body.early-years-mode .early-years-circle-choice-sketches,
+  body.early-years-mode .early-years-trace-glyph-grid {
+    gap: 4px !important;
+    margin-top: 4px !important;
+    margin-bottom: 4px !important;
+  }
+
+  body.early-years-mode .early-years-trace-glyph-grid > div {
+    min-height: 48px !important;
+    padding: 3px 2px !important;
+  }
+
+  body.early-years-mode .early-years-trace-glyph-grid > div > div:first-child {
+    font-size: 24pt !important;
+    padding-bottom: 1px !important;
+  }
+
+  body.early-years-mode .early-years-counting-grid {
+    gap: 3px !important;
+    margin: 4px 0 !important;
+  }
+
+  body.early-years-mode .early-years-counting-grid .counting-cell {
+    height: 9mm !important;
+    min-height: 28px !important;
+    border-radius: 4px !important;
+    padding: 1px 3px !important;
+  }
+
+  body.early-years-mode .early-years-alphabet-writing-area {
+    margin: 3px 0 !important;
+    padding: 3px 6px !important;
+  }
+
+  body.early-years-mode .early-years-handwriting-lines {
+    margin: 4px 0 !important;
+    gap: 7mm !important;
+  }
+
+  body.early-years-mode .early-years-matching-columns {
+    margin: 4px 0 !important;
+    gap: 4px !important;
+  }
+
+  body.early-years-mode .early-years-matching-columns > div {
+    min-height: 12mm !important;
+    padding: 2px 4px !important;
+  }
+
   body.early-years-mode .early-years-footer {
+    margin-top: 6px !important;
+    padding-top: 3px !important;
+    font-size: 8pt !important;
     color: #444 !important;
   }
 }
 
-/* Compact child-friendly duplex profile: keep each pre-class paper within two A4 sides. */
-.early-years-question-block {
-  margin-bottom: 12px !important;
-}
-.early-years-sketch {
-  max-width: 38mm;
-  max-height: 38mm;
-}
-@media print {
-  body.early-years-mode .early-years-sheet-a4 {
-    padding: 7mm 8mm !important;
-  }
-  body.early-years-mode .early-years-worksheet-header {
-    margin-bottom: 8px !important;
-    padding: 6px 9px !important;
-  }
-  body.early-years-mode .early-years-question-block {
-    margin-bottom: 8px !important;
-  }
-  body.early-years-mode .early-years-question-block > div:first-child {
-    margin-bottom: 4px !important;
-    padding-bottom: 2px !important;
-  }
-  body.early-years-mode .early-years-sketch {
-    max-width: 31mm !important;
-    max-height: 31mm !important;
-  }
-  body.early-years-mode .early-years-colouring-area {
-    padding: 6px 5px !important;
-  }
-  body.early-years-mode .early-years-picture-coloring-block,
-  body.early-years-mode .early-years-circle-choice-sketches,
-  body.early-years-mode .early-years-trace-glyph-grid {
-    gap: 6px !important;
-    margin-top: 5px !important;
-    margin-bottom: 5px !important;
-  }
-  body.early-years-mode .early-years-trace-glyph-grid > div {
-    min-height: 52px !important;
-    padding: 4px 3px !important;
-  }
-  body.early-years-mode .early-years-trace-glyph-grid > div > div:first-child {
-    font-size: 25pt !important;
-    padding-bottom: 2px !important;
-  }
-  body.early-years-mode .early-years-counting-grid {
-    gap: 3px !important;
-    margin: 5px 0 !important;
-  }
-  body.early-years-mode .early-years-counting-grid .counting-cell {
-    height: 9.5mm !important;
-    min-height: 30px !important;
-    border-radius: 4px !important;
-    padding: 1px 3px !important;
-  }
-  body.early-years-mode .early-years-alphabet-writing-area {
-    margin: 4px 0 !important;
-    padding: 4px 6px !important;
-  }
-  body.early-years-mode .early-years-footer {
-    margin-top: 8px !important;
-    padding-top: 4px !important;
-    font-size: 8pt !important;
-  }
-}
-
-
-/* Print hardening: never print the dark editor canvas/frame around an Early Years sheet.
-   Starter may keep a light template border; Mover/Flyer print borderless by default. */
+/* Print hardening: clean sheet edges */
 @media print {
   html,
   body,
@@ -177,26 +215,35 @@
     box-shadow: none !important;
     outline: none !important;
     outline-offset: 0 !important;
-    border: 0 !important;
-    border-radius: 0 !important;
+    border: 0.35mm solid var(--ey-border, #9eb6cf) !important;
+    border-radius: 3px !important;
     margin: 0 auto !important;
     background: #fff !important;
   }
 
   .early-years-sheet-a4[data-class-stage="starter"] {
-    border: 0.25mm solid var(--ey-border, #b8cadb) !important;
+    border: 0.35mm solid var(--ey-border, #b8cadb) !important;
   }
 }
 
 /* Isolated printing for user-created worksheets: show only the shared A4 renderer. */
 @media print {
- body.early-years-mode [data-early-years-studio],
- body.early-years-mode [data-user-early-years-studio],
- body.early-years-mode [data-user-early-years-studio] .early-years-workspace-body,
- body.early-years-mode [data-user-early-years-preview] {
-  display:block !important; width:100% !important; height:auto !important;
-  min-height:0 !important; max-height:none !important; overflow:visible !important;
-  margin:0 !important; padding:0 !important; position:static !important; background:#fff !important;
- }
- body.early-years-mode [data-user-early-years-studio] .early-years-workspace-body {grid-template-columns:1fr !important}
+  body.early-years-mode [data-early-years-studio],
+  body.early-years-mode [data-user-early-years-studio],
+  body.early-years-mode [data-user-early-years-studio] .early-years-workspace-body,
+  body.early-years-mode [data-user-early-years-preview] {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: static !important;
+    background: #fff !important;
+  }
+  body.early-years-mode [data-user-early-years-studio] .early-years-workspace-body {
+    grid-template-columns: 1fr !important;
+  }
 }

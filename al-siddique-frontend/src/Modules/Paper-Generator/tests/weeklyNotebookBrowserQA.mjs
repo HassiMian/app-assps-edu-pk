@@ -13,7 +13,9 @@ const errors=[]
 const source='/root/secure-archive/composer-review-20261014/manifest_plus_classone_private.json'
 const bundle=JSON.parse(fs.readFileSync(source,'utf8'))
 const serverRows=[]
+const serverDayRows=[]
 const writes=[]
+const dayWrites=[]
 await page.addInitScript(()=>{
  localStorage.setItem('al_siddique_user',JSON.stringify({id:92001,role:'admin',designation:'Principal',school_id:1}))
 })
@@ -36,9 +38,19 @@ await page.route('**/api/**',async route=>{
    return reply(bundle)
  }
  if(path.endsWith('/api/lesson-plans')){
-   if(method==='GET')return reply(serverRows)
+   if(method==='GET')return reply([...serverRows,...serverDayRows])
    if(method==='POST'){
      const body=route.request().postDataJSON()
+     if(body.planningScope==='daily'){
+       assert.equal(body.plannerDocument?.provenance?.marker,'ASSPS_DAILY_LESSON_NOTEBOOK_V1')
+       assert.equal(body.plannerDocument?.provenance?.academicPublication,'BLOCKED')
+       assert.equal(body.endDate,body.date)
+       assert.ok(!JSON.stringify(body).includes('QA Student'))
+       assert.equal(body.sentToPortal,undefined)
+       const saved={...body,id:'lp_qa_daily_server_0001',revision:1,serverRevision:1}
+       serverDayRows.push(saved);dayWrites.push(body)
+       return reply(saved,201)
+     }
      writes.push(body)
      assert.equal(body.planningScope,'weekly')
      assert.equal(body.plannerDocument?.provenance?.academicPublication,'BLOCKED')
@@ -49,6 +61,14 @@ await page.route('**/api/**',async route=>{
      serverRows.push(saved)
      return reply(saved,201)
    }
+ }
+ if(path.includes('/api/lesson-plans/lp_qa_daily_server_0001')&&method==='PUT'){
+   const body=route.request().postDataJSON()
+   assert.equal(Number(body.expectedRevision),1)
+   assert.equal(body.planningScope,'daily')
+   const saved={...body,id:'lp_qa_daily_server_0001',revision:2,serverRevision:2}
+   serverDayRows.splice(0,1,saved);dayWrites.push(body)
+   return reply(saved)
  }
  if(path.includes('/api/lesson-plans/lp_qa_weekly_server_0001')&&method==='PUT'){
    const body=route.request().postDataJSON()
@@ -170,7 +190,7 @@ try{
  console.log('CLASS_ONE_IMAGE_REVIEW: verified 18 weeks, visual source W1 pages and W17 test review PASS')
  assert.equal(errors.length,0,JSON.stringify(errors))
  await popup.close()
- await page.getByRole('button',{name:'3. Daily Student Cards'}).click()
+ await page.getByRole('button',{name:'3. Daily Lesson Plan'}).click()
  assert.equal(await page.locator('.wn-card').first().evaluate(n=>
    getComputedStyle(n).getPropertyValue('--wn-subject-name-size').trim()),afterWeekSize+'px')
  await page.locator('.wn-daily-date input[type=date]').fill('2026-11-10')
@@ -182,6 +202,60 @@ try{
  await daily.waitForLoadState('domcontentloaded')
  assert.ok((await daily.locator('body').innerText()).includes('DAILY LEARNING NOTE'))
  await daily.close()
+ // Return to authorized real-class roster; each personalized Day card must
+ // have one correct student name, not an unscoped or foreign-school identity.
+ await page.locator('[data-wn-class]').selectOption('Four')
+ await page.getByText('3 authorized students loaded').waitFor()
+ await page.locator('.wn-daily-date input[type=date]').fill('2026-11-10')
+ assert.equal(await page.locator('[data-lesson-student-card]').count(),3)
+ assert.ok((await page.locator('.wn-card-identity').first().innerText()).includes('QA Student Alpha'))
+ // Day-specific draft is separate from weekly notes and operational Daily Diary.
+ const dayText=page.locator('.wn-editline textarea').first()
+ await dayText.fill('Independent Daily Teaching: 10 Nov 2026, Urdu/English lesson.')
+ await page.locator('[aria-label^="Learning objectives"]').first().fill('Identify parts of a sentence.')
+ await page.locator('[aria-label^="Teacher activities"]').first().fill('Guided reading, board examples.')
+ await page.locator('[aria-label^="Homework / follow-up"]').first().fill('Page 31 practice.')
+ await page.locator('[aria-label^="Daily assessment"]').first().fill('Oral questions.')
+ await page.getByRole('button',{name:'Save Day to School Server'}).click()
+ await page.getByText('Saved Day as private school-server draft.').waitFor()
+ assert.equal(serverDayRows.length,1)
+ assert.equal(dayWrites.length,1)
+ assert.equal(dayWrites[0].classLevel,'Four')
+ assert.ok(!JSON.stringify(dayWrites[0]).includes('QA Student'))
+ assert.equal(dayWrites[0].plannerDocument.provenance.academicPublication,'BLOCKED')
+ assert.equal(dayWrites[0].plannerDocument.subjects[0].lessons[0].objectives[0],
+   'Identify parts of a sentence.')
+ assert.equal(dayWrites[0].plannerDocument.subjects[0].lessons[0].activities[0],
+   'Guided reading, board examples.')
+ assert.equal(dayWrites[0].plannerDocument.subjects[0].lessons[0].homework,'Page 31 practice.')
+ assert.equal(dayWrites[0].plannerDocument.subjects[0].lessons[0].assessment,'Oral questions.')
+
+ assert.equal(writes.length,2)
+ await page.reload({waitUntil:'networkidle'})
+ await page.getByText('Original source library automatically loaded: 59 subjects').waitFor({timeout:18000})
+ await page.locator('[data-wn-class]').selectOption('Four')
+ await page.getByRole('button',{name:'3. Daily Lesson Plan'}).click()
+ await page.getByText('3 authorized students loaded').waitFor()
+ await page.locator('[aria-label="Server Saved Days"] .wn-saved button').first().waitFor()
+ await page.locator('[aria-label="Server Saved Days"] .wn-saved button').first().click()
+ assert.equal(await page.locator('.wn-editline textarea').first().inputValue(),
+  'Independent Daily Teaching: 10 Nov 2026, Urdu/English lesson.')
+ assert.equal(await page.locator('.wn-card-week').first().innerText().then(x=>x.includes('10 Nov 2026')),true)
+ assert.ok((await page.locator('.wn-card-identity').first().innerText()).includes('QA Student Alpha'))
+ assert.equal(await page.locator('[aria-label^="Learning objectives"]').first().inputValue(),
+   'Identify parts of a sentence.')
+ assert.equal(await page.locator('[aria-label^="Teacher activities"]').first().inputValue(),
+   'Guided reading, board examples.')
+ assert.equal(await page.locator('[aria-label^="Homework / follow-up"]').first().inputValue(),
+   'Page 31 practice.')
+ assert.ok((await page.locator('.wn-card').first().innerText()).includes('Objectives:'))
+ await page.locator('.wn-editline textarea').first().fill('Edited daily teaching after reopen.')
+ await page.getByRole('button',{name:'Save Day to School Server'}).click()
+ await page.getByText('Saved Day as private school-server draft.').waitFor()
+ assert.equal(serverDayRows.length,1)
+ assert.equal(serverDayRows[0].serverRevision,2)
+ assert.equal(dayWrites.length,2)
+ assert.equal(writes.length,2)
  await page.getByRole('button',{name:'2. Weekly Plan'}).click()
  assert.equal(writes.length,2)
  console.log('WEEKLY_NOTEBOOK_CHROMIUM: auto-original59 + server Save/Reopen + roster3 + 3card overflow safe-block + 1card A4 + assessed14Nov + print PASS')

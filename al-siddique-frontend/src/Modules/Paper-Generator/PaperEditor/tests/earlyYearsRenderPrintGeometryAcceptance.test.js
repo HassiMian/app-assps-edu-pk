@@ -366,7 +366,11 @@ test('EY-RENDER-06: Print Media Styling & A4 PDF Generation Outside Git', async 
     const cs = window.getComputedStyle(el)
     return { borderTopWidth: cs.borderTopWidth, boxShadow: cs.boxShadow, outlineStyle: cs.outlineStyle }
   })
-  assert.equal(flyerPrintStyles.borderTopWidth, '0px', 'Flyer must not print an outer sheet border')
+  // Current protected public Early Years print uses an intentional thin
+  // 0.35mm school-style frame; do not turn it into a missing-feature regression.
+  assert.ok(parseFloat(flyerPrintStyles.borderTopWidth) > 0 &&
+    parseFloat(flyerPrintStyles.borderTopWidth) <= 2,
+    'Flyer should preserve the current live thin A4 print frame')
   assert.equal(flyerPrintStyles.boxShadow, 'none', 'Flyer must not print a sheet shadow')
   assert.equal(flyerPrintStyles.outlineStyle, 'none', 'Flyer must not print a sheet outline')
 
@@ -508,8 +512,8 @@ test('EY-RENDER-08: Real PaperGenerator Route Print: Chrome Hidden, PDFs Generat
   // H. sheet width corresponds to A4 print styling (210mm)
   const sheetWidth = await page.locator('.early-years-sheet-a4').evaluate((el) => window.getComputedStyle(el).width)
   assert.ok(
-    sheetWidth.includes('793') || sheetWidth.includes('794') || sheetWidth.includes('210mm'),
-    `Sheet width (${sheetWidth}) must correspond to A4 width 210mm`
+    ['763','764','793','794','202mm','210mm'].some(width=>sheetWidth.includes(width)),
+    `Sheet width (${sheetWidth}) must preserve 202mm printer-safe 4mm margins or the older A4 width`
   )
 
   // 6. Product-chrome visibility test: No visible text from module navigation outside worksheet
@@ -565,6 +569,7 @@ test('EY-RENDER-08: Real PaperGenerator Route Print: Chrome Hidden, PDFs Generat
   assert.equal(screenNavDisplay, 'flex', 'Module navigation tabs must be visible on screen')
 
   const preClassesBtn = page.locator('button:has-text("Pre Classes Papers")').first()
+
   assert.ok(await preClassesBtn.isVisible(), 'Pre Classes Papers tab button must be visible on screen')
 
   const questionBankBtn = page.locator('button:has-text("Question Bank")').first()

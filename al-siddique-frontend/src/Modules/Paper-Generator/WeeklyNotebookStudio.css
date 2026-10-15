@@ -163,3 +163,8 @@
 .wn-subject-size-stepper button{min-width:36px;min-height:34px;border:1px solid #b8d2df;border-radius:6px;background:white;color:#173f60;font-weight:800;cursor:pointer}
 .wn-subject-size-stepper output{min-width:40px;text-align:center;font-weight:800;color:#124b71}
 .wn-subject-typography-controls input[type=range]{width:100%}
+
+.wn-daily-teaching-details{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:8px 0}
+.wn-daily-teaching-details label{display:grid;gap:4px;font-size:10px;font-weight:700;color:#245371}
+.wn-daily-teaching-details textarea{min-height:54px;resize:vertical;width:100%}
+@media(max-width:780px){.wn-daily-teaching-details{grid-template-columns:1fr}}

@@ -3,7 +3,7 @@ const assert=require('node:assert/strict')
 const {mustHoldLessonPublication,privateLessonMutationAllowed,
  isLockedSourceDocument}=require('../services/lessonPlanningPublicationGuard')
 test('weekly and term original-source drafts are blocked from parent/student publishing',()=>{
- for(const marker of ['ASSPS_TERM_NOTEBOOK_V1','ASSPS_WEEKLY_NOTEBOOK_V1']){
+ for(const marker of ['ASSPS_TERM_NOTEBOOK_V1','ASSPS_WEEKLY_NOTEBOOK_V1','ASSPS_DAILY_LESSON_NOTEBOOK_V1']){
   assert.equal(mustHoldLessonPublication({plannerDocument:{provenance:{marker}}}),true)
   assert.equal(mustHoldLessonPublication({provenance:{marker}}),true)
  }
@@ -58,4 +58,24 @@ test('source-term applicability cannot be forged in protected plan edits',()=>{
  const b=structuredClone(a)
  b.plannerDocument.provenance.sourceApplicability='ORIGINAL_REVIEW_PENDING'
  assert.equal(privateLessonMutationAllowed(a,b,'lp-unsourced-manual'),false)
+})
+
+test('private Daily Lesson Plan has immutable class/section/day/source and cannot be published',()=>{
+ const old={plannerDocument:{planningType:'daily',classLevel:'Four',section:'Blue',
+  startDate:'2026-10-15',endDate:'2026-10-15',
+  provenance:{marker:'ASSPS_DAILY_LESSON_NOTEBOOK_V1',
+   academicPublication:'BLOCKED',sourceZipSha256:'a'.repeat(64),
+   dailyKey:'four|blue|2026-10-15',sourceApplicability:'TEACHER_REVIEW_REQUIRED'}}}
+ const newer=structuredClone(old)
+ newer.plannerDocument.subjects=[{subject:'English',lessons:[{title:'Synthetic revised lesson'}]}]
+ assert.equal(mustHoldLessonPublication(old),true)
+ assert.equal(privateLessonMutationAllowed(old,newer,'lp-safe-day'),true)
+ newer.plannerDocument.provenance.dailyKey='four|blue|2026-10-16'
+ assert.equal(privateLessonMutationAllowed(old,newer,'lp-safe-day'),false)
+ newer.plannerDocument.provenance.dailyKey='four|blue|2026-10-15'
+ newer.plannerDocument.startDate='2026-10-16'
+ assert.equal(privateLessonMutationAllowed(old,newer,'lp-safe-day'),false)
+ newer.plannerDocument.startDate='2026-10-15'
+ newer.plannerDocument.provenance.academicPublication='APPROVED'
+ assert.equal(privateLessonMutationAllowed(old,newer,'lp-safe-day'),false)
 })

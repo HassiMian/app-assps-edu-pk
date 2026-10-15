@@ -1667,7 +1667,13 @@ select option:checked {
 }
 
 @media print {
-  .no-print { display: none !important; }
+  .no-print,
+  .app-sidebar-slot,
+  .app-topbar-slot,
+  .super-topbar,
+  header.super-topbar {
+    display: none !important;
+  }
   body { background: white; color: black; }
 }
 
