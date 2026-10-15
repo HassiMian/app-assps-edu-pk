@@ -1,0 +1,30 @@
+{
+  "schema": "assps-grade910-source-preserving-held-alternate-readiness-v1",
+  "originalQuestionId": "X-CHEM-C23-L01",
+  "originalSourceFileSha256": "ef2917a8fc5ea030992d5f15df2493b7422954463ee4d54c25414fc81af706a1",
+  "originalQuestionRevisionSha256": "360a3227b3720e98810a1311601bfded8f9aae720402281658b405a18cab2c5b",
+  "proposedSeparateDraftId": "X-CHEM-C23-L01-ALT-CONCEPTUAL-20261015",
+  "proposedQuestionRevisionSha256": "08769cd0eeb649a7dbfd5fc171b56221565a5e1ef050b6c51bed3acbfaa56f35",
+  "proposedAnswerRevisionSha256": "b7446d2b3c78d5c44c835053c6f4d0abd733ff85708b4d0bb298b5e6f17dccb4",
+  "privateRecordHashSummaries": {
+    "UNSIGNED_CONCEPTUAL_ALTERNATE.json": "30525cc65cb4afc6496f4863e1cad913db009ab75152be4da27f6db8ed7013c9",
+    "BLIND_CONCEPTUAL_ALTERNATE.json": "869ee957affa98f8db85589deaf73d6b70889c9ba7e33226e4586327784a5d35",
+    "ANSWER_REFERENCE_KEEP_SEPARATE.json": "869ee732a429a313073ef1ca1bb7fa9c19b0228ea043162b8b84cae4b41c6b39"
+  },
+  "privateReviewArtifactsSha256": {
+    "BLIND_FOR_HUMAN_REVIEW.html": "3bbb419c4fb74c4586e4a7e163e5523e437ff2754fdd803898904c5a3f8f41f1",
+    "UNVERIFIED_ANSWER_AND_RUBRIC.html": "08a67f72cbf2247925aefbd5e8a46546472615db714e242a6a70911de9bdd1fb",
+    "UNSIGNED_REVIEW_TEMPLATE.json": "4c2b1284f907c83ed9bb0dd172c34ab698836d41a16a98d632903593b03cb4f7"
+  },
+  "validFiveMarkConceptualDraftPrepared": true,
+  "changeAppliedToOriginal": false,
+  "schoolExerciseMatchVerified": false,
+  "privateBlindQuestionAndAnswerSeparatelyStored": true,
+  "requiresQualifiedIndependentReview": true,
+  "needsSchoolAdoptedEditionConfirmation": true,
+  "originalRecordFacultyHeld": true,
+  "approved": 0,
+  "published": 0,
+  "paperStudioSelectable": false,
+  "stage": "NEW_CONCEPTUAL_RESEARCH_CANDIDATE_HOLD"
+}
