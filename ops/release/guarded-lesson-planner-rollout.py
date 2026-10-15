@@ -149,6 +149,13 @@ def main():
     companion_spec.loader.exec_module(companion_module)
     companions_contract=json.loads((HERE/'preserved-companions-v1.json').read_text())
     companions=companion_module.evaluate(repo,companions_contract,dist)
+    # Protect current production Exam Marks Review and printable sheets.
+    # Old branches with no reachable MarksRegister UI must not replace live.
+    marks_guard=HERE/'verify-marks-register-ui-20261015.cjs'
+    marks_check=run(['node',str(marks_guard),'--dist',str(dist)])
+    if marks_check.returncode!=0:
+        raise RuntimeError('Saved marks View/Print feature missing in active release candidate: '
+                           +(marks_check.stderr or marks_check.stdout).strip()[:500])
     if companions['result']!='PASS':
         raise RuntimeError('Current live Diary / Early Years capabilities missing: reconcile reviewed owner changes first')
     diary_guard=HERE/'verify-diary-controls-in-active-bundle-20261015.cjs'

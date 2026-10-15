@@ -15,6 +15,8 @@ on:
       - "ops/release/guarded-lesson-planner-rollout.py"
       - "ops/release/check-preserved-companion-features.py"
       - "ops/release/verify-diary-controls-in-active-bundle-20261015.cjs"
+      - "ops/release/verify-marks-register-ui-20261015.cjs"
+      - "ops/tests/marks-register-live-nonregression.test.cjs"
       - "ops/tests/paper-diary-active-controller-immutable-release-gate-20261015.test.cjs"
       - "ops/release/preserved-companions-v1.json"
       - "ops/release/tests/test_preserved_companions.py"
@@ -41,6 +43,8 @@ on:
       - "ops/release/guarded-lesson-planner-rollout.py"
       - "ops/release/check-preserved-companion-features.py"
       - "ops/release/verify-diary-controls-in-active-bundle-20261015.cjs"
+      - "ops/release/verify-marks-register-ui-20261015.cjs"
+      - "ops/tests/marks-register-live-nonregression.test.cjs"
       - "ops/tests/paper-diary-active-controller-immutable-release-gate-20261015.test.cjs"
       - "ops/release/preserved-companions-v1.json"
       - "ops/release/tests/test_preserved_companions.py"
@@ -80,6 +84,10 @@ jobs:
         run: node ops/release/verify-diary-controls-in-active-bundle-20261015.cjs --dist al-siddique-frontend/dist
       - name: Verify immutable candidate and adversarial missing-controller detection
         run: ASSPS_DIARY_CANDIDATE_DIST=al-siddique-frontend/dist node --test ops/tests/paper-diary-active-controller-immutable-release-gate-20261015.test.cjs
+      - name: Verify saved-marks register and printable sheets from active router
+        run: node ops/release/verify-marks-register-ui-20261015.cjs --dist al-siddique-frontend/dist
+      - name: Reject absent-or-orphan marks review and print bundles
+        run: ASSPS_MARKS_REGISTER_DIST=al-siddique-frontend/dist node --test ops/tests/marks-register-live-nonregression.test.cjs
       - name: Verify stale-but-present chunks cannot bypass regression check
         run: python3 -m unittest discover -s ops/release/tests -p test_lesson_planner_ui_contract.py -v
       - name: Verify V4 subject-font controls and layout-model regression
