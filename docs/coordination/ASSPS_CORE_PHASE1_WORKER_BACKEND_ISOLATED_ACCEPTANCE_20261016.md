@@ -30,3 +30,13 @@ Date: 16 October 2026 (PKT). **Status: SOURCE + ISOLATED QA ACCEPTED; PRODUCTION
 - Production promotion requires verified running backend worker config (real restricted identity, signed transport flags, actual worker SQL role grants), reviewed backend publication guard and route parity, authenticated independent tenant/subject denial, signed off-host recovery and successful official gate; with exact source ancestry, original-source backups, rollback and postflight evidence.
 
 **Do not run `--apply` or change existing service source based only on this QA receipt.** Protect historical exam results/real zero-versus-pending marks and owner-accepted Diary/Result Cards/Employees UI through final cutover.
+
+## Additional genuine production-side read-only worker probe
+
+- PostgreSQL production `pg_hba_file_rules` confirmed local Unix-socket `peer` authentication for regular roles; no auth config change or password disclosure.
+- Provisioned narrowly scoped, **no-shell** OS system identity `assps_ai_worker_login` matching the **preexisting** restricted PostgreSQL LOGIN role; no production PostgreSQL role/ACL altered.
+- Actually authenticated a short-lived worker process by OS peer on production PG socket (port 5432), proving `current_user=session_user=assps_ai_worker_login`, inherited `assps_core_ai_worker` role, AI queue SELECT allowed and students SELECT denied.
+- Copied byte-identical reviewed Node worker adapter to owner-only isolated probe directory under `/var/tmp`, SHA256 `97090fee75c77283375141e21d572d52a1a9fe58952ff16a4584ca9f308592cc`. The *actual adapter* connected to production PG under that dedicated OS account, executed its built-in role/privilege preflight, and returned the correctly authenticated actor. It issued no mutation.
+- Through the same adapter, production `public.students` and `public.exam_results` read attempts each failed as intended with SQLSTATE **42501 (permission denied)**. No sensitive student or marks row was read.
+- Root-private evidence `phase1-production-worker-readonly-evidence.json` SHA256 `03117838ebc075189b95e5ec64db94d8851a658fdeb70d206d803b0abd249ebe`.
+- This is **real production DB peer login and worker adapter QA**, stronger than a test-only mock. It is still **NOT** a running PM2 worker, official signed restricted transport, independent reviewer signature, or a full SaaS security clearance; the production backend files and signed receipt intake remain absent.
