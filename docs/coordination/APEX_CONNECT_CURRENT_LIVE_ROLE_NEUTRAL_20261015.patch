@@ -1,0 +1,110 @@
+diff --git a/next.config.ts b/next.config.ts
+index e4db12f..55768f0 100644
+--- a/next.config.ts
++++ b/next.config.ts
+@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
+ 
+ const nextConfig: NextConfig = {
+   distDir: process.env.NEXT_DIST_DIR || ".next",
++  turbopack: { root: process.cwd() },
+   images: {
+     unoptimized: true,
+   },
+@@ -57,16 +58,6 @@ const nextConfig: NextConfig = {
+         destination: "/admin",
+         permanent: false,
+       },
+-      {
+-        source: "/dashboard",
+-        destination: "/admin",
+-        permanent: false,
+-      },
+-      {
+-        source: "/dashboard/:path*",
+-        destination: "/admin",
+-        permanent: false,
+-      },
+     ];
+   },
+ };
+diff --git a/src/app/dashboard/[...path]/page.tsx b/src/app/dashboard/[...path]/page.tsx
+index 62ccff7..db954ae 100644
+--- a/src/app/dashboard/[...path]/page.tsx
++++ b/src/app/dashboard/[...path]/page.tsx
+@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
+ 
+ export const dynamic = "force-dynamic";
+ 
+-/** Legacy /dashboard/* → school admin portal (never loop back to /dashboard). */
++/** Legacy /dashboard/* → neutral login if proxy has not already resolved authenticated role (never loop back to /dashboard). */
+ export default function DashboardCatchAllPage() {
+-  redirect("/admin");
++  redirect("/login");
+ }
+diff --git a/src/app/dashboard/page.tsx b/src/app/dashboard/page.tsx
+index c4d8bec..594cc93 100644
+--- a/src/app/dashboard/page.tsx
++++ b/src/app/dashboard/page.tsx
+@@ -38,7 +38,7 @@ export default function DashboardPage() {
+       } catch {
+         /* fall through */
+       }
+-      window.location.replace("/login?next=/admin");
++      window.location.replace("/login");
+     };
+     go();
+   }, []);
+diff --git a/src/lib/roleRoutes.ts b/src/lib/roleRoutes.ts
+index ccdd1ff..c208fc9 100644
+--- a/src/lib/roleRoutes.ts
++++ b/src/lib/roleRoutes.ts
+@@ -30,10 +30,13 @@ export function coerceRedirectPath(path: string, roleFallback?: string): string
+     "/saas-admin": "/admin",
+     "/school_admin": "/admin",
+     "/schooladmin": "/admin",
+-    "/dashboard": "/admin",
++    // Legacy dashboard follows only an authenticated, explicit role.
+   };
+ 
+   const base = raw.split("?")[0].replace(/\/+$/, "") || "/";
++  if (base === "/dashboard" || base.startsWith("/dashboard/")) {
++    return roleFallback ? getPortalPathForRole(roleFallback, "/login") : "/login";
++  }
+   if (legacy[base]) return legacy[base];
+ 
+   if (base.startsWith("/saas_admin") || base.startsWith("/saas-admin")) {
+diff --git a/src/proxy.ts b/src/proxy.ts
+index a6c3014..b7717a1 100644
+--- a/src/proxy.ts
++++ b/src/proxy.ts
+@@ -172,7 +172,7 @@ export async function proxy(req: NextRequest) {
+       return redirectTo(req, connectPortal(role), 307);
+     }
+     const loginUrl = new URL("/login", req.url);
+-    loginUrl.searchParams.set("next", "/admin");
++    // Anonymous dashboard never presumes an administrative role.
+     return NextResponse.redirect(loginUrl, 307);
+   }
+ 
+@@ -216,7 +216,7 @@ export async function proxy(req: NextRequest) {
+     const next = req.nextUrl.searchParams.get("next") || "";
+     if (next === "/dashboard" || next.startsWith("/dashboard/") || next.startsWith("/saas-admin")) {
+       const loginUrl = req.nextUrl.clone();
+-      loginUrl.searchParams.set("next", "/admin");
++      loginUrl.searchParams.delete("next");
+       return NextResponse.redirect(loginUrl, 307);
+     }
+     if (userId && req.nextUrl.searchParams.get("force") !== "1") {
+diff --git a/tsconfig.json b/tsconfig.json
+index 86e0949..8061beb 100644
+--- a/tsconfig.json
++++ b/tsconfig.json
+@@ -39,6 +39,7 @@
+     ".next-candidate/dev/types/**/*.ts"
+   ],
+   "exclude": [
+-    "node_modules"
++    "node_modules",
++    "src-backup-*/**"
+   ]
+ }
