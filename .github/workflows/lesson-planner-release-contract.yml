@@ -81,6 +81,8 @@ jobs:
         run: python3 ops/release/check-preserved-companion-features.py --dist al-siddique-frontend/dist
       - name: Enforce actual active Diary controller import graph in built release artifact
         run: node ops/release/verify-diary-controls-in-active-bundle-20261015.cjs --dist al-siddique-frontend/dist
+      - name: Protect live Result Cards premium v2 and batch printing
+        run: node ops/release/verify-resultcards-v2-active-20261015.cjs --dist al-siddique-frontend/dist
       - name: Verify login-compatible Marks GET upstream contract
         run: python3 ops/release/signed-bluegreen/nginx/test-marksonly-ingress-contract-20261011.py -v
       - name: Enforce live Marks Register View/Edit/Print active import graph

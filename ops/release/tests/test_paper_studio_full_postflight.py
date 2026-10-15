@@ -21,14 +21,14 @@ class Checker:
 
 
 class FullPostflightTests(unittest.TestCase):
-    def run_gate(self, lesson, companions, diary_exit, marks_exit=0):
+    def run_gate(self, lesson, companions, diary_exit, marks_exit=0, cards_exit=0):
         return mod.verify_full_paper_studio_postflight(
             Path('/synthetic/immutable'), Path('/synthetic/repo'),
             Checker(lesson), {}, Checker(companions), {},
             Path('/synthetic/guard.cjs'),
             runner=lambda args: SimpleNamespace(returncode=(
-                marks_exit if any('marks.cjs' in str(x) for x in args) else diary_exit)),
-            marks_guard=Path('/synthetic/marks.cjs'))
+                cards_exit if any('resultcards.cjs' in str(x) for x in args) else (marks_exit if any('marks.cjs' in str(x) for x in args) else diary_exit))),
+            marks_guard=Path('/synthetic/marks.cjs'),resultcards_guard=Path('/synthetic/resultcards.cjs'))
 
     def test_all_three_pass(self):
         self.assertTrue(self.run_gate({'pass': True}, {'result': 'PASS'}, 0))
@@ -44,6 +44,10 @@ class FullPostflightTests(unittest.TestCase):
     def test_missing_live_marks_register_blocks_release(self):
         with self.assertRaisesRegex(RuntimeError, 'Marks Register'):
             self.run_gate({'pass': True}, {'result': 'PASS'}, 0, marks_exit=2)
+
+    def test_missing_premium_result_cards_blocks_release(self):
+        with self.assertRaisesRegex(RuntimeError, 'Result Cards premium'):
+            self.run_gate({'pass': True}, {'result': 'PASS'}, 0, cards_exit=2)
 
     def test_missing_diary_controller_fails(self):
         with self.assertRaisesRegex(RuntimeError, 'Diary controller'):

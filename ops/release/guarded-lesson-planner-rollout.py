@@ -40,7 +40,7 @@ HTML_ROOT_RE = re.compile(r'^([ \t]*root[ \t]+)(/var/www/assps-[^\s;]+)(;[ \t]*)
 
 def verify_full_paper_studio_postflight(dist, repo, lesson_checker, lesson_contract,
                                         companion_checker, companion_contract,
-                                        diary_guard, runner=None, marks_guard=None):
+                                        diary_guard, runner=None, marks_guard=None, resultcards_guard=None):
     """Fail closed if promoted Diary, Term/Weekly/Daily Lesson or Early Years regresses."""
     if runner is None:
         runner = run
@@ -54,6 +54,8 @@ def verify_full_paper_studio_postflight(dist, repo, lesson_checker, lesson_contr
         raise RuntimeError('FAIL_CLOSED: active Diary controller contract failed postflight')
     if marks_guard is not None and runner(['node', str(marks_guard), '--dist', str(dist)]).returncode != 0:
         raise RuntimeError('FAIL_CLOSED: active Marks Register View/Edit/Print contract failed postflight')
+    if resultcards_guard is not None and runner(['node',str(resultcards_guard),'--dist',str(dist)]).returncode != 0:
+        raise RuntimeError('FAIL_CLOSED: Result Cards premium batch/print contract failed postflight')
     return True
 
 
@@ -185,6 +187,9 @@ def main():
     api_src=(repo/'al-siddique-frontend/src/services/api.js').read_text()
     if marks_src.count('marksReviewReadOnly401:true') != 2 or 'marksReviewReadDenied' not in api_src:
         raise RuntimeError('FAIL_CLOSED: candidate Marks 401 scoped fallback absent')
+    resultcards_guard=HERE/'verify-resultcards-v2-active-20261015.cjs'
+    if run(['node',str(resultcards_guard),'--dist',str(dist)]).returncode != 0:
+        raise RuntimeError('FAIL_CLOSED: live premium Result Cards preservation failed')
     marks_guard=HERE/'verify-marks-register-active-bundle-20261015.cjs'
     if run(['node',str(marks_guard),'--dist',str(dist)]).returncode!=0:
         raise RuntimeError('FAIL_CLOSED: active Marks Register review/print import graph incomplete')
@@ -255,7 +260,7 @@ def main():
             # promoted root, not only Diary. Any regression triggers rollback.
             verify_full_paper_studio_postflight(
                 newroot, repo, mod, contract, companion_module,
-                companions_contract, diary_guard, marks_guard=marks_guard)
+                companions_contract, diary_guard, marks_guard=marks_guard, resultcards_guard=resultcards_guard)
             success=True
             plan.update(decision='FRONTEND_ONLY_PROMOTED_CORE_VERIFIED',
                         production_changed=True,rollback_config=str(backup/'apex-app-ssl.pre-change'))
