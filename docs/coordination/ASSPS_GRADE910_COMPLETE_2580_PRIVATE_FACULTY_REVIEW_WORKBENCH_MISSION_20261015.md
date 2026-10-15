@@ -26,3 +26,15 @@
 - Grade IX revised ALP issued November 2025: <https://pectaa.edu.pk/uploads/Revised%20ALP%20Notification%2007.11.2025.pdf> is expressly framed around Annual 2026; automatic Annual 2027 ALP use remains denied. Individual 2027 scheme proof cannot be substituted with non-official 2027 pairing-scheme summaries.
 
 **Institutional approval remains 0. Published questions remain 0.** The mission does not claim that software navigation itself fulfills authentic teacher verification, school adoption, 2027 exam year applicability or production certification. No production marks, school accounts, students, official papers, database seed/migration or deployment modified.
+
+## Frozen execution acceptance — final verified source-run evidence
+
+- Tested isolated implementation commit `6425c94a1a3f968095297f139835d61411582604` on `feat/grade910-2580-full-faculty-review-workbench-20261015`.
+- **Full mission 30/30 stages PASS, 19/19 source/security gates PASS, Paper Studio 510/510 + Academic Master 680/680 = 1,190/1,190 integrated tests PASS, 0 FAILED, 0 SKIPPED.** Run log `/tmp/assps-grade910-full-workbench-6425c94a-20261015/mission-audit.json`; SHA-256 `5eaeda7502195c52c8d261691a609aab2eb765b0d917f16fe8d402e8bd14e9c8`. Final academic release verdict correctly `BLOCK_PUBLICATION_PENDING_AUTHENTICATED_SCHOOL_ADOPTION_AND_HUMAN_REVIEW`.
+- **6/6 private real-file tests PASS** (includes exact navigations, no restricted answers, immutable owner-only custody and traversal/symlink/world-readable negative testing); **3/3 portable public-safe source/receipt tests PASS** (included within academic suite).
+- **Read-only SaaS Core preflight on clean implementation SHA:** 22 backend + 38 Python + 5 frontend = 65/65 PASS; overall `HOLD`, not a production authorization.
+- **Actual genuine review evidence ingestion check:** `reconcile-grade910-teacher-response-to-signed-school-packet.cjs` found school signed bundle not configured, 0 real teacher submissions, 0 signed question revisions; private school adoption claims check found 0 actual claim submissions and 0 verified evidence byte matches. This is not equivalent to the existence of 2,580 unsigned review forms and 56 unsigned adoption forms.
+- New root-only offline workbench byte SHA-256 `adc6a748424552caa4faa1240566ff732dd82ea2c217a85a91a648bfa86ec265` and mode `0600`, original root-private archive mode `0700`.
+- Zero production data modifications, zero new academic certifications, zero production publication and no new privileged reviewer/Principal claims.
+
+**Mission outcome: Full faculty source-review navigation and preparatory academic evidence engineering COMPLETE. Genuine school 2026–27 textbook adoption, 2027 board applicability, authenticated independent teachers/Principal approvals and real SaaS Core/Paper Studio live acceptance remain institution-controlled and correctly HOLD.**
