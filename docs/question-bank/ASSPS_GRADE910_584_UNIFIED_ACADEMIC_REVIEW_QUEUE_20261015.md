@@ -14,6 +14,8 @@ Original candidate questions preserved: **2,581**. Unique original source- and r
 | Topic-specific English/Urdu essay rubrics | 8 |
 | **Total with exactly one original-revision-bound evidence record** | **584** |
 
+Explicit grade/subject/medium absent from **28 original Grade IX English items**. Their separate source-map file and candidate-file hashes support PROVISIONAL REVIEW ROUTING ONLY: Grade 9 routing **390**, Grade 10 **194**, English **334**, Urdu **250**; no official school-adoption or original field is silently fabricated.
+
 Approved questions **0**; qualified subject/Urdu reviewers **0**; authenticated Principal signatures **0**; published **0**.
 The JSON includes one source ID/revision SHA, one evidence-file SHA, stage and nonpublication flags for every original question. Original data and production records are untouched.
 

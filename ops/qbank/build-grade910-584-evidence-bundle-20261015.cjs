@@ -37,6 +37,13 @@ function assemble(){
  }
  const curated=new Map(materials.curated.doc.rows.map(x=>[x.originalId,x]))
  if(curated.size!==66)fail('CURATED_66')
+ const englishDir=path.join(root,'al-siddique-frontend/src/Modules/Paper-Generator/seed-data/grade9-10-staging')
+ const englishCandidateBytes=fs.readFileSync(path.join(englishDir,'english9CompetencyOriginals2026.json'))
+ const englishMapBytes=fs.readFileSync(path.join(englishDir,'english9SourceMap2026.json'))
+ const authoring=JSON.parse(englishCandidateBytes),schoolMap=JSON.parse(englishMapBytes)
+ if(schoolMap.identity?.[0]!=='ENGLISH 9'||authoring.reviewStatus!=='UNREVIEWED_ORIGINAL_DRAFTS')
+  fail('ENGLISH9_AUTHORING_SOURCE_NOT_PROVISIONAL')
+ const englishCandidates=new Map(authoring.items.map(q=>[q.id,q]))
  const rows=[]
  for(const r of integrity.rows){
   const stages=Object.keys(signal).filter(k=>index[k].has(r.originalId))
@@ -50,7 +57,21 @@ function assemble(){
   if(stage==='essay'&&e.proposedTotalMarks!==e.originalQuestionMarks)fail('ESSAY_MARKS_MISMATCH')
   const c=stage==='mcq'?curated.get(r.originalId):null
   if(c&&(c.originalRevisionSha256!==r.originalRevisionSha256||c.residualStrongLengthCue))fail('CURATED_DRAFT_INVALID')
+  const explicit=r.grade!=null&&r.subject!=null&&r.medium!=null
+  const author=explicit?null:englishCandidates.get(r.originalId)
+  if(!explicit&&(!author||!r.originalId.startsWith('IX-ENG-ORIG-20261008-')))
+   fail('UNRESOLVED_AUTHORING_ROUTE_'+r.originalId)
+  const reviewRoute=explicit?{
+   grade:r.grade,subject:r.subject,medium:r.medium,unit:r.chapter??null,
+   evidence:'SOURCE_DOCKET_ORIGINAL_CLAIM_NOT_SCHOOL_ADOPTION',schoolAdoptionCertified:false
+  }:{
+   grade:9,subject:'english',medium:'english',unit:author.unit,
+   evidence:'ENGLISH9_AUTHORING_SOURCE_MAP_INFERENCE_ONLY',
+   sourceMapFile:'english9SourceMap2026.json',sourceMapSha256:sha(englishMapBytes),
+   candidateSourceSha256:sha(englishCandidateBytes),schoolAdoptionCertified:false
+  }
   rows.push({
+   reviewRoutingIdentity:reviewRoute,originalIdentityFieldsComplete:explicit,
    originalId:r.originalId,originalRevisionSha256:r.originalRevisionSha256,
    grade:r.grade,subject:r.subject,medium:r.medium,chapter:r.chapter,type:r.type,
    priority:r.priority,signals:r.signals,
@@ -81,6 +102,12 @@ function assemble(){
   schema:'assps-grade910-584-unified-review-queue-v1',
   originalResearchCandidatesPreserved:2581,sourceShaBoundQuestions:584,
   priorityCounts:{P1:119,P2:465},stageCounts:stats,
+  originalMetadataComplete:rows.filter(x=>x.originalIdentityFieldsComplete).length,
+  provisionalGrade9EnglishAuthoringRoute:rows.filter(x=>!x.originalIdentityFieldsComplete).length,
+  reviewGrade9:rows.filter(x=>x.reviewRoutingIdentity.grade===9).length,
+  reviewGrade10:rows.filter(x=>x.reviewRoutingIdentity.grade===10).length,
+  reviewEnglish:rows.filter(x=>x.reviewRoutingIdentity.medium==='english').length,
+  reviewUrdu:rows.filter(x=>x.reviewRoutingIdentity.medium==='urdu').length,
   curatedDistractorRevisions:66,
   evidenceFiles:Object.fromEntries(Object.values(materials).map(m=>[m.file,m.hash])),
   realQualifiedAcademicReviews:0,adoptionEvidenceApprovals:0,principalSigned:0,
@@ -103,6 +130,7 @@ function write(){
   '| MCQ option-length measurements (with 66 curated new-distractor proposals) | 68 |',
   '| Source-mark-consistent P2 rubrics | 389 |','| Topic-specific English/Urdu essay rubrics | 8 |',
   '| **Total with exactly one original-revision-bound evidence record** | **584** |',
+  '', 'Explicit grade/subject/medium absent from **28 original Grade IX English items**. Their separate source-map file and candidate-file hashes support PROVISIONAL REVIEW ROUTING ONLY: Grade 9 routing **390**, Grade 10 **194**, English **334**, Urdu **250**; no official school-adoption or original field is silently fabricated.',
   '', 'Approved questions **0**; qualified subject/Urdu reviewers **0**; authenticated Principal signatures **0**; published **0**.',
   'The JSON includes one source ID/revision SHA, one evidence-file SHA, stage and nonpublication flags for every original question. Original data and production records are untouched.',
   '', '**Do not directly seed or expose these drafts in Paper Studio.** Actual adopted textbook pages, genuine independent subject/Urdu review, Principal and SaaS Core authenticated acceptance remain separate institutional evidence.',''
