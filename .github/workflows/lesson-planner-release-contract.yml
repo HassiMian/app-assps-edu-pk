@@ -94,6 +94,10 @@ jobs:
       - name: Reproducible backend verifier dependencies
         run: npm ci --ignore-scripts --no-audit --no-fund
         working-directory: al-siddique-backend/src
+      - name: Verify exam authorization, tenant isolation, marks validity and grade policy
+        run: |
+          node --test tests/tenant-clause-intersection-security.test.js tests/exam-marks-teacher-scope.test.js tests/exam-result-status-20261013.test.js tests/exam-marks-teacher-http-isolated.test.js tests/approved-exam-subject-policy-http.test.js tests/academic-assignment-guard.test.js tests/grade-band-assignment-20261014.test.js tests/exam-marks-subject-maximum.test.js
+        working-directory: al-siddique-backend/src
       - name: Fail closed on AI worker role, identity and Blue fallback
         run: |
           node services/ai/test-ai-queue-worker-isolation-20261014.js
