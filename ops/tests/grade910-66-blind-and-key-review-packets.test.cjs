@@ -69,3 +69,11 @@ test('printable source answer and blind review packets remain in private untrack
   assert.ok(fs.existsSync(file))
  }
 })
+test('no newly generated faculty answer-key HTML is tracked by Git or committed to public review tree',()=>{
+ const {execFileSync}=require('node:child_process')
+ const root=path.resolve(__dirname,'../..')
+ const tracked=execFileSync('git',['ls-files','--','docs/question-bank/ASSPS_GRADE910_66_*FACULTY*html','docs/question-bank/ASSPS_GRADE910_66_*MANIFEST*json'],{cwd:root,encoding:'utf8'})
+ assert.equal(tracked.trim(),'')
+ const ignore=fs.readFileSync(path.join(root,'.gitignore'),'utf8')
+ assert.match(ignore,/\.assps-private-reviews\//)
+})

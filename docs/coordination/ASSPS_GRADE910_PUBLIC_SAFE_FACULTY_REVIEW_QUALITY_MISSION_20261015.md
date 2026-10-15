@@ -1,0 +1,33 @@
+# ASSPS Grade IX–X — Unified MCQ Quality, Provenance Routing and Private Faculty Handoff
+
+**15 October 2026 | School:** Al Siddique Scholars Public School | **Session:** 2026–27 | **Exam year:** 2027 requires genuine official applicability evidence.
+
+**Source branch:** `fix/grade910-blind-review-quality-handoff-20261015` (isolated feeder; never a live production branch). **Parent:** `6fa59d7fbad94d2a0d55b4c564e0c9a2d2d3af99`. **Frozen tested implementation:** `17898fedbd30c741d591dac7a3b67fcd2e85e6c0`. No production deployment.
+
+## Findings and executed repairs
+
+1. **Sequential answer-key leak fixed.** The previous 66 revised MCQs assigned correct keys by lexicographic source-ID index `i % 4`, making a predictable repeating A–B–C–D cycle. Source-revision-bound SHA ordering now selects stable, balanced placements independently of lexical question-ID order. A:17, B:17, C:16, D:16. Only 18 of 66 happen to match the formerly predictable cycle; it is no longer an identifier-order pattern. Original correct answer text and all 2,581 original research candidate rows preserved. Resulting drafts are still **AI editorial proposals**, not source-approved examination questions.
+
+2. **Actual quality-risk measurement beyond length.** Of 66 revised MCQ drafts, no source recorded correct option exceeds 1.5× mean distractor length. **15** are still strictly the longest. More importantly, a bilingual surface-form heuristic found **102/198 new distractors** using exclusive/absolute wording (e.g., only/always and Urdu equivalents), against **2/66 original reference answers**, affecting **54/66 questions**, with **34 questions containing two or more flagged distractors**. These are objective linguistic signals, **not proof** a choice is wrong or correct; a qualified subject/Urdu reviewer must assess content, parallel phrasing and second-correct-answer risks. Report and per-item signals: `docs/question-bank/ASSPS_GRADE910_66_RESIDUAL_OPTION_BIAS_RISKS_20261015.md` and its revision-bound JSON.
+
+3. **Single authoritative 584-question review queue** retains unique source and exact evidence SHA mapping for 61 numerical reference computations, 24 Grade IX English AI language assessments, 34 P1 long content proposals, 68 MCQ length analyses, 389 P2 marks-aligned rubric proposals and 8 Urdu/English composition rubrics. P1=119, P2=465, approved=0, published=0. The source original candidate count remains 2,581. No original source question has been edited.
+
+4. **28 original-item identity gaps made visible, not fabricated.** Of 584 candidates, original question-level grade/subject/medium fields are explicit for **556** but absent for **28** Grade IX English MCQ/essay authoring items. The original English 9 candidate document and associated source-map SHA support **provisional routing** (not an ASSPS school adoption or textbook page certificate), while original nulls remain null. Review routing: Grade 9=390, Grade 10=194, English=334, Urdu=250. School-authorized edition/medium mappings still require real verification.
+
+5. **Two-channel offline human review workflow** implemented. Blind HTML excludes the displayed answer key; the separate restricted academic-key HTML shows **unverified** original reference keys, original revision/proposal SHA, private reviewer checklists and prompts to inspect possible double-correct answers. Security: the printouts and manifest are generated only into `.assps-private-reviews/` (ignored by Git), mode **0700 directory and 0600 files**, with a root-only archived copy on VPS. No scripts, network, automatic reviewer decisions, teacher signatures or Principal signature impersonations. Output is byte-verified against its SHA manifest; mutation/injection tests fail closed. **None of the new rendered faculty HTML/manifest files is committed or pushed.** The published repository is **public** as independently verified on October 15; any confidential real staff evidence, actual future exam answer key or Principal signature must be held in authorized private school storage, never Git.
+
+## Frozen QA and production boundaries
+
+- **30/30** Academic Master integrated mission stages PASS; **19/19** source/security gates PASS.
+- Paper Studio **510/510 PASS** + Academic **646/646 PASS** = **1,156/1,156 unique source tests PASS**, no failures or skipped tests.
+- Frozen QA audit SHA256: `411e7784ec2901fff07b938aee85ab4bf2ffd0c84f8062a770da8b73d584bcd1`.
+- Audit file (private VPS): `/tmp/assps-grade910-final-protected-review-17898fed-20261015/mission-audit.json`.
+- Independent SaaS Core source preflight on clean implementation: **22 backend + 38 Python + 5 frontend = 65/65 PASS**. Overall preflight **HOLD** by design (exit 2), as authenticated live acceptance, actual revision-specific academic signoffs and rollback certification are absent.
+- Focused reproducibility/security test suite has **22 PASS** checks, plus one subsequent Git-tracking regression check for nonpublication of private HTML. These are source checks, not real authenticated school actions.
+- No change to production database, real student marks/results, genuine account credentials, existing saved official papers, migrations, Nginx or PM2. Numeric zero vs blank protected. No principal/teacher signoffs fabricated.
+
+## Academic and operational go/no-go
+
+**HOLD VERIFIED PUBLICATION.** Public PECTAA edition lists cannot establish which physical IX/X book ASSPS has adopted for 2026–27 or which annual 2027 board scheme applies. Source SHA validates research-candidate integrity, not factual answer accuracy. The 198 independently drafted alternatives, content/rubric suggestions and 28 provisionally routed English items need genuine qualified teachers to review the exact changed question revision, original printed source, Urdu semantics and exam marking allocation; a genuine Principal can upload their own personal signature in the isolated vault candidate and approve an exact revision through authenticated school login. Paper Studio alone owns real canonical Save → Reopen → Edit → Print testing. SaaS Core alone owns school-scoped RLS and signed tenant acceptance, production backup/rollback and deployment promotion.
+
+**Additional security requirement:** As the canonical GitHub repository is public, do not treat versioned answer-bearing seed/candidate files as confidential exam material. The school must eventually separate genuinely restricted academic keys from the public code repository into access-controlled school-owned storage, without destructively modifying original verified or provisional records. This review-packet mission did not migrate, delete or expose any genuine signed staff evidence.
