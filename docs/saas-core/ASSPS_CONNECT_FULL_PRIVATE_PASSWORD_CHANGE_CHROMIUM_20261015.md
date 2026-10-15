@@ -1,0 +1,17 @@
+# ASSPS Core + Connect: real Chromium synthetic first-login/password-change flow
+
+**15 October 2026.** Single isolated QA source descendant of latest Core+Connect joint checkpoint `ec52577b0b25271e14802e67a9b7355c40fdd178`; newest reviewed Connect source `98f6dfcff72fbe9d46d227d5c1200d388300d3d5`, private compiled build `rc1vIlE6prAQ8pHrw7ohX`, hardened worker reviewed digest `97090fee75c77283375141e21d572d52a1a9fe58952ff16a4584ca9f308592cc`. GitHub issue #4 is coordination authority. No live backend, teacher credentials, school results, PM2 or public Nginx changed.
+
+## What was really run
+
+Actual compiled isolated Next16.2.6 localhost:3016 behind isolated strict HTTPS Nginx localhost:3017 and actual headless Chromium. The browser's hostname resolver mapped only `api.assps.edu.pk:3017` to 127.0.0.1, and globally blocked off-host requests. Credential-free synthetic browser interception provided the **login challenge POST** and **password-change success POST**. A separate explicit interceptor handled the app's canonical `https://api.assps.edu.pk/login?force=1` redirect on port443 by a synthetic HTTP307 back to the private localhost:3017 build **without contacting public production**. The test neither uses nor certifies a real staff identity or real password change. Two actual independent runs on the same pinned private build: each **14/14 PASS, process exit0**; private Next/Nginx cleanup completed; no public ports changed. Synthetic tests cover first challenge, anonymous-auth probe stability, no admin portal, three masked fields, accessibility, show/hide, explicit submission only, and post-success return to login prompt. **Does not prove the final second authenticated login/teacher role; that requires Muhammad Imran personally.**
+
+Reproduction (restricted VPS, existing local QA stage, pinned source):
+
+`bash ops/release/signed-bluegreen/replay-connect-private-firstlogin-passwordchange-20261015.sh`
+
+Guard: runner pins the current private QA source Git `9fcca4320bdbeb834f6494d1af82d82f1d9b818f` (QA-only snapshot, **not** GitHub release ancestry) and exact reviewed private build `rc1vIlE6prAQ8pHrw7ohX`. The runner refuses source/build drift; rebind and rerun all tests if newer Connect changes land. Test script: `ops/release/signed-bluegreen/test-connect-private-firstlogin-passwordchange-chromium-20261015.cjs` SHA256 `b8db009d915122181128d54bcee03dd074af28477a6a0762604706eff45dbde2`. Runner SHA256 `67f5eb2d241fda717eb21878c918b48ffe0ecf77c9ad0a834d94de7ff5b3c9b9`. Test controls make zero real HTTP requests to port443 and stop on unreviewed routes/actual out-of-host traffic. All reported PASS are **synthetic-client browser** results, not live teacher/reviewer/peer authentication.
+
+## Still HOLD
+
+Although latest Core+Connect joint technical attestation currently pins 20 technical checks, every runtime cutover must still be held until actual existing teacher password-change/relogin, independent existing peer-school/subject-denial authenticated evidence, signed institutional and independent recovery review, running production worker adapter and signed Green, and real Core-controlled Next+Nginx traffic promotion/postflight/rollback. Public compiled Next remains `ONDwxEIZlx5onDIKY7wYf`; running backend adapter absent. Protect School 1 Exam9 1762 marks including 213 genuine numeric zeros, 0 NULL, original 301-entry protected fingerprint, and newest Paper Studio/Weekly Notebook routes. The new private test is a source-only QA supplement and must NOT generate reviewer acceptance receipts.
