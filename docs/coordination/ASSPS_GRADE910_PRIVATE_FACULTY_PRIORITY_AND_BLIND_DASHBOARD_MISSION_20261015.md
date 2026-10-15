@@ -16,3 +16,15 @@
 **Only an actual qualified independent teacher** can verify answer accuracy, MCQ distractors, marks, Urdu-English equivalence and textbook topic/page mapping for a precise question revision. **Only ASSPS's real authenticated authority** can attest school adopted physical book, exam year and Principal academic authorization. No generated private worksheet, AI-authored text, source catalog entry or computed content-risk score automatically makes a question `approved`. Paper Studio live Save→Reopen→Edit→Print and SaaS Core live RLS/tenant, backup/rollback and release certification remain with their owners.
 
 **Human academic reviews: 0. Actual school adoption certificates: 0. Authenticated Principal question approvals: 0. Academically approved/published: 0/0.** Production marks, results, official papers, accounts, migrations and deployment were not changed by this mission. Academic publication remains **HOLD**.
+
+## Frozen mission-wide verification and exact handoff
+
+- Implementation commit with all source code + portable/private test fixtures: `f461373e6ce235346ac6f3c57a4568974d0a837f` on `feat/grade910-private-quality-overlay-20261015` (clean source branch, descendants of verified `db04a72cb5ef1dfc7eb48046bb36fa5e51ff99ee`).
+- Complete isolated source-level mission: **30/30 stages PASS**, **19/19 source/security gates PASS**, **510/510 Paper Studio + 669/669 Academic Master = 1,179/1,179 PASS**, **0 FAIL, 0 SKIP**. Original live deployment safety decision **BLOCK PUBLICATION pending authenticated school adoption/human review**.
+- Mission audit immutable evidence SHA-256: `18eac0b14c151ead5533a634a984e7b6ac16a72d97456dceb72c8f6275c0323b`; private VPS source run `/tmp/assps-grade910-private-quality-f461373e-20261015/mission-audit.json`.
+- Additional **7/7** root-private QA fixture tests PASS, intentionally kept out of portable CI. The portable source mission includes **4** new public-safe attestation tests.
+- Independent SaaS Core read-only preflight on tested implementation commit: **22 backend + 38 Python + 5 frontend = 65/65 source checks PASS** with clean source SHA and overall **HOLD** as required by genuine external approval/security gates.
+- Exact source-held question ID `X-CHEM-C23-L01`, only **2,580** source-revision-verified review candidates; no fabricated Chemistry academic answer, teacher or Principal signature.
+- No seed or production write, no production release, no account, exam marks/result, zero-vs-blank, saved paper, official print or database modification. Neither the new private HTML nor any private faculty answer-bearing pack has been committed to public GitHub.
+
+**Final engineering disposition: IMPLEMENTATION AND PRIVATE FACULTY ROUTING COMPLETE; ACADEMIC APPROVAL / PUBLICATION / PRODUCTION RELEASE STILL HOLD.** The remaining real evidence gates belong to authenticated school staff and SaaS Core/Paper Studio owners, not the AI review metadata.
