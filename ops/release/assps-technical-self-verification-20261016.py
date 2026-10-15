@@ -92,7 +92,9 @@ def public_http_code(url: str) -> int:
         return 0
 
 def metric_read_only() -> dict:
-    p=execute(["sudo","-n","-u","postgres","psql","-X","-At","-v","ON_ERROR_STOP=1",
+    # runuser DROPS root to postgres under systemd NoNewPrivileges=yes.
+    # sudo's PAM/audit plugin is incompatible with that sandbox and MUST NOT be used.
+    p=execute(["/usr/sbin/runuser","-u","postgres","--","/usr/bin/psql","-X","-At","-v","ON_ERROR_STOP=1",
                "-d","apexos","-c","BEGIN TRANSACTION READ ONLY;\n"+READ_ONLY_SQL+";\nCOMMIT;"],timeout=20)
     if p.returncode:
         raise RuntimeError("READ_ONLY_DB_AUDIT_FAILED: "+(p.stderr or p.stdout)[:200])
