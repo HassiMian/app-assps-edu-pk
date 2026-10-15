@@ -1,8 +1,10 @@
 'use strict'
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path')
 const {inspect}=require('../release/verify-diary-controls-in-active-bundle-20261015.cjs')
-const REAL='/root/assps-release-candidates/paper-current-canonical-6cc7931-source-qa-20261015/reopened/dist'
-const LIVE='/var/www/assps-grade910-draft-save-print-b18a8aae'
+// Candidate and production checks are explicitly scoped; never assume a mutable
+// VPS live directory is part of a hermetic source-unit test run.
+const CANDIDATE=process.env.ASSPS_DIARY_CANDIDATE_DIST
+const LIVE=process.env.ASSPS_DIARY_LIVE_DIST
 function sandbox(t){
  const root=fs.mkdtempSync(path.join(os.tmpdir(),'assps-diary-release-'))
  t.after(()=>fs.rmSync(root,{recursive:true,force:true}))
@@ -17,20 +19,19 @@ function sandbox(t){
  for(const [f,b] of Object.entries(files))fs.writeFileSync(path.join(root,f),b)
  return{root,files,change(f,fn){fs.writeFileSync(path.join(root,f),fn(fs.readFileSync(path.join(root,f),'utf8')))}}
 }
-test('actual independently staged latest canonical Paper Studio build preserves active diary controls',()=>{
- const a=inspect(REAL)
- assert.equal(a.activeEntry,'assets/index-CVQti4GY.js')
- assert.equal(a.activePaperModule,'assets/PaperGenerator-CWnU78Ou.js')
- assert.equal(a.activeDiaryModule,'assets/DailyDiaryWorkspace-DXjGkW7T.js')
- assert.equal(a.activeDiaryCss,'assets/DailyDiaryWorkspace-BDofWbd2.css')
+test('explicit staged release candidate preserves all active diary controllers',t=>{
+ if(!CANDIDATE)return t.skip('set ASSPS_DIARY_CANDIDATE_DIST for immutable release-candidate check')
+ const a=inspect(CANDIDATE)
  assert.equal(a.verifiedControllerSignals.length,11)
+ assert.equal(a.activeEntryGraphVerified,true)
  assert.equal(a.deploymentPerformed,false)
+ assert.match(a.activeDiaryModule,/^assets\/DailyDiaryWorkspace-[\w-]+\.js$/)
 })
-test('current production-only read confirms existing active diary controls must be protected from later deploys',()=>{
+test('explicit live production root meets active diary controller contract',t=>{
+ if(!LIVE)return t.skip('set ASSPS_DIARY_LIVE_DIST for independent live production gate')
  const a=inspect(LIVE)
- assert.equal(a.activeDiaryModule,'assets/DailyDiaryWorkspace-UmxZExBI.js')
- assert.notEqual(a.activeDiaryJsSha256,inspect(REAL).activeDiaryJsSha256)
- assert.equal(a.activeDiaryCssSha256,inspect(REAL).activeDiaryCssSha256)
+ assert.equal(a.verifiedControllerSignals.length,11)
+ assert.equal(a.activeEntryGraphVerified,true)
 })
 test('reject candidate which silently drops even one active subject/diary/print controller',t=>{
  const q=sandbox(t)
