@@ -1,0 +1,343 @@
+diff --git a/docs/coordination/APEX_CONNECT_ROLE_NEUTRAL_RUNTIME_BROWSER_AND_PUBLIC_GATE_20261015.md b/docs/coordination/APEX_CONNECT_ROLE_NEUTRAL_RUNTIME_BROWSER_AND_PUBLIC_GATE_20261015.md
+new file mode 100644
+index 0000000..c51847c
+--- /dev/null
++++ b/docs/coordination/APEX_CONNECT_ROLE_NEUTRAL_RUNTIME_BROWSER_AND_PUBLIC_GATE_20261015.md
+@@ -0,0 +1,85 @@
++# APEX Connect — compiled role-neutral browser and public release acceptance
++
++Date: 15 October 2026. Stream: Connect. SOURCE + private real Chromium QA +
++read-only public HTTPS verification. NO production promotion.
++
++## Source provenance
++
++Exact standalone Connect parent:
++492429340504224a8984a33403d585c747d38fde
++The reviewed compiled candidate BUILD_ID:
++aMD_UNZVOSO2lpyRO0-RO.
++
++Actual currently public Connect BUILD_ID:
++ONDwxEIZlx5onDIKY7wYf. The production source was changed by another
++authorized Core operator and must not be blindly overwritten.
++
++New executable standalone source:
++- scripts/connect/replay-role-neutral-compiled-loopback-20261015.sh
++- scripts/connect/test-role-neutral-runtime-live-parity-20261015.cjs
++- scripts/connect/verify-role-neutral-public-cutover-20261015.cjs
++- scripts/connect/test-role-neutral-public-cutover-20261015.cjs
++
++## Actually executed isolated browser tests
++
++The actual compiled Next build was started on localhost port3016, without
++PM2/Nginx reload or public traffic change. Chromium used host resolver rules
++that pin api.assps.edu.pk:3016 to 127.0.0.1. ALL other network requests
++were intercepted and blocked. No school cookies/teacher passwords loaded.
++
++Real compiled Chromium QA **8/8 PASS**, repeated:
++1. Unknown-actor dashboard navigates to login, no admin fallback.
++2. Compiled route really redirects rather than displaying protected data.
++3. Nested legacy dashboard avoids administrator next target.
++4. Unauthenticated teacher route requires login.
++5. Teacher login preserves exact next=/teacher.
++6. Login page loads HTTP200.
++7. No uncaught browser JavaScript faults.
++8. Browser makes actual private requests and blocks all outside origins.
++   Final execution 64 private requests, four off-host requests blocked.
++
++Discovered and FIXED one QA cleanup issue: Next.js forks a child server
++that can outlive the original launcher PID. Updated bash runner starts an
++isolated operating system process group and kills the whole QA group on
++exit. No private port3016 listener remained after repeated tests.
++
++## Actual current public HTTPS read-only release gate
++
++The new public guard checks six facts:
++- Exact reviewed compiled role-neutral BUILD_ID is public.
++- /login returns HTTP200.
++- /dashboard directs anonymous actor to login with NO admin next.
++- /dashboard/history also avoids admin next target.
++- /teacher preserves /login?next=/teacher.
++- /api/auth/me refuses anonymous identity with HTTP401.
++
++10/10 adversarial negative unit tests PASS for stale build, old admin next,
++nested admin next, teacher impersonation redirects, external redirects,
++dashboard exposed HTTP200, identity leak and missing route responses.
++
++Actual current public verdict: HOLD, with precisely THREE failures:
++  Reviewed role-neutral compiled BUILD_ID not yet publicly deployed;
++  /dashboard still biases anonymous login toward admin;
++  /dashboard/history still biases anonymous login toward admin.
++Login, teacher-specific redirect and anonymous identity refusal PASS.
++
++The public guard always reports authenticatedTeacherAccepted=false,
++independentCrossTenantDenied=false and productionReleaseCertified=false.
++Even 6/6 anonymous pass is NOT a valid authenticated staff/tenant release.
++
++## Genuine production safeguards
++
++SaaS Core owner already verified live six-global Green denial, preserved Blue,
++77 signed tenant guards and real separate worker SCRAM/queue operations.
++However reviewed worker adapter source remains absent from the RUNNING public
++backend. Genuine existing teacher temp-password challenge/relogin, true
++independent peer-school and unauthorized subject HTTP denial, signed owner
++acceptance and live rollback are not yet certified.
++
++Only SaaS Core, after full signed PRE release gate, may atomically promote
++reviewed Next and Nginx, without clobbering a concurrent Core/Paper release.
++Original ExamID9 marks (1,762 saved scores, 213 genuine numeric zeroes) must
++remain untouched. Academic publication is NOT part of this login-only fix.
++
++No production DB, staff accounts, marks, Nginx, PM2 or public Next binary was
++changed by this mission.
+diff --git a/scripts/connect/replay-role-neutral-compiled-loopback-20261015.sh b/scripts/connect/replay-role-neutral-compiled-loopback-20261015.sh
+new file mode 100755
+index 0000000..53c6b58
+--- /dev/null
++++ b/scripts/connect/replay-role-neutral-compiled-loopback-20261015.sh
+@@ -0,0 +1,44 @@
++#!/usr/bin/env bash
++# Real private Next/Chromium route acceptance; no production PM2/Nginx changes.
++set -Eeuo pipefail
++umask 077
++ROOT=/root/workspace/assps-connect-role-neutral-dashboard-20261015
++TOOL_ROOT=/opt/assps-editor-worker/repo/al-siddique-frontend
++PORT=3016
++EXPECTED=aMD_UNZVOSO2lpyRO0-RO
++[[ "$(git -C "$ROOT" rev-parse HEAD)" == 492429340504224a8984a33403d585c747d38fde ]] || { echo REVIEWED_SOURCE_SHA_MISMATCH;exit 3; }
++[[ "$(cat "$ROOT/.next/BUILD_ID")" == "$EXPECTED" ]] || { echo COMPILED_BUILD_CHANGED;exit 3; }
++! ss -lnt | grep -q ":$PORT " || { echo PORT_3016_IN_USE;exit 3; }
++LOG=$(mktemp /tmp/connect-role-neutral-next-XXXXXX)
++pid=''
++group=''
++cleanup(){
++  # Next.js 16 may fork next-server. Stop the entire isolated session.
++  if [[ -n "$group" && "$group" =~ ^[0-9]+$ && "$group" == "$pid" ]];then
++    kill -- "-$group" >/dev/null 2>&1 || :
++  elif [[ -n "$pid" ]];then
++    kill "$pid" >/dev/null 2>&1 || :
++  fi
++  [[ -z "$pid" ]] || wait "$pid" >/dev/null 2>&1 || :
++  rm -f -- "$LOG"
++}
++trap cleanup EXIT
++setsid bash -c '
++  cd "$1"
++  exec env NODE_ENV=production PORT=3016 HOSTNAME=127.0.0.1 \
++  node node_modules/next/dist/bin/next start --hostname 127.0.0.1 --port 3016
++' bash "$ROOT" > "$LOG" 2>&1 &
++pid=$!
++group=$(ps -p "$pid" -o pgid= | tr -d ' ')
++[[ "$group" == "$pid" ]] || { echo QA_PROCESS_GROUP_NOT_ISOLATED;exit 3; }
++ready=no
++for t in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15;do
++ if curl -sS --max-time 2 --resolve "api.assps.edu.pk:$PORT:127.0.0.1" \
++ -o /dev/null "http://api.assps.edu.pk:$PORT/login" 2>/dev/null;then ready=yes;break;fi
++ sleep 1
++done
++[[ "$ready" == yes ]] || { echo PRIVATE_NEXT_UNAVAILABLE;tail -15 "$LOG";exit 3; }
++CONNECT_ISOLATED_QA=yes CONNECT_QA_COMPILED_ROOT="$ROOT" \
++ CONNECT_BROWSER_TOOLING_ROOT="$TOOL_ROOT" \
++ node "$(cd "$(dirname "$0")" && pwd)/test-role-neutral-runtime-live-parity-20261015.cjs"
++echo QA_PROCESS_GROUP_CLEANUP_ARMED
+diff --git a/scripts/connect/test-role-neutral-public-cutover-20261015.cjs b/scripts/connect/test-role-neutral-public-cutover-20261015.cjs
+new file mode 100644
+index 0000000..4c56b6f
+--- /dev/null
++++ b/scripts/connect/test-role-neutral-public-cutover-20261015.cjs
+@@ -0,0 +1,49 @@
++'use strict';
++const assert=require('node:assert/strict');
++const {evaluate,EXPECTED_BUILD}=require('./verify-role-neutral-public-cutover-20261015.cjs');
++const fixture={
++ '/login':{status:200},
++ '/dashboard':{status:307,location:'/login'},
++ '/dashboard/history':{status:307,location:'/login'},
++ '/teacher':{status:302,location:'/login?next=%2Fteacher'},
++ '/api/auth/me':{status:401},
++};
++let counter=0;
++function test(label,fn){fn();counter++;console.log('PASS '+label);}
++function verdict(changes={},build=EXPECTED_BUILD){
++ return evaluate({...fixture,...changes},build);
++}
++test('anonymous PRE verifier only, never final production certification',()=>{
++ const v=verdict();assert.equal(v.status,'ANONYMOUS_ROUTES_PASS');
++ assert.equal(v.authenticatedTeacherAccepted,false);
++ assert.equal(v.independentCrossTenantDenied,false);
++ assert.equal(v.productionReleaseCertified,false);
++});
++test('legacy admin next in dashboard fails closed',()=>{
++ assert.equal(verdict({'/dashboard':{status:307,location:'/login?next=%2Fadmin'}}).status,'HOLD');
++});
++test('legacy nested admin next fails closed',()=>{
++ assert.equal(verdict({'/dashboard/history':{status:307,location:'/login?next=/admin'}}).status,'HOLD');
++});
++test('old compiled Next build fails even with corrected routes',()=>{
++ assert.equal(verdict({},'ONDwxEIZlx5onDIKY7wYf').status,'HOLD');
++});
++test('teacher route cannot resolve admin',()=>{
++ assert.equal(verdict({'/teacher':{status:302,location:'/admin'}}).status,'HOLD');
++});
++test('teacher route cannot be left without role next',()=>{
++ assert.equal(verdict({'/teacher':{status:302,location:'/login'}}).status,'HOLD');
++});
++test('external redirect hostile origin rejected',()=>{
++ assert.equal(verdict({'/dashboard':{status:307,location:'https://evil.invalid/login'}}).status,'HOLD');
++});
++test('HTTP 200 private dashboard without authentication rejected',()=>{
++ assert.equal(verdict({'/dashboard':{status:200}}).status,'HOLD');
++});
++test('anonymous session leak /auth/me 200 rejected',()=>{
++ assert.equal(verdict({'/api/auth/me':{status:200}}).status,'HOLD');
++});
++test('missing route evidence rejected',()=>{
++ assert.equal(verdict({'/teacher':undefined}).status,'HOLD');
++});
++console.log('ROLE_NEUTRAL_PUBLIC_FAIL_CLOSED '+counter+'/'+counter+' PASS');
+diff --git a/scripts/connect/test-role-neutral-runtime-live-parity-20261015.cjs b/scripts/connect/test-role-neutral-runtime-live-parity-20261015.cjs
+new file mode 100644
+index 0000000..687c056
+--- /dev/null
++++ b/scripts/connect/test-role-neutral-runtime-live-parity-20261015.cjs
+@@ -0,0 +1,66 @@
++'use strict';
++// Real isolated Chromium/Next compiled route regression, never teacher impersonation.
++// Live public request is read-only and reported as diagnostic, not acceptance.
++const assert=require('node:assert/strict');
++const fs=require('node:fs');
++const cp=require('node:child_process');
++const path=require('node:path');
++const root=process.env.CONNECT_QA_COMPILED_ROOT;
++const browserRoot=process.env.CONNECT_BROWSER_TOOLING_ROOT;
++const port=3016;
++const host='api.assps.edu.pk';
++if(process.env.CONNECT_ISOLATED_QA!=='yes'||!root||!browserRoot)throw Error('ISOLATED_RUNTIME_REQUIRED');
++if(!fs.existsSync(path.join(root,'.next/BUILD_ID')))throw Error('REVIEWED_COMPILED_BUILD_MISSING');
++const build=fs.readFileSync(path.join(root,'.next/BUILD_ID'),'utf8').trim();
++assert.equal(build,'aMD_UNZVOSO2lpyRO0-RO','ONLY_REVIEWED_ROLE_NEUTRAL_BUILD');
++const {chromium}=require(path.join(browserRoot,'node_modules/playwright'));
++const browserPath='/root/.cache/ms-playwright/chromium-1148/chrome-linux/chrome';
++if(!fs.existsSync(browserPath))throw Error('REVIEWED_CHROMIUM_NOT_INSTALLED');
++const origin='http://'+host+':'+port;
++let browser;
++const checks=[];
++let privateRequests=0;
++let blockedExternalRequests=0;
++function pass(name,predicate){assert.ok(predicate,name);checks.push(name);console.log('PASS '+name);}
++(async()=>{
++  browser=await chromium.launch({executablePath:browserPath,headless:true,args:[
++    '--no-sandbox','--disable-dev-shm-usage',
++    '--host-resolver-rules=MAP '+host+' 127.0.0.1, EXCLUDE localhost',
++  ]});
++  const context=await browser.newContext({ignoreHTTPSErrors:false});
++  // No external application requests or production user sessions permitted.
++  await context.route('**/*',route=>{
++    const dest=new URL(route.request().url());
++    if(dest.hostname===host&&dest.port===String(port)&&dest.protocol==='http:'){
++      privateRequests++;
++      return route.continue();
++    }
++    blockedExternalRequests++;
++    return route.abort('blockedbyclient');
++  });
++  const page=await context.newPage();
++  const faults=[];
++  page.on('pageerror',x=>faults.push(String(x.message)));
++  const response=await page.goto(origin+'/dashboard',{waitUntil:'domcontentloaded',timeout:20000});
++  const current=new URL(page.url());
++  pass('anonymous dashboard routes to LOGIN, never admin',current.pathname==='/login'&&
++    !current.searchParams.get('next')?.includes('/admin'));
++  pass('compiled dashboard HTTP routing is a redirect',response&&
++    [200,302,307,308].includes(response.status()));
++  const legacy=await page.goto(origin+'/dashboard/history',{waitUntil:'domcontentloaded',timeout:20000});
++  pass('nested legacy dashboard avoids admin login target',
++    new URL(page.url()).pathname==='/login'&&
++    !page.url().includes('next=%2Fadmin'));
++  const teacher=await page.goto(origin+'/teacher',{waitUntil:'domcontentloaded',timeout:20000});
++  const t=new URL(page.url());
++  pass('unauthenticated teacher route requires login',t.pathname==='/login');
++  pass('teacher login link preserves teacher-specific destination',
++    t.searchParams.get('next')==='/teacher');
++  const login=await page.goto(origin+'/login',{waitUntil:'domcontentloaded',timeout:20000});
++  pass('reviewed compiled login page responds',login&&login.status()===200);
++  pass('no browser JavaScript uncaught exception on anonymous routes',faults.length===0);
++  pass('browser accessed private Next and all off-host requests were intercepted',privateRequests>0);
++  console.log('BROWSER_PRIVATE_REQUESTS='+privateRequests+' EXTERNAL_BLOCKED='+blockedExternalRequests);
++  console.log('ROLE_NEUTRAL_REAL_CHROMIUM_ISOLATED '+checks.length+'/'+checks.length+' PASS');
++})().catch(e=>{console.error('ROLE_NEUTRAL_REAL_CHROMIUM_QA_FAIL '+(e&&e.message));process.exitCode=2})
++.finally(async()=>{if(browser)await browser.close()});
+diff --git a/scripts/connect/verify-role-neutral-public-cutover-20261015.cjs b/scripts/connect/verify-role-neutral-public-cutover-20261015.cjs
+new file mode 100644
+index 0000000..39c8624
+--- /dev/null
++++ b/scripts/connect/verify-role-neutral-public-cutover-20261015.cjs
+@@ -0,0 +1,69 @@
++'use strict';
++// Read-only HTTPS anonymous acceptance; not a security release certification.
++const fs=require('node:fs');
++const path=require('node:path');
++const {URL}=require('node:url');
++const EXPECTED_BUILD='aMD_UNZVOSO2lpyRO0-RO';
++const LIVE_BUILD='/var/www/apex-connect/.next/BUILD_ID';
++const HOST='https://api.assps.edu.pk';
++const paths=['/login','/dashboard','/dashboard/history','/teacher','/api/auth/me'];
++const allowedStatus=[200,302,307,308,401,403];
++function localPath(location){
++  if(!location)return null;
++  try {
++    const u=new URL(location,HOST);
++    if(u.origin!==HOST)return null;
++    return {path:u.pathname,next:u.searchParams.get('next')};
++  }catch{return null}
++}
++function evaluate(result,liveBuild){
++  const checks=[];
++  const add=(name,pass)=>checks.push({name,pass:pass===true});
++  add('reviewed_role_neutral_next_build_live',liveBuild===EXPECTED_BUILD);
++  const get=p=>result[p];
++  const login=get('/login'),dash=get('/dashboard'),nested=get('/dashboard/history');
++  const teacher=get('/teacher'),self=get('/api/auth/me');
++  add('anonymous_login_200',login?.status===200);
++  for(const [name,item] of [['dashboard',dash],['nested_dashboard',nested]]) {
++    const u=localPath(item?.location);
++    add(name+'_unauthenticated_goes_only_to_login',
++      [302,307,308].includes(item?.status) && u?.path==='/login' &&
++      u.next===null);
++  }
++  const t=localPath(teacher?.location);
++  add('unauthenticated_teacher_does_not_enter_admin',
++      [302,307,308].includes(teacher?.status)&&t?.path==='/login'&&
++      t.next==='/teacher');
++  add('anonymous_identity_is_401',self?.status===401);
++  const ok=checks.every(v=>v.pass);
++  return {scope:'PUBLIC_ANONYMOUS_ONLY',status:ok?'ANONYMOUS_ROUTES_PASS':'HOLD',
++      checks,blocked:checks.filter(c=>!c.pass).map(c=>c.name),
++      authenticatedTeacherAccepted:false,
++      independentCrossTenantDenied:false,
++      realTrafficRollbackCertified:false,
++      productionReleaseCertified:false};
++}
++async function fetchStatus(route) {
++  const response=await fetch(HOST+route,{
++    redirect:'manual',cache:'no-store',signal:AbortSignal.timeout(7000),
++    headers:{'Cache-Control':'no-store','User-Agent':'ASSPS-connect-read-only-public-routing-qa'},
++  });
++  if(!allowedStatus.includes(response.status))throw Error('UNEXPECTED_HTTP_STATUS');
++  return {status:response.status,location:response.headers.get('location')};
++}
++async function main() {
++  let build='';
++  try{build=fs.readFileSync(LIVE_BUILD,'utf8').trim()}catch {}
++  const records={};
++  const errors=[];
++  for(const route of paths){
++    try{records[route]=await fetchStatus(route);}
++    catch(e){errors.push(route+':'+(e?.name||'ERROR'));}
++  }
++  const report=evaluate(records,build);
++  if(errors.length){report.blocked.push('HTTPS_NETWORK_OR_TLS_FAILURE');report.status='HOLD'}
++  console.log(JSON.stringify({...report,errors,checkedPaths:paths},null,2));
++  process.exitCode=report.status==='ANONYMOUS_ROUTES_PASS'?0:2;
++}
++if(require.main===module)main().catch(e=>{console.error('ROUTING_PUBLIC_HOLD '+e.message);process.exitCode=2;});
++module.exports={evaluate,localPath,EXPECTED_BUILD};
