@@ -4,6 +4,9 @@ on:
   pull_request:
     paths:
       - "al-siddique-frontend/**"
+      - "al-siddique-backend/src/routes/assessmentStudioRoutes.js"
+      - "al-siddique-backend/src/services/grade910PaperWorkspaceReleaseGuard.js"
+      - "al-siddique-backend/src/tests/grade910-institutional-draft-validation-contract.test.js"
       - "ops/release/check-lesson-planner-ui.py"
       - "ops/release/guarded-lesson-planner-rollout.py"
       - "ops/release/check-preserved-companion-features.py"
@@ -23,6 +26,9 @@ on:
       - "release/**"
     paths:
       - "al-siddique-frontend/**"
+      - "al-siddique-backend/src/routes/assessmentStudioRoutes.js"
+      - "al-siddique-backend/src/services/grade910PaperWorkspaceReleaseGuard.js"
+      - "al-siddique-backend/src/tests/grade910-institutional-draft-validation-contract.test.js"
       - "ops/release/check-lesson-planner-ui.py"
       - "ops/release/guarded-lesson-planner-rollout.py"
       - "ops/release/check-preserved-companion-features.py"
@@ -74,5 +80,11 @@ jobs:
           node --test al-siddique-frontend/src/Modules/Paper-Generator/tests/dailyServerPayload.test.mjs
           python3 -m unittest discover -s ops/release/tests -p test_lesson_v4_subject_controls.py -v
           python3 -m unittest discover -s ops/release/tests -p test_lesson_v5_daily_controls.py -v
+      - name: Fail closed on Grade IX/X institutional draft and official-release boundary
+        run: node al-siddique-backend/src/tests/grade910-institutional-draft-validation-contract.test.js
+      - name: Keep printed marks balanced across English Urdu RTL and half A4
+        run: node --test al-siddique-frontend/src/Modules/Paper-Generator/tests/printMarksLedgerParity.test.mjs
+      - name: Preserve Grade IX/X verified Paper Workspace authorization bridge
+        run: node --test al-siddique-frontend/src/Modules/Paper-Generator/grade910PaperWorkspaceVerifiedBridge.test.mjs
       - name: Verify safe rollout and original source boundaries
         run: python3 -m unittest discover -s ops/release/tests -p test_lesson_rollout_guard.py -v
