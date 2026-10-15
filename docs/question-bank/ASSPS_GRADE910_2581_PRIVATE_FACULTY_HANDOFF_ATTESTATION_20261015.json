@@ -1,0 +1,17 @@
+{
+  "schema": "assps-grade910-2581-private-faculty-handoff-attestation-v1",
+  "originalResearchQuestionCount": 2581,
+  "privateBlindAndAnswerReferenceQuestions": 2580,
+  "unsignedQualifiedTeacherForms": 2580,
+  "unsignedTextbookAdoptionForms": 56,
+  "questionReviewBatchCount": 120,
+  "sourceReviewGroups": 56,
+  "facultyHeldOriginalId": "X-CHEM-C23-L01",
+  "candidateReviewCrosswalkSha256": "a67852e7e03cfd0ad7bb9c4cd50138a6a0a68a078624ff65356a8bf25657186b",
+  "privateGroupHandoffSha256": "f4abef4d558bbfd52c2346508e7c9ae27461af2cc1fae60ffcfe1d6d5bb1e38b",
+  "teacherReviewsAuthenticated": 0,
+  "academicallyApproved": 0,
+  "published": 0,
+  "productionWritePermitted": false,
+  "status": "PRIVATE_UNSIGNED_FACULTY_HANDOFF_READY_PUBLICATION_HOLD"
+}

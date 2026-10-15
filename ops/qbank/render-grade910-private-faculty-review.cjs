@@ -214,12 +214,14 @@ function verifyRendered({base,runId,renderId}){
  const d=path.join(sourceDir,name)
  requireSafeDir(d)
  const original=fs.readFileSync(path.join(sourceDir,'INDEX.json'))
+ const expected=JSON.parse(original).filePairs.length
+ if(!Number.isInteger(expected)||expected<60||expected>2580)reject('PRIVATE_PRINT_BATCH_COUNT_INVALID')
  const index=JSON.parse(fs.readFileSync(path.join(d,'RENDERED_INDEX.json'),'utf8'))
  if(index.privateSourceIndexSha256!==sha(original)||index.privatePrintableQuestions!==2580||
-  index.originalBatches!==167||index.facultyHeldNotRendered!==1||
+  index.originalBatches!==expected||index.facultyHeldNotRendered!==1||
   index.teacherVerifiedPickerEnabled!==false||index.verifiedPublished!==0||
   index.reviewerSignaturesAuthenticated!==0||
-  !Array.isArray(index.files)||index.files.length!==501)reject('BAD_PRINTABLE_INDEX')
+  !Array.isArray(index.files)||index.files.length!==expected*3)reject('BAD_PRINTABLE_INDEX')
  for(const row of index.files){
   if(!/^[a-z0-9_-]+--batch-\d{3,4}\.(blind|reference|decision)\.html$/.test(row.name))
    reject('INVALID_RENDERED_FILENAME')
