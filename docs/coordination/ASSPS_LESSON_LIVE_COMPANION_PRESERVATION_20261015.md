@@ -79,3 +79,25 @@ traffic rollback. A synthetic session cannot satisfy an actor signature.
 **Production release: HOLD**, including attempts to install a frontend
 unaware of these currently live companion features. Do not disable the
 new gate, invent school signatures, or assert deployed changes prematurely.
+
+## Compiled runtime graph extension
+
+The verifier now accepts an optional --dist frontend build. It follows
+assets truly reachable from index.html, checking the actual Diary chunk,
+Early Years editor and independent print chunk rather than finding stale
+unused artifacts. The read-only observed live entry graph loads rich
+DailyDiaryWorkspace-UmxZExBI.js, EarlyYearsWorksheetEditor-Be5xUMBW.js
+and printEarlyYearsPaper-DVs1Rdwx.js, and current observed source+runtime
+passes all nine companion checks. The incomplete 1d9291b recovered build
+loads DailyDiaryWorkspace-B-gEVGCe.js and older Early Years, so it returns
+HOLD at both source and runtime level. A complete **synthetic future** build
+with new chunk names passes the tests, proving there is no fixed-SHA lock.
+The test suite now has 13/13 passing cases including a stale-but-unused
+rich asset negative check.
+
+A fresh root-only rollback baseline for the actual current live frontend
+and Nginx config, generated without changing services, is at
+/root/assps-release-backups/lesson-planner-live-baseline-20261015T090109Z.
+Archive and config hashes verified; original public HTML SHA and Nginx
+configuration SHA stayed unchanged. Existing full-ACL PostgreSQL recovery
+archive was separately verified; no new database backup was needed.

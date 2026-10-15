@@ -148,7 +148,7 @@ def main():
     companion_module=module_from_spec(companion_spec)
     companion_spec.loader.exec_module(companion_module)
     companions_contract=json.loads((HERE/'preserved-companions-v1.json').read_text())
-    companions=companion_module.evaluate(repo,companions_contract)
+    companions=companion_module.evaluate(repo,companions_contract,dist)
     if companions['result']!='PASS':
         raise RuntimeError('Current live Diary / Early Years capabilities missing: reconcile reviewed owner changes first')
     newroot=OUTPUT_ROOT/('assps-lesson-planner-'+commit[:12])
