@@ -42,6 +42,7 @@ await page.route('**/api/**',async route=>{
      writes.push(body)
      assert.equal(body.planningScope,'weekly')
      assert.equal(body.plannerDocument?.provenance?.academicPublication,'BLOCKED')
+     assert.equal(body.plannerDocument?.layoutSettings?.fontFamily,'Times New Roman')
      assert.ok(!JSON.stringify(body).includes('QA Student'))
      assert.equal(body.sentToPortal,undefined)
      const saved={...body,id:'lp_qa_weekly_server_0001',revision:1,serverRevision:1}
@@ -65,7 +66,7 @@ try{
  await page.getByText('Original source library automatically loaded: 59 subjects').waitFor({timeout:18000})
  await page.locator('[data-wn-class]').selectOption('Four')
  await page.getByRole('button',{name:'1. Term Syllabus'}).click()
- assert.equal(await page.locator('.wn-term-grid article').count(),6)
+ assert.equal(await page.locator('[data-term-edit-subject]').count(),6)
  await page.getByRole('button',{name:'2. Weekly Plan'}).click()
 
  await page.getByText('3 authorized students loaded').waitFor()
@@ -108,6 +109,11 @@ try{
  assert.equal(serverRows[0].serverRevision,2)
  assert.equal(await page.locator('[data-lesson-student-card]').count(),3)
  await page.getByText('Class in-charge (Principal-provided):').waitFor()
+ // Six full-length subjects and a separate assessment table correctly block
+ // the overloaded three-card page rather than silently shrinking user fonts.
+ await page.getByRole('button',{name:'Print Selected Students'}).click()
+ await page.getByText('Some student cards are too long for this A4 layout.').waitFor()
+ await page.getByLabel('Student cards / page').selectOption('1')
  const popupPromise=page.waitForEvent('popup',{timeout:8000})
  await page.getByRole('button',{name:'Print Selected Students'}).click()
  const popup=await popupPromise
@@ -115,7 +121,7 @@ try{
  const printed=await popup.content()
  assert.ok(printed.includes('QA Student Alpha'))
  assert.ok((await popup.locator('body').innerText()).includes('Unit #7'))
- assert.ok(printed.includes('Assessment / جائزہ'))
+ assert.ok(printed.includes('ASSESSMENT'))
  assert.ok(printed.includes('school-logo.svg'))
  const layout=await popup.evaluate(()=>{
    const p=document.querySelector('.wn-paper'),cards=[...document.querySelectorAll('.wn-card')]
@@ -159,7 +165,7 @@ try{
  await daily.close()
  await page.getByRole('button',{name:'2. Weekly Plan'}).click()
  assert.equal(writes.length,2)
- console.log('WEEKLY_NOTEBOOK_CHROMIUM: auto-original59 + server Save/Reopen + roster3 + 3cards A4 + assessed14Nov + print PASS')
+ console.log('WEEKLY_NOTEBOOK_CHROMIUM: auto-original59 + server Save/Reopen + roster3 + 3card overflow safe-block + 1card A4 + assessed14Nov + print PASS')
  console.log('NO_PRODUCTION_DB_WRITES: mock actor and synthetic students only')
 }catch(e){
  console.error('WEEKLY_NOTEBOOK_BROWSER_FAILED',e.message)

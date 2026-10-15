@@ -6,12 +6,17 @@ import {CLASS_ORDER,LABELS} from './composerReviewDomain'
 import {validateLocalComposerSource,normalizeClass} from './composerLocalVerifier'
 import {CLASS_INCHARGES} from './lessonWeeklyEngine'
 import {termWeeks,notebookModel,planWeekRows} from './weeklyNotebookModel'
+import TermPlannerEditor from './TermPlannerEditor'
+import {termKey,buildTermOverview,termAssessmentRows,validateTermContent} from './termPlanningModel'
+import {listTermServerPlans,saveTermServerPlan} from './termServerPersistence'
 import {loadPrincipalSourceLibrary,listWeeklyServerPlans,saveWeeklyServerPlan,
  weeklyIdentity} from './weeklyServerPersistence'
 import './WeeklyNotebookStudio.css'
 
 const TITLE='AL SIDDIQUE SCHOLARS PUBLIC SCHOOL'
 const keyPrefix='assps_second_term_notebook_v1'
+const EMPTY_TERM_EDITS=Object.freeze({})
+const EMPTY_TERM_ASSESSMENTS=Object.freeze([])
 function actorKey(){
  try{
   const user=JSON.parse(localStorage.getItem('al_siddique_user')||sessionStorage.getItem('al_siddique_user')||'{}')
@@ -38,7 +43,9 @@ const studentClass=s=>s?.class||s?.class_name||s?.classLevel||s?.class_level||''
 
 const chunk=(arr,n)=>Array.from({length:Math.ceil(arr.length/n)},(_,i)=>arr.slice(i*n,(i+1)*n))
 const PAGE_OPTIONS=[1,2,3,4,6,8]
-const defaultDesign={cardsPerPage:3,fontSize:10,headerSize:13,subjectWidth:25,rowHeight:22,palette:'navy',zoom:72}
+const defaultDesign={cardsPerPage:3,fontSize:10,headerSize:13,schoolNameSize:17,subjectNameSize:12,
+ subjectWidth:25,assessmentWidth:55,rowHeight:22,fontFamily:'Times New Roman',
+ urduFontFamily:'Jameel Noori Nastaleeq',palette:'navy',zoom:72}
 const dateLabel=s=>{if(!s)return '';const d=new Date(s+'T12:00:00Z');return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric',timeZone:'UTC'})}
 const originalPageWarning=(rows,count)=>rows.some(x=>x.task.length>105)&&count>3
 function saveDownload(data,name){
@@ -52,12 +59,19 @@ function MixedDirection({text}){
    /^\d/.test(piece)?<bdi dir="ltr" className="wn-number" key={i}>{piece}</bdi>:<span key={i}>{piece}</span>)
 }
 function Card({student,rows,klass,section,teacher,week,design,cardIndex,viewMode,dailyDate}){
+ const allAssessments=rows.flatMap(r=>(r.assessments||[]).map(a=>({...a,subject:r.subject})))
+  .filter((a,i,list)=>list.findIndex(b=>a.date===b.date&&a.subject===b.subject&&a.origin===b.origin)===i)
  const identity=student?studentName(student):'Student Name: ______________________'
  const roll=student?studentRoll(student):'________'
  return <article className="wn-card" data-lesson-student-card
-   style={{'--wn-title':(design.cardsPerPage>=3?Math.min(design.headerSize,11):design.headerSize)+'px',
-     '--wn-font':(design.cardsPerPage>=3?Math.min(design.fontSize,9):design.fontSize)+'px',
-     '--wn-subject-width':design.subjectWidth+'%','--wn-row-min':(design.cardsPerPage>=3?Math.min(design.rowHeight,18):design.rowHeight)+'px'}}>
+   style={{'--wn-title':design.headerSize+'px',
+     '--wn-name-size':design.schoolNameSize+'px',
+     '--wn-subject-name-size':design.subjectNameSize+'px',
+     '--wn-urdu-font':design.urduFontFamily,
+     '--wn-font':design.fontSize+'px','--wn-text-family':design.fontFamily,
+     '--wn-subject-width':design.subjectWidth+'%',
+     '--wn-assessment-width':design.assessmentWidth+'%',
+     '--wn-row-min':design.rowHeight+'px'}}>
    <header className="wn-card-head">
      <img src="/school-logo.svg" alt="ASSPS school crest"/>
      <div><b>{TITLE}</b><small>{viewMode==='daily'?'DAILY LEARNING NOTE':'WEEKLY LEARNING PLAN'} · Al Ilmul Ikhlaq</small></div>
@@ -75,12 +89,17 @@ function Card({student,rows,klass,section,teacher,week,design,cardIndex,viewMode
            <b>Application / Activity</b> <bdi dir="ltr">{dateLabel(a.date)}</bdi>
            <small>Proposed teaching date</small>
          </div>)}
-         {r.assessments.map((a,i)=><div className="wn-assessment" key={a.date+'-'+i}>
-           <b>Assessment / جائزہ</b> <bdi dir="ltr">{dateLabel(a.date)}</bdi>
-           <small>{a.origin==='ORIGINAL_SOURCE'?'Source date':'Proposed date'}</small>
-         </div>)}
+
        </td>
      </tr>)}</tbody>
+   </table>
+   <table className="wn-assessment-table" aria-label="Weekly assessments">
+     <thead><tr><th>ASSESSMENT</th><th>DATE</th></tr></thead>
+     <tbody>{(allAssessments.length?allAssessments:[{date:'',origin:'EMPTY_PROPOSAL'}]).map((a,i)=>
+       <tr key={a.subject+'-'+a.date+'-'+i}><th>Assessment {i+1}
+         {a.subject&&<small>{a.subject}</small>}</th>
+         <td><bdi dir="ltr">{a.date?dateLabel(a.date):'____________'}</bdi>
+           {a.date&&a.origin!=='ORIGINAL_SOURCE'&&<small>Proposed</small>}</td></tr>)}</tbody>
    </table>
    <footer><span>Al Ilmul Ikhlaq · Sharif Chowk, Rayya Khas, Narowal</span><span>{cardIndex+1}</span></footer>
  </article>
@@ -95,6 +114,14 @@ export default function WeeklyNotebookStudio(){
  const [error,setError]=useState('')
  const [klass,setKlass]=useState('Starter')
  const [viewMode,setViewMode]=useState('weekly')
+ const [termName,setTermName]=useState('Second Term')
+ const [termDrafts,setTermDrafts]=useState({})
+ const [termServerPlans,setTermServerPlans]=useState([])
+ const [currentTermServerId,setCurrentTermServerId]=useState(null)
+ const [termSaving,setTermSaving]=useState(false)
+ const [termStatus,setTermStatus]=useState('')
+ const [termCacheReady,setTermCacheReady]=useState(false)
+ const [termDraftSource,setTermDraftSource]=useState('')
  const [dailyDate,setDailyDate]=useState('2026-10-15')
  const [section,setSection]=useState('')
  const [start,setStart]=useState('2026-10-15')
@@ -135,6 +162,17 @@ export default function WeeklyNotebookStudio(){
    ...r.assessments,...(extraAssessments[r.id]||[])
   ].filter((a,i,list)=>list.findIndex(x=>x.date===a.date&&x.origin===a.origin)===i)}))
  },[candidates,klass,activeWeek,start,end,manifest,edits,includedIds,extraAssessments])
+ const activeTermKey=termKey(klass,section,termName,start)
+ const termEdits=(termDraftSource===manifest?.source_zip_sha256?termDrafts[activeTermKey]?.edits:null)||EMPTY_TERM_EDITS
+ const termManualAssessments=(termDraftSource===manifest?.source_zip_sha256?termDrafts[activeTermKey]?.assessments:null)||EMPTY_TERM_ASSESSMENTS
+ const termRows=useMemo(()=>{
+   if(!manifest)return []
+   try{return buildTermOverview(candidates,{
+     start,end,imageReview:manifest?.class_one_image_review,edits:termEdits
+   })}catch{return []}
+ },[candidates,start,end,manifest,termEdits])
+ const termAssessments=useMemo(()=>termAssessmentRows(termRows,termManualAssessments),
+   [termRows,termManualAssessments])
  const teacher=CLASS_INCHARGES[klass]?.join(' & ')||'Class in-charge to be verified'
  const activeRoster=rosterScope===klass+'|'+section?students:[]
  const selectedStudents=activeRoster.filter(st=>chosenStudents===null||chosenStudents.includes(studentId(st)))
@@ -167,7 +205,32 @@ export default function WeeklyNotebookStudio(){
   return()=>{live=false}
  },[storageKey])
  useEffect(()=>{
+  if(!manifest||!storageKey)return
   let live=true
+  const cacheKey=storageKey+'_term_drafts_v1_'+manifest.source_zip_sha256.slice(0,16)
+  const cached=readJson(cacheKey,null)
+  queueMicrotask(()=>{
+    if(!live)return
+    setTermDrafts(cached?.sourceZipSha256===manifest.source_zip_sha256 &&
+      cached.drafts && typeof cached.drafts==='object' && !Array.isArray(cached.drafts)?
+        cached.drafts:{})
+    setTermDraftSource(manifest.source_zip_sha256)
+    setTermCacheReady(true)
+  })
+  return()=>{live=false}
+ },[manifest,storageKey])
+ useEffect(()=>{
+  if(!manifest||!storageKey||!termCacheReady||
+     termDraftSource!==manifest.source_zip_sha256||!Object.keys(termDrafts).length)return
+  setTenantStorageItem(
+    storageKey+'_term_drafts_v1_'+manifest.source_zip_sha256.slice(0,16),
+    JSON.stringify({sourceZipSha256:manifest.source_zip_sha256,drafts:termDrafts}))
+ },[manifest,storageKey,termCacheReady,termDraftSource,termDrafts])
+ useEffect(()=>{
+  let live=true
+  Promise.resolve().then(()=>listTermServerPlans()).then(data=>{
+    if(live)setTermServerPlans(data)
+  }).catch(()=>{if(live)setTermStatus('Term server list unavailable; no term changes were made.')})
   Promise.resolve().then(()=>listWeeklyServerPlans()).then(data=>{
     if(live){setRemotePlans(data);setRemoteError('')}
   }).catch(()=>{if(live)setRemoteError('Saved school plans could not be loaded. No server write was attempted.')})
@@ -238,14 +301,14 @@ export default function WeeklyNotebookStudio(){
     const key=weeklyIdentity(klass,section,activeWeek.start)
     const existing=remotePlans.find(plan=>plan.id===currentServerId&&plan.provenance?.weeklyKey===key)
     const saved=await saveWeeklyServerPlan({klass,section,week:activeWeek,
-      rows,teacherLabel:teacher,sourceZipSha256:manifest.source_zip_sha256,existing})
+      rows,teacherLabel:teacher,sourceZipSha256:manifest.source_zip_sha256,existing,design})
     if(!saved?.id)throw Error('School server did not return a saved plan ID')
     setCurrentServerId(saved.id)
     const latest=await listWeeklyServerPlans()
     setRemotePlans(latest)
     // Local cache is a fallback for this device, never a second publication.
     const newRecord={classLevel:klass,section,weekStart:activeWeek.start,weekEnd:activeWeek.end,
-      savedAt:new Date().toISOString(),edits,extraAssessments,
+      savedAt:new Date().toISOString(),edits,extraAssessments,design,
       sourceZipSha256:manifest.source_zip_sha256,serverId:saved.id,serverRevision:saved.serverRevision||saved.revision}
     if(storageKey){
       const updated={...plans,[planKey]:newRecord}
@@ -273,7 +336,9 @@ export default function WeeklyNotebookStudio(){
       c.source_subject_label===subject.subject)?.candidate_key
     if(!key)continue
     const lesson=subject.lessons?.[0]
-    if(lesson?.homework||lesson?.title)nextEdits[key]=lesson.homework||lesson.title
+    if(doc.provenance?.fullWeeklyStatements?.[key]!==undefined)
+      nextEdits[key]=doc.provenance.fullWeeklyStatements[key]
+    else if(lesson?.homework||lesson?.title)nextEdits[key]=lesson.homework||lesson.title
     if(lesson?.assessment)nextExtra[key]=lesson.assessment.split('; ').map(item=>{
       const [d]=item.split(' ')
       return {date:d,label:'Assessment / جائزہ',origin:'SERVER_SAVED_DRAFT'}
@@ -286,6 +351,7 @@ export default function WeeklyNotebookStudio(){
   setKlass(nextClass);setSection(nextSection)
   setWeekIndex(Math.max(0,weeks.findIndex(w=>w.start===nextWeekStart)))
   setEdits(nextEdits);setExtraAssessments(nextExtra)
+  setDesign({...defaultDesign,...(doc.layoutSettings||{})})
   setStatus('Verified server-saved class/week reopened. Original academic approval remains pending.')
   setError('')
  }
@@ -295,6 +361,7 @@ export default function WeeklyNotebookStudio(){
   setKlass(saved.classLevel);setSection(saved.section||'')
   setWeekIndex(Math.max(0,weeks.findIndex(w=>w.start===saved.weekStart)))
   setEdits(saved.edits||{});setExtraAssessments(saved.extraAssessments||{})
+  setDesign({...defaultDesign,...(saved.design||{})})
   setStatus('Saved class/week plan reopened on this device. Not yet shared to the school server.')
  }
 
@@ -337,6 +404,104 @@ export default function WeeklyNotebookStudio(){
   setStatus('Printable lesson cards opened. Check A4 scaling and Urdu fonts before printing.')
  }
  if(!ready)return <p>Checking verified source availability...</p>
+ function updateTermDraft(patch){
+   setTermDrafts(old=>({...old,[activeTermKey]:{
+     ...(old[activeTermKey]||{}),...patch(old[activeTermKey]||{})
+   }}))
+ }
+ function changeTermRow(id,values){
+   updateTermDraft(d=>({edits:{...(d.edits||{}),
+     [id]:{...(d.edits?.[id]||{}),...values}}}))
+ }
+ function changeTermAssessment(id,date){
+   const current=termAssessments.find(a=>a.id===id)
+   if(!current)return
+   const amended={...current,date,
+     origin:date===current.originalDate&&current.origin==='ORIGINAL_SOURCE'?
+       'ORIGINAL_SOURCE':'MANUAL_PROPOSAL'}
+   updateTermDraft(d=>({assessments:[
+     ...(d.assessments||[]).filter(x=>x.id!==id),amended
+   ]}))
+ }
+ function removeTermAssessment(id){
+   updateTermDraft(d=>({assessments:(d.assessments||[]).filter(a=>a.id!==id)}))
+ }
+ function addTermAssessment(){
+   updateTermDraft(d=>({assessments:[...(d.assessments||[]),{
+     id:'manual-'+Date.now()+'-'+Math.random().toString(36).slice(2,8),
+     date:'',name:'Assessment',subject:'',origin:'MANUAL_PROPOSAL'
+   }]}))
+ }
+ async function saveTerm(){
+   if(!manifest?.source_zip_sha256){
+     setError('A verified original source is required for a term draft.');return
+   }
+   setTermSaving(true);setError('')
+   try{
+     validateTermContent({klass,start,end,rows:termRows,assessments:termAssessments})
+     const existing=termServerPlans.find(p=>p.id===currentTermServerId &&
+       p.provenance?.termKey===activeTermKey)
+     const result=await saveTermServerPlan({klass,section,term:termName,
+       start,end,rows:termRows,assessments:termAssessments,design,
+       sourceZipSha256:manifest.source_zip_sha256,existing})
+     if(!result?.id)throw Error('School server did not return a saved term plan ID')
+     setCurrentTermServerId(result.id)
+     setTermServerPlans(await listTermServerPlans())
+     setTermStatus('Saved term draft to the school server (not published).')
+   }catch(ex){
+     setError('Term save FAILED. No publication or overwrite. '+
+       (ex?.response?.data?.message||ex.message||'Reopen the latest revision.'))
+   }finally{setTermSaving(false)}
+ }
+ function openSavedTerm(doc){
+   if(doc?.provenance?.marker!=='ASSPS_TERM_NOTEBOOK_V1' ||
+      doc?.provenance?.academicPublication!=='BLOCKED' ||
+      !manifest?.source_zip_sha256 ||
+      doc?.provenance?.sourceZipSha256!==manifest.source_zip_sha256){
+     setError('Saved term source revision differs from the verified current original. Open blocked.');return
+   }
+   const sourceIds=new Set((manifest.candidates||[])
+     .filter(c=>normalizeClass(c.proposed_class_level)===doc.classLevel)
+     .map(c=>c.candidate_key))
+   if((doc.termCoverageRows||[]).some(r=>!sourceIds.has(r.id))){
+     setError('Saved term has subject identities absent from current source. Review before reopening.');return
+   }
+   const key=termKey(doc.classLevel,doc.section,doc.termLabel,doc.startDate)
+   setTermDrafts(old=>({...old,[key]:{
+     edits:Object.fromEntries((doc.termCoverageRows||[]).map(r=>[
+       r.id,{detail:r.detail,pageFrom:r.pageFrom,pageTo:r.pageTo}])),
+     assessments:(doc.assessments||[]).filter(a=>a.origin!=='EMPTY_PROPOSAL')
+   }}))
+   setKlass(doc.classLevel);setSection(doc.section||'')
+   setTermName(doc.termLabel);setStart(doc.startDate);setEnd(doc.endDate)
+   setDesign({...defaultDesign,...(doc.layoutSettings||{})})
+   setCurrentTermServerId(doc.id)
+   setViewMode('term')
+   setTermStatus('Saved term reopened at revision '+doc.serverRevision+' (private draft).')
+   setError('')
+ }
+ function printTerm(){
+   try{validateTermContent({klass,start,end,rows:termRows,assessments:termAssessments})}
+   catch(ex){setError(ex.message);return}
+   const copy=document.getElementById('wn-term-print')
+   if(!copy){setError('Term print document is not mounted.');return}
+   const popup=window.open('','_blank','width=1150,height=900')
+   if(!popup){setError('Allow popups to print the term plan.');return}
+   const styleLinks=[...document.querySelectorAll('link[rel="stylesheet"]')]
+     .map(node=>'<link rel="stylesheet" href="'+node.href+'">').join('')
+   popup.document.open()
+   popup.document.write('<!doctype html><html><head><meta charset="utf-8"><title>ASSPS Term Syllabus</title>'+
+     styleLinks+'<style>@page{size:A4;margin:10mm}body{background:white;margin:0}'+
+     '.term-print-document{box-shadow:none;width:auto;min-height:0;padding:0}'+
+     '.term-print-document thead{display:table-header-group}'+
+     '.term-print-document tr{break-inside:avoid;page-break-inside:avoid}'+
+     '</style></head><body>'+copy.outerHTML+'</body></html>')
+   popup.document.close()
+   popup.addEventListener('load',()=>{
+     popup.document.fonts.ready.then(()=>popup.print()).catch(()=>popup.print())
+   },{once:true})
+   setTermStatus('Print preview opened. Verify page breaks and Urdu font before physical print.')
+ }
  return <section className="wn-studio" data-weekly-notebook-studio>
   <header className="wn-heading">
    <div><span className="wn-eyebrow">ASSPS · LESSON NOTEBOOK STUDIO</span><h3>Weekly Lesson Planning</h3>
@@ -366,10 +531,10 @@ export default function WeeklyNotebookStudio(){
     <label>Section<input data-wn-section value={section} onChange={e=>{setSection(e.target.value);setCurrentServerId(null);setRosterScope('')}} placeholder="All / Section"/></label>
     <label>Term begins<input type="date" value={start} onChange={e=>{setStart(e.target.value);setWeekIndex(0);setCurrentServerId(null)}}/></label>
     <label>Term ends<input type="date" value={end} min={start} onChange={e=>{setEnd(e.target.value);setWeekIndex(0);setCurrentServerId(null)}}/></label>
-    <label>Week<select data-wn-week value={Math.min(weekIndex,Math.max(0,weeks.length-1))}
+    {viewMode!=='term'&&<label>Week<select data-wn-week value={Math.min(weekIndex,Math.max(0,weeks.length-1))}
       onChange={e=>{setWeekIndex(Number(e.target.value));setCurrentServerId(null)}}>
       {weeks.map((w,i)=><option value={i} key={w.start}>Week {w.index} · {dateLabel(w.start)}–{dateLabel(w.end)}</option>)}
-    </select></label>
+    </select></label>}
    </div>
    {viewMode==='daily'&&<label className="wn-daily-date">Daily diary date
       <input type="date" min={activeWeek?.start} max={activeWeek?.end}
@@ -377,15 +542,17 @@ export default function WeeklyNotebookStudio(){
        onChange={e=>setDailyDate(e.target.value)}/>
       <small>Daily statements are editable weekly-derived proposals until teacher confirmation.</small>
    </label>}
-   {viewMode==='term'&&<section className="wn-term-overview">
-     <h4>Second Term Overview — {LABELS[klass]||klass}</h4>
-     <p>Original subjects {candidates.length} · {weeks.length} available week slots. Missing source dates are proposed, never presented as verified.</p>
-     <div className="wn-term-grid">{candidates.map(c=><article key={c.candidate_key}>
-       <strong>{c.source_subject_label}</strong>
-       <small>Original WhatsApp source · Academic review required</small>
-       <button onClick={()=>{setViewMode('weekly');setChosenSubjects([c.candidate_key])}}>Open Weekly Breakdown</button>
-     </article>)}</div>
-   </section>}
+   {viewMode==='term'&&<TermPlannerEditor
+     klass={klass} section={section} term={termName} start={start} end={end} setTerm={next=>{setTermName(next);setCurrentTermServerId(null)}}
+     rows={termRows} onChangeRow={changeTermRow}
+     assessments={termAssessments} onChangeAssessment={changeTermAssessment}
+     onRemoveAssessment={removeTermAssessment}
+     onAddAssessment={addTermAssessment} design={design}
+     onChangeDesign={patchDesign} onResetDesign={()=>setDesign(defaultDesign)}
+     onSave={saveTerm} onPrint={printTerm} saving={termSaving}
+     savedPlans={termServerPlans.filter(p=>p.classLevel===klass)}
+     onOpenSaved={openSavedTerm} status={termStatus}/>}
+   {viewMode!=='term'&&<>
    <div className="wn-actions">
     <button onClick={saveCurrent} disabled={savingToServer||!rows.length}><Save size={15}/> {savingToServer?'Saving to School Server...':'Save Week to School Server'}</button>
     <button onClick={()=>saveDownload({schema:'assps.weekly_learning_plan.private.v1',
@@ -423,8 +590,8 @@ export default function WeeklyNotebookStudio(){
        <p className="wn-hint">Short, editable notes. Source-derived / proposed dates stay separate.</p>
        {rows.map(row=><div className="wn-editline" key={row.id}>
          <label>{row.subject} <small>{row.sourceStatus}</small></label>
-         <textarea dir="auto" rows={2} value={row.task}
-           onChange={e=>setEdits(old=>({...old,[row.id]:e.target.value.slice(0,280)}))}/>
+         <textarea dir="auto" rows={2} maxLength={6000} value={row.task}
+           onChange={e=>setEdits(old=>({...old,[row.id]:e.target.value}))}/>
          {row.assessments.map(a=><p className="wn-assess-chip" key={a.date+a.origin}>
            Assessment: <bdi dir="ltr">{dateLabel(a.date)}</bdi> · {a.origin==='ORIGINAL_SOURCE'?'source':'proposed'}
          </p>)}
@@ -470,13 +637,25 @@ export default function WeeklyNotebookStudio(){
          <option value="teal">Ferozi academic · low ink</option>
          <option value="silver">Silver minimal · low ink</option>
        </select></label>
-       <label>Text size <b>{design.fontSize}px</b><input type="range" min="8" max="16"
+       <label>Text size <b>{design.fontSize}px</b><input type="range" min="8" max="20"
          value={design.fontSize} onChange={e=>patchDesign('fontSize',Number(e.target.value))}/></label>
-       <label>Subject heading <b>{design.headerSize}px</b><input type="range" min="10" max="20"
+       <label>Subject heading <b>{design.headerSize}px</b><input type="range" min="10" max="26"
          value={design.headerSize} onChange={e=>patchDesign('headerSize',Number(e.target.value))}/></label>
+       <label>School name/header <b>{design.schoolNameSize}px</b><input type="range" min="12" max="30"
+         value={design.schoolNameSize} onChange={e=>patchDesign('schoolNameSize',Number(e.target.value))}/></label>
+       <label>English font<select value={design.fontFamily} onChange={e=>patchDesign('fontFamily',e.target.value)}>
+         <option>Times New Roman</option><option>Arial</option><option>Georgia</option><option>Inter</option>
+       </select></label>
+       <label>Urdu font<select value={design.urduFontFamily} onChange={e=>patchDesign('urduFontFamily',e.target.value)}>
+         <option>Jameel Noori Nastaleeq</option><option>Noto Nastaliq Urdu</option><option>Noto Naskh Arabic</option>
+       </select></label>
+       <label>Subject name <b>{design.subjectNameSize}px</b><input type="range" min="10" max="23"
+         value={design.subjectNameSize} onChange={e=>patchDesign('subjectNameSize',Number(e.target.value))}/></label>
+       <label>Assessment column <b>{design.assessmentWidth}%</b><input type="range" min="35" max="70"
+         value={design.assessmentWidth} onChange={e=>patchDesign('assessmentWidth',Number(e.target.value))}/></label>
        <label>Subject column <b>{design.subjectWidth}%</b><input type="range" min="17" max="45"
          value={design.subjectWidth} onChange={e=>patchDesign('subjectWidth',Number(e.target.value))}/></label>
-       <label>Row height <b>{design.rowHeight}px</b><input type="range" min="17" max="47"
+       <label>Row height <b>{design.rowHeight}px</b><input type="range" min="17" max="80"
          value={design.rowHeight} onChange={e=>patchDesign('rowHeight',Number(e.target.value))}/></label>
        <label>Preview zoom <b>{design.zoom}%</b><input type="range" min="45" max="100"
          value={design.zoom} onChange={e=>patchDesign('zoom',Number(e.target.value))}/></label>
@@ -531,6 +710,7 @@ export default function WeeklyNotebookStudio(){
       <p className="wn-privacy">Only official source evidence, proposed teaching weeks and unapproved corrections appear here. Printing does not publish school records.</p>
     </section>
    </div>
+   </>}
   </>}
  </section>
 }

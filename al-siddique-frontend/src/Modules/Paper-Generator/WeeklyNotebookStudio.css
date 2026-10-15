@@ -138,3 +138,20 @@
 .wn-daily-date{display:flex;align-items:center;gap:12px;background:#fff;padding:9px 12px;border:1px solid #dce6ef;border-radius:9px;margin:10px 0;font-size:12px;font-weight:700}
 .wn-daily-date small{font-size:10px;color:#7a8593;font-weight:400}
 @media print{.wn-stage-switch,.wn-daily-date,.wn-term-overview{display:none!important}}
+
+/* V3: independent assessment table follows all subject rows, never nested inside work. */
+.wn-card{font-family:var(--wn-text-family,"Times New Roman"),serif}
+.wn-card-head b{font-size:var(--wn-name-size,var(--wn-title))}
+.wn-card-table thead th{font-size:clamp(8px,calc(var(--wn-title) - 3px),19px)}
+.wn-assessment-table{width:100%;table-layout:fixed;border-collapse:collapse;margin-top:1mm;font-size:var(--wn-font)}
+.wn-assessment-table th,.wn-assessment-table td{padding:.6mm 1mm;border:1px solid #cbd8e2;vertical-align:middle}
+.wn-assessment-table thead th{text-align:left;background:var(--wn-pale);color:#244d6e;font:700 8px Arial,sans-serif}
+.wn-assessment-table th:first-child{width:var(--wn-assessment-width)}
+.wn-assessment-table tbody th{text-align:left;font:700 var(--wn-font) Arial,sans-serif}
+.wn-assessment-table tbody td bdi{unicode-bidi:isolate;direction:ltr;font-family:"Times New Roman",serif}
+.wn-assessment-table tbody small,.wn-assessment-table tbody th small{display:block;color:#94702f;font:400 8px Arial,sans-serif}
+.wn-dense .wn-assessment-table th,.wn-dense .wn-assessment-table td{padding:.35mm .5mm}
+.wn-card-table tbody tr{height:var(--wn-row-min)}
+
+.wn-card-table tbody th{font-size:var(--wn-subject-name-size,var(--wn-font))}
+.wn-rtl .wn-task{font-family:var(--wn-urdu-font,"Jameel Noori Nastaleeq"),"Jameel Noori Nastaleeq","Noto Nastaliq Urdu",serif}

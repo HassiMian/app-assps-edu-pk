@@ -28,7 +28,6 @@ export function shortSourceStatement(text,weekIndex,weekCount){
  let chosen=pieces[index]
  // Never invent a lesson absent in the original list; proposed distribution
  // is clearly flagged by source proof state in the UI.
- if(chosen.length>93)chosen=chosen.slice(0,90)+'…'
  return chosen
 }
 export function planWeekRows(candidates,klass,week,options={}){
@@ -68,7 +67,6 @@ export function planWeekRows(candidates,klass,week,options={}){
   const page=study[0]?.page||null
   if(!task&&compiled.mode==='IMAGE_REVIEW_REQUIRED')task='Review original image before writing a weekly task.'
   if(!task)task='No source lesson in this week. Review syllabus coverage.'
-  if(task.length>115)task=task.slice(0,112)+'…'
   rows.push({id:candidate.candidate_key,subject:candidate.source_subject_label,task,
    page,sourceStatus,assessments,activities,flags,originalSourceIds:candidate.source_submissions||[]})
   sourceMeta.push({id:candidate.candidate_key,warnings:compiled.warnings})
@@ -77,7 +75,7 @@ export function planWeekRows(candidates,klass,week,options={}){
 }
 export function notebookModel({candidates,klass,week,options,edits,subjects}){
  const payload=planWeekRows(candidates,klass,week,options)
- return payload.rows.filter(x=>subjects?.length?subjects.includes(x.id):true).map(x=>({
+ return payload.rows.filter(x=>subjects===undefined||subjects===null?true:subjects.includes(x.id)).map(x=>({
   ...x,task:typeof edits?.[x.id]==='string'?edits[x.id]:x.task
  }))
 }
