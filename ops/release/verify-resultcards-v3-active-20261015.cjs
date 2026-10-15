@@ -9,7 +9,7 @@ function inspect(dist){
  const contents=fs.readFileSync(chunk,'utf8')
  const required=[
   'include_subjects','missing_configured_subject','DRAFT RESULT',
-  'AWAITING ACADEMIC APPROVAL','__asspsValidatedResultPrint',
+  'Verify before final print','__asspsValidatedResultPrint',
   'Subject roster not verified','STUDENT (OPTIONAL)','scholars-archive'
  ]
  const missing=required.filter(k=>!contents.includes(k))

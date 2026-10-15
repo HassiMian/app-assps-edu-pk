@@ -90,10 +90,8 @@ function BaseTemplate({ data, templateClass, children }) {
  return (
  <section className={`result-card-a4 ${data.options.orientation === 'landscape' ? 'landscape' : ''} ${templateClass}${dense || ultraDense ? ' premium-dense' : ''}${ultraDense ? ' premium-ultra-dense' : ''}${multiTerm ? ' premium-multi-term' : ''}`}>
 
- {data.academicIntegrity && <div className={'rc-academic-state '+(data.academicIntegrity.status==='DRAFT'?'rc-academic-state-draft':'rc-academic-state-review')}>
-   {data.academicIntegrity.status==='DRAFT'
-     ? 'DRAFT RESULT · Pending / unverified subject records · Not approved'
-     : 'AWAITING ACADEMIC APPROVAL · Verify before final publication'}
+ {data.academicIntegrity?.status==='DRAFT' && <div className="rc-academic-state rc-academic-state-draft">
+   DRAFT RESULT · Missing / unverified subject records · Verify before final print
  </div>}
  {children}
  </section>
