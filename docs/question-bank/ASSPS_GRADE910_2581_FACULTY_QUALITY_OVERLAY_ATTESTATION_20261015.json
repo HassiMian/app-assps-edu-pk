@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "assps-grade910-public-safe-private-teacher-priority-custody-v1",
+  "sourceOriginals": 2581,
+  "privateFacultyQuestions": 2580,
+  "reviewGroups": 56,
+  "heldIncompleteOriginal": "X-CHEM-C23-L01",
+  "originalRiskDocketSha256": "b97a49d8174e2d550e65ecbb74dabf4de46713f4dc9d6764dcc870617f8858b6",
+  "privatePrioritySha256": "d0737b5b0c543fc227d48ab1fdd1818b9e3d15a0e5e5ed2e4d1b0179f7f29101",
+  "teacherReviewed": 0,
+  "schoolBooksAdoptedAuthenticated": 0,
+  "academicallyApproved": 0,
+  "published": 0,
+  "publicationStatus": "HOLD_PENDING_AUTHENTICATED_HUMAN_EVIDENCE"
+}

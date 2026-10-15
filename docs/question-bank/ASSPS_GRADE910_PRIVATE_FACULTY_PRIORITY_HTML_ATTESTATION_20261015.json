@@ -1,0 +1,12 @@
+{
+  "schema": "assps-grade910-private-faculty-offline-blind-priority-index-v1",
+  "originalResearchQuestions": 2581,
+  "blindReviewCandidates": 2580,
+  "privateReviewGroups": 56,
+  "privateSourcePrioritySha256": "d0737b5b0c543fc227d48ab1fdd1818b9e3d15a0e5e5ed2e4d1b0179f7f29101",
+  "offlineBlindIndexSha256": "77541afe5054194c93cd3b3b5f739fbdb05fcb3deca43e23bda3243df2bdc6cc",
+  "reviewedByRealSubjectTeacher": 0,
+  "academicallyApproved": 0,
+  "published": 0,
+  "policy": "OFFLINE_PRIVATE_UNAPPROVED_BLIND_QA_ONLY_NO_SOURCE_ANSWER_PUBLICATION"
+}
