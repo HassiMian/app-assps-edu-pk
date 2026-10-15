@@ -1,0 +1,35 @@
+'use strict'
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs')
+const {assess,OUT}=require('../qbank/attest-grade910-three-biology-concept-check-and-release-partition.cjs')
+test('three user-screened concepts are source and revision bound, bilingual MCQ key aligned',()=>{
+ const a=assess()
+ assert.equal(a.screenCount,3)
+ assert.equal(a.sourceResearchUniverse,2581)
+ assert.equal(a.results.length,3)
+ assert.equal(new Set(a.results.map(q=>q.originalQuestionId)).size,3)
+ assert.equal(a.generalBiologyAnswerConceptsPass,3)
+ for(const row of a.results){
+  assert.match(row.originalQuestionRevisionSha256,/^[a-f0-9]{64}$/)
+  assert.equal(row.enUrStoredAnswerConsistencyChecked,true)
+  assert.equal(row.authorAiGeneralBiologyConceptCheck,'PASS_GENERAL_BIOLOGY_CONCEPT_ONLY')
+  assert.equal(row.principalChatFeedback,'SELF_REPORTED_SAHI_UNAUTHENTICATED')
+ }
+})
+test('AI and chat responses cannot become genuine staff approval or bypass school textbook/2027 applicability',()=>{
+ const a=assess()
+ assert.equal(a.academicApprovedCount,0);assert.equal(a.verifiedPublishedCount,0)
+ assert.equal(a.separateReviewFacts.humanIndependentAnswerCheckVerified,false)
+ assert.equal(a.separateReviewFacts.printedEditionAndPageExactSchoolAdoptionVerified,false)
+ assert.equal(a.separateReviewFacts.applicable2027AnnualBoardEvidenceVerified,false)
+ assert.ok(a.results.every(q=>!q.paperStudioAcademicallyVerifiedSelectable&&!q.published))
+ assert.equal(a.releasePartition.researchedCandidatesAutomaticallyPublished,0)
+ assert.equal(a.releasePartition.currentProductionAcademicSeedAuthorized,false)
+ assert.equal(a.releasePartition.currentProductionStudentMarkOrExistingPaperMutationAuthorized,false)
+})
+test('public-safe release partition remains exact and contains no counterfeit teacher attestation',()=>{
+ const a=assess(),saved=JSON.parse(fs.readFileSync(OUT))
+ assert.deepEqual(saved,a)
+ for(const q of saved.results)for(const key of ['teacherName','principalSignature','signedAt','textbookPageAttested','academicApprovalVerified'])
+  assert.equal(Object.hasOwn(q,key),false)
+ assert.equal(saved.releasePartition.liveReleaseCertification,'NOT_CERTIFIED_BY_ACADEMIC_MASTER')
+})
