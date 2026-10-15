@@ -607,7 +607,9 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  : SUBJECTS.find(s=>s.id===subjectId)
  
  const isUserAuthoredPaper = Boolean(paper?.userAuthored || loadedPaper?.userAuthored || overrideConfig?.userAuthored)
- const isOfficialPaper = !isUserAuthoredPaper && Boolean(loadedPaper?.documentFormat === 'pts-native-v13' || loadedPaper?.documentFormat === 'official-v12' || loadedPaper?.official_section?.length)
+ const hasOfficialSection = Boolean(paper?.official_section?.length || loadedPaper?.official_section?.length)
+ const isOfficialPaper = !isUserAuthoredPaper && Boolean(loadedPaper?.documentFormat === 'pts-native-v13' || loadedPaper?.documentFormat === 'official-v12' || hasOfficialSection)
+ const isOfficialOrHasOfficial = isOfficialPaper || hasOfficialSection
  let questionTypes = getFilteredQuestionTypes(subject?.name || '')
  // Ensure that any type with active questions is always shown, even if filtered out by subject
  if (paper && allQuestionTypes) {
@@ -788,9 +790,9 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   official_section: paper.official_section || loadedPaper?.official_section || [],
   printReadiness: marksAuthorityEdited ? 'READY' : loadedPaper?.printReadiness,
  }
- const marksLedger = isOfficialPaper ? buildMarksLedger(liveAuditPaper) : { headerTotal:Number(headerTotalMarks || 0), questionTotal:0, balanced:false, difference:0 }
- const draftQuality = isOfficialPaper ? validatePaperDraft(liveAuditPaper) : { ready:true, issues:[], errorCount:0, warningCount:0, academicQuestionCount:0 }
- const printAudit = isOfficialPaper ? auditOfficialPaperForPrint(liveAuditPaper) : { blocked:false, issues:[] }
+ const marksLedger = isOfficialOrHasOfficial ? buildMarksLedger(liveAuditPaper) : { headerTotal:Number(headerTotalMarks || 0), questionTotal:0, balanced:false, difference:0 }
+ const draftQuality = isOfficialOrHasOfficial ? validatePaperDraft(liveAuditPaper) : { ready:true, issues:[], errorCount:0, warningCount:0, academicQuestionCount:0 }
+ const printAudit = isOfficialOrHasOfficial ? auditOfficialPaperForPrint(liveAuditPaper) : { blocked:false, issues:[] }
  const templateVariant = ({
   academic:'academic', modern:'modern', emerald:'emerald', gold:'gold', coral:'coral', violet:'violet', minimal:'minimal', editorial:'editorial',
   // Compatibility aliases keep previously saved papers opening without migration.
@@ -1002,8 +1004,12 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
    const sections=[...(current.official_section||[])]
    const ordinal=sections.filter(s=>s.layoutPreset!=='marker').length+1
    const officialSection=createGrade910ApprovedSection(question,ordinal)
+   const nextSections=[...sections,officialSection]
+   const newQuestionTotal = nextSections.reduce((sum, s) => sum + (Number(s.marks) || 0), 0)
+   setHeaderTotalMarks(newQuestionTotal)
+   setMarksAuthorityEdited(true)
    return {...current,[question.type]:[...items,question],[question.type+'_marks']:question.marks,
-    official_section:[...sections,officialSection]}
+    official_section:nextSections}
   })
  }
  async function doSave(options = {}) {
@@ -1484,10 +1490,10 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  </div>
  <div style={{ display:'grid', gridTemplateColumns:'2fr 1fr auto', gap:10, marginTop:8, alignItems:'end' }}>
   <label style={{ fontSize:11, color:D.muted, fontWeight:700 }}>Campus / Address<input value={headerAddress} onChange={e=>setHeaderAddress(e.target.value)} placeholder={paperSettings?.address || 'Sharif Chowk, Rayya Khas, Narowal'} style={{...tinp,width:'100%',marginTop:4}} /></label>
-  {isOfficialPaper && <div data-marks-ledger style={{ border:`1px solid ${marksLedger.balanced?'rgba(48,209,88,.45)':'rgba(255,159,10,.55)'}`, borderRadius:8, padding:'7px 9px', background:marksLedger.balanced?'rgba(48,209,88,.08)':'rgba(255,159,10,.08)', fontFamily:'Arial,sans-serif' }}><div style={{fontSize:10,color:D.muted,fontWeight:800}}>MARKS LEDGER</div><div style={{fontSize:12,color:marksLedger.balanced?D.green:D.orange,fontWeight:900}}>Header {marksLedger.headerTotal || 0} / Questions {marksLedger.questionTotal || 0}</div></div>}
-  {isOfficialPaper && <button type="button" disabled={!marksLedger.questionTotal || marksLedger.headerTotal===marksLedger.questionTotal} onClick={()=>{setHeaderTotalMarks(marksLedger.questionTotal);setMarksAuthorityEdited(true)}} style={{...tinp,cursor:'pointer',fontWeight:800,color:D.gold,minWidth:128}}>Use Question Total</button>}
+  {isOfficialOrHasOfficial && <div data-marks-ledger style={{ border:`1px solid ${marksLedger.balanced?'rgba(48,209,88,.45)':'rgba(255,159,10,.55)'}`, borderRadius:8, padding:'7px 9px', background:marksLedger.balanced?'rgba(48,209,88,.08)':'rgba(255,159,10,.08)', fontFamily:'Arial,sans-serif' }}><div style={{fontSize:10,color:D.muted,fontWeight:800}}>MARKS LEDGER</div><div style={{fontSize:12,color:marksLedger.balanced?D.green:D.orange,fontWeight:900}}>Header {marksLedger.headerTotal || 0} / Questions {marksLedger.questionTotal || 0}</div></div>}
+  {isOfficialOrHasOfficial && <button type="button" disabled={!marksLedger.questionTotal || marksLedger.headerTotal===marksLedger.questionTotal} onClick={()=>{setHeaderTotalMarks(marksLedger.questionTotal);setMarksAuthorityEdited(true)}} style={{...tinp,cursor:'pointer',fontWeight:800,color:D.gold,minWidth:128}}>Use Question Total</button>}
  </div>
- {isOfficialPaper && <div style={{ display:'grid', gridTemplateColumns:'minmax(0,1fr) auto', gap:10, marginTop:8, alignItems:'start' }}>
+ {isOfficialOrHasOfficial && <div style={{ display:'grid', gridTemplateColumns:'minmax(0,1fr) auto', gap:10, marginTop:8, alignItems:'start' }}>
   <div data-paper-quality-gate style={{ border:`1px solid ${draftQuality.errorCount?'rgba(255,55,95,.55)':draftQuality.warningCount?'rgba(255,159,10,.55)':'rgba(48,209,88,.45)'}`, borderRadius:8, padding:'8px 10px', background:draftQuality.errorCount?'rgba(255,55,95,.08)':draftQuality.warningCount?'rgba(255,159,10,.08)':'rgba(48,209,88,.08)', fontFamily:'Arial,sans-serif' }}>
    <div style={{ display:'flex', gap:8, alignItems:'center', flexWrap:'wrap' }}><b style={{ fontSize:11, color:draftQuality.errorCount?D.red:draftQuality.warningCount?D.orange:D.green }}>PAPER QUALITY GATE</b><span style={{ fontSize:11, color:D.silver }}>{draftQuality.academicQuestionCount} questions · {draftQuality.errorCount} errors · {draftQuality.warningCount} warnings</span></div>
    {draftQuality.issues.length > 0 && <div style={{ marginTop:5, fontSize:10, color:D.muted }}>{draftQuality.issues.slice(0,4).map(issue=><div key={`${issue.code}-${issue.question||0}-${issue.item||0}`}>• {issue.text}</div>)}{draftQuality.issues.length>4&&<div>• +{draftQuality.issues.length-4} more issue(s)</div>}</div>}
@@ -2165,7 +2171,8 @@ function paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp=0, wordSp=0 }) {
 
 //  Template 1: AS Classic (exact PDF replica) 
 function ClassicTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
- const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
+ const officialSectionSum = paper.official_section?.length ? paper.official_section.reduce((sum, s) => sum + (Number(s.marks) || Number(s.nodes?.[0]?.operationalNodeMarks) || 0), 0) : 0
+ const total = officialSectionSum > 0 ? (Number(cfg.totalMarks) === officialSectionSum || !Number(cfg.totalMarks) || Number(cfg.totalMarks) === 1 ? officialSectionSum : Number(cfg.totalMarks)) : (Number(cfg.totalMarks) || questionTypes.reduce((sum, t) => t.value === 'official_section' ? sum : sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0))
  const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
  const editStyle = editMode ? { outline:'1.5px dashed #cc0000', borderRadius:2, minWidth:20, display:'inline-block' } : {}
@@ -2232,7 +2239,8 @@ function ClassicTemplate({ paper, cfg, printBubble, printAns, half, editMode=fal
 
 //  Template 2: Modern Pro 
 export function ModernTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
- const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
+ const officialSectionSum = paper.official_section?.length ? paper.official_section.reduce((sum, s) => sum + (Number(s.marks) || Number(s.nodes?.[0]?.operationalNodeMarks) || 0), 0) : 0
+ const total = officialSectionSum > 0 ? (Number(cfg.totalMarks) === officialSectionSum || !Number(cfg.totalMarks) || Number(cfg.totalMarks) === 1 ? officialSectionSum : Number(cfg.totalMarks)) : (Number(cfg.totalMarks) || questionTypes.reduce((sum, t) => t.value === 'official_section' ? sum : sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0))
  const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
  const editStyle = editMode ? { outline:'1.5px dashed #1565c0', borderRadius:2, minWidth:20, display:'inline-block' } : {}
@@ -2280,7 +2288,8 @@ export function ModernTemplate({ paper, cfg, printBubble, printAns, half, editMo
 
 //  Template 3: Elite Premium 
 export function EliteTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
- const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
+ const officialSectionSum = paper.official_section?.length ? paper.official_section.reduce((sum, s) => sum + (Number(s.marks) || Number(s.nodes?.[0]?.operationalNodeMarks) || 0), 0) : 0
+ const total = officialSectionSum > 0 ? (Number(cfg.totalMarks) === officialSectionSum || !Number(cfg.totalMarks) || Number(cfg.totalMarks) === 1 ? officialSectionSum : Number(cfg.totalMarks)) : (Number(cfg.totalMarks) || questionTypes.reduce((sum, t) => t.value === 'official_section' ? sum : sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0))
  const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
  const editStyle = editMode ? { outline:'1.5px dashed #B8860B', borderRadius:2, minWidth:20, display:'inline-block' } : {}
@@ -2329,7 +2338,8 @@ export function EliteTemplate({ paper, cfg, printBubble, printAns, half, editMod
 
 //  Template 4: Emerald Green 
 export function EmeraldTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
- const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
+ const officialSectionSum = paper.official_section?.length ? paper.official_section.reduce((sum, s) => sum + (Number(s.marks) || Number(s.nodes?.[0]?.operationalNodeMarks) || 0), 0) : 0
+ const total = officialSectionSum > 0 ? (Number(cfg.totalMarks) === officialSectionSum || !Number(cfg.totalMarks) || Number(cfg.totalMarks) === 1 ? officialSectionSum : Number(cfg.totalMarks)) : (Number(cfg.totalMarks) || questionTypes.reduce((sum, t) => t.value === 'official_section' ? sum : sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0))
  const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
  const fs = (half ? 0.82 : 1) * (baseFontSz / 11)
@@ -2382,7 +2392,8 @@ function PremiumPaperTemplate({ variant='academic', paper, cfg, printBubble, pri
  const theme = PREMIUM_PAPER_THEMES[variant] || PREMIUM_PAPER_THEMES.academic
  const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
- const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, type) => sum + (paper[type.value]?.length || 0) * (paper[`${type.value}_marks`] || type.marks || 1), 0)
+ const officialSectionSum = paper.official_section?.length ? paper.official_section.reduce((sum, s) => sum + (Number(s.marks) || Number(s.nodes?.[0]?.operationalNodeMarks) || 0), 0) : 0
+ const total = officialSectionSum > 0 ? (Number(cfg.totalMarks) === officialSectionSum || !Number(cfg.totalMarks) || Number(cfg.totalMarks) === 1 ? officialSectionSum : Number(cfg.totalMarks)) : (Number(cfg.totalMarks) || questionTypes.reduce((sum, t) => t.value === 'official_section' ? sum : sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0))
  const fs = (half ? 0.82 : 1) * (baseFontSz / 11)
  const qFs = baseFontSz * (isUrdu ? 1.6 : 4 / 3) * (half ? 0.82 : 1)
  const contentFont = resolvePaperFontFamily({ isUrdu, fontFamily, englishFallback:"'Times New Roman', Times, serif" })
@@ -2453,7 +2464,8 @@ export function AcademicClassicTemplate(props) {
 
 //  Template 5: Docx Assessment 
 export function DocxAssessmentTemplate({ paper, cfg, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, qBorderStyle='none', showUrduHeaders=false, questionTypes=[] , pbStyle, onQuestionChange }) {
- const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
+ const officialSectionSum = paper.official_section?.length ? paper.official_section.reduce((sum, s) => sum + (Number(s.marks) || Number(s.nodes?.[0]?.operationalNodeMarks) || 0), 0) : 0
+ const total = officialSectionSum > 0 ? (Number(cfg.totalMarks) === officialSectionSum || !Number(cfg.totalMarks) || Number(cfg.totalMarks) === 1 ? officialSectionSum : Number(cfg.totalMarks)) : (Number(cfg.totalMarks) || questionTypes.reduce((sum, t) => t.value === 'official_section' ? sum : sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0))
  const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
  const fs = (half ? 0.82 : 1) * (baseFontSz / 11)
