@@ -78,3 +78,6 @@
 .result-preview-panel .premium-card .rc-marks-table td:first-child{font-size:9.1pt!important;font-weight:700!important}
 .result-preview-panel .premium-card .rc-marks-table td{font-size:8.8pt!important}
 .result-preview-panel .premium-card .rc-marks-table th{font-size:7.7pt!important}
+
+.rc-academic-state{position:absolute;right:8mm;top:1.6mm;z-index:3;font:700 6.4pt Arial,sans-serif;letter-spacing:.15px;border-radius:2mm;padding:.6mm 1.7mm;white-space:nowrap;background:#eef3f4;color:#365766;border:.2mm solid #b4c9ca}
+.rc-academic-state-draft{background:#fff4e3;color:#7b5022;border-color:#e1ba75}

@@ -1,4 +1,5 @@
 import { resolveResultStudentClass } from './resultStudentIdentity.js'
+import {findGradeForPercent} from './resultCardIntegrityGate.js'
 import { interpretSubjectResult } from './resultSubjectState.js'
 import { inferExamTermKey, resolveResultPrintOptions } from './resultPrintPlanning'
 import { RESULT_TEMPLATES as LEGACY_TEMPLATES, DEFAULT_RESULT_OPTIONS, buildResultCardData as legacyBuilder } from './resultCardTemplates'
@@ -28,7 +29,7 @@ export const termFields = [
 
 export function gradeLabel(pct, bands = []) {
  const value = Math.max(0, Math.min(100, Number(pct) || 0))
- const match = (Array.isArray(bands) ? bands : []).find(row => value >= Number(row.from) && value <= Number(row.to))
+ const match = findGradeForPercent(value,bands)
  return match?.label || ''
 }
 
