@@ -7,6 +7,10 @@ on:
       - "al-siddique-backend/src/routes/assessmentStudioRoutes.js"
       - "al-siddique-backend/src/services/grade910PaperWorkspaceReleaseGuard.js"
       - "al-siddique-backend/src/tests/grade910-institutional-draft-validation-contract.test.js"
+      - "al-siddique-backend/src/routes/opsRoutes.js"
+      - "al-siddique-backend/src/services/ai/**"
+      - "al-siddique-backend/src/package.json"
+      - "al-siddique-backend/src/package-lock.json"
       - "ops/release/check-lesson-planner-ui.py"
       - "ops/release/guarded-lesson-planner-rollout.py"
       - "ops/release/check-preserved-companion-features.py"
@@ -29,6 +33,10 @@ on:
       - "al-siddique-backend/src/routes/assessmentStudioRoutes.js"
       - "al-siddique-backend/src/services/grade910PaperWorkspaceReleaseGuard.js"
       - "al-siddique-backend/src/tests/grade910-institutional-draft-validation-contract.test.js"
+      - "al-siddique-backend/src/routes/opsRoutes.js"
+      - "al-siddique-backend/src/services/ai/**"
+      - "al-siddique-backend/src/package.json"
+      - "al-siddique-backend/src/package-lock.json"
       - "ops/release/check-lesson-planner-ui.py"
       - "ops/release/guarded-lesson-planner-rollout.py"
       - "ops/release/check-preserved-companion-features.py"
@@ -80,6 +88,14 @@ jobs:
           node --test al-siddique-frontend/src/Modules/Paper-Generator/tests/dailyServerPayload.test.mjs
           python3 -m unittest discover -s ops/release/tests -p test_lesson_v4_subject_controls.py -v
           python3 -m unittest discover -s ops/release/tests -p test_lesson_v5_daily_controls.py -v
+      - name: Reproducible backend verifier dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+        working-directory: al-siddique-backend/src
+      - name: Fail closed on AI worker role, identity and Blue fallback
+        run: |
+          node services/ai/test-ai-queue-worker-isolation-20261014.js
+          node --test services/ai/test-ai-worker-import-boundary-20261015.cjs
+        working-directory: al-siddique-backend/src
       - name: Fail closed on Grade IX/X institutional draft and official-release boundary
         run: node al-siddique-backend/src/tests/grade910-institutional-draft-validation-contract.test.js
       - name: Keep printed marks balanced across English Urdu RTL and half A4

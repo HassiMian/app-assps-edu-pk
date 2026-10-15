@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { query } = require('../config/database')
+const { query: queryAiWorker } = require('../services/ai/aiQueueWorkerDatabase')
 const { protect, adminOnly } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
 const { getQueueStats, listQueueEvents } = require('../services/ai/paperAiQueue')
@@ -101,8 +102,8 @@ router.get('/diagnostics', protect, adminOnly, async (req, res) => {
       query(`SELECT COUNT(*)::int AS count FROM attendance${schoolFilter}`, schoolParams),
       query(`SELECT COUNT(*)::int AS count FROM notices${schoolFilter}`, schoolParams).catch((err) => { console.error('Diagnostics notices query failed:', err.message); return null }),
       query(`SELECT COUNT(*)::int AS count FROM admissions${schoolFilter}`, schoolParams).catch((err) => { console.error('Diagnostics admissions query failed:', err.message); return null }),
-      query(`SELECT COUNT(*)::int AS count FROM ai_queue_events WHERE created_at >= NOW() - INTERVAL '30 minutes'`).catch((err) => { console.error('Diagnostics AI activity query failed:', err.message); return null }),
-      query(`
+      queryAiWorker(`SELECT COUNT(*)::int AS count FROM ai_queue_events WHERE created_at >= NOW() - INTERVAL '30 minutes'`).catch((err) => { console.error('Diagnostics AI activity query failed:', err.message); return null }),
+      queryAiWorker(`
         SELECT
           COUNT(*) FILTER (WHERE event_type = 'job_completed')::int AS completed,
           COUNT(*) FILTER (WHERE event_type = 'job_failed')::int AS failed,
