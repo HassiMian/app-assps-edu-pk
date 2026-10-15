@@ -272,8 +272,23 @@ export function ResultCardTemplateExaminationDossier({ data }) {
  </BaseTemplate>
 }
 
+export function ResultCardTemplateScholarsArchive({ data }) {
+ return <BaseTemplate data={data} templateClass="premium-card premium-archive">
+  <div className="premium-archive-masthead"><span>ACADEMIC ARCHIVE / ASSPS</span><span>SESSION {data.result.session}</span></div>
+  <PremiumSchoolHeader data={data} title="Scholastic Achievement Record" />
+  <div className="premium-archive-section-label">01 / LEARNER IDENTITY</div>
+  <ResultStudentInfoBlock data={data} />
+  <div className="premium-archive-section-label">02 / SUBJECT PERFORMANCE</div>
+  <PremiumMarksTable data={data} />
+  <div className="premium-archive-section-label">03 / LEARNING PROGRESS</div>
+  <PremiumInsights data={data} />
+  <Remarks data={data} />
+  <ResultSignatureFooter data={data} />
+ </BaseTemplate>
+}
+
 export function ResultCardPreview({data}) {
- const premium = {'signature-editorial':ResultCardTemplateSignatureEditorial,'swiss-grid':ResultCardTemplateSwissGrid,'data-atelier':ResultCardTemplateDataAtelier,'regal-linework':ResultCardTemplateRegalLinework,'young-scholars':ResultCardTemplateYoungScholars,'academic-heritage':ResultCardTemplateAcademicHeritage,'airframe-geometry':ResultCardTemplateAirframeGeometry,'corporate-ledger':ResultCardTemplateCorporateLedger,'examination-dossier':ResultCardTemplateExaminationDossier}
+ const premium = {'signature-editorial':ResultCardTemplateSignatureEditorial,'swiss-grid':ResultCardTemplateSwissGrid,'data-atelier':ResultCardTemplateDataAtelier,'regal-linework':ResultCardTemplateRegalLinework,'young-scholars':ResultCardTemplateYoungScholars,'academic-heritage':ResultCardTemplateAcademicHeritage,'airframe-geometry':ResultCardTemplateAirframeGeometry,'corporate-ledger':ResultCardTemplateCorporateLedger,'examination-dossier':ResultCardTemplateExaminationDossier,'scholars-archive':ResultCardTemplateScholarsArchive}
  const Template = premium[data.options.template]
  return Template ? <Template data={{...data, options:{...data.options,includeCharts:true,orientation:'portrait'}}}/> : <LegacyPreview data={data}/>
 }
