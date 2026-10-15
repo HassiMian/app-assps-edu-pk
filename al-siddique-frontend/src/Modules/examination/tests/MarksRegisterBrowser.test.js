@@ -17,6 +17,7 @@ test('Marks Register shows zero, absent, print and edit route', {timeout:85000},
   {id:3,exam_id:9,student_id:102,student_name:'Sara',class:'9',section:'Girls',roll_number:'02',subject:'English',marks_obtained:null,total_marks:75,result_status:'ABSENT'}
  ]
  await context.route('**/api/exams/results*',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:rows})}))
+ await context.route('**/api/exams/results/**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:{revision_id:77,marks_obtained:45,grade:'F'}})}))
  await context.route('**/api/exams*',r=>{
   const isResult=new URL(r.request().url()).pathname.endsWith('/results')
   return r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:isResult?rows:[{id:9,name:'First Term 2026',session:'2026-27'}]})})
@@ -37,9 +38,13 @@ test('Marks Register shows zero, absent, print and edit route', {timeout:85000},
  assert.match(html,/Recorded Total/)
  await print.close()
  await page.getByRole('button',{name:'Edit'}).first().click()
- const target=await page.getByTestId('edit-destination').textContent()
- assert.match(target,/exam_id=9/)
- console.log('MARKS_REVIEW_ZERO_ABSENT_PRINT_EDIT_ROUTE_PASS')
+ const dialog=page.getByRole('dialog',{name:'Principal audited marks correction'})
+ await dialog.waitFor()
+ await dialog.locator('input[type="number"]').fill('44')
+ await dialog.locator('textarea').fill('Corrected after crosschecking original signed paper.')
+ await dialog.getByRole('button',{name:'Save Audited Revision'}).click()
+ await page.getByText(/Principal revision saved with audit receipt #77/).waitFor()
+ console.log('MARKS_REVIEW_ZERO_ABSENT_PRINT_AUDITED_EDIT_FORM_PASS')
 })
 
 test('school API 403 denial never prints any saved marks',{timeout:75000},async t=>{

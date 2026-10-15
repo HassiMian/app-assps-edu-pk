@@ -8,6 +8,7 @@ const { parseExactMarksNumber } = require('../services/examMarksInputValidation'
 const { validatePaperMaxima } = require('../services/examMarksSubjectMaximum')
 const { validateResultState } = require('../services/examResultStatus')
 const { selectGradeBand } = require('../services/gradeBandAssignment')
+const {reviseExamScore,RevisionError} = require('../services/examOfficialMarksRevision')
 
 const canManageExams = requireRoles('super_admin', 'admin', 'principal')
 const canWriteMarks = requireRoles('super_admin', 'admin', 'principal', 'teacher')
@@ -456,6 +457,26 @@ router.post('/results', protect, canWriteMarks, async (req, res) => {
     return res.status(500).json({ success: false, message: 'Results could not be saved.' })
   } finally {
     client.release()
+  }
+})
+
+// POST /api/exams/results/:resultId/revision
+// STRICTLY requires a real signed Principal/Admin session and a separately
+// provisioned signed-school append-only audit ledger. No teacher or AI edits.
+router.post('/results/:resultId/revision', protect, requireRoles('principal','admin'), async (req,res)=>{
+  try{
+    const schoolId=currentSchoolId(req)
+    const result=await reviseExamScore({
+      pool,applyTenantContext,actor:req.user,schoolId,
+      resultId:req.params.resultId,body:req.body
+    })
+    return res.status(200).json({success:true,data:result,code:'AUDITED_OFFICIAL_MARKS_REVISION_SAVED'})
+  }catch(err){
+    if(err instanceof RevisionError)
+      return res.status(err.status).json({success:false,code:err.code,message:'Revision was not saved. Review the current record and authorized school policy.'})
+    console.error('Audited exam marks revision failed:',err.message)
+    return res.status(503).json({success:false,code:'MARKS_REVISION_SERVICE_UNAVAILABLE',
+      message:'Official marks revision could not be certified. Existing marks are unchanged.'})
   }
 })
 

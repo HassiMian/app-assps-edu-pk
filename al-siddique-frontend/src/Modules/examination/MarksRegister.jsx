@@ -76,6 +76,12 @@ export default function MarksRegister(){
  const [sectionFilter,setSectionFilter]=useState('')
  const [subjectFilter,setSubjectFilter]=useState('')
  const [search,setSearch]=useState('')
+ const [editRecord,setEditRecord]=useState(null)
+ const [editValue,setEditValue]=useState('')
+ const [editReason,setEditReason]=useState('')
+ const [editError,setEditError]=useState('')
+ const [savingRevision,setSavingRevision]=useState(false)
+ const [revisionNotice,setRevisionNotice]=useState('')
  const request=useRef(0)
  const [refreshSeq,setRefreshSeq]=useState(0)
 
@@ -110,8 +116,39 @@ export default function MarksRegister(){
  const recorded=visible.filter(r=>scoreState(r)==='SCORED'&&numberOrNull(r.marks_obtained)!==null).length
  const zero=visible.filter(r=>scoreState(r)==='SCORED'&&numberOrNull(r.marks_obtained)===0).length
  const edit=(student,subject)=>{
-  const query=new URLSearchParams({exam_id:examId,class:classKey(student),subject})
-  navigate('/exams/marks?'+query.toString())
+  const record=student.marks.get(subject)
+  if(!record||numberOrNull(record.marks_obtained)===null||scoreState(record)!=='SCORED'){
+    const query=new URLSearchParams({exam_id:examId,class:classKey(student),subject})
+    navigate('/exams/marks?'+query.toString())
+    return
+  }
+  setEditRecord(record)
+  setEditValue(String(record.marks_obtained))
+  setEditReason('')
+  setEditError('')
+ }
+ const saveOfficialRevision=async()=>{
+  if(!editRecord||savingRevision)return
+  const next=numberOrNull(editValue)
+  const max=numberOrNull(editRecord.total_marks)
+  if(next===null||max===null||next<0||next>max){setEditError('Enter a valid mark between 0 and the original subject maximum.');return}
+  if(editReason.trim().length<12){setEditError('A clear Principal correction reason (at least 12 characters) is required.');return}
+  setSavingRevision(true);setEditError('')
+  try{
+   const response=await api.post('/api/exams/results/'+encodeURIComponent(editRecord.id)+'/revision',{
+    expected_marks:editRecord.marks_obtained,
+    expected_total_marks:editRecord.total_marks,
+    expected_grade:editRecord.grade??'',
+    proposed_marks:next,
+    reason:editReason.trim()
+   })
+   if(!response.data?.success||!response.data?.data?.revision_id)
+    throw Error('Audited revision receipt missing. Marks have not been confirmed.')
+   setRevisionNotice('Principal revision saved with audit receipt #'+response.data.data.revision_id+'. Reopen the sheet to verify.')
+   setEditRecord(null);setRefreshSeq(n=>n+1)
+  }catch(err){
+   setEditError(err.response?.data?.code||err.response?.data?.message||err.message||'Official revision unavailable. Existing marks are unchanged.')
+  }finally{setSavingRevision(false)}
  }
  const doPrint=()=>{
   if(!visible.length){setError('Select an exam with saved marks before printing.');return}
@@ -137,6 +174,7 @@ export default function MarksRegister(){
    <label>Student / roll #<div className="mr-search"><Search size={15}/><input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search saved entries"/></div></label>
    <button title="Refresh saved data" className="mr-icon" onClick={()=>setRefreshSeq(x=>x+1)} disabled={loading}><RefreshCw size={18}/></button>
   </div>
+  {revisionNotice&&<div className="mr-info" role="status"><ShieldCheck size={16}/>{revisionNotice}</div>}
   {error&&<div className="mr-error"><AlertCircle size={17}/>{error}</div>}
   <div className="mr-stats">
    <div><span>Saved records</span><strong>{visible.length}</strong></div>
@@ -158,5 +196,17 @@ export default function MarksRegister(){
    })}</tbody></table></div>}
   </div>
   <div className="mr-footer"><span>Missing subjects stay blank; they are never converted into zero. Existing saved scores remain protected.</span><button onClick={doPrint} disabled={!visible.length} className="mr-button mr-primary"><Printer size={15}/> Print / Save PDF</button></div>
+  {editRecord&&<div className="mr-modal-backdrop" role="presentation">
+   <section className="mr-modal" role="dialog" aria-modal="true" aria-label="Principal audited marks correction">
+    <span className="mr-eyebrow"><ShieldCheck size={14}/> PRINCIPAL AUDITED CORRECTION</span>
+    <h2>Revise saved marks</h2>
+    <p className="mr-modal-explain">Changing an official saved result requires Principal/Admin authentication, a reason and an immutable audit record. No unrelated student marks are changed.</p>
+    <div className="mr-modal-detail"><strong>{stableName(editRecord)}</strong><span>{editRecord.subject} · {editRecord.exam_name||currentExam?.name}</span></div>
+    <div className="mr-modal-values"><div><span>Currently saved</span><strong>{displayMark(editRecord)} / {editRecord.total_marks}</strong></div><div><span>Revised score</span><input type="number" value={editValue} min={0} max={numberOrNull(editRecord.total_marks)||100} step="0.01" onChange={e=>setEditValue(e.target.value)} /></div></div>
+    <label className="mr-modal-reason">Correction reason<textarea value={editReason} maxLength={500} placeholder="Reason for revision and source of verification (minimum 12 characters)" onChange={e=>setEditReason(e.target.value)}/></label>
+    {editError&&<div className="mr-error" role="alert">{editError}</div>}
+    <div className="mr-modal-actions"><button className="mr-button" disabled={savingRevision} onClick={()=>setEditRecord(null)}>Cancel</button><button className="mr-button mr-primary" disabled={savingRevision} onClick={saveOfficialRevision}>{savingRevision?'Saving audit…':'Save Audited Revision'}</button></div>
+   </section>
+  </div>}
  </main>
 }
