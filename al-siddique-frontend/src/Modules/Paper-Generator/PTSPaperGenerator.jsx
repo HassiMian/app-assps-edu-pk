@@ -979,11 +979,14 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
    await verifyWorkspaceApprovedImports(paper,scope,params=>
     api.get('/api/grade910-verified-picker/resolve-revision',{
      params,headers:{'Cache-Control':'no-store'}
+    }),params=>
+    api.get('/api/grade910-verified-picker/resolve-draft',{
+     params,headers:{'Cache-Control':'no-store'}
     })
    )
    return true
   }catch(error){
-   alert('ACADEMICALLY VERIFIED PAPER OPERATION BLOCKED — '+(error?.response?.data?.code||error.message))
+   alert('GRADE 9/10 QUESTION SOURCE VERIFICATION BLOCKED — '+(error?.response?.data?.code||error.message))
    return false
   }
  }

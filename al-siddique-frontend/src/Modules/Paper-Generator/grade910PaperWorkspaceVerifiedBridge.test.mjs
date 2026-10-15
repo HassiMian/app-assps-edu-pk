@@ -159,3 +159,105 @@ test('legacy and protected completed papers render identically when no verified 
  assert.deepEqual(result,unchanged)
  assert.deepEqual(result.official_section,unchanged.official_section)
 })
+
+
+const Z='0'.repeat(64)
+const advisoryDraft={
+ ...accepted,
+ originalQuestionId:'IX-BIO-INSTITUTIONAL-DRAFT-001',revision:1,
+ publicationGrantSha:Z,verifiedReviewPacketSha:Z,
+ academicallyApproved:false,academicallyVerified:false,
+ tier:'institutional-draft',pipelineState:'AI_ADVISORY',
+ paperPayload:{...accepted.paperPayload,
+  originalQuestionId:'IX-BIO-INSTITUTIONAL-DRAFT-001',questionRevision:1}
+}
+const draftEnvelope=record=>({data:{
+ success:true,source:'server-institutional-draft-question-bank',
+ academicallyApprovedOnly:false,tier:'institutional-draft',schoolScoped:true,
+ records:[record]
+}})
+test('institutional draft Save/Print uses draft resolver while preserving approved-only gate',async()=>{
+ const q=adaptVerifiedPaperRecord(advisoryDraft,scope)
+ const paper=withSection(q)
+ let approvedCalls=0,draftCalls=0
+ const result=await verifyWorkspaceApprovedImports(paper,scope,()=>{
+  approvedCalls++;throw Error('NEVER_PROMOTE_DRAFT')
+ },()=>{
+  draftCalls++;return draftEnvelope(advisoryDraft)
+ })
+ assert.equal(approvedCalls,0)
+ assert.equal(draftCalls,1)
+ assert.equal(result[0].tier,'institutional-draft')
+ assert.equal(q.verifiedAcademicRef.academicallyApproved,false)
+ assert.match(paper.official_section[0].heading,/Draft Candidate.*AI Advisory/)
+})
+test('institutional draft content editing may save/print, but remains marked advisory',async()=>{
+ const q=adaptVerifiedPaperRecord(advisoryDraft,scope)
+ const paper=withSection(q)
+ q.en='Teacher-adapted classroom question'
+ paper.official_section[0].content='1. Teacher-adapted classroom question'
+ const result=await verifyWorkspaceApprovedImports(paper,scope,()=>{throw Error('DO_NOT_USE_APPROVED')},
+  ()=>draftEnvelope(advisoryDraft))
+ assert.equal(result[0].tier,'institutional-draft')
+ assert.match(paper.official_section[0].heading,/Draft Candidate/)
+})
+test('draft source change or a forged official grant fails closed',async()=>{
+ const q=adaptVerifiedPaperRecord(advisoryDraft,scope),paper=withSection(q)
+ const modified=copy(advisoryDraft)
+ modified.paperPayload.finalQuestion.options[0].text='Altered source option'
+ await assert.rejects(
+  verifyWorkspaceApprovedImports(paper,scope,()=>{throw Error('NO_APPROVED')},()=>draftEnvelope(modified)),
+  /DRAFT_QUESTION_SOURCE_CHANGED/)
+ q.verifiedAcademicRef.academicallyApproved=true
+ await assert.rejects(
+  verifyWorkspaceApprovedImports(paper,scope,()=>{throw Error('NO_APPROVED')},()=>draftEnvelope(advisoryDraft)),
+  /DRAFT_CANNOT_CLAIM_OFFICIAL_APPROVAL/)
+})
+test('draft missing advisory heading must not print',async()=>{
+ const q=adaptVerifiedPaperRecord(advisoryDraft,scope),paper=withSection(q)
+ paper.official_section[0].heading='Official examination - misrepresented'
+ await assert.rejects(verifyWorkspaceApprovedImports(paper,scope,()=>{},()=>draftEnvelope(advisoryDraft)),
+  /DRAFT_ADVISORY_HEADING_REQUIRED/)
+})
+test('draft remains draft after canonical reconstruction even with edited classroom content',async()=>{
+ const q=adaptVerifiedPaperRecord(advisoryDraft,scope)
+ const section=createGrade910ApprovedSection(q,1)
+ q.en='Adapted question for classroom practice'
+ section.content='1. Adapted question for classroom practice'
+ const row={originalQuestionId:q.verifiedAcademicRef.originalQuestionId,
+  revision:q.verifiedAcademicRef.revision,questionSha:q.verifiedAcademicRef.questionSha,
+  answerSha:q.verifiedAcademicRef.answerSha,publicationGrantSha:q.verifiedAcademicRef.publicationGrantSha,
+  question:q,section}
+ const paper={canonicalDocument:{academicVerifiedSelections:{
+  schemaVersion:'assps-grade910-canonical-approved-revisions-v1',
+  alwaysRequireServerReverification:true,rows:[row]}},
+  mcq:[],short:[],long:[],official_section:[],mcq_marks:1}
+ const restored=rehydrateGrade910VerifiedPaper(paper)
+ assert.equal(restored.academicVerifiedRestoreError,undefined)
+ assert.equal(restored.mcq[0].en,'Adapted question for classroom practice')
+ assert.equal(restored.official_section[0].content,'1. Adapted question for classroom practice')
+ const result=await verifyWorkspaceApprovedImports(restored,scope,()=>{},()=>draftEnvelope(advisoryDraft))
+ assert.equal(result[0].tier,'institutional-draft')
+})
+
+
+test('mixed approved and advisory draft selections resolve through separate trust channels',async()=>{
+ const approved=adaptVerifiedPaperRecord(accepted,scope)
+ const draft=adaptVerifiedPaperRecord(advisoryDraft,scope)
+ const paper={mcq:[approved,draft],mcq_marks:1,official_section:[
+  createGrade910ApprovedSection(approved,1),createGrade910ApprovedSection(draft,2)]}
+ let approvedCalls=0,draftCalls=0
+ const result=await verifyWorkspaceApprovedImports(paper,scope,
+  ()=>{approvedCalls++;return envelope(accepted)},
+  ()=>{draftCalls++;return draftEnvelope(advisoryDraft)})
+ assert.equal(approvedCalls,1)
+ assert.equal(draftCalls,1)
+ assert.equal(result.length,2)
+ assert.equal(result.filter(x=>x.tier==='institutional-draft').length,1)
+})
+test('missing dedicated draft verification must fail closed, without using approved resolver',async()=>{
+ const draft=adaptVerifiedPaperRecord(advisoryDraft,scope)
+ const paper=withSection(draft)
+ await assert.rejects(verifyWorkspaceApprovedImports(paper,scope,()=>envelope(accepted)),
+  /DRAFT_RESOLVER_REQUIRED/)
+})

@@ -73,8 +73,8 @@ export default function Grade910WorkspaceApprovedInsert({grade,subject,onInsert}
  }
 
  return <details data-grade910-real-verified-paper-workspace style={{marginTop:10,padding:'10px 14px',border:'1px solid #40a8ce',borderRadius:10,background:'rgba(14,63,98,.9)',color:'#f4faff'}}>
-  <summary style={{fontWeight:800,cursor:'pointer'}}>Insert academically verified Grade {grade} question directly into this paper</summary>
-  <p style={{fontSize:12}}>Only independently reviewed, institutionally signed, non-revoked revisions published by the school server are eligible. Provisional drafts and local approval flags are excluded.</p>
+  <summary style={{fontWeight:800,cursor:'pointer'}}>Insert Grade {grade} question — Approved or Institutional Draft</summary>
+  <p style={{fontSize:12}}>Approved revisions require genuine signed faculty review. Institutional drafts may be edited and printed for classroom use, but remain explicitly unapproved and cannot enter official publication.</p>
   <p><a href="/academic/grade910-signoffs">Principal: upload your own adoption signature</a> · Teacher signatures remain pending; this does not authorize automatic academic publication. Institutional draft usage unblocked without falsifying academic approval.</p>
   <div style={{display:'flex',gap:10,alignItems:'end',flexWrap:'wrap'}}>
    <label style={{fontSize:12}}>Section (required for assigned teachers)<input style={{...ctrl,display:'block'}} value={section} maxLength={50} onChange={e=>setSection(e.target.value)} placeholder="e.g. Usman / Fatma"/></label>

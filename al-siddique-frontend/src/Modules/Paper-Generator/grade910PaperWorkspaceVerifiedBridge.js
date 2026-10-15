@@ -22,6 +22,34 @@ function checked(response, record, scope) {
  }
  return q
 }
+const UNAPPROVED_SHA = '0'.repeat(64)
+function isInstitutionalDraft(ref){ return ref?.tier === 'institutional-draft' }
+
+function checkedInstitutionalDraft(response, sourceRef, scope) {
+ const body=response?.data||response
+ if(body?.success!==true||body?.source!=='server-institutional-draft-question-bank'||
+    body?.academicallyApprovedOnly!==false||body?.tier!=='institutional-draft'||
+    body?.schoolScoped!==true||!Array.isArray(body.records)||body.records.length!==1)
+   throw Error('DRAFT_SOURCE_NOT_AUTHENTICATED')
+ const q=body.records[0]
+ if(!isInstitutionalDraft(sourceRef)||sourceRef.academicallyApproved!==false||
+    sourceRef.publicationGrantSha!==UNAPPROVED_SHA||
+    q.tier!=='institutional-draft'||q.academicallyApproved!==false||
+    q.academicallyVerified!==false||q.pipelineState!=='AI_ADVISORY'||
+    q.publicationGrantSha!==UNAPPROVED_SHA||q.verifiedReviewPacketSha!==UNAPPROVED_SHA||
+    q.originalQuestionId!==sourceRef.originalQuestionId||
+    Number(q.revision)!==Number(sourceRef.revision)||
+    q.questionSha!==sourceRef.questionSha||q.answerSha!==sourceRef.answerSha||
+    Number(q.grade)!==Number(scope.grade)||
+    clean(q.subject).toLowerCase()!==clean(scope.subject).toLowerCase())
+   throw Error('DRAFT_SOURCE_CHANGED_OR_FALSE_APPROVAL')
+ // Compare the COMPLETE server question snapshot, including MCQ options.
+ // Question/answer SHA alone is insufficient because options may change.
+ const currentSource=adaptVerifiedPaperRecord(q,scope)
+ if(currentSource.verifiedAcademicRef.contentSnapshot!==sourceRef.contentSnapshot)
+   throw Error('DRAFT_QUESTION_SOURCE_CHANGED')
+ return q
+}
 export function grade910ClassNumber(value){
  const raw=clean(value).toLowerCase().replace(/^class\s*/,'')
  if(/^(9|9th|ix|nine)(?:\s|$)/.test(raw))return 9
@@ -125,8 +153,8 @@ export function rehydrateGrade910VerifiedPaper(paper){
      ref.publicationGrantSha!==item.publicationGrantSha||
      sec.verifiedAcademicRef?.questionSha!==ref.questionSha||
      sec.verifiedAcademicRef?.originalQuestionId!==ref.originalQuestionId||
-     sec.verifiedRenderSnapshot!==verifiedRenderedSectionSnapshot(sec)||
-     ref.contentSnapshot!==verifiedQuestionContent(q))
+     (!isInstitutionalDraft(ref) && sec.verifiedRenderSnapshot!==verifiedRenderedSectionSnapshot(sec))||
+     (!isInstitutionalDraft(ref) && ref.contentSnapshot!==verifiedQuestionContent(q)))
     return {...copy,academicVerifiedRestoreError:'CANONICAL_SIGNED_REFERENCE_TAMPERED'}
   if(!['mcq','short','long'].includes(q.type))
     return {...copy,academicVerifiedRestoreError:'CANONICAL_VERIFIED_TYPE_INVALID'}
@@ -135,7 +163,7 @@ export function rehydrateGrade910VerifiedPaper(paper){
  }
  return copy
 }
-export async function verifyWorkspaceApprovedImports(paper,scope,resolve){
+export async function verifyWorkspaceApprovedImports(paper,scope,resolve,resolveDraft){
  if(paper?.academicVerifiedRestoreError)throw Error(paper.academicVerifiedRestoreError)
  const requests=[]
  const rendered=(paper?.official_section||[]).filter(s=>s?.verifiedAcademicRef)
@@ -155,31 +183,48 @@ export async function verifyWorkspaceApprovedImports(paper,scope,resolve){
  for(const section of rendered){
   const ref=section.verifiedAcademicRef
   const item=embedded.find(q=>q.verifiedAcademicRef?.originalQuestionId===ref.originalQuestionId&&q.verifiedAcademicRef?.revision===ref.revision)
-  if(!item||!section.verifiedRenderSnapshot||section.verifiedRenderSnapshot!==verifiedRenderedSectionSnapshot(section)||
-     Number(section.marks)!==Number(item.marks)||section.layoutPreset!==item.type)
+  const draft=isInstitutionalDraft(ref)
+  if(!item||section.layoutPreset!==item.type||
+     (!draft && (!section.verifiedRenderSnapshot||
+       section.verifiedRenderSnapshot!==verifiedRenderedSectionSnapshot(section)||
+       Number(section.marks)!==Number(item.marks))))
    throw Error('VERIFIED_PAPER_RENDERED_CONTENT_TAMPERED')
+  if(draft && !(/Draft Candidate.*AI Advisory/i.test(clean(section.heading))||
+                 /مسودہ/.test(clean(section.heading))))
+   throw Error('DRAFT_ADVISORY_HEADING_REQUIRED')
  }
  for(const type of ['mcq','short','long']){
   for(const q of paper?.[type]||[]){
    if(!q.verifiedAcademicRef)continue
    const ref=q.verifiedAcademicRef
-   if(q.type!==type||!ref.contentSnapshot||ref.contentSnapshot!==verifiedQuestionContent(q))
+   const draft=isInstitutionalDraft(ref)
+   if(q.type!==type||!ref.contentSnapshot||
+      (!draft && ref.contentSnapshot!==verifiedQuestionContent(q)))
     throw Error('VERIFIED_QUESTION_EDITED_REQUIRES_NEW_INDEPENDENT_REVIEW')
-   const sectionMarks=Number(paper?.[type+'_marks'])
-   if(Number.isFinite(sectionMarks)&&sectionMarks>0&&sectionMarks!==Number(q.marks))
-    throw Error('VERIFIED_SECTION_MARKS_CHANGED_REQUIRES_REVIEW')
+   if(draft) {
+    if(ref.academicallyApproved!==false||ref.publicationGrantSha!==UNAPPROVED_SHA||
+       !HASH.test(clean(ref.questionSha))||!HASH.test(clean(ref.answerSha)))
+      throw Error('DRAFT_CANNOT_CLAIM_OFFICIAL_APPROVAL')
+   } else {
+    const sectionMarks=Number(paper?.[type+'_marks'])
+    if(Number.isFinite(sectionMarks)&&sectionMarks>0&&sectionMarks!==Number(q.marks))
+     throw Error('VERIFIED_SECTION_MARKS_CHANGED_REQUIRES_REVIEW')
+   }
    if(Number(ref.grade)!==Number(scope.grade)||
      clean(ref.subject).toLowerCase()!==clean(scope.subject).toLowerCase())
     throw Error('VERIFIED_QUESTION_DIFFERENT_GRADE_OR_SUBJECT')
-   const raw=await resolve({
+   const params={
     grade:Number(scope.grade),subject:clean(scope.subject),section:clean(ref.section||scope.section),
     originalQuestionId:ref.originalQuestionId,revision:ref.revision,questionSha:ref.questionSha
-   })
-   const published=checked(raw,ref,scope)
-   if(published.paperPayload?.finalQuestion?.type!==q.type)
+   }
+   if(draft && typeof resolveDraft!=='function')throw Error('DRAFT_RESOLVER_REQUIRED')
+   const raw=await (draft?resolveDraft:resolve)(params)
+   const source=draft?checkedInstitutionalDraft(raw,ref,scope):checked(raw,ref,scope)
+   if(source.paperPayload?.finalQuestion?.type!==q.type)
     throw Error('VERIFIED_QUESTION_TYPE_CHANGED')
    requests.push({id:ref.originalQuestionId,revision:ref.revision,
-    questionSha:ref.questionSha,answerSha:ref.answerSha,grantSha:ref.publicationGrantSha})
+    questionSha:ref.questionSha,answerSha:ref.answerSha,grantSha:ref.publicationGrantSha,
+    ...(draft?{tier:'institutional-draft'}:{})})
   }
  }
  return requests
