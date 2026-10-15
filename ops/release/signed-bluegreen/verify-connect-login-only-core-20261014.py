@@ -18,10 +18,10 @@ from datetime import datetime, timezone, timedelta
 ROOT=Path(__file__).resolve().parents[3]
 TRUST=Path('/etc/assps/release-evidence-ed25519.pub')
 RECEIPTS=Path('/etc/assps/connect-login-precutover-core-receipts.json')
-BACKUP=Path('/root/assps-release-backups/offsite-staging-20261015/apexos-latest-fullacl.dump')
-ROLLBACK=Path('/root/assps-release-backups/core-login-blue-artifacts-20261014T1855Z/apex-connect-blue-and-nginx.tgz')
-APPROVED_BACKUP_SHA256='6c9bfb8b1c06680c4eca6852fd7a903e0349a9539d0d502b46b496ac390eb445'
-APPROVED_BLUE_ARCHIVE_SHA256='950f6c7449ae0f5ad4947518caf8bec8b40cad0126df8d951ab8766a721cfc7c'
+BACKUP=Path('/root/assps-release-backups/core-login-ond-post-worker-20261015/apexos-full-current.dump')
+ROLLBACK=Path('/root/assps-release-backups/connect-current-ond-blue-20261015T0209Z/current-next-nginx-blue.tar.zst')
+APPROVED_BACKUP_SHA256='a989b0ef674014109f1f30108a56e9fe4555027712ede8aaed9f82a397f7169a'
+APPROVED_BLUE_ARCHIVE_SHA256='844430b88e1b12906ef00945f8a382a69905f5a0a05727e35e0729452466947e'
 
 CATALOG=ROOT/'ops/release/signed-bluegreen/audit-current-signed-catalog-20261014.py'
 MARKS=ROOT/'ops/release/exam9-status-20261013/verify_exam9_active_roster_coverage_20261014.py'
@@ -323,7 +323,7 @@ def current_facts(release_id,sha,build):
     try:
         st=ROLLBACK.stat();rollback=st.st_size>5000000 and (st.st_mode&0o077)==0
         if rollback:
-            rc,_=run(['tar','-tzf',str(ROLLBACK)],timeout=25)
+            rc,_=run(['tar','--use-compress-program=zstd','-tf',str(ROLLBACK)],timeout=45)
             rollback=rc==0
             if rollback:
                 with ROLLBACK.open('rb') as stream:
