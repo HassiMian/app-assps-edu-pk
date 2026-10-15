@@ -83,6 +83,39 @@ class JointTests(unittest.TestCase):
         self.assertEqual(r['technical_candidate_status'],'PASS')
         self.assertIn('public_diary_healthy',r['failure_reasons'])
 
+    def test_diary_only_public_fix_is_not_full_recovery(self):
+        def partial_public(command, **kwargs):
+            string = ' '.join(command)
+            if str(self.live) in string and 'check-lesson-planner-ui' in string:
+                return {'result':'FAIL','pass':False}, 2
+            if str(self.live) in string and 'check-preserved-companion' in string:
+                return {'result':'HOLD','public_release_authorized':False}, 2
+            return self.fake_json(command, **kwargs)
+        with patch.object(joint, 'run_json', side_effect=partial_public):
+            with patch.object(joint, 'run_source_test', return_value=(True,13)):
+                with patch.object(joint.subprocess, 'run', side_effect=self.fake_run):
+                    r=joint.check(self.args)
+        self.assertTrue(r['checks']['public_diary_healthy'])
+        self.assertFalse(r['checks']['public_lesson_planner_healthy'])
+        self.assertFalse(r['checks']['public_early_years_companion_healthy'])
+        self.assertFalse(r['public_frontend_fully_recovered'])
+        self.assertEqual(r['technical_candidate_status'], 'PASS')
+        self.assertFalse(r['production_release_authorized'])
+
+    def test_wrong_active_nginx_root_fails_closed(self):
+        config = Path(self.temp.name) / 'nginx-site.conf'
+        config.write_text('server { root /var/www/stale-release; }\n'
+                          'root /var/www/other-stale;\n')
+        self.args.nginx_site_config = config
+        r = self.check()
+        self.assertFalse(r['checks']['real_nginx_root_matches_exact_live_target'])
+        self.assertEqual(r['technical_candidate_status'], 'HOLD')
+
+    def test_missing_nginx_site_file_fails_closed(self):
+        self.args.nginx_site_config = Path(self.temp.name) / 'nonexistent.conf'
+        r = self.check()
+        self.assertEqual(r['technical_candidate_status'], 'HOLD')
+
     def test_live_root_hash_drift_blocks_technical(self):
         (self.live/'index.html').write_text('sneaky changed')
         self.assertEqual(self.check()['technical_candidate_status'],'HOLD')

@@ -10,6 +10,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -70,6 +71,17 @@ def check(args) -> dict:
         results['live_hash_not_changed_since_review'] = (
             out['live_grade_html_sha256'] == args.expected_live_html_sha)
 
+        # A stale known dist folder is NOT necessarily the current public site.
+        # An explicitly supplied Nginx site must resolve to the same root.
+        site_file = getattr(args, 'nginx_site_config', None)
+        if site_file:
+            config = site_file.read_text()
+            configured_roots = re.findall(r'^\s*root\s+(/var/www/[^;\s]+);',
+                                          config, flags=re.MULTILINE)
+            results['real_nginx_root_matches_exact_live_target'] = (
+                len(configured_roots) == 1
+                and Path(configured_roots[0]).resolve() == live)
+
         paper_guard = paper/'ops/release/verify-diary-controls-in-active-bundle-20261015.cjs'
         candidate_diary, _ = run_json(['node',str(paper_guard),'--dist',str(dist)])
         results['paper_candidate_diary_11_controls'] = (
@@ -105,6 +117,38 @@ def check(args) -> dict:
             out['public_diary_active_graph_status'] = 'FAIL'
         results['public_diary_healthy'] = out['public_diary_active_graph_status']=='PASS'
 
+        # Independent public companion checks are recorded even when the
+        # currently deployed Diary is healthy. A Diary-only emergency hotfix
+        # cannot count as restoration of the entire SaaS frontend.
+        try:
+            live_planner, _ = run_json([
+                'python3',str(paper/'ops/release/check-lesson-planner-ui.py'),
+                '--dist',str(live),'--repo',str(paper),'--no-source'
+            ], accepted=(0,2))
+            out['public_lesson_planner_status'] = (
+                'PASS' if live_planner.get('pass') is True
+                and live_planner.get('result') == 'PASS' else 'FAIL')
+        except (ValueError, subprocess.TimeoutExpired, OSError):
+            out['public_lesson_planner_status'] = 'FAIL'
+        results['public_lesson_planner_healthy'] = (
+            out['public_lesson_planner_status'] == 'PASS')
+        try:
+            live_companions, _ = run_json([
+                'python3',str(paper/'ops/release/check-preserved-companion-features.py'),
+                '--dist',str(live),'--repo',str(paper)
+            ], accepted=(0,2))
+            out['public_early_years_companion_status'] = (
+                'PASS' if live_companions.get('result') == 'PASS' else 'FAIL')
+        except (ValueError, subprocess.TimeoutExpired, OSError):
+            out['public_early_years_companion_status'] = 'FAIL'
+        results['public_early_years_companion_healthy'] = (
+            out['public_early_years_companion_status'] == 'PASS')
+        out['public_frontend_fully_recovered'] = all((
+            results['public_diary_healthy'],
+            results['public_lesson_planner_healthy'],
+            results['public_early_years_companion_healthy'],
+        ))
+
         out['connect_auth_source_tests'] = {}
         tests = [
             ('role_neutral', 'test-current-live-role-neutral-20261015.cjs',13),
@@ -138,7 +182,9 @@ def check(args) -> dict:
 
         # Current full-release gate can never be replaced by this technical report.
         out['technical_candidate_status'] = 'PASS' if all(
-            v for k,v in results.items() if k!='public_diary_healthy') else 'HOLD'
+            v for k,v in results.items() if k not in ('public_diary_healthy',
+                                     'public_lesson_planner_healthy',
+                                     'public_early_years_companion_healthy')) else 'HOLD'
         out['release_decision'] = 'HOLD_REQUIRES_INDEPENDENT_CORE_SIGNED_ACCEPTANCE'
         out['failure_reasons'] = [k for k,v in results.items() if not v]
     except (OSError, ValueError, subprocess.TimeoutExpired, KeyError) as exc:
@@ -153,6 +199,7 @@ def main():
     for key in ('paper-repo','paper-dist','connect-ops','next-stage','live-grade-root','core-verifier'):
         ap.add_argument('--'+key, type=Path, required=True)
     ap.add_argument('--expected-live-html-sha',required=True)
+    ap.add_argument('--nginx-site-config',type=Path,help='read-only verification of current public frontend root')
     ap.add_argument('--production-release-gate',action='store_true')
     args=ap.parse_args()
     result=check(args)
