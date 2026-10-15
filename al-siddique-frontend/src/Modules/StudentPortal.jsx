@@ -3,13 +3,14 @@ import Portal from '../components/Portal'
 import { useAuth } from '../context/AuthContext'
 import { useAcademicStore } from '../services/useAcademicStore'
 import api from '../services/api'
+import BellSchedulePanel from '../components/BellSchedulePanel'
 import { C, card, btnPrimary, btnSecondary, input, labelStyle, sectionHeader } from './moduleStyles'
 import {
  BookOpen, TrendingUp, Award, CheckCircle, Eye, X,
  CreditCard, Calendar, BarChart2, RefreshCw, AlertCircle, Send,
 } from 'lucide-react'
 
-const SECTIONS = ['Dashboard', 'My Exams', 'Attendance', 'Fee Status', 'Messages']
+const SECTIONS = ['Dashboard', 'Timetable', 'My Exams', 'Attendance', 'Fee Status', 'Messages']
 
 // Notifications and messages are loaded from the scoped server inbox.
 //  Helpers 
@@ -252,6 +253,7 @@ export default function StudentPortal() {
  ) : (
  <>
  {section === 'Dashboard' && <DashboardSection attPct={attPct} attTotal={attTotal} presentCount={presentCount} avgPct={avgPct} overallGrade={overallGrade} subjectSummary={subjectSummary} exams={exams} pendingFees={pendingFees} paidFeeAmt={paidFeeAmt} totalFeeAmt={totalFeeAmt} studentClass={studentDisplay} messages={messages} readMsg={readMsg} />}
+ {section === 'Timetable' && <BellSchedulePanel />}
  {section === 'My Exams' && <ExamsSection exams={exams} results={results} />}
  {section === 'Attendance' && <AttendanceSection records={attRecords} presentCount={presentCount} attTotal={attTotal} attPct={attPct} />}
  {section === 'Fee Status' && <FeeSection fees={fees} />}

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useAcademicStore } from '../../services/useAcademicStore'
 import { usePaperStore } from '../Paper-Generator/usePaperStore'
 import api from '../../services/api'
+import BellSchedulePanel from '../../components/BellSchedulePanel'
 
 // Dynamic lists will be used from the store.
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
@@ -269,6 +270,7 @@ function TimetableModule() {
  </div>
 
  <div style={{ display: 'grid', gap: 22 }}>
+ <BellSchedulePanel />
  {teacherLoadError && (
  <div className="super-module-card" style={{ ...card, padding:'12px 14px', color:'var(--apex-action-danger)', border:'1px solid color-mix(in srgb,var(--apex-action-danger) 30%,transparent)' }}>
  {teacherLoadError}

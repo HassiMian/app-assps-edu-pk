@@ -3,6 +3,19 @@ const router = express.Router()
 const { query } = require('../config/database')
 const { protect, requireScopeForServiceOnly } = require('../middleware/auth')
 const { tenantClause } = require('../middleware/tenant')
+const { schoolBellSchedule } = require('../domain/schoolBellSchedule')
+
+// Shared school-wide bell slots. No private student or academic assignment data is returned.
+router.get('/bell-schedule', protect, requireScopeForServiceOnly('school.timetable.read'), (req, res) => {
+  const schoolId = Number(req.school_id)
+  if (!Number.isSafeInteger(schoolId) || schoolId <= 0) {
+    return res.status(403).json({ success: false, code: 'SCHOOL_CONTEXT_REQUIRED' })
+  }
+  const schedule = schoolBellSchedule(schoolId)
+  if (!schedule) return res.status(404).json({ success: false, code: 'BELL_SCHEDULE_NOT_PUBLISHED' })
+  res.set('Cache-Control', 'private, no-store')
+  return res.json({ success: true, data: schedule })
+})
 
 router.get('/', protect, requireScopeForServiceOnly('school.timetable.read'), async (req, res) => {
   try {
