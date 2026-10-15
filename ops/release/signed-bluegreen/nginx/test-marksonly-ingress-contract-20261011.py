@@ -51,7 +51,7 @@ class Contract(unittest.TestCase):
  def test_actual_marks_and_result_card_requests_follow_split_contract(self):
   expected={
    'MarksSheet.jsx':{('GET','/api/exams'),('GET','/api/students'),('GET','/api/exams/results/9'),('POST','/api/exams/results')},
-   'ResultCards.jsx':{('GET','/api/exams'),('GET','/api/exams/grade-settings'),('GET','/api/exams/results/9'),('GET','/api/exams/results')},
+   'ResultCards.jsx':{('GET','/api/exams'),('GET','/api/exams/grade-settings'),('GET','/api/exams/results/9')},
   }
   for name,wanted in expected.items():
    source=(FRONT/name).read_text()
@@ -63,6 +63,11 @@ class Contract(unittest.TestCase):
    self.assertEqual(found,wanted,f'Unexpected Marks/Results API drift: {name}')
    for method,path in found:
     self.assertIn(target(path,method),('legacy','green'))
+ def test_one_term_never_fetches_different_exams_for_all_class_print(self):
+  src=(FRONT/'ResultCards.jsx').read_text()
+  self.assertNotIn('const examIds = exams.map',src)
+  self.assertNotIn("api.get('/api/exams/results'",src)
+  self.assertIn('setPrintCards(allExamPrintCards)',src)
  def test_upstream_never_public_host(self):
   self.assertNotIn('0.0.0.0:5091',MAPS)
   self.assertNotIn('https://',MAPS)
