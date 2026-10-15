@@ -151,6 +151,17 @@ def main():
     companions=companion_module.evaluate(repo,companions_contract,dist)
     if companions['result']!='PASS':
         raise RuntimeError('Current live Diary / Early Years capabilities missing: reconcile reviewed owner changes first')
+    # Assert controllers in the actual reachable release bundle, never merely
+    # in an unused stale chunk or source file. This is mandatory for dry-run
+    # and --apply; it is not a substitute for signed Core acceptance.
+    active_diary_guard = HERE/'verify-diary-controls-in-active-bundle-20261015.cjs'
+    active_diary_check = subprocess.run(
+        ['node', str(active_diary_guard), '--dist', str(dist)],
+        capture_output=True, text=True, timeout=45, check=False)
+    if active_diary_check.returncode != 0:
+        raise RuntimeError(
+            'Active production Diary controllers missing from candidate: '
+            + (active_diary_check.stderr or active_diary_check.stdout).strip()[:800])
     newroot=OUTPUT_ROOT/('assps-lesson-planner-'+commit[:12])
     expected_new=sha(dist/'index.html')
     plan={'decision':'READY_FOR_CORE_GATE' if not args.apply else 'CORE_GATE_CHECK_REQUIRED',
