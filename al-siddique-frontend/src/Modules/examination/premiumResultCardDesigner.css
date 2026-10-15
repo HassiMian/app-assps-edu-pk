@@ -68,3 +68,13 @@
 
 .result-premium-shell .premium-printer-guide { padding:9px 10px; margin:7px 0; border-radius:7px; border:1px solid #C9DDE8; background:#F4FAFD; color:#28556A; font-size:11px; line-height:1.55; }
 .result-premium-shell .premium-printer-guide strong { color:#153F58; }
+
+.result-batch-pagination{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;padding:10px 12px;background:#f3f7f8;border:1px solid #d8e5e7;border-radius:10px;margin-bottom:13px}
+.result-batch-pagination strong{font-size:13px;color:#214458;min-width:100px;text-align:center}
+.result-batch-pagination button{font-size:12px;font-weight:700;padding:8px 10px;border:1px solid #c9dadf;border-radius:7px;background:#fff;color:#1b4d65;cursor:pointer}
+.result-batch-pagination button:disabled{opacity:.42;cursor:not-allowed}
+.premium-featured-tile.scholars-archive{background:linear-gradient(145deg,#f3f8f7,#edf2f5);border-color:#a8cac8}
+.premium-featured-tile.scholars-archive .premium-tile-thumbnail{background:linear-gradient(180deg,#24495d 0 18%,#eaf3f2 18% 100%);border-color:#9cbdbc}
+.result-preview-panel .premium-card .rc-marks-table td:first-child{font-size:9.1pt!important;font-weight:700!important}
+.result-preview-panel .premium-card .rc-marks-table td{font-size:8.8pt!important}
+.result-preview-panel .premium-card .rc-marks-table th{font-size:7.7pt!important}
