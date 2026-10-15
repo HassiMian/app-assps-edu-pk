@@ -1,0 +1,73 @@
+.term-planner{display:flex;flex-direction:column;gap:12px;margin-top:13px}
+.term-hero{display:flex;justify-content:space-between;gap:10px;align-items:center;background:#fff;border:1px solid #d6e2ef;border-radius:10px;padding:13px}
+.term-hero strong{font-size:15px;color:#113b62}.term-hero p{font-size:11px;color:#667a8d;margin:4px 0}
+.term-hero label{display:grid;gap:4px;min-width:160px;font-size:11px;font-weight:700}
+.term-split{display:grid;grid-template-columns:minmax(270px,340px) minmax(0,1fr);gap:13px}
+.term-inputs{max-height:950px;overflow:auto;padding:14px;border:1px solid #dbe5ed;border-radius:10px;background:#fff}
+.term-inputs h4{font-size:13px;color:#163d60;margin:10px 0;display:flex;justify-content:space-between}
+.term-inputs h4 small{font-size:10px;color:#728397}
+.term-edit-subject{border:1px solid #e1e8f0;border-radius:8px;margin-bottom:8px;padding:9px}
+.term-edit-name{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.term-edit-name strong{font-size:12px}.term-edit-name small{font-size:9px;color:#a07828}
+.term-edit-subject label,.term-controls label{display:flex;flex-direction:column;gap:4px;margin-top:7px;font-size:10px;font-weight:650;color:#35556c}
+.term-edit-subject textarea{width:100%;font-family:inherit;resize:vertical;min-height:75px}
+.term-page-inputs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.term-page-inputs input{width:100%}
+.term-warning{font-size:9px;color:#8e6d2c}
+.term-hint{font-size:10px;color:#5b7185;line-height:1.5}
+.term-edit-assessments{width:100%;border-collapse:collapse}
+.term-edit-assessments th,.term-edit-assessments td{padding:6px;border:1px solid #d6e3eb;font-size:11px;text-align:left}
+.term-edit-assessments th{width:50%;font-weight:650}
+.term-edit-assessments th small{display:block;color:#7c8792;font-size:9px;font-weight:400}
+.term-edit-assessments input{width:100%}
+.term-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.term-controls label span{font-weight:600;color:#1b879e}
+.term-controls input[type=range]{width:100%}
+.term-controls button,.term-add{justify-content:center}
+.term-saved{display:flex;flex-wrap:wrap;gap:5px}
+.term-saved button{font-size:10px}
+.term-preview-wrap{background:#e8edf3;border-radius:10px;border:1px solid #d1dbe5;min-width:0}
+.term-preview-actions{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px;background:#fff;border-radius:10px 10px 0 0}
+.term-preview-actions div{display:flex;gap:7px;align-items:center}
+.term-preview-actions div:first-child{flex-direction:column;align-items:flex-start}
+.term-preview-actions strong{font-size:12px}
+.term-preview-actions small{font-size:10px;color:#66798a}
+.term-preview-scroll{overflow:auto;padding:14px}
+.term-print-document{background:#fff;width:210mm;min-height:297mm;margin:auto;padding:13mm 12mm;box-shadow:0 5px 20px #17345121;color:#172c42;font-size:var(--term-text-size);font-family:var(--term-text-family),"Times New Roman",serif}
+.term-letterhead{display:grid;grid-template-columns:20mm minmax(0,1fr);gap:5mm;align-items:center;text-align:center;border-bottom:2px solid #123b61;padding-bottom:3mm}
+.term-letterhead img{width:19mm;height:19mm;object-fit:contain}
+.term-letterhead h2{font:800 var(--term-school-name) Arial,sans-serif;color:#0f3456;margin:0 0 5px}
+.term-letterhead strong{font-size:var(--term-head-size)}
+.term-letterhead p{font-size:10px;margin:4px 0 0}
+.term-meta{display:flex;justify-content:space-between;gap:10px;border:1px solid #cbd9e4;padding:8px;margin:10px 0;font-size:11px}
+.term-print-subjects,.term-print-assessments{border-collapse:collapse;width:100%;table-layout:fixed}
+.term-print-subjects{margin-top:9px}
+.term-print-document th,.term-print-document td{border:1px solid #b7c9d7;padding:7px;vertical-align:top;overflow-wrap:anywhere}
+.term-print-document thead th{background:#edf3f7;color:#173f60;font:700 calc(var(--term-text-size) - 1px) Arial,sans-serif}
+.term-print-subjects th:first-child{width:var(--term-subject-width)}
+.term-print-subjects tbody th{font:700 var(--term-subject-name) Arial,sans-serif;text-align:left}
+.term-print-subjects tbody tr,.term-print-assessments tbody tr{min-height:var(--term-row-height);height:var(--term-row-height)}
+.term-print-subjects tbody td{white-space:pre-wrap;line-height:1.7}
+.term-urdu-content{direction:rtl;text-align:right;white-space:pre-wrap;font-family:var(--term-urdu-font,"Jameel Noori Nastaleeq"),"Jameel Noori Nastaleeq","Noto Nastaliq Urdu","Noto Naskh Arabic",serif;unicode-bidi:plaintext}
+.term-english-content{direction:ltr;white-space:pre-wrap}
+.term-pages{display:block;margin-top:4px;color:#35617c;font-family:"Times New Roman",serif}
+.term-pages bdi{direction:ltr;unicode-bidi:isolate}
+.term-print-assessments{margin-top:13px}
+.term-print-assessments th:first-child{width:var(--term-assessment-width)}
+.term-print-assessments tbody th{text-align:left;font-weight:650}
+.term-print-assessments td bdi{direction:ltr;unicode-bidi:isolate}
+.term-print-assessments td small{display:block;color:#8b6524;font-size:9px}
+.term-document-foot{border-top:1px solid #d8e2e9;color:#627588;text-align:center;font:9px Arial,sans-serif;margin-top:12px;padding-top:6px}
+@media(max-width:1050px){.term-split{grid-template-columns:1fr}.term-inputs{max-height:none}.term-hero{align-items:flex-start}}
+@media(max-width:600px){.term-hero{flex-direction:column}.term-preview-actions{flex-direction:column;align-items:stretch}.term-preview-actions div{flex-wrap:wrap}}
+@media print{
+  @page{size:A4;margin:10mm}
+  .term-print-document{width:auto;min-height:0;padding:0;box-shadow:none;margin:0}
+  .term-print-document thead{display:table-header-group}
+  .term-print-document tr{break-inside:avoid;page-break-inside:avoid}
+  .term-print-document .term-letterhead{break-inside:avoid}
+  .term-print-document td,.term-print-document th{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+}
+
+.term-meta{flex-wrap:wrap}
+.term-small-action{font-size:9px!important;padding:4px 6px!important;margin-top:4px}

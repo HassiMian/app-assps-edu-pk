@@ -27,6 +27,9 @@ export function createEmptyLessonPlanDocument(overrides = {}) {
     bufferRatio: Number.isFinite(Number(overrides.bufferRatio)) ? Number(overrides.bufferRatio) : 0.1,
     blackoutDates: list(overrides.blackoutDates),
     subjects: list(overrides.subjects),
+    termCoverageRows: list(overrides.termCoverageRows),
+    assessments: list(overrides.assessments),
+    layoutSettings: overrides.layoutSettings && typeof overrides.layoutSettings === 'object' ? overrides.layoutSettings : {},
     analysis: overrides.analysis || { warnings:[] },
     provenance: overrides.provenance || { deterministic:false, aiEnhanced:false },
   }
@@ -99,11 +102,28 @@ export function normalizeLessonPlanDocument(input = {}) {
     const base = createEmptyLessonPlanDocument(input)
     return {
       ...base,
+      schemaVersion: Number(input.schemaVersion)>=3?3:2,
       id: input.id,
       revision: Number(input.revision || input.serverRevision || 0),
       serverRevision: Number(input.serverRevision || input.revision || 0),
       title: text(input.title, 500),
       subjects: input.subjects.map(normalizeSubject),
+      termCoverageRows: list(input.termCoverageRows).map(row=>({
+        id:text(row.id,220),subject:text(row.subject,160),
+        detail:String(row.detail||'').slice(0,6000),
+        pageFrom:text(row.pageFrom,20),pageTo:text(row.pageTo,20),
+        sourceStatus:text(row.sourceStatus,80),
+        originalSourceIds:list(row.originalSourceIds).slice(0,20),
+        needsReview:true
+      })),
+      assessments:list(input.assessments).map(a=>({
+        id:text(a.id,240),number:Number(a.number)||0,
+        date:text(a.date,10),name:text(a.name,140),
+        subject:text(a.subject,160),origin:text(a.origin,80),
+        originalDate:text(a.originalDate,10),sourceId:text(a.sourceId,150)
+      })),
+      layoutSettings: input.layoutSettings && typeof input.layoutSettings === 'object' ?
+        {...input.layoutSettings} : {},
       analysis: input.analysis && typeof input.analysis === 'object' ? input.analysis : { warnings:[] },
       provenance: input.provenance && typeof input.provenance === 'object' ? input.provenance : { deterministic:false, aiEnhanced:false },
     }

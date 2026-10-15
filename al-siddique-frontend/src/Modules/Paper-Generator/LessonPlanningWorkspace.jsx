@@ -20,6 +20,8 @@ import {
   normalizeLessonPlanDocument,
   toLessonPlanPersistencePayload,
 } from './lessonPlanDomain'
+import WeeklyNotebookStudio from './WeeklyNotebookStudio'
+import './WeeklyNotebookStudio.css'
 import './LessonPlanningWorkspace.css'
 
 const DRAFT_KEY = 'assps_lesson_planner_v2_draft'
@@ -110,6 +112,7 @@ function SubjectPlanner({ subjectPlan, planningType, onChange, onRemove }) {
 }
 
 export default function LessonPlanningWorkspace() {
+  const [showWeeklyNotebook,setShowWeeklyNotebook]=useState(true)
   const { activeClasses, subjectsForClass, sectionsForClass, sessionStart, sessionEnd } = useAcademicStore()
   const [document,setDocument] = useState(()=>{
     try { const raw=getTenantStorageItem(DRAFT_KEY); return raw?normalizeLessonPlanDocument(JSON.parse(raw)):createEmptyLessonPlanDocument({startDate:today()}) } catch { return createEmptyLessonPlanDocument({startDate:today()}) }
@@ -205,6 +208,11 @@ export default function LessonPlanningWorkspace() {
   const removeSubject = index => {const name=document.subjects[index]?.subject;setDocument(current=>normalizeLessonPlanDocument({ ...current,subjects:current.subjects.filter((_,i)=>i!==index) }));setSelectedSubjects(current=>current.filter(item=>item!==name))}
 
   return <div className="lesson-planning-workspace" data-lesson-planning-workspace>
+    <nav className="wn-switch" aria-label="Lesson planning mode">
+      <button className={showWeeklyNotebook?'selected':''} onClick={()=>setShowWeeklyNotebook(true)}>Weekly Notebook Studio</button>
+      <button className={!showWeeklyNotebook?'selected':''} onClick={()=>setShowWeeklyNotebook(false)}>Advanced Lesson Editor</button>
+    </nav>
+    {showWeeklyNotebook?<WeeklyNotebookStudio/>:<>
     <div className="lp-topbar">
       <div><div className="lp-eyebrow">ASSPS Academic Planning</div><h2>Lesson Planning Workspace</h2><p>Plan once. Reuse across term, daily lessons, diary cards and assessments.</p></div>
       <div className="lp-actions"><button className="ghost" onClick={reset}><Plus size={16}/> New</button><button className="ghost" onClick={()=>setShowPaste(true)}><WandSparkles size={16}/> Smart Paste</button><button className="ghost" onClick={printPlan}><Printer size={16}/> Print</button><button className="ghost" onClick={()=>window.dispatchEvent(new CustomEvent('assps-open-diary-lesson-plan',{detail:{planId:document.id||'',classLevel:document.classLevel,section:document.section,date:document.startDate}}))}><Users size={16}/> Student Cards</button><button data-save-plan className="primary" onClick={save} disabled={busy==='save'}>{busy==='save'?<RefreshCw className="spin" size={16}/>:<Save size={16}/>} Save Draft</button></div>
@@ -246,5 +254,6 @@ export default function LessonPlanningWorkspace() {
     </div>
 
     {showPaste && <div className="lp-modal-backdrop" onMouseDown={e=>{if(e.target===e.currentTarget)setShowPaste(false)}}><div className="lp-modal" data-smart-paste-modal><button className="lp-modal-close" onClick={()=>setShowPaste(false)}><X size={17}/></button><div className="lp-card-title"><WandSparkles size={18}/><span>Smart Paste — whole day / whole plan</span></div><p>Paste multiple subjects at once. Recognized subjects, objectives, activities, assessment, homework and page ranges are mapped into editable blocks. Unrecognized text is preserved for review.</p><textarea value={smartText} onChange={e=>setSmartText(e.target.value)} placeholder={'English\nChapter 1: Reading Skills\nObjectives: ...\nHomework: ...\n\nScience\nChapter 2: Photosynthesis\nActivity: ...'} /><button className="primary wide" onClick={smartArrange} disabled={busy==='parse'}>{busy==='parse'?<RefreshCw className="spin" size={16}/>:<WandSparkles size={16}/>} Arrange into Subjects</button></div></div>}
+    </>}
   </div>
 }

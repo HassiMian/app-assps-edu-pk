@@ -1,5 +1,6 @@
 const express = require('express')
 const crypto = require('node:crypto')
+const fs = require('node:fs/promises')
 const router = express.Router()
 
 const { pool, tenantContext, applyTenantContext } = require('../config/database')
@@ -7,6 +8,7 @@ const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
 const { isSchoolDocumentManager, canAccessAuthoredDocument } = require('../services/teacherDocumentAccess')
 const { loadPlanningContext } = require('../services/lessonPlanningContext')
+const { mustHoldLessonPublication, privateLessonMutationAllowed } = require('../services/lessonPlanningPublicationGuard')
 const { buildDeterministicPlan, enhancePlanWithAi, parseSmartPlanningText, parseIsoDate, MAX_RANGE_DAYS } = require('../services/lessonPlanningEngine')
 
 const canManageLessonPlans = requireRoles('super_admin', 'admin', 'school_admin', 'principal', 'teacher')
@@ -152,6 +154,39 @@ router.use(protect, canManageLessonPlans, (req, res, next) => {
   next()
 })
 
+// Server-held immutable academic source. Only a genuine active school Principal
+// may retrieve the class/subject archive. This route DOES NOT create/publish plans.
+router.get('/planner/private-source-bundle', async (req, res) => {
+  if (Number(resolveSchoolId(req)) !== 1 ||
+      !isSchoolDocumentManager(req.user) ||
+      !['admin','school_admin','principal'].includes(String(req.user?.role||'').toLowerCase()) ||
+      String(req.user?.designation||'').trim().toLowerCase() !== 'principal')
+    return res.status(403).json({ success:false,code:'PRINCIPAL_SOURCE_ACCESS_DENIED' })
+  try {
+    const schoolId=resolveSchoolId(req)
+    const actor=await withTenantTransaction(req,schoolId,client=>client.query(
+      'SELECT id FROM users WHERE id=$1 AND school_id=$2 AND is_active=true '+
+      "AND lower(trim(designation))='principal' AND lower(role) IN ('admin','school_admin','principal') LIMIT 1",
+      [Number(req.user.id),schoolId]))
+    if (actor.rowCount!==1)
+      return res.status(403).json({success:false,code:'PRINCIPAL_IDENTITY_NOT_VERIFIED'})
+    const file=await fs.readFile('/root/secure-archive/composer-review-20261014/manifest_plus_classone_private.json')
+    if (crypto.createHash('sha256').update(file).digest('hex')!=='4d2ccdce5ec644750a530c890df5a0a41eaee5b76f1e4ba47d912617db5c0cda')
+      return res.status(503).json({success:false,code:'ORIGINAL_SOURCE_INTEGRITY_ERROR'})
+    const manifest=JSON.parse(file.toString('utf8'))
+    if (manifest.schema!=='assps.lesson_plan.review_import.v1' ||
+        manifest.candidates?.length!==59 ||
+        manifest.class_one_image_review?.weeks?.length!==18)
+      return res.status(503).json({success:false,code:'ORIGINAL_SOURCE_SCHEMA_ERROR'})
+    res.set('Cache-Control','private, no-store')
+    res.set('Vary','Authorization, Cookie')
+    return res.json({success:true,data:manifest})
+  } catch (error) {
+    console.error('Academic source-bundle unavailable:', error?.code||'UNAVAILABLE')
+    return res.status(503).json({success:false,code:'ORIGINAL_SOURCE_UNAVAILABLE'})
+  }
+})
+
 router.get('/planner/context', async (req, res) => {
   try {
     const schoolId = resolveSchoolId(req)
@@ -279,6 +314,12 @@ router.put('/:id', async (req, res) => {
     if (!revision) return res.status(428).json({ success:false, code:'LESSON_PLAN_REVISION_REQUIRED', message:'Current lesson plan revision is required.' })
     const plan = normalizePlan({ ...(req.body || {}), id })
     const data = await withTenantTransaction(req, schoolId, async client => {
+      const prior = await client.query(
+        'SELECT payload FROM lesson_plans WHERE school_id=$1 AND public_id=$2 AND revision=$3 LIMIT 1',
+        [schoolId,id,revision]
+      )
+      if (prior.rowCount && !privateLessonMutationAllowed(prior.rows[0].payload,plan.payload,id))
+        return { immutableConflict:true }
       const result = await client.query(`
         UPDATE lesson_plans SET
           revision=revision+1,title=$1,subject=$2,class_level=$3,chapter=$4,teacher=$5,
@@ -297,6 +338,7 @@ router.put('/:id', async (req, res) => {
       if (current.rows[0] && (!canAccessAuthoredDocument(req.user, current.rows[0], schoolId) || (!isSchoolDocumentManager(req.user) && current.rows[0].sent_to_portal))) return { missing:true }
       return current.rowCount ? { conflict:true, currentRevision:Number(current.rows[0].revision) } : { missing:true }
     })
+    if (data.immutableConflict) return res.status(409).json({ success:false, code:'LESSON_PLAN_ACADEMIC_SOURCE_LOCKED', message:'Original source identity and publication hold cannot be removed from a private academic plan.' })
     if (data.missing) return res.status(404).json({ success:false, code:'LESSON_PLAN_NOT_FOUND', message:'Lesson plan not found.' })
     if (data.conflict) return res.status(409).json({ success:false, code:'LESSON_PLAN_REVISION_CONFLICT', currentRevision:data.currentRevision, message:'Lesson plan changed in another session. Reopen it before saving.' })
     res.json({ success:true, data:data.plan })
@@ -315,12 +357,19 @@ router.delete('/:id', async (req, res) => {
     const revision = expectedRevision(req)
     if (!revision) return res.status(428).json({ success:false, code:'LESSON_PLAN_REVISION_REQUIRED', message:'Current lesson plan revision is required.' })
     const data = await withTenantTransaction(req, schoolId, async client => {
+      const prior = await client.query(
+        'SELECT payload FROM lesson_plans WHERE school_id=$1 AND public_id=$2 AND revision=$3 LIMIT 1',
+        [schoolId,id,revision]
+      )
+      if (prior.rowCount && mustHoldLessonPublication(prior.rows[0].payload,id))
+        return { academicHold:true }
       const result = await client.query('DELETE FROM lesson_plans WHERE school_id=$1 AND public_id=$2 AND revision=$3 AND ($4::boolean OR created_by=$5) AND ($4::boolean OR sent_to_portal=false) RETURNING public_id', [schoolId, id, revision, isSchoolDocumentManager(req.user), Number(req.user?.id) || -1])
       if (result.rowCount) return { deleted:true }
       const current = await client.query('SELECT revision, school_id, created_by, sent_to_portal FROM lesson_plans WHERE school_id=$1 AND public_id=$2 LIMIT 1', [schoolId, id])
       if (current.rows[0] && (!canAccessAuthoredDocument(req.user, current.rows[0], schoolId) || (!isSchoolDocumentManager(req.user) && current.rows[0].sent_to_portal))) return { missing:true }
       return current.rowCount ? { conflict:true, currentRevision:Number(current.rows[0].revision) } : { missing:true }
     })
+    if (data.academicHold) return res.status(409).json({ success:false, code:'LESSON_PLAN_ACADEMIC_SOURCE_LOCKED', message:'Private academic review evidence cannot be deleted using generic lesson management.' })
     if (data.missing) return res.status(404).json({ success:false, code:'LESSON_PLAN_NOT_FOUND', message:'Lesson plan not found.' })
     if (data.conflict) return res.status(409).json({ success:false, code:'LESSON_PLAN_REVISION_CONFLICT', currentRevision:data.currentRevision, message:'Lesson plan changed in another session. Reopen it before deleting.' })
     res.json({ success:true, deleted:true, id })
@@ -346,6 +395,7 @@ router.post('/:id/share', async (req, res) => {
       if (Number(row.revision) !== revision) return { conflict:true, currentRevision:Number(row.revision) }
 
       const payload = row.payload && typeof row.payload === 'object' ? row.payload : {}
+      if (mustHoldLessonPublication(payload,row.public_id)) return { academicHold:true }
       payload.sentToPortal = true
       payload.sent_to_portal = true
       const updated = (await client.query(`
@@ -381,6 +431,7 @@ router.post('/:id/share', async (req, res) => {
 
     if (data.missing) return res.status(404).json({ success:false, code:'LESSON_PLAN_NOT_FOUND', message:'Lesson plan not found.' })
     if (data.forbidden) return res.status(403).json({ success:false, code:'LESSON_PLAN_SHARE_REVIEW_REQUIRED', message:'A school administrator must review and share this lesson plan.' })
+    if (data.academicHold) return res.status(409).json({ success:false, code:'LESSON_PLAN_ACADEMIC_APPROVAL_REQUIRED', message:'Unapproved original-source weekly and term plans cannot be published to student or parent portals.' })
     if (data.conflict) return res.status(409).json({ success:false, code:'LESSON_PLAN_REVISION_CONFLICT', currentRevision:data.currentRevision, message:'Lesson plan changed in another session. Reopen it before sharing.' })
     res.json({ success:true, data:data.plan, delivery:{ students:data.studentCount, notifications:data.notifications } })
   } catch (error) {
