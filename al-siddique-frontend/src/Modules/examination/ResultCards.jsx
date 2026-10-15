@@ -41,6 +41,7 @@ export function ProfessionalParametersModal({ cards, student, exam, studentMarks
   const [remarksOpen, setRemarksOpen] = useState(false)
   const previewRef = useRef(null)
   const [scale, setScale] = useState(1)
+  const [previewIndex, setPreviewIndex] = useState(0)
   const sourceCards = cards?.length ? cards : [{ student, exam, studentMarks }]
   const dataList = sourceCards
     .filter(item => item?.student && item?.exam && item?.studentMarks?.length)
@@ -49,7 +50,8 @@ export function ProfessionalParametersModal({ cards, student, exam, studentMarks
     const status = String(row?.result_status ?? row?.exam_result_status ?? '').trim().toUpperCase()
     return status && status !== 'SCORED'
   }))
-  const data = dataList[0]
+  const safePreviewIndex = Math.min(Math.max(previewIndex,0),Math.max(0,dataList.length-1))
+  const data = dataList[safePreviewIndex]
   const batchInfo = summarizePrintBatch(dataList)
   const printBatch = (pdf = false) => {
     if (!dataList.length) { window.alert('No result cards are ready for printing.'); return }
@@ -155,9 +157,12 @@ export function ProfessionalParametersModal({ cards, student, exam, studentMarks
             {data ? (
               <>
                 {dataList.length > 1 && (
-                  <div style={{ marginBottom:12, color:'#C8991A', fontWeight:800, textAlign:'center' }}>
-                    Previewing first card. Print/PDF will include all {dataList.length} cards.
-                  </div>
+                  <nav className="result-batch-pagination" aria-label="Batch result card preview pages">
+                    <button type="button" onClick={()=>setPreviewIndex(v=>Math.max(v-1,0))} disabled={safePreviewIndex===0}>Previous</button>
+                    <strong>Card {safePreviewIndex+1} of {dataList.length}</strong>
+                    <button type="button" onClick={()=>setPreviewIndex(v=>Math.min(v+1,dataList.length-1))} disabled={safePreviewIndex===dataList.length-1}>Next</button>
+                    <button type="button" onClick={()=>openResultPrintWindow(dataList,false,true)}>Preview all {dataList.length} cards</button>
+                  </nav>
                 )}
                 <div className="result-preview-scale" style={{ transform:`scale(${scale})`, transformOrigin:'top left', width:'794px' }}>
                   <ResultCardPreview data={data} />
@@ -182,7 +187,8 @@ export default function ResultCards() {
   const [selectedStudent, setSelectedStudent] = useState('')
   const [selectedPrintClass, setSelectedPrintClass] = useState('')
   const [selectedPrintSection, setSelectedPrintSection] = useState('')
-  const [outputMode, setOutputMode] = useState('single')
+  const [outputMode, setOutputMode] = useState('class')
+  const [selectedBatchStudent, setSelectedBatchStudent] = useState('')
   const [printCards, setPrintCards] = useState([])
   const [loading, setLoading] = useState(false)
   const [showParams, setShowParams] = useState(false)
@@ -195,7 +201,7 @@ export default function ResultCards() {
   useEffect(() => {
     Promise.all([api.get('/api/exams'), api.get('/api/exams/grade-settings')])
       .then(([examResponse, gradeResponse]) => {
-        const list = examResponse.data.data || []
+        const list = (examResponse.data.data || []).filter(e=>!/^smoke\s+test\s+exam\b/i.test(String(e?.name||'').trim()))
         setExams(list)
         setGradeBands(Array.isArray(gradeResponse.data?.data) ? gradeResponse.data.data : [])
         if (list.length) setSelectedExam(String(list[0].id))
@@ -214,6 +220,7 @@ export default function ResultCards() {
     setSelectedStudent('')
     setSelectedPrintClass('')
     setSelectedPrintSection('')
+    setSelectedBatchStudent('')
     setPrintCards([])
     setLoadError('')
     api.get(`/api/exams/results/${requestExamId}`)
@@ -225,7 +232,12 @@ export default function ResultCards() {
         setLoadedExamId(requestExamId)
         const isEx9 = Number(requestExamId) === 9
         const validStudents = buildResultStudents(list).filter(s => !isEx9 || isClassAllowedForExam({ id: requestExamId }, s.className || s.class))
-        if (validStudents.length) setSelectedStudent(String(validStudents[0].id))
+        if (validStudents.length) {
+          const firstClass=sortSchoolClasses([...new Set(validStudents.map(s=>s.className||s.class).filter(Boolean))])[0]
+          setSelectedPrintClass(firstClass||'')
+          setOutputMode('class')
+          setSelectedStudent('')
+        }
       })
       .catch(err => {
         if (latestResultRequest.current !== requestId) return
@@ -240,6 +252,7 @@ export default function ResultCards() {
     setSelectedStudent('')
     setSelectedPrintClass('')
     setSelectedPrintSection('')
+    setSelectedBatchStudent('')
     setPrintCards([])
     setShowParams(false)
     setLoadError('')
@@ -294,6 +307,14 @@ export default function ResultCards() {
     return sortSchoolClasses(Array.from(classSet))
   }, [isExamNine, exam, academicClassNames, students])
 
+  // Reconcile async result-loading and exam-selection races: class mode must
+  // never silently fall back to a first-student print target.
+  useEffect(() => {
+    if (outputMode!=='class' || selectedPrintClass || String(loadedExamId)!==String(selectedExam)) return
+    const firstWithResults=availablePrintClasses.find(c=>students.some(s=>schoolClassOrderKey(s.className||s.class)===schoolClassOrderKey(c)))
+    if (firstWithResults) setSelectedPrintClass(firstWithResults)
+  }, [outputMode,selectedPrintClass,loadedExamId,selectedExam,availablePrintClasses,students])
+
   const availableSections = useMemo(() => {
     if (!selectedPrintClass) return []
     const sectionSet = new Set()
@@ -311,6 +332,13 @@ export default function ResultCards() {
     return Array.from(sectionSet).sort()
   }, [selectedPrintClass, sectionsForClass, students])
 
+  const batchStudentOptions = useMemo(()=>{
+    if(!selectedPrintClass)return []
+    const target=schoolClassOrderKey(selectedPrintClass)
+    return students.filter(s=>schoolClassOrderKey(s.className||s.class)===target&&
+       (!selectedPrintSection||String(s.section||'').trim().toLowerCase()===selectedPrintSection.trim().toLowerCase()))
+      .sort((a,b)=>String(a.roll_number||a.gr_number||a.name).localeCompare(String(b.roll_number||b.gr_number||b.name),undefined,{numeric:true}))
+  },[students,selectedPrintClass,selectedPrintSection])
   const buildPrintCards = useCallback((rows = activeResults, examObj = exam, scopeStudents = students) =>
     scopeStudents.map(s => {
       const authenticatedClass = s.className || s.class || ''
@@ -335,13 +363,14 @@ export default function ResultCards() {
     const matchingStudents = students.filter(s => {
       const sClass = s.className || s.class || ''
       if (schoolClassOrderKey(sClass) !== targetKey) return false
+      if (selectedBatchStudent && String(s.id)!==String(selectedBatchStudent)) return false
       if (selectedPrintSection && selectedPrintSection !== 'All') {
         return String(s.section || '').trim().toLowerCase() === String(selectedPrintSection).trim().toLowerCase()
       }
       return true
     })
     return buildPrintCards(activeResults, exam, matchingStudents)
-  }, [outputMode, selectedPrintClass, selectedPrintSection, students, activeResults, exam, buildPrintCards])
+  }, [outputMode, selectedPrintClass, selectedPrintSection, selectedBatchStudent, students, activeResults, exam, buildPrintCards])
 
   const allExamPrintCards = useMemo(() => {
     return buildPrintCards(activeResults, exam, students)
@@ -405,38 +434,9 @@ export default function ResultCards() {
     }
 
     if (outputMode === 'all') {
-      if (allExamPrintCards.length > 0 && (isExamNine || /^all\s+classes$/i.test(String(exam?.class || '')) || exams.length <= 1)) {
-        setPrintCards(allExamPrintCards)
-        setShowParams(true)
-        return
-      }
-
-      setLoading(true)
-      try {
-        const examIds = exams.map(item => Number(item.id)).filter(Number.isInteger)
-        if (!examIds.length) return alert('No exams are available to load.')
-        const response = await api.get('/api/exams/results', { params: { exam_ids: examIds.join(',') } })
-        const rows = Array.isArray(response.data?.data) ? response.data.data : []
-        const byExam = new Map()
-        rows.forEach(row => {
-          const key = String(row.exam_id)
-          if (!byExam.has(key)) byExam.set(key, [])
-          byExam.get(key).push(row)
-        })
-        const flat = exams.flatMap(item => {
-          const examRows = byExam.get(String(item.id)) || []
-          const isEx9 = isFirstTermExamNine(item)
-          const scopeStudents = buildResultStudents(examRows).filter(s => !isEx9 || isClassAllowedForExam(item, s.className || s.class))
-          return buildPrintCards(examRows, item, scopeStudents)
-        })
-        if (!flat.length) return alert('No marks found in any class/exam')
-        setPrintCards(flat)
-        setShowParams(true)
-      } catch {
-        alert('Could not load all classes result cards')
-      } finally {
-        setLoading(false)
-      }
+      if (!allExamPrintCards.length) return alert('No saved result cards for selected examination.')
+      setPrintCards(allExamPrintCards)
+      setShowParams(true)
       return
     }
   }
@@ -478,7 +478,7 @@ export default function ResultCards() {
         <div className="super-module-card" style={{ ...card, display:'flex', justifyContent:'space-between', flexWrap:'wrap', gap:16, alignItems:'center' }}>
           <div>
             <h1 style={sectionHeader}>Result Cards</h1>
-            <p style={{ color:C.muted, marginTop:8 }}>Choose single student, whole class (with explicit class isolation), or all classes, then print professional A4 result cards.</p>
+            <p style={{ color:C.muted, marginTop:8 }}>Choose term, class and section. Preview or print the full class at once, or choose one student.</p>
           </div>
           <button
             id="result-cards-generate-top-btn"
@@ -486,7 +486,7 @@ export default function ResultCards() {
             onClick={openDesigner}
             disabled={!canPrint || loading}
           >
-            Generate Report Cards
+            Preview & Print Result Cards
           </button>
         </div>
 
@@ -563,6 +563,7 @@ export default function ResultCards() {
                     onChange={e => {
                       setSelectedPrintClass(e.target.value)
                       setSelectedPrintSection('')
+                      setSelectedBatchStudent('')
                     }}
                   >
                     <option value="">Select Class to print</option>
@@ -579,13 +580,21 @@ export default function ResultCards() {
                     id="result-cards-section-select"
                     style={{ ...select, width:'100%', fontSize:13, fontWeight:700 }}
                     value={selectedPrintSection}
-                    onChange={e => setSelectedPrintSection(e.target.value)}
+                    onChange={e => {setSelectedPrintSection(e.target.value);setSelectedBatchStudent('')}}
                     disabled={!selectedPrintClass}
                   >
                     <option value="">All Sections</option>
                     {availableSections.map(sec => (
                       <option key={sec} value={sec}>Section {sec}</option>
                     ))}
+                  </select>
+                </div>
+                <div style={{gridColumn:'1 / -1'}}>
+                  <label htmlFor="result-cards-student-select" style={{display:'block',fontSize:12,fontWeight:800,color:C.silver,marginBottom:7}}>STUDENT (OPTIONAL)</label>
+                  <select id="result-cards-student-select" style={{...select,width:'100%',fontSize:14,fontWeight:700}}
+                    value={selectedBatchStudent} onChange={e=>setSelectedBatchStudent(e.target.value)}>
+                    <option value="">All {batchStudentOptions.length} students in selected class / section</option>
+                    {batchStudentOptions.map(child=><option key={child.id} value={child.id}>{child.name} — {child.roll_number ? 'Roll '+child.roll_number : child.gr_number ? 'GR '+child.gr_number : 'Saved Student'}</option>)}
                   </select>
                 </div>
               </div>

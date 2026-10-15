@@ -14,8 +14,9 @@ export const RESULT_TEMPLATES = [LEGACY_TEMPLATES[0],
  {id:'airframe-geometry',label:'Signature 07',name:'Airframe Geometry'},
  {id:'corporate-ledger',label:'Signature 08',name:'Corporate Ledger'},
  {id:'examination-dossier',label:'Signature 09',name:'Examination Dossier'},
+ {id:'scholars-archive',label:'Signature 10',name:'Scholars Archive'},
  ...LEGACY_TEMPLATES.slice(1)]
-export const PREMIUM_IDS = new Set(['signature-editorial','swiss-grid','data-atelier','regal-linework','young-scholars','academic-heritage','airframe-geometry','corporate-ledger','examination-dossier'])
+export const PREMIUM_IDS = new Set(['signature-editorial','swiss-grid','data-atelier','regal-linework','young-scholars','academic-heritage','airframe-geometry','corporate-ledger','examination-dossier','scholars-archive'])
 
 export const termFields = [
  ['includeAssessment', 'assessmentMarks', 'Assessment'],

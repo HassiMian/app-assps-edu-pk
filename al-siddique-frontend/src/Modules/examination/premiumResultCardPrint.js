@@ -199,7 +199,7 @@ export const resultCardPrintCss = legacyCss + `
 
 `
 
-export function openResultPrintWindow(data, exportMode = false) {
+export function openResultPrintWindow(data, exportMode = false, previewOnly = false) {
  const cards = Array.isArray(data) ? data : [data]
  const first = cards[0]
  if (!first) return
@@ -208,6 +208,7 @@ export function openResultPrintWindow(data, exportMode = false) {
  : '@page { size: A4 portrait; margin: 0; }'
  const cardMarkup = cards.map(card => renderToStaticMarkup(createElement(ResultCardPreview, {data:card}))).join('')
  const title = cards.length > 1 ? `Result Cards - ${cards.length} Students` : `Result Card - ${first.student.name}`
+ const premiumReadabilityCss = '\n .premium-card .rc-marks-table th{font-size:7.7pt!important;line-height:1.35!important;padding:2.35mm 1mm!important;letter-spacing:0!important}\n .premium-card .rc-marks-table td{font-size:8.8pt!important;line-height:1.36!important;padding:2.2mm 1mm!important}\n .premium-card .rc-marks-table td:first-child{font-size:9.1pt!important;font-weight:700!important;text-align:left!important;width:34mm!important;overflow-wrap:normal}\n .premium-card .rc-marks-table th:first-child{width:34mm!important;text-align:left!important}\n .premium-card .rc-student-info strong{font-size:9pt!important}\n .premium-card .rc-school-name{letter-spacing:.25px!important}\n .premium-archive{--accent:#2f6871;--navy:#203a51;border-top:2.1mm solid #284958!important}\n .premium-archive .premium-archive-masthead{display:flex;justify-content:space-between;font:700 7pt Arial,sans-serif;letter-spacing:1.1px;color:#415d6b;border-bottom:.25mm solid #9fbbb9;padding:2mm 1mm 3mm}\n .premium-archive .premium-archive-section-label{font:700 7.1pt Arial,sans-serif;color:#2c6066;letter-spacing:1px;background:#eaf3f2;border-left:1mm solid #7da8a4;padding:1.8mm 3mm;margin:2.6mm 0}\n .premium-archive .rc-marks-table th{background:#e6f0f0!important;color:#25434b!important;border-color:#aec7c8!important}\n .premium-archive .rc-marks-table td{border-color:#d6e4e3!important}\n'
  const batchCss = `
  .result-card-a4 { page-break-after: always; break-after: page; }
  .result-card-a4:last-child { page-break-after: auto; break-after: auto; }
@@ -264,7 +265,13 @@ export function openResultPrintWindow(data, exportMode = false) {
   setTimeout(function(){blocked('Some result card assets are still loading. Verify the school logo in SaaS settings and retry opening print.');},9500);
  })();
  </script>`
- const html = `<!doctype html><html><head><meta charset="UTF-8"><title>${safeTitle}</title><style>${resultCardPrintCss.replace('@page { size: A4; margin: 0; }', pageRule)}${batchCss}#result-print-status{display:none;margin:12px;padding:12px;border:1px solid #B45309;color:#92400E;background:#FFFBEB;font:14px Arial,sans-serif;}@media print{#result-print-status{display:none!important}}</style></head><body><div id="result-print-status" role="alert"></div>${cardMarkup}${printReadyScript}</body></html>`
+ const toolbar = previewOnly
+   ? '<div class="batch-doc-actions"><strong>ASSPS · '+cards.length+' result card(s) · Complete Class Document</strong><button type="button" onclick="window.print()">Print / Save PDF</button></div>'
+   : ''
+ const controlsCss = '.batch-doc-actions{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:#1c3e51;color:#fff;font:700 13px Arial,sans-serif}.batch-doc-actions button{background:white;color:#234859;border:0;border-radius:7px;padding:10px 17px;cursor:pointer;font-weight:700}@media print{.batch-doc-actions{display:none!important}}'
+ const printStatusCss = '#result-print-status{display:none;margin:12px;padding:12px;border:1px solid #B45309;color:#92400E;background:#FFFBEB;font:14px Arial,sans-serif}@media print{#result-print-status{display:none!important}}'
+ const html = '<!doctype html><html><head><meta charset="UTF-8"><title>'+safeTitle+'</title><style>'+resultCardPrintCss.replace('@page { size: A4; margin: 0; }', pageRule)+premiumReadabilityCss+batchCss+controlsCss+printStatusCss+'</style></head><body>'+toolbar+'<div id="result-print-status" role="alert"></div>'+cardMarkup+(previewOnly ? '' : printReadyScript)+'</body></html>'
+
  const w = window.open('', '_blank', 'width=1100,height=900')
  if (!w) { window.alert('Your browser blocked the print window. Allow pop-ups for this SaaS site and retry.'); return false }
  w.document.write(html)
