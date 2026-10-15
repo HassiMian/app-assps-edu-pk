@@ -1,0 +1,22 @@
+diff --git a/src/utils/api.ts b/src/utils/api.ts
+index 02b3505..7447ffc 100644
+--- a/src/utils/api.ts
++++ b/src/utils/api.ts
+@@ -29,6 +29,17 @@ api.interceptors.response.use(
+     // the actual logout revocation endpoint must never refresh/retry.
+     const requestPathname = new URL(requestUrl, 'http://connect.invalid').pathname;
+     const isAuthEndpoint = /^\/(?:api\/)?auth\/(?:login|refresh|logout)\/?$/.test(requestPathname);
++    // The initial anonymous session probe is allowed to return 401 on public
++    // login / first-password-change pages. Refreshing here causes the generic
++    // Axios interceptor to bounce the challenge back to /login?cleared=1.
++    // Keep all existing refresh/denial handling on protected portal routes.
++    const isSessionProbe = /^\/(?:api\/)?auth\/me\/?$/.test(requestPathname);
++    const onAnonymousEntry = typeof window !== 'undefined' &&
++      (window.location.pathname === '/login' ||
++       window.location.pathname === '/auth/change-password');
++    if (error.response?.status === 401 && isSessionProbe && onAnonymousEntry) {
++      return Promise.reject(error);
++    }
+     if (error.response?.status === 401 && !isAuthEndpoint) {
+       originalRequest._retry = true;
+       if (!refreshPromise) {
