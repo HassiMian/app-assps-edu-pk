@@ -33,6 +33,11 @@ export default function TermPlannerEditor({klass,section,term,start,end,setTerm,
     </div>
     <div className="term-split">
       <section className="term-inputs">
+        {term!=='Second Term'&&<p className="term-warning" role="alert">
+          Only Second Term original curriculum evidence is loaded. This is an unpublished,
+          unsourced {term} template. Enter genuine term topics, page ranges and assessment
+          dates; no Second Term topics are copied automatically.
+        </p>}
         <h4>Subject & page-range editor <small>{rows.length} subjects</small></h4>
         {rows.map(row=><div className="term-edit-subject" key={row.id} data-term-edit-subject>
           <div className="term-edit-name"><strong>{row.subject}</strong>
@@ -127,6 +132,10 @@ export default function TermPlannerEditor({klass,section,term,start,end,setTerm,
               <span>Section: <b>{section||'All'}</b></span>
               <span>Term: <b>{term}</b></span>
               <span>Dates: <bdi>{start} – {end}</bdi></span></div>
+            {term!=='Second Term'&&<p className="term-print-unsourced">
+              UNVERIFIED {term.toUpperCase()} — Teacher-proposed content;
+              no original term syllabus has been approved.
+            </p>}
             <table className="term-print-subjects">
               <thead><tr><th>SUBJECT</th><th>TERM SYLLABUS / CHAPTERS / PAGE RANGE</th></tr></thead>
               <tbody>{rows.map(row=><tr key={row.id}>

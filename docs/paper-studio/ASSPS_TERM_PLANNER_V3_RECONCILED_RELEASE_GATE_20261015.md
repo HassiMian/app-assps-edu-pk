@@ -19,11 +19,12 @@ This integrated branch starts on actual live b18a8aae and merges independent com
 - Long weekly source-derived statements no longer shortened in the planner, and the full statement is preserved alongside compact existing legacy lesson fields.
 - Backend candidate guard: unapproved original-source weekly/term drafts and three specific source-uncertain Miss Adiba legacy review records cannot be generic-shared, deleted or have their source identity or publication hold stripped via editing. Tenant scope and prior generic legacy permissions remain separate.
 - Original school source: 59 private subject/class groups and 18 Class One transcribed weeks, with existing source SHA verification; unverified textbook titles, dates and teacher assignments are never fabricated.
+- Independent term provenance protection: current authenticated original library is explicitly Second Term only. First/Third Term mode shows offered subject names but **never imports Second Term topics, page numbers or assessment dates**; users can enter proposed unsourced coverage as a private draft, and A4 displays an UNVERIFIED TERM notice. Versioned server records store sourceArchiveScope=SECOND_TERM_ONLY and sourceApplicability=UNSOURCED_MANUAL_DRAFT; backend mutation guard prevents forged source applicability. This removes a false-academic-attribution bug caught during final adversarial review.
 
 ## Current merged-source QA
 
-- Frontend pure term/weekly + Grade IX–X Bridge unit regression: 41/41 PASS, no skip or fail. /tmp/assps-term-merged-source-tests.log
-- Backend static/engine, Principal source bundle, protected source HTTP denial and academic guard: 19/19 PASS, no skip or fail. /tmp/assps-term-merged-backend-tests.log
+- Frontend pure term/weekly + Grade IX–X Bridge unit regression: 42/42 PASS, no skip or fail. /tmp/assps-term-merged-source-tests.log
+- Backend static/engine, Principal source bundle, protected source HTTP denial and academic guard: 20/20 PASS, no skip or fail. /tmp/assps-term-merged-backend-tests.log
 - Changed-module ESLint exit0 with zero warnings. /tmp/assps-term-merged-eslint.log
 - Optimized Vite release build exit0. /tmp/assps-term-merged-build.log
 - Headless private Chromium synthetic Term Save→Reopen→revision2 Edit, six class subjects, source date edit/restore, assessment add/remove, typography and A4 PDF: PASS. /tmp/assps-term-merged-browser-term.log

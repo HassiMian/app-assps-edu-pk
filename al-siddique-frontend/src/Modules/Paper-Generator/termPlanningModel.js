@@ -22,10 +22,25 @@ const inTerm=(week,start,end)=>week?.start<=end&&week?.end>=start
 export const termKey=(klass,section,term,start)=>[
   klass,section,term,start].map(x=>String(x||'').trim().toLowerCase()).join('|')
 
-export function buildTermOverview(candidates,{start,end,imageReview,edits={}}={}){
+export function buildTermOverview(candidates,{start,end,imageReview,edits={},term='Second Term'}={}){
   assertTermRange(start,end)
   return (Array.isArray(candidates)?candidates:[]).map(candidate=>{
     const id=candidate.candidate_key
+    // The pinned private school archive was sourced for Second Term.
+    // Never silently reuse those dated topics/pages as First or Third Term.
+    if(term!=='Second Term'){
+      const override=edits[id]||{}
+      return {
+        id,subject:candidate.source_subject_label,
+        detail:override.detail===undefined?'':String(override.detail),
+        pageFrom:override.pageFrom===undefined?'':String(override.pageFrom),
+        pageTo:override.pageTo===undefined?'':String(override.pageTo),
+        sourceStatus:'UNSOURCED TERM — TEACHER PROPOSAL',
+        originalSourceIds:[],needsReview:true,
+        warnings:['Original school source archive is Second Term only. Verify this term independently.'],
+        events:[]
+      }
+    }
     const compiled=compileWeeklyPlan(candidate,{start,end,imageReview})
     const matched=(compiled.weeks||[]).filter(x=>inTerm(x,start,end))
     const teaching=matched.filter(x=>x.source!=='ORIGINAL_ASSESSMENT_ONLY')
@@ -115,6 +130,8 @@ export function buildTermServerPayload({klass,section,term,start,end,rows,
       classLevel:klass,section,termLabel:term,startDate:start,endDate:end,
       subjects,analysis:{warnings:['Term source, dates and subject offerings require institutional review']},
       provenance:{marker:TERM_MARKER,termKey:identity,sourceZipSha256,
+        sourceArchiveScope:'SECOND_TERM_ONLY',
+        sourceApplicability:term==='Second Term'?'ORIGINAL_REVIEW_PENDING':'UNSOURCED_MANUAL_DRAFT',
         academicPublication:'BLOCKED',deterministic:true,aiEnhanced:false}}),
     schemaVersion:3,
     title:'Term Planner — '+klass+' — '+term+' — '+start,

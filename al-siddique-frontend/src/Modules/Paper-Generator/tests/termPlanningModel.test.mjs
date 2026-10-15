@@ -102,3 +102,21 @@ test('long weekly statements and selected A4 typography survive server serializa
  assert.equal(d.layoutSettings.rowHeight,40)
  assert.equal(d.provenance.academicPublication,'BLOCKED')
 })
+
+test('First or Third Term never automatically inherits Second Term textbook/source dates',()=>{
+ for(const term of ['First Term','Third Term']){
+  const other=buildTermOverview(source,{...options,term})
+  assert.equal(other.length,2)
+  assert.ok(other.every(r=>r.detail===''&&r.pageFrom===''&&r.pageTo===''))
+  assert.ok(other.every(r=>r.events.length===0&&r.originalSourceIds.length===0))
+  assert.ok(other.every(r=>r.sourceStatus.includes('UNSOURCED')))
+  const manual={...other[0],detail:'Teacher proposed unrelated term topic',
+   pageFrom:'12',pageTo:'21'}
+  const saved=buildTermServerPayload({klass:'Four',section:'Blue',term,
+   start:options.start,end:options.end,rows:[manual,other[1]],
+   assessments:[],sourceZipSha256:sha})
+  assert.equal(saved.plannerDocument.provenance.sourceArchiveScope,'SECOND_TERM_ONLY')
+  assert.equal(saved.plannerDocument.provenance.sourceApplicability,'UNSOURCED_MANUAL_DRAFT')
+  assert.equal(saved.plannerDocument.provenance.academicPublication,'BLOCKED')
+ }
+})

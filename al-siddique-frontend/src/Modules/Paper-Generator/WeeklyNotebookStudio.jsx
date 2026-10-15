@@ -168,9 +168,9 @@ export default function WeeklyNotebookStudio(){
  const termRows=useMemo(()=>{
    if(!manifest)return []
    try{return buildTermOverview(candidates,{
-     start,end,imageReview:manifest?.class_one_image_review,edits:termEdits
+     start,end,term:termName,imageReview:manifest?.class_one_image_review,edits:termEdits
    })}catch{return []}
- },[candidates,start,end,manifest,termEdits])
+ },[candidates,start,end,termName,manifest,termEdits])
  const termAssessments=useMemo(()=>termAssessmentRows(termRows,termManualAssessments),
    [termRows,termManualAssessments])
  const teacher=CLASS_INCHARGES[klass]?.join(' & ')||'Class in-charge to be verified'

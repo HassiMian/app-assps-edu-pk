@@ -32,7 +32,7 @@ function privateLessonMutationAllowed(existing,proposed,id){
  if(!mustHoldLessonPublication(proposed,id))return false
  const previous=documentOf(existing),next=documentOf(proposed)
  const a=provenanceOf(existing),b=provenanceOf(proposed)
- for(const key of ['marker','sourceZipSha256','weeklyKey','termKey','academicPublication']){
+ for(const key of ['marker','sourceZipSha256','weeklyKey','termKey','sourceArchiveScope','sourceApplicability','academicPublication']){
    if(String(a[key]||'')!==String(b[key]||''))return false
  }
  if(String(b.academicPublication||'').toUpperCase()!=='BLOCKED')return false

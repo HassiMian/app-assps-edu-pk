@@ -48,3 +48,14 @@ test('revision-safe private syllabus editing preserves immutable source identity
  next.plannerDocument.classLevel='Five'
  assert.equal(privateLessonMutationAllowed(old,next,'lp-synthetic'),false)
 })
+
+test('source-term applicability cannot be forged in protected plan edits',()=>{
+ const a={plannerDocument:{planningType:'term',classLevel:'Four',section:'Blue',
+  startDate:'2026-10-15',endDate:'2027-02-15',
+  provenance:{marker:'ASSPS_TERM_NOTEBOOK_V1',termKey:'four|blue|first term|2026-10-15',
+   sourceZipSha256:'a'.repeat(64),sourceArchiveScope:'SECOND_TERM_ONLY',
+   sourceApplicability:'UNSOURCED_MANUAL_DRAFT',academicPublication:'BLOCKED'}}}
+ const b=structuredClone(a)
+ b.plannerDocument.provenance.sourceApplicability='ORIGINAL_REVIEW_PENDING'
+ assert.equal(privateLessonMutationAllowed(a,b,'lp-unsourced-manual'),false)
+})

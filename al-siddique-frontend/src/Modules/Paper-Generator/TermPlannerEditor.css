@@ -71,3 +71,5 @@
 
 .term-meta{flex-wrap:wrap}
 .term-small-action{font-size:9px!important;padding:4px 6px!important;margin-top:4px}
+
+.term-print-unsourced{font:700 11px Arial,sans-serif;color:#85632b;border:1px solid #d2b875;padding:7px;text-align:center;break-inside:avoid}
