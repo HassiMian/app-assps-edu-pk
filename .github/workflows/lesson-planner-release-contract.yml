@@ -108,6 +108,9 @@ jobs:
       - name: Install headless browser for protected Diary and Marks acceptance
         run: npx playwright install --with-deps chromium
         working-directory: al-siddique-frontend
+      - name: Lint protected Marks Register before release
+        run: ./node_modules/.bin/eslint src/Modules/examination/MarksRegister.jsx src/Modules/examination/MarksSheet.jsx src/Modules/examination/tests/MarksRegisterBrowser.test.js
+        working-directory: al-siddique-frontend
       - name: Verify saved Marks Register, zero-versus-blank and denied printing
         run: node --test src/Modules/examination/tests/MarksRegisterBrowser.test.js
         working-directory: al-siddique-frontend

@@ -57,3 +57,25 @@ test('school API 403 denial never prints any saved marks',{timeout:75000},async 
  assert.equal(await page.locator('tbody tr').count(),0)
  console.log('MARKS_REVIEW_DENIED_NO_STUDENT_DATA_NO_PRINT_PASS')
 })
+
+test('switching to a denied examination clears previously visible marks before 403 response',{timeout:75000},async t=>{
+ const vite=await createServer({root,server:{port:5875,strictPort:true}})
+ await vite.listen()
+ const browser=await chromium.launch({headless:true,args:['--no-sandbox']})
+ t.after(async()=>{await browser.close();await vite.close()})
+ const context=await browser.newContext()
+ await context.route('**/api/exams*',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:[{id:9,name:'First Term'},{id:10,name:'Restricted Exam'}]})}))
+ await context.route('**/api/exams/results*',r=>{
+  const blocked=new URL(r.request().url()).searchParams.get('exam_ids')==='10'
+  return r.fulfill({status:blocked?403:200,contentType:'application/json',body:JSON.stringify(blocked?{success:false,message:'Restricted examination.'}:{success:true,data:[{id:1,exam_id:9,student_id:101,student_name:'Amina',class:'9',section:'Girls',subject:'English',marks_obtained:0,total_marks:75,result_status:'SCORED'}]})})
+ })
+ const page=await context.newPage()
+ await page.goto('http://127.0.0.1:5875/marks-register-test.html')
+ await page.getByText('Amina',{exact:true}).waitFor({timeout:20000})
+ await page.getByLabel('Examination').selectOption('10')
+ await page.getByText('Restricted examination.').waitFor({timeout:20000})
+ assert.equal(await page.getByText('Amina',{exact:true}).count(),0)
+ assert.equal(await page.locator('tbody tr').count(),0)
+ assert.equal(await page.getByRole('button',{name:'Print Marks Sheet'}).isDisabled(),true)
+ console.log('MARKS_EXAM_SWITCH_DENIAL_PURGES_STALE_ROWS_PASS')
+})
