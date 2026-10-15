@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 import Portal from '../../components/Portal'
 import { useSearchParams } from 'react-router-dom'
 import api from '../../services/api'
@@ -6,6 +6,23 @@ import { getTenantStorageItem, setTenantStorageItem } from '../../services/tenan
 import { DonutChart, BarChart, ChartLegend } from '../../components/Charts'
 import { PERMISSION_GROUPS, ALL_PERMISSIONS, DEFAULT_TEACHER_PERMISSIONS } from '../../services/permissions'
 import { BadgeCheck, BriefcaseBusiness, Clock3, Percent, UserCheck, Users, VenusAndMars, Wallet } from 'lucide-react'
+
+// Source-level repair of the live Employees hotfix. These values must be
+// statically imported/defined, never injected into immutable hashed assets.
+const btnPrimary = {
+ minHeight:40, display:'inline-flex', alignItems:'center', justifyContent:'center',
+ gap:8, background:'var(--apex-action-primary)', color:'#fff',
+ border:'1px solid transparent', borderRadius:'var(--apex-radius-sm)',
+ padding:'8px 15px', fontWeight:750, fontSize:13, cursor:'pointer',
+ boxShadow:'0 8px 20px color-mix(in srgb, var(--apex-action-primary) 20%, transparent)'
+}
+const btnSecondary = {
+ minHeight:40, display:'inline-flex', alignItems:'center', justifyContent:'center',
+ gap:8, background:'var(--apex-bg-surface-solid)',
+ color:'var(--apex-text-secondary)', border:'1px solid var(--apex-border-default)',
+ borderRadius:'var(--apex-radius-sm)', padding:'8px 15px', fontWeight:700,
+ fontSize:13, cursor:'pointer', boxShadow:'var(--apex-shadow-sm)'
+}
 
 const DEFAULT_DESIGNATIONS = ['Principal','Vice Principal','Teacher','Subject Teacher','PTI','Librarian','Clerk','Accountant','IT Staff','Peon','Security Guard','Driver','Sweeper','Cook']
 const DEFAULT_SUBJECTS = ['Mathematics','English','Urdu','Science','Social Studies','Islamiyat','Computer Science','Arts','Physical Education','Library','Administration','N/A']
