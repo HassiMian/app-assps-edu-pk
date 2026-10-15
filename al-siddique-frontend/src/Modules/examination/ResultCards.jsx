@@ -2,6 +2,7 @@ import './premiumResultCardDesigner.css'
 import { summarizeResultRows, formatResultCell, meetsResultPassMark } from './resultPreviewIntegrity'
 import { getResultLogoDiagnostic } from './resultLogoDiagnostics'
 import { summarizePrintBatch } from './resultPrintPlanning'
+import {reconcileOfficialSubjectRoster,findGradeForPercent} from './resultCardIntegrityGate'
 import { buildResultStudents } from './resultStudentIdentity'
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
@@ -19,7 +20,7 @@ import {openResultPrintWindow, resultCardPrintCss} from './premiumResultCardPrin
 
 function gradeLabel(pct, bands = []) {
   const value = Math.max(0, Math.min(100, Number(pct) || 0))
-  const match = (Array.isArray(bands) ? bands : []).find(row => value >= Number(row.from) && value <= Number(row.to))
+  const match = findGradeForPercent(value,bands)
   return match?.label || '—'
 }
 
@@ -45,7 +46,7 @@ export function ProfessionalParametersModal({ cards, student, exam, studentMarks
   const sourceCards = cards?.length ? cards : [{ student, exam, studentMarks }]
   const dataList = sourceCards
     .filter(item => item?.student && item?.exam && item?.studentMarks?.length)
-    .map(item => buildResultCardData({ ...item, options: { ...options, gradeBands }, school }))
+    .map(item => ({...buildResultCardData({ ...item, options: { ...options, gradeBands }, school }),academicIntegrity:item.academicIntegrity}))
   const hasNonScoredStatus = sourceCards.some(item => (item.studentMarks || []).some(row => {
     const status = String(row?.result_status ?? row?.exam_result_status ?? '').trim().toUpperCase()
     return status && status !== 'SCORED'
@@ -63,6 +64,8 @@ export function ProfessionalParametersModal({ cards, student, exam, studentMarks
     }
     if (batchInfo.absentLogo) { window.alert(`${batchInfo.absentLogo} result card(s) have no school logo configured. Set the correct logo in SaaS School/Paper Settings before printing.`); return }
     if (batchInfo.missingStudent || batchInfo.missingSubject) { window.alert('A student identity or subject name is missing from the authenticated result records. Verify the saved records before printing.'); return }
+    const unverified = dataList.filter(item=>item.academicIntegrity?.status!=='READY_FOR_REVIEW').length
+    if (unverified && !window.confirm('ACADEMIC DRAFT: '+unverified+' of '+dataList.length+' cards contain missing or unverified subjects. All printouts are visibly labeled DRAFT or AWAITING APPROVAL; no scores are invented. Print draft copies only?')) return
     if (batchInfo.unscoredCards) { window.alert(`${batchInfo.unscoredCards} result card(s) have no recorded complete subject marks. Enter actual student marks first; blank worksheets can be printed from Marks Sheet without inventing result grades.`); return }
     if (batchInfo.ungraded) { window.alert(`${batchInfo.ungraded} complete subject result(s) have no matching school grade band. Review the school's approved grade settings before printing.`); return }
     if (data?.options?.template && ['signature-editorial','swiss-grid','data-atelier','regal-linework','young-scholars','academic-heritage','airframe-geometry','corporate-ledger','examination-dossier'].includes(data.options.template)) {
@@ -199,7 +202,7 @@ export default function ResultCards() {
   const { classNames: academicClassNames, sectionsForClass } = useAcademicStore()
 
   useEffect(() => {
-    Promise.all([api.get('/api/exams'), api.get('/api/exams/grade-settings')])
+    Promise.all([api.get('/api/exams',{params:{include_subjects:'1'}}), api.get('/api/exams/grade-settings')])
       .then(([examResponse, gradeResponse]) => {
         const list = (examResponse.data.data || []).filter(e=>!/^smoke\s+test\s+exam\b/i.test(String(e?.name||'').trim()))
         setExams(list)
@@ -350,10 +353,14 @@ export default function ResultCards() {
         className: safeClass,
         class: safeClass,
       }
+      const reconciled=reconcileOfficialSubjectRoster({
+        student:sanitizedStudent,exam:examObj,
+        rows:rows.filter(r => String(r.student_id) === String(s.id))
+      })
       return {
-        student: sanitizedStudent,
-        exam: examObj,
-        studentMarks: rows.filter(r => String(r.student_id) === String(s.id)),
+        student:sanitizedStudent,exam:examObj,
+        studentMarks:reconciled.rows,
+        academicIntegrity:reconciled.audit,
       }
     }).filter(item => item && item.studentMarks.length > 0), [activeResults, exam, students])
 
@@ -407,14 +414,20 @@ export default function ResultCards() {
     }
   }
 
+  const candidateDrafts = outputMode === 'class'
+    ? classPrintCards.filter(item=>item.academicIntegrity?.status!=='READY_FOR_REVIEW').length
+    : outputMode === 'all'
+      ? allExamPrintCards.filter(item=>item.academicIntegrity?.status!=='READY_FOR_REVIEW').length
+      : 0
   const canPrint = outputMode === 'single'
     ? !!student && studentMarks.length > 0
     : outputMode === 'class'
     ? !!selectedPrintClass && classPrintCards.length > 0
     : outputMode === 'all'
-    ? (allExamPrintCards.length > 0 || exams.length > 0)
+    ? allExamPrintCards.length > 0
     : false
 
+  const resultDraftWarning = candidateDrafts > 0 ? (candidateDrafts+' card(s) require academic review — DRAFT status, no fabricated marks.') : ''
   const openDesigner = async () => {
     if (outputMode === 'single') {
       if (!student || !studentMarks.length) return alert('Select student with marks first')
@@ -616,6 +629,8 @@ export default function ResultCards() {
                     ? 'One A4 page per student in selected class and section'
                     : 'All enrolled exam classes with saved marks will be printed'}
                 </div>
+                {resultDraftWarning && <div role="status" style={{marginTop:8,borderTop:'1px solid rgba(180,139,80,.26)',paddingTop:7,fontWeight:750,fontSize:12,color:'#E3B86F'}}>{resultDraftWarning}</div>}
+                <div style={{marginTop:6,fontSize:11,color:C.muted}}>Official approval is separate from preview or draft printing. No missing score is converted to zero.</div>
               </div>
             )}
           </div>

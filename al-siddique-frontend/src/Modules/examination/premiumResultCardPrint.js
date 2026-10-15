@@ -260,17 +260,21 @@ export function openResultPrintWindow(data, exportMode = false, previewOnly = fa
    if(img.complete&&img.naturalWidth===0)blocked(logoError);
    img.addEventListener('error',function(){blocked(logoError)},{once:true});
   });
-  window.addEventListener('load',finish);
-  if(document.readyState==='complete')setTimeout(finish,0);
-  setTimeout(function(){blocked('Some result card assets are still loading. Verify the school logo in SaaS settings and retry opening print.');},9500);
+  window.__asspsValidatedResultPrint=finish;
+  var autoPrint=${!previewOnly};
+  if(autoPrint){
+   window.addEventListener('load',finish);
+   if(document.readyState==='complete')setTimeout(finish,0);
+   setTimeout(function(){if(started&&!finished)blocked('Print preflight still loading. Verify school logo and retry.');},9500);
+  }
  })();
  </script>`
  const toolbar = previewOnly
-   ? '<div class="batch-doc-actions"><strong>ASSPS · '+cards.length+' result card(s) · Complete Class Document</strong><button type="button" onclick="window.print()">Print / Save PDF</button></div>'
+   ? '<div class="batch-doc-actions"><strong>ASSPS · '+cards.length+' result card(s) · Complete Class Document</strong><button type="button" onclick="window.__asspsValidatedResultPrint()">Print / Save PDF</button></div>'
    : ''
  const controlsCss = '.batch-doc-actions{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:#1c3e51;color:#fff;font:700 13px Arial,sans-serif}.batch-doc-actions button{background:white;color:#234859;border:0;border-radius:7px;padding:10px 17px;cursor:pointer;font-weight:700}@media print{.batch-doc-actions{display:none!important}}'
  const printStatusCss = '#result-print-status{display:none;margin:12px;padding:12px;border:1px solid #B45309;color:#92400E;background:#FFFBEB;font:14px Arial,sans-serif}@media print{#result-print-status{display:none!important}}'
- const html = '<!doctype html><html><head><meta charset="UTF-8"><title>'+safeTitle+'</title><style>'+resultCardPrintCss.replace('@page { size: A4; margin: 0; }', pageRule)+premiumReadabilityCss+batchCss+controlsCss+printStatusCss+'</style></head><body>'+toolbar+'<div id="result-print-status" role="alert"></div>'+cardMarkup+(previewOnly ? '' : printReadyScript)+'</body></html>'
+ const html = '<!doctype html><html><head><meta charset="UTF-8"><title>'+safeTitle+'</title><style>'+resultCardPrintCss.replace('@page { size: A4; margin: 0; }', pageRule)+premiumReadabilityCss+batchCss+controlsCss+printStatusCss+'</style></head><body>'+toolbar+'<div id="result-print-status" role="alert"></div>'+cardMarkup+printReadyScript+'</body></html>'
 
  const w = window.open('', '_blank', 'width=1100,height=900')
  if (!w) { window.alert('Your browser blocked the print window. Allow pop-ups for this SaaS site and retry.'); return false }
