@@ -104,3 +104,5 @@ jobs:
         run: node --test al-siddique-frontend/src/Modules/Paper-Generator/grade910PaperWorkspaceVerifiedBridge.test.mjs
       - name: Verify safe rollout and original source boundaries
         run: python3 -m unittest discover -s ops/release/tests -p test_lesson_rollout_guard.py -v
+      - name: Require all three Paper Studio routes to survive real postflight
+        run: python3 -m unittest discover -s ops/release/tests -p test_paper_studio_full_postflight.py -v
