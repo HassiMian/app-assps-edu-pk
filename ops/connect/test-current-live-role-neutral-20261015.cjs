@@ -42,7 +42,11 @@ chk('catchall is neutral if a middleware path is bypassed',()=>{
  assert.match(x,/redirect\("\/login"\)/);
  assert.doesNotMatch(x,/redirect\("\/admin"\)/);
 });
-for (const f of ['src/components/LoginClient.tsx','src/app/auth/change-password/page.tsx','src/app/teacher/assessments/page.tsx','src/lib/server/auth-user.ts']) {
- chk('newer production module unchanged '+f,()=>assert.deepEqual(fs.readFileSync(path.join(root,f)),fs.readFileSync('/var/www/apex-connect/'+f)));
+// Preserve unrelated teacher assessment code exactly. The reviewed first-login challenge
+// deliberately changes LoginClient, change-password and auth-user; requiring those
+// to match the older live Blue would incorrectly reject the security fix.
+// Auth changes are covered separately by test-current-live-temporary-login-20261015.cjs.
+for (const f of ['src/app/teacher/assessments/page.tsx']) {
+ chk('unrelated protected production module unchanged '+f,()=>assert.deepEqual(fs.readFileSync(path.join(root,f)),fs.readFileSync('/var/www/apex-connect/'+f)));
 }
 console.log('CURRENT_LIVE_NEXT_ROLE_NEUTRAL',checks+'/'+checks,'PASS');
