@@ -140,6 +140,17 @@ def main():
     contract=json.loads(CONTRACT.read_text())
     qa=mod.validate(dist,contract,repo)
     if not qa['pass']:raise RuntimeError('Built frontend FAILED actual reachable Lesson Planner contract')
+    # Protect independently evolving live Daily Diary and Early Years modules.
+    # An older source descendant alone is not enough to preserve uncommitted
+    # yet deployed cross-owner functionality.
+    companion_script=HERE/'check-preserved-companion-features.py'
+    companion_spec=spec_from_file_location('assps_companions',companion_script)
+    companion_module=module_from_spec(companion_spec)
+    companion_spec.loader.exec_module(companion_module)
+    companions_contract=json.loads((HERE/'preserved-companions-v1.json').read_text())
+    companions=companion_module.evaluate(repo,companions_contract)
+    if companions['result']!='PASS':
+        raise RuntimeError('Current live Diary / Early Years capabilities missing: reconcile reviewed owner changes first')
     newroot=OUTPUT_ROOT/('assps-lesson-planner-'+commit[:12])
     expected_new=sha(dist/'index.html')
     plan={'decision':'READY_FOR_CORE_GATE' if not args.apply else 'CORE_GATE_CHECK_REQUIRED',

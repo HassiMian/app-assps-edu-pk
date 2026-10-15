@@ -44,3 +44,24 @@ release gates pass. Do not bypass a failing check by simply deleting it.
 Existing students, examination results, numeric zero vs blank values,
 official school papers, staff credentials and other agent's protected
 features must never be reset, deleted, leaked or overwritten.
+
+
+## Preserve the currently live Diary and Early Years improvements
+
+The public 15-Oct build was traced to an independently dirty Result Cards
+source worktree with eight unpublished modifications and a new printing module.
+Those changes include working Diary font controls and Early Years print.
+The 1d9291b Lesson Planner recovery branch lacks some of those live features.
+
+Run `python3 ops/release/check-preserved-companion-features.py` before
+any public frontend deployment. Until the Paper Studio owner has reconciled
+the identified source differences in a CLEAN latest canonical descendant,
+the policy must return HOLD. Do NOT replace the 1,732-line live-derived
+Diary module with a 261-line older component solely to fix Lesson Planning;
+do not overwrite any other agent's dirty original worktree.
+
+This independent companion guard is versioned, not a fixed-SHA deployment
+ban. Owners can improve or intentionally replace the Diary/printing design,
+then update the reviewed feature contract and its adversarial tests.
+The final built index/chunk graph, protected backend guard and genuine Core
+release certificates remain separately required.

@@ -6,6 +6,9 @@ on:
       - "al-siddique-frontend/**"
       - "ops/release/check-lesson-planner-ui.py"
       - "ops/release/guarded-lesson-planner-rollout.py"
+      - "ops/release/check-preserved-companion-features.py"
+      - "ops/release/preserved-companions-v1.json"
+      - "ops/release/tests/test_preserved_companions.py"
       - "ops/release/lesson-planner-ui-contract-*.json"
       - "ops/release/tests/test_lesson_planner_ui_contract.py"
       - ".github/workflows/lesson-planner-release-contract.yml"
@@ -20,6 +23,9 @@ on:
       - "al-siddique-frontend/**"
       - "ops/release/check-lesson-planner-ui.py"
       - "ops/release/guarded-lesson-planner-rollout.py"
+      - "ops/release/check-preserved-companion-features.py"
+      - "ops/release/preserved-companions-v1.json"
+      - "ops/release/tests/test_preserved_companions.py"
       - "ops/release/lesson-planner-ui-contract-*.json"
       - "ops/release/tests/test_lesson_planner_ui_contract.py"
       - ".github/workflows/lesson-planner-release-contract.yml"
@@ -50,6 +56,8 @@ jobs:
         working-directory: al-siddique-frontend
       - name: Verify active Lesson Planner from index import graph
         run: python3 ops/release/check-lesson-planner-ui.py --dist al-siddique-frontend/dist
+      - name: Preserve live Diary / Early Years functionality before frontend cutover
+        run: python3 ops/release/check-preserved-companion-features.py
       - name: Verify stale-but-present chunks cannot bypass regression check
         run: python3 -m unittest discover -s ops/release/tests -p test_lesson_planner_ui_contract.py -v
       - name: Verify safe rollout and original source boundaries
