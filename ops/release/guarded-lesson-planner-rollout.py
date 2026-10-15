@@ -38,6 +38,23 @@ RUNNING_BACKEND = Path('/var/www/apex-backend')
 HTML_ROOT_RE = re.compile(r'^([ \t]*root[ \t]+)(/var/www/assps-[^\s;]+)(;[ \t]*)$', re.M)
 
 
+def verify_full_paper_studio_postflight(dist, repo, lesson_checker, lesson_contract,
+                                        companion_checker, companion_contract,
+                                        diary_guard, runner=None):
+    """Fail closed if promoted Diary, Term/Weekly/Daily Lesson or Early Years regresses."""
+    if runner is None:
+        runner = run
+    result = lesson_checker.validate(dist, lesson_contract, repo)
+    if not result.get('pass'):
+        raise RuntimeError('FAIL_CLOSED: reachable Lesson Planner V5 contract failed postflight')
+    result = companion_checker.evaluate(repo, companion_contract, dist)
+    if result.get('result') != 'PASS':
+        raise RuntimeError('FAIL_CLOSED: Early Years / Diary companion contract failed postflight')
+    if runner(['node', str(diary_guard), '--dist', str(dist)]).returncode != 0:
+        raise RuntimeError('FAIL_CLOSED: active Diary controller contract failed postflight')
+    return True
+
+
 def sha(path):
     h=hashlib.sha256()
     with Path(path).open('rb') as f:
@@ -216,8 +233,11 @@ def main():
                 raise RuntimeError('Local TLS frontend postflight failed')
             # Never mark success until the exact promoted root passes the same
             # active-entrypoint protection; failure triggers original-config rollback.
-            if run(['node',str(diary_guard),'--dist',str(newroot)]).returncode!=0:
-                raise RuntimeError('FAIL_CLOSED: active Diary controller contract failed postflight')
+            # Postflight must prove ALL Paper Studio routes reachable in the exact
+            # promoted root, not only Diary. Any regression triggers rollback.
+            verify_full_paper_studio_postflight(
+                newroot, repo, mod, contract, companion_module,
+                companions_contract, diary_guard)
             success=True
             plan.update(decision='FRONTEND_ONLY_PROMOTED_CORE_VERIFIED',
                         production_changed=True,rollback_config=str(backup/'apex-app-ssl.pre-change'))
