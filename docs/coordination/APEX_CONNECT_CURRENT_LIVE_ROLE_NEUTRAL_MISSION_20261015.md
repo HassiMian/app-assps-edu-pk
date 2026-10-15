@@ -38,3 +38,22 @@ Official SaaS Core alone promotes shared backend, DB, Nginx, Next production.
 Before any public release: genuine existing Muhammad Imran temporary-password change and authenticated relogin, independent authenticated existing school-2/unauthorized-subject HTTP denials, supervised signed Green worker installed in latest live backend preserving Weekly Notebook routes, independent authenticated human reviewer/owner SHA-bound release receipts, exact current Blue restore and rollout rollback, atomic Next+Nginx traffic cutover and postflight. No fake actors, synthetic signatures, password retrieval, or resetting real teacher credentials. School1 Exam9 baseline 1762 genuine marks with 213 actual zeros and immutable original digest must remain intact. Private isolated success is not public security certification.
 
 Status by this Connect Master: **reviewed source candidate delivered; public cutover explicitly HOLD**.
+
+
+## Integrated first-login temporary-password recovery (15 October)
+
+**New latest-live-derived private QA candidate, not public:** /root/assps-release-candidates/apex-connect-login-challenge-current-live-20261015, built atop the earlier tested role-neutral current-live source. The earlier current-live snapshot and its private HTTPS browser proof are preserved unchanged.
+
+A fresh current-live inspection identified an additional actual source defect explaining the reported teacher first-login blink/redirect loop: LoginClient previously called contextLogin immediately on a temporary-password response, before finishing the password-change challenge. This races canonical signed-session verification, which can redirect back to role choice/login. Selectively ported three previously reviewed modules only (not an old complete Next tree):
+
+- src/components/LoginClient.tsx: do not hydrate an authenticated session on mustChangePassword; constrain challenge navigation to an exact local numeric userId URL; after a normal login, reverify actual server-issued HttpOnly session via /api/auth/me, match canonical user id and role/portal before opening the portal; add reset-password visibility.
+- src/app/auth/change-password/page.tsx: accessible visibility controls for current, new, confirm password, preserving existing change-temporary-password API calls and clearing old local credentials after change.
+- src/lib/server/auth-user.ts: reject reset-marked user's older portal JWT/cookie while role and tenant remain checked, no request-time database DDL or password reset.
+
+The untouched actual latest Connect API login handler, teacher assessments/report-cards, unrelated api utility and role-neutral proxy were compared byte-for-byte with the previous current-live candidate.
+
+**New exact next QA version:** private local source-snapshot Git SHA ff947da97858e76b628d66da5de857553b2cb342 (this is NOT a remote public production commit); actual optimized Next.js 16.2.6 build including TypeScript and postbuild exit0, BUILD_ID 1C7EPZhqltxUUzTMiDTwQ, build log SHA256 913b8c5a0edfae0c3420ecbea0e9405fcfe052788d864ea80e3995cad549c377. Auth file SHA256 (LoginClient) 3d45699280a63c0089b5b35a629b307306fc74f69eee684b5b3ac66c34f965b8, (password-change UI) 4f1087fae2f6d2c6d9457e8ea255ea1085b6b87002bb5a521b1e5eaea21860f6, (auth-user) 06c47ef8ff003f7425f9204ad08b4e5a6e25a13c3d6cde45cd07bfb46166cc90.
+
+Actual tests against new candidate: 6/6 temporary-login/session role/tenant security checks, 10/10 legacy dashboard role-neutral checks, 2/2 auth logout-relogin race checks and isolated tsc noEmit PASS. Full optimized build PASS. Browser acceptance specific to this new **auth** candidate is **NOT VERIFIED** (the platform did not permit the attempted private replay); 9/9 strictly authenticated-TLS Chromium prior result is for the earlier routing-only candidate, not the newly built auth version. Do not substitute synthetic fixtures or static tests for Muhammad Imran's actual self-authenticated temporary password change and relogin.
+
+A portable incremental review patch against the exact prior live-derived role-neutral QA source is published as docs/coordination/APEX_CONNECT_CURRENT_LIVE_AUTH_CHALLENGE_20261015.patch, SHA256 ee2be1cb43f332d743241eb0544189a29a912e9fa56670ce037e07609367dc40, with independent git apply --check PASS. Official Core release is still HOLD: running Next remains OND, worker adapter remains absent, real teacher/peer actor evidence and independent signed rollback receipts absent.
