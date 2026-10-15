@@ -132,5 +132,7 @@ jobs:
         working-directory: al-siddique-frontend
       - name: Verify safe rollout and original source boundaries
         run: python3 -m unittest discover -s ops/release/tests -p test_lesson_rollout_guard.py -v
+      - name: Enforce protected Lesson Planning and Diary source contracts
+        run: node --test ops/tests/lesson-diary-cognitive-contract.test.js
       - name: Require all three Paper Studio routes to survive real postflight
         run: python3 -m unittest discover -s ops/release/tests -p test_paper_studio_full_postflight.py -v
