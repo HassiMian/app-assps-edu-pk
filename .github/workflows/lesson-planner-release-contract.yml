@@ -81,6 +81,10 @@ jobs:
         run: python3 ops/release/check-preserved-companion-features.py --dist al-siddique-frontend/dist
       - name: Enforce actual active Diary controller import graph in built release artifact
         run: node ops/release/verify-diary-controls-in-active-bundle-20261015.cjs --dist al-siddique-frontend/dist
+      - name: Enforce live Marks Register View/Edit/Print active import graph
+        run: node ops/release/verify-marks-register-active-bundle-20261015.cjs --dist al-siddique-frontend/dist
+      - name: Reject missing, stale, or unauthorized Marks Register release bundles
+        run: node --test ops/tests/marks-register-active-bundle-20261015.test.cjs
       - name: Verify immutable candidate and adversarial missing-controller detection
         run: ASSPS_DIARY_CANDIDATE_DIST=al-siddique-frontend/dist node --test ops/tests/paper-diary-active-controller-immutable-release-gate-20261015.test.cjs
       - name: Verify stale-but-present chunks cannot bypass regression check
