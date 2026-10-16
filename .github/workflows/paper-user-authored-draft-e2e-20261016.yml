@@ -1,0 +1,39 @@
+name: ASSPS Paper User-Authored Draft Chromium Contract
+on:
+  push:
+    branches:
+      - 'fix/paper-user-authored-blank-workspace-*'
+    paths:
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PTSPaperGenerator.jsx'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/manualWeeklyAssessmentBrowserAcceptance.test.js'
+      - 'ops/paper-studio/run_disposable_teacher_e2e_20261016.sh'
+      - '.github/workflows/paper-user-authored-draft-e2e-20261016.yml'
+  pull_request:
+    paths:
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PTSPaperGenerator.jsx'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/manualWeeklyAssessmentBrowserAcceptance.test.js'
+      - 'ops/paper-studio/run_disposable_teacher_e2e_20261016.sh'
+jobs:
+  authored-draft:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: al-siddique-frontend/package-lock.json
+      - name: Install pinned frontend dependencies
+        run: npm ci --no-audit --no-fund
+        working-directory: al-siddique-frontend
+      - name: Install isolated Chromium
+        run: npx playwright install chromium --with-deps
+        working-directory: al-siddique-frontend
+      - name: Draft manual creation, server-revision mock, finalize, reopen and print
+        run: node --test src/Modules/Paper-Generator/PaperEditor/tests/manualWeeklyAssessmentBrowserAcceptance.test.js
+        working-directory: al-siddique-frontend
+      - name: Fail closed on invalid PG16 disposable runner syntax
+        run: bash -n ops/paper-studio/run_disposable_teacher_e2e_20261016.sh

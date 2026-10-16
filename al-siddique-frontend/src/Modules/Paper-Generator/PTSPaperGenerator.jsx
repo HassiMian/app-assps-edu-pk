@@ -609,6 +609,12 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const isUserAuthoredPaper = Boolean(paper?.userAuthored || loadedPaper?.userAuthored || overrideConfig?.userAuthored)
  const hasOfficialSection = Boolean(paper?.official_section?.length || loadedPaper?.official_section?.length)
  const isOfficialPaper = !isUserAuthoredPaper && Boolean(loadedPaper?.documentFormat === 'pts-native-v13' || loadedPaper?.documentFormat === 'official-v12' || hasOfficialSection)
+ const authoredFinalized = isUserAuthoredPaper && (
+  paper?.assessmentRelease?.status === 'FINALIZED' ||
+  loadedPaper?.assessmentRelease?.status === 'FINALIZED' ||
+  String(paper?.lifecycleStatus || loadedPaper?.lifecycleStatus || '').toUpperCase() === 'FINALIZED'
+ )
+ const canEditAuthoredDraft = isUserAuthoredPaper && !authoredFinalized
  const isOfficialOrHasOfficial = isOfficialPaper || hasOfficialSection
  let questionTypes = getFilteredQuestionTypes(subject?.name || '')
  // Ensure that any type with active questions is always shown, even if filtered out by subject
@@ -1461,7 +1467,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  {isUserAuthoredPaper && persistenceNotice && <div data-assessment-persistence-status style={{ fontSize:10, maxWidth:220, color:persistenceNotice.includes('Conflict')||persistenceNotice.includes('Offline')?'#fbbf24':'#86efac', fontWeight:700 }}>{persistenceNotice}</div>}
  <div data-paper-actions style={{ marginLeft:'auto', display:'flex', gap:8, alignItems:'center' }}>
  <DBtn color="ghost" onClick={onBack} style={{ padding:'8px 14px', fontSize:12 }}>← Back</DBtn>
- {isOfficialPaper && <button data-edit-paper-toggle type="button" onClick={toggleEditMode} style={{ padding:'8px 15px', borderRadius:9, border:`1px solid ${editMode?'#ef4444':D.border}`, cursor:'pointer', fontWeight:800, fontSize:12, background:editMode?'rgba(239,68,68,.16)':'rgba(11,44,77,.92)', color:editMode?'#fecaca':D.silver }}>{editMode?'Done Editing':'Edit Paper'}</button>}
+ {(isOfficialPaper || canEditAuthoredDraft) && <button data-edit-paper-toggle type="button" onClick={toggleEditMode} style={{ padding:'8px 15px', borderRadius:9, border:`1px solid ${editMode?'#ef4444':D.border}`, cursor:'pointer', fontWeight:800, fontSize:12, background:editMode?'rgba(239,68,68,.16)':'rgba(11,44,77,.92)', color:editMode?'#fecaca':D.silver }}>{editMode?'Done Editing':'Edit Paper'}</button>}
  <button onClick={()=>setModalOpen(true)} style={{ background:`linear-gradient(135deg,#0A84FF,#0055cc)`, color:'white', border:'none', borderRadius:10, padding:'8px 18px', fontWeight: 600, fontSize:13, cursor:'pointer', display:'flex', alignItems:'center', gap:7, }}> Question Menu {totalQs > 0 && (<span style={{ background:'rgba(255,255,255,0.25)', borderRadius:9, padding:'1px 8px', fontSize:11, fontWeight: 600 }}>{totalQs}</span>)}</button>
  <DBtn color="green" onClick={()=>doSave()} disabled={!totalQs && !isUserAuthoredPaper} style={{ padding:'8px 16px', fontSize:13 }}>{isUserAuthoredPaper ? 'Save Draft' : 'Save'}</DBtn>
  {isUserAuthoredPaper && <button data-finalize-assessment type="button" onClick={doFinalize} disabled={finalizing || !totalQs} style={{ padding:'8px 14px',borderRadius:9,border:`1px solid ${D.gold}`,background:'rgba(200,153,26,.10)',color:D.gold,fontWeight:900,fontSize:12,cursor:finalizing?'wait':'pointer',opacity:(finalizing||!totalQs)?0.55:1 }}>{finalizing?'Finalizing…':paper.assessmentRelease?.status==='FINALIZED'?'Finalized ✓':'Finalize'}</button>}
@@ -1614,7 +1620,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  </div>
  </div>
  <PaperSelectionToolbar editMode={editMode} active={activeEditable} />
- {editMode && isOfficialPaper && <div className="no-print" data-section-inspector style={{ position:'fixed', right:14, top:150, zIndex:11500, width:300, maxHeight:'calc(100vh - 185px)', overflowY:'auto', padding:12, border:'1px solid var(--pg-panel-border,#ef4444)', borderRadius:12, background:'var(--pg-panel-bg,rgba(7,25,48,.98))', color:D.silver, boxShadow:'var(--pg-panel-shadow,0 10px 34px rgba(0,0,0,.42))', fontFamily:'Arial,sans-serif', direction:'ltr' }}>
+ {editMode && (isOfficialPaper || canEditAuthoredDraft) && <div className="no-print" data-section-inspector style={{ position:'fixed', right:14, top:150, zIndex:11500, width:300, maxHeight:'calc(100vh - 185px)', overflowY:'auto', padding:12, border:'1px solid var(--pg-panel-border,#ef4444)', borderRadius:12, background:'var(--pg-panel-bg,rgba(7,25,48,.98))', color:D.silver, boxShadow:'var(--pg-panel-shadow,0 10px 34px rgba(0,0,0,.42))', fontFamily:'Arial,sans-serif', direction:'ltr' }}>
   <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:8, marginBottom:10 }}>
    <div><b style={{ color:D.gold, fontSize:12 }}>EDIT PAPER</b><div style={{ color:D.muted, fontSize:10, marginTop:2 }}>{selectedSection ? 'Question settings — paper layout stays fixed' : 'Click any question or editable line'}</div></div>
    {selectedSection && <button type="button" aria-label="Close question inspector" onClick={()=>{setSelectedSectionId('');setActiveEditable(null)}} style={{border:0,background:'transparent',color:D.muted,fontSize:18,cursor:'pointer'}}>×</button>}
@@ -1742,7 +1748,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <div style={{ fontSize:72, marginBottom:16, opacity:0.4 }}></div>
  <div style={{ fontSize:22, fontWeight:700, color:D.silver, marginBottom:10 }}>Paper Preview</div>
  <div style={{ fontSize:14, color:D.muted, maxWidth:380, lineHeight:1.7 }}>Click <strong style={{color:'#4da6ff'}}>Question Menu</strong> to add questions.<br/>Your paper will appear here live as you add them.</div>
- <button onClick={()=>isOfficialPaper ? addOfficialSection() : setModalOpen(true)} style={{ marginTop:28, background:`linear-gradient(135deg,#0A84FF,#0055cc)`, color:'white', border:'none', borderRadius:12, padding:'13px 34px', fontWeight: 600, fontSize:16, cursor:'pointer', boxShadow:'0 6px 20px rgba(10,132,255,0.35)', }}>{isOfficialPaper ? '+ Type First Question' : 'Open Question Menu'}</button>
+ <button onClick={()=>isOfficialPaper || canEditAuthoredDraft ? addOfficialSection() : setModalOpen(true)} style={{ marginTop:28, background:`linear-gradient(135deg,#0A84FF,#0055cc)`, color:'white', border:'none', borderRadius:12, padding:'13px 34px', fontWeight: 600, fontSize:16, cursor:'pointer', boxShadow:'0 6px 20px rgba(10,132,255,0.35)', }}>{isOfficialPaper || canEditAuthoredDraft ? '+ Type First Question' : 'Open Question Menu'}</button>
  </div>
  ) : half ? (
  <div className="preview-container" data-watermark-enabled={showWatermark?'true':'false'} data-watermark-scale={watermarkScale} data-watermark-opacity={watermarkOpacity} style={{ width:794, height:1123, zoom:previewZoom, flexShrink:0, background:'white', boxShadow:'0 4px 20px rgba(0,0,0,0.35)', overflow:'hidden', position:'relative' }}>
