@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - 'fix/paper-manual-heading-rich-revision-*'
+      - 'integration/core-paper-manual-richtext-rc-*'
     paths:
       - 'al-siddique-frontend/src/Modules/Paper-Generator/AssessmentStudio/core/manualAssessmentDocument.js'
       - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/core/PaperDocumentV2.js'
