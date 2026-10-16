@@ -13,6 +13,7 @@ import re
 import subprocess
 import sys
 from verify_public_anonymous_sensitive_api_denial_20261016 import run as check_public_anonymous_denial
+from verify_frontend_rollback_disk_budget_20261016 import run as measure_frontend_rollback_headroom
 
 CONNECT_OPS=Path(__file__).resolve().parent
 DEFAULT_CORE=Path('/root/workspace/assps-core-unified-p5-20261016')
@@ -31,6 +32,8 @@ APPROVED_CORE_DIST_SHA={
     'a2ff445a492e914e0988b2751da58000bd02b16e':'01805309fef95c61a39088569ae4727bba8a44d80fc8e14d4353c2a793ac30d6',
     # Rebuilt current Core+Paper marks-safe candidate; cherry-picked from e691 base.
     '05a59127e43cdcd2ee3a6b26694b8d798efef4d3':'1097d23897e1bc507a111c4c202aba47a54960e27cf62f34234f95e32e0c26e3',
+    # Independently rebuilt 05a descendant: Paper font QA/CI, unchanged compiled bytes.
+    '13ac2be49e8d0aa6939c82f510aa4bbc65caf2a7':'1097d23897e1bc507a111c4c202aba47a54960e27cf62f34234f95e32e0c26e3',
 }
 OFFICIAL=Path('/root/workspace/assps-core-connect-gate-exit-hardening-20261015/ops/release/signed-bluegreen/verify-connect-login-only-core-20261014.py')
 JOINT_CORE=OFFICIAL.with_name('verify-joint-current-candidates-20261015.py')
@@ -111,6 +114,26 @@ def make_phase_decisions(live:dict,compiled:dict,joint:dict,official:dict,verifi
         'public_release_authorized_by_this_tool':False,
         'production_changed':False,
     }
+
+def require_frontend_capacity_for_core_cutover(phases: dict, capacity: dict) -> dict:
+    # This can only further restrict Phase 4; never creates a release approval.
+    result = dict(phases)
+    if (capacity.get('scope') != 'READ_ONLY_COMPILED_FRONTEND_ROLLBACK_HEADROOM_ONLY'
+        or capacity.get('decision') != 'FRONTEND_SNAPSHOT_HEADROOM_PASS_NOT_RELEASE'
+        or capacity.get('ready') is not True
+        or capacity.get('signed_recovery_certified') is not False
+        or capacity.get('production_release_authorized') is not False
+        or capacity.get('production_modified') is not False):
+        result['phase_4_protected_production_cutover'] = 'HOLD'
+    return result
+
+def final_gate_ready_for_core_review(phases: dict) -> bool:
+    # 0 means "all evidence verified, Core owner still must approve/deploy".
+    # Phase3 alone is insufficient if storage or any later guard HOLDS.
+    return (phases.get('phase_3_independent_signed_core_authorization') == 'PASS'
+            and phases.get('phase_4_protected_production_cutover') == 'CORE_ONLY_PENDING'
+            and phases.get('public_release_authorized_by_this_tool') is False
+            and phases.get('production_changed') is False)
 
 def read_live(live:Path)->dict:
     facts={'source_sha':None,'nginx_root_correct':False,
@@ -222,10 +245,14 @@ def main()->int:
     out['phases']=make_phase_decisions(
         live,compiled,joint,{**official,'checks':official.get('checks')},
         out['verifier_exit_codes'])
-    out['decision']='PROTECTED_CORE_RELEASE_PENDING' if out['phases']['phase_3_independent_signed_core_authorization']=='PASS' else 'HOLD_NO_PRODUCTION_CUTOVER'
+    out['frontend_snapshot_capacity'] = measure_frontend_rollback_headroom(x.core, x.next_stage)
+    out['phases'] = require_frontend_capacity_for_core_cutover(
+        out['phases'], out['frontend_snapshot_capacity'])
+    ready_for_owner = final_gate_ready_for_core_review(out['phases'])
+    out['decision'] = 'PROTECTED_CORE_RELEASE_PENDING' if ready_for_owner else 'HOLD_NO_PRODUCTION_CUTOVER'
     print(json.dumps(out,indent=2,sort_keys=True))
     # Exit 2 means release not certified, not a silent success.
-    return 0 if out['phases']['phase_3_independent_signed_core_authorization']=='PASS' else 2
+    return 0 if ready_for_owner else 2
 
 if __name__=='__main__':
     sys.exit(main())

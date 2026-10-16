@@ -20,11 +20,50 @@ class Phases(unittest.TestCase):
  def test_unknown_newer_core_sha_denied(self):
   self.assertFalse(g.approved_core_artifact(Path('/tmp'), '0'*40))
  def test_reviewed_pinned_frontends_exact(self):
-  self.assertEqual(len(g.APPROVED_CORE_DIST_SHA),5)
+  self.assertEqual(len(g.APPROVED_CORE_DIST_SHA),6)
   self.assertEqual(g.APPROVED_CORE_DIST_SHA[g.CORE_INTEGRATION],
                    g.APPROVED_CORE_DIST_SHA['017d51060349e39150ebd508d0d670c10eb15f5f'])
   self.assertEqual(g.APPROVED_CORE_DIST_SHA['e6911732ff52df240390b28b37e531535c58a915'],
                    '07f14dad2bd55e0e3104681174925ac5425c6371c179a294ae319ada8672a01e')
+ def test_new_font_guard_core_exact_compiled_pin(self):
+  key='13ac2be49e8d0aa6939c82f510aa4bbc65caf2a7'
+  expected='1097d23897e1bc507a111c4c202aba47a54960e27cf62f34234f95e32e0c26e3'
+  self.assertEqual(g.APPROVED_CORE_DIST_SHA[key],expected)
+  self.assertEqual(g.APPROVED_CORE_DIST_SHA['05a59127e43cdcd2ee3a6b26694b8d798efef4d3'],expected)
+  from unittest.mock import patch
+  with patch.object(g,'sha',return_value=expected):
+   self.assertTrue(g.approved_core_artifact(Path('/synthetic/core'), key))
+   self.assertFalse(g.approved_core_artifact(Path('/synthetic/core'), 'f'*40))
+  with patch.object(g,'sha',return_value='0'*64):
+   self.assertFalse(g.approved_core_artifact(Path('/synthetic/core'), key))
+ def test_signed_success_does_not_bypass_frontend_capacity_or_core_owner(self):
+  green={'phase_3_independent_signed_core_authorization':'PASS',
+         'phase_4_protected_production_cutover':'CORE_ONLY_PENDING',
+         'production_changed':False,
+         'public_release_authorized_by_this_tool':False}
+  self.assertTrue(g.final_gate_ready_for_core_review(green))
+  for update in ({'phase_3_independent_signed_core_authorization':'HOLD'},
+                 {'phase_4_protected_production_cutover':'HOLD'},
+                 {'production_changed':True},
+                 {'public_release_authorized_by_this_tool':True}):
+   self.assertFalse(g.final_gate_ready_for_core_review({**green,**update}))
+  self.assertFalse(g.final_gate_ready_for_core_review({}))
+ def test_core_owner_phase4_requires_separate_frontend_headroom(self):
+  phase={'phase_4_protected_production_cutover':'CORE_ONLY_PENDING',
+         'production_changed':False,'public_release_authorized_by_this_tool':False}
+  good={'scope':'READ_ONLY_COMPILED_FRONTEND_ROLLBACK_HEADROOM_ONLY',
+        'decision':'FRONTEND_SNAPSHOT_HEADROOM_PASS_NOT_RELEASE',
+        'ready':True,'signed_recovery_certified':False,
+        'production_release_authorized':False,'production_modified':False}
+  self.assertEqual(g.require_frontend_capacity_for_core_cutover(phase,good)['phase_4_protected_production_cutover'],'CORE_ONLY_PENDING')
+  for override in ({'ready':False}, {'ready':1}, {'signed_recovery_certified':True},
+                   {'production_modified':True},{'scope':'FABRICATED'},
+                   {'production_release_authorized':True},{'decision':'HOLD_FRONTEND_SNAPSHOT_HEADROOM'}):
+   fail={**good,**override}
+   result=g.require_frontend_capacity_for_core_cutover(phase,fail)
+   self.assertEqual(result['phase_4_protected_production_cutover'],'HOLD')
+   self.assertFalse(result['public_release_authorized_by_this_tool'])
+  self.assertEqual(g.require_frontend_capacity_for_core_cutover(phase,{})['phase_4_protected_production_cutover'],'HOLD')
  def test_current_marks_safe_core_exact_pin_and_fail_closed(self):
   self.assertEqual(g.APPROVED_CORE_DIST_SHA['05a59127e43cdcd2ee3a6b26694b8d798efef4d3'],
                    '1097d23897e1bc507a111c4c202aba47a54960e27cf62f34234f95e32e0c26e3')
