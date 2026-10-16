@@ -34,3 +34,6 @@ This artifact explicitly reports `releaseAuthorized=false` and `securityCertific
 - Postflight public root `/var/www/assps-resultcards-owner-accepted-20261016` index SHA256 `760b232b493c300fe78908704aef4989c24c25028faac1821dd41f6480210f3c`; app 200, API health 200, live result count 1,763. Existing one-shot restricted worker still Result=success/ExecMainStatus=0 (inactive expected).
 - The restored clone is retained as a **private local audit artifact**, not promoted to application configuration or exposed to public access.
 - Local same-host restoration is **not** a signed/offhost restore trial, a physically independent backup, or a substitute for official 13/13 trusted release certification. Production cutover **HOLD**.
+
+## Audit guard strengthening (same date)
+A subsequent review tightened the fail-closed catalog scope without changing production: all 77 original guards must also include the reviewed `assps_core_green_runtime` role; exactly five additional academic/evidence policies must exist; none may have an unscoped permissive predicate. Live check again returned `CATALOG_PASS_NOT_RELEASE` and 5/5 tests PASS. This remains a catalog-only result, not an independently authenticated tenant-certification.
