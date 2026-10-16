@@ -1,0 +1,49 @@
+name: ASSPS Paper Manual Heading Server Revision Safety
+on:
+  push:
+    branches:
+      - 'fix/paper-manual-heading-rich-revision-*'
+    paths:
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/AssessmentStudio/core/manualAssessmentDocument.js'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/core/PaperDocumentV2.js'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/manualAssessmentDocument.test.js'
+      - '.github/workflows/paper-manual-inline-server-revision-20261016.yml'
+  pull_request:
+    paths:
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/AssessmentStudio/core/manualAssessmentDocument.js'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/core/PaperDocumentV2.js'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/manualAssessmentDocument.test.js'
+jobs:
+  manual-revision:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: al-siddique-frontend/package-lock.json
+      - name: Install pinned packages
+        run: npm ci --no-audit --no-fund
+        working-directory: al-siddique-frontend
+      - name: Canonical revision provenance and scoring tests
+        run: |
+          node --test \
+            src/Modules/Paper-Generator/PaperEditor/tests/manualAssessmentDocument.test.js \
+            src/Modules/Paper-Generator/PaperEditor/tests/mathAssetCapabilities.test.js \
+            src/Modules/Paper-Generator/grade910PaperWorkspaceVerifiedBridge.test.mjs
+        working-directory: al-siddique-frontend
+      - name: Build production candidate
+        run: npm run build
+        working-directory: al-siddique-frontend
+      - name: All five static Paper Studio features
+        run: python3 ops/paper-studio/verify_full_feature_readiness_20261016.py --repo . --dist al-siddique-frontend/dist
+      - name: Install isolated Chromium
+        run: npx playwright install chromium --with-deps
+        working-directory: al-siddique-frontend
+      - name: Manual paper Save Finalize Reopen Print
+        run: node --test src/Modules/Paper-Generator/PaperEditor/tests/manualWeeklyAssessmentBrowserAcceptance.test.js
+        working-directory: al-siddique-frontend

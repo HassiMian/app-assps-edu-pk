@@ -272,3 +272,82 @@ test('nested choice scoring blocks impossible subgroup attempt counts',()=>{
  assert.equal(releaseCheck.valid,false)
  assert.ok(releaseCheck.errors.some(error=>error.includes('cannot exceed available alternatives')))
 })
+
+test('teacher inline serial and Urdu statement styling round-trips through server-authoritative canonical JSON',()=>{
+ const before=JSON.parse(JSON.stringify(base))
+ const styled={
+  ...before,
+  paper:{
+   ...before.paper,
+   official_section:[
+    {
+     ...before.paper.official_section[0],
+     richText:{
+      headingSerial:'<span style="font-weight: bold;">Q1.</span>',
+      headingInstruction:'<span style="text-decoration: underline;">Answer briefly.</span> (5)',
+     }
+    },
+    before.paper.official_section[1],
+   ]
+  }
+ }
+ const doc=createManualAssessmentDocument(styled)
+ assert.equal(doc.documentOrigin,DocumentOrigin.USER_AUTHORED)
+ assert.deepEqual(doc.sections[0].editorInlineRichText,styled.paper.official_section[0].richText)
+ assert.equal(doc.sections[1].editorInlineRichText,undefined)
+ assert.equal(doc.sections[0].heading,before.paper.official_section[0].heading)
+ assert.equal(doc.scoringPlan.maximumObtainableMarks,10)
+ assert.deepEqual(validateManualAssessmentForRelease(doc),{valid:true,errors:[]})
+ const serverCopy=JSON.parse(JSON.stringify(doc))
+ const reopened=mergeServerDocumentIntoLocalPaper({},serverCopy,{currentRevision:2,contentHash:'safe-style-hash'})
+ assert.deepEqual(reopened.official_section[0].richText,styled.paper.official_section[0].richText)
+ assert.equal(reopened.official_section[1].richText,undefined)
+ assert.equal(reopened.official_section[0].marks,5)
+ assert.equal(reopened.config.totalMarks,10)
+ assert.equal(reopened.serverRevision,2)
+ assert.equal(reopened.persistenceAuthority,'SERVER_REVISION_SOURCE_OF_TRUTH')
+})
+
+test('visual-only heading format refuses scripts, handlers, excessive payload and protected official sources',()=>{
+ const doc=createManualAssessmentDocument(base)
+ const mutated=JSON.parse(JSON.stringify(doc))
+ mutated.sections[0].editorInlineRichText={headingSerial:'<img src=x onerror=alert(1)>'}
+ assert.equal(validateCanonicalPaperDocument(mutated).valid,false)
+ mutated.sections[0].editorInlineRichText={headingSerial:'<span onclick="a()">Q1</span>'}
+ assert.equal(validateCanonicalPaperDocument(mutated).valid,false)
+ mutated.sections[0].editorInlineRichText={headingSerial:'A'.repeat(8193)}
+ assert.equal(validateCanonicalPaperDocument(mutated).valid,false)
+ mutated.sections[0].editorInlineRichText={headingSerial:'Q1',otherQuestionId:'foreign'}
+ assert.equal(validateCanonicalPaperDocument(mutated).valid,false)
+ mutated.sections[0].editorInlineRichText={headingSerial:'Q1'}
+ mutated.documentOrigin=DocumentOrigin.OFFICIAL
+ assert.equal(validateCanonicalPaperDocument(mutated).valid,false)
+ assert.equal(doc.sections[0].editorInlineRichText,undefined)
+})
+
+test('server-reopened forged rich text cannot be copied into teacher-visible formatting fields',()=>{
+ const doc=createManualAssessmentDocument(base)
+ const adversarial=JSON.parse(JSON.stringify(doc))
+ adversarial.sections[0].editorInlineRichText={
+  headingSerial:'<svg onload=alert(1)>Q1.</svg>',
+  headingInstruction:'<span style="position:fixed;left:0">Spoof</span>'
+ }
+ const reopened=mergeServerDocumentIntoLocalPaper({},adversarial,{currentRevision:3})
+ assert.equal(reopened.official_section[0].richText?.headingSerial,undefined)
+ assert.equal(reopened.official_section[0].richText?.headingInstruction,undefined)
+ assert.equal(reopened.official_section[0].heading,doc.sections[0].heading)
+ assert.equal(reopened.official_section[0].marks,5)
+ assert.equal(validateCanonicalPaperDocument(adversarial).valid,false)
+})
+
+test('legacy canonical papers without inline-format extension retain identical serialization and scoring',()=>{
+ const doc=createManualAssessmentDocument(base)
+ const before=JSON.stringify(doc.sections)
+ assert.equal(doc.sections.every(s=>!Object.hasOwn(s,'editorInlineRichText')),true)
+ const restored=mergeServerDocumentIntoLocalPaper({},JSON.parse(JSON.stringify(doc)))
+ assert.equal(restored.official_section[0].richText,undefined)
+ assert.equal(restored.official_section[0].heading,base.paper.official_section[0].heading)
+ assert.equal(restored.official_section[0].marks,5)
+ assert.equal(JSON.stringify(doc.sections),before)
+ assert.deepEqual(validateManualAssessmentForRelease(doc),{valid:true,errors:[]})
+})

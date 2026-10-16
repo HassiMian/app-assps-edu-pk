@@ -511,6 +511,33 @@ export function createUnknownPreservedNode(overrides = {}) {
   }
 }
 
+const EDITOR_INLINE_ALLOWED_TAGS = new Set(['span','b','strong','i','em','u','s','strike','sup','sub','br'])
+const EDITOR_INLINE_ALLOWED_CSS = new Set(['font-weight','font-style','text-decoration','text-decoration-line',
+  'font-family','font-size','color','background-color','vertical-align','display','transform'])
+// Inert canonical JSON field, never interpreted as raw HTML. Only already-sanitized
+// editor spans may survive into the teacher's server-authoritative revision.
+export function isSafeEditorInlineHtml(value) {
+  if (typeof value !== 'string' || value.length > 8192) return false
+  if (/<\s*(?:!|\?|script|iframe|svg|math|style|img|object|embed|form|input|textarea)\b|\bon\w+\s*=|(?:javascript\s*:|expression\s*\(|url\s*\()/i.test(value)) return false
+  const tokens=value.match(/<[^>]*>/g) || []
+  for (const token of tokens) {
+    const match=token.match(/^<\s*(\/?)\s*([a-z]+)([\s\S]*?)\s*\/?\s*>$/i)
+    if (!match || !EDITOR_INLINE_ALLOWED_TAGS.has(match[2].toLowerCase())) return false
+    const attrs=match[3] || ''
+    if (match[1] && attrs.trim()) return false
+    let remaining=attrs.replace(/\bstyle="([^"]*)"|\bdir="(?:ltr|rtl)"/gi,(_whole,style)=>{
+      if (style) for (const decl of style.split(';').filter(Boolean)) {
+        const colon=decl.indexOf(':')
+        if (colon<1 || !EDITOR_INLINE_ALLOWED_CSS.has(decl.slice(0,colon).trim().toLowerCase())) return 'UNSAFE'
+      }
+      return ''
+    }).trim()
+    if (remaining && remaining!=='/') return false
+  }
+  // Reject dangling raw markup. Escaped teacher text (&lt;) stays inert.
+  return !/[<>]/.test(value.replace(/<[^>]*>/g,''))
+}
+
 export function createCanonicalSection(overrides = {}) {
   return {
     id: overrides.id,
@@ -518,6 +545,10 @@ export function createCanonicalSection(overrides = {}) {
     title: overrides.title ?? null,
     titleUrdu: overrides.titleUrdu ?? null,
     heading: overrides.heading ?? null,
+    // Visual-only USER_AUTHORED heading formatting, not question text or marks.
+    ...(overrides.editorInlineRichText !== undefined
+      ? { editorInlineRichText: { ...overrides.editorInlineRichText } }
+      : {}),
     instructions: overrides.instructions ?? null,
     direction: overrides.direction || DocumentDirection.AUTO,
     storedLegacyMarksValue: Number.isFinite(overrides.storedLegacyMarksValue)
@@ -855,6 +886,18 @@ export function validateCanonicalPaperDocument(doc) {
         sectionIds.add(sec.id)
       }
 
+      if (sec.editorInlineRichText !== undefined) {
+        const value=sec.editorInlineRichText
+        if (doc.documentOrigin !== DocumentOrigin.USER_AUTHORED)
+          errors.push(secPath+'.editorInlineRichText is restricted to USER_AUTHORED papers')
+        if (!value || typeof value !== 'object' || Array.isArray(value) ||
+            Object.keys(value).some(key=>!['headingSerial','headingInstruction'].includes(key)))
+          errors.push(secPath+'.editorInlineRichText contains unauthorized fields')
+        else for (const [key,html] of Object.entries(value)) {
+          if (!isSafeEditorInlineHtml(html))
+            errors.push(secPath+'.editorInlineRichText.'+key+' is unsafe or oversized')
+        }
+      }
       if (sec.direction === 'dual') {
         errors.push(`${secPath}.direction MUST NOT be "dual"`)
       } else if (!VALID_DIRECTIONS.has(sec.direction)) {
