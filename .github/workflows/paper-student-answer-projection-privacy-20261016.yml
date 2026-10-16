@@ -6,9 +6,11 @@ on:
       - 'integration/core401-paper-student-answer-privacy-20261016'
       - 'fix/paper-core503-student-expectedanswer-projection-*'
       - 'integration/paper-core503-truefalse-http-core8dc-*'
+      - 'fix/paper-core503-print-projection-teacher-exact-scope-*'
   pull_request:
     paths:
       - 'al-siddique-backend/src/services/assessmentPrintJobs.js'
+      - 'al-siddique-backend/src/routes/assessmentStudioRoutes.js'
       - 'al-siddique-backend/src/tests/assessment-print-jobs-domain.test.js'
       - 'al-siddique-backend/src/tests/assessment-truefalse-student-projection-http-isolated.test.cjs'
       - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/personalizedPrintDurableBrowserAcceptance.test.js'
