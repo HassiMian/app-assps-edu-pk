@@ -40,3 +40,7 @@ Every matched live question ID points to its current full-question revision SHA2
 For the **229 high-priority current revision flags lacking a separate prior research draft**, create independently authored, subject-safe conceptual answer proposals where evidence permits; never mark them approved without qualified teacher review. Prioritize actual adopted session/edition confirmation, current chapter correctness and formula/translation validation; do not reuse copyright-protected exercise passages without permission.
 
 **Release status stays HOLD:** 2,411 live provisional questions, 2,581 frozen original research candidates and 170 separately held original-only candidates are preserved; none of the historical 165 proposal records is declared staff-approved by this script.
+
+## Executable revision-locked future research queue
+
+The protected 0600 JSON receipt now includes `unlinkedCurrentRevisionResearchQueue` with **450 uniquely identified, current-SHA-bound, metadata-only research work items**, sorted HIGH-first. Exactly **229** HIGH items are prioritized for new independently authored answer research; the other **221** are reviewer-advisory items. Every row contains grade, subject, medium, original question ID, exact current-live content revision SHA, risk category, and explicit `academicallySelectable=false`. This allows controlled offline faculty/research routing without reusing a changed question or disclosing question/answer text in a public report. No question publication or database writing is performed.

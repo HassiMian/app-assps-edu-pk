@@ -9,7 +9,6 @@ m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
 groups=json.loads((m.DOCS/m.MASTER).read_text())['sourceGroups']
 last=json.loads((m.DOCS/m.FIVE).read_text())
 def scenario():
-    ids={x['questionId'] for x in m.packet_ids(groups)[0].values()} if False else None
     packets,_=m.packet_ids(groups)
     lastids=[r['originalQuestionId'] for r in last['rows']]
     only=sorted(packets)[0]
@@ -70,6 +69,10 @@ class HistoricalAnswerRecoveryTests(unittest.TestCase):
         self.assertEqual(out['highPriorityRiskIdsWithPriorResearchDraft'],128)
         self.assertEqual(out['highPriorityRiskIdsWithoutPriorResearchDraft'],229)
         self.assertEqual(out['qualifiedAcademicApprovalsCreated'],0)
+        self.assertEqual(len(out['unlinkedCurrentRevisionResearchQueue']),450)
+        self.assertEqual(sum(r['priority']=='HIGH' for r in out['unlinkedCurrentRevisionResearchQueue']),229)
+        self.assertTrue(all(r['academicallySelectable'] is False for r in out['unlinkedCurrentRevisionResearchQueue']))
+        self.assertTrue(all('stem' not in r and 'answer' not in r for r in out['unlinkedCurrentRevisionResearchQueue']))
         self.assertFalse(out['schoolAdoptedEditionVerifiedByThisAudit'])
     def test_existing_packet_content_edit_denied_by_source_hash(self):
         with tempfile.TemporaryDirectory() as temp:

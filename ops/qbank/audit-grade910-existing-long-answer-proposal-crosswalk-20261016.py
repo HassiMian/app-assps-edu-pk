@@ -20,7 +20,7 @@ ANSWER_FIELDS=('proposedEnglishModelAnswer','proposedOriginalEnglishExplanatoryA
                'proposedIndependentEnglishExplanation')
 BLOCK_FLAGS={'approved','academicapproved','academicallyapproved','published','verifiedpublished',
              'qualifiedsubjectreviewed','qualifiedteachersubjectreviewed','teacherscientificanswerverified',
-             'independentlysubjectreviewed','independentlyhum anreviewed','answerscorrectnessverifiedbyqualifiedteacher',
+             'independentlysubjectreviewed','answerscorrectnessverifiedbyqualifiedteacher',
              'answercorrectnessverifiedbyqualifiedteacher','qualifiedindependentsubjectreviewed'}
 SCHEMA='ASSPS_GRADE910_EXISTING_166_LONG_ANSWER_RESEARCH_LIVE_CROSSWALK_V1'
 def sha(data):return hashlib.sha256(data).hexdigest()
@@ -108,6 +108,22 @@ def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG):
           'researchOnlySupplementExists':has,'currentLivePresent':is_live,
           'answerDepthRiskFlag':riskmap[id]['category'] if is_risk else None,
           'qualifiedSubjectTeacherApproved':False,'paperStudioVerifiedSelectable':False})
+    # Ready-to-work metadata-only research queue: no answer text, no fabricated
+    # teacher approvals; ordering is HIGH first and stable by grade/subject/ID.
+    unlinked=[]
+    for id,review in riskmap.items():
+        if id not in existing or not existing[id]['proposalExists']:
+            unlinked.append({'questionId':id,
+               'currentLiveRevisionSha256':hashes[id],
+               'grade':review.get('grade'),'subject':review.get('subject'),
+               'medium':review.get('medium'),'type':review.get('type'),
+               'priority':review['priority'],'riskCategory':review['category'],
+               'state':'RESEARCH_BACKLOG_NOT_FACULTY_APPROVED',
+               'academicallySelectable':False})
+    unlinked.sort(key=lambda x:(0 if x['priority']=='HIGH' else 1,
+                                str(x['grade']),str(x['subject']),x['questionId']))
+    if len(unlinked)!=450 or sum(x['priority']=='HIGH' for x in unlinked)!=229:
+        raise ValueError('UNLINKED_SUBJECTIVE_RESEARCH_QUEUE_SCOPE_DRIFT')
     if summary['originalUniverse']!=166 or summary['live']!=165 or summary['originalOnly']!=1:
         raise ValueError('RESEARCH_ORIGINAL_LIVE_CROSSWALK_DRIFT')
     if summary['hasResearchDraft']!=165 or summary['noResearchDraft']!=1 or summary['liveWithResearchDraft']!=164:
@@ -131,7 +147,8 @@ def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG):
        'schoolAdoptedEditionVerifiedByThisAudit':False,
        'qualifiedAcademicApprovalsCreated':0,
        'productionDatabaseWrites':0,'academicallySelectableCreated':0,
-       'packetEvidence':packets,'records':union}
+       'packetEvidence':packets,'records':union,
+       'unlinkedCurrentRevisionResearchQueue':unlinked}
 def atomic_private(path,obj):
     path.parent.mkdir(parents=True,exist_ok=True,mode=0o700)
     if path.parent.stat().st_mode & 0o077:raise ValueError('PRIVATE_RESEARCH_RECEIPT_REQUIRED')
@@ -163,4 +180,4 @@ def run():
     return result
 if __name__=='__main__':
     a=run()
-    print(json.dumps({k:v for k,v in a.items() if k not in ('packetEvidence','records')},sort_keys=True))
+    print(json.dumps({k:v for k,v in a.items() if k not in ('packetEvidence','records','unlinkedCurrentRevisionResearchQueue')},sort_keys=True))
