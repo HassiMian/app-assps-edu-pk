@@ -28,3 +28,12 @@
 ## Safe next actions
 
 Core review must recompare the newest source and staging hashes; merge only these scoped Daily Diary print changes and their test/CI/docs into the **latest verified clean descendant**, not vice versa. Preserve untracked Argus logs, tenant RLS, Jameel font parity and student marks. Do not publish static candidate without signed Core acceptance. For local reproduction, rerun the above read-only and disposable QA scripts against this branch; private log files remain off GitHub.
+
+## Follow-up: browser timeout ambiguity resolved by independent bounded runs
+
+The earlier combined Early Years + Lesson browser command exceeded the remote terminal's 50-second response window. Both test files were subsequently **rerun separately** on this same integrated source, with full private logs and real Playwright Chromium, not inferred from a terminated combined call:
+
+- Early Years actual print geometry, source reference nine papers, zero clipping/overlap, route printing/PDF checks: `node --test src/Modules/Paper-Generator/PaperEditor/tests/earlyYearsRenderPrintGeometryAcceptance.test.js` — **8/8 PASS**, 0 failures/skips, exit 0, ~26.6s. Private log `/root/paper_studio_private_qa_20261016/core-rc-early-years-print.log`.
+- Cognitive Lesson Planning mode-driven multi-subject term planning, Save and student-card bridge: `node --test src/Modules/Paper-Generator/PaperEditor/tests/lessonPlanningWorkspaceBrowserAcceptance.test.js` — **1/1 PASS**, 0 failures/skips, exit 0, ~4s. Private log `/root/paper_studio_private_qa_20261016/core-rc-lesson-planner-browser.log`.
+
+Neither isolated browser acceptance is a witnessed physical Urdu printer job, authentic live teacher signoff or Core signed release gate. The production worker remains not installed and new Core deployment is not authorized.
