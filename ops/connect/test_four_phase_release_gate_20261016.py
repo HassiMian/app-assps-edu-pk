@@ -20,11 +20,22 @@ class Phases(unittest.TestCase):
  def test_unknown_newer_core_sha_denied(self):
   self.assertFalse(g.approved_core_artifact(Path('/tmp'), '0'*40))
  def test_reviewed_pinned_frontends_exact(self):
-  self.assertEqual(len(g.APPROVED_CORE_DIST_SHA),8)
+  self.assertEqual(len(g.APPROVED_CORE_DIST_SHA),9)
   self.assertEqual(g.APPROVED_CORE_DIST_SHA[g.CORE_INTEGRATION],
                    g.APPROVED_CORE_DIST_SHA['017d51060349e39150ebd508d0d670c10eb15f5f'])
   self.assertEqual(g.APPROVED_CORE_DIST_SHA['e6911732ff52df240390b28b37e531535c58a915'],
                    '07f14dad2bd55e0e3104681174925ac5425c6371c179a294ae319ada8672a01e')
+ def test_latest_core_diary6a9_independent_build_exact_and_tamper_denial(self):
+  from unittest.mock import patch
+  key='6a9d48af16ae7e57881ce5251bcc8b75c138aaac'
+  digest='e4ae29640eeb756518b825f0fac4e2e950fbf12a2c6560c1d55c8a51548b7611'
+  self.assertEqual(g.APPROVED_CORE_DIST_SHA[key],digest)
+  self.assertNotEqual(g.APPROVED_CORE_DIST_SHA['a9611dbe27411f3d15b4bca7e9a0983360789989'],digest)
+  with patch.object(g,'sha',return_value=digest):
+   self.assertTrue(g.approved_core_artifact(Path('/synthetic/core'),key))
+   self.assertFalse(g.approved_core_artifact(Path('/synthetic/core'),'0'*40))
+  with patch.object(g,'sha',return_value='0'*64):
+   self.assertFalse(g.approved_core_artifact(Path('/synthetic/core'),key))
  def test_newest_core4397_rebuilt_exact_pin_and_tamper_denial(self):
   from unittest.mock import patch
   key='4397a1836fedff3cba6a1062ed85b7c25e5388c6'

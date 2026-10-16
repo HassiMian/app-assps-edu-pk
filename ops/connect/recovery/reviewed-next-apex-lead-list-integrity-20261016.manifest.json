@@ -1,0 +1,40 @@
+{
+  "allNodeTestsPassed": 63,
+  "baseCommit": "7c3e26cb3626f2eeed0cc38a2dcb7b629b7d9e5c",
+  "changedFiles": [
+    "src/lib/server/apex-leads-storage.ts",
+    "src/app/api/saas-admin/apex-leads/route.ts",
+    "tests/apex-lead-list-integrity.test.cjs"
+  ],
+  "deploymentStatus": "QA_SOURCE_ONLY_NOT_DEPLOYED",
+  "errorMaskingPrevented": true,
+  "fixedCommit": "3a4d7ab664168607317eec040891292747636598",
+  "focusedTestsPassed": 10,
+  "latestCoreCompiledBuildExitCode": 0,
+  "latestCoreCompiledBuildLogSha256": "f4c615ce2edb9e214eb3f6391c156ad0f67b70a1eee308b895920504458a2a6e",
+  "latestCoreDistIndexSha256": "e4ae29640eeb756518b825f0fac4e2e950fbf12a2c6560c1d55c8a51548b7611",
+  "latestFourPhaseGateSha256": "8bda527e0cd1ff0d543b9614fe44bd0f394f295b44339d125ca9cd74c241e7fd",
+  "latestReviewedCoreSha": "6a9d48af16ae7e57881ce5251bcc8b75c138aaac",
+  "loopbackHttpPassed": 8,
+  "loopbackHttpReceiptSha256": "704a2f4c338e49821fc8bc9377ea05fee66a88a2a81a4dae773e8b9806cdd6f0",
+  "officialSignedChecksPassed": 6,
+  "officialSignedChecksTotal": 13,
+  "patchSha256": "98be604a39ca3a094ebe80ba87b92ddaae64aff10fb1dbf9b8cbd6264c9aa7b9",
+  "phase2JointChecksPassed": 13,
+  "phase2JointChecksTotal": 15,
+  "priorBaselineFocusedFailed": 7,
+  "priorBaselineFocusedPass": 3,
+  "privateBuildExitCode": 0,
+  "privateBuildId": "j2H5SSD63AnRhCWoSCEw5",
+  "privateBuildLogSha256": "6a43b37e43671ba9f5d0056084f48928a300a528c1c2d9ec00390c90148b84e9",
+  "privateBuildVerified": true,
+  "productionModified": false,
+  "scopedLintExitCode": 0,
+  "signedReleaseAuthorized": false,
+  "sourceFileSha256": {
+    "src/app/api/saas-admin/apex-leads/route.ts": "361434600f2bffa18b3d0f335007944f2b0ec60382cde9fc2ef11672cae217a9",
+    "src/lib/server/apex-leads-storage.ts": "a8af2d7325d313cafdc377fc6bd2b4dbd60cd2afaba3c6ef9784a212a3cce831",
+    "tests/apex-lead-list-integrity.test.cjs": "1f4b057bc9cae42f6b956fe7e0095fbe1e8e4e41825e9e1375f4017ec67564bd"
+  },
+  "staticPagesGenerated": 103
+}
