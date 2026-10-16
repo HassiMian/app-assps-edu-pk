@@ -31,6 +31,9 @@ on:
       - 'ops/connect/recovery/reviewed-next-public-lead-payload-20261016.patch'
       - 'ops/connect/recovery/reviewed-next-public-lead-payload-20261016.manifest.json'
       - 'ops/connect/test_reviewed_next_public_lead_payload_20261016.py'
+      - 'ops/connect/recovery/reviewed-next-public-lead-stream-20261016.patch'
+      - 'ops/connect/recovery/reviewed-next-public-lead-stream-20261016.manifest.json'
+      - 'ops/connect/test_reviewed_next_public_lead_stream_20261016.py'
       - 'ops/connect/recovery/reviewed-next-eslint-config-20261016.mjs'
       - 'ops/connect/test_reviewed_next_eslint_config_20261016.py'
       - 'ops/connect/recovery/reviewed-next-eslint-active-scope-20261016.mjs'
@@ -88,6 +91,9 @@ on:
       - 'ops/connect/recovery/reviewed-next-public-lead-payload-20261016.patch'
       - 'ops/connect/recovery/reviewed-next-public-lead-payload-20261016.manifest.json'
       - 'ops/connect/test_reviewed_next_public_lead_payload_20261016.py'
+      - 'ops/connect/recovery/reviewed-next-public-lead-stream-20261016.patch'
+      - 'ops/connect/recovery/reviewed-next-public-lead-stream-20261016.manifest.json'
+      - 'ops/connect/test_reviewed_next_public_lead_stream_20261016.py'
       - 'ops/connect/recovery/reviewed-next-eslint-config-20261016.mjs'
       - 'ops/connect/test_reviewed_next_eslint_config_20261016.py'
       - 'ops/connect/recovery/reviewed-next-eslint-active-scope-20261016.mjs'
@@ -173,3 +179,5 @@ jobs:
         run: python3 -m unittest discover -v -s ops/connect -p 'test_reviewed_next_public_lead_mail_safety_20261016.py'
       - name: Verify immutable public lead payload safety source
         run: python3 -m unittest discover -v -s ops/connect -p 'test_reviewed_next_public_lead_payload_20261016.py'
+      - name: Verify immutable public lead streamed upload boundary
+        run: python3 -m unittest discover -v -s ops/connect -p 'test_reviewed_next_public_lead_stream_20261016.py'

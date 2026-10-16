@@ -1,0 +1,201 @@
+diff --git a/src/app/api/apex/leads/route.ts b/src/app/api/apex/leads/route.ts
+index 38d288f..f75d48e 100644
+--- a/src/app/api/apex/leads/route.ts
++++ b/src/app/api/apex/leads/route.ts
+@@ -7,6 +7,58 @@ export const runtime = "nodejs";
+ // Public submissions must remain bounded before they reach disk or outbound mail.
+ // This guard is additive; the existing valid request/response contract is unchanged.
+ const MAX_PUBLIC_LEAD_JSON_CHARS = 16_384;
++// Raw transport cap: a JSON character limit alone cannot stop an oversized upload.
++const MAX_PUBLIC_LEAD_BODY_BYTES = 65_536;
++
++class PublicLeadPayloadTooLarge extends Error {}
++
++async function readBoundedPublicLeadJson(req: Request): Promise<unknown> {
++  const rawLength = req.headers?.get("content-length");
++  if (rawLength != null) {
++    if (!/^[0-9]+$/.test(rawLength)) {
++      throw new SyntaxError("Invalid Content-Length");
++    }
++    if (Number(rawLength) > MAX_PUBLIC_LEAD_BODY_BYTES) {
++      throw new PublicLeadPayloadTooLarge();
++    }
++  }
++
++  // req.json() supports existing synthetic tests with no ReadableStream.
++  // Real incoming HTTP JSON bodies expose Request.body and are bounded below.
++  if (!req.body) return req.json();
++
++  const reader = req.body.getReader();
++  const parts: Uint8Array[] = [];
++  let size = 0;
++  try {
++    while (true) {
++      const { done, value } = await reader.read();
++      if (done) break;
++      size += value.byteLength;
++      if (size > MAX_PUBLIC_LEAD_BODY_BYTES) {
++        // Stop consuming untrusted content as soon as the cap is exceeded.
++        void reader.cancel().catch(() => {});
++        throw new PublicLeadPayloadTooLarge();
++      }
++      parts.push(value);
++    }
++  } finally {
++    reader.releaseLock();
++  }
++
++  const bytes = new Uint8Array(size);
++  let cursor = 0;
++  for (const part of parts) {
++    bytes.set(part, cursor);
++    cursor += part.byteLength;
++  }
++  try {
++    const text = new TextDecoder("utf-8", { fatal: true }).decode(bytes);
++    return JSON.parse(text) as unknown;
++  } catch {
++    throw new SyntaxError("Invalid JSON request");
++  }
++}
+ const PUBLIC_LEAD_FIELD_LIMITS: Record<string, number> = {
+   type: 40,
+   name: 160,
+@@ -51,7 +103,7 @@ function validPublicLeadPayload(value: unknown): value is Record<string, unknown
+ 
+ export async function POST(req: Request) {
+   try {
+-    const body: unknown = await req.json();
++    const body: unknown = await readBoundedPublicLeadJson(req);
+     if (!validPublicLeadPayload(body)) {
+       return rejectPublicLead("Invalid request fields");
+     }
+@@ -120,6 +172,9 @@ export async function POST(req: Request) {
+       leadId: lead.leadId,
+     }, { headers: { "Cache-Control": "no-store" } });
+   } catch (error: unknown) {
++    if (error instanceof PublicLeadPayloadTooLarge) {
++      return rejectPublicLead("Request too large", 413);
++    }
+     if (error instanceof SyntaxError) {
+       return NextResponse.json(
+         { success: false, message: "Invalid JSON request" },
+diff --git a/tests/apex-public-lead-mail-safety.test.cjs b/tests/apex-public-lead-mail-safety.test.cjs
+index 347a0fa..5f222c1 100644
+--- a/tests/apex-public-lead-mail-safety.test.cjs
++++ b/tests/apex-public-lead-mail-safety.test.cjs
+@@ -14,7 +14,7 @@ function load(file,imports,globals={}){
+     if(!Object.prototype.hasOwnProperty.call(imports,name))throw Error('Unmocked dependency '+name);
+     return imports[name];
+   },process:{env:{SMTP_USER:'synthetic',SMTP_PASS:'synthetic',APEX_LEADS_EMAIL:'qa@example.invalid'}},
+-  console,Error,SyntaxError,...globals},{timeout:1500,filename:file});
++  console,Error,SyntaxError,TextDecoder,...globals},{timeout:1500,filename:file});
+   return exports;
+ }
+ const {escapeApexLeadHtml}=load('lib/server/apex-lead-html.ts',{});
+@@ -178,3 +178,105 @@ test('public lead success and missing-field responses explicitly disable caching
+   assert.equal(rejected.status,400);
+   assert.equal(rejected.headers['Cache-Control'],'no-store');
+ });
++
++
++function streamedJson(raw,headers={}) {
++  const source=typeof raw==='string' ? Buffer.from(raw,'utf8') : raw;
++  let reads=0,cancels=0;
++  const body=new ReadableStream({
++    pull(controller) {
++      reads++;
++      controller.enqueue(source);
++      controller.close();
++    },
++    cancel() { cancels++; }
++  },{highWaterMark:0});
++  return {body,headers:new Headers(headers),json:async()=>{throw Error('unbounded json called');},
++    get reads(){return reads},get cancels(){return cancels}};
++}
++
++test('raw upload larger than transport cap is rejected without persistence or email',async()=>{
++  const h=handler();
++  const input=JSON.stringify({...valid,notes:'x'.repeat(65537)});
++  const request=streamedJson(input);
++  const res=await h.POST(request);
++  assert.equal(res.status,413);
++  assert.equal(res.headers['Cache-Control'],'no-store');
++  assert.equal(h.calls.save,0);
++  assert.equal(h.calls.notify,0);
++});
++
++test('declared large content-length is rejected before reading stream',async()=>{
++  const h=handler();
++  const request=streamedJson(JSON.stringify(valid),{'content-length':'65537'});
++  const res=await h.POST(request);
++  assert.equal(res.status,413);
++  assert.equal(request.reads,0);
++  assert.equal(h.calls.save,0);
++});
++
++test('incorrectly declared short length does not bypass streamed byte cap',async()=>{
++  const h=handler();
++  const request=streamedJson(JSON.stringify({...valid,unrecognized:'x'.repeat(75000)}),
++    {'content-length':'10'});
++  const res=await h.POST(request);
++  assert.equal(res.status,413);
++  assert.equal(h.calls.save,0);
++});
++
++test('malformed content-length is rejected as HTTP400 without disk writes',async()=>{
++  for(const length of ['NaN','-1','6e5','10, 10']){
++    const h=handler();
++    const request=streamedJson(JSON.stringify(valid),{'content-length':length});
++    const res=await h.POST(request);
++    assert.equal(res.status,400);
++    assert.equal(res.headers['Cache-Control'],'no-store');
++    assert.equal(request.reads,0);
++    assert.equal(h.calls.save,0);
++  }
++});
++
++test('valid streamed JSON with multilingual content preserves normal success',async()=>{
++  const h=handler();
++  const request=streamedJson(JSON.stringify({...valid,schoolName:'مدرسہ ASSPS'}));
++  const res=await h.POST(request);
++  assert.equal(res.status,200);
++  assert.equal(res.headers['Cache-Control'],'no-store');
++  assert.equal(h.calls.save,1);
++  assert.equal(h.calls.notify,1);
++});
++
++test('malformed UTF-8 transport is 400 not internal error, with no side effects',async()=>{
++  const h=handler();
++  const request=streamedJson(Uint8Array.from([0xff,0xfe,0xfd]));
++  const res=await h.POST(request);
++  assert.equal(res.status,400);
++  assert.equal(res.body.message,'Invalid JSON request');
++  assert.equal(h.calls.save,0);
++});
++
++test('multipart chunk transport cumulatively enforces bytes and cancels further reading',async()=>{
++  const h=handler();
++  let reads=0,cancelled=0;
++  const body=new ReadableStream({
++    pull(controller) {
++      reads++;
++      controller.enqueue(new Uint8Array(20_000));
++    },
++    cancel(){cancelled++;}
++  },{highWaterMark:0});
++  const res=await h.POST({body,headers:new Headers(),json:async()=>{throw Error('unbounded json used')}});
++  assert.equal(res.status,413);
++  assert.equal(h.calls.save,0);
++  assert.equal(reads,4);
++  assert.equal(cancelled,1);
++});
++
++test('valid Content-Length with leading zeros is accepted',async()=>{
++  const h=handler();
++  const json=JSON.stringify(valid);
++  const req=streamedJson(json,{'content-length':String(Buffer.byteLength(json)).padStart(5,'0')});
++  const res=await h.POST(req);
++  assert.equal(res.status,200);
++  assert.equal(h.calls.save,1);
++});
