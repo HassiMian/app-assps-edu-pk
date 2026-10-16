@@ -42,7 +42,12 @@ export function buildWeeklyServerPayload({klass,section,week,rows,teacherLabel,s
      marker:WEEKLY_MARKER,weeklyKey:identity,
      academicPublication:'BLOCKED',teacherLabelDisplayOnly:teacherLabel||'',
      sourceZipSha256:sourceDigest,
-     fullWeeklyStatements:Object.fromEntries(rows.map(r=>[r.id,String(r.task)]))}
+     fullWeeklyStatements:Object.fromEntries(rows.map(r=>[r.id,String(r.task)])),
+     sourcePartsBySubject:Object.fromEntries(rows.filter(r=>r.sourceParts?.length)
+       .map(r=>[r.id,r.sourceParts.map(part=>({
+         part:part.part,candidateKey:part.candidateKey,
+         originalSourceIds:part.originalSourceIds||[]
+       }))]))}
  })
  const title='Weekly Notebook — '+klass+(section?' '+section:'')+' — '+week.start
  const out=toLessonPlanPersistencePayload({...doc,title})

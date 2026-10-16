@@ -34,6 +34,40 @@ export function planWeekRows(candidates,klass,week,options={}){
  const rows=[],sourceMeta=[]
  const subjects=(candidates||[]).filter(c=>normalizeClass(c.proposed_class_level)===klass)
  for(const candidate of subjects){
+  if (Array.isArray(candidate.sourceVariants)) {
+   // Both original subplans are independently compiled first. Combining their
+   // raw excerpts before compiling would lose A/B source identity and dates.
+   const parts = candidate.sourceVariants.map(({part,candidate:source}) => {
+    const result = planWeekRows([source],klass,week,options)
+    return {part,source,result,row:result.rows[0]}
+   })
+   const present = parts.filter(x=>x.row)
+   if (!present.length) continue
+   rows.push({
+    id:candidate.candidate_key,subject:candidate.source_subject_label,
+    task:parts.map(x=>'['+x.part+'] '+(x.row?.task ||
+      'No verified source coverage for this week; review original '+x.part+' plan.')).join('\n'),
+    page:null, sourceStatus:'A/B ORIGINAL SOURCE — REVIEW REQUIRED',
+    assessments:parts.flatMap(x=>(x.row?.assessments||[]).map(a=>({
+      ...a,label:'['+x.part+'] '+a.label,sourcePart:x.part
+    }))),
+    activities:parts.flatMap(x=>(x.row?.activities||[]).map(a=>({
+      ...a,label:'['+x.part+'] '+a.label,sourcePart:x.part
+    }))),
+    flags:parts.flatMap(x=>(x.row?.flags||[]).map(f=>'['+x.part+'] '+f)),
+    originalSourceIds:candidate.source_submissions||[],
+    sourceParts:parts.map(x=>({
+      part:x.part,candidateKey:x.source.candidate_key,
+      originalSourceIds:x.source.source_submissions||[]
+    }))
+   })
+   sourceMeta.push({
+    id:candidate.candidate_key,
+    warnings:parts.flatMap(x=>x.result.sourceMeta.flatMap(m=>
+      m.warnings.map(w=>'['+x.part+'] '+w)))
+   })
+   continue
+  }
   const compiled=compileWeeklyPlan(candidate,options)
   const matching=compiled.weeks.filter(w=>w.start<=week.end&&w.end>=week.start)
   const study=matching.filter(w=>w.source!=='ORIGINAL_ASSESSMENT_ONLY')
@@ -75,7 +109,11 @@ export function planWeekRows(candidates,klass,week,options={}){
 }
 export function notebookModel({candidates,klass,week,options,edits,subjects}){
  const payload=planWeekRows(candidates,klass,week,options)
- return payload.rows.filter(x=>subjects===undefined||subjects===null?true:subjects.includes(x.id)).map(x=>({
-  ...x,task:typeof edits?.[x.id]==='string'?edits[x.id]:x.task
- }))
+ return payload.rows.filter(x=>subjects===undefined||subjects===null?true:subjects.includes(x.id)).map(x=>{
+  const previousParts=(x.sourceParts||[]).filter(p=>typeof edits?.[p.candidateKey]==='string')
+  const legacyEdits=previousParts.length?
+   x.sourceParts.map(p=>'['+p.part+'] '+(typeof edits?.[p.candidateKey]==='string'?
+    edits[p.candidateKey]:x.task.split('\n').find(t=>t.startsWith('['+p.part+'] '))?.slice(4)||'')).join('\n'):null
+  return {...x,task:typeof edits?.[x.id]==='string'?edits[x.id]:legacyEdits??x.task}
+ })
 }

@@ -5,9 +5,10 @@ import api from '../../services/api'
 import {getTenantStorageItem,setTenantStorageItem} from '../../services/tenantStorage'
 import {currentSchoolDate} from './schoolCalendarDate.js'
 import {CLASS_ORDER,LABELS} from './composerReviewDomain'
-import {validateLocalComposerSource,normalizeClass} from './composerLocalVerifier'
+import {validateLocalComposerSource} from './composerLocalVerifier'
 import {CLASS_INCHARGES} from './lessonWeeklyEngine'
 import {termWeeks,notebookModel,planWeekRows} from './weeklyNotebookModel'
+import {canonicalLessonCandidates} from './plannerSourceGrouping.js'
 import TermPlannerEditor from './TermPlannerEditor'
 import {termKey,buildTermOverview,termAssessmentRows,validateTermContent} from './termPlanningModel'
 import {listTermServerPlans,saveTermServerPlan} from './termServerPersistence'
@@ -163,8 +164,8 @@ export default function WeeklyNotebookStudio(){
    sourceWeeks.map(x=>({start:x.start,end:x.end,index:x.week})):termWeeks(start,end)
  },[start,end,klass,manifest])
  const activeWeek=weeks[Math.min(weekIndex,weeks.length-1)]||null
- const groups=useMemo(()=>CLASS_ORDER.filter(cls=>manifest?.candidates?.some(c=>normalizeClass(c.proposed_class_level)===cls)),[manifest])
- const candidates=useMemo(()=>manifest?.candidates?.filter(c=>normalizeClass(c.proposed_class_level)===klass)||[],[manifest,klass])
+ const groups=useMemo(()=>CLASS_ORDER.filter(cls=>canonicalLessonCandidates(manifest?.candidates,cls).length>0),[manifest])
+ const candidates=useMemo(()=>canonicalLessonCandidates(manifest?.candidates,klass),[manifest,klass])
  const subjectIds=candidates.map(c=>c.candidate_key)
  const includedIds=chosenSubjects===null?subjectIds:chosenSubjects
  const planKey=activeWeek?klass+'|'+section+'|'+activeWeek.start:''
@@ -313,7 +314,7 @@ export default function WeeklyNotebookStudio(){
   try{
    if(file.size>2*1024*1024)throw Error('File exceeds 2 MB')
    const proof=await persistSource(await file.text())
-   setStatus('59 source groups verified in '+proof.classes+' classes. '+
+   setStatus('Original '+proof.classes+' classes / 59 groups verified; active 10 classes / 51 subject rows. Eight and Pre-Nine excluded from planning. '+
     (proof.classOneImage?.available?'Class One 18-week image source transcript ready for review. ':'')+
     'Original evidence preserved. '+(storageKey?'Source remembered on this device.':''))
   }catch(ex){setError(ex.message||'Failed to verify original WhatsApp source')}
@@ -378,6 +379,7 @@ export default function WeeklyNotebookStudio(){
    setError('Saved Daily Plan source differs from verified current source.');return
   }
   if(!CLASS_ORDER.includes(doc.classLevel)||
+     !canonicalLessonCandidates(manifest?.candidates,doc.classLevel).length||
      !doc.startDate||doc.startDate!==doc.endDate){
    setError('Saved Daily Plan class/date invalid.');return
   }
@@ -397,6 +399,9 @@ export default function WeeklyNotebookStudio(){
   const doc=plan
   setCurrentServerId(plan.id)
   const nextClass=doc.classLevel
+  if(!canonicalLessonCandidates(manifest?.candidates,nextClass).length){
+    setError('This class is excluded from active Lesson Planning. Saved record was not changed.');return
+  }
   if(!CLASS_ORDER.includes(nextClass)){
     setError('Saved plan has an unrecognized class.');return
   }
@@ -405,8 +410,13 @@ export default function WeeklyNotebookStudio(){
   const nextEdits={}
   const nextExtra={}
   for(const subject of doc.subjects||[]){
-    const key=(manifest?.candidates||[]).find(c=>normalizeClass(c.proposed_class_level)===nextClass &&
-      c.source_subject_label===subject.subject)?.candidate_key
+    const current=canonicalLessonCandidates(manifest?.candidates,nextClass)
+    const direct=current.find(c=>c.source_subject_label===subject.subject)
+    const legacy=(direct?null:current.flatMap(c=>c.sourceVariants||[])
+      .find(v=>v.candidate.source_subject_label===subject.subject))
+    // Old server drafts A/B keep their original per-source key. New unified
+    // English/Urdu drafts use one stable combined key: no data overwritten.
+    const key=direct?.candidate_key||legacy?.candidate.candidate_key
     if(!key)continue
     const lesson=subject.lessons?.[0]
     if(doc.provenance?.fullWeeklyStatements?.[key]!==undefined)
@@ -533,9 +543,12 @@ export default function WeeklyNotebookStudio(){
       doc?.provenance?.sourceZipSha256!==manifest.source_zip_sha256){
      setError('Saved term source revision differs from the verified current original. Open blocked.');return
    }
-   const sourceIds=new Set((manifest.candidates||[])
-     .filter(c=>normalizeClass(c.proposed_class_level)===doc.classLevel)
-     .map(c=>c.candidate_key))
+   const current=canonicalLessonCandidates(manifest.candidates,doc.classLevel)
+   if(!current.length){
+     setError('This class is excluded from active Lesson Planning. Original saved draft retained.');return
+   }
+   const sourceIds=new Set(current.flatMap(c=>[c.candidate_key,
+     ...(c.sourceVariants||[]).map(v=>v.candidate.candidate_key)]))
    if((doc.termCoverageRows||[]).some(r=>!sourceIds.has(r.id))){
      setError('Saved term has subject identities absent from current source. Review before reopening.');return
    }
@@ -599,6 +612,7 @@ export default function WeeklyNotebookStudio(){
       onClick={()=>{setViewMode('daily');const i=weeks.findIndex(w=>dailyDate>=w.start&&dailyDate<=w.end);if(i>=0)setWeekIndex(i)}}>
       3. Daily Lesson Plan</button>
    </nav>
+   <p className="wn-hint">Active source: 10 classes; English A/B and Urdu A/B are combined inside one subject row with [A] and [B] separately labeled. Class Eight Urdu and Pre-Nine Islamiyat are excluded; the original 59-group archive is preserved.</p>
    <div className="wn-topbar">
     <label>Class<select data-wn-class value={klass} onChange={e=>selectClass(e.target.value)}>
       {groups.map(c=><option key={c} value={c}>{LABELS[c]||'Class '+c}</option>)}

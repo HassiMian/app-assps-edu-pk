@@ -26,6 +26,38 @@ export function buildTermOverview(candidates,{start,end,imageReview,edits={},ter
   assertTermRange(start,end)
   return (Array.isArray(candidates)?candidates:[]).map(candidate=>{
     const id=candidate.candidate_key
+    if (Array.isArray(candidate.sourceVariants)) {
+      // The two original documents retain separate verified/proposed state and
+      // assessment provenance. One visible English/Urdu row is saved as a draft.
+      const parts=candidate.sourceVariants.map(({part,candidate:source})=>({
+        part,source,row:buildTermOverview([source],{start,end,imageReview,edits,term})[0]
+      }))
+      const override=edits[id]||{}
+      const combined=parts.map(p=>'['+p.part+'] '+(p.row.detail||
+        'No verified source coverage; review original '+p.part+' plan.')).join('\n')
+      const allPages=parts.map(x=>x.row)
+      const from=allPages.map(x=>Number(x.pageFrom)).filter(validPage)
+      const to=allPages.map(x=>Number(x.pageTo)).filter(validPage)
+      const pageFrom=from.length?String(Math.min(...from)):''
+      const pageTo=to.length?String(Math.max(...to)):''
+      return {
+        id,subject:candidate.source_subject_label,
+        detail:override.detail===undefined?combined:String(override.detail),
+        pageFrom:override.pageFrom===undefined?pageFrom:String(override.pageFrom),
+        pageTo:override.pageTo===undefined?pageTo:String(override.pageTo),
+        sourceStatus:term==='Second Term'?'A/B SOURCE — REVIEW REQUIRED':
+          'UNSOURCED TERM — TEACHER PROPOSAL',
+        originalSourceIds:term==='Second Term'?(candidate.source_submissions||[]):[],
+        sourceParts:parts.map(p=>({part:p.part,candidateKey:p.source.candidate_key,
+          sourceIds:term==='Second Term'?(p.source.source_submissions||[]):[]})),
+        needsReview:true,
+        warnings:parts.flatMap(p=>(p.row.warnings||[]).map(w=>'['+p.part+'] '+w)),
+        events:parts.flatMap(p=>(p.row.events||[]).map(e=>({
+          ...e,subject:candidate.source_subject_label,
+          name:'['+p.part+'] '+e.name,sourcePart:p.part
+        })))
+      }
+    }
     // The pinned private school archive was sourced for Second Term.
     // Never silently reuse those dated topics/pages as First or Third Term.
     if(term!=='Second Term'){
@@ -132,7 +164,11 @@ export function buildTermServerPayload({klass,section,term,start,end,rows,
       provenance:{marker:TERM_MARKER,termKey:identity,sourceZipSha256,
         sourceArchiveScope:'SECOND_TERM_ONLY',
         sourceApplicability:term==='Second Term'?'ORIGINAL_REVIEW_PENDING':'UNSOURCED_MANUAL_DRAFT',
-        academicPublication:'BLOCKED',deterministic:true,aiEnhanced:false}}),
+        academicPublication:'BLOCKED',deterministic:true,aiEnhanced:false,
+        sourcePartsBySubject:Object.fromEntries(rows.filter(r=>r.sourceParts?.length)
+          .map(r=>[r.id,r.sourceParts.map(p=>({
+            part:p.part,candidateKey:p.candidateKey,sourceIds:p.sourceIds||[]
+          }))]))}}),
     schemaVersion:3,
     title:'Term Planner — '+klass+' — '+term+' — '+start,
     termCoverageRows:rows.map(r=>({id:r.id,subject:r.subject,
