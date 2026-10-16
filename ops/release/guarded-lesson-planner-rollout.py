@@ -49,6 +49,33 @@ def run(cmd):
     return subprocess.run(cmd,capture_output=True,text=True,check=False,timeout=30)
 
 
+def verify_five_feature_release(repo, dist):
+    """Actual active artifact must pass all Paper/Diary/Lesson/Print checks.
+
+    Static PASS cannot substitute for Core security, signed actors, or rollback.
+    """
+    tool=Path(repo)/'ops/paper-studio/verify_full_feature_readiness_20261016.py'
+    if not tool.is_file() or tool.is_symlink():
+        raise RuntimeError('FAIL_CLOSED: reviewed Paper Studio verifier missing')
+    result=run(['python3',str(tool),'--repo',str(repo),'--dist',str(dist)])
+    if result.returncode!=0:
+        raise RuntimeError('FAIL_CLOSED: Paper Studio five-feature readiness HOLD')
+    try: report=json.loads(result.stdout)
+    except (ValueError,TypeError):
+        raise RuntimeError('FAIL_CLOSED: Paper Studio verifier returned invalid JSON') from None
+    required={'resultCardsV3','savedMarks','dailyDiary','lessonPlannerV5','earlyYearsPrint'}
+    checks=report.get('checks')
+    if (report.get('fullFeatureReadiness')!='STATIC_FEATURES_PASS' or
+        report.get('indexSha256')!=sha(Path(dist)/'index.html') or
+        report.get('productionReleaseAuthorized') is not False or
+        report.get('studentRecordsChanged') is not False or
+        report.get('printerJobsDispatched')!=0 or
+        not isinstance(checks,dict) or set(checks)!=required or
+        any(not isinstance(checks[n],dict) or checks[n].get('status')!='PASS' for n in required)):
+        raise RuntimeError('FAIL_CLOSED: malformed or insufficient Paper Studio evidence')
+    return report
+
+
 def check_core(args):
     """Trusted Core gate must verify genuine actors and signatures itself."""
     if not CORE_VERIFIER.is_file():
@@ -193,6 +220,7 @@ def main():
     diary_guard=HERE/'verify-diary-controls-in-active-bundle-20261015.cjs'
     if run(['node',str(diary_guard),'--dist',str(dist)]).returncode!=0:
         raise RuntimeError('FAIL_CLOSED: active Diary controller import graph incomplete in release candidate')
+    verify_five_feature_release(repo,dist)
     newroot=OUTPUT_ROOT/('assps-lesson-planner-'+commit[:12])
     expected_new=sha(dist/'index.html')
     plan={'decision':'READY_FOR_CORE_GATE' if not args.apply else 'CORE_GATE_CHECK_REQUIRED',
@@ -280,6 +308,7 @@ def main():
                 if check.returncode!=0:
                     raise RuntimeError('FAIL_CLOSED: '+title+' postflight failed: '+
                                        (check.stderr or check.stdout).strip()[:400])
+            verify_five_feature_release(repo,newroot)
             success=True
             plan.update(decision='FRONTEND_ONLY_PROMOTED_CORE_VERIFIED',
                         production_changed=True,rollback_config=str(backup/'apex-app-ssl.pre-change'))
