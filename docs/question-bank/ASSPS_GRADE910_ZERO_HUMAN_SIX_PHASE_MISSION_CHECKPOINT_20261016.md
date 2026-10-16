@@ -36,3 +36,14 @@ Source commands:
 - Sources and private staff review forms must not be leaked to public reports; publish aggregate anonymized metrics and stable source SHA references only.
 
 **Required truthful final gate:** `academicVerifiedPublicationReady=false`, `authenticIndependentAcademicApprovals=0`, `paperStudioAcademicallyApprovedSnapshotReady=false`. Neither the school owner's standing institutional consent nor AI-generated result can replace revision-specific independent qualified faculty review or prove the actual adopted book edition. Continue authorized technical verification without micro-approval requests; preserve publication hold until authentic evidence exists.
+
+## Official curriculum/reference authority crosscheck — 16 October 2026
+
+These URLs were freshly checked as issuing-authority **discovery references**, not as authenticated proof that ASSPS adopted every listed book or ALP:
+
+- **Punjab Education Curriculum Training and Assessment Authority (PECTAA):** curriculum and textbook listing, https://pectaa.edu.pk/curriculum-compliance/ ; the site includes several Grade IX/X textbook edition-labelled entries including **2026–27**.
+- **PECTAA official downloads and notifications:** https://pectaa.edu.pk/downloads-2-2/ ; official Academic Session 2026–27 label/notices do not by themselves establish school adoption.
+- **National Curriculum Council Wing (NCC):** https://www.ncc.gov.pk/ ; lists curriculum categories and Rationalized Curricula (9–12) 2026. This national listing is NOT evidence that a smart syllabus/ALP automatically applies to ASSPS.
+- **BISE Gujranwala SSC information:** https://www.bisegrw.online/ ; the Narowal school’s exact SSC board affiliation/session and specific 2027 exam/pairing scheme must be independently authenticated before labelling individual questions as board-verified. Do NOT treat BISE Lahore notices as automatic Narowal board adoption.
+
+Every source reference used for an individual academically published question still requires its own actual edition, medium, applicable session, source PDF SHA, subject/chapter/topic, page/exercise, and revision-specific academic reviewer provenance. Existing owner institutional consent is acknowledged but is not a substitute for the independent per-question correctness signature.
