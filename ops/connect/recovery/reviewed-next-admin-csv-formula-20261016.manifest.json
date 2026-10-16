@@ -1,0 +1,19 @@
+{
+  "isolatedBuildLogSha256": "5805addbe201fff26b1452b734d6f28cc01ce44c603df88f200ee3824ee59706",
+  "observedCsvNodeTestsPassed": 5,
+  "observedOptimizedBuildExit": 0,
+  "observedStaticPages": 103,
+  "patchSha256": "2ade87d0f595a8063ec40fa53c8fd89deda8cd533207e7e0d6f9fbe39315fd46",
+  "productionModified": false,
+  "releaseAuthorized": false,
+  "reviewedModifiedFiles": {
+    "src/lib/server/apex-leads-export.ts": "7d467b66f00f12e0c7f7edab4b4fdbb78665ddd02b9544ca4d2c8cbb15f73b11",
+    "src/lib/server/csv-cell.ts": "d42ea27ab0d2ad2c126b6635ec3ac4c7c150bad216d764727080424a7deee4e1",
+    "src/lib/server/subscription-request-export.ts": "6aebcc54c5c4dfc40fe3a7d8e7bb731d50e3bb66f04e218a9f8a2e55148047a7",
+    "tests/csv-formula-hardening.test.mjs": "576ede00f66ad5dc2c92402e63d4dafdf2d29a071364e806549218b865980f9d"
+  },
+  "schema": "connect-reviewed-csv-hardening-v1",
+  "sourceGitBase": "2de3c39224b12385be0ab46a1e6c53328a7eeafc",
+  "sourceGitCommit": "44cfef3e2162d61ebff4374dab62fcc4b84689d0",
+  "testedBuildId": "6P6T_rpCWPP-p5da2Ye_u"
+}

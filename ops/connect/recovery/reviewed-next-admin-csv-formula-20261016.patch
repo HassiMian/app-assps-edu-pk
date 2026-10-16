@@ -1,0 +1,136 @@
+diff --git a/src/lib/server/apex-leads-export.ts b/src/lib/server/apex-leads-export.ts
+index 57fa994..e7b7da0 100644
+--- a/src/lib/server/apex-leads-export.ts
++++ b/src/lib/server/apex-leads-export.ts
+@@ -1,13 +1,6 @@
++import { escapeCsvCell } from "@/lib/server/csv-cell";
+ import { listApexLeads } from "@/lib/server/apex-leads-storage";
+ 
+-function escapeCsv(value: unknown) {
+-  const text = String(value ?? "");
+-  if (/[",\n\r]/.test(text)) {
+-    return `"${text.replace(/"/g, '""')}"`;
+-  }
+-  return text;
+-}
+-
+ export async function buildApexLeadsCsv(statusParam: string | null) {
+   const leads = await listApexLeads(statusParam);
+   const headers = [
+@@ -38,7 +31,7 @@ export async function buildApexLeadsCsv(statusParam: string | null) {
+       item.notes || "",
+       item.created_at,
+     ]
+-      .map(escapeCsv)
++      .map(escapeCsvCell)
+       .join(",")
+   );
+ 
+diff --git a/src/lib/server/csv-cell.ts b/src/lib/server/csv-cell.ts
+new file mode 100644
+index 0000000..dd70597
+--- /dev/null
++++ b/src/lib/server/csv-cell.ts
+@@ -0,0 +1,19 @@
++/**
++ * CSV cell encoder for administrative exports.
++ *
++ * Quoting alone does not prevent formula interpretation in spreadsheet apps.
++ * Prefix formula-like user strings with a literal apostrophe before CSV quoting.
++ * Preserve numeric values as numeric cells, including legitimate negative amounts.
++ */
++export function escapeCsvCell(value: unknown): string {
++  const raw = String(value ?? "");
++  const isNumericValue = typeof value === "number" || typeof value === "bigint";
++  const mayBeFormula = !isNumericValue
++    && /^[\s\u0000-\u001f\u007f-\u009f\u200b\u200e\u200f\u2060\ufeff]*[=+\-@\uff1d\uff0b\uff0d\uff20]/u.test(raw);
++  const text = mayBeFormula ? "'" + raw : raw;
++
++  if (/[",\n\r]/.test(text)) {
++    return '"' + text.replace(/"/g, '""') + '"';
++  }
++  return text;
++}
+diff --git a/src/lib/server/subscription-request-export.ts b/src/lib/server/subscription-request-export.ts
+index c719e77..6ad1fc4 100644
+--- a/src/lib/server/subscription-request-export.ts
++++ b/src/lib/server/subscription-request-export.ts
+@@ -1,14 +1,7 @@
++import { escapeCsvCell } from "@/lib/server/csv-cell";
+ import { listAdminSubscriptionRequests } from "@/lib/server/subscription-request-admin";
+ import { formatPaymentMethodLabel } from "@/lib/payment-method-labels";
+ 
+-function escapeCsv(value: unknown) {
+-  const text = String(value ?? "");
+-  if (/[",\n\r]/.test(text)) {
+-    return `"${text.replace(/"/g, '""')}"`;
+-  }
+-  return text;
+-}
+-
+ export async function buildSubscriptionRequestsCsv(statusParam: string | null) {
+   const requests = await listAdminSubscriptionRequests(statusParam);
+   const headers = [
+@@ -43,7 +36,7 @@ export async function buildSubscriptionRequestsCsv(statusParam: string | null) {
+       item.createdAt,
+       item.source,
+     ]
+-      .map(escapeCsv)
++      .map(escapeCsvCell)
+       .join(",")
+   );
+ 
+diff --git a/tests/csv-formula-hardening.test.mjs b/tests/csv-formula-hardening.test.mjs
+new file mode 100644
+index 0000000..165e781
+--- /dev/null
++++ b/tests/csv-formula-hardening.test.mjs
+@@ -0,0 +1,48 @@
++import assert from "node:assert/strict";
++import { readFileSync } from "node:fs";
++import test from "node:test";
++import { fileURLToPath } from "node:url";
++import { dirname, resolve } from "node:path";
++import { escapeCsvCell } from "../src/lib/server/csv-cell.ts";
++
++const dir = dirname(fileURLToPath(import.meta.url));
++const root = resolve(dir, "..");
++
++test("neutralizes spreadsheet formula operators", () => {
++  for (const value of ["=2+2", "+2+2", "-2+2", "@SUM(1)", "\t=2+2",
++                       "  =2+2", "\ufeff=2+2", "\u200b+4",
++                       "\r\n=2+2", "＝2+2"]) {
++    assert.ok(escapeCsvCell(value).startsWith("'") ||
++              escapeCsvCell(value).startsWith("\"'"),
++              JSON.stringify(value));
++  }
++});
++
++test("preserves genuine number types including negatives", () => {
++  assert.equal(escapeCsvCell(-200), "-200");
++  assert.equal(escapeCsvCell(0), "0");
++  assert.equal(escapeCsvCell(300n), "300");
++});
++
++test("quotes commas, double quotes and newlines correctly", () => {
++  assert.equal(escapeCsvCell('abc,def'), '"abc,def"');
++  assert.equal(escapeCsvCell('a"b'), '"a""b"');
++  assert.equal(escapeCsvCell("a\nb"), '"a\nb"');
++  assert.equal(escapeCsvCell('=SUM(1,2)'), '"\'=SUM(1,2)"');
++});
++
++test("does not corrupt normal Urdu and ordinary plain values", () => {
++  assert.equal(escapeCsvCell("السدیق اسکالرز"), "السدیق اسکالرز");
++  assert.equal(escapeCsvCell("teacher@example.com"), "teacher@example.com");
++  assert.equal(escapeCsvCell("+923001234567"), "'+923001234567");
++  assert.equal(escapeCsvCell(null), "");
++});
++
++test("administrative CSV exporters share audited cell encoder", () => {
++  for (const f of ["apex-leads-export.ts", "subscription-request-export.ts"]) {
++    const src = readFileSync(resolve(root, "src/lib/server", f), "utf8");
++    assert.match(src, /import \{ escapeCsvCell \} from ["']@\/lib\/server\/csv-cell["']/);
++    assert.match(src, /\.map\(escapeCsvCell\)/);
++    assert.doesNotMatch(src, /function escapeCsv\(/);
++  }
++});
