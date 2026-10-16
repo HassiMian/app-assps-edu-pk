@@ -42,6 +42,8 @@ jobs:
       - name: Verify manually authored weekly paper Save, Finalize, Reopen, Print in Chromium
         working-directory: al-siddique-frontend
         run: node --test src/Modules/Paper-Generator/PaperEditor/tests/manualWeeklyAssessmentBrowserAcceptance.test.js
+      - name: Validate fail-closed real-worker peer proof syntax without reaching production database
+        run: bash -n ops/release/worker-probe/verify_real_node_worker_adapter_peer_20261016.sh
       - name: Verify isolated AI worker privilege and sensitive data denials
         run: node --test al-siddique-backend/src/services/ai/test-ai-worker-sensitive-dml-gate-20261016.cjs
       - name: Verify Core PostgreSQL policy and rollback guard fixture regressions
