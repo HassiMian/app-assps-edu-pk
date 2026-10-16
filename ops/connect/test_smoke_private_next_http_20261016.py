@@ -60,6 +60,17 @@ class PrivateConnectSmokeTests(unittest.TestCase):
     def test_javascript_redirect_rejected(self):
         self.assertFalse(smoke.assess("/dashboard", 307, "javascript:alert(1)"))
 
+    def test_exact_compiled_worktree_allowlisted(self):
+        stage = smoke.REVIEWED_BUILD_STAGE
+        if stage.exists():
+            self.assertTrue(smoke.safe_stage(stage, smoke.REVIEWED_BUILD_ID))
+
+    def test_stale_compiled_id_rejected(self):
+        self.assertFalse(smoke.safe_stage(smoke.REVIEWED_BUILD_STAGE, "EvBJH9KRqqtM5ldAhJKtT"))
+
+    def test_other_workspace_still_rejected(self):
+        self.assertFalse(smoke.safe_stage(Path("/root/workspace/assps-connect-private-http-qa-20261016"), smoke.REVIEWED_BUILD_ID))
+
     def test_unapproved_stage_rejected(self):
         self.assertFalse(smoke.safe_stage(Path("/var/www/apex-connect"), "ONDwxEIZlx5onDIKY7wYf"))
 

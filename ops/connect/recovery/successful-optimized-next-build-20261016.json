@@ -1,0 +1,25 @@
+{
+  "actual_build_process_exit": 0,
+  "build_exit_record_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+  "build_id": "SAsg3cC_el5cq2_nN2a46",
+  "build_log_sha256": "03686583b567ce5b653fd91cb24d2c046f659eef65daac2d996f802ed1063e8f",
+  "files": {
+    ".next/BUILD_ID": "63ce1593a381bafe14abc156365c2c687b97d277a339e0a0eb00478a1ab77312",
+    ".next/required-server-files.json": "a71f8079c697e7e4e23151b23dde1fbcfa21848740e634536120a3758933ecb7",
+    ".next/server/app/api/auth/me/route.js": "bde3647ea50a22e7eca3fa3d616e3a16c88deac4bb0a40a8c3ed44d4e459c33a",
+    ".next/server/app/dashboard/page.js": "aa7c608e4f00079239141aac6ae9b7a7efb38955fc1aa35bf9d13662ea668765",
+    ".next/server/app/login/page.js": "48e307297465c0652e1872af54b24a6adee8449db87500792840b8b9ff257c8a",
+    "eslint.config.mjs": "520ddbd1a0d347a8e3d12e2fce14c4a2ca8b700cb87cf93be3c65efb449b8b83",
+    "src/generated/buildProvenance.ts": "955cb2d5bff775d05aca44a39d209720c9f6293761730c85887cbd77af3a7c46"
+  },
+  "full_typescript_and_postbuild_observed": true,
+  "independent_school2_denial_certified": false,
+  "private_http_passed": 5,
+  "private_https_real_chromium_synthetic_passed": 14,
+  "production_changed": false,
+  "production_release_authorized": false,
+  "schema": "assps-connect-optimized-next-build-success-v1",
+  "scope": "COMPILED_ISOLATED_CONNECT_ONLY",
+  "signed_staff_login_certified": false,
+  "source_commit": "9fcca4320bdbeb834f6494d1af82d82f1d9b818f"
+}

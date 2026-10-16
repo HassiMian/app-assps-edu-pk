@@ -6,6 +6,7 @@ cross-school access, signed security acceptance, or production cutover.
 """
 from __future__ import annotations
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -21,6 +22,10 @@ from urllib.request import HTTPRedirectHandler, build_opener
 
 PATHS = ("/dashboard", "/dashboard/history", "/teacher", "/login", "/api/auth/me")
 ALLOWED_ROOT = Path("/root/assps-release-candidates")
+REVIEWED_BUILD_STAGE = Path("/root/workspace/apex-connect-eslint-full-source-reconcile-20261016")
+REVIEWED_BUILD_ID = "SAsg3cC_el5cq2_nN2a46"
+REVIEWED_SOURCE = "9fcca4320bdbeb834f6494d1af82d82f1d9b818f"
+REVIEWED_LINT_SHA = "520ddbd1a0d347a8e3d12e2fce14c4a2ca8b700cb87cf93be3c65efb449b8b83"
 
 
 class NoRedirect(HTTPRedirectHandler):
@@ -48,8 +53,23 @@ def assess(path: str, status: int, location: str | None) -> bool:
 
 def safe_stage(stage: Path, expected_build: str) -> bool:
     stage = stage.resolve()
-    if not stage.is_relative_to(ALLOWED_ROOT) or stage == ALLOWED_ROOT:
+    is_original_private = stage.is_relative_to(ALLOWED_ROOT) and stage != ALLOWED_ROOT
+    is_exact_compiled_qa = stage == REVIEWED_BUILD_STAGE and expected_build == REVIEWED_BUILD_ID
+    if not (is_original_private or is_exact_compiled_qa):
         return False
+    if is_exact_compiled_qa:
+        # The new workspace exception is one exact reviewed SHA/build/config, not
+        # a blanket permission for arbitrary /root/workspace applications.
+        try:
+            src = subprocess.run(["git", "-C", str(stage), "rev-parse", "HEAD"],
+                                 capture_output=True, text=True, check=True, timeout=5)
+            if src.stdout.strip() != REVIEWED_SOURCE:
+                return False
+            digest = hashlib.sha256((stage / "eslint.config.mjs").read_bytes()).hexdigest()
+            if digest != REVIEWED_LINT_SHA:
+                return False
+        except (OSError, subprocess.SubprocessError):
+            return False
     build_id = stage / ".next" / "BUILD_ID"
     next_bin = stage / "node_modules" / ".bin" / "next"
     try:
