@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - 'integration/core-paper-worker-unified-rc-*'
+      - 'integration/core-paper-diary-font-rc-*'
   pull_request:
     paths:
       - 'al-siddique-frontend/**'
@@ -35,6 +36,9 @@ jobs:
         run: node --test ops/tests/marks-sheet-data-truth.test.js
       - name: Preserve 43 paper metadata manifest and its strict count
         run: node --test ops/paper-studio/test_emit_windows_canonical_manifest_20261016.cjs
+      - name: Verify Urdu A4 Diary screen-print alignment and font readiness in Chromium
+        working-directory: al-siddique-frontend
+        run: node --test src/Modules/Paper-Generator/PaperEditor/tests/dailyDiaryWorkspaceBrowserAcceptance.test.js
       - name: Verify daily diary Save, Reopen, Print, and failed-save race in Chromium
         run: node ops/paper-studio/run_diary_release_browser_20261016.cjs
       - name: Verify official Paper Workspace and Urdu/English cross-field print in Chromium
