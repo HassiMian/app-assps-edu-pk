@@ -21,6 +21,8 @@ function cleanText(value, max = 160) {
 // do not blanket-strip fields like `answerLines` (needed for paper geometry).
 const FORBIDDEN_ANSWER_KEYS = new Set([
   'answer','answers','answertext','answerkey','answerexplanation','answerindex',
+  // Canonical TRUE_FALSE expectedAnswer is hidden source truth, never student print.
+  'expectedanswer',
   'answeroption','answeroptionid',
   'correct','correctanswer','correctanswertext','correctanswerindex',
   'correctoption','correctoptionid','correctoptionindex','correctoptions',
