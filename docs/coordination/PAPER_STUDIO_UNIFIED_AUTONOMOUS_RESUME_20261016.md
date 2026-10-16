@@ -1,0 +1,33 @@
+# ASSPS Paper Studio MASTER — unified autonomous mission checkpoint (2026-10-16)
+
+**Release verdict:** STAGED / HOLD_NO_PRODUCTION_CUTOVER. This is one coordinated Paper Studio mission (not permission to deploy), rooted in GitHub issue #4 and the Paper Studio Master handoff. Actual source and runtime take precedence over historical chats. Full original chat/attachment histories have not been byte-for-byte recovered.
+
+## Phase 1 — authoritative source and live reconciliation
+- Newest reviewed SaaS Core + Paper candidate: `integration/core-paper-manual-richtext-rc-20261016@2a3d5bac57decb4f9dc32fb97728b2403f82c7b6`, matching origin at verification. It includes prior reviewed legacy Diary and manual heading rich-text fixes.
+- Independent isolated Paper QA-only descendant: `fix/paper-diary-revisit-isolated-auth-20261016`, containing `535dbf4c` (isolate Question Bank bootstrap 401 from synthetic Diary test) and `2803c9e2` (permanent five-flow Chromium release guard and branch/path-triggered CI). Push/local SHA exact. No product sources changed.
+- Existing Core worktree's two untracked `al-siddique-backend/src/shared/argus_*paper*.json` retained untouched. No other worktree cleaned, reset or rebased.
+- Public HTTPS `app.assps.edu.pk/` and `api.assps.edu.pk/health` both HTTP 200; accepted static Nginx `index.html` SHA256 `760b232b493c300fe78908704aef4989c24c25028faac1821dd41f6480210f3c`. Candidate not promoted.
+
+## Phase 2 — reproducible missing regression repair
+- Fail-before: `dailyDiaryRevisitScopeBrowser.test.js` navigated to `/login`, then 30s selector timeout because mock session's unrelated Question Bank bootstrap returned unauthenticated response. Not proof of a live product authentication defect.
+- Fix: a scoped synthetic `**/api/question-bank**` 200 empty result matching other Diary fixtures, no production auth bypass. Class/section/date revisits now enforce exact original record IDs via PUT, including eight expected requests. Added this regression to `ops/paper-studio/run_diary_release_browser_20261016.cjs`, and scoped workflow paths/branch in `.github/workflows/paper-diary-real-browser-release-20261016.yml`.
+- Actual command `node ops/paper-studio/run_diary_release_browser_20261016.cjs`: **5/5 PASS**, 0 fail, 0 skip. Node script syntax and workflow YAML parse PASS. Remote hosted Actions green NOT evidenced (combined statuses and PR-associated workflow runs empty).
+
+## Phase 3 — clean compilation and feature regression
+- Exact feeder `al-siddique-frontend`: `npm run build` EXIT0. Compiled `dist/index.html` SHA256 `d0de50ad2011ee3dc5532352788e1e1795a94cc6f49b90a84ed7c08994748d05`, byte-identical to reviewed Core candidate: no shipped app change.
+- `verify_full_feature_readiness_20261016.py --repo .. --dist dist`: five compiled capabilities PASS (Diary, Early Years print, Lesson Planner V5, Saved Marks, Result Cards V3), `productionReleaseAuthorized=false`.
+- Prior exact Core source branch test evidence: 22/22 manual metadata/scoring Node PASS, 1/1 isolated Chromium Manual Weekly Assessment Save/Finalize/Reopen/Print PASS, 1/1 disposable PG16 Express/JWT two-school Paper/Diary/Lesson acceptance PASS, protected First Term corpus 43/43 PASS and Early Years/lesson-browser receipts. These historical exact-source assertions are not newly rerun hosted CI/physical print. The new descendant only changes tests/CI/docs.
+
+## Phase 4 — fresh live read-only security and data audit
+- Actual DB read-only `exam_results`: 1,763 rows, 213 numeric zero scores, 0 NULL obtained-score rows. No UPDATE/DELETE/INSERT, no claims about independent offsite data restore.
+- `pg_class` public ordinary tables: 87 RLS enabled, 83 FORCE RLS. Four RLS-enabled but not FORCE: `assps_grade_revision_audit_20261014`, `employee_teaching_subject_evidence`, `school_class_promotion_plans`, `school_class_promotion_source_roster`; all owned by superuser `postgres`; one SELECT RLS policy each. This requires SaaS Core classification but does **not** by itself prove exposure. `apexos_user` currently `BYPASSRLS=false`; reviewed app/worker runtime roles have no effective SELECT/INSERT/UPDATE/DELETE on those four, except `assps_core_green_runtime` SELECT on the latter three. RLS and ACL catalog checks are not an independently signed tenant-denial or authenticated end-user acceptance.
+- Executed installed guarded source probe `bash ops/release/worker-probe/verify_real_node_worker_adapter_peer_20261016.sh` against real OS peer; read-only transaction, `assps_ai_worker_login`, five real sensitive `SQLSTATE 42501` denial checks, exit0 `REAL_NODE_WORKER_PEER_READONLY_PASS_NOT_RELEASE`. No worker persistent install, backend write or runtime deployment. Actual reviewed adapter still absent from `/var/www/apex-backend/src/services/ai/aiQueueWorkerDatabase.js`.
+
+## Phase 5 — signed Core release boundary / final blocked work
+- Latest independent recorded Core authority gate remains `6/13` signed checks PASS, seven HOLD: approved current full ACL backup, independent signed current off-host restore, signed persistent restricted worker transport, exact reviewed adapter deployed into live backend, independent persistent global worker authentication, live inherited grants independent certificate, and genuine live School2/unassigned-subject denial signature. No fabricated actors/signatures or silent waivers.
+- Physical school Urdu/A4 hardcopy, real teacher School1 Save→Reopen→Print and actual post-cutover rollback witness **not** certified. Synthetic browser PDFs are not school printer evidence. Production promotion remains exclusively SaaS Core's decision after official independently witnessed GO and rollback-ready acceptance.
+- No student marks/papers/Diary data mutations, migrations, Nginx reload, PM2 restart, worker install, public frontend deploy, faculty grade IX–X provisional bank approval or printer jobs in this mission.
+- Attempted draft PR creation using GitHub connector was rejected `422 must be a collaborator`; branch itself was pushed and exact commits are recoverable. Coordination issue #4 is authoritative handoff. Do not force merge or use another identity to bypass reviewer permissions.
+
+### Exact subsequent owner action
+SaaS Core should accept/review `535dbf4c` and `2803c9e2` as QA-only forward-port on the latest correctly verified Core descendant, reconcile four non-FORCE RLS tables against approved schema/role/policy contract, independently verify signed evidence and persistent live worker, then run the official final cutover gate. No cutover until ALL gates genuinely PASS. Recheck live hashes and records before and after release; preserve rollback archives and original official paper corpora.
