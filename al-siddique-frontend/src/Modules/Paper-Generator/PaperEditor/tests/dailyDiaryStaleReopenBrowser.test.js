@@ -6,13 +6,13 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../../../..')
-const PORT=5832
 const ownRecord={id:301,school_id:1,created_by:999,class_level:'8',class_name:'Eight',diary_date:'2026-10-09T00:00:00.000Z',slips_per_page:5,footer_text:'Original October 9 Footer',style_settings:{section:'Blue',paletteId:2},rows:[{id:'english',subject:'ENGLISH',diary:'Private October 9 English homework',isUrdu:false,isBold:true,fontSize:11,textAlign:'left'}]}
 
 for(const returnToOriginal of [false,true]){
 test(`late authorized Diary GET must not hydrate stale selection ${returnToOriginal?'even on Oct9→Oct10→Oct9 ABA':'after Oct9→Oct10'}`,{timeout:95000},async t=>{
- const port=PORT+(returnToOriginal?1:0)
- const v=await createServer({root,server:{port,strictPort:true}});await v.listen()
+ const v=await createServer({root,server:{port:0,strictPort:true}});await v.listen()
+ const port=v.httpServer?.address()?.port
+ assert.ok(Number.isInteger(port)&&port>0,'isolated Diary test must bind an available loopback port')
  const browser=await chromium.launch({headless:true,args:['--no-sandbox','--disable-setuid-sandbox']});t.after(async()=>{await browser.close();await v.close()})
  const ctx=await browser.newContext({viewport:{width:1400,height:930},timezoneId:'Asia/Karachi'})
  await ctx.addInitScript(()=>{localStorage.setItem('al_siddique_token','mock-jwt-token');localStorage.setItem('al_siddique_login_at',String(Date.now()));localStorage.setItem('al_siddique_user',JSON.stringify({id:999,role:'teacher',school_id:1,tenant_id:'assps'}))})
