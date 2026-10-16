@@ -1,0 +1,304 @@
+diff --git a/src/app/api/saas-admin/apex-leads/[leadId]/follow-up/route.ts b/src/app/api/saas-admin/apex-leads/[leadId]/follow-up/route.ts
+index 83e0159..ce616e1 100644
+--- a/src/app/api/saas-admin/apex-leads/[leadId]/follow-up/route.ts
++++ b/src/app/api/saas-admin/apex-leads/[leadId]/follow-up/route.ts
+@@ -27,23 +27,29 @@ export async function POST(
+       leadId: lead.leadId,
+     });
+ 
+-    return NextResponse.json({
+-      success: true,
+-      message: sent
+-        ? "Follow-up email sent to lead"
+-        : "SMTP not configured — email logged to server fallback",
+-      emailSent: sent,
+-    });
++    return NextResponse.json(
++      {
++        success: sent,
++        message: sent
++          ? "Follow-up email sent to lead"
++          : "Follow-up email not sent: SMTP is not configured",
++        emailSent: sent,
++      },
++      { headers: { "Cache-Control": "no-store" } },
++    );
+   } catch (error: unknown) {
+     const message = error instanceof Error ? error.message : "Follow-up failed";
+     if (message === "Unauthorized" || message === "Forbidden") {
+       return NextResponse.json(
+         { success: false, message },
+-        { status: message === "Forbidden" ? 403 : 401 }
++        { status: message === "Forbidden" ? 403 : 401, headers: { "Cache-Control": "no-store" } }
+       );
+     }
+     if (message.includes("ENOENT")) {
+-      return NextResponse.json({ success: false, message: "Lead not found" }, { status: 404 });
++      return NextResponse.json(
++        { success: false, message: "Lead not found" },
++        { status: 404, headers: { "Cache-Control": "no-store" } },
++      );
+     }
+     return NextResponse.json(
+       { success: false, message: "Administrative request temporarily unavailable" },
+diff --git a/src/lib/server/mail.ts b/src/lib/server/mail.ts
+index 4b2ffad..982518b 100644
+--- a/src/lib/server/mail.ts
++++ b/src/lib/server/mail.ts
+@@ -13,12 +13,20 @@ export const transporter = nodemailer.createTransport({
+   },
+ });
+ 
+-function logEmailFallback(label: string, content: string) {
++type MailFallbackReason =
++  | "SMTP_NOT_CONFIGURED"
++  | "PAYMENT_NOTIFICATION_RECIPIENT_MISSING"
++  | "LEAD_NOTIFICATION_RECIPIENT_MISSING";
++
++// Historical versions wrote full HTML bodies (including onboarding credentials)
++// into fallback logs. Never persist recipient, subject or message body here.
++function logEmailFallback(reason: MailFallbackReason) {
+   const logDir = path.join(process.cwd(), "logs");
+-  if (!fs.existsSync(logDir)) fs.mkdirSync(logDir, { recursive: true });
++  if (!fs.existsSync(logDir)) fs.mkdirSync(logDir, { recursive: true, mode: 0o700 });
+   fs.appendFileSync(
+     path.join(logDir, "email_fallbacks.log"),
+-    `\n=== ${label} ===\nTime: ${new Date().toISOString()}\n${content}\n============================\n`
++    `Time: ${new Date().toISOString()} | Event: ${reason} | Delivered: false\n`,
++    { encoding: "utf8", mode: 0o600, flag: "a" },
+   );
+ }
+ 
+@@ -34,7 +42,7 @@ async function sendMail({
+   const from = process.env.SMTP_FROM || `"APEX Support" <support@apex.assps.edu.pk>`;
+ 
+   if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
+-    logEmailFallback(subject, `To: ${to}\n${html.replace(/<[^>]+>/g, " ")}`);
++    logEmailFallback("SMTP_NOT_CONFIGURED");
+     return false;
+   }
+ 
+@@ -55,7 +63,7 @@ export async function sendSchoolCredentialsEmail({
+   email: string;
+   password: string;
+ }) {
+-  await sendMail({
++  const delivered = await sendMail({
+     to,
+     subject: `Your APEX School Account Credentials - ${schoolName}`,
+     html: `
+@@ -74,6 +82,11 @@ export async function sendSchoolCredentialsEmail({
+       </div>
+     `,
+   });
++  if (!delivered) {
++    // The school approval has already committed; do not falsely report
++    // credential delivery just because a fallback event was recorded.
++    throw new Error("APEX_CREDENTIAL_EMAIL_NOT_DELIVERED");
++  }
+ }
+ 
+ export async function sendPaymentPendingEmail({
+@@ -195,7 +208,7 @@ export async function sendPaymentConfirmedAdminNotification({
+     "";
+ 
+   if (!adminTo) {
+-    logEmailFallback("PAYMENT CONFIRMED", `${gateway} | ${requestId} | ${schoolName}`);
++    logEmailFallback("PAYMENT_NOTIFICATION_RECIPIENT_MISSING");
+     return;
+   }
+ 
+@@ -320,7 +333,7 @@ export async function sendApexLeadNotification({
+ }) {
+   const adminTo = process.env.APEX_LEADS_EMAIL || process.env.SMTP_USER || "";
+   if (!adminTo) {
+-    logEmailFallback("APEX LEAD", `${type} | ${name} | ${email} | ${phone}`);
++    logEmailFallback("LEAD_NOTIFICATION_RECIPIENT_MISSING");
+     return;
+   }
+ 
+diff --git a/src/lib/server/subscription-request-approve.ts b/src/lib/server/subscription-request-approve.ts
+index cedfc6c..1c8a771 100644
+--- a/src/lib/server/subscription-request-approve.ts
++++ b/src/lib/server/subscription-request-approve.ts
+@@ -195,8 +195,9 @@ export async function approveSubscriptionRequestByDbId(
+         email: adminEmail,
+         password: tempPassword,
+       });
+-    } catch (emailErr) {
+-      console.error("[approve] credentials email failed:", emailErr);
++    } catch {
++      // SMTP failures can contain addresses or upstream transport details.
++      console.error("[approve] credentials email failed");
+       emailSent = false;
+     }
+ 
+diff --git a/tests/apex-smtp-fallback-secret-guard.test.cjs b/tests/apex-smtp-fallback-secret-guard.test.cjs
+new file mode 100644
+index 0000000..2e9dd36
+--- /dev/null
++++ b/tests/apex-smtp-fallback-secret-guard.test.cjs
+@@ -0,0 +1,163 @@
++'use strict';
++const assert=require('node:assert/strict');
++const fs=require('node:fs');
++const path=require('node:path');
++const vm=require('node:vm');
++const ts=require('typescript');
++const {test}=require('node:test');
++const root=path.resolve(__dirname,'../src');
++const sensitive={
++  password:'PRIVATE_TEMPPASSWORD_SHOULD_NEVER_REACH_FALLBACK',
++  address:'private-person@example.invalid',
++  name:'PRIVATE_PERSON_SHOULD_NEVER_REACH_FALLBACK',
++  school:'PRIVATE_SCHOOL_SHOULD_NEVER_REACH_FALLBACK',
++  id:'PRIVATE_REQUEST_ID_SHOULD_NEVER_REACH_FALLBACK'
++};
++function compile(rel,imports,extras={}){
++ const source=fs.readFileSync(path.join(root,rel),'utf8');
++ const js=ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS,esModuleInterop:true}}).outputText;
++ const exports={};
++ vm.runInNewContext(js,{exports,Error,Date,console,process:extras.process||{env:{},cwd:()=>'/private/fixture'},require(id){
++  if(!Object.prototype.hasOwnProperty.call(imports,id))throw Error('unexpected import '+id);
++  return imports[id];
++ }},{filename:rel,timeout:2000});
++ return exports;
++}
++function mailer(opts={}){
++ const records={messages:[],dirs:[],writes:[],transports:0};
++ const directory={
++  existsSync:()=>false,
++  mkdirSync:(p,options)=>records.dirs.push({p,options}),
++  appendFileSync:(p,data,options)=>records.writes.push({p,data,options})
++ };
++ const transport={sendMail:async(mail)=>{records.messages.push(mail);if(opts.sendFails)throw Error('SMTP_TRANSPORT_PRIVATE_ERROR')}};
++ const mod=compile('lib/server/mail.ts',{
++  nodemailer:{createTransport:()=>{records.transports++;return transport}},
++  fs:directory,path,
++  '@/lib/server/apex-lead-html':{escapeApexLeadHtml:s=>String(s).replace(/</g,'&lt;')}
++ },{process:{env:opts.smtp?{SMTP_USER:'synthetic-user',SMTP_PASS:'synthetic-pass'}:{},cwd:()=>'/private/fixture'}});
++ return {mod,records};
++}
++const credential=()=>({
++ to:sensitive.address,schoolName:sensitive.school,ownerName:sensitive.name,
++ email:sensitive.address,password:sensitive.password
++});
++test('SMTP missing fails credentials delivery and persists zero personal content',async()=>{
++ const h=mailer();
++ await assert.rejects(h.mod.sendSchoolCredentialsEmail(credential()),/APEX_CREDENTIAL_EMAIL_NOT_DELIVERED/);
++ assert.equal(h.records.messages.length,0);
++ assert.equal(h.records.writes.length,1);
++ const entry=h.records.writes[0];
++ assert.match(entry.data,/SMTP_NOT_CONFIGURED/);
++ assert.match(entry.data,/Delivered: false/);
++ for(const value of Object.values(sensitive))assert.ok(!entry.data.includes(value),'sensitive fallback data recorded');
++ assert.equal(entry.options.mode,0o600);
++ assert.equal(entry.options.flag,'a');
++ assert.equal(h.records.dirs[0].options.mode,0o700);
++});
++test('configured mocked SMTP produces actual send success, no fallback disk log',async()=>{
++ const h=mailer({smtp:true});
++ await h.mod.sendSchoolCredentialsEmail(credential());
++ assert.equal(h.records.messages.length,1);
++ assert.equal(h.records.writes.length,0);
++ assert.equal(h.records.messages[0].to,sensitive.address);
++});
++test('missing SMTP auto-reply returns false and logs only static event',async()=>{
++ const h=mailer();
++ const sent=await h.mod.sendApexLeadAutoReply({
++  to:sensitive.address,name:sensitive.name,type:'contact',leadId:'LEAD-1234ABCD'});
++ assert.equal(sent,false);
++ assert.equal(h.records.writes.length,1);
++ assert.match(h.records.writes[0].data,/SMTP_NOT_CONFIGURED/);
++ for(const value of Object.values(sensitive))assert.ok(!h.records.writes[0].data.includes(value));
++});
++test('missing notification recipient writes no person, school, payment or request metadata',async()=>{
++ const h=mailer();
++ await h.mod.sendApexLeadNotification({
++  leadId:'LEAD-1234ABCD',type:'contact',name:sensitive.name,
++  email:sensitive.address,phone:'PRIVATE_PHONE_DO_NOT_PERSIST',schoolName:sensitive.school});
++ assert.equal(h.records.messages.length,0);
++ assert.equal(h.records.writes.length,1);
++ assert.match(h.records.writes[0].data,/LEAD_NOTIFICATION_RECIPIENT_MISSING/);
++ assert.doesNotMatch(h.records.writes[0].data,/PRIVATE_/);
++});
++test('missing payment admin recipient writes only static event without private request',async()=>{
++ const h=mailer();
++ await h.mod.sendPaymentConfirmedAdminNotification({
++  requestId:sensitive.id,schoolName:sensitive.school,ownerName:sensitive.name,
++  email:sensitive.address,planName:'PRIVATE_PLAN',amount:100,
++  gateway:'PRIVATE_GATEWAY',transactionId:'PRIVATE_TRANSACTION'});
++ assert.equal(h.records.writes.length,1);
++ assert.match(h.records.writes[0].data,/PAYMENT_NOTIFICATION_RECIPIENT_MISSING/);
++ assert.doesNotMatch(h.records.writes[0].data,/PRIVATE_/);
++});
++class Response{
++ constructor(body,opts={}){this.body=body;this.status=opts.status||200;this.headers=opts.headers||{}}
++ static json(body,opts){return new Response(body,opts)}
++}
++function follow({send=false,authError=null,readError=null}={}){
++ const calls={auth:0,read:0,send:0};
++ const handler=compile('app/api/saas-admin/apex-leads/[leadId]/follow-up/route.ts',{
++  'next/server':{NextResponse:Response},
++  '@/lib/server/auth-user':{requireSaasAdminUser:async()=>{calls.auth++;if(authError)throw Error(authError)}},
++  '@/lib/server/apex-leads-storage':{
++    isApexLeadId:id=>/^LEAD-[0-9A-F]{8}$/.test(id),
++    readApexLeadById:async()=>{calls.read++;if(readError)throw Error(readError);return {
++      ...credential(),leadId:'LEAD-1234ABCD',type:'contact'}}
++  },
++  '@/lib/server/mail':{sendApexLeadAutoReply:async()=>{calls.send++;return send}}
++ });
++ return {POST:handler.POST,calls};
++}
++const context=(id='LEAD-1234ABCD')=>({params:Promise.resolve({leadId:id})});
++test('follow-up no SMTP truthfully reports not delivered and is never cached',async()=>{
++ const h=follow();
++ const response=await h.POST({},context());
++ assert.equal(response.status,200);
++ assert.equal(response.headers['Cache-Control'],'no-store');
++ assert.equal(response.body.success,false);
++ assert.equal(response.body.emailSent,false);
++ assert.match(response.body.message,/not sent/);
++ assert.equal(h.calls.send,1);
++});
++test('follow-up actual mocked send has success true and no-store',async()=>{
++ const h=follow({send:true});
++ const response=await h.POST({},context());
++ assert.equal(response.body.success,true);
++ assert.equal(response.body.emailSent,true);
++ assert.equal(response.headers['Cache-Control'],'no-store');
++});
++test('follow-up invalid ID/unauthorized actor cannot read or email data',async()=>{
++ const invalid=follow();
++ const bad=await invalid.POST({},context('../etc'));
++ assert.equal(bad.status,400);
++ assert.equal(bad.headers['Cache-Control'],'no-store');
++ assert.equal(invalid.calls.read,0);
++ for(const [message,expected] of [['Unauthorized',401],['Forbidden',403]]){
++  const h=follow({authError:message});
++  const result=await h.POST({},context());
++  assert.equal(result.status,expected);
++  assert.equal(result.headers['Cache-Control'],'no-store');
++  assert.equal(h.calls.read,0);
++  assert.equal(h.calls.send,0);
++ }
++});
++test('follow-up read not found is 404 no-store, other error redacted no-store 500',async()=>{
++ const gone=follow({readError:'ENOENT'});
++ const missing=await gone.POST({},context());
++ assert.equal(missing.status,404);
++ assert.equal(missing.headers['Cache-Control'],'no-store');
++ const fail=follow({readError:'PRIVATE_FILE_IO_ERROR'});
++ const result=await fail.POST({},context());
++ assert.equal(result.status,500);
++ assert.equal(result.headers['Cache-Control'],'no-store');
++ assert.doesNotMatch(JSON.stringify(result.body),/PRIVATE_FILE_IO_ERROR/);
++});
++test('approval caller will mark SMTP failure as emailSent=false without logging SMTP exception',()=>{
++ const content=fs.readFileSync(path.join(root,'lib/server/subscription-request-approve.ts'),'utf8');
++ assert.match(content,/await sendSchoolCredentialsEmail/);
++ assert.match(content,/catch \{/);
++ assert.match(content,/emailSent = false;/);
++ assert.match(content,/console\.error\("\[approve\] credentials email failed"\)/);
++ assert.ok(!content.includes('console.error("[approve] credentials email failed:", emailErr)'));
++});
