@@ -32,3 +32,10 @@ Existing Core release gate re-run against audit/core-unsigned-rls-matrix-2026101
 
 Use this as a post-cutover anonymous route-acceptance guard ONLY after SaaS Core officially certifies independent signed worker/authentication/peer-school denial, fresh ACL backup, offhost recovery and backup/rollback proof. A false outcome after approved promotion is a reason for Core to investigate/rollback, not a reason to bypass gates. A 200 public root or anonymous login redirect is never evidence of real tenant RLS. Do not modify school records or existing student marks/results for this test.
 
+
+
+## Follow-on additive gate: approved build identity check
+
+Connect release acceptance now checks an additional fixed public endpoint, /api/build-provenance, and requires the public response buildId to exactly equal the reviewed isolated optimized Next candidate SAsg3cC_el5cq2_nN2a46. No secrets or personal records are in the report: response is bounded at 16 KiB, raw body is never persisted or printed, malformed/duplicate JSON keys fail closed, and status must equal 200. This is a **build identity smoke check**, not full source provenance or a signed attestation; a forged JSON buildId cannot authorize release. The baseline current public buildId ONDwxEIZlx5onDIKY7wYf intentionally fails because production has not been cut over.
+
+Real new public gate 3/6 exit2/HOLD: three valid anonymous session/login routes, two dashboard redirect drift checks, and one expected pre-cutover public Build ID difference. Local Python regression suite now 164/164 PASS, including three new bounded-build/duplicate-key fail-closed tests. This additive guard is Connect-only, read-only, and does not modify Core release authority.

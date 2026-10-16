@@ -13,6 +13,8 @@ from urllib.parse import parse_qs, urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 ORIGIN = "https://apex.assps.edu.pk"
+EXPECTED_PUBLIC_BUILD = "SAsg3cC_el5cq2_nN2a46"
+PROVENANCE_PATH = "/api/build-provenance"
 ROUTES = ("/login", "/api/auth/me", "/dashboard",
           "/dashboard/history", "/teacher")
 
@@ -62,6 +64,36 @@ def fetch(opener, path: str, timeout: int) -> tuple[int, str | None]:
         return exc.code, exc.headers.get("Location")
 
 
+def reject_duplicate_json_keys(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError("duplicate key in build provenance")
+        result[key] = value
+    return result
+
+
+def check_build_provenance(opener, timeout: int) -> dict:
+    # Never return the response body or untrusted source metadata in evidence.
+    request = Request(ORIGIN + PROVENANCE_PATH, method="GET", headers={
+        "User-Agent": "ASSPS-Connect-ReadOnly-Provenance-Check",
+        "Cache-Control": "no-store",
+    })
+    try:
+        with opener.open(request, timeout=timeout) as response:
+            if response.status != 200:
+                return {"status": response.status, "route_ok": False}
+            raw = response.read(16385)
+            if len(raw) > 16384:
+                return {"status": 200, "route_ok": False}
+            data = json.loads(raw, object_pairs_hook=reject_duplicate_json_keys)
+            passed = (isinstance(data, dict) and
+                      data.get("buildId") == EXPECTED_PUBLIC_BUILD)
+            return {"status": 200, "route_ok": passed}
+    except (HTTPError, URLError, OSError, TimeoutError, ValueError, TypeError):
+        return {"route_ok": False, "error": "PROVENANCE_CHECK_FAILED"}
+
+
 def run(timeout: int = 8) -> dict:
     out = {"scope": "PUBLIC_ANONYMOUS_CONNECT_POSTCUTOVER_CONTRACT",
            "origin": ORIGIN, "authenticated_security_certified": False,
@@ -74,9 +106,10 @@ def run(timeout: int = 8) -> dict:
                                    "route_ok": assess(path, status, location)}
         except (URLError, OSError, TimeoutError, ValueError):
             out["checks"][path] = {"route_ok": False, "error": "REQUEST_FAILED"}
+    out["checks"][PROVENANCE_PATH] = check_build_provenance(opener, timeout)
     out["passed"] = sum(check["route_ok"] for check in out["checks"].values())
-    out["total"] = len(ROUTES)
-    out["decision"] = "ANONYMOUS_ROUTE_CONTRACT_PASS" if out["passed"] == out["total"] else "HOLD_ANONYMOUS_ROUTE_DRIFT"
+    out["total"] = len(ROUTES) + 1
+    out["decision"] = "ANONYMOUS_ROUTE_CONTRACT_PASS" if out["passed"] == out["total"] else "HOLD_PUBLIC_RELEASE_CONTRACT"
     return out
 
 

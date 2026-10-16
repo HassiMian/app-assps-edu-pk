@@ -51,6 +51,35 @@ class PublicAnonymousRouteTests(unittest.TestCase):
         self.assertFalse(routes.assess("/not-a-route", 302, "/login"))
         self.assertFalse(routes.assess("/login", True, None))
 
+    def test_build_provenance_matches_exact_approved_build(self):
+        class Response:
+            status = 200
+            def __enter__(self): return self
+            def __exit__(self, *args): return False
+            def read(self, maximum): return b'{"buildId":"SAsg3cC_el5cq2_nN2a46"}'
+        class Opener:
+            def open(self, req, timeout): return Response()
+        self.assertTrue(routes.check_build_provenance(Opener(), 5)["route_ok"])
+
+    def test_stale_or_fabricated_build_provenance_rejected(self):
+        for body in (b'{"buildId":"ONDwxEIZlx5onDIKY7wYf"}',
+                     b'{"buildId":"SAsg3cC_el5cq2_nN2a46","x":{}}' + b' ' * 16384,
+                     b'{"buildId":true}', b'not json', b'[]',
+                     b'{"buildId":"stale","buildId":"SAsg3cC_el5cq2_nN2a46"}'):
+            class Response:
+                status = 200
+                def __enter__(self): return self
+                def __exit__(self, *args): return False
+                def read(self, maximum): return body[:maximum]
+            class Opener:
+                def open(self, req, timeout): return Response()
+            self.assertFalse(routes.check_build_provenance(Opener(), 5)["route_ok"])
+
+    def test_build_provenance_error_cannot_authorize_release(self):
+        class Opener:
+            def open(self, req, timeout): raise OSError("test failure")
+        self.assertFalse(routes.check_build_provenance(Opener(), 5)["route_ok"])
+
     def test_login_and_auth_cannot_redirect(self):
         self.assertFalse(routes.assess("/login", 302, "/login"))
         self.assertFalse(routes.assess("/api/auth/me", 302, "/login"))
