@@ -34,3 +34,15 @@
 - **No Nginx reload, PM2 restart, backend adapter deployment, live SQL writes/migrations, forced Git update, removal of historic backups, signoff impersonation or production frontend replacement.**
 - Exactly required next automatic technical work: Core review of latest authentic source and real worker transport, independent authenticated/role-scoped denial with genuine credentials/receipts, officially reviewed backup freshness + independently certified off-host restore, 13/13 fail-closed trusted release gate, approved reproducible candidate deployment, postflight/rollback checks; abort and revert candidate when any gate fails.
 - All Grade IX–X research remains provisional without independently verified academic revision approval. School owner will self-upload any genuine external signatures; never auto-sign or publish provisional academic questions.
+
+## Same-mission update: 16 October, additional nonrelease phase-3 validation
+
+New clean descendant `audit/core-unsigned-rls-matrix-20261016@a73e72f190f9be2f2120841eafb1c01120819d80` adds a read-only unsigned-context role-denial matrix and hermetic unit tests/CI. Previous 37 Core tests and Paper Studio work remain included by ancestry.
+
+1. **Phase 1 baseline:** read-only public frontend/API HTTP 200; exact live root and accepted V3 remain unchanged; saved marks 1,763 and genuine zeros 213.
+2. **Phase 2 source:** same protected Vite/Express + Paper browser code from `b53bf123`; no academic or Connect feature takeover.
+3. **Phase 3 security negative tests newly executed:** 172/172 actual no-ticket role queries denied (159 RLS zero rows, 13 SQLSTATE 42501), zero unexpected visibility across 77 signed + nine additional tables; live public 5/5 protected HTTP endpoints anonymous 401. This **does not** prove independent peer-school authenticated denial. Full same-host restore proven earlier; signed offhost restore and authenticated production transport still not certified.
+4. **Phase 4 exact descendant candidate:** new `npm run build` EXIT 0 (9.81 s), HTML SHA256 `68ad0a2359d84d627ab8055ab28166baa4a43058d38c5fef052ed7f7073c0b89` identical to prior source; 5/5 static feature contracts PASS. Fresh module suites total **53/53 PASS** (8 new RLS logic, 5 older catalog, 9 backup readiness, 23 monitor, 8 worker/stage). Prior real browser 4/4 remains valid for same production source browser code. One combined fresh protected rollout invocation was blocked by execution-safety interface, **not** marked as executed PASS. Prior `b53bf123` guarded rollout read-only preflight remains separately recorded.
+5. **Phase 5 release:** NOT EXECUTED; Core official latest independently recorded 6/13 HOLD (not re-certified on this exact turn); accepted live V3 retained. Production signed worker adapter, independent signed offhost recovery, genuine tenant 2/unassigned subject checks, and full 13/13 remain mandatory. Do not invent independent signed receipts or trigger SQL/Nginx mutations.
+
+New audit evidence `docs/coordination/ASSPS_UNSIGNED_CONTEXT_172_RLS_NEGATIVE_MATRIX_20261016.md`.
