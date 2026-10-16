@@ -1,0 +1,130 @@
+diff --git a/src/lib/server/mail.ts b/src/lib/server/mail.ts
+index 982518b..9e7845c 100644
+--- a/src/lib/server/mail.ts
++++ b/src/lib/server/mail.ts
+@@ -70,11 +70,11 @@ export async function sendSchoolCredentialsEmail({
+       <div style="font-family:Arial,sans-serif;background:#f8fafc;padding:30px;">
+         <div style="max-width:620px;margin:auto;background:white;border-radius:18px;padding:28px;border:1px solid #e5e7eb;">
+           <h1 style="color:#0f172a;margin:0;">Welcome to APEX</h1>
+-          <p style="color:#475569;">Dear ${ownerName},</p>
+-          <p>Your subscription request for <b>${schoolName}</b> has been approved.</p>
++          <p style="color:#475569;">Dear ${escapeApexLeadHtml(ownerName)},</p>
++          <p>Your subscription request for <b>${escapeApexLeadHtml(schoolName)}</b> has been approved.</p>
+           <div style="background:#0f172a;color:white;border-radius:14px;padding:20px;margin:22px 0;">
+-            <p><b>Login Email:</b> ${email}</p>
+-            <p><b>Temporary Password:</b> ${password}</p>
++            <p><b>Login Email:</b> ${escapeApexLeadHtml(email)}</p>
++            <p><b>Temporary Password:</b> ${escapeApexLeadHtml(password)}</p>
+           </div>
+           <p>Please login and change your password on first login.</p>
+           <p style="color:#64748b;font-size:13px;">APEX OS by AL SIDDIQUE SCHOLARS PUBLIC SCHOOL</p>
+@@ -110,9 +110,9 @@ export async function sendPaymentPendingEmail({
+     html: `
+       <div style="font-family:Arial,sans-serif;padding:24px;">
+         <h2 style="color:#0f172a;">Payment submitted successfully</h2>
+-        <p>Dear ${ownerName},</p>
+-        <p>We received your subscription payment proof for <b>${schoolName}</b>.</p>
+-        <p><b>Request ID:</b> ${requestId}<br/><b>Plan:</b> ${planName}<br/><b>Amount:</b> PKR ${amount.toLocaleString()}</p>
++        <p>Dear ${escapeApexLeadHtml(ownerName)},</p>
++        <p>We received your subscription payment proof for <b>${escapeApexLeadHtml(schoolName)}</b>.</p>
++        <p><b>Request ID:</b> ${escapeApexLeadHtml(requestId)}<br/><b>Plan:</b> ${escapeApexLeadHtml(planName)}<br/><b>Amount:</b> PKR ${amount.toLocaleString()}</p>
+         <p>Our team will verify your payment within 24–48 hours. You will receive login credentials once approved.</p>
+       </div>
+     `,
+@@ -138,9 +138,9 @@ export async function sendPaymentRejectedEmail({
+     html: `
+       <div style="font-family:Arial,sans-serif;padding:24px;">
+         <h2 style="color:#b91c1c;">Payment verification could not be completed</h2>
+-        <p>Dear ${ownerName},</p>
+-        <p>Your payment request for <b>${schoolName}</b> (${requestId}) was not approved.</p>
+-        <p><b>Reason:</b> ${reason}</p>
++        <p>Dear ${escapeApexLeadHtml(ownerName)},</p>
++        <p>Your payment request for <b>${escapeApexLeadHtml(schoolName)}</b> (${escapeApexLeadHtml(requestId)}) was not approved.</p>
++        <p><b>Reason:</b> ${escapeApexLeadHtml(reason)}</p>
+         <p>Please resubmit checkout with corrected transaction details or contact support.</p>
+       </div>
+     `,
+@@ -171,11 +171,11 @@ export async function sendPaymentConfirmedEmail({
+     subject: `APEX Payment Confirmed — ${requestId}`,
+     html: `
+       <div style="font-family:Arial,sans-serif;padding:24px;">
+-        <h2 style="color:#0f766e;">Payment confirmed via ${gateway}</h2>
+-        <p>Dear ${ownerName},</p>
+-        <p>Your ${gateway} payment for <b>${schoolName}</b> was received successfully.</p>
+-        <p><b>Request ID:</b> ${requestId}<br/><b>Plan:</b> ${planName}<br/><b>Amount:</b> PKR ${amount.toLocaleString()}</p>
+-        ${transactionId ? `<p><b>Transaction ID:</b> ${transactionId}</p>` : ""}
++        <h2 style="color:#0f766e;">Payment confirmed via ${escapeApexLeadHtml(gateway)}</h2>
++        <p>Dear ${escapeApexLeadHtml(ownerName)},</p>
++        <p>Your ${escapeApexLeadHtml(gateway)} payment for <b>${escapeApexLeadHtml(schoolName)}</b> was received successfully.</p>
++        <p><b>Request ID:</b> ${escapeApexLeadHtml(requestId)}<br/><b>Plan:</b> ${escapeApexLeadHtml(planName)}<br/><b>Amount:</b> PKR ${amount.toLocaleString()}</p>
++        ${transactionId ? `<p><b>Transaction ID:</b> ${escapeApexLeadHtml(transactionId)}</p>` : ""}
+         <p>Our team will activate your school tenant shortly. You will receive login credentials by email once approved.</p>
+       </div>
+     `,
+@@ -218,12 +218,12 @@ export async function sendPaymentConfirmedAdminNotification({
+     html: `
+       <div style="font-family:Arial,sans-serif;padding:24px;">
+         <h2>Gateway payment confirmed</h2>
+-        <p><b>Gateway:</b> ${gateway}</p>
+-        <p><b>Request ID:</b> ${requestId}</p>
++        <p><b>Gateway:</b> ${escapeApexLeadHtml(gateway)}</p>
++        <p><b>Request ID:</b> ${escapeApexLeadHtml(requestId)}</p>
+         <p><b>School:</b> ${escapeApexLeadHtml(schoolName)}</p>
+-        <p><b>Owner:</b> ${ownerName} (${email})</p>
+-        <p><b>Plan:</b> ${planName} — PKR ${amount.toLocaleString()}</p>
+-        ${transactionId ? `<p><b>Transaction ID:</b> ${transactionId}</p>` : ""}
++        <p><b>Owner:</b> ${escapeApexLeadHtml(ownerName)} (${escapeApexLeadHtml(email)})</p>
++        <p><b>Plan:</b> ${escapeApexLeadHtml(planName)} — PKR ${amount.toLocaleString()}</p>
++        ${transactionId ? `<p><b>Transaction ID:</b> ${escapeApexLeadHtml(transactionId)}</p>` : ""}
+         <p>Status is <b>payment_confirmed</b>. Approve in SaaS Admin to activate tenant.</p>
+       </div>
+     `,
+diff --git a/tests/apex-mail-template-html-escape.test.cjs b/tests/apex-mail-template-html-escape.test.cjs
+new file mode 100644
+index 0000000..75bf918
+--- /dev/null
++++ b/tests/apex-mail-template-html-escape.test.cjs
+@@ -0,0 +1,43 @@
++'use strict';
++const assert=require('node:assert/strict');
++const fs=require('node:fs');
++const path=require('node:path');
++const vm=require('node:vm');
++const ts=require('typescript');
++const {test}=require('node:test');
++const source=fs.readFileSync(path.join(__dirname,'../src/lib/server/mail.ts'),'utf8');
++const js=ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS,esModuleInterop:true}}).outputText;
++const attack='<svg onload=alert(1)>&"\'';
++function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
++function load(){
++ const captures=[];
++ const exp={};
++ const env={SMTP_USER:'synthetic-user',SMTP_PASS:'synthetic-pass'};
++ vm.runInNewContext(js,{exports:exp,console,Date,process:{env,cwd:()=>'/synthetic'},Error,require(id){
++  if(id==='nodemailer')return {createTransport:()=>({sendMail:async x=>{captures.push(x)}})};
++  if(id==='fs')return {existsSync:()=>true,appendFileSync:()=>{throw Error('unexpected disk logging')}};
++  if(id==='path')return path;
++  if(id==='@/lib/server/apex-lead-html')return {escapeApexLeadHtml:escapeHtml};
++  throw Error('unknown '+id);
++ }},{filename:'mail.ts',timeout:2000});
++ return {exp,captures};
++}
++const common={to:'recipient@example.invalid',ownerName:attack,schoolName:attack,requestId:attack,planName:attack,amount:5000,gateway:attack,transactionId:attack,email:attack,password:attack,reason:attack};
++const cases=[
++ ['onboarding credentials', 'sendSchoolCredentialsEmail', common],
++ ['pending payment', 'sendPaymentPendingEmail', common],
++ ['rejected payment', 'sendPaymentRejectedEmail', common],
++ ['confirmed payment', 'sendPaymentConfirmedEmail', common],
++ ['admin payment notification', 'sendPaymentConfirmedAdminNotification', common],
++ ['lead notification (existing escaped baseline)', 'sendApexLeadNotification',{leadId:attack,type:attack,name:attack,email:attack,phone:attack,schoolName:attack,notes:attack}]
++];
++for(const [label,fn,params] of cases){
++ test(label+' keeps untrusted field literal in HTML email',async()=>{
++  const {exp,captures}=load(); await exp[fn](params);
++  assert.equal(captures.length,1);
++  const html=captures[0].html;
++  assert.ok(!html.includes(attack),'raw injected markup rendered in '+fn);
++  assert.ok(!html.includes('<svg onload=alert(1)>'),'active markup rendered in '+fn);
++  assert.ok(html.includes('&lt;svg onload=alert(1)&gt;'),'escaped marker missing in '+fn);
++ });
++}
