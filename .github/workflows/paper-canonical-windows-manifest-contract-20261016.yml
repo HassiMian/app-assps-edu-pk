@@ -1,0 +1,32 @@
+name: ASSPS Paper Studio Windows Canonical Manifest Contract
+on:
+  pull_request:
+    paths:
+      - 'ops/paper-studio/emit_windows_canonical_manifest_20261016.cjs'
+      - 'ops/paper-studio/verify_windows_canonical_chrome_cdp_20261016.cjs'
+      - 'ops/paper-studio/test_emit_windows_canonical_manifest_20261016.cjs'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/migration/data/canonical-first-term-2026-paperdoc-v2-schema3.json'
+      - '.github/workflows/paper-canonical-windows-manifest-contract-20261016.yml'
+  push:
+    branches:
+      - 'audit/paper-windows-corpus-full-20261016'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline-privacy-and-manifest-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout immutable branch
+        uses: actions/checkout@v4
+      - name: Configure Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Validate portable corpus manifest and fail-closed safety
+        run: node --test ops/paper-studio/test_emit_windows_canonical_manifest_20261016.cjs
+      - name: Reject accidental paper text in exported manifest
+        run: |
+          node ops/paper-studio/emit_windows_canonical_manifest_20261016.cjs > "$RUNNER_TEMP/assps-paper-manifest.json"
+          node -e "const m=require(process.argv[1]); if(m.cases.length!==43||Object.keys(m.cases[0]).join(',')!=='id,dir,family')process.exit(2)" "$RUNNER_TEMP/assps-paper-manifest.json"
