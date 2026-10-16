@@ -3,7 +3,7 @@
 // NO actual network, live SQL, real staff credentials, or token minting.
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
 const root=process.env.CONNECT_STAGE_ROOT;
-if(!root?.startsWith('/root/assps-release-candidates/'))throw Error('PRIVATE_CANDIDATE_REQUIRED');
+if(!require('./private-reviewed-stage-allowlist-20261016.cjs').allowed(root))throw Error('PRIVATE_CANDIDATE_REQUIRED');
 const ts=require(require.resolve('typescript',{paths:[root]}));
 const code=fs.readFileSync(path.join(root,'src/utils/api.ts'),'utf8');
 const compiled=ts.transpileModule(code,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,esModuleInterop:true}}).outputText;

@@ -25,3 +25,11 @@ Actual private HTTPS Nginx + real Chromium against **this newly successful build
 Production data protection: unchanged accepted Result Cards V3, saved 1,763 examination result rows including 213 genuine numeric zeros, existing Daily Diary and protected examination materials. No Nginx reload, PM2 restart, SQL record mutation, password reset, or printer job was performed.
 
 **Core adoption:** Reconcile the existing exact 10-file reviewed Connect source patch and lint config through the latest protected Core source, then Core must run its actual trusted 13/13 release gate, five-feature browser acceptance, live authenticated tenant test and backup/rollback gates. No direct public promotion from this isolated worktree.
+
+## Latest Core joint integration retest
+
+Latest clean verified Core branch `integration/core-autonomous-readiness-20261016@72b5e0fad9f772053d4f89a1c10d921193adde06`, current candidate frontend dist SHA256 `68ad0a2359d84d627ab8055ab28166baa4a43058d38c5fef052ed7f7073c0b89`, current public Nginx accepted index SHA256 `760b232b493c300fe78908704aef4989c24c25028faac1821dd41f6480210f3c`.
+
+The historical source-only JavaScript test helpers correctly rejected any new workspace path. Added `ops/connect/private-reviewed-stage-allowlist-20261016.cjs`: **only the exact reviewed isolated source path, Build ID, source Git SHA and ESLint digest** can now pass. No arbitrary workspace, path traversal, production root or stale build is accepted. The pre-existing release-candidates path remains backward compatible. **8/8 adversarial Node tests PASS**; two old Node source tests run without credentials or network on this strict allowlist.
+
+Actual latest joint Core + Connect + Paper preflight rerun after the scoped repair: **technical PASS, process exit 0, 13/15 matrix checks true**. Connect role-neutral source 13/13, Axios first-login 401 source 7/7 and password boundary 6/6. Two remaining false matrix keys represent **actual live** public frontend deficiencies: `public_lesson_planner_healthy`, `public_early_years_companion_healthy`. The candidate's corresponding saved Marks, Diary, Lesson, print and Result Cards contracts pass. `official_core_release_status:HOLD`; technical source readiness is **not signed production release authority**. No public Nginx/PM2/DB change performed.

@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const root=process.env.CONNECT_STAGE_ROOT;
-if(!root || !root.startsWith('/root/assps-release-candidates/')) throw Error('PRIVATE_STAGE_ROOT_REQUIRED');
+if(!require('./private-reviewed-stage-allowlist-20261016.cjs').allowed(root)) throw Error('PRIVATE_STAGE_ROOT_REQUIRED');
 const ts = require(require.resolve('typescript',{paths:[root]}));
 
 const source = fs.readFileSync(path.join(root, 'src/lib/server/auth-user.ts'), 'utf8');

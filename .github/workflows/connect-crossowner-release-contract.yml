@@ -21,6 +21,10 @@ on:
       - 'ops/connect/recovery/successful-optimized-next-build-20261016.json'
       - 'ops/connect/verify_successful_next_build_20261016.py'
       - 'ops/connect/test_verify_successful_next_build_20261016.py'
+      - 'ops/connect/private-reviewed-stage-allowlist-20261016.cjs'
+      - 'ops/connect/test-private-reviewed-stage-allowlist-20261016.test.cjs'
+      - 'ops/connect/test-current-live-firstlogin-401-boundary-20261015.cjs'
+      - 'ops/connect/test-current-live-temporary-login-20261015.cjs'
       - '.github/workflows/connect-crossowner-release-contract.yml'
   pull_request:
     paths:
@@ -43,6 +47,10 @@ on:
       - 'ops/connect/recovery/successful-optimized-next-build-20261016.json'
       - 'ops/connect/verify_successful_next_build_20261016.py'
       - 'ops/connect/test_verify_successful_next_build_20261016.py'
+      - 'ops/connect/private-reviewed-stage-allowlist-20261016.cjs'
+      - 'ops/connect/test-private-reviewed-stage-allowlist-20261016.test.cjs'
+      - 'ops/connect/test-current-live-firstlogin-401-boundary-20261015.cjs'
+      - 'ops/connect/test-current-live-temporary-login-20261015.cjs'
       - '.github/workflows/connect-crossowner-release-contract.yml'
 permissions:
   contents: read
@@ -73,3 +81,5 @@ jobs:
         run: python3 -m unittest discover -v -s ops/connect -p 'test_verify_local_full_acl_restore_20261016.py'
       - name: Guard actual successful optimized Connect Next build against forged release claims
         run: python3 -m unittest discover -v -s ops/connect -p 'test_verify_successful_next_build_20261016.py'
+      - name: Ensure new optimized private stage permit is exact hash pinned
+        run: node --test ops/connect/test-private-reviewed-stage-allowlist-20261016.test.cjs
