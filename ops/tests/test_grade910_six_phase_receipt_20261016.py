@@ -116,6 +116,22 @@ class ZeroHumanSixPhaseGuards(unittest.TestCase):
     'liveContentRevisionHashEntries':2411,'qualifiedFacultyDecisionsForged':1,
     'newlyApprovedQuestions':0,'verifiedPublisherSelectableQuestionsCreated':0}))
   with self.assertRaises(ValueError):m.evaluate(*a)
+ def test_restricted_role_no_cross_school_counts_not_human_auth(self):
+  a=list(fixtures())
+  a.extend((None,None,None,None,{'schema':'ASSPS_GRADE910_RESTRICTED_ROLE_QBANK_READ_ONLY_RLS_V1',
+    'crossTenantLeakCount':0,'school1PeerSchool5VisibleRows':0,
+    'school5PeerSchool1VisibleRows':0,'noTenantContextVisibleRows':0,
+    'forcedRLS':True,'CoreProductionSecurityCertificationGranted':False}))
+  result=m.evaluate(*a)
+  self.assertTrue(result['questionBankCrossSchoolRlsDenied'])
+  self.assertFalse(result['academicVerifiedPublicationReady'])
+ def test_any_cross_tenant_leak_denies_phase_readiness(self):
+  a=list(fixtures())
+  a.extend((None,None,None,None,{'schema':'ASSPS_GRADE910_RESTRICTED_ROLE_QBANK_READ_ONLY_RLS_V1',
+    'crossTenantLeakCount':1,'school1PeerSchool5VisibleRows':1,
+    'school5PeerSchool1VisibleRows':0,'noTenantContextVisibleRows':0,
+    'forcedRLS':True,'CoreProductionSecurityCertificationGranted':False}))
+  with self.assertRaises(ValueError):m.evaluate(*a)
  def test_private_receipt_permissions(self):
   with tempfile.TemporaryDirectory() as d:
    p=Path(d)/'private'/'status.json'

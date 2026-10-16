@@ -21,6 +21,7 @@ ExecStartPost=/usr/bin/python3 /usr/local/libexec/assps-grade910-sourceclaims/au
 ExecStartPost=/usr/bin/python3 /usr/local/libexec/assps-grade910-sourceclaims/audit-school1-versioned-textbook-adoption-20261016.py
 ExecStartPost=/usr/bin/python3 /usr/local/libexec/assps-grade910-sourceclaims/audit-grade910-live-question-revisions-20261016.py
 ExecStartPost=/usr/bin/python3 /usr/local/libexec/assps-grade910-sourceclaims/build-grade910-live-source-review-delta-20261016.py
+ExecStartPost=/usr/bin/python3 /usr/local/libexec/assps-grade910-sourceclaims/audit-grade910-runtime-question-bank-rls-20261016.py
 ExecStartPost=/usr/bin/python3 /usr/local/libexec/assps-grade910-sourceclaims/assps-grade910-autonomous-six-phase-receipt-20261016.py
 TimeoutStartSec=300
 ProtectSystem=strict

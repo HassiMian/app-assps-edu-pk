@@ -19,7 +19,7 @@ OUT=SOURCE_DIR/"autonomous-six-phase-checkpoint.json"
 def read(path:Path):
     return json.loads(path.read_text(encoding="utf8")) if path.exists() else None
 
-def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, answer, ocr_progress=None, live_collisions=None, adoption_inventory=None, review_delta=None):
+def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, answer, ocr_progress=None, live_collisions=None, adoption_inventory=None, review_delta=None, tenant_rls=None):
     if not all(isinstance(x,dict) for x in (technical,weekly,source,held,pdf,text,ocr_pilot,answer)):
         raise ValueError("MANDATORY_MACHINE_EVIDENCE_MISSING")
     src=source.get("summary") or {}
@@ -89,6 +89,15 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
            or review_delta.get('newlyApprovedQuestions')!=0
            or review_delta.get('verifiedPublisherSelectableQuestionsCreated')!=0):
             raise ValueError('FACULTY_REVIEW_DELTA_UNTRUSTED_OR_PUBLICATION_LEAK')
+    if tenant_rls is not None:
+        if (tenant_rls.get('schema')!='ASSPS_GRADE910_RESTRICTED_ROLE_QBANK_READ_ONLY_RLS_V1'
+            or tenant_rls.get('crossTenantLeakCount')!=0
+            or tenant_rls.get('school1PeerSchool5VisibleRows')!=0
+            or tenant_rls.get('school5PeerSchool1VisibleRows')!=0
+            or tenant_rls.get('noTenantContextVisibleRows')!=0
+            or tenant_rls.get('forcedRLS') is not True
+            or tenant_rls.get('CoreProductionSecurityCertificationGranted') is not False):
+            raise ValueError('QUESTION_BANK_RESTRICTED_ROLE_TENANT_ISOLATION_REGRESSION')
     score=technical.get("metrics",{}).get("scores",{})
     integrity=technical.get("decision")=="OPERATIONAL" and score.get("total_score_rows",0)>=1763
     fullsuite_ok=(weekly.get("decision")=="QA_PASSED_NO_AUTOMATIC_ACADEMIC_PUBLICATION"
@@ -123,6 +132,7 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
       {"phase":5,"title":"Paper Studio handoff and isolated integration QA",
        "status":"MACHINE_INTEGRATION_PASS_CORE_CUTOVER_NOT_CERTIFIED" if fullsuite_ok else "HOLD_FULL_QA_EVIDENCE",
        "fullQaBatchesPass":30 if fullsuite_ok else 0,
+       "restrictedRoleTenantQBankReadOnlyEvidence":('PASS_NOT_REAL_STAFF_LOGIN_CERTIFICATION' if tenant_rls else 'NOT_AUDITED'),
        "evidence":"30-batch isolated source QA and approved-only data-contract tests; SaaS Core owns release"},
       {"phase":6,"title":"Production release certification and final report",
        "status":"TECHNICAL_EVIDENCE_STAGED_ACADEMIC_PUBLICATION_HOLD",
@@ -145,6 +155,7 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
       "ocrResumablePageClaimsCheckpointed":progressClaims,
       "facultyReviewEvidenceCohorts":review_delta.get('existingFacultyCohorts') if review_delta else None,
       "liveQuestionRevisionHashes":review_delta.get('liveContentRevisionHashEntries') if review_delta else None,
+      "questionBankCrossSchoolRlsDenied":tenant_rls.get("crossTenantLeakCount")==0 if tenant_rls else None,
       "liveQuestionDuplicateGroups":0 if live_collisions is not None else None,
       "unresolvedIndependentEvidence":["School-specific approved book edition and exact academic session adoption",
          "Question-revision and source-page/exercise content attribution",
@@ -176,7 +187,8 @@ if __name__=="__main__":
                read(SOURCE_DIR/"ocr-progress.json"),
                read(SOURCE_DIR/"live-stem-collisions.json"),
                read(SOURCE_DIR/"school-adoption-inventory.json"),
-               read(SOURCE_DIR/"faculty-source-evidence-delta.json"))
+               read(SOURCE_DIR/"faculty-source-evidence-delta.json"),
+               read(SOURCE_DIR/"tenant-rls-qbank-readonly.json"))
     save(OUT,p)
     print(json.dumps({k:v for k,v in p.items() if k!="phases"},sort_keys=True))
     for row in p["phases"]:print(f"PHASE_{row['phase']}={row['status']}")

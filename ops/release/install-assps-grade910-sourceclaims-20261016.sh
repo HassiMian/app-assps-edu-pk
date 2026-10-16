@@ -20,6 +20,7 @@ python3 -m py_compile "$REPO/ops/qbank/audit-grade910-live-answer-integrity-2026
 python3 -m py_compile "$REPO/ops/qbank/audit-grade910-live-question-collisions-20261016.py"
 python3 -m py_compile "$REPO/ops/qbank/audit-school1-versioned-textbook-adoption-20261016.py"
 python3 -m py_compile "$REPO/ops/qbank/audit-grade910-live-question-revisions-20261016.py"
+python3 -m py_compile "$REPO/ops/qbank/audit-grade910-runtime-question-bank-rls-20261016.py"
 python3 -m py_compile "$REPO/ops/qbank/build-grade910-live-source-review-delta-20261016.py"
 python3 -m py_compile "$REPO/ops/qbank/assps-grade910-autonomous-six-phase-receipt-20261016.py"
 python3 -m py_compile "$REPO/ops/qbank/assps-grade910-held170-near-duplicate-screen-20261016.py"
@@ -33,6 +34,7 @@ python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_live_answer_i
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_live_question_collisions_20261016.py -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_school1_versioned_textbook_adoption_20261016.py -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_live_question_revision_hashes_20261016.py -q
+python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_runtime_question_bank_rls_20261016.py -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_live_source_review_delta_20261016.py -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_six_phase_receipt_20261016.py -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_held170_near_duplicate_screen_20261016.py -q
@@ -52,6 +54,7 @@ install -m 0644 "$REPO/ops/qbank/audit-grade910-live-answer-integrity-20261016.p
 install -m 0644 "$REPO/ops/qbank/audit-grade910-live-question-collisions-20261016.py" "$DEST/audit-grade910-live-question-collisions-20261016.py"
 install -m 0644 "$REPO/ops/qbank/audit-school1-versioned-textbook-adoption-20261016.py" "$DEST/audit-school1-versioned-textbook-adoption-20261016.py"
 install -m 0644 "$REPO/ops/qbank/audit-grade910-live-question-revisions-20261016.py" "$DEST/audit-grade910-live-question-revisions-20261016.py"
+install -m 0644 "$REPO/ops/qbank/audit-grade910-runtime-question-bank-rls-20261016.py" "$DEST/audit-grade910-runtime-question-bank-rls-20261016.py"
 install -m 0644 "$REPO/ops/qbank/build-grade910-live-source-review-delta-20261016.py" "$DEST/build-grade910-live-source-review-delta-20261016.py"
 install -m 0644 "$REPO/ops/qbank/assps-grade910-autonomous-six-phase-receipt-20261016.py" "$DEST/assps-grade910-autonomous-six-phase-receipt-20261016.py"
 install -m 0644 "$REPO/ops/qbank/assps-grade910-held170-near-duplicate-screen-20261016.py" "$DEST/assps-grade910-held170-near-duplicate-screen-20261016.py"
@@ -110,6 +113,12 @@ assert d['protectedOriginalOnlyIds']==170 and d['existingFacultyCohorts']==56
 assert d['liveContentRevisionHashEntries']==2411
 assert d['databaseWrites']==0 and d['verifiedPublisherSelectableQuestionsCreated']==0
 assert d['qualifiedFacultyDecisionsForged']==0 and d['confirmedExactExercisePageMappings']==0
+rls=json.loads(Path('/var/lib/assps-grade910-sourceclaims/tenant-rls-qbank-readonly.json').read_text())
+assert rls['crossTenantLeakCount']==0 and rls['noTenantContextVisibleRows']==0
+assert rls['school1PeerSchool5VisibleRows']==0 and rls['school5PeerSchool1VisibleRows']==0
+assert rls['forcedRLS'] is True and rls['roleSuperuserOrBypassRLS'] is False
+assert rls['authenticatedRealTeacherLoginVerified'] is False
+assert rls['CoreProductionSecurityCertificationGranted'] is False
 p=json.loads(Path('/var/lib/assps-grade910-sourceclaims/autonomous-six-phase-checkpoint.json').read_text())
 assert p['phaseCount']==6 and p['machinePassedPhases']>=4
 assert p['academicVerifiedPublicationReady'] is False
