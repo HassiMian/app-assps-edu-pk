@@ -23,6 +23,9 @@ const FORBIDDEN_ANSWER_KEYS = new Set([
   'answer','answers','answertext','answerkey','answerexplanation','answerindex',
   // Canonical TRUE_FALSE expectedAnswer is hidden source truth, never student print.
   'expectedanswer',
+  // Numerical working sheets and research banks may include hidden solutions
+  // and grading rubrics; neither belongs in student-only print output.
+  'finalanswer','markingrubric',
   'answeroption','answeroptionid',
   'correct','correctanswer','correctanswertext','correctanswerindex',
   'correctoption','correctoptionid','correctoptionindex','correctoptions',

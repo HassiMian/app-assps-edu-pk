@@ -148,3 +148,29 @@ test('canonical True/False expectedAnswer source metadata is absent from student
   assert.equal(staff.paper.sections[0].nodes[1].expected_answer,false)
   assert.equal(source.sections[0].nodes[0].expectedAnswer,true,'release source mutated by projection')
 })
+
+
+// Real Paper Generator numerical payloads use finalAnswer, and older source
+// banks include markingRubric. Neither is a student print instruction.
+test('student-only print omits numerical final answers and marking rubrics',()=>{
+  const source={sections:[{nodes:[
+    {kind:'NUMERICAL',prompt:'Calculate the result.',answerLines:3,
+      structuredData:{formula:'F = ma',finalAnswer:'PRIVATE_FINAL_9_8',steps:'Show working'},
+      markingRubric:['PRIVATE_RUBRIC_1','PRIVATE_RUBRIC_2'],
+      options:[{text:'Option A'},{text:'Option B'}]},
+  ]}]}
+  assert.equal(containsForbiddenAnswerMaterial(source),true,'source answer metadata must be flagged')
+  const student=buildStudentSafeProjection(source,{student:{displayName:'Synthetic',rollNo:'04'}})
+  const q=student.paper.sections[0].nodes[0]
+  assert.equal(q.prompt,'Calculate the result.')
+  assert.equal(q.answerLines,3)
+  assert.deepEqual(q.options.map(o=>o.text),['Option A','Option B'])
+  for (const leaked of ['PRIVATE_FINAL_9_8','PRIVATE_RUBRIC_1','PRIVATE_RUBRIC_2']) {
+    assert.equal(JSON.stringify(student).includes(leaked),false,'student answer metadata leaked: '+leaked)
+  }
+  assert.equal(containsForbiddenAnswerMaterial(student),false)
+  const staff=buildStaffAnswerKeyProjection(source,{role:'teacher'})
+  assert.equal(staff.paper.sections[0].nodes[0].structuredData.finalAnswer,'PRIVATE_FINAL_9_8')
+  assert.deepEqual(staff.paper.sections[0].nodes[0].markingRubric,['PRIVATE_RUBRIC_1','PRIVATE_RUBRIC_2'])
+  assert.equal(source.sections[0].nodes[0].structuredData.finalAnswer,'PRIVATE_FINAL_9_8','signed original source mutated')
+})
