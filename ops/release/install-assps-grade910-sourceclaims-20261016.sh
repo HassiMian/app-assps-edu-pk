@@ -21,6 +21,7 @@ python3 -m py_compile "$REPO/ops/qbank/audit-grade910-live-question-collisions-2
 python3 -m py_compile "$REPO/ops/qbank/audit-school1-versioned-textbook-adoption-20261016.py"
 python3 -m py_compile "$REPO/ops/qbank/audit-grade910-live-question-revisions-20261016.py"
 python3 -m py_compile "$REPO/ops/qbank/audit-grade910-live-numerical-evidence-20261016.py"
+python3 -m py_compile "$REPO/ops/qbank/build-grade910-numerical-review-priority-20261016.py"
 python3 -m py_compile "$REPO/ops/qbank/grade910_live_revision_history_20261016.py"
 python3 -m py_compile "$REPO/ops/qbank/grade910_live_revision_history_20261016.py"
 python3 -m py_compile "$REPO/ops/qbank/audit-grade910-runtime-question-bank-rls-20261016.py"
@@ -38,6 +39,7 @@ python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_live_question
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_school1_versioned_textbook_adoption_20261016.py -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_live_question_revision_hashes_20261016.py -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_live_numerical_evidence_20261016.py -q
+python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_numerical_review_priority_20261016.py -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_live_revision_history_20261016.py -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_live_revision_history_20261016.py -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_runtime_question_bank_rls_20261016.py -q
@@ -61,6 +63,7 @@ install -m 0644 "$REPO/ops/qbank/audit-grade910-live-question-collisions-2026101
 install -m 0644 "$REPO/ops/qbank/audit-school1-versioned-textbook-adoption-20261016.py" "$DEST/audit-school1-versioned-textbook-adoption-20261016.py"
 install -m 0644 "$REPO/ops/qbank/audit-grade910-live-question-revisions-20261016.py" "$DEST/audit-grade910-live-question-revisions-20261016.py"
 install -m 0644 "$REPO/ops/qbank/audit-grade910-live-numerical-evidence-20261016.py" "$DEST/audit-grade910-live-numerical-evidence-20261016.py"
+install -m 0644 "$REPO/ops/qbank/build-grade910-numerical-review-priority-20261016.py" "$DEST/build-grade910-numerical-review-priority-20261016.py"
 install -m 0644 "$REPO/ops/qbank/grade910_live_revision_history_20261016.py" "$DEST/grade910_live_revision_history_20261016.py"
 install -m 0644 "$REPO/ops/qbank/grade910_live_revision_history_20261016.py" "$DEST/grade910_live_revision_history_20261016.py"
 install -m 0644 "$REPO/ops/qbank/audit-grade910-runtime-question-bank-rls-20261016.py" "$DEST/audit-grade910-runtime-question-bank-rls-20261016.py"

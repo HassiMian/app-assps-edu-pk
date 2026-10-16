@@ -11,6 +11,8 @@ on:
       - "ops/qbank/audit-school1-versioned-textbook-adoption-20261016.py"
       - "ops/qbank/audit-grade910-live-question-revisions-20261016.py"
       - "ops/qbank/audit-grade910-live-numerical-evidence-20261016.py"
+      - "ops/qbank/build-grade910-numerical-review-priority-20261016.py"
+      - "ops/tests/test_grade910_numerical_review_priority_20261016.py"
       - "ops/tests/test_grade910_live_numerical_evidence_20261016.py"
       - "ops/qbank/grade910_live_revision_history_20261016.py"
       - "ops/tests/test_grade910_live_revision_history_20261016.py"
@@ -54,6 +56,8 @@ on:
       - "ops/qbank/audit-school1-versioned-textbook-adoption-20261016.py"
       - "ops/qbank/audit-grade910-live-question-revisions-20261016.py"
       - "ops/qbank/audit-grade910-live-numerical-evidence-20261016.py"
+      - "ops/qbank/build-grade910-numerical-review-priority-20261016.py"
+      - "ops/tests/test_grade910_numerical_review_priority_20261016.py"
       - "ops/tests/test_grade910_live_numerical_evidence_20261016.py"
       - "ops/qbank/grade910_live_revision_history_20261016.py"
       - "ops/tests/test_grade910_live_revision_history_20261016.py"
@@ -120,5 +124,7 @@ jobs:
           python3 -m unittest discover -s ops/tests -p test_grade910_live_source_review_delta_20261016.py -v
       - name: Verify restricted-role QBank tenant isolation cannot be forged as staff login
         run: python3 -m unittest discover -s ops/tests -p test_grade910_runtime_question_bank_rls_20261016.py -v
+      - name: Validate current live-revision numerical recomputation backlog
+        run: python3 -m unittest discover -s ops/tests -p test_grade910_numerical_review_priority_20261016.py -v
       - name: Validate offline claim auditor syntax
         run: python3 -m py_compile ops/qbank/audit-live-grade910-source-claims-20261016.py ops/qbank/reconcile-grade910-held-original-candidates-20261016.py
