@@ -46,3 +46,13 @@ Added 4 more **direct authenticated School1 teacher API negative revision reques
 Final candidate Vite build **PASS** and static feature matrix **5/5 PASS_NOT_RELEASE**, HTML SHA256 `db0ef46c9922c049f0b150a1a2b00323c15c67967483cd02ccdafa48d0134237`. DOCX real zipped 43-paper Word OOXML and math tests **9/9 PASS**, private log `/root/paper_studio_private_qa_20261016/core401-richtext-docx-all43.log`. All sample content and user records were synthetic or unchanged canonical historical references; no proprietary font files copied to the source tree.
 
 The GitHub CI push scopes for the Paper DOCX and backend rich-heading workflows include `integration/core401-paper-docx-richheading-secure-20261016`; hosted CI remains **unverified until actual job completion evidence**, regardless of local 55/55 tests. The two preexisting Argus JSON untracked files in this isolated tree are preserved and excluded from the commit. No production release occurred: outstanding signed off-host recovery, persistent live restricted worker, independent authorized School2/subject-denial witness, printed Urdu hardcopy and SaaS Core 13/13 cutover remain fail-closed.
+
+## Post-integration cross-feature real Chromium checks
+
+On the identical integrated source now pushed as `integration/core401-paper-docx-richheading-secure-20261016@3540b19f954a76db0b60a03cf02a930d0a201865`, the following additional exact browser tests were run after complete 43-paper and two-school tests:
+
+- `PLAYWRIGHT_BROWSERS_PATH=/opt/assps-editor-worker/browsers node ops/paper-studio/run_diary_release_browser_20261016.cjs` — **4/4 PASS, exit 0**, including Diary A4 print/controller, Save/Reopen foreign-tenant protection and late-save selection race, no real printer jobs.
+- `node --test src/Modules/Paper-Generator/PaperEditor/tests/lessonPlanningWorkspaceBrowserAcceptance.test.js` — **1/1 PASS, exit 0**, Cognitive Lesson Planning browser, zero failed/skipped.
+- `node --test src/Modules/Paper-Generator/PaperEditor/tests/earlyYearsRenderPrintGeometryAcceptance.test.js` — **8/8 PASS, exit 0**, all nine Early Years references nonempty, faithful word-bank/counting sections, no answers leaked, Chrome A4 PDF print route and zero physical clipping/overlap. Entire run completed in 27.2s, no failures/skipped.
+
+These are synthetic/non-live browser acceptance tests, not genuine signed teacher or printer witness. No production frontend promotion or school record mutation occurred.
