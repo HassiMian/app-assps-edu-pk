@@ -77,3 +77,13 @@ Connect patch is included so the isolated Connect source can be forward-ported o
 - Existing isolated genuine-account QA log reports two-parent auth PASS, unauthorized 401, linked child isolation and Friday fifth period. Not equivalent to end-user acceptance on production.
 - New 336-projection read-only corpus test passes across all seven imported class groups, six weekdays, all 56 periods and class Eight/Pre-Nine non-aliasing.
 - Phase 5 remains HOLD until approved teacher identities, junior subjects/Class Eight mapping, canonical integrated green candidate E2E and controlled cutover.
+
+## 16 October resumed read-only continuation
+- Fresh 16 October archive SHA256SUMS check PASS.
+- Real live exam_results: 1762 rows, 213 genuine numeric zero marks, zero null marks and zero out-of-range scores. No grade write.
+- Teacher spelling search found zero remaining wrong Ausa / Aousa / Aksha timetable rows.
+- Canonical production ancestry verified; live Connect parent and API proxy sources match prefeature baseline.
+- Subject coverage: 98 active students across Four/Five/Six/Seven/Nine groups have verified subject periods; 220 students in Starter/Mover/Flyer/One/Two/Three/Eight do not. Never fill academic data gaps without approved source.
+- Private synthetic Chromium harness bundled real Connect FamilyTimetable React component with compiled CSS. Tested two student tables, Miss Aqsa incharge, Mover Miss Laiba and Miss Abida, Friday 5th 10:40–11:05, no Friday break, visible 1px table grid, zero JS errors. Screenshot proof private QA hash 79893d3de0c3b2728286bdf6440223ef66a03f65acd86745a40e7c8b998dcd2b. No real student details used.
+- Temporary QA route removed, QA servers stopped, Connect code restored clean, production unchanged.
+- Autonomous execution permission does not substitute for subject allocations, approved staff links or evidence-based class mappings; release HOLD remains.

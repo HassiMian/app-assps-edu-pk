@@ -26,13 +26,13 @@
       "phase": 4,
       "name": "SaaS and Connect frontend QA",
       "status": "ISOLATED_BUILD_PASS",
-      "evidence": "Vite build 3.54s, Next full webpack build + TS +103 static pages, unauthenticated preview redirects verified"
+      "evidence": "Vite and Next full build+TypeScript+103 pages pass. Synthetic Chromium browser validates 2 child tables, Friday 5th 10:40\u201311:05, no break, junior teachers, 1px borders and zero JS errors."
     },
     {
       "phase": 5,
       "name": "live production release",
       "status": "HOLD",
-      "evidence": "No source or PM2 production changes; gated by real auth, staff approval, full backup restore, canonical candidate/release review"
+      "evidence": "Core and Connect candidate builds pass; authenticated QA plus isolated browser test pass, but subject allocation coverage only 98 of 318 current students. Do not claim full release."
     }
   ],
   "irreducible_gates": [
@@ -57,5 +57,46 @@
     "cutover_approved": false,
     "verified_exam9_results": 1762,
     "verified_exam9_zero_scores": 213
+  },
+  "timetable_coverage": {
+    "as_of": "2026-10-16",
+    "active_students": 318,
+    "students_with_8_official_subject_periods": 98,
+    "students_with_period_subject_allocations_unverified": 220,
+    "groups_with_complete_subjects": [
+      "Four Blue",
+      "Five Blue",
+      "Six Blue",
+      "Seven Blue",
+      "Nine Usman",
+      "Nine Fatima"
+    ],
+    "missing_groups": [
+      "Starter Blue",
+      "Mover Purple",
+      "Flyer Pink",
+      "One Yellow",
+      "Two Orange",
+      "Three Red",
+      "Eight Blue"
+    ],
+    "rule": "Never equate Eight with Pre-Nine without verified school decision"
+  },
+  "synthetic_browser_qa": {
+    "status": "PASS",
+    "renderer": "Actual FamilyTimetable React component in isolated Vite browser harness",
+    "browser": "Playwright Chromium headless",
+    "screenshot_sha256": "79893d3de0c3b2728286bdf6440223ef66a03f65acd86745a40e7c8b998dcd2b",
+    "synthetic_student_count": 2,
+    "period5_friday": "10:40\u201311:05",
+    "friday_break": false,
+    "mover_fixed_teachers": [
+      "Miss Laiba",
+      "Miss Abida"
+    ],
+    "first_period_class_incharge": "Miss Aqsa",
+    "table_border_width": "1px",
+    "javascript_errors": 0,
+    "production_deployed": false
   }
 }
