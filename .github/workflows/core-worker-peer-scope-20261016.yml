@@ -1,0 +1,18 @@
+name: ASSPS restricted AI worker authentic peer scope unit guard
+on:
+  push:
+    paths:
+      - "ops/release/worker-probe/verify_worker_peer_scope_20261016.py"
+      - "ops/release/worker-probe/test_verify_worker_peer_scope_20261016.py"
+      - ".github/workflows/core-worker-peer-scope-20261016.yml"
+  workflow_dispatch:
+jobs:
+  hermetic-fail-closed-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Worker negative ACL/identity tests without live DB access
+        run: python3 -m unittest discover -s ops/release/worker-probe -p test_verify_worker_peer_scope_20261016.py -v
