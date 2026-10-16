@@ -12,6 +12,20 @@
 - Grade X: 881 candidates, 443 in-range original page assertions, 438 without exact page.
 - **0** questions were academically approved, altered or published in this audit. `question_bank.source_page_no` is not silently filled from the author metadata. Real teacher reviewer signatures and ASSPS 2026–27 textbook edition adoption remain separate evidence requirements.
 
+## Official curriculum applicability recheck — 16 October 2026
+
+The publicly accessible **PECTAA Curriculum & Compliance** official catalog at
+https://pectaa.edu.pk/curriculum-compliance/ currently lists multiple Grade IX editions
+(e.g. 2020, 2025–26 and dated 2026 updates) as well as Grade X textbooks explicitly
+labelled **2026–27**. This establishes available authority links and competing
+edition choices, **not** which particular set ASSPS has adopted. The site's Grade IX
+smart syllabus/ALP resources must not be automatically attached to the school's
+2026–27 Full Syllabus or to Annual Examination 2027 without an applicable official
+notification and school-specific adoption evidence. The present source manifest
+was created on 8 October 2026; this run rehashed its preserved **cached bytes**,
+not fresh downloads of every official 16 October catalog URL. Content and paper
+publication remain separated from this PDF-identity exercise.
+
 ## Prioritize source-page checks without inventing pages
 
 | Grade | Subject | Without exact page | Recoverable unverified page claim |
