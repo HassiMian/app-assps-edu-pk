@@ -2,6 +2,7 @@ name: ASSPS Paper Studio Student Print Answer Privacy
 on:
   push:
     branches:
+      - 'integration/paper-core503-privacy-diary15-*'
       - 'fix/paper-student-projection-answer-alias-20261016'
   pull_request:
     paths:

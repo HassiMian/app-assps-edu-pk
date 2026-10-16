@@ -2,6 +2,7 @@ name: ASSPS Daily Diary Safe Browser Release
 on:
   push:
     branches:
+      - 'integration/paper-core503-privacy-diary15-*'
       - 'integration/core-paper-phase3ag-*'
       - 'integration/core-worker-paper-phase3ag-*'
       - 'fix/paper-diary-save-race-browser-*'

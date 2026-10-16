@@ -1,0 +1,25 @@
+# Paper Studio / SaaS Core Marks503 unified QA and student-print privacy — 16 October 2026
+
+## Provenance and ownership
+- Single scoped Paper Studio candidate: `integration/paper-core503-privacy-diary15-20261016`; isolated clean VPS worktree `/root/workspace/assps-paper-core503-privacy-diary15-20261016`.
+- Genuine latest Core-owned reviewed base: `integration/core-marks503-paper-diary-unified-20261016@4df452c2bfbb5f3a1b6bef73795f78b4c2ecb9e5`, remote SHA verified unchanged during integration. Core-only changes (Marks POST auth 503, signed RLS catalog, preview-only default-grade fix) remain unaltered.
+- Selectively cherry-picked reviewed Paper commits with `-x`: Diary eight-flow `e924b6bf` -> `96b2e82a`, Diary fifteen-flow `ad1f1567` -> `4ce89c0e`, and print projection answer-alias security `684be8fd` -> `1c7c34db`. Historical same-parent docs and other owners' worktrees intact. This is ONE integrated candidate for coordination, not Core production authority.
+- Exactly 18 source/workflow/QA/doc paths changed against Core base before this handoff. Backend runtime product change is restricted to answer alias sanitization; no changes to official paper data, marks, RLS grants, user credentials or deployed frontend.
+
+## Actual executed checks on this exact isolated candidate
+- `node --test al-siddique-backend/src/tests/assessment-print-jobs-domain.test.js`: **9/9 PASS**, exit0; tested nested answer alias redaction and authorized staff answer-key separation.
+- `npm ci --prefer-offline --no-audit --no-fund`: **exit0**, 315 pinned packages.
+- `npm run build`: **exit0**, compiled `al-siddique-frontend/dist/index.html` SHA256 `db0ef46c9922c049f0b150a1a2b00323c15c67967483cd02ccdafa48d0134237` (identical to prior vetted Core/Paper candidate; not public production digest). Private build receipt SHA256 `f2dbce8d31841deb1bc12ca24d09ef16bc01d92b81d394f6e798e1defdd19f3f`.
+- `npm run verify:templates`: **6/6 protected official templates unchanged**, exit0.
+- `node --test canonicalDocxBinary.test.js canonicalDocxModel.test.js canonicalDocxMathAssets.test.js` (under frontend tests): **9/9 PASS**, exit0. Combined protected/DOCX private receipt SHA256 `4d37fddc82ab36cf2d70589c7af252e40ca9acf5d2824cf8d9447775b52d153c`.
+- `node --test .../personalizedPrintDurableBrowserAcceptance.test.js`: **1/1 PASS**, exit0, synthetic browser/teacher print job including duplex class-safe projections; private receipt SHA256 `ebc8851a91540088eadd86cd5f6f987b711051d0b87aedcfab94791268ad310c`.
+- `node ops/paper-studio/run_diary_release_browser_20261016.cjs`: full synthetic server **15/15 browser assertions printed PASS**, private log SHA256 `b6f749c87b328d8f2c59bae9dc888cc1905ffea4c3c20e4d03b233d68c0fc16e`; original synchronous command timed out at transport boundary, therefore outer shell exit code **not captured**. Independent detached exit-code receipt is being obtained; until verified the strict release runner process RC is not certified.
+- `node --test al-siddique-backend/src/tests/assessment-print-projection-boundary-static.test.js al-siddique-backend/src/tests/exam-marks-teacher-scope.test.js`: **6/6 PASS**, exit0; private receipt SHA256 `5debcd8e11f09ed3ff7400422ae8a60c46ababc1a5f4a97eaa4d6135080b9832`.
+- The scoped two GitHub Actions workflows now recognize the candidate branch. GitHub-hosted Actions status is **unverified** and must never be called green solely because YAML exists.
+
+## Release HOLD, rollback and real-world acceptance
+- This work made **NO live deployment**; no SQL DML/DDL, PM2/Nginx restart/reload, printer job, ACL/grants, live worker, official paper rewrite, marks reset or teacher impersonation.
+- Synthetic browser success is NOT the same as real authorized teacher Save -> Reopen -> physically print, genuine independent School2 denial, hardware Jameel Noori rendering or signed offhost recovery.
+- Issue #4 last actual Core security status: **6/13**, seven real requirements absent: owner-signed ACL backup, independent signed offhost restore, signed persistent restricted worker transport, exact reviewed worker adapter installed, separate authenticated persistent worker, witnessed effective inherited-grants denial, independently signed real School2/unassigned-subject denial. Thus **HOLD_NO_PRODUCTION_CUTOVER**; only SaaS Core may certify/promote after gates.
+- Source rollback (NO PRODUCTION ROLLBACK NEEDED): discard this new isolated candidate or revert three cherry-picked Paper commits; its parent Core4df is untouched. Never replace newer production code or destroy existing worktrees.
+- Complete byte-for-byte old ChatGPT historical transcript export unavailable; coordination issue and recoverable source artifacts checked, historical summaries are supporting evidence only.
