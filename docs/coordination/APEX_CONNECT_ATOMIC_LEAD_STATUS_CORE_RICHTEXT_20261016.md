@@ -1,0 +1,39 @@
+# APEX Connect — unified phase mission, atomic admin lead revision, current Core/Paper source
+
+16 October 2026. **Reviewed source and isolated QA only; NO production cutover.**
+
+## Verified source lineage and workstream
+
+Connect standalone Next code is on clean local `fix/connect-atomic-lead-status-20261016@4fe2c2ecad355e784868bee325f4d31f11e8eb4d`, exact descendant of reviewed `fix/connect-lead-list-integrity-20261016@3a4d7ab664168607317eec040891292747636598`. Standalone Next repo has **no GitHub remote**; owner coordination publication instead carries exact SHA-pinned 4-file reversible patch `ops/connect/recovery/reviewed-next-atomic-status-20261016.patch` SHA256 `5b9106afa7e99e2af6d5baf77cd58d806b97d731adaa379c8bb797d5bca28d81`. Literal `git apply --check` on prior source and `git apply --reverse --check` on fixed source pass. No competing database, SaaS Core mutation or Paper Studio source edits.
+
+## Concrete issue, implemented product repair and preserved contracts
+
+Previously authorized admin lead status saves used `fs.writeFile(filePath, ...)` directly on the existing genuine lead JSON. A partial disk write/process failure can truncate the old record before the handler reports an error. This is a **source-level risk**, not an assertion of a real lost enquiry. Implemented same-directory atomic replacement: validate canonical ID, load existing record, construct next status/timestamp without dropping existing fields, exclusively write to unpredictable UUID-suffixed private `0600` non-JSON temporary file, rename atomically to original path on successful complete write. On write or rename failure clean up temporary file and rethrow; if temp creation returned `EEXIST`, **never delete another process's temp**. Real valid `LEAD-XXXXXXXX` filenames/IDs, read/list/admin follow-up contract, O_EXCL lead creation, strict listing/CSV guards and tenant/auth boundaries unchanged. Admin status success, invalid body/status and not-found responses now explicitly set `Cache-Control:no-store`, as existing 500 already does. No actual school record writes.
+
+Atomic rename prevents partial visible JSON replacement on a normal functioning same-directory filesystem, **not** a claim of full power-loss durability (no file/directory fsync) or optimistic version-conflict prevention; concurrent authorized status changes can still be last-write-wins and require separate reviewed revision policy if product adds it.
+
+## Reproducible synthetic and actual local filesystem acceptance
+
+Exact pre-fix Git source against 9 original new scratch tests: **4 pass / 5 expected failures**, rc1. Fixed source after additional temp EEXIST non-deletion case: full Connect transpiled TypeScript/Next synthetic and actual private temporary filesystem Node suite **73/73 PASS**, including protected admin validation, partial-write and rename failures, absent/invalid IDs, preservation of older lead fields, 0600 successful rewritten file, cleanup and collision non-unlink. Scoped ESLint exit0 (one pre-existing unused-variable warning in legacy ID test). No real stored enquiry, teacher credentials, SMTP, student data or official papers were accessed.
+
+## Exact compiled, Core compatibility and release-gate checkpoint
+
+See the remainder of this report for final byte-pinned private builds, real loopback responses, source tamper tests, latest SaaS Core source digest, official 13-check signed gate and handoff. Signed Core gate is **not** auto-fulfilled by isolated QA or disposable cross-school tests. Production ownership remains SaaS Core; there is no Connect self-deployment or falsified teacher/owner signature.
+
+## Completed Phase 3 — optimized Connect candidate and private HTTP acceptance
+
+Fresh isolated Next16.2.6 optimized build from exact clean committed source `4fe2c2ecad355e784868bee325f4d31f11e8eb4d` **exit0**. TypeScript completed; 103/103 static pages generated; postbuild normalization completed. Private Build ID `HYiWHiCuGMYLnPKNZhpt9`; root-protected build log SHA256 `fec874ae5abab03d7e41b6cbadf66cc0e9de8c2eb2a97b643dab1d82a00b9f04`. Verified actual scoped ESLint process exit0, prior pre-existing unused fixture variable warning (zero errors). Real self-contained Next server ran temporarily on allocated `127.0.0.1` loopback only: login HTTP200; auth/me and six privileged school/admin APIs returned HTTP401; **8/8 PASS**, root-protected receipt SHA256 `5adc27395039edb176ad685f6ff7c09b10c72902bc055393f369c43ec79caf49`. Temporary server was terminated and listener confirmed closed. Anonymous denial is NOT an authenticated staff/School2 independent security signature.
+
+## Completed Phase 4 — current Core/Paper reconciliation and full regression
+
+Compared current Issue #4 Core/Paper owner releases and isolated the newer reviewed actual Core branch `integration/core-paper-manual-richtext-rc-20261016@2a3d5bac57decb4f9dc32fb97728b2403f82c7b6`, which includes the reviewed legacy Diary reopen fix and manually authored PaperDocumentV2 rich text changes. Rebuilt exact clean Core source in separate detached, fresh `npm ci && npm run build` worktree: **exit0**; `al-siddique-frontend/dist/index.html` SHA256 **`d0de50ad2011ee3dc5532352788e1e1795a94cc6f49b90a84ed7c08994748d05`**, byte-for-byte matching independent owner review. Root-private Core build log SHA256 `505216f0545e2165cdc75f9ec3feddd170e5c1b9247eff57eefcce685d49073c`. Added only this **exact** SHA+digest pair to Connect technical source allowlist (previous exact pins preserved; unknown SHA/digest still rejected), with its own tamper-negative regression.
+
+Source handoff CI workflow has immutable four-file patch manifest/source scope checks; Python source-contract **8/8 PASS**, source pin and Core negative checks passed. Full Connect offline Python suite **277/277 PASS, exit0**; complete Next CJS Node suite **73/73 PASS, exit0**. GitHub-hosted Actions run is not verified and must not be reported as green.
+
+## Phase 5/6 — current protected signed release result and non-destructive outcome
+
+Fresh genuine read-only four-phase gate against exact independently rebuilt Core2a3 + previously reviewed private Next technical stage: Phase 1 production integrity **PASS**, preserving **1,763 genuine examination result rows including 213 numeric zeros**; Phase 2 technical Core/Connect joint **13/15 PASS** (two older public Lesson Planning/Early Years companion checks remain); Phase 3 independently signed Core security **6/13, HOLD**, actual subprocess exit2; Phase 4 production cutover **HOLD**. Final `HOLD_NO_PRODUCTION_CUTOVER`, `production_changed:false`. Root-private release receipt SHA256 `8946f4f0cc571fe168224f79469e20e0da9f6129f2f129c60f367c7033aee8e5`.
+
+Seven authoritative missing independent Core conditions: previously reviewed owner-approved full ACL backup, independently signed current off-host recovery, signed production restricted worker transport, exact reviewed live adapter, separately authenticated persistent worker, independently verified live inherited grants, and genuine signed live School2 + unassigned-subject denial. Prior disposable PostgreSQL16 two-school acceptance is useful but **not** independently witnessed current live school/worker certification. Physical Diary Save→Reopen→Print hardcopy owner acceptance remains pending. SaaS Core alone may authorize rollback-ready production cutover after all genuine signed gates and device acceptance. Never fake certificates, impersonate staff, weaken RLS or overwrite marks/papers.
+
+**Absolutely no live school records, lead files, authentication data, Nginx/PM2 processes, DB schema, production API or application release were modified by this Connect work.** No real SMTP sent, no private credentials accessed and no physical printer operated. This is a source-only technical development and test checkpoint, not final product deployment. Original public Connect Build ID remains `ONDwxEIZlx5onDIKY7wYf` until a separate SaaS Core certified release.

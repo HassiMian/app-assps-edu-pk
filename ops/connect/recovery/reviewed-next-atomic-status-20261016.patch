@@ -1,0 +1,279 @@
+diff --git a/src/app/api/saas-admin/apex-leads/[leadId]/status/route.ts b/src/app/api/saas-admin/apex-leads/[leadId]/status/route.ts
+index 21e882a..afa9015 100644
+--- a/src/app/api/saas-admin/apex-leads/[leadId]/status/route.ts
++++ b/src/app/api/saas-admin/apex-leads/[leadId]/status/route.ts
+@@ -29,12 +29,15 @@ export async function POST(
+     if (!ALLOWED.includes(status)) {
+       return NextResponse.json(
+         { success: false, message: "Invalid lead status" },
+-        { status: 400 }
++        { status: 400, headers: { "Cache-Control": "no-store" } }
+       );
+     }
+ 
+     const lead = await updateApexLeadStatus(leadId, status);
+-    return NextResponse.json({ success: true, data: lead });
++    return NextResponse.json(
++      { success: true, data: lead },
++      { headers: { "Cache-Control": "no-store" } },
++    );
+   } catch (error: unknown) {
+     const message = error instanceof Error ? error.message : "Failed to update lead";
+     if (message === "Unauthorized" || message === "Forbidden") {
+@@ -44,7 +47,10 @@ export async function POST(
+       );
+     }
+     if (message.includes("ENOENT")) {
+-      return NextResponse.json({ success: false, message: "Lead not found" }, { status: 404 });
++      return NextResponse.json(
++        { success: false, message: "Lead not found" },
++        { status: 404, headers: { "Cache-Control": "no-store" } },
++      );
+     }
+     return NextResponse.json(
+       { success: false, message: "Administrative request temporarily unavailable" },
+diff --git a/src/lib/server/apex-leads-storage.ts b/src/lib/server/apex-leads-storage.ts
+index 034bd3f..209a925 100644
+--- a/src/lib/server/apex-leads-storage.ts
++++ b/src/lib/server/apex-leads-storage.ts
+@@ -136,6 +136,28 @@ export async function updateApexLeadStatus(leadId: string, status: ApexLeadStatu
+     status,
+     updated_at: new Date().toISOString(),
+   };
+-  await fs.writeFile(filePath, JSON.stringify(next, null, 2), "utf8");
++  // Persist to a private sibling first. A failed/partial write must never
++  // truncate an existing lead. Rename is atomic on this same filesystem.
++  const temporaryPath = `${filePath}.${uuid()}.tmp`;
++  try {
++    await fs.writeFile(temporaryPath, JSON.stringify(next, null, 2), {
++      encoding: "utf8",
++      flag: "wx",
++      mode: 0o600,
++    });
++    await fs.rename(temporaryPath, filePath);
++  } catch (error) {
++    // Ignore cleanup errors so we propagate the actual storage failure.
++    // If exclusive creation failed because a temp already existed, it belongs
++    // to another request; never unlink another writer's temporary record.
++    if ((error as NodeJS.ErrnoException).code !== "EEXIST") {
++      try {
++        await fs.unlink(temporaryPath);
++      } catch {
++        // A failed cleanup leaves a non-JSON temporary artifact, never a lead.
++      }
++    }
++    throw error;
++  }
+   return next;
+ }
+diff --git a/tests/apex-lead-atomic-status.test.cjs b/tests/apex-lead-atomic-status.test.cjs
+new file mode 100644
+index 0000000..b81e053
+--- /dev/null
++++ b/tests/apex-lead-atomic-status.test.cjs
+@@ -0,0 +1,184 @@
++'use strict';
++const assert=require('node:assert/strict');
++const fs=require('node:fs');
++const fsp=require('node:fs/promises');
++const os=require('node:os');
++const path=require('node:path');
++const vm=require('node:vm');
++const ts=require('typescript');
++const {test}=require('node:test');
++const root=path.resolve(__dirname,'../src');
++const original={
++  leadId:'LEAD-AAAABBBB',type:'contact',status:'new',
++  name:'Unchanged synthetic',email:'person@example.invalid',phone:'000',
++  notes:'Historic diary lead metadata remains unchanged',created_at:'2026-10-16T07:00:00Z'
++};
++function transpile(file, imports, cwd){
++  const source=fs.readFileSync(path.join(root,file),'utf8');
++  const output=ts.transpileModule(source,{compilerOptions:{
++    target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS,esModuleInterop:true
++  }}).outputText;
++  const exports={};
++  vm.runInNewContext(output,{exports,process:{cwd:()=>cwd},Error,Date,URL,console,
++    require:(id)=>{
++      assert.ok(Object.hasOwn(imports,id),'unexpected import '+id);
++      return imports[id];
++    }},{filename:file,timeout:2000});
++  return exports;
++}
++async function fixture({fault=null}={}){
++  const temp=await fsp.mkdtemp(path.join(os.tmpdir(),'connect-safe-lead-'));
++  const dir=path.join(temp,'data','apex-leads');
++  const file=path.join(dir,original.leadId+'.json');
++  await fsp.mkdir(dir,{recursive:true});
++  const before=JSON.stringify(original,null,2);
++  await fsp.writeFile(file,before,'utf8');
++  let writes=0,renames=0,unlinks=0;
++  const mocked={
++    mkdir:fsp.mkdir.bind(fsp),
++    readFile:fsp.readFile.bind(fsp),
++    readdir:fsp.readdir.bind(fsp),
++    writeFile:async(target,body,opts)=>{
++      writes++;
++      if(fault==='eexist' && typeof target==='string' && target.endsWith('.tmp')){
++        await fsp.writeFile(target,'OTHER_WRITER_TEMPORARY_RECORD','utf8');
++        return fsp.writeFile(target,body,opts);
++      }
++      if(fault==='write' && typeof target==='string' && target.endsWith('.tmp')){
++        await fsp.writeFile(target,'INCOMPLETE-CANDIDATE',opts);
++        throw Object.assign(Error('EIO private simulated filesystem'),{code:'EIO'});
++      }
++      return fsp.writeFile(target,body,opts);
++    },
++    rename:async(from,to)=>{
++      renames++;
++      if(fault==='rename')throw Object.assign(Error('EIO private rename failure'),{code:'EIO'});
++      return fsp.rename(from,to);
++    },
++    unlink:async(target)=>{unlinks++;return fsp.unlink(target);}
++  };
++  const storage=transpile('lib/server/apex-leads-storage.ts',{
++    path,'fs/promises':mocked,'uuid':{v4:()=>'12345678-1234-1234-1234-123456781234'}
++  },temp);
++  async function close(){await fsp.rm(temp,{recursive:true,force:true});}
++  return {storage,dir,file,before,close,
++    get writes(){return writes},get renames(){return renames},get unlinks(){return unlinks}};
++}
++test('genuine scratch filesystem status revision preserves fields, existing ID and private permissions',async()=>{
++  const f=await fixture();
++  try{
++    const changed=await f.storage.updateApexLeadStatus(original.leadId,'contacted');
++    assert.equal(changed.status,'contacted');
++    assert.equal(changed.notes,original.notes);
++    assert.equal(changed.leadId,original.leadId);
++    assert.ok(changed.updated_at);
++    const raw=await fsp.readFile(f.file,'utf8');
++    assert.equal(JSON.parse(raw).status,'contacted');
++    assert.equal(JSON.parse(raw).notes,original.notes);
++    assert.equal((await fsp.stat(f.file)).mode & 0o777,0o600);
++    assert.deepEqual(await fsp.readdir(f.dir),[original.leadId+'.json']);
++    assert.equal(f.writes,1);assert.equal(f.renames,1);
++  }finally{await f.close()}
++});
++test('partial candidate write failure cannot truncate historic lead; temporary artifact removed',async()=>{
++  const f=await fixture({fault:'write'});
++  try{
++    await assert.rejects(f.storage.updateApexLeadStatus(original.leadId,'archived'),/EIO private simulated filesystem/);
++    assert.equal(await fsp.readFile(f.file,'utf8'),f.before);
++    assert.deepEqual(await fsp.readdir(f.dir),[original.leadId+'.json']);
++    assert.equal(f.renames,0);
++    assert.equal(f.unlinks,1);
++  }finally{await f.close()}
++});
++test('atomic rename failure preserves historic bytes and removes candidate temp',async()=>{
++  const f=await fixture({fault:'rename'});
++  try{
++    await assert.rejects(f.storage.updateApexLeadStatus(original.leadId,'archived'),/EIO private rename failure/);
++    assert.equal(await fsp.readFile(f.file,'utf8'),f.before);
++    assert.deepEqual(await fsp.readdir(f.dir),[original.leadId+'.json']);
++    assert.equal(f.renames,1);assert.equal(f.unlinks,1);
++  }finally{await f.close()}
++});
++test('temporary-name EEXIST never deletes another writer candidate or old lead',async()=>{
++  const f=await fixture({fault:'eexist'});
++  try{
++    await assert.rejects(f.storage.updateApexLeadStatus(original.leadId,'archived'),e=>e.code==='EEXIST');
++    assert.equal(await fsp.readFile(f.file,'utf8'),f.before);
++    const names=await fsp.readdir(f.dir);
++    assert.equal(names.length,2);
++    const other=names.find(name=>name.endsWith('.tmp'));
++    assert.ok(other);
++    assert.equal(await fsp.readFile(path.join(f.dir,other),'utf8'),'OTHER_WRITER_TEMPORARY_RECORD');
++    assert.equal(f.unlinks,0);
++    assert.equal(f.renames,0);
++  }finally{await f.close()}
++});
++test('invalid ID rejects before any disk write or read',async()=>{
++  const f=await fixture();
++  try{
++    await assert.rejects(f.storage.updateApexLeadStatus('../other','archived'),/INVALID_APEX_LEAD_ID/);
++    assert.equal(f.writes,0);assert.equal(f.renames,0);
++    assert.equal(await fsp.readFile(f.file,'utf8'),f.before);
++  }finally{await f.close()}
++});
++test('missing old lead fails before candidate creation and does not create phantom status record',async()=>{
++  const f=await fixture();
++  try{
++    await fsp.unlink(f.file);
++    await assert.rejects(f.storage.updateApexLeadStatus(original.leadId,'contacted'),/ENOENT/);
++    assert.deepEqual(await fsp.readdir(f.dir),[]);
++    assert.equal(f.writes,0);
++  }finally{await f.close()}
++});
++class Response {
++  constructor(body, options={}){this.body=body;this.status=options.status||200;this.headers=options.headers||{};}
++  static json(body, options){return new Response(body, options);}
++}
++function handler({authError=null,storageError=null}={}){
++  let auth=0,updates=0;
++  const store={
++    isApexLeadId:v=>typeof v==='string'&&/^LEAD-[0-9A-F]{8}$/.test(v),
++    updateApexLeadStatus:async(id,status)=>{
++      updates++;
++      if(storageError)throw Object.assign(Error(storageError),{code:storageError});
++      return {...original,leadId:id,status};
++    }
++  };
++  const route=transpile('app/api/saas-admin/apex-leads/[leadId]/status/route.ts',{
++    'next/server':{NextResponse:Response},
++    '@/lib/server/auth-user':{requireSaasAdminUser:async()=>{
++      auth++;if(authError)throw Error(authError);
++    }},
++    '@/lib/server/apex-leads-storage':store
++  },'/synthetic/app');
++  return {post:route.POST,get auth(){return auth},get updates(){return updates}};
++}
++const ctx=id=>({params:Promise.resolve({leadId:id})});
++test('admin successful status revision has no-store and preserves authorized ID',async()=>{
++  const h=handler();
++  const r=await h.post({json:async()=>({status:'archived'})},ctx(original.leadId));
++  assert.equal(r.status,200);assert.equal(r.headers['Cache-Control'],'no-store');
++  assert.equal(r.body.data.status,'archived');assert.equal(h.auth,1);assert.equal(h.updates,1);
++});
++test('admin invalid status and unknown lead both have no-store without secrets',async()=>{
++  const bad=handler();
++  const r=await bad.post({json:async()=>({status:'superadmin'})},ctx(original.leadId));
++  assert.equal(r.status,400);assert.equal(r.headers['Cache-Control'],'no-store');assert.equal(bad.updates,0);
++  const absent=handler({storageError:'ENOENT'});
++  const miss=await absent.post({json:async()=>({status:'archived'})},ctx(original.leadId));
++  assert.equal(miss.status,404);assert.equal(miss.headers['Cache-Control'],'no-store');
++});
++test('failure in persistent storage is protected HTTP500 without sensitive path',async()=>{
++  const h=handler({storageError:'EACCES'});
++  const r=await h.post({json:async()=>({status:'archived'})},ctx(original.leadId));
++  assert.equal(r.status,500);assert.equal(r.headers['Cache-Control'],'no-store');
++  assert.equal(r.body.message,'Administrative request temporarily unavailable');
++});
++test('admin unauthorized or forbidden actors never modify storage',async()=>{
++  for(const [error,status] of [['Unauthorized',401],['Forbidden',403]]){
++    const h=handler({authError:error});
++    const r=await h.post({json:async()=>{throw Error('body read before authentication')}},ctx(original.leadId));
++    assert.equal(r.status,status);
++    assert.equal(h.auth,1);assert.equal(h.updates,0);
++  }
++});
+diff --git a/tests/apex-lead-id-boundary.test.cjs b/tests/apex-lead-id-boundary.test.cjs
+index 1956856..7923f92 100644
+--- a/tests/apex-lead-id-boundary.test.cjs
++++ b/tests/apex-lead-id-boundary.test.cjs
+@@ -41,6 +41,16 @@ const storage=transpile('lib/server/apex-leads-storage.ts',{
+       if(!files.has(p))throw Error('ENOENT synthetic lead');
+       return files.get(p);
+     },
++    rename:async(from,to)=>{
++      assert.equal(path.dirname(from),leadRoot);
++      assert.equal(path.dirname(to),leadRoot);
++      assert.match(path.basename(from),/^LEAD-[0-9A-F]{8}\.json\.[a-f0-9-]+\.tmp$/);
++      assert.match(path.basename(to),/^LEAD-[0-9A-F]{8}\.json$/);
++      if(!files.has(from))throw Error('ENOENT temporary lead');
++      files.set(to,files.get(from));
++      files.delete(from);
++    },
++    unlink:async(p)=>{files.delete(p)},
+     readdir:async()=>[],
+   },
+   uuid:{v4:()=> 'abcdef12-aaaa-bbbb-cccc-abcdef123456'},

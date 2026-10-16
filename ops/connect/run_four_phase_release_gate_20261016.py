@@ -40,6 +40,8 @@ APPROVED_CORE_DIST_SHA={
     'a9611dbe27411f3d15b4bca7e9a0983360789989':'1097d23897e1bc507a111c4c202aba47a54960e27cf62f34234f95e32e0c26e3',
     # Current SaaS Core-owned Diary print fix independently rebuilt; new reviewed compiled bytes.
     '6a9d48af16ae7e57881ce5251bcc8b75c138aaac':'e4ae29640eeb756518b825f0fac4e2e950fbf12a2c6560c1d55c8a51548b7611',
+    # Independently rebuilt currently reviewed Core+Paper manual rich text candidate.
+    '2a3d5bac57decb4f9dc32fb97728b2403f82c7b6':'d0de50ad2011ee3dc5532352788e1e1795a94cc6f49b90a84ed7c08994748d05',
 }
 OFFICIAL=Path('/root/workspace/assps-core-connect-gate-exit-hardening-20261015/ops/release/signed-bluegreen/verify-connect-login-only-core-20261014.py')
 JOINT_CORE=OFFICIAL.with_name('verify-joint-current-candidates-20261015.py')
