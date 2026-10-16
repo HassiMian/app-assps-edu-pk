@@ -14,6 +14,8 @@ on:
       - "ops/release/check-lesson-planner-ui.py"
       - "ops/release/guarded-lesson-planner-rollout.py"
       - "ops/release/phase1-backend-isolated-stage-20261016.py"
+      - "ops/release/worker-probe/**"
+      - "ops/tests/test_phase1_worker_readonly_service_20261016.py"
       - "ops/tests/test_phase1_backend_isolated_stage_20261016.py"
       - "ops/release/check-preserved-companion-features.py"
       - "ops/release/verify-diary-controls-in-active-bundle-20261015.cjs"
@@ -61,6 +63,8 @@ on:
       - "ops/release/check-lesson-planner-ui.py"
       - "ops/release/guarded-lesson-planner-rollout.py"
       - "ops/release/phase1-backend-isolated-stage-20261016.py"
+      - "ops/release/worker-probe/**"
+      - "ops/tests/test_phase1_worker_readonly_service_20261016.py"
       - "ops/tests/test_phase1_backend_isolated_stage_20261016.py"
       - "ops/release/check-preserved-companion-features.py"
       - "ops/release/verify-diary-controls-in-active-bundle-20261015.cjs"
@@ -170,3 +174,5 @@ jobs:
         run: python3 -m unittest discover -s ops/release/tests -p test_lesson_rollout_guard.py -v
       - name: Prevent unsafe Phase 1 worker staging and stale source overwrites
         run: python3 -m unittest discover -s ops/tests -p test_phase1_backend_isolated_stage_20261016.py -v
+      - name: Preserve actual restricted peer worker read-only service and safe identity config
+        run: python3 -m unittest discover -s ops/tests -p test_phase1_worker_readonly_service_20261016.py -v

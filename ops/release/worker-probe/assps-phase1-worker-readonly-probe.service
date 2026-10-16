@@ -1,0 +1,37 @@
+[Unit]
+Description=ASSPS Phase 1 restricted AI worker independent one-shot read-only identity audit
+After=postgresql.service
+ConditionPathExists=/usr/local/lib/assps-phase1-worker-probe/aiQueueWorkerDatabase.js
+
+[Service]
+Type=oneshot
+User=assps_ai_worker_login
+Group=assps_ai_worker_login
+WorkingDirectory=/usr/local/lib/assps-phase1-worker-probe
+Environment=NODE_PATH=/var/www/apex-backend/node_modules
+Environment=NODE_ENV=production
+Environment=DB_SIGNED_TENANT_RLS_ENABLED=true
+Environment=DB_AI_WORKER_HOST=/var/run/postgresql
+Environment=DB_AI_WORKER_PORT=5432
+Environment=DB_AI_WORKER_NAME=apexos
+Environment=DB_AI_WORKER_USER=assps_ai_worker_login
+Environment=DB_AI_WORKER_PASSWORD=UNUSED_PEER_SOCKET_CONFIG_SENTINEL_NOT_A_CREDENTIAL
+Environment=DB_AI_WORKER_ROLE=assps_core_ai_worker
+Environment=DB_USER=apexos_user
+ExecStart=/usr/bin/node /usr/local/lib/assps-phase1-worker-probe/phase1-worker-readonly-probe.cjs
+TimeoutStartSec=25
+NoNewPrivileges=yes
+PrivateNetwork=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+RestrictAddressFamilies=AF_UNIX
+RestrictSUIDSGID=yes
+LockPersonality=yes
+CapabilityBoundingSet=
+AmbientCapabilities=
+UMask=0077
