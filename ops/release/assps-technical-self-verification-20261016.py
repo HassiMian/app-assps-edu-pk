@@ -119,7 +119,8 @@ student_percentage_gaps AS (
 ),
 grade910_raw AS (
   SELECT class_level,subject,medium,question_type,question_text,options,
-         correct_option,source_file_id,source_page_no,answer,is_approved
+         correct_option,source_file_id,source_page_no,answer,is_approved,
+         source_type,metadata
   FROM public.question_bank WHERE school_id=1 AND class_level IN ('9th','10th')
 ),
 grade910_mcq AS (
@@ -156,6 +157,15 @@ grade910_quality AS (
   SELECT COUNT(*) FILTER(WHERE class_level='9th') class9_question_rows,
          COUNT(*) FILTER(WHERE class_level='10th') class10_question_rows,
          COUNT(*) FILTER(WHERE is_approved=true) flagged_approved_rows,
+         COUNT(*) FILTER(WHERE lower(btrim(coalesce(source_type,'')))='json_seed'
+           OR lower(btrim(coalesce(metadata->>'review_state','')))= 'provisional_internal'
+           OR coalesce(source_file_id,'') ILIKE '%provisional%') provisional_seed_reference_rows,
+         COUNT(DISTINCT source_file_id) FILTER(WHERE lower(btrim(coalesce(source_type,'')))='json_seed'
+           OR coalesce(source_file_id,'') ILIKE '%provisional%') provisional_seed_file_count,
+         COUNT(*) FILTER(WHERE is_approved=true AND (
+           lower(btrim(coalesce(source_type,'')))='json_seed'
+           OR lower(btrim(coalesce(metadata->>'review_state','')))= 'provisional_internal'
+           OR coalesce(source_file_id,'') ILIKE '%provisional%')) approved_rows_still_linked_to_provisional_seed,
          COUNT(*) FILTER(WHERE source_file_id IS NULL OR btrim(source_file_id)='') missing_source_ids,
          COUNT(*) FILTER(WHERE source_page_no IS NULL OR source_page_no<=0) unresolved_source_pages,
          COUNT(*) FILTER(WHERE is_approved=true AND (
@@ -260,6 +270,8 @@ def evaluate(health:dict,previous:dict|None) -> tuple[str,list[str]]:
     # This protects minimal academic provenance if a later importer changes flags.
     if metrics.get("grade910QuestionQuality",{}).get("approved_rows_missing_minimum_evidence",0)>0:
         issues.append("GRADE910_APPROVED_QUESTION_WITHOUT_MINIMUM_SOURCE_OR_ANSWER_EVIDENCE")
+    if metrics.get("grade910QuestionQuality",{}).get("approved_rows_still_linked_to_provisional_seed",0)>0:
+        issues.append("GRADE910_APPROVED_WITH_ONLY_PROVISIONAL_JSON_SEED_PROVENANCE")
     if metrics.get("grade910McqQuality",{}).get("structurally_invalid_mcqs",0)>0:
         issues.append("GRADE910_MCQ_OPTIONS_OR_KEY_STRUCTURE_REGRESSION")
     if metrics.get("grade910DuplicateQuality",{}).get("exact_duplicate_extras",0)>0:

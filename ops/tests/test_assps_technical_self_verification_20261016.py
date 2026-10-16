@@ -69,6 +69,17 @@ class TestAcceptanceWithoutForgedSignatures(unittest.TestCase):
  def test_source_pages_missing_is_reported_without_fake_textbook_locators(self):
   a=good();a["metrics"]["grade910QuestionQuality"]={"unresolved_source_pages":2411,"approved_rows_missing_minimum_evidence":0}
   self.assertEqual(module.evaluate(a,None)[0],"OPERATIONAL")
+ def test_seed_json_cannot_be_mislabeled_academically_verified(self):
+  a=good();a["metrics"]["grade910QuestionQuality"]={
+   "provisional_seed_reference_rows":2411,"approved_rows_still_linked_to_provisional_seed":1,
+   "approved_rows_missing_minimum_evidence":0}
+  self.assertIn("GRADE910_APPROVED_WITH_ONLY_PROVISIONAL_JSON_SEED_PROVENANCE",module.evaluate(a,None)[1])
+ def test_pending_seed_research_is_inventory_not_production_failure(self):
+  a=good();a["metrics"]["grade910QuestionQuality"]={
+   "provisional_seed_reference_rows":2411,"provisional_seed_file_count":29,
+   "approved_rows_still_linked_to_provisional_seed":0,
+   "approved_rows_missing_minimum_evidence":0}
+  self.assertEqual(module.evaluate(a,None)[0],"OPERATIONAL")
  def test_receipt_stored_atomically_and_no_personal_data(self):
   with tempfile.TemporaryDirectory() as d:
    p=Path(d)/"receipt.json";module.write_receipt(p,good())
