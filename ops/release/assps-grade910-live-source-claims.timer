@@ -1,0 +1,12 @@
+[Unit]
+Description=ASSPS Grade IX/X real source byte/metadata crosswalk every Sunday off-school-hours
+
+[Timer]
+OnCalendar=Sun *-*-* 03:35:00 Asia/Karachi
+RandomizedDelaySec=3m
+AccuracySec=1m
+Persistent=true
+Unit=assps-grade910-live-source-claims.service
+
+[Install]
+WantedBy=timers.target

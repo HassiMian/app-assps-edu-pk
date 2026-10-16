@@ -1,0 +1,25 @@
+[Unit]
+Description=ASSPS independent read-only Grade IX/X source PDF byte and metadata claim audit
+After=postgresql.service network-online.target
+Wants=network-online.target
+ConditionPathExists=/usr/local/libexec/assps-grade910-sourceclaims/audit-live-grade910-source-claims-20261016.py
+
+[Service]
+Type=oneshot
+UMask=0077
+StateDirectory=assps-grade910-sourceclaims
+StateDirectoryMode=0700
+ExecStart=/usr/bin/python3 /usr/local/libexec/assps-grade910-sourceclaims/audit-live-grade910-source-claims-20261016.py --manifest /usr/local/libexec/assps-grade910-sourceclaims/officialSourceManifest.json --out /var/lib/assps-grade910-sourceclaims/latest.json
+TimeoutStartSec=160
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/var/lib/assps-grade910-sourceclaims
+PrivateTmp=yes
+NoNewPrivileges=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+MemoryMax=1G
+CPUQuota=70%

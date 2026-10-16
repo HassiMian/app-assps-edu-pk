@@ -1,0 +1,25 @@
+name: ASSPS Grade IX-X source-claim safety contract
+on:
+  push:
+    paths:
+      - "ops/qbank/audit-live-grade910-source-claims-20261016.py"
+      - "ops/tests/test_grade910_live_source_claim_recovery_20261016.py"
+      - "ops/release/assps-grade910-live-source-claims.*"
+      - "ops/release/install-assps-grade910-sourceclaims-20261016.sh"
+      - ".github/workflows/grade910-live-source-claim-contract-20261016.yml"
+  pull_request:
+    paths:
+      - "ops/qbank/audit-live-grade910-source-claims-20261016.py"
+      - "ops/tests/test_grade910_live_source_claim_recovery_20261016.py"
+      - "ops/release/assps-grade910-live-source-claims.*"
+jobs:
+  source-claim-safety:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Keep database untouched while testing author metadata claims
+        run: python3 -m unittest discover -s ops/tests -p test_grade910_live_source_claim_recovery_20261016.py -v
+      - name: Validate offline claim auditor syntax
+        run: python3 -m py_compile ops/qbank/audit-live-grade910-source-claims-20261016.py
