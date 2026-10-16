@@ -1,0 +1,58 @@
+name: ASSPS Paper Studio Core503 Unified Student Privacy and Diary15
+on:
+  push:
+    branches:
+      - 'integration/core503-paper-answer-privacy-diary15-20261016'
+  pull_request:
+    paths:
+      - 'al-siddique-backend/src/services/assessmentPrintJobs.js'
+      - 'al-siddique-backend/src/tests/assessment-print-jobs-domain.test.js'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/dailyDiary*.test.js'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/personalizedPrintDurableBrowserAcceptance.test.js'
+      - 'ops/paper-studio/run_diary_release_browser_20261016.cjs'
+      - '.github/workflows/paper-core503-unified-privacy-diary15-20261016.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  all-source-privacy-diary-and-build-gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout reviewed integrated source
+        uses: actions/checkout@v4
+      - name: Configure supported Node and locked package cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: al-siddique-frontend/package-lock.json
+      - name: Install exact frontend dependencies, no school data
+        working-directory: al-siddique-frontend
+        run: npm ci --no-audit --no-fund
+      - name: Install isolated headless Chrome and system libraries
+        working-directory: al-siddique-frontend
+        run: npx playwright install --with-deps chromium
+      - name: Require real student-safe and staff-only print separation
+        run: >-
+          node --test
+          al-siddique-backend/src/tests/assessment-print-jobs-domain.test.js
+          al-siddique-backend/src/tests/assessment-print-projection-boundary-static.test.js
+      - name: Reject student personalized print answer key aliases
+        working-directory: al-siddique-frontend
+        run: >-
+          node --test
+          src/Modules/Paper-Generator/PaperEditor/tests/personalizedPrintDurableBrowserAcceptance.test.js
+      - name: Require all 15 fail-closed Diary print Save and Reopen browser checks
+        run: node ops/paper-studio/run_diary_release_browser_20261016.cjs
+      - name: Preserve scoped Core marks and signed RLS-catalog guards
+        run: >-
+          node --test
+          al-siddique-backend/src/config/signedRlsCatalogGuard.test.cjs
+          al-siddique-frontend/src/services/marksSave401Session.test.mjs
+          ops/tests/marks-sheet-data-truth.test.js
+      - name: Compile integrated candidate without deploying it
+        working-directory: al-siddique-frontend
+        run: npm run build
+      - name: Require all Paper Daily Diary Lesson Early Years Results assets
+        run: python3 ops/paper-studio/verify_full_feature_readiness_20261016.py --repo . --dist al-siddique-frontend/dist
