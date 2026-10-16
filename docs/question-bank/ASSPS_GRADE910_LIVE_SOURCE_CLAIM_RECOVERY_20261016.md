@@ -26,6 +26,16 @@ was created on 8 October 2026; this run rehashed its preserved **cached bytes**,
 not fresh downloads of every official 16 October catalog URL. Content and paper
 publication remain separated from this PDF-identity exercise.
 
+## Stable identity reconciliation with all 2,581 original research questions
+
+A separate **read-only** comparison of each current live `metadata.seed_id`
+against the protected original `ASSPS_GRADE910_UNIFIED_2581_FACULTY_CONTENT_REVIEW_PRIORITIES_20261011.json` gives:
+
+- **2,411/2,411** live School 1 question IDs exactly map to a SHA-traceable protected research original ID.
+- **0** orphan imported question IDs and **0** duplicate live seed IDs.
+- **170** protected original research questions are **not live imported**, and remain preserved in the source corpus. This is not proof that the 170 are approved or that production seeding should be forced.
+- The weekly source audit now FAILS CLOSED if a future live import introduces an ID missing from the immutable research-origin catalog. It will never seed those 170 or change `is_approved`.
+
 ## Prioritize source-page checks without inventing pages
 
 | Grade | Subject | Without exact page | Recoverable unverified page claim |
@@ -47,7 +57,7 @@ This is a **triage ordering**, not a recommendation to avoid other subjects or a
 
 - Source parser: `ops/qbank/audit-live-grade910-source-claims-20261016.py`, schema `assps-live-source-claim-audit-v1`. Reads PostgreSQL under an explicit `BEGIN TRANSACTION READ ONLY` using the existing peer-authenticated Postgres identity.
 - Every original catalog claim is checked against the **actual official manifest hash** and locally available PDF hash; TOC, chapter-only, shared-authority, uncertain page boundary, hash mismatch, grade mismatch and out-of-range claims fail appropriate provenance or remain clearly provisional.
-- 13 hermetic tests PASS (including malformed/null hash, page overflow, old TOC, fake approved, PDF byte hash tampering, path traversal and 0600 private evidence permissions).
+- 15 hermetic tests PASS (including malformed/null hash, page overflow, old TOC, fake approved, PDF byte hash tampering, path traversal and 0600 private evidence permissions).
 - Root-only complete ID-level private evidence: `/root/secure-archive/assps-grade910-live-source-evidence-20261016/claims.json`, SHA-256 `159f749e4ef81eb1e5e3283f5b93feec7c55dc8a325e55c05bfe538579034d61`.
 - Source-controlled systemd timer is designed for Sunday 03:35 PKT, **after** the separately installed full academic source QA at Sunday 02:30 PKT. Public app/student marks/Nginx and any real printer remain untouched.
 - Official publication remains blocked when genuine source page content, edition adoption and revision-specific qualified review are not authenticated. This is not the same as re-requesting general institution-level Principal consent, which has already been acknowledged.

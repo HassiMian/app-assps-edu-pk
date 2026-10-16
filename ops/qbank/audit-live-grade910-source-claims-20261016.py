@@ -3,6 +3,7 @@
 import argparse, collections, datetime, hashlib, json, os, pathlib, re, subprocess, tempfile
 R=pathlib.Path(__file__).resolve().parents[2]
 MAN=R/'al-siddique-frontend/src/Modules/Paper-Generator/seed-data/grade9-10-staging/officialSourceManifest.json'
+ORIGINAL=R/'docs/question-bank/ASSPS_GRADE910_UNIFIED_2581_FACULTY_CONTENT_REVIEW_PRIORITIES_20261011.json'
 CACHE=pathlib.Path('/root/workspace/qbank-source-cache')
 DEFAULT=pathlib.Path('/root/secure-archive/assps-grade910-live-source-evidence-20261016/claims.json')
 RX=re.compile(r'^\s*(.*?)\s*\|\s*([a-fA-F0-9]{64})\s*\|\s*(.*?)\s*$')
@@ -59,14 +60,14 @@ def evaluate(row,catalogs,root,cache):
         else 'PAGE_RANGE_OUTSIDE_PDF' if kind=='author_page_claim' else 'NO_QUESTION_PAGE')
  return dict(id=row['id'],grade=row['grade'],subject=row['subject'],medium=row['medium'],
              catalog=entry['recordId'] if entry else None,manifestHashMatch=ok,
-             byteHashStatus=bytes_status,claimKind=kind,claimedPage=page,
+             byteHashStatus=bytes_status,seedId=row.get('seedId'),claimKind=kind,claimedPage=page,
              plausiblePdfRangeOnly=rangeok,state=state,dbApproved=row['approved'],
              questionPageVerified=False,schoolAdoptionVerified=False,
              facultyReviewed=False,published=False)
 def live():
  sql="""BEGIN TRANSACTION READ ONLY;
  SELECT json_build_object('id',id,'grade',class_level,'subject',subject,
- 'medium',medium,'source',coalesce(metadata->>'source',''),
+ 'medium',medium,'seedId',metadata->>'seed_id','source',coalesce(metadata->>'source',''),
  'approved',is_approved)::text
  FROM public.question_bank
  WHERE school_id=1 AND class_level IN ('9th','10th') ORDER BY id;
@@ -77,7 +78,13 @@ def live():
  rows=[json.loads(v) for v in p.stdout.splitlines() if v.startswith('{')]
  if len(rows)<2000:raise ValueError('SCHOOL1_GRADE_IX_X_INVENTORY_UNEXPECTED')
  return rows
-def analyze(rows,catalogs,root):
+def read_frozen_originals(path):
+ ledger=json.loads(path.read_text());rows=ledger['rows']
+ ids=[x['originalQuestionId'] for x in rows]
+ if len(ids)!=2581 or len(set(ids))!=2581:
+  raise ValueError('FROZEN_ORIGINAL_INVENTORY_DRIFT')
+ return set(ids)
+def analyze(rows,catalogs,root,originals=None):
  cache={};records=[evaluate(r,catalogs,root,cache) for r in rows]
  counter=lambda key:dict(collections.Counter(x[key] for x in records))
  summary={
@@ -90,12 +97,16 @@ def analyze(rows,catalogs,root):
   'existingMarkedApproved':sum(x['dbApproved'] is True for x in records),
   'catalogPdfHashesCompared':len(cache),
   'cachedPdfHashesMatchingManifest':sum(x=='match' for x in cache.values()),
-  'cachedPdfHashesConflicting':sum(x=='mismatch' for x in cache.values())
+  'cachedPdfHashesConflicting':sum(x=='mismatch' for x in cache.values()),
+  'liveIdsMatchingProtectedOriginals':sum(x.get('seedId') in originals for x in records) if originals else None,
+  'orphanLiveSeedIds':sum(x.get('seedId') not in originals for x in records) if originals else None,
+  'preservedOriginalsNotImported':len(originals-{x.get('seedId') for x in records}) if originals else None
  }
  return {'schemaVersion':'assps-live-source-claim-audit-v1',
          'observedUTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),
          'scope':'SCHOOL1_IX_X_NO_DB_WRITES',
          'questionPageProof':'NOT_VERIFIED',
+         'preservedOriginalsNotImportedIds':sorted(originals-{x.get('seedId') for x in records}) if originals else [],
          'schoolEditionAdoption':'NOT_ESTABLISHED_BY_CATALOG',
          'facultySignaturesCreated':0,'approvedCountFromAudit':0,
          'summary':summary,'recordIdsAndClaimsOnly':records}
@@ -116,13 +127,15 @@ def audit_decision(summary):
    ('UNPARSED','MANIFEST_CONFLICT','GRADE_MISMATCH','PAGE_RANGE_OUTSIDE_PDF'))
  return ('SOURCE_INTEGRITY_HOLD' if bad or summary['cachedPdfHashesConflicting']
          or summary['manifestHashMatches']!=summary['rows']
+         or (summary.get('orphanLiveSeedIds') or 0)>0
          else 'CLAIMS_CLASSIFIED_NO_PUBLICATION')
 if __name__=='__main__':
  p=argparse.ArgumentParser()
  p.add_argument('--out',type=pathlib.Path,default=DEFAULT)
  p.add_argument('--manifest',type=pathlib.Path,default=MAN)
+ p.add_argument('--original-ledger',type=pathlib.Path,default=ORIGINAL)
  a=p.parse_args()
- result=analyze(live(),read_catalogs(a.manifest),CACHE)
+ result=analyze(live(),read_catalogs(a.manifest),CACHE,read_frozen_originals(a.original_ledger))
  save(a.out,result)
  decision=audit_decision(result['summary'])
  print(json.dumps({'decision':decision,

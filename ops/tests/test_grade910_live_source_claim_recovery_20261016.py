@@ -57,6 +57,18 @@ class Checks(unittest.TestCase):
   summary={'evidenceClasses':{'UNVERIFIED_AUTHOR_PAGE_RANGE_PLAUSIBLE':10},
            'cachedPdfHashesConflicting':0,'manifestHashMatches':10,'rows':10}
   self.assertEqual(m.audit_decision(summary),'CLAIMS_CLASSIFIED_NO_PUBLICATION')
+ def test_no_unmapped_live_seed_ids_allowed(self):
+  q=row();q['seedId']='IX-BIO-TEST-01'
+  a=m.analyze([q],{'pectaa-catalog-009':entry()},pathlib.Path('/tmp/absent'),{'IX-BIO-TEST-01','X-PRESERVED'})
+  self.assertEqual(a['summary']['liveIdsMatchingProtectedOriginals'],1)
+  self.assertEqual(a['summary']['orphanLiveSeedIds'],0)
+  self.assertEqual(a['summary']['preservedOriginalsNotImported'],1)
+  self.assertEqual(m.audit_decision(a['summary']),'CLAIMS_CLASSIFIED_NO_PUBLICATION')
+ def test_unknown_live_seed_id_fails_closed(self):
+  q=row();q['seedId']='FAKE-NEW-ROW'
+  a=m.analyze([q],{'pectaa-catalog-009':entry()},pathlib.Path('/tmp/absent'),{'IX-PROTECTED-ORIGINAL'})
+  self.assertEqual(a['summary']['orphanLiveSeedIds'],1)
+  self.assertEqual(m.audit_decision(a['summary']),'SOURCE_INTEGRITY_HOLD')
  def test_private_receipt_has_0600_permissions(self):
   with tempfile.TemporaryDirectory() as t:
    out=pathlib.Path(t)/'private'/'receipt.json'

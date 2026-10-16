@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - "ops/qbank/audit-live-grade910-source-claims-20261016.py"
+      - "docs/question-bank/ASSPS_GRADE910_UNIFIED_2581_FACULTY_CONTENT_REVIEW_PRIORITIES_20261011.json"
       - "ops/tests/test_grade910_live_source_claim_recovery_20261016.py"
       - "ops/release/assps-grade910-live-source-claims.*"
       - "ops/release/install-assps-grade910-sourceclaims-20261016.sh"
@@ -10,6 +11,7 @@ on:
   pull_request:
     paths:
       - "ops/qbank/audit-live-grade910-source-claims-20261016.py"
+      - "docs/question-bank/ASSPS_GRADE910_UNIFIED_2581_FACULTY_CONTENT_REVIEW_PRIORITIES_20261011.json"
       - "ops/tests/test_grade910_live_source_claim_recovery_20261016.py"
       - "ops/release/assps-grade910-live-source-claims.*"
 jobs:
