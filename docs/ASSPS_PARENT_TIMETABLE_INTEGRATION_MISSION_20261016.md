@@ -42,3 +42,4 @@ NOT proof of real authenticated parent E2E in production.
 - Match current canonical Core+Connect deployed builds, full build/test regression, UI/print acceptance.
 - Safe blue-green release with observed Save->Reopen->Parent View, Friday no-break and marks zero-vs-blank invariants.
 - Unrelated results publication holds must not be bypassed.
+Connect patch is included so the isolated Connect source can be forward-ported onto verified target release; do not deploy it unreviewed.

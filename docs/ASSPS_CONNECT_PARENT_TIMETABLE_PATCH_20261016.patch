@@ -1,0 +1,147 @@
+From 65f931d886fc7c93f5e2687e3d7ebf0fc5784226 Mon Sep 17 00:00:00 2001
+From: root <root@srv1769723.hstgr.cloud>
+Date: Fri, 16 Oct 2026 04:33:13 +0000
+Subject: [PATCH] feat(connect): child-linked parent timetable display
+
+---
+ ...ENT_TIMETABLE_RELEASE_CONTRACT_20261016.md |  9 +++
+ src/app/parent/page.tsx                       |  2 +
+ src/app/parent/reports/page.tsx               |  4 +-
+ src/components/FamilyTimetable.tsx            | 74 +++++++++++++++++++
+ 4 files changed, 88 insertions(+), 1 deletion(-)
+ create mode 100644 docs/ASSPS_PARENT_TIMETABLE_RELEASE_CONTRACT_20261016.md
+ create mode 100644 src/components/FamilyTimetable.tsx
+
+diff --git a/docs/ASSPS_PARENT_TIMETABLE_RELEASE_CONTRACT_20261016.md b/docs/ASSPS_PARENT_TIMETABLE_RELEASE_CONTRACT_20261016.md
+new file mode 100644
+index 0000000..a5efc70
+--- /dev/null
++++ b/docs/ASSPS_PARENT_TIMETABLE_RELEASE_CONTRACT_20261016.md
+@@ -0,0 +1,9 @@
++# ASSPS Connect Parent Timetable — 2026-10-16 isolated change
++Parent dashboard + reports include FamilyTimetable.
++API GET /api/portal/family-timetable?day=<school weekday>.
++Only authenticated linked children from the backend; no arbitrary student_id or school_id query parameters.
++ASSPS school ID 1 approved version 2026–27. Other schools fail closed.
++Principal-approved Monday–Thursday/Saturday 08:30–13:30 with break; Friday 08:30–12:30 without break.
++Unverified junior subjects remain explicitly pending. Staff names do NOT authorize logins or marks-entry permissions.
++Backend must deploy first; until then frontend displays an error, never invented timetable data.
++No production cutover or real-account browser acceptance has occurred yet.
+diff --git a/src/app/parent/page.tsx b/src/app/parent/page.tsx
+index d57a412..01a7f97 100644
+--- a/src/app/parent/page.tsx
++++ b/src/app/parent/page.tsx
+@@ -1,4 +1,5 @@
+ "use client";
++import FamilyTimetable from '@/components/FamilyTimetable';
+ import DashboardLayout from '@/components/DashboardLayout';
+ import {PortalHero,MetricCard,ModuleAction,DataEmpty,DataError,DashboardSection} from '@/components/PortalDashboardPrimitives';
+ import {Bell,CalendarCheck,ChartNoAxesCombined,CreditCard,FileText,GraduationCap,Users,ShieldCheck} from 'lucide-react';
+@@ -37,5 +38,6 @@ export default function ParentDashboard(){
+    <DashboardSection eyebrow="STAY INFORMED" title="School notices" description="Relevant announcements from the school.">{loading?<div className="h-28 animate-pulse rounded-xl bg-[#F1F2ED]"/>:notices.length?<div className="space-y-3">{notices.slice(0,4).map((n,i)=><article key={n.id??i} className="rounded-xl border border-[#E6E8E1] bg-[#FBFCFA] p-4"><strong className="block text-[13px] text-[#2D3B32]">{n.title||'School update'}</strong>{n.message&&<p className="mt-1 text-[12px] leading-6 text-[#55665A]">{n.message}</p>}</article>)}</div>:<DataEmpty title="No new announcements" description="Any relevant school notices will appear here."/>}</DashboardSection>
+    <DashboardSection eyebrow="CONTACT WITH CARE" title="Questions for school?" description="A dependable support experience should never claim a message was sent when no backend record exists."><div className="cw-empty"><Bell size={24} color="var(--cw-accent)"/><strong>School communication</strong><p>For a concern requiring a formal response, contact the school administration directly. An in-app complaint form will be enabled only after its secure submission and receipt API are implemented.</p></div></DashboardSection>
+   </div>
++ <FamilyTimetable/>
+  </DashboardLayout>;
+ }
+diff --git a/src/app/parent/reports/page.tsx b/src/app/parent/reports/page.tsx
+index 4f15e46..d657429 100644
+--- a/src/app/parent/reports/page.tsx
++++ b/src/app/parent/reports/page.tsx
+@@ -1,4 +1,5 @@
+ "use client";
++import FamilyTimetable from '@/components/FamilyTimetable';
+ 
+ import DashboardLayout from '@/components/DashboardLayout';
+ import {PortalModuleHeading,PortalSubheading,PortalSupportNote} from '@/components/PortalModulePrimitives';
+@@ -66,5 +67,6 @@ export default function ParentReports(){
+       </section>
+     </div>
+     <div className="mt-6 rounded-[15px] border border-[#dce8e3] bg-[#f6fbf9] p-4"><div className="flex items-start gap-3"><FileText size={19} className="mt-0.5 shrink-0 text-[#28766e]"/><p className="text-[12px] leading-6 text-[#4c6c61]">For detailed academic decisions or discrepancies in records, please contact the school. This report page does not invent grades, future performance, or recommendations.</p></div></div>
+-  </DashboardLayout>;
++  <FamilyTimetable/>
++ </DashboardLayout>;
+ }
+diff --git a/src/components/FamilyTimetable.tsx b/src/components/FamilyTimetable.tsx
+new file mode 100644
+index 0000000..bdb900e
+--- /dev/null
++++ b/src/components/FamilyTimetable.tsx
+@@ -0,0 +1,74 @@
++"use client";
++import {useState} from 'react';
++import {useApiData} from '@/hooks/useApiData';
++
++type Period={label:string;start:string;end:string;kind:string;subject:string|null;teacher:string|null;period_verified:boolean;teacher_account_linked:boolean};
++type Incharge={name:string|null;teachers:string[];source:string;staff_identity_verified:boolean;note:string|null};
++type Child={student_id:number;name:string;class:string;section:string;class_incharge:Incharge;timetable_status:string;periods:Period[]};
++type FamilyData={version:string;day:string;profile:string;children:Child[]};
++const EMPTY:FamilyData={version:'',day:'',profile:'',children:[]};
++const DAYS=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
++const todayInSchool=()=>{
++ const day=new Intl.DateTimeFormat('en-US',{weekday:'long',timeZone:'Asia/Karachi'}).format(new Date());
++ return DAYS.includes(day)?day:'Monday';
++};
++const friendlyTime=(value:string)=>{
++ const [h,m]=value.split(':').map(Number);
++ return String((h%12)||12)+':'+String(m).padStart(2,'0')+(h>=12?' PM':' AM');
++};
++export default function FamilyTimetable(){
++ const [day,setDay]=useState(todayInSchool);
++ const {data,loading,error,refetch}=useApiData<FamilyData>('/portal/family-timetable?day='+encodeURIComponent(day),EMPTY,[day]);
++ return <section className="mt-6 rounded-[18px] border border-[#d8e5dd] bg-white p-4 shadow-sm sm:p-5" aria-label="Your children's class timetables">
++  <div className="flex flex-wrap items-start justify-between gap-3">
++   <div><p className="text-[11px] font-bold uppercase tracking-[.13em] text-[#397667]">School timetable</p>
++    <h2 className="mt-1 text-lg font-bold text-[#283c37]">Your child’s classes & teachers</h2>
++    <p className="mt-1 text-xs text-[#536960]">Official period timings in Pakistan school time. Friday has no break.</p></div>
++   <label className="flex items-center gap-2 text-xs font-semibold text-[#37594d]">School day
++    <select aria-label="Select school day" value={day} onChange={e=>setDay(e.target.value)} className="rounded-lg border border-[#a9c7bd] bg-[#f7fcf8] px-3 py-2 text-[#263f36]">
++     {DAYS.map(d=><option key={d} value={d}>{d}</option>)}
++    </select>
++   </label>
++  </div>
++  {loading?<p className="mt-5 rounded-lg bg-[#f5f8f5] p-4 text-sm text-[#435c52]" role="status">Loading verified timetable…</p>:
++  error?<div className="mt-5 rounded-lg border border-[#d0a9a2] bg-[#fff8f6] p-4 text-sm text-[#6d3834]" role="alert">
++    Timetable could not be verified. The school schedule has not been replaced by guessed data.
++    <button type="button" onClick={refetch} className="ml-3 underline">Retry</button>
++   </div>:
++  !data.children.length?<p className="mt-5 rounded-lg border border-[#e0e5db] bg-[#f8faf7] p-4 text-sm text-[#52665b]">
++    No linked child record was found for this account. Ask the school to verify your parent–student link.
++   </p>:
++  <div className="mt-4 space-y-5">
++   {data.children.map(child=><article key={child.student_id} className="overflow-hidden rounded-xl border border-[#c0d4c9]">
++    <div className="flex flex-wrap items-start justify-between gap-2 bg-[#edf7f2] px-4 py-3">
++     <div><h3 className="text-sm font-extrabold text-[#26483b]">{child.name}</h3>
++      <p className="text-xs text-[#3d6254]">Class {child.class} · {child.section||'No section'}</p></div>
++     <div className="text-left sm:text-right">
++      <p className="text-[11px] font-bold uppercase tracking-wide text-[#51776b]">Class incharge</p>
++      <p className="text-sm font-bold text-[#244f41]">{child.class_incharge.name||'Not designated'}</p>
++      {child.class_incharge.teachers.length>1?<p className="text-xs text-[#465d56]">Teachers: {child.class_incharge.teachers.join(' & ')}</p>:null}
++     </div>
++    </div>
++    {child.timetable_status!=='complete'?<p className="border-t border-[#d9e7dd] bg-[#fffaf1] px-4 py-2 text-xs font-medium text-[#7f5c32]">
++      Subject allocations are pending verified publication. Unconfirmed subjects and teachers are intentionally left blank.
++     </p>:null}
++    <div className="overflow-x-auto">
++     <table className="w-full min-w-[540px] border-collapse text-left text-xs sm:text-sm">
++      <thead><tr className="bg-[#e6f1f8] text-[#25495e]">
++       <th className="border border-[#aec6ce] px-3 py-2">Period</th>
++       <th className="border border-[#aec6ce] px-3 py-2">Time</th>
++       <th className="border border-[#aec6ce] px-3 py-2">Subject</th>
++       <th className="border border-[#aec6ce] px-3 py-2">Teacher</th>
++      </tr></thead>
++      <tbody>{child.periods.map(p=><tr key={p.label} className={p.kind==='break'?'bg-[#fff3de]':p.kind==='assembly'?'bg-[#f0eef8]':'even:bg-[#fbfdfb]'}>
++       <th scope="row" className="border border-[#cadad2] px-3 py-2 font-semibold text-[#314d44]">{p.label}</th>
++       <td className="whitespace-nowrap border border-[#cadad2] px-3 py-2 text-[#35534a]">{friendlyTime(p.start)} – {friendlyTime(p.end)}</td>
++       <td className="border border-[#cadad2] px-3 py-2 font-medium text-[#334e44]">{p.kind==='teaching'?(p.subject||'Awaiting verified allocation'):'—'}</td>
++       <td className="border border-[#cadad2] px-3 py-2 text-[#405c50]">{p.kind==='teaching'?(p.teacher||'Not confirmed'):'—'}</td>
++      </tr>)}</tbody>
++     </table>
++    </div>
++   </article>)}
++  </div>}
++ </section>;
++}
+-- 
+2.43.0
+
