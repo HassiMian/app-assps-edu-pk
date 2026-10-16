@@ -1,24 +1,40 @@
 {
   "baseCommit": "c47edc0c8bf18d93a7b4daecd15ffc12f1ba47b9",
+  "buildLogSha256": "a25be47e5d5fe01658569cb3bd76f3501c60a7a2c1c506c5758d3b8a5e0b4202",
   "changedFiles": [
     "src/app/api/apex/leads/route.ts",
     "tests/apex-public-lead-mail-safety.test.cjs"
   ],
+  "coreOfficialSecurityCheckPass": 6,
+  "coreOfficialSecurityCheckTotal": 13,
   "deploymentStatus": "SOURCE_ONLY_QA_NOT_PROMOTED",
   "fixedCommit": "b5b5e904e8e00aa5cfaf88aa00dc395047e24a7f",
   "focusedNodeTestExitCode": 0,
   "focusedNodeTestsPassed": 47,
-  "optimizedBuildVerified": false,
+  "fullConnectPythonFailed": 0,
+  "fullConnectPythonPassed": 251,
+  "generatedStaticPages": 103,
+  "loopbackPrivateHttpVerified": true,
+  "newestCoreIndependentBuildExitCode": 0,
+  "newestPinnedCoreCommit": "4397a1836fedff3cba6a1062ed85b7c25e5388c6",
+  "newestPinnedCoreDistHtmlSha256": "1097d23897e1bc507a111c4c202aba47a54960e27cf62f34234f95e32e0c26e3",
+  "optimizedBuildExitCode": 0,
+  "optimizedBuildVerified": true,
   "parsedJsonCharsMax": 16384,
   "patchSha256": "868b5d79390192d339d9cf6f2c9b400e3723f1ed787ca9a8419d8b75f658adc4",
+  "privateBuildId": "9vE2aQmgAYVa9Q4La0QDp",
+  "privateHttpCasesPassed": 8,
+  "privateHttpReceiptSha256": "8a078a680b3122a2aba42ac3ac2470f83e7357fc2d88639a26e4f0bbc8957656",
   "productionModified": false,
   "protectedDataTouched": false,
+  "protectedReleaseAuthorized": false,
   "qaDependencyNote": "Node22 TypeScript transpile uses synthetic in-memory mocks; no live lead, SMTP or student records",
   "releaseAuthorized": false,
-  "scopedESLintRerunVerified": false,
+  "scopedESLintRerunVerified": true,
   "sourceFileSha256": {
     "src/app/api/apex/leads/route.ts": "154c975fdf9a97c26538e55f3d6777a3b115fdb58ff8b7c3a0d8a9d261bf5775",
     "tests/apex-public-lead-mail-safety.test.cjs": "2e15a6374b31e2241567453c3c27c52c940d5224045d2c3701f9d4d072cbdf12"
   },
+  "sourceOnlyQaVerified": true,
   "streamBodyBytesMax": 65536
 }

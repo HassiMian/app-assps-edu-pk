@@ -34,6 +34,8 @@ APPROVED_CORE_DIST_SHA={
     '05a59127e43cdcd2ee3a6b26694b8d798efef4d3':'1097d23897e1bc507a111c4c202aba47a54960e27cf62f34234f95e32e0c26e3',
     # Independently rebuilt 05a descendant: Paper font QA/CI, unchanged compiled bytes.
     '13ac2be49e8d0aa6939c82f510aa4bbc65caf2a7':'1097d23897e1bc507a111c4c202aba47a54960e27cf62f34234f95e32e0c26e3',
+    # Newest independently rebuilt Core worker-hardening + Paper Windows43 QA descendant, unchanged exact compiled bytes.
+    '4397a1836fedff3cba6a1062ed85b7c25e5388c6':'1097d23897e1bc507a111c4c202aba47a54960e27cf62f34234f95e32e0c26e3',
 }
 OFFICIAL=Path('/root/workspace/assps-core-connect-gate-exit-hardening-20261015/ops/release/signed-bluegreen/verify-connect-login-only-core-20261014.py')
 JOINT_CORE=OFFICIAL.with_name('verify-joint-current-candidates-20261015.py')
