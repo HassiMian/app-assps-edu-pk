@@ -13,6 +13,8 @@ test('Daily Diary revisiting saved scope must PUT the original ID rather than du
  t.after(async()=>{await browser.close();await vite.close()})
  const ctx=await browser.newContext({viewport:{width:1480,height:970},timezoneId:'Asia/Karachi'})
  await ctx.addInitScript(()=>{localStorage.setItem('al_siddique_token','mock-jwt-token');localStorage.setItem('al_siddique_login_at',String(Date.now()));localStorage.setItem('al_siddique_user',JSON.stringify({id:999,role:'admin',school_id:1,tenant_id:'assps'}))})
+ // Isolate the synthetic Diary scope test from unmocked Question Bank 401/logout.
+ await ctx.route('**/api/question-bank**',r=>r.fulfill({status:200,contentType:'application/json',body:'{"success":true,"data":[]}'}))
  const calls=[]
  const students=[
   {id:801,name:'Synthetic Blue Eight',roll_number:'01',class:'Eight',section:'Blue'},
