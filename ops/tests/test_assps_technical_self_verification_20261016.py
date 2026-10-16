@@ -38,6 +38,15 @@ class TestAcceptanceWithoutForgedSignatures(unittest.TestCase):
  def test_invalid_marks_cause_critical(self):
   a=good();a["metrics"]["scores"]["invalid_rows"]=1
   self.assertIn("INVALID_SCORED_MARKS_DETECTED",module.evaluate(a,None)[1])
+ def test_duplicate_exam_subject_scores_trigger_critical(self):
+  a=good();a["metrics"]["firstTermCompleteness"]={"duplicateStudentSubjects":1,"subjectGradeBandGaps":0,"studentGradeBandGaps":0}
+  self.assertIn("DUPLICATE_STUDENT_SUBJECT_RESULT",module.evaluate(a,None)[1])
+ def test_grade_band_gaps_trigger_critical(self):
+  a=good();a["metrics"]["firstTermCompleteness"]={"duplicateStudentSubjects":0,"subjectGradeBandGaps":1,"studentGradeBandGaps":0}
+  self.assertIn("GRADE_BAND_COVERAGE_REGRESSION",module.evaluate(a,None)[1])
+ def test_known_missing_marks_are_not_fabricated_or_break_school_use(self):
+  a=good();a["metrics"]["firstTermCompleteness"]={"duplicateStudentSubjects":0,"subjectGradeBandGaps":0,"studentGradeBandGaps":0,"missingEntries":284,"affectedStudents":233,"unmappedRecordedSubjects":1}
+  self.assertEqual(module.evaluate(a,None)[0],"OPERATIONAL")
  def test_receipt_stored_atomically_and_no_personal_data(self):
   with tempfile.TemporaryDirectory() as d:
    p=Path(d)/"receipt.json";module.write_receipt(p,good())
