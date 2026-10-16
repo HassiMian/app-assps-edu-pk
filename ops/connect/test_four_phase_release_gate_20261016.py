@@ -6,7 +6,7 @@ p=Path(__file__).with_name('run_four_phase_release_gate_20261016.py')
 s=importlib.util.spec_from_file_location('gate',p);g=importlib.util.module_from_spec(s);s.loader.exec_module(g)
 def sample():
  return [
-  {'source_sha':g.LIVE_HTML,'nginx_root_correct':True,'https_ok':True,'result_counts':g.RESULT_COUNTS,'pg_transaction_read_only':True},
+  {'source_sha':g.LIVE_HTML,'nginx_root_correct':True,'https_ok':True,'result_counts':g.RESULT_COUNTS,'pg_transaction_read_only':True,'anonymous_private_apis_denied':True},
   {'decision':'OPTIMIZED_NEXT_BUILD_PROVENANCE_PASS','optimized_build_exit_observed':True,'production_release_authorized':False},
   {'technical_candidate_status':'PASS','production_modified':False,'next_candidate_build_id':g.NEXT_BUILD},
   {'status':'READY_FOR_LOGIN_ONLY_CORE','checks':{k:True for k in g.REQUIRED_OFFICIAL_CHECKS},'signed_runtime_security_certified':True},
@@ -47,6 +47,12 @@ class Phases(unittest.TestCase):
  def test_absent_verified_signer(self):self.assertEqual(self.check(3,{'signed_runtime_security_certified':False})['phase_3_independent_signed_core_authorization'],'HOLD')
  def test_original_mark_zeros_locked(self):self.assertEqual(self.check(0,{'result_counts':'1763|0'})['phase_1_readonly_production_integrity'],'HOLD')
  def test_wrong_current_root(self):self.assertEqual(self.check(0,{'source_sha':'0'*64})['phase_1_readonly_production_integrity'],'HOLD')
+ def test_missing_private_api_denial_fails_closed(self):
+  self.assertEqual(self.check(0,{'anonymous_private_apis_denied':False})['phase_1_readonly_production_integrity'],'HOLD')
+ def test_missing_private_api_denial_key_fails_closed(self):
+  v=sample()
+  del v[0]['anonymous_private_apis_denied']
+  self.assertEqual(g.make_phase_decisions(*v)['phase_1_readonly_production_integrity'],'HOLD')
  def test_missing_live_db_evidence(self):self.assertEqual(self.check(0,{'pg_transaction_read_only':False})['phase_1_readonly_production_integrity'],'HOLD')
  def test_current_stage_mismatch(self):self.assertEqual(self.check(2,{'next_candidate_build_id':'stale'})['phase_2_compiled_connect_core_integration'],'HOLD')
  def test_build_not_completed(self):self.assertEqual(self.check(1,{'optimized_build_exit_observed':False})['phase_2_compiled_connect_core_integration'],'HOLD')

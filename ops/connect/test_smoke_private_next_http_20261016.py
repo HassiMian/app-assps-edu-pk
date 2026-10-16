@@ -21,6 +21,18 @@ class PrivateConnectSmokeTests(unittest.TestCase):
     def test_good_teacher(self):
         self.assertTrue(smoke.assess("/teacher", 302, "/login?next=%2Fteacher"))
 
+    def test_private_apis_all_require_401(self):
+        self.assertEqual(len(smoke.PRIVATE_API_PATHS), 6)
+        for path in smoke.PRIVATE_API_PATHS:
+            self.assertTrue(smoke.assess(path, 401, None), path)
+
+    def test_private_apis_never_allow_200_or_redirect(self):
+        for path in smoke.PRIVATE_API_PATHS:
+            for status, location in ((200, None), (302, "/login"),
+                                     (403, None), (500, None),
+                                     (401, "https://attacker.example")):
+                self.assertFalse(smoke.assess(path, status, location), path)
+
     def test_good_login(self):
         self.assertTrue(smoke.assess("/login", 200, None))
 

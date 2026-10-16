@@ -20,7 +20,15 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import parse_qs, urlparse
 from urllib.request import HTTPRedirectHandler, build_opener
 
-PATHS = ("/dashboard", "/dashboard/history", "/teacher", "/login", "/api/auth/me")
+PRIVATE_API_PATHS = (
+    "/api/saas-admin/subscription-requests/export",
+    "/api/saas-admin/apex-leads/export",
+    "/api/saas-admin/subscription-requests",
+    "/api/saas-admin/apex-leads",
+    "/api/school/settings/current",
+    "/api/settings/branding",
+)
+PATHS = ("/dashboard", "/dashboard/history", "/teacher", "/login", "/api/auth/me") + PRIVATE_API_PATHS
 ALLOWED_ROOT = Path("/root/assps-release-candidates")
 REVIEWED_BUILD_STAGE = Path("/root/workspace/apex-connect-eslint-full-source-reconcile-20261016")
 REVIEWED_BUILD_ID = "SAsg3cC_el5cq2_nN2a46"
@@ -35,9 +43,9 @@ class NoRedirect(HTTPRedirectHandler):
 
 def assess(path: str, status: int, location: str | None) -> bool:
     if path == "/login":
-        return status == 200
-    if path == "/api/auth/me":
-        return status == 401
+        return status == 200 and not location
+    if path == "/api/auth/me" or path in PRIVATE_API_PATHS:
+        return status == 401 and not location
     if path not in PATHS or status not in (302, 303, 307, 308) or not location:
         return False
     target = urlparse(location)

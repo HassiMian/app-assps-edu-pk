@@ -12,6 +12,7 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+from verify_public_anonymous_sensitive_api_denial_20261016 import run as check_public_anonymous_denial
 
 CONNECT_OPS=Path(__file__).resolve().parent
 DEFAULT_CORE=Path('/root/workspace/assps-core-unified-p5-20261016')
@@ -80,7 +81,8 @@ def verifier_exit_passed(exits:dict,key:str)->bool:
 def make_phase_decisions(live:dict,compiled:dict,joint:dict,official:dict,verifier_exits:dict)->dict:
     p1=(live.get('source_sha')==LIVE_HTML and live.get('nginx_root_correct') is True
         and live.get('https_ok') is True and live.get('result_counts')==RESULT_COUNTS
-        and live.get('pg_transaction_read_only') is True)
+        and live.get('pg_transaction_read_only') is True
+        and live.get('anonymous_private_apis_denied') is True)
     p2=(verifier_exit_passed(verifier_exits,'optimized_build')
         and verifier_exit_passed(verifier_exits,'joint_candidate')
         and compiled.get('decision')=='OPTIMIZED_NEXT_BUILD_PROVENANCE_PASS'
@@ -109,6 +111,7 @@ def make_phase_decisions(live:dict,compiled:dict,joint:dict,official:dict,verifi
 def read_live(live:Path)->dict:
     facts={'source_sha':None,'nginx_root_correct':False,
            'https_ok':False,'result_counts':None,'pg_transaction_read_only':False,
+           'anonymous_private_apis_denied':False,
            'current_next_build_id':None}
     try:
         facts['source_sha']=sha(live/'index.html')
@@ -134,6 +137,16 @@ def read_live(live:Path)->dict:
     if rc==0 and out.splitlines()==[RESULT_COUNTS]:
         facts['result_counts']=RESULT_COUNTS
         facts['pg_transaction_read_only']=True
+    # Additional anonymous-negative gate is live read-only network only.
+    # It never certifies signed runtime, RLS or peer-school isolation.
+    try:
+        denial=check_public_anonymous_denial(timeout=8)
+        facts['anonymous_private_apis_denied']=(
+            denial.get('decision')=='ANONYMOUS_PRIVATE_API_DENIAL_PASS'
+            and denial.get('passed')==6 and denial.get('total')==6
+            and denial.get('production_modified') is False)
+    except (OSError, ValueError, TypeError):
+        facts['anonymous_private_apis_denied']=False
     return facts
 
 def main()->int:
