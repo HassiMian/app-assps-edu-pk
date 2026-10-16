@@ -1,0 +1,72 @@
+diff --git a/src/app/api/saas-admin/apex-leads/export/route.ts b/src/app/api/saas-admin/apex-leads/export/route.ts
+index eab18cc..ccf1427 100644
+--- a/src/app/api/saas-admin/apex-leads/export/route.ts
++++ b/src/app/api/saas-admin/apex-leads/export/route.ts
+@@ -35,6 +35,9 @@ export async function GET(req: Request) {
+         { status: message === "Forbidden" ? 403 : 401 }
+       );
+     }
+-    return NextResponse.json({ success: false, message }, { status: 500 });
++    return NextResponse.json(
++      { success: false, message: "Export temporarily unavailable" },
++      { status: 500, headers: { "Cache-Control": "no-store" } },
++    );
+   }
+ }
+diff --git a/src/app/api/saas-admin/subscription-requests/export/route.ts b/src/app/api/saas-admin/subscription-requests/export/route.ts
+index 8e327d8..4d3f0a8 100644
+--- a/src/app/api/saas-admin/subscription-requests/export/route.ts
++++ b/src/app/api/saas-admin/subscription-requests/export/route.ts
+@@ -36,6 +36,9 @@ export async function GET(req: Request) {
+         { status: message === "Forbidden" ? 403 : 401 }
+       );
+     }
+-    return NextResponse.json({ success: false, message }, { status: 500 });
++    return NextResponse.json(
++      { success: false, message: "Export temporarily unavailable" },
++      { status: 500, headers: { "Cache-Control": "no-store" } },
++    );
+   }
+ }
+diff --git a/tests/admin-export-route-security.test.cjs b/tests/admin-export-route-security.test.cjs
+index 5c473e7..774e457 100644
+--- a/tests/admin-export-route-security.test.cjs
++++ b/tests/admin-export-route-security.test.cjs
+@@ -34,7 +34,7 @@ for (const [kind, route, exporter] of [
+   ['apex-leads', 'app/api/saas-admin/apex-leads/export/route.ts', 'buildApexLeadsCsv'],
+   ['subscription-requests', 'app/api/saas-admin/subscription-requests/export/route.ts', 'buildSubscriptionRequestsCsv'],
+ ]) {
+-  function setup(authorized = true) {
++  function setup(authorized = true, exporterFailure = false) {
+     let authCalls = 0, exportCalls = 0;
+     const source = fs.readFileSync(path.join(folder, route), 'utf8');
+     const { GET } = runModule(source, (name) => {
+@@ -47,7 +47,11 @@ for (const [kind, route, exporter] of [
+       };
+       if (name === '@/lib/server/admin-export-status') return { parseAdminExportStatus: parser };
+       if (name.includes('export')) return {
+-        [exporter]: async (status) => { exportCalls++; return 'csv-status=' + status; },
++        [exporter]: async (status) => {
++          exportCalls++;
++          if (exporterFailure) throw Error('PRIVATE_INTERNAL_DB_CONNECTION_STRING');
++          return 'csv-status=' + status;
++        },
+       };
+       throw Error('unmocked module ' + name);
+     });
+@@ -70,6 +74,15 @@ for (const [kind, route, exporter] of [
+     assert.equal(s.counters().authCalls, 1);
+     assert.equal(s.counters().exportCalls, 0);
+   });
++  test(kind + ' redacts backend failures before any 500 response', async () => {
++    const s = setup(true, true);
++    const r = await s.GET(new Request('https://apex.assps.edu.pk/api/export?status=ALL'));
++    assert.equal(r.status, 500);
++    assert.equal(r.headers['Cache-Control'], 'no-store');
++    assert.equal(r.body.message, 'Export temporarily unavailable');
++    assert.doesNotMatch(JSON.stringify(r.body), /PRIVATE_INTERNAL_DB_CONNECTION_STRING/);
++    assert.equal(s.counters().exportCalls, 1);
++  });
+   test(kind + ' permits canonical ALL and generates bounded filename', async () => {
+     const s = setup();
+     const r = await s.GET(new Request('https://apex.assps.edu.pk/api/export?status=all'));

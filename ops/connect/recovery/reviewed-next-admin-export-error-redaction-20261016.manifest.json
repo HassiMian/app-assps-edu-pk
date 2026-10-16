@@ -1,0 +1,19 @@
+{
+  "baseCommit": "2b749aee8a21b460e099e4bdbf608e1b997427c0",
+  "combinedFocusedNodeTests": 18,
+  "fixCommit": "eb007ae1d2c539b6f20095ebc832605c0b5ac6e2",
+  "isolatedBuildLogSha256": "a9ac2f2c666835061a36dfe9f5f814208890221e33dcf252ff69b38230a942a8",
+  "newRouteTests": 8,
+  "observedBuildExit": 0,
+  "observedStaticPages": 103,
+  "patchSha256": "36fe68f52ab439d53b4f01aac455a86ba0bf3d3f061fd63115a758b79087cb31",
+  "privateBuildId": "Onz3qs6uPLcJv5vNpWqZh",
+  "productionModified": false,
+  "releaseAuthorized": false,
+  "schema": "connect-next-admin-export-error-redaction-v1",
+  "sourceFileSha256": {
+    "src/app/api/saas-admin/apex-leads/export/route.ts": "79bc94bb51a75f6fe56ad18333ef053f93008a5c596576ffbd71324495416a80",
+    "src/app/api/saas-admin/subscription-requests/export/route.ts": "926d1955250ad0693ace4008aa710fe1a4a869a38bd64d03857f56792f7d2eb8",
+    "tests/admin-export-route-security.test.cjs": "74182f3839be2ec77756faac5aff1b64e443f0acee82ff453af7427678cbb203"
+  }
+}
