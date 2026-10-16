@@ -18,6 +18,7 @@ const MODULE_SEARCH_ITEMS = [
  { id:'result-cards', type:'Action', title:'Result Cards', subtitle:'Print professional result cards', path:'/examination/results', keywords:['result card','report card','remarks','teacher remarks','print result'] },
  { id:'paper', type:'Module', title:'Paper Generator', subtitle:'Manual and AI-assisted paper generation', path:'/paper-generator', keywords:['paper','question','ai paper','lesson plan','syllabus'] },
  { id:'timetable', type:'Module', title:'Academic Timetable', subtitle:'Subjects, teachers and class schedule', path:'/timetable', keywords:['timetable','subject','teacher assignment'] },
+ { id:'teacher-subjects', type:'Module', title:'Teacher Subjects & Class In-charge', subtitle:'Multiple teaching subjects, separate verified class teacher assignments', path:'/teacher-subjects', keywords:['teacher profile','subjects','Nazra','Islamiyat','class incharge','class teacher'] },
  { id:'period-timings', type:'Module', title:'Period Timings', subtitle:'Assembly, periods and Friday bell schedule', path:'/period-timings', keywords:['bell','period timings','school hours','friday'] },
  { id:'school-documents', type:'Module', title:'Notice Studio', subtitle:'Official notices, circulars, general date sheets and printing', path:'/school-documents', keywords:['notice','circular','office order','staff acknowledgement','date sheet','letter'] },
  { id:'cards', type:'Module', title:'ID Cards', subtitle:'Student and staff ID cards', path:'/cards', keywords:['id card','card','barcode','qr'] },

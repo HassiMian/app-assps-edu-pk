@@ -90,6 +90,7 @@ const MENU_GROUPS = [
  label: 'OPERATIONS',
  items: [
  { icon: FileText, label: 'School Documents & Notices', path: '/school-documents', color: '#4ED7C2', roles: ROLE_SETS.academicStaff, permKey: 'school_documents' },
+ { icon: Users2, label: 'Teacher Subjects & In-charge', path: '/teacher-subjects', color: '#5CE2DE', roles: ROLE_SETS.leadership, permKey: 'employees' },
  { icon: Book, label: 'Library', path: '/library', color: '#FF9F0A', roles: ROLE_SETS.schoolStaff, permKey: 'library' },
  { icon: Bus, label: 'Transport', path: '/transport', color: '#0A84FF', roles: ROLE_SETS.adminOffice, permKey: 'transport' },
  { icon: Wallet, label: 'Expenses', path: '/expenses', color: '#FF375F', roles: ROLE_SETS.adminOffice, permKey: 'expenses' },

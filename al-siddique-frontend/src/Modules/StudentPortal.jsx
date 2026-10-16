@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext'
 import { useAcademicStore } from '../services/useAcademicStore'
 import api from '../services/api'
 import BellSchedulePanel from '../components/BellSchedulePanel'
+import StudentClassInchargePanel from './academicAssignments/StudentClassInchargePanel'
 import { C, card, btnPrimary, btnSecondary, input, labelStyle, sectionHeader } from './moduleStyles'
 import {
  BookOpen, TrendingUp, Award, CheckCircle, Eye, X,
@@ -217,6 +218,8 @@ export default function StudentPortal() {
  </div>
  </div>
  </div>
+
+ <StudentClassInchargePanel userId={user?.id} />
 
  {/*  Tabs  */}
  <div className="super-module-card" style={{ ...card, display: 'flex', gap: 10, flexWrap: 'wrap', borderRadius: 22 }}>
