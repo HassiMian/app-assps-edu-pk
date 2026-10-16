@@ -10,7 +10,7 @@ import {
 } from '../../officialSectionSemantics.js'
 import { URDU_FONT_STACK } from '../../resolvePaperRoute.js'
 import { optionLabelParts, replaceQuestionSerial, replaceSectionMarks, resolveSectionTotalMarks } from '../../paperSystemRules.js'
-import { InlineEditable } from '../../PaperInlineEditor.jsx'
+import { InlineEditable, sanitizeInlineHtml, htmlToPlainText } from '../../PaperInlineEditor.jsx'
 import StableClosingBracket from '../StableClosingBracket.jsx'
 
 function parseNumberedLines(content = '') {
@@ -446,7 +446,7 @@ export default function OfficialSectionRenderer({
    const kind=inferOfficialSectionKind(section)
    if(kind==='marker'){
     const labels=String(section.content||'').split(/\r?\n/).filter(isSectionMarkerLine)
-    return <Fragment key={section.id||index}>{labels.map((line,i)=><SectionBanner key={i} text={cleanSectionMarker(line)} themeColor={themeColor} isUrdu={isUrdu} fs={fs}/>)}</Fragment>
+   return <Fragment key={section.id||index}>{labels.map((line,i)=><SectionBanner key={i} text={cleanSectionMarker(line)} themeColor={themeColor} isUrdu={isUrdu} fs={fs}/>)}</Fragment>
    }
    const ordinal=ordered.slice(0,index+1).filter(item=>inferOfficialSectionKind(item)!=='marker').length
    const serial=Number(section.sourceOrder||ordinal)||ordinal
@@ -485,9 +485,33 @@ export default function OfficialSectionRenderer({
    }
    const commitSerial=payload=>{
     const next=Math.max(1,Number(String(payload.text).match(/\d+/)?.[0]||serial))
+    const richText={...(section.richText||{}),headingSerial:payload.html}
+    if(next===serial){onQuestionChange?.(section.id,{richText});return}
     const heading=replaceQuestionSerial(section.heading||'',next,isUrdu)
-    onQuestionChange?.(section.id,{sourceOrder:next,heading,text:heading,textUrdu:isUrdu?heading:''})
+    onQuestionChange?.(section.id,{sourceOrder:next,heading,text:heading,textUrdu:isUrdu?heading:'',richText})
    }
+    const commitComposite=root=>{
+    if(!editMode||!root)return
+    const serialEl=root.querySelector('[data-edit-field="question-number"]')
+    const headingEl=root.querySelector('[data-edit-field="question-heading"]')
+    if(!serialEl||!headingEl)return
+    const serialHtml=sanitizeInlineHtml(serialEl.innerHTML)
+    const headingHtml=sanitizeInlineHtml(headingEl.innerHTML)
+    const next=Math.max(1,Number(String(serialEl.textContent||'').match(/\d+/)?.[0]||serial))
+    const plain=htmlToPlainText(headingHtml)
+    const richText={...(section.richText||{}),headingSerial:serialHtml,headingInstruction:headingHtml}
+    const serialOriginal=sanitizeInlineHtml(section.richText?.headingSerial||serialText)
+    const instructionOriginal=sanitizeInlineHtml(section.richText?.headingInstruction||instruction)
+    if(next===serial&&plain===instruction){
+     if(serialHtml!==serialOriginal||headingHtml!==instructionOriginal)
+      onQuestionChange?.(section.id,{richText})
+     return
+    }
+    let heading=replaceQuestionSerial(plain,next,isUrdu)
+    heading=replaceSectionMarks(heading,resolvedMarks,isUrdu)
+    onQuestionChange?.(section.id,{sourceOrder:next,heading,text:heading,textUrdu:isUrdu?heading:'',richText})
+   }
+
    const commitMarks=payload=>{
     const next=Math.max(0,Number(String(payload.text).match(/\d+/)?.[0]||0))
     const heading=replaceSectionMarks(section.heading||'',next,isUrdu)
@@ -500,9 +524,9 @@ export default function OfficialSectionRenderer({
     onClickCapture={event=>{if(editMode&&event.target?.closest?.('[data-paper-inline-editable]'))onSelectSection?.(section.id)}}
     style={{marginBottom:String(10*fs)+'px',border:sectionBorder,borderRadius:qBorderStyle==='box'?7:0,padding:sectionPadding,breakInside:'auto',overflow:qBorderStyle==='table'?'hidden':undefined,outline:editMode?(selected?'2px dashed '+themeColor:'1px dashed '+themeColor+'77'):'none',outlineOffset:editMode?3:0,background:selected?themeColor+'0A':undefined}}>
     <div data-section-heading data-language={isUrdu?'urdu':'english'} style={{display:'grid',gridTemplateColumns:isUrdu?'84px minmax(0,1fr)':'minmax(0,1fr) 84px',gridTemplateRows:'auto',alignItems:'center',gap:8,padding:qBorderStyle==='table'?String(5*fs)+'px '+String(7*fs)+'px':undefined,paddingBottom:qBorderStyle==='table'?String(5*fs)+'px':String(4*fs)+'px',marginBottom:qBorderStyle==='table'?0:String(6*fs)+'px',borderBottom:qBorderStyle==='table'?'1.5px solid '+themeColor:(divider?'2px solid '+themeColor:'none'),background:qBorderStyle==='table'?themeColor+'09':undefined,direction:'ltr'}}>
-     <div data-question-heading style={{gridColumn:isUrdu?2:1,gridRow:1,direction:isUrdu?'rtl':'ltr',textAlign:isUrdu?'right':'left',fontWeight:900,fontSize:String(Math.max(Number(headingFs||0),qFs+1,13))+'px',display:'flex',flexDirection:'row',justifyContent:'flex-start',alignItems:'baseline',gap:6,minWidth:0}}>
-      <InlineEditable text={serialText} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey="question-number" sectionId={section.id} ariaLabel={'Edit question '+serial+' number'} onActivate={onActiveEditable} onCommit={commitSerial} style={{flex:'0 0 auto',whiteSpace:'nowrap',fontWeight:900}} />
-      <InlineEditable text={instruction} richHtml={section.richText?.headingInstruction||''} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey="question-heading" sectionId={section.id} ariaLabel={'Edit question '+serial+' heading'} onActivate={onActiveEditable} onCommit={commitInstruction} style={{flex:'1 1 auto',minWidth:0,fontWeight:500}} />
+     <div data-question-heading data-question-heading-composite={editMode?'true':undefined} contentEditable={editMode} suppressContentEditableWarning ref={node=>{if(node)node.__paperCommitComposite=()=>commitComposite(node)}} onBlur={event=>{if(!event.currentTarget.contains(event.relatedTarget))commitComposite(event.currentTarget)}} onKeyDown={event=>{if(editMode&&event.key==='Enter'){event.preventDefault();event.currentTarget.blur()}}} style={{gridColumn:isUrdu?2:1,gridRow:1,direction:isUrdu?'rtl':'ltr',textAlign:isUrdu?'right':'left',fontWeight:900,fontSize:String(Math.max(Number(headingFs||0),qFs+1,13))+'px',display:'flex',flexDirection:'row',justifyContent:'flex-start',alignItems:'baseline',gap:6,minWidth:0}}>
+      <InlineEditable text={serialText} richHtml={section.richText?.headingSerial||''} inheritEditable editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey="question-number" sectionId={section.id} ariaLabel={'Edit question '+serial+' number'} onActivate={onActiveEditable} onCommit={commitSerial} style={{flex:'0 0 auto',whiteSpace:'nowrap',fontWeight:900}} />
+      <InlineEditable text={instruction} richHtml={section.richText?.headingInstruction||''} inheritEditable editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey="question-heading" sectionId={section.id} ariaLabel={'Edit question '+serial+' heading'} onActivate={onActiveEditable} onCommit={commitInstruction} style={{flex:'1 1 auto',minWidth:0,fontWeight:500}} />
      </div>
      {marksLabel?<div data-marks-badge style={{gridColumn:isUrdu?1:2,gridRow:1,direction:'ltr',textAlign:'center',alignSelf:'center',justifySelf:isUrdu?'start':'end',minWidth:64,border:'1px solid '+themeColor,borderRadius:4,padding:'2px 7px',color:themeColor,fontWeight:800,fontSize:String(Math.max(10,qFs-2))+'px',whiteSpace:'nowrap',fontFamily:'Arial,sans-serif'}}>
       <InlineEditable text={marksLabel} editMode={editMode} direction="ltr" fieldKey="marks" sectionId={section.id} ariaLabel={'Edit question '+serial+' marks'} onActivate={onActiveEditable} onCommit={commitMarks} style={{display:'block',textAlign:'center'}} />

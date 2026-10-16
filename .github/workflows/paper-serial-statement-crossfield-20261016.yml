@@ -1,0 +1,38 @@
+name: ASSPS Paper Serial and Statement Cross-Field Browser Gate
+on:
+  push:
+    branches:
+      - 'feat/paper-serial-statement-bounded-*'
+    paths:
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperInlineEditor.jsx'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/official/OfficialSectionRenderer.jsx'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/paperSerialStatementCrossFieldBrowser.test.js'
+      - 'ops/paper-studio/run_serial_statement_crossfield_20261016.cjs'
+      - '.github/workflows/paper-serial-statement-crossfield-20261016.yml'
+  pull_request:
+    paths:
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperInlineEditor.jsx'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/official/OfficialSectionRenderer.jsx'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/paperSerialStatementCrossFieldBrowser.test.js'
+      - 'ops/paper-studio/run_serial_statement_crossfield_20261016.cjs'
+jobs:
+  crossfield-chromium:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: al-siddique-frontend/package-lock.json
+      - name: Install pinned test dependencies
+        run: npm ci --no-audit --no-fund
+        working-directory: al-siddique-frontend
+      - name: Install isolated Chromium runtime
+        run: npx playwright install chromium --with-deps
+        working-directory: al-siddique-frontend
+      - name: Strict English and Urdu cross-field tests
+        run: node ops/paper-studio/run_serial_statement_crossfield_20261016.cjs
