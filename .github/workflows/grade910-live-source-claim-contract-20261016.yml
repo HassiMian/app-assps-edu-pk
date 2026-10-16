@@ -9,6 +9,11 @@ on:
       - "ops/qbank/audit-grade910-existing-long-answer-proposal-crosswalk-20261016.py"
       - "ops/qbank/author-grade10-urdu-biology-ten-research-answers-20261016.py"
       - "ops/qbank/author-grade9-biology8-grade10-computer6-urdu-research-20261016.py"
+      - "ops/qbank/author-grade10-urdu-chemistry-ten-safe-conceptual-answers-20261016.py"
+      - "ops/tests/test_grade910_new_ten_urdu_chemistry_original_research_20261016.py"
+      - "ops/tests/test_grade910_ten_urdu_chemistry_research_crosswalk_20261016.py"
+      - "docs/question-bank/ASSPS_GRADE10_CHEMISTRY_URDU_10_SAFE_UNAPPROVED_CONCEPTUAL_EXPLANATIONS_20261016.json"
+      - "docs/question-bank/ASSPS_GRADE10_URDU_CHEMISTRY_TEN_CONCEPTUAL_RESEARCH_PRIORITY_20261016.md"
       - "ops/tests/test_grade910_new_fourteen_urdu_original_explanations_20261016.py"
       - "ops/tests/test_grade910_second_urdu_crosswalk_release_hold_20261016.py"
       - "docs/question-bank/ASSPS_GRADE9_BIOLOGY_8_AND_GRADE10_COMPUTER_6_URDU_UNAPPROVED_EXPLANATIONS_20261016.json"
@@ -82,6 +87,11 @@ on:
       - "ops/qbank/audit-grade910-existing-long-answer-proposal-crosswalk-20261016.py"
       - "ops/qbank/author-grade10-urdu-biology-ten-research-answers-20261016.py"
       - "ops/qbank/author-grade9-biology8-grade10-computer6-urdu-research-20261016.py"
+      - "ops/qbank/author-grade10-urdu-chemistry-ten-safe-conceptual-answers-20261016.py"
+      - "ops/tests/test_grade910_new_ten_urdu_chemistry_original_research_20261016.py"
+      - "ops/tests/test_grade910_ten_urdu_chemistry_research_crosswalk_20261016.py"
+      - "docs/question-bank/ASSPS_GRADE10_CHEMISTRY_URDU_10_SAFE_UNAPPROVED_CONCEPTUAL_EXPLANATIONS_20261016.json"
+      - "docs/question-bank/ASSPS_GRADE10_URDU_CHEMISTRY_TEN_CONCEPTUAL_RESEARCH_PRIORITY_20261016.md"
       - "ops/tests/test_grade910_new_fourteen_urdu_original_explanations_20261016.py"
       - "ops/tests/test_grade910_second_urdu_crosswalk_release_hold_20261016.py"
       - "docs/question-bank/ASSPS_GRADE9_BIOLOGY_8_AND_GRADE10_COMPUTER_6_URDU_UNAPPROVED_EXPLANATIONS_20261016.json"
@@ -215,5 +225,9 @@ jobs:
           python3 -m unittest discover -s ops/tests -p test_grade910_new_fourteen_urdu_original_explanations_20261016.py -v
           # Live private ledger gate is tested only in the protected VPS audit.
           python3 -m py_compile ops/qbank/author-grade9-biology8-grade10-computer6-urdu-research-20261016.py
+      - name: Validate ten original non-operational Chemistry Urdu research explanations
+        run: |
+          python3 -m unittest discover -s ops/tests -p test_grade910_new_ten_urdu_chemistry_original_research_20261016.py -v
+          python3 -m py_compile ops/qbank/author-grade10-urdu-chemistry-ten-safe-conceptual-answers-20261016.py
       - name: Validate offline claim auditor syntax
         run: python3 -m py_compile ops/qbank/audit-live-grade910-source-claims-20261016.py ops/qbank/reconcile-grade910-held-original-candidates-20261016.py

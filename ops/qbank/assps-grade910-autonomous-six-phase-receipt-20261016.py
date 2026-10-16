@@ -197,7 +197,8 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
               and 'unlinkedCurrentRevisionResearchQueue' in x
               and len(x['unlinkedCurrentRevisionResearchQueue'])!=450):
             raise ValueError('HISTORICAL_ORIGINAL_RESEARCH_BACKLOG_LEDGER_DRIFT')
-        if x.get('newHighPriorityGrade9BiologyAndGrade10ComputerUrduResearchCandidates') is not None:
+        if (x.get('newHighPriorityGrade9BiologyAndGrade10ComputerUrduResearchCandidates') is not None
+            and x.get('newGrade10ChemistryUrduConceptualResearchCandidates') is None):
             if (x.get('newHighPriorityGrade9BiologyAndGrade10ComputerUrduResearchCandidates')!=14
                 or x.get('newIndependentHighPriorityUrduBiologyResearchCandidates')!=10
                 or x.get('remainingLiveReviewDepthFlagsWithoutAnyDraft')!=426
@@ -205,6 +206,15 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
                 or len(x.get('unlinkedCurrentRevisionResearchQueue',[]))!=426
                 or sum(y.get('priority')=='HIGH' for y in x['unlinkedCurrentRevisionResearchQueue'])!=205):
                 raise ValueError('SECOND_URDU_RESEARCH_CROSSWALK_FRAUD_OR_COUNT_DRIFT')
+        if x.get('newGrade10ChemistryUrduConceptualResearchCandidates') is not None:
+            if (x.get('newGrade10ChemistryUrduConceptualResearchCandidates')!=10
+                or x.get('newHighPriorityGrade9BiologyAndGrade10ComputerUrduResearchCandidates')!=14
+                or x.get('newIndependentHighPriorityUrduBiologyResearchCandidates')!=10
+                or x.get('remainingLiveReviewDepthFlagsWithoutAnyDraft')!=416
+                or x.get('remainingHighPriorityFlagsWithoutAnyDraft')!=195
+                or len(x.get('unlinkedCurrentRevisionResearchQueue',[]))!=416
+                or sum(y.get('priority')=='HIGH' for y in x['unlinkedCurrentRevisionResearchQueue'])!=195):
+                raise ValueError('GRADE10_10_SAFE_CHEMISTRY_RESEARCH_CROSSWALK_INVALID_OR_FABRICATED')
         prior_long_explanations_linked=True
     score=technical.get("metrics",{}).get("scores",{})
     integrity=technical.get("decision")=="OPERATIONAL" and score.get("total_score_rows",0)>=1763
@@ -278,6 +288,7 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
       "priorLongAnswerDraftsAreNotTeacherReviews":True,
       "newGrade10UrduBiologyUnapprovedAnswerResearchCandidates":historic_answer_drafts.get("newIndependentHighPriorityUrduBiologyResearchCandidates") if prior_long_explanations_linked else None,
       "newGrade9Biology8AndGrade10Computer6UrduUnapprovedAnswers":historic_answer_drafts.get("newHighPriorityGrade9BiologyAndGrade10ComputerUrduResearchCandidates") if prior_long_explanations_linked else None,
+      "newGrade10ChemistryUrdu10UnapprovedConceptualAnswers":historic_answer_drafts.get("newGrade10ChemistryUrduConceptualResearchCandidates") if prior_long_explanations_linked else None,
       "subjectiveDepthFlagsNeedingFreshAnswerResearchAfterNewDrafts":historic_answer_drafts.get("remainingLiveReviewDepthFlagsWithoutAnyDraft") if prior_long_explanations_linked else None,
       "highPriorityResearchFlagsStillUnlinkedAfterNewDrafts":historic_answer_drafts.get("remainingHighPriorityFlagsWithoutAnyDraft") if prior_long_explanations_linked else None,
       "everyChangedQuestionRevisionMustBeRereviewed":True,

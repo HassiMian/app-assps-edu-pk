@@ -57,7 +57,7 @@ def packet_ids(groups,docs=DOCS,original=ORIG):
     if len(result)!=161 or sum(x['rows'] for x in packets)!=161:
         raise ValueError('EXPECTED_161_RESEARCH_DRAFTS_MISSING')
     return result,packets
-def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG,new_biology=None,new_dual_urdu=None):
+def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG,new_biology=None,new_dual_urdu=None,new_chemistry=None):
     existing,packets=packet_ids(groups,docs,original)
     rows=five.get('rows')
     if not isinstance(rows,list) or len(rows)!=5:raise ValueError('EXPECTED_FINAL_FIVE_FACULTY_DOCKETS')
@@ -226,6 +226,55 @@ def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG,new_biology=
         another14=len(newids)
         if len(unlinked)!=426 or sum(x['priority']=='HIGH' for x in unlinked)!=205:
             raise ValueError('SECOND_URDU_RESEARCH_LEFTOVER_PRIORITY_DRIFT')
+    new_chemistry_count=0
+    if new_chemistry is not None:
+        packet=new_chemistry
+        if (packet.get('schema')!='ASSPS_GRADE10_CHEMISTRY_10_SAFE_CONCEPTUAL_URDU_ANSWERS_V1'
+            or packet.get('candidateCount')!=10
+            or packet.get('sourceFrozenResearchSha256')!='5c89d545299e106ef13671202f72c920a03669e59123dfd296a283f9e97b6da3'
+            or packet.get('grade')!='10th' or packet.get('medium')!='Urdu' or packet.get('subject')!='Chemistry'
+            or packet.get('actualSchoolAdoptedTextbookVerified') is not False
+            or packet.get('sourceExercisePageCorroborated') is not False
+            or packet.get('qualifiedIndependentChemistryAndUrduReviewCompleted') is not False
+            or packet.get('academicApproval') is not False
+            or packet.get('published') is not False
+            or packet.get('paperStudioVerifiedSelectable') is not False
+            or packet.get('productionDatabaseWrites')!=0
+            or packet.get('originalConceptualAnswersNotOperationalPreparationGuides') is not True
+            or packet.get('specialistHeldNoAIExplanatoryAnswerQuestionIds')!=['X-CHEM-UR-C18-L01','X-CHEM-UR-C23-L01','X-CHEM-UR-C24-L01']):
+            raise ValueError('CHEMISTRY_URDU_13_NEW_RESEARCH_CANNOT_CLAIM_APPROVAL')
+        rows=packet.get('drafts')
+        if not isinstance(rows,list) or len(rows)!=10:
+            raise ValueError('CHEMISTRY_URDU_13_RESEARCH_MISSING')
+        unlinked_ids={row['questionId'] for row in unlinked}
+        visited=set()
+        for q in rows:
+            id=q.get('questionId')
+            if (id in visited or id not in unlinked_ids or id not in riskmap
+                or riskmap[id].get('priority')!='HIGH'
+                or riskmap[id].get('grade')!='10th'
+                or riskmap[id].get('subject')!='Chemistry'
+                or riskmap[id].get('medium')!='Urdu' or riskmap[id].get('type')!='long'
+                or q.get('liveFullQuestionContentRevisionSha256')!=hashes.get(id)
+                or q.get('grade')!='10th' or q.get('subject')!='Chemistry'
+                or q.get('medium')!='Urdu' or q.get('marks')!=5
+                or q.get('approved') is not False or q.get('published') is not False
+                or q.get('paperStudioVerifiedSelectable') is not False
+                or q.get('independentChemistryTeacherReviewed') is not False
+                or q.get('independentUrduLanguageReviewed') is not False
+                or q.get('school2026To2027BookAdoptionVerified') is not False
+                or q.get('actualSourceExercisePageVerified') is not False
+                or q.get('operationalHazardousLabInstructionsProvided') is not False
+                or len(str(q.get('originalConceptualExplanationCandidateUrdu') or '').split())<65
+                or len(q.get('proposedFiveIndependentAssessmentPointsUrdu') or [])!=5):
+                raise ValueError('CHEMISTRY_URDU_13_DRAFT_NOT_CURRENT_OR_NOT_UNAPPROVED')
+            visited.add(id)
+        if len(visited)!=10 or not all(str(id).startswith('X-CHEM-UR-C') for id in visited):
+            raise ValueError('CHEMISTRY_URDU_CURRENT_HIGH_BATCH_ID_SCOPE_DRIFT')
+        unlinked=[x for x in unlinked if x['questionId'] not in visited]
+        new_chemistry_count=len(visited)
+        if len(unlinked)!=416 or sum(x['priority']=='HIGH' for x in unlinked)!=195:
+            raise ValueError('CHEMISTRY_URDU_RESEARCH_QUEUE_416_195_DRIFT')
     if summary['originalUniverse']!=166 or summary['live']!=165 or summary['originalOnly']!=1:
         raise ValueError('RESEARCH_ORIGINAL_LIVE_CROSSWALK_DRIFT')
     if summary['hasResearchDraft']!=165 or summary['noResearchDraft']!=1 or summary['liveWithResearchDraft']!=164:
@@ -242,6 +291,7 @@ def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG,new_biology=
        'liveRiskIdsWithoutPriorResearchDraft':604-summary['liveRiskWithResearchDraft'],
        'newIndependentHighPriorityUrduBiologyResearchCandidates':recently_authored,
        'newHighPriorityGrade9BiologyAndGrade10ComputerUrduResearchCandidates':another14,
+       'newGrade10ChemistryUrduConceptualResearchCandidates':new_chemistry_count,
        'remainingLiveReviewDepthFlagsWithoutAnyDraft':len(unlinked),
        'remainingHighPriorityFlagsWithoutAnyDraft':sum(x['priority']=='HIGH' for x in unlinked),
        'highPriorityRiskIdsWithPriorResearchDraft':high_existing,
@@ -306,7 +356,19 @@ def run():
     for subject,(_grade,filename,original_sha,_catalog) in author2.FROZEN.items():
         if sha((author2.SOURCE_ROOT/filename).read_bytes())!=original_sha:
             raise ValueError('SECOND_URDU_ORIGINAL_SOURCE_SHA_DRIFT')
-    result=build(groups,last,ledger,risks,set(hashes),new_biology=proposal,new_dual_urdu=proposal2)
+    spec3=importlib.util.spec_from_file_location(
+        'assps_chemistry10_urdu_thirteen_original_research',
+        ROOT/'ops/qbank/author-grade10-urdu-chemistry-ten-safe-conceptual-answers-20261016.py')
+    author3=importlib.util.module_from_spec(spec3);spec3.loader.exec_module(author3)
+    proposal3=json.loads(author3.OUT.read_text(encoding='utf8'))
+    if sha(author3.SOURCE.read_bytes())!=author3.SOURCE_SHA:
+        raise ValueError('CHEMISTRY_URDU_ORIGINAL_SOURCE_TAMPERED')
+    expected13=author3.build({r['id']:r for r in live},hashes,
+                             {z['questionId']:z for z in risks['records']})
+    if expected13!=proposal3:
+        raise ValueError('CHEMISTRY_URDU_THIRTEEN_AUTHORED_PACKET_TAMPERED')
+    result=build(groups,last,ledger,risks,set(hashes),new_biology=proposal,
+                 new_dual_urdu=proposal2,new_chemistry=proposal3)
     atomic_private(OUT,result)
     return result
 if __name__=='__main__':
