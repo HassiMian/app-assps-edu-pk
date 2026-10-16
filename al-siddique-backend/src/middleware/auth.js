@@ -3,6 +3,7 @@ const { strictPositiveSchoolId } = require('../services/security/strictSchoolIde
 const jwt = require('jsonwebtoken')
 const { query, tenantContext } = require('../config/database')
 
+const { isSignedDatabaseInfrastructureError } = require('./signedDbInfrastructureError')
 const JWT_SECRET = process.env.JWT_SECRET || (process.env.NODE_ENV === 'production' ? '' : 'dev-jwt-secret')
 
 if (process.env.NODE_ENV === 'production' && !JWT_SECRET) {
@@ -333,6 +334,16 @@ async function protect(req, res, next) {
     activateRequestRlsContext(req)
     return next()
   } catch (err) {
+    if (isSignedDatabaseInfrastructureError(err)) {
+      // A database catalog/role denial is a fail-closed service error, NOT
+      // an expired login. Preserve marks edits rather than globally log out.
+      // Never retry writes in middleware or weaken tenant/RLS policy.
+      return sendJson(res, 503, {
+        success: false,
+        code: 'SIGNED_DATABASE_TEMPORARILY_UNAVAILABLE',
+        message: 'Secure marks service temporarily unavailable. Marks were not saved; keep this page open and retry after repair.',
+      })
+    }
     console.warn('JWT verification failed:', err.name || 'JwtError')
     return sendJson(res, 401, { message: 'Invalid or expired token.' })
   }

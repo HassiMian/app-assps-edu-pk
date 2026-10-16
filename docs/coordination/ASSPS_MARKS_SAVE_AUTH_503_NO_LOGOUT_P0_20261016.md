@@ -1,0 +1,14 @@
+# ASSPS Marks Save P0 — infrastructure failures must never erase school login (2026-10-16)
+
+## Live root cause
+Nginx sent POST /api/exams/results to signed green 5091. Green required 77 FORCE RLS tables but live DB had 82 FORCE: 77 exact restrictive core tables and five separate protected academic tables. Repeated actual green POST401 with JWT verification failed Error coincided with global frontend login redirects. The read-only production signed-role query reproduced DB_SIGNED_RLS_CATALOG_INCOMPLETE before the guarded fix; after the exact 82-table check it passed with the same restricted role.
+
+## Security-first fix and future-proof error semantics
+Previous signed Green source 6c0d402d0694376d4f054c59fc7b827c57c12399 requires all 77 original restrictive policy signatures plus all five exact additional FORCE RLS academic policy names, operations, roles and predicates. No rights granted, no policies changed. This additional patch changes only authenticated API middleware error classification: trusted signed database catalogue or restricted runtime misconfigurations become HTTP503 generic fail-closed service-unavailable, NOT HTTP401 falsely indicating expired JWT. Malformed/absent/expired JWT and missing tenant remain real 401/403. No transparent retry of marks writes. This prevents a future DB catalogue drift from clearing school login through the frontend's global 401 interceptor. The complementary opt-in client-side POST 401 suppression remains isolated in Core frontend hotfix 5b4bce2d and is NOT part of the active public frontend release.
+
+11 exact RLS policy tests plus 13 auth infrastructure-vs-user-token classification cases PASSED (24/24), scoped backend only. Requires separate actual HTTPS authorized savedCount acceptance before claims that new marks uploaded successfully.
+
+## Scope, protection and recovery
+Current live score baseline 1763 saved exam rows including 213 genuine numeric 0; Class One First Term already holds 152 records, 38 each English, Islamiyat, Mathematics and Science. Missing typed-in scores are NOT server persisted and must not be fabricated. No DML/DDL, no marks rewrite or tenant grant bypass.
+
+Exact backup of Nginx maps and PM2 state exists under root-private /root/assps-release-evidence/marks-save-p0-20261016. Old 5091 remains online. New signed 5092 separately supplies the repaired 82-table catalogue with unchanged stored school/JWT credentials, passes restricted real read-only session and unsigned HTTP401. For this second 503 safeguard, stage an isolated reviewed 5093 canary with exact commit identity, verify separately, then (if safe) change only Nginx POST map with live health/negative smoke and rollback to 5092; leave GET, other API paths and full signed SaaS cutover untouched. 13/13 whole-platform signed release gate stays HOLD. Do not misrepresent synthetic/read-only probes as real logged-in Marks Save.
