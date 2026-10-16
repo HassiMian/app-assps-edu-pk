@@ -153,14 +153,14 @@ export default function MarksSheet() {
  setLoadingData(true)
  setMessage('')
  setMarksLoaded(false)
- setSavedMarks({})
  try {
  const studentsForClass = await loadRoster(selectedClass)
  if (request !== rosterFetchSeq.current) return
- setStudents(studentsForClass)
  if (!studentsForClass.length) {
+ setStudents([])
  setMarks({})
  setSavedMarks({})
+ setEditedMarks({})
  setMessage(`No authorized registered students found in Class ${selectedClass}. Check Admissions, academic class labels, or teacher class assignments.`)
  return
  }
@@ -175,6 +175,7 @@ export default function MarksSheet() {
  if (String(row.subject).trim() === selectedSubject && allowed.has(String(row.student_id)) && row.marks_obtained !== null && row.marks_obtained !== undefined && String(row.marks_obtained).trim() !== '' && Number.isFinite(Number(row.marks_obtained)))
  loaded[row.student_id] = row.marks_obtained
  }
+ setStudents(studentsForClass)
  setMarks(loaded)
  setSavedMarks(loaded)
  setEditedMarks({})
@@ -184,13 +185,11 @@ export default function MarksSheet() {
  setMessage(`Loaded ${studentsForClass.length} students for ${selectedExam.name || 'saved exam'}: ${countRecordedMarks(result.data.data,selectedSubject,studentsForClass)} marks saved, ${studentsForClass.length-countRecordedMarks(result.data.data,selectedSubject,studentsForClass)} pending. ${Object.keys(loaded).length ? 'Saved marks restored.' : 'No marks entered yet; you can start with any student tomorrow.'}`)
  } catch (err) {
  if (request !== rosterFetchSeq.current) return
- setMarks({})
- setSavedMarks({})
- setMessage(`Students loaded, but saved marks could not be verified: ${err.response?.data?.message || err.message}. Saving is disabled until you search again.`)
+ setMessage(`Saved marks could not be verified: ${err.response?.data?.message || err.message}. Previous records remain displayed; saving is disabled until you search again.`)
  }
  } catch (err) {
  if (request !== rosterFetchSeq.current) return
- setMessage(`Student search failed: ${err.response?.data?.message || err.message || 'Server unavailable'}`)
+ setMessage(`Student search failed: ${err.response?.data?.message || err.message || 'Server unavailable'}. Existing loaded students and marks were preserved.`)
  } finally {
  if (request === rosterFetchSeq.current) setLoadingData(false)
  }
