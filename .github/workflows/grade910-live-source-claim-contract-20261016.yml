@@ -6,6 +6,8 @@ on:
       - "ops/qbank/reconcile-grade910-held-original-candidates-20261016.py"
       - "ops/qbank/assps-grade910-held170-near-duplicate-screen-20261016.py"
       - "ops/qbank/verify-grade910-pdf-physical-page-bounds-20261016.mjs"
+      - "ops/qbank/verify-grade910-pdf-question-text-evidence-20261016.mjs"
+      - "ops/tests/grade910-pdf-question-text-evidence-20261016.test.mjs"
       - "ops/tests/grade910-physical-pdf-page-bounds-20261016.test.mjs"
       - "ops/tests/test_grade910_held170_near_duplicate_screen_20261016.py"
       - "ops/tests/test_grade910_170_original_reconciliation_20261016.py"
@@ -21,6 +23,8 @@ on:
       - "ops/qbank/reconcile-grade910-held-original-candidates-20261016.py"
       - "ops/qbank/assps-grade910-held170-near-duplicate-screen-20261016.py"
       - "ops/qbank/verify-grade910-pdf-physical-page-bounds-20261016.mjs"
+      - "ops/qbank/verify-grade910-pdf-question-text-evidence-20261016.mjs"
+      - "ops/tests/grade910-pdf-question-text-evidence-20261016.test.mjs"
       - "ops/tests/grade910-physical-pdf-page-bounds-20261016.test.mjs"
       - "ops/tests/test_grade910_held170_near_duplicate_screen_20261016.py"
       - "ops/tests/test_grade910_170_original_reconciliation_20261016.py"
@@ -41,5 +45,7 @@ jobs:
         run: python3 -m unittest discover -s ops/tests -p test_grade910_held170_near_duplicate_screen_20261016.py -v
       - name: Validate PDF page-bounds technical contract without production PDFs
         run: node --test ops/tests/grade910-physical-pdf-page-bounds-20261016.test.mjs
+      - name: Validate exact PDF text-layer matching without false faculty approvals
+        run: node --test ops/tests/grade910-pdf-question-text-evidence-20261016.test.mjs
       - name: Validate offline claim auditor syntax
         run: python3 -m py_compile ops/qbank/audit-live-grade910-source-claims-20261016.py ops/qbank/reconcile-grade910-held-original-candidates-20261016.py

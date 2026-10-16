@@ -14,7 +14,9 @@ ExecStartPost=/usr/bin/python3 /usr/local/libexec/assps-grade910-sourceclaims/re
 ExecStartPost=/usr/bin/python3 /usr/local/libexec/assps-grade910-sourceclaims/assps-grade910-held170-near-duplicate-screen-20261016.py --crosswalk /usr/local/libexec/assps-grade910-sourceclaims/originalReviewCrosswalk2581.json --seed-dir /usr/local/libexec/assps-grade910-sourceclaims/held-stems --held /var/lib/assps-grade910-sourceclaims/held170.json --out /var/lib/assps-grade910-sourceclaims/held170-near-duplicate.json
 Environment=ASSPS_CATALOG=/usr/local/libexec/assps-grade910-sourceclaims/officialSourceManifest.json
 ExecStartPost=/usr/bin/node /usr/local/libexec/assps-grade910-sourceclaims/verify-grade910-pdf-physical-page-bounds-20261016.mjs
-TimeoutStartSec=160
+Environment=ASSPS_MANIFEST=/usr/local/libexec/assps-grade910-sourceclaims/officialSourceManifest.json
+ExecStartPost=/usr/bin/node /usr/local/libexec/assps-grade910-sourceclaims/verify-grade910-pdf-question-text-evidence-20261016.mjs
+TimeoutStartSec=300
 ProtectSystem=strict
 ProtectHome=read-only
 ReadWritePaths=/var/lib/assps-grade910-sourceclaims

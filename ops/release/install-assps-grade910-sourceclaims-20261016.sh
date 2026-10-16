@@ -19,6 +19,8 @@ python3 -m py_compile "$REPO/ops/qbank/reconcile-grade910-held-original-candidat
 python3 -m py_compile "$REPO/ops/qbank/assps-grade910-held170-near-duplicate-screen-20261016.py"
 node --check "$REPO/ops/qbank/verify-grade910-pdf-physical-page-bounds-20261016.mjs"
 node --test "$REPO/ops/tests/grade910-physical-pdf-page-bounds-20261016.test.mjs"
+node --check "$REPO/ops/qbank/verify-grade910-pdf-question-text-evidence-20261016.mjs"
+node --test "$REPO/ops/tests/grade910-pdf-question-text-evidence-20261016.test.mjs"
 python3 -m unittest discover -s "$REPO/ops/tests" -p "$TEST" -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_170_original_reconciliation_20261016.py -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_held170_near_duplicate_screen_20261016.py -q
@@ -33,6 +35,7 @@ install -m 0644 "$SRC" "$DEST/$(basename "$SRC")"
 install -m 0644 "$REPO/ops/qbank/reconcile-grade910-held-original-candidates-20261016.py" "$DEST/reconcile-grade910-held-original-candidates-20261016.py"
 install -m 0644 "$REPO/ops/qbank/assps-grade910-held170-near-duplicate-screen-20261016.py" "$DEST/assps-grade910-held170-near-duplicate-screen-20261016.py"
 install -m 0644 "$REPO/ops/qbank/verify-grade910-pdf-physical-page-bounds-20261016.mjs" "$DEST/verify-grade910-pdf-physical-page-bounds-20261016.mjs"
+install -m 0644 "$REPO/ops/qbank/verify-grade910-pdf-question-text-evidence-20261016.mjs" "$DEST/verify-grade910-pdf-question-text-evidence-20261016.mjs"
 mkdir -p "$DEST/held-stems"
 chmod 700 "$DEST/held-stems"
 for fn in biology9Chapter1TopicDrafts.json biology9TopicResearchDrafts.json english9CompetencyOriginals2026.json mathematics10OriginalReasoningBatch2026.json physics10OriginalApplicationBatch2026.json;do
@@ -72,6 +75,14 @@ assert v['summary']['originalAuthorPageClaims']==998
 assert v['summary']['authorPageClaimsWithinActualPdfRange']==998
 assert v['summary']['authorPageClaimsOutsideActualPdfRange']==0
 assert v['summary']['independentlyVerifiedQuestionPages']==0
+t=json.loads(Path('/var/lib/assps-grade910-sourceclaims/question-page-textlayer.json').read_text())
+assert t['summary']['claimsChecked']==998
+assert t['summary']['distinctPdfPagesChecked']==162
+assert t['summary']['independentlyVerifiedQuestionPages']==0
+assert t['summary']['genuineFacultyApproved']==0
+assert t['summary']['newPublishedQuestions']==0
+assert t['summary']['productionDatabaseWrites']==0
+assert sum(t['summary']['categories'].values())==998
 print('ASSPS_SOURCE_CLAIMS_WEEKLY_INSTALLED_FIRST_RUN_PASS',s['rows'],
       s['cachedPdfHashesMatchingManifest'],s['authorPageClaimsRangePlausibleOnly'])
 PY
