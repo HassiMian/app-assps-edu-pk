@@ -1,0 +1,21 @@
+name: ASSPS Core Provisional Local Backup Inspection
+on:
+  push:
+    branches:
+      - 'integration/core-autonomous-readiness-*'
+    paths:
+      - 'ops/release/backup-readiness/**'
+      - '.github/workflows/core-local-backup-readiness-20261016.yml'
+  pull_request:
+    paths:
+      - 'ops/release/backup-readiness/**'
+      - '.github/workflows/core-local-backup-readiness-20261016.yml'
+jobs:
+  hermetic-inspection:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify fail-closed safety without school data
+        run: python3 -m unittest discover -s ops/release/backup-readiness -p 'test_fresh_local_acl_snapshot_20261016.py' -v
