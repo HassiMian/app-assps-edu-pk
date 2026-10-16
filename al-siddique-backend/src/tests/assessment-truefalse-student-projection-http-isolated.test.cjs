@@ -14,6 +14,9 @@ const source={title:'Synthetic True/False',sections:[{nodes:[
   {kind:'TRUE_FALSE',statement:'Ice is hot.',hasIndicatorBox:true,expected_answer:false},
   {kind:'TRUE_FALSE',statement:'Water is wet.',hasIndicatorBox:true,'expected-answer':true},
   {kind:'MCQ',prompt:'Choose a planet.',answerLines:3,options:[{id:'A',text:'Mars',isCorrect:true},{id:'B',text:'Rock'}]},
+  {kind:'NUMERICAL',prompt:'Show your calculation.',answerLines:4,
+    structuredData:{formula:'F=ma',finalAnswer:'PRIVATE_NUMERICAL_RESULT'},
+    markingRubric:['PRIVATE_STAFF_RUBRIC'],options:[{text:'Given'}]},
  ]}]}
 const roster={context:{school_id:1,className:'Seven',section:'Blue'},students:[{studentId:'101',displayName:'Synthetic Student',rollNo:'05',section:'Blue'}]}
 const printRecord={print_job_id:'job-synthetic-1',personalized:true,
@@ -85,10 +88,18 @@ test('HTTP student projection suppresses canonical true/false keys but staff pri
  assert.deepEqual(nodes[3].options.map(x=>x.text),['Mars','Rock'])
  assert.equal(nodes[3].answerLines,3)
  assert.equal(Object.hasOwn(nodes[3].options[0],'isCorrect'),false)
+ assert.equal(nodes[4].prompt,'Show your calculation.')
+ assert.equal(nodes[4].answerLines,4)
+ assert.equal(nodes[4].structuredData.formula,'F=ma')
+ assert.equal(Object.hasOwn(nodes[4].structuredData,'finalAnswer'),false,'numeric final answer leaked by student HTTP')
+ assert.equal(Object.hasOwn(nodes[4],'markingRubric'),false,'marking rubric leaked by student HTTP')
+ assert.equal(JSON.stringify(student.json).includes('PRIVATE_'),false,'private answer or rubric bytes leaked by student HTTP')
  assert.equal(student.json.data.personalization.student.rollNumber,'05')
  const staff=await get('/print-jobs/job-synthetic-1/answer-key','school1teacher')
  assert.equal(staff.status,200,JSON.stringify(staff.json))
  assert.equal(staff.json.data.paper.sections[0].nodes[0].expectedAnswer,true)
+ assert.equal(staff.json.data.paper.sections[0].nodes[4].structuredData.finalAnswer,'PRIVATE_NUMERICAL_RESULT')
+ assert.deepEqual(staff.json.data.paper.sections[0].nodes[4].markingRubric,['PRIVATE_STAFF_RUBRIC'])
  assert.equal(source.sections[0].nodes[0].expectedAnswer,true,'frozen original release mutated')
  const otherSchool=await get(suffix,'school2teacher')
  assert.equal(otherSchool.status,404,'peer-school must not be able to read same print-job ID')
