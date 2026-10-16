@@ -1,0 +1,23 @@
+[Unit]
+Description=ASSPS autonomous read-only health, saved marks and acceptance verifier
+After=network-online.target postgresql.service nginx.service
+Wants=network-online.target
+ConditionPathExists=/etc/nginx/sites-enabled/apex-app-ssl
+
+[Service]
+Type=oneshot
+# systemd defaults to root; explicit User= root triggers unwanted UID-drop restriction.
+UMask=0077
+StateDirectory=assps-technical-self-verification
+ExecStart=/usr/bin/python3 /usr/local/libexec/assps-technical-self-verification/assps-technical-self-verification-20261016.py --receipt /var/lib/assps-technical-self-verification/latest.json
+TimeoutStartSec=85
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/var/lib/assps-technical-self-verification
+PrivateTmp=yes
+NoNewPrivileges=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6

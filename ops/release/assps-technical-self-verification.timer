@@ -1,0 +1,12 @@
+[Unit]
+Description=ASSPS unattended hourly operational and marks-integrity checks
+
+[Timer]
+OnCalendar=hourly
+RandomizedDelaySec=3m
+AccuracySec=1m
+Persistent=true
+Unit=assps-technical-self-verification.service
+
+[Install]
+WantedBy=timers.target
