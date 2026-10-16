@@ -1,0 +1,49 @@
+{
+  "mission": "ASSPS class/teacher timetable \u2192 SaaS Core \u2192 APEX Connect \u2192 Parent Super App",
+  "snapshot_date": "2026-10-16",
+  "release_decision": "HOLD",
+  "allow_production_cutover": false,
+  "phase_status": [
+    {
+      "phase": 1,
+      "name": "production read-only audit, archive and parity",
+      "status": "PASS",
+      "evidence": "58 timetable rows, source SHA 56/56, prechange parity true, recent full dump decompress pass"
+    },
+    {
+      "phase": 2,
+      "name": "official bells and fixed junior incharges",
+      "status": "CODE_COMPLETE",
+      "evidence": "Mon\u2013Thu+Sat 08:30\u201313:30, Friday 08:30\u201312:30 without break, fixed teacher labels"
+    },
+    {
+      "phase": 3,
+      "name": "parent- and student-owned secure timetable APIs",
+      "status": "READONLY_INTEGRATION_PASS",
+      "evidence": "11 isolated tests pass plus 1 explicitly invoked real DB read-only test pass, two distinct parents denied cross access"
+    },
+    {
+      "phase": 4,
+      "name": "SaaS and Connect frontend QA",
+      "status": "ISOLATED_BUILD_PASS",
+      "evidence": "Vite build 3.54s, Next full webpack build + TS +103 static pages, unauthenticated preview redirects verified"
+    },
+    {
+      "phase": 5,
+      "name": "live production release",
+      "status": "HOLD",
+      "evidence": "No source or PM2 production changes; gated by real auth, staff approval, full backup restore, canonical candidate/release review"
+    }
+  ],
+  "irreducible_gates": [
+    "Full fresh permitted backup and isolated restore/rollback rehearsal",
+    "Real authorized parent/teacher authentication and browser E2E; exact linked child and peer-school denies",
+    "Staff identity/teaching permission authorizations; 13 reference-only mapping proposals not privilege grant",
+    "Junior subject schedules and Class Eight vs Pre-Nine unresolved; Mover primary incharge not designated",
+    "Forward-port reviewed patch onto current canonical Core and Connect production descendants",
+    "Controlled blue-green pilot, actual save/reopen/parent display and zero-vs-blank marks regression"
+  ],
+  "protected_existing_records": "unchanged; latest table-level parity compared to 16-Oct 58-row baseline",
+  "official_policy": "ASSPS-2026-10-16-V1",
+  "build_dependency_note": "Connect production webpack build verified; isolated Turbopack symlink issue avoided without touching production; Apex CSS converted to equivalent global stylesheet"
+}

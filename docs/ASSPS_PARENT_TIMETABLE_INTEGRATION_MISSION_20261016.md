@@ -54,3 +54,13 @@ Connect patch is included so the isolated Connect source can be forward-ported o
   ASSPS_DB_INTEGRATION=1 NODE_PATH=/var/www/apex-backend/node_modules node --test al-siddique-backend/src/tests/family-timetable-db-readonly-20261016.test.cjs
 - Protected employee_teaching_subject_evidence table rejected current DB role with SQLSTATE 42501. No privilege bypass. Read-only directory found candidate matches for all 13 null teacher IDs (Aqsa, Maryam, Nazra); these are only candidates and grant NO access or approval.
 - Existing full dump decompression via pg_restore to /dev/null PASS (not a restore rehearsal). Fresh permissioned dump and real staff authorization still block release.
+
+
+## Final continuation checkpoint (16 Oct)
+- Core Vite full production frontend build PASSED in 3.54 seconds.
+- Connect Next.js full npm build with webpack PASSED, all 103 static pages and TypeScript PASSED; committed-source build provenance points to Connect commit 45a8e473.
+- Staged Next preview started on localhost, /login HTTP 200, unauthenticated /parent and /parent/reports redirect HTTP 302. No real parent session used.
+- Original 58 timetable source rows, 0 teacher_class_assignments and 0 classes rows match original prechange JSON byte-for-byte; no production DB mutation.
+- Private JSON staff alias proposal generated: 13 missing IDs, each has one active directory candidate across three employee IDs, all reference-only and NOT authorized; no permission granted.
+- Full Connect feature + CSS build fix are portable as 2 email patches in docs/ASSPS_CONNECT_PARENT_TIMETABLE_PATCH_20261016.patch, regenerated to include both commits.
+- Machine-readable release decision is documented in docs/ASSPS_PARENT_TIMETABLE_RELEASE_GATES_20261016.json; release_decision HOLD until all remaining hard gates are verified.

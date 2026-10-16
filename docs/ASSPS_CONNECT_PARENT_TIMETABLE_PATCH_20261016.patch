@@ -1,7 +1,7 @@
 From 65f931d886fc7c93f5e2687e3d7ebf0fc5784226 Mon Sep 17 00:00:00 2001
 From: root <root@srv1769723.hstgr.cloud>
 Date: Fri, 16 Oct 2026 04:33:13 +0000
-Subject: [PATCH] feat(connect): child-linked parent timetable display
+Subject: [PATCH 1/2] feat(connect): child-linked parent timetable display
 
 ---
  ...ENT_TIMETABLE_RELEASE_CONTRACT_20261016.md |  9 +++
@@ -142,6 +142,2877 @@ index 0000000..bdb900e
 +  </div>}
 + </section>;
 +}
+-- 
+2.43.0
+
+
+From 45a8e473a83c0b9cf4d87c98889387ad2701b60a Mon Sep 17 00:00:00 2001
+From: root <root@srv1769723.hstgr.cloud>
+Date: Fri, 16 Oct 2026 05:10:38 +0000
+Subject: [PATCH 2/2] fix(connect): preserve Apex global selectors in
+ production CSS build
+
+---
+ .../apex/{apex.module.css => apex.global.css} | 884 +++++++++---------
+ src/app/apex/page.tsx                         |   2 +-
+ 2 files changed, 443 insertions(+), 443 deletions(-)
+ rename src/app/apex/{apex.module.css => apex.global.css} (76%)
+
+diff --git a/src/app/apex/apex.module.css b/src/app/apex/apex.global.css
+similarity index 76%
+rename from src/app/apex/apex.module.css
+rename to src/app/apex/apex.global.css
+index cfb4973..bc2f6ac 100644
+--- a/src/app/apex/apex.module.css
++++ b/src/app/apex/apex.global.css
+@@ -1,6 +1,6 @@
+ @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;800&display=swap');
+ 
+-:global(:root) {
++:root {
+   --apex-void: #020510;
+   --apex-navy: #020510;
+   --apex-navy-2: #030712;
+@@ -17,18 +17,18 @@
+   --mono-font: 'JetBrains Mono', monospace;
+ }
+ 
+-:global(.apex-page),
+-:global(.apex-page *) {
++.apex-page,
++.apex-page * {
+   box-sizing: border-box;
+ }
+ 
+-:global(.apex-portal-page) {
++.apex-portal-page {
+   background: var(--apex-void);
+   color: var(--apex-white);
+   min-height: 100dvh;
+ }
+ 
+-:global(.apex-page) {
++.apex-page {
+   background: transparent;
+   color: var(--apex-white);
+   overflow-x: hidden;
+@@ -39,21 +39,21 @@
+   -moz-osx-font-smoothing: grayscale;
+ }
+ 
+-:global(.apex-page img),
+-:global(.apex-page svg),
+-:global(.apex-page canvas),
+-:global(.apex-page video) {
++.apex-page img,
++.apex-page svg,
++.apex-page canvas,
++.apex-page video {
+   max-width: 100%;
+ }
+ 
+-:global(.apex-page section),
+-:global(.apex-page article),
+-:global(.apex-page div) {
++.apex-page section,
++.apex-page article,
++.apex-page div {
+   min-width: 0;
+ }
+ 
+ /* Background canvas particles */
+-:global(.apex-particles-canvas) {
++.apex-particles-canvas {
+   position: fixed;
+   inset: 0;
+   width: 100vw;
+@@ -63,7 +63,7 @@
+ }
+ 
+ /* Header Navigation (300% Brand Visibility Lockup) */
+-:global(.apex-nav) {
++.apex-nav {
+   position: fixed;
+   z-index: 50;
+   top: 0;
+@@ -79,25 +79,25 @@
+   border-bottom: 1px solid var(--apex-line);
+ }
+ 
+-:global(.apex-brand) {
++.apex-brand {
+   text-decoration: none;
+   display: block;
+ }
+ 
+-:global(.header-brand-lockup) {
++.header-brand-lockup {
+   display: flex;
+   align-items: center;
+   gap: 18px;
+ }
+ 
+-:global(.apex-nav-logo) {
++.apex-nav-logo {
+   height: 56px !important;
+   width: auto;
+   display: block;
+   filter: drop-shadow(0 0 12px rgba(201, 168, 76, 0.2));
+ }
+ 
+-:global(.header-brand-labels) {
++.header-brand-labels {
+   display: flex;
+   flex-direction: column;
+   color: white;
+@@ -105,7 +105,7 @@
+   padding-left: 18px;
+ }
+ 
+-:global(.h-title) {
++.h-title {
+   font-size: 20px;
+   font-weight: 800;
+   letter-spacing: 0.15em;
+@@ -113,7 +113,7 @@
+   color: var(--apex-white);
+ }
+ 
+-:global(.h-sub) {
++.h-sub {
+   font-size: 10px;
+   font-weight: 700;
+   text-transform: uppercase;
+@@ -122,7 +122,7 @@
+   margin-top: 3px;
+ }
+ 
+-:global(.h-tagline) {
++.h-tagline {
+   font-size: 9px;
+   font-weight: 500;
+   letter-spacing: 0.06em;
+@@ -131,12 +131,12 @@
+   text-transform: uppercase;
+ }
+ 
+-:global(.apex-nav-links) {
++.apex-nav-links {
+   display: flex;
+   gap: 32px;
+ }
+ 
+-:global(.apex-nav-links a) {
++.apex-nav-links a {
+   color: rgba(255, 255, 255, 0.7);
+   text-decoration: none;
+   font-size: 13.5px;
+@@ -146,12 +146,12 @@
+   transition: color 0.3s ease;
+ }
+ 
+-:global(.apex-nav-links a:hover) {
++.apex-nav-links a:hover {
+   color: var(--apex-gold);
+ }
+ 
+ /* Cinematic Hero Intro */
+-:global(.apex-hero-cinematic) {
++.apex-hero-cinematic {
+   min-height: 100vh;
+   position: relative;
+   overflow: hidden;
+@@ -160,14 +160,14 @@
+   justify-content: center;
+ }
+ 
+-:global(.chaos-container) {
++.chaos-container {
+   position: absolute;
+   inset: 0;
+   z-index: 1;
+   pointer-events: none;
+ }
+ 
+-:global(.chaos-item) {
++.chaos-item {
+   position: absolute;
+   padding: 14px 24px;
+   border-radius: 14px;
+@@ -184,13 +184,13 @@
+   text-transform: uppercase;
+ }
+ 
+-:global(.chaos-item.type-records) { border-color: rgba(201, 168, 76, 0.4); color: var(--apex-gold); }
+-:global(.chaos-item.type-exams) { border-color: rgba(201, 168, 76, 0.4); color: var(--apex-gold); }
+-:global(.chaos-item.type-forge) { border-color: rgba(201, 168, 76, 0.5); background: rgba(201, 168, 76, 0.06); color: var(--apex-gold); }
++.chaos-item.type-records { border-color: rgba(201, 168, 76, 0.4); color: var(--apex-gold); }
++.chaos-item.type-exams { border-color: rgba(201, 168, 76, 0.4); color: var(--apex-gold); }
++.chaos-item.type-forge { border-color: rgba(201, 168, 76, 0.5); background: rgba(201, 168, 76, 0.06); color: var(--apex-gold); }
+ 
+ /* Overlays */
+-:global(.chaos-text-overlay),
+-:global(.disconnected-text-overlay) {
++.chaos-text-overlay,
++.disconnected-text-overlay {
+   position: absolute;
+   z-index: 2;
+   inset: 0;
+@@ -203,8 +203,8 @@
+   pointer-events: none;
+ }
+ 
+-:global(.chaos-text-overlay h1),
+-:global(.disconnected-text-overlay h2) {
++.chaos-text-overlay h1,
++.disconnected-text-overlay h2 {
+   font-size: clamp(32px, 5.5vw, 68px);
+   line-height: 1.1;
+   font-weight: 800;
+@@ -213,7 +213,7 @@
+ }
+ 
+ /* Scene 3 central emerge logo */
+-:global(.apex-logo-emerge) {
++.apex-logo-emerge {
+   position: absolute;
+   z-index: 3;
+   display: flex;
+@@ -224,7 +224,7 @@
+   scale: 0.75;
+ }
+ 
+-:global(.emerge-brand-svg) {
++.emerge-brand-svg {
+   width: min(520px, 80vw);
+   height: auto;
+   display: block;
+@@ -232,7 +232,7 @@
+   filter: drop-shadow(0 0 80px rgba(201, 168, 76, 0.28));
+ }
+ 
+-:global(.apex-hero-final-actions) {
++.apex-hero-final-actions {
+   display: flex;
+   gap: 20px;
+   opacity: 0;
+@@ -240,7 +240,7 @@
+ }
+ 
+ /* Premium Buttons */
+-:global(.apex-btn) {
++.apex-btn {
+   padding: 16px 32px;
+   border-radius: 12px;
+   text-decoration: none;
+@@ -256,32 +256,32 @@
+   text-align: center;
+ }
+ 
+-:global(.apex-btn.primary) {
++.apex-btn.primary {
+   background: linear-gradient(135deg, #dfc067 0%, #c9a84c 100%);
+   color: #040b14;
+   box-shadow: 0 8px 30px rgba(201, 168, 76, 0.35);
+ }
+ 
+-:global(.apex-btn.primary:hover) {
++.apex-btn.primary:hover {
+   transform: translateY(-2px);
+   box-shadow: 0 12px 35px rgba(201, 168, 76, 0.5);
+ }
+ 
+-:global(.apex-btn.ghost) {
++.apex-btn.ghost {
+   border: 1px solid rgba(255, 255, 255, 0.16);
+   color: var(--apex-white);
+   background: rgba(255, 255, 255, 0.02);
+   backdrop-filter: blur(8px);
+ }
+ 
+-:global(.apex-btn.ghost:hover) {
++.apex-btn.ghost:hover {
+   background: rgba(255, 255, 255, 0.08);
+   border-color: rgba(255, 255, 255, 0.3);
+   transform: translateY(-2px);
+ }
+ 
+ /* Premium Product Split Sections (45/55 layout) */
+-:global(.apex-story) {
++.apex-story {
+   min-height: 100vh;
+   position: relative;
+   display: flex;
+@@ -293,11 +293,11 @@
+   overflow: hidden;
+ }
+ 
+-:global(.apex-story.layout-reverse) {
++.apex-story.layout-reverse {
+   flex-direction: row-reverse;
+ }
+ 
+-:global(.story-panel) {
++.story-panel {
+   width: 45%;
+   flex-shrink: 0;
+   position: relative;
+@@ -305,7 +305,7 @@
+   text-align: left;
+ }
+ 
+-:global(.apex-kicker) {
++.apex-kicker {
+   color: var(--apex-muted);
+   font-family: var(--mono-font);
+   font-size: 12px;
+@@ -318,14 +318,14 @@
+   padding-left: 12px;
+ }
+ 
+-:global(.story-panel h2) {
++.story-panel h2 {
+   font-size: clamp(36px, 4vw, 56px);
+   line-height: 1.1;
+   font-weight: 800;
+   margin: 0 0 24px;
+ }
+ 
+-:global(.story-panel .lead-p) {
++.story-panel .lead-p {
+   color: rgba(255, 255, 255, 0.7);
+   font-size: 18px;
+   line-height: 1.65;
+@@ -334,7 +334,7 @@
+ }
+ 
+ /* Feature Grid for split layout */
+-:global(.feature-grid) {
++.feature-grid {
+   border-top: 1px solid var(--apex-line);
+   padding-top: 28px;
+   display: flex;
+@@ -342,7 +342,7 @@
+   gap: 24px;
+ }
+ 
+-:global(.feature-grid .module-group h4) {
++.feature-grid .module-group h4 {
+   color: var(--apex-gold);
+   font-size: 13px;
+   font-weight: 800;
+@@ -351,7 +351,7 @@
+   letter-spacing: 0.08em;
+ }
+ 
+-:global(.feature-grid .module-group p) {
++.feature-grid .module-group p {
+   color: var(--apex-muted);
+   font-size: 14.5px;
+   line-height: 1.5;
+@@ -359,7 +359,7 @@
+ }
+ 
+ /* Primary Visual container (55% width) */
+-:global(.visual-block) {
++.visual-block {
+   width: 55%;
+   position: relative;
+   z-index: 2;
+@@ -374,7 +374,7 @@
+   100% { transform: translate(-50%, -50%) rotate(360deg) scale(1); }
+ }
+ 
+-:global(.visual-glow-bg) {
++.visual-glow-bg {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+@@ -392,7 +392,7 @@
+ }
+ 
+ /* Ultra-Premium Borderless Bento Glass */
+-:global(.premium-mock-window) {
++.premium-mock-window {
+   width: 100%;
+   aspect-ratio: 16 / 10;
+   border-radius: 20px;
+@@ -409,12 +409,12 @@
+   z-index: 10;
+   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s ease;
+ }
+-:global(.premium-mock-window:hover) {
++.premium-mock-window:hover {
+   border-color: rgba(255, 255, 255, 0.15);
+   transform: translateY(-4px);
+ }
+ 
+-:global(.window-header) {
++.window-header {
+   height: 42px;
+   background: rgba(0, 0, 0, 0.25);
+   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+@@ -424,22 +424,22 @@
+   padding: 0 16px;
+ }
+ 
+-:global(.traffic-lights) {
++.traffic-lights {
+   display: flex;
+   gap: 7px;
+ }
+ 
+-:global(.tl) {
++.tl {
+   width: 11px;
+   height: 11px;
+   border-radius: 50%;
+ }
+ 
+-:global(.tl.close) { background: #ff5f56; }
+-:global(.tl.minimize) { background: #ffbd2e; }
+-:global(.tl.maximize) { background: #27c93f; }
++.tl.close { background: #ff5f56; }
++.tl.minimize { background: #ffbd2e; }
++.tl.maximize { background: #27c93f; }
+ 
+-:global(.window-title) {
++.window-title {
+   display: flex;
+   align-items: center;
+   gap: 8px;
+@@ -449,13 +449,13 @@
+   letter-spacing: 0.03em;
+ }
+ 
+-:global(.window-actions) {
++.window-actions {
+   display: flex;
+   gap: 14px;
+   color: rgba(255, 255, 255, 0.4);
+ }
+ 
+-:global(.window-body) {
++.window-body {
+   flex: 1;
+   position: relative;
+   background: #000000;
+@@ -463,20 +463,20 @@
+ }
+ 
+ /* Screenshot Zoom wrapper (Cinematic motion Pan & Zoom Fallback) */
+-:global(.motion-scene-engine) {
++.motion-scene-engine {
+   width: 100%;
+   height: 100%;
+   position: relative;
+ }
+ 
+-:global(.screenshot-zoom-wrapper) {
++.screenshot-zoom-wrapper {
+   width: 100%;
+   height: 100%;
+   overflow: hidden;
+   transform-origin: center center;
+ }
+ 
+-:global(.screenshot-base-img) {
++.screenshot-base-img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+@@ -484,7 +484,7 @@
+   display: block;
+ }
+ 
+-:global(.screenshot-glare) {
++.screenshot-glare {
+   position: absolute;
+   inset: 0;
+   background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 50%, transparent 100%);
+@@ -493,7 +493,7 @@
+ }
+ 
+ /* Layered Glass information panels overlaying screenshots */
+-:global(.floating-glass-panel) {
++.floating-glass-panel {
+   position: absolute;
+   z-index: 4;
+   background: rgba(9, 9, 11, 0.85);
+@@ -510,27 +510,27 @@
+   max-width: 290px;
+   transition: all 0.3s ease;
+ }
+-:global(.floating-glass-panel:hover) {
++.floating-glass-panel:hover {
+   border-color: rgba(201, 168, 76, 0.4);
+ }
+ 
+-:global(.floating-glass-panel.panel-records) {
++.floating-glass-panel.panel-records {
+   left: 28px;
+   bottom: 28px;
+ }
+ 
+-:global(.floating-glass-panel.panel-exams) {
++.floating-glass-panel.panel-exams {
+   right: 28px;
+   bottom: 28px;
+ }
+ 
+-:global(.floating-glass-panel.panel-fees) {
++.floating-glass-panel.panel-fees {
+   left: 28px;
+   top: 28px;
+   border-color: rgba(255, 255, 255, 0.12);
+ }
+ 
+-:global(.floating-glass-panel.panel-mobile) {
++.floating-glass-panel.panel-mobile {
+   left: 50%;
+   bottom: 40px;
+   transform: translateX(-50%);
+@@ -538,18 +538,18 @@
+   max-width: 250px;
+ }
+ 
+-:global(.floating-glass-panel.panel-command) {
++.floating-glass-panel.panel-command {
+   right: 28px;
+   top: 28px;
+ }
+ 
+-:global(.glow-icon) {
++.glow-icon {
+   color: var(--apex-gold);
+   filter: drop-shadow(0 0 8px rgba(201, 168, 76, 0.6));
+   flex-shrink: 0;
+ }
+ 
+-:global(.panel-desc h5) {
++.panel-desc h5 {
+   color: white;
+   font-size: 12.5px;
+   font-weight: 700;
+@@ -557,7 +557,7 @@
+   letter-spacing: 0.02em;
+ }
+ 
+-:global(.panel-desc p) {
++.panel-desc p {
+   color: rgba(255, 255, 255, 0.55);
+   font-size: 11px;
+   line-height: 1.4;
+@@ -565,7 +565,7 @@
+ }
+ 
+ /* Mapped SVG connection streams */
+-:global(.svg-data-lines) {
++.svg-data-lines {
+   position: absolute;
+   inset: 0;
+   width: 100%;
+@@ -578,11 +578,11 @@
+   to { stroke-dashoffset: -100; }
+ }
+ 
+-:global(.flow-dash-path-1), :global(.challan-path-1) {
++.flow-dash-path-1, .challan-path-1 {
+   animation: strokeFlow 8s linear infinite;
+ }
+ 
+-:global(.flow-dash-path-2), :global(.challan-path-2) {
++.flow-dash-path-2, .challan-path-2 {
+   stroke-dasharray: 6,4;
+   animation: strokeFlow 12s linear infinite;
+ }
+@@ -591,7 +591,7 @@
+    FEES & FINANCE 8-STEP CHALLAN REVEAL TIMELINE
+    ======================================================== */
+ 
+-:global(.challan-revealer-section) {
++.challan-revealer-section {
+   max-width: 680px;
+   min-height: 480px;
+   margin: 20px auto 0;
+@@ -600,13 +600,13 @@
+   justify-content: center;
+ }
+ 
+-:global(.premium-challan-wrapper) {
++.premium-challan-wrapper {
+   width: 100%;
+   position: relative;
+   z-index: 10;
+ }
+ 
+-:global(.ledger-flow-lines) {
++.ledger-flow-lines {
+   position: absolute;
+   z-index: 1;
+   inset: -60px;
+@@ -616,7 +616,7 @@
+ }
+ 
+ /* Timeline glowing label cards */
+-:global(.challan-timeline-label) {
++.challan-timeline-label {
+   position: absolute;
+   z-index: 30;
+   background: rgba(13, 33, 56, 0.94);
+@@ -637,24 +637,24 @@
+   opacity: 0;
+ }
+ 
+-:global(.challan-timeline-label.paid) {
++.challan-timeline-label.paid {
+   background: rgba(39, 201, 63, 0.15);
+   border: 2px solid rgba(39, 201, 63, 0.5);
+   color: #27c93f;
+   box-shadow: 0 0 30px rgba(39, 201, 63, 0.15);
+ }
+ 
+-:global(.label-monthly-fee) {
++.label-monthly-fee {
+   left: -90px;
+   top: 50px;
+ }
+ 
+-:global(.label-arrears) {
++.label-arrears {
+   right: -90px;
+   top: 130px;
+ }
+ 
+-:global(.label-paid-badge) {
++.label-paid-badge {
+   left: 50%;
+   top: 50%;
+   transform: translate(-50%, -50%);
+@@ -663,7 +663,7 @@
+   letter-spacing: 0.1em;
+ }
+ 
+-:global(.label-balance) {
++.label-balance {
+   left: -40px;
+   bottom: 50px;
+ }
+@@ -672,7 +672,7 @@
+    APEX CONNECT PHONE SIDEBAR SEQUENCE
+    ======================================================== */
+ 
+-:global(.phone-sequence-showcase) {
++.phone-sequence-showcase {
+   max-width: 980px;
+   display: flex;
+   align-items: center;
+@@ -681,35 +681,35 @@
+   margin-top: 24px;
+ }
+ 
+-:global(.phone-sequence-showcase .premium-mobile-frame) {
++.phone-sequence-showcase .premium-mobile-frame {
+   width: 290px;
+   height: 590px;
+   flex-shrink: 0;
+   z-index: 5;
+ }
+ 
+-:global(.phone-sequence-showcase .mobile-screen) {
++.phone-sequence-showcase .mobile-screen {
+   background: #000000;
+ }
+ 
+-:global(.phone-screen-labels-left),
+-:global(.phone-screen-labels-right) {
++.phone-screen-labels-left,
++.phone-screen-labels-right {
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+   flex: 1;
+ }
+ 
+-:global(.phone-screen-labels-left) {
++.phone-screen-labels-left {
+   text-align: right;
+ }
+ 
+-:global(.phone-screen-labels-right) {
++.phone-screen-labels-right {
+   text-align: left;
+ }
+ 
+ /* Indicators */
+-:global(.app-screen-dot-indicator) {
++.app-screen-dot-indicator {
+   opacity: 0.28;
+   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+   padding: 12px 18px;
+@@ -718,34 +718,34 @@
+   border-right: 2px solid transparent;
+ }
+ 
+-:global(.phone-screen-labels-left .app-screen-dot-indicator) {
++.phone-screen-labels-left .app-screen-dot-indicator {
+   border-right: 2px solid rgba(255, 255, 255, 0.05);
+ }
+ 
+-:global(.phone-screen-labels-right .app-screen-dot-indicator) {
++.phone-screen-labels-right .app-screen-dot-indicator {
+   border-left: 2px solid rgba(255, 255, 255, 0.05);
+ }
+ 
+-:global(.phone-screen-labels-left .app-screen-dot-indicator.active) {
++.phone-screen-labels-left .app-screen-dot-indicator.active {
+   opacity: 1;
+   border-right: 2px solid var(--apex-gold);
+   background: linear-gradient(to left, rgba(201, 168, 76, 0.06), transparent);
+ }
+ 
+-:global(.phone-screen-labels-right .app-screen-dot-indicator.active) {
++.phone-screen-labels-right .app-screen-dot-indicator.active {
+   opacity: 1;
+   border-left: 2px solid var(--apex-gold);
+   background: linear-gradient(to right, rgba(201, 168, 76, 0.06), transparent);
+ }
+ 
+-:global(.app-screen-dot-indicator h5) {
++.app-screen-dot-indicator h5 {
+   color: var(--apex-white);
+   font-size: 15px;
+   font-weight: 700;
+   margin: 0 0 4px;
+ }
+ 
+-:global(.app-screen-dot-indicator p) {
++.app-screen-dot-indicator p {
+   color: var(--apex-muted);
+   font-size: 12.5px;
+   line-height: 1.4;
+@@ -753,14 +753,14 @@
+ }
+ 
+ /* Command center */
+-:global(.apex-story-command) {
++.apex-story-command {
+   background: #000000;
+ }
+ 
+ 
+ 
+ /* Premium Mobile hardware bezels */
+-:global(.premium-mobile-frame) {
++.premium-mobile-frame {
+   border-radius: 46px;
+   background: #111827;
+   padding: 10px;
+@@ -771,7 +771,7 @@
+   position: relative;
+ }
+ 
+-:global(.mobile-notch) {
++.mobile-notch {
+   position: absolute;
+   top: 0;
+   left: 50%;
+@@ -784,7 +784,7 @@
+   z-index: 10;
+ }
+ 
+-:global(.mobile-home-indicator) {
++.mobile-home-indicator {
+   position: absolute;
+   bottom: 8px;
+   left: 50%;
+@@ -796,7 +796,7 @@
+   z-index: 5;
+ }
+ 
+-:global(.mobile-header) {
++.mobile-header {
+   padding: 24px 16px 10px;
+   display: flex;
+   justify-content: space-between;
+@@ -806,7 +806,7 @@
+   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+ }
+ 
+-:global(.mobile-hardware-bezel) {
++.mobile-hardware-bezel {
+   border-radius: 36px;
+   height: 100%;
+   position: relative;
+@@ -815,12 +815,12 @@
+ }
+ 
+ /* Portals section (Dark contrast) */
+-:global(.apex-portals) {
++.apex-portals {
+   background: linear-gradient(to bottom, #071525, #0a1829);
+   border-top: 1px solid var(--apex-line);
+ }
+ 
+-:global(.portal-grid) {
++.portal-grid {
+   max-width: 1180px;
+   margin: auto;
+   display: grid;
+@@ -829,7 +829,7 @@
+ }
+ 
+ /* Glassmorphic cards */
+-:global(.premium-card) {
++.premium-card {
+   background: linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0%, rgba(255, 255, 255, 0.005) 100%);
+   backdrop-filter: blur(20px);
+   border: 1px solid var(--apex-glass-border);
+@@ -842,14 +842,14 @@
+   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+ }
+ 
+-:global(.card-glare) {
++.card-glare {
+   position: absolute;
+   inset: 0;
+   background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.06) 0%, transparent 60%);
+   pointer-events: none;
+ }
+ 
+-:global(.portal-card) {
++.portal-card {
+   text-decoration: none;
+   padding: 36px 28px;
+   display: flex;
+@@ -857,7 +857,7 @@
+   min-height: 250px;
+ }
+ 
+-:global(.portal-card:hover) {
++.portal-card:hover {
+   transform: translateY(-6px);
+   border-color: rgba(201, 168, 76, 0.38);
+   box-shadow: 
+@@ -865,14 +865,14 @@
+     0 0 30px rgba(201, 168, 76, 0.12);
+ }
+ 
+-:global(.card-icon) {
++.card-icon {
+   color: var(--apex-gold);
+   width: 32px;
+   height: 32px;
+   margin-bottom: 28px;
+ }
+ 
+-:global(.portal-card h3) {
++.portal-card h3 {
+   color: var(--apex-white);
+   font-size: 18px;
+   font-weight: 700;
+@@ -880,7 +880,7 @@
+   letter-spacing: 0.02em;
+ }
+ 
+-:global(.portal-card p) {
++.portal-card p {
+   color: rgba(255, 255, 255, 0.55);
+   font-size: 14px;
+   line-height: 1.6;
+@@ -888,7 +888,7 @@
+   margin: 0 0 24px;
+ }
+ 
+-:global(.card-link) {
++.card-link {
+   font-weight: 700;
+   font-size: 13px;
+   color: var(--apex-gold);
+@@ -900,7 +900,7 @@
+ }
+ 
+ /* Payments Section */
+-:global(.apex-payment) {
++.apex-payment {
+   display: grid;
+   grid-template-columns: 1.15fr 0.85fr;
+   gap: 64px;
+@@ -909,41 +909,41 @@
+   border-top: 1px solid var(--apex-line);
+ }
+ 
+-:global(.payment-copy) {
++.payment-copy {
+   max-width: 580px;
+ }
+ 
+-:global(.payment-copy h2) {
++.payment-copy h2 {
+   font-size: clamp(34px, 4.2vw, 54px);
+   line-height: 1.05;
+   font-weight: 800;
+   margin: 0 0 24px;
+ }
+ 
+-:global(.payment-copy p) {
++.payment-copy p {
+   color: rgba(255, 255, 255, 0.65);
+   font-size: 17px;
+   line-height: 1.7;
+ }
+ 
+-:global(.payment-card) {
++.payment-card {
+   padding: 42px 36px;
+ }
+ 
+-:global(.payment-card h3) {
++.payment-card h3 {
+   color: var(--apex-white);
+   font-size: 20px;
+   font-weight: 700;
+   margin: 0 0 24px;
+ }
+ 
+-:global(.payment-card ol) {
++.payment-card ol {
+   list-style: none;
+   padding: 0;
+   margin: 0;
+ }
+ 
+-:global(.payment-card li) {
++.payment-card li {
+   color: rgba(255, 255, 255, 0.6);
+   font-size: 14.5px;
+   line-height: 1.6;
+@@ -952,11 +952,11 @@
+   position: relative;
+ }
+ 
+-:global(.payment-card li:last-child) {
++.payment-card li:last-child {
+   margin-bottom: 0;
+ }
+ 
+-:global(.payment-card li::before) {
++.payment-card li::before {
+   content: counter(item);
+   counter-increment: item;
+   position: absolute;
+@@ -976,25 +976,25 @@
+ }
+ 
+ /* Demo Request section */
+-:global(.apex-demo) {
++.apex-demo {
+   background: linear-gradient(to bottom, #071525, #040b14);
+ }
+ 
+-:global(.demo-form) {
++.demo-form {
+   max-width: 860px;
+   margin: auto;
+   padding: 48px;
+ }
+ 
+-:global(.form-grid) {
++.form-grid {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   gap: 16px;
+   margin-bottom: 18px;
+ }
+ 
+-:global(.demo-form input),
+-:global(.demo-form textarea) {
++.demo-form input,
++.demo-form textarea {
+   width: 100%;
+   background: rgba(255, 255, 255, 0.02);
+   border: 1px solid rgba(255, 255, 255, 0.08);
+@@ -1007,25 +1007,25 @@
+   transition: all 0.3s ease;
+ }
+ 
+-:global(.demo-form input:focus),
+-:global(.demo-form textarea:focus) {
++.demo-form input:focus,
++.demo-form textarea:focus {
+   border-color: var(--apex-gold);
+   background: rgba(255, 255, 255, 0.04);
+ }
+ 
+-:global(.demo-form textarea) {
++.demo-form textarea {
+   height: 120px;
+   resize: vertical;
+   margin-bottom: 24px;
+ }
+ 
+-:global(.demo-form button) {
++.demo-form button {
+   width: 100%;
+   border: none;
+   cursor: pointer;
+ }
+ 
+-:global(.demo-success) {
++.demo-success {
+   color: #27c93f;
+   margin-top: 18px;
+   font-size: 14px;
+@@ -1033,7 +1033,7 @@
+   font-weight: 600;
+ }
+ 
+-:global(.demo-error) {
++.demo-error {
+   color: #ff5f56;
+   margin-top: 18px;
+   font-size: 14px;
+@@ -1042,7 +1042,7 @@
+ }
+ 
+ /* Footer (300% Larger Brand Lockup) */
+-:global(.apex-footer) {
++.apex-footer {
+   background: #02070d;
+   border-top: 1px solid var(--apex-line);
+   padding: 100px 72px 80px;
+@@ -1053,11 +1053,11 @@
+   gap: 48px;
+ }
+ 
+-:global(.footer-brand-col) {
++.footer-brand-col {
+   max-width: 480px;
+ }
+ 
+-:global(.footer-brand-lockup) {
++.footer-brand-lockup {
+   display: flex;
+   align-items: center;
+   gap: 20px;
+@@ -1066,7 +1066,7 @@
+   margin-bottom: 20px;
+ }
+ 
+-:global(.apex-footer-logo) {
++.apex-footer-logo {
+   height: 64px !important;
+   width: auto;
+   display: block;
+@@ -1074,7 +1074,7 @@
+   filter: drop-shadow(0 0 16px rgba(201, 168, 76, 0.25));
+ }
+ 
+-:global(.f-title) {
++.f-title {
+   font-size: 24px;
+   font-weight: 800;
+   letter-spacing: 0.16em;
+@@ -1082,7 +1082,7 @@
+   line-height: 1;
+ }
+ 
+-:global(.f-sub) {
++.f-sub {
+   font-size: 11px;
+   font-weight: 700;
+   text-transform: uppercase;
+@@ -1091,7 +1091,7 @@
+   margin-top: 4px;
+ }
+ 
+-:global(.f-tagline) {
++.f-tagline {
+   font-size: 10px;
+   font-weight: 500;
+   letter-spacing: 0.06em;
+@@ -1100,7 +1100,7 @@
+   text-transform: uppercase;
+ }
+ 
+-:global(.powered-by) {
++.powered-by {
+   margin-top: 18px;
+   font-size: 11.5px;
+   text-transform: uppercase;
+@@ -1109,13 +1109,13 @@
+   color: var(--apex-gold);
+ }
+ 
+-:global(.footer-links) {
++.footer-links {
+   display: flex;
+   flex-direction: column;
+   gap: 16px;
+ }
+ 
+-:global(.footer-links a) {
++.footer-links a {
+   color: rgba(255, 255, 255, 0.55);
+   text-decoration: none;
+   font-size: 14.5px;
+@@ -1126,12 +1126,12 @@
+   transition: color 0.3s ease;
+ }
+ 
+-:global(.footer-links a:hover) {
++.footer-links a:hover {
+   color: var(--apex-gold);
+ }
+ 
+ /* Typographic Overrides */
+-:global(.premium-text) {
++.premium-text {
+   background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+@@ -1142,64 +1142,64 @@
+    ======================================================= */
+ 
+ @media (max-width: 1024px) {
+-  :global(.apex-payment) {
++  .apex-payment {
+     padding: 100px 40px 60px;
+   }
+   
+-  :global(.feature-grid) {
++  .feature-grid {
+     flex-direction: column;
+     gap: 24px;
+   }
+   
+-  :global(.payment-copy) {
++  .payment-copy {
+     max-width: 100%;
+   }
+ 
+-  :global(.portal-grid) {
++  .portal-grid {
+     grid-template-columns: repeat(2, 1fr);
+   }
+ 
+-  :global(.phone-sequence-showcase) {
++  .phone-sequence-showcase {
+     flex-direction: column;
+     gap: 36px;
+   }
+ 
+-  :global(.phone-screen-labels-left),
+-  :global(.phone-screen-labels-right) {
++  .phone-screen-labels-left,
++  .phone-screen-labels-right {
+     text-align: center;
+     max-width: 100%;
+     width: 100%;
+   }
+ 
+-  :global(.phone-screen-labels-left .app-screen-dot-indicator) {
++  .phone-screen-labels-left .app-screen-dot-indicator {
+     border-right: none;
+     border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+   }
+ 
+-  :global(.phone-screen-labels-right .app-screen-dot-indicator) {
++  .phone-screen-labels-right .app-screen-dot-indicator {
+     border-left: none;
+     border-top: 2px solid rgba(255, 255, 255, 0.05);
+   }
+ 
+-  :global(.phone-screen-labels-left .app-screen-dot-indicator.active) {
++  .phone-screen-labels-left .app-screen-dot-indicator.active {
+     border-right: none;
+     border-bottom: 2px solid var(--apex-gold);
+   }
+ 
+-  :global(.phone-screen-labels-right .app-screen-dot-indicator.active) {
++  .phone-screen-labels-right .app-screen-dot-indicator.active {
+     border-left: none;
+     border-top: 2px solid var(--apex-gold);
+   }
+ 
+   /* Challan repositioning under 1024px */
+-  :global(.challan-timeline-label) {
++  .challan-timeline-label {
+     position: static;
+     opacity: 1 !important;
+     margin: 8px 0;
+     width: 100%;
+     justify-content: center;
+   }
+-  :global(.premium-challan-wrapper) {
++  .premium-challan-wrapper {
+     display: flex;
+     flex-direction: column;
+     gap: 12px;
+@@ -1207,58 +1207,58 @@
+ }
+ 
+ @media (max-width: 768px) {
+-  :global(.apex-nav) {
++  .apex-nav {
+     padding: 0 24px;
+     height: 90px;
+   }
+   
+-  :global(.apex-nav-links) {
++  .apex-nav-links {
+     display: none;
+   }
+ 
+-  :global(.header-brand-labels) {
++  .header-brand-labels {
+     display: none; /* Simplify nav on very small viewports */
+   }
+ 
+-  :global(.apex-hero-cinematic) {
++  .apex-hero-cinematic {
+     min-height: auto;
+     padding: 120px 24px 80px;
+   }
+ 
+-  :global(.emerge-brand-svg) {
++  .emerge-brand-svg {
+     margin-bottom: 32px;
+   }
+ 
+-  :global(.apex-section) {
++  .apex-section {
+     padding: 80px 24px;
+   }
+ 
+-  :global(.apex-showcase-visual) {
++  .apex-showcase-visual {
+     transform: none !important;
+   }
+ 
+-  :global(.apex-showcase-visual img) {
++  .apex-showcase-visual img {
+     opacity: 0.82;
+   }
+ 
+-  :global(.apex-ai-core) {
++  .apex-ai-core {
+     padding: 90px 24px;
+   }
+ 
+-  :global(.ai-core-grid) {
++  .ai-core-grid {
+     grid-template-columns: 1fr;
+     gap: 34px;
+   }
+ 
+-  :global(.ai-visual-collage) {
++  .ai-visual-collage {
+     min-height: auto;
+   }
+ 
+-  :global(.ai-main-visual) {
++  .ai-main-visual {
+     width: 100%;
+   }
+ 
+-  :global(.ai-float-visual) {
++  .ai-float-visual {
+     position: relative;
+     inset: auto;
+     width: 88%;
+@@ -1266,20 +1266,20 @@
+     transform: none;
+   }
+ 
+-  :global(.portal-grid) {
++  .portal-grid {
+     grid-template-columns: 1fr;
+     gap: 16px;
+   }
+ 
+-  :global(.form-grid) {
++  .form-grid {
+     grid-template-columns: 1fr;
+   }
+ 
+-  :global(.demo-form) {
++  .demo-form {
+     padding: 24px;
+   }
+ 
+-  :global(.apex-footer) {
++  .apex-footer {
+     padding: 60px 24px;
+     flex-direction: column;
+     gap: 36px;
+@@ -1287,23 +1287,23 @@
+ }
+ 
+ /* APEX Gateway mobile shell fixes. Scoped to .apex-page so the SaaS/Super App dashboards keep their own layout rules. */
+-:global(.apex-page a),
+-:global(.apex-page button) {
++.apex-page a,
++.apex-page button {
+   touch-action: manipulation;
+ }
+ 
+-:global(.apex-page a:focus-visible),
+-:global(.apex-page button:focus-visible) {
++.apex-page a:focus-visible,
++.apex-page button:focus-visible {
+   outline: 2px solid rgba(103, 232, 249, 0.9);
+   outline-offset: 3px;
+ }
+ 
+-:global(.apex-mobile-drawer),
+-:global(.apex-mobile-menu-overlay) {
++.apex-mobile-drawer,
++.apex-mobile-menu-overlay {
+   box-sizing: border-box;
+ }
+ 
+-:global(.apex-mobile-menu-overlay) {
++.apex-mobile-menu-overlay {
+   position: fixed;
+   inset: 0;
+   z-index: 45;
+@@ -1314,17 +1314,17 @@
+   transition: opacity 220ms ease;
+ }
+ 
+-:global(.apex-mobile-menu-overlay[data-open="false"]) {
++.apex-mobile-menu-overlay[data-open="false"] {
+   opacity: 0;
+   pointer-events: none;
+ }
+ 
+-:global(body.apex-drawer-open) {
++body.apex-drawer-open {
+   overflow: hidden;
+   touch-action: none;
+ }
+ 
+-:global(.apex-mobile-drawer) {
++.apex-mobile-drawer {
+   position: fixed;
+   top: max(5rem, calc(4.5rem + env(safe-area-inset-top, 0px)));
+   right: 0.75rem;
+@@ -1338,7 +1338,7 @@
+   transition: transform 260ms ease, opacity 220ms ease;
+ }
+ 
+-:global(.apex-mobile-drawer[data-open="false"]) {
++.apex-mobile-drawer[data-open="false"] {
+   opacity: 0;
+   pointer-events: none;
+   visibility: hidden;
+@@ -1346,160 +1346,160 @@
+ }
+ 
+ @media (min-width: 1280px) {
+-  :global(.apex-mobile-menu-overlay),
+-  :global(.apex-mobile-drawer) {
++  .apex-mobile-menu-overlay,
++  .apex-mobile-drawer {
+     display: none;
+   }
+ }
+ 
+ @media (max-width: 1279px) {
+-  :global(.apex-page) {
++  .apex-page {
+     overflow-x: clip;
+   }
+ 
+-  :global(.apex-page main),
+-  :global(.apex-page section) {
++  .apex-page main,
++  .apex-page section {
+     max-width: 100vw;
+   }
+ }
+ 
+ @media (max-width: 1024px) {
+-  :global(.apex-page [class*="h-[520px]"]),
+-  :global(.apex-page [class*="h-[580px]"]),
+-  :global(.apex-page [class*="h-[620px]"]),
+-  :global(.apex-page [class*="h-[720px]"]),
+-  :global(.apex-page [class*="w-[520px]"]),
+-  :global(.apex-page [class*="w-[580px]"]),
+-  :global(.apex-page [class*="w-[620px]"]),
+-  :global(.apex-page [class*="w-[720px]"]),
+-  :global(.apex-page [class*="w-[760px]"]) {
++  .apex-page [class*="h-[520px]"],
++  .apex-page [class*="h-[580px]"],
++  .apex-page [class*="h-[620px]"],
++  .apex-page [class*="h-[720px]"],
++  .apex-page [class*="w-[520px]"],
++  .apex-page [class*="w-[580px]"],
++  .apex-page [class*="w-[620px]"],
++  .apex-page [class*="w-[720px]"],
++  .apex-page [class*="w-[760px]"] {
+     max-width: calc(100vw - 2rem);
+   }
+ 
+-  :global(.apex-page [class*="right-[-"]),
+-  :global(.apex-page [class*="left-[-"]) {
++  .apex-page [class*="right-[-"],
++  .apex-page [class*="left-[-"] {
+     max-width: 100vw;
+   }
+ 
+-  :global(.apex-page .cinematic-card:hover),
+-  :global(.apex-page .group:hover) {
++  .apex-page .cinematic-card:hover,
++  .apex-page .group:hover {
+     transform: none;
+   }
+ }
+ 
+ @media (max-width: 768px) {
+-  :global(.apex-page) {
++  .apex-page {
+     font-size: 16px;
+   }
+ 
+-  :global(.apex-page .apex-scene) {
++  .apex-page .apex-scene {
+     scroll-margin-top: max(6rem, calc(5rem + env(safe-area-inset-top, 0px)));
+   }
+ 
+-  :global(.apex-page .apex-world-card:hover) {
++  .apex-page .apex-world-card:hover {
+     transform: none;
+     box-shadow: inherit;
+   }
+ 
+-  :global(.apex-page .apex-magnetic-btn) {
++  .apex-page .apex-magnetic-btn {
+     width: 100%;
+     max-width: 20rem;
+   }
+ 
+-  :global(.apex-page .apex-final-mission-panel .apex-magnetic-btn) {
++  .apex-page .apex-final-mission-panel .apex-magnetic-btn {
+     max-width: 100%;
+   }
+ 
+-  :global(.apex-page .apex-scene) {
++  .apex-page .apex-scene {
+     scroll-margin-top: max(6rem, calc(5rem + env(safe-area-inset-top, 0px)));
+   }
+ 
+-  :global(.apex-page .apex-world-card:hover) {
++  .apex-page .apex-world-card:hover {
+     transform: none;
+     box-shadow: inherit;
+   }
+ 
+-  :global(.apex-page .apex-magnetic-btn) {
++  .apex-page .apex-magnetic-btn {
+     width: 100%;
+     max-width: 20rem;
+   }
+ 
+-  :global(.apex-page .apex-final-mission-panel .apex-magnetic-btn) {
++  .apex-page .apex-final-mission-panel .apex-magnetic-btn {
+     max-width: 100%;
+   }
+ 
+-  :global(.apex-page > .fixed.inset-0) {
++  .apex-page > .fixed.inset-0 {
+     padding: 0;
+   }
+ 
+-  :global(.apex-page h1),
+-  :global(.apex-page h2),
+-  :global(.apex-page h3),
+-  :global(.apex-page p) {
++  .apex-page h1,
++  .apex-page h2,
++  .apex-page h3,
++  .apex-page p {
+     overflow-wrap: anywhere;
+   }
+ 
+-  :global(.apex-page [class*="max-w-7xl"]),
+-  :global(.apex-page [class*="max-w-6xl"]),
+-  :global(.apex-page [class*="max-w-5xl"]) {
++  .apex-page [class*="max-w-7xl"],
++  .apex-page [class*="max-w-6xl"],
++  .apex-page [class*="max-w-5xl"] {
+     width: 100%;
+     max-width: 100%;
+   }
+ 
+-  :global(.apex-page [class*="grid-cols-2"]),
+-  :global(.apex-page [class*="grid-cols-3"]),
+-  :global(.apex-page [class*="grid-cols-4"]),
+-  :global(.apex-page [class*="md:grid-cols-2"]),
+-  :global(.apex-page [class*="md:grid-cols-3"]),
+-  :global(.apex-page [class*="lg:grid-cols-2"]),
+-  :global(.apex-page [class*="lg:grid-cols-3"]),
+-  :global(.apex-page [class*="lg:grid-cols-4"]) {
++  .apex-page [class*="grid-cols-2"],
++  .apex-page [class*="grid-cols-3"],
++  .apex-page [class*="grid-cols-4"],
++  .apex-page [class*="md:grid-cols-2"],
++  .apex-page [class*="md:grid-cols-3"],
++  .apex-page [class*="lg:grid-cols-2"],
++  .apex-page [class*="lg:grid-cols-3"],
++  .apex-page [class*="lg:grid-cols-4"] {
+     grid-template-columns: minmax(0, 1fr) !important;
+   }
+ 
+-  :global(.apex-page [class*="rounded-[2.5rem]"]),
+-  :global(.apex-page [class*="rounded-[2.25rem]"]),
+-  :global(.apex-page [class*="rounded-[2rem]"]) {
++  .apex-page [class*="rounded-[2.5rem]"],
++  .apex-page [class*="rounded-[2.25rem]"],
++  .apex-page [class*="rounded-[2rem]"] {
+     border-radius: 1.35rem;
+   }
+ 
+-  :global(.apex-page [class*="p-8"]),
+-  :global(.apex-page [class*="md:p-8"]),
+-  :global(.apex-page [class*="md:p-16"]) {
++  .apex-page [class*="p-8"],
++  .apex-page [class*="md:p-8"],
++  .apex-page [class*="md:p-16"] {
+     padding: 1.25rem !important;
+   }
+ 
+-  :global(.apex-page .apex-mobile-drawer a),
+-  :global(.apex-page .apex-mobile-drawer button) {
++  .apex-page .apex-mobile-drawer a,
++  .apex-page .apex-mobile-drawer button {
+     width: 100%;
+   }
+ }
+ 
+ @media (max-width: 430px) {
+-  :global(.apex-galaxy-scene) {
++  .apex-galaxy-scene {
+     min-height: auto;
+     padding-bottom: 5rem !important;
+   }
+ 
+-  :global(.apex-page [class*="px-6"]),
+-  :global(.apex-page [class*="md:px-8"]) {
++  .apex-page [class*="px-6"],
++  .apex-page [class*="md:px-8"] {
+     padding-left: 1rem !important;
+     padding-right: 1rem !important;
+   }
+ 
+-  :global(.apex-page [class*="py-28"]),
+-  :global(.apex-page [class*="py-24"]) {
++  .apex-page [class*="py-28"],
++  .apex-page [class*="py-24"] {
+     padding-top: 4.5rem !important;
+     padding-bottom: 4.5rem !important;
+   }
+ 
+-  :global(.apex-page [class*="gap-16"]),
+-  :global(.apex-page [class*="gap-14"]),
+-  :global(.apex-page [class*="gap-12"]) {
++  .apex-page [class*="gap-16"],
++  .apex-page [class*="gap-14"],
++  .apex-page [class*="gap-12"] {
+     gap: 1.5rem !important;
+   }
+ 
+-  :global(.apex-page .apex-mobile-drawer) {
++  .apex-page .apex-mobile-drawer {
+     right: 0.75rem;
+     left: 0.75rem;
+     width: auto;
+@@ -1507,7 +1507,7 @@
+ }
+ 
+ @media (prefers-reduced-motion: reduce) {
+-  :global(.apex-page *) {
++  .apex-page * {
+     animation-duration: 0.01ms !important;
+     animation-iteration-count: 1 !important;
+     scroll-behavior: auto !important;
+@@ -1518,24 +1518,24 @@
+    RESPONSIVE MEDIA QUERIES FOR SPLIT LAYOUT
+    ======================================================== */
+ @media (max-width: 1024px) {
+-  :global(.apex-story), :global(.apex-story.layout-reverse) {
++  .apex-story, .apex-story.layout-reverse {
+     flex-direction: column;
+     padding: 100px 6%;
+     gap: 40px;
+   }
+-  :global(.story-panel), :global(.visual-block) {
++  .story-panel, .visual-block {
+     width: 100%;
+   }
+-  :global(.story-panel) {
++  .story-panel {
+     text-align: center;
+   }
+-  :global(.feature-grid) {
++  .feature-grid {
+     flex-direction: row;
+     flex-wrap: wrap;
+     justify-content: center;
+     text-align: left;
+   }
+-  :global(.feature-grid .module-group) {
++  .feature-grid .module-group {
+     flex: 1 1 300px;
+   }
+ }
+@@ -1543,7 +1543,7 @@
+ /* ========================================================
+    APEX CONNECT CUSTOM SEQUENCING INDICATORS
+    ======================================================== */
+-:global(.phone-sequence-showcase) {
++.phone-sequence-showcase {
+   width: 100%;
+   max-width: 1080px;
+   display: flex;
+@@ -1552,7 +1552,7 @@
+   gap: 64px;
+ }
+ 
+-:global(.app-screen-dot-indicator) {
++.app-screen-dot-indicator {
+   background: none;
+   border: none;
+   text-align: inherit;
+@@ -1565,25 +1565,25 @@
+   max-width: 280px;
+ }
+ 
+-:global(.app-screen-dot-indicator.active) {
++.app-screen-dot-indicator.active {
+   opacity: 1;
+ }
+ 
+ /* Under 1024px responsive grid stacked visuals */
+ @media (max-width: 1024px) {
+-  :global(.phone-sequence-showcase) {
++  .phone-sequence-showcase {
+     flex-direction: column;
+     gap: 32px;
+   }
+   
+-  :global(.app-screen-dot-indicator) {
++  .app-screen-dot-indicator {
+     max-width: 100%;
+     text-align: center;
+     border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+     border-radius: 0;
+   }
+   
+-  :global(.app-screen-dot-indicator.active) {
++  .app-screen-dot-indicator.active {
+     border-bottom-color: var(--apex-gold);
+     background: rgba(201, 168, 76, 0.04);
+   }
+@@ -1592,7 +1592,7 @@
+ 
+ 
+ /* Engineering Grid for Hero */
+-:global(.engineering-grid) {
++.engineering-grid {
+   position: absolute;
+   inset: 0;
+   width: 100%;
+@@ -1609,16 +1609,16 @@
+ 
+ 
+ /* GSAP Text Stagger wrappers */
+-:global(.text-stagger-line) {
++.text-stagger-line {
+   overflow: hidden;
+   display: block;
+ }
+-:global(.text-stagger-inner) {
++.text-stagger-inner {
+   display: block;
+ }
+ 
+ /* Monumental Hero */
+-:global(.monumental-hero) {
++.monumental-hero {
+   position: relative;
+   width: 100%;
+   display: flex;
+@@ -1629,7 +1629,7 @@
+   min-height: 120vh;
+   z-index: 10;
+ }
+-:global(.monumental-hero h1) {
++.monumental-hero h1 {
+   font-size: clamp(48px, 8vw, 96px);
+   font-weight: 800;
+   line-height: 1;
+@@ -1638,7 +1638,7 @@
+   max-width: 1100px;
+   margin: 0 0 24px;
+ }
+-:global(.monumental-sub) {
++.monumental-sub {
+   font-size: clamp(18px, 2vw, 24px);
+   color: var(--apex-muted);
+   text-align: center;
+@@ -1646,7 +1646,7 @@
+   line-height: 1.5;
+   margin-bottom: 48px;
+ }
+-:global(.hero-bento-dock) {
++.hero-bento-dock {
+   position: relative;
+   width: 100%;
+   max-width: 1200px;
+@@ -1662,7 +1662,7 @@
+   justify-content: center;
+   overflow: hidden;
+ }
+-:global(.hero-bento-dock::after) {
++.hero-bento-dock::after {
+   content: '';
+   position: absolute;
+   bottom: 0; left: 0; right: 0; height: 50%;
+@@ -1670,7 +1670,7 @@
+ }
+ 
+ /* Real rendered APEX interface visuals */
+-:global(.apex-showcase-visual) {
++.apex-showcase-visual {
+   position: relative;
+   width: 100%;
+   height: 100%;
+@@ -1680,7 +1680,7 @@
+   will-change: transform;
+ }
+ 
+-:global(.apex-showcase-visual img) {
++.apex-showcase-visual img {
+   width: 100%;
+   height: 100%;
+   display: block;
+@@ -1689,7 +1689,7 @@
+   filter: saturate(0.95) contrast(1.04);
+ }
+ 
+-:global(.apex-showcase-visual::after) {
++.apex-showcase-visual::after {
+   content: "";
+   position: absolute;
+   inset: 0;
+@@ -1701,28 +1701,28 @@
+   opacity: 0.55;
+ }
+ 
+-:global(.apex-showcase-visual.hero-showcase) {
++.apex-showcase-visual.hero-showcase {
+   min-height: 100%;
+ }
+ 
+-:global(.device-frame-desktop .apex-showcase-visual.in-device) {
++.device-frame-desktop .apex-showcase-visual.in-device {
+   position: absolute;
+   inset: 0;
+   z-index: 1;
+ }
+ 
+-:global(.apex-showcase-overlays) {
++.apex-showcase-overlays {
+   position: absolute;
+   inset: 42px 0 0;
+   z-index: 5;
+   pointer-events: none;
+ }
+ 
+-:global(.apex-showcase-overlays > *) {
++.apex-showcase-overlays > * {
+   pointer-events: auto;
+ }
+ 
+-:global(.apex-showcase-titlebar) {
++.apex-showcase-titlebar {
+   position: absolute;
+   top: 14px;
+   left: 16px;
+@@ -1740,7 +1740,7 @@
+   box-shadow: 0 18px 45px rgba(0,0,0,0.35);
+ }
+ 
+-:global(.apex-showcase-titlebar span) {
++.apex-showcase-titlebar span {
+   display: inline-flex;
+   align-items: center;
+   gap: 8px;
+@@ -1752,7 +1752,7 @@
+   text-transform: uppercase;
+ }
+ 
+-:global(.apex-showcase-titlebar small) {
++.apex-showcase-titlebar small {
+   color: rgba(201,168,76,0.82);
+   font-family: var(--mono-font);
+   font-size: 9px;
+@@ -1760,7 +1760,7 @@
+   letter-spacing: 0.12em;
+ }
+ 
+-:global(.device-frame-mobile .connect-mobile-showcase) {
++.device-frame-mobile .connect-mobile-showcase {
+   position: absolute;
+   inset: 0;
+   z-index: 1;
+@@ -1768,18 +1768,18 @@
+   overflow: hidden;
+ }
+ 
+-:global(.device-frame-mobile .connect-mobile-showcase img) {
++.device-frame-mobile .connect-mobile-showcase img {
+   object-fit: cover;
+   object-position: center;
+ }
+ 
+-:global(.apex-section) {
++.apex-section {
+   position: relative;
+   padding: 120px 6%;
+   overflow: hidden;
+ }
+ 
+-:global(.apex-section-head) {
++.apex-section-head {
+   max-width: 880px;
+   margin: 0 auto 64px;
+   text-align: center;
+@@ -1787,13 +1787,13 @@
+   z-index: 5;
+ }
+ 
+-:global(.apex-section-head h2) {
++.apex-section-head h2 {
+   font-size: clamp(38px, 5vw, 68px);
+   line-height: 1.02;
+   margin: 0 0 20px;
+ }
+ 
+-:global(.apex-section-head p) {
++.apex-section-head p {
+   color: rgba(255,255,255,0.62);
+   font-size: 17px;
+   line-height: 1.7;
+@@ -1802,7 +1802,7 @@
+ }
+ 
+ /* AI Core section */
+-:global(.apex-ai-core) {
++.apex-ai-core {
+   background:
+     radial-gradient(circle at 50% 0%, rgba(201,168,76,0.11), transparent 36%),
+     radial-gradient(circle at 76% 48%, rgba(38,84,145,0.14), transparent 34%),
+@@ -1811,7 +1811,7 @@
+   border-bottom: 1px solid var(--apex-line);
+ }
+ 
+-:global(.ai-core-grid) {
++.ai-core-grid {
+   max-width: 1280px;
+   margin: 0 auto;
+   display: grid;
+@@ -1822,35 +1822,35 @@
+   z-index: 5;
+ }
+ 
+-:global(.ai-feature-stack) {
++.ai-feature-stack {
+   display: grid;
+   gap: 16px;
+ }
+ 
+-:global(.ai-feature-card) {
++.ai-feature-card {
+   padding: 24px 26px;
+ }
+ 
+-:global(.ai-feature-card h3) {
++.ai-feature-card h3 {
+   color: var(--apex-white);
+   font-size: 18px;
+   margin: 0 0 8px;
+ }
+ 
+-:global(.ai-feature-card p) {
++.ai-feature-card p {
+   color: rgba(255,255,255,0.58);
+   line-height: 1.55;
+   margin: 0;
+ }
+ 
+-:global(.ai-visual-collage) {
++.ai-visual-collage {
+   min-height: 620px;
+   position: relative;
+   border-radius: 32px;
+   perspective: 1400px;
+ }
+ 
+-:global(.ai-main-visual) {
++.ai-main-visual {
+   position: absolute;
+   inset: 7% 3% 10% 3%;
+   border-radius: 30px;
+@@ -1860,7 +1860,7 @@
+     0 0 0 1px rgba(255,255,255,0.08);
+ }
+ 
+-:global(.ai-float-visual) {
++.ai-float-visual {
+   position: absolute;
+   width: 43%;
+   height: 30%;
+@@ -1871,12 +1871,12 @@
+     0 0 0 1px rgba(255,255,255,0.10);
+ }
+ 
+-:global(.ai-float-one) {
++.ai-float-one {
+   left: -2%;
+   bottom: 1%;
+ }
+ 
+-:global(.ai-float-two) {
++.ai-float-two {
+   right: -2%;
+   top: 0;
+ }
+@@ -1886,7 +1886,7 @@
+    ======================================================== */
+ 
+ /* Generic UI Container */
+-:global(.native-ui-container) {
++.native-ui-container {
+   width: 100%;
+   height: 100%;
+   display: flex;
+@@ -1897,7 +1897,7 @@
+ }
+ 
+ /* Sidebar */
+-:global(.ui-sidebar) {
++.ui-sidebar {
+   width: 22%;
+   background: #04080f;
+   border-right: 1px solid rgba(255,255,255,0.06);
+@@ -1906,7 +1906,7 @@
+   flex-direction: column;
+   gap: 8px;
+ }
+-:global(.ui-nav-item) {
++.ui-nav-item {
+   height: 24px;
+   border-radius: 6px;
+   background: rgba(255,255,255,0.02);
+@@ -1915,35 +1915,35 @@
+   padding: 0 10px;
+   gap: 8px;
+ }
+-:global(.ui-nav-item.active) {
++.ui-nav-item.active {
+   background: rgba(201, 168, 76, 0.15);
+   border-left: 2px solid var(--apex-gold);
+ }
+-:global(.ui-nav-icon) {
++.ui-nav-icon {
+   width: 12px; height: 12px;
+   background: rgba(255,255,255,0.2);
+   border-radius: 3px;
+ }
+-:global(.ui-nav-item.active .ui-nav-icon) {
++.ui-nav-item.active .ui-nav-icon {
+   background: var(--apex-gold);
+ }
+-:global(.ui-nav-text) {
++.ui-nav-text {
+   width: 60%; height: 6px;
+   background: rgba(255,255,255,0.2);
+   border-radius: 3px;
+ }
+-:global(.ui-nav-item.active .ui-nav-text) {
++.ui-nav-item.active .ui-nav-text {
+   background: var(--apex-gold);
+ }
+ 
+ /* Main Content Area */
+-:global(.ui-main) {
++.ui-main {
+   flex: 1;
+   display: flex;
+   flex-direction: column;
+   background: #010306;
+ }
+-:global(.ui-header) {
++.ui-header {
+   height: 48px;
+   border-bottom: 1px solid rgba(255,255,255,0.06);
+   display: flex;
+@@ -1951,21 +1951,21 @@
+   padding: 0 20px;
+   justify-content: space-between;
+ }
+-:global(.ui-header-title) {
++.ui-header-title {
+   width: 120px; height: 10px;
+   background: rgba(255,255,255,0.4);
+   border-radius: 4px;
+ }
+-:global(.ui-header-actions) {
++.ui-header-actions {
+   display: flex;
+   gap: 8px;
+ }
+-:global(.ui-avatar) {
++.ui-avatar {
+   width: 20px; height: 20px;
+   border-radius: 50%;
+   background: var(--apex-gold);
+ }
+-:global(.ui-content) {
++.ui-content {
+   padding: 20px;
+   display: flex;
+   flex-direction: column;
+@@ -1975,12 +1975,12 @@
+ }
+ 
+ /* OS Dashboard Grid */
+-:global(.ui-grid-3) {
++.ui-grid-3 {
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   gap: 12px;
+ }
+-:global(.ui-card) {
++.ui-card {
+   background: rgba(255,255,255,0.02);
+   border: 1px solid rgba(255,255,255,0.06);
+   border-radius: 12px;
+@@ -1989,18 +1989,18 @@
+   flex-direction: column;
+   gap: 10px;
+ }
+-:global(.ui-card-title) {
++.ui-card-title {
+   font-size: 10px;
+   color: rgba(255,255,255,0.4);
+   text-transform: uppercase;
+   font-family: var(--mono-font);
+ }
+-:global(.ui-card-value) {
++.ui-card-value {
+   font-size: 24px;
+   font-weight: 800;
+   color: #fff;
+ }
+-:global(.ui-chart-area) {
++.ui-chart-area {
+   flex: 1;
+   background: rgba(255,255,255,0.02);
+   border-radius: 12px;
+@@ -2010,7 +2010,7 @@
+   padding: 16px;
+   gap: 8px;
+ }
+-:global(.ui-bar) {
++.ui-bar {
+   flex: 1;
+   background: rgba(201, 168, 76, 0.4);
+   border-radius: 4px 4px 0 0;
+@@ -2018,12 +2018,12 @@
+ }
+ 
+ /* Academic Forge specific */
+-:global(.ui-forge-list) {
++.ui-forge-list {
+   display: flex;
+   flex-direction: column;
+   gap: 8px;
+ }
+-:global(.ui-forge-row) {
++.ui-forge-row {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+@@ -2032,12 +2032,12 @@
+   border-radius: 8px;
+   border: 1px solid rgba(255,255,255,0.04);
+ }
+-:global(.ui-q-text) {
++.ui-q-text {
+   width: 70%; height: 8px;
+   background: rgba(255,255,255,0.6);
+   border-radius: 4px;
+ }
+-:global(.ui-q-tag) {
++.ui-q-tag {
+   padding: 4px 8px;
+   background: rgba(201,168,76,0.1);
+   color: var(--apex-gold);
+@@ -2049,7 +2049,7 @@
+ }
+ 
+ /* Finance Ledger specific */
+-:global(.ui-receipt) {
++.ui-receipt {
+   background: #ffffff;
+   border-radius: 12px;
+   flex: 1;
+@@ -2061,16 +2061,16 @@
+   position: relative;
+   box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+ }
+-:global(.ui-receipt-head) {
++.ui-receipt-head {
+   text-align: center;
+   border-bottom: 2px dashed #ccc;
+   padding-bottom: 12px;
+   margin-bottom: 12px;
+ }
+-:global(.ui-receipt-title) {
++.ui-receipt-title {
+   font-size: 16px; font-weight: 800; letter-spacing: 2px;
+ }
+-:global(.ui-receipt-row) {
++.ui-receipt-row {
+   display: flex; justify-content: space-between;
+   margin-bottom: 8px;
+   font-size: 11px;
+@@ -2078,14 +2078,14 @@
+   font-weight: 600;
+   color: #444;
+ }
+-:global(.ui-receipt-total) {
++.ui-receipt-total {
+   border-top: 2px dashed #ccc;
+   padding-top: 12px;
+   margin-top: 12px;
+   display: flex; justify-content: space-between;
+   font-size: 14px; font-weight: 800;
+ }
+-:global(.ui-stamp) {
++.ui-stamp {
+   position: absolute;
+   top: 50%; left: 50%;
+   transform: translate(-50%, -50%) rotate(-15deg);
+@@ -2100,7 +2100,7 @@
+ }
+ 
+ /* Mobile specific */
+-:global(.ui-mobile-head) {
++.ui-mobile-head {
+   padding: 20px 16px 16px;
+   background: #04080f;
+   display: flex;
+@@ -2108,34 +2108,34 @@
+   gap: 12px;
+   border-bottom: 1px solid rgba(255,255,255,0.06);
+ }
+-:global(.ui-mobile-avatar) {
++.ui-mobile-avatar {
+   width: 40px; height: 40px;
+   border-radius: 50%;
+   background: linear-gradient(135deg, var(--apex-gold), #fff);
+ }
+-:global(.ui-mobile-info) {
++.ui-mobile-info {
+   display: flex; flex-direction: column; gap: 4px;
+ }
+-:global(.ui-mobile-name) {
++.ui-mobile-name {
+   width: 100px; height: 10px; background: #fff; border-radius: 4px;
+ }
+-:global(.ui-mobile-class) {
++.ui-mobile-class {
+   width: 60px; height: 6px; background: rgba(255,255,255,0.4); border-radius: 3px;
+ }
+-:global(.ui-mobile-feed) {
++.ui-mobile-feed {
+   padding: 16px;
+   display: flex;
+   flex-direction: column;
+   gap: 12px;
+ }
+-:global(.ui-feed-card) {
++.ui-feed-card {
+   background: rgba(255,255,255,0.04);
+   border-radius: 12px;
+   padding: 16px;
+ }
+ 
+ /* Background Texture classes for split sections */
+-:global(.bg-texture-grid) {
++.bg-texture-grid {
+   position: absolute; inset: 0;
+   background-size: 40px 40px;
+   background-image: 
+@@ -2148,7 +2148,7 @@
+    ULTRA-HD REALISTIC DEVICE FRAMES
+    ======================================================== */
+ 
+-:global(.device-frame-desktop) {
++.device-frame-desktop {
+   width: 100%;
+   aspect-ratio: 16 / 10;
+   background: #000;
+@@ -2165,21 +2165,21 @@
+   justify-content: center;
+   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+ }
+-:global(.device-frame-desktop:hover) {
++.device-frame-desktop:hover {
+   transform: translateY(-8px);
+   box-shadow: 
+     0 0 0 1px rgba(255,255,255,0.15),
+     0 60px 120px rgba(0,0,0,1),
+     inset 0 0 0 1px rgba(255,255,255,0.05);
+ }
+-:global(.device-frame-desktop img) {
++.device-frame-desktop img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   object-position: top center;
+ }
+ 
+-:global(.device-frame-mobile) {
++.device-frame-mobile {
+   width: 300px;
+   height: 620px;
+   background: #000;
+@@ -2194,10 +2194,10 @@
+   margin: 0 auto;
+   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+ }
+-:global(.device-frame-mobile:hover) {
++.device-frame-mobile:hover {
+   transform: translateY(-8px);
+ }
+-:global(.dynamic-island) {
++.dynamic-island {
+   position: absolute;
+   top: 12px;
+   left: 50%;
+@@ -2209,7 +2209,7 @@
+   z-index: 20;
+   box-shadow: inset 0 0 4px rgba(255,255,255,0.1);
+ }
+-:global(.device-frame-mobile img) {
++.device-frame-mobile img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+@@ -2217,83 +2217,83 @@
+ }
+ 
+ /* ── Cinematic universe scroll (one continuous world) ── */
+-:global(.apex-universe-scroll) {
++.apex-universe-scroll {
+   position: relative;
+   width: 100%;
+ }
+ 
+-:global(.apex-journey-rail) {
++.apex-journey-rail {
+   opacity: 0.85;
+ }
+ 
+-:global(html.lenis),
+-:global(html.lenis body) {
++html.lenis,
++html.lenis body {
+   height: auto;
+ }
+ 
+-:global(.lenis.lenis-smooth) {
++.lenis.lenis-smooth {
+   scroll-behavior: auto !important;
+ }
+ 
+-:global(.apex-journey-rail) {
++.apex-journey-rail {
+   will-change: transform, opacity;
+ }
+ 
+-:global(.apex-journey-rail) {
++.apex-journey-rail {
+   will-change: transform, opacity;
+ }
+ 
+-:global(.lenis.lenis-smooth [data-lenis-prevent]) {
++.lenis.lenis-smooth [data-lenis-prevent] {
+   overscroll-behavior: contain;
+ }
+ 
+-:global(.lenis.lenis-stopped) {
++.lenis.lenis-stopped {
+   overflow: hidden;
+ }
+ 
+-:global(.lenis.lenis-scrolling iframe) {
++.lenis.lenis-scrolling iframe {
+   pointer-events: none;
+ }
+ 
+ /* ── Premium cinematic gateway polish (2026) ── */
+-:global(.apex-scene-reveal) {
++.apex-scene-reveal {
+   position: relative;
+   overflow: visible;
+ }
+ 
+-:global(.apex-scene-reveal-inner) {
++.apex-scene-reveal-inner {
+   will-change: transform, opacity;
+ }
+ 
+-:global(.apex-scene) {
++.apex-scene {
+   position: relative;
+   isolation: isolate;
+ }
+ 
+ /* Scene washes removed — unified navy void via ApexCinematicBackground */
+-:global(.apex-scene-wash),
+-:global(.apex-scene-wash-hero),
+-:global(.apex-scene-wash-cyan),
+-:global(.apex-scene-wash-blue),
+-:global(.apex-scene-wash-gold) {
++.apex-scene-wash,
++.apex-scene-wash-hero,
++.apex-scene-wash-cyan,
++.apex-scene-wash-blue,
++.apex-scene-wash-gold {
+   display: none;
+ }
+ 
+-:global(.apex-brand-lockup .apex-symbol) {
++.apex-brand-lockup .apex-symbol {
+   filter: drop-shadow(0 0 18px rgba(201, 168, 76, 0.35));
+ }
+ 
+-:global(.apex-brand-lockup) {
++.apex-brand-lockup {
+   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+ }
+ 
+-:global(.apex-nav-link) {
++.apex-nav-link {
+   position: relative;
+   padding-bottom: 2px;
+   transition: color 0.25s ease, text-shadow 0.25s ease;
+ }
+ 
+-:global(.apex-nav-link::after) {
++.apex-nav-link::after {
+   content: "";
+   position: absolute;
+   left: 0;
+@@ -2307,27 +2307,27 @@
+   border-radius: 2px;
+ }
+ 
+-:global(.apex-nav-link:hover) {
++.apex-nav-link:hover {
+   color: #e0f2fe;
+   text-shadow: 0 0 20px rgba(34, 211, 238, 0.35);
+ }
+ 
+-:global(.apex-nav-link:hover::after),
+-:global(.apex-nav-link[data-active="true"]::after) {
++.apex-nav-link:hover::after,
++.apex-nav-link[data-active="true"]::after {
+   transform: scaleX(1);
+ }
+ 
+-:global(.apex-nav-link[data-active="true"]) {
++.apex-nav-link[data-active="true"] {
+   color: #fff;
+ }
+ 
+-:global(.apex-btn-demo) {
++.apex-btn-demo {
+   position: relative;
+   overflow: hidden;
+   transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+ }
+ 
+-:global(.apex-btn-demo::before) {
++.apex-btn-demo::before {
+   content: "";
+   position: absolute;
+   inset: 0;
+@@ -2336,67 +2336,67 @@
+   transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+ }
+ 
+-:global(.apex-btn-demo:hover) {
++.apex-btn-demo:hover {
+   transform: translateY(-2px);
+   box-shadow: 0 12px 32px rgba(255, 255, 255, 0.18);
+ }
+ 
+-:global(.apex-btn-demo:hover::before) {
++.apex-btn-demo:hover::before {
+   transform: translateX(120%);
+ }
+ 
+-:global(.apex-core-engine),
+-:global(.apex-core-stage),
+-:global(.apex-core-tilt),
+-:global(.apex-core-halo),
+-:global(.apex-converge-stage) {
++.apex-core-engine,
++.apex-core-stage,
++.apex-core-tilt,
++.apex-core-halo,
++.apex-converge-stage {
+   overflow: visible;
+ }
+ 
+-:global(.apex-core-engine) {
++.apex-core-engine {
+   transform-style: preserve-3d;
+   perspective: 1100px;
+ }
+ 
+-:global(.apex-core-tilt) {
++.apex-core-tilt {
+   transform-style: preserve-3d;
+   border-radius: 9999px;
+ }
+ 
+-:global(.apex-core-3d) {
++.apex-core-3d {
+   transform-style: preserve-3d;
+ }
+ 
+-:global(.apex-core-stage) {
++.apex-core-stage {
+   transform-style: preserve-3d;
+ }
+ 
+-:global(.apex-core-mark) {
++.apex-core-mark {
+   transform-style: preserve-3d;
+ }
+ 
+-:global(.apex-data-planet-sphere) {
++.apex-data-planet-sphere {
+   transform-style: preserve-3d;
+ }
+ 
+-:global(.apex-converge-planet-sphere) {
++.apex-converge-planet-sphere {
+   transform-style: preserve-3d;
+   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+ }
+ 
+-:global(.apex-converge-planet:hover .apex-converge-planet-sphere) {
++.apex-converge-planet:hover .apex-converge-planet-sphere {
+   transform: translateY(-4px) scale(1.06);
+ }
+ 
+-:global(.apex-orbit-planet),
+-:global(.apex-converge-planet-sphere),
+-:global(.apex-data-planet-sphere) {
++.apex-orbit-planet,
++.apex-converge-planet-sphere,
++.apex-data-planet-sphere {
+   aspect-ratio: 1 / 1;
+   flex-shrink: 0;
+   border-radius: 9999px;
+ }
+ 
+-:global(.apex-core-planet) {
++.apex-core-planet {
+   background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.22), rgba(15, 23, 42, 0.65) 48%, rgba(2, 6, 23, 0.95) 72%);
+   box-shadow:
+     inset 0 2px 24px rgba(255, 255, 255, 0.12),
+@@ -2407,16 +2407,16 @@
+ }
+ 
+ /* Version E — realistic core sphere */
+-:global(.apex-core-sphere-wrap) {
++.apex-core-sphere-wrap {
+   transform-style: preserve-3d;
+ }
+ 
+-:global(.apex-core-sphere-aura) {
++.apex-core-sphere-aura {
+   background: radial-gradient(circle, rgba(201, 168, 76, 0.2), rgba(34, 211, 238, 0.1) 45%, transparent 75%);
+   filter: blur(28px);
+ }
+ 
+-:global(.apex-core-sphere-surface) {
++.apex-core-sphere-surface {
+   background:
+     radial-gradient(circle at 30% 24%, rgba(255, 255, 255, 0.28), transparent 42%),
+     radial-gradient(circle at 72% 78%, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.98) 68%),
+@@ -2429,19 +2429,19 @@
+   border: 1px solid rgba(201, 168, 76, 0.32);
+ }
+ 
+-:global(.apex-core-sphere-rim) {
++.apex-core-sphere-rim {
+   background: radial-gradient(circle, transparent 58%, rgba(201, 168, 76, 0.18) 72%, transparent 82%);
+   mix-blend-mode: screen;
+ }
+ 
+-:global(.apex-core-sphere-shine) {
++.apex-core-sphere-shine {
+   background: linear-gradient(125deg, rgba(255, 255, 255, 0.22) 0%, transparent 38%);
+   mix-blend-mode: overlay;
+   opacity: 0.7;
+ }
+ 
+ /* Version E — hero glass stat capsules */
+-:global(.apex-glass-capsule) {
++.apex-glass-capsule {
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+@@ -2458,7 +2458,7 @@
+   white-space: nowrap;
+ }
+ 
+-:global(.apex-glass-capsule-icon) {
++.apex-glass-capsule-icon {
+   display: flex;
+   height: 2rem;
+   width: 2rem;
+@@ -2470,14 +2470,14 @@
+   background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.16), rgba(15, 23, 42, 0.85) 65%);
+ }
+ 
+-:global(.apex-glass-capsule-body) {
++.apex-glass-capsule-body {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   line-height: 1.2;
+ }
+ 
+-:global(.apex-glass-capsule-label) {
++.apex-glass-capsule-label {
+   font-size: 0.5625rem;
+   font-weight: 700;
+   text-transform: uppercase;
+@@ -2485,7 +2485,7 @@
+   color: rgba(148, 163, 184, 0.95);
+ }
+ 
+-:global(.apex-glass-capsule-value) {
++.apex-glass-capsule-value {
+   font-size: 0.8125rem;
+   font-weight: 800;
+   color: #f8fafc;
+@@ -2493,11 +2493,11 @@
+ }
+ 
+ /* Version E — orbit module nodes */
+-:global(.apex-orbit-module-shell) {
++.apex-orbit-module-shell {
+   transform-style: preserve-3d;
+ }
+ 
+-:global(.apex-orbit-module-glass) {
++.apex-orbit-module-glass {
+   background:
+     radial-gradient(circle at 32% 26%, rgba(255, 255, 255, 0.2), transparent 40%),
+     radial-gradient(circle at 70% 75%, rgba(15, 23, 42, 0.85), rgba(2, 6, 23, 0.95) 70%);
+@@ -2508,18 +2508,18 @@
+     0 0 28px color-mix(in srgb, var(--node-color) 30%, transparent);
+ }
+ 
+-:global(.apex-orbit-module-icon-badge) {
++.apex-orbit-module-icon-badge {
+   border: 1px solid rgba(255, 255, 255, 0.14);
+   background: radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.14), rgba(15, 23, 42, 0.88) 65%);
+   box-shadow: inset 0 1px 8px rgba(255, 255, 255, 0.1);
+ }
+ 
+-:global(.apex-orbit-module-label) {
++.apex-orbit-module-label {
+   letter-spacing: 0.03em;
+   text-shadow: 0 1px 8px rgba(2, 6, 23, 0.8);
+ }
+ 
+-:global(.apex-orbit-module-dot) {
++.apex-orbit-module-dot {
+   display: block;
+   height: 0.25rem;
+   width: 0.25rem;
+@@ -2527,11 +2527,11 @@
+   box-shadow: 0 0 8px currentColor;
+ }
+ 
+-:global(.apex-brand-lockup:hover .apex-symbol) {
++.apex-brand-lockup:hover .apex-symbol {
+   filter: drop-shadow(0 0 24px rgba(201, 168, 76, 0.55)) drop-shadow(0 0 40px rgba(34, 211, 238, 0.25));
+ }
+ 
+-:global(.apex-orbit-node) {
++.apex-orbit-node {
+   position: relative;
+   display: flex;
+   flex-direction: column;
+@@ -2540,7 +2540,7 @@
+   text-align: center;
+ }
+ 
+-:global(.apex-orbit-node-ring) {
++.apex-orbit-node-ring {
+   position: absolute;
+   inset: -6px;
+   border-radius: 9999px;
+@@ -2549,7 +2549,7 @@
+   animation: apex-orbit-halo 5s ease-in-out infinite;
+ }
+ 
+-:global(.apex-orbit-node-icon) {
++.apex-orbit-node-icon {
+   position: relative;
+   z-index: 2;
+   display: flex;
+@@ -2566,11 +2566,11 @@
+   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+ }
+ 
+-:global(.apex-orbit-node:hover .apex-orbit-node-icon) {
++.apex-orbit-node:hover .apex-orbit-node-icon {
+   transform: translateY(-4px) scale(1.06);
+ }
+ 
+-:global(.apex-orbit-node-label) {
++.apex-orbit-node-label {
+   margin-top: 0.5rem;
+   font-size: 0.65rem;
+   font-weight: 800;
+@@ -2578,7 +2578,7 @@
+   color: #f8fafc;
+ }
+ 
+-:global(.apex-orbit-live) {
++.apex-orbit-live {
+   margin-top: 0.2rem;
+   display: inline-flex;
+   align-items: center;
+@@ -2590,16 +2590,16 @@
+   color: rgba(110, 231, 183, 0.85);
+ }
+ 
+-:global(.apex-world-card) {
++.apex-world-card {
+   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.4s ease;
+ }
+ 
+-:global(.apex-world-card:hover) {
++.apex-world-card:hover {
+   transform: translateY(-6px) rotateX(2deg);
+   box-shadow: 0 24px 48px rgba(2, 6, 23, 0.65), 0 0 32px rgba(34, 211, 238, 0.12);
+ }
+ 
+-:global(.apex-scroll-glow) {
++.apex-scroll-glow {
+   box-shadow: 0 0 18px rgba(34, 211, 238, 0.55), 0 0 36px rgba(201, 168, 76, 0.25);
+ }
+ 
+@@ -2609,27 +2609,27 @@
+ }
+ 
+ /* Version E — celestial realism + official logo cores */
+-:global(.apex-celestial-core) {
++.apex-celestial-core {
+   transform-style: preserve-3d;
+ }
+ 
+-:global(.apex-celestial-corona) {
++.apex-celestial-corona {
+   background: radial-gradient(circle, rgba(201, 168, 76, 0.24), rgba(34, 211, 238, 0.12) 38%, transparent 72%);
+   filter: blur(36px);
+ }
+ 
+-:global(.apex-celestial-atmosphere) {
++.apex-celestial-atmosphere {
+   background: radial-gradient(circle, rgba(34, 211, 238, 0.14), transparent 68%);
+   filter: blur(18px);
+   border: 1px solid rgba(255, 255, 255, 0.04);
+   border-radius: 9999px;
+ }
+ 
+-:global(.apex-celestial-body) {
++.apex-celestial-body {
+   border-radius: 9999px;
+ }
+ 
+-:global(.apex-celestial-surface) {
++.apex-celestial-surface {
+   border-radius: 9999px;
+   background:
+     radial-gradient(ellipse 72% 48% at 26% 20%, rgba(255, 255, 255, 0.38), transparent 54%),
+@@ -2645,20 +2645,20 @@
+     0 0 140px rgba(34, 211, 238, 0.08);
+ }
+ 
+-:global(.apex-celestial-clouds) {
++.apex-celestial-clouds {
+   mix-blend-mode: screen;
+   mask-image: radial-gradient(circle at 38% 32%, black 20%, transparent 72%);
+   -webkit-mask-image: radial-gradient(circle at 38% 32%, black 20%, transparent 72%);
+ }
+ 
+-:global(.apex-celestial-atmo-shell) {
++.apex-celestial-atmo-shell {
+   background: radial-gradient(circle, rgba(var(--planet-accent-rgb, 34 211 238), 0.16), transparent 68%);
+   filter: blur(12px);
+   opacity: 0.82;
+   border: 1px solid rgba(255, 255, 255, 0.05);
+ }
+ 
+-:global(.apex-galaxy-planet) {
++.apex-galaxy-planet {
+   position: relative;
+   border-radius: 9999px;
+   overflow: hidden;
+@@ -2667,39 +2667,39 @@
+     inset 0 2px 12px rgba(255, 255, 255, 0.12);
+ }
+ 
+-:global(.apex-final-mission-panel) {
++.apex-final-mission-panel {
+   border: 1px solid var(--apex-glass-border);
+   background: var(--apex-glass-bg);
+   backdrop-filter: blur(20px);
+ }
+ 
+-:global(.apex-world-card) {
++.apex-world-card {
+   border-color: rgba(255, 255, 255, 0.1);
+   background: rgba(2, 5, 16, 0.72);
+ }
+ 
+-:global(.apex-celestial-terminator) {
++.apex-celestial-terminator {
+   background: radial-gradient(ellipse 90% 80% at 68% 72%, rgba(0, 0, 0, 0.55), transparent 58%);
+   mix-blend-mode: multiply;
+   opacity: 0.85;
+ }
+ 
+-:global(.apex-celestial-specular) {
++.apex-celestial-specular {
+   background: radial-gradient(ellipse 45% 30% at 32% 24%, rgba(255, 255, 255, 0.35), transparent 70%);
+   mix-blend-mode: overlay;
+ }
+ 
+-:global(.apex-celestial-rimlight) {
++.apex-celestial-rimlight {
+   background: radial-gradient(circle, transparent 62%, rgba(201, 168, 76, 0.22) 74%, rgba(34, 211, 238, 0.12) 82%, transparent 92%);
+   mix-blend-mode: screen;
+ }
+ 
+-:global(.apex-volumetric-glow) {
++.apex-volumetric-glow {
+   background: radial-gradient(circle, rgba(201, 168, 76, 0.16), rgba(34, 211, 238, 0.08) 42%, transparent 78%);
+   filter: blur(44px);
+ }
+ 
+-:global(.apex-nebula-fog) {
++.apex-nebula-fog {
+   background:
+     radial-gradient(ellipse 90% 60% at 20% 30%, rgba(59, 130, 246, 0.08), transparent 70%),
+     radial-gradient(ellipse 70% 50% at 80% 60%, rgba(201, 168, 76, 0.06), transparent 68%),
+@@ -2707,7 +2707,7 @@
+   opacity: 0.9;
+ }
+ 
+-:global(.apex-world-node-halo) {
++.apex-world-node-halo {
+   border: 1px solid rgba(255, 255, 255, 0.16);
+   background: radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.18), rgba(15, 23, 42, 0.82) 65%);
+   box-shadow:
+@@ -2716,7 +2716,7 @@
+   backdrop-filter: blur(8px);
+ }
+ 
+-:global(.apex-world-planet-surface) {
++.apex-world-planet-surface {
+   background:
+     radial-gradient(ellipse 70% 55% at 30% 25%, rgba(255, 255, 255, 0.22), transparent 48%),
+     radial-gradient(circle at 70% 75%, rgba(10, 18, 38, 0.92), rgba(2, 5, 16, 0.98) 70%),
+@@ -2727,15 +2727,15 @@
+     inset 0 -10px 24px rgba(0, 0, 0, 0.45);
+ }
+ 
+-:global(.apex-world-planet-glow) {
++.apex-world-planet-glow {
+   box-shadow: 0 0 32px color-mix(in srgb, var(--node-color) 28%, transparent);
+ }
+ 
+-:global(.apex-world-node-name) {
++.apex-world-node-name {
+   text-shadow: 0 2px 12px rgba(2, 6, 23, 0.9);
+ }
+ 
+-:global(.apex-world-node-status) {
++.apex-world-node-status {
+   font-size: 0.5625rem;
+   font-weight: 700;
+   text-transform: uppercase;
+@@ -2743,7 +2743,7 @@
+   color: rgba(110, 231, 183, 0.85);
+ }
+ 
+-:global(.apex-mini-moon) {
++.apex-mini-moon {
+   aspect-ratio: 1 / 1;
+   background:
+     radial-gradient(ellipse 70% 50% at 28% 22%, rgba(255, 255, 255, 0.42), transparent 52%),
+@@ -2756,15 +2756,15 @@
+   border: 1px solid rgba(255, 255, 255, 0.08);
+ }
+ 
+-:global(.apex-page)::before {
++.apex-page::before {
+   display: none;
+ }
+ 
+ @media (prefers-reduced-motion: reduce) {
+-  :global(.apex-orbit-node-ring) {
++  .apex-orbit-node-ring {
+     animation: none;
+   }
+-  :global(.apex-scene-reveal-inner) {
++  .apex-scene-reveal-inner {
+     transform: none !important;
+     opacity: 1 !important;
+     filter: none !important;
+diff --git a/src/app/apex/page.tsx b/src/app/apex/page.tsx
+index 9878c5e..65e7961 100644
+--- a/src/app/apex/page.tsx
++++ b/src/app/apex/page.tsx
+@@ -2,7 +2,7 @@ import ApexGatewayCinematic from "./ApexGatewayCinematic";
+ import ApexJsonLd from "./ApexJsonLd";
+ import ApexAnalytics from "./ApexAnalytics";
+ import { apexGatewayMetadata } from "./apexSeo";
+-import "./apex.module.css";
++import "./apex.global.css";
+ 
+ export const metadata = apexGatewayMetadata;
+ 
 -- 
 2.43.0
 
