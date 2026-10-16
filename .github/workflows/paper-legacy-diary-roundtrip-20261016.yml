@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - 'fix/paper-legacy-diary-authenticated-print-20261016'
+      - 'integration/core-paper-legacy-diary-roundtrip-20261016'
   pull_request:
     paths:
       - 'al-siddique-frontend/src/Modules/Paper-Generator/DailyDiaryWorkspace.jsx'
