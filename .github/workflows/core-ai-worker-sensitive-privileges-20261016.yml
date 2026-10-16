@@ -6,11 +6,13 @@ on:
     paths:
       - 'al-siddique-backend/src/services/ai/aiQueueWorkerDatabase.js'
       - 'al-siddique-backend/src/services/ai/test-ai-worker-sensitive-dml-gate-20261016.cjs'
+      - 'ops/release/*reviewed_worker_dml_stage_20261016.py'
       - '.github/workflows/core-ai-worker-sensitive-privileges-20261016.yml'
   pull_request:
     paths:
       - 'al-siddique-backend/src/services/ai/aiQueueWorkerDatabase.js'
       - 'al-siddique-backend/src/services/ai/test-ai-worker-sensitive-dml-gate-20261016.cjs'
+      - 'ops/release/*reviewed_worker_dml_stage_20261016.py'
       - '.github/workflows/core-ai-worker-sensitive-privileges-20261016.yml'
 jobs:
   mock-node-worker-privileges:
@@ -26,3 +28,5 @@ jobs:
         run: |
           node --check al-siddique-backend/src/services/ai/aiQueueWorkerDatabase.js
           node --test al-siddique-backend/src/services/ai/test-ai-worker-sensitive-dml-gate-20261016.cjs
+      - name: Verify private stage receipt safety offline
+        run: python3 -m unittest discover -s ops/release -p 'test_verify_reviewed_worker_dml_stage_20261016.py' -v

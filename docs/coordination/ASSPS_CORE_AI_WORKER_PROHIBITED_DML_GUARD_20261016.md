@@ -28,3 +28,17 @@ Current public backend metadata `16ab8f346ba27aa6b2e29a8f03c68db32a326cb9`, Core
 2. Re-run hermetic unit tests, real read-only peer-role SQL, stage/rollback parity and cross-tenant/subject-denial tests.
 3. Adopt only verified missing diff onto the latest Core descendant and rebuild isolated backend/Next/Vite candidates.
 4. Retain official Core fail-closed signed release status HOLD until all required independently signed evidence is present.
+
+## New isolated verified overlay, not a release
+Private source-only stage created and independently verified without touching the old immutable review archive: `/root/assps-release-candidates/core-ai-worker-sensitive-dml-3b7f6b24-20261016`. A committed pinned script `ops/release/verify_reviewed_worker_dml_stage_20261016.py` supports `--create` (create only when absent; NEVER overwrite) and default read-only verification. It reads reviewed git bytes at exact backend hardening commit `3b7f6b24a6b3ea935105f4eba95afef1fb1179b1`, stages only five listed backend overlays, and reuses the byte-verified original-three-file backup from the old root-private stage after checking every original's SHA against the current running backend. No live backend writes or secrets copied. New stage directory root-owned 0700 and manifest/overlays/archive 0600.
+
+**Actual private result:** `PRIVATE_WORKER_DML_OVERLAY_PASS_NOT_RELEASE`, 5/5 reviewed source SHA overlays and 3/3 currently unchanged archived live-backend originals match, zero errors, `productionChanged:false`. Separate **12/12** hermetic fail-closed stage tests pass, including unexpected source commit, source drift, unauthorized paths, fake release signature/approval, rollback SHA changes, extra original and insufficient permissions. Old stage remains intact, and intentionally returns `HOLD / STAGE_SOURCE_SHA_DRIFT` against this newer hardening branch. The independently staged *source overlays* are not a complete runnable server, not independently reviewed/approved release artifacts, and must not be connected to production until all mandatory gates pass.
+
+Commands executed:
+```bash
+python3 -m unittest discover -s ops/release -p 'test_verify_reviewed_worker_dml_stage_20261016.py' -v
+python3 ops/release/verify_reviewed_worker_dml_stage_20261016.py --create
+python3 ops/release/verify_reviewed_worker_dml_stage_20261016.py
+```
+
+**Remaining production blockers are genuine:** owner-approved original ACL backup, separately signed current off-host recovery, production restricted signed transport, actual reviewed backend adapter deployment, separate live persistent worker authentication, independently signed effective inherited role grants and real signed School2/unassigned-subject HTTP denial. The official 13/13 Ed25519 Core gate stays HOLD and no production cutover is authorized.
