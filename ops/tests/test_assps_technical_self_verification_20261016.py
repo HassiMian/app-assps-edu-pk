@@ -47,6 +47,12 @@ class TestAcceptanceWithoutForgedSignatures(unittest.TestCase):
  def test_known_missing_marks_are_not_fabricated_or_break_school_use(self):
   a=good();a["metrics"]["firstTermCompleteness"]={"duplicateStudentSubjects":0,"subjectGradeBandGaps":0,"studentGradeBandGaps":0,"missingEntries":284,"affectedStudents":233,"unmappedRecordedSubjects":1}
   self.assertEqual(module.evaluate(a,None)[0],"OPERATIONAL")
+ def test_grade910_fake_approved_without_source_evidence_triggers_critical(self):
+  a=good();a["metrics"]["grade910QuestionQuality"]={"approved_rows_missing_minimum_evidence":1}
+  self.assertIn("GRADE910_APPROVED_QUESTION_WITHOUT_MINIMUM_SOURCE_OR_ANSWER_EVIDENCE",module.evaluate(a,None)[1])
+ def test_unreviewed_grade910_candidates_not_falsely_approved(self):
+  a=good();a["metrics"]["grade910QuestionQuality"]={"class9_question_rows":1530,"class10_question_rows":881,"flagged_approved_rows":0,"approved_rows_missing_minimum_evidence":0}
+  self.assertEqual(module.evaluate(a,None)[0],"OPERATIONAL")
  def test_receipt_stored_atomically_and_no_personal_data(self):
   with tempfile.TemporaryDirectory() as d:
    p=Path(d)/"receipt.json";module.write_receipt(p,good())
