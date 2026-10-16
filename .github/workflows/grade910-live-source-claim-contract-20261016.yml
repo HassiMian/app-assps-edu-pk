@@ -11,6 +11,11 @@ on:
       - "ops/qbank/author-grade9-biology8-grade10-computer6-urdu-research-20261016.py"
       - "ops/qbank/author-grade10-urdu-chemistry-ten-safe-conceptual-answers-20261016.py"
       - "ops/qbank/author-grade910-english-21-essay-exemplars-20261016.py"
+      - "ops/qbank/build-grade910-session-adoption-evidence-gate-20261016.py"
+      - "ops/release/install-grade910-session-2027-adoption-gate-20261016.sh"
+      - "ops/tests/test_grade910_2026_27_catalog_vs_assps_adoption_evidence_20261016.py"
+      - "ops/tests/test_grade910_catalog_alp_2027_publication_hold_20261016.py"
+      - "docs/question-bank/ASSPS_GRADE910_OFFICIAL_2026_2027_SESSION_ADOPTION_GAP_20261016.md"
       - "ops/qbank/author-grade9-urdu-chemistry-eight-conceptual-20261016.py"
       - "ops/tests/test_grade910_english21_essay_exemplar_research_20261016.py"
       - "ops/tests/test_grade9_urdu_chemistry8_conceptual_answers_20261016.py"
@@ -97,6 +102,11 @@ on:
       - "ops/qbank/author-grade9-biology8-grade10-computer6-urdu-research-20261016.py"
       - "ops/qbank/author-grade10-urdu-chemistry-ten-safe-conceptual-answers-20261016.py"
       - "ops/qbank/author-grade910-english-21-essay-exemplars-20261016.py"
+      - "ops/qbank/build-grade910-session-adoption-evidence-gate-20261016.py"
+      - "ops/release/install-grade910-session-2027-adoption-gate-20261016.sh"
+      - "ops/tests/test_grade910_2026_27_catalog_vs_assps_adoption_evidence_20261016.py"
+      - "ops/tests/test_grade910_catalog_alp_2027_publication_hold_20261016.py"
+      - "docs/question-bank/ASSPS_GRADE910_OFFICIAL_2026_2027_SESSION_ADOPTION_GAP_20261016.md"
       - "ops/qbank/author-grade9-urdu-chemistry-eight-conceptual-20261016.py"
       - "ops/tests/test_grade910_english21_essay_exemplar_research_20261016.py"
       - "ops/tests/test_grade9_urdu_chemistry8_conceptual_answers_20261016.py"
@@ -250,5 +260,11 @@ jobs:
           python3 -m unittest discover -s ops/tests -p test_grade910_english21_essay_exemplar_research_20261016.py -v
           python3 -m unittest discover -s ops/tests -p test_grade9_urdu_chemistry8_conceptual_answers_20261016.py -v
           python3 -m py_compile ops/qbank/author-grade910-english-21-essay-exemplars-20261016.py ops/qbank/author-grade9-urdu-chemistry-eight-conceptual-20261016.py
+      - name: Verify school adoption vs public catalog and the 2026 ALP year firewall
+        run: |
+          python3 -m unittest discover -s ops/tests -p test_grade910_2026_27_catalog_vs_assps_adoption_evidence_20261016.py -v
+          python3 -m unittest discover -s ops/tests -p test_grade910_catalog_alp_2027_publication_hold_20261016.py -v
+          python3 -m py_compile ops/qbank/build-grade910-session-adoption-evidence-gate-20261016.py
+          bash -n ops/release/install-grade910-session-2027-adoption-gate-20261016.sh
       - name: Validate offline claim auditor syntax
         run: python3 -m py_compile ops/qbank/audit-live-grade910-source-claims-20261016.py ops/qbank/reconcile-grade910-held-original-candidates-20261016.py

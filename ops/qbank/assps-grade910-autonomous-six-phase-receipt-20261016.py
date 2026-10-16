@@ -19,7 +19,7 @@ OUT=SOURCE_DIR/"autonomous-six-phase-checkpoint.json"
 def read(path:Path):
     return json.loads(path.read_text(encoding="utf8")) if path.exists() else None
 
-def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, answer, ocr_progress=None, live_collisions=None, adoption_inventory=None, review_delta=None, tenant_rls=None, revision_history=None, numerical_evidence=None, numerical_deep_proof=None, subjective_risk=None, historic_answer_drafts=None):
+def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, answer, ocr_progress=None, live_collisions=None, adoption_inventory=None, review_delta=None, tenant_rls=None, revision_history=None, numerical_evidence=None, numerical_deep_proof=None, subjective_risk=None, historic_answer_drafts=None, session_evidence=None):
     if not all(isinstance(x,dict) for x in (technical,weekly,source,held,pdf,text,ocr_pilot,answer)):
         raise ValueError("MANDATORY_MACHINE_EVIDENCE_MISSING")
     src=source.get("summary") or {}
@@ -78,6 +78,37 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
            adoption_inventory.get('schoolEditionAdoptionVerifiedByThisAudit') is not False) or (
            adoption_inventory.get('academicQuestionApprovalGained')!=0):
             raise ValueError('SCHOOL_ADOPTION_NOT_AUTHENTICALLY_VERIFIED')
+    if session_evidence is not None:
+        se=session_evidence
+        expected_counts={'EARLIER_PRINTED_EDITION_MUST_CONFIRM_SESSION':1040,
+                         'PUBLIC_LABEL_2026_27_NOT_ASSPS_ADOPTION':599,
+                         'UNSPECIFIED_OR_DATE_LINK_REQUIRES_INDEPENDENT_ADOPTION':942}
+        counts=se.get('schoolAdoptionVersionRowCounts') or {}
+        if (se.get('schema')!='ASSPS_GRADE910_2026_27_CATALOG_APPLICABILITY_NOT_SCHOOL_ADOPTION_V1'
+            or se.get('schoolId')!=1
+            or se.get('actualLiveFullQuestionRevisionCount')!=2411
+            or se.get('originalResearchCount')!=2581
+            or se.get('heldOriginalOnlyCount')!=170
+            or se.get('allPublicCatalogs')!=111
+            or se.get('catalogsReferencedByFrozenResearch')!=56
+            or se.get('candidateCountByEvidenceLane')!=expected_counts
+            or len(se.get('missingGradeClaimOriginalResearchIDs',[]))!=44
+            or se.get('gradeConflictIDs')!=[]
+            or se.get('grade9RevisedALPAppliesToAnnualExamYear')!=2026
+            or se.get('grade9RevisedALPAutomaticallyAppliesTo2027') is not False
+            or se.get('thePublic2026_27CatalogDoesNotAuthenticateASSPSAdoption') is not True
+            or se.get('referenceEditionLabelNotProofOfAppliedBoardScheme') is not True
+            or se.get('publisherQuestionSpecificPrintedPageExerciseTextIndependentlyVerified')!=0
+            or se.get('qualifiedIndependentSubjectAndLanguageReviewsAuthenticated')!=0
+            or se.get('newlyApprovedQuestions')!=0
+            or se.get('academicallyPublishedQuestions')!=0
+            or se.get('paperStudioVerifiedSelectableQuestions')!=0
+            or se.get('productionQuestionOrStudentDatabaseWrites')!=0
+            or not isinstance(se.get('manifestSourceSHA256'),str)
+            or len(se['manifestSourceSHA256'])!=64
+            or any(counts.get(name)!=0 for name in ('sessionVersions','curriculumProfileVersions',
+                'resourceBooks','resourceVersions','learningScopeVersions','schoolAcademicApprovalEvents'))):
+            raise ValueError('OFFICIAL_CATALOG_VS_ASSPS_ADOPTION_YEAR_FRAUD_OR_DRIFT')
     if review_delta is not None:
         if (review_delta.get('schema')!='ASSPS_GRADE910_2581_LIVE_SOURCE_EVIDENCE_DELTA_V1'
            or review_delta.get('originalResearchQuestionIds')!=2581
@@ -260,6 +291,8 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
        "ocrPageClaimsCheckpointed":progressClaims,
        "ocrPagesRemaining":112-progressPages,
        "schoolVersionedAdoptionEvidenceChain":adoption_inventory.get("interpretation") if adoption_inventory else "NOT_AUDITED",
+       "official2026_27PublisherLabelsWithoutASSPSAdoptionProof":session_evidence.get("candidateCountByEvidenceLane",{}).get("PUBLIC_LABEL_2026_27_NOT_ASSPS_ADOPTION") if session_evidence else None,
+       "grade9ALPAnnual2026CannotAutoApplyTo2027":session_evidence.get("grade9RevisedALPAutomaticallyAppliesTo2027") is False if session_evidence else None,
        "sourcePdfAssetsChecked":56,
        "claimsChecked":998,"independentVerifiedContentPages":0,
        "evidence":"SHA/page bounds, exact PDF text layer, and bounded English OCR pilot"},
@@ -293,6 +326,10 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
       "academicVerifiedPublicationReady":False,
       "paperStudioAcademicallyApprovedSnapshotReady":False,
       "academicPublicationDecision":"BLOCK_UNVERIFIED_QUESTION_PUBLICATION",
+      "officialCatalogVsSchoolAdoptionEvidenceGate":session_evidence.get("schema") if session_evidence else None,
+      "public2026_27TextbookLabelsWithoutAdoptionProof":session_evidence.get("candidateCountByEvidenceLane",{}).get("PUBLIC_LABEL_2026_27_NOT_ASSPS_ADOPTION") if session_evidence else None,
+      "school2026_27VersionedAdoptionEvidenceRows":session_evidence.get("schoolAdoptionVersionRowCounts") if session_evidence else None,
+      "grade9Annual2026ALPCannotBeAutomaticallyAppliedTo2027":not session_evidence.get("grade9RevisedALPAutomaticallyAppliesTo2027") if session_evidence else None,
       "actualQuestionContentPagesVerified":0,
       "ocrFullRunCompleted":full_ocr_done,
       "ocrResumablePagesCheckpointed":progressPages,
@@ -360,7 +397,8 @@ if __name__=="__main__":
                read(SOURCE_DIR/"live-numerical-evidence.json"),
                read(SOURCE_DIR/"numerical-deep-recomputation-21.json"),
                read(SOURCE_DIR/"subjective-answer-depth-risk-20261016.json"),
-               read(SOURCE_DIR/"live-existing-answer-proposal-crosswalk-20261016.json"))
+               read(SOURCE_DIR/"live-existing-answer-proposal-crosswalk-20261016.json"),
+               read(SOURCE_DIR/"session-adoption-catalog-crosswalk-20261016.json"))
     save(OUT,p)
     print(json.dumps({k:v for k,v in p.items() if k!="phases"},sort_keys=True))
     for row in p["phases"]:print(f"PHASE_{row['phase']}={row['status']}")
