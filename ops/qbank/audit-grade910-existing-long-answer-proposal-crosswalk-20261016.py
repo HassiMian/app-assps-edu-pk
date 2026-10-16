@@ -57,7 +57,7 @@ def packet_ids(groups,docs=DOCS,original=ORIG):
     if len(result)!=161 or sum(x['rows'] for x in packets)!=161:
         raise ValueError('EXPECTED_161_RESEARCH_DRAFTS_MISSING')
     return result,packets
-def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG):
+def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG,new_biology=None):
     existing,packets=packet_ids(groups,docs,original)
     rows=five.get('rows')
     if not isinstance(rows,list) or len(rows)!=5:raise ValueError('EXPECTED_FINAL_FIVE_FACULTY_DOCKETS')
@@ -124,6 +124,52 @@ def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG):
                                 str(x['grade']),str(x['subject']),x['questionId']))
     if len(unlinked)!=450 or sum(x['priority']=='HIGH' for x in unlinked)!=229:
         raise ValueError('UNLINKED_SUBJECTIVE_RESEARCH_QUEUE_SCOPE_DRIFT')
+    # Newly authored Urdu Biology explanations are *additional research*, not
+    # a rewrite of the historical 161+5 packet inventory and not staff approval.
+    recently_authored=0
+    if new_biology is not None:
+        if (new_biology.get('schema')!='ASSPS_BIOLOGY_X_URDU_TEN_LONG_ORIGINAL_RESEARCH_ANSWERS_V1'
+            or new_biology.get('candidateCount')!=10
+            or new_biology.get('academicallyApproved') is not False
+            or new_biology.get('publishedVerified') is not False
+            or new_biology.get('independentQualifiedSubjectReviewed') is not False
+            or new_biology.get('independentUrduReviewed') is not False
+            or new_biology.get('actualSchoolTextbookAdoptionVerified') is not False
+            or new_biology.get('exactOriginalExercisePageVerified') is not False
+            or new_biology.get('productionDatabaseWrites')!=0):
+            raise ValueError('UNAPPROVED_BIOLOGY_RESEARCH_PACKET_FORGED_OR_DRIFTED')
+        rows=new_biology.get('newAnswers')
+        if not isinstance(rows,list) or len(rows)!=10:
+            raise ValueError('NEW_BIOLOGY_RESEARCH_PACKET_10_REQUIRED')
+        ids=set()
+        for entry in rows:
+            id=entry.get('questionId')
+            if id in ids or id not in hashes or id in existing and existing[id]['proposalExists']:
+                raise ValueError('NEW_BIOLOGY_RESEARCH_DUPLICATES_PREVIOUS_EXPLANATION')
+            ids.add(id)
+            prior=riskmap.get(id)
+            if (prior is None or prior['priority']!='HIGH'
+                or prior['grade']!='10th' or prior['subject']!='Biology'
+                or prior['medium']!='Urdu' or prior['type']!='long'
+                or entry.get('grade')!=10 or entry.get('subject')!='Biology'
+                or entry.get('medium')!='Urdu' or entry.get('marks')!=5
+                or entry.get('currentLiveRevisionSha256')!=hashes[id]
+                or entry.get('academicApproved') is not False
+                or entry.get('published') is not False
+                or entry.get('paperStudioVerifiedSelectable') is not False
+                or entry.get('independentSubjectTeacherReviewed') is not False
+                or entry.get('independentUrduLanguageReviewed') is not False
+                or entry.get('school2026To2027EditionAdoptionAuthenticated') is not False
+                or entry.get('sourcePageOrExerciseIndependentlyVerified') is not False
+                or len(str(entry.get('newIndependentResearchAnswerUrdu') or '').split())<65
+                or len(entry.get('proposedFiveSeparateMarkingCriteriaUrdu') or [])!=5):
+                raise ValueError('NEW_BIOLOGY_RESEARCH_NOT_CURRENT_UNAPPROVED_HIGH_REVISION')
+        unlinked=[x for x in unlinked if x['questionId'] not in ids]
+        recently_authored=len(ids)
+        if recently_authored!=10:
+            raise ValueError('NEW_BIOLOGY_RESEARCH_COUNT_NOT_TEN')
+        if len(unlinked)!=440 or sum(x['priority']=='HIGH' for x in unlinked)!=219:
+            raise ValueError('NEW_BIOLOGY_RESEARCH_LEFTOVER_QUEUE_WRONG')
     if summary['originalUniverse']!=166 or summary['live']!=165 or summary['originalOnly']!=1:
         raise ValueError('RESEARCH_ORIGINAL_LIVE_CROSSWALK_DRIFT')
     if summary['hasResearchDraft']!=165 or summary['noResearchDraft']!=1 or summary['liveWithResearchDraft']!=164:
@@ -138,6 +184,9 @@ def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG):
        'liveLongQuestionIdsWithPriorResearchDraft':summary['liveWithResearchDraft'],
        'liveRiskIdsWithPriorResearchDraft':summary['liveRiskWithResearchDraft'],
        'liveRiskIdsWithoutPriorResearchDraft':604-summary['liveRiskWithResearchDraft'],
+       'newIndependentHighPriorityUrduBiologyResearchCandidates':recently_authored,
+       'remainingLiveReviewDepthFlagsWithoutAnyDraft':len(unlinked),
+       'remainingHighPriorityFlagsWithoutAnyDraft':sum(x['priority']=='HIGH' for x in unlinked),
        'highPriorityRiskIdsWithPriorResearchDraft':high_existing,
        'highPriorityRiskIdsWithoutPriorResearchDraft':357-high_existing,
        'finalFiveSupplementalDockets':5,'finalFiveExplanatoryDrafts':4,
@@ -175,7 +224,18 @@ def run():
     groups=json.loads((DOCS/MASTER).read_text())['sourceGroups']
     last=json.loads((DOCS/FIVE).read_text())
     risks=json.loads((STATE/RISK_LEDGER).read_text())
-    result=build(groups,last,ledger,risks,set(hashes))
+    # Rebuild expected answers from the frozen research authoring script and
+    # today's actual current live SHA set before trusting the source packet.
+    spec=importlib.util.spec_from_file_location(
+        'assps_original_urdu_biology_research_author',
+        ROOT/'ops/qbank/author-grade10-urdu-biology-ten-research-answers-20261016.py')
+    author=importlib.util.module_from_spec(spec);spec.loader.exec_module(author)
+    proposal=json.loads(author.OUT.read_text(encoding='utf8'))
+    if sha(author.SOURCE.read_bytes())!=author.EXPECTED_SOURCE_SHA:
+        raise ValueError('TEN_URDU_BIOLOGY_FROZEN_ORIGINAL_FILE_CHANGED')
+    if author.build({r['id']:r for r in live},hashes)!=proposal:
+        raise ValueError('TEN_URDU_BIOLOGY_PROPOSAL_TAMPERED_OR_CURRENT_REVISION_DRIFT')
+    result=build(groups,last,ledger,risks,set(hashes),new_biology=proposal)
     atomic_private(OUT,result)
     return result
 if __name__=='__main__':

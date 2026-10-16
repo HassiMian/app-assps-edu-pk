@@ -12,13 +12,13 @@ MAIN=assps-grade910-live-source-claims.service
 DIR="/etc/systemd/system/$MAIN.d"
 TARGET="$DIR/84z-grade910-prior-long-answer-research.conf"
 PHASE_LIVE=/usr/local/libexec/assps-grade910-sourceclaims/assps-grade910-six-phase-current-numeric-proof-20261016.py
-PREVIOUS=ecccbc161e9b81cbaaacf5d9835efa8f0500f9c294984f3aed56cfec24c62054
+PREVIOUS=109931be5fc1395dc074cb388a4f8f76683482b1e524b61d1b8f0018e776745e
 for name in 80-grade910-live-numerical-proofs.conf 82-grade910-mcq-choice-equivalence.conf 84-grade910-subjective-depth-review.conf 85-grade910-current-machine-phase.conf;do
  [[ -s "$DIR/$name" ]] || { echo "MISSING_PREVIOUS_ACADEMIC_QA_HOOK_$name" >&2;exit 2; }
 done
 [[ -s "$Q" && -s "$PHASE" && -s "$PHASE_LIVE" ]] || exit 2
 python3 -m py_compile "$Q" "$PHASE"
-for test in test_grade910_existing_long_answer_proposal_crosswalk_20261016.py test_grade910_historical_answer_research_phase_guard_20261016.py test_grade910_subjective_six_phase_gate_20261016.py test_grade910_six_phase_receipt_20261016.py;do
+for test in test_grade910_existing_long_answer_proposal_crosswalk_20261016.py test_grade910_historical_answer_research_phase_guard_20261016.py test_grade910_subjective_six_phase_gate_20261016.py test_grade910_six_phase_receipt_20261016.py test_grade910_biology10_urdu_ten_explanation_drafts_20261016.py test_grade910_new_urdu_biology_research_queue_gate_20261016.py;do
  python3 -m unittest discover -s "$ROOT/ops/tests" -p "$test" -q
 done
 CURRENT_SHA="$(sha256sum "$PHASE_LIVE" | cut -d' ' -f1)"
@@ -32,6 +32,7 @@ if [[ "$MODE" == "--check" ]];then
 fi
 [[ "$(id -u)" -eq 0 ]] || exit 65
 [[ -z "$(git -C "$ROOT" status --porcelain)" ]] || { echo 'DIRTY_SOURCE_REFUSED' >&2;exit 2; }
+python3 "$ROOT/ops/qbank/author-grade10-urdu-biology-ten-research-answers-20261016.py" --check
 BACKUP=''
 CHANGED=0
 ADDED=0

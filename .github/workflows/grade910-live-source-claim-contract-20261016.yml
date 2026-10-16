@@ -7,6 +7,11 @@ on:
       - "ops/qbank/assps-grade910-autonomous-six-phase-receipt-20261016.py"
       - "ops/qbank/audit-grade910-subjective-answer-depth-20261016.py"
       - "ops/qbank/audit-grade910-existing-long-answer-proposal-crosswalk-20261016.py"
+      - "ops/qbank/author-grade10-urdu-biology-ten-research-answers-20261016.py"
+      - "ops/tests/test_grade910_biology10_urdu_ten_explanation_drafts_20261016.py"
+      - "ops/tests/test_grade910_new_urdu_biology_research_queue_gate_20261016.py"
+      - "docs/question-bank/ASSPS_GRADE10_URDU_BIOLOGY_TEN_UNAPPROVED_ANSWER_CONTENT_BATCH_20261016.md"
+      - "docs/question-bank/ASSPS_BIOLOGY10_URDU_TEN_HIGH_PRIORITY_CONCEPTUAL_ANSWER_RESEARCH_20261016.json"
       - "ops/tests/test_grade910_existing_long_answer_proposal_crosswalk_20261016.py"
       - "ops/tests/test_grade910_historical_answer_research_phase_guard_20261016.py"
       - "ops/release/install-grade910-existing-answer-research-crosswalk-20261016.sh"
@@ -70,6 +75,11 @@ on:
       - "ops/qbank/assps-grade910-autonomous-six-phase-receipt-20261016.py"
       - "ops/qbank/audit-grade910-subjective-answer-depth-20261016.py"
       - "ops/qbank/audit-grade910-existing-long-answer-proposal-crosswalk-20261016.py"
+      - "ops/qbank/author-grade10-urdu-biology-ten-research-answers-20261016.py"
+      - "ops/tests/test_grade910_biology10_urdu_ten_explanation_drafts_20261016.py"
+      - "ops/tests/test_grade910_new_urdu_biology_research_queue_gate_20261016.py"
+      - "docs/question-bank/ASSPS_GRADE10_URDU_BIOLOGY_TEN_UNAPPROVED_ANSWER_CONTENT_BATCH_20261016.md"
+      - "docs/question-bank/ASSPS_BIOLOGY10_URDU_TEN_HIGH_PRIORITY_CONCEPTUAL_ANSWER_RESEARCH_20261016.json"
       - "ops/tests/test_grade910_existing_long_answer_proposal_crosswalk_20261016.py"
       - "ops/tests/test_grade910_historical_answer_research_phase_guard_20261016.py"
       - "ops/release/install-grade910-existing-answer-research-crosswalk-20261016.sh"
@@ -186,5 +196,9 @@ jobs:
           python3 -m unittest discover -s ops/tests -p test_grade910_existing_long_answer_proposal_crosswalk_20261016.py -v
           python3 -m unittest discover -s ops/tests -p test_grade910_historical_answer_research_phase_guard_20261016.py -v
           bash -n ops/release/install-grade910-existing-answer-research-crosswalk-20261016.sh
+      - name: Protect ten original Urdu Biology research explanations from false academic approval
+        run: |
+          python3 -m unittest discover -s ops/tests -p test_grade910_biology10_urdu_ten_explanation_drafts_20261016.py -v
+          python3 -m py_compile ops/qbank/author-grade10-urdu-biology-ten-research-answers-20261016.py
       - name: Validate offline claim auditor syntax
         run: python3 -m py_compile ops/qbank/audit-live-grade910-source-claims-20261016.py ops/qbank/reconcile-grade910-held-original-candidates-20261016.py

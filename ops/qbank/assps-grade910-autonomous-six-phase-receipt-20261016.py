@@ -184,6 +184,15 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
             or len(x.get('records',[]))!=166
             or not subjective_depth_checked):
             raise ValueError('HISTORICAL_ANSWER_RESEARCH_CROSSWALK_INVALID_OR_UNREVIEWED')
+        if x.get('newIndependentHighPriorityUrduBiologyResearchCandidates') is not None:
+            if (x.get('newIndependentHighPriorityUrduBiologyResearchCandidates')!=10
+                or x.get('remainingLiveReviewDepthFlagsWithoutAnyDraft')!=440
+                or x.get('remainingHighPriorityFlagsWithoutAnyDraft')!=219
+                or len(x.get('unlinkedCurrentRevisionResearchQueue',[]))!=440
+                or sum(y.get('priority')=='HIGH' for y in x['unlinkedCurrentRevisionResearchQueue'])!=219):
+                raise ValueError('NEW_URDU_BIOLOGY_MODEL_RESEARCH_FRAUDULENT_APPROVAL_OR_DRIFT')
+        elif 'unlinkedCurrentRevisionResearchQueue' in x and len(x['unlinkedCurrentRevisionResearchQueue'])!=450:
+            raise ValueError('HISTORICAL_ORIGINAL_RESEARCH_BACKLOG_LEDGER_DRIFT')
         prior_long_explanations_linked=True
     score=technical.get("metrics",{}).get("scores",{})
     integrity=technical.get("decision")=="OPERATIONAL" and score.get("total_score_rows",0)>=1763
@@ -255,6 +264,9 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
       "subjectiveDepthRiskFlagsNeedingFreshModelResearch":450 if prior_long_explanations_linked else None,
       "highPriorityAnswerRiskWithoutPriorResearch":229 if prior_long_explanations_linked else None,
       "priorLongAnswerDraftsAreNotTeacherReviews":True,
+      "newGrade10UrduBiologyUnapprovedAnswerResearchCandidates":historic_answer_drafts.get("newIndependentHighPriorityUrduBiologyResearchCandidates") if prior_long_explanations_linked else None,
+      "subjectiveDepthFlagsNeedingFreshAnswerResearchAfterNewDrafts":historic_answer_drafts.get("remainingLiveReviewDepthFlagsWithoutAnyDraft") if prior_long_explanations_linked else None,
+      "highPriorityResearchFlagsStillUnlinkedAfterNewDrafts":historic_answer_drafts.get("remainingHighPriorityFlagsWithoutAnyDraft") if prior_long_explanations_linked else None,
       "everyChangedQuestionRevisionMustBeRereviewed":True,
       "questionBankCrossSchoolRlsDenied":tenant_rls.get("crossTenantLeakCount")==0 if tenant_rls else None,
       "liveQuestionDuplicateGroups":0 if live_collisions is not None else None,
