@@ -80,6 +80,30 @@ test('Daily Diary split workspace personalizes students, supports dynamic A4 cou
   assert.ok(boxes&&Math.abs(Number(boxes[1])-595)<5&&Math.abs(Number(boxes[2])-842)<5,'Diary print is not A4')
   await printPage.close()
   console.log('DAILY_DIARY_REAL_ISOLATED_PRINT_FRAME_A4_FONT_CONTROLLER_PASS',printPdf.length)
+  // A delayed earlier font/image promise must never print or overwrite the
+  // next teacher-selected snapshot after rapid successive Print / PDF clicks.
+  await page.locator('[data-diary-editor] .dd-row-editor').first().locator('button[title="Increase subject font"]').click()
+  const latestSubjectSize=await page.locator('.dd-a4-page .dd-sub-cell').first().evaluate(el=>el.style.fontSize)
+  await page.getByRole('button',{name:'Print / PDF'}).click()
+  await page.getByRole('button',{name:'Print / PDF'}).click()
+  const latestPrint=await printFrame.evaluate(el=>({
+    token:el.dataset.printRequestToken,
+    subjectSize:el.contentDocument.querySelector('.dd-sub-cell')?.style.fontSize,
+    pageCount:el.contentDocument.querySelectorAll('.dd-a4-page').length,
+    cardCount:el.contentDocument.querySelectorAll('.dd-card').length,
+  }))
+  assert.equal(latestPrint.token,'3','Rapid Print clicks lost the monotonically increasing snapshot request token')
+  assert.equal(latestPrint.subjectSize,latestSubjectSize,'Rapid Print clicks printed an older subject-size selection')
+  assert.equal(latestPrint.pageCount,1)
+  assert.equal(latestPrint.cardCount,10)
+  await page.waitForTimeout(2650)
+  const afterStaleTimeout=await printFrame.evaluate(el=>({
+    token:el.dataset.printRequestToken,
+    subjectSize:el.contentDocument.querySelector('.dd-sub-cell')?.style.fontSize,
+  }))
+  assert.deepEqual(afterStaleTimeout,{token:'3',subjectSize:latestSubjectSize},
+    'Earlier asynchronous print readiness changed the latest print snapshot')
+  console.log('DAILY_DIARY_RAPID_PRINT_NEWEST_SNAPSHOT_PRESERVED_PASS')
   await page.locator('[data-diary-mode="lesson"]').click();await page.locator('[data-auto-plan-today]').click();await page.getByText('Daily multi-subject plan generated with AI enrichment.').waitFor({timeout:10000});const preview=(await page.locator('[data-a4-page]').first().textContent())||'';assert.match(preview,/ENGLISH/);assert.match(preview,/SCIENCE/);assert.match(preview,/Reading comprehension/);assert.match(preview,/Photosynthesis diagram/)
   const pageStyle=await page.locator('[data-a4-page]').first().evaluate(el=>({width:getComputedStyle(el).width,height:getComputedStyle(el).height,cols:getComputedStyle(el).getPropertyValue('--cols'),rows:getComputedStyle(el).getPropertyValue('--rows')}));assert.ok(parseFloat(pageStyle.width)>700);assert.ok(parseFloat(pageStyle.height)>1000);assert.equal(pageStyle.cols.trim(),'2');assert.equal(pageStyle.rows.trim(),'5')
   console.log('DAILY_DIARY_WORKSPACE_BROWSER 1/1 PASS')
