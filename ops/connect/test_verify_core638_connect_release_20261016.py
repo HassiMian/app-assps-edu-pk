@@ -94,6 +94,77 @@ class UnifiedFailClosedTests(unittest.TestCase):
         self.assertEqual(len(set(mod.PRIVATE_PATHS)), 8)
         self.assertTrue(all(path.startswith("/api/") for path in mod.PRIVATE_PATHS))
 
+    def test_direct_core_gate_refuses_untrusted_source_before_process(self):
+        with patch.object(mod, "root_owned_pinned_file", return_value=False), \
+             patch.object(mod.subprocess, "run") as runner:
+            receipt, rc, trusted = mod.invoke_pinned_official_core_gate()
+        self.assertEqual(receipt, {})
+        self.assertEqual(rc, 255)
+        self.assertFalse(trusted)
+        runner.assert_not_called()
+
+    def test_direct_core_gate_requires_exact_pinned_executable_and_nginx(self):
+        checks=[]
+        def audit_path(path, sha):
+            checks.append((str(path),sha))
+            return True
+        with patch.object(mod, "root_owned_pinned_file", side_effect=audit_path), \
+             patch.object(mod.subprocess, "run",return_value=type("Proc",(),{
+                 "returncode":2,"stdout":'{"status":"HOLD","checks":{}}'
+             })()) as runner:
+            receipt, rc, trusted = mod.invoke_pinned_official_core_gate()
+        self.assertEqual(rc,2)
+        self.assertTrue(trusted)
+        self.assertEqual(receipt["status"],"HOLD")
+        self.assertEqual(checks,[(str(mod.OFFICIAL_CORE_GATE),mod.OFFICIAL_CORE_GATE_SHA256),
+                                 (str(mod.NGINX_CONF),mod.NGINX_CONF_SHA256)])
+        argv = runner.call_args.args[0]
+        self.assertEqual(argv[-6:],[
+            "--release-id",mod.FIXED_RELEASE_ID,
+            "--approved-proxy-sha256",mod.NGINX_CONF_SHA256,
+            "--approved-build-id",mod.CONNECT_BUILD_ID
+        ])
+
+    def test_direct_core_gate_rejects_crashed_process_and_invalid_json(self):
+        with patch.object(mod,"root_owned_pinned_file",return_value=True):
+            for rc,body in ((1,'{"status":"READY_FOR_LOGIN_ONLY_CORE"}'),
+                            (0,'<SECRET ERROR>'),(0,'[]')):
+                with self.subTest(rc=rc,body=body):
+                    with patch.object(mod.subprocess,"run",return_value=type("Proc",(),{
+                        "returncode":rc,"stdout":body})()):
+                        receipt,status,verified=mod.invoke_pinned_official_core_gate()
+                    self.assertEqual(receipt,{})
+                    self.assertFalse(verified)
+
+    def test_direct_core_gate_timeout_fails_closed(self):
+        import subprocess
+        with patch.object(mod,"root_owned_pinned_file",return_value=True), \
+             patch.object(mod.subprocess,"run",side_effect=subprocess.TimeoutExpired("core",115)):
+            result=mod.invoke_pinned_official_core_gate()
+        self.assertEqual(result,({},255,False))
+
+    def test_direct_data_is_not_signed_when_verifier_not_trusted(self):
+        fake=self.gate()
+        # Supplying a 13/13 JSON can NEVER manufacture independent trust.
+        x=mod.signed_assessment(fake,0,independently_verified=False)
+        self.assertEqual(x["passed"],13)
+        self.assertFalse(x["authentic_core_release"])
+        self.assertEqual(mod.decide({"verified":True},x),"HOLD_NO_PRODUCTION_CUTOVER")
+
+    def test_untrusted_relative_or_symlinked_root_file_denied(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder)
+            file=root/"release-core.py"
+            file.write_text("safe_test_stub")
+            os.chmod(file,0o644)
+            digest=mod.digest(file)
+            symlink=root/"pointer.py"
+            symlink.symlink_to(file)
+            self.assertFalse(mod.root_owned_pinned_file(symlink,digest))
+            self.assertFalse(mod.root_owned_pinned_file(file,"0"*64))
+            os.chmod(file,0o666)
+            self.assertFalse(mod.root_owned_pinned_file(file,digest))
+
     def test_source_pins_are_exact_commit_and_hash_shapes(self):
         for sha in (mod.CORE_SHA,mod.CONNECT_SHA,mod.CONNECT_PARENT_SHA,
                     mod.CORE_DIST_SHA,mod.PRIVATE_HTTP_DIGEST,*mod.CONNECT_FILES.values()):

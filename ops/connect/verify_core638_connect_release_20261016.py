@@ -23,6 +23,13 @@ CONNECT_PARENT_SHA = "e776d8f15350f62708ed55f6b7cd9fbdfc636ec3"
 CONNECT_BUILD_ID = "91l6KJsI2x_oOVXPQjUd5"
 PUBLIC_BUILD_ID = "ONDwxEIZlx5onDIKY7wYf"
 PRIVATE_HTTP_DIGEST = "68e4a6de75d459ef1cf8192291d81ce124065c6e733ebfc686e27d608fa44fc0"
+
+OFFICIAL_CORE_GATE = Path("/root/workspace/assps-core-connect-gate-exit-hardening-20261015/ops/release/signed-bluegreen/verify-connect-login-only-core-20261014.py")
+OFFICIAL_CORE_GATE_SHA256 = "534d2a7cd14925f8b6cbdc40f1a8bed8c205983ababd42ac67a6bc265e0470bf"
+NGINX_CONF = Path("/etc/nginx/sites-enabled/apex-app-ssl")
+NGINX_CONF_SHA256 = "298f4156fa12d8fc055f98be38961382e4ee6df17048f8d424112cc2408e8919"
+FIXED_RELEASE_ID = "connect-unified-20261016"
+
 CONNECT_FILES = {
     "src/app/api/proxy/[...path]/route.ts": "6868d0f211ad29d0ab5b9c6daf5290d8c6c9f302d44ffddf268f102bb072d815",
     "src/lib/server/mail.ts": "6caf69cf2597d5d776df1b7eb24c361f6a8bab5db5f9f2f16b50b72eee14636b",
@@ -115,6 +122,41 @@ def secure_receipt(path, maximum_age_seconds=3600):
     except (OSError, ValueError, TypeError):
         return None
 
+def root_owned_pinned_file(path, expected_sha):
+    """Reject symlink, non-root, group/world-writable and byte drift."""
+    try:
+        st = path.lstat()
+        return (path.is_file() and not path.is_symlink() and st.st_uid == 0
+                and not (st.st_mode & 0o022)
+                and digest(path) == expected_sha)
+    except OSError:
+        return False
+
+
+def invoke_pinned_official_core_gate():
+    """Run canonical signed verifier; no external receipt payload grants trust."""
+    if not (root_owned_pinned_file(OFFICIAL_CORE_GATE, OFFICIAL_CORE_GATE_SHA256)
+            and root_owned_pinned_file(NGINX_CONF, NGINX_CONF_SHA256)):
+        return {}, 255, False
+    try:
+        call = subprocess.run([
+            sys.executable, str(OFFICIAL_CORE_GATE),
+            "--release-id", FIXED_RELEASE_ID,
+            "--approved-proxy-sha256", NGINX_CONF_SHA256,
+            "--approved-build-id", CONNECT_BUILD_ID,
+        ], capture_output=True, text=True, check=False, timeout=115)
+        # Treat any other return as a failed verifier rather than accepting
+        # arbitrary JSON from a crashed/untrusted process.
+        if call.returncode not in (0, 2):
+            return {}, call.returncode, False
+        receipt = json.loads(call.stdout)
+        if not isinstance(receipt, dict):
+            return {}, 255, False
+        return receipt, call.returncode, True
+    except (ValueError, TypeError, OSError, subprocess.SubprocessError):
+        return {}, 255, False
+
+
 def public_status(path, timeout=6):
     url = "https://api.assps.edu.pk" + path
     try:
@@ -130,7 +172,7 @@ def runtime_probes():
     # Never send staff tokens, tenant IDs, credentials or body data. Save codes only.
     return {path: public_status(path) for path in ("/login",) + PRIVATE_PATHS}
 
-def evaluate(core, connect, live, official, official_rc, smoke, probe=True):
+def evaluate(core, connect, live, official, official_rc, smoke, probe=True, direct_official=False, trusted_execution=False):
     tech = {}
     tech["core_sha_and_clean"] = git_exact_clean(core, CORE_SHA)
     try:
@@ -177,7 +219,11 @@ def evaluate(core, connect, live, official, official_rc, smoke, probe=True):
     else:
         live_codes = {}
         tech["current_anonymous_deny"] = False
-    official_fact = signed_assessment(secure_receipt(official), official_rc)
+    if direct_official:
+        official_fact = signed_assessment(official, official_rc,
+                                          independently_verified=trusted_execution)
+    else:
+        official_fact = signed_assessment(secure_receipt(official), official_rc)
     result = {
         "scope": "CURRENT_READ_ONLY_CONNECT_CORE638_CANDIDATE",
         "production_mutation_performed": False,
@@ -188,6 +234,8 @@ def evaluate(core, connect, live, official, official_rc, smoke, probe=True):
         "technical": tech,
         "anonymous_http_statuses": live_codes,
         "signed_core": official_fact,
+        "direct_official_verifier_executed": bool(direct_official and trusted_execution),
+        "official_core_process_exit": official_rc,
         "decision": decide(tech, official_fact),
         "deployment_executed": False,
         "remaining": [
@@ -210,15 +258,23 @@ def main():
     cli.add_argument("--signed-core-exit-receipt", type=Path, required=True)
     cli.add_argument("--private-http-receipt", type=Path, required=True)
     cli.add_argument("--skip-live-probes", action="store_true")
+    cli.add_argument("--direct-official-recheck", action="store_true",
+                     help="Re-execute SHA-pinned signed Core verifier, read-only; never use supplied receipt for authority")
     cli.add_argument("--output", type=Path)
     args = cli.parse_args()
     try:
         core_rc = int(args.signed_core_exit_receipt.read_text().strip())
     except (OSError, ValueError):
         core_rc = 255
+    core_gate = args.signed_core_receipt
+    trusted_execution = False
+    if args.direct_official_recheck:
+        core_gate, core_rc, trusted_execution = invoke_pinned_official_core_gate()
     report = evaluate(args.core, args.connect, args.live,
-                      args.signed_core_receipt, core_rc, args.private_http_receipt,
-                      probe=not args.skip_live_probes)
+                      core_gate, core_rc, args.private_http_receipt,
+                      probe=not args.skip_live_probes,
+                      direct_official=args.direct_official_recheck,
+                      trusted_execution=trusted_execution)
     data = json.dumps(report, sort_keys=True, indent=2) + "\n"
     if args.output:
         dest = args.output.resolve()
