@@ -57,7 +57,7 @@ def packet_ids(groups,docs=DOCS,original=ORIG):
     if len(result)!=161 or sum(x['rows'] for x in packets)!=161:
         raise ValueError('EXPECTED_161_RESEARCH_DRAFTS_MISSING')
     return result,packets
-def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG,new_biology=None,new_dual_urdu=None,new_chemistry=None,new_english_essays=None,new_grade9_chem=None):
+def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG,new_biology=None,new_dual_urdu=None,new_chemistry=None,new_english_essays=None,new_grade9_chem=None,new_nontech15=None):
     existing,packets=packet_ids(groups,docs,original)
     rows=five.get('rows')
     if not isinstance(rows,list) or len(rows)!=5:raise ValueError('EXPECTED_FINAL_FIVE_FACULTY_DOCKETS')
@@ -384,6 +384,60 @@ def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG,new_biology=
         grade9_chem_count=len(seen)
         if grade9_chem_count!=8 or len(unlinked)!=387 or sum(x['priority']=='HIGH' for x in unlinked)!=166:
             raise ValueError('GRADE9_URDU_CHEM_BACKLOG_387_166_DRIFT')
+    original_nontech15=0
+    if new_nontech15 is not None:
+        packet=new_nontech15
+        if (packet.get('schema')!='ASSPS_GRADE910_15_CONVENTIONAL_HIGH_UNAPPROVED_ORIGINAL_EXEMPLARS_V1'
+            or packet.get('candidateCount')!=15
+            or packet.get('linkedCurrentSchool1QuestionRevisions')!=15
+            or packet.get('sourceSchool1LiveRecordsReadOnly')!=2411
+            or packet.get('independentQualifiedSubjectApprovalCount')!=0
+            or packet.get('actualSchoolTextbookAdoptionVerified') is not False
+            or packet.get('originalExercisePageVerified') is not False
+            or packet.get('paperStudioVerifiedPublication') is not False
+            or packet.get('productionDatabaseWrites')!=0
+            or len(packet.get('answers',[]))!=15):
+            raise ValueError('NEW_15_ORIGINAL_NONTECH_RESEARCH_PACKET_INVALID')
+        existing_unlinked={r['questionId']:r for r in unlinked}
+        expected_names={
+            'X-PAK-UR-C01-L01','X-PAK-UR-C03-L01','X-PAK-UR-C04-L01',
+            'X-PAK-UR-C05-L01','X-PAK-UR-C06-L01','X-PAK-UR-C07-L01',
+            'X-PAK-UR-C08-L01','X-URDU-GR-ESS01','X-URDU-GR-ESS02',
+            'IX-URDU-GR-ESS01','IX-URDU-GR-ESS02','IX-MATH-C08-L01',
+            'IX-MATH-UR-C08-L01','IX-MATH-UR-C11-L01','IX-PHY-UR-C09-L01'}
+        seen=set()
+        for entry in packet['answers']:
+            id=entry.get('questionId')
+            risk=existing_unlinked.get(id)
+            if (id in seen or id not in expected_names or risk is None
+                or risk.get('priority')!='HIGH'
+                or risk.get('schoolStreamApplicability')!='SUBJECT_BOOK_EDITION_ADOPTION_EVIDENCE_REQUIRED'
+                or entry.get('currentLiveFullRevisionSha256')!=hashes.get(id)
+                or entry.get('grade')!=risk.get('grade')
+                or entry.get('subject')!=risk.get('subject')
+                or entry.get('medium')!=risk.get('medium')
+                or entry.get('questionType')!=risk.get('type')
+                or entry.get('marks')!=5
+                or not 65<=len(str(entry.get('independentOriginalIllustrativeExemplarNotUniqueModelKey','')).split())<=190
+                or len(entry.get('fivePointReviewRubricNotApprovedAnswerKey',[]))!=5
+                or entry.get('alternateAccurateStudentAnswersPermitted') is not True
+                or entry.get('school2026To2027BookAdoptionAuthenticated') is not False
+                or entry.get('specificPrintedTextbookExercisePageAuthenticated') is not False
+                or entry.get('qualifiedSubjectIndependentTeacherApproval') is not False
+                or entry.get('qualifiedUrduLanguageTeacherApproval') is not False
+                or entry.get('academicApproved') is not False
+                or entry.get('paperStudioVerifiedSelectable') is not False
+                or entry.get('productionSchoolQuestionDatabaseWrites')!=0):
+                raise ValueError('NONTECH_15_CURRENT_LIVE_OR_HUMAN_REVIEW_FRAUD')
+            seen.add(id)
+        if seen!=expected_names:
+            raise ValueError('EXACT_15_HIGH_CONVENTIONAL_SUBJECT_IDS_REQUIRED')
+        unlinked=[r for r in unlinked if r['questionId'] not in seen]
+        original_nontech15=15
+        if (len(unlinked)!=372
+            or sum(r['priority']=='HIGH' for r in unlinked)!=151
+            or sum(r['priority']=='HIGH' and r['schoolStreamApplicability']=='STREAM_SPECIFIC_ADOPTION_EVIDENCE_REQUIRED' for r in unlinked)!=137):
+            raise ValueError('CURRENT_15_ADDITIONAL_RESEARCH_QUEUE_372_151_DRIFT')
     if summary['originalUniverse']!=166 or summary['live']!=165 or summary['originalOnly']!=1:
         raise ValueError('RESEARCH_ORIGINAL_LIVE_CROSSWALK_DRIFT')
     if summary['hasResearchDraft']!=165 or summary['noResearchDraft']!=1 or summary['liveWithResearchDraft']!=164:
@@ -403,6 +457,7 @@ def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG,new_biology=
        'newGrade10ChemistryUrduConceptualResearchCandidates':new_chemistry_count,
        'newEnglishGrade9And10IllustrativeParagraphCandidates':english_count,
        'newGrade9ChemistryUrduOriginalConceptualResearchCandidates':grade9_chem_count,
+       'newConventionalHighPriorityOriginalExemplarsWithoutApproval':original_nontech15,
        'remainingHighPriorityStreamSpecificSubjectLabelsAwaitSchoolAdoption':sum(x['priority']=='HIGH' and x['schoolStreamApplicability']=='STREAM_SPECIFIC_ADOPTION_EVIDENCE_REQUIRED' for x in unlinked),
        'remainingHighPriorityOtherSubjectLabelsStillNeedBookAdoption':sum(x['priority']=='HIGH' and x['schoolStreamApplicability']=='SUBJECT_BOOK_EDITION_ADOPTION_EVIDENCE_REQUIRED' for x in unlinked),
        'streamSpecificLabelsAreNotAutomaticInapplicabilityOrApproval':True,
@@ -504,9 +559,21 @@ def run():
                             {r['questionId']:r for r in risks['records']})
     if expected5!=proposal5:
         raise ValueError('GRADE9_URDU_CHEM_EIGHT_ANSWER_PACKET_TAMPERED')
+    spec6=importlib.util.spec_from_file_location(
+        'assps_15_nontech_current_unapproved_original_exemplars',
+        ROOT/'ops/qbank/author-grade910-15-nontech-high-original-exemplars-20261016.py')
+    author6=importlib.util.module_from_spec(spec6);spec6.loader.exec_module(author6)
+    proposal6=json.loads(author6.OUT.read_text(encoding='utf8'))
+    baseline=build(groups,last,ledger,risks,set(hashes),new_biology=proposal,
+        new_dual_urdu=proposal2,new_chemistry=proposal3,
+        new_english_essays=proposal4,new_grade9_chem=proposal5)
+    expected6=author6.build(live,json.loads(author6.PUBLIC.read_text())['rows'],
+        risks['records'],hashes,baseline['unlinkedCurrentRevisionResearchQueue'])
+    if proposal6!=expected6:
+        raise ValueError('NEW_CONVENTIONAL_15_ORIGINAL_SHA_BOUND_PACKET_MODIFIED')
     result=build(groups,last,ledger,risks,set(hashes),new_biology=proposal,
                  new_dual_urdu=proposal2,new_chemistry=proposal3,
-                 new_english_essays=proposal4,new_grade9_chem=proposal5)
+                 new_english_essays=proposal4,new_grade9_chem=proposal5,new_nontech15=proposal6)
     atomic_private(OUT,result)
     return result
 if __name__=='__main__':

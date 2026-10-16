@@ -57,6 +57,11 @@ on:
       - "ops/qbank/build-grade910-numerical-review-priority-20261016.py"
       - "ops/qbank/recompute-grade910-21-original-numericals-20261016.py"
       - "ops/qbank/reconcile-grade910-80-live-numerical-machine-proof-20261016.py"
+      - "ops/qbank/author-grade910-15-nontech-high-original-exemplars-20261016.py"
+      - "ops/tests/test_grade910_15_conventional_original_exemplars_review_20261016.py"
+      - "docs/question-bank/ASSPS_GRADE910_15_NONTECH_ORIGINAL_HIGH_PRIORITY_UNAPPROVED_EXEMPLARS_20261016.json"
+      - "docs/question-bank/ASSPS_GRADE910_15_CONVENTIONAL_ORIGINAL_RESEARCH_REVIEW_20261016.md"
+      - "ops/release/install-grade910-15-nontech-answer-review-gate-20261016.sh"
       - "ops/tests/test_grade910_all_80_numerical_machine_vs_review_20261016.py"
       - "ops/release/install-grade910-all80-numerical-machine-source-check-20261016.sh"
       - "docs/question-bank/ASSPS_GRADE910_ALL_80_NUMERICAL_CURRENT_MACHINE_NOT_FACULTY_PROOF_20261016.md"
@@ -176,6 +181,11 @@ on:
       - "ops/qbank/build-grade910-numerical-review-priority-20261016.py"
       - "ops/qbank/recompute-grade910-21-original-numericals-20261016.py"
       - "ops/qbank/reconcile-grade910-80-live-numerical-machine-proof-20261016.py"
+      - "ops/qbank/author-grade910-15-nontech-high-original-exemplars-20261016.py"
+      - "ops/tests/test_grade910_15_conventional_original_exemplars_review_20261016.py"
+      - "docs/question-bank/ASSPS_GRADE910_15_NONTECH_ORIGINAL_HIGH_PRIORITY_UNAPPROVED_EXEMPLARS_20261016.json"
+      - "docs/question-bank/ASSPS_GRADE910_15_CONVENTIONAL_ORIGINAL_RESEARCH_REVIEW_20261016.md"
+      - "ops/release/install-grade910-15-nontech-answer-review-gate-20261016.sh"
       - "ops/tests/test_grade910_all_80_numerical_machine_vs_review_20261016.py"
       - "ops/release/install-grade910-all80-numerical-machine-source-check-20261016.sh"
       - "docs/question-bank/ASSPS_GRADE910_ALL_80_NUMERICAL_CURRENT_MACHINE_NOT_FACULTY_PROOF_20261016.md"
@@ -357,5 +367,10 @@ jobs:
           python3 -m unittest discover -s ops/tests -p test_grade910_all_80_numerical_machine_vs_review_20261016.py -v
           python3 -m py_compile ops/qbank/reconcile-grade910-80-live-numerical-machine-proof-20261016.py
           bash -n ops/release/install-grade910-all80-numerical-machine-source-check-20261016.sh
+      - name: Enforce original 15 conventional academic answer exemplars are only research
+        run: |
+          python3 -m unittest discover -s ops/tests -p test_grade910_15_conventional_original_exemplars_review_20261016.py -v
+          python3 -m py_compile ops/qbank/author-grade910-15-nontech-high-original-exemplars-20261016.py
+          bash -n ops/release/install-grade910-15-nontech-answer-review-gate-20261016.sh
       - name: Validate offline claim auditor syntax
         run: python3 -m py_compile ops/qbank/audit-live-grade910-source-claims-20261016.py ops/qbank/reconcile-grade910-held-original-candidates-20261016.py
