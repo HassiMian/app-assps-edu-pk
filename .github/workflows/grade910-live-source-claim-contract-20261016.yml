@@ -5,6 +5,8 @@ on:
       - "ops/qbank/audit-live-grade910-source-claims-20261016.py"
       - "ops/qbank/reconcile-grade910-held-original-candidates-20261016.py"
       - "ops/qbank/assps-grade910-autonomous-six-phase-receipt-20261016.py"
+      - "ops/release/install-grade910-current-sixphase-numeric-20261016.sh"
+      - "ops/tests/test_grade910_six_phase_current_numeric_proof_20261016.py"
       - "ops/tests/test_grade910_six_phase_receipt_20261016.py"
       - "ops/qbank/audit-grade910-live-answer-integrity-20261016.py"
       - "ops/qbank/audit-grade910-live-question-collisions-20261016.py"
@@ -53,6 +55,8 @@ on:
       - "ops/qbank/audit-live-grade910-source-claims-20261016.py"
       - "ops/qbank/reconcile-grade910-held-original-candidates-20261016.py"
       - "ops/qbank/assps-grade910-autonomous-six-phase-receipt-20261016.py"
+      - "ops/release/install-grade910-current-sixphase-numeric-20261016.sh"
+      - "ops/tests/test_grade910_six_phase_current_numeric_proof_20261016.py"
       - "ops/tests/test_grade910_six_phase_receipt_20261016.py"
       - "ops/qbank/audit-grade910-live-answer-integrity-20261016.py"
       - "ops/qbank/audit-grade910-live-question-collisions-20261016.py"
@@ -136,5 +140,9 @@ jobs:
         run: python3 -m unittest discover -s ops/tests -p test_grade910_numerical_deep_recompute_20261016.py -v
       - name: Check additive numerical audit hook installer shell syntax
         run: bash -n ops/release/install-grade910-80-numeric-audit-hook-20261016.sh
+      - name: Protect 80-of-80 machine recalculation from fabricated academic signoff
+        run: |
+          python3 -m unittest discover -s ops/tests -p test_grade910_six_phase_current_numeric_proof_20261016.py -v
+          bash -n ops/release/install-grade910-current-sixphase-numeric-20261016.sh
       - name: Validate offline claim auditor syntax
         run: python3 -m py_compile ops/qbank/audit-live-grade910-source-claims-20261016.py ops/qbank/reconcile-grade910-held-original-candidates-20261016.py
