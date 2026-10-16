@@ -10,6 +10,14 @@ on:
       - "ops/qbank/author-grade10-urdu-biology-ten-research-answers-20261016.py"
       - "ops/qbank/author-grade9-biology8-grade10-computer6-urdu-research-20261016.py"
       - "ops/qbank/author-grade10-urdu-chemistry-ten-safe-conceptual-answers-20261016.py"
+      - "ops/qbank/author-grade910-english-21-essay-exemplars-20261016.py"
+      - "ops/qbank/author-grade9-urdu-chemistry-eight-conceptual-20261016.py"
+      - "ops/tests/test_grade910_english21_essay_exemplar_research_20261016.py"
+      - "ops/tests/test_grade9_urdu_chemistry8_conceptual_answers_20261016.py"
+      - "ops/tests/test_grade910_29_essay_and_urdu_chem_current_gate_20261016.py"
+      - "docs/question-bank/ASSPS_GRADE910_ENGLISH_21_INDEPENDENT_UNAPPROVED_ESSAY_EXEMPLARS_20261016.json"
+      - "docs/question-bank/ASSPS_GRADE9_CHEMISTRY_URDU_8_ORIGINAL_CONCEPTUAL_EXPLANATIONS_20261016.json"
+      - "docs/question-bank/ASSPS_GRADE910_29_ENGLISH_AND_URDU_CHEMISTRY_RESEARCH_STREAM_TRIAGE_20261016.md"
       - "ops/tests/test_grade910_new_ten_urdu_chemistry_original_research_20261016.py"
       - "ops/tests/test_grade910_ten_urdu_chemistry_research_crosswalk_20261016.py"
       - "docs/question-bank/ASSPS_GRADE10_CHEMISTRY_URDU_10_SAFE_UNAPPROVED_CONCEPTUAL_EXPLANATIONS_20261016.json"
@@ -88,6 +96,14 @@ on:
       - "ops/qbank/author-grade10-urdu-biology-ten-research-answers-20261016.py"
       - "ops/qbank/author-grade9-biology8-grade10-computer6-urdu-research-20261016.py"
       - "ops/qbank/author-grade10-urdu-chemistry-ten-safe-conceptual-answers-20261016.py"
+      - "ops/qbank/author-grade910-english-21-essay-exemplars-20261016.py"
+      - "ops/qbank/author-grade9-urdu-chemistry-eight-conceptual-20261016.py"
+      - "ops/tests/test_grade910_english21_essay_exemplar_research_20261016.py"
+      - "ops/tests/test_grade9_urdu_chemistry8_conceptual_answers_20261016.py"
+      - "ops/tests/test_grade910_29_essay_and_urdu_chem_current_gate_20261016.py"
+      - "docs/question-bank/ASSPS_GRADE910_ENGLISH_21_INDEPENDENT_UNAPPROVED_ESSAY_EXEMPLARS_20261016.json"
+      - "docs/question-bank/ASSPS_GRADE9_CHEMISTRY_URDU_8_ORIGINAL_CONCEPTUAL_EXPLANATIONS_20261016.json"
+      - "docs/question-bank/ASSPS_GRADE910_29_ENGLISH_AND_URDU_CHEMISTRY_RESEARCH_STREAM_TRIAGE_20261016.md"
       - "ops/tests/test_grade910_new_ten_urdu_chemistry_original_research_20261016.py"
       - "ops/tests/test_grade910_ten_urdu_chemistry_research_crosswalk_20261016.py"
       - "docs/question-bank/ASSPS_GRADE10_CHEMISTRY_URDU_10_SAFE_UNAPPROVED_CONCEPTUAL_EXPLANATIONS_20261016.json"
@@ -229,5 +245,10 @@ jobs:
         run: |
           python3 -m unittest discover -s ops/tests -p test_grade910_new_ten_urdu_chemistry_original_research_20261016.py -v
           python3 -m py_compile ops/qbank/author-grade10-urdu-chemistry-ten-safe-conceptual-answers-20261016.py
+      - name: Verify 29 original English essay exemplars and Urdu Chemistry explanations without teacher approval
+        run: |
+          python3 -m unittest discover -s ops/tests -p test_grade910_english21_essay_exemplar_research_20261016.py -v
+          python3 -m unittest discover -s ops/tests -p test_grade9_urdu_chemistry8_conceptual_answers_20261016.py -v
+          python3 -m py_compile ops/qbank/author-grade910-english-21-essay-exemplars-20261016.py ops/qbank/author-grade9-urdu-chemistry-eight-conceptual-20261016.py
       - name: Validate offline claim auditor syntax
         run: python3 -m py_compile ops/qbank/audit-live-grade910-source-claims-20261016.py ops/qbank/reconcile-grade910-held-original-candidates-20261016.py

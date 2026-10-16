@@ -57,7 +57,7 @@ def packet_ids(groups,docs=DOCS,original=ORIG):
     if len(result)!=161 or sum(x['rows'] for x in packets)!=161:
         raise ValueError('EXPECTED_161_RESEARCH_DRAFTS_MISSING')
     return result,packets
-def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG,new_biology=None,new_dual_urdu=None,new_chemistry=None):
+def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG,new_biology=None,new_dual_urdu=None,new_chemistry=None,new_english_essays=None,new_grade9_chem=None):
     existing,packets=packet_ids(groups,docs,original)
     rows=five.get('rows')
     if not isinstance(rows,list) or len(rows)!=5:raise ValueError('EXPECTED_FINAL_FIVE_FACULTY_DOCKETS')
@@ -119,7 +119,8 @@ def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG,new_biology=
                'medium':review.get('medium'),'type':review.get('type'),
                'priority':review['priority'],'riskCategory':review['category'],
                'state':'RESEARCH_BACKLOG_NOT_FACULTY_APPROVED',
-               'academicallySelectable':False})
+               'academicallySelectable':False,
+               'schoolStreamApplicability':'STREAM_SPECIFIC_ADOPTION_EVIDENCE_REQUIRED' if str(review.get('subject','')).endswith('-Tech') else 'SUBJECT_BOOK_EDITION_ADOPTION_EVIDENCE_REQUIRED'})
     unlinked.sort(key=lambda x:(0 if x['priority']=='HIGH' else 1,
                                 str(x['grade']),str(x['subject']),x['questionId']))
     if len(unlinked)!=450 or sum(x['priority']=='HIGH' for x in unlinked)!=229:
@@ -275,6 +276,114 @@ def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG,new_biology=
         new_chemistry_count=len(visited)
         if len(unlinked)!=416 or sum(x['priority']=='HIGH' for x in unlinked)!=195:
             raise ValueError('CHEMISTRY_URDU_RESEARCH_QUEUE_416_195_DRIFT')
+    # Twenty-one original English essay *examples*, not the only correct answers.
+    # These are deliberately a separate unapproved corpus, never the MCQ key.
+    english_count=0
+    if new_english_essays is not None:
+        manifest=new_english_essays
+        if (manifest.get('schema')!='ASSPS_GRADE910_21_ENGLISH_ESSAY_EXEMPLAR_UNAPPROVED_RESEARCH_V1'
+            or manifest.get('totalCandidateResearchExemplars')!=21
+            or manifest.get('grade9Exemplars')!=11 or manifest.get('grade10Exemplars')!=10
+            or manifest.get('answersAreExamplesNotTheOnlyValidAnswers') is not True
+            or manifest.get('frozenOriginalResearchFilesShaVerified')!=2
+            or manifest.get('currentRevisionPinsPresent') is not True
+            or manifest.get('productionDatabaseWrites')!=0
+            or manifest.get('schoolAdoptedEditionConfirmed') is not False
+            or manifest.get('exercisePageProvenanceConfirmed') is not False
+            or manifest.get('qualifiedEnglishTeacherReviewCompleted') is not False
+            or manifest.get('academicApproved') is not False
+            or manifest.get('published') is not False
+            or manifest.get('paperStudioSelectable') is not False):
+            raise ValueError('ENGLISH_21_UNREVIEWED_ESSAY_EXEMPLAR_FRAUDULENT_APPROVAL')
+        entries=manifest.get('rows')
+        if not isinstance(entries,list) or len(entries)!=21:
+            raise ValueError('ENGLISH_21_ESSAY_RESEARCH_ROWS_MISSING')
+        remaining={x['questionId'] for x in unlinked}
+        used=set()
+        counts=collections.Counter()
+        for row in entries:
+            id=row.get('questionId')
+            grade=row.get('grade')
+            prefix={'9th':'IX-ENG-2025-U','10th':'X-ENG-2026-U'}.get(grade)
+            rev=riskmap.get(id)
+            if (id in used or id not in remaining or prefix is None
+                or not str(id).startswith(prefix)
+                or rev is None or rev.get('priority')!='HIGH'
+                or rev.get('grade')!=grade or rev.get('subject')!='English'
+                or rev.get('medium')!='english' or rev.get('type')!='essay'
+                or id not in hashes
+                or row.get('currentLiveFullQuestionRevisionSha256')!=hashes[id]
+                or row.get('subject')!='English' or row.get('medium')!='english'
+                or row.get('type')!='essay' or row.get('marks')!=5
+                or row.get('alternateCorrectStudentAnswersPermitted') is not True
+                or row.get('thisIsAnIllustrativeExemplarNotAnAnswerKey') is not True
+                or row.get('textbookExtractOrPastPaperTextReproduced') is not False
+                or row.get('authenticASSPSAdoptedEditionEvidence') is not False
+                or row.get('independentEnglishTeacherReviewed') is not False
+                or row.get('sourceExercisePrintedPageVerified') is not False
+                or row.get('academicApproved') is not False
+                or row.get('published') is not False
+                or row.get('paperStudioVerifiedSelectable') is not False
+                or not 75<=len(str(row.get('originalIllustrativeParagraphNotUniqueAnswer') or '').split())<=145
+                or len(row.get('flexibleFiveCriterionMarkingGuide') or [])!=5):
+                raise ValueError('ENGLISH_21_EXEMPLAR_NOT_CURRENT_NONSELECTABLE_ESSAY')
+            counts[grade]+=1;used.add(id)
+        if counts!=collections.Counter({'9th':11,'10th':10}):
+            raise ValueError('ENGLISH_21_GRADE_SPLIT_DRIFT')
+        unlinked=[q for q in unlinked if q['questionId'] not in used]
+        english_count=len(used)
+        if len(unlinked)!=395 or sum(q['priority']=='HIGH' for q in unlinked)!=174:
+            raise ValueError('ENGLISH_21_RESEARCH_QUEUE_MUST_BE_395_174')
+    grade9_chem_count=0
+    if new_grade9_chem is not None:
+        d=new_grade9_chem
+        if (d.get('schema')!='ASSPS_GRADE9_URDU_CHEMISTRY_8_UNAPPROVED_CONCEPTUAL_ANSWERS_V1'
+            or d.get('candidateCount')!=8
+            or d.get('frozenResearchSourceSha256')!='0993bd684e10497b63e0792a23698046470c9433bca944b06e71f5849ef54cc5'
+            or d.get('liveSchool1RevisionsChecked')!=2411
+            or d.get('grade')!='9th' or d.get('subject')!='Chemistry'
+            or d.get('medium')!='Urdu'
+            or d.get('productionDatabaseWrites')!=0
+            or d.get('academicApproved') is not False
+            or d.get('published') is not False
+            or d.get('paperStudioVerifiedSelectable') is not False
+            or d.get('independentReviewerAuthenticated') is not False
+            or d.get('officialSchoolTextbookAdoptionVerified') is not False
+            or d.get('exactExercisePageVerified') is not False):
+            raise ValueError('GRADE9_URDU_CHEM_EIGHT_CANNOT_FORGE_APPROVAL')
+        rows=d.get('rows')
+        if not isinstance(rows,list) or len(rows)!=8:
+            raise ValueError('GRADE9_URDU_CHEM_EIGHT_ROWS_NOT_FOUND')
+        available={q['questionId'] for q in unlinked}
+        seen=set()
+        for row in rows:
+            id=row.get('questionId')
+            r=riskmap.get(id)
+            if (id in seen or id not in available
+                or not str(id).startswith('IX-CHEM-UR-C')
+                or r is None or r.get('grade')!='9th'
+                or r.get('subject')!='Chemistry'
+                or r.get('medium')!='Urdu'
+                or r.get('priority')!='HIGH' or r.get('type')!='long'
+                or row.get('grade')!='9th' or row.get('medium')!='Urdu'
+                or row.get('subject')!='Chemistry' or row.get('questionType')!='long'
+                or row.get('marks')!=5 or row.get('currentFullQuestionRevisionSha256')!=hashes.get(id)
+                or row.get('published') is not False
+                or row.get('academicallyApproved') is not False
+                or row.get('paperStudioVerifiedSelectable') is not False
+                or row.get('independentQualifiedChemistryReviewed') is not False
+                or row.get('independentUrduReviewed') is not False
+                or row.get('sourcePrintedExercisePageVerified') is not False
+                or row.get('schoolSessionTextbookEditionAuthenticated') is not False
+                or row.get('hazardousPreparationProcedureIncluded') is not False
+                or len(str(row.get('newOriginalUrduConceptualExplanation') or '').split())<75
+                or len(row.get('proposedFivePointReviewRubric') or [])!=5):
+                raise ValueError('GRADE9_URDU_CHEM_CURRENT_REVISION_UNAPPROVED_RESEARCH_REQUIRED')
+            seen.add(id)
+        unlinked=[x for x in unlinked if x['questionId'] not in seen]
+        grade9_chem_count=len(seen)
+        if grade9_chem_count!=8 or len(unlinked)!=387 or sum(x['priority']=='HIGH' for x in unlinked)!=166:
+            raise ValueError('GRADE9_URDU_CHEM_BACKLOG_387_166_DRIFT')
     if summary['originalUniverse']!=166 or summary['live']!=165 or summary['originalOnly']!=1:
         raise ValueError('RESEARCH_ORIGINAL_LIVE_CROSSWALK_DRIFT')
     if summary['hasResearchDraft']!=165 or summary['noResearchDraft']!=1 or summary['liveWithResearchDraft']!=164:
@@ -292,6 +401,11 @@ def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG,new_biology=
        'newIndependentHighPriorityUrduBiologyResearchCandidates':recently_authored,
        'newHighPriorityGrade9BiologyAndGrade10ComputerUrduResearchCandidates':another14,
        'newGrade10ChemistryUrduConceptualResearchCandidates':new_chemistry_count,
+       'newEnglishGrade9And10IllustrativeParagraphCandidates':english_count,
+       'newGrade9ChemistryUrduOriginalConceptualResearchCandidates':grade9_chem_count,
+       'remainingHighPriorityStreamSpecificSubjectLabelsAwaitSchoolAdoption':sum(x['priority']=='HIGH' and x['schoolStreamApplicability']=='STREAM_SPECIFIC_ADOPTION_EVIDENCE_REQUIRED' for x in unlinked),
+       'remainingHighPriorityOtherSubjectLabelsStillNeedBookAdoption':sum(x['priority']=='HIGH' and x['schoolStreamApplicability']=='SUBJECT_BOOK_EDITION_ADOPTION_EVIDENCE_REQUIRED' for x in unlinked),
+       'streamSpecificLabelsAreNotAutomaticInapplicabilityOrApproval':True,
        'remainingLiveReviewDepthFlagsWithoutAnyDraft':len(unlinked),
        'remainingHighPriorityFlagsWithoutAnyDraft':sum(x['priority']=='HIGH' for x in unlinked),
        'highPriorityRiskIdsWithPriorResearchDraft':high_existing,
@@ -367,8 +481,32 @@ def run():
                              {z['questionId']:z for z in risks['records']})
     if expected13!=proposal3:
         raise ValueError('CHEMISTRY_URDU_THIRTEEN_AUTHORED_PACKET_TAMPERED')
+    spec4=importlib.util.spec_from_file_location(
+        'assps_original_english_21_essay_exemplars',
+        ROOT/'ops/qbank/author-grade910-english-21-essay-exemplars-20261016.py')
+    author4=importlib.util.module_from_spec(spec4);spec4.loader.exec_module(author4)
+    proposal4=json.loads(author4.OUT.read_text(encoding='utf8'))
+    for grade,(filename,fingerprint,_catalog) in author4.FROZEN.items():
+        if sha((author4.DATA/filename).read_bytes())!=fingerprint:
+            raise ValueError('ENGLISH_21_ORIGINAL_RESEARCH_SOURCE_SHA_CHANGED')
+    expected4=author4.build({r['id']:r for r in live},hashes,
+                            {r['questionId']:r for r in risks['records']})
+    if expected4!=proposal4:
+        raise ValueError('ENGLISH_21_INDEPENDENT_DRAFT_OR_CURRENT_REVISION_DRIFT')
+    spec5=importlib.util.spec_from_file_location(
+        'assps_grade9_urdu_chemistry_eight_original_research',
+        ROOT/'ops/qbank/author-grade9-urdu-chemistry-eight-conceptual-20261016.py')
+    author5=importlib.util.module_from_spec(spec5);spec5.loader.exec_module(author5)
+    proposal5=json.loads(author5.OUT.read_text(encoding='utf8'))
+    if sha(author5.SRC.read_bytes())!=author5.SRC_SHA:
+        raise ValueError('GRADE9_URDU_CHEM_ORIGINAL_FROZEN_FILE_DRIFT')
+    expected5=author5.build({r['id']:r for r in live},hashes,
+                            {r['questionId']:r for r in risks['records']})
+    if expected5!=proposal5:
+        raise ValueError('GRADE9_URDU_CHEM_EIGHT_ANSWER_PACKET_TAMPERED')
     result=build(groups,last,ledger,risks,set(hashes),new_biology=proposal,
-                 new_dual_urdu=proposal2,new_chemistry=proposal3)
+                 new_dual_urdu=proposal2,new_chemistry=proposal3,
+                 new_english_essays=proposal4,new_grade9_chem=proposal5)
     atomic_private(OUT,result)
     return result
 if __name__=='__main__':
