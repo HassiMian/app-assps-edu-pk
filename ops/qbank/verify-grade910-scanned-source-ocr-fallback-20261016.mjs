@@ -28,8 +28,11 @@ export function pdfJsLocalResourceUrls(modulePath=pdfjsPath){
  for(const f of ['openjpeg.wasm','openjpeg_nowasm_fallback.js']){
    if(!fs.existsSync(path.join(wasm,f)))throw Error('PDFJS_OPENJPEG_DECODER_MISSING');
  }
- return {wasmUrl:pathToFileURL(wasm+path.sep).href,
-         standardFontDataUrl:pathToFileURL(fonts+path.sep).href};
+ // pdfjs-dist v5 NodeWasmFactory uses fs.promises.readFile(string).
+ // A file:// string is NOT a filesystem path for that API; use absolute paths
+ // with a trailing separator. The JS fallback is importable from that path too.
+ return {wasmUrl:wasm+path.sep,
+         standardFontDataUrl:fonts+path.sep};
 }
 
 const limit=validatePageBudget(process.env.ASSPS_OCR_PILOT_PAGES || 0);
@@ -155,12 +158,14 @@ async function main(){
       averageConfidence:diagnosis.meanConfidence,
       exactStemCandidate:diagnosis.exactStem,
       pdfJsDecoderResourceUrlsExplicitlyConfigured:true,
+      nodePdfJsFilesystemWasmLoaderPathConfigured:true,
       academicQuestionContentPageVerified:false,
       qualifiedFacultyApproved:false,autoPublished:false});
   }
   assets.push({catalog:item.catalog,page:item.page,ocrWords:languageStats.tokens,
     ocrMeanConfidence:languageStats.averageConfidence,
     pdfJsDecoderResourceUrlsExplicitlyConfigured:true,
+    nodePdfJsFilesystemWasmLoaderPathConfigured:true,
     rawPageImagePersisted:false,rawOCRTextPersisted:false});
   page.cleanup();currentCount++;
   // A committed page must always include both OCR confidence/ID-only evidence
@@ -181,6 +186,8 @@ async function main(){
    claimsCoveredNow:results.length,
    pagesAfterExplicitLocalDecoderResourceConfiguration:assets.filter(x=>x.pdfJsDecoderResourceUrlsExplicitlyConfigured===true).length,
    olderPagesWithoutExplicitDecoderResourceConfiguration:assets.filter(x=>x.pdfJsDecoderResourceUrlsExplicitlyConfigured!==true).length,
+   pagesWithValidatedLocalFilesystemWasmAndFontPaths:assets.filter(x=>x.nodePdfJsFilesystemWasmLoaderPathConfigured===true).length,
+   legacyOrFileUriDecoderPageReceiptsNeedingConservativeRecheck:assets.filter(x=>x.nodePdfJsFilesystemWasmLoaderPathConfigured!==true).length,
    exactTextReviewNotGuaranteedByDecoderConfiguration:true,
    categories:buckets,
    highConfidenceStrictExactStemCandidateCount:results.filter(x=>x.exactStemCandidate).length,

@@ -11,7 +11,7 @@ SRC="$ROOT/ops/qbank/verify-grade910-scanned-source-ocr-fallback-20261016.mjs"
 DST=/usr/local/libexec/assps-grade910-sourceclaims/verify-grade910-scanned-source-ocr-fallback-20261016.mjs
 SERVICE=assps-grade910-scanned-ocr-fallback.service
 TIMER=assps-grade910-scanned-ocr-fallback.timer
-PREVIOUS=599728d156271845debcbd4635eb1631641c6ca493f31b10dfbc23ccca53b49f
+PREVIOUS=a6ac7f674ace04b9240bb31a936c515d368504ed6851b78861ea1b6a1cc7541b
 [[ -s "$SRC" && -s "$DST" ]] || exit 2
 test -d /var/www/apex-backend/node_modules/pdfjs-dist/wasm
 test -d /var/www/apex-backend/node_modules/pdfjs-dist/standard_fonts

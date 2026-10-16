@@ -19,8 +19,8 @@ test('pdfjs node OCR explicitly resolves local wasm and standard-font URLs',()=>
  const f=fixture();
  try{
   const x=pdfJsLocalResourceUrls(f.modulePath);
-  assert.equal(x.wasmUrl,pathToFileURL(f.wasm+path.sep).href);
-  assert.equal(x.standardFontDataUrl,pathToFileURL(f.font+path.sep).href);
+  assert.equal(x.wasmUrl,f.wasm+path.sep);
+  assert.equal(x.standardFontDataUrl,f.font+path.sep);
   assert.equal(Object.keys(x).length,2);
  }finally{fs.rmSync(f.dir,{recursive:true,force:true});}
 });
