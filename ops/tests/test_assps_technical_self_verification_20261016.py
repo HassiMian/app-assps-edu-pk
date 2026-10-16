@@ -17,6 +17,8 @@ def good():
    "marks":{"status":"PASS"}},
   "metrics":{
    "scores":{"total_score_rows":1763,"actual_zeros":213,"school_count":2,"invalid_rows":0},
+   "tenantRlsPolicyContract":{"expectedProtectedTables":6,"enforcedTables":6,
+    "appRuntimeRestrictiveGuards":6,"coreSignedRestrictiveGuards":6,"coreRoleBypassRls":0},
    "subjectEvidence":{"inconsistent_configurations":0}}
  }
 
@@ -86,6 +88,15 @@ class TestAcceptanceWithoutForgedSignatures(unittest.TestCase):
   self.assertIn('readlink -f "$0"',source)
   self.assertIn('FAIL_CLOSED_DIRTY_SOURCE_WORKTREE',source)
   self.assertNotIn('REPO=/root/workspace/assps-zero-human-ops-20261016',source)
+ def test_rls_guard_regression_wont_get_green(self):
+  a=good();a["metrics"]["tenantRlsPolicyContract"]["coreSignedRestrictiveGuards"]=5
+  self.assertIn("TENANT_RLS_POLICY_SHAPE_REGRESSION",module.evaluate(a,None)[1])
+ def test_bypass_rls_on_app_runtime_not_accepted(self):
+  a=good();a["metrics"]["tenantRlsPolicyContract"]["coreRoleBypassRls"]=1
+  self.assertIn("TENANT_RLS_POLICY_SHAPE_REGRESSION",module.evaluate(a,None)[1])
+ def test_missing_tenant_security_evidence_fails_closed(self):
+  a=good();a["metrics"].pop("tenantRlsPolicyContract")
+  self.assertEqual(module.evaluate(a,None)[0],"CRITICAL")
  def test_receipt_stored_atomically_and_no_personal_data(self):
   with tempfile.TemporaryDirectory() as d:
    p=Path(d)/"receipt.json";module.write_receipt(p,good())
