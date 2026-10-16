@@ -6,11 +6,15 @@ on:
     paths:
       - 'ops/paper-studio/verify_teacher_print_operational_readiness_20261016.py'
       - 'ops/paper-studio/test_verify_teacher_print_operational_readiness_20261016.py'
+      - 'ops/paper-studio/verify_windows_jameel_pdf_embedding_20261016.ps1'
+      - 'ops/paper-studio/test_windows_jameel_pdf_source_a4_20261016.py'
       - '.github/workflows/paper-teacher-print-readiness-readonly-20261016.yml'
   pull_request:
     paths:
       - 'ops/paper-studio/verify_teacher_print_operational_readiness_20261016.py'
       - 'ops/paper-studio/test_verify_teacher_print_operational_readiness_20261016.py'
+      - 'ops/paper-studio/verify_windows_jameel_pdf_embedding_20261016.ps1'
+      - 'ops/paper-studio/test_windows_jameel_pdf_source_a4_20261016.py'
       - '.github/workflows/paper-teacher-print-readiness-readonly-20261016.yml'
   workflow_dispatch:
 permissions:
@@ -28,5 +32,7 @@ jobs:
           python-version: '3.11'
       - name: Test fail-closed privilege separation, immutable receipts, no release GO
         run: python -m unittest discover -s ops/paper-studio -p 'test_verify_teacher_print_operational_readiness_20261016.py' -v
+      - name: Require Windows Jameel PDF A4 and non-printer side effects in source
+        run: python -m unittest discover -s ops/paper-studio -p 'test_windows_jameel_pdf_source_a4_20261016.py' -v
       - name: Syntax check only, do not open school DB or deploy
         run: python -m py_compile ops/paper-studio/verify_teacher_print_operational_readiness_20261016.py

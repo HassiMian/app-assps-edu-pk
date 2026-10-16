@@ -17,7 +17,7 @@ try {
   $chrome = $candidates | Where-Object { $_ -and (Test-Path -LiteralPath $_) } | Select-Object -First 1
   if (!$chrome) { throw 'CHROME_NOT_INSTALLED' }
   New-Item -ItemType Directory -Path $work -Force | Out-Null
-  $html = '<!doctype html><html lang="ur"><head><meta charset="utf-8"><style>@font-face{font-family:"ASSPS Jameel Noori";src:local("Jameel Noori Nastaleeq Kasheeda")}body{font-family:"ASSPS Jameel Noori","Jameel Noori Nastaleeq Kasheeda",serif;direction:rtl;font-size:28px;line-height:2}</style></head><body><h1>الصدیق سکالرز پبلک سکول</h1><p>اردو پرنٹ کی جانچ، سوال نمبر ایک، درست جوابات اور امتحانی پرچہ</p></body></html>'
+  $html = '<!doctype html><html lang="ur"><head><meta charset="utf-8"><style>@page{size:A4;margin:12mm}@font-face{font-family:"ASSPS Jameel Noori";src:local("Jameel Noori Nastaleeq Kasheeda")}body{font-family:"ASSPS Jameel Noori","Jameel Noori Nastaleeq Kasheeda",serif;direction:rtl;font-size:28px;line-height:2}</style></head><body><h1>الصدیق سکالرز پبلک سکول</h1><p>اردو پرنٹ کی جانچ، سوال نمبر ایک، درست جوابات اور امتحانی پرچہ</p></body></html>'
   $htmlPath = Join-Path $work 'probe.html'
   $pdfPath = Join-Path $work 'probe.pdf'
   [System.IO.File]::WriteAllText($htmlPath, $html, [System.Text.UTF8Encoding]::new($false))
@@ -32,6 +32,16 @@ try {
   if (!$ascii.StartsWith('%PDF-')) { throw 'BAD_PDF_SIGNATURE' }
   if (!$ascii.Contains('Jameel#20Noori#20Nastaleeq#20Kasheeda')) { throw 'JAMEEL_BASEFONT_NOT_USED' }
   if (!$ascii.Contains('/FontFile2') -and !$ascii.Contains('/FontFile3')) { throw 'PDF_EMBEDDED_FONT_MISSING' }
+  # PDF /MediaBox is in PostScript points. Enforce ISO A4 geometry,
+  # not the local Chrome default US Letter printer page setting.
+  $mediaBox = [regex]::Match($ascii, '/MediaBox\s*\[\s*0\s+0\s+([0-9.]+)\s+([0-9.]+)\s*\]')
+  if (!$mediaBox.Success) { throw 'A4_MEDIABOX_MISSING' }
+  $pageWidth = [double]::Parse($mediaBox.Groups[1].Value, [cultureinfo]::InvariantCulture)
+  $pageHeight = [double]::Parse($mediaBox.Groups[2].Value, [cultureinfo]::InvariantCulture)
+  if ([Math]::Abs($pageWidth - 595.28) -gt 4 -or [Math]::Abs($pageHeight - 841.89) -gt 4) { throw 'PDF_NOT_A4' }
+  $result['a4MediaBoxObserved'] = $true
+  $result['pageWidthPoints'] = $pageWidth
+  $result['pageHeightPoints'] = $pageHeight
   $result.verdict = 'WINDOWS_LOCAL_JAMEEL_EMBEDDED_PASS_NOT_RELEASE'
   $result['pdfBytes'] = $bytes.Length
   $result['pdfSha256'] = (Get-FileHash -LiteralPath $pdfPath -Algorithm SHA256).Hash.ToLowerInvariant()
@@ -48,6 +58,8 @@ try {
     '^BAD_PDF_SIGNATURE$' { 'BAD_PDF_SIGNATURE'; break }
     '^JAMEEL_BASEFONT_NOT_USED$' { 'JAMEEL_BASEFONT_NOT_USED'; break }
     '^PDF_EMBEDDED_FONT_MISSING$' { 'PDF_EMBEDDED_FONT_MISSING'; break }
+    '^A4_MEDIABOX_MISSING$' { 'A4_MEDIABOX_MISSING'; break }
+    '^PDF_NOT_A4$' { 'PDF_NOT_A4'; break }
     default { 'FONT_PROOF_EXECUTION_ERROR' }
   }
 } finally {
