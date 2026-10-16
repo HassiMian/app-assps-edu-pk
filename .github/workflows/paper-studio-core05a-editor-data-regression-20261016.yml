@@ -1,0 +1,50 @@
+name: ASSPS Paper Studio Core05a Editor and Data Safety
+on:
+  push:
+    branches:
+      - 'integration/core-paper-font-guard-*'
+    paths:
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/**'
+      - 'al-siddique-frontend/src/Modules/examination/MarksSheet.jsx'
+      - 'ops/tests/marks-sheet-data-truth.test.js'
+      - '.github/workflows/paper-studio-core05a-editor-data-regression-20261016.yml'
+  pull_request:
+    paths:
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/**'
+      - 'al-siddique-frontend/src/Modules/examination/MarksSheet.jsx'
+      - 'ops/tests/marks-sheet-data-truth.test.js'
+      - '.github/workflows/paper-studio-core05a-editor-data-regression-20261016.yml'
+jobs:
+  marks-and-authoring:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: al-siddique-frontend/package-lock.json
+      - name: Install pinned deps
+        working-directory: al-siddique-frontend
+        run: npm ci --no-audit --no-fund
+      - name: Install Chromium for true browser acceptance
+        working-directory: al-siddique-frontend
+        run: npx playwright install chromium --with-deps
+      - name: Existing marks remain visible, zero distinct from blank, deny save on broken refresh
+        run: node --test ops/tests/marks-sheet-data-truth.test.js
+      - name: User-authored blank paper Save Finalize Reopen Print acceptance
+        working-directory: al-siddique-frontend
+        run: node --test src/Modules/Paper-Generator/PaperEditor/tests/manualWeeklyAssessmentBrowserAcceptance.test.js
+      - name: Bounded Urdu-English serial/heading Chrome print and security
+        run: node ops/paper-studio/run_serial_statement_crossfield_20261016.cjs
+      - name: Diary Save Reopen Print & stale-save scope
+        run: node ops/paper-studio/run_diary_release_browser_20261016.cjs
+      - name: Reject partial compiled five-feature builds
+        run: |
+          cd al-siddique-frontend
+          npm run build
+          cd ..
+          python3 ops/paper-studio/verify_full_feature_readiness_20261016.py --repo . --dist al-siddique-frontend/dist
