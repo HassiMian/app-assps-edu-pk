@@ -1,0 +1,46 @@
+name: ASSPS Paper Studio Student Print Answer Privacy
+on:
+  push:
+    branches:
+      - 'fix/paper-student-projection-answer-alias-20261016'
+  pull_request:
+    paths:
+      - 'al-siddique-backend/src/services/assessmentPrintJobs.js'
+      - 'al-siddique-backend/src/tests/assessment-print-jobs-domain.test.js'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/personalizedPrintDurableBrowserAcceptance.test.js'
+      - '.github/workflows/paper-student-answer-projection-privacy-20261016.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  student-privacy-boundary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout reviewed Paper source
+        uses: actions/checkout@v4
+      - name: Configure Node runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: al-siddique-frontend/package-lock.json
+      - name: Install pinned frontend dependencies
+        working-directory: al-siddique-frontend
+        run: npm ci --no-audit --no-fund
+      - name: Install headless Chromium for isolated print QA
+        working-directory: al-siddique-frontend
+        run: npx playwright install --with-deps chromium
+      - name: Verify answer aliases and print projection student privacy
+        run: >-
+          node --test
+          al-siddique-backend/src/tests/assessment-print-jobs-domain.test.js
+          al-siddique-backend/src/tests/assessment-print-projection-boundary-static.test.js
+      - name: Verify personalized A4 print does not leak private roster fields
+        working-directory: al-siddique-frontend
+        run: >-
+          node --test
+          src/Modules/Paper-Generator/PaperEditor/tests/personalizedPrintDurableBrowserAcceptance.test.js
+      - name: Compile frontend candidate, never deploy
+        working-directory: al-siddique-frontend
+        run: npm run build

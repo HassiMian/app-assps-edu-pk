@@ -19,6 +19,14 @@ test('finalized manual paper creates one durable personalized duplex print job',
     window.print=()=>{ window.__asspsPrintCalled=true }
   })
   t.after(async()=>{await context.close().catch(()=>{});await browser.close().catch(()=>{});await server.close().catch(()=>{})})
+  // Fail-closed mock transport: the local Vite harness has no school API,
+  // and any unhandled /api request must never navigate to a live login page.
+  // Targeted mocked responses registered below take precedence over this
+  // fallback, so no real users or school records are queried.
+  await context.route('**/api/**',r=>r.fulfill({
+    status:200,contentType:'application/json',
+    body:JSON.stringify({success:true,data:[],user:{id:999,role:'admin',school_id:1,tenant_id:'assps'}}),
+  }))
 
   await context.route('**/api/students**',r=>r.fulfill({
     status:200,
@@ -131,6 +139,13 @@ test('finalized manual paper creates one durable personalized duplex print job',
   assert.match(html,/R-1/)
   assert.match(html,/R-2/)
   assert.equal(await frame.locator('.duplex-blank-page').count(),2)
+  // Do not copy student phone/address or private answer-key attributes into
+  // the actual HTML sent to the per-student A4 print iframe.
+  const actualPrintMarkup=await frame.locator('body').innerHTML()
+  assert.doesNotMatch(actualPrintMarkup,/PRIVATE-[123AB]|\bphone\b|\baddress\b/i,
+    'Student contact or private roster attributes escaped into print HTML')
+  assert.equal(await frame.locator('[data-answer-key],[data-correct-answer],script,iframe,object,embed').count(),0,
+    'Answer-key or active embedded elements escaped into student print HTML')
 
   assert.equal(requests.job.personalized,true)
   assert.equal(requests.job.roster.context.className,'Seven')
