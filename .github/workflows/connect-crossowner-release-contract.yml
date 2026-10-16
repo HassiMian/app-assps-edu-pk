@@ -25,6 +25,8 @@ on:
       - 'ops/connect/test-private-reviewed-stage-allowlist-20261016.test.cjs'
       - 'ops/connect/test-current-live-firstlogin-401-boundary-20261015.cjs'
       - 'ops/connect/test-current-live-temporary-login-20261015.cjs'
+      - 'ops/connect/run_four_phase_release_gate_20261016.py'
+      - 'ops/connect/test_four_phase_release_gate_20261016.py'
       - '.github/workflows/connect-crossowner-release-contract.yml'
   pull_request:
     paths:
@@ -51,6 +53,8 @@ on:
       - 'ops/connect/test-private-reviewed-stage-allowlist-20261016.test.cjs'
       - 'ops/connect/test-current-live-firstlogin-401-boundary-20261015.cjs'
       - 'ops/connect/test-current-live-temporary-login-20261015.cjs'
+      - 'ops/connect/run_four_phase_release_gate_20261016.py'
+      - 'ops/connect/test_four_phase_release_gate_20261016.py'
       - '.github/workflows/connect-crossowner-release-contract.yml'
 permissions:
   contents: read
@@ -83,3 +87,5 @@ jobs:
         run: python3 -m unittest discover -v -s ops/connect -p 'test_verify_successful_next_build_20261016.py'
       - name: Ensure new optimized private stage permit is exact hash pinned
         run: node --test ops/connect/test-private-reviewed-stage-allowlist-20261016.test.cjs
+      - name: Test four-phase release fail-closed decisions
+        run: python3 -m unittest discover -v -s ops/connect -p 'test_four_phase_release_gate_20261016.py'
