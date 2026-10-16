@@ -83,6 +83,10 @@ on:
       - "ops/qbank/prepare-grade910-ocr-legacy-recheck-20261016.py"
       - "ops/qbank/triage-grade910-998-unverified-source-page-claims-20261016.py"
       - "ops/qbank/verify-grade10-health-tech-one-excluded-page-bilingual-ocr-20261016.mjs"
+      - "ops/qbank/verify-grade9-physics-single-ocr-stem-adjacent-pages-20261016.mjs"
+      - "ops/tests/grade9-physics-ocr-three-page-source-reconfirmation-20261016.test.mjs"
+      - "ops/tests/test_grade910_one_independent_physics_source_candidate_20261016.py"
+      - "docs/question-bank/ASSPS_GRADE9_PHYSICS_INDEPENDENT_THREE_PAGE_SOURCE_CORROBORATION_20261016.md"
       - "ops/tests/grade10-health-tech-page102-ocr-nonapproval.test.mjs"
       - "ops/tests/test_grade910_3_unknown_medium_page102_bilingual_proof_20261016.py"
       - "docs/question-bank/ASSPS_GRADE910_THREE_UNKNOWN_MEDIUM_PAGE102_OCR_EVIDENCE_RECOVERY_20261016.md"
@@ -190,6 +194,10 @@ on:
       - "ops/qbank/prepare-grade910-ocr-legacy-recheck-20261016.py"
       - "ops/qbank/triage-grade910-998-unverified-source-page-claims-20261016.py"
       - "ops/qbank/verify-grade10-health-tech-one-excluded-page-bilingual-ocr-20261016.mjs"
+      - "ops/qbank/verify-grade9-physics-single-ocr-stem-adjacent-pages-20261016.mjs"
+      - "ops/tests/grade9-physics-ocr-three-page-source-reconfirmation-20261016.test.mjs"
+      - "ops/tests/test_grade910_one_independent_physics_source_candidate_20261016.py"
+      - "docs/question-bank/ASSPS_GRADE9_PHYSICS_INDEPENDENT_THREE_PAGE_SOURCE_CORROBORATION_20261016.md"
       - "ops/tests/grade10-health-tech-page102-ocr-nonapproval.test.mjs"
       - "ops/tests/test_grade910_3_unknown_medium_page102_bilingual_proof_20261016.py"
       - "docs/question-bank/ASSPS_GRADE910_THREE_UNKNOWN_MEDIUM_PAGE102_OCR_EVIDENCE_RECOVERY_20261016.md"
@@ -318,5 +326,10 @@ jobs:
           node --test ops/tests/grade10-health-tech-page102-ocr-nonapproval.test.mjs
           python3 -m unittest discover -s ops/tests -p test_grade910_3_unknown_medium_page102_bilingual_proof_20261016.py -v
           node --check ops/qbank/verify-grade10-health-tech-one-excluded-page-bilingual-ocr-20261016.mjs
+      - name: Verify bounded Physics exact-stem candidate is not an approved exercise-page proof
+        run: |
+          node --test ops/tests/grade9-physics-ocr-three-page-source-reconfirmation-20261016.test.mjs
+          python3 -m unittest discover -s ops/tests -p test_grade910_one_independent_physics_source_candidate_20261016.py -v
+          node --check ops/qbank/verify-grade9-physics-single-ocr-stem-adjacent-pages-20261016.mjs
       - name: Validate offline claim auditor syntax
         run: python3 -m py_compile ops/qbank/audit-live-grade910-source-claims-20261016.py ops/qbank/reconcile-grade910-held-original-candidates-20261016.py

@@ -17,6 +17,7 @@ OCR=PRIVATE/'ocr-recheck-legacy-progress-20261016.json'
 FINAL=PRIVATE/'ocr-legacy-recheck-final-assessment-20261016.json'
 LIVE=PRIVATE/'live-question-revisions.json'
 SUPPLEMENT=PRIVATE/'health-sciences10-tech-c17-page102-bilingual-ocr-20261016.json'
+PHYSICS=PRIVATE/'physics9-c01-s01-three-page-independent-text-proof-20261016.json'
 PUBLIC=ROOT/'docs/question-bank/ASSPS_GRADE910_2581_PUBLIC_SAFE_REVIEW_CROSSWALK_20261015.json'
 TARGET=PRIVATE/'998-text-and-ocr-question-page-review-routing-20261016.json'
 EXPECTED_ORIGINAL_OCR_SHA='fc73d62fb4606a9a89a41aad70fe0fce24d199cb44158e6d8aeb296e2b79c4c6'
@@ -28,7 +29,7 @@ def ident(row):
     return (str(row.get('questionId')),
             str(row.get('sourceCatalog',row.get('catalog'))),
             int(row.get('originallyClaimedPdfPage',row.get('page'))))
-def reconcile(layer,ocr,old,recheck_proof,strict=True,live=None,supplemental=None):
+def reconcile(layer,ocr,old,recheck_proof,strict=True,live=None,supplemental=None,physics=None):
     if layer.get('schema') is None or not isinstance(layer.get('records'),list):
         raise ValueError('TEXT_LAYER_RESEARCH_NOT_PRESENT')
     if ocr.get('schema')!='ASSPS_GRADE910_OCR_RESUME_V1' or ocr.get('academicApproved') is not False or ocr.get('published') is not False or ocr.get('rawTextPersisted') is not False:
@@ -195,6 +196,53 @@ def reconcile(layer,ocr,old,recheck_proof,strict=True,live=None,supplemental=Non
             supplementary_count+=1
         if supplementary_count!=3:
             raise ValueError('SUPPLEMENTAL_3_QUESTION_PAGE_EVIDENCE_INCOMPLETE')
+    independently_reconfirmed_physics=0
+    if physics is not None:
+        original_id='IX-PHY-2025-C01-S01'
+        record=next((r for r in items if r['questionId']==original_id),None)
+        source_record=source.get(original_id)
+        pages=physics.get('pageEvidence',[])
+        checks={p.get('physicalPDFPage'):p for p in pages} if isinstance(pages,list) else {}
+        allowed={'physicalPDFPage','ocrRecognizedWords','ocrAverageConfidence',
+                 'exactNormalizedPhraseOccurrences','reliability','rawPageTextPersisted'}
+        if (physics.get('schema')!='ASSPS_GRADE9_PHYSICS_THREE_PDF_PAGES_UNAPPROVED_OCR_SECOND_PASS_V1'
+            or physics.get('candidateQuestionId')!=original_id
+            or physics.get('sourceCatalogId')!='pectaa-catalog-011'
+            or physics.get('immutablePDFSHA256')!='a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794'
+            or physics.get('originalFrozenResearchFileSHA256')!='1a882970fc2548f50bc001691d6de990ce156690cfa252f3f5355d8d63a6dc16'
+            or physics.get('sourcePDFPhysicalPages')!=204
+            or physics.get('claimedPDFPhysicalPage')!=5
+            or physics.get('independentPagesChecked')!=3
+            or physics.get('checkedPhysicalPDFPages')!=[4,5,6]
+            or len(pages)!=3 or set(checks)!={4,5,6}
+            or any(set(p)!=allowed for p in pages)
+            or any(p.get('reliability')!='READABLE_OCR_RESEARCH_ONLY'
+                   or p.get('ocrAverageConfidence',0)<70 or p.get('ocrRecognizedWords',0)<40
+                   or p.get('rawPageTextPersisted') is not False for p in pages)
+            or checks.get(4,{}).get('exactNormalizedPhraseOccurrences')!=0
+            or checks.get(5,{}).get('exactNormalizedPhraseOccurrences')!=1
+            or checks.get(6,{}).get('exactNormalizedPhraseOccurrences')!=0
+            or physics.get('claimedPageStrictExactMatchResearchEvidence') is not True
+            or record is None or source_record is None
+            or record.get('sourceCatalogId')!='pectaa-catalog-011'
+            or record.get('unverifiedOriginalClaimedPdfPage')!=5
+            or record.get('currentLiveSchool1FullRevisionSha256')!=physics.get('exactCurrentLiveQuestionRevisionSHA256')
+            or record.get('sourceComparisonEvidenceCategory')!='OCR_EXACT_STEM_RESEARCH_CANDIDATE_NOT_VERIFIED'
+            or source_record.get('contentOrigin')!='additional'
+            or physics.get('sourceSchoolAdoptedEditionVerified') is not False
+            or physics.get('curriculumAcademicSessionApplicabilityVerified') is not False
+            or physics.get('officialBookPrintedExercisePageVerified') is not False
+            or physics.get('independentPhysicsTeacherAuthenticated') is not False
+            or physics.get('academicQuestionAnswerApproved') is not False
+            or physics.get('paperStudioVerifiedSelectable') is not False
+            or physics.get('rawCopyrightedPageTextPersisted') is not False
+            or physics.get('productionDatabaseWrites')!=0):
+            raise ValueError('PHYSICS_SECOND_OCR_EXACT_REPRODUCIBLE_BUT_NO_ACADEMIC_APPROVAL')
+        record['secondPassPage5ExactOCRPhraseReproduced']=True
+        record['adjacentPages4And6NoExactPhrase']=True
+        record['originalQuestionOriginClaim']='additional'
+        record['corroborationScope']='THREE_PHYSICAL_PDF_PAGES_OCR_ONLY_NOT_EDITION_OR_EXERCISE_CERTIFICATION'
+        independently_reconfirmed_physics=1
     grade=collections.Counter(str(x['originalGradeClaim']) for x in items)
     evidence=collections.Counter(x['sourceComparisonEvidenceCategory'] for x in items)
     subject=collections.Counter(x['routing'] for x in items)
@@ -224,6 +272,8 @@ def reconcile(layer,ocr,old,recheck_proof,strict=True,live=None,supplemental=Non
        'validatedDecoderOCRQuestionClaims':len(ocr_rows),
        'supplementalUnknownOfficialMediumPDFPagesOCRChecked':1 if supplementary_count else 0,
        'supplementalSourceClaimsIndependentlyOCRChecked':supplementary_count,
+       'independentPhysicsSingleExactStemPageAndNeighborsRechecked':independently_reconfirmed_physics,
+       'physicsSecondPassTextMatchStillNotAcademicPrintedExerciseProof':True,
        'totalClaimsWithSomeValidatedDecoderOCRScreening':len(ocr_rows)+supplementary_count,
        'originalEnglishOnlyOCRExcludedClaimsRecovered':supplementary_count,
        'originalSourceClaimIdsPresentInCurrentSchool1LiveBank':sum(x['currentLiveSchool1FullRevisionSha256'] is not None for x in items),
@@ -251,9 +301,10 @@ def load_real():
     final=json.loads(FINAL.read_text())
     current=json.loads(LIVE.read_text())
     bilingual=json.loads(SUPPLEMENT.read_text()) if SUPPLEMENT.exists() else None
+    physics=json.loads(PHYSICS.read_text()) if PHYSICS.exists() else None
     if final.get('newFullRecheckReceiptSha256')!=sha(ocr_bytes):
         raise ValueError('FINAL_OCR_SIGNED_RECEIPT_SOURCE_NOT_MATCHING')
-    return reconcile(layer,corrected,old,final,live=current,supplemental=bilingual)
+    return reconcile(layer,corrected,old,final,live=current,supplemental=bilingual,physics=physics)
 def write_private(path,obj):
     if path.parent.stat().st_mode & 0o077:raise ValueError('UNSAFE_PRIVATE_RESEARCH_DIRECTORY_PERMISSIONS')
     fd,tmp=tempfile.mkstemp(prefix='.998-source-review-',dir=path.parent)
