@@ -1,0 +1,49 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {fingerprint,newProgress,validateProgress,persistCheckpoint,pageKey} from '../qbank/assps-grade910-ocr-resume-guard-20261016.mjs';
+const input=()=>fingerprint(Buffer.from('catalog-unchanged'),Buffer.from('textlayer'),[['Q1','Stem with 3']]);
+const p={catalog:'cat-001',page:3,claims:[{questionId:'Q1'}]};
+function completed(){
+ const x=newProgress(input());x.completedPages=[pageKey(p)];
+ x.assets=[{catalog:'cat-001',page:3,rawPageImagePersisted:false,rawOCRTextPersisted:false}];
+ x.results=[{questionId:'Q1',catalog:'cat-001',page:3,autoPublished:false,qualifiedFacultyApproved:false,academicQuestionContentPageVerified:false}];
+ return x;
+}
+test('source fingerprint includes manifest, PDF-text receipt and question stem revision',()=>{
+ assert.notEqual(input(),fingerprint(Buffer.from('modified catalog'),Buffer.from('textlayer'),[['Q1','Stem with 3']]));
+ assert.notEqual(input(),fingerprint(Buffer.from('catalog-unchanged'),Buffer.from('textlayer'),[['Q1','Stem with 4']]));
+});
+test('empty checkpoint can resume safely without claiming scanned pages',()=>{
+ const x=newProgress(input());assert.equal(validateProgress(x,input(),[p]).completedPages.length,0);
+});
+test('complete source-id-only result is accepted but never approved',()=>{
+ const x=completed();assert.equal(validateProgress(x,input(),[p]).results.length,1);
+ assert.equal(x.academicApproved,false);
+});
+test('source changes invalidate cached page claims',()=>{
+ assert.throws(()=>validateProgress(completed(),'f'.repeat(64),[p]),/SOURCE_HASH_CHANGED/);
+});
+test('invented second completed page or duplicated page is blocked',()=>{
+ const x=completed();x.completedPages.push(pageKey(p));assert.throws(()=>validateProgress(x,input(),[p]),/INVALID_OR_DUPLICATE/);
+});
+test('incomplete page-specific claims cannot be marked as completed',()=>{
+ const x=completed();x.results=[];assert.throws(()=>validateProgress(x,input(),[p]),/CLAIM_COVERAGE_MISMATCH/);
+});
+test('any authorized/approved label in resume data is blocked',()=>{
+ const x=completed();x.results[0].qualifiedFacultyApproved=true;assert.throws(()=>validateProgress(x,input(),[p]),/INVALID_OCR_QUESTION_RECEIPT/);
+});
+test('no raw copyright-bearing images or text are allowed in claimed assets',()=>{
+ const x=completed();x.assets[0].rawPageImagePersisted=true;
+ assert.throws(()=>validateProgress(x,input(),[p]),/PRIVATE_MATERIAL/);
+});
+test('private durable checkpoint permissions 0600',()=>{
+ const dir=fs.mkdtempSync(path.join(os.tmpdir(),'assps-ocr-'));
+ try{
+   const state=path.join(dir,'checkpoint.json');persistCheckpoint(state,completed());
+   assert.equal(fs.statSync(state).mode&0o777,0o600);
+   assert.equal(validateProgress(JSON.parse(fs.readFileSync(state)),input(),[p]).results.length,1);
+ }finally{fs.rmSync(dir,{recursive:true,force:true});}
+});

@@ -1,8 +1,9 @@
 [Unit]
-Description=ASSPS English scanned-book OCR source evidence off-school-hours Sunday
+Description=ASSPS bounded English source OCR resuming twice nightly with root-private progress
 
 [Timer]
-OnCalendar=Sun *-*-* 04:15:00 Asia/Karachi
+OnCalendar=*-*-* 00:45:00 Asia/Karachi
+OnCalendar=*-*-* 05:15:00 Asia/Karachi
 RandomizedDelaySec=2m
 AccuracySec=1m
 Persistent=false

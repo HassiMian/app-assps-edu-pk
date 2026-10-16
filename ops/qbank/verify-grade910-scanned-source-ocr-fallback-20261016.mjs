@@ -7,6 +7,7 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {pathToFileURL,fileURLToPath} from 'node:url';
 import {classify,normalize} from './verify-grade910-pdf-question-text-evidence-20261016.mjs';
+import {fingerprint,newProgress,validateProgress,persistCheckpoint,pageKey} from './assps-grade910-ocr-resume-guard-20261016.mjs';
 const root='/root/workspace/assps-grade910-metadata-source-claim-20261016';
 const manifestPath=process.env.ASSPS_MANIFEST || path.join(root,'al-siddique-frontend/src/Modules/Paper-Generator/seed-data/grade9-10-staging/officialSourceManifest.json');
 const textLayerPath=process.env.ASSPS_TEXT_LAYER || '/var/lib/assps-grade910-sourceclaims/question-page-textlayer.json';
@@ -14,6 +15,8 @@ const evidencePath=process.env.ASSPS_OCR_EVIDENCE || '/var/lib/assps-grade910-so
 const cacheRoot='/root/workspace/qbank-source-cache';
 const pdfjsPath='/var/www/apex-backend/node_modules/pdfjs-dist/legacy/build/pdf.mjs';
 const limit=Number(process.env.ASSPS_OCR_PILOT_PAGES || 0);
+const chunkLimit=Number(process.env.ASSPS_OCR_CHUNK_PAGES || 0);
+const progressFile=process.env.ASSPS_OCR_PROGRESS || '/var/lib/assps-grade910-sourceclaims/ocr-progress.json';
 const h=b=>createHash('sha256').update(b).digest('hex');
 export function parseTesseractTSV(stdout){
  const rows=String(stdout).split(/\r?\n/);
@@ -87,9 +90,20 @@ async function main(){
  const catalog=new Map(man.entries.map(x=>[x.recordId,x]));
  const {getDocument}=await import(pathToFileURL(pdfjsPath).href);
  const {createCanvas}=await import(pathToFileURL('/var/www/apex-backend/node_modules/@napi-rs/canvas/index.js').href);
- const results=[],assets=[];
+ const resuming=(limit===0);
+ const sourceFP=fingerprint(fs.readFileSync(manifestPath),fs.readFileSync(textLayerPath),[...stems.entries()]);
+ const progress=resuming && fs.existsSync(progressFile)
+   ? validateProgress(JSON.parse(fs.readFileSync(progressFile,'utf8')),sourceFP,selection.selected)
+   : newProgress(sourceFP);
+ const results=resuming?progress.results:[];
+ const assets=resuming?progress.assets:[];
+ const scanned=new Set(progress.completedPages);
+ const pending=selection.selected.filter(x=>!scanned.has(pageKey(x)));
+ const thisBatch=(resuming && chunkLimit>0) ? pending.slice(0,chunkLimit):pending;
+ if(resuming && chunkLimit>0 && (!Number.isInteger(chunkLimit)||chunkLimit>112))
+    throw Error('UNSAFE_OCR_BATCH_SIZE');
  let currentId=null,currentDoc=null,currentHash=null,currentCount=0;
- for(const item of selection.selected){
+ for(const item of thisBatch){
   const e=catalog.get(item.catalog);
   if(currentId!==item.catalog){
    if(currentDoc)await currentDoc.destroy();
@@ -130,6 +144,12 @@ async function main(){
     ocrMeanConfidence:languageStats.averageConfidence,
     rawPageImagePersisted:false,rawOCRTextPersisted:false});
   page.cleanup();currentCount++;
+  // A committed page must always include both OCR confidence/ID-only evidence
+  // and a matching asset receipt before the next page begins.
+  if(resuming){
+    progress.completedPages.push(pageKey(item));
+    persistCheckpoint(progressFile,progress);
+  }
   if(currentCount%8===0 && global.gc)global.gc();
  }
  if(currentDoc)await currentDoc.destroy();
@@ -138,14 +158,24 @@ async function main(){
  const summary={eligibleEnglishOnlySourceClaims:selection.eligibleQuestionClaims,
    excludedNonEnglishOrUnknownMediumClaims:selection.skippedNonEnglishClaims,
    uniquePagesEligibleForLastResortOCR:selection.eligiblePages,
-   pagesScannedNow:selection.selected.length,
+   pagesScannedNow:assets.length,
    claimsCoveredNow:results.length,
    categories:buckets,
    highConfidenceStrictExactStemCandidateCount:results.filter(x=>x.exactStemCandidate).length,
    independentQuestionContentPagesVerified:0,reviewerApprovals:0,
    publishedQuestions:0,productionDatabaseWrites:0,
    rawOCRTextPersisted:false,rawBookPageImagesPersisted:false,
-   scope:limit?'PILOT_PARTIAL_EVIDENCE':'ALL_ELIGIBLE_ENGLISH_SCANNED_PAGES'};
+   scope:limit?'PILOT_PARTIAL_EVIDENCE':
+      (progress.completedPages.length===selection.eligiblePages?'ALL_ELIGIBLE_ENGLISH_SCANNED_PAGES':'PARTIAL_PROGRESS')};
+ if(resuming){
+   validateProgress(progress,sourceFP,selection.selected);
+   if(summary.scope==='PARTIAL_PROGRESS'){
+     console.log(JSON.stringify({decision:'OCR_PARTIAL_SOURCE_BOUND_PROGRESS_SAVED_NO_PUBLICATION',
+       remainingPages:selection.eligiblePages-progress.completedPages.length,summary,
+       progressFileMode:'0600'}));
+     return;
+   }
+ }
  const out={schema:'ASSPS_IX_X_SCANNED_PDF_OCR_FALLBACK_V1',
    observedUTC:new Date().toISOString(),textLayerSourceSHA256:h(fs.readFileSync(textLayerPath)),
    summary,assets,records:results};

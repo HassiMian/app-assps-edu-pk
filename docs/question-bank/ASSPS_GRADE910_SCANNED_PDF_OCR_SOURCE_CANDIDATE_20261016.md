@@ -31,6 +31,14 @@ Six distinct high-priority PDFs/pages were rendered privately and OCR'd using En
 
 ## Autonomous off-school-hours continuation
 
-`assps-grade910-scanned-ocr-fallback.timer` is configured for **Sunday 04:15 Asia/Karachi**, following 02:30 full source QA and 03:35 SHA/PDF/170-question source audits. Separate isolated service has `CPUQuota=45%`, memory pressure at 1.5 GB, hard cap 2.5 GB, strict read-only filesystem except private receipts, no elevated privileges, and `Persistent=false` to avoid an unplanned intensive post-reboot run during a school day.
+`assps-grade910-scanned-ocr-fallback.timer` is configured for **00:45 and 05:15 PKT daily**, following 02:30 full source QA and 03:35 SHA/PDF/170-question source audits. Separate isolated service has `CPUQuota=45%`, memory pressure at 1.5 GB, hard cap 2.5 GB, strict read-only filesystem except private receipts, no elevated privileges, and `Persistent=false` to avoid an unplanned intensive post-reboot run during a school day.
 
 This timer is a **planned technical execution**, not a claim that all 112 source pages have already undergone OCR. Completion requires the actual server receipt `/var/lib/assps-grade910-sourceclaims/ocr-fallback.json` and its checked scope status `ALL_ELIGIBLE_ENGLISH_SCANNED_PAGES`; no false certificate is issued before then. Previously accepted school-level Principal and Ricoh MP C307 hardware print acceptances remain carried forward, not routine tasks.
+
+## Resumable OCR safety checkpoint — 16 October 2026
+
+The source scan now writes a root-private, mode-0600 progress receipt after **each scanned PDF page**, retaining only source/question IDs, OCR confidence and strict phrase-match flags; no textbook images or raw OCR text. A SHA256 fingerprint binds the checkpoint to the official catalog manifest, the prior PDF text-layer receipt and all 2,411 question stems. If the source changes, the service refuses to reuse a stale checkpoint. An interrupted/partial run never writes the final OCR completion receipt.
+
+The scheduled English-only OCR service is now configured for **20 pages per execution**, twice off-hours daily at **00:45 and 05:15 Pakistan time**, beginning 17 October 2026 at 00:45 PKT, with CPU and memory protection. This is **a plan activated by systemd**, not proof that all 112 pages have already been scanned. Once the eligible queue is complete, only then will the full `/var/lib/assps-grade910-sourceclaims/ocr-fallback.json` receipt show `ALL_ELIGIBLE_ENGLISH_SCANNED_PAGES`.
+
+Independent tests cover source hash and question stem drift, claimed page/ID bounds, incomplete or duplicated receipts, anti-forgery publication flags, and private file permissions. Phase 4's real qualified academic review and school adoption evidence remain independent requirements; no publisher approval is auto-generated.

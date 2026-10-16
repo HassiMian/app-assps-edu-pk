@@ -12,6 +12,8 @@ on:
       - "ops/qbank/verify-grade910-pdf-physical-page-bounds-20261016.mjs"
       - "ops/qbank/verify-grade910-pdf-question-text-evidence-20261016.mjs"
       - "ops/qbank/verify-grade910-scanned-source-ocr-fallback-20261016.mjs"
+      - "ops/qbank/assps-grade910-ocr-resume-guard-20261016.mjs"
+      - "ops/tests/grade910-ocr-resume-guard-20261016.test.mjs"
       - "ops/tests/grade910-scanned-source-ocr-fallback-20261016.test.mjs"
       - "ops/release/assps-grade910-scanned-ocr-fallback.*"
       - "ops/release/install-assps-grade910-ocr-fallback-20261016.sh"
@@ -37,6 +39,8 @@ on:
       - "ops/qbank/verify-grade910-pdf-physical-page-bounds-20261016.mjs"
       - "ops/qbank/verify-grade910-pdf-question-text-evidence-20261016.mjs"
       - "ops/qbank/verify-grade910-scanned-source-ocr-fallback-20261016.mjs"
+      - "ops/qbank/assps-grade910-ocr-resume-guard-20261016.mjs"
+      - "ops/tests/grade910-ocr-resume-guard-20261016.test.mjs"
       - "ops/tests/grade910-scanned-source-ocr-fallback-20261016.test.mjs"
       - "ops/release/assps-grade910-scanned-ocr-fallback.*"
       - "ops/release/install-assps-grade910-ocr-fallback-20261016.sh"
@@ -63,6 +67,8 @@ jobs:
         run: node --test ops/tests/grade910-physical-pdf-page-bounds-20261016.test.mjs
       - name: Validate exact PDF text-layer matching without false faculty approvals
         run: node --test ops/tests/grade910-pdf-question-text-evidence-20261016.test.mjs
+      - name: Validate private resumable OCR checkpoints and fail-closed provenance
+        run: node --test ops/tests/grade910-ocr-resume-guard-20261016.test.mjs
       - name: Validate last-resort English OCR fallback never claims faculty approvals
         run: node --test ops/tests/grade910-scanned-source-ocr-fallback-20261016.test.mjs
       - name: Validate read-only MCQ answer text correspondence without academic self-approval
