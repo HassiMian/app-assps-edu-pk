@@ -3,7 +3,7 @@ const {spawnSync}=require('node:child_process')
 const path=require('node:path')
 const cwd=path.resolve(__dirname,'../../al-siddique-frontend')
 const cases=[
- ['paperSerialStatementCrossFieldBrowser.test.js',2],
+ ['paperSerialStatementCrossFieldBrowser.test.js',3],
  ['unifiedWorkspaceOfficialBrowserAcceptance.test.js',1],
 ]
 for (const [filename,expected] of cases){
