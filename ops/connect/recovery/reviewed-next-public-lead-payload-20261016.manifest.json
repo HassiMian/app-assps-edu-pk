@@ -1,0 +1,22 @@
+{
+  "baseCommit": "9c2e34c2fe988cf01dd1a679f42654e278473f07",
+  "bodyLimitScope": "Parsed JSON character limit before disk/email, NOT ingress stream cap or rate limiting",
+  "buildCommandDirectExitCodeCaptured": false,
+  "buildLogSha256": "8fc126dc841eecd5a165deb7a65959fe8097c63363f03feae9f750a81d50ed81",
+  "buildLogShowsCompletedPostbuild": true,
+  "changedFiles": [
+    "src/app/api/apex/leads/route.ts",
+    "tests/apex-public-lead-mail-safety.test.cjs"
+  ],
+  "eslintPassed": true,
+  "fixedCommit": "c47edc0c8bf18d93a7b4daecd15ffc12f1ba47b9",
+  "focusedNodeTestsPassed": 39,
+  "patchSha256": "f0e1f73ce93c7d1fdc1f5e48a068fb0d7807f88447362f802c443bfe65ae6429",
+  "privateBuildId": "JJPC22k5mVzQtcdV-YFXn",
+  "productionModified": false,
+  "releaseAuthorized": false,
+  "sourceFileSha256": {
+    "src/app/api/apex/leads/route.ts": "377209e479f9448e4ce56fb6cbf1c3671e2d8ee64978a8fe372889cb2c18190f",
+    "tests/apex-public-lead-mail-safety.test.cjs": "2d799d877b046874fc99e5733194aabf83dfe67dc6fa56b5a01ff9799018a469"
+  }
+}

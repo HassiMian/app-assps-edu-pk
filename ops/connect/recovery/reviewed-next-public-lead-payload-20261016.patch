@@ -1,0 +1,167 @@
+diff --git a/src/app/api/apex/leads/route.ts b/src/app/api/apex/leads/route.ts
+index e23b197..38d288f 100644
+--- a/src/app/api/apex/leads/route.ts
++++ b/src/app/api/apex/leads/route.ts
+@@ -4,9 +4,60 @@ import { sendApexLeadAutoReply, sendApexLeadNotification } from "@/lib/server/ma
+ 
+ export const runtime = "nodejs";
+ 
++// Public submissions must remain bounded before they reach disk or outbound mail.
++// This guard is additive; the existing valid request/response contract is unchanged.
++const MAX_PUBLIC_LEAD_JSON_CHARS = 16_384;
++const PUBLIC_LEAD_FIELD_LIMITS: Record<string, number> = {
++  type: 40,
++  name: 160,
++  contactName: 160,
++  ownerName: 160,
++  email: 320,
++  phone: 80,
++  contactNumber: 80,
++  schoolName: 240,
++  city: 160,
++  studentsCount: 60,
++  notes: 4_096,
++};
++
++function rejectPublicLead(message: string, status = 400) {
++  return NextResponse.json(
++    { success: false, message },
++    { status, headers: { "Cache-Control": "no-store" } }
++  );
++}
++
++function validPublicLeadPayload(value: unknown): value is Record<string, unknown> {
++  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
++  const body = value as Record<string, unknown>;
++  for (const [key, limit] of Object.entries(PUBLIC_LEAD_FIELD_LIMITS)) {
++    const field = body[key];
++    if (field == null) continue;
++    if (key === "studentsCount" && typeof field === "number" && Number.isFinite(field)) continue;
++    if (typeof field !== "string" || field.length > limit) return false;
++  }
++  const extra = body.extra;
++  if (extra != null) {
++    if (!extra || typeof extra !== "object" || Array.isArray(extra)) return false;
++    const entries = Object.entries(extra);
++    if (entries.length > 32) return false;
++    if (entries.some(([key, val]) =>
++      key.length > 100 || typeof val !== "string" || val.length > 512
++    )) return false;
++  }
++  return true;
++}
++
+ export async function POST(req: Request) {
+   try {
+-    const body = await req.json();
++    const body: unknown = await req.json();
++    if (!validPublicLeadPayload(body)) {
++      return rejectPublicLead("Invalid request fields");
++    }
++    if (JSON.stringify(body).length > MAX_PUBLIC_LEAD_JSON_CHARS) {
++      return rejectPublicLead("Request too large", 413);
++    }
+     const type = String(body.type || "contact").toLowerCase() as
+       | "demo"
+       | "contact"
+@@ -20,7 +71,7 @@ export async function POST(req: Request) {
+     if (!name || !email || !phone) {
+       return NextResponse.json(
+         { success: false, message: "Name, email and phone are required" },
+-        { status: 400 }
++        { status: 400, headers: { "Cache-Control": "no-store" } }
+       );
+     }
+ 
+@@ -33,7 +84,7 @@ export async function POST(req: Request) {
+       city: body.city ? String(body.city) : undefined,
+       studentsCount: body.studentsCount ? String(body.studentsCount) : undefined,
+       notes: body.notes ? String(body.notes) : undefined,
+-      extra: body.extra,
++      extra: body.extra == null ? undefined : body.extra as Record<string, string>,
+     });
+ 
+     // A persisted lead is successful even if a notification provider fails.
+@@ -67,7 +118,7 @@ export async function POST(req: Request) {
+       success: true,
+       message: "Request submitted successfully",
+       leadId: lead.leadId,
+-    });
++    }, { headers: { "Cache-Control": "no-store" } });
+   } catch (error: unknown) {
+     if (error instanceof SyntaxError) {
+       return NextResponse.json(
+diff --git a/tests/apex-public-lead-mail-safety.test.cjs b/tests/apex-public-lead-mail-safety.test.cjs
+index 1a71b7e..347a0fa 100644
+--- a/tests/apex-public-lead-mail-safety.test.cjs
++++ b/tests/apex-public-lead-mail-safety.test.cjs
+@@ -112,3 +112,69 @@ test('missing required field stays HTTP400',async()=>{
+   assert.equal(res.status,400);
+   assert.equal(h.calls.save,0);
+ });
++
++test('public lead rejects null, primitive and array JSON payloads without persistence',async()=>{
++  for(const payload of [null, 1, 'unsafe', [], ['name','email']]){
++    const h=handler();
++    const res=await h.POST({json:async()=>payload});
++    assert.equal(res.status,400);
++    assert.equal(res.headers['Cache-Control'],'no-store');
++    assert.equal(h.calls.save,0);
++    assert.equal(h.calls.notify,0);
++  }
++});
++
++test('public lead rejects non-string form fields and nested extra records',async()=>{
++  for(const payload of [
++    {...valid,name:['unsafe']},
++    {...valid,email:{address:'nested'}},
++    {...valid,notes:{html:'nested'}},
++    {...valid,extra:{tag:{nested:true}}},
++    {...valid,extra:['unexpected']},
++    {...valid,extra:{tag:'x'.repeat(513)}}
++  ]){
++    const h=handler();
++    const res=await h.POST({json:async()=>payload});
++    assert.equal(res.status,400);
++    assert.equal(h.calls.save,0);
++  }
++});
++
++test('public lead rejects oversized fields and total payload without disk/mail writes',async()=>{
++  for(const [payload,status] of [
++    [{...valid,notes:'x'.repeat(4097)},400],
++    [{...valid,name:'x'.repeat(161)},400],
++    [{...valid,unrecognized:'x'.repeat(17000)},413]
++  ]){
++    const h=handler();
++    const res=await h.POST({json:async()=>payload});
++    assert.equal(res.status,status);
++    assert.equal(res.headers['Cache-Control'],'no-store');
++    assert.equal(h.calls.save,0);
++    assert.equal(h.calls.notify,0);
++  }
++});
++
++test('public lead keeps legacy aliases and bounded extra strings working',async()=>{
++  const h=handler();
++  const res=await h.POST({json:async()=>({
++    type:'demo',contactName:'Example Staff',email:'staff@example.invalid',
++    contactNumber:'+92 300 1234567', studentsCount:20,
++    extra:{ref:'public form'}
++  })});
++  assert.equal(res.status,200);
++  assert.equal(h.calls.save,1);
++  assert.equal(h.calls.notify,1);
++});
++
++
++test('public lead success and missing-field responses explicitly disable caching',async()=>{
++  const good=handler();
++  const success=await good.POST({json:async()=>valid});
++  assert.equal(success.status,200);
++  assert.equal(success.headers['Cache-Control'],'no-store');
++  const bad=handler();
++  const rejected=await bad.POST({json:async()=>({...valid,phone:''})});
++  assert.equal(rejected.status,400);
++  assert.equal(rejected.headers['Cache-Control'],'no-store');
++});
