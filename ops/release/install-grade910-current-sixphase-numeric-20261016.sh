@@ -55,22 +55,8 @@ if [[ ! -e "$DROP" ]];then
  MADE_DROP=1
 fi
 systemctl daemon-reload
-systemctl start "$MAIN"
-python3 - <<'PY'
-from pathlib import Path
-import json
-p=Path('/var/lib/assps-grade910-sourceclaims/autonomous-six-phase-checkpoint.json')
-s=json.loads(p.read_text())
-assert s['liveNumericalsMatchedToDeepRecomputedOriginal']==80
-assert s['liveNumericalsStillNeedRevisionSpecificDeepRecomputation']==0
-assert s['numericalCurrentFullLiveRevisionsAndMachineAnswersMatched'] is True
-assert s['machinePassedPhases']==4
-assert s['academicVerifiedPublicationReady'] is False
-assert s['authenticIndependentAcademicApprovals']==0
-assert s['paperStudioAcademicallyApprovedSnapshotReady'] is False
-assert p.stat().st_mode & 0o077 == 0
-print('SIX_PHASE_LIVE_NUMERICAL_EVIDENCE_80_OF_80_UPDATED_ACADEMIC_HOLD')
-PY
+# Long-running PDF source jobs must NEVER hold the installer process open.
+# Execute and independently verify the full existing academic service separately.
 systemctl is-active --quiet assps-grade910-live-source-claims.timer
-systemctl show "$MAIN" -p Result -p ExecMainStatus --no-pager
+printf '%s\n' "SIX_PHASE_HOOK_STAGED_NOT_YET_SERVICE_CERTIFIED"
 trap - EXIT
