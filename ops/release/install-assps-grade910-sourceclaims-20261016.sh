@@ -15,7 +15,9 @@ TIMER=assps-grade910-live-source-claims.timer
 DEST=/usr/local/libexec/assps-grade910-sourceclaims
 test -s "$SRC" && test -s "$MAN" && test -s "$ORIGINAL"
 python3 -m py_compile "$SRC"
+python3 -m py_compile "$REPO/ops/qbank/reconcile-grade910-held-original-candidates-20261016.py"
 python3 -m unittest discover -s "$REPO/ops/tests" -p "$TEST" -q
+python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_170_original_reconciliation_20261016.py -q
 systemd-analyze verify "$REPO/ops/release/$UNIT" "$REPO/ops/release/$TIMER"
 if [[ "$MODE" == --check ]];then
  echo ASSPS_SOURCE_CLAIMS_PREFLIGHT_PASS_NO_PRODUCTION_CHANGE
@@ -24,6 +26,8 @@ fi
 [[ -z "$(git -C "$REPO" status --porcelain)" ]] || { echo UNCOMMITTED_SOURCE_HOLD;exit 66; }
 mkdir -p "$DEST"
 install -m 0644 "$SRC" "$DEST/$(basename "$SRC")"
+install -m 0644 "$REPO/ops/qbank/reconcile-grade910-held-original-candidates-20261016.py" "$DEST/reconcile-grade910-held-original-candidates-20261016.py"
+install -m 0644 "$REPO/docs/question-bank/ASSPS_GRADE910_2581_PUBLIC_SAFE_REVIEW_CROSSWALK_20261015.json" "$DEST/originalReviewCrosswalk2581.json"
 install -m 0644 "$MAN" "$DEST/officialSourceManifest.json"
 install -m 0644 "$ORIGINAL" "$DEST/frozenOriginalResearchIDs.json"
 install -m 0644 "$REPO/ops/release/$UNIT" "/etc/systemd/system/$UNIT"
@@ -43,6 +47,9 @@ assert s['manifestHashMatches']==s['rows']
 assert s['orphanLiveSeedIds']==0
 assert s['liveIdsMatchingProtectedOriginals']==s['rows']
 assert not r['facultySignaturesCreated']
+h=json.loads(Path('/var/lib/assps-grade910-sourceclaims/held170.json').read_text())
+assert h['sourceIdsNotInLive']==170 and h['existingUnsignedFacultyFormsVerified']==170
+assert h['newApprovedQuestions']==0 and h['databaseWrites']==0
 print('ASSPS_SOURCE_CLAIMS_WEEKLY_INSTALLED_FIRST_RUN_PASS',s['rows'],
       s['cachedPdfHashesMatchingManifest'],s['authorPageClaimsRangePlausibleOnly'])
 PY

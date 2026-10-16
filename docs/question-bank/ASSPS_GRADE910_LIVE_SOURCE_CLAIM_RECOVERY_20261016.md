@@ -53,6 +53,24 @@ against the protected original `ASSPS_GRADE910_UNIFIED_2581_FACULTY_CONTENT_REVI
 
 This is a **triage ordering**, not a recommendation to avoid other subjects or a proof that the listed questions are incorrect.
 
+
+## 170 original research revisions absent from the provisional LIVE seed — recovered, not fabricated
+
+A separate read-only “live ↔ original research” reconciliation confirms **2,581 original IDs**, **2,411 live IDs**, **0 orphan live IDs**, and **170 original-only research IDs**. All 170 already have a source-revision SHA256 crosswalk and a private existing **unsigned** qualified teacher review template physically present (170/170). No new question text or copyrighted material is copied to GitHub, no provisional bank import, no signed reviews and no “academically verified” publication.
+
+| Protected original source file | Original-only IDs |
+|---|---:|
+| `biology9Chapter1TopicDrafts.json` | 48 |
+| `biology9TopicResearchDrafts.json` | 6 |
+| `english9CompetencyOriginals2026.json` | 44 |
+| `mathematics10OriginalReasoningBatch2026.json` | 36 |
+| `physics10OriginalApplicationBatch2026.json` | 36 |
+| **Total** | **170** |
+
+The original grade field is unspecified for some English records, so the report retains `UNSPECIFIED_ORIGINAL` rather than fabricating the original grade claim. The original frozen research revision SHA256 and the live provisional database record SHA256 are **different hashing domains**; raw string mismatch between them is **not** evidence of academic edits. Verified identity is by unique `metadata.seed_id` and original source crosswalk, while original revision SHA is checked against the existing unsigned private teacher intake form crosswalk.
+
+A reusable exact revision/unsigned-review resolver lives in `ops/qbank/reconcile-grade910-held-original-candidates-20261016.py`, with six independent real-source/negative tests (no unknown live IDs, no lost unsigned forms, no false signatures, no count drift). Machine-only private receipt is `/root/secure-archive/assps-grade910-live-source-evidence-20261016/held170.json`. The existing Sunday 03:35 PKT source-integrity systemd service now also executes this reconciliation in `ExecStartPost`, protected by systemd and the revised installer.
+
 ## Reproducible and autonomous execution
 
 - Source parser: `ops/qbank/audit-live-grade910-source-claims-20261016.py`, schema `assps-live-source-claim-audit-v1`. Reads PostgreSQL under an explicit `BEGIN TRANSACTION READ ONLY` using the existing peer-authenticated Postgres identity.
