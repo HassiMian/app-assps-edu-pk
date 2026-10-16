@@ -488,6 +488,26 @@ test('two-school real-auth Paper Save/Reopen/Print, Diary persistence and Lesson
   assert.equal(storedStyledRevision.rows[0].document_json.sections[0].editorInlineRichText.headingSerial, richSerial)
   assert.equal(storedStyledRevision.rows[0].document_json.sections[0].editorInlineRichText.headingInstruction, richInstruction)
   console.log('PHASE3_REAL_AUTH_SERVER_RICH_HEADING_REVISION_REOPEN_CONFLICT_PASS')
+  // Server rejection, not just browser sanitizer: an arbitrary client must
+  // not persist unsupported rich-text HTML in a USER_AUTHORED revision.
+  const unsafeDoc = JSON.parse(JSON.stringify(storedHeadingPaper.document_json))
+  unsafeDoc.sections[0].editorInlineRichText.headingSerial = '<iframe></iframe>'
+  const deniedMarkup = await page.evaluate(async payload => {
+    const token = localStorage.getItem('al_siddique_token')
+    const response = await fetch(`/api/assessment-studio/papers/${encodeURIComponent(payload.paperId)}/revisions`, {
+      method:'POST', headers:{'Content-Type':'application/json',Authorization:`Bearer ${token}`},
+      body:JSON.stringify({ expectedRevision:payload.revision, title:payload.title, document:payload.document }),
+    })
+    return { status:response.status, body:await response.json() }
+  }, {paperId:saved.serverPaperId, revision:storedHeadingPaper.current_revision,
+      title:paperTitle, document:unsafeDoc})
+  assert.equal(deniedMarkup.status, 400, 'Backend allowed unsupported inline HTML in paper revision')
+  const afterUnsafe = await pool.query(
+    'SELECT current_revision FROM assessment_papers WHERE school_id=$1 AND public_id=$2',
+    [schoolId,saved.serverPaperId])
+  assert.equal(Number(afterUnsafe.rows[0].current_revision), Number(storedHeadingPaper.current_revision),
+    'Backend rejected unsafe markup but changed the stored revision')
+  console.log('PHASE3_REAL_AUTH_SERVER_UNSAFE_HEADING_REJECTED_NO_MUTATION_PASS')
 
   await context.close()
 

@@ -1,0 +1,42 @@
+name: ASSPS Paper Server Inline Heading Contract
+on:
+  push:
+    branches:
+      - 'fix/paper-server-inline-richtext-validation-*'
+    paths:
+      - 'al-siddique-backend/src/routes/assessmentStudioRoutes.js'
+      - 'al-siddique-backend/src/services/paperStudioInlineRichTextGuard.js'
+      - 'al-siddique-backend/src/tests/paper-studio-inline-richtext-backend-validation.test.cjs'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/core/PaperDocumentV2.js'
+      - '.github/workflows/paper-server-richtext-validation-20261016.yml'
+  pull_request:
+    paths:
+      - 'al-siddique-backend/src/routes/assessmentStudioRoutes.js'
+      - 'al-siddique-backend/src/services/paperStudioInlineRichTextGuard.js'
+      - 'al-siddique-backend/src/tests/paper-studio-inline-richtext-backend-validation.test.cjs'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/core/PaperDocumentV2.js'
+      - '.github/workflows/paper-server-richtext-validation-20261016.yml'
+jobs:
+  paper-validated-heading:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: al-siddique-frontend/package-lock.json
+      - name: Deny unsafe headings and compare canonical frontend rules
+        run: node --test al-siddique-backend/src/tests/paper-studio-inline-richtext-backend-validation.test.cjs
+      - name: Install pinned frontend dependencies
+        working-directory: al-siddique-frontend
+        run: npm ci --no-audit --no-fund
+      - name: Verify protected paper templates
+        working-directory: al-siddique-frontend
+        run: npm run verify:templates
+      - name: Compile frontend unchanged
+        working-directory: al-siddique-frontend
+        run: npm run build
