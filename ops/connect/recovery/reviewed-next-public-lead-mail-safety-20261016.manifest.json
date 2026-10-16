@@ -1,0 +1,19 @@
+{
+  "baseCommit": "e0073349d2fc1ae1bda294b9b48f99392695f9b9",
+  "buildExitCode": 0,
+  "buildLogSha256": "0bbc073d86703e510d4478d5eb47918b339e38237c82d6d26ec20df9be6ca49a",
+  "fixedCommit": "9c2e34c2fe988cf01dd1a679f42654e278473f07",
+  "focusedNodeTestsPassed": 44,
+  "generatedStaticPages": 103,
+  "patchSha256": "85839bc4781513c98684a5d9c57f2e96b1d669296ff7f59ccb183569c08abeec",
+  "privateBuildId": "dlSeqwoA5aoEGvFjwuY6Z",
+  "productionModified": false,
+  "releaseAuthorized": false,
+  "schema": "connect-public-apex-lead-mail-safety-v1",
+  "sourceFileSha256": {
+    "src/app/api/apex/leads/route.ts": "2c8864c3c7fea607df90e589d7f99ee4bf2decfc3d766960c47f2dc36174d6e1",
+    "src/lib/server/apex-lead-html.ts": "26e5cef569342a30c3708cf269bb248754143295641aeaed70c7aa3870fbe313",
+    "src/lib/server/mail.ts": "573385adee3145c493af8884f1a5dc013246de998ea74fc63bd01c6bb7d32f4a",
+    "tests/apex-public-lead-mail-safety.test.cjs": "13eb8d3325d1c5ae98089672221f5d4bc022c6f55c26d3a7aaef214f1a22f33f"
+  }
+}

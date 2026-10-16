@@ -25,6 +25,9 @@ on:
       - 'ops/connect/recovery/reviewed-next-apex-lead-id-path-20261016.patch'
       - 'ops/connect/recovery/reviewed-next-apex-lead-id-path-20261016.manifest.json'
       - 'ops/connect/test_reviewed_next_apex_lead_id_path_20261016.py'
+      - 'ops/connect/recovery/reviewed-next-public-lead-mail-safety-20261016.patch'
+      - 'ops/connect/recovery/reviewed-next-public-lead-mail-safety-20261016.manifest.json'
+      - 'ops/connect/test_reviewed_next_public_lead_mail_safety_20261016.py'
       - 'ops/connect/recovery/reviewed-next-eslint-config-20261016.mjs'
       - 'ops/connect/test_reviewed_next_eslint_config_20261016.py'
       - 'ops/connect/recovery/reviewed-next-eslint-active-scope-20261016.mjs'
@@ -76,6 +79,9 @@ on:
       - 'ops/connect/recovery/reviewed-next-apex-lead-id-path-20261016.patch'
       - 'ops/connect/recovery/reviewed-next-apex-lead-id-path-20261016.manifest.json'
       - 'ops/connect/test_reviewed_next_apex_lead_id_path_20261016.py'
+      - 'ops/connect/recovery/reviewed-next-public-lead-mail-safety-20261016.patch'
+      - 'ops/connect/recovery/reviewed-next-public-lead-mail-safety-20261016.manifest.json'
+      - 'ops/connect/test_reviewed_next_public_lead_mail_safety_20261016.py'
       - 'ops/connect/recovery/reviewed-next-eslint-config-20261016.mjs'
       - 'ops/connect/test_reviewed_next_eslint_config_20261016.py'
       - 'ops/connect/recovery/reviewed-next-eslint-active-scope-20261016.mjs'
@@ -157,3 +163,5 @@ jobs:
         run: python3 -m unittest discover -v -s ops/connect -p 'test_verify_frontend_rollback_disk_budget_20261016.py'
       - name: Verify immutable Apex lead ID path-guard source
         run: python3 -m unittest discover -v -s ops/connect -p 'test_reviewed_next_apex_lead_id_path_20261016.py'
+      - name: Verify immutable public lead-mail HTML and failure safety source
+        run: python3 -m unittest discover -v -s ops/connect -p 'test_reviewed_next_public_lead_mail_safety_20261016.py'

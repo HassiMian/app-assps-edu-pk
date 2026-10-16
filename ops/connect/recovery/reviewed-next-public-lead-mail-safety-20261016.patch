@@ -1,0 +1,250 @@
+diff --git a/src/app/api/apex/leads/route.ts b/src/app/api/apex/leads/route.ts
+index aa7ee45..e23b197 100644
+--- a/src/app/api/apex/leads/route.ts
++++ b/src/app/api/apex/leads/route.ts
+@@ -36,15 +36,21 @@ export async function POST(req: Request) {
+       extra: body.extra,
+     });
+ 
+-    await sendApexLeadNotification({
+-      leadId: lead.leadId,
+-      type: lead.type,
+-      name: lead.name,
+-      email: lead.email,
+-      phone: lead.phone,
+-      schoolName: lead.schoolName,
+-      notes: lead.notes,
+-    });
++    // A persisted lead is successful even if a notification provider fails.
++    try {
++      await sendApexLeadNotification({
++        leadId: lead.leadId,
++        type: lead.type,
++        name: lead.name,
++        email: lead.email,
++        phone: lead.phone,
++        schoolName: lead.schoolName,
++        notes: lead.notes,
++      });
++    } catch {
++      // Do not leak private SMTP/server details or cause duplicate submissions.
++      console.warn("APEX_LEAD_NOTIFICATION_FAILED");
++    }
+ 
+     try {
+       await sendApexLeadAutoReply({
+@@ -63,7 +69,15 @@ export async function POST(req: Request) {
+       leadId: lead.leadId,
+     });
+   } catch (error: unknown) {
+-    const message = error instanceof Error ? error.message : "Failed to submit request";
+-    return NextResponse.json({ success: false, message }, { status: 500 });
++    if (error instanceof SyntaxError) {
++      return NextResponse.json(
++        { success: false, message: "Invalid JSON request" },
++        { status: 400, headers: { "Cache-Control": "no-store" } },
++      );
++    }
++    return NextResponse.json(
++      { success: false, message: "Unable to submit request" },
++      { status: 500, headers: { "Cache-Control": "no-store" } },
++    );
+   }
+ }
+diff --git a/src/lib/server/apex-lead-html.ts b/src/lib/server/apex-lead-html.ts
+new file mode 100644
+index 0000000..9ec264b
+--- /dev/null
++++ b/src/lib/server/apex-lead-html.ts
+@@ -0,0 +1,13 @@
++/** Escapes externally supplied lead fields before HTML email interpolation. */
++export function escapeApexLeadHtml(value: string): string {
++  return value.replace(/[&<>"']/g, (character) => {
++    switch (character) {
++      case "&": return "&amp;";
++      case "<": return "&lt;";
++      case ">": return "&gt;";
++      case '"': return "&quot;";
++      case "'": return "&#39;";
++      default: return character;
++    }
++  });
++}
+diff --git a/src/lib/server/mail.ts b/src/lib/server/mail.ts
+index b41263d..4b2ffad 100644
+--- a/src/lib/server/mail.ts
++++ b/src/lib/server/mail.ts
+@@ -1,6 +1,7 @@
+ import nodemailer from "nodemailer";
+ import fs from "fs";
+ import path from "path";
++import { escapeApexLeadHtml } from "@/lib/server/apex-lead-html";
+ 
+ export const transporter = nodemailer.createTransport({
+   host: process.env.SMTP_HOST || "smtp.gmail.com",
+@@ -206,7 +207,7 @@ export async function sendPaymentConfirmedAdminNotification({
+         <h2>Gateway payment confirmed</h2>
+         <p><b>Gateway:</b> ${gateway}</p>
+         <p><b>Request ID:</b> ${requestId}</p>
+-        <p><b>School:</b> ${schoolName}</p>
++        <p><b>School:</b> ${escapeApexLeadHtml(schoolName)}</p>
+         <p><b>Owner:</b> ${ownerName} (${email})</p>
+         <p><b>Plan:</b> ${planName} — PKR ${amount.toLocaleString()}</p>
+         ${transactionId ? `<p><b>Transaction ID:</b> ${transactionId}</p>` : ""}
+@@ -285,13 +286,13 @@ export async function sendApexLeadAutoReply({
+     html: `
+       <div style="font-family:Arial,sans-serif;background:#f8fafc;padding:30px;">
+         <div style="max-width:620px;margin:auto;background:white;border-radius:18px;padding:28px;border:1px solid #e5e7eb;">
+-          <h1 style="color:#0f172a;margin:0 0 12px;">Thank you, ${name}</h1>
++          <h1 style="color:#0f172a;margin:0 0 12px;">Thank you, ${escapeApexLeadHtml(name)}</h1>
+           <p style="color:#475569;line-height:1.6;">
+             Your APEX ${label} has been received. Our team will respond within 24–48 hours.
+           </p>
+           <div style="background:#0f172a;color:white;border-radius:14px;padding:16px 20px;margin:22px 0;">
+             <p style="margin:0;font-size:13px;opacity:0.8;">Reference ID</p>
+-            <p style="margin:6px 0 0;font-family:monospace;font-size:15px;">${leadId}</p>
++            <p style="margin:6px 0 0;font-family:monospace;font-size:15px;">${escapeApexLeadHtml(leadId)}</p>
+           </div>
+           <p style="color:#64748b;font-size:13px;">APEX Education OS · Al Siddique School System</p>
+         </div>
+@@ -328,13 +329,13 @@ export async function sendApexLeadNotification({
+     subject: `New APEX ${type} lead — ${leadId}`,
+     html: `
+       <div style="font-family:Arial,sans-serif;padding:24px;">
+-        <h2>New ${type} request</h2>
+-        <p><b>ID:</b> ${leadId}</p>
+-        <p><b>Name:</b> ${name}</p>
+-        <p><b>Email:</b> ${email}</p>
+-        <p><b>Phone:</b> ${phone}</p>
+-        ${schoolName ? `<p><b>School:</b> ${schoolName}</p>` : ""}
+-        ${notes ? `<p><b>Notes:</b> ${notes}</p>` : ""}
++        <h2>New ${escapeApexLeadHtml(type)} request</h2>
++        <p><b>ID:</b> ${escapeApexLeadHtml(leadId)}</p>
++        <p><b>Name:</b> ${escapeApexLeadHtml(name)}</p>
++        <p><b>Email:</b> ${escapeApexLeadHtml(email)}</p>
++        <p><b>Phone:</b> ${escapeApexLeadHtml(phone)}</p>
++        ${schoolName ? `<p><b>School:</b> ${escapeApexLeadHtml(schoolName)}</p>` : ""}
++        ${notes ? `<p><b>Notes:</b> ${escapeApexLeadHtml(notes)}</p>` : ""}
+       </div>
+     `,
+   });
+diff --git a/tests/apex-public-lead-mail-safety.test.cjs b/tests/apex-public-lead-mail-safety.test.cjs
+new file mode 100644
+index 0000000..1a71b7e
+--- /dev/null
++++ b/tests/apex-public-lead-mail-safety.test.cjs
+@@ -0,0 +1,114 @@
++'use strict';
++const assert=require('node:assert/strict');
++const fs=require('node:fs');
++const path=require('node:path');
++const vm=require('node:vm');
++const ts=require('typescript');
++const test=require('node:test');
++const root=path.resolve(__dirname,'../src');
++function load(file,imports,globals={}){
++  const source=fs.readFileSync(path.join(root,file),'utf8');
++  const js=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,esModuleInterop:true}}).outputText;
++  const exports={};
++  vm.runInNewContext(js,{exports,require:(name)=>{
++    if(!Object.prototype.hasOwnProperty.call(imports,name))throw Error('Unmocked dependency '+name);
++    return imports[name];
++  },process:{env:{SMTP_USER:'synthetic',SMTP_PASS:'synthetic',APEX_LEADS_EMAIL:'qa@example.invalid'}},
++  console,Error,SyntaxError,...globals},{timeout:1500,filename:file});
++  return exports;
++}
++const {escapeApexLeadHtml}=load('lib/server/apex-lead-html.ts',{});
++const emails=[];
++const mail=load('lib/server/mail.ts',{
++  nodemailer:{createTransport:()=>({sendMail:async(data)=>{emails.push(data);return {accepted:['synthetic']};}})},
++  fs:{existsSync:()=>true,appendFileSync:()=>{throw Error('unexpected fallback disk write')}},
++  path,
++  '@/lib/server/apex-lead-html':{escapeApexLeadHtml},
++});
++class Response {
++  constructor(body,options={}){this.body=body;this.status=options.status||200;this.headers=options.headers||{};}
++  static json(b,o){return new Response(b,o);}
++}
++function handler({storeFails=false,notifyFails=false,replyFails=false}={}){
++  const calls={save:0,notify:0,reply:0,warns:[]};
++  const route=load('app/api/apex/leads/route.ts',{
++    'next/server':{NextResponse:Response},
++    '@/lib/server/apex-leads-storage':{createApexLead:async(body)=>{
++      calls.save++;
++      if(storeFails)throw Error('PRIVATE_FS_PATH_AND_SMTP_CREDENTIAL');
++      return {...body,leadId:'LEAD-ABCDEF12'};
++    }},
++    '@/lib/server/mail':{
++      sendApexLeadNotification:async()=>{calls.notify++;if(notifyFails)throw Error('PRIVATE_SMTP_HOST_TOKEN');},
++      sendApexLeadAutoReply:async()=>{calls.reply++;if(replyFails)throw Error('PRIVATE_REPLY_ERROR');}
++    }
++  },{console:{warn:(...x)=>calls.warns.push(x.join(' '))}});
++  return {POST:route.POST,calls};
++}
++const valid={type:'contact',name:'Synthetic Name',email:'qa@example.invalid',phone:'000'};
++const req=(input)=>({json:async()=>input});
++test('HTML encoder protects markup metacharacters in lead fields',()=>{
++  assert.equal(escapeApexLeadHtml('<img src=x onerror="alert(1)">&'),
++   '&lt;img src=x onerror=&quot;alert(1)&quot;&gt;&amp;');
++  assert.equal(escapeApexLeadHtml('مدرسہ ASSPS — normal'),'مدرسہ ASSPS — normal');
++});
++test('actual admin and auto-reply email render lead text as literal, not HTML',async()=>{
++  emails.length=0;
++  const attack='<img src=x onerror=alert(1)>';
++  const name='Student & School <svg onload=evil()> "test"';
++  await mail.sendApexLeadNotification({
++    leadId:'LEAD-ABCDEF12',type:'contact',name,
++    email:'qa@example.invalid',phone:'000',schoolName:attack,notes:attack
++  });
++  await mail.sendApexLeadAutoReply({
++    to:'qa@example.invalid',name,type:'contact',leadId:'LEAD-ABCDEF12'
++  });
++  assert.equal(emails.length,2);
++  for(const email of emails){
++    assert.doesNotMatch(email.html,/<img src=x|<svg onload/);
++    assert.match(email.html,/&lt;svg onload=evil\(\)&gt;/);
++    assert.match(email.html,/Student &amp; School/);
++  }
++  assert.match(emails[0].html,/&lt;img src=x onerror=alert\(1\)&gt;/);
++});
++test('saved lead success even if admin notification fails',async()=>{
++  const h=handler({notifyFails:true});
++  const res=await h.POST(req(valid));
++  assert.equal(res.status,200);
++  assert.equal(res.body.success,true);
++  assert.equal(res.body.leadId,'LEAD-ABCDEF12');
++  assert.equal(h.calls.save,1);
++  assert.equal(h.calls.notify,1);
++  assert.equal(h.calls.reply,1);
++  assert.equal(h.calls.warns[0],'APEX_LEAD_NOTIFICATION_FAILED');
++  assert.doesNotMatch(JSON.stringify(res.body),/PRIVATE_SMTP/);
++});
++test('auto-reply failure after save does not fail submission',async()=>{
++  const h=handler({replyFails:true});
++  const res=await h.POST(req(valid));
++  assert.equal(res.status,200);
++  assert.equal(h.calls.save,1);
++});
++test('storage failure redacted no-store on public HTTP500',async()=>{
++  const h=handler({storeFails:true});
++  const res=await h.POST(req(valid));
++  assert.equal(res.status,500);
++  assert.equal(res.body.message,'Unable to submit request');
++  assert.equal(res.headers['Cache-Control'],'no-store');
++  assert.doesNotMatch(JSON.stringify(res.body),/PRIVATE_FS_PATH/);
++  assert.equal(h.calls.notify,0);
++});
++test('malformed JSON is HTTP400 and never creates lead',async()=>{
++  const h=handler();
++  const res=await h.POST({json:async()=>{throw new SyntaxError('Unexpected input')}});
++  assert.equal(res.status,400);
++  assert.equal(res.body.message,'Invalid JSON request');
++  assert.equal(res.headers['Cache-Control'],'no-store');
++  assert.equal(h.calls.save,0);
++});
++test('missing required field stays HTTP400',async()=>{
++  const h=handler();
++  const res=await h.POST(req({...valid,name:''}));
++  assert.equal(res.status,400);
++  assert.equal(h.calls.save,0);
++});
