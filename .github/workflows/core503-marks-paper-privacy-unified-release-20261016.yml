@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - 'integration/core503-marks-rls-paper-privacy-20261016'
+      - 'integration/core503-privacy-expectedanswer-diary-port-20261016'
   pull_request:
     paths:
       - 'al-siddique-backend/src/config/signedRlsCatalogGuard.js'
@@ -47,6 +48,8 @@ jobs:
           python3 -m unittest -q ops/release/core-infrastructure/test_verify_signed_rls_catalog_drift_20261016.py ops/release/core-infrastructure/test_verify_live_role_membership_grants_20261016.py ops/release/core-infrastructure/test_verify_unsigned_rls_matrix_20261016.py ops/release/worker-probe/test_verify_worker_peer_scope_20261016.py ops/release/test_verify_private_backend_stage_rollback_20261016.py
       - name: Protect all fifteen Daily Diary synthetic Chromium workflows
         run: node ops/paper-studio/run_diary_release_browser_20261016.cjs
+      - name: Prevent shared port collisions and ABA diary regressions in Chromium
+        run: node --test al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/dailyDiaryStaleReopenBrowser.test.js
       - name: Compile all protected Paper/Marks/Diary/Lesson/Early Years modules
         working-directory: al-siddique-frontend
         run: npm run build
