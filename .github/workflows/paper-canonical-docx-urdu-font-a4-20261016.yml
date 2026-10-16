@@ -1,0 +1,46 @@
+name: Paper Studio Canonical DOCX Urdu A4 and Marks Parity
+on:
+  push:
+    branches:
+      - 'fix/paper-docx-jameel-rtl-parity-20261016'
+      - 'integration/core-paper-docx-jameel-qa-20261016'
+  pull_request:
+    paths:
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/export/canonicalDocxExport.js'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/export/canonicalDocxModel.js'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/canonicalDocx*.test.js'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/migration/data/canonical-first-term-2026-paperdoc-v2-schema3.json'
+      - '.github/workflows/paper-canonical-docx-urdu-font-a4-20261016.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify-real-docx-binary-without-school-data-mutation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout reviewed source
+        uses: actions/checkout@v4
+      - name: Use Node runtime matching source tests
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: al-siddique-frontend/package-lock.json
+      - name: Install exact locked frontend dependencies
+        working-directory: al-siddique-frontend
+        run: npm ci --no-audit --no-fund
+      - name: Require ZIP inspector for actual Word OpenXML checks
+        run: command -v unzip
+      - name: Verify all 43 DOCX binary fonts, A4 and blank versus zero marks
+        working-directory: al-siddique-frontend
+        run: >-
+          node --test
+          src/Modules/Paper-Generator/PaperEditor/tests/canonicalDocxBinary.test.js
+          src/Modules/Paper-Generator/PaperEditor/tests/canonicalDocxMathAssets.test.js
+          src/Modules/Paper-Generator/PaperEditor/tests/canonicalDocxModel.test.js
+      - name: Verify production candidate build without deployment
+        working-directory: al-siddique-frontend
+        run: npm run build
+      - name: Check five feature asset completeness
+        run: python3 ops/paper-studio/verify_full_feature_readiness_20261016.py --repo . --dist al-siddique-frontend/dist

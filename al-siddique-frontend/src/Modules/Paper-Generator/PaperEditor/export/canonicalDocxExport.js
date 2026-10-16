@@ -4,7 +4,7 @@ import {
 import { buildCanonicalDocxModel } from './canonicalDocxModel.js'
 
 const rtl = d => d === 'rtl'
-const run = (value, opts={}) => new TextRun({ text:String(value??''), size:opts.size||22, bold:Boolean(opts.bold), italics:Boolean(opts.italics), font:opts.font || (opts.rtl ? 'Noto Nastaliq Urdu' : 'Times New Roman'), rightToLeft:Boolean(opts.rtl) })
+const run = (value, opts={}) => new TextRun({ text:String(value??''), size:opts.size||22, bold:Boolean(opts.bold), italics:Boolean(opts.italics), font:opts.font || (opts.rtl ? 'Jameel Noori Nastaleeq' : 'Times New Roman'), rightToLeft:Boolean(opts.rtl) })
 const para = (value, opts={}) => new Paragraph({
   heading: opts.heading,
   bidirectional:Boolean(opts.rtl),
@@ -12,7 +12,14 @@ const para = (value, opts={}) => new Paragraph({
   children:[run(value,{...opts,rtl:Boolean(opts.rtl)})],
   spacing:{before:opts.before??0,after:opts.after??100},
 })
-const marksSuffix = value => Number.isFinite(Number(value)) ? `  [${Number(value)}]` : ''
+const marksSuffix = value => {
+  // Only actual numeric marks may be printed. JavaScript Number(null),
+  // Number('') and Number(false) otherwise masquerade as zero marks.
+  if (typeof value !== 'number' && typeof value !== 'string') return ''
+  if (typeof value === 'string' && !value.trim()) return ''
+  const marks = Number(value)
+  return Number.isFinite(marks) ? `  [${marks}]` : ''
+}
 
 const imageTypeFromMime = mime => {
   const value=String(mime||'').toLowerCase()
