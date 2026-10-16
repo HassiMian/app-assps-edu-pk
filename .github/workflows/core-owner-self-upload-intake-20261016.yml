@@ -1,0 +1,19 @@
+name: ASSPS Core Owner Evidence Self Upload Intake
+on:
+  push:
+    paths:
+      - 'ops/release/evidence-intake/**'
+      - '.github/workflows/core-owner-self-upload-intake-20261016.yml'
+  pull_request:
+    paths:
+      - 'ops/release/evidence-intake/**'
+      - '.github/workflows/core-owner-self-upload-intake-20261016.yml'
+jobs:
+  offline-safety:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Offline owner-provided evidence intake safety
+        run: python3 -m unittest discover -s ops/release/evidence-intake -p 'test_owner_upload_intake_20261016.py' -v
