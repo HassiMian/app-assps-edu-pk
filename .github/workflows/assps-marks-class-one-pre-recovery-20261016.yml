@@ -1,0 +1,23 @@
+name: ASSPS Class One Existing Marks Integrity - Synthetic Tests Only
+on:
+  push:
+    branches:
+      - 'audit/marks-p0-class-one-recovery-integrity-*'
+    paths:
+      - 'ops/release/marks-save/**'
+      - '.github/workflows/assps-marks-class-one-pre-recovery-20261016.yml'
+  pull_request:
+    paths:
+      - 'ops/release/marks-save/**'
+jobs:
+  failclosed-pure-tests:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test Class One saved-marks mismatch and missing-score safeguards
+        run: python3 -m unittest discover -s ops/release/marks-save -p 'test_verify_class_one_recovery_integrity_20261016.py' -v
