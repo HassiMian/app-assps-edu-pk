@@ -10,6 +10,7 @@ on:
   push:
     branches:
       - 'fix/paper-diary-print-font-load-integrity-20261016'
+      - 'integration/core-paper-diary-print-rc-20261016'
   workflow_dispatch:
 permissions:
   contents: read
