@@ -1,0 +1,40 @@
+name: ASSPS Core P0 Marks Save 401 signed-RLS drift
+on:
+  push:
+    branches:
+      - 'hotfix/core-marks-save-401-*'
+  pull_request:
+    paths:
+      - 'al-siddique-frontend/src/services/api.js'
+      - 'al-siddique-frontend/src/services/marksSave401Session.test.mjs'
+      - 'al-siddique-frontend/src/Modules/examination/MarksSheet.jsx'
+      - 'al-siddique-backend/src/config/database.js'
+      - 'al-siddique-backend/src/config/signedRlsCatalogGuard*'
+      - '.github/workflows/core-marks-save-auth-p0-20261016.yml'
+jobs:
+  scoped-marks-auth:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: al-siddique-frontend/package-lock.json
+      - name: Install pinned frontend dependencies
+        working-directory: al-siddique-frontend
+        run: npm ci --no-audit --no-fund
+      - name: Validate catalog policy and never logout on opted-in failed Marks Save
+        run: |
+          node --check al-siddique-backend/src/config/database.js
+          node --test al-siddique-backend/src/config/signedRlsCatalogGuard.test.cjs
+          node --test al-siddique-frontend/src/services/marksSave401Session.test.mjs
+          node --test ops/tests/marks-sheet-data-truth.test.js
+      - name: Original signed RLS and unsigned denial regressions
+        run: python3 -m unittest ops/release/core-infrastructure/test_verify_signed_rls_catalog_drift_20261016.py ops/release/core-infrastructure/test_verify_unsigned_rls_matrix_20261016.py -q
+      - name: Build marks-safe frontend
+        working-directory: al-siddique-frontend
+        run: npm run build

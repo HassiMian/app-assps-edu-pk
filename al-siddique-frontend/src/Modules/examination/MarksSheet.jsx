@@ -218,7 +218,7 @@ export default function MarksSheet() {
  setSaving(true)
  setMessage('')
  try {
- const response = await api.post('/api/exams/results', {results:rows})
+ const response = await api.post('/api/exams/results', {results:rows}, {marksWriteNoLogout401:true})
  if (response.data?.success !== true || Number(response.data?.savedCount) !== rows.length)
  throw new Error('Save acknowledgement did not match the submitted marks. Refresh before retrying.')
  if (submittedScope === rosterFetchSeq.current) {
@@ -230,7 +230,9 @@ export default function MarksSheet() {
  }
  } catch (err) {
  if (submittedScope === rosterFetchSeq.current)
- setMessage(err.response?.data?.message || err.message || 'Failed to save marks. Existing records have not been cleared.')
+ setMessage(err.response?.status === 401
+   ? 'Marks NOT saved: the Save server rejected authorization. Your unsaved entries remain on this page. Do not close or refresh this tab; retry after the server is repaired.'
+   : (err.response?.data?.message || err.message || 'Failed to save marks. Existing records have not been cleared.'))
  } finally {
  setSaving(false)
  }

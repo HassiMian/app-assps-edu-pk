@@ -150,7 +150,11 @@ api.interceptors.response.use(
     const marksReviewReadDenied = config.marksReviewReadOnly401 === true &&
       method === 'get' &&
       (exactReadPath === '/api/exams' || exactReadPath === '/api/exams/results')
-    if (err.response?.status === 401 && !marksReviewReadDenied) {
+    // A failed marks Save request is not proof that primary login expired.
+    // Scope precisely to opted-in POST; never turn off global 401 elsewhere.
+    const marksWriteCanaryDenied = config.marksWriteNoLogout401 === true &&
+      method === 'post' && exactReadPath === '/api/exams/results'
+    if (err.response?.status === 401 && !marksReviewReadDenied && !marksWriteCanaryDenied) {
       clearAuthSession()
       if (typeof window !== 'undefined' && window.location.pathname !== '/login') window.location.href = '/login'
       return Promise.reject(err)
