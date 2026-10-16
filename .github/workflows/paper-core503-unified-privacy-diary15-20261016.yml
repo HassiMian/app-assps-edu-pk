@@ -4,6 +4,7 @@ on:
     branches:
       - 'integration/core503-paper-answer-privacy-diary15-20261016'
       - 'integration/core503-paper-privacy-diary15-guardfix-*'
+      - 'integration/core503-paper-truefalse-privacy-gate-*'
   pull_request:
     paths:
       - 'al-siddique-backend/src/services/assessmentPrintJobs.js'

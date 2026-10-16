@@ -5,6 +5,7 @@ on:
       - 'hotfix/core-marks-save-401-*'
       - 'fix/core-marks-signed-guard-contract-*'
       - 'integration/core503-paper-privacy-diary15-guardfix-*'
+      - 'integration/core503-paper-truefalse-privacy-gate-*'
   pull_request:
     paths:
       - 'al-siddique-frontend/src/services/api.js'
