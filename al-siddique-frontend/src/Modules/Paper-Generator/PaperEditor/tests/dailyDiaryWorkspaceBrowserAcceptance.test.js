@@ -31,6 +31,55 @@ test('Daily Diary split workspace personalizes students, supports dynamic A4 cou
   await page.getByRole('button',{name:'None'}).click()
   for(const count of [2,3,4,5,6,8,10]){await page.locator(`[data-card-count="${count}"]`).click();await page.waitForTimeout(80);assert.equal(await page.locator('[data-a4-page]').count(),1,`generic ${count} should use one A4 page`);assert.equal(await page.locator('[data-student-card]').count(),count,`generic ${count} card count`)}
   await page.emulateMedia({media:'print'});const printStyle=await page.locator('[data-a4-page]').first().evaluate(el=>({width:parseFloat(getComputedStyle(el).width),height:parseFloat(getComputedStyle(el).height),transform:getComputedStyle(el).transform}));assert.ok(printStyle.width>780&&printStyle.width<810,`A4 print width unexpected: ${printStyle.width}`);assert.ok(printStyle.height>1110&&printStyle.height<1140,`A4 print height unexpected: ${printStyle.height}`);assert.equal(printStyle.transform,'none');await page.emulateMedia({media:'screen'})
+  // Actual Print/PDF uses a separate iframe; verify it preserves the selected
+  // number of A4 cards, line layouts, controls and school/student content.
+  // Change a teacher-controlled subject size + weight before printing: a
+  // default-only comparison would miss lost custom formatting on print.
+  const subjectBefore=await page.locator('.dd-a4-page .dd-sub-cell').first().evaluate(el=>el.style.fontSize)
+  await page.locator('[data-diary-editor] .dd-row-editor').first().locator('button[title="Increase subject font"]').click()
+  await page.locator('[data-diary-editor] .dd-row-editor').first().locator('button[title="Toggle Subject Bold (Optional)"]').click()
+  const subjectAfter=await page.locator('.dd-a4-page .dd-sub-cell').first().evaluate(el=>({size:el.style.fontSize,weight:el.style.fontWeight}))
+  assert.notEqual(subjectAfter.size,subjectBefore,'Subject-size controller did not update preview')
+  assert.equal(subjectAfter.weight,'850','Subject Bold controller did not update preview')
+  const screenDiaryText=(await page.locator('[data-a4-page]').first().innerText()).trim()
+  const screenSubjectStyle=await page.locator('.dd-a4-page .dd-sub-cell').first().evaluate(el=>({fontSize:el.style.fontSize,fontWeight:el.style.fontWeight}))
+  const screenUrduAlignment=await page.locator('.dd-a4-page .dd-sub-cell.urdu').first().evaluate(el=>({align:getComputedStyle(el).textAlign,justify:getComputedStyle(el).justifyContent}))
+  await page.getByRole('button',{name:'Print / PDF'}).click()
+  const printFrame=page.locator('#dd-print-frame')
+  await printFrame.waitFor({state:'attached',timeout:10000})
+  const printed=await printFrame.evaluate(el=>{
+    const doc=el.contentDocument
+    return {html:doc.documentElement.outerHTML,text:doc.body.innerText,
+      pages:doc.querySelectorAll('.dd-a4-page').length,
+      cards:doc.querySelectorAll('.dd-card').length,
+      subjectSize:doc.querySelector('.dd-sub-cell')?.style.fontSize,
+      subjectWeight:doc.querySelector('.dd-sub-cell')?.style.fontWeight,
+      urduAlign:doc.querySelector('.dd-sub-cell.urdu')&&doc.defaultView.getComputedStyle(doc.querySelector('.dd-sub-cell.urdu')).textAlign,
+      urduJustify:doc.querySelector('.dd-sub-cell.urdu')&&doc.defaultView.getComputedStyle(doc.querySelector('.dd-sub-cell.urdu')).justifyContent,
+      tokens:el.dataset.printRequestToken,
+      css:doc.querySelector('style')?.textContent||''}
+  })
+  assert.equal(printed.pages,1)
+  assert.equal(printed.cards,10)
+  assert.ok(printed.text.includes(screenDiaryText.slice(0,55)),'Print iframe lost visible Diary content')
+  assert.equal(printed.subjectSize,screenSubjectStyle.fontSize,'Print iframe reset subject size controller')
+  assert.equal(printed.subjectWeight,screenSubjectStyle.fontWeight,'Print iframe reset subject bold controller')
+  assert.equal(printed.urduAlign,screenUrduAlignment.align,'Print iframe changed Urdu subject alignment')
+  assert.equal(printed.urduJustify,screenUrduAlignment.justify,'Print iframe changed Urdu subject justification')
+  assert.equal(printed.tokens,'1','First Diary print request must be tracked')
+  assert.match(printed.css,/@page\s*\{\s*size:\s*A4\s+portrait/)
+  assert.match(printed.css,/font-family:\s*'ASSPS Jameel Noori',\s*'Jameel Noori Nastaleeq'/)
+  const printPage=await context.newPage()
+  await printPage.setContent(printed.html,{waitUntil:'domcontentloaded'})
+  await printPage.emulateMedia({media:'print'})
+  assert.equal(await printPage.locator('.dd-a4-page').count(),1)
+  const printPdf=await printPage.pdf({format:'A4',printBackground:true})
+  assert.equal(printPdf.subarray(0,5).toString(),'%PDF-')
+  assert.ok(printPdf.length>7000,`Diary print PDF unexpectedly short: ${printPdf.length}`)
+  const boxes=printPdf.toString('latin1').match(/\/MediaBox\s*\[\s*0\s+0\s+([\d.]+)\s+([\d.]+)\s*\]/)
+  assert.ok(boxes&&Math.abs(Number(boxes[1])-595)<5&&Math.abs(Number(boxes[2])-842)<5,'Diary print is not A4')
+  await printPage.close()
+  console.log('DAILY_DIARY_REAL_ISOLATED_PRINT_FRAME_A4_FONT_CONTROLLER_PASS',printPdf.length)
   await page.locator('[data-diary-mode="lesson"]').click();await page.locator('[data-auto-plan-today]').click();await page.getByText('Daily multi-subject plan generated with AI enrichment.').waitFor({timeout:10000});const preview=(await page.locator('[data-a4-page]').first().textContent())||'';assert.match(preview,/ENGLISH/);assert.match(preview,/SCIENCE/);assert.match(preview,/Reading comprehension/);assert.match(preview,/Photosynthesis diagram/)
   const pageStyle=await page.locator('[data-a4-page]').first().evaluate(el=>({width:getComputedStyle(el).width,height:getComputedStyle(el).height,cols:getComputedStyle(el).getPropertyValue('--cols'),rows:getComputedStyle(el).getPropertyValue('--rows')}));assert.ok(parseFloat(pageStyle.width)>700);assert.ok(parseFloat(pageStyle.height)>1000);assert.equal(pageStyle.cols.trim(),'2');assert.equal(pageStyle.rows.trim(),'5')
   console.log('DAILY_DIARY_WORKSPACE_BROWSER 1/1 PASS')

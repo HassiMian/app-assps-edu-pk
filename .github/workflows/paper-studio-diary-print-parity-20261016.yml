@@ -1,0 +1,39 @@
+name: Paper Studio Diary Print Parity
+on:
+  pull_request:
+    paths:
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/DailyDiaryWorkspace.jsx'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/dailyDiaryWorkspaceBrowserAcceptance.test.js'
+      - 'al-siddique-frontend/package.json'
+      - 'al-siddique-frontend/package-lock.json'
+      - '.github/workflows/paper-studio-diary-print-parity-20261016.yml'
+  push:
+    branches:
+      - 'fix/paper-diary-print-font-load-integrity-20261016'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  a4-urdu-rtl-print-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - name: Checkout reviewed Paper Studio branch
+        uses: actions/checkout@v4
+      - name: Use lockfile Node runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: al-siddique-frontend/package-lock.json
+      - name: Install exact frontend dependencies
+        working-directory: al-siddique-frontend
+        run: npm ci --no-audit --no-fund
+      - name: Install isolated Playwright Chromium
+        working-directory: al-siddique-frontend
+        run: npx playwright install --with-deps chromium
+      - name: Confirm full candidate frontend compiles
+        working-directory: al-siddique-frontend
+        run: npm run build
+      - name: Verify A4 Diary print and all Save Reopen races
+        run: node ops/paper-studio/run_diary_release_browser_20261016.cjs
