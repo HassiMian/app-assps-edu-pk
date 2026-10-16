@@ -1,0 +1,32 @@
+name: ASSPS Paper Studio Teacher Print Readiness Read-Only Tests
+on:
+  push:
+    branches:
+      - 'audit/paper-teacher-print-readiness-gate-*'
+    paths:
+      - 'ops/paper-studio/verify_teacher_print_operational_readiness_20261016.py'
+      - 'ops/paper-studio/test_verify_teacher_print_operational_readiness_20261016.py'
+      - '.github/workflows/paper-teacher-print-readiness-readonly-20261016.yml'
+  pull_request:
+    paths:
+      - 'ops/paper-studio/verify_teacher_print_operational_readiness_20261016.py'
+      - 'ops/paper-studio/test_verify_teacher_print_operational_readiness_20261016.py'
+      - '.github/workflows/paper-teacher-print-readiness-readonly-20261016.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  synthetic-read-only-gate-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout isolated source
+        uses: actions/checkout@v4
+      - name: Python 3.11, no production DB access
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test fail-closed privilege separation, immutable receipts, no release GO
+        run: python -m unittest discover -s ops/paper-studio -p 'test_verify_teacher_print_operational_readiness_20261016.py' -v
+      - name: Syntax check only, do not open school DB or deploy
+        run: python -m py_compile ops/paper-studio/verify_teacher_print_operational_readiness_20261016.py
