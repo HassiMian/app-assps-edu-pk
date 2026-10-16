@@ -19,7 +19,7 @@ OUT=SOURCE_DIR/"autonomous-six-phase-checkpoint.json"
 def read(path:Path):
     return json.loads(path.read_text(encoding="utf8")) if path.exists() else None
 
-def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, answer, ocr_progress=None, live_collisions=None, adoption_inventory=None, review_delta=None, tenant_rls=None, revision_history=None, numerical_evidence=None, numerical_deep_proof=None, subjective_risk=None):
+def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, answer, ocr_progress=None, live_collisions=None, adoption_inventory=None, review_delta=None, tenant_rls=None, revision_history=None, numerical_evidence=None, numerical_deep_proof=None, subjective_risk=None, historic_answer_drafts=None):
     if not all(isinstance(x,dict) for x in (technical,weekly,source,held,pdf,text,ocr_pilot,answer)):
         raise ValueError("MANDATORY_MACHINE_EVIDENCE_MISSING")
     src=source.get("summary") or {}
@@ -159,6 +159,32 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
             or len(subjective_risk.get('records',[]))!=604):
             raise ValueError('SUBJECTIVE_DEPTH_EVIDENCE_UNVERIFIED_OR_PUBLICATION_UNSAFE')
         subjective_depth_checked=True
+    # Existing historical explanatory drafts are strictly UNAPPROVED research,
+    # not a newly manufactured independent faculty review decision.
+    prior_long_explanations_linked=False
+    if historic_answer_drafts is not None:
+        x=historic_answer_drafts
+        if (x.get('schema')!='ASSPS_GRADE910_EXISTING_166_LONG_ANSWER_RESEARCH_LIVE_CROSSWALK_V1'
+            or x.get('liveQuestionRevisionsLinked')!=2411
+            or x.get('uniqueHistoricalResearchLongIds')!=166
+            or x.get('historicalLongIdsWithAnySupplementalExplanatoryDraft')!=165
+            or x.get('historicalLongIdsWithoutSupplementalDraft')!=1
+            or x.get('liveLongQuestionIdsWithPriorResearchDraft')!=164
+            or x.get('liveRiskIdsWithPriorResearchDraft')!=154
+            or x.get('liveRiskIdsWithoutPriorResearchDraft')!=450
+            or x.get('highPriorityRiskIdsWithPriorResearchDraft')!=128
+            or x.get('highPriorityRiskIdsWithoutPriorResearchDraft')!=229
+            or x.get('previousTwentyPacketsAuthenticatedOriginalSha')!=20
+            or x.get('publicOutputContainsNoSchoolStemOrModelAnswer') is not True
+            or x.get('researchCandidatesAreNotIndependentTeacherReviews') is not True
+            or x.get('schoolAdoptedEditionVerifiedByThisAudit') is not False
+            or x.get('qualifiedAcademicApprovalsCreated')!=0
+            or x.get('academicallySelectableCreated')!=0
+            or x.get('productionDatabaseWrites')!=0
+            or len(x.get('records',[]))!=166
+            or not subjective_depth_checked):
+            raise ValueError('HISTORICAL_ANSWER_RESEARCH_CROSSWALK_INVALID_OR_UNREVIEWED')
+        prior_long_explanations_linked=True
     score=technical.get("metrics",{}).get("scores",{})
     integrity=technical.get("decision")=="OPERATIONAL" and score.get("total_score_rows",0)>=1763
     fullsuite_ok=(weekly.get("decision")=="QA_PASSED_NO_AUTOMATIC_ACADEMIC_PUBLICATION"
@@ -224,6 +250,11 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
       "subjectiveAnswerDepthRiskQueue":subjective_risk.get("subjectiveRiskReviewCandidates") if subjective_depth_checked else None,
       "highPrioritySubjectiveModelAnswerReviewQueue":subjective_risk.get("highPriorityReviewCandidates") if subjective_depth_checked else None,
       "subjectiveLengthFlagsAreNotAcademicCorrectnessJudgments":True,
+      "liveLongQuestionsWithPriorUnapprovedExplanatoryResearch":164 if prior_long_explanations_linked else None,
+      "subjectiveDepthRiskFlagsWithPriorResearch":154 if prior_long_explanations_linked else None,
+      "subjectiveDepthRiskFlagsNeedingFreshModelResearch":450 if prior_long_explanations_linked else None,
+      "highPriorityAnswerRiskWithoutPriorResearch":229 if prior_long_explanations_linked else None,
+      "priorLongAnswerDraftsAreNotTeacherReviews":True,
       "everyChangedQuestionRevisionMustBeRereviewed":True,
       "questionBankCrossSchoolRlsDenied":tenant_rls.get("crossTenantLeakCount")==0 if tenant_rls else None,
       "liveQuestionDuplicateGroups":0 if live_collisions is not None else None,
@@ -262,7 +293,8 @@ if __name__=="__main__":
                read(SOURCE_DIR/"live-revision-history.json"),
                read(SOURCE_DIR/"live-numerical-evidence.json"),
                read(SOURCE_DIR/"numerical-deep-recomputation-21.json"),
-               read(SOURCE_DIR/"subjective-answer-depth-risk-20261016.json"))
+               read(SOURCE_DIR/"subjective-answer-depth-risk-20261016.json"),
+               read(SOURCE_DIR/"live-existing-answer-proposal-crosswalk-20261016.json"))
     save(OUT,p)
     print(json.dumps({k:v for k,v in p.items() if k!="phases"},sort_keys=True))
     for row in p["phases"]:print(f"PHASE_{row['phase']}={row['status']}")
