@@ -28,7 +28,7 @@ function fetchStatus(port, pathname) {
   })
 }
 
-test('teacher creates, saves, reopens, and prints an assessment through real isolated authentication', { timeout: 140000 }, async t => {
+test('two-school real-auth Paper Save/Reopen/Print, Diary persistence and Lesson revision/tenant boundaries', { timeout: 140000 }, async t => {
   // Never synthesize school identities against the live database or live ports.
   // These genuine-actor tests require an explicitly named disposable clone and scoped fixtures.
   // An unprovisioned build should report SKIPPED, not crash while importing pg.
@@ -57,6 +57,7 @@ test('teacher creates, saves, reopens, and prints an assessment through real iso
     max: 5,
   })
   let schoolId
+  let peerSchoolId
   let vite
   let backend
   let browser
@@ -68,6 +69,10 @@ test('teacher creates, saves, reopens, and prints an assessment through real iso
     if (schoolId) {
       await pool.query('DELETE FROM users WHERE school_id=$1', [schoolId]).catch(() => {})
       await pool.query('DELETE FROM schools WHERE id=$1', [schoolId]).catch(() => {})
+    }
+    if (peerSchoolId) {
+      await pool.query('DELETE FROM users WHERE school_id=$1', [peerSchoolId]).catch(() => {})
+      await pool.query('DELETE FROM schools WHERE id=$1', [peerSchoolId]).catch(() => {})
     }
     await pool.end().catch(() => {})
   })
@@ -93,6 +98,20 @@ test('teacher creates, saves, reopens, and prints an assessment through real iso
   await pool.query(
     "INSERT INTO users(school_id,tenant_id,name,email,role,password,is_active,must_change_password,permissions) VALUES($1,$2,'Restricted QA Teacher',$3,'teacher',$4,true,false,$5::jsonb)",
     [schoolId, schoolCode, deniedEmail, deniedHash, JSON.stringify([])],
+  )
+
+  // Independent School2 tenant and genuine second-school teacher login.
+  // All records stay in this disposable PG16 cluster, never live production.
+  const peerSchoolCode = `p2x${suffix}`
+  const peerEmail = `peer-${suffix}@example.invalid`
+  const peerPassword = crypto.randomBytes(18).toString('base64url')
+  peerSchoolId = (await pool.query(
+    "INSERT INTO schools(name,code,status,tenant_id) VALUES('Phase2 QA School Two',$1,'active',$1) RETURNING id",
+    [peerSchoolCode],
+  )).rows[0].id
+  await pool.query(
+    "INSERT INTO users(school_id,tenant_id,name,email,role,password,is_active,must_change_password,permissions) VALUES($1,$2,'School2 QA Teacher',$3,'teacher',$4,true,false,$5::jsonb)",
+    [peerSchoolId, peerSchoolCode, peerEmail, await bcrypt.hash(peerPassword, 10), JSON.stringify(['paper_generator'])],
   )
 
   backend = spawn(process.execPath, ['server.js'], {
@@ -147,6 +166,120 @@ test('teacher creates, saves, reopens, and prints an assessment through real iso
   })
   assert.deepEqual(me, { status: 200, role: 'teacher' })
   console.log('PHASE2_TEACHER_REAL_LOGIN_PASS')
+
+  // Genuine authenticated Daily Diary database acceptance in the SAME private
+  // PG16 clone. A teacher must be able to save, reopen and edit only her draft;
+  // a second same-school teacher must not read it. No production identity used.
+  const diaryDate = '2026-10-16'
+  const diaryDraft = {
+    school_name: 'CLIENT-SUPPLIED-NAME-MUST-NOT-PERSIST',
+    template_id: 1, class_level: '1', class_name: 'One', diary_date: diaryDate,
+    slips_per_page: 8, footer_text: 'Synthetic QA diary', footer_is_urdu: false,
+    rows: [{ subject: 'English', homework: 'Page 21 - Learn five words.' }],
+    style_settings: { subjectFontSize: 13 },
+  }
+  const createdDiary = await page.evaluate(async payload => {
+    const token = localStorage.getItem('al_siddique_token')
+    const response = await fetch('/api/daily-diary', {
+      method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+      body: JSON.stringify(payload),
+    })
+    return { status: response.status, body: await response.json() }
+  }, diaryDraft)
+  assert.equal(createdDiary.status, 200, `Synthetic teacher Diary create rejected: ${JSON.stringify(createdDiary.body).slice(0, 240)}`)
+  assert.equal(createdDiary.body.success, true)
+  const diaryId = Number(createdDiary.body.data?.id)
+  assert.ok(Number.isSafeInteger(diaryId) && diaryId > 0, 'Daily Diary did not receive a persistent server ID')
+  assert.equal(Number(createdDiary.body.data.school_id), Number(schoolId))
+  assert.equal(createdDiary.body.data.school_name, 'Phase2 QA School', 'Untrusted browser school name was accepted')
+  console.log('PHASE4_REAL_TEACHER_DIARY_SAVE_PASS')
+
+  const reopenedDiary = await page.evaluate(async id => {
+    const token = localStorage.getItem('al_siddique_token')
+    const response = await fetch(`/api/daily-diary/${id}`, { headers: { Authorization: `Bearer ${token}` } })
+    return { status: response.status, body: await response.json() }
+  }, diaryId)
+  assert.equal(reopenedDiary.status, 200)
+  assert.equal(reopenedDiary.body.success, true)
+  assert.equal(Number(reopenedDiary.body.data.id), diaryId)
+  assert.equal(reopenedDiary.body.data.class_name, 'One')
+  assert.equal(reopenedDiary.body.data.rows[0].homework, diaryDraft.rows[0].homework)
+  assert.equal(String(reopenedDiary.body.data.diary_date).slice(0, 10), diaryDate)
+  console.log('PHASE4_REAL_TEACHER_DIARY_REOPEN_PASS')
+
+  const updatedDiary = await page.evaluate(async id => {
+    const token = localStorage.getItem('al_siddique_token')
+    const response = await fetch(`/api/daily-diary/${id}`, {
+      method: 'PUT', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+      body: JSON.stringify({ footer_text: 'Verified revised synthetic diary' }),
+    })
+    return { status: response.status, body: await response.json() }
+  }, diaryId)
+  assert.equal(updatedDiary.status, 200, `Synthetic teacher Diary update rejected: ${JSON.stringify(updatedDiary.body).slice(0, 240)}`)
+  assert.equal(updatedDiary.body.data?.footer_text, 'Verified revised synthetic diary')
+  assert.equal(updatedDiary.body.data?.rows?.[0]?.homework, diaryDraft.rows[0].homework, 'Diary update erased existing subject work')
+  console.log('PHASE4_REAL_TEACHER_DIARY_PATCH_PRESERVATION_PASS')
+
+  // Lesson Planning must prove real tenant-scoped backend storage, optimistic
+  // revision behavior and untrusted client publication-flag suppression.
+  const lessonDraft = {
+    title: 'Synthetic QA Plants Lesson', subject: 'Science', classLevel: '7',
+    chapter: 'Plant Biology', teacher: 'Phase2 QA Teacher', date: diaryDate,
+    duration: 40, planningScope: 'daily', sentToPortal: true,
+    objectives: ['Understand photosynthesis'], teachingSteps: [{ activity: 'Explain sunlight role' }],
+  }
+  const createdLesson = await page.evaluate(async draft => {
+    const token = localStorage.getItem('al_siddique_token')
+    const response = await fetch('/api/lesson-plans', {
+      method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+      body: JSON.stringify(draft),
+    })
+    return { status: response.status, body: await response.json() }
+  }, lessonDraft)
+  assert.equal(createdLesson.status, 201, `Real lesson creation rejected: ${JSON.stringify(createdLesson.body).slice(0, 260)}`)
+  assert.equal(createdLesson.body.success, true)
+  const lessonId = String(createdLesson.body.data?.id || '')
+  assert.match(lessonId, /^lp_[a-f0-9-]{36}$/)
+  assert.equal(Number(createdLesson.body.data?.serverRevision), 1)
+  assert.equal(createdLesson.body.data?.sentToPortal, false, 'Client was permitted to publish unreviewed lesson')
+  console.log('PHASE6_REAL_TEACHER_LESSON_CREATE_PRIVATE_PASS')
+
+  const reopenedLesson = await page.evaluate(async () => {
+    const token = localStorage.getItem('al_siddique_token')
+    const response = await fetch('/api/lesson-plans?limit=100', { headers: { Authorization: `Bearer ${token}` } })
+    return { status: response.status, body: await response.json() }
+  })
+  assert.equal(reopenedLesson.status, 200)
+  const listedLesson = reopenedLesson.body.data?.find(item => item.id === lessonId)
+  assert.equal(listedLesson?.title, lessonDraft.title)
+  assert.deepEqual(listedLesson?.objectives, lessonDraft.objectives)
+  assert.equal(listedLesson?.sentToPortal, false)
+  console.log('PHASE6_REAL_TEACHER_LESSON_REOPEN_PRIVATE_PASS')
+
+  const updatedLesson = await page.evaluate(async current => {
+    const token = localStorage.getItem('al_siddique_token')
+    const response = await fetch(`/api/lesson-plans/${encodeURIComponent(current.id)}`, {
+      method: 'PUT', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+      body: JSON.stringify({ ...current, title: 'Verified Revised Synthetic Lesson', expectedRevision: 1 }),
+    })
+    return { status: response.status, body: await response.json() }
+  }, listedLesson)
+  assert.equal(updatedLesson.status, 200, `Real lesson update rejected: ${JSON.stringify(updatedLesson.body).slice(0, 260)}`)
+  assert.equal(updatedLesson.body.data?.title, 'Verified Revised Synthetic Lesson')
+  assert.equal(Number(updatedLesson.body.data?.serverRevision), 2)
+  assert.deepEqual(updatedLesson.body.data?.objectives, lessonDraft.objectives)
+  console.log('PHASE6_REAL_TEACHER_LESSON_REVISION_UPDATE_PASS')
+
+  const staleLesson = await page.evaluate(async id => {
+    const token = localStorage.getItem('al_siddique_token')
+    const response = await fetch(`/api/lesson-plans/${encodeURIComponent(id)}`, {
+      method: 'PUT', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+      body: JSON.stringify({ title: 'UNAUTHORIZED-STALE-REVISION', expectedRevision: 1 }),
+    })
+    return { status: response.status, body: await response.json() }
+  }, lessonId)
+  assert.equal(staleLesson.status, 409, 'Stale optimistic revision overwrote saved Lesson Plan')
+  console.log('PHASE6_REAL_TEACHER_LESSON_STALE_REVISION_DENIED_PASS')
 
   await page.goto(`${url}/paper-generator`, { waitUntil: 'domcontentloaded' })
   await page.waitForTimeout(2200)
@@ -241,9 +374,98 @@ test('teacher creates, saves, reopens, and prints an assessment through real iso
     const user = JSON.parse(localStorage.getItem('al_siddique_user') || 'null')
     return user?.role === 'teacher'
   }, null, { timeout: 25000 })
+  // The second authenticated teacher belongs to the SAME synthetic school,
+  // so denying the saved diary proves author isolation, not merely tenant ID.
+  const forbiddenDiary = await restrictedPage.evaluate(async id => {
+    const token = localStorage.getItem('al_siddique_token')
+    const response = await fetch(`/api/daily-diary/${id}`, { headers: { Authorization: `Bearer ${token}` } })
+    return { status: response.status, body: await response.json() }
+  }, diaryId)
+  assert.equal(forbiddenDiary.status, 404, 'Different same-school teacher read the authored diary')
+  const forbiddenDiaryWrite = await restrictedPage.evaluate(async id => {
+    const token = localStorage.getItem('al_siddique_token')
+    const response = await fetch(`/api/daily-diary/${id}`, {
+      method: 'PUT', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ footer_text: 'UNAUTHORIZED-SAME-SCHOOL-DIARY-WRITE' }),
+    })
+    return response.status
+  }, diaryId)
+  assert.equal(forbiddenDiaryWrite, 404, 'Different same-school teacher overwrote authored diary')
+  console.log('PHASE4_REAL_DIARY_SAME_SCHOOL_OTHER_TEACHER_DENIED_PASS')
+  const restrictedLessons = await restrictedPage.evaluate(async () => {
+    const token = localStorage.getItem('al_siddique_token')
+    const response = await fetch('/api/lesson-plans?limit=100', { headers: { Authorization: `Bearer ${token}` } })
+    return { status: response.status, body: await response.json() }
+  })
+  assert.equal(restrictedLessons.status, 200)
+  assert.ok(!restrictedLessons.body.data?.some(item => item.id === lessonId), 'Different same-school teacher saw private Lesson Plan')
+  const forbiddenLessonWrite = await restrictedPage.evaluate(async id => {
+    const token = localStorage.getItem('al_siddique_token')
+    const response = await fetch(`/api/lesson-plans/${encodeURIComponent(id)}`, {
+      method: 'PUT', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title: 'UNAUTHORIZED-SAME-SCHOOL-LESSON-WRITE', expectedRevision: 2 }),
+    })
+    return response.status
+  }, lessonId)
+  assert.equal(forbiddenLessonWrite, 404, 'Different same-school teacher overwrote private Lesson Plan')
+  console.log('PHASE6_REAL_LESSON_SAME_SCHOOL_OTHER_TEACHER_DENIED_PASS')
   await restrictedPage.goto(`${url}/paper-generator`, { waitUntil: 'domcontentloaded' })
   await restrictedPage.getByRole('heading', { name: 'You do not have access to this module.' }).waitFor({ timeout: 22000 })
   assert.equal(await restrictedPage.locator('[data-creation-option]').count(), 0)
   console.log('PHASE2_TEACHER_WITHOUT_PERMISSION_DENIED_PASS')
   await restrictedContext.close()
+
+  // Authenticated cross-tenant School2 access must be denied at HTTP and
+  // storage layers, independently of same-school author protection.
+  const peerContext = await browser.newContext({ viewport: { width: 1440, height: 900 } })
+  const peerPage = await peerContext.newPage()
+  await peerPage.goto(`${url}/login?school_code=${peerSchoolCode}`, { waitUntil: 'domcontentloaded' })
+  await peerPage.getByLabel('Email address').fill(peerEmail)
+  await peerPage.getByLabel('Password', { exact: true }).fill(peerPassword)
+  await peerPage.getByRole('button', { name: 'Sign in', exact: true }).click()
+  await peerPage.waitForFunction(() => {
+    const token = localStorage.getItem('al_siddique_token')
+    const user = JSON.parse(localStorage.getItem('al_siddique_user') || 'null')
+    return Boolean(token && user?.role === 'teacher')
+  }, null, { timeout: 25000 })
+  const crossSchoolResult = await peerPage.evaluate(async id => {
+    const token = localStorage.getItem('al_siddique_token')
+    const headers = { Authorization: `Bearer ${token}` }
+    const get = await fetch(`/api/daily-diary/${id}`, { headers })
+    const list = await fetch('/api/daily-diary?limit=100', { headers })
+    const put = await fetch(`/api/daily-diary/${id}`, {
+      method: 'PUT', headers: { ...headers, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ footer_text: 'UNAUTHORIZED-CROSS-SCHOOL-CHANGE' }),
+    })
+    return { get: get.status, list: list.status, listBody: await list.json(), put: put.status }
+  }, diaryId)
+  assert.equal(crossSchoolResult.get, 404, 'School2 teacher read School1 diary')
+  assert.equal(crossSchoolResult.put, 404, 'School2 teacher attempted to overwrite School1 diary')
+  assert.equal(crossSchoolResult.list, 200)
+  assert.equal(crossSchoolResult.listBody.success, true)
+  assert.equal(crossSchoolResult.listBody.data.length, 0, 'School2 diary list leaked School1 entries')
+  const unchangedDiary = await pool.query('SELECT school_id,footer_text FROM daily_diaries WHERE id=$1', [diaryId])
+  assert.equal(Number(unchangedDiary.rows[0]?.school_id), Number(schoolId))
+  assert.equal(unchangedDiary.rows[0]?.footer_text, 'Verified revised synthetic diary', 'School2 overwrite altered stored School1 diary')
+  console.log('PHASE5_REAL_DIARY_SCHOOL2_LIST_READ_WRITE_DENIED_PASS')
+  const peerLessons = await peerPage.evaluate(async id => {
+    const token = localStorage.getItem('al_siddique_token')
+    const headers = { Authorization: `Bearer ${token}` }
+    const list = await fetch('/api/lesson-plans?limit=100', { headers })
+    const put = await fetch(`/api/lesson-plans/${encodeURIComponent(id)}`, {
+      method: 'PUT', headers: { ...headers, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title: 'CROSS-SCHOOL-LESSON-MUTATION', expectedRevision: 2 }),
+    })
+    return { list: list.status, listBody: await list.json(), put: put.status }
+  }, lessonId)
+  assert.equal(peerLessons.list, 200)
+  assert.ok(!peerLessons.listBody.data?.some(item => item.id === lessonId), 'School2 tenant saw School1 private Lesson Plan')
+  assert.equal(peerLessons.put, 404, 'School2 tenant mutated School1 Lesson Plan')
+  const unchangedPlan = await pool.query('SELECT title,revision,school_id,sent_to_portal FROM lesson_plans WHERE public_id=$1', [lessonId])
+  assert.equal(unchangedPlan.rows[0]?.title, 'Verified Revised Synthetic Lesson')
+  assert.equal(Number(unchangedPlan.rows[0]?.revision), 2)
+  assert.equal(Number(unchangedPlan.rows[0]?.school_id), Number(schoolId))
+  assert.equal(unchangedPlan.rows[0]?.sent_to_portal, false)
+  console.log('PHASE6_REAL_LESSON_SCHOOL2_LIST_WRITE_DENIED_PASS')
+  await peerContext.close()
 })
