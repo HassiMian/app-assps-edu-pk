@@ -57,7 +57,7 @@ def packet_ids(groups,docs=DOCS,original=ORIG):
     if len(result)!=161 or sum(x['rows'] for x in packets)!=161:
         raise ValueError('EXPECTED_161_RESEARCH_DRAFTS_MISSING')
     return result,packets
-def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG,new_biology=None,new_dual_urdu=None,new_chemistry=None,new_english_essays=None,new_grade9_chem=None,new_nontech15=None):
+def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG,new_biology=None,new_dual_urdu=None,new_chemistry=None,new_english_essays=None,new_grade9_chem=None,new_nontech15=None,new_islamic10=None):
     existing,packets=packet_ids(groups,docs,original)
     rows=five.get('rows')
     if not isinstance(rows,list) or len(rows)!=5:raise ValueError('EXPECTED_FINAL_FIVE_FACULTY_DOCKETS')
@@ -438,6 +438,57 @@ def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG,new_biology=
             or sum(r['priority']=='HIGH' for r in unlinked)!=151
             or sum(r['priority']=='HIGH' and r['schoolStreamApplicability']=='STREAM_SPECIFIC_ADOPTION_EVIDENCE_REQUIRED' for r in unlinked)!=137):
             raise ValueError('CURRENT_15_ADDITIONAL_RESEARCH_QUEUE_372_151_DRIFT')
+    islamic10_count=0
+    if new_islamic10 is not None:
+        pkt=new_islamic10
+        if (pkt.get('schema')!='ASSPS_GRADE9_ISLAMIC_ETHICS_TEN_ORIGINAL_UNAPPROVED_EXEMPLARS_V1'
+            or pkt.get('candidateCount')!=10
+            or pkt.get('liveSchool1ReadOnlyCurrentRevisionCount')!=2411
+            or pkt.get('qualifiedIslamicAndUrduReviewerApprovals')!=0
+            or pkt.get('school2026_27TextbookAdoptionVerified') is not False
+            or pkt.get('printedExercisePageVerified') is not False
+            or pkt.get('publishedVerified') is not False
+            or pkt.get('productionDatabaseWrites')!=0):
+            raise ValueError('ISLAMIC_TEN_RESEARCH_MUST_REMAIN_UNAPPROVED')
+        expected={
+            'IX-ISL-U02-L01','IX-ISL-U05-L01','IX-ISL-U06-L01','IX-ISL-U07-L01',
+            'IX-TTQ-C04-L01','IX-TTQ-C06-L01','IX-TTQ-C09-L01',
+            'IX-TTQ-C11-L01','IX-TTQ-C15-L01','IX-TTQ-C16-L01'}
+        before={row['questionId']:row for row in unlinked}
+        if len(pkt.get('answers',[]))!=10:raise ValueError('EXACT_TEN_ISLAMIC_ITEMS_REQUIRED')
+        seen=set()
+        for one in pkt['answers']:
+            id=one.get('questionId');row=before.get(id)
+            if (id in seen or id not in expected or row is None
+                or row.get('priority')!='HIGH' or row.get('grade')!='9th'
+                or row.get('medium')!='Urdu'
+                or row.get('subject') not in ('Islamiat','Tarjuma-tul-Quran')
+                or row.get('schoolStreamApplicability')!='SUBJECT_BOOK_EDITION_ADOPTION_EVIDENCE_REQUIRED'
+                or one.get('currentLiveFullRevisionSha256')!=hashes.get(id)
+                or one.get('subject')!=row.get('subject')
+                or one.get('medium')!=row.get('medium')
+                or one.get('marks')!=5
+                or not 70<=len(str(one.get('newOriginalUrduIllustrativeEthicalExplanationNotOfficialTranslation','')).split())<=160
+                or len(one.get('fivePointUnapprovedSubjectUrduReviewCriteria',[]))!=5
+                or one.get('multipleCorrectStudentAnswersPermitted') is not True
+                or one.get('noCopyrightedAyahTranslationOrHadithReproduced') is not True
+                or one.get('actualASSPSAdopted2026To2027BookVerified') is not False
+                or one.get('actualPrintedExercisePageVerified') is not False
+                or one.get('independentIslamicStudiesTeacherApproved') is not False
+                or one.get('independentUrduReviewerApproved') is not False
+                or one.get('academicallyApproved') is not False
+                or one.get('paperStudioVerifiedSelectable') is not False
+                or one.get('productionDatabaseWrites')!=0):
+                raise ValueError('ISLAMIC_TEN_NOT_CURRENT_UNREVIEWED_SCHOOL1_REVISION')
+            seen.add(id)
+        if seen!=expected:raise ValueError('ISLAMIC_TEN_REQUIRED_IDS_NOT_PRESENT')
+        unlinked=[z for z in unlinked if z['questionId'] not in seen]
+        islamic10_count=10
+        if (len(unlinked)!=362
+            or sum(z['priority']=='HIGH' for z in unlinked)!=141
+            or sum(z['priority']=='HIGH' and z['schoolStreamApplicability']=='STREAM_SPECIFIC_ADOPTION_EVIDENCE_REQUIRED' for z in unlinked)!=137
+            or sum(z['priority']=='HIGH' and z['schoolStreamApplicability']=='SUBJECT_BOOK_EDITION_ADOPTION_EVIDENCE_REQUIRED' for z in unlinked)!=4):
+            raise ValueError('ISLAMIC_TEN_BACKLOG_MUST_BE_362_141_RESEARCH_ONLY')
     if summary['originalUniverse']!=166 or summary['live']!=165 or summary['originalOnly']!=1:
         raise ValueError('RESEARCH_ORIGINAL_LIVE_CROSSWALK_DRIFT')
     if summary['hasResearchDraft']!=165 or summary['noResearchDraft']!=1 or summary['liveWithResearchDraft']!=164:
@@ -458,6 +509,7 @@ def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG,new_biology=
        'newEnglishGrade9And10IllustrativeParagraphCandidates':english_count,
        'newGrade9ChemistryUrduOriginalConceptualResearchCandidates':grade9_chem_count,
        'newConventionalHighPriorityOriginalExemplarsWithoutApproval':original_nontech15,
+       'newGrade9IslamiyatTarjumaOriginalEthicalResearchCandidates':islamic10_count,
        'remainingHighPriorityStreamSpecificSubjectLabelsAwaitSchoolAdoption':sum(x['priority']=='HIGH' and x['schoolStreamApplicability']=='STREAM_SPECIFIC_ADOPTION_EVIDENCE_REQUIRED' for x in unlinked),
        'remainingHighPriorityOtherSubjectLabelsStillNeedBookAdoption':sum(x['priority']=='HIGH' and x['schoolStreamApplicability']=='SUBJECT_BOOK_EDITION_ADOPTION_EVIDENCE_REQUIRED' for x in unlinked),
        'streamSpecificLabelsAreNotAutomaticInapplicabilityOrApproval':True,
@@ -571,9 +623,25 @@ def run():
         risks['records'],hashes,baseline['unlinkedCurrentRevisionResearchQueue'])
     if proposal6!=expected6:
         raise ValueError('NEW_CONVENTIONAL_15_ORIGINAL_SHA_BOUND_PACKET_MODIFIED')
+    spec7=importlib.util.spec_from_file_location(
+        'assps_grade9_islamic_ethics_ten_original',
+        ROOT/'ops/qbank/author-grade9-ten-islamic-urdu-ethical-exemplars-20261016.py')
+    author7=importlib.util.module_from_spec(spec7);spec7.loader.exec_module(author7)
+    proposal7=json.loads(author7.OUT.read_text(encoding='utf8'))
+    baseline7=build(groups,last,ledger,risks,set(hashes),new_biology=proposal,
+        new_dual_urdu=proposal2,new_chemistry=proposal3,new_english_essays=proposal4,
+        new_grade9_chem=proposal5,new_nontech15=proposal6)
+    source7={r['questionId']:r for r in json.loads(author7.PUB.read_text())['rows']}
+    expected7=author7.build(live,hashes,
+        {r['questionId']:r for r in risks['records']},
+        {r['questionId']:r for r in baseline7['unlinkedCurrentRevisionResearchQueue']},
+        source7)
+    if proposal7!=expected7:
+        raise ValueError('ISLAMIC_TEN_INDEPENDENT_CURRENT_SHA_PACKET_NOT_REPRODUCIBLE')
     result=build(groups,last,ledger,risks,set(hashes),new_biology=proposal,
                  new_dual_urdu=proposal2,new_chemistry=proposal3,
-                 new_english_essays=proposal4,new_grade9_chem=proposal5,new_nontech15=proposal6)
+                 new_english_essays=proposal4,new_grade9_chem=proposal5,new_nontech15=proposal6,
+                 new_islamic10=proposal7)
     atomic_private(OUT,result)
     return result
 if __name__=='__main__':
