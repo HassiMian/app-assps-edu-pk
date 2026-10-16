@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - 'fix/paper-student-projection-answer-alias-20261016'
+      - 'integration/core401-paper-student-answer-privacy-20261016'
   pull_request:
     paths:
       - 'al-siddique-backend/src/services/assessmentPrintJobs.js'
