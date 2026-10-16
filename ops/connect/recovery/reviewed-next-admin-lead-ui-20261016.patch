@@ -1,0 +1,260 @@
+diff --git a/src/app/saas-admin/apex-leads/page.tsx b/src/app/saas-admin/apex-leads/page.tsx
+index 16d0c9d..9fc4270 100644
+--- a/src/app/saas-admin/apex-leads/page.tsx
++++ b/src/app/saas-admin/apex-leads/page.tsx
+@@ -1,6 +1,7 @@
+ "use client";
+ 
+-import { Suspense, useEffect, useState } from "react";
++import { Suspense, useEffect, useRef, useState } from "react";
++import { fetchValidatedLeadList, LatestLeadListRequest } from "@/lib/client/apex-lead-list-request";
+ import { useRouter, useSearchParams } from "next/navigation";
+ import Link from "next/link";
+ 
+@@ -66,6 +67,9 @@ function ApexLeadsContent() {
+   const [leadStats, setLeadStats] = useState<LeadStats | null>(null);
+   const [status, setStatus] = useState(() => resolveLeadStatusParam(searchParams.get("status")));
+   const [loading, setLoading] = useState(true);
++  const [loadError, setLoadError] = useState(false);
++  const requests = useRef(new LatestLeadListRequest());
++  const activeStatus = useRef(status);
+   const [exporting, setExporting] = useState(false);
+   const [updatingId, setUpdatingId] = useState<string | null>(null);
+   const [emailingId, setEmailingId] = useState<string | null>(null);
+@@ -74,18 +78,22 @@ function ApexLeadsContent() {
+     setStatus(resolveLeadStatusParam(searchParams.get("status")));
+   }, [searchParams]);
+ 
+-  async function loadLeads(selectedStatus = status) {
++  async function loadLeads(selectedStatus = activeStatus.current) {
++    const revision = requests.current.begin();
+     setLoading(true);
++    setLoadError(false);
++    // Never present a previous filter's enquiries as the current selection.
++    setLeads([]);
+     try {
+-      const res = await fetch(`/api/saas-admin/apex-leads?status=${selectedStatus}`, {
+-        cache: "no-store",
+-      });
+-      const data = await res.json();
+-      if (data.success) setLeads(data.data);
+-    } catch (err) {
+-      console.error("Failed to load leads:", err);
++      const records = await fetchValidatedLeadList<LeadItem>(selectedStatus, fetch);
++      if (requests.current.isCurrent(revision)) setLeads(records);
++    } catch {
++      if (requests.current.isCurrent(revision)) {
++        setLeads([]);
++        setLoadError(true);
++      }
+     } finally {
+-      setLoading(false);
++      if (requests.current.isCurrent(revision)) setLoading(false);
+     }
+   }
+ 
+@@ -136,7 +144,7 @@ function ApexLeadsContent() {
+       });
+       const data = await res.json();
+       if (data.success) {
+-        await loadLeads(status);
++        await loadLeads(activeStatus.current);
+       } else {
+         alert(data.message || "Update failed");
+       }
+@@ -158,6 +166,7 @@ function ApexLeadsContent() {
+   }
+ 
+   useEffect(() => {
++    activeStatus.current = status;
+     loadLeads(status);
+     loadLeadStats();
+   }, [status]);
+@@ -200,6 +209,11 @@ function ApexLeadsContent() {
+               value={status}
+               onChange={(e) => {
+                 const nextStatus = e.target.value;
++                requests.current.invalidate();
++                activeStatus.current = nextStatus;
++                setLeads([]);
++                setLoading(true);
++                setLoadError(false);
+                 setStatus(nextStatus);
+                 updateLeadStatusUrl(router, searchParams, nextStatus);
+               }}
+@@ -266,6 +280,17 @@ function ApexLeadsContent() {
+           <div className="rounded-3xl border border-white/10 bg-white/10 p-8 text-center text-slate-300">
+             Loading leads...
+           </div>
++        ) : loadError ? (
++          <div role="alert" className="rounded-3xl border border-amber-400/20 bg-amber-400/10 p-8 text-center text-amber-100">
++            <p>Unable to load enquiries. Your saved records have not been changed.</p>
++            <button
++              type="button"
++              onClick={() => void loadLeads(activeStatus.current)}
++              className="mt-4 rounded-xl border border-amber-300/40 px-4 py-2 font-semibold hover:bg-amber-300/10"
++            >
++              Retry loading
++            </button>
++          </div>
+         ) : leads.length === 0 ? (
+           <div className="rounded-3xl border border-white/10 bg-white/10 p-8 text-center text-slate-300">
+             No leads in this filter.
+diff --git a/src/lib/client/apex-lead-list-request.ts b/src/lib/client/apex-lead-list-request.ts
+new file mode 100644
+index 0000000..d234145
+--- /dev/null
++++ b/src/lib/client/apex-lead-list-request.ts
+@@ -0,0 +1,41 @@
++/** Protect administrative enquiry lists against stale asynchronous responses. */
++export class LatestLeadListRequest {
++  private revision = 0;
++
++  begin(): number {
++    return ++this.revision;
++  }
++
++  invalidate(): void {
++    this.revision++;
++  }
++
++  isCurrent(revision: number): boolean {
++    return revision === this.revision;
++  }
++}
++
++type LeadListResponse = {
++  ok: boolean;
++  json(): Promise<unknown>;
++};
++
++export async function fetchValidatedLeadList<T>(
++  status: string,
++  fetcher: (url: string, options: { cache: "no-store" }) => Promise<LeadListResponse>,
++): Promise<T[]> {
++  const response = await fetcher(
++    `/api/saas-admin/apex-leads?status=${encodeURIComponent(status)}`,
++    { cache: "no-store" },
++  );
++  if (!response.ok) throw new Error("APEX_LEAD_LIST_UNAVAILABLE");
++  const body: unknown = await response.json();
++  if (!body || typeof body !== "object" || Array.isArray(body)) {
++    throw new Error("APEX_LEAD_LIST_MALFORMED");
++  }
++  const result = body as Record<string, unknown>;
++  if (result.success !== true || !Array.isArray(result.data)) {
++    throw new Error("APEX_LEAD_LIST_MALFORMED");
++  }
++  return result.data as T[];
++}
+diff --git a/tests/apex-admin-lead-ui-failclosed.test.cjs b/tests/apex-admin-lead-ui-failclosed.test.cjs
+new file mode 100644
+index 0000000..ccbc57f
+--- /dev/null
++++ b/tests/apex-admin-lead-ui-failclosed.test.cjs
+@@ -0,0 +1,105 @@
++'use strict';
++const assert=require('node:assert/strict');
++const fs=require('node:fs');
++const path=require('node:path');
++const vm=require('node:vm');
++const ts=require('typescript');
++const test=require('node:test');
++const source=path.resolve(__dirname,'../src/lib/client/apex-lead-list-request.ts');
++const pageSource=fs.readFileSync(path.resolve(__dirname,'../src/app/saas-admin/apex-leads/page.tsx'),'utf8');
++const js=ts.transpileModule(fs.readFileSync(source,'utf8'),{compilerOptions:{
++  target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS
++}}).outputText;
++const moduleExports={};
++vm.runInNewContext(js,{exports:moduleExports,Error},{filename:source,timeout:2000});
++const {LatestLeadListRequest,fetchValidatedLeadList}=moduleExports;
++
++test('first, invalidated, and new asynchronous revision tracked independently',()=>{
++  const requests=new LatestLeadListRequest();
++  const a=requests.begin();
++  assert.equal(requests.isCurrent(a),true);
++  requests.invalidate();
++  assert.equal(requests.isCurrent(a),false);
++  const b=requests.begin();
++  assert.equal(requests.isCurrent(b),true);
++  assert.equal(requests.isCurrent(a),false);
++});
++test('fast two-filter responses: delayed first result can never supersede newest',async()=>{
++  const seq=new LatestLeadListRequest();
++  let completeOld;
++  const oldFetcher=()=>new Promise(resolve=>{completeOld=resolve});
++  const observed=[];
++  const oldTicket=seq.begin();
++  const old=fetchValidatedLeadList('new',oldFetcher)
++    .then(rows=>{if(seq.isCurrent(oldTicket))observed.push(rows[0].leadId)});
++  const newTicket=seq.begin();
++  const newer=await fetchValidatedLeadList('contacted',async()=>({
++    ok:true,json:async()=>({success:true,data:[{leadId:'LEAD-22222222'}]})
++  }));
++  if(seq.isCurrent(newTicket))observed.push(newer[0].leadId);
++  completeOld({ok:true,json:async()=>({success:true,data:[{leadId:'LEAD-11111111'}]})});
++  await old;
++  assert.deepEqual(observed,['LEAD-22222222']);
++});
++test('transport uses no-store and URL-encodes even unusual filter strings',async()=>{
++  let seen;
++  const result=await fetchValidatedLeadList('new&status=archived',async(url,opt)=>{
++    seen={url,opt};
++    return {ok:true,json:async()=>({success:true,data:[]})};
++  });
++  assert.equal(result.length,0);
++  assert.equal(seen.opt.cache,'no-store');
++  assert.equal(seen.url,'/api/saas-admin/apex-leads?status=new%26status%3Darchived');
++});
++test('an authentication/storage failure rejects rather than converting into empty success',async()=>{
++  for(const code of [401,403,500,503]){
++    await assert.rejects(fetchValidatedLeadList('ALL',async()=>({
++      ok:false,status:code,json:async()=>({success:false,data:[]})
++    })),/APEX_LEAD_LIST_UNAVAILABLE/);
++  }
++});
++test('HTTP200 application failure is not a fake empty result',async()=>{
++  await assert.rejects(fetchValidatedLeadList('new',async()=>({
++    ok:true,json:async()=>({success:false,data:[]})
++  })),/APEX_LEAD_LIST_MALFORMED/);
++});
++test('wrong payload shape, null, arrays and missing data cannot render as leads',async()=>{
++  for(const body of [null,[],{},'oops',{success:true},{success:true,data:null},
++    {success:true,data:{leadId:'LEAD-11111111'}}]){
++    await assert.rejects(fetchValidatedLeadList('new',async()=>({
++      ok:true,json:async()=>body
++    })),/APEX_LEAD_LIST_MALFORMED/);
++  }
++});
++test('network fetch and JSON parsing failures propagate to fail-closed UI',async()=>{
++  await assert.rejects(fetchValidatedLeadList('new',async()=>{throw Error('network unavailable')}),/network unavailable/);
++  await assert.rejects(fetchValidatedLeadList('new',async()=>({
++    ok:true,json:async()=>{throw SyntaxError('invalid JSON')}
++  })),/invalid JSON/);
++});
++test('React UI preserves explicit loading/failure/empty states and latest-only guards',()=>{
++  for(const phrase of [
++    'useRef(new LatestLeadListRequest())',
++    'requests.current.begin()',
++    'requests.current.invalidate()',
++    'requests.current.isCurrent(revision)',
++    'setLeads([])',
++    'setLoadError(true)',
++    'setLoading(false)',
++    'fetchValidatedLeadList<LeadItem>(selectedStatus, fetch)',
++    'role="alert"',
++    'Unable to load enquiries. Your saved records have not been changed.',
++    'Retry loading',
++    'await loadLeads(activeStatus.current)',
++  ])assert.ok(pageSource.includes(phrase),phrase);
++  assert.ok(pageSource.indexOf(') : loadError ? (') < pageSource.indexOf(') : leads.length === 0 ? ('));
++});
++test('successful permitted response retains rows without changing record bytes',async()=>{
++  const stored={leadId:'LEAD-ABCDEF12',status:'new',name:'Immutable stored lead'};
++  const before=JSON.stringify(stored);
++  const result=await fetchValidatedLeadList('new',async()=>({
++    ok:true,json:async()=>({success:true,data:[stored]})
++  }));
++  assert.equal(result[0].leadId,stored.leadId);
++  assert.equal(JSON.stringify(stored),before);
++});

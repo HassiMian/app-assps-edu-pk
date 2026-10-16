@@ -1,0 +1,39 @@
+{
+  "allNodePassed": 82,
+  "baseCommit": "4fe2c2ecad355e784868bee325f4d31f11e8eb4d",
+  "baselinePageFailureConfirmed": true,
+  "buildExitCode": 0,
+  "buildLogSha256": "dba280dda911b450480ee06fc5315d00b31d5adccb0f8d0fcbcc1596bafb3f01",
+  "buildVerified": true,
+  "changedFiles": [
+    "src/app/saas-admin/apex-leads/page.tsx",
+    "src/lib/client/apex-lead-list-request.ts",
+    "tests/apex-admin-lead-ui-failclosed.test.cjs"
+  ],
+  "fixedCommit": "9a605e2e4c94ddb0f10bf7d4d93da43c01b1747e",
+  "focusedRequestsPassed": 9,
+  "fourPhaseReceiptSha256": "3d882772846cde2412d30466d3fee8c73f14973470bb29a7281cfaf6ce0a612a",
+  "fullConnectPythonFailed": 0,
+  "fullConnectPythonPass": 285,
+  "independentSignedPass": 6,
+  "independentSignedTotal": 13,
+  "jointTechnicalPass": 13,
+  "jointTechnicalTotal": 15,
+  "latestCoreCompiledIndexSha256": "d0de50ad2011ee3dc5532352788e1e1795a94cc6f49b90a84ed7c08994748d05",
+  "latestCoreSource": "2a3d5bac57decb4f9dc32fb97728b2403f82c7b6",
+  "patchSha256": "6cbb1d25ebca72885e4a1bbf614eb3668911548f7fdb25b4257f9a164534214e",
+  "privateBuildId": "EssVp4cjPiD8Gtm8sSJtv",
+  "privateHttpPass": 8,
+  "privateHttpReceiptSha256": "062d49ae9735204121983330ea9981fc03b4d753116a6f236615c11d5550623b",
+  "productionModified": false,
+  "releaseStatus": "NOT_PROMOTED",
+  "scopedLintExit": 0,
+  "signedCutoverAuthorized": false,
+  "sourceFileSha256": {
+    "src/app/saas-admin/apex-leads/page.tsx": "ff1ca69f6b92ecd1e981bc37b217ef2732ca54c9f27708535c46bf4fb8fd4175",
+    "src/lib/client/apex-lead-list-request.ts": "87316c26b0a41bd4a90591a490b078295788ca0629581e321f3088e07486b4ca",
+    "tests/apex-admin-lead-ui-failclosed.test.cjs": "02f5480652ff3a4a1c9919f0eaff5b5e02630e73c9fd0a69833e0ab1733321f2"
+  },
+  "sourceOnly": true,
+  "typecheckAnd103Pages": true
+}
