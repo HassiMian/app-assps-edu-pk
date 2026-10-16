@@ -20,6 +20,8 @@ python3 -m py_compile "$REPO/ops/qbank/audit-grade910-live-answer-integrity-2026
 python3 -m py_compile "$REPO/ops/qbank/audit-grade910-live-question-collisions-20261016.py"
 python3 -m py_compile "$REPO/ops/qbank/audit-school1-versioned-textbook-adoption-20261016.py"
 python3 -m py_compile "$REPO/ops/qbank/audit-grade910-live-question-revisions-20261016.py"
+python3 -m py_compile "$REPO/ops/qbank/grade910_live_revision_history_20261016.py"
+python3 -m py_compile "$REPO/ops/qbank/grade910_live_revision_history_20261016.py"
 python3 -m py_compile "$REPO/ops/qbank/audit-grade910-runtime-question-bank-rls-20261016.py"
 python3 -m py_compile "$REPO/ops/qbank/build-grade910-live-source-review-delta-20261016.py"
 python3 -m py_compile "$REPO/ops/qbank/assps-grade910-autonomous-six-phase-receipt-20261016.py"
@@ -34,6 +36,8 @@ python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_live_answer_i
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_live_question_collisions_20261016.py -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_school1_versioned_textbook_adoption_20261016.py -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_live_question_revision_hashes_20261016.py -q
+python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_live_revision_history_20261016.py -q
+python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_live_revision_history_20261016.py -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_runtime_question_bank_rls_20261016.py -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_live_source_review_delta_20261016.py -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_six_phase_receipt_20261016.py -q
@@ -54,6 +58,8 @@ install -m 0644 "$REPO/ops/qbank/audit-grade910-live-answer-integrity-20261016.p
 install -m 0644 "$REPO/ops/qbank/audit-grade910-live-question-collisions-20261016.py" "$DEST/audit-grade910-live-question-collisions-20261016.py"
 install -m 0644 "$REPO/ops/qbank/audit-school1-versioned-textbook-adoption-20261016.py" "$DEST/audit-school1-versioned-textbook-adoption-20261016.py"
 install -m 0644 "$REPO/ops/qbank/audit-grade910-live-question-revisions-20261016.py" "$DEST/audit-grade910-live-question-revisions-20261016.py"
+install -m 0644 "$REPO/ops/qbank/grade910_live_revision_history_20261016.py" "$DEST/grade910_live_revision_history_20261016.py"
+install -m 0644 "$REPO/ops/qbank/grade910_live_revision_history_20261016.py" "$DEST/grade910_live_revision_history_20261016.py"
 install -m 0644 "$REPO/ops/qbank/audit-grade910-runtime-question-bank-rls-20261016.py" "$DEST/audit-grade910-runtime-question-bank-rls-20261016.py"
 install -m 0644 "$REPO/ops/qbank/build-grade910-live-source-review-delta-20261016.py" "$DEST/build-grade910-live-source-review-delta-20261016.py"
 install -m 0644 "$REPO/ops/qbank/assps-grade910-autonomous-six-phase-receipt-20261016.py" "$DEST/assps-grade910-autonomous-six-phase-receipt-20261016.py"
@@ -106,6 +112,24 @@ assert ad['academicQuestionApprovalGained']==0
 assert ad['studentOrQuestionDbWrites']==0
 rev=json.loads(Path('/var/lib/assps-grade910-sourceclaims/live-question-revisions.json').read_text())
 assert rev['revisions']==2411 and rev['academicallyApprovedRevisions']==0
+rev_history=json.loads(Path('/var/lib/assps-grade910-sourceclaims/live-revision-history.json').read_text())
+assert rev_history['schema']=='ASSPS_GRADE910_LIVE_SHA_REVISION_CHANGE_HISTORY_V1'
+assert rev_history['contentChangesObserved']==len(rev_history['events'])
+assert rev_history['everyChangedQuestionNeedsNewIndependentReview'] is True
+assert rev_history['academicReviewApprovalsFromJournal']==0
+assert rev_history['publishedQuestionsFromJournal']==0
+assert rev_history['questionTextsPersisted'] is False
+assert len(rev_history['lastSeenIdRevisionSha256'])==2411
+rev_history=json.loads(Path('/var/lib/assps-grade910-sourceclaims/live-revision-history.json').read_text())
+assert rev_history['schema']=='ASSPS_GRADE910_LIVE_SHA_REVISION_CHANGE_HISTORY_V1'
+assert rev_history['contentChangesObserved']==len(rev_history['events'])
+assert rev_history['everyChangedQuestionNeedsNewIndependentReview'] is True
+assert rev_history['academicReviewApprovalsFromJournal']==0
+assert rev_history['publishedQuestionsFromJournal']==0
+assert rev_history['questionTextsPersisted'] is False
+assert rev_history['currentSnapshotSha256'] == __import__('hashlib').sha256(__import__('json').dumps(
+  {x['questionId']:x['revisionSha256'] for x in rev['records']},sort_keys=True,
+  ensure_ascii=False,separators=(',',':')).encode('utf8')).hexdigest()
 assert rev['originalResearchRevisionHashInterchangeable'] is False
 d=json.loads(Path('/var/lib/assps-grade910-sourceclaims/faculty-source-evidence-delta.json').read_text())
 assert d['originalResearchQuestionIds']==2581 and d['liveProvisionalIds']==2411

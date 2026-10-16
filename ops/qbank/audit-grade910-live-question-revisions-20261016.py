@@ -82,6 +82,17 @@ def save(path,data):
         if os.path.exists(tmp):os.unlink(tmp)
 
 if __name__=='__main__':
+    from grade910_live_revision_history_20261016 import PATH as HISTORY, build as build_history
     report=build(read_live())
+    if not OUT.exists():
+        raise SystemExit('NO_PREEXISTING_LIVE_REVISION_BASELINE_PROTECT_ORIGINAL_HISTORY')
+    previous=json.loads(OUT.read_text())
+    history=json.loads(HISTORY.read_text()) if HISTORY.exists() else None
+    journal=build_history(previous,report,history)
+    # Journal before current state. If the process crashes between the two,
+    # recovery recognises the legitimate old-current pair without duplicate events.
+    save(HISTORY,journal)
     save(OUT,report)
-    print(json.dumps({k:v for k,v in report.items() if k!='records'},sort_keys=True))
+    print(json.dumps({**{k:v for k,v in report.items() if k!='records'},
+       'revisionHistoryEvents':journal['contentChangesObserved'],
+       'allChangedRevisionsRequireIndependentRereview':True},sort_keys=True))

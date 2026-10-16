@@ -19,7 +19,7 @@ OUT=SOURCE_DIR/"autonomous-six-phase-checkpoint.json"
 def read(path:Path):
     return json.loads(path.read_text(encoding="utf8")) if path.exists() else None
 
-def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, answer, ocr_progress=None, live_collisions=None, adoption_inventory=None, review_delta=None, tenant_rls=None):
+def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, answer, ocr_progress=None, live_collisions=None, adoption_inventory=None, review_delta=None, tenant_rls=None, revision_history=None):
     if not all(isinstance(x,dict) for x in (technical,weekly,source,held,pdf,text,ocr_pilot,answer)):
         raise ValueError("MANDATORY_MACHINE_EVIDENCE_MISSING")
     src=source.get("summary") or {}
@@ -98,6 +98,15 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
             or tenant_rls.get('forcedRLS') is not True
             or tenant_rls.get('CoreProductionSecurityCertificationGranted') is not False):
             raise ValueError('QUESTION_BANK_RESTRICTED_ROLE_TENANT_ISOLATION_REGRESSION')
+    if revision_history is not None:
+        if (revision_history.get('schema')!='ASSPS_GRADE910_LIVE_SHA_REVISION_CHANGE_HISTORY_V1'
+            or revision_history.get('contentChangesObserved')!=len(revision_history.get('events',[]))
+            or len(revision_history.get('lastSeenIdRevisionSha256',{}))!=2411
+            or revision_history.get('academicReviewApprovalsFromJournal')!=0
+            or revision_history.get('publishedQuestionsFromJournal')!=0
+            or revision_history.get('everyChangedQuestionNeedsNewIndependentReview') is not True
+            or revision_history.get('questionTextsPersisted') is not False):
+            raise ValueError('LIVE_REVISION_HISTORY_APPROVAL_OR_ID_INTEGRITY_FAILED')
     score=technical.get("metrics",{}).get("scores",{})
     integrity=technical.get("decision")=="OPERATIONAL" and score.get("total_score_rows",0)>=1763
     fullsuite_ok=(weekly.get("decision")=="QA_PASSED_NO_AUTOMATIC_ACADEMIC_PUBLICATION"
@@ -155,6 +164,8 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
       "ocrResumablePageClaimsCheckpointed":progressClaims,
       "facultyReviewEvidenceCohorts":review_delta.get('existingFacultyCohorts') if review_delta else None,
       "liveQuestionRevisionHashes":review_delta.get('liveContentRevisionHashEntries') if review_delta else None,
+      "independentlyReviewableLiveRevisionChangeEvents":revision_history.get("contentChangesObserved") if revision_history else None,
+      "everyChangedQuestionRevisionMustBeRereviewed":True,
       "questionBankCrossSchoolRlsDenied":tenant_rls.get("crossTenantLeakCount")==0 if tenant_rls else None,
       "liveQuestionDuplicateGroups":0 if live_collisions is not None else None,
       "unresolvedIndependentEvidence":["School-specific approved book edition and exact academic session adoption",
@@ -188,7 +199,8 @@ if __name__=="__main__":
                read(SOURCE_DIR/"live-stem-collisions.json"),
                read(SOURCE_DIR/"school-adoption-inventory.json"),
                read(SOURCE_DIR/"faculty-source-evidence-delta.json"),
-               read(SOURCE_DIR/"tenant-rls-qbank-readonly.json"))
+               read(SOURCE_DIR/"tenant-rls-qbank-readonly.json"),
+               read(SOURCE_DIR/"live-revision-history.json"))
     save(OUT,p)
     print(json.dumps({k:v for k,v in p.items() if k!="phases"},sort_keys=True))
     for row in p["phases"]:print(f"PHASE_{row['phase']}={row['status']}")

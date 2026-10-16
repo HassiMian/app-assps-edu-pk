@@ -132,6 +132,24 @@ class ZeroHumanSixPhaseGuards(unittest.TestCase):
     'school5PeerSchool1VisibleRows':0,'noTenantContextVisibleRows':0,
     'forcedRLS':True,'CoreProductionSecurityCertificationGranted':False}))
   with self.assertRaises(ValueError):m.evaluate(*a)
+ def test_revision_change_event_never_becomes_a_review_signature(self):
+  a=list(fixtures())
+  a.extend((None,None,None,None,None,{'schema':'ASSPS_GRADE910_LIVE_SHA_REVISION_CHANGE_HISTORY_V1',
+    'contentChangesObserved':2,'events':[{},{}],
+    'lastSeenIdRevisionSha256':{str(i):'a'*64 for i in range(2411)},
+    'academicReviewApprovalsFromJournal':0,'publishedQuestionsFromJournal':0,
+    'everyChangedQuestionNeedsNewIndependentReview':True,'questionTextsPersisted':False}))
+  out=m.evaluate(*a)
+  self.assertEqual(out['independentlyReviewableLiveRevisionChangeEvents'],2)
+  self.assertFalse(out['academicVerifiedPublicationReady'])
+ def test_forged_approval_from_revision_history_is_blocked(self):
+  a=list(fixtures())
+  a.extend((None,None,None,None,None,{'schema':'ASSPS_GRADE910_LIVE_SHA_REVISION_CHANGE_HISTORY_V1',
+    'contentChangesObserved':0,'events':[],
+    'lastSeenIdRevisionSha256':{str(i):'a'*64 for i in range(2411)},
+    'academicReviewApprovalsFromJournal':1,'publishedQuestionsFromJournal':0,
+    'everyChangedQuestionNeedsNewIndependentReview':True,'questionTextsPersisted':False}))
+  with self.assertRaises(ValueError):m.evaluate(*a)
  def test_private_receipt_permissions(self):
   with tempfile.TemporaryDirectory() as d:
    p=Path(d)/'private'/'status.json'
