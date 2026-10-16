@@ -6,6 +6,8 @@ on:
       - "ops/qbank/reconcile-grade910-held-original-candidates-20261016.py"
       - "ops/qbank/assps-grade910-autonomous-six-phase-receipt-20261016.py"
       - "ops/qbank/audit-grade910-subjective-answer-depth-20261016.py"
+      - "ops/qbank/build-grade910-live-subject-chapter-coverage-20261016.py"
+      - "ops/tests/test_grade910_live_subject_chapter_coverage_20261016.py"
       - "ops/tests/test_grade910_subjective_answer_depth_20261016.py"
       - "ops/tests/test_grade910_subjective_six_phase_gate_20261016.py"
       - "ops/release/install-grade910-subjective-depth-and-sixphase-20261016.sh"
@@ -63,6 +65,8 @@ on:
       - "ops/qbank/reconcile-grade910-held-original-candidates-20261016.py"
       - "ops/qbank/assps-grade910-autonomous-six-phase-receipt-20261016.py"
       - "ops/qbank/audit-grade910-subjective-answer-depth-20261016.py"
+      - "ops/qbank/build-grade910-live-subject-chapter-coverage-20261016.py"
+      - "ops/tests/test_grade910_live_subject_chapter_coverage_20261016.py"
       - "ops/tests/test_grade910_subjective_answer_depth_20261016.py"
       - "ops/tests/test_grade910_subjective_six_phase_gate_20261016.py"
       - "ops/release/install-grade910-subjective-depth-and-sixphase-20261016.sh"
@@ -167,5 +171,7 @@ jobs:
           python3 -m unittest discover -s ops/tests -p test_grade910_subjective_answer_depth_20261016.py -v
           python3 -m unittest discover -s ops/tests -p test_grade910_subjective_six_phase_gate_20261016.py -v
           bash -n ops/release/install-grade910-subjective-depth-and-sixphase-20261016.sh
+      - name: Test immutable read-only live subject/chapter coverage projection
+        run: python3 -m unittest discover -s ops/tests -p test_grade910_live_subject_chapter_coverage_20261016.py -v
       - name: Validate offline claim auditor syntax
         run: python3 -m py_compile ops/qbank/audit-live-grade910-source-claims-20261016.py ops/qbank/reconcile-grade910-held-original-candidates-20261016.py
