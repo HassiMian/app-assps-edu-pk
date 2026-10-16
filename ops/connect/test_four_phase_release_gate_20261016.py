@@ -19,9 +19,24 @@ class Phases(unittest.TestCase):
   return g.make_phase_decisions(*v)
  def test_unknown_newer_core_sha_denied(self):
   self.assertFalse(g.approved_core_artifact(Path('/tmp'), '0'*40))
- def test_reviewed_b53_and_017d_have_same_pinned_frontend(self):
-  self.assertEqual(len(g.APPROVED_CORE_DIST_SHA),2)
-  self.assertEqual(len(set(g.APPROVED_CORE_DIST_SHA.values())),1)
+ def test_reviewed_pinned_frontends_exact(self):
+  self.assertEqual(len(g.APPROVED_CORE_DIST_SHA),3)
+  self.assertEqual(g.APPROVED_CORE_DIST_SHA[g.CORE_INTEGRATION],
+                   g.APPROVED_CORE_DIST_SHA['017d51060349e39150ebd508d0d670c10eb15f5f'])
+  self.assertEqual(g.APPROVED_CORE_DIST_SHA['e6911732ff52df240390b28b37e531535c58a915'],
+                   '07f14dad2bd55e0e3104681174925ac5425c6371c179a294ae319ada8672a01e')
+ def test_pinned_new_core_portable(self):
+  from unittest.mock import patch
+  with patch.object(g, 'sha', return_value=g.APPROVED_CORE_DIST_SHA['e6911732ff52df240390b28b37e531535c58a915']):
+   self.assertTrue(g.approved_core_artifact(Path('/synthetic/core'), 'e6911732ff52df240390b28b37e531535c58a915'))
+   self.assertFalse(g.approved_core_artifact(Path('/synthetic/core'), 'f'*40))
+ def test_new_core_modified_index_fails_closed(self):
+  import tempfile
+  with tempfile.TemporaryDirectory() as temp:
+   path=Path(temp)/'al-siddique-frontend'/'dist'
+   path.mkdir(parents=True)
+   (path/'index.html').write_text('<html>tampered candidate</html>')
+   self.assertFalse(g.approved_core_artifact(Path(temp),'e6911732ff52df240390b28b37e531535c58a915'))
  def test_approved_core_absent_artifact_denied(self):
   self.assertFalse(g.approved_core_artifact(Path('/tmp/nonexistent-core-stage'),g.CORE_INTEGRATION))
  def test_verified_never_self_deploys(self):
