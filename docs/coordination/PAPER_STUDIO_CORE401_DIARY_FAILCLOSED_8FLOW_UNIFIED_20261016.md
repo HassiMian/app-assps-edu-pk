@@ -1,0 +1,29 @@
+# Paper Studio Master — Unified Core401 Diary fail-closed eight-flow checkpoint
+
+**Date:** 16 October 2026. **Verdict:** Core401 Paper-owned QA phase PASS, official Core production cutover HOLD. Preserve the canonical teacher Paper Workspace, all existing school papers, saved results, zero-vs-blank marks, RLS, Jameel Noori RTL, PDF/Word layouts, and separate Academic Master approvals.
+
+## Phase 1 — source and scope
+
+Latest verified integrated Core401 source `integration/core401-paper-unified-diary5-20261016@2bd42380d916db7014f497ed32f9f0eead04cff2` (remote and VPS equal), descendant of signed Core Marks401 hotfix and reviewed DOCX/Jameel, heading-security and Diary5 integrations. New isolated test-only descendant `test/core401-paper-diary-failclosed-20261016`; no production worktrees/reset/force pushes. Untracked Argus runtime JSON in other owner worktrees preserved untouched.
+
+## Phase 2 — fail-before and precise test-fixture repair
+
+Existing `dailyDiarySaveResponseValidationBrowser.test.js` fail-before reproduced: 0/1 PASS, unexpected `/login` navigation and 30-second selector timeout. Synthetic fixture had omitted the `**/api/question-bank**` bootstrap route; unrelated unauthenticated Question Bank response triggered global logout. This is a **test isolation defect**, NOT proof of production teacher login fix. Reused exactly the previously verified Question Bank 200-empty fixture for three already-existing negative scenarios: `HTTP200 success:false`, delayed HTTP500 on originally selected date, and server PUT returning mismatched ID. Changes are two lines per test, confined to in-memory Playwright synthetic interception; no auth behavior or user data changed.
+
+## Phase 3 — permanent eight-flow release gate
+
+`ops/paper-studio/run_diary_release_browser_20261016.cjs`: retains existing 5 checks (Diary print/layout, 2 Save→Reopen/foreign tenant assertions, async late-save race, revisit preserving prior record ID), adds exactly three negative assertions: HTTP200 with `success:false` must not be marked saved; delayed HTTP500 identifies original unsuccessful selection, not newer selection; PUT response with incorrect server ID is rejected. No synthetic actor is represented as a real school acceptance. Adjusted final count from 5 to **8**, strict 0 fail / 0 skipped / 0 cancelled / exit0 acceptance. GitHub Actions `.github/workflows/paper-diary-real-browser-release-20261016.yml` now watches exact three test paths and new test-branch pattern. Hosted CI actual green status not yet proven.
+
+Actual command `node ops/paper-studio/run_diary_release_browser_20261016.cjs` through private bounded VPS execution: **8/8 Chromium assertions PASS, process RC0**, private 0600 log SHA256 `98a8d25a551343a0990904f662e4813430b311f528828164908272a08c4732d5` in `/root/paper_studio_private_qa_20261016/core401-diary-failclosed8.log`. The three new cases also independently ran **1/1 each PASS** after fixture isolation. Scoped workflow YAML parse PASS and runner JS syntax PASS.
+
+Same isolated source manual Paper scoring + DOCX Jameel/RTL/marks-zero + scoped Marks401 frontend: combined **36/36 Node tests PASS**. Backend signed RLS/catalog + rich-heading validation: **15/15 PASS**. Six protected paper templates immutable PASS. Fresh Vite production build EXIT0, candidate index SHA256 `db0ef46c9922c049f0b150a1a2b00323c15c67967483cd02ccdafa48d0134237`, byte-identical to original reviewed Core401 application (only tests/workflow/docs changed). All five compiled feature static checks PASS and `productionReleaseAuthorized:false`. Exact same Core401 application runtime had independently verified official 43/43 Chromium print parity and disposable PG16 genuine JWT synthetic School1/School2 Paper/Diary/Lesson 1/1 PASS in prior immutable issue #4 receipt; those high-cost checks were **not newly repeated in this test-only descendant** and physical printers were not used.
+
+## Phase 4 — production read-only integrity
+
+Live `https://app.assps.edu.pk` and `https://api.assps.edu.pk/health` each HTTP200; signed scoped Marks POST localhost5093 `/health` 200 (not an authenticated student Marks Save). Public frontend static index SHA256 `760b232b493c300fe78908704aef4989c24c25028faac1821dd41f6480210f3c` unchanged vs different unpublished candidate. Real PostgreSQL `exam_results` read-only SELECT: 1,763 saved rows including 213 genuine numeric zeros, 0 NULL obtained marks. `nginx -t` PASS. No DDL/DML, migrations, live school login, printer dispatch, Nginx/PM2 restart, rollback action or worker installation. Original protected files, school data, tenant RLS and prior rollback backups preserved.
+
+## Phase 5 — official release boundary
+
+Last authentic independent SaaS Core official verdict remains **6/13 PASS, HOLD**. Seven mandatory external conditions: signed reviewed complete ACL backup, signed independent current offhost restore, signed restricted persistent worker transport, exact approved reviewed adapter actually live, separately authenticated persistent global worker, independently witnessed effective inherited DB grants, and true real School2/unassigned-subject signed denial. Adapter still absent from installed production backend, real School1 staff Marks Save `success:true/savedCount/GET`, physical school Daily Diary/Paper print, authenticated peer School2, and post-cutover rollback acceptance remain unverified. No synthetic signatures, impersonation, gate waivers or production promotion. SaaS Core exclusively owns merging/upgrading and final deployment after its actual independent gate passes.
+
+**Next reviewed owner operation:** check new branch ancestry against newest available Core successor, forward-port only the five scoped CI/tests/runner files, then rerun official release tests on exact latest Core branch. Full historical chats and unmounted old artifacts cannot be claimed byte-for-byte accessible; issue #4, current files and receipts govern.
