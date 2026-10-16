@@ -101,6 +101,15 @@ class PrivateConnectSmokeTests(unittest.TestCase):
             with patch.object(smoke, "ADMIN_QA_MANIFEST_SHA", "0"*64):
                 self.assertFalse(smoke.safe_stage(smoke.ADMIN_QA_STAGE, smoke.ADMIN_QA_BUILD))
 
+    def test_mail_html_private_stage_rejects_wrong_build(self):
+        self.assertFalse(smoke.safe_stage(smoke.MAIL_HTML_QA_STAGE,
+                                          "WRONG_BUILD_NOT_REVIEWED"))
+
+    def test_mail_html_build_cannot_authorize_other_workspace(self):
+        self.assertFalse(smoke.safe_stage(
+            Path("/root/workspace/apex-connect-mail-html-NOT-APPROVED"),
+            smoke.MAIL_HTML_QA_BUILD))
+
     def test_stale_compiled_id_rejected(self):
         self.assertFalse(smoke.safe_stage(smoke.REVIEWED_BUILD_STAGE, "EvBJH9KRqqtM5ldAhJKtT"))
 

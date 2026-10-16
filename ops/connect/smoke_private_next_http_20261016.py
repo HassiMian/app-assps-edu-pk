@@ -46,6 +46,17 @@ ADMIN_QA_SOURCE = "cecdcebd8e244cc73b784abaafc250f8ee8955cd"
 ADMIN_QA_LINT_SHA = "b064360d718fdfbfcdb177dfdf30884505cddabc757d2c155c37dadc22648aff"
 ADMIN_QA_MANIFEST = Path(__file__).resolve().parent / "recovery/reviewed-next-admin-api-500-redaction-20261016.manifest.json"
 ADMIN_QA_MANIFEST_SHA = "6a8c8ca2c919dbd467e338d8a66091c400f144b24599694c91b00fdb7ca33684"
+
+# Byte-pinned, SOURCE-ONLY Connect mail HTML security QA; never production permission.
+MAIL_HTML_QA_STAGE = Path("/root/workspace/apex-connect-mail-html-escape-20261016")
+MAIL_HTML_QA_SOURCE = "e776d8f15350f62708ed55f6b7cd9fbdfc636ec3"
+MAIL_HTML_QA_BUILD = "Lg_rjm1A8YiTBS_hbDELm"
+MAIL_HTML_QA_LINT_SHA = "b064360d718fdfbfcdb177dfdf30884505cddabc757d2c155c37dadc22648aff"
+MAIL_HTML_QA_SOURCE_SHA = {
+    "src/lib/server/mail.ts": "6caf69cf2597d5d776df1b7eb24c361f6a8bab5db5f9f2f16b50b72eee14636b",
+    "tests/apex-mail-template-html-escape.test.cjs": "16562fb41d3836f826cc5dba81b3050d932510a73e61dbf74bb635404d7d87bb",
+}
+
 EXPORT_QA_SOURCE_DIGESTS = {
     "src/app/api/saas-admin/apex-leads/export/route.ts": "79bc94bb51a75f6fe56ad18333ef053f93008a5c596576ffbd71324495416a80",
     "src/app/api/saas-admin/subscription-requests/export/route.ts": "926d1955250ad0693ace4008aa710fe1a4a869a38bd64d03857f56792f7d2eb8",
@@ -82,7 +93,9 @@ def safe_stage(stage: Path, expected_build: str) -> bool:
     is_exact_compiled_qa = stage == REVIEWED_BUILD_STAGE and expected_build == REVIEWED_BUILD_ID
     is_exact_export_qa = stage == EXPORT_QA_STAGE and expected_build == EXPORT_QA_BUILD
     is_exact_admin_qa = stage == ADMIN_QA_STAGE and expected_build == ADMIN_QA_BUILD
-    if not (is_original_private or is_exact_compiled_qa or is_exact_export_qa or is_exact_admin_qa):
+    is_exact_mail_html_qa = stage == MAIL_HTML_QA_STAGE and expected_build == MAIL_HTML_QA_BUILD
+    if not (is_original_private or is_exact_compiled_qa or is_exact_export_qa or
+            is_exact_admin_qa or is_exact_mail_html_qa):
         return False
     if is_exact_compiled_qa:
         # The new workspace exception is one exact reviewed SHA/build/config, not
@@ -136,6 +149,25 @@ def safe_stage(stage: Path, expected_build: str) -> bool:
                 if hashlib.sha256((stage / rel).read_bytes()).hexdigest() != checksum:
                     return False
         except (OSError, ValueError, KeyError, TypeError, subprocess.SubprocessError):
+            return False
+    if is_exact_mail_html_qa:
+        # Only the reviewed build/source and two exact mail template files are
+        # permitted to run the read-only anonymous smoke. No tenant bypass.
+        try:
+            src = subprocess.run(["git", "-C", str(stage), "rev-parse", "HEAD"],
+                                 capture_output=True, text=True, check=True, timeout=5)
+            if src.stdout.strip() != MAIL_HTML_QA_SOURCE:
+                return False
+            dirty = subprocess.run(["git", "-C", str(stage), "status", "--porcelain"],
+                                   capture_output=True, text=True, check=True, timeout=5)
+            if dirty.stdout.strip():
+                return False
+            if hashlib.sha256((stage / "eslint.config.mjs").read_bytes()).hexdigest() != MAIL_HTML_QA_LINT_SHA:
+                return False
+            for rel, approved_sha in MAIL_HTML_QA_SOURCE_SHA.items():
+                if hashlib.sha256((stage / rel).read_bytes()).hexdigest() != approved_sha:
+                    return False
+        except (OSError, subprocess.SubprocessError):
             return False
     build_id = stage / ".next" / "BUILD_ID"
     next_bin = stage / "node_modules" / ".bin" / "next"
