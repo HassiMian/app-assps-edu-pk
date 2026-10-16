@@ -4,6 +4,8 @@ on:
     paths:
       - "ops/qbank/audit-live-grade910-source-claims-20261016.py"
       - "ops/qbank/reconcile-grade910-held-original-candidates-20261016.py"
+      - "ops/qbank/assps-grade910-held170-near-duplicate-screen-20261016.py"
+      - "ops/tests/test_grade910_held170_near_duplicate_screen_20261016.py"
       - "ops/tests/test_grade910_170_original_reconciliation_20261016.py"
       - "docs/question-bank/ASSPS_GRADE910_2581_PUBLIC_SAFE_REVIEW_CROSSWALK_20261015.json"
       - "docs/question-bank/ASSPS_GRADE910_UNIFIED_2581_FACULTY_CONTENT_REVIEW_PRIORITIES_20261011.json"
@@ -15,6 +17,8 @@ on:
     paths:
       - "ops/qbank/audit-live-grade910-source-claims-20261016.py"
       - "ops/qbank/reconcile-grade910-held-original-candidates-20261016.py"
+      - "ops/qbank/assps-grade910-held170-near-duplicate-screen-20261016.py"
+      - "ops/tests/test_grade910_held170_near_duplicate_screen_20261016.py"
       - "ops/tests/test_grade910_170_original_reconciliation_20261016.py"
       - "docs/question-bank/ASSPS_GRADE910_2581_PUBLIC_SAFE_REVIEW_CROSSWALK_20261015.json"
       - "docs/question-bank/ASSPS_GRADE910_UNIFIED_2581_FACULTY_CONTENT_REVIEW_PRIORITIES_20261011.json"
@@ -29,5 +33,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Keep database untouched while testing author metadata claims
         run: python3 -m unittest discover -s ops/tests -p test_grade910_live_source_claim_recovery_20261016.py -v
+      - name: Validate near-stem screening respects changed scientific qualifiers
+        run: python3 -m unittest discover -s ops/tests -p test_grade910_held170_near_duplicate_screen_20261016.py -v
       - name: Validate offline claim auditor syntax
         run: python3 -m py_compile ops/qbank/audit-live-grade910-source-claims-20261016.py ops/qbank/reconcile-grade910-held-original-candidates-20261016.py

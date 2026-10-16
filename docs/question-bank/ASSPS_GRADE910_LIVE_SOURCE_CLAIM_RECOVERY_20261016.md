@@ -71,6 +71,19 @@ The original grade field is unspecified for some English records, so the report 
 
 A reusable exact revision/unsigned-review resolver lives in `ops/qbank/reconcile-grade910-held-original-candidates-20261016.py`, with six independent real-source/negative tests (no unknown live IDs, no lost unsigned forms, no false signatures, no count drift). Machine-only private receipt is `/root/secure-archive/assps-grade910-live-source-evidence-20261016/held170.json`. The existing Sunday 03:35 PKT source-integrity systemd service now also executes this reconciliation in `ExecStartPost`, protected by systemd and the revised installer.
 
+## New: cross-corpus near-duplicate risk screen for all 170 original-only questions
+
+The full original-only corpus was compared **read-only** to 2,411 current School-1 live provisional question stems. Scope is same provisional grade and subject using the original English stem where bilingual authored source exists; it does not compare translations, and score thresholds do not establish conceptual identity.
+
+- **170/170 original-only research questions screened** with live subject-level comparison candidates present for all 170.
+- **1 high-similarity candidate**: English Grade IX gerund skill, original `IX-ENG-ORIG-20261008-M017` versus live `IX-ENG-2025-U04-G01` (~0.92 lexical similarity). It is a **potential rephrasing**, not confirmed identical approved material.
+- **1 additional potentially similar candidate**: Grade X mathematical tangent construction, original `X-MATH-C10-L02` versus live `X-MATH-C10-L01` (~0.73). Review whether differences in construction language are academically material.
+- **1 separate meaningful-qualifier contrast**: Grade X mathematics discriminant, original `X-MATH-C02-S03` versus live `X-MATH-C02-S01` (~0.79 lexical overlap), but **zero versus positive discriminant** ask different mathematics. This pair is EXCLUDED from duplicate candidates by qualifier safety logic.
+- Numeric-token changes and oppositional scientific qualifiers (`positive/negative/zero`, `increase/decrease`, etc.) are never silently deduplicated. Near-stem similarity is advisory and is not an independent examination answer-key verification.
+- No confirmed duplicates, deleted records, approvals, automatic imports, student-score changes, or Paper Studio publishing occurred. Existing 170 unsigned faculty review forms remain unsigned.
+
+Executable read-only script `ops/qbank/assps-grade910-held170-near-duplicate-screen-20261016.py` with **8 deterministic local tests**. Its full **ID-only / similarity-metric private receipt** is `/var/lib/assps-grade910-sourceclaims/held170-near-duplicate.json` (0600). It is added as an additional step after original-to-live source/reviewer-form reconciliation in the existing Sunday 03:35 PKT service, with locally staged source files under a root-only directory. GitHub tracks implementation, checks and aggregate evidence only—not full question text.
+
 ## Reproducible and autonomous execution
 
 - Source parser: `ops/qbank/audit-live-grade910-source-claims-20261016.py`, schema `assps-live-source-claim-audit-v1`. Reads PostgreSQL under an explicit `BEGIN TRANSACTION READ ONLY` using the existing peer-authenticated Postgres identity.

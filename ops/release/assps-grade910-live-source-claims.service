@@ -11,6 +11,7 @@ StateDirectory=assps-grade910-sourceclaims
 StateDirectoryMode=0700
 ExecStart=/usr/bin/python3 /usr/local/libexec/assps-grade910-sourceclaims/audit-live-grade910-source-claims-20261016.py --manifest /usr/local/libexec/assps-grade910-sourceclaims/officialSourceManifest.json --original-ledger /usr/local/libexec/assps-grade910-sourceclaims/frozenOriginalResearchIDs.json --out /var/lib/assps-grade910-sourceclaims/latest.json
 ExecStartPost=/usr/bin/python3 /usr/local/libexec/assps-grade910-sourceclaims/reconcile-grade910-held-original-candidates-20261016.py --crosswalk /usr/local/libexec/assps-grade910-sourceclaims/originalReviewCrosswalk2581.json --out /var/lib/assps-grade910-sourceclaims/held170.json
+ExecStartPost=/usr/bin/python3 /usr/local/libexec/assps-grade910-sourceclaims/assps-grade910-held170-near-duplicate-screen-20261016.py --crosswalk /usr/local/libexec/assps-grade910-sourceclaims/originalReviewCrosswalk2581.json --seed-dir /usr/local/libexec/assps-grade910-sourceclaims/held-stems --held /var/lib/assps-grade910-sourceclaims/held170.json --out /var/lib/assps-grade910-sourceclaims/held170-near-duplicate.json
 TimeoutStartSec=160
 ProtectSystem=strict
 ProtectHome=read-only
