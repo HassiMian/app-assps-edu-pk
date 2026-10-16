@@ -8,6 +8,8 @@ on:
       - 'ops/connect/test_smoke_private_next_http_20261016.py'
       - 'ops/connect/verify_public_anonymous_routes_20261016.py'
       - 'ops/connect/test_verify_public_anonymous_routes_20261016.py'
+      - 'ops/connect/verify_public_anonymous_sensitive_api_denial_20261016.py'
+      - 'ops/connect/test_verify_public_anonymous_sensitive_api_denial_20261016.py'
       - 'ops/connect/recovery/reviewed-next-eslint-config-20261016.mjs'
       - 'ops/connect/test_reviewed_next_eslint_config_20261016.py'
       - 'ops/connect/recovery/reviewed-next-eslint-active-scope-20261016.mjs'
@@ -40,6 +42,8 @@ on:
       - 'ops/connect/test_smoke_private_next_http_20261016.py'
       - 'ops/connect/verify_public_anonymous_routes_20261016.py'
       - 'ops/connect/test_verify_public_anonymous_routes_20261016.py'
+      - 'ops/connect/verify_public_anonymous_sensitive_api_denial_20261016.py'
+      - 'ops/connect/test_verify_public_anonymous_sensitive_api_denial_20261016.py'
       - 'ops/connect/recovery/reviewed-next-eslint-config-20261016.mjs'
       - 'ops/connect/test_reviewed_next_eslint_config_20261016.py'
       - 'ops/connect/recovery/reviewed-next-eslint-active-scope-20261016.mjs'
@@ -102,3 +106,5 @@ jobs:
 
       - name: Verify public anonymous route contract without touching live production
         run: python3 -m unittest discover -v -s ops/connect -p 'test_verify_public_anonymous_routes_20261016.py'
+      - name: Guard anonymous access denial for private Connect APIs (offline unit tests)
+        run: python3 -m unittest discover -v -s ops/connect -p 'test_verify_public_anonymous_sensitive_api_denial_20261016.py'
