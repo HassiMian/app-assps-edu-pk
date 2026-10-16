@@ -1,0 +1,318 @@
+diff --git a/next.config.ts b/next.config.ts
+index e4db12f..55768f0 100644
+--- a/next.config.ts
++++ b/next.config.ts
+@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
+ 
+ const nextConfig: NextConfig = {
+   distDir: process.env.NEXT_DIST_DIR || ".next",
++  turbopack: { root: process.cwd() },
+   images: {
+     unoptimized: true,
+   },
+@@ -57,16 +58,6 @@ const nextConfig: NextConfig = {
+         destination: "/admin",
+         permanent: false,
+       },
+-      {
+-        source: "/dashboard",
+-        destination: "/admin",
+-        permanent: false,
+-      },
+-      {
+-        source: "/dashboard/:path*",
+-        destination: "/admin",
+-        permanent: false,
+-      },
+     ];
+   },
+ };
+diff --git a/src/app/auth/change-password/page.tsx b/src/app/auth/change-password/page.tsx
+index 8f5f854..7597a55 100644
+--- a/src/app/auth/change-password/page.tsx
++++ b/src/app/auth/change-password/page.tsx
+@@ -1,8 +1,49 @@
+ "use client";
+ 
+-import { Suspense, useState } from "react";
++import { Suspense, useId, useState } from "react";
+ import { useSearchParams } from "next/navigation";
+ import { URLS } from "@/lib/platform";
++import { Eye, EyeOff } from "lucide-react";
++
++type PasswordFieldProps = {
++  label: string;
++  value: string;
++  onChange: (value: string) => void;
++  autoComplete: "current-password" | "new-password";
++  minLength?: number;
++};
++
++function PasswordField({ label, value, onChange, autoComplete, minLength }: PasswordFieldProps) {
++  const [visible, setVisible] = useState(false);
++  const inputId = useId();
++
++  return (
++    <div className="block">
++      <label htmlFor={inputId} className="mb-1 block text-sm text-slate-200">{label}</label>
++      <span className="relative block">
++        <input
++          id={inputId}
++          type={visible ? "text" : "password"}
++          required
++          minLength={minLength}
++          autoComplete={autoComplete}
++          value={value}
++          onChange={(event) => onChange(event.target.value)}
++          className="w-full rounded-xl border border-white/10 bg-white/10 px-4 py-3 pr-12 outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
++        />
++        <button
++          type="button"
++          onClick={() => setVisible((previous) => !previous)}
++          aria-label={`${visible ? "Hide" : "Show"} ${label.toLowerCase()}`}
++          aria-pressed={visible}
++          className="absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 text-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-400"
++        >
++          {visible ? <EyeOff size={19} aria-hidden="true" /> : <Eye size={19} aria-hidden="true" />}
++        </button>
++      </span>
++    </div>
++  );
++}
+ 
+ function ChangeTemporaryPasswordForm() {
+   const searchParams = useSearchParams();
+@@ -81,34 +122,11 @@ function ChangeTemporaryPasswordForm() {
+         ) : null}
+ 
+         <form onSubmit={handleSubmit} className="mt-8 grid gap-4">
+-          <input
+-            type="password"
+-            required
+-            value={currentPassword}
+-            onChange={(e) => setCurrentPassword(e.target.value)}
+-            placeholder="Temporary Password"
+-            className="rounded-xl border border-white/10 bg-white/10 px-4 py-3 outline-none"
+-          />
+-
+-          <input
+-            type="password"
+-            required
+-            minLength={8}
+-            value={newPassword}
+-            onChange={(e) => setNewPassword(e.target.value)}
+-            placeholder="New Password"
+-            className="rounded-xl border border-white/10 bg-white/10 px-4 py-3 outline-none"
+-          />
+-
+-          <input
+-            type="password"
+-            required
+-            minLength={8}
+-            value={confirmPassword}
+-            onChange={(e) => setConfirmPassword(e.target.value)}
+-            placeholder="Confirm New Password"
+-            className="rounded-xl border border-white/10 bg-white/10 px-4 py-3 outline-none"
+-          />
++          <PasswordField label="Temporary password" value={currentPassword} onChange={setCurrentPassword} autoComplete="current-password" />
++
++          <PasswordField label="New password" value={newPassword} onChange={setNewPassword} autoComplete="new-password" minLength={8} />
++
++          <PasswordField label="Confirm new password" value={confirmPassword} onChange={setConfirmPassword} autoComplete="new-password" minLength={8} />
+ 
+           <button
+             disabled={loading}
+diff --git a/src/app/dashboard/[...path]/page.tsx b/src/app/dashboard/[...path]/page.tsx
+index 62ccff7..db954ae 100644
+--- a/src/app/dashboard/[...path]/page.tsx
++++ b/src/app/dashboard/[...path]/page.tsx
+@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
+ 
+ export const dynamic = "force-dynamic";
+ 
+-/** Legacy /dashboard/* → school admin portal (never loop back to /dashboard). */
++/** Legacy /dashboard/* → neutral login if proxy has not already resolved authenticated role (never loop back to /dashboard). */
+ export default function DashboardCatchAllPage() {
+-  redirect("/admin");
++  redirect("/login");
+ }
+diff --git a/src/app/dashboard/page.tsx b/src/app/dashboard/page.tsx
+index c4d8bec..594cc93 100644
+--- a/src/app/dashboard/page.tsx
++++ b/src/app/dashboard/page.tsx
+@@ -38,7 +38,7 @@ export default function DashboardPage() {
+       } catch {
+         /* fall through */
+       }
+-      window.location.replace("/login?next=/admin");
++      window.location.replace("/login");
+     };
+     go();
+   }, []);
+diff --git a/src/components/LoginClient.tsx b/src/components/LoginClient.tsx
+index 18bc678..7e75611 100644
+--- a/src/components/LoginClient.tsx
++++ b/src/components/LoginClient.tsx
+@@ -50,6 +50,7 @@ export default function LoginClient() {
+   const [resetLogin, setResetLogin] = useState('');
+   const [resetOtp, setResetOtp] = useState('');
+   const [resetPassword, setResetPassword] = useState('');
++  const [showResetPassword, setShowResetPassword] = useState(false);
+   const [resetToken, setResetToken] = useState('');
+   const [resetMessage, setResetMessage] = useState('');
+   const [resetLoading, setResetLoading] = useState(false);
+@@ -247,17 +248,41 @@ export default function LoginClient() {
+       }
+ 
+       if (data.success) {
+-        contextLogin(data.token || '', null, data.user);
+-        if (data.mustChangePassword && data.redirectTo) {
+-          window.location.replace(
+-            coerceConnectRedirect(String(data.redirectTo), data.user?.role, selectedRole || undefined)
+-          );
++        // A temporary-password challenge is NOT an authenticated portal session.
++        // Hydrating AuthContext here races its signed-session check and can bounce
++        // the browser back to the role chooser before the challenge is completed.
++        if (data.mustChangePassword) {
++          const redirect = String(data.redirectTo || '');
++          if (!/^\/auth\/change-password\?userId=\d+$/.test(redirect)) {
++            setError('Unable to start the secure password-change flow.');
++            setLoading(false);
++            return;
++          }
++          window.location.replace(redirect);
+           return;
+         }
+-        const portal = getConnectPortalPath(
+-          data.user?.role || selectedRole || "admin",
+-          selectedRole || undefined
+-        );
++
++        // Never navigate on a merely optimistic login payload. The next page
++        // requires the server-issued HttpOnly cookie, independently checked here.
++        const meRes = await fetchWithTimeout('/api/auth/me', {
++          method: 'GET',
++          credentials: 'include',
++          cache: 'no-store',
++        }, 8000);
++        const me = await meRes.json().catch(() => ({}));
++        const verifiedUser = me?.user;
++        const verifiedPortal = getConnectPortalPath(verifiedUser?.role);
++        const responsePortal = getConnectPortalPath(data.user?.role);
++        if (!meRes.ok || !me?.success || !verifiedUser?.id ||
++            String(verifiedUser.id) !== String(data.user?.id) ||
++            verifiedPortal.startsWith('/login') ||
++            verifiedPortal !== responsePortal) {
++          setError('Secure session could not be verified. Please try signing in again.');
++          setLoading(false);
++          return;
++        }
++        contextLogin('', null, verifiedUser);
++        const portal = verifiedPortal;
+         if (portal.startsWith("http")) {
+           window.location.replace(portal);
+         } else {
+@@ -586,7 +611,12 @@ export default function LoginClient() {
+                 </div>
+                 <div>
+                   <label className="mb-1.5 block text-sm text-slate-400">New Password</label>
+-                  <input type="password" value={resetPassword} onChange={e => setResetPassword(e.target.value)} required minLength={8} className="w-full rounded-xl border border-slate-700 bg-black/20 px-4 py-3 text-white outline-none focus:ring-2 focus:ring-blue-500" placeholder="Minimum 8 characters" />
++                  <div className="relative">
++                    <input type={showResetPassword ? 'text' : 'password'} autoComplete="new-password" value={resetPassword} onChange={e => setResetPassword(e.target.value)} required minLength={8} className="w-full rounded-xl border border-slate-700 bg-black/20 px-4 py-3 pr-12 text-white outline-none focus:ring-2 focus:ring-blue-500" placeholder="Minimum 8 characters" />
++                    <button type="button" aria-label={showResetPassword ? 'Hide new password' : 'Show new password'} aria-pressed={showResetPassword} onClick={() => setShowResetPassword(prev => !prev)} className="absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 text-slate-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-400">
++                      {showResetPassword ? <EyeOff className="h-5 w-5" aria-hidden="true" /> : <Eye className="h-5 w-5" aria-hidden="true" />}
++                    </button>
++                  </div>
+                 </div>
+                 <button disabled={resetLoading} className="w-full rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 py-3 font-bold text-white disabled:opacity-60">
+                   {resetLoading ? 'Updating...' : 'Verify OTP & Change Password'}
+diff --git a/src/lib/roleRoutes.ts b/src/lib/roleRoutes.ts
+index ccdd1ff..c208fc9 100644
+--- a/src/lib/roleRoutes.ts
++++ b/src/lib/roleRoutes.ts
+@@ -30,10 +30,13 @@ export function coerceRedirectPath(path: string, roleFallback?: string): string
+     "/saas-admin": "/admin",
+     "/school_admin": "/admin",
+     "/schooladmin": "/admin",
+-    "/dashboard": "/admin",
++    // Legacy dashboard follows only an authenticated, explicit role.
+   };
+ 
+   const base = raw.split("?")[0].replace(/\/+$/, "") || "/";
++  if (base === "/dashboard" || base.startsWith("/dashboard/")) {
++    return roleFallback ? getPortalPathForRole(roleFallback, "/login") : "/login";
++  }
+   if (legacy[base]) return legacy[base];
+ 
+   if (base.startsWith("/saas_admin") || base.startsWith("/saas-admin")) {
+diff --git a/src/lib/server/auth-user.ts b/src/lib/server/auth-user.ts
+index d337548..ea32b28 100644
+--- a/src/lib/server/auth-user.ts
++++ b/src/lib/server/auth-user.ts
+@@ -72,7 +72,8 @@ export async function getCurrentUser(): Promise<AuthUser | null> {
+   );
+ 
+   const row = result.rows[0];
+-  if (!row || !row.is_active) return null;
++  // A newly reset password revokes every older portal token immediately.
++  if (!row || !row.is_active || row.must_change_password) return null;
+ 
+   const normalizedRole = String(row.role || "").toLowerCase() === "super_admin"
+     ? "SAAS_ADMIN"
+diff --git a/src/proxy.ts b/src/proxy.ts
+index a6c3014..b7717a1 100644
+--- a/src/proxy.ts
++++ b/src/proxy.ts
+@@ -172,7 +172,7 @@ export async function proxy(req: NextRequest) {
+       return redirectTo(req, connectPortal(role), 307);
+     }
+     const loginUrl = new URL("/login", req.url);
+-    loginUrl.searchParams.set("next", "/admin");
++    // Anonymous dashboard never presumes an administrative role.
+     return NextResponse.redirect(loginUrl, 307);
+   }
+ 
+@@ -216,7 +216,7 @@ export async function proxy(req: NextRequest) {
+     const next = req.nextUrl.searchParams.get("next") || "";
+     if (next === "/dashboard" || next.startsWith("/dashboard/") || next.startsWith("/saas-admin")) {
+       const loginUrl = req.nextUrl.clone();
+-      loginUrl.searchParams.set("next", "/admin");
++      loginUrl.searchParams.delete("next");
+       return NextResponse.redirect(loginUrl, 307);
+     }
+     if (userId && req.nextUrl.searchParams.get("force") !== "1") {
+diff --git a/src/utils/api.ts b/src/utils/api.ts
+index 02b3505..7447ffc 100644
+--- a/src/utils/api.ts
++++ b/src/utils/api.ts
+@@ -29,6 +29,17 @@ api.interceptors.response.use(
+     // the actual logout revocation endpoint must never refresh/retry.
+     const requestPathname = new URL(requestUrl, 'http://connect.invalid').pathname;
+     const isAuthEndpoint = /^\/(?:api\/)?auth\/(?:login|refresh|logout)\/?$/.test(requestPathname);
++    // The initial anonymous session probe is allowed to return 401 on public
++    // login / first-password-change pages. Refreshing here causes the generic
++    // Axios interceptor to bounce the challenge back to /login?cleared=1.
++    // Keep all existing refresh/denial handling on protected portal routes.
++    const isSessionProbe = /^\/(?:api\/)?auth\/me\/?$/.test(requestPathname);
++    const onAnonymousEntry = typeof window !== 'undefined' &&
++      (window.location.pathname === '/login' ||
++       window.location.pathname === '/auth/change-password');
++    if (error.response?.status === 401 && isSessionProbe && onAnonymousEntry) {
++      return Promise.reject(error);
++    }
+     if (error.response?.status === 401 && !isAuthEndpoint) {
+       originalRequest._retry = true;
+       if (!refreshPromise) {
+diff --git a/tsconfig.json b/tsconfig.json
+index 86e0949..8061beb 100644
+--- a/tsconfig.json
++++ b/tsconfig.json
+@@ -39,6 +39,7 @@
+     ".next-candidate/dev/types/**/*.ts"
+   ],
+   "exclude": [
+-    "node_modules"
++    "node_modules",
++    "src-backup-*/**"
+   ]
+ }

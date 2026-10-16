@@ -6,6 +6,10 @@ on:
       - 'ops/connect/test_verify_joint_frontend_connect_core_20261015.py'
       - 'ops/connect/smoke_private_next_http_20261016.py'
       - 'ops/connect/test_smoke_private_next_http_20261016.py'
+      - 'ops/connect/recovery/reviewed-next-role-neutral-firstlogin-20261016.patch'
+      - 'ops/connect/recovery/reviewed-next-role-neutral-firstlogin-20261016.manifest.json'
+      - 'ops/connect/verify_recovered_next_source_20261016.py'
+      - 'ops/connect/test_verify_recovered_next_source_20261016.py'
       - '.github/workflows/connect-crossowner-release-contract.yml'
   pull_request:
     paths:
@@ -13,6 +17,10 @@ on:
       - 'ops/connect/test_verify_joint_frontend_connect_core_20261015.py'
       - 'ops/connect/smoke_private_next_http_20261016.py'
       - 'ops/connect/test_smoke_private_next_http_20261016.py'
+      - 'ops/connect/recovery/reviewed-next-role-neutral-firstlogin-20261016.patch'
+      - 'ops/connect/recovery/reviewed-next-role-neutral-firstlogin-20261016.manifest.json'
+      - 'ops/connect/verify_recovered_next_source_20261016.py'
+      - 'ops/connect/test_verify_recovered_next_source_20261016.py'
       - '.github/workflows/connect-crossowner-release-contract.yml'
 permissions:
   contents: read
@@ -33,3 +41,5 @@ jobs:
         run: python3 -m unittest discover -v -s ops/connect -p 'test_smoke_private_next_http_20261016.py'
       - name: Compile isolated runtime smoke tool
         run: python3 -m py_compile ops/connect/smoke_private_next_http_20261016.py
+      - name: Verify published reviewed Next patch evidence and negative cases
+        run: python3 -m unittest discover -v -s ops/connect -p 'test_verify_recovered_next_source_20261016.py'

@@ -1,0 +1,52 @@
+{
+  "base_commit": "67db5bff39f36e72ab14d4acd2b4a7448bb0d40b",
+  "files": {
+    "next.config.ts": {
+      "base": "ff8f2c33a1be1f29c0b1a63c39585f186f9846f07cce8eabf830f16e7273efbb",
+      "reviewed": "4581a6df82cf8a5f7d38c951f07d884bf0393870378b5cbafc2f7847d9c8e9b0"
+    },
+    "src/app/auth/change-password/page.tsx": {
+      "base": "745287556dfe096234d7eada04429188d5f92fce863475d44647842e32d4f2a9",
+      "reviewed": "4f1087fae2f6d2c6d9457e8ea255ea1085b6b87002bb5a521b1e5eaea21860f6"
+    },
+    "src/app/dashboard/[...path]/page.tsx": {
+      "base": "414db8c29e345881ec864ca93a56770a7876b36c7ebd05f036a0eeaa2cec0428",
+      "reviewed": "5b00c2b9ba17edb3c6031a8452a9910e16c78be7a45944afe30b0136d87f81d0"
+    },
+    "src/app/dashboard/page.tsx": {
+      "base": "a9b168bbde17aca2cd9740e3e86cea609dc33d7380d4f67451811f32425d11a3",
+      "reviewed": "3b349fa70e2061b0bf1683d761648e8c90c1f06844d18456f98564452f94aa9b"
+    },
+    "src/components/LoginClient.tsx": {
+      "base": "362903ff35e818cf1ff96b6b57b57b86185a78c23134cc589703cefbae73285d",
+      "reviewed": "3d45699280a63c0089b5b35a629b307306fc74f69eee684b5b3ac66c34f965b8"
+    },
+    "src/lib/roleRoutes.ts": {
+      "base": "99b3bcac2b7cce9d68df6cfc5a9a57a185990532ffcfb8a2b329c138eeb44c39",
+      "reviewed": "dc9d94349f20f8690ff59c5c92b98eb69cf131e287037852194bdffa8bf17ca1"
+    },
+    "src/lib/server/auth-user.ts": {
+      "base": "6064840567970d7fb8124b608f681107210e0735876b21e06f00b3e320f6dff8",
+      "reviewed": "06c47ef8ff003f7425f9204ad08b4e5a6e25a13c3d6cde45cd07bfb46166cc90"
+    },
+    "src/proxy.ts": {
+      "base": "2d4d9be579952c780d09f8ed66f9981a6c6fef40af4042fb842ca9aa38414193",
+      "reviewed": "7978b360f2ccc235a086283463851f0c5a8c98390efd57b17476cc32b21fd015"
+    },
+    "src/utils/api.ts": {
+      "base": "d515c93eefd16cb29f5c14bcd73e15949f3b2acf3d36128e13ceae07ad540c50",
+      "reviewed": "9e2a2d314374da65f92d4d8b873197c937005204c5aeb83de0d5edf1b5431332"
+    },
+    "tsconfig.json": {
+      "base": "b14eed5abb2362afd0e84c23730913c60c35a5892da249877e76fbef6a2d8bd6",
+      "reviewed": "e46566463bbdf5638711abd7ae4abe7767b529bd111539bfd350088c422dff5e"
+    }
+  },
+  "independent_security_certified": false,
+  "patch_sha256": "7bc7623a9f6e1ab9ebb8c0fa3f66744a251b7ce8d306a77c78c77719daf72ea7",
+  "production_modified": false,
+  "reviewed_commit": "9fcca4320bdbeb834f6494d1af82d82f1d9b818f",
+  "reviewed_private_build_id": "rc1vIlE6prAQ8pHrw7ohX",
+  "schema": "assps-connect-private-next-source-recovery-v1",
+  "scope": "SOURCE_RECOVERY_ONLY_NOT_RELEASE_AUTHORITY"
+}
