@@ -110,6 +110,15 @@ class PrivateConnectSmokeTests(unittest.TestCase):
             Path("/root/workspace/apex-connect-mail-html-NOT-APPROVED"),
             smoke.MAIL_HTML_QA_BUILD))
 
+    def test_legacy_proxy_private_stage_wrong_build_rejected(self):
+        self.assertFalse(smoke.safe_stage(smoke.LEGACY_PROXY_QA_STAGE,
+                                          smoke.MAIL_HTML_QA_BUILD))
+
+    def test_legacy_proxy_private_stage_wrong_path_rejected(self):
+        self.assertFalse(smoke.safe_stage(
+            Path("/root/workspace/apex-connect-legacy-proxy-NOT-APPROVED"),
+            smoke.LEGACY_PROXY_QA_BUILD))
+
     def test_stale_compiled_id_rejected(self):
         self.assertFalse(smoke.safe_stage(smoke.REVIEWED_BUILD_STAGE, "EvBJH9KRqqtM5ldAhJKtT"))
 

@@ -1,0 +1,315 @@
+diff --git a/src/app/api/proxy/[...path]/route.ts b/src/app/api/proxy/[...path]/route.ts
+index 19be348..58d7c51 100644
+--- a/src/app/api/proxy/[...path]/route.ts
++++ b/src/app/api/proxy/[...path]/route.ts
+@@ -1,80 +1,147 @@
+-// src/app/api/proxy/[...path]/route.ts
+-// This proxy forwards all requests from the Next.js frontend to the backend
+-// eliminating CORS issues entirely.
+-
++// Compatibility /api/proxy route. Canonical SaaS remains the only data authority.
++// The proxy never authenticates for the caller: the upstream must enforce roles/RLS.
+ import { NextRequest, NextResponse } from 'next/server';
+ import { envString } from '@/lib/server/env';
+ 
+ export const dynamic = 'force-dynamic';
+ 
++const PRIVATE_HEADERS = { 'Cache-Control': 'private, no-store', Pragma: 'no-cache' };
++const MAX_STANDARD_BYTES = 32 * 1024 * 1024;
++const MAX_LARGE_BYTES = 128 * 1024 * 1024;
++const PROXY_TIMEOUT_MS = 30_000;
++
++function problem(status: number, message: string) {
++  return NextResponse.json({ success: false, message }, { status, headers: PRIVATE_HEADERS });
++}
++
+ function getBackendApiUrl() {
+   const configured = envString('BACKEND_URL', 'http://127.0.0.1:5000/api');
+-  if (!configured) {
+-    throw new Error('Missing required environment variable: BACKEND_URL');
++  if (!configured) throw new Error('Missing BACKEND_URL');
++  const url = new URL(configured);
++  if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password || url.search || url.hash) {
++    throw new Error('Invalid BACKEND_URL');
++  }
++  return url.toString().replace(/\/$/, '');
++}
++
++function validPathSegment(value: string) {
++  return value.length > 0 && value.length <= 255
++    && value !== '.' && value !== '..'
++    && !/[\/\\?#%\x00-\x1f\x7f]/.test(value);
++}
++
++function declaredLength(headers: Headers, max: number) {
++  const value = headers.get('content-length');
++  if (value === null) return;
++  if (!/^[0-9]+$/.test(value) || !Number.isSafeInteger(Number(value))) {
++    throw new Error('INVALID_DECLARED_LENGTH');
+   }
+-  return configured.replace(/\/$/, '');
++  if (Number(value) > max) throw new Error('BODY_TOO_LARGE');
++}
++
++async function boundedBody(
++  stream: ReadableStream<Uint8Array> | null,
++  max: number,
++): Promise<Uint8Array<ArrayBuffer>> {
++  if (!stream) return new Uint8Array(0);
++  const reader = stream.getReader();
++  const parts: Uint8Array[] = [];
++  let total = 0;
++  try {
++    while (true) {
++      const { done, value } = await reader.read();
++      if (done) break;
++      if (value.byteLength > max - total) {
++        void reader.cancel().catch(() => {});
++        throw new Error('BODY_TOO_LARGE');
++      }
++      total += value.byteLength;
++      parts.push(value);
++    }
++  } finally {
++    reader.releaseLock();
++  }
++  const bytes = new Uint8Array(total);
++  let offset = 0;
++  for (const part of parts) {
++    bytes.set(part, offset);
++    offset += part.byteLength;
++  }
++  return bytes;
+ }
+ 
+ async function handler(req: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
+   const { path } = await params;
+-  const targetPath = path.join('/');
+-  const searchParams = req.nextUrl.searchParams.toString();
+-  const isUploadAsset = targetPath.startsWith('uploads/');
+-  let url: string;
++  if (!Array.isArray(path) || path.length === 0 || path.length > 30 ||
++      path.some((part) => typeof part !== 'string' || !validPathSegment(part))) {
++    return problem(400, 'Invalid API path.');
++  }
++
++  const targetPath = path.map(encodeURIComponent).join('/');
++  const isUploadAsset = path[0] === 'uploads';
++  const isLargeWorkflow = isUploadAsset || path.some((part) => /^(papers|paper|exports|export)$/i.test(part));
++  const budget = isLargeWorkflow ? MAX_LARGE_BYTES : MAX_STANDARD_BYTES;
++
++  let targetUrl: string;
+   try {
+-    const backendApiUrl = getBackendApiUrl();
+-    const backendRoot = backendApiUrl.replace(/\/api\/?$/i, '').replace(/\/$/, '');
+-    const urlBase = isUploadAsset ? backendRoot : backendApiUrl;
+-    url = `${urlBase}/${targetPath}${searchParams ? `?${searchParams}` : ''}`;
++    const apiRoot = getBackendApiUrl();
++    const assetRoot = apiRoot.replace(/\/api\/?$/i, '');
++    const root = isUploadAsset ? assetRoot : apiRoot;
++    targetUrl = `${root}/${targetPath}${req.nextUrl.search}`;
+   } catch {
+-    return NextResponse.json(
+-      { success: false, message: 'Backend URL is not configured.' },
+-      { status: 503 }
+-    );
++    return problem(503, 'Backend URL is not configured.');
+   }
+ 
+   const headers: Record<string, string> = {};
+-  const incomingContentType = req.headers.get('content-type');
+-  if (incomingContentType) {
+-    headers['Content-Type'] = incomingContentType;
+-  } else {
+-    headers['Content-Type'] = 'application/json';
+-  }
++  const type = req.headers.get('content-type');
++  if (type) headers['Content-Type'] = type;
++  const auth = req.headers.get('authorization');
++  if (auth) headers.Authorization = auth;
+ 
+-  // Forward the Authorization header if present
+-  const auth = req.headers.get('Authorization');
+-  if (auth) headers['Authorization'] = auth;
++  let requestBody: Uint8Array<ArrayBuffer> | undefined;
++  if (req.method !== 'GET' && req.method !== 'HEAD') {
++    try {
++      declaredLength(req.headers, budget);
++      requestBody = await boundedBody(req.body, budget);
++    } catch (error) {
++      if ((error as Error).message === 'BODY_TOO_LARGE') {
++        return problem(413, 'Request exceeds upload size limit.');
++      }
++      return problem(400, 'Invalid request body.');
++    }
++  }
+ 
+   try {
+-    const body = req.method !== 'GET' && req.method !== 'HEAD'
+-      ? await req.arrayBuffer()
+-      : undefined;
+-
+-    const response = await fetch(url, {
++    const response = await fetch(targetUrl, {
+       method: req.method,
+       headers,
+-      body,
++      body: requestBody,
++      redirect: 'manual',
++      signal: AbortSignal.timeout(isLargeWorkflow ? 120_000 : PROXY_TIMEOUT_MS),
+     });
+-
+-    const contentType = response.headers.get('content-type') || '';
+-    if (contentType.includes('application/json')) {
+-      const data = await response.json();
+-      return NextResponse.json(data, { status: response.status });
++    const type = response.headers.get('content-type') || 'application/octet-stream';
++    if ([204, 205, 304].includes(response.status)) {
++      return new NextResponse(null, { status: response.status, headers: PRIVATE_HEADERS });
+     }
+-
+-    const buffer = await response.arrayBuffer();
+-    return new NextResponse(buffer, {
+-      status: response.status,
+-      headers: {
+-        'Content-Type': contentType || 'application/octet-stream',
+-        'Cache-Control': response.headers.get('cache-control') || 'no-store',
+-      },
+-    });
+-  } catch (error: any) {
+-    return NextResponse.json(
+-      { success: false, message: 'Backend server is not reachable. Please start the backend on port 3001.' },
+-      { status: 503 }
+-    );
++    try {
++      declaredLength(response.headers, budget);
++      const bytes = await boundedBody(response.body, budget);
++      if (type.toLowerCase().includes('application/json') || type.toLowerCase().includes('+json')) {
++        try {
++          JSON.parse(new TextDecoder().decode(bytes));
++        } catch {
++          return problem(502, 'Invalid backend JSON response.');
++        }
++      }
++      return new NextResponse(bytes, {
++        status: response.status,
++        headers: { 'Content-Type': type, ...PRIVATE_HEADERS },
++      });
++    } catch {
++      return problem(502, 'Backend response exceeded safe limits.');
++    }
++  } catch {
++    return problem(503, 'Backend service is unavailable.');
+   }
+ }
+ 
+diff --git a/tests/apex-legacy-proxy-failclosed.test.cjs b/tests/apex-legacy-proxy-failclosed.test.cjs
+new file mode 100644
+index 0000000..fdfd46c
+--- /dev/null
++++ b/tests/apex-legacy-proxy-failclosed.test.cjs
+@@ -0,0 +1,104 @@
++'use strict';
++const assert=require('node:assert/strict');
++const fs=require('node:fs');
++const path=require('node:path');
++const vm=require('node:vm');
++const ts=require('typescript');
++const test=require('node:test');
++const source=fs.readFileSync(path.join(__dirname,'../src/app/api/proxy/[...path]/route.ts'),'utf8');
++const js=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,esModuleInterop:true}}).outputText;
++const SIZE=1024*1024;
++function mount(fetchImpl) {
++ const exp={};
++ class R extends Response {
++  static json(data,init={}){return new Response(JSON.stringify(data),{
++    status:init.status||200,headers:{'content-type':'application/json',...init.headers}
++  })}
++ }
++ vm.runInNewContext(js,{exports:exp,process:{env:{}},console,
++  require:(id)=>{
++   if(id==='next/server')return {NextResponse:R};
++   if(id==='@/lib/server/env')return {envString:()=> 'http://127.0.0.1:5000/api'};
++   throw Error('Unexpected import '+id);
++  },
++  fetch:fetchImpl,AbortSignal,ArrayBuffer,Uint8Array,TextDecoder,Response,Headers,ReadableStream,Error,URL
++ },{filename:'proxy-route',timeout:2000});
++ return exp;
++}
++const request=(url='http://app.invalid/api/proxy/teacher/records',method='GET',body)=>({
++ method,nextUrl:new URL(url),
++ headers:new Headers(body?{'content-type':'application/json','content-length':String(body.length)}:{}),
++ arrayBuffer:async()=>new TextEncoder().encode(body||'').buffer
++});
++const ctx=(...parts)=>({params:Promise.resolve({path:parts})});
++test('JSON200 remains private no-store and intact',async()=>{
++ const route=mount(async()=>new Response('{"records":[{"id":1}]}',{status:200,headers:{'content-type':'application/json'}}));
++ const r=await route.GET(request(),ctx('teacher','records'));
++ assert.equal(r.status,200);
++ assert.deepEqual(await r.json(),{records:[{id:1}]});
++ assert.match(r.headers.get('cache-control')||'',/no-store/);
++});
++test('JSON401 is never cacheable',async()=>{
++ const route=mount(async()=>new Response('{"message":"unauthorized"}',{status:401,headers:{'content-type':'application/json'}}));
++ const r=await route.GET(request(),ctx('protected'));
++ assert.equal(r.status,401);
++ assert.match(r.headers.get('cache-control')||'',/no-store/);
++});
++test('rejects traversal and delimiter path elements before upstream call',async()=>{
++ let calls=0; const route=mount(async()=>{calls++;return new Response('{}')});
++ for(const element of ['..','.','../../admin','?scope=all','#fragment','%2e%2e','\\backslash']){
++  const r=await route.GET(request(),ctx('school',element));
++  assert.equal(r.status,400,element);
++ }
++ assert.equal(calls,0);
++});
++test('rejects declared 40MB JSON upstream without allocating body',async()=>{
++ let read=false; const route=mount(async()=>({
++  status:200,headers:new Headers({'content-type':'application/json','content-length':String(40*SIZE)}),
++  arrayBuffer:async()=>{read=true;throw Error('SHOULD_NOT_BUFFER')},
++  body:{getReader:()=>{read=true;throw Error('SHOULD_NOT_READ')}}
++ }));
++ const r=await route.GET(request(),ctx('classes'));
++ assert.equal(r.status,502);
++ assert.equal(read,false);
++ assert.match(r.headers.get('cache-control')||'',/no-store/);
++});
++test('rejects malformed backend JSON without reflecting its body',async()=>{
++ const route=mount(async()=>new Response('<PRIVATE_SERVICE_HTML>',{status:200,headers:{'content-type':'application/json'}}));
++ const r=await route.GET(request(),ctx('classes'));
++ assert.equal(r.status,502);
++ assert.ok(!(await r.text()).includes('PRIVATE_SERVICE_HTML'));
++});
++test('replies 204 without attempting forbidden body',async()=>{
++ const route=mount(async()=>new Response(null,{status:204}));
++ const r=await route.DELETE(request('http://app.invalid/api/proxy/drafts','DELETE'),ctx('drafts'));
++ assert.equal(r.status,204);
++ assert.match(r.headers.get('cache-control')||'',/no-store/);
++});
++test('JSON response without declared length is bounded while streaming',async()=>{
++ let read=0;
++ const payload=new Uint8Array(33*SIZE);
++ const upstream={status:200,headers:new Headers({'content-type':'application/json'}),
++  body:new ReadableStream({pull(controller){read++;controller.enqueue(payload);controller.close();}})};
++ const route=mount(async()=>upstream);
++ const r=await route.GET(request(),ctx('records'));
++ assert.equal(r.status,502);
++ assert.equal(read,1);
++ assert.match(r.headers.get('cache-control')||'',/no-store/);
++});
++test('disallows an oversized upload request before backend fetch',async()=>{
++ let calls=0;
++ const route=mount(async()=>{calls++;return new Response('{}')});
++ const req=request('http://app.invalid/api/proxy/uploads/file','POST','');
++ req.headers.set('content-length',String(129*SIZE));
++ const r=await route.POST(req,ctx('uploads','file'));
++ assert.equal(r.status,413);
++ assert.equal(calls,0);
++});
++test('encodes ordinary Unicode path safely and keeps query on canonical API root',async()=>{
++ let captured;
++ const route=mount(async(url)=>{captured=url;return new Response('{}',{headers:{'content-type':'application/json'}})});
++ const r=await route.GET(request('http://app.invalid/api/proxy/classes/%D8%AE?year=2026'),ctx('classes','خ'));
++ assert.equal(r.status,200);
++ assert.equal(captured,'http://127.0.0.1:5000/api/classes/%D8%AE?year=2026');
++});

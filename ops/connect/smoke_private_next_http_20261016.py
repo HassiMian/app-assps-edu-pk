@@ -87,6 +87,17 @@ def assess(path: str, status: int, location: str | None) -> bool:
     return query == {}
 
 
+# Next legacy proxy mitigation: exact private QA scope only, NEVER a production permit.
+LEGACY_PROXY_QA_STAGE = Path("/root/workspace/apex-connect-legacy-proxy-guard-20261016")
+LEGACY_PROXY_QA_SOURCE = "20ebae71ca438ad1590720ac93ff1ed9d59fedd7"
+LEGACY_PROXY_QA_BUILD = "91l6KJsI2x_oOVXPQjUd5"
+LEGACY_PROXY_QA_LINT_SHA = "b064360d718fdfbfcdb177dfdf30884505cddabc757d2c155c37dadc22648aff"
+LEGACY_PROXY_QA_SHA = {
+  "src/app/api/proxy/[...path]/route.ts": "6868d0f211ad29d0ab5b9c6daf5290d8c6c9f302d44ffddf268f102bb072d815",
+  "tests/apex-legacy-proxy-failclosed.test.cjs": "5c225ebfee7fc801c7d10335ed933d2891609b5487adae1590aa515188187531",
+}
+
+
 def safe_stage(stage: Path, expected_build: str) -> bool:
     stage = stage.resolve()
     is_original_private = stage.is_relative_to(ALLOWED_ROOT) and stage != ALLOWED_ROOT
@@ -94,8 +105,9 @@ def safe_stage(stage: Path, expected_build: str) -> bool:
     is_exact_export_qa = stage == EXPORT_QA_STAGE and expected_build == EXPORT_QA_BUILD
     is_exact_admin_qa = stage == ADMIN_QA_STAGE and expected_build == ADMIN_QA_BUILD
     is_exact_mail_html_qa = stage == MAIL_HTML_QA_STAGE and expected_build == MAIL_HTML_QA_BUILD
+    is_exact_legacy_proxy_qa = stage == LEGACY_PROXY_QA_STAGE and expected_build == LEGACY_PROXY_QA_BUILD
     if not (is_original_private or is_exact_compiled_qa or is_exact_export_qa or
-            is_exact_admin_qa or is_exact_mail_html_qa):
+            is_exact_admin_qa or is_exact_mail_html_qa or is_exact_legacy_proxy_qa):
         return False
     if is_exact_compiled_qa:
         # The new workspace exception is one exact reviewed SHA/build/config, not
@@ -166,6 +178,23 @@ def safe_stage(stage: Path, expected_build: str) -> bool:
                 return False
             for rel, approved_sha in MAIL_HTML_QA_SOURCE_SHA.items():
                 if hashlib.sha256((stage / rel).read_bytes()).hexdigest() != approved_sha:
+                    return False
+        except (OSError, subprocess.SubprocessError):
+            return False
+    if is_exact_legacy_proxy_qa:
+        try:
+            source = subprocess.run(["git", "-C", str(stage), "rev-parse", "HEAD"],
+                    capture_output=True, text=True, check=True, timeout=5)
+            if source.stdout.strip() != LEGACY_PROXY_QA_SOURCE:
+                return False
+            tree = subprocess.run(["git", "-C", str(stage), "status", "--porcelain"],
+                    capture_output=True, text=True, check=True, timeout=5)
+            if tree.stdout.strip():
+                return False
+            if hashlib.sha256((stage / "eslint.config.mjs").read_bytes()).hexdigest() != LEGACY_PROXY_QA_LINT_SHA:
+                return False
+            for rel, sha in LEGACY_PROXY_QA_SHA.items():
+                if hashlib.sha256((stage / rel).read_bytes()).hexdigest() != sha:
                     return False
         except (OSError, subprocess.SubprocessError):
             return False

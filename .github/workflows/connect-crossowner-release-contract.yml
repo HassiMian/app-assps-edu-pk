@@ -77,6 +77,9 @@ on:
       - 'ops/connect/test_four_phase_release_gate_20261016.py'
       - 'ops/connect/verify_frontend_rollback_disk_budget_20261016.py'
       - 'ops/connect/test_verify_frontend_rollback_disk_budget_20261016.py'
+      - 'ops/connect/recovery/reviewed-next-legacy-proxy-20261016.patch'
+      - 'ops/connect/test_reviewed_next_legacy_proxy_20261016.py'
+      - 'docs/coordination/APEX_CONNECT_LEGACY_PROXY_SECURITY_UNIFIED_20261016.md'
       - '.github/workflows/connect-crossowner-release-contract.yml'
   pull_request:
     paths:
@@ -155,6 +158,9 @@ on:
       - 'ops/connect/test_four_phase_release_gate_20261016.py'
       - 'ops/connect/verify_frontend_rollback_disk_budget_20261016.py'
       - 'ops/connect/test_verify_frontend_rollback_disk_budget_20261016.py'
+      - 'ops/connect/recovery/reviewed-next-legacy-proxy-20261016.patch'
+      - 'ops/connect/test_reviewed_next_legacy_proxy_20261016.py'
+      - 'docs/coordination/APEX_CONNECT_LEGACY_PROXY_SECURITY_UNIFIED_20261016.md'
       - '.github/workflows/connect-crossowner-release-contract.yml'
 permissions:
   contents: read
@@ -229,3 +235,5 @@ jobs:
         run: python3 -m unittest discover -v -s ops/connect -p 'test_reviewed_next_admin_lead_stats_20261016.py'
       - name: Verify immutable SMTP fallback credential and PII safety
         run: python3 -m unittest discover -v -s ops/connect -p 'test_reviewed_next_mail_privacy_20261016.py'
+      - name: Verify immutable Connect legacy proxy bounded fail-closed source
+        run: python3 -m unittest discover -v -s ops/connect -p 'test_reviewed_next_legacy_proxy_20261016.py'
