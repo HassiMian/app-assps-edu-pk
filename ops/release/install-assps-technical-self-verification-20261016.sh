@@ -4,8 +4,11 @@ set -euo pipefail
 MODE="${1:---check}"
 [[ "$MODE" == --check || "$MODE" == --apply ]] || { echo "USAGE: --check|--apply";exit 64; }
 [[ "$(id -u)" == 0 ]] || { echo "ROOT_REQUIRED";exit 65; }
-REPO=/root/workspace/assps-zero-human-ops-20261016
-SOURCE="$REPO/ops/release"
+# Resolve THIS Git worktree, never a stale chat/worktree copied months ago.
+SOURCE="$(cd -- "$(dirname -- "$(readlink -f "$0")")" && pwd -P)"
+REPO="$(cd -- "$SOURCE/../.." && pwd -P)"
+if ! { test -d "$REPO/.git" || test -f "$REPO/.git"; };then echo "NOT_A_GIT_SOURCE_WORKTREE";exit 69;fi
+[[ -z "$(git -C "$REPO" status --porcelain)" ]] || { echo "FAIL_CLOSED_DIRTY_SOURCE_WORKTREE";exit 70; }
 DEST=/usr/local/libexec/assps-technical-self-verification
 SERVICE=assps-technical-self-verification.service
 TIMER=assps-technical-self-verification.timer

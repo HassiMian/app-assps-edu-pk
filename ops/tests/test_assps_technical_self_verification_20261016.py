@@ -80,6 +80,12 @@ class TestAcceptanceWithoutForgedSignatures(unittest.TestCase):
    "approved_rows_still_linked_to_provisional_seed":0,
    "approved_rows_missing_minimum_evidence":0}
   self.assertEqual(module.evaluate(a,None)[0],"OPERATIONAL")
+ def test_hourly_installer_uses_its_actual_clean_worktree_not_stale_chat_branch(self):
+  p=Path(__file__).resolve().parents[1]/"release"/"install-assps-technical-self-verification-20261016.sh"
+  source=p.read_text()
+  self.assertIn('readlink -f "$0"',source)
+  self.assertIn('FAIL_CLOSED_DIRTY_SOURCE_WORKTREE',source)
+  self.assertNotIn('REPO=/root/workspace/assps-zero-human-ops-20261016',source)
  def test_receipt_stored_atomically_and_no_personal_data(self):
   with tempfile.TemporaryDirectory() as d:
    p=Path(d)/"receipt.json";module.write_receipt(p,good())
