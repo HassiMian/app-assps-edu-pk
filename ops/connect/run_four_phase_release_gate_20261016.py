@@ -27,6 +27,8 @@ APPROVED_CORE_DIST_SHA={
     '017d51060349e39150ebd508d0d670c10eb15f5f':'68ad0a2359d84d627ab8055ab28166baa4a43058d38c5fef052ed7f7073c0b89',
     # Independently rebuilt clean Core+Paper+RLS+worker successor; no wildcard refs.
     'e6911732ff52df240390b28b37e531535c58a915':'07f14dad2bd55e0e3104681174925ac5425c6371c179a294ae319ada8672a01e',
+    # Independently rebuilt newest approved Core+Paper authored-teacher candidate.
+    'a2ff445a492e914e0988b2751da58000bd02b16e':'01805309fef95c61a39088569ae4727bba8a44d80fc8e14d4353c2a793ac30d6',
 }
 OFFICIAL=Path('/root/workspace/assps-core-connect-gate-exit-hardening-20261015/ops/release/signed-bluegreen/verify-connect-login-only-core-20261014.py')
 JOINT_CORE=OFFICIAL.with_name('verify-joint-current-candidates-20261015.py')
