@@ -165,6 +165,40 @@ class UnifiedFailClosedTests(unittest.TestCase):
             os.chmod(file,0o666)
             self.assertFalse(mod.root_owned_pinned_file(file,digest))
 
+    def test_current_core_pinned_to_verified_successor(self):
+        self.assertEqual(mod.CORE_SHA, "e301273e0d055667dc7b0787593839a006fb97f7")
+        self.assertEqual(mod.CORE_PARENT_SHA,
+                         "638025c86a949b9768e5005966724e5d3e834e68")
+        self.assertNotEqual(mod.CORE_SHA, mod.CORE_PARENT_SHA)
+        self.assertEqual(len(mod.CORE_PRIVACY_FILES), 3)
+        self.assertTrue(all(x.startswith("al-siddique-backend/") for x in mod.CORE_PRIVACY_FILES))
+
+    def test_immutable_core_print_privacy_bytes_exact(self):
+        import hashlib
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            paths = ("service.js", "student-projection.cjs", "print-domain.test.js")
+            approved = {}
+            for name in paths:
+                dest = root/name
+                dest.write_bytes(("synthetic:" + name).encode())
+                approved[name] = hashlib.sha256(dest.read_bytes()).hexdigest()
+            with patch.dict(mod.CORE_PRIVACY_FILES, approved, clear=True):
+                self.assertTrue(mod.reviewed_core_privacy_bytes(root))
+                (root/paths[0]).write_text("altered synthetic privacy guard")
+                self.assertFalse(mod.reviewed_core_privacy_bytes(root))
+
+    def test_missing_core_privacy_file_fails_closed(self):
+        with tempfile.TemporaryDirectory() as d:
+            with patch.dict(mod.CORE_PRIVACY_FILES, {"absent/file.js":"0"*64}, clear=True):
+                self.assertFalse(mod.reviewed_core_privacy_bytes(Path(d)))
+
+    def test_previous_core_does_not_satisfy_new_core_identity(self):
+        with tempfile.TemporaryDirectory() as d:
+            with patch.object(mod, "command", return_value=(1,"")), \
+                 patch.object(mod, "git_exact_clean", return_value=False):
+                self.assertFalse(mod.git_exact_clean(Path(d),mod.CORE_SHA))
+
     def test_source_pins_are_exact_commit_and_hash_shapes(self):
         for sha in (mod.CORE_SHA,mod.CONNECT_SHA,mod.CONNECT_PARENT_SHA,
                     mod.CORE_DIST_SHA,mod.PRIVATE_HTTP_DIGEST,*mod.CONNECT_FILES.values()):
