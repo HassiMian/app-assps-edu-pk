@@ -56,6 +56,10 @@ on:
       - "ops/qbank/audit-grade910-live-numerical-evidence-20261016.py"
       - "ops/qbank/build-grade910-numerical-review-priority-20261016.py"
       - "ops/qbank/recompute-grade910-21-original-numericals-20261016.py"
+      - "ops/qbank/reconcile-grade910-80-live-numerical-machine-proof-20261016.py"
+      - "ops/tests/test_grade910_all_80_numerical_machine_vs_review_20261016.py"
+      - "ops/release/install-grade910-all80-numerical-machine-source-check-20261016.sh"
+      - "docs/question-bank/ASSPS_GRADE910_ALL_80_NUMERICAL_CURRENT_MACHINE_NOT_FACULTY_PROOF_20261016.md"
       - "ops/release/install-grade910-80-numeric-audit-hook-20261016.sh"
       - "ops/tests/test_grade910_numerical_deep_recompute_20261016.py"
       - "ops/tests/test_grade910_numerical_review_priority_20261016.py"
@@ -171,6 +175,10 @@ on:
       - "ops/qbank/audit-grade910-live-numerical-evidence-20261016.py"
       - "ops/qbank/build-grade910-numerical-review-priority-20261016.py"
       - "ops/qbank/recompute-grade910-21-original-numericals-20261016.py"
+      - "ops/qbank/reconcile-grade910-80-live-numerical-machine-proof-20261016.py"
+      - "ops/tests/test_grade910_all_80_numerical_machine_vs_review_20261016.py"
+      - "ops/release/install-grade910-all80-numerical-machine-source-check-20261016.sh"
+      - "docs/question-bank/ASSPS_GRADE910_ALL_80_NUMERICAL_CURRENT_MACHINE_NOT_FACULTY_PROOF_20261016.md"
       - "ops/release/install-grade910-80-numeric-audit-hook-20261016.sh"
       - "ops/tests/test_grade910_numerical_deep_recompute_20261016.py"
       - "ops/tests/test_grade910_numerical_review_priority_20261016.py"
@@ -344,5 +352,10 @@ jobs:
           node --test ops/tests/grade10-230-native-text-bounded-source-research-20261016.test.mjs
           python3 -m unittest discover -s ops/tests -p test_grade910_230_native_short_source_revision_hold_20261016.py -v
           node --check ops/qbank/verify-grade10-230-short-native-source-page-window-20261016.mjs
+      - name: Reject source-only numerical recomputation as faculty verification or Paper Studio publication
+        run: |
+          python3 -m unittest discover -s ops/tests -p test_grade910_all_80_numerical_machine_vs_review_20261016.py -v
+          python3 -m py_compile ops/qbank/reconcile-grade910-80-live-numerical-machine-proof-20261016.py
+          bash -n ops/release/install-grade910-all80-numerical-machine-source-check-20261016.sh
       - name: Validate offline claim auditor syntax
         run: python3 -m py_compile ops/qbank/audit-live-grade910-source-claims-20261016.py ops/qbank/reconcile-grade910-held-original-candidates-20261016.py
