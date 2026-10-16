@@ -1,0 +1,43 @@
+name: Paper Studio Legacy Diary Print Compatibility QA
+on:
+  push:
+    branches:
+      - 'fix/paper-legacy-diary-authenticated-print-20261016'
+  pull_request:
+    paths:
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/DailyDiaryWorkspace.jsx'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/teacherSaveReopenPrintIsolatedBrowserAcceptance.test.js'
+      - 'al-siddique-frontend/package-lock.json'
+      - 'ops/paper-studio/**'
+      - '.github/workflows/paper-legacy-diary-roundtrip-20261016.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify-static-and-chromium-print-without-school-data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout exact patch
+        uses: actions/checkout@v4
+      - name: Select supported Node runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: al-siddique-frontend/package-lock.json
+      - name: Reproduce frontend dependencies
+        working-directory: al-siddique-frontend
+        run: npm ci --no-audit --no-fund
+      - name: Install isolated Chrome for print QA
+        working-directory: al-siddique-frontend
+        run: npx playwright install --with-deps chromium
+      - name: Verify Diary Save Reopen Print geometry and races
+        run: node ops/paper-studio/run_diary_release_browser_20261016.cjs
+      - name: Verify marks and language corpus guards
+        run: node --test ops/tests/marks-sheet-data-truth.test.js ops/tests/lesson-diary-cognitive-contract.test.js ops/paper-studio/test_emit_windows_canonical_manifest_20261016.cjs
+      - name: Build production-candidate frontend
+        working-directory: al-siddique-frontend
+        run: npm run build
+      - name: Verify complete feature compilation without deployment
+        run: python3 ops/paper-studio/verify_full_feature_readiness_20261016.py --repo . --dist al-siddique-frontend/dist

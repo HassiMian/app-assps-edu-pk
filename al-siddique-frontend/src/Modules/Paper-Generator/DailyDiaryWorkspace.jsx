@@ -587,7 +587,18 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
     if (record.class_level) setClassLevel(String(record.class_level))
     if (record.style_settings?.section !== undefined) setSection(String(record.style_settings.section))
     if (record.diary_date) setDate(String(record.diary_date).slice(0, 10))
-    if (Array.isArray(record.rows)) setRows(record.rows)
+    if (Array.isArray(record.rows)) {
+      // Older Daily Diary APIs stored subject work as `homework`, whereas the
+      // canonical Paper Workspace previews/prints `diary`. Preserve all saved
+      // row fields without modifying server data; explicit empty `diary` is
+      // authoritative and must not be silently replaced by stale homework.
+      setRows(record.rows.map(row => ({
+        ...row,
+        diary: typeof row.diary === 'string'
+          ? row.diary
+          : (typeof row.homework === 'string' ? row.homework : ''),
+      })))
+    }
     if (CARD_COUNTS.includes(Number(record.slips_per_page))) setCardsPerPage(Number(record.slips_per_page))
     if (PALETTES.some(p => p.id === Number(record.style_settings?.paletteId || record.template_id))) {
       setPaletteId(Number(record.style_settings?.paletteId || record.template_id))
