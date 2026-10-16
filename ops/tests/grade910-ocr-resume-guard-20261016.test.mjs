@@ -3,8 +3,17 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {fingerprint,newProgress,validateProgress,persistCheckpoint,pageKey,validatePageBudget} from '../qbank/assps-grade910-ocr-resume-guard-20261016.mjs';
-const input=()=>fingerprint(Buffer.from('catalog-unchanged'),Buffer.from('textlayer'),[['Q1','Stem with 3']]);
+import {fingerprint,stableTextLayerEvidence,newProgress,validateProgress,persistCheckpoint,pageKey,validatePageBudget} from '../qbank/assps-grade910-ocr-resume-guard-20261016.mjs';
+const nativeEvidence={
+ schema:'ASSPS_IX_X_STRICT_TEXT_LAYER_STEM_MATCH_V1',
+ observedUTC:'2026-10-16T00:00:00Z',originalClaimsSHA256:'oldsha',
+ assets:[{catalog:'book-a',claimedPagesChecked:3,pagesWithUsableTextLayer:0}],
+ records:[{questionId:'Q1',sourceCatalog:'book-a',originallyClaimedPdfPage:3,
+   pdfTextLayerSHA256:'x'.repeat(64),category:'TEXT_LAYER_INSUFFICIENT',
+   extractedTextCharacterCount:0,strictExactStemPresent:false}]
+};
+const asBytes=(changes={})=>Buffer.from(JSON.stringify({...nativeEvidence,...changes}));
+const input=()=>fingerprint(Buffer.from('catalog-unchanged'),asBytes(),[['Q1','Stem with 3']]);
 const p={catalog:'cat-001',page:3,claims:[{questionId:'Q1'}]};
 function completed(){
  const x=newProgress(input());x.completedPages=[pageKey(p)];
@@ -13,8 +22,24 @@ function completed(){
  return x;
 }
 test('source fingerprint includes manifest, PDF-text receipt and question stem revision',()=>{
- assert.notEqual(input(),fingerprint(Buffer.from('modified catalog'),Buffer.from('textlayer'),[['Q1','Stem with 3']]));
- assert.notEqual(input(),fingerprint(Buffer.from('catalog-unchanged'),Buffer.from('textlayer'),[['Q1','Stem with 4']]));
+ assert.notEqual(input(),fingerprint(Buffer.from('modified catalog'),asBytes(),[['Q1','Stem with 3']]));
+ assert.notEqual(input(),fingerprint(Buffer.from('catalog-unchanged'),asBytes(),[['Q1','Stem with 4']]));
+});
+test('harmless audit rerun date and parent audit SHA do not destroy OCR progress',()=>{
+ const changed=asBytes({observedUTC:'2026-10-17T04:00:00Z',
+                         originalClaimsSHA256:'different-run-transient-sha'});
+ assert.equal(input(),fingerprint(Buffer.from('catalog-unchanged'),changed,[['Q1','Stem with 3']]));
+});
+test('actual physical source page SHA or claim page change must invalidate resume',()=>{
+ const r={...nativeEvidence.records[0],originallyClaimedPdfPage:4};
+ assert.notEqual(input(),fingerprint(Buffer.from('catalog-unchanged'),
+          asBytes({records:[r]}),[['Q1','Stem with 3']]));
+ const changed={...nativeEvidence.records[0],pdfTextLayerSHA256:'y'.repeat(64)};
+ assert.notEqual(input(),fingerprint(Buffer.from('catalog-unchanged'),
+          asBytes({records:[changed]}),[['Q1','Stem with 3']]));
+});
+test('invalid or missing text-layer source records fail closed',()=>{
+ assert.throws(()=>stableTextLayerEvidence(Buffer.from('{"schema":"unknown"}')),/UNTRUSTED/);
 });
 test('empty checkpoint can resume safely without claiming scanned pages',()=>{
  const x=newProgress(input());assert.equal(validateProgress(x,input(),[p]).completedPages.length,0);

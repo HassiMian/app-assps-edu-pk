@@ -9,10 +9,26 @@ export function validatePageBudget(value,maxPages=112){
   if(!Number.isInteger(n)||n<0||n>maxPages)throw Error('INVALID_OCR_BATCH_OR_PILOT_LIMIT');
   return n;
 }
+export function stableTextLayerEvidence(textLayerBytes) {
+  const report=JSON.parse(Buffer.from(textLayerBytes).toString('utf8'));
+  if(report?.schema!=='ASSPS_IX_X_STRICT_TEXT_LAYER_STEM_MATCH_V1' ||
+     !Array.isArray(report.records)||!Array.isArray(report.assets))
+    throw Error('UNTRUSTED_TEXT_LAYER_SOURCE_RECEIPT');
+  // Exclude volatile observedUTC and parent-receipt SHA: a harmless re-audit
+  // must not invalidate already OCR'd scanned pages.
+  const pageEvidence=report.records.map(r=>({
+    questionId:r.questionId,catalog:r.sourceCatalog,page:r.originallyClaimedPdfPage,
+    pageTextSHA256:r.pdfTextLayerSHA256,category:r.category,
+    textCharacters:r.extractedTextCharacterCount,exactPhrase:r.strictExactStemPresent
+  })).sort((a,b)=>JSON.stringify(a).localeCompare(JSON.stringify(b)));
+  const assets=report.assets.map(a=>({...a}))
+    .sort((a,b)=>JSON.stringify(a).localeCompare(JSON.stringify(b)));
+  return hash(Buffer.from(JSON.stringify({schema:report.schema,pageEvidence,assets})));
+}
 export function fingerprint(manifestBytes,textLayerBytes,stemEntries){
   const ordered=[...stemEntries].sort((a,b)=>String(a[0]).localeCompare(String(b[0])));
   return hash(Buffer.from(JSON.stringify({
-    manifest:hash(manifestBytes),textLayer:hash(textLayerBytes),
+    manifest:hash(manifestBytes),textLayer:stableTextLayerEvidence(textLayerBytes),
     stems:hash(Buffer.from(JSON.stringify(ordered)))
   })));
 }
