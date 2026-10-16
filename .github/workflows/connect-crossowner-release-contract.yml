@@ -12,6 +12,9 @@ on:
       - 'ops/connect/recovery/reviewed-next-role-neutral-firstlogin-20261016.manifest.json'
       - 'ops/connect/verify_recovered_next_source_20261016.py'
       - 'ops/connect/test_verify_recovered_next_source_20261016.py'
+      - 'ops/connect/recovery/verified-local-fullacl-restore-20261016.json'
+      - 'ops/connect/verify_local_full_acl_restore_20261016.py'
+      - 'ops/connect/test_verify_local_full_acl_restore_20261016.py'
       - 'ops/connect/recovery/private-next-build-20261016.json'
       - 'ops/connect/verify_private_next_build_20261016.py'
       - 'ops/connect/test_verify_private_next_build_20261016.py'
@@ -28,6 +31,9 @@ on:
       - 'ops/connect/recovery/reviewed-next-role-neutral-firstlogin-20261016.manifest.json'
       - 'ops/connect/verify_recovered_next_source_20261016.py'
       - 'ops/connect/test_verify_recovered_next_source_20261016.py'
+      - 'ops/connect/recovery/verified-local-fullacl-restore-20261016.json'
+      - 'ops/connect/verify_local_full_acl_restore_20261016.py'
+      - 'ops/connect/test_verify_local_full_acl_restore_20261016.py'
       - 'ops/connect/recovery/private-next-build-20261016.json'
       - 'ops/connect/verify_private_next_build_20261016.py'
       - 'ops/connect/test_verify_private_next_build_20261016.py'
@@ -57,3 +63,5 @@ jobs:
         run: python3 -m unittest discover -v -s ops/connect -p 'test_reviewed_next_eslint_config_20261016.py'
       - name: Verify private compiled Next runtime provenance safety contract
         run: python3 -m unittest discover -v -s ops/connect -p 'test_verify_private_next_build_20261016.py'
+      - name: Guard local full-ACL recovery parity against fabricated Core certification
+        run: python3 -m unittest discover -v -s ops/connect -p 'test_verify_local_full_acl_restore_20261016.py'
