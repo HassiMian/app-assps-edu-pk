@@ -30,3 +30,14 @@ python3 ops/connect/verify_recovered_next_source_20261016.py --source-repo /root
 ```
 
 A Core reviewer must still integrate the reviewed source into its independently authorized current release ancestry, satisfy authenticated security and rollback gates, then perform the actual promotion. Never directly `git apply` the patch into the live `/var/www/apex-connect`.
+
+## Root-level ESLint failure repaired in isolated Next source (16 Oct 2026)
+
+Actual reviewed private Connect Next candidate baseline:
+- `eslint src`: 367 files, **0 errors, 394 warnings**, exit 0.
+- `eslint .`: **fatal** configuration error (`react/no-unescaped-entities` used without registered `react` plugin in certain root-level CommonJS files).
+- Root-cause repair on isolated source worktree: register `eslint-plugin-react` in the actual config object and apply the TypeScript `no-require-imports` exception **only to .cjs Node test/release helpers**. This is a file-type rule correction, not a global lint bypass.
+- After correction, `eslint scripts`: **146 files, 0 errors, 10 warnings**, exit 0; `eslint eslint.config.mjs next.config.ts`: **2 files, 0 errors, 0 warnings**, exit 0. Separate `src` result remains 0 errors / 394 warnings on unchanged source. A massive unrestricted full-root lint run was aborted due to timeout and must **not** be reported as complete.
+- Reviewed corrected Next flat config, SHA256 `520ddbd1a0d347a8e3d12e2fce14c4a2ca8b700cb87cf93be3c65efb449b8b83`, is preserved as `ops/connect/recovery/reviewed-next-eslint-config-20261016.mjs`. Eight CI adversarial guards ensure this config retains JSX safety and TS warnings. It can be forward-ported ONLY after Core/Connect reviewer compares exact current protected Next source.
+
+No public Next compiled build or authenticated service was replaced by this QA.
