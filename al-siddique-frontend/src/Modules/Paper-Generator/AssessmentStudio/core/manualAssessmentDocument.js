@@ -21,6 +21,7 @@ import {
   createGrammarTableNode,
   createMatchingColumnsNode,
   validateCanonicalPaperDocument,
+  isSafeEditorInlineHtml,
 } from '../../PaperEditor/core/PaperDocumentV2.js'
 import { DEFAULT_BLOCK_REGISTRY, normalizeNodeForBlockRegistry } from './BlockRegistry.js'
 import { resolveSectionTotalMarks } from '../../paperSystemRules.js'
@@ -107,6 +108,13 @@ export function createManualAssessmentDocument({ paper = {}, config = {}, paperS
       sectionIndex: index + 1,
       title: heading || `Question ${index + 1}`,
       heading: heading || null,
+      ...(section.richText && typeof section.richText==='object' && !Array.isArray(section.richText)
+        ? { editorInlineRichText:Object.fromEntries(
+            ['headingSerial','headingInstruction']
+              .filter(key=>section.richText[key] !== undefined)
+              .map(key=>[key,section.richText[key]])
+          ) }
+        : {}),
       instructions: text(section.instructions) || null,
       direction,
       storedLegacyMarksValue: null,
@@ -270,7 +278,14 @@ export function mergeServerDocumentIntoLocalPaper(localPaper = {}, doc = {}, ser
   const sections = Array.isArray(doc?.sections) ? doc.sections : []
   const officialSections = sections.map((section, index) => ({
     id: String(section.id || `server-section-${index + 1}`).replace(/^manual-section-/, ''),
-    heading: section.heading || section.title || `Question ${index + 1}`,
+    heading: section.heading || section.title || 'Question '+(index + 1),
+    ...(section.editorInlineRichText
+      ? { richText: Object.fromEntries(
+          ['headingSerial','headingInstruction']
+            .filter(key=>isSafeEditorInlineHtml(section.editorInlineRichText[key]))
+            .map(key=>[key,section.editorInlineRichText[key]])
+        ) }
+      : {}),
     instructions: section.instructions || '',
     content: section.nodes?.map(node => node.content || '').filter(Boolean).join('\n') || '',
     marks: finiteMarks(section.operationalSectionTotal ?? section.authoritativeSectionTotal),
