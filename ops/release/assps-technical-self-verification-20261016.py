@@ -183,6 +183,10 @@ def evaluate(health:dict,previous:dict|None) -> tuple[str,list[str]]:
     issues=[]
     if health["appHTTP"]!=200 or health["apiHTTP"]!=200:
         issues.append("PUBLIC_APP_OR_API_UNHEALTHY")
+    # Anonymous-only security smoke: no school account, password or session stored.
+    protected=health.get("anonymousProtectedEndpoints",{})
+    if len(protected)!=5 or any(code not in (401,403) for code in protected.values()):
+        issues.append("SENSITIVE_SCHOOL_API_ANONYMOUS_DENIAL_REGRESSION")
     for name in ("resultCards","marks"):
         if health["checks"][name].get("status")!="PASS":
             issues.append(name.upper()+"_RELEASE_GUARD_FAILED")
@@ -277,6 +281,10 @@ def main() -> int:
            "publicIndexSHA256":hashlib.sha256((dist/"index.html").read_bytes()).hexdigest(),
            "appHTTP":public_http_code(APP_URL),
            "apiHTTP":public_http_code(API_URL),
+           "anonymousProtectedEndpoints":{
+             path:public_http_code("https://app.assps.edu.pk"+path)
+             for path in ("/api/auth/me","/api/exams","/api/exams/results",
+                          "/api/exams/results/9","/api/daily-diary")},
            "checks":checks,"metrics":metric,
            "principalInstitutionalAcceptance":"ACKNOWLEDGED_CARRY_FORWARD",
            "printerHardwareAcceptance":"RICOH_MP_C307_OWNER_ACCEPTED_CARRY_FORWARD",
