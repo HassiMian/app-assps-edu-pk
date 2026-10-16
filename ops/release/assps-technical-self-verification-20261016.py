@@ -116,6 +116,19 @@ student_percentage_gaps AS (
       SELECT 1 FROM public.grade_settings g WHERE g.school_id=1
         AND floor(t.marks*100.0/t.total)
            BETWEEN g.min_percentage AND g.max_percentage)
+),
+grade910_quality AS (
+  SELECT COUNT(*) FILTER(WHERE class_level='9th') class9_question_rows,
+         COUNT(*) FILTER(WHERE class_level='10th') class10_question_rows,
+         COUNT(*) FILTER(WHERE is_approved=true) flagged_approved_rows,
+         COUNT(*) FILTER(WHERE is_approved=true AND (
+             source_file_id IS NULL OR btrim(source_file_id)=''
+             OR source_page_no IS NULL
+             OR ((answer IS NULL OR btrim(answer)='')
+                 AND (correct_option IS NULL OR btrim(correct_option)=''))))
+             as approved_rows_missing_minimum_evidence
+  FROM public.question_bank
+  WHERE school_id=1 AND class_level IN ('9th','10th')
 )
 SELECT json_build_object(
  'scores',(SELECT row_to_json(score_rollup) FROM score_rollup),
@@ -128,6 +141,7 @@ SELECT json_build_object(
      'subjectGradeBandGaps',(SELECT count(*) FROM subject_percentage_gaps),
      'studentGradeBandGaps',(SELECT count(*) FROM student_percentage_gaps))),
  'subjectEvidence',(SELECT row_to_json(subject_rollup) FROM subject_rollup),
+ 'grade910QuestionQuality',(SELECT row_to_json(grade910_quality) FROM grade910_quality),
  'formalReviewEvents',(SELECT COUNT(*) FROM public.school_academic_approval_events
    WHERE school_id=1 AND exam_id=9)
 )::text
@@ -188,6 +202,10 @@ def evaluate(health:dict,previous:dict|None) -> tuple[str,list[str]]:
         issues.append("DUPLICATE_STUDENT_SUBJECT_RESULT")
     if diagnostics.get("subjectGradeBandGaps",0)>0 or diagnostics.get("studentGradeBandGaps",0)>0:
         issues.append("GRADE_BAND_COVERAGE_REGRESSION")
+    # is_approved is NOT a substitute for authentic independent faculty review.
+    # This protects minimal academic provenance if a later importer changes flags.
+    if metrics.get("grade910QuestionQuality",{}).get("approved_rows_missing_minimum_evidence",0)>0:
+        issues.append("GRADE910_APPROVED_QUESTION_WITHOUT_MINIMUM_SOURCE_OR_ANSWER_EVIDENCE")
     if previous:
         old=previous.get("metrics",{}).get("scores",{})
         if metrics["scores"]["total_score_rows"]<old.get("total_score_rows",0):
@@ -248,6 +266,8 @@ def main() -> int:
             k:int(value) for k,value in raw["firstTermCompleteness"].items()},
           "subjectEvidence":{
             k:int(value) for k,value in raw["subjectEvidence"].items()},
+          "grade910QuestionQuality":{
+            k:int(value) for k,value in raw["grade910QuestionQuality"].items()},
           "formalReviewEvents":int(raw["formalReviewEvents"])
         }
         data={
