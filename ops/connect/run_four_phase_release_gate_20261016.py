@@ -20,11 +20,31 @@ DEFAULT_LIVE=Path('/var/www/assps-resultcards-owner-accepted-20261016')
 NEXT_BUILD='SAsg3cC_el5cq2_nN2a46'
 LIVE_HTML='760b232b493c300fe78908704aef4989c24c25028faac1821dd41f6480210f3c'
 CORE_INTEGRATION='b53bf123cfff54cb5413b472667ed8bf55e0a854'
+# Exact independently verified descendant; both compiled frontend digests match.
+APPROVED_CORE_DIST_SHA={
+    CORE_INTEGRATION:'68ad0a2359d84d627ab8055ab28166baa4a43058d38c5fef052ed7f7073c0b89',
+    '017d51060349e39150ebd508d0d670c10eb15f5f':'68ad0a2359d84d627ab8055ab28166baa4a43058d38c5fef052ed7f7073c0b89',
+}
 OFFICIAL=Path('/root/workspace/assps-core-connect-gate-exit-hardening-20261015/ops/release/signed-bluegreen/verify-connect-login-only-core-20261014.py')
 JOINT_CORE=OFFICIAL.with_name('verify-joint-current-candidates-20261015.py')
 NGINX=Path('/etc/nginx/sites-enabled/apex-app-ssl')
 PUBLIC_NEXT=Path('/var/www/apex-connect')
 RESULT_COUNTS='1763|213'
+REQUIRED_OFFICIAL_CHECKS=frozenset((
+    'current_blue_rollback_archive_verified',
+    'exact_reviewed_ai_worker_adapter_deployed',
+    'global_worker_separated_and_authenticated',
+    'independent_offhost_current_recovery_certified',
+    'isolated_previously_reviewed_full_acl_backup',
+    'live_worker_role_and_inherited_grants_verified',
+    'original_school_marks_integrity_preserved',
+    'production_nginx_configuration_valid',
+    'production_restricted_signed_transport_enabled',
+    'production_signed_catalog_safe',
+    'real_signed_peer_school_and_subject_denial',
+    'release_id_pinned',
+    'trusted_external_owner_pinned_key',
+))
 
 def command(args:list[str],timeout=120)->tuple[int,str]:
     try:
@@ -41,19 +61,36 @@ def sha(path:Path)->str:
             h.update(data)
     return h.hexdigest()
 
-def make_phase_decisions(live:dict,compiled:dict,joint:dict,official:dict)->dict:
+def approved_core_artifact(core:Path, source_sha:str)->bool:
+    pinned=APPROVED_CORE_DIST_SHA.get(source_sha)
+    if not pinned:
+        return False
+    try:
+        return sha(core/'al-siddique-frontend/dist/index.html')==pinned
+    except OSError:
+        return False
+
+def verifier_exit_passed(exits:dict,key:str)->bool:
+    # bool is an int subclass in Python: False must never impersonate exit 0.
+    code=exits.get(key)
+    return type(code) is int and code==0
+
+def make_phase_decisions(live:dict,compiled:dict,joint:dict,official:dict,verifier_exits:dict)->dict:
     p1=(live.get('source_sha')==LIVE_HTML and live.get('nginx_root_correct') is True
         and live.get('https_ok') is True and live.get('result_counts')==RESULT_COUNTS
         and live.get('pg_transaction_read_only') is True)
-    p2=(compiled.get('decision')=='OPTIMIZED_NEXT_BUILD_PROVENANCE_PASS'
+    p2=(verifier_exit_passed(verifier_exits,'optimized_build')
+        and verifier_exit_passed(verifier_exits,'joint_candidate')
+        and compiled.get('decision')=='OPTIMIZED_NEXT_BUILD_PROVENANCE_PASS'
         and compiled.get('optimized_build_exit_observed') is True
         and compiled.get('production_release_authorized') is False
         and joint.get('technical_candidate_status')=='PASS'
         and joint.get('production_modified') is False
         and joint.get('next_candidate_build_id')==NEXT_BUILD)
     checks=official.get('checks')
-    p3=(p1 and p2 and official.get('status')=='READY_FOR_LOGIN_ONLY_CORE'
-        and isinstance(checks,dict) and len(checks)==13
+    p3=(p1 and p2 and verifier_exit_passed(verifier_exits,'official_release')
+        and official.get('status')=='READY_FOR_LOGIN_ONLY_CORE'
+        and isinstance(checks,dict) and set(checks)==REQUIRED_OFFICIAL_CHECKS
         and all(v is True for v in checks.values())
         and official.get('signed_runtime_security_certified') is True)
     return {
@@ -118,9 +155,10 @@ def main()->int:
     except (ValueError,TypeError): compiled={}
     out['optimized_build']={'decision':compiled.get('decision','HOLD'),
                             'optimized_build_exit_observed':compiled.get('optimized_build_exit_observed',False),
-                            'production_release_authorized':False}
+                            'production_release_authorized':compiled.get('production_release_authorized')}
     joint={}
-    if rc==0 and source==CORE_INTEGRATION and live.get('source_sha')==LIVE_HTML:
+    joint_rc=255
+    if rc==0 and approved_core_artifact(x.core,source) and live.get('source_sha')==LIVE_HTML:
         joint_args=[
             sys.executable,str(CONNECT_OPS/'verify_joint_frontend_connect_core_20261015.py'),
             '--paper-repo',str(x.core),'--paper-dist',str(x.core/'al-siddique-frontend/dist'),
@@ -140,6 +178,7 @@ def main()->int:
     }
     out['staged_build_id']=joint.get('next_candidate_build_id')
     official={}
+    off_rc=255
     try:
         proxy=sha(PUBLIC_NEXT/'.next/server/middleware.js')
         public_id=(PUBLIC_NEXT/'.next/BUILD_ID').read_text().strip()
@@ -156,8 +195,14 @@ def main()->int:
         'failed_keys':official.get('blocked',[]),
         'signed_runtime_security_certified':official.get('signed_runtime_security_certified',False)
     }
+    out['verifier_exit_codes']={
+        'optimized_build':comp_rc,
+        'joint_candidate':joint_rc,
+        'official_release':off_rc,
+    }
     out['phases']=make_phase_decisions(
-        live,compiled,joint,{**official,'checks':official.get('checks')})
+        live,compiled,joint,{**official,'checks':official.get('checks')},
+        out['verifier_exit_codes'])
     out['decision']='PROTECTED_CORE_RELEASE_PENDING' if out['phases']['phase_3_independent_signed_core_authorization']=='PASS' else 'HOLD_NO_PRODUCTION_CUTOVER'
     print(json.dumps(out,indent=2,sort_keys=True))
     # Exit 2 means release not certified, not a silent success.
