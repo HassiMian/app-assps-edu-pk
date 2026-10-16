@@ -175,7 +175,11 @@ test('two-school real-auth Paper Save/Reopen/Print, Diary persistence and Lesson
     school_name: 'CLIENT-SUPPLIED-NAME-MUST-NOT-PERSIST',
     template_id: 1, class_level: '1', class_name: 'One', diary_date: diaryDate,
     slips_per_page: 8, footer_text: 'Synthetic QA diary', footer_is_urdu: false,
-    rows: [{ subject: 'English', homework: 'Page 21 - Learn five words.' }],
+    rows: [
+      { subject: 'English', homework: 'Page 21 - Learn five words.' },
+      { subject: 'Urdu', homework: 'Page 22 — 【زیور، زردی】 — Learn & copy.' },
+      { subject: 'Science', diary: '', homework: 'LEGACY-STALE-EXPLICIT-BLANK-NOT-VISIBLE' },
+    ],
     style_settings: { subjectFontSize: 13 },
   }
   const createdDiary = await page.evaluate(async payload => {
@@ -219,6 +223,75 @@ test('two-school real-auth Paper Save/Reopen/Print, Diary persistence and Lesson
   assert.equal(updatedDiary.body.data?.footer_text, 'Verified revised synthetic diary')
   assert.equal(updatedDiary.body.data?.rows?.[0]?.homework, diaryDraft.rows[0].homework, 'Diary update erased existing subject work')
   console.log('PHASE4_REAL_TEACHER_DIARY_PATCH_PRESERVATION_PASS')
+
+  // Real teacher, real persisted legacy/homework rows, actual canonical Diary
+  // Workspace: open the saved database record and print the same content.
+  // This is NOT a mocked API or a generic screenshot-only Diary print test.
+  await page.goto(`${url}/paper-generator?tab=diary`, { waitUntil: 'domcontentloaded' })
+  await page.locator('[data-diary-workspace]').waitFor({ state: 'visible', timeout: 22000 })
+  await page.getByRole('button', { name: /Saved Diaries Library/ }).click()
+  await page.locator('.dd-library-card').first().waitFor({ timeout: 15000 })
+  await page.locator('.dd-library-card').first().getByRole('button', { name: 'Load / Edit' }).click()
+  await page.getByText(`Diary #${diaryId} loaded into workspace.`).waitFor({ timeout: 12000 })
+  const persistedPreview = await page.locator('.dd-a4-page').first().innerText()
+  assert.match(persistedPreview, /Page 21 - Learn five words\./,
+    'Persisted legacy homework field disappeared in actual Diary preview')
+  assert.match(persistedPreview, /زیور، زردی/,
+    'Persisted Urdu homework disappeared during actual Diary reopening')
+  assert.doesNotMatch(persistedPreview, /LEGACY-STALE-EXPLICIT-BLANK-NOT-VISIBLE/,
+    'Explicitly blank diary content was replaced with stale legacy homework')
+  await page.getByRole('button', { name: 'Print / PDF' }).click()
+  const savedPrintFrame = page.locator('#dd-print-frame')
+  await savedPrintFrame.waitFor({ state: 'attached', timeout: 10000 })
+  const printedDiary = await savedPrintFrame.evaluate(el => {
+    const doc = el.contentDocument
+    const urdu = doc.querySelector('.dd-diary-cell.urdu')
+    return {
+      text: doc.body.innerText,
+      pages: doc.querySelectorAll('.dd-a4-page').length,
+      urduDirection: urdu ? doc.defaultView.getComputedStyle(urdu).direction : null,
+      html: doc.documentElement.outerHTML,
+    }
+  })
+  assert.match(printedDiary.text, /Page 21 - Learn five words\./)
+  assert.match(printedDiary.text, /زیور، زردی/)
+  assert.doesNotMatch(printedDiary.text, /LEGACY-STALE-EXPLICIT-BLANK-NOT-VISIBLE/)
+  assert.equal(printedDiary.urduDirection, 'rtl')
+  assert.ok(printedDiary.pages >= 1)
+  const persistedPrintPage = await context.newPage()
+  await persistedPrintPage.setContent(printedDiary.html, { waitUntil: 'domcontentloaded' })
+  const persistedPdf = await persistedPrintPage.pdf({ format: 'A4', printBackground: true })
+  assert.equal(persistedPdf.subarray(0, 5).toString(), '%PDF-')
+  assert.ok(persistedPdf.length > 8000)
+  await persistedPrintPage.close()
+  console.log('PHASE7_REAL_TEACHER_LEGACY_DIARY_SAVE_REOPEN_A4_PRINT_PASS', persistedPdf.length)
+  // Re-save via actual teacher-facing UI, not direct fetch. Original server
+  // record identity must remain the same and the legacy rows must survive.
+  await page.getByRole('button', { name: /Save Diary/ }).click()
+  await page.getByText(`Daily diary saved safely (ID #${diaryId}).`).waitFor({ timeout: 15000 })
+  const uiResaved = await page.evaluate(async id => {
+    const token = localStorage.getItem('al_siddique_token')
+    const response = await fetch(`/api/daily-diary/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    return { status: response.status, body: await response.json() }
+  }, diaryId)
+  assert.equal(uiResaved.status, 200)
+  assert.equal(Number(uiResaved.body.data?.id), diaryId, 'Diary UI created a duplicate instead of updating its own record')
+  assert.equal(uiResaved.body.data?.rows[0]?.diary, diaryDraft.rows[0].homework)
+  assert.equal(uiResaved.body.data?.rows[1]?.diary, diaryDraft.rows[1].homework)
+  assert.equal(uiResaved.body.data?.rows[2]?.diary, '', 'Explicit blank Diary unexpectedly gained stale homework')
+  assert.equal(uiResaved.body.data?.footer_text, 'Verified revised synthetic diary')
+  console.log('PHASE7_REAL_TEACHER_LEGACY_DIARY_UI_RESAVE_SAME_ID_PASS')
+  page.once('dialog', dialog => dialog.accept())
+  await page.getByRole('button', { name: 'Reopen Saved Diary' }).click()
+  await page.getByText('Saved diary reopened and verified. Changes will update its original record.')
+    .waitFor({ timeout: 14000 })
+  const exactReopenedText = await page.locator('.dd-a4-page').first().innerText()
+  assert.match(exactReopenedText, /Page 21 - Learn five words\./)
+  assert.match(exactReopenedText, /زیور، زردی/)
+  assert.doesNotMatch(exactReopenedText, /LEGACY-STALE-EXPLICIT-BLANK-NOT-VISIBLE/)
+  console.log('PHASE7_REAL_TEACHER_DIARY_EXPLICIT_REOPEN_SAME_ID_PASS')
 
   // Lesson Planning must prove real tenant-scoped backend storage, optimistic
   // revision behavior and untrusted client publication-flag suppression.
