@@ -9,6 +9,7 @@ on:
     paths:
       - 'al-siddique-backend/src/services/assessmentPrintJobs.js'
       - 'al-siddique-backend/src/tests/assessment-print-jobs-domain.test.js'
+      - 'al-siddique-backend/src/tests/assessment-truefalse-student-projection-http-isolated.test.cjs'
       - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/personalizedPrintDurableBrowserAcceptance.test.js'
       - '.github/workflows/paper-student-answer-projection-privacy-20261016.yml'
   workflow_dispatch:
@@ -30,6 +31,9 @@ jobs:
       - name: Install pinned frontend dependencies
         working-directory: al-siddique-frontend
         run: npm ci --no-audit --no-fund
+      - name: Install pinned backend dependencies for isolated HTTP route QA
+        working-directory: al-siddique-backend/src
+        run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Install headless Chromium for isolated print QA
         working-directory: al-siddique-frontend
         run: npx playwright install --with-deps chromium
@@ -38,6 +42,8 @@ jobs:
           node --test
           al-siddique-backend/src/tests/assessment-print-jobs-domain.test.js
           al-siddique-backend/src/tests/assessment-print-projection-boundary-static.test.js
+      - name: Verify synthetic true-false student projection on actual Express HTTP routes
+        run: node --test al-siddique-backend/src/tests/assessment-truefalse-student-projection-http-isolated.test.cjs
       - name: Verify personalized A4 print does not leak private roster fields
         working-directory: al-siddique-frontend
         run: >-
