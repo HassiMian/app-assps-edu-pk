@@ -4,6 +4,7 @@ on:
     branches:
       - 'integration/core-paper-worker-unified-rc-*'
       - 'integration/core-paper-diary-font-rc-*'
+      - 'integration/core-diary-race-release-rc-*'
   pull_request:
     paths:
       - 'al-siddique-frontend/**'
@@ -39,6 +40,12 @@ jobs:
       - name: Verify Urdu A4 Diary screen-print alignment and font readiness in Chromium
         working-directory: al-siddique-frontend
         run: node --test src/Modules/Paper-Generator/PaperEditor/tests/dailyDiaryWorkspaceBrowserAcceptance.test.js
+      - name: Verify Early Years A4 and card geometry real Chrome acceptance
+        working-directory: al-siddique-frontend
+        run: node --test src/Modules/Paper-Generator/PaperEditor/tests/earlyYearsRenderPrintGeometryAcceptance.test.js
+      - name: Verify cognitive Lesson Planning interactive real Chrome acceptance
+        working-directory: al-siddique-frontend
+        run: node --test src/Modules/Paper-Generator/PaperEditor/tests/lessonPlanningWorkspaceBrowserAcceptance.test.js
       - name: Verify daily diary Save, Reopen, Print, and failed-save race in Chromium
         run: node ops/paper-studio/run_diary_release_browser_20261016.cjs
       - name: Verify official Paper Workspace and Urdu/English cross-field print in Chromium
