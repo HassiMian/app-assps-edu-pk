@@ -170,3 +170,88 @@ test('English LTR serial and instruction underline is bounded, reversible and pr
  assert.match(print.h||'',/font-style:\s*italic/i)
  console.log('CROSS_FIELD_ENGLISH_LTR_UNDERLINE_PRINT_PASS',JSON.stringify({selection,print}))
 })
+
+test('reverse Urdu RTL drag stays bounded to one question and preserves unselected MCQ/marks',{timeout:90000},async t=>{
+ const reversePort=5997
+ const vite=await createServer({root,server:{port:reversePort,strictPort:true}});await vite.listen()
+ const browser=await chromium.launch({headless:true,args:['--no-sandbox']})
+ t.after(async()=>{await browser.close();await vite.close()})
+ const context=await browser.newContext({viewport:{width:1640,height:1000}})
+ await context.addInitScript(()=>{
+  localStorage.setItem('al_siddique_token','mock-jwt-token')
+  localStorage.setItem('al_siddique_user',JSON.stringify({id:999,role:'admin',school_id:1}))
+  localStorage.setItem('al_siddique_login_at',String(Date.now()))
+ })
+ await context.route('**/api/**',r=>r.fulfill({status:200,contentType:'application/json',body:'{"success":true,"data":[]}'}))
+ const page=await context.newPage()
+ await page.goto('http://127.0.0.1:'+reversePort+'/paper-workspace-test.html',{waitUntil:'domcontentloaded'})
+ await page.getByRole('button',{name:'Edit Paper'}).click()
+ const heading=page.getByLabel('Edit question 2 heading')
+ const serial=page.getByLabel('Edit question 2 number')
+ const marks=page.getByLabel('Edit question 2 marks')
+ await heading.scrollIntoViewIfNeeded()
+ const other=page.getByLabel('Edit question 1 heading')
+ const otherBefore=await other.innerHTML()
+ const marksBefore=await marks.innerHTML()
+ const section2Before=await page.locator('[data-official-section]').nth(1).textContent()
+ const matchingBefore=await page.locator('[data-official-section]').nth(2).textContent()
+ assert.ok(section2Before.includes('کامیابی'),'five-item odd-number list is present')
+ assert.ok(matchingBefore.includes('کالم'),'adjacent matching-table question exists')
+
+ const points=await page.evaluate(()=>{
+  const number=document.querySelector('[aria-label="Edit question 2 number"]')
+  const instruction=document.querySelector('[aria-label="Edit question 2 heading"]')
+  const caret=(el,pos)=>{
+   const node=document.createTreeWalker(el,NodeFilter.SHOW_TEXT).nextNode()
+   const range=document.createRange();range.setStart(node,pos);range.collapse(true)
+   const rect=range.getBoundingClientRect()
+   return {x:rect.x,y:rect.y+rect.height/2}
+  }
+  return {
+   fromHeading:caret(instruction,Math.min(8,instruction.textContent.length)),
+   toSerial:caret(number,Math.max(0,number.textContent.length-3)),
+  }
+ })
+ await page.mouse.move(points.fromHeading.x,points.fromHeading.y)
+ await page.mouse.down()
+ await page.mouse.move(points.toSerial.x,points.toSerial.y,{steps:24})
+ await page.mouse.up()
+ const selection=await page.evaluate(()=>{
+  const selected=window.getSelection()
+  return {text:selected?.toString(),isBackward:selected?.anchorNode?.parentElement?.closest('[data-edit-field]')?.dataset?.editField==='question-heading'}
+ })
+ assert.ok(selection.text?.includes('2:'),'backwards native drag must select serial '+JSON.stringify(selection))
+ assert.ok(selection.text?.includes('درج'),'backwards native drag must select Urdu instruction '+JSON.stringify(selection))
+ const toolbar=page.locator('[data-inline-selection-toolbar]')
+ await toolbar.getByRole('button',{name:'B',exact:true}).click()
+ assert.match(await serial.innerHTML(),/font-weight:\s*bold/i)
+ assert.match(await heading.innerHTML(),/font-weight:\s*bold/i)
+ assert.equal(await marks.innerHTML(),marksBefore)
+ assert.equal(await other.innerHTML(),otherBefore,'another question must remain unchanged')
+ const serialBeforeForeign=await serial.innerHTML()
+ const headingBeforeForeign=await heading.innerHTML()
+ const heading3=page.getByLabel('Edit question 3 heading')
+ const heading3Before=await heading3.innerHTML()
+ await page.evaluate(()=>{
+  const s=document.querySelector('[aria-label="Edit question 2 number"]')
+  const h=document.querySelector('[aria-label="Edit question 3 heading"]')
+  const first=document.createTreeWalker(s,NodeFilter.SHOW_TEXT).nextNode()
+  const last=document.createTreeWalker(h,NodeFilter.SHOW_TEXT).nextNode()
+  const selection=document.createRange()
+  selection.setStart(first,0);selection.setEnd(last,Math.min(2,last.textContent.length))
+  const active=window.getSelection();active.removeAllRanges();active.addRange(selection)
+ })
+ await toolbar.getByRole('button',{name:'U',exact:true}).click()
+ assert.equal(await serial.innerHTML(),serialBeforeForeign,'cross-question formatting must not alter original serial')
+ assert.equal(await heading.innerHTML(),headingBeforeForeign,'cross-question formatting must not alter original heading')
+ assert.equal(await heading3.innerHTML(),heading3Before,'cross-question formatting must not alter destination heading')
+ await page.getByRole('button',{name:'Done Editing'}).click()
+ assert.equal(await page.locator('[data-official-section]').nth(1).textContent(),section2Before,
+   'odd-number 5-item list and heading plain text must remain unchanged')
+ assert.equal(await page.locator('[data-official-section]').nth(2).textContent(),matchingBefore,
+   'neighboring matching-table question must remain byte-identical as text')
+ const persisted=page.locator('[data-official-section]').nth(1)
+ assert.match(await persisted.locator('[data-edit-field="question-number"]').innerHTML(),/font-weight:\s*bold/i)
+ assert.match(await persisted.locator('[data-edit-field="question-heading"]').innerHTML(),/font-weight:\s*bold/i)
+ console.log('CROSS_FIELD_REVERSE_RTL_BOUNDED_PASS',JSON.stringify(selection))
+})
