@@ -1,0 +1,23 @@
+[Unit]
+Description=ASSPS weekly isolated Grade IX-X academic machine QA without publication
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+UMask=0077
+StateDirectory=assps-grade910-weekly-qa
+ExecStart=/usr/bin/python3 /usr/local/libexec/assps-grade910-weekly-qa/assps-grade910-weekly-self-qa-20261016.py --run
+TimeoutStartSec=2700
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/var/lib/assps-grade910-weekly-qa
+PrivateTmp=yes
+NoNewPrivileges=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+CPUQuota=90%
+MemoryMax=3G
