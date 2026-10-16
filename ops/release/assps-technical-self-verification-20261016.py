@@ -61,11 +61,87 @@ score_rollup AS (
 term_rollup AS (
   SELECT COUNT(*) first_term_rows,COUNT(DISTINCT student_id) first_term_students
   FROM public.exam_results WHERE school_id=1 AND exam_id=9
+),
+scored_students AS (
+  SELECT DISTINCT student_id FROM public.exam_results
+  WHERE school_id=1 AND exam_id=9
+),
+expected_subjects AS (
+  SELECT s.id student_id,es.subject
+  FROM scored_students p
+  JOIN public.students s ON s.id=p.student_id AND s.school_id=1
+  JOIN public.exam_subjects es ON es.school_id=1 AND es.exam_id=9
+    AND es.is_active
+    AND lower(btrim(es.class_name))=lower(btrim(s.class))
+    AND lower(btrim(es.section))=lower(btrim(s.section))
+),
+missing_subjects AS (
+  SELECT e.student_id FROM expected_subjects e
+  LEFT JOIN public.exam_results r ON r.school_id=1 AND r.exam_id=9
+    AND r.student_id=e.student_id
+    AND lower(btrim(r.subject))=lower(btrim(e.subject))
+  WHERE r.id IS NULL
+),
+unmapped_results AS (
+  SELECT r.id FROM public.exam_results r
+  JOIN public.students s ON s.school_id=r.school_id AND s.id=r.student_id
+  LEFT JOIN public.exam_subjects es ON es.school_id=1 AND es.exam_id=9
+    AND es.is_active AND lower(btrim(es.class_name))=lower(btrim(s.class))
+    AND lower(btrim(es.section))=lower(btrim(s.section))
+    AND lower(btrim(es.subject))=lower(btrim(r.subject))
+  WHERE r.school_id=1 AND r.exam_id=9 AND es.id IS NULL
+),
+duplicate_scores AS (
+  SELECT r.student_id,lower(btrim(r.subject))
+  FROM public.exam_results r WHERE r.school_id=1 AND r.exam_id=9
+  GROUP BY r.student_id,lower(btrim(r.subject)) HAVING count(*)>1
+),
+subject_percentage_gaps AS (
+  SELECT r.id FROM public.exam_results r
+  WHERE r.school_id=1 AND r.exam_id=9 AND r.total_marks>0
+    AND NOT EXISTS (
+      SELECT 1 FROM public.grade_settings g WHERE g.school_id=1
+        AND floor(r.marks_obtained*100.0/r.total_marks)
+           BETWEEN g.min_percentage AND g.max_percentage)
+),
+student_totals AS (
+  SELECT r.student_id,sum(r.marks_obtained) AS marks,
+         sum(r.total_marks) AS total
+  FROM public.exam_results r WHERE r.school_id=1 AND r.exam_id=9
+  GROUP BY r.student_id
+),
+student_percentage_gaps AS (
+  SELECT t.student_id FROM student_totals t
+  WHERE t.total>0 AND NOT EXISTS (
+      SELECT 1 FROM public.grade_settings g WHERE g.school_id=1
+        AND floor(t.marks*100.0/t.total)
+           BETWEEN g.min_percentage AND g.max_percentage)
+),
+grade910_quality AS (
+  SELECT COUNT(*) FILTER(WHERE class_level='9th') class9_question_rows,
+         COUNT(*) FILTER(WHERE class_level='10th') class10_question_rows,
+         COUNT(*) FILTER(WHERE is_approved=true) flagged_approved_rows,
+         COUNT(*) FILTER(WHERE is_approved=true AND (
+             source_file_id IS NULL OR btrim(source_file_id)=''
+             OR source_page_no IS NULL
+             OR ((answer IS NULL OR btrim(answer)='')
+                 AND (correct_option IS NULL OR btrim(correct_option)=''))))
+             as approved_rows_missing_minimum_evidence
+  FROM public.question_bank
+  WHERE school_id=1 AND class_level IN ('9th','10th')
 )
 SELECT json_build_object(
  'scores',(SELECT row_to_json(score_rollup) FROM score_rollup),
  'firstTerm',(SELECT row_to_json(term_rollup) FROM term_rollup),
+ 'firstTermCompleteness',(SELECT json_build_object(
+     'missingEntries',(SELECT count(*) FROM missing_subjects),
+     'affectedStudents',(SELECT count(DISTINCT student_id) FROM missing_subjects),
+     'unmappedRecordedSubjects',(SELECT count(*) FROM unmapped_results),
+     'duplicateStudentSubjects',(SELECT count(*) FROM duplicate_scores),
+     'subjectGradeBandGaps',(SELECT count(*) FROM subject_percentage_gaps),
+     'studentGradeBandGaps',(SELECT count(*) FROM student_percentage_gaps))),
  'subjectEvidence',(SELECT row_to_json(subject_rollup) FROM subject_rollup),
+ 'grade910QuestionQuality',(SELECT row_to_json(grade910_quality) FROM grade910_quality),
  'formalReviewEvents',(SELECT COUNT(*) FROM public.school_academic_approval_events
    WHERE school_id=1 AND exam_id=9)
 )::text
@@ -107,6 +183,10 @@ def evaluate(health:dict,previous:dict|None) -> tuple[str,list[str]]:
     issues=[]
     if health["appHTTP"]!=200 or health["apiHTTP"]!=200:
         issues.append("PUBLIC_APP_OR_API_UNHEALTHY")
+    # Anonymous-only security smoke: no school account, password or session stored.
+    protected=health.get("anonymousProtectedEndpoints",{})
+    if len(protected)!=5 or any(code not in (401,403) for code in protected.values()):
+        issues.append("SENSITIVE_SCHOOL_API_ANONYMOUS_DENIAL_REGRESSION")
     for name in ("resultCards","marks"):
         if health["checks"][name].get("status")!="PASS":
             issues.append(name.upper()+"_RELEASE_GUARD_FAILED")
@@ -121,6 +201,15 @@ def evaluate(health:dict,previous:dict|None) -> tuple[str,list[str]]:
         issues.append("INVALID_SCORED_MARKS_DETECTED")
     if metrics["subjectEvidence"]["inconsistent_configurations"]>0:
         issues.append("SUBJECT_MAXIMUM_CONFLICT_DETECTED")
+    diagnostics=metrics.get("firstTermCompleteness",{})
+    if diagnostics.get("duplicateStudentSubjects",0)>0:
+        issues.append("DUPLICATE_STUDENT_SUBJECT_RESULT")
+    if diagnostics.get("subjectGradeBandGaps",0)>0 or diagnostics.get("studentGradeBandGaps",0)>0:
+        issues.append("GRADE_BAND_COVERAGE_REGRESSION")
+    # is_approved is NOT a substitute for authentic independent faculty review.
+    # This protects minimal academic provenance if a later importer changes flags.
+    if metrics.get("grade910QuestionQuality",{}).get("approved_rows_missing_minimum_evidence",0)>0:
+        issues.append("GRADE910_APPROVED_QUESTION_WITHOUT_MINIMUM_SOURCE_OR_ANSWER_EVIDENCE")
     if previous:
         old=previous.get("metrics",{}).get("scores",{})
         if metrics["scores"]["total_score_rows"]<old.get("total_score_rows",0):
@@ -177,8 +266,12 @@ def main() -> int:
           "firstTerm":{
             "first_term_rows":int(raw["firstTerm"]["first_term_rows"]),
             "first_term_students":int(raw["firstTerm"]["first_term_students"])},
+          "firstTermCompleteness":{
+            k:int(value) for k,value in raw["firstTermCompleteness"].items()},
           "subjectEvidence":{
             k:int(value) for k,value in raw["subjectEvidence"].items()},
+          "grade910QuestionQuality":{
+            k:int(value) for k,value in raw["grade910QuestionQuality"].items()},
           "formalReviewEvents":int(raw["formalReviewEvents"])
         }
         data={
@@ -188,6 +281,10 @@ def main() -> int:
            "publicIndexSHA256":hashlib.sha256((dist/"index.html").read_bytes()).hexdigest(),
            "appHTTP":public_http_code(APP_URL),
            "apiHTTP":public_http_code(API_URL),
+           "anonymousProtectedEndpoints":{
+             path:public_http_code("https://app.assps.edu.pk"+path)
+             for path in ("/api/auth/me","/api/exams","/api/exams/results",
+                          "/api/exams/results/9","/api/daily-diary")},
            "checks":checks,"metrics":metric,
            "principalInstitutionalAcceptance":"ACKNOWLEDGED_CARRY_FORWARD",
            "printerHardwareAcceptance":"RICOH_MP_C307_OWNER_ACCEPTED_CARRY_FORWARD",
