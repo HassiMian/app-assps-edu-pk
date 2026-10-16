@@ -1,6 +1,6 @@
 'use strict'
-// Three fresh isolated Chromium flows: Diary screen/print CSS, authenticated
-// save->reopen scope, and stale asynchronous save status. No live server,
+// Four isolated Chromium flows: Diary screen/print CSS, authenticated
+// save->reopen scope, stale asynchronous save, and revisit PUT identity. No live server,
 // teacher credentials, database changes or real printer job.
 const {spawnSync}=require('node:child_process')
 const path=require('node:path')
@@ -9,6 +9,7 @@ const tests=[
  ['Diary print-layout and controller acceptance','dailyDiaryWorkspaceBrowserAcceptance.test.js',1],
  ['Diary Save-Reopen/foreign-tenant negative acceptance','dailyDiaryExplicitReopenBrowser.test.js',2],
  ['Late Diary save selection race','dailyDiarySaveStatusRaceBrowser.test.js',1],
+ ['Diary revisited class/section/date preserves prior ID','dailyDiaryRevisitScopeBrowser.test.js',1],
 ]
 let passed=0
 for(const [label,file,expected] of tests){
@@ -33,6 +34,6 @@ for(const [label,file,expected] of tests){
  passed+=expected
  console.log('DIARY_BROWSER_PASS',label,expected+'/'+expected)
 }
-if(passed===4&&process.exitCode!==2){
- console.log('ASSPS_DIARY_SAVE_REOPEN_PRINT_CHROMIUM 4/4 PASS (synthetic server, no hardware jobs)')
+if(passed===5&&process.exitCode!==2){
+ console.log('ASSPS_DIARY_SAVE_REOPEN_PRINT_CHROMIUM 5/5 PASS (synthetic server, no hardware jobs)')
 }
