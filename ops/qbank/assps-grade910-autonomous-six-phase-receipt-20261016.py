@@ -19,7 +19,7 @@ OUT=SOURCE_DIR/"autonomous-six-phase-checkpoint.json"
 def read(path:Path):
     return json.loads(path.read_text(encoding="utf8")) if path.exists() else None
 
-def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, answer, ocr_progress=None, live_collisions=None):
+def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, answer, ocr_progress=None, live_collisions=None, adoption_inventory=None):
     if not all(isinstance(x,dict) for x in (technical,weekly,source,held,pdf,text,ocr_pilot,answer)):
         raise ValueError("MANDATORY_MACHINE_EVIDENCE_MISSING")
     src=source.get("summary") or {}
@@ -73,6 +73,11 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
             live_collisions.get('approvedQuestions')!=0 or
             live_collisions.get('sourceDatabaseWrites')!=0):
             raise ValueError('LIVE_DUPLICATE_OR_UNREVIEWED_APPROVAL_REGRESSION')
+    if adoption_inventory is not None:
+        if adoption_inventory.get('schema')!='ASSPS_SCHOOL1_VERSIONED_ADOPTION_EVIDENCE_INVENTORY_V1' or (
+           adoption_inventory.get('schoolEditionAdoptionVerifiedByThisAudit') is not False) or (
+           adoption_inventory.get('academicQuestionApprovalGained')!=0):
+            raise ValueError('SCHOOL_ADOPTION_NOT_AUTHENTICALLY_VERIFIED')
     score=technical.get("metrics",{}).get("scores",{})
     integrity=technical.get("decision")=="OPERATIONAL" and score.get("total_score_rows",0)>=1763
     fullsuite_ok=(weekly.get("decision")=="QA_PASSED_NO_AUTOMATIC_ACADEMIC_PUBLICATION"
@@ -89,7 +94,9 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
        "status":"MACHINE_SOURCE_PASS_PAGE_CONTENT_PENDING" if source_integrity and source_text and ocr_pilot_ok else "HOLD_INCOMPLETE_SOURCE_EVIDENCE",
        "ocrFullCompleted":full_ocr_done,"ocrPagesCheckpointed":progressPages,
        "ocrPageClaimsCheckpointed":progressClaims,
-       "ocrPagesRemaining":112-progressPages,"sourcePdfAssetsChecked":56,
+       "ocrPagesRemaining":112-progressPages,
+       "schoolVersionedAdoptionEvidenceChain":adoption_inventory.get("interpretation") if adoption_inventory else "NOT_AUDITED",
+       "sourcePdfAssetsChecked":56,
        "claimsChecked":998,"independentVerifiedContentPages":0,
        "evidence":"SHA/page bounds, exact PDF text layer, and bounded English OCR pilot"},
       {"phase":3,"title":"Live Grade IX/X question and answer-key mechanical quality",
@@ -152,7 +159,8 @@ if __name__=="__main__":
                read(SOURCE_DIR/"ocr-fallback.json"),
                read(SOURCE_DIR/"live-answer-integrity.json"),
                read(SOURCE_DIR/"ocr-progress.json"),
-               read(SOURCE_DIR/"live-stem-collisions.json"))
+               read(SOURCE_DIR/"live-stem-collisions.json"),
+               read(SOURCE_DIR/"school-adoption-inventory.json"))
     save(OUT,p)
     print(json.dumps({k:v for k,v in p.items() if k!="phases"},sort_keys=True))
     for row in p["phases"]:print(f"PHASE_{row['phase']}={row['status']}")

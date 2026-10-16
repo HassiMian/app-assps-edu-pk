@@ -82,6 +82,21 @@ class ZeroHumanSixPhaseGuards(unittest.TestCase):
   a.extend((None,{'grade9And10Candidates':2411,'exactStemCollisionGroups':0,
      'exactStemDifferentAnswerGroups':0,'approvedQuestions':0,'sourceDatabaseWrites':0}))
   self.assertEqual(m.evaluate(*a)['liveQuestionDuplicateGroups'],0)
+ def test_school_adoption_inventory_cannot_auto_publish(self):
+  a=list(fixtures())
+  a.extend((None,None,{'schema':'ASSPS_SCHOOL1_VERSIONED_ADOPTION_EVIDENCE_INVENTORY_V1',
+         'schoolEditionAdoptionVerifiedByThisAudit':False,
+         'academicQuestionApprovalGained':0,
+         'interpretation':'NO_COMPLETE_SCHOOL_VERSIONED_ADOPTION_EVIDENCE_CHAIN'}))
+  p=m.evaluate(*a)
+  self.assertEqual(p['phases'][1]['schoolVersionedAdoptionEvidenceChain'],
+    'NO_COMPLETE_SCHOOL_VERSIONED_ADOPTION_EVIDENCE_CHAIN')
+  self.assertFalse(p['academicVerifiedPublicationReady'])
+ def test_forged_school_adoption_certification_denied(self):
+  a=list(fixtures())
+  a.extend((None,None,{'schema':'ASSPS_SCHOOL1_VERSIONED_ADOPTION_EVIDENCE_INVENTORY_V1',
+         'schoolEditionAdoptionVerifiedByThisAudit':True,'academicQuestionApprovalGained':1}))
+  with self.assertRaises(ValueError):m.evaluate(*a)
  def test_private_receipt_permissions(self):
   with tempfile.TemporaryDirectory() as d:
    p=Path(d)/'private'/'status.json'

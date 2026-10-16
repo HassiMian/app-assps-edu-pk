@@ -18,6 +18,7 @@ python3 -m py_compile "$SRC"
 python3 -m py_compile "$REPO/ops/qbank/reconcile-grade910-held-original-candidates-20261016.py"
 python3 -m py_compile "$REPO/ops/qbank/audit-grade910-live-answer-integrity-20261016.py"
 python3 -m py_compile "$REPO/ops/qbank/audit-grade910-live-question-collisions-20261016.py"
+python3 -m py_compile "$REPO/ops/qbank/audit-school1-versioned-textbook-adoption-20261016.py"
 python3 -m py_compile "$REPO/ops/qbank/assps-grade910-autonomous-six-phase-receipt-20261016.py"
 python3 -m py_compile "$REPO/ops/qbank/assps-grade910-held170-near-duplicate-screen-20261016.py"
 node --check "$REPO/ops/qbank/verify-grade910-pdf-physical-page-bounds-20261016.mjs"
@@ -28,6 +29,7 @@ python3 -m unittest discover -s "$REPO/ops/tests" -p "$TEST" -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_170_original_reconciliation_20261016.py -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_live_answer_integrity_20261016.py -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_live_question_collisions_20261016.py -q
+python3 -m unittest discover -s "$REPO/ops/tests" -p test_school1_versioned_textbook_adoption_20261016.py -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_six_phase_receipt_20261016.py -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_held170_near_duplicate_screen_20261016.py -q
 systemd-analyze verify "$REPO/ops/release/$UNIT" "$REPO/ops/release/$TIMER"
@@ -44,6 +46,7 @@ install -m 0644 "$SRC" "$DEST/$(basename "$SRC")"
 install -m 0644 "$REPO/ops/qbank/reconcile-grade910-held-original-candidates-20261016.py" "$DEST/reconcile-grade910-held-original-candidates-20261016.py"
 install -m 0644 "$REPO/ops/qbank/audit-grade910-live-answer-integrity-20261016.py" "$DEST/audit-grade910-live-answer-integrity-20261016.py"
 install -m 0644 "$REPO/ops/qbank/audit-grade910-live-question-collisions-20261016.py" "$DEST/audit-grade910-live-question-collisions-20261016.py"
+install -m 0644 "$REPO/ops/qbank/audit-school1-versioned-textbook-adoption-20261016.py" "$DEST/audit-school1-versioned-textbook-adoption-20261016.py"
 install -m 0644 "$REPO/ops/qbank/assps-grade910-autonomous-six-phase-receipt-20261016.py" "$DEST/assps-grade910-autonomous-six-phase-receipt-20261016.py"
 install -m 0644 "$REPO/ops/qbank/assps-grade910-held170-near-duplicate-screen-20261016.py" "$DEST/assps-grade910-held170-near-duplicate-screen-20261016.py"
 install -m 0644 "$REPO/ops/qbank/verify-grade910-pdf-physical-page-bounds-20261016.mjs" "$DEST/verify-grade910-pdf-physical-page-bounds-20261016.mjs"
@@ -87,6 +90,11 @@ assert c['grade9And10Candidates']==2411
 assert c['exactStemCollisionGroups']==0 and c['exactStemDifferentAnswerGroups']==0
 assert c['approvedQuestions']==0 and c['sourceDatabaseWrites']==0
 assert c['questionsDeleted']==0 and c['questionsPublished']==0
+ad=json.loads(Path('/var/lib/assps-grade910-sourceclaims/school-adoption-inventory.json').read_text())
+assert ad['schema']=='ASSPS_SCHOOL1_VERSIONED_ADOPTION_EVIDENCE_INVENTORY_V1'
+assert ad['schoolEditionAdoptionVerifiedByThisAudit'] is False
+assert ad['academicQuestionApprovalGained']==0
+assert ad['studentOrQuestionDbWrites']==0
 p=json.loads(Path('/var/lib/assps-grade910-sourceclaims/autonomous-six-phase-checkpoint.json').read_text())
 assert p['phaseCount']==6 and p['machinePassedPhases']>=4
 assert p['academicVerifiedPublicationReady'] is False
