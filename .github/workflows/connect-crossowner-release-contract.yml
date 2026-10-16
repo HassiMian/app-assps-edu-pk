@@ -6,6 +6,8 @@ on:
       - 'ops/connect/test_verify_joint_frontend_connect_core_20261015.py'
       - 'ops/connect/smoke_private_next_http_20261016.py'
       - 'ops/connect/test_smoke_private_next_http_20261016.py'
+      - 'ops/connect/verify_public_anonymous_routes_20261016.py'
+      - 'ops/connect/test_verify_public_anonymous_routes_20261016.py'
       - 'ops/connect/recovery/reviewed-next-eslint-config-20261016.mjs'
       - 'ops/connect/test_reviewed_next_eslint_config_20261016.py'
       - 'ops/connect/recovery/reviewed-next-eslint-active-scope-20261016.mjs'
@@ -36,6 +38,8 @@ on:
       - 'ops/connect/test_verify_joint_frontend_connect_core_20261015.py'
       - 'ops/connect/smoke_private_next_http_20261016.py'
       - 'ops/connect/test_smoke_private_next_http_20261016.py'
+      - 'ops/connect/verify_public_anonymous_routes_20261016.py'
+      - 'ops/connect/test_verify_public_anonymous_routes_20261016.py'
       - 'ops/connect/recovery/reviewed-next-eslint-config-20261016.mjs'
       - 'ops/connect/test_reviewed_next_eslint_config_20261016.py'
       - 'ops/connect/recovery/reviewed-next-eslint-active-scope-20261016.mjs'
@@ -95,3 +99,6 @@ jobs:
         run: node --test ops/connect/test-private-reviewed-stage-allowlist-20261016.test.cjs
       - name: Test four-phase release fail-closed decisions
         run: python3 -m unittest discover -v -s ops/connect -p 'test_four_phase_release_gate_20261016.py'
+
+      - name: Verify public anonymous route contract without touching live production
+        run: python3 -m unittest discover -v -s ops/connect -p 'test_verify_public_anonymous_routes_20261016.py'
