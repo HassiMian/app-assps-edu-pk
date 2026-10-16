@@ -7,6 +7,7 @@ const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId, tenantClause } = require('../middleware/tenant')
 const { createPrintJobBinding, printJobTransition, buildStudentSafeProjection, buildStaffAnswerKeyProjection, sha256 } = require('../services/assessmentPrintJobs')
 const { assertVerifiedPaperDocument } = require('../services/grade910PaperWorkspaceReleaseGuard')
+const { validatePaperStudioInlineRichText } = require('../services/paperStudioInlineRichTextGuard')
 
 const canAuthorAssessments = requireRoles('super_admin', 'admin', 'school_admin', 'principal', 'teacher')
 
@@ -50,7 +51,7 @@ function validatePaperDocument(document) {
   if (document.documentOrigin !== 'USER_AUTHORED') return 'Assessment Studio revision must be USER_AUTHORED'
   if (document.sourceIdentity !== null && document.sourceIdentity !== undefined) return 'USER_AUTHORED document must not carry sourceIdentity'
   if (!Array.isArray(document.sections)) return 'document.sections must be an array'
-  return null
+  return validatePaperStudioInlineRichText(document)
 }
 
 async function withTenantTransaction(req, schoolId, fn) {
