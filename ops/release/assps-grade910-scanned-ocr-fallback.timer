@@ -1,0 +1,12 @@
+[Unit]
+Description=ASSPS English scanned-book OCR source evidence off-school-hours Sunday
+
+[Timer]
+OnCalendar=Sun *-*-* 04:15:00 Asia/Karachi
+RandomizedDelaySec=2m
+AccuracySec=1m
+Persistent=false
+Unit=assps-grade910-scanned-ocr-fallback.service
+
+[Install]
+WantedBy=timers.target

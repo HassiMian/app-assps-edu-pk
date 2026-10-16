@@ -1,0 +1,29 @@
+[Unit]
+Description=ASSPS Grade IX-X bounded English-only scanned textbook OCR evidence
+After=network-online.target
+ConditionPathExists=/var/lib/assps-grade910-sourceclaims/question-page-textlayer.json
+ConditionPathExists=/usr/local/libexec/assps-grade910-sourceclaims/verify-grade910-scanned-source-ocr-fallback-20261016.mjs
+
+[Service]
+Type=oneshot
+UMask=0077
+StateDirectory=assps-grade910-sourceclaims
+StateDirectoryMode=0700
+Environment=ASSPS_MANIFEST=/usr/local/libexec/assps-grade910-sourceclaims/officialSourceManifest.json
+Environment=ASSPS_TEXT_LAYER=/var/lib/assps-grade910-sourceclaims/question-page-textlayer.json
+Environment=ASSPS_OCR_EVIDENCE=/var/lib/assps-grade910-sourceclaims/ocr-fallback.json
+ExecStart=/usr/bin/node --expose-gc /usr/local/libexec/assps-grade910-sourceclaims/verify-grade910-scanned-source-ocr-fallback-20261016.mjs
+TimeoutStartSec=10800
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/var/lib/assps-grade910-sourceclaims
+PrivateTmp=yes
+NoNewPrivileges=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+CPUQuota=45%
+MemoryHigh=1536M
+MemoryMax=2500M
