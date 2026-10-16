@@ -1,0 +1,20 @@
+name: ASSPS Paper Static Release Readiness Guard
+on:
+  push:
+    branches: ['audit/paper-full-feature-readiness-*']
+    paths:
+      - 'ops/paper-studio/**'
+      - '.github/workflows/paper-static-release-readiness-20261016.yml'
+  pull_request:
+    paths:
+      - 'ops/paper-studio/**'
+      - '.github/workflows/paper-static-release-readiness-20261016.yml'
+jobs:
+  hermetic-unit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fail-closed Paper Studio read-only guard tests
+        run: python3 -m unittest discover -s ops/paper-studio -p 'test_full_feature_readiness_20261016.py' -v
