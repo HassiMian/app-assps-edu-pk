@@ -7,15 +7,15 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {pathToFileURL,fileURLToPath} from 'node:url';
 import {classify,normalize} from './verify-grade910-pdf-question-text-evidence-20261016.mjs';
-import {fingerprint,newProgress,validateProgress,persistCheckpoint,pageKey} from './assps-grade910-ocr-resume-guard-20261016.mjs';
+import {fingerprint,newProgress,validateProgress,persistCheckpoint,pageKey,validatePageBudget} from './assps-grade910-ocr-resume-guard-20261016.mjs';
 const root='/root/workspace/assps-grade910-metadata-source-claim-20261016';
 const manifestPath=process.env.ASSPS_MANIFEST || path.join(root,'al-siddique-frontend/src/Modules/Paper-Generator/seed-data/grade9-10-staging/officialSourceManifest.json');
 const textLayerPath=process.env.ASSPS_TEXT_LAYER || '/var/lib/assps-grade910-sourceclaims/question-page-textlayer.json';
 const evidencePath=process.env.ASSPS_OCR_EVIDENCE || '/var/lib/assps-grade910-sourceclaims/ocr-fallback.json';
 const cacheRoot='/root/workspace/qbank-source-cache';
 const pdfjsPath='/var/www/apex-backend/node_modules/pdfjs-dist/legacy/build/pdf.mjs';
-const limit=Number(process.env.ASSPS_OCR_PILOT_PAGES || 0);
-const chunkLimit=Number(process.env.ASSPS_OCR_CHUNK_PAGES || 0);
+const limit=validatePageBudget(process.env.ASSPS_OCR_PILOT_PAGES || 0);
+const chunkLimit=validatePageBudget(process.env.ASSPS_OCR_CHUNK_PAGES || 0);
 const progressFile=process.env.ASSPS_OCR_PROGRESS || '/var/lib/assps-grade910-sourceclaims/ocr-progress.json';
 const h=b=>createHash('sha256').update(b).digest('hex');
 export function parseTesseractTSV(stdout){
@@ -100,8 +100,6 @@ async function main(){
  const scanned=new Set(progress.completedPages);
  const pending=selection.selected.filter(x=>!scanned.has(pageKey(x)));
  const thisBatch=(resuming && chunkLimit>0) ? pending.slice(0,chunkLimit):pending;
- if(resuming && chunkLimit>0 && (!Number.isInteger(chunkLimit)||chunkLimit>112))
-    throw Error('UNSAFE_OCR_BATCH_SIZE');
  let currentId=null,currentDoc=null,currentHash=null,currentCount=0;
  for(const item of thisBatch){
   const e=catalog.get(item.catalog);

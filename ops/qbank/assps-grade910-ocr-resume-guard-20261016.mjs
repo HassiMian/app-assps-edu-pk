@@ -4,6 +4,11 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 const hash = b => createHash('sha256').update(b).digest('hex');
 export const pageKey = item => String(item.catalog)+'|'+String(item.page);
+export function validatePageBudget(value,maxPages=112){
+  const n=Number(value);
+  if(!Number.isInteger(n)||n<0||n>maxPages)throw Error('INVALID_OCR_BATCH_OR_PILOT_LIMIT');
+  return n;
+}
 export function fingerprint(manifestBytes,textLayerBytes,stemEntries){
   const ordered=[...stemEntries].sort((a,b)=>String(a[0]).localeCompare(String(b[0])));
   return hash(Buffer.from(JSON.stringify({

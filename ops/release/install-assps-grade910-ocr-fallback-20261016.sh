@@ -25,6 +25,9 @@ if [[ "$MODE" == --check ]];then
  exit 0
 fi
 [[ -z "$(git -C "$ROOT" status --porcelain)" ]] || { echo UNCOMMITTED_SOURCE_HOLD;exit 66; }
+STATE=/var/lib/assps-grade910-sourceclaims
+[[ ! -L "$STATE" ]] || { echo UNSAFE_SOURCE_STATE_SYMLINK;exit 67; }
+install -d -m 0700 -o root -g root "$STATE"
 mkdir -p "$DEST"
 install -m 0644 "$SRC" "$DEST/$(basename "$SRC")"
 install -m 0644 "$ROOT/ops/qbank/assps-grade910-ocr-resume-guard-20261016.mjs" "$DEST/assps-grade910-ocr-resume-guard-20261016.mjs"

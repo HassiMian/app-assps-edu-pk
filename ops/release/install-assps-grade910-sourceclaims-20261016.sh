@@ -34,6 +34,9 @@ if [[ "$MODE" == --check ]];then
  exit 0
 fi
 [[ -z "$(git -C "$REPO" status --porcelain)" ]] || { echo UNCOMMITTED_SOURCE_HOLD;exit 66; }
+STATE=/var/lib/assps-grade910-sourceclaims
+[[ ! -L "$STATE" ]] || { echo UNSAFE_SOURCE_STATE_SYMLINK;exit 67; }
+install -d -m 0700 -o root -g root "$STATE"
 mkdir -p "$DEST"
 install -m 0644 "$SRC" "$DEST/$(basename "$SRC")"
 install -m 0644 "$REPO/ops/qbank/reconcile-grade910-held-original-candidates-20261016.py" "$DEST/reconcile-grade910-held-original-candidates-20261016.py"

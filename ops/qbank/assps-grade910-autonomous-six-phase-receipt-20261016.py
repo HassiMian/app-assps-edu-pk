@@ -19,7 +19,7 @@ OUT=SOURCE_DIR/"autonomous-six-phase-checkpoint.json"
 def read(path:Path):
     return json.loads(path.read_text(encoding="utf8")) if path.exists() else None
 
-def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, answer):
+def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, answer, ocr_progress=None):
     if not all(isinstance(x,dict) for x in (technical,weekly,source,held,pdf,text,ocr_pilot,answer)):
         raise ValueError("MANDATORY_MACHINE_EVIDENCE_MISSING")
     src=source.get("summary") or {}
@@ -50,6 +50,22 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
                        and (full_ocr.get("summary") or {}).get("pagesScannedNow")==
                            (full_ocr.get("summary") or {}).get("uniquePagesEligibleForLastResortOCR")
                        and (full_ocr.get("summary") or {}).get("productionDatabaseWrites")==0)
+    progressPages=0
+    progressClaims=0
+    if ocr_progress is not None:
+        if (ocr_progress.get("schema")!="ASSPS_GRADE910_OCR_RESUME_V1"
+                or ocr_progress.get("academicApproved") is not False
+                or ocr_progress.get("published") is not False
+                or ocr_progress.get("rawTextPersisted") is not False):
+            raise ValueError("OCR_PROGRESS_UNTRUSTED_OR_FALSELY_PUBLISHED")
+        pages=ocr_progress.get("completedPages")
+        covered=ocr_progress.get("results")
+        if not isinstance(pages,list) or not isinstance(covered,list) or len(set(pages))!=len(pages) or len(pages)>112:
+            raise ValueError("OCR_PROGRESS_DUPLICATED_OR_UNBOUNDED")
+        progressPages=len(pages)
+        progressClaims=len(covered)
+    if full_ocr_done:
+        progressPages=112
     score=technical.get("metrics",{}).get("scores",{})
     integrity=technical.get("decision")=="OPERATIONAL" and score.get("total_score_rows",0)>=1763
     fullsuite_ok=(weekly.get("decision")=="QA_PASSED_NO_AUTOMATIC_ACADEMIC_PUBLICATION"
@@ -64,7 +80,9 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
        "evidence":"Current technical self-audit and exact zero-vs-null result aggregates"},
       {"phase":2,"title":"Official-source PDF integrity and actual page-content recovery",
        "status":"MACHINE_SOURCE_PASS_PAGE_CONTENT_PENDING" if source_integrity and source_text and ocr_pilot_ok else "HOLD_INCOMPLETE_SOURCE_EVIDENCE",
-       "ocrFullCompleted":full_ocr_done,"sourcePdfAssetsChecked":56,
+       "ocrFullCompleted":full_ocr_done,"ocrPagesCheckpointed":progressPages,
+       "ocrPageClaimsCheckpointed":progressClaims,
+       "ocrPagesRemaining":112-progressPages,"sourcePdfAssetsChecked":56,
        "claimsChecked":998,"independentVerifiedContentPages":0,
        "evidence":"SHA/page bounds, exact PDF text layer, and bounded English OCR pilot"},
       {"phase":3,"title":"Live Grade IX/X question and answer-key mechanical quality",
@@ -96,6 +114,8 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
       "academicPublicationDecision":"BLOCK_UNVERIFIED_QUESTION_PUBLICATION",
       "actualQuestionContentPagesVerified":0,
       "ocrFullRunCompleted":full_ocr_done,
+      "ocrResumablePagesCheckpointed":progressPages,
+      "ocrResumablePageClaimsCheckpointed":progressClaims,
       "unresolvedIndependentEvidence":["School-specific approved book edition and exact academic session adoption",
          "Question-revision and source-page/exercise content attribution",
          "Qualified independent academic subject and Urdu-language review per question revision",
@@ -122,7 +142,8 @@ if __name__=="__main__":
                read(SOURCE_DIR/"question-page-textlayer.json"),
                read(SOURCE_DIR/"ocr-pilot-20261016.json"),
                read(SOURCE_DIR/"ocr-fallback.json"),
-               read(SOURCE_DIR/"live-answer-integrity.json"))
+               read(SOURCE_DIR/"live-answer-integrity.json"),
+               read(SOURCE_DIR/"ocr-progress.json"))
     save(OUT,p)
     print(json.dumps({k:v for k,v in p.items() if k!="phases"},sort_keys=True))
     for row in p["phases"]:print(f"PHASE_{row['phase']}={row['status']}")

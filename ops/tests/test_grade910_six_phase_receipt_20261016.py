@@ -51,6 +51,27 @@ class ZeroHumanSixPhaseGuards(unittest.TestCase):
  def test_source_shrink_and_missing_zero_protection_fail_closed(self):
   a=list(fixtures());a[8]['liveCandidateRows']=2399
   with self.assertRaises(ValueError):m.evaluate(*a)
+ def test_progress_receipt_tracks_unique_pages_not_false_full_completion(self):
+  a=list(fixtures())
+  a.append({'schema':'ASSPS_GRADE910_OCR_RESUME_V1',
+    'academicApproved':False,'published':False,'rawTextPersisted':False,
+    'completedPages':['a|3','a|4'],'results':[{'questionId':'Q1'}]})
+  p=m.evaluate(*a)
+  self.assertEqual(p['ocrResumablePagesCheckpointed'],2)
+  self.assertEqual(p['phases'][1]['ocrPagesRemaining'],110)
+  self.assertFalse(p['ocrFullRunCompleted'])
+ def test_ocr_checkpoint_forged_approval_denied(self):
+  a=list(fixtures())
+  a.append({'schema':'ASSPS_GRADE910_OCR_RESUME_V1',
+    'academicApproved':True,'published':False,'rawTextPersisted':False,
+    'completedPages':[],'results':[]})
+  with self.assertRaises(ValueError):m.evaluate(*a)
+ def test_duplicate_pages_in_progress_denied(self):
+  a=list(fixtures())
+  a.append({'schema':'ASSPS_GRADE910_OCR_RESUME_V1',
+    'academicApproved':False,'published':False,'rawTextPersisted':False,
+    'completedPages':['a|1','a|1'],'results':[]})
+  with self.assertRaises(ValueError):m.evaluate(*a)
  def test_private_receipt_permissions(self):
   with tempfile.TemporaryDirectory() as d:
    p=Path(d)/'private'/'status.json'

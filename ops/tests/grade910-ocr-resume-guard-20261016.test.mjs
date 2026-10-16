@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {fingerprint,newProgress,validateProgress,persistCheckpoint,pageKey} from '../qbank/assps-grade910-ocr-resume-guard-20261016.mjs';
+import {fingerprint,newProgress,validateProgress,persistCheckpoint,pageKey,validatePageBudget} from '../qbank/assps-grade910-ocr-resume-guard-20261016.mjs';
 const input=()=>fingerprint(Buffer.from('catalog-unchanged'),Buffer.from('textlayer'),[['Q1','Stem with 3']]);
 const p={catalog:'cat-001',page:3,claims:[{questionId:'Q1'}]};
 function completed(){
@@ -46,4 +46,12 @@ test('private durable checkpoint permissions 0600',()=>{
    assert.equal(fs.statSync(state).mode&0o777,0o600);
    assert.equal(validateProgress(JSON.parse(fs.readFileSync(state)),input(),[p]).results.length,1);
  }finally{fs.rmSync(dir,{recursive:true,force:true});}
+});
+
+test('negative, fractional, NaN and excessive OCR batch sizes fail closed',()=>{
+ for(const v of [-1,1.5,'NaN',113,-20,'-2']){
+   assert.throws(()=>validatePageBudget(v),/INVALID_OCR_BATCH_OR_PILOT_LIMIT/);
+ }
+ assert.equal(validatePageBudget('20'),20);
+ assert.equal(validatePageBudget(0),0);
 });
