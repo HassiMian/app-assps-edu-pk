@@ -38,7 +38,11 @@ async function session(port,qaPort) {
   function call(method,params={}){
     return new Promise((ok,no)=>{const id=++serial;const timer=setTimeout(()=>{pending.delete(id);no(Error('CDP_COMMAND_TIMEOUT'))},30000);pending.set(id,{ok,no,timer,method});ws.send(JSON.stringify({id,method,params}))})
   }
-  return {call,interception,close:()=>ws.close()}
+  return {call,interception,close:async()=>{
+    ws.close()
+    // Explicitly close the finished test target: 43 PDF tabs must not accumulate.
+    try{await deadline(fetch('http://127.0.0.1:'+port+'/json/close/'+encodeURIComponent(data.id)),2500,'CDP_TARGET_CLOSE_TIMEOUT')}catch(_){}
+  }}
 }
 async function checkDocument(call){
   for(let i=0;i<80;i++){
@@ -49,6 +53,27 @@ async function checkDocument(call){
   }
   throw Error('CANONICAL_DOM_TIMEOUT')
 }
+function readManifest(file){
+  if(!file)return null
+  const stat=fs.lstatSync(file)
+  if(!stat.isFile()||stat.isSymbolicLink()||stat.size>32768||stat.size<400)throw Error('INVALID_MANIFEST_FILE')
+  const m=JSON.parse(fs.readFileSync(file,'utf8'))
+  if(m.schema!=='ASSPS_CANONICAL_WINDOWS_CASE_MANIFEST_V1'||m.expectedCount!==43||
+      !/^[0-9a-f]{64}$/.test(m.sourceSha256||'')||!Array.isArray(m.cases)||m.cases.length!==43)throw Error('INVALID_MANIFEST_SCHEMA')
+  const unique=new Set(), counts={rtl:0,ltr:0}
+  const cases=m.cases.map(x=>{
+    if(!x||!/^doc__official-first-term-2026-class-[a-z0-9-]+$/.test(x.id||'')||unique.has(x.id))throw Error('INVALID_MANIFEST_PAPER_ID')
+    unique.add(x.id)
+    if(!['rtl','ltr'].includes(x.dir))throw Error('INVALID_MANIFEST_DIRECTION')
+    counts[x.dir]++
+    const family=x.dir==='rtl'?'Jameel':'Times New Roman'
+    if(x.family!==family)throw Error('INVALID_MANIFEST_FONT')
+    return {id:x.id,dir:x.dir,family,pdfFont:x.dir==='rtl'?/Jameel#20Noori#20Nastaleeq#20Kasheeda/:/TimesNewRoman|Times#20New#20Roman|TimesNewRomanPS/}
+  })
+  if(counts.rtl!==17||counts.ltr!==26)throw Error('INVALID_MANIFEST_LANGUAGE_COUNTS')
+  return cases
+}
+const progress={verified:0,failedPaper:null}
 async function main(){
   if(process.platform!=='win32')throw Error('WINDOWS_ONLY')
   const vitePort=Number(process.env.ASSPS_PRIVATE_VITE_PORT||5681)
@@ -68,14 +93,16 @@ async function main(){
     }
     if(!port)throw Error('CDP_PORT_UNAVAILABLE')
     const result=[];let totalApiMocks=0
-    const cases=[
+    const defaultCases=[
       {id:'doc__official-first-term-2026-class-1-urdu',dir:'rtl',family:'Jameel',pdfFont:/Jameel#20Noori#20Nastaleeq#20Kasheeda/},
       {id:'doc__official-first-term-2026-class-6-urdu',dir:'rtl',family:'Jameel',pdfFont:/Jameel#20Noori#20Nastaleeq#20Kasheeda/},
       {id:'doc__official-first-term-2026-class-8-tarjuma-tul-quran',dir:'rtl',family:'Jameel',pdfFont:/Jameel#20Noori#20Nastaleeq#20Kasheeda/},
       {id:'doc__official-first-term-2026-class-1-english',dir:'ltr',family:'Times New Roman',pdfFont:/TimesNewRoman|Times#20New#20Roman|TimesNewRomanPS/},
       {id:'doc__official-first-term-2026-class-8-english',dir:'ltr',family:'Times New Roman',pdfFont:/TimesNewRoman|Times#20New#20Roman|TimesNewRomanPS/}
     ]
+    const cases=readManifest(process.env.ASSPS_CANONICAL_MANIFEST)||defaultCases
     for(const x of cases){
+      progress.failedPaper=x.id
       const s=await session(port,vitePort)
       try{
         await s.call('Page.enable');await s.call('Runtime.enable');await s.call('Fetch.enable',{patterns:[{urlPattern:'*',requestStage:'Request'}]})
@@ -97,14 +124,18 @@ async function main(){
         assert.ok(/\/FontFile2\b|\/FontFile3\b/.test(t),'PDF_FONT_NOT_EMBEDDED')
         const m=t.match(/\/MediaBox\s*\[\s*0\s+0\s+([\d.]+)\s+([\d.]+)\s*\]/)
         assert.ok(m&&Math.abs(Number(m[1])-595)<5&&Math.abs(Number(m[2])-842)<5,'PDF_NOT_A4')
+        progress.verified++
+        process.stderr.write('ASSPS_CANONICAL_WINDOWS_PDF_PROGRESS '+progress.verified+'/'+cases.length+' '+x.id+' PASS\n')
         result.push({paper:x.id,chars:dom.len,dir:dom.dir,pdfBytes:pdf.length,sha256:crypto.createHash('sha256').update(pdf).digest('hex'),fontEmbedded:true,a4:true,mockedApiRequests:s.interception.mockedApis,blockedExternalRequests:s.interception.blockedExternal})
-      }finally{totalApiMocks+=s.interception.mockedApis;s.close()}
+      }finally{totalApiMocks+=s.interception.mockedApis;await s.close()}
     }
     assert.ok(totalApiMocks>0,'TEST_API_ISOLATION_INACTIVE')
+    progress.failedPaper=null
     return result
   }finally{
     if(child&&child.pid){try{execFileSync('taskkill.exe',['/PID',String(child.pid),'/T','/F'],{timeout:8000,stdio:'ignore'})}catch(_){}}
     try{fs.rmSync(profile,{recursive:true,force:true,maxRetries:3,retryDelay:400})}catch(_){}
   }
 }
-main().then(results=>console.log(JSON.stringify({schema:'ASSPS_WINDOWS_CANONICAL_REAL_A4_V1',verdict:'WINDOWS_CANONICAL_PDFS_PASS_NOT_RELEASE',results,releaseAuthorized:false,productionChanged:false,physicalPrinterUsed:false})),e=>{console.log(JSON.stringify({schema:'ASSPS_WINDOWS_CANONICAL_REAL_A4_V1',verdict:'HOLD',errorCode:/^[A-Z0-9_]{4,110}$/.test(e.message||'')?e.message:'QA_CHECK_FAILED',releaseAuthorized:false,productionChanged:false,physicalPrinterUsed:false}));process.exitCode=2})
+if(require.main===module)main().then(results=>console.log(JSON.stringify({schema:'ASSPS_WINDOWS_CANONICAL_REAL_A4_V1',verdict:'WINDOWS_CANONICAL_PDFS_PASS_NOT_RELEASE',results,releaseAuthorized:false,productionChanged:false,physicalPrinterUsed:false})),e=>{console.log(JSON.stringify({schema:'ASSPS_WINDOWS_CANONICAL_REAL_A4_V1',verdict:'HOLD',errorCode:/^[A-Z0-9_]{4,110}$/.test(e.message||'')?e.message:'QA_CHECK_FAILED',releaseAuthorized:false,productionChanged:false,physicalPrinterUsed:false,verifiedBeforeFailure:progress.verified,failedPaper:progress.failedPaper}));process.exitCode=2})
+module.exports={readManifest}
