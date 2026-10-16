@@ -61,10 +61,72 @@ score_rollup AS (
 term_rollup AS (
   SELECT COUNT(*) first_term_rows,COUNT(DISTINCT student_id) first_term_students
   FROM public.exam_results WHERE school_id=1 AND exam_id=9
+),
+scored_students AS (
+  SELECT DISTINCT student_id FROM public.exam_results
+  WHERE school_id=1 AND exam_id=9
+),
+expected_subjects AS (
+  SELECT s.id student_id,es.subject
+  FROM scored_students p
+  JOIN public.students s ON s.id=p.student_id AND s.school_id=1
+  JOIN public.exam_subjects es ON es.school_id=1 AND es.exam_id=9
+    AND es.is_active
+    AND lower(btrim(es.class_name))=lower(btrim(s.class))
+    AND lower(btrim(es.section))=lower(btrim(s.section))
+),
+missing_subjects AS (
+  SELECT e.student_id FROM expected_subjects e
+  LEFT JOIN public.exam_results r ON r.school_id=1 AND r.exam_id=9
+    AND r.student_id=e.student_id
+    AND lower(btrim(r.subject))=lower(btrim(e.subject))
+  WHERE r.id IS NULL
+),
+unmapped_results AS (
+  SELECT r.id FROM public.exam_results r
+  JOIN public.students s ON s.school_id=r.school_id AND s.id=r.student_id
+  LEFT JOIN public.exam_subjects es ON es.school_id=1 AND es.exam_id=9
+    AND es.is_active AND lower(btrim(es.class_name))=lower(btrim(s.class))
+    AND lower(btrim(es.section))=lower(btrim(s.section))
+    AND lower(btrim(es.subject))=lower(btrim(r.subject))
+  WHERE r.school_id=1 AND r.exam_id=9 AND es.id IS NULL
+),
+duplicate_scores AS (
+  SELECT r.student_id,lower(btrim(r.subject))
+  FROM public.exam_results r WHERE r.school_id=1 AND r.exam_id=9
+  GROUP BY r.student_id,lower(btrim(r.subject)) HAVING count(*)>1
+),
+subject_percentage_gaps AS (
+  SELECT r.id FROM public.exam_results r
+  WHERE r.school_id=1 AND r.exam_id=9 AND r.total_marks>0
+    AND NOT EXISTS (
+      SELECT 1 FROM public.grade_settings g WHERE g.school_id=1
+        AND floor(r.marks_obtained*100.0/r.total_marks)
+           BETWEEN g.min_percentage AND g.max_percentage)
+),
+student_totals AS (
+  SELECT r.student_id,sum(r.marks_obtained) AS marks,
+         sum(r.total_marks) AS total
+  FROM public.exam_results r WHERE r.school_id=1 AND r.exam_id=9
+  GROUP BY r.student_id
+),
+student_percentage_gaps AS (
+  SELECT t.student_id FROM student_totals t
+  WHERE t.total>0 AND NOT EXISTS (
+      SELECT 1 FROM public.grade_settings g WHERE g.school_id=1
+        AND floor(t.marks*100.0/t.total)
+           BETWEEN g.min_percentage AND g.max_percentage)
 )
 SELECT json_build_object(
  'scores',(SELECT row_to_json(score_rollup) FROM score_rollup),
  'firstTerm',(SELECT row_to_json(term_rollup) FROM term_rollup),
+ 'firstTermCompleteness',(SELECT json_build_object(
+     'missingEntries',(SELECT count(*) FROM missing_subjects),
+     'affectedStudents',(SELECT count(DISTINCT student_id) FROM missing_subjects),
+     'unmappedRecordedSubjects',(SELECT count(*) FROM unmapped_results),
+     'duplicateStudentSubjects',(SELECT count(*) FROM duplicate_scores),
+     'subjectGradeBandGaps',(SELECT count(*) FROM subject_percentage_gaps),
+     'studentGradeBandGaps',(SELECT count(*) FROM student_percentage_gaps))),
  'subjectEvidence',(SELECT row_to_json(subject_rollup) FROM subject_rollup),
  'formalReviewEvents',(SELECT COUNT(*) FROM public.school_academic_approval_events
    WHERE school_id=1 AND exam_id=9)
@@ -121,6 +183,11 @@ def evaluate(health:dict,previous:dict|None) -> tuple[str,list[str]]:
         issues.append("INVALID_SCORED_MARKS_DETECTED")
     if metrics["subjectEvidence"]["inconsistent_configurations"]>0:
         issues.append("SUBJECT_MAXIMUM_CONFLICT_DETECTED")
+    diagnostics=metrics.get("firstTermCompleteness",{})
+    if diagnostics.get("duplicateStudentSubjects",0)>0:
+        issues.append("DUPLICATE_STUDENT_SUBJECT_RESULT")
+    if diagnostics.get("subjectGradeBandGaps",0)>0 or diagnostics.get("studentGradeBandGaps",0)>0:
+        issues.append("GRADE_BAND_COVERAGE_REGRESSION")
     if previous:
         old=previous.get("metrics",{}).get("scores",{})
         if metrics["scores"]["total_score_rows"]<old.get("total_score_rows",0):
@@ -177,6 +244,8 @@ def main() -> int:
           "firstTerm":{
             "first_term_rows":int(raw["firstTerm"]["first_term_rows"]),
             "first_term_students":int(raw["firstTerm"]["first_term_students"])},
+          "firstTermCompleteness":{
+            k:int(value) for k,value in raw["firstTermCompleteness"].items()},
           "subjectEvidence":{
             k:int(value) for k,value in raw["subjectEvidence"].items()},
           "formalReviewEvents":int(raw["formalReviewEvents"])
