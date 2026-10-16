@@ -1,0 +1,21 @@
+{
+  "actual_anonymous_http_passed": 5,
+  "actual_synthetic_chromium_passed": 14,
+  "artifacts": {
+    ".next/BUILD_ID": "0197638afdd8973e6ddb142a33eacbde5dd35da2d24bd92eb6b734e93e295ca3",
+    ".next/required-server-files.json": "a71f8079c697e7e4e23151b23dde1fbcfa21848740e634536120a3758933ecb7",
+    ".next/server/app/api/auth/me/route.js": "bde3647ea50a22e7eca3fa3d616e3a16c88deac4bb0a40a8c3ed44d4e459c33a",
+    ".next/server/app/dashboard/page.js": "aa7c608e4f00079239141aac6ae9b7a7efb38955fc1aa35bf9d13662ea668765",
+    ".next/server/app/login/page.js": "48e307297465c0652e1872af54b24a6adee8449db87500792840b8b9ff257c8a",
+    "eslint.config.mjs": "520ddbd1a0d347a8e3d12e2fce14c4a2ca8b700cb87cf93be3c65efb449b8b83",
+    "src/generated/buildProvenance.ts": "955cb2d5bff775d05aca44a39d209720c9f6293761730c85887cbd77af3a7c46"
+  },
+  "build_id": "EvBJH9KRqqtM5ldAhJKtT",
+  "independent_security_certified": false,
+  "optimized_build_exit_zero_confirmed": false,
+  "production_changed": false,
+  "production_release_authorized": false,
+  "schema": "assps-connect-isolated-build-evidence-v1",
+  "scope": "PRIVATE_NEXT_HTTPS_BROWSER_ONLY",
+  "source_commit": "9fcca4320bdbeb834f6494d1af82d82f1d9b818f"
+}
