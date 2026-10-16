@@ -13,6 +13,10 @@ test('Late Diary Save must not confirm currently unsaved selection',{timeout:115
  t.after(async()=>{await browser.close();await vite.close()})
  const ctx=await browser.newContext({viewport:{width:1480,height:970},timezoneId:'Asia/Karachi'})
  await ctx.addInitScript(()=>{localStorage.setItem('al_siddique_token','mock-jwt-token');localStorage.setItem('al_siddique_login_at',String(Date.now()));localStorage.setItem('al_siddique_user',JSON.stringify({id:999,role:'admin',school_id:1,tenant_id:'assps'}))})
+ // The canonical workspace now fetches the question bank during bootstrap.
+ // Isolate this synthetic race test from real SaaS/network auth: an unmocked
+ // 401 used to trigger global logout and conceal the actual late-save assertion.
+ await ctx.route('**/api/question-bank**',route=>route.fulfill({status:200,contentType:'application/json',body:'{"success":true,"data":[]}'}))
  const calls=[]
  let releaseSave
  const deferredSave=new Promise(resolve=>{releaseSave=resolve})

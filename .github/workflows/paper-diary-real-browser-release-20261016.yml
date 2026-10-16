@@ -1,0 +1,35 @@
+name: ASSPS Daily Diary Safe Browser Release
+on:
+  push:
+    branches:
+      - 'fix/paper-diary-save-race-browser-*'
+    paths:
+      - 'ops/paper-studio/run_diary_release_browser_20261016.cjs'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/dailyDiarySaveStatusRaceBrowser.test.js'
+      - '.github/workflows/paper-diary-real-browser-release-20261016.yml'
+  pull_request:
+    paths:
+      - 'ops/paper-studio/run_diary_release_browser_20261016.cjs'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/dailyDiarySaveStatusRaceBrowser.test.js'
+      - '.github/workflows/paper-diary-real-browser-release-20261016.yml'
+jobs:
+  diary-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: al-siddique-frontend/package-lock.json
+      - name: Install pinned frontend dependencies
+        run: npm ci --no-audit --no-fund
+        working-directory: al-siddique-frontend
+      - name: Install isolated Chromium
+        run: npx playwright install chromium --with-deps
+        working-directory: al-siddique-frontend
+      - name: Chromium Diary Save-Reopen-Print and race acceptance
+        run: node ops/paper-studio/run_diary_release_browser_20261016.cjs
