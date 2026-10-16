@@ -44,3 +44,30 @@ test('server denies unsafe or unauthorized optional heading fields',()=>{
  assert.ok(validatePaperStudioInlineRichText({documentOrigin:'OFFICIAL',sections:[{editorInlineRichText:{headingSerial:'Q1'}}]}))
  assert.ok(validatePaperStudioInlineRichText({documentOrigin:'USER_AUTHORED',sections:[null]}))
 })
+
+test('backend and editor have deterministic Unicode/attribute/CSS boundary parity', async () => {
+ const {isSafeEditorInlineHtml} = await import(editor)
+ const bodies = ['Q1.', 'سوال نمبر ایک', 'ا تا ف', '&lt;user-supplied&gt;', 'x'.repeat(128)]
+ const openers = [
+  '<b>', '<strong>', '<span dir="rtl">',
+  '<span style="font-family:\'Jameel Noori Nastaleeq\';font-size:18px">',
+  '<span style="color:#112233;background-color:#ffffff">',
+  '<span dir="unknown">', '<span onclick="oops()">',
+  '<span style="background-image:url(bad)">', '<svg>', '<span data-meta="x">',
+ ]
+ const endings = ['</b>', '</strong>', '</span>', '</span>', '</span>', '</span>', '</span>', '</span>', '</svg>', '</span>']
+ let total = 0
+ for (const body of bodies) for (let i = 0; i < openers.length; i++) {
+  const html = openers[i] + body + endings[i]
+  assert.equal(safeInlineHtml(html), isSafeEditorInlineHtml(html),
+    `backend/frontend mismatch for variant ${i} ${body.slice(0, 12)}`)
+  total++
+ }
+ for (const html of ['Q1 <b', '<b>unterminated<', '<!-- bypass -->',
+  '<span style="font-size:1px; -moz-binding:url(x)">Q</span>',
+  '<span title="foo">Q</span>', '<b style="color:red">سوال</b>']) {
+  assert.equal(safeInlineHtml(html),isSafeEditorInlineHtml(html))
+  total++
+ }
+ assert.equal(total, 56)
+})

@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - 'fix/paper-server-inline-richtext-validation-*'
+      - 'integration/core401-paper-docx-richheading-secure-20261016'
     paths:
       - 'al-siddique-backend/src/routes/assessmentStudioRoutes.js'
       - 'al-siddique-backend/src/services/paperStudioInlineRichTextGuard.js'

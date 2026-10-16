@@ -508,6 +508,39 @@ test('two-school real-auth Paper Save/Reopen/Print, Diary persistence and Lesson
   assert.equal(Number(afterUnsafe.rows[0].current_revision), Number(storedHeadingPaper.current_revision),
     'Backend rejected unsafe markup but changed the stored revision')
   console.log('PHASE3_REAL_AUTH_SERVER_UNSAFE_HEADING_REJECTED_NO_MUTATION_PASS')
+  // Multiple direct authenticated bypass patterns must all fail before any
+  // database INSERT/UPDATE; browser editor controls are not a security gate.
+  const maliciousHeadingCases = [
+    { headingInstruction: '<span onclick="bad()">Q1</span>' },
+    { headingSerial: '<span style="background-image:url(evil)">Q1</span>' },
+    { headingSerial: '<b>Q1</b>', unauthorizedField: 'metadata-smuggle' },
+    { headingSerial: 'x'.repeat(8193) },
+  ]
+  const deniedCases = await page.evaluate(async input => {
+    const token=localStorage.getItem('al_siddique_token')
+    const endpoint=`/api/assessment-studio/papers/${encodeURIComponent(input.paperId)}/revisions`
+    const headers={'Content-Type':'application/json',Authorization:`Bearer ${token}`}
+    const statuses=[]
+    for(const fields of input.maliciousHeadingCases){
+      const modified=JSON.parse(JSON.stringify(input.document))
+      modified.sections[0].editorInlineRichText=fields
+      const response=await fetch(endpoint,{
+        method:'POST',headers,
+        body:JSON.stringify({expectedRevision:input.revision,title:input.title,document:modified}),
+      })
+      statuses.push(response.status)
+    }
+    return statuses
+  }, { paperId:saved.serverPaperId,revision:storedHeadingPaper.current_revision,
+    title:paperTitle,document:storedHeadingPaper.document_json,maliciousHeadingCases })
+  assert.deepEqual(deniedCases,[400,400,400,400],
+    'Direct authenticated client bypassed canonical heading style/attribute/size constraints')
+  const afterDeniedCases = await pool.query(
+    'SELECT current_revision FROM assessment_papers WHERE school_id=$1 AND public_id=$2',
+    [schoolId,saved.serverPaperId])
+  assert.equal(Number(afterDeniedCases.rows[0].current_revision),Number(storedHeadingPaper.current_revision),
+    'Denied heading payload unexpectedly modified the canonical revision')
+  console.log('PHASE3_REAL_AUTH_SERVER_HEADING_MULTI_VECTOR_NO_MUTATION_PASS')
 
   await context.close()
 
@@ -595,6 +628,37 @@ test('two-school real-auth Paper Save/Reopen/Print, Diary persistence and Lesson
   assert.equal(Number(unchangedDiary.rows[0]?.school_id), Number(schoolId))
   assert.equal(unchangedDiary.rows[0]?.footer_text, 'Verified revised synthetic diary', 'School2 overwrite altered stored School1 diary')
   console.log('PHASE5_REAL_DIARY_SCHOOL2_LIST_READ_WRITE_DENIED_PASS')
+  // Full canonical Paper Workspace isolation, beyond Diary/Lesson tenancy:
+  // School2 teacher must never fetch/list/revise School1 paper by public ID.
+  const peerPaperAccess=await peerPage.evaluate(async ({paperId,revision,document}) => {
+    const token=localStorage.getItem('al_siddique_token')
+    const headers={Authorization:`Bearer ${token}`}
+    const endpoint=`/api/assessment-studio/papers/${encodeURIComponent(paperId)}`
+    const list=await fetch('/api/assessment-studio/papers',{headers})
+    const get=await fetch(endpoint,{headers})
+    // Cross-school revision cannot update School1. A positive expected
+    // revision must not create a School2 paper either.
+    const post=await fetch(endpoint+'/revisions',{
+      method:'POST',headers:{...headers,'Content-Type':'application/json'},
+      body:JSON.stringify({expectedRevision:revision,title:'CROSS-SCHOOL-UNAUTHORIZED',document}),
+    })
+    return {list:list.status,listBody:await list.json(),get:get.status,post:post.status}
+  },{paperId:saved.serverPaperId,revision:Number(storedHeadingPaper.current_revision),
+    document:storedHeadingPaper.document_json})
+  assert.equal(peerPaperAccess.get,404,'School2 read School1 official Saved Paper')
+  assert.equal(peerPaperAccess.list,200)
+  assert.ok(!peerPaperAccess.listBody.data?.some(item=>item.public_id===saved.serverPaperId),
+    'School2 Saved Paper library leaked School1 paper')
+  assert.equal(peerPaperAccess.post,409,
+    'School2 revised or duplicated School1 Paper through a forged revision')
+  const ownerRevisionAfterPeer=await pool.query(
+    'SELECT p.school_id,p.current_revision,(SELECT COUNT(*) FROM assessment_paper_revisions r WHERE r.paper_id=p.id) AS revision_count FROM assessment_papers p WHERE p.public_id=$1 ORDER BY p.school_id',
+    [saved.serverPaperId])
+  assert.equal(ownerRevisionAfterPeer.rowCount,1,'Cross-school revision created a duplicate paper')
+  assert.equal(Number(ownerRevisionAfterPeer.rows[0].school_id),Number(schoolId))
+  assert.equal(Number(ownerRevisionAfterPeer.rows[0].current_revision),Number(storedHeadingPaper.current_revision),
+    'Cross-school Paper revision changed the owner revision')
+  console.log('PHASE8_REAL_SCHOOL2_PAPER_LIST_READ_REVISION_DENIED_PASS')
   const peerLessons = await peerPage.evaluate(async id => {
     const token = localStorage.getItem('al_siddique_token')
     const headers = { Authorization: `Bearer ${token}` }

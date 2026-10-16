@@ -5,6 +5,7 @@ on:
       - 'fix/paper-docx-jameel-rtl-parity-20261016'
       - 'integration/core-paper-docx-jameel-qa-20261016'
       - 'integration/core401-paper-docx-jameel-20261016'
+      - 'integration/core401-paper-docx-richheading-secure-20261016'
   pull_request:
     paths:
       - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/export/canonicalDocxExport.js'
