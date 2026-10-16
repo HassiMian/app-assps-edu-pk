@@ -47,3 +47,13 @@ This change preserves all research originals, 2,411 School 1 provisional IX/X
 questions, student marks, real zeros, currently accepted printer and school
 institutional acceptances, and the separate authentic independent academic
 publication hold. It changes **no** live database records or Nginx deployments.
+
+## Actual post-fix VPS acceptance
+
+- Source SHA fix: `47dc5196b85423547ed080a5960b5466f5ce431f` pushed to the protected Academic Master source branch.
+- Installed source-controlled OCR service helper SHA agrees byte-for-byte with its repository revision; off-hours timer remained **enabled/active**.
+- The old four-page/24-claim private checkpoint was SHA256-preserved in `ocr-progress-legacy-20261016-89248ff7e50f.json`, private mode `0600`, source directory `0700`. Historical original SHA256: `89248ff7e50fb884c79fb91e2a7b3dd99aa7ccbbc6028c276a497c7330c4feff`. This legacy evidence was **not** silently repurposed as current-revision-proof.
+- Two separate new resource-restricted, 20% CPU VPS systemd jobs executed actual PDF rendering, Tesseract and safe progress persistence. Both exited **Result=success / ExecMainStatus=0**. New root-private current fingerprint accumulated **4 unique scanned PDF pages and 24 claimed questions**, with **zero automatic approvals or publications**.
+- A separate read-only canonical-claim check confirmed timestamp and parent-audit-only changes retain the fingerprint and a real page-mapping change invalidates it.
+- The six-phase machine receipt was refreshed at `2026-10-16T05:07:13.678506+00:00`: **4/6 technical-readiness phases PASS**, `ocrResumablePagesCheckpointed=4`, `ocrResumablePageClaimsCheckpointed=24`, `academicVerifiedPublicationReady=false`, and `academicPublicationDecision=BLOCK_UNVERIFIED_QUESTION_PUBLICATION`.
+- No student marks or saved papers changed. Full English-source OCR remains bounded at 20 pages per unattended execution, twice nightly (00:45 and 05:15 Asia/Karachi). The current 4/112 scanned-page status is a **partial checkpoint, not a completed full OCR run or a verified textbook adoption**.
