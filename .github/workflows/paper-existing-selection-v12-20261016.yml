@@ -6,11 +6,13 @@ on:
     paths:
       - 'ops/paper-studio/run_existing_selection_v12_20261016.cjs'
       - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/paperWorkspaceSelectionRegressionV12.test.js'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/paperWorkspaceUrduVisualV13.test.js'
       - '.github/workflows/paper-existing-selection-v12-20261016.yml'
   pull_request:
     paths:
       - 'ops/paper-studio/run_existing_selection_v12_20261016.cjs'
       - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/paperWorkspaceSelectionRegressionV12.test.js'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/paperWorkspaceUrduVisualV13.test.js'
       - '.github/workflows/paper-existing-selection-v12-20261016.yml'
 jobs:
   isolated-selection:
