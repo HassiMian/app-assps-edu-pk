@@ -9,6 +9,7 @@ const INLINE_SIZES = [8,9,10,11,12,13,14,16,18,20,22,24,28,32]
 const selectionCache = new Map()
 const liveFieldHandles = new WeakMap()
 let lastActualSelection = null
+let lastCompositeSelection = null
 const cacheKey = (sectionId='',fieldKey='') => String(sectionId)+'::'+String(fieldKey)
 const ALLOWED_TAGS = new Set(['B','STRONG','I','EM','U','S','SPAN','SUP','SUB','BR'])
 const ALLOWED_STYLE = new Set(['font-family','font-size','color','background-color','font-weight','font-style','text-decoration','text-decoration-line','vertical-align','display','transform'])
@@ -77,7 +78,7 @@ function safeStyleValue(name,value='') {
  if(name==='transform') return /^skewX\(-8deg\)$/i.test(clean)?'skewX(-8deg)':''
  return ''
 }
-function sanitizeInlineHtml(html='') {
+export function sanitizeInlineHtml(html='') {
  if(typeof document==='undefined') return escapeHtml(String(html).replace(/<[^>]*>/g,''))
  const template=document.createElement('template'); template.innerHTML=String(html)
  const cleanNode=node=>{
@@ -109,7 +110,7 @@ function sanitizeInlineHtml(html='') {
  cleanNode(template.content)
  return template.innerHTML
 }
-function htmlToPlainText(html='') {
+export function htmlToPlainText(html='') {
  if(typeof document==='undefined') return String(html).replace(/<br\s*\/?\s*>/gi,'\n').replace(/<[^>]*>/g,'')
  const div=document.createElement('div'); div.innerHTML=sanitizeInlineHtml(html)
  return (div.innerText||div.textContent||'').replace(/\u00a0/g,' ').trim()
@@ -144,7 +145,7 @@ function sanitizeLiveEditableElement(el,safe){ if(el.innerHTML!==safe) el.innerH
 
 export function InlineEditable(props) {
  const { text='', richHtml='', editMode=false, direction='ltr', className='', style,
-  fieldKey='', sectionId='', onCommit, onActivate, as='span', singleLine=true, ariaLabel='' }=props
+  fieldKey='', sectionId='', onCommit, onActivate, as='span', singleLine=true, ariaLabel='', inheritEditable=false }=props
  const ref=useRef(null); const focused=useRef(false); const savedSelection=useRef(null); const Tag=as
  const html=normalizeHeadingPunctuation(richHtml?sanitizeInlineHtml(richHtml):textHtml(text),fieldKey)
  const lastCommittedHtml=useRef(html)
@@ -213,9 +214,10 @@ export function InlineEditable(props) {
   className={('paper-inline-editable '+className).trim()}
   data-paper-inline-editable={editMode?'true':undefined}
   data-edit-field={fieldKey||undefined} data-section-id={sectionId||undefined}
-  contentEditable={editMode} suppressContentEditableWarning dir={direction}
+  contentEditable={editMode?(inheritEditable?'inherit':true):false} suppressContentEditableWarning dir={direction}
   aria-label={ariaLabel||undefined} spellCheck={false}
   style={{...style,outline:editMode?'none':undefined,cursor:editMode?'text':undefined}}
+  onMouseDown={inheritEditable?()=>{lastCompositeSelection=null;activate()}:undefined}
   onFocus={()=>{
    focused.current=true
    if(lastActualSelection?.element!==ref.current) lastActualSelection=null
@@ -243,19 +245,54 @@ function ownerOfSelectionNode(node) {
  const el=node?.nodeType===Node.ELEMENT_NODE?node:node?.parentElement
  return el?.closest?.('[data-paper-inline-editable]')||null
 }
+function resolveCompositeHeadingRange(range,start,end) {
+ if(!start||!end||start===end||
+    start.dataset.editField!=='question-number'||end.dataset.editField!=='question-heading'||
+    start.dataset.sectionId!==end.dataset.sectionId)return null
+ const parent=start.closest('[data-question-heading-composite="true"]')
+ if(!parent||parent!==end.closest('[data-question-heading-composite="true"]')||
+    parent.closest('[data-marks-badge]')||!start.lastChild||!end.firstChild)return null
+ const firstRange=document.createRange()
+ firstRange.setStart(range.startContainer,range.startOffset)
+ firstRange.setEndAfter(start.lastChild)
+ const lastRange=document.createRange()
+ lastRange.setStartBefore(end.firstChild)
+ lastRange.setEnd(range.endContainer,range.endOffset)
+ const first=selectionOffsets(start,firstRange),last=selectionOffsets(end,lastRange)
+ const firstHandle=liveFieldHandles.get(start)?.(),lastHandle=liveFieldHandles.get(end)?.()
+ if(!firstHandle||!lastHandle||!first||!last||first.end<=first.start||last.end<=last.start)return null
+ const target={compound:[{el:start,handle:firstHandle,snapshot:first},{el:end,handle:lastHandle,snapshot:last}],
+  parent,el:start,handle:firstHandle,snapshot:first,range:range.cloneRange()}
+ lastCompositeSelection={target,savedAt:Date.now()}
+ return target
+}
 function resolveActionTarget() {
  const selection=window.getSelection?.()
  if(selection?.rangeCount&&!selection.isCollapsed){
   const range=selection.getRangeAt(0)
   const start=ownerOfSelectionNode(range.startContainer)
   const end=ownerOfSelectionNode(range.endContainer)
-  if(!start||start!==end||!start.contains(range.commonAncestorContainer)) return null
+  const cached=lastCompositeSelection
+  if(cached&&Date.now()-cached.savedAt<30000&&cached.target.parent.isConnected&&
+     document.activeElement===cached.target.parent&&
+     cached.target.parent.contains(range.commonAncestorContainer)&&
+     cached.target.compound.every(part=>part.el.isConnected))return cached.target
+  if(start!==end)return resolveCompositeHeadingRange(range,start,end)
+  const old=lastCompositeSelection
+  if(old&&Date.now()-old.savedAt<30000&&old.target.parent.isConnected&&
+     start?.closest('[data-question-heading-composite]')===old.target.parent&&
+     old.target.compound.every(part=>part.el.isConnected))return old.target
+  if(!start||!start.contains(range.commonAncestorContainer)) return null
   const handle=liveFieldHandles.get(start)?.()
   const snapshot=selectionOffsets(start,range)
   if(!handle||!snapshot||snapshot.end<=snapshot.start) return null
   lastActualSelection={element:start,sectionId:String(handle.sectionId),fieldKey:String(handle.fieldKey),snapshot,savedAt:Date.now()}
   return {el:start,handle,range:range.cloneRange(),snapshot}
  }
+ const old=lastCompositeSelection
+ if(old&&Date.now()-old.savedAt<30000&&old.target.parent.isConnected&&
+    old.target.compound.every(part=>part.el.isConnected)&&
+    (old.target.parent===document.activeElement||old.target.parent.contains(document.activeElement)))return old.target
  const previous=lastActualSelection
  if(!previous||Date.now()-previous.savedAt>30000||!document.body.contains(previous.element)) return null
  const focusedField=ownerOfSelectionNode(document.activeElement)
@@ -267,6 +304,7 @@ function resolveActionTarget() {
 }
 function exec(active,command,value=null,requireSelection=true) {
  if((command==='undo'||command==='redo')&&replaySemanticHistory(active,command))return
+ if(resolveActionTarget()?.compound)return
  const target=resolveActionTarget()
  const el=target?.el||(!requireSelection?findActiveElement(active):null)
  const handle=target?.handle||active
@@ -369,11 +407,11 @@ function renderInlineRuns(el,runs) {
  }
  el.replaceChildren(fragment)
 }
-function splitAndToggleMark(el,snapshot,mark) {
+function splitAndToggleMark(el,snapshot,mark,forced=null) {
  const runs=readInlineRuns(el)
  if(runs.some(run=>run.br))return null
  const states=selectedMarkStates(el,snapshot)
- const enable=!states[mark]
+ const enable=forced===null?!states[mark]:Boolean(forced)
  const next=[];let offset=0;let found=false
  for(const run of runs){
   const end=offset+run.text.length
@@ -400,10 +438,59 @@ function splitAndToggleMark(el,snapshot,mark) {
  renderInlineRuns(el,merged)
  return enable
 }
+const compositeHistory=new WeakMap()
+function targetMarkStates(target){
+ if(!target)return {bold:false,italic:false,underline:false,strikeThrough:false}
+ if(!target.compound)return selectedMarkStates(target.el,target.snapshot)
+ const parts=target.compound.map(part=>selectedMarkStates(part.el,part.snapshot))
+ return Object.fromEntries(MARK_NAMES.map(mark=>[mark,parts.every(states=>states[mark])]))
+}
+function restoreCompoundSelection(target){
+ if(!target?.compound||!target.parent?.isConnected)return
+ const a=target.compound[0],b=target.compound[1]
+ const start=rangeFromOffsets(a.el,a.snapshot),end=rangeFromOffsets(b.el,b.snapshot)
+ if(!start||!end)return
+ const range=document.createRange()
+ range.setStart(start.startContainer,start.startOffset)
+ range.setEnd(end.endContainer,end.endOffset)
+ const selection=window.getSelection?.()
+ if(selection){selection.removeAllRanges();selection.addRange(range)}
+}
+function snapshotCompositeHistory(target){
+ const history=compositeHistory.get(target.parent)||{past:[],future:[]}
+ history.past.push(target.compound.map(part=>part.el.innerHTML))
+ if(history.past.length>40)history.past.shift()
+ history.future=[]
+ compositeHistory.set(target.parent,history)
+}
+function replayCompositeHistory(target,direction){
+ const history=compositeHistory.get(target.parent)
+ if(!history)return false
+ const from=direction==='undo'?history.past:history.future
+ const to=direction==='undo'?history.future:history.past
+ if(!from.length)return false
+ const prior=target.compound.map(part=>part.el.innerHTML)
+ const next=from.pop();to.push(prior)
+ target.compound.forEach((part,i)=>{part.el.innerHTML=next[i]})
+ target.parent.__paperCommitComposite?.()
+ restoreCompoundSelection(target)
+ return true
+}
 function toggleSemanticMark(active,command) {
  if(!MARK_NAMES.includes(command))return null
  const target=resolveActionTarget()
  if(!target)return null
+ if(target.compound){
+  const enabled=!targetMarkStates(target)[command]
+  snapshotCompositeHistory(target)
+  for(const part of target.compound){
+   if(splitAndToggleMark(part.el,part.snapshot,command,enabled)===null)return null
+  }
+  target.parent.__paperCommitComposite?.()
+  restoreCompoundSelection(target)
+  requestAnimationFrame(()=>restoreCompoundSelection(target))
+  return enabled
+ }
  const {el,handle,snapshot}=target
  let result=splitAndToggleMark(el,snapshot,command)
  if(result===null){
@@ -435,6 +522,7 @@ function toggleSemanticMark(active,command) {
 function replaySemanticHistory(active,direction) {
  const target=resolveActionTarget()
  if(!target)return false
+ if(target.compound)return replayCompositeHistory(target,direction)
  const {el,handle,snapshot}=target
  const history=semanticHistory.get(el)
  if(!history)return false
@@ -457,6 +545,18 @@ function replaySemanticHistory(active,direction) {
 function applyRangeStyle(active,styles={}) {
  const target=resolveActionTarget()
  if(!target)return
+ if(target.compound){
+  snapshotCompositeHistory(target)
+  for(const part of target.compound){
+   const bounded=rangeFromOffsets(part.el,part.snapshot)
+   if(!bounded)return
+   const span=document.createElement('span');Object.assign(span.style,styles)
+   try{bounded.surroundContents(span)}catch{const frag=bounded.extractContents();span.appendChild(frag);bounded.insertNode(span)}
+  }
+  target.parent.__paperCommitComposite?.()
+  restoreCompoundSelection(target)
+  return
+ }
  const {el,handle,range,snapshot}=target
  const selection=window.getSelection?.()
  if(!selection)return
@@ -481,7 +581,7 @@ export function PaperSelectionToolbar({editMode=false,active=null}) {
   const next=toggleSemanticMark(active,command)
   if(next!==null){
    const target=resolveActionTarget()
-   setMarks(target?selectedMarkStates(target.el,target.snapshot):previous=>({...previous,[command]:next}))
+   setMarks(target?targetMarkStates(target):previous=>({...previous,[command]:next}))
   }
  }
  useEffect(()=>{
@@ -503,7 +603,7 @@ export function PaperSelectionToolbar({editMode=false,active=null}) {
      const section=String(detail.sectionId||'')
      const field=String(detail.fieldKey||'')
      if(section===String(target.handle.sectionId)&&field===String(target.handle.fieldKey)){
-      setMarks(selectedMarkStates(target.el,target.snapshot))
+      setMarks(targetMarkStates(target))
      }
     }
    }

@@ -173,6 +173,17 @@ const mathAssetsPaper = {
  ],
 }
 
+const englishCrossFieldPaper = {
+ ...paper,
+ id:'workspace-english-crossfield-only',
+ name:'Workspace English Cross-Field Acceptance',
+ config:{...paper.config,subject:'English',subjectName:'English',language:'english',paperCode:'TEST-ENG-XFIELD'},
+ official_section:paper.official_section.map((item,index)=>{
+  const heading='Q'+(index+1)+'. '+(index===1?'Study the sentence.':'Read and respond.')+' (5)'
+  return {...item,medium:'english',heading,text:heading,textUrdu:''}
+ })
+}
+
 export function ThemeFixture() {
  const { theme, setTheme, toggleTheme } = useTheme()
  const { savedPapers } = usePaperStore()
@@ -182,7 +193,7 @@ export function ThemeFixture() {
  const reopenPaper = savedPapers.find(p => p.userAuthored && (reopenId ? String(p.id)===reopenId : p.name===reopenName)) || null
  const officialId = params.get('officialId') || ''
  const officialPaper = officialId ? officialV13.papers.find(item => item.id === officialId) || null : null
- const fixture = params.has('new') ? null : params.has('reopen') ? reopenPaper : params.has('nestedScoring') ? nestedScoringPaper : params.has('mathAssets') ? mathAssetsPaper : officialPaper || (params.has('recovery8') ? classEightUrduFixture : paper)
+ const fixture = params.has('crossEnglish') ? englishCrossFieldPaper : params.has('new') ? null : params.has('reopen') ? reopenPaper : params.has('nestedScoring') ? nestedScoringPaper : params.has('mathAssets') ? mathAssetsPaper : officialPaper || (params.has('recovery8') ? classEightUrduFixture : paper)
  React.useEffect(() => { setTheme('light') }, [setTheme])
  return <>
   <button hidden id="fixture-global-theme-toggle" data-current-theme={theme} onClick={toggleTheme}>Portal theme toggle</button>
