@@ -80,6 +80,11 @@ on:
       - "ops/tests/grade910-ocr-pdfjs-local-assets-20261016.test.mjs"
       - "docs/question-bank/ASSPS_GRADE910_OCR_JPX_DECODER_PROVENANCE_GUARD_20261016.md"
       - "ops/qbank/assps-grade910-ocr-resume-guard-20261016.mjs"
+      - "ops/qbank/prepare-grade910-ocr-legacy-recheck-20261016.py"
+      - "ops/qbank/verify-grade910-ocr-legacy-full-comparison-20261016.py"
+      - "ops/tests/test_grade910_ocr_legacy_recheck_immutability_20261016.py"
+      - "ops/tests/test_grade910_ocr_112_final_source_comparison_20261016.py"
+      - "docs/question-bank/ASSPS_GRADE910_62_LEGACY_OCR_RECHECK_COMPLETE_20261016.md"
       - "ops/tests/grade910-ocr-resume-guard-20261016.test.mjs"
       - "ops/tests/grade910-scanned-source-ocr-fallback-20261016.test.mjs"
       - "ops/release/assps-grade910-scanned-ocr-fallback.*"
@@ -174,6 +179,11 @@ on:
       - "ops/tests/grade910-ocr-pdfjs-local-assets-20261016.test.mjs"
       - "docs/question-bank/ASSPS_GRADE910_OCR_JPX_DECODER_PROVENANCE_GUARD_20261016.md"
       - "ops/qbank/assps-grade910-ocr-resume-guard-20261016.mjs"
+      - "ops/qbank/prepare-grade910-ocr-legacy-recheck-20261016.py"
+      - "ops/qbank/verify-grade910-ocr-legacy-full-comparison-20261016.py"
+      - "ops/tests/test_grade910_ocr_legacy_recheck_immutability_20261016.py"
+      - "ops/tests/test_grade910_ocr_112_final_source_comparison_20261016.py"
+      - "docs/question-bank/ASSPS_GRADE910_62_LEGACY_OCR_RECHECK_COMPLETE_20261016.md"
       - "ops/tests/grade910-ocr-resume-guard-20261016.test.mjs"
       - "ops/tests/grade910-scanned-source-ocr-fallback-20261016.test.mjs"
       - "ops/release/assps-grade910-scanned-ocr-fallback.*"
@@ -203,6 +213,11 @@ jobs:
         run: node --test ops/tests/grade910-pdf-question-text-evidence-20261016.test.mjs
       - name: Validate private resumable OCR checkpoints and fail-closed provenance
         run: node --test ops/tests/grade910-ocr-resume-guard-20261016.test.mjs
+      - name: Fail closed on 62 legacy OCR rescans while preserving 50 reliable old pages
+        run: |
+          python3 -m unittest discover -s ops/tests -p test_grade910_ocr_legacy_recheck_immutability_20261016.py -v
+          python3 -m unittest discover -s ops/tests -p test_grade910_ocr_112_final_source_comparison_20261016.py -v
+          python3 -m py_compile ops/qbank/prepare-grade910-ocr-legacy-recheck-20261016.py ops/qbank/verify-grade910-ocr-legacy-full-comparison-20261016.py
       - name: Validate last-resort English OCR fallback never claims faculty approvals
         run: node --test ops/tests/grade910-scanned-source-ocr-fallback-20261016.test.mjs
       - name: Validate read-only MCQ answer text correspondence without academic self-approval
