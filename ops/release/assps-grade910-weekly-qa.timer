@@ -1,0 +1,12 @@
+[Unit]
+Description=ASSPS automatic weekly textbook-source QA Sunday 2:30 AM PKT
+
+[Timer]
+OnCalendar=Sun *-*-* 02:30:00 Asia/Karachi
+RandomizedDelaySec=2m
+AccuracySec=1m
+Persistent=true
+Unit=assps-grade910-weekly-qa.service
+
+[Install]
+WantedBy=timers.target

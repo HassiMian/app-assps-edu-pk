@@ -26,6 +26,11 @@ on:
       - "ops/release/assps-technical-self-verification.service"
       - "ops/release/assps-technical-self-verification.timer"
       - "ops/tests/test_assps_technical_self_verification_20261016.py"
+      - "ops/qbank/assps-grade910-weekly-self-qa-20261016.py"
+      - "ops/tests/test_assps_grade910_weekly_self_qa_20261016.py"
+      - "ops/release/assps-grade910-weekly-qa.service"
+      - "ops/release/assps-grade910-weekly-qa.timer"
+      - "ops/release/install-assps-grade910-weekly-qa-20261016.sh"
       - "ops/tests/resultcards-v3-immutable-20261015.test.cjs"
       - "ops/tests/resultcards-owner-acceptance-and-employee-source-20261016.test.cjs"
       - "al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx"
@@ -75,6 +80,11 @@ on:
       - "ops/release/assps-technical-self-verification.service"
       - "ops/release/assps-technical-self-verification.timer"
       - "ops/tests/test_assps_technical_self_verification_20261016.py"
+      - "ops/qbank/assps-grade910-weekly-self-qa-20261016.py"
+      - "ops/tests/test_assps_grade910_weekly_self_qa_20261016.py"
+      - "ops/release/assps-grade910-weekly-qa.service"
+      - "ops/release/assps-grade910-weekly-qa.timer"
+      - "ops/release/install-assps-grade910-weekly-qa-20261016.sh"
       - "ops/tests/resultcards-v3-immutable-20261015.test.cjs"
       - "ops/tests/resultcards-owner-acceptance-and-employee-source-20261016.test.cjs"
       - "al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx"
@@ -138,6 +148,8 @@ jobs:
         run: ASSPS_RESULT_CARDS_V3_DIST=al-siddique-frontend/dist node --test ops/tests/resultcards-v3-immutable-20261015.test.cjs
       - name: Verify unattended operational audit never forges signatures or changes real marks
         run: python3 -m unittest discover -s ops/tests -p test_assps_technical_self_verification_20261016.py -v
+      - name: Preserve unattended independent academic QA runner and prohibit counterfeit reviewer signoff
+        run: python3 -m unittest discover -s ops/tests -p test_assps_grade910_weekly_self_qa_20261016.py -v
       - name: Preserve accepted school-owner card status and Employees source hotfix
         run: node --test ops/tests/resultcards-owner-acceptance-and-employee-source-20261016.test.cjs
       - name: Verify unfilled subjects remain pending and fractional grade boundaries match Core

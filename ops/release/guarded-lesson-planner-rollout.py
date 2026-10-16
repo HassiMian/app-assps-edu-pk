@@ -163,6 +163,11 @@ def main():
         raise RuntimeError('FAIL_CLOSED: live marks GET route diverges from login-compatible backend')
     # Protect the deployed ten distinct premium Result Cards templates and
     # whole-class/section print selector against old-source production cutovers.
+    weekly_qa_contract=repo/'ops/tests/test_assps_grade910_weekly_self_qa_20261016.py'
+    weekly_qa_checks=run(['python3','-m','unittest','discover','-s',str(repo/'ops/tests'),
+                          '-p',weekly_qa_contract.name])
+    if weekly_qa_checks.returncode!=0:
+        raise RuntimeError('FAIL_CLOSED: Grade IX-X weekly QA runner/zero-fake-publication protection missing')
     owner_acceptance_contract=repo/'ops/tests/resultcards-owner-acceptance-and-employee-source-20261016.test.cjs'
     owner_contract_check=run(['node','--test',str(owner_acceptance_contract)])
     if owner_contract_check.returncode!=0:
