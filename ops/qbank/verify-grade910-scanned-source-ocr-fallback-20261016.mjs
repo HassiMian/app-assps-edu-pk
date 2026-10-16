@@ -14,6 +14,24 @@ const textLayerPath=process.env.ASSPS_TEXT_LAYER || '/var/lib/assps-grade910-sou
 const evidencePath=process.env.ASSPS_OCR_EVIDENCE || '/var/lib/assps-grade910-sourceclaims/ocr-fallback.json';
 const cacheRoot='/root/workspace/qbank-source-cache';
 const pdfjsPath='/var/www/apex-backend/node_modules/pdfjs-dist/legacy/build/pdf.mjs';
+// Resource URLs must be explicit for pdfjs-dist v5 Node JPX/OpenJPEG pages.
+// Missing wasmUrl can silently make some scanned question pages unreadable,
+// so a missing or symlinked decoder directory fails closed before page capture.
+export function pdfJsLocalResourceUrls(modulePath=pdfjsPath){
+ const base=path.resolve(path.dirname(modulePath),'../..');
+ const wasm=path.join(base,'wasm');
+ const fonts=path.join(base,'standard_fonts');
+ for(const d of [wasm,fonts]){
+   if(!fs.existsSync(d)||fs.lstatSync(d).isSymbolicLink()||!fs.statSync(d).isDirectory())
+      throw Error('LOCAL_PDFJS_DECODER_ASSETS_NOT_TRUSTED');
+ }
+ for(const f of ['openjpeg.wasm','openjpeg_nowasm_fallback.js']){
+   if(!fs.existsSync(path.join(wasm,f)))throw Error('PDFJS_OPENJPEG_DECODER_MISSING');
+ }
+ return {wasmUrl:pathToFileURL(wasm+path.sep).href,
+         standardFontDataUrl:pathToFileURL(fonts+path.sep).href};
+}
+
 const limit=validatePageBudget(process.env.ASSPS_OCR_PILOT_PAGES || 0);
 const chunkLimit=validatePageBudget(process.env.ASSPS_OCR_CHUNK_PAGES || 0);
 const progressFile=process.env.ASSPS_OCR_PROGRESS || '/var/lib/assps-grade910-sourceclaims/ocr-progress.json';
@@ -110,7 +128,8 @@ async function main(){
       throw Error('UNSAFE_CACHED_PDF_PATH');
    const bytes=fs.readFileSync(pdfPath);
    if(h(bytes)!==e.pdfSha256.toLowerCase())throw Error('OCR_PDF_HASH_MISMATCH');
-   currentDoc=await getDocument({data:new Uint8Array(bytes),disableFontFace:true,stopAtErrors:true}).promise;
+   currentDoc=await getDocument({data:new Uint8Array(bytes),disableFontFace:true,stopAtErrors:true,
+     ...pdfJsLocalResourceUrls(pdfjsPath)}).promise;
    if(currentDoc.numPages!==e.pdfPageCount)throw Error('OCR_PDF_PAGE_COUNT_MISMATCH');
    currentId=item.catalog;currentHash=e.pdfSha256;currentCount=0;
   }
@@ -135,11 +154,13 @@ async function main(){
       category:diagnosis.category,recognizedWords:diagnosis.tokens,
       averageConfidence:diagnosis.meanConfidence,
       exactStemCandidate:diagnosis.exactStem,
+      pdfJsDecoderResourceUrlsExplicitlyConfigured:true,
       academicQuestionContentPageVerified:false,
       qualifiedFacultyApproved:false,autoPublished:false});
   }
   assets.push({catalog:item.catalog,page:item.page,ocrWords:languageStats.tokens,
     ocrMeanConfidence:languageStats.averageConfidence,
+    pdfJsDecoderResourceUrlsExplicitlyConfigured:true,
     rawPageImagePersisted:false,rawOCRTextPersisted:false});
   page.cleanup();currentCount++;
   // A committed page must always include both OCR confidence/ID-only evidence
@@ -158,6 +179,9 @@ async function main(){
    uniquePagesEligibleForLastResortOCR:selection.eligiblePages,
    pagesScannedNow:assets.length,
    claimsCoveredNow:results.length,
+   pagesAfterExplicitLocalDecoderResourceConfiguration:assets.filter(x=>x.pdfJsDecoderResourceUrlsExplicitlyConfigured===true).length,
+   olderPagesWithoutExplicitDecoderResourceConfiguration:assets.filter(x=>x.pdfJsDecoderResourceUrlsExplicitlyConfigured!==true).length,
+   exactTextReviewNotGuaranteedByDecoderConfiguration:true,
    categories:buckets,
    highConfidenceStrictExactStemCandidateCount:results.filter(x=>x.exactStemCandidate).length,
    independentQuestionContentPagesVerified:0,reviewerApprovals:0,
