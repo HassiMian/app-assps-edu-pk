@@ -1,5 +1,5 @@
 'use strict'
-// Eight isolated browser assertions: Diary print, save/reopen and tenant scope,
+// Fifteen isolated browser assertions: Diary print, save/reopen and tenant scope,
 // async save/revisit, and three fail-closed server-response identity/status cases.
 // Synthetic server only; no live credentials, database writes or printer jobs.
 const {spawnSync}=require('node:child_process')
@@ -13,6 +13,12 @@ const tests=[
  ['HTTP 200 success:false is never a saved Diary','dailyDiarySaveResponseValidationBrowser.test.js',1],
  ['Late HTTP 500 reports original unsaved selection','dailyDiarySaveErrorScopeBrowser.test.js',1],
  ['Mismatched PUT response ID is rejected','dailyDiaryPutResponseIdentityBrowser.test.js',1],
+ ['Returned date mismatch denied','dailyDiaryReturnedDateBrowser.test.js',1],
+ ['Returned school/class scope mismatch denied','dailyDiaryReturnedScopeBrowser.test.js',1],
+ ['Returned section mismatch denied','dailyDiaryReturnedSectionBrowser.test.js',1],
+ ['Invalid saved record ID type denied','dailyDiarySaveIdTypeBrowser.test.js',1],
+ ['Save response identity mismatch denied','dailyDiarySaveIdentityBrowser.test.js',1],
+ ['Stale Reopen response and ABA selection denied','dailyDiaryStaleReopenBrowser.test.js',2],
 ]
 let passed=0
 for(const [label,file,expected] of tests){
@@ -37,6 +43,6 @@ for(const [label,file,expected] of tests){
  passed+=expected
  console.log('DIARY_BROWSER_PASS',label,expected+'/'+expected)
 }
-if(passed===8&&process.exitCode!==2){
- console.log('ASSPS_DIARY_SAVE_REOPEN_PRINT_CHROMIUM 8/8 PASS (synthetic server, no hardware jobs)')
+if(passed===15&&process.exitCode!==2){
+ console.log('ASSPS_DIARY_SAVE_REOPEN_PRINT_CHROMIUM 15/15 PASS (synthetic server, no hardware jobs)')
 }
