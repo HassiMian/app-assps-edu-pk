@@ -8,9 +8,13 @@ on:
       - 'integration/core503-paper-truefalse-privacy-gate-*'
       - 'fix/paper-core503-numeric-rubric-student-projection-*'
       - 'integration/core503-truefalse-http-marks-release-20261016'
+      - 'integration/paper-core503-truefalse-http-core8dc-*'
+      - 'fix/paper-core503-print-projection-teacher-exact-scope-*'
+      - 'integration/core503-marks-urdu-teacher-print-scope-20261016'
   pull_request:
     paths:
       - 'al-siddique-backend/src/services/assessmentPrintJobs.js'
+      - 'al-siddique-backend/src/routes/assessmentStudioRoutes.js'
       - 'al-siddique-backend/src/tests/assessment-print-jobs-domain.test.js'
       - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/personalizedPrintDurableBrowserAcceptance.test.js'
       - '.github/workflows/paper-student-answer-projection-privacy-20261016.yml'
