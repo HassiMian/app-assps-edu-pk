@@ -1,0 +1,56 @@
+name: ASSPS Core Paper Worker Unified RC — QA Only
+on:
+  push:
+    branches:
+      - 'integration/core-paper-worker-unified-rc-*'
+  pull_request:
+    paths:
+      - 'al-siddique-frontend/**'
+      - 'al-siddique-backend/src/services/ai/**'
+      - 'ops/paper-studio/**'
+      - 'ops/release/**'
+      - 'ops/tests/marks-sheet-data-truth.test.js'
+      - 'ops/tests/paper-diary-active-controller-immutable-release-gate-20261015.test.cjs'
+      - '.github/workflows/core-unified-release-qa-20261016.yml'
+jobs:
+  tested-code-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: al-siddique-frontend/package-lock.json
+      - name: Install strictly pinned frontend testing dependencies
+        working-directory: al-siddique-frontend
+        run: npm ci --no-audit --no-fund
+      - name: Install Chromium for real isolated browser tests
+        working-directory: al-siddique-frontend
+        run: npx playwright install chromium --with-deps
+      - name: Preserve marks and distinguish genuine zero from empty
+        run: node --test ops/tests/marks-sheet-data-truth.test.js
+      - name: Preserve 43 paper metadata manifest and its strict count
+        run: node --test ops/paper-studio/test_emit_windows_canonical_manifest_20261016.cjs
+      - name: Verify daily diary Save, Reopen, Print, and failed-save race in Chromium
+        run: node ops/paper-studio/run_diary_release_browser_20261016.cjs
+      - name: Verify official Paper Workspace and Urdu/English cross-field print in Chromium
+        run: node ops/paper-studio/run_serial_statement_crossfield_20261016.cjs
+      - name: Verify manually authored weekly paper Save, Finalize, Reopen, Print in Chromium
+        working-directory: al-siddique-frontend
+        run: node --test src/Modules/Paper-Generator/PaperEditor/tests/manualWeeklyAssessmentBrowserAcceptance.test.js
+      - name: Verify isolated AI worker privilege and sensitive data denials
+        run: node --test al-siddique-backend/src/services/ai/test-ai-worker-sensitive-dml-gate-20261016.cjs
+      - name: Verify Core PostgreSQL policy and rollback guard fixture regressions
+        run: |
+          python3 -m unittest ops/release/core-infrastructure/test_verify_live_role_membership_grants_20261016.py ops/release/core-infrastructure/test_verify_signed_rls_catalog_drift_20261016.py ops/release/core-infrastructure/test_verify_unsigned_rls_matrix_20261016.py ops/release/worker-probe/test_verify_worker_peer_scope_20261016.py ops/release/test_verify_private_backend_stage_rollback_20261016.py ops/release/tests/test_five_feature_rollout_guard_20261016.py ops/release/backup-readiness/test_fresh_local_acl_snapshot_20261016.py ops/release/test_verify_reviewed_worker_dml_stage_20261016.py -q
+      - name: Build integrated Core frontend candidate from source
+        working-directory: al-siddique-frontend
+        run: npm run build
+      - name: Fail on a partial five-feature compiled artifact
+        run: python3 ops/paper-studio/verify_full_feature_readiness_20261016.py --repo . --dist al-siddique-frontend/dist
+      - name: Reject regression that removes Daily Diary font and row controllers
+        run: ASSPS_DIARY_CANDIDATE_DIST="$PWD/al-siddique-frontend/dist" node --test ops/tests/paper-diary-active-controller-immutable-release-gate-20261015.test.cjs
