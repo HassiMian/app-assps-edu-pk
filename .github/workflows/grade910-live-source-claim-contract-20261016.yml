@@ -10,6 +10,8 @@ on:
       - "ops/qbank/audit-grade910-live-question-collisions-20261016.py"
       - "ops/qbank/audit-school1-versioned-textbook-adoption-20261016.py"
       - "ops/qbank/audit-grade910-live-question-revisions-20261016.py"
+      - "ops/qbank/audit-grade910-live-numerical-evidence-20261016.py"
+      - "ops/tests/test_grade910_live_numerical_evidence_20261016.py"
       - "ops/qbank/grade910_live_revision_history_20261016.py"
       - "ops/tests/test_grade910_live_revision_history_20261016.py"
       - "ops/qbank/grade910_live_revision_history_20261016.py"
@@ -51,6 +53,8 @@ on:
       - "ops/qbank/audit-grade910-live-question-collisions-20261016.py"
       - "ops/qbank/audit-school1-versioned-textbook-adoption-20261016.py"
       - "ops/qbank/audit-grade910-live-question-revisions-20261016.py"
+      - "ops/qbank/audit-grade910-live-numerical-evidence-20261016.py"
+      - "ops/tests/test_grade910_live_numerical_evidence_20261016.py"
       - "ops/qbank/grade910_live_revision_history_20261016.py"
       - "ops/tests/test_grade910_live_revision_history_20261016.py"
       - "ops/qbank/grade910_live_revision_history_20261016.py"
@@ -110,6 +114,7 @@ jobs:
       - name: Verify revision-specific live hashes and existing 56 faculty cohort evidence queue
         run: |
           python3 -m unittest discover -s ops/tests -p test_grade910_live_question_revision_hashes_20261016.py -v
+          python3 -m unittest discover -s ops/tests -p test_grade910_live_numerical_evidence_20261016.py -v
           python3 -m unittest discover -s ops/tests -p test_grade910_live_revision_history_20261016.py -v
           python3 -m unittest discover -s ops/tests -p test_grade910_live_revision_history_20261016.py -v
           python3 -m unittest discover -s ops/tests -p test_grade910_live_source_review_delta_20261016.py -v

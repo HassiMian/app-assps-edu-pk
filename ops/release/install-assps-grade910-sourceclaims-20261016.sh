@@ -20,6 +20,7 @@ python3 -m py_compile "$REPO/ops/qbank/audit-grade910-live-answer-integrity-2026
 python3 -m py_compile "$REPO/ops/qbank/audit-grade910-live-question-collisions-20261016.py"
 python3 -m py_compile "$REPO/ops/qbank/audit-school1-versioned-textbook-adoption-20261016.py"
 python3 -m py_compile "$REPO/ops/qbank/audit-grade910-live-question-revisions-20261016.py"
+python3 -m py_compile "$REPO/ops/qbank/audit-grade910-live-numerical-evidence-20261016.py"
 python3 -m py_compile "$REPO/ops/qbank/grade910_live_revision_history_20261016.py"
 python3 -m py_compile "$REPO/ops/qbank/grade910_live_revision_history_20261016.py"
 python3 -m py_compile "$REPO/ops/qbank/audit-grade910-runtime-question-bank-rls-20261016.py"
@@ -36,6 +37,7 @@ python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_live_answer_i
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_live_question_collisions_20261016.py -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_school1_versioned_textbook_adoption_20261016.py -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_live_question_revision_hashes_20261016.py -q
+python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_live_numerical_evidence_20261016.py -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_live_revision_history_20261016.py -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_live_revision_history_20261016.py -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_runtime_question_bank_rls_20261016.py -q
@@ -58,6 +60,7 @@ install -m 0644 "$REPO/ops/qbank/audit-grade910-live-answer-integrity-20261016.p
 install -m 0644 "$REPO/ops/qbank/audit-grade910-live-question-collisions-20261016.py" "$DEST/audit-grade910-live-question-collisions-20261016.py"
 install -m 0644 "$REPO/ops/qbank/audit-school1-versioned-textbook-adoption-20261016.py" "$DEST/audit-school1-versioned-textbook-adoption-20261016.py"
 install -m 0644 "$REPO/ops/qbank/audit-grade910-live-question-revisions-20261016.py" "$DEST/audit-grade910-live-question-revisions-20261016.py"
+install -m 0644 "$REPO/ops/qbank/audit-grade910-live-numerical-evidence-20261016.py" "$DEST/audit-grade910-live-numerical-evidence-20261016.py"
 install -m 0644 "$REPO/ops/qbank/grade910_live_revision_history_20261016.py" "$DEST/grade910_live_revision_history_20261016.py"
 install -m 0644 "$REPO/ops/qbank/grade910_live_revision_history_20261016.py" "$DEST/grade910_live_revision_history_20261016.py"
 install -m 0644 "$REPO/ops/qbank/audit-grade910-runtime-question-bank-rls-20261016.py" "$DEST/audit-grade910-runtime-question-bank-rls-20261016.py"
@@ -112,6 +115,12 @@ assert ad['academicQuestionApprovalGained']==0
 assert ad['studentOrQuestionDbWrites']==0
 rev=json.loads(Path('/var/lib/assps-grade910-sourceclaims/live-question-revisions.json').read_text())
 assert rev['revisions']==2411 and rev['academicallyApprovedRevisions']==0
+num=json.loads(Path('/var/lib/assps-grade910-sourceclaims/live-numerical-evidence.json').read_text())
+assert num['liveNumericals']==80
+assert num['liveNumericStemAndAnswerIdenticalToDeepOriginal']==59
+assert num['liveNumericalCurrentRevisionMissingDeepComputation']==21
+assert num['academicApprovals']==0 and num['productionDatabaseWrites']==0
+assert num['rawQuestionsOrAnswersStored'] is False
 rev_history=json.loads(Path('/var/lib/assps-grade910-sourceclaims/live-revision-history.json').read_text())
 assert rev_history['schema']=='ASSPS_GRADE910_LIVE_SHA_REVISION_CHANGE_HISTORY_V1'
 assert rev_history['contentChangesObserved']==len(rev_history['events'])

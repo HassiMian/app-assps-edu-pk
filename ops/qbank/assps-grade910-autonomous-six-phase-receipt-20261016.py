@@ -19,7 +19,7 @@ OUT=SOURCE_DIR/"autonomous-six-phase-checkpoint.json"
 def read(path:Path):
     return json.loads(path.read_text(encoding="utf8")) if path.exists() else None
 
-def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, answer, ocr_progress=None, live_collisions=None, adoption_inventory=None, review_delta=None, tenant_rls=None, revision_history=None):
+def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, answer, ocr_progress=None, live_collisions=None, adoption_inventory=None, review_delta=None, tenant_rls=None, revision_history=None, numerical_evidence=None):
     if not all(isinstance(x,dict) for x in (technical,weekly,source,held,pdf,text,ocr_pilot,answer)):
         raise ValueError("MANDATORY_MACHINE_EVIDENCE_MISSING")
     src=source.get("summary") or {}
@@ -107,6 +107,15 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
             or revision_history.get('everyChangedQuestionNeedsNewIndependentReview') is not True
             or revision_history.get('questionTextsPersisted') is not False):
             raise ValueError('LIVE_REVISION_HISTORY_APPROVAL_OR_ID_INTEGRITY_FAILED')
+    if numerical_evidence is not None:
+        if (numerical_evidence.get('schema')!='ASSPS_GRADE910_LIVE_NUMERICAL_REVISION_EVIDENCE_V1'
+            or numerical_evidence.get('liveNumericals')!=80
+            or numerical_evidence.get('liveNumericStemAndAnswerIdenticalToDeepOriginal')!=59
+            or numerical_evidence.get('liveNumericalCurrentRevisionMissingDeepComputation')!=21
+            or numerical_evidence.get('academicApprovals')!=0
+            or numerical_evidence.get('productionDatabaseWrites')!=0
+            or numerical_evidence.get('rawQuestionsOrAnswersStored') is not False):
+            raise ValueError('NUMERICAL_LIVE_REVISION_OR_ACADEMIC_APPROVAL_EVIDENCE_REGRESSION')
     score=technical.get("metrics",{}).get("scores",{})
     integrity=technical.get("decision")=="OPERATIONAL" and score.get("total_score_rows",0)>=1763
     fullsuite_ok=(weekly.get("decision")=="QA_PASSED_NO_AUTOMATIC_ACADEMIC_PUBLICATION"
@@ -165,6 +174,8 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
       "facultyReviewEvidenceCohorts":review_delta.get('existingFacultyCohorts') if review_delta else None,
       "liveQuestionRevisionHashes":review_delta.get('liveContentRevisionHashEntries') if review_delta else None,
       "independentlyReviewableLiveRevisionChangeEvents":revision_history.get("contentChangesObserved") if revision_history else None,
+      "liveNumericalsMatchedToDeepRecomputedOriginal":numerical_evidence.get("liveNumericStemAndAnswerIdenticalToDeepOriginal") if numerical_evidence else None,
+      "liveNumericalsStillNeedRevisionSpecificDeepRecomputation":numerical_evidence.get("liveNumericalCurrentRevisionMissingDeepComputation") if numerical_evidence else None,
       "everyChangedQuestionRevisionMustBeRereviewed":True,
       "questionBankCrossSchoolRlsDenied":tenant_rls.get("crossTenantLeakCount")==0 if tenant_rls else None,
       "liveQuestionDuplicateGroups":0 if live_collisions is not None else None,
@@ -200,7 +211,8 @@ if __name__=="__main__":
                read(SOURCE_DIR/"school-adoption-inventory.json"),
                read(SOURCE_DIR/"faculty-source-evidence-delta.json"),
                read(SOURCE_DIR/"tenant-rls-qbank-readonly.json"),
-               read(SOURCE_DIR/"live-revision-history.json"))
+               read(SOURCE_DIR/"live-revision-history.json"),
+               read(SOURCE_DIR/"live-numerical-evidence.json"))
     save(OUT,p)
     print(json.dumps({k:v for k,v in p.items() if k!="phases"},sort_keys=True))
     for row in p["phases"]:print(f"PHASE_{row['phase']}={row['status']}")

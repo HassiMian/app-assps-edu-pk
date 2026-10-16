@@ -150,6 +150,22 @@ class ZeroHumanSixPhaseGuards(unittest.TestCase):
     'academicReviewApprovalsFromJournal':1,'publishedQuestionsFromJournal':0,
     'everyChangedQuestionNeedsNewIndependentReview':True,'questionTextsPersisted':False}))
   with self.assertRaises(ValueError):m.evaluate(*a)
+ def test_numerical_reference_not_teacher_certification(self):
+  a=list(fixtures());a.extend((None,None,None,None,None,None,{
+    'schema':'ASSPS_GRADE910_LIVE_NUMERICAL_REVISION_EVIDENCE_V1',
+    'liveNumericals':80,'liveNumericStemAndAnswerIdenticalToDeepOriginal':59,
+    'liveNumericalCurrentRevisionMissingDeepComputation':21,
+    'academicApprovals':0,'productionDatabaseWrites':0,'rawQuestionsOrAnswersStored':False}))
+  out=m.evaluate(*a)
+  self.assertEqual(out['liveNumericalsMatchedToDeepRecomputedOriginal'],59)
+  self.assertFalse(out['academicVerifiedPublicationReady'])
+ def test_false_numerical_approvals_blocked(self):
+  a=list(fixtures());a.extend((None,None,None,None,None,None,{
+    'schema':'ASSPS_GRADE910_LIVE_NUMERICAL_REVISION_EVIDENCE_V1',
+    'liveNumericals':80,'liveNumericStemAndAnswerIdenticalToDeepOriginal':59,
+    'liveNumericalCurrentRevisionMissingDeepComputation':21,
+    'academicApprovals':1,'productionDatabaseWrites':0,'rawQuestionsOrAnswersStored':False}))
+  with self.assertRaises(ValueError):m.evaluate(*a)
  def test_private_receipt_permissions(self):
   with tempfile.TemporaryDirectory() as d:
    p=Path(d)/'private'/'status.json'
