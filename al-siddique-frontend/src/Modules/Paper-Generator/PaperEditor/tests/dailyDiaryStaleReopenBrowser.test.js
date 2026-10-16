@@ -17,6 +17,7 @@ test(`late authorized Diary GET must not hydrate stale selection ${returnToOrigi
  const ctx=await browser.newContext({viewport:{width:1400,height:930},timezoneId:'Asia/Karachi'})
  await ctx.addInitScript(()=>{localStorage.setItem('al_siddique_token','mock-jwt-token');localStorage.setItem('al_siddique_login_at',String(Date.now()));localStorage.setItem('al_siddique_user',JSON.stringify({id:999,role:'teacher',school_id:1,tenant_id:'assps'}))})
  const academic={success:true,configured:true,data:{periodsPerDay:8,classes:[{level:'8',name:'Eight',active:true,sections:['Blue','Green']}],subjects:[{name:'English',classes:['8']}]}}
+ await ctx.route('**/api/question-bank**',r=>r.fulfill({status:200,contentType:'application/json',body:'{"success":true,"data":[]}'}))
  await ctx.route('**/api/academic/setup',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify(academic)}))
  await ctx.route('**/api/settings',r=>r.fulfill({status:200,contentType:'application/json',body:'{"success":true,"data":{}}'}))
  await ctx.route('**/api/students**',r=>r.fulfill({status:200,contentType:'application/json',body:'{"success":true,"data":[]}'}))

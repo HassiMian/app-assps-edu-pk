@@ -22,6 +22,7 @@ test('HTTP200 successful Save mismatched returned date must not confirm Save',{t
   {id:701,name:'Synthetic Blue Seven',roll_number:'01',class:'Seven',section:'Blue'},
  ]
  const academic={success:true,configured:true,data:{periodsPerDay:8,classes:[{level:'8',name:'Eight',active:true,sections:['Blue','Green']},{level:'7',name:'Seven',active:true,sections:['Blue']}],subjects:[{name:'English',classes:['8','7']}]}}
+ await ctx.route('**/api/question-bank**',r=>r.fulfill({status:200,contentType:'application/json',body:'{"success":true,"data":[]}'}))
  await ctx.route('**/api/academic/setup',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify(academic)}))
  await ctx.route('**/api/settings',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:{school_name:'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL'}})}))
  await ctx.route('**/api/students**',r=>{const term=new URL(r.request().url()).searchParams.get('class');return r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:students.filter(s=>s.class===term)})})})
