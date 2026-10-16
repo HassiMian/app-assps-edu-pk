@@ -1,0 +1,286 @@
+diff --git a/src/app/api/saas-admin/apex-leads/stats/route.ts b/src/app/api/saas-admin/apex-leads/stats/route.ts
+index 547d350..aeedbe1 100644
+--- a/src/app/api/saas-admin/apex-leads/stats/route.ts
++++ b/src/app/api/saas-admin/apex-leads/stats/route.ts
+@@ -8,13 +8,16 @@ export async function GET() {
+   try {
+     await requireSaasAdminUser();
+     const stats = await getApexLeadStats();
+-    return NextResponse.json({ success: true, data: stats });
++    return NextResponse.json(
++      { success: true, data: stats },
++      { headers: { "Cache-Control": "no-store" } },
++    );
+   } catch (error: unknown) {
+     const message = error instanceof Error ? error.message : "Failed to load lead stats";
+     if (message === "Unauthorized" || message === "Forbidden") {
+       return NextResponse.json(
+         { success: false, message },
+-        { status: message === "Forbidden" ? 403 : 401 }
++        { status: message === "Forbidden" ? 403 : 401, headers: { "Cache-Control": "no-store" } }
+       );
+     }
+     return NextResponse.json(
+diff --git a/src/app/saas-admin/apex-leads/page.tsx b/src/app/saas-admin/apex-leads/page.tsx
+index 9fc4270..84f4b56 100644
+--- a/src/app/saas-admin/apex-leads/page.tsx
++++ b/src/app/saas-admin/apex-leads/page.tsx
+@@ -1,7 +1,7 @@
+ "use client";
+ 
+ import { Suspense, useEffect, useRef, useState } from "react";
+-import { fetchValidatedLeadList, LatestLeadListRequest } from "@/lib/client/apex-lead-list-request";
++import { fetchValidatedLeadList, fetchValidatedLeadStats, LatestLeadListRequest } from "@/lib/client/apex-lead-list-request";
+ import { useRouter, useSearchParams } from "next/navigation";
+ import Link from "next/link";
+ 
+@@ -65,6 +65,8 @@ function ApexLeadsContent() {
+   const searchParams = useSearchParams();
+   const [leads, setLeads] = useState<LeadItem[]>([]);
+   const [leadStats, setLeadStats] = useState<LeadStats | null>(null);
++  const [statsError, setStatsError] = useState(false);
++  const statsRequests = useRef(new LatestLeadListRequest());
+   const [status, setStatus] = useState(() => resolveLeadStatusParam(searchParams.get("status")));
+   const [loading, setLoading] = useState(true);
+   const [loadError, setLoadError] = useState(false);
+@@ -156,12 +158,17 @@ function ApexLeadsContent() {
+   }
+ 
+   async function loadLeadStats() {
++    const revision = statsRequests.current.begin();
++    setLeadStats(null);
++    setStatsError(false);
+     try {
+-      const res = await fetch("/api/saas-admin/apex-leads/stats", { cache: "no-store" });
+-      const data = await res.json();
+-      if (data.success) setLeadStats(data.data);
++      const current = await fetchValidatedLeadStats(fetch);
++      if (statsRequests.current.isCurrent(revision)) setLeadStats(current);
+     } catch {
+-      // non-blocking
++      if (statsRequests.current.isCurrent(revision)) {
++        setLeadStats(null);
++        setStatsError(true);
++      }
+     }
+   }
+ 
+@@ -210,6 +217,9 @@ function ApexLeadsContent() {
+               onChange={(e) => {
+                 const nextStatus = e.target.value;
+                 requests.current.invalidate();
++                statsRequests.current.invalidate();
++                setLeadStats(null);
++                setStatsError(false);
+                 activeStatus.current = nextStatus;
+                 setLeads([]);
+                 setLoading(true);
+@@ -244,6 +254,19 @@ function ApexLeadsContent() {
+           </div>
+         </div>
+ 
++        {statsError && (
++          <div role="status" className="mb-6 rounded-2xl border border-amber-400/20 bg-amber-400/10 p-4 text-amber-100">
++            Enquiry statistics are temporarily unavailable.
++            <button
++              type="button"
++              onClick={() => void loadLeadStats()}
++              className="ml-3 rounded-lg border border-amber-300/40 px-3 py-1 font-semibold hover:bg-amber-300/10"
++            >
++              Retry statistics
++            </button>
++          </div>
++        )}
++
+         {leadStats && (
+           <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+             {[
+diff --git a/src/lib/client/apex-lead-list-request.ts b/src/lib/client/apex-lead-list-request.ts
+index d234145..1f63aa5 100644
+--- a/src/lib/client/apex-lead-list-request.ts
++++ b/src/lib/client/apex-lead-list-request.ts
+@@ -39,3 +39,47 @@ export async function fetchValidatedLeadList<T>(
+   }
+   return result.data as T[];
+ }
++
++
++/** Never display cached or malformed privileged lead statistics as current. */
++export type ValidatedLeadStats = {
++  total: number;
++  new: number;
++  contacted: number;
++  archived: number;
++  byType: Record<string, number>;
++};
++
++const KNOWN_LEAD_TYPES = new Set(["demo", "contact", "register", "enterprise"]);
++
++export async function fetchValidatedLeadStats(
++  fetcher: (url: string, options: { cache: "no-store" }) => Promise<LeadListResponse>,
++): Promise<ValidatedLeadStats> {
++  const response = await fetcher("/api/saas-admin/apex-leads/stats", { cache: "no-store" });
++  if (!response.ok) throw new Error("APEX_LEAD_STATS_UNAVAILABLE");
++  const body: unknown = await response.json();
++  if (!body || typeof body !== "object" || Array.isArray(body)) {
++    throw new Error("APEX_LEAD_STATS_MALFORMED");
++  }
++  const envelope = body as Record<string, unknown>;
++  if (envelope.success !== true || !envelope.data ||
++      typeof envelope.data !== "object" || Array.isArray(envelope.data)) {
++    throw new Error("APEX_LEAD_STATS_MALFORMED");
++  }
++  const data = envelope.data as Record<string, unknown>;
++  const safeCount = (value: unknown): value is number =>
++    typeof value === "number" && Number.isSafeInteger(value) && value >= 0;
++  const counts = [data.total, data.new, data.contacted, data.archived];
++  if (!counts.every(safeCount) ||
++      data.total !== (data.new as number) + (data.contacted as number) + (data.archived as number) ||
++      !data.byType || typeof data.byType !== "object" || Array.isArray(data.byType)) {
++    throw new Error("APEX_LEAD_STATS_MALFORMED");
++  }
++  const types = data.byType as Record<string, unknown>;
++  if (Object.entries(types).some(([key, value]) => !KNOWN_LEAD_TYPES.has(key) || !safeCount(value))) {
++    throw new Error("APEX_LEAD_STATS_MALFORMED");
++  }
++  const byTypeTotal = Object.values(types).reduce<number>((sum, count) => sum + (count as number), 0);
++  if (byTypeTotal !== data.total) throw new Error("APEX_LEAD_STATS_MALFORMED");
++  return data as ValidatedLeadStats;
++}
+diff --git a/tests/apex-admin-lead-stats-failclosed.test.cjs b/tests/apex-admin-lead-stats-failclosed.test.cjs
+new file mode 100644
+index 0000000..3acb1b7
+--- /dev/null
++++ b/tests/apex-admin-lead-stats-failclosed.test.cjs
+@@ -0,0 +1,131 @@
++'use strict';
++const assert=require('node:assert/strict');
++const fs=require('node:fs');
++const path=require('node:path');
++const vm=require('node:vm');
++const ts=require('typescript');
++const {test}=require('node:test');
++const root=path.resolve(__dirname,'../src');
++function compile(relative,imports={}){
++ const code=ts.transpileModule(fs.readFileSync(path.join(root,relative),'utf8'),{
++  compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS,esModuleInterop:true}
++ }).outputText;
++ const exported={};
++ vm.runInNewContext(code,{exports:exported,require:id=>{
++  if(!Object.hasOwn(imports,id))throw Error('unexpected import '+id);
++  return imports[id];
++ },Error,console},{filename:relative,timeout:1800});
++ return exported;
++}
++const {fetchValidatedLeadStats,LatestLeadListRequest}=compile('lib/client/apex-lead-list-request.ts');
++const page=fs.readFileSync(path.join(root,'app/saas-admin/apex-leads/page.tsx'),'utf8');
++const correct={total:3,new:1,contacted:1,archived:1,byType:{demo:2,enterprise:1}};
++const reply=(body=correct)=>({ok:true,json:async()=>({success:true,data:body})});
++test('real valid canonical totals preserve counts unchanged and use no-store',async()=>{
++ let captured;
++ const stats=await fetchValidatedLeadStats(async(url,opt)=>{captured={url,opt};return reply()});
++ assert.equal(stats.total,3);assert.equal(stats.byType.demo,2);
++ assert.equal(captured.url,'/api/saas-admin/apex-leads/stats');
++ assert.equal(captured.opt.cache,'no-store');
++});
++test('auth/permission/transport failures cannot appear as zero statistics',async()=>{
++ for(const code of [401,403,500,503]){
++  await assert.rejects(fetchValidatedLeadStats(async()=>({
++   ok:false,status:code,json:async()=>({success:false,data:correct})
++  })),/APEX_LEAD_STATS_UNAVAILABLE/);
++ }
++ await assert.rejects(fetchValidatedLeadStats(async()=>{throw Error('network lost')}),/network lost/);
++});
++test('HTTP 200 application failure and malformed envelope reject',async()=>{
++ for(const value of [null,[],{},'text',{success:false,data:correct},{success:true},
++  {success:true,data:null},{success:true,data:[]}]){
++  await assert.rejects(fetchValidatedLeadStats(async()=>({ok:true,json:async()=>value})),/APEX_LEAD_STATS_MALFORMED/);
++ }
++});
++test('negative fractional or nonfinite counts and broken status totals reject',async()=>{
++ for(const part of ['total','new','contacted','archived']){
++  for(const value of [-1,1.5,NaN,Infinity,'1',undefined,Number.MAX_SAFE_INTEGER+1]){
++   await assert.rejects(fetchValidatedLeadStats(async()=>reply({...correct,[part]:value})),/APEX_LEAD_STATS_MALFORMED/);
++  }
++ }
++ await assert.rejects(fetchValidatedLeadStats(async()=>reply({...correct,total:4})),/APEX_LEAD_STATS_MALFORMED/);
++});
++test('forged byType keys, wrong type counts, mismatched total and arrays reject',async()=>{
++ for(const byType of [null,[],{}, {'__proto__':3}, {demo:-1,enterprise:4},
++  {demo:2,enterprise:2},{demo:'2',enterprise:1},
++  {demo:2,enterprise:1,unauthorized:0}]){
++  await assert.rejects(fetchValidatedLeadStats(async()=>reply({...correct,byType})),/APEX_LEAD_STATS_MALFORMED/);
++ }
++});
++test('current no-lead statistics stay valid without fabricated totals',async()=>{
++ const value={total:0,new:0,contacted:0,archived:0,byType:{}};
++ const stats=await fetchValidatedLeadStats(async()=>reply(value));
++ assert.equal(stats.total,0);
++ assert.equal(Object.keys(stats.byType).length,0);
++});
++test('slow old status response cannot repopulate stats after newer refresh',async()=>{
++ const request=new LatestLeadListRequest();let finishOld;
++ const oldTicket=request.begin();
++ const old=fetchValidatedLeadStats(()=>new Promise(resolve=>finishOld=resolve));
++ request.invalidate();
++ const nowTicket=request.begin();
++ const latest=await fetchValidatedLeadStats(async()=>reply({total:0,new:0,contacted:0,archived:0,byType:{}}));
++ const shown=[];
++ if(request.isCurrent(nowTicket))shown.push(latest.total);
++ finishOld(reply());
++ const outdated=await old;
++ if(request.isCurrent(oldTicket))shown.push(outdated.total);
++ assert.deepEqual(shown,[0]);
++});
++test('page starts stats in cleared loading state and has fail-closed status + retry',()=>{
++ for(const phrase of ['setLeadStats(null);','setStatsError(false);','setStatsError(true);',
++  'statsRequests.current.begin()','statsRequests.current.invalidate()',
++  'statsRequests.current.isCurrent(revision)','fetchValidatedLeadStats(fetch)',
++  'Enquiry statistics are temporarily unavailable.','Retry statistics','role="status"']){
++  assert.ok(page.includes(phrase),phrase);
++ }
++ assert.ok(page.indexOf('{statsError && (')<page.indexOf('{leadStats && ('));
++});
++class Response{
++ constructor(body,options={}){this.body=body;this.status=options.status||200;this.headers=options.headers||{}}
++ static json(body,options){return new Response(body,options)}
++}
++function route({authError,storageError}={}){
++ let auth=0,reads=0;
++ const handler=compile('app/api/saas-admin/apex-leads/stats/route.ts',{
++  'next/server':{NextResponse:Response},
++  '@/lib/server/auth-user':{requireSaasAdminUser:async()=>{
++   auth++;if(authError)throw Error(authError);
++  }},
++  '@/lib/server/apex-leads-stats':{getApexLeadStats:async()=>{
++   reads++;if(storageError)throw Error(storageError);
++   return correct;
++  }}
++ });
++ return {get:handler.GET,get auth(){return auth},get reads(){return reads}};
++}
++test('real transpiled admin stats handler returns successful no-store and guarded data',async()=>{
++ const h=route();
++ const response=await h.get();
++ assert.equal(response.status,200);
++ assert.equal(response.headers['Cache-Control'],'no-store');
++ assert.equal(response.body.data.total,3);
++ assert.equal(h.auth,1);assert.equal(h.reads,1);
++});
++test('HTTP 401 403 are uncached and never read protected statistics',async()=>{
++ for(const [why,status] of [['Unauthorized',401],['Forbidden',403]]){
++  const h=route({authError:why});
++  const response=await h.get();
++  assert.equal(response.status,status);
++  assert.equal(response.headers['Cache-Control'],'no-store');
++  assert.equal(h.reads,0);
++ }
++});
++test('backend stats storage faults stay redacted no-store 500',async()=>{
++ const h=route({storageError:'PRIVATE_PATH_FROM_BACKEND_MUST_NOT_LEAK'});
++ const result=await h.get();
++ assert.equal(result.status,500);
++ assert.equal(result.headers['Cache-Control'],'no-store');
++ assert.equal(result.body.message,'Administrative request temporarily unavailable');
++ assert.doesNotMatch(JSON.stringify(result.body),/PRIVATE_PATH_FROM_BACKEND_MUST_NOT_LEAK/);
++});
