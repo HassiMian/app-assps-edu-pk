@@ -1,0 +1,20 @@
+{
+  "baseGitCommit": "44cfef3e2162d61ebff4374dab62fcc4b84689d0",
+  "fixedGitCommit": "2b749aee8a21b460e099e4bdbf608e1b997427c0",
+  "nodeFocusedTestsPassed": 16,
+  "observedBuildId": "OS4cW8dj-TjhMP5tGmtlR",
+  "observedBuildLogSha256": "09783bccdcd432d1c8ce9c94be0cf96043168b953f316f469c8e8cf6eb6cf64a",
+  "observedGeneratedPages": 103,
+  "observedOptimizedBuildExit": 0,
+  "productionModified": false,
+  "releaseAuthorized": false,
+  "reviewedFiles": {
+    "src/app/api/saas-admin/apex-leads/export/route.ts": "7ef46810b9b657bfd0d60955a35e6e5f7a1581f3f8b2c046d0951d9c2810013f",
+    "src/app/api/saas-admin/subscription-requests/export/route.ts": "71dca6ce52c14211d535964920ff0729094d478f214b3db971dab51c4dd7f825",
+    "src/lib/server/admin-export-status.ts": "5abd1784fde8d759b29c1b5cb1e2aebc4f89e0fd73048fcc2248fe51e405b9b5",
+    "tests/admin-export-route-security.test.cjs": "3a37aef5df13875faf2b5b577f00ece40ca3956df90088bf3e4c45b3d18e74c1",
+    "tests/admin-export-status.test.mjs": "7cff2baa181a90526a73673baf66e84a15fb6bb03cb1364cd8e311a0fdd93e91"
+  },
+  "schema": "connect-reviewed-csv-status-v1",
+  "sourcePatchSha256": "2f1d716f8650d8dd576a4f4e428ddbf4f0af70b4c46fc9ca97a6e9aa6082555d"
+}

@@ -1,0 +1,202 @@
+diff --git a/src/app/api/saas-admin/apex-leads/export/route.ts b/src/app/api/saas-admin/apex-leads/export/route.ts
+index 7844148..eab18cc 100644
+--- a/src/app/api/saas-admin/apex-leads/export/route.ts
++++ b/src/app/api/saas-admin/apex-leads/export/route.ts
+@@ -1,3 +1,4 @@
++import { parseAdminExportStatus } from "@/lib/server/admin-export-status";
+ import { NextResponse } from "next/server";
+ import { requireSaasAdminUser } from "@/lib/server/auth-user";
+ import { buildApexLeadsCsv } from "@/lib/server/apex-leads-export";
+@@ -8,7 +9,13 @@ export async function GET(req: Request) {
+   try {
+     await requireSaasAdminUser();
+     const { searchParams } = new URL(req.url);
+-    const statusParam = searchParams.get("status") || "ALL";
++    const statusParam = parseAdminExportStatus(searchParams.get("status"), "apex-leads");
++    if (statusParam === null) {
++      return NextResponse.json(
++        { success: false, message: "Invalid export status" },
++        { status: 400, headers: { "Cache-Control": "no-store" } },
++      );
++    }
+     const csv = await buildApexLeadsCsv(statusParam);
+     const stamp = new Date().toISOString().slice(0, 10);
+ 
+diff --git a/src/app/api/saas-admin/subscription-requests/export/route.ts b/src/app/api/saas-admin/subscription-requests/export/route.ts
+index a119f1b..8e327d8 100644
+--- a/src/app/api/saas-admin/subscription-requests/export/route.ts
++++ b/src/app/api/saas-admin/subscription-requests/export/route.ts
+@@ -1,3 +1,4 @@
++import { parseAdminExportStatus } from "@/lib/server/admin-export-status";
+ import { NextResponse } from "next/server";
+ import { requireSaasAdminUser } from "@/lib/server/auth-user";
+ import { buildSubscriptionRequestsCsv } from "@/lib/server/subscription-request-export";
+@@ -9,7 +10,13 @@ export async function GET(req: Request) {
+     await requireSaasAdminUser();
+ 
+     const { searchParams } = new URL(req.url);
+-    const statusParam = searchParams.get("status") || "ALL";
++    const statusParam = parseAdminExportStatus(searchParams.get("status"), "subscription-requests");
++    if (statusParam === null) {
++      return NextResponse.json(
++        { success: false, message: "Invalid export status" },
++        { status: 400, headers: { "Cache-Control": "no-store" } },
++      );
++    }
+     const csv = await buildSubscriptionRequestsCsv(statusParam);
+     const stamp = new Date().toISOString().slice(0, 10);
+ 
+diff --git a/src/lib/server/admin-export-status.ts b/src/lib/server/admin-export-status.ts
+new file mode 100644
+index 0000000..622aba7
+--- /dev/null
++++ b/src/lib/server/admin-export-status.ts
+@@ -0,0 +1,10 @@
++/** Exact valid administrative CSV status filters. */
++export type AdminExportKind = "apex-leads" | "subscription-requests";
++const STATUSES: Record<AdminExportKind, ReadonlySet<string>> = {
++  "apex-leads": new Set(["ALL", "NEW", "CONTACTED", "ARCHIVED"]),
++  "subscription-requests": new Set(["ALL", "PENDING", "PAYMENT_CONFIRMED", "APPROVED", "REJECTED"]),
++};
++export function parseAdminExportStatus(raw: string | null, kind: AdminExportKind): string | null {
++  const status = (raw ?? "ALL").toUpperCase();
++  return STATUSES[kind].has(status) ? status : null;
++}
+diff --git a/tests/admin-export-route-security.test.cjs b/tests/admin-export-route-security.test.cjs
+new file mode 100644
+index 0000000..5c473e7
+--- /dev/null
++++ b/tests/admin-export-route-security.test.cjs
+@@ -0,0 +1,83 @@
++'use strict';
++const assert = require('node:assert/strict');
++const fs = require('node:fs');
++const path = require('node:path');
++const vm = require('node:vm');
++const ts = require('typescript');
++const test = require('node:test');
++
++function runModule(source, requireDependency) {
++  const js = ts.transpileModule(source, {
++    compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
++  }).outputText;
++  const ex = {};
++  vm.runInNewContext(js, { exports: ex, require: requireDependency, URL, Error }, { timeout: 1200 });
++  return ex;
++}
++class FakeResponse {
++  constructor(body, options) {
++    this.body = body;
++    this.status = options?.status || 200;
++    this.headers = options?.headers || {};
++  }
++  static json(body, options) {
++    return new FakeResponse(body, options);
++  }
++}
++const folder = path.resolve(__dirname, '..', 'src');
++const parser = runModule(
++  fs.readFileSync(path.join(folder, 'lib/server/admin-export-status.ts'), 'utf8'),
++  () => { throw Error('unexpected parser import'); },
++).parseAdminExportStatus;
++
++for (const [kind, route, exporter] of [
++  ['apex-leads', 'app/api/saas-admin/apex-leads/export/route.ts', 'buildApexLeadsCsv'],
++  ['subscription-requests', 'app/api/saas-admin/subscription-requests/export/route.ts', 'buildSubscriptionRequestsCsv'],
++]) {
++  function setup(authorized = true) {
++    let authCalls = 0, exportCalls = 0;
++    const source = fs.readFileSync(path.join(folder, route), 'utf8');
++    const { GET } = runModule(source, (name) => {
++      if (name === 'next/server') return { NextResponse: FakeResponse };
++      if (name === '@/lib/server/auth-user') return {
++        requireSaasAdminUser: async () => {
++          authCalls++;
++          if (!authorized) throw Error('Unauthorized');
++        },
++      };
++      if (name === '@/lib/server/admin-export-status') return { parseAdminExportStatus: parser };
++      if (name.includes('export')) return {
++        [exporter]: async (status) => { exportCalls++; return 'csv-status=' + status; },
++      };
++      throw Error('unmocked module ' + name);
++    });
++    return { GET, counters: () => ({ authCalls, exportCalls }) };
++  }
++  test(kind + ' rejects malformed status after auth and before storage', async () => {
++    for (const input of ['ALL%22%3B%20filename%3Dfake.csv', '%0D%0ASet-Cookie%3Afoo', 'BAD']) {
++      const s = setup();
++      const r = await s.GET(new Request('https://apex.assps.edu.pk/api/export?status=' + input));
++      assert.equal(r.status, 400);
++      assert.equal(s.counters().authCalls, 1);
++      assert.equal(s.counters().exportCalls, 0);
++      assert.equal(r.headers['Cache-Control'], 'no-store');
++    }
++  });
++  test(kind + ' rejects unauthenticated callers without touching storage', async () => {
++    const s = setup(false);
++    const r = await s.GET(new Request('https://apex.assps.edu.pk/api/export?status=INVALID'));
++    assert.equal(r.status, 401);
++    assert.equal(s.counters().authCalls, 1);
++    assert.equal(s.counters().exportCalls, 0);
++  });
++  test(kind + ' permits canonical ALL and generates bounded filename', async () => {
++    const s = setup();
++    const r = await s.GET(new Request('https://apex.assps.edu.pk/api/export?status=all'));
++    assert.equal(r.status, 200);
++    assert.equal(r.body, 'csv-status=ALL');
++    assert.equal(s.counters().authCalls, 1);
++    assert.equal(s.counters().exportCalls, 1);
++    assert.match(r.headers['Content-Disposition'], /-all-\d{4}-\d{2}-\d{2}\.csv"$/);
++    assert.equal(r.headers['Cache-Control'], 'no-store');
++  });
++}
+diff --git a/tests/admin-export-status.test.mjs b/tests/admin-export-status.test.mjs
+new file mode 100644
+index 0000000..1620931
+--- /dev/null
++++ b/tests/admin-export-status.test.mjs
+@@ -0,0 +1,43 @@
++import assert from "node:assert/strict";
++import test from "node:test";
++import { readFileSync } from "node:fs";
++import { resolve, dirname } from "node:path";
++import { fileURLToPath } from "node:url";
++import { parseAdminExportStatus } from "../src/lib/server/admin-export-status.ts";
++const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
++const paths = [
++  "src/app/api/saas-admin/apex-leads/export/route.ts",
++  "src/app/api/saas-admin/subscription-requests/export/route.ts",
++];
++test("lead status allowlist and casing", () => {
++  for (const s of ["ALL", "NEW", "CONTACTED", "ARCHIVED"])
++    assert.equal(parseAdminExportStatus(s.toLowerCase(), "apex-leads"), s);
++  assert.equal(parseAdminExportStatus(null, "apex-leads"), "ALL");
++});
++test("subscription status allowlist and casing", () => {
++  for (const s of ["ALL", "PENDING", "PAYMENT_CONFIRMED", "APPROVED", "REJECTED"])
++    assert.equal(parseAdminExportStatus(s.toLowerCase(), "subscription-requests"), s);
++  assert.equal(parseAdminExportStatus(null, "subscription-requests"), "ALL");
++});
++test("reject filename breaking malformed status values", () => {
++  for (const value of ["", " ", "\t", "\n", "ALL/../private", 'ALL"; filename="fake.csv',
++    "ALL%0D%0ASet-Cookie", "ALL\r\nSet-Cookie:evil", "APPROVED?x=1", "..", "@SUM(2)",
++    "NEW\n", "PENDING\u200b", "ALL,NEW", "é", "PAID", "NEW\u0000", "NEW\\ADMIN"]) {
++    for (const kind of ["apex-leads", "subscription-requests"])
++      assert.equal(parseAdminExportStatus(value, kind), null);
++  }
++});
++test("deny cross-kind status names", () => {
++  assert.equal(parseAdminExportStatus("PENDING", "apex-leads"), null);
++  assert.equal(parseAdminExportStatus("CONTACTED", "subscription-requests"), null);
++});
++test("both routes validate status after auth before CSV storage", () => {
++  for (const f of paths) {
++    const src = readFileSync(resolve(root, f), "utf8");
++    assert.match(src, /parseAdminExportStatus\(searchParams\.get\("status"\),/);
++    assert.match(src, /if \(statusParam === null\)/);
++    assert.match(src, /status: 400/);
++    assert.ok(src.indexOf("if (statusParam === null)") < src.indexOf("await build"));
++    assert.ok(src.indexOf("await requireSaasAdminUser()") < src.indexOf("const statusParam = parseAdminExportStatus"));
++  }
++});
