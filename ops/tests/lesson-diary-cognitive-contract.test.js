@@ -7,7 +7,7 @@ const read = rel => fs.readFileSync(path.join(root, rel), 'utf8')
 
 test('Lesson Planning cognitive endpoints stay behind lesson-plan auth/RLS router', () => {
   const route = read('al-siddique-backend/src/routes/lessonPlanRoutes.js')
-  assert.match(route, /router\.use\(protect, canManageLessonPlans\)/)
+  assert.match(route, /router\.use\(protect,\s*canManageLessonPlans(?:,|\))/)
   assert.match(route, /router\.get\('\/planner\/context'/)
   assert.match(route, /router\.post\('\/planner\/parse'/)
   assert.match(route, /router\.post\('\/planner\/generate'/)
@@ -19,7 +19,7 @@ test('Daily Diary accepts requested dynamic A4 card counts', () => {
   const route = read('al-siddique-backend/src/routes/dailyDiaryRoutes.js')
   assert.match(route, /\[2, 3, 4, 5, 6, 8, 10, 12, 14\]\.includes\(slipsPerPage\)/)
   const workspace = read('al-siddique-frontend/src/Modules/Paper-Generator/DailyDiaryWorkspace.jsx')
-  assert.match(workspace, /const CARD_COUNTS = \[2,3,4,5,6,8,10\]/)
+  assert.match(workspace, /const CARD_COUNTS = \[2,\s*3,\s*4,\s*5,\s*6,\s*8,\s*10\]/)
   assert.match(workspace, /data-student-card/)
   assert.match(workspace, /data-a4-page/)
 })
