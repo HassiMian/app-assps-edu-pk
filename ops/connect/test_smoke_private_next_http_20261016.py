@@ -77,6 +77,19 @@ class PrivateConnectSmokeTests(unittest.TestCase):
         if stage.exists():
             self.assertTrue(smoke.safe_stage(stage, smoke.REVIEWED_BUILD_ID))
 
+    def test_exact_hardened_export_stage_qa_only_permit(self):
+        if smoke.EXPORT_QA_STAGE.exists():
+            self.assertTrue(smoke.safe_stage(smoke.EXPORT_QA_STAGE, smoke.EXPORT_QA_BUILD))
+            self.assertFalse(smoke.safe_stage(smoke.EXPORT_QA_STAGE, smoke.REVIEWED_BUILD_ID))
+
+    def test_export_stage_source_drift_rejected(self):
+        from unittest.mock import patch
+        if smoke.EXPORT_QA_STAGE.exists():
+            with patch.dict(smoke.EXPORT_QA_SOURCE_DIGESTS, {
+                "src/app/api/saas-admin/apex-leads/export/route.ts": "0" * 64
+            }):
+                self.assertFalse(smoke.safe_stage(smoke.EXPORT_QA_STAGE, smoke.EXPORT_QA_BUILD))
+
     def test_stale_compiled_id_rejected(self):
         self.assertFalse(smoke.safe_stage(smoke.REVIEWED_BUILD_STAGE, "EvBJH9KRqqtM5ldAhJKtT"))
 

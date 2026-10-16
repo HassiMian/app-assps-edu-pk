@@ -34,6 +34,17 @@ REVIEWED_BUILD_STAGE = Path("/root/workspace/apex-connect-eslint-full-source-rec
 REVIEWED_BUILD_ID = "SAsg3cC_el5cq2_nN2a46"
 REVIEWED_SOURCE = "9fcca4320bdbeb834f6494d1af82d82f1d9b818f"
 REVIEWED_LINT_SHA = "520ddbd1a0d347a8e3d12e2fce14c4a2ca8b700cb87cf93be3c65efb449b8b83"
+# Exact QA-only permit for the byte-pinned, newly built admin CSV repair.
+# The Core signed release checker still independently pins the old reviewed stage.
+EXPORT_QA_STAGE = Path("/root/workspace/apex-connect-admin-csv-error-redaction-20261016")
+EXPORT_QA_BUILD = "Onz3qs6uPLcJv5vNpWqZh"
+EXPORT_QA_SOURCE = "eb007ae1d2c539b6f20095ebc832605c0b5ac6e2"
+EXPORT_QA_LINT_SHA = "b064360d718fdfbfcdb177dfdf30884505cddabc757d2c155c37dadc22648aff"
+EXPORT_QA_SOURCE_DIGESTS = {
+    "src/app/api/saas-admin/apex-leads/export/route.ts": "79bc94bb51a75f6fe56ad18333ef053f93008a5c596576ffbd71324495416a80",
+    "src/app/api/saas-admin/subscription-requests/export/route.ts": "926d1955250ad0693ace4008aa710fe1a4a869a38bd64d03857f56792f7d2eb8",
+    "tests/admin-export-route-security.test.cjs": "74182f3839be2ec77756faac5aff1b64e443f0acee82ff453af7427678cbb203",
+}
 
 
 class NoRedirect(HTTPRedirectHandler):
@@ -63,7 +74,8 @@ def safe_stage(stage: Path, expected_build: str) -> bool:
     stage = stage.resolve()
     is_original_private = stage.is_relative_to(ALLOWED_ROOT) and stage != ALLOWED_ROOT
     is_exact_compiled_qa = stage == REVIEWED_BUILD_STAGE and expected_build == REVIEWED_BUILD_ID
-    if not (is_original_private or is_exact_compiled_qa):
+    is_exact_export_qa = stage == EXPORT_QA_STAGE and expected_build == EXPORT_QA_BUILD
+    if not (is_original_private or is_exact_compiled_qa or is_exact_export_qa):
         return False
     if is_exact_compiled_qa:
         # The new workspace exception is one exact reviewed SHA/build/config, not
@@ -76,6 +88,20 @@ def safe_stage(stage: Path, expected_build: str) -> bool:
             digest = hashlib.sha256((stage / "eslint.config.mjs").read_bytes()).hexdigest()
             if digest != REVIEWED_LINT_SHA:
                 return False
+        except (OSError, subprocess.SubprocessError):
+            return False
+    if is_exact_export_qa:
+        # This is a strictly byte-scoped QA exception, NOT a production permit.
+        try:
+            src = subprocess.run(["git", "-C", str(stage), "rev-parse", "HEAD"],
+                                 capture_output=True, text=True, check=True, timeout=5)
+            if src.stdout.strip() != EXPORT_QA_SOURCE:
+                return False
+            if hashlib.sha256((stage / "eslint.config.mjs").read_bytes()).hexdigest() != EXPORT_QA_LINT_SHA:
+                return False
+            for rel, approved_digest in EXPORT_QA_SOURCE_DIGESTS.items():
+                if hashlib.sha256((stage / rel).read_bytes()).hexdigest() != approved_digest:
+                    return False
         except (OSError, subprocess.SubprocessError):
             return False
     build_id = stage / ".next" / "BUILD_ID"

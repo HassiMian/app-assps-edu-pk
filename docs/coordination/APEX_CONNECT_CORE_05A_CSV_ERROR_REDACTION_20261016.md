@@ -41,3 +41,14 @@ Five new hermetic Python patch tests verify checksum, scope, source/provenance, 
 Latest Core+Paper candidate, existing production, academic Question Bank revisions and historical accepted papers remain owned by separate streams. No production Nginx or PM2 restart, database DDL/DML, user impersonation, signed certificate creation, actual marks/results modification, answer-key exposure, live academic approval, forced push, physical printer job or Next deployment occurred.
 
 Release stays HOLD until SaaS Core itself gets real independent 13/13 signed security and robust backup/offhost rollback proof, then performs its governed blue-green promotion and real teacher+peer-school, Diary Save-Reopen-Print and result/zero-integrity postflight. The isolated security change is finished and tested; the complete production mission is NOT certified.
+## Additional private-stage exact byte-scoped HTTP acceptance
+
+The original private smoke runner correctly REJECTED the newly built Next stage as UNAPPROVED_STAGE_OR_BUILD (exit2) because it was restricted to the earlier independently reviewed role-neutral candidate. This was recorded as a proper fail-closed result, not a server failure.
+
+After independently verifying the new Next source exact Git commit eb007ae1d2c539b6f20095ebc832605c0b5ac6e2, actual successful compiled Build ID Onz3qs6uPLcJv5vNpWqZh, ESLint config SHA256 b064360d718fdfbfcdb177dfdf30884505cddabc757d2c155c37dadc22648aff and SHA256 hashes of both modified admin export routes and route-test source (pinned in immutable companion manifest), the QA runner was updated to permit ONLY this exact private QA source/build. The earlier private stage permit remains unchanged. This does not modify the four-phase official signed release list or make production promotion possible.
+
+Two new adversarial source tests verify (1) exact reviewed build can be tested, stale Build ID cannot, (2) changing even one reviewed admin export route hash denies the test stage.
+
+Actual ephemeral Node/Next loopback runtime from the latest source: **11/11 PRIVATE_HTTP_PASS**, including /login 200, /api/auth/me 401, /dashboard and history expected 307 login, /teacher 302 login next=/teacher, six private admin/school GET endpoints exact HTTP401. Process EXIT0, listener terminated. Private status-only receipt mode0600 /root/assps-release-evidence/connect-core-marks-safe-05a-20261016/qa-hardened-private-http.json SHA256 5ff58a456756b0b5a6c02e445b1bea7e723f2cb23c512713430ac8442ecd7ff7 and companion rc0. The check did not authenticate any real user or access school records, and is NOT independently signed tenant/RLS certification.
+
+With the additional QA-stage tests: full Connect Python suite **204/204 PASS** and Node stage-negative suite **8/8 PASS**. Existing Core officially signed gate still 6/13 EXIT2/HOLD; no production change.
