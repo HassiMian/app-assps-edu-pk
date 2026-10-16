@@ -5,11 +5,13 @@ on:
       - 'integration/core503-marks-rls-paper-privacy-20261016'
       - 'integration/core503-privacy-expectedanswer-diary-port-20261016'
       - 'integration/core503-truefalse-http-marks-release-20261016'
+      - 'fix/core-classone-urdu-locked-readonly-preflight-20261016'
   pull_request:
     paths:
       - 'al-siddique-backend/src/config/signedRlsCatalogGuard.js'
       - 'al-siddique-backend/src/config/database.js'
       - 'al-siddique-backend/src/tests/signed-runtime-catalog-contract.test.js'
+      - 'ops/release/core-marks/**'
       - 'al-siddique-backend/src/services/assessmentPrintJobs.js'
       - 'al-siddique-backend/src/tests/assessment-print-jobs-domain.test.js'
       - 'al-siddique-backend/src/tests/assessment-truefalse-student-projection-http-isolated.test.cjs'
@@ -55,6 +57,8 @@ jobs:
       - name: Read-only fixtures for live role/ACL/RLS/peer-worker, no real production connection
         run: |
           python3 -m unittest -q ops/release/core-infrastructure/test_verify_signed_rls_catalog_drift_20261016.py ops/release/core-infrastructure/test_verify_live_role_membership_grants_20261016.py ops/release/core-infrastructure/test_verify_unsigned_rls_matrix_20261016.py ops/release/worker-probe/test_verify_worker_peer_scope_20261016.py ops/release/test_verify_private_backend_stage_rollback_20261016.py
+      - name: Reject tampered Urdu marks, duplicate student IDs or fabricated school approval
+        run: python3 -m unittest discover -s ops/release/core-marks -p 'test_*.py' -q
       - name: Protect all fifteen Daily Diary synthetic Chromium workflows
         run: node ops/paper-studio/run_diary_release_browser_20261016.cjs
       - name: Prevent shared port collisions and ABA diary regressions in Chromium
