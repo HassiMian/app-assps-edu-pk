@@ -1,0 +1,25 @@
+{
+  "baseCommit": "eb007ae1d2c539b6f20095ebc832605c0b5ac6e2",
+  "buildLogSha256": "6fcfa34d76777d2121912a344f403a5c51c23a2a67708761137be92ff82a1560",
+  "compiledStaticPages": 103,
+  "fixCommit": "cecdcebd8e244cc73b784abaafc250f8ee8955cd",
+  "focusedNodeTestsPassed": 31,
+  "optimizedBuildExit": 0,
+  "patchSha256": "64d28006fff3ef470bcfb93a8436d425ec5a90045205943bc308c7e8154b873b",
+  "privateBuildId": "FQusvFB3gAQSa5Cal2tJX",
+  "productionModified": false,
+  "releaseAuthorized": false,
+  "schema": "connect-next-saas-admin-500-redaction-v1",
+  "sourceFileSha256": {
+    "src/app/api/saas-admin/apex-leads/[leadId]/follow-up/route.ts": "76584572774f1b538011c76fca5e28f1ebd8fc4eabd1f6fc5d62b18834d055bd",
+    "src/app/api/saas-admin/apex-leads/[leadId]/status/route.ts": "9462dadd154deb649e8ab312406b703c086676f03419d94b4a58e5eecf06bb8f",
+    "src/app/api/saas-admin/apex-leads/route.ts": "b34d70ba1c3a7ca0ddb66e542e3e919b7565e181151c0c821677d08ea402faaa",
+    "src/app/api/saas-admin/apex-leads/stats/route.ts": "79ecef2c998f046b88873bc37b54f3a1690fa72413bcf996f49cc95745cdfa43",
+    "src/app/api/saas-admin/gateway-sandbox/route.ts": "582464b6ab09f8ad58f82ebd87e9cf2326161f320698a74214258fe0256f6ac5",
+    "src/app/api/saas-admin/gateway-setup/route.ts": "bfe40ea674c299273268f95a6874b2a0480eaed429b72f8d672c32b4a45b7df8",
+    "src/app/api/saas-admin/subscription-requests/[id]/approve/route.ts": "a214b038ffe6065ab8973efb0cb615cdbc2ad455c6b153ebf465c3f391ac3ac5",
+    "src/app/api/saas-admin/subscription-requests/bulk-approve/route.ts": "58a2551355a2818f75579115a261f582d7751ff3f2e8df0aaf29528ecf5d4f50",
+    "src/app/api/saas-admin/subscription-requests/stats/route.ts": "b0aada53df23d4a6d02275689c1b2d630e7c24192f5cd2b2cf30a85c6d7360f2",
+    "tests/admin-api-error-boundary.test.cjs": "58d8a751030c0f69525e47f6c1e362b2995fbfe3fce3e10d5bcc95b22e8e8003"
+  }
+}

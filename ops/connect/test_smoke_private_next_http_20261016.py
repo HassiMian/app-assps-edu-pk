@@ -90,6 +90,17 @@ class PrivateConnectSmokeTests(unittest.TestCase):
             }):
                 self.assertFalse(smoke.safe_stage(smoke.EXPORT_QA_STAGE, smoke.EXPORT_QA_BUILD))
 
+    def test_admin_private_stage_byte_pinned_qa_only(self):
+        if smoke.ADMIN_QA_STAGE.exists():
+            self.assertTrue(smoke.safe_stage(smoke.ADMIN_QA_STAGE, smoke.ADMIN_QA_BUILD))
+            self.assertFalse(smoke.safe_stage(smoke.ADMIN_QA_STAGE, smoke.EXPORT_QA_BUILD))
+
+    def test_admin_stage_manifest_tamper_rejected(self):
+        from unittest.mock import patch
+        if smoke.ADMIN_QA_STAGE.exists():
+            with patch.object(smoke, "ADMIN_QA_MANIFEST_SHA", "0"*64):
+                self.assertFalse(smoke.safe_stage(smoke.ADMIN_QA_STAGE, smoke.ADMIN_QA_BUILD))
+
     def test_stale_compiled_id_rejected(self):
         self.assertFalse(smoke.safe_stage(smoke.REVIEWED_BUILD_STAGE, "EvBJH9KRqqtM5ldAhJKtT"))
 

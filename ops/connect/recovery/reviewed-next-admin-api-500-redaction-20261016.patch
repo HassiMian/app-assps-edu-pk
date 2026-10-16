@@ -1,0 +1,230 @@
+diff --git a/src/app/api/saas-admin/apex-leads/[leadId]/follow-up/route.ts b/src/app/api/saas-admin/apex-leads/[leadId]/follow-up/route.ts
+index 4575e99..430aa50 100644
+--- a/src/app/api/saas-admin/apex-leads/[leadId]/follow-up/route.ts
++++ b/src/app/api/saas-admin/apex-leads/[leadId]/follow-up/route.ts
+@@ -43,6 +43,9 @@ export async function POST(
+     if (message.includes("ENOENT")) {
+       return NextResponse.json({ success: false, message: "Lead not found" }, { status: 404 });
+     }
+-    return NextResponse.json({ success: false, message }, { status: 500 });
++    return NextResponse.json(
++      { success: false, message: "Administrative request temporarily unavailable" },
++      { status: 500, headers: { "Cache-Control": "no-store" } },
++    );
+   }
+ }
+diff --git a/src/app/api/saas-admin/apex-leads/[leadId]/status/route.ts b/src/app/api/saas-admin/apex-leads/[leadId]/status/route.ts
+index 68e71cc..5fb71f9 100644
+--- a/src/app/api/saas-admin/apex-leads/[leadId]/status/route.ts
++++ b/src/app/api/saas-admin/apex-leads/[leadId]/status/route.ts
+@@ -39,6 +39,9 @@ export async function POST(
+     if (message.includes("ENOENT")) {
+       return NextResponse.json({ success: false, message: "Lead not found" }, { status: 404 });
+     }
+-    return NextResponse.json({ success: false, message }, { status: 500 });
++    return NextResponse.json(
++      { success: false, message: "Administrative request temporarily unavailable" },
++      { status: 500, headers: { "Cache-Control": "no-store" } },
++    );
+   }
+ }
+diff --git a/src/app/api/saas-admin/apex-leads/route.ts b/src/app/api/saas-admin/apex-leads/route.ts
+index d7d18ac..b636d02 100644
+--- a/src/app/api/saas-admin/apex-leads/route.ts
++++ b/src/app/api/saas-admin/apex-leads/route.ts
+@@ -19,6 +19,9 @@ export async function GET(req: Request) {
+         { status: message === "Forbidden" ? 403 : 401 }
+       );
+     }
+-    return NextResponse.json({ success: false, message }, { status: 500 });
++    return NextResponse.json(
++      { success: false, message: "Administrative request temporarily unavailable" },
++      { status: 500, headers: { "Cache-Control": "no-store" } },
++    );
+   }
+ }
+diff --git a/src/app/api/saas-admin/apex-leads/stats/route.ts b/src/app/api/saas-admin/apex-leads/stats/route.ts
+index fc64a93..547d350 100644
+--- a/src/app/api/saas-admin/apex-leads/stats/route.ts
++++ b/src/app/api/saas-admin/apex-leads/stats/route.ts
+@@ -17,6 +17,9 @@ export async function GET() {
+         { status: message === "Forbidden" ? 403 : 401 }
+       );
+     }
+-    return NextResponse.json({ success: false, message }, { status: 500 });
++    return NextResponse.json(
++      { success: false, message: "Administrative request temporarily unavailable" },
++      { status: 500, headers: { "Cache-Control": "no-store" } },
++    );
+   }
+ }
+diff --git a/src/app/api/saas-admin/gateway-sandbox/route.ts b/src/app/api/saas-admin/gateway-sandbox/route.ts
+index c95aeb6..135b2cd 100644
+--- a/src/app/api/saas-admin/gateway-sandbox/route.ts
++++ b/src/app/api/saas-admin/gateway-sandbox/route.ts
+@@ -16,6 +16,9 @@ export async function GET() {
+         { status: message === "Forbidden" ? 403 : 401 }
+       );
+     }
+-    return NextResponse.json({ success: false, message }, { status: 500 });
++    return NextResponse.json(
++      { success: false, message: "Administrative request temporarily unavailable" },
++      { status: 500, headers: { "Cache-Control": "no-store" } },
++    );
+   }
+ }
+diff --git a/src/app/api/saas-admin/gateway-setup/route.ts b/src/app/api/saas-admin/gateway-setup/route.ts
+index 9a11467..fdb3b00 100644
+--- a/src/app/api/saas-admin/gateway-setup/route.ts
++++ b/src/app/api/saas-admin/gateway-setup/route.ts
+@@ -16,6 +16,9 @@ export async function GET() {
+         { status: message === "Forbidden" ? 403 : 401 }
+       );
+     }
+-    return NextResponse.json({ success: false, message }, { status: 500 });
++    return NextResponse.json(
++      { success: false, message: "Administrative request temporarily unavailable" },
++      { status: 500, headers: { "Cache-Control": "no-store" } },
++    );
+   }
+ }
+diff --git a/src/app/api/saas-admin/subscription-requests/[id]/approve/route.ts b/src/app/api/saas-admin/subscription-requests/[id]/approve/route.ts
+index 68bb0bd..d1864ce 100644
+--- a/src/app/api/saas-admin/subscription-requests/[id]/approve/route.ts
++++ b/src/app/api/saas-admin/subscription-requests/[id]/approve/route.ts
+@@ -46,6 +46,9 @@ export async function POST(
+         { status: message === "Forbidden" ? 403 : 401 }
+       );
+     }
+-    return NextResponse.json({ success: false, message }, { status: 500 });
++    return NextResponse.json(
++      { success: false, message: "Administrative request temporarily unavailable" },
++      { status: 500, headers: { "Cache-Control": "no-store" } },
++    );
+   }
+ }
+diff --git a/src/app/api/saas-admin/subscription-requests/bulk-approve/route.ts b/src/app/api/saas-admin/subscription-requests/bulk-approve/route.ts
+index 0c08706..3a79613 100644
+--- a/src/app/api/saas-admin/subscription-requests/bulk-approve/route.ts
++++ b/src/app/api/saas-admin/subscription-requests/bulk-approve/route.ts
+@@ -25,6 +25,9 @@ export async function POST() {
+         { status: message === "Forbidden" ? 403 : 401 }
+       );
+     }
+-    return NextResponse.json({ success: false, message }, { status: 500 });
++    return NextResponse.json(
++      { success: false, message: "Administrative request temporarily unavailable" },
++      { status: 500, headers: { "Cache-Control": "no-store" } },
++    );
+   }
+ }
+diff --git a/src/app/api/saas-admin/subscription-requests/stats/route.ts b/src/app/api/saas-admin/subscription-requests/stats/route.ts
+index 78d73b1..1d28faf 100644
+--- a/src/app/api/saas-admin/subscription-requests/stats/route.ts
++++ b/src/app/api/saas-admin/subscription-requests/stats/route.ts
+@@ -17,6 +17,9 @@ export async function GET() {
+         { status: message === "Forbidden" ? 403 : 401 }
+       );
+     }
+-    return NextResponse.json({ success: false, message }, { status: 500 });
++    return NextResponse.json(
++      { success: false, message: "Administrative request temporarily unavailable" },
++      { status: 500, headers: { "Cache-Control": "no-store" } },
++    );
+   }
+ }
+diff --git a/tests/admin-api-error-boundary.test.cjs b/tests/admin-api-error-boundary.test.cjs
+new file mode 100644
+index 0000000..55a9c40
+--- /dev/null
++++ b/tests/admin-api-error-boundary.test.cjs
+@@ -0,0 +1,89 @@
++'use strict';
++const assert=require('node:assert/strict');
++const fs=require('node:fs');
++const path=require('node:path');
++const vm=require('node:vm');
++const ts=require('typescript');
++const test=require('node:test');
++const root=path.resolve(__dirname,'../src/app/api/saas-admin');
++const routes=[
++ 'apex-leads/route.ts',
++ 'apex-leads/stats/route.ts',
++ 'apex-leads/[leadId]/follow-up/route.ts',
++ 'apex-leads/[leadId]/status/route.ts',
++ 'gateway-sandbox/route.ts',
++ 'gateway-setup/route.ts',
++ 'subscription-requests/[id]/approve/route.ts',
++ 'subscription-requests/bulk-approve/route.ts',
++ 'subscription-requests/stats/route.ts',
++];
++const safeMessage='Administrative request temporarily unavailable';
++class Response {
++ constructor(body, options={}){this.body=body;this.status=options.status||200;this.headers=options.headers||{};}
++ static json(data,options){return new Response(data,options);}
++}
++test('exact nine administrative route error boundaries are redacted',()=>{
++ assert.equal(routes.length,9);
++ for(const rel of routes){
++  const source=fs.readFileSync(path.join(root,rel),'utf8');
++  assert.match(source,/await requireSaasAdminUser\(\)/,rel);
++  assert.match(source,/message === "Unauthorized" \|\| message === "Forbidden"/,rel);
++  assert.match(source,/status: message === "Forbidden" \? 403 : 401/,rel);
++  assert.match(source,/message: "Administrative request temporarily unavailable"/,rel);
++  assert.match(source,/status: 500, headers: \{ "Cache-Control": "no-store" \}/,rel);
++  assert.doesNotMatch(source,/return NextResponse\.json\(\{ success: false, message \}, \{ status: 500 \}\)/,rel);
++ }
++});
++function load(rel,authError){
++ const source=fs.readFileSync(path.join(root,rel),'utf8');
++ const js=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
++ const exp={};
++ const counts={auth:0, backend:0};
++ const auth=async()=>{
++   counts.auth++;
++   if(authError) throw Error(authError);
++ };
++ const backend=()=>{
++   counts.backend++;
++   throw Error('PRIVATE_SQL_CREDENTIALS_AND_FILESYSTEM_PATH');
++ };
++ const mock=(id)=>{
++   if(id==='next/server')return {NextResponse:Response};
++   if(id==='@/lib/server/auth-user')return {requireSaasAdminUser:auth};
++   if(!id.startsWith('@/lib/server/'))throw Error('Unexpected module: '+id);
++   return new Proxy({}, {get(_target,key){
++     if(key==='then')return undefined;
++     return backend;
++   }});
++ };
++ vm.runInNewContext(js,{exports:exp,require:mock,URL,Error,console},{timeout:1000,filename:rel});
++ return {get:exp.GET,post:exp.POST,counts};
++}
++for(const [rel,method] of [
++ ['apex-leads/route.ts','get'],
++ ['apex-leads/stats/route.ts','get'],
++ ['gateway-sandbox/route.ts','get'],
++ ['gateway-setup/route.ts','get'],
++ ['subscription-requests/stats/route.ts','get'],
++ ['subscription-requests/bulk-approve/route.ts','post'],
++]){
++ test(rel+' authenticated backend failure never leaks details',async()=>{
++   const m=load(rel,null);
++   const resp=await m[method]({url:'https://apex.assps.edu.pk/api/saas-admin/qa'});
++   assert.equal(m.counts.auth,1);
++   assert.equal(m.counts.backend,1);
++   assert.equal(resp.status,500);
++   assert.equal(resp.body.message,safeMessage);
++   assert.equal(resp.headers['Cache-Control'],'no-store');
++   assert.doesNotMatch(JSON.stringify(resp.body),/PRIVATE_SQL_CREDENTIALS_AND_FILESYSTEM_PATH/);
++ });
++ test(rel+' unauthorized before backend access',async()=>{
++   for(const [message,status] of [['Unauthorized',401],['Forbidden',403]]){
++     const m=load(rel,message);
++     const resp=await m[method]({url:'https://apex.assps.edu.pk/api/saas-admin/qa'});
++     assert.equal(resp.status,status);
++     assert.equal(m.counts.auth,1);
++     assert.equal(m.counts.backend,0);
++   }
++ });
++}
