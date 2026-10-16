@@ -1,0 +1,21 @@
+name: ASSPS Core Effective Role Grants Hermetic Safety
+on:
+  push:
+    branches:
+      - 'audit/core-effective-grants-role-graph-*'
+    paths:
+      - 'ops/release/core-infrastructure/*live_role_membership_grants_20261016.py'
+      - '.github/workflows/core-effective-role-grants-audit-20261016.yml'
+  pull_request:
+    paths:
+      - 'ops/release/core-infrastructure/*live_role_membership_grants_20261016.py'
+      - '.github/workflows/core-effective-role-grants-audit-20261016.yml'
+jobs:
+  hermetic-role-graph:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test fail-closed policy without connecting to school database
+        run: python3 -m unittest discover -s ops/release/core-infrastructure -p 'test_verify_live_role_membership_grants_20261016.py' -v
