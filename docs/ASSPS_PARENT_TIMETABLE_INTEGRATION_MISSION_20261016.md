@@ -64,3 +64,9 @@ Connect patch is included so the isolated Connect source can be forward-ported o
 - Private JSON staff alias proposal generated: 13 missing IDs, each has one active directory candidate across three employee IDs, all reference-only and NOT authorized; no permission granted.
 - Full Connect feature + CSS build fix are portable as 2 email patches in docs/ASSPS_CONNECT_PARENT_TIMETABLE_PATCH_20261016.patch, regenerated to include both commits.
 - Machine-readable release decision is documented in docs/ASSPS_PARENT_TIMETABLE_RELEASE_GATES_20261016.json; release_decision HOLD until all remaining hard gates are verified.
+
+## QA full archive restore completed (2026-10-16)
+- Existing 15-Oct permissioned full archive apexos-full-current.dump was restored on isolated QA PostgreSQL cluster port 55432 into a uniquely named temporary database.
+- Verified 58 timetable rows, 318 student rows, 0 teacher_class_assignments in restored copy.
+- QA database dropped after verification; existence probe confirmed absent; production database was never mutated.
+- This validates archived full restore, NOT a fresh same-moment privileged production backup. Fresh permitted pre-cutover backup and real-login acceptance remain release gates.

@@ -8,7 +8,7 @@
       "phase": 1,
       "name": "production read-only audit, archive and parity",
       "status": "PASS",
-      "evidence": "58 timetable rows, source SHA 56/56, prechange parity true, recent full dump decompress pass"
+      "evidence": "58 timetable rows, 56/56 source SHA matches, byte parity true; Oct15 full archive successfully restored Oct16 in isolated QA with 58 timetable, 318 students, 0 teacher assignments; QA database dropped after verification."
     },
     {
       "phase": 2,
@@ -36,7 +36,7 @@
     }
   ],
   "irreducible_gates": [
-    "Full fresh permitted backup and isolated restore/rollback rehearsal",
+    "Fresh permissioned pre-cutover full backup and same-day restore; prior Oct15 archive restore verified on Oct16",
     "Real authorized parent/teacher authentication and browser E2E; exact linked child and peer-school denies",
     "Staff identity/teaching permission authorizations; 13 reference-only mapping proposals not privilege grant",
     "Junior subject schedules and Class Eight vs Pre-Nine unresolved; Mover primary incharge not designated",
@@ -45,5 +45,15 @@
   ],
   "protected_existing_records": "unchanged; latest table-level parity compared to 16-Oct 58-row baseline",
   "official_policy": "ASSPS-2026-10-16-V1",
-  "build_dependency_note": "Connect production webpack build verified; isolated Turbopack symlink issue avoided without touching production; Apex CSS converted to equivalent global stylesheet"
+  "build_dependency_note": "Connect production webpack build verified; isolated Turbopack symlink issue avoided without touching production; Apex CSS converted to equivalent global stylesheet",
+  "backup_restore_20261016": {
+    "archive": "Oct15 permitted full backup",
+    "qa_port": 55432,
+    "restored_timetable_rows": 58,
+    "restored_students": 318,
+    "restored_teacher_assignments": 0,
+    "qa_database_dropped": true,
+    "fresh_current_full_backup": false,
+    "cutover_approved": false
+  }
 }
