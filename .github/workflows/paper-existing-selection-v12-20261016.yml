@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - 'integration/core-paper-phase3ag-*'
+      - 'integration/core-worker-paper-phase3ag-*'
       - 'feat/paper-cross-field-selection-phase-*'
     paths:
       - 'ops/paper-studio/run_existing_selection_v12_20261016.cjs'
