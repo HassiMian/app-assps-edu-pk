@@ -18,6 +18,7 @@ FINAL=PRIVATE/'ocr-legacy-recheck-final-assessment-20261016.json'
 LIVE=PRIVATE/'live-question-revisions.json'
 SUPPLEMENT=PRIVATE/'health-sciences10-tech-c17-page102-bilingual-ocr-20261016.json'
 PHYSICS=PRIVATE/'physics9-c01-s01-three-page-independent-text-proof-20261016.json'
+NATIVE230=PRIVATE/'grade10-230-native-text-source-page-neighborhood-review-20261016.json'
 PUBLIC=ROOT/'docs/question-bank/ASSPS_GRADE910_2581_PUBLIC_SAFE_REVIEW_CROSSWALK_20261015.json'
 TARGET=PRIVATE/'998-text-and-ocr-question-page-review-routing-20261016.json'
 EXPECTED_ORIGINAL_OCR_SHA='fc73d62fb4606a9a89a41aad70fe0fce24d199cb44158e6d8aeb296e2b79c4c6'
@@ -29,7 +30,7 @@ def ident(row):
     return (str(row.get('questionId')),
             str(row.get('sourceCatalog',row.get('catalog'))),
             int(row.get('originallyClaimedPdfPage',row.get('page'))))
-def reconcile(layer,ocr,old,recheck_proof,strict=True,live=None,supplemental=None,physics=None):
+def reconcile(layer,ocr,old,recheck_proof,strict=True,live=None,supplemental=None,physics=None,native230=None):
     if layer.get('schema') is None or not isinstance(layer.get('records'),list):
         raise ValueError('TEXT_LAYER_RESEARCH_NOT_PRESENT')
     if ocr.get('schema')!='ASSPS_GRADE910_OCR_RESUME_V1' or ocr.get('academicApproved') is not False or ocr.get('published') is not False or ocr.get('rawTextPersisted') is not False:
@@ -243,6 +244,99 @@ def reconcile(layer,ocr,old,recheck_proof,strict=True,live=None,supplemental=Non
         record['originalQuestionOriginClaim']='additional'
         record['corroborationScope']='THREE_PHYSICAL_PDF_PAGES_OCR_ONLY_NOT_EDITION_OR_EXERCISE_CERTIFICATION'
         independently_reconfirmed_physics=1
+    native230_count=0
+    if native230 is not None:
+        expected_source_counts={
+            'pectaa-recovered-chemistry10-en-2026':65,
+            'pectaa-catalog-017':60,
+            'pectaa-catalog-057':30,
+            'pectaa-catalog-049':27,
+            'pectaa-catalog-054':24,
+            'pectaa-catalog-062':24}
+        allowed_dispositions={
+            'SHORT_OR_AMBIGUOUS_STEM_NOT_PROVEN',
+            'READABLE_NATIVE_TEXT_NO_EXACT_STEM_IN_BOUNDED_WINDOW',
+            'EXACT_NATIVE_TEXT_ON_CLAIMED_PHYSICAL_PAGE_RESEARCH_ONLY',
+            'ONLY_ADJACENT_PHYSICAL_PAGE_TEXT_RESEARCH_ONLY'}
+        if (native230.get('schema')!='ASSPS_GRADE10_230_SHORT_NATIVE_SOURCE_PAGE_BOUNDED_V1'
+            or native230.get('scopedExistingClaims')!=230
+            or native230.get('originalNativeTextNotVerifiedClaims')!=124
+            or native230.get('originalShortAmbiguousClaims')!=106
+            or native230.get('numberOfOriginalSourcePDFs')!=6
+            or native230.get('numberOfOriginalSourcePhysicalClaimPages')!=49
+            or native230.get('examinedWindowRadiusInPhysicalPDFPages')!=1
+            or native230.get('asspsAdoptedBookEditionVerified') is not False
+            or native230.get('independentlyVerifiedExactExercisePageClaims')!=0
+            or native230.get('qualifiedSubjectOrUrduAcademicReviews')!=0
+            or native230.get('academicallyApprovedQuestions')!=0
+            or native230.get('paperStudioVerifiedSelectableQuestions')!=0
+            or native230.get('productionDatabaseWrites')!=0
+            or native230.get('originalQuestionsAndTextbookExtractsPersisted') is not False
+            or not isinstance(native230.get('rows'),list)
+            or len(native230['rows'])!=230
+            or not isinstance(native230.get('pdfs'),list)
+            or len(native230['pdfs'])!=6):
+            raise ValueError('NATIVE_230_RESEARCH_CAN_NOT_BECOME_FALSE_TEXTBOOK_CERTIFICATION')
+        page_sources={v['sourceCatalogId']:v for v in native230['pdfs']}
+        if set(page_sources)!=set(expected_source_counts) or len(page_sources)!=6:
+            raise ValueError('NATIVE_230_SOURCE_CATALOG_DIVERGED')
+        manifest=json.loads((ROOT/'al-siddique-frontend/src/Modules/Paper-Generator/seed-data/grade9-10-staging/officialSourceManifest.json').read_text())
+        manifest_by={r['recordId']:r for r in manifest['entries']}
+        for cat,one in page_sources.items():
+            official=manifest_by[cat]
+            if (one.get('sourcePDFSHA256')!=official['pdfSha256']
+                or one.get('physicalPDFPages')!=official['pdfPageCount']
+                or one.get('originalOfficialCatalogMedium')!=official['medium']
+                or one.get('uniquePhysicalPagesNativeTextChecked',0)<2
+                or one.get('pagesWithInsufficientNativeText')!=0):
+                raise ValueError('NATIVE_230_PDF_SOURCE_FINGERPRINT_OR_NATIVE_READABILITY_CHANGED')
+        byid={r['questionId']:r for r in items}
+        used=set()
+        distribution=collections.Counter()
+        catalogs=collections.Counter()
+        for row in native230['rows']:
+            id=row.get('questionId')
+            old=byid.get(id)
+            cat=row.get('sourceCatalogId')
+            if (id in used or old is None or cat not in expected_source_counts
+                or row.get('grade')!=10 or old.get('originalGradeClaim')!=10
+                or old.get('sourceCatalogId')!=cat
+                or row.get('currentLiveRevisionSHA256')!=old.get('currentLiveSchool1FullRevisionSha256')
+                or row.get('originalClaimedPhysicalPDFPage')!=old.get('unverifiedOriginalClaimedPdfPage')
+                or row.get('reason')!=old.get('sourceComparisonEvidenceCategory')
+                or row.get('reason') not in ('SHORT_STEM_NEEDS_EXERCISE_REVIEW','TEXT_LAYER_READABLE_NO_EXACT_STEM')
+                or row.get('evidenceDisposition') not in allowed_dispositions
+                or not isinstance(row.get('checkedPhysicalPages'),list)
+                or row['checkedPhysicalPages']!=list(range(
+                    max(1,row['originalClaimedPhysicalPDFPage']-1),
+                    min(page_sources[cat]['physicalPDFPages'],row['originalClaimedPhysicalPDFPage']+1)+1))
+                or row.get('authenticASSPSBookAdoptionProven') is not False
+                or row.get('academicallyVerifiedPrintedExercisePage') is not False
+                or row.get('academicReviewerAuthenticated') is not False
+                or row.get('paperStudioSelectable') is not False
+                or row.get('claimedPDFPhysicalPageNativeTextReadable') is not True
+                or len(str(row.get('frozenOriginalStemSHA256','')))!=64
+                or 'rawPageText' in row or 'originalQuestionText' in row):
+                raise ValueError('NATIVE_230_CURRENT_SHA_SOURCE_PAGE_MISMATCH_OR_FRAUD')
+            if row['reason']=='SHORT_STEM_NEEDS_EXERCISE_REVIEW' and (
+                row.get('fullStemSafeForExactPhrase') is not False
+                or row['evidenceDisposition']!='SHORT_OR_AMBIGUOUS_STEM_NOT_PROVEN'):
+                raise ValueError('NATIVE_106_AMBIGUOUS_QUESTION_CANNOT_BECOME_EXACT_PAGE_EVIDENCE')
+            if row['reason']=='TEXT_LAYER_READABLE_NO_EXACT_STEM' and (
+                row['evidenceDisposition']!='READABLE_NATIVE_TEXT_NO_EXACT_STEM_IN_BOUNDED_WINDOW'
+                or row.get('claimedPhysicalPageExactPhraseOccurrences')!=0
+                or row.get('neighboringPhysicalPageExactPhraseOccurrences')!=0):
+                raise ValueError('NATIVE_124_NO_MATCH_CANNOT_INVENT_EXACT_STEM')
+            used.add(id);catalogs[cat]+=1;distribution[row['evidenceDisposition']]+=1
+            old['independentBoundedNativePDFSourceResearch']='CLAIMED_PAGE_AND_IMMEDIATE_NEIGHBORS_ONLY'
+            old['newSourceEvidenceDisposition']=row['evidenceDisposition']
+            old['boundedOriginalPhysicalPDFAreaChecked']=row['checkedPhysicalPages']
+            native230_count+=1
+        if catalogs!=collections.Counter(expected_source_counts) or (
+            distribution!=collections.Counter({
+                'SHORT_OR_AMBIGUOUS_STEM_NOT_PROVEN':106,
+                'READABLE_NATIVE_TEXT_NO_EXACT_STEM_IN_BOUNDED_WINDOW':124})):
+            raise ValueError('NATIVE_230_EXACT_CURRENT_RESEARCH_CLASSIFICATIONS_DRIFT')
     grade=collections.Counter(str(x['originalGradeClaim']) for x in items)
     evidence=collections.Counter(x['sourceComparisonEvidenceCategory'] for x in items)
     subject=collections.Counter(x['routing'] for x in items)
@@ -273,6 +367,8 @@ def reconcile(layer,ocr,old,recheck_proof,strict=True,live=None,supplemental=Non
        'supplementalUnknownOfficialMediumPDFPagesOCRChecked':1 if supplementary_count else 0,
        'supplementalSourceClaimsIndependentlyOCRChecked':supplementary_count,
        'independentPhysicsSingleExactStemPageAndNeighborsRechecked':independently_reconfirmed_physics,
+       'grade10OriginalNativeTextAndShortClaimWindowsIndependentlyChecked':native230_count,
+       'grade10ShortAndNativeSourcePagesAcademicallyApproved':0,
        'physicsSecondPassTextMatchStillNotAcademicPrintedExerciseProof':True,
        'totalClaimsWithSomeValidatedDecoderOCRScreening':len(ocr_rows)+supplementary_count,
        'originalEnglishOnlyOCRExcludedClaimsRecovered':supplementary_count,
@@ -302,9 +398,10 @@ def load_real():
     current=json.loads(LIVE.read_text())
     bilingual=json.loads(SUPPLEMENT.read_text()) if SUPPLEMENT.exists() else None
     physics=json.loads(PHYSICS.read_text()) if PHYSICS.exists() else None
+    native230=json.loads(NATIVE230.read_text()) if NATIVE230.exists() else None
     if final.get('newFullRecheckReceiptSha256')!=sha(ocr_bytes):
         raise ValueError('FINAL_OCR_SIGNED_RECEIPT_SOURCE_NOT_MATCHING')
-    return reconcile(layer,corrected,old,final,live=current,supplemental=bilingual,physics=physics)
+    return reconcile(layer,corrected,old,final,live=current,supplemental=bilingual,physics=physics,native230=native230)
 def write_private(path,obj):
     if path.parent.stat().st_mode & 0o077:raise ValueError('UNSAFE_PRIVATE_RESEARCH_DIRECTORY_PERMISSIONS')
     fd,tmp=tempfile.mkstemp(prefix='.998-source-review-',dir=path.parent)
