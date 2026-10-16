@@ -125,3 +125,26 @@ test('student-safe paper projection strips real Question Bank answer aliases wit
  assert.equal(staff.paper.sections[0].nodes[0].correctOptionId,'B')
  assert.equal(snapshot.sections[0].nodes[0].correctOptionId,'B','Source release mutated during sanitization')
 })
+
+// True/False expectedAnswer is a real PaperDocumentV2 field, not a printed prompt.
+// Fail-before fixture: the old student projection included the private truth key.
+test('canonical True/False expectedAnswer source metadata is absent from student-only print',()=>{
+  const source={title:'Private source fixture',sections:[{nodes:[
+    {kind:'TRUE_FALSE',statement:'The sun is a star.',hasIndicatorBox:true,expectedAnswer:true},
+    {kind:'TRUE_FALSE',statement:'Ice is hot.',hasIndicatorBox:true,expected_answer:false},
+    {kind:'TRUE_FALSE',statement:'Rain is water.',hasIndicatorBox:true,'expected-answer':true},
+  ]}]}
+  assert.equal(containsForbiddenAnswerMaterial(source),true,'private truth answers must be detected in release source')
+  const safe=buildStudentSafeProjection(source,{student:{name:'Synthetic Student',rollNo:'09'}})
+  for(const item of safe.paper.sections[0].nodes){
+    assert.equal(item.hasIndicatorBox,true,'student-facing answer indicator must be preserved')
+    assert.equal(Object.keys(item).some(k=>k.replace(/[^a-z0-9]/gi,'').toLowerCase()==='expectedanswer'),false,'student-visible true/false key leaked')
+  }
+  assert.equal(safe.paper.sections[0].nodes[0].statement,'The sun is a star.')
+  assert.equal(safe.personalization.student.rollNumber,'09')
+  assert.equal(containsForbiddenAnswerMaterial(safe),false)
+  const staff=buildStaffAnswerKeyProjection(source,{role:'teacher'})
+  assert.equal(staff.paper.sections[0].nodes[0].expectedAnswer,true)
+  assert.equal(staff.paper.sections[0].nodes[1].expected_answer,false)
+  assert.equal(source.sections[0].nodes[0].expectedAnswer,true,'release source mutated by projection')
+})
