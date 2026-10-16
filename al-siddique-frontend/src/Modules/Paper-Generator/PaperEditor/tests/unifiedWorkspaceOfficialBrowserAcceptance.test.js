@@ -14,6 +14,13 @@ test('Class 1 Islamiyat opens Paper Workspace, never Canonical Editor V2', {time
   const browser=await chromium.launch({headless:true,args:['--no-sandbox']})
   const context=await browser.newContext({viewport:{width:1600,height:950}})
   t.after(async()=>{await context.close().catch(()=>{});await browser.close().catch(()=>{});await server.close().catch(()=>{})})
+  // Scope this legacy route acceptance to synthetic school auth only.
+  await context.addInitScript(()=>{
+    localStorage.setItem('al_siddique_token','mock-jwt-token')
+    localStorage.setItem('al_siddique_login_at',String(Date.now()))
+    localStorage.setItem('al_siddique_user',JSON.stringify({id:999,role:'admin',school_id:1,tenant_id:'assps'}))
+  })
+  await context.route('**/api/question-bank**',r=>r.fulfill({status:200,contentType:'application/json',body:'{"success":true,"data":[]}' }))
   const page=await context.newPage()
   const errors=[]
   page.on('pageerror',e=>errors.push(e.message))
