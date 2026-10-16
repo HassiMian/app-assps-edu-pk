@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - 'hotfix/core-marks-save-401-*'
+      - 'fix/core-marks-signed-guard-contract-*'
   pull_request:
     paths:
       - 'al-siddique-frontend/src/services/api.js'
@@ -10,6 +11,7 @@ on:
       - 'al-siddique-frontend/src/Modules/examination/MarksSheet.jsx'
       - 'al-siddique-backend/src/config/database.js'
       - 'al-siddique-backend/src/config/signedRlsCatalogGuard*'
+      - 'al-siddique-backend/src/tests/signed-runtime-catalog-contract.test.js'
       - '.github/workflows/core-marks-save-auth-p0-20261016.yml'
 jobs:
   scoped-marks-auth:
@@ -31,6 +33,7 @@ jobs:
         run: |
           node --check al-siddique-backend/src/config/database.js
           node --test al-siddique-backend/src/config/signedRlsCatalogGuard.test.cjs
+          node --test al-siddique-backend/src/tests/signed-runtime-catalog-contract.test.js
           node --test al-siddique-frontend/src/services/marksSave401Session.test.mjs
           node --test ops/tests/marks-sheet-data-truth.test.js
       - name: Original signed RLS and unsigned denial regressions
