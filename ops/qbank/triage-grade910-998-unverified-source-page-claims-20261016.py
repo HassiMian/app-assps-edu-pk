@@ -16,6 +16,7 @@ TEXT=PRIVATE/'question-page-textlayer.json'
 OCR=PRIVATE/'ocr-recheck-legacy-progress-20261016.json'
 FINAL=PRIVATE/'ocr-legacy-recheck-final-assessment-20261016.json'
 LIVE=PRIVATE/'live-question-revisions.json'
+SUPPLEMENT=PRIVATE/'health-sciences10-tech-c17-page102-bilingual-ocr-20261016.json'
 PUBLIC=ROOT/'docs/question-bank/ASSPS_GRADE910_2581_PUBLIC_SAFE_REVIEW_CROSSWALK_20261015.json'
 TARGET=PRIVATE/'998-text-and-ocr-question-page-review-routing-20261016.json'
 EXPECTED_ORIGINAL_OCR_SHA='fc73d62fb4606a9a89a41aad70fe0fce24d199cb44158e6d8aeb296e2b79c4c6'
@@ -27,7 +28,7 @@ def ident(row):
     return (str(row.get('questionId')),
             str(row.get('sourceCatalog',row.get('catalog'))),
             int(row.get('originallyClaimedPdfPage',row.get('page'))))
-def reconcile(layer,ocr,old,recheck_proof,strict=True,live=None):
+def reconcile(layer,ocr,old,recheck_proof,strict=True,live=None,supplemental=None):
     if layer.get('schema') is None or not isinstance(layer.get('records'),list):
         raise ValueError('TEXT_LAYER_RESEARCH_NOT_PRESENT')
     if ocr.get('schema')!='ASSPS_GRADE910_OCR_RESUME_V1' or ocr.get('academicApproved') is not False or ocr.get('published') is not False or ocr.get('rawTextPersisted') is not False:
@@ -131,6 +132,69 @@ def reconcile(layer,ocr,old,recheck_proof,strict=True,live=None):
         items.append(item)
     if set(ocr_map)-seen:
         raise ValueError('OCR_QUESTION_PAGE_NOT_IN_TEXT_LAYER_998_SET')
+    supplementary_count=0
+    if supplemental is not None:
+        ids={'X-HS-TECH-C17-L01','X-HS-TECH-C17-M01','X-HS-TECH-C17-S01'}
+        if (supplemental.get('schema')!='ASSPS_C054_PAGE102_BILINGUAL_OCR_RESEARCH_ONLY_V1'
+            or supplemental.get('catalog')!='pectaa-catalog-054'
+            or supplemental.get('page')!=102
+            or supplemental.get('grade')!=10
+            or supplemental.get('originalPDFSHA256')!='f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906'
+            or supplemental.get('originalFrozenQuestionFileSHA256')!='544e7b9b1dfc157e9b1199606bf5a84d52120534d993b1249f9064c403244a74'
+            or supplemental.get('mediumNotEstablishedByOfficialCatalog') is not True
+            or supplemental.get('officialSchoolStreamAdoptionVerified') is not False
+            or supplemental.get('officialSchoolTextbookEditionVerified') is not False
+            or supplemental.get('independentlyVerifiedPrintedQuestionPage') is not False
+            or supplemental.get('authenticatedQualifiedReviewers')!=0
+            or supplemental.get('academicApprovedQuestions')!=0
+            or supplemental.get('publishedQuestions')!=0
+            or supplemental.get('productionDatabaseWrites')!=0
+            or supplemental.get('rawTextOrPDFImagesPersisted') is not False
+            or supplemental.get('languagesTried')!=['eng','urd']
+            or len(supplemental.get('results',[]))!=3
+            or {r.get('questionId') for r in supplemental['results']}!=ids):
+            raise ValueError('UNKNOWN_MEDIUM_BILINGUAL_OCR_RESEARCH_NOT_TRUSTED')
+        mapped={r['questionId']:r for r in items}
+        for z in supplemental['results']:
+            id=z['questionId']
+            r=mapped.get(id)
+            english=z.get('languageDiagnostics',{}).get('eng',{})
+            urdu=z.get('languageDiagnostics',{}).get('urd',{})
+            allowed={'questionId','currentLiveQuestionRevisionSHA256','originalQuestionStemSHA256',
+                     'languageDiagnostics','verifiedQuestionAnswerPage','teacherApproved',
+                     'paperStudioVerifiedSelectable'}
+            if (set(z)!=allowed
+                or len(str(z.get('originalQuestionStemSHA256','')))!=64
+                or set(z.get('languageDiagnostics',{}))!={'eng','urd'}
+                or any(set(stats)!={'tokenCount','meanConfidence',
+                                     'substantialExactStemResearchCandidate','reliability'}
+                       for stats in z.get('languageDiagnostics',{}).values())):
+                raise ValueError('UNKNOWN_MEDIUM_SUPPLEMENTAL_METADATA_NOT_PRIVATE_OR_COMPLETE')
+            if (r is None
+                or r.get('sourceCatalogId')!='pectaa-catalog-054'
+                or r.get('unverifiedOriginalClaimedPdfPage')!=102
+                or r.get('textLayerEvidenceCategory')!='TEXT_LAYER_INSUFFICIENT'
+                or r.get('sourceComparisonEvidenceCategory')!='UNREADABLE_NO_ELIGIBLE_OCR'
+                or r.get('currentLiveSchool1FullRevisionSha256')!=z.get('currentLiveQuestionRevisionSHA256')
+                or r.get('originalGradeClaim')!=10
+                or r.get('routing')!='SCHOOL_TECH_STREAM_ADOPTION_AND_EXERCISE_PROOF_REQUIRED'
+                or english.get('reliability')!='OCR_RENDER_READABLE_NOT_SOURCE_PAGE_APPROVAL'
+                or english.get('tokenCount',0)<40 or english.get('meanConfidence',0)<70
+                or english.get('substantialExactStemResearchCandidate') is not False
+                or urdu.get('substantialExactStemResearchCandidate') is not False
+                or z.get('verifiedQuestionAnswerPage') is not False
+                or z.get('teacherApproved') is not False
+                or z.get('paperStudioVerifiedSelectable') is not False
+                or 'ocrText' in z or 'originalQuestionStem' in z):
+                raise ValueError('UNKNOWN_MEDIUM_SOURCE_CURRENT_REVISION_EVIDENCE_DRIFT')
+            r['originalEnglishOnlyOCRExclusion']='UNKNOWN_CATALOG_MEDIUM_EXCLUDED_NOT_UNREADABLE_PDF'
+            r['sourceComparisonEvidenceCategory']='UNKNOWN_MEDIUM_BILINGUAL_OCR_READABLE_NO_EXACT_STEM'
+            r['supplementalOCRDiagnosticEnglishWordCount']=english['tokenCount']
+            r['supplementalOCRDiagnosticEnglishMeanConfidence']=english['meanConfidence']
+            r['supplementalOCRDiagnosticUrduMeanConfidence']=urdu.get('meanConfidence')
+            supplementary_count+=1
+        if supplementary_count!=3:
+            raise ValueError('SUPPLEMENTAL_3_QUESTION_PAGE_EVIDENCE_INCOMPLETE')
     grade=collections.Counter(str(x['originalGradeClaim']) for x in items)
     evidence=collections.Counter(x['sourceComparisonEvidenceCategory'] for x in items)
     subject=collections.Counter(x['routing'] for x in items)
@@ -142,11 +206,13 @@ def reconcile(layer,ocr,old,recheck_proof,strict=True,live=None):
             or evidence.get('OCR_EXACT_STEM_RESEARCH_CANDIDATE_NOT_VERIFIED')!=1
             or evidence.get('OCR_READABLE_NO_EXACT_STEM')!=764
             or sum(evidence.values())!=998
+            or evidence.get('UNKNOWN_MEDIUM_BILINGUAL_OCR_READABLE_NO_EXACT_STEM',0)!=supplementary_count
+            or evidence.get('UNREADABLE_NO_ELIGIBLE_OCR',0)!=3-supplementary_count
             or len(pdfs)!=15):
             raise ValueError('AUTHORITATIVE_998_SOURCE_CLAIM_LEDGER_DRIFT')
     order={'UNREADABLE_NO_ELIGIBLE_OCR':0,'OCR_EXACT_STEM_RESEARCH_CANDIDATE_NOT_VERIFIED':1,
-           'SHORT_STEM_NEEDS_EXERCISE_REVIEW':2,'TEXT_LAYER_READABLE_NO_EXACT_STEM':3,
-           'OCR_READABLE_NO_EXACT_STEM':4}
+           'UNKNOWN_MEDIUM_BILINGUAL_OCR_READABLE_NO_EXACT_STEM':2,'SHORT_STEM_NEEDS_EXERCISE_REVIEW':3,'TEXT_LAYER_READABLE_NO_EXACT_STEM':4,
+           'OCR_READABLE_NO_EXACT_STEM':5}
     items.sort(key=lambda x:(order[x['sourceComparisonEvidenceCategory']],
                              x['originalGradeClaim'] if isinstance(x['originalGradeClaim'],int) else 999,
                              x['sourceCatalogId'],x['questionId']))
@@ -156,6 +222,10 @@ def reconcile(layer,ocr,old,recheck_proof,strict=True,live=None):
        'frozenResearchQuestionCount':len(frozen),
        'sourceTextLayerQuestionClaims':len(text_rows),
        'validatedDecoderOCRQuestionClaims':len(ocr_rows),
+       'supplementalUnknownOfficialMediumPDFPagesOCRChecked':1 if supplementary_count else 0,
+       'supplementalSourceClaimsIndependentlyOCRChecked':supplementary_count,
+       'totalClaimsWithSomeValidatedDecoderOCRScreening':len(ocr_rows)+supplementary_count,
+       'originalEnglishOnlyOCRExcludedClaimsRecovered':supplementary_count,
        'originalSourceClaimIdsPresentInCurrentSchool1LiveBank':sum(x['currentLiveSchool1FullRevisionSha256'] is not None for x in items),
        'originalCanonicalOCRPagesPreserved':112,
        'allOriginalQuestionPageCandidateMatchEvidenceProven':False,
@@ -180,9 +250,10 @@ def load_real():
     old=json.loads(PUBLIC.read_text())
     final=json.loads(FINAL.read_text())
     current=json.loads(LIVE.read_text())
+    bilingual=json.loads(SUPPLEMENT.read_text()) if SUPPLEMENT.exists() else None
     if final.get('newFullRecheckReceiptSha256')!=sha(ocr_bytes):
         raise ValueError('FINAL_OCR_SIGNED_RECEIPT_SOURCE_NOT_MATCHING')
-    return reconcile(layer,corrected,old,final,live=current)
+    return reconcile(layer,corrected,old,final,live=current,supplemental=bilingual)
 def write_private(path,obj):
     if path.parent.stat().st_mode & 0o077:raise ValueError('UNSAFE_PRIVATE_RESEARCH_DIRECTORY_PERMISSIONS')
     fd,tmp=tempfile.mkstemp(prefix='.998-source-review-',dir=path.parent)
