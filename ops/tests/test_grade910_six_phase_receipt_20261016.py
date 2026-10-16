@@ -72,6 +72,16 @@ class ZeroHumanSixPhaseGuards(unittest.TestCase):
     'academicApproved':False,'published':False,'rawTextPersisted':False,
     'completedPages':['a|1','a|1'],'results':[]})
   with self.assertRaises(ValueError):m.evaluate(*a)
+ def test_live_bank_duplicate_receipt_is_fail_closed(self):
+  a=list(fixtures())
+  a.extend((None,{'grade9And10Candidates':2411,'exactStemCollisionGroups':1,
+     'exactStemDifferentAnswerGroups':0,'approvedQuestions':0,'sourceDatabaseWrites':0}))
+  with self.assertRaises(ValueError):m.evaluate(*a)
+ def test_clean_live_duplicate_receipt_is_captured(self):
+  a=list(fixtures())
+  a.extend((None,{'grade9And10Candidates':2411,'exactStemCollisionGroups':0,
+     'exactStemDifferentAnswerGroups':0,'approvedQuestions':0,'sourceDatabaseWrites':0}))
+  self.assertEqual(m.evaluate(*a)['liveQuestionDuplicateGroups'],0)
  def test_private_receipt_permissions(self):
   with tempfile.TemporaryDirectory() as d:
    p=Path(d)/'private'/'status.json'

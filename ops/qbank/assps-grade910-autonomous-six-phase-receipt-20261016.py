@@ -19,7 +19,7 @@ OUT=SOURCE_DIR/"autonomous-six-phase-checkpoint.json"
 def read(path:Path):
     return json.loads(path.read_text(encoding="utf8")) if path.exists() else None
 
-def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, answer, ocr_progress=None):
+def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, answer, ocr_progress=None, live_collisions=None):
     if not all(isinstance(x,dict) for x in (technical,weekly,source,held,pdf,text,ocr_pilot,answer)):
         raise ValueError("MANDATORY_MACHINE_EVIDENCE_MISSING")
     src=source.get("summary") or {}
@@ -66,6 +66,13 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
         progressClaims=len(covered)
     if full_ocr_done:
         progressPages=112
+    if live_collisions is not None:
+        if (live_collisions.get('grade9And10Candidates')!=2411 or
+            live_collisions.get('exactStemCollisionGroups')!=0 or
+            live_collisions.get('exactStemDifferentAnswerGroups')!=0 or
+            live_collisions.get('approvedQuestions')!=0 or
+            live_collisions.get('sourceDatabaseWrites')!=0):
+            raise ValueError('LIVE_DUPLICATE_OR_UNREVIEWED_APPROVAL_REGRESSION')
     score=technical.get("metrics",{}).get("scores",{})
     integrity=technical.get("decision")=="OPERATIONAL" and score.get("total_score_rows",0)>=1763
     fullsuite_ok=(weekly.get("decision")=="QA_PASSED_NO_AUTOMATIC_ACADEMIC_PUBLICATION"
@@ -116,6 +123,7 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
       "ocrFullRunCompleted":full_ocr_done,
       "ocrResumablePagesCheckpointed":progressPages,
       "ocrResumablePageClaimsCheckpointed":progressClaims,
+      "liveQuestionDuplicateGroups":0 if live_collisions is not None else None,
       "unresolvedIndependentEvidence":["School-specific approved book edition and exact academic session adoption",
          "Question-revision and source-page/exercise content attribution",
          "Qualified independent academic subject and Urdu-language review per question revision",
@@ -143,7 +151,8 @@ if __name__=="__main__":
                read(SOURCE_DIR/"ocr-pilot-20261016.json"),
                read(SOURCE_DIR/"ocr-fallback.json"),
                read(SOURCE_DIR/"live-answer-integrity.json"),
-               read(SOURCE_DIR/"ocr-progress.json"))
+               read(SOURCE_DIR/"ocr-progress.json"),
+               read(SOURCE_DIR/"live-stem-collisions.json"))
     save(OUT,p)
     print(json.dumps({k:v for k,v in p.items() if k!="phases"},sort_keys=True))
     for row in p["phases"]:print(f"PHASE_{row['phase']}={row['status']}")

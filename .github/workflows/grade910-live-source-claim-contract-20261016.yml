@@ -7,6 +7,8 @@ on:
       - "ops/qbank/assps-grade910-autonomous-six-phase-receipt-20261016.py"
       - "ops/tests/test_grade910_six_phase_receipt_20261016.py"
       - "ops/qbank/audit-grade910-live-answer-integrity-20261016.py"
+      - "ops/qbank/audit-grade910-live-question-collisions-20261016.py"
+      - "ops/tests/test_grade910_live_question_collisions_20261016.py"
       - "ops/tests/test_grade910_live_answer_integrity_20261016.py"
       - "ops/qbank/assps-grade910-held170-near-duplicate-screen-20261016.py"
       - "ops/qbank/verify-grade910-pdf-physical-page-bounds-20261016.mjs"
@@ -34,6 +36,8 @@ on:
       - "ops/qbank/assps-grade910-autonomous-six-phase-receipt-20261016.py"
       - "ops/tests/test_grade910_six_phase_receipt_20261016.py"
       - "ops/qbank/audit-grade910-live-answer-integrity-20261016.py"
+      - "ops/qbank/audit-grade910-live-question-collisions-20261016.py"
+      - "ops/tests/test_grade910_live_question_collisions_20261016.py"
       - "ops/tests/test_grade910_live_answer_integrity_20261016.py"
       - "ops/qbank/assps-grade910-held170-near-duplicate-screen-20261016.py"
       - "ops/qbank/verify-grade910-pdf-physical-page-bounds-20261016.mjs"
@@ -75,5 +79,7 @@ jobs:
         run: python3 -m unittest discover -s ops/tests -p test_grade910_live_answer_integrity_20261016.py -v
       - name: Maintain phase-wise machine evidence without fabricated academic publication
         run: python3 -m unittest discover -s ops/tests -p test_grade910_six_phase_receipt_20261016.py -v
+      - name: Verify live-bank duplicates and numeric/chemical contrasts remain separate
+        run: python3 -m unittest discover -s ops/tests -p test_grade910_live_question_collisions_20261016.py -v
       - name: Validate offline claim auditor syntax
         run: python3 -m py_compile ops/qbank/audit-live-grade910-source-claims-20261016.py ops/qbank/reconcile-grade910-held-original-candidates-20261016.py
