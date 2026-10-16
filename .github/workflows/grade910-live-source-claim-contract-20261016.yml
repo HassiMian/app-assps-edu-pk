@@ -9,6 +9,10 @@ on:
       - "ops/qbank/audit-grade910-live-answer-integrity-20261016.py"
       - "ops/qbank/audit-grade910-live-question-collisions-20261016.py"
       - "ops/qbank/audit-school1-versioned-textbook-adoption-20261016.py"
+      - "ops/qbank/audit-grade910-live-question-revisions-20261016.py"
+      - "ops/qbank/build-grade910-live-source-review-delta-20261016.py"
+      - "ops/tests/test_grade910_live_question_revision_hashes_20261016.py"
+      - "ops/tests/test_grade910_live_source_review_delta_20261016.py"
       - "ops/tests/test_school1_versioned_textbook_adoption_20261016.py"
       - "ops/tests/test_grade910_live_question_collisions_20261016.py"
       - "ops/tests/test_grade910_live_answer_integrity_20261016.py"
@@ -40,6 +44,10 @@ on:
       - "ops/qbank/audit-grade910-live-answer-integrity-20261016.py"
       - "ops/qbank/audit-grade910-live-question-collisions-20261016.py"
       - "ops/qbank/audit-school1-versioned-textbook-adoption-20261016.py"
+      - "ops/qbank/audit-grade910-live-question-revisions-20261016.py"
+      - "ops/qbank/build-grade910-live-source-review-delta-20261016.py"
+      - "ops/tests/test_grade910_live_question_revision_hashes_20261016.py"
+      - "ops/tests/test_grade910_live_source_review_delta_20261016.py"
       - "ops/tests/test_school1_versioned_textbook_adoption_20261016.py"
       - "ops/tests/test_grade910_live_question_collisions_20261016.py"
       - "ops/tests/test_grade910_live_answer_integrity_20261016.py"
@@ -87,5 +95,9 @@ jobs:
         run: python3 -m unittest discover -s ops/tests -p test_grade910_live_question_collisions_20261016.py -v
       - name: Do not conflate official catalog with school textbook adoption
         run: python3 -m unittest discover -s ops/tests -p test_school1_versioned_textbook_adoption_20261016.py -v
+      - name: Verify revision-specific live hashes and existing 56 faculty cohort evidence queue
+        run: |
+          python3 -m unittest discover -s ops/tests -p test_grade910_live_question_revision_hashes_20261016.py -v
+          python3 -m unittest discover -s ops/tests -p test_grade910_live_source_review_delta_20261016.py -v
       - name: Validate offline claim auditor syntax
         run: python3 -m py_compile ops/qbank/audit-live-grade910-source-claims-20261016.py ops/qbank/reconcile-grade910-held-original-candidates-20261016.py

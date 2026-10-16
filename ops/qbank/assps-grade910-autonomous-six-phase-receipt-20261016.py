@@ -19,7 +19,7 @@ OUT=SOURCE_DIR/"autonomous-six-phase-checkpoint.json"
 def read(path:Path):
     return json.loads(path.read_text(encoding="utf8")) if path.exists() else None
 
-def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, answer, ocr_progress=None, live_collisions=None, adoption_inventory=None):
+def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, answer, ocr_progress=None, live_collisions=None, adoption_inventory=None, review_delta=None):
     if not all(isinstance(x,dict) for x in (technical,weekly,source,held,pdf,text,ocr_pilot,answer)):
         raise ValueError("MANDATORY_MACHINE_EVIDENCE_MISSING")
     src=source.get("summary") or {}
@@ -78,6 +78,17 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
            adoption_inventory.get('schoolEditionAdoptionVerifiedByThisAudit') is not False) or (
            adoption_inventory.get('academicQuestionApprovalGained')!=0):
             raise ValueError('SCHOOL_ADOPTION_NOT_AUTHENTICALLY_VERIFIED')
+    if review_delta is not None:
+        if (review_delta.get('schema')!='ASSPS_GRADE910_2581_LIVE_SOURCE_EVIDENCE_DELTA_V1'
+           or review_delta.get('originalResearchQuestionIds')!=2581
+           or review_delta.get('liveProvisionalIds')!=2411
+           or review_delta.get('protectedOriginalOnlyIds')!=170
+           or review_delta.get('existingFacultyCohorts')!=56
+           or review_delta.get('liveContentRevisionHashEntries')!=2411
+           or review_delta.get('qualifiedFacultyDecisionsForged')!=0
+           or review_delta.get('newlyApprovedQuestions')!=0
+           or review_delta.get('verifiedPublisherSelectableQuestionsCreated')!=0):
+            raise ValueError('FACULTY_REVIEW_DELTA_UNTRUSTED_OR_PUBLICATION_LEAK')
     score=technical.get("metrics",{}).get("scores",{})
     integrity=technical.get("decision")=="OPERATIONAL" and score.get("total_score_rows",0)>=1763
     fullsuite_ok=(weekly.get("decision")=="QA_PASSED_NO_AUTOMATIC_ACADEMIC_PUBLICATION"
@@ -106,6 +117,8 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
       {"phase":4,"title":"Independent review evidence and approved-only publication firewall",
        "status":"SAFE_PUBLICATION_HOLD_EXPECTED",
        "signedIndependentRevisionApprovals":0,"publishedVerifiedQuestions":0,
+       "existingFacultyCohortsReadyWithEvidence":review_delta.get('existingFacultyCohorts') if review_delta else 0,
+       "liveQuestionRevisionsIndividuallySHA256Bound":review_delta.get('liveContentRevisionHashEntries') if review_delta else 0,
        "evidence":"170 private revision-bound unsigned forms, 2411 live provisional records, zero authentic review events"},
       {"phase":5,"title":"Paper Studio handoff and isolated integration QA",
        "status":"MACHINE_INTEGRATION_PASS_CORE_CUTOVER_NOT_CERTIFIED" if fullsuite_ok else "HOLD_FULL_QA_EVIDENCE",
@@ -130,6 +143,8 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
       "ocrFullRunCompleted":full_ocr_done,
       "ocrResumablePagesCheckpointed":progressPages,
       "ocrResumablePageClaimsCheckpointed":progressClaims,
+      "facultyReviewEvidenceCohorts":review_delta.get('existingFacultyCohorts') if review_delta else None,
+      "liveQuestionRevisionHashes":review_delta.get('liveContentRevisionHashEntries') if review_delta else None,
       "liveQuestionDuplicateGroups":0 if live_collisions is not None else None,
       "unresolvedIndependentEvidence":["School-specific approved book edition and exact academic session adoption",
          "Question-revision and source-page/exercise content attribution",
@@ -160,7 +175,8 @@ if __name__=="__main__":
                read(SOURCE_DIR/"live-answer-integrity.json"),
                read(SOURCE_DIR/"ocr-progress.json"),
                read(SOURCE_DIR/"live-stem-collisions.json"),
-               read(SOURCE_DIR/"school-adoption-inventory.json"))
+               read(SOURCE_DIR/"school-adoption-inventory.json"),
+               read(SOURCE_DIR/"faculty-source-evidence-delta.json"))
     save(OUT,p)
     print(json.dumps({k:v for k,v in p.items() if k!="phases"},sort_keys=True))
     for row in p["phases"]:print(f"PHASE_{row['phase']}={row['status']}")

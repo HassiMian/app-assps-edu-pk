@@ -97,6 +97,25 @@ class ZeroHumanSixPhaseGuards(unittest.TestCase):
   a.extend((None,None,{'schema':'ASSPS_SCHOOL1_VERSIONED_ADOPTION_EVIDENCE_INVENTORY_V1',
          'schoolEditionAdoptionVerifiedByThisAudit':True,'academicQuestionApprovalGained':1}))
   with self.assertRaises(ValueError):m.evaluate(*a)
+ def test_faculty_revision_binding_is_review_only(self):
+  a=list(fixtures())
+  a.extend((None,None,None,{'schema':'ASSPS_GRADE910_2581_LIVE_SOURCE_EVIDENCE_DELTA_V1',
+    'originalResearchQuestionIds':2581,'liveProvisionalIds':2411,
+    'protectedOriginalOnlyIds':170,'existingFacultyCohorts':56,
+    'liveContentRevisionHashEntries':2411,'qualifiedFacultyDecisionsForged':0,
+    'newlyApprovedQuestions':0,'verifiedPublisherSelectableQuestionsCreated':0}))
+  result=m.evaluate(*a)
+  self.assertEqual(result['facultyReviewEvidenceCohorts'],56)
+  self.assertEqual(result['liveQuestionRevisionHashes'],2411)
+  self.assertFalse(result['academicVerifiedPublicationReady'])
+ def test_forged_faculty_publication_in_delta_denied(self):
+  a=list(fixtures())
+  a.extend((None,None,None,{'schema':'ASSPS_GRADE910_2581_LIVE_SOURCE_EVIDENCE_DELTA_V1',
+    'originalResearchQuestionIds':2581,'liveProvisionalIds':2411,
+    'protectedOriginalOnlyIds':170,'existingFacultyCohorts':56,
+    'liveContentRevisionHashEntries':2411,'qualifiedFacultyDecisionsForged':1,
+    'newlyApprovedQuestions':0,'verifiedPublisherSelectableQuestionsCreated':0}))
+  with self.assertRaises(ValueError):m.evaluate(*a)
  def test_private_receipt_permissions(self):
   with tempfile.TemporaryDirectory() as d:
    p=Path(d)/'private'/'status.json'

@@ -15,6 +15,7 @@ Environment=ASSPS_OCR_EVIDENCE=/var/lib/assps-grade910-sourceclaims/ocr-fallback
 Environment=ASSPS_OCR_CHUNK_PAGES=20
 Environment=ASSPS_OCR_PROGRESS=/var/lib/assps-grade910-sourceclaims/ocr-progress.json
 ExecStart=/usr/bin/node --expose-gc /usr/local/libexec/assps-grade910-sourceclaims/verify-grade910-scanned-source-ocr-fallback-20261016.mjs
+ExecStartPost=/usr/bin/python3 /usr/local/libexec/assps-grade910-sourceclaims/build-grade910-live-source-review-delta-20261016.py
 ExecStartPost=/usr/bin/python3 /usr/local/libexec/assps-grade910-sourceclaims/assps-grade910-autonomous-six-phase-receipt-20261016.py
 TimeoutStartSec=10800
 ProtectSystem=strict

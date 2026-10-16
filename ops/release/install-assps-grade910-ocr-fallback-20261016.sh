@@ -32,6 +32,7 @@ mkdir -p "$DEST"
 install -m 0644 "$SRC" "$DEST/$(basename "$SRC")"
 install -m 0644 "$ROOT/ops/qbank/assps-grade910-ocr-resume-guard-20261016.mjs" "$DEST/assps-grade910-ocr-resume-guard-20261016.mjs"
 install -m 0644 "$ROOT/ops/qbank/assps-grade910-autonomous-six-phase-receipt-20261016.py" "$DEST/assps-grade910-autonomous-six-phase-receipt-20261016.py"
+install -m 0644 "$ROOT/ops/qbank/build-grade910-live-source-review-delta-20261016.py" "$DEST/build-grade910-live-source-review-delta-20261016.py"
 install -m 0644 "$ROOT/ops/release/$UNIT" "/etc/systemd/system/$UNIT"
 install -m 0644 "$ROOT/ops/release/$TIMER" "/etc/systemd/system/$TIMER"
 systemctl daemon-reload
