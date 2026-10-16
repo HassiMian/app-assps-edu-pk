@@ -5,6 +5,10 @@ on:
       - "ops/qbank/audit-live-grade910-source-claims-20261016.py"
       - "ops/qbank/reconcile-grade910-held-original-candidates-20261016.py"
       - "ops/qbank/assps-grade910-autonomous-six-phase-receipt-20261016.py"
+      - "ops/qbank/audit-grade910-subjective-answer-depth-20261016.py"
+      - "ops/tests/test_grade910_subjective_answer_depth_20261016.py"
+      - "ops/tests/test_grade910_subjective_six_phase_gate_20261016.py"
+      - "ops/release/install-grade910-subjective-depth-and-sixphase-20261016.sh"
       - "ops/qbank/audit-grade910-live-mcq-choice-equivalence-20261016.py"
       - "ops/tests/test_grade910_live_mcq_choice_equivalence_20261016.py"
       - "ops/release/install-grade910-809-mcq-choice-gate-20261016.sh"
@@ -58,6 +62,10 @@ on:
       - "ops/qbank/audit-live-grade910-source-claims-20261016.py"
       - "ops/qbank/reconcile-grade910-held-original-candidates-20261016.py"
       - "ops/qbank/assps-grade910-autonomous-six-phase-receipt-20261016.py"
+      - "ops/qbank/audit-grade910-subjective-answer-depth-20261016.py"
+      - "ops/tests/test_grade910_subjective_answer_depth_20261016.py"
+      - "ops/tests/test_grade910_subjective_six_phase_gate_20261016.py"
+      - "ops/release/install-grade910-subjective-depth-and-sixphase-20261016.sh"
       - "ops/qbank/audit-grade910-live-mcq-choice-equivalence-20261016.py"
       - "ops/tests/test_grade910_live_mcq_choice_equivalence_20261016.py"
       - "ops/release/install-grade910-809-mcq-choice-gate-20261016.sh"
@@ -154,5 +162,10 @@ jobs:
         run: |
           python3 -m unittest discover -s ops/tests -p test_grade910_live_mcq_choice_equivalence_20261016.py -v
           bash -n ops/release/install-grade910-809-mcq-choice-gate-20261016.sh
+      - name: Independently screen all 1522 subjective answer risks without academic publication
+        run: |
+          python3 -m unittest discover -s ops/tests -p test_grade910_subjective_answer_depth_20261016.py -v
+          python3 -m unittest discover -s ops/tests -p test_grade910_subjective_six_phase_gate_20261016.py -v
+          bash -n ops/release/install-grade910-subjective-depth-and-sixphase-20261016.sh
       - name: Validate offline claim auditor syntax
         run: python3 -m py_compile ops/qbank/audit-live-grade910-source-claims-20261016.py ops/qbank/reconcile-grade910-held-original-candidates-20261016.py

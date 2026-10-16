@@ -19,7 +19,7 @@ OUT=SOURCE_DIR/"autonomous-six-phase-checkpoint.json"
 def read(path:Path):
     return json.loads(path.read_text(encoding="utf8")) if path.exists() else None
 
-def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, answer, ocr_progress=None, live_collisions=None, adoption_inventory=None, review_delta=None, tenant_rls=None, revision_history=None, numerical_evidence=None, numerical_deep_proof=None):
+def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, answer, ocr_progress=None, live_collisions=None, adoption_inventory=None, review_delta=None, tenant_rls=None, revision_history=None, numerical_evidence=None, numerical_deep_proof=None, subjective_risk=None):
     if not all(isinstance(x,dict) for x in (technical,weekly,source,held,pdf,text,ocr_pilot,answer)):
         raise ValueError("MANDATORY_MACHINE_EVIDENCE_MISSING")
     src=source.get("summary") or {}
@@ -137,6 +137,28 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
             or numerical_deep_proof.get('sourceQuestionTextOrAnswersStoredInReport') is not False):
             raise ValueError('80_NUMERICAL_MACHINE_RECEIPT_INVALID_OR_UNAPPROVED')
         all80_current=True
+    # Subjective answer depth is an editorial RISK queue. Never promote it to
+    # signed academic approval or force-short answers to become incorrect.
+    subjective_depth_checked=False
+    if subjective_risk is not None:
+        if (subjective_risk.get('schema')!='ASSPS_GRADE910_SUBJECTIVE_ANSWER_DEPTH_TRIAGE_V1'
+            or subjective_risk.get('currentLiveQuestionRevisionsChecked')!=2411
+            or subjective_risk.get('subjectiveItemsChecked')!=1522
+            or subjective_risk.get('longQuestionsTotal')!=545
+            or subjective_risk.get('longAtMost25Words')!=332
+            or subjective_risk.get('longAtMost40Words')!=523
+            or subjective_risk.get('essayAtMost25Words')!=25
+            or subjective_risk.get('subjectiveRiskReviewCandidates')!=604
+            or subjective_risk.get('highPriorityReviewCandidates')!=357
+            or subjective_risk.get('riskFlagsAreEditorialAdvisoryNotIncorrectAnswerProof') is not True
+            or subjective_risk.get('qualifiedAcademicApprovalsCreated')!=0
+            or subjective_risk.get('publishedVerifiedQuestionsCreated')!=0
+            or subjective_risk.get('sourcePdfOrEditionAuthenticatedByThisAudit') is not False
+            or subjective_risk.get('productionDatabaseWrites')!=0
+            or subjective_risk.get('questionTextOrAnswerStoredInReceipt') is not False
+            or len(subjective_risk.get('records',[]))!=604):
+            raise ValueError('SUBJECTIVE_DEPTH_EVIDENCE_UNVERIFIED_OR_PUBLICATION_UNSAFE')
+        subjective_depth_checked=True
     score=technical.get("metrics",{}).get("scores",{})
     integrity=technical.get("decision")=="OPERATIONAL" and score.get("total_score_rows",0)>=1763
     fullsuite_ok=(weekly.get("decision")=="QA_PASSED_NO_AUTOMATIC_ACADEMIC_PUBLICATION"
@@ -199,6 +221,9 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
       "liveNumericalsStillNeedRevisionSpecificDeepRecomputation":0 if all80_current else numerical_evidence.get("liveNumericalCurrentRevisionMissingDeepComputation") if numerical_evidence else None,
       "numericalCurrentFullLiveRevisionsAndMachineAnswersMatched":all80_current,
       "numericalMachineProofIsNotFacultyReview":True,
+      "subjectiveAnswerDepthRiskQueue":subjective_risk.get("subjectiveRiskReviewCandidates") if subjective_depth_checked else None,
+      "highPrioritySubjectiveModelAnswerReviewQueue":subjective_risk.get("highPriorityReviewCandidates") if subjective_depth_checked else None,
+      "subjectiveLengthFlagsAreNotAcademicCorrectnessJudgments":True,
       "everyChangedQuestionRevisionMustBeRereviewed":True,
       "questionBankCrossSchoolRlsDenied":tenant_rls.get("crossTenantLeakCount")==0 if tenant_rls else None,
       "liveQuestionDuplicateGroups":0 if live_collisions is not None else None,
@@ -236,7 +261,8 @@ if __name__=="__main__":
                read(SOURCE_DIR/"tenant-rls-qbank-readonly.json"),
                read(SOURCE_DIR/"live-revision-history.json"),
                read(SOURCE_DIR/"live-numerical-evidence.json"),
-               read(SOURCE_DIR/"numerical-deep-recomputation-21.json"))
+               read(SOURCE_DIR/"numerical-deep-recomputation-21.json"),
+               read(SOURCE_DIR/"subjective-answer-depth-risk-20261016.json"))
     save(OUT,p)
     print(json.dumps({k:v for k,v in p.items() if k!="phases"},sort_keys=True))
     for row in p["phases"]:print(f"PHASE_{row['phase']}={row['status']}")
