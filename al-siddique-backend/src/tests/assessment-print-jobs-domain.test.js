@@ -96,3 +96,32 @@ test('answer-key projection is staff-only and preserves release answers for auth
   assert.equal(staff.projectionType,'STAFF_ANSWER_KEY')
   assert.equal(staff.paper.sections[0].nodes[0].answer,'A')
 })
+
+test('student-safe paper projection strips real Question Bank answer aliases without losing answer-line layout', () => {
+ const snapshot={
+  subject:'Science',
+  sections:[{nodes:[{
+   id:'Q1',prompt:'Choose the correct answer.',answerLines:3,
+   answerText:'PRIVATE_ANSWER_TEXT',answerExplanation:'PRIVATE_TEACHER_REASON',
+   correctOptionId:'B',correctAnswerIndex:1,
+   options:[
+    {id:'A',text:'Water',isCorrect:false},
+    {id:'B',text:'Oxygen',isCorrect:true,correct_option_id:'B'},
+   ],
+  }]}],
+ }
+ const safe=buildStudentSafeProjection(snapshot,{student:{displayName:'Synthetic Student',rollNo:'07'}})
+ assert.equal(safe.paper.sections[0].nodes[0].prompt,'Choose the correct answer.')
+ assert.equal(safe.paper.sections[0].nodes[0].answerLines,3,'Blank answer-line geometry was removed')
+ assert.deepEqual(safe.paper.sections[0].nodes[0].options.map(o=>o.text),['Water','Oxygen'])
+ assert.equal(safe.personalization.student.rollNumber,'07')
+ for(const forbidden of ['PRIVATE_ANSWER_TEXT','PRIVATE_TEACHER_REASON','correctOptionId','correctAnswerIndex','isCorrect','correct_option_id']) {
+  assert.equal(JSON.stringify(safe).includes(forbidden),false,`Student-visible answer alias leaked: ${forbidden}`)
+ }
+ assert.equal(containsForbiddenAnswerMaterial(snapshot),true,'Answer key alias was not detected in source')
+ assert.equal(containsForbiddenAnswerMaterial(safe),false,'Student projection still contains answer metadata')
+ const staff=buildStaffAnswerKeyProjection(snapshot,{role:'teacher'})
+ assert.equal(staff.paper.sections[0].nodes[0].answerText,'PRIVATE_ANSWER_TEXT')
+ assert.equal(staff.paper.sections[0].nodes[0].correctOptionId,'B')
+ assert.equal(snapshot.sections[0].nodes[0].correctOptionId,'B','Source release mutated during sanitization')
+})

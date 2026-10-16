@@ -15,15 +15,25 @@ function cleanText(value, max = 160) {
   return text ? text.slice(0, max) : null
 }
 
+// The canonical Question Bank, paper templates and legacy imports use both
+// snake_case and camelCase answer metadata. Never expose those metadata in
+// student-personalized print projection. These are *exact* normalized keys:
+// do not blanket-strip fields like `answerLines` (needed for paper geometry).
 const FORBIDDEN_ANSWER_KEYS = new Set([
-  'answer','answers','answerkey','answer_key','correctanswer','correct_answer','correctoption','correct_option',
-  'correct','academicverifiedselections','verifiedacademicref',
-  'correctmappings','correct_mappings','iscorrect','is_correct','explanation','explanations','solution','solutions',
-  'markingscheme','marking_scheme','teachernotes','teacher_notes',
+  'answer','answers','answertext','answerkey','answerexplanation','answerindex',
+  'answeroption','answeroptionid',
+  'correct','correctanswer','correctanswertext','correctanswerindex',
+  'correctoption','correctoptionid','correctoptionindex','correctoptions',
+  'correctmappings','iscorrect',
+  'academicverifiedselections','verifiedacademicref',
+  'explanation','explanations','solution','solutions',
+  'markingscheme','teachernotes',
 ])
 
 function normalizeProjectionKey(value) {
-  return String(value || '').replace(/[^a-z0-9_]/gi, '').toLowerCase()
+  // `correctOptionId`, `correct_option_id` and `correct-option-id` are the
+  // same sensitive field for public output, regardless of source schema.
+  return String(value || '').replace(/[^a-z0-9]/gi, '').toLowerCase()
 }
 
 function stripAnswerMaterial(value) {
