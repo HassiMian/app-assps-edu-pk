@@ -80,6 +80,9 @@ on:
       - 'ops/connect/recovery/reviewed-next-legacy-proxy-20261016.patch'
       - 'ops/connect/test_reviewed_next_legacy_proxy_20261016.py'
       - 'docs/coordination/APEX_CONNECT_LEGACY_PROXY_SECURITY_UNIFIED_20261016.md'
+      - 'ops/connect/verify_core638_connect_release_20261016.py'
+      - 'ops/connect/test_verify_core638_connect_release_20261016.py'
+      - 'docs/coordination/APEX_CONNECT_CORE638_UNIFIED_RELEASE_READINESS_20261016.md'
       - '.github/workflows/connect-crossowner-release-contract.yml'
   pull_request:
     paths:
@@ -161,6 +164,9 @@ on:
       - 'ops/connect/recovery/reviewed-next-legacy-proxy-20261016.patch'
       - 'ops/connect/test_reviewed_next_legacy_proxy_20261016.py'
       - 'docs/coordination/APEX_CONNECT_LEGACY_PROXY_SECURITY_UNIFIED_20261016.md'
+      - 'ops/connect/verify_core638_connect_release_20261016.py'
+      - 'ops/connect/test_verify_core638_connect_release_20261016.py'
+      - 'docs/coordination/APEX_CONNECT_CORE638_UNIFIED_RELEASE_READINESS_20261016.md'
       - '.github/workflows/connect-crossowner-release-contract.yml'
 permissions:
   contents: read
@@ -237,3 +243,5 @@ jobs:
         run: python3 -m unittest discover -v -s ops/connect -p 'test_reviewed_next_mail_privacy_20261016.py'
       - name: Verify immutable Connect legacy proxy bounded fail-closed source
         run: python3 -m unittest discover -v -s ops/connect -p 'test_reviewed_next_legacy_proxy_20261016.py'
+      - name: Validate pinned Core638 Connect release verdict fail-closed (no live access)
+        run: python3 -m unittest discover -v -s ops/connect -p 'test_verify_core638_connect_release_20261016.py'
