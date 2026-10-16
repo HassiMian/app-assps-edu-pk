@@ -9,7 +9,7 @@ class TestAcademicAutoQAGuards(unittest.TestCase):
    p=Path(d)/'a.json'
    p.write_text(json.dumps({'batches':[{'passedGate':True,'tests':2,'passed':2,'failed':0}]*30,
      'allSourceTestsCompleted':True,'qualityGatesPassed':True,
-     'academicallyApproved':0,'verifiedPublished':0,
+     'academicallyApproved':0,'verifiedPublished':0,'deployment':False,
      'releaseDecision':'BLOCK_PUBLICATION_PENDING_AUTHENTICATED_SCHOOL_ADOPTION_AND_HUMAN_REVIEW'}))
    a=mod.inspect_audit(p);self.assertTrue(a['qualityVerified']);self.assertEqual(a['academicallyApproved'],0)
  def test_one_failed_gate_never_passes(self):
@@ -17,6 +17,22 @@ class TestAcademicAutoQAGuards(unittest.TestCase):
    p=Path(d)/'a.json'
    a=[{'passedGate':True,'tests':1,'passed':1,'failed':0}]*29 + [{'passedGate':False,'tests':1,'passed':0,'failed':1}]
    p.write_text(json.dumps({'batches':a,'allSourceTestsCompleted':True,'qualityGatesPassed':True}))
+   self.assertFalse(mod.inspect_audit(p)['qualityVerified'])
+ def test_fake_faculty_approval_cannot_pass_qa_receipt(self):
+  with tempfile.TemporaryDirectory() as d:
+   p=Path(d)/'a.json'
+   p.write_text(json.dumps({'batches':[{'passedGate':True,'tests':1,'passed':1,'failed':0}]*30,
+    'allSourceTestsCompleted':True,'qualityGatesPassed':True,
+    'academicallyApproved':1,'verifiedPublished':1,
+    'releaseDecision':'APPROVED','deployment':True}))
+   self.assertFalse(mod.inspect_audit(p)['qualityVerified'])
+ def test_publication_status_cannot_be_relabelled_to_green(self):
+  with tempfile.TemporaryDirectory() as d:
+   p=Path(d)/'a.json'
+   p.write_text(json.dumps({'batches':[{'passedGate':True,'tests':1,'passed':1,'failed':0}]*30,
+    'allSourceTestsCompleted':True,'qualityGatesPassed':True,
+    'academicallyApproved':0,'verifiedPublished':0,
+    'releaseDecision':'APPROVED','deployment':False}))
    self.assertFalse(mod.inspect_audit(p)['qualityVerified'])
  def test_atomic_receipt_permissions(self):
   with tempfile.TemporaryDirectory() as d:

@@ -45,7 +45,13 @@ def inspect_audit(path:Path):
     tests=sum(int(x.get("tests") or 0) for x in batches)
     successes=sum(int(x.get("passed") or 0) for x in batches)
     failed=sum(int(x.get("failed") or 0) for x in batches)
-    verified=data.get("allSourceTestsCompleted") is True and data.get("qualityGatesPassed") is True and len(batches)==30 and passed==30 and tests==successes and failed==0
+    verified=(data.get("allSourceTestsCompleted") is True
+        and data.get("qualityGatesPassed") is True and len(batches)==30 and passed==30
+        and tests==successes and failed==0
+        and data.get("academicallyApproved")==0
+        and data.get("verifiedPublished")==0
+        and data.get("releaseDecision")==FROZEN_RECEIPT
+        and data.get("deployment") is False)
     return {"qualityVerified":verified,"batches":len(batches),"passedBatches":passed,
             "tapTests":tests,"tapPassed":successes,"tapFailed":failed,
             "sourceReceiptSHA256":hashlib.sha256(path.read_bytes()).hexdigest(),
