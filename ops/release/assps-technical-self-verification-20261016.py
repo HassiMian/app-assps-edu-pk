@@ -117,18 +117,66 @@ student_percentage_gaps AS (
         AND floor(t.marks*100.0/t.total)
            BETWEEN g.min_percentage AND g.max_percentage)
 ),
+grade910_raw AS (
+  SELECT class_level,subject,medium,question_type,question_text,options,
+         correct_option,source_file_id,source_page_no,answer,is_approved
+  FROM public.question_bank WHERE school_id=1 AND class_level IN ('9th','10th')
+),
+grade910_mcq AS (
+  SELECT q.class_level,q.subject,q.medium,q.question_text,q.correct_option,q.options,
+    CASE WHEN jsonb_typeof(q.options)='array'
+         THEN jsonb_array_length(q.options) ELSE 0 END AS opt_count,
+    CASE WHEN jsonb_typeof(q.options)='array'
+         THEN (SELECT COUNT(DISTINCT upper(btrim(coalesce(o.elem->>'id',''))))
+               FROM jsonb_array_elements(q.options) o(elem))
+         ELSE 0 END AS distinct_opt_ids,
+    CASE WHEN jsonb_typeof(q.options)='array'
+         THEN (SELECT COUNT(DISTINCT lower(btrim(coalesce(o.elem->>'text',''))))
+               FROM jsonb_array_elements(q.options) o(elem))
+         ELSE 0 END AS distinct_opt_text,
+    CASE WHEN jsonb_typeof(q.options)='array'
+         THEN (SELECT COUNT(*) FROM jsonb_array_elements(q.options) o(elem)
+               WHERE btrim(coalesce(o.elem->>'text',''))='')
+         ELSE 1 END AS blank_opts,
+    CASE WHEN jsonb_typeof(q.options)='array'
+         THEN (SELECT COUNT(*) FROM jsonb_array_elements(q.options) o(elem)
+               WHERE upper(btrim(coalesce(o.elem->>'id',''))) =
+                     upper(btrim(coalesce(q.correct_option,''))))
+         ELSE 0 END AS matched_keys
+  FROM grade910_raw q WHERE lower(btrim(q.question_type))='mcq'
+),
+grade910_dupes AS (
+  SELECT class_level,lower(btrim(subject)) subject,lower(btrim(medium)) medium,
+    lower(regexp_replace(btrim(question_text),'[[:space:]]+',' ','g')) stem,
+    count(*) quantity
+  FROM grade910_raw
+  GROUP BY 1,2,3,4 HAVING count(*)>1
+),
 grade910_quality AS (
   SELECT COUNT(*) FILTER(WHERE class_level='9th') class9_question_rows,
          COUNT(*) FILTER(WHERE class_level='10th') class10_question_rows,
          COUNT(*) FILTER(WHERE is_approved=true) flagged_approved_rows,
+         COUNT(*) FILTER(WHERE source_file_id IS NULL OR btrim(source_file_id)='') missing_source_ids,
+         COUNT(*) FILTER(WHERE source_page_no IS NULL OR source_page_no<=0) unresolved_source_pages,
          COUNT(*) FILTER(WHERE is_approved=true AND (
              source_file_id IS NULL OR btrim(source_file_id)=''
              OR source_page_no IS NULL
              OR ((answer IS NULL OR btrim(answer)='')
                  AND (correct_option IS NULL OR btrim(correct_option)=''))))
              as approved_rows_missing_minimum_evidence
-  FROM public.question_bank
-  WHERE school_id=1 AND class_level IN ('9th','10th')
+  FROM grade910_raw
+),
+grade910_mcq_quality AS (
+  SELECT COUNT(*) mcq_count,
+     COUNT(*) FILTER(WHERE opt_count<>4 OR distinct_opt_ids<>4
+       OR distinct_opt_text<>4 OR blank_opts>0
+       OR matched_keys<>1 OR upper(btrim(coalesce(correct_option,''))) NOT IN ('A','B','C','D'))
+       structurally_invalid_mcqs
+  FROM grade910_mcq
+),
+grade910_duplicate_quality AS (
+  SELECT coalesce(SUM(quantity-1),0) exact_duplicate_extras,
+         COUNT(*) exact_duplicate_groups FROM grade910_dupes
 )
 SELECT json_build_object(
  'scores',(SELECT row_to_json(score_rollup) FROM score_rollup),
@@ -142,6 +190,8 @@ SELECT json_build_object(
      'studentGradeBandGaps',(SELECT count(*) FROM student_percentage_gaps))),
  'subjectEvidence',(SELECT row_to_json(subject_rollup) FROM subject_rollup),
  'grade910QuestionQuality',(SELECT row_to_json(grade910_quality) FROM grade910_quality),
+ 'grade910McqQuality',(SELECT row_to_json(grade910_mcq_quality) FROM grade910_mcq_quality),
+ 'grade910DuplicateQuality',(SELECT row_to_json(grade910_duplicate_quality) FROM grade910_duplicate_quality),
  'formalReviewEvents',(SELECT COUNT(*) FROM public.school_academic_approval_events
    WHERE school_id=1 AND exam_id=9)
 )::text
@@ -210,6 +260,10 @@ def evaluate(health:dict,previous:dict|None) -> tuple[str,list[str]]:
     # This protects minimal academic provenance if a later importer changes flags.
     if metrics.get("grade910QuestionQuality",{}).get("approved_rows_missing_minimum_evidence",0)>0:
         issues.append("GRADE910_APPROVED_QUESTION_WITHOUT_MINIMUM_SOURCE_OR_ANSWER_EVIDENCE")
+    if metrics.get("grade910McqQuality",{}).get("structurally_invalid_mcqs",0)>0:
+        issues.append("GRADE910_MCQ_OPTIONS_OR_KEY_STRUCTURE_REGRESSION")
+    if metrics.get("grade910DuplicateQuality",{}).get("exact_duplicate_extras",0)>0:
+        issues.append("GRADE910_EXACT_DUPLICATE_QUESTION_CANDIDATES")
     if previous:
         old=previous.get("metrics",{}).get("scores",{})
         if metrics["scores"]["total_score_rows"]<old.get("total_score_rows",0):
@@ -272,6 +326,10 @@ def main() -> int:
             k:int(value) for k,value in raw["subjectEvidence"].items()},
           "grade910QuestionQuality":{
             k:int(value) for k,value in raw["grade910QuestionQuality"].items()},
+          "grade910McqQuality":{
+            k:int(value) for k,value in raw["grade910McqQuality"].items()},
+          "grade910DuplicateQuality":{
+            k:int(value) for k,value in raw["grade910DuplicateQuality"].items()},
           "formalReviewEvents":int(raw["formalReviewEvents"])
         }
         data={

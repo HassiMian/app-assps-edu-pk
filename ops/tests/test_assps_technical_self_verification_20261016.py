@@ -60,6 +60,15 @@ class TestAcceptanceWithoutForgedSignatures(unittest.TestCase):
  def test_missing_sensitive_api_endpoint_security_evidence_fails_closed(self):
   a=good();a["anonymousProtectedEndpoints"]={}
   self.assertEqual(module.evaluate(a,None)[0],"CRITICAL")
+ def test_invalid_mcq_options_block_machine_integrity(self):
+  a=good();a["metrics"]["grade910McqQuality"]={"structurally_invalid_mcqs":1}
+  self.assertIn("GRADE910_MCQ_OPTIONS_OR_KEY_STRUCTURE_REGRESSION",module.evaluate(a,None)[1])
+ def test_exact_duplicates_block_clean_candidate_batch(self):
+  a=good();a["metrics"]["grade910DuplicateQuality"]={"exact_duplicate_extras":2}
+  self.assertIn("GRADE910_EXACT_DUPLICATE_QUESTION_CANDIDATES",module.evaluate(a,None)[1])
+ def test_source_pages_missing_is_reported_without_fake_textbook_locators(self):
+  a=good();a["metrics"]["grade910QuestionQuality"]={"unresolved_source_pages":2411,"approved_rows_missing_minimum_evidence":0}
+  self.assertEqual(module.evaluate(a,None)[0],"OPERATIONAL")
  def test_receipt_stored_atomically_and_no_personal_data(self):
   with tempfile.TemporaryDirectory() as d:
    p=Path(d)/"receipt.json";module.write_receipt(p,good())
