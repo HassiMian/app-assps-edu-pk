@@ -10,7 +10,7 @@ import {
  CreditCard, Calendar, BarChart2, RefreshCw, AlertCircle, Send,
 } from 'lucide-react'
 
-const SECTIONS = ['Dashboard', 'Timetable', 'My Exams', 'Attendance', 'Fee Status', 'Messages']
+const SECTIONS = ['Dashboard', 'Period Timings', 'My Exams', 'Attendance', 'Fee Status', 'Messages']
 
 // Notifications and messages are loaded from the scoped server inbox.
 //  Helpers 
@@ -253,7 +253,7 @@ export default function StudentPortal() {
  ) : (
  <>
  {section === 'Dashboard' && <DashboardSection attPct={attPct} attTotal={attTotal} presentCount={presentCount} avgPct={avgPct} overallGrade={overallGrade} subjectSummary={subjectSummary} exams={exams} pendingFees={pendingFees} paidFeeAmt={paidFeeAmt} totalFeeAmt={totalFeeAmt} studentClass={studentDisplay} messages={messages} readMsg={readMsg} />}
- {section === 'Timetable' && <BellSchedulePanel />}
+ {section === 'Period Timings' && <BellSchedulePanel />}
  {section === 'My Exams' && <ExamsSection exams={exams} results={results} />}
  {section === 'Attendance' && <AttendanceSection records={attRecords} presentCount={presentCount} attTotal={attTotal} attPct={attPct} />}
  {section === 'Fee Status' && <FeeSection fees={fees} />}

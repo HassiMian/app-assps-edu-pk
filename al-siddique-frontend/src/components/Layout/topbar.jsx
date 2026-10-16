@@ -17,7 +17,9 @@ const MODULE_SEARCH_ITEMS = [
  { id:'exams', type:'Module', title:'Examinations', subtitle:'Exams, marks entry, result cards', path:'/examination', keywords:['exam','marks','result','grade','assessment'] },
  { id:'result-cards', type:'Action', title:'Result Cards', subtitle:'Print professional result cards', path:'/examination/results', keywords:['result card','report card','remarks','teacher remarks','print result'] },
  { id:'paper', type:'Module', title:'Paper Generator', subtitle:'Manual and AI-assisted paper generation', path:'/paper-generator', keywords:['paper','question','ai paper','lesson plan','syllabus'] },
- { id:'timetable', type:'Module', title:'Timetable', subtitle:'Class schedule and periods', path:'/timetable', keywords:['timetable','period','schedule','teacher assignment'] },
+ { id:'timetable', type:'Module', title:'Academic Timetable', subtitle:'Subjects, teachers and class schedule', path:'/timetable', keywords:['timetable','subject','teacher assignment'] },
+ { id:'period-timings', type:'Module', title:'Period Timings', subtitle:'Assembly, periods and Friday bell schedule', path:'/period-timings', keywords:['bell','period timings','school hours','friday'] },
+ { id:'school-documents', type:'Module', title:'Notice Studio', subtitle:'Official notices, circulars, general date sheets and printing', path:'/school-documents', keywords:['notice','circular','office order','staff acknowledgement','date sheet','letter'] },
  { id:'cards', type:'Module', title:'ID Cards', subtitle:'Student and staff ID cards', path:'/cards', keywords:['id card','card','barcode','qr'] },
  { id:'settings', type:'Module', title:'System Settings', subtitle:'School logo, Urdu name, print headers', path:'/settings', keywords:['settings','logo','urdu','school profile','signature'] },
 ]
