@@ -1,0 +1,28 @@
+name: ASSPS Core Worker Sensitive Privilege Boundary
+on:
+  push:
+    branches:
+      - 'fix/core-ai-worker-sensitive-dml-gate-*'
+    paths:
+      - 'al-siddique-backend/src/services/ai/aiQueueWorkerDatabase.js'
+      - 'al-siddique-backend/src/services/ai/test-ai-worker-sensitive-dml-gate-20261016.cjs'
+      - '.github/workflows/core-ai-worker-sensitive-privileges-20261016.yml'
+  pull_request:
+    paths:
+      - 'al-siddique-backend/src/services/ai/aiQueueWorkerDatabase.js'
+      - 'al-siddique-backend/src/services/ai/test-ai-worker-sensitive-dml-gate-20261016.cjs'
+      - '.github/workflows/core-ai-worker-sensitive-privileges-20261016.yml'
+jobs:
+  mock-node-worker-privileges:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify fail-closed signed Green worker privilege boundary
+        run: |
+          node --check al-siddique-backend/src/services/ai/aiQueueWorkerDatabase.js
+          node --test al-siddique-backend/src/services/ai/test-ai-worker-sensitive-dml-gate-20261016.cjs

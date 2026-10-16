@@ -55,17 +55,30 @@ async function workerQuery(statement, parameters) {
     const check = await client.query(
       `SELECT current_user AS actor,
        rolcanlogin AS can_login, rolbypassrls AS bypass, rolsuper AS super,
+       rolcreaterole AS can_create_role, rolcreatedb AS can_create_db,
+       rolreplication AS can_replicate,
        pg_has_role(current_user, $1, 'USAGE') AS worker_member,
+       pg_has_role(current_user, $1, 'SET') AS can_set_worker_role,
        has_table_privilege(current_user,'public.ai_jobs','SELECT') AS can_queue,
-       has_table_privilege(current_user,'public.organizations','SELECT') AS can_org,
-       has_table_privilege(current_user,'public.campuses','SELECT') AS can_campus,
-       has_table_privilege(current_user,'public.admin_block_audit_log','SELECT') AS can_audit
+       -- PostgreSQL accepts privilege lists: TRUE means ANY prohibited DML right.
+       -- Check more than SELECT: privilege drift on student records must fail closed.
+       has_table_privilege(current_user,'public.students','SELECT,INSERT,UPDATE,DELETE') AS can_students,
+       has_table_privilege(current_user,'public.exam_results','SELECT,INSERT,UPDATE,DELETE') AS can_exam_results,
+       has_table_privilege(current_user,'public.organizations','SELECT,INSERT,UPDATE,DELETE') AS can_org,
+       has_table_privilege(current_user,'public.campuses','SELECT,INSERT,UPDATE,DELETE') AS can_campus,
+       has_table_privilege(current_user,'public.admin_block_audit_log','SELECT,INSERT,UPDATE,DELETE') AS can_audit
        FROM pg_roles WHERE rolname=current_user`, [config.workerRole])
     const identity=check.rows[0]
+    // Require literal booleans. Missing/null/altered result fields must not
+    // silently grant access just because JavaScript treats them as falsy.
     if (!identity || identity.actor!==config.user ||
-        identity.bypass || identity.super || !identity.can_login ||
-        !identity.worker_member || !identity.can_queue ||
-        identity.can_org || identity.can_campus || identity.can_audit) {
+        identity.bypass !== false || identity.super !== false ||
+        identity.can_create_role !== false || identity.can_create_db !== false ||
+        identity.can_replicate !== false || identity.can_login !== true ||
+        identity.worker_member !== true || identity.can_set_worker_role !== false ||
+        identity.can_queue !== true || identity.can_students !== false ||
+        identity.can_exam_results !== false || identity.can_org !== false ||
+        identity.can_campus !== false || identity.can_audit !== false) {
       throw new Error('AI_QUEUE_WORKER_DATABASE_PRIVILEGES_NOT_ISOLATED')
     }
     return await client.query(statement, parameters)
