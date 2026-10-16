@@ -435,6 +435,60 @@ test('two-school real-auth Paper Save/Reopen/Print, Diary persistence and Lesson
   console.log('PHASE3_REAL_TEACHER_CHROMIUM_PRINT_PDF_PASS', pdf.length)
   await printPage.close()
 
+  // Paper-owned previously missing integration contract: an independently
+  // authenticated teacher revises this actual disposable-PG server document
+  // with bounded user-authored visual heading spans, then fetches it anew.
+  // Unlike an in-memory JSON converter test, this verifies Express/JWT/PG
+  // persistence and optimistic revision semantics without live school data.
+  const richSerial = '<strong>Q1.</strong>'
+  const richInstruction = '<span dir="rtl" style="text-decoration:underline">سوال نمبر ایک</span>'
+  const styledDocument = JSON.parse(JSON.stringify(saved.canonicalDocument))
+  styledDocument.sections[0].editorInlineRichText = {
+    headingSerial: richSerial, headingInstruction: richInstruction,
+  }
+  const persistStyledHeading = await page.evaluate(async payload => {
+    const token = localStorage.getItem('al_siddique_token')
+    const endpoint = `/api/assessment-studio/papers/${encodeURIComponent(payload.paperId)}`
+    const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }
+    const changed = await fetch(endpoint + '/revisions', {
+      method: 'POST', headers,
+      body: JSON.stringify({ expectedRevision:payload.revision, title:payload.title, document:payload.document }),
+    })
+    const changedBody = await changed.json()
+    const loaded = await fetch(endpoint, { headers: { Authorization: `Bearer ${token}` } })
+    const loadedBody = await loaded.json()
+    // Reusing the already-spent revision must fail without modifying rows.
+    const stale = await fetch(endpoint + '/revisions', {
+      method:'POST', headers,
+      body: JSON.stringify({ expectedRevision:payload.revision, title:payload.title, document:payload.document }),
+    })
+    const staleBody = await stale.json()
+    return {
+      savedStatus:changed.status, savedBody:changedBody,
+      readStatus:loaded.status, readBody:loadedBody,
+      staleStatus:stale.status, staleBody,
+    }
+  }, { paperId:saved.serverPaperId, revision:saved.serverRevision, title:paperTitle, document:styledDocument })
+  assert.equal(persistStyledHeading.savedStatus, 201,
+    `Server rejected safe heading revision: ${JSON.stringify(persistStyledHeading.savedBody).slice(0, 220)}`)
+  assert.equal(persistStyledHeading.readStatus, 200)
+  assert.equal(persistStyledHeading.staleStatus, 409)
+  assert.equal(persistStyledHeading.staleBody.code, 'REVISION_CONFLICT')
+  const storedHeadingPaper = persistStyledHeading.readBody.data
+  assert.equal(Number(storedHeadingPaper.current_revision), Number(saved.serverRevision) + 1)
+  assert.equal(storedHeadingPaper.document_json.sections[0].editorInlineRichText.headingSerial, richSerial)
+  assert.equal(storedHeadingPaper.document_json.sections[0].editorInlineRichText.headingInstruction, richInstruction)
+  assert.equal(storedHeadingPaper.document_json.sections[0].nodes[0].content,
+    'Explain why green plants need sunlight.')
+  assert.equal(storedHeadingPaper.document_json.scoringPlan.maximumObtainableMarks, 10)
+  const storedStyledRevision = await pool.query(
+    'SELECT document_json, revision_number FROM assessment_paper_revisions WHERE school_id=$1 AND paper_id=(SELECT id FROM assessment_papers WHERE school_id=$1 AND public_id=$2) ORDER BY revision_number DESC LIMIT 1',
+    [schoolId, saved.serverPaperId])
+  assert.equal(storedStyledRevision.rowCount, 1)
+  assert.equal(storedStyledRevision.rows[0].document_json.sections[0].editorInlineRichText.headingSerial, richSerial)
+  assert.equal(storedStyledRevision.rows[0].document_json.sections[0].editorInlineRichText.headingInstruction, richInstruction)
+  console.log('PHASE3_REAL_AUTH_SERVER_RICH_HEADING_REVISION_REOPEN_CONFLICT_PASS')
+
   await context.close()
 
   const restrictedContext = await browser.newContext({ viewport: { width: 1440, height: 900 } })
