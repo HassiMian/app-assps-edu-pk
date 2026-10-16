@@ -10,7 +10,7 @@ The selection guard accepts only serial+heading from the SAME exact section and 
 
 ## Actually run
 
-Real Chromium Urdu RTL cross-drag included serial 2: and heading glyphs; selected substring bold, Undo/Redo and print iframe identical, marks unmodified. Real English LTR Q2 fixture cross-drag included serial and Study, selected underlining ON/OFF and Undo/Redo, print iframe identical, marks protected; explicitly invalid three-field range crossing marks rejected. Cross-field: 2/2 PASS, no skip.
+Real Chromium Urdu RTL cross-drag included serial 2: and heading glyphs; selected substring bold, Undo/Redo and print iframe identical, marks unmodified. Real English LTR Q2 fixture cross-drag included serial and Study, selected underlining ON/OFF, Italic ON/OFF, and Undo/Redo, print iframe identical, marks protected; explicitly invalid three-field range crossing marks rejected. Cross-field: 2/2 PASS, no skip.
 
 Original V12 formatting regressions 8/8 PASS, original V13 Jameel font/RTL punctuation/pixel tests 5/5 PASS after change. Canonical Class 1 Islamiyat Paper Workspace route 1/1 PASS with fixture-only protected Question Bank mock. Vite build PASS. Added strict real-Chromium source runner and GitHub Actions workflow; remote CI green NOT claimed. Tests use only disposable mock server and dummy school session; no real school passwords, student records, DB writes, PM2 restarts or hardware print jobs.
 
