@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useAcademicStore } from '../../services/useAcademicStore'
 import { usePaperStore } from '../Paper-Generator/usePaperStore'
 import api from '../../services/api'
+import PublishedTimetableReference from './PublishedTimetableReference'
 
 // Dynamic lists will be used from the store.
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
@@ -249,6 +250,7 @@ function TimetableModule() {
  return (
  <div style={{ minHeight: '100vh', background: 'var(--apex-shell-gradient)', color: 'var(--apex-text-primary)', padding: 24, fontFamily: 'Inter, sans-serif' }}>
  <div style={{ width: '100%', maxWidth: 1600, margin: '0 auto', display: 'grid', gap: 22, minWidth: 0 }}>
+ <PublishedTimetableReference />
  <div className="super-module-card" style={{ ...card, padding: 28, boxShadow: '0 18px 40px rgba(0,0,0,0.24)', borderRadius: 24 }}>
  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20, alignItems: 'center', justifyContent: 'space-between' }}>
  <div>

@@ -8,6 +8,7 @@ const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
 const { requestedPolicy, policyMatches, assignmentMatches } = require('../services/approvedExamSubjectPolicy')
 const { buildTeachingOptionsQuery } = require('../services/teacherTeachingOptionsScope')
+const { SCHOOL_ID: ASSPS_SCHOOL_ID, SOURCE_SHAS, VERSION: SCHOOL_TIMETABLE_VERSION, VALID_DAYS, getKarachiDay, rowsForDay, buildChildTimetable } = require('../services/approvedSchoolTimetable')
 
 function toSafeDate(value) {
   const date = new Date(value)
@@ -275,6 +276,63 @@ router.get('/dashboard', protect, async (req, res) => {
   }
 })
 
+// A parent's timetable is scoped to the authenticated parent's actual student links.
+// Never accept a caller-supplied student, school, or section as an access-control key.
+router.get('/family-timetable', protect, async (req, res) => {
+  res.set('Cache-Control', 'private, no-store')
+  const role = String(req.user?.role || '').toLowerCase()
+  if (role !== 'parent' && role !== 'student') {
+    return res.status(403).json({success:false,code:'FAMILY_ROLE_REQUIRED'})
+  }
+  const day = req.query.day || getKarachiDay()
+  if (typeof day !== 'string' || !VALID_DAYS.has(day)) {
+    return res.status(400).json({success:false,code:'INVALID_SCHOOL_DAY'})
+  }
+  const schoolId = Number(currentSchoolId(req))
+  const ownerId = Number(req.user?.id)
+  if (!Number.isSafeInteger(schoolId) || schoolId<=0 || !Number.isSafeInteger(ownerId) || ownerId<=0) {
+    return res.status(403).json({success:false,code:'FAMILY_CONTEXT_REQUIRED'})
+  }
+  if (schoolId !== ASSPS_SCHOOL_ID) {
+    return res.status(409).json({success:false,code:'TENANT_TIMETABLE_POLICY_NOT_CONFIGURED'})
+  }
+  try {
+    const relation = role === 'parent' ? 'parent_user_id' : 'student_user_id'
+    // Relation is a server-side role allowlist, never caller-controlled input.
+    const owned = await query(`SELECT id,name,class,section FROM students
+      WHERE school_id=$1 AND ${relation}=$2 AND is_active=true ORDER BY id`,
+      [schoolId,ownerId])
+    const children = owned.rows
+    let records = []
+    if (children.length) {
+      const pairs = [...new Set(children.map(c =>
+        JSON.stringify([String(c.class||'').trim().toLowerCase(),String(c.section||'').trim().toLowerCase()])))].map(s=>JSON.parse(s))
+      const parameters = [schoolId]
+      const predicate = pairs.map(pair=>{
+        parameters.push(pair[0],pair[1])
+        const i=parameters.length
+        return `(lower(trim(class_name))=$${i-1} AND lower(trim(coalesce(section,'')))=$${i})`
+      }).join(' OR ')
+      parameters.push(...SOURCE_SHAS)
+      const shaStart = parameters.length - SOURCE_SHAS.length + 1
+      const result = await query(`SELECT class_name,section,period_label,subject,teacher_display_name,teacher_id
+        FROM timetable WHERE school_id=$1 AND (${predicate})
+          AND academic_session='2026–27' AND day_name='Regular'
+          AND source_sha256 IN ($${shaStart},$${shaStart+1})
+        ORDER BY class_name,section,period_label`,parameters)
+      records = result.rows
+    }
+    return res.json({success:true,data:{
+      version:SCHOOL_TIMETABLE_VERSION,day,profile:day==='Friday'?'friday':day==='Sunday'?'closed':'regular',
+      bell_schedule:rowsForDay(day),
+      children:children.map(child=>buildChildTimetable(child,records,day))
+    }})
+  } catch(error) {
+    console.error('Parent timetable request failed:',error.code||'QUERY_FAILED')
+    return res.status(503).json({success:false,code:'FAMILY_TIMETABLE_UNAVAILABLE'})
+  }
+})
+
 // GET /api/portal/timetable — teacher's weekly schedule
 router.get('/timetable', protect, async (req, res) => {
   try {
@@ -339,10 +397,23 @@ router.get('/timetable', protect, async (req, res) => {
 
     const byDay = {}
     entries.forEach(e => {
-      const d = e.day || 'Monday'
+      // School's saved regular-period assignments apply Monday–Thursday and Saturday.
+      // Friday has its own principal-approved shorter, no-break bell schedule.
+      if (Number(schoolId) === ASSPS_SCHOOL_ID && e.day_name === 'Regular' && /^Period [1-8]$/.test(e.period_label || '')) {
+        for (const day of ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']) {
+          const slot = rowsForDay(day).find(p => p.label === e.period_label)
+          if (!slot) continue
+          if (!byDay[day]) byDay[day] = []
+          byDay[day].push({...e,day,start_time:slot.start+':00',end_time:slot.end+':00'})
+        }
+        return
+      }
+      const d = e.day || e.day_name || 'Monday'
       if (!byDay[d]) byDay[d] = []
       byDay[d].push(e)
     })
+    for (const day of Object.keys(byDay)) byDay[day].sort((a,b)=>
+      String(a.start_time||'').localeCompare(String(b.start_time||'')))
 
     res.json({ success: true, data: { timetable: entries, byDay } })
   } catch (error) {

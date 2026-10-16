@@ -3,8 +3,8 @@ const express=require('express')
 const router=express.Router()
 const {query}=require('../config/database')
 const {protect,requireScopeForServiceOnly}=require('../middleware/auth')
-const BASE_SHA='263941c69d939a6dafaa8288097f423a95087333679a4edb9963767efd667589'
-const NINE_SHA='e182d9616f300e731e3e3dc957bc43934ef1f574b7b564714d433726c03fc724'
+const {SCHOOL_ID:ASSPS_SCHOOL_ID,SOURCE_SHAS,VERSION:APPROVED_TIMETABLE_VERSION,rowsForDay}=require('../services/approvedSchoolTimetable')
+const [BASE_SHA,NINE_SHA]=SOURCE_SHAS
 const classes=['Four','Five','Six','Seven','Pre-Nine']
 function signedSchool(req,res){
  const school=Number(req.school_id)
@@ -43,6 +43,9 @@ router.get('/reference',protect,requireScopeForServiceOnly('school.timetable.rea
     sourceTeacherAccountsApproved:false,
     fridayScheduleIncluded:false,
     grade9SectionsLoaded:isGrade9Loaded,
+    approvedTimingVersion:school===ASSPS_SCHOOL_ID?APPROVED_TIMETABLE_VERSION:null,
+    approvedBellTimings:school===ASSPS_SCHOOL_ID?{regular:rowsForDay('Monday'),friday:rowsForDay('Friday')}:null,
+    timingNotice:'Stored imported timestamps are superseded by approvedBellTimings; original imported records remain unchanged.',
     data:rows})
  }catch(e){
   console.error('Timetable reference',e.code||'QUERY_FAILURE')
