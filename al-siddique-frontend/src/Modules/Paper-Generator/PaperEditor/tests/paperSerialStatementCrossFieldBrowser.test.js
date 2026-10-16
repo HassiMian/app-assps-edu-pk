@@ -129,6 +129,15 @@ test('English LTR serial and instruction underline is bounded, reversible and pr
  await toolbar.getByRole('button',{name:'U',exact:true}).click()
  assert.match(await serial.innerHTML(),/underline/i)
  assert.match(await heading.innerHTML(),/underline/i)
+ await toolbar.getByRole('button',{name:'I',exact:true}).click()
+ assert.match(await serial.innerHTML(),/font-style:\s*italic/i)
+ assert.match(await heading.innerHTML(),/font-style:\s*italic/i)
+ await toolbar.getByRole('button',{name:'I',exact:true}).click()
+ assert.ok(!/font-style:\s*italic/i.test(await serial.innerHTML()))
+ assert.ok(!/font-style:\s*italic/i.test(await heading.innerHTML()))
+ await toolbar.getByRole('button',{name:'I',exact:true}).click()
+ assert.match(await serial.innerHTML(),/font-style:\s*italic/i)
+ assert.match(await heading.innerHTML(),/font-style:\s*italic/i)
  // The marks badge is never part of the two-field composite formatting surface,
  // even if a user extends a DOM range beyond the instruction.
  const protectedSerial=await serial.innerHTML(),protectedHeading=await heading.innerHTML()
@@ -157,5 +166,7 @@ test('English LTR serial and instruction underline is bounded, reversible and pr
     h:item?.querySelector('[data-edit-field="question-heading"]')?.innerHTML}
  })
  assert.match(print.s||'',/underline/i);assert.match(print.h||'',/underline/i)
+ assert.match(print.s||'',/font-style:\s*italic/i)
+ assert.match(print.h||'',/font-style:\s*italic/i)
  console.log('CROSS_FIELD_ENGLISH_LTR_UNDERLINE_PRINT_PASS',JSON.stringify({selection,print}))
 })

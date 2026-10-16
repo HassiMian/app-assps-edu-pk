@@ -2,6 +2,7 @@ name: ASSPS Paper Serial and Statement Cross-Field Browser Gate
 on:
   push:
     branches:
+      - 'integration/core-paper-phase3ag-*'
       - 'feat/paper-serial-statement-bounded-*'
     paths:
       - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperInlineEditor.jsx'

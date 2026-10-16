@@ -2,6 +2,7 @@ name: ASSPS Daily Diary Safe Browser Release
 on:
   push:
     branches:
+      - 'integration/core-paper-phase3ag-*'
       - 'fix/paper-diary-save-race-browser-*'
     paths:
       - 'ops/paper-studio/run_diary_release_browser_20261016.cjs'
