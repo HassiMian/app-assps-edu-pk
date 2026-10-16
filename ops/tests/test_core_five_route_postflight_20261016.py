@@ -17,7 +17,7 @@ EXPECTED = (
 )
 
 
-def exercise(*, failed_label=None, lesson_ok=True, companion_ok=True):
+def exercise(*, failed_label=None, lesson_ok=True, companion_ok=True, five_feature_ok=True):
     source = ROLLOUT.read_text()
     assert source.count(MARK) == 1 and source.count(END) == 1
     selected = source.split(MARK, 1)[1].split(END, 1)[0]
@@ -42,6 +42,7 @@ def exercise(*, failed_label=None, lesson_ok=True, companion_ok=True):
                                stderr="synthetic guard rejection", stdout="")
     ns = dict(
         mod=SimpleNamespace(validate=lambda *_: {"pass": lesson_ok}),
+        verify_five_feature_release=lambda *_: None if five_feature_ok else (_ for _ in ()).throw(RuntimeError("Paper Studio five-feature HOLD")),
         companion_module=SimpleNamespace(
             evaluate=lambda *_: {"result": "PASS" if companion_ok else "HOLD"}
         ),
@@ -78,6 +79,10 @@ class PostflightGate(unittest.TestCase):
     def test_early_years_failure_blocks_before_any_module_checks(self):
         with self.assertRaisesRegex(RuntimeError, "Early Years printer postflight failed"):
             exercise(companion_ok=False)
+
+    def test_paper_five_feature_failure_blocks_success(self):
+        with self.assertRaisesRegex(RuntimeError,'Paper Studio five-feature HOLD'):
+            exercise(five_feature_ok=False)
 
     def test_real_release_gate_precedes_every_production_write(self):
         source=ROLLOUT.read_text()
