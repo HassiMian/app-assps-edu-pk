@@ -6,16 +6,23 @@ on:
       - 'integration/core-worker-paper-phase3ag-*'
       - 'fix/paper-diary-save-race-browser-*'
       - 'fix/paper-diary-revisit-*'
+      - 'test/core401-paper-diary-failclosed-*'
     paths:
       - 'ops/paper-studio/run_diary_release_browser_20261016.cjs'
       - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/dailyDiarySaveStatusRaceBrowser.test.js'
       - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/dailyDiaryRevisitScopeBrowser.test.js'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/dailyDiarySaveResponseValidationBrowser.test.js'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/dailyDiarySaveErrorScopeBrowser.test.js'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/dailyDiaryPutResponseIdentityBrowser.test.js'
       - '.github/workflows/paper-diary-real-browser-release-20261016.yml'
   pull_request:
     paths:
       - 'ops/paper-studio/run_diary_release_browser_20261016.cjs'
       - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/dailyDiarySaveStatusRaceBrowser.test.js'
       - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/dailyDiaryRevisitScopeBrowser.test.js'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/dailyDiarySaveResponseValidationBrowser.test.js'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/dailyDiarySaveErrorScopeBrowser.test.js'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/dailyDiaryPutResponseIdentityBrowser.test.js'
       - '.github/workflows/paper-diary-real-browser-release-20261016.yml'
 jobs:
   diary-browser:

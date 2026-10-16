@@ -1,7 +1,7 @@
 'use strict'
-// Four isolated Chromium flows: Diary screen/print CSS, authenticated
-// save->reopen scope, stale asynchronous save, and revisit PUT identity. No live server,
-// teacher credentials, database changes or real printer job.
+// Eight isolated browser assertions: Diary print, save/reopen and tenant scope,
+// async save/revisit, and three fail-closed server-response identity/status cases.
+// Synthetic server only; no live credentials, database writes or printer jobs.
 const {spawnSync}=require('node:child_process')
 const path=require('node:path')
 const root=path.resolve(__dirname,'../../al-siddique-frontend')
@@ -10,6 +10,9 @@ const tests=[
  ['Diary Save-Reopen/foreign-tenant negative acceptance','dailyDiaryExplicitReopenBrowser.test.js',2],
  ['Late Diary save selection race','dailyDiarySaveStatusRaceBrowser.test.js',1],
  ['Diary revisited class/section/date preserves prior ID','dailyDiaryRevisitScopeBrowser.test.js',1],
+ ['HTTP 200 success:false is never a saved Diary','dailyDiarySaveResponseValidationBrowser.test.js',1],
+ ['Late HTTP 500 reports original unsaved selection','dailyDiarySaveErrorScopeBrowser.test.js',1],
+ ['Mismatched PUT response ID is rejected','dailyDiaryPutResponseIdentityBrowser.test.js',1],
 ]
 let passed=0
 for(const [label,file,expected] of tests){
@@ -34,6 +37,6 @@ for(const [label,file,expected] of tests){
  passed+=expected
  console.log('DIARY_BROWSER_PASS',label,expected+'/'+expected)
 }
-if(passed===5&&process.exitCode!==2){
- console.log('ASSPS_DIARY_SAVE_REOPEN_PRINT_CHROMIUM 5/5 PASS (synthetic server, no hardware jobs)')
+if(passed===8&&process.exitCode!==2){
+ console.log('ASSPS_DIARY_SAVE_REOPEN_PRINT_CHROMIUM 8/8 PASS (synthetic server, no hardware jobs)')
 }

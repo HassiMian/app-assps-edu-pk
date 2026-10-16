@@ -13,6 +13,8 @@ test('HTTP200 success false must never acknowledge saved Diary',{timeout:115000}
  t.after(async()=>{await browser.close();await vite.close()})
  const ctx=await browser.newContext({viewport:{width:1480,height:970},timezoneId:'Asia/Karachi'})
  await ctx.addInitScript(()=>{localStorage.setItem('al_siddique_token','mock-jwt-token');localStorage.setItem('al_siddique_login_at',String(Date.now()));localStorage.setItem('al_siddique_user',JSON.stringify({id:999,role:'admin',school_id:1,tenant_id:'assps'}))})
+ // Keep unrelated Question Bank bootstrap from triggering global synthetic /login.
+ await ctx.route('**/api/question-bank**',r=>r.fulfill({status:200,contentType:'application/json',body:'{"success":true,"data":[]}'}))
  const calls=[]
  let releaseSave
  const deferredSave=new Promise(resolve=>{releaseSave=resolve})
