@@ -70,3 +70,10 @@ Connect patch is included so the isolated Connect source can be forward-ported o
 - Verified 58 timetable rows, 318 student rows, 0 teacher_class_assignments in restored copy.
 - QA database dropped after verification; existence probe confirmed absent; production database was never mutated.
 - This validates archived full restore, NOT a fresh same-moment privileged production backup. Fresh permitted pre-cutover backup and real-login acceptance remain release gates.
+
+## 12:23 PKT continuation
+- Fresh 16 Oct 05:47Z production archive fingerprint verified by SHA256SUMS.
+- Fresh full restore QA log: 58 timetable, 318 students, Exam9 1762 results including 213 zeros; cleanup succeeded.
+- Existing isolated genuine-account QA log reports two-parent auth PASS, unauthorized 401, linked child isolation and Friday fifth period. Not equivalent to end-user acceptance on production.
+- New 336-projection read-only corpus test passes across all seven imported class groups, six weekdays, all 56 periods and class Eight/Pre-Nine non-aliasing.
+- Phase 5 remains HOLD until approved teacher identities, junior subjects/Class Eight mapping, canonical integrated green candidate E2E and controlled cutover.
