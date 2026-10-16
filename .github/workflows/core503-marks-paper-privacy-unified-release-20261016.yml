@@ -1,0 +1,58 @@
+name: ASSPS Core503 Marks Paper Privacy and Diary15 Integrated QA
+on:
+  push:
+    branches:
+      - 'integration/core503-marks-rls-paper-privacy-20261016'
+  pull_request:
+    paths:
+      - 'al-siddique-backend/src/config/signedRlsCatalogGuard.js'
+      - 'al-siddique-backend/src/config/database.js'
+      - 'al-siddique-backend/src/tests/signed-runtime-catalog-contract.test.js'
+      - 'al-siddique-backend/src/services/assessmentPrintJobs.js'
+      - 'al-siddique-backend/src/tests/assessment-print-jobs-domain.test.js'
+      - 'al-siddique-frontend/src/Modules/examination/MarksSheet.jsx'
+      - 'al-siddique-frontend/src/services/api.js'
+      - 'al-siddique-frontend/src/services/marksSave401Session.test.mjs'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/dailyDiary*.test.js'
+      - 'ops/paper-studio/run_diary_release_browser_20261016.cjs'
+      - '.github/workflows/core503-marks-paper-privacy-unified-release-20261016.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  integrated-nondestructive-source-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: al-siddique-frontend/package-lock.json
+      - name: Install frontend exact pinned packages (no production credentials)
+        working-directory: al-siddique-frontend
+        run: npm ci --no-audit --no-fund
+      - name: Install isolated Chromium for Diary and privacy acceptance
+        working-directory: al-siddique-frontend
+        run: npx playwright install --with-deps chromium
+      - name: Validate signed 82-table RLS and student print answer aliases, no backend secrets
+        run: |
+          node --test al-siddique-backend/src/tests/signed-runtime-catalog-contract.test.js al-siddique-backend/src/config/signedRlsCatalogGuard.test.cjs al-siddique-backend/src/tests/assessment-print-jobs-domain.test.js al-siddique-backend/src/tests/assessment-print-projection-boundary-static.test.js
+      - name: Fail closed on Marks POST401 logout, damaged roster, zeros or missing marks
+        run: |
+          node --test al-siddique-frontend/src/services/marksSave401Session.test.mjs ops/tests/marks-sheet-data-truth.test.js
+      - name: Read-only fixtures for live role/ACL/RLS/peer-worker, no real production connection
+        run: |
+          python3 -m unittest -q ops/release/core-infrastructure/test_verify_signed_rls_catalog_drift_20261016.py ops/release/core-infrastructure/test_verify_live_role_membership_grants_20261016.py ops/release/core-infrastructure/test_verify_unsigned_rls_matrix_20261016.py ops/release/worker-probe/test_verify_worker_peer_scope_20261016.py ops/release/test_verify_private_backend_stage_rollback_20261016.py
+      - name: Protect all fifteen Daily Diary synthetic Chromium workflows
+        run: node ops/paper-studio/run_diary_release_browser_20261016.cjs
+      - name: Compile all protected Paper/Marks/Diary/Lesson/Early Years modules
+        working-directory: al-siddique-frontend
+        run: npm run build
+      - name: Require complete five-feature compiled artifact, not a public release
+        run: python3 ops/paper-studio/verify_full_feature_readiness_20261016.py --repo . --dist al-siddique-frontend/dist
+      - name: Enforce published Diary controller retention in candidate assets
+        env:
+          ASSPS_DIARY_CANDIDATE_DIST: ${{ github.workspace }}/al-siddique-frontend/dist
+        run: node --test ops/tests/paper-diary-active-controller-immutable-release-gate-20261015.test.cjs
