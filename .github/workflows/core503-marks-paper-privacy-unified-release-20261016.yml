@@ -4,6 +4,7 @@ on:
     branches:
       - 'integration/core503-marks-rls-paper-privacy-20261016'
       - 'integration/core503-privacy-expectedanswer-diary-port-20261016'
+      - 'integration/core503-truefalse-http-marks-release-20261016'
   pull_request:
     paths:
       - 'al-siddique-backend/src/config/signedRlsCatalogGuard.js'
@@ -11,6 +12,7 @@ on:
       - 'al-siddique-backend/src/tests/signed-runtime-catalog-contract.test.js'
       - 'al-siddique-backend/src/services/assessmentPrintJobs.js'
       - 'al-siddique-backend/src/tests/assessment-print-jobs-domain.test.js'
+      - 'al-siddique-backend/src/tests/assessment-truefalse-student-projection-http-isolated.test.cjs'
       - 'al-siddique-frontend/src/Modules/examination/MarksSheet.jsx'
       - 'al-siddique-frontend/src/services/api.js'
       - 'al-siddique-frontend/src/services/marksSave401Session.test.mjs'
@@ -30,9 +32,14 @@ jobs:
         with:
           node-version: '22'
           cache: npm
-          cache-dependency-path: al-siddique-frontend/package-lock.json
+          cache-dependency-path: |
+            al-siddique-frontend/package-lock.json
+            al-siddique-backend/src/package-lock.json
       - name: Install frontend exact pinned packages (no production credentials)
         working-directory: al-siddique-frontend
+        run: npm ci --no-audit --no-fund
+      - name: Install exact pinned Express backend packages for HTTP privacy test
+        working-directory: al-siddique-backend/src
         run: npm ci --no-audit --no-fund
       - name: Install isolated Chromium for Diary and privacy acceptance
         working-directory: al-siddique-frontend
@@ -40,6 +47,8 @@ jobs:
       - name: Validate signed 82-table RLS and student print answer aliases, no backend secrets
         run: |
           node --test al-siddique-backend/src/tests/signed-runtime-catalog-contract.test.js al-siddique-backend/src/config/signedRlsCatalogGuard.test.cjs al-siddique-backend/src/tests/assessment-print-jobs-domain.test.js al-siddique-backend/src/tests/assessment-print-projection-boundary-static.test.js
+      - name: Require real HTTP student privacy and teacher/tenant denial (synthetic actors only)
+        run: node --test al-siddique-backend/src/tests/assessment-truefalse-student-projection-http-isolated.test.cjs
       - name: Fail closed on Marks POST401 logout, damaged roster, zeros or missing marks
         run: |
           node --test al-siddique-frontend/src/services/marksSave401Session.test.mjs ops/tests/marks-sheet-data-truth.test.js
