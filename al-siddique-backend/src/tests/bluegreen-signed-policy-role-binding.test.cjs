@@ -25,8 +25,18 @@ class FakePool{
    if(sql.includes('AS forced,')&&sql.includes('AS enabled,')&&sql.includes('AS signed')){
     observedPolicySQL=sql;observedRoleParams=params;
     const correct=sql.includes('$1::name=ANY(p.roles)')&&params.length===1&&params[0]===role;
-    return {rows:[{forced:77,enabled:77,signed:correct?77:0}]};
+    const modern=sql.includes("c.relname <> 'student_class_movement_audit'");
+    return {rows:[{
+      forced:modern?82:77,
+      enabled:modern?82:77,
+      signed:correct?77:0,
+      signed_school:modern?73:undefined,
+      signed_tenant:modern?4:undefined,
+    }]};
    }
+   if(sql.includes('AS approved_additional'))return {rows:[{
+    approved_additional:process.env.ASSPS_TEST_SIMULATE_POLICY_DRIFT==='1'?4:5
+   }]};
    if(sql.includes('AS role_name, rolsuper'))return {rows:[{role_name:role,rolsuper:false,rolbypassrls:false}]};
    if(sql.includes('session_user AS login_name'))return {rows:[{login_name:login,transaction_id:'21212121'}]};
    if(sql.includes('current_user AS role_name'))return {rows:[{role_name:role,rolsuper:false,rolbypassrls:false}]};
@@ -70,4 +80,13 @@ test('role-configured restrictive policy coverage binds exact new runtime role',
  const x=run(updated)
  assert.equal(x.status,0,x.stderr)
  assert.match(x.stdout,/BLUEGREEN_POLICY_BINDING_REAL_SOURCE_PASS/)
+})
+
+test('new signed catalog refuses missing academic signed policy despite matching 77 core role policies',()=>{
+ const x=child.spawnSync(process.execPath,['-e',stub],{
+  env:{...process.env,ASSPS_CHECK_SOURCE:updated,ASSPS_TEST_SIMULATE_POLICY_DRIFT:'1'},
+  encoding:'utf8',timeout:12000,
+ })
+ assert.notEqual(x.status,0)
+ assert.match(x.stderr,/DB_SIGNED_RLS_CATALOG_INCOMPLETE/)
 })
