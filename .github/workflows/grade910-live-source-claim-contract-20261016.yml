@@ -13,6 +13,7 @@ on:
       - "ops/qbank/audit-grade910-live-numerical-evidence-20261016.py"
       - "ops/qbank/build-grade910-numerical-review-priority-20261016.py"
       - "ops/qbank/recompute-grade910-21-original-numericals-20261016.py"
+      - "ops/release/install-grade910-80-numeric-audit-hook-20261016.sh"
       - "ops/tests/test_grade910_numerical_deep_recompute_20261016.py"
       - "ops/tests/test_grade910_numerical_review_priority_20261016.py"
       - "ops/tests/test_grade910_live_numerical_evidence_20261016.py"
@@ -60,6 +61,7 @@ on:
       - "ops/qbank/audit-grade910-live-numerical-evidence-20261016.py"
       - "ops/qbank/build-grade910-numerical-review-priority-20261016.py"
       - "ops/qbank/recompute-grade910-21-original-numericals-20261016.py"
+      - "ops/release/install-grade910-80-numeric-audit-hook-20261016.sh"
       - "ops/tests/test_grade910_numerical_deep_recompute_20261016.py"
       - "ops/tests/test_grade910_numerical_review_priority_20261016.py"
       - "ops/tests/test_grade910_live_numerical_evidence_20261016.py"
@@ -132,5 +134,7 @@ jobs:
         run: python3 -m unittest discover -s ops/tests -p test_grade910_numerical_review_priority_20261016.py -v
       - name: Independently recompute 21 original numerical proofs with source-blob and revision tamper guard
         run: python3 -m unittest discover -s ops/tests -p test_grade910_numerical_deep_recompute_20261016.py -v
+      - name: Check additive numerical audit hook installer shell syntax
+        run: bash -n ops/release/install-grade910-80-numeric-audit-hook-20261016.sh
       - name: Validate offline claim auditor syntax
         run: python3 -m py_compile ops/qbank/audit-live-grade910-source-claims-20261016.py ops/qbank/reconcile-grade910-held-original-candidates-20261016.py

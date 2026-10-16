@@ -42,3 +42,7 @@ The bank still has 2,411 live **provisional** IX/X candidate questions, 2,581 fr
 Before release: actual ASSPS-adopted 2026–27 textbook edition and medium/session linkage; exact PDF/page/exercise content evidence and rights; genuine qualified independent subject/Urdu teacher review per immutable revision; approved-only snapshot/provider contract; and SaaS Core tenant/role/security certification. Principal's existing general institutional permission does not replace qualified subject verification. Production cutover is owned solely by SaaS Core, and Paper Studio owns its selection and print integration.
 
 A changed question must be re-reviewed; do not interpret arithmetic QA as textbook verification or independently signed academic publication.
+
+## Unattended source-audit integration
+
+`ops/release/install-grade910-80-numeric-audit-hook-20261016.sh` adds a **separate additive ExecStartPost** hook on the existing Sunday 03:35 PKT academic source audit; it preserves all previous systemd units, timers, service checks and data contracts. `--check` runs offline QA without systemd changes; `--apply` refuses a dirty checkout and an unexpected existing audit unit, installs only a scoped systemd drop-in, reruns existing read-only audit and requires a protected 80/80 receipt. Source/answer changes fail closed instead of carrying a stale proof. It never creates a second bank or modifies student data. This is academic QA automation, **not** the SaaS Core production cutover or academic review.
