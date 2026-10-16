@@ -1,0 +1,130 @@
+#!/usr/bin/env python3
+"""One authoritative Grade IX-X phase checkpoint from read-only machine evidence.
+
+No permissions to change question approval or edition adoption. Never
+manufacture reviewer decisions or a green academic publication certificate.
+"""
+from __future__ import annotations
+import datetime as dt
+import json
+import os
+from pathlib import Path
+import tempfile
+
+SOURCE_DIR=Path("/var/lib/assps-grade910-sourceclaims")
+TECH=Path("/var/lib/assps-technical-self-verification/latest.json")
+ACADEMIC=Path("/var/lib/assps-grade910-weekly-qa/latest.json")
+OUT=SOURCE_DIR/"autonomous-six-phase-checkpoint.json"
+
+def read(path:Path):
+    return json.loads(path.read_text(encoding="utf8")) if path.exists() else None
+
+def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, answer):
+    if not all(isinstance(x,dict) for x in (technical,weekly,source,held,pdf,text,ocr_pilot,answer)):
+        raise ValueError("MANDATORY_MACHINE_EVIDENCE_MISSING")
+    src=source.get("summary") or {}
+    physical=pdf.get("summary") or {}
+    txt=text.get("summary") or {}
+    ocr=(ocr_pilot.get("summary") or {})
+    qa=(weekly.get("academicSourceChecks") or {})
+    candidates=answer.get("liveCandidateRows")
+    unapproved=answer.get("unapprovedProvisionalRows")
+    if candidates!=2411 or src.get("rows")!=2411:
+        raise ValueError("CANDIDATE_CORPUS_INVENTORY_DRIFT")
+    if held.get("sourceIdsNotInLive")!=170:
+        raise ValueError("SOURCE_TO_LIVE_ORIGINAL_CROSSWALK_DRIFT")
+    if unapproved!=2411 or answer.get("unexpectedApprovedWithoutAuthenticatedReviewerEvidence")!=0:
+        raise ValueError("APPROVED_STATUS_WITHOUT_AUTHENTICATED_REVIEW_EVIDENCE")
+    if physical.get("pdfPageCountConflicts")!=0 or physical.get("authorPageClaimsOutsideActualPdfRange")!=0:
+        raise ValueError("PDF_SOURCE_PAGE_BOUNDS_REGRESSION")
+    if answer.get("substantiveOrStructuralAnswerConflicts")!=0 or answer.get("recordCompletenessIssues")!={}:
+        raise ValueError("LIVE_ANSWER_MAPPING_REGRESSION")
+    source_integrity=(src.get("cachedPdfHashesMatchingManifest")==56 and src.get("cachedPdfHashesConflicting")==0
+                    and physical.get("catalogPdfFilesVerified")==56 and physical.get("originalAuthorPageClaims")==998)
+    source_text=(txt.get("claimsChecked")==998 and txt.get("independentlyVerifiedQuestionPages")==0
+                 and txt.get("productionDatabaseWrites")==0)
+    ocr_pilot_ok=(ocr.get("pagesScannedNow")==6 and ocr.get("claimsCoveredNow")==111
+                  and ocr.get("independentQuestionContentPagesVerified")==0
+                  and ocr.get("publishedQuestions")==0)
+    full_ocr_done=bool(full_ocr and (full_ocr.get("summary") or {}).get("scope")=="ALL_ELIGIBLE_ENGLISH_SCANNED_PAGES"
+                       and (full_ocr.get("summary") or {}).get("pagesScannedNow")==
+                           (full_ocr.get("summary") or {}).get("uniquePagesEligibleForLastResortOCR")
+                       and (full_ocr.get("summary") or {}).get("productionDatabaseWrites")==0)
+    score=technical.get("metrics",{}).get("scores",{})
+    integrity=technical.get("decision")=="OPERATIONAL" and score.get("total_score_rows",0)>=1763
+    fullsuite_ok=(weekly.get("decision")=="QA_PASSED_NO_AUTOMATIC_ACADEMIC_PUBLICATION"
+                  and qa.get("qualityVerified") is True
+                  and qa.get("passedBatches")==30)
+    mcq_ok=(answer.get("mcqCandidates")==809
+            and answer.get("answerEqualsSelectedOptionExactly",0)+
+                answer.get("terminalPunctuationOnlyDifferences",0)==809)
+    phases=[
+      {"phase":1,"title":"Checkpoint recovery and school-data protection",
+       "status":"MACHINE_PASS" if integrity else "HOLD_LIVE_HEALTH_EVIDENCE",
+       "evidence":"Current technical self-audit and exact zero-vs-null result aggregates"},
+      {"phase":2,"title":"Official-source PDF integrity and actual page-content recovery",
+       "status":"MACHINE_SOURCE_PASS_PAGE_CONTENT_PENDING" if source_integrity and source_text and ocr_pilot_ok else "HOLD_INCOMPLETE_SOURCE_EVIDENCE",
+       "ocrFullCompleted":full_ocr_done,"sourcePdfAssetsChecked":56,
+       "claimsChecked":998,"independentVerifiedContentPages":0,
+       "evidence":"SHA/page bounds, exact PDF text layer, and bounded English OCR pilot"},
+      {"phase":3,"title":"Live Grade IX/X question and answer-key mechanical quality",
+       "status":"MACHINE_PASS_NOT_SUBJECT_CORRECTNESS" if mcq_ok else "HOLD_MCQ_KEY_CONFLICT",
+       "mcqsChecked":809,"actualQualifiedReviewDecisions":0,
+       "evidence":"Read-only selected-option vs answer mapping, four-option structure and 2411 required academic metadata fields"},
+      {"phase":4,"title":"Independent review evidence and approved-only publication firewall",
+       "status":"SAFE_PUBLICATION_HOLD_EXPECTED",
+       "signedIndependentRevisionApprovals":0,"publishedVerifiedQuestions":0,
+       "evidence":"170 private revision-bound unsigned forms, 2411 live provisional records, zero authentic review events"},
+      {"phase":5,"title":"Paper Studio handoff and isolated integration QA",
+       "status":"MACHINE_INTEGRATION_PASS_CORE_CUTOVER_NOT_CERTIFIED" if fullsuite_ok else "HOLD_FULL_QA_EVIDENCE",
+       "fullQaBatchesPass":30 if fullsuite_ok else 0,
+       "evidence":"30-batch isolated source QA and approved-only data-contract tests; SaaS Core owns release"},
+      {"phase":6,"title":"Production release certification and final report",
+       "status":"TECHNICAL_EVIDENCE_STAGED_ACADEMIC_PUBLICATION_HOLD",
+       "productionDbMutationCount":0,"productionDeployAuthorizedByAcademicAgent":False,
+       "evidence":"One source-ledger, root-private machine receipts, no fabricated qualified teacher signatures"}
+    ]
+    return {
+      "schema":"ASSPS_GRADE910_SIX_PHASE_AUTONOMOUS_MACHINE_CHECKPOINT_V1",
+      "observedUTC":dt.datetime.now(dt.timezone.utc).isoformat(),
+      "dataProtection":"READ_ONLY_NOT_A_RELEASE_OR_FACULTY_CERTIFICATE",
+      "phaseCount":6,"phases":phases,
+      "machinePassedPhases":sum(x["status"].startswith("MACHINE_PASS") or x["status"].startswith("MACHINE_SOURCE_PASS") or x["status"].startswith("MACHINE_INTEGRATION_PASS") for x in phases),
+      "authenticIndependentAcademicApprovals":0,
+      "academicVerifiedPublicationReady":False,
+      "paperStudioAcademicallyApprovedSnapshotReady":False,
+      "academicPublicationDecision":"BLOCK_UNVERIFIED_QUESTION_PUBLICATION",
+      "actualQuestionContentPagesVerified":0,
+      "ocrFullRunCompleted":full_ocr_done,
+      "unresolvedIndependentEvidence":["School-specific approved book edition and exact academic session adoption",
+         "Question-revision and source-page/exercise content attribution",
+         "Qualified independent academic subject and Urdu-language review per question revision",
+         "Paper Studio/SaaS Core authorized release acceptance for actual approved snapshot"],
+      "realStudentMarksChanged":False,"newPrinterJobsRequested":False
+    }
+
+def save(path,data):
+    path.parent.mkdir(parents=True,exist_ok=True,mode=0o700)
+    if path.parent.stat().st_mode & 0o077:raise ValueError("PRIVATE_RECEIPT_DIRECTORY_REQUIRED")
+    fd,tmp=tempfile.mkstemp(dir=path.parent,prefix=".phase-")
+    try:
+        os.fchmod(fd,0o600)
+        with os.fdopen(fd,"w") as f:
+            json.dump(data,f,sort_keys=True,indent=2);f.write("\n");f.flush();os.fsync(f.fileno())
+        os.replace(tmp,path)
+    finally:
+        if os.path.exists(tmp):os.unlink(tmp)
+
+if __name__=="__main__":
+    p=evaluate(read(TECH),read(ACADEMIC),
+               read(SOURCE_DIR/"latest.json"),read(SOURCE_DIR/"held170.json"),
+               read(SOURCE_DIR/"physical-page-count.json"),
+               read(SOURCE_DIR/"question-page-textlayer.json"),
+               read(SOURCE_DIR/"ocr-pilot-20261016.json"),
+               read(SOURCE_DIR/"ocr-fallback.json"),
+               read(SOURCE_DIR/"live-answer-integrity.json"))
+    save(OUT,p)
+    print(json.dumps({k:v for k,v in p.items() if k!="phases"},sort_keys=True))
+    for row in p["phases"]:print(f"PHASE_{row['phase']}={row['status']}")
+    if any(x["status"].startswith("HOLD_LIVE") or x["status"].startswith("HOLD_INCOMPLETE") or x["status"].startswith("HOLD_MCQ") or x["status"].startswith("HOLD_FULL") for x in p["phases"]):
+        raise SystemExit("OPERATIONAL_GUARD_HOLD_NO_PRODUCTION_CHANGES")

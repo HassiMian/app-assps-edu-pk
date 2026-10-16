@@ -45,6 +45,14 @@ test('pilot is a bounded subset and never silently changes the total eligible co
  assert.equal(v.eligiblePages,6);assert.equal(v.selected.length,2);
  assert.deepEqual(v.selected.map(x=>x.catalog),['a','b']);
 });
+test('full source OCR groups physical pages per PDF instead of reloading on every page',()=>{
+ const manifest={entries:[{recordId:'a',medium:'English'},{recordId:'b',medium:'English'}]};
+ const rows=[];
+ for(const n of [1,2,3])for(const catalog of ['a','b'])rows.push({category:'TEXT_LAYER_INSUFFICIENT',sourceCatalog:catalog,originallyClaimedPdfPage:n});
+ const full=selectUniquePages(rows,manifest);
+ assert.equal(full.selected.length,6);
+ assert.deepEqual(full.selected.map(x=>x.catalog),['a','a','a','b','b','b']);
+});
 test('source catalog missing must fail closed',()=>{
  assert.throws(()=>selectUniquePages([{category:'TEXT_LAYER_INSUFFICIENT',sourceCatalog:'unknown'}],{entries:[]}),/MISSING_OFFICIAL_CATALOG/);
 });

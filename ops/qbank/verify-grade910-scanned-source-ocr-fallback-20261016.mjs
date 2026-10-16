@@ -53,12 +53,17 @@ export function selectUniquePages(records, manifest, maxPages=0) {
   pages.get(r.originallyClaimedPdfPage).push(r);
  }
  const queues=[...catalogPages].map(([id,pages])=>({id,pages:[...pages].sort((a,b)=>a[0]-b[0])}));
- const order=[];
- for(let i=0;queues.some(q=>i<q.pages.length);i++){
-  for(const q of queues)if(i<q.pages.length)order.push({catalog:q.id,page:q.pages[i][0],claims:q.pages[i][1]});
+ // A small pilot samples across catalogs. Full runs group pages by source PDF
+ // to avoid reloading enormous scanned book images for every page.
+ const fullOrder=queues.flatMap(q=>q.pages.map(([page,claims])=>({catalog:q.id,page,claims})));
+ const roundRobin=[];
+ if(maxPages>0){
+   for(let i=0;queues.some(q=>i<q.pages.length);i++){
+     for(const q of queues)if(i<q.pages.length)roundRobin.push({catalog:q.id,page:q.pages[i][0],claims:q.pages[i][1]});
+   }
  }
- return {selected:maxPages>0?order.slice(0,maxPages):order,
-  eligiblePages:order.length,eligibleQuestionClaims:order.reduce((n,x)=>n+x.claims.length,0),
+ return {selected:maxPages>0?roundRobin.slice(0,maxPages):fullOrder,
+  eligiblePages:fullOrder.length,eligibleQuestionClaims:fullOrder.reduce((n,x)=>n+x.claims.length,0),
   skippedNonEnglishClaims:excluded};
 }
 function sourceQuestionStems(){
@@ -125,6 +130,7 @@ async function main(){
     ocrMeanConfidence:languageStats.averageConfidence,
     rawPageImagePersisted:false,rawOCRTextPersisted:false});
   page.cleanup();currentCount++;
+  if(currentCount%8===0 && global.gc)global.gc();
  }
  if(currentDoc)await currentDoc.destroy();
  const buckets={};

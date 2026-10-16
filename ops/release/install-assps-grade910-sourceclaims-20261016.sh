@@ -16,6 +16,8 @@ DEST=/usr/local/libexec/assps-grade910-sourceclaims
 test -s "$SRC" && test -s "$MAN" && test -s "$ORIGINAL"
 python3 -m py_compile "$SRC"
 python3 -m py_compile "$REPO/ops/qbank/reconcile-grade910-held-original-candidates-20261016.py"
+python3 -m py_compile "$REPO/ops/qbank/audit-grade910-live-answer-integrity-20261016.py"
+python3 -m py_compile "$REPO/ops/qbank/assps-grade910-autonomous-six-phase-receipt-20261016.py"
 python3 -m py_compile "$REPO/ops/qbank/assps-grade910-held170-near-duplicate-screen-20261016.py"
 node --check "$REPO/ops/qbank/verify-grade910-pdf-physical-page-bounds-20261016.mjs"
 node --test "$REPO/ops/tests/grade910-physical-pdf-page-bounds-20261016.test.mjs"
@@ -23,6 +25,8 @@ node --check "$REPO/ops/qbank/verify-grade910-pdf-question-text-evidence-2026101
 node --test "$REPO/ops/tests/grade910-pdf-question-text-evidence-20261016.test.mjs"
 python3 -m unittest discover -s "$REPO/ops/tests" -p "$TEST" -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_170_original_reconciliation_20261016.py -q
+python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_live_answer_integrity_20261016.py -q
+python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_six_phase_receipt_20261016.py -q
 python3 -m unittest discover -s "$REPO/ops/tests" -p test_grade910_held170_near_duplicate_screen_20261016.py -q
 systemd-analyze verify "$REPO/ops/release/$UNIT" "$REPO/ops/release/$TIMER"
 if [[ "$MODE" == --check ]];then
@@ -33,6 +37,8 @@ fi
 mkdir -p "$DEST"
 install -m 0644 "$SRC" "$DEST/$(basename "$SRC")"
 install -m 0644 "$REPO/ops/qbank/reconcile-grade910-held-original-candidates-20261016.py" "$DEST/reconcile-grade910-held-original-candidates-20261016.py"
+install -m 0644 "$REPO/ops/qbank/audit-grade910-live-answer-integrity-20261016.py" "$DEST/audit-grade910-live-answer-integrity-20261016.py"
+install -m 0644 "$REPO/ops/qbank/assps-grade910-autonomous-six-phase-receipt-20261016.py" "$DEST/assps-grade910-autonomous-six-phase-receipt-20261016.py"
 install -m 0644 "$REPO/ops/qbank/assps-grade910-held170-near-duplicate-screen-20261016.py" "$DEST/assps-grade910-held170-near-duplicate-screen-20261016.py"
 install -m 0644 "$REPO/ops/qbank/verify-grade910-pdf-physical-page-bounds-20261016.mjs" "$DEST/verify-grade910-pdf-physical-page-bounds-20261016.mjs"
 install -m 0644 "$REPO/ops/qbank/verify-grade910-pdf-question-text-evidence-20261016.mjs" "$DEST/verify-grade910-pdf-question-text-evidence-20261016.mjs"
@@ -64,6 +70,17 @@ assert not r['facultySignaturesCreated']
 h=json.loads(Path('/var/lib/assps-grade910-sourceclaims/held170.json').read_text())
 assert h['sourceIdsNotInLive']==170 and h['existingUnsignedFacultyFormsVerified']==170
 assert h['newApprovedQuestions']==0 and h['databaseWrites']==0
+z=json.loads(Path('/var/lib/assps-grade910-sourceclaims/live-answer-integrity.json').read_text())
+assert z['liveCandidateRows']>=2411 and z['mcqCandidates']>=809
+assert z['substantiveOrStructuralAnswerConflicts']==0
+assert z['recordCompletenessIssues']=={} and z['missingAnswerRecords']==0
+assert z['unexpectedApprovedWithoutAuthenticatedReviewerEvidence']==0
+assert z['productionDatabaseWrites']==0
+p=json.loads(Path('/var/lib/assps-grade910-sourceclaims/autonomous-six-phase-checkpoint.json').read_text())
+assert p['phaseCount']==6 and p['machinePassedPhases']>=4
+assert p['academicVerifiedPublicationReady'] is False
+assert p['authenticIndependentAcademicApprovals']==0
+assert p['academicPublicationDecision']=='BLOCK_UNVERIFIED_QUESTION_PUBLICATION'
 n=json.loads(Path('/var/lib/assps-grade910-sourceclaims/held170-near-duplicate.json').read_text())
 assert n['sourceOriginalOnly']==170 and n['liveComparisonRows']==2411
 assert n['automaticImports']==0 and n['newApprovals']==0 and n['confirmedDuplicateCount']==0

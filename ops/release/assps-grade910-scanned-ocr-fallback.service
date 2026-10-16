@@ -13,6 +13,7 @@ Environment=ASSPS_MANIFEST=/usr/local/libexec/assps-grade910-sourceclaims/offici
 Environment=ASSPS_TEXT_LAYER=/var/lib/assps-grade910-sourceclaims/question-page-textlayer.json
 Environment=ASSPS_OCR_EVIDENCE=/var/lib/assps-grade910-sourceclaims/ocr-fallback.json
 ExecStart=/usr/bin/node --expose-gc /usr/local/libexec/assps-grade910-sourceclaims/verify-grade910-scanned-source-ocr-fallback-20261016.mjs
+ExecStartPost=/usr/bin/python3 /usr/local/libexec/assps-grade910-sourceclaims/assps-grade910-autonomous-six-phase-receipt-20261016.py
 TimeoutStartSec=10800
 ProtectSystem=strict
 ProtectHome=read-only
