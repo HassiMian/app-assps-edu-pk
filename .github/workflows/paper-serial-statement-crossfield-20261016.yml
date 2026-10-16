@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - 'integration/core-paper-phase3ag-*'
+      - 'integration/core-worker-paper-phase3ag-*'
       - 'feat/paper-serial-statement-bounded-*'
     paths:
       - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperInlineEditor.jsx'
