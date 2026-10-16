@@ -21,3 +21,16 @@ python3 ops/release/core-infrastructure/verify_signed_rls_catalog_drift_20261016
 ```
 
 This artifact explicitly reports `releaseAuthorized=false` and `securityCertification=false` even if its catalog verification succeeds. All original Core gates remain mandatory. Production cutover **HOLD**.
+
+## Fresh full PostgreSQL local restore acceptance — same mission
+
+- Source **separate Connect-produced private backup** `/root/assps-release-backups/core-acl-fresh-candidate-20261016/apexos-full-fresh-20261016.dump`, mode 0600, 2,706,585 bytes, SHA256 `e4564c8228994c4b395d43e73ca02c3d308cefad55b5b241f2d4a7becd17e277`.
+- Confirmed full `pg_restore -l` catalog, source database `apexos` size 34 MB and available VPS disk 16 GB before restoring.
+- Created **new, separate** `assps_rls_restore_audit_20261016` with owner `postgres`, `TEMPLATE template0`, and revoked PUBLIC database CONNECT. Did not drop/modify any pre-existing database.
+- First `pg_restore` failed because a non-root postgres OS account cannot open the protected `/root/...` backup. Recovered **without weakening file permissions or making another sensitive backup copy** by opening the file as root and piping its existing input FD to the `postgres` process.
+- `pg_restore --exit-on-error --single-transaction --no-owner -d assps_rls_restore_audit_20261016` **SUCCESS**; new private isolated DB size 28 MB.
+- Live = restored: 1,763 `exam_results`, 213 genuine zeros, zero NULL `marks_obtained`, **identical full results row-content hash** `75d6f6e04b196e3fc23b5988f305dcd5`; 379 policies, 83 FORCE RLS tables, 87 RLS enabled tables, 77 signed guards and 77 signed allows.
+- Clone read-only unsigned `assps_marks_signed_runtime` denied result visibility (0 rows), ROLLBACK.
+- Postflight public root `/var/www/assps-resultcards-owner-accepted-20261016` index SHA256 `760b232b493c300fe78908704aef4989c24c25028faac1821dd41f6480210f3c`; app 200, API health 200, live result count 1,763. Existing one-shot restricted worker still Result=success/ExecMainStatus=0 (inactive expected).
+- The restored clone is retained as a **private local audit artifact**, not promoted to application configuration or exposed to public access.
+- Local same-host restoration is **not** a signed/offhost restore trial, a physically independent backup, or a substitute for official 13/13 trusted release certification. Production cutover **HOLD**.
