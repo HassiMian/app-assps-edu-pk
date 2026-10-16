@@ -57,7 +57,7 @@ def packet_ids(groups,docs=DOCS,original=ORIG):
     if len(result)!=161 or sum(x['rows'] for x in packets)!=161:
         raise ValueError('EXPECTED_161_RESEARCH_DRAFTS_MISSING')
     return result,packets
-def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG,new_biology=None):
+def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG,new_biology=None,new_dual_urdu=None):
     existing,packets=packet_ids(groups,docs,original)
     rows=five.get('rows')
     if not isinstance(rows,list) or len(rows)!=5:raise ValueError('EXPECTED_FINAL_FIVE_FACULTY_DOCKETS')
@@ -170,6 +170,62 @@ def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG,new_biology=
             raise ValueError('NEW_BIOLOGY_RESEARCH_COUNT_NOT_TEN')
         if len(unlinked)!=440 or sum(x['priority']=='HIGH' for x in unlinked)!=219:
             raise ValueError('NEW_BIOLOGY_RESEARCH_LEFTOVER_QUEUE_WRONG')
+    # Grade IX Biology (8) + Grade X Computer Science (6), distinct from the
+    # first 10 and all preserved historic research. Only manuscript candidates.
+    another14=0
+    if new_dual_urdu is not None:
+        d=new_dual_urdu
+        if (d.get('schema')!='ASSPS_GRADE910_14_ORIGINAL_URDU_BIOLOGY9_COMPUTER10_EXPLANATIONS_V1'
+            or d.get('candidateCount')!=14 or d.get('grade9BiologyUrduCount')!=8
+            or d.get('grade10ComputerUrduCount')!=6
+            or d.get('originalSourceFileFingerprintsVerified')!=2
+            or d.get('researchOnlyNotTextbookCopyrightReproduction') is not True
+            or d.get('actualSchoolTextbookAdoptionVerified') is not False
+            or d.get('sourceExercisePageVerified') is not False
+            or d.get('independentAcademicReviewCompleted') is not False
+            or d.get('independentUrduLanguageReviewCompleted') is not False
+            or d.get('academicallyApproved') is not False
+            or d.get('published') is not False
+            or d.get('paperStudioSelectable') is not False
+            or d.get('productionDatabaseWrites')!=0):
+            raise ValueError('SECOND_URDU_MODEL_ANSWER_RESEARCH_FORGED_OR_DRIFTED')
+        entries=d.get('drafts')
+        if not isinstance(entries,list) or len(entries)!=14:
+            raise ValueError('SECOND_URDU_RESEARCH_14_ROWS_REQUIRED')
+        newids=set()
+        for row in entries:
+            id=row.get('questionId'); prior=riskmap.get(id)
+            spec={('9th','Biology'):('IX-BIO-UR-',8),
+                  ('10th','Computer Science'):('X-COMP-',6)}
+            grade=str(row.get('grade'));sub=str(row.get('subject'))
+            approved_spec=spec.get((grade,sub))
+            if (id in newids or not approved_spec or not str(id).startswith(approved_spec[0])
+                or prior is None or prior.get('priority')!='HIGH'
+                or prior.get('grade')!=grade or prior.get('subject')!=sub
+                or prior.get('medium')!='Urdu' or prior.get('type')!='long'
+                or id not in hashes or row.get('currentLiveFullContentRevisionSha256')!=hashes[id]
+                or id in existing and existing[id]['proposalExists']
+                or any(x.get('questionId')==id for x in (new_biology or {}).get('newAnswers',[]))
+                or row.get('marks')!=5 or row.get('medium')!='Urdu'
+                or row.get('academicallyApproved') is not False
+                or row.get('publishedVerified') is not False
+                or row.get('paperStudioApprovedSelectable') is not False
+                or row.get('sourcePrintedTextbookPageOrExerciseVerified') is not False
+                or row.get('actualSchoolAdoptedEditionFor2026_27Verified') is not False
+                or row.get('independentlyQualifiedSubjectReviewed') is not False
+                or row.get('independentUrduLanguageReviewerApproved') is not False
+                or len(str(row.get('independentlyAuthoredUrduExplanationCandidate') or '').split())<70
+                or len(row.get('proposedFivePointMarkingCriteriaUrdu') or [])!=5):
+                raise ValueError('SECOND_URDU_DRAFT_NOT_CURRENT_UNAPPROVED_SOURCE_REVISION')
+            newids.add(id)
+        if sum(id.startswith('IX-BIO-UR-') for id in newids)!=8 or sum(id.startswith('X-COMP-') for id in newids)!=6:
+            raise ValueError('SECOND_URDU_RESEARCH_GRADE_SUBJECT_DRIFT')
+        if not newids<=set(x['questionId'] for x in unlinked):
+            raise ValueError('SECOND_URDU_RESEARCH_DUPLICATED_OLD_QUEUE')
+        unlinked=[x for x in unlinked if x['questionId'] not in newids]
+        another14=len(newids)
+        if len(unlinked)!=426 or sum(x['priority']=='HIGH' for x in unlinked)!=205:
+            raise ValueError('SECOND_URDU_RESEARCH_LEFTOVER_PRIORITY_DRIFT')
     if summary['originalUniverse']!=166 or summary['live']!=165 or summary['originalOnly']!=1:
         raise ValueError('RESEARCH_ORIGINAL_LIVE_CROSSWALK_DRIFT')
     if summary['hasResearchDraft']!=165 or summary['noResearchDraft']!=1 or summary['liveWithResearchDraft']!=164:
@@ -185,6 +241,7 @@ def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG,new_biology=
        'liveRiskIdsWithPriorResearchDraft':summary['liveRiskWithResearchDraft'],
        'liveRiskIdsWithoutPriorResearchDraft':604-summary['liveRiskWithResearchDraft'],
        'newIndependentHighPriorityUrduBiologyResearchCandidates':recently_authored,
+       'newHighPriorityGrade9BiologyAndGrade10ComputerUrduResearchCandidates':another14,
        'remainingLiveReviewDepthFlagsWithoutAnyDraft':len(unlinked),
        'remainingHighPriorityFlagsWithoutAnyDraft':sum(x['priority']=='HIGH' for x in unlinked),
        'highPriorityRiskIdsWithPriorResearchDraft':high_existing,
@@ -235,7 +292,21 @@ def run():
         raise ValueError('TEN_URDU_BIOLOGY_FROZEN_ORIGINAL_FILE_CHANGED')
     if author.build({r['id']:r for r in live},hashes)!=proposal:
         raise ValueError('TEN_URDU_BIOLOGY_PROPOSAL_TAMPERED_OR_CURRENT_REVISION_DRIFT')
-    result=build(groups,last,ledger,risks,set(hashes),new_biology=proposal)
+    spec2=importlib.util.spec_from_file_location(
+        'assps_new_independent_grade9_biology8_grade10_computer6_urdu_research',
+        ROOT/'ops/qbank/author-grade9-biology8-grade10-computer6-urdu-research-20261016.py')
+    author2=importlib.util.module_from_spec(spec2);spec2.loader.exec_module(author2)
+    proposal2=json.loads(author2.OUTPUT.read_text(encoding='utf8'))
+    # Authoring is reproducible from actual live full revision SHA and frozen
+    # original research bytes; a changed packet is rejected, never adopted.
+    expected14=author2.build({r['id']:r for r in live},hashes,
+        {z['questionId']:z for z in risks['records'] if z['priority']=='HIGH'})
+    if proposal2!=expected14:
+        raise ValueError('SECOND_URDU_ORIGINAL_AUTHOR_PACKET_TAMPERED')
+    for subject,(_grade,filename,original_sha,_catalog) in author2.FROZEN.items():
+        if sha((author2.SOURCE_ROOT/filename).read_bytes())!=original_sha:
+            raise ValueError('SECOND_URDU_ORIGINAL_SOURCE_SHA_DRIFT')
+    result=build(groups,last,ledger,risks,set(hashes),new_biology=proposal,new_dual_urdu=proposal2)
     atomic_private(OUT,result)
     return result
 if __name__=='__main__':

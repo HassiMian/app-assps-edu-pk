@@ -8,6 +8,11 @@ on:
       - "ops/qbank/audit-grade910-subjective-answer-depth-20261016.py"
       - "ops/qbank/audit-grade910-existing-long-answer-proposal-crosswalk-20261016.py"
       - "ops/qbank/author-grade10-urdu-biology-ten-research-answers-20261016.py"
+      - "ops/qbank/author-grade9-biology8-grade10-computer6-urdu-research-20261016.py"
+      - "ops/tests/test_grade910_new_fourteen_urdu_original_explanations_20261016.py"
+      - "ops/tests/test_grade910_second_urdu_crosswalk_release_hold_20261016.py"
+      - "docs/question-bank/ASSPS_GRADE9_BIOLOGY_8_AND_GRADE10_COMPUTER_6_URDU_UNAPPROVED_EXPLANATIONS_20261016.json"
+      - "docs/question-bank/ASSPS_GRADE910_14_NEW_URDU_BIOLOGY_COMPUTER_ANSWER_RESEARCH_20261016.md"
       - "ops/tests/test_grade910_biology10_urdu_ten_explanation_drafts_20261016.py"
       - "ops/tests/test_grade910_new_urdu_biology_research_queue_gate_20261016.py"
       - "docs/question-bank/ASSPS_GRADE10_URDU_BIOLOGY_TEN_UNAPPROVED_ANSWER_CONTENT_BATCH_20261016.md"
@@ -76,6 +81,11 @@ on:
       - "ops/qbank/audit-grade910-subjective-answer-depth-20261016.py"
       - "ops/qbank/audit-grade910-existing-long-answer-proposal-crosswalk-20261016.py"
       - "ops/qbank/author-grade10-urdu-biology-ten-research-answers-20261016.py"
+      - "ops/qbank/author-grade9-biology8-grade10-computer6-urdu-research-20261016.py"
+      - "ops/tests/test_grade910_new_fourteen_urdu_original_explanations_20261016.py"
+      - "ops/tests/test_grade910_second_urdu_crosswalk_release_hold_20261016.py"
+      - "docs/question-bank/ASSPS_GRADE9_BIOLOGY_8_AND_GRADE10_COMPUTER_6_URDU_UNAPPROVED_EXPLANATIONS_20261016.json"
+      - "docs/question-bank/ASSPS_GRADE910_14_NEW_URDU_BIOLOGY_COMPUTER_ANSWER_RESEARCH_20261016.md"
       - "ops/tests/test_grade910_biology10_urdu_ten_explanation_drafts_20261016.py"
       - "ops/tests/test_grade910_new_urdu_biology_research_queue_gate_20261016.py"
       - "docs/question-bank/ASSPS_GRADE10_URDU_BIOLOGY_TEN_UNAPPROVED_ANSWER_CONTENT_BATCH_20261016.md"
@@ -200,5 +210,10 @@ jobs:
         run: |
           python3 -m unittest discover -s ops/tests -p test_grade910_biology10_urdu_ten_explanation_drafts_20261016.py -v
           python3 -m py_compile ops/qbank/author-grade10-urdu-biology-ten-research-answers-20261016.py
+      - name: Regression check 14 more independent Urdu Biology and Computer research drafts
+        run: |
+          python3 -m unittest discover -s ops/tests -p test_grade910_new_fourteen_urdu_original_explanations_20261016.py -v
+          # Live private ledger gate is tested only in the protected VPS audit.
+          python3 -m py_compile ops/qbank/author-grade9-biology8-grade10-computer6-urdu-research-20261016.py
       - name: Validate offline claim auditor syntax
         run: python3 -m py_compile ops/qbank/audit-live-grade910-source-claims-20261016.py ops/qbank/reconcile-grade910-held-original-candidates-20261016.py
