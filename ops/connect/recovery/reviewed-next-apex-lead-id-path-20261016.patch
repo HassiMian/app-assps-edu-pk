@@ -1,0 +1,251 @@
+diff --git a/src/app/api/saas-admin/apex-leads/[leadId]/follow-up/route.ts b/src/app/api/saas-admin/apex-leads/[leadId]/follow-up/route.ts
+index 430aa50..83e0159 100644
+--- a/src/app/api/saas-admin/apex-leads/[leadId]/follow-up/route.ts
++++ b/src/app/api/saas-admin/apex-leads/[leadId]/follow-up/route.ts
+@@ -1,9 +1,7 @@
+ import { NextResponse } from "next/server";
+-import path from "path";
+-import fs from "fs/promises";
+ import { requireSaasAdminUser } from "@/lib/server/auth-user";
+ import { sendApexLeadAutoReply } from "@/lib/server/mail";
+-import type { ApexLeadRecord } from "@/lib/server/apex-leads-storage";
++import { isApexLeadId, readApexLeadById } from "@/lib/server/apex-leads-storage";
+ 
+ export const runtime = "nodejs";
+ 
+@@ -14,9 +12,13 @@ export async function POST(
+   try {
+     await requireSaasAdminUser();
+     const { leadId } = await context.params;
+-    const filePath = path.join(process.cwd(), "data", "apex-leads", `${leadId}.json`);
+-    const raw = await fs.readFile(filePath, "utf8");
+-    const lead = JSON.parse(raw) as ApexLeadRecord;
++    if (!isApexLeadId(leadId)) {
++      return NextResponse.json(
++        { success: false, message: "Invalid lead ID" },
++        { status: 400, headers: { "Cache-Control": "no-store" } },
++      );
++    }
++    const lead = await readApexLeadById(leadId);
+ 
+     const sent = await sendApexLeadAutoReply({
+       to: lead.email,
+diff --git a/src/app/api/saas-admin/apex-leads/[leadId]/status/route.ts b/src/app/api/saas-admin/apex-leads/[leadId]/status/route.ts
+index 5fb71f9..21e882a 100644
+--- a/src/app/api/saas-admin/apex-leads/[leadId]/status/route.ts
++++ b/src/app/api/saas-admin/apex-leads/[leadId]/status/route.ts
+@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
+ import { requireSaasAdminUser } from "@/lib/server/auth-user";
+ import {
+   ApexLeadStatus,
++  isApexLeadId,
+   updateApexLeadStatus,
+ } from "@/lib/server/apex-leads-storage";
+ 
+@@ -16,6 +17,12 @@ export async function POST(
+   try {
+     await requireSaasAdminUser();
+     const { leadId } = await context.params;
++    if (!isApexLeadId(leadId)) {
++      return NextResponse.json(
++        { success: false, message: "Invalid lead ID" },
++        { status: 400, headers: { "Cache-Control": "no-store" } },
++      );
++    }
+     const body = await req.json();
+     const status = String(body.status || "").toLowerCase() as ApexLeadStatus;
+ 
+diff --git a/src/lib/server/apex-leads-storage.ts b/src/lib/server/apex-leads-storage.ts
+index bfe9b1a..52bb80e 100644
+--- a/src/lib/server/apex-leads-storage.ts
++++ b/src/lib/server/apex-leads-storage.ts
+@@ -23,6 +23,23 @@ export type ApexLeadRecord = ApexLeadInput & {
+   updated_at?: string;
+ };
+ 
++/** All persisted IDs are generated using UUID hex prefix, never URL path text. */
++export function isApexLeadId(value: unknown): value is string {
++  return typeof value === "string" && /^LEAD-[0-9A-F]{8}$/.test(value);
++}
++
++function leadFilePath(leadId: string): string {
++  if (!isApexLeadId(leadId)) {
++    throw new Error("INVALID_APEX_LEAD_ID");
++  }
++  return path.join(leadsDir(), `${leadId}.json`);
++}
++
++export async function readApexLeadById(leadId: string): Promise<ApexLeadRecord> {
++  const raw = await fs.readFile(leadFilePath(leadId), "utf8");
++  return JSON.parse(raw) as ApexLeadRecord;
++}
++
+ function leadsDir() {
+   return path.join(process.cwd(), "data", "apex-leads");
+ }
+@@ -37,7 +54,7 @@ export async function createApexLead(input: ApexLeadInput) {
+   };
+ 
+   await fs.mkdir(leadsDir(), { recursive: true });
+-  await fs.writeFile(path.join(leadsDir(), `${leadId}.json`), JSON.stringify(record, null, 2), "utf8");
++  await fs.writeFile(leadFilePath(leadId), JSON.stringify(record, null, 2), "utf8");
+   return record;
+ }
+ 
+@@ -72,9 +89,8 @@ export async function listApexLeads(statusParam?: string | null) {
+ }
+ 
+ export async function updateApexLeadStatus(leadId: string, status: ApexLeadStatus) {
+-  const filePath = path.join(leadsDir(), `${leadId}.json`);
+-  const raw = await fs.readFile(filePath, "utf8");
+-  const data = JSON.parse(raw) as ApexLeadRecord;
++  const filePath = leadFilePath(leadId);
++  const data = await readApexLeadById(leadId);
+   const next: ApexLeadRecord = {
+     ...data,
+     status,
+diff --git a/tests/apex-lead-id-boundary.test.cjs b/tests/apex-lead-id-boundary.test.cjs
+new file mode 100644
+index 0000000..4fa8678
+--- /dev/null
++++ b/tests/apex-lead-id-boundary.test.cjs
+@@ -0,0 +1,139 @@
++'use strict';
++const assert = require('node:assert/strict');
++const fs = require('node:fs');
++const path = require('node:path');
++const vm = require('node:vm');
++const test = require('node:test');
++const ts = require('typescript');
++const root=path.resolve(__dirname,'../src');
++const leadRoot='/synthetic/connect/data/apex-leads';
++const files=new Map();
++let reads=0,writes=0,sends=0,authCalls=0;
++function transpile(rel, imports) {
++  const src=fs.readFileSync(path.join(root,rel),'utf8');
++  const js=ts.transpileModule(src,{compilerOptions:{
++    target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS,esModuleInterop:true
++  }}).outputText;
++  const exp={};
++  vm.runInNewContext(js,{exports:exp,URL,Error,console,process:{cwd:()=>'/synthetic/connect'},
++    require:(id)=>{
++      if(!(id in imports))throw Error('UNREVIEWED_IMPORT:'+id);
++      return imports[id];
++    }},{filename:rel,timeout:1500});
++  return exp;
++}
++const storage=transpile('lib/server/apex-leads-storage.ts',{
++  path, 'fs/promises':{
++    mkdir:async()=>undefined,
++    writeFile:async(p,v)=>{
++      writes++;
++      assert.equal(path.dirname(p),leadRoot,'file write must stay in exact leads directory');
++      files.set(p,v);
++    },
++    readFile:async(p)=>{
++      reads++;
++      assert.equal(path.dirname(p),leadRoot,'file read must stay in exact leads directory');
++      if(!files.has(p))throw Error('ENOENT synthetic lead');
++      return files.get(p);
++    },
++    readdir:async()=>[],
++  },
++  uuid:{v4:()=> 'abcdef12-aaaa-bbbb-cccc-abcdef123456'},
++});
++class Response {
++  constructor(body,opts={}){
++    this.body=body;
++    this.status=opts.status||200;
++    this.headers=opts.headers||{};
++  }
++  static json(b,o){return new Response(b,o);}
++}
++function route(rel,auth='OK'){
++  return transpile(rel,{
++    'next/server':{NextResponse:Response},
++    '@/lib/server/auth-user':{
++      requireSaasAdminUser:async()=>{
++        authCalls++;
++        if(auth!=='OK')throw Error(auth);
++      }
++    },
++    '@/lib/server/apex-leads-storage':storage,
++    '@/lib/server/mail':{sendApexLeadAutoReply:async()=>{
++      sends++;
++      return true;
++    }},
++  }).POST;
++}
++function ctx(id){return {params:Promise.resolve({leadId:id})};}
++const statusRoute='app/api/saas-admin/apex-leads/[leadId]/status/route.ts';
++const followRoute='app/api/saas-admin/apex-leads/[leadId]/follow-up/route.ts';
++const malformed=['../private','../../other','LEAD-ABCDEF12/../private','LEAD-ABCDEF12\\..','LEAD-ABCDEF12%2F..','lead-abcdef12','LEAD-ABCDEF12.json','LEAD-ABCDEFGH','LEAD-ABCDEF123','LEAD-ABCDE12','LEAD-ABCDEF12\u0000','',null,42];
++
++test('canonical generated ID and legitimate read/update keep exact path',async()=>{
++  const lead=await storage.createApexLead({
++    type:'demo',name:'Synthetic Person',email:'fixture@example.invalid',phone:'000'
++  });
++  assert.equal(lead.leadId,'LEAD-ABCDEF12');
++  assert.ok(storage.isApexLeadId(lead.leadId));
++  const saved=await storage.readApexLeadById(lead.leadId);
++  assert.equal(saved.name,'Synthetic Person');
++  const updated=await storage.updateApexLeadStatus(lead.leadId,'contacted');
++  assert.equal(updated.status,'contacted');
++  assert.equal(files.size,1);
++  assert.equal(JSON.parse(files.get(path.join(leadRoot,'LEAD-ABCDEF12.json'))).status,'contacted');
++});
++
++test('path traversal and malformed IDs cannot reach even synthetic filesystem',async()=>{
++ for(const id of malformed){
++  assert.equal(storage.isApexLeadId(id),false,String(id));
++  const before={reads,writes};
++  await assert.rejects(storage.readApexLeadById(id),/INVALID_APEX_LEAD_ID/);
++  await assert.rejects(storage.updateApexLeadStatus(id,'contacted'),/INVALID_APEX_LEAD_ID/);
++  assert.deepEqual({reads,writes},before,'filesystem accessed for '+String(id));
++ }
++});
++
++test('follow-up rejects invalid IDs before filesystem or email',async()=>{
++ const POST=route(followRoute);
++ for(const id of malformed){
++  const before={reads,writes,sends};
++  const response=await POST({},ctx(id));
++  assert.equal(response.status,400);
++  assert.equal(response.body.message,'Invalid lead ID');
++  assert.equal(response.headers['Cache-Control'],'no-store');
++  assert.deepEqual({reads,writes,sends},before);
++ }
++});
++
++test('status update rejects invalid IDs before body parse and filesystem',async()=>{
++ const POST=route(statusRoute);
++ for(const id of malformed){
++  const before={reads,writes};
++  const response=await POST({json:async()=>{throw Error('body parsed before ID rejected')}},ctx(id));
++  assert.equal(response.status,400);
++  assert.deepEqual({reads,writes},before);
++ }
++});
++
++test('both handlers still enforce auth before checking record IDs',async()=>{
++ for(const rel of [followRoute,statusRoute]){
++  for(const [denial,code] of [['Unauthorized',401],['Forbidden',403]]){
++   const before={reads,writes,sends};
++   const response=await route(rel,denial)({json:async()=>({status:'new'})},ctx('BAD'));
++   assert.equal(response.status,code);
++   assert.deepEqual({reads,writes,sends},before);
++  }
++ }
++});
++
++test('valid lead status and follow-up remain functional',async()=>{
++ const status=await route(statusRoute)({json:async()=>({status:'archived'})},ctx('LEAD-ABCDEF12'));
++ assert.equal(status.status,200);
++ assert.equal(status.body.data.status,'archived');
++ const before=sends;
++ const follow=await route(followRoute)({},ctx('LEAD-ABCDEF12'));
++ assert.equal(follow.status,200);
++ assert.equal(follow.body.emailSent,true);
++ assert.equal(sends,before+1);
++ assert.equal(files.size,1);
++});
