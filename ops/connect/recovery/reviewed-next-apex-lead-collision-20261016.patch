@@ -1,0 +1,195 @@
+diff --git a/src/lib/server/apex-leads-storage.ts b/src/lib/server/apex-leads-storage.ts
+index 52bb80e..666e45e 100644
+--- a/src/lib/server/apex-leads-storage.ts
++++ b/src/lib/server/apex-leads-storage.ts
+@@ -44,18 +44,35 @@ function leadsDir() {
+   return path.join(process.cwd(), "data", "apex-leads");
+ }
+ 
+-export async function createApexLead(input: ApexLeadInput) {
+-  const leadId = `LEAD-${uuid().slice(0, 8).toUpperCase()}`;
+-  const record: ApexLeadRecord = {
+-    ...input,
+-    leadId,
+-    status: "new",
+-    created_at: new Date().toISOString(),
+-  };
++const MAX_LEAD_CREATE_ATTEMPTS = 8;
+ 
++export async function createApexLead(input: ApexLeadInput) {
+   await fs.mkdir(leadsDir(), { recursive: true });
+-  await fs.writeFile(leadFilePath(leadId), JSON.stringify(record, null, 2), "utf8");
+-  return record;
++
++  for (let attempt = 0; attempt < MAX_LEAD_CREATE_ATTEMPTS; attempt++) {
++    // Keep the existing ID contract, but never overwrite an earlier lead on collision.
++    const leadId = `LEAD-${uuid().slice(0, 8).toUpperCase()}`;
++    const record: ApexLeadRecord = {
++      ...input,
++      leadId,
++      status: "new",
++      created_at: new Date().toISOString(),
++    };
++    try {
++      // Exclusive O_EXCL creation is atomic even across concurrent app workers.
++      await fs.writeFile(leadFilePath(leadId), JSON.stringify(record, null, 2), {
++        encoding: "utf8",
++        flag: "wx",
++        mode: 0o600,
++      });
++      return record;
++    } catch (error) {
++      // Retry only a true random-ID filename collision, never an I/O/ACL failure.
++      if ((error as NodeJS.ErrnoException).code !== "EEXIST") throw error;
++    }
++  }
++
++  throw new Error("APEX_LEAD_ID_COLLISION_RETRY_EXHAUSTED");
+ }
+ 
+ export async function listApexLeads(statusParam?: string | null) {
+diff --git a/tests/apex-lead-exclusive-create.test.cjs b/tests/apex-lead-exclusive-create.test.cjs
+new file mode 100644
+index 0000000..0e4945e
+--- /dev/null
++++ b/tests/apex-lead-exclusive-create.test.cjs
+@@ -0,0 +1,119 @@
++'use strict';
++const assert = require('node:assert/strict');
++const { test } = require('node:test');
++const fs = require('node:fs');
++const path = require('node:path');
++const vm = require('node:vm');
++const ts = require('typescript');
++
++const SOURCE = path.resolve(__dirname, '../src/lib/server/apex-leads-storage.ts');
++const ORIGINAL = { leadId: 'LEAD-AAAABBBB', type:'contact', name:'Original', email:'original@example.invalid', phone:'000', status:'new', created_at:'2026-10-01T00:00:00Z' };
++const DATA_DIR='/synthetic/assps/data/apex-leads';
++const sample={type:'contact',name:'New person',email:'new@example.invalid',phone:'111'};
++
++function fixture(ids, opts={}) {
++  const files = new Map(opts.existing || []);
++  let cursor=0, attempts=0, mkdirs=0, reads=0, lastError;
++  const fsStub = {
++    mkdir: async(dir,options)=>{
++      mkdirs++;
++      assert.equal(dir,DATA_DIR);
++      assert.equal(options.recursive,true);
++    },
++    writeFile:async(target,body,options)=>{
++      attempts++;
++      assert.equal(path.dirname(target),DATA_DIR);
++      assert.deepEqual(JSON.parse(body).leadId+'.json',path.basename(target));
++      assert.equal(options?.encoding,'utf8');
++      assert.equal(options?.flag,'wx');
++      assert.equal(options?.mode,0o600);
++      if(opts.error)throw Object.assign(new Error('storage failed'),{code:opts.error});
++      if(files.has(target)){
++        lastError=Object.assign(new Error('file exists'),{code:'EEXIST'});
++        throw lastError;
++      }
++      files.set(target,body);
++    },
++    readFile:async(target)=>{
++      reads++;
++      if(!files.has(target))throw Object.assign(new Error('missing'),{code:'ENOENT'});
++      return files.get(target);
++    },
++    readdir:async()=>[...files.keys()].map(x=>path.basename(x))
++  };
++  const js=ts.transpileModule(fs.readFileSync(SOURCE,'utf8'),{compilerOptions:{
++    target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS,esModuleInterop:true
++  }}).outputText;
++  const exports={};
++  vm.runInNewContext(js,{exports,process:{cwd:()=>'/synthetic/assps'},Date,Error,console,require:(id)=>{
++    if(id==='path')return path;
++    if(id==='fs/promises')return fsStub;
++    if(id==='uuid')return {v4:()=>{
++      const value=ids[Math.min(cursor,ids.length-1)];
++      cursor++;
++      return value+'-1234-4567-aaaa-123456789abc';
++    }};
++    throw Error('unexpected import '+id);
++  }},{filename:SOURCE,timeout:1500});
++  return {storage:exports,files,get attempts(){return attempts},get mkdirs(){return mkdirs},get reads(){return reads},get uuids(){return cursor},get lastError(){return lastError}};
++}
++
++test('unique new ID is persisted exclusively, private-file 0600, and can be read',async()=>{
++  const h=fixture(['1234abcd']);
++  const lead=await h.storage.createApexLead(sample);
++  assert.equal(lead.leadId,'LEAD-1234ABCD');
++  assert.equal(h.attempts,1);
++  assert.equal(h.mkdirs,1);
++  assert.equal(h.files.size,1);
++  assert.equal((await h.storage.readApexLeadById(lead.leadId)).email,sample.email);
++});
++
++test('collision of 8-hex-character ID retries without replacing genuine older record',async()=>{
++  const priorPath=DATA_DIR+'/LEAD-AAAABBBB.json';
++  const before=JSON.stringify(ORIGINAL);
++  const h=fixture(['aaaabbbb','deadbeef'],{existing:[[priorPath,before]]});
++  const lead=await h.storage.createApexLead(sample);
++  assert.equal(lead.leadId,'LEAD-DEADBEEF');
++  assert.equal(h.attempts,2);
++  assert.equal(h.files.get(priorPath),before,'historic lead bytes must remain untouched');
++  assert.equal(h.files.size,2);
++});
++
++test('repeated collision exhausts bounded 8 attempts with no overwritten record',async()=>{
++  const priorPath=DATA_DIR+'/LEAD-AAAABBBB.json';
++  const before=JSON.stringify(ORIGINAL);
++  const h=fixture(['aaaabbbb'],{existing:[[priorPath,before]]});
++  await assert.rejects(h.storage.createApexLead(sample),/APEX_LEAD_ID_COLLISION_RETRY_EXHAUSTED/);
++  assert.equal(h.attempts,8);
++  assert.equal(h.files.get(priorPath),before);
++  assert.equal(h.files.size,1);
++});
++
++test('non-collision storage errors are not retried and no notification or record is generated',async()=>{
++  const h=fixture(['1234abcd','deadbeef'],{error:'EACCES'});
++  await assert.rejects(h.storage.createApexLead(sample),/storage failed/);
++  assert.equal(h.attempts,1);
++  assert.equal(h.uuids,1);
++  assert.equal(h.files.size,0);
++});
++
++test('concurrent creates with same first generated ID cannot overwrite each other',async()=>{
++  const h=fixture(['aaaabbbb','aaaabbbb','ccccdddd','eeeeffff']);
++  const [first,second]=await Promise.all([
++    h.storage.createApexLead({...sample,name:'A'}),
++    h.storage.createApexLead({...sample,name:'B'})
++  ]);
++  assert.notEqual(first.leadId,second.leadId);
++  assert.equal(h.files.size,2);
++  assert.deepEqual(new Set([...h.files.values()].map(x=>JSON.parse(x).name)),new Set(['A','B']));
++});
++
++test('existing admin revision remains readable and writable by its original revision path',async()=>{
++  const priorPath=DATA_DIR+'/LEAD-AAAABBBB.json';
++  const h=fixture(['deadbeef'],{existing:[[priorPath,JSON.stringify(ORIGINAL)]]});
++  assert.equal((await h.storage.readApexLeadById(ORIGINAL.leadId)).name,'Original');
++  const created=await h.storage.createApexLead(sample);
++  assert.equal(h.files.size,2);
++  assert.equal(created.leadId,'LEAD-DEADBEEF');
++  assert.equal(h.reads,1);
++});
+diff --git a/tests/apex-lead-id-boundary.test.cjs b/tests/apex-lead-id-boundary.test.cjs
+index 4fa8678..1956856 100644
+--- a/tests/apex-lead-id-boundary.test.cjs
++++ b/tests/apex-lead-id-boundary.test.cjs
+@@ -25,9 +25,14 @@ function transpile(rel, imports) {
+ const storage=transpile('lib/server/apex-leads-storage.ts',{
+   path, 'fs/promises':{
+     mkdir:async()=>undefined,
+-    writeFile:async(p,v)=>{
++    writeFile:async(p,v,options)=>{
+       writes++;
+       assert.equal(path.dirname(p),leadRoot,'file write must stay in exact leads directory');
++      if(options && options.flag==='wx'){
++        assert.equal(options.mode,0o600);
++        assert.equal(options.encoding,'utf8');
++        if(files.has(p))throw Object.assign(Error('synthetic existing lead'),{code:'EEXIST'});
++      }
+       files.set(p,v);
+     },
+     readFile:async(p)=>{

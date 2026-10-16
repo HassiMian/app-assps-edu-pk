@@ -20,7 +20,7 @@ class Phases(unittest.TestCase):
  def test_unknown_newer_core_sha_denied(self):
   self.assertFalse(g.approved_core_artifact(Path('/tmp'), '0'*40))
  def test_reviewed_pinned_frontends_exact(self):
-  self.assertEqual(len(g.APPROVED_CORE_DIST_SHA),7)
+  self.assertEqual(len(g.APPROVED_CORE_DIST_SHA),8)
   self.assertEqual(g.APPROVED_CORE_DIST_SHA[g.CORE_INTEGRATION],
                    g.APPROVED_CORE_DIST_SHA['017d51060349e39150ebd508d0d670c10eb15f5f'])
   self.assertEqual(g.APPROVED_CORE_DIST_SHA['e6911732ff52df240390b28b37e531535c58a915'],
@@ -36,6 +36,17 @@ class Phases(unittest.TestCase):
    self.assertFalse(g.approved_core_artifact(Path('/synthetic/core'),'f'*40))
   with patch.object(g,'sha',return_value='f'*64):
    self.assertFalse(g.approved_core_artifact(Path('/synthetic/core'),key))
+ def test_independent_latest_core_a961_exact_pin_fails_closed(self):
+  from unittest.mock import patch
+  key='a9611dbe27411f3d15b4bca7e9a0983360789989'
+  digest='1097d23897e1bc507a111c4c202aba47a54960e27cf62f34234f95e32e0c26e3'
+  self.assertEqual(g.APPROVED_CORE_DIST_SHA[key],digest)
+  self.assertEqual(g.APPROVED_CORE_DIST_SHA['4397a1836fedff3cba6a1062ed85b7c25e5388c6'],digest)
+  with patch.object(g,'sha',return_value=digest):
+   self.assertTrue(g.approved_core_artifact(Path('/synthetic/a961'),key))
+   self.assertFalse(g.approved_core_artifact(Path('/synthetic/a961'),'z'*40))
+  with patch.object(g,'sha',return_value='0'*64):
+   self.assertFalse(g.approved_core_artifact(Path('/synthetic/a961'),key))
  def test_new_font_guard_core_exact_compiled_pin(self):
   key='13ac2be49e8d0aa6939c82f510aa4bbc65caf2a7'
   expected='1097d23897e1bc507a111c4c202aba47a54960e27cf62f34234f95e32e0c26e3'

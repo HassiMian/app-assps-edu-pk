@@ -1,0 +1,31 @@
+# APEX Connect Master — integrated phase mission: atomic lead persistence and Core a961
+
+16 October 2026 — **reviewed SOURCE QA only; no production rollout or independent release signature.**
+
+## Exact source lineage and ownership
+
+APEX Connect owner coordination branch `fix/connect-lead-collision-handoff-20261016` follows published Connect `fix/connect-lead-stream-handoff-20261016@0e42844c1c75cbeedea2f42f188db7deac19e7bd`. Standalone Next application source is separately committed clean on `fix/connect-lead-create-excl-collision-20261016@7c3e26cb3626f2eeed0cc38a2dcb7b629b7d9e5c`, strict descendant of `b5b5e904e8e00aa5cfaf88aa00dc395047e24a7f`. That standalone Next source has no GitHub remote; its exact, reversible three-file patch and SHA-pinned manifest are published in this coordination branch, not misrepresented as deployed.
+
+## Actual new Connect data-integrity defect and fix
+
+Existing `src/lib/server/apex-leads-storage.ts` generated only eight UUID-hex characters per lead and wrote using default `fs.writeFile()` semantics. A collision on an existing `LEAD-XXXXXXXX.json` filename could overwrite an older saved inquiry. This is a **source-level risk**, not a claim any real school enquiry was overwritten. Fixed **only new lead creation** to use filesystem-exclusive `flag: 'wx'`, private `mode: 0600`, preserve the existing ID contract, retry *only* `EEXIST` up to eight attempts, and stop with a dedicated non-sensitive collision error when all attempts fail. Filesystem errors other than collision propagate. Existing read, admin status-update and authorized follow-up routes are unchanged. Concurrent processes rely on OS O_EXCL; this is not a rate limiter, transactional distributed lead datastore or cross-request deduplication.
+
+Exact reviewed patch SHA256 `dfafd7da274a7c9bcdafcd9c2bbfbacc1d1b37e735faf5ed6c1f7fd7021c457d`, changed paths only `src/lib/server/apex-leads-storage.ts`, `tests/apex-lead-id-boundary.test.cjs`, `tests/apex-lead-exclusive-create.test.cjs`. `git apply --check` on the pristine preceding source and `git apply --reverse --check` on fixed source **both pass**. Original baseline against the six new synthetic exclusive-create tests **0/6 PASS, 6/6 expected failures, exit1**; fixed source all six PASS plus legacy ID/traversal/admin tests. Synthetic tests never write genuine lead files.
+
+## Genuine compiled Next acceptance
+
+Current Next 16.2.6 source compiled successfully, TypeScript completed, 103/103 prerendered pages and postbuild normalized; actual isolated optimized build process **exit0**. Private Build ID `-1n6XzSCRe2rjHFa4h7ms` and root-only build log SHA256 `6c0524b36925110114a11517fb34ce2c60238565d0e0b9dd4cc763576ccd5ec7`. Scoped ESLint zero errors (one pre-existing unrelated test unused-variable warning). Full actual TypeScript-transpiled mocked Next Node suites **53/53 PASS**. True private loopback Next runtime accepted login HTTP200 and denied anonymous auth/me plus six restricted admin/school endpoints HTTP401: **8/8 PASS**. Temporary QA server terminated and port verified closed, no login credentials, real SMTP or production student records. Root-only HTTP receipt SHA256 `3ca5eaca9c9f81e419a195ae7a892ff326e940a0611e84672509af581a033377`.
+
+## Latest cross-owner Core/Paper integration verification
+
+Actual newer SaaS Core source `integration/core-paper-worker-unified-rc-20261016@a9611dbe27411f3d15b4bca7e9a0983360789989`, descendant of reviewed Core/Paper `4397a1836fedff3cba6a1062ed85b7c25e5388c6`, verified GitHub origin HEAD. Own isolated detached worktree at exact a961 built Vite8 frontend with fresh pinned `npm ci` and `npm run build`, **exit0**, compiled `dist/index.html` SHA256 `1097d23897e1bc507a111c4c202aba47a54960e27cf62f34234f95e32e0c26e3`, matching previous reviewed compiled frontend output. Build log SHA256 `de66c6844620a7dfdfb19e6c4425ca0743ee099eeb6de88e8658a131c5b6f594`. Added **only exact SHA plus digest** to Connect technical allowlist; unknown sources and mismatched digests still fail closed. Paper Studio has independent newer Diary print-format fix `0ba7553281e395ddbf9d17b29d11a14e09ffacf8` with a **different compiled digest**, not yet merged by Core into this pinned a961 source; do not mistakenly claim it deployed.
+
+## One protected release gate, not bypassed
+
+Fresh four-phase source verifier against exact rebuilt Core a961 and previous reviewed private Next stage, read-only: Phase1 live integrity **PASS** (existing result record count 1,763 including 213 genuine numeric zero values; six protected APIs deny unauthenticated access), Phase2 technical Core+Connect **13/15 PASS**, Phase3 independently signed Core authorization **6/13 HOLD**, Phase4 rollback-ready production cutover **HOLD**. Checker returns `HOLD_NO_PRODUCTION_CUTOVER`, official exit2, `production_changed:false`; root-private receipt SHA256 `d60daf9d6e50dba7afc4ed812eadb81c84fdbe795003a7fa300e54290afdf041`. Two public-only technical checks still fail because current live app lacks candidate Lesson Planner/Early Years print. No production Connect code or backend worker promoted.
+
+Seven authentic independent mandatory blockers: approved full ACL backup; independently certified current off-host restore; signed restricted worker transport; reviewed adapter actually deployed; globally separated authenticated worker; verified effective live inherited grants; independently signed real School2 and unauthorized subject-denial witness. Test-only synthetic School2 evidence elsewhere in Paper/Core **does not satisfy** signed live institutional certification. Physical Urdu paper/Diary printer and true staff workflow certification not done.
+
+## Complete reproducible evidence and handoff
+
+Connect offline Python validation **259/259 PASS**, process exit0, root-private SHA256 `22b3897b86d90573619f65ca0ce6f618bc068e1382cb201824b0bd6098473cd1`. Seven new pinned atomic-create contract unit tests PASS. Existing protected APEX data records, marks/results, zero-vs-blank semantics, papers, school accounts and SaaS RLS unmodified. No real enquiry submission, secrets read, user impersonation, DB DDL/DML, Nginx/PM2 restart, deployment or fabricated signatures. Core retains production final release authority. Exact published source branch/commit and cross-owner dependencies are recorded in Issue #4.
