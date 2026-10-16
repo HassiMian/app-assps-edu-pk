@@ -907,8 +907,8 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
       color: var(--accent) !important;
       display: flex !important;
       align-items: center !important;
-      justify-content: center !important;
-      text-align: center !important;
+      /* Preserve each subject's inline textAlign/justifyContent: Urdu right,
+         English center/left and teacher-selected alignment must print alike. */
       line-height: 1.2 !important;
       border-right: 1px solid #dbe4eb !important;
       word-break: break-word !important;
@@ -962,10 +962,37 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
       doc.open()
       doc.write(printDoc)
       doc.close()
-      setTimeout(() => {
-        iframe.contentWindow.focus()
-        iframe.contentWindow.print()
-      }, 350)
+      // Print the actual A4 snapshot only after its fonts and school logo have
+      // had a chance to load. A fixed 350 ms delay could capture fallback Urdu
+      // typography or an empty logo even when the screen preview was correct.
+      // The bounded fallback prevents an offline font CDN from hanging Print.
+      // The request token also stops a previous click from printing a newer
+      // iframe document after the teacher has changed the Diary selection.
+      const requestToken = String(Number(iframe.dataset.printRequestToken || 0) + 1)
+      iframe.dataset.printRequestToken = requestToken
+      const imageReady = Array.from(doc.images).map(image => new Promise(resolve => {
+        if (image.complete) return resolve()
+        image.addEventListener('load', resolve, { once: true })
+        image.addEventListener('error', resolve, { once: true })
+      }))
+      const fontReady = doc.fonts?.ready || Promise.resolve()
+      let fired = false
+      const runPrint = () => {
+        if (fired) return
+        fired = true
+        if (!iframe.isConnected || iframe.dataset.printRequestToken !== requestToken) return
+        try {
+          iframe.contentWindow.focus()
+          iframe.contentWindow.print()
+        } catch {
+          window.print()
+        }
+      }
+      const fallbackTimer = setTimeout(runPrint, 2400)
+      Promise.allSettled([fontReady, ...imageReady]).then(() => {
+        clearTimeout(fallbackTimer)
+        runPrint()
+      })
     } catch {
       window.print()
     }
