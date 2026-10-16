@@ -19,14 +19,14 @@
     {
       "phase": 3,
       "name": "parent- and student-owned secure timetable APIs",
-      "status": "READONLY_INTEGRATION_PASS",
-      "evidence": "11 simulated HTTP/unit tests, 1 read-only real corpus 336 checks and authenticated two-parent QA log PASS (401 unauthorized), without production mutations"
+      "status": "READONLY_REALDB_HTTP_PASS",
+      "evidence": "Family parent child-scoped API + admin timetable reference. Fixed 503 false hold due to missing Blue section in imported source validation. 22 isolated policy/mock HTTP tests passed; 3 live PostgreSQL READ ONLY HTTP/corpus tests passed. Parent can only view owned child; school-wide admin=200, teacher=200 with no coverage counts, parent=403."
     },
     {
       "phase": 4,
       "name": "SaaS and Connect frontend QA",
-      "status": "ISOLATED_BUILD_PASS",
-      "evidence": "Vite and Next full build+TypeScript+103 pages pass. Synthetic Chromium browser validates 2 child tables, Friday 5th 10:40\u201311:05, no break, junior teachers, 1px borders and zero JS errors."
+      "status": "ISOLATED_BUILD_BROWSER_PASS",
+      "evidence": "SaaS Vite build PASS; Connect full Next production webpack build PASS with TypeScript and 103 static pages (commit 90bfd76). Chromium synthetic UI: 2 child grids, visible borders, Friday no break/5th 10:40; multi-tenant 409 causes optional ASSPS-only component to be hidden. Replayed 3 Connect commits cleanly from canonical feature base."
     },
     {
       "phase": 5,
@@ -98,5 +98,50 @@
     "table_border_width": "1px",
     "javascript_errors": 0,
     "production_deployed": false
+  },
+  "new_verified_engineering_20261016": {
+    "fixed_root_cause": "timetableReferenceRoutes previously expected Four|, Five| etc but live records are Four|Blue, Five|Blue etc, yielding HTTP 503 for real data",
+    "corrected_exact_group_count": 8,
+    "corrected_schoolwide_rows": 2,
+    "coverage_gate_model": "ASSPS-COVERAGE-GATE-2026-10-16-V1",
+    "full_release_requires": [
+      "All 318 active students have eight source-fingerprinted subject and teacher period rows",
+      "All parent records correctly linked",
+      "No unresolved teacher ID references",
+      "No orphan imported class groups",
+      "Authorized full current backup, rollback and production E2E"
+    ],
+    "current_decision": "HOLD_FULL_RELEASE",
+    "students_complete": 98,
+    "students_pending": 220,
+    "unlinked_parent_students": 5,
+    "unlinked_teacher_periods": 13,
+    "orphan_import": "Pre-Nine does not match an active student roster group",
+    "browser_other_schools": "ASSPS-only component hidden on explicit backend 409; school tenant isolation preserved",
+    "live_http_reference": "Admin 200, teacher 200 without student aggregate, parent 403",
+    "non_destructive": true
+  },
+  "staff_assignment_status": "DIRECTORY_PROPOSALS_ONLY_NOT_AUTHORIZED",
+  "publication_gate": {
+    "policy_version": "ASSPS-COVERAGE-GATE-2026-10-16-V1",
+    "live_readonly_audit_decision": "HOLD_FULL_RELEASE",
+    "active_students": 318,
+    "eight_period_subjects_verified_students": 98,
+    "awaiting_subject_periods_students": 220,
+    "unlinked_parents": 5,
+    "unlinked_teacher_period_ids": 13,
+    "unmatched_import_group": "Pre-Nine",
+    "current_full_release_approved": false,
+    "limited_parent_readonly_technically_possible": true,
+    "no_invented_subjects": true
+  },
+  "release_candidate": {
+    "core_branch": "feat/timetable-parent-core-20261016",
+    "connect_latest_commit": "90bfd76f8cc57233291a54e208924eec4099d9ad",
+    "connect_integrated_patch": "docs/ASSPS_CONNECT_PARENT_TIMETABLE_PATCH_20261016.patch",
+    "connect_three_patch_replay": "PASS",
+    "production_backend_restart": false,
+    "production_connect_restart": false,
+    "production_db_writes": false
   }
 }

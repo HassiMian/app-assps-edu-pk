@@ -87,3 +87,21 @@ Connect patch is included so the isolated Connect source can be forward-ported o
 - Private synthetic Chromium harness bundled real Connect FamilyTimetable React component with compiled CSS. Tested two student tables, Miss Aqsa incharge, Mover Miss Laiba and Miss Abida, Friday 5th 10:40–11:05, no Friday break, visible 1px table grid, zero JS errors. Screenshot proof private QA hash 79893d3de0c3b2728286bdf6440223ef66a03f65acd86745a40e7c8b998dcd2b. No real student details used.
 - Temporary QA route removed, QA servers stopped, Connect code restored clean, production unchanged.
 - Autonomous execution permission does not substitute for subject allocations, approved staff links or evidence-based class mappings; release HOLD remains.
+
+## Additional operational integration — 16 Oct next phase continuation
+- New deterministic timetable publication coverage gate added. Checks seven school groups, imported source SHA, 8 unique subject periods, teacher login references, parent links, and unrecognized timetable groups.
+- Live read-only coverage gate: decision HOLD_FULL_RELEASE; total active students 318; source-verified subject schedule 98; pending subject schedule 220; missing parent links 5; unlinked teacher period IDs 13; orphan import Pre-Nine. Gate prevents silently treating junior fixed teachers as eight verified subject allocations.
+- School timetable reference HTTP root cause discovered: legacy integrity assertion expected Four| and Five| (blank sections), whereas imported source has Four|Blue, Five|Blue, etc. Corrected the integrity predicate to require exactly the eight verified class+section groups (4/5/6/7 Blue; Pre-Nine blank; Nine Usman/Fatima; School-wide) and 58 total rows.
+- Admin schoolwide timetable GET now provides aggregate coverage; teacher still gets timetable but no student roster aggregates, parent denied. Real PostgreSQL read-only route HTTP proof: admin 200 with 58 records and coverage 98/220; teacher 200 with coverage null; parent 403.
+- Multi-tenant Connect module handles ASSPS-only backend 409 as a deliberately absent feature rather than showing an unrelated error to other schools. Verified using actual React component rendered in isolated Chromium, zero JavaScript exceptions.
+- All checked changes are on isolated Git worktrees. Production and existing zero-vs-blank exam result records remain unchanged; publication still HOLD for missing authoritative academic allocations.
+
+## Operational coverage and 503 repair checkpoint (16 October)
+- Created school1-only coverage publication gate with source fingerprint validation, exact eight period numbers, roster/parent links, teacher account ID references and orphan group hold.
+- Live read-only audit reported 318 active students: 98 with complete subject allocations; 220 without, five parent links unset, 13 timetable teacher IDs unset, and unmatched imported Pre-Nine group. FULL publication is HOLD; partial read-only timetable with truthful pending labels is technically feasible.
+- Fixed a real legacy timetable reference HTTP 503 defect caused by verifying Four| (blank section) rather than Four|Blue. Corrected eight locked class+section groups and preserved strict staff_identity_reviewed hold.
+- Admin gets aggregate coverage counts, teachers see reference without all-student counts, and parents cannot access schoolwide reference.
+- Multi-school UI fix: Connect treats ASSPS-only 409 not-configured as an absent optional module rather than a misleading error; browser negative test PASS. Other tenants cannot see ASSPS timetable content.
+- Regression: 22 isolated tests PASS, 3 real PostgreSQL READ ONLY HTTP/corpus tests PASS, Vite production build PASS, Next full webpack build PASS (TS +103 static pages).
+- Connect three-commit portable patch replayed on base d78659b: source files identical after clean git am.
+- No production deployment in this checkpoint; safe release remains gated by authoritative junior/Eight subjects, real staff authorization, parent linking and production cutover regression.

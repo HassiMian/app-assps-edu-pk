@@ -294,7 +294,7 @@ router.get('/family-timetable', protect, async (req, res) => {
     return res.status(403).json({success:false,code:'FAMILY_CONTEXT_REQUIRED'})
   }
   if (schoolId !== ASSPS_SCHOOL_ID) {
-    return res.status(409).json({success:false,code:'TENANT_TIMETABLE_POLICY_NOT_CONFIGURED'})
+    return res.status(409).json({success:false,code:'TENANT_TIMETABLE_POLICY_NOT_CONFIGURED',message:'TIMETABLE_NOT_CONFIGURED_FOR_THIS_SCHOOL'})
   }
   try {
     const relation = role === 'parent' ? 'parent_user_id' : 'student_user_id'

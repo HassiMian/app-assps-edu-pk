@@ -56,6 +56,15 @@ export default function PublishedTimetableReference(){
     </select></label>
    </div>
   </header>
+  {model?.coverage&&<div role="status" style={{marginTop:14,padding:12,border:'1px solid #d8c6a3',background:'#fffbf0',borderRadius:10,fontSize:12,lineHeight:1.6,color:'#534b3b'}}>
+   <strong>Admin publication coverage — {model.coverage.decision==='FULL_RELEASE_READY'?'All subjects verified':'Full publication on hold'}</strong>
+   {Number.isFinite(model.coverage.total_active_students)?<p style={{margin:'3px 0'}}>
+    Verified 8-period subject timetable: <strong>{model.coverage.fully_verified_subject_timetable_students}</strong> of <strong>{model.coverage.total_active_students}</strong> students;
+    awaiting subject allocation: <strong>{model.coverage.students_subject_timetable_pending}</strong>.
+    Missing parent links: {model.coverage.unlinked_parent_students}. Missing staff ID references: {model.coverage.unlinked_teacher_periods}.
+   </p>:<p style={{margin:'3px 0'}}>School-wide coverage cannot be verified with this login.</p>}
+   <p style={{margin:'3px 0'}}>Incomplete grades show the official bell times and verified class incharge only. Never infer subjects or Class Eight / Pre-Nine equivalence.</p>
+  </div>}
   {loading?<p role="status">Loading approved timetable…</p>:
    error?<p role="alert" style={{color:'#8a3a2d',background:'#fff4f0',padding:12}}>Timetable not verified: {error}. The displayed draft below is not authoritative.</p>:
    <div style={{overflowX:'auto',marginTop:14}}>
