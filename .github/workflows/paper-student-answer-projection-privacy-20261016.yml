@@ -6,6 +6,7 @@ on:
       - 'integration/core401-paper-student-answer-privacy-20261016'
       - 'fix/paper-core503-student-expectedanswer-projection-*'
       - 'integration/core503-paper-truefalse-privacy-gate-*'
+      - 'fix/paper-core503-numeric-rubric-student-projection-*'
   pull_request:
     paths:
       - 'al-siddique-backend/src/services/assessmentPrintJobs.js'
