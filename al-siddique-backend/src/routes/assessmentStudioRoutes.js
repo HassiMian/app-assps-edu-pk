@@ -43,6 +43,32 @@ function schoolIdForRequest(req, body = {}) {
   return null
 }
 
+// Staff teacher print projections are private assessment data. A tenant match
+// alone does not establish a teacher's current class/subject/section assignment.
+// Fail closed on legacy/missing bindings; admins/principals retain tenant-scoped
+// institutional access. Use the same signed assignment table as grade IX/X.
+async function teacherMayReadPrintProjection({ req, schoolId, binding, lookup }) {
+  if (req.user?.role !== 'teacher') return true
+  const teacherId = Number(req.user?.id)
+  // The teacher identity comes from verified auth, never an unsigned client
+  // binding; legacy/current UI print jobs omit teacherUserId entirely.
+  const suppliedTeacherId = String(binding?.teacherUserId ?? '').trim()
+  const className = String(binding?.className || '').trim()
+  const subject = String(binding?.subjectName || '').trim()
+  const section = String(binding?.section || '').trim()
+  if (!Number.isSafeInteger(teacherId) || teacherId < 1 || !className || !subject ||
+      (suppliedTeacherId && suppliedTeacherId !== String(teacherId))) return false
+  const result = await lookup(
+    `SELECT EXISTS (SELECT 1 FROM teacher_class_assignments t
+      WHERE t.school_id=$1 AND t.teacher_user_id=$2 AND t.is_active=true
+        AND lower(trim(t.class_name))=lower($3)
+        AND lower(trim(t.subject))=lower($4)
+        AND lower(trim(coalesce(t.section,'')))=lower($5)) AS allowed`,
+    [schoolId, teacherId, className, subject, section]
+  )
+  return result.rows?.[0]?.allowed === true
+}
+
 function validatePaperDocument(document) {
   if (!document || typeof document !== 'object') return 'document must be an object'
   if (document.format !== 'assps-canonical-paper') return 'document.format must be assps-canonical-paper'
@@ -340,6 +366,7 @@ router.post('/papers/:paperId/print-jobs', async (req, res) => {
           [schoolId, parentPrintJobId, paper.id]
         )).rows[0]
         if (!parent) return { missingParent:true }
+        if (!await teacherMayReadPrintProjection({req,schoolId,binding:parent.binding_snapshot_json,lookup:(sql,params)=>client.query(sql,params)})) return { teacherScopeDenied:true }
         await assertVerifiedPaperDocument({
           document:parent.signed_release_document,schoolId,actor:req.user,
           lookup:(sql,params)=>client.query(sql,params),
@@ -369,11 +396,13 @@ router.post('/papers/:paperId/print-jobs', async (req, res) => {
       } catch (error) {
         return { invalid:error.message }
       }
+      if (!await teacherMayReadPrintProjection({req,schoolId,binding:binding.bindingSnapshot,lookup:(sql,params)=>client.query(sql,params)})) return { teacherScopeDenied:true }
       if (binding.reprintMode === 'NEW_JOB' && binding.parentPrintJobId) return { invalid:'NEW_JOB cannot reference a parent print job.' }
       if (binding.reprintMode === 'UPDATED_JOB' && !binding.parentPrintJobId) return { invalid:'UPDATED_JOB requires parentPrintJobId.' }
       if (binding.parentPrintJobId) {
-        const parent = (await client.query(`SELECT 1 FROM assessment_print_jobs WHERE school_id=$1 AND print_job_id=$2 LIMIT 1`, [schoolId,binding.parentPrintJobId])).rows[0]
+        const parent = (await client.query(`SELECT binding_snapshot_json FROM assessment_print_jobs WHERE school_id=$1 AND print_job_id=$2 LIMIT 1`, [schoolId,binding.parentPrintJobId])).rows[0]
         if (!parent) return { missingParent:true }
+        if (!await teacherMayReadPrintProjection({req,schoolId,binding:parent.binding_snapshot_json,lookup:(sql,params)=>client.query(sql,params)})) return { teacherScopeDenied:true }
       }
       const release = (await client.query(
         `SELECT ar.release_id,ar.snapshot_json AS signed_release_document FROM assessment_releases ar
@@ -410,6 +439,7 @@ router.post('/papers/:paperId/print-jobs', async (req, res) => {
     if (data.missingPaper) return res.status(404).json({ success:false, message:'Paper not found.' })
     if (data.missingRelease) return res.status(404).json({ success:false, message:'Assessment release not found for this paper.' })
     if (data.missingParent) return res.status(404).json({ success:false, message:'Parent print job not found.' })
+    if (data.teacherScopeDenied) return res.status(403).json({ success:false, code:'TEACHER_PRINT_ASSIGNMENT_REQUIRED' })
     if (data.invalid) return res.status(400).json({ success:false, message:data.invalid })
     return res.status(201).json({ success:true, data })
   } catch (error) {
@@ -431,7 +461,7 @@ router.get('/print-jobs/:printJobId', async (req, res) => {
     if (!schoolId) return res.status(400).json({ success:false, message:'School context required.' })
     await tenantClause(req, { table:'assessment_print_jobs' })
     const result = await query(
-      `SELECT j.print_job_id,j.release_id,j.copy_count,j.personalized,j.duplex,j.student_boundary_policy,j.reprint_mode,j.parent_print_job_id,j.status,j.attempt_count,j.last_error,j.created_at,j.updated_at,
+      `SELECT j.print_job_id,j.release_id,j.copy_count,j.personalized,j.duplex,j.student_boundary_policy,j.reprint_mode,j.parent_print_job_id,j.status,j.attempt_count,j.last_error,j.created_at,j.updated_at,j.binding_snapshot_json,
               r.snapshot_id AS roster_snapshot_id,r.student_count,r.roster_hash,r.context_json AS roster_context
          FROM assessment_print_jobs j
          LEFT JOIN assessment_roster_snapshots r ON r.school_id=j.school_id AND r.snapshot_id=j.roster_snapshot_id
@@ -439,8 +469,10 @@ router.get('/print-jobs/:printJobId', async (req, res) => {
       [schoolId,printJobId]
     )
     if (!result.rowCount) return res.status(404).json({ success:false, message:'Print job not found.' })
+    if (!await teacherMayReadPrintProjection({req,schoolId,binding:result.rows[0].binding_snapshot_json,lookup:query})) return res.status(403).json({ success:false, code:'TEACHER_PRINT_ASSIGNMENT_REQUIRED' })
     await recheckPrintJob({schoolId,printJobId,req})
-    return res.json({ success:true, data:result.rows[0] })
+    const { binding_snapshot_json, ...publicPrintJob } = result.rows[0]
+    return res.json({ success:true, data:publicPrintJob })
   } catch (error) {
     return respondVerifiedReadFailure(res,error,'Assessment Studio print job read failed')
   }
@@ -454,8 +486,9 @@ router.patch('/print-jobs/:printJobId/status', async (req, res) => {
     if (!schoolId) return res.status(400).json({ success:false, message:'School context required.' })
     const target = String(req.body?.status || '').toUpperCase()
     const data = await withTenantTransaction(req, schoolId, async client => {
-      const current = (await client.query(`SELECT status,attempt_count FROM assessment_print_jobs WHERE school_id=$1 AND print_job_id=$2 FOR UPDATE`,[schoolId,printJobId])).rows[0]
+      const current = (await client.query(`SELECT status,attempt_count,binding_snapshot_json FROM assessment_print_jobs WHERE school_id=$1 AND print_job_id=$2 FOR UPDATE`,[schoolId,printJobId])).rows[0]
       if (!current) return { missing:true }
+      if (!await teacherMayReadPrintProjection({req,schoolId,binding:current.binding_snapshot_json,lookup:(sql,params)=>client.query(sql,params)})) return { teacherScopeDenied:true }
       if (target !== 'FAILED') await recheckPrintJob({schoolId,printJobId,req,lookup:(sql,params)=>client.query(sql,params)})
       let transition
       try { transition = printJobTransition(current.status,target,current.attempt_count) }
@@ -469,6 +502,7 @@ router.patch('/print-jobs/:printJobId/status', async (req, res) => {
       return { printJob:updated }
     })
     if (data.missing) return res.status(404).json({ success:false, message:'Print job not found.' })
+    if (data.teacherScopeDenied) return res.status(403).json({ success:false, code:'TEACHER_PRINT_ASSIGNMENT_REQUIRED' })
     if (data.invalid) return res.status(409).json({ success:false, code:'INVALID_PRINT_JOB_TRANSITION', message:data.invalid, currentStatus:data.currentStatus })
     return res.json({ success:true, data:data.printJob })
   } catch (error) {
@@ -497,6 +531,7 @@ router.get('/print-jobs/:printJobId/student-projection/:studentId', async (req, 
         [schoolId, printJobId]
       )).rows[0]
       if (!row) return { missing:true }
+      if (!await teacherMayReadPrintProjection({req,schoolId,binding:row.binding_snapshot_json,lookup:(sql,params)=>client.query(sql,params)})) return { teacherScopeDenied:true }
       await recheckVerifiedSnapshot({snapshot:row.snapshot_json,storedHash:row.content_hash,schoolId,req,lookup:(sql,params)=>client.query(sql,params)})
       if (!row.personalized || !row.students_json) return { notPersonalized:true }
       if (sha256(row.snapshot_json || {}) !== String(row.content_hash || '')) return { releaseHashMismatch:true }
@@ -524,6 +559,7 @@ router.get('/print-jobs/:printJobId/student-projection/:studentId', async (req, 
     })
 
     if (data.missing) return res.status(404).json({ success:false, code:'PRINT_JOB_NOT_FOUND', message:'Print job not found.' })
+    if (data.teacherScopeDenied) return res.status(403).json({ success:false, code:'TEACHER_PRINT_ASSIGNMENT_REQUIRED' })
     if (data.notPersonalized) return res.status(409).json({ success:false, code:'PRINT_JOB_NOT_PERSONALIZED', message:'Student projection requires a personalized print job.' })
     if (data.missingStudent) return res.status(404).json({ success:false, code:'PRINT_ROSTER_STUDENT_NOT_FOUND', message:'Student is not present in the immutable print roster.' })
     if (data.releaseHashMismatch) return res.status(409).json({ success:false, code:'PRINT_RELEASE_HASH_MISMATCH', message:'Release snapshot integrity check failed.' })
@@ -545,19 +581,21 @@ router.get('/print-jobs/:printJobId/answer-key', async (req, res) => {
 
     const data = await withTenantTransaction(req, schoolId, async client => {
       const row = (await client.query(
-        `SELECT ar.snapshot_json,ar.content_hash
+        `SELECT j.binding_snapshot_json,ar.snapshot_json,ar.content_hash
            FROM assessment_print_jobs j
            JOIN assessment_releases ar ON ar.school_id=j.school_id AND ar.release_id=j.release_id
           WHERE j.school_id=$1 AND j.print_job_id=$2 LIMIT 1`,
         [schoolId, printJobId]
       )).rows[0]
       if (!row) return { missing:true }
+      if (!await teacherMayReadPrintProjection({req,schoolId,binding:row.binding_snapshot_json,lookup:(sql,params)=>client.query(sql,params)})) return { teacherScopeDenied:true }
       await recheckVerifiedSnapshot({snapshot:row.snapshot_json,storedHash:row.content_hash,schoolId,req,lookup:(sql,params)=>client.query(sql,params)})
       if (sha256(row.snapshot_json || {}) !== String(row.content_hash || '')) return { releaseHashMismatch:true }
       return { projection:buildStaffAnswerKeyProjection(row.snapshot_json || {}, { role:req.user?.role }) }
     })
 
     if (data.missing) return res.status(404).json({ success:false, code:'PRINT_JOB_NOT_FOUND', message:'Print job not found.' })
+    if (data.teacherScopeDenied) return res.status(403).json({ success:false, code:'TEACHER_PRINT_ASSIGNMENT_REQUIRED' })
     if (data.releaseHashMismatch) return res.status(409).json({ success:false, code:'PRINT_RELEASE_HASH_MISMATCH', message:'Release snapshot integrity check failed.' })
     return res.json({ success:true, data:data.projection })
   } catch (error) {

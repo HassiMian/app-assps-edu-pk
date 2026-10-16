@@ -1,0 +1,26 @@
+# ASSPS Paper Studio MASTER — Core784 teacher-scope safety integration, single coordinated mission
+
+**Date:** 2026-10-16 (PKT). **Owner:** Paper Studio source/tests only. **Deployment authority:** SaaS Core. **Release:** HOLD, no production change.
+
+## Canonical ancestry and scope
+- Exact verified latest independently published Core at start: `fix/core-classone-urdu-locked-readonly-preflight-20261016@784be6ac7d23d18882f5ca76f31933fd21bb9524`, clean and descendant of Core `e301273e0d055667dc7b0787593839a006fb97f7`. Existing 38 Class One Yellow handwritten Urdu scores and academic subject approval remain held by Core; no upload, grade edit, or approval.
+- Reviewed Paper teacher exact-scope source `fix/paper-core503-print-projection-teacher-exact-scope-20261016@0b3b7172a19488ba15c93dbd89481da352460f22` was absent from the newest Core route. Forward-ported only its `assessmentStudioRoutes.js` authorization guard and synthetic Express test into **new clean isolated Core784 descendant worktree**. Current Core workflow branch selector preserved during one CI conflict, with only new branch/PR paths, pinned backend install and actual HTTP test added.
+- Separate active `integration/paper-core503-teacher-scope-numeric-privacy-20261016@4577eb51` worktree contains uncommitted edits; not modified. No rewrite of the 43 protected official papers, browser workspace, 15-case diary, 38 private scores, school marks, Core RLS/worker, or any other agent's branch.
+
+## Exact authorization change
+- For a `teacher` using print job details/status/create/reprint/updated parent/student-only projection/staff answer key, require authenticated `req.user.id` and active **same school, same class, same subject, same section** row in `teacher_class_assignments`. Fail closed on missing/malformed or mismatched actor binding or revoked assignment; never authenticate from user-provided teacher ID. Principal/admin keep existing institution-scoped tenant check. Existing true/false and numerical staff/student privacy remains untouched on the Core784 base.
+- The **actual production `teacher_class_assignments` table held zero active/total rows** at read-only verification. A teacher invoking this new guard will be denied until independent authorized staff establish genuine approved assignments through proper Core workflows. No speculative timetable-to-grants SQL import is appropriate. Existing Assessment Studio release and print job row availability also needs separate acceptance.
+
+## Fresh executed tests, backed by root-private local receipts
+1. Pinned backend `npm ci --ignore-scripts --prefer-offline --no-audit --no-fund`: PASS under `al-siddique-backend/src`. Node syntax, `git diff --check`, CI YAML parse and HTTP test wiring: PASS.
+2. Actual isolated Express HTTP synthetic actors + print domain/static security: **14/14 PASS RC0**, SHA256 `3f2babfc441fa5433f6728cb4a96d18d4deb89a9b12aa5f066ad88deab6480d5`, `core784-teacherscope-integrated-node-20261016.log`.
+3. DB-independent staff marks scope, genuine zero-vs-blank, marks maximum, cohort authorization and assessment domain: **16/16 PASS RC0**, SHA256 `5596f27ec3c4d7abdaeeffbee75a97e19c9b4562cefc6362cdccb76b669ac871`, `core784-teacherscope-isolated-marks-qa.log`.
+4. Canonical 43-paper DOCX model parity and math/image packaging: **8/8 PASS RC0**, SHA256 `c3e67369ee26b7757aeda792b56b619d0253d3abd446265332c89c0d0efbf72b`, `core784-teacherscope-docx-isolated.log`.
+5. Broader assessment-results authorization and DOCX HTTP suites were attempted; the isolated worktree lacks genuine PostgreSQL connection credentials, so SCRAM `client password must be a string` errors occurred and the wrappers timed out. THESE ARE **BLOCKED/FAILED**, NOT PASSED. Their logs remain root-private as `core784-teacherscope-marks-results-qa.log` and `core784-teacherscope-docx-qa.log`. No secret fabrication, production DB auth bypass or inflated test counts.
+
+## Independent release limits
+- No real principal/teacher JWT was available in browser automation (login page only). No genuine signed School2/unassigned-subject denial, independent offsite ACL restore, worker transport/adaptor/auth/grants, physical Urdu/Jameel Noori A4 Diary Save→Reopen→Print or actual teacher Marks `savedCount`→GET.
+- Latest independently reported SaaS Core signed gate remained **6/13 HOLD**. Passing synthetic HTTP tests and a correct branch are **not** permission for production PM2/Nginx reload, privileged database DML, publishing unreviewed academic bank questions, grades or marks upload.
+- For deployment, **SaaS Core alone** must reconcile this scoped descendant with its newer actual source, provision legitimate exact teacher assignments, do genuine authenticated positive/negative peer-school testing and role/RLS checks, run complete 43-paper/Diary15/headless-and-real physical print and protected source checks, verify all 13 signed release gates, exact live source ancestry, backups and rollback, then control production promotion. This branch must never be deployed on its own or force-replace the newest owner release.
+
+**Historical limitation:** Entire old ChatGPT transcripts cannot be byte-for-byte recovered. GitHub issue #4, concrete branch/commit hashes and root-private logs are the source of truth.

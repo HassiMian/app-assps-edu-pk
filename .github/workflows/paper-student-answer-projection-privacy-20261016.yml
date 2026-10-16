@@ -8,9 +8,12 @@ on:
       - 'integration/core503-paper-truefalse-privacy-gate-*'
       - 'fix/paper-core503-numeric-rubric-student-projection-*'
       - 'integration/core503-truefalse-http-marks-release-20261016'
+      - 'fix/paper-core784-teacher-print-guard-unified-20261016'
   pull_request:
     paths:
       - 'al-siddique-backend/src/services/assessmentPrintJobs.js'
+      - 'al-siddique-backend/src/routes/assessmentStudioRoutes.js'
+      - 'al-siddique-backend/src/tests/assessment-truefalse-student-projection-http-isolated.test.cjs'
       - 'al-siddique-backend/src/tests/assessment-print-jobs-domain.test.js'
       - 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/personalizedPrintDurableBrowserAcceptance.test.js'
       - '.github/workflows/paper-student-answer-projection-privacy-20261016.yml'
@@ -36,11 +39,15 @@ jobs:
       - name: Install headless Chromium for isolated print QA
         working-directory: al-siddique-frontend
         run: npx playwright install --with-deps chromium
+      - name: Install pinned backend dependencies for actual Express HTTP security test
+        working-directory: al-siddique-backend/src
+        run: npm ci --no-audit --no-fund
       - name: Verify answer aliases and print projection student privacy
         run: >-
           node --test
           al-siddique-backend/src/tests/assessment-print-jobs-domain.test.js
           al-siddique-backend/src/tests/assessment-print-projection-boundary-static.test.js
+          al-siddique-backend/src/tests/assessment-truefalse-student-projection-http-isolated.test.cjs
       - name: Verify personalized A4 print does not leak private roster fields
         working-directory: al-siddique-frontend
         run: >-
