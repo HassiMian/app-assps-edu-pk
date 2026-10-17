@@ -93,6 +93,7 @@ on:
       - 'docs/coordination/APEX_CONNECT_CURRENT_CORE_E301_UNIFIED_GATE_20261016.md'
       - 'docs/coordination/APEX_CONNECT_CORE58A_GREEN_RECOVERY_20261017.md'
       - 'docs/coordination/APEX_CONNECT_CORE638_UNIFIED_RELEASE_READINESS_20261016.md'
+      - 'docs/coordination/APEX_CONNECT_CORE742_ALLSTREAMS_UNIFIED_RELEASE_MISSION_20261017.md'
       - '.github/workflows/connect-crossowner-release-contract.yml'
   pull_request:
     paths:
@@ -187,6 +188,7 @@ on:
       - 'docs/coordination/APEX_CONNECT_CURRENT_CORE_E301_UNIFIED_GATE_20261016.md'
       - 'docs/coordination/APEX_CONNECT_CORE58A_GREEN_RECOVERY_20261017.md'
       - 'docs/coordination/APEX_CONNECT_CORE638_UNIFIED_RELEASE_READINESS_20261016.md'
+      - 'docs/coordination/APEX_CONNECT_CORE742_ALLSTREAMS_UNIFIED_RELEASE_MISSION_20261017.md'
       - '.github/workflows/connect-crossowner-release-contract.yml'
 permissions:
   contents: read
