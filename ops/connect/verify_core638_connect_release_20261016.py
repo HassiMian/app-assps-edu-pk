@@ -18,7 +18,8 @@ from urllib.request import Request, urlopen
 
 # Exact new Core/Paper integration, independently published and read-only checked.
 CORE_PARENT_SHA = "638025c86a949b9768e5005966724e5d3e834e68"
-CORE_SHA = "e301273e0d055667dc7b0787593839a006fb97f7"
+CORE_SHA = "58a111c82e4e2051ecab08960cf4c68c25085a24"
+CORE_REVIEWED_E301_SHA = "e301273e0d055667dc7b0787593839a006fb97f7"
 CORE_DIST_SHA = "db0ef46c9922c049f0b150a1a2b00323c15c67967483cd02ccdafa48d0134237"
 CONNECT_SHA = "20ebae71ca438ad1590720ac93ff1ed9d59fedd7"
 CONNECT_PARENT_SHA = "e776d8f15350f62708ed55f6b7cd9fbdfc636ec3"
@@ -38,7 +39,14 @@ FIXED_RELEASE_ID = "connect-unified-20261016"
 CORE_PRIVACY_FILES = {
     "al-siddique-backend/src/services/assessmentPrintJobs.js": "f28b0f570dfcd29b4613553b1fd33b37ba5485a425c3c29552d91dc9f131dfa9",
     "al-siddique-backend/src/tests/assessment-print-jobs-domain.test.js": "5685096b5408b0420ed8b815cb5b2a3e67909e19aa31d212b8385c8cb0770ad8",
-    "al-siddique-backend/src/tests/assessment-truefalse-student-projection-http-isolated.test.cjs": "08cbc63b106461ec92f7d2cf593844422ff8416570827bb3ece3425412d2b5d6",
+    "al-siddique-backend/src/tests/assessment-truefalse-student-projection-http-isolated.test.cjs": "d7c292e41e70551c095f793012d0c30bd047967f913ca5d073efb668e79a52b8",
+}
+
+# Exact canonical Core-owned teacher print scope and read-only post-save proof.
+# Hash-only checks never read or publish student records or mark payloads.
+CORE_SCOPE_FILES = {
+    "al-siddique-backend/src/routes/assessmentStudioRoutes.js": "5dc33360934b3c10a82b4fd8dae00baed285190abf7a76cd4da5189c98ec2cfe",
+    "ops/release/core-marks/verify_postsave_classone_urdu_20261016.py": "271bbada4de37c5278c1f53445f8a70a70a62b927ffc542fdb636b87867948f7",
 }
 
 CONNECT_FILES = {
@@ -199,7 +207,17 @@ def evaluate(core, connect, live, official, official_rc, smoke, probe=True, dire
                                   "merge-base", "--is-ancestor",
                                   CORE_PARENT_SHA, "HEAD")
     tech["core_reviewed_parent"] = core_ancestor_rc == 0
+    e301_ancestor_rc, _ = command("git", "-C", str(core),
+                                  "merge-base", "--is-ancestor",
+                                  CORE_REVIEWED_E301_SHA, "HEAD")
+    tech["core_e301_in_ancestry"] = e301_ancestor_rc == 0
     tech["core_student_print_privacy_exact"] = reviewed_core_privacy_bytes(core)
+    # Core-authorized teacher assignment scope and true post-save audit source.
+    try:
+        tech["core_teacher_print_and_postsave_source_exact"] = all(
+            digest(core / name) == sha for name, sha in CORE_SCOPE_FILES.items())
+    except OSError:
+        tech["core_teacher_print_and_postsave_source_exact"] = False
     try:
         tech["core_compiled_sha"] = digest(core/"al-siddique-frontend/dist/index.html") == CORE_DIST_SHA
     except OSError:
@@ -250,7 +268,7 @@ def evaluate(core, connect, live, official, official_rc, smoke, probe=True, dire
     else:
         official_fact = signed_assessment(secure_receipt(official), official_rc)
     result = {
-        "scope": "CURRENT_READ_ONLY_CONNECT_CORE_E301_CANDIDATE",
+        "scope": "CURRENT_READ_ONLY_CONNECT_CORE_58A_POSTSAVE_SCOPE_CANDIDATE",
         "production_mutation_performed": False,
         "build": CONNECT_BUILD_ID,
         "live_build": PUBLIC_BUILD_ID if tech["public_build_remains_original"] else "DRIFT_OR_UNKNOWN",
@@ -268,7 +286,8 @@ def evaluate(core, connect, live, official, official_rc, smoke, probe=True, dire
             "signed persistent restricted worker transport and actual adapter",
             "separate authenticated worker and inherited grants witness",
             "genuine independently witnessed School2/unassigned-subject denial",
-            "genuine staff marks Save-success/savedCount/GET acceptance",
+            "independent authenticated teacher/School2 results acceptance (Principal 38 Urdu marks Save/GET already verified)",
+            "formal exam9 One/Yellow Urdu subject offering approval (currently pending)",
             "owner-approved rollback, physical Urdu Diary print and postflight",
         ],
     }

@@ -166,7 +166,9 @@ class UnifiedFailClosedTests(unittest.TestCase):
             self.assertFalse(mod.root_owned_pinned_file(file,digest))
 
     def test_current_core_pinned_to_verified_successor(self):
-        self.assertEqual(mod.CORE_SHA, "e301273e0d055667dc7b0787593839a006fb97f7")
+        self.assertEqual(mod.CORE_SHA, "58a111c82e4e2051ecab08960cf4c68c25085a24")
+        self.assertEqual(mod.CORE_REVIEWED_E301_SHA, "e301273e0d055667dc7b0787593839a006fb97f7")
+        self.assertEqual(len(mod.CORE_SCOPE_FILES), 2)
         self.assertEqual(mod.CORE_PARENT_SHA,
                          "638025c86a949b9768e5005966724e5d3e834e68")
         self.assertNotEqual(mod.CORE_SHA, mod.CORE_PARENT_SHA)
@@ -192,6 +194,24 @@ class UnifiedFailClosedTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             with patch.dict(mod.CORE_PRIVACY_FILES, {"absent/file.js":"0"*64}, clear=True):
                 self.assertFalse(mod.reviewed_core_privacy_bytes(Path(d)))
+
+    def test_core_teacher_print_and_postsave_source_hashes_are_strict(self):
+        for name, sha in mod.CORE_SCOPE_FILES.items():
+            self.assertRegex(sha, r"^[0-9a-f]{64}$")
+            self.assertFalse(name.startswith("/"))
+        self.assertTrue(any("assessmentStudioRoutes" in x for x in mod.CORE_SCOPE_FILES))
+        self.assertTrue(any("postsave" in x for x in mod.CORE_SCOPE_FILES))
+
+    def test_core_teacher_print_scope_missing_or_tampered_fails_closed(self):
+        with tempfile.TemporaryDirectory() as d:
+            self.assertFalse(all((Path(d) / p).is_file() and mod.digest(Path(d) / p) == h
+                                 for p, h in mod.CORE_SCOPE_FILES.items()))
+            for name in mod.CORE_SCOPE_FILES:
+                p = Path(d) / name
+                p.parent.mkdir(parents=True, exist_ok=True)
+                p.write_bytes(b"test scoped source only")
+            self.assertFalse(all(mod.digest(Path(d) / p) == h
+                                 for p, h in mod.CORE_SCOPE_FILES.items()))
 
     def test_previous_core_does_not_satisfy_new_core_identity(self):
         with tempfile.TemporaryDirectory() as d:
