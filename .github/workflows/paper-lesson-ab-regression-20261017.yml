@@ -6,6 +6,8 @@ on:
       - 'audit/paper-lesson-ab-core58-regression-20261017'
       - 'feat/lesson-ab-subject-unification-exclusions-20261017'
       - 'audit/paper-lesson42-corpus-sha-20261017'
+      - 'integration/assps-core78-lesson42-corpus-unified-20261017'
+      - 'integration/assps-allstreams-core0d-paper82-20261017'
     paths:
       - 'al-siddique-frontend/src/Modules/Paper-Generator/**'
       - 'al-siddique-frontend/scripts/verify-protected-templates.mjs'
