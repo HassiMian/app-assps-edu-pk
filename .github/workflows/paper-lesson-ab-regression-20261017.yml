@@ -5,6 +5,7 @@ on:
     branches:
       - 'audit/paper-lesson-ab-core58-regression-20261017'
       - 'feat/lesson-ab-subject-unification-exclusions-20261017'
+      - 'audit/paper-lesson42-corpus-sha-20261017'
     paths:
       - 'al-siddique-frontend/src/Modules/Paper-Generator/**'
       - 'al-siddique-frontend/scripts/verify-protected-templates.mjs'
@@ -37,6 +38,8 @@ jobs:
           al-siddique-frontend/src/Modules/Paper-Generator/tests/termPlanningModel.test.mjs
       - name: Preserve six original official paper templates
         run: node al-siddique-frontend/scripts/verify-protected-templates.mjs
-      - name: Preserve canonical 43-paper reference corpus
-        run: >-
-          node -e 'const fs=require("node:fs");const p="al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/migration/data/canonical-first-term-2026-paperdoc-v2-schema3.json";const x=JSON.parse(fs.readFileSync(p,"utf8"));if(!Array.isArray(x.documents)||x.documents.length!==43||x.paperCount!==43){console.error("PROTECTED_CORPUS_COUNT_MISMATCH");process.exit(1)}console.log("PROTECTED_CANONICAL_43_PRESENT_PASS")'
+      - name: Preserve canonical 43-paper corpus structure and exact approved bytes
+        run: |
+          node -e 'const fs=require("node:fs");const p="al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/migration/data/canonical-first-term-2026-paperdoc-v2-schema3.json";const x=JSON.parse(fs.readFileSync(p,"utf8"));if(!Array.isArray(x.documents)||x.documents.length!==43||x.paperCount!==43){console.error("PROTECTED_CORPUS_COUNT_MISMATCH");process.exit(1)}console.log("PROTECTED_CANONICAL_43_STRUCTURE_PASS")'
+          printf '%s  %s\n' '39a2dcd58e064dd63985c7f5b57d4bed55fdb949e99db0b00bc4b1735f2f1843' 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/migration/data/canonical-first-term-2026-paperdoc-v2-schema3.json' | sha256sum --check --status
+          echo PROTECTED_CANONICAL_43_BYTE_INTEGRITY_PASS
