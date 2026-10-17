@@ -17,7 +17,7 @@ import time
 
 EVIDENCE = Path('/root/assps-release-evidence/connect-core78-cluster-20261017')
 SOURCE = {
-    "core": "2324bcb9d8f27e8032b1bddfeb8b09133c4df7bc",
+    "core": "742e277a00cddadae9e82251e8147863c989dadd",
     "connect": "20ebae71ca438ad1590720ac93ff1ed9d59fedd7",
     "green": "659b01fcef34ade4e7052b436fb62e083845cc3a",
 }

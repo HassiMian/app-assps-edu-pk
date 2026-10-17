@@ -166,7 +166,9 @@ class UnifiedFailClosedTests(unittest.TestCase):
             self.assertFalse(mod.root_owned_pinned_file(file,digest))
 
     def test_current_core_pinned_to_verified_successor(self):
-        self.assertEqual(mod.CORE_SHA, "2324bcb9d8f27e8032b1bddfeb8b09133c4df7bc")
+        self.assertEqual(mod.CORE_SHA, "742e277a00cddadae9e82251e8147863c989dadd")
+        self.assertEqual(mod.CORE_REVIEWED_2324_SHA, "2324bcb9d8f27e8032b1bddfeb8b09133c4df7bc")
+        self.assertEqual(mod.CORE_MERGE_SECOND_PARENT, "2c1588bf4e3063987524782e97a8b2c193cdab60")
         self.assertEqual(mod.CORE_REVIEWED_78_SHA, "78e30667e9391c82783eaf5d554b46dc99d346d7")
         self.assertEqual(mod.CORE_REVIEWED_0D_SHA, "0d3d5e3c05ab49e3e87ccd86e119ddb043a3d913")
         self.assertEqual(mod.CORE_REVIEWED_E301_SHA, "e301273e0d055667dc7b0787593839a006fb97f7")
@@ -207,6 +209,53 @@ class UnifiedFailClosedTests(unittest.TestCase):
     def test_core2324_ci_delta_rejects_command_failure(self):
         with patch.object(mod, "command", return_value=(1, "\n".join(sorted(mod.CORE_CI_ONLY_FILES)))):
             self.assertFalse(mod.current_core_ci_only_delta(Path("/synthetic")))
+
+    def test_core742_two_reviewed_parent_merge_exact_scope(self):
+        self.assertEqual(len(mod.CORE_RESULT_MERGE_FILES), 6)
+        self.assertIn("ops/production-safety-check.js", mod.CORE_RESULT_MERGE_FILES)
+        self.assertIn("ops/release/tests/resultcards-selected-exam-grade-policy-contract-20261017.test.cjs",
+                      mod.CORE_RESULT_MERGE_FILES)
+        self.assertTrue(all(
+            name.startswith((".github/workflows/", "docs/coordination/", "ops/"))
+            for name in mod.CORE_RESULT_MERGE_FILES))
+
+    def test_core742_merge_delta_passes_only_six_exact_paths_and_hashes(self):
+        import hashlib
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            chosen = {}
+            for rel in mod.CORE_RESULT_MERGE_FILES:
+                file = root / rel
+                file.parent.mkdir(parents=True, exist_ok=True)
+                file.write_bytes(("synthetic review exact:"+rel).encode())
+                chosen[rel] = hashlib.sha256(file.read_bytes()).hexdigest()
+            with patch.dict(mod.CORE_RESULT_MERGE_FILES, chosen, clear=True), \
+                 patch.object(mod, "command", return_value=(0, "\n".join(sorted(chosen)))):
+                self.assertTrue(mod.current_core_result_merge_delta(root))
+                x = next(iter(chosen))
+                (root/x).write_text("changed after approval")
+                self.assertFalse(mod.current_core_result_merge_delta(root))
+                (root/x).unlink()
+                self.assertFalse(mod.current_core_result_merge_delta(root))
+
+    def test_core742_merged_scope_rejects_runtime_additions_and_missing_paths(self):
+        files = sorted(mod.CORE_RESULT_MERGE_FILES)
+        for value in ("\n".join(files+["al-siddique-backend/src/routes/examRoutes.js"]),
+                      "\n".join(files[:-1]), "", "\n".join(files)):
+            with self.subTest(value=value[:80]):
+                if value=="\n".join(files):
+                    rc = 1
+                else:
+                    rc = 0
+                with patch.object(mod, "command", return_value=(rc,value)):
+                    self.assertFalse(mod.current_core_result_merge_delta(Path("/synthetic-absent")))
+
+    def test_reviewed_core2324_ci_delta_is_anchored_to_fixed_parent_not_new_head(self):
+        with patch.object(mod, "command", return_value=(0,"\n".join(sorted(mod.CORE_CI_ONLY_FILES)))) as command:
+            self.assertTrue(mod.current_core_ci_only_delta(Path("/fixture")))
+            args = command.call_args.args
+            self.assertEqual(args[-2], mod.CORE_REVIEWED_0D_SHA)
+            self.assertEqual(args[-1], mod.CORE_REVIEWED_2324_SHA)
 
     def test_green_source_is_new_descendant_not_private_old_build(self):
         self.assertEqual(mod.GREEN_SOURCE_SHA, "659b01fcef34ade4e7052b436fb62e083845cc3a")

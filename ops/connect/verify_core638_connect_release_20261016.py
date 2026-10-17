@@ -18,7 +18,9 @@ from urllib.request import Request, urlopen
 
 # Exact new Core/Paper integration, independently published and read-only checked.
 CORE_PARENT_SHA = "58a111c82e4e2051ecab08960cf4c68c25085a24"
-CORE_SHA = "2324bcb9d8f27e8032b1bddfeb8b09133c4df7bc"
+CORE_REVIEWED_2324_SHA = "2324bcb9d8f27e8032b1bddfeb8b09133c4df7bc"
+CORE_MERGE_SECOND_PARENT = "2c1588bf4e3063987524782e97a8b2c193cdab60"
+CORE_SHA = "742e277a00cddadae9e82251e8147863c989dadd"
 CORE_REVIEWED_78_SHA = "78e30667e9391c82783eaf5d554b46dc99d346d7"
 CORE_REVIEWED_0D_SHA = "0d3d5e3c05ab49e3e87ccd86e119ddb043a3d913"
 CORE_REVIEWED_E301_SHA = "e301273e0d055667dc7b0787593839a006fb97f7"
@@ -62,6 +64,18 @@ CORE_OPERATIONS_FILES = {
 # The latest reviewed Core owner candidate changes *only* hosted CI,
 # synthetic test fixtures and its source-only report relative to Core0d.
 # Exact file names, not a broad "tests/" wildcard, are permitted.
+# Core742 is a two-parent reviewed merge. Exactly these six path deltas
+# relative to the approved Core2324 parent are permitted. No runtime backend,
+# student marks, tenancy or reviewed official-paper edits are accepted.
+CORE_RESULT_MERGE_FILES = {
+    ".github/workflows/core503-marks-paper-privacy-unified-release-20261016.yml": "f5d34aea69dd5046b7d95e78b15f5814b1a74580ce2477491ceb62cb2732f60e",
+    ".github/workflows/paper-lesson-ab-regression-20261017.yml": "58d60ad8135c5cb4de8c6de4f5a29b9dfe69f51f7e059439b476d4fd9f5248ff",
+    ".github/workflows/verify.yml": "4100f95ed353bd548c92f032bc0744fc4747459f55cdb2e217c2cb3c06f0c576",
+    "docs/coordination/PAPER_STUDIO_CORE2324_RESULTCARDS_GRADE_POLICY_SECURITY_RECONCILIATION_20261017.md": "295d42fb4b022adcec6644df0e7830dbb2d58603e491507135026bc3d04d528a",
+    "ops/production-safety-check.js": "6ddb6bc431a5f968232fe3f028fd84b5e1d2966b7fbf8bc7fd8c3c06e7bf8b7c",
+    "ops/release/tests/resultcards-selected-exam-grade-policy-contract-20261017.test.cjs": "cca9901b53b601f6fc476381a51eb89756febf91b61d5663a20467bb29c42254",
+}
+
 CORE_CI_ONLY_FILES = frozenset({
     ".github/workflows/core503-marks-paper-privacy-unified-release-20261016.yml",
     ".github/workflows/lesson-planner-release-contract.yml",
@@ -75,10 +89,23 @@ def current_core_ci_only_delta(core):
     try:
         code, changed = command(
             "git", "-C", str(core), "diff", "--name-only",
-            CORE_REVIEWED_0D_SHA, "HEAD")
+            CORE_REVIEWED_0D_SHA, CORE_REVIEWED_2324_SHA)
         return code == 0 and set(changed.splitlines()) == CORE_CI_ONLY_FILES
     except (OSError, ValueError):
         return False
+
+def current_core_result_merge_delta(core):
+    """Require exact six reviewed Core/Paper result-safety deltas + bytes."""
+    rc, paths = command("git", "-C", str(core), "diff", "--name-only",
+                        CORE_REVIEWED_2324_SHA, "HEAD")
+    if rc != 0 or set(paths.splitlines()) != set(CORE_RESULT_MERGE_FILES):
+        return False
+    try:
+        return all(digest(core / path) == sha
+                   for path, sha in CORE_RESULT_MERGE_FILES.items())
+    except OSError:
+        return False
+
 
 GREEN_SOURCE_SHA = "659b01fcef34ade4e7052b436fb62e083845cc3a"
 GREEN_FILES = {
@@ -256,6 +283,15 @@ def evaluate(core, connect, live, official, official_rc, smoke, probe=True, dire
                                   "merge-base", "--is-ancestor",
                                   CORE_REVIEWED_E301_SHA, "HEAD")
     tech["core_e301_in_ancestry"] = e301_ancestor_rc == 0
+    checked_2324, _ = command("git", "-C", str(core),
+                              "merge-base", "--is-ancestor",
+                              CORE_REVIEWED_2324_SHA, "HEAD")
+    checked_second, _ = command("git", "-C", str(core),
+                                "merge-base", "--is-ancestor",
+                                CORE_MERGE_SECOND_PARENT, "HEAD")
+    tech["core_both_reviewed_merge_parents"] = (
+        checked_2324 == 0 and checked_second == 0)
+    tech["core_exact_results_safety_merge_delta"] = current_core_result_merge_delta(core)
     tech["core_student_print_privacy_exact"] = reviewed_core_privacy_bytes(core)
     # Core-authorized teacher assignment scope and true post-save audit source.
     try:
