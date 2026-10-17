@@ -1,6 +1,8 @@
 """Protect independent persisted daily lesson plans across every future frontend cutover."""
 import importlib.util
 import json
+import shutil
+import tempfile
 from pathlib import Path
 import unittest
 
@@ -23,11 +25,27 @@ class IndependentDailyControls(unittest.TestCase):
   for text in DAILY_MARKERS:self.assertTrue(report['details']['runtime_markers'][text])
 
  def test_old_paper_term_bundle_without_save_day_must_fail(self):
-  prior=Path('/root/workspace/assps-planning-architecture-v4-20261015/al-siddique-frontend/dist')
-  if not prior.is_dir():self.skipTest('Archived v4 reference build unavailable')
-  report=gate.validate(prior,contract)
-  self.assertFalse(report['pass'])
-  self.assertFalse(report['checks']['all_runtime_ui_markers'])
+  # Reproduce the old 'Term only; no Save Day' failure hermetically.
+  # Never depend on another agent's /root/workspace archived build in CI.
+  original=gate.validate(dist,contract)
+  self.assertTrue(original['pass'],original)
+  active=original['details']['active_lesson_modules']
+  self.assertEqual(len(active),1,original)
+  missing='Save Day to School Server'
+  self.assertTrue(original['details']['runtime_markers'][missing])
+  with tempfile.TemporaryDirectory(prefix='assps-lesson-legacy-negative-') as d:
+   prior=Path(d)/'dist'
+   shutil.copytree(dist,prior)
+   module=prior/'assets'/active[0]
+   content=module.read_text(encoding='utf-8')
+   self.assertIn(missing,content)
+   module.write_text(content.replace(missing,'ARCHIVED_TERM_ONLY_NO_DAILY_SAVE'),encoding='utf-8')
+   report=gate.validate(prior,contract)
+   self.assertFalse(report['pass'],report)
+   self.assertFalse(report['checks']['all_runtime_ui_markers'])
+   self.assertFalse(report['details']['runtime_markers'][missing])
+   self.assertTrue(all(value for key,value in report['checks'].items()
+                       if key!='all_runtime_ui_markers'),report)
 
  def test_daily_button_removal_alone_fails_closed(self):
   mutated={**contract,'required_lesson_module_markers':

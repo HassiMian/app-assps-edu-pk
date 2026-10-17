@@ -1,0 +1,31 @@
+name: Core78 Hermetic CI Fixture Regression (tests only)
+on:
+  push:
+    branches:
+      - fix/core78-ci-hermetic-fixtures-20261017
+    paths:
+      - ops/release/core-marks/test_locked_classone_urdu_staging_20261016.py
+      - ops/release/tests/test_lesson_v5_daily_controls.py
+      - .github/workflows/core78-hermetic-ci-regression-20261017.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  hosted-nonroot-safe-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Root ownership verifier stays fail-closed on nonroot hosted runner
+        run: python3 -m unittest discover -s ops/release/core-marks -p test_locked_classone_urdu_staging_20261016.py -v
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: al-siddique-frontend/package-lock.json
+      - name: Install isolated source dependencies (never deployed)
+        run: npm ci --prefix al-siddique-frontend --no-audit --no-fund
+      - name: Build source-only frontend artifact
+        run: npm --prefix al-siddique-frontend run build
+      - name: Reject compiled Lesson Planner with missing Save Day on any runner
+        run: python3 -m unittest discover -s ops/release/tests -p test_lesson_v5_daily_controls.py -v

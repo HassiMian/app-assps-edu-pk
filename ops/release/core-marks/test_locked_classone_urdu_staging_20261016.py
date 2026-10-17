@@ -5,6 +5,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+from types import SimpleNamespace
 import tempfile
 import unittest
 import contextlib
@@ -169,20 +170,45 @@ class RecoveryContract(unittest.TestCase):
             self.assertEqual((root / gate.OUTPUT).stat().st_mode & 0o777, 0o600)
 
     def test_untrusted_private_directory_or_symlink_rejected(self):
+        # A hosted CI runner is not root. Simulate only the UID metadata while
+        # retaining the actual file type, permissions and symlink from lstat.
+        # The production verifier still requires a *real* UID 0.
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
             f = root / 'example.json'
             f.write_text('{}')
             os.chmod(root, 0o700)
             os.chmod(f, 0o600)
-            self.assertEqual(private_json(root, 'example.json'), {})
-            os.chmod(f, 0o644)
-            with self.assertRaisesRegex(ValueError, 'UNTRUSTED_PRIVATE_FILE'):
-                private_json(root, 'example.json')
-            os.chmod(f, 0o600)
-            (root / 'link.json').symlink_to(f)
-            with self.assertRaisesRegex(ValueError, 'UNTRUSTED_PRIVATE_FILE'):
-                private_json(root, 'link.json')
+            real_lstat = Path.lstat
+
+            def with_owner(uid, *, file_uid=None):
+                def synthetic_lstat(path):
+                    info = real_lstat(path)
+                    owner = file_uid if file_uid is not None and path != root else uid
+                    return SimpleNamespace(st_mode=info.st_mode, st_uid=owner)
+                return synthetic_lstat
+
+            # Reject nonroot directory ownership even with perfect permissions.
+            with patch.object(Path, 'lstat', with_owner(65534)):
+                with self.assertRaisesRegex(ValueError, 'UNTRUSTED_PRIVATE_DIRECTORY'):
+                    private_json(root, 'example.json')
+
+            # Reject nonroot file ownership independently of directory owner.
+            with patch.object(Path, 'lstat', with_owner(0, file_uid=65534)):
+                with self.assertRaisesRegex(ValueError, 'UNTRUSTED_PRIVATE_FILE'):
+                    private_json(root, 'example.json')
+
+            # Test the positive root-owned fixture and the real chmod/symlink
+            # negatives deterministically on both root VPS and nonroot CI.
+            with patch.object(Path, 'lstat', with_owner(0)):
+                self.assertEqual(private_json(root, 'example.json'), {})
+                os.chmod(f, 0o644)
+                with self.assertRaisesRegex(ValueError, 'UNTRUSTED_PRIVATE_FILE'):
+                    private_json(root, 'example.json')
+                os.chmod(f, 0o600)
+                (root / 'link.json').symlink_to(f)
+                with self.assertRaisesRegex(ValueError, 'UNTRUSTED_PRIVATE_FILE'):
+                    private_json(root, 'link.json')
 
 
 if __name__ == '__main__':
