@@ -6,10 +6,17 @@ const path=require('node:path')
 const {evaluate}=require('../notices/verify-notice-audience-source-20261017.cjs')
 const src=fs.readFileSync(path.resolve(__dirname,'../../al-siddique-backend/src/routes/noticesRoutes.js'),'utf8')
 const original=evaluate(src)
-test('read audience is HOLD on existing WIP branch',()=>{
- assert.equal(original.status,'HOLD_NOTICE_READ_AUDIENCE')
- assert.ok(original.blockers.includes('UNVERIFIED_TEACHER_NOTICE_AUDIENCE'))
+test('legacy list GET is now manager-only but remains NOT live certified',()=>{
+ assert.equal(original.status,'SOURCE_GUARD_PRESENT_NOT_LIVE_CERTIFIED')
+ assert.equal(original.source_audience_bound,true)
  assert.equal(original.production_release_authorized,false)
+})
+test('source audit detects attempted removal of manager-only reader guard',()=>{
+ const changed=src.replace("requireRoles('super_admin', 'admin', 'school_admin', 'principal'), async (req, res) => {",'async (req, res) => {')
+ assert.notEqual(changed,src)
+ const out=evaluate(changed)
+ assert.equal(out.status,'HOLD_NOTICE_READ_AUDIENCE')
+ assert.ok(out.blockers.includes('UNVERIFIED_TEACHER_NOTICE_AUDIENCE'))
 })
 test('existing WIP scoped write invariants observed',()=>{
  for(const key of ['four_routes_present','signed_auth_on_all_routes','get_has_read_scope','get_school_sql_scoped','writes_require_managers_not_teachers','post_issuer_uses_session','update_preserves_original_issuer','delete_tenant_and_id_scoped'])assert.equal(original.source_checks[key],true,key)
@@ -31,9 +38,9 @@ for(const [title,fn,key] of attacks)test('reject '+title,()=>{
 })
 test('recipient fields in comments never count as scoped reader auth',()=>{
  const changed=src.replace('// GET all notices for this school','// GET all notices for this school recipient_type teacher_ids req.user')
- assert.equal(evaluate(changed).source_audience_bound,false)
+ assert.equal(evaluate(changed).source_audience_bound,true)
 })
 test('service scope does not imply teacher audience scope',()=>{
  assert.equal(original.source_checks.get_has_read_scope,true)
- assert.equal(original.source_audience_bound,false)
+ assert.equal(original.source_audience_bound,true)
 })

@@ -130,11 +130,22 @@ test('principal delete always scoped by school',async()=>{
   assert.match(q.sql,/school_id = \$2/)
   assert.deepEqual(q.params,['62',2])
 })
-test('teacher retains read access to scoped notices, not write access',async()=>{
+test('teacher cannot list all school notices before verified recipient audience policy',async()=>{
   const {res,queries}=await invoke('GET','/',{user:admin('teacher',3)})
-  assert.equal(res.code,200)
-  assert.equal(res.body.data[0].school_id,3)
-  assert.ok(queries.some(x=>x.sql.includes('WHERE school_id = $1')&&x.params[0]===3))
+  assert.equal(res.code,403)
+  assert.equal(queries.length,0)
+})
+test('school administrators retain tenant-scoped read access',async()=>{
+  for (const role of ['principal','admin','school_admin','super_admin']) {
+    const {res,queries}=await invoke('GET','/',{user:admin(role,3)})
+    assert.equal(res.code,200,role)
+    assert.equal(res.body.data[0].school_id,3)
+    assert.ok(queries.some(x=>x.sql.includes('WHERE school_id = $1')&&x.params[0]===3),role)
+  }
+})
+test('legacy notice service readers fail closed until dedicated reader contract is verified',async()=>{
+  const {res,queries}=await invoke('GET','/',{user:{id:'svc',role:'service',school_id:1,account_type:'service',scopes:['school.notices.read']}})
+  assert.equal(res.code,403);assert.equal(queries.length,0)
 })
 test('service without explicit notices-read scope denied',async()=>{
   const {res,queries}=await invoke('GET','/',{user:{id:20,role:'service',school_id:1,account_type:'service',scopes:[]}})

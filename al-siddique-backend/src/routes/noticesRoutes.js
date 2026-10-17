@@ -73,8 +73,10 @@ function normalizeNoticePayload(body) {
   }
 }
 
-// GET all notices for this school
-router.get('/', protect, requireScopeForServiceOnly('school.notices.read'), async (req, res) => {
+// Legacy notices are restricted to school administration until a verified
+// recipient/teacher-identity audience mapping is implemented. School-scoped
+// SQL alone is NOT permission to expose every notice to any school teacher.
+router.get('/', protect, requireScopeForServiceOnly('school.notices.read'), requireRoles('super_admin', 'admin', 'school_admin', 'principal'), async (req, res) => {
   try {
     await ensureNoticesTable()
     const schoolId = requireNoticeSchoolContext(req, res)
