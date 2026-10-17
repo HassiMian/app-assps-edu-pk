@@ -21,13 +21,20 @@ await page.addInitScript(()=>localStorage.setItem('al_siddique_user',
 page.on('pageerror',error=>errors.push(error.message))
 let unauthorizedSaveCalls=0
 await page.route('**/api/**',route=>{
-  const pathname=new URL(route.request().url()).pathname
+  const url=new URL(route.request().url())
+  const pathname=url.pathname
   if(route.request().method()!=='GET'){
     unauthorizedSaveCalls++
     return route.fulfill({status:403,contentType:'application/json',
       body:JSON.stringify({success:false,code:'BROWSER_READ_ONLY'})})
   }
-  const data=pathname.endsWith('/planner/private-source-bundle')?manifest:[]
+  const requestedClass=url.searchParams.get('class')||'Two'
+  const fakeStudents=Array.from({length:5},(_,i)=>({
+    id:8001+i,name:'Synthetic QA Student '+(i+1),class:requestedClass,
+    roll_number:'QA-'+(i+1),section:'Blue'
+  }))
+  const data=pathname.endsWith('/planner/private-source-bundle')?manifest:
+    pathname.endsWith('/api/students')?fakeStudents:[]
   return route.fulfill({status:200,contentType:'application/json',
     body:JSON.stringify({success:true,data})})
 })
@@ -63,6 +70,20 @@ try{
         klass+'/'+subject+' weekly A/B must survive')
     }
     console.log('BROWSER_CLASS_PASS',klass,'SUBJECT_ROWS',n,'AB_SOURCE_LABELS',4)
+  }
+  // Validate the actual student-personalized print layout at 2, 3 and 4 cards
+  // per A4 sheet. No browser print dialog or live student data is involved.
+  await page.locator('[data-wn-class]').selectOption('Two')
+  await page.getByText('5 authorized students loaded').waitFor({timeout:10000})
+  for(const [count,pages] of [[2,3],[3,2],[4,2]]){
+    await page.getByLabel('Student cards / page').selectOption(String(count))
+    assert.equal(await page.locator('.wn-paper').count(),pages)
+    assert.equal(await page.locator('[data-lesson-student-card]').count(),5)
+    const sample=await page.locator('.wn-card').first().innerText()
+    assert.match(sample,/QA-1/)
+    assert.match(sample,/\[A\]/)
+    assert.match(sample,/\[B\]/)
+    console.log('STUDENT_CARD_A4_PASS',count,'PER_PAGE',pages,'PAGES')
   }
   assert.equal(unauthorizedSaveCalls,0)
   assert.deepEqual(errors,[])

@@ -40,3 +40,13 @@ The authorized school1 Principal-only original manifest is root-private at /root
 
 ## Ownership and release
 Isolated branch feat/lesson-ab-subject-unification-exclusions-20261017 based on latest reviewed integrated SaaS Core commit 58a111c82e4e2051ecab08960cf4c68c25085a24. Paper Studio Master owns Lesson Planner module integration and academic acceptance; SaaS Core owns final controlled deployment and database/RLS verification. Real authorized staff Save -> Reopen -> student print, physical Urdu A4 acceptance, source ancestry, protected regression and Core signed production release gates remain required. Do not equate the browser tests with a live deployment.
+
+## 17 October 06:xx PKT — legacy-draft preservation and live preview QA
+
+Additional audit found possible legacy-record overwrite: editing an OLD separately stored English-A/English-B or Urdu-A/Urdu-B weekly/term document in the new unified editor might issue PUT against its original ID. This was remediated before production release.
+
+- Pure isLegacySeparateABPlan detects historic A/B saved documents only for One/Two/Three. New unified subjects and unrelated classes are unaffected.
+- Reopen of a legacy Weekly or Term document carries original A/B source statements and provenance to the merged editor, but clears current existing server ID. Save creates a NEW grouped private draft via POST and leaves original separate A/B records/revision intact. Subsequent updates to new grouped documents preserve normal revision flow. Excluded Eight/Pre-Nine old Day/Week/Term saved records cannot be reopened in this active planner, though still stored.
+- Actual real Chromium, strict mock API and original manifest fixture, with exact source candidate IDs: LEGACY_WEEK_CLONED_POST_NOT_PUT PASS and LEGACY_TERM_CLONED_POST_NOT_PUT PASS, no old record mutated, no publication. First test's deliberately invalid fake source candidate IDs were correctly blocked; fixture corrected to original verified IDs.
+- Additional real Chromium synthetic five-student roster and A4 student print preview: 2 cards per page yields 3 sheets; 3 yields 2; 4 yields 2. Each personalized student card retained synthetic roll number and both English/Urdu [A] / [B] text. No physical print or PDF dispatch claimed.
+- Receipt paths (root-only) /root/assps-release-evidence/lesson-ab-20261017/legacy-clone-browser-v3.log and ab-card-print-browser-v2.log. No live database, student marks, academic approvals or other agent worktree changed.

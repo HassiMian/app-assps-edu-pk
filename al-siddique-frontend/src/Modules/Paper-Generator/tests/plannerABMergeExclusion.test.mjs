@@ -2,6 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import {
   canonicalLessonCandidates,
+  isLegacySeparateABPlan,
   OMITTED_LESSON_CLASSES
 } from '../plannerSourceGrouping.js'
 import {planWeekRows,notebookModel} from '../weeklyNotebookModel.js'
@@ -155,4 +156,16 @@ test('merged term server draft preserves A/B linkage without collapsing original
   assert.deepEqual(doc.provenance.sourcePartsBySubject[rows[0].id].map(x=>x.part),['A','B'])
   assert.equal(doc.provenance.academicPublication,'BLOCKED')
   assert.equal(payload.sentToPortal,undefined)
+})
+
+
+test('historical saved A/B server drafts are detected and must clone, not update',()=>{
+  const old = {classLevel:'One',subjects:[{subject:'English-A'},{subject:'English-B'},{subject:'Urdu'}]}
+  assert.equal(isLegacySeparateABPlan(old),true)
+  assert.equal(isLegacySeparateABPlan({classLevel:'Two',subjects:[{subject:'Urdu B'}]}),true)
+  assert.equal(isLegacySeparateABPlan({classLevel:'Three',subjects:[{subject:'English'},{subject:'Urdu'}]}),false)
+  assert.equal(isLegacySeparateABPlan({classLevel:'Four',subjects:[{subject:'English-A'}]}),false)
+  assert.equal(isLegacySeparateABPlan({classLevel:'Eight',subjects:[{subject:'English-A'}]}),false)
+  assert.equal(isLegacySeparateABPlan({classLevel:'One',subjects:[]}),false)
+  assert.equal(isLegacySeparateABPlan(null),false)
 })

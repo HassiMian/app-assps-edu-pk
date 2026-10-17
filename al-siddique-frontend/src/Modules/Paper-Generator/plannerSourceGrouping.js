@@ -68,3 +68,13 @@ export function canonicalLessonCandidates(sourceCandidates, klass) {
     }]
   })
 }
+
+// Existing separately saved A/B drafts must NEVER be overwritten by a later
+// unified English/Urdu Save. Clone as a new private draft instead; preserve the
+// old per-part record and audit revision exactly.
+export function isLegacySeparateABPlan(plan) {
+  const klass = normalizeClass(plan?.classLevel)
+  if (!SPECIAL.has(klass)) return false
+  return (Array.isArray(plan?.subjects) ? plan.subjects : []).some(subject =>
+    KEY_RE.test(String(subject?.subject || '').trim()))
+}

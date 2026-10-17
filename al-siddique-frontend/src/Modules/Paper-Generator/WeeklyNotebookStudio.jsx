@@ -8,7 +8,7 @@ import {CLASS_ORDER,LABELS} from './composerReviewDomain'
 import {validateLocalComposerSource} from './composerLocalVerifier'
 import {CLASS_INCHARGES} from './lessonWeeklyEngine'
 import {termWeeks,notebookModel,planWeekRows} from './weeklyNotebookModel'
-import {canonicalLessonCandidates} from './plannerSourceGrouping.js'
+import {canonicalLessonCandidates,isLegacySeparateABPlan} from './plannerSourceGrouping.js'
 import TermPlannerEditor from './TermPlannerEditor'
 import {termKey,buildTermOverview,termAssessmentRows,validateTermContent} from './termPlanningModel'
 import {listTermServerPlans,saveTermServerPlan} from './termServerPersistence'
@@ -330,7 +330,8 @@ export default function WeeklyNotebookStudio(){
   setSavingToServer(true);setError('')
   try{
     const key=weeklyIdentity(klass,section,activeWeek.start)
-    const existing=remotePlans.find(plan=>plan.id===currentServerId&&plan.provenance?.weeklyKey===key)
+    const existing=remotePlans.find(plan=>plan.id===currentServerId&&
+      plan.provenance?.weeklyKey===key && !isLegacySeparateABPlan(plan))
     const saved=await saveWeeklyServerPlan({klass,section,week:activeWeek,
       rows,teacherLabel:teacher,sourceZipSha256:manifest.source_zip_sha256,existing,design})
     if(!saved?.id)throw Error('School server did not return a saved plan ID')
@@ -397,7 +398,6 @@ export default function WeeklyNotebookStudio(){
  }
  function openServerPlan(plan){
   const doc=plan
-  setCurrentServerId(plan.id)
   const nextClass=doc.classLevel
   if(!canonicalLessonCandidates(manifest?.candidates,nextClass).length){
     setError('This class is excluded from active Lesson Planning. Saved record was not changed.');return
@@ -405,6 +405,9 @@ export default function WeeklyNotebookStudio(){
   if(!CLASS_ORDER.includes(nextClass)){
     setError('Saved plan has an unrecognized class.');return
   }
+  // A merged editor must clone old A/B server data; never update its revision.
+  const legacyAB=isLegacySeparateABPlan(doc)
+  setCurrentServerId(legacyAB?null:plan.id)
   const nextSection=doc.section||''
   const nextWeekStart=doc.startDate
   const nextEdits={}
@@ -523,7 +526,7 @@ export default function WeeklyNotebookStudio(){
    try{
      validateTermContent({klass,start,end,rows:termRows,assessments:termAssessments})
      const existing=termServerPlans.find(p=>p.id===currentTermServerId &&
-       p.provenance?.termKey===activeTermKey)
+       p.provenance?.termKey===activeTermKey && !isLegacySeparateABPlan(p))
      const result=await saveTermServerPlan({klass,section,term:termName,
        start,end,rows:termRows,assessments:termAssessments,design,
        sourceZipSha256:manifest.source_zip_sha256,existing})
@@ -561,9 +564,12 @@ export default function WeeklyNotebookStudio(){
    setKlass(doc.classLevel);setSection(doc.section||'')
    setTermName(doc.termLabel);setStart(doc.startDate);setEnd(doc.endDate)
    setDesign({...defaultDesign,...(doc.layoutSettings||{})})
-   setCurrentTermServerId(doc.id)
+   const legacyAB=isLegacySeparateABPlan(doc)
+   setCurrentTermServerId(legacyAB?null:doc.id)
    setViewMode('term')
-   setTermStatus('Saved term reopened at revision '+doc.serverRevision+' (private draft).')
+   setTermStatus(legacyAB?
+     'Old separate A/B draft loaded as a new unified draft. Save creates a new record; original remains untouched.':
+     'Saved term reopened at revision '+doc.serverRevision+' (private draft).')
    setError('')
  }
  function printTerm(){
