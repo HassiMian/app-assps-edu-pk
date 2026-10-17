@@ -45,6 +45,9 @@ jobs:
         run: npm ci --no-audit --no-fund
         working-directory: al-siddique-backend/src
 
+      - name: Reject unsafe exam scope and school grading-policy regressions
+        run: node --test ops/tests/resultcards-grading-scope-contract-20261017.test.cjs
+
       - name: Production safety gates
         run: npm run production:safety
 

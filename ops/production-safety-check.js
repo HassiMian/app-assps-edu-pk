@@ -505,11 +505,10 @@ assertNotContains(
   'result-card all-exam printing must not fan out one HTTP request per exam.'
 )
 
-assertContains(
-  'al-siddique-frontend/src/Modules/examination/ResultCards.jsx',
-  "api.get('/api/exams/results', { params: { exam_ids: examIds.join(',') } })",
-  'result-card all-exam printing must use the tenant-scoped batch result endpoint.'
-)
+// Result Cards explicitly offers ALL CLASSES of ONE selected examination.
+// Its tenant-scoped single-exam GET, stale-request guard, printed-row provenance,
+// school+exam tenant denial, and persistent school grading policy are verified
+// together below. Genuine future all-exams mode requires a separate batch check.
 
 assertNotContains(
   'al-siddique-frontend/src/Modules/fees/FeeSettings.jsx',
@@ -942,11 +941,9 @@ assertNotContains(
 )
 
 
-assertContains(
-  'al-siddique-backend/src/routes/examRoutes.js',
-  'gradeBands = await loadGradeBandsForSchool(schoolId)',
-  'saved exam grades must use the school grading policy.'
-)
+for (const violation of require('./release/check-resultcards-grading-contract-20261017.cjs').checkRepository(repoRoot)) {
+  fail('Paper/Results fail-closed examination+tenant+school grading policy: ' + violation)
+}
 
 assertNotContains(
   'al-siddique-backend/src/routes/examRoutes.js',
