@@ -1,6 +1,7 @@
 """Protect independent persisted daily lesson plans across every future frontend cutover."""
 import importlib.util
 import json
+import tempfile
 from pathlib import Path
 import unittest
 
@@ -23,11 +24,27 @@ class IndependentDailyControls(unittest.TestCase):
   for text in DAILY_MARKERS:self.assertTrue(report['details']['runtime_markers'][text])
 
  def test_old_paper_term_bundle_without_save_day_must_fail(self):
-  prior=Path('/root/workspace/assps-planning-architecture-v4-20261015/al-siddique-frontend/dist')
-  if not prior.is_dir():self.skipTest('Archived v4 reference build unavailable')
-  report=gate.validate(prior,contract)
-  self.assertFalse(report['pass'])
-  self.assertFalse(report['checks']['all_runtime_ui_markers'])
+  # Hermetic prior-style bundle: well-formed entry, route and lesson assets,
+  # all required markers EXCEPT Save Day. No private /root archive dependency.
+  with tempfile.TemporaryDirectory() as directory:
+   prior=Path(directory); assets=prior/'assets';assets.mkdir()
+   entry='index-fixture-v4-20261017.js'
+   route=contract.get('protected_route_entry','PaperGenerator')+'-fixture-v4-20261017.js'
+   lesson=contract['protected_runtime_entry']+'-fixture-v4-20261017.js'
+   (prior/'index.html').write_text('<script type="module" src="/assets/'+entry+'"></script>')
+   (assets/entry).write_text('import("./'+route+'");import("./'+lesson+'");')
+   (assets/route).write_text('/* synthetic prior paper route */')
+   missing='Save Day to School Server'
+   self.assertIn(missing,contract['required_lesson_module_markers'])
+   (assets/lesson).write_text('\n'.join(m for m in contract['required_lesson_module_markers'] if m!=missing))
+   report=gate.validate(prior,contract)
+   self.assertFalse(report['pass'],report)
+   for key in ('html_module_entry','no_missing_reachable_assets',
+               'one_active_paper_generator_route','one_active_lesson_planner_module'):
+    self.assertTrue(report['checks'][key],(key,report))
+   self.assertFalse(report['checks']['all_runtime_ui_markers'])
+   self.assertFalse(report['details']['runtime_markers'][missing])
+   self.assertTrue(all(value for key,value in report['details']['runtime_markers'].items() if key!=missing))
 
  def test_daily_button_removal_alone_fails_closed(self):
   mutated={**contract,'required_lesson_module_markers':

@@ -5,6 +5,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+from types import SimpleNamespace
 import tempfile
 import unittest
 import contextlib
@@ -169,20 +170,40 @@ class RecoveryContract(unittest.TestCase):
             self.assertEqual((root / gate.OUTPUT).stat().st_mode & 0o777, 0o600)
 
     def test_untrusted_private_directory_or_symlink_rejected(self):
+        # GitHub Actions intentionally runs unprivileged, whereas production
+        # receipts MUST remain root-owned. Mock ONLY stat ownership in this
+        # synthetic fixture; never weaken private_json's real UID=0 check.
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
             f = root / 'example.json'
             f.write_text('{}')
             os.chmod(root, 0o700)
             os.chmod(f, 0o600)
-            self.assertEqual(private_json(root, 'example.json'), {})
-            os.chmod(f, 0o644)
-            with self.assertRaisesRegex(ValueError, 'UNTRUSTED_PRIVATE_FILE'):
-                private_json(root, 'example.json')
-            os.chmod(f, 0o600)
-            (root / 'link.json').symlink_to(f)
-            with self.assertRaisesRegex(ValueError, 'UNTRUSTED_PRIVATE_FILE'):
-                private_json(root, 'link.json')
+            genuine_lstat = Path.lstat
+
+            def synthetic_lstat(path, deny_owner=None):
+                real = genuine_lstat(path)
+                return SimpleNamespace(st_mode=real.st_mode,
+                                       st_uid=42 if path == deny_owner else 0)
+
+            with patch.object(Path, 'lstat', autospec=True,
+                              side_effect=lambda path: synthetic_lstat(path, root)):
+                with self.assertRaisesRegex(ValueError, 'UNTRUSTED_PRIVATE_DIRECTORY'):
+                    private_json(root, 'example.json')
+            with patch.object(Path, 'lstat', autospec=True,
+                              side_effect=lambda path: synthetic_lstat(path, f)):
+                with self.assertRaisesRegex(ValueError, 'UNTRUSTED_PRIVATE_FILE'):
+                    private_json(root, 'example.json')
+            with patch.object(Path, 'lstat', autospec=True,
+                              side_effect=synthetic_lstat):
+                self.assertEqual(private_json(root, 'example.json'), {})
+                os.chmod(f, 0o644)
+                with self.assertRaisesRegex(ValueError, 'UNTRUSTED_PRIVATE_FILE'):
+                    private_json(root, 'example.json')
+                os.chmod(f, 0o600)
+                (root / 'link.json').symlink_to(f)
+                with self.assertRaisesRegex(ValueError, 'UNTRUSTED_PRIVATE_FILE'):
+                    private_json(root, 'link.json')
 
 
 if __name__ == '__main__':
