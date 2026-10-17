@@ -56,6 +56,7 @@ export const PERMISSION_GROUPS = [
  { key: 'question_bank', label: 'Question Bank', route: '/question-bank' },
  { key: 'timetable', label: 'Timetable', route: '/timetable' },
  { key: 'datesheet', label: 'Datesheet', route: '/datesheet' },
+ { key: 'school_documents', label: 'Notices & Circulars', route: '/school-documents' },
  ],
  },
  {

@@ -21,6 +21,7 @@ import {
   toLessonPlanPersistencePayload,
 } from './lessonPlanDomain'
 import WeeklyNotebookStudio from './WeeklyNotebookStudio'
+import DailyDiaryWorkspace from './DailyDiaryWorkspace'
 import './WeeklyNotebookStudio.css'
 import './LessonPlanningWorkspace.css'
 
@@ -112,7 +113,9 @@ function SubjectPlanner({ subjectPlan, planningType, onChange, onRemove }) {
 }
 
 export default function LessonPlanningWorkspace() {
-  const [showWeeklyNotebook,setShowWeeklyNotebook]=useState(true)
+  // Use the exact Daily Diary rendering/editor/print engine, not a lookalike copy.
+  // Other planning workspaces remain accessible without migrating saved records.
+  const [planningView,setPlanningView]=useState('diary-format')
   const { activeClasses, subjectsForClass, sectionsForClass, sessionStart, sessionEnd } = useAcademicStore()
   const [document,setDocument] = useState(()=>{
     try { const raw=getTenantStorageItem(DRAFT_KEY); return raw?normalizeLessonPlanDocument(JSON.parse(raw)):createEmptyLessonPlanDocument({startDate:today()}) } catch { return createEmptyLessonPlanDocument({startDate:today()}) }
@@ -208,11 +211,13 @@ export default function LessonPlanningWorkspace() {
   const removeSubject = index => {const name=document.subjects[index]?.subject;setDocument(current=>normalizeLessonPlanDocument({ ...current,subjects:current.subjects.filter((_,i)=>i!==index) }));setSelectedSubjects(current=>current.filter(item=>item!==name))}
 
   return <div className="lesson-planning-workspace" data-lesson-planning-workspace>
-    <nav className="wn-switch" aria-label="Lesson planning mode">
-      <button className={showWeeklyNotebook?'selected':''} onClick={()=>setShowWeeklyNotebook(true)}>Weekly Notebook Studio</button>
-      <button className={!showWeeklyNotebook?'selected':''} onClick={()=>setShowWeeklyNotebook(false)}>Advanced Lesson Editor</button>
+    <nav className="wn-switch" aria-label="Lesson planning mode" data-lesson-diary-parity-nav>
+      <button type="button" aria-pressed={planningView==='diary-format'} className={planningView==='diary-format'?'selected':''} onClick={()=>setPlanningView('diary-format')}>Diary Format — Lesson Planning</button>
+      <button type="button" aria-pressed={planningView==='weekly'} className={planningView==='weekly'?'selected':''} onClick={()=>setPlanningView('weekly')}>Weekly / Term Notebook</button>
+      <button type="button" aria-pressed={planningView==='advanced'} className={planningView==='advanced'?'selected':''} onClick={()=>setPlanningView('advanced')}>Advanced Lesson Editor</button>
     </nav>
-    {showWeeklyNotebook?<WeeklyNotebookStudio/>:<>
+    {planningView==='diary-format'?<DailyDiaryWorkspace initialMode="lesson"/>:
+     planningView==='weekly'?<WeeklyNotebookStudio/>:<>
     <div className="lp-topbar">
       <div><div className="lp-eyebrow">ASSPS Academic Planning</div><h2>Lesson Planning Workspace</h2><p>Plan once. Reuse across term, daily lessons, diary cards and assessments.</p></div>
       <div className="lp-actions"><button className="ghost" onClick={reset}><Plus size={16}/> New</button><button className="ghost" onClick={()=>setShowPaste(true)}><WandSparkles size={16}/> Smart Paste</button><button className="ghost" onClick={printPlan}><Printer size={16}/> Print</button><button className="ghost" onClick={()=>window.dispatchEvent(new CustomEvent('assps-open-diary-lesson-plan',{detail:{planId:document.id||'',classLevel:document.classLevel,section:document.section,date:document.startDate}}))}><Users size={16}/> Student Cards</button><button data-save-plan className="primary" onClick={save} disabled={busy==='save'}>{busy==='save'?<RefreshCw className="spin" size={16}/>:<Save size={16}/>} Save Draft</button></div>
