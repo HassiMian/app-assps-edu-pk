@@ -17,10 +17,10 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 # Exact new Core/Paper integration, independently published and read-only checked.
-CORE_PARENT_SHA = "638025c86a949b9768e5005966724e5d3e834e68"
-CORE_SHA = "58a111c82e4e2051ecab08960cf4c68c25085a24"
+CORE_PARENT_SHA = "58a111c82e4e2051ecab08960cf4c68c25085a24"
+CORE_SHA = "78e30667e9391c82783eaf5d554b46dc99d346d7"
 CORE_REVIEWED_E301_SHA = "e301273e0d055667dc7b0787593839a006fb97f7"
-CORE_DIST_SHA = "db0ef46c9922c049f0b150a1a2b00323c15c67967483cd02ccdafa48d0134237"
+CORE_DIST_SHA = "48d3e2076c3d56cd8a41ec5c4a2689a998449c1c9801a80736b2e1ea5f2e41bb"
 CONNECT_SHA = "20ebae71ca438ad1590720ac93ff1ed9d59fedd7"
 CONNECT_PARENT_SHA = "e776d8f15350f62708ed55f6b7cd9fbdfc636ec3"
 CONNECT_BUILD_ID = "91l6KJsI2x_oOVXPQjUd5"
@@ -48,6 +48,23 @@ CORE_SCOPE_FILES = {
     "al-siddique-backend/src/routes/assessmentStudioRoutes.js": "5dc33360934b3c10a82b4fd8dae00baed285190abf7a76cd4da5189c98ec2cfe",
     "ops/release/core-marks/verify_postsave_classone_urdu_20261016.py": "271bbada4de37c5278c1f53445f8a70a70a62b927ffc542fdb636b87867948f7",
 }
+
+# Explicitly reviewed 17 October Core integrated Lesson + print/teacher/boot
+# source files. Connect never modifies these upstream owner-owned files.
+CORE_OPERATIONS_FILES = {
+    "ops/release/core-infrastructure/verify_connect_green_startup_20261017.py": "f5ef5881ef63dadbea97198e2f8f03b25236c50fe849b0bde57542204761ead3",
+    "ops/paper-studio/verify_paper_api_dependency_20261017.py": "15b13ba314e71cf36eea00ba58a4d1104c1cd98a1578247d8d57a6e84d47ddbf",
+    "ops/paper-studio/verify_teacher_timetable_source_20261017.py": "2aa45e6de70cefe5c416892ced8e5aef482db5496f75faf3d7e7103e070ce90f",
+    "al-siddique-frontend/src/Modules/Paper-Generator/plannerSourceGrouping.js": "0be7f71e1dec33917051eb5d21878e8c5150b52912ffbccb5b3dcdbd65df087a",
+}
+GREEN_SOURCE_SHA = "659b01fcef34ade4e7052b436fb62e083845cc3a"
+GREEN_FILES = {
+    "ecosystem.connect.config.cjs": "982cfd70535ed8949d4ca2f17232622baeb39886cec4eb3c5a8fc4e2a81dd367",
+    "ecosystem.connect.green.config.cjs": "b19c9bba1b7a8b2e5ac7e92655c51eec782414fcaf4837f1dc79a39394a04cb5",
+    "run-next-release.sh": "90747c54a02dc45883942a73004db59771aa7888a7c05b36bcaec125cb241649",
+    "tests/apex-green-startup-failclosed.test.cjs": "71801aad75863f696eb090e226a698a8445d11f202d620d19ad87518731051e6",
+}
+GREEN_REVIEWED_SOURCE_SHA = "20ebae71ca438ad1590720ac93ff1ed9d59fedd7"
 
 CONNECT_FILES = {
     "src/app/api/proxy/[...path]/route.ts": "6868d0f211ad29d0ab5b9c6daf5290d8c6c9f302d44ffddf268f102bb072d815",
@@ -200,7 +217,7 @@ def runtime_probes():
     # Never send staff tokens, tenant IDs, credentials or body data. Save codes only.
     return {path: public_status(path) for path in ("/login",) + PRIVATE_PATHS}
 
-def evaluate(core, connect, live, official, official_rc, smoke, probe=True, direct_official=False, trusted_execution=False):
+def evaluate(core, connect, live, official, official_rc, smoke, probe=True, direct_official=False, trusted_execution=False, green_connect=None):
     tech = {}
     tech["core_sha_and_clean"] = git_exact_clean(core, CORE_SHA)
     core_ancestor_rc, _ = command("git", "-C", str(core),
@@ -219,6 +236,11 @@ def evaluate(core, connect, live, official, official_rc, smoke, probe=True, dire
     except OSError:
         tech["core_teacher_print_and_postsave_source_exact"] = False
     try:
+        tech["core_current_ops_and_planner_exact"] = all(
+            digest(core / name) == sha for name, sha in CORE_OPERATIONS_FILES.items())
+    except OSError:
+        tech["core_current_ops_and_planner_exact"] = False
+    try:
         tech["core_compiled_sha"] = digest(core/"al-siddique-frontend/dist/index.html") == CORE_DIST_SHA
     except OSError:
         tech["core_compiled_sha"] = False
@@ -231,6 +253,16 @@ def evaluate(core, connect, live, official, official_rc, smoke, probe=True, dire
             digest(connect / name) == sha for name, sha in CONNECT_FILES.items())
     except OSError:
         tech["connect_source_digests"] = False
+    tech["connect_green_source_clean"] = (green_connect is not None
+        and git_exact_clean(green_connect, GREEN_SOURCE_SHA))
+    green_ancestor_rc, _ = command("git", "-C", str(green_connect or "/NONEXISTENT"),
+        "merge-base", "--is-ancestor", GREEN_REVIEWED_SOURCE_SHA, "HEAD")
+    tech["connect_green_reviewed_parent"] = green_ancestor_rc == 0
+    try:
+        tech["connect_green_bootstrap_exact"] = (green_connect is not None and all(
+            digest(green_connect / name) == sha for name, sha in GREEN_FILES.items()))
+    except OSError:
+        tech["connect_green_bootstrap_exact"] = False
     try:
         tech["private_build_id"] = (connect/".next/BUILD_ID").read_text().strip() == CONNECT_BUILD_ID
         tech["compiled_next_server_exists"] = (connect/".next/server").is_dir()
@@ -297,6 +329,8 @@ def main():
     cli = argparse.ArgumentParser()
     cli.add_argument("--core", type=Path, required=True)
     cli.add_argument("--connect", type=Path, required=True)
+    cli.add_argument("--green-connect", type=Path,
+                     help="Exact reviewed standalone green boot source (never deployed by verifier)")
     cli.add_argument("--live", type=Path, default=Path("/var/www/apex-connect"))
     cli.add_argument("--signed-core-receipt", type=Path, required=True)
     cli.add_argument("--signed-core-exit-receipt", type=Path, required=True)
@@ -318,7 +352,8 @@ def main():
                       core_gate, core_rc, args.private_http_receipt,
                       probe=not args.skip_live_probes,
                       direct_official=args.direct_official_recheck,
-                      trusted_execution=trusted_execution)
+                      trusted_execution=trusted_execution,
+                      green_connect=args.green_connect)
     data = json.dumps(report, sort_keys=True, indent=2) + "\n"
     if args.output:
         dest = args.output.resolve()

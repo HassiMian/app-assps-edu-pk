@@ -166,15 +166,61 @@ class UnifiedFailClosedTests(unittest.TestCase):
             self.assertFalse(mod.root_owned_pinned_file(file,digest))
 
     def test_current_core_pinned_to_verified_successor(self):
-        self.assertEqual(mod.CORE_SHA, "58a111c82e4e2051ecab08960cf4c68c25085a24")
+        self.assertEqual(mod.CORE_SHA, "78e30667e9391c82783eaf5d554b46dc99d346d7")
         self.assertEqual(mod.CORE_REVIEWED_E301_SHA, "e301273e0d055667dc7b0787593839a006fb97f7")
         self.assertEqual(len(mod.CORE_SCOPE_FILES), 2)
         self.assertEqual(mod.CORE_PARENT_SHA,
-                         "638025c86a949b9768e5005966724e5d3e834e68")
+                         "58a111c82e4e2051ecab08960cf4c68c25085a24")
         self.assertNotEqual(mod.CORE_SHA, mod.CORE_PARENT_SHA)
         self.assertEqual(len(mod.CORE_PRIVACY_FILES), 3)
         self.assertTrue(all(x.startswith("al-siddique-backend/") for x in mod.CORE_PRIVACY_FILES))
 
+    def test_current_core_operational_integrity_pins(self):
+        self.assertEqual(len(mod.CORE_OPERATIONS_FILES), 4)
+        self.assertIn("ops/release/core-infrastructure/verify_connect_green_startup_20261017.py",
+                      mod.CORE_OPERATIONS_FILES)
+        self.assertIn("ops/paper-studio/verify_teacher_timetable_source_20261017.py",
+                      mod.CORE_OPERATIONS_FILES)
+
+    def test_green_source_is_new_descendant_not_private_old_build(self):
+        self.assertEqual(mod.GREEN_SOURCE_SHA, "659b01fcef34ade4e7052b436fb62e083845cc3a")
+        self.assertEqual(mod.GREEN_REVIEWED_SOURCE_SHA, mod.CONNECT_SHA)
+        self.assertEqual(len(mod.GREEN_FILES),4)
+        self.assertIn("run-next-release.sh",mod.GREEN_FILES)
+        self.assertIn("ecosystem.connect.green.config.cjs",mod.GREEN_FILES)
+        self.assertNotEqual(mod.CONNECT_BUILD_ID,mod.PUBLIC_BUILD_ID)
+
+    def test_green_bootstrap_missing_or_tampered_not_valid(self):
+        import hashlib
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d)
+            approved={}
+            for rel in ("startup.cjs","green.cjs","run.sh","test.cjs"):
+                path=root/rel
+                path.write_bytes(("reviewed-"+rel).encode())
+                approved[rel]=hashlib.sha256(path.read_bytes()).hexdigest()
+            with patch.dict(mod.GREEN_FILES,approved,clear=True):
+                self.assertTrue(all(mod.digest(root/f)==v for f,v in mod.GREEN_FILES.items()))
+                (root/"run.sh").write_text("invalid")
+                self.assertFalse(all(mod.digest(root/f)==v for f,v in mod.GREEN_FILES.items()))
+                (root/"run.sh").unlink()
+                self.assertFalse(all((root/f).is_file() for f in mod.GREEN_FILES))
+
+    def test_core_ops_hash_policy_rejects_file_drift(self):
+        import hashlib
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d)
+            files={}
+            for name in ("core-api.py","timetable.py","lesson.js"):
+                (root/name).write_text("SYNTHETIC "+name)
+                files[name]=hashlib.sha256((root/name).read_bytes()).hexdigest()
+            with patch.dict(mod.CORE_OPERATIONS_FILES,files,clear=True):
+                self.assertTrue(all(mod.digest(root/f)==sha for f,sha in files.items()))
+                (root/"lesson.js").write_text("CORRUPTED")
+                self.assertFalse(all(mod.digest(root/f)==sha for f,sha in files.items()))
+
+    def test_missing_green_source_does_not_accidentally_become_ready(self):
+        self.assertFalse(mod.git_exact_clean(Path("/not/a/reviewed/green/source"), mod.GREEN_SOURCE_SHA))
     def test_immutable_core_print_privacy_bytes_exact(self):
         import hashlib
         with tempfile.TemporaryDirectory() as d:
