@@ -28,7 +28,8 @@ export default function AdmissionsModule() {
  const { classNames, sectionsForClass, localities } = useAcademicStore()
  const { paperSettings } = usePaperStore()
  const safeClassNames = Array.isArray(classNames) ? classNames : []
- const safeLocalities = Array.isArray(localities) ? localities : []
+ const DEFAULT_LOCALITIES = ["Garoowal", "Tharpal Sharif", "Matteke", "Jeewan Bhinder", "Fattoke", "Nangal Machanna", "Adhukay Mahais", "Narang Chainna", "Dayyi Wala Syedan", "Sahowal", "Kulla Mandiala", "Rayya Khas", "Baddomalhi", "Narowal", "Lahore"]
+ const safeLocalities = (Array.isArray(localities) && localities.length > 0) ? localities : DEFAULT_LOCALITIES
  const safeSectionsForClass = (className) => {
  const sections = sectionsForClass(className)
  return Array.isArray(sections) ? sections : []
@@ -56,6 +57,13 @@ export default function AdmissionsModule() {
  const [policyOpen, setPolicyOpen] = useState(false)
 
  useEffect(() => {
+ if (!form.studentClass && safeClassNames.length > 0) {
+ const initClass = safeClassNames[0]
+ const initSecs = safeSectionsForClass(initClass)
+ // eslint-disable-next-line react-hooks/set-state-in-effect
+ setForm(prev => ({ ...prev, studentClass: initClass, section: prev.section || initSecs[0] || "Blue" }))
+ return
+ }
  if (!form.studentClass) return
  const rawSections = sectionsForClass(form.studentClass)
  const validSections = Array.isArray(rawSections) ? rawSections : []
@@ -63,7 +71,7 @@ export default function AdmissionsModule() {
  // eslint-disable-next-line react-hooks/set-state-in-effect
  setForm(prev => ({ ...prev, section: validSections[0] }))
  }
- }, [form.studentClass, form.section, sectionsForClass])
+ }, [form.studentClass, form.section, safeClassNames, safeSectionsForClass, sectionsForClass])
 
  useEffect(() => {
  if (!form.studentClass) return
@@ -96,8 +104,8 @@ export default function AdmissionsModule() {
  const [sendCredentials, setSendCredentials] = useState(true)
  const [generatedCredentials, setGeneratedCredentials] = useState(null)
 
- const selectedSections = safeSectionsForClass(form.studentClass)
- const safeSectionNames = selectedSections
+ const selectedSections = safeSectionsForClass(form.studentClass || safeClassNames[0] || "Starter")
+ const safeSectionNames = selectedSections.length > 0 ? selectedSections : ["Blue"]
 
  async function fetchApplications(status) {
  const s = status || appsFilter
@@ -494,7 +502,8 @@ export default function AdmissionsModule() {
  </div>
  <div>
  <label style={labelStyle}>Section</label>
- <select style={select} value={form.section} onChange={set('section')}>
+ <select style={select} value={form.section || safeSectionNames[0] || "Blue"} onChange={set('section')}>
+ <option value="">-- Select Section --</option>
  {safeSectionNames.map(v=><option key={v} value={v}>{v}</option>)}
  </select>
  </div>
