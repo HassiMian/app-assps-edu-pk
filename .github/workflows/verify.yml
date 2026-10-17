@@ -48,6 +48,9 @@ jobs:
       - name: Production safety gates
         run: npm run production:safety
 
+      - name: Result Cards selected-exam and school grade-policy adversarial contract
+        run: node --test ops/release/tests/resultcards-selected-exam-grade-policy-contract-20261017.test.cjs
+
       - name: Protected template integrity
         run: npm run verify:templates
         working-directory: al-siddique-frontend

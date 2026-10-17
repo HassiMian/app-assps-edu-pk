@@ -505,10 +505,39 @@ assertNotContains(
   'result-card all-exam printing must not fan out one HTTP request per exam.'
 )
 
+// ResultCards supports all CLASSES within ONE selected examination, not an
+// unbounded multi-exam print. Preserve the selected-exam HTTP filter, the
+// async-request revision guard and print-source isolation. The separately
+// exposed multi-exam batch route remains bounded/tenant-scoped above.
 assertContains(
   'al-siddique-frontend/src/Modules/examination/ResultCards.jsx',
-  "api.get('/api/exams/results', { params: { exam_ids: examIds.join(',') } })",
-  'result-card all-exam printing must use the tenant-scoped batch result endpoint.'
+  'api.get(`/api/exams/results/${requestExamId}`)',
+  'result-card printing must request ONLY the selected examination.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/examination/ResultCards.jsx',
+  'const activeResults = String(loadedExamId) === String(selectedExam) ? results : []',
+  'stale results from an earlier selected exam must not become printable.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/examination/ResultCards.jsx',
+  'return buildPrintCards(activeResults, exam, students)',
+  'all-classes printing must use only the current-exam guarded result rows.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/examination/ResultCards.jsx',
+  "if (latestResultRequest.current !== requestId) return",
+  'out-of-order result requests must be ignored.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/examRoutes.js',
+  "router.get('/results/:exam_id', protect, canReadResults, async (req, res) => {",
+  'selected-examination result reads require authenticated authorization.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/examRoutes.js',
+  'WHERE er.exam_id = $1',
+  'selected-examination reads must filter by the requested exam ID.'
 )
 
 assertNotContains(
@@ -942,10 +971,18 @@ assertNotContains(
 )
 
 
+// A missing school grade policy MUST NOT silently save a fabricated grade.
+// The public grade-settings preview may show defaults, but write paths must
+// request configured-only grade bands; scored rows without bands stay null.
 assertContains(
   'al-siddique-backend/src/routes/examRoutes.js',
-  'gradeBands = await loadGradeBandsForSchool(schoolId)',
-  'saved exam grades must use the school grading policy.'
+  'gradeBands = await loadGradeBandsForSchool(schoolId, { previewDefaults: false })',
+  'saved exam grades must use ONLY configured school grading bands.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/examRoutes.js',
+  "grade:parsedState.status === 'SCORED' && gradeBands.length > 0 ? gradeFromBands(marksObtained, totalMarks, gradeBands) : null",
+  'missing grading policy and nonscored result states must never fabricate a saved grade.'
 )
 
 assertNotContains(
