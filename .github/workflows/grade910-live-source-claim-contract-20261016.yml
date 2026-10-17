@@ -67,6 +67,10 @@ on:
       - "ops/qbank/build-grade910-tech137-adoption-metadata-proof-20261017.py"
       - "ops/tests/test_grade910_137_tech_school_adoption_metadata_hold_20261017.py"
       - "ops/release/install-grade910-tech137-adoption-source-postcheck-20261017.sh"
+      - "ops/qbank/build-grade910-single-authoritative-review-blocker-cluster-20261017.py"
+      - "ops/tests/test_grade910_master_1305_distinct_blocker_cluster_20261017.py"
+      - "ops/release/install-grade910-unified-1305-review-postcheck-20261017.sh"
+      - "docs/question-bank/ASSPS_GRADE910_ONE_UNIFIED_1305_REVIEW_MISSION_20261017.md"
       - "docs/question-bank/ASSPS_GRADE910_TECH137_SOURCE_ADOPTION_EVIDENCE_CLUSTER_20261017.md"
       - "ops/tests/test_grade910_grade9_islamic_ten_unapproved_exemplars_20261016.py"
       - "docs/question-bank/ASSPS_GRADE9_ISLAMIAT_TARJUMA_10_ORIGINAL_UNAPPROVED_ETHICAL_EXEMPLARS_20261016.json"
@@ -205,6 +209,10 @@ on:
       - "ops/qbank/build-grade910-tech137-adoption-metadata-proof-20261017.py"
       - "ops/tests/test_grade910_137_tech_school_adoption_metadata_hold_20261017.py"
       - "ops/release/install-grade910-tech137-adoption-source-postcheck-20261017.sh"
+      - "ops/qbank/build-grade910-single-authoritative-review-blocker-cluster-20261017.py"
+      - "ops/tests/test_grade910_master_1305_distinct_blocker_cluster_20261017.py"
+      - "ops/release/install-grade910-unified-1305-review-postcheck-20261017.sh"
+      - "docs/question-bank/ASSPS_GRADE910_ONE_UNIFIED_1305_REVIEW_MISSION_20261017.md"
       - "docs/question-bank/ASSPS_GRADE910_TECH137_SOURCE_ADOPTION_EVIDENCE_CLUSTER_20261017.md"
       - "ops/tests/test_grade910_grade9_islamic_ten_unapproved_exemplars_20261016.py"
       - "docs/question-bank/ASSPS_GRADE9_ISLAMIAT_TARJUMA_10_ORIGINAL_UNAPPROVED_ETHICAL_EXEMPLARS_20261016.json"
@@ -415,5 +423,10 @@ jobs:
           python3 -m unittest discover -s ops/tests -p test_grade910_137_tech_school_adoption_metadata_hold_20261017.py -v
           python3 -m py_compile ops/qbank/build-grade910-tech137-adoption-metadata-proof-20261017.py
           bash -n ops/release/install-grade910-tech137-adoption-source-postcheck-20261017.sh
+      - name: Enforce one 1305 unique academic review blocker ledger and prohibit false faculty approval
+        run: |
+          python3 -m unittest discover -s ops/tests -p test_grade910_master_1305_distinct_blocker_cluster_20261017.py -v
+          python3 -m py_compile ops/qbank/build-grade910-single-authoritative-review-blocker-cluster-20261017.py
+          bash -n ops/release/install-grade910-unified-1305-review-postcheck-20261017.sh
       - name: Validate offline claim auditor syntax
         run: python3 -m py_compile ops/qbank/audit-live-grade910-source-claims-20261016.py ops/qbank/reconcile-grade910-held-original-candidates-20261016.py
