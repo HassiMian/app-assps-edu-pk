@@ -1,0 +1,37 @@
+name: ASSPS School Notices Audience HOLD Gate - Source Only
+on:
+  push:
+    branches:
+      - audit/assps-notices-audience-release-hold-20261017
+    paths:
+      - 'al-siddique-backend/src/routes/noticesRoutes.js'
+      - 'al-siddique-backend/src/tests/notices-principal-issuer-tenant-isolated.test.cjs'
+      - 'ops/notices/**'
+      - 'ops/tests/notices-read-audience-source-20261017.test.cjs'
+      - '.github/workflows/assps-notices-audience-release-hold-20261017.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  notices-release-hold-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node 22 for pure source checks only
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Exercise mocked routes with ZERO school DB or credentials
+        run: node --test al-siddique-backend/src/tests/notices-principal-issuer-tenant-isolated.test.cjs
+      - name: Test that missing notice-reader policy is detected
+        run: node --test ops/tests/notices-read-audience-source-20261017.test.cjs
+      - name: Assert production HOLD is correctly emitted, NOT a release certificate
+        shell: bash
+        run: |
+          set +e
+          node ops/notices/verify-notice-audience-source-20261017.cjs
+          code=$?
+          set -e
+          test "$code" -eq 2
+          echo 'EXPECTED_HOLD_NOTICE_READ_AUDIENCE; DO_NOT_DEPLOY'
