@@ -1,0 +1,31 @@
+name: ASSPS Grade IX-X Annual-2027 source authority hold
+on:
+  push:
+    branches:
+      - audit/grade910-2027-applicability-firewall-20261017
+    paths:
+      - .github/workflows/grade910-2027-authority-firewall.yml
+      - docs/question-bank/ASSPS_GRADE910_OFFICIAL_SYLLABUS_AUTHORITY_LEDGER_20261017.json
+      - ops/qbank/grade910-2027-syllabus-evidence-firewall.cjs
+      - ops/tests/grade910-2027-syllabus-evidence-firewall-20261017.test.cjs
+      - al-siddique-frontend/src/Modules/Paper-Generator/seed-data/grade9-10-staging/syllabusPolicy.mjs
+      - al-siddique-frontend/src/Modules/Paper-Generator/seed-data/grade9-10-staging/syllabusPolicy.test.mjs
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  research-only-authority-firewall:
+    name: Confirm Annual-2027 provenance remains unpublished
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Run source-only adversarial authorization tests
+        run: |
+          node --version
+          node --test ops/tests/grade910-2027-syllabus-evidence-firewall-20261017.test.cjs
+      - name: Preserve existing ALP no-publication policy tests
+        run: |
+          node --test al-siddique-frontend/src/Modules/Paper-Generator/seed-data/grade9-10-staging/syllabusPolicy.test.mjs
