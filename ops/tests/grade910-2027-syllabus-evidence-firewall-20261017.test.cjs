@@ -82,8 +82,8 @@ poison('forged textbook adoption denied',x=>{x.records[2].schoolAdoptionAuthenti
 poison('forged PDF checksum denied',x=>{x.records[0].originalPdfByteSha256='f'.repeat(64)},/PROVENANCE_ASSERTION_REFUSED/)
 poison('forged faculty approval denied',x=>{x.facultyRevisionApprovalCount=1},/RELEASE_ASSERTION_REFUSED/)
 poison('forged publication denied',x=>{x.verifiedPublicationAllowed=true},/RELEASE_ASSERTION_REFUSED/)
-poison('original 2025/376 ID cannot be silently replaced',x=>{x.records[0].notificationId='FAKE'},/2026_YEAR_IDENTITY_REFUSED/)
-poison('Annual-2026 ALP cannot be retargeted to 2027',x=>{x.records[0].applicableAnnualExamYear=2027},/2026_YEAR_IDENTITY_REFUSED/)
+poison('original 2025/376 ID cannot be silently replaced',x=>{x.records[0].notificationId='FAKE'},/AUTHORITY_PINNED_IDENTITY_MISMATCH/)
+poison('Annual-2026 ALP cannot be retargeted to 2027',x=>{x.records[0].applicableAnnualExamYear=2027},/AUTHORITY_PINNED_IDENTITY_MISMATCH/)
 poison('duplicate authority IDs denied',x=>{x.records[1].id=x.records[0].id},/PROVENANCE_ASSERTION_REFUSED/)
 poison('source record deletion denied',x=>{x.records.pop()},/RELEASE_ASSERTION_REFUSED/)
 test('existing independently reviewed runtime ALP eligibility code not modified',()=>{
@@ -92,3 +92,53 @@ test('existing independently reviewed runtime ALP eligibility code not modified'
  assert.match(data,/s\.examYear!==examYear/)
  assert.match(data,/syllabusScope/)
 })
+
+
+// Signed source-identity metadata is held to an EXACT issuer, path, date,
+// audience, grade and exam-year identity; https alone cannot attest source.
+const mutationCases = [
+ ['official PECTAA source replaced with phishing host', 0, 'originalUrl', 'https://pectaa.edu.pk.fake.invalid/uploads/Revised%20ALP%20Notification%2007.11.2025.pdf'],
+ ['official notice replaced with drive URL', 0, 'originalUrl', 'https://drive.google.com/fake-document'],
+ ['official notice replaced with external mirror', 0, 'originalUrl', 'https://pectaa.mushtaqaisolutions.com/revised-grade9-alp.pdf'],
+ ['official notice path changed at valid host', 0, 'originalUrl', 'https://pectaa.edu.pk/uploads/Grade9Annual2027.pdf'],
+ ['official notice URL gains invalid fragment', 0, 'originalUrl', 'https://pectaa.edu.pk/uploads/Revised%20ALP%20Notification%2007.11.2025.pdf#reviewed'],
+ ['official notice URL mixed-case edit without source approval', 0, 'originalUrl', 'https://PECTAA.edu.pk/uploads/Revised%20ALP%20Notification%2007.11.2025.pdf'],
+ ['official PECTAA issuer silently replaced', 0, 'issuer', 'Fake Board Authority'],
+ ['original 2025-issued ALP date silently changed', 0, 'issuedDate', '2026-10-17'],
+ ['ALP type silently promoted to board scheme', 0, 'sourceType', 'BOARD_SYLLABUS_INDEX'],
+ ['ALP stream silently promoted to approved school', 0, 'stream', 'general'],
+ ['ALP grade silently expanded to Grade X', 0, 'grades', [9,10]],
+ ['ALP session silently assigned by claim', 0, 'academicSession', '2026-27'],
+ ['model pairing notice URL switched to PECTAA path', 1, 'originalUrl', 'https://pectaa.edu.pk/2027-pairing.pdf'],
+ ['model pairing notification ID spoofed', 1, 'notificationId', 'PECTAA/C&C Unit/2025/376'],
+ ['model pairing audience changed to regular stream', 1, 'stream', 'general'],
+ ['Tech pairing exam 2027 promoted', 1, 'applicableAnnualExamYear', 2027],
+ ['catalog 2026-27 edition silently changed to 2027-28', 2, 'academicSession', '2027-28'],
+ ['catalog URL switched to fake official subdomain', 2, 'originalUrl', 'https://pectaa.edu.pk.attacker.invalid/curriculum-compliance/'],
+ ['catalog audience silently changed to general school', 2, 'stream', 'general'],
+ ['BISE Lahore syllabus index switched to Gujranwala host', 3, 'originalUrl', 'https://www.bisegrw.online/notifications'],
+ ['Lahore scheme 2025-27 labelled annual 2027 without proof', 3, 'applicableAnnualExamYear', 2027],
+ ['NCC index spoofed to be a 2027 ALP', 4, 'sourceType', 'ALP_NOTIFICATION'],
+ ['NCC grade IX-only switch', 4, 'grades', [9]],
+ ['NCC subject scope promoted to board', 4, 'stream', 'board-2027'],
+]
+for (const [name, index, field, forgedValue] of mutationCases) {
+  poison(name, source => { source.records[index][field] = forgedValue }, /AUTHORITY_PINNED_IDENTITY_MISMATCH/)
+}
+test('renaming an authority ID is never accepted despite five remaining records', () => {
+  const copy = structuredClone(ledger)
+  copy.records[0].id = 'assps-annual2027-approved'
+  assert.throws(() => validateResearchLedger(copy), /AUTHORITY_PINNED_IDENTITY_MISMATCH/)
+})
+test('no issuer identity may be removed from five-record authority ledger', () => {
+  const copy = structuredClone(ledger)
+  copy.records[0] = structuredClone(copy.records[1])
+  assert.throws(() => validateResearchLedger(copy), /PROVENANCE_ASSERTION_REFUSED/)
+})
+
+poison('forged school session label cannot change from 2026-27',
+  x => { x.asspsSchoolSession = '2027-28' }, /RELEASE_ASSERTION_REFUSED/)
+poison('an unknown source schema revision cannot inherit signed identity',
+  x => { x.schemaVersion = 'official-certified-v2' }, /RELEASE_ASSERTION_REFUSED/)
+poison('an invented updated issuance ledger date cannot silently replace checked source',
+  x => { x.createdDate = '2027-01-01' }, /RELEASE_ASSERTION_REFUSED/)

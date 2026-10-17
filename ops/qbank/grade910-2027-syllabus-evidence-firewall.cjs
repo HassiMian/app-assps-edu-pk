@@ -4,6 +4,55 @@ const ledger = require('../../docs/question-bank/ASSPS_GRADE910_OFFICIAL_SYLLABU
 const VALID_MODES = new Set(['full', 'alp'])
 const APPROVED_TYPES = new Set(['ALP_NOTIFICATION', 'MATRIC_TECH_MODEL_AND_PAIRING',
   'TEXTBOOK_CATALOG_INDEX', 'BOARD_SYLLABUS_INDEX', 'LEARNING_OUTCOMES_INDEX'])
+// Reviewed *metadata identities*, NOT PDF-byte authenticity or school adoption.
+// Changes to an issuing authority URL, notice, year, session, stream or grade
+// require a separate explicit revision to this code and independent source review.
+// In particular, an HTTPS URL hosted on an unverified external mirror is not proof.
+const SOURCE_IDENTITY_PINS = Object.freeze({
+  'pectaa-revised-grade9-alp-annual2026': Object.freeze({
+    issuer: 'Punjab Education Curriculum Training and Assessment Authority (PECTAA)',
+    sourceType: 'ALP_NOTIFICATION',
+    notificationId: 'PECTAA/C&C Unit/2025/376',
+    issuedDate: '2025-11-07',
+    grades: [9], stream: 'NOT_AUTHENTICATED_FOR_ASSPS',
+    applicableAnnualExamYear: 2026, academicSession: null,
+    originalUrl: 'https://pectaa.edu.pk/uploads/Revised%20ALP%20Notification%2007.11.2025.pdf'
+  }),
+  'pectaa-grade9-tech-model-annual2026': Object.freeze({
+    issuer: 'PECTAA, hosted on BISE Lahore',
+    sourceType: 'MATRIC_TECH_MODEL_AND_PAIRING',
+    notificationId: 'PECTAA/C&C Unit/2025/326',
+    issuedDate: '2025-10-24',
+    grades: [9], stream: 'matric-tech',
+    applicableAnnualExamYear: 2026, academicSession: null,
+    originalUrl: 'https://www.biselahore.com/downloads/notifications/misc/PS%26MP_MatricTech.pdf'
+  }),
+  'pectaa-2026-27-books-index': Object.freeze({
+    issuer: 'PECTAA', sourceType: 'TEXTBOOK_CATALOG_INDEX',
+    notificationId: null, issuedDate: null, grades: [9, 10],
+    stream: 'MULTIPLE_UNVERIFIED', applicableAnnualExamYear: null,
+    academicSession: '2026-27',
+    originalUrl: 'https://pectaa.edu.pk/curriculum-compliance/'
+  }),
+  'bise-lahore-2025-27-ssc-index': Object.freeze({
+    issuer: 'BISE Lahore', sourceType: 'BOARD_SYLLABUS_INDEX',
+    notificationId: null, issuedDate: null, grades: [9, 10],
+    stream: 'NOT_AUTHENTICATED_FOR_ASSPS', applicableAnnualExamYear: null,
+    academicSession: '2025-27',
+    originalUrl: 'https://www.biselahore.com/notifications'
+  }),
+  'ncc-national-learning-outcomes-index': Object.freeze({
+    issuer: 'National Curriculum Council, Pakistan',
+    sourceType: 'LEARNING_OUTCOMES_INDEX',
+    notificationId: null, issuedDate: null, grades: [9, 10],
+    stream: 'NOT_EXAM_SPECIFIC', applicableAnnualExamYear: null,
+    academicSession: null, originalUrl: 'https://ncc.gov.pk/GoPInitiative'
+  })
+})
+const BOUND_SOURCE_FIELDS = Object.freeze([
+  'issuer', 'sourceType', 'notificationId', 'issuedDate', 'grades',
+  'stream', 'applicableAnnualExamYear', 'academicSession', 'originalUrl'
+])
 const freezeDeep = value => {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
     Object.values(value).forEach(freezeDeep)
@@ -14,7 +63,9 @@ const freezeDeep = value => {
 freezeDeep(ledger)
 
 function validateResearchLedger (source = ledger) {
-  if (!source || !Array.isArray(source.records) || source.records.length !== 5 ||
+  if (!source || source.schemaVersion !== 'grade910-official-authority-research-v1' ||
+      source.asspsSchoolSession !== '2026-27' || source.createdDate !== '2026-10-17' ||
+      !Array.isArray(source.records) || source.records.length !== 5 ||
       source.verifiedPublicationAllowed !== false ||
       source.asspsBoardAffiliationAuthenticated !== false ||
       source.schoolTextbookAdoptionAuthenticated !== false ||
@@ -29,6 +80,11 @@ function validateResearchLedger (source = ledger) {
         record.originalPdfByteSha256 !== null || record.originalPdfBytesVerified !== false ||
         record.schoolAdoptionAuthenticated !== false) {
       throw new Error('GRADE910_RESEARCH_LEDGER_PROVENANCE_ASSERTION_REFUSED')
+    }
+    const pin = SOURCE_IDENTITY_PINS[record.id]
+    if (!Object.prototype.hasOwnProperty.call(SOURCE_IDENTITY_PINS, record.id) ||
+        !BOUND_SOURCE_FIELDS.every(field => JSON.stringify(record[field]) === JSON.stringify(pin[field]))) {
+      throw new Error('GRADE910_AUTHORITY_PINNED_IDENTITY_MISMATCH')
     }
     ids.add(record.id)
   }
