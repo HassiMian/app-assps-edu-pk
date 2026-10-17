@@ -1,0 +1,11 @@
+# ASSPS unified mission: official school notices authentication review (17 October 2026)
+
+Status: **SOURCE CANDIDATE ONLY / DO NOT DEPLOY**. Parent is clean unified master Core/Paper/Results commit 742e277a00cddadae9e82251e8147863c989dadd. No school DB migration, data mutation, new parent notifications, PM2/Nginx restart, live release, or role provisioning.
+
+Observed code safety bug: official notice POST/PUT/DELETE accepted generic teacher role. User-supplied issued_by allowed a client to claim an unrelated authority. This isolated candidate restricts official notice issue/change/delete to principal/admin/school_admin/super_admin and derives issuer from signed session actor on create. Existing issuer column is preserved on edits; existing school_id WHERE predicates remain unchanged.
+
+Standalone mocked Express + DB route tests: 12/12 pass. Tests cover teacher write denials, missing auth, missing school, spoofed issuer and forged header/body school IDs, principal scope, school-qualified edit/delete, service read scope. These are SYNTHETIC, not real School2 or independent production worker RLS witnesses.
+
+**IMPORTANT UNRESOLVED READ-AUDIENCE ISSUE:** Current GET route still returns all notices belonging to a school to an authenticated teacher, without checking recipient_type or teacher_ids. Accordingly this branch is NOT ready for promotion. Teacher/student/management audience-level disclosure needs an explicit verified schema, identity mapping and authorization contract, plus negative tests using independently signed actor identities. The attempted additional code change was blocked by a connected tool safety check; no claim it was implemented. Do NOT weaken the server auth gate or grant teacher identities from unreviewed timetable links.
+
+Standalone NotificationModule is not an end-to-end verified notices authoring+delivery UI. Actual Principal Notice create/preview/approve/issue/print/archive, teacher-specific read rules and Diary-style Lesson Planner live Save/Reopen/Print acceptance remain separate gated work. Preserve all saved First Term scores (1801 total, 213 true zero) and previous 38 authenticated Principal Urdu marks. Last independent signed production release 6/13 HOLD. SaaS Core alone can review code and release after real policy tests, teacher identity review, offhost backup+restore and rollback approval.
