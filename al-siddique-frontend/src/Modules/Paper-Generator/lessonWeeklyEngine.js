@@ -32,7 +32,7 @@ export const sourceLines=c=>(c?.source_detail_records||[]).flatMap(r=>
   text:clean(x),sourceId:r.source_id
  })))).filter(x=>x.text)
 const page=s=>{
- const m=clean(s).match(/(?:page|pg|صفحہ(?:\s*نمبر)?|صفحات)\s*#?\s*:?\s*(\d{1,3})(?:\s*(?:to|تا|سے|-)\s*(\d{1,3}))?/iu)
+ const m=clean(s).match(/(?:pages?|pgs?|صفحہ(?:\s*نمبر)?|صفحات)\s*#?\s*:?\s*(\d{1,3})(?:\s*(?:to|تا|سے|[-:])\s*(\d{1,3}))?/iu)
  if(!m)return null
  const from=Number(m[1]),to=Number(m[2]||m[1])
  return from>=1&&from<=to&&to<=500?{from,to}:null
@@ -116,10 +116,11 @@ function originalImageWeekReview(c,review){
    (row.week===17&&/\bTEST\b/i.test(sourceText))
   const assessment=testWeek?{date:row.end,label:'Source test week',origin:'PROPOSED_DATE_WITHIN_IMAGE_TEST_WEEK'}:null
   return [{start:row.start,end:row.end,
-   source:'IMAGE_VISUAL_TRANSCRIPTION_NOT_APPROVED',
+   source:testWeek&&!pageref?'ORIGINAL_ASSESSMENT_ONLY':'IMAGE_VISUAL_TRANSCRIPTION_NOT_APPROVED',
    sourceRange:'Image W'+row.week,
    sourceIds:c.source_submissions||[],page:pageref,
    statement:shortDiary(sub,pageref,pageref?null:sourceText),
+   teacherText:sourceText,
    reviewRequired:true,assessment}]
  })
  return {mode:'IMAGE_TRANSCRIPTION_REVIEW',weeks,sourceDerived:false,

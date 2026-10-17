@@ -1,6 +1,7 @@
 // Unified Term coverage is derived from the same evidence-first weekly engine.
 // Proposed allocations are never promoted to verified textbook/source claims.
 import {compileWeeklyPlan} from './lessonWeeklyEngine.js'
+import {composeTeachingStatement,proposeTwiceMonthlyAssessments} from './professionalLessonCopy.js'
 import {createEmptyLessonPlanDocument,toLessonPlanPersistencePayload,
   normalizeLessonPlanDocument} from './lessonPlanDomain.js'
 
@@ -35,6 +36,7 @@ export function buildTermOverview(candidates,{start,end,imageReview,edits={},ter
         detail:override.detail===undefined?'':String(override.detail),
         pageFrom:override.pageFrom===undefined?'':String(override.pageFrom),
         pageTo:override.pageTo===undefined?'':String(override.pageTo),
+        sourcePageFrom:'',sourcePageTo:'',
         sourceStatus:'UNSOURCED TERM — TEACHER PROPOSAL',
         originalSourceIds:[],needsReview:true,
         warnings:['Original school source archive is Second Term only. Verify this term independently.'],
@@ -44,10 +46,14 @@ export function buildTermOverview(candidates,{start,end,imageReview,edits={},ter
     const compiled=compileWeeklyPlan(candidate,{start,end,imageReview})
     const matched=(compiled.weeks||[]).filter(x=>inTerm(x,start,end))
     const teaching=matched.filter(x=>x.source!=='ORIGINAL_ASSESSMENT_ONLY')
-    const notes=[...new Set(teaching.map(x=>sourceText(x.statement)).filter(Boolean))]
+    const notes=[...new Set(teaching.map(x=>sourceText(x.teacherText||x.statement)).filter(Boolean))]
     const actualPages=teaching.map(x=>x.page).filter(p=>p&&validPage(p.from)&&validPage(p.to))
-    const defaultFrom=actualPages.length?String(Math.min(...actualPages.map(p=>Number(p.from)))):''
-    const defaultTo=actualPages.length?String(Math.max(...actualPages.map(p=>Number(p.to)))):''
+    // Derive one concise original-language statement for the whole term.
+    // Keep unmodified teacher notes for review; pages/units are source-backed only.
+    const authored=composeTeachingStatement({subject:candidate.source_subject_label,
+      notes,pages:actualPages,scope:'term'})
+    const defaultFrom=authored.pageFrom
+    const defaultTo=authored.pageTo
     const events=matched.flatMap(x=>x.assessment?[{
       date:x.assessment.date||'',name:x.assessment.label||'Assessment',
       subject:candidate.source_subject_label,origin:x.assessment.origin||'PROPOSED',
@@ -56,25 +62,38 @@ export function buildTermOverview(candidates,{start,end,imageReview,edits={},ter
     const override=edits[id]||{}
     return {
       id,subject:candidate.source_subject_label,
-      detail:override.detail===undefined?notes.join(' ; '):String(override.detail),
-      pageFrom:override.pageFrom===undefined?defaultFrom:String(override.pageFrom),
-      pageTo:override.pageTo===undefined?defaultTo:String(override.pageTo),
+      detail:override.detail===undefined?authored.statement:String(override.detail),
+       originalTeacherNotes:notes,sourceUnits:authored.units,
+       needsLanguageReview:authored.needsLanguageReview,
+      // Source-derived page bounds are immutable; keep legacy edits for audit.
+      pageFrom:defaultFrom||(override.pageFrom===undefined?'':String(override.pageFrom)),
+      pageTo:defaultTo||(override.pageTo===undefined?'':String(override.pageTo)),
+      sourcePageFrom:defaultFrom,sourcePageTo:defaultTo,
       sourceStatus:compiled.mode==='PROPOSED'?'PROPOSED ALLOCATION':
         compiled.mode==='IMAGE_TRANSCRIPTION_REVIEW'?'IMAGE TRANSCRIPTION / REVIEW':
         compiled.mode==='IMAGE_REVIEW_REQUIRED'?'IMAGE REVIEW REQUIRED':'SOURCE DATED / REVIEW',
       originalSourceIds:candidate.source_submissions||[],
       needsReview:true,
-      warnings:compiled.warnings||[],
+      warnings:[...(compiled.warnings||[]),
+        ...(defaultFrom&&override.pageFrom!==undefined&&String(override.pageFrom)!==defaultFrom?
+          ['An older manual page start differs from the original; original restored in preview.']:[]),
+        ...(defaultTo&&override.pageTo!==undefined&&String(override.pageTo)!==defaultTo?
+          ['An older manual page end differs from the original; original restored in preview.']:[]),
+        ...(authored.needsLanguageReview?['Original Urdu wording needs teacher verification.']:[])],
       events
     }
   })
 }
-export function termAssessmentRows(rows,manual=[]){
+export function termAssessmentRows(rows,manual=[],calendar={}){
+  // Week/Term/Day must share ONE effective assessment ledger.
+  // Original assessment dates remain immutable in row.events; UI amendments
+  // are clearly proposals, and dates outside the selected term are held for review.
   const seen=new Set(),source=[]
   for(const row of rows||[])for(const a of row.events||[]){
     const key=[row.id,a.date,a.sourceId,a.origin].join('|')
     if(!a.date||seen.has(key))continue
     seen.add(key)
+    if(calendar.start&&calendar.end&&(a.date<calendar.start||a.date>calendar.end))continue
     source.push({id:'src:'+key,date:a.date,subject:a.subject||row.subject,
       name:a.name||'Assessment',origin:a.origin,originalDate:a.originalDate||a.date,
       sourceId:a.sourceId||''})
@@ -83,12 +102,25 @@ export function termAssessmentRows(rows,manual=[]){
   const extras=(Array.isArray(manual)?manual:[]).filter(a=>a&&a.id)
     .map(a=>({...a,date:String(a.date||''),name:String(a.name||'Assessment'),
       subject:String(a.subject||''),origin:a.origin||'MANUAL_PROPOSAL'}))
-  const combined=[...source.map(s=>extras.find(a=>a.id===s.id)||s),
-    ...extras.filter(a=>!String(a.id).startsWith('src:'))]
-  while(combined.length<2)
-    combined.push({id:'blank-'+combined.length,date:'',name:'Assessment',
-      subject:'',origin:'EMPTY_PROPOSAL'})
-  return combined.map((a,index)=>({...a,number:index+1}))
+  const overridden=source.map(s=>extras.find(a=>a.id===s.id)||s)
+  const explicit=[...overridden,...extras.filter(a=>!String(a.id).startsWith('src:'))]
+  const proposals=calendar.weeks&&calendar.start&&calendar.end?
+    proposeTwiceMonthlyAssessments({weeks:calendar.weeks,start:calendar.start,
+      end:calendar.end,existing:explicit}):[]
+  // Multiple subject assessments on the same date form one calendar event,
+  // without deleting their original per-subject source evidence.
+  const byDate=new Map()
+  for(const item of [...explicit,...proposals]){
+    if(!item.date)continue
+    const found=byDate.get(item.date)
+    if(found){
+      const subjects=[...new Set([...(found.sourceSubjects||[found.subject]),item.subject].filter(Boolean))]
+      byDate.set(item.date,{...found,subject:subjects.join(', '),sourceSubjects:subjects})
+    }else byDate.set(item.date,{...item})
+  }
+  const dated=[...byDate.values()].sort((a,b)=>a.date.localeCompare(b.date))
+  const blanks=explicit.filter(a=>!a.date)
+  return [...dated,...blanks].map((a,index)=>({...a,number:index+1}))
 }
 export function validateTermContent({klass,start,end,rows,assessments}){
   assertTermRange(start,end)

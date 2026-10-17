@@ -33,6 +33,7 @@ import api, { resolveAssetUrl } from '../../services/api'
 import { useAcademicStore } from '../../services/useAcademicStore'
 import { getTenantStorageItem, setTenantStorageItem } from '../../services/tenantStorage'
 import { usePaperStore } from './usePaperStore'
+import { useTenantBranding } from '../../context/TenantBrandingContext'
 import {
   createLessonPlan,
   generateLessonPlanDraft,
@@ -322,6 +323,7 @@ function StudentCard({
 export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLessonPlanId = '', initialContext = null }) {
   const { activeClasses, subjectsForClass, sectionsForClass } = useAcademicStore()
   const { paperSettings } = usePaperStore()
+  const branding = useTenantBranding()
 
   const [initialDraft] = useState(() => {
     try {
@@ -393,8 +395,8 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   const subjectOptions = useMemo(() => subjectsForClass(classLevel || selectedClass?.level || '') || [], [subjectsForClass, classLevel, selectedClass?.level])
   const sectionOptions = useMemo(() => selectedClass ? sectionsForClass(selectedClass.name) : [], [selectedClass, sectionsForClass])
   const palette = PALETTES.find(item => item.id === paletteId) || PALETTES[0]
-  const schoolName = safeSchoolName(paperSettings?.schoolName)
-  const logoUrl = paperSettings?.logo || ''
+  const schoolName = safeSchoolName(branding?.schoolName || paperSettings?.schoolName)
+  const logoUrl = branding?.logoUrl || paperSettings?.logo || '/school-logo.svg'
   const previewRows = useMemo(() => mode === 'lesson' ? deriveDiaryRowsFromLessonPlan(lessonDoc, date).map(row => ({ ...row, fontSize: row.fontSize || globalDiaryFontSize || (row.isUrdu ? 13 : 12), isBold: false, textAlign: row.isUrdu ? 'right' : 'left', subjectFontSize: row.subjectFontSize || globalSubjectFontSize || 0, subjectBold: row.subjectBold ?? globalSubjectBold })) : rows, [mode, lessonDoc, date, rows, globalDiaryFontSize, globalSubjectFontSize, globalSubjectBold])
   const filteredStudents = useMemo(() => students.filter(student => { const hay = `${studentName(student)} ${studentRoll(student)}`.toLowerCase(); return !search || hay.includes(search.toLowerCase()) }), [students, search])
   const selectedStudents = useMemo(() => students.filter(student => selectedStudentIds.includes(studentId(student))), [students, selectedStudentIds])

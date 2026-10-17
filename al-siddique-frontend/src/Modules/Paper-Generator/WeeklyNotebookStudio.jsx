@@ -1,4 +1,5 @@
 import {useEffect,useMemo,useState} from 'react'
+import {useTenantBranding} from '../../context/TenantBrandingContext'
 import { changeSubjectTypography, normalizeSubjectTypography } from './plannerSubjectTypography.js'
 import {BookOpen,CalendarDays,FileInput,Printer,Save,Download} from 'lucide-react'
 import api from '../../services/api'
@@ -48,6 +49,7 @@ const chunk=(arr,n)=>Array.from({length:Math.ceil(arr.length/n)},(_,i)=>arr.slic
 const PAGE_OPTIONS=[1,2,3,4,6,8]
 const defaultDesign={cardsPerPage:3,fontSize:10,headerSize:13,schoolNameSize:17,subjectNameSize:14,subjectNameBold:true,
  subjectWidth:25,assessmentWidth:55,rowHeight:22,fontFamily:'Times New Roman',
+ studentNameSize:13,tableLineHeight:1.45,assessmentFontSize:11,pagePaddingMm:6,termTemplate:'ivory',
  urduFontFamily:'Jameel Noori Nastaleeq',palette:'navy',zoom:72}
 const dateLabel=s=>{if(!s)return '';const d=new Date(s+'T12:00:00Z');return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric',timeZone:'UTC'})}
 const originalPageWarning=(rows,count)=>rows.some(x=>x.task.length>105)&&count>3
@@ -61,9 +63,11 @@ function MixedDirection({text}){
  return String(text||'').split(/(\d+(?:[–-]\d+)?)/).map((piece,i)=>
    /^\d/.test(piece)?<bdi dir="ltr" className="wn-number" key={i}>{piece}</bdi>:<span key={i}>{piece}</span>)
 }
-function Card({student,rows,klass,section,teacher,week,design,cardIndex,viewMode,dailyDate}){
- const allAssessments=rows.flatMap(r=>(r.assessments||[]).map(a=>({...a,subject:r.subject})))
-  .filter((a,i,list)=>list.findIndex(b=>a.date===b.date&&a.subject===b.subject&&a.origin===b.origin)===i)
+function Card({student,rows,klass,section,teacher,week,design,cardIndex,viewMode,dailyDate,logoSrc,schoolAssessments=[]}){
+ const sourceAssessments=rows.flatMap(r=>(r.assessments||[]).map(a=>({...a,subject:r.subject})))
+ const allAssessments=[...sourceAssessments,...schoolAssessments]
+  .filter((a,i,list)=>a.date&&list.findIndex(b=>a.date===b.date)===i)
+  .sort((a,b)=>a.date.localeCompare(b.date))
  const identity=student?studentName(student):'Student Name: ______________________'
  const roll=student?studentRoll(student):'________'
  return <article className="wn-card" data-lesson-student-card
@@ -73,11 +77,14 @@ function Card({student,rows,klass,section,teacher,week,design,cardIndex,viewMode
      '--wn-subject-name-weight':normalizeSubjectTypography(design).subjectNameBold ? 750 : 450,
      '--wn-urdu-font':design.urduFontFamily,
      '--wn-font':design.fontSize+'px','--wn-text-family':design.fontFamily,
+     '--wn-student-size':(design.studentNameSize||13)+'px',
+     '--wn-line-height':design.tableLineHeight||1.45,
+     '--wn-assessment-font':(design.assessmentFontSize||11)+'px',
      '--wn-subject-width':design.subjectWidth+'%',
      '--wn-assessment-width':design.assessmentWidth+'%',
      '--wn-row-min':design.rowHeight+'px'}}>
    <header className="wn-card-head">
-     <img src="/school-logo.svg" alt="ASSPS school crest"/>
+     <img src={logoSrc} alt="ASSPS school crest"/>
      <div><b>{TITLE}</b><small>{viewMode==='daily'?'DAILY LEARNING NOTE':'WEEKLY LEARNING PLAN'} · Al Ilmul Ikhlaq</small></div>
      <div className="wn-card-week">{viewMode==='daily'?'Daily': 'Week '+week.index}
         <small>{viewMode==='daily'?dateLabel(dailyDate):dateLabel(week.start)+' – '+dateLabel(week.end)}</small></div>
@@ -104,17 +111,20 @@ function Card({student,rows,klass,section,teacher,week,design,cardIndex,viewMode
    </table>
    <table className="wn-assessment-table" aria-label="Weekly assessments">
      <thead><tr><th>ASSESSMENT</th><th>DATE</th></tr></thead>
-     <tbody>{(allAssessments.length?allAssessments:[{date:'',origin:'EMPTY_PROPOSAL'}]).map((a,i)=>
+     <tbody>{allAssessments.length?allAssessments.map((a,i)=>
        <tr key={a.subject+'-'+a.date+'-'+i}><th>Assessment {i+1}
          {a.subject&&<small>{a.subject}</small>}</th>
-         <td><bdi dir="ltr">{a.date?dateLabel(a.date):'____________'}</bdi>
-           {a.date&&a.origin!=='ORIGINAL_SOURCE'&&<small>Proposed</small>}</td></tr>)}</tbody>
+         <td><bdi dir="ltr">{dateLabel(a.date)}</bdi>
+           {a.origin!=='ORIGINAL_SOURCE'&&<small>Proposed</small>}</td></tr>):
+         <tr><th colSpan={2}>No assessment scheduled for this week</th></tr>}</tbody>
    </table>
    <footer><span>Al Ilmul Ikhlaq · Sharif Chowk, Rayya Khas, Narowal</span><span>{cardIndex+1}</span></footer>
  </article>
 }
 
 export default function WeeklyNotebookStudio(){
+ const branding=useTenantBranding()
+ const logoSrc=branding?.logoUrl||'/school-logo.svg'
  const [storageKey]=useState(()=>actorKey())
  const [manifest,setManifest]=useState(null)
  const [ready,setReady]=useState(false)
@@ -198,8 +208,8 @@ export default function WeeklyNotebookStudio(){
      start,end,term:termName,imageReview:manifest?.class_one_image_review,edits:termEdits
    })}catch{return []}
  },[candidates,start,end,termName,manifest,termEdits])
- const termAssessments=useMemo(()=>termAssessmentRows(termRows,termManualAssessments),
-   [termRows,termManualAssessments])
+ const termAssessments=useMemo(()=>termAssessmentRows(termRows,termManualAssessments,
+   {weeks,start,end}),[termRows,termManualAssessments,weeks,start,end])
  const teacher=CLASS_INCHARGES[klass]?.join(' & ')||'Class in-charge to be verified'
  const activeRoster=rosterScope===klass+'|'+section?students:[]
  const selectedStudents=activeRoster.filter(st=>chosenStudents===null||chosenStudents.includes(studentId(st)))
@@ -483,12 +493,25 @@ export default function WeeklyNotebookStudio(){
    }}))
  }
  function changeTermRow(id,values){
+   const original=termRows.find(row=>row.id===id)
+   for(const field of ['pageFrom','pageTo']){
+     const bound=field==='pageFrom'?'sourcePageFrom':'sourcePageTo'
+     if(Object.hasOwn(values,field)&&original?.[bound]&&
+       String(values[field])!==String(original[bound])){
+       setTermStatus('Original source page bounds are locked; change only teaching statements and print formatting.')
+       return
+     }
+   }
    updateTermDraft(d=>({edits:{...(d.edits||{}),
      [id]:{...(d.edits?.[id]||{}),...values}}}))
  }
  function changeTermAssessment(id,date){
    const current=termAssessments.find(a=>a.id===id)
    if(!current)return
+   if(current.origin==='ORIGINAL_SOURCE'){
+     setTermStatus('Verified source assessment dates are locked. Add a separate proposal if needed.')
+     return
+   }
    const amended={...current,date,
      origin:date===current.originalDate&&current.origin==='ORIGINAL_SOURCE'?
        'ORIGINAL_SOURCE':'MANUAL_PROPOSAL'}
@@ -554,6 +577,9 @@ export default function WeeklyNotebookStudio(){
    setError('')
  }
  function printTerm(){
+   if(activeRoster.length&&!selectedStudents.length){
+     setError('Select at least one student for personalized term printing.');return
+   }
    try{validateTermContent({klass,start,end,rows:termRows,assessments:termAssessments})}
    catch(ex){setError(ex.message);return}
    const copy=document.getElementById('wn-term-print')
@@ -564,8 +590,9 @@ export default function WeeklyNotebookStudio(){
      .map(node=>'<link rel="stylesheet" href="'+node.href+'">').join('')
    popup.document.open()
    popup.document.write('<!doctype html><html><head><meta charset="utf-8"><title>ASSPS Term Syllabus</title>'+
-     styleLinks+'<style>@page{size:A4;margin:10mm}body{background:white;margin:0}'+
-     '.term-print-document{box-shadow:none;width:auto;min-height:0;padding:0}'+
+     styleLinks+'<style>@page{size:A4;margin:6mm}body{background:white;margin:0}'+
+     '.term-print-document{box-shadow:none;width:auto;min-height:0;padding:0;transform:none!important;filter:none!important}'+
+     '.term-print-document:not(:last-child){break-after:page;page-break-after:always}'+
      '.term-print-document thead{display:table-header-group}'+
      '.term-print-document tr{break-inside:avoid;page-break-inside:avoid}'+
      '</style></head><body>'+copy.outerHTML+'</body></html>')
@@ -620,6 +647,9 @@ export default function WeeklyNotebookStudio(){
       <small>Daily statements are editable weekly-derived proposals until teacher confirmation.</small>
    </label>}
    {viewMode==='term'&&<TermPlannerEditor
+     logoSrc={logoSrc} schoolName={branding?.schoolName||'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL'}
+     studentPages={printableStudents} studentChoices={activeRoster}
+     studentSelection={chosenStudents} onStudentSelection={setChosenStudents}
      klass={klass} section={section} term={termName} start={start} end={end} setTerm={next=>{setTermName(next);setCurrentTermServerId(null)}}
      rows={termRows} onChangeRow={changeTermRow}
      assessments={termAssessments} onChangeAssessment={changeTermAssessment}
@@ -739,6 +769,12 @@ export default function WeeklyNotebookStudio(){
          value={design.headerSize} onChange={e=>patchDesign('headerSize',Number(e.target.value))}/></label>
        <label>School name/header <b>{design.schoolNameSize}px</b><input type="range" min="12" max="30"
          value={design.schoolNameSize} onChange={e=>patchDesign('schoolNameSize',Number(e.target.value))}/></label>
+       <label>Student name <b>{design.studentNameSize||13}px</b><input type="range" min="10" max="23"
+         value={design.studentNameSize||13} onChange={e=>patchDesign('studentNameSize',Number(e.target.value))}/></label>
+       <label>Assessment font <b>{design.assessmentFontSize||11}px</b><input type="range" min="9" max="19"
+         value={design.assessmentFontSize||11} onChange={e=>patchDesign('assessmentFontSize',Number(e.target.value))}/></label>
+       <label>Teaching line spacing <b>{design.tableLineHeight||1.45}</b><input type="range" min="1.2" max="2" step=".05"
+         value={design.tableLineHeight||1.45} onChange={e=>patchDesign('tableLineHeight',Number(e.target.value))}/></label>
        <label>English font<select value={design.fontFamily} onChange={e=>patchDesign('fontFamily',e.target.value)}>
          <option>Times New Roman</option><option>Arial</option><option>Georgia</option><option>Inter</option>
        </select></label>
@@ -815,10 +851,13 @@ export default function WeeklyNotebookStudio(){
       <div className="wn-page-scroll">
        <div id="wn-print-pages" className="wn-print-pages" data-wn-pages>
         {pages.map((people,i)=><section className={'wn-paper wn-'+design.palette+(design.cardsPerPage>=3?' wn-dense':'')} key={i}
-          style={{'--wn-count':design.cardsPerPage,'--wn-grid-cols':design.cardsPerPage>=4?2:1,
+          style={{'--wn-count':design.cardsPerPage,'--wn-page-padding':(design.pagePaddingMm||6)+'mm',
+            '--wn-grid-cols':design.cardsPerPage>=4?2:1,
             '--wn-grid-rows':design.cardsPerPage>=4?Math.ceil(design.cardsPerPage/2):design.cardsPerPage,
             '--wn-zoom':design.zoom/100}}>
           {people.map((st,j)=><Card key={st?studentId(st):'generic-'+i+'-'+j}
+            logoSrc={logoSrc}
+            schoolAssessments={viewMode==='weekly'?termAssessments.filter(a=>activeWeek&&a.date>=activeWeek.start&&a.date<=activeWeek.end):[]}
             student={st} rows={activeRows} klass={klass} section={section} teacher={teacher}
             week={activeWeek||{index:0,start:'',end:''}} design={design}
             cardIndex={i*design.cardsPerPage+j} viewMode={viewMode} dailyDate={effectiveDailyDate}/>)}
