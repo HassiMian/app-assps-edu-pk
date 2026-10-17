@@ -20,7 +20,16 @@
 
 - Source-only `.github/workflows/paper-lesson-ab-regression-20261017.yml` forward-ported to current ebf lineage, updated to run against this audit branch and the newest actual legacy clone native unit via Node22; `contents:read`, no secrets, database/passwords, deployment authority, production browser or printer. The private-manifest Chromium tests run only on protected VPS fixture and are NOT hosted CI steps.
 - Workflow also checks all six protected templates and exact 43-paper corpus count. Local YAML parse/least privilege/CI steps verified; independently hosted GitHub Actions status must be observed, never fabricated.
-- Historical Core owner evidence includes successful Diary15 and canonical print regressions on unchanged Paper Editor and Diary sources; independently rerun before claiming newest branch full acceptance. A prior independent 165s 43-paper browser run timed out after 14 individual passes; new full bounded run initiated on exact latest ebf lineage, final verdict must cite its exit code rather than assume PASS.
+- **NEW completed exact-source 43/43 Chromium acceptance:** Original `canonicalAll43RenderPrintAcceptance.test.js` executed against this current `ebf13f4` app source with a 720-second hard timeout. Every individual official First Term paper `PHASE14 1/43` through `43/43` reported PASS, encompassing Urdu RTL and English/Math/Science/Islamiyat/Computer papers. Node TAP **1/1 suite PASS, process exit code 0**, zero skips or failures, duration `466754.619511` ms. Root-only mode-protected log `/root/assps-release-evidence/paper-studio-legacy-ebf-20261017/canonical43-full.log`, SHA256 `d03b2b714a67785237bbe1ca15747cc17a47bb6f5a662a0c10af9216374a1880`. This **supersedes** a preserved earlier 165-second partial 14/43 watchdog RC124; it is still a localhost Chromium screen/print test and NOT genuine Ricoh hardware hardcopy or Core signed production cutover.
+
+## Independently executed final companion tests
+
+- Canonical Paper semantic parity / DOCX model / editor invariants / printed marks ledger parity: **15/15 PASS RC0**, SHA256 `4cab1fa61e165181ba5714a420038c41413e7762deb89e3a81871b9bc01379c1`.
+- Actual local isolated Express HTTP synthetic same-school assigned/revoked/unassigned teacher vs peer school/student-safe question projection/staff-only answer privacy: **14/14 PASS RC0**, SHA256 `f9cc066f68eee9a7778b01155fae94395b3cf749bae243ab5d598f566b0429da`.
+- Backend canonical 43 DOCX projections with mathematics/immutable diagram ZIP packaging: **8/8 PASS RC0**, SHA256 `17426dbbcc0d4b3d40f5d14c53a45453f5ca3357743cc300e4652215a6b44fa9`.
+- Pinned backend/frontend `package-lock.json` digests exactly matched previously reviewed installed dependencies. Only isolated test-worktree symlinks were used and both were removed after testing; neither shared target nor published app source was mutated.
+- Public API after previously identified 502 incident: **five** consecutive sampled HTTP `health200/login200/anonymous auth-me401`; existing public stable Next Build ID `ONDwxEIZlx5onDIKY7wYf`, green PM2 process historic 30,947 restarts did not increase during this verification. Short samples do not prove sustained SLA or official Core signoff.
+- GitHub source-only CI pushed; combined commit statuses and associated PR workflow runs returned empty. Hosted Actions remain **UNVERIFIED**.
 
 ## Phase 4 — Live read-only readiness and operational caveats
 
