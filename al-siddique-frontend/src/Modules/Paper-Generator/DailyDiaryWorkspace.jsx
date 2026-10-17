@@ -1026,16 +1026,16 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
             className={activeTab === 'editor' ? 'dd-nav-pill active' : 'dd-nav-pill'}
             onClick={() => setActiveTab('editor')}
           >
-            <Edit size={14} /> Diary Editor
+            <Edit size={14} /> {mode === 'lesson' ? 'Lesson Plan Editor' : 'Diary Editor'}
           </button>
-          <button
+          {mode === 'diary' && <button
             type="button"
             className={activeTab === 'library' ? 'dd-nav-pill active' : 'dd-nav-pill'}
             onClick={() => setActiveTab('library')}
           >
             <Layers size={14} /> Saved Diaries Library
             {savedDiariesList.length > 0 && <span className="dd-badge-count">{libraryPagination.total || savedDiariesList.length}</span>}
-          </button>
+          </button>}
           <button
             type="button"
             className={activeTab === 'preview' ? 'dd-nav-pill active' : 'dd-nav-pill'}
@@ -1090,7 +1090,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
       )}
 
       {/* Mode Bar */}
-      <div className="dd-modebar no-print">
+      {initialMode !== 'lesson' && <div className="dd-modebar no-print">
         <button
           type="button"
           className={mode === 'diary' ? 'active' : ''}
@@ -1113,7 +1113,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
             <button type="button" onClick={() => { setActiveSavedDiaryId(null); setStatus('Detached record ID. Next save will create a new entry.') }} title="Save as new entry instead">New Draft</button>
           </div>
         )}
-      </div>
+      </div>}
 
       {/* VIEW 1: SAVED DIARIES LIBRARY (Checkpoint 2) */}
       {activeTab === 'library' && (
