@@ -51,6 +51,9 @@ jobs:
       - name: Result Cards selected-exam and school grade-policy adversarial contract
         run: node --test ops/release/tests/resultcards-selected-exam-grade-policy-contract-20261017.test.cjs
 
+      - name: Result Cards strict scoped adversarial coverage (17 additional cases)
+        run: node --test ops/tests/resultcards-grading-scope-contract-20261017.test.cjs
+
       - name: Protected template integrity
         run: npm run verify:templates
         working-directory: al-siddique-frontend

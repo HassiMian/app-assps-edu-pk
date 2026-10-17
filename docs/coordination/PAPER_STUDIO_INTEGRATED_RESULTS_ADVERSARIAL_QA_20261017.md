@@ -1,0 +1,9 @@
+# Paper Studio Master — integrated Results safety adversarial gate (2026-10-17)
+
+Source-only branch `audit/paper-results-strict-integrated-20261017`, derived from VERIFIED clean and remote-matching integrated `integration/assps-master-core-paper-result-20261017@742e277a00cddadae9e82251e8147863c989dadd`.
+
+This is ADDITIVE regression evidence, NOT deployment approval. It forward-ports only the previously reviewed source-only strict Result Cards/School grade-policy verifier and 17 mutation tests from supplemental `audit/paper-results-grading-gate-core2324-20261017@062bd55bcddd99c0fe8db26f1c30fa04f2ef626a`. No production runtime source was changed; the existing 12-adversarial-case verifier, source policy checker, 43-paper hash, CI steps and production guards remain in place. Added strict suite to existing Verify SaaS CI without skips or bypasses.
+
+Checks cover selected-exam request provenance, stale success and error, all-class within one exam, no empty or unbounded fanout, authenticated school/student/portal read scope, school-specific configured grade bands, NULL grade when absent. They are source-unit/adversarial tests; NOT genuine authenticated staff/tenant database tests.
+
+Release: HOLD; SaaS Core release owner must review and reconcile this branch with newer owner source, verify hosted workflow on exact published SHA, independent signed 13/13 gate, offsite full ACL restore, worker/restricted identity and School2 subject denial, real authorized teacher/Diary save-reopen-print, licensed Jameel Nastaleeq physical A4 and signed rollback. No database DML/DDL, RLS/grants, live deployment or print action permitted from this branch. Keep original 1801 results and 213 numerical zeros safe, with 38 already saved Class One Urdu marks not replayed. Historical chat evidence does not replace fresh independent verification.
