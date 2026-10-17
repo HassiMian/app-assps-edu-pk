@@ -99,6 +99,40 @@ async function loadCurrentSchoolSettings(schoolId) {
 }
 
 
+// Public login crest: intentionally limited to published branding for a
+// validated school code. No staff, settings object, tenant ID or role data.
+router.get('/public-branding', async (req, res) => {
+  const code = String(req.query?.school_code || '').trim()
+  if (!/^[a-z0-9][a-z0-9_-]{1,59}$/i.test(code)) {
+    return res.status(400).json({ success: false, message: 'Valid school code is required.' })
+  }
+  try {
+    const result = await query(`
+      SELECT COALESCE(NULLIF(st.school_name,''),NULLIF(s.school_name,''),s.name) AS school_name,
+             COALESCE(NULLIF(st.school_logo,''),NULLIF(s.logo_url,'')) AS logo_url,
+             s.primary_color, s.secondary_color
+      FROM schools s
+      LEFT JOIN settings st ON st.school_id = s.id
+      WHERE LOWER(s.code) = LOWER($1) AND LOWER(s.status) IN ('active','trial')
+      LIMIT 1`, [code])
+    if (!result.rows.length) {
+      return res.status(404).json({ success: false, message: 'School branding not found.' })
+    }
+    const row = result.rows[0]
+    return res.set('Cache-Control', 'public, max-age=60').json({
+      success: true, data: {
+        schoolName: row.school_name || '',
+        logoUrl: publicAssetUrl(row.logo_url),
+        primaryColor: row.primary_color || '#256FE8',
+        secondaryColor: row.secondary_color || '#20A99F',
+      },
+    })
+  } catch (error) {
+    console.warn('Public school branding unavailable:', error.code || error.name)
+    return res.status(503).json({ success: false, message: 'School branding temporarily unavailable.' })
+  }
+})
+
 // GET /api/school/settings/current
 router.get('/settings/current', protect, async (req, res) => {
   const schoolId = req.school_id
