@@ -8,6 +8,7 @@ on:
       - audit/**
       - feat/**
       - fix/**
+      - integration/assps-core742-notice-diary-unified-20261017
 
 permissions:
   contents: read

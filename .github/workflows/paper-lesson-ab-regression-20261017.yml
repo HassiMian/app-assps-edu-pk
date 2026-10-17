@@ -9,6 +9,7 @@ on:
       - 'integration/assps-core78-lesson42-corpus-unified-20261017'
       - 'integration/assps-allstreams-core0d-paper82-20261017'
       - 'integration/assps-master-core-paper-result-20261017'
+      - 'integration/assps-core742-notice-diary-unified-20261017'
     paths:
       - 'al-siddique-frontend/src/Modules/Paper-Generator/**'
       - 'al-siddique-frontend/scripts/verify-protected-templates.mjs'
