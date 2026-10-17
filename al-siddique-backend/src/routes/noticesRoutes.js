@@ -6,7 +6,9 @@ const router = express.Router()
 const { query } = require('../config/database')
 const { protect, requireRoles, requireScopeForServiceOnly } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
-const canManageNotices = requireRoles('super_admin', 'admin', 'school_admin', 'principal', 'teacher')
+// Only school administration may issue, alter or revoke official school notices.
+// Teachers can use notice read access but cannot amend school-wide notices.
+const canManageNotices = requireRoles('super_admin', 'admin', 'school_admin', 'principal')
 
 function requireNoticeSchoolContext(req, res) {
   const schoolId = currentSchoolId(req)
@@ -58,7 +60,6 @@ function normalizeNoticePayload(body) {
   return {
     title: body.title,
     content,
-    issuedBy: body.issued_by || body.issuedBy || body.author || '',
     recipientType: listValue(body.recipient_type ?? body.recipientType),
     teacherIds: listValue(body.teacher_ids ?? body.teacherIds),
     mentionedTeacherIds: listValue(body.mentioned_teacher_ids ?? body.mentionedTeacherIds),
@@ -72,8 +73,10 @@ function normalizeNoticePayload(body) {
   }
 }
 
-// GET all notices for this school
-router.get('/', protect, requireScopeForServiceOnly('school.notices.read'), async (req, res) => {
+// Legacy notices are restricted to school administration until a verified
+// recipient/teacher-identity audience mapping is implemented. School-scoped
+// SQL alone is NOT permission to expose every notice to any school teacher.
+router.get('/', protect, requireScopeForServiceOnly('school.notices.read'), requireRoles('super_admin', 'admin', 'school_admin', 'principal'), async (req, res) => {
   try {
     await ensureNoticesTable()
     const schoolId = requireNoticeSchoolContext(req, res)
@@ -100,7 +103,8 @@ router.post('/', protect, canManageNotices, async (req, res) => {
     await ensureNoticesTable()
     const schoolId = requireNoticeSchoolContext(req, res)
     if (!schoolId) return
-    const issuedBy = notice.issuedBy || String(req.user?.name || req.user?.email || '').trim()
+    // The issuer is the authenticated actor, never a client-supplied display name.
+    const issuedBy = String(req.user?.name || req.user?.email || '').trim()
     if (!issuedBy) return res.status(422).json({ success: false, message: 'Notice issuer identity is required.' })
     const result = await query(`
       INSERT INTO notices (
@@ -144,30 +148,27 @@ router.put('/:id', protect, canManageNotices, async (req, res) => {
     await ensureNoticesTable()
     const schoolId = requireNoticeSchoolContext(req, res)
     if (!schoolId) return
-    const issuedBy = notice.issuedBy || String(req.user?.name || req.user?.email || '').trim()
-    if (!issuedBy) return res.status(422).json({ success: false, message: 'Notice issuer identity is required.' })
     const result = await query(`
       UPDATE notices
+      -- Original issued_by attribution must remain immutable across edits.
       SET title = $1,
           content = $2,
-          issued_by = $3,
-          recipient_type = $4,
-          teacher_ids = $5,
-          mentioned_teacher_ids = $6,
-          template_key = $7,
-          language = $8,
-          content_english = $9,
-          content_urdu = $10,
-          priority = $11,
-          is_pinned = $12,
-          expires_at = $13,
+          recipient_type = $3,
+          teacher_ids = $4,
+          mentioned_teacher_ids = $5,
+          template_key = $6,
+          language = $7,
+          content_english = $8,
+          content_urdu = $9,
+          priority = $10,
+          is_pinned = $11,
+          expires_at = $12,
           updated_at = CURRENT_TIMESTAMP
-      WHERE id = $14 AND school_id = $15
+      WHERE id = $13 AND school_id = $14
       RETURNING *
     `, [
       title,
       content,
-      issuedBy,
       JSON.stringify(notice.recipientType),
       JSON.stringify(notice.teacherIds),
       JSON.stringify(notice.mentionedTeacherIds),
