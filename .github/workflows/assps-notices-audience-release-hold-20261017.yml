@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - audit/assps-notices-audience-release-hold-20261017
+      - integration/assps-core742-notice-diary-unified-20261017
     paths:
       - 'al-siddique-backend/src/routes/noticesRoutes.js'
       - 'al-siddique-backend/src/tests/notices-principal-issuer-tenant-isolated.test.cjs'
