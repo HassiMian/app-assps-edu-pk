@@ -1,0 +1,23 @@
+name: ASSPS Core78 Hermetic Security and Daily Contract (source only)
+on:
+  push:
+    branches:
+      - audit/core78-ci-portability-20261017
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  hosted-nonroot-synthetic-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Assert actual GitHub hosted non-root environment
+        run: test "$(id -u)" -ne 0
+      - name: Verify all 34 marks-security tests and root-only private receipts
+        run: python3 -m unittest discover -s ops/release/core-marks -p 'test_*.py' -q
+      - name: Verify hermetic reachable Lesson bundle and precise Save Day denial
+        run: PYTHONPATH=ops/release/tests python3 -m unittest -v test_lesson_v5_daily_controls.IndependentDailyControls.test_old_paper_term_bundle_without_save_day_must_fail
