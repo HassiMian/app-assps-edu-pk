@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'audit/paper-lesson-ab-core58-regression-20261017'
+      - 'test/paper-lesson-ab-legacy-ebf-ci-20261017'
       - 'feat/lesson-ab-subject-unification-exclusions-20261017'
     paths:
       - 'al-siddique-frontend/src/Modules/Paper-Generator/**'
@@ -30,7 +31,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Verify A and B labels, class exclusions, immutable source, weekly and term models
+      - name: Verify A and B labels, old A/B draft cloning guard, excluded classes and term sources
         run: >-
           node --test
           al-siddique-frontend/src/Modules/Paper-Generator/tests/plannerABMergeExclusion.test.mjs
