@@ -18,7 +18,9 @@ from urllib.request import Request, urlopen
 
 # Exact new Core/Paper integration, independently published and read-only checked.
 CORE_PARENT_SHA = "58a111c82e4e2051ecab08960cf4c68c25085a24"
-CORE_SHA = "78e30667e9391c82783eaf5d554b46dc99d346d7"
+CORE_SHA = "2324bcb9d8f27e8032b1bddfeb8b09133c4df7bc"
+CORE_REVIEWED_78_SHA = "78e30667e9391c82783eaf5d554b46dc99d346d7"
+CORE_REVIEWED_0D_SHA = "0d3d5e3c05ab49e3e87ccd86e119ddb043a3d913"
 CORE_REVIEWED_E301_SHA = "e301273e0d055667dc7b0787593839a006fb97f7"
 CORE_DIST_SHA = "48d3e2076c3d56cd8a41ec5c4a2689a998449c1c9801a80736b2e1ea5f2e41bb"
 CONNECT_SHA = "20ebae71ca438ad1590720ac93ff1ed9d59fedd7"
@@ -57,6 +59,27 @@ CORE_OPERATIONS_FILES = {
     "ops/paper-studio/verify_teacher_timetable_source_20261017.py": "2aa45e6de70cefe5c416892ced8e5aef482db5496f75faf3d7e7103e070ce90f",
     "al-siddique-frontend/src/Modules/Paper-Generator/plannerSourceGrouping.js": "0be7f71e1dec33917051eb5d21878e8c5150b52912ffbccb5b3dcdbd65df087a",
 }
+# The latest reviewed Core owner candidate changes *only* hosted CI,
+# synthetic test fixtures and its source-only report relative to Core0d.
+# Exact file names, not a broad "tests/" wildcard, are permitted.
+CORE_CI_ONLY_FILES = frozenset({
+    ".github/workflows/core503-marks-paper-privacy-unified-release-20261016.yml",
+    ".github/workflows/lesson-planner-release-contract.yml",
+    "docs/coordination/ASSPS_CORE78_UNIFIED_HERMETIC_CI_AND_RELEASE_HOLD_20261017.md",
+    "ops/release/core-infrastructure/test_verify_connect_green_startup_20261017.py",
+    "ops/release/core-marks/test_locked_classone_urdu_staging_20261016.py",
+    "ops/release/tests/test_lesson_v5_daily_controls.py",
+})
+
+def current_core_ci_only_delta(core):
+    try:
+        code, changed = command(
+            "git", "-C", str(core), "diff", "--name-only",
+            CORE_REVIEWED_0D_SHA, "HEAD")
+        return code == 0 and set(changed.splitlines()) == CORE_CI_ONLY_FILES
+    except (OSError, ValueError):
+        return False
+
 GREEN_SOURCE_SHA = "659b01fcef34ade4e7052b436fb62e083845cc3a"
 GREEN_FILES = {
     "ecosystem.connect.config.cjs": "982cfd70535ed8949d4ca2f17232622baeb39886cec4eb3c5a8fc4e2a81dd367",
@@ -223,7 +246,12 @@ def evaluate(core, connect, live, official, official_rc, smoke, probe=True, dire
     core_ancestor_rc, _ = command("git", "-C", str(core),
                                   "merge-base", "--is-ancestor",
                                   CORE_PARENT_SHA, "HEAD")
-    tech["core_reviewed_parent"] = core_ancestor_rc == 0
+    rc_78, _ = command("git", "-C", str(core), "merge-base",
+                       "--is-ancestor", CORE_REVIEWED_78_SHA, "HEAD")
+    rc_0d, _ = command("git", "-C", str(core), "merge-base",
+                       "--is-ancestor", CORE_REVIEWED_0D_SHA, "HEAD")
+    tech["core_reviewed_parent"] = (
+        core_ancestor_rc == 0 and rc_78 == 0 and rc_0d == 0)
     e301_ancestor_rc, _ = command("git", "-C", str(core),
                                   "merge-base", "--is-ancestor",
                                   CORE_REVIEWED_E301_SHA, "HEAD")
@@ -236,8 +264,10 @@ def evaluate(core, connect, live, official, official_rc, smoke, probe=True, dire
     except OSError:
         tech["core_teacher_print_and_postsave_source_exact"] = False
     try:
-        tech["core_current_ops_and_planner_exact"] = all(
-            digest(core / name) == sha for name, sha in CORE_OPERATIONS_FILES.items())
+        tech["core_current_ops_and_planner_exact"] = (
+            current_core_ci_only_delta(core) and
+            all(digest(core / name) == sha
+                for name, sha in CORE_OPERATIONS_FILES.items()))
     except OSError:
         tech["core_current_ops_and_planner_exact"] = False
     try:
@@ -300,7 +330,7 @@ def evaluate(core, connect, live, official, official_rc, smoke, probe=True, dire
     else:
         official_fact = signed_assessment(secure_receipt(official), official_rc)
     result = {
-        "scope": "CURRENT_READ_ONLY_CONNECT_CORE_58A_POSTSAVE_SCOPE_CANDIDATE",
+        "scope": "CURRENT_READ_ONLY_CONNECT_CORE2324_TESTONLY_SUCCESSOR_NOT_DEPLOYED",
         "production_mutation_performed": False,
         "build": CONNECT_BUILD_ID,
         "live_build": PUBLIC_BUILD_ID if tech["public_build_remains_original"] else "DRIFT_OR_UNKNOWN",

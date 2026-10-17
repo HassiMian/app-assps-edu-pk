@@ -1,0 +1,14 @@
+# APEX Connect MASTER | Unified Core2324 release mission | 17 October 2026
+
+Release verdict: HOLD_NO_PRODUCTION_CUTOVER. Continuation of original APEX Connect mission, not a separate release.
+
+Source: latest reviewed clean Core fix/core78-hermetic-ci-gates-20261017 @ 2324bcb9d8f27e8032b1bddfeb8b09133c4df7bc; direct successor of Core0d and original reviewed Core78. GitHub compare Core0d->Core2324 gives exactly six test, CI and report files; NO runtime frontend/backend application changes.
+Connect source: isolated successor of audit/connect-core78-unified-completion-20261017 @ 82c02d29f83d3849bad9e37e13c2fb7b3a0a1f04. The EXISTING 18-check fail-closed verifier now pins Core2324 and the Core78/Core0d ancestors and requires that six-file-only exact diff. Its source-owned privacy, teacher and green-runtime hashes are immutable; no new release authority created.
+
+Fresh real Connect coordinator unit tests: 370/370 PASS exit0. Private log SHA256 cc86d700ae8138b7c55c57917a35afefac88213f31b147afa1cbbf30820789c1. Focused fail-closed tests: 49/49 PASS. Latest clean Core exact protected hash checks 9/9 PASS. Six-file-only delta exact. Current candidate Vite SHA256 48d3e2076c3d56cd8a41ec5c4a2689a998449c1c9801a80736b2e1ea5f2e41bb; isolated Core2324 checkout uses ignored 5.5MB COPY of the already-reviewed Core78 artifact with identical source runtime, NOT a newly built Core2324 release.
+
+Latest sampled public Connect login200, API health200 and anonymous auth/me401. Green port3002 PM2 online with historic 30947 restarts unchanged over >80min sampled; public Next build ONDwxEIZlx5onDIKY7wYf unchanged. Core previously fixed on-disk startup ecosystem path; stronger stop-on-78 Next launch guard is still source-only. Nginx config earlier tested PASS. Signed Core's last independently verified 6/13 HOLD. Direct new live verifier call was blocked by tool safety checks; do NOT claim newer fresh 18/18 live signed report, nor hosted CI run for this new Connect commit.
+
+Remaining ONE release cluster: independent full owner/ACL backup and genuine offhost restore; signed restricted transport/worker adapter and separate authenticated worker; inherited grants and real School2/unassigned subject denial; 43 actual unreviewed timetable teacher links, 0 active trusted assignments; formal Urdu exam offering approval; actual teacher Save/Reopen/Print and witnessed Ricoh Jameel A4 hardcopy; Core-authorized reboot/rollback and postflight. Original 38 Class One Yellow Urdu marks already genuinely SAVED, old 152 scores and numeric zeros preserved, never replay.
+
+No new live release, backend/frontend production change, PM2 restart, Nginx reload, SQL DML/DDL, marks/role grant, student/teacher data write, or background scheduled task in this Connect source update.

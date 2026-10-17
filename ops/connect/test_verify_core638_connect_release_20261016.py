@@ -166,7 +166,9 @@ class UnifiedFailClosedTests(unittest.TestCase):
             self.assertFalse(mod.root_owned_pinned_file(file,digest))
 
     def test_current_core_pinned_to_verified_successor(self):
-        self.assertEqual(mod.CORE_SHA, "78e30667e9391c82783eaf5d554b46dc99d346d7")
+        self.assertEqual(mod.CORE_SHA, "2324bcb9d8f27e8032b1bddfeb8b09133c4df7bc")
+        self.assertEqual(mod.CORE_REVIEWED_78_SHA, "78e30667e9391c82783eaf5d554b46dc99d346d7")
+        self.assertEqual(mod.CORE_REVIEWED_0D_SHA, "0d3d5e3c05ab49e3e87ccd86e119ddb043a3d913")
         self.assertEqual(mod.CORE_REVIEWED_E301_SHA, "e301273e0d055667dc7b0787593839a006fb97f7")
         self.assertEqual(len(mod.CORE_SCOPE_FILES), 2)
         self.assertEqual(mod.CORE_PARENT_SHA,
@@ -181,6 +183,30 @@ class UnifiedFailClosedTests(unittest.TestCase):
                       mod.CORE_OPERATIONS_FILES)
         self.assertIn("ops/paper-studio/verify_teacher_timetable_source_20261017.py",
                       mod.CORE_OPERATIONS_FILES)
+
+    def test_core2324_scope_is_exactly_six_test_ci_and_report_paths(self):
+        self.assertEqual(len(mod.CORE_CI_ONLY_FILES), 6)
+        self.assertTrue(all(p.startswith(("ops/release/", ".github/workflows/",
+                                          "docs/coordination/"))
+                            for p in mod.CORE_CI_ONLY_FILES))
+        self.assertTrue(all(not p.startswith("/") and ".." not in p.split("/")
+                            for p in mod.CORE_CI_ONLY_FILES))
+
+    def test_core2324_exact_ci_delta_accepts_reviewed_paths(self):
+        with patch.object(mod, "command", return_value=(0, "\n".join(sorted(mod.CORE_CI_ONLY_FILES)))):
+            self.assertTrue(mod.current_core_ci_only_delta(Path("/synthetic")))
+
+    def test_core2324_ci_delta_rejects_runtime_change_or_missing_file(self):
+        files = sorted(mod.CORE_CI_ONLY_FILES)
+        for changed in ("\n".join(files + ["al-siddique-backend/src/routes/auth.js"]),
+                        "\n".join(files[:-1]), ""):
+            with self.subTest(changed=changed[:45]):
+                with patch.object(mod, "command", return_value=(0, changed)):
+                    self.assertFalse(mod.current_core_ci_only_delta(Path("/synthetic")))
+
+    def test_core2324_ci_delta_rejects_command_failure(self):
+        with patch.object(mod, "command", return_value=(1, "\n".join(sorted(mod.CORE_CI_ONLY_FILES)))):
+            self.assertFalse(mod.current_core_ci_only_delta(Path("/synthetic")))
 
     def test_green_source_is_new_descendant_not_private_old_build(self):
         self.assertEqual(mod.GREEN_SOURCE_SHA, "659b01fcef34ade4e7052b436fb62e083845cc3a")
