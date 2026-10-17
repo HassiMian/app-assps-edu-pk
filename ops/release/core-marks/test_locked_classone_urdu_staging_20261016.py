@@ -175,6 +175,10 @@ class RecoveryContract(unittest.TestCase):
             f.write_text('{}')
             os.chmod(root, 0o700)
             os.chmod(f, 0o600)
+            if os.geteuid() != 0:
+                with self.assertRaisesRegex(ValueError, 'UNTRUSTED_PRIVATE_DIRECTORY'):
+                    private_json(root, 'example.json')
+                return  # Positive UID-0 file and symlink checks run on root-owned VPS QA.
             self.assertEqual(private_json(root, 'example.json'), {})
             os.chmod(f, 0o644)
             with self.assertRaisesRegex(ValueError, 'UNTRUSTED_PRIVATE_FILE'):

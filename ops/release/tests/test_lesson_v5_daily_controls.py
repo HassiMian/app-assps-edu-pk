@@ -2,6 +2,7 @@
 import importlib.util
 import json
 from pathlib import Path
+import tempfile
 import unittest
 
 ROOT=Path(__file__).resolve().parents[3]
@@ -23,9 +24,16 @@ class IndependentDailyControls(unittest.TestCase):
   for text in DAILY_MARKERS:self.assertTrue(report['details']['runtime_markers'][text])
 
  def test_old_paper_term_bundle_without_save_day_must_fail(self):
-  prior=Path('/root/workspace/assps-planning-architecture-v4-20261015/al-siddique-frontend/dist')
-  if not prior.is_dir():self.skipTest('Archived v4 reference build unavailable')
-  report=gate.validate(prior,contract)
+  with tempfile.TemporaryDirectory(prefix='lesson-old-bundle-') as d:
+   prior=Path(d)
+   assets=prior/'assets'
+   assets.mkdir()
+   (prior/'index.html').write_text('<script type="module" src="/assets/index-oldfixture001.js"></script>')
+   (assets/'index-oldfixture001.js').write_text('PaperGenerator-oldfixture001.js LessonPlanModule-oldfixture001.js')
+   (assets/'PaperGenerator-oldfixture001.js').write_text('Paper Generator old fixture')
+   kept=[m for m in contract['required_lesson_module_markers'] if m!='Save Day to School Server']
+   (assets/'LessonPlanModule-oldfixture001.js').write_text(' '.join(kept))
+   report=gate.validate(prior,contract)
   self.assertFalse(report['pass'])
   self.assertFalse(report['checks']['all_runtime_ui_markers'])
 
