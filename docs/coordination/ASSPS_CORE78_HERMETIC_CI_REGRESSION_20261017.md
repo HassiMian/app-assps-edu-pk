@@ -31,3 +31,11 @@ acceptance remains compulsory. Temporary fixture is automatically deleted.
 - Existing Core platform release 6/13 HOLD; no real teacher/School2 authorization witness,
   physical Ricoh Urdu A4, offsite ACL/worker signatures or independently signed rollback.
   Hosted CI PASS would certify ONLY test portability, never production release.
+
+## Actual hosted first-run reconciliation
+Initial push CI run 38993747380: 18 root/private safety tests PASS, npm dependencies PASS,
+frontend Vite production build PASS, compiled negative Save Day test PASS.
+Current-source positive Lesson contract failed ONLY preserves_ancestor checks because
+GitHub checkout@v4 default shallow depth 1 omits reviewed b18a8aae1a and 3282ca7c95
+commits. Workflow now uses explicit fetch-depth: 0; no production verification
+logic or protected ancestry expectation was weakened. A rerun must demonstrate PASS.

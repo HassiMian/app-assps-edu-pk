@@ -16,6 +16,8 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # required for protected-ancestor release provenance
       - name: Root ownership verifier stays fail-closed on nonroot hosted runner
         run: python3 -m unittest discover -s ops/release/core-marks -p test_locked_classone_urdu_staging_20261016.py -v
       - uses: actions/setup-node@v4
