@@ -1,0 +1,65 @@
+name: ASSPS Paper Studio Lesson A-B Safe Regression (source only)
+
+on:
+  push:
+    branches:
+      - 'audit/paper-lesson-ab-core58-regression-20261017'
+      - 'feat/lesson-ab-subject-unification-exclusions-20261017'
+      - 'integration/core58-lessonab-apiguard-master-20261017'
+      - 'audit/paper-core78e-canonical-integrity-20261017'
+    paths:
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/**'
+      - 'al-siddique-frontend/scripts/verify-protected-templates.mjs'
+      - '.github/workflows/paper-lesson-ab-regression-20261017.yml'
+  pull_request:
+    paths:
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/**'
+      - 'al-siddique-frontend/scripts/verify-protected-templates.mjs'
+      - '.github/workflows/paper-lesson-ab-regression-20261017.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lesson-source-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - name: Checkout pinned source, never deploy
+        uses: actions/checkout@v4
+      - name: Use Node 22 without app secrets
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify A and B labels, class exclusions, immutable source, weekly and term models
+        run: >-
+          node --test
+          al-siddique-frontend/src/Modules/Paper-Generator/tests/plannerABMergeExclusion.test.mjs
+          al-siddique-frontend/src/Modules/Paper-Generator/tests/termPlanningModel.test.mjs
+      - name: Preserve six original official paper templates
+        run: node al-siddique-frontend/scripts/verify-protected-templates.mjs
+      - name: Preserve canonical 43-paper corpus structure and exact approved bytes
+        run: |
+          node -e 'const fs=require("node:fs");const p="al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/migration/data/canonical-first-term-2026-paperdoc-v2-schema3.json";const x=JSON.parse(fs.readFileSync(p,"utf8"));if(!Array.isArray(x.documents)||x.documents.length!==43||x.paperCount!==43){console.error("PROTECTED_CORPUS_COUNT_MISMATCH");process.exit(1)}console.log("PROTECTED_CANONICAL_43_STRUCTURE_PASS")'
+          printf '%s  %s\n' '39a2dcd58e064dd63985c7f5b57d4bed55fdb949e99db0b00bc4b1735f2f1843' 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/migration/data/canonical-first-term-2026-paperdoc-v2-schema3.json' | sha256sum --check --status
+          echo PROTECTED_CANONICAL_43_BYTE_INTEGRITY_PASS
+      - name: Reject one-byte corpus tampering without changing tracked school data
+        run: |
+          python3 - <<'PYQA'
+          import hashlib
+          import pathlib
+          import tempfile
+          source = pathlib.Path('al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/migration/data/canonical-first-term-2026-paperdoc-v2-schema3.json')
+          approved = '39a2dcd58e064dd63985c7f5b57d4bed55fdb949e99db0b00bc4b1735f2f1843'
+          original = source.read_bytes()
+          assert hashlib.sha256(original).hexdigest() == approved
+          with tempfile.TemporaryDirectory(prefix='paper-studio-immutable-qa-') as tmp:
+              copy = pathlib.Path(tmp) / 'tamper.json'
+              copy.write_bytes(original)
+              assert hashlib.sha256(copy.read_bytes()).hexdigest() == approved
+              copy.write_bytes(original + b' ')
+              assert hashlib.sha256(copy.read_bytes()).hexdigest() != approved
+          assert hashlib.sha256(source.read_bytes()).hexdigest() == approved
+          print('PROTECTED_CANONICAL_TAMPER_COPY_DENIED_AND_ORIGINAL_PRESERVED')
+          PYQA

@@ -1,0 +1,39 @@
+# ASSPS Paper Studio MASTER — Core78E protected corpus and A/B regression source gate
+
+**17 October 2026 PKT — SINGLE authoritative coordination issue #4.** Status: engineering/source QA executed, **official full system release HOLD**. SaaS Core alone owns production promotion, DB/security and rollback. Grade IX/X academic source approvals remain with Academic Master.
+
+## Phase 1 — exact latest Core and historical recovery
+
+- Current reviewed integrated Core `integration/core58-lessonab-apiguard-master-20261017@78e30667e9391c82783eaf5d554b46dc99d346d7` was independently checked against GitHub remote (same SHA). It contains Lesson A/B/unreviewed 43 teacher identity timetable preflights, exact teacher print job guard, API green startup resilience/source audit, existing principal-saved Urdu38 verification and historical Diary15 acceptance. It is NOT the deployed public build.
+- Parent source is a confirmed descendant of Lesson `ebf13f4cf0e87a655d9c55be6d4aaca2319b9388`; `git diff --name-only ebf13f4... 78e30667... -- al-siddique-frontend/src/Modules/Paper-Generator` returned **0 files**. Previously truly executed canonical all-43 Chromium screen/print run with RC0/SHA256 `d03b2b714a67785237bbe1ca15747cc17a47bb6f5a662a0c10af9216374a1880` therefore applies to the **same Paper runtime**; NOT a second re-execution on Core78E and NOT physical Ricoh hardcopy. The real exact Core78E Diary15 synthetic Chrome suite was separately executed/verified by SaaS Core owner in issue #4 comment 6228143243, not this Paper session.
+- The previously reviewed Paper SHA-protection flow exists on separate clean `audit/paper-lesson42-corpus-sha-20261017@b1172b09...` but is **absent** from integrated Core78E. Do not merge stale parallel feature applications or overwrite any owner worktree; forward-port ONLY the missing test-only invariant.
+- New isolated clean worktree `/root/workspace/assps-paper-core78e-canonical-integrity-20261017`, branch `audit/paper-core78e-canonical-integrity-20261017` from Core78E. Exactly one protective workflow and this source handoff are new paths. Zero changes to source papers, Paper Editor, Lesson/Diary, Backend, DB, marks/results or security rules.
+
+## Phase 2 — new latest-branch source-only CI
+
+- A new `.github/workflows/paper-lesson-ab-regression-20261017.yml` is ported from verified earlier Paper workflow as an independent six-step `contents:read` / Node22 source check on exact current Core descendant, with no staff tokens/secrets, network school APIs, SQL, print hardware, worker installation or deployment actions.
+- Validates (1) real A/B source grouping/term/class-exclusion and legacy clone detection, (2) six original protected templates, (3) exact 43 canonical First Term paper document count and SHA256 **`39a2dcd58e064dd63985c7f5b57d4bed55fdb949e99db0b00bc4b1735f2f1843`**, (4) **separate temporary one-byte mutation adversarial check** proving the immutable checksum rejects an altered copy while leaving protected reference unchanged. Actions can still have empty hosted status; no hosted green assertion before independent result.
+- Local SHA script corresponding to actual CI step executed successfully (`PROTECTED_CANONICAL_43_STRUCTURE_PASS`, `PROTECTED_CANONICAL_43_BYTE_INTEGRITY_PASS`) and actual CI-embedded Python tamper step executed (`PROTECTED_CANONICAL_TAMPER_COPY_DENIED_AND_ORIGINAL_PRESERVED`), both exit0. Local workflow YAML parse and least privilege passed. A separate local check invoking `sha256sum --check --status` against an altered disposable file returned nonzero while exact original returned0.
+
+## Phase 3 — genuine fresh targeted integrated Core78E tests
+
+- Core78E native Lesson Planner A/B weekly+term and legacy detection **16/16 PASS RC0**, evidence root-private SHA256 `a721c6c601ad0023fb493bf7ee49ef58959343a818399fefc253a010814c1416`.
+- Core78E actual isolated localhost Express staff/School2/revoked teacher/staff answer projection security + print-domain/static checks **14/14 PASS RC0**, protected log SHA256 `b9e792bc667102d6adc2df23b58a3fb9e09b4e637a1a72ff810cd667c6eefaef`.
+- Core78E canonical backend 43-paper DOCX model/math/immutable diagram ZIP test **8/8 PASS RC0**, evidence SHA256 `e09ca6eb3819a0f382eacb5016f153e603f3a061bf3d8518bf4b666d5458df3e`.
+- Core78E canonical frontend semantic/MCQ/editor/marks parity **15/15 PASS RC0**, evidence SHA256 `95a810b927af179e6e5c6dca58fda4df7a089163c07030878cea868c9451a649`.
+- Six protected original official templates verified unchanged. Matching pinned frontend/backend npm lockfile hashes verified from reviewed installed dependencies; temporary `node_modules` symlinks used **only in own clean test worktree and removed afterwards**. The prior actual complete canonical 43/43 browser render/print receipt and Core owner synthetic Diary 15/15 remain separately verifiable; these are not independent physical hardware acceptance.
+- All root-private QA logs under `/root/assps-release-evidence/paper-studio-core78e-20261017`, not uploaded as student/teacher secrets.
+
+## Phase 4 — read-only live postflight and release blockers
+
+- 3 repeated sampled HTTPS rounds: public school login **HTTP200**, API health **HTTP200**, anonymous auth/me **HTTP401** (no actor impersonation). Production PostgreSQL constrained SELECT: `exam_results=1801`, actual numeric zero scores `213`; genuine previous Principal-assisted original 38 Class One Yellow Urdu marks still persisted, no duplicate/replay. Academic Urdu offering maximum/pass approval **pending**, not publishable merely because result rows exist.
+- `teacher_class_assignments` actual `0 total/0 active`; distinct timetable source's 43 teacher ID links **unreviewed**, therefore automatically provisioning access to print jobs is forbidden and actual teacher print deliberately denies until validated explicit assignment issuance.
+- Public API previously flapped with 502 due green port3002 missing `.next-candidate` artifact, recovered under Core/Connect owners to prior known `.next` build. P0 production Connect ecosystem recipe now corrected by Core (issue #4 6228143243), but that is a separate scoped config repair, not a complete system release or documented reboot/long-duration acceptance. Historical >30k restart count still reviewable.
+- Windows synthetic Chrome Urdu Jameel font embedded A4 PDF was proven separately, actual physical Ricoh/Samsung printer reported offline in last witness; no real school paper/Diary A4 print claimed.
+- Last independently signed full SaaS Core 13-gate outcome remains **6/13 HOLD**, requiring authentic owner/independent offhost ACL restore, signed restricted worker+adapter/auth, inherited effective privileges and genuine peer-school denial receipts. No real staff School1/peer School2 actor signatures, physical Ricoh output or controlled rollback certification here. Never fake these to satisfy zero-human-involvement goal.
+
+## Phase 5 — atomic reproducible handoff
+
+- GitHub coordination issue #4 is the only cross-stream authority. Do NOT restart Paper Studio, forward-port stale branches indiscriminately, overwrite protected student/paper data, or treat a QA branch as the main deployment candidate. SaaS Core must reconcile only the narrowly reviewed test-only source against its newest actual production descendant and perform verified signed release gates before deployment.
+- This branch's source rollback is simply reverting its single test-only commit. This session issued **no** live DB DML/DDL, role, marks, saved paper edit, credential extraction, Nginx/PM2 restart, print job or public deploy; no production rollback action is needed for these changes.
+- Full byte-for-byte archived historical ChatGPT conversations cannot all be retrieved; actual current GitHub commits, issue #4, protected private QA logs and genuine live read-only counts are authoritative.
