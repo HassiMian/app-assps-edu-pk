@@ -944,8 +944,13 @@ assertNotContains(
 
 assertContains(
   'al-siddique-backend/src/routes/examRoutes.js',
-  'gradeBands = await loadGradeBandsForSchool(schoolId)',
-  'saved exam grades must use the school grading policy.'
+  /gradeBands\s*=\s*await\s+loadGradeBandsForSchool\(\s*schoolId,\s*\{\s*previewDefaults\s*:\s*false\s*\}\s*\)/,
+  'saved exam grades must load configured school grade bands without preview-only defaults.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/examRoutes.js',
+  /grade\s*:\s*parsedState\.status\s*===\s*['"]SCORED['"]\s*&&\s*gradeBands\.length\s*>\s*0\s*\?\s*gradeFromBands\([^)]*gradeBands\)\s*:\s*null/,
+  'unconfigured schools must not persist fabricated exam grades.'
 )
 
 assertNotContains(
