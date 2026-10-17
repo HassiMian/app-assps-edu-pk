@@ -13,6 +13,21 @@ const claimsPath=process.env.ASSPS_CLAIMS || '/var/lib/assps-grade910-sourceclai
 const cacheRoot=process.env.ASSPS_CACHE || '/root/workspace/qbank-source-cache';
 const evidencePath=process.env.ASSPS_TEXT_EVIDENCE || '/var/lib/assps-grade910-sourceclaims/question-page-textlayer.json';
 const pdfjsModule=process.env.ASSPS_PDFJS || '/var/www/apex-backend/node_modules/pdfjs-dist/legacy/build/pdf.mjs';
+// Load PDF.js standard fonts from its OWN local package, not an untrusted web URL.
+// Node pdfjs-dist requires a filesystem pathname with a trailing separator.
+export function verifiedPdfJsStandardFontDataUrl(modulePath=pdfjsModule) {
+ const packageRoot=path.resolve(path.dirname(modulePath),'../..');
+ const fonts=path.join(packageRoot,'standard_fonts');
+ if(!path.isAbsolute(modulePath)||!fs.existsSync(fonts)||
+    fs.lstatSync(fonts).isSymbolicLink()||!fs.statSync(fonts).isDirectory())
+   throw Error('UNTRUSTED_PDFJS_STANDARD_FONT_ASSET_DIRECTORY');
+ for(const font of ['FoxitSerif.pfb','FoxitDingbats.pfb']) {
+   const f=path.join(fonts,font);
+   if(!fs.existsSync(f)||fs.lstatSync(f).isSymbolicLink()||!fs.statSync(f).isFile())
+     throw Error('PDFJS_STANDARD_FONT_ASSET_MISSING');
+ }
+ return fonts+path.sep;
+}
 const strictQLength=40;
 export function normalize(s) {
  return String(s??'').normalize('NFKC').toLocaleLowerCase('en')
@@ -69,6 +84,7 @@ async function main() {
    if(!pages.has(q.claimedPage))pages.set(q.claimedPage,[]);
    pages.get(q.claimedPage).push(q);
  }
+ const standardFontDataUrl=verifiedPdfJsStandardFontDataUrl(pdfjsModule);
  const {getDocument}=await import(pathToFileURL(pdfjsModule).href);
  const results=[];
  const assets=[];
@@ -81,7 +97,7 @@ async function main() {
    if(fs.lstatSync(full).isSymbolicLink())throw Error('REFUSE_SOURCE_SYMLINK');
    const bytes=fs.readFileSync(full);
    if(sha256(bytes)!==e.pdfSha256.toLowerCase())throw Error('PDF_BYTE_HASH_CONFLICT_'+id);
-   const pdf=await getDocument({data:new Uint8Array(bytes),stopAtErrors:true,disableFontFace:true}).promise;
+   const pdf=await getDocument({data:new Uint8Array(bytes),stopAtErrors:true,disableFontFace:true,standardFontDataUrl}).promise;
    if(pdf.numPages!==e.pdfPageCount)throw Error('PDF_PAGE_COUNT_CONFLICT_'+id);
    let readablePages=0,unreadablePages=0;
    for(const [page, pageClaims] of pages) {

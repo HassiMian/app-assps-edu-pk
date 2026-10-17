@@ -102,6 +102,8 @@ on:
       - "ops/qbank/assps-grade910-held170-near-duplicate-screen-20261016.py"
       - "ops/qbank/verify-grade910-pdf-physical-page-bounds-20261016.mjs"
       - "ops/qbank/verify-grade910-pdf-question-text-evidence-20261016.mjs"
+      - "ops/release/install-grade910-pdfjs-textlayer-standardfonts-20261017.sh"
+      - "docs/question-bank/ASSPS_GRADE910_PDFJS_STANDARD_FONT_RECOVERY_20261017.md"
       - "ops/qbank/verify-grade910-scanned-source-ocr-fallback-20261016.mjs"
       - "ops/release/install-grade910-ocr-pdfjs-resource-config-20261016.sh"
       - "ops/tests/grade910-ocr-pdfjs-local-assets-20261016.test.mjs"
@@ -244,6 +246,8 @@ on:
       - "ops/qbank/assps-grade910-held170-near-duplicate-screen-20261016.py"
       - "ops/qbank/verify-grade910-pdf-physical-page-bounds-20261016.mjs"
       - "ops/qbank/verify-grade910-pdf-question-text-evidence-20261016.mjs"
+      - "ops/release/install-grade910-pdfjs-textlayer-standardfonts-20261017.sh"
+      - "docs/question-bank/ASSPS_GRADE910_PDFJS_STANDARD_FONT_RECOVERY_20261017.md"
       - "ops/qbank/verify-grade910-scanned-source-ocr-fallback-20261016.mjs"
       - "ops/release/install-grade910-ocr-pdfjs-resource-config-20261016.sh"
       - "ops/tests/grade910-ocr-pdfjs-local-assets-20261016.test.mjs"
@@ -428,5 +432,9 @@ jobs:
           python3 -m unittest discover -s ops/tests -p test_grade910_master_1305_distinct_blocker_cluster_20261017.py -v
           python3 -m py_compile ops/qbank/build-grade910-single-authoritative-review-blocker-cluster-20261017.py
           bash -n ops/release/install-grade910-unified-1305-review-postcheck-20261017.sh
+      - name: Enforce PDF.js original-text-source local standard-font asset fail-closed contract
+        run: |
+          node --test ops/tests/grade910-pdf-question-text-evidence-20261016.test.mjs
+          bash -n ops/release/install-grade910-pdfjs-textlayer-standardfonts-20261017.sh
       - name: Validate offline claim auditor syntax
         run: python3 -m py_compile ops/qbank/audit-live-grade910-source-claims-20261016.py ops/qbank/reconcile-grade910-held-original-candidates-20261016.py
