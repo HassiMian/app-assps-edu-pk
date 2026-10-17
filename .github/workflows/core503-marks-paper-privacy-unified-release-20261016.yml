@@ -10,6 +10,9 @@ on:
       - 'integration/core58-lessonab-apiguard-master-20261017'
       - 'integration/core78-lesson42-corpus-security-20261017'
       - 'fix/core78-hermetic-ci-gates-20261017'
+      - 'integration/assps-core78-lesson42-corpus-unified-20261017'
+      - 'integration/assps-allstreams-core0d-paper82-20261017'
+      - 'integration/assps-master-core-paper-result-20261017'
   pull_request:
     paths:
       - 'al-siddique-backend/src/config/signedRlsCatalogGuard.js'
