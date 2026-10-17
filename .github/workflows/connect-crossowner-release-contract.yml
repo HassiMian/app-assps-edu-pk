@@ -222,7 +222,9 @@ jobs:
         run: python3 -m unittest discover -v -s ops/connect -p 'test_verify_private_next_build_20261016.py'
       - name: Guard local full-ACL recovery parity against fabricated Core certification
         run: python3 -m unittest discover -v -s ops/connect -p 'test_verify_local_full_acl_restore_20261016.py'
-      - name: Guard actual successful optimized Connect Next build against forged release claims
+      # This hosted test suite is portable and fail-closed. Genuine private VPS
+      # build artifact acceptance must be separately witnessed on the trusted VPS.
+      - name: Verify portable build anti-forgery; do not certify VPS-private artifacts
         run: python3 -m unittest discover -v -s ops/connect -p 'test_verify_successful_next_build_20261016.py'
       - name: Ensure new optimized private stage permit is exact hash pinned
         run: node --test ops/connect/test-private-reviewed-stage-allowlist-20261016.test.cjs

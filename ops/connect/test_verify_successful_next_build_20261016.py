@@ -4,6 +4,7 @@ import importlib.util
 import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from unittest import mock
 import unittest
 
 P=Path(__file__).with_name("verify_successful_next_build_20261016.py")
@@ -13,11 +14,29 @@ S.loader.exec_module(V)
 SOURCE=json.loads(V.MANIFEST.read_text())
 
 class ActualBuildEvidenceSafety(unittest.TestCase):
+    def require_real_private_build(self):
+        # Source tests run on portable CI. Private compiled bits exist only
+        # on the separately trusted VPS, which must independently pass the CLI.
+        try:
+            ready=V.STAGE.is_dir() and not V.STAGE.is_symlink()
+        except OSError:
+            ready=False
+        if not ready:
+            self.skipTest("Root-private VPS build unavailable: no real build attestation on this runner")
+
+    def test_private_stage_permission_denied_fails_closed(self):
+        with mock.patch.object(Path, "is_dir", side_effect=PermissionError("synthetic denied")):
+            self.assertFalse(V.verify(SOURCE))
+
+    def test_private_stage_is_missing_fails_closed(self):
+        with TemporaryDirectory() as t:
+            self.assertFalse(V.verify(SOURCE,stage=Path(t)/"missing"))
+
     def test_exact_source_manifest_valid(self):
         self.assertTrue(V.valid(SOURCE))
     def test_actual_log_and_binaries_current(self):
-        if V.STAGE.is_dir():
-            self.assertTrue(V.verify(SOURCE))
+        self.require_real_private_build()
+        self.assertTrue(V.verify(SOURCE))
     def test_stale_build_identity_rejected(self):
         d=copy.deepcopy(SOURCE);d["build_id"]="ONDwxEIZlx5onDIKY7wYf"
         self.assertFalse(V.valid(d))
@@ -46,15 +65,18 @@ class ActualBuildEvidenceSafety(unittest.TestCase):
         d=copy.deepcopy(SOURCE);d["files"].pop(".next/server/app/login/page.js")
         self.assertFalse(V.valid(d))
     def test_artifact_digest_tamper_rejected(self):
+        self.require_real_private_build()
         d=copy.deepcopy(SOURCE);d["files"]["eslint.config.mjs"]="0"*64
         self.assertFalse(V.verify(d))
     def test_private_log_missing_fails_closed(self):
+        self.require_real_private_build()
         with TemporaryDirectory() as t:
             self.assertFalse(V.verify(SOURCE,base=Path(t)/"missing"))
     def test_stage_missing_fails_closed(self):
         with TemporaryDirectory() as t:
             self.assertFalse(V.verify(SOURCE,stage=Path(t)))
     def test_build_receipt_hash_locked(self):
+        self.require_real_private_build()
         d=copy.deepcopy(SOURCE);d["build_exit_record_sha256"]="a"*64
         self.assertFalse(V.verify(d))
 if __name__=="__main__":

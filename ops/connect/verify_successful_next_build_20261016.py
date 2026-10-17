@@ -41,9 +41,13 @@ def valid(m):
                                                     m.get("build_exit_record_sha256","")]))
 
 def verify(m,stage=STAGE,base=BASE):
-    if not valid(m) or not stage.is_dir() or stage.is_symlink():
+    if not valid(m):
         return False
     try:
+        # Unprivileged hosted runners cannot traverse VPS-private /root paths.
+        # PermissionError must be a fail-closed False, never an exception or a PASS.
+        if not stage.is_dir() or stage.is_symlink():
+            return False
         p=subprocess.run(["git","-C",str(stage),"rev-parse","HEAD"],capture_output=True,text=True,timeout=5,check=True)
         if p.stdout.strip()!=SOURCE:
             return False
