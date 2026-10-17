@@ -261,17 +261,18 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
         if x.get('newGrade9ChemistryUrduOriginalConceptualResearchCandidates') is not None:
             if (x.get('newConventionalHighPriorityOriginalExemplarsWithoutApproval') not in (None,0,15)
                 or x.get('newGrade9IslamiyatTarjumaOriginalEthicalResearchCandidates') not in (None,0,10)
+                or x.get('newGrade10FourNonproceduralChemistryOriginalResearchCandidates') not in (None,0,4)
                 or x.get('newGrade9ChemistryUrduOriginalConceptualResearchCandidates')!=8
                 or x.get('newEnglishGrade9And10IllustrativeParagraphCandidates')!=21
                 or x.get('newGrade10ChemistryUrduConceptualResearchCandidates')!=10
                 or x.get('newHighPriorityGrade9BiologyAndGrade10ComputerUrduResearchCandidates')!=14
                 or x.get('newIndependentHighPriorityUrduBiologyResearchCandidates')!=10
-                or x.get('remainingLiveReviewDepthFlagsWithoutAnyDraft')!=(362 if x.get('newGrade9IslamiyatTarjumaOriginalEthicalResearchCandidates')==10 else 372 if x.get('newConventionalHighPriorityOriginalExemplarsWithoutApproval')==15 else 387)
-                or x.get('remainingHighPriorityFlagsWithoutAnyDraft')!=(141 if x.get('newGrade9IslamiyatTarjumaOriginalEthicalResearchCandidates')==10 else 151 if x.get('newConventionalHighPriorityOriginalExemplarsWithoutApproval')==15 else 166)
-                or len(x.get('unlinkedCurrentRevisionResearchQueue',[]))!=(362 if x.get('newGrade9IslamiyatTarjumaOriginalEthicalResearchCandidates')==10 else 372 if x.get('newConventionalHighPriorityOriginalExemplarsWithoutApproval')==15 else 387)
-                or sum(r.get('priority')=='HIGH' for r in x['unlinkedCurrentRevisionResearchQueue'])!=(141 if x.get('newGrade9IslamiyatTarjumaOriginalEthicalResearchCandidates')==10 else 151 if x.get('newConventionalHighPriorityOriginalExemplarsWithoutApproval')==15 else 166)
+                or x.get('remainingLiveReviewDepthFlagsWithoutAnyDraft')!=(358 if x.get('newGrade10FourNonproceduralChemistryOriginalResearchCandidates')==4 else 362 if x.get('newGrade9IslamiyatTarjumaOriginalEthicalResearchCandidates')==10 else 372 if x.get('newConventionalHighPriorityOriginalExemplarsWithoutApproval')==15 else 387)
+                or x.get('remainingHighPriorityFlagsWithoutAnyDraft')!=(137 if x.get('newGrade10FourNonproceduralChemistryOriginalResearchCandidates')==4 else 141 if x.get('newGrade9IslamiyatTarjumaOriginalEthicalResearchCandidates')==10 else 151 if x.get('newConventionalHighPriorityOriginalExemplarsWithoutApproval')==15 else 166)
+                or len(x.get('unlinkedCurrentRevisionResearchQueue',[]))!=(358 if x.get('newGrade10FourNonproceduralChemistryOriginalResearchCandidates')==4 else 362 if x.get('newGrade9IslamiyatTarjumaOriginalEthicalResearchCandidates')==10 else 372 if x.get('newConventionalHighPriorityOriginalExemplarsWithoutApproval')==15 else 387)
+                or sum(r.get('priority')=='HIGH' for r in x['unlinkedCurrentRevisionResearchQueue'])!=(137 if x.get('newGrade10FourNonproceduralChemistryOriginalResearchCandidates')==4 else 141 if x.get('newGrade9IslamiyatTarjumaOriginalEthicalResearchCandidates')==10 else 151 if x.get('newConventionalHighPriorityOriginalExemplarsWithoutApproval')==15 else 166)
                 or x.get('remainingHighPriorityStreamSpecificSubjectLabelsAwaitSchoolAdoption')!=137
-                or x.get('remainingHighPriorityOtherSubjectLabelsStillNeedBookAdoption')!=(4 if x.get('newGrade9IslamiyatTarjumaOriginalEthicalResearchCandidates')==10 else 14 if x.get('newConventionalHighPriorityOriginalExemplarsWithoutApproval')==15 else 29)
+                or x.get('remainingHighPriorityOtherSubjectLabelsStillNeedBookAdoption')!=(0 if x.get('newGrade10FourNonproceduralChemistryOriginalResearchCandidates')==4 else 4 if x.get('newGrade9IslamiyatTarjumaOriginalEthicalResearchCandidates')==10 else 14 if x.get('newConventionalHighPriorityOriginalExemplarsWithoutApproval')==15 else 29)
                 or x.get('streamSpecificLabelsAreNotAutomaticInapplicabilityOrApproval') is not True):
                 raise ValueError('GRADE9_CHEMISTRY_EIGHT_RESEARCH_REVISION_DRIFT_OR_FALSE_APPROVAL')
         prior_long_explanations_linked=True
@@ -358,6 +359,7 @@ def evaluate(technical, weekly, source, held, pdf, text, ocr_pilot, full_ocr, an
       "newGrade9ChemistryUrdu8UnapprovedExplanations":historic_answer_drafts.get("newGrade9ChemistryUrduOriginalConceptualResearchCandidates") if prior_long_explanations_linked else None,
       "newConventionalSubject15UnapprovedRubricExemplars":historic_answer_drafts.get("newConventionalHighPriorityOriginalExemplarsWithoutApproval") if prior_long_explanations_linked else None,
       "newGrade9IslamiatTarjuma10UnapprovedEthicalExemplars":historic_answer_drafts.get("newGrade9IslamiyatTarjumaOriginalEthicalResearchCandidates") if prior_long_explanations_linked else None,
+      "newGrade10FourNonproceduralChemistryUnapprovedExemplars":historic_answer_drafts.get("newGrade10FourNonproceduralChemistryOriginalResearchCandidates") if prior_long_explanations_linked else None,
       "highPriorityTechStreamLabelsAdoptionNotAuthenticated":historic_answer_drafts.get("remainingHighPriorityStreamSpecificSubjectLabelsAwaitSchoolAdoption") if prior_long_explanations_linked else None,
       "highPriorityOtherSubjectLabelsAdoptionNotAuthenticated":historic_answer_drafts.get("remainingHighPriorityOtherSubjectLabelsStillNeedBookAdoption") if prior_long_explanations_linked else None,
       "subjectiveDepthFlagsNeedingFreshAnswerResearchAfterNewDrafts":historic_answer_drafts.get("remainingLiveReviewDepthFlagsWithoutAnyDraft") if prior_long_explanations_linked else None,

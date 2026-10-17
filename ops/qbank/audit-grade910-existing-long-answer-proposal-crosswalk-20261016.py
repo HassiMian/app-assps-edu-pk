@@ -57,7 +57,7 @@ def packet_ids(groups,docs=DOCS,original=ORIG):
     if len(result)!=161 or sum(x['rows'] for x in packets)!=161:
         raise ValueError('EXPECTED_161_RESEARCH_DRAFTS_MISSING')
     return result,packets
-def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG,new_biology=None,new_dual_urdu=None,new_chemistry=None,new_english_essays=None,new_grade9_chem=None,new_nontech15=None,new_islamic10=None):
+def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG,new_biology=None,new_dual_urdu=None,new_chemistry=None,new_english_essays=None,new_grade9_chem=None,new_nontech15=None,new_islamic10=None,new_chemistry4=None):
     existing,packets=packet_ids(groups,docs,original)
     rows=five.get('rows')
     if not isinstance(rows,list) or len(rows)!=5:raise ValueError('EXPECTED_FINAL_FIVE_FACULTY_DOCKETS')
@@ -489,6 +489,56 @@ def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG,new_biology=
             or sum(z['priority']=='HIGH' and z['schoolStreamApplicability']=='STREAM_SPECIFIC_ADOPTION_EVIDENCE_REQUIRED' for z in unlinked)!=137
             or sum(z['priority']=='HIGH' and z['schoolStreamApplicability']=='SUBJECT_BOOK_EDITION_ADOPTION_EVIDENCE_REQUIRED' for z in unlinked)!=4):
             raise ValueError('ISLAMIC_TEN_BACKLOG_MUST_BE_362_141_RESEARCH_ONLY')
+    chemistry4_count=0
+    if new_chemistry4 is not None:
+        pkt=new_chemistry4
+        expected={'X-CHEM-C23-L01','X-CHEM-UR-C18-L01',
+                  'X-CHEM-UR-C23-L01','X-CHEM-UR-C24-L01'}
+        if (pkt.get('schema')!='ASSPS_GRADE10_FOUR_CHEMISTRY_CONCEPTUAL_RESEARCH_NONPROCEDURAL_UNAPPROVED_V1'
+            or pkt.get('candidateCount')!=4
+            or pkt.get('school1LiveCurrentRevisionCount')!=2411
+            or pkt.get('laboratoryOperatingInstructionsIncluded') is not False
+            or pkt.get('falseAcademicReviewSignaturesCount')!=0
+            or pkt.get('verifiedSchoolAdoptedSourceExercisePages')!=0
+            or pkt.get('qualifiedSubjectApprovals')!=0
+            or pkt.get('qualifiedUrduReviews')!=0
+            or pkt.get('academicallyApproved')!=0
+            or pkt.get('paperStudioPublished')!=0
+            or pkt.get('school1DatabaseMutations')!=0
+            or len(pkt.get('answers',[]))!=4):
+            raise ValueError('FOUR_CHEMISTRY_CAN_ONLY_BE_UNAPPROVED_CONCEPT_RESEARCH')
+        prior={row['questionId']:row for row in unlinked}
+        seen=set()
+        for one in pkt['answers']:
+            id=one.get('questionId');original=prior.get(id)
+            if (id not in expected or id in seen or original is None
+                or original.get('grade')!='10th' or original.get('subject')!='Chemistry'
+                or original.get('priority')!='HIGH'
+                or original.get('schoolStreamApplicability')!='SUBJECT_BOOK_EDITION_ADOPTION_EVIDENCE_REQUIRED'
+                or one.get('currentLiveFullRevisionSHA256')!=hashes.get(id)
+                or one.get('subject')!=original.get('subject')
+                or one.get('medium')!=original.get('medium')
+                or one.get('marks')!=5
+                or not 80<=len(one.get('originalNonproceduralChemistryConceptualExemplarNotOfficialKey','').split())<=180
+                or len(one.get('fiveCriterionAcademicAndSafetyReviewRubricNotApprovedKey',[]))!=5
+                or one.get('mayNotProvideLaboratoryOperatingParameters') is not True
+                or one.get('schoolSpecific2026To2027EditionAdopted') is not False
+                or one.get('originalPrintedTextbookExercisePageVerified') is not False
+                or one.get('independentChemistryFacultyRevisionApproval') is not False
+                or one.get('independentUrduReviewerApproval') is not False
+                or one.get('academicApproved') is not False
+                or one.get('paperStudioVerifiedSelectable') is not False
+                or one.get('productionDBWrites')!=0):
+                raise ValueError('FOUR_CHEMISTRY_NOT_EXACT_CURRENT_UNREVIEWED_QID_SHA')
+            seen.add(id)
+        if seen!=expected:raise ValueError('EXACT_FOUR_GRADE10_CHEMISTRY_IDS_REQUIRED')
+        unlinked=[v for v in unlinked if v['questionId'] not in expected]
+        chemistry4_count=4
+        if (len(unlinked)!=358
+            or sum(v['priority']=='HIGH' for v in unlinked)!=137
+            or sum(v['priority']=='HIGH' and v['schoolStreamApplicability']=='STREAM_SPECIFIC_ADOPTION_EVIDENCE_REQUIRED' for v in unlinked)!=137
+            or sum(v['priority']=='HIGH' and v['schoolStreamApplicability']=='SUBJECT_BOOK_EDITION_ADOPTION_EVIDENCE_REQUIRED' for v in unlinked)!=0):
+            raise ValueError('CHEMISTRY_FOUR_BACKLOG_MUST_BE_358_137_TECH_PENDING')
     if summary['originalUniverse']!=166 or summary['live']!=165 or summary['originalOnly']!=1:
         raise ValueError('RESEARCH_ORIGINAL_LIVE_CROSSWALK_DRIFT')
     if summary['hasResearchDraft']!=165 or summary['noResearchDraft']!=1 or summary['liveWithResearchDraft']!=164:
@@ -510,6 +560,7 @@ def build(groups,five,revision,risk,liveids,docs=DOCS,original=ORIG,new_biology=
        'newGrade9ChemistryUrduOriginalConceptualResearchCandidates':grade9_chem_count,
        'newConventionalHighPriorityOriginalExemplarsWithoutApproval':original_nontech15,
        'newGrade9IslamiyatTarjumaOriginalEthicalResearchCandidates':islamic10_count,
+       'newGrade10FourNonproceduralChemistryOriginalResearchCandidates':chemistry4_count,
        'remainingHighPriorityStreamSpecificSubjectLabelsAwaitSchoolAdoption':sum(x['priority']=='HIGH' and x['schoolStreamApplicability']=='STREAM_SPECIFIC_ADOPTION_EVIDENCE_REQUIRED' for x in unlinked),
        'remainingHighPriorityOtherSubjectLabelsStillNeedBookAdoption':sum(x['priority']=='HIGH' and x['schoolStreamApplicability']=='SUBJECT_BOOK_EDITION_ADOPTION_EVIDENCE_REQUIRED' for x in unlinked),
        'streamSpecificLabelsAreNotAutomaticInapplicabilityOrApproval':True,
@@ -638,10 +689,24 @@ def run():
         source7)
     if proposal7!=expected7:
         raise ValueError('ISLAMIC_TEN_INDEPENDENT_CURRENT_SHA_PACKET_NOT_REPRODUCIBLE')
+    spec8=importlib.util.spec_from_file_location(
+        'assps_four_conceptual_chemistry_unapproved',
+        ROOT/'ops/qbank/author-grade10-four-safe-conceptual-chemistry-exemplars-20261017.py')
+    author8=importlib.util.module_from_spec(spec8);spec8.loader.exec_module(author8)
+    proposal8=json.loads(author8.OUT.read_text(encoding='utf8'))
+    baseline8=build(groups,last,ledger,risks,set(hashes),new_biology=proposal,
+        new_dual_urdu=proposal2,new_chemistry=proposal3,new_english_essays=proposal4,
+        new_grade9_chem=proposal5,new_nontech15=proposal6,new_islamic10=proposal7)
+    expected8=author8.build(live,hashes,
+        {r['questionId']:r for r in risks['records']},
+        {r['questionId']:r for r in baseline8['unlinkedCurrentRevisionResearchQueue']},
+        {r['questionId']:r for r in json.loads(author8.PUB.read_text())['rows']})
+    if proposal8!=expected8:
+        raise ValueError('CURRENT_GRADE10_CHEMISTRY_FOUR_PROOF_NOT_REPRODUCIBLE')
     result=build(groups,last,ledger,risks,set(hashes),new_biology=proposal,
                  new_dual_urdu=proposal2,new_chemistry=proposal3,
                  new_english_essays=proposal4,new_grade9_chem=proposal5,new_nontech15=proposal6,
-                 new_islamic10=proposal7)
+                 new_islamic10=proposal7,new_chemistry4=proposal8)
     atomic_private(OUT,result)
     return result
 if __name__=='__main__':
