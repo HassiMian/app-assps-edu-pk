@@ -1,4 +1,5 @@
 import {compileWeeklyPlan} from './lessonWeeklyEngine.js'
+import {composeTeachingStatement} from './professionalLessonCopy.js'
 const NUMERIC={1:'One',2:'Two',3:'Three',4:'Four',5:'Five',6:'Six',7:'Seven',8:'Eight'}
 const normalizeClass=s=>NUMERIC[Number(s)]||({Play:'Starter',Playgroup:'Starter',Nursery:'Mover',Prep:'Flyer'})[s]||s
 export const LESSON_CARD_COUNTS=[1,2,3,4,6,8]
@@ -71,7 +72,22 @@ export function planWeekRows(candidates,klass,week,options={}){
   const compiled=compileWeeklyPlan(candidate,options)
   const matching=compiled.weeks.filter(w=>w.start<=week.end&&w.end>=week.start)
   const study=matching.filter(w=>w.source!=='ORIGINAL_ASSESSMENT_ONLY')
-  if(compiled.mode==='IMAGE_TRANSCRIPTION_REVIEW'&&!study.length)continue
+  if(compiled.mode==='IMAGE_TRANSCRIPTION_REVIEW'&&!study.length){
+   // Keep test-only image weeks in the assessment calendar; do not invent
+   // a reading lesson or paste 'FULL REVISION TEST' as syllabus work.
+   const testOnly=matching.flatMap(w=>w.assessment?[w.assessment]:[])
+   if(!testOnly.length)continue
+   const subject=candidate.source_subject_label
+   const urdu=/Urdu|Islamiat|Islamiyat|Nazra|Quran|اردو|اسلامیات/i.test(subject)
+   rows.push({id:candidate.candidate_key,subject,
+    task:urdu?'متعلقہ باب کے کام کی تکمیل کے بعد مقررہ جائزہ لیں۔':
+      'Complete the scheduled assessment after confirming chapter coverage.',
+    teacherSourceNotes:matching.map(w=>w.teacherText||w.statement).filter(Boolean),
+    sourceUnits:[],page:null,sourceStatus:'ASSESSMENT WEEK / SOURCE REVIEW',
+    assessments:testOnly,activities:[],flags:['Original lesson coverage must be verified.'],
+    originalSourceIds:candidate.source_submissions||[]})
+   continue
+  }
   let task=study[0]?.statement||''
   let flags=[]
   if(study.length>1&&new Set(study.map(w=>w.sourceRange)).size>1)
@@ -98,10 +114,19 @@ export function planWeekRows(candidates,klass,week,options={}){
    compiled.mode==='PROPOSED'?'PROPOSED WEEK':compiled.mode==='IMAGE_REVIEW_REQUIRED'?
     'IMAGE REVIEW REQUIRED':'SOURCE DATED'
   if(study.some(x=>x.reviewRequired))flags.push('Source date/month needs confirmation')
-  const page=study[0]?.page||null
+  // Only transform source-backed instruction text; do not invent pages or weeks.
+  const teacherNotes=study.map(w=>w.teacherText||w.statement).filter(Boolean)
+  const composed=study.length?composeTeachingStatement({
+    subject:candidate.source_subject_label,notes:teacherNotes,pages:study.map(w=>w.page)
+  }):null
+  const page=composed?.pageFrom&&composed?.pageTo?
+    {from:Number(composed.pageFrom),to:Number(composed.pageTo)}:study[0]?.page||null
+  if(composed?.statement)task=composed.statement
+  if(composed?.needsLanguageReview)flags.push('Verify original Urdu teacher wording before publishing.')
   if(!task&&compiled.mode==='IMAGE_REVIEW_REQUIRED')task='Review original image before writing a weekly task.'
   if(!task)task='No source lesson in this week. Review syllabus coverage.'
   rows.push({id:candidate.candidate_key,subject:candidate.source_subject_label,task,
+   teacherSourceNotes:teacherNotes,sourceUnits:composed?.units||[],
    page,sourceStatus,assessments,activities,flags,originalSourceIds:candidate.source_submissions||[]})
   sourceMeta.push({id:candidate.candidate_key,warnings:compiled.warnings})
  }

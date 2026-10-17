@@ -19,8 +19,9 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false)
 
   const isLight = theme === 'light'
-  const schoolName = branding?.schoolName || 'APEX Education Gateway'
-  const logoUrl = branding?.logoUrl || '/favicon.svg'
+  const isAsspsDomain = typeof window !== 'undefined' && window.location.hostname === 'app.assps.edu.pk'
+  const schoolName = branding?.schoolName || (isAsspsDomain ? 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL' : 'APEX Education Gateway')
+  const logoUrl = branding?.logoUrl || (isAsspsDomain ? '/school-logo.svg' : '/favicon.svg')
 
   const handleLogin = async (event) => {
     event.preventDefault()

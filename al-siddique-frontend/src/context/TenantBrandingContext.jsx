@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useAuth } from "./AuthContext";
 import api, { resolveAssetUrl } from "../services/api";
 import { getTenantStorageItem, setTenantStorageItem } from "../services/tenantStorage";
@@ -25,7 +25,7 @@ try {
   if (cached) {
     initialBrandingState = { ...DEFAULT_BRANDING, ...JSON.parse(cached), loading: false };
   }
-} catch {}
+} catch { /* optional local cache is unavailable */ }
 
 function pick(...values) {
   return values.find((value) => value !== undefined && value !== null && String(value).trim() !== "");
@@ -57,6 +57,7 @@ function normalizeBrandingPayload(payload) {
 export function TenantBrandingProvider({ children }) {
   const { user } = useAuth();
   const [branding, setBranding] = useState(initialBrandingState);
+  const brandingRequest = useRef(0);
 
   const applyCssVars = useCallback((data) => {
     try {
@@ -77,14 +78,38 @@ export function TenantBrandingProvider({ children }) {
   }, []);
 
   const loadBranding = useCallback(async () => {
+    const requestId = ++brandingRequest.current;
     if (!user) {
-      const neutral = { ...DEFAULT_BRANDING, refresh: loadBranding };
-      setBranding(neutral);
-      applyCssVars(neutral);
-      return neutral;
+      // Without authentication we may fetch ONLY public school-name/logo data
+      // for the explicitly selected code or the canonical ASSPS web hostname.
+      const params = typeof window === 'undefined' ? null : new URLSearchParams(window.location.search);
+      const rawCode = params?.get('school_code') ||
+        (typeof window !== 'undefined' && window.location.hostname === 'app.assps.edu.pk' ? 'assps' : '');
+      const code = /^[a-z0-9][a-z0-9_-]{1,59}$/i.test(rawCode || '') ? rawCode : '';
+      const neutral = { ...DEFAULT_BRANDING };
+      if (!code) {
+        setBranding(neutral);
+        applyCssVars(neutral);
+        return neutral;
+      }
+      try {
+        const response = await api.get('/api/school/public-branding', { params: { school_code: code } });
+        if (requestId !== brandingRequest.current) return neutral;
+        const safePublic = normalizeBrandingPayload(response.data);
+        const publicBrand = { ...neutral, ...safePublic, schoolId: null, tenantId: null };
+        setBranding(publicBrand);
+        applyCssVars(publicBrand);
+        return publicBrand;
+      } catch {
+        if (requestId === brandingRequest.current) {
+          setBranding(neutral);
+          applyCssVars(neutral);
+        }
+        return neutral;
+      }
     }
 
-    setBranding({ ...DEFAULT_BRANDING, loading: true, error: null, refresh: loadBranding });
+    setBranding({ ...DEFAULT_BRANDING, loading: true, error: null });
 
     const endpoints = ["/api/school/settings/current", "/api/school/branding", "/api/settings"];
     let lastError = null;
@@ -94,13 +119,13 @@ export function TenantBrandingProvider({ children }) {
         const res = await api.get(endpoint);
         if (res.data?.success === false) throw new Error(res.data?.message || "Branding API failed");
 
+        if (requestId !== brandingRequest.current) return DEFAULT_BRANDING;
         const normalized = normalizeBrandingPayload(res.data);
         const nextBranding = {
           ...DEFAULT_BRANDING,
           ...normalized,
           loading: false,
           error: null,
-          refresh: loadBranding,
         };
 
         setBranding(nextBranding);
@@ -114,7 +139,7 @@ export function TenantBrandingProvider({ children }) {
               secondaryColor: nextBranding.secondaryColor,
             }));
           }
-        } catch {}
+        } catch { /* optional local cache is unavailable */ }
         return nextBranding;
       } catch (error) {
         lastError = error;
@@ -126,15 +151,18 @@ export function TenantBrandingProvider({ children }) {
       ...DEFAULT_BRANDING,
       loading: false,
       error: lastError?.message || "School settings could not be loaded",
-      refresh: loadBranding,
     };
-    setBranding(fallback);
-    applyCssVars(fallback);
+    if (requestId === brandingRequest.current) {
+      setBranding(fallback);
+      applyCssVars(fallback);
+    }
     return fallback;
   }, [applyCssVars, user]);
 
   useEffect(() => {
-    loadBranding();
+    let active = true;
+    queueMicrotask(() => { if (active) void loadBranding(); });
+    return () => { active = false; };
   }, [loadBranding]);
 
   useEffect(() => {
@@ -156,6 +184,8 @@ export function TenantBrandingProvider({ children }) {
   );
 }
 
+// Context hook intentionally co-located with its provider; existing API preserved.
+// eslint-disable-next-line react-refresh/only-export-components
 export function useTenantBranding() {
   return useContext(TenantBrandingContext);
 }

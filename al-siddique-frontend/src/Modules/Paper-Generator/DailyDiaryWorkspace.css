@@ -1701,3 +1701,19 @@
     print-color-adjust: exact !important;
   }
 }
+
+/* Neutral controls beneath Live A4 Preview: keep functioning size controllers
+   while separating editing chrome from the actual printed diary. */
+.dd-workspace .dd-studio-quick-bar{background:#f5f8fb;color:#193950;
+  border:1px solid #d9e3ea;box-shadow:none}
+.dd-workspace .dd-sqb-label{color:#43647b}
+.dd-workspace .dd-sqb-select{background:white;color:#193950;border:1px solid #c5d6e0}
+.dd-workspace .dd-sqb-select:focus{border-color:#1598a3;outline:2px solid #c1e8e9}
+.dd-workspace .dd-sqb-stepper{background:white;border:1px solid #c5d6e0}
+.dd-workspace .dd-sqb-stepper button{background:#edf4f7;border-color:#c8d9e2;color:#184c65}
+.dd-workspace .dd-sqb-stepper button:hover{background:#dceef0}
+.dd-workspace .dd-sqb-stepper b{color:#213c51}
+.dd-workspace .dd-sqb-reset{color:#466a7c!important}
+.dd-workspace .dd-sqb-reset:hover{color:#123549!important}
+.dd-workspace .dd-sqb-divider{background:#ccdae4}
+.dd-workspace .dd-sqb-btn-bold.active{background:#d9f3ec!important;color:#165a4c!important;border-color:#8bd4c0!important}
