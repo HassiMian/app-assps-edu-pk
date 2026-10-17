@@ -81,3 +81,36 @@
 .term-subject-size-stepper button{min-width:36px;min-height:34px;border:1px solid #b8d2df;border-radius:6px;background:white;color:#173f60;font-weight:800;cursor:pointer}
 .term-subject-size-stepper output{min-width:40px;text-align:center;font-weight:800;color:#124b71}
 .term-subject-typography-controls input[type=range]{width:100%}
+
+/* ASSPS premium vector A4 term templates — no bitmap canvas rasterization. */
+.term-template-choice {display:grid;gap:5px;font-size:11px;font-weight:700;margin:8px 0 13px}
+.term-template-choice select{width:100%;padding:8px;border:1px solid #bfcedb;border-radius:8px;background:#fff}
+.term-roster-editor {background:#f6f9fc;border:1px solid #d6e5ec;border-radius:10px;padding:10px;margin:8px 0 14px}
+.term-roster-actions {display:flex;gap:8px;margin:5px 0}
+.term-roster-list {max-height:135px;overflow:auto;display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.term-roster-list label {display:flex;gap:6px;align-items:center;font-size:10px;color:#254e65}
+.term-roster-list input{accent-color:#087c90}
+.term-print-pages{display:flex;flex-direction:column;gap:13px}
+.term-print-document{padding:var(--term-page-padding,6mm);box-sizing:border-box;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  text-rendering:optimizeLegibility;font-kerning:normal;filter:none}
+.term-print-document tbody td{line-height:var(--term-line-height,1.45)}
+.term-print-assessments tbody td,.term-print-assessments tbody th{font-size:var(--term-assessment-font,11px)}
+.term-student-identification{display:flex;flex-wrap:wrap;justify-content:space-between;
+  gap:8px;margin:8px 0;padding:8px 9px;background:#f7fafc;border:1px solid #d4e2eb}
+.term-student-identification strong{font-size:var(--term-student-size,13px)}
+.term-student-identification span{font-size:11px}
+.term-template-ivory{--term-accent:#a48b62;--term-accent-soft:#f9f7ef}
+.term-template-teal{--term-accent:#0b7f86;--term-accent-soft:#ecf9f8}
+.term-template-silver{--term-accent:#5a6c7e;--term-accent-soft:#f2f5f7}
+.term-print-document .term-letterhead{border-bottom:2px solid var(--term-accent,#a48b62)}
+.term-print-document .term-letterhead h2{color:#173549}
+.term-print-document thead th{background:var(--term-accent-soft,#f9f7ef);color:#18384d}
+.term-print-document .term-student-identification{border-left:3px solid var(--term-accent,#a48b62)}
+@media print{
+  @page{size:A4;margin:6mm}
+  .term-print-pages{display:block}
+  .term-print-document{padding:0!important;min-height:0;box-shadow:none;transform:none!important;filter:none!important}
+  .term-print-document:not(:last-child){break-after:page;page-break-after:always}
+  .term-roster-editor,.term-template-choice{display:none!important}
+}

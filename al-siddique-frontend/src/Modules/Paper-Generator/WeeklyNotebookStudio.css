@@ -168,3 +168,10 @@
 .wn-daily-teaching-details label{display:grid;gap:4px;font-size:10px;font-weight:700;color:#245371}
 .wn-daily-teaching-details textarea{min-height:54px;resize:vertical;width:100%}
 @media(max-width:780px){.wn-daily-teaching-details{grid-template-columns:1fr}}
+
+/* Student, assessment and line metrics remain vector-print typography. */
+.wn-card-identity b{font-size:var(--wn-student-size,13px)}
+.wn-task{line-height:var(--wn-line-height,1.45)}
+.wn-assessment-table tbody td,.wn-assessment-table tbody th{font-size:var(--wn-assessment-font,11px)}
+.wn-paper{padding:var(--wn-page-padding,6mm)}
+@media print{.wn-paper{transform:none!important;filter:none!important;padding:0!important}}

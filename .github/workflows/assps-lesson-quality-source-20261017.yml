@@ -1,0 +1,46 @@
+name: ASSPS Paper Studio Lesson Term Diary Source QA (NOT DEPLOY)
+on:
+  push:
+    branches:
+      - fix/paper-lesson-unified-quality-20261017
+      - integration/assps-core742-lesson-quality-forward-20261017
+    paths:
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/**'
+      - 'al-siddique-frontend/src/context/TenantBrandingContext.jsx'
+      - 'al-siddique-frontend/src/pages/LoginPage.jsx'
+      - 'al-siddique-backend/src/routes/brandingRoutes.js'
+      - 'al-siddique-backend/src/tests/public-school-branding-login-20261017.test.cjs'
+      - 'ops/tests/assps-lesson-source-calendar-20261017.test.mjs'
+      - 'ops/tests/professional-lesson-copy-20261017.test.mjs'
+      - '.github/workflows/assps-lesson-quality-source-20261017.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-contracts-no-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: al-siddique-frontend/package-lock.json
+      - name: Source and negative security tests without live school data
+        run: |
+          node --test ops/tests/assps-lesson-source-calendar-20261017.test.mjs ops/tests/professional-lesson-copy-20261017.test.mjs al-siddique-backend/src/tests/public-school-branding-login-20261017.test.cjs
+          node --test ops/tests/paper-diary-active-controller-immutable-release-gate-20261015.test.cjs
+      - name: Install ephemeral dependencies
+        working-directory: al-siddique-frontend
+        run: npm ci --no-audit --no-fund
+      - name: Protected template integrity
+        working-directory: al-siddique-frontend
+        run: npm run verify:templates
+      - name: Scoped lint and build
+        working-directory: al-siddique-frontend
+        run: |
+          ./node_modules/.bin/eslint src/Modules/Paper-Generator/WeeklyNotebookStudio.jsx src/Modules/Paper-Generator/TermPlannerEditor.jsx src/Modules/Paper-Generator/weeklyNotebookModel.js src/Modules/Paper-Generator/termPlanningModel.js src/Modules/Paper-Generator/professionalLessonCopy.js src/pages/LoginPage.jsx src/context/TenantBrandingContext.jsx src/Modules/Paper-Generator/DailyDiaryWorkspace.jsx
+          npm run build
+      - name: Explicit source-only status
+        run: echo SOURCE_ONLY_PASS_NOT_RELEASE_PAPER_STUDIO_AND_CORE_SIGNOFF_PENDING
