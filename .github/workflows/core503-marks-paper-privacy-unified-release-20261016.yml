@@ -13,6 +13,8 @@ on:
       - 'integration/assps-core78-lesson42-corpus-unified-20261017'
       - 'integration/assps-allstreams-core0d-paper82-20261017'
       - 'integration/assps-master-core-paper-result-20261017'
+      - 'integration/core78-school-notices-diary-contract-20261017'
+      - 'integration/assps-core742-notice-lesson-unified-20261017'
   pull_request:
     paths:
       - 'al-siddique-backend/src/config/signedRlsCatalogGuard.js'
@@ -81,6 +83,10 @@ jobs:
         run: python3 -m unittest -q ops/paper-studio/test_verify_paper_api_dependency_20261017.py ops/paper-studio/test_verify_teacher_timetable_source_20261017.py
       - name: Protect A B English Urdu lesson subject merges and excluded classes
         run: node --test al-siddique-frontend/src/Modules/Paper-Generator/tests/plannerABMergeExclusion.test.mjs
+      - name: Keep notices and daily-format Lesson Planning tied to canonical modules
+        run: |
+          node --test ops/tests/lesson-diary-format-source-parity.test.cjs
+          node --test al-siddique-backend/src/tests/school-document-contract.test.js al-siddique-backend/src/tests/school-bell-schedule-20261016.test.js al-siddique-backend/src/tests/school-document-http-isolated.test.js
       - name: Pin source-reviewed private A-B Chromium acceptance scripts (secure VPS witness; never a hosted browser claim)
         run: |
           printf '%s  %s\n' 'a74641a7ec259e1c2acc3c42733bfa7d3a660c2e23b558f0d5b91b6f0edd54a1' 'al-siddique-frontend/src/Modules/Paper-Generator/tests/plannerABBrowserQA.mjs' | sha256sum --check
