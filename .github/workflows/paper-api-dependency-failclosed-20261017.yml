@@ -6,11 +6,15 @@ on:
     paths:
       - 'ops/paper-studio/verify_paper_api_dependency_20261017.py'
       - 'ops/paper-studio/test_verify_paper_api_dependency_20261017.py'
+      - 'ops/paper-studio/verify_teacher_timetable_source_20261017.py'
+      - 'ops/paper-studio/test_verify_teacher_timetable_source_20261017.py'
       - '.github/workflows/paper-api-dependency-failclosed-20261017.yml'
   pull_request:
     paths:
       - 'ops/paper-studio/verify_paper_api_dependency_20261017.py'
       - 'ops/paper-studio/test_verify_paper_api_dependency_20261017.py'
+      - 'ops/paper-studio/verify_teacher_timetable_source_20261017.py'
+      - 'ops/paper-studio/test_verify_teacher_timetable_source_20261017.py'
       - '.github/workflows/paper-api-dependency-failclosed-20261017.yml'
 permissions:
   contents: read
@@ -25,5 +29,7 @@ jobs:
           python-version: '3.11'
       - name: Validate injected 502, restarts, protected 401 and no release bypass
         run: python -m unittest discover -s ops/paper-studio -p 'test_verify_paper_api_dependency_20261017.py' -v
+      - name: Reject unreviewed timetable IDs as teacher print privileges
+        run: python -m unittest discover -s ops/paper-studio -p 'test_verify_teacher_timetable_source_20261017.py' -v
       - name: Syntax validation only; no school credentials or live probes in GitHub CI
-        run: python -m py_compile ops/paper-studio/verify_paper_api_dependency_20261017.py
+        run: python -m py_compile ops/paper-studio/verify_paper_api_dependency_20261017.py ops/paper-studio/verify_teacher_timetable_source_20261017.py
