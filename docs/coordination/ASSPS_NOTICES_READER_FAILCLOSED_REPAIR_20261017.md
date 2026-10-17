@@ -19,3 +19,5 @@ Until authoritative recipient-to-teacher identity linkage and a separately authe
 ## Release gates still CLOSED
 
 These are synthetic source and mocked Express regression tests, not real teacher login or production policy verification. No teacher audience certification, independent authenticated School2 denial, production grant/RLS audit, offsite backup ownership restore, signed worker transport, actual teacher Diary Save→Reopen→Print, physical Urdu A4 witness, approved academic source or controlled rollback certificate. Last independently signed overall Core gate was 6/13 HOLD. **Do not deploy or merge into production based on this patch or a green CI alone.**
+
+The dedicated Notice Audience CI workflow is updated to assert the protected administrative GET source while requiring `production_release_authorized:false` and `school2_authenticated:false`. A green source HOLD gate must never be interpreted as teacher audience functionality or authenticated release authorization.

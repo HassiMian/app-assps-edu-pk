@@ -4,6 +4,7 @@ on:
     branches:
       - audit/assps-notices-audience-release-hold-20261017
       - integration/assps-core742-notice-diary-unified-20261017
+      - fix/assps-notices-read-failclosed-20261017
     paths:
       - 'al-siddique-backend/src/routes/noticesRoutes.js'
       - 'al-siddique-backend/src/tests/notices-principal-issuer-tenant-isolated.test.cjs'
@@ -27,12 +28,13 @@ jobs:
         run: node --test al-siddique-backend/src/tests/notices-principal-issuer-tenant-isolated.test.cjs
       - name: Test that missing notice-reader policy is detected
         run: node --test ops/tests/notices-read-audience-source-20261017.test.cjs
-      - name: Assert production HOLD is correctly emitted, NOT a release certificate
+      - name: Assert admin-only source guard and STILL HOLD independent release certification
         shell: bash
         run: |
-          set +e
-          node ops/notices/verify-notice-audience-source-20261017.cjs
-          code=$?
-          set -e
-          test "$code" -eq 2
-          echo 'EXPECTED_HOLD_NOTICE_READ_AUDIENCE; DO_NOT_DEPLOY'
+          set -euo pipefail
+          result=$(node ops/notices/verify-notice-audience-source-20261017.cjs)
+          printf '%s\n' "$result"
+          echo "$result" | grep -q 'SOURCE_GUARD_PRESENT_NOT_LIVE_CERTIFIED'
+          echo "$result" | grep -q '"production_release_authorized": false'
+          echo "$result" | grep -q '"school2_authenticated": false'
+          echo 'EXPECTED_HOLD_TEACHER_AUDIENCE_AND_LIVE_RELEASE; DO_NOT_DEPLOY'
