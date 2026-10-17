@@ -169,20 +169,48 @@ class RecoveryContract(unittest.TestCase):
             self.assertEqual((root / gate.OUTPUT).stat().st_mode & 0o777, 0o600)
 
     def test_untrusted_private_directory_or_symlink_rejected(self):
+        # Test POSIX owner metadata hermetically. Real private_json MUST still
+        # demand uid=0 and modes 0700/0600 on the production host.
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
             f = root / 'example.json'
             f.write_text('{}')
             os.chmod(root, 0o700)
             os.chmod(f, 0o600)
-            self.assertEqual(private_json(root, 'example.json'), {})
-            os.chmod(f, 0o644)
-            with self.assertRaisesRegex(ValueError, 'UNTRUSTED_PRIVATE_FILE'):
-                private_json(root, 'example.json')
-            os.chmod(f, 0o600)
-            (root / 'link.json').symlink_to(f)
-            with self.assertRaisesRegex(ValueError, 'UNTRUSTED_PRIVATE_FILE'):
-                private_json(root, 'link.json')
+            original_lstat = Path.lstat
+
+            def owner_stat(path, uid):
+                fields = list(original_lstat(path))
+                fields[4] = uid  # POSIX stat_result.st_uid; TEST MOCK ONLY.
+                return os.stat_result(fields)
+
+            with patch.object(Path, 'lstat', autospec=True,
+                              side_effect=lambda path: owner_stat(path, 12345)):
+                with self.assertRaisesRegex(ValueError, 'UNTRUSTED_PRIVATE_DIRECTORY'):
+                    private_json(root, 'example.json')
+
+            def owned_fixture(path):
+                uid = 12345 if path == f else 0
+                return owner_stat(path, uid)
+
+            with patch.object(Path, 'lstat', autospec=True, side_effect=owned_fixture):
+                with self.assertRaisesRegex(ValueError, 'UNTRUSTED_PRIVATE_FILE'):
+                    private_json(root, 'example.json')
+
+            with patch.object(Path, 'lstat', autospec=True,
+                              side_effect=lambda path: owner_stat(path, 0)):
+                self.assertEqual(private_json(root, 'example.json'), {})
+                os.chmod(root, 0o755)
+                with self.assertRaisesRegex(ValueError, 'UNTRUSTED_PRIVATE_DIRECTORY'):
+                    private_json(root, 'example.json')
+                os.chmod(root, 0o700)
+                os.chmod(f, 0o644)
+                with self.assertRaisesRegex(ValueError, 'UNTRUSTED_PRIVATE_FILE'):
+                    private_json(root, 'example.json')
+                os.chmod(f, 0o600)
+                (root / 'link.json').symlink_to(f)
+                with self.assertRaisesRegex(ValueError, 'UNTRUSTED_PRIVATE_FILE'):
+                    private_json(root, 'link.json')
 
 
 if __name__ == '__main__':

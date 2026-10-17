@@ -1,6 +1,7 @@
 """Protect independent persisted daily lesson plans across every future frontend cutover."""
 import importlib.util
 import json
+import tempfile
 from pathlib import Path
 import unittest
 
@@ -23,11 +24,23 @@ class IndependentDailyControls(unittest.TestCase):
   for text in DAILY_MARKERS:self.assertTrue(report['details']['runtime_markers'][text])
 
  def test_old_paper_term_bundle_without_save_day_must_fail(self):
-  prior=Path('/root/workspace/assps-planning-architecture-v4-20261015/al-siddique-frontend/dist')
-  if not prior.is_dir():self.skipTest('Archived v4 reference build unavailable')
-  report=gate.validate(prior,contract)
-  self.assertFalse(report['pass'])
-  self.assertFalse(report['checks']['all_runtime_ui_markers'])
+  # Hermetic archived-like bundle: current real built bundle has its own positive test.
+  missing='Save Day to School Server'
+  self.assertIn(missing,contract['required_lesson_module_markers'])
+  with tempfile.TemporaryDirectory() as folder:
+   root=Path(folder);assets=root/'assets';assets.mkdir()
+   names=['index-negativefixture.js','PaperGenerator-negativefixture.js','LessonPlanModule-negativefixture.js']
+   (root/'index.html').write_text('<script type="module" src="/assets/'+names[0]+'"></script>')
+   (assets/names[0]).write_text('import "./'+names[1]+'";')
+   (assets/names[1]).write_text('import "./'+names[2]+'";')
+   (assets/names[2]).write_text('\n'.join(x for x in contract['required_lesson_module_markers'] if x!=missing))
+   report=gate.validate(root,contract)
+   self.assertFalse(report['pass'],report)
+   self.assertTrue(report['checks']['one_active_lesson_planner_module'],report)
+   self.assertTrue(report['checks']['no_missing_reachable_assets'],report)
+   self.assertFalse(report['checks']['all_runtime_ui_markers'],report)
+   self.assertIs(report['details']['runtime_markers'][missing],False)
+   self.assertTrue(all(v for k,v in report['details']['runtime_markers'].items() if k!=missing),report)
 
  def test_daily_button_removal_alone_fails_closed(self):
   mutated={**contract,'required_lesson_module_markers':
