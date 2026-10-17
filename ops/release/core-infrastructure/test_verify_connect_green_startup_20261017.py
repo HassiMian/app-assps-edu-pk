@@ -58,14 +58,25 @@ class GreenBootContract(unittest.TestCase):
   with self.assertRaises(ValueError):m.check_pm2(a,b)
 
  def test_reject_symlink_and_weak_mode_metadata(self):
+  # Simulate POSIX uid=0 in the fixture only; the real verifier stays strict.
   with tempfile.TemporaryDirectory() as d:
-   p=Path(d)/'protected.cjs';p.write_bytes(CONFIG)
-   os.chmod(p,0o600)
-   self.assertEqual(m.safe_regular_file(p,private=True),CONFIG)
-   os.chmod(p,0o644)
-   with self.assertRaisesRegex(ValueError,'UNSAFE_PRIVATE_BACKUP_PERMISSIONS'):m.safe_regular_file(p,private=True)
-   l=Path(d)/'link.cjs';l.symlink_to(p)
-   with self.assertRaisesRegex(ValueError,'UNTRUSTED_STARTUP_FILE'):m.safe_regular_file(l)
+   p=Path(d)/'protected.cjs';p.write_bytes(CONFIG);os.chmod(p,0o600)
+   real_lstat=Path.lstat
+   def owner_stat(path,uid):
+    parts=list(real_lstat(path));parts[4]=uid
+    return os.stat_result(parts)
+   with patch.object(Path,'lstat',autospec=True,side_effect=lambda path:owner_stat(path,12345)):
+    with self.assertRaisesRegex(ValueError,'UNTRUSTED_STARTUP_FILE'):
+     m.safe_regular_file(p,private=True)
+   with patch.object(Path,'lstat',autospec=True,side_effect=lambda path:owner_stat(path,0)):
+    self.assertEqual(m.safe_regular_file(p,private=True),CONFIG)
+    os.chmod(p,0o644)
+    with self.assertRaisesRegex(ValueError,'UNSAFE_PRIVATE_BACKUP_PERMISSIONS'):
+     m.safe_regular_file(p,private=True)
+    os.chmod(p,0o600)
+    l=Path(d)/'link.cjs';l.symlink_to(p)
+    with self.assertRaisesRegex(ValueError,'UNTRUSTED_STARTUP_FILE'):
+     m.safe_regular_file(l)
 
  def test_no_live_readwithout_explicit_optin(self):
   self.assertEqual(m.main([]),2)
