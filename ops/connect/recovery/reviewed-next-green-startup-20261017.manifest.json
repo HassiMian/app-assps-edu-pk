@@ -1,0 +1,17 @@
+{
+  "scope": "CONNECT_NEXT_STARTUP_SOURCE_ONLY_NOT_DEPLOYED",
+  "standalone_parent_sha": "20ebae71ca438ad1590720ac93ff1ed9d59fedd7",
+  "standalone_reviewed_sha": "659b01fcef34ade4e7052b436fb62e083845cc3a",
+  "patch_sha256": "7b0a52f00811699742cb11b65559e4844d106d0c87933bb64eeb720270525be3",
+  "files": [
+    "ecosystem.connect.config.cjs",
+    "ecosystem.connect.green.config.cjs",
+    "run-next-release.sh",
+    "tests/apex-green-startup-failclosed.test.cjs"
+  ],
+  "production_source_changed": false,
+  "production_app_cutover": false,
+  "test_scope": "isolated shell fixtures, PM2 declaration metadata, full standalone Next 138 Node tests",
+  "runtime_build_id_preserved": "ONDwxEIZlx5onDIKY7wYf",
+  "core_owner_approval_required": true
+}

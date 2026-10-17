@@ -79,6 +79,10 @@ on:
       - 'ops/connect/test_verify_frontend_rollback_disk_budget_20261016.py'
       - 'ops/connect/recovery/reviewed-next-legacy-proxy-20261016.patch'
       - 'ops/connect/test_reviewed_next_legacy_proxy_20261016.py'
+      - 'ops/connect/recovery/reviewed-next-green-startup-20261017.patch'
+      - 'ops/connect/recovery/reviewed-next-green-startup-20261017.manifest.json'
+      - 'ops/connect/test_reviewed_next_green_startup_20261017.py'
+      - 'docs/coordination/APEX_CONNECT_GREEN_STARTUP_FAILCLOSED_20261017.md'
       - 'docs/coordination/APEX_CONNECT_LEGACY_PROXY_SECURITY_UNIFIED_20261016.md'
       - 'ops/connect/verify_core638_connect_release_20261016.py'
       - 'ops/connect/test_verify_core638_connect_release_20261016.py'
@@ -166,6 +170,10 @@ on:
       - 'ops/connect/test_verify_frontend_rollback_disk_budget_20261016.py'
       - 'ops/connect/recovery/reviewed-next-legacy-proxy-20261016.patch'
       - 'ops/connect/test_reviewed_next_legacy_proxy_20261016.py'
+      - 'ops/connect/recovery/reviewed-next-green-startup-20261017.patch'
+      - 'ops/connect/recovery/reviewed-next-green-startup-20261017.manifest.json'
+      - 'ops/connect/test_reviewed_next_green_startup_20261017.py'
+      - 'docs/coordination/APEX_CONNECT_GREEN_STARTUP_FAILCLOSED_20261017.md'
       - 'docs/coordination/APEX_CONNECT_LEGACY_PROXY_SECURITY_UNIFIED_20261016.md'
       - 'ops/connect/verify_core638_connect_release_20261016.py'
       - 'ops/connect/test_verify_core638_connect_release_20261016.py'
@@ -249,5 +257,7 @@ jobs:
         run: python3 -m unittest discover -v -s ops/connect -p 'test_reviewed_next_mail_privacy_20261016.py'
       - name: Verify immutable Connect legacy proxy bounded fail-closed source
         run: python3 -m unittest discover -v -s ops/connect -p 'test_reviewed_next_legacy_proxy_20261016.py'
+      - name: Verify immutable green startup/restart-storm source patch (synthetic only)
+        run: python3 -m unittest discover -v -s ops/connect -p 'test_reviewed_next_green_startup_20261017.py'
       - name: Validate pinned latest Core58A Connect release verdict fail-closed (no live access)
         run: python3 -m unittest discover -v -s ops/connect -p 'test_verify_core638_connect_release_20261016.py'

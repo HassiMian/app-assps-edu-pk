@@ -1,0 +1,199 @@
+diff --git a/ecosystem.connect.config.cjs b/ecosystem.connect.config.cjs
+index 2d44ddc..2af0574 100644
+--- a/ecosystem.connect.config.cjs
++++ b/ecosystem.connect.config.cjs
+@@ -4,6 +4,9 @@ module.exports = {
+     cwd: '/var/www/apex-connect',
+     script: '/var/www/apex-connect/node_modules/next/dist/bin/next',
+     args: 'start -p 3000',
+-    env: { NODE_ENV: 'production', NEXT_DIST_DIR: '.next-candidate' }
++    env: { NODE_ENV: 'production', NEXT_DIST_DIR: '.next' },
++    min_uptime: '10s',
++    max_restarts: 3,
++    stop_exit_codes: [78]
+   }]
+ };
+diff --git a/ecosystem.connect.green.config.cjs b/ecosystem.connect.green.config.cjs
+new file mode 100644
+index 0000000..a22f028
+--- /dev/null
++++ b/ecosystem.connect.green.config.cjs
+@@ -0,0 +1,14 @@
++// APEX Connect green recovery/runbook recipe, separate from primary.
++// Builds must already exist. The launcher fails closed rather than falling back.
++module.exports = {
++  apps: [{
++    name: 'apex-connect-green',
++    cwd: '/var/www/apex-connect',
++    script: '/var/www/apex-connect/run-next-release.sh',
++    interpreter: 'bash',
++    env: { NODE_ENV: 'production', APP_PORT: '3002', NEXT_DIST_DIR: '.next' },
++    min_uptime: '10s',
++    max_restarts: 3,
++    stop_exit_codes: [78]
++  }]
++};
+diff --git a/run-next-release.sh b/run-next-release.sh
+index 354b517..a9ceda6 100755
+--- a/run-next-release.sh
++++ b/run-next-release.sh
+@@ -1,6 +1,29 @@
+ #!/usr/bin/env bash
++# APEX Connect immutable-build preflight. Never silently substitute release artifacts.
+ set -Eeuo pipefail
+ cd /var/www/apex-connect
++
+ APP_PORT="${APP_PORT:-3000}"
+-export PORT="${APP_PORT}"
+-exec env NODE_ENV=production NEXT_DIST_DIR="${NEXT_DIST_DIR:-.next}" PORT="${APP_PORT}" ./node_modules/.bin/next start -p "${APP_PORT}"
++NEXT_DIST_DIR="${NEXT_DIST_DIR:-.next}"
++case "$NEXT_DIST_DIR" in
++  .next|.next-candidate) ;;
++  *) echo 'CONNECT_BOOT_BLOCKED: invalid distribution selector' >&2; exit 78 ;;
++esac
++case "$APP_PORT" in
++  3000|3002) ;;
++  *) echo 'CONNECT_BOOT_BLOCKED: invalid supported port' >&2; exit 78 ;;
++esac
++
++# Never launch a half-built/stale candidate; the supervisor must stop on exit 78.
++# This check deliberately does NOT copy .next into .next-candidate or swap versions.
++if [[ -L "$NEXT_DIST_DIR" || ! -d "$NEXT_DIST_DIR/server" || ! -f "$NEXT_DIST_DIR/required-server-files.json" || ! -f "$NEXT_DIST_DIR/BUILD_ID" ]]; then
++  echo 'CONNECT_BOOT_BLOCKED: selected production build is absent or incomplete' >&2
++  exit 78
++fi
++read -r BUILD_ID < "$NEXT_DIST_DIR/BUILD_ID" || true
++if [[ ! "$BUILD_ID" =~ ^[A-Za-z0-9_-]{8,100}$ ]]; then
++  echo 'CONNECT_BOOT_BLOCKED: selected production build ID invalid' >&2
++  exit 78
++fi
++export PORT="$APP_PORT"
++exec env NODE_ENV=production NEXT_DIST_DIR="$NEXT_DIST_DIR" PORT="$APP_PORT" ./node_modules/.bin/next start -p "$APP_PORT"
+diff --git a/tests/apex-green-startup-failclosed.test.cjs b/tests/apex-green-startup-failclosed.test.cjs
+new file mode 100644
+index 0000000..574c68a
+--- /dev/null
++++ b/tests/apex-green-startup-failclosed.test.cjs
+@@ -0,0 +1,122 @@
++'use strict';
++// Static and isolated-sandbox verification: NEVER starts production Next or PM2.
++const test = require('node:test');
++const assert = require('node:assert/strict');
++const fs = require('node:fs');
++const os = require('node:os');
++const path = require('node:path');
++const { spawnSync } = require('node:child_process');
++const root = path.resolve(__dirname, '..');
++const launcher = fs.readFileSync(path.join(root, 'run-next-release.sh'), 'utf8');
++
++function fakeRoot(t, dist = '.next') {
++  const home = fs.mkdtempSync(path.join(os.tmpdir(), 'connect-bootguard-'));
++  t.after(() => fs.rmSync(home, { recursive: true, force: true }));
++  fs.mkdirSync(path.join(home, 'node_modules/.bin'), { recursive: true });
++  const marker = path.join(home, 'executed');
++  const next = path.join(home, 'node_modules/.bin/next');
++  fs.writeFileSync(next, '#!/bin/sh\nprintf "%s\\n" "$NEXT_DIST_DIR $PORT $*" > "' + marker + '"\n', { mode: 0o755 });
++  const testLauncher = path.join(home, 'isolated-launcher.sh');
++  const expected = 'cd /var/www/apex-connect';
++  assert.equal(launcher.split(expected).length, 2, 'exactly one production cwd replacement in test copy');
++  fs.writeFileSync(testLauncher, launcher.replace(expected, 'cd ' + JSON.stringify(home)), { mode: 0o755 });
++  const target = path.join(home, dist);
++  function makeBuild(buildId = 'ONDwxEIZlx5onDIKY7wYf') {
++    fs.mkdirSync(path.join(target, 'server'), { recursive: true });
++    fs.writeFileSync(path.join(target, 'BUILD_ID'), buildId + '\n');
++    fs.writeFileSync(path.join(target, 'required-server-files.json'), '{}');
++  }
++  function run(env = {}) {
++    const allowed = { PATH: process.env.PATH, HOME: home, ...env };
++    return spawnSync('bash', [testLauncher], { encoding: 'utf8', timeout: 4000, env: allowed });
++  }
++  return { home, target, makeBuild, run, marker };
++}
++
++test('both deployment recipes select existing stable .next and cap failed startups', () => {
++  for (const [file, name, port] of [
++    ['ecosystem.connect.config.cjs', 'apex-connect', undefined],
++    ['ecosystem.connect.green.config.cjs', 'apex-connect-green', '3002']
++  ]) {
++    const cfg = require(path.join(root, file));
++    assert.equal(cfg.apps.length, 1);
++    const app = cfg.apps[0];
++    assert.equal(app.name, name);
++    assert.equal(app.env.NEXT_DIST_DIR, '.next');
++    if (port) assert.equal(app.env.APP_PORT, port);
++    assert.deepEqual(app.stop_exit_codes, [78]);
++    assert.ok(Number.isInteger(app.max_restarts) && app.max_restarts <= 3);
++    assert.equal(app.min_uptime, '10s');
++  }
++});
++
++test('default old stable build boots only from completed local artifact', t => {
++  const f = fakeRoot(t); f.makeBuild();
++  const r = f.run();
++  assert.equal(r.status, 0, r.stderr);
++  assert.match(fs.readFileSync(f.marker, 'utf8'), /^\.next 3000 start -p 3000/);
++});
++
++test('explicit green port and existing .next build starts without candidate', t => {
++  const f = fakeRoot(t); f.makeBuild();
++  const r = f.run({ APP_PORT: '3002', NEXT_DIST_DIR: '.next' });
++  assert.equal(r.status, 0, r.stderr);
++  assert.match(fs.readFileSync(f.marker, 'utf8'), /^\.next 3002 start -p 3002/);
++});
++
++test('missing candidate blocks with exit78 instead of silently launching old build', t => {
++  const f = fakeRoot(t); f.makeBuild();
++  const r = f.run({ APP_PORT: '3002', NEXT_DIST_DIR: '.next-candidate' });
++  assert.equal(r.status, 78);
++  assert.match(r.stderr, /CONNECT_BOOT_BLOCKED/);
++  assert.equal(fs.existsSync(f.marker), false);
++});
++
++test('candidate can boot only if explicitly selected AND fully built', t => {
++  const f = fakeRoot(t, '.next-candidate'); f.makeBuild('Candidate_Build_ID20261017');
++  const r = f.run({ APP_PORT: '3002', NEXT_DIST_DIR: '.next-candidate' });
++  assert.equal(r.status, 0, r.stderr);
++  assert.match(fs.readFileSync(f.marker, 'utf8'), /^\.next-candidate 3002 start -p 3002/);
++});
++
++test('partial candidate with no required manifest fails before invoking Next', t => {
++  const f = fakeRoot(t, '.next-candidate'); f.makeBuild();
++  fs.rmSync(path.join(f.target, 'required-server-files.json'));
++  const r = f.run({ APP_PORT: '3002', NEXT_DIST_DIR: '.next-candidate' });
++  assert.equal(r.status, 78);
++  assert.equal(fs.existsSync(f.marker), false);
++});
++
++test('invalid or empty BUILD_ID fails closed', t => {
++  const f = fakeRoot(t); f.makeBuild('bad id !');
++  assert.equal(f.run().status, 78);
++  fs.writeFileSync(path.join(f.target, 'BUILD_ID'), '\n');
++  assert.equal(f.run().status, 78);
++  assert.equal(fs.existsSync(f.marker), false);
++});
++
++test('unsafe directory selectors cannot escape canonical build root', t => {
++  const f = fakeRoot(t); f.makeBuild();
++  for (const value of ['../../etc', '/tmp/build', '.next/../../etc', '.next-backup', '']) {
++    if (value === '') continue; // Empty means normal default, intentionally allowed.
++    const r = f.run({ NEXT_DIST_DIR: value });
++    assert.equal(r.status, 78, value);
++  }
++  assert.equal(fs.existsSync(f.marker), false);
++});
++
++test('invalid port is rejected before starting Next', t => {
++  const f = fakeRoot(t); f.makeBuild();
++  for (const port of ['3001', '0', '80', '3002;echo bad']) {
++    assert.equal(f.run({ APP_PORT: port }).status, 78, port);
++  }
++  assert.equal(fs.existsSync(f.marker), false);
++});
++
++test('symlinked candidate root cannot select an outside artifact', t => {
++  const f = fakeRoot(t); f.makeBuild();
++  fs.symlinkSync(f.target, path.join(f.home, '.next-candidate'));
++  const r = f.run({ APP_PORT: '3002', NEXT_DIST_DIR: '.next-candidate' });
++  assert.equal(r.status, 78);
++  assert.equal(fs.existsSync(f.marker), false);
++});
