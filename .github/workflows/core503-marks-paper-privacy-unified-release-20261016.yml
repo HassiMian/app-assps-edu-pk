@@ -15,6 +15,7 @@ on:
       - 'integration/assps-master-core-paper-result-20261017'
       - 'integration/core78-school-notices-diary-contract-20261017'
       - 'integration/assps-core742-notice-diary-unified-20261017'
+      - 'integration/assps-core742-lesson-quality-forward-20261017'
   pull_request:
     paths:
       - 'al-siddique-backend/src/config/signedRlsCatalogGuard.js'
