@@ -130,11 +130,24 @@ test('principal delete always scoped by school',async()=>{
   assert.match(q.sql,/school_id = \$2/)
   assert.deepEqual(q.params,['62',2])
 })
-test('teacher retains read access to scoped notices, not write access',async()=>{
+test('unbound teacher notice recipient IDs fail closed before SQL',async()=>{
   const {res,queries}=await invoke('GET','/',{user:admin('teacher',3)})
+  assert.equal(res.code,403)
+  assert.equal(queries.length,0)
+})
+test('principal notice reader remains authenticated-school scoped',async()=>{
+  const {res,queries}=await invoke('GET','/',{user:admin('principal',3)})
   assert.equal(res.code,200)
   assert.equal(res.body.data[0].school_id,3)
   assert.ok(queries.some(x=>x.sql.includes('WHERE school_id = $1')&&x.params[0]===3))
+})
+test('service token even with read scope has no notice audience authorization',async()=>{
+  const {res,queries}=await invoke('GET','/',{user:{id:'service:test',role:'service',school_id:1,account_type:'service',scopes:['school.notices.read']}})
+  assert.equal(res.code,403);assert.equal(queries.length,0)
+})
+test('unauthenticated GET denied before SQL',async()=>{
+  const {res,queries}=await invoke('GET','/',{user:null})
+  assert.equal(res.code,401);assert.equal(queries.length,0)
 })
 test('service without explicit notices-read scope denied',async()=>{
   const {res,queries}=await invoke('GET','/',{user:{id:20,role:'service',school_id:1,account_type:'service',scopes:[]}})

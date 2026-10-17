@@ -73,8 +73,11 @@ function normalizeNoticePayload(body) {
   }
 }
 
-// GET all notices for this school
-router.get('/', protect, requireScopeForServiceOnly('school.notices.read'), async (req, res) => {
+// Temporary security containment: recipient_type and teacher_ids do not have a
+// verified binding to the authenticated users.id. Deny teacher/service reads
+// until independently tested audience scoping exists; never return all notices.
+// Manager-only access is NOT teacher-notice delivery certification.
+router.get('/', protect, requireScopeForServiceOnly('school.notices.read'), requireRoles('super_admin', 'admin', 'school_admin', 'principal'), async (req, res) => {
   try {
     await ensureNoticesTable()
     const schoolId = requireNoticeSchoolContext(req, res)

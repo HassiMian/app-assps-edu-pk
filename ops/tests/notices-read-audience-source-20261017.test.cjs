@@ -6,10 +6,12 @@ const path=require('node:path')
 const {evaluate}=require('../notices/verify-notice-audience-source-20261017.cjs')
 const src=fs.readFileSync(path.resolve(__dirname,'../../al-siddique-backend/src/routes/noticesRoutes.js'),'utf8')
 const original=evaluate(src)
-test('read audience is HOLD on existing WIP branch',()=>{
- assert.equal(original.status,'HOLD_NOTICE_READ_AUDIENCE')
- assert.ok(original.blockers.includes('UNVERIFIED_TEACHER_NOTICE_AUDIENCE'))
+test('manager-only read containment is source-guarded, NOT live teacher delivery',()=>{
+ assert.equal(original.status,'SOURCE_GUARD_PRESENT_NOT_LIVE_CERTIFIED')
+ assert.equal(original.source_audience_bound,true)
+ assert.equal(original.blockers.length,0)
  assert.equal(original.production_release_authorized,false)
+ assert.equal(original.school2_authenticated,false)
 })
 test('existing WIP scoped write invariants observed',()=>{
  for(const key of ['four_routes_present','signed_auth_on_all_routes','get_has_read_scope','get_school_sql_scoped','writes_require_managers_not_teachers','post_issuer_uses_session','update_preserves_original_issuer','delete_tenant_and_id_scoped'])assert.equal(original.source_checks[key],true,key)
@@ -29,11 +31,18 @@ for(const [title,fn,key] of attacks)test('reject '+title,()=>{
  assert.ok(check.blockers.includes(key))
  assert.equal(check.production_release_authorized,false)
 })
-test('recipient fields in comments never count as scoped reader auth',()=>{
- const changed=src.replace('// GET all notices for this school','// GET all notices for this school recipient_type teacher_ids req.user')
+test('recipient words alone cannot replace manager authorization',()=>{
+ const changed=src.replace("requireRoles('super_admin', 'admin', 'school_admin', 'principal'), async", "async")
+   .replace('// Temporary security containment:', '// recipient_type teacher_ids req.user Temporary security containment:')
+ assert.notEqual(changed,src)
  assert.equal(evaluate(changed).source_audience_bound,false)
 })
-test('service scope does not imply teacher audience scope',()=>{
+test('service scope alone never grants notice audience access',()=>{
  assert.equal(original.source_checks.get_has_read_scope,true)
- assert.equal(original.source_audience_bound,false)
+ assert.equal(original.source_audience_bound,true)
+})
+test('removing manager-only GET containment fails closed',()=>{
+ const changed=src.replace("requireRoles('super_admin', 'admin', 'school_admin', 'principal'), async", "async")
+ assert.notEqual(changed,src)
+ assert.equal(evaluate(changed).status,'HOLD_NOTICE_READ_AUDIENCE')
 })
