@@ -78,11 +78,12 @@ jobs:
         run: python3 -m unittest -q ops/paper-studio/test_verify_paper_api_dependency_20261017.py ops/paper-studio/test_verify_teacher_timetable_source_20261017.py
       - name: Protect A B English Urdu lesson subject merges and excluded classes
         run: node --test al-siddique-frontend/src/Modules/Paper-Generator/tests/plannerABMergeExclusion.test.mjs
-      - name: Preserve existing A B planner documents and prove A4 print geometry on Chromium
-        working-directory: al-siddique-frontend
+      - name: Pin source-reviewed private A-B Chromium acceptance scripts (secure VPS witness; never a hosted browser claim)
         run: |
-          node src/Modules/Paper-Generator/tests/plannerABBrowserQA.mjs
-          node src/Modules/Paper-Generator/tests/plannerLegacyABCloneBrowserQA.mjs
+          printf '%s  %s\n' 'a74641a7ec259e1c2acc3c42733bfa7d3a660c2e23b558f0d5b91b6f0edd54a1' 'al-siddique-frontend/src/Modules/Paper-Generator/tests/plannerABBrowserQA.mjs' | sha256sum --check
+          printf '%s  %s\n' '1c0abe79df146673286d160dc630908adc6a9975d58c9d2ea7cf3d8de73b9a1c' 'al-siddique-frontend/src/Modules/Paper-Generator/tests/plannerLegacyABCloneBrowserQA.mjs' | sha256sum --check
+          echo 'PINNED_AB_BROWSER_QA_SOURCE_OK_PRIVATE_ORIGINAL_EVIDENCE_NOT_AVAILABLE_ON_HOSTED_RUNNER'
+          echo 'SECURE_VPS_REAL_CHROMIUM_WITNESS_SEPARATE_FROM_HOSTED_CI_AND_NOT_LIVE_STAFF_ACCEPTANCE'
       - name: Protect all fifteen Daily Diary synthetic Chromium workflows
         run: node ops/paper-studio/run_diary_release_browser_20261016.cjs
       - name: Prevent shared port collisions and ABA diary regressions in Chromium
