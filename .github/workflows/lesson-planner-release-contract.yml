@@ -50,6 +50,7 @@ on:
       - "ops/release/tests/test_preserved_companions.py"
       - "ops/release/lesson-planner-ui-contract-*.json"
       - "ops/release/tests/test_lesson_planner_ui_contract.py"
+      - "ops/release/tests/test_lesson_v5_daily_controls.py"
       - ".github/workflows/lesson-planner-release-contract.yml"
   push:
     branches:
@@ -106,6 +107,7 @@ on:
       - "ops/release/tests/test_preserved_companions.py"
       - "ops/release/lesson-planner-ui-contract-*.json"
       - "ops/release/tests/test_lesson_planner_ui_contract.py"
+      - "ops/release/tests/test_lesson_v5_daily_controls.py"
       - ".github/workflows/lesson-planner-release-contract.yml"
 
 permissions:
