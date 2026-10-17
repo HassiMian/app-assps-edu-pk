@@ -1,0 +1,38 @@
+name: ASSPS Unified Notices Publication Placeholder Regression (Source Only)
+on:
+  push:
+    branches:
+      - fix/assps-core742-notice-template-publish-guard-20261017
+    paths:
+      - 'al-siddique-backend/src/routes/schoolDocumentStudioRoutes.js'
+      - 'al-siddique-backend/src/services/documents/schoolDocumentContract.js'
+      - 'al-siddique-backend/src/tests/school-document-*.test.cjs'
+      - '.github/workflows/assps-notice-publication-guard-20261017.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  incomplete-document-publication-denial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate actual ready-to-edit fields and pure publication guard
+        run: node --test al-siddique-backend/src/tests/school-document-template-publish-guard.test.cjs
+      - name: Deny incomplete publish via actual mock-isolated route
+        run: node --test al-siddique-backend/src/tests/school-document-publish-http-mock-20261017.test.cjs
+      - name: Preserve Notice domain, school bells, and Diary parity
+        run: |
+          node --test al-siddique-backend/src/tests/school-bell-schedule-20261016.test.js al-siddique-backend/src/tests/school-document-contract.test.js ops/tests/lesson-diary-format-source-parity.test.cjs al-siddique-backend/src/tests/notices-principal-issuer-tenant-isolated.test.cjs ops/tests/notices-read-audience-source-20261017.test.cjs
+      - name: Confirm Notice GET audience is still HOLD, not approved
+        shell: bash
+        run: |
+          set +e
+          node ops/notices/verify-notice-audience-source-20261017.cjs
+          rc=$?
+          set -e
+          test "$rc" -eq 2
+          echo 'EXPECTED_HOLD_NOTICE_READ_AUDIENCE; DO_NOT_DEPLOY'

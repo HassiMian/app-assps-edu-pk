@@ -4,7 +4,7 @@ const {randomUUID,createHash}=require('node:crypto')
 const {pool,query,applyTenantContext}=require('../config/database')
 const {protect,requireRoles}=require('../middleware/auth')
 const {currentSchoolId}=require('../middleware/tenant')
-const {cleanNotice,KINDS,LAYOUTS}=require('../services/documents/schoolDocumentContract')
+const {cleanNotice,KINDS,LAYOUTS,unresolvedPresetFields}=require('../services/documents/schoolDocumentContract')
 const {schoolBellSchedule}=require('../domain/schoolBellSchedule')
 const router=express.Router()
 const staff=requireRoles('admin','super_admin','school_admin','principal','teacher')
@@ -167,13 +167,19 @@ async function transition(req,res,from,to,requiresLeader=false){
   await ready();await client.query('BEGIN');await applyTenantContext(client)
   const ownerCheck=requiresLeader?'':"AND created_by=$5"
   const who=requiresLeader?[id,req.params.id,from,revision]:[id,req.params.id,from,revision,actor(req)]
-  const before=await client.query(`SELECT id,created_by,approved_by FROM school_documents
+  const before=await client.query(`SELECT id,created_by,approved_by,content FROM school_documents
    WHERE school_id=$1 AND id=$2 AND status=$3 AND revision=$4 ${ownerCheck} FOR UPDATE`,who)
   if(!before.rowCount){await client.query('ROLLBACK');return res.status(409).json({success:false,code:'STATE_CONFLICT'})}
   if(to==='approved' && before.rows[0].created_by===actor(req)){
    await client.query('ROLLBACK');return res.status(403).json({success:false,code:'SELF_APPROVAL_NOT_ALLOWED'})
   }
   if(to==='published'){
+   // Validate the same locked revision; drafting and review remain unaffected.
+   const unresolved=unresolvedPresetFields(before.rows[0].content)
+   if(unresolved.length){
+    await client.query('ROLLBACK')
+    return res.status(409).json({success:false,code:'UNRESOLVED_NOTICE_TEMPLATE_FIELDS',fields:unresolved})
+   }
    const sourceGate=await client.query('SELECT document_kind,source_type FROM school_documents WHERE school_id=$1 AND id=$2',[id,req.params.id])
    const kind=sourceGate.rows[0]?.document_kind
    if(kind==='general_datesheet'||kind==='academic_timetable'){

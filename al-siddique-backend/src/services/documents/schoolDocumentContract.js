@@ -42,4 +42,29 @@ function cleanNotice(body) {
   content:{message,action_required:action,note,signer_label:signedBy,issue_date:issueDate,schedule_rows:dayRows}
  }}
 }
-module.exports={KINDS,LANGUAGES,AUDIENCES,LAYOUTS,cleanNotice}
+// Allow placeholders in drafts, but never in officially published notices.
+const PRESET_FIELD_NAMES=Object.freeze([
+ 'academic session','date','date/day','destination','due date','end time',
+ 'event name','month','period/date','reason','reopening date','start time',
+ 'term','time','time/venue','venue/time','weather/safety situation'
+])
+const PRESET_FIELD_SET=new Set(PRESET_FIELD_NAMES)
+function unresolvedPresetFields(content) {
+ if(typeof content==='string') {
+  try { content=JSON.parse(content) } catch { return ['invalid_document_content'] }
+ }
+ if(!content || typeof content!=='object' || Array.isArray(content)) {
+  return ['invalid_document_content']
+ }
+ const outstanding=new Set()
+ for(const key of ['message','action_required','note']) {
+  if(typeof content[key]!=='string')continue
+  for(const match of content[key].matchAll(/\[([^\]\r\n]{1,60})\]/g)) {
+   const name=match[1].toLowerCase().replace(/\s+/g,' ').trim()
+   if(PRESET_FIELD_SET.has(name))outstanding.add(name)
+  }
+ }
+ return [...outstanding].sort()
+}
+
+module.exports={KINDS,LANGUAGES,AUDIENCES,LAYOUTS,cleanNotice,PRESET_FIELD_NAMES,unresolvedPresetFields}
