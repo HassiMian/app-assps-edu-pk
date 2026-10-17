@@ -23,11 +23,37 @@ class IndependentDailyControls(unittest.TestCase):
   for text in DAILY_MARKERS:self.assertTrue(report['details']['runtime_markers'][text])
 
  def test_old_paper_term_bundle_without_save_day_must_fail(self):
-  prior=Path('/root/workspace/assps-planning-architecture-v4-20261015/al-siddique-frontend/dist')
-  if not prior.is_dir():self.skipTest('Archived v4 reference build unavailable')
-  report=gate.validate(prior,contract)
-  self.assertFalse(report['pass'])
-  self.assertFalse(report['checks']['all_runtime_ui_markers'])
+  # Reproducible on GitHub runner: no dependency on archived /root/VPS builds.
+  # First demonstrate a valid reachable bundle; then remove only Save Day.
+  from tempfile import TemporaryDirectory
+  with TemporaryDirectory() as tmp:
+   synthetic=Path(tmp)
+   assets=synthetic/'assets'
+   assets.mkdir()
+   entry='index-abcdefgh1234.js'
+   route='PaperGenerator-abcdefgh1234.js'
+   lesson='LessonPlanModule-abcdefgh1234.js'
+   (synthetic/'index.html').write_text(
+    f'<script type="module" src="/assets/{entry}"></script>',encoding='utf-8')
+   (assets/entry).write_text(f'import "./{route}";',encoding='utf-8')
+   (assets/route).write_text(f'import "./{lesson}";',encoding='utf-8')
+   module=assets/lesson
+   required=contract['required_lesson_module_markers']
+   module.write_text(' '.join(required),encoding='utf-8')
+   valid=gate.validate(synthetic,contract)
+   self.assertTrue(valid['pass'],valid)
+   module.write_text(' '.join(x for x in required
+                              if x!='Save Day to School Server'),encoding='utf-8')
+   report=gate.validate(synthetic,contract)
+   self.assertTrue(report['checks']['html_module_entry'])
+   self.assertTrue(report['checks']['one_active_paper_generator_route'])
+   self.assertTrue(report['checks']['one_active_lesson_planner_module'])
+   self.assertTrue(report['checks']['no_missing_reachable_assets'])
+   self.assertFalse(report['pass'])
+   self.assertFalse(report['checks']['all_runtime_ui_markers'])
+   self.assertIs(report['details']['runtime_markers']['Save Day to School Server'],False)
+   self.assertTrue(all(v for k,v in report['details']['runtime_markers'].items()
+                       if k!='Save Day to School Server'))
 
  def test_daily_button_removal_alone_fails_closed(self):
   mutated={**contract,'required_lesson_module_markers':

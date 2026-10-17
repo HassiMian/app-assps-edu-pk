@@ -169,20 +169,37 @@ class RecoveryContract(unittest.TestCase):
             self.assertEqual((root / gate.OUTPUT).stat().st_mode & 0o777, 0o600)
 
     def test_untrusted_private_directory_or_symlink_rejected(self):
+        # CI runs unprivileged; production MUST still require real root ownership.
+        # This fixture only simulates st_uid, never changes the private_json guard.
+        from types import SimpleNamespace
+
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
             f = root / 'example.json'
             f.write_text('{}')
             os.chmod(root, 0o700)
             os.chmod(f, 0o600)
-            self.assertEqual(private_json(root, 'example.json'), {})
-            os.chmod(f, 0o644)
-            with self.assertRaisesRegex(ValueError, 'UNTRUSTED_PRIVATE_FILE'):
-                private_json(root, 'example.json')
-            os.chmod(f, 0o600)
-            (root / 'link.json').symlink_to(f)
-            with self.assertRaisesRegex(ValueError, 'UNTRUSTED_PRIVATE_FILE'):
-                private_json(root, 'link.json')
+            if root.lstat().st_uid != 0:
+                with self.assertRaisesRegex(ValueError, 'UNTRUSTED_PRIVATE_DIRECTORY'):
+                    private_json(root, 'example.json')
+
+            original_lstat = Path.lstat
+
+            def root_owned_fixture_lstat(path, *args, **kwargs):
+                info = original_lstat(path, *args, **kwargs)
+                if path == root or path.parent == root:
+                    return SimpleNamespace(st_mode=info.st_mode, st_uid=0)
+                return info
+
+            with patch.object(Path, 'lstat', root_owned_fixture_lstat):
+                self.assertEqual(private_json(root, 'example.json'), {})
+                os.chmod(f, 0o644)
+                with self.assertRaisesRegex(ValueError, 'UNTRUSTED_PRIVATE_FILE'):
+                    private_json(root, 'example.json')
+                os.chmod(f, 0o600)
+                (root / 'link.json').symlink_to(f)
+                with self.assertRaisesRegex(ValueError, 'UNTRUSTED_PRIVATE_FILE'):
+                    private_json(root, 'link.json')
 
 
 if __name__ == '__main__':
