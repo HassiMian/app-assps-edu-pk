@@ -140,15 +140,29 @@ try{
  assert.equal(serverRows[0].serverRevision,2)
  assert.equal(await page.locator('[data-lesson-student-card]').count(),3)
  await page.getByText('Class in-charge (Principal-provided):').waitFor()
- // Six full-length subjects and a separate assessment table correctly block
- // the overloaded three-card page rather than silently shrinking user fonts.
+ // Professional short copy may now legitimately fit three A4 cards. Test
+ // actual DOM geometry instead of assuming a fixed card count must overflow.
+ const measured=await page.locator('.wn-paper').evaluateAll(nodes=>nodes.map(n=>({
+   paperClient:n.clientHeight,paperScroll:n.scrollHeight,
+   cards:[...n.querySelectorAll('.wn-card')].map(c=>({client:c.clientHeight,scroll:c.scrollHeight}))
+ })))
+ assert.ok(measured.every(p=>p.paperScroll<=p.paperClient+3 &&
+   p.cards.every(c=>c.scroll<=c.client+3)))
+ // Deliberately overfill a row with SYNTHETIC content. Printing must stop
+ // before opening the popup, with no font shrinking or clipping.
+ const firstWork=page.locator('.wn-editline').first().locator('textarea')
+ const beforeStress=await firstWork.inputValue()
+ await firstWork.fill('Very long synthetic academic exercise for overflow verification. '.repeat(65))
  await page.getByRole('button',{name:'Print Selected Students'}).click()
  await page.getByText('Some student cards are too long for this A4 layout.').waitFor()
+ await firstWork.fill(beforeStress)
  await page.getByLabel('Student cards / page').selectOption('1')
  const popupPromise=page.waitForEvent('popup',{timeout:8000})
  await page.getByRole('button',{name:'Print Selected Students'}).click()
  const popup=await popupPromise
  await popup.waitForLoadState('domcontentloaded')
+ const popupZoom=await popup.locator('.wn-paper').first().evaluate(n=>getComputedStyle(n).transform)
+ assert.equal(popupZoom,'none','Print popup screen preview must be unscaled and crisp')
  const printed=await popup.content()
  assert.ok(printed.includes('QA Student Alpha'))
  assert.ok((await popup.locator('body').innerText()).includes('Unit #7'))
@@ -181,7 +195,9 @@ try{
  await page.waitForTimeout(160)
  assert.equal(await page.locator('[data-wn-week] option').count(),18)
  const firstWeek=await page.locator('.wn-editline').allInnerTexts()
- assert.ok(firstWeek.some(x=>x.includes('English-A')))
+ assert.ok(firstWeek.some(x=>x.includes('English')), 'Combined English A/B source must retain one subject row')
+ assert.ok((await page.locator('.wn-editline').first().locator('textarea').inputValue()).includes('[A]'), 'Part A source label preserved')
+ assert.ok((await page.locator('.wn-editline').first().locator('textarea').inputValue()).includes('[B]'), 'Part B source label preserved')
  assert.ok((await page.locator('.wn-editline').first().locator('textarea').inputValue()).includes('Pages 36–38'))
  assert.ok((await page.locator('.wn-panel').first().innerText()).includes('Miss Amna'))
  await page.locator('[data-wn-week]').selectOption('16')

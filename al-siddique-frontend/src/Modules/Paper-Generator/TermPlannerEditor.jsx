@@ -1,5 +1,6 @@
 import {Save,Printer,Plus,RotateCcw,BookOpen} from 'lucide-react'
 import {termAssessmentRows} from './termPlanningModel.js'
+import {displaySubjectLabel} from './professionalLessonCopy.js'
 import { changeSubjectTypography, normalizeSubjectTypography } from './plannerSubjectTypography.js'
 import './TermPlannerEditor.css'
 
@@ -70,7 +71,7 @@ export default function TermPlannerEditor({klass,section,term,start,end,setTerm,
         </section>
         <h4>Subject & page-range editor <small>{rows.length} subjects</small></h4>
         {rows.map(row=><div className="term-edit-subject" key={row.id} data-term-edit-subject>
-          <div className="term-edit-name"><strong>{row.subject}</strong>
+          <div className="term-edit-name"><strong>{displaySubjectLabel(row.subject)}</strong>
             <small>{row.sourceStatus}</small></div>
           <label>Syllabus / topics / chapters
             <textarea rows={3} aria-label={row.subject+' term coverage'}
@@ -208,7 +209,7 @@ export default function TermPlannerEditor({klass,section,term,start,end,setTerm,
             <table className="term-print-subjects">
               <thead><tr><th>SUBJECT</th><th>TERM SYLLABUS / CHAPTERS / PAGE RANGE</th></tr></thead>
               <tbody>{rows.map(row=><tr key={row.id}>
-                <th>{row.subject}</th>
+                <th dir={/Urdu|Islamiyat|Islamiat|Nazra|Pakistan Studies|اردو/i.test(row.subject)?'rtl':undefined}>{displaySubjectLabel(row.subject)}</th>
                 <td>
                   <div dir="auto" className={
                     /Urdu|Islamiyat|Islamiat|Pakistan Studies|اردو|قرآن|Quran/i.test(row.subject)?

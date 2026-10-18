@@ -7,6 +7,17 @@
 const txt = x => String(x ?? '').replace(/\s+/g,' ').trim()
 const unique = items => [...new Set(items)]
 const containsUrdu = /[\u0600-\u06ff]/
+// Presentation label only; original source subject/id remain authoritative.
+export function displaySubjectLabel(subject) {
+  const s=String(subject||'').trim()
+  if (/^Urdu[\s-]*(?:A|الف)$/i.test(s)) return 'اردو (حصہ الف)'
+  if (/^Urdu[\s-]*(?:B|ب)$/i.test(s)) return 'اردو (حصہ ب)'
+  if (/^Urdu$/i.test(s)) return 'اردو'
+  if (/^(?:Islamiyat|Islamiat)$/i.test(s)) return 'اسلامیات'
+  if (/^Nazra(?:\s+Quran)?$/i.test(s)) return 'ناظرہ قرآن'
+  if (/^Pakistan Studies$/i.test(s)) return 'مطالعہ پاکستان'
+  return s
+}
 export function lessonLanguage(subject) {
   return /urdu|islamiyat|islamiat|nazra|quran|قرآن|اردو|اسلامیات|مطالعہ|pakistan studies/i.test(String(subject)) ? 'ur' : 'en'
 }

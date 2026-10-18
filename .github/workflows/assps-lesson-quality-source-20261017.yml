@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - fix/paper-lesson-unified-quality-20261017
+      - integration/core742-lesson-quality-forwardport-20261018
     paths:
       - 'al-siddique-frontend/src/Modules/Paper-Generator/**'
       - 'al-siddique-frontend/src/context/TenantBrandingContext.jsx'
@@ -30,6 +31,8 @@ jobs:
         run: |
           node --test ops/tests/assps-lesson-source-calendar-20261017.test.mjs ops/tests/professional-lesson-copy-20261017.test.mjs al-siddique-backend/src/tests/public-school-branding-login-20261017.test.cjs
           node --test ops/tests/paper-diary-active-controller-immutable-release-gate-20261015.test.cjs
+          node --test al-siddique-frontend/src/Modules/Paper-Generator/tests/termPlanningModel.test.mjs al-siddique-frontend/src/Modules/Paper-Generator/tests/lessonWeeklyEngine.test.js
+          node ops/production-safety-check.js
       - name: Install ephemeral dependencies
         working-directory: al-siddique-frontend
         run: npm ci --no-audit --no-fund
@@ -41,5 +44,10 @@ jobs:
         run: |
           ./node_modules/.bin/eslint src/Modules/Paper-Generator/WeeklyNotebookStudio.jsx src/Modules/Paper-Generator/TermPlannerEditor.jsx src/Modules/Paper-Generator/weeklyNotebookModel.js src/Modules/Paper-Generator/termPlanningModel.js src/Modules/Paper-Generator/professionalLessonCopy.js src/pages/LoginPage.jsx src/context/TenantBrandingContext.jsx src/Modules/Paper-Generator/DailyDiaryWorkspace.jsx
           npm run build
+      - name: Protect compiled saved Marks Register and Diary controls
+        run: |
+          ASSPS_MARKS_REGISTER_DIST=al-siddique-frontend/dist node --test ops/tests/marks-register-live-nonregression.test.cjs
+          node ops/release/verify-marks-register-ui-20261015.cjs --dist al-siddique-frontend/dist
+          ASSPS_DIARY_CANDIDATE_DIST=al-siddique-frontend/dist node --test ops/tests/paper-diary-active-controller-immutable-release-gate-20261015.test.cjs
       - name: Explicit source-only status
         run: echo SOURCE_ONLY_PASS_NOT_RELEASE_PAPER_STUDIO_AND_CORE_SIGNOFF_PENDING

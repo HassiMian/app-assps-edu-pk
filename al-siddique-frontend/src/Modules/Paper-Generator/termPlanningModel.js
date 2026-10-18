@@ -152,6 +152,13 @@ export function termAssessmentRows(rows,manual=[],calendar={}){
   }
   const dated=[...byDate.values()].sort((a,b)=>a.date.localeCompare(b.date))
   const blanks=explicit.filter(a=>!a.date)
+  // Legacy blank/undated Term drafts retained two editable placeholders.
+  // Keep that harmless editor compatibility ONLY without a real term calendar;
+  // never add fake assessment dates or override the shared calendar proposals.
+  if (!calendar.weeks && dated.length===0 && blanks.length===0) {
+    blanks.push({id:'blank-0',date:'',name:'Assessment',subject:'',origin:'EMPTY_PROPOSAL'},
+      {id:'blank-1',date:'',name:'Assessment',subject:'',origin:'EMPTY_PROPOSAL'})
+  }
   return [...dated,...blanks].map((a,index)=>({...a,number:index+1}))
 }
 export function validateTermContent({klass,start,end,rows,assessments}){

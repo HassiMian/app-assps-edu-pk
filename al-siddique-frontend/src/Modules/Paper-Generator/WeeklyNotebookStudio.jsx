@@ -1,3 +1,4 @@
+import {displaySubjectLabel} from './professionalLessonCopy.js'
 import {useEffect,useMemo,useState} from 'react'
 import {useTenantBranding} from '../../context/TenantBrandingContext'
 import { changeSubjectTypography, normalizeSubjectTypography } from './plannerSubjectTypography.js'
@@ -94,7 +95,7 @@ function Card({student,rows,klass,section,teacher,week,design,cardIndex,viewMode
    <div className="wn-card-meta">Class in-charge: {teacher} <span>Proposed lesson schedule · Review before teaching</span></div>
    <table className="wn-card-table"><thead><tr><th>SUBJECT</th><th>WEEKLY WORK / سبق</th></tr></thead>
      <tbody>{rows.map(r=><tr key={r.id}>
-       <th>{r.subject}</th>
+       <th dir={/Urdu|Islamiyat|Islamiat|Nazra|Pakistan Studies|اردو/i.test(r.subject)?'rtl':undefined}>{displaySubjectLabel(r.subject)}</th>
        <td className={/Urdu|Islamiyat|Islamiat|Pakistan Studies|اردو/i.test(r.subject)?'wn-rtl':''}>
          <div dir="auto" className="wn-task"><MixedDirection text={r.task}/></div>
          {viewMode==='daily'&&[
@@ -493,7 +494,7 @@ export default function WeeklyNotebookStudio(){
    .map(node=>'<link rel="stylesheet" href="'+node.href+'">').join('')
   popup.document.open()
   popup.document.write('<!DOCTYPE html><html><head><meta charset="utf-8"><title>ASSPS Weekly Learning Plan</title>'+
-   styleLinks+[...document.querySelectorAll('style')].map(node=>node.outerHTML).join('')+'<style>@page{size:A4;margin:4mm}body{margin:0;background:white} .wn-print-pages{display:block!important} .wn-paper{box-shadow:none!important;break-after:page;page-break-after:always}</style></head><body>'+
+   styleLinks+[...document.querySelectorAll('style')].map(node=>node.outerHTML).join('')+'<style>@page{size:A4;margin:4mm}body{margin:0;background:white} .wn-print-pages{display:block!important} .wn-paper{box-shadow:none!important;transform:none!important;margin:0 auto!important;break-after:page;page-break-after:always}</style></head><body>'+
    '<div class="wn-print-pages">'+copy.innerHTML+'</div></body></html>')
   popup.document.close()
   popup.addEventListener('load',()=>{popup.document.fonts.ready.then(()=>popup.print()).catch(()=>popup.print())},{once:true})
@@ -609,7 +610,7 @@ export default function WeeklyNotebookStudio(){
      .map(node=>'<link rel="stylesheet" href="'+node.href+'">').join('')
    popup.document.open()
    popup.document.write('<!doctype html><html><head><meta charset="utf-8"><title>ASSPS Term Syllabus</title>'+
-     styleLinks+'<style>@page{size:A4;margin:6mm}body{background:white;margin:0}'+
+     styleLinks+[...document.querySelectorAll('style')].map(node=>node.outerHTML).join('')+'<style>@page{size:A4;margin:6mm}body{background:white;margin:0}'+
      '.term-print-document{box-shadow:none;width:auto;min-height:0;padding:0;transform:none!important;filter:none!important}'+
      '.term-print-document:not(:last-child){break-after:page;page-break-after:always}'+
      '.term-print-document thead{display:table-header-group}'+

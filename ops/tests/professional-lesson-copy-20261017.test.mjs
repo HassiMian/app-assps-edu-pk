@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import {composeTeachingStatement,proposeTwiceMonthlyAssessments} from '../../al-siddique-frontend/src/Modules/Paper-Generator/professionalLessonCopy.js'
+import {composeTeachingStatement,proposeTwiceMonthlyAssessments,displaySubjectLabel} from '../../al-siddique-frontend/src/Modules/Paper-Generator/professionalLessonCopy.js'
 import {termWeeks} from '../../al-siddique-frontend/src/Modules/Paper-Generator/weeklyNotebookModel.js'
 test('Starter English keeps page range, concise work, no artificial exam prep',()=>{
  const r=composeTeachingStatement({subject:'English',notes:['Page 22-23 read and complete class work','Page 38-40 Complete exercise'],pages:[{from:22,to:23},{from:38,to:40}],scope:'term'})
@@ -53,4 +53,11 @@ test('Sunday image week-end schedules the preceding teaching day without rewriti
  const dates=proposeTwiceMonthlyAssessments({weeks,start:'2026-11-01',end:'2026-11-30'})
  assert.deepEqual(dates.map(x=>x.date),['2026-11-14','2026-11-28'])
  assert.deepEqual(weeks.map(w=>w.end),original)
+})
+
+test('Urdu subject titles are presented in Urdu without changing underlying identifiers',()=>{
+ assert.equal(displaySubjectLabel('Urdu A'),'اردو (حصہ الف)')
+ assert.equal(displaySubjectLabel('Urdu B'),'اردو (حصہ ب)')
+ assert.equal(displaySubjectLabel('Islamiyat'),'اسلامیات')
+ assert.equal(displaySubjectLabel('Science'),'Science')
 })
