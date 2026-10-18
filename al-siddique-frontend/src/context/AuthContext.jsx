@@ -19,8 +19,13 @@ export function AuthProvider({ children }) {
 
  useEffect(() => {
  const handleForceLogout = () => setUser(null)
+ const handleAuthRefreshed = event => { if (event.detail?.user) setUser(event.detail.user) }
  window.addEventListener('auth:logout', handleForceLogout)
- return () => window.removeEventListener('auth:logout', handleForceLogout)
+ window.addEventListener('auth:refreshed', handleAuthRefreshed)
+ return () => {
+ window.removeEventListener('auth:logout', handleForceLogout)
+ window.removeEventListener('auth:refreshed', handleAuthRefreshed)
+ }
  }, [])
 
  useEffect(() => {
@@ -31,7 +36,6 @@ export function AuthProvider({ children }) {
 
  async function restoreSession() {
  const token = getAuthToken()
- const refreshToken = getRefreshToken()
  const storage = getStorage()
  const loginAt = Number(storage?.getItem('al_siddique_login_at') || 0)
 
@@ -52,7 +56,7 @@ export function AuthProvider({ children }) {
  if (!verifiedUser) throw new Error('Session verification returned no user.')
  if (!cancelled) {
  setUser(verifiedUser)
- setAuthSession(token, refreshToken, verifiedUser)
+ setAuthSession(getAuthToken(), getRefreshToken(), verifiedUser)
  }
  } catch (err) {
  if (err?.response?.status === 401 || err?.response?.status === 403) {

@@ -3,3 +3,8 @@
 /* Same Daily Diary workspace available as the primary Lesson Planning view. */
 .lesson-planning-workspace > .wn-switch{flex-wrap:wrap}
 .lesson-planning-workspace > .wn-switch button{flex:1 1 190px;min-width:0;white-space:normal;text-align:center}
+
+/* Explicit backend recovery must never hide an existing private draft. */
+.lp-recovery-banner { margin: 10px 0; padding: 12px 16px; border: 1px solid #a96a27; border-radius: 9px; background: #fff9ed; color: #49371d; }
+.lp-recovery-banner p { margin: 4px 0; line-height: 1.55; }
+.lp-recovery-banner button { margin-left: 10px; border: 1px solid currentColor; background: transparent; color: inherit; border-radius: 6px; padding: 3px 8px; cursor: pointer; }

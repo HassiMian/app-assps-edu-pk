@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {isAuthHandshake,sessionWindowValid,sameAuthenticatedIdentity,mayAutoReplayAfterRefresh} from './authSessionRecovery.js'
 
 const api = axios.create({
   baseURL: '',
@@ -95,6 +96,43 @@ export function clearAuthSession() {
   } catch { /* storage can be unavailable in hardened browsers */ }
 }
 
+let refreshInFlight = null
+
+function signOutInvalidSession() {
+  clearAuthSession()
+  if (typeof window !== 'undefined') {
+    try { window.localStorage?.removeItem('al_siddique_login_at') } catch { /* optional browser storage or event support */ }
+    window.dispatchEvent?.(new Event('auth:logout'))
+    if (window.location.pathname !== '/login') window.location.href = '/login'
+  }
+}
+
+async function refreshAuthenticatedSession() {
+  if (refreshInFlight) return refreshInFlight
+  const previousRefresh = getRefreshToken()
+  const previousUser = getAuthUser()
+  if (!previousRefresh || !previousUser) return false
+  refreshInFlight = (async () => {
+    // Use the plain axios transport: avoid recursion through API interceptors.
+    const response = await axios.post('/api/auth/refresh',
+      {refreshToken:previousRefresh}, {timeout:12000})
+    const {token,refreshToken,user} = response.data || {}
+    // A separate login/logout may have changed browser identity while pending.
+    if (getRefreshToken() !== previousRefresh) return false
+    if (!token || !refreshToken || !sameAuthenticatedIdentity(previousUser,user)) {
+      const error = new Error('AUTH_REFRESH_IDENTITY_MISMATCH')
+      error.code = 'AUTH_REFRESH_IDENTITY_MISMATCH'
+      throw error
+    }
+    setAuthSession(token,refreshToken,user)
+    if (typeof window !== 'undefined') {
+      try { window.dispatchEvent(new CustomEvent('auth:refreshed',{detail:{user}})) } catch { /* optional browser storage or event support */ }
+    }
+    return true
+  })().finally(() => { refreshInFlight = null })
+  return refreshInFlight
+}
+
 api.interceptors.request.use((config) => {
   const token = getAuthToken()
   if (token) config.headers.Authorization = `Bearer ${token}`
@@ -155,8 +193,46 @@ api.interceptors.response.use(
     const marksWriteCanaryDenied = config.marksWriteNoLogout401 === true &&
       method === 'post' && exactReadPath === '/api/exams/results'
     if (err.response?.status === 401 && !marksReviewReadDenied && !marksWriteCanaryDenied) {
-      clearAuthSession()
-      if (typeof window !== 'undefined' && window.location.pathname !== '/login') window.location.href = '/login'
+      // Login failures, an optional module's 401, and an expired access token
+      // are different cases. Only the verified auth service may end a session.
+      if (!isAuthHandshake(exactReadPath) && !config._sessionRecoveryAttempted) {
+        const loginAt = (() => {
+          try { return getStorage()?.getItem('al_siddique_login_at') } catch { return null }
+        })()
+        if (!sessionWindowValid(loginAt)) {
+          signOutInvalidSession()
+          return Promise.reject(err)
+        }
+        const priorToken = getAuthToken()
+        if (priorToken) {
+          const requestToken = String(config.headers?.Authorization || '').replace(/^Bearer\s+/i,'')
+          const alreadyRefreshed = requestToken && requestToken !== priorToken
+          try {
+            const recovered = alreadyRefreshed || await refreshAuthenticatedSession()
+            if (recovered) {
+              if (mayAutoReplayAfterRefresh(method)) {
+                config._sessionRecoveryAttempted = true
+                return api(config)
+              }
+              // Never repeat a marks/fees/diary write automatically.
+              err.sessionRecovered = true
+              return Promise.reject(err)
+            }
+          } catch (refreshError) {
+            // Genuine refresh rejection or identity mismatch: fail closed.
+            // Temporary network/5xx failures never silently discard drafts.
+            const refreshStatus = refreshError?.response?.status
+            if (refreshStatus === 401 || refreshStatus === 403 ||
+                refreshError?.code === 'AUTH_REFRESH_IDENTITY_MISMATCH') {
+              signOutInvalidSession()
+            }
+            return Promise.reject(err)
+          }
+        }
+        // An invalid /me response with no refresh token is the only
+        // remaining authoritative reason to discard an old legacy session.
+        if (exactReadPath === '/api/auth/me') signOutInvalidSession()
+      }
       return Promise.reject(err)
     }
 
