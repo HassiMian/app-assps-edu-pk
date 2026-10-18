@@ -107,6 +107,7 @@ const MENU_GROUPS = [
  { label: 'Student Portal', path: '/student-portal', roles: ROLE_SETS.learner },
  ]},
  { icon: IdCard, label: 'Identity Studio', path: '/cards', color: '#BF5AF2', roles: ROLE_SETS.schoolStaff, permKey: 'cards' },
+      { icon: FileText, label: 'Notice & Document Studio', path: '/school-documents', color: '#38BDF8', roles: ROLE_SETS.schoolStaff, permKey: 'notices' },
  ],
  },
  {
