@@ -10,6 +10,7 @@ const { query } = require('../config/database')
 const { protect } = require('../middleware/auth')
 const { currentTenantId, hasColumn } = require('../middleware/tenant')
 const { getTwilioConfigForSchool, buildTwilioClient } = require('../services/twilioSettings')
+const { checkExplicitSchoolLoginScope } = require('../services/explicitSchoolLoginScope')
 
 function resolveSecret(name, fallback) {
   const value = process.env[name]
@@ -490,11 +491,13 @@ router.post('/login', async (req, res) => {
       return sendJson(res, 400, { message: 'Password must be at least 8 characters long.' })
     }
 
-    let requestedSchool = await resolveRequestedSchool(req)
-    const requestedIdentifier = req.body?.school_id || req.query?.school_id || req.body?.school_code || req.query?.school_code || req.body?.schoolId || req.query?.schoolId || req.body?.schoolCode || req.query?.schoolCode || null
-    if (requestedIdentifier && !requestedSchool) {
-      console.warn('Login school lookup did not resolve. Falling back to default portal context.')
-      requestedSchool = null
+    const requestedSchool = await resolveRequestedSchool(req)
+    const explicitScope = checkExplicitSchoolLoginScope(req, requestedSchool)
+    if (!explicitScope.ok) {
+      return sendJson(res, 403, {
+        code: 'SCHOOL_CONTEXT_NOT_VERIFIED',
+        message: 'Selected school could not be verified. Check your school code or contact the school administrator.'
+      })
     }
     if (requestedSchool && !isSchoolActive(requestedSchool)) {
       return sendJson(res, 403, {
@@ -785,7 +788,13 @@ router.post('/password-reset/request', async (req, res) => {
       return sendJson(res, 400, { message: 'Invalid portal role.' })
     }
 
-    let requestedSchool = await resolveRequestedSchool(req)
+    const requestedSchool = await resolveRequestedSchool(req)
+    const resetSchoolScope = checkExplicitSchoolLoginScope(req, requestedSchool)
+    if (!resetSchoolScope.ok) {
+      // Do not look up or reveal accounts from a different school.
+      return sendJson(res, 403, { code: 'SCHOOL_CONTEXT_NOT_VERIFIED',
+        message: 'Selected school could not be verified.' })
+    }
     const user = await findUserByLoginId(loginId, requestedRole, requestedSchool?.id, requestedSchool?.code)
     if (!user) {
       return sendJson(res, 404, { message: 'No active account found for this Login ID.' })

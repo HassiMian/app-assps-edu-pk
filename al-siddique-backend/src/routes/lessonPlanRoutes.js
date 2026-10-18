@@ -7,6 +7,7 @@ const { pool, tenantContext, applyTenantContext } = require('../config/database'
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
 const { isSchoolDocumentManager, canAccessAuthoredDocument } = require('../services/teacherDocumentAccess')
+const { getTeacherLessonDeliveryAudit } = require('../services/teacherLessonDeliveryAudit')
 const { loadPlanningContext } = require('../services/lessonPlanningContext')
 const { mustHoldLessonPublication, privateLessonMutationAllowed } = require('../services/lessonPlanningPublicationGuard')
 const { buildDeterministicPlan, enhancePlanWithAi, parseSmartPlanningText, parseIsoDate, MAX_RANGE_DAYS } = require('../services/lessonPlanningEngine')
@@ -186,6 +187,25 @@ router.get('/planner/private-source-bundle', async (req, res) => {
     return res.status(503).json({success:false,code:'ORIGINAL_SOURCE_UNAVAILABLE'})
   }
 })
+
+// SaaS Core read-only evidence for authorized school leadership.
+// Never grants class assignments, shares lessons or bypasses academic review.
+router.get('/planner/delivery-readiness',
+ requireRoles('super_admin','admin','school_admin','principal'),
+ async (req,res)=>{
+  res.set('Cache-Control','private, no-store')
+  res.set('Vary','Authorization, Cookie')
+  const schoolId=resolveSchoolId(req)
+  if(!schoolId)return res.status(403).json({success:false,code:'LESSON_SCHOOL_CONTEXT_REQUIRED'})
+  try{
+   const data=await withTenantTransaction(req,schoolId,
+     client=>getTeacherLessonDeliveryAudit(client,schoolId))
+   return res.json({success:true,data})
+  }catch(error){
+   console.error('Lesson delivery readiness unavailable:',error.code||'UNAVAILABLE')
+   return res.status(503).json({success:false,code:'LESSON_DELIVERY_AUDIT_UNAVAILABLE'})
+  }
+ })
 
 router.get('/planner/context', async (req, res) => {
   try {
