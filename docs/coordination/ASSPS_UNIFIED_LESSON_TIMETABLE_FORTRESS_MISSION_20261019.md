@@ -37,3 +37,11 @@
 
 ## Antigravity / desktop operator instruction
 When an actually reachable, authenticated Windows Antigravity session becomes available, load THIS exact mission document and GitHub Issue #4. Start with read-only source reconciliation and protected worktree inventory. Do not assume that this file means the desktop agent has already received work. Use an isolated clone/worktree only, preserve the Core branch and ARGUS data. Implement the unresolved UI/printer clone and tenant checks, attach command/test receipts and full SHA comparison to Issue #4. Return concrete proposed commits/PRs and independently verifiable artifacts to SaaS Core. Never use access to bypass human academic signing, genuine user acceptance, offsite custody or RLS protections, and do not independently deploy.
+
+## Integrated Core timetable/Notice Studio QA candidate (continuation)
+- Core's protected 825f2a4f integrated source is descended from timetable source base 41b71d8e. Four tracked timetable/Notice paths had no intervening upstream Core modifications. SHA256-matched forward-port of exactly four tracked and 21 untracked files into this separate clean Core worktree; ORIGINAL timetable/Notice worktree remains unchanged and dirty.
+- Source explicitly calls the PDF reference approved_print_source_unmapped_to_database and has publication_authorized=false/may_write_production_timetable=false. Its timetable draft migration is named QA_ONLY and must NEVER be auto-applied to production.
+- Reverified 81 new backend tests, 9 timetable contract tests, 23 Lesson readiness tests, 5 day-wise reconciliation tests: 118/118 PASS. Production-safety check PASS.
+- Disposable PG16 QA migration: deliberately fails closed without signed guard and leaves no table; synthetic signed guard permits scoped schema RLS with 5 policies. PASS; temporary PG16 deleted, no real school data.
+- Unified frontend Vite production build PASS in an isolated dist-qa output directory. Built artifacts are excluded from git commit and NOT deployed.
+- This adds source/test coverage but does NOT discharge timetable import provenance, academic signatures, authentic teacher/peer login, offsite restore or physical Ricoh Urdu A4 gates.

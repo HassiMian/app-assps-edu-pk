@@ -1,0 +1,577 @@
+{
+  "schema_version": 1,
+  "school_id": 1,
+  "academic_session": "2026–27",
+  "source_document": "ASSPS_Timetable_Print_Locked_2026-27.pdf",
+  "source_pdf_sha256": "9ac81002d2bc67cc748ece72b637c6cc081c8e1f23d1551d594031deea7e70c4",
+  "source_page_numbers": {
+    "classwise": 1,
+    "ninth": 2,
+    "bell_schedule": 3
+  },
+  "source_effective_from": "2026-10-16",
+  "timezone": "Asia/Karachi",
+  "status": "approved_print_source_unmapped_to_database",
+  "publication_authorized": false,
+  "may_write_production_timetable": false,
+  "teacher_accounts_verified": false,
+  "section_mapping_verified": false,
+  "notes": [
+    "Regular days Monday–Thursday and Saturday; Friday has separate bell times and no break.",
+    "Friday uses the same subject/teacher allocations as regular days.",
+    "Classes Four, Five, Six, Seven, Pre-Nine have no approved section name on source PDF; do not auto-assign to Blue or other sections.",
+    "Nine Usman and Fatima are separately approved sections.",
+    "Sir Fida-ul-Rehman and Qari Fida-ul-Rehman may refer to one person; do not assume identity without employee records.",
+    "Student, marks, attendance, fees, and existing historical timetable rows must not be mutated."
+  ],
+  "regular_weekdays": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Saturday"
+  ],
+  "friday_weekday": "Friday",
+  "regular_bells": [
+    {
+      "label": "Assembly",
+      "start": "08:30",
+      "end": "08:45"
+    },
+    {
+      "label": "Period 1",
+      "start": "08:45",
+      "end": "09:25"
+    },
+    {
+      "label": "Period 2",
+      "start": "09:25",
+      "end": "09:55"
+    },
+    {
+      "label": "Period 3",
+      "start": "09:55",
+      "end": "10:25"
+    },
+    {
+      "label": "Period 4",
+      "start": "10:25",
+      "end": "10:55"
+    },
+    {
+      "label": "Period 5",
+      "start": "10:55",
+      "end": "11:25"
+    },
+    {
+      "label": "Period 6",
+      "start": "11:25",
+      "end": "11:55"
+    },
+    {
+      "label": "Break",
+      "start": "11:55",
+      "end": "12:20"
+    },
+    {
+      "label": "Period 7",
+      "start": "12:20",
+      "end": "12:50"
+    },
+    {
+      "label": "Period 8",
+      "start": "12:50",
+      "end": "13:30"
+    }
+  ],
+  "friday_bells": [
+    {
+      "label": "Assembly",
+      "start": "08:30",
+      "end": "08:45"
+    },
+    {
+      "label": "Period 1",
+      "start": "08:45",
+      "end": "09:20"
+    },
+    {
+      "label": "Period 2",
+      "start": "09:20",
+      "end": "09:50"
+    },
+    {
+      "label": "Period 3",
+      "start": "09:50",
+      "end": "10:15"
+    },
+    {
+      "label": "Period 4",
+      "start": "10:15",
+      "end": "10:40"
+    },
+    {
+      "label": "Period 5",
+      "start": "10:40",
+      "end": "11:05"
+    },
+    {
+      "label": "Period 6",
+      "start": "11:05",
+      "end": "11:30"
+    },
+    {
+      "label": "Period 7",
+      "start": "11:30",
+      "end": "12:00"
+    },
+    {
+      "label": "Period 8",
+      "start": "12:00",
+      "end": "12:30"
+    }
+  ],
+  "allocations": [
+    {
+      "class_name": "Four",
+      "section": null,
+      "section_verified": false,
+      "periods": [
+        {
+          "period": 1,
+          "subject": "Urdu",
+          "teacher_display_name": "Miss Aqsa",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 2,
+          "subject": "Islamiyat",
+          "teacher_display_name": "Miss Maryam",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 3,
+          "subject": "Mathematics",
+          "teacher_display_name": "Miss Isma",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 4,
+          "subject": "English",
+          "teacher_display_name": "Miss Sumaira",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 5,
+          "subject": "English",
+          "teacher_display_name": "Miss Sumaira",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 6,
+          "subject": "Science",
+          "teacher_display_name": "Miss Aqsa",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 7,
+          "subject": "Social Studies",
+          "teacher_display_name": "Miss Aqsa",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 8,
+          "subject": "Nazra",
+          "teacher_display_name": "Qari Imran",
+          "employee_id": null,
+          "employee_identity_verified": false
+        }
+      ]
+    },
+    {
+      "class_name": "Five",
+      "section": null,
+      "section_verified": false,
+      "periods": [
+        {
+          "period": 1,
+          "subject": "Mathematics",
+          "teacher_display_name": "Miss Isma",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 2,
+          "subject": "Mathematics",
+          "teacher_display_name": "Miss Isma",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 3,
+          "subject": "Science",
+          "teacher_display_name": "Miss Aqsa",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 4,
+          "subject": "Social Studies",
+          "teacher_display_name": "Miss Aqsa",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 5,
+          "subject": "English",
+          "teacher_display_name": "Miss Sumaira",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 6,
+          "subject": "Islamiyat",
+          "teacher_display_name": "Miss Isma",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 7,
+          "subject": "Urdu",
+          "teacher_display_name": "Miss Nazra",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 8,
+          "subject": "Nazra",
+          "teacher_display_name": "Qari Imran",
+          "employee_id": null,
+          "employee_identity_verified": false
+        }
+      ]
+    },
+    {
+      "class_name": "Six",
+      "section": null,
+      "section_verified": false,
+      "periods": [
+        {
+          "period": 1,
+          "subject": "English A",
+          "teacher_display_name": "Miss Sumaira",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 2,
+          "subject": "Social Studies",
+          "teacher_display_name": "Miss Mehreen",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 3,
+          "subject": "Mathematics",
+          "teacher_display_name": "Miss Ghulam Fatima",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 4,
+          "subject": "Urdu",
+          "teacher_display_name": "Miss Nazra",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 5,
+          "subject": "Nazra",
+          "teacher_display_name": "Qari Imran",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 6,
+          "subject": "Islamiyat",
+          "teacher_display_name": "Miss Maryam",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 7,
+          "subject": "Science",
+          "teacher_display_name": "Miss Tayyaba",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 8,
+          "subject": "English B",
+          "teacher_display_name": "Miss Sumaira",
+          "employee_id": null,
+          "employee_identity_verified": false
+        }
+      ]
+    },
+    {
+      "class_name": "Seven",
+      "section": null,
+      "section_verified": false,
+      "periods": [
+        {
+          "period": 1,
+          "subject": "English",
+          "teacher_display_name": "Miss Tayyaba",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 2,
+          "subject": "Urdu",
+          "teacher_display_name": "Miss Nazra",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 3,
+          "subject": "Islamiyat",
+          "teacher_display_name": "Qari Fida-ul-Rehman",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 4,
+          "subject": "Mathematics",
+          "teacher_display_name": "Miss Isma",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 5,
+          "subject": "Science",
+          "teacher_display_name": "Miss Aqsa",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 6,
+          "subject": "Nazra",
+          "teacher_display_name": "Qari Imran",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 7,
+          "subject": "Social Studies",
+          "teacher_display_name": "Miss Mehreen",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 8,
+          "subject": "English B",
+          "teacher_display_name": "Miss Tayyaba",
+          "employee_id": null,
+          "employee_identity_verified": false
+        }
+      ]
+    },
+    {
+      "class_name": "Pre-Nine",
+      "section": null,
+      "section_verified": false,
+      "periods": [
+        {
+          "period": 1,
+          "subject": "Islamiyat",
+          "teacher_display_name": "Qari Fida-ul-Rehman",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 2,
+          "subject": "English",
+          "teacher_display_name": "Miss Sumaira",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 3,
+          "subject": "Urdu",
+          "teacher_display_name": "Miss Nazra",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 4,
+          "subject": "Chemistry",
+          "teacher_display_name": "Miss Tayyaba",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 5,
+          "subject": "Mathematics",
+          "teacher_display_name": "Miss Ghulam Fatima",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 6,
+          "subject": "Physics",
+          "teacher_display_name": "Miss Ghulam Fatima",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 7,
+          "subject": "Biology",
+          "teacher_display_name": "Sir Haseeb",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 8,
+          "subject": "Tarjuma",
+          "teacher_display_name": "Miss Maryam",
+          "employee_id": null,
+          "employee_identity_verified": false
+        }
+      ]
+    },
+    {
+      "class_name": "Nine",
+      "section": "Usman",
+      "section_verified": true,
+      "periods": [
+        {
+          "period": 1,
+          "subject": "Tarjuma",
+          "teacher_display_name": "Miss Maryam",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 2,
+          "subject": "Chemistry",
+          "teacher_display_name": "Sir Haseeb",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 3,
+          "subject": "English",
+          "teacher_display_name": "Miss Ayesha",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 4,
+          "subject": "Physics",
+          "teacher_display_name": "Miss Ghulam Fatima",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 5,
+          "subject": "Islamiyat",
+          "teacher_display_name": "Qari Fida-ul-Rehman",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 6,
+          "subject": "Urdu",
+          "teacher_display_name": "Miss Nazra",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 7,
+          "subject": "Computer Science",
+          "teacher_display_name": "Miss Isma",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 8,
+          "subject": "Mathematics",
+          "teacher_display_name": "Miss Ghulam Fatima",
+          "employee_id": null,
+          "employee_identity_verified": false
+        }
+      ]
+    },
+    {
+      "class_name": "Nine",
+      "section": "Fatima",
+      "section_verified": true,
+      "periods": [
+        {
+          "period": 1,
+          "subject": "Physics",
+          "teacher_display_name": "Miss Ghulam Fatima",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 2,
+          "subject": "Mathematics",
+          "teacher_display_name": "Miss Ghulam Fatima",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 3,
+          "subject": "Chemistry",
+          "teacher_display_name": "Sir Haseeb",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 4,
+          "subject": "Biology",
+          "teacher_display_name": "Sir Haseeb",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 5,
+          "subject": "Quran",
+          "teacher_display_name": "Miss Maryam",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 6,
+          "subject": "English",
+          "teacher_display_name": "Miss Ayesha",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 7,
+          "subject": "Islamiyat",
+          "teacher_display_name": "Sir Fida-ul-Rehman",
+          "employee_id": null,
+          "employee_identity_verified": false
+        },
+        {
+          "period": 8,
+          "subject": "Urdu",
+          "teacher_display_name": "Miss Nazra",
+          "employee_id": null,
+          "employee_identity_verified": false
+        }
+      ]
+    }
+  ]
+}

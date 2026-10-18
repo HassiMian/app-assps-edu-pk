@@ -2,9 +2,17 @@ import { useEffect, useMemo, useState } from 'react'
 import { useAcademicStore } from '../../services/useAcademicStore'
 import { usePaperStore } from '../Paper-Generator/usePaperStore'
 import api from '../../services/api'
+import ApprovedTimetableReference from './ApprovedTimetableReference'
+import { useAuth } from '../../context/AuthContext'
 
 // Dynamic lists will be used from the store.
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+const ACTIVE_SESSION = '2026–27'
+const createBlankAssignments = count => Object.fromEntries(DAYS.map(day => [
+ day, Object.fromEntries(Array.from({ length: count }, (_, i) => [
+   `Period ${i + 1}`, { subject: '', teacher: '' }
+ ]))
+]))
 const escapeHtml = (value) => String(value || '')
   .replaceAll('&', '&amp;')
   .replaceAll('<', '&lt;')
@@ -159,18 +167,12 @@ function TimetableModule() {
  
  const [section, setSection] = useState(sectionOptions[0] || '')
  const [numPeriods, setNumPeriods] = useState(periodsPerDay)
- const [assignments, setAssignments] = useState(() => {
- const initialPeriods = periodsPerDay
- const initial = {}
- DAYS.forEach(day => {
- initial[day] = {}
- for (let i = 1; i <= initialPeriods; i++) {
- const period = `Period ${i}`
- initial[day][period] = { subject: subjectOptions[0] || '', teacher: '' }
- }
- })
- return initial
- })
+ const [assignments, setAssignments] = useState(() => createBlankAssignments(periodsPerDay))
+ const { user } = useAuth()
+ const canManageDraft = ['principal','admin','school_admin','super_admin'].includes(String(user?.role || '').toLowerCase())
+ const [draftRevision, setDraftRevision] = useState(0)
+ const [draftStatus, setDraftStatus] = useState('')
+ const [draftSaving, setDraftSaving] = useState(false)
 
  useEffect(() => {
  let cancelled = false
@@ -218,7 +220,118 @@ function TimetableModule() {
  if (numPeriods !== periodsPerDay) setNumPeriods(periodsPerDay)
  }, [periodsPerDay, numPeriods])
 
+ useEffect(() => {
+   let active = true
+   setAssignments(createBlankAssignments(numPeriods))
+   setDraftRevision(0)
+   if (!canManageDraft || !schoolClass || !section || numPeriods !== 8) {
+     setDraftStatus(numPeriods === 8 ? '' : 'Eight periods required for official timetable drafts.')
+     return () => { active = false }
+   }
+   setDraftStatus('Loading saved timetable draft…')
+   async function loadDraft() {
+     try {
+       const response = await api.get('/api/timetable/drafts', {
+         params: { class: schoolClass, section, session: ACTIVE_SESSION },
+         skipCache: true
+       })
+       if (!active) return
+       const data = response.data?.data
+       const rows = data?.content?.days
+       if (!Array.isArray(rows) || rows.length !== 6) throw new Error('Draft data is incomplete.')
+       const next = createBlankAssignments(8)
+       rows.forEach(day => {
+         if (!next[day.day]) return
+         ;(day.periods || []).forEach(p => {
+           if (p.number >= 1 && p.number <= 8) {
+             next[day.day][`Period ${p.number}`] = {
+               subject: p.subject || '', teacher: p.teacher_display_name || ''
+             }
+           }
+         })
+       })
+       setAssignments(next)
+       setDraftRevision(Number(data.revision))
+       setDraftStatus('Saved draft loaded. This is not an approved or published timetable.')
+     } catch (err) {
+       if (!active) return
+       if (err.response?.status === 404) {
+         setDraftStatus('No saved draft exists for this class and section.')
+       } else {
+         setDraftStatus('Draft storage unavailable. Editing here is temporary and cannot be saved.')
+       }
+     }
+   }
+   void loadDraft()
+   return () => { active = false }
+ }, [canManageDraft, schoolClass, section, numPeriods])
+
+ async function loadOfficialPatternAsDraft() {
+   if (!canManageDraft || numPeriods !== 8 || !schoolClass || !section) return
+   if (!window.confirm('Replace current unsaved timetable cells with the class-level approved print source? This will NOT publish or save anything.')) return
+   try {
+     const result = await api.get('/api/timetable/approved-source', { skipCache: true })
+     const source = result.data?.data
+     if (!result.data?.reference_only || result.data.publication_authorized !== false ||
+         source?.school_id !== Number(user?.school_id)) {
+       throw new Error('Official print source not safely authenticated.')
+     }
+     const cohort = source.allocations?.find(item =>
+       String(item.class_name).toLowerCase() === String(schoolClass).toLowerCase() &&
+       (item.class_name !== 'Nine' || String(item.section).toLowerCase() === String(section).toLowerCase()))
+     if (!cohort || cohort.periods?.length !== 8) {
+       setDraftStatus('No matching approved class-level source; original editor left unchanged.')
+       return
+     }
+     const next = createBlankAssignments(8)
+     for (const day of DAYS) {
+       for (const item of cohort.periods) {
+         next[day][`Period ${item.period}`] = {
+           subject:item.subject, teacher:item.teacher_display_name
+         }
+       }
+     }
+     setAssignments(next)
+     setDraftStatus('Official source pattern loaded as UNSAVED DRAFT. Selected section and employee identities still require verification.')
+   } catch (err) {
+     setDraftStatus('Official source could not be verified; existing draft remains unchanged.')
+   }
+ }
+ async function saveDraft() {
+   if (!canManageDraft || numPeriods !== 8 || !schoolClass || !section || draftSaving) return
+   setDraftSaving(true)
+   setDraftStatus('Saving unapproved draft…')
+   try {
+     const days = DAYS.map(day => ({
+       day,
+       periods: Array.from({length:8},(_,i) => {
+         const row = assignments[day]?.[`Period ${i+1}`] || {}
+         return {
+           number:i+1,
+           subject:row.subject || '',
+           teacher_display_name:row.teacher || ''
+         }
+       })
+     }))
+     const response = await api.post('/api/timetable/drafts', {
+       class_name:schoolClass,section,academic_session:ACTIVE_SESSION,
+       revision:draftRevision,days
+     })
+     if (!response.data?.success || response.data?.publication_authorized) {
+       throw new Error('Server did not confirm safe draft persistence.')
+     }
+     setDraftRevision(Number(response.data.data.revision))
+     setDraftStatus('Draft saved successfully. Reload this class to verify. Not published.')
+   } catch (err) {
+     setDraftStatus(err.response?.status === 409
+       ? 'Draft revision conflict. Reopen the timetable before saving again.'
+       : 'Draft save failed. Your edits remain in this browser only.')
+   } finally {
+     setDraftSaving(false)
+   }
+ }
  const handleChange = (day, period, key, value) => {
+ setDraftStatus('Unsaved timetable draft changes.')
  setAssignments(prev => ({
  ...prev,
  [day]: {
@@ -307,6 +420,21 @@ function TimetableModule() {
  </div>
  </div>
 
+ {canManageDraft && <div style={{display:'flex',alignItems:'center',gap:12,flexWrap:'wrap',padding:'10px 2px'}}>
+  <button type="button" onClick={loadOfficialPatternAsDraft}
+   disabled={draftSaving || numPeriods !== 8 || !schoolClass || !section}
+   style={{padding:'10px 16px',borderRadius:9,background:'var(--apex-bg-subtle)',
+    color:'var(--apex-text-primary)',border:'1px solid var(--apex-border-default)',cursor:'pointer'}}>
+   Load Official Class Pattern (Draft Only)
+  </button>
+  <button type="button" onClick={saveDraft}
+   disabled={draftSaving || numPeriods !== 8 || !schoolClass || !section || draftStatus.includes('storage unavailable')}
+   style={{padding:'10px 16px',borderRadius:9,background:'#0b7494',color:'#fff',border:0,cursor:'pointer'}}>
+   {draftSaving ? 'Saving…' : 'Save Unpublished Timetable Draft'}
+  </button>
+  <span role="status" style={{fontSize:13,color:'var(--apex-text-secondary)'}}>{draftStatus}</span>
+ </div>}
+ <ApprovedTimetableReference schoolClass={schoolClass} section={section} />
  <div className="os-scroll-x timetable-scroll" style={{ overflowX: 'auto', overflowY: 'hidden', width: '100%', maxWidth: '100%', paddingBottom: 12 }}>
  <div style={{ minWidth: timetableMinWidth }}>
  <table style={{ width: '100%', tableLayout: 'fixed', borderCollapse: 'collapse' }}>
@@ -331,7 +459,10 @@ function TimetableModule() {
  <div style={{ display: 'grid', gap: 8, padding: 10, borderRadius: 14, background: 'var(--apex-bg-surface)', border: '1px solid var(--apex-border-subtle)' }}>
  <div>
  <span style={labelStyle}>Subject</span>
- <select value={assignments[day][period]?.subject || subjectOptions[0]} onChange={e => handleChange(day, period, 'subject', e.target.value)} style={inputStyle}>
+ <select value={assignments[day][period]?.subject || ''} onChange={e => handleChange(day, period, 'subject', e.target.value)} style={inputStyle}>
+ <option value="">Unassigned subject</option>
+ {assignments[day][period]?.subject && !subjectOptions.includes(assignments[day][period].subject) &&
+   <option value={assignments[day][period].subject}>{assignments[day][period].subject} (verify subject)</option>}
  {subjectOptions.map(subject => <option key={subject} value={subject}>{subject}</option>)}
  </select>
  </div>
@@ -339,6 +470,8 @@ function TimetableModule() {
  <span style={labelStyle}>Teacher</span>
  <select value={assignments[day][period]?.teacher || ''} onChange={e => handleChange(day, period, 'teacher', e.target.value)} style={inputStyle}>
  <option value="">Unassigned</option>
+ {assignments[day][period]?.teacher && !teacherOptions.includes(assignments[day][period].teacher) &&
+   <option value={assignments[day][period].teacher}>{assignments[day][period].teacher} (identity unverified)</option>}
  {teacherOptions.map(teacher => <option key={teacher} value={teacher}>{teacher}</option>)}
  </select>
  </div>

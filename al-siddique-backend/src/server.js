@@ -196,6 +196,8 @@ const registerRoutes = (router) => {
   mount('/grade910-verified-picker', './routes/grade910VerifiedPickerRoutes')
   mount('/timetable',  './routes/timetableRoutes')
   mount('/timetable',  './routes/timetableReferenceRoutes')
+  mount('/timetable',  './routes/timetableApprovedSourceRoutes')
+  mount('/timetable',  './routes/timetableDraftRoutes')
   mount('/academic-promotions', './routes/classEightPromotionPreflightRoutes')
   mount('/global-search', './routes/globalSearchRoutes')
   mount('/admissions', './routes/admissionRoutes')
