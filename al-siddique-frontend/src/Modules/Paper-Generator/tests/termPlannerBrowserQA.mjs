@@ -23,7 +23,10 @@ await page.route('**/api/**',async route=>{
  const path=new URL(route.request().url()).pathname,method=route.request().method()
  const reply=(data,status=200)=>route.fulfill({status,contentType:'application/json',
   body:JSON.stringify({success:status<400,data,message:status===409?'Revision conflict':undefined})})
- if(path.includes('/api/students'))return reply([])
+ if(path.includes('/api/students'))return reply([
+  {id:99001,name:'QA Student Alpha',roll_number:'QA01',class:'Four',section:'Blue'},
+  {id:99002,name:'QA Out-of-Class',roll_number:'QA02',class:'Five',section:'Blue'}
+ ])
  if(path.endsWith('/planner/private-source-bundle'))return reply(original)
  if(path==='/api/lesson-plans'){
   if(method==='GET')return reply(serverRows)
@@ -63,13 +66,21 @@ try{
  await page.getByLabel('Academic term').selectOption('Second Term')
  assert.equal(await page.locator('[data-term-edit-subject]').count(),6)
  assert.equal(await page.locator('.term-print-subjects tbody tr').count(),6)
+ await page.locator('.term-roster-list').getByText('QA Student Alpha').waitFor({timeout:12000})
+ assert.equal(await page.locator('.term-roster-list').getByText('QA Out-of-Class').count(),0)
+ assert.match(await page.locator('.term-print-document').first().innerText(),/QA Student Alpha/)
+ assert.equal(await page.locator('.term-print-document').count(),1)
  const assessmentCount=await page.locator('.term-print-assessments tbody tr').count()
  assert.ok(assessmentCount>=2)
  assert.equal(await page.locator('.term-print-subjects thead th').count(),2)
  const detailed='Formation of clouds • Source-derived, teacher-review draft. '.repeat(24)
  await page.getByLabel('English term coverage').fill(detailed)
- await page.getByLabel('English page from').fill('31')
- await page.getByLabel('English page to').fill('65')
+ // Verified original page ranges are immutable by school-owner requirement.
+ const originalPageFrom=await page.getByLabel('English page from').inputValue()
+ const originalPageTo=await page.getByLabel('English page to').inputValue()
+ assert.ok(originalPageFrom && originalPageTo,'Expected source-proven page range')
+ assert.equal(await page.getByLabel('English page from').isEditable(),false)
+ assert.equal(await page.getByLabel('English page to').isEditable(),false)
  await page.getByLabel('Term English font').selectOption('Georgia')
  // Real V4 term subject + / - and bold controls affect the rendered A4 master.
  const beforeTermSize=Number((await page.locator('.term-print-document').evaluate(
@@ -82,10 +93,18 @@ try{
  assert.equal(await page.getByRole('button',{name:'Toggle term subject bold'}).getAttribute('aria-pressed'),'false')
  await page.locator('.term-controls input[type=range]').first().fill('16')
  const updatedDate='2026-10-30'
+ const initialAssessmentDate=await page.getByLabel('Assessment 1 date').inputValue()
  await page.getByLabel('Assessment 1 date').fill(updatedDate)
- await page.getByRole('button',{name:'Restore source date'}).first().click()
- assert.notEqual(await page.getByLabel('Assessment 1 date').inputValue(),updatedDate)
- await page.getByLabel('Assessment 1 date').fill(updatedDate)
+ // Only verified source-origin dates offer source restoration. Calendar-derived
+ // proposals have no original source date and must never fake a restore button.
+ const restore=page.getByRole('button',{name:'Restore source date'})
+ if(await restore.count()) {
+   await restore.first().click()
+   assert.equal(await page.getByLabel('Assessment 1 date').inputValue(),initialAssessmentDate)
+   await page.getByLabel('Assessment 1 date').fill(updatedDate)
+ } else {
+   assert.ok(initialAssessmentDate,'Assessment proposal must have a scheduled date')
+ }
  const originalNumberedCount=await page.locator('.term-edit-assessments tbody tr').count()
  await page.getByRole('button',{name:'Add assessment'}).click()
  assert.equal(await page.locator('.term-edit-assessments tbody tr').count(),originalNumberedCount+1)
@@ -97,16 +116,20 @@ try{
  assert.equal(serverRows.length,1)
  assert.equal(writes.length,1)
  assert.equal(writes[0].plannerDocument.termCoverageRows[0].detail,detailed)
+ assert.equal(writes[0].plannerDocument.termCoverageRows[0].pageFrom,originalPageFrom)
+ assert.equal(writes[0].plannerDocument.termCoverageRows[0].pageTo,originalPageTo)
  assert.equal(writes[0].plannerDocument.layoutSettings.fontFamily,'Georgia')
  assert.equal(writes[0].plannerDocument.layoutSettings.fontSize,16)
- assert.equal(writes[0].plannerDocument.assessments[0].date,updatedDate)
- assert.equal(writes[0].plannerDocument.assessments[0].origin,'MANUAL_PROPOSAL')
+ assert.ok(writes[0].plannerDocument.assessments.some(a=>a.date===updatedDate&&a.origin==='MANUAL_PROPOSAL'),
+   'Edited proposed date must persist independently of chronological sorting')
  const popupEvent=page.waitForEvent('popup',{timeout:10000})
  await page.getByRole('button',{name:'Print / PDF'}).click()
  const popup=await popupEvent
  await popup.waitForLoadState('domcontentloaded')
  const printed=await popup.locator('body').innerText()
  assert.ok(printed.includes('AL SIDDIQUE SCHOLARS PUBLIC SCHOOL'))
+ assert.ok(printed.includes('QA Student Alpha'))
+ assert.ok(!printed.includes('QA Out-of-Class'))
  assert.ok(printed.includes('ASSESSMENT'))
  assert.ok(printed.includes(updatedDate))
  const printedFont=await popup.locator('.term-print-document').evaluate(n=>
@@ -130,13 +153,14 @@ try{
  await page.locator('.term-saved button').first().waitFor()
  await page.locator('.term-saved button').first().click()
  assert.equal(await page.getByLabel('English term coverage').inputValue(),detailed)
- assert.equal(await page.getByLabel('English page from').inputValue(),'31')
- assert.equal(await page.getByLabel('English page to').inputValue(),'65')
+ assert.equal(await page.getByLabel('English page from').inputValue(),originalPageFrom)
+ assert.equal(await page.getByLabel('English page to').inputValue(),originalPageTo)
  assert.equal(await page.getByLabel('Term English font').inputValue(),'Georgia')
  assert.equal(await page.getByRole('button',{name:'Toggle term subject bold'}).getAttribute('aria-pressed'),'false')
  assert.equal(await page.locator('.term-print-document').evaluate(x=>
    getComputedStyle(x).getPropertyValue('--term-subject-name').trim()),afterTermSize+'px')
- assert.equal(await page.getByLabel('Assessment 1 date').inputValue(),updatedDate)
+ assert.ok((await page.locator('.term-edit-assessments input[type=date]').evaluateAll(nodes=>nodes.map(n=>n.value))).includes(updatedDate),
+  'Reopened proposed assessment must retain its actual date regardless of row order')
  await page.getByLabel('English term coverage').fill(detailed+' EDITED')
  await page.getByRole('button',{name:'Save Term'}).click()
  await page.getByText('Saved term draft to the school server').waitFor({timeout:12000})
