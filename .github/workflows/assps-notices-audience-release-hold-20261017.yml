@@ -12,6 +12,7 @@ on:
       - 'ops/notices/**'
       - 'ops/tests/notices-read-audience-source-20261017.test.cjs'
       - '.github/workflows/assps-notices-audience-release-hold-20261017.yml'
+      - '.github/workflows/lesson-planner-release-contract.yml'
   workflow_dispatch:
 permissions:
   contents: read

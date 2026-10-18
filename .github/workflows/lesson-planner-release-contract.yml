@@ -4,6 +4,10 @@ on:
   pull_request:
     paths:
       - "al-siddique-frontend/**"
+      - "al-siddique-backend/src/routes/noticesRoutes.js"
+      - "al-siddique-backend/src/tests/notices-principal-issuer-tenant-isolated.test.cjs"
+      - "ops/notices/**"
+      - "ops/tests/notices-read-audience-source-20261017.test.cjs"
       - "al-siddique-backend/src/routes/assessmentStudioRoutes.js"
       - "al-siddique-backend/src/services/grade910PaperWorkspaceReleaseGuard.js"
       - "al-siddique-backend/src/tests/grade910-institutional-draft-validation-contract.test.js"
@@ -61,6 +65,10 @@ on:
       - "release/**"
     paths:
       - "al-siddique-frontend/**"
+      - "al-siddique-backend/src/routes/noticesRoutes.js"
+      - "al-siddique-backend/src/tests/notices-principal-issuer-tenant-isolated.test.cjs"
+      - "ops/notices/**"
+      - "ops/tests/notices-read-audience-source-20261017.test.cjs"
       - "al-siddique-backend/src/routes/assessmentStudioRoutes.js"
       - "al-siddique-backend/src/services/grade910PaperWorkspaceReleaseGuard.js"
       - "al-siddique-backend/src/tests/grade910-institutional-draft-validation-contract.test.js"
@@ -166,6 +174,10 @@ jobs:
         run: ASSPS_MARKS_REGISTER_DIST=al-siddique-frontend/dist node --test ops/tests/marks-register-live-nonregression.test.cjs
       - name: Verify principal-only immutable exam-mark correction contract (source-only)
         run: node --test al-siddique-backend/src/tests/exam-marks-principal-audited-revision.test.js al-siddique-backend/src/tests/exam-marks-revision-migration.test.js
+      - name: Prevent broad teacher notices and missing school audience guard in release
+        run: |
+          node --test al-siddique-backend/src/tests/notices-principal-issuer-tenant-isolated.test.cjs ops/tests/notices-read-audience-source-20261017.test.cjs
+          node ops/notices/verify-notice-audience-source-20261017.cjs
       - name: Verify stale-but-present chunks cannot bypass regression check
         run: python3 -m unittest discover -s ops/release/tests -p test_lesson_planner_ui_contract.py -v
       - name: Verify V4 subject-font controls and layout-model regression
