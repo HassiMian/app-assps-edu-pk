@@ -3,10 +3,12 @@ on:
   push:
     branches:
       - fix/paper-lesson-unified-quality-20261017
+      - integration/assps-canonical-lesson-quality-20261018
     paths:
       - 'al-siddique-frontend/src/Modules/Paper-Generator/**'
       - 'al-siddique-frontend/src/context/TenantBrandingContext.jsx'
       - 'al-siddique-frontend/src/pages/LoginPage.jsx'
+      - 'al-siddique-frontend/src/pages/tests/PublicBrandingLoginBrowser.test.js'
       - 'al-siddique-backend/src/routes/brandingRoutes.js'
       - 'al-siddique-backend/src/tests/public-school-branding-login-20261017.test.cjs'
       - 'ops/tests/assps-lesson-source-calendar-20261017.test.mjs'
@@ -33,6 +35,12 @@ jobs:
       - name: Install ephemeral dependencies
         working-directory: al-siddique-frontend
         run: npm ci --no-audit --no-fund
+      - name: Install Chromium for browser-only login identity verification
+        working-directory: al-siddique-frontend
+        run: npx playwright install --with-deps chromium
+      - name: Verify real login UI consumes only public school code-scoped crest
+        working-directory: al-siddique-frontend
+        run: node --test src/pages/tests/PublicBrandingLoginBrowser.test.js
       - name: Protected template integrity
         working-directory: al-siddique-frontend
         run: npm run verify:templates
