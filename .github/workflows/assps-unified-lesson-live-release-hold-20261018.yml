@@ -1,0 +1,27 @@
+name: ASSPS Lesson Live Release HOLD Safety Gate (SOURCE ONLY)
+on:
+  push:
+    branches:
+      - fix/assps-lesson-release-evidence-20261018
+    paths:
+      - 'ops/release/verify-unified-lesson-live-preflight-20261018.cjs'
+      - 'ops/tests/unified-lesson-release-preflight-20261018.test.cjs'
+      - '.github/workflows/assps-unified-lesson-live-release-hold-20261018.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-only-no-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Prove uninstalled ledger, stale branding, and missing acceptance block release
+        run: node --test ops/tests/unified-lesson-release-preflight-20261018.test.cjs
+      - name: Preserve global SaaS production safety guard
+        run: node ops/production-safety-check.js
+      - name: Do not advertise green source gate as production certificate
+        run: echo 'SOURCE_READONLY_GUARD_PASS; PRODUCTION_DEPLOYMENT_NOT_AUTHORIZED'
