@@ -13,7 +13,12 @@ export function lessonLanguage(subject) {
 export function immutableAcademicRefs(subject, rawNotes=[], pages=[]) {
   const notes=rawNotes.map(txt).filter(Boolean)
   const pageRefs=pages.filter(p=>p&&Number.isSafeInteger(+p.from)&&Number.isSafeInteger(+p.to)&&+p.from>0&&+p.to>=+p.from&&+p.to<10000)
-  const unitNumbers=unique(notes.flatMap(s=>[...s.matchAll(/\b(?:unit|chapter|ch(?:apter)?\.?|باب)\s*(?:no\.?|number|#|نمبر)?\s*[:.#-]?\s*(\d{1,3})\b/giu)].map(m=>Number(m[1]))))
+  // Preserve compact teacher shorthand U3/U4 as genuine unit references.
+  // Require a token boundary: words like Useful must not become fabricated units.
+  const unitNumbers=unique(notes.flatMap(s=>[
+    ...[...s.matchAll(/\b(?:unit|chapter|ch(?:apter)?\.?|باب)\s*(?:no\.?|number|#|نمبر)?\s*[:.#-]?\s*(\d{1,3})\b/giu)].map(m=>Number(m[1])),
+    ...[...s.matchAll(/(?:^|[\s(])U\s*#?\s*(\d{1,3})(?=\b|\s|$)/giu)].map(m=>Number(m[1]))
+  ]))
   return {pageFrom:pageRefs.length?String(Math.min(...pageRefs.map(p=>+p.from))):'',
     pageTo:pageRefs.length?String(Math.max(...pageRefs.map(p=>+p.to))):'',
     units:unitNumbers, originalTeacherNotes:[...notes] }
@@ -37,7 +42,7 @@ export function composeTeachingStatement({subject,notes=[],pages=[]}={}) {
  const text=refs.originalTeacherNotes.join(' ').toLowerCase()
  const named=namedWriting(refs.originalTeacherNotes,lang)
  const isEnglish=lang==='en'
- const questions=/question|answer|q\.?\s*&\s*a|سوال|جواب|مشق کے سوال/.test(text)
+ const questions=/question|answer|q\.?\s*[/&]\s*a|سوال|جواب|مشق کے سوال/.test(text)
  const writing=/essay|application|write|writing|copy|class.?work|home.?work|مضمون|درخواست|لکھ|تحریر|کاپی|کام/.test(text)
  const exercises=/exercise|complete|choose|fill|مشق|مکمل|حل کریں/.test(text)
  const reading=/read|reading|learn|پڑھ|یاد/.test(text)

@@ -54,3 +54,15 @@ test('Sunday image week-end schedules the preceding teaching day without rewriti
  assert.deepEqual(dates.map(x=>x.date),['2026-11-14','2026-11-28'])
  assert.deepEqual(weeks.map(w=>w.end),original)
 })
+
+test('Class One verified Science shorthand U3 and U4 is retained',()=>{
+ const r=composeTeachingStatement({subject:'Science',notes:['U3 Reading','U3 Q/A','U4 Reading','U4 Q/A']})
+ assert.deepEqual(r.units,[3,4])
+ assert.match(r.statement,/Units #3, 4/)
+ assert.match(r.statement,/questions and answers/i)
+})
+test('plain words without chapter or unit numbers cannot fabricate a unit',()=>{
+ const r=composeTeachingStatement({subject:'Science',notes:['Useful reading','Review the work']})
+ assert.deepEqual(r.units,[])
+ assert.doesNotMatch(r.statement,/Unit #/)
+})
