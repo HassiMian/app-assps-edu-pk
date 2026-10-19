@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Printer, Save, Plus, X, Edit2, Smartphone, Share2, Grid } from 'lucide-react'
+import { Printer, Save, Plus, X, Edit2 } from 'lucide-react'
 import { classLevelLabel, classLevelsMatch, useAcademicStore } from '../services/useAcademicStore'
 import { useStudentStore } from '../services/useStudentStore'
 import { usePaperStore } from './Paper-Generator/usePaperStore'
@@ -14,8 +14,8 @@ function academicSessionLabel(sessionStart, sessionEnd) {
 
 const TERMS = ['First Term Exam', 'Second Term Exam', 'Annual Exam', 'Monthly Assessment']
 const TEMPLATES = [
-  { id: 'classic', label: 'Template 1 - Classic Royal' },
-  { id: 'premium', label: 'Template 2 - Premium Navy Gold' },
+  { id: 'classic', label: 'Template 1 - Classic' },
+  { id: 'premium', label: 'Template 2 - Premium Navy' },
   { id: 'minimal', label: 'Template 3 - Clean Minimal' },
   { id: 'orange-executive', label: 'Template 4 - Executive Orange' },
   { id: 'yellow-academic', label: 'Template 5 - Academic Yellow' },
@@ -55,21 +55,6 @@ function prettyDate(date) {
   if (!date) return ''
   const parsed = new Date(`${date}T00:00:00`)
   return Number.isNaN(parsed.getTime()) ? date : parsed.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
-}
-
-function parseDateParts(dateStr) {
-  if (!dateStr) return { dayNum: '—', month: '—', dayAbbr: '—', fullDay: '—' }
-  const d = new Date(`${dateStr}T00:00:00`)
-  if (Number.isNaN(d.getTime())) return { dayNum: '—', month: '—', dayAbbr: '—', fullDay: '—' }
-  const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
-  const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
-  const fullDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-  return {
-    dayNum: String(d.getDate()).padStart(2, '0'),
-    month: months[d.getMonth()],
-    dayAbbr: days[d.getDay()],
-    fullDay: fullDays[d.getDay()]
-  }
 }
 
 function esc(value) {
@@ -162,386 +147,91 @@ const styles = {
   chip: { display:'inline-flex', alignItems:'center', gap:6, height:32, padding:'0 12px', borderRadius:20, fontSize:13, fontWeight:600, cursor:'pointer', border:'1px solid', transition:'all 0.18s' },
 }
 
-function templateCss(template, layout = 'single') {
+function templateCss(template) {
   const themes = {
-    classic: { accent:'#2563EB', dark:'#0B1F3A', soft:'#EFF6FF', table:'#0B1F3A', tableText:'#FFFFFF', border:'#C9D5E3', card:'#F8FAFC', cardBorder:'#CBD5E1' },
-    premium: { accent:'#C8991A', dark:'#0B1F3A', soft:'#FFF7D6', table:'#C8991A', tableText:'#071E34', border:'#0B1F3A', card:'#FFFDF3', cardBorder:'#E2D9B8' },
-    minimal: { accent:'#0B1F3A', dark:'#0B1F3A', soft:'#F8FAFC', table:'#0B1F3A', tableText:'#FFFFFF', border:'#0B1F3A', card:'#FFFFFF', cardBorder:'#E2E8F0' },
-    'orange-executive': { accent:'#EA580C', dark:'#431407', soft:'#FFF7ED', table:'#9A3412', tableText:'#FFFFFF', border:'#FDBA74', card:'#FFFBF6', cardBorder:'#FED7AA' },
-    'yellow-academic': { accent:'#D97706', dark:'#0F172A', soft:'#FEFCE8', table:'#0F172A', tableText:'#FDE047', border:'#FACC15', card:'#FFFDEB', cardBorder:'#FEF08A' },
-    'purple-royal': { accent:'#7C3AED', dark:'#2E1065', soft:'#F5F3FF', table:'#4C1D95', tableText:'#FFFFFF', border:'#C4B5FD', card:'#FBFAFF', cardBorder:'#DDD6FE' },
-    'red-formal': { accent:'#DC2626', dark:'#450A0A', soft:'#FEF2F2', table:'#991B1B', tableText:'#FFFFFF', border:'#FCA5A5', card:'#FFF8F8', cardBorder:'#FECACA' },
-    'pink-modern': { accent:'#DB2777', dark:'#500724', soft:'#FDF2F8', table:'#BE185D', tableText:'#FFFFFF', border:'#F9A8D4', card:'#FFF7FB', cardBorder:'#FBCFE8' },
+    classic: { accent:'#2563EB', dark:'#0B1F3A', soft:'#EFF6FF', table:'#0B1F3A', tableText:'#FFFFFF', border:'#C9D5E3', card:'#F8FAFC' },
+    premium: { accent:'#C8991A', dark:'#0B1F3A', soft:'#FFF7D6', table:'#C8991A', tableText:'#071E34', border:'#0B1F3A', card:'#FFFDF3' },
+    minimal: { accent:'#0B1F3A', dark:'#0B1F3A', soft:'#F8FAFC', table:'#0B1F3A', tableText:'#FFFFFF', border:'#0B1F3A', card:'#FFFFFF' },
+    'orange-executive': { accent:'#EA580C', dark:'#431407', soft:'#FFF7ED', table:'#9A3412', tableText:'#FFFFFF', border:'#FDBA74', card:'#FFFBF6' },
+    'yellow-academic': { accent:'#D97706', dark:'#0F172A', soft:'#FEFCE8', table:'#0F172A', tableText:'#FDE047', border:'#FACC15', card:'#FFFDEB' },
+    'purple-royal': { accent:'#7C3AED', dark:'#2E1065', soft:'#F5F3FF', table:'#4C1D95', tableText:'#FFFFFF', border:'#C4B5FD', card:'#FBFAFF' },
+    'red-formal': { accent:'#DC2626', dark:'#450A0A', soft:'#FEF2F2', table:'#991B1B', tableText:'#FFFFFF', border:'#FCA5A5', card:'#FFF8F8' },
+    'pink-modern': { accent:'#DB2777', dark:'#500724', soft:'#FDF2F8', table:'#BE185D', tableText:'#FFFFFF', border:'#F9A8D4', card:'#FFF7FB' },
   }
   const theme = themes[template] || themes.classic
   const isNew = ['orange-executive', 'yellow-academic', 'purple-royal', 'red-formal', 'pink-modern'].includes(template)
-
   return `
-  @page { size: ${layout === 'whatsapp-status' ? '430px 880px' : layout === 'whatsapp-group' ? '560px 650px' : 'A4 portrait'}; margin: 0; }
-  * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  body { margin: 0; background: #0b1329; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #102033; }
-  .bar { background: #0B1F3A; color: white; padding: 12px 20px; display: flex; align-items: center; gap: 14px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.1); }
-  .bar button { background: linear-gradient(135deg, #C8991A 0%, #E6B83B 100%); color: #07172C; border: 0; border-radius: 8px; padding: 9px 20px; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(200,153,26,0.35); }
-  @media print { body { background: white; } .bar { display: none !important; } }
-
-  /* Standard A4 Sheets */
-  .sheet { position: relative; width: 190mm; min-height: 277mm; background: #fff; margin: 10mm auto; padding: 10mm 13mm; break-after: page; border: 1px solid ${theme.border}; border-radius: 4px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
-  .two .sheet { min-height: 133mm; height: auto; margin: 0; width: 190mm; padding: 6mm 10mm; break-after: auto; border: 1px solid ${theme.border}; }
-  .pair { width: 210mm; min-height: 297mm; padding: 7mm 10mm; background: white; display: flex; flex-direction: column; gap: 5mm; break-after: page; margin: 10mm auto; }
-
-  .head { display: grid; grid-template-columns: 24mm minmax(0,1fr) 46mm; gap: 6mm; align-items: center; border-bottom: 2.5px solid ${theme.accent}; padding-bottom: 3.5mm; margin-bottom: 4mm; }
-  .two .head { grid-template-columns: 16mm minmax(0,1fr) 38mm; gap: 4mm; padding-bottom: 2mm; margin-bottom: 2.5mm; border-bottom-width: 1.5px; }
-  .logo { width: 23mm; height: 23mm; border: 1.5px solid ${theme.border}; border-radius: 50%; object-fit: contain; padding: 1.5mm; background: white; }
-  .two .logo { width: 15mm; height: 15mm; padding: 1mm; }
-  .school h1 { margin: 0; color: ${theme.dark}; font-size: ${isNew ? '23pt' : '20pt'}; line-height: 1.05; text-transform: uppercase; font-weight: 900; letter-spacing: 0.3px; }
-  .two .school h1 { font-size: 14pt; line-height: 1.05; }
-  .school small { display: block; color: #475569; font-size: 8pt; margin-top: 1.2mm; line-height: 1.3; font-weight: 600; }
-  .two .school small { font-size: 6.5pt; margin-top: 0.6mm; }
-  .meta { justify-self: end; width: 45mm; text-align: center; border: 1.5px solid ${theme.border}; background: ${theme.soft}; border-radius: 3mm; padding: 2.5mm 3mm; display: flex; flex-direction: column; gap: 1.2mm; }
-  .two .meta { width: 36mm; padding: 1.6mm 2mm; border-radius: 2mm; gap: 0.8mm; }
-  .meta-kicker { display: block; text-transform: uppercase; font-size: 6.8pt; font-weight: 900; letter-spacing: 0.8px; color: ${theme.accent}; }
-  .two .meta-kicker { font-size: 5.6pt; }
-  .meta-term { display: block; font-size: 10.5pt; font-weight: 900; line-height: 1.05; color: ${theme.dark}; text-transform: uppercase; }
-  .two .meta-term { font-size: 8pt; }
-  .meta-session { display: inline-block; margin: 0 auto; font-size: 7pt; font-weight: 700; color: #475569; background: white; border: 1px solid ${theme.border}; border-radius: 12px; padding: 1px 6px; }
-  .two .meta-session { font-size: 6pt; padding: 0 4px; }
-  .info { display: grid; grid-template-columns: repeat(4,1fr); gap: 2.5mm; margin-bottom: 4mm; }
-  .two .info { gap: 1.8mm; margin-bottom: 2.5mm; }
-  .info div { border: 1px solid ${theme.border}; background: ${theme.card}; padding: 2mm 2.5mm; border-radius: 2mm; }
-  .two .info div { padding: 1.2mm 1.8mm; border-radius: 1.5mm; }
-  .info span { display: block; color: #64748b; font-size: 6.8pt; text-transform: uppercase; font-weight: 800; letter-spacing: 0.4px; }
-  .two .info span { font-size: 5.6pt; }
-  .info strong { display: block; color: ${theme.dark}; font-size: 9.8pt; line-height: 1.15; margin-top: 0.6mm; font-weight: 800; }
-  .two .info strong { font-size: 7.8pt; margin-top: 0.3mm; }
-
-  /* Attractive Date / Day / Time Schedule Cards */
-  .schedule-cards-list { display: flex; flex-direction: column; gap: 6px; margin-top: 3mm; margin-bottom: 4mm; }
-  .exam-card-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: ${theme.card};
-    border: 1.2px solid ${theme.cardBorder};
-    border-radius: 10px;
-    padding: 7px 12px;
-    position: relative;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-  }
-  .exam-card-item::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 3.5px;
-    background: ${theme.accent};
-    border-radius: 10px 0 0 10px;
-  }
-  .exam-date-box {
-    flex-shrink: 0;
-    width: 48px;
-    background: #FFFFFF;
-    border: 1px solid #CBD5E1;
-    border-radius: 8px;
-    text-align: center;
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-  }
-  .exam-date-month {
-    background: ${theme.dark};
-    color: #FFFFFF;
-    font-size: 6.5pt;
-    font-weight: 900;
-    letter-spacing: 0.6px;
-    padding: 1.5px 0;
-    text-transform: uppercase;
-  }
-  .exam-date-num {
-    font-size: 14pt;
-    font-weight: 900;
-    line-height: 1.05;
-    color: ${theme.dark};
-    padding: 2px 0 0;
-  }
-  .exam-date-day {
-    font-size: 6.5pt;
-    font-weight: 800;
-    color: #64748B;
-    text-transform: uppercase;
-    padding-bottom: 2px;
-  }
-  .exam-details {
-    flex: 1;
-    min-width: 0;
-  }
-  .exam-pill-row {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 2px;
-  }
-  .exam-paper-tag {
-    font-size: 6.5pt;
-    font-weight: 800;
-    text-transform: uppercase;
-    color: ${theme.accent};
-    background: ${theme.soft};
-    border: 1px solid ${theme.border};
-    padding: 0 5px;
-    border-radius: 3px;
-  }
-  .exam-weekday-text {
-    font-size: 7.2pt;
-    color: #64748B;
-    font-weight: 700;
-  }
-  .exam-subject-title {
-    font-size: 10.5pt;
-    font-weight: 900;
-    color: #0F172A;
-    line-height: 1.15;
-    letter-spacing: -0.1px;
-  }
-  .exam-timing-pill {
-    flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    background: #FFFFFF;
-    border: 1px solid #CBD5E1;
-    color: #0F172A;
-    padding: 4px 9px;
-    border-radius: 16px;
-    font-size: 7.5pt;
-    font-weight: 800;
-  }
-  .foot { display: flex; justify-content: space-between; color: #64748b; font-size: 7.8pt; font-weight: 700; margin-top: 4mm; padding-top: 2mm; border-top: 1.2px solid #cbd5e1; }
-  .two .foot { display: none; }
-  .foot span { min-width: 44mm; text-align: center; }
-
-  /* 📱 WHATSAPP STATUS (9:16 Vertical Story) */
-  .sheet.whatsapp-status {
-    width: 410px;
-    min-height: 730px;
-    margin: 20px auto;
-    background: linear-gradient(180deg, #07172C 0%, #0B1F3A 40%, #0A1C34 100%);
-    color: #FFFFFF;
-    border-radius: 24px;
-    padding: 20px 18px;
-    border: 2px solid rgba(200, 153, 26, 0.5);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-    position: relative;
-    break-after: page;
-  }
-  .sheet.whatsapp-status .head { border-bottom: 1.5px solid rgba(200, 153, 26, 0.4); padding-bottom: 10px; margin-bottom: 10px; }
-  .sheet.whatsapp-status .school h1 { color: #FFFFFF; font-size: 15pt; letter-spacing: 0.3px; }
-  .sheet.whatsapp-status .school small { color: #94A3B8; font-size: 7pt; }
-  .sheet.whatsapp-status .meta { background: rgba(200, 153, 26, 0.15); border-color: rgba(200, 153, 26, 0.4); width: auto; padding: 4px 10px; border-radius: 8px; }
-  .sheet.whatsapp-status .meta-kicker { color: #FDE047; }
-  .sheet.whatsapp-status .meta-term { color: #FFFFFF; font-size: 8.5pt; }
-  .sheet.whatsapp-status .meta-session { background: #07172C; color: #FDE047; border-color: rgba(200, 153, 26, 0.3); }
-  .sheet.whatsapp-status .ws-class-banner {
-    background: linear-gradient(90deg, #C8991A 0%, #E6B83B 100%);
-    color: #07172C;
-    font-size: 10.5pt;
-    font-weight: 900;
-    text-transform: uppercase;
-    text-align: center;
-    padding: 6px 12px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    letter-spacing: 0.5px;
-    box-shadow: 0 4px 10px rgba(200,153,26,0.3);
-  }
-  .sheet.whatsapp-status .exam-card-item {
-    background: rgba(15, 33, 58, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-    padding: 5px 9px;
-    gap: 10px;
-  }
-  .sheet.whatsapp-status .exam-date-box {
-    background: #0B1F3A;
-    border-color: rgba(200, 153, 26, 0.5);
-    width: 44px;
-  }
-  .sheet.whatsapp-status .exam-date-month {
-    background: #C8991A;
-    color: #07172C;
-    font-size: 6pt;
-  }
-  .sheet.whatsapp-status .exam-date-num {
-    color: #FFFFFF;
-    font-size: 13pt;
-  }
-  .sheet.whatsapp-status .exam-date-day {
-    color: #94A3B8;
-    font-size: 6pt;
-  }
-  .sheet.whatsapp-status .exam-subject-title {
-    color: #FFFFFF;
-    font-size: 9.8pt;
-  }
-  .sheet.whatsapp-status .exam-paper-tag {
-    background: rgba(200, 153, 26, 0.2);
-    color: #FDE047;
-    border-color: rgba(200, 153, 26, 0.4);
-    font-size: 6pt;
-  }
-  .sheet.whatsapp-status .exam-weekday-text {
-    color: #94A3B8;
-    font-size: 6.8pt;
-  }
-  .sheet.whatsapp-status .exam-timing-pill {
-    background: rgba(200, 153, 26, 0.15);
-    border-color: rgba(200, 153, 26, 0.4);
-    color: #FEF08A;
-    font-size: 6.8pt;
-    padding: 3px 7px;
-  }
-  .sheet.whatsapp-status .foot {
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
-    padding-top: 8px;
-    color: #94A3B8;
-    font-size: 6.8pt;
-  }
-
-  /* 💬 WHATSAPP GROUP CARD (Compact 1:1 or 4:5 Feed Post) */
-  .sheet.whatsapp-group {
-    width: 520px;
-    min-height: 520px;
-    margin: 20px auto;
-    background: #FFFFFF;
-    color: #0F172A;
-    border-radius: 18px;
-    padding: 18px 20px;
-    border: 2px solid ${theme.accent};
-    box-shadow: 0 16px 36px rgba(0,0,0,0.15);
-    position: relative;
-    break-after: page;
-  }
-  .sheet.whatsapp-group .ws-class-banner {
-    background: ${theme.dark};
-    color: #FFFFFF;
-    font-size: 11pt;
-    font-weight: 900;
-    text-transform: uppercase;
-    text-align: center;
-    padding: 6px 12px;
-    border-radius: 8px;
-    margin-bottom: 12px;
-  }
-  .sheet.whatsapp-group .schedule-cards-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-  .sheet.whatsapp-group .exam-card-item {
-    padding: 5px 8px;
-    gap: 8px;
-  }
-  .sheet.whatsapp-group .exam-date-box {
-    width: 42px;
-  }
-  .sheet.whatsapp-group .exam-date-num {
-    font-size: 12pt;
-  }
-  .sheet.whatsapp-group .exam-subject-title {
-    font-size: 9pt;
-  }
-  .sheet.whatsapp-group .exam-timing-pill {
-    font-size: 6.8pt;
-    padding: 2px 6px;
-  }
-  .sheet.whatsapp-group .foot {
-    border-top: 1px solid #CBD5E1;
-    padding-top: 8px;
-  }
+  @page{size:A4 portrait;margin:0}*{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{margin:0;background:#e5e7eb;font-family:'Segoe UI',Roboto,Arial,sans-serif;color:#102033}.bar{background:#256FE8;color:white;padding:10px 16px;display:flex;gap:10px}.bar button{margin-left:auto;background:#C8991A;border:0;border-radius:6px;padding:8px 18px;font-weight:800;cursor:pointer}
+  @media print{body{background:white}.bar{display:none!important}}
+  .sheet{position:relative;width:190mm;height:277mm;background:#fff;margin:10mm auto;padding:12mm 14mm;break-after:page;overflow:hidden;border:1px solid ${theme.border}}
+  .two .sheet{height:133mm;margin:0;width:190mm;padding:7mm 11mm;break-after:auto;border:1px solid ${theme.border}}.pair{width:210mm;height:297mm;padding:7mm 10mm;background:white;display:flex;flex-direction:column;gap:5mm;break-after:page}
+  .head{display:grid;grid-template-columns:25mm minmax(0,1fr) 46mm;gap:6mm;align-items:center;border-bottom:2.5px solid ${theme.accent};padding-bottom:4mm;margin-bottom:5mm}.two .head{grid-template-columns:18mm minmax(0,1fr) 38mm;gap:4mm;padding-bottom:2.5mm;margin-bottom:2.5mm;border-bottom-width:1.5px}
+  .logo{width:24mm;height:24mm;border:1.5px solid ${theme.border};border-radius:${template === 'minimal' ? '4mm' : '50%'};object-fit:contain;padding:2mm;background:white}.two .logo{width:16mm;height:16mm;padding:1.5mm}
+  .school h1{margin:0;color:${theme.dark};font-size:${isNew ? '26pt' : '23pt'};line-height:1.02;text-transform:uppercase;font-weight:900;letter-spacing:0.4px}.two .school h1{font-size:16pt;line-height:1.05}
+  .school small{display:block;color:#475569;font-size:8pt;margin-top:1.5mm;line-height:1.3;font-weight:600}.two .school small{font-size:6.8pt;margin-top:0.8mm}
+  .meta{justify-self:end;width:45mm;text-align:center;border:1.5px solid ${theme.border};background:${theme.soft};border-radius:3mm;padding:2.5mm 3mm;display:flex;flex-direction:column;gap:1.2mm}.two .meta{width:36mm;padding:1.8mm 2mm;border-radius:2mm;gap:0.8mm}
+  .meta-kicker{display:block;text-transform:uppercase;font-size:6.8pt;font-weight:900;letter-spacing:0.8px;color:${theme.accent}}.two .meta-kicker{font-size:5.8pt}
+  .meta-term{display:block;font-size:11.5pt;font-weight:900;line-height:1.05;color:${theme.dark};text-transform:uppercase}.two .meta-term{font-size:8.5pt}
+  .meta-session{display:inline-block;margin:0 auto;font-size:7pt;font-weight:700;color:#475569;background:white;border:1px solid ${theme.border};border-radius:12px;padding:1px 6px}.two .meta-session{font-size:6pt;padding:0 4px}
+  .info{display:grid;grid-template-columns:repeat(4,1fr);gap:2.5mm;margin-bottom:5mm}.two .info{gap:1.8mm;margin-bottom:2.8mm}
+  .info div{border:1px solid ${theme.border};background:${theme.card};padding:2.2mm 2.8mm;border-radius:2mm}.two .info div{padding:1.4mm 2mm;border-radius:1.5mm}
+  .info span{display:block;color:#64748b;font-size:7pt;text-transform:uppercase;font-weight:800;letter-spacing:0.4px}.two .info span{font-size:5.8pt}
+  .info strong{display:block;color:${theme.dark};font-size:10.5pt;line-height:1.15;margin-top:0.8mm;font-weight:800}.two .info strong{font-size:8pt;margin-top:0.4mm}
+  table{width:100%;border-collapse:collapse;font-size:9.5pt}.two table{font-size:7.5pt}
+  th{background:${theme.table};color:${theme.tableText};font-size:8pt;text-transform:uppercase;font-weight:900;letter-spacing:0.5px;padding:2.8mm 3mm}.two th{padding:1.4mm 2mm;font-size:6.8pt}
+  td{border:1px solid #cbd5e1;padding:2.8mm 3mm;text-align:left;vertical-align:middle}.two td{padding:1.3mm 2mm}
+  td:first-child,th:first-child{text-align:center;width:8mm}.two td:first-child,.two th:first-child{width:6mm}
+  th:nth-child(2),td:nth-child(2){width:31mm;font-weight:700}.two th:nth-child(2),td:nth-child(2){width:24mm}
+  th:nth-child(3),td:nth-child(3){width:27mm}.two th:nth-child(3),td:nth-child(3){width:22mm}
+  th:nth-child(5),td:nth-child(5){width:42mm;font-weight:800;color:${theme.dark}}.two th:nth-child(5),td:nth-child(5){width:34mm}
+  .foot{position:absolute;left:14mm;right:14mm;bottom:9mm;display:flex;justify-content:space-between;color:#64748b;font-size:8pt;font-weight:700}.two .foot{display:none}
+  .foot span{border-top:1.5px solid #94a3b8;padding-top:1.5mm;min-width:44mm;text-align:center}
+  .premium{border:4mm solid #0B1F3A}.minimal{border:none;border-top:5mm solid #0B1F3A}
+  .orange-executive{border-top:6mm solid #EA580C;background:linear-gradient(180deg,#FFFDF9 0%,#FFFFFF 18%)}.orange-executive .head{background:linear-gradient(90deg,#FFF7ED 0%,#FFFFFF 70%);padding:4mm;border-radius:3mm;border-bottom:1.5mm solid #EA580C}.orange-executive .info div{border-left:1.5mm solid #EA580C}
+  .yellow-academic{border-left:5mm solid #D97706;border-top:1px solid #FDE047}.yellow-academic .head{background:#FEFCE8;border:1.2px solid #FACC15;padding:4mm;border-radius:3mm}.yellow-academic .meta{background:#0F172A;border-color:#0F172A}.yellow-academic .meta-term{color:#FDE047}.yellow-academic .meta-kicker{color:#FBBF24}.yellow-academic .meta-session{background:#1E293B;color:#FEF08A;border-color:#334155}
+  .purple-royal{border:2mm solid #4C1D95}.purple-royal .head{background:#F5F3FF;padding:4mm;border-radius:3mm;border-bottom:1.2mm solid #7C3AED}.purple-royal .meta{background:#4C1D95;border-color:#3B0764}.purple-royal .meta-term{color:#FFFFFF}.purple-royal .meta-kicker{color:#DDD6FE}.purple-royal .meta-session{background:#581C87;color:#E9D5FF;border-color:#6B21A8}.purple-royal .info div{border-color:#C4B5FD}
+  .red-formal{border-top:5mm solid #991B1B;border-bottom:2mm solid #991B1B}.red-formal .head{background:#FEF2F2;padding:4mm;border-radius:3mm;border-bottom:1.5mm solid #DC2626}.red-formal .info div{background:#FFF5F5;border-color:#FCA5A5}
+  .pink-modern{border:none;border-top:4mm solid #DB2777;box-shadow:inset 0 0 0 1.2px #F9A8D4}.pink-modern .head{background:#FDF2F8;border:1.2px solid #F9A8D4;border-radius:4mm;padding:4mm}.pink-modern .logo{border-radius:5mm}.pink-modern tbody tr:nth-child(even){background:#FFF7FB}
   `
 }
 
-function buildCard({ student, rows, school, term, session, template, layout = 'single' }) {
+function buildCard({ student, rows, school, term, session, template }) {
   const logo = school.logo ? `<img class="logo" src="${school.logo}" alt="logo">` : '<div class="logo" style="display:grid;place-items:center;font-weight:900">S</div>'
-  const isWhatsApp = layout === 'whatsapp-status' || layout === 'whatsapp-group'
-
-  const cardItems = rows.map((r, i) => {
-    const parts = parseDateParts(r.date)
-    const timeFormatted = (r.times || []).filter(Boolean).join(' / ') || '10:00 AM - 12:00 PM'
-    return `
-      <div class="exam-card-item">
-        <div class="exam-date-box">
-          <div class="exam-date-month">${esc(parts.month)}</div>
-          <div class="exam-date-num">${esc(parts.dayNum)}</div>
-          <div class="exam-date-day">${esc(parts.dayAbbr)}</div>
-        </div>
-        <div class="exam-details">
-          <div class="exam-pill-row">
-            <span class="exam-paper-tag">Paper ${i + 1}</span>
-            <span class="exam-weekday-text">${esc(parts.fullDay)}</span>
-          </div>
-          <div class="exam-subject-title">${esc(r.subjects.join(', '))}</div>
-        </div>
-        <div class="exam-timing-pill">
-          <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          <span>${esc(timeFormatted)}</span>
-        </div>
-      </div>
-    `
-  }).join('')
-
-  const studentInfo = !isWhatsApp ? `
-    <div class="info">
-      <div><span>Student</span><strong>${esc(student?.name || 'All Students')}</strong></div>
-      <div><span>GR No</span><strong>${esc(student?.gr_number || '-')}</strong></div>
-      <div><span>Father</span><strong>${esc(student?.father_name || '-')}</strong></div>
-      <div><span>Class</span><strong>${esc(clsLabel(student?.class))}${student?.section ? ` - ${esc(student.section)}` : ''}</strong></div>
+  const lines = rows.map((r, i) => `<tr><td>${i + 1}</td><td>${esc(prettyDate(r.date))}</td><td>${esc(dayName(r.date))}</td><td>${esc(r.subjects.join(', '))}</td><td>${esc((r.times || []).filter(Boolean).join(' / '))}</td></tr>`).join('')
+  return `<section class="sheet ${template}">
+  <div class="head">
+    ${logo}
+    <div class="school">
+      <h1>${esc(school.schoolName || '—')}</h1>
+      <small>${esc(school.address || '')}${school.phone ? ` | Ph: ${esc(school.phone)}` : ''}</small>
     </div>
-  ` : `
-    <div class="ws-class-banner">
-      ${esc(clsLabel(student?.class || 'All Classes'))}${student?.section ? ` - Section ${esc(student.section)}` : ''} • Date Sheet
+    <div class="meta">
+      <span class="meta-kicker">Date Sheet</span>
+      <strong class="meta-term">${esc(term)}</strong>
+      <span class="meta-session">Session ${esc(session)}</span>
     </div>
-  `
-
-  return `
-    <section class="sheet ${template} ${layout}">
-      <div class="head">
-        ${logo}
-        <div class="school">
-          <h1>${esc(school.schoolName || school.name || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL')}</h1>
-          <small>${esc(school.address || 'Sharif Chowk, Rayya Khas, Narowal')}${school.phone ? ` | Ph: ${esc(school.phone)}` : ' | Ph: 03001291959'}</small>
-        </div>
-        <div class="meta">
-          <span class="meta-kicker">Date Sheet</span>
-          <strong class="meta-term">${esc(term)}</strong>
-          <span class="meta-session">Session ${esc(session)}</span>
-        </div>
-      </div>
-      ${studentInfo}
-      <div class="schedule-cards-list">
-        ${cardItems}
-      </div>
-      <div class="foot">
-        <span>Reporting: 08:15 AM • Exam Starts: 08:30 AM</span>
-        <span>Controller of Examination</span>
-      </div>
-    </section>
-  `
+  </div>
+  <div class="info">
+    <div><span>Student</span><strong>${esc(student.name)}</strong></div>
+    <div><span>GR No</span><strong>${esc(student.gr_number || '-')}</strong></div>
+    <div><span>Father</span><strong>${esc(student.father_name || '-')}</strong></div>
+    <div><span>Class</span><strong>${esc(clsLabel(student.class))}${student.section ? ` - ${esc(student.section)}` : ''}</strong></div>
+  </div>
+  <table><thead><tr><th>#</th><th>Date</th><th>Day</th><th>Subject</th><th>Time</th></tr></thead><tbody>${lines}</tbody></table>
+  <div class="foot"><span>Prepared by Exam Office</span><span>Controller of Examination</span></div>
+  </section>`
 }
 
 function openPrint({ students, rows, school, term, session, template, layout }) {
   const ordered = [...rows].sort((a, b) => String(a.date).localeCompare(String(b.date)))
-  const cards = (layout === 'whatsapp-status' || layout === 'whatsapp-group')
-    ? [buildCard({ student: students[0], rows: ordered, school, term, session, template, layout })]
-    : students.map(student => buildCard({ student, rows: ordered, school, term, session, template, layout }))
-
+  const cards = students.map(student => buildCard({ student, rows: ordered, school, term, session, template }))
   const body = layout === 'two'
     ? cards.reduce((html, card, index) => `${html}${index % 2 === 0 ? '<div class="pair">' : ''}${card}${index % 2 === 1 || index === cards.length - 1 ? '</div>' : ''}`, '')
     : cards.join('')
-
-  const titlePrefix = layout === 'whatsapp-status' ? 'WhatsApp Status Date Sheet' : layout === 'whatsapp-group' ? 'WhatsApp Group Date Sheet' : 'Date Sheets'
   const w = window.open('', '_blank', 'width=1120,height=820')
   if (!w) return
-  w.document.write(`<!doctype html><html><head><meta charset="UTF-8"><title>${titlePrefix}</title><style>${templateCss(template, layout)}</style></head><body class="${layout}"><div class="bar"><strong>${esc(term)} ${titlePrefix}</strong><span>${cards.length} card(s)</span><button onclick="window.print()">Print / Save as PDF</button></div>${body}</body></html>`)
+  w.document.write(`<!doctype html><html><head><meta charset="UTF-8"><title>Date Sheets</title><style>${templateCss(template)}</style></head><body class="${layout === 'two' ? 'two' : ''}"><div class="bar"><strong>${esc(term)} Date Sheets</strong><span>${students.length} students</span><button onclick="window.print()">Print / Save PDF</button></div>${body}</body></html>`)
   w.document.close()
 }
 
@@ -558,6 +248,7 @@ export default function DateSheet() {
   const [gridReady, setGridReady] = useState(false)
   const [columns, setColumns] = useState([])
   const [cellSubjects, setCellSubjects] = useState({})
+  // Each row: { id, classLevel, section }
   const [classRows, setClassRows] = useState([])
   const [openCell, setOpenCell] = useState(null)
   const [subjectSearch, setSubjectSearch] = useState('')
@@ -567,8 +258,7 @@ export default function DateSheet() {
   const [printSession, setPrintSession] = useState(() => pickDateSheetSession(activeAcademicSession, paperSettings.academicYear))
   const [printTerm, setPrintTerm] = useState(TERMS[0])
   const [template, setTemplate] = useState('classic')
-  const [layout, setLayout] = useState('whatsapp-status')
-  const [previewMode, setPreviewMode] = useState('cards') // 'cards' | 'table'
+  const [layout, setLayout] = useState('single')
   const sessionOptions = dateSheetSessionOptions(sheets, activeAcademicSession, paperSettings.academicYear, session, printSession)
 
   const loadDateSheet = (targetSession, targetTerm, sourceRows = sheets) => {
@@ -601,6 +291,7 @@ export default function DateSheet() {
     loadDateSheet(session, term)
   }
 
+  // Server is authoritative. Browser caches are never auto-promoted into tenant data.
   useEffect(() => {
     let cancelled = false
     async function hydrateServerSheets() {
@@ -610,6 +301,8 @@ export default function DateSheet() {
         if (cancelled) return
         setSheets(serverRows)
         setSyncState('synced')
+        // Reconcile with the authenticated school's saved sessions, not with the
+        // browser's implicit first <option>. Keep the print selector in sync too.
         const restoredSession = pickDateSheetSession(activeAcademicSession, paperSettings.academicYear, serverRows)
         const restoredTerm = serverRows.some(row => row.session === restoredSession && row.term === term)
           ? term : (serverRows.find(row => row.session === restoredSession)?.term || term)
@@ -742,19 +435,10 @@ export default function DateSheet() {
   const printableRows = sheets.filter(row => row.session === printSession && row.term === printTerm && sameClass(row.class, printClass))
   const printableStudents = students.filter(student => isActiveStudent(student) && sameClass(studentClass(student), printClass))
   const printablePreviewRows = [...printableRows].sort((a, b) => String(a.date).localeCompare(String(b.date)))
-  
   const print = () => {
     if (!printableRows.length) return setWarning('No saved date sheet found for the selected class, session, and term.')
-    if (!printableStudents.length && !layout.startsWith('whatsapp')) return setWarning('No students found for the selected class.')
-    openPrint({ 
-      students: printableStudents.length ? printableStudents : [{ name: 'All Students', class: printClass, section: '' }], 
-      rows: printableRows, 
-      school: paperSettings, 
-      term: printTerm, 
-      session: printSession, 
-      template, 
-      layout 
-    })
+    if (!printableStudents.length) return setWarning('No students found for the selected class.')
+    openPrint({ students: printableStudents, rows: printableRows, school: paperSettings, term: printTerm, session: printSession, template, layout })
   }
 
   return (
@@ -845,41 +529,35 @@ export default function DateSheet() {
                       <thead>
                         <tr>
                           <th style={styles.classTh}>Class / Section</th>
-                          {columns.map((col, dayIndex) => {
-                            const parts = parseDateParts(col.date)
-                            return (
-                              <th key={col.id} style={{ ...styles.th, background:'var(--app-surface)', borderTop:'3px solid #22d3ee' }}>
-                                <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:6 }}>
-                                  <div style={{ display:'flex', alignItems:'center', gap:5 }}>
-                                    <span style={{ fontSize:10, color:'#22d3ee', fontWeight:900, textTransform:'uppercase', background:'rgba(34,211,238,0.12)', padding:'2px 6px', borderRadius:4 }}>Day {dayIndex + 1}</span>
-                                    {col.date && <span style={{ fontSize:10, color:'var(--app-muted)', fontWeight:700 }}>{parts.month} {parts.dayNum}</span>}
-                                  </div>
-                                  {columns.length > 1 && (
-                                    <button
-                                      type="button"
-                                      title="Remove this date column"
-                                      onClick={() => removeColumn(dayIndex)}
-                                      style={{ background:'rgba(239,68,68,0.15)', border:'1px solid rgba(239,68,68,0.3)', color:'#ef4444', borderRadius:4, cursor:'pointer', width:20, height:20, display:'inline-flex', alignItems:'center', justifyContent:'center', padding:0 }}
-                                    >
-                                      <X size={12} />
-                                    </button>
-                                  )}
-                                </div>
-                                <input type="date" style={{ ...styles.input, height:34, fontSize:13, fontWeight:700, marginBottom:6 }} value={col.date} onChange={e => updateColumn(dayIndex, { date:e.target.value })} />
-                                {col.times.map((time, ti) => (
-                                  <input
-                                    key={ti}
-                                    type="text"
-                                    placeholder={`Time slot ${ti + 1}`}
-                                    style={{ ...styles.input, height:28, fontSize:12, marginBottom:4 }}
-                                    value={time}
-                                    onChange={e => updateTime(dayIndex, ti, e.target.value)}
-                                  />
-                                ))}
-                                <div style={{ color:'#22d3ee', fontSize:12, marginTop:4, fontWeight:800 }}>{dayName(col.date) || '—'}</div>
-                              </th>
-                            )
-                          })}
+                          {columns.map((col, dayIndex) => (
+                            <th key={col.id} style={styles.th}>
+                              <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:6 }}>
+                                <span style={{ fontSize:11, color:'rgba(34,211,238,0.9)', fontWeight:800, textTransform:'uppercase', letterSpacing:0.5 }}>Day {dayIndex + 1}</span>
+                                {columns.length > 1 && (
+                                  <button
+                                    type="button"
+                                    title="Remove this date column"
+                                    onClick={() => removeColumn(dayIndex)}
+                                    style={{ background:'rgba(239,68,68,0.15)', border:'1px solid rgba(239,68,68,0.3)', color:'#ef4444', borderRadius:4, cursor:'pointer', width:20, height:20, display:'inline-flex', alignItems:'center', justifyContent:'center', padding:0 }}
+                                  >
+                                    <X size={12} />
+                                  </button>
+                                )}
+                              </div>
+                              <input type="date" style={{ ...styles.input, height:34, fontSize:13, fontWeight:700, marginBottom:6 }} value={col.date} onChange={e => updateColumn(dayIndex, { date:e.target.value })} />
+                              {col.times.map((time, ti) => (
+                                <input
+                                  key={ti}
+                                  type="text"
+                                  placeholder={`Time slot ${ti + 1}`}
+                                  style={{ ...styles.input, height:28, fontSize:12, marginBottom:4 }}
+                                  value={time}
+                                  onChange={e => updateTime(dayIndex, ti, e.target.value)}
+                                />
+                              ))}
+                              <div style={{ color:'#22d3ee', fontSize:12, marginTop:4, fontWeight:700 }}>{dayName(col.date) || '—'}</div>
+                            </th>
+                          ))}
                         </tr>
                       </thead>
                       <tbody>
@@ -969,99 +647,25 @@ export default function DateSheet() {
             </>
           )}
 
-          {/* PRINT & WHATSAPP CARD EXPORT PANEL */}
           <div style={styles.printPanel}>
-            <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:10, borderBottom:'1px solid rgba(148,163,184,0.1)', paddingBottom:12 }}>
-              <div>
-                <h2 style={{ ...styles.title, fontSize:20, margin:0, paddingBottom:0, borderBottom:0 }}>
-                  Date Sheet Cards &amp; Print Studio
-                </h2>
-                <div style={{ color:'var(--app-muted)', fontSize:13, marginTop:3 }}>
-                  Share stunning Date, Day &amp; Time cards directly to WhatsApp Status or Groups, or print official student slips.
-                </div>
-              </div>
-              <div style={{ display:'flex', gap:8, alignItems:'center' }}>
-                <span style={{ fontSize:12, fontWeight:700, color:'rgba(34,211,238,0.9)' }}>PREVIEW MODE:</span>
-                <button
-                  type="button"
-                  onClick={() => setPreviewMode('cards')}
-                  style={{
-                    padding:'6px 12px',
-                    borderRadius:8,
-                    fontSize:12,
-                    fontWeight:800,
-                    cursor:'pointer',
-                    border:'1px solid',
-                    background: previewMode==='cards' ? '#0A84FF' : 'rgba(15,23,42,0.4)',
-                    color: previewMode==='cards' ? '#fff' : 'var(--app-muted)',
-                    borderColor: previewMode==='cards' ? '#0A84FF' : 'rgba(148,163,184,0.2)',
-                    display:'inline-flex', alignItems:'center', gap:5
-                  }}
-                >
-                  <Smartphone size={13} /> Attractive Cards
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setPreviewMode('table')}
-                  style={{
-                    padding:'6px 12px',
-                    borderRadius:8,
-                    fontSize:12,
-                    fontWeight:800,
-                    cursor:'pointer',
-                    border:'1px solid',
-                    background: previewMode==='table' ? '#0A84FF' : 'rgba(15,23,42,0.4)',
-                    color: previewMode==='table' ? '#fff' : 'var(--app-muted)',
-                    borderColor: previewMode==='table' ? '#0A84FF' : 'rgba(148,163,184,0.2)',
-                    display:'inline-flex', alignItems:'center', gap:5
-                  }}
-                >
-                  <Grid size={13} /> Classic Table
-                </button>
-              </div>
-            </div>
-
+            <h2 style={{ ...styles.title, fontSize:20, margin:'0 0 2px', paddingBottom:10 }}>Print Student Date Sheets</h2>
             <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(180px, 1fr))', gap:14 }}>
               <div><label style={styles.label}>Class</label><select style={styles.input} value={printClass} onChange={e => setPrintClass(e.target.value)}>{classOptions.map(item => <option key={item.value} value={item.value}>{item.label}</option>)}</select></div>
               <div><label style={styles.label}>Session</label><select aria-label="Print date sheet session" style={styles.input} value={printSession} onChange={e => setPrintSession(e.target.value)}>{sessionOptions.map(option => <option value={option} key={option}>{option}</option>)}</select></div>
               <div><label style={styles.label}>Term</label><select style={styles.input} value={printTerm} onChange={e => setPrintTerm(e.target.value)}>{TERMS.map(item => <option key={item}>{item}</option>)}</select></div>
-              <div><label style={styles.label}>Theme / Template</label><select style={styles.input} value={template} onChange={e => setTemplate(e.target.value)}>{TEMPLATES.map(item => <option key={item.id} value={item.id}>{item.label}</option>)}</select></div>
-              <div>
-                <label style={styles.label}>Sharing &amp; Print Size</label>
-                <select style={{ ...styles.input, fontWeight:700, borderColor:'#22d3ee' }} value={layout} onChange={e => setLayout(e.target.value)}>
-                  <option value="whatsapp-status">📱 WhatsApp Status (9:16 Story)</option>
-                  <option value="whatsapp-group">💬 WhatsApp Group Post (Compact Feed)</option>
-                  <option value="single">📄 1 student per page (A4 Document)</option>
-                  <option value="two">📑 2 students per page (A4 Half Slip)</option>
-                </select>
-              </div>
+              <div><label style={styles.label}>Template</label><select style={styles.input} value={template} onChange={e => setTemplate(e.target.value)}>{TEMPLATES.map(item => <option key={item.id} value={item.id}>{item.label}</option>)}</select></div>
+              <div><label style={styles.label}>Layout</label><select style={styles.input} value={layout} onChange={e => setLayout(e.target.value)}><option value="single">1 student per page</option><option value="two">2 students per page</option></select></div>
             </div>
-
-            <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', color:'var(--app-muted)', fontSize:14, flexWrap:'wrap', gap:10, paddingTop:8, borderTop:'1px solid rgba(148,163,184,0.1)' }}>
-              <span>{printableRows.length} saved papers scheduled | {printableStudents.length} students</span>
-              <div style={{ display:'flex', gap:10 }}>
-                {layout.startsWith('whatsapp') ? (
-                  <button type="button" style={{ ...styles.button, background:'linear-gradient(135deg, #25D366 0%, #128C7E 100%)', boxShadow:'0 4px 14px rgba(37,211,102,0.35)' }} onClick={print}>
-                    <Share2 size={15} /> Open WhatsApp View / Save PDF
-                  </button>
-                ) : (
-                  <button type="button" style={styles.button} onClick={print}>
-                    <Printer size={15} /> Print Student Slips
-                  </button>
-                )}
-              </div>
+            <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', color:'var(--app-muted)', fontSize:14, flexWrap:'wrap', gap:10 }}>
+              <span>{printableRows.length} saved papers | {printableStudents.length} students</span>
+              <button type="button" style={styles.button} onClick={print}><Printer size={15} /> Print</button>
             </div>
-
-            {/* LIVE PREVIEW CONTAINER */}
             {printablePreviewRows.length > 0 && (
-              <div style={{ border:'1px solid rgba(148,163,184,0.16)', borderRadius:16, overflow:'hidden', background:'rgba(15,23,42,0.45)', marginTop:6 }}>
-                <div style={{ padding:'12px 18px', color:'var(--app-text)', fontWeight:700, borderBottom:'1px solid rgba(148,163,184,0.12)', display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:10, background:'rgba(15,23,42,0.3)' }}>
+              <div style={{ border:'1px solid rgba(148,163,184,0.12)', borderRadius:14, overflow:'hidden', background:'rgba(15,23,42,0.35)' }}>
+                <div style={{ padding:'12px 16px', color:'var(--app-text)', fontWeight:700, borderBottom:'1px solid rgba(148,163,184,0.1)', display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:10 }}>
                   <div>
-                    <span style={{ fontSize:15, color:'var(--app-text)', fontWeight:800 }}>{clsLabel(printClass)} — {printTerm} Date Sheet</span>
-                    <span style={{ color:'var(--app-muted)', fontSize:12, marginLeft:10 }}>({printablePreviewRows.length} examination papers)</span>
-                    <span style={{ display:'inline-block', marginLeft:10, fontSize:11, padding:'2px 8px', borderRadius:12, background:layout.startsWith('whatsapp')?'rgba(37,211,102,0.15)':'rgba(10,132,255,0.15)', color:layout.startsWith('whatsapp')?'#25D366':'#0A84FF', fontWeight:800 }}>
-                      {layout === 'whatsapp-status' ? '9:16 WhatsApp Status Story' : layout === 'whatsapp-group' ? 'Compact WhatsApp Group Post' : 'A4 Print Document'}
-                    </span>
+                    <span style={{ fontSize:15, color:'var(--app-text)' }}>{clsLabel(printClass)} - {printTerm} preview</span>
+                    <span style={{ color:'var(--app-muted)', fontSize:12, marginLeft:10 }}>({printablePreviewRows.length} papers scheduled)</span>
                   </div>
                   <button
                     type="button"
@@ -1074,148 +678,26 @@ export default function DateSheet() {
                     <Edit2 size={13} /> Edit This Date Sheet
                   </button>
                 </div>
-
-                {/* CARDS PREVIEW */}
-                {previewMode === 'cards' ? (
-                  <div style={{ padding:20, maxWidth: layout === 'whatsapp-status' ? 440 : layout === 'whatsapp-group' ? 760 : '100%', margin:'0 auto' }}>
-                    {/* Header Banner for WhatsApp */}
-                    <div style={{
-                      background: layout === 'whatsapp-status' ? 'linear-gradient(135deg, #0B1F3A 0%, #07172C 100%)' : 'rgba(30,41,59,0.6)',
-                      border: '1.5px solid rgba(200,153,26,0.35)',
-                      borderRadius: 14,
-                      padding: '14px 18px',
-                      marginBottom: 14,
-                      textAlign: 'center',
-                      boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
-                    }}>
-                      <div style={{ color:'#FDE047', fontSize:11, fontWeight:900, textTransform:'uppercase', letterSpacing:1.2, marginBottom:4 }}>
-                        AL SIDDIQUE SCHOLARS PUBLIC SCHOOL
-                      </div>
-                      <div style={{ color:'#FFFFFF', fontSize:16, fontWeight:900, textTransform:'uppercase' }}>
-                        {clsLabel(printClass)} • {printTerm}
-                      </div>
-                      <div style={{ color:'rgba(255,255,255,0.7)', fontSize:12, marginTop:3 }}>
-                        Academic Session {printSession} • Examination Schedule
-                      </div>
-                    </div>
-
-                    {/* Cards Grid */}
-                    <div style={{
-                      display: layout === 'whatsapp-group' ? 'grid' : 'flex',
-                      gridTemplateColumns: layout === 'whatsapp-group' ? 'repeat(auto-fit, minmax(320px, 1fr))' : undefined,
-                      flexDirection: layout === 'whatsapp-group' ? undefined : 'column',
-                      gap: 10
-                    }}>
-                      {printablePreviewRows.map((row, idx) => {
-                        const parts = parseDateParts(row.date)
-                        const timesStr = (row.times || []).filter(Boolean).join(' / ') || '10:00 AM - 12:00 PM'
-                        return (
-                          <div
-                            key={row.id}
-                            style={{
-                              display:'flex',
-                              alignItems:'center',
-                              gap:14,
-                              background:'rgba(30,41,59,0.7)',
-                              border:'1.5px solid rgba(255,255,255,0.1)',
-                              borderRadius:14,
-                              padding:'10px 14px',
-                              position:'relative',
-                              boxShadow:'0 4px 10px rgba(0,0,0,0.15)',
-                              transition:'all 0.2s ease'
-                            }}
-                          >
-                            {/* Accent indicator line */}
-                            <div style={{ position:'absolute', left:0, top:0, bottom:0, width:4, background:'#22d3ee', borderRadius:'14px 0 0 14px' }} />
-
-                            {/* Calendar Badge */}
-                            <div style={{
-                              flexShrink:0,
-                              width:52,
-                              background:'#0F172A',
-                              border:'1.5px solid rgba(34,211,238,0.4)',
-                              borderRadius:10,
-                              textAlign:'center',
-                              overflow:'hidden',
-                              boxShadow:'0 2px 6px rgba(0,0,0,0.3)'
-                            }}>
-                              <div style={{ background:'linear-gradient(135deg, #0A84FF 0%, #22d3ee 100%)', color:'#0F172A', fontSize:9, fontWeight:900, textTransform:'uppercase', letterSpacing:0.8, padding:'2px 0' }}>
-                                {parts.month}
-                              </div>
-                              <div style={{ fontSize:18, fontWeight:900, lineHeight:1.1, color:'#FFFFFF', padding:'3px 0 1px' }}>
-                                {parts.dayNum}
-                              </div>
-                              <div style={{ fontSize:9, fontWeight:800, color:'#94A3B8', textTransform:'uppercase', paddingBottom:3 }}>
-                                {parts.dayAbbr}
-                              </div>
-                            </div>
-
-                            {/* Subject & Paper Info */}
-                            <div style={{ flex:1, minWidth:0 }}>
-                              <div style={{ display:'flex', alignItems:'center', gap:6, marginBottom:3 }}>
-                                <span style={{ fontSize:9, fontWeight:800, textTransform:'uppercase', color:'#22d3ee', background:'rgba(34,211,238,0.12)', border:'1px solid rgba(34,211,238,0.25)', padding:'1px 6px', borderRadius:4 }}>
-                                  Paper {idx + 1}
-                                </span>
-                                <span style={{ fontSize:11, color:'#94A3B8', fontWeight:700 }}>
-                                  {parts.fullDay}
-                                </span>
-                              </div>
-                              <div style={{ fontSize:14, fontWeight:900, color:'#FFFFFF', lineHeight:1.2, letterSpacing:-0.2 }}>
-                                {(row.subjects || []).join(', ')}
-                              </div>
-                            </div>
-
-                            {/* Time Pill */}
-                            <div style={{
-                              flexShrink:0,
-                              display:'inline-flex',
-                              alignItems:'center',
-                              gap:5,
-                              background:'rgba(15,23,42,0.8)',
-                              border:'1px solid rgba(255,255,255,0.15)',
-                              color:'#FDE047',
-                              padding:'5px 10px',
-                              borderRadius:20,
-                              fontSize:11,
-                              fontWeight:800,
-                              whiteSpace:'nowrap'
-                            }}>
-                              <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                              <span>{timesStr}</span>
-                            </div>
-                          </div>
-                        )
-                      })}
-                    </div>
-
-                    {/* WhatsApp Footer note */}
-                    <div style={{ marginTop:14, textAlign:'center', color:'rgba(255,255,255,0.5)', fontSize:11, fontWeight:600 }}>
-                      Reporting: 08:15 AM • Exam Starts: 08:30 AM • Sharif Chowk, Rayya Khas, Narowal
-                    </div>
-                  </div>
-                ) : (
-                  /* CLASSIC TABLE PREVIEW */
-                  <table style={{ width:'100%', borderCollapse:'collapse', fontSize:13, color:'var(--app-text)' }}>
-                    <thead>
-                      <tr style={{ background:'var(--app-bg-soft)', color:'var(--app-text)', textTransform:'uppercase', fontSize:11 }}>
-                        <th style={{ textAlign:'left', padding:'9px 12px' }}>Date</th>
-                        <th style={{ textAlign:'left', padding:'9px 12px' }}>Day</th>
-                        <th style={{ textAlign:'left', padding:'9px 12px' }}>Subject</th>
-                        <th style={{ textAlign:'left', padding:'9px 12px' }}>Time</th>
+                <table style={{ width:'100%', borderCollapse:'collapse', fontSize:13, color:'var(--app-text)' }}>
+                  <thead>
+                    <tr style={{ background:'var(--app-bg-soft)', color:'var(--app-text)', textTransform:'uppercase', fontSize:11 }}>
+                      <th style={{ textAlign:'left', padding:'9px 12px' }}>Date</th>
+                      <th style={{ textAlign:'left', padding:'9px 12px' }}>Day</th>
+                      <th style={{ textAlign:'left', padding:'9px 12px' }}>Subject</th>
+                      <th style={{ textAlign:'left', padding:'9px 12px' }}>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {printablePreviewRows.map(row => (
+                      <tr key={row.id} style={{ borderTop:'1px solid rgba(148,163,184,0.08)' }}>
+                        <td style={{ padding:'10px 12px', fontWeight:700, color:'var(--app-text)' }}>{prettyDate(row.date)}</td>
+                        <td style={{ padding:'10px 12px', color:'var(--app-text)' }}>{dayName(row.date)}</td>
+                        <td style={{ padding:'10px 12px', color:'var(--app-text)', fontWeight:700 }}>{(row.subjects || []).join(', ')}</td>
+                        <td style={{ padding:'10px 12px', color:'var(--app-text)' }}>{(row.times || []).filter(Boolean).join(' / ') || '-'}</td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      {printablePreviewRows.map(row => (
-                        <tr key={row.id} style={{ borderTop:'1px solid rgba(148,163,184,0.08)' }}>
-                          <td style={{ padding:'10px 12px', fontWeight:700, color:'var(--app-text)' }}>{prettyDate(row.date)}</td>
-                          <td style={{ padding:'10px 12px', color:'var(--app-text)' }}>{dayName(row.date)}</td>
-                          <td style={{ padding:'10px 12px', color:'var(--app-text)', fontWeight:700 }}>{(row.subjects || []).join(', ')}</td>
-                          <td style={{ padding:'10px 12px', color:'var(--app-text)' }}>{(row.times || []).filter(Boolean).join(' / ') || '-'}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                )}
+                    ))}
+                  </tbody>
+                </table>
               </div>
             )}
           </div>
