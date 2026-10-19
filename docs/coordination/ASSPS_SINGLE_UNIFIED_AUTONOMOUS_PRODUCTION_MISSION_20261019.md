@@ -141,3 +141,10 @@ This is a source-only Core hardening iteration on the same protected unified mis
 
 - The mission worktree inherits an already-public repository history with potentially sensitive image/media content; do not push this inherited branch publicly. The latest Core work is committed locally and separately archived root-private with checksum receipts. GitHub Issue #4 coordination describes provenance, counts and release conditions only, never attaches the vulnerable asset or secrets.
 - Next isolated Core integration needs to honor newer parallel branch integration/assps-zero-human-unified-master-20261019@6ce32e0 and the newly deployed First Term Exam9 four-trigger migration. Do NOT replay that migration or overwrite peer agent's worktree; reconcile exact SHA and verify latest descendant before any cutover.
+
+## Finance / protected ledger independent read-only checkpoint
+
+- Core payment test with genuine mutation intentionally requires a disposable fee QA Postgres database and must never be pointed at the school production cluster. No test payments created, no challan updated.
+- Read-only live School1/all-school fee aggregate: 905 existing challans, 902 School1 challans, 213 append-only payment transaction rows. Six anomaly classes checked: negative challan/transaction values, orphan payments, cross-school payment-to-challan mismatch, wrong-student link, and decreasing cumulative paid amounts. Every anomaly count is **zero** at the current snapshot.
+- The separate assps_fee_ledger_integrity_readonly.py exposes only aggregate counts and checks minimum historical record survival, while allowing future legitimate fee challans and payments. No student names, identities, receipts or amounts copied into report.
+- Integrated fee ledger validation into unified gate. As of 19 October the actual live checker has 10/10 operational evidence sections PASS; 12 unresolved release holds remain (including authenticated receipt/workflow browser acceptance). Source-only synthetic tests are not proof of actual payment operation or merchant reconciliation.

@@ -7,6 +7,7 @@ import re
 import subprocess
 import verify_backend_source_preservation_readonly as backend_preservation
 import assps_attendance_coverage_readonly as attendance_coverage
+import assps_fee_ledger_integrity_readonly as fee_integrity
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 
@@ -170,6 +171,19 @@ def inspect_frontend():
             'sidecar_claimed_commit':sidecar.get('candidate_commit',''),
             'active_root':str(ACTIVE_ROOT)}
 
+def inspect_fees_ledger():
+    result=run(['runuser','-u','postgres','--','psql','-p','5432','-d','apexos',
+                '-X','-Atq','-v','ON_ERROR_STOP=1'],
+               timeout=17,input_data=fee_integrity.SQL)
+    if result.returncode:
+        raise RuntimeError('Read-only fee ledger audit failed')
+    aggregates=fee_integrity.parse(result.stdout)
+    return {'pass':fee_integrity.assess(aggregates),
+            'challans_total':aggregates['challans_total'],
+            'school1_challans':aggregates['challans_school1'],
+            'payment_transactions':aggregates['payment_transactions_total'],
+            'financial_anomaly_count':sum(aggregates[k] for k in fee_integrity.NO_ANOMALIES)}
+
 def inspect_attendance_coverage():
     # Read-only roster and saved-day status. Missing attendance is NOT guessed.
     result=run(['runuser','-u','postgres','--','psql','-p','5432','-d','apexos',
@@ -246,7 +260,7 @@ def inspect_http():
 def classify(evidence):
     required=('database','backup','frontend','rollback','http',
               'restricted_catalog_and_firstterm','source_privacy_inventory',
-              'backend_source_inventory','attendance_roster_coverage')
+              'backend_source_inventory','attendance_roster_coverage','fee_ledger_integrity')
     checks={k:(isinstance(evidence.get(k),dict) and evidence[k].get('pass') is True)
             for k in required}
     infrastructure=all(checks.values())
@@ -269,6 +283,7 @@ def main():
         'rollback':inspect_rollback,'source_privacy_inventory':inspect_source_privacy,
         'backend_source_inventory':inspect_backend_preservation,
         'attendance_roster_coverage':inspect_attendance_coverage,
+        'fee_ledger_integrity':inspect_fees_ledger,
         'restricted_catalog_and_firstterm':inspect_signed_and_history,
         'http':inspect_http,
     }
