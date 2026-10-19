@@ -1,0 +1,17 @@
+'use strict'
+const test=require('node:test'),assert=require('node:assert/strict')
+const fs=require('node:fs')
+const path=require('node:path')
+const {KINDS,cleanNotice,unresolvedPresetFields}=require('../services/documents/schoolDocumentContract')
+const route=fs.readFileSync(path.join(__dirname,'../routes/schoolDocumentStudioRoutes.js'),'utf8')
+const kinds=['staff_punctuality','staff_absence','duty_concern','staff_warning','show_cause','improvement_plan','staff_appreciation']
+test('all 7 HR notice kinds remain available in contract',()=>{for(const k of kinds)assert(KINDS.includes(k),k)})
+test('staff-private requires designated employee',()=>{const a=cleanNotice({document_kind:'staff_warning',audience_kind:'staff_private',title:'Test',content:{message:'Synthetic alert'}});assert(a.errors.length>0)})
+test('HR drafting enforces principal-only even with fake teacher role',()=>assert(route.includes("code:'HR_PRINCIPAL_ONLY'")))
+test('confidential recipient is verified by active school employee ID',()=>{assert(route.includes("HR_RECIPIENT_NOT_VERIFIED"));assert(route.includes("AND is_active=true"));assert(route.includes("bound.employee_name=e.rows[0].name"))})
+test('staff-private recipient cannot read unpublished manager drafts',()=>{assert(route.includes("status='published' AND audience_kind='staff_private' AND target_employee_id=$4"));assert(route.includes("status='published' AND audience_kind='staff_private' AND target_employee_id=$5"))})
+test('acknowledgement is published-only, recipient-only and idempotent',()=>{assert(route.includes('HR_ONLY_PUBLISHED_INTENDED_RECIPIENT'));assert(route.includes('HR_RECEIPT_ALREADY_ACKNOWLEDGED'));assert(route.includes('acknowledged_by_employee:verifiedEmp.rows[0].name'))})
+test('no client-supplied acknowledgment identity is trusted',()=>{assert(!route.includes('employee_name||actor(req)'));assert(route.includes("String(written_response).trim().slice(0,8000)"))})
+test('HR and Notice mutations use tenant transaction scope, never stub context',()=>{assert(route.includes("query,pool,applyTenantContext"));assert(!route.includes('async function applyTenantContext(client){'));assert(!route.includes('const ready=async()=>true'))})
+test('private no-store responses and permissioned employee directory',()=>{assert(route.includes("router.get('/employees/list',protect,leader"));assert(route.includes("Cache-Control','private, no-store"))})
+test('missing fields in notices cannot be silently published',()=>assert(unresolvedPresetFields({message:'Visit on [date]',action_required:'Respond'}).includes('date')))
