@@ -101,6 +101,7 @@ router.post('/save', protect, async (req, res) => {
  let client
  try {
   const {schoolId,actorId}=writeGuard.authority(req)
+  if (!schoolBellSchedule(schoolId)) throw new writeGuard.GateError(403,'TIMETABLE_SCHOOL_NOT_CONFIGURED')
   // Never promote a submitted source hash into a server-trusted approval.
   const trusted=process.env.ASSPS_TIMETABLE_APPROVED_SOURCE_SHA256 || ''
   const attested=process.env.ASSPS_TIMETABLE_SOURCE_INDEPENDENTLY_ATTESTED === 'true'
@@ -140,6 +141,7 @@ router.post('/save', protect, async (req, res) => {
 router.get('/snapshot', protect, async (req,res)=>{
  try {
   const {schoolId}=writeGuard.authority(req)
+  if (!schoolBellSchedule(schoolId)) throw new writeGuard.GateError(403,'TIMETABLE_SCHOOL_NOT_CONFIGURED')
   const className=String(req.query.class_name||'').trim()
   const section=String(req.query.section||'').trim()
   const day=String(req.query.day_name||'').trim()
