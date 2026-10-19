@@ -17,6 +17,15 @@ class DriftTests(unittest.TestCase):
             with self.subTest(k=k):
                 f=dict(guard.EXPECTED);f[k]=value+1
                 self.assertEqual(guard.verdict(f)["status"],"HOLD")
+    def test_three_document_delta_requires_exact_restrictive_coverage(self):
+        for key in ("forced_total","document_three_forced","document_three_restrictive_guards",
+                    "document_six_legacy_policies"):
+            f=dict(guard.EXPECTED)
+            f[key]=0
+            self.assertEqual(guard.verdict(f)["status"],"HOLD")
+            self.assertIn(key,guard.verdict(f)["failures"])
+        self.assertFalse(guard.verdict(dict(guard.EXPECTED))["securityCertification"])
+
     def test_absent_key_fails_closed(self):
         for k in guard.EXPECTED:
             with self.subTest(k=k):

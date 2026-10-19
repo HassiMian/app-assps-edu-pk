@@ -25,7 +25,20 @@ SELECT COALESCE(json_agg(json_build_object(
        p.permissive='PERMISSIVE' AND 'apex_app_runtime'=ANY(p.roles)
        AND p.qual LIKE '%app.tenant_id%' AND p.qual NOT LIKE '%app.rls_enabled%'
        ) FROM pg_policies p WHERE p.schemaname='public'
-       AND p.tablename=c.relname AND p.policyname LIKE '%_app_runtime'),false)
+       AND p.tablename=c.relname AND p.policyname LIKE '%_app_runtime'),false),
+  'restrictive_default_deny_guard', COALESCE((SELECT bool_or(
+       p.permissive='RESTRICTIVE' AND p.cmd='ALL'
+       AND 'public'=ANY(p.roles)
+       AND p.qual LIKE '%app.rls_enabled%'
+       AND p.qual LIKE '%app.tenant_id%'
+       AND p.qual LIKE '%app.is_super_admin%'
+       AND p.qual LIKE '%AND%'
+       AND p.with_check LIKE '%app.rls_enabled%'
+       AND p.with_check LIKE '%app.tenant_id%'
+       AND p.with_check LIKE '%AND%'
+       ) FROM pg_policies p WHERE p.schemaname='public'
+       AND p.tablename=c.relname
+       AND p.policyname=c.relname||'_failclosed_20261019'),false)
   )), '[]'::json)::text
 FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace
 WHERE n.nspname='public' AND c.relkind='r'
@@ -44,10 +57,15 @@ def verdict(rows):
         r = by_name[name]
         if not r.get("enabled") or not r.get("forced"):
             risks.append(name + ":RLS_DISABLED")
+        # RESTRICTIVE FOR ALL policies are AND-combined with legacy permissive
+        # OR-policy families. A correct restrictive context guard masks both
+        # formerly unsafe old policies; do not count their text alone as leakage.
+        guarded = r.get("restrictive_default_deny_guard") is True
         if (r.get("app_can_select") and r.get("fallback_public")
-                and r.get("fallback_missing_flag_allows")):
+                and r.get("fallback_missing_flag_allows") and not guarded):
             risks.append(name + ":UNSCOPED_APP_RUNTIME_FALLBACK")
-        if r.get("app_can_select") and r.get("app_runtime_policy_unscoped_flag"):
+        if (r.get("app_can_select") and r.get("app_runtime_policy_unscoped_flag")
+                and not guarded):
             risks.append(name + ":APP_RUNTIME_POLICY_OMITS_RLS_CONTEXT")
     return {"status": "HOLD" if risks else "CATALOG_PASS_NOT_RELEASE",
             "risks": risks, "readOnly": True, "releaseAuthorized": False,

@@ -54,6 +54,23 @@ class CatalogAudit(unittest.TestCase):
         self.assertTrue(any("APP_RUNTIME_POLICY_OMITS_RLS_CONTEXT" in risk
                             for risk in module.verdict(rows)["risks"]))
 
+    def test_restrictive_guard_correctly_masks_legacy_fallbacks(self):
+        rows = good()
+        for item in rows:
+            item["fallback_missing_flag_allows"] = True
+            item["app_runtime_policy_unscoped_flag"] = True
+            item["restrictive_default_deny_guard"] = True
+        v = module.verdict(rows)
+        self.assertEqual(v["status"], "CATALOG_PASS_NOT_RELEASE")
+        self.assertFalse(v["releaseAuthorized"])
+        self.assertFalse(v["realTenantDenialCertified"])
+
+    def test_partial_guard_does_not_mask_legacy_fallback(self):
+        rows = good()
+        rows[0]["fallback_missing_flag_allows"] = True
+        rows[0]["restrictive_default_deny_guard"] = False
+        self.assertEqual(module.verdict(rows)["status"], "HOLD")
+
     def test_malformed_catalog_fails_closed(self):
         self.assertEqual(module.verdict(None)["status"], "HOLD")
 

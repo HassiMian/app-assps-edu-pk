@@ -30,3 +30,9 @@
 - Windows Antigravity workstation standby and queue is NOT proof agent executed the handoff; full production readiness must never be falsely certified.
 
 Verdict: TWO LIVE SAFETY/BRANDING HOTFIXES DEPLOYED + BOTH LOCAL BACKUP RESTORES PASS; UNIFIED PRODUCTION RELEASE HOLD.
+
+## Catalog drift audit reconciled AFTER verified live RLS guard
+- Existing historical signed-RLS verifier compared 82 forced tables to 85 on main PG; the three additional tables were independently identified by exact names and tested as FORCE RLS before the new restrictive policies. Updated read-only verifier now requires ALL of: forced_total 85, exactly three named document tables forced, exactly three named RESTRICTIVE default-deny policies containing tenant context for USING and WITH CHECK, all six original document policies preserved. This is an evidence-backed expansion, not relaxing a threshold to pass.
+- Fresh verification reports original_guards77, green_guards77, original_allows77, unpaired0, five_new5, four_new4, safe_runtime_roles3, forced_total85, document_three_forced3, document_three_restrictive_guards3, document_six_legacy_policies6, failures empty. Verdict CATALOG_PASS_NOT_RELEASE; securityCertification false and releaseAuthorized false.
+- Independent document RLS catalog checker now recognizes AND-combined RESTRICTIVE policies instead of incorrectly flagging the old permissive policy text. 9/9 pure unit tests passed; its current live verdict CATALOG_PASS_NOT_RELEASE, realTenantDenialCertified false, releaseAuthorized false. Actual restricted SQL role read counts were tested independently.
+- Strengthened disposable PG16 rehearsal to verify School1 INSERT / UPDATE / DELETE inside rollback transaction succeed, School1 scope cannot insert into School2, and no-tenant insertion is denied. Original three-table policy rollback rehearsal continues to pass. None of those synthetic writes touched live school data.

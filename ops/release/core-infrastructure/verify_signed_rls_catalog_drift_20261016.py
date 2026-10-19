@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Non-mutating, fail-closed ASSPS signed-RLS catalog drift evidence; NOT release authorization."""
+"""Non-mutating FORCE-RLS catalog drift evidence, including verified Oct19 three-document delta; NOT release authorization."""
 import json
 import os
 import subprocess
@@ -14,6 +14,22 @@ SQL = {
  "original_allows": """SELECT count(*) FROM pg_policies p JOIN pg_class c ON c.relname=p.tablename AND c.relnamespace='public'::regnamespace WHERE p.schemaname='public' AND p.policyname='core_signed_tenant_allow' AND p.permissive='PERMISSIVE' AND 'assps_marks_signed_runtime'=ANY(p.roles) AND c.relrowsecurity AND c.relforcerowsecurity AND p.qual IN ('core_security.signed_school_allowed(school_id)','core_security.signed_school_allowed(id)','core_security.signed_tenant_key_allowed((tenant_id)::text)')""",
  "unpaired": """WITH guards AS (SELECT tablename FROM pg_policies WHERE schemaname='public' AND policyname='core_signed_tenant_guard'), allows AS (SELECT tablename FROM pg_policies WHERE schemaname='public' AND policyname='core_signed_tenant_allow') SELECT count(*) FROM guards g FULL JOIN allows a USING(tablename) WHERE g.tablename IS NULL OR a.tablename IS NULL""",
  "forced_total": """SELECT count(*) FROM pg_class WHERE relnamespace='public'::regnamespace AND relkind='r' AND relforcerowsecurity AND relname<>'student_class_movement_audit'""",
+ "document_three_forced": """SELECT count(*) FROM pg_class WHERE relnamespace='public'::regnamespace AND relkind='r'
+ AND relname IN ('school_documents','school_document_events','school_document_revisions')
+ AND relrowsecurity AND relforcerowsecurity""",
+ "document_three_restrictive_guards": """SELECT count(*) FROM pg_policies
+ WHERE schemaname='public'
+ AND tablename IN ('school_documents','school_document_events','school_document_revisions')
+ AND policyname=tablename||'_failclosed_20261019'
+ AND permissive='RESTRICTIVE' AND cmd='ALL' AND 'public'=ANY(roles)
+ AND qual LIKE '%app.rls_enabled%' AND qual LIKE '%app.tenant_id%'
+ AND qual LIKE '%AND%'
+ AND with_check LIKE '%app.rls_enabled%' AND with_check LIKE '%app.tenant_id%'
+ AND with_check LIKE '%AND%'""",
+ "document_six_legacy_policies": """SELECT count(*) FROM pg_policies
+ WHERE schemaname='public'
+ AND tablename IN ('school_documents','school_document_events','school_document_revisions')
+ AND policyname IN (tablename||'_app_runtime',tablename||'_tenant_fallback')""",
  "five_new": """SELECT count(DISTINCT c.relname) FROM pg_class c JOIN pg_policies p ON p.schemaname='public' AND p.tablename=c.relname WHERE c.relnamespace='public'::regnamespace AND c.relname IN ('grade910_human_signoff_evidence','grade910_personal_signature_assets','grade910_supporting_evidence_objects','grade910_verified_paper_publications','school_academic_approval_events') AND c.relrowsecurity AND c.relforcerowsecurity AND p.permissive='PERMISSIVE' AND p.qual='core_security.signed_school_allowed(school_id)'""",
  "five_policy_count": """SELECT count(*) FROM pg_policies WHERE schemaname='public' AND tablename IN ('grade910_human_signoff_evidence','grade910_personal_signature_assets','grade910_supporting_evidence_objects','grade910_verified_paper_publications','school_academic_approval_events')""",
  "five_unscoped": """SELECT count(*) FROM pg_policies WHERE schemaname='public' AND tablename IN ('grade910_human_signoff_evidence','grade910_personal_signature_assets','grade910_supporting_evidence_objects','grade910_verified_paper_publications','school_academic_approval_events') AND (permissive<>'PERMISSIVE' OR qual IS DISTINCT FROM 'core_security.signed_school_allowed(school_id)')""",
@@ -23,7 +39,7 @@ SQL = {
  "runtime_roles_safe": """SELECT count(*) FROM pg_roles WHERE rolname IN ('apexos_user','assps_marks_signed_runtime','assps_core_green_runtime') AND NOT rolbypassrls AND NOT rolsuper""",
 }
 
-EXPECTED = dict(original_guards=77, green_guards=77, original_allows=77, unpaired=0, forced_total=82,
+EXPECTED = dict(original_guards=77, green_guards=77, original_allows=77, unpaired=0, forced_total=85, document_three_forced=3, document_three_restrictive_guards=3, document_six_legacy_policies=6,
                 five_new=5, five_policy_count=5, five_unscoped=0, four_new=4, four_unscoped_policies=0,
                 four_app_acl_exposure=0, runtime_roles_safe=3)
 

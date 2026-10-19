@@ -18,7 +18,7 @@ BEGIN
   EXECUTE format('INSERT INTO public.%I VALUES (1,101),(2,202)',t);
   EXECUTE format('ALTER TABLE public.%I ENABLE ROW LEVEL SECURITY',t);
   EXECUTE format('ALTER TABLE public.%I FORCE ROW LEVEL SECURITY',t);
-  EXECUTE format('GRANT SELECT,INSERT ON public.%I TO apex_app_runtime,apexos_user',t);
+  EXECUTE format('GRANT SELECT,INSERT,UPDATE,DELETE ON public.%I TO apex_app_runtime,apexos_user',t);
   EXECUTE format('CREATE POLICY %I ON public.%I AS PERMISSIVE FOR ALL TO PUBLIC USING (current_setting(''app.rls_enabled'',true) IS DISTINCT FROM ''true'' OR current_setting(''app.is_super_admin'',true)=''true'' OR school_id = NULLIF(current_setting(''app.tenant_id'',true),'''')::integer)',t||'_tenant_fallback',t);
   EXECUTE format('CREATE POLICY %I ON public.%I AS PERMISSIVE FOR ALL TO apex_app_runtime USING (current_setting(''app.is_super_admin'',true)=''true'' OR school_id::text = NULLIF(current_setting(''app.tenant_id'',true),'''')) WITH CHECK (current_setting(''app.is_super_admin'',true)=''true'' OR school_id::text = NULLIF(current_setting(''app.tenant_id'',true),''''))', t||'_app_runtime',t);
  END LOOP;
@@ -42,6 +42,17 @@ for role in apex_app_runtime apexos_user; do
  count3 0 "$role" "SET LOCAL app.tenant_id='101';" MISSING_FLAG
  count3 6 "$role" "SET LOCAL app.rls_enabled='true'; SET LOCAL app.is_super_admin='true';" EXPLICIT_ADMIN
 done
+echo '===FAKE TENANT WRITE PATHS (ONLY DISPOSABLE PG16)==='
+psql -X -q -v ON_ERROR_STOP=1 -d postgres -c "BEGIN; SET LOCAL ROLE apex_app_runtime; SET LOCAL app.rls_enabled='true'; SET LOCAL app.is_super_admin='false'; SET LOCAL app.tenant_id='101'; INSERT INTO public.school_documents(id,school_id) VALUES(11,101); UPDATE public.school_documents SET id=12 WHERE id=11; DELETE FROM public.school_documents WHERE id=12; ROLLBACK;" >/dev/null
+echo 'SCHOOL101_INSERT_UPDATE_DELETE_ROLLBACK_OK'
+if psql -X -q -v ON_ERROR_STOP=1 -d postgres -c "BEGIN; SET LOCAL ROLE apex_app_runtime; SET LOCAL app.rls_enabled='true'; SET LOCAL app.is_super_admin='false'; SET LOCAL app.tenant_id='101'; INSERT INTO public.school_documents(id,school_id) VALUES(11,202); ROLLBACK;" >/dev/null 2>&1; then
+  echo 'WRONG_SCHOOL_INSERT_SHOULD_HAVE_BEEN_DENIED'; exit 7
+fi
+echo 'WRONG_SCHOOL_INSERT_DENIED_OK'
+if psql -X -q -v ON_ERROR_STOP=1 -d postgres -c "BEGIN; SET LOCAL ROLE apex_app_runtime; INSERT INTO public.school_documents(id,school_id) VALUES(11,101); ROLLBACK;" >/dev/null 2>&1; then
+  echo 'UNSCOPED_INSERT_SHOULD_HAVE_BEEN_DENIED'; exit 8
+fi
+echo 'UNSCOPED_INSERT_DENIED_OK'
 v="$(psql -X -A -t -q -d postgres -c "SELECT COUNT(*) FROM pg_policies WHERE schemaname='public' AND permissive='RESTRICTIVE' AND policyname LIKE '%_failclosed_20261019'")"
 test "$v" = 3
 printf "SET assps.document_rls_rollback_approved TO '20261019_confirmed';\n\\i %s\n" "$DIR/20261019_school_documents_failclosed_restrictive_rollback.sql" | psql -X -q -v ON_ERROR_STOP=1 -d postgres
