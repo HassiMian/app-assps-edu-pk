@@ -1,0 +1,24 @@
+# ASSPS Single Unified SaaS Completion Mission — 19 October 2026
+Status: IN EXECUTION; preservation guard active; NOT production-release approval.
+
+## New owner directive
+- First Term examinations FINISHED and Result Cards PRINTED. This is closed, not an outstanding task.
+- Exam ID 9 First Term historical results, 224 genuine zero scores, Exam 8 historical results and exam metadata must never be deleted, reset, reseeded, replayed, regraded, overwritten or destructively migrated. Future terms require distinct exam identities.
+- Preserve all original papers, results, diaries, students, identity mappings, official print layouts, backups, independent tenants.
+- Zero routine owner/teacher/staff involvement requested: agents perform source investigation, authenticated automated QA, backups, recovery, fixes and controlled deployment where permitted.
+- Never fabricate independent academic approval, official 2027 syllabus authority, signatures, authentic credentials, physically witnessed printer tests, or independent disaster restore. Non-delegable evidence that does not exist is explicit HOLD.
+
+## One programme — sequential guarded technical phases
+0. HISTORICAL LOCK: First Term Exam9 1853 records, 224 numeric zero marks, 0 NULL; Exam8 1 record; globally 1854 results. Root-private sealed per-row SHA256 fingerprints and one-time immutable baseline, read-only checker, fresh full custom-format apexos backup with archive list + SHA proof. COMPLETED checkpoint, future application-side enforcement pending.
+1. PRODUCTION FENCE: Current frontend in /var/www/assps-resultcard-nazra-purged-20261019 has inconsistent release attestation and previously changed inside same live directory. Attest exact frontend and backend code to GitHub, preserve live-only changes, prohibit blind replacement with older 8d2d or 88e6 candidates. Coordinate existing release owners, immutable directories and atomic promotion; backup and rollback checks before touching live.
+2. AUTH/RLS: Do NOT duplicate 54 verified current teacher assignments across 12 teachers. Verify school-scoped login, first password change, no blanket grants, principal/teacher/School2 denial, signed actor HMAC enforcement, hardened school_documents role policies. Disposable PostgreSQL and browser negative cases precede reviewed live migration.
+3. LESSON/TIMETABLE/DIARY: secure Principal-only eight-slot timetable save, reject empty/mismatched schedules, reconcile official 16-Oct PDF and combined-class overlaps. Real scoped teacher weekly/term/daily Save-Reopen-Print and visible error/retry. Preserve source 59 academic groups (unapproved, no auto publish), original pages, language-specific text, A/B merges, 18 Class One weeks, 51 rows, separate monthly proposed assessments.
+4. PAPER + GRADE IX/X: Protect original 43 canonical papers and six official result templates; preserve Jameel Noori RTL, editor, marks, MCQs, choice, DOCX/PDF. Complete original Phase3AE immutable intent/revision and real PG18 regression via selective forwardport, Phase3AG authenticated selection-style persistence and actual print. Grade IX-X distinct overlapping question inventories are research; 584 AI advisory corrections and 1305 flagged revisions need authentic provenance and independent approval; do NOT invent 2027 ALP applicability.
+5. OTHER MODULES: Starter Attendance Save-Reopen, fee payment-challan reconciliation with no ledger mutation, next-term Results without touching First Term, private HR notice audience, authenticated APEX Connect projection, school branding.
+6. VERIFIED RELEASE: Clean exact ancestry and current built artifact, protected CI, tenant/role adversarial tests on disposable clone, production DB guard, off-host encrypted restore, genuine witnessed Urdu physical A4 if attainable, reversible atomic rollout, real postflight. Missing genuine third-party witness means gate HOLD; no false 100%.
+
+## Execution trace
+19-Oct current owner instruction persisted via Cloud Desktop Commander memory checkpoint. Read-only PostgreSQL independently reported exam9=1853, true zero=224, NULL=0, exam8=1. Root-private historical SHA baseline initialized/rechecked PASS. New custom-format full apexos dump written root-private, pg_restore list readable, digest PASS, data guard PASS. No production marks mutation, no code deployment.
+
+## Mandatory each-cycle guard
+Re-observe exact active Nginx and PM2 source SHA -> backup and restore checks -> First Term immutable guard PASS -> isolated source and tests -> signed actor & approval gate -> verified cutover -> live smoke & rollback -> source-backed report to central GitHub Issue #4. This isolated audit branch does not replace the canonical release branch.
