@@ -1,0 +1,32 @@
+# ASSPS Unified SaaS Core — live P0 fixes and full local dual-cluster restore
+19 October 2026 PKT. This is an actual narrow production hotfix checkpoint. Full integrated platform release still HOLD.
+
+## Production change 1: RLS document default-deny live
+- Main PG database apexos on port 5432: added three RESTRICTIVE PostgreSQL policies to school_documents, school_document_events and school_document_revisions, in one transaction, WITHOUT modifying any record. Existing six permissive policies were preserved.
+- Source SQL file: ops/release/core-infrastructure/20261019_school_documents_failclosed_restrictive_guard.sql, SHA256 fb20d947c529b958b65170fe0c1cc1ab24c671cff72adb7f59ef3edd50fc6f17. Companion revert SHA256 40391f5c942532ad44f938b4d3da4ee2d7269651391f0187559a226130919a7f.
+- Original schema snapshot containing six policies, exact original and new files, SHA manifest, surgical rollback wrapper: /root/secure-archive/assps-documents-rls-p0-20261019 (access restricted).
+- Real live read-only SQL tests as roles apex_app_runtime and apexos_user: unset context=0/0/0 visible docs/events/revisions; scoped School1=18/46/45; scoped School2=0/0/0; explicitly enabled superadmin=18/46/45. This confirms missing-context default deny for these tables, not cryptographically authenticated signed RLS for the whole platform. Original school data intact; 322 students, 1854 exam results.
+- Disposable PG16 rehearsed both roles, two schools, invalid/missing context, and complete rollback before production. No PM2 reload for this DB policy change.
+
+## Production change 2: public login branding endpoint
+- Original live backend brandingRoutes.js SHA256 394f2534e601adfacc67309f66d851de6d99c30982352c7d224b7bb68167c075; exact reviewed source diff has ONE 34-line new public GET endpoint, no other changes; source branding/auth tests 12/12 PASS.
+- New active backend route file SHA256 97dc3928405dffdbb400bc6d8d147dc36f455446e8f10721148ee3883f0205e1.
+- Backup, candidate, SHA manifest and surgical rollback: /root/secure-archive/assps-public-branding-hotfix-20261019 (restricted).
+- Actual PM2 reload took place; PID changed 986335 to 994912. An immediately following request transiently returned HTTP503; four consecutive later public-branding requests HTTP200 (no zero-downtime claim). Invalid code HTTP400; unknown school HTTP404. Public response field names only: logoUrl, primaryColor, schoolName, secondaryColor. API health and frontend login HTTP200, timetable Nginx POST /save guard HTTP403.
+- Live frontend HTML remains SHA256 8216276411fce912309767361e0f23e8a445106aa3b5eefe629c3ed0fceb2958, unchanged. Anonymous Chromium login HTTP200, two visible input fields; browser did not initiate branded API call in that context, so no false claim of school crest visual acceptance.
+
+## Fresh complete local backup restore
+- Latest daily archive /var/backups/assps-critical-20261019T013648Z, manifest 4/4 files PASS. Immutable original postgres-all.sql.gz and postgres-asspssigned-55432-all.sql.gz restored into SEPARATE fresh disposable PG16 instances on non-production ports in the Hostinger VPS.
+- Main restore PASS 63 databases, restored apexos 322 students / 1854 exam_results match. Signed restore PASS 35 databases. Both full-replay SQL error counts zero; both temporary test clusters destroyed and production PG16 main5432 and signed55432 still online.
+- Signed source archive contains an ALTER ROLE postgres password statement incompatible with disposable PG16 test authentication. The QA-only restore stream omits CREATE ROLE postgres and ALTER ROLE postgres WITH statements for the pre-existing disposable built-in postgres login; the immutable original backup itself was not modified. All other records and DB objects replayed without SQL errors.
+- Main restore originally failed due built-in postgres role collision, then corrected and re-run PASS. Signed restore originally failed due disposable postgres role password reauth, then corrected and re-run PASS. Both initial temporary QA test clusters cleaned safely.
+- Versioned local restore test runner: ops/release/core-infrastructure/rehearse_full_dual_pg16_archives_20261019.sh. Restricted machine-readable aggregate receipt with archive digests /root/secure-archive/assps-dual-archive-local-restore-20261019/LOCAL_RESTORE_RECEIPT.json, SHA256 83b328b6e12b11ba427eea39b52fe244a35bd941b5538a9519a3085235e618c9.
+- This certifies local recoverability of both logical archives, NOT independent off-host encrypted transport/decryption/restore or realistic disaster-recovery recovery time objectives. No trusted offsite destination was available; protected student data was not sent to an unverified endpoint.
+
+## Unfinished unified release gates
+- Separate integrated source branch has guarded timetable writer, tenant-auth, confidential HR notices, lesson recovery and read-only official PDF comparator; full candidate was NOT installed as a frontend/backend pair. P0 legacy public timetable Save still quarantined HTTP403, preventing accidental timetable deletion.
+- School1 teacher_class_assignments=0 active, 59 candidate academic source groups blocked/no signed approvals, 3 saved/0 shared plans. Official timetable 336/336 day-wise teaching rows match expected timetable but 336 source SHA rows older than approved final PDF, 6 display labels differ and 12 Four/Five combined period overlaps not independently signed.
+- Genuine production Principal/Teacher/School2 journeys, official timetable staff authorization, physical Ricoh Jameel Noori A4 printing, single attested current frontend/backend commit ancestry, signed-role end-to-end isolation, and independently restored encrypted off-host dual-cluster disaster recovery remain HOLD.
+- Windows Antigravity workstation standby and queue is NOT proof agent executed the handoff; full production readiness must never be falsely certified.
+
+Verdict: TWO LIVE SAFETY/BRANDING HOTFIXES DEPLOYED + BOTH LOCAL BACKUP RESTORES PASS; UNIFIED PRODUCTION RELEASE HOLD.
