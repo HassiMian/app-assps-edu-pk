@@ -45,6 +45,6 @@ test('documents require exact three restrictive policy identities',()=>{
  for(const name of ['school_documents','school_document_events','school_document_revisions'])
   assert.match(documentPolicySql,new RegExp(name))
  for(const fragment of ["p.permissive='RESTRICTIVE'",'c.relrowsecurity AND c.relforcerowsecurity',
-   'p.qual=p.with_check','expected.policy_count','app.rls_enabled'])
+   'p.qual=expected.guard_predicate','p.with_check=expected.guard_predicate','expected.policy_count','app.rls_enabled'])
   assert.ok(documentPolicySql.includes(fragment),fragment)
 })
