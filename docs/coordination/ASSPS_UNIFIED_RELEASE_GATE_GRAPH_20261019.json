@@ -1,0 +1,155 @@
+{
+  "schema": "ASSPS_UNIFIED_RELEASE_GATES_V1",
+  "programme": "ASSPS-UNIFIED-20261019",
+  "owner_mode": "zero_routine_human_involvement",
+  "release_owner": "SaaS Core",
+  "historical_exam_ids": [
+    8,
+    9
+  ],
+  "historical_lock": "First Term complete, Result Cards printed, no reset/reseed/delete/replay/overwrite",
+  "independent_human_proofs_may_not_be_fabricated": true,
+  "phases": [
+    {
+      "id": "P0",
+      "name": "Protected history and trusted backups",
+      "depends_on": [],
+      "checks": [
+        "first_term_hash",
+        "full_archive_sha",
+        "rollback_preflight"
+      ],
+      "state": "partial"
+    },
+    {
+      "id": "P1",
+      "name": "Exact live frontend/backend and immutable source",
+      "depends_on": [
+        "P0"
+      ],
+      "checks": [
+        "frontend_reproducible",
+        "backend_source_attested",
+        "asset_graph"
+      ],
+      "state": "hold"
+    },
+    {
+      "id": "P2",
+      "name": "Signed identity RLS and strict school-role denial",
+      "depends_on": [
+        "P0",
+        "P1"
+      ],
+      "checks": [
+        "signed_actor_runtime",
+        "principal_teacher_school2_auth",
+        "documents_recipient_isolation"
+      ],
+      "state": "hold"
+    },
+    {
+      "id": "P3",
+      "name": "Timetable teacher assignment lesson and diary",
+      "depends_on": [
+        "P0",
+        "P2"
+      ],
+      "checks": [
+        "timetable_transaction",
+        "teacher_assignment_scope",
+        "lesson_diary_save_reopen_print"
+      ],
+      "state": "hold"
+    },
+    {
+      "id": "P4",
+      "name": "Paper Studio and approved Grade IX-X Question Bank",
+      "depends_on": [
+        "P0",
+        "P2",
+        "P3"
+      ],
+      "checks": [
+        "paper_revision_intent_pg",
+        "editor_selection_browser",
+        "grade9_10_approved_revision"
+      ],
+      "state": "hold"
+    },
+    {
+      "id": "P5",
+      "name": "Attendance fees notices APEX results future term",
+      "depends_on": [
+        "P0",
+        "P2"
+      ],
+      "checks": [
+        "attendance_start",
+        "fees_reconciliation",
+        "notices_audience",
+        "apex_auth",
+        "future_term_separation"
+      ],
+      "state": "hold"
+    },
+    {
+      "id": "P6",
+      "name": "Exact-source automated integrated acceptance",
+      "depends_on": [
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "P5"
+      ],
+      "checks": [
+        "ci_regression",
+        "real_multi_role_acceptance",
+        "multi_cluster_restore",
+        "physical_print_witness"
+      ],
+      "state": "hold"
+    },
+    {
+      "id": "P7",
+      "name": "Atomic canary rollback ready production release",
+      "depends_on": [
+        "P0",
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "P5",
+        "P6"
+      ],
+      "checks": [
+        "immutable_atomic_cutover",
+        "pre_post_hash",
+        "automatic_rollback"
+      ],
+      "state": "hold"
+    },
+    {
+      "id": "P8",
+      "name": "Full production certification and final owner report",
+      "depends_on": [
+        "P7"
+      ],
+      "checks": [
+        "signed_release_receipt",
+        "all_critical_gates_pass"
+      ],
+      "state": "hold"
+    }
+  ],
+  "policies": {
+    "NO_FALSE_PASS": true,
+    "NO_LIVE_DB_WRITES_UNTIL_REVIEWED": true,
+    "NO_HISTORICAL_EXAM_RESET": true,
+    "NO_SIGNATURE_FORGERY": true,
+    "NO_CREDENTIAL_IMPERSONATION": true,
+    "NO_BLIND_SOURCE_DEPLOY": true,
+    "REUSE_EXISTING_SINGLE_AUTOMATION": true
+  }
+}

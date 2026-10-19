@@ -1,0 +1,33 @@
+name: ASSPS Unified Autonomous Mission Safety (Source Only)
+on:
+  push:
+    branches:
+      - 'audit/assps-firstterm-historical-retention-20261019'
+    paths:
+      - 'docs/coordination/ASSPS_UNIFIED_**'
+      - 'ops/release/firstterm/**'
+      - '.github/workflows/assps-unified-mission-safety-20261019.yml'
+  pull_request:
+    paths:
+      - 'docs/coordination/ASSPS_UNIFIED_**'
+      - 'ops/release/firstterm/**'
+      - '.github/workflows/assps-unified-mission-safety-20261019.yml'
+permissions:
+  contents: read
+jobs:
+  hermetic-protection-gates:
+    name: Exact source Python negative tests and unified graph contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Verify pure source-only historical/privacy/release tests
+        run: python3 -m unittest discover -s ops/release/firstterm -p 'test_*.py' -v
+      - name: Validate ONE unified programme dependency graph
+        run: python3 ops/release/firstterm/verify_unified_release_gate_graph.py --graph docs/coordination/ASSPS_UNIFIED_RELEASE_GATE_GRAPH_20261019.json
+      - name: Check for accidental whitespace/code mistakes
+        run: git diff --check HEAD^ HEAD
+# This hosted workflow does NOT connect to live PostgreSQL, PM2, any school account,
+# physical printer, backup devices or Nginx. A PASS is SOURCE ONLY, not production.
