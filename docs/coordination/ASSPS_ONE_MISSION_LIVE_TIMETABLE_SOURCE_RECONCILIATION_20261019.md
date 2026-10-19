@@ -20,7 +20,7 @@ Authority: GitHub coordination Issue #4; first-term examinations and result card
 
 ## Existing source blockers; do not cover up
 - The protected resultCardTemplates.jsx source no longer matches the old protected template hash (actual cb76705cffecd8675f35ab6425b904374a44197a53779e403384a022fff7ee29; locked expectation 302b5f162689b2067a81073b98de53ffd38502cf2659c2a5757fe8d099c1c13c). This patch does NOT edit that file or claim a protected-template PASS. Reconcile against already-printed First Term evidence and Paper Studio ownership.
-- The source production safety check also flags preexisting grading-policy use in examRoutes.js and two TimetableModule.jsx print/tenant/style checks. These files are NOT modified by this branch.
+- Later isolated Core quality hardening aligns the source safety checker with the safer school-grade lookup using previewDefaults:false; removes school-specific name/address/Urdu fallbacks from timetable print, escapes a logo URL attribute, and derives valid section context without an effect cascade. The source production safety check now PASS; the protected Result Card snapshot remains HOLD under Paper Studio ownership. Frontend build, targeted timetable ESLint and 3/3 synthetic timetable identity tests PASS. No production UI or grading-calculation update.
 - Backend deployment requires source reconciliation for different routes/services, not a whole-directory replacement.
 
 ## One coherent next release gate programme

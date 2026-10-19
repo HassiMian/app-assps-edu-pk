@@ -16,8 +16,10 @@ const escapeHtml = (value) => String(value || '')
 const printTimetableDocument = ({ school, schoolClass, section, periods, days, assignments }) => {
   const title = `Class ${schoolClass} - Section ${section} Timetable`
   const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
-  const schoolName = school?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL'
-  const schoolUrdu = school?.showUrduHeader ? school?.schoolUrdu : 'الصدّیق سکالرز پبلک سکول'
+  const schoolName = school?.schoolName || 'School'
+  const schoolUrdu = school?.showUrduHeader && school?.schoolUrdu ? school.schoolUrdu : ''
+  const schoolAddress = school?.address || ''
+  const academicSession = school?.examYear || ''
   const logo = school?.logo
 
   const rows = days.map(day => `
@@ -47,7 +49,7 @@ const printTimetableDocument = ({ school, schoolClass, section, periods, days, a
     .toolbar { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 12px; padding: 12px 18px; background: #0c2c4a; color: #fff; box-shadow: 0 6px 18px rgba(15,23,42,.22); }
     .toolbar strong { color: #38bdf8; font-size: 15px; }
     .toolbar span { color: #94a3b8; font-size: 13px; }
-    .toolbar button { margin-left: auto; border: 0; border-radius: 8px; padding: 9px 18px; background: #0284c7; color: #fff; font-weight: 700; cursor: pointer; }
+    .toolbar button { margin-left: auto; border: 0; border-radius: 8px; padding: 9px 18px; background: #256FE8; color: #fff; font-weight: 700; cursor: pointer; }
     .sheet { width: 280mm; min-height: 194mm; margin: 14px auto; padding: 8mm 10mm; background: white; box-shadow: 0 16px 45px rgba(15,23,42,.18); }
     header { display: flex; align-items: center; gap: 14px; border-bottom: 2px solid #0284c7; padding-bottom: 10px; margin-bottom: 10px; }
     .logo { width: 56px; height: 56px; object-fit: contain; border: 1px solid #d9dee8; border-radius: 10px; padding: 3px; }
@@ -75,19 +77,19 @@ const printTimetableDocument = ({ school, schoolClass, section, periods, days, a
 <body>
   <div class="toolbar">
     <strong>Official Academic Timetable</strong>
-    <span>${escapeHtml(title)} · Academic Session 2026–27</span>
+    <span>${escapeHtml(title)}${academicSession ? ` · Academic Session ${escapeHtml(academicSession)}` : ''}</span>
     <button onclick="window.print()">Print / Save PDF</button>
   </div>
   <main class="sheet">
     <header>
-      ${logo ? `<img class="logo" src="${logo}" alt="">` : '<div class="fallback-logo">A</div>'}
+      ${logo ? `<img class="logo" src="${escapeHtml(logo)}" alt="">` : '<div class="fallback-logo">S</div>'}
       <div>
         <h1>${escapeHtml(schoolName)}</h1>
         ${schoolUrdu ? `<div class="urdu">${escapeHtml(schoolUrdu)}</div>` : ''}
-        <div style="color:#64748b;font-size:11px;margin-top:4px">Sharif Chowk, Rayya Khas, Narowal · Empowering Minds, Shaping Futures</div>
+        ${schoolAddress ? `<div style="color:#64748b;font-size:11px;margin-top:4px">${escapeHtml(schoolAddress)}</div>` : ''}
       </div>
       <div class="meta">
-        <div><strong>Academic Session:</strong> 2026–27</div>
+        ${academicSession ? `<div><strong>Academic Session:</strong> ${escapeHtml(academicSession)}</div>` : ''}
         <div><strong>Print Date:</strong> ${escapeHtml(today)}</div>
         <div><strong>Status:</strong> Approved Official Timetable</div>
       </div>
@@ -106,7 +108,7 @@ const printTimetableDocument = ({ school, schoolClass, section, periods, days, a
       <tbody>${rows}</tbody>
     </table>
     <footer>
-      <span>Al Siddique Scholars Public School · Verified Production Master</span>
+      <span>${escapeHtml(schoolName)} · Official Timetable</span>
       <span>Principal Authorization: ____________________</span>
     </footer>
   </main>
@@ -166,6 +168,7 @@ export default function TimetableModule() {
   }, [selectedAcademicClass, schoolClass])
   
   const [section, setSection] = useState(sectionOptions[0] || (schoolClass === 'Nine' ? 'Usman' : 'Blue'))
+  const resolvedSection = sectionOptions.includes(section) ? section : (sectionOptions[0] || (schoolClass === 'Nine' ? 'Usman' : 'Blue'))
   const [numPeriods, setNumPeriods] = useState(8)
   const [teacherOptions, setTeacherOptions] = useState([])
   const [teacherLoadError, setTeacherLoadError] = useState('')
@@ -221,13 +224,6 @@ export default function TimetableModule() {
     return () => { cancelled = true }
   }, [])
 
-  // Keep section valid when sectionOptions change
-  useEffect(() => {
-    if (!sectionOptions.includes(section)) {
-      setSection(sectionOptions[0] || (schoolClass === 'Nine' ? 'Usman' : 'Blue'))
-    }
-  }, [sectionOptions, section, schoolClass])
-
   // 2. Fetch official timetable records whenever class or section changes
   useEffect(() => {
     let cancelled = false
@@ -237,7 +233,7 @@ export default function TimetableModule() {
       setSaveStatus({ loading: false, success: '', error: '' })
       try {
         const res = await api.get('/api/timetable', {
-          params: { class: schoolClass, section: section || undefined }
+          params: { class: schoolClass, section: resolvedSection || undefined }
         })
         const rows = Array.isArray(res.data?.data) ? res.data.data : []
         if (cancelled) return
@@ -275,7 +271,7 @@ export default function TimetableModule() {
     }
     fetchTimetable()
     return () => { cancelled = true }
-  }, [schoolClass, section, numPeriods])
+  }, [schoolClass, resolvedSection, numPeriods])
 
   // Handle cell edits
   const handleChange = (day, period, field, value) => {
@@ -322,14 +318,14 @@ export default function TimetableModule() {
 
       const res = await api.post('/api/timetable/save', {
         class_name: schoolClass,
-        section: section,
+        section: resolvedSection,
         num_periods: numPeriods,
         assignments: payloadAssignments
       })
 
       setSaveStatus({
         loading: false,
-        success: res.data?.message || `Successfully saved ${payloadAssignments.length} timetable entries for Class ${schoolClass} (${section})!`,
+        success: res.data?.message || `Successfully saved ${payloadAssignments.length} timetable entries for Class ${schoolClass} (${resolvedSection})!`,
         error: ''
       })
     } catch (err) {
@@ -372,7 +368,7 @@ export default function TimetableModule() {
     printTimetableDocument({
       school: paperSettings,
       schoolClass,
-      section,
+      section: resolvedSection,
       periods,
       days: DAYS,
       assignments,
@@ -395,6 +391,7 @@ export default function TimetableModule() {
               </div>
               <div style={{ color: 'var(--apex-action-primary, #38bdf8)', fontSize: 28, fontWeight: 700, margin: '4px 0' }}>Academic Timetable Manager</div>
               <div style={{ color: 'var(--apex-text-tertiary, #94a3b8)', fontSize: 14 }}>Full 8-period academic schedule, combined classes, teacher allocations, bell timings, and conflict detection.</div>
+              {teacherLoadError && <p role="alert" style={{ color: '#fca5a5', fontSize: 13, margin: '8px 0 0' }}>{teacherLoadError}</p>}
             </div>
             
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
@@ -496,7 +493,7 @@ export default function TimetableModule() {
           </div>
           <div>
             <span style={labelStyle}>Section</span>
-            <select value={section} onChange={e => setSection(e.target.value)} style={inputStyle}>
+            <select value={resolvedSection} onChange={e => setSection(e.target.value)} style={inputStyle}>
               {sectionOptions.map(item => <option key={item} value={item}>{item}</option>)}
             </select>
           </div>
@@ -513,7 +510,7 @@ export default function TimetableModule() {
           <div style={{ display: 'flex', justifyContent: 'space-between', gap: 20, flexWrap: 'wrap', marginBottom: 20, alignItems: 'center' }}>
             <div>
               <div style={{ color: 'var(--apex-action-primary, #38bdf8)', fontSize: 18, fontWeight: 700, marginBottom: 4 }}>
-                Class {schoolClass} · Section {section}
+                Class {schoolClass} · Section {resolvedSection}
               </div>
               <div style={{ color: '#94a3b8', fontSize: 13 }}>
                 {loadingTimetable ? 'Loading official schedule from database...' : `Loaded approved 2026–27 allocations (${activeLessonCount} assigned periods)`}

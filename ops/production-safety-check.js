@@ -944,7 +944,7 @@ assertNotContains(
 
 assertContains(
   'al-siddique-backend/src/routes/examRoutes.js',
-  'gradeBands = await loadGradeBandsForSchool(schoolId)',
+  'gradeBands = await loadGradeBandsForSchool(schoolId, {previewDefaults:false})',
   'saved exam grades must use the school grading policy.'
 )
 
