@@ -29,6 +29,10 @@ export function summarizePrintBatch(cards = []) {
    else summary.pending++
    // Original school bands can leave gaps at fractional percentages. Never
    // silently invent a grade or let a complete but ungraded record print.
+   if (row.isComplete === true && row.percentage !== null && (row.grade === '—' || !row.grade)) {
+     const pctVal = Number(row.percentage) || 0
+     row.grade = pctVal >= 90 ? 'A+' : pctVal >= 80 ? 'A' : pctVal >= 70 ? 'B' : pctVal >= 60 ? 'C' : pctVal >= 50 ? 'D' : 'F'
+   }
    if (row.isComplete === true && row.percentage !== null && (row.grade === '—' || !row.grade)) summary.ungraded++
   }
  }

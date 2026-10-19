@@ -18,9 +18,33 @@ import {DEFAULT_RESULT_OPTIONS, buildResultCardData, PREMIUM_IDS, isNazraSubject
 import {openResultPrintWindow, resultCardPrintCss} from './premiumResultCardPrint'
 
 function gradeLabel(pct, bands = []) {
-  const value = Math.max(0, Math.min(100, Number(pct) || 0))
-  const match = (Array.isArray(bands) ? bands : []).find(row => value >= Number(row.from) && value <= Number(row.to))
-  return match?.label || '—'
+  if (pct === null || pct === undefined || pct === '' || Number.isNaN(Number(pct))) return '—'
+  const value = Math.max(0, Math.min(100, Number(pct)))
+  const activeBands = Array.isArray(bands) && bands.length ? bands : [
+    { label: 'A+', from: 90, to: 100 },
+    { label: 'A',  from: 80, to: 89 },
+    { label: 'B',  from: 70, to: 79 },
+    { label: 'C',  from: 60, to: 69 },
+    { label: 'D',  from: 50, to: 59 },
+    { label: 'F',  from: 0,  to: 49 },
+  ]
+  let match = activeBands.find(row => value >= Number(row.from) && value <= Number(row.to))
+  if (!match) {
+    const isIntegerBands = activeBands.every(row => Number.isInteger(Number(row.from)) && Number.isInteger(Number(row.to)))
+    if (isIntegerBands) {
+      const floored = Math.floor(value)
+      match = activeBands.find(row => floored >= Number(row.from) && floored <= Number(row.to))
+    }
+  }
+  if (!match) {
+    const sortedDesc = [...activeBands].sort((a, b) => Number(b.from) - Number(a.from))
+    match = sortedDesc.find(row => value >= Number(row.from))
+  }
+  if (!match && activeBands.length) {
+    const sortedAsc = [...activeBands].sort((a, b) => Number(a.from) - Number(b.from))
+    match = sortedAsc[0]
+  }
+  return match?.label || (value >= 90 ? 'A+' : value >= 80 ? 'A' : value >= 70 ? 'B' : value >= 60 ? 'C' : value >= 50 ? 'D' : 'F')
 }
 
 const TEACHER_REMARK_PRESETS = [
