@@ -10,7 +10,7 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
         return {x:{'pass':True} for x in (
             'database','backup','frontend','rollback','http','restricted_catalog_and_firstterm',
             'source_privacy_inventory','backend_source_inventory','attendance_roster_coverage',
-            'fee_ledger_integrity')}
+            'fee_ledger_integrity','frontend_artifact_closure')}
     def test_every_operational_check_passes_but_unapproved_signoff_remains_hold(self):
         e=self.fixture()
         e['frontend']['sidecar_matches']=True

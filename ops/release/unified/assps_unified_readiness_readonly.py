@@ -6,6 +6,7 @@ from pathlib import Path
 import re
 import subprocess
 import verify_backend_source_preservation_readonly as backend_preservation
+import verify_frontend_artifact_closure_readonly as frontend_closure
 import assps_attendance_coverage_readonly as attendance_coverage
 import assps_fee_ledger_integrity_readonly as fee_integrity
 from concurrent.futures import ThreadPoolExecutor
@@ -224,6 +225,14 @@ def inspect_source_privacy():
     return {'pass':True,'tracked_private_asset_path_count':len(flagged),
             'repository_history_privacy_remediation_required':bool(flagged)}
 
+def inspect_frontend_artifact_closure():
+    result=frontend_closure.audit()
+    return {'pass':bool(result['trusted_packaged_source_build_pass']),
+            'matching_count':result['active_matching_file_count'],
+            'extra_count':result['active_extra_file_count'],
+            'extra_extension_groups':result['active_extra_by_extension'],
+            'immutable_artifact_go':result['immutable_artifact_go']}
+
 def inspect_rollback():
     r=run(['bash',str(ROLLBACK),'--check'],timeout=22)
     if r.returncode or 'ROLLBACK_PREFLIGHT_PASS_NO_MUTATION' not in r.stdout:
@@ -260,7 +269,8 @@ def inspect_http():
 def classify(evidence):
     required=('database','backup','frontend','rollback','http',
               'restricted_catalog_and_firstterm','source_privacy_inventory',
-              'backend_source_inventory','attendance_roster_coverage','fee_ledger_integrity')
+              'backend_source_inventory','attendance_roster_coverage','fee_ledger_integrity',
+              'frontend_artifact_closure')
     checks={k:(isinstance(evidence.get(k),dict) and evidence[k].get('pass') is True)
             for k in required}
     infrastructure=all(checks.values())
@@ -269,6 +279,8 @@ def classify(evidence):
     holds=list(UNPROVEN_RELEASE_GATES)
     if not attested:
         holds.insert(0,'active_frontend_attestation_does_not_match_served_hash')
+    if evidence.get('frontend_artifact_closure',{}).get('immutable_artifact_go') is not True:
+        holds.insert(0,'active_frontend_has_public_legacy_or_extra_artifacts')
     if evidence.get('backend_source_inventory',{}).get('whole_tree_safe') is not True:
         holds.insert(0,'backend_whole_tree_replacement_would_overwrite_or_remove_runtime_code')
     if not infrastructure:
@@ -282,6 +294,7 @@ def main():
         'database':inspect_database,'backup':inspect_backup,'frontend':inspect_frontend,
         'rollback':inspect_rollback,'source_privacy_inventory':inspect_source_privacy,
         'backend_source_inventory':inspect_backend_preservation,
+        'frontend_artifact_closure':inspect_frontend_artifact_closure,
         'attendance_roster_coverage':inspect_attendance_coverage,
         'fee_ledger_integrity':inspect_fees_ledger,
         'restricted_catalog_and_firstterm':inspect_signed_and_history,
