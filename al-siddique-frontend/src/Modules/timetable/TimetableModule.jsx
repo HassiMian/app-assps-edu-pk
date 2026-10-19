@@ -1,3 +1,4 @@
+import { submitGuardedDay } from './guardedDaySave'
 import { useEffect, useMemo, useState } from 'react'
 import { useAcademicStore } from '../../services/useAcademicStore'
 import { usePaperStore } from '../Paper-Generator/usePaperStore'
@@ -170,6 +171,7 @@ export default function TimetableModule() {
   const [section, setSection] = useState(sectionOptions[0] || (schoolClass === 'Nine' ? 'Usman' : 'Blue'))
   const resolvedSection = sectionOptions.includes(section) ? section : (sectionOptions[0] || (schoolClass === 'Nine' ? 'Usman' : 'Blue'))
   const [numPeriods, setNumPeriods] = useState(8)
+  const [saveDay, setSaveDay] = useState('Monday')
   const [teacherOptions, setTeacherOptions] = useState([])
   const [teacherLoadError, setTeacherLoadError] = useState('')
   const [saveStatus, setSaveStatus] = useState({ loading: false, success: '', error: '' })
@@ -292,48 +294,23 @@ export default function TimetableModule() {
     })
   }
 
-  // Handle save
+  // One reviewed weekday per transaction. Never fake an all-week atomic save.
   const handleSaveTimetable = async () => {
+    if (saveStatus.loading || loadingTimetable) return
     setSaveStatus({ loading: true, success: '', error: '' })
     try {
-      const payloadAssignments = []
-      DAYS.forEach(day => {
-        for (let i = 1; i <= numPeriods; i++) {
-          const p = `Period ${i}`
-          const item = assignments[day]?.[p]
-          if (item && item.subject) {
-            payloadAssignments.push({
-              day_name: day,
-              period_label: p,
-              period_number: i,
-              subject: item.subject,
-              teacher_display_name: item.teacher || '',
-              teacher_id: item.teacher_id || null,
-              start_time: item.start_time || null,
-              end_time: item.end_time || null
-            })
-          }
-        }
+      const res = await submitGuardedDay({
+        api, schoolClass, section: resolvedSection, day: saveDay, assignments, numPeriods
       })
-
-      const res = await api.post('/api/timetable/save', {
-        class_name: schoolClass,
-        section: resolvedSection,
-        num_periods: numPeriods,
-        assignments: payloadAssignments
-      })
-
+      if (res?.data?.success !== true) throw new Error('TIMETABLE_SAVE_NOT_CONFIRMED')
       setSaveStatus({
         loading: false,
-        success: res.data?.message || `Successfully saved ${payloadAssignments.length} timetable entries for Class ${schoolClass} (${resolvedSection})!`,
+        success: `Saved ${saveDay} (8 periods) for Class ${schoolClass}, Section ${resolvedSection}.`,
         error: ''
       })
     } catch (err) {
-      setSaveStatus({
-        loading: false,
-        success: '',
-        error: err.response?.data?.message || err.message || 'Failed to save timetable.'
-      })
+      const code = err.response?.data?.code || err.response?.data?.message || err.message
+      setSaveStatus({ loading: false, success: '', error: code || 'Verified timetable save unavailable.' })
     }
   }
 
@@ -433,22 +410,30 @@ export default function TimetableModule() {
                 <span>📊</span> Staff Workload
               </button>
 
+              <select
+                aria-label="Choose one timetable day to save"
+                value={saveDay}
+                onChange={e => setSaveDay(e.target.value)}
+                style={{...inputStyle, width: 140, flex: 'none'}}
+              >
+                {DAYS.map(day => <option key={day} value={day}>{day}</option>)}
+              </select>
               <button
                 onClick={handleSaveTimetable}
-                disabled={saveStatus.loading}
+                disabled={saveStatus.loading || loadingTimetable}
                 style={{
                   background: 'linear-gradient(135deg, #0284c7, #0369a1)',
                   color: '#fff',
                   border: 'none',
                   borderRadius: 12,
                   padding: '12px 22px',
-                  cursor: saveStatus.loading ? 'not-allowed' : 'pointer',
+                  cursor: saveStatus.loading || loadingTimetable ? 'not-allowed' : 'pointer',
                   fontWeight: 700,
                   fontSize: 14,
                   boxShadow: '0 4px 14px rgba(2, 132, 199, 0.4)',
                 }}
               >
-                {saveStatus.loading ? 'Saving...' : '💾 Save Timetable'}
+                {saveStatus.loading ? 'Saving...' : '💾 Save Selected Day'}
               </button>
 
               <button

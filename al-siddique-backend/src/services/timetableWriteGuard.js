@@ -40,14 +40,15 @@ function normalize(body,bells,{sourceSha,attested=false}={}){
   if(!n||sorted.has(Number(n[1])))reject(422,'TIMETABLE_PERIOD_DUPLICATE_OR_INVALID')
   const slot=slots.find(x=>x.label===e.period_label)
   if(time(e.start_time)!==slot?.start||time(e.end_time)!==slot?.end)reject(422,'TIMETABLE_OFFICIAL_TIME_REQUIRED')
+  if(!Object.prototype.hasOwnProperty.call(e,'room') || (e.room!==null && (typeof e.room!=='string' || e.room.length>120)))reject(422,'TIMETABLE_ROOM_SNAPSHOT_REQUIRED')
   const teacher=id(e.teacher_id)
   if(!teacher)reject(422,'TIMETABLE_TEACHER_ID_REQUIRED')
-  sorted.set(Number(n[1]),{period_label:e.period_label,start_time:slot.start,end_time:slot.end,subject:val(e.subject,'TIMETABLE_SUBJECT_REQUIRED'),teacher_id:teacher,teacher_display_name:val(e.teacher_display_name,'TIMETABLE_TEACHER_NAME_REQUIRED'),room:String(e.room||'').slice(0,120)})
+  sorted.set(Number(n[1]),{period_label:e.period_label,start_time:slot.start,end_time:slot.end,subject:val(e.subject,'TIMETABLE_SUBJECT_REQUIRED'),teacher_id:teacher,teacher_display_name:val(e.teacher_display_name,'TIMETABLE_TEACHER_NAME_REQUIRED'),room:e.room})
  }
  return {class_name:cls,section,day_name:day,academic_session:session,entries:Array.from({length:8},(_,i)=>sorted.get(i+1)),expected_snapshot_sha256:body.expected_snapshot_sha256,source_sha256:sourceSha}
 }
 function digest(rows){
- const normalized=rows.map(r=>({period_label:r.period_label,start_time:time(r.start_time),end_time:time(r.end_time),teacher_id:id(r.teacher_id),teacher_display_name:String(r.teacher_display_name||'').trim(),subject:String(r.subject||'').trim(),source_sha256:String(r.source_sha256||'').trim(),staff_identity_reviewed:r.staff_identity_reviewed===true})).sort((a,b)=>a.period_label.localeCompare(b.period_label,undefined,{numeric:true}))
+ const normalized=rows.map(r=>({period_label:r.period_label,start_time:time(r.start_time),end_time:time(r.end_time),teacher_id:id(r.teacher_id),teacher_display_name:String(r.teacher_display_name||'').trim(),subject:String(r.subject||'').trim(),room:r.room==null?null:String(r.room),source_sha256:String(r.source_sha256||'').trim(),staff_identity_reviewed:r.staff_identity_reviewed===true})).sort((a,b)=>a.period_label.localeCompare(b.period_label,undefined,{numeric:true}))
  return createHash('sha256').update(JSON.stringify(normalized)).digest('hex')
 }
 function matchSnapshot(rows,expected){

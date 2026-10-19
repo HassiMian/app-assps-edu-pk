@@ -10,7 +10,7 @@ function input(day='Monday'){
  return {class_name:'Five',section:'Blue',day_name:day,academic_session:bells.academic_session,
  schedule_version:bells.version,source_sha256:g.APPROVED_SHA,expected_snapshot_sha256:'f'.repeat(64),
  entries:(day==='Friday'?bells.friday:bells.regular).filter(x=>x.label.startsWith('Period ')).map(s=>
- ({period_label:s.label,start_time:s.start,end_time:s.end,teacher_id:77,teacher_display_name:'Test Teacher',subject:'Science'}))}
+ ({period_label:s.label,start_time:s.start,end_time:s.end,teacher_id:77,teacher_display_name:'Test Teacher',subject:'Science',room:null}))}
 }
 test('verified principal manager accepted',()=>assert.equal(g.authority(actor()).schoolId,1))
 test('teachers, clerks, anonymous and superadmins cannot write',()=>{for(const role of ['teacher','staff','clerk','','super_admin'])fail(()=>g.authority(actor(role)),'TIMETABLE_MANAGER_REQUIRED')})
@@ -29,3 +29,7 @@ test('source route has serializable lock, safe role guard and transaction rollba
   assert.ok(r.includes(x),x)
  assert.ok(!r.includes('req.user?.school_id || 1'),'never fallback to School1')
 })
+
+test('room null preserved; room mutations change concurrency digest',()=>{const p=input();assert.equal(g.normalize(p,bells,opts).entries[0].room,null);delete p.entries[0].room;fail(()=>g.normalize(p,bells,opts),'TIMETABLE_ROOM_SNAPSHOT_REQUIRED');const rows=input().entries.map(x=>({...x,source_sha256:g.APPROVED_SHA,staff_identity_reviewed:true}));const hash=g.digest(rows);rows[0].room='Changed';assert.notEqual(g.digest(rows),hash)})
+
+test('room truncation is prohibited',()=>{const p=input();p.entries[0].room='X'.repeat(121);fail(()=>g.normalize(p,bells,opts),'TIMETABLE_ROOM_SNAPSHOT_REQUIRED')})

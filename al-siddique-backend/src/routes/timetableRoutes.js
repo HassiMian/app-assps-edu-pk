@@ -114,7 +114,7 @@ router.post('/save', protect, async (req, res) => {
   await client.query('SELECT pg_advisory_xact_lock(hashtext($1))',[lockKey])
   const where='WHERE school_id=$1 AND lower(class_name)=lower($2) AND lower(section)=lower($3) AND day_name=$4 AND academic_session=$5'
   const args=[schoolId,replacement.class_name,replacement.section,replacement.day_name,replacement.academic_session]
-  const existing=await client.query('SELECT period_label,start_time,end_time,subject,teacher_id,teacher_display_name,source_sha256,staff_identity_reviewed FROM public.timetable '+where+' ORDER BY period_label FOR UPDATE',args)
+  const existing=await client.query('SELECT period_label,start_time,end_time,subject,teacher_id,teacher_display_name,room,source_sha256,staff_identity_reviewed FROM public.timetable '+where+' ORDER BY period_label FOR UPDATE',args)
   writeGuard.matchSnapshot(existing.rows,replacement.expected_snapshot_sha256)
   const identity=await client.query("SELECT u.id AS uid,e.name AS employee_name FROM public.users u JOIN public.employees e ON e.school_id=u.school_id AND e.user_id=u.id AND e.is_active=true WHERE u.school_id=$1 AND u.is_active=true AND lower(u.role)='teacher' AND u.id=ANY($2::int[])",[schoolId,ids])
   const known=new Map(identity.rows.map(row=>[Number(row.uid),String(row.employee_name||'').trim().toLowerCase()]))
@@ -147,7 +147,7 @@ router.get('/snapshot', protect, async (req,res)=>{
   if(!className||!section||!['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'].includes(day)||
       session!==schoolBellSchedule(schoolId)?.academic_session)
    return res.status(422).json({success:false,code:'TIMETABLE_SNAPSHOT_SCOPE_REQUIRED'})
-  const rows=await query('SELECT period_label,start_time,end_time,subject,teacher_id,teacher_display_name,source_sha256,staff_identity_reviewed FROM public.timetable WHERE school_id=$1 AND lower(class_name)=lower($2) AND lower(section)=lower($3) AND day_name=$4 AND academic_session=$5 ORDER BY period_label',
+  const rows=await query('SELECT period_label,start_time,end_time,subject,teacher_id,teacher_display_name,room,source_sha256,staff_identity_reviewed FROM public.timetable WHERE school_id=$1 AND lower(class_name)=lower($2) AND lower(section)=lower($3) AND day_name=$4 AND academic_session=$5 ORDER BY period_label',
    [schoolId,className,section,day,session])
   writeGuard.matchSnapshot(rows.rows,writeGuard.digest(rows.rows))
   res.set('Cache-Control','private, no-store')
