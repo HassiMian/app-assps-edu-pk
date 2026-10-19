@@ -7,6 +7,7 @@ import re
 import subprocess
 import verify_backend_source_preservation_readonly as backend_preservation
 import verify_frontend_artifact_closure_readonly as frontend_closure
+import verify_exam_attendance_tenant_scope_readonly as exam_attendance_scope
 import assps_attendance_coverage_readonly as attendance_coverage
 import assps_fee_ledger_integrity_readonly as fee_integrity
 from concurrent.futures import ThreadPoolExecutor
@@ -270,7 +271,7 @@ def classify(evidence):
     required=('database','backup','frontend','rollback','http',
               'restricted_catalog_and_firstterm','source_privacy_inventory',
               'backend_source_inventory','attendance_roster_coverage','fee_ledger_integrity',
-              'frontend_artifact_closure')
+              'frontend_artifact_closure','exam_attendance_tenant_scope')
     checks={k:(isinstance(evidence.get(k),dict) and evidence[k].get('pass') is True)
             for k in required}
     infrastructure=all(checks.values())
@@ -283,6 +284,10 @@ def classify(evidence):
         holds.insert(0,'active_frontend_has_public_legacy_or_extra_artifacts')
     if evidence.get('backend_source_inventory',{}).get('whole_tree_safe') is not True:
         holds.insert(0,'backend_whole_tree_replacement_would_overwrite_or_remove_runtime_code')
+    if evidence.get('exam_attendance_tenant_scope',{}).get('live_scoped') is not True:
+        holds.insert(0,'active_exam_attendance_aggregate_missing_school_tenant_scope')
+    if evidence.get('exam_attendance_tenant_scope',{}).get('candidate_scoped') is not True:
+        holds.insert(0,'candidate_exam_attendance_tenant_scope_regression')
     if not infrastructure:
         holds.insert(0,'read_only_operational_preflight_failed')
     return {'status':'RELEASE_HOLD','operational_checks_pass':infrastructure,
@@ -295,6 +300,7 @@ def main():
         'rollback':inspect_rollback,'source_privacy_inventory':inspect_source_privacy,
         'backend_source_inventory':inspect_backend_preservation,
         'frontend_artifact_closure':inspect_frontend_artifact_closure,
+        'exam_attendance_tenant_scope':exam_attendance_scope.inspect,
         'attendance_roster_coverage':inspect_attendance_coverage,
         'fee_ledger_integrity':inspect_fees_ledger,
         'restricted_catalog_and_firstterm':inspect_signed_and_history,

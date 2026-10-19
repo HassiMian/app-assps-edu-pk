@@ -160,3 +160,15 @@ Source workstream for the SAME unified mission: audit/core-unified-front-closure
 - For controlled promotion, enforce source-provenance and a strictly permitted static asset set, offer only genuinely authenticated tenant-scoped signature/document access, verify browser navigation and cached open sessions with owner Paper Studio, and keep prior Nginx root and rollback intact. Do not promote private sanitization artifact until all mandatory release gates pass.
 
 This is source hardening within the previously adopted one integrated production mission, not a separate release.
+
+## 19 October 2026 supplementary exam-attendance tenant-scope audit
+
+An isolated, static, nonmutating release test now compares the two exam-result
+attendance aggregates in the active live backend with the corresponding unified
+candidate sources. The candidate groups and joins by `(school_id, student_id)`;
+the live route presently groups/joins by `student_id` only. This is a release
+hardening requirement; static differences alone do not establish actual cross-tenant
+student disclosure. The unified readiness gate now explicitly HOLDS if either
+backend is not school-scoped. Live school data, reverse proxy, PM2 and DB remain
+untouched. Runtime confirmation still requires genuinely signed, authorized
+Principal/Teacher/peer-tenant roles and effective RLS isolation tests.

@@ -10,7 +10,7 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
         return {x:{'pass':True} for x in (
             'database','backup','frontend','rollback','http','restricted_catalog_and_firstterm',
             'source_privacy_inventory','backend_source_inventory','attendance_roster_coverage',
-            'fee_ledger_integrity','frontend_artifact_closure')}
+            'fee_ledger_integrity','frontend_artifact_closure','exam_attendance_tenant_scope')}
     def test_every_operational_check_passes_but_unapproved_signoff_remains_hold(self):
         e=self.fixture()
         e['frontend']['sidecar_matches']=True
@@ -20,6 +20,20 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
         self.assertGreaterEqual(len(r['unresolved_release_gates']),9)
         self.assertFalse(r['production_deployed_by_this_check'])
         self.assertFalse(r['safe_to_remove_timetable_ingress_quarantine'])
+    def test_unscoped_live_exam_attendance_is_explicit_hold(self):
+        e=self.fixture()
+        e['exam_attendance_tenant_scope'].update({'live_scoped':False,'candidate_scoped':True})
+        r=gate.classify(e)
+        self.assertIn('active_exam_attendance_aggregate_missing_school_tenant_scope',r['unresolved_release_gates'])
+        self.assertNotIn('candidate_exam_attendance_tenant_scope_regression',r['unresolved_release_gates'])
+        self.assertTrue(r['operational_checks_pass'])
+
+    def test_unscoped_candidate_attendance_blocks_release(self):
+        e=self.fixture()
+        e['exam_attendance_tenant_scope'].update({'live_scoped':True,'candidate_scoped':False})
+        r=gate.classify(e)
+        self.assertIn('candidate_exam_attendance_tenant_scope_regression',r['unresolved_release_gates'])
+
     def test_stale_sidecar_adds_provenance_blocker(self):
         e=self.fixture();e['frontend']['sidecar_matches']=False
         r=gate.classify(e)
