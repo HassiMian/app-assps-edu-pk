@@ -14,7 +14,7 @@ import { C, card, btnPrimary, btnSecondary, select, sectionHeader } from '../mod
 import {
   ResultCardPreview, ResultCardPrintToolbar, ResultCardTemplateSelector,
 } from './premiumResultCardTemplates'
-import {DEFAULT_RESULT_OPTIONS, buildResultCardData, PREMIUM_IDS} from './premiumResultCardData'
+import {DEFAULT_RESULT_OPTIONS, buildResultCardData, PREMIUM_IDS, isNazraSubject} from './premiumResultCardData'
 import {openResultPrintWindow, resultCardPrintCss} from './premiumResultCardPrint'
 
 function gradeLabel(pct, bands = []) {
@@ -325,7 +325,7 @@ export default function ResultCards() {
       return {
         student: sanitizedStudent,
         exam: examObj,
-        studentMarks: rows.filter(r => String(r.student_id) === String(s.id)),
+        studentMarks: rows.filter(r => String(r.student_id) === String(s.id) && !isNazraSubject(r?.subject || r?.subjectName)),
       }
     }).filter(item => item && item.studentMarks.length > 0), [activeResults, exam, students])
 
@@ -347,7 +347,7 @@ export default function ResultCards() {
     return buildPrintCards(activeResults, exam, students)
   }, [activeResults, exam, students, buildPrintCards])
 
-  const studentMarks = activeResults.filter(r => String(r.student_id) === selectedStudent)
+  const studentMarks = activeResults.filter(r => String(r.student_id) === selectedStudent && !isNazraSubject(r?.subject || r?.subjectName))
   const student = students.find(s => String(s.id) === selectedStudent)
   const { obtained: totalObtained, possible: totalPossible, percentage: pct, pending: pendingSubjects } = summarizeResultRows(studentMarks, exam)
   const selectedStudentLabel = student

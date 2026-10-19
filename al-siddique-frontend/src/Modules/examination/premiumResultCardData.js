@@ -42,11 +42,17 @@ function numberOrNull(value) {
  return Number.isFinite(n) ? n : null
 }
 
+export function isNazraSubject(name) {
+ const s = String(name || '').toLowerCase()
+ return s.includes('nazra') || s.includes('quran / nazra') || s.includes('quran/nazra') || s.includes('ناظرہ') || s.trim() === 'quran'
+}
+
 function buildPremiumResultCardData({ student, exam, studentMarks, options, school }) {
+ const cleanMarks = (studentMarks || []).filter(row => !isNazraSubject(row?.subjectName || row?.subject))
  const opts = resolveResultPrintOptions({ ...DEFAULT_RESULT_OPTIONS, ...options, autoTermColumns: options?.autoTermColumns !== false, includeCharts:true, orientation:'portrait' }, exam)
  const activeTerms = termFields.filter(([key]) => opts[key])
  const slot = currentTermField(exam)
- const subjects = (studentMarks || []).map((row) => {
+ const subjects = cleanMarks.map((row) => {
  const resultState = interpretSubjectResult(row)
  const rawTotal = row.total_marks ?? exam?.total_marks
  const perTermTotal = rawTotal === null || rawTotal === undefined || rawTotal === '' || !Number.isFinite(Number(rawTotal)) || Number(rawTotal) <= 0 ? null : Number(rawTotal)
@@ -153,7 +159,8 @@ export function buildResultCardData(args) {
  // Normalize student class at the common boundary. The separately owned
  // protected legacy template source stays byte-identical to its approved SHA.
  const safeClass = resolveResultStudentClass(args.student, args.exam)
- const scopedArgs = {...args, student:{...args.student,className:safeClass,class:safeClass}}
+ const cleanMarks = (args.studentMarks || []).filter(row => !isNazraSubject(row?.subjectName || row?.subject))
+ const scopedArgs = {...args, studentMarks:cleanMarks, student:{...args.student,className:safeClass,class:safeClass}}
  return PREMIUM_IDS.has(args.options?.template)
   ? buildPremiumResultCardData(scopedArgs)
   : legacyBuilder(scopedArgs)
