@@ -500,10 +500,19 @@ router.get('/results', protect, canReadResults, async (req, res) => {
 
     let sql = `
       SELECT er.*, e.name as exam_name, e.session, e.type as exam_type,
-             s.name as student_name, s.class, s.section, s.gr_number, s.father_name
+             s.name as student_name, s.class, s.section, s.gr_number, s.father_name,
+             COALESCE(att.attendance_total_days, 0) AS attendance_total_days,
+             COALESCE(att.attendance_attended, 0) AS attendance_attended,
+             COALESCE(att.attendance_absent, 0) AS attendance_absent
       FROM exam_results er
       JOIN exams e ON er.exam_id = e.id
       JOIN students s ON er.student_id = s.id AND s.school_id = e.school_id
+      LEFT JOIN (
+        SELECT school_id, student_id, COUNT(DISTINCT date) AS attendance_total_days,
+               COUNT(*) FILTER (WHERE status = 'present') AS attendance_attended,
+               COUNT(*) FILTER (WHERE status = 'absent') AS attendance_absent
+        FROM attendance GROUP BY school_id, student_id
+      ) att ON att.school_id = s.school_id AND att.student_id = s.id
       WHERE 1=1
     `
     if (filters.length) sql += ` AND ${filters.join(' AND ')}`
@@ -533,10 +542,19 @@ router.get('/results', protect, canReadResults, async (req, res) => {
 router.get('/results/:exam_id', protect, canReadResults, async (req, res) => {
   try {
     let sql = `
-      SELECT er.*, s.name, s.class AS student_class, s.section AS student_section, s.gr_number, s.roll_number, s.father_name, s.photo
+      SELECT er.*, s.name, s.class AS student_class, s.section AS student_section, s.gr_number, s.roll_number, s.father_name, s.photo,
+             COALESCE(att.attendance_total_days, 0) AS attendance_total_days,
+             COALESCE(att.attendance_attended, 0) AS attendance_attended,
+             COALESCE(att.attendance_absent, 0) AS attendance_absent
       FROM exam_results er
       JOIN exams e ON er.exam_id = e.id
       JOIN students s ON er.student_id = s.id AND s.school_id = e.school_id
+      LEFT JOIN (
+        SELECT school_id, student_id, COUNT(DISTINCT date) AS attendance_total_days,
+               COUNT(*) FILTER (WHERE status = 'present') AS attendance_attended,
+               COUNT(*) FILTER (WHERE status = 'absent') AS attendance_absent
+        FROM attendance GROUP BY school_id, student_id
+      ) att ON att.school_id = s.school_id AND att.student_id = s.id
       WHERE er.exam_id = $1
     `
     const params = [req.params.exam_id]

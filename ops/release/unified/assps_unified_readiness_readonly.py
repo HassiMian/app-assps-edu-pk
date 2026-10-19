@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import re
 import subprocess
+import verify_backend_source_preservation_readonly as backend_preservation
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 
@@ -40,6 +41,26 @@ BASELINES = {
     'school1_timetable': 405, 'school1_lesson_plans': 3,
     'force_enabled_public_rls': 85,
 }
+# Absolute counts may grow with legitimate admissions and future terms.
+# Only immutable First Term Exam9, historical Exam8 and exact authorization/policy
+# contracts remain strict. The original firstterm SHA checker separately protects
+# every historical row against changes that aggregate counts would miss.
+MINIMUM_AGGREGATES = frozenset({
+    'students_total', 'students_school1', 'students_school2',
+    'exam_results_total', 'school1_timetable', 'school1_lesson_plans',
+    'force_enabled_public_rls',
+})
+def compatible_aggregates(actual):
+    if set(actual) != set(BASELINES):
+        return False
+    for key, baseline in BASELINES.items():
+        if key in MINIMUM_AGGREGATES:
+            if actual[key] < baseline:
+                return False
+        elif actual[key] != baseline:
+            return False
+    return True
+
 READONLY_SQL = """
 BEGIN TRANSACTION READ ONLY;
 SELECT 'students_total|' || count(*) FROM public.students;
@@ -105,7 +126,7 @@ def inspect_database():
     if query.returncode:
         raise RuntimeError('Main PostgreSQL read-only inspection failed')
     records=parse_aggregate(query.stdout)
-    return {'pass':records==BASELINES,'counts':records}
+    return {'pass':compatible_aggregates(records),'counts':records}
 
 def inspect_backup():
     dirs=sorted(p for p in BACKUP_ROOT.iterdir() if p.is_dir() and LATEST_BACKUP_PATTERN.fullmatch(p.name))
@@ -147,6 +168,17 @@ def inspect_frontend():
             'sidecar_matches':second==sidecar.get('frontend_index_sha256'),
             'sidecar_claimed_commit':sidecar.get('candidate_commit',''),
             'active_root':str(ACTIVE_ROOT)}
+
+def inspect_backend_preservation():
+    inventory=backend_preservation.compare(
+        backend_preservation.LIVE,backend_preservation.CANDIDATE)
+    return {'pass':True,
+            'live_files':inventory['live_files'],
+            'byte_identical':inventory['byte_identical'],
+            'different_count':inventory['different_count'],
+            'live_only_count':inventory['live_only_count'],
+            'independently_owned_live_only_count':inventory['independently_owned_live_only_count'],
+            'whole_tree_safe':inventory['can_replace_live_tree_wholesale']}
 
 def inspect_source_privacy():
     # Presence of a private school asset in any public git history is a separate HOLD.
@@ -196,7 +228,8 @@ def inspect_http():
 
 def classify(evidence):
     required=('database','backup','frontend','rollback','http',
-              'restricted_catalog_and_firstterm','source_privacy_inventory')
+              'restricted_catalog_and_firstterm','source_privacy_inventory',
+              'backend_source_inventory')
     checks={k:(isinstance(evidence.get(k),dict) and evidence[k].get('pass') is True)
             for k in required}
     infrastructure=all(checks.values())
@@ -205,6 +238,8 @@ def classify(evidence):
     holds=list(UNPROVEN_RELEASE_GATES)
     if not attested:
         holds.insert(0,'active_frontend_attestation_does_not_match_served_hash')
+    if evidence.get('backend_source_inventory',{}).get('whole_tree_safe') is not True:
+        holds.insert(0,'backend_whole_tree_replacement_would_overwrite_or_remove_runtime_code')
     if not infrastructure:
         holds.insert(0,'read_only_operational_preflight_failed')
     return {'status':'RELEASE_HOLD','operational_checks_pass':infrastructure,
@@ -215,6 +250,7 @@ def main():
     actions={
         'database':inspect_database,'backup':inspect_backup,'frontend':inspect_frontend,
         'rollback':inspect_rollback,'source_privacy_inventory':inspect_source_privacy,
+        'backend_source_inventory':inspect_backend_preservation,
         'restricted_catalog_and_firstterm':inspect_signed_and_history,
         'http':inspect_http,
     }

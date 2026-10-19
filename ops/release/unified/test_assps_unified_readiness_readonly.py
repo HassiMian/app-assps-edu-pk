@@ -9,7 +9,7 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
     def fixture(self):
         return {x:{'pass':True} for x in (
             'database','backup','frontend','rollback','http','restricted_catalog_and_firstterm',
-            'source_privacy_inventory')}
+            'source_privacy_inventory','backend_source_inventory')}
     def test_every_operational_check_passes_but_unapproved_signoff_remains_hold(self):
         e=self.fixture()
         e['frontend']['sidecar_matches']=True
@@ -51,6 +51,48 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
         self.assertEqual(records['exam9_true_zero'],224)
         self.assertEqual(records['exam9_firstterm_rows'],1853)
         self.assertEqual(records['exam8_school2_demo_rows'],1)
+    def test_new_second_term_results_and_new_admissions_do_not_fake_corruption(self):
+        grown=dict(gate.BASELINES)
+        grown['students_total'] += 3
+        grown['students_school1'] += 3
+        grown['exam_results_total'] += 100
+        grown['school1_lesson_plans'] += 12
+        grown['school1_timetable'] += 60
+        grown['force_enabled_public_rls'] += 2
+        self.assertTrue(gate.compatible_aggregates(grown))
+        self.assertEqual(grown['exam9_firstterm_rows'],1853)
+    def test_loss_of_historic_student_result_or_teacher_grant_is_rejected(self):
+        for key in ('students_total','students_school1','exam_results_total',
+                    'exam9_firstterm_rows','exam9_true_zero','official_teacher_grants',
+                    'firstterm_live_guard_triggers'):
+            broken=dict(gate.BASELINES)
+            broken[key]-=1
+            self.assertFalse(gate.compatible_aggregates(broken),key)
+    def test_extra_unapproved_teacher_grants_fail_closed(self):
+        wrong=dict(gate.BASELINES)
+        wrong['unauthorized_active_grants']=1
+        self.assertFalse(gate.compatible_aggregates(wrong))
+    def test_exam8_school2_retention_not_confused_with_school1_firstterm(self):
+        wrong=dict(gate.BASELINES)
+        wrong['exam8_school2_demo_rows']=0
+        self.assertFalse(gate.compatible_aggregates(wrong))
+        wrong=dict(gate.BASELINES)
+        wrong['exam9_firstterm_rows']=1854
+        self.assertFalse(gate.compatible_aggregates(wrong))
+
+    def test_missing_backend_evidence_fails_operational_gate(self):
+        e=self.fixture()
+        e.pop('backend_source_inventory')
+        self.assertFalse(gate.classify(e)['operational_checks_pass'])
+    def test_unsafe_backend_whole_tree_copy_refused_even_if_source_tests_pass(self):
+        e=self.fixture()
+        e['backend_source_inventory']['whole_tree_safe']=False
+        r=gate.classify(e)
+        self.assertIn('backend_whole_tree_replacement_would_overwrite_or_remove_runtime_code',
+                      r['unresolved_release_gates'])
+        self.assertFalse(r['safe_to_remove_timetable_ingress_quarantine'])
+        self.assertFalse(r['production_deployed_by_this_check'])
+
     def test_missing_count_is_a_failure(self):
         with self.assertRaises(ValueError):
             gate.parse_aggregate('students_total|326')
