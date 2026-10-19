@@ -51,3 +51,30 @@ Source-controlled read-only acceptance is provided in
 ops/release/security/verify_school_tenant_scopes_readonly_20261019.py.
 These GUC-based aggregate results do NOT prove signed actor/HMAC
 identity enforcement, real staff login acceptance or School2 HTTP E2E.
+
+## 19-Oct source and migration follow-up
+Selected candidate static/security/unit test suites passed 47/47 (signed catalog
+guard, infrastructure fail-closed, approved-source role, teacher-readiness and
+timetable draft contract) and 28/28 (isolated Express fake-database timetable
+draft, snapshot, lesson-delivery and write guard), all on independent clean
+worktree based on 88e6de66. These were NOT live user acceptance cases.
+
+Existing src candidate migration
+ops/release/timetable/002_school_timetable_drafts_QA_ONLY.sql was tested by
+ops/release/timetable/test_migration_disposable_pg16.sh with a newly created
+PG16 pg_virtualenv cluster (auto-destroyed): fail-closed without signed function
+PASS, additive schema PASS, FORCE RLS on both tables PASS, five scoped policies
+PASS. Live production has no public.school_timetable_drafts or
+public.school_timetable_draft_revisions, and old live backend has no mounted
+drafts or approved-source router. Therefore do NOT remove legacy Save HTTP403,
+do NOT deploy the candidate migration blindly and do NOT claim that live
+timetable editing works. Production source recovery requires preserving 147
+live-only runtime JS/JSON files and reconciling 22 overlapping changed files.
+No runtime backend restart or code replacement occurred in this mission.
+
+The guarded document/assignment tenant scope suite passed 7/7 read-only
+catalog/context checks, not a signed actor/HMAC audit. Source-only branch
+is audit/core-live-api-health-closeout-20261019, descendant of reviewed
+fortress candidate 88e6de66. Static source safety passed. Physical Urdu A4,
+offhost recipient decrypt/restore, source academic signoff, real authenticated
+teacher/Principal and peer-school tests remain independently gated.
