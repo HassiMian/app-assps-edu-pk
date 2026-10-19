@@ -16,7 +16,7 @@ ACTIVE_ROOT = Path('/var/www/assps-resultcard-nazra-purged-20261019')
 EXPECTED_LIVE_INDEX = '3c74d3be652b41549ef2129eaacec4c341c05c2118597e308edffd17a33726a9'
 BACKUP_ROOT = Path('/var/backups')
 ROLLBACK = Path('/root/instant_rollback_to_20261016.sh')
-FIRSTTERM = Path('/root/secure-archive/assps-firstterm-retention-20261019/verify_firstterm_integrity.py')
+FIRSTTERM = Path('/root/secure-archive/assps-firstterm-retention-20261019/verify_school1_firstterm_exam9_v2.py')
 STRICT_CATALOG = Path('/root/workspace/assps-core-signed85-catalog-20261019/ops/release/security/verify_signed85_catalog_live_readonly_20261019.py')
 LATEST_BACKUP_PATTERN = re.compile(r'assps-critical-\d{8}T\d{6}Z')
 APPROVED_MAPPING = 'timetable_verified_20261019'
@@ -241,7 +241,7 @@ def inspect_rollback():
 
 def inspect_signed_and_history():
     tests=(
-        ('exact_firstterm_sha', ['python3',str(FIRSTTERM),'--check'], 'FIRST_TERM_IMMUTABLE_INTEGRITY_PASS'),
+        ('exact_firstterm_sha', ['python3',str(FIRSTTERM),'--check'], 'SCHOOL1_FIRST_TERM_IMMUTABLE_INTEGRITY_PASS'),
         ('exam9_live_catalog', ['python3','/root/workspace/assps-core-firstterm-db-immutable-20261019/ops/release/firstterm/verify_exam9_history_lock_readonly_20261019.py'],'FIRST_TERM_EXAM9_IMMUTABLE_GUARD_PASS'),
         ('signed85_source_catalog', ['python3',str(STRICT_CATALOG)],'Source catalog ready for further isolated signed-actor validation'),
     )
