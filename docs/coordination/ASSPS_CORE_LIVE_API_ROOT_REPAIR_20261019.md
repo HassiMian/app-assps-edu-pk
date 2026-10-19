@@ -36,3 +36,18 @@ but independent recipient-key decrypt and standalone two-cluster restore
 HOLD. No witnessed real School1 Teacher/Principal + School2 acceptance or
 physical laser Urdu A4. This release remains PARTIAL; do not claim full
 production certification.
+
+## Fresh tenant RLS read-only validation
+On 19-Oct after API fix, read-only SQL with SET LOCAL ROLE apex_app_runtime
+returned active authorized assignments 0 unscoped, 0 School2, 54 School1.
+With SET LOCAL ROLE apexos_user, documents were 0 unscoped, 0 School2
+and 18 School1. School document events and revisions have restrictive
+20261019 fail-closed policies alongside the older permissive fallback;
+this new guard was observed, not installed by this verifier.
+The forced-RLS count is 85 **excluding** the historical audit table
+(student_class_movement_audit); 86 **including** that table is the same
+catalog, not evidence of a new unreviewed 86th protected relation.
+Source-controlled read-only acceptance is provided in
+ops/release/security/verify_school_tenant_scopes_readonly_20261019.py.
+These GUC-based aggregate results do NOT prove signed actor/HMAC
+identity enforcement, real staff login acceptance or School2 HTTP E2E.
