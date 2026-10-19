@@ -311,23 +311,74 @@ export default function ResultCards() {
     return Array.from(sectionSet).sort()
   }, [selectedPrintClass, sectionsForClass, students])
 
+  const classRanks = useMemo(() => {
+    const byClass = new Map()
+    const studentTotals = new Map()
+    activeResults.forEach(r => {
+      if (isNazraSubject(r?.subject || r?.subjectName)) return
+      const sId = String(r.student_id)
+      const cur = studentTotals.get(sId) || { id: sId, obtained: 0, possible: 0, className: r.student_class || '' }
+      const obt = Number(r.marks_obtained)
+      const tot = Number(r.total_marks || 0)
+      if (Number.isFinite(obt) && obt >= 0) cur.obtained += obt
+      if (Number.isFinite(tot) && tot > 0) cur.possible += tot
+      studentTotals.set(sId, cur)
+    })
+
+    students.forEach(s => {
+      const sId = String(s.id)
+      const cur = studentTotals.get(sId)
+      if (cur) {
+        cur.className = s.className || s.class || cur.className
+      }
+    })
+
+    studentTotals.forEach(item => {
+      const cls = schoolClassOrderKey(item.className)
+      if (!byClass.has(cls)) byClass.set(cls, [])
+      byClass.get(cls).push(item)
+    })
+
+    const rankMap = new Map()
+    const ordinal = n => {
+      const s = ['th', 'st', 'nd', 'rd']
+      const v = n % 100
+      return n + (s[(v - 20) % 10] || s[v] || s[0])
+    }
+
+    byClass.forEach(list => {
+      list.sort((a, b) => b.obtained - a.obtained)
+      let currentRank = 1
+      list.forEach((item, idx) => {
+        if (idx > 0 && item.obtained < list[idx - 1].obtained) {
+          currentRank = idx + 1
+        }
+        rankMap.set(item.id, ordinal(currentRank))
+      })
+    })
+
+    return rankMap
+  }, [activeResults, students])
+
   const buildPrintCards = useCallback((rows = activeResults, examObj = exam, scopeStudents = students) =>
     scopeStudents.map(s => {
       const authenticatedClass = s.className || s.class || ''
       const safeClass = /^all\s+classes$/i.test(authenticatedClass.trim()) ? '' : authenticatedClass
       if (!safeClass) return null // incomplete identity must not be printed
       if (!isClassAllowedForExam(examObj, safeClass)) return null
+      const pos = classRanks.get(String(s.id)) || s.position || '—'
       const sanitizedStudent = {
         ...s,
         className: safeClass,
         class: safeClass,
+        position: pos,
       }
       return {
         student: sanitizedStudent,
         exam: examObj,
         studentMarks: rows.filter(r => String(r.student_id) === String(s.id) && !isNazraSubject(r?.subject || r?.subjectName)),
       }
-    }).filter(item => item && item.studentMarks.length > 0), [activeResults, exam, students])
+    }).filter(item => item && item.studentMarks.length > 0), [activeResults, exam, students, classRanks])
 
   const classPrintCards = useMemo(() => {
     if (outputMode !== 'class' || !selectedPrintClass) return []
@@ -348,28 +399,43 @@ export default function ResultCards() {
   }, [activeResults, exam, students, buildPrintCards])
 
   const studentMarks = activeResults.filter(r => String(r.student_id) === selectedStudent && !isNazraSubject(r?.subject || r?.subjectName))
-  const student = students.find(s => String(s.id) === selectedStudent)
+  const student = useMemo(() => {
+    const found = students.find(s => String(s.id) === selectedStudent)
+    if (!found) return null
+    return {
+      ...found,
+      position: classRanks.get(String(found.id)) || '—',
+    }
+  }, [students, selectedStudent, classRanks])
   const { obtained: totalObtained, possible: totalPossible, percentage: pct, pending: pendingSubjects } = summarizeResultRows(studentMarks, exam)
   const selectedStudentLabel = student
     ? `${student.name}${student.className ? ` (Class ${student.className})` : ''}${student.gr_number ? ` - ${student.gr_number}` : student.roll_number ? ` - Roll ${student.roll_number}` : ''}`
     : ''
 
-  const printTargetValue = outputMode === 'single' && selectedStudent ? `student:${selectedStudent}` : outputMode
+  const printTargetValue = outputMode === 'single' && selectedStudent
+    ? `student:${selectedStudent}`
+    : outputMode === 'class' && selectedPrintClass
+    ? `class:${selectedPrintClass}`
+    : outputMode
 
   const handlePrintTargetChange = (value) => {
-    if (value === 'class') {
-      setOutputMode('class')
-      if (!selectedPrintClass) {
-        if (exam?.class && !/^all\s+classes$/i.test(String(exam.class).trim()) && isClassAllowedForExam(exam, exam.class)) {
-          setSelectedPrintClass(exam.class)
-        } else if (availablePrintClasses.length > 0) {
-          setSelectedPrintClass(availablePrintClasses[0])
-        }
-      }
-      return
-    }
     if (value === 'all') {
       setOutputMode('all')
+      setSelectedPrintClass('')
+      return
+    }
+    if (value.startsWith('class:')) {
+      const cls = value.replace('class:', '')
+      setOutputMode('class')
+      setSelectedPrintClass(cls)
+      setSelectedPrintSection('')
+      return
+    }
+    if (value === 'class') {
+      setOutputMode('class')
+      if (!selectedPrintClass && availablePrintClasses.length > 0) {
+        setSelectedPrintClass(availablePrintClasses[0])
+      }
       return
     }
     if (value.startsWith('student:')) {
@@ -467,7 +533,7 @@ export default function ResultCards() {
     email: paperSettings.email,
     academicYear: paperSettings.examYear,
     logo: paperSettings.logo,
-    principalSignature: paperSettings.principalSignature,
+    principalSignature: paperSettings.principalSignature || '/principal-signature.png',
     showUrduHeader: paperSettings.showUrduHeader !== false,
   }
 
@@ -541,13 +607,24 @@ export default function ResultCards() {
               disabled={!students.length || loading}
             >
               <option value="">{loading ? 'Loading targets...' : students.length ? 'Select print target' : 'No students with marks'}</option>
-              <option value="class">Whole Class {selectedPrintClass ? `— Class ${selectedPrintClass}` : ''} ({classPrintCards.length} cards)</option>
-              <option value="all">All Classes — all saved result cards ({allExamPrintCards.length} cards)</option>
-              {students.map(s => {
-                const suffix = s.gr_number ? s.gr_number : s.roll_number ? `Roll ${s.roll_number}` : `${s.subjectsCount} subjects`
-                const classLabel = s.className ? ` - Class ${s.className}` : ''
-                return <option key={s.id} value={`student:${s.id}`}>Student - {s.name}{classLabel} - {suffix}</option>
-              })}
+              <optgroup label="Batch Print by Class">
+                {availablePrintClasses.map(cls => {
+                  const count = students.filter(s => schoolClassOrderKey(s.className || s.class) === schoolClassOrderKey(cls)).length
+                  return (
+                    <option key={`class:${cls}`} value={`class:${cls}`}>
+                      Class {cls} — whole class ({count} cards)
+                    </option>
+                  )
+                })}
+                <option value="all">All Classes — all saved result cards ({allExamPrintCards.length} cards)</option>
+              </optgroup>
+              <optgroup label="Individual Student">
+                {students.map(s => {
+                  const suffix = s.gr_number ? s.gr_number : s.roll_number ? `Roll ${s.roll_number}` : `${s.subjectsCount} subjects`
+                  const classLabel = s.className ? ` - Class ${s.className}` : ''
+                  return <option key={s.id} value={`student:${s.id}`}>Student - {s.name}{classLabel} - {suffix}</option>
+                })}
+              </optgroup>
             </select>
 
             {outputMode === 'class' && (
@@ -706,7 +783,7 @@ export default function ResultCards() {
               <div><div style={{ color:C.gold, fontWeight:800 }}>Total</div><div style={{ color:C.silver }}>{totalPossible ? `${totalObtained} / ${totalPossible}` : 'Pending marks'}</div></div>
               <div style={{ textAlign:'right' }}>
                 <div style={{ color:pct === null || pendingSubjects || studentMarks.some(row => meetsResultPassMark(row.marks_obtained, exam?.pass_marks) === null) ? C.muted : studentMarks.every(row => meetsResultPassMark(row.marks_obtained, exam?.pass_marks)) ? C.green : C.red, fontSize:32, fontWeight:800 }}>{pct === null ? 'Pending' : `${pct}%`}</div>
-                <div style={{ color:C.muted }}>Grade: {pct === null ? '—' : gradeLabel(pct, gradeBands)}{pendingSubjects ? ` · ${pendingSubjects} subject(s) pending` : ''}</div>
+                <div style={{ color:C.muted }}>Grade: {pct === null ? '—' : gradeLabel(pct, gradeBands)} · Position: <b style={{ color:C.gold }}>{student?.position || '—'}</b>{pendingSubjects ? ` · ${pendingSubjects} subject(s) pending` : ''}</div>
               </div>
             </div>
           </div>

@@ -128,15 +128,16 @@ function PremiumSubjectBars({ data }) {
 }
 function PremiumSummaryDonut({ data }) {
  const pct = data.result.percentage
+ const strokeDash = `${pct ?? 0} ${100 - (pct ?? 0)}`
  return <div className="rc-chart-card premium-summary-chart">
   <h3>Performance Summary</h3>
-  <svg className="premium-donut" viewBox="0 0 42 42" role="img" aria-label={pct === null ? 'Marks pending' : 'Overall ' + pct + ' percent'}>
-   <circle cx="21" cy="21" r="15.915" fill="none" stroke="#E5EDF2" strokeWidth="2.4" />
-   <circle cx="21" cy="21" r="15.915" fill="none" stroke="var(--accent)" strokeWidth="2.4" strokeDasharray={(pct ?? 0) + ' ' + (100 - (pct ?? 0))} strokeDashoffset="25" />
-   <text x="21" y="20" textAnchor="middle" className="premium-donut-value">{pct === null ? '—' : pct + '%'}</text>
-   <text x="21" y="25" textAnchor="middle" className="premium-donut-label">{pct === null ? 'PENDING' : 'OVERALL'}</text>
+  <svg className="premium-donut" viewBox="0 0 36 36" role="img" aria-label={pct === null ? 'Marks pending' : 'Overall ' + pct + ' percent'}>
+   <path className="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#E5EDF2" strokeWidth="3" />
+   <path className="circle" strokeDasharray={strokeDash} d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke={pct === null ? '#94A3B8' : 'var(--accent)'} strokeWidth="3.4" strokeLinecap="round" />
+   <text x="18" y="18" textAnchor="middle" className="premium-donut-value">{pct === null ? '—' : pct + '%'}</text>
+   <text x="18" y="23" textAnchor="middle" className="premium-donut-label">{pct === null ? 'PENDING' : 'OVERALL'}</text>
   </svg>
-  <div className="premium-chart-caption">{data.result.pendingCount ? `${data.result.pendingCount} subject(s) pending · ` : ''}{data.result.obtainedMarks} / {data.result.totalMarks} verified marks</div>
+  <div className="premium-chart-caption">{data.result.pendingCount ? `${data.result.pendingCount} subject(s) pending · ` : ''}<b>{data.result.obtainedMarks}</b> / {data.result.totalMarks} verified marks</div>
  </div>
 }
 function PremiumInsights({ data, reverse = false }) {

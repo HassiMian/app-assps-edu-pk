@@ -68,3 +68,17 @@
 
 .result-premium-shell .premium-printer-guide { padding:9px 10px; margin:7px 0; border-radius:7px; border:1px solid #C9DDE8; background:#F4FAFD; color:#28556A; font-size:11px; line-height:1.55; }
 .result-premium-shell .premium-printer-guide strong { color:#153F58; }
+
+/* Signature & Donut Chart Alignment */
+.result-card-a4 .premium-donut { display:block; width:33mm; height:33mm; margin:0 auto; max-width:100%; }
+.result-card-a4 .premium-donut-value { font-size:6.5px; font-weight:800; fill:#223E53; }
+.result-card-a4 .premium-donut-label { font-size:2.8px; fill:#718494; font-weight:700; }
+.result-card-a4 .premium-chart-caption { font-size:6.8pt; color:#607484; margin:1mm auto 0; text-align:center; }
+.result-card-a4 .circle-bg { stroke:#E5EDF2; }
+.result-card-a4 .circle { transition:stroke-dasharray 0.3s ease; }
+.result-card-a4 .rc-signatures span { border-top:none !important; }
+.result-card-a4 .rc-sig-block { min-width:36mm; display:flex; flex-direction:column; align-items:center; }
+.result-card-a4 .rc-sig-space { height:42px; display:flex; align-items:flex-end; justify-content:center; margin-bottom:-2px; }
+.result-card-a4 .rc-sig-img { max-height:40px; max-width:125px; object-fit:contain; mix-blend-mode:multiply; display:block; }
+.result-card-a4 .rc-sig-line { width:130px; border-top:1.2px solid var(--navy); margin-bottom:2mm; }
+.result-card-a4 .rc-sig-label { font-size:8pt; font-weight:700; color:var(--navy); text-align:center; }

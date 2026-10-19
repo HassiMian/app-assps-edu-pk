@@ -219,9 +219,9 @@ export function ResultStudentInfoBlock({ data }) {
  ['Father Name', student.fatherName],
  ['Class/Section', `${student.className}${student.section && student.section !== '-' ? ` / ${student.section}` : ''}`],
  ['Roll No', student.rollNo],
+ ['Position in Class', result.position || student.position || '—'],
  ['School Year', result.session],
  ['Term', result.term],
- ['Teacher Name', result.classTeacher],
  ['Date', result.issueDate],
  ]
  return (
@@ -320,14 +320,18 @@ export function ResultSignatureFooter({ data }) {
  </div>
  )}
  <div className="rc-signatures">
- <span>Teacher Signature</span>
- <span style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:0 }}>
- <div style={{ height:42, display:'flex', alignItems:'flex-end', justifyContent:'center', paddingBottom:2 }}>
- {sigImg && <img src={sigImg} alt="Principal Signature" style={{ height:40, maxWidth:130, objectFit:'contain', mixBlendMode:'multiply' }} />}
- </div>
- <div style={{ width:130, height:0, borderTop:'1.5px solid var(--navy)', marginBottom:3 }} />
- Principal Signature
- </span>
+  <div className="rc-sig-block">
+   <div className="rc-sig-space" />
+   <div className="rc-sig-line" />
+   <span className="rc-sig-label">Teacher Signature</span>
+  </div>
+  <div className="rc-sig-block">
+   <div className="rc-sig-space">
+    {sigImg && <img src={sigImg} alt="Principal Signature" className="rc-sig-img" style={{ maxHeight:40, maxWidth:125, objectFit:'contain', mixBlendMode:'multiply', display:'block' }} />}
+   </div>
+   <div className="rc-sig-line" />
+   <span className="rc-sig-label">Principal Signature</span>
+  </div>
  </div>
  <p>{school.address}{school.phone ? ` | ${school.phone}` : ''}{school.email ? ` | ${school.email}` : ''}</p>
  </div>
@@ -554,8 +558,13 @@ export const resultCardPrintCss = `
  .rc-chart-legend { display: flex; justify-content: space-between; gap: 2mm; font-size: 6.5pt; color: #667085; margin-top: 1mm; }
  .rc-footer { position: relative; z-index: 2; margin-top: auto; flex: 0 0 auto; }
  .rc-attendance { display: flex; gap: 7mm; color: var(--navy); font-size: 8pt; margin-bottom: 9mm; }
- .rc-signatures { display: flex; justify-content: space-between; align-items: flex-end; gap: 20mm; margin-bottom: 5mm; padding: 0 10mm; }
- .rc-signatures span { min-width: 34mm; border-top: 1px solid var(--navy); padding-top: 2mm; text-align: center; color: var(--navy); font-size: 8pt; font-weight: 700; }
+ .rc-signatures { display: flex; justify-content: space-between; align-items: flex-end; gap: 20mm; margin-bottom: 4mm; padding: 0 10mm; }
+ .rc-signatures span { min-width: 34mm; text-align: center; color: var(--navy); font-size: 8pt; font-weight: 700; }
+ .rc-sig-block { min-width: 36mm; display: flex; flex-direction: column; align-items: center; }
+ .rc-sig-space { height: 42px; display: flex; align-items: flex-end; justify-content: center; margin-bottom: -2px; }
+ .rc-sig-img { max-height: 40px; max-width: 125px; object-fit: contain; mix-blend-mode: multiply; display: block; }
+ .rc-sig-line { width: 130px; border-top: 1.2px solid var(--navy); margin-bottom: 2mm; }
+ .rc-sig-label { font-size: 8pt; font-weight: 700; color: var(--navy); text-align: center; }
  .rc-footer p { margin: 0; text-align: center; color: #667085; font-size: 7pt; border-top: 4mm solid #D9DEE8; padding-top: 2mm; }
  .curve.top { position:absolute; left:-20mm; top:-35mm; width:150mm; height:70mm; background:linear-gradient(135deg,#374151,#2D9CDB); border-radius:0 0 90% 0; z-index:0; }
  .curve.side { position:absolute; left:-45mm; top:18mm; width:80mm; height:90mm; border-radius:50%; border:12mm solid #2D9CDB; z-index:0; }
