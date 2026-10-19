@@ -22,3 +22,6 @@ Status: IN EXECUTION; preservation guard active; NOT production-release approval
 
 ## Mandatory each-cycle guard
 Re-observe exact active Nginx and PM2 source SHA -> backup and restore checks -> First Term immutable guard PASS -> isolated source and tests -> signed actor & approval gate -> verified cutover -> live smoke & rollback -> source-backed report to central GitHub Issue #4. This isolated audit branch does not replace the canonical release branch.
+
+## Source-attested production fence — additional completed code checkpoint
+Read-only gate at ops/release/firstterm/verify_live_artifact_fence.py checks the actual Nginx root against index SHA, release attestation SHA, and locally known Git commit object. It refuses missing metadata, ambiguous roots and unknown commits. Six synthetic tests pass. On current active production it correctly exits 2 with HOLD: served index hash 3c74d3be... differs from attested 8fdadfe4..., and claimed Git candidate 575438b8... is not present in local canonical repository. Even a future PASS only demonstrates metadata consistency plus a known Git object, not full reproducible artifact build or independent runtime authentication. This source-only gate does not alter Nginx, DB, PM2 or production artifacts.
