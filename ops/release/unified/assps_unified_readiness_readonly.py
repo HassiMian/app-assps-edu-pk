@@ -6,6 +6,7 @@ from pathlib import Path
 import re
 import subprocess
 import verify_backend_source_preservation_readonly as backend_preservation
+import assps_attendance_coverage_readonly as attendance_coverage
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 
@@ -169,6 +170,22 @@ def inspect_frontend():
             'sidecar_claimed_commit':sidecar.get('candidate_commit',''),
             'active_root':str(ACTIVE_ROOT)}
 
+def inspect_attendance_coverage():
+    # Read-only roster and saved-day status. Missing attendance is NOT guessed.
+    result=run(['runuser','-u','postgres','--','psql','-p','5432','-d','apexos',
+                '-X','-Atq','-v','ON_ERROR_STOP=1'],
+               timeout=15,input_data=attendance_coverage.SQL)
+    if result.returncode:
+        raise RuntimeError('Attendance coverage read-only query failed')
+    coverage=attendance_coverage.parse(result.stdout)
+    return {'pass':True,'date_pakistan':coverage['date_pakistan'],
+            'active_students':coverage['total_active'],
+            'marked_students':coverage['total_marked'],
+            'newly_registered_unmarked':coverage['newly_registered_unmarked_total'],
+            'previously_registered_unmarked':coverage['previously_registered_unmarked_total'],
+            'zero_saved_class_alerts':coverage['zero_saved_class_alerts'],
+            'attendance_not_fabricated':True}
+
 def inspect_backend_preservation():
     inventory=backend_preservation.compare(
         backend_preservation.LIVE,backend_preservation.CANDIDATE)
@@ -229,7 +246,7 @@ def inspect_http():
 def classify(evidence):
     required=('database','backup','frontend','rollback','http',
               'restricted_catalog_and_firstterm','source_privacy_inventory',
-              'backend_source_inventory')
+              'backend_source_inventory','attendance_roster_coverage')
     checks={k:(isinstance(evidence.get(k),dict) and evidence[k].get('pass') is True)
             for k in required}
     infrastructure=all(checks.values())
@@ -251,6 +268,7 @@ def main():
         'database':inspect_database,'backup':inspect_backup,'frontend':inspect_frontend,
         'rollback':inspect_rollback,'source_privacy_inventory':inspect_source_privacy,
         'backend_source_inventory':inspect_backend_preservation,
+        'attendance_roster_coverage':inspect_attendance_coverage,
         'restricted_catalog_and_firstterm':inspect_signed_and_history,
         'http':inspect_http,
     }

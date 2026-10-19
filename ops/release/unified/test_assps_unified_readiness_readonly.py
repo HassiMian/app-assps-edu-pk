@@ -9,7 +9,7 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
     def fixture(self):
         return {x:{'pass':True} for x in (
             'database','backup','frontend','rollback','http','restricted_catalog_and_firstterm',
-            'source_privacy_inventory','backend_source_inventory')}
+            'source_privacy_inventory','backend_source_inventory','attendance_roster_coverage')}
     def test_every_operational_check_passes_but_unapproved_signoff_remains_hold(self):
         e=self.fixture()
         e['frontend']['sidecar_matches']=True
@@ -80,6 +80,10 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
         wrong['exam9_firstterm_rows']=1854
         self.assertFalse(gate.compatible_aggregates(wrong))
 
+    def test_missing_attendance_coverage_evidence_fails_operational_gate(self):
+        e=self.fixture()
+        e.pop('attendance_roster_coverage')
+        self.assertFalse(gate.classify(e)['operational_checks_pass'])
     def test_missing_backend_evidence_fails_operational_gate(self):
         e=self.fixture()
         e.pop('backend_source_inventory')
