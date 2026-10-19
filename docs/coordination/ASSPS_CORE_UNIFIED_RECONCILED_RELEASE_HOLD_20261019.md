@@ -31,3 +31,8 @@
 5. Prepare independent frontend/backend rollback proof, then release; current Nginx timetable write 403 cannot be removed until replacement endpoint is actually safe and live.
 
 Verdict SOURCE_CANDIDATE_QA_PASS / PRODUCTION_RELEASE_HOLD.
+
+## Fresh cross-actor production drift discovered at 06:49 PKT
+- PM2 apex-backend process changed from previous PID 912978 (restart count 24) to PID 986335 (restart count 25), start timestamp 2026-10-19 01:43:16 UTC. This reconciler did NOT initiate a production PM2 restart or Nginx reload. The actor/reason cannot be certified from PM2 uptime alone.
+- Fresh live SHA256 for src/server.js remains ab428a5842ea9c3313f5978087ef350d2d2858df5e082153e469f3e44bfe3144, timetableRoutes.js remains 4142fc54c39eec39e5fea470d452d6efdf54c862d14b4d2292d18bb7538457ce, brandingRoutes.js remains 394f2534e601adfacc67309f66d851de6d99c30982352c7d224b7bb68167c075, lessonPlanRoutes.js remains 870de5e583fa3ef75744c11a28ab9facf30ae8e9a1d9d805653ad2dd6d6978e2, served frontend index remains 8216276411fce912309767361e0f23e8a445106aa3b5eefe629c3ed0fceb2958. No source artifact hash difference was observed after this independent restart.
+- Live API health still HTTP200; branding still 404; emergency protected timetable POST still HTTP403. Backend process restart is neither proof of our new code deployment nor proof of zero-downtime, and needs independent coordination with current runtime owner.
