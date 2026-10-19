@@ -88,7 +88,6 @@ const MENU_GROUPS = [
  {
  label: 'OPERATIONS',
  items: [
- { icon: FileText, label: 'Notices & Circulars', path: '/school-documents', color: '#4ED7C2', roles: ROLE_SETS.academicStaff, permKey: 'school_documents' },
  { icon: Book, label: 'Library', path: '/library', color: '#FF9F0A', roles: ROLE_SETS.schoolStaff, permKey: 'library' },
  { icon: Bus, label: 'Transport', path: '/transport', color: '#0A84FF', roles: ROLE_SETS.adminOffice, permKey: 'transport' },
  { icon: Wallet, label: 'Expenses', path: '/expenses', color: '#FF375F', roles: ROLE_SETS.adminOffice, permKey: 'expenses' },
@@ -108,6 +107,7 @@ const MENU_GROUPS = [
  { label: 'Student Portal', path: '/student-portal', roles: ROLE_SETS.learner },
  ]},
  { icon: IdCard, label: 'Identity Studio', path: '/cards', color: '#BF5AF2', roles: ROLE_SETS.schoolStaff, permKey: 'cards' },
+      { icon: FileText, label: 'Notice & Document Studio', path: '/school-documents', color: '#38BDF8', roles: ROLE_SETS.schoolStaff, permKey: 'notices' },
  ],
  },
  {
@@ -215,7 +215,7 @@ function Sidebar({ collapsed, setCollapsed, isHovered, setIsHovered }) {
  .map(item => item.label)
 
  if (!activeParents.length) return
- setOpen(prev => Array.from(new Set([...prev, ...activeParents])))
+ queueMicrotask(() => setOpen(prev => Array.from(new Set([...prev, ...activeParents]))))
  // eslint-disable-next-line react-hooks/exhaustive-deps
  }, [location.pathname, location.search])
 
