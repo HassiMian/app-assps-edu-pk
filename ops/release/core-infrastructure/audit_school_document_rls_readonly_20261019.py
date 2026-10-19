@@ -20,7 +20,12 @@ SELECT COALESCE(json_agg(json_build_object(
        AND p.qual LIKE '%app.rls_enabled%'
        AND p.qual LIKE '%IS DISTINCT FROM%'
        ) FROM pg_policies p WHERE p.schemaname='public'
-       AND p.tablename=c.relname AND p.policyname LIKE '%tenant_fallback'),false)
+       AND p.tablename=c.relname AND p.policyname LIKE '%tenant_fallback'),false),
+  'app_runtime_policy_unscoped_flag', COALESCE((SELECT bool_or(
+       p.permissive='PERMISSIVE' AND 'apex_app_runtime'=ANY(p.roles)
+       AND p.qual LIKE '%app.tenant_id%' AND p.qual NOT LIKE '%app.rls_enabled%'
+       ) FROM pg_policies p WHERE p.schemaname='public'
+       AND p.tablename=c.relname AND p.policyname LIKE '%_app_runtime'),false)
   )), '[]'::json)::text
 FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace
 WHERE n.nspname='public' AND c.relkind='r'
@@ -42,6 +47,8 @@ def verdict(rows):
         if (r.get("app_can_select") and r.get("fallback_public")
                 and r.get("fallback_missing_flag_allows")):
             risks.append(name + ":UNSCOPED_APP_RUNTIME_FALLBACK")
+        if r.get("app_can_select") and r.get("app_runtime_policy_unscoped_flag"):
+            risks.append(name + ":APP_RUNTIME_POLICY_OMITS_RLS_CONTEXT")
     return {"status": "HOLD" if risks else "CATALOG_PASS_NOT_RELEASE",
             "risks": risks, "readOnly": True, "releaseAuthorized": False,
             "realTenantDenialCertified": False}

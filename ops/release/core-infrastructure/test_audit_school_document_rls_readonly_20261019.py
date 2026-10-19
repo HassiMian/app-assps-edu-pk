@@ -10,7 +10,8 @@ spec.loader.exec_module(module)
 def row(name, **kw):
     return {"table": name, "forced": True, "enabled": True,
             "app_can_select": True, "fallback_public": True,
-            "fallback_missing_flag_allows": False, **kw}
+            "fallback_missing_flag_allows": False,
+            "app_runtime_policy_unscoped_flag": False, **kw}
 
 def good():
     return [row(name) for name in sorted(module.EXPECTED)]
@@ -46,6 +47,12 @@ class CatalogAudit(unittest.TestCase):
             item["fallback_missing_flag_allows"] = True
             item["app_can_select"] = False
         self.assertEqual(module.verdict(rows)["status"], "CATALOG_PASS_NOT_RELEASE")
+
+    def test_app_runtime_policy_without_rls_flag_fails_closed(self):
+        rows = good()
+        rows[0]["app_runtime_policy_unscoped_flag"] = True
+        self.assertTrue(any("APP_RUNTIME_POLICY_OMITS_RLS_CONTEXT" in risk
+                            for risk in module.verdict(rows)["risks"]))
 
     def test_malformed_catalog_fails_closed(self):
         self.assertEqual(module.verdict(None)["status"], "HOLD")
