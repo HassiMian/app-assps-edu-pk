@@ -49,7 +49,7 @@ Protected Result Cards ─────────┴── Future-term Results 
 
 ### Phase 0 — historical foundation and exact live inventory (already in operation)
 **Inputs:** live PostgreSQL apexos, previous signed backups and restore receipts, actual Nginx/PM2 and Git worktrees.
-- Run read-only two-pass protected baseline verifier before and after any proposed change. Previous verified Exam9=1,853 results, 224 numeric zeros, 0 NULL; Exam8=1 row; total exam_results=1,854. Current students=326; school1 official teacher-class assignments=54; 3 saved lesson plans (0 shared at earlier scope).
+- Run read-only two-pass protected baseline verifier before and after any proposed change. Verified School1 Exam9=1,853 First Term results, 224 numeric zeros, 0 NULL; separate School2 Demo Exam8=1 row; total exam_results=1,854. School2 Demo is NOT First Term. Current students=326; school1 official teacher-class assignments=54; 3 saved lesson plans (0 shared at earlier scope).
 - Retain one-time original rows/metadata SHA manifest mode0600; hourly fail-closed scheduled read-only monitor; fresh PostgreSQL full custom archive and its SHA. Protect all student and historical paper rows separately with snapshot-before-release.
 - Reconcile existing latest critical backup manifests, encrypted off-host archives and BOTH PG cluster restores, with isolated restore compared to source SHA and counts. Same-host restore is NOT an off-host restore.
 **Acceptance:** historical before/after exact SHA PASS; all relevant backup artefacts readable; named zero/NULL invariants; retention manifest cannot be reset; no destructive SQL.
@@ -122,7 +122,7 @@ Only mark **FULL SYSTEM VERIFIED / PRODUCTION READY** when no critical unverifie
 
 | Risk | Exposure | Required prevention / containment |
 |---|---|---|
-| First Term loss or true zero→blank | Irrecoverable school record corruption | immutable baseline + refusal triggers staged + two backups + pre/post SHA |
+| First Term loss or true zero→blank | Irrecoverable school record corruption | immutable baseline + FOUR LIVE Exam9-only Core triggers + two backups + pre/post SHA |
 | Unattested live frontend/backend | Hidden older assets/modified routes | source-reproducible entry and asset graph, immutable release and anti-reversal guard |
 | Unverified signed actor and RLS | Student data across tenants/teachers | per-request signed context, FORCE RLS, real actor/School2 negative tests |
 | Timetable unsafe DELETE/INSERT | Loss of 405 historical slots | keep 403 until scoped SQL transaction and optimistic concurrency |
@@ -140,6 +140,6 @@ Only mark **FULL SYSTEM VERIFIED / PRODUCTION READY** when no critical unverifie
 - Source: GitHub Issue #4 latest Core candidate `fix/core-live-timetable-guard-reconcile-20261019@04b3d53aff1a54710ac95761ddea0b2bb28679d1` (source-only) and separate protected audit branch `audit/assps-firstterm-historical-retention-20261019@2aefdfae8ba76a6d2c1be14a1ca7f925c26efd05`; their features must be reconciled, never deploy the old audit base itself.
 - Nginx root `/var/www/assps-resultcard-nazra-purged-20261019`, active `index.html` SHA `3c74d3be652b41549ef2129eaacec4c341c05c2118597e308edffd17a33726a9`. Sidecar previous SHA `8fdadfe4…` mismatches. Core agent independently reproduced newer live-frontend build 98/98 against `3f7fbfa4…`; signed integrated release still HOLD.
 - Website, login, public branding, api root and api health HTTP200. Anonymous public principal signature HTTP403 and no-store; same file preserved privately. Timetable legacy unsafe save intentionally 403. Current PM2 backend and Connect online.
-- Physical students 326, exam results 1,854, true zeros 224, 0 NULL, First Term Exam9=1,853, Exam8=1. Lesson plans School1=3, authorized teacher mappings School1=54. The real First Term SHA guard PASS; roll-back --check PASS. Critical backup `/var/backups/assps-critical-20261019T154045Z` exists, newer source comments assert 4/4 SHA PASS.
+- Physical students 326, exam results 1,854, true zeros 224, 0 NULL, First Term School1 Exam9=1,853, School2 Demo Exam8=1; Core Exam9-only triggers active. Lesson plans School1=3, authorized teacher mappings School1=54. The real First Term SHA guard PASS; roll-back --check PASS. Critical backup `/var/backups/assps-critical-20261019T154045Z` exists, newer source comments assert 4/4 SHA PASS.
 - Published privacy/First Term/reproducible-build evidence total 30/30 targeted tests (6 historical + 6 release-sidecar + 4 privacy + 6 reproducible-asset synthetic + 8 genuine disposable-PG negative). Historic exact Vite source at 575438b8 rebuilt to claimed sidecar SHA, but current entry differs. Existing production-safety check PASS; **no unified release certification**.
 - Academic Issues #1, Paper Studio #2/#3 open. Genuine independent school-role acceptance, expert review, independent offhost restore, actual physical Ricoh Urdu print remain unverified.
