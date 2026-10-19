@@ -4,7 +4,7 @@ const assert = require('node:assert/strict')
 const fs = require('node:fs')
 const path = require('node:path')
 const source = fs.readFileSync(path.join(__dirname, '../config/database.js'), 'utf8')
-const { EXPECTED, signedCatalogComplete, additionalPolicySql } = require('../config/signedRlsCatalogGuard')
+const { EXPECTED, signedCatalogComplete, additionalPolicySql, documentPolicySql } = require('../config/signedRlsCatalogGuard')
 
 function signedRuntimeGate() {
   const start = source.indexOf('if (signedTenantGate) {', source.indexOf('async function connectForContext'))
@@ -14,10 +14,10 @@ function signedRuntimeGate() {
 }
 
 const verified = Object.freeze({
-  forced: 82, enabled: 82, signed: 77, signed_school: 73, signed_tenant: 4,
+  forced: 85, enabled: 85, signed: 77, signed_school: 73, signed_tenant: 4,
 })
 
-test('production signed runtime must verify all 82 FORCE+ENABLE tables before preparing tenant session', () => {
+test('production signed runtime must verify all 85 FORCE+ENABLE tables before preparing tenant session', () => {
   const gate = signedRuntimeGate()
   for (const marker of [
     'c.relforcerowsecurity', 'c.relrowsecurity',
@@ -25,27 +25,27 @@ test('production signed runtime must verify all 82 FORCE+ENABLE tables before pr
     '$1::name=ANY(p.roles)', "c.relname <> 'student_class_movement_audit'",
     'AS signed_school', 'AS signed_tenant', 'p.qual=p.with_check',
     'DB_SIGNED_RLS_CATALOG_INCOMPLETE',
-    'signedCatalogComplete(state, additional.rows[0])',
+    'signedCatalogComplete(state, additional.rows[0], documents.rows[0])',
   ]) assert.ok(gate.includes(marker), `required signed RLS gate: ${marker}`)
   assert.match(gate, /const additional = await client\.query\(additionalPolicySql\)/)
   assert.match(gate, /`\s*, \[configuredRuntimeRole\(\)\]\)/)
   assert.match(source.slice(source.indexOf('async function connectForContext')), /await client\.release\(error\)/)
 })
 
-test('fail-closed signed helper expects precisely 82 FORCE, original 77 guard bindings, and five academic policies', () => {
-  assert.deepEqual({ ...EXPECTED }, { ...verified, approved_additional: 5 })
-  assert.equal(signedCatalogComplete(verified, { approved_additional: 5 }), true)
+test('fail-closed signed helper expects precisely 85 FORCE, original 77 guard bindings, and five academic policies', () => {
+  assert.deepEqual({ ...EXPECTED }, { ...verified, approved_additional: 5, verified_documents: 3 })
+  assert.equal(signedCatalogComplete(verified, { approved_additional: 5 }, { verified_documents: 3 }), true)
   for (const [field, count] of Object.entries(verified)) {
     for (const wrong of [count - 1, count + 1, String(count), false, null, undefined]) {
-      assert.equal(signedCatalogComplete({ ...verified, [field]: wrong }, { approved_additional: 5 }), false,
+      assert.equal(signedCatalogComplete({ ...verified, [field]: wrong }, { approved_additional: 5 }, { verified_documents: 3 }), false,
         `must reject wrong ${field}=${String(wrong)}`)
     }
   }
   for (const bad of [4, 6, '5', false, null, undefined]) {
-    assert.equal(signedCatalogComplete(verified, { approved_additional: bad }), false)
+    assert.equal(signedCatalogComplete(verified, { approved_additional: bad }, { verified_documents: 3 }), false)
   }
-  assert.equal(signedCatalogComplete(null, { approved_additional: 5 }), false)
-  assert.equal(signedCatalogComplete(verified, null), false)
+  assert.equal(signedCatalogComplete(null, { approved_additional: 5 }, { verified_documents: 3 }), false)
+  assert.equal(signedCatalogComplete(verified, null, { verified_documents: 3 }), false)
 })
 
 test('five separately FORCE-protected academic policies require exact predicates and no extra policy', () => {
@@ -72,4 +72,13 @@ test('signed-school and signed-tenant policy predicates remain independently exa
     'core_security.signed_tenant_key_allowed((tenant_id)::text)',
     'AS signed_school', 'AS signed_tenant',
   ]) assert.ok(gate.includes(marker), `signed-policy scope drift: ${marker}`)
+})
+
+test('document restrictive policy gate is non-optional and binds 85 catalog',()=>{
+ assert.equal(EXPECTED.forced,85)
+ assert.equal(EXPECTED.signed,77)
+ assert.equal(EXPECTED.verified_documents,3)
+ for(const table of ['school_documents','school_document_events','school_document_revisions'])
+  assert.ok(documentPolicySql.includes(table))
+ assert.equal(signedCatalogComplete(verified,{approved_additional:5},{verified_documents:2}),false)
 })

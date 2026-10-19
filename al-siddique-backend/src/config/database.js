@@ -111,7 +111,7 @@ if (paperRestrictedMode && (
   err.code = 'PAPER_RESTRICTED_CORE_SIGNED_DEPENDENCIES_REQUIRED'
   throw err
 }
-const { signedCatalogComplete, additionalPolicySql } = require('./signedRlsCatalogGuard')
+const { signedCatalogComplete, additionalPolicySql, documentPolicySql } = require('./signedRlsCatalogGuard')
 const paperRestrictedRole = 'apex_paper_runtime'
 const restrictedPaperPool = paperRestrictedMode ? (() => {
   const user = String(process.env.PAPER_RESTRICTED_DB_USER || '').trim()
@@ -359,9 +359,10 @@ async function connectForContext() {
       // Keep all 77 original restrictive policies, and independently verify
       // each of the five additional force-RLS academic approval tables.
       const additional = await client.query(additionalPolicySql)
+      const documents = await client.query(documentPolicySql)
       const state = gate.rows[0]
-      if (!signedCatalogComplete(state, additional.rows[0])) {
-        const error = new Error('Signed tenant RLS requires 82 forced tables: 77 core restrictive and five additional protected policies')
+      if (!signedCatalogComplete(state, additional.rows[0], documents.rows[0])) {
+        const error = new Error('Signed tenant RLS requires 85 FORCE tables: 77 signed core, 5 approved academic and 3 attested document relations')
         error.code = 'DB_SIGNED_RLS_CATALOG_INCOMPLETE'
         throw error
       }
