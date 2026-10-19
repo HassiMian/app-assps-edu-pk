@@ -1,0 +1,8 @@
+# ASSPS P0 privacy control, exact server{} insertion only.
+# Protected source record; not a standalone entire Nginx configuration.
+# Original Principal signature file preserved. Never expose it anonymously.
+# Future result-card printing requires authenticated, tenant- and document-scoped delivery.
+location = /principal-signature.png {
+    add_header Cache-Control "no-store" always;
+    return 403;
+}
