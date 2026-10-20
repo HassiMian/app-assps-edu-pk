@@ -244,3 +244,35 @@ pretend Ricoh print results. Missing evidence is an explicit release HOLD.
 7. Evidence receipts are root-private by default; never publish school images,
    private logs, tokens, user identities, secrets or protected media to public
    Git history.
+
+
+### 20-Oct continuation: storage headroom and timetable room snapshot parity
+
+All of this work remains inside the original, single unified release mission.
+The audited VPS root filesystem has roughly 7.67 GiB / 8.0% space available.
+A read-only storage check now includes `/`, `/var/backups`, and
+`/var/lib/postgresql` in the unified fence. The engineering minimum for a
+release rehearsal is 12 GiB and 12% free; this is a conservative staging
+threshold, not a guarantee that an off-host dual-cluster restore can succeed.
+Currently this introduces an explicit capacity HOLD; no backups, databases,
+source worktrees or project files were deleted or rotated to manipulate it.
+
+The live timetable backend now has an additional optimistic snapshot contract
+binding `room` in both read queries, input validation and SHA256 digest.
+The isolated audit candidate forward-ported exactly this contract, without
+changing live state. Candidate room is no longer silently defaulted to an
+empty value, and tests verify that changed room invalidates stale snapshots.
+This brings two live-source conflict paths to byte-for-byte parity in the audit
+worktree (18 canonical candidate differences vs 16 audit-worktree differences),
+while leaving 171 independently-owned live-only paths untouched. The canonical
+unified release candidate and active production are not altered by this work.
+
+Controlled source tests executed: 85 hermetic Python release gate tests,
+36 simulated timetable/lesson unit+HTTP tests, 31 synthetic identity and
+examination tests, and 23 Paper Studio/Diary/attendance/examination contract
+tests, all passing (175 individual test cases). These tests are not genuine
+Principal/Teacher/School2 signed browser acceptance, witnessed Ricoh printing,
+independent editorial approvals or an off-host decrypted restore. The release
+remains HOLD, with 15 reported gates including capacity, provenance and the
+previously unverified external acceptances. Existing Exam 9/First Term remains
+immutable at 1,853 results with 224 genuine zeros and zero NULL marks.
