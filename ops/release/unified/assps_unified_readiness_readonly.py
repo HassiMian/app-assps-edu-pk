@@ -13,6 +13,7 @@ import assps_attendance_coverage_readonly as attendance_coverage
 import assps_fee_ledger_integrity_readonly as fee_integrity
 import assps_storage_headroom_readonly as disk_headroom
 import verify_timetable_collision_scope_readonly as timetable_collision
+import verify_lesson_coverage_readonly as lesson_coverage
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 
@@ -276,7 +277,7 @@ def classify(evidence):
               'restricted_catalog_and_firstterm','source_privacy_inventory',
               'backend_source_inventory','attendance_roster_coverage','fee_ledger_integrity',
               'frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity',
-              'storage_headroom','timetable_collision_scope')
+              'storage_headroom','timetable_collision_scope','lesson_coverage')
     checks={k:(isinstance(evidence.get(k),dict) and evidence[k].get('pass') is True)
             for k in required}
     infrastructure=all(checks.values())
@@ -297,7 +298,8 @@ def classify(evidence):
         holds.insert(0,'active_timetable_teacher_identity_null_for_approved_grants')
     if evidence.get('academic_delivery_integrity',{}).get('teaching_sections_complete') is not True:
         holds.insert(0,'unscoped_pre_nine_timetable_sections_require_reconciliation')
-    if evidence.get('academic_delivery_integrity',{}).get('lesson_coverage_certified') is not True:
+    if (evidence.get('academic_delivery_integrity',{}).get('lesson_coverage_certified') is not True
+        or evidence.get('lesson_coverage',{}).get('lesson_coverage_certified') is not True):
         holds.insert(0,'lesson_planning_academic_publication_and_coverage_not_certified')
     if evidence.get('attendance_roster_coverage',{}).get('possible_post_close_full_roster_unsaved') is True:
         holds.insert(0,'current_schoolday_full_attendance_roster_unsaved_after_close_requires_investigation')
@@ -321,6 +323,7 @@ def main():
         'academic_delivery_integrity':academic_integrity.inspect,
         'storage_headroom':disk_headroom.inspect,
         'timetable_collision_scope':timetable_collision.inspect,
+        'lesson_coverage':lesson_coverage.inspect,
         'attendance_roster_coverage':inspect_attendance_coverage,
         'fee_ledger_integrity':inspect_fees_ledger,
         'restricted_catalog_and_firstterm':inspect_signed_and_history,

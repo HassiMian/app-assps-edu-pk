@@ -10,7 +10,7 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
         return {x:{'pass':True} for x in (
             'database','backup','frontend','rollback','http','restricted_catalog_and_firstterm',
             'source_privacy_inventory','backend_source_inventory','attendance_roster_coverage',
-            'fee_ledger_integrity','frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity','storage_headroom','timetable_collision_scope')}
+            'fee_ledger_integrity','frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity','storage_headroom','timetable_collision_scope','lesson_coverage')}
     def test_every_operational_check_passes_but_unapproved_signoff_remains_hold(self):
         e=self.fixture()
         e['frontend']['sidecar_matches']=True
@@ -60,6 +60,17 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
         verdict=gate.classify(e)
         self.assertIn('current_schoolday_full_attendance_roster_unsaved_after_close_requires_investigation',verdict['unresolved_release_gates'])
         self.assertTrue(verdict['operational_checks_pass'])
+
+    def test_missing_lesson_coverage_evidence_fails_operational_gate(self):
+        e=self.fixture()
+        e.pop('lesson_coverage')
+        self.assertFalse(gate.classify(e)['operational_checks_pass'])
+    def test_unapproved_lesson_scope_stays_release_hold(self):
+        e=self.fixture()
+        e['lesson_coverage']['lesson_coverage_certified']=False
+        e['academic_delivery_integrity']['lesson_coverage_certified']=True
+        self.assertIn('lesson_planning_academic_publication_and_coverage_not_certified',
+                      gate.classify(e)['unresolved_release_gates'])
 
     def test_missing_teacher_occupancy_evidence_stays_hold(self):
         e=self.fixture()

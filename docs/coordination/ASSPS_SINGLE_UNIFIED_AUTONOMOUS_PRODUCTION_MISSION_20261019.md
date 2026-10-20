@@ -327,3 +327,28 @@ original 100% batch write/persist-or-rollback invariant remains unchanged.
 Source regression tests were added; this is **candidate-only** code and is
 not evidence of a live school staff attendance login or successful attendance
 save. The existing School1 First Term result records are protected exactly.
+
+### 20-Oct lesson-plan coverage reconciliation — exact metadata without invented approvals
+
+A new independent read-only coverage checker
+`ops/release/unified/verify_lesson_coverage_readonly.py` compares all active
+School1 `timetable_verified_20261019` teacher/class/section/subject grants
+against the actual `lesson_plans` metadata. Live state on 20 October:
+
+- **54 distinct authorized active class/section/subject groups** are verified.
+- **3 existing school-wide lesson-plan rows**, **0 sent-to-portal**.
+- **1 directly exact-matched class+subject candidate** (Class Five / Social
+  Studies); **53 mappings have no direct exact-matched lesson-plan metadata**.
+- **2 plan headings have no directly matching approved class+subject tuple**;
+  broad labels such as Primary/Urdu-General and different subject languages
+  require explicit academic reconciliation, NOT automatic publication.
+
+The lesson-plan table lacks a section identity; even direct metadata matches
+cannot certify per-section curriculum, syllabus pages, exercises, named
+teacher acceptance, signed academic authority, or plan publication.
+The new evidence is integrated into the ONE unified fail-closed release gate.
+Missing coverage inspection fails operational preflight; the existing lesson
+publication/content-approval HOLD continues. These counts describe only
+metadata, not the true number of approved teaching lessons. Neither the
+existing three plans nor 54 teacher permissions were modified, and no grade
+IX/X provisional question-bank drafts were promoted or inferred as approved.
