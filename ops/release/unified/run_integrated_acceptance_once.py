@@ -94,6 +94,18 @@ def record_receipt(record):
     PRIVATE_RECEIPTS.mkdir(mode=0o700, parents=True, exist_ok=True)
     os.chmod(PRIVATE_RECEIPTS, 0o700)
     payload = (json.dumps(record, indent=2, sort_keys=True) + '\n').encode()
+    digest = hashlib.sha256(payload).hexdigest()
+    immutable = PRIVATE_RECEIPTS / ('integrated-' + digest + '.json')
+    # Every run retains an immutable, unique private receipt; latest is only an index.
+    if immutable.exists():
+        if immutable.read_bytes() != payload:
+            raise RuntimeError('Immutable receipt digest mismatch')
+    else:
+        with immutable.open('xb') as stream:
+            stream.write(payload)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.chmod(immutable, 0o600)
     fd, tmp = tempfile.mkstemp(dir=PRIVATE_RECEIPTS, prefix='.integrated-')
     try:
         with os.fdopen(fd, 'wb') as stream:

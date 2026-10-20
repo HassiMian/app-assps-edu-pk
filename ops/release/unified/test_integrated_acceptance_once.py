@@ -1,5 +1,9 @@
 """Hermetic policy tests for the single non-deploying ASSPS acceptance runner."""
 import unittest
+import tempfile
+from pathlib import Path
+from unittest.mock import patch
+import run_integrated_acceptance_once as runner
 from run_integrated_acceptance_once import node_summary, suite_success, BROWSER_TESTS, CORE_TESTS, INTEGRATION_TESTS
 
 class OneRunAcceptanceContract(unittest.TestCase):
@@ -21,6 +25,17 @@ class OneRunAcceptanceContract(unittest.TestCase):
             self.assertIn('.test.', item)
             self.assertNotIn('attendance-active-roster-hotfix',item)
             self.assertNotIn('fixture-insert',item)
+    def test_two_receipts_are_immutable_and_latest_is_index_only(self):
+        with tempfile.TemporaryDirectory(prefix='assps-mock-receipts-') as directory:
+            with patch.object(runner, 'PRIVATE_RECEIPTS', Path(directory)):
+                a = runner.record_receipt({'schema':'synthetic', 'run':'one'})
+                b = runner.record_receipt({'schema':'synthetic', 'run':'two'})
+                self.assertNotEqual(a['sha256'], b['sha256'])
+                self.assertEqual(len(list(Path(directory).glob('integrated-*.json'))), 2)
+                self.assertEqual((Path(directory)/('integrated-'+a['sha256']+'.json')).read_text().find('one')>=0,True)
+                self.assertEqual((Path(directory)/('integrated-'+b['sha256']+'.json')).read_text().find('two')>=0,True)
+                self.assertIn('two',(Path(directory)/'latest-integrated-readonly-acceptance.json').read_text())
+                self.assertEqual((Path(directory)/('integrated-'+a['sha256']+'.json')).stat().st_mode & 0o777,0o600)
     def test_browser_tests_are_explicit_suite(self):
         self.assertEqual(len(BROWSER_TESTS),15)
         self.assertIn('dailyDiaryNewDraftScopeBrowser.test.js',BROWSER_TESTS)
