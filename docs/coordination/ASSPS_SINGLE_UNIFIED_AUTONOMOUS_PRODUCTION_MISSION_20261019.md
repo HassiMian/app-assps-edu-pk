@@ -276,3 +276,31 @@ independent editorial approvals or an off-host decrypted restore. The release
 remains HOLD, with 15 reported gates including capacity, provenance and the
 previously unverified external acceptances. Existing Exam 9/First Term remains
 immutable at 1,853 results with 224 genuine zeros and zero NULL marks.
+
+### 20-Oct continuation: timetable combined-class occupancy closure
+
+In the existing unified release train, a new read-only active schedule audit
+checks all 42 day/class/section groups and 336 teaching-period records (seven
+current classroom sections across Monday through Saturday). Every active
+section has eight distinct numbered periods, a scoped teacher, and a nonempty
+section. It found 12 timeslots shared by the same teacher across Four/Blue and
+Five/Blue in English (Period 5) or Nazra (Period 8), all six school days.
+These are the established combined-class pairing, not 12 unrelated double
+bookings. The evidence rule is STRICT: exactly one Four/Blue and one Five/Blue
+record, same teacher, subject, date, period, start/end, and room. Any other
+same-teacher cross-class overlap is a release HOLD; detected unexpected
+collisions = **zero**. The exceptional pair must not implicitly authorize any
+other year, room, class, school or subject.
+
+The integrated release gate imports `verify_timetable_collision_scope_readonly.py`
+and fails closed if active teaching days are incomplete, teacher identity is
+missing, periods are invalid, a section is unscoped, or unapproved teacher
+overlaps appear. Structural checks do not confer academic approvals. The
+isolated candidate `/workload` route was adjusted to return **physical teacher
+timeslots** as `total_periods` while separately retaining `assignment_rows`,
+and its clash SQL excludes *only* the exact known Four/Five simultaneous
+teaching pairs. The equivalent query was verified with a READ ONLY transaction
+against production: **336 class assignment rows, 324 unique occupied teacher
+timeslots, zero unapproved clashes**. No live timetable or backend was edited;
+full live authenticated teacher workload and user-interface acceptance remains
+an unmet release prerequisite.

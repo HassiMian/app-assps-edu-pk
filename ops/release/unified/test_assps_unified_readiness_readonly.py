@@ -10,7 +10,7 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
         return {x:{'pass':True} for x in (
             'database','backup','frontend','rollback','http','restricted_catalog_and_firstterm',
             'source_privacy_inventory','backend_source_inventory','attendance_roster_coverage',
-            'fee_ledger_integrity','frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity','storage_headroom')}
+            'fee_ledger_integrity','frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity','storage_headroom','timetable_collision_scope')}
     def test_every_operational_check_passes_but_unapproved_signoff_remains_hold(self):
         e=self.fixture()
         e['frontend']['sidecar_matches']=True
@@ -53,6 +53,20 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
         e=self.fixture();e['storage_headroom']['pass']=False
         r=gate.classify(e)
         self.assertFalse(r['operational_checks_pass'])
+
+    def test_missing_teacher_occupancy_evidence_stays_hold(self):
+        e=self.fixture()
+        report=gate.classify(e)
+        self.assertIn('active_timetable_unapproved_teacher_collisions_or_incomplete_periods',report['unresolved_release_gates'])
+    def test_unapproved_teacher_collision_stays_hold(self):
+        e=self.fixture();e['timetable_collision_scope']['structural_timetable_valid']=False
+        r=gate.classify(e)
+        self.assertTrue(r['operational_checks_pass'])
+        self.assertIn('active_timetable_unapproved_teacher_collisions_or_incomplete_periods',r['unresolved_release_gates'])
+    def test_valid_occupancy_omits_specific_collision_hold(self):
+        e=self.fixture();e['timetable_collision_scope']['structural_timetable_valid']=True
+        r=gate.classify(e)
+        self.assertNotIn('active_timetable_unapproved_teacher_collisions_or_incomplete_periods',r['unresolved_release_gates'])
 
     def test_stale_sidecar_adds_provenance_blocker(self):
         e=self.fixture();e['frontend']['sidecar_matches']=False
