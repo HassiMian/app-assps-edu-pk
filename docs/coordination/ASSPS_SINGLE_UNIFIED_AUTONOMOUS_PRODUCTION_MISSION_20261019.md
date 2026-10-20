@@ -397,3 +397,25 @@ runtime containment or permission/RLS behavior, and is **not deployed**.
 Only a signed, source-reviewed, rollback-ready release with real school-channel
 acceptance can clear the active runtime risk. Existing academic databases,
 WhatsApp message histories, and historical release archives were not altered.
+
+### 20-Oct school communications privacy boundary (candidate-only)
+
+Read-only line-specific audit of the *active* school WhatsApp route found
+**11 direct sensitive diagnostic logging lines** involving phones, message
+identifiers, portions of inbound text, provider responses or uncensored
+exception messages. This is a source-level privacy risk finding; it does not
+establish that specific pupils' messages were actually written to disk or
+exposed to third parties. The isolated candidate replaces these with generic
+status-only diagnostic messages, preserving outbound message content and
+idempotency behaviour for the intended recipient. An independent read-only
+source checker `verify_school_whatsapp_log_privacy_readonly.py` compares the
+active backend with the isolated candidate and registers an explicit **LIVE
+privacy HOLD** while sensitive source-level logging remains in production.
+The candidate scanner finds zero matching sensitive direct logging lines and
+isolated tests check refusal of raw phone, text, message IDs and provider
+payload logging. This checker is narrowly scoped to direct one-line source
+expressions; it is NOT general message-history privacy certification or a
+statement that no other module logs sensitive data. No live WhatsApp code,
+messages, PM2 process, files, PostgreSQL rows or backups were changed by this
+work. The entire ASSPS Unified Release remains HOLD pending signed authorized
+source preservation, genuine E2E actor tests and rollback-ready cutover.

@@ -53,7 +53,7 @@ async function sendWhatsAppMessage(to, text) {
 
   // Prevent duplicate outbound messages
   if (missionManager.isDuplicateResponse(cleanTo, text)) {
-    console.log(`[WhatsApp Outbound] Duplicate reply suppressed for +${cleanTo}`)
+    console.log('[WhatsApp Outbound] Duplicate reply suppressed')
     return null
   }
 
@@ -79,13 +79,13 @@ async function sendWhatsAppMessage(to, text) {
     })
     const data = await res.json()
     if (!res.ok) {
-      console.error(`[WhatsApp Outbound Error] Status ${res.status}: ${JSON.stringify(data.error || data)}`)
+      console.error(`[WhatsApp Outbound Error] Provider status ${Number(res.status) || 0}`)
     } else {
-      console.log(`[WhatsApp Outbound Success] Sent to +${cleanTo} (wamid: ${data.messages?.[0]?.id})`)
+      console.log('[WhatsApp Outbound Success] Dispatch accepted')
     }
     return data
   } catch (err) {
-    console.error('[WhatsApp Outbound Network Error]', err.message)
+    console.error('[WhatsApp Outbound Network Error] Dispatch failed')
     return null
   }
 }
@@ -111,7 +111,7 @@ async function recordIdempotentEvent(eventId, eventType, senderId, recipientId, 
     )
     return (res.rowCount || 0) > 0
   } catch (err) {
-    console.error('[WhatsApp Webhook Idempotency Error]', err.message)
+    console.error('[WhatsApp Webhook Idempotency Error] Storage unavailable')
     throw err
   }
 }
@@ -196,7 +196,7 @@ router.post('/webhook', async (req, res) => {
           const from = msg.from
           const isNew = await recordIdempotentEvent(msgId, 'message', from, null, msg)
           if (!isNew) {
-            console.log(`[WhatsApp Webhook] Duplicate ${msgId} dropped.`)
+            console.log('[WhatsApp Webhook] Duplicate event dropped')
             continue
           }
           pendingMessages.push({ msgId, from, msg })
@@ -211,7 +211,7 @@ router.post('/webhook', async (req, res) => {
       }
     }
   } catch (err) {
-    console.error('[WhatsApp Webhook Persistence Error]', err.message)
+    console.error('[WhatsApp Webhook Persistence Error] Storage unavailable')
     return res.status(503).json({ success: false, error: 'Inbound event persistence unavailable.' })
   }
 
@@ -219,7 +219,7 @@ router.post('/webhook', async (req, res) => {
 
   for (const { msgId, from, msg } of pendingMessages) {
     const text = msg.text?.body || msg.interactive?.button_reply?.title || msg.image?.caption || msg.document?.caption || ''
-    console.log(`[WhatsApp Webhook Inbound] ${msgId} from +${from}: "${text.slice(0, 80)}"`)
+    console.log('[WhatsApp Webhook Inbound] Accepted message event')
     void markMessageAsRead(msgId)
 
     if (text) {
@@ -236,12 +236,12 @@ router.post('/webhook', async (req, res) => {
           return null
         })
         .catch(err => {
-          console.error('[JARVIS Core Execution Error]', err.message)
+          console.error('[JARVIS Core Execution Error] Primary handler unavailable')
           return whatsappRouter.processMessage(from, text)
             .then(result => result?.reply ? sendWhatsAppMessage(from, result.reply) : null)
         })
         .catch(fallbackErr => {
-          console.error('[WhatsApp Router Fallback Error]', fallbackErr.message)
+          console.error('[WhatsApp Router Fallback Error] Fallback handler unavailable')
         })
     }
   }

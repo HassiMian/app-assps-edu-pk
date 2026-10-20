@@ -10,7 +10,7 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
         return {x:{'pass':True} for x in (
             'database','backup','frontend','rollback','http','restricted_catalog_and_firstterm',
             'source_privacy_inventory','backend_source_inventory','attendance_roster_coverage',
-            'fee_ledger_integrity','frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity','storage_headroom','timetable_collision_scope','lesson_coverage','cross_product_boundary')}
+            'fee_ledger_integrity','frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity','storage_headroom','timetable_collision_scope','lesson_coverage','cross_product_boundary','school_whatsapp_log_privacy')}
     def test_every_operational_check_passes_but_unapproved_signoff_remains_hold(self):
         e=self.fixture()
         e['frontend']['sidecar_matches']=True
@@ -60,6 +60,19 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
         verdict=gate.classify(e)
         self.assertIn('current_schoolday_full_attendance_roster_unsaved_after_close_requires_investigation',verdict['unresolved_release_gates'])
         self.assertTrue(verdict['operational_checks_pass'])
+
+    def test_live_sensitive_whatsapp_logs_block_release(self):
+        e=self.fixture()
+        e['school_whatsapp_log_privacy']['live_sensitive_log_hold']=True
+        self.assertIn('active_school_whatsapp_message_or_phone_logging_requires_privacy_fix',
+                      gate.classify(e)['unresolved_release_gates'])
+    def test_missing_whatsapp_log_privacy_evidence_breaks_operational_preflight(self):
+        e=self.fixture();e.pop('school_whatsapp_log_privacy')
+        self.assertFalse(gate.classify(e)['operational_checks_pass'])
+    def test_unredacted_candidate_whatsapp_logs_block_release(self):
+        e=self.fixture();e['school_whatsapp_log_privacy']['candidate_log_scope_pass']=False
+        self.assertIn('candidate_school_whatsapp_sensitive_logs_not_redacted',
+                      gate.classify(e)['unresolved_release_gates'])
 
     def test_active_cross_product_financial_coupling_is_release_hold(self):
         e=self.fixture()
