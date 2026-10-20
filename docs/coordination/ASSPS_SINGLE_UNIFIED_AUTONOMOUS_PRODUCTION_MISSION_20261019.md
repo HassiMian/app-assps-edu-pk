@@ -419,3 +419,26 @@ statement that no other module logs sensitive data. No live WhatsApp code,
 messages, PM2 process, files, PostgreSQL rows or backups were changed by this
 work. The entire ASSPS Unified Release remains HOLD pending signed authorized
 source preservation, genuine E2E actor tests and rollback-ready cutover.
+
+### 20-Oct dynamic proof for staged school WhatsApp controls
+
+`al-siddique-backend/src/tests/school-whatsapp-webhook-isolated-http.test.cjs`
+starts an entirely local ephemeral HTTP fixture server and stubs the tenant
+DB interface, WhatsApp network transport, school cognitive handlers and
+idempotency store. It does **not** connect to Meta, MT5, production PG,
+student records, or a real WhatsApp account. Synthetic HMAC SHA-256 test
+requests establish five concrete candidate behaviors:
+
+1. Wrong signature rejected HTTP 403 *before* any DB write/AI handler.
+2. Signed explicit market request receives school-scope refusal, and neither
+   primary nor fallback school cognitive handler is invoked.
+3. Signed ordinary school diary request reaches the normal school handler.
+4. Duplicate signed provider event is acknowledged without duplicate AI work.
+5. Synthetic DB/idempotency failure returns HTTP 503 and no AI work.
+
+The fixture enforces local HTTP requests through real loopback fetch, while
+all outbound Meta requests are stubbed. This verifies request ordering and
+fail-closed behavior in the **candidate only**; it does not clear the separate
+live financially coupled WhatsApp route, school log privacy, identity or
+multi-tenant signed release gates. School communication histories and First
+Term examination records stay entirely untouched.
