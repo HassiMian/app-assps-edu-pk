@@ -5,6 +5,7 @@ Only source tests, synthetic browser tests, and the existing read-only gate
 are invoked. A green test suite never overrides a release hold.
 """
 import argparse
+from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager
 import datetime as dt
 import hashlib
@@ -164,8 +165,14 @@ def main():
     if opt.browser:
         try:
             with browser_dependency_scope(True):
-                for name in BROWSER_TESTS:
-                    checks.append(execute('synthetic_browser_'+name,['node','--test',FRONTEND+name],18,env))
+                def run_browser(name):
+                    return execute('synthetic_browser_'+name,
+                                   ['node','--test',FRONTEND+name],18,env)
+                # Each fixture owns a distinct synthetic localhost port. Bounded
+                # concurrency makes one-shot acceptance finish without hiding a
+                # timeout, missing test or individual failing exit code.
+                with ThreadPoolExecutor(max_workers=3) as pool:
+                    checks.extend(pool.map(run_browser, BROWSER_TESTS))
         except (RuntimeError, OSError):
             checks.append({'name':'synthetic_browser_dependency_setup','pass':False,'error':'OFFLINE_DEPENDENCY_UNAVAILABLE','counts':{}})
     try:
