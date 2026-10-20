@@ -203,6 +203,7 @@ def inspect_attendance_coverage():
             'newly_registered_unmarked':coverage['newly_registered_unmarked_total'],
             'previously_registered_unmarked':coverage['previously_registered_unmarked_total'],
             'zero_saved_class_alerts':coverage['zero_saved_class_alerts'],
+            'possible_post_close_full_roster_unsaved':attendance_coverage.post_close_unsaved_day(coverage),
             'attendance_not_fabricated':True}
 
 def inspect_backend_preservation():
@@ -298,6 +299,8 @@ def classify(evidence):
         holds.insert(0,'unscoped_pre_nine_timetable_sections_require_reconciliation')
     if evidence.get('academic_delivery_integrity',{}).get('lesson_coverage_certified') is not True:
         holds.insert(0,'lesson_planning_academic_publication_and_coverage_not_certified')
+    if evidence.get('attendance_roster_coverage',{}).get('possible_post_close_full_roster_unsaved') is True:
+        holds.insert(0,'current_schoolday_full_attendance_roster_unsaved_after_close_requires_investigation')
     if evidence.get('timetable_collision_scope',{}).get('structural_timetable_valid') is not True:
         holds.insert(0,'active_timetable_unapproved_teacher_collisions_or_incomplete_periods')
     if evidence.get('storage_headroom',{}).get('headroom_ok') is not True:

@@ -54,6 +54,13 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
         r=gate.classify(e)
         self.assertFalse(r['operational_checks_pass'])
 
+    def test_whole_roster_unsaved_after_school_close_stays_explicit_hold(self):
+        e=self.fixture()
+        e['attendance_roster_coverage']['possible_post_close_full_roster_unsaved']=True
+        verdict=gate.classify(e)
+        self.assertIn('current_schoolday_full_attendance_roster_unsaved_after_close_requires_investigation',verdict['unresolved_release_gates'])
+        self.assertTrue(verdict['operational_checks_pass'])
+
     def test_missing_teacher_occupancy_evidence_stays_hold(self):
         e=self.fixture()
         report=gate.classify(e)

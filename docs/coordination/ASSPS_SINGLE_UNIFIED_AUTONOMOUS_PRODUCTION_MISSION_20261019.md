@@ -304,3 +304,26 @@ against production: **336 class assignment rows, 324 unique occupied teacher
 timeslots, zero unapproved clashes**. No live timetable or backend was edited;
 full live authenticated teacher workload and user-interface acceptance remains
 an unmet release prerequisite.
+
+### 20-Oct continuation: all-school attendance save evidence and acquisition fail-closed
+
+The same unified release programme now flags a **possible entire-school
+attendance day without saved marks** after 15:00 Pakistan time on a Mon–Sat
+schedule day. A live read-only observation on **Tuesday, 20 October 2026**
+found 321 active pupils and **zero persisted attendance records for this date**,
+whereas 317 rows existed for 19 October. This is **NOT** evidence that pupils
+were absent, and without a verified holiday/operational attendance calendar is
+not proof that marking failed. No attendance statuses were guessed or backfilled.
+The gate records a distinct HOLD for investigation instead of incorrectly
+reporting zero saved class alerts as an all-school PASS. Sunday, before-closing
+observations and previously saved days are explicitly excluded from this alert.
+
+Isolated backend `POST /attendance/mark` now executes its teacher-assignment
+preflight before acquiring the database pool connection and acquires the
+connection inside an error-handled `try` block. If the pool acquisition fails,
+rollback and release are guarded against an undefined client, and a generic
+non-sensitive error is returned rather than raw backend error text. The
+original 100% batch write/persist-or-rollback invariant remains unchanged.
+Source regression tests were added; this is **candidate-only** code and is
+not evidence of a live school staff attendance login or successful attendance
+save. The existing School1 First Term result records are protected exactly.

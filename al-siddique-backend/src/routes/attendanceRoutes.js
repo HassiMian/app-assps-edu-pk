@@ -295,12 +295,13 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
     return res.status(400).json({ success: false, message: err.message || 'Invalid attendance record' })
   }
 
-  const client = await pool.connect()
+  let client
   try {
+    if (!(await requireTeacherAssignmentsForAttendance(req, res))) return
+    client = await pool.connect()
     const schoolId = currentSchoolId(req)
     const tenantId = currentTenantId(req)
     const actorRole = String(req.user?.role || '').toLowerCase()
-    if (!(await requireTeacherAssignmentsForAttendance(req, res))) return
     let schoolName = ''
     if (schoolId) {
       const schoolIdentity = await query(`
@@ -486,16 +487,16 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
       notificationSummary,
     })
   } catch (err) {
-    await client.query('ROLLBACK').catch(() => {})
+    if (client) await client.query('ROLLBACK').catch(() => {})
     console.error('Attendance mark error:', err.message)
-    return res.status(500).json({
+    return res.status(503).json({
       success: false,
-      error: 'DATABASE_ERROR',
-      message: 'Database error: Attendance could not be saved. ' + err.message,
+      error: 'ATTENDANCE_SAVE_UNAVAILABLE',
+      message: 'Attendance could not be saved. No absent or present statuses were inferred.',
       saved: 0,
     })
   } finally {
-    client.release()
+    if (client) client.release()
   }
 })
 

@@ -1,4 +1,5 @@
 import sys,unittest
+from datetime import datetime, timezone
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 import assps_attendance_coverage_readonly as mod
@@ -33,6 +34,24 @@ class Coverage(unittest.TestCase):
     def test_no_date_or_roster_rejected(self):
         with self.assertRaises(ValueError):
             mod.parse("DAY|2026-10-19")
+    def test_post_close_no_saved_day_requires_investigation_not_absence(self):
+        observation=mod.parse("DAY|2026-10-20\nCLASS|Starter|48|0|0|0")
+        now=datetime.fromisoformat('2026-10-20T20:05:00+05:00')
+        self.assertTrue(mod.post_close_unsaved_day(observation,now))
+        self.assertEqual(observation['class_coverage'][0]['unmarked'],48)
+    def test_before_close_no_warning(self):
+        observation=mod.parse("DAY|2026-10-20\nCLASS|Starter|48|0|0|0")
+        self.assertFalse(mod.post_close_unsaved_day(observation,datetime.fromisoformat('2026-10-20T11:00:00+05:00')))
+    def test_saved_or_historical_day_no_warning(self):
+        marked=mod.parse("DAY|2026-10-20\nCLASS|Starter|48|40|40|0")
+        now=datetime.fromisoformat('2026-10-20T20:05:00+05:00')
+        self.assertFalse(mod.post_close_unsaved_day(marked,now))
+        blank_yesterday=mod.parse("DAY|2026-10-19\nCLASS|Starter|48|0|0|0")
+        self.assertFalse(mod.post_close_unsaved_day(blank_yesterday,now))
+    def test_sunday_not_implicitly_school_day(self):
+        sunday=mod.parse("DAY|2026-10-18\nCLASS|Starter|48|0|0|0")
+        self.assertFalse(mod.post_close_unsaved_day(sunday,datetime.fromisoformat('2026-10-18T20:00:00+05:00')))
+
     def test_sql_is_read_only(self):
         s=mod.SQL.upper()
         self.assertIn('BEGIN TRANSACTION READ ONLY',s)
