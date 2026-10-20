@@ -295,8 +295,9 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
     return res.status(400).json({ success: false, message: err.message || 'Invalid attendance record' })
   }
 
-  const client = await pool.connect()
+  let client
   try {
+    client = await pool.connect()
     const schoolId = currentSchoolId(req)
     const tenantId = currentTenantId(req)
     const actorRole = String(req.user?.role || '').toLowerCase()
@@ -486,16 +487,17 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
       notificationSummary,
     })
   } catch (err) {
-    await client.query('ROLLBACK').catch(() => {})
+    if (client) await client.query('ROLLBACK').catch(() => {})
     console.error('Attendance mark error:', err.message)
-    return res.status(500).json({
+    return res.status(client ? 500 : 503).json({
       success: false,
-      error: 'DATABASE_ERROR',
-      message: 'Database error: Attendance could not be saved. ' + err.message,
+      error: client ? 'DATABASE_ERROR' : 'ATTENDANCE_STORAGE_UNAVAILABLE',
+      message: 'Attendance could not be saved. No records were persisted.',
       saved: 0,
+      requestedCount: normalizedRecords.length,
     })
   } finally {
-    client.release()
+    if (client) client.release()
   }
 })
 
