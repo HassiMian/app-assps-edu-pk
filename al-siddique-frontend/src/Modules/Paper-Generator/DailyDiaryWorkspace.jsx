@@ -378,6 +378,9 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   const savedDiaryIdentities = useRef(new Map())
   const diaryScopeGeneration = useRef(0)
   useEffect(() => { diaryScopeGeneration.current += 1 }, [classLevel, section, date])
+  // A server record identity is only active for the exact editor school-day selection.
+  const displayedSavedDiaryId = activeSavedDiaryId != null && savedDiaryIdentities.current.get(JSON.stringify([classLevel, section, date])) === Number(activeSavedDiaryId)
+    ? Number(activeSavedDiaryId) : null
   const [status, setStatus] = useState('')
   const [previewZoom, setPreviewZoom] = useState(.68)
   const [lessonPlans, setLessonPlans] = useState([])
@@ -684,17 +687,21 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
           editorFontSize
         }
       }
-      const scopeKey = JSON.stringify([classLevel, section, date])
+      // Validate the persisted record against the request snapshot, not a later editor selection.
+      const requestedScope = [String(payload.class_level), String(payload.style_settings.section), String(payload.diary_date)]
+      const scopeKey = JSON.stringify(requestedScope)
       const updateId = savedDiaryIdentities.current.get(scopeKey) || null
       const response = updateId ? await api.put(`/api/daily-diary/${updateId}`, payload) : await api.post('/api/daily-diary', payload)
       const saved = response.data?.data
       if (response.data?.success !== true || !Number.isSafeInteger(saved?.id) || saved.id <= 0) throw new Error('Unverified Diary Save response')
       if (updateId && Number(saved.id) !== Number(updateId)) throw new Error('Diary Save returned a different record identity')
-      if ((saved.class_level != null && String(saved.class_level) !== String(classLevel)) || (saved.diary_date != null && String(saved.diary_date).slice(0, 10) !== date) || (saved.style_settings?.section != null && String(saved.style_settings.section) !== String(section))) throw new Error('Diary Save returned a different school-day selection')
+      if ((saved.class_level != null && String(saved.class_level) !== requestedScope[0]) || (saved.diary_date != null && String(saved.diary_date).slice(0, 10) !== requestedScope[2]) || (saved.style_settings?.section != null && String(saved.style_settings.section) !== requestedScope[1])) throw new Error('Diary Save returned a different school-day selection')
 
       savedDiaryIdentities.current.set(scopeKey, Number(saved.id))
-      setActiveSavedDiaryId(Number(saved.id))
-      setStatus(diaryScopeGeneration.current === saveGeneration ? `Daily diary saved safely (ID #${saved.id}).` : 'Previous diary selection was saved. Current editor selection was not saved.')
+      const stillEditingRequestedScope = diaryScopeGeneration.current === saveGeneration
+      if (stillEditingRequestedScope) setActiveSavedDiaryId(Number(saved.id))
+      // A stale response must not clear a newer editor selection's legitimate record identity.
+      setStatus(stillEditingRequestedScope ? `Daily diary saved safely (ID #${saved.id}).` : 'Previous diary selection was saved. Current editor selection was not saved.')
     } catch (error) {
       setStatus(diaryScopeGeneration.current === saveGeneration ? (error?.response?.data?.message || 'Daily diary save failed. Local recovery draft remains available.') : 'Previous diary selection could not be saved. Current editor selection was not submitted.')
     } finally { setSaving(false) }
@@ -1022,13 +1029,13 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
               </button>
               <button
                 type="button"
-                className={activeSavedDiaryId ? 'btn-saved-synced' : 'btn-save-primary'}
+                className={displayedSavedDiaryId ? 'btn-saved-synced' : 'btn-save-primary'}
                 onClick={saveDiary}
                 disabled={saving || busy === 'diary-open'}
               >
                 <Save size={14} />
                 {saving ? 'Saving…' : 'Save Diary'}
-                {activeSavedDiaryId && <span className="dd-saved-id-pill">#{activeSavedDiaryId}</span>}
+                {displayedSavedDiaryId && <span className="dd-saved-id-pill">#{displayedSavedDiaryId}</span>}
               </button>
             </>
           ) : (
@@ -1069,10 +1076,10 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
         >
           <BookOpen size={15} /> Lesson Plan Integration
         </button>
-        {activeSavedDiaryId && (
+        {displayedSavedDiaryId && (
           <div className="dd-active-record-tag">
-            <Check size={12} /> Editing Server Record #{activeSavedDiaryId} ({classLabel} · {formatDate(date)})
-            <button type="button" onClick={() => { setActiveSavedDiaryId(null); setStatus('Detached record ID. Next save will create a new entry.') }} title="Save as new entry instead">New Draft</button>
+            <Check size={12} /> Editing Server Record #{displayedSavedDiaryId} ({classLabel} · {formatDate(date)})
+            <button type="button" disabled={saving} onClick={() => { savedDiaryIdentities.current.delete(JSON.stringify([classLevel, section, date])); setActiveSavedDiaryId(null); setStatus('Detached record ID. Next save will create a new entry.') }} title="Save as new entry instead">New Draft</button>
           </div>
         )}
       </div>
