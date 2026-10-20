@@ -352,3 +352,26 @@ publication/content-approval HOLD continues. These counts describe only
 metadata, not the true number of approved teaching lessons. Neither the
 existing three plans nor 54 teacher permissions were modified, and no grade
 IX/X provisional question-bank drafts were promoted or inferred as approved.
+
+### 20-Oct security extension: mounted cross-product legacy boundary (READ ONLY)
+
+A source-only inspection of active PM2 backend `/var/www/apex-backend/src`
+confirmed that the school server mounts its WhatsApp route, while the live
+route includes **two call sites to legacy financial execution/closure
+functions** and **one automatic legacy scanner start**. This is a security
+and separation concern because ARGUS research/mocks are NOT evidence that
+all school production integration pathways are quarantined. It does **not**
+prove that financial actions actually happened, nor is the school database
+itself proven exposed by these call sites. No broker, scanner, account or
+legacy module was imported, contacted, started, stopped or modified.
+
+`verify_school_cross_product_boundary_readonly.py` provides metadata-only
+static risk evidence; the single unified release gate adds a separate
+**cross-product boundary review HOLD** if risk call sites remain in an
+active mounted school route. Tests deliberately confirm an unmounted route
+or absence of static signatures is **not** comprehensive runtime
+isolation certification. Quarantine must preserve lawful school messaging
+and student/teacher data while keeping autonomous financial capabilities
+outside the school runtime. No live route was deployed or disabled during
+this step because genuine authorized tenant acceptance, signed provenance,
+backup/rollback and other mandatory release gates are still unresolved.

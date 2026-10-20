@@ -10,7 +10,7 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
         return {x:{'pass':True} for x in (
             'database','backup','frontend','rollback','http','restricted_catalog_and_firstterm',
             'source_privacy_inventory','backend_source_inventory','attendance_roster_coverage',
-            'fee_ledger_integrity','frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity','storage_headroom','timetable_collision_scope','lesson_coverage')}
+            'fee_ledger_integrity','frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity','storage_headroom','timetable_collision_scope','lesson_coverage','cross_product_boundary')}
     def test_every_operational_check_passes_but_unapproved_signoff_remains_hold(self):
         e=self.fixture()
         e['frontend']['sidecar_matches']=True
@@ -60,6 +60,16 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
         verdict=gate.classify(e)
         self.assertIn('current_schoolday_full_attendance_roster_unsaved_after_close_requires_investigation',verdict['unresolved_release_gates'])
         self.assertTrue(verdict['operational_checks_pass'])
+
+    def test_active_cross_product_financial_coupling_is_release_hold(self):
+        e=self.fixture()
+        e['cross_product_boundary']['legacy_boundary_requires_review']=True
+        r=gate.classify(e)
+        self.assertTrue(r['operational_checks_pass'])
+        self.assertIn('mounted_school_whatsapp_legacy_financial_coupling_requires_quarantine_evidence',r['unresolved_release_gates'])
+    def test_missing_cross_product_inspection_fails_operational_gate(self):
+        e=self.fixture();e.pop('cross_product_boundary')
+        self.assertFalse(gate.classify(e)['operational_checks_pass'])
 
     def test_missing_lesson_coverage_evidence_fails_operational_gate(self):
         e=self.fixture()
