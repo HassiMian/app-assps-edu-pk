@@ -9,7 +9,8 @@ const source=fs.readFileSync(path.join(__dirname,'../routes/whatsappRoutes.js'),
 
 test('market execution and trading terms are rejected for every school sender',()=>{
  for(const prompt of ['MT5','ARGUS', 'forex analysis','XAUUSD','EURUSD',
-  'trading account', 'trade','stop loss','take profit','lot size','broker position']){
+  'trading account', 'trade','stop loss','take profit','lot size','broker position',
+  'gold setup do','market signal','market intelligence','stock market','emergency close']){
   assert.equal(isFinancialMarketRequest(prompt),true,prompt)
  }
 })

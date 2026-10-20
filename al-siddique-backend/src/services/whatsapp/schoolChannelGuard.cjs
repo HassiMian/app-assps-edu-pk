@@ -60,7 +60,7 @@ function formatSchoolScopeRestriction(language='ROMAN_URDU') {
 // It never invokes trading code, account services or external networks.
 function isFinancialMarketRequest(rawText) {
   const text = String(rawText ?? '').toLowerCase().normalize('NFKC')
-  return /\b(?:argus|mt5|metatrader|forex|xauusd|eurusd|gbpusd|usd[jc]py|broker|trading|trade|trades|stop[ -]?loss|take[ -]?profit|lot[ -]?size|margin[ -]?call|liquidation)\b/i.test(text)
+  return /\b(?:argus|mt5|metatrader|forex|xauusd|eurusd|gbpusd|usd[jc]py|broker|trading|trade|trades|stop[ -]?loss|take[ -]?profit|lot[ -]?size|margin[ -]?call|liquidation)\b|\b(?:gold[ -]+setup|market[ -]+(?:signal|intelligence|setup)|stock[ -]+market|emergency[ -]+close)\b/i.test(text)
 }
 
 module.exports = { USER_ROLES, normalizePhoneNumber, resolveUserRole, isOwner, requireConfiguredSchoolId, formatSchoolScopeRestriction, isFinancialMarketRequest }
