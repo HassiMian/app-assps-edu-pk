@@ -375,3 +375,25 @@ and student/teacher data while keeping autonomous financial capabilities
 outside the school runtime. No live route was deployed or disabled during
 this step because genuine authorized tenant acceptance, signed provenance,
 backup/rollback and other mandatory release gates are still unresolved.
+
+### 20-Oct next checkpoint: candidate-only school WhatsApp market-request boundary
+
+The isolated `al-siddique-backend/src/routes/whatsappRoutes.js` candidate has
+no direct legacy financial execution/closure or auto-scanner call sites, but
+its general AI dispatch remained usable for explicitly financial-market
+messages. A fail-closed, channel-wide pre-dispatch refusal now invokes
+`isFinancialMarketRequest(text)` before both primary and fallback cognitive
+handlers, and returns the school's existing scope-restriction message. This
+does not use broker credentials or invoke the legacy financial runtime. The
+owner has no exception for school-channel financial prompts. Normal diary,
+admission, fee, and attendance questions remain unrestricted by this filter.
+
+Pure offline tests cover explicit market intents, allowed school messages,
+control-flow ordering, default refusal wording, and absence of direct broker
+execution/scanner imports. The unified source-only guardian now separately
+checks the candidate boundary while retaining its independent LIVE financial
+coupling HOLD. The candidate may pass static checks; this never certifies
+runtime containment or permission/RLS behavior, and is **not deployed**.
+Only a signed, source-reviewed, rollback-ready release with real school-channel
+acceptance can clear the active runtime risk. Existing academic databases,
+WhatsApp message histories, and historical release archives were not altered.

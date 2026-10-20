@@ -302,6 +302,8 @@ def classify(evidence):
     if (evidence.get('academic_delivery_integrity',{}).get('lesson_coverage_certified') is not True
         or evidence.get('lesson_coverage',{}).get('lesson_coverage_certified') is not True):
         holds.insert(0,'lesson_planning_academic_publication_and_coverage_not_certified')
+    if evidence.get('cross_product_boundary',{}).get('candidate_financial_scope_static_pass') is not True:
+        holds.insert(0,'candidate_school_whatsapp_financial_scope_guard_missing')
     if evidence.get('cross_product_boundary',{}).get('legacy_boundary_requires_review') is True:
         holds.insert(0,'mounted_school_whatsapp_legacy_financial_coupling_requires_quarantine_evidence')
     if evidence.get('attendance_roster_coverage',{}).get('possible_post_close_full_roster_unsaved') is True:

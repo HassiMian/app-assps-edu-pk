@@ -9,6 +9,7 @@ import re
 from pathlib import Path
 
 ROOT=Path('/var/www/apex-backend/src')
+CANDIDATE=Path(__file__).resolve().parents[3]/'al-siddique-backend'/'src'
 MOUNT=re.compile(r"mount\s*\(\s*['\"]\/whatsapp['\"]\s*,\s*['\"]\.\/routes\/whatsappRoutes['\"]\s*\)")
 EXECUTOR=re.compile(r'\bargusMt5Orchestrator\s*\.\s*(?:executeTrade|closeAllPositions)\s*\(')
 SCANNER=re.compile(r'\bargusContinuousScanner\s*\.\s*start\s*\(')
@@ -27,12 +28,32 @@ def analyze(server,route):
       'interpretation':'STATIC_RISK_INDICATOR_NOT_EVIDENCE_OF_BROKER_EXECUTION_OR_RUNTIME_ISOLATION',
     }
 
-def inspect(root=ROOT):
+def candidate_scope_check(route,guard):
+    # Boundaries must precede both AI/fallback dispatch paths, and may not
+    # include the legacy direct execution or startup call sites.
+    boundary=route.find('if (isFinancialMarketRequest(text))')
+    primary=route.find('jarvisCore.processMessage(from, text)')
+    fallback=route.find('whatsappRouter.processMessage(from, text)')
+    rejected=boundary>=0 and primary>boundary and fallback>primary
+    segment=route[boundary:primary] if rejected else ''
+    return (rejected and 'continue' in segment
+            and 'formatSchoolScopeRestriction()' in segment
+            and 'function isFinancialMarketRequest' in guard
+            and not EXECUTOR.search(route) and not SCANNER.search(route))
+
+def inspect(root=ROOT, candidate=CANDIDATE):
     server=root/'server.js'
     route=root/'routes/whatsappRoutes.js'
     if any(p.is_symlink() or not p.is_file() for p in (server,route)):
         raise RuntimeError('Missing or redirected live server/route source')
     result=analyze(server.read_text(encoding='utf-8'),route.read_text(encoding='utf-8'))
+    candidate_route=candidate/'routes/whatsappRoutes.js'
+    candidate_guard=candidate/'services/whatsapp/schoolChannelGuard.cjs'
+    if any(p.is_symlink() or not p.is_file() for p in (candidate_route,candidate_guard)):
+        raise RuntimeError('Candidate school messaging scope source unavailable')
+    result['candidate_financial_scope_static_pass']=candidate_scope_check(
+        candidate_route.read_text(encoding='utf-8'),
+        candidate_guard.read_text(encoding='utf-8'))
     if not result['active_school_whatsapp_route_mounted']:
         # Unmounted is not proof that there are no other financial routes.
         result['interpretation']='WHATSAPP_ROUTE_NOT_MOUNTED_WHOLE_SYSTEM_NOT_CERTIFIED'

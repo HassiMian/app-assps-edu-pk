@@ -3,7 +3,7 @@ const crypto = require('crypto')
 const { query, tenantContext } = require('../config/database')
 const jarvisCore = require('../services/whatsapp/jarvisCognitiveCore')
 const { WhatsAppRouter } = require('../services/whatsapp/whatsappRouter')
-const { requireConfiguredSchoolId } = require('../services/whatsapp/schoolChannelGuard.cjs')
+const { requireConfiguredSchoolId, isFinancialMarketRequest, formatSchoolScopeRestriction } = require('../services/whatsapp/schoolChannelGuard.cjs')
 const { missionManager } = require('../services/whatsapp/missionManager')
 
 const router = express.Router()
@@ -223,6 +223,12 @@ router.post('/webhook', async (req, res) => {
     void markMessageAsRead(msgId)
 
     if (text) {
+      // Scope check precedes both primary and fallback cognitive handlers.
+      // The school channel never dispatches financial-market requests.
+      if (isFinancialMarketRequest(text)) {
+        void sendWhatsAppMessage(from, formatSchoolScopeRestriction())
+        continue
+      }
       jarvisCore.processMessage(from, text)
         .then(result => {
           const replyText = typeof result === 'object' && result?.reply ? result.reply : (typeof result === 'string' ? result : '')

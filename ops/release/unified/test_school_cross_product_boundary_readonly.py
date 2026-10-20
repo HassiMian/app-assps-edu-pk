@@ -35,9 +35,18 @@ class SchoolCrossProductTests(unittest.TestCase):
    base=Path(folder);(base/'routes').mkdir()
    (base/'server.js').write_text(MOUNT)
    (base/'routes'/'whatsappRoutes.js').write_text('argusContinuousScanner.start()')
-   x=checker.inspect(base)
+   x=checker.inspect(base,checker.CANDIDATE)
    self.assertTrue(x['legacy_boundary_requires_review'])
    self.assertEqual(x['legacy_automatic_scanner_starts_in_mounted_route'],1)
+ def test_candidate_guard_cannot_certify_without_correct_order(self):
+  route="if (isFinancialMarketRequest(text)) { send(formatSchoolScopeRestriction()); continue } jarvisCore.processMessage(from, text); whatsappRouter.processMessage(from, text)"
+  guard='function isFinancialMarketRequest(text) { return true }'
+  self.assertTrue(checker.candidate_scope_check(route,guard))
+  self.assertFalse(checker.candidate_scope_check(route.replace('continue','return'),guard))
+  self.assertFalse(checker.candidate_scope_check(route.replace('if (isFinancialMarketRequest(text))','if (false)'),guard))
+  self.assertFalse(checker.candidate_scope_check(route, 'no guard'))
+  self.assertFalse(checker.candidate_scope_check(route+';argusContinuousScanner.start()',guard))
+  self.assertFalse(checker.candidate_scope_check(route+';argusMt5Orchestrator.executeTrade()',guard))
  def test_symlink_source_does_not_get_certified(self):
   with tempfile.TemporaryDirectory() as folder:
    base=Path(folder);(base/'routes').mkdir()
