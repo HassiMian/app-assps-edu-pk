@@ -16,6 +16,7 @@ import verify_timetable_collision_scope_readonly as timetable_collision
 import verify_lesson_coverage_readonly as lesson_coverage
 import verify_school_cross_product_boundary_readonly as product_boundary
 import verify_school_whatsapp_log_privacy_readonly as whatsapp_log_privacy
+import verify_school_whatsapp_phone_scope_readonly as whatsapp_phone_scope
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 
@@ -280,7 +281,7 @@ def classify(evidence):
               'backend_source_inventory','attendance_roster_coverage','fee_ledger_integrity',
               'frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity',
               'storage_headroom','timetable_collision_scope','lesson_coverage','cross_product_boundary',
-              'school_whatsapp_log_privacy')
+              'school_whatsapp_log_privacy','school_whatsapp_phone_scope')
     checks={k:(isinstance(evidence.get(k),dict) and evidence[k].get('pass') is True)
             for k in required}
     infrastructure=all(checks.values())
@@ -304,6 +305,10 @@ def classify(evidence):
     if (evidence.get('academic_delivery_integrity',{}).get('lesson_coverage_certified') is not True
         or evidence.get('lesson_coverage',{}).get('lesson_coverage_certified') is not True):
         holds.insert(0,'lesson_planning_academic_publication_and_coverage_not_certified')
+    if evidence.get('school_whatsapp_phone_scope',{}).get('candidate_school_phone_scope_static_pass') is not True:
+        holds.insert(0,'candidate_school_whatsapp_phone_number_scope_missing')
+    if evidence.get('school_whatsapp_phone_scope',{}).get('live_school_phone_scope_hold') is True:
+        holds.insert(0,'live_school_whatsapp_signed_webhook_phone_scope_unverified')
     if evidence.get('school_whatsapp_log_privacy',{}).get('candidate_log_scope_pass') is not True:
         holds.insert(0,'candidate_school_whatsapp_sensitive_logs_not_redacted')
     if evidence.get('school_whatsapp_log_privacy',{}).get('live_sensitive_log_hold') is True:
@@ -337,6 +342,7 @@ def main():
         'lesson_coverage':lesson_coverage.inspect,
         'cross_product_boundary':product_boundary.inspect,
         'school_whatsapp_log_privacy':whatsapp_log_privacy.inspect,
+        'school_whatsapp_phone_scope':whatsapp_phone_scope.inspect,
         'attendance_roster_coverage':inspect_attendance_coverage,
         'fee_ledger_integrity':inspect_fees_ledger,
         'restricted_catalog_and_firstterm':inspect_signed_and_history,

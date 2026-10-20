@@ -10,7 +10,7 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
         return {x:{'pass':True} for x in (
             'database','backup','frontend','rollback','http','restricted_catalog_and_firstterm',
             'source_privacy_inventory','backend_source_inventory','attendance_roster_coverage',
-            'fee_ledger_integrity','frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity','storage_headroom','timetable_collision_scope','lesson_coverage','cross_product_boundary','school_whatsapp_log_privacy')}
+            'fee_ledger_integrity','frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity','storage_headroom','timetable_collision_scope','lesson_coverage','cross_product_boundary','school_whatsapp_log_privacy','school_whatsapp_phone_scope')}
     def test_every_operational_check_passes_but_unapproved_signoff_remains_hold(self):
         e=self.fixture()
         e['frontend']['sidecar_matches']=True
@@ -60,6 +60,20 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
         verdict=gate.classify(e)
         self.assertIn('current_schoolday_full_attendance_roster_unsaved_after_close_requires_investigation',verdict['unresolved_release_gates'])
         self.assertTrue(verdict['operational_checks_pass'])
+
+    def test_live_whatsapp_phone_tenant_scope_is_separate_release_hold(self):
+        e=self.fixture()
+        e['school_whatsapp_phone_scope']['live_school_phone_scope_hold']=True
+        r=gate.classify(e)
+        self.assertIn('live_school_whatsapp_signed_webhook_phone_scope_unverified',r['unresolved_release_gates'])
+    def test_candidate_whatsapp_phone_tenant_scope_missing_blocks_release(self):
+        e=self.fixture()
+        e['school_whatsapp_phone_scope']['candidate_school_phone_scope_static_pass']=False
+        r=gate.classify(e)
+        self.assertIn('candidate_school_whatsapp_phone_number_scope_missing',r['unresolved_release_gates'])
+    def test_missing_whatsapp_phone_boundary_evidence_fails_preflight(self):
+        e=self.fixture();e.pop('school_whatsapp_phone_scope')
+        self.assertFalse(gate.classify(e)['operational_checks_pass'])
 
     def test_live_sensitive_whatsapp_logs_block_release(self):
         e=self.fixture()

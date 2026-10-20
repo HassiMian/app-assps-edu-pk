@@ -57,7 +57,7 @@ test.after(async()=>{
  global.fetch=originalFetch
  await new Promise(resolve=>server.close(resolve))
 })
-function body(id,message){return {object:'whatsapp_business_account',entry:[{changes:[{value:{messages:[{id,from:'0000000000',type:'text',text:{body:message}}]}}]}]}}
+function body(id,message){return {object:'whatsapp_business_account',entry:[{changes:[{value:{metadata:{phone_number_id:'synthetic-id'},messages:[{id,from:'0000000000',type:'text',text:{body:message}}]}}]}]}}
 async function post(bodyObj,valid=true){
  const raw=JSON.stringify(bodyObj)
  const sig=crypto.createHmac('sha256',secret).update(raw).digest('hex')
@@ -66,29 +66,68 @@ async function post(bodyObj,valid=true){
 }
 async function settle(){await new Promise(resolve=>setTimeout(resolve,10))}
 
+test('correctly signed event from another phone number is rejected before any DB write',async()=>{
+ const foreign=body('foreign-002','Grade Five fee status')
+ foreign.entry[0].changes[0].value.metadata.phone_number_id='another-number'
+ const beforeDB=calls.db.length
+ const beforePrimary=calls.primary.length
+ const response=await post(foreign)
+ assert.equal(response.status,403)
+ assert.equal(response.data.error,'SCHOOL_PHONE_SCOPE_MISMATCH')
+ assert.equal(calls.db.length,beforeDB)
+ assert.equal(calls.primary.length,beforePrimary)
+})
+test('any mixed tenant phone event rejects the entire signed batch atomically',async()=>{
+ const mixed=body('mixed-valid-101','Starter English diary')
+ mixed.entry[0].changes.push({value:{metadata:{phone_number_id:'not-school'},messages:[{
+  id:'mixed-foreign-102',from:'0000000000',text:{body:'School private data'}
+ }]}})
+ const beforeDB=calls.db.length
+ const beforePrimary=calls.primary.length
+ const r=await post(mixed)
+ assert.equal(r.status,403)
+ assert.equal(calls.db.length,beforeDB)
+ assert.equal(calls.primary.length,beforePrimary)
+})
+test('multiple signed changes from the same school phone are all processed',async()=>{
+ const same=body('multiple-school-100','Starter English diary')
+ same.entry[0].changes.push({value:{metadata:{phone_number_id:'synthetic-id'},messages:[{
+  id:'multiple-school-101',from:'0000000000',text:{body:'Class Five Mathematics diary'}
+ }]}})
+ const previous=calls.primary.length
+ const response=await post(same)
+ assert.equal(response.status,200)
+ await settle()
+ assert.equal(calls.primary.length,previous+2)
+})
 test('invalid signature rejected before storage or school handlers',async()=>{
  const before=calls.db.length
+ const priorPrimary=calls.primary.length
  const r=await post(body('bad-sig-001','Starter English diary'),false)
  assert.equal(r.status,403)
  assert.equal(calls.db.length,before)
- assert.equal(calls.primary.length,0)
+ assert.equal(calls.primary.length,priorPrimary)
 })
 test('signed market phrase is blocked before primary and fallback processing',async()=>{
+ const priorPrimary=calls.primary.length
+ const priorFallback=calls.fallback.length
  const r=await post(body('market-001','gold setup do'))
  assert.equal(r.status,200)
  await settle()
- assert.equal(calls.primary.length,0)
- assert.equal(calls.fallback.length,0)
+ assert.equal(calls.primary.length,priorPrimary)
+ assert.equal(calls.fallback.length,priorFallback)
  const outgoing=calls.network.map(x=>x.body||'').filter(x=>x.includes('School')||x.includes('school'))
  assert.ok(outgoing.some(x=>x.includes('market')||x.includes('Market')||x.includes('school')))
 })
 test('signed school diary question still invokes school core',async()=>{
+ const priorPrimary=calls.primary.length
+ const priorFallback=calls.fallback.length
  const r=await post(body('school-diary-002','Starter English diary'))
  assert.equal(r.status,200)
  await settle()
- assert.equal(calls.primary.length,1)
- assert.equal(calls.primary[0][1],'Starter English diary')
- assert.equal(calls.fallback.length,0)
+ assert.equal(calls.primary.length,priorPrimary+1)
+ assert.equal(calls.primary.at(-1)[1],'Starter English diary')
+ assert.equal(calls.fallback.length,priorFallback)
 })
 test('duplicate signed message is acknowledged but is not redelivered to school core',async()=>{
  const before=calls.primary.length

@@ -5,6 +5,7 @@ const jarvisCore = require('../services/whatsapp/jarvisCognitiveCore')
 const { WhatsAppRouter } = require('../services/whatsapp/whatsappRouter')
 const { requireConfiguredSchoolId, isFinancialMarketRequest, formatSchoolScopeRestriction } = require('../services/whatsapp/schoolChannelGuard.cjs')
 const { missionManager } = require('../services/whatsapp/missionManager')
+const { inspectSchoolWebhookChanges } = require('../services/whatsapp/schoolWebhookChannelScope.cjs')
 
 const router = express.Router()
 
@@ -183,12 +184,17 @@ router.post('/webhook', async (req, res) => {
     return res.status(200).json({ success: true, message: 'Ignored' })
   }
 
+  // Meta app signatures do NOT establish which school phone number sent
+  // an event. Check the complete batch before persisting any entry.
+  const schoolScope = inspectSchoolWebhookChanges(payload, PHONE_ID)
+  if (!schoolScope.ok) {
+    const status = schoolScope.reason === 'SCHOOL_PHONE_SCOPE_NOT_CONFIGURED' ? 503 : 403
+    return res.status(status).json({ success: false, error: schoolScope.reason })
+  }
+
   const pendingMessages = []
   try {
-    const entries = Array.isArray(payload.entry) ? payload.entry : []
-    for (const entry of entries) {
-      const changes = entry.changes?.[0]?.value
-      if (!changes) continue
+    for (const changes of schoolScope.values) {
 
       if (Array.isArray(changes.messages)) {
         for (const msg of changes.messages) {

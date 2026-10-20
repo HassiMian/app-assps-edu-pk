@@ -442,3 +442,30 @@ fail-closed behavior in the **candidate only**; it does not clear the separate
 live financially coupled WhatsApp route, school log privacy, identity or
 multi-tenant signed release gates. School communication histories and First
 Term examination records stay entirely untouched.
+
+### 20-Oct webhook cross-school phone identity gate — pre-persistence fail-closed
+
+The previously reviewed school WhatsApp webhook verifies a Meta application
+HMAC but did not independently bind each signed event's
+`value.metadata.phone_number_id` to the school's configured channel ID.
+A shared Meta app signature is not a proof that every phone's messages are
+for the same school tenant. The isolated backend candidate now **preflights
+ALL webhook change values before any idempotency/database insert**, refuses
+messages and delivery statuses with missing/foreign phone metadata HTTP 403,
+and refuses actual events when the school's phone ID is unconfigured HTTP
+503. A mixed signed batch of valid school and foreign events is entirely
+rejected before any DB side effects. Multi-change, legitimate same-school
+batches retain their events rather than silently reading only `[0]`.
+
+No school WhatsApp credentials or live parent messages were accessed.
+`schoolWebhookChannelScope.cjs` is pure and has independent hermetic tests,
+while the existing synthetic HTTP suite now verifies both phone-number
+rejections and legitimate multi-change processing with real loopback HTTP,
+fake DB, and fake network. The unified read-only release preflight
+`verify_school_whatsapp_phone_scope_readonly.py` separately examines LIVE
+source and isolated CANDIDATE source. Its code-shape assertions report the
+candidate static policy present, **LIVE scope unverified**, and never claim
+true provider-level, tenant/RLS or runtime certification. A distinct release
+HOLD remains until a verified source-preserving, rollback-ready production
+cutover and authentic authorized school-channel acceptance. All live student
+records, exams, attendance marks, WhatsApp data and backups are unchanged.
