@@ -10,7 +10,7 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
         return {x:{'pass':True} for x in (
             'database','backup','frontend','rollback','http','restricted_catalog_and_firstterm',
             'source_privacy_inventory','backend_source_inventory','attendance_roster_coverage',
-            'fee_ledger_integrity','frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity')}
+            'fee_ledger_integrity','frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity','storage_headroom')}
     def test_every_operational_check_passes_but_unapproved_signoff_remains_hold(self):
         e=self.fixture()
         e['frontend']['sidecar_matches']=True
@@ -43,6 +43,16 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
                   'lesson_planning_academic_publication_and_coverage_not_certified'):
             self.assertIn(x,r['unresolved_release_gates'])
         self.assertTrue(r['operational_checks_pass'])
+
+    def test_insufficient_disk_capacity_stays_release_hold(self):
+        e=self.fixture(); e['storage_headroom']['headroom_ok']=False
+        r=gate.classify(e)
+        self.assertIn('insufficient_space_for_safe_release_and_restore_rehearsal',r['unresolved_release_gates'])
+        self.assertTrue(r['operational_checks_pass'])
+    def test_inspection_failure_is_preflight_failure(self):
+        e=self.fixture();e['storage_headroom']['pass']=False
+        r=gate.classify(e)
+        self.assertFalse(r['operational_checks_pass'])
 
     def test_stale_sidecar_adds_provenance_blocker(self):
         e=self.fixture();e['frontend']['sidecar_matches']=False

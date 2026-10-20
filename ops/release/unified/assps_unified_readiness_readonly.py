@@ -11,6 +11,7 @@ import verify_exam_attendance_tenant_scope_readonly as exam_attendance_scope
 import verify_academic_delivery_integrity_readonly as academic_integrity
 import assps_attendance_coverage_readonly as attendance_coverage
 import assps_fee_ledger_integrity_readonly as fee_integrity
+import assps_storage_headroom_readonly as disk_headroom
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 
@@ -272,7 +273,8 @@ def classify(evidence):
     required=('database','backup','frontend','rollback','http',
               'restricted_catalog_and_firstterm','source_privacy_inventory',
               'backend_source_inventory','attendance_roster_coverage','fee_ledger_integrity',
-              'frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity')
+              'frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity',
+              'storage_headroom')
     checks={k:(isinstance(evidence.get(k),dict) and evidence[k].get('pass') is True)
             for k in required}
     infrastructure=all(checks.values())
@@ -295,6 +297,8 @@ def classify(evidence):
         holds.insert(0,'unscoped_pre_nine_timetable_sections_require_reconciliation')
     if evidence.get('academic_delivery_integrity',{}).get('lesson_coverage_certified') is not True:
         holds.insert(0,'lesson_planning_academic_publication_and_coverage_not_certified')
+    if evidence.get('storage_headroom',{}).get('headroom_ok') is not True:
+        holds.insert(0,'insufficient_space_for_safe_release_and_restore_rehearsal')
     if not infrastructure:
         holds.insert(0,'read_only_operational_preflight_failed')
     return {'status':'RELEASE_HOLD','operational_checks_pass':infrastructure,
@@ -309,6 +313,7 @@ def main():
         'frontend_artifact_closure':inspect_frontend_artifact_closure,
         'exam_attendance_tenant_scope':exam_attendance_scope.inspect,
         'academic_delivery_integrity':academic_integrity.inspect,
+        'storage_headroom':disk_headroom.inspect,
         'attendance_roster_coverage':inspect_attendance_coverage,
         'fee_ledger_integrity':inspect_fees_ledger,
         'restricted_catalog_and_firstterm':inspect_signed_and_history,

@@ -8,7 +8,8 @@ import verify_academic_delivery_integrity_readonly as checker
 EXPECTED={'official_grants':54,'unauthorized_grants':0,'duplicate_grants':0,
  'timetable_subject_groups':64,'granted_subject_groups':54,'grant_timetable_matches':54,
  'matched_null_teacher_groups':11,'mismatched_nonnull_teacher_groups':0,
- 'unmatched_blank_section_subject_groups':8,'unmatched_nonblank_teaching_groups':0,
+ 'unmatched_blank_section_subject_groups':8,'unmatched_blank_section_active_groups':0,
+ 'unmatched_blank_section_template_groups':8,'unmatched_nonblank_teaching_groups':0,
  'unmatched_schoolwide_groups':2,'lesson_plans':3,'published_lesson_plans':0}
 
 class AcademicDeliveryTests(unittest.TestCase):
@@ -26,6 +27,18 @@ class AcademicDeliveryTests(unittest.TestCase):
         self.assertFalse(report['teaching_sections_complete'])
         self.assertFalse(report['lesson_publication_observed'])
         self.assertFalse(report['lesson_coverage_certified'])
+    def test_historical_template_is_not_active_timetable(self):
+        d=dict(EXPECTED, matched_null_teacher_groups=0)
+        self.assertTrue(checker.classify(d, historical_filter_verified=True)['teaching_sections_complete'])
+        self.assertFalse(checker.classify(d, historical_filter_verified=False)['teaching_sections_complete'])
+    def test_non_regular_blank_section_blocks_release(self):
+        d=dict(EXPECTED, unmatched_blank_section_active_groups=1, unmatched_blank_section_template_groups=7,
+               matched_null_teacher_groups=0)
+        self.assertFalse(checker.classify(d, historical_filter_verified=True)['teaching_sections_complete'])
+    def test_inconsistent_legacy_split_fails_closed(self):
+        d=dict(EXPECTED, unmatched_blank_section_active_groups=1, unmatched_blank_section_template_groups=8)
+        with self.assertRaises(ValueError):checker.parse(self.lines(d))
+
     def test_complete_teacher_reference_requires_no_nulls(self):
         values=dict(EXPECTED, matched_null_teacher_groups=0)
         self.assertTrue(checker.classify(values)['teacher_identity_complete'])
