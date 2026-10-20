@@ -8,6 +8,7 @@ import subprocess
 import verify_backend_source_preservation_readonly as backend_preservation
 import verify_frontend_artifact_closure_readonly as frontend_closure
 import verify_exam_attendance_tenant_scope_readonly as exam_attendance_scope
+import verify_academic_delivery_integrity_readonly as academic_integrity
 import assps_attendance_coverage_readonly as attendance_coverage
 import assps_fee_ledger_integrity_readonly as fee_integrity
 from concurrent.futures import ThreadPoolExecutor
@@ -271,7 +272,7 @@ def classify(evidence):
     required=('database','backup','frontend','rollback','http',
               'restricted_catalog_and_firstterm','source_privacy_inventory',
               'backend_source_inventory','attendance_roster_coverage','fee_ledger_integrity',
-              'frontend_artifact_closure','exam_attendance_tenant_scope')
+              'frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity')
     checks={k:(isinstance(evidence.get(k),dict) and evidence[k].get('pass') is True)
             for k in required}
     infrastructure=all(checks.values())
@@ -288,6 +289,12 @@ def classify(evidence):
         holds.insert(0,'active_exam_attendance_aggregate_missing_school_tenant_scope')
     if evidence.get('exam_attendance_tenant_scope',{}).get('candidate_scoped') is not True:
         holds.insert(0,'candidate_exam_attendance_tenant_scope_regression')
+    if evidence.get('academic_delivery_integrity',{}).get('teacher_identity_complete') is not True:
+        holds.insert(0,'active_timetable_teacher_identity_null_for_approved_grants')
+    if evidence.get('academic_delivery_integrity',{}).get('teaching_sections_complete') is not True:
+        holds.insert(0,'unscoped_pre_nine_timetable_sections_require_reconciliation')
+    if evidence.get('academic_delivery_integrity',{}).get('lesson_coverage_certified') is not True:
+        holds.insert(0,'lesson_planning_academic_publication_and_coverage_not_certified')
     if not infrastructure:
         holds.insert(0,'read_only_operational_preflight_failed')
     return {'status':'RELEASE_HOLD','operational_checks_pass':infrastructure,
@@ -301,6 +308,7 @@ def main():
         'backend_source_inventory':inspect_backend_preservation,
         'frontend_artifact_closure':inspect_frontend_artifact_closure,
         'exam_attendance_tenant_scope':exam_attendance_scope.inspect,
+        'academic_delivery_integrity':academic_integrity.inspect,
         'attendance_roster_coverage':inspect_attendance_coverage,
         'fee_ledger_integrity':inspect_fees_ledger,
         'restricted_catalog_and_firstterm':inspect_signed_and_history,

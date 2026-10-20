@@ -172,3 +172,75 @@ student disclosure. The unified readiness gate now explicitly HOLDS if either
 backend is not school-scoped. Live school data, reverse proxy, PM2 and DB remain
 untouched. Runtime confirmation still requires genuinely signed, authorized
 Principal/Teacher/peer-tenant roles and effective RLS isolation tests.
+
+## 20 October 2026 — Integrated academic delivery architecture and release dependency closure
+
+This is an amendment of the SAME unified mission, not a standalone project or a
+new deployment request. The execution controller is the **read-only integrated
+release gate** `ops/release/unified/assps_unified_readiness_readonly.py`; each
+candidate change must be reconciled against the active production build, its
+rollback receipt, database integrity evidence, and authentically authorized
+actors before changing live state.
+
+### Unified component dependency order (one release train)
+
+| Stage | Integrated services | Prerequisite evidence | Exit condition |
+| --- | --- | --- | --- |
+| A — Truth | Canonical Git history, current VPS runtime, immutable frontend/backend files, retired static assets | Source file ancestry and root-private SHA256 manifests; no unsafe public push | Unique source of truth per file and safe signed artifact provenance |
+| B — Irrecoverable-data fence | Main `apexos` PostgreSQL, signed `asspssigned` tenant context, Exam 9, Exam 8 demo, academic assets, fees | Separate backups, off-host encrypted copy, two independently proven decrypted disposable restores, rowwise evidence and rollback rehearsal | Every protected historical record unchanged; no NULL/zero semantic drift |
+| C — Actor perimeter | Principal, teachers, School 2, 85 forced-RLS policies, limited workers, API permissions | Genuine pre-existing identities and cryptographic signed actor context, not mocks | Positive and peer-negative browser/API acceptance, audit logs, scoped permissions |
+| D — Academic truth | 405 timetable records, 54 verified active grants, Early Years, 59 Grade IX/X provenance groups | Signed source mapping, class/section/subject ownership, student privacy and schedule version control | No ambiguous teacher identities or unscoped subject slots; no invented academic approvals |
+| E — Teaching workflow | Lesson plans, class/subject planner, diary, question bank, assessments, Paper Studio, Urdu PDF/Word | Source syllabi, teacher ownership, plan revision/sent-to-portal semantics, content approval | Save → reopen → retrieve → print parity on real authorized users in controlled paths |
+| F — Operations | Attendance, fees, receipts, result cards, school documents/notices, admin dashboard, APEX Connect | Tenant isolation, row locking, payments ledger, term/result history, protected documents | Multi-module end-to-end authorized flows, denied peer access and accessibility/RTL checks |
+| G — Deployment | Backend + frontend + Nginx + PM2 and rollback set | Signed artifact closure, 0 unintended deletions, 0 live-only source omissions, 0 unresolved private static references | Health+canary+cross-tenant+live DB fingerprint PASS; rollback path verified |
+| H — Certification | Integrated tests and observation windows | Complete evidence matrix, offhost restore and genuine independent gates | RELEASE_GO only if no unresolved critical gates; otherwise HOLD without inventing a certificate |
+
+### 20-Oct new evidence and explicit automatic gates
+
+- Live Exam 9 protected set remains 1,853 results, 224 authentic zeros, zero NULL marks; source guard remains immutable. The School 2 Exam 8 historical demo result is distinct and protected.
+- Teacher grants: 54 source-verified active, **zero unauthorized and zero duplicate**. All 54 approved class/section/subject grant keys match timetable subjects. Among these, 11 distinct timetable key groups carry a NULL `teacher_id` although approved user IDs exist; mismatched *nonnull* IDs = zero. These are unresolved identity projections, **not** authorization to update 11 rows.
+- Eight additional Pre-Nine regular lesson rows have empty section while 8 corresponding approved grants target section `Blue`. Two other unmatched subject groups are administrative School-wide Assembly/Break; they must never become academic teacher grants.
+- Three term lesson-plan records exist; **zero are `sent_to_portal=true`**. Term content, current enrollment/class/subject coverage, syllabus edition, publication and signed academic approval cannot be inferred from counts. Do not silently mass-create or publish lessons.
+- Employee preferred display forms differ from legal user-account names; do not exact-match names or automatically mutate `teacher_id` without a verified stable identity mapping, transaction-level expected-snapshot check, full backup+restore and application acceptance.
+- Active result attendance aggregation still omits school ID in two SQL projections while candidate includes `(school_id,student_id)`; never replace the entire live backend or declare this fixed in production on source-only evidence.
+
+The integrated readiness controller now reports **17 unresolved fail-closed gates**,
+including new timetable-teacher, unscoped Pre-Nine and lesson-publication
+conditions. The three new gates are *within the one existing mission*; they do
+not signal three separate projects. All counted evidence is collected with
+`BEGIN TRANSACTION READ ONLY` and never modifies live records.
+
+### Zero-human engineering automation boundary
+
+Automate discovery, scoped source changes, targeted tests, migrations rehearsed
+on isolated restored clones, observability, certificate aggregation, backup
+verification and permitted release cutovers. Block and preserve live state
+where a security authorization, authenticated external actor, physical paper
+inspection or independent academic approval cannot be established by available
+legitimate mechanisms. System cannot certify itself by creating mock principals,
+peer-school credentials, faux off-host restores, invented source approval or
+pretend Ricoh print results. Missing evidence is an explicit release HOLD.
+
+### Backups, migration, rollback and exception discipline
+
+1. Pre-migration lock: current release refs, PM2 map, Nginx config, two PG
+   clusters' checksums and First Term row fingerprints, and media ownership.
+2. Use **additive migrations** with nullable transitional columns; no global
+   truncate, reset, delete, reimport of exam history or blanket teacher grant.
+3. Rehearse exact migration and rollback in a nonproduction restored clone using
+   the immutable authentic data, then compare Exam 9 rowwise and School 2 guard.
+4. For any teacher-ID repair, require single `(school_id,class,section,subject)`
+   approved source, stable teacher-user and employee association, non-null
+   display preserved, optimistic concurrency check, audited rows and restoration
+   receipt; no change on ambiguous or blank-section tuples.
+5. Stage a complete protected asset manifest. Prevent unsafe removal of 198
+   extra live frontend assets and retention media until ownership, references
+   and rollback have been reconciled. Stage backend with 17 differing and 171
+   live-only paths preserved, not wholesale replaced.
+6. Only roll forward after scoped auth+peer-denial acceptance, effective RLS,
+   academic workflows, print/PDF/Word parity, staged HTTP and independent
+   restore prove complete. If gates fail, freeze writes/cutover as applicable
+   and use verified preflight rollback strategy without losing new records.
+7. Evidence receipts are root-private by default; never publish school images,
+   private logs, tokens, user identities, secrets or protected media to public
+   Git history.

@@ -10,7 +10,7 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
         return {x:{'pass':True} for x in (
             'database','backup','frontend','rollback','http','restricted_catalog_and_firstterm',
             'source_privacy_inventory','backend_source_inventory','attendance_roster_coverage',
-            'fee_ledger_integrity','frontend_artifact_closure','exam_attendance_tenant_scope')}
+            'fee_ledger_integrity','frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity')}
     def test_every_operational_check_passes_but_unapproved_signoff_remains_hold(self):
         e=self.fixture()
         e['frontend']['sidecar_matches']=True
@@ -33,6 +33,16 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
         e['exam_attendance_tenant_scope'].update({'live_scoped':True,'candidate_scoped':False})
         r=gate.classify(e)
         self.assertIn('candidate_exam_attendance_tenant_scope_regression',r['unresolved_release_gates'])
+
+    def test_academic_coverage_unverified_stays_hold(self):
+        e=self.fixture()
+        e['academic_delivery_integrity'].update({'teacher_identity_complete':False,'teaching_sections_complete':False,'lesson_coverage_certified':False})
+        r=gate.classify(e)
+        for x in ('active_timetable_teacher_identity_null_for_approved_grants',
+                  'unscoped_pre_nine_timetable_sections_require_reconciliation',
+                  'lesson_planning_academic_publication_and_coverage_not_certified'):
+            self.assertIn(x,r['unresolved_release_gates'])
+        self.assertTrue(r['operational_checks_pass'])
 
     def test_stale_sidecar_adds_provenance_blocker(self):
         e=self.fixture();e['frontend']['sidecar_matches']=False
