@@ -469,3 +469,42 @@ true provider-level, tenant/RLS or runtime certification. A distinct release
 HOLD remains until a verified source-preserving, rollback-ready production
 cutover and authentic authorized school-channel acceptance. All live student
 records, exams, attendance marks, WhatsApp data and backups are unchanged.
+
+### 20-Oct 22:30+ PKT: disposable two-cluster backup restore preflight (HOLD)
+
+**Purpose and isolation boundary.** A fresh PostgreSQL 16.15 disposable
+instance was initialized under `/var/tmp/assps-restore-rehearsal-20261020-a`
+with a **local Unix socket only** and port **56543**, and with host TCP
+listening disabled. This instance is independent from the serving School1
+and signed-role database processes, and no live school DB was touched.
+The existing compressed `postgres-all.sql.gz` backup archive was read as a
+stream; the original archive and checksum manifest were not modified.
+
+**Actual result: RESTORE_NOT_CERTIFIED.** The first strict `psql`
+`ON_ERROR_STOP=1` replay terminated with status **3** on the first
+`CREATE ROLE postgres` statement because `initdb` already creates that
+built-in bootstrap role. This is a restore-stream compatibility blocker,
+not evidence that the source data are missing or corrupt. An attempted
+follow-up status/inspection operation was blocked by tool safety, so no
+alternative replay was run or represented as a success. The disposable
+PostgreSQL server was subsequently **cleanly stopped** using its own
+`pg_ctl` path, with `pg_ctl status` confirming **no server running**; the
+39-MiB disposable data directory remained isolated under `/var/tmp`.
+Production database services and exam results were unchanged.
+
+**Next safe certification design:** Authorize a narrowly scoped,
+reviewable restore-replay adapter that handles the destination's already
+existing bootstrap PostgreSQL role, with exact removal accounting and
+fail-on-unexpected-SQL semantics, then retry in a disposable instance
+while storing an inspectable aggregate-only restore receipt. Independently
+restore BOTH source PostgreSQL clusters on a genuinely separate off-host
+environment; verify role grants, RLS, first-term zero-vs-NULL invariants,
+physical application restore and rollback. A same-host rehearsal, even if
+successful later, cannot certify independent off-host recovery. On-server
+backup file existence or gzip checks are likewise NOT sufficient.
+
+The VPS root free space concurrently rose above **19 GiB** (roughly 20%),
+clearing the previously explicit headroom safety gate; this observation was
+made after other activity and does not attribute reclaimed capacity to this
+audit execution. Absolutely no school backup, git evidence or academic
+history was deleted to achieve this outcome.
