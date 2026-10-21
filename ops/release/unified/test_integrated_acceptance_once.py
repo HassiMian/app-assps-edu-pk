@@ -39,6 +39,10 @@ class OneRunAcceptanceContract(unittest.TestCase):
                 self.assertEqual((Path(directory)/('integrated-'+b['sha256']+'.json')).read_text().find('two')>=0,True)
                 self.assertIn('two',(Path(directory)/'latest-integrated-readonly-acceptance.json').read_text())
                 self.assertEqual((Path(directory)/('integrated-'+a['sha256']+'.json')).stat().st_mode & 0o777,0o600)
+    def test_teacher_gr_attendance_negative_boundary_is_mandatory(self):
+        self.assertIn('attendance-gr-teacher-scope-http.test.cjs', runner.CORE_TESTS)
+        self.assertEqual(runner.CORE_TESTS.count('attendance-gr-teacher-scope-http.test.cjs'), 1)
+
     def test_browser_tests_are_explicit_suite(self):
         self.assertEqual(len(BROWSER_TESTS),15)
         self.assertIn('dailyDiaryNewDraftScopeBrowser.test.js',BROWSER_TESTS)

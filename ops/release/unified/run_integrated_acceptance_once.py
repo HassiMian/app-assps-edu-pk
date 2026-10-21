@@ -30,6 +30,7 @@ CORE_TESTS = (
     'lesson-private-review-failclosed-http.test.js',
     'lesson-principal-source-bundle-http.test.js',
     'attendance-pool-failure-http.test.cjs',
+    'attendance-gr-teacher-scope-http.test.cjs',
 )
 INTEGRATION_TESTS = (
     'ops/tests/lesson-diary-cognitive-contract.test.js',
