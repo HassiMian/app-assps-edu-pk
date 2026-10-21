@@ -44,3 +44,7 @@ test('source route has serializable lock, safe role guard and transaction rollba
   assert.ok(r.includes(x),x)
  assert.ok(!r.includes('req.user?.school_id || 1'),'never fallback to School1')
 })
+
+test('room null preserved; room mutations change concurrency digest',()=>{const p=input();assert.equal(g.normalize(p,bells,opts).entries[0].room,null);delete p.entries[0].room;fail(()=>g.normalize(p,bells,opts),'TIMETABLE_ROOM_SNAPSHOT_REQUIRED');const rows=input().entries.map(x=>({...x,source_sha256:g.APPROVED_SHA,staff_identity_reviewed:true}));const hash=g.digest(rows);rows[0].room='Changed';assert.notEqual(g.digest(rows),hash)})
+
+test('room truncation is prohibited',()=>{const p=input();p.entries[0].room='X'.repeat(121);fail(()=>g.normalize(p,bells,opts),'TIMETABLE_ROOM_SNAPSHOT_REQUIRED')})

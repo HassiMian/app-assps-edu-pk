@@ -488,12 +488,14 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
     })
   } catch (err) {
     if (client) await client.query('ROLLBACK').catch(() => {})
-    console.error('Attendance mark error:', err.message)
+    // Do not put DB error text or potentially identifying school data in process logs.
+    console.error('Attendance bulk save failed (details redacted)')
     return res.status(503).json({
       success: false,
-      error: 'ATTENDANCE_SAVE_UNAVAILABLE',
-      message: 'Attendance could not be saved. No absent or present statuses were inferred.',
+      error: client ? 'ATTENDANCE_SAVE_UNAVAILABLE' : 'ATTENDANCE_STORAGE_UNAVAILABLE',
+      message: 'Attendance could not be saved. No attendance status was inferred or changed.',
       saved: 0,
+      requestedCount: normalizedRecords.length,
     })
   } finally {
     if (client) client.release()
