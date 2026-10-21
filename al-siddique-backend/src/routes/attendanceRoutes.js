@@ -508,6 +508,18 @@ router.post('/mark-by-gr', protect, canMarkAttendance, async (req, res) => {
     if (!gr_number) {
       return res.status(400).json({ success: false, message: 'GR number is required' })
     }
+    // Reject invalid scanner input before any student lookup or DB mutation.
+    // Do not silently normalize calendar overflow (e.g. February 30).
+    if (!ATTENDANCE_STATUSES.includes(String(status || '').trim().toLowerCase())) {
+      return res.status(400).json({ success: false, error: 'INVALID_ATTENDANCE_STATUS', message: 'Invalid attendance status.' })
+    }
+    if (date != null && date !== '') {
+      if (typeof date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(date) ||
+          Number.isNaN(new Date(date + 'T00:00:00Z').getTime()) ||
+          new Date(date + 'T00:00:00Z').toISOString().slice(0, 10) !== date) {
+        return res.status(400).json({ success: false, error: 'INVALID_ATTENDANCE_DATE', message: 'Use a valid YYYY-MM-DD attendance date.' })
+      }
+    }
     const schoolId = currentSchoolId(req)
     const tenantId = currentTenantId(req)
     const supportsStudentSchool = await hasColumn('students', 'school_id')

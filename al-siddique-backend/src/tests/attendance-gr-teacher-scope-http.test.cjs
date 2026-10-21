@@ -35,6 +35,31 @@ const server=http.createServer(app);let url
 test.before(async()=>{await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));url='http://127.0.0.1:'+server.address().port+'/api/attendance/mark-by-gr'})
 test.after(async()=>{server.closeAllConnections();await new Promise(resolve=>server.close(resolve))})
 const send=async gr_number=>{const response=await fetch(url,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({gr_number,status:'present',date:'2026-10-20'}),signal:AbortSignal.timeout(2000)});return{status:response.status,body:await response.json()}}
+const sendPayload=async payload=>{
+ const response=await fetch(url,{method:'POST',headers:{'content-type':'application/json'},
+  body:JSON.stringify(payload),signal:AbortSignal.timeout(2000)})
+ return{status:response.status,body:await response.json()}
+}
+test('invalid scan attendance statuses fail with HTTP 400 before any DB read',async()=>{
+ assignments=[{class_name:'Five',section:'A'}];writes=0;selectSql=''
+ const r=await sendPayload({gr_number:'ALLOWED',status:'unexcused',date:'2026-10-20'})
+ assert.equal(r.status,400);assert.equal(r.body.error,'INVALID_ATTENDANCE_STATUS')
+ assert.equal(writes,0);assert.equal(selectSql,'')
+})
+test('malformed and impossible scan dates fail with HTTP 400 before any DB read',async()=>{
+ assignments=[{class_name:'Five',section:'A'}];writes=0;selectSql=''
+ for(const date of ['21/10/2026','2026-02-30','2026-13-05','2026-10-20T00:00:00Z']){
+  const r=await sendPayload({gr_number:'ALLOWED',status:'present',date})
+  assert.equal(r.status,400,date);assert.equal(r.body.error,'INVALID_ATTENDANCE_DATE')
+ }
+ assert.equal(writes,0);assert.equal(selectSql,'')
+})
+test('valid leap-day scan date remains supported',async()=>{
+ assignments=[{class_name:'Five',section:'A'}];writes=0
+ const r=await sendPayload({gr_number:'ALLOWED',status:'present',date:'2028-02-29'})
+ assert.equal(r.status,200);assert.equal(writes,1)
+})
+
 test('teacher without active assignments cannot scan attendance',async()=>{
  assignments=[];writes=0
  const r=await send('ANY')
