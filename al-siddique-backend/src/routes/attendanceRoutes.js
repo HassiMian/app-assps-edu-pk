@@ -536,6 +536,21 @@ router.post('/mark-by-gr', protect, canMarkAttendance, async (req, res) => {
         params.push(schoolId)
       }
     }
+    // Single-GR writes must enforce the SAME teacher class/section scope as bulk marking.
+    // A school/tenant match alone must not authorize a teacher to alter another class.
+    if (String(req.user?.role || '').toLowerCase() === 'teacher') {
+      if (!supportsStudentSchool) {
+        return res.status(503).json({ success: false, error: 'STUDENT_SCHOOL_SCHEMA_REQUIRED', message: 'Teacher-scoped scanning requires a school_id on students.' })
+      }
+      if (!(await requireTeacherAssignmentsForAttendance(req, res))) return
+      const teacherScope = teacherStudentScopeClause(req, 'students', idx)
+      if (!teacherScope || !teacherScope.clause || !Array.isArray(teacherScope.params)) {
+        return res.status(403).json({ success: false, error: 'TEACHER_SCOPE_REQUIRED', message: 'A valid teaching assignment is required.' })
+      }
+      studentSql += teacherScope.clause
+      params.push(...teacherScope.params)
+      idx = teacherScope.nextIndex
+    }
     studentSql += ' LIMIT 1'
     const studentRes = await query(studentSql, params)
     if (!studentRes.rows.length) {
