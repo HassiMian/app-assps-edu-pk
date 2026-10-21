@@ -40,6 +40,23 @@ def http_status(url):
         return None
     return int(output)
 
+def frontend_attestation_verdict(actual_index_sha, sidecar):
+    """Read-only trust gate: hash mismatch is FAIL, hash parity is not provenance."""
+    if not isinstance(actual_index_sha, str) or not re.fullmatch(r"[0-9a-f]{64}", actual_index_sha):
+        return "FAIL", "invalid active index SHA256"
+    if not isinstance(sidecar, dict):
+        return "FAIL", "missing or malformed release attestation"
+    declared_sha = sidecar.get("frontend_index_sha256")
+    claimed_commit = sidecar.get("candidate_commit")
+    if not isinstance(declared_sha, str) or not re.fullmatch(r"[0-9a-f]{64}", declared_sha):
+        return "FAIL", "missing or malformed attested index SHA256"
+    if not isinstance(claimed_commit, str) or not re.fullmatch(r"[0-9a-f]{40}", claimed_commit):
+        return "FAIL", "missing or malformed source commit ancestry claim"
+    if actual_index_sha != declared_sha:
+        return "FAIL", "live frontend index SHA256 mismatch against release sidecar"
+    return "HOLD", "matching hash requires independent build, deployed assets and signed source ancestry proof"
+
+
 def sha256(path):
     h = hashlib.sha256()
     with path.open("rb") as f:
@@ -72,15 +89,10 @@ def audit():
         sidecar = active / "assps-release-attestation.json"
         try:
             doc = json.loads(sidecar.read_text())
-            expected = doc.get("frontend_index_sha256")
-            if expected == digest and re.fullmatch(r"[0-9a-f]{40}", doc.get("candidate_commit","")):
-                gate("G2_frontend_attestation", "HOLD",
-                     "artifact hash matches sidecar but independent build and all assets require proof")
-            else:
-                gate("G2_frontend_attestation", "HOLD",
-                     "live artifact and release-sidecar hash/source ancestry are not independently reconciled")
+            verdict, reason = frontend_attestation_verdict(digest, doc)
+            gate("G2_frontend_attestation", verdict, reason)
         except (OSError, ValueError):
-            gate("G2_frontend_attestation", "HOLD", "missing/invalid frontend release metadata")
+            gate("G2_frontend_attestation", "FAIL", "missing/invalid frontend release metadata")
 
     nginx_code, _, _ = process(["nginx", "-t"], timeout=8)
     gate("G0_nginx_syntax", "PASS" if nginx_code == 0 else "FAIL",
