@@ -7,6 +7,9 @@ import run_integrated_acceptance_once as runner
 from run_integrated_acceptance_once import node_summary, suite_success, BROWSER_TESTS, CORE_TESTS, INTEGRATION_TESTS
 
 class OneRunAcceptanceContract(unittest.TestCase):
+    def test_runner_attests_this_checkout_not_stale_worktree(self):
+        self.assertEqual(runner.ROOT, Path(__file__).resolve().parents[3])
+        self.assertTrue((runner.ROOT / 'al-siddique-frontend' / 'package-lock.json').is_file())
     def test_node_test_success_requires_real_counts(self):
         self.assertFalse(suite_success(0, {}))
         self.assertFalse(suite_success(0, {'tests':0,'pass':0,'fail':0}))

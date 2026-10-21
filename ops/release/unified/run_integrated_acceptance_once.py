@@ -17,8 +17,8 @@ import subprocess
 import sys
 import tempfile
 
-ROOT = Path('/root/workspace/assps-unified-one-train-exam9v2-20261019')
-PRIVATE_RECEIPTS = Path('/root/secure-archive/assps-unified-one-run-evidence-20261020')
+ROOT = Path(__file__).resolve().parents[3]  # exact source checkout; never test a stale release branch
+PRIVATE_RECEIPTS = Path('/root/secure-archive/assps-unified-one-run-evidence-20261021')
 BACKEND = 'al-siddique-backend/src/tests/'
 FRONTEND = 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/'
 CORE_TESTS = (
@@ -132,6 +132,13 @@ def browser_dependency_scope(enabled):
     if not existing.is_dir():
         raise RuntimeError('Pinned offline browser dependencies unavailable')
     created = False
+    if link.is_dir() and not link.is_symlink():
+        # npm ci in this isolated source checkout is an acceptable locally installed
+        # browser runtime; never relink, delete or modify another agent's modules.
+        if not (link / '.package-lock.json').is_file() or not (link / '.bin' / 'vite').exists():
+            raise RuntimeError('Local isolated frontend dependencies are incomplete')
+        yield
+        return
     if link.is_symlink():
         if link.resolve() != existing.resolve():
             raise RuntimeError('Existing browser dependencies do not match pinned location')
