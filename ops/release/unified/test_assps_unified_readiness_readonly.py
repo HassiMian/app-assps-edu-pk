@@ -1,6 +1,11 @@
 """Pure, hermetic tests: NEVER connect to live database or make HTTP calls."""
 import sys
 import unittest
+import gzip
+import hashlib
+import tarfile
+import tempfile
+from unittest import mock
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 import assps_unified_readiness_readonly as gate
@@ -130,6 +135,34 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
         self.assertIn('postgres-all.sql.gz',source)
         self.assertIn('postgres-asspssigned-55432-all.sql.gz',source)
         self.assertIn("'SHA256SUMS'",source)
+
+    def test_backup_archive_must_match_current_frontend_not_only_include_filename(self):
+        # All data is synthetic, private temporary fixture; no live DB, HTTP or files.
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            served=root/'served'
+            served.mkdir()
+            (served/'index.html').write_bytes(b'original-index')
+            backups=root/'backups'
+            bundle=backups/'assps-critical-20261021T034500Z'
+            bundle.mkdir(parents=True)
+            for name in ('postgres-all.sql.gz','postgres-asspssigned-55432-all.sql.gz'):
+                (bundle/name).write_bytes(gzip.compress(b'synthetic-pg-only'))
+            (bundle/'worktree-vault-result.txt').write_text('synthetic-vault')
+            arcname=str(served/'index.html').lstrip('/')
+            with tarfile.open(bundle/'live-apps-and-configs.tar.gz','w:gz') as archive:
+                archive.add(served/'index.html',arcname=arcname)
+            names=('postgres-all.sql.gz','postgres-asspssigned-55432-all.sql.gz',
+                   'worktree-vault-result.txt','live-apps-and-configs.tar.gz')
+            (bundle/'SHA256SUMS').write_text(''.join(
+                f"{hashlib.sha256((bundle/n).read_bytes()).hexdigest()}  {n}\n" for n in names
+            ))
+            with mock.patch.object(gate,'ACTIVE_ROOT',served),mock.patch.object(gate,'BACKUP_ROOT',backups):
+                self.assertTrue(gate.inspect_backup()['current_frontend_snapshot_matches'])
+                (served/'index.html').write_bytes(b'newer-deployment-after-backup')
+                with self.assertRaisesRegex(RuntimeError,'snapshot differs from active'):
+                    gate.inspect_backup()
+
     def test_provenance_sidecar_not_rewritten(self):
         source=Path(gate.__file__).read_text()
         self.assertIn('sidecar_matches',source)

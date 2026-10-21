@@ -156,7 +156,20 @@ def inspect_backup():
     rel=str(ACTIVE_ROOT).lstrip('/')+'/index.html'
     if not any(line.lstrip('./')==rel for line in tar.stdout.splitlines()):
         raise RuntimeError('Latest backup omits the current live frontend root')
-    return {'pass':True,'snapshot':latest.name,'checksum_entries':4,'main_and_signed_gzip_pass':True,'active_frontend_included':True}
+    # Filename presence and archive integrity cannot prove rollback of the *active*
+    # release if a different build was deployed after the last snapshot.
+    active_before=digest(ACTIVE_ROOT/'index.html')
+    extraction=subprocess.run(['tar','-xOzf',str(arch),rel],
+                              capture_output=True,timeout=30,check=False)
+    if extraction.returncode:
+        raise RuntimeError('Cannot extract the exact backed-up live frontend index')
+    archived_sha256=hashlib.sha256(extraction.stdout).hexdigest()
+    active_after=digest(ACTIVE_ROOT/'index.html')
+    if active_before!=active_after or archived_sha256!=active_after:
+        raise RuntimeError('Latest backup frontend snapshot differs from active served index')
+    return {'pass':True,'snapshot':latest.name,'checksum_entries':4,
+            'main_and_signed_gzip_pass':True,'active_frontend_included':True,
+            'archived_index_sha256':archived_sha256,'current_frontend_snapshot_matches':True}
 
 def inspect_frontend():
     html=ACTIVE_ROOT/'index.html'
