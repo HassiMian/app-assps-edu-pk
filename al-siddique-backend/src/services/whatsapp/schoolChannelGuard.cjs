@@ -54,4 +54,13 @@ function formatSchoolScopeRestriction(language='ROMAN_URDU') {
   return 'Ye ASSPS school assistant sirf school operations, students, fees, attendance aur admissions ke liye hai. Market ya trading intelligence is channel par available nahi hai.'
 }
 
-module.exports = { USER_ROLES, normalizePhoneNumber, resolveUserRole, isOwner, requireConfiguredSchoolId, formatSchoolScopeRestriction }
+
+// A school WhatsApp channel may not accept requests for financial market
+// operations. This guard is channel-wide, including the configured owner.
+// It never invokes trading code, account services or external networks.
+function isFinancialMarketRequest(rawText) {
+  const text = String(rawText ?? '').toLowerCase().normalize('NFKC')
+  return /\b(?:argus|mt5|metatrader|forex|xauusd|eurusd|gbpusd|usd[jc]py|broker|trading|trade|trades|stop[ -]?loss|take[ -]?profit|lot[ -]?size|margin[ -]?call|liquidation)\b|\b(?:gold[ -]+setup|market[ -]+(?:signal|intelligence|setup)|stock[ -]+market|emergency[ -]+close)\b/i.test(text)
+}
+
+module.exports = { USER_ROLES, normalizePhoneNumber, resolveUserRole, isOwner, requireConfiguredSchoolId, formatSchoolScopeRestriction, isFinancialMarketRequest }

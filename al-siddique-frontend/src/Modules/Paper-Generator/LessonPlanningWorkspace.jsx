@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { BookOpen, BrainCircuit, CalendarDays, CheckCircle2, ChevronDown, ChevronUp, Copy, FileText, Plus, Printer, RefreshCw, Save, Sparkles, Trash2, WandSparkles, X, Users } from 'lucide-react'
 import { useAcademicStore } from '../../services/useAcademicStore'
 import { getTenantStorageItem, setTenantStorageItem } from '../../services/tenantStorage'
@@ -23,6 +23,19 @@ import {
 import WeeklyNotebookStudio from './WeeklyNotebookStudio'
 import './WeeklyNotebookStudio.css'
 import './LessonPlanningWorkspace.css'
+
+// Surface the real HTTP failure; NEVER render an empty saved plan list as
+// proof that no plans exist when the backend cannot be reached.
+function lessonRequestError(error, label) {
+  const status = Number(error?.response?.status || 0)
+  const description = status === 401 ? 'Your session needs verification. Please sign in again if recovery fails.'
+    : status === 403 ? 'Your role does not have access to this school resource.'
+    : status === 404 ? 'The Lesson Planning service is not available on this release.'
+    : status === 503 ? 'The school service is temporarily unavailable.'
+    : status >= 500 || !status ? 'The server or network could not be reached.'
+    : 'The school service returned an error.'
+  return label + ': ' + description + ' Your existing draft has not been cleared.'
+}
 
 const DRAFT_KEY = 'assps_lesson_planner_v2_draft'
 const today = () => new Date().toISOString().slice(0, 10)
@@ -118,6 +131,9 @@ export default function LessonPlanningWorkspace() {
     try { const raw=getTenantStorageItem(DRAFT_KEY); return raw?normalizeLessonPlanDocument(JSON.parse(raw)):createEmptyLessonPlanDocument({startDate:today()}) } catch { return createEmptyLessonPlanDocument({startDate:today()}) }
   })
   const [savedPlans,setSavedPlans] = useState([])
+  const [savedPlansError,setSavedPlansError] = useState('')
+  const [contextError,setContextError] = useState('')
+  const [contextRetryKey,setContextRetryKey] = useState(0)
   const [selectedSubjects,setSelectedSubjects] = useState(()=>document.subjects.map(item=>item.subject))
   const selectedSubjectsCsv = selectedSubjects.join(',')
   const [context,setContext] = useState(null)
@@ -135,13 +151,31 @@ export default function LessonPlanningWorkspace() {
   const sectionOptions = useMemo(()=>selectedClass ? sectionsForClass(selectedClass.name) : [],[selectedClass,sectionsForClass])
 
   useEffect(()=>{ try { setTenantStorageItem(DRAFT_KEY,JSON.stringify(document)) } catch { /* Preserve the current lesson in memory when local draft storage is unavailable. */ } },[document])
-  useEffect(()=>{ listLessonPlans({limit:200}).then(data=>setSavedPlans(Array.isArray(data)?data:[])).catch(()=>{}) },[])
+  const reloadSavedPlans=useCallback(async()=>{
+    try {
+      const data=await listLessonPlans({limit:200})
+      setSavedPlans(Array.isArray(data)?data:[])
+      setSavedPlansError('')
+      return true
+    } catch(error) {
+      setSavedPlansError(lessonRequestError(error,'Saved plans'))
+      return false
+    }
+  },[])
   useEffect(()=>{
-    if(!document.classLevel)return
     let cancelled=false
-    getLessonPlanningContext({ classLevel:document.classLevel,section:document.section,subjects:selectedSubjectsCsv }).then(data=>{if(!cancelled)setContext(data)}).catch(()=>{if(!cancelled)setContext(null)})
+    queueMicrotask(()=>{if(!cancelled)void reloadSavedPlans()})
     return()=>{cancelled=true}
-  },[document.classLevel,document.section,selectedSubjectsCsv])
+  },[reloadSavedPlans])
+  useEffect(()=>{
+    let cancelled=false
+    queueMicrotask(()=>{if(!cancelled)setContextError('')})
+    if(!document.classLevel)return()=>{cancelled=true}
+    getLessonPlanningContext({classLevel:document.classLevel,section:document.section,subjects:selectedSubjectsCsv})
+      .then(data=>{if(!cancelled){setContext(data);setContextError('')}})
+      .catch(error=>{if(!cancelled){setContext(null);setContextError(lessonRequestError(error,'Class context'))}})
+    return()=>{cancelled=true}
+  },[document.classLevel,document.section,selectedSubjectsCsv,contextRetryKey])
 
   const patch = updates => setDocument(current=>normalizeLessonPlanDocument({ ...current,...updates }))
   const changeType = type => {
@@ -192,8 +226,13 @@ export default function LessonPlanningWorkspace() {
     try{
       const payload=toLessonPlanPersistencePayload(document)
       const saved=document.id?await updateLessonPlan(payload):await createLessonPlan(payload)
-      const normalized=normalizeLessonPlanDocument(saved);setDocument(normalized);setSelectedSubjects(normalized.subjects.map(item=>item.subject))
-      const all=await listLessonPlans({limit:200});setSavedPlans(Array.isArray(all)?all:[]);setStatus('Lesson plan saved safely.')
+      const normalized=normalizeLessonPlanDocument(saved)
+      setDocument(normalized)
+      setSelectedSubjects(normalized.subjects.map(item=>item.subject))
+      // Server Save is durable independently of a SECOND read request.
+      // A failed list refresh must not cause a duplicate POST/PUT next time.
+      setStatus('Lesson plan saved safely. Server ID and revision preserved.')
+      await reloadSavedPlans()
     }catch(error){const code=error?.response?.data?.code;if(code==='LESSON_PLAN_REVISION_CONFLICT')setStatus('This plan changed in another session. Reopen it before saving again.');else setStatus(error?.response?.data?.message||error?.message||'Save failed. Recovery draft remains on this device.')}
     finally{setBusy('')}
   }
@@ -212,6 +251,11 @@ export default function LessonPlanningWorkspace() {
       <button className={showWeeklyNotebook?'selected':''} onClick={()=>setShowWeeklyNotebook(true)}>Weekly Notebook Studio</button>
       <button className={!showWeeklyNotebook?'selected':''} onClick={()=>setShowWeeklyNotebook(false)}>Advanced Lesson Editor</button>
     </nav>
+    {!showWeeklyNotebook && (savedPlansError || contextError) &&
+      <section className="lp-recovery-banner" data-lesson-api-recovery role="alert" aria-live="assertive">
+        {savedPlansError && <p>{savedPlansError} <button type="button" onClick={()=>void reloadSavedPlans()}>Retry saved plans</button></p>}
+        {contextError && <p>{contextError} <button type="button" onClick={()=>setContextRetryKey(k=>k+1)}>Retry class context</button></p>}
+      </section>}
     {showWeeklyNotebook?<WeeklyNotebookStudio/>:<>
     <div className="lp-topbar">
       <div><div className="lp-eyebrow">ASSPS Academic Planning</div><h2>Lesson Planning Workspace</h2><p>Plan once. Reuse across term, daily lessons, diary cards and assessments.</p></div>

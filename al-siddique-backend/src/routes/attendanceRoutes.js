@@ -297,11 +297,11 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
 
   let client
   try {
+    if (!(await requireTeacherAssignmentsForAttendance(req, res))) return
     client = await pool.connect()
     const schoolId = currentSchoolId(req)
     const tenantId = currentTenantId(req)
     const actorRole = String(req.user?.role || '').toLowerCase()
-    if (!(await requireTeacherAssignmentsForAttendance(req, res))) return
     let schoolName = ''
     if (schoolId) {
       const schoolIdentity = await query(`
@@ -488,11 +488,12 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
     })
   } catch (err) {
     if (client) await client.query('ROLLBACK').catch(() => {})
-    console.error('Attendance mark error:', err.message)
-    return res.status(client ? 500 : 503).json({
+    // Do not put DB error text or potentially identifying school data in process logs.
+    console.error('Attendance bulk save failed (details redacted)')
+    return res.status(503).json({
       success: false,
-      error: client ? 'DATABASE_ERROR' : 'ATTENDANCE_STORAGE_UNAVAILABLE',
-      message: 'Attendance could not be saved. No records were persisted.',
+      error: client ? 'ATTENDANCE_SAVE_UNAVAILABLE' : 'ATTENDANCE_STORAGE_UNAVAILABLE',
+      message: 'Attendance could not be saved. No attendance status was inferred or changed.',
       saved: 0,
       requestedCount: normalizedRecords.length,
     })
@@ -550,8 +551,17 @@ router.post('/mark-by-gr', protect, canMarkAttendance, async (req, res) => {
         params.push(schoolId)
       }
     }
+    // Single-GR writes must enforce the SAME teacher class/section scope as bulk marking.
+    // A school/tenant match alone must not authorize a teacher to alter another class.
     if (String(req.user?.role || '').toLowerCase() === 'teacher') {
+      if (!supportsStudentSchool) {
+        return res.status(503).json({ success: false, error: 'STUDENT_SCHOOL_SCHEMA_REQUIRED', message: 'Teacher-scoped scanning requires a school_id on students.' })
+      }
+      if (!(await requireTeacherAssignmentsForAttendance(req, res))) return
       const teacherScope = teacherStudentScopeClause(req, 'students', idx)
+      if (!teacherScope || !teacherScope.clause || !Array.isArray(teacherScope.params)) {
+        return res.status(403).json({ success: false, error: 'TEACHER_SCOPE_REQUIRED', message: 'A valid teaching assignment is required.' })
+      }
       studentSql += teacherScope.clause
       params.push(...teacherScope.params)
       idx = teacherScope.nextIndex

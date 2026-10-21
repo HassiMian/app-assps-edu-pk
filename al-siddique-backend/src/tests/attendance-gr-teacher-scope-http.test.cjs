@@ -1,77 +1,93 @@
 'use strict'
+// All HTTP requests, actors, and student records in this test are synthetic.
+// Database and auth modules are intercepted before the actual attendance route loads.
 const test = require('node:test')
 const assert = require('node:assert/strict')
 const Module = require('node:module')
 const express = require('express')
 const http = require('node:http')
 const path = require('node:path')
-let assignments = [], writes = 0, selectSql = '', selectParams = []
+const routePath = path.resolve(__dirname, '../routes/attendanceRoutes.js')
 const originalLoad = Module._load
-const next = (req, res, follow) => { req.user={id:17,role:'teacher',school_id:1}; follow() }
-const fake = {
- '../config/database': {pool:{connect:async()=>{throw Error('unexpected pool')}},applyTenantContext:()=>{},
-  query:async (sql,params)=>{
-   if(sql.includes('FROM students')) {
-    selectSql=sql;selectParams=params
-    if(params[0]==='DENIED'&&sql.includes('teacher_class_assignments'))return{rows:[]}
-    return{rows:[{id:901,name:'Fixture Student',gr_number:params[0],class:'Five',section:'A',school_id:1,tenant_id:'tenant1',parent_phone:null}]}
-   }
-   if(sql.includes('INSERT INTO attendance')){writes++;return{rows:[{id:7,student_id:901}]}}
-   throw Error('unexpected SQL')
-  }},
- '../middleware/auth':{protect:next,requireRoles:()=>next,requireScopeForServiceOnly:()=>next,hasServiceScope:()=>false},
- '../middleware/tenant':{currentSchoolId:()=>1,currentTenantId:()=> 'tenant1',hasColumn:async()=>true,tenantClause:()=>({clause:'',params:[],nextIndex:1})},
- '../services/teacherAssignmentService':{getTeacherAssignments:async()=>assignments,
-  teacherStudentScopeClause:(req,alias,startIndex)=>({clause:' AND EXISTS (SELECT 1 FROM teacher_class_assignments tca WHERE tca.teacher_user_id = $'+startIndex+' AND tca.school_id = '+alias+'.school_id AND tca.is_active = true)',params:[17],nextIndex:startIndex+1})},
- '../services/twilioSettings':{getTwilioConfigForSchool:async()=>({}),buildTwilioClient:()=>null}
-}
-let routes
+let actualScopeClause
 try {
- Module._load=function(request,parent,isMain){return Object.hasOwn(fake,request)?fake[request]:originalLoad.call(this,request,parent,isMain)}
- routes=require(path.resolve(__dirname,'../routes/attendanceRoutes.js'))
-} finally {Module._load=originalLoad}
-const app=express();app.use(express.json());app.use('/api/attendance',routes)
-const server=http.createServer(app);let url
-test.before(async()=>{await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));url='http://127.0.0.1:'+server.address().port+'/api/attendance/mark-by-gr'})
-test.after(async()=>{server.closeAllConnections();await new Promise(resolve=>server.close(resolve))})
-const send=async gr_number=>{const response=await fetch(url,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({gr_number,status:'present',date:'2026-10-20'}),signal:AbortSignal.timeout(2000)});return{status:response.status,body:await response.json()}}
-const sendPayload=async payload=>{
- const response=await fetch(url,{method:'POST',headers:{'content-type':'application/json'},
-  body:JSON.stringify(payload),signal:AbortSignal.timeout(2000)})
- return{status:response.status,body:await response.json()}
+  Module._load = function (name, parent, isMain) {
+    if (name === '../config/database') return { query: async () => { throw Error('unexpected real query') } }
+    return originalLoad.call(this, name, parent, isMain)
+  }
+  actualScopeClause = require('../services/teacherAssignmentService').teacherStudentScopeClause
+} finally { Module._load = originalLoad }
+let hasAssignment = false
+let studentSelectCount = 0
+let insertedCount = 0
+const tenantId = 'tenant-synthetic-one'
+const syntheticDb = {
+  pool: { connect: async () => { throw Error('real pool must not be used') } },
+  applyTenantContext: () => {},
+  query: async (sql, args) => {
+    if (sql.includes('FROM students WHERE')) {
+      studentSelectCount++
+      assert.match(sql, /EXISTS\s*\(\s*SELECT 1\s*FROM teacher_class_assignments tca/)
+      assert.match(sql, /tca\.teacher_user_id = \$3/)
+      assert.match(sql, /tca\.school_id = students\.school_id/)
+      assert.equal(args[1], tenantId)
+      assert.equal(args[2], 17)
+      if (args[0] !== 'OWN-GR') return {rows: []}
+      return {rows: [{id: 201, name: 'Synthetic Student', gr_number: 'OWN-GR', class: '8', section: 'Blue', school_id: 1, tenant_id: tenantId, parent_phone: null}]}
+    }
+    if (sql.includes('INSERT INTO attendance')) {
+      insertedCount++
+      assert.equal(args[0], 201)
+      assert.equal(args[3], 17)
+      return { rows: [{student_id: 201, date: '2026-10-21', status: 'present', marked_by: 17}] }
+    }
+    throw Error('Unexpected SQL in synthetic test')
+  }
 }
-test('invalid scan attendance statuses fail with HTTP 400 before any DB read',async()=>{
- assignments=[{class_name:'Five',section:'A'}];writes=0;selectSql=''
- const r=await sendPayload({gr_number:'ALLOWED',status:'unexcused',date:'2026-10-20'})
- assert.equal(r.status,400);assert.equal(r.body.error,'INVALID_ATTENDANCE_STATUS')
- assert.equal(writes,0);assert.equal(selectSql,'')
-})
-test('malformed and impossible scan dates fail with HTTP 400 before any DB read',async()=>{
- assignments=[{class_name:'Five',section:'A'}];writes=0;selectSql=''
- for(const date of ['21/10/2026','2026-02-30','2026-13-05','2026-10-20T00:00:00Z']){
-  const r=await sendPayload({gr_number:'ALLOWED',status:'present',date})
-  assert.equal(r.status,400,date);assert.equal(r.body.error,'INVALID_ATTENDANCE_DATE')
- }
- assert.equal(writes,0);assert.equal(selectSql,'')
-})
-test('valid leap-day scan date remains supported',async()=>{
- assignments=[{class_name:'Five',section:'A'}];writes=0
- const r=await sendPayload({gr_number:'ALLOWED',status:'present',date:'2028-02-29'})
- assert.equal(r.status,200);assert.equal(writes,1)
-})
+const pass = (req, res, next) => { req.user = { id: 17, role: 'teacher', school_id: 1, tenant_id: tenantId }; next() }
+const stubs = {
+  '../config/database': syntheticDb,
+  '../middleware/auth': { protect: pass, requireRoles: () => pass, requireScopeForServiceOnly: () => pass, hasServiceScope: () => false },
+  '../middleware/tenant': { tenantClause: () => ({clause:'',params:[]}), currentSchoolId: () => 1, currentTenantId: () => tenantId, hasColumn: async () => true },
+  '../services/teacherAssignmentService': { teacherStudentScopeClause: actualScopeClause, getTeacherAssignments: async () => hasAssignment ? [{class_name:'8',section:'Blue'}] : [] },
+  '../services/twilioSettings': { getTwilioConfigForSchool: async () => ({}), buildTwilioClient: () => null }
+}
+let route
+try {
+  Module._load = function (name, parent, isMain) { if (Object.hasOwn(stubs,name)) return stubs[name]; return originalLoad.call(this,name,parent,isMain) }
+  route = require(routePath)
+} finally { Module._load = originalLoad }
+const app = express(); app.use(express.json()); app.use('/api/attendance', route)
+const server = http.createServer(app)
+let base
 
-test('teacher without active assignments cannot scan attendance',async()=>{
- assignments=[];writes=0
- const r=await send('ANY')
- assert.equal(r.status,409);assert.equal(r.body.code,'TEACHER_ASSIGNMENTS_REQUIRED');assert.equal(writes,0)
+test.before(async () => { await new Promise(resolve => server.listen(0, '127.0.0.1', resolve)); base = `http://127.0.0.1:${server.address().port}` })
+test.after(async () => { server.closeAllConnections(); await new Promise(resolve => server.close(resolve)) })
+async function mark(gr) {
+  const response = await fetch(base + '/api/attendance/mark-by-gr', { method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({gr_number:gr,status:'present',date:'2026-10-21'}), signal:AbortSignal.timeout(2000) })
+  return {code:response.status, data:await response.json()}
+}
+test('teacher with no assignments is rejected before GR lookup or attendance writes', async () => {
+  hasAssignment = false
+  const result = await mark('OWN-GR')
+  assert.equal(result.code, 409)
+  assert.equal(result.data.code, 'TEACHER_ASSIGNMENTS_REQUIRED')
+  assert.equal(studentSelectCount, 0)
+  assert.equal(insertedCount, 0)
 })
-test('assigned teacher cannot scan unauthorized GR outside class',async()=>{
- assignments=[{class_name:'One',section:'A'}];writes=0
- const r=await send('DENIED')
- assert.equal(r.status,404);assert.match(selectSql,/teacher_class_assignments/);assert.equal(selectParams.at(-1),17);assert.equal(writes,0)
+test('teacher with one class assignment cannot mark a GR outside that assigned class', async () => {
+  hasAssignment = true
+  const result = await mark('OUT-OF-SCOPE-GR')
+  assert.equal(result.code, 404)
+  assert.equal(result.data.success, false)
+  assert.equal(studentSelectCount, 1)
+  assert.equal(insertedCount, 0)
 })
-test('assigned teacher can scan class-authorized GR',async()=>{
- assignments=[{class_name:'Five',section:'A'}];writes=0
- const r=await send('ALLOWED')
- assert.equal(r.status,200);assert.equal(r.body.success,true);assert.match(selectSql,/teacher_class_assignments/);assert.equal(writes,1)
+test('teacher may mark a GR in assigned class only after scoped SQL lookup', async () => {
+  hasAssignment = true
+  const result = await mark('OWN-GR')
+  assert.equal(result.code, 200)
+  assert.equal(result.data.success, true)
+  assert.equal(studentSelectCount, 2)
+  assert.equal(insertedCount, 1)
 })

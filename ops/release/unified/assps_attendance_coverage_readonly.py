@@ -2,7 +2,8 @@
 """School1 attendance visibility without pupil data, guessed marks or DB mutations."""
 import json
 import subprocess
-from datetime import datetime, timezone
+from datetime import datetime, timezone, time, date
+from zoneinfo import ZoneInfo
 from collections import Counter
 
 SQL = """
@@ -86,6 +87,23 @@ def parse(text):
             'zero_saved_class_alerts':sum(x['investigate_no_saved_rows'] for x in groups),
             'does_not_infer_missing_attendance_status':True}
 
+def post_close_unsaved_day(coverage, now=None):
+    """Possible missing daily save, not evidence of absences or school opening.
+
+    Only warn on the matching local date, a scheduled weekday (Mon–Sat),
+    and after 15:00 PKT. Holiday evidence is unavailable here; never create
+    attendance statuses or automatically perform a backfill.
+    """
+    current = now if now is not None else datetime.now(timezone.utc)
+    if current.tzinfo is None:
+        raise ValueError('Attendance observation time must be timezone aware')
+    local=current.astimezone(ZoneInfo('Asia/Karachi'))
+    observed_date=date.fromisoformat(coverage['date_pakistan'])
+    return (local.date()==observed_date and local.weekday()<6
+        and local.time()>=time(15,0)
+        and coverage['total_active']>0 and coverage['total_marked']==0
+        and coverage['previously_registered_unmarked_total']>0)
+
 def main():
     p=subprocess.run(['runuser','-u','postgres','--','psql','-p','5432','-d','apexos',
                       '-X','-Atq','-v','ON_ERROR_STOP=1'],input=SQL,text=True,
@@ -93,7 +111,8 @@ def main():
     if p.returncode:
         raise SystemExit('HOLD: read-only class attendance query unavailable')
     result=parse(p.stdout)
-    print(json.dumps({'observed_at_utc':datetime.now(timezone.utc).isoformat(),**result},indent=2))
+    print(json.dumps({'observed_at_utc':datetime.now(timezone.utc).isoformat(),**result,
+                      'possible_post_close_full_roster_unsaved':post_close_unsaved_day(result)},indent=2))
     if any(x['duplicate_rows']>0 for x in result['class_coverage']):
         raise SystemExit(2)
 

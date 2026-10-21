@@ -17,6 +17,21 @@ test('teachers, clerks, anonymous and superadmins cannot write',()=>{for(const r
 test('no default School1, no peer tenant override',()=>{fail(()=>g.authority({user:{id:9,role:'principal',school_id:1},body:{}}),'TIMETABLE_VERIFIED_SCHOOL_ACTOR_REQUIRED');fail(()=>g.authority({...actor(),school_id:2}),'TIMETABLE_VERIFIED_SCHOOL_ACTOR_REQUIRED');fail(()=>g.authority({...actor(),body:{school_id:2}}),'TIMETABLE_SCHOOL_OVERRIDE_DENIED')})
 test('source attestation blocked until independently reviewed',()=>fail(()=>g.normalize(input(),bells,{sourceSha:g.APPROVED_SHA}),'TIMETABLE_SOURCE_ATTESTATION_HOLD'))
 test('valid Monday and Friday eight periods correct',()=>{for(const day of ['Monday','Friday']){const r=g.normalize(input(day),bells,opts);assert.equal(r.entries.length,8);assert.equal(r.entries[4].period_label,'Period 5');assert.equal(r.entries[7].end_time,day==='Friday'?'12:30':'13:30')}})
+test('room is required in each optimistic save and included in snapshot digest',()=>{
+ const incomplete=input();delete incomplete.entries[0].room
+ fail(()=>g.normalize(incomplete,bells,opts),'TIMETABLE_ROOM_SNAPSHOT_REQUIRED')
+ const accepted=g.normalize(input(),bells,opts)
+ assert.equal(accepted.entries[0].room,null)
+ const rows=input().entries.map(e=>({...e,source_sha256:g.APPROVED_SHA,staff_identity_reviewed:true}))
+ const expected=g.digest(rows)
+ const changed=rows.map((row,i)=>i===0?{...row,room:'Computer Lab'}:row)
+ assert.notEqual(expected,g.digest(changed))
+ fail(()=>g.matchSnapshot(changed,expected),'TIMETABLE_CONCURRENT_MODIFICATION')
+})
+test('backend must bind room in both timetable snapshot reads',()=>{
+ const source=fs.readFileSync(path.join(__dirname,'../routes/timetableRoutes.js'),'utf8')
+ assert.equal(source.split('teacher_display_name,room,source_sha256,staff_identity_reviewed FROM public.timetable').length-1,2)
+})
 test('empty and missing period blocked',()=>{for(const rows of [[],input().entries.slice(1)]){const p=input();p.entries=rows;fail(()=>g.normalize(p,bells,opts),'TIMETABLE_EIGHT_PERIODS_REQUIRED')}})
 test('duplicate period blocked',()=>{const p=input();p.entries[7]={...p.entries[0]};fail(()=>g.normalize(p,bells,opts),'TIMETABLE_PERIOD_DUPLICATE_OR_INVALID')})
 test('wrong bell time, Friday break and Regular writes blocked',()=>{const p=input();p.entries[0].start_time='08:15';fail(()=>g.normalize(p,bells,opts),'TIMETABLE_OFFICIAL_TIME_REQUIRED');const q=input('Friday');q.entries[7].period_label='Break';fail(()=>g.normalize(q,bells,opts),'TIMETABLE_PERIOD_DUPLICATE_OR_INVALID');const x=input();x.day_name='Regular';fail(()=>g.normalize(x,bells,opts),'TIMETABLE_DAY_INVALID')})

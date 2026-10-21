@@ -31,6 +31,7 @@ CORE_TESTS = (
     'lesson-principal-source-bundle-http.test.js',
     'attendance-pool-failure-http.test.cjs',
     'attendance-gr-teacher-scope-http.test.cjs',
+    'attendance-gr-input-validation-http.test.cjs',
 )
 INTEGRATION_TESTS = (
     'ops/tests/lesson-diary-cognitive-contract.test.js',
@@ -133,6 +134,13 @@ def browser_dependency_scope(enabled):
     if not existing.is_dir():
         raise RuntimeError('Pinned offline browser dependencies unavailable')
     created = False
+    if link.is_dir() and not link.is_symlink():
+        # npm ci in this isolated source checkout is an acceptable locally installed
+        # browser runtime; never relink, delete or modify another agent's modules.
+        if not (link / '.package-lock.json').is_file() or not (link / '.bin' / 'vite').exists():
+            raise RuntimeError('Local isolated frontend dependencies are incomplete')
+        yield
+        return
     if link.is_symlink():
         if link.resolve() != existing.resolve():
             raise RuntimeError('Existing browser dependencies do not match pinned location')

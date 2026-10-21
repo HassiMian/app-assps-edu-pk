@@ -35,7 +35,15 @@ test.before(async()=>{await new Promise(resolve=>server.listen(0,'127.0.0.1',res
 test.after(async()=>{server.closeAllConnections();await new Promise(resolve=>server.close(resolve))})
 const send=async body=> {const r=await fetch(base+'/api/attendance/mark',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body),signal:AbortSignal.timeout(1800)});return {code:r.status,body:await r.json()}}
 test('bulk Attendance connection rejection returns controlled 503 without leaking internal error or persisting rows',async()=>{
- const r=await send({date:'2026-10-20',records:[{student_id:901,status:'present'}]})
+ const priorError=console.error
+ const diagnostics=[]
+ console.error=(...args)=>diagnostics.push(args.join(' '))
+ let r
+ try {r=await send({date:'2026-10-20',records:[{student_id:901,status:'present'}]})}
+ finally {console.error=priorError}
+ assert.ok(diagnostics.some(line=>line.includes('Attendance bulk save failed')))
+ assert.ok(diagnostics.every(line=>!line.includes('sensitive internal details')))
+
  assert.equal(r.code,503);assert.equal(r.body.success,false)
  assert.equal(r.body.error,'ATTENDANCE_STORAGE_UNAVAILABLE')
  assert.equal(r.body.saved,0);assert.equal(r.body.requestedCount,1)

@@ -15,7 +15,7 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
         return {x:{'pass':True} for x in (
             'database','backup','frontend','rollback','http','restricted_catalog_and_firstterm',
             'source_privacy_inventory','backend_source_inventory','attendance_roster_coverage',
-            'fee_ledger_integrity','frontend_artifact_closure')}
+            'fee_ledger_integrity','frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity','storage_headroom','timetable_collision_scope','lesson_coverage','cross_product_boundary','school_whatsapp_log_privacy','school_whatsapp_phone_scope')}
     def test_every_operational_check_passes_but_unapproved_signoff_remains_hold(self):
         e=self.fixture()
         e['frontend']['sidecar_matches']=True
@@ -25,6 +25,109 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
         self.assertGreaterEqual(len(r['unresolved_release_gates']),9)
         self.assertFalse(r['production_deployed_by_this_check'])
         self.assertFalse(r['safe_to_remove_timetable_ingress_quarantine'])
+    def test_unscoped_live_exam_attendance_is_explicit_hold(self):
+        e=self.fixture()
+        e['exam_attendance_tenant_scope'].update({'live_scoped':False,'candidate_scoped':True})
+        r=gate.classify(e)
+        self.assertIn('active_exam_attendance_aggregate_missing_school_tenant_scope',r['unresolved_release_gates'])
+        self.assertNotIn('candidate_exam_attendance_tenant_scope_regression',r['unresolved_release_gates'])
+        self.assertTrue(r['operational_checks_pass'])
+
+    def test_unscoped_candidate_attendance_blocks_release(self):
+        e=self.fixture()
+        e['exam_attendance_tenant_scope'].update({'live_scoped':True,'candidate_scoped':False})
+        r=gate.classify(e)
+        self.assertIn('candidate_exam_attendance_tenant_scope_regression',r['unresolved_release_gates'])
+
+    def test_academic_coverage_unverified_stays_hold(self):
+        e=self.fixture()
+        e['academic_delivery_integrity'].update({'teacher_identity_complete':False,'teaching_sections_complete':False,'lesson_coverage_certified':False})
+        r=gate.classify(e)
+        for x in ('active_timetable_teacher_identity_null_for_approved_grants',
+                  'unscoped_pre_nine_timetable_sections_require_reconciliation',
+                  'lesson_planning_academic_publication_and_coverage_not_certified'):
+            self.assertIn(x,r['unresolved_release_gates'])
+        self.assertTrue(r['operational_checks_pass'])
+
+    def test_insufficient_disk_capacity_stays_release_hold(self):
+        e=self.fixture(); e['storage_headroom']['headroom_ok']=False
+        r=gate.classify(e)
+        self.assertIn('insufficient_space_for_safe_release_and_restore_rehearsal',r['unresolved_release_gates'])
+        self.assertTrue(r['operational_checks_pass'])
+    def test_inspection_failure_is_preflight_failure(self):
+        e=self.fixture();e['storage_headroom']['pass']=False
+        r=gate.classify(e)
+        self.assertFalse(r['operational_checks_pass'])
+
+    def test_whole_roster_unsaved_after_school_close_stays_explicit_hold(self):
+        e=self.fixture()
+        e['attendance_roster_coverage']['possible_post_close_full_roster_unsaved']=True
+        verdict=gate.classify(e)
+        self.assertIn('current_schoolday_full_attendance_roster_unsaved_after_close_requires_investigation',verdict['unresolved_release_gates'])
+        self.assertTrue(verdict['operational_checks_pass'])
+
+    def test_live_whatsapp_phone_tenant_scope_is_separate_release_hold(self):
+        e=self.fixture()
+        e['school_whatsapp_phone_scope']['live_school_phone_scope_hold']=True
+        r=gate.classify(e)
+        self.assertIn('live_school_whatsapp_signed_webhook_phone_scope_unverified',r['unresolved_release_gates'])
+    def test_candidate_whatsapp_phone_tenant_scope_missing_blocks_release(self):
+        e=self.fixture()
+        e['school_whatsapp_phone_scope']['candidate_school_phone_scope_static_pass']=False
+        r=gate.classify(e)
+        self.assertIn('candidate_school_whatsapp_phone_number_scope_missing',r['unresolved_release_gates'])
+    def test_missing_whatsapp_phone_boundary_evidence_fails_preflight(self):
+        e=self.fixture();e.pop('school_whatsapp_phone_scope')
+        self.assertFalse(gate.classify(e)['operational_checks_pass'])
+
+    def test_live_sensitive_whatsapp_logs_block_release(self):
+        e=self.fixture()
+        e['school_whatsapp_log_privacy']['live_sensitive_log_hold']=True
+        self.assertIn('active_school_whatsapp_message_or_phone_logging_requires_privacy_fix',
+                      gate.classify(e)['unresolved_release_gates'])
+    def test_missing_whatsapp_log_privacy_evidence_breaks_operational_preflight(self):
+        e=self.fixture();e.pop('school_whatsapp_log_privacy')
+        self.assertFalse(gate.classify(e)['operational_checks_pass'])
+    def test_unredacted_candidate_whatsapp_logs_block_release(self):
+        e=self.fixture();e['school_whatsapp_log_privacy']['candidate_log_scope_pass']=False
+        self.assertIn('candidate_school_whatsapp_sensitive_logs_not_redacted',
+                      gate.classify(e)['unresolved_release_gates'])
+
+    def test_active_cross_product_financial_coupling_is_release_hold(self):
+        e=self.fixture()
+        e['cross_product_boundary']['legacy_boundary_requires_review']=True
+        r=gate.classify(e)
+        self.assertTrue(r['operational_checks_pass'])
+        self.assertIn('mounted_school_whatsapp_legacy_financial_coupling_requires_quarantine_evidence',r['unresolved_release_gates'])
+    def test_missing_cross_product_inspection_fails_operational_gate(self):
+        e=self.fixture();e.pop('cross_product_boundary')
+        self.assertFalse(gate.classify(e)['operational_checks_pass'])
+
+    def test_missing_lesson_coverage_evidence_fails_operational_gate(self):
+        e=self.fixture()
+        e.pop('lesson_coverage')
+        self.assertFalse(gate.classify(e)['operational_checks_pass'])
+    def test_unapproved_lesson_scope_stays_release_hold(self):
+        e=self.fixture()
+        e['lesson_coverage']['lesson_coverage_certified']=False
+        e['academic_delivery_integrity']['lesson_coverage_certified']=True
+        self.assertIn('lesson_planning_academic_publication_and_coverage_not_certified',
+                      gate.classify(e)['unresolved_release_gates'])
+
+    def test_missing_teacher_occupancy_evidence_stays_hold(self):
+        e=self.fixture()
+        report=gate.classify(e)
+        self.assertIn('active_timetable_unapproved_teacher_collisions_or_incomplete_periods',report['unresolved_release_gates'])
+    def test_unapproved_teacher_collision_stays_hold(self):
+        e=self.fixture();e['timetable_collision_scope']['structural_timetable_valid']=False
+        r=gate.classify(e)
+        self.assertTrue(r['operational_checks_pass'])
+        self.assertIn('active_timetable_unapproved_teacher_collisions_or_incomplete_periods',r['unresolved_release_gates'])
+    def test_valid_occupancy_omits_specific_collision_hold(self):
+        e=self.fixture();e['timetable_collision_scope']['structural_timetable_valid']=True
+        r=gate.classify(e)
+        self.assertNotIn('active_timetable_unapproved_teacher_collisions_or_incomplete_periods',r['unresolved_release_gates'])
+
     def test_stale_sidecar_adds_provenance_blocker(self):
         e=self.fixture();e['frontend']['sidecar_matches']=False
         r=gate.classify(e)

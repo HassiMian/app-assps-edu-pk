@@ -160,3 +160,351 @@ Source workstream for the SAME unified mission: audit/core-unified-front-closure
 - For controlled promotion, enforce source-provenance and a strictly permitted static asset set, offer only genuinely authenticated tenant-scoped signature/document access, verify browser navigation and cached open sessions with owner Paper Studio, and keep prior Nginx root and rollback intact. Do not promote private sanitization artifact until all mandatory release gates pass.
 
 This is source hardening within the previously adopted one integrated production mission, not a separate release.
+
+## 19 October 2026 supplementary exam-attendance tenant-scope audit
+
+An isolated, static, nonmutating release test now compares the two exam-result
+attendance aggregates in the active live backend with the corresponding unified
+candidate sources. The candidate groups and joins by `(school_id, student_id)`;
+the live route presently groups/joins by `student_id` only. This is a release
+hardening requirement; static differences alone do not establish actual cross-tenant
+student disclosure. The unified readiness gate now explicitly HOLDS if either
+backend is not school-scoped. Live school data, reverse proxy, PM2 and DB remain
+untouched. Runtime confirmation still requires genuinely signed, authorized
+Principal/Teacher/peer-tenant roles and effective RLS isolation tests.
+
+## 20 October 2026 — Integrated academic delivery architecture and release dependency closure
+
+This is an amendment of the SAME unified mission, not a standalone project or a
+new deployment request. The execution controller is the **read-only integrated
+release gate** `ops/release/unified/assps_unified_readiness_readonly.py`; each
+candidate change must be reconciled against the active production build, its
+rollback receipt, database integrity evidence, and authentically authorized
+actors before changing live state.
+
+### Unified component dependency order (one release train)
+
+| Stage | Integrated services | Prerequisite evidence | Exit condition |
+| --- | --- | --- | --- |
+| A — Truth | Canonical Git history, current VPS runtime, immutable frontend/backend files, retired static assets | Source file ancestry and root-private SHA256 manifests; no unsafe public push | Unique source of truth per file and safe signed artifact provenance |
+| B — Irrecoverable-data fence | Main `apexos` PostgreSQL, signed `asspssigned` tenant context, Exam 9, Exam 8 demo, academic assets, fees | Separate backups, off-host encrypted copy, two independently proven decrypted disposable restores, rowwise evidence and rollback rehearsal | Every protected historical record unchanged; no NULL/zero semantic drift |
+| C — Actor perimeter | Principal, teachers, School 2, 85 forced-RLS policies, limited workers, API permissions | Genuine pre-existing identities and cryptographic signed actor context, not mocks | Positive and peer-negative browser/API acceptance, audit logs, scoped permissions |
+| D — Academic truth | 405 timetable records, 54 verified active grants, Early Years, 59 Grade IX/X provenance groups | Signed source mapping, class/section/subject ownership, student privacy and schedule version control | No ambiguous teacher identities or unscoped subject slots; no invented academic approvals |
+| E — Teaching workflow | Lesson plans, class/subject planner, diary, question bank, assessments, Paper Studio, Urdu PDF/Word | Source syllabi, teacher ownership, plan revision/sent-to-portal semantics, content approval | Save → reopen → retrieve → print parity on real authorized users in controlled paths |
+| F — Operations | Attendance, fees, receipts, result cards, school documents/notices, admin dashboard, APEX Connect | Tenant isolation, row locking, payments ledger, term/result history, protected documents | Multi-module end-to-end authorized flows, denied peer access and accessibility/RTL checks |
+| G — Deployment | Backend + frontend + Nginx + PM2 and rollback set | Signed artifact closure, 0 unintended deletions, 0 live-only source omissions, 0 unresolved private static references | Health+canary+cross-tenant+live DB fingerprint PASS; rollback path verified |
+| H — Certification | Integrated tests and observation windows | Complete evidence matrix, offhost restore and genuine independent gates | RELEASE_GO only if no unresolved critical gates; otherwise HOLD without inventing a certificate |
+
+### 20-Oct new evidence and explicit automatic gates
+
+- Live Exam 9 protected set remains 1,853 results, 224 authentic zeros, zero NULL marks; source guard remains immutable. The School 2 Exam 8 historical demo result is distinct and protected.
+- Teacher grants: 54 source-verified active, **zero unauthorized and zero duplicate**. All 54 approved class/section/subject grant keys match timetable subjects. Among these, 11 distinct timetable key groups carry a NULL `teacher_id` although approved user IDs exist; mismatched *nonnull* IDs = zero. These are unresolved identity projections, **not** authorization to update 11 rows.
+- Eight additional Pre-Nine regular lesson rows have empty section while 8 corresponding approved grants target section `Blue`. Two other unmatched subject groups are administrative School-wide Assembly/Break; they must never become academic teacher grants.
+- Three term lesson-plan records exist; **zero are `sent_to_portal=true`**. Term content, current enrollment/class/subject coverage, syllabus edition, publication and signed academic approval cannot be inferred from counts. Do not silently mass-create or publish lessons.
+- Employee preferred display forms differ from legal user-account names; do not exact-match names or automatically mutate `teacher_id` without a verified stable identity mapping, transaction-level expected-snapshot check, full backup+restore and application acceptance.
+- Active result attendance aggregation still omits school ID in two SQL projections while candidate includes `(school_id,student_id)`; never replace the entire live backend or declare this fixed in production on source-only evidence.
+
+The integrated readiness controller now reports **17 unresolved fail-closed gates**,
+including new timetable-teacher, unscoped Pre-Nine and lesson-publication
+conditions. The three new gates are *within the one existing mission*; they do
+not signal three separate projects. All counted evidence is collected with
+`BEGIN TRANSACTION READ ONLY` and never modifies live records.
+
+### Zero-human engineering automation boundary
+
+Automate discovery, scoped source changes, targeted tests, migrations rehearsed
+on isolated restored clones, observability, certificate aggregation, backup
+verification and permitted release cutovers. Block and preserve live state
+where a security authorization, authenticated external actor, physical paper
+inspection or independent academic approval cannot be established by available
+legitimate mechanisms. System cannot certify itself by creating mock principals,
+peer-school credentials, faux off-host restores, invented source approval or
+pretend Ricoh print results. Missing evidence is an explicit release HOLD.
+
+### Backups, migration, rollback and exception discipline
+
+1. Pre-migration lock: current release refs, PM2 map, Nginx config, two PG
+   clusters' checksums and First Term row fingerprints, and media ownership.
+2. Use **additive migrations** with nullable transitional columns; no global
+   truncate, reset, delete, reimport of exam history or blanket teacher grant.
+3. Rehearse exact migration and rollback in a nonproduction restored clone using
+   the immutable authentic data, then compare Exam 9 rowwise and School 2 guard.
+4. For any teacher-ID repair, require single `(school_id,class,section,subject)`
+   approved source, stable teacher-user and employee association, non-null
+   display preserved, optimistic concurrency check, audited rows and restoration
+   receipt; no change on ambiguous or blank-section tuples.
+5. Stage a complete protected asset manifest. Prevent unsafe removal of 198
+   extra live frontend assets and retention media until ownership, references
+   and rollback have been reconciled. Stage backend with 17 differing and 171
+   live-only paths preserved, not wholesale replaced.
+6. Only roll forward after scoped auth+peer-denial acceptance, effective RLS,
+   academic workflows, print/PDF/Word parity, staged HTTP and independent
+   restore prove complete. If gates fail, freeze writes/cutover as applicable
+   and use verified preflight rollback strategy without losing new records.
+7. Evidence receipts are root-private by default; never publish school images,
+   private logs, tokens, user identities, secrets or protected media to public
+   Git history.
+
+
+### 20-Oct continuation: storage headroom and timetable room snapshot parity
+
+All of this work remains inside the original, single unified release mission.
+The audited VPS root filesystem has roughly 7.67 GiB / 8.0% space available.
+A read-only storage check now includes `/`, `/var/backups`, and
+`/var/lib/postgresql` in the unified fence. The engineering minimum for a
+release rehearsal is 12 GiB and 12% free; this is a conservative staging
+threshold, not a guarantee that an off-host dual-cluster restore can succeed.
+Currently this introduces an explicit capacity HOLD; no backups, databases,
+source worktrees or project files were deleted or rotated to manipulate it.
+
+The live timetable backend now has an additional optimistic snapshot contract
+binding `room` in both read queries, input validation and SHA256 digest.
+The isolated audit candidate forward-ported exactly this contract, without
+changing live state. Candidate room is no longer silently defaulted to an
+empty value, and tests verify that changed room invalidates stale snapshots.
+This brings two live-source conflict paths to byte-for-byte parity in the audit
+worktree (18 canonical candidate differences vs 16 audit-worktree differences),
+while leaving 171 independently-owned live-only paths untouched. The canonical
+unified release candidate and active production are not altered by this work.
+
+Controlled source tests executed: 85 hermetic Python release gate tests,
+36 simulated timetable/lesson unit+HTTP tests, 31 synthetic identity and
+examination tests, and 23 Paper Studio/Diary/attendance/examination contract
+tests, all passing (175 individual test cases). These tests are not genuine
+Principal/Teacher/School2 signed browser acceptance, witnessed Ricoh printing,
+independent editorial approvals or an off-host decrypted restore. The release
+remains HOLD, with 15 reported gates including capacity, provenance and the
+previously unverified external acceptances. Existing Exam 9/First Term remains
+immutable at 1,853 results with 224 genuine zeros and zero NULL marks.
+
+### 20-Oct continuation: timetable combined-class occupancy closure
+
+In the existing unified release train, a new read-only active schedule audit
+checks all 42 day/class/section groups and 336 teaching-period records (seven
+current classroom sections across Monday through Saturday). Every active
+section has eight distinct numbered periods, a scoped teacher, and a nonempty
+section. It found 12 timeslots shared by the same teacher across Four/Blue and
+Five/Blue in English (Period 5) or Nazra (Period 8), all six school days.
+These are the established combined-class pairing, not 12 unrelated double
+bookings. The evidence rule is STRICT: exactly one Four/Blue and one Five/Blue
+record, same teacher, subject, date, period, start/end, and room. Any other
+same-teacher cross-class overlap is a release HOLD; detected unexpected
+collisions = **zero**. The exceptional pair must not implicitly authorize any
+other year, room, class, school or subject.
+
+The integrated release gate imports `verify_timetable_collision_scope_readonly.py`
+and fails closed if active teaching days are incomplete, teacher identity is
+missing, periods are invalid, a section is unscoped, or unapproved teacher
+overlaps appear. Structural checks do not confer academic approvals. The
+isolated candidate `/workload` route was adjusted to return **physical teacher
+timeslots** as `total_periods` while separately retaining `assignment_rows`,
+and its clash SQL excludes *only* the exact known Four/Five simultaneous
+teaching pairs. The equivalent query was verified with a READ ONLY transaction
+against production: **336 class assignment rows, 324 unique occupied teacher
+timeslots, zero unapproved clashes**. No live timetable or backend was edited;
+full live authenticated teacher workload and user-interface acceptance remains
+an unmet release prerequisite.
+
+### 20-Oct continuation: all-school attendance save evidence and acquisition fail-closed
+
+The same unified release programme now flags a **possible entire-school
+attendance day without saved marks** after 15:00 Pakistan time on a Mon–Sat
+schedule day. A live read-only observation on **Tuesday, 20 October 2026**
+found 321 active pupils and **zero persisted attendance records for this date**,
+whereas 317 rows existed for 19 October. This is **NOT** evidence that pupils
+were absent, and without a verified holiday/operational attendance calendar is
+not proof that marking failed. No attendance statuses were guessed or backfilled.
+The gate records a distinct HOLD for investigation instead of incorrectly
+reporting zero saved class alerts as an all-school PASS. Sunday, before-closing
+observations and previously saved days are explicitly excluded from this alert.
+
+Isolated backend `POST /attendance/mark` now executes its teacher-assignment
+preflight before acquiring the database pool connection and acquires the
+connection inside an error-handled `try` block. If the pool acquisition fails,
+rollback and release are guarded against an undefined client, and a generic
+non-sensitive error is returned rather than raw backend error text. The
+original 100% batch write/persist-or-rollback invariant remains unchanged.
+Source regression tests were added; this is **candidate-only** code and is
+not evidence of a live school staff attendance login or successful attendance
+save. The existing School1 First Term result records are protected exactly.
+
+### 20-Oct lesson-plan coverage reconciliation — exact metadata without invented approvals
+
+A new independent read-only coverage checker
+`ops/release/unified/verify_lesson_coverage_readonly.py` compares all active
+School1 `timetable_verified_20261019` teacher/class/section/subject grants
+against the actual `lesson_plans` metadata. Live state on 20 October:
+
+- **54 distinct authorized active class/section/subject groups** are verified.
+- **3 existing school-wide lesson-plan rows**, **0 sent-to-portal**.
+- **1 directly exact-matched class+subject candidate** (Class Five / Social
+  Studies); **53 mappings have no direct exact-matched lesson-plan metadata**.
+- **2 plan headings have no directly matching approved class+subject tuple**;
+  broad labels such as Primary/Urdu-General and different subject languages
+  require explicit academic reconciliation, NOT automatic publication.
+
+The lesson-plan table lacks a section identity; even direct metadata matches
+cannot certify per-section curriculum, syllabus pages, exercises, named
+teacher acceptance, signed academic authority, or plan publication.
+The new evidence is integrated into the ONE unified fail-closed release gate.
+Missing coverage inspection fails operational preflight; the existing lesson
+publication/content-approval HOLD continues. These counts describe only
+metadata, not the true number of approved teaching lessons. Neither the
+existing three plans nor 54 teacher permissions were modified, and no grade
+IX/X provisional question-bank drafts were promoted or inferred as approved.
+
+### 20-Oct security extension: mounted cross-product legacy boundary (READ ONLY)
+
+A source-only inspection of active PM2 backend `/var/www/apex-backend/src`
+confirmed that the school server mounts its WhatsApp route, while the live
+route includes **two call sites to legacy financial execution/closure
+functions** and **one automatic legacy scanner start**. This is a security
+and separation concern because ARGUS research/mocks are NOT evidence that
+all school production integration pathways are quarantined. It does **not**
+prove that financial actions actually happened, nor is the school database
+itself proven exposed by these call sites. No broker, scanner, account or
+legacy module was imported, contacted, started, stopped or modified.
+
+`verify_school_cross_product_boundary_readonly.py` provides metadata-only
+static risk evidence; the single unified release gate adds a separate
+**cross-product boundary review HOLD** if risk call sites remain in an
+active mounted school route. Tests deliberately confirm an unmounted route
+or absence of static signatures is **not** comprehensive runtime
+isolation certification. Quarantine must preserve lawful school messaging
+and student/teacher data while keeping autonomous financial capabilities
+outside the school runtime. No live route was deployed or disabled during
+this step because genuine authorized tenant acceptance, signed provenance,
+backup/rollback and other mandatory release gates are still unresolved.
+
+### 20-Oct next checkpoint: candidate-only school WhatsApp market-request boundary
+
+The isolated `al-siddique-backend/src/routes/whatsappRoutes.js` candidate has
+no direct legacy financial execution/closure or auto-scanner call sites, but
+its general AI dispatch remained usable for explicitly financial-market
+messages. A fail-closed, channel-wide pre-dispatch refusal now invokes
+`isFinancialMarketRequest(text)` before both primary and fallback cognitive
+handlers, and returns the school's existing scope-restriction message. This
+does not use broker credentials or invoke the legacy financial runtime. The
+owner has no exception for school-channel financial prompts. Normal diary,
+admission, fee, and attendance questions remain unrestricted by this filter.
+
+Pure offline tests cover explicit market intents, allowed school messages,
+control-flow ordering, default refusal wording, and absence of direct broker
+execution/scanner imports. The unified source-only guardian now separately
+checks the candidate boundary while retaining its independent LIVE financial
+coupling HOLD. The candidate may pass static checks; this never certifies
+runtime containment or permission/RLS behavior, and is **not deployed**.
+Only a signed, source-reviewed, rollback-ready release with real school-channel
+acceptance can clear the active runtime risk. Existing academic databases,
+WhatsApp message histories, and historical release archives were not altered.
+
+### 20-Oct school communications privacy boundary (candidate-only)
+
+Read-only line-specific audit of the *active* school WhatsApp route found
+**11 direct sensitive diagnostic logging lines** involving phones, message
+identifiers, portions of inbound text, provider responses or uncensored
+exception messages. This is a source-level privacy risk finding; it does not
+establish that specific pupils' messages were actually written to disk or
+exposed to third parties. The isolated candidate replaces these with generic
+status-only diagnostic messages, preserving outbound message content and
+idempotency behaviour for the intended recipient. An independent read-only
+source checker `verify_school_whatsapp_log_privacy_readonly.py` compares the
+active backend with the isolated candidate and registers an explicit **LIVE
+privacy HOLD** while sensitive source-level logging remains in production.
+The candidate scanner finds zero matching sensitive direct logging lines and
+isolated tests check refusal of raw phone, text, message IDs and provider
+payload logging. This checker is narrowly scoped to direct one-line source
+expressions; it is NOT general message-history privacy certification or a
+statement that no other module logs sensitive data. No live WhatsApp code,
+messages, PM2 process, files, PostgreSQL rows or backups were changed by this
+work. The entire ASSPS Unified Release remains HOLD pending signed authorized
+source preservation, genuine E2E actor tests and rollback-ready cutover.
+
+### 20-Oct dynamic proof for staged school WhatsApp controls
+
+`al-siddique-backend/src/tests/school-whatsapp-webhook-isolated-http.test.cjs`
+starts an entirely local ephemeral HTTP fixture server and stubs the tenant
+DB interface, WhatsApp network transport, school cognitive handlers and
+idempotency store. It does **not** connect to Meta, MT5, production PG,
+student records, or a real WhatsApp account. Synthetic HMAC SHA-256 test
+requests establish five concrete candidate behaviors:
+
+1. Wrong signature rejected HTTP 403 *before* any DB write/AI handler.
+2. Signed explicit market request receives school-scope refusal, and neither
+   primary nor fallback school cognitive handler is invoked.
+3. Signed ordinary school diary request reaches the normal school handler.
+4. Duplicate signed provider event is acknowledged without duplicate AI work.
+5. Synthetic DB/idempotency failure returns HTTP 503 and no AI work.
+
+The fixture enforces local HTTP requests through real loopback fetch, while
+all outbound Meta requests are stubbed. This verifies request ordering and
+fail-closed behavior in the **candidate only**; it does not clear the separate
+live financially coupled WhatsApp route, school log privacy, identity or
+multi-tenant signed release gates. School communication histories and First
+Term examination records stay entirely untouched.
+
+### 20-Oct webhook cross-school phone identity gate — pre-persistence fail-closed
+
+The previously reviewed school WhatsApp webhook verifies a Meta application
+HMAC but did not independently bind each signed event's
+`value.metadata.phone_number_id` to the school's configured channel ID.
+A shared Meta app signature is not a proof that every phone's messages are
+for the same school tenant. The isolated backend candidate now **preflights
+ALL webhook change values before any idempotency/database insert**, refuses
+messages and delivery statuses with missing/foreign phone metadata HTTP 403,
+and refuses actual events when the school's phone ID is unconfigured HTTP
+503. A mixed signed batch of valid school and foreign events is entirely
+rejected before any DB side effects. Multi-change, legitimate same-school
+batches retain their events rather than silently reading only `[0]`.
+
+No school WhatsApp credentials or live parent messages were accessed.
+`schoolWebhookChannelScope.cjs` is pure and has independent hermetic tests,
+while the existing synthetic HTTP suite now verifies both phone-number
+rejections and legitimate multi-change processing with real loopback HTTP,
+fake DB, and fake network. The unified read-only release preflight
+`verify_school_whatsapp_phone_scope_readonly.py` separately examines LIVE
+source and isolated CANDIDATE source. Its code-shape assertions report the
+candidate static policy present, **LIVE scope unverified**, and never claim
+true provider-level, tenant/RLS or runtime certification. A distinct release
+HOLD remains until a verified source-preserving, rollback-ready production
+cutover and authentic authorized school-channel acceptance. All live student
+records, exams, attendance marks, WhatsApp data and backups are unchanged.
+
+### 20-Oct 22:30+ PKT: disposable two-cluster backup restore preflight (HOLD)
+
+**Purpose and isolation boundary.** A fresh PostgreSQL 16.15 disposable
+instance was initialized under `/var/tmp/assps-restore-rehearsal-20261020-a`
+with a **local Unix socket only** and port **56543**, and with host TCP
+listening disabled. This instance is independent from the serving School1
+and signed-role database processes, and no live school DB was touched.
+The existing compressed `postgres-all.sql.gz` backup archive was read as a
+stream; the original archive and checksum manifest were not modified.
+
+**Actual result: RESTORE_NOT_CERTIFIED.** The first strict `psql`
+`ON_ERROR_STOP=1` replay terminated with status **3** on the first
+`CREATE ROLE postgres` statement because `initdb` already creates that
+built-in bootstrap role. This is a restore-stream compatibility blocker,
+not evidence that the source data are missing or corrupt. An attempted
+follow-up status/inspection operation was blocked by tool safety, so no
+alternative replay was run or represented as a success. The disposable
+PostgreSQL server was subsequently **cleanly stopped** using its own
+`pg_ctl` path, with `pg_ctl status` confirming **no server running**; the
+39-MiB disposable data directory remained isolated under `/var/tmp`.
+Production database services and exam results were unchanged.
+
+**Next safe certification design:** Authorize a narrowly scoped,
+reviewable restore-replay adapter that handles the destination's already
+existing bootstrap PostgreSQL role, with exact removal accounting and
+fail-on-unexpected-SQL semantics, then retry in a disposable instance
+while storing an inspectable aggregate-only restore receipt. Independently
+restore BOTH source PostgreSQL clusters on a genuinely separate off-host
+environment; verify role grants, RLS, first-term zero-vs-NULL invariants,
+physical application restore and rollback. A same-host rehearsal, even if
+successful later, cannot certify independent off-host recovery. On-server
+backup file existence or gzip checks are likewise NOT sufficient.
+
+The VPS root free space concurrently rose above **19 GiB** (roughly 20%),
+clearing the previously explicit headroom safety gate; this observation was
+made after other activity and does not attribute reclaimed capacity to this
+audit execution. Absolutely no school backup, git evidence or academic
+history was deleted to achieve this outcome.

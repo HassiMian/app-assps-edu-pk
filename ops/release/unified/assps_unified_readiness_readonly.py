@@ -7,8 +7,16 @@ import re
 import subprocess
 import verify_backend_source_preservation_readonly as backend_preservation
 import verify_frontend_artifact_closure_readonly as frontend_closure
+import verify_exam_attendance_tenant_scope_readonly as exam_attendance_scope
+import verify_academic_delivery_integrity_readonly as academic_integrity
 import assps_attendance_coverage_readonly as attendance_coverage
 import assps_fee_ledger_integrity_readonly as fee_integrity
+import assps_storage_headroom_readonly as disk_headroom
+import verify_timetable_collision_scope_readonly as timetable_collision
+import verify_lesson_coverage_readonly as lesson_coverage
+import verify_school_cross_product_boundary_readonly as product_boundary
+import verify_school_whatsapp_log_privacy_readonly as whatsapp_log_privacy
+import verify_school_whatsapp_phone_scope_readonly as whatsapp_phone_scope
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 
@@ -212,6 +220,7 @@ def inspect_attendance_coverage():
             'newly_registered_unmarked':coverage['newly_registered_unmarked_total'],
             'previously_registered_unmarked':coverage['previously_registered_unmarked_total'],
             'zero_saved_class_alerts':coverage['zero_saved_class_alerts'],
+            'possible_post_close_full_roster_unsaved':attendance_coverage.post_close_unsaved_day(coverage),
             'attendance_not_fabricated':True}
 
 def inspect_backend_preservation():
@@ -283,7 +292,9 @@ def classify(evidence):
     required=('database','backup','frontend','rollback','http',
               'restricted_catalog_and_firstterm','source_privacy_inventory',
               'backend_source_inventory','attendance_roster_coverage','fee_ledger_integrity',
-              'frontend_artifact_closure')
+              'frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity',
+              'storage_headroom','timetable_collision_scope','lesson_coverage','cross_product_boundary',
+              'school_whatsapp_log_privacy','school_whatsapp_phone_scope')
     checks={k:(isinstance(evidence.get(k),dict) and evidence[k].get('pass') is True)
             for k in required}
     infrastructure=all(checks.values())
@@ -296,6 +307,35 @@ def classify(evidence):
         holds.insert(0,'active_frontend_has_public_legacy_or_extra_artifacts')
     if evidence.get('backend_source_inventory',{}).get('whole_tree_safe') is not True:
         holds.insert(0,'backend_whole_tree_replacement_would_overwrite_or_remove_runtime_code')
+    if evidence.get('exam_attendance_tenant_scope',{}).get('live_scoped') is not True:
+        holds.insert(0,'active_exam_attendance_aggregate_missing_school_tenant_scope')
+    if evidence.get('exam_attendance_tenant_scope',{}).get('candidate_scoped') is not True:
+        holds.insert(0,'candidate_exam_attendance_tenant_scope_regression')
+    if evidence.get('academic_delivery_integrity',{}).get('teacher_identity_complete') is not True:
+        holds.insert(0,'active_timetable_teacher_identity_null_for_approved_grants')
+    if evidence.get('academic_delivery_integrity',{}).get('teaching_sections_complete') is not True:
+        holds.insert(0,'unscoped_pre_nine_timetable_sections_require_reconciliation')
+    if (evidence.get('academic_delivery_integrity',{}).get('lesson_coverage_certified') is not True
+        or evidence.get('lesson_coverage',{}).get('lesson_coverage_certified') is not True):
+        holds.insert(0,'lesson_planning_academic_publication_and_coverage_not_certified')
+    if evidence.get('school_whatsapp_phone_scope',{}).get('candidate_school_phone_scope_static_pass') is not True:
+        holds.insert(0,'candidate_school_whatsapp_phone_number_scope_missing')
+    if evidence.get('school_whatsapp_phone_scope',{}).get('live_school_phone_scope_hold') is True:
+        holds.insert(0,'live_school_whatsapp_signed_webhook_phone_scope_unverified')
+    if evidence.get('school_whatsapp_log_privacy',{}).get('candidate_log_scope_pass') is not True:
+        holds.insert(0,'candidate_school_whatsapp_sensitive_logs_not_redacted')
+    if evidence.get('school_whatsapp_log_privacy',{}).get('live_sensitive_log_hold') is True:
+        holds.insert(0,'active_school_whatsapp_message_or_phone_logging_requires_privacy_fix')
+    if evidence.get('cross_product_boundary',{}).get('candidate_financial_scope_static_pass') is not True:
+        holds.insert(0,'candidate_school_whatsapp_financial_scope_guard_missing')
+    if evidence.get('cross_product_boundary',{}).get('legacy_boundary_requires_review') is True:
+        holds.insert(0,'mounted_school_whatsapp_legacy_financial_coupling_requires_quarantine_evidence')
+    if evidence.get('attendance_roster_coverage',{}).get('possible_post_close_full_roster_unsaved') is True:
+        holds.insert(0,'current_schoolday_full_attendance_roster_unsaved_after_close_requires_investigation')
+    if evidence.get('timetable_collision_scope',{}).get('structural_timetable_valid') is not True:
+        holds.insert(0,'active_timetable_unapproved_teacher_collisions_or_incomplete_periods')
+    if evidence.get('storage_headroom',{}).get('headroom_ok') is not True:
+        holds.insert(0,'insufficient_space_for_safe_release_and_restore_rehearsal')
     if not infrastructure:
         holds.insert(0,'read_only_operational_preflight_failed')
     return {'status':'RELEASE_HOLD','operational_checks_pass':infrastructure,
@@ -308,6 +348,14 @@ def main():
         'rollback':inspect_rollback,'source_privacy_inventory':inspect_source_privacy,
         'backend_source_inventory':inspect_backend_preservation,
         'frontend_artifact_closure':inspect_frontend_artifact_closure,
+        'exam_attendance_tenant_scope':exam_attendance_scope.inspect,
+        'academic_delivery_integrity':academic_integrity.inspect,
+        'storage_headroom':disk_headroom.inspect,
+        'timetable_collision_scope':timetable_collision.inspect,
+        'lesson_coverage':lesson_coverage.inspect,
+        'cross_product_boundary':product_boundary.inspect,
+        'school_whatsapp_log_privacy':whatsapp_log_privacy.inspect,
+        'school_whatsapp_phone_scope':whatsapp_phone_scope.inspect,
         'attendance_roster_coverage':inspect_attendance_coverage,
         'fee_ledger_integrity':inspect_fees_ledger,
         'restricted_catalog_and_firstterm':inspect_signed_and_history,

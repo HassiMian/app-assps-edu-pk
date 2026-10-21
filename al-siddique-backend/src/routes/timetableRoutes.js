@@ -49,7 +49,10 @@ router.get('/workload', protect, async (req, res) => {
       SELECT
         teacher_id,
         COALESCE(teacher_display_name, 'Unassigned') as teacher_name,
-        COUNT(*) as total_periods,
+        -- A combined Four/Five class is one occupied teacher timeslot,
+        -- even if two class-assignment records are preserved for it.
+        COUNT(DISTINCT (day_name,period_label)) as total_periods,
+        COUNT(*) as assignment_rows,
         COUNT(DISTINCT day_name) as teaching_days,
         json_agg(json_build_object(
           'day_name', day_name,
@@ -80,6 +83,17 @@ router.get('/workload', protect, async (req, res) => {
                        AND t1.id < t2.id
       WHERE t1.school_id = $1 AND t1.teacher_id IS NOT NULL AND t1.day_name != 'Regular'
         AND NOT (t1.class_name = t2.class_name AND t1.section = t2.section)
+        -- School1 Four/Blue + Five/Blue are one known combined teaching group.
+        -- Only identical subject/time/room for this exact pair is not a clash.
+        AND NOT (
+          t1.school_id=1 AND t1.section='Blue' AND t2.section='Blue'
+          AND ((t1.class_name='Four' AND t2.class_name='Five')
+            OR (t1.class_name='Five' AND t2.class_name='Four'))
+          AND t1.subject IS NOT DISTINCT FROM t2.subject
+          AND t1.start_time IS NOT DISTINCT FROM t2.start_time
+          AND t1.end_time IS NOT DISTINCT FROM t2.end_time
+          AND coalesce(t1.room,'')=coalesce(t2.room,'')
+        )
       ORDER BY t1.day_order, t1.start_time
     `
     const clashResult = await query(clashSql, [schoolId])
