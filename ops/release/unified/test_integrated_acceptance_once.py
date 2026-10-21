@@ -51,14 +51,14 @@ class OneRunAcceptanceContract(unittest.TestCase):
         self.assertEqual(output['error'],'INCOMPLETE_BROWSER_BATCH')
         self.assertEqual(len(output['browser_files']),5)
 
-    def test_browser_batch_uses_at_most_two_fixture_workers(self):
+    def test_browser_batch_uses_one_fixture_worker(self):
         files = runner.browser_test_batches()[0]
         complete = {'name':'synthetic','pass':True,'counts':{'tests':5,'pass':5,'fail':0,'skipped':0}}
         with patch.object(runner,'execute',return_value=complete) as execute:
             output=runner.run_browser_batch(1, files, {})
         self.assertTrue(output['pass'])
         args=execute.call_args.args
-        self.assertIn('--test-concurrency=2',args[1])
+        self.assertIn('--test-concurrency=1',args[1])
         self.assertEqual(args[2],43)
 
     def test_browser_tests_are_explicit_suite(self):

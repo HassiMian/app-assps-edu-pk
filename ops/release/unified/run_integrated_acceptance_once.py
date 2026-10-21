@@ -154,7 +154,7 @@ def browser_test_batches():
 
 def run_browser_batch(number, names, env):
     check = execute('synthetic_browser_batch_'+str(number),
-                    ['node','--test','--test-concurrency=2',*(FRONTEND+name for name in names)],43,env)
+                    ['node','--test','--test-concurrency=1',*(FRONTEND+name for name in names)],43,env)
     check['browser_files'] = list(names)
     counts = check.get('counts',{})
     # Batches have >= one test per fixture; the final batch currently has six.
@@ -185,7 +185,7 @@ def main():
         try:
             with browser_dependency_scope(True):
                 # Preserve one report per bounded batch, but execute batches serially.
-                # Each Node runner starts at most two browser fixture files at once,
+                # Each Node runner starts one browser fixture file at a time,
                 # keeping Playwright/Chromium memory and ports isolated and stable.
                 for number, names in enumerate(browser_test_batches(), start=1):
                     checks.append(run_browser_batch(number, names, env))
