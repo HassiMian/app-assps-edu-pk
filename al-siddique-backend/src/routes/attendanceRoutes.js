@@ -520,6 +520,9 @@ router.post('/mark-by-gr', protect, canMarkAttendance, async (req, res) => {
       return res.status(403).json({ success: false, error: 'TENANT_CONTEXT_REQUIRED', message: 'A valid school or tenant context is required to scan attendance.' })
     }
 
+    // QR/GR attendance must enforce the same active class+section teacher scope as bulk attendance.
+    if (!(await requireTeacherAssignmentsForAttendance(req, res))) return
+
     const studentColumns = ['id', 'name', 'gr_number', 'class', 'section', 'parent_phone']
     if (supportsStudentSchool) studentColumns.push('school_id')
     if (supportsStudentTenant) studentColumns.push('tenant_id')
@@ -534,6 +537,12 @@ router.post('/mark-by-gr', protect, canMarkAttendance, async (req, res) => {
         studentSql += ` AND school_id = $${idx++}`
         params.push(schoolId)
       }
+    }
+    if (String(req.user?.role || '').toLowerCase() === 'teacher') {
+      const teacherScope = teacherStudentScopeClause(req, 'students', idx)
+      studentSql += teacherScope.clause
+      params.push(...teacherScope.params)
+      idx = teacherScope.nextIndex
     }
     studentSql += ' LIMIT 1'
     const studentRes = await query(studentSql, params)
