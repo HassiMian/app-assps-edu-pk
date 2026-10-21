@@ -16,8 +16,9 @@ import subprocess
 import sys
 import tempfile
 
-ROOT = Path('/root/workspace/assps-unified-one-train-exam9v2-20261019')
-PRIVATE_RECEIPTS = Path('/root/secure-archive/assps-unified-one-run-evidence-20261020')
+ROOT = Path(__file__).resolve().parents[3]
+# A run belongs to its own exact worktree; never consume another worker's HEAD.
+PRIVATE_RECEIPTS = Path('/root/secure-archive/assps-unified-one-run-evidence-20261021') / ROOT.name
 BACKEND = 'al-siddique-backend/src/tests/'
 FRONTEND = 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/'
 CORE_TESTS = (
