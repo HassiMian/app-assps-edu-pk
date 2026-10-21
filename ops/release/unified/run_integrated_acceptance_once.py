@@ -5,7 +5,6 @@ Only source tests, synthetic browser tests, and the existing read-only gate
 are invoked. A green test suite never overrides a release hold.
 """
 import argparse
-from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager
 import datetime as dt
 import hashlib
@@ -147,6 +146,25 @@ def browser_dependency_scope(enabled):
         if created and link.is_symlink() and link.resolve() == existing.resolve():
             link.unlink()
 
+def browser_test_batches():
+    # Every named fixture must run exactly once; never silently drop a file.
+    if len(BROWSER_TESTS) != 15 or len(set(BROWSER_TESTS)) != len(BROWSER_TESTS):
+        raise ValueError('Invalid or duplicate synthetic browser fixture list')
+    return tuple(BROWSER_TESTS[start:start+5] for start in range(0,len(BROWSER_TESTS),5))
+
+def run_browser_batch(number, names, env):
+    check = execute('synthetic_browser_batch_'+str(number),
+                    ['node','--test','--test-concurrency=2',*(FRONTEND+name for name in names)],43,env)
+    check['browser_files'] = list(names)
+    counts = check.get('counts',{})
+    # Batches have >= one test per fixture; the final batch currently has six.
+    if check['pass'] and (counts.get('pass',0) < len(names)
+                          or counts.get('tests',0) != counts.get('pass',0)
+                          or counts.get('skipped',0) != 0):
+        check['pass'] = False
+        check['error'] = 'INCOMPLETE_BROWSER_BATCH'
+    return check
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--browser', action='store_true', help='Run synthetic Chromium cases, never live user sessions')
@@ -166,14 +184,11 @@ def main():
     if opt.browser:
         try:
             with browser_dependency_scope(True):
-                def run_browser(name):
-                    return execute('synthetic_browser_'+name,
-                                   ['node','--test',FRONTEND+name],18,env)
-                # Each fixture owns a distinct synthetic localhost port. Bounded
-                # concurrency makes one-shot acceptance finish without hiding a
-                # timeout, missing test or individual failing exit code.
-                with ThreadPoolExecutor(max_workers=3) as pool:
-                    checks.extend(pool.map(run_browser, BROWSER_TESTS))
+                # Preserve one report per bounded batch, but execute batches serially.
+                # Each Node runner starts at most two browser fixture files at once,
+                # keeping Playwright/Chromium memory and ports isolated and stable.
+                for number, names in enumerate(browser_test_batches(), start=1):
+                    checks.append(run_browser_batch(number, names, env))
         except (RuntimeError, OSError):
             checks.append({'name':'synthetic_browser_dependency_setup','pass':False,'error':'OFFLINE_DEPENDENCY_UNAVAILABLE','counts':{}})
     try:

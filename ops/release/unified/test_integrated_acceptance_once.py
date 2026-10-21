@@ -36,6 +36,31 @@ class OneRunAcceptanceContract(unittest.TestCase):
                 self.assertEqual((Path(directory)/('integrated-'+b['sha256']+'.json')).read_text().find('two')>=0,True)
                 self.assertIn('two',(Path(directory)/'latest-integrated-readonly-acceptance.json').read_text())
                 self.assertEqual((Path(directory)/('integrated-'+a['sha256']+'.json')).stat().st_mode & 0o777,0o600)
+    def test_browser_batches_are_unique_and_bounded(self):
+        batches = runner.browser_test_batches()
+        self.assertEqual([len(group) for group in batches],[5,5,5])
+        self.assertEqual(tuple(name for group in batches for name in group),BROWSER_TESTS)
+        self.assertEqual(len(set(name for group in batches for name in group)),15)
+
+    def test_browser_batch_cannot_pass_with_incomplete_suite(self):
+        files = runner.browser_test_batches()[0]
+        partial = {'name':'synthetic','pass':True,'counts':{'tests':4,'pass':4,'fail':0,'skipped':0}}
+        with patch.object(runner,'execute',return_value=partial):
+            output=runner.run_browser_batch(1, files, {})
+        self.assertFalse(output['pass'])
+        self.assertEqual(output['error'],'INCOMPLETE_BROWSER_BATCH')
+        self.assertEqual(len(output['browser_files']),5)
+
+    def test_browser_batch_uses_at_most_two_fixture_workers(self):
+        files = runner.browser_test_batches()[0]
+        complete = {'name':'synthetic','pass':True,'counts':{'tests':5,'pass':5,'fail':0,'skipped':0}}
+        with patch.object(runner,'execute',return_value=complete) as execute:
+            output=runner.run_browser_batch(1, files, {})
+        self.assertTrue(output['pass'])
+        args=execute.call_args.args
+        self.assertIn('--test-concurrency=2',args[1])
+        self.assertEqual(args[2],43)
+
     def test_browser_tests_are_explicit_suite(self):
         self.assertEqual(len(BROWSER_TESTS),15)
         self.assertIn('dailyDiaryNewDraftScopeBrowser.test.js',BROWSER_TESTS)
