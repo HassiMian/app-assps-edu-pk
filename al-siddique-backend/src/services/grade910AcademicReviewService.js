@@ -17,7 +17,7 @@ async function recordIndependentAcademicReview({
       [reviewerId,tenantId]
     )
     if(user.rowCount!==1||user.rows[0].is_active!==true||
-       !['admin','principal','super_admin'].includes(user.rows[0].role))
+       !['admin','principal','super_admin','owner'].includes(user.rows[0].role))
       throw error('REVIEWER_NOT_AUTHORIZED_FOR_TENANT','An authorized reviewer in this school is required.',403)
     const masters=await client.query(
       "SELECT id,public_id,current_revision,lifecycle_status,created_by,source_question_bank_id FROM question_masters WHERE school_id=$1 AND public_id=$2 FOR UPDATE",
@@ -115,7 +115,7 @@ async function getAcademicReviewContext({schoolId,requesterId,publicId}={}){
     const user=await client.query('SELECT id,role,is_active FROM users WHERE id=$1 AND school_id=$2',
       [requesterId,tenantId])
     if(user.rowCount!==1||user.rows[0].is_active!==true||
-       !['admin','principal','super_admin'].includes(user.rows[0].role))
+       !['admin','principal','super_admin','owner'].includes(user.rows[0].role))
       throw error('REVIEW_SCOPE_DENIED','User is not authorized for this school.',403)
     const rows=await client.query(`SELECT qm.public_id,qm.lifecycle_status,qm.current_revision,
              qm.created_by AS author_id,qm.source_question_bank_id,

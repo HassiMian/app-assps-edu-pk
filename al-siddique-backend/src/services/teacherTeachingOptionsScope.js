@@ -21,7 +21,8 @@ function buildTeachingOptionsQuery({schoolId,role,teacherId,actorSchoolId}) {
           AND LOWER(BTRIM(tca.section))=LOWER(BTRIM(COALESCE(s.section,'')))
       ) GROUP BY s.class,s.section ORDER BY s.class::text,s.section::text`,params:[sid,tid]}
   }
-  if(['principal','admin','super_admin'].includes(r))
+  if(r==='owner' && Number(actorSchoolId)!==sid) return null
+  if(['principal','admin','super_admin','owner'].includes(r))
     return {sql:`${sqlBase} GROUP BY s.class,s.section ORDER BY s.class::text,s.section::text`,params:[sid]}
   return null
 }

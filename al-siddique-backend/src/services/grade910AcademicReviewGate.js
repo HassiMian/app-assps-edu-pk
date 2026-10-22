@@ -297,7 +297,7 @@ async function assertIndependentReviewReady(client,{schoolId,master,actorId}){
     [reviewer,schoolId]
   )
   if(activeReviewer.rowCount!==1||activeReviewer.rows[0].is_active!==true||
-     !['admin','principal','super_admin'].includes(activeReviewer.rows[0].role))
+     !['admin','principal','super_admin','owner'].includes(activeReviewer.rows[0].role))
     throw error('ACADEMIC_REVIEWER_NO_LONGER_AUTHORIZED',
       'The independent academic reviewer must remain active and authorized in this school.',403)
   // Release must independently recheck who created the linked original, not just

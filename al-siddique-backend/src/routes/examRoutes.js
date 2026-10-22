@@ -159,7 +159,7 @@ router.get('/', protect, requireScopeForServiceOnly('school.results.read'), asyn
     // stay school-scoped by BOTH the validated JWT and FORCE RLS policies.
     if (req.query.include_subjects === '1' && result.rows.length) {
       const role = String(req.user?.role || '').toLowerCase()
-      if (!['principal','admin','super_admin','teacher'].includes(role) &&
+      if (!['principal','admin','super_admin','owner','teacher'].includes(role) &&
           !(req.user?.account_type === 'service' && hasServiceScope(req,'school.results.read'))) {
         return res.status(403).json({success:false,code:'EXAM_SUBJECT_CATALOG_PERMISSION_DENIED'})
       }

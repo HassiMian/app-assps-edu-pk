@@ -13,7 +13,7 @@ function validateResultState(row, role) {
    return {status:state,marks:number}
  }
  if(!blank) return {error:'NON_NUMERIC_STATUS_HAS_MARKS'}
- if(state==='EXCUSED' && !['principal','admin','super_admin'].includes(String(role||'').toLowerCase()))
+ if(state==='EXCUSED' && !['principal','admin','super_admin','owner'].includes(String(role||'').toLowerCase()))
    return {error:'EXCUSED_REQUIRES_PRINCIPAL'}
  // A subject absence is not a daily-school-attendance status.
  return {status:state,marks:null}

@@ -6,7 +6,7 @@ function refuse(code,status=422){const err=new Error(code);err.code=code;err.sta
 function validateActor(actor){
  if(!actor||!Number.isSafeInteger(actor.schoolId)||actor.schoolId<1||
  !Number.isSafeInteger(actor.id)||actor.id<1||
- !['principal','admin','school_admin','teacher'].includes(actor.role))
+ !['principal','admin','school_admin','owner','teacher'].includes(actor.role))
  refuse('PERSONAL_SIGNATURE_REAL_STAFF_REQUIRED',403)
 }
 function validatePersonalPng(bytes){
