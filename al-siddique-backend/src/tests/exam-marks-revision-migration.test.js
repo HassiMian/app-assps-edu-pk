@@ -1,7 +1,7 @@
 'use strict'
 const test=require('node:test'),assert=require('node:assert/strict')
 const {up}=require('../../migrations/034_exam_marks_revision_history')
-function pool({signed=true,restricted=true,rls=true}={}){
+function pool({signed=true,restricted=true,rls=true,immutable=true}={}){
  const q=[]
  const db={connect:async()=>({
   query:async(text,params)=>{
@@ -9,6 +9,7 @@ function pool({signed=true,restricted=true,rls=true}={}){
    if(String(text).includes('to_regprocedure'))return {rows:[{fn:signed?'core_security.signed_school_allowed(integer)':null}]}
    if(String(text).includes('FROM pg_roles'))return {rows:[{rolsuper:!restricted,rolbypassrls:!restricted}]}
    if(String(text).includes('FROM pg_class c'))return {rows:[{relrowsecurity:rls,relforcerowsecurity:rls,has_policy:rls}]}
+   if(String(text).includes('FROM pg_trigger t'))return {rows:[{count:immutable?1:0}]}
    return {rows:[],rowCount:0}
   },release:()=>q.push('RELEASE')
  })}
@@ -20,6 +21,8 @@ test('migration is additive, zero exam_results writes, installs force RLS plus r
  assert.equal(result.existingMarksChanged,false)
  assert.ok(m.q.some(q=>q.includes('CREATE TABLE IF NOT EXISTS public.exam_marks_revision_history')))
  assert.ok(m.q.some(q=>q.includes('FORCE ROW LEVEL SECURITY')))
+ assert.ok(m.q.some(q=>q.includes('BEFORE UPDATE OR DELETE')))
+ assert.ok(m.q.some(q=>q.includes('MARKS_AUDIT_APPEND_ONLY')))
  assert.ok(m.q.some(q=>q.includes('exam_results_school_record_key')))
  assert.ok(m.q.some(q=>q.includes('FOREIGN KEY(school_id,exam_result_id)')))
  assert.ok(m.q.some(q=>q.includes('REVOKE ALL ON public.exam_marks_revision_history FROM PUBLIC')))
@@ -46,6 +49,13 @@ test('malformed runtime role denied before connecting',async()=>{
 test('missing verified FORCE RLS rolls back migration',async()=>{
  const m=pool({rls:false})
  await assert.rejects(()=>up({pool:m.db,runtimeRole:'apex_app_runtime'}),/FORCE_RLS_VERIFICATION_FAILED/)
+ assert.ok(m.q.includes('ROLLBACK'))
+ assert.ok(!m.q.includes('COMMIT'))
+})
+
+test('missing append-only trigger refuses migration COMMIT',async()=>{
+ const m=pool({immutable:false})
+ await assert.rejects(()=>up({pool:m.db,runtimeRole:'apex_app_runtime'}),/APPEND_ONLY_TRIGGER_REQUIRED/)
  assert.ok(m.q.includes('ROLLBACK'))
  assert.ok(!m.q.includes('COMMIT'))
 })

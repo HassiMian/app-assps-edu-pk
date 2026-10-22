@@ -13,14 +13,18 @@ const body={expected_marks:50,expected_total_marks:50,expected_grade:'D',
 const before={id:77,school_id:1,exam_id:9,student_id:794,subject:'English Written',
  marks_obtained:'50.00',total_marks:50,grade:'D',result_status:'SCORED',
  audit_schema:'exam_grade_revision_history'}
-function mocks({row=before,user=true,policy=bands,update=1,audit=1}={}){
+function mocks({row=before,user=true,policy=bands,latest=null,audit=1,crossMarks=false}={}){
  const queries=[]
  const client={query:async(sql,v)=>{
   queries.push({sql:String(sql),values:v})
   if(/SELECT id FROM users WHERE id=/.test(sql))return {rowCount:user?1:0,rows:user?[{id:4}]:[]}
   if(/SELECT er.id/.test(sql))return {rowCount:row?1:0,rows:row?[row]:[]}
+  if(/SELECT to_regclass\('public.exam_marks_revision_history'\)/.test(sql))
+   return {rows:[{rel:'exam_marks_revision_history'}]}
+  if(/SELECT id FROM exam_marks_revision_history/.test(sql))
+   return {rowCount:crossMarks?1:0,rows:crossMarks?[{id:13}]:[]}
   if(/SELECT label,min_percentage/.test(sql))return {rowCount:policy.length,rows:policy}
-  if(/UPDATE exam_results SET grade=/.test(sql))return {rowCount:update,rows:update?[{id:77,marks_obtained:'50.00',total_marks:50,grade:'A+'}]:[]}
+  if(/SELECT id,new_grade FROM exam_grade_revision_history/.test(sql))return {rowCount:latest?1:0,rows:latest?[{id:18,new_grade:latest}]:[]}
   if(/INSERT INTO exam_grade_revision_history/.test(sql))return {rowCount:audit,rows:audit?[{id:19,created_at:'2026-10-22T18:00:00Z'}]:[]}
   return {rowCount:0,rows:[]}
  },release:()=>queries.push({sql:'RELEASE'})}
@@ -34,10 +38,12 @@ test('grade-only correction D to authentic school A+ audits atomically without w
  assert.equal(x.total_marks,50)
  assert.equal(x.grade,'A+')
  assert.equal(x.revision_id,19)
- const u=m.queries.find(q=>q.sql.includes('UPDATE exam_results SET grade='))
+ assert.equal(x.recorded_grade,'D')
+ assert.equal(x.effective_grade,'A+')
+ const u=m.queries.find(q=>q.sql.includes('INSERT INTO exam_grade_revision_history'))
  assert.ok(u)
- assert.doesNotMatch(u.sql,/SET\s+marks_obtained/i)
- assert.deepEqual(u.values,['A+',77,1,50,50,'D'])
+ assert.equal(m.queries.some(q=>/UPDATE\s+exam_results/i.test(q.sql)),false)
+ assert.deepEqual(u.values,[1,77,9,794,'English Written',50,50,'D','A+',4,body.reason])
  assert.equal(m.queries.filter(x=>x.sql==='COMMIT').length,1)
  assert.equal(m.queries.filter(x=>x.sql==='TENANT_CTX').length,1)
 })
@@ -79,6 +85,17 @@ test('reject stale mark, wrong expected grade, missing signed bands and unchange
   await assert.rejects(()=>execute(m,b?{body:b}:{}) ,e=>e.status===409)
   assert.equal(m.queries.some(x=>/UPDATE exam_results/.test(x.sql)),false)
  }
+})
+test('existing grade overlay cannot be replayed or overwritten with stale expectation',async()=>{
+ const m=mocks({latest:'A+'})
+ await assert.rejects(()=>execute(m),e=>e.code==='GRADE_REVISION_STALE_OR_AMBIGUOUS')
+ assert.equal(m.queries.some(q=>/INSERT INTO exam_grade_revision_history/.test(q.sql)),false)
+ assert.equal(m.queries.filter(q=>q.sql==='COMMIT').length,0)
+})
+test('existing score overlay prevents ambiguous grade-only overlay',async()=>{
+ const m=mocks({crossMarks:true})
+ await assert.rejects(()=>execute(m),e=>e.code==='CROSS_LEDGER_SCORE_CORRECTION_REQUIRES_ADJUDICATION')
+ assert.equal(m.queries.some(q=>/INSERT INTO exam_grade_revision_history/.test(q.sql)),false)
 })
 test('audit failure triggers rollback not COMMIT',async()=>{
  const m=mocks({audit:0})

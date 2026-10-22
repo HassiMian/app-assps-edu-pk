@@ -10,6 +10,7 @@ const { validateResultState } = require('../services/examResultStatus')
 const { selectGradeBand } = require('../services/gradeBandAssignment')
 const {reviseExamScore,RevisionError} = require('../services/examOfficialMarksRevision')
 const {reviseExamGradeOnly,GradeRevisionError} = require('../services/examOfficialGradeRevision')
+const {gradeProjection,marksProjection,effectiveGradeRows} = require('../services/examGradeOverlayReadModel')
 
 const canManageExams = requireRoles('super_admin', 'admin', 'principal', 'owner')
 const canWriteMarks = requireRoles('super_admin', 'admin', 'principal', 'owner', 'teacher')
@@ -541,8 +542,12 @@ router.get('/results', protect, canReadResults, async (req, res) => {
       params.push(req.query.class)
     }
 
+    const ledger=await query("SELECT to_regclass('public.exam_grade_revision_history') AS rel")
+    const gradeExpr=gradeProjection(Boolean(ledger.rows[0]?.rel))
+    const marksLedger=await query("SELECT to_regclass('public.exam_marks_revision_history') AS rel")
+    const marksExpr=marksProjection(Boolean(marksLedger.rows[0]?.rel))
     let sql = `
-      SELECT er.*, e.name as exam_name, e.session, e.type as exam_type,
+      SELECT er.*, ${gradeExpr}, ${marksExpr}, e.name as exam_name, e.session, e.type as exam_type,
              s.name as student_name, s.class, s.section, s.gr_number, s.father_name,
              COALESCE(att.attendance_total_days, 0) AS attendance_total_days,
              COALESCE(att.attendance_attended, 0) AS attendance_attended,
@@ -574,7 +579,7 @@ router.get('/results', protect, canReadResults, async (req, res) => {
     sql += ` ORDER BY e.created_at DESC, s.class, s.roll_number, er.subject`
     if (!explicitExamIds.length) sql += ` LIMIT 500`
     const result = await query(sql, params)
-    res.json({ success: true, data: result.rows })
+    res.json({ success: true, data: effectiveGradeRows(result.rows) })
   } catch (err) {
     console.error('Exam results list error:', err.message)
     res.status(500).json({ success: false, message: 'Failed to load exam results.' })
@@ -584,8 +589,12 @@ router.get('/results', protect, canReadResults, async (req, res) => {
 // GET /api/exams/results/:exam_id
 router.get('/results/:exam_id', protect, canReadResults, async (req, res) => {
   try {
+    const ledger=await query("SELECT to_regclass('public.exam_grade_revision_history') AS rel")
+    const gradeExpr=gradeProjection(Boolean(ledger.rows[0]?.rel))
+    const marksLedger=await query("SELECT to_regclass('public.exam_marks_revision_history') AS rel")
+    const marksExpr=marksProjection(Boolean(marksLedger.rows[0]?.rel))
     let sql = `
-      SELECT er.*, s.name, s.class AS student_class, s.section AS student_section, s.gr_number, s.roll_number, s.father_name, s.photo,
+      SELECT er.*, ${gradeExpr}, ${marksExpr}, s.name, s.class AS student_class, s.section AS student_section, s.gr_number, s.roll_number, s.father_name, s.photo,
              COALESCE(att.attendance_total_days, 0) AS attendance_total_days,
              COALESCE(att.attendance_attended, 0) AS attendance_attended,
              COALESCE(att.attendance_absent, 0) AS attendance_absent
@@ -613,7 +622,7 @@ router.get('/results/:exam_id', protect, canReadResults, async (req, res) => {
     }
     sql += ` ORDER BY s.roll_number, er.subject`
     const result = await query(sql, params)
-    res.json({ success: true, data: result.rows })
+    res.json({ success: true, data: effectiveGradeRows(result.rows) })
   } catch (err) {
     console.error('Exam results fetch error:', err.message)
     return res.status(503).json({ success: false, message: 'Database unavailable. Exam results could not be loaded.' })
@@ -624,8 +633,12 @@ router.get('/results/:exam_id', protect, canReadResults, async (req, res) => {
 // GET /api/exams/student-results/:student_id
 router.get('/student-results/:student_id', protect, requireScopeForServiceOnly('school.results.read'), async (req, res) => {
   try {
+    const ledger=await query("SELECT to_regclass('public.exam_grade_revision_history') AS rel")
+    const gradeExpr=gradeProjection(Boolean(ledger.rows[0]?.rel))
+    const marksLedger=await query("SELECT to_regclass('public.exam_marks_revision_history') AS rel")
+    const marksExpr=marksProjection(Boolean(marksLedger.rows[0]?.rel))
     let sql = `
-      SELECT er.*, e.name as exam_name, e.session, e.type as exam_type, s.name as student_name, s.class, s.section, s.gr_number, s.father_name, s.photo
+      SELECT er.*, ${gradeExpr}, ${marksExpr}, e.name as exam_name, e.session, e.type as exam_type, s.name as student_name, s.class, s.section, s.gr_number, s.father_name, s.photo
       FROM exam_results er
       JOIN exams e ON er.exam_id = e.id
       JOIN students s ON er.student_id = s.id AND s.school_id = e.school_id
@@ -644,7 +657,7 @@ router.get('/student-results/:student_id', protect, requireScopeForServiceOnly('
     }
     sql += ` ORDER BY e.created_at DESC, er.subject`
     const result = await query(sql, params)
-    res.json({ success: true, data: result.rows })
+    res.json({ success: true, data: effectiveGradeRows(result.rows) })
   } catch (err) {
     console.error('Student results fetch error:', err.message)
     return res.status(503).json({ success: false, message: 'Database unavailable. Student results could not be loaded.' })

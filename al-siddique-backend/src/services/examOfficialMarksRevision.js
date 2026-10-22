@@ -28,7 +28,7 @@ function deriveGrade(marks,total,bands){
  return selected.label
 }
 async function reviseExamScore({pool,applyTenantContext,actor,schoolId,resultId,body}){
- if(!actor || !['principal','owner'].includes(String(actor.role||'').toLowerCase()))
+ if(!actor || actor.account_type==='service' || !['principal','owner'].includes(String(actor.role||'').toLowerCase()))
   throw new RevisionError('PRINCIPAL_REVISION_AUTHORIZATION_REQUIRED',403)
  const actorId=Number(actor.id)
  if(!Number.isSafeInteger(actorId)||actorId<=0||!Number.isSafeInteger(schoolId)||schoolId<=0)
@@ -38,7 +38,7 @@ async function reviseExamScore({pool,applyTenantContext,actor,schoolId,resultId,
  const requested=parseRequest(body)
  const client=await pool.connect()
  try{
-  await client.query('BEGIN ISOLATION LEVEL REPEATABLE READ')
+  await client.query('BEGIN ISOLATION LEVEL READ COMMITTED')
   await applyTenantContext(client)
   // Never accept a stale authenticated claim as continuing school authority.
   // An owner/principal whose verified school membership was revoked cannot revise.
@@ -49,7 +49,7 @@ async function reviseExamScore({pool,applyTenantContext,actor,schoolId,resultId,
     throw new RevisionError('PRINCIPAL_SCHOOL_MEMBERSHIP_NO_LONGER_ACTIVE',403)
   const lookup=await client.query(
    `SELECT er.id,er.school_id,er.exam_id,er.student_id,er.subject,er.marks_obtained,
-           er.total_marks,er.grade,er.remarks,
+           er.total_marks,er.grade,er.remarks,er.result_status,
            to_regclass('public.exam_marks_revision_history') AS revision_schema
       FROM exam_results er
       JOIN exams e ON e.id=er.exam_id AND e.school_id=$2
@@ -61,23 +61,34 @@ async function reviseExamScore({pool,applyTenantContext,actor,schoolId,resultId,
   const before=lookup.rows[0]
   if(!before.revision_schema)throw new RevisionError('REVISION_LEDGER_NOT_CERTIFIED',503)
   if(before.result_status && before.result_status!=='SCORED')throw new RevisionError('ONLY_NUMERIC_SCORES_CAN_BE_REVISED',409)
-  const actual=before.marks_obtained===null?null:Number(before.marks_obtained)
-  if(actual===null)throw new RevisionError('NON_SCORED_MARKS_REVISION_REQUIRES_SEPARATE_STATUS_WORKFLOW',409)
-  if(actual!==requested.old||Number(before.total_marks)!==requested.total||
-     String(before.grade??'')!==requested.oldGrade)
+  // Locked First Term results must NEVER be updated or trigger-disabled.
+  // Use strictly append-only mark history, read the latest under the base
+  // row lock and compare with the authenticated reviewer's expected state.
+  const next=await client.query(
+   `SELECT new_marks,new_grade FROM exam_marks_revision_history
+      WHERE school_id=$1 AND exam_result_id=$2
+      ORDER BY id DESC LIMIT 1`,[schoolId,id])
+  const liveMarks=next.rowCount===1?Number(next.rows[0].new_marks):
+   (before.marks_obtained===null?null:Number(before.marks_obtained))
+  const liveGrade=next.rowCount===1?String(next.rows[0].new_grade):String(before.grade??'')
+  if(liveMarks===null)throw new RevisionError('NON_SCORED_MARKS_REVISION_REQUIRES_SEPARATE_STATUS_WORKFLOW',409)
+  if(liveMarks!==requested.old||Number(before.total_marks)!==requested.total||
+     liveGrade!==requested.oldGrade)
     throw new RevisionError('MARKS_CHANGED_SINCE_REVIEW_RELOAD_REQUIRED',409)
+  const gradeLedger=await client.query(
+   "SELECT to_regclass('public.exam_grade_revision_history') AS rel")
+  if(gradeLedger.rows[0]?.rel){
+   const other=await client.query(
+    'SELECT id FROM exam_grade_revision_history WHERE school_id=$1 AND exam_result_id=$2 LIMIT 1',
+    [schoolId,id])
+   if(other.rowCount)
+    throw new RevisionError('CROSS_LEDGER_GRADE_CORRECTION_REQUIRES_ADJUDICATION',409)
+  }
   const policy=await client.query(
    'SELECT label,min_percentage,max_percentage FROM grade_settings WHERE school_id=$1 ORDER BY sort_order',
    [schoolId])
   const grade=deriveGrade(requested.proposed,requested.total,policy.rows)
-  const updated=await client.query(
-   `UPDATE exam_results
-       SET marks_obtained=$1,grade=$2
-     WHERE id=$3 AND school_id=$4 AND marks_obtained=$5 AND total_marks=$6
-       AND COALESCE(grade,'')=$7
-     RETURNING id,marks_obtained,total_marks,grade`,
-   [requested.proposed,grade,id,schoolId,requested.old,requested.total,requested.oldGrade])
-  if(updated.rowCount!==1)throw new RevisionError('MARKS_REVISION_CONFLICT',409)
+  // No UPDATE to exam_results. Original saved score and grade are immutable.
   const audit=await client.query(
    `INSERT INTO exam_marks_revision_history
       (school_id,exam_result_id,exam_id,student_id,subject,
@@ -86,11 +97,13 @@ async function reviseExamScore({pool,applyTenantContext,actor,schoolId,resultId,
       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
       RETURNING id,created_at`,
    [schoolId,id,before.exam_id,before.student_id,before.subject,
-    requested.old,requested.proposed,requested.total,requested.oldGrade,grade,actorId,requested.reason])
+    liveMarks,requested.proposed,requested.total,liveGrade,grade,actorId,requested.reason])
   if(audit.rowCount!==1)throw new RevisionError('REVISION_AUDIT_WRITE_FAILED',503)
   await client.query('COMMIT')
   return {result_id:id,exam_id:before.exam_id,student_id:before.student_id,
     subject:before.subject,marks_obtained:requested.proposed,total_marks:requested.total,
+    recorded_marks:before.marks_obtained,recorded_grade:before.grade,
+    effective_marks:requested.proposed,effective_grade:grade,
     grade,revision_id:audit.rows[0].id,audited_at:audit.rows[0].created_at}
  }catch(e){
   try{await client.query('ROLLBACK')}catch(_){}

@@ -29,13 +29,13 @@ import {
 } from 'lucide-react'
 
 const ROLE_SETS = {
- leadership: ['super_admin', 'admin', 'principal'],
- adminOffice: ['super_admin', 'admin', 'principal', 'accountant'],
- academicStaff: ['super_admin', 'admin', 'principal', 'teacher'],
- schoolStaff: ['super_admin', 'admin', 'principal', 'teacher', 'accountant'],
- family: ['super_admin', 'admin', 'principal', 'parent'],
- learner: ['super_admin', 'admin', 'principal', 'student'],
- all: ['super_admin', 'admin', 'principal', 'teacher', 'accountant', 'parent', 'student'],
+ leadership: ['super_admin', 'admin', 'principal', 'owner'],
+ adminOffice: ['super_admin', 'admin', 'principal', 'owner', 'accountant'],
+ academicStaff: ['super_admin', 'admin', 'principal', 'owner', 'teacher'],
+ schoolStaff: ['super_admin', 'admin', 'principal', 'owner', 'teacher', 'accountant'],
+ family: ['super_admin', 'admin', 'principal', 'owner', 'parent'],
+ learner: ['super_admin', 'admin', 'principal', 'owner', 'student'],
+ all: ['super_admin', 'admin', 'principal', 'owner', 'teacher', 'accountant', 'parent', 'student'],
 }
 
 const MENU_GROUPS = [

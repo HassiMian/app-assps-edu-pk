@@ -11,11 +11,11 @@ const school=(req)=>Number(req.user?.school_id)
 const actor=(req)=>String(req.user?.id||req.user?.username||'anonymous')
 const principal=(req)=>{
  const role=String(req.user?.role||'').toLowerCase()
- return ['principal','admin','headmaster','super_admin'].includes(role)
+ return ['principal','admin','headmaster','super_admin','owner'].includes(role)
 }
 const staff=(req,res,next)=>{
  const role=String(req.user?.role||'').toLowerCase()
- if(['principal','admin','headmaster','super_admin','teacher','staff','clerk'].includes(role))return next()
+ if(['principal','admin','headmaster','super_admin','owner','teacher','staff','clerk'].includes(role))return next()
  return res.status(403).json({success:false,message:'Staff role required'})
 }
 const leader=(req,res,next)=>{

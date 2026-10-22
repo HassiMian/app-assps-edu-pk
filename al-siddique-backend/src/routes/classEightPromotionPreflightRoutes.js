@@ -8,7 +8,7 @@ const {protect,requireScopeForServiceOnly}=require('../middleware/auth')
 router.get('/eight-to-pre-nine/preflight',protect,requireScopeForServiceOnly('school.promotion.read'),async(req,res)=>{
  const school=Number(req.school_id)
  if(!Number.isSafeInteger(school)||school<=0||
-   !['admin','principal','super_admin'].includes(String(req.user?.role||'')))
+   !['admin','principal','super_admin','owner'].includes(String(req.user?.role||'')))
   return res.status(403).json({success:false,code:'PROMOTION_ADMIN_ONLY'})
  try{
   const policy=await query(`SELECT id,exam_id,source_class,source_section,destination_class,

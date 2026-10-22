@@ -52,6 +52,14 @@ async function up(options={}){
       END IF;
     END
     $guard$;
+    CREATE OR REPLACE FUNCTION public.assps_exam_marks_audit_deny_mutation()
+     RETURNS trigger LANGUAGE plpgsql AS $guard$
+      BEGIN RAISE EXCEPTION 'MARKS_AUDIT_APPEND_ONLY'; END
+     $guard$;
+    DROP TRIGGER IF EXISTS exam_marks_revision_immutable ON public.exam_marks_revision_history;
+    CREATE TRIGGER exam_marks_revision_immutable
+      BEFORE UPDATE OR DELETE ON public.exam_marks_revision_history
+      FOR EACH ROW EXECUTE FUNCTION public.assps_exam_marks_audit_deny_mutation();
     CREATE INDEX IF NOT EXISTS idx_exam_marks_revision_school_result
       ON public.exam_marks_revision_history(school_id,exam_result_id,created_at DESC);
     ALTER TABLE public.exam_marks_revision_history ENABLE ROW LEVEL SECURITY;
@@ -68,6 +76,12 @@ async function up(options={}){
     EXISTS(SELECT 1 FROM pg_policy p WHERE p.polrelid=c.oid AND p.polname='exam_marks_revision_signed_school') AS has_policy
     FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace
     WHERE n.nspname='public' AND c.relname='exam_marks_revision_history'`)
+  const immutable=await client.query(`SELECT COUNT(*)::int AS count FROM pg_trigger t
+    JOIN pg_class c ON c.oid=t.tgrelid JOIN pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND c.relname='exam_marks_revision_history'
+      AND t.tgname='exam_marks_revision_immutable' AND t.tgenabled='O'`)
+  if(Number(immutable.rows[0]?.count)!==1)
+   throw Error('EXAM_MARKS_AUDIT_APPEND_ONLY_TRIGGER_REQUIRED')
   if(check.rows.length!==1 || !check.rows[0].relrowsecurity ||
      !check.rows[0].relforcerowsecurity || !check.rows[0].has_policy)
     throw Error('EXAM_MARKS_REVISION_FORCE_RLS_VERIFICATION_FAILED')

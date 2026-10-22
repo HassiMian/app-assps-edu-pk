@@ -2,7 +2,7 @@ const { query } = require('../config/database')
 const { getTeacherAssignments, ensureTeacherAssignmentSchema, teacherCanAccessClass } = require('./teacherAssignmentService')
 
 function normalizedRole(req) { return String(req.user?.role || '').trim().toLowerCase() }
-function isPaperAdmin(req) { return ['super_admin','admin','principal'].includes(normalizedRole(req)) }
+function isPaperAdmin(req) { return ['super_admin','admin','principal','owner'].includes(normalizedRole(req)) }
 function normalizeText(v) { return String(v ?? '').trim() }
 
 
@@ -49,7 +49,7 @@ async function createProjectedPaper({ schoolId, userId, role, payload }) {
     err.code = 'INVALID_PAPER_DOCUMENT'
     throw err
   }
-  if (!['super_admin','admin','principal','teacher'].includes(role)) {
+  if (!['super_admin','admin','principal','owner','teacher'].includes(role)) {
     const err = new Error('Paper creation is not available for this role.')
     err.status = 403
     err.code = 'PAPER_CREATE_FORBIDDEN'
@@ -122,7 +122,7 @@ async function listProjectedPapers({ schoolId, userId, role, limit = 100 }) {
   const params = [schoolId]
   let ownerClause = ''
   if (role === 'teacher') { params.push(userId); ownerClause = ` AND owner_user_id=$${params.length}` }
-  else if (!['super_admin','admin','principal'].includes(role)) return []
+  else if (!['super_admin','admin','principal','owner'].includes(role)) return []
   params.push(Math.max(1, Math.min(Number(limit) || 100, 200)))
   const result = await query(
     `SELECT id, owner_user_id, name, class_name, section, subject_name, status, revision, payload, created_at, updated_at
@@ -139,7 +139,7 @@ async function getProjectedPaper({ schoolId, userId, role, paperId }) {
   const params = [paperId, schoolId]
   let ownerClause = ''
   if (role === 'teacher') { params.push(userId); ownerClause = ` AND owner_user_id=$${params.length}` }
-  else if (!['super_admin','admin','principal'].includes(role)) return null
+  else if (!['super_admin','admin','principal','owner'].includes(role)) return null
   const result = await query(
     `SELECT id, owner_user_id, name, class_name, section, subject_name, status, revision, payload, created_at, updated_at
      FROM paper_vault WHERE id=$1 AND school_id=$2 AND deleted_at IS NULL${ownerClause} LIMIT 1`, params)

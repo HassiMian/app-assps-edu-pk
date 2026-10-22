@@ -29,7 +29,7 @@ async function reviseExamGradeOnly({pool,applyTenantContext,actor,schoolId,resul
  const expected=parseGradeRevisionRequest(body)
  const client=await pool.connect()
  try {
-  await client.query('BEGIN ISOLATION LEVEL REPEATABLE READ')
+  await client.query('BEGIN ISOLATION LEVEL READ COMMITTED')
   await applyTenantContext(client)
   const user=await client.query(
    'SELECT id FROM users WHERE id=$1 AND school_id=$2 AND role=$3 AND is_active=true',
@@ -51,9 +51,28 @@ async function reviseExamGradeOnly({pool,applyTenantContext,actor,schoolId,resul
    throw new GradeRevisionError('GRADE_ONLY_REQUIRES_SCORED_RECORD',409)
   if(old.marks_obtained===null||
      Number(old.marks_obtained)!==expected.score||
-     Number(old.total_marks)!==expected.max||
-     String(old.grade??'')!==expected.original)
+     Number(old.total_marks)!==expected.max)
    throw new GradeRevisionError('GRADE_REVISION_STALE_OR_AMBIGUOUS',409)
+  // Historical Exam 9 has a database immutability trigger. Never disable it.
+  const latest=await client.query(
+   `SELECT id,new_grade FROM exam_grade_revision_history
+       WHERE school_id=$1 AND exam_result_id=$2
+       ORDER BY id DESC LIMIT 1`,[school,id])
+  const beforeGrade=latest.rowCount===1
+    ?String(latest.rows[0].new_grade):String(old.grade??'')
+  if(beforeGrade!==expected.original)
+   throw new GradeRevisionError('GRADE_REVISION_STALE_OR_AMBIGUOUS',409)
+  // A result may use only one correction ledger until a signed joint
+  // reconciliation workflow is certified. Prevent stale grade overlays
+  // from overriding a newer score revision.
+  const scoreLedger=await client.query(
+   "SELECT to_regclass('public.exam_marks_revision_history') AS rel")
+  if(scoreLedger.rows[0]?.rel){
+   const other=await client.query(
+    'SELECT id FROM exam_marks_revision_history WHERE school_id=$1 AND exam_result_id=$2 LIMIT 1',
+    [school,id])
+   if(other.rowCount)throw new GradeRevisionError('CROSS_LEDGER_SCORE_CORRECTION_REQUIRES_ADJUDICATION',409)
+  }
   const policy=await client.query(
    'SELECT label,min_percentage,max_percentage FROM grade_settings WHERE school_id=$1 ORDER BY sort_order',
    [school])
@@ -63,16 +82,7 @@ async function reviseExamGradeOnly({pool,applyTenantContext,actor,schoolId,resul
   if(!selected)throw new GradeRevisionError('GRADE_BANDS_INVALID_OR_AMBIGUOUS',409)
   const grade=selected.label
   if(grade===expected.original)throw new GradeRevisionError('GRADE_REVISION_NO_CHANGE',409)
-  const updated=await client.query(
-   `UPDATE exam_results SET grade=$1
-     WHERE id=$2 AND school_id=$3 AND marks_obtained=$4
-       AND total_marks=$5 AND COALESCE(grade,'')=$6 AND result_status='SCORED'
-     RETURNING id,marks_obtained,total_marks,grade`,
-   [grade,id,school,expected.score,expected.max,expected.original])
-  if(updated.rowCount!==1 ||
-     Number(updated.rows[0].marks_obtained)!==expected.score||
-     Number(updated.rows[0].total_marks)!==expected.max)
-   throw new GradeRevisionError('GRADE_REVISION_UPDATE_CONFLICT',409)
+  // Append-only signed overlay; never UPDATE protected original grade.
   const logged=await client.query(
    `INSERT INTO exam_grade_revision_history
       (school_id,exam_result_id,exam_id,student_id,subject,marks_obtained,total_marks,
@@ -80,11 +90,12 @@ async function reviseExamGradeOnly({pool,applyTenantContext,actor,schoolId,resul
      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
      RETURNING id,created_at`,
    [school,id,old.exam_id,old.student_id,old.subject,expected.score,expected.max,
-    expected.original,grade,userId,expected.reason])
+    beforeGrade,grade,userId,expected.reason])
   if(logged.rowCount!==1)throw new GradeRevisionError('GRADE_AUDIT_INSERT_FAILED',503)
   await client.query('COMMIT')
   return {result_id:id,exam_id:old.exam_id,student_id:old.student_id,
-   subject:old.subject,marks_obtained:expected.score,total_marks:expected.max,grade,
+   subject:old.subject,marks_obtained:expected.score,total_marks:expected.max,
+   recorded_grade:String(old.grade??''),effective_grade:grade,grade,
    revision_id:logged.rows[0].id,audited_at:logged.rows[0].created_at}
  }catch(e){
   try{await client.query('ROLLBACK')}catch(_){}

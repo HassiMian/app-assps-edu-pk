@@ -8,7 +8,7 @@ const NINE_SHA='e182d9616f300e731e3e3dc957bc43934ef1f574b7b564714d433726c03fc724
 const classes=['Four','Five','Six','Seven','Pre-Nine']
 function signedSchool(req,res){
  const school=Number(req.school_id)
- if(!Number.isSafeInteger(school)||school<=0||!['admin','principal','teacher','super_admin'].includes(String(req.user?.role||''))){
+ if(!Number.isSafeInteger(school)||school<=0||!['admin','principal','teacher','super_admin','owner'].includes(String(req.user?.role||''))){
   res.status(403).json({success:false,code:'TIMETABLE_SCHOOL_ROLE_REQUIRED'})
   return 0
  }
@@ -52,7 +52,7 @@ router.get('/reference',protect,requireScopeForServiceOnly('school.timetable.rea
 router.get('/staff-subjects',protect,requireScopeForServiceOnly('school.timetable.read'),async(req,res)=>{
  const school=signedSchool(req,res)
  if(!school)return
- if(!['admin','principal','super_admin'].includes(String(req.user?.role)))
+ if(!['admin','principal','super_admin','owner'].includes(String(req.user?.role)))
   return res.status(403).json({success:false,code:'STAFF_DIRECTORY_ADMIN_ONLY'})
  try{
   const {rows}=await query(`SELECT x.teacher_label,x.employee_id,

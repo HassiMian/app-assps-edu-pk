@@ -75,7 +75,7 @@ function buildStudentSafeProjection(releaseSnapshot = {}, bindings = {}) {
 }
 
 function buildStaffAnswerKeyProjection(releaseSnapshot = {}, { role } = {}) {
-  const allowed = new Set(['super_admin','admin','school_admin','principal','teacher'])
+  const allowed = new Set(['super_admin','admin','school_admin','principal','owner','teacher'])
   if (!allowed.has(String(role || '').toLowerCase())) {
     const error = new Error('Staff authorization is required for answer-key projection')
     error.code = 'ANSWER_KEY_ROLE_REQUIRED'

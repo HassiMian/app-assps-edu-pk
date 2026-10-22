@@ -9,8 +9,8 @@ test('grade-only changes require protect and Principal/Owner and audited service
 })
 test('grade-only service never updates score',()=>{
  const s=fs.readFileSync(path.join(__dirname,'../services/examOfficialGradeRevision.js'),'utf8')
- assert.ok(s.includes('SET grade=$1'))
- assert.ok(!/SET\s+marks_obtained\s*=/.test(s))
- assert.ok(s.includes('AND marks_obtained=$4'))
+ assert.ok(!/UPDATE\s+exam_results/i.test(s))
+ assert.ok(s.includes('SELECT id,new_grade FROM exam_grade_revision_history'))
+ assert.ok(s.includes('FOR UPDATE OF er'))
  assert.ok(s.includes('INSERT INTO exam_grade_revision_history'))
 })

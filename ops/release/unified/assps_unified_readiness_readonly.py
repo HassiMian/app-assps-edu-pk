@@ -9,6 +9,7 @@ import verify_backend_source_preservation_readonly as backend_preservation
 import verify_backend_listener_readonly as backend_listener
 import verify_owner_academic_authenticity_readonly as owner_academic
 import verify_firstterm_snapshot_drift_readonly as result_drift
+import verify_exam9_immutability_readonly as exam9_immutability
 import verify_frontend_artifact_closure_readonly as frontend_closure
 import verify_exam_attendance_tenant_scope_readonly as exam_attendance_scope
 import verify_academic_delivery_integrity_readonly as academic_integrity
@@ -279,7 +280,7 @@ def inspect_http():
     return {'pass':all(v['pass'] for v in result.values()),'checks':result}
 
 def classify(evidence):
-    required=('database','backup','frontend','rollback','http','backend_listener','owner_academic_authenticity','firstterm_snapshot_drift',
+    required=('database','backup','frontend','rollback','http','backend_listener','owner_academic_authenticity','firstterm_snapshot_drift','exam9_original_immutability',
               'restricted_catalog_and_firstterm','source_privacy_inventory',
               'backend_source_inventory','attendance_roster_coverage','fee_ledger_integrity',
               'frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity',
@@ -297,6 +298,8 @@ def classify(evidence):
         holds.insert(0,'owner_identity_grade_audit_and_firstterm_authority_not_verified')
     if not checks['firstterm_snapshot_drift']:
         holds.insert(0,'school1_firstterm_unattributed_score_or_grade_drift_requires_source_proof')
+    if not checks['exam9_original_immutability']:
+        holds.insert(0,'school1_firstterm_original_immutability_trigger_or_rls_missing')
     if not attested:
         holds.insert(0,'active_frontend_attestation_does_not_match_served_hash')
     if evidence.get('frontend_artifact_closure',{}).get('immutable_artifact_go') is not True:
@@ -346,6 +349,7 @@ def main():
         'backend_listener':backend_listener.inspect,
         'owner_academic_authenticity':owner_academic.inspect,
         'firstterm_snapshot_drift':result_drift.inspect,
+        'exam9_original_immutability':exam9_immutability.inspect,
         'frontend_artifact_closure':inspect_frontend_artifact_closure,
         'exam_attendance_tenant_scope':exam_attendance_scope.inspect,
         'academic_delivery_integrity':academic_integrity.inspect,

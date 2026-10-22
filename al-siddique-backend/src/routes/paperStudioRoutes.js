@@ -36,7 +36,7 @@ function schoolContext(req, res) {
 router.get('/canonical-readiness', async (req,res) => {
   try {
     const role=normalizedRole(req)
-    if(!['super_admin','admin','principal'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
+    if(!['super_admin','admin','principal','owner'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
     const data=await buildCanonicalCutoverReadiness()
     res.set('Cache-Control','private, no-store')
     return res.json({success:true,data})
@@ -49,7 +49,7 @@ router.get('/canonical-readiness', async (req,res) => {
 router.get('/canonical-readiness/human-authority-boundary', async (req,res) => {
   try {
     const role=normalizedRole(req)
-    if(!['super_admin','admin','principal'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
+    if(!['super_admin','admin','principal','owner'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
     const data=await buildHumanAuthorityBoundary()
     res.set('Cache-Control','private, no-store')
     return res.json({success:true,data,policy:{readOnly:true,persisted:false,envChanged:false,approvalChanged:false,canonicalWriteChanged:false}})
@@ -71,7 +71,7 @@ router.get('/canonical-readiness/human-authority-boundary', async (req,res) => {
 router.post('/publisher-review/edition-review-precheck', express.json({limit:'512kb'}), async (req,res) => {
   try {
     const role=normalizedRole(req)
-    if(!['super_admin','admin','principal'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
+    if(!['super_admin','admin','principal','owner'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
     const schoolId=schoolContext(req,res); if(!schoolId)return
     const data=validatePublisherEditionReviewPreflight(req.body||{}, {forbidReviewerIds:[req.user?.id]})
     res.set('Cache-Control','private, no-store')
@@ -87,7 +87,7 @@ router.post('/publisher-review/edition-review-precheck', express.json({limit:'51
 router.post('/publisher-review/academic-publication-precheck', express.json({limit:'768kb'}), async (req,res) => {
   try {
     const role=normalizedRole(req)
-    if(!['super_admin','admin','principal'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
+    if(!['super_admin','admin','principal','owner'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
     const schoolId=schoolContext(req,res); if(!schoolId)return
     const data=buildAcademicPublicationPrecheck(req.body||{}, {forbidReviewerIds:[req.user?.id]})
     res.set('Cache-Control','private, no-store')
@@ -102,7 +102,7 @@ router.post('/publisher-review/academic-publication-precheck', express.json({lim
 router.post('/publisher-review/release-envelope', express.json({limit:'1mb'}), async (req,res) => {
   try {
     const role=normalizedRole(req)
-    if(!['super_admin','admin','principal'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
+    if(!['super_admin','admin','principal','owner'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
     const schoolId=schoolContext(req,res); if(!schoolId)return
     const data=buildPublisherReleaseEnvelope(req.body||{}, {forbidReviewerIds:[req.user?.id]})
     res.set('Cache-Control','private, no-store')
@@ -117,7 +117,7 @@ router.post('/publisher-review/release-envelope', express.json({limit:'1mb'}), a
 router.post('/publisher-review/release-signature-verify', express.json({limit:'1mb'}), async (req,res) => {
   try {
     const role=normalizedRole(req)
-    if(!['super_admin','admin','principal'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
+    if(!['super_admin','admin','principal','owner'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
     const schoolId=schoolContext(req,res); if(!schoolId)return
     const body=req.body||{}
     const data=verifyPublisherReleaseDetachedSignature(body.releaseBundle||{},body.signatureRecord||{}, {forbidReviewerIds:[req.user?.id]})
@@ -133,7 +133,7 @@ router.post('/publisher-review/release-signature-verify', express.json({limit:'1
 router.post('/publisher-review/key-custody-precheck', express.json({limit:'256kb'}), async (req,res) => {
   try {
     const role=normalizedRole(req)
-    if(!['super_admin','admin','principal'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
+    if(!['super_admin','admin','principal','owner'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
     const schoolId=schoolContext(req,res); if(!schoolId)return
     const body=req.body||{}
     const data=validatePublisherKeyCustodyPreflight(body.publicKeyPem,body.custody||{}, {forbidReviewerIds:[req.user?.id]})
@@ -149,7 +149,7 @@ router.post('/publisher-review/key-custody-precheck', express.json({limit:'256kb
 router.post('/publisher-review/approval-activation-precheck', express.json({limit:'512kb'}), async (req,res) => {
   try {
     const role=normalizedRole(req)
-    if(!['super_admin','admin','principal'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
+    if(!['super_admin','admin','principal','owner'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
     const schoolId=schoolContext(req,res); if(!schoolId)return
     const body=req.body||{}
     const data=await buildPublisherApprovalActivationPreflight(body.reviewBundle||{},body.signature||{},body.approval||{}, {grade:9,subject:'Biology',forbidReviewerIds:[req.user?.id],forbidApproverIds:[req.user?.id]})
@@ -165,7 +165,7 @@ router.post('/publisher-review/approval-activation-precheck', express.json({limi
 router.post('/publisher-review/approval-decision-validate', express.json({limit:'512kb'}), async (req,res) => {
   try {
     const role=normalizedRole(req)
-    if(!['super_admin','admin','principal'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
+    if(!['super_admin','admin','principal','owner'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
     const schoolId=schoolContext(req,res); if(!schoolId)return
     const body=req.body||{}
     const data=validatePublisherApprovalDecision(body.reviewBundle||{},body.signature||{},body.approval||{}, {grade:9,subject:'Biology',forbidReviewerIds:[req.user?.id],forbidApproverIds:[req.user?.id]})
@@ -181,7 +181,7 @@ router.post('/publisher-review/approval-decision-validate', express.json({limit:
 router.post('/publisher-review/signature-verify', express.json({limit:'384kb'}), async (req,res) => {
   try {
     const role=normalizedRole(req)
-    if(!['super_admin','admin','principal'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
+    if(!['super_admin','admin','principal','owner'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
     const schoolId=schoolContext(req,res); if(!schoolId)return
     const body=req.body||{}
     const data=verifyPublisherDetachedSignature(body.reviewBundle||{}, body.signature||{}, {grade:9,subject:'Biology',forbidReviewerIds:[req.user?.id]})
@@ -197,7 +197,7 @@ router.post('/publisher-review/signature-verify', express.json({limit:'384kb'}),
 router.post('/publisher-review/promotion-envelope', express.json({limit:'256kb'}), async (req,res) => {
   try {
     const role=normalizedRole(req)
-    if(!['super_admin','admin','principal'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
+    if(!['super_admin','admin','principal','owner'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
     const schoolId=schoolContext(req,res); if(!schoolId)return
     const data=buildPublisherPromotionEnvelope(req.body||{}, {grade:9,subject:'Biology',forbidReviewerIds:[req.user?.id]})
     res.set('Cache-Control','private, no-store')
@@ -212,7 +212,7 @@ router.post('/publisher-review/promotion-envelope', express.json({limit:'256kb'}
 router.post('/publisher-review/promotion-precheck', express.json({limit:'256kb'}), async (req,res) => {
   try {
     const role=normalizedRole(req)
-    if(!['super_admin','admin','principal'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
+    if(!['super_admin','admin','principal','owner'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
     const schoolId=schoolContext(req,res); if(!schoolId)return
     const data=buildPublisherPromotionPrecheck(req.body||{}, {grade:9,subject:'Biology',forbidReviewerIds:[req.user?.id]})
     res.set('Cache-Control','private, no-store')
@@ -227,7 +227,7 @@ router.post('/publisher-review/promotion-precheck', express.json({limit:'256kb'}
 router.post('/publisher-review/validate', express.json({limit:'256kb'}), async (req,res) => {
   try {
     const role=normalizedRole(req)
-    if(!['super_admin','admin','principal'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
+    if(!['super_admin','admin','principal','owner'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
     const schoolId=schoolContext(req,res); if(!schoolId)return
     const data=validateReviewBundle(req.body||{}, {grade:9,subject:'Biology',forbidReviewerIds:[req.user?.id]})
     res.set('Cache-Control','private, no-store')

@@ -86,7 +86,7 @@ export const PERMISSION_GROUPS = [
 export const ALL_PERMISSIONS = PERMISSION_GROUPS.flatMap(g => g.perms)
 
 // Roles that bypass permissions entirely (they see everything)
-export const ADMIN_ROLES = ['super_admin', 'admin', 'principal', 'school_admin']
+export const ADMIN_ROLES = ['super_admin', 'admin', 'principal', 'owner', 'school_admin']
 
 // Default permissions auto-assigned to teachers
 export const DEFAULT_TEACHER_PERMISSIONS = [

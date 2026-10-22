@@ -13,7 +13,7 @@ async function withApproval(req,res,fn){
   c=await pool.connect()
   await c.query('BEGIN');opened=true;await applyTenantContext(c)
   const uid=id(req.user?.id),school=id(req.user?.school_id)
-  if(!uid||!school||school!==id(req.school_id)||!['admin','principal'].includes(String(req.user?.role))||!/^Bearer\s+\S+$/i.test(String(req.headers.authorization||''))){await c.query('ROLLBACK');opened=false;return bad(res,403,'AUTHENTIC_SCHOOL_ADMIN_REQUIRED')}
+  if(!uid||!school||school!==id(req.school_id)||!['admin','principal','owner'].includes(String(req.user?.role))||!/^Bearer\s+\S+$/i.test(String(req.headers.authorization||''))){await c.query('ROLLBACK');opened=false;return bad(res,403,'AUTHENTIC_SCHOOL_ADMIN_REQUIRED')}
   const actor=await c.query("SELECT id FROM users WHERE id=$1 AND school_id=$2 AND role IN ('admin','principal') AND is_active=true FOR SHARE",[uid,school])
   if(actor.rowCount!==1){await c.query('ROLLBACK');opened=false;return bad(res,403,'AUTHENTIC_SCHOOL_ADMIN_REQUIRED')}
   const result=await fn(c,{uid,school})
