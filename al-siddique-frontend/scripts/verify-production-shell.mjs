@@ -42,7 +42,7 @@ async function main() {
   assert(referencedEntryNames.every((candidate) => candidate === entry),
     `Mixed frontend release graph: HTML loads ${entry} but LoginPage imports ${[...new Set(referencedEntryNames)].join(', ')}`)
 
-  const browser = await chromium.launch({ headless: true, ...(process.env.APEX_CHROME_PATH ? { executablePath: process.env.APEX_CHROME_PATH } : { channel: 'chrome' }) })
+  const browser = await chromium.launch({ headless: true, args: ['--disable-quic'], ...(process.env.APEX_CHROME_PATH ? { executablePath: process.env.APEX_CHROME_PATH } : (process.env.CI ? {} : { channel: 'chrome' })) })
   try {
     for (const path of ['/login', '/dashboard']) {
       const context = await browser.newContext({ serviceWorkers: 'block' })
@@ -54,7 +54,18 @@ async function main() {
           errors.push(message.text().slice(0, 300))
         }
       })
-      await page.goto(url(path), { waitUntil: 'networkidle', timeout })
+      // Cloudflare QUIC transport errors are intermittent; retry only transport
+      // errors once, never JS/app-shell errors.
+      for (let attempt = 0; attempt < 2; attempt++) {
+        try {
+          await page.goto(url(path), { waitUntil: 'domcontentloaded', timeout })
+          break
+        } catch (error) {
+          const transient = /ERR_QUIC_PROTOCOL_ERROR|ERR_CONNECTION_RESET|ERR_HTTP2_PROTOCOL_ERROR/.test(String(error?.message))
+          if (!transient || attempt === 1) throw error
+        }
+      }
+      await page.locator('input').first().waitFor({ state: 'visible', timeout: 12000 })
       await page.waitForTimeout(500)
       const recoveryCount = await page.getByText('APEX RECOVERY MODE', { exact: false }).count()
       const inputCount = await page.locator('input').count()

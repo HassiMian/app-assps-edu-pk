@@ -1,4 +1,4 @@
-﻿name: ASSPS Frontend Release Integrity
+name: ASSPS Frontend Release Integrity
 
 on:
   push:
@@ -31,6 +31,22 @@ jobs:
         run: npm run build:frontend
       - name: Verify complete hashed asset graph
         run: npm run release:frontend:validate
+      - name: Install browser runtime for candidate smoke test
+        run: npm exec --prefix al-siddique-frontend -- playwright install --with-deps chromium
+      - name: Start isolated candidate preview
+        run: |
+          npm --prefix al-siddique-frontend run preview -- --host 127.0.0.1 --port 4173 > /tmp/assps-preview.log 2>&1 &
+          for attempt in $(seq 1 25); do
+            if curl -fsS http://127.0.0.1:4173/login -o /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/assps-preview.log
+          exit 1
+      - name: Browser-check candidate login and dashboard redirect
+        env:
+          CI: 'true'
+          APEX_BASE_URL: http://127.0.0.1:4173
+        run: node al-siddique-frontend/scripts/verify-production-shell.mjs
       - name: Preserve candidate build for audit
         uses: actions/upload-artifact@v4
         with:
