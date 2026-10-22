@@ -9,6 +9,7 @@ const { validatePaperMaxima } = require('../services/examMarksSubjectMaximum')
 const { validateResultState } = require('../services/examResultStatus')
 const { selectGradeBand } = require('../services/gradeBandAssignment')
 const {reviseExamScore,RevisionError} = require('../services/examOfficialMarksRevision')
+const {reviseExamGradeOnly,GradeRevisionError} = require('../services/examOfficialGradeRevision')
 
 const canManageExams = requireRoles('super_admin', 'admin', 'principal', 'owner')
 const canWriteMarks = requireRoles('super_admin', 'admin', 'principal', 'owner', 'teacher')
@@ -478,6 +479,27 @@ router.post('/results/:resultId/revision', protect, requireRoles('principal','ow
     console.error('Audited exam marks revision failed:',err.message)
     return res.status(503).json({success:false,code:'MARKS_REVISION_SERVICE_UNAVAILABLE',
       message:'Official marks revision could not be certified. Existing marks are unchanged.'})
+  }
+})
+
+// POST /api/exams/results/:resultId/grade-revision
+// Grade-only correction: authentic Owner/Principal, school-bound numeric
+// optimistic lock and signed append-only audit. Does NOT change saved marks.
+router.post('/results/:resultId/grade-revision', protect, requireRoles('principal','owner'), async(req,res)=>{
+  try{
+    const schoolId=currentSchoolId(req)
+    const result=await reviseExamGradeOnly({
+      pool,applyTenantContext,actor:req.user,schoolId,
+      resultId:req.params.resultId,body:req.body
+    })
+    return res.status(200).json({success:true,data:result,code:'AUDITED_GRADE_ONLY_REVISION_SAVED'})
+  }catch(err){
+    if(err instanceof GradeRevisionError)
+      return res.status(err.status).json({success:false,code:err.code,
+        message:'Grade correction was not saved. Review the authenticated policy and original score.'})
+    console.error('Grade-only revision unavailable:',err.message)
+    return res.status(503).json({success:false,code:'AUDITED_GRADE_REVISION_UNAVAILABLE',
+      message:'Original marks and grade remain unchanged.'})
   }
 })
 

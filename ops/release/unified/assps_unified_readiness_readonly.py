@@ -7,6 +7,7 @@ import re
 import subprocess
 import verify_backend_source_preservation_readonly as backend_preservation
 import verify_backend_listener_readonly as backend_listener
+import verify_owner_academic_authenticity_readonly as owner_academic
 import verify_frontend_artifact_closure_readonly as frontend_closure
 import verify_exam_attendance_tenant_scope_readonly as exam_attendance_scope
 import verify_academic_delivery_integrity_readonly as academic_integrity
@@ -277,7 +278,7 @@ def inspect_http():
     return {'pass':all(v['pass'] for v in result.values()),'checks':result}
 
 def classify(evidence):
-    required=('database','backup','frontend','rollback','http','backend_listener',
+    required=('database','backup','frontend','rollback','http','backend_listener','owner_academic_authenticity',
               'restricted_catalog_and_firstterm','source_privacy_inventory',
               'backend_source_inventory','attendance_roster_coverage','fee_ledger_integrity',
               'frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity',
@@ -291,6 +292,8 @@ def classify(evidence):
     holds=list(UNPROVEN_RELEASE_GATES)
     if not checks['backend_listener']:
         holds.insert(0,'active_backend_listener_or_whatsapp_syntax_uncertified')
+    if not checks['owner_academic_authenticity']:
+        holds.insert(0,'owner_identity_grade_audit_and_firstterm_authority_not_verified')
     if not attested:
         holds.insert(0,'active_frontend_attestation_does_not_match_served_hash')
     if evidence.get('frontend_artifact_closure',{}).get('immutable_artifact_go') is not True:
@@ -338,6 +341,7 @@ def main():
         'rollback':inspect_rollback,'source_privacy_inventory':inspect_source_privacy,
         'backend_source_inventory':inspect_backend_preservation,
         'backend_listener':backend_listener.inspect,
+        'owner_academic_authenticity':owner_academic.inspect,
         'frontend_artifact_closure':inspect_frontend_artifact_closure,
         'exam_attendance_tenant_scope':exam_attendance_scope.inspect,
         'academic_delivery_integrity':academic_integrity.inspect,

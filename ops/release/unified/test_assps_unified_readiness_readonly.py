@@ -8,7 +8,7 @@ import assps_unified_readiness_readonly as gate
 class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
     def fixture(self):
         return {x:{'pass':True} for x in (
-            'database','backup','frontend','rollback','http','backend_listener','restricted_catalog_and_firstterm',
+            'database','backup','frontend','rollback','http','backend_listener','owner_academic_authenticity','restricted_catalog_and_firstterm',
             'source_privacy_inventory','backend_source_inventory','attendance_roster_coverage',
             'fee_ledger_integrity','frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity','storage_headroom','timetable_collision_scope','lesson_coverage','cross_product_boundary','school_whatsapp_log_privacy','school_whatsapp_phone_scope')}
     def test_every_operational_check_passes_but_unapproved_signoff_remains_hold(self):
@@ -20,6 +20,13 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
         self.assertGreaterEqual(len(r['unresolved_release_gates']),9)
         self.assertFalse(r['production_deployed_by_this_check'])
         self.assertFalse(r['safe_to_remove_timetable_ingress_quarantine'])
+    def test_owner_identity_or_academic_official_policy_missing_stays_hold(self):
+        evidence=self.fixture()
+        evidence['owner_academic_authenticity']['pass']=False
+        result=gate.classify(evidence)
+        self.assertFalse(result['operational_checks_pass'])
+        self.assertIn('owner_identity_grade_audit_and_firstterm_authority_not_verified',result['unresolved_release_gates'])
+
     def test_backend_offline_blocks_release_even_if_other_checks_pass(self):
         e=self.fixture()
         e['backend_listener']['pass']=False
