@@ -105,7 +105,14 @@ grep -Eq '^AUTO_MIGRATE_ON_BOOT=false$' /var/www/apex-backend/.env
 }
 
 if ($Mode -in @('Frontend', 'Both')) {
+  # Fail closed when deploy target differs from the actual Nginx root.
+  # Never report success after updating an unserved legacy directory.
+  Remote @"
+set -e
+grep -Eq '^[[:space:]]*root[[:space:]]+/var/www/apex-os;' /etc/nginx/sites-enabled/apex-app-ssl || { echo 'STOP: Nginx live root differs from /var/www/apex-os. Reconcile immutable deployment first.'; exit 74; }
+"@
   Run 'npm run build:frontend'
+  Run 'npm run release:frontend:validate'
   $archive = Join-Path $env:TEMP "assps-frontend-dist-$timestamp.tar"
   Run "tar -cf `"$archive`" -C `"$frontendRoot\dist`" ."
   CopyToRemote $archive "/tmp/assps-frontend-dist-$timestamp.tar"

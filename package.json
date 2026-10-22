@@ -11,6 +11,7 @@
     "migrate:backend": "npm --prefix al-siddique-backend/src run migrate",
     "smoke:paper-ai": "npm --prefix al-siddique-backend/src run smoke:paper-ai",
     "production:safety": "node ops/production-safety-check.js",
+    "release:frontend:validate": "node ops/verify-frontend-release.mjs al-siddique-frontend/dist",
     "release:manifest": "node ops/release-candidate-manifest.js",
     "live:contract": "node ops/live-route-contract-check.js",
     "verify:local": "node ops/verify-local.js",

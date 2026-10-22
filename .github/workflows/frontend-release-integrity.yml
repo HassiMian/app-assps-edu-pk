@@ -1,0 +1,39 @@
+﻿name: ASSPS Frontend Release Integrity
+
+on:
+  push:
+    branches:
+      - main
+      - 'hotfix/**'
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  frontend-build-contract:
+    name: Build and verify immutable release
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout release source
+        uses: actions/checkout@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: al-siddique-frontend/package-lock.json
+      - name: Install locked frontend dependencies
+        run: npm ci --prefix al-siddique-frontend --no-audit --no-fund
+      - name: Build complete frontend release
+        run: npm run build:frontend
+      - name: Verify complete hashed asset graph
+        run: npm run release:frontend:validate
+      - name: Preserve candidate build for audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: assps-frontend-candidate
+          path: al-siddique-frontend/dist/
+          retention-days: 7
