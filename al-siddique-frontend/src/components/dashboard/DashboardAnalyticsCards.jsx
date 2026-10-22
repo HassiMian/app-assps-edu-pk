@@ -189,12 +189,12 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
     setLoadError(null)
     try {
       const [stuRes, attRes] = await Promise.all([
-        api.get('/api/students'),
+        api.get('/api/students', { params: { active: 'true' } }),
         api.get(`/api/attendance?date=${today}`),
       ])
       const stuList = Array.isArray(stuRes.data?.data) ? stuRes.data.data : []
       const attList = Array.isArray(attRes.data?.data) ? attRes.data.data : []
-      setStudents(stuList)
+      setStudents(stuList.filter((student) => student.is_active === true))
       setMarkedToday(attList)
     } catch (err) {
       console.error('Failed to load unmarked attendance data:', err)

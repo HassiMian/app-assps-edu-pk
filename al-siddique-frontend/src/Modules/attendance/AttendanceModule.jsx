@@ -110,7 +110,7 @@ export default function AttendanceModule() {
  try {
  const [attendanceRes, studentRes] = await Promise.all([
  api.get('/api/attendance', { params: { class: selectedClass, section: selectedSection, date: selectedDate } }),
- api.get('/api/students', { params: { class: selectedClass, section: selectedSection } }),
+ api.get('/api/students', { params: { class: selectedClass, section: selectedSection, active: 'true' } }),
  ])
 
  const attendanceData = Array.isArray(attendanceRes.data?.data) ? attendanceRes.data.data : []
@@ -120,7 +120,7 @@ export default function AttendanceModule() {
  const sid = row.student_id || row.id
  if (sid && row.status) markMap[sid] = row.status
  })
- setStudents(studentData.map(transformStudent))
+ setStudents(studentData.filter((student) => student.is_active === true).map(transformStudent))
  setAttendance(markMap)
  setLoadedScopeKey(requestScopeKey)
  } catch (err) {

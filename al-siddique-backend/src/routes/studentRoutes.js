@@ -396,8 +396,20 @@ router.post('/', protect, adminOnly, async (req, res) => {
       finalRollNumber = String(rollRes.rows[0]?.next_roll || 1)
     }
 
+    // Derive tenant from the authenticated school's canonical DB identity.
+    // An admission cannot create a cross-tenant or NULL-tenant student.
+    const schoolTenantRow = await client.query(
+      'SELECT tenant_id FROM schools WHERE id = $1 LIMIT 1', [schoolId]
+    )
+    const canonicalStudentTenantId = schoolTenantRow.rows[0]?.tenant_id || null
+    const claimedTenantId = currentTenantId(req)
+    if (!canonicalStudentTenantId || (claimedTenantId && claimedTenantId !== canonicalStudentTenantId)) {
+      throw new Error('Authenticated school/tenant mismatch in student admission.')
+    }
+
     const candidateColumns = [
       ['school_id', schoolId],
+      ['tenant_id', canonicalStudentTenantId],
       ['gr_number', finalGr],
       ['name', name],
       ['father_name', father_name],
@@ -1095,6 +1107,13 @@ router.post('/bulk', protect, adminOnly, async (req, res) => {
     }
 
     const schoolId = currentSchoolId(req)
+    if (!schoolId) return res.status(403).json({ success: false, message: 'Authenticated school context required.' })
+    const schoolTenantRow = await query('SELECT tenant_id FROM schools WHERE id = $1 LIMIT 1', [schoolId])
+    const canonicalStudentTenantId = schoolTenantRow.rows[0]?.tenant_id || null
+    const claimedTenantId = currentTenantId(req)
+    if (!canonicalStudentTenantId || (claimedTenantId && claimedTenantId !== canonicalStudentTenantId)) {
+      return res.status(403).json({ success: false, message: 'School/tenant mismatch.' })
+    }
     const validatedAssignments = new Map()
     for (let index = 0; index < students.length; index += 1) {
       const student = students[index]
@@ -1128,10 +1147,10 @@ router.post('/bulk', protect, adminOnly, async (req, res) => {
       const gender = student.gender || 'male'
 
       const insertSql = `
-        INSERT INTO students (school_id, name, gr_number, roll_number, class, section, father_name, father_cnic, phone_number, family_code, gender)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+        INSERT INTO students (school_id, name, gr_number, roll_number, class, section, father_name, father_cnic, phone_number, family_code, gender, tenant_id)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
       `
-      await query(insertSql, [schoolId, name, gr_number, roll_number, className, section, father_name, father_cnic, phone_number, family_code, gender])
+      await query(insertSql, [schoolId, name, gr_number, roll_number, className, section, father_name, father_cnic, phone_number, family_code, gender, canonicalStudentTenantId])
       imported++
     }
 

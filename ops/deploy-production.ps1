@@ -95,6 +95,19 @@ if ($Apply -and -not (Test-Path $KnownHostsFile)) {
 Step "mode=$Mode apply=$Apply timestamp=$timestamp host=$(HostLabel)"
 RunAlways 'npm run production:safety'
 
+if ($Mode -eq 'Frontend') {
+  # Canonical entrypoint: no more direct writes to /var/www/apex-os.
+  $controller = Join-Path $PSScriptRoot 'deploy-frontend-atomic.ps1'
+  $args = @{ HostSpec = $HostSpec; SshKey = $SshKey; KnownHostsFile = $KnownHostsFile }
+  if ($Apply) { $args.Apply = $true; $args.ConfirmProduction = [bool]$ConfirmProduction }
+  & $controller @args
+  if ($LASTEXITCODE -ne 0) { throw 'Atomic frontend release was rejected.' }
+  exit
+}
+if ($Apply -and $Mode -in @('Backend', 'Both')) {
+  throw 'Legacy backend release or compound release blocked: production backend differs from tracked source. Review production drift and authenticated cross-tenant regressions before enabling.'
+}
+
 if ($Apply -and ($Mode -in @('Backend', 'Both'))) {
   Remote @"
 set -e
@@ -105,7 +118,14 @@ grep -Eq '^AUTO_MIGRATE_ON_BOOT=false$' /var/www/apex-backend/.env
 }
 
 if ($Mode -in @('Frontend', 'Both')) {
+  # Fail closed when deploy target differs from the actual Nginx root.
+  # Never report success after updating an unserved legacy directory.
+  Remote @"
+set -e
+grep -Eq '^[[:space:]]*root[[:space:]]+/var/www/apex-os;' /etc/nginx/sites-enabled/apex-app-ssl || { echo 'STOP: Nginx live root differs from /var/www/apex-os. Reconcile immutable deployment first.'; exit 74; }
+"@
   Run 'npm run build:frontend'
+  Run 'npm run release:frontend:validate'
   $archive = Join-Path $env:TEMP "assps-frontend-dist-$timestamp.tar"
   Run "tar -cf `"$archive`" -C `"$frontendRoot\dist`" ."
   CopyToRemote $archive "/tmp/assps-frontend-dist-$timestamp.tar"
@@ -157,7 +177,6 @@ cp -a /var/www/apex-backend/src/.env /var/www/apex-backend/.env
 node -c /var/www/apex-backend/server.js
 node -c /var/www/apex-backend/middleware/auth.js
 node -c /var/www/apex-backend/routes/authRoutes.js
-node /var/www/apex-backend/src/scripts/liveArtifactDriftCheck.js
 pm2 restart apex-backend --update-env
 pm2 status --no-color
 curl -fsS https://api.assps.edu.pk/health >/dev/null

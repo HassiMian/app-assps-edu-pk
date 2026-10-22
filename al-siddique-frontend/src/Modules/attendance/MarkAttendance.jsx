@@ -203,7 +203,7 @@ export default function MarkAttendance() {
  setLoading(true)
  setMessage('')
  Promise.all([
- api.get('/api/students', { params: { class: attendanceApiClass(selectedClass), section: selectedSection } }),
+ api.get('/api/students', { params: { class: attendanceApiClass(selectedClass), section: selectedSection, active: 'true' } }),
  api.get('/api/attendance', { params: { class: attendanceApiClass(selectedClass), section: selectedSection, date } }),
  ])
  .then(([stuRes, attRes]) => {
@@ -214,7 +214,7 @@ export default function MarkAttendance() {
  const sid = row.student_id || row.id
  if (sid && row.status) attMap[sid] = row.status
  })
- setStudents(list)
+ setStudents(list.filter((student) => student.is_active === true))
  const initialMarks = {}
  list.forEach((student) => {
  if (attMap[student.id]) initialMarks[student.id] = attMap[student.id]

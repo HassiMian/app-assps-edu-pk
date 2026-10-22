@@ -23,6 +23,6 @@ test('failed connection and preflight returns safe response without undefined re
 test('student marks and status never synthesized or exposed via raw database error text',()=>{
  assert.doesNotMatch(block,/message: ['"`]Database error:[^\n]*\+ err\.message/)
  assert.match(block,/saved:\s*0/)
- assert.match(block,/if \(saved !== normalizedRecords\.length\)/)
+ assert.match(block,/if \(saved !== persistableRecords\.length\)/)
  assert.match(block,/await client\.query\('COMMIT'\)/)
 })

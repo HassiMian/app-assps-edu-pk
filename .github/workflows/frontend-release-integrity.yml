@@ -1,0 +1,70 @@
+name: ASSPS Frontend Release Integrity
+
+on:
+  push:
+    branches:
+      - main
+      - 'hotfix/**'
+      - 'recovery/**'
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  frontend-build-contract:
+    name: Build and verify immutable release
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout release source
+        uses: actions/checkout@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: al-siddique-frontend/package-lock.json
+      - name: Install locked frontend dependencies
+        run: npm ci --prefix al-siddique-frontend --no-audit --no-fund
+      - name: Install locked backend QA dependencies
+        run: npm ci --prefix al-siddique-backend/src --no-audit --no-fund
+      - name: Non-mutating attendance and school-isolation regression tests
+        env:
+          DB_STARTUP_PROBE: 'false'
+        run: |
+          cd al-siddique-backend/src
+          node --test \
+            tests/tenant-clause-intersection-security.test.js \
+            tests/tenant-school-id-boundary.test.js \
+            tests/attendance-gr-input-validation-http.test.cjs \
+            tests/attendance-gr-teacher-scope-http.test.cjs \
+            tests/attendance-mark-pool-failure-boundary.test.cjs \
+            tests/attendance-pool-failure-http.test.cjs
+      - name: Build complete frontend release
+        run: npm run build:frontend
+      - name: Verify complete hashed asset graph
+        run: npm run release:frontend:validate
+      - name: Install browser runtime for candidate smoke test
+        run: npm exec --prefix al-siddique-frontend -- playwright install --with-deps chromium
+      - name: Start isolated candidate preview
+        run: |
+          npm --prefix al-siddique-frontend run preview -- --host 127.0.0.1 --port 4173 > /tmp/assps-preview.log 2>&1 &
+          for attempt in $(seq 1 25); do
+            if curl -fsS http://127.0.0.1:4173/login -o /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/assps-preview.log
+          exit 1
+      - name: Browser-check candidate login and dashboard redirect
+        env:
+          CI: 'true'
+          APEX_BASE_URL: http://127.0.0.1:4173
+        run: node al-siddique-frontend/scripts/verify-production-shell.mjs
+      - name: Preserve candidate build for audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: assps-frontend-candidate
+          path: al-siddique-frontend/dist/
+          retention-days: 7

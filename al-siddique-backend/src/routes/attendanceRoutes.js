@@ -379,16 +379,39 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
     const studentMap = new Map(rosterResult.rows.map(s => [Number(s.id), s]))
     const invalidIds = requestedIds.filter(id => !studentMap.has(Number(id)))
 
-    if (invalidIds.length > 0) {
+    // Struck-off students can linger in a stale browser roster. Ignore ONLY
+    // explicitly inactive members of the authenticated school, never missing
+    // or foreign-tenant students. Keep the remaining batch atomic.
+    const skippedInactiveIds = []
+    if (invalidIds.length && schoolId) {
+      const inactiveParams = [invalidIds, schoolId]
+      let inactiveSql = 'SELECT id FROM students WHERE id = ANY($1::int[]) AND school_id = $2 AND is_active = false'
+      if (supportsStudentTenant && tenantId) {
+        inactiveSql += ' AND (tenant_id = $3 OR tenant_id IS NULL)'
+        inactiveParams.push(tenantId)
+      }
+      if (actorRole === 'teacher') {
+        const teacherScope = teacherStudentScopeClause(req, 'students', inactiveParams.length + 1)
+        inactiveSql += teacherScope.clause
+        inactiveParams.push(...teacherScope.params)
+      }
+      const inactiveMatches = await client.query(inactiveSql, inactiveParams)
+      const inactiveIdSet = new Set(inactiveMatches.rows.map(row => Number(row.id)))
+      skippedInactiveIds.push(...invalidIds.filter(id => inactiveIdSet.has(id)))
+    }
+    const skippedInactiveSet = new Set(skippedInactiveIds)
+    const unauthorizedIds = invalidIds.filter(id => !skippedInactiveSet.has(id))
+    if (unauthorizedIds.length > 0) {
       await client.query('ROLLBACK')
       return res.status(400).json({
         success: false,
         error: 'INVALID_STUDENT_IDS',
-        message: `Attendance rejected: ${invalidIds.length} student(s) do not exist, are inactive, or are unauthorized for your school/tenant.`,
-        invalidIds,
+        message: `Attendance rejected: ${unauthorizedIds.length} student(s) do not exist or are unauthorized for your school/tenant.`,
+        invalidIds: unauthorizedIds,
         saved: 0,
       })
     }
+    const persistableRecords = normalizedRecords.filter(r => studentMap.has(Number(r.student_id)))
 
     // 2. Atomic upsert loop inside transaction
     let saved = 0
@@ -397,7 +420,7 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
       ? authenticatedActorId
       : (Number.isInteger(Number(marked_by)) ? Number(marked_by) : authenticatedActorId)
 
-    for (const r of normalizedRecords) {
+    for (const r of persistableRecords) {
       const student = studentMap.get(Number(r.student_id))
       if ((r.status === 'absent' || r.status === 'late') && student.parent_phone) {
         toNotify.push({
@@ -457,12 +480,12 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
       }
     }
 
-    if (saved !== normalizedRecords.length) {
+    if (saved !== persistableRecords.length) {
       await client.query('ROLLBACK')
       return res.status(500).json({
         success: false,
         error: 'INCOMPLETE_BATCH_PERSISTENCE',
-        message: `Attendance batch failed invariant check: requested ${normalizedRecords.length}, persisted ${saved}. Rolled back completely.`,
+        message: `Attendance batch failed invariant check: requested ${persistableRecords.length}, persisted ${saved}. Rolled back completely.`,
         saved: 0,
       })
     }
@@ -480,9 +503,11 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
 
     return res.json({
       success: true,
-      message: `${saved} attendance records saved.`,
+      message: `${saved} attendance records saved.${skippedInactiveIds.length ? ` ${skippedInactiveIds.length} inactive student(s) excluded.` : ''}`,
       savedCount: saved,
       requestedCount: normalizedRecords.length,
+      skippedInactiveCount: skippedInactiveIds.length,
+      skippedInactiveIds,
       notificationRequestedCount: toNotify.length,
       notificationSummary,
     })
