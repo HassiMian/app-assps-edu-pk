@@ -23,3 +23,12 @@
 - Never bypass template checksums; never normalize zero/blank; never promote user based on designation alone.
 - Deploy only after owner-approved genuine account binding, restricted DB role RLS, subject/grade policy provenance, migration rehearsal on restored dual-school data, off-host restore/rollback, preview/print parity and module acceptance pass.
 - No live DB UPDATE/DELETE/INSERT, schema changes, deploy/restart/Nginx configuration changes were made in this mission.
+
+## Complete single-turn nondeploying acceptance and newly discovered P0
+- Combined Phase2 Core/Owner source: 164 Python unit tests plus 76 Node integration tests PASS, four/four source groups PASS on final commit f08de25e. Synthetic browser acceptance before adding the listener gate: fifteen/fifteen browser groups PASS and 92 Node test cases PASS; this was on the same feature source and did NOT certify a live signed actor.
+- Owner/result regression: 58/58 PASS. Candidate Vite frontend twice byte-identical, 98/98 output files; manifest SHA256 89c620a8f27691e658c20b157d59fca15caa582709b1e544ba7b2e7cc9b31289.
+- Fail-closed read-only readiness: 20 operational groups, RELEASE_HOLD, 19 unresolved gates. New listener/syntax gate blocks a false "PM2 online" success.
+- P0 live website: frontend 200 but app /api/ 502, 127.0.0.1:5000 listener absent; separate api.assps.edu.pk/health 200. Repeated PM2 SIGINT restarts around every 33 seconds seen, origin unverified. Live WhatsApp/JARVIS cognitive module has Unexpected string at line 368.
+- Single isolated JS syntax correction passed node --check. Production original bytes and checksum preserved; NOT deployed because of trading-related module side effects, missing verified offhost rollback, independent actor/RLS acceptance and continuing PM2 interference.
+- 22 October critical backup 5/5 SHA entries verified, both PostgreSQL gzip files gzip -t pass; current served frontend index exists in dedicated archive. Legacy gate expects 4 entries and obsolete served-root placement; checksum validity does NOT prove external/offhost restore nor approve current served frontend. Rollback --check refuses active artifact SHA mismatch.
+- No server restart, Nginx change, live frontend cutover, production JS write, database migration, marks or grade edits, account promotion, or scheduled ChatGPT task was made.
