@@ -14,6 +14,8 @@ LOCK="/run/lock/assps-frontend-release.lock"
 [[ $EUID -eq 0 ]] || { echo 'Root access required on release VPS' >&2; exit 77; }
 [[ -f "$CONFIG" ]] || { echo 'Nginx site config missing' >&2; exit 78; }
 mkdir -p "$BASE" "$STATE"
+# Public web root needs execute traversal for Nginx, state remains private.
+chmod 755 "$BASE"
 chmod 700 "$STATE"
 exec 9>"$LOCK"
 flock -x -w 20 9 || { echo 'Deployment currently locked' >&2; exit 75; }
@@ -46,7 +48,7 @@ test_origin() {
     echo "Live origin entry mismatch: expected $expect, got $got" >&2
     return 1
   fi
-  curl -kfsS --http1.1 --connect-timeout 5 --max-time 15 --resolve app.assps.edu.pk:443:127.0.0.1 https://app.assps.edu.pk/health/ready >/dev/null
+  curl -fsS --http1.1 --connect-timeout 5 --max-time 15 http://127.0.0.1:5000/health/ready | grep -q '"database":"ok"' 
 }
 
 swap_config() {
@@ -140,6 +142,10 @@ JS
     chown -R www-data:www-data "$BASE/$RELEASE_ID"
     find "$BASE/$RELEASE_ID" -type d -exec chmod 755 {} +
     find "$BASE/$RELEASE_ID" -type f -exec chmod 644 {} +
+    # Prevent a repeat of the Oct 22 root-directory traversal outage.
+    su -s /bin/sh www-data -c "test -r '$BASE/$RELEASE_ID/index.html'" || {
+      echo 'Nginx user cannot read candidate index.html' >&2; exit 78;
+    }
     echo "STAGED release=$RELEASE_ID; baseline=$(cat "$STATE/$RELEASE_ID/base-root")"
     ;;
   promote)
@@ -148,6 +154,9 @@ JS
     NEW="$BASE/$RELEASE_ID"
     [[ "$(live_root)" == "$OLD" ]] || { echo 'Production moved since staging, aborting' >&2; exit 76; }
     [[ -f "$OLD/index.html" ]] || { echo 'Previous release missing, aborting' >&2; exit 76; }
+    su -s /bin/sh www-data -c "test -r '$NEW/index.html'" || {
+      echo 'Nginx cannot traverse candidate path; activation blocked' >&2; exit 78;
+    }
     cp -p "$CONFIG" "$STATE/$RELEASE_ID/nginx.before"
     ENTRY="$(grep -oE '/assets/index-[^"]+\.js' "$NEW/index.html" | head -1)"
     rollback_inner() {
