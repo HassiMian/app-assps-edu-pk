@@ -48,7 +48,7 @@ test_origin() {
     echo "Live origin entry mismatch: expected $expect, got $got" >&2
     return 1
   fi
-  curl -fsS --http1.1 --connect-timeout 5 --max-time 15 http://127.0.0.1:5000/health/ready | grep -q '"database":"ok"' 
+  curl -fsS --http1.1 --connect-timeout 5 --max-time 15 http://127.0.0.1:5000/health/ready | grep -q '"database":"ok"'
 }
 
 swap_config() {
