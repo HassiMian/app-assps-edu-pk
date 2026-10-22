@@ -13,6 +13,7 @@ import {
  marksEntryClasses, marksSubjectsForClass, marksClassQueryAliases, mergeMarksRoster, validateMarksBatch
 } from './marksEntryModel'
 
+import { areExamMarksVerified } from './marksSaveVerification.js'
 const FALLBACK_EXAM_TYPES = ['Term Exam', 'Assessment', 'Quiz', 'Annual Exam', 'Monthly Test']
 
 function classLabel(value) {
@@ -223,11 +224,17 @@ export default function MarksSheet() {
  const response = await api.post('/api/exams/results', {results:rows})
  if (response.data?.success !== true || Number(response.data?.savedCount) !== rows.length)
  throw new Error('Save acknowledgement did not match the submitted marks. Refresh before retrying.')
+ // A successful HTTP acknowledgement is not proof that every score persisted.
+ // Read the authoritative exam rows again before clearing any unsaved edits.
+ const reloaded = await api.get(`/api/exams/results/${selectedExam.id}`)
+ if (!Array.isArray(reloaded.data?.data)) throw new Error('Saved marks could not be verified from the database.')
+ const verifiedAll = areExamMarksVerified(rows, reloaded.data.data)
+ if (!verifiedAll) throw new Error('Some marks were not present after Save → Reopen verification. Unsaved edits were preserved.')
  if (submittedScope === rosterFetchSeq.current) {
  setSavedMarks(previous => ({...previous,...Object.fromEntries(rows.map(row=>[row.student_id,row.marks_obtained]))}))
  setEditedMarks(current=>retainNewerMarkEdits(current,rows))
  if (submittedRevision === marksEditRevision.current)
- setMessage(`Saved ${rows.length} edited student mark${rows.length===1?'':'s'} in ${selectedExam.name}. Other marks were left unchanged.`)
+ setMessage(`Saved and independently verified ${rows.length} edited student mark${rows.length===1?'':'s'} in ${selectedExam.name}. Other marks were left unchanged.`)
  else setMessage('Earlier edits saved; newer unsaved changes remain in the editor.')
  }
  } catch (err) {

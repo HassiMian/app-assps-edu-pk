@@ -6,6 +6,7 @@ on:
       - main
       - 'hotfix/**'
       - 'recovery/**'
+      - 'fix/**'
   pull_request:
   workflow_dispatch:
 
@@ -47,8 +48,15 @@ jobs:
         run: npm run build:frontend
       - name: Verify complete hashed asset graph
         run: npm run release:frontend:validate
+      - name: Result ranking and marks save/reopen regressions
+        run: |
+          node --test \
+            al-siddique-frontend/src/Modules/examination/tests/resultRankIntegrity.test.mjs \
+            al-siddique-frontend/src/Modules/examination/tests/marksSaveVerification.test.mjs
       - name: Install browser runtime for candidate smoke test
         run: npm exec --prefix al-siddique-frontend -- playwright install --with-deps chromium
+      - name: Daily Diary browser layout and header theme acceptance
+        run: node --test al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/dailyDiaryWorkspaceBrowserAcceptance.test.js
       - name: Start isolated candidate preview
         run: |
           npm --prefix al-siddique-frontend run preview -- --host 127.0.0.1 --port 4173 > /tmp/assps-preview.log 2>&1 &

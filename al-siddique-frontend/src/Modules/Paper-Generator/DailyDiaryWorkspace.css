@@ -852,6 +852,7 @@
   flex-direction: column;
   gap: 1.4mm;
   padding: 2.2mm 2.8mm 1.8mm;
+  padding-top: var(--head-top-space, 2.2mm);
   border-bottom: 1.2px solid var(--line);
   background: linear-gradient(180deg, #ffffff 0%, var(--soft) 100%);
   flex: 0 0 auto;
@@ -1615,6 +1616,7 @@
 
 .dd-card-compact .dd-card-head {
   padding: 1.4mm 2.2mm 1.2mm;
+  padding-top: var(--head-top-space, 1.4mm);
   gap: 0.8mm;
 }
 

@@ -57,6 +57,12 @@ const PALETTES = [
   { id: 2, name: 'Royal Blue', accent: '#1769aa', soft: '#edf6fc', line: '#c7dcec', ink: '#12314a' },
   { id: 3, name: 'Crimson Editorial', accent: '#a4343f', soft: '#fbf0f1', line: '#e6c7cb', ink: '#3b2024' },
   { id: 4, name: 'Gold Academy', accent: '#b77b00', soft: '#fff8e8', line: '#ead7aa', ink: '#3b2c12' },
+  { id: 5, name: 'Ferozi Scholars', accent: '#087e88', soft: '#eaf9f8', line: '#a8d9dc', ink: '#114a52' },
+  { id: 6, name: 'Sky Blue Classic', accent: '#227aaf', soft: '#f0f9ff', line: '#b5dce9', ink: '#163a55' },
+  { id: 7, name: 'Midnight Silver', accent: '#293b57', soft: '#f0f3f8', line: '#bfcbd8', ink: '#1b2839' },
+  { id: 8, name: 'Emerald Heritage', accent: '#24745a', soft: '#eef8f1', line: '#b8d7c5', ink: '#193f31' },
+  { id: 9, name: 'Indigo Scholar', accent: '#4b528c', soft: '#f2f3fb', line: '#cbcfea', ink: '#262b56' },
+  { id: 10, name: 'Graphite Minimal', accent: '#425365', soft: '#f4f6f8', line: '#cbd4db', ink: '#24303a' },
 ]
 
 const FONT_STYLES = [
@@ -180,6 +186,7 @@ function StudentCard({
   subjectColWidth = 28,
   headerScalePercent = 100,
   rowHeightMm = 0,
+  headerTopSpaceMm = 0,
   fontStyleId = 'times',
   headerPreset = 'standard',
   schoolNameFontSize = 0,
@@ -210,6 +217,7 @@ function StudentCard({
       '--ink': palette.ink,
       '--scale': layout.scale,
       '--header-scale': dynamicHeaderScale,
+      ...(headerTopSpaceMm > 0 ? { '--head-top-space': `calc(${headerTopSpaceMm}mm * var(--scale))` } : {}),
       fontFamily: selectedFont.family
     }}
     data-student-card
@@ -344,6 +352,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   const [subjectColWidth, setSubjectColWidth] = useState(Number(initialDraft.subjectColWidth) || 28)
   const [headerScalePercent, setHeaderScalePercent] = useState(Number(initialDraft.headerScalePercent) || 100)
   const [rowHeightMm, setRowHeightMm] = useState(Number(initialDraft.rowHeightMm) || 0)
+  const [headerTopSpaceMm, setHeaderTopSpaceMm] = useState(Number(initialDraft.headerTopSpaceMm) || 0)
   const [fontStyleId, setFontStyleId] = useState(initialDraft.fontStyleId || 'times')
 
   // Advanced Header & Layout Controls
@@ -412,13 +421,13 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
     try {
       setTenantStorageItem(DRAFT_KEY, JSON.stringify({
         mode, classLevel, section, date, rows, cardsPerPage, paletteId, footerText,
-        subjectColWidth, headerScalePercent, rowHeightMm, fontStyleId, headerPreset,
+        subjectColWidth, headerScalePercent, rowHeightMm, headerTopSpaceMm, fontStyleId, headerPreset,
         schoolNameFontSize, logoSizeMm, activeSavedDiaryId,
         globalDiaryFontSize, globalSubjectFontSize, globalSubjectBold,
         footerFontSize, editorFontSize
       }))
     } catch { /* Preserve editor state */ }
-  }, [mode, classLevel, section, date, rows, cardsPerPage, paletteId, footerText, subjectColWidth, headerScalePercent, rowHeightMm, fontStyleId, headerPreset, schoolNameFontSize, logoSizeMm, activeSavedDiaryId, globalDiaryFontSize, globalSubjectFontSize, globalSubjectBold, footerFontSize, editorFontSize])
+  }, [mode, classLevel, section, date, rows, cardsPerPage, paletteId, footerText, subjectColWidth, headerScalePercent, rowHeightMm, headerTopSpaceMm, fontStyleId, headerPreset, schoolNameFontSize, logoSizeMm, activeSavedDiaryId, globalDiaryFontSize, globalSubjectFontSize, globalSubjectBold, footerFontSize, editorFontSize])
 
   useEffect(() => {
     let cancelled = false
@@ -599,6 +608,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
     if (record.style_settings?.subjectColWidth) setSubjectColWidth(Number(record.style_settings.subjectColWidth))
     if (record.style_settings?.headerScalePercent) setHeaderScalePercent(Number(record.style_settings.headerScalePercent))
     if (record.style_settings?.rowHeightMm !== undefined) setRowHeightMm(Number(record.style_settings.rowHeightMm))
+    if (record.style_settings?.headerTopSpaceMm !== undefined) setHeaderTopSpaceMm(Number(record.style_settings.headerTopSpaceMm))
     if (record.style_settings?.fontStyleId) setFontStyleId(record.style_settings.fontStyleId)
     if (record.style_settings?.headerPreset) setHeaderPreset(record.style_settings.headerPreset)
     if (record.style_settings?.schoolNameFontSize) setSchoolNameFontSize(Number(record.style_settings.schoolNameFontSize))
@@ -676,6 +686,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
           subjectColWidth,
           headerScalePercent,
           rowHeightMm,
+          headerTopSpaceMm,
           fontStyleId,
           headerPreset,
           schoolNameFontSize,
@@ -795,6 +806,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
       flex-direction: column !important;
       gap: 1mm !important;
       padding: 1.6mm 2.4mm 1.4mm !important;
+      padding-top: var(--head-top-space, 1.6mm) !important;
       border-bottom: 1px solid var(--line) !important;
       background: linear-gradient(180deg, #ffffff 0%, var(--soft) 100%) !important;
       flex: 0 0 auto !important;
@@ -802,6 +814,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
     .dd-card-compact .dd-card-head {
       gap: 0.6mm !important;
       padding: 1.2mm 2mm 1mm !important;
+      padding-top: var(--head-top-space, 1.2mm) !important;
     }
     .dd-head-top {
       display: flex !important;
@@ -1420,9 +1433,9 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
               <label>
                 <span>Row Height (Expansion)</span>
                 <div className="dd-stepper">
-                  <button type="button" onClick={() => setRowHeightMm(h => Math.max(0, (h || 12) - 2))}><Minus size={12} /></button>
+                  <button type="button" onClick={() => setRowHeightMm(h => Math.max(0, (h || 12) - 1))}><Minus size={12} /></button>
                   <b>{rowHeightMm > 0 ? `${rowHeightMm}mm` : 'Auto'}</b>
-                  <button type="button" onClick={() => setRowHeightMm(h => Math.min(26, (h || 10) + 2))}><Plus size={12} /></button>
+                  <button type="button" onClick={() => setRowHeightMm(h => Math.min(26, (h || 10) + 1))}><Plus size={12} /></button>
                   {rowHeightMm > 0 ? <button type="button" className="dd-stepper-reset" onClick={() => setRowHeightMm(0)} title="Reset to auto height"><RotateCcw size={11} /></button> : null}
                 </div>
               </label>
@@ -1524,6 +1537,17 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
                         <b>{schoolNameFontSize > 0 ? `${schoolNameFontSize}px` : 'Auto'}</b>
                         <button type="button" onClick={() => setSchoolNameFontSize(s => Math.min(22, (s || 11) + 1))}><Plus size={12} /></button>
                         {schoolNameFontSize > 0 ? <button type="button" className="dd-stepper-reset" onClick={() => setSchoolNameFontSize(0)}><RotateCcw size={11} /></button> : null}
+                      </div>
+                    </label>
+                  </div>
+                  <div className="dd-config-row">
+                    <label>
+                      <span>Header Top Space</span>
+                      <div className="dd-stepper" aria-label="Adjust top spacing above school name in preview and print">
+                        <button type="button" aria-label="Reduce header top space" onClick={() => setHeaderTopSpaceMm(v => Math.max(0, (v || 2) - 0.5))}><Minus size={12} /></button>
+                        <b>{headerTopSpaceMm > 0 ? `${headerTopSpaceMm}mm` : 'Auto'}</b>
+                        <button type="button" aria-label="Increase header top space" onClick={() => setHeaderTopSpaceMm(v => Math.min(4, (v || 1) + 0.5))}><Plus size={12} /></button>
+                        {headerTopSpaceMm > 0 && <button type="button" className="dd-stepper-reset" onClick={() => setHeaderTopSpaceMm(0)} title="Restore existing printed header spacing"><RotateCcw size={11} /></button>}
                       </div>
                     </label>
                   </div>
@@ -1635,9 +1659,9 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
             <div className="dd-sqb-group">
               <span className="dd-sqb-label">Row Height:</span>
               <div className="dd-sqb-stepper">
-                <button type="button" onClick={() => setRowHeightMm(h => Math.max(0, (h || 12) - 2))} title="Decrease row height"><Minus size={11} /></button>
+                <button type="button" onClick={() => setRowHeightMm(h => Math.max(0, (h || 12) - 1))} title="Decrease row height"><Minus size={11} /></button>
                 <b>{rowHeightMm > 0 ? `${rowHeightMm}mm` : 'Auto'}</b>
-                <button type="button" onClick={() => setRowHeightMm(h => Math.min(26, (h || 10) + 2))} title="Increase row height"><Plus size={11} /></button>
+                <button type="button" onClick={() => setRowHeightMm(h => Math.min(26, (h || 10) + 1))} title="Increase row height"><Plus size={11} /></button>
                 {rowHeightMm > 0 && <button type="button" className="dd-sqb-reset" onClick={() => setRowHeightMm(0)} title="Reset row height"><RotateCcw size={10} /></button>}
               </div>
             </div>
@@ -1718,6 +1742,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
                       subjectColWidth={subjectColWidth}
                       headerScalePercent={headerScalePercent}
                       rowHeightMm={rowHeightMm}
+                      headerTopSpaceMm={headerTopSpaceMm}
                       fontStyleId={fontStyleId}
                       headerPreset={headerPreset}
                       schoolNameFontSize={schoolNameFontSize}

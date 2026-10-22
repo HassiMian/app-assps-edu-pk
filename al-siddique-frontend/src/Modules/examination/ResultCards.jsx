@@ -3,6 +3,7 @@ import { summarizeResultRows, formatResultCell, meetsResultPassMark } from './re
 import { getResultLogoDiagnostic } from './resultLogoDiagnostics'
 import { summarizePrintBatch } from './resultPrintPlanning'
 import { buildResultStudents } from './resultStudentIdentity'
+import { auditClassPositions } from './resultRankIntegrity.js'
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import api from '../../services/api'
@@ -335,54 +336,11 @@ export default function ResultCards() {
     return Array.from(sectionSet).sort()
   }, [selectedPrintClass, sectionsForClass, students])
 
-  const classRanks = useMemo(() => {
-    const byClass = new Map()
-    const studentTotals = new Map()
-    activeResults.forEach(r => {
-      if (isNazraSubject(r?.subject || r?.subjectName)) return
-      const sId = String(r.student_id)
-      const cur = studentTotals.get(sId) || { id: sId, obtained: 0, possible: 0, className: r.student_class || '' }
-      const obt = Number(r.marks_obtained)
-      const tot = Number(r.total_marks || 0)
-      if (Number.isFinite(obt) && obt >= 0) cur.obtained += obt
-      if (Number.isFinite(tot) && tot > 0) cur.possible += tot
-      studentTotals.set(sId, cur)
-    })
-
-    students.forEach(s => {
-      const sId = String(s.id)
-      const cur = studentTotals.get(sId)
-      if (cur) {
-        cur.className = s.className || s.class || cur.className
-      }
-    })
-
-    studentTotals.forEach(item => {
-      const cls = schoolClassOrderKey(item.className)
-      if (!byClass.has(cls)) byClass.set(cls, [])
-      byClass.get(cls).push(item)
-    })
-
-    const rankMap = new Map()
-    const ordinal = n => {
-      const s = ['th', 'st', 'nd', 'rd']
-      const v = n % 100
-      return n + (s[(v - 20) % 10] || s[v] || s[0])
-    }
-
-    byClass.forEach(list => {
-      list.sort((a, b) => b.obtained - a.obtained)
-      let currentRank = 1
-      list.forEach((item, idx) => {
-        if (idx > 0 && item.obtained < list[idx - 1].obtained) {
-          currentRank = idx + 1
-        }
-        rankMap.set(item.id, ordinal(currentRank))
-      })
-    })
-
-    return rankMap
-  }, [activeResults, students])
+  const rankingAudit = useMemo(() => auditClassPositions(activeResults, students, {
+    classKey: schoolClassOrderKey,
+    excludeSubject: isNazraSubject,
+  }), [activeResults, students])
+  const classRanks = rankingAudit.ranks
 
   const buildPrintCards = useCallback((rows = activeResults, examObj = exam, scopeStudents = students) =>
     scopeStudents.map(s => {
@@ -390,7 +348,8 @@ export default function ResultCards() {
       const safeClass = /^all\s+classes$/i.test(authenticatedClass.trim()) ? '' : authenticatedClass
       if (!safeClass) return null // incomplete identity must not be printed
       if (!isClassAllowedForExam(examObj, safeClass)) return null
-      const pos = classRanks.get(String(s.id)) || s.position || '—'
+      const hasRankIssue = rankingAudit.issues.has(schoolClassOrderKey(s.className || s.class))
+      const pos = hasRankIssue ? '—' : (classRanks.get(String(s.id)) || '—')
       const sanitizedStudent = {
         ...s,
         className: safeClass,
@@ -402,7 +361,7 @@ export default function ResultCards() {
         exam: examObj,
         studentMarks: rows.filter(r => String(r.student_id) === String(s.id) && !isNazraSubject(r?.subject || r?.subjectName)),
       }
-    }).filter(item => item && item.studentMarks.length > 0), [activeResults, exam, students, classRanks])
+    }).filter(item => item && item.studentMarks.length > 0), [activeResults, exam, students, classRanks, rankingAudit])
 
   const classPrintCards = useMemo(() => {
     if (outputMode !== 'class' || !selectedPrintClass) return []
@@ -428,9 +387,9 @@ export default function ResultCards() {
     if (!found) return null
     return {
       ...found,
-      position: classRanks.get(String(found.id)) || '—',
+      position: rankingAudit.issues.has(schoolClassOrderKey(found.className || found.class)) ? '—' : (classRanks.get(String(found.id)) || '—'),
     }
-  }, [students, selectedStudent, classRanks])
+  }, [students, selectedStudent, classRanks, rankingAudit])
   const { obtained: totalObtained, possible: totalPossible, percentage: pct, pending: pendingSubjects } = summarizeResultRows(studentMarks, exam)
   const selectedStudentLabel = student
     ? `${student.name}${student.className ? ` (Class ${student.className})` : ''}${student.gr_number ? ` - ${student.gr_number}` : student.roll_number ? ` - Roll ${student.roll_number}` : ''}`
@@ -468,15 +427,22 @@ export default function ResultCards() {
     }
   }
 
-  const canPrint = outputMode === 'single'
+  const ranksNeedReview = outputMode === 'single'
+    ? !!student && rankingAudit.issues.has(schoolClassOrderKey(student.className || student.class))
+    : outputMode === 'class'
+    ? !!selectedPrintClass && rankingAudit.issues.has(schoolClassOrderKey(selectedPrintClass))
+    : outputMode === 'all' && rankingAudit.issues.size > 0
+
+  const canPrint = !ranksNeedReview && (outputMode === 'single'
     ? !!student && studentMarks.length > 0
     : outputMode === 'class'
     ? !!selectedPrintClass && classPrintCards.length > 0
     : outputMode === 'all'
     ? (allExamPrintCards.length > 0 || exams.length > 0)
-    : false
+    : false)
 
   const openDesigner = async () => {
+    if (ranksNeedReview) return window.alert('Positions are under review: at least one saved student has a different or incomplete subject/maximum-marks set. No result card was printed. Review the official exam subject roster first.')
     if (outputMode === 'single') {
       if (!student || !studentMarks.length) return alert('Select student with marks first')
       const singleCards = buildPrintCards(activeResults, exam, [student])
@@ -740,6 +706,11 @@ export default function ResultCards() {
           </div>
         </div>
 
+        {rankingAudit.issues.size > 0 && (
+          <div role="alert" className="super-module-card" style={{ ...card, padding:16, marginBottom:12, color:C.gold, borderColor:'rgba(200,153,26,0.42)' }}>
+            Position verification required for {Array.from(rankingAudit.issues.keys()).join(', ')}. Subject sets or maxima differ within these classes. The affected result cards cannot print unverified positions; existing saved marks are unchanged.
+          </div>
+        )}
         {loadError && (
           <div className="super-module-card" style={{ ...card, padding:16, marginBottom:12, color:C.red, borderColor:'rgba(255,55,95,0.35)' }}>{loadError}</div>
         )}

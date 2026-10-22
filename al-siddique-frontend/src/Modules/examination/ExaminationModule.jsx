@@ -5,6 +5,7 @@ import { Trophy, Plus, Save, Printer, BarChart2, FileText, Bookmark } from "luci
 import { DonutChart, BarChart, ChartLegend } from "../../components/Charts";
 import { useAcademicStore } from "../../services/useAcademicStore";
 import api from "../../services/api";
+import { areExamMarksVerified } from './marksSaveVerification.js'
 const cardStyle = {
  background: 'var(--apex-bg-surface)',
  backdropFilter: 'blur(18px)',
@@ -260,6 +261,7 @@ export default function ExaminationModule() {
  const [selectedSection, setSelectedSection] = useState(() => sectionsForClass(initialClass)[0] || '');
  const [marks, setMarks] = useState({});
  const [saved, setSaved] = useState(false);
+ const [saveError, setSaveError] = useState('');
  const [viewCard, setViewCard] = useState(null);
  const [students, setStudents] = useState([]);
  const [loading, setLoading] = useState(true);
@@ -305,36 +307,84 @@ export default function ExaminationModule() {
  const activeTab = path === '/examination' || path === '/examination/manage' ? 'exams' : path === '/examination/marks' ? 'marks' : path === '/examination/results' ? 'results' : path === '/examination/cards' ? 'cards' : 'exams';
 
  const setMark = (studentId, subject, value) => {
- const examTotal = Math.max(1, Number(selectedExam?.total_marks) || 100);
- const parsed = Math.min(examTotal, Math.max(0, parseInt(value) || 0));
- setMarks(prev => ({ ...prev, [studentId]: { ...(prev[studentId] || {}), [subject]: parsed } }));
+ const raw = String(value ?? '').trim();
+ const examTotal = Number(selectedExam?.total_marks);
+ setMarks(prev => {
+   const studentEdits = { ...(prev[studentId] || {}) };
+   if (raw === '') delete studentEdits[subject]; // blank is NOT a saved zero
+   else if (Number.isFinite(Number(raw)) && Number(raw) >= 0 && Number.isFinite(examTotal) && Number(raw) <= examTotal) {
+     studentEdits[subject] = Number(raw);
+   }
+   return { ...prev, [studentId]: studentEdits };
+ });
  setSaved(false);
+ setSaveError('');
  };
 
  const handleSave = async () => {
- if (!selectedExam || !filteredStudents.length || !subjects.length) return;
- const results = [];
- filteredStudents.forEach(student => {
- subjects.forEach(subject => {
- results.push({
- exam_id: selectedExam.id,
- student_id: student.id,
- subject,
- marks_obtained: Number(marks[student.id]?.[subject] || 0),
- total_marks: Math.max(1, Number(selectedExam?.total_marks) || 100),
- pass_marks: Math.max(0, Number(selectedExam?.pass_marks) || 0),
- });
- });
- });
- try {
- await api.post('/api/exams/results', { results });
- setSaved(true);
- setTimeout(() => setSaved(false), 3000);
- } catch (err) {
- console.error('Failed to save exam results', err);
- }
+   setSaved(false);
+   setSaveError('');
+   if (!selectedExam || !filteredStudents.length || !subjects.length) {
+     setSaveError('Select an exam, class and subject before saving marks.');
+     return;
+   }
+   // First Term Exam uses real subject maxima (25/50/60), unlike the legacy
+   // quick-entry grid which only knows the exam-wide 100. Never silently
+   // rewrite authenticated first-term results through this old interface.
+   if (Number(selectedExam.id) === 9 || /first\s+term/i.test(String(selectedExam.name || ''))) {
+     setSaveError('First Term marks require the protected per-subject Marks Entry workspace. This quick grid cannot verify official subject maxima. No scores were changed.');
+     return;
+   }
+   const total = Number(selectedExam.total_marks);
+   if (!Number.isFinite(total) || total <= 0) {
+     setSaveError('Invalid exam maximum. No marks were saved.');
+     return;
+   }
+   const requested = filteredStudents.flatMap(student => subjects.flatMap(subject => {
+     const mark = marks[student.id]?.[subject];
+     if (mark === undefined || mark === null || mark === '') return [];
+     const obtained = Number(mark);
+     if (!Number.isFinite(obtained) || obtained < 0 || obtained > total) return [];
+     return [{ exam_id: selectedExam.id, student_id: student.id, subject,
+       marks_obtained: obtained, total_marks: total }];
+   }));
+   if (!requested.length) {
+     setSaveError('No explicitly entered marks to save. Blank fields remain blank.');
+     return;
+   }
+   try {
+     // Existing scores are authoritative: forbid silent overwrite in this
+     // legacy grid. Corrections belong to the reviewed Principal workflow.
+     const read = async () => {
+       const response = await api.get(`/api/exams/results/${selectedExam.id}`);
+       if (!Array.isArray(response.data?.data)) throw new Error('Saved marks could not be verified.');
+       return response.data.data;
+     };
+     const before = await read();
+     const byKey = new Map(before.map(row => [`${row.student_id}|${String(row.subject).trim()}`, row]));
+     const toCreate = requested.filter(row => !byKey.has(`${row.student_id}|${row.subject}`));
+     const conflicting = requested.filter(row => {
+       const existing = byKey.get(`${row.student_id}|${row.subject}`);
+       return existing && (Number(existing.marks_obtained) !== row.marks_obtained || Number(existing.total_marks) !== row.total_marks || String(existing.result_status || 'SCORED').toUpperCase() !== 'SCORED');
+     });
+     if (conflicting.length) {
+       setSaveError(`${conflicting.length} existing official score(s) differ. No changes made. Use the protected Principal revision workflow.`);
+       return;
+     }
+     if (toCreate.length) {
+       const response = await api.post('/api/exams/results', { results: toCreate });
+       if (response.data?.success !== true || Number(response.data.savedCount) !== toCreate.length) {
+         throw new Error('Server did not confirm the complete marks batch.');
+       }
+     }
+     const confirmed = await read();
+     if (!areExamMarksVerified(requested, confirmed)) throw new Error('Save response received, but marks did not match on independent reload.');
+     setSaved(true);
+   } catch (err) {
+     console.error('Marks save/reload verification failed', err);
+     setSaveError(err?.response?.data?.message || err?.message || 'Marks could not be verified.');
+   }
  };
-
  const deleteExam = async (exam) => {
  if (!exam?.id || !window.confirm(`Delete ${exam.name}? Its saved result rows will also be removed.`)) return;
  try {
@@ -497,14 +547,14 @@ export default function ExaminationModule() {
  {activeTab === 'marks' && (
  <div style={{ display: 'grid', gap: 16 }}>
  <div className="super-module-card" style={{ ...cardStyle, display: 'grid', gridTemplateColumns: 'repeat(3, minmax(180px, 1fr))', gap: 16 }}>
- <select value={selectedExam?.id || ''} onChange={e => setSelectedExam(exams.find(ex => ex.id === parseInt(e.target.value)))} style={selectStyle}>
+ <select value={selectedExam?.id || ''} onChange={e => { setSelectedExam(exams.find(ex => ex.id === parseInt(e.target.value))); setMarks({}); setSaved(false); setSaveError(''); }} style={selectStyle}>
  <option value="">Select Exam</option>
  {exams.map(ex => <option key={ex.id} value={ex.id}>{ex.name}</option>)}
  </select>
- <select value={selectedClass} onChange={e => { const nextClass = e.target.value; setSelectedClass(nextClass); setSelectedSection(sectionsForClass(nextClass)[0] || ''); }} style={selectStyle}>
+ <select value={selectedClass} onChange={e => { const nextClass = e.target.value; setSelectedClass(nextClass); setSelectedSection(sectionsForClass(nextClass)[0] || ''); setMarks({}); setSaved(false); setSaveError(''); }} style={selectStyle}>
  {CLASSES.map(cls => <option key={cls}>{cls}</option>)}
  </select>
- <select value={selectedSection} onChange={e => setSelectedSection(e.target.value)} style={selectStyle}>
+ <select value={selectedSection} onChange={e => { setSelectedSection(e.target.value); setMarks({}); setSaved(false); setSaveError(''); }} style={selectStyle}>
  {sectionsForClass(selectedClass).map(sec => <option key={sec}>{sec}</option>)}
  </select>
  </div>
@@ -516,6 +566,7 @@ export default function ExaminationModule() {
  <div style={{ color: 'var(--apex-text-tertiary)', fontSize: 13 }}>{selectedClass} · {selectedSection}</div>
  </div>
  {saved && <div style={{ padding: '10px 14px', borderRadius: 14, background: 'rgba(48,209,88,0.14)', border: '1px solid rgba(48,209,88,0.3)', color: '#30D158', fontWeight: 700 }}> Marks saved successfully</div>}
+ {saveError && <div role="alert" style={{ padding: '10px 14px', borderRadius: 12, background: 'rgba(185,56,56,0.1)', color: '#b12c36', maxWidth: 520 }}>{saveError}</div>}
  </div>
  <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 700 }}>
  <thead>
