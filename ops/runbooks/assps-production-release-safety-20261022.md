@@ -46,3 +46,15 @@ Promotion was explicitly tested and rejected with exit code 79 *before* touching
 - node al-siddique-frontend/scripts/verify-production-shell.mjs
 
 The actual backend database and its authentic marks, fees and student records are never disposable test fixtures.
+
+## 22 October 2026 — isolated recovered-source candidate
+- Original live entry `index-BHF9eC1U.js` matched byte-for-byte the October 15 source release at `/root/workspace/assps-term-planner-mission-20261015/al-siddique-frontend/dist/`. The preserved running web root contains older historical chunks, so chunk count alone is not feature parity.
+- Recovered clean integrated school source from Git commit `aad1ca8d453ebc9821ff58fbd97dcccad1dbc1ee` (`integration/assps-one-core-both-guards-20261021`). It retains all eight previously missing modules.
+- Do **not** directly merge the hotfix branch onto this source. An isolated `git merge-tree` found conflicts in admissions and attendance, with more than 800 divergent commits. Direct hotfix-to-recovery file replacement removes academic modules.
+- Recovery source branch: `recovery/assps-frontend-source-20261022`. Targeted, audited corrections ported: canonical admission tenant IDs, active-only dashboard/attendance loaders, same-school inactive batch exclusion without foreign-school/unknown bypass, and immutable deployment safeguards.
+- Detached clean-source build: 83 JavaScript chunks; 432 verified imports; eight of eight school modules present; local anonymous login + dashboard redirect Chromium checks passed without errors.
+- Synthetic, nonmutating security tests: 35 tenant/attendance tests passed; additional three isolated HTTP batch tests explicitly confirm legitimate attendance plus inactive student save, foreign-school atomic denial and unknown ID rejection. These tests do not use live PostgreSQL records.
+- Staged recovery frontend: `/var/www/assps-releases/reconciled-bc06179-20261022`. **STAGED ONLY**, NOT activated. Git recovery branch has newer test-only commits; frontend payload remains the same until the next compiled release.
+- Public production remains `/var/www/assps-releases/baseline-20261022-1404`. Do not delete this or the prior `/var/www/assps-resultcard-nazra-purged-20261019` fallback.
+- **Remaining barrier to live promotion:** production-equivalent signed user attendance Save→Reopen and Daily Diary Save→Reopen→Print, first-term marks/results immutability + zero-versus-blank and School B denial need independent disposable authenticated verification. Recovered backend has a different attendance-parent-notification implementation from live; do not replace the live backend wholesale.
+- CI runs are recorded under GitHub Actions `ASSPS Frontend Release Integrity` for the recovery branch. A green build is necessary, not sufficient for a live academic cutover.
