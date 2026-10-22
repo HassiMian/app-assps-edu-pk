@@ -16,6 +16,7 @@
     "live:contract": "node ops/live-route-contract-check.js",
     "verify:local": "node ops/verify-local.js",
     "deploy:production:dry-run": "powershell -NoProfile -ExecutionPolicy Bypass -File ops/deploy-production.ps1",
+    "deploy:frontend:atomic": "powershell -NoProfile -ExecutionPolicy Bypass -File ops/deploy-frontend-atomic.ps1",
     "deploy:production": "powershell -NoProfile -ExecutionPolicy Bypass -File ops/deploy-production.ps1 -Apply"
   }
 }

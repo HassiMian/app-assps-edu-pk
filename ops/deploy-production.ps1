@@ -95,6 +95,19 @@ if ($Apply -and -not (Test-Path $KnownHostsFile)) {
 Step "mode=$Mode apply=$Apply timestamp=$timestamp host=$(HostLabel)"
 RunAlways 'npm run production:safety'
 
+if ($Mode -eq 'Frontend') {
+  # Canonical entrypoint: no more direct writes to /var/www/apex-os.
+  $controller = Join-Path $PSScriptRoot 'deploy-frontend-atomic.ps1'
+  $args = @{ HostSpec = $HostSpec; SshKey = $SshKey; KnownHostsFile = $KnownHostsFile }
+  if ($Apply) { $args.Apply = $true; $args.ConfirmProduction = [bool]$ConfirmProduction }
+  & $controller @args
+  if ($LASTEXITCODE -ne 0) { throw 'Atomic frontend release was rejected.' }
+  exit
+}
+if ($Apply -and $Mode -in @('Backend', 'Both')) {
+  throw 'Legacy backend release or compound release blocked: production backend differs from tracked source. Review production drift and authenticated cross-tenant regressions before enabling.'
+}
+
 if ($Apply -and ($Mode -in @('Backend', 'Both'))) {
   Remote @"
 set -e

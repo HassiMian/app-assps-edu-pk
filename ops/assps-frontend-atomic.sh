@@ -80,6 +80,11 @@ case "$ACTION" in
   stage)
     require_id
     [[ -n "$ARCHIVE" && -f "$ARCHIVE" ]] || { echo 'Missing release archive' >&2; exit 66; }
+    # No auto-deletion of historic rollback releases. Refuse releases on low disk.
+    free_kb="$(df -Pk "$BASE" | awk 'NR==2 {print $4}')"
+    [[ "$free_kb" =~ ^[0-9]+$ && "$free_kb" -ge 2097152 ]] || {
+      echo 'Less than 2 GiB disk free: release refused, previous releases preserved' >&2; exit 75;
+    }
     [[ ! -e "$BASE/$RELEASE_ID" && ! -e "$STATE/$RELEASE_ID" ]] || { echo 'Release ID already exists' >&2; exit 73; }
     mkdir -m 700 "$BASE/$RELEASE_ID"
     # Reject path traversal, symlinks and special tar entries before extracting.
@@ -170,7 +175,11 @@ JS
       rollback_inner
       exit 1
     fi
-    nginx -s reload
+    if ! nginx -s reload; then
+      echo 'Nginx reload failed: reverting' >&2
+      rollback_inner
+      exit 1
+    fi
     if ! test_origin "$ENTRY"; then
       echo 'Origin acceptance failed: reverting' >&2
       rollback_inner
@@ -185,8 +194,14 @@ JS
     [[ -f "$STATE/$RELEASE_ID/nginx.before" ]] || { echo 'No rollback checkpoint' >&2; exit 76; }
     [[ "$(live_root)" == "$NEW" ]] || { echo 'Active root is not candidate; no rollback necessary or allowed' >&2; exit 76; }
     OLD="$(cat "$STATE/$RELEASE_ID/base-root")"
+    cp -p "$CONFIG" "$STATE/$RELEASE_ID/nginx.pre-rollback"
     swap_config "$OLD" "$NEW"
-    nginx -t && nginx -s reload
+    if ! nginx -t || ! nginx -s reload; then
+      cp -p "$STATE/$RELEASE_ID/nginx.pre-rollback" "$CONFIG"
+      nginx -t && nginx -s reload
+      echo 'Rollback could not be safely activated; prior config restored' >&2
+      exit 1
+    fi
     echo "ROLLED_BACK release=$RELEASE_ID to=$OLD"
     ;;
   *)
