@@ -24,7 +24,13 @@ class IndependentDailyControls(unittest.TestCase):
 
  def test_old_paper_term_bundle_without_save_day_must_fail(self):
   prior=Path('/root/workspace/assps-planning-architecture-v4-20261015/al-siddique-frontend/dist')
-  if not prior.is_dir():self.skipTest('Archived v4 reference build unavailable')
+  # A GitHub-hosted runner cannot traverse /root; that is unavailable evidence,
+  # not a failed V5 deployment. An accessible archived build is always tested.
+  try:
+   accessible=prior.is_dir()
+  except PermissionError:
+   accessible=False
+  if not accessible:self.skipTest('Archived v4 reference build unavailable or inaccessible')
   report=gate.validate(prior,contract)
   self.assertFalse(report['pass'])
   self.assertFalse(report['checks']['all_runtime_ui_markers'])
