@@ -41,7 +41,8 @@ jobs:
             tests/attendance-gr-input-validation-http.test.cjs \
             tests/attendance-gr-teacher-scope-http.test.cjs \
             tests/attendance-mark-pool-failure-boundary.test.cjs \
-            tests/attendance-pool-failure-http.test.cjs
+            tests/attendance-pool-failure-http.test.cjs \
+            tests/attendance-batch-inactive-tenant-synthetic.test.cjs
       - name: Build complete frontend release
         run: npm run build:frontend
       - name: Verify complete hashed asset graph
