@@ -28,7 +28,8 @@ export function auditClassPositions(rows = [], students = [], { classKey = value
   }
   const groups = new Map()
   for (const entry of entries.values()) {
-    if (!entry.subjects.length) continue
+    if (!entry.className) continue
+    if (!entry.subjects.length) entry.complete = false
     if (!groups.has(entry.className)) groups.set(entry.className, [])
     groups.get(entry.className).push(entry)
   }

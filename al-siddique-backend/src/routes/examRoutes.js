@@ -6,6 +6,8 @@ const { tenantClause, currentSchoolId, hasColumn } = require('../middleware/tena
 const { isTeacher, validateTeacherMarksWrite, teacherResultReadScope } = require('../services/examMarksTeacherScope')
 const { parseExactMarksNumber } = require('../services/examMarksInputValidation')
 const { validatePaperMaxima } = require('../services/examMarksSubjectMaximum')
+const { validateMoverFirstTermResults } = require('../services/examFirstTermMoverRosterGuard')
+const { reviseExamScore } = require('../services/examOfficialMarksRevision')
 const { validateResultState } = require('../services/examResultStatus')
 const { selectGradeBand } = require('../services/gradeBandAssignment')
 
@@ -334,7 +336,7 @@ router.post('/results', protect, canWriteMarks, async (req, res) => {
     const examIds = [...new Set(normalized.map(row => row.examId))]
     const [studentScope, examScope] = await Promise.all([
       client.query('SELECT id, class, section FROM students WHERE school_id = $1 AND id = ANY($2::int[])', [schoolId, studentIds]),
-      client.query('SELECT id, class FROM exams WHERE school_id = $1 AND id = ANY($2::int[])', [schoolId, examIds]),
+      client.query('SELECT id, class, name FROM exams WHERE school_id = $1 AND id = ANY($2::int[])', [schoolId, examIds]),
     ])
     const validStudents = new Set(studentScope.rows.map(row => Number(row.id)))
     const validExams = new Set(examScope.rows.map(row => Number(row.id)))
@@ -345,6 +347,18 @@ router.post('/results', protect, canWriteMarks, async (req, res) => {
       return res.status(403).json({
         success: false,
         message: foreignStudent ? 'One or more students do not belong to this school.' : 'One or more exams do not belong to this school.',
+      })
+    }
+
+    // Approved ASSPS 2026 First Term roster: seven Mover subjects, not Computer.
+    // This is a restrictive safety check in addition to signed exam_subjects approvals.
+    if (!validateMoverFirstTermResults({
+      schoolId,results:normalized,students:studentScope.rows,exams:examScope.rows,
+    })) {
+      await client.query('ROLLBACK')
+      return res.status(422).json({
+        success:false,code:'MOVER_FIRST_TERM_SUBJECT_NOT_IN_OFFICIAL_ROSTER',
+        message:'This class/subject/maximum is not part of the approved Mover First Term roster.',
       })
     }
 
@@ -457,6 +471,24 @@ router.post('/results', protect, canWriteMarks, async (req, res) => {
     return res.status(500).json({ success: false, message: 'Results could not be saved.' })
   } finally {
     client.release()
+  }
+})
+
+// A separate audited Principal-only correction path; normal marks POST remains
+// immutable. Missing revision ledger or grade policy must fail closed.
+router.post('/results/:result_id/principal-revision', protect, requireRoles('principal'), async (req,res) => {
+  try {
+    const data = await reviseExamScore({
+      pool, applyTenantContext, actor:req.user, schoolId:currentSchoolId(req),
+      resultId:req.params.result_id, body:req.body,
+    })
+    return res.json({ success:true, data, message:'Official score revised with immutable audit entry.' })
+  } catch(err) {
+    if (!err.code || !err.status) {
+      console.error('Principal score revision failed:', err.message)
+      return res.status(500).json({success:false,code:'OFFICIAL_MARKS_REVISION_FAILED'})
+    }
+    return res.status(err.status).json({success:false,code:err.code})
   }
 })
 

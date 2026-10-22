@@ -24,3 +24,11 @@ test('class cohorts independently rank where clean',()=>{
  const out=auditClassPositions(rows,[s(1,'One'),s(2,'One'),s(3),s(4)])
  assert.equal(out.ranks.get('1'),'1st');assert.equal(out.ranks.get('2'),'2nd');assert.equal(out.issues.has('mover'),true);assert.equal(out.ranks.has('4'),false)
 })
+
+test('a student with no legitimate subject rows blocks ranking rather than disappearing',()=>{
+ const rows=[r(1,'English Written',50),r(2,'Computer',85,100)]
+ const filtered=rows.filter(x=>x.subject!=='Computer')
+ const out=auditClassPositions(filtered,[s(1),s(2)])
+ assert.equal(out.issues.has('mover'),true)
+ assert.equal(out.ranks.size,0)
+})

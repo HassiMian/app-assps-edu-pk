@@ -52,7 +52,15 @@ jobs:
         run: |
           node --test \
             al-siddique-frontend/src/Modules/examination/tests/resultRankIntegrity.test.mjs \
-            al-siddique-frontend/src/Modules/examination/tests/marksSaveVerification.test.mjs
+            al-siddique-frontend/src/Modules/examination/tests/marksSaveVerification.test.mjs \
+            al-siddique-frontend/src/Modules/examination/tests/moverFirstTermRoster.test.mjs
+      - name: Principal-only audit, official Mover roster and amendment tamper resistance
+        run: |
+          node --test \
+            al-siddique-backend/src/tests/exam-marks-principal-audited-revision.test.js \
+            al-siddique-backend/src/tests/exam-marks-revision-migration.test.js \
+            al-siddique-backend/src/tests/exam-first-term-mover-roster.test.js \
+            al-siddique-frontend/scripts/tests/protectedTemplateReconciliation.test.mjs
       - name: Install browser runtime for candidate smoke test
         run: npm exec --prefix al-siddique-frontend -- playwright install --with-deps chromium
       - name: Daily Diary browser layout and header theme acceptance

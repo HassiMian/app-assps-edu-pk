@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "scope": "ASSPS result card only: source integrity, NOT approval of changed marks",
+  "template_path": "al-siddique-frontend/src/Modules/examination/resultCardTemplates.jsx",
+  "historical_approved_snapshot": "docs/template-baseline/history/resultCardTemplates.20261005.jsx",
+  "historical_approved_sha256": "302b5f162689b2067a81073b98de53ffd38502cf2659c2a5757fe8d099c1c13c",
+  "reconciled_sha256": "cb76705cffecd8675f35ab6425b904374a44197a53779e403384a022fff7ee29",
+  "historical_change_commits": ["cb26e41c", "47c5530c"],
+  "technical_review_date": "2026-10-22",
+  "change_classification": "grade band fallback, class position field, signature/teacher-header spacing",
+  "previous_baseline_preserved": true,
+  "official_print_result_acceptance": "NOT_CERTIFIED",
+  "production_release_permission": "DENIED_UNTIL_AUTHENTICATED_PRINT_ACCEPTANCE"
+}

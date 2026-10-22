@@ -4,6 +4,7 @@ import { getResultLogoDiagnostic } from './resultLogoDiagnostics'
 import { summarizePrintBatch } from './resultPrintPlanning'
 import { buildResultStudents } from './resultStudentIdentity'
 import { auditClassPositions } from './resultRankIntegrity.js'
+import { projectMoverFirstTermRows } from './moverFirstTermRoster.js'
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import api from '../../services/api'
@@ -336,13 +337,16 @@ export default function ResultCards() {
     return Array.from(sectionSet).sort()
   }, [selectedPrintClass, sectionsForClass, students])
 
-  const rankingAudit = useMemo(() => auditClassPositions(activeResults, students, {
+  const rosterProjection = useMemo(() => projectMoverFirstTermRows(activeResults, students, exam), [activeResults, students, exam])
+  const rankEligibleResults = rosterProjection.rows
+
+  const rankingAudit = useMemo(() => auditClassPositions(rankEligibleResults, students, {
     classKey: schoolClassOrderKey,
     excludeSubject: isNazraSubject,
-  }), [activeResults, students])
+  }), [rankEligibleResults, students])
   const classRanks = rankingAudit.ranks
 
-  const buildPrintCards = useCallback((rows = activeResults, examObj = exam, scopeStudents = students) =>
+  const buildPrintCards = useCallback((rows = rankEligibleResults, examObj = exam, scopeStudents = students) =>
     scopeStudents.map(s => {
       const authenticatedClass = s.className || s.class || ''
       const safeClass = /^all\s+classes$/i.test(authenticatedClass.trim()) ? '' : authenticatedClass
@@ -361,7 +365,7 @@ export default function ResultCards() {
         exam: examObj,
         studentMarks: rows.filter(r => String(r.student_id) === String(s.id) && !isNazraSubject(r?.subject || r?.subjectName)),
       }
-    }).filter(item => item && item.studentMarks.length > 0), [activeResults, exam, students, classRanks, rankingAudit])
+    }).filter(item => item && item.studentMarks.length > 0), [rankEligibleResults, exam, students, classRanks, rankingAudit])
 
   const classPrintCards = useMemo(() => {
     if (outputMode !== 'class' || !selectedPrintClass) return []
@@ -374,14 +378,14 @@ export default function ResultCards() {
       }
       return true
     })
-    return buildPrintCards(activeResults, exam, matchingStudents)
-  }, [outputMode, selectedPrintClass, selectedPrintSection, students, activeResults, exam, buildPrintCards])
+    return buildPrintCards(rankEligibleResults, exam, matchingStudents)
+  }, [outputMode, selectedPrintClass, selectedPrintSection, students, rankEligibleResults, exam, buildPrintCards])
 
   const allExamPrintCards = useMemo(() => {
-    return buildPrintCards(activeResults, exam, students)
-  }, [activeResults, exam, students, buildPrintCards])
+    return buildPrintCards(rankEligibleResults, exam, students)
+  }, [rankEligibleResults, exam, students, buildPrintCards])
 
-  const studentMarks = activeResults.filter(r => String(r.student_id) === selectedStudent && !isNazraSubject(r?.subject || r?.subjectName))
+  const studentMarks = rankEligibleResults.filter(r => String(r.student_id) === selectedStudent && !isNazraSubject(r?.subject || r?.subjectName))
   const student = useMemo(() => {
     const found = students.find(s => String(s.id) === selectedStudent)
     if (!found) return null
@@ -445,7 +449,7 @@ export default function ResultCards() {
     if (ranksNeedReview) return window.alert('Positions are under review: at least one saved student has a different or incomplete subject/maximum-marks set. No result card was printed. Review the official exam subject roster first.')
     if (outputMode === 'single') {
       if (!student || !studentMarks.length) return alert('Select student with marks first')
-      const singleCards = buildPrintCards(activeResults, exam, [student])
+      const singleCards = buildPrintCards(rankEligibleResults, exam, [student])
       if (!singleCards.length) return alert('No valid marks found for selected student')
       setPrintCards(singleCards)
       setShowParams(true)
@@ -706,6 +710,11 @@ export default function ResultCards() {
           </div>
         </div>
 
+        {rosterProjection.excluded.length > 0 && (
+          <div role="status" style={{ padding:12, color:'#7a4b00', background:'#fff4d6', border:'1px solid #e1ae54', borderRadius:8, marginBottom:10 }}>
+            {rosterProjection.excluded.length} historically saved Mover subject row(s) excluded from the approved First Term result calculation. Original database records remain unchanged.
+          </div>
+        )}
         {rankingAudit.issues.size > 0 && (
           <div role="alert" className="super-module-card" style={{ ...card, padding:16, marginBottom:12, color:C.gold, borderColor:'rgba(200,153,26,0.42)' }}>
             Position verification required for {Array.from(rankingAudit.issues.keys()).join(', ')}. Subject sets or maxima differ within these classes. The affected result cards cannot print unverified positions; existing saved marks are unchanged.
