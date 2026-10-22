@@ -162,6 +162,22 @@ JS
     su -s /bin/sh www-data -c "test -r '$NEW/index.html'" || {
       echo 'Nginx cannot traverse candidate path; activation blocked' >&2; exit 78;
     }
+    # Protect critical existing school modules against an older Git source build.
+    # These named chunks are in the currently verified running production release.
+    # Changes to chunk names require separate functional parity evidence before
+    # this gate can be updated; never bypass merely to turn CI green.
+    missing_modules=()
+    for critical in DailyDiaryWorkspace EarlyYearsStudio LessonPlanModule MarksRegister PaperEditorRouter BellSchedulePanel SavedPapersTab Grade910HumanSignoff; do
+      if [[ -n "$(find "$OLD/assets" -maxdepth 1 -name "$critical-*.js" -print -quit)" ]] &&
+         [[ -z "$(find "$NEW/assets" -maxdepth 1 -name "$critical-*.js" -print -quit)" ]]; then
+        missing_modules+=("$critical")
+      fi
+    done
+    if (( ${#missing_modules[@]} > 0 )); then
+      echo "RELEASE BLOCKED: candidate lacks production modules: ${missing_modules[*]}" >&2
+      echo 'Reconcile latest audited frontend sources and browser regression checks first.' >&2
+      exit 79
+    fi
     cp -p "$CONFIG" "$STATE/$RELEASE_ID/nginx.before"
     ENTRY="$(grep -oE '/assets/index-[^"]+\.js' "$NEW/index.html" | head -1)"
     rollback_inner() {
