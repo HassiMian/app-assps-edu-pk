@@ -8,7 +8,7 @@ import assps_unified_readiness_readonly as gate
 class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
     def fixture(self):
         return {x:{'pass':True} for x in (
-            'database','backup','frontend','rollback','http','restricted_catalog_and_firstterm',
+            'database','backup','frontend','rollback','http','backend_listener','restricted_catalog_and_firstterm',
             'source_privacy_inventory','backend_source_inventory','attendance_roster_coverage',
             'fee_ledger_integrity','frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity','storage_headroom','timetable_collision_scope','lesson_coverage','cross_product_boundary','school_whatsapp_log_privacy','school_whatsapp_phone_scope')}
     def test_every_operational_check_passes_but_unapproved_signoff_remains_hold(self):
@@ -20,6 +20,13 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
         self.assertGreaterEqual(len(r['unresolved_release_gates']),9)
         self.assertFalse(r['production_deployed_by_this_check'])
         self.assertFalse(r['safe_to_remove_timetable_ingress_quarantine'])
+    def test_backend_offline_blocks_release_even_if_other_checks_pass(self):
+        e=self.fixture()
+        e['backend_listener']['pass']=False
+        result=gate.classify(e)
+        self.assertFalse(result['operational_checks_pass'])
+        self.assertIn('active_backend_listener_or_whatsapp_syntax_uncertified',result['unresolved_release_gates'])
+
     def test_unscoped_live_exam_attendance_is_explicit_hold(self):
         e=self.fixture()
         e['exam_attendance_tenant_scope'].update({'live_scoped':False,'candidate_scoped':True})

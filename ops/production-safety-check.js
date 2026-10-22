@@ -925,7 +925,7 @@ assertNotContains(
 
 assertContains(
   'al-siddique-backend/src/routes/examRoutes.js',
-  "['super_admin', 'admin', 'principal', 'teacher', 'parent', 'student'].includes(role)",
+  "['super_admin', 'admin', 'principal', 'owner', 'teacher', 'parent', 'student'].includes(role)",
   'exam result reads must support legitimate staff and portal roles.'
 )
 
