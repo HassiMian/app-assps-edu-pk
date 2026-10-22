@@ -2,15 +2,18 @@
 // Read-only policy verification. Never derives approval from historic marks.
 const normalize = value => String(value ?? '').trim().toLocaleLowerCase('en').replace(/\s+/g,' ')
 const id = value => Number.isSafeInteger(Number(value)) && Number(value) > 0 ? Number(value) : 0
+const {officialMoverFirstTermAllows}=require('./officialMoverFirstTermPolicy')
 function requestedPolicy(query) {
   const examId=id(query?.exam_id)
   const cls=String(query?.class_name ?? '').trim()
   const section=String(query?.section ?? '').trim()
   const subject=String(query?.subject ?? '').trim()
   if(!examId || !cls || !subject || cls.length>80 || section.length>80 || subject.length>160) return null
+  if (!officialMoverFirstTermAllows({examId,className:cls,subject})) return null
   return {examId,cls,section,subject}
 }
 function policyMatches(row, request, schoolId) {
+  if (!officialMoverFirstTermAllows({examId:request?.examId,className:request?.cls,subject:request?.subject,totalMarks:row?.total_marks})) return false
   return Boolean(row && id(row.school_id)===id(schoolId) &&
     id(row.exam_id)===request.examId &&
     normalize(row.class_name)===normalize(request.cls) &&

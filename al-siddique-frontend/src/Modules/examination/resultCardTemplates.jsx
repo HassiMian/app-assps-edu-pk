@@ -101,15 +101,15 @@ export function buildResultCardData({ student, exam, studentMarks, options, scho
  const perTermTotal = Number(row.total_marks || exam?.total_marks || 100)
  const subject = {
  subjectName: row.subjectName || row.subject || '—',
- assessmentMarks: numberOrNull(row.assessmentMarks | row.assessment_marks),
- firstTermMarks: numberOrNull(row.firstTermMarks | row.first_term_marks),
- secondTermMarks: numberOrNull(row.secondTermMarks | row.second_term_marks),
- thirdTermMarks: numberOrNull(row.thirdTermMarks | row.third_term_marks),
- finalTermMarks: numberOrNull(row.finalTermMarks | row.final_term_marks),
+ assessmentMarks: numberOrNull(row.assessmentMarks ?? row.assessment_marks),
+ firstTermMarks: numberOrNull(row.firstTermMarks ?? row.first_term_marks),
+ secondTermMarks: numberOrNull(row.secondTermMarks ?? row.second_term_marks),
+ thirdTermMarks: numberOrNull(row.thirdTermMarks ?? row.third_term_marks),
+ finalTermMarks: numberOrNull(row.finalTermMarks ?? row.final_term_marks),
  remarks: row.remarks || '',
  perTermTotal,
  }
- if (subject[slot] === null) subject[slot] = numberOrNull(row.marks_obtained | row.obtainedMarks)
+ if (subject[slot] === null) subject[slot] = numberOrNull(row.marks_obtained ?? row.obtainedMarks)
  const selectedMarks = activeTerms.map(([, field]) => subject[field]).filter(v => v !== null)
  const obtainedMarks = selectedMarks.length ? selectedMarks.reduce((s, v) => s + v, 0) : Number(row.marks_obtained || 0)
  const totalMarks = selectedMarks.length ? selectedMarks.length * perTermTotal : perTermTotal

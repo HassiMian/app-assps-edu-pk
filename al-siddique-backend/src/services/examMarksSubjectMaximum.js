@@ -3,12 +3,14 @@
 // enrolled student's class/section and exact published subject offering.
 // Historical marks and the exam-wide total are NEVER approval evidence.
 const { normalizedClass } = require('./examMarksTeacherScope')
+const {officialMoverFirstTermAllows} = require('./officialMoverFirstTermPolicy')
 function norm(value) { return String(value ?? '').trim().toLowerCase().replace(/\s+/g,' ') }
 function validatePaperMaxima({schoolId,results,students,offerings}) {
   const studentMap = new Map((students || []).map(s=>[Number(s.id),s]))
   return Array.isArray(results) && results.length > 0 && results.every(result=>{
     const s = studentMap.get(Number(result.studentId))
     if (!s) return false
+    if (!officialMoverFirstTermAllows({examId:result.examId,className:s.class,subject:result.subject,totalMarks:result.totalMarks})) return false
     const matching = (offerings || []).filter(offering =>
       Number(offering.exam_id) === Number(result.examId) &&
       Number(offering.school_id) === Number(schoolId) &&

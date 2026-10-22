@@ -1,5 +1,6 @@
 const crypto = require('crypto')
 const { strictPositiveSchoolId } = require('../services/security/strictSchoolIdentity')
+const { canUseSchoolRole } = require('../services/schoolOwnerRolePolicy')
 const jwt = require('jsonwebtoken')
 const { query, tenantContext } = require('../config/database')
 
@@ -339,7 +340,7 @@ async function protect(req, res, next) {
 }
 
 function adminOnly(req, res, next) {
-  const allowed = ['super_admin', 'admin', 'principal']
+  const allowed = ['super_admin', 'admin', 'principal', 'owner']
   if (!req.user?.role || !allowed.includes(req.user.role)) {
     return sendJson(res, 403, { message: 'Admin or principal only' })
   }
@@ -376,7 +377,7 @@ function adminOrServiceScope(scope) {
 
 function requireRoles(...roles) {
   return (req, res, next) => {
-    if (!req.user?.role || !roles.includes(req.user.role)) {
+    if (!canUseSchoolRole(req.user?.role,roles)) {
       return sendJson(res, 403, {
         message: `Access denied. Allowed roles: ${roles.join(', ')}`
       })

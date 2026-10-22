@@ -362,7 +362,7 @@ router.get('/assessment-subject-policy', protect, async (req, res) => {
   if (!requested) return res.status(422).json({ success:false, code:'INVALID_SUBJECT_POLICY_REQUEST' })
   if (!Number.isSafeInteger(schoolId) || schoolId <= 0 ||
       actorSchoolId !== schoolId ||
-      !['teacher','admin','principal'].includes(role) ||
+      !['teacher','admin','principal','owner'].includes(role) ||
       !Number.isSafeInteger(actorUserId) || actorUserId <= 0) {
     return res.status(403).json({success:false,code:'STAFF_SCHOOL_CONTEXT_REQUIRED'})
   }
@@ -390,7 +390,7 @@ router.get('/assessment-subject-policy', protect, async (req, res) => {
       x.total_marks,x.is_active,x.approval_status,x.approval_revision,
       x.approved_by_user_id,x.approved_at,
       (u.id IS NOT NULL AND u.is_active=true AND u.school_id=x.school_id
-        AND u.role IN ('admin','principal')) AS reviewer_valid
+        AND u.role IN ('admin','principal','owner')) AS reviewer_valid
       FROM exam_subjects x
       JOIN exams e ON e.id=x.exam_id AND e.school_id=x.school_id
       LEFT JOIN users u ON u.id=x.approved_by_user_id

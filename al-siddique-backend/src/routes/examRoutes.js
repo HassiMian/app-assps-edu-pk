@@ -8,16 +8,17 @@ const { parseExactMarksNumber } = require('../services/examMarksInputValidation'
 const { validatePaperMaxima } = require('../services/examMarksSubjectMaximum')
 const { validateResultState } = require('../services/examResultStatus')
 const { selectGradeBand } = require('../services/gradeBandAssignment')
+const {reviseExamScore,RevisionError} = require('../services/examOfficialMarksRevision')
 
-const canManageExams = requireRoles('super_admin', 'admin', 'principal')
-const canWriteMarks = requireRoles('super_admin', 'admin', 'principal', 'teacher')
+const canManageExams = requireRoles('super_admin', 'admin', 'principal', 'owner')
+const canWriteMarks = requireRoles('super_admin', 'admin', 'principal', 'owner', 'teacher')
 function canReadResults(req, res, next) {
   if (req.user?.account_type === 'service') {
     if (hasServiceScope(req, 'school.results.read')) return next()
     return res.status(403).json({ success: false, message: 'Service permission denied. Required scope: school.results.read' })
   }
   const role = String(req.user?.role || '').toLowerCase()
-  if (['super_admin', 'admin', 'principal', 'teacher', 'parent', 'student'].includes(role)) return next()
+  if (['super_admin', 'admin', 'principal', 'owner', 'teacher', 'parent', 'student'].includes(role)) return next()
   return res.status(403).json({ success: false, message: 'Results access denied.' })
 }
 
@@ -377,7 +378,7 @@ router.post('/results', protect, canWriteMarks, async (req, res) => {
           x.total_marks, x.is_active, x.approval_status, x.approval_revision,
           x.approved_by_user_id, x.approved_at,
           (u.id IS NOT NULL AND u.is_active=true AND u.school_id=x.school_id
-           AND u.role IN ('principal','admin')) AS reviewer_valid
+           AND u.role IN ('principal','admin','owner')) AS reviewer_valid
         FROM exam_subjects x
         LEFT JOIN users u ON u.id=x.approved_by_user_id
         WHERE x.school_id = $1 AND x.exam_id = ANY($2::int[]) AND x.is_active = true
@@ -457,6 +458,26 @@ router.post('/results', protect, canWriteMarks, async (req, res) => {
     return res.status(500).json({ success: false, message: 'Results could not be saved.' })
   } finally {
     client.release()
+  }
+})
+
+// POST /api/exams/results/:resultId/revision
+// STRICTLY requires a real signed Owner/Principal session and a separately
+// provisioned signed-school append-only audit ledger. No teacher or AI edits.
+router.post('/results/:resultId/revision', protect, requireRoles('principal','owner'), async (req,res)=>{
+  try{
+    const schoolId=currentSchoolId(req)
+    const result=await reviseExamScore({
+      pool,applyTenantContext,actor:req.user,schoolId,
+      resultId:req.params.resultId,body:req.body
+    })
+    return res.status(200).json({success:true,data:result,code:'AUDITED_OFFICIAL_MARKS_REVISION_SAVED'})
+  }catch(err){
+    if(err instanceof RevisionError)
+      return res.status(err.status).json({success:false,code:err.code,message:'Revision was not saved. Review the current record and authorized school policy.'})
+    console.error('Audited exam marks revision failed:',err.message)
+    return res.status(503).json({success:false,code:'MARKS_REVISION_SERVICE_UNAVAILABLE',
+      message:'Official marks revision could not be certified. Existing marks are unchanged.'})
   }
 })
 

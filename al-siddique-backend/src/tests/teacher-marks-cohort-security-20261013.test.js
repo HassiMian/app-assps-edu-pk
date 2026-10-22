@@ -38,8 +38,8 @@ test('router invokes the scoped builder before reading teaching options',()=>{
  assert.match(portal,/query\(plan\.sql, plan\.params\)/)
 })
 test('teacher cannot create/delete exams or edit grade scheme, only request scoped result writes',()=>{
- assert.match(routes,/const canManageExams = requireRoles\('super_admin', 'admin', 'principal'\)/)
- assert.match(routes,/const canWriteMarks = requireRoles\('super_admin', 'admin', 'principal', 'teacher'\)/)
+ assert.match(routes,/const canManageExams = requireRoles\('super_admin', 'admin', 'principal', 'owner'\)/)
+ assert.match(routes,/const canWriteMarks = requireRoles\('super_admin', 'admin', 'principal', 'owner', 'teacher'\)/)
  for(const route of ["router.post('/', protect, canManageExams", "router.delete('/:id', protect, canManageExams", "router.put('/grade-settings', protect, canManageExams"])
   assert.ok(routes.includes(route),route)
  assert.match(routes,/router\.post\('\/results', protect, canWriteMarks/)
