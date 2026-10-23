@@ -1,0 +1,30 @@
+'use strict'
+const test=require('node:test'),assert=require('node:assert/strict')
+const fs=require('node:fs'),path=require('node:path')
+const {canCreateSchoolUser:create,canResetSchoolUserPassword:reset}=require('../services/schoolUserRoleProvisioningPolicy')
+test('generic School Admin cannot mint Owner, super admin or Principal roles',()=>{
+ for(const role of ['owner','super_admin','saas_admin','platform_owner','principal','admin','school_admin',null])
+  assert.equal(create({actorRole:'admin',newRole:role}),false,role)
+ for(const role of ['teacher','parent','student','accountant'])
+  assert.equal(create({actorRole:'admin',newRole:role}),true,role)
+})
+test('even authenticated platform superadmin cannot generic-create Owner',()=>{
+ for(const role of ['owner','super_admin','platform_owner','saas_admin'])
+  assert.equal(create({actorRole:'super_admin',newRole:role}),false,role)
+ for(const role of ['admin','principal','school_admin','teacher'])
+  assert.equal(create({actorRole:'super_admin',newRole:role}),true,role)
+})
+test('generic account password route cannot reset Owner or elevate ordinary Admin',()=>{
+ for(const role of ['owner','super_admin','admin','principal','school_admin'])
+  assert.equal(reset({actorRole:'admin',targetRole:role}),false,role)
+ assert.equal(reset({actorRole:'super_admin',targetRole:'owner'}),false)
+ assert.equal(reset({actorRole:'super_admin',targetRole:'teacher'}),true)
+})
+test('actual auth endpoints have fail-closed role guards on user creation and password update',()=>{
+ const code=fs.readFileSync(path.join(__dirname,'../routes/authRoutes.js'),'utf8')
+ assert.match(code,/canCreateSchoolUser\(\{actorRole:req\.user\?\.role,newRole:role\}\)/)
+ assert.match(code,/PRIVILEGED_ACCOUNT_PROVISIONING_DENIED/)
+ assert.match(code,/UPDATE users SET password = \$1 WHERE email = \$2/)
+ assert.match(code,/AND role IN \('teacher','parent','student','accountant'\)/)
+ assert.match(code,/AND school_id = \$3/)
+})

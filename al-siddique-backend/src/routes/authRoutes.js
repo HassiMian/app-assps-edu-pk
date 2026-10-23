@@ -9,6 +9,7 @@ const crypto  = require('crypto')
 const { query } = require('../config/database')
 const { protect } = require('../middleware/auth')
 const { currentTenantId, hasColumn } = require('../middleware/tenant')
+const {canCreateSchoolUser} = require('../services/schoolUserRoleProvisioningPolicy')
 const { getTwilioConfigForSchool, buildTwilioClient } = require('../services/twilioSettings')
 
 function resolveSecret(name, fallback) {
@@ -343,6 +344,7 @@ function roleRoutesForResponse(role) {
     admin: '/admin',
     school_admin: '/admin',
     principal: '/admin',
+    owner: '/admin',
     teacher: '/teacher',
     parent: '/parent',
     student: '/student',
@@ -584,7 +586,7 @@ router.post('/login', async (req, res) => {
     }
 
     if (requestedRole && user.role !== requestedRole) {
-      if (requestedRole === 'admin' && ['super_admin', 'saas_admin'].includes(user.role)) {
+      if (requestedRole === 'admin' && ['super_admin', 'saas_admin', 'owner'].includes(user.role)) {
         // Allow super_admin/saas_admin to log in through the admin portal
       } else {
         return sendJson(res, 403, { message: 'Selected portal role does not match your account.' })
@@ -781,7 +783,7 @@ router.post('/password-reset/request', async (req, res) => {
     if (!loginId) {
       return sendJson(res, 400, { message: 'Login ID is required.' })
     }
-    if (requestedRole && !['admin', 'teacher', 'student', 'parent', 'super_admin'].includes(requestedRole)) {
+    if (requestedRole && !['admin', 'owner', 'teacher', 'student', 'parent', 'super_admin'].includes(requestedRole)) {
       return sendJson(res, 400, { message: 'Invalid portal role.' })
     }
 
@@ -1013,6 +1015,13 @@ router.post('/users', protect, async (req, res) => {
     return sendJson(res, 400, { message: 'Name, email, password, and role are required.' })
   }
 
+  // Privileged account roles (especially Owner) are never created through
+  // the generic user endpoint, even when a current Admin requests them.
+  if (!canCreateSchoolUser({actorRole:req.user?.role,newRole:role})) {
+    return sendJson(res,403,{code:'PRIVILEGED_ACCOUNT_PROVISIONING_DENIED',
+      message:'This role requires a separately authorized provisioning workflow.'})
+  }
+
   const schoolId = req.user.role === 'super_admin'
     ? Number(req.body.school_id || req.body.schoolId)
     : Number(req.user.school_id)
@@ -1073,7 +1082,14 @@ router.put('/users/password', protect, async (req, res) => {
 
   try {
     const hashed = await bcrypt.hash(newPassword, 10);
+    // Generic password changes cannot seize an Owner/Principal/Admin
+    // account. Admins may only reset staff/parent/student passwords in
+    // their own school, while super_admin still cannot reset Owner here.
     let sql = 'UPDATE users SET password = $1 WHERE email = $2';
+    if(req.user.role==='super_admin')
+      sql += " AND role IN ('teacher','parent','student','accountant','admin','school_admin','principal')";
+    else
+      sql += " AND role IN ('teacher','parent','student','accountant')";
     const params = [hashed, email];
 
     if (req.user.role !== 'super_admin') {

@@ -8,7 +8,7 @@ import assps_unified_readiness_readonly as gate
 class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
     def fixture(self):
         return {x:{'pass':True} for x in (
-            'database','backup','frontend','rollback','http','backend_listener','owner_academic_authenticity','firstterm_snapshot_drift','exam9_original_immutability','restricted_catalog_and_firstterm',
+            'database','backup','frontend','rollback','http','backend_listener','owner_academic_authenticity','firstterm_snapshot_drift','exam9_original_immutability','owner_role_schema','live_user_provisioning_guard','restricted_catalog_and_firstterm',
             'source_privacy_inventory','backend_source_inventory','attendance_roster_coverage',
             'fee_ledger_integrity','frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity','storage_headroom','timetable_collision_scope','lesson_coverage','cross_product_boundary','school_whatsapp_log_privacy','school_whatsapp_phone_scope')}
     def test_every_operational_check_passes_but_unapproved_signoff_remains_hold(self):
@@ -20,6 +20,20 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
         self.assertGreaterEqual(len(r['unresolved_release_gates']),9)
         self.assertFalse(r['production_deployed_by_this_check'])
         self.assertFalse(r['safe_to_remove_timetable_ingress_quarantine'])
+    def test_owner_schema_stays_hard_hold_when_db_owner_role_is_disallowed(self):
+        evidence=self.fixture()
+        evidence['owner_role_schema']['pass']=False
+        result=gate.classify(evidence)
+        self.assertFalse(result['operational_checks_pass'])
+        self.assertIn('production_users_role_check_blocks_authenticated_owner_provisioning',result['unresolved_release_gates'])
+
+    def test_live_generic_account_privilege_escalation_guard_is_required(self):
+        evidence=self.fixture()
+        evidence['live_user_provisioning_guard']['pass']=False
+        result=gate.classify(evidence)
+        self.assertFalse(result['operational_checks_pass'])
+        self.assertIn('production_generic_user_creation_privilege_escalation_guard_missing',result['unresolved_release_gates'])
+
     def test_missing_original_immutable_trigger_blocks_release(self):
         evidence=self.fixture()
         evidence['exam9_original_immutability']['pass']=False
