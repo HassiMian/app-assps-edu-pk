@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import re
 import subprocess
+import tarfile
 import verify_backend_source_preservation_readonly as backend_preservation
 import verify_backend_listener_readonly as backend_listener
 import verify_owner_academic_authenticity_readonly as owner_academic
@@ -14,6 +15,7 @@ import verify_owner_role_schema_readonly as owner_schema
 import verify_live_user_provisioning_guard_readonly as live_account_guard
 import verify_live_staff_portal_role_readonly as live_staff_guard
 import seal_firstterm_snapshot_readonly as current_seal
+import verify_unsigned_signed_runtime_denial_readonly as signed_runtime_denial
 import verify_frontend_artifact_closure_readonly as frontend_closure
 import verify_exam_attendance_tenant_scope_readonly as exam_attendance_scope
 import verify_academic_delivery_integrity_readonly as academic_integrity
@@ -147,8 +149,66 @@ def inspect_database():
     records=parse_aggregate(query.stdout)
     return {'pass':compatible_aggregates(records),'counts':records}
 
+def validate_backup_manifest(lines, latest):
+    required={'live-apps-and-configs.tar.gz','postgres-all.sql.gz',
+      'postgres-asspssigned-55432-all.sql.gz','worktree-vault-result.txt'}
+    optional={'current-served-frontend-root.tar.gz'}
+    filenames=set()
+    for line in lines:
+        match=re.fullmatch(r'([a-f0-9]{64})  (.+)',line)
+        if not match:
+            raise RuntimeError('Backup manifest has malformed checksum')
+        raw=match.group(2)
+        expected_parent=str(latest)+'/'
+        if raw.startswith('/'):
+            if not raw.startswith(expected_parent):
+                raise RuntimeError('Backup manifest absolute path outside snapshot')
+            basename=raw[len(expected_parent):]
+        else:
+            basename=raw
+        if '/' in basename or basename in filenames or basename not in required|optional:
+            raise RuntimeError('Backup manifest has duplicate, unsupported or traversal entry')
+        filenames.add(basename)
+    if not required.issubset(filenames) or not filenames.issubset(required|optional):
+        raise RuntimeError('Backup manifest required archive missing')
+    return filenames
+
+
+def verify_frontend_archive_file_parity(archive,active_root):
+    active_root=Path(active_root).resolve(strict=True)
+    if active_root.is_symlink():
+        raise RuntimeError('Active frontend root cannot be a symlink')
+    present=set()
+    with tarfile.open(archive,'r:gz') as tar:
+        for member in tar.getmembers():
+            if not member.isfile():
+                if member.issym() or member.islnk():
+                    raise RuntimeError('Frontend backup contains an unexpected link')
+                continue
+            path=Path(member.name)
+            if not path.parts or path.parts[0]!=active_root.name or '..' in path.parts:
+                raise RuntimeError('Frontend backup includes unsafe or unrelated file')
+            relative=Path(*path.parts[1:])
+            if not relative.parts or str(relative) in present:
+                raise RuntimeError('Frontend backup has duplicate file paths')
+            present.add(str(relative))
+            current=active_root/relative
+            if not current.is_file() or current.is_symlink():
+                raise RuntimeError('Frontend backup does not match live file set')
+            saved=tar.extractfile(member)
+            if saved is None:
+                raise RuntimeError('Frontend archived file cannot be opened')
+            if hashlib.file_digest(saved,'sha256').digest()!=hashlib.sha256(current.read_bytes()).digest():
+                raise RuntimeError('Frontend archived file bytes differ from served file')
+    active={str(x.relative_to(active_root)) for x in active_root.rglob('*') if x.is_file()}
+    if not present or active!=present:
+        raise RuntimeError('Frontend backup and live file lists differ')
+    return len(present)
+
+
 def inspect_backup():
-    dirs=sorted(p for p in BACKUP_ROOT.iterdir() if p.is_dir() and LATEST_BACKUP_PATTERN.fullmatch(p.name))
+    dirs=sorted(p for p in BACKUP_ROOT.iterdir()
+      if p.is_dir() and LATEST_BACKUP_PATTERN.fullmatch(p.name))
     if not dirs:
         raise RuntimeError('No timestamped critical backup directory')
     latest=dirs[-1]
@@ -156,23 +216,39 @@ def inspect_backup():
     if not sha.is_file():
         raise RuntimeError('Newest critical backup has no SHA256SUMS')
     entries=[line for line in sha.read_text().splitlines() if line.strip()]
-    if len(entries)!=4:
-        raise RuntimeError('Backup does not have exactly four checksum entries')
-    checked=run(['sha256sum','-c',str(sha)],cwd=str(latest),timeout=25)
-    if checked.returncode or checked.stdout.count(': OK')!=4:
-        raise RuntimeError('Latest backup checksum failure')
+    filenames=validate_backup_manifest(entries,latest)
+    checked=run(['sha256sum','-c',str(sha)],cwd=str(latest),timeout=35)
+    if checked.returncode or checked.stdout.count(': OK')!=len(filenames):
+        raise RuntimeError('Latest backup checksum verification failed')
     for name in ('postgres-all.sql.gz','postgres-asspssigned-55432-all.sql.gz'):
-        gzip=run(['gzip','-t',str(latest/name)],timeout=22)
+        gzip=run(['gzip','-t',str(latest/name)],timeout=35)
         if gzip.returncode:
             raise RuntimeError('Postgres backup gzip test failed')
-    arch=latest/'live-apps-and-configs.tar.gz'
-    tar=run(['tar','-tzf',str(arch)],timeout=30)
-    if tar.returncode:
-        raise RuntimeError('App backup tar listing failed')
-    rel=str(ACTIVE_ROOT).lstrip('/')+'/index.html'
-    if not any(line.lstrip('./')==rel for line in tar.stdout.splitlines()):
-        raise RuntimeError('Latest backup omits the current live frontend root')
-    return {'pass':True,'snapshot':latest.name,'checksum_entries':4,'main_and_signed_gzip_pass':True,'active_frontend_included':True}
+    with tarfile.open(latest/'live-apps-and-configs.tar.gz','r:gz') as tar:
+        if not any(m.isfile() for m in tar.getmembers()):
+            raise RuntimeError('Application+configuration archive lacks files')
+    if 'current-served-frontend-root.tar.gz' in filenames:
+        frontend_archive=latest/'current-served-frontend-root.tar.gz'
+        supplemental=False
+    else:
+        parent=Path('/root/secure-archive/assps-fivephase-recovery-evidence-20261023')
+        frontend_archive=parent/'current-served-frontend-20261023.tar.gz'
+        manifest=parent/'frontend-supplement.sha256'
+        if not frontend_archive.is_file() or not manifest.is_file():
+            raise RuntimeError('Current served frontend missing from latest complete recovery set')
+        digest_line=manifest.read_text().strip()
+        digest_expected=hashlib.sha256(frontend_archive.read_bytes()).hexdigest()
+        if digest_line != digest_expected+'  '+str(frontend_archive):
+            raise RuntimeError('Supplemental current frontend archive checksum mismatch')
+        supplemental=True
+    count=verify_frontend_archive_file_parity(frontend_archive,ACTIVE_ROOT)
+    return {'pass':True,'snapshot':latest.name,
+      'checksum_entries':len(filenames),'main_and_signed_gzip_pass':True,
+      'active_frontend_included_in_recovery_set':True,
+      'frontend_snapshot_is_separate_supplement':supplemental,
+      'live_frontend_file_count_byte_identical':count,
+      'off_host_restore_proven':False}
+
 
 def inspect_frontend():
     html=ACTIVE_ROOT/'index.html'
@@ -284,7 +360,7 @@ def inspect_http():
     return {'pass':all(v['pass'] for v in result.values()),'checks':result}
 
 def classify(evidence):
-    required=('database','backup','frontend','rollback','http','backend_listener','owner_academic_authenticity','firstterm_snapshot_drift','exam9_original_immutability','owner_role_schema','live_user_provisioning_guard','live_staff_portal_guard','firstterm_forward_seal',
+    required=('database','backup','frontend','rollback','http','backend_listener','owner_academic_authenticity','firstterm_snapshot_drift','exam9_original_immutability','owner_role_schema','live_user_provisioning_guard','live_staff_portal_guard','firstterm_forward_seal','unsigned_signed_runtime_deny',
               'restricted_catalog_and_firstterm','source_privacy_inventory',
               'backend_source_inventory','attendance_roster_coverage','fee_ledger_integrity',
               'frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity',
@@ -312,6 +388,8 @@ def classify(evidence):
         holds.insert(0,'production_staff_portal_privileged_role_provisioning_guard_missing')
     if not checks['firstterm_forward_seal']:
         holds.insert(0,'current_firstterm_hmac_seal_drift_or_missing')
+    if not checks['unsigned_signed_runtime_deny']:
+        holds.insert(0,'unsigned_runtime_can_read_another_school_or_local_marks')
     if not attested:
         holds.insert(0,'active_frontend_attestation_does_not_match_served_hash')
     if evidence.get('frontend_artifact_closure',{}).get('immutable_artifact_go') is not True:
@@ -366,6 +444,7 @@ def main():
         'live_user_provisioning_guard':live_account_guard.inspect,
         'live_staff_portal_guard':live_staff_guard.inspect,
         'firstterm_forward_seal':current_seal.check,
+        'unsigned_signed_runtime_deny':signed_runtime_denial.inspect,
         'frontend_artifact_closure':inspect_frontend_artifact_closure,
         'exam_attendance_tenant_scope':exam_attendance_scope.inspect,
         'academic_delivery_integrity':academic_integrity.inspect,
