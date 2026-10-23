@@ -152,75 +152,20 @@ async function manageDatesheet({ action = 'add', examId = 9, className, subject,
 
 // ─── 2. Marks Entry & Result Cards ──────────────────────────────────────────
 
-async function enterExamMarks({ examId = 9, className, subject, marksList = [] } = {}) {
-  try {
-    if (!marksList || marksList.length === 0) {
-      return { success: false, error: 'No marks provided in marksList' };
-    }
-
-    const inserted = [];
-    const errors = [];
-
-    for (const item of marksList) {
-      const queryStr = item.studentNameOrGr || item.grNumber || item.name;
-      const marks = parseFloat(item.marksObtained);
-      const total = parseFloat(item.totalMarks || 100);
-      const remarks = item.remarks || '';
-
-      const stdRes = await queryDb(
-        `SELECT id, name, gr_number, class FROM students
-         WHERE (gr_number ILIKE $1 OR name ILIKE $2)
-           ${className ? 'AND class ILIKE $3' : ''}
-         LIMIT 1;`,
-        className ? [queryStr.trim(), `%${queryStr.trim()}%`, `%${className.trim()}%`] : [queryStr.trim(), `%${queryStr.trim()}%`]
-      );
-
-      if (stdRes.rowCount === 0) {
-        errors.push({ student: queryStr, error: 'Student not found in database' });
-        continue;
-      }
-
-      const student = stdRes.rows[0];
-      const pct = (marks / total) * 100;
-      let grade = 'F';
-      if (pct >= 80) grade = 'A+';
-      else if (pct >= 70) grade = 'A';
-      else if (pct >= 60) grade = 'B';
-      else if (pct >= 50) grade = 'C';
-      else if (pct >= 40) grade = 'D';
-      else if (pct >= 33) grade = 'E';
-
-      const upsert = await queryDb(
-        `INSERT INTO exam_results (exam_id, student_id, subject, marks_obtained, total_marks, grade, remarks, school_id)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, current_setting('app.tenant_id')::int)
-         ON CONFLICT (exam_id, student_id, subject)
-         DO UPDATE SET marks_obtained = $4, total_marks = $5, grade = $6, remarks = $7, updated_at = NOW()
-         RETURNING id, student_id, subject, marks_obtained, grade;`,
-        [examId, student.id, subject, marks, total, grade, remarks]
-      );
-
-      inserted.push({
-        student_id: student.id,
-        name: student.name,
-        gr_number: student.gr_number,
-        marks_obtained: marks,
-        total_marks: total,
-        grade
-      });
-    }
-
-    return {
-      success: true,
-      examId,
-      subject,
-      className,
-      processed: inserted.length,
-      inserted,
-      errors
-    };
-  } catch (err) {
-    return { success: false, error: err.message };
-  }
+async function enterExamMarks({ examId = 9 } = {}) {
+  // Critical safety boundary: this cognitive tool has no independently
+  // authenticated school actor, official award source, or tenant-scoped
+  // revision approval. Never let a voice/WhatsApp action write scores.
+  // The separate authenticated Exam Management UI remains available.
+  return {
+    success: false,
+    code: 'SIGNED_MARKS_ACTOR_REQUIRED',
+    error: 'WhatsApp marks entry requires signed school-scoped academic authorization.',
+    examId,
+    processed: 0,
+    inserted: [],
+    errors: [],
+  };
 }
 
 async function getOrPrintResultCards({ examId = 9, className, studentIdOrGr } = {}) {

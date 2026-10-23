@@ -8,7 +8,7 @@ import assps_unified_readiness_readonly as gate
 class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
     def fixture(self):
         return {x:{'pass':True} for x in (
-            'database','backup','frontend','rollback','http','backend_listener','owner_academic_authenticity','firstterm_snapshot_drift','exam9_original_immutability','owner_role_schema','live_user_provisioning_guard','live_staff_portal_guard','firstterm_forward_seal','unsigned_signed_runtime_deny','on_host_dual_restore_evidence','remote_main_security_parity','restricted_catalog_and_firstterm',
+            'database','backup','frontend','rollback','http','backend_listener','owner_academic_authenticity','firstterm_snapshot_drift','exam9_original_immutability','owner_role_schema','live_user_provisioning_guard','live_staff_portal_guard','firstterm_forward_seal','unsigned_signed_runtime_deny','on_host_dual_restore_evidence','remote_main_security_parity','latest_firstterm_snapshot_drift','live_whatsapp_marks_guard','restricted_catalog_and_firstterm',
             'source_privacy_inventory','backend_source_inventory','attendance_roster_coverage',
             'fee_ledger_integrity','frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity','storage_headroom','timetable_collision_scope','lesson_coverage','cross_product_boundary','school_whatsapp_log_privacy','school_whatsapp_phone_scope')}
     def test_every_operational_check_passes_but_unapproved_signoff_remains_hold(self):
@@ -26,6 +26,20 @@ class SafeReadOnlyUnifiedReleaseGateTests(unittest.TestCase):
         result=gate.classify(evidence)
         self.assertFalse(result['operational_checks_pass'])
         self.assertIn('production_users_role_check_blocks_authenticated_owner_provisioning',result['unresolved_release_gates'])
+
+    def test_live_whatsapp_cognitive_marks_actor_guard_required(self):
+        evidence=self.fixture()
+        evidence['live_whatsapp_marks_guard']['pass']=False
+        result=gate.classify(evidence)
+        self.assertIn('live_whatsapp_marks_write_without_signed_academic_actor_must_be_disabled',
+                      result['unresolved_release_gates'])
+
+    def test_latest_20261023_verified_backup_marks_drift_blocks_release(self):
+        evidence=self.fixture()
+        evidence['latest_firstterm_snapshot_drift']['pass']=False
+        result=gate.classify(evidence)
+        self.assertIn('new_firstterm_drift_after_20261023_sealed_backup_requires_original_award_evidence',
+            result['unresolved_release_gates'])
 
     def test_stale_remote_main_requires_explicit_reviewed_security_merge(self):
         evidence=self.fixture()
