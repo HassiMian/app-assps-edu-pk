@@ -16,6 +16,7 @@ import verify_live_user_provisioning_guard_readonly as live_account_guard
 import verify_live_staff_portal_role_readonly as live_staff_guard
 import seal_firstterm_snapshot_readonly as current_seal
 import verify_unsigned_signed_runtime_denial_readonly as signed_runtime_denial
+import verify_private_dual_restore_receipt_readonly as dual_restore
 import verify_frontend_artifact_closure_readonly as frontend_closure
 import verify_exam_attendance_tenant_scope_readonly as exam_attendance_scope
 import verify_academic_delivery_integrity_readonly as academic_integrity
@@ -360,7 +361,7 @@ def inspect_http():
     return {'pass':all(v['pass'] for v in result.values()),'checks':result}
 
 def classify(evidence):
-    required=('database','backup','frontend','rollback','http','backend_listener','owner_academic_authenticity','firstterm_snapshot_drift','exam9_original_immutability','owner_role_schema','live_user_provisioning_guard','live_staff_portal_guard','firstterm_forward_seal','unsigned_signed_runtime_deny',
+    required=('database','backup','frontend','rollback','http','backend_listener','owner_academic_authenticity','firstterm_snapshot_drift','exam9_original_immutability','owner_role_schema','live_user_provisioning_guard','live_staff_portal_guard','firstterm_forward_seal','unsigned_signed_runtime_deny','on_host_dual_restore_evidence',
               'restricted_catalog_and_firstterm','source_privacy_inventory',
               'backend_source_inventory','attendance_roster_coverage','fee_ledger_integrity',
               'frontend_artifact_closure','exam_attendance_tenant_scope','academic_delivery_integrity',
@@ -390,6 +391,8 @@ def classify(evidence):
         holds.insert(0,'current_firstterm_hmac_seal_drift_or_missing')
     if not checks['unsigned_signed_runtime_deny']:
         holds.insert(0,'unsigned_runtime_can_read_another_school_or_local_marks')
+    if not checks['on_host_dual_restore_evidence']:
+        holds.insert(0,'private_dual_postgresql_restoration_evidence_missing_or_stale')
     if not attested:
         holds.insert(0,'active_frontend_attestation_does_not_match_served_hash')
     if evidence.get('frontend_artifact_closure',{}).get('immutable_artifact_go') is not True:
@@ -445,6 +448,7 @@ def main():
         'live_staff_portal_guard':live_staff_guard.inspect,
         'firstterm_forward_seal':current_seal.check,
         'unsigned_signed_runtime_deny':signed_runtime_denial.inspect,
+        'on_host_dual_restore_evidence':dual_restore.inspect,
         'frontend_artifact_closure':inspect_frontend_artifact_closure,
         'exam_attendance_tenant_scope':exam_attendance_scope.inspect,
         'academic_delivery_integrity':academic_integrity.inspect,
