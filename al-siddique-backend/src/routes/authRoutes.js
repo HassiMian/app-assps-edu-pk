@@ -9,6 +9,7 @@ const crypto  = require('crypto')
 const { query } = require('../config/database')
 const { protect } = require('../middleware/auth')
 const { currentTenantId, hasColumn } = require('../middleware/tenant')
+const { canCreateSchoolUser } = require('../services/schoolUserRoleProvisioningPolicy')
 const { getTwilioConfigForSchool, buildTwilioClient } = require('../services/twilioSettings')
 
 function resolveSecret(name, fallback) {
@@ -1005,6 +1006,14 @@ router.post('/users', protect, async (req, res) => {
     return sendJson(res, 400, { message: 'Name, email, password, and role are required.' })
   }
 
+  if (!canCreateSchoolUser({actorRole:req.user?.role,newRole:role})) {
+    return sendJson(res, 403, {
+      code: 'PRIVILEGED_ACCOUNT_PROVISIONING_DENIED',
+      message: 'The requested account role requires a separate verified enrollment process.'
+    })
+  }
+  const normalizedRole = String(role).trim().toLowerCase()
+
   const schoolId = req.user.role === 'super_admin'
     ? Number(req.body.school_id || req.body.schoolId)
     : Number(req.user.school_id)
@@ -1023,20 +1032,19 @@ router.post('/users', protect, async (req, res) => {
       return sendJson(res, 403, { message: 'Cannot create users for another school.' })
     }
 
-    const hashed = await bcrypt.hash(password, 10);
     const supportsTenantId = await hasColumn('users', 'tenant_id').catch(() => false)
-    const tenantId = supportsTenantId ? (school.tenant_id || currentTenantId(req) || null) : null
-    const result = supportsTenantId
-      ? await query(
-        `INSERT INTO users (name, email, password, role, designation, school_id, tenant_id, is_active)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, true) RETURNING id, name, email, role, school_id, tenant_id`,
-        [name, email, hashed, role, designation || role, schoolId, tenantId]
-      )
-      : await query(
-        `INSERT INTO users (name, email, password, role, designation, school_id, is_active)
-         VALUES ($1, $2, $3, $4, $5, $6, true) RETURNING id, name, email, role, school_id`,
-        [name, email, hashed, role, designation || role, schoolId]
-      )
+    if (!supportsTenantId || !school.tenant_id) {
+      return sendJson(res, 503, {
+        code: 'SCHOOL_TENANT_SCHEMA_REQUIRED',
+        message: 'Tenant-linked user provisioning is not safely available.'
+      })
+    }
+    const hashed = await bcrypt.hash(password, 10);
+    const result = await query(
+      `INSERT INTO users (name, email, password, role, designation, school_id, tenant_id, is_active)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, true) RETURNING id, name, email, role, school_id, tenant_id`,
+      [name, email, hashed, normalizedRole, designation || normalizedRole, schoolId, school.tenant_id]
+    )
     return sendJson(res, 201, { message: 'User created successfully', user: result.rows[0] });
   } catch (err) {
     if (err.code === '23505') {
@@ -1059,11 +1067,14 @@ router.put('/users/password', protect, async (req, res) => {
 
   try {
     const hashed = await bcrypt.hash(newPassword, 10);
-    let sql = 'UPDATE users SET password = $1 WHERE email = $2';
-    const params = [hashed, email];
-    
+    // Prevent privileged reset even if target changes roles concurrently.
+    const resetRoles = req.user.role === 'super_admin'
+      ? ['teacher','parent','student','accountant','admin','school_admin','principal']
+      : ['teacher','parent','student','accountant']
+    let sql = 'UPDATE users SET password = $1 WHERE email = $2 AND role = ANY($3::text[])';
+    const params = [hashed, email, resetRoles];
     if (req.user.role !== 'super_admin') {
-      sql += ' AND school_id = $3';
+      sql += ' AND school_id = $4';
       params.push(req.user.school_id);
     }
     
