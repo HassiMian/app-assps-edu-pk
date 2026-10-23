@@ -1,0 +1,29 @@
+--- a/src/services/emailService.js
++++ b/src/services/emailService.js
+@@ -24 +24 @@
+-function logEmailFallback(to, subject) {
++function logEmailFallback(_to, _subject) {
+@@ -26,11 +26,3 @@
+-  const safeTo = String(to || '').replace(/[\r\n]+/g, ' ').slice(0, 320)
+-  const safeSubject = String(subject || '').replace(/[\r\n]+/g, ' ').slice(0, 320)
+-  const logEntry = `
+-========================================
+-[EMAIL SEND FALLBACK] - ${timestamp}
+-To: ${safeTo}
+-Subject: ${safeSubject}
+-Message body omitted for security.
+-========================================
+-\n`
+-
++  // Email delivery diagnostics must never include personally identifying data.
++  const logEntry = '\n[EMAIL DELIVERY NOT CONFIRMED] - ' + timestamp +
++    '\nRecipient: [REDACTED]\nSubject: [REDACTED]\nBody: [NOT STORED]\n'
+@@ -38 +30 @@
+-  console.log(`✉️ Email fallback logged to logs/email_fallbacks.log [Subject: "${safeSubject}" to "${safeTo}"]`)
++  console.warn('[EMAIL DELIVERY NOT CONFIRMED] Private recipient and subject withheld')
+@@ -82 +74 @@
+-    console.error('❌ SMTP send failed. Attempt logged locally; delivery not confirmed. Error:', err.message)
++    console.error('[SMTP SEND FAILED] Delivery not confirmed; provider diagnostics withheld')
+@@ -84 +76 @@
+-    return { success: false, delivered: false, method: 'fallback_logger_after_error', error: err.message }
++    return { success: false, delivered: false, method: 'fallback_logger_after_error', error: 'SMTP_SEND_FAILED' }
