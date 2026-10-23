@@ -54,6 +54,16 @@ async function provisionPortalUser({
   db = null,
 }) {
   const normalizedRole = clean(role, 40).toLowerCase()
+  // This reusable low-level service has no signed authorization context;
+  // never permit privileged accounts through employee/student provisioning.
+  const portalRoles = new Set(['teacher','accountant','student','parent'])
+  if(!portalRoles.has(normalizedRole)){
+    const error = new Error('Privileged roles cannot be created by the portal provisioning service.')
+    error.code='PORTAL_ROLE_NOT_ELIGIBLE_FOR_SELF_SERVICE'
+    error.status=403
+    throw error
+  }
+
   const normalizedEmail = clean(email).toLowerCase()
   const normalizedUsername = clean(username, 120)
   if (!schoolId || !name || !normalizedRole || (!normalizedEmail && !normalizedUsername)) {
@@ -88,6 +98,12 @@ async function provisionPortalUser({
   })
 
   if (existing) {
+    if(String(existing.role||'').toLowerCase() !== normalizedRole){
+      const error = new Error('A portal account may not change another stored role.')
+      error.code='PORTAL_EXISTING_ROLE_MISMATCH'
+      error.status=409
+      throw error
+    }
     const supportsUsername = await hasColumn('users', 'username')
     const supportsPhone = await hasColumn('users', 'phone')
     const updates = ['name = $1', 'designation = $2', 'is_active = $3']

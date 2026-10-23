@@ -403,6 +403,11 @@ router.post('/:id/portal-account', protect, canManageStaff, async (req, res) => 
     if (!employee.rowCount) return res.status(404).json({ success: false, message: 'Employee not found.' })
     const row = employee.rows[0]
     const role = String(req.body?.role || row.portal_role || 'teacher').trim().toLowerCase()
+    if(!['teacher','accountant'].includes(role)){
+      return res.status(403).json({success:false,code:'STAFF_ROLE_ESCALATION_DENIED',
+       message:'Only teacher or accountant portals may be provisioned here.'})
+    }
+
     const username = String(req.body?.username || row.emp_id || `EMP-${row.id}`).trim()
     const email = String(row.email || `${username.toLowerCase().replace(/[^a-z0-9]/g, '')}@staff.assps.edu.pk`).trim().toLowerCase()
     const permissions = Array.isArray(req.body?.permissions)
