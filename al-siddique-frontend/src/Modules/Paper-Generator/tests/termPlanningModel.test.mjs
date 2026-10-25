@@ -154,3 +154,35 @@ test('No feasible two-per-subject timetable is explicitly held, not fabricated',
  const assessments=termAssessmentRows(rows,[],{start,end})
  assert.ok(termAssessmentIssues(rows,assessments,{start,end}).includes('UNSCHEDULED_ASSESSMENT'))
 })
+
+test('replayed source-id overrides cannot move or relabel original academic assessment dates',()=>{
+ const sourceRow=[{id:'en',subject:'English',events:[{
+   date:'2026-10-17',originalDate:'2026-10-17',sourceId:'original-a',
+   origin:'ORIGINAL_SOURCE',name:'Verified source test'
+ }]}]
+ const lockedId='src:en|2026-10-17|original-a|ORIGINAL_SOURCE'
+ const changed={id:lockedId,subjectId:'en',subject:'English',date:'2026-10-19',
+   name:'Forged reassignment',origin:'MANUAL_PROPOSAL'}
+ const a=termAssessmentRows(sourceRow,[changed],{start:'2026-10-01',end:'2026-10-31'})
+ const verified=a.find(x=>x.id===lockedId)
+ assert.ok(verified)
+ assert.equal(verified.date,'2026-10-17')
+ assert.equal(verified.originalDate,'2026-10-17')
+ assert.equal(verified.origin,'ORIGINAL_SOURCE')
+ assert.equal(verified.name,'Verified source test')
+ assert.equal(a.filter(x=>x.date==='2026-10-19').length,0)
+ assert.deepEqual(termAssessmentIssues(sourceRow,a,{start:'2026-10-01',end:'2026-10-31'}),[])
+})
+test('source-engine proposals remain editable without claiming original approval',()=>{
+ const row=[{id:'en',subject:'English',events:[{
+   date:'2026-10-17',originalDate:'2026-10-17',sourceId:'proposed-a',
+   origin:'PROPOSED',name:'Proposed assessment'
+ }]}]
+ const id='src:en|2026-10-17|proposed-a|PROPOSED'
+ const dates=termAssessmentRows(row,[{id,subjectId:'en',subject:'English',
+   date:'2026-10-19',origin:'MANUAL_PROPOSAL'}],{start:'2026-10-01',end:'2026-10-31'})
+ const amended=dates.find(a=>a.id===id)
+ assert.equal(amended.date,'2026-10-19')
+ assert.equal(amended.origin,'MANUAL_PROPOSAL')
+ assert.notEqual(amended.origin,'ORIGINAL_SOURCE')
+})

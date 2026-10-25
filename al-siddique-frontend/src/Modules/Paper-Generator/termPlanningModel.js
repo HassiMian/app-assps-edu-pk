@@ -160,12 +160,19 @@ export function termAssessmentRows(rows,manual=[],calendar={}){
     .map(x=>({...x,id:String(x.id),subjectId:String(x.subjectId||
       subjects.find(r=>r.subject===x.subject)?.id||subjects[0]?.id||''),
       date:String(x.date||''),origin:x.origin||'MANUAL_PROPOSAL'}))
-  const overrides=new Map(changes.filter(x=>String(x.id).startsWith('src:')).map(x=>[x.id,x]))
+  // Historical saved/manual payloads are not authority to rewrite original
+  // academic assessment dates or relabel source evidence as a proposal.
+  // Retain the raw draft in storage; ignore conflicting aliases in rendering.
+  const lockedSourceIds=new Set(explicit.filter(x=>x.origin==='ORIGINAL_SOURCE')
+    .map(x=>x.id))
+  const effectiveChanges=changes.filter(x=>!lockedSourceIds.has(x.id))
+  const overrides=new Map(effectiveChanges.filter(x=>String(x.id).startsWith('src:'))
+    .map(x=>[x.id,x]))
   const source=explicit.map(x=>overrides.get(x.id)||x)
   // Approved/original dates and owner-edited proposed dates are immutable
   // reservations. Conflicts between two original dates remain visible HOLD.
   for(const x of source.filter(x=>x.origin==='ORIGINAL_SOURCE'))used.add(x.date)
-  for(const x of changes)if(dateValid(x.date))used.add(x.date)
+  for(const x of effectiveChanges)if(dateValid(x.date))used.add(x.date)
   const sourceSchedule=source.map(x=>{
     if(x.origin==='ORIGINAL_SOURCE'||overrides.has(x.id))return x
     // Other source-engine origins were never approved school-calendar dates.
@@ -182,7 +189,7 @@ export function termAssessmentRows(rows,manual=[],calendar={}){
     return {...x,date:updatedDate,sourceProposalOrigin:x.origin,
       origin:'SCHOOL_POLICY_PROPOSAL',academicApproval:false}
   })
-  const datedManual=changes.filter(x=>!String(x.id).startsWith('src:')&&
+  const datedManual=effectiveChanges.filter(x=>!String(x.id).startsWith('src:')&&
     !String(x.id).startsWith('suggested:'))
   const schedule=[...sourceSchedule,...datedManual]
   for(const row of subjects){
@@ -195,7 +202,7 @@ export function termAssessmentRows(rows,manual=[],calendar={}){
       // Stable candidate IDs allow edits to survive recalculation and Save/Reopen.
       for(let ordinal=1;ordinal<=Math.max(0,2-already);ordinal++){
         const id='suggested:'+row.id+':'+month+':'+ordinal
-        const override=changes.find(x=>x.id===id)
+        const override=effectiveChanges.find(x=>x.id===id)
         const taken=override&&dateValid(override.date)?override.date:null
         const half=ordinal===1?dates.slice(0,Math.ceil(dates.length/2)):
           dates.slice(Math.ceil(dates.length/2))
@@ -222,7 +229,7 @@ export function termAssessmentRows(rows,manual=[],calendar={}){
   }
   // An edited auto-proposal that has become extra due to source records remains
   // visible for review, never silently deleted or promoted to original evidence.
-  for(const x of changes.filter(x=>String(x.id).startsWith('suggested:'))){
+  for(const x of effectiveChanges.filter(x=>String(x.id).startsWith('suggested:'))){
     if(!schedule.some(a=>a.id===x.id))schedule.push({...x,subject:x.subject||
       subjects.find(r=>r.id===x.subjectId)?.subject||'',academicApproval:false})
   }
