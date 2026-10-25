@@ -51,15 +51,27 @@ export function buildTermOverview(candidates,{start,end,imageReview,edits={},ter
       return {
         id,subject:candidate.source_subject_label,
         detail:override.detail===undefined?combined:String(override.detail),
-        pageFrom:override.pageFrom===undefined?pageFrom:String(override.pageFrom),
-        pageTo:override.pageTo===undefined?pageTo:String(override.pageTo),
+        // A/B originals are as immutable as single-part textbook page bounds.
+        // Other terms are unsourced, so their manual page proposals stay editable.
+        pageFrom:term==='Second Term'&&pageFrom?pageFrom:
+          (override.pageFrom===undefined?pageFrom:String(override.pageFrom)),
+        pageTo:term==='Second Term'&&pageTo?pageTo:
+          (override.pageTo===undefined?pageTo:String(override.pageTo)),
+        sourcePageFrom:term==='Second Term'?pageFrom:'',
+        sourcePageTo:term==='Second Term'?pageTo:'',
         sourceStatus:term==='Second Term'?'A/B SOURCE — REVIEW REQUIRED':
           'UNSOURCED TERM — TEACHER PROPOSAL',
         originalSourceIds:term==='Second Term'?(candidate.source_submissions||[]):[],
         sourceParts:parts.map(p=>({part:p.part,candidateKey:p.source.candidate_key,
           sourceIds:term==='Second Term'?(p.source.source_submissions||[]):[]})),
         needsReview:true,
-        warnings:parts.flatMap(p=>(p.row.warnings||[]).map(w=>'['+p.part+'] '+w)),
+        warnings:[...parts.flatMap(p=>(p.row.warnings||[]).map(w=>'['+p.part+'] '+w)),
+          ...(term==='Second Term'&&pageFrom&&override.pageFrom!==undefined&&
+            String(override.pageFrom)!==pageFrom?
+            ['An older A/B manual page start differs from the original; original restored in preview.']:[]),
+          ...(term==='Second Term'&&pageTo&&override.pageTo!==undefined&&
+            String(override.pageTo)!==pageTo?
+            ['An older A/B manual page end differs from the original; original restored in preview.']:[])],
         events:parts.flatMap(p=>(p.row.events||[]).map(e=>({
           ...e,subject:candidate.source_subject_label,
           name:'['+p.part+'] '+e.name,sourcePart:p.part
@@ -168,7 +180,14 @@ export function termAssessmentRows(rows,manual=[],calendar={}){
   const effectiveChanges=changes.filter(x=>!lockedSourceIds.has(x.id))
   const overrides=new Map(effectiveChanges.filter(x=>String(x.id).startsWith('src:'))
     .map(x=>[x.id,x]))
-  const source=explicit.map(x=>overrides.get(x.id)||x)
+  const source=explicit.map(x=>{
+    const edited=overrides.get(x.id)
+    if(!edited)return x
+    // Editable school proposal fields may not become evidence fields. Retain
+    // sourced identity, original date and archive reference from the original.
+    return {...x,date:edited.date,name:edited.name===undefined?x.name:edited.name,
+      origin:'MANUAL_PROPOSAL',academicApproval:false}
+  })
   // Approved/original dates and owner-edited proposed dates are immutable
   // reservations. Conflicts between two original dates remain visible HOLD.
   for(const x of source.filter(x=>x.origin==='ORIGINAL_SOURCE'))used.add(x.date)
@@ -190,7 +209,9 @@ export function termAssessmentRows(rows,manual=[],calendar={}){
       origin:'SCHOOL_POLICY_PROPOSAL',academicApproval:false}
   })
   const datedManual=effectiveChanges.filter(x=>!String(x.id).startsWith('src:')&&
-    !String(x.id).startsWith('suggested:'))
+    !String(x.id).startsWith('suggested:')).map(x=>({...x,
+      origin:'MANUAL_PROPOSAL',academicApproval:false,
+      sourceId:'',originalDate:''}))
   const schedule=[...sourceSchedule,...datedManual]
   for(const row of subjects){
     if(!termDates)continue
@@ -219,7 +240,8 @@ export function termAssessmentRows(rows,manual=[],calendar={}){
         const proposed=taken||preferred[0]||''
         if(proposed)used.add(proposed)
         schedule.push({id,subjectId:row.id,subject:row.subject,
-          date:proposed,name:'Assessment',origin:override?.origin||'SCHOOL_POLICY_PROPOSAL',
+          date:proposed,name:'Assessment',
+          origin:override?'MANUAL_PROPOSAL':'SCHOOL_POLICY_PROPOSAL',
           originalDate:'',sourceId:'',academicApproval:false})
       }
       const next=utcDate(month+'-01')
@@ -231,7 +253,8 @@ export function termAssessmentRows(rows,manual=[],calendar={}){
   // visible for review, never silently deleted or promoted to original evidence.
   for(const x of effectiveChanges.filter(x=>String(x.id).startsWith('suggested:'))){
     if(!schedule.some(a=>a.id===x.id))schedule.push({...x,subject:x.subject||
-      subjects.find(r=>r.id===x.subjectId)?.subject||'',academicApproval:false})
+      subjects.find(r=>r.id===x.subjectId)?.subject||'',
+      origin:'MANUAL_PROPOSAL',academicApproval:false,sourceId:'',originalDate:''})
   }
   const ordered=schedule.sort((a,b)=>(a.date||'9999').localeCompare(b.date||'9999')||
     subjects.findIndex(r=>r.id===a.subjectId)-subjects.findIndex(r=>r.id===b.subjectId)||
