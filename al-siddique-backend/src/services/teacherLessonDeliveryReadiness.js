@@ -4,6 +4,16 @@
 // never accept approval, identity or assignments from a browser request.
 const positiveId=v=>Number.isSafeInteger(Number(v))&&Number(v)>0
 const clean=v=>String(v||'').trim().toLocaleLowerCase('en')
+// Compare safe, unambiguous class-number aliases only; keep Pre-Nine distinct.
+// This is a validation normalizer, never an assignment or authorization grant.
+const canonicalClass=v=>{
+  const key=clean(v).replace(/^(?:class|grade)\s*/,'').replace(/[^a-z0-9]/g,'')
+  const levels={one:'1',first:'1',two:'2',second:'2',three:'3',third:'3',
+    four:'4',fourth:'4',five:'5',fifth:'5',six:'6',sixth:'6',
+    seven:'7',seventh:'7',eight:'8',eighth:'8',
+    nine:'9',ninth:'9',ten:'10',tenth:'10'}
+  return levels[key]||key
+}
 function teacherLessonDeliveryReadiness({schoolId,actor,employee,assignment,plan,academicReview}={}) {
   const failures=[]
   if(!positiveId(schoolId))failures.push('SIGNED_SCHOOL_MISSING')
@@ -22,7 +32,7 @@ function teacherLessonDeliveryReadiness({schoolId,actor,employee,assignment,plan
   const section=plan?.payload?.section
   if(!clean(section)||clean(assignment?.section)!==clean(section))
     failures.push('SECTION_BINDING_UNVERIFIED')
-  if(!clean(plan?.class_level)||clean(assignment?.class_name)!==clean(plan?.class_level))
+  if(!canonicalClass(plan?.class_level)||canonicalClass(assignment?.class_name)!==canonicalClass(plan?.class_level))
     failures.push('CLASS_BINDING_UNVERIFIED')
   if(!clean(plan?.subject)||clean(assignment?.subject)!==clean(plan?.subject))
     failures.push('SUBJECT_BINDING_UNVERIFIED')

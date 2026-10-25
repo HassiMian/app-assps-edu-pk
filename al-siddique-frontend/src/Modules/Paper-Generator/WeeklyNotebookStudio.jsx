@@ -11,7 +11,7 @@ import {CLASS_INCHARGES} from './lessonWeeklyEngine'
 import {termWeeks,notebookModel,planWeekRows} from './weeklyNotebookModel'
 import {canonicalLessonCandidates,isLegacySeparateABPlan} from './plannerSourceGrouping.js'
 import TermPlannerEditor from './TermPlannerEditor'
-import {termKey,buildTermOverview,termAssessmentRows,validateTermContent} from './termPlanningModel'
+import {termKey,buildTermOverview,termAssessmentRows,termAssessmentIssues,validateTermContent} from './termPlanningModel'
 import {listTermServerPlans,saveTermServerPlan} from './termServerPersistence'
 import {dailyIdentity,listDailyServerPlans,saveDailyServerPlan} from './dailyServerPersistence'
 import {loadPrincipalSourceLibrary,listWeeklyServerPlans,saveWeeklyServerPlan,
@@ -50,7 +50,7 @@ const chunk=(arr,n)=>Array.from({length:Math.ceil(arr.length/n)},(_,i)=>arr.slic
 const PAGE_OPTIONS=[1,2,3,4,6,8]
 const defaultDesign={cardsPerPage:3,fontSize:10,headerSize:13,schoolNameSize:17,subjectNameSize:14,subjectNameBold:true,
  subjectWidth:25,assessmentWidth:55,rowHeight:22,fontFamily:'Times New Roman',
- studentNameSize:13,tableLineHeight:1.45,assessmentFontSize:11,pagePaddingMm:6,termTemplate:'ivory',
+ studentNameSize:13,tableLineHeight:1.45,assessmentFontSize:11,pagePaddingMm:6,termTemplate:'ivory',termCardsPerPage:2,
  urduFontFamily:'Jameel Noori Nastaleeq',palette:'navy',zoom:72}
 const dateLabel=s=>{if(!s)return '';const d=new Date(s+'T12:00:00Z');return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric',timeZone:'UTC'})}
 const originalPageWarning=(rows,count)=>rows.some(x=>x.task.length>105)&&count>3
@@ -482,7 +482,7 @@ export default function WeeklyNotebookStudio(){
   if(activeRoster.length&&!selectedStudents.length){setError('Select at least one student before printing.');return}
   const copy=document.getElementById('wn-print-pages')
   if(!copy)return
-  const overflow=[...copy.querySelectorAll('.wn-card')].some(card=>card.scrollHeight>card.clientHeight+3)
+  const overflow=[...copy.querySelectorAll('.wn-card')].some(card=>card.scrollHeight>card.clientHeight-15)
   if(overflow){
     setError('Some student cards are too long for this A4 layout. Reduce cards per page, reduce text size or shorten statements before printing.')
     return
@@ -521,6 +521,14 @@ export default function WeeklyNotebookStudio(){
  function changeTermAssessment(id,date){
    const current=termAssessments.find(a=>a.id===id)
    if(!current)return
+   if(date&&termAssessments.some(a=>a.id!==id&&a.date===date)){
+     setTermStatus('Date already assigned to another assessment in this class. Choose a unique teaching date.')
+     return
+   }
+   if(date&&new Date(date+'T00:00:00Z').getUTCDay()===0){
+     setTermStatus('Sunday is not a teaching day. Choose another assessment date.')
+     return
+   }
    if(current.origin==='ORIGINAL_SOURCE'){
      setTermStatus('Verified source assessment dates are locked. Add a separate proposal if needed.')
      return
@@ -535,10 +543,13 @@ export default function WeeklyNotebookStudio(){
  function removeTermAssessment(id){
    updateTermDraft(d=>({assessments:(d.assessments||[]).filter(a=>a.id!==id)}))
  }
- function addTermAssessment(){
+ function addTermAssessment(subjectId){
+   const row=termRows.find(r=>r.id===subjectId)||termRows[0]
+   if(!row)return
    updateTermDraft(d=>({assessments:[...(d.assessments||[]),{
      id:'manual-'+Date.now()+'-'+Math.random().toString(36).slice(2,8),
-     date:'',name:'Assessment',subject:'',origin:'MANUAL_PROPOSAL'
+     subjectId:row.id,subject:row.subject,
+     date:'',name:'Assessment',origin:'MANUAL_PROPOSAL'
    }]}))
  }
  async function saveTerm(){
@@ -596,6 +607,9 @@ export default function WeeklyNotebookStudio(){
    setError('')
  }
  function printTerm(){
+   const issues=termAssessmentIssues(termRows,termAssessments,{start,end})
+   if(issues.length){setError('Term assessment dates are not print-safe: '+issues.join(', '));return}
+   if(!branding?.logoUrl){setError('School logo is missing from current authorized Settings. Term print on hold.');return}
    if(activeRoster.length&&!selectedStudents.length){
      setError('Select at least one student for personalized term printing.');return
    }
@@ -603,6 +617,13 @@ export default function WeeklyNotebookStudio(){
    catch(ex){setError(ex.message);return}
    const copy=document.getElementById('wn-term-print')
    if(!copy){setError('Term print document is not mounted.');return}
+   const images=[...copy.querySelectorAll('.term-letterhead img')]
+   if(images.some(img=>!img.complete||img.naturalWidth===0)){
+     setError('Official school logo has not loaded correctly. Check Settings before printing.');return
+   }
+   const oversized=[...copy.querySelectorAll('.term-print-document')].some(card=>
+     card.scrollHeight>card.clientHeight+3)
+   if(oversized){setError('Term card content does not fit this A4 layout. Choose fewer students per page or reduce text size.');return}
    const popup=window.open('','_blank','width=1150,height=900')
    if(!popup){setError('Allow popups to print the term plan.');return}
    const styleLinks=[...document.querySelectorAll('link[rel="stylesheet"]')]
@@ -611,7 +632,7 @@ export default function WeeklyNotebookStudio(){
    popup.document.write('<!doctype html><html><head><meta charset="utf-8"><title>ASSPS Term Syllabus</title>'+
      styleLinks+'<style>@page{size:A4;margin:6mm}body{background:white;margin:0}'+
      '.term-print-document{box-shadow:none;width:auto;min-height:0;padding:0;transform:none!important;filter:none!important}'+
-     '.term-print-document:not(:last-child){break-after:page;page-break-after:always}'+
+     '.term-print-sheet:not(:last-child){break-after:page;page-break-after:always}'+
      '.term-print-document thead{display:table-header-group}'+
      '.term-print-document tr{break-inside:avoid;page-break-inside:avoid}'+
      '</style></head><body>'+copy.outerHTML+'</body></html>')

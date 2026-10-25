@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import {
-  TERM_MARKER,termKey,assertTermRange,buildTermOverview,termAssessmentRows,
+  TERM_MARKER,termKey,assertTermRange,buildTermOverview,termAssessmentRows,termAssessmentIssues,
   validateTermContent,buildTermServerPayload,eligibleTermPlans
 } from '../termPlanningModel.js'
 import {normalizeLessonPlanDocument} from '../lessonPlanDomain.js'
@@ -36,7 +36,7 @@ test('source and manual assessments remain separate numbered rows after subjects
  assert.equal(numbered[0].origin,'ORIGINAL_SOURCE')
  assert.equal(numbered[1].number,2)
  assert.equal(numbered[1].origin,'MANUAL_PROPOSAL')
- assert.equal(termAssessmentRows([],[]).filter(x=>!x.date).length,2)
+ assert.equal(termAssessmentRows([],[]).length,0,'No subjects means no invented assessments')
 })
 test('term documents serialize all subject text, assessments, typography and source SHA',()=>{
  const fullText='Verified syllabus statement. '.repeat(67)
@@ -119,4 +119,38 @@ test('First or Third Term never automatically inherits Second Term textbook/sour
   assert.equal(saved.plannerDocument.provenance.sourceApplicability,'UNSOURCED_MANUAL_DRAFT')
   assert.equal(saved.plannerDocument.provenance.academicPublication,'BLOCKED')
  }
+})
+
+test('Starter term assessment schedule assigns two unique working dates per subject and month',()=>{
+ const classes=['English','Urdu','Mathematics','General Knowledge'].map((subject,i)=>({
+   id:'starter-'+i,subject,events:[]}))
+ const start='2026-10-15',end='2026-12-31'
+ const dates=termAssessmentRows(classes,[],{start,end})
+ assert.equal(dates.length,4*2*3)
+ assert.equal(new Set(dates.map(a=>a.date)).size,dates.length)
+ assert.deepEqual(termAssessmentIssues(classes,dates,{start,end}),[])
+ for(const row of classes)for(const month of ['2026-10','2026-11','2026-12']){
+   assert.equal(dates.filter(a=>a.subjectId===row.id&&a.date.startsWith(month)).length,2)
+ }
+ assert.ok(dates.every(a=>new Date(a.date+'T00:00:00Z').getUTCDay()!==0))
+ assert.ok(dates.every(a=>a.academicApproval===false&&a.origin==='SCHOOL_POLICY_PROPOSAL'))
+ const firstEnglish=dates.filter(a=>a.subjectId==='starter-0'&&a.date.startsWith('2026-10'))
+ assert.deepEqual(firstEnglish.map(a=>a.date),['2026-10-17','2026-10-24'])
+})
+test('Source assessment dates never silently merge or move across subjects',()=>{
+ const start='2026-10-15',end='2026-10-31'
+ const rows=[
+   {id:'en',subject:'English',events:[{date:'2026-10-17',origin:'ORIGINAL_SOURCE',sourceId:'e-17'}]},
+   {id:'ur',subject:'Urdu',events:[{date:'2026-10-17',origin:'ORIGINAL_SOURCE',sourceId:'u-17'}]}
+ ]
+ const a=termAssessmentRows(rows,[],{start,end})
+ assert.equal(a.filter(x=>x.date==='2026-10-17').length,2)
+ assert.ok(termAssessmentIssues(rows,a,{start,end}).includes('ASSESSMENT_DATE_CONFLICT'))
+ assert.equal(a.filter(x=>x.origin==='ORIGINAL_SOURCE').length,2)
+})
+test('No feasible two-per-subject timetable is explicitly held, not fabricated',()=>{
+ const rows=Array.from({length:12},(_,i)=>({id:'subject-'+i,subject:'Subject '+i,events:[]}))
+ const start='2026-10-28',end='2026-10-31'
+ const assessments=termAssessmentRows(rows,[],{start,end})
+ assert.ok(termAssessmentIssues(rows,assessments,{start,end}).includes('UNSCHEDULED_ASSESSMENT'))
 })

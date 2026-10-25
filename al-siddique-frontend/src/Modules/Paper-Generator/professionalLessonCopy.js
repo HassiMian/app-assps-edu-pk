@@ -36,34 +36,42 @@ function namedWriting(notes,language) {
  if(/meri\s*kitab|mera\s*kitab|my\s*book|میری\s*کتاب/.test(joined))bits.push('مضمون: میری کتاب۔')
  return bits
 }
-export function composeTeachingStatement({subject,notes=[],pages=[]}={}) {
+export function composeTeachingStatement({subject,notes=[],pages=[],scope='week'}={}) {
  const lang=lessonLanguage(subject)
  const refs=immutableAcademicRefs(subject,notes,pages)
  const text=refs.originalTeacherNotes.join(' ').toLowerCase()
  const named=namedWriting(refs.originalTeacherNotes,lang)
  const isEnglish=lang==='en'
+ const mathematics=/math|mathematics|ریاضی/i.test(String(subject||''))
  const questions=/question|answer|q\.?\s*[/&]\s*a|سوال|جواب|مشق کے سوال/.test(text)
  const writing=/essay|application|write|writing|copy|class.?work|home.?work|مضمون|درخواست|لکھ|تحریر|کاپی|کام/.test(text)
  const exercises=/exercise|complete|choose|fill|مشق|مکمل|حل کریں/.test(text)
  const reading=/read|reading|learn|پڑھ|یاد/.test(text)
  let instruction
  if (isEnglish) {
-   if(questions) instruction='Read the lesson and complete the questions and answers.'
-   else if(writing && !exercises && !reading) instruction='Practise the assigned writing work.'
-   else if(exercises || writing) instruction='Read the lesson and complete the classwork and exercises.'
-   else if(reading) instruction='Read the lesson and learn the assigned work.'
-   else instruction='Read the assigned lesson and complete the relevant work.'
+   if(mathematics) instruction=scope==='term'?
+     'Practise the covered concepts and complete the assigned exercises.':
+     'Practise the method and complete the assigned work neatly.'
+   else if(questions) instruction='Read carefully and complete the questions and answers.'
+   else if(writing && !exercises && !reading) instruction='Practise the assigned writing neatly.'
+   else if(exercises || writing) instruction=scope==='term'?
+     'Read the lessons and complete the assigned exercises.':
+     'Read carefully and complete the assigned exercises.'
+   else if(reading) instruction='Read the assigned lessons and practise fluently.'
+   else instruction='Review the lessons and complete the assigned work.'
  } else {
-   if(questions) instruction='سبق پڑھیں، سوالات کے جواب لکھیں اور مشق مکمل کریں۔'
-   else if(writing && !exercises && !reading) instruction='دی گئی تحریری مشق مکمل کریں۔'
-   else if(exercises || writing) instruction='سبق پڑھیں اور دی گئی مشق مکمل کریں۔'
-   else if(reading) instruction='متعلقہ سبق پڑھیں اور یاد کریں۔'
-   else instruction='متعلقہ سبق پڑھیں اور مشق مکمل کریں۔'
+   if(questions) instruction='اسباق پڑھیں اور دیے گئے سوالات کے جواب لکھیں۔'
+   else if(writing && !exercises && !reading) instruction='دی گئی تحریری مشق صاف اور درست لکھیں۔'
+   else if(exercises || writing) instruction='اسباق پڑھیں اور متعلقہ مشقیں مکمل کریں۔'
+   else if(reading) instruction='متعلقہ اسباق روانی سے پڑھیں اور یاد کریں۔'
+   else instruction='متعلقہ اسباق پڑھیں اور دی گئی مشق مکمل کریں۔'
  }
  const units=refs.units
  const title=units.length ? (isEnglish ? (units.length===1?'Unit #':'Units #') : (units.length===1?'یونٹ نمبر ':'یونٹ نمبر '))+units.join(', ') : ''
  const pageText=refs.pageFrom && refs.pageTo ?
-  (isEnglish ? 'Pages '+refs.pageFrom+'–'+refs.pageTo : 'صفحہ نمبر '+refs.pageFrom+' تا '+refs.pageTo) : ''
+  (isEnglish ? (refs.pageFrom===refs.pageTo?'Page ':'Pages ')+refs.pageFrom+
+    (refs.pageFrom===refs.pageTo?'':'–'+refs.pageTo) :
+    'صفحہ نمبر '+refs.pageFrom+(refs.pageFrom===refs.pageTo?'':' تا '+refs.pageTo)) : ''
  const content=named.length ?
    [[title,pageText].filter(Boolean).join(' — '),...named,instruction].filter(Boolean).join('\n') :
    [title,pageText,instruction].filter(Boolean).join(' — ')

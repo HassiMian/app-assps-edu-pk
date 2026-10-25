@@ -83,3 +83,20 @@ test('no actor or school fails closed',()=>{
  assert.ok(f.includes('SIGNED_SCHOOL_MISSING'))
  assert.ok(f.includes('TEACHER_ACTOR_UNVERIFIED'))
 })
+
+
+test('reviewed Grade Five teacher assignment accepts numeric Class 5 lesson alias only',()=>{
+ for(const label of ['5','Class 5','Grade Five']){
+  const e=example();e.plan.class_level=label
+  assert.equal(check(e).evidenceComplete,true,label)
+  assert.equal(check(e).permissionGranted,false)
+ }
+ const e=example();e.plan.class_level='9'
+ assert.ok(check(e).failures.includes('CLASS_BINDING_UNVERIFIED'))
+})
+test('Pre-Nine cannot alias Grade Nine or bypass review',()=>{
+ const e=example();e.assignment.class_name='Pre-Nine';e.plan.class_level='9'
+ assert.ok(check(e).failures.includes('CLASS_BINDING_UNVERIFIED'))
+ const unapproved=example();unapproved.plan.class_level='5';unapproved.academicReview.review_state='BLOCKED'
+ assert.ok(check(unapproved).failures.includes('ACADEMIC_SOURCE_APPROVAL_MISSING'))
+})

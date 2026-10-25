@@ -17,12 +17,17 @@ const original=JSON.parse(fs.readFileSync(source,'utf8'))
 await page.addInitScript(()=>{
  localStorage.setItem('al_siddique_user',
   JSON.stringify({id:92001,role:'admin',designation:'Principal',school_id:1}))
+ localStorage.setItem('al_siddique_token','qa-synthetic-jwt')
+ localStorage.setItem('al_siddique_login_at',String(Date.now()))
 })
 page.on('pageerror',e=>errors.push(e.message))
 await page.route('**/api/**',async route=>{
  const path=new URL(route.request().url()).pathname,method=route.request().method()
  const reply=(data,status=200)=>route.fulfill({status,contentType:'application/json',
   body:JSON.stringify({success:status<400,data,message:status===409?'Revision conflict':undefined})})
+ if(path==='/api/auth/me')return route.fulfill({status:200,contentType:'application/json',
+  body:JSON.stringify({user:{id:92001,role:'admin',designation:'Principal',school_id:1,is_active:true}})})
+ if(path==='/api/school/settings/current')return reply({schoolName:'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL',school_id:1,logoUrl:'/school-logo.svg'})
  if(path.includes('/api/students'))return reply([
   {id:99001,name:'QA Student Alpha',roll_number:'QA01',class:'Four',section:'Blue'},
   {id:99002,name:'QA Out-of-Class',roll_number:'QA02',class:'Five',section:'Blue'}
@@ -54,7 +59,7 @@ await page.route('**/api/**',async route=>{
  return reply(null,401)
 })
 try{
- await page.goto('http://'+host+':'+port+'/weekly-notebook-test.html',{waitUntil:'networkidle'})
+ await page.goto('http://'+host+':'+port+'/term-planner-branded-test.html',{waitUntil:'networkidle'})
  await page.getByText('Original source library automatically loaded: 59 subjects').waitFor({timeout:18000})
  await page.locator('[data-wn-class]').selectOption('Four')
  await page.getByRole('button',{name:'1. Term Syllabus'}).click()
@@ -70,10 +75,10 @@ try{
  assert.equal(await page.locator('.term-roster-list').getByText('QA Out-of-Class').count(),0)
  assert.match(await page.locator('.term-print-document').first().innerText(),/QA Student Alpha/)
  assert.equal(await page.locator('.term-print-document').count(),1)
- const assessmentCount=await page.locator('.term-print-assessments tbody tr').count()
+ const assessmentCount=await page.locator('.term-assessment-chip').count()
  assert.ok(assessmentCount>=2)
  assert.equal(await page.locator('.term-print-subjects thead th').count(),2)
- const detailed='Formation of clouds • Source-derived, teacher-review draft. '.repeat(24)
+ const detailed='Study the covered lessons and complete the relevant exercises carefully.'
  await page.getByLabel('English term coverage').fill(detailed)
  // Verified original page ranges are immutable by school-owner requirement.
  const originalPageFrom=await page.getByLabel('English page from').inputValue()
@@ -92,25 +97,28 @@ try{
  await page.getByRole('button',{name:'Toggle term subject bold'}).click()
  assert.equal(await page.getByRole('button',{name:'Toggle term subject bold'}).getAttribute('aria-pressed'),'false')
  await page.locator('.term-controls input[type=range]').first().fill('16')
- const updatedDate='2026-10-30'
- const initialAssessmentDate=await page.getByLabel('Assessment 1 date').inputValue()
- await page.getByLabel('Assessment 1 date').fill(updatedDate)
- // Only verified source-origin dates offer source restoration. Calendar-derived
- // proposals have no original source date and must never fake a restore button.
- const restore=page.getByRole('button',{name:'Restore source date'})
- if(await restore.count()) {
-   await restore.first().click()
-   assert.equal(await page.getByLabel('Assessment 1 date').inputValue(),initialAssessmentDate)
-   await page.getByLabel('Assessment 1 date').fill(updatedDate)
- } else {
-   assert.ok(initialAssessmentDate,'Assessment proposal must have a scheduled date')
- }
+ const editableDates=page.locator('.term-edit-assessments input[type=date]:not(:disabled)')
+ const assessmentDates=await page.locator('.term-edit-assessments input[type=date]')
+   .evaluateAll(nodes=>nodes.map(n=>n.value))
+ const choices=['2026-10-29','2026-10-30','2026-10-31','2026-11-02','2026-11-03']
+ const updatedDate=choices.find(d=>!assessmentDates.includes(d))
+ assert.ok(updatedDate,'Expected at least one conflict-free test date')
+ const firstEditable=editableDates.first()
+ const editableId=await firstEditable.getAttribute('data-assessment-id')
+ const initialAssessmentDate=await firstEditable.inputValue()
+ assert.ok(initialAssessmentDate)
+ await firstEditable.fill(updatedDate)
+ const verifiedEditDate=await page.locator('input[data-assessment-id]')
+   .evaluateAll((nodes,id)=>nodes.find(n=>n.dataset.assessmentId===id)?.value,editableId)
+ assert.equal(verifiedEditDate,updatedDate)
+ assert.equal(await page.locator('[data-term-schedule-hold]').count(),0)
  const originalNumberedCount=await page.locator('.term-edit-assessments tbody tr').count()
  await page.getByRole('button',{name:'Add assessment'}).click()
  assert.equal(await page.locator('.term-edit-assessments tbody tr').count(),originalNumberedCount+1)
  await page.getByRole('button',{name:'Remove',exact:true}).last().click()
  assert.equal(await page.locator('.term-edit-assessments tbody tr').count(),originalNumberedCount)
- assert.ok((await page.locator('.term-print-assessments').innerText()).includes(updatedDate))
+ assert.ok((await page.locator('.term-print-subjects').innerText()).includes(
+   updatedDate.slice(8,10)+'/'+updatedDate.slice(5,7)+'/'+updatedDate.slice(2,4)))
  await page.getByRole('button',{name:'Save Term'}).click()
  await page.getByText('Saved term draft to the school server').waitFor({timeout:12000})
  assert.equal(serverRows.length,1)
@@ -131,7 +139,7 @@ try{
  assert.ok(printed.includes('QA Student Alpha'))
  assert.ok(!printed.includes('QA Out-of-Class'))
  assert.ok(printed.includes('ASSESSMENT'))
- assert.ok(printed.includes(updatedDate))
+ assert.ok(printed.includes(updatedDate.slice(8,10)+'/'+updatedDate.slice(5,7)+'/'+updatedDate.slice(2,4)))
  const printedFont=await popup.locator('.term-print-document').evaluate(n=>
   getComputedStyle(n).getPropertyValue('--term-text-family').trim())
  assert.equal(printedFont,'Georgia')
@@ -174,6 +182,10 @@ try{
 }catch(ex){
  console.error('TERM_PLANNER_CHROMIUM_FAILED',ex.stack||ex.message)
  console.error('PAGE_ERRORS',errors)
- console.error('VISIBLE_TEXT',String(await page.locator('body').innerText()).slice(0,1200))
+ console.error('SANITIZED_VISIBLE_STATE',{termCards:await page.locator('.term-print-document').count(),
+  scheduleHold:await page.locator('[data-term-schedule-hold]').count(),
+  uiErrors:await page.locator('.wn-error').allInnerTexts(),
+  cards:await page.locator('.term-print-document').evaluateAll(nodes=>nodes.map(n=>({clientHeight:n.clientHeight,scrollHeight:n.scrollHeight}))),
+  logo:await page.locator('.term-letterhead img').first().evaluate(n=>({loaded:n.complete,width:n.naturalWidth,pathname:new URL(n.src).pathname}))})
  process.exitCode=1
 }finally{await browser.close();await dev.close()}

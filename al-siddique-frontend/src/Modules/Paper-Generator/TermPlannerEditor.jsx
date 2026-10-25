@@ -1,11 +1,13 @@
 import {Save,Printer,Plus,RotateCcw,BookOpen} from 'lucide-react'
-import {termAssessmentRows} from './termPlanningModel.js'
+import {termAssessmentRows,termAssessmentIssues} from './termPlanningModel.js'
 import { changeSubjectTypography, normalizeSubjectTypography } from './plannerSubjectTypography.js'
 import './TermPlannerEditor.css'
 
 const fonts=['Times New Roman','Arial','Georgia','Inter']
 const urduFonts=['Jameel Noori Nastaleeq','Noto Nastaliq Urdu','Noto Naskh Arabic']
 const numberLabel=(n)=>'Assessment '+n
+const shortDate=value=>/^\d{4}-\d{2}-\d{2}$/.test(String(value||''))?
+  value.slice(8,10)+'/'+value.slice(5,7)+'/'+value.slice(2,4):value
 const studentId=s=>String(s?.id||s?.student_id||s?.gr_number||s?.roll_number||'')
 const studentName=s=>String(s?.name||s?.student_name||s?.full_name||[s?.first_name,s?.last_name].filter(Boolean).join(' ')||'Student')
 const studentRoll=s=>String(s?.roll_number||s?.roll_no||s?.gr_number||'')
@@ -16,6 +18,9 @@ export default function TermPlannerEditor({klass,section,term,start,end,setTerm,
   onChangeRow,assessments,onChangeAssessment,onAddAssessment,onRemoveAssessment,design,onChangeDesign,
   onResetDesign,onSave,onPrint,saving,savedPlans,onOpenSaved,status}){
   const printableAssessments=assessments.length?assessments:termAssessmentRows([],[])
+  const assessmentIssues=termAssessmentIssues(rows,printableAssessments,{start,end})
+  const groupedPages=Array.from({length:Math.ceil(studentPages.length/(Number(design.termCardsPerPage)||2))},
+    (_,i)=>studentPages.slice(i*(Number(design.termCardsPerPage)||2),(i+1)*(Number(design.termCardsPerPage)||2)))
   const headerStyle={
     '--term-text-size':design.fontSize+'px',
     '--term-head-size':design.headerSize+'px',
@@ -88,17 +93,23 @@ export default function TermPlannerEditor({klass,section,term,start,end,setTerm,
                 onChange={e=>onChangeRow(row.id,{pageTo:e.target.value})}/></label>
           </div>
           {row.warnings.length>0&&<small className="term-warning">Original-source review: {row.warnings.join(' · ')}</small>}
+          <button type="button" className="term-small-action" onClick={()=>onAddAssessment(row.id)}>
+            <Plus size={12}/> Add {row.subject} assessment
+          </button>
         </div>)}
-        <h4>Assessments — independent schedule</h4>
-        <p className="term-hint">These entries print below every subject. A changed source date becomes a proposal, not an official correction.</p>
+        <h4>Assessments — per subject (2/month)</h4>
+        <p className="term-hint">Dates are class-wide unique and appear under the corresponding subject. Proposed dates are not official until reviewed; original source dates are never overwritten.</p>
+        {!!assessmentIssues.length&&<p role="alert" className="term-warning" data-term-schedule-hold>
+          Print on hold: {assessmentIssues.join(', ')}. Correct the affected dates before printing.
+        </p>}
         <table className="term-edit-assessments">
           <thead><tr><th>Assessment</th><th>Date</th></tr></thead>
           <tbody>{printableAssessments.map(a=><tr key={a.id}>
             <th>{numberLabel(a.number)}
               {a.subject&&<small>{a.subject}</small>}
               {a.originalDate&&<small>Source: {a.originalDate}</small>}
-            </th><td><input type="date" aria-label={numberLabel(a.number)+' date'}
-              value={a.date||''} disabled={a.origin==='ORIGINAL_SOURCE'}
+            </th><td><input type="date" aria-label={a.subject+' '+numberLabel(a.number)+' date'}
+              data-assessment-id={a.id} value={a.date||''} disabled={a.origin==='ORIGINAL_SOURCE'}
               onChange={e=>onChangeAssessment(a.id,e.target.value)}/>
               {(a.id.startsWith('manual-')||a.id.startsWith('blank-'))&&
                 <button className="term-small-action" onClick={()=>onRemoveAssessment(a.id)}>Remove</button>}
@@ -118,6 +129,12 @@ export default function TermPlannerEditor({klass,section,term,start,end,setTerm,
           </select>
         </label>
         <div className="term-controls">
+          <label>Students per A4 term sheet
+            <select aria-label="Term students per page" value={design.termCardsPerPage||2}
+              onChange={e=>onChangeDesign('termCardsPerPage',Number(e.target.value))}>
+              {[2,3,4].map(n=><option value={n} key={n}>{n} students / page</option>)}
+            </select>
+          </label>
           <label>English font family
             <select aria-label="Term English font" value={design.fontFamily||'Times New Roman'}
               onChange={e=>onChangeDesign('fontFamily',e.target.value)}>
@@ -179,13 +196,16 @@ export default function TermPlannerEditor({klass,section,term,start,end,setTerm,
       </section>
       <section className="term-preview-wrap">
         <header className="term-preview-actions">
-          <div><strong>Live Term A4 Preview</strong><small>All subjects and independent assessment rows</small></div>
+          <div><strong>Live Term A4 Preview</strong><small>Assessments inside each subject · {design.termCardsPerPage||2} students / sheet</small></div>
           <div><button disabled={saving||!rows.length} onClick={onSave}><Save size={15}/>{saving?'Saving…':'Save Term'}</button>
-          <button className="primary" onClick={onPrint} disabled={!rows.length}><Printer size={15}/> Print / PDF</button></div>
+          <button className="primary" onClick={onPrint} disabled={!rows.length||!!assessmentIssues.length}><Printer size={15}/> Print / PDF</button></div>
         </header>
         <div className="term-preview-scroll">
           <div id="wn-term-print" className="term-print-pages">
-          {studentPages.map(student=>
+          {groupedPages.map((group,pageIndex)=>
+          <section key={pageIndex} className="term-print-sheet" data-term-print-sheet
+            style={{'--term-cards-per-sheet':design.termCardsPerPage||2}}>
+          {group.map(student=>
           <article key={student?studentId(student):'blank'} className={'term-print-document term-template-'+(design.termTemplate||'ivory')} style={headerStyle}>
             <header className="term-letterhead">
               <img src={logoSrc} alt="School logo"/>
@@ -215,21 +235,21 @@ export default function TermPlannerEditor({klass,section,term,start,end,setTerm,
                     'term-urdu-content':'term-english-content'}>
                     {row.detail||'Source coverage to be confirmed'}
                   </div>
-                  {row.pageFrom&&row.pageTo&&<small className="term-pages">
+                  {row.pageFrom&&row.pageTo&&
+                    !(/(?:Pages?|صفحہ نمبر)\s*\d+/iu.test(row.detail||''))&&
+                    <small className="term-pages">
                     Pages: <bdi>{row.pageFrom} – {row.pageTo}</bdi></small>}
+                  <div className="term-subject-assessments" aria-label={row.subject+' assessments'}>
+                    {printableAssessments.filter(a=>a.subjectId===row.id).map(a=>
+                      <span className="term-assessment-chip" key={a.id}>
+                        <b>{numberLabel(a.number)}</b> <bdi dir="ltr" title={a.date||''}>{shortDate(a.date)||'Not scheduled'}</bdi>
+                      </span>)}
+                  </div>
                 </td></tr>)}</tbody>
-            </table>
-            <table className="term-print-assessments">
-              <thead><tr><th>ASSESSMENT</th><th>DATE</th></tr></thead>
-              <tbody>{printableAssessments.map(a=><tr key={a.id}>
-                <th>{numberLabel(a.number)}</th>
-                <td><bdi>{a.date||'________________'}</bdi>
-                  {a.date&&a.origin!=='ORIGINAL_SOURCE'&&<small>Proposed · review required</small>}
-                </td>
-              </tr>)}</tbody>
             </table>
             <div className="term-document-foot">Private academic draft · Verify textbook pages, dates and subject coverage before school publication.</div>
           </article>)}
+          </section>)}
           </div>
           {studentPages.length===0&&<p className="term-hint" role="alert">Select at least one student before printing.</p>}
         </div>

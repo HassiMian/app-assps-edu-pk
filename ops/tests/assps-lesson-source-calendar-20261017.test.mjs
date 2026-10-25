@@ -22,7 +22,7 @@ test('Week One compact task does not duplicate raw source or invent assessments'
  assert.equal(a.rows[0].page.from,22)
  assert.equal(a.rows[0].page.to,23)
  assert.match(a.rows[0].task,/Pages 22–23/)
- assert.match(a.rows[0].task,/Read the lesson/)
+ assert.match(a.rows[0].task,/Read carefully/)
  assert.equal(a.rows[0].teacherSourceNotes[0],'Pg#22:23 Read and complete class work.')
 })
 test('Term full source page span and original-language statements match weekly provenance',()=>{
