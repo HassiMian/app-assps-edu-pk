@@ -163,9 +163,26 @@ export function termAssessmentRows(rows,manual=[],calendar={}){
   // Historical saved/manual payloads are not authority to rewrite original
   // academic assessment dates or relabel source evidence as a proposal.
   // Retain the raw draft in storage; ignore conflicting aliases in rendering.
-  const lockedSourceIds=new Set(explicit.filter(x=>x.origin==='ORIGINAL_SOURCE')
-    .map(x=>x.id))
-  const effectiveChanges=changes.filter(x=>!lockedSourceIds.has(x.id))
+  // Only the current source manifest can grant ORIGINAL_SOURCE provenance.
+  // Historical/manual drafts may adjust proposals, not forge a source identity,
+  // change a source ID, or promote a proposal into academic approval.
+  const sourceById=new Map(explicit.map(x=>[x.id,x]))
+  const allowedSubjects=new Map(subjects.map(row=>[String(row.id),row]))
+  const effectiveChanges=changes.filter(change=>{
+    if(!allowedSubjects.has(change.subjectId))return false
+    if(!change.id.startsWith('src:'))return true
+    const original=sourceById.get(change.id)
+    return !!original&&original.origin!=='ORIGINAL_SOURCE'&&
+      original.subjectId===change.subjectId
+  }).map(change=>{
+    if(change.id.startsWith('src:')){
+      const original=sourceById.get(change.id)
+      return {...original,date:change.date,name:change.name||original.name,
+        origin:'MANUAL_PROPOSAL',academicApproval:false}
+    }
+    return {...change,subject:allowedSubjects.get(change.subjectId).subject,
+      origin:'MANUAL_PROPOSAL',originalDate:'',sourceId:'',academicApproval:false}
+  })
   const overrides=new Map(effectiveChanges.filter(x=>String(x.id).startsWith('src:'))
     .map(x=>[x.id,x]))
   const source=explicit.map(x=>overrides.get(x.id)||x)
@@ -292,6 +309,32 @@ export function buildTermServerPayload({klass,section,term,start,end,rows,
   validateTermContent({klass,start,end,rows,assessments})
   if(!term||!/^([a-f0-9]{64})$/.test(String(sourceZipSha256||'')))
     throw Error('Verified original source and term name are required')
+  // Second boundary: even a direct save caller must not forge source dates,
+  // source labels, or approval from a replayed/manual planner payload.
+  const locked=new Map()
+  for(const row of rows)for(const event of row.events||[]){
+    if(event.origin!=='ORIGINAL_SOURCE'||!dateValid(event.date)||
+       event.date<start||event.date>end)continue
+    const id='src:'+ [row.id,event.date,event.sourceId||'',event.origin].join('|')
+    locked.set(id,{subjectId:row.id,subject:row.subject,date:event.date,
+      originalDate:event.originalDate||event.date,sourceId:event.sourceId||'',
+      name:event.name||'Assessment'})
+  }
+  for(const a of assessments||[]){
+    if(a.academicApproval===true)
+      throw Error('Academic approval cannot be granted by a term draft')
+    const verified=locked.get(a.id)
+    if(!verified){
+      if(a.origin==='ORIGINAL_SOURCE')
+        throw Error('Original assessment identity is not in the verified source')
+      continue
+    }
+    if(a.origin!=='ORIGINAL_SOURCE'||a.subjectId!==verified.subjectId||
+       a.subject!==verified.subject||a.date!==verified.date||
+       a.originalDate!==verified.originalDate||a.sourceId!==verified.sourceId||
+       a.name!==verified.name)
+      throw Error('Original assessment provenance cannot be rewritten')
+  }
   const identity=termKey(klass,section,term,start)
   const subjects=rows.map((r,index)=>({
     subject:r.subject,status:'draft',notes:[],

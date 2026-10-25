@@ -186,3 +186,75 @@ test('source-engine proposals remain editable without claiming original approval
  assert.equal(amended.origin,'MANUAL_PROPOSAL')
  assert.notEqual(amended.origin,'ORIGINAL_SOURCE')
 })
+
+test('manual replay cannot forge original academic provenance or source ID',()=>{
+ const rows=[{id:'en',subject:'English',events:[{
+   date:'2026-11-14',originalDate:'2026-11-14',
+   origin:'PROPOSED',sourceId:'real-source',name:'Unapproved source proposal'
+ }]}]
+ const id='src:en|2026-11-14|real-source|PROPOSED'
+ const a=termAssessmentRows(rows,[{id,subjectId:'en',subject:'Forged subject',
+   date:'2026-11-18',origin:'ORIGINAL_SOURCE',sourceId:'forged',
+   originalDate:'2026-11-18',academicApproval:true}],{
+   start:'2026-11-01',end:'2026-11-30'})
+ const amended=a.find(item=>item.id===id)
+ assert.equal(amended.date,'2026-11-18')
+ assert.equal(amended.subject,'English')
+ assert.equal(amended.origin,'MANUAL_PROPOSAL')
+ assert.equal(amended.sourceId,'real-source')
+ assert.equal(amended.originalDate,'2026-11-14')
+ assert.equal(amended.academicApproval,false)
+})
+
+test('standalone draft assessment cannot claim academic source or approval',()=>{
+ const rows=[{id:'en',subject:'English',events:[]}]
+ const a=termAssessmentRows(rows,[{id:'manual-one',subjectId:'en',
+   date:'2026-11-18',origin:'ORIGINAL_SOURCE',originalDate:'2026-10-01',
+   sourceId:'forged-source',academicApproval:true}],{
+   start:'2026-11-01',end:'2026-11-30'})
+ const manual=a.find(item=>item.id==='manual-one')
+ assert.equal(manual.origin,'MANUAL_PROPOSAL')
+ assert.equal(manual.academicApproval,false)
+ assert.equal(manual.originalDate,'')
+ assert.equal(manual.sourceId,'')
+})
+
+test('unknown replayed source alias cannot steal an assessment date',()=>{
+ const rows=[{id:'en',subject:'English',events:[]}]
+ const a=termAssessmentRows(rows,[{
+   id:'src:en|2026-10-17|foreign|ORIGINAL_SOURCE',
+   subjectId:'en',date:'2026-10-17',origin:'ORIGINAL_SOURCE'
+ }],{start:'2026-10-15',end:'2026-10-31'})
+ assert.equal(a.some(item=>item.id.includes('foreign')),false)
+ assert.equal(a.filter(item=>item.date==='2026-10-17').length,1)
+ assert.deepEqual(termAssessmentIssues(rows,a,{start:'2026-10-15',end:'2026-10-31'}),[])
+})
+
+test('server payload rejects a forged ORIGINAL_SOURCE identity even if called directly',()=>{
+ const row={id:'en',subject:'English',detail:'Practice',events:[]}
+ assert.throws(()=>buildTermServerPayload({klass:'Four',section:'Blue',
+   term:'Second Term',start:'2026-11-01',end:'2026-11-30',rows:[row],
+   assessments:[{id:'manual-forged',subjectId:'en',subject:'English',
+     name:'Assessment',date:'2026-11-18',origin:'ORIGINAL_SOURCE'}],
+   sourceZipSha256:sha}),/verified source/)
+ assert.throws(()=>buildTermServerPayload({klass:'Four',section:'Blue',
+   term:'Second Term',start:'2026-11-01',end:'2026-11-30',rows:[row],
+   assessments:[{id:'manual-forged',subjectId:'en',subject:'English',
+     name:'Assessment',date:'2026-11-18',origin:'MANUAL_PROPOSAL',
+     academicApproval:true}],sourceZipSha256:sha}),/Academic approval/)
+})
+
+test('server payload preserves genuine locked original and rejects date rewrite',()=>{
+ const sourceEvent={date:'2026-11-14',origin:'ORIGINAL_SOURCE',
+   sourceId:'publisher-evidence',name:'Original assessment'}
+ const row={id:'en',subject:'English',detail:'Practice',events:[sourceEvent]}
+ const args={klass:'Four',section:'Blue',term:'Second Term',
+   start:'2026-11-01',end:'2026-11-30',rows:[row],sourceZipSha256:sha}
+ const original=termAssessmentRows([row],[],{start:args.start,end:args.end})
+   .find(a=>a.origin==='ORIGINAL_SOURCE')
+ const saved=buildTermServerPayload({...args,assessments:[original]})
+ assert.equal(saved.assessments[0].date,'2026-11-14')
+ assert.equal(saved.assessments[0].sourceId,'publisher-evidence')
+ assert.throws(()=>buildTermServerPayload({...args,assessments:[
+   {...original,date:'2026-11-18'}]}),/provenance cannot be rewritten/)
+})
