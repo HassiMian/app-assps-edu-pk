@@ -59,8 +59,8 @@ export function tenantStorageKey(baseKey, user) {
  return scope === 'public' ? baseKey : `${baseKey}__${scope}`
 }
 
-export function getTenantStorageItem(baseKey) {
- const key = tenantStorageKey(baseKey)
+export function getTenantStorageItem(baseKey, user) {
+ const key = tenantStorageKey(baseKey, user)
  const session = getSessionStorage()
  const emergency = session?.getItem(key)
  if (emergency !== null && emergency !== undefined) return emergency
@@ -69,8 +69,8 @@ export function getTenantStorageItem(baseKey) {
  return storage.getItem(key)
 }
 
-export function setTenantStorageItem(baseKey, value) {
- const key = tenantStorageKey(baseKey)
+export function setTenantStorageItem(baseKey, value, user) {
+ const key = tenantStorageKey(baseKey, user)
  const storage = getStorage()
  if (!storage) {
   const session = getSessionStorage()

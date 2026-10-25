@@ -5,25 +5,32 @@ import { useEffect, useMemo, useState } from 'react'
 import { Edit, Trash2, X, Send, BookOpen, Printer, Check } from 'lucide-react';
 import Portal from '../../components/Portal'
 import { useAcademicStore } from '../../services/useAcademicStore'
-import { getTenantStorageItem, setTenantStorageItem } from '../../services/tenantStorage'
+import { getTenantStorageItem, setTenantStorageItem, tenantStorageKey } from '../../services/tenantStorage'
+import { useAuth } from '../../context/AuthContext'
+import { lessonPlanRecoveryKey } from './lessonPlanRecoveryScope'
 import { usePaperStore } from './usePaperStore'
 import { createLessonPlan, deleteLessonPlan as deleteLessonPlanServer, listLessonPlans, shareLessonPlan, updateLessonPlan } from './lessonPlanClient'
 
 //  Storage 
-const LP_KEY = 'al_siddique_lesson_plans'
-const loadPlans = () => {
+// Local recovery belongs to one VERIFIED authenticated actor inside one school.
+ // Legacy school-wide/unscoped draft bytes stay untouched for forensic recovery,
+ // but must never be silently adopted by the currently signed-in user.
+
+const loadPlans = user => {
+ const key = lessonPlanRecoveryKey(user)
+ if (!key) return []
  try {
-  const scoped = getTenantStorageItem(LP_KEY)
-  if (scoped) return JSON.parse(scoped) || []
-  const legacy = typeof window !== 'undefined' ? window.localStorage?.getItem(LP_KEY) : null
-  const parsed = legacy ? JSON.parse(legacy) : []
-  if (Array.isArray(parsed) && parsed.length) setTenantStorageItem(LP_KEY, JSON.stringify(parsed))
+  const raw = getTenantStorageItem(key, user)
+  const parsed = raw ? JSON.parse(raw) : []
   return Array.isArray(parsed) ? parsed : []
  } catch { return [] }
 }
-const storePlans = (plans) => {
- try { setTenantStorageItem(LP_KEY, JSON.stringify(plans)); return true } catch { return false }
+const storePlans = (plans, user) => {
+ const key = lessonPlanRecoveryKey(user)
+ if (!key) return false
+ try { return Boolean(setTenantStorageItem(key, JSON.stringify(plans), user)) } catch { return false }
 }
+
 const mergePlanSources = (serverPlans = [], recoveryPlans = []) => {
  const byId = new Map(serverPlans.map(plan => [String(plan.id), plan]))
  for (const plan of recoveryPlans) {
@@ -1097,7 +1104,16 @@ function PlanPreview({ plan, onBack, settings }) {
 
 //  Main LessonPlanTab 
 export default function LessonPlanTab({ settings }) {
- const [plans, setPlans] = useState(loadPlans)
+ const { user, loading } = useAuth()
+ const actorKey = lessonPlanRecoveryKey(user)
+ if (loading || !actorKey) {
+  return <div role="status" data-lesson-auth-required>Lesson Planning requires a verified school account.</div>
+ }
+ return <AuthenticatedLessonPlanTab key={tenantStorageKey(actorKey, user)} user={user} settings={settings} />
+}
+
+function AuthenticatedLessonPlanTab({ settings, user }) {
+ const [plans, setPlans] = useState(() => loadPlans(user))
  const [view, setView] = useState('list') // 'list' | 'editor' | 'preview'
  const [planView, setPlanView] = useState('list') // 'list' | 'weekly' | 'annual'
  const [editing, setEditing] = useState(null)
@@ -1108,18 +1124,18 @@ export default function LessonPlanTab({ settings }) {
 
  useEffect(() => {
   let cancelled = false
-  const recoveryPlans = loadPlans()
+  const recoveryPlans = loadPlans(user)
   listLessonPlans({ limit:500 }).then(serverPlans => {
    if (cancelled) return
    const merged = mergePlanSources(Array.isArray(serverPlans) ? serverPlans : [], recoveryPlans)
    setPlans(merged)
-   storePlans(merged)
+   storePlans(merged, user)
   }).catch(() => {
    if (cancelled || !recoveryPlans.length) return
    setToast({ message:'Lesson Plans server is temporarily unavailable. Local recovery copies are still available.', color:C.orange })
   })
   return () => { cancelled = true }
- }, [])
+ }, [user])
 
  async function persistPlanToServer(plan) {
   return Number(plan.serverRevision || plan.revision || 0) > 0
@@ -1138,13 +1154,13 @@ export default function LessonPlanTab({ settings }) {
   const optimistic = plans.find(item => item.id === plan.id)
    ? plans.map(item => item.id === plan.id ? provisional : item)
    : [provisional, ...plans]
-  storePlans(optimistic)
+  storePlans(optimistic, user)
   setPlans(optimistic)
   try {
    const saved = await persistPlanToServer(provisional)
    const authoritative = { ...saved, persistenceMode:'ONLINE' }
    const updated = optimistic.map(item => item.id === authoritative.id ? authoritative : item)
-   storePlans(updated)
+   storePlans(updated, user)
    setPlans(updated)
    setEditing(authoritative)
    setView('list')
@@ -1153,16 +1169,18 @@ export default function LessonPlanTab({ settings }) {
    const current = error?.response?.data?.data
    if (error?.response?.status === 409 && current?.id) {
     const reconciled = optimistic.map(item => item.id === current.id ? { ...current, persistenceMode:'ONLINE' } : item)
-    storePlans(reconciled)
+    storePlans(reconciled, user)
     setPlans(reconciled)
     setToast({ message:'This lesson plan changed on the server. The latest server copy was restored; reopen it before editing again.', color:C.red })
     return
    }
    const recovery = optimistic.map(item => item.id === plan.id ? { ...item, persistenceMode:'LOCAL_RECOVERY' } : item)
-   storePlans(recovery)
+   const recoveredLocally = storePlans(recovery, user)
    setPlans(recovery)
-   setView('list')
-   setToast({ message:'Server save is unavailable. A tenant-scoped local recovery copy was preserved.', color:C.orange })
+   if (recoveredLocally) setView('list')
+   setToast({ message: recoveredLocally
+     ? 'Server save is unavailable. Your account-scoped local recovery copy was preserved.'
+     : 'Server save failed and local recovery is unavailable. Keep the editor open and retry; nothing was published.', color:C.orange })
   }
   setTimeout(() => setToast(null), 4500)
  }
@@ -1182,7 +1200,7 @@ export default function LessonPlanTab({ settings }) {
    }
   }
   const updated = plans.filter(item => item.id !== id)
-  storePlans(updated)
+  storePlans(updated, user)
   setPlans(updated)
   setConfirmDel(null)
  }
@@ -1206,7 +1224,7 @@ export default function LessonPlanTab({ settings }) {
   const now = new Date().toISOString()
   const provisional = newPlans.map(plan => ({ ...plan, createdAt:plan.createdAt || now, updatedAt:now, persistenceMode:'PENDING_SERVER' }))
   let updated = [...provisional, ...plans]
-  storePlans(updated)
+  storePlans(updated, user)
   setPlans(updated)
   const results = await Promise.allSettled(provisional.map(plan => createLessonPlan(plan)))
   let failed = 0
@@ -1219,9 +1237,9 @@ export default function LessonPlanTab({ settings }) {
     updated = updated.map(item => item.id === original.id ? { ...item, persistenceMode:'LOCAL_RECOVERY' } : item)
    }
   })
-  storePlans(updated)
+  const recoveredLocally = storePlans(updated, user)
   setPlans(updated)
-  setToast({ message: failed ? `${newPlans.length-failed} plan(s) saved to server; ${failed} preserved as local recovery.` : `${newPlans.length} lesson plan${newPlans.length>1?'s':''} generated and saved to server.`, color:failed ? C.orange : C.green })
+  setToast({ message: failed ? `${newPlans.length-failed} plan(s) saved to server; ${failed} ${recoveredLocally ? 'preserved as account-scoped local recovery' : 'NOT backed up locally—retry before leaving'}.` : `${newPlans.length} lesson plan${newPlans.length>1?'s':''} generated and saved to server.`, color:failed ? C.orange : C.green })
   setTimeout(() => setToast(null), 4500)
  }
 
@@ -1234,10 +1252,11 @@ export default function LessonPlanTab({ settings }) {
    const shared = await shareLessonPlan(serverPlan)
    const authoritative = { ...shared.plan, persistenceMode:'ONLINE' }
    const updated = plans.map(item => item.id === plan.id ? authoritative : item)
-   storePlans(updated)
+   storePlans(updated, user)
    setPlans(updated)
-   const students = Number(shared.delivery?.students || 0)
-   setToast({ message:`"${plan.title || plan.subject}" sent to portal for ${students} student${students===1?'':'s'} and their parents.`, color:C.blue })
+   const students = shared.delivery.students
+   const notifications = shared.delivery.notifications
+   setToast({ message:`"${plan.title || plan.subject}" published: ${students} student record${students===1?'':'s'}, ${notifications} notification${notifications===1?'':'s'} queued.`, color:C.blue })
   } catch (error) {
    const conflict = error?.response?.status === 409
    setToast({ message: conflict ? 'Portal send blocked because this plan changed on the server. Reopen it first.' : 'Portal delivery failed. The plan was not marked as sent.', color:C.red })
