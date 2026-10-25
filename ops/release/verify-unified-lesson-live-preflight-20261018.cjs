@@ -41,7 +41,7 @@ function assess({candidateBackend,liveBackend,candidateFrontend,liveFrontend,ngi
  if(!livePublic)blockers.push('PUBLIC_BRANDING_NOT_YET_LIVE');
  // A stale /var/www/apex-os may NOT represent Nginx's currently configured
  // app.assps.edu.pk release. Fail closed if a caller supplies that old root.
- const configFile=nginxConfigFile || (fs.existsSync(DEFAULT_APP_NGINX)?DEFAULT_APP_NGINX:null);
+ const configFile=nginxConfigFile || null;
  let nginxConfiguredRoot=null;
  if(configFile){
   try{
@@ -74,7 +74,8 @@ if(require.main===module){
   console.error('USAGE: node verify-unified-lesson-live-preflight-20261018.cjs candidateBackend liveBackend candidateFrontendDist liveFrontendRoot');
   process.exitCode=64;
  }else{
-  const r=assess({candidateBackend,liveBackend,candidateFrontend,liveFrontend});
+  const nginxConfigFile=fs.existsSync(DEFAULT_APP_NGINX)?DEFAULT_APP_NGINX:null;
+  const r=assess({candidateBackend,liveBackend,candidateFrontend,liveFrontend,nginxConfigFile});
   console.log(JSON.stringify(r,null,2));
   if(!r.deployAuthorized)process.exitCode=2;
  }

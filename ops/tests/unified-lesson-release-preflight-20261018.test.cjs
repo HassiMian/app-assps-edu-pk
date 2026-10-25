@@ -19,6 +19,7 @@ function scenario(t){
 test('new branding endpoint does not magically become live by green source CI',t=>{
  const x=scenario(t),r=assess(x.map);
  assert.equal(r.deployAuthorized,false);
+ assert.equal(r.nginxConfiguredRoot,null,'isolated fixture must not depend on VPS Nginx configuration');
  assert.ok(r.blockers.includes('PUBLIC_BRANDING_NOT_YET_LIVE'));
  assert.equal(r.candidateBrandingRoute,true);
 });
