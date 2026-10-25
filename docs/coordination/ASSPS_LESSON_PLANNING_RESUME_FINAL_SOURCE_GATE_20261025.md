@@ -1,0 +1,24 @@
+# ASSPS Lesson Planning — unified 25 October 2026 source checkpoint
+
+## Mission boundary
+Resumed isolated lesson planning at `ff1c6ce1c55d7f8b3f18ceaecc3e645199aa9c45` (original assessment source immutability lock) after preceding compact Term/A4 candidate `fca2724f258e86fb43b241e9b68173dc3592613b`. This is **source-only engineering and read-only live verification**. Neither a production release nor an academic publication certificate.
+
+## Verified engineering
+- Concise Term subject page spans and separately numbered subject-level monthly assessments; avoid invented first/third-term page sources, retain original Second Term provenance, immutable original-source dates and allow auditable MANUAL_PROPOSAL date edits only.
+- Original teacher groups and A/B subject identities preserved; weekly lesson text compact; printable Term A4 student cards selectable 2/3/4 per sheet with logo and scoped roster, fail-closed on missing source/logo, overlap or overflow.
+- Fresh Node safe-source suite **90/90 PASS**; Python Lesson Planner gate suite **14/14 PASS**; scoped ESLint **PASS**; isolated Vite production build **PASS**.
+- Actual isolated Chromium Term planner with **mocked** API: six subjects, POST/PUT revision 1→2, Save→Reopen→Edit, A4 PDF **PASS**. Separate mock-browser roster: five fictional students, cards/sheet `2→3`, `3→2`, `4→2` pages **PASS**. These are not live authentication or real printing.
+- A destructive PostgreSQL integration test was **not executed**: it expects `NODE_ENV=test`, a deliberately separate disposable database, and test dependencies absent from the isolated checkout. An ad-hoc direct run was invalid (missing dependency; subsequent fallback lacked a test database), not a proven production application bug. Never point it at `apexos`.
+
+## New release-evidence defect corrected
+`ops/release/verify-unified-lesson-live-preflight-20261018.cjs` previously trusted an arbitrary `liveFrontend` argument; using `/var/www/apex-os` silently hashed an **inactive** directory as if production was serving it. Active Nginx `app.assps.edu.pk` root was confirmed as `/var/www/assps-releases/baseline-20261022-1404` with direct-origin and public served index SHA256 `aebad446888f85bceaf6ebb2aec9fb458761eef6e07aa6e6db2dd1c1003bff8a`. Stale `/var/www/apex-os/index.html` is SHA256 `aee09f43440cafe2a0b667949e8dcf47382fa3b75a7cc757cd89716234bf65ce`. A new read-only configured-Nginx-root cross-check flags `LIVE_FRONTEND_ROOT_NOT_CONFIGURED_APP_ROOT`. Two new tests verify mismatch detection and malformed config fail-closed. Correct-root preflight still returns `HOLD_NOT_LIVE_CERTIFIED` / `deployAuthorized:false`. Configured-root check **is not independently proof of currently loaded Nginx configuration**; direct-origin byte observation is separate evidence.
+
+## Fresh production READ ONLY evidence
+- School 1 `apexos` aggregate: **3** saved lesson plans, **0** student/parent portal shares, **54** active formal teacher-class assignment rows, **12** formally assigned active teacher accounts, **19** active teacher users, **336** scheduled teaching slots and **12** cross-checked timetable/employee/user links. No credentials or PII logged.
+- Production landing page HTTP **200**, backend direct health HTTP **200**, anonymous lesson API HTTP **401**, `nginx -t` **PASS**. This does **not** verify actual signed Principal/Teacher/S2 access.
+- Academic source candidate manifest: **59/59 publication BLOCKED**, independent subject-owner/academic QA pending. Source-calendar prior protected aggregate showed **9/10** active class calendars without collision; **Class Five has three duplicate locked ORIGINAL_SOURCE dates** that must not be rewritten. Some Mover and Class Two/Three page bounds are unsourced. Cannot manufacture exact syllabus pages or backfill First/Third Term from Second Term.
+
+## Release decision / outstanding checkpoints
+**G11/G12 RELEASE HOLD.** Fresh correct-root preflight confirmed protected exam route difference, signed marks revision service and migration not deployed, independent cross-tenant signed real-user acceptance absent, genuine teacher roster Save/Reopen/Publish absent, Urdu physical print witnessing absent, independent dual-DB off-host restore and deployment-source provenance absent. Earlier 25-Oct overall audit recorded a separate **P0 cached private-media CDN leak**, without provider-authenticated purge certificate; not retested in this lesson-only checkpoint. Core remains sole production release owner. No School1 grades, student data, fees, lesson records, Nginx service, PM2 process or CDN cache was modified; no production release or privileged credential creation was attempted.
+
+Remaining academic approvals and independent printing/authentication/restore evidence cannot be truthfully replaced by synthetic fixtures or code tests. Next release requires resolving those gates, not bypassing them.

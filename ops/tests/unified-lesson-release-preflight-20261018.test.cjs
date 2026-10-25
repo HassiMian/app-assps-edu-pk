@@ -51,3 +51,20 @@ test('missing compiled frontend always stops promotion',t=>{
  fs.rmSync(path.join(x.map.candidateFrontend,'index.html'));
  assert.ok(assess(x.map).blockers.includes('FRONTEND_BUILD_ARTIFACT_MISSING'));
 });
+
+test('stale frontend directory cannot masquerade as the configured production release',t=>{
+ const x=scenario(t),conf=path.join(path.dirname(x.map.liveFrontend),'app-nginx.conf');
+ fs.writeFileSync(conf,`server {\n server_name app.assps.edu.pk;\n root ${x.map.liveFrontend};\n}`);
+ const correct=assess({...x.map,nginxConfigFile:conf});
+ assert.equal(correct.nginxConfiguredRoot,fs.realpathSync(x.map.liveFrontend));
+ assert.ok(!correct.blockers.includes('LIVE_FRONTEND_ROOT_NOT_CONFIGURED_APP_ROOT'));
+ const stale=assess({...x.map,liveFrontend:x.map.candidateFrontend,nginxConfigFile:conf});
+ assert.ok(stale.blockers.includes('LIVE_FRONTEND_ROOT_NOT_CONFIGURED_APP_ROOT'));
+ assert.equal(stale.deployAuthorized,false);
+});
+test('unverifiable Nginx app root remains a blocker rather than evidence',t=>{
+ const x=scenario(t),conf=path.join(path.dirname(x.map.liveFrontend),'bad-nginx.conf');
+ fs.writeFileSync(conf,'server { server_name unrelated.invalid; root /tmp/something; }');
+ const result=assess({...x.map,nginxConfigFile:conf});
+ assert.ok(result.blockers.includes('ACTIVE_APP_NGINX_ROOT_NOT_VERIFIABLE'));
+});

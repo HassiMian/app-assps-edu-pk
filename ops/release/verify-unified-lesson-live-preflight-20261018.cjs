@@ -2,7 +2,16 @@
 // Read-only release evidence gate. No service, git, DB, or filesystem mutation.
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const hash=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
-function assess({candidateBackend,liveBackend,candidateFrontend,liveFrontend}){
+const DEFAULT_APP_NGINX='/etc/nginx/sites-enabled/apex-app-ssl';
+function configuredAppRoot(configFile){
+ const config=fs.readFileSync(configFile,'utf8').replace(/^\s*#.*$/gm,'');
+ if(!/\bserver_name\s+app\.assps\.edu\.pk\s*;/.test(config))
+   throw new Error('APP_SERVER_NAME_NOT_FOUND');
+ const roots=[...config.matchAll(/^\s*root\s+([^;\s]+)\s*;/gm)].map(match=>match[1]);
+ if(roots.length!==1||roots[0].includes('$'))throw new Error('APP_ROOT_NOT_UNAMBIGUOUS');
+ return fs.realpathSync(roots[0]);
+}
+function assess({candidateBackend,liveBackend,candidateFrontend,liveFrontend,nginxConfigFile}){
  const missing=[],changes=[],matches=[],blockers=[];
  const guarded=['src/routes/noticesRoutes.js','src/routes/dailyDiaryRoutes.js','src/routes/examRoutes.js'];
  for(const f of guarded){
@@ -30,6 +39,19 @@ function assess({candidateBackend,liveBackend,candidateFrontend,liveFrontend}){
  const livePublic=fs.existsSync(oldBrand)&&fs.readFileSync(oldBrand,'utf8').includes("router.get('/public-branding'");
  if(!candidatePublic)blockers.push('CANDIDATE_BRANDING_API_MISSING');
  if(!livePublic)blockers.push('PUBLIC_BRANDING_NOT_YET_LIVE');
+ // A stale /var/www/apex-os may NOT represent Nginx's currently configured
+ // app.assps.edu.pk release. Fail closed if a caller supplies that old root.
+ const configFile=nginxConfigFile || (fs.existsSync(DEFAULT_APP_NGINX)?DEFAULT_APP_NGINX:null);
+ let nginxConfiguredRoot=null;
+ if(configFile){
+  try{
+   nginxConfiguredRoot=configuredAppRoot(configFile);
+   if(fs.realpathSync(liveFrontend)!==nginxConfiguredRoot)
+     blockers.push('LIVE_FRONTEND_ROOT_NOT_CONFIGURED_APP_ROOT');
+  }catch(error){
+   blockers.push('ACTIVE_APP_NGINX_ROOT_NOT_VERIFIABLE');
+  }
+ }
  const liveIndex=path.join(liveFrontend,'index.html');
  const candidateIndex=path.join(candidateFrontend,'index.html');
  if(!fs.existsSync(liveIndex)||!fs.existsSync(candidateIndex))blockers.push('FRONTEND_BUILD_ARTIFACT_MISSING');
@@ -41,6 +63,7 @@ function assess({candidateBackend,liveBackend,candidateFrontend,liveFrontend}){
  return {status:'HOLD_NOT_LIVE_CERTIFIED',deployAuthorized:false,
   protectedMatches:matches,protectedDifferences:changes,missingProtected:missing,
   candidateBrandingRoute: candidatePublic, liveBrandingRoute:livePublic,
+  nginxConfiguredRoot,
   compiledIndexHash:fs.existsSync(candidateIndex)?hash(candidateIndex):null,
   liveIndexHash:fs.existsSync(liveIndex)?hash(liveIndex):null,
   blockers:[...new Set([...blockers,...outstanding])]};
