@@ -51,15 +51,27 @@ export function buildTermOverview(candidates,{start,end,imageReview,edits={},ter
       return {
         id,subject:candidate.source_subject_label,
         detail:override.detail===undefined?combined:String(override.detail),
-        pageFrom:override.pageFrom===undefined?pageFrom:String(override.pageFrom),
-        pageTo:override.pageTo===undefined?pageTo:String(override.pageTo),
+        // Verified A/B Second Term page bounds cannot be overwritten by
+        // stale or cross-account local draft edits. Unverified terms remain editable.
+        pageFrom:term==='Second Term'&&pageFrom?pageFrom:
+          (override.pageFrom===undefined?pageFrom:String(override.pageFrom)),
+        pageTo:term==='Second Term'&&pageTo?pageTo:
+          (override.pageTo===undefined?pageTo:String(override.pageTo)),
+        sourcePageFrom:term==='Second Term'?pageFrom:'',
+        sourcePageTo:term==='Second Term'?pageTo:'',
         sourceStatus:term==='Second Term'?'A/B SOURCE — REVIEW REQUIRED':
           'UNSOURCED TERM — TEACHER PROPOSAL',
         originalSourceIds:term==='Second Term'?(candidate.source_submissions||[]):[],
         sourceParts:parts.map(p=>({part:p.part,candidateKey:p.source.candidate_key,
           sourceIds:term==='Second Term'?(p.source.source_submissions||[]):[]})),
         needsReview:true,
-        warnings:parts.flatMap(p=>(p.row.warnings||[]).map(w=>'['+p.part+'] '+w)),
+        warnings:[...parts.flatMap(p=>(p.row.warnings||[]).map(w=>'['+p.part+'] '+w)),
+          ...(term==='Second Term'&&pageFrom&&override.pageFrom!==undefined&&
+            String(override.pageFrom)!==pageFrom?
+            ['An older A/B manual page start differs from the original; original restored in preview.']:[]),
+          ...(term==='Second Term'&&pageTo&&override.pageTo!==undefined&&
+            String(override.pageTo)!==pageTo?
+            ['An older A/B manual page end differs from the original; original restored in preview.']:[])],
         events:parts.flatMap(p=>(p.row.events||[]).map(e=>({
           ...e,subject:candidate.source_subject_label,
           name:'['+p.part+'] '+e.name,sourcePart:p.part
