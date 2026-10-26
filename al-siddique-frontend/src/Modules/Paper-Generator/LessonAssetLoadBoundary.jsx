@@ -23,6 +23,7 @@ export default class LessonAssetLoadBoundary extends Component {
           ? 'Your browser could not load a protected page asset. Check the connection and retry the page.'
           : 'An unexpected error occurred. The original record is unchanged.'}
         </p>
+        <p role="note">Retry reloads this page. Any unsaved changes in this browser tab may be lost.</p>
         <button type="button" onClick={() => window.location.replace(
           window.location.pathname + window.location.search
         )}>Retry this page</button>
