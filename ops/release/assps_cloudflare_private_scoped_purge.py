@@ -27,11 +27,11 @@ def validated_manifest(raw, inventory):
     if not isinstance(raw,dict) or set(raw)!= {'files'} or not isinstance(raw['files'],list):
         raise ValueError('INVALID_PURGE_BODY')
     paths=raw['files']
-    if not 1 <= len(paths) <= 30 or len(paths)!=len(set(paths)):
+    if not 1 <= len(paths) <= 100 or len(paths)!=len(set(paths)):
         raise ValueError('INVENTORY_COUNT_OR_DUPLICATES')
     fs=sorted(p.name for p in inventory.iterdir()
       if p.name.lower().startswith(PERMITTED_PREFIXES) and p.suffix.lower() in EXTS)
-    if len(fs)!=29 or any(not (inventory/n).is_file() or (inventory/n).is_symlink() for n in fs):
+    if not 1 <= len(fs) <= 100 or any(not (inventory/n).is_file() or (inventory/n).is_symlink() for n in fs):
         raise ValueError('PRIVATE_INVENTORY_DRIFT')
     requested=[]
     for value in paths:

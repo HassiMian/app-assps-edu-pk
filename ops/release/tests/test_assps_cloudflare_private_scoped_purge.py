@@ -13,6 +13,14 @@ class Scope(unittest.TestCase):
  def check(self,urls=None,body=None):
     return m.validated_manifest({'files':self.urls if urls is None else urls} if body is None else body,self.p)
  def test_exact_inventory_passes(self):self.assertEqual(len(self.check()),29)
+ def test_new_private_item_requires_manifest_update(self):
+    n='birthday_new20261026.png'
+    (self.p/n).write_bytes(b'new private file')
+    with self.assertRaises(ValueError):self.check()
+    self.assertEqual(len(self.check(urls=self.urls+['https://app.assps.edu.pk/uploads/branding/'+n])),30)
+ def test_manifest_extra_unknown_denied(self):
+    with self.assertRaises(ValueError):self.check(self.urls+['https://app.assps.edu.pk/uploads/branding/birthday_nonexistent.png'])
+
  def test_prefix_purge_not_allowed(self):
     with self.assertRaises(ValueError):self.check(body={'prefixes':['app.assps.edu.pk/uploads']})
  def test_purge_everything_never_allowed(self):
