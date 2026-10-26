@@ -26,3 +26,10 @@ NEVER treat this doc, scripted boolean checks, synthetic assertions, SSH push ac
 - The review branch also includes `ops/release/assps_cloudflare_private_scoped_purge.py` (dry-run by default) with 9 isolated validation tests.
 - API method: Cloudflare `POST /zones/{zone_id}/purge_cache` with **only** `files`, never purge_everything/prefix/hosts. Needs a zone-scoped `Cache Purge` token in secure environment; no token is stored in git or reports.
 - Execute requires the exact manifest SHA, intentional `--authorize-scoped-purge`, and a separate successful independent private-media recheck to finish the gate. At this writing the token and zone authorization are absent; no purge has been sent.
+
+## Static cached-browser compatibility (new read-only finding)
+- The currently serving legacy static release contains 575 files and the reviewed b0e3 candidate static build contains 94 files. Merely switching Nginx roots would make 4/8 current index asset references unavailable to browsers using cached old index HTML.
+- The new **offline-only** `assps_legacy_static_asset_overlay.py` composes a *NEW* isolated preview root and verifies live index SHA, reviewed candidate index SHA, all copied hashed JS/CSS checksums and old index bootstrap asset closure. Current verified inputs yield 548 hashed legacy fallback assets, 5 non-hashed / backup-suffix legacy assets excluded, candidate index unchanged.
+- The script refuses source drift, symlinks, path-collisions, unbounded assets, missing cached-index bootstrap references and every output path that does not belong to the expressly isolated private preview prefix. It never writes to live Nginx static roots.
+- This improves stale-browser asset compatibility only; it is not proof of source provenance/signatures, content authority, privacy, active user sessions, dynamic dependency stability across releases, or release authorization. The existing official Core signed gate still must approve a future cutover.
+- Actual live database records, frontend Nginx root, PM2 state, and private branding assets remain untouched.
