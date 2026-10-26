@@ -3,6 +3,8 @@ import { lazy, Suspense, useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useTheme } from '../../context/ThemeContext.jsx'
 import './paperStudioShell.css'
+import LessonAssetLoadBoundary from './LessonAssetLoadBoundary.jsx'
+import { loadLessonAssetWithSingleRetry } from './lessonStaticAssetRetry.js'
 
 import { resolvePaperRoute } from './resolvePaperRoute.js'
 import { createDuplicatePaperDraft } from './paperCreationDraft.js'
@@ -10,7 +12,7 @@ import { loadAssessmentPaper } from './AssessmentStudio/core/assessmentPersisten
 import { mergeServerDocumentIntoLocalPaper } from './AssessmentStudio/core/manualAssessmentDocument.js'
 
 const SavedPapersTab = lazy(() => import('./SavedPapersTab'))
-const LessonPlanModule = lazy(() => import('./LessonPlanModule'))
+const LessonPlanModule = lazy(() => loadLessonAssetWithSingleRetry(() => import('./LessonPlanModule')))
 const PTSPaperGenerator = lazy(() => import('./PTSPaperGenerator'))
 const BoardPaperGenerator = lazy(() => import('./BoardPaperGenerator'))
 const QuestionBank = lazy(() => import('./QuestionBank'))
@@ -158,7 +160,7 @@ export default function PaperGenerator() {
     return <ModuleWrap moduleTab={moduleTab} studioTheme={studioTheme} onOpenTab={openModuleTab}><DailyDiaryFeature initialMode={diaryLaunch ? 'lesson' : 'diary'} initialLessonPlanId={diaryLaunch?.planId || ''} initialContext={diaryLaunch || null}/></ModuleWrap>
   }
   if (moduleTab === 'lesson') {
-    return <ModuleWrap moduleTab={moduleTab} studioTheme={studioTheme} onOpenTab={openModuleTab}><LessonPlanModule/></ModuleWrap>
+    return <ModuleWrap moduleTab={moduleTab} studioTheme={studioTheme} onOpenTab={openModuleTab}><LessonAssetLoadBoundary><LessonPlanModule/></LessonAssetLoadBoundary></ModuleWrap>
   }
 
   // Compatibility only: these routes are not shown in normal Paper Generator navigation.
