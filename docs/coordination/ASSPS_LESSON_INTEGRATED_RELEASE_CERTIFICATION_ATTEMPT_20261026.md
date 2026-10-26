@@ -15,10 +15,11 @@
 - Safe simulated HTTP source/provenance suites: **8 PASS, 0 FAIL**.
 - Python Lesson contract/gate tests: **14 PASS, 0 FAIL**.
 - Python teacher read-only audit/reconcile tests: **14 PASS, 0 FAIL**.
-- **145 total focused Node/Python tests PASS**. Suites are separate, no duplicated cases claimed to be additive from previous checkpoints.
+- **145 total focused Node/Python safe-source tests PASS** (71+38+8+14+14), plus **3/3 independent disposable PostgreSQL-backed HTTP/integration suites PASS**; total **148/148 distinct selected test cases PASS** on final verified runs. They are not live-school authenticated tests.
+- For the three formerly excluded DB suites, initialized a separate PostgreSQL 16 cluster under `/tmp/assps-lesson-qa-20261026/data`, Unix-socket-only at port 5444, no TCP listener and a test-only `assps_lesson_qa_20261026` database. Verified `current_database()`, `inet_server_addr()=NULL`, and exact data directory before any migration. Applied test-only subscription and main schema migrations. The initial blank-DB main migration exposed missing subscription schema and a seeded-table sequence collision; corrected **only inside the disposable QA cluster**; reran the three test suites: `lesson-plans-http` PASS, `lesson-planner-cognitive-http` PASS, `lesson-planning-cognitive-http` PASS. These failures were disposable bootstrap prerequisites, not proof of a live app defect. No copy or clone of the real `apexos` database was used.
 - Changed-file ESLint PASS, optimized Vite build PASS, production source safety script PASS, git diff --check PASS.
 - Independently executed **3 synthetic browser acceptance flows**: Lesson Plans account-switch/login/recovery/real returned revision and portal receipt 1/1 PASS; six-subject Term POST→PUT revision1→2, reopen and A4 PDF PASS; five fictional students 2, 3, 4 cards/sheet PASS. All intercepted backend APIs; NO production credentials, live publishing, actual users, real pupil PII, physical print or real school transaction involved.
-- Deliberately did not run three older PostgreSQL-writing cognitive/http integration suites against `apexos`; a disposable independent DB is needed. They are NOT certified PASS.
+- Those PostgreSQL-writing suites were **never** run against live `apexos`; only the independent disposable QA database was used. Their PASS evidence is test-environment-only, not live production certification.
 
 ## Live READ ONLY, 26 October
 - Website HTTP 200; backend health HTTP 200; anonymous `/api/lesson-plans` HTTP 401; Nginx syntax PASS.
