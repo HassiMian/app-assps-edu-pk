@@ -21,3 +21,8 @@
 
 ## Explicit approval constraints
 NEVER treat this doc, scripted boolean checks, synthetic assertions, SSH push access, source SHA parity, or frontend dry-run output as certification. Genuine independently signed operational evidence is required for every remaining sensitive gate. Pushing this review branch does not update main, public site, Nginx, systemd/PM2 or school database.
+
+## Scoped Cloudflare purge, credential-gated
+- The review branch also includes `ops/release/assps_cloudflare_private_scoped_purge.py` (dry-run by default) with 9 isolated validation tests.
+- API method: Cloudflare `POST /zones/{zone_id}/purge_cache` with **only** `files`, never purge_everything/prefix/hosts. Needs a zone-scoped `Cache Purge` token in secure environment; no token is stored in git or reports.
+- Execute requires the exact manifest SHA, intentional `--authorize-scoped-purge`, and a separate successful independent private-media recheck to finish the gate. At this writing the token and zone authorization are absent; no purge has been sent.
