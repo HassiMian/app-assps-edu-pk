@@ -242,3 +242,5 @@
  display:block;margin-top:2px;font-size:9px;color:#4b647b;
  white-space:normal;overflow-wrap:anywhere
 }
+
+.term-print-subject-mini .term-source-dates{display:inline-block;margin-left:8px;color:#536d85;font-size:8px;white-space:nowrap}

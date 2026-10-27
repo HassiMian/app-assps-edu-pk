@@ -244,6 +244,10 @@ export default function TermPlannerEditor({klass,section,term,start,end,setTerm,
                       </small>}
                     {row.pageFrom&&row.pageTo&&<span className="term-pages" dir="ltr">
                       Pages {row.pageFrom}–{row.pageTo}</span>}
+                    {row.sourceTermStart&&row.sourceTermEnd&&
+                      <small className="term-source-dates" dir="ltr">
+                        Source weeks: {row.sourceTermStart} – {row.sourceTermEnd}
+                      </small>}
                   </td></tr>
                   <tr><th>Assessments</th><td className="term-subject-assessments">
                     {printableAssessments.filter(a=>a.subjectId===row.id).length?

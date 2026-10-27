@@ -24,37 +24,59 @@ export function improveWeeklyStatement(raw,subject=''){
 }
 
 export function summarizeTermFromOriginalNotes(notes,subject=''){
-  const list=topicTags(notes)
-  if(!list.length)return ''
-  // Match the *teacher's source script*, not merely the subject label.
-  // No automatic translation or class/topic rewriting is permitted.
-  const sourceHasUrdu=list.some(t=>/[؀-ۿ]/u.test(t))
-  const sourceHasLatin=list.some(t=>/[A-Za-z]/.test(t))
+  const lines=topicTags(notes)
+  if(!lines.length)return ''
+  // Only factual, explicitly supplied teacher activities may be synthesized.
+  // The existence of pages, dates, a subject or a Unit title is NOT evidence
+  // that reading/homework/exercises were assigned.
+  const sourceHasUrdu=lines.some(t=>/[\u0600-\u06FF]/u.test(t))
+  const sourceHasLatin=lines.some(t=>/[A-Za-z]/.test(t))
   const urdu=sourceHasUrdu?true:sourceHasLatin?false:isUrdu(subject)
-  const cw=has(list,/\bclass\s*work\b|\bclasswork\b|کلاس\s*ورک/i)
-  const ex=has(list,/\bexercise\b|\bexercises\b|\bcopy\s*work\b|مشق|سوال/i)
-  const rev=has(list,/\brevis(?:e|ion)\b|دہرائی/i)
-  const read=has(list,/\bread(?:ing)?\b|قرأت|مطالعہ/i)
-  const assessment=has(list,/\bassessment\b|\btest\b|جائزہ|اسسمنٹ/i)
+  const normalized=lines.map(t=>t.replace(/^(?:pages?|pg|صفحہ(?: نمبر)?)\s*\d+\s*(?:[-–—]|to|تا)\s*\d+\s*[-–—:]?\s*/iu,''))
+  // Match only action-bearing lines; strip factual pages/unit headings from
+  // the professional sentence while preserving them in provenance fields.
+  const actions=normalized.filter(t=>/\b(?:read|reading|class\s*work|classwork|cw|home\s*work|homework|hw|exercise|exercises|copy\s*work|task\s*work|taskwork|revise|revision|learn|memorize|test|assessment|complete|solve|write)\b|پڑھ|قرأت|کلاس\s*ورک|گھر\s*کا\s*کام|ہوم\s*ورک|مشق|سوال|دہرائی|جائزہ|اسسمنٹ|ٹاسک|یاد|لکھ|مکمل/iu.test(t))
+  if(!actions.length)return ''
+  const present=(re)=>actions.some(t=>re.test(t))
+  const reading=present(/\b(?:read|reading)\b|پڑھ|قرأت/i)
+  const classwork=present(/\b(?:class\s*work|classwork|cw)\b|کلاس\s*ورک/i)
+  const homework=present(/\b(?:home\s*work|homework|hw)\b|گھر\s*کا\s*کام|ہوم\s*ورک/i)
+  const exercises=present(/\b(?:exercises?|solve)\b|مشق|سوال/i)
+  const copy=present(/\b(?:copy\s*work|write|writing)\b|لکھ|تحریر/i)
+  const task=present(/\b(?:task\s*work|taskwork|tasks?)\b|ٹاسک/i)
+  const revision=present(/\b(?:revise|revision)\b|دہرائی/i)
+  const learning=present(/\b(?:learn|memorize)\b|یاد/i)
+  const assessment=present(/\b(?:test|assessment)\b|جائزہ|اسسمنٹ/i)
   if(urdu){
-    const tasks=[
-      cw?'دیے گئے اسباق کا کلاس ورک مکمل کریں':'',
-      ex?'متعلقہ مشقوں کو درست انداز میں حل کریں':'',
-      read?'منتخب متن کی پڑھائی کریں':'',
-      rev?'مقررہ کام کی دہرائی کریں':'',
+    const items=[
+      reading?'مقررہ متن پڑھیں':'',
+      classwork?'متعلقہ کلاس ورک مکمل کریں':'',
+      homework?'دیے گئے ہوم ورک کو مکمل کریں':'',
+      exercises?'اصل مشقیں حل کریں':'',
+      copy?'مقررہ تحریری کام مکمل کریں':'',
+      task?'دیے گئے ٹاسک مکمل کریں':'',
+      revision?'پڑھے ہوئے کام کی دہرائی کریں':'',
+      learning?'مقررہ کام یاد کریں':''
     ].filter(Boolean)
-    if(!tasks.length)tasks.push('استاد کے دیے ہوئے اسباق کا کام مکمل کریں')
-    return tasks.slice(0,2).join('؛ ')+'۔'+(assessment?' مقررہ جائزے کی تیاری کریں۔':'')
+    const parts=items.slice(0,4)
+    if(!parts.length)return assessment?'اصل شیڈول کے مطابق جائزے کی تیاری کریں۔':''
+    return parts.join('؛ ')+'۔'+(assessment?' اصل شیڈول کے مطابق جائزے کی تیاری کریں۔':'')
   }
-  const tasks=[
-    cw?'Complete the assigned classwork accurately':'',
-    ex?'finish the prescribed exercises carefully':'',
-    read?'read the assigned passages attentively':'',
-    rev?'revise the covered work':''
+  const items=[
+    reading?'read the assigned text':'',
+    classwork?'complete the classwork':'',
+    homework?'complete the given homework':'',
+    exercises?'solve the specified exercises':'',
+    copy?'complete the written work':'',
+    task?'finish the assigned tasks':'',
+    revision?'revise the covered work':'',
+    learning?'learn the prescribed work':''
   ].filter(Boolean)
-  if(!tasks.length)tasks.push('Complete the teacher-assigned syllabus work')
-  const sentence=tasks.slice(0,2).join('; ')
-  return sentence[0].toUpperCase()+sentence.slice(1)+'.'+(assessment?' Prepare for the recorded assessment.':'')
+  const parts=items.slice(0,4)
+  if(!parts.length)return assessment?'Prepare for the original recorded assessment.':''
+  const sentence=parts.join('; ')
+  return sentence[0].toUpperCase()+sentence.slice(1)+'.'+
+    (assessment?' Prepare for the original recorded assessment.':'')
 }
 
 // Explicit teacher-given chapter/unit labels and page spans remain in the

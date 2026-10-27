@@ -197,6 +197,9 @@ export function compileWeeklyPlan(c,options={}){
    weeks.push({...week,source:'SOURCE_DATE_RANGE',
     sourceRange:block.original,sourceIds:[block.sourceId],page:block.page,
     statement:shortDiary(c.source_subject_label,block.page,block.body.map(t=>t.replace(/\s*\+\s*(?:Assessment|Test|جائزہ)/ig,'')).find(t=>t.trim())||''),
+    // Immutable teacher-authored instruction text is retained in FULL.
+    // Weekly's short visual headline is never the source of truth for Term.
+    teacherText:block.body.join('\n'),
     reviewRequired:block.inferred,assessment:null})
   }
   if(block.hasAssessment && !explicitAssessments.some(a=>

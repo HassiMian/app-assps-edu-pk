@@ -99,6 +99,8 @@ export function buildTermOverview(candidates,{start,end,imageReview,edits={},ter
     const compiled=compileWeeklyPlan(candidate,{start,end,imageReview})
     const matched=(compiled.weeks||[]).filter(x=>inTerm(x,start,end))
     const teaching=matched.filter(x=>x.source!=='ORIGINAL_ASSESSMENT_ONLY')
+      .sort((a,b)=>String(a.start||'').localeCompare(String(b.start||''))||
+        String(a.end||'').localeCompare(String(b.end||'')))
     const notes=[...new Set(teaching.map(x=>sourceText(x.teacherText||x.statement)).filter(Boolean))]
     const actualPages=teaching.map(x=>x.page).filter(p=>p&&validPage(p.from)&&validPage(p.to))
     // MODE B: Weekly is the auditable source of Term. Merge the weeks' real
@@ -116,8 +118,25 @@ export function buildTermOverview(candidates,{start,end,imageReview,edits={},ter
     const compactTermStatement=summarizeTermFromOriginalNotes(notes,candidate.source_subject_label)
     const authored=composeTeachingStatement({subject:candidate.source_subject_label,
       notes,pages:actualPages,scope:'term'})
-    const defaultFrom=authored.pageFrom
-    const defaultTo=authored.pageTo
+    // The Term's selected start/end are explicit in the header. Additionally
+    // show the actual documented weekly coverage dates. Do NOT label the
+    // chosen term date range as if it were evidence of weeks that do not exist.
+    const sourceTermStart=teaching.length?teaching[0].start>start?
+      teaching[0].start:start:''
+    const sourceTermEnd=teaching.length?
+      (teaching[teaching.length-1].end<end?teaching[teaching.length-1].end:end):''
+    // "Pages X to Y" is FIRST dated verified week start to LAST dated verified
+    // week end. A reversed/out-of-sequence textbook is NOT turned into a fake
+    // continuous span: keep source rows and flag it for teacher review.
+    const pageWeeks=teaching.filter(w=>w.page&&validPage(w.page.from)&&validPage(w.page.to)&&
+      Number(w.page.to)>=Number(w.page.from))
+    const nonmonotone=pageWeeks.some((w,i)=>i>0&&(
+      Number(w.page.from)<Number(pageWeeks[i-1].page.from)||
+      Number(w.page.to)<Number(pageWeeks[i-1].page.to)))
+    const defaultFrom=pageWeeks.length&&!nonmonotone?
+      String(pageWeeks[0].page.from):''
+    const defaultTo=pageWeeks.length&&!nonmonotone?
+      String(pageWeeks[pageWeeks.length-1].page.to):''
     const events=matched.flatMap(x=>x.assessment?[{
       date:x.assessment.date||'',name:x.assessment.label||'Assessment',
       subject:candidate.source_subject_label,origin:x.assessment.origin||'PROPOSED',
@@ -128,6 +147,7 @@ export function buildTermOverview(candidates,{start,end,imageReview,edits={},ter
       id,subject:candidate.source_subject_label,
       detail:override.detail===undefined?compactTermStatement:String(override.detail),
        originalTeacherNotes:notes,sourceWeeklyCoverage,
+       sourceTermStart,sourceTermEnd,
        sourceChapterTitles:explicitTeacherChapterLabels(notes),sourceUnits:authored.units,
        needsLanguageReview:authored.needsLanguageReview,
       // Source-derived page bounds are immutable; keep legacy edits for audit.
@@ -140,6 +160,8 @@ export function buildTermOverview(candidates,{start,end,imageReview,edits={},ter
       originalSourceIds:candidate.source_submissions||[],
       needsReview:true,
       warnings:[...(compiled.warnings||[]),
+        ...(nonmonotone?['Page numbering reverses between original dated weeks. Do not print a misleading continuous term page range; teacher must verify the source.']:[]),
+        ...(!compactTermStatement&&notes.length?['Teacher weekly source has no explicit classwork/reading/homework/task instruction; do not invent one.']:[]),
         ...(defaultFrom&&override.pageFrom!==undefined&&String(override.pageFrom)!==defaultFrom?
           ['An older manual page start differs from the original; original restored in preview.']:[]),
         ...(defaultTo&&override.pageTo!==undefined&&String(override.pageTo)!==defaultTo?
