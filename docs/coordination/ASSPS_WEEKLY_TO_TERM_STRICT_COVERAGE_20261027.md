@@ -23,3 +23,9 @@ Synthetic examples (NEVER real student data):
 - Explicit negation such as NO HOMEWORK or NO TEST does not become a new obligation or an assessment.
 - New true teacher activity text is taken from all source block-body lines, NOT just the truncated visual first-topic headline.
 - Source chapter titles such as Unit 7: Reading Skills or Chapter 4: Homework Policy NEVER count as teacher-assigned tasks, even if they contain English work verbs.
+
+## Current iteration: one-A4 student-sheet real browser print checks
+- Historical school report exists in older Git worktree but shows only a few verified subject plans, not the missing approved 59 cohort archive; neither Week 18 nor textbook pages for all students may be fabricated.
+- New isolated Chromium printer QA includes 8, 10 and 12 distinct synthetic subjects with separate subject tables. Each rendered on exactly one A4 with all subject tables inside the physical card boundary, and Urdu print stylesheet reports Jameel Noori Nastaleeq.
+- The synthetic fixtures contain no actual pupil data or newly approved syllabus. They prove only render/fit of the candidate CSS, not owner academic approval or the school RICOH printer's per-class content acceptance.
+- C.W. / H.W. / T.W. explicit teacher abbreviations are classified without altering the original source statements. Test suite: 52/52 planning PASS; 79/79 release PASS; Vite build PASS.

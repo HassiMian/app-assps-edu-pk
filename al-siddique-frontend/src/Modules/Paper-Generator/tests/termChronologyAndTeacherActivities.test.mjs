@@ -95,3 +95,10 @@ test('Topic title Reading Skills / Homework Policy is never treated as an assign
  ],'English')
  assert.equal(c,'')
 })
+
+test('Teacher H.W., C.W., T.W. abbreviations are classified without changing the source',()=>{
+ const phrase=summarizeTermFromOriginalNotes(['C.W.', 'H.W.', 'T.W.'],'English')
+ assert.match(phrase,/classwork/)
+ assert.match(phrase,/homework/)
+ assert.match(phrase,/tasks/)
+})

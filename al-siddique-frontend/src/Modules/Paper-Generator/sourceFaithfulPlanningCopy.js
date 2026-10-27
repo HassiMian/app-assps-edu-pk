@@ -35,7 +35,13 @@ export function summarizeTermFromOriginalNotes(notes,subject=''){
   const normalized=lines.map(t=>t.replace(/^(?:pages?|pg|صفحہ(?: نمبر)?)\s*\d+\s*(?:[-–—]|to|تا)\s*\d+\s*[-–—:]?\s*/iu,''))
   // Match only action-bearing lines; strip factual pages/unit headings from
   // the professional sentence while preserving them in provenance fields.
-  const actions=normalized.filter(t=>
+  // Normalize explicit classroom abbreviations for classification only;
+  // the original notes, page strings and chapter names remain immutable.
+  const classified=normalized.map(t=>t
+    .replace(/\bH\s*\.\s*W\s*\.?/giu,'homework')
+    .replace(/\bC\s*\.\s*W\s*\.?/giu,'classwork')
+    .replace(/\bT\s*\.\s*W\s*\.?/giu,'taskwork'))
+  const actions=classified.filter(t=>
     // A unit/chapter heading (e.g. "Unit 7: Reading Skills") is a TITLE,
     // not teacher authorization to assign reading or writing as homework.
     !/^(?:unit|chapter|ch\.?|باب|یونٹ)\s*(?:no\.?\s*)?(?:\d+|[٠-٩۰-۹]+)\s*[:.\-–]?/iu.test(t) &&
