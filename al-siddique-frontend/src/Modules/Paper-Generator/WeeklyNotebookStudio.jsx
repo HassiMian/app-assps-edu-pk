@@ -623,11 +623,30 @@ export default function WeeklyNotebookStudio(){
    }
    const oversized=[...copy.querySelectorAll('.term-print-document')].some(card=>
      card.scrollHeight>card.clientHeight+3)
-   if(oversized){setError('Term card content does not fit this A4 layout. Choose fewer students per page or reduce text size.');return}
+   // Full source statements remain visible. A long term prints on multiple
+   // A4 pages rather than shrinking fonts or silently clipping academic text.
    const popup=window.open('','_blank','width=1150,height=900')
    if(!popup){setError('Allow popups to print the term plan.');return}
    const styleLinks=[...document.querySelectorAll('link[rel="stylesheet"]')]
      .map(node=>'<link rel="stylesheet" href="'+node.href+'">').join('')
+   const bodyClass=oversized?' class="term-reflow-large"':''
+   let printRequested=false
+   // Register before document.close(): a late window-load listener misses the
+   // event on fast browsers and leaves a blank popup instead of a print dialog.
+   popup.addEventListener('load',async()=>{
+     // About:blank can fire its own load BEFORE the term document is written.
+     if(!popup.document.getElementById('wn-term-print')||printRequested)return
+     printRequested=true
+     try{
+       await popup.document.fonts.ready
+       await Promise.all([...popup.document.images].map(img=>img.decode?img.decode():Promise.resolve()))
+       if(popup.closed)return
+       popup.focus()
+       popup.print()
+     }catch(ex){
+       setError('Term print fonts or school logo could not load. Reopen the preview and retry.')
+     }
+   })
    popup.document.open()
    popup.document.write('<!doctype html><html><head><meta charset="utf-8"><title>ASSPS Term Syllabus</title>'+
      styleLinks+'<style>@page{size:A4;margin:6mm}body{background:white;margin:0}'+
@@ -635,12 +654,12 @@ export default function WeeklyNotebookStudio(){
      '.term-print-sheet:not(:last-child){break-after:page;page-break-after:always}'+
      '.term-print-document thead{display:table-header-group}'+
      '.term-print-document tr{break-inside:avoid;page-break-inside:avoid}'+
-     '</style></head><body>'+copy.outerHTML+'</body></html>')
+     'body.term-reflow-large .term-print-subjects tbody tr{break-inside:auto;page-break-inside:auto}'+
+     '</style></head><body'+bodyClass+'>'+copy.outerHTML+'</body></html>')
    popup.document.close()
-   popup.addEventListener('load',()=>{
-     popup.document.fonts.ready.then(()=>popup.print()).catch(()=>popup.print())
-   },{once:true})
-   setTermStatus('Print preview opened. Verify page breaks and Urdu font before physical print.')
+   setTermStatus(oversized?
+     'Long source statements will reflow across additional A4 pages without shrinking or clipping. Check the preview.':
+     'Print preview opened. Verify page breaks and Urdu font before physical print.')
  }
  return <section className="wn-studio" data-weekly-notebook-studio>
   <header className="wn-heading">

@@ -99,8 +99,10 @@ export function buildTermOverview(candidates,{start,end,imageReview,edits={},ter
     const teaching=matched.filter(x=>x.source!=='ORIGINAL_ASSESSMENT_ONLY')
     const notes=[...new Set(teaching.map(x=>sourceText(x.teacherText||x.statement)).filter(Boolean))]
     const actualPages=teaching.map(x=>x.page).filter(p=>p&&validPage(p.from)&&validPage(p.to))
-    // Derive one concise original-language statement for the whole term.
-    // Keep unmodified teacher notes for review; pages/units are source-backed only.
+    // A term is a FULL coverage sheet, not a generic one-line teaching summary.
+    // Keep every distinct source teacher statement in source order. Manual
+    // corrections remain editable drafts; they never alter source provenance.
+    const fullTermStatement=notes.join('\n')
     const authored=composeTeachingStatement({subject:candidate.source_subject_label,
       notes,pages:actualPages,scope:'term'})
     const defaultFrom=authored.pageFrom
@@ -113,7 +115,7 @@ export function buildTermOverview(candidates,{start,end,imageReview,edits={},ter
     const override=edits[id]||{}
     return {
       id,subject:candidate.source_subject_label,
-      detail:override.detail===undefined?authored.statement:String(override.detail),
+      detail:override.detail===undefined?fullTermStatement:String(override.detail),
        originalTeacherNotes:notes,sourceUnits:authored.units,
        needsLanguageReview:authored.needsLanguageReview,
       // Source-derived page bounds are immutable; keep legacy edits for audit.

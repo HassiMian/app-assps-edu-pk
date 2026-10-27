@@ -121,11 +121,11 @@
   gap:2.5mm;padding:5mm;box-shadow:0 4px 14px #17345124}
 .term-print-sheet .term-print-document{width:100%;min-height:0;height:100%;
   margin:0;box-shadow:none;overflow:hidden;border:1px solid #d0dce3;padding:3mm;
-  font-size:clamp(8px,var(--term-text-size),12px)}
+  font-size:var(--term-text-size,12px)}
 .term-print-sheet .term-letterhead{grid-template-columns:10mm 1fr;gap:3mm;padding-bottom:1mm}
 .term-print-sheet .term-letterhead img{width:10mm;height:10mm}
-.term-print-sheet .term-letterhead h2{font-size:clamp(10px,var(--term-school-name),14px);margin:0}
-.term-print-sheet .term-letterhead strong{font-size:clamp(9px,var(--term-head-size),12px)}
+.term-print-sheet .term-letterhead h2{font-size:var(--term-school-name,17px);margin:0}
+.term-print-sheet .term-letterhead strong{font-size:var(--term-head-size,14px)}
 .term-print-sheet .term-letterhead p{display:none}
 .term-print-sheet .term-meta{margin:3px 0;padding:3px 5px;gap:6px;font-size:9px}
 .term-print-sheet .term-student-identification{margin:3px 0;padding:4px 5px}
@@ -151,21 +151,50 @@
   .term-print-sheet .term-print-document{break-after:auto!important;page-break-after:auto!important}
 }
 
-.term-print-sheet .term-print-document{--term-subject-name:10px}
-.term-print-sheet .term-print-document th{font-size:10px}
 .term-print-sheet .term-letterhead{padding-bottom:0;grid-template-columns:9mm 1fr}
 .term-print-sheet .term-letterhead img{width:9mm;height:9mm}
 .term-print-sheet .term-meta,.term-print-sheet .term-student-identification{margin:2px 0;padding:2px 4px}
 .term-print-sheet .term-print-document td,.term-print-sheet .term-print-document th{padding:2px 3px}
-.term-print-sheet .term-print-document{font-size:10px;line-height:1.15}
-.term-print-sheet .term-print-subjects tbody td{line-height:1.1}
+.term-print-sheet .term-print-document{font-size:var(--term-text-size,12px);line-height:var(--term-line-height,1.45)}
+.term-print-sheet .term-print-subjects tbody td{line-height:var(--term-line-height,1.45)}
 .term-print-sheet .term-document-foot{margin-top:2px;padding-top:2px}
 .term-print-sheet .term-subject-assessments{margin-top:2px;padding-top:2px;gap:2px 5px;font-size:8px;line-height:1}
 .term-print-sheet .term-assessment-chip{gap:2px}
 
 .term-print-sheet .term-print-document{
-  font-size:clamp(8px,calc(var(--term-text-size) * .82),11px);
+  font-size:var(--term-text-size,12px);
 }
 .term-print-sheet .term-print-subjects tbody th{
-  font-size:clamp(9px,calc(var(--term-subject-name) * .75),11px);
+  font-size:var(--term-subject-name,12px);
+  font-weight:var(--term-subject-weight,700);
+}
+
+/*
+ * Explicit overflow printing is multi-A4 reflow, never clipping or shrinking
+ * principal-selected font settings. Normal fitting sheets retain their original
+ * configurable students-per-A4 layout; only oversized sheets use this mode.
+ */
+@media print {
+  body.term-reflow-large .term-print-pages {display:block!important}
+  body.term-reflow-large .term-print-sheet {
+    width:auto!important;height:auto!important;min-height:0!important;
+    display:block!important;overflow:visible!important;
+    margin:0!important;padding:0!important;gap:0!important;
+    box-shadow:none!important;break-after:auto!important;page-break-after:auto!important
+  }
+  body.term-reflow-large .term-print-sheet .term-print-document {
+    width:100%!important;height:auto!important;min-height:0!important;
+    display:block!important;overflow:visible!important;
+    break-inside:auto!important;page-break-inside:auto!important;
+    break-after:page!important;page-break-after:always!important;
+    padding:var(--term-page-padding,6mm)!important;
+    font-size:var(--term-text-size,12px)!important
+  }
+  body.term-reflow-large .term-print-sheet .term-print-subjects tbody tr {
+    break-inside:auto!important;page-break-inside:auto!important;height:auto!important
+  }
+  body.term-reflow-large .term-print-sheet .term-print-subjects td,
+  body.term-reflow-large .term-print-sheet .term-print-subjects th {
+    overflow:visible!important;text-overflow:clip!important;white-space:normal!important
+  }
 }
