@@ -101,9 +101,18 @@ export function buildTermOverview(candidates,{start,end,imageReview,edits={},ter
     const teaching=matched.filter(x=>x.source!=='ORIGINAL_ASSESSMENT_ONLY')
     const notes=[...new Set(teaching.map(x=>sourceText(x.teacherText||x.statement)).filter(Boolean))]
     const actualPages=teaching.map(x=>x.page).filter(p=>p&&validPage(p.from)&&validPage(p.to))
-    // A term is a FULL coverage sheet, not a generic one-line teaching summary.
-    // Keep every distinct source teacher statement in source order. Manual
-    // corrections remain editable drafts; they never alter source provenance.
+    // MODE B: Weekly is the auditable source of Term. Merge the weeks' real
+    // page bounds and explicit teacher chapter labels, but do NOT print every
+    // weekly classwork sentence again on the Term sheet. Exactly one short
+    // teaching summary is derived from the collected notes. All originals
+    // remain in originalTeacherNotes/sourceWeeklyCoverage for inspection.
+    const sourceWeeklyCoverage=teaching.map(w=>({
+      start:w.start,end:w.end,originalRange:w.sourceRange||'',
+      pageFrom:w.page&&validPage(w.page.from)?String(w.page.from):'',
+      pageTo:w.page&&validPage(w.page.to)?String(w.page.to):'',
+      sourceIds:[...(w.sourceIds||[])],
+      teacherText:sourceText(w.teacherText||w.statement)
+    }))
     const compactTermStatement=summarizeTermFromOriginalNotes(notes,candidate.source_subject_label)
     const authored=composeTeachingStatement({subject:candidate.source_subject_label,
       notes,pages:actualPages,scope:'term'})
@@ -118,7 +127,8 @@ export function buildTermOverview(candidates,{start,end,imageReview,edits={},ter
     return {
       id,subject:candidate.source_subject_label,
       detail:override.detail===undefined?compactTermStatement:String(override.detail),
-       originalTeacherNotes:notes,sourceChapterTitles:explicitTeacherChapterLabels(notes),sourceUnits:authored.units,
+       originalTeacherNotes:notes,sourceWeeklyCoverage,
+       sourceChapterTitles:explicitTeacherChapterLabels(notes),sourceUnits:authored.units,
        needsLanguageReview:authored.needsLanguageReview,
       // Source-derived page bounds are immutable; keep legacy edits for audit.
       pageFrom:defaultFrom||(override.pageFrom===undefined?'':String(override.pageFrom)),

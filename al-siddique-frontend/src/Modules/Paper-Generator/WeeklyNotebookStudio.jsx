@@ -50,7 +50,7 @@ const chunk=(arr,n)=>Array.from({length:Math.ceil(arr.length/n)},(_,i)=>arr.slic
 const PAGE_OPTIONS=[1,2,3,4,6,8]
 const defaultDesign={cardsPerPage:3,fontSize:10,headerSize:13,schoolNameSize:17,subjectNameSize:14,subjectNameBold:true,
  subjectWidth:25,assessmentWidth:55,rowHeight:22,fontFamily:'Times New Roman',
- studentNameSize:13,tableLineHeight:1.45,assessmentFontSize:11,pagePaddingMm:6,termTemplate:'ivory',termCardsPerPage:2,
+ studentNameSize:13,tableLineHeight:1.45,assessmentFontSize:11,pagePaddingMm:6,termTemplate:'ivory',termCardsPerPage:1,
  urduFontFamily:'Jameel Noori Nastaleeq',palette:'navy',zoom:72}
 const dateLabel=s=>{if(!s)return '';const d=new Date(s+'T12:00:00Z');return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric',timeZone:'UTC'})}
 const originalPageWarning=(rows,count)=>rows.some(x=>x.task.length>105)&&count>3

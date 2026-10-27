@@ -26,7 +26,11 @@ export function improveWeeklyStatement(raw,subject=''){
 export function summarizeTermFromOriginalNotes(notes,subject=''){
   const list=topicTags(notes)
   if(!list.length)return ''
-  const urdu=isUrdu(subject)
+  // Match the *teacher's source script*, not merely the subject label.
+  // No automatic translation or class/topic rewriting is permitted.
+  const sourceHasUrdu=list.some(t=>/[؀-ۿ]/u.test(t))
+  const sourceHasLatin=list.some(t=>/[A-Za-z]/.test(t))
+  const urdu=sourceHasUrdu?true:sourceHasLatin?false:isUrdu(subject)
   const cw=has(list,/\bclass\s*work\b|\bclasswork\b|کلاس\s*ورک/i)
   const ex=has(list,/\bexercise\b|\bexercises\b|\bcopy\s*work\b|مشق|سوال/i)
   const rev=has(list,/\brevis(?:e|ion)\b|دہرائی/i)
