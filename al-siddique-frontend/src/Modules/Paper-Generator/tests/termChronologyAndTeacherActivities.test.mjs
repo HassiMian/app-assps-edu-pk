@@ -72,3 +72,17 @@ test('Source-only Urdu actions stay Urdu and do not add homework that was not as
  assert.ok(!text.includes('ہوم ورک'))
  assert.ok(!text.includes('اسسمنٹ'))
 })
+test('All teacher-assigned work types survive; never discard fifth/sixth instruction',()=>{
+ const text=summarizeTermFromOriginalNotes([
+  'Read the lesson','Complete classwork','Finish homework','Solve exercise',
+  'Complete copy work','Finish task work','Revise work','Learn the lesson',
+  'Assessment 2 scheduled by teacher'],'English')
+ for(const word of ['read','classwork','homework','exercises','written work','tasks','revise','learn','assessment'])
+   assert.match(text,new RegExp(word,'i'))
+ assert.ok(text.split('. ').length<=2)
+})
+test('Explicit NO homework or cancelled test never becomes an assignment',()=>{
+ const text=summarizeTermFromOriginalNotes(['Read the lesson','No homework','No test'],'English')
+ assert.match(text,/read/i)
+ assert.doesNotMatch(text,/homework|assessment/i)
+})

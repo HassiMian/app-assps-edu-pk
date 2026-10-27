@@ -14,5 +14,11 @@ Synthetic examples (NEVER real student data):
 - Week pages 37–40 and 41–48 => Term 37–48; original Unit 7/8 names preserved without generating labels.
 - Weekly explicit reading, classwork, homework, tasks => concise term summary containing those, no unsourced exercises or assessments.
 - Unit/page-only source => no generated teaching action; reversed page numbering => no fake continuous span.
-- 48/48 JS Term/Weekly source & print tests PASS; 79/79 Python release unit tests PASS; production Vite build PASS.
+- 50/50 JS Term/Weekly source & print tests PASS; 79/79 Python release unit tests PASS; production Vite build PASS.
 - Candidate only. No signed owner approval, Principal browser Lesson Save/Reopen/Print or School2 authenticated deny witness. No production deploy / marks or student DB changes.
+
+
+## Additional fail-closed edge tests
+- Eight kinds of explicit original teacher work (reading, classwork, homework, exercises, written work, tasks, revision and learning) are all retained in no more than two summary sentences; do not arbitrarily drop the fifth or sixth task.
+- Explicit negation such as NO HOMEWORK or NO TEST does not become a new obligation or an assessment.
+- New true teacher activity text is taken from all source block-body lines, NOT just the truncated visual first-topic headline.

@@ -35,7 +35,9 @@ export function summarizeTermFromOriginalNotes(notes,subject=''){
   const normalized=lines.map(t=>t.replace(/^(?:pages?|pg|صفحہ(?: نمبر)?)\s*\d+\s*(?:[-–—]|to|تا)\s*\d+\s*[-–—:]?\s*/iu,''))
   // Match only action-bearing lines; strip factual pages/unit headings from
   // the professional sentence while preserving them in provenance fields.
-  const actions=normalized.filter(t=>/\b(?:read|reading|class\s*work|classwork|cw|home\s*work|homework|hw|exercise|exercises|copy\s*work|task\s*work|taskwork|revise|revision|learn|memorize|test|assessment|complete|solve|write)\b|پڑھ|قرأت|کلاس\s*ورک|گھر\s*کا\s*کام|ہوم\s*ورک|مشق|سوال|دہرائی|جائزہ|اسسمنٹ|ٹاسک|یاد|لکھ|مکمل/iu.test(t))
+  const actions=normalized.filter(t=>
+    !/\b(?:no|not|without|cancelled|canceled)\s+(?:homework|classwork|assessment|test|exercise|reading|task)\b|ہوم\s*ورک\s*نہیں|کلاس\s*ورک\s*نہیں|جائزہ\s*نہیں/iu.test(t) &&
+    /\b(?:read|reading|class\s*work|classwork|cw|home\s*work|homework|hw|exercise|exercises|copy\s*work|task\s*work|taskwork|revise|revision|learn|memorize|test|assessment|complete|solve|write)\b|پڑھ|قرأت|کلاس\s*ورک|گھر\s*کا\s*کام|ہوم\s*ورک|مشق|سوال|دہرائی|جائزہ|اسسمنٹ|ٹاسک|یاد|لکھ|مکمل/iu.test(t))
   if(!actions.length)return ''
   const present=(re)=>actions.some(t=>re.test(t))
   const reading=present(/\b(?:read|reading)\b|پڑھ|قرأت/i)
@@ -48,35 +50,37 @@ export function summarizeTermFromOriginalNotes(notes,subject=''){
   const learning=present(/\b(?:learn|memorize)\b|یاد/i)
   const assessment=present(/\b(?:test|assessment)\b|جائزہ|اسسمنٹ/i)
   if(urdu){
-    const items=[
+    const first=[
       reading?'مقررہ متن پڑھیں':'',
-      classwork?'متعلقہ کلاس ورک مکمل کریں':'',
-      homework?'دیے گئے ہوم ورک کو مکمل کریں':'',
-      exercises?'اصل مشقیں حل کریں':'',
-      copy?'مقررہ تحریری کام مکمل کریں':'',
-      task?'دیے گئے ٹاسک مکمل کریں':'',
-      revision?'پڑھے ہوئے کام کی دہرائی کریں':'',
-      learning?'مقررہ کام یاد کریں':''
+      classwork?'کلاس ورک مکمل کریں':'',
+      homework?'ہوم ورک مکمل کریں':'',
+      exercises?'مشقیں حل کریں':'',
+      copy?'تحریری کام مکمل کریں':'',
+      task?'ٹاسک مکمل کریں':''
     ].filter(Boolean)
-    const parts=items.slice(0,4)
-    if(!parts.length)return assessment?'اصل شیڈول کے مطابق جائزے کی تیاری کریں۔':''
-    return parts.join('؛ ')+'۔'+(assessment?' اصل شیڈول کے مطابق جائزے کی تیاری کریں۔':'')
+    const second=[
+      revision?'کام کی دہرائی کریں':'',
+      learning?'مقررہ سبق یاد کریں':'',
+      assessment?'اصل جائزے کی تیاری کریں':''
+    ].filter(Boolean)
+    return [first.join('؛ '),second.join('؛ ')].filter(Boolean).map(x=>x+'۔').join(' ')
   }
-  const items=[
+  const actionsFirst=[
     reading?'read the assigned text':'',
-    classwork?'complete the classwork':'',
-    homework?'complete the given homework':'',
+    classwork?'complete classwork':'',
+    homework?'finish the given homework':'',
     exercises?'solve the specified exercises':'',
-    copy?'complete the written work':'',
-    task?'finish the assigned tasks':'',
-    revision?'revise the covered work':'',
-    learning?'learn the prescribed work':''
+    copy?'complete written work':'',
+    task?'finish assigned tasks':''
   ].filter(Boolean)
-  const parts=items.slice(0,4)
-  if(!parts.length)return assessment?'Prepare for the original recorded assessment.':''
-  const sentence=parts.join('; ')
-  return sentence[0].toUpperCase()+sentence.slice(1)+'.'+
-    (assessment?' Prepare for the original recorded assessment.':'')
+  const actionsNext=[
+    revision?'revise covered work':'',
+    learning?'learn the prescribed material':'',
+    assessment?'prepare for the source-recorded assessment':''
+  ].filter(Boolean)
+  const capitalize=t=>t[0].toUpperCase()+t.slice(1)
+  return [actionsFirst,actionsNext].filter(a=>a.length).map(a=>
+    capitalize(a.join('; '))+'.').join(' ')
 }
 
 // Explicit teacher-given chapter/unit labels and page spans remain in the
