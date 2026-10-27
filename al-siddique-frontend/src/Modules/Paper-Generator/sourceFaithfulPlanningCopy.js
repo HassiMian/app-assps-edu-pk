@@ -36,6 +36,9 @@ export function summarizeTermFromOriginalNotes(notes,subject=''){
   // Match only action-bearing lines; strip factual pages/unit headings from
   // the professional sentence while preserving them in provenance fields.
   const actions=normalized.filter(t=>
+    // A unit/chapter heading (e.g. "Unit 7: Reading Skills") is a TITLE,
+    // not teacher authorization to assign reading or writing as homework.
+    !/^(?:unit|chapter|ch\.?|باب|یونٹ)\s*(?:no\.?\s*)?(?:\d+|[٠-٩۰-۹]+)\s*[:.\-–]?/iu.test(t) &&
     !/\b(?:no|not|without|cancelled|canceled)\s+(?:homework|classwork|assessment|test|exercise|reading|task)\b|ہوم\s*ورک\s*نہیں|کلاس\s*ورک\s*نہیں|جائزہ\s*نہیں/iu.test(t) &&
     /\b(?:read|reading|class\s*work|classwork|cw|home\s*work|homework|hw|exercise|exercises|copy\s*work|task\s*work|taskwork|revise|revision|learn|memorize|test|assessment|complete|solve|write)\b|پڑھ|قرأت|کلاس\s*ورک|گھر\s*کا\s*کام|ہوم\s*ورک|مشق|سوال|دہرائی|جائزہ|اسسمنٹ|ٹاسک|یاد|لکھ|مکمل/iu.test(t))
   if(!actions.length)return ''

@@ -86,3 +86,12 @@ test('Explicit NO homework or cancelled test never becomes an assignment',()=>{
  assert.match(text,/read/i)
  assert.doesNotMatch(text,/homework|assessment/i)
 })
+
+test('Topic title Reading Skills / Homework Policy is never treated as an assigned action',()=>{
+ const c=summarizeTermFromOriginalNotes([
+  'Page 37 to 40 — Unit 7: Reading Skills',
+  'Chapter 4: Homework Policy',
+  'Unit 9: Assessment methods'
+ ],'English')
+ assert.equal(c,'')
+})
