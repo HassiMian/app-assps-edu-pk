@@ -198,3 +198,47 @@
     overflow:visible!important;text-overflow:clip!important;white-space:normal!important
   }
 }
+
+/* Academic-print rule: one A4 per child. Every subject has its own compact
+   table, like the existing single-line Daily Diary print hierarchy. */
+.term-print-sheet{grid-template-rows:1fr!important}
+.term-print-sheet .term-print-document{
+  width:100%;height:100%;overflow:hidden;box-sizing:border-box
+}
+.term-subject-separate-tables{display:grid;grid-template-columns:1fr;gap:3px;margin-top:5px}
+.term-print-subject-mini{
+  border-collapse:collapse;table-layout:fixed;width:100%;
+  font-family:var(--term-text-family,"Times New Roman"),serif;
+  font-size:var(--term-text-size,11px);
+  break-inside:avoid
+}
+.term-print-sheet .term-print-subject-mini th,
+.term-print-sheet .term-print-subject-mini td{
+  border:1px solid #cbd6e1;padding:2px 5px;line-height:1.17;
+  min-height:0;height:auto;vertical-align:top;white-space:normal;
+  overflow-wrap:anywhere
+}
+.term-print-subject-mini thead th{
+  background:#f1f5f9;color:#233f60;
+  text-align:left;font-size:var(--term-subject-name,12px);
+  font-weight:var(--term-subject-weight,700)
+}
+.term-print-subject-mini tbody th{
+  width:21%;font-size:9px;font-weight:700;text-align:left;color:#4c627d
+}
+.term-print-subject-mini tbody td{font-size:var(--term-text-size,11px)}
+.term-print-subject-mini .term-subject-assessments{
+  border:0;display:block;padding:2px 4px;line-height:1.15
+}
+.term-print-subject-mini .term-assessment-chip{margin-right:8px;font-size:9px}
+.term-print-subject-mini .term-pages{display:inline;margin-left:8px;font-weight:700}
+@media print{
+ .term-print-sheet{height:285mm!important;page-break-inside:avoid!important}
+ .term-print-sheet .term-print-document{height:100%!important;overflow:hidden!important;
+    break-inside:avoid!important;page-break-inside:avoid!important}
+ .term-print-sheet:not(:last-child){break-after:page!important}
+}
+.term-print-subject-mini .term-source-chapters{
+ display:block;margin-top:2px;font-size:9px;color:#4b647b;
+ white-space:normal;overflow-wrap:anywhere
+}

@@ -623,8 +623,12 @@ export default function WeeklyNotebookStudio(){
    }
    const oversized=[...copy.querySelectorAll('.term-print-document')].some(card=>
      card.scrollHeight>card.clientHeight+3)
-   // Full source statements remain visible. A long term prints on multiple
-   // A4 pages rather than shrinking fonts or silently clipping academic text.
+   // Exactly one child per A4. Refuse overflow rather than clip, shrink,
+   // silently merge subjects or split their term across extra pages.
+   if(oversized){
+     setError('One-student Term A4 overflow. Shorten only teaching statements or adjust print controls; never change the original pages, chapters or assessments.')
+     return
+   }
    const popup=window.open('','_blank','width=1150,height=900')
    if(!popup){setError('Allow popups to print the term plan.');return}
    const styleLinks=[...document.querySelectorAll('link[rel="stylesheet"]')]

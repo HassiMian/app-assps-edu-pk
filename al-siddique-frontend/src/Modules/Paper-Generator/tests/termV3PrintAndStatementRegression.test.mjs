@@ -7,18 +7,19 @@ const root=new URL('../',import.meta.url)
 const style=fs.readFileSync(new URL('../TermPlannerEditor.css',import.meta.url),'utf8')
 const component=fs.readFileSync(new URL('../WeeklyNotebookStudio.jsx',import.meta.url),'utf8')
 
-test('Term defaults to full original source statements, never a generic summary',()=>{
+test('Term summary stays concise while exact teacher chapter labels remain separate',()=>{
   const candidates=[{
     candidate_key:'en-source-1',source_subject_label:'English',
     source_submissions:['synthetic-term-source'],
     source_detail_records:[{source_id:'synthetic-term-source',source_excerpt_pieces:[
-      {verbatim:'October 15 to October 21\nPage 31 to 40\nUnit 7: Formation of clouds and condensation; reading exercise 3.'}
+      {verbatim:'15 October to 21 October\nPage 31 to 40\nUnit 7: Formation of clouds and condensation; reading exercise 3.'}
     ]}]
   }]
   const [row]=buildTermOverview(candidates,{start:'2026-10-15',end:'2026-11-15'})
-  assert.ok(row.detail.includes('Formation of clouds and condensation'))
-  assert.ok(row.detail.includes('reading exercise 3'))
-  assert.ok(row.originalTeacherNotes.length>0)
+  assert.ok(row.detail.length<180)
+  assert.ok(!row.detail.includes('October 15'))
+  assert.ok(row.sourceChapterTitles.includes('Unit 7: Formation of clouds and condensation; reading exercise 3.'))
+  assert.ok(row.originalTeacherNotes.some(note=>note.includes('Formation of clouds and condensation')))
   assert.equal(row.needsReview,true)
 })
 
@@ -27,7 +28,7 @@ test('Term user edits persist exactly without changing original notes',()=>{
     candidate_key:'one',source_subject_label:'English',
     source_submissions:['synthetic'],
     source_detail_records:[{source_id:'synthetic',source_excerpt_pieces:[
-      {verbatim:'October 15 to October 21\nPage 31 to 40\nUnit 7: Formation of clouds'}
+      {verbatim:'15 October to 21 October\nPage 31 to 40\nUnit 7: Formation of clouds'}
     ]}]
   }]
   const corrections='Lesson statement corrected by teacher.\nComplete chapters as per verified syllabus — not AI assumed pages.'
@@ -51,15 +52,16 @@ test('Selected Term body, header and subject font sizes are not automatically sh
   assert.doesNotMatch(style,/--term-subject-name:10px/)
 })
 
-test('Oversized Term output uses explicit multi-A4 reflow without clipping',()=>{
-  assert.match(style,/body\.term-reflow-large \.term-print-sheet/)
-  assert.match(style,/overflow:visible!important/)
-  assert.match(style,/break-after:page!important/)
+test('Strict one-student-one-A4 Term blocks overflow instead of slicing academic source',()=>{
+  assert.match(style,/\.term-print-sheet\{grid-template-rows:1fr!important\}/)
+  assert.match(style,/\.term-subject-separate-tables/)
+  assert.match(style,/\.term-print-subject-mini/)
   const print=component.slice(component.indexOf('function printTerm(){'),
     component.indexOf('return <section className="wn-studio"',component.indexOf('function printTerm(){')))
-  assert.doesNotMatch(print,/if\(oversized\)\{setError/)
-  assert.match(print,/const bodyClass=oversized\?/)
-  assert.match(print,/teacher statements|Full source statements|Long source statements/i)
+  assert.match(print,/if\(oversized\)\{/)
+  assert.match(print,/One-student Term A4 overflow/)
+  assert.match(print,/return/)
+  assert.ok(print.indexOf('if(oversized){')<print.indexOf("window.open("))
 })
 
 test('Print load listener is installed BEFORE popup document closes and printing is single-shot',()=>{

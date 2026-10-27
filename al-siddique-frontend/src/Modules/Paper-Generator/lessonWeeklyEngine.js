@@ -1,3 +1,4 @@
+import {improveWeeklyStatement} from './sourceFaithfulPlanningCopy.js'
 // ASSPS evidence-first, non-destructive week planner.
 // Never interpret generated teaching schedule as quoted WhatsApp instructions.
 export const CLASS_INCHARGES=Object.freeze({
@@ -43,10 +44,11 @@ export function shortDiary(subject,pages,topic=''){
  const rtl=/Urdu|Islamiyat|Islamiat|Quran|Pakistan Studies|اردو|اسلامیات/i.test(subject)
  const p=pages?(rtl?'صفحہ نمبر ':'Pages ')+pages.from+(pages.to===pages.from?'':'–'+pages.to):''
  let detail=clean(topic).replace(/^Work\s*:/i,'').replace(/\s+/g,' ').trim()
- if(detail.length>80)detail=detail.slice(0,77).trim()+'…'
- if(detail&&!/^(page|pg|صفحہ)/i.test(detail))return p?p+' — '+detail:detail
- if(p)return p+(rtl?' — پڑھیں اور مشق مکمل کریں۔':' — Read & complete classwork.')
- return 'Original topic needs review.'
+ detail=improveWeeklyStatement(detail,subject)
+ // Original teacher instructions take precedence over generic replacement.
+ if(detail)return p&&!/^(?:pages?|pg|صفحہ)/iu.test(detail)?p+' — '+detail:detail
+ if(p)return p
+ return ''
 }
 
 const finalTeachingDay=d=>{
@@ -87,7 +89,7 @@ function topicsWithoutDates(c){
   return Array.from({length:match[1]-match[0]+1},(_,i)=>{
    const n=match[0]+i
    const line=a.find(x=>new RegExp('unit\\s*(?:no\\.?)?\\s*:?\\s*'+n+'\\b','i').test(x))
-   return 'Unit '+n+(line?' — '+line.replace(/.*?\d+\s*/,''):' — title not supplied')
+   return 'Unit '+n+(line?' — '+line.replace(/.*?\d+\s*/,''):'')
   })
  }
  return topicLines
@@ -177,8 +179,8 @@ export function compileWeeklyPlan(c,options={}){
   explicitAssessments
  }
  if(!blocks.length)return {
-  mode:'PROPOSED',weeks:proposed(c,beginning,ending),sourceDerived:false,
-  warnings:['Original source has no dated weekly breakdown; all dates are proposed.'],
+  mode:'SOURCE_UNDATED_REVIEW',weeks:[],sourceDerived:false,
+  warnings:['Original weekly dates not supplied. No class allocations, chapters or dates invented.'],
   explicitAssessments
  }
  const weeks=[]
@@ -199,9 +201,10 @@ export function compileWeeklyPlan(c,options={}){
   }
   if(block.hasAssessment && !explicitAssessments.some(a=>
    a.date>=iso(block.start)&&a.date<=iso(new Date(block.end.getTime()+7*DAY)))){
-   const proposedDay=finalTeachingDay(block.end)
-   const target=weeks.findLast(w=>w.start<=iso(proposedDay)&&w.end>=iso(proposedDay)&&w.sourceIds?.includes(block.sourceId))
-   if(target)target.assessment={date:iso(proposedDay),label:'Assessment',origin:'PROPOSED_END_OF_BLOCK'}
+   const target=weeks.findLast(w=>w.sourceIds?.includes(block.sourceId))
+   if(target)target.assessment={date:'',label:'Assessment (source date not supplied)',
+     origin:'SOURCE_UNDATED_ASSESSMENT',sourceId:block.sourceId}
+   warnings.push('Teacher assessment has no exact source date; none was assigned.')
   }
  }
  for(const a of explicitAssessments){

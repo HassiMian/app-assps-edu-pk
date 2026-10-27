@@ -1,3 +1,4 @@
+import {summarizeTermFromOriginalNotes,explicitTeacherChapterLabels} from './sourceFaithfulPlanningCopy.js'
 // Unified Term coverage is derived from the same evidence-first weekly engine.
 // Proposed allocations are never promoted to verified textbook/source claims.
 import {compileWeeklyPlan} from './lessonWeeklyEngine.js'
@@ -41,7 +42,7 @@ export function buildTermOverview(candidates,{start,end,imageReview,edits={},ter
       const pageTo=to.length?String(Math.max(...to)):''
       // Preserve A/B identities without repeating the same term page spans in
       // every weekly source sentence. Do not infer a missing part as approved.
-      const concisePart=part=>String(part.row.detail||'No verified source coverage; review original plan.')
+      const concisePart=part=>String(part.row.detail||'Teacher source pending.')
         .replace(/^(?:Pages?\s+\d+\s*[–-]\s*\d+|صفحہ\s*نمبر\s*\d+\s*تا\s*\d+)\s*[—–:-]?\s*/iu,'').trim()
       const combined=[pageFrom&&pageTo?
         (/urdu|اسلام|اردو|قرآن/i.test(candidate.source_subject_label)?
@@ -51,6 +52,7 @@ export function buildTermOverview(candidates,{start,end,imageReview,edits={},ter
       return {
         id,subject:candidate.source_subject_label,
         detail:override.detail===undefined?combined:String(override.detail),
+        sourceChapterTitles:parts.flatMap(p=>p.row.sourceChapterTitles||[]),
         // Verified A/B Second Term page bounds cannot be overwritten by
         // stale or cross-account local draft edits. Unverified terms remain editable.
         pageFrom:term==='Second Term'&&pageFrom?pageFrom:
@@ -102,7 +104,7 @@ export function buildTermOverview(candidates,{start,end,imageReview,edits={},ter
     // A term is a FULL coverage sheet, not a generic one-line teaching summary.
     // Keep every distinct source teacher statement in source order. Manual
     // corrections remain editable drafts; they never alter source provenance.
-    const fullTermStatement=notes.join('\n')
+    const compactTermStatement=summarizeTermFromOriginalNotes(notes,candidate.source_subject_label)
     const authored=composeTeachingStatement({subject:candidate.source_subject_label,
       notes,pages:actualPages,scope:'term'})
     const defaultFrom=authored.pageFrom
@@ -115,8 +117,8 @@ export function buildTermOverview(candidates,{start,end,imageReview,edits={},ter
     const override=edits[id]||{}
     return {
       id,subject:candidate.source_subject_label,
-      detail:override.detail===undefined?fullTermStatement:String(override.detail),
-       originalTeacherNotes:notes,sourceUnits:authored.units,
+      detail:override.detail===undefined?compactTermStatement:String(override.detail),
+       originalTeacherNotes:notes,sourceChapterTitles:explicitTeacherChapterLabels(notes),sourceUnits:authored.units,
        needsLanguageReview:authored.needsLanguageReview,
       // Source-derived page bounds are immutable; keep legacy edits for audit.
       pageFrom:defaultFrom||(override.pageFrom===undefined?'':String(override.pageFrom)),

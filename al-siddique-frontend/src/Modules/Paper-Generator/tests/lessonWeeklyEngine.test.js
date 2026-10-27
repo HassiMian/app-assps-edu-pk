@@ -18,11 +18,11 @@ test('October dates and textbook page numbers stay chronological',()=>{
  assert.equal(a[1].page.to,26)
  assert.ok(a.some(w=>w.start==='2026-11-02'))
 })
-test('Class Four English preserves precise proposed assessment dates',()=>{
+test('Class Four English preserves exact chapter and page but NEVER invents assessment dates',()=>{
  const c=candidate('4','English','15 Oct to 15 Nov\nUnit No #07 + Verb Pg 29-32 + Assessment + Application\n15 Nov to 15 Dec\nUnit No 8 and 9 + Pronoun + Assessment + Letter - Birthday Present')
  const w=compileWeeklyPlan(c).weeks
- assert.ok(w.some(x=>x.assessment?.date==='2026-11-14'))
- assert.ok(w.some(x=>x.assessment?.date==='2026-12-14'))
+ assert.ok(w.some(x=>x.assessment?.origin==='SOURCE_UNDATED_ASSESSMENT'))
+ assert.ok(!w.some(x=>x.assessment?.date==='2026-11-14'||x.assessment?.date==='2026-12-14'))
  assert.equal(w[0].page.from,29)
  assert.ok(w[0].statement.includes('Unit No'))
  assert.ok(!w.some(x=>x.assessment?.origin==='ORIGINAL_SOURCE'))
@@ -36,12 +36,12 @@ test('Urdu numeric ranges are source-preserved and isolated from original text',
  assert.equal(c.source_detail_records[0].source_excerpt_pieces[0].verbatim,original)
  assert.match(shortDiary('Islamiyat',{from:79,to:82}),/صفحہ نمبر 79–82/)
 })
-test('Class Two and Class Three source lacking weeks remains proposed',()=>{
+test('Class Two and Three source lacking dates remains BLOCKED without weekly allocations',()=>{
  const c=candidate('3','English-A','English-A\nUnit no:7 Seasons\nTo\nUnit no :9 All about rules')
  const out=compileWeeklyPlan(c,{start:'2026-10-15',end:'2026-11-15'})
- assert.equal(out.mode,'PROPOSED')
- assert.ok(out.weeks.length>=4)
- assert.ok(out.weeks.every(x=>x.source==='PROPOSED_WEEKLY_ALLOCATION'&&x.reviewRequired))
+ assert.equal(out.mode,'SOURCE_UNDATED_REVIEW')
+ assert.equal(out.weeks.length,0)
+ assert.ok(out.warnings.some(x=>x.includes('No class allocations')))
 })
 test('Class-One original image cannot invent academic transcription',()=>{
  const out=compileWeeklyPlan({proposed_class_level:'1',source_subject_label:'English-A',source_detail_records:[],source_submissions:['WA14-IMG-C1']})
