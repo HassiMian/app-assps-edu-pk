@@ -68,6 +68,15 @@ async function up(options={}){
       RETURNS trigger LANGUAGE plpgsql SECURITY DEFINER
       SET search_path = pg_catalog, public AS $actor$
     BEGIN
+      -- A school-scoped signer is not sufficient to prove the named human.
+      -- Require the existing transaction-bound HMAC actor claim to be EXACTLY
+      -- the inserted audit actor; unsigned/expired/forged claim fails closed.
+      IF NEW.actor_user_id::text IS DISTINCT FROM
+          current_setting('app.core_actor_id',true)
+          OR core_security.signed_school_allowed(NEW.school_id) IS NOT TRUE THEN
+        RAISE EXCEPTION 'EXAM_MARKS_REVISION_SIGNED_ACTOR_MISMATCH'
+          USING ERRCODE='42501';
+      END IF;
       IF NOT EXISTS (
         SELECT 1 FROM public.users u
          WHERE u.id=NEW.actor_user_id AND u.school_id=NEW.school_id
@@ -127,13 +136,19 @@ async function up(options={}){
     JOIN pg_class c ON c.oid=t.tgrelid JOIN pg_namespace n ON n.oid=c.relnamespace
     WHERE n.nspname='public' AND c.relname='exam_marks_revision_history'
       AND t.tgname='exam_marks_revision_immutable' AND t.tgenabled='O'`)
+  const signedActorTrigger=await client.query(`SELECT COUNT(*)::int AS count FROM pg_trigger t
+    JOIN pg_class c ON c.oid=t.tgrelid JOIN pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND c.relname='exam_marks_revision_history'
+      AND t.tgname='exam_marks_revision_actor_eligibility' AND t.tgenabled='O'`)
+  if(Number(signedActorTrigger.rows[0]?.count)!==1)
+   throw Error('EXAM_MARKS_SIGNED_ACTOR_TRIGGER_REQUIRED')
   if(Number(immutable.rows[0]?.count)!==1)
    throw Error('EXAM_MARKS_AUDIT_APPEND_ONLY_TRIGGER_REQUIRED')
   if(check.rows.length!==1 || !check.rows[0].relrowsecurity ||
      !check.rows[0].relforcerowsecurity || !check.rows[0].has_policy)
     throw Error('EXAM_MARKS_REVISION_FORCE_RLS_VERIFICATION_FAILED')
   await client.query('COMMIT')
-  return {created:true,appendOnlyAudit:true,schoolSigned:true,existingMarksChanged:false,productionApproved:false}
+  return {created:true,appendOnlyAudit:true,schoolSigned:true,actorSignatureEnforced:true,existingMarksChanged:false,productionApproved:false}
  }catch(e){try{await client.query('ROLLBACK')}catch(_){}throw e}
  finally{client.release()}
 }

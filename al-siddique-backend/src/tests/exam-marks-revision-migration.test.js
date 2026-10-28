@@ -1,7 +1,7 @@
 'use strict'
 const test=require('node:test'),assert=require('node:assert/strict')
 const {up}=require('../../migrations/034_exam_marks_revision_history')
-function pool({signed=true,restricted=true,rls=true,immutable=true}={}){
+function pool({signed=true,restricted=true,rls=true,immutable=true,signedActorTrigger=true}={}){
  const q=[]
  const db={connect:async()=>({
   query:async(text,params)=>{
@@ -9,6 +9,7 @@ function pool({signed=true,restricted=true,rls=true,immutable=true}={}){
    if(String(text).includes('to_regprocedure'))return {rows:[{fn:signed?'core_security.signed_school_allowed(integer)':null}]}
    if(String(text).includes('FROM pg_roles'))return {rows:[{rolsuper:!restricted,rolbypassrls:!restricted}]}
    if(String(text).includes('FROM pg_class c'))return {rows:[{relrowsecurity:rls,relforcerowsecurity:rls,has_policy:rls}]}
+   if(String(text).includes("t.tgname='exam_marks_revision_actor_eligibility'"))return {rows:[{count:signedActorTrigger?1:0}]}
    if(String(text).includes('FROM pg_trigger t'))return {rows:[{count:immutable?1:0}]}
    return {rows:[],rowCount:0}
   },release:()=>q.push('RELEASE')
@@ -56,6 +57,13 @@ test('missing verified FORCE RLS rolls back migration',async()=>{
 test('missing append-only trigger refuses migration COMMIT',async()=>{
  const m=pool({immutable:false})
  await assert.rejects(()=>up({pool:m.db,runtimeRole:'apex_app_runtime'}),/APPEND_ONLY_TRIGGER_REQUIRED/)
+ assert.ok(m.q.includes('ROLLBACK'))
+ assert.ok(!m.q.includes('COMMIT'))
+})
+
+test('missing enabled signed-actor trigger rolls back additive migration',async()=>{
+ const m=pool({signedActorTrigger:false})
+ await assert.rejects(up({pool:m.db,runtimeRole:'apex_app_runtime'}),/EXAM_MARKS_SIGNED_ACTOR_TRIGGER_REQUIRED/)
  assert.ok(m.q.includes('ROLLBACK'))
  assert.ok(!m.q.includes('COMMIT'))
 })
