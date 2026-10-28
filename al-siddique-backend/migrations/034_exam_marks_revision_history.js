@@ -37,6 +37,53 @@ async function up(options={}){
       CONSTRAINT exam_marks_revision_result_school_fk
         FOREIGN KEY(school_id,exam_result_id) REFERENCES public.exam_results(school_id,id)
     );
+    -- Immutable original source identity and same-school actor (defence in depth).
+    -- Requires exact student, exam, subject and school match, not only result id.
+    CREATE UNIQUE INDEX IF NOT EXISTS exam_results_school_record_identity_key
+      ON public.exam_results(school_id,id,exam_id,student_id,subject);
+    CREATE UNIQUE INDEX IF NOT EXISTS users_school_actor_identity_key
+      ON public.users(school_id,id);
+    DO $identity_guard$
+    BEGIN
+      IF NOT EXISTS (SELECT 1 FROM pg_constraint
+          WHERE conrelid='public.exam_marks_revision_history'::regclass
+            AND conname='exam_marks_revision_source_identity_fk') THEN
+        ALTER TABLE public.exam_marks_revision_history
+          ADD CONSTRAINT exam_marks_revision_source_identity_fk
+          FOREIGN KEY(school_id,exam_result_id,exam_id,student_id,subject)
+          REFERENCES public.exam_results(school_id,id,exam_id,student_id,subject);
+      END IF;
+      IF NOT EXISTS (SELECT 1 FROM pg_constraint
+          WHERE conrelid='public.exam_marks_revision_history'::regclass
+            AND conname='exam_marks_revision_actor_school_fk') THEN
+        ALTER TABLE public.exam_marks_revision_history
+          ADD CONSTRAINT exam_marks_revision_actor_school_fk
+          FOREIGN KEY(school_id,actor_user_id) REFERENCES public.users(school_id,id);
+      END IF;
+    END
+    $identity_guard$;
+    -- A cross-school FK alone does not ensure the ratifying actor is a Principal.
+    -- Fail closed if the referenced same-school actor is inactive or not eligible.
+    CREATE OR REPLACE FUNCTION public.assps_exam_marks_audit_actor_eligibility()
+      RETURNS trigger LANGUAGE plpgsql SECURITY DEFINER
+      SET search_path = pg_catalog, public AS $actor$
+    BEGIN
+      IF NOT EXISTS (
+        SELECT 1 FROM public.users u
+         WHERE u.id=NEW.actor_user_id AND u.school_id=NEW.school_id
+           AND u.is_active IS TRUE AND u.role IN ('principal','owner')
+      ) THEN
+        RAISE EXCEPTION 'EXAM_MARKS_REVISION_ACTIVE_PRINCIPAL_OR_OWNER_REQUIRED'
+          USING ERRCODE='42501';
+      END IF;
+      RETURN NEW;
+    END;
+    $actor$;
+    REVOKE ALL ON FUNCTION public.assps_exam_marks_audit_actor_eligibility() FROM PUBLIC;
+    DROP TRIGGER IF EXISTS exam_marks_revision_actor_eligibility ON public.exam_marks_revision_history;
+    CREATE TRIGGER exam_marks_revision_actor_eligibility
+      BEFORE INSERT ON public.exam_marks_revision_history
+      FOR EACH ROW EXECUTE FUNCTION public.assps_exam_marks_audit_actor_eligibility();
     -- Also upgrade existing isolated/staged ledgers without truncating rows.
     DO $guard$
     BEGIN
