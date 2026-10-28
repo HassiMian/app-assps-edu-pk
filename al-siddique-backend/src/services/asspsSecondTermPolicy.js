@@ -16,6 +16,11 @@ const isSecondTermLabel=value=>{
     /(?:^|[\s|/:·()[\]])(?:second|2nd|2|ii)\s+(?:term|semester)(?=$|[\s|/:·()[\]])/.test(text)||
     /(?:^|[\s|/:·()[\]])(?:term|semester)\s+(?:second|2nd|two|2|ii)(?=$|[\s|/:·()[\]])/.test(text)
 }
+// Numeric and ordinal codes are meaningful ONLY in explicit term fields.
+// Never interpret an arbitrary '2' in a provenance termKey (e.g. section 2)
+// as Second Term.
+const isSecondTermField=value=>isSecondTermLabel(value)||
+  /^(?:0?2|2nd|ii|two)$/i.test(String(value??'').trim())
 function violatesAsspsSecondTermPolicy(schoolId,entry={}){
   if(Number(schoolId)!==1)return false
   const body=entry&&typeof entry==='object'?entry:{}
@@ -31,7 +36,7 @@ function violatesAsspsSecondTermPolicy(schoolId,entry={}){
   const scopes=[body,payload,nested,direct]
   const gradeEight=scopes.some(x=>[x.classLevel,x.class_level,x.klass,x.grade].some(isEight))
   const termSecond=scopes.some(x=>
-    [x.termLabel,x.term,x.sessionTerm,x.session_term,x.term_name].some(isSecondTermLabel)||
+    [x.termLabel,x.term,x.sessionTerm,x.session_term,x.term_name].some(isSecondTermField)||
     String(x.provenance?.sourceArchiveScope||'').trim().toUpperCase()==='SECOND_TERM_ONLY'||
     [x.provenance?.termKey,x.termKey].some(value=>
       String(value??'').split('|').some(isSecondTermLabel)))

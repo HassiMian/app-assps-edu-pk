@@ -82,3 +82,18 @@ test('dated labels, nested source termKey and conflicting key names cannot bypas
  assert.equal(deny(1,{classLevel:'Eight',payload:{plannerDocument:{provenance:{termKey:'eight|blue|first term|2026-04'}}}}),false)
  assert.equal(deny(1,{classLevel:'Pre-Nine',termLabel:'2026–27 / Second Term'}),false)
 })
+
+test('explicit term-field numeric/ordinal codes cannot bypass School1 Eight policy',()=>{
+ for(const term of [2,'2','02','2nd','II','two']){
+  for(const key of ['term','termLabel','sessionTerm','session_term','term_name']){
+   const input={classLevel:'Eight',[key]:term}
+   assert.equal(deny(1,input),true,`${key}=${term}`)
+   assert.equal(deny(2,input),false,`peer ${key}=${term}`)
+   assert.equal(deny(1,{classLevel:'Seven',[key]:term}),false,`Seven ${key}=${term}`)
+  }
+ }
+ for(const term of [1,'1','01','1st','I','one','2026','2027'])
+  assert.equal(deny(1,{classLevel:'Eight',term}),false,`not second term: ${term}`)
+ assert.equal(deny(1,{classLevel:'Eight',payload:{plannerDocument:{sessionTerm:'II'}}}),true)
+ assert.equal(deny(1,{classLevel:'Eight',payload:{plannerDocument:{provenance:{termKey:'eight|blue|2|2026-10-15'}}}}),false,'termKey components must not treat arbitrary 2 as Second Term')
+})
