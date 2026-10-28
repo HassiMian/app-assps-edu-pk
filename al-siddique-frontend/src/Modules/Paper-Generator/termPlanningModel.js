@@ -1,6 +1,7 @@
 // Unified Term coverage is derived from the same evidence-first weekly engine.
 // Proposed allocations are never promoted to verified textbook/source claims.
 import {compileWeeklyPlan} from './lessonWeeklyEngine.js'
+import {assertSecondTermAcademicPolicy} from './secondTermAcademicScope.js'
 import {createEmptyLessonPlanDocument,toLessonPlanPersistencePayload,
   normalizeLessonPlanDocument} from './lessonPlanDomain.js'
 
@@ -110,7 +111,8 @@ export function validateTermContent({klass,start,end,rows,assessments}){
   return true
 }
 export function buildTermServerPayload({klass,section,term,start,end,rows,
-  assessments,design,sourceZipSha256,existing}){
+  assessments,design,sourceZipSha256,existing,schoolId}){
+  assertSecondTermAcademicPolicy(klass,term,schoolId)
   validateTermContent({klass,start,end,rows,assessments})
   if(!term||!/^([a-f0-9]{64})$/.test(String(sourceZipSha256||'')))
     throw Error('Verified original source and term name are required')

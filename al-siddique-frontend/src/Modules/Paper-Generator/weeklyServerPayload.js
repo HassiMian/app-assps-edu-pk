@@ -1,10 +1,12 @@
 // Pure weekly persistence payload for deterministic, DB-free regression tests.
 import {createEmptyLessonPlanDocument,toLessonPlanPersistencePayload,
  normalizeLessonPlanDocument} from './lessonPlanDomain.js'
+import {assertSecondTermAcademicPolicy} from './secondTermAcademicScope.js'
 export const WEEKLY_MARKER='ASSPS_WEEKLY_NOTEBOOK_V1'
 const trim=s=>String(s||'').trim()
 export const weeklyIdentity=(klass,section,start)=>[trim(klass),trim(section),trim(start)].map(x=>x.toLowerCase()).join('|')
-export function buildWeeklyServerPayload({klass,section,week,rows,teacherLabel,sourceZipSha256,existing,design}){
+export function buildWeeklyServerPayload({klass,section,week,rows,teacherLabel,sourceZipSha256,existing,design,schoolId}){
+ assertSecondTermAcademicPolicy(klass,'Second Term',schoolId)
  if(!klass||!week?.start||!week?.end||!Array.isArray(rows)||!rows.length)
   throw new Error('Class, teaching week and at least one subject are required')
  const sourceDigest=String(sourceZipSha256||'')

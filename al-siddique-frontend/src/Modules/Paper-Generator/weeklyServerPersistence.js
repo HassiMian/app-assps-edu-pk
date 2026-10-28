@@ -1,7 +1,8 @@
 import {createLessonPlan,updateLessonPlan,listLessonPlans} from './lessonPlanClient'
 import {normalizeLessonPlanDocument} from './lessonPlanDomain'
 import {WEEKLY_MARKER,buildWeeklyServerPayload} from './weeklyServerPayload'
-import api from '../../services/api'
+import api, {getAuthUser} from '../../services/api'
+import {assertSecondTermAcademicPolicy} from './secondTermAcademicScope.js'
 export {WEEKLY_MARKER,weeklyIdentity,buildWeeklyServerPayload} from './weeklyServerPayload'
 
 export function eligibleWeeklyPlans(plans=[]){
@@ -22,7 +23,9 @@ export async function listWeeklyServerPlans(){
  return eligibleWeeklyPlans(await listLessonPlans({limit:500}))
 }
 export async function saveWeeklyServerPlan(args){
- const payload=buildWeeklyServerPayload(args)
+ const authUser=getAuthUser() || {}
+ assertSecondTermAcademicPolicy(args?.klass,'Second Term',authUser.school_id ?? authUser.schoolId)
+ const payload=buildWeeklyServerPayload({...args,schoolId:authUser.school_id ?? authUser.schoolId})
  return args.existing?updateLessonPlan(payload):createLessonPlan(payload)
 }
 export async function loadPrincipalSourceLibrary(){
