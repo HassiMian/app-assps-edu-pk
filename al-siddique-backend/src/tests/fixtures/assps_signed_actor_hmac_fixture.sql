@@ -44,7 +44,7 @@ GRANT EXECUTE ON FUNCTION core_security.valid_signed_context() TO apex_app_runti
 GRANT EXECUTE ON FUNCTION core_security.signed_school_allowed(integer) TO apex_app_runtime;
 CREATE TABLE public.schools(id integer PRIMARY KEY);
 CREATE TABLE public.users(id integer PRIMARY KEY,school_id integer NOT NULL,role text NOT NULL,is_active boolean NOT NULL);
-CREATE TABLE public.exam_results(id integer PRIMARY KEY,school_id integer NOT NULL,exam_id integer NOT NULL,student_id integer NOT NULL,subject varchar NOT NULL,marks_obtained numeric(10,2) NOT NULL);
+CREATE TABLE public.exam_results(id integer PRIMARY KEY,school_id integer NOT NULL,exam_id integer NOT NULL,student_id integer NOT NULL,subject varchar NOT NULL,marks_obtained numeric(10,2) NOT NULL,total_marks integer NOT NULL DEFAULT 20,grade text);
 INSERT INTO public.schools VALUES(1),(2);
 INSERT INTO public.users VALUES(11,1,'principal',true),(12,1,'teacher',true),(13,1,'principal',true),(22,2,'principal',true);
 INSERT INTO public.exam_results VALUES(101,1,31,42,'Science',0);

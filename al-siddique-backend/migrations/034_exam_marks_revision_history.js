@@ -88,6 +88,52 @@ async function up(options={}){
       RETURN NEW;
     END;
     $actor$;
+    -- Ensure audit history truthfully chains to the original saved result or
+    -- the latest signed revision. Serialize concurrent writers on the source
+    -- result row; this is append-only and NEVER modifies exam_results.
+    CREATE OR REPLACE FUNCTION public.assps_exam_marks_audit_previous_value()
+      RETURNS trigger LANGUAGE plpgsql SECURITY DEFINER
+      SET search_path = pg_catalog, public AS $prior$
+    DECLARE
+      base_marks numeric(10,2);
+      base_grade text;
+      base_total integer;
+      expected_marks numeric(10,2);
+      expected_grade text;
+    BEGIN
+      SELECT er.marks_obtained,er.grade,er.total_marks
+        INTO base_marks,base_grade,base_total
+        FROM public.exam_results er
+       WHERE er.school_id=NEW.school_id AND er.id=NEW.exam_result_id
+       FOR UPDATE;
+      IF NOT FOUND OR base_marks IS NULL OR
+         base_total IS DISTINCT FROM NEW.total_marks THEN
+        RAISE EXCEPTION 'EXAM_MARKS_REVISION_SOURCE_TOTAL_OR_SCORE_MISMATCH'
+          USING ERRCODE='23514';
+      END IF;
+      SELECT h.new_marks,h.new_grade
+        INTO expected_marks,expected_grade
+        FROM public.exam_marks_revision_history h
+       WHERE h.school_id=NEW.school_id AND h.exam_result_id=NEW.exam_result_id
+       ORDER BY h.id DESC LIMIT 1;
+      IF NOT FOUND THEN
+        expected_marks:=base_marks;
+        expected_grade:=base_grade;
+      END IF;
+      IF NEW.old_marks IS DISTINCT FROM expected_marks OR
+         COALESCE(NEW.old_grade,'') IS DISTINCT FROM
+           COALESCE(expected_grade,'') THEN
+        RAISE EXCEPTION 'EXAM_MARKS_REVISION_PREVIOUS_VALUE_MISMATCH'
+          USING ERRCODE='23514';
+      END IF;
+      RETURN NEW;
+    END;
+    $prior$;
+    REVOKE ALL ON FUNCTION public.assps_exam_marks_audit_previous_value() FROM PUBLIC;
+    DROP TRIGGER IF EXISTS exam_marks_revision_previous_value_guard ON public.exam_marks_revision_history;
+    CREATE TRIGGER exam_marks_revision_previous_value_guard
+      BEFORE INSERT ON public.exam_marks_revision_history
+      FOR EACH ROW EXECUTE FUNCTION public.assps_exam_marks_audit_previous_value();
     REVOKE ALL ON FUNCTION public.assps_exam_marks_audit_actor_eligibility() FROM PUBLIC;
     DROP TRIGGER IF EXISTS exam_marks_revision_actor_eligibility ON public.exam_marks_revision_history;
     CREATE TRIGGER exam_marks_revision_actor_eligibility
@@ -140,6 +186,12 @@ async function up(options={}){
     JOIN pg_class c ON c.oid=t.tgrelid JOIN pg_namespace n ON n.oid=c.relnamespace
     WHERE n.nspname='public' AND c.relname='exam_marks_revision_history'
       AND t.tgname='exam_marks_revision_actor_eligibility' AND t.tgenabled='O'`)
+  const previousValueTrigger=await client.query(`SELECT COUNT(*)::int AS count FROM pg_trigger t
+    JOIN pg_class c ON c.oid=t.tgrelid JOIN pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND c.relname='exam_marks_revision_history'
+      AND t.tgname='exam_marks_revision_previous_value_guard' AND t.tgenabled='O'`)
+  if(Number(previousValueTrigger.rows[0]?.count)!==1)
+   throw Error('EXAM_MARKS_PREVIOUS_VALUE_TRIGGER_REQUIRED')
   if(Number(signedActorTrigger.rows[0]?.count)!==1)
    throw Error('EXAM_MARKS_SIGNED_ACTOR_TRIGGER_REQUIRED')
   if(Number(immutable.rows[0]?.count)!==1)
@@ -148,7 +200,7 @@ async function up(options={}){
      !check.rows[0].relforcerowsecurity || !check.rows[0].has_policy)
     throw Error('EXAM_MARKS_REVISION_FORCE_RLS_VERIFICATION_FAILED')
   await client.query('COMMIT')
-  return {created:true,appendOnlyAudit:true,schoolSigned:true,actorSignatureEnforced:true,existingMarksChanged:false,productionApproved:false}
+  return {created:true,appendOnlyAudit:true,schoolSigned:true,actorSignatureEnforced:true,previousValueGuard:true,existingMarksChanged:false,productionApproved:false}
  }catch(e){try{await client.query('ROLLBACK')}catch(_){}throw e}
  finally{client.release()}
 }
