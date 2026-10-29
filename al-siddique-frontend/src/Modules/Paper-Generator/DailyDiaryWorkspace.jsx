@@ -47,6 +47,7 @@ import {
   normalizeLessonPlanDocument,
   toLessonPlanPersistencePayload
 } from './lessonPlanDomain'
+import { buildStudentTermDiary3Up } from './studentTermDiary3Up'
 import './DailyDiaryWorkspace.css'
 
 const DRAFT_KEY = 'assps_daily_diary_workspace_v3'
@@ -444,7 +445,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   useEffect(() => {
     if (!classLevel) { let cancelled = false; queueMicrotask(() => { if (!cancelled) { setStudents([]); setSelectedStudentIds([]) } }); return () => { cancelled = true } }
     let cancelled = false; queueMicrotask(() => { if (!cancelled) setRosterStatus('Loading roster…') })
-    api.get('/api/students', { params: { class: classLabel }, skipCache: true }).then(response => { if (cancelled) return; const list = Array.isArray(response.data?.data) ? response.data.data : Array.isArray(response.data) ? response.data : []; const scoped = section ? list.filter(student => !studentSection(student) || studentSection(student).toLowerCase() === section.toLowerCase()) : list; setStudents(scoped); setSelectedStudentIds(scoped.map(studentId)); setRosterStatus(`${scoped.length} students loaded`) }).catch(error => { if (cancelled) return; setRosterStatus(error?.response?.data?.message || 'Student roster unavailable. Existing selection preserved.') }).finally(() => { })
+    api.get('/api/students', { params: { class: classLabel, active: 'true' }, skipCache: true }).then(response => { if (cancelled) return; const list = Array.isArray(response.data?.data) ? response.data.data : Array.isArray(response.data) ? response.data : []; const scoped = section ? list.filter(student => !studentSection(student) || studentSection(student).toLowerCase() === section.toLowerCase()) : list; setStudents(scoped); setSelectedStudentIds(scoped.map(studentId)); setRosterStatus(`${scoped.length} students loaded`) }).catch(error => { if (cancelled) return; setRosterStatus(error?.response?.data?.message || 'Student roster unavailable. Existing selection preserved.') }).finally(() => { })
     return () => { cancelled = true }
   }, [classLevel, classLabel, section])
 
@@ -710,6 +711,32 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   const toggleStudent = id => setSelectedStudentIds(current => current.includes(id) ? current.filter(value => value !== id) : [...current, id])
   const selectAll = () => setSelectedStudentIds(students.map(studentId))
   const clearStudents = () => setSelectedStudentIds([])
+
+  // Actual SaaS students + saved/planned curriculum: same locked landscape 3-up print geometry.
+  // This is a print preview, NOT an academic approval or a database write.
+  const printStudentTermCards = () => {
+    try {
+      const output = buildStudentTermDiary3Up({
+        students:selectedStudents,
+        plan:lessonDoc,
+        classLevel:classLabel,
+        section,
+        schoolName,
+        logoUrl:logoUrl ? resolveAssetUrl(logoUrl) : '',
+      })
+      const preview = window.open('', '_blank', 'width=1180,height=900')
+      if (!preview) { setStatus('Allow the print preview popup to open for student term diaries.'); return }
+      preview.document.open()
+      preview.document.write(output.html)
+      preview.document.close()
+      setStatus(`Student Term Diary preview: ${output.students} authenticated student cards, ${output.pages} landscape A4 sheets.`)
+      // Wait for fonts and the official school crest before invoking browser print.
+      Promise.resolve(preview.document.fonts?.ready).then(async () => {
+        await Promise.all(Array.from(preview.document.images).map(img => img.complete ? Promise.resolve() : new Promise(resolve => { img.onload=resolve; img.onerror=resolve })))
+        if (!preview.closed) { preview.focus(); preview.print() }
+      })
+    } catch (error) { setStatus(`Student Term Diary not printed: ${error.message}`) }
+  }
 
   // Isolated Print Architecture
   const print = () => {
@@ -1044,6 +1071,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
               {busy === 'lesson-save' ? 'Saving…' : 'Save Lesson Plan'}
             </button>
           )}
+          {mode === 'lesson' && <button type="button" className="primary" onClick={printStudentTermCards} data-student-term-3up><Printer size={14}/> Student Term Diaries · 3-up Landscape</button>}
           <button type="button" className="primary" onClick={print}>
             <Printer size={14} /> Print / PDF
           </button>
