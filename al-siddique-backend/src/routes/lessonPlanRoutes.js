@@ -256,10 +256,27 @@ router.get('/', async (req, res) => {
       const params = [schoolId]
       let sql = 'SELECT * FROM lesson_plans WHERE school_id=$1'
       if (!isSchoolDocumentManager(req.user)) { params.push(Number(req.user.id)); sql += ` AND created_by=$${params.length}` }
-      if (req.query.classLevel) { params.push(cleanText(req.query.classLevel,100)); sql += ` AND class_level=$${params.length}` }
+      if (req.query.classLevel) {
+        const rawClass = cleanText(req.query.classLevel,100)
+        const numericKey = normalizeClassKey(rawClass)
+        const gradeNames = { '1':'one','2':'two','3':'three','4':'four','5':'five','6':'six','7':'seven','8':'eight','9':'nine','10':'ten' }
+        const aliases = [...new Set([rawClass.toLowerCase(),numericKey,gradeNames[numericKey]].filter(Boolean))]
+        params.push(aliases)
+        sql += ` AND lower(class_level) = ANY($${params.length}::text[])`
+      }
       if (req.query.subject) { params.push(cleanText(req.query.subject,160)); sql += ` AND subject ILIKE $${params.length}` }
-      if (req.query.from) { params.push(cleanDate(req.query.from)); sql += ` AND plan_date >= $${params.length}::date` }
-      if (req.query.to) { params.push(cleanDate(req.query.to)); sql += ` AND plan_date <= $${params.length}::date` }
+      // Date-bound queries must include an existing weekly/term plan spanning
+      // the requested day; the old exact-start-date match hid valid saved plans.
+      // Authorship and school_id filters above remain mandatory.
+      if (req.query.from && req.query.to) {
+        params.push(cleanDate(req.query.from)); const dateFrom=params.length
+        params.push(cleanDate(req.query.to)); const dateTo=params.length
+        sql += ` AND ((plan_date >= $${dateFrom}::date AND plan_date <= $${dateTo}::date)`
+        sql += ` OR (planning_scope IN ('weekly','term') AND plan_date <= $${dateTo}::date AND COALESCE(end_date,plan_date) >= $${dateFrom}::date))`
+      } else {
+        if (req.query.from) { params.push(cleanDate(req.query.from)); sql += ` AND plan_date >= $${params.length}::date` }
+        if (req.query.to) { params.push(cleanDate(req.query.to)); sql += ` AND plan_date <= $${params.length}::date` }
+      }
       params.push(limit)
       sql += ` ORDER BY plan_date DESC, updated_at DESC LIMIT $${params.length}`
       const rows = await client.query(sql, params)

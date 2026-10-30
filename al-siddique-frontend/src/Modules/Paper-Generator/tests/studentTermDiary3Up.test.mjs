@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import {buildStudentTermDiary3Up as build,studentTermDiaryColor,studentTermDiaryIdentity,studentTermDiarySubjects,studentTermDiaryAssessmentSubjects} from '../studentTermDiary3Up.js'
 const student=(id=1,name='Ayesha',s={})=>({id,name, father_name:'Zain Ali',class:'Three',section:'Red',roll_number:'',gr_number:'MIG26-001',is_active:true,...s})
 const plan=()=>({classLevel:'Three',planningType:'term',termCoverageRows:[{subject:'English (A + B)',detail:'Read Units 7–11 and complete classwork.'},{subject:'Urdu (A + B)',detail:'سبق پڑھیں اور کلاس ورک مکمل کریں۔'}],assessments:[{subject:'English (A + B)',number:1,date:'2026-11-05'},{subject:'English (A + B)',number:3,date:'2027-01-12'}]})
-const make=(opts={})=>build({students:[student()],plan:plan(),classLevel:'Three',section:'Red',schoolName:'Al Siddique Scholars Public School',logoUrl:'/assets/assps.png',...opts})
+const make=(opts={})=>build({students:[student()],plan:plan(),classLevel:'Three',section:'Red',schoolName:'Al Siddique Scholars Public School',logoUrl:'/assets/assps.png',strictClassCoverage:false,...opts})
 test('mandatory SaaS identity key; never fabricate missing student id',()=>assert.throws(()=>studentTermDiaryIdentity({name:'Ayesha'}),/id and name/))
 test('migration reference is not mislabeled as GR',()=>{const x=studentTermDiaryIdentity(student());assert.equal(x.grLabel,'SaaS Ref');assert.equal(x.roll,'')})
 test('regular GR and Roll are separately preserved',()=>{const x=studentTermDiaryIdentity(student(7,'Hadi',{gr_number:'GR-2026-0145',roll_number:'09'}));assert.equal(x.grLabel,'GR');assert.equal(x.roll,'09')})
@@ -60,4 +60,25 @@ test('invalid real calendar dates rejected (31 Nov and non-leap Feb)',()=>{
 })
 test('duplicate A1 slots rejected even if original date was blank',()=>{
  assert.throws(()=>make({plan:{...plan(),assessments:[{subject:'Urdu (A + B)',number:1,date:''},{subject:'Urdu (A + B)',number:1,date:'2027-01-05'}]}}),/Duplicate assessment number/)
+})
+
+test('legacy numeric Grade Three term class alias is compatible with word-label SaaS roster',()=>{
+ const out=make({plan:{...plan(),classLevel:'3'},students:[student(1,'Ayesha',{class:'3'})]})
+ assert.equal(out.students,1)
+})
+test('numeric School1 Eight still barred from Second Term print',()=>assert.throws(()=>make({classLevel:'8',plan:{...plan(),classLevel:'8'}}),/No Second Term/))
+
+test('actual SaaS print refuses a single-subject term plan as full class diary',()=>assert.throws(()=>make({strictClassCoverage:true}),/Incomplete Three Second Term coverage/))
+
+test('Pre-9, Grade 9, unknown classes are never silently printed as school Second Term',()=>{
+ for(const klass of ['Pre-9','Pre 9th','9','Nine','Unknown'])assert.throws(()=>make({classLevel:klass}),/Only Starter–Seven/)
+})
+test('non-boolean inactive legacy value denied',()=>assert.throws(()=>make({students:[student(1,'Ayesha',{is_active:'false'})]}),/Inactive/))
+
+test('SaaS print button must fail closed when roster loading failed or is in progress',async()=>{
+ const fs=await import('node:fs');const src=fs.readFileSync(new URL('../DailyDiaryWorkspace.jsx',import.meta.url),'utf8')
+ assert(src.includes('if (!rosterVerified)'))
+ assert(src.includes('setRosterVerified(false)'))
+ assert(src.includes('setRosterVerified(true)'))
+ assert(src.includes('setStudents([]); setSelectedStudentIds([]); setRosterStatus(error'))
 })

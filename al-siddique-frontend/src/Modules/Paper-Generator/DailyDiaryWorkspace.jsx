@@ -374,6 +374,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   const [students, setStudents] = useState([])
   const [selectedStudentIds, setSelectedStudentIds] = useState([])
   const [rosterStatus, setRosterStatus] = useState('')
+  const [rosterVerified, setRosterVerified] = useState(false)
   const [search, setSearch] = useState('')
   const [saving, setSaving] = useState(false)
   const savedDiaryIdentities = useRef(new Map())
@@ -443,9 +444,9 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   }, [initialLessonPlanId, lessonPlans])
 
   useEffect(() => {
-    if (!classLevel) { let cancelled = false; queueMicrotask(() => { if (!cancelled) { setStudents([]); setSelectedStudentIds([]) } }); return () => { cancelled = true } }
-    let cancelled = false; queueMicrotask(() => { if (!cancelled) setRosterStatus('Loading roster…') })
-    api.get('/api/students', { params: { class: classLabel, active: 'true' }, skipCache: true }).then(response => { if (cancelled) return; const list = Array.isArray(response.data?.data) ? response.data.data : Array.isArray(response.data) ? response.data : []; const scoped = section ? list.filter(student => !studentSection(student) || studentSection(student).toLowerCase() === section.toLowerCase()) : list; setStudents(scoped); setSelectedStudentIds(scoped.map(studentId)); setRosterStatus(`${scoped.length} students loaded`) }).catch(error => { if (cancelled) return; setRosterStatus(error?.response?.data?.message || 'Student roster unavailable. Existing selection preserved.') }).finally(() => { })
+    if (!classLevel) { let cancelled = false; queueMicrotask(() => { if (!cancelled) { setStudents([]); setSelectedStudentIds([]); setRosterVerified(false) } }); return () => { cancelled = true } }
+    let cancelled = false; queueMicrotask(() => { if (!cancelled) { setRosterStatus('Loading roster…'); setRosterVerified(false) } })
+    api.get('/api/students', { params: { class: classLabel, active: 'true' }, skipCache: true }).then(response => { if (cancelled) return; const list = Array.isArray(response.data?.data) ? response.data.data : Array.isArray(response.data) ? response.data : []; const scoped = section ? list.filter(student => !studentSection(student) || studentSection(student).toLowerCase() === section.toLowerCase()) : list; setStudents(scoped); setSelectedStudentIds(scoped.map(studentId)); setRosterStatus(`${scoped.length} students loaded`); setRosterVerified(true) }).catch(error => { if (cancelled) return; setRosterVerified(false); setStudents([]); setSelectedStudentIds([]); setRosterStatus(error?.response?.data?.message || 'Student roster unavailable. Retry before printing.') }).finally(() => { })
     return () => { cancelled = true }
   }, [classLevel, classLabel, section])
 
@@ -716,6 +717,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   // Actual SaaS students + saved/planned curriculum: same locked landscape 3-up print geometry.
   // This is a print preview, NOT an academic approval or a database write.
   const printStudentTermCards = () => {
+    if (!rosterVerified) { setStatus('Print blocked: authenticated class roster is not loaded. Retry the student list.'); return }
     try {
       const output = buildStudentTermDiary3Up({
         students:selectedStudents,

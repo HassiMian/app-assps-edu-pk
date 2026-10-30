@@ -11,9 +11,13 @@ const PALETTES = {
   green:['#e8f6ec','#3f8059'],red:['#fff0ee','#b65360'],purple:['#f2edfc','#7961ac'],
   pink:['#fff0f7','#b67d9b'],yellow:['#fff8e7','#a9833c'],orange:['#fff2e8','#c7814e'],blue:['#ebf3fc','#5e8eba']
 }
+const REQUIRED_CLASS_SUBJECTS={starter:4,mover:4,flyer:4,one:6,two:5,three:6,four:6,five:6,six:6,seven:6}
 const CLASS_COLOR = {starter:'green',mover:'purple',flyer:'pink',one:'yellow',two:'orange',three:'red',four:'blue',five:'blue',six:'blue',seven:'blue'}
 const getStudent = (s,key,alt) => norm(s?.[key] ?? s?.[alt])
 const normalizedSubject = s => norm(s).toLowerCase().replace(/\s+/g,' ')
+const CLASS_GRADE_WORDS={1:'one',2:'two',3:'three',4:'four',5:'five',6:'six',7:'seven',8:'eight',9:'nine',10:'ten'}
+const numericGrade = {one:'1',two:'2',three:'3',four:'4',five:'5',six:'6',seven:'7',eight:'8',nine:'9',ten:'10'}
+const classKey = value => {const raw=normalizedSubject(value).replace(/^(class|grade)\s+/,'');return CLASS_GRADE_WORDS[raw]||CLASS_GRADE_WORDS[numericGrade[raw]]||raw}
 const isLegacyMigrationRef = gr => /^MIG[\d-]/i.test(gr)
 
 export function studentTermDiaryIdentity(student) {
@@ -28,7 +32,7 @@ export function studentTermDiaryIdentity(student) {
 }
 
 export function studentTermDiaryColor(classLevel,section) {
-  const c=normalizedSubject(classLevel).replace(/^class\s+/,'')
+  const c=classKey(classLevel)
   const fallback=CLASS_COLOR[c]||'blue'
   // Respect school section colors, but avoid pink/red substitutions for Mover.
   const key=normalizedSubject(section)
@@ -108,15 +112,18 @@ function assessmentDates(plan, subject) {
 const TABLE_NOTE='ہفتہ وار اور ماہانہ اسیسمنٹس اور ورک شیٹس اسکول کے روزانہ شیڈول اور روزانہ کی لیسن پلاننگ کے مطابق کروائی جائیں گی۔'
 
 /** Returns a printable HTML document; NEVER sends data to an external URL. */
-export function buildStudentTermDiary3Up({students,plan,classLevel,section,schoolName,logoUrl}) {
+export function buildStudentTermDiary3Up({students,plan,classLevel,section,schoolName,logoUrl,strictClassCoverage=true}) {
   const cls=norm(classLevel || plan?.classLevel)
-  if(/^(?:class\s*)?(?:eight|8|pre.?9|nine|9)$/i.test(cls))throw new Error('No Second Term student diary for this class')
+  if(classKey(cls)==='eight')throw new Error('No Second Term student diary for this class')
+  if(!Object.prototype.hasOwnProperty.call(REQUIRED_CLASS_SUBJECTS,classKey(cls)))throw new Error('Only Starter–Seven Second Term diaries are in the approved scope')
   if(!cls)throw new Error('Select the class before printing')
   if (plan?.planningType !== 'term') throw new Error('Consolidate the saved weekly plan into Second Term before printing student term diaries')
-  if (norm(plan?.classLevel) && normalizedSubject(plan.classLevel).replace(/^class\s+/,'') !== normalizedSubject(cls).replace(/^class\s+/,'')) throw new Error('Saved term plan belongs to a different class')
+  if (norm(plan?.classLevel) && classKey(plan.classLevel) !== classKey(cls)) throw new Error('Saved term plan belongs to a different class')
   if (norm(plan?.section) && norm(section) && normalizedSubject(plan.section) !== normalizedSubject(section)) throw new Error('Saved term plan belongs to a different section')
   const subjects=studentTermDiarySubjects(plan)
   if(!subjects.length)throw new Error('No verified syllabus entered for this class; do not print placeholder chapters')
+  const requiredCount=REQUIRED_CLASS_SUBJECTS[classKey(cls)] || 1
+  if(strictClassCoverage && subjects.length<requiredCount)throw new Error(`Incomplete ${cls} Second Term coverage: ${subjects.length}/${requiredCount} subject rows. Open the complete class syllabus; do not print partial student diaries.`)
   if(subjects.length>10)throw new Error('More than ten subjects need editorial review for 3-up printing')
   const roster=arr(students)
   if(!roster.length)throw new Error('SaaS student roster unavailable; printing blocked to prevent unlabeled cards')
@@ -126,9 +133,9 @@ export function buildStudentTermDiary3Up({students,plan,classLevel,section,schoo
   if(ids.size!==studentsIdentity.length)throw new Error('Duplicate student IDs in SaaS roster')
   for(let i=0;i<roster.length;i++) {
     const s=roster[i],c=norm(s.class || s.class_name)
-    if(c&&normalizedSubject(c).replace(/^class\s+/,'')!==normalizedSubject(cls).replace(/^class\s+/,'')) throw new Error(`Cross-class student in roster: ${studentsIdentity[i].id}`)
+    if(c&&classKey(c)!==classKey(cls)) throw new Error(`Cross-class student in roster: ${studentsIdentity[i].id}`)
     if(norm(plan?.section) && norm(s.section) && normalizedSubject(plan.section) !== normalizedSubject(s.section)) throw new Error(`Term plan's section does not match the SaaS roster: ${studentsIdentity[i].id}`)
-    if(s.is_active===false)throw new Error('Inactive student cannot be printed in active roster')
+    if([false,0,'false','f','0'].includes(s.is_active))throw new Error('Inactive student cannot be printed in active roster')
   }
   const [defaultTint,defaultAccent]=studentTermDiaryColor(cls,section)
   const safeLogo=/^(?:\/[^/]|https?:\/\/)/i.test(norm(logoUrl))?norm(logoUrl):''
