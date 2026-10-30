@@ -230,7 +230,7 @@ router.post('/', protect, canManageExams, async (req, res) => {
   }
 })
 
-// DELETE /api/exams/:id — remove one exam and its result rows atomically
+// DELETE /api/exams/:id — only unused exams; never cascade-delete recorded student results
 router.delete('/:id', protect, canManageExams, async (req, res) => {
   const examId = Number(req.params.id)
   if (!Number.isInteger(examId) || examId <= 0) {
@@ -239,22 +239,37 @@ router.delete('/:id', protect, canManageExams, async (req, res) => {
   const client = await pool.connect()
   try {
     const schoolId = currentSchoolId(req)
-    const supportsTenant = await hasColumn('exams', 'school_id')
-    if (!supportsTenant) {
-      return res.status(503).json({ success: false, code: 'EXAM_TENANT_SCHEMA_REQUIRED', message: 'Exam storage is not tenant-safe for deletion.' })
+    const [supportsTenant, supportsResultTenant] = await Promise.all([
+      hasColumn('exams', 'school_id'),
+      hasColumn('exam_results', 'school_id'),
+    ])
+    if (!supportsTenant || !supportsResultTenant) {
+      return res.status(503).json({ success: false, code: 'EXAM_TENANT_SCHEMA_REQUIRED', message: 'Exam and result storage must both be tenant-safe before deletion.' })
     }
     if (!schoolId) {
       return res.status(403).json({ success: false, code: 'SCHOOL_CONTEXT_REQUIRED', message: 'A school context is required to delete an exam.' })
     }
     await client.query('BEGIN')
     await applyTenantContext(client)
-    const lookup = await client.query('SELECT id, name FROM exams WHERE id = $1 AND school_id = $2 LIMIT 1', [examId, schoolId])
+    // Row lock serializes child-result inserts against deletion.
+    const lookup = await client.query('SELECT id, name FROM exams WHERE id = $1 AND school_id = $2 LIMIT 1 FOR UPDATE', [examId, schoolId])
     if (!lookup.rowCount) {
       await client.query('ROLLBACK')
       return res.status(404).json({ success: false, message: 'Exam not found.' })
     }
-    await client.query('DELETE FROM exam_results WHERE exam_id = $1', [examId])
-    await client.query('DELETE FROM exams WHERE id = $1', [examId])
+    const recordedResults = await client.query(
+      'SELECT 1 AS present FROM exam_results WHERE exam_id = $1 AND school_id = $2 LIMIT 1',
+      [examId, schoolId]
+    )
+    if (recordedResults.rowCount > 0) {
+      await client.query('ROLLBACK')
+      return res.status(409).json({
+        success:false,
+        code:'EXAM_RESULTS_RETENTION_LOCK',
+        message:'This exam contains saved student results and cannot be deleted. Existing marks are protected.',
+      })
+    }
+    await client.query('DELETE FROM exams WHERE id = $1 AND school_id = $2', [examId, schoolId])
     await client.query('COMMIT')
     return res.json({ success: true, message: 'Exam deleted successfully.', data: { id: examId, name: lookup.rows[0].name } })
   } catch (err) {

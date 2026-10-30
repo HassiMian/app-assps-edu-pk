@@ -336,12 +336,14 @@ export default function ExaminationModule() {
  };
 
  const deleteExam = async (exam) => {
- if (!exam?.id || !window.confirm(`Delete ${exam.name}? Its saved result rows will also be removed.`)) return;
+ if (!exam?.id || !window.confirm(`Delete ${exam.name}? Exams with saved student results are protected and cannot be deleted.`)) return;
  try {
  await api.delete(`/api/exams/${exam.id}`);
+ setLoadError('');
  setExams(prev => prev.filter(item => item.id !== exam.id));
  if (selectedExam?.id === exam.id) setSelectedExam(null);
  } catch (err) {
+ setLoadError(err?.response?.data?.message || 'Exam deletion failed. Existing marks were preserved.');
  console.error('Failed to delete exam', err);
  }
  };
