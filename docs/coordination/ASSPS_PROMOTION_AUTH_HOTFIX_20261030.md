@@ -124,3 +124,27 @@ Fix in src/middleware/schoolScopedMovement.js is inserted **after** existing pro
 - Signed DB rollback-only read test PASS as role assps_marks_signed_runtime, official Pre Nine class configured, 11 in Eight and 0 in Pre Nine at testing time.
 - Public anonymous promotion POST still returns 401.
 - Real authenticated Principal submit **after** this fix has not yet been observed; therefore successful promotion and voucher generation are not claimed.
+
+## Fourth correction: print-approval gate is the actual transaction blocker (14:53 UTC)
+
+After credential, RLS and signed-school-scope repairs, a real authenticated request
+to /api/students/bulk-class-assignment returned 500 at 14:53:15 UTC.
+Signed backend logs recorded PostgreSQL error:
+CLASS_EIGHT_PROMOTION_AWAITS_PRINT_APPROVAL (SQLSTATE 23514).
+
+The installed trigger assps_class8_print_gate_20261014, BEFORE UPDATE
+OF class/section/school_id ON students, requires one READY_FOR_APPROVED_PROMOTION
+plan for source Eight/Blue, verified historical result printing, academic approval,
+snapshot sha256, exactly approved exam_subject offerings with official total_marks,
+and seven correctly matching student mark rows. The current plan still reports
+AWAITING_RESULTS_AND_PRINT. Live exam_subjects for Eight/Blue: 7 active,
+0 approved, 0 official maxima; historical exam_results for 11 pupils: 66
+rows spanning 6 unique subject names. The trigger additionally expects
+exact destination class 'Pre-Nine', which differs from the application's
+canonical 'Pre Nine'. None of these protections may be bypassed simply
+to generate fee vouchers.
+
+This hotfix now maps known SQLSTATE 23514 academic rejection codes to an
+actionable HTTP 409 with an explanatory message instead of unhelpful 500.
+PostgreSQL trigger, exam marks, students, fee records and signoff documents
+are unchanged. This is a visibility correction, NOT a promotion release.
