@@ -80,3 +80,13 @@ test('printed ResultCards.jsx cannot fallback to a stale student.position',()=>{
  assert.match(source,/const pos = classRanks\.get\(String\(s\.id\)\) \|\| '—'/)
  assert.doesNotMatch(source,/const pos = classRanks\.get\(String\(s\.id\)\) \|\| s\.position/)
 })
+test('production-size Flyer layout: 24 comparable students outrank a higher RAW total from a different scheme',()=>{
+ const normal=[]
+ for(let id=1;id<=24;id++)normal.push(...ledger(id,[id,15,15,15,15,15,15]))
+ const outsider=ledger(25,[60,60,60,60,50],['English','Urdu','Mathematics','Science','Islamiyat'],[75,75,60,60,50])
+ const r=rank([...normal,...outsider],users(...Array.from({length:25},(_,i)=>i+1)))
+ assert.equal(r.get('25'),null)
+ assert.equal(r.get('24'),'1st')
+ assert.equal(r.get('1'),'24th')
+ assert.equal(r.size,25)
+})
