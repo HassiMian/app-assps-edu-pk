@@ -5,6 +5,7 @@ import { Trophy, Plus, Save, Printer, BarChart2, FileText, Bookmark } from "luci
 import { DonutChart, BarChart, ChartLegend } from "../../components/Charts";
 import { useAcademicStore } from "../../services/useAcademicStore";
 import api from "../../services/api";
+import { summarizeResultCardScores } from "./resultCardScoreModel";
 const cardStyle = {
  background: 'var(--apex-bg-surface)',
  backdropFilter: 'blur(18px)',
@@ -63,20 +64,26 @@ const esc = (value) => String(value || '')
   .replaceAll('"', '&quot;')
   .replaceAll("'", '&#039;')
 
-function printExamResultCard({ student, marks, subjects, examName, totalMarks = 100, passMarks = 33, gradeBands = DEFAULT_GRADE_BANDS }) {
- const totalObtained = subjects.reduce((sum, subject) => sum + (parseInt(marks[student.id]?.[subject]) || 0), 0)
- const perSubjectTotal = Math.max(1, Number(totalMarks) || 100)
- const totalMax = subjects.length * perSubjectTotal
- const pct = totalMax > 0 ? Math.round((totalObtained / totalMax) * 100) : 0
- const { g, c } = getGrade(pct, gradeBands)
+function printExamResultCard({ student, marks, subjects, examName, totalMarks, passMarks, gradeBands = DEFAULT_GRADE_BANDS }) {
+ const summary = summarizeResultCardScores({studentId:student.id,marks,subjects,totalMarks,passMarks})
+ const {totalObtained,totalMax,perSubjectTotal,percentage:pct,pass,complete} = summary
+ const {g,c} = pct === null ? {g:'Pending',c:'#64748b'} : getGrade(pct,gradeBands)
+ const obtainedLabel = complete ? totalObtained : 'Pending'
+ const totalMaxLabel = totalMax ?? '—'
+ const subjectMaxLabel = perSubjectTotal ?? '—'
+ const pctLabel = pct === null ? 'Pending' : String(pct) + '%'
+ const remarks = pass === null ? 'Result incomplete or passing policy not configured.' :
+   pass ? 'Passed. Keep up the good work.' : 'Needs improvement and guided practice.'
  const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
  const rows = subjects.map((subject, index) => {
- const obtained = parseInt(marks[student.id]?.[subject]) || 0
- const { g: sg, c: sc } = getGrade((obtained / perSubjectTotal) * 100, gradeBands)
+ const entry = summary.rows[index]
+ const obtained = entry.label
+ const {g:sg,c:sc} = entry.status === 'SCORED' && perSubjectTotal
+   ? getGrade((entry.score / perSubjectTotal) * 100,gradeBands) : {g:'—',c:'#64748b'}
  return `<tr>
  <td>${index + 1}</td>
  <td>${esc(subject)}</td>
- <td>${perSubjectTotal}</td>
+ <td>${subjectMaxLabel}</td>
  <td><strong>${obtained}</strong></td>
  <td style="color:${sc};font-weight:800">${sg}</td>
  </tr>`
@@ -112,12 +119,12 @@ function printExamResultCard({ student, marks, subjects, examName, totalMarks = 
  </section>
  <table><thead><tr><th>S.No</th><th>Subject</th><th>Total</th><th>Obtained</th><th>Grade</th></tr></thead><tbody>${rows}</tbody></table>
  <section class="summary">
- <div class="box"><b>${totalObtained}</b><span>Obtained</span></div>
- <div class="box"><b>${totalMax}</b><span>Total</span></div>
+ <div class="box"><b>${obtainedLabel}</b><span>Obtained</span></div>
+ <div class="box"><b>${totalMaxLabel}</b><span>Total</span></div>
  <div class="box"><b style="color:${c}">${g}</b><span>Grade</span></div>
- <div class="box"><b style="color:${pct >= 50 ? '#15803d' : '#b91c1c'}">${pct}%</b><span>Percentage</span></div>
+ <div class="box"><b style="color:${pass === null ? '#64748b' : pass ? '#15803d' : '#b91c1c'}">${pctLabel}</b><span>Percentage</span></div>
  </section>
- <div class="remarks"><strong>Remarks:</strong> ${pct >= 50 ? 'Passed. Keep up the good work.' : 'Needs improvement and guided practice.'}</div>
+ <div class="remarks"><strong>Remarks:</strong> ${remarks}</div>
  <section class="signatures"><div class="sig">Class Teacher</div><div class="sig">Principal</div></section>
  <footer>Generated: ${esc(today)}</footer>
  </main>
@@ -175,12 +182,11 @@ function AddExamModal({ onClose, onAdd, sessionOptions = [] }) {
  );
 }
 
-function ResultCard({ student, marks, subjects, examName, totalMarks = 100, passMarks = 33, gradeBands = DEFAULT_GRADE_BANDS, onClose }) {
- const totalObtained = subjects.reduce((sum, subject) => sum + (parseInt(marks[student.id]?.[subject]) || 0), 0);
- const perSubjectTotal = Math.max(1, Number(totalMarks) || 100)
- const totalMax = subjects.length * perSubjectTotal;
- const pct = Math.round((totalObtained / totalMax) * 100);
- const { g, c } = getGrade(pct, gradeBands);
+function ResultCard({ student, marks, subjects, examName, totalMarks, passMarks, gradeBands = DEFAULT_GRADE_BANDS, onClose }) {
+ const summary = summarizeResultCardScores({studentId:student.id,marks,subjects,totalMarks,passMarks})
+ const {totalObtained,totalMax,perSubjectTotal,percentage:pct,pass,complete} = summary
+ const {g,c} = pct === null ? {g:'Pending',c:'#64748b'} : getGrade(pct,gradeBands)
+ const obtainedLabel = complete ? totalObtained : 'Pending'
 
  return createPortal(
  <div style={{ position: 'fixed', inset: 0, zIndex: 9999, background:'var(--apex-bg-overlay)', backdropFilter: 'blur(12px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
@@ -212,13 +218,15 @@ function ResultCard({ student, marks, subjects, examName, totalMarks = 100, pass
  </thead>
  <tbody>
  {subjects.map((subject, index) => {
- const obtained = parseInt(marks[student.id]?.[subject]) || 0;
- const { g: sg, c: sc } = getGrade((obtained / perSubjectTotal) * 100, gradeBands);
+ const entry = summary.rows[index];
+ const obtained = entry.label;
+ const {g:sg,c:sc} = entry.status === 'SCORED' && perSubjectTotal
+   ? getGrade((entry.score / perSubjectTotal) * 100,gradeBands) : {g:'—',c:'#64748b'};
  return (
  <tr key={subject} style={{ background: index % 2 === 0 ? 'transparent' : 'var(--apex-bg-subtle)' }}>
  <td style={{ padding: '10px' }}>{subject}</td>
  <td style={{ padding: '10px', textAlign: 'center', fontWeight: 700 }}>{obtained}</td>
- <td style={{ padding: '10px', textAlign: 'center' }}>{perSubjectTotal}</td>
+ <td style={{ padding: '10px', textAlign: 'center' }}>{perSubjectTotal ?? '—'}</td>
  <td style={{ padding: '10px', textAlign: 'center', color: sc, fontWeight: 700 }}>{sg}</td>
  </tr>
  );
@@ -227,15 +235,15 @@ function ResultCard({ student, marks, subjects, examName, totalMarks = 100, pass
  <tfoot>
  <tr style={{ background: 'var(--apex-bg-subtle)', color: 'var(--apex-text-primary)', fontWeight: 700 }}>
  <td style={{ padding: '10px' }}>Total</td>
- <td style={{ padding: '10px', textAlign: 'center' }}>{totalObtained}</td>
- <td style={{ padding: '10px', textAlign: 'center' }}>{totalMax}</td>
- <td style={{ padding: '10px', textAlign: 'center', color: c }}>{g} ({pct}%)</td>
+ <td style={{ padding: '10px', textAlign: 'center' }}>{obtainedLabel}</td>
+ <td style={{ padding: '10px', textAlign: 'center' }}>{totalMax ?? '—'}</td>
+ <td style={{ padding: '10px', textAlign: 'center', color: c }}>{g} ({pct === null ? 'Pending' : String(pct) + '%'})</td>
  </tr>
  </tfoot>
  </table>
 
  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
- <div style={{ padding: '14px 18px', borderRadius: 20, background: c === '#30D158' ? 'rgba(48,209,88,0.14)' : 'rgba(200,153,26,0.14)', color: 'var(--apex-text-primary)', fontWeight: 700 }}>Status: {totalMax > 0 && totalObtained >= subjects.length * Number(passMarks || 0) ? 'PASS' : 'FAIL'}</div>
+ <div style={{ padding: '14px 18px', borderRadius: 20, background: c === '#30D158' ? 'rgba(48,209,88,0.14)' : 'rgba(200,153,26,0.14)', color: 'var(--apex-text-primary)', fontWeight: 700 }}>Status: {pass === null ? 'PENDING' : pass ? 'PASS' : 'FAIL'}</div>
  <div style={{ display: 'flex', gap: 12, width: '100%', maxWidth: 320 }}>
  <button onClick={() => printExamResultCard({ student, marks, subjects, examName, totalMarks, passMarks, gradeBands })} style={{ ...btnPrimary, flex: 1, justifyContent: 'center' }}><Printer size={16} />Print</button>
  <button onClick={onClose} style={{ ...btnSecondary, flex: 1, justifyContent: 'center' }}>Close</button>
