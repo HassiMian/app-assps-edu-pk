@@ -74,4 +74,9 @@ test('principal assessment creation accepts whole marks and rejects unsafe draft
     assert.equal(outcome.status,422,JSON.stringify(body))
   }
   assert.equal(inserted.length,1,'invalid data never reached INSERT')
+  actor.role='teacher'
+  const forbidden=await create(draft)
+  assert.equal(forbidden.status,403,'teacher must not create all-class exams without role authority')
+  assert.equal(inserted.length,1,'forbidden actor did not create any row')
+  actor.role='principal'
 })

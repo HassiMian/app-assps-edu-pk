@@ -17,7 +17,7 @@ State: REVIEW ONLY, production certification HOLD.
 - Independent no-release GitHub CI workflows cover assessment and attendance on the same unified branch.
 
 ## Verified test evidence
-- Isolated VPS worktree: 47/47 frontend and 6/6 backend mock tests passed; targeted ESLint and full production-mode frontend build passed. Added 2/2 real Chromium component-browser tests with intercepted synthetic API: failed Assessment save leaves the dialog open, explicit retry with confirmed server ID closes it; server-saved assessments appear in Saved Papers, and failed reopening does not create a fabricated document. These tests did not write to school PostgreSQL.
+- Isolated VPS worktree: 47/47 frontend and 6/6 backend mock tests passed, plus a separate 47/47 backend service/authorization regression sweep and 24/24 lesson-policy/domain tests; targeted ESLint and full production-mode frontend build passed. Added 2/2 real Chromium component-browser tests with intercepted synthetic API: failed Assessment save leaves the dialog open, explicit retry with confirmed server ID closes it; server-saved assessments appear in Saved Papers, and failed reopening does not create a fabricated document. These tests did not write to school PostgreSQL.
 - Previous integrated commit 3ea86315: GitHub Actions exams run 41053116163 SUCCESS; attendance run 41053115964 SUCCESS. New creator-attribution change requires its own fresh CI on updated head.
 
 ## Fresh live READ-ONLY checkpoints (school_id 1)
@@ -25,10 +25,13 @@ State: REVIEW ONLY, production certification HOLD.
 - Exam 9: 1,854 saved result rows; 213 exact numeric zeros; 0 null. Earlier quoted 224 zeros is not the observed current number.
 - First Term pass policy stored as 33 out of 100 versus requested 40 percent. Twenty scores fall from 33 percent inclusive to below 40 percent. Existing grades and scores have not been rewritten.
 - Active students 329; attendance marked 328 for 30 October; unmarked 1.
+- Class Eight still has **11 active students** in the current admissions roster, while **no active Pre-9/Pre Nine students** are listed. This contradicts the stated school promotion policy; never mass-update student class or historical examination records without a verified student-by-student promotion roster.
+- No exam 7 marks exist; all currently saved exam result rows belong to the First Term exam 9. Grade/class configuration table and exam class enrollment table have 0 rows for the queried school scope; do not treat a configured Pre-9 as proven from those empty tables.
+
 - Active school principal/owner users 0, admin 3, super_admin 1, teacher 19. No fabricated authenticated Principal review.
 - assessment_papers and lesson_plans: 0 rows in current school scope.
 - Live portal HTTP 200, anonymous students API HTTP 401. PM2 services online, without any restart in this mission.
-- Two on-VPS 30 October restore receipts reported all_restore_gates_passed true; independent off-VPS full restore evidence remains absent.
+- Two on-VPS 30 October restore receipts reported all_restore_gates_passed true for Git repository clones, fsck, patch checks and source zip checks. **These receipts do not establish any PostgreSQL data restoration**, let alone independent off-VPS database recovery. That essential release gate remains unmet.
 - Source contains Class Eight Second Term forbidden lesson-policy guard, but this guard was not found in the active backend path, so live certification is withheld.
 
 ## No-release / certification gates
