@@ -1,7 +1,7 @@
 // Optional real Chromium print-fit check; run with: node tests/studentTermDiary3Up.browser.mjs
 import assert from 'node:assert/strict'
 import { chromium } from 'playwright'
-import { buildStudentTermDiary3Up as build } from '../studentTermDiary3Up.js'
+import { buildStudentTermDiary3Up as build, validateStudentTermDiary3UpLayout as validate } from '../studentTermDiary3Up.js'
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']})
 try {
   for (const [cls,section,subjectCount] of [['Starter','Green',4],['Mover','Purple',4],['Three','Red',6],['Six','Blue',6],['Seven','Blue',6]]) {
@@ -18,7 +18,18 @@ try {
     assert.equal(positions.length,3)
     for(const p of positions) {assert.equal(p.cols,3);assert(!p.clipped,`${cls} card overflow`);assert(p.lessonsEnd<=p.assessBegin+1,`${cls} lesson overlaps assessment`);assert(p.assessmentEnd<=p.noteStart+1,`${cls} assessment overlaps note`);assert(p.noteEnd<=p.cardEnd+1,`${cls} note clipped`)}
     assert.equal(await page.locator('.sheet').count(),1)
+    const fit=await page.evaluate(fn=>new Function('return ('+fn+')')()(document),validate.toString())
+    assert.equal(fit.ok,true,JSON.stringify(fit.errors))
     await page.close()
     console.log('PASS',cls,'3 portrait cards fit A4 landscape with ruled tables and no overlaps')
   }
+  const largePlan={planningType:'term',termCoverageRows:Array.from({length:10},(_,i)=>({subject:'Subject '+i,detail:'Extremely detailed source text '.repeat(180)})),assessments:[]}
+  const tooMuch=build({students:[{id:1,name:'Overflow tester',class:'Seven',section:'Blue',father_name:'Parent'}],plan:largePlan,classLevel:'Seven',section:'Blue'})
+  const overflowPage=await browser.newPage()
+  await overflowPage.setContent(tooMuch.html)
+  const overflow=await overflowPage.evaluate(fn=>new Function('return ('+fn+')')()(document),validate.toString())
+  assert.equal(overflow.ok,false,'Dense curriculum must fail print rather than clipping')
+  assert(overflow.errors.length)
+  console.log('PASS overflow preflight prevents cropped source content')
+  await overflowPage.close()
 } finally {await browser.close()}

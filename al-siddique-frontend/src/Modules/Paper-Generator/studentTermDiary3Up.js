@@ -58,16 +58,48 @@ export function studentTermDiarySubjects(plan) {
   return result
 }
 
+/** Keep printed assessment subject rows aligned with the actual teacher source. */
+export function studentTermDiaryAssessmentSubjects(plan, lessonSubjects) {
+  const supplied=arr(plan?.assessments).map(x=>norm(x.subject)).filter(Boolean)
+  const distinct=new Map()
+  for(const item of supplied)if(!distinct.has(normalizedSubject(item)))distinct.set(normalizedSubject(item),item)
+  const rows=[]
+  const seen=new Set()
+  const add = name => {const k=normalizedSubject(name);if(k&&!seen.has(k)){rows.push(name);seen.add(k)}}
+  for(const {subject} of lessonSubjects) {
+    const m=/^(english|urdu)\s*(?:\(\s*a\s*[+&]\s*b\s*\)|a\s*[+&]\s*b)$/i.exec(norm(subject))
+    if(m && [...distinct.keys()].some(key=>key===`${m[1].toLowerCase()} a`||key===`${m[1].toLowerCase()} b`)) {
+      add(m[1]+' A')
+      add(m[1]+' B')
+    } else add(subject)
+  }
+  // Explicit teacher source subjects not on the merged lesson row must never vanish.
+  for(const name of distinct.values())add(name)
+  return rows
+}
+function validAssessmentDate(date) {
+  if(/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    const value=new Date(date+'T12:00:00Z')
+    return Number.isFinite(value.getTime()) && value.toISOString().slice(0,10)===date
+  }
+  if(/^\d{2}-\d{2}-\d{4}$/.test(date)) {
+    const [d,m,y]=date.split('-')
+    return validAssessmentDate(`${y}-${m}-${d}`)
+  }
+  return false
+}
 function assessmentDates(plan, subject) {
   const list=arr(plan?.assessments).filter(a=>normalizedSubject(a.subject)===normalizedSubject(subject))
   if(list.length>5)throw new Error(`More than five assessment entries for ${subject}; cannot silently discard dates`)
   const result=Array(5).fill('')
+  const occupied=Array(5).fill(false)
   for(let i=0;i<list.length;i++) {
     const a=list[i], n=Number(a.number)
     const at=Number.isInteger(n)&&n>=1&&n<=5?n-1:i
-    if(result[at])throw new Error(`Duplicate assessment date for ${subject}`)
+    if(occupied[at])throw new Error(`Duplicate assessment number for ${subject}`)
+    occupied[at]=true
     const date=norm(a.date)
-    if(date&&!/^\d{4}-\d{2}-\d{2}$/.test(date)&&!/^\d{2}-\d{2}-\d{4}$/.test(date)) throw new Error(`Unverified assessment date format for ${subject}`)
+    if(date&&!validAssessmentDate(date))throw new Error(`Unverified assessment date for ${subject}`)
     result[at]=date
   }
   return result
@@ -81,6 +113,8 @@ export function buildStudentTermDiary3Up({students,plan,classLevel,section,schoo
   if(/^(?:class\s*)?(?:eight|8|pre.?9|nine|9)$/i.test(cls))throw new Error('No Second Term student diary for this class')
   if(!cls)throw new Error('Select the class before printing')
   if (plan?.planningType !== 'term') throw new Error('Consolidate the saved weekly plan into Second Term before printing student term diaries')
+  if (norm(plan?.classLevel) && normalizedSubject(plan.classLevel).replace(/^class\s+/,'') !== normalizedSubject(cls).replace(/^class\s+/,'')) throw new Error('Saved term plan belongs to a different class')
+  if (norm(plan?.section) && norm(section) && normalizedSubject(plan.section) !== normalizedSubject(section)) throw new Error('Saved term plan belongs to a different section')
   const subjects=studentTermDiarySubjects(plan)
   if(!subjects.length)throw new Error('No verified syllabus entered for this class; do not print placeholder chapters')
   if(subjects.length>10)throw new Error('More than ten subjects need editorial review for 3-up printing')
@@ -93,12 +127,15 @@ export function buildStudentTermDiary3Up({students,plan,classLevel,section,schoo
   for(let i=0;i<roster.length;i++) {
     const s=roster[i],c=norm(s.class || s.class_name)
     if(c&&normalizedSubject(c).replace(/^class\s+/,'')!==normalizedSubject(cls).replace(/^class\s+/,'')) throw new Error(`Cross-class student in roster: ${studentsIdentity[i].id}`)
+    if(norm(plan?.section) && norm(s.section) && normalizedSubject(plan.section) !== normalizedSubject(s.section)) throw new Error(`Term plan's section does not match the SaaS roster: ${studentsIdentity[i].id}`)
     if(s.is_active===false)throw new Error('Inactive student cannot be printed in active roster')
   }
   const [defaultTint,defaultAccent]=studentTermDiaryColor(cls,section)
   const safeLogo=/^(?:\/[^/]|https?:\/\/)/i.test(norm(logoUrl))?norm(logoUrl):''
   const headLogo=safeLogo?`<img class="crest" src="${e(safeLogo)}" alt="School crest"/>`:''
-  const assessmentRows=subjects.map(({subject},i)=>`<tr><td>${i+1}</td><th>${e(subject)}</th>${assessmentDates(plan,subject).map(date=>`<td>${e(date)}</td>`).join('')}</tr>`).join('')
+  const assessmentSubjects=studentTermDiaryAssessmentSubjects(plan,subjects)
+  if(assessmentSubjects.length>11)throw new Error('Too many assessment subjects for safe 3-up print; review syllabus grouping')
+  const assessmentRows=assessmentSubjects.map((subject,i)=>`<tr><td>${i+1}</td><th>${e(subject)}</th>${assessmentDates(plan,subject).map(date=>`<td>${e(date)}</td>`).join('')}</tr>`).join('')
   const lessons=subjects.map(({subject,lesson})=>`<tr><th>${e(subject)}</th><td class="${hasUrdu(lesson)?'urdu':''}">${e(lesson)}</td></tr>`).join('')
   const pageCount=Math.ceil(studentsIdentity.length/3)
   const pages=[]
@@ -111,4 +148,29 @@ export function buildStudentTermDiary3Up({students,plan,classLevel,section,schoo
   }
   const css=`@page{size:A4 landscape;margin:0}*{box-sizing:border-box}html,body{margin:0;padding:0;background:white;color:#111;font-family:'Times New Roman',serif}.sheet{width:297mm;height:210mm;padding:1.7mm 2mm;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5mm;break-after:page}.sheet:last-child{break-after:auto}.card{min-width:0;height:206.6mm;border:.35mm solid #4d5964;border-top:.65mm solid var(--accent);border-radius:1.1mm;display:flex;flex-flow:column nowrap;overflow:hidden}header{height:19mm;display:flex;gap:2mm;align-items:center;padding:1.2mm 2mm;border-bottom:.25mm solid #374452}.crest{width:15mm;height:15mm;object-fit:contain}.school strong{display:block;font-size:10.4pt;line-height:1.08;color:#18324a}.school small{display:block;margin-top:1mm;font-size:6.9pt;font-weight:bold}.class-row{height:8.5mm;display:flex;align-items:center;justify-content:space-between;padding:0 2mm;background:var(--tint);border-bottom:.3mm solid var(--accent)}.class-row b{font-size:12pt}.class-row span{font-size:7.8pt;font-weight:bold}table{width:100%;table-layout:fixed;border-collapse:collapse}.identity{height:27.5mm}.identity tr{height:6.8mm}.identity th,.identity td{border:.23mm solid #4c5965;text-align:left;padding:.6mm 1.2mm;font-weight:bold;vertical-align:middle}.identity th{width:25%;font-size:7.5pt;background:#f5f8fa}.identity td{font-size:8.9pt;overflow-wrap:anywhere}.lessons{height:110mm;margin-top:1mm}.lessons thead{height:8mm}.lessons thead th{background:var(--tint);font-size:8.5pt;text-align:left}.lessons th,.lessons td{border:.26mm solid #334555;vertical-align:middle;padding:.65mm 1.1mm}.lessons tbody th{background:#f7f9fb;text-align:left;font-size:9pt}.lessons tbody td{font-size:8.5pt;line-height:1.18;overflow-wrap:break-word}.urdu,.note{font-family:'Jameel Noori Nastaleeq','Noto Nastaliq Urdu',serif;direction:rtl;text-align:right}.lessons tbody td.urdu{font-size:9pt;line-height:1.85}.assess{height:31mm;margin-top:1.5mm}.assess th,.assess td{border:.25mm solid #364553;text-align:center;padding:.25mm;font-size:7.1pt;line-height:1.1}.assess thead{background:var(--tint)}.assess tbody th{text-align:left;font-size:7.7pt}.assess tr>*:nth-child(1){width:7%}.assess tr>*:nth-child(2){width:27%}.note{height:12mm;margin-top:1mm;border:.2mm solid #56626c;display:flex;align-items:center;gap:1mm;padding:.8mm;font-weight:bold}.note b{min-width:14mm;font-size:9pt}.note span{font-size:8pt;line-height:1.5}@media screen{body{background:#eee}.sheet{margin:4mm auto;background:white;box-shadow:0 0 4mm #999}}@media print{html,body{print-color-adjust:exact;-webkit-print-color-adjust:exact}.sheet{margin:0}}`
   return {html:`<!doctype html><html lang="en"><head><meta charset="utf-8"><title>ASSPS ${e(cls)} Student Term Diaries</title><style>${css}</style></head><body>${pages.join('')}</body></html>`,students:studentsIdentity.length,pages:pageCount,subjects:subjects.length,colors:[defaultTint,defaultAccent]}
+}
+
+/** Browser preflight: never print a cropped lesson, assessment grid, or Urdu note. */
+export function validateStudentTermDiary3UpLayout(doc) {
+  const cards = Array.from(doc?.querySelectorAll?.('.sheet .card') || [])
+  if (!cards.length) return {ok:false,errors:['No student cards were rendered']}
+  const errors=[]
+  const bottom = node => node.getBoundingClientRect().bottom
+  const top = node => node.getBoundingClientRect().top
+  for (const [index, card] of cards.entries()) {
+    const items=['header','.class-row','.identity','.lessons','.assess','.note'].map(s=>card.querySelector(s))
+    if(items.some(x=>!x)) {errors.push(`Card ${index+1}: required table or section missing`);continue}
+    for(let i=0;i<items.length-1;i++) {
+      if(bottom(items[i])>top(items[i+1])+2)errors.push(`Card ${index+1}: content overlaps after ${i+1}`)
+    }
+    if(bottom(items.at(-1))>bottom(card)+2)errors.push(`Card ${index+1}: Urdu note is clipped`)
+    if(card.scrollHeight>card.clientHeight+2)errors.push(`Card ${index+1}: page content exceeds portrait card`)
+    for(const cell of card.querySelectorAll('td,th')) {
+      if(cell.scrollHeight>cell.clientHeight+3) {
+        errors.push(`Card ${index+1}: cell text overflows its table row`)
+        break
+      }
+    }
+  }
+  return {ok:errors.length===0,errors}
 }

@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import {buildStudentTermDiary3Up as build,studentTermDiaryColor,studentTermDiaryIdentity,studentTermDiarySubjects} from '../studentTermDiary3Up.js'
+import {buildStudentTermDiary3Up as build,studentTermDiaryColor,studentTermDiaryIdentity,studentTermDiarySubjects,studentTermDiaryAssessmentSubjects} from '../studentTermDiary3Up.js'
 const student=(id=1,name='Ayesha',s={})=>({id,name, father_name:'Zain Ali',class:'Three',section:'Red',roll_number:'',gr_number:'MIG26-001',is_active:true,...s})
 const plan=()=>({classLevel:'Three',planningType:'term',termCoverageRows:[{subject:'English (A + B)',detail:'Read Units 7–11 and complete classwork.'},{subject:'Urdu (A + B)',detail:'سبق پڑھیں اور کلاس ورک مکمل کریں۔'}],assessments:[{subject:'English (A + B)',number:1,date:'2026-11-05'},{subject:'English (A + B)',number:3,date:'2027-01-12'}]})
 const make=(opts={})=>build({students:[student()],plan:plan(),classLevel:'Three',section:'Red',schoolName:'Al Siddique Scholars Public School',logoUrl:'/assets/assps.png',...opts})
@@ -29,3 +29,35 @@ test('weekly plan does not masquerade as consolidated term',()=>assert.throws(()
 
 // Source wiring: the SaaS API defaults to active=all; explicitly request active=true.
 test('real SaaS roster API is queried with active student filter',async()=>{const fs=await import('node:fs');const src=fs.readFileSync(new URL('../DailyDiaryWorkspace.jsx',import.meta.url),'utf8');assert.match(src,/api\.get\('\/api\/students',\s*\{\s*params:\s*\{\s*class:\s*classLabel,\s*active:\s*'true'/)})
+
+test('different class saved term plan fails closed',()=>assert.throws(()=>make({plan:{...plan(),classLevel:'Six'}}),/different class/))
+test('different section saved term plan fails closed',()=>assert.throws(()=>make({plan:{...plan(),section:'Blue'}}),/different section/))
+test('term plan cannot silently become a daily plan on save or smart paste',async()=>{
+  const fs=await import('node:fs');const src=fs.readFileSync(new URL('../DailyDiaryWorkspace.jsx',import.meta.url),'utf8');
+  for (const name of ['saveLessonPlan','arrangeLessonPaste','autoPlanToday']){
+    const start=src.search(new RegExp('const\\s+'+name+'\\s*=\\s*async\\s*\\(\\)\\s*=>'));assert(start>=0,name)
+    const next=src.slice(start,start+550)
+    assert(next.includes("lessonDoc.planningType !== 'daily'"),name)
+  }
+})
+
+test('merged English A+B generates separate English A/B assessment rows when teacher source separates them',()=>{
+ const p={...plan(),termCoverageRows:[{subject:'English (A + B)',detail:'Read lesson and complete classwork.'}],assessments:[{subject:'English A',number:1,date:'2026-11-05'},{subject:'English B',number:1,date:'2026-11-09'}]}
+ assert.deepEqual(studentTermDiaryAssessmentSubjects(p,studentTermDiarySubjects(p)),['English A','English B'])
+ const output=make({plan:p}).html
+ assert(output.includes('<th>English A</th>')&&output.includes('<th>English B</th>'))
+ assert(output.includes('2026-11-05')&&output.includes('2026-11-09'))
+})
+test('teacher source assessment subjects not in lesson table are not silently lost',()=>{
+ const p={...plan(),assessments:[...plan().assessments,{subject:'General Knowledge',number:1,date:'2026-11-12'}]}
+ assert(studentTermDiaryAssessmentSubjects(p,studentTermDiarySubjects(p)).includes('General Knowledge'))
+ assert(make({plan:p}).html.includes('<th>General Knowledge</th>'))
+})
+test('invalid real calendar dates rejected (31 Nov and non-leap Feb)',()=>{
+ for(const date of ['2026-11-31','2027-02-29','31-11-2026']) {
+   assert.throws(()=>make({plan:{...plan(),assessments:[{subject:'English (A + B)',number:1,date}]}}),/Unverified assessment date/)
+ }
+})
+test('duplicate A1 slots rejected even if original date was blank',()=>{
+ assert.throws(()=>make({plan:{...plan(),assessments:[{subject:'Urdu (A + B)',number:1,date:''},{subject:'Urdu (A + B)',number:1,date:'2027-01-05'}]}}),/Duplicate assessment number/)
+})

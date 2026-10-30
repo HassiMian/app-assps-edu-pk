@@ -47,7 +47,7 @@ import {
   normalizeLessonPlanDocument,
   toLessonPlanPersistencePayload
 } from './lessonPlanDomain'
-import { buildStudentTermDiary3Up } from './studentTermDiary3Up'
+import { buildStudentTermDiary3Up, validateStudentTermDiary3UpLayout } from './studentTermDiary3Up'
 import './DailyDiaryWorkspace.css'
 
 const DRAFT_KEY = 'assps_daily_diary_workspace_v3'
@@ -493,10 +493,11 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   const applyDiaryPaste = () => { const parsed = robustParseDiaryText(pasteText, subjectOptions); if (!parsed.length) { setStatus('No subject lines detected. Use “Subject: task” format.'); return } setRows(parsed); setPasteText(''); setStatus(`Diary auto-arranged into ${parsed.length} subject rows.`) }
 
   const selectPlan = planId => { setLessonPlanId(planId); const plan = lessonPlans.find(item => String(item.id) === String(planId)); if (plan) { const doc = normalizeLessonPlanDocument(plan); setLessonDoc(doc); if (doc.startDate) setDate(doc.startDate) } }
-  const autoPlanToday = async () => { if (!classLevel) { setStatus('Select class first.'); return } setBusy('generate'); try { const result = await generateLessonPlanDraft({ planningType: 'daily', classLevel, section, startDate: date, endDate: date, subjects: subjectOptions, useAi: true, bufferRatio: .05 }); setLessonDoc(normalizeLessonPlanDocument(result.plan)); setStatus(result.ai?.used ? 'Daily multi-subject plan generated with AI enrichment.' : 'Daily plan generated from timetable/context; AI enrichment was unavailable or not needed.') } catch (error) { setStatus(error?.response?.data?.message || 'Daily plan generation failed.') } finally { setBusy('') } }
-  const arrangeLessonPaste = async () => { if (!lessonPaste.trim()) return; setBusy('parse'); try { const parsed = await parseLessonPlanningText(lessonPaste, subjectOptions); const next = mergeParsedPlanningText({ ...lessonDoc, classLevel, section, startDate: date, endDate: date, planningType: 'daily' }, parsed); setLessonDoc(next); setLessonPaste(''); setStatus(parsed.unclassified?.length ? 'Lesson plan arranged; review preserved unclassified lines.' : 'Whole-day lesson text arranged by subject.') } catch (error) { setStatus(error?.response?.data?.message || 'Could not arrange lesson plan text.') } finally { setBusy('') } }
+  const autoPlanToday = async () => { if (lessonDoc.planningType !== 'daily') { setStatus('Term plans cannot be replaced from Daily Diary. Open Lesson Planning workspace to edit the term.'); return } if (!classLevel) { setStatus('Select class first.'); return } setBusy('generate'); try { const result = await generateLessonPlanDraft({ planningType: 'daily', classLevel, section, startDate: date, endDate: date, subjects: subjectOptions, useAi: true, bufferRatio: .05 }); setLessonDoc(normalizeLessonPlanDocument(result.plan)); setStatus(result.ai?.used ? 'Daily multi-subject plan generated with AI enrichment.' : 'Daily plan generated from timetable/context; AI enrichment was unavailable or not needed.') } catch (error) { setStatus(error?.response?.data?.message || 'Daily plan generation failed.') } finally { setBusy('') } }
+  const arrangeLessonPaste = async () => { if (lessonDoc.planningType !== 'daily') { setStatus('Term plans cannot be overwritten from Daily Diary. Open Lesson Planning workspace.'); return } if (!lessonPaste.trim()) return; setBusy('parse'); try { const parsed = await parseLessonPlanningText(lessonPaste, subjectOptions); const next = mergeParsedPlanningText({ ...lessonDoc, classLevel, section, startDate: date, endDate: date, planningType: 'daily' }, parsed); setLessonDoc(next); setLessonPaste(''); setStatus(parsed.unclassified?.length ? 'Lesson plan arranged; review preserved unclassified lines.' : 'Whole-day lesson text arranged by subject.') } catch (error) { setStatus(error?.response?.data?.message || 'Could not arrange lesson plan text.') } finally { setBusy('') } }
 
   const saveLessonPlan=async()=>{
+    if (lessonDoc.planningType !== 'daily') { setStatus('Term plan is print-only in this Daily Diary editor. Edit/save through Lesson Planning workspace; academic content is unchanged.'); return }
     const submittedScope = diaryScopeGeneration.current
     const submittedDocument = lessonDoc
     setBusy('lesson-save')
@@ -733,7 +734,15 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
       // Wait for fonts and the official school crest before invoking browser print.
       Promise.resolve(preview.document.fonts?.ready).then(async () => {
         await Promise.all(Array.from(preview.document.images).map(img => img.complete ? Promise.resolve() : new Promise(resolve => { img.onload=resolve; img.onerror=resolve })))
-        if (!preview.closed) { preview.focus(); preview.print() }
+        if (preview.closed) return
+        const fit = validateStudentTermDiary3UpLayout(preview.document)
+        if (!fit.ok) {
+          preview.close()
+          setStatus(`Student term diary print prevented: ${fit.errors[0]}. Review the class content and table spacing.`)
+          return
+        }
+        preview.focus()
+        preview.print()
       })
     } catch (error) { setStatus(`Student Term Diary not printed: ${error.message}`) }
   }

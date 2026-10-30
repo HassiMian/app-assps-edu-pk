@@ -28,3 +28,7 @@ Approved private print PDF reference (school offline artifact; do NOT add studen
 ## Real acceptance gates still required
 
 Authenticated School1 Principal and Teacher Save-Reopen-Edit-Print, independent School2 denial, academic original page/source ratification, account roles, independently verified encrypted off-host full restore and authorized signed production cutover. None are auto-PASS by these local tests. Do not grant roles or mutate historical marks as part of a print UI patch.
+
+## Consolidated 30 October regression hardening
+
+The 40-minute mission follow-up covers: term plans cannot be silently changed into daily scope by the Diary Save, Smart Paste or Auto-Generate handlers; saved term class/section must match the selected authenticated roster; separate English A/B and Urdu A/B assessment rows remain distinct when supplied by teachers, and extra teacher-provided assessment subjects cannot be lost in a merged lesson; duplicate assessment numbers and impossible dates (e.g. 31 Nov) fail closed; browser preflight verifies actual text/table/note geometry and **blocks printing when source content would crop**. V4 integration candidate will retain the CURRENT production V4 asset rather than resurrect an older V1/V2 asset. Live release and academic signoff remain HOLD.
