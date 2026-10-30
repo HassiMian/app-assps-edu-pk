@@ -1,0 +1,25 @@
+'use strict'
+const test=require('node:test')
+const assert=require('node:assert/strict')
+const fs=require('node:fs')
+const path=require('node:path')
+const source=fs.readFileSync(path.resolve(__dirname,'../routes/feeRoutes.js'),'utf8')
+test('latest carried balance replaces historical sum (no double-billing)',()=>{
+ const block=source.slice(source.indexOf('async function calculatePreviousArrears'),source.indexOf("router.get('/settings'"))
+ assert.ok(block.includes('ORDER BY year DESC'))
+ assert.ok(block.includes('LIMIT 1'))
+ assert.ok(block.includes('COALESCE(remaining_balance, gross_total, amount, 0)'))
+ assert.ok(!block.includes('SUM(GREATEST'))
+ assert.ok(!block.includes("status IN ('unpaid', 'partial')"))
+})
+test('November 2026 class Eight single and bulk creation blocked',()=>{
+ assert.match(source,/PRE_NINE_PROMOTION_REQUIRED/g)
+ assert.match(source,/november2026 && className === 'Eight'/)
+})
+test('November held student configured privately and blocked in both generation paths',()=>{
+ assert.match(source,/MAYA_PRE_NINE_PROMOTION_REQUIRED/)
+ assert.ok(source.includes("COALESCE(gr_number,'') <> $4"))
+ assert.ok(source.includes("ASSPS_202611_PRENINE_HOLD_GR"))
+ assert.ok(!source.includes("GR-7752"))
+ assert.ok(source.includes("student.class !== 'Pre Nine'"))
+})

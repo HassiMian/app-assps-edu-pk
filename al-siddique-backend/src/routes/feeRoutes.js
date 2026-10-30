@@ -233,10 +233,15 @@ async function calculatePreviousArrears(studentId, schoolId, targetMonth, target
     params.push(targetYearNumber, targetMonthNumber)
   }
   const result = await query(`
-    SELECT COALESCE(SUM(GREATEST(COALESCE(remaining_balance, gross_total, amount, 0), 0)), 0) AS total_arrears
+    SELECT COALESCE(GREATEST(COALESCE(remaining_balance, gross_total, amount, 0), 0), 0) AS total_arrears
     FROM fee_challans
-    WHERE student_id = $1 AND school_id = $2 AND status IN ('unpaid', 'partial')${priorPeriodFilter}
+    WHERE student_id = $1 AND school_id = $2${priorPeriodFilter}
+    ORDER BY year DESC, ${monthCase} DESC NULLS LAST, id DESC
+    LIMIT 1
   `, params)
+  // Monthly vouchers already include their previous_arrears: the latest
+  // carried balance is authoritative, not the sum of all historical invoices.
+  // Even a fully paid October voucher must be considered (zero carried due).
   return asMoney(result.rows[0]?.total_arrears || 0)
 }
 
@@ -582,6 +587,20 @@ router.post('/', protect, adminOnly, async (req, res) => {
     }
 
     const student = studentResult.rows[0]
+    if (String(month).trim().toLowerCase() === 'november' && Number(year) === 2026) {
+      if (student.class === 'Eight') {
+        return res.status(423).json({ success:false, code:'PRE_NINE_PROMOTION_REQUIRED', message:'Class Eight November vouchers are held until verified promotion to Pre Nine.' })
+      }
+      const heldGr = String(process.env.ASSPS_202611_PRENINE_HOLD_GR || '').trim()
+      if (schoolId === 1 && student.class === 'Nine' && !heldGr) {
+        return res.status(503).json({success:false,code:'NOVEMBER_FEE_HOLD_CONFIG_REQUIRED',message:'School-specific November student hold configuration is missing.'})
+      }
+      const held = heldGr ? await query('SELECT 1 FROM students WHERE id=$1 AND school_id=$2 AND gr_number=$3 LIMIT 1',
+        [student.id,schoolId,heldGr]) : {rows:[]}
+      if (held.rows.length && student.class !== 'Pre Nine') {
+        return res.status(423).json({ success:false, code:'MAYA_PRE_NINE_PROMOTION_REQUIRED', message:'Maya Babar November voucher is held until verified Pre Nine promotion.' })
+      }
+    }
     const session = await resolveAcademicSession(schoolId, year)
     const configuredMonthly = await getClassMonthlyFee(schoolId, student.class, session)
     const monthlyFee = asMoney(amount || configuredMonthly)
@@ -659,10 +678,19 @@ router.post('/bulk', protect, adminOnly, async (req, res) => {
     if (!className || !month || !year) {
       return res.status(400).json({ success: false, message: 'class, month, and year are required' })
     }
-
+    const november2026 = String(month).trim().toLowerCase() === 'november' && Number(year) === 2026
+    if (november2026 && className === 'Eight') {
+      return res.status(423).json({success:false,code:'PRE_NINE_PROMOTION_REQUIRED',message:'Class Eight November vouchers are held until verified Pre Nine promotion.'})
+    }
+    const heldGr = String(process.env.ASSPS_202611_PRENINE_HOLD_GR || '').trim()
+    if (november2026 && schoolId === 1 && className === 'Nine' && !heldGr) {
+      return res.status(503).json({success:false,code:'NOVEMBER_FEE_HOLD_CONFIG_REQUIRED',message:'School-specific November student hold configuration is missing.'})
+    }
     const studentsResult = await query(
-      'SELECT id, class, section FROM students WHERE class = $1 AND is_active = true AND school_id = $2',
-      [className, schoolId]
+      `SELECT id, class, section FROM students
+        WHERE class = $1 AND is_active = true AND school_id = $2
+        AND (NOT $3::boolean OR class = 'Pre Nine' OR COALESCE(gr_number,'') <> $4)`,
+      [className, schoolId, november2026 && schoolId===1, heldGr]
     )
 
     let generatedCount = 0
