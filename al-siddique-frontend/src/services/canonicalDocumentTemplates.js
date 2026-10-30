@@ -113,8 +113,10 @@ export function renderDynamicFeeRows(ch, theme) {
     const { monthly: amt, arrears: prevFee, discount: disc, gross: net, paid: paidAmt } = feeParts(ch);
     const admFee = Number(ch.admission_fee || 0);
     const othFee = Number(ch.other_fee || 0);
+    const examFee = Number(ch.exam_fee || 0);
+    const paperFee = Number(ch.paper_fund || 0);
     const hasPrev = prevFee > 0;
-    const totalGross = amt + prevFee + admFee + othFee;
+    const totalGross = amt + prevFee + admFee + othFee + examFee + paperFee;
     const monthlyNet = Math.max(0, amt - disc);
 
     return `
@@ -139,6 +141,8 @@ export function renderDynamicFeeRows(ch, theme) {
         <td style="text-align:center; padding:4px 3px; font-size:10.5px;">0</td>
         <td style="text-align:center; padding:4px 3px; font-weight:800; font-size:10.5px;">${othFee ? othFee.toLocaleString() : '—'}</td>
       </tr>
+      ${examFee>0?'<tr><td>Examination Fee</td><td>'+examFee.toLocaleString()+'</td><td>0</td><td>0</td><td>'+examFee.toLocaleString()+'</td></tr>':''}
+      ${paperFee>0?'<tr><td>Paper Fund</td><td>'+paperFee.toLocaleString()+'</td><td>0</td><td>0</td><td>'+paperFee.toLocaleString()+'</td></tr>':''}
       <tr style="border-bottom:1px solid #d4b84a; background:#fef8e0;">
         <td style="padding:4px 6px; color:#7a5c00; font-style:italic; font-size:10.5px; font-weight:600;">Previous Arrears / Balance</td>
         <td style="text-align:center; padding:4px 3px; color:#7a5c00; font-size:10.5px;">${hasPrev ? prevFee.toLocaleString() : '—'}</td>

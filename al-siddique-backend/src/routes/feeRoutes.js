@@ -5,6 +5,7 @@ const { pool, query, applyTenantContext } = require('../config/database')
 const { protect, adminOnly } = require('../middleware/auth')
 const { tenantClause, currentSchoolId, hasColumn } = require('../middleware/tenant')
 const { findExistingChallan } = require('../services/feeChallanService')
+router.use('/batch', require('./feeBatchRoutes'))
 const FEE_ADMIN_ROLES = new Set(['super_admin', 'admin', 'principal', 'accountant'])
 
 function generateChallanNumber() {

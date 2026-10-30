@@ -11,6 +11,7 @@ import { usePaperStore } from '../Paper-Generator/usePaperStore'
 import { useAcademicStore } from '../../services/useAcademicStore'
 import { BadgeCheck, CreditCard, ReceiptText, Wallet, X } from 'lucide-react'
 import { renderVoucherCopyHtml } from './ViewChallans'
+import FeeCreationStudio from './FeeCreationStudio'
 import { btnPrimary, btnSecondary } from '../moduleStyles'
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -870,7 +871,7 @@ function FeeModule() {
  <TabBtn active={routeTab === 'settings'} onClick={() => navigate('/fees/settings')}> Fee Settings</TabBtn>
  </div>
  </div>
- <GCard style={{ marginTop: 20, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: 18, alignItems: 'center' }}>
+ {routeTab !== 'create' && <GCard style={{ marginTop: 20, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: 18, alignItems: 'center' }}>
  <div>
  <div className="super-module-card" style={{ color: C.silver, fontSize: 13, marginBottom: 6 }}>Fee Voucher Settings</div>
  <div className="super-module-card" style={{ color: '#fff', fontWeight: 700 }}>Choose the print template to apply to all vouchers.</div>
@@ -881,10 +882,10 @@ function FeeModule() {
  {TEMPLATE_OPTIONS.map(option => <option key={option.id} value={option.id}>{option.label}</option>)}
  </Sel>
  </div>
- </GCard>
+ </GCard>}
 
  <div className="super-module-card" style={{ paddingTop: 28 }}>
- {routeTab === 'create' && <CreateChallan onCreate={addChallan} students={students} classOptions={classOptions} feeClassSettings={feeClassSettings} feeSettingsLoadError={feeSettingsLoadError} />}
+ {routeTab === 'create' && <FeeCreationStudio students={students} classOptions={classOptions} templateId={selectedTemplate} onTemplateChange={setSelectedTemplate} />}
  {routeTab === 'view' && (
  <ViewChallans
  challans={challans}
