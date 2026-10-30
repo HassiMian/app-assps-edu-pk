@@ -1,0 +1,46 @@
+name: Assessment attested source review (no deployment)
+on:
+  push:
+    branches:
+      - review/assps-assessment-attested-minimal-20261030
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: al-siddique-frontend/package-lock.json
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+        working-directory: al-siddique-frontend
+      - run: node --test src/Modules/examination/examCreationModel.test.mjs src/Modules/examination/classPassingThreshold.test.js src/Modules/examination/classPassingThreshold.ui.test.js src/Modules/examination/resultSubjectState.test.mjs
+        working-directory: al-siddique-frontend
+      - run: npx eslint src/Modules/examination/ManageExams.jsx src/Modules/examination/examCreationModel.js
+        working-directory: al-siddique-frontend
+      - run: npm run build
+        working-directory: al-siddique-frontend
+
+  isolated-backend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: al-siddique-backend/src/package-lock.json
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+        working-directory: al-siddique-backend/src
+      - run: node --test tests/exam-creation-principal-http-isolated.test.js tests/teacher-marks-cohort-security-20261013.test.js
+        working-directory: al-siddique-backend/src
+
+# No production secrets, deployment, migrations, or live database access.
