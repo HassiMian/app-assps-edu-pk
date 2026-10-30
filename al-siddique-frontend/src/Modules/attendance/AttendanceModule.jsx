@@ -1,3 +1,4 @@
+import { activeAttendanceRosterParams } from './attendanceRosterScope'
 import { useState, useEffect } from "react";
 import {
  Check, CheckCircle2, X, Clock, Users, Calendar,
@@ -110,7 +111,7 @@ export default function AttendanceModule() {
  try {
  const [attendanceRes, studentRes] = await Promise.all([
  api.get('/api/attendance', { params: { class: selectedClass, section: selectedSection, date: selectedDate } }),
- api.get('/api/students', { params: { class: selectedClass, section: selectedSection } }),
+ api.get('/api/students', { params: activeAttendanceRosterParams({className:selectedClass,section:selectedSection}) }),
  ])
 
  const attendanceData = Array.isArray(attendanceRes.data?.data) ? attendanceRes.data.data : []
