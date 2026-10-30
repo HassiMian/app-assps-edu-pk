@@ -1,6 +1,8 @@
 // SavedPapersTab.jsx — Al Siddique Smart School OS
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import api from '../../services/api'
+import {cloudAssessmentRows} from './savedCloudAssessment.js'
 import Portal from '../../components/Portal'
 import { usePaperStore } from './usePaperStore'
 import { canDuplicatePaperInWorkspace } from './paperCreationDraft.js'
@@ -93,6 +95,35 @@ export default function SavedPapersTab({ onLoadPaper, onDuplicatePaper }) {
  const [renameVal, setRenameVal] = useState('')
  const [search, setSearch] = useState('')
  const [confirmDelete, setConfirmDelete] = useState(null)
+ const [cloudRows, setCloudRows] = useState([])
+ const [cloudLoading, setCloudLoading] = useState(true)
+ const [cloudError, setCloudError] = useState('')
+ const [cloudRefresh, setCloudRefresh] = useState(0)
+ const [cloudOpening, setCloudOpening] = useState('')
+ useEffect(() => {
+  let active=true
+  api.get('/api/assessment-studio/papers', {skipCache:true}).then(response=>{
+   if (!active) return
+   if (response.data?.success !== true || !Array.isArray(response.data?.data))
+    throw Error('The assessment server did not return a valid saved list.')
+   setCloudRows(response.data.data)
+   setCloudError('')
+  }).catch(error=>{
+   if (!active) return
+   setCloudError(error?.response?.data?.message || error?.message || 'Cannot load server-saved assessments.')
+  }).finally(()=>{if(active)setCloudLoading(false)})
+  return ()=>{active=false}
+ },[cloudRefresh])
+ const cloudPapers=cloudAssessmentRows(cloudRows)
+ const visibleCloudPapers=cloudPapers.filter(paper=>!search || paper.name.toLowerCase().includes(search.toLowerCase()))
+ const openCloudPaper=async paper=>{
+  if(cloudOpening)return
+  setCloudOpening(paper.serverPaperId)
+  setCloudError('')
+  try{await onLoadPaper(paper,'build')}
+  catch(error){setCloudError(error?.response?.data?.message||error?.message||'Assessment cannot be reopened from the server. No local empty document was created.')}
+  finally{setCloudOpening('')}
+ }
 
  const filtered = savedPapers.filter(p => {
  // Role-based visibility
@@ -141,13 +172,30 @@ export default function SavedPapersTab({ onLoadPaper, onDuplicatePaper }) {
  <div style={{ fontSize: 36 }}></div>
  <div style={{ flex: 1 }}>
  <div style={{ color: '#fff', fontWeight: 800, fontSize: 20 }}>Saved Papers</div>
- <div style={{ color: C.muted, fontSize: 13 }}>{savedPapers.length} paper{savedPapers.length !== 1 ? 's' : ''} saved — click any to load and print</div>
+ <div style={{ color: C.muted, fontSize: 13 }}>{savedPapers.length} browser paper(s) · {cloudLoading?'Checking server…':cloudError?'Server unavailable':cloudPapers.length+' server assessment(s)'}</div>
  </div>
  <input value={search} onChange={e => setSearch(e.target.value)} placeholder=" Search papers..."
  style={{ background: 'rgba(11,44,77,0.6)', border: `1px solid ${C.border}`, borderRadius: 12, color: C.silver, padding: '10px 16px', fontSize: 13, outline: 'none', width: 220 }} />
  </div>
 
- {filtered.length === 0 ? (
+ {cloudLoading && <p style={{ color:C.muted, margin:'0 0 12px' }}>Checking authenticated server-saved assessments…</p>}
+ {cloudError && <div role="alert" style={{ color:C.red, marginBottom:14, border:'1px solid '+C.border, padding:12, borderRadius:10 }}>
+  {cloudError} <button type="button" onClick={()=>{setCloudLoading(true);setCloudRefresh(n=>n+1)}} style={{marginLeft:12,cursor:'pointer'}}>Retry</button>
+ </div>}
+ {visibleCloudPapers.length>0 && <section aria-label="Server-saved assessments" style={{ marginBottom:22 }}>
+  <h3 style={{ fontSize:16, color:C.silver, margin:'0 0 10px' }}>Server-Saved Assessments · Reopen for Editing</h3>
+  <div style={{ display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:12 }}>
+   {visibleCloudPapers.map(paper=><div key={paper.serverPaperId} style={{background:C.card,border:'1px solid '+C.border,borderRadius:14,padding:18}}>
+    <div style={{fontSize:15,color:C.silver,fontWeight:700}}>{paper.name}</div>
+    <div style={{fontSize:12,color:C.muted,margin:'8px 0'}}>Server revision {paper.serverRevision} · {paper.status} · Not a local backup</div>
+    <button type="button" disabled={Boolean(cloudOpening)} onClick={()=>void openCloudPaper(paper)}
+      style={{background:C.gold,color:'#071e34',border:0,borderRadius:8,fontWeight:700,cursor:'pointer',padding:'8px 14px'}}>
+      {cloudOpening===paper.serverPaperId?'Verifying server revision…':'Open & Edit'}
+    </button>
+   </div>)}
+  </div>
+ </section>}
+ {filtered.length === 0 && visibleCloudPapers.length===0 && !cloudLoading && !cloudError ? (
  <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 18, padding: 60, textAlign: 'center' }}>
  <div style={{ fontSize: 48, marginBottom: 16 }}></div>
  <div style={{ color: C.silver, fontWeight: 700, fontSize: 18, marginBottom: 8 }}>

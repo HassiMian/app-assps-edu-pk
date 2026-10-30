@@ -125,8 +125,13 @@ export default function PaperGenerator() {
     if (paper?.userAuthored && (paper.serverPaperId || paper.canonicalDocument?.id)) {
       try {
         const server = await loadAssessmentPaper(paper.serverPaperId || paper.canonicalDocument.id)
-        if (server?.document_json) resolvedPaper = mergeServerDocumentIntoLocalPaper(paper, server.document_json, server)
+        if (!server?.document_json) {
+          if (paper.serverOnly) throw new Error('Server assessment revision has no document. Open was cancelled.')
+        } else resolvedPaper = mergeServerDocumentIntoLocalPaper(paper, server.document_json, server)
       } catch (error) {
+        // A server-only item has no confirmed local document; never silently
+        // navigate into an empty editor or claim it was recovered offline.
+        if (paper.serverOnly) throw error
         const retryable = !error?.response || error.response.status === 408 || error.response.status === 429 || error.response.status >= 500
         resolvedPaper = { ...paper, persistenceMode:retryable ? 'DEGRADED_OFFLINE' : (paper.persistenceMode || 'LOCAL_RECOVERY'), serverReopenError:error?.response?.status || 'NETWORK' }
       }
