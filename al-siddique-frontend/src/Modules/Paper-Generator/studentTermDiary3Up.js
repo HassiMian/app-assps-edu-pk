@@ -98,8 +98,12 @@ function assessmentDates(plan, subject) {
   const result=Array(5).fill('')
   const occupied=Array(5).fill(false)
   for(let i=0;i<list.length;i++) {
-    const a=list[i], n=Number(a.number)
-    const at=Number.isInteger(n)&&n>=1&&n<=5?n-1:i
+    const a=list[i]
+    const number=norm(a.number)
+    // Omitted legacy ordinals can use their source order; an explicit invalid
+    // ordinal must NEVER be silently placed into the wrong assessment column.
+    if(number && !/^0?[1-5]$/.test(number))throw new Error(`Invalid assessment number for ${subject}`)
+    const at=number?Number(number)-1:i
     if(occupied[at])throw new Error(`Duplicate assessment number for ${subject}`)
     occupied[at]=true
     const date=norm(a.date)
@@ -122,6 +126,14 @@ export function buildStudentTermDiary3Up({students,plan,classLevel,section,schoo
   if (norm(plan?.section) && norm(section) && normalizedSubject(plan.section) !== normalizedSubject(section)) throw new Error('Saved term plan belongs to a different section')
   const subjects=studentTermDiarySubjects(plan)
   if(!subjects.length)throw new Error('No verified syllabus entered for this class; do not print placeholder chapters')
+  // Count UNIQUE source subjects. Duplicate entries could otherwise conceal
+  // missing academic coverage and produce apparently complete printed plans.
+  const seenSubjects=new Set()
+  for(const {subject} of subjects) {
+    const name=normalizedSubject(subject)
+    if(seenSubjects.has(name))throw new Error(`Duplicate Second Term subject: ${subject}; reconcile the source plan first`)
+    seenSubjects.add(name)
+  }
   const requiredCount=REQUIRED_CLASS_SUBJECTS[classKey(cls)] || 1
   if(strictClassCoverage && subjects.length<requiredCount)throw new Error(`Incomplete ${cls} Second Term coverage: ${subjects.length}/${requiredCount} subject rows. Open the complete class syllabus; do not print partial student diaries.`)
   if(subjects.length>10)throw new Error('More than ten subjects need editorial review for 3-up printing')
@@ -133,8 +145,12 @@ export function buildStudentTermDiary3Up({students,plan,classLevel,section,schoo
   if(ids.size!==studentsIdentity.length)throw new Error('Duplicate student IDs in SaaS roster')
   for(let i=0;i<roster.length;i++) {
     const s=roster[i],c=norm(s.class || s.class_name)
-    if(c&&classKey(c)!==classKey(cls)) throw new Error(`Cross-class student in roster: ${studentsIdentity[i].id}`)
-    if(norm(plan?.section) && norm(s.section) && normalizedSubject(plan.section) !== normalizedSubject(s.section)) throw new Error(`Term plan's section does not match the SaaS roster: ${studentsIdentity[i].id}`)
+    if(!c) throw new Error(`SaaS student class is missing: ${studentsIdentity[i].id}`)
+    if(classKey(c)!==classKey(cls)) throw new Error(`Cross-class student in roster: ${studentsIdentity[i].id}`)
+    const studentSection=getStudent(s,'section','section_name')
+    const expectedSection=norm(section) || norm(plan?.section)
+    if(expectedSection && !studentSection) throw new Error(`SaaS student section is missing: ${studentsIdentity[i].id}`)
+    if(expectedSection && normalizedSubject(studentSection)!==normalizedSubject(expectedSection)) throw new Error(`SaaS student section does not match selected section: ${studentsIdentity[i].id}`)
     if([false,0,'false','f','0'].includes(s.is_active))throw new Error('Inactive student cannot be printed in active roster')
   }
   const [defaultTint,defaultAccent]=studentTermDiaryColor(cls,section)

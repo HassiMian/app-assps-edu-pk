@@ -82,3 +82,43 @@ test('SaaS print button must fail closed when roster loading failed or is in pro
  assert(src.includes('setRosterVerified(true)'))
  assert(src.includes('setStudents([]); setSelectedStudentIds([]); setRosterStatus(error'))
 })
+
+// Regression: source roster cannot silently substitute unknown or cross-section students.
+test('selected section refuses a student from a different section even when plan section is blank',()=>{
+ assert.throws(()=>make({section:'Blue',students:[student(1,'Ayesha',{section:'Red'})]}),/section does not match/)
+})
+test('selected section refuses student with no section provenance',()=>{
+ assert.throws(()=>make({students:[student(1,'Ayesha',{section:''})]}),/student section is missing/)
+})
+test('class-scoped term print refuses student with absent class provenance',()=>{
+ assert.throws(()=>make({students:[student(1,'Ayesha',{class:''})]}),/student class is missing/)
+})
+test('roster UI must not silently accept unknown section records as verified',async()=>{
+ const fs=await import('node:fs'); const src=fs.readFileSync(new URL('../DailyDiaryWorkspace.jsx',import.meta.url),'utf8')
+ assert.match(src,/unverifiedSectionRows/)
+ assert.match(src,/setRosterVerified\(false\)/)
+})
+
+// Invalid explicit assessment ordinals must not silently become A1/A2 positional dates.
+test('out-of-range explicit assessment number is rejected, not silently reassigned',()=>{
+ for (const number of [0,6,-1,'9']) assert.throws(()=>make({plan:{...plan(),assessments:[{subject:'English (A + B)',number,date:'2026-12-01'}]}}),/Invalid assessment number/)
+})
+test('noncanonical explicit assessment ordinal is rejected, not coerced to A1',()=>{
+ for (const number of ['1e0','0x1','1.0',true]) assert.throws(()=>make({plan:{...plan(),assessments:[{subject:'English (A + B)',number,date:'2026-12-01'}]}}),/Invalid assessment number/)
+})
+test('normal legacy absent assessment ordinal and 01 label remain printable',()=>{
+ const a=make({plan:{...plan(),assessments:[{subject:'English (A + B)',date:'2026-12-01'}]}})
+ const b=make({plan:{...plan(),assessments:[{subject:'English (A + B)',number:'01',date:'2026-12-01'}]}})
+ assert.match(a.html,/2026-12-01/);assert.match(b.html,/2026-12-01/)
+})
+
+// Row-count completeness alone must never accept six copies of the same subject.
+test('same subject repeated cannot satisfy strict six-subject coverage',()=>{
+ const termCoverageRows=Array.from({length:6},(_,i)=>({subject:i%2?' English ':'ENGLISH',detail:'Source page range '+i}))
+ assert.throws(()=>make({strictClassCoverage:true,plan:{...plan(),termCoverageRows}}),/Duplicate Second Term subject/)
+})
+test('six different genuine subjects still satisfy strict class coverage',()=>{
+ const termCoverageRows=['English','Urdu','Mathematics','Science','Islamiyat','Social Studies'].map(subject=>({subject,detail:'Source-based plan'}))
+ const result=make({strictClassCoverage:true,plan:{...plan(),termCoverageRows}})
+ assert.equal(result.subjects,6)
+})

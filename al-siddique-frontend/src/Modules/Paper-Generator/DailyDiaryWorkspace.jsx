@@ -446,7 +446,27 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   useEffect(() => {
     if (!classLevel) { let cancelled = false; queueMicrotask(() => { if (!cancelled) { setStudents([]); setSelectedStudentIds([]); setRosterVerified(false) } }); return () => { cancelled = true } }
     let cancelled = false; queueMicrotask(() => { if (!cancelled) { setRosterStatus('Loading roster…'); setRosterVerified(false) } })
-    api.get('/api/students', { params: { class: classLabel, active: 'true' }, skipCache: true }).then(response => { if (cancelled) return; const list = Array.isArray(response.data?.data) ? response.data.data : Array.isArray(response.data) ? response.data : []; const scoped = section ? list.filter(student => !studentSection(student) || studentSection(student).toLowerCase() === section.toLowerCase()) : list; setStudents(scoped); setSelectedStudentIds(scoped.map(studentId)); setRosterStatus(`${scoped.length} students loaded`); setRosterVerified(true) }).catch(error => { if (cancelled) return; setRosterVerified(false); setStudents([]); setSelectedStudentIds([]); setRosterStatus(error?.response?.data?.message || 'Student roster unavailable. Retry before printing.') }).finally(() => { })
+    api.get('/api/students', { params: { class: classLabel, active: 'true' }, skipCache: true })
+      .then(response => {
+        if (cancelled) return
+        const list = Array.isArray(response.data?.data) ? response.data.data : Array.isArray(response.data) ? response.data : []
+        // An unassigned student could belong to ANY section. Never treat it as
+        // a verified member of the selected section, or silently omit it.
+        const unverifiedSectionRows = section ? list.filter(student => !studentSection(student)) : []
+        if (unverifiedSectionRows.length) {
+          setStudents([])
+          setSelectedStudentIds([])
+          setRosterStatus(`${unverifiedSectionRows.length} students have no verified section; print blocked until roster is corrected.`)
+          setRosterVerified(false)
+          return
+        }
+        const scoped = section ? list.filter(student => studentSection(student).toLowerCase() === section.toLowerCase()) : list
+        setStudents(scoped)
+        setSelectedStudentIds(scoped.map(studentId))
+        setRosterStatus(`${scoped.length} students loaded`)
+        setRosterVerified(true)
+      })
+      .catch(error => { if (cancelled) return; setRosterVerified(false); setStudents([]); setSelectedStudentIds([]); setRosterStatus(error?.response?.data?.message || 'Student roster unavailable. Retry before printing.') })
     return () => { cancelled = true }
   }, [classLevel, classLabel, section])
 
