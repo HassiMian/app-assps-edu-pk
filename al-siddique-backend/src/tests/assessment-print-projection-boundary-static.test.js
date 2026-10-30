@@ -19,6 +19,6 @@ test('student projection strips answer material and answer-key projection remain
   assert.match(service, /STUDENT_PROJECTION_ANSWER_LEAK/)
   assert.match(service, /FORBIDDEN_ANSWER_KEYS/)
   assert.match(service, /ANSWER_KEY_ROLE_REQUIRED/)
-  assert.match(service, /new Set\(\['super_admin','admin','school_admin','principal','teacher'\]\)/)
+  assert.match(service, /new Set\(\['super_admin','admin','school_admin','principal','owner','teacher'\]\)/)
   assert.match(route, /buildStaffAnswerKeyProjection\(row\.snapshot_json \|\| \{\}, \{ role:req\.user\?\.role \}\)/)
 })
