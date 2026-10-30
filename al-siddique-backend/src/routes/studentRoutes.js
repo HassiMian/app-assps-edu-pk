@@ -1,7 +1,8 @@
 const crypto = require('crypto')
 const express = require('express')
 const router  = express.Router()
-const { pool, query, applyTenantContext } = require('../config/database')
+const { pool, query, applyTenantContext, tenantContext } = require('../config/database')
+const { schoolScopedMovement } = require('../middleware/schoolScopedMovement')
 const auth = require('../middleware/auth')
 const protect = auth.protect
 const adminOnly = auth.adminOnly
@@ -783,7 +784,7 @@ router.delete('/:id/portal-accounts/:role', protect, adminOnly, async (req, res)
 })
 
 // POST /api/students/bulk-class-assignment — atomic class/section transitions
-router.post('/bulk-class-assignment', protect, adminOnly, async (req, res) => {
+router.post('/bulk-class-assignment', protect, adminOnly, schoolScopedMovement(tenantContext), async (req, res) => {
   const assignments = Array.isArray(req.body?.assignments) ? req.body.assignments : []
   if (!assignments.length || assignments.length > 500) {
     return res.status(422).json({ success: false, message: 'Provide between 1 and 500 student assignments.' })
