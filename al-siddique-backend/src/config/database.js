@@ -356,9 +356,11 @@ async function connectForContext() {
           AND c.relname <> 'student_class_movement_audit'
       `, [configuredRuntimeRole()])
       const state = gate.rows[0]
-      if (!state || state.forced !== 77 || state.enabled !== 77 || state.signed !== 77 ||
-          state.signed_school !== 73 || state.signed_tenant !== 4) {
-        const error = new Error('Signed tenant RLS requires 77 enabled, forced, exact restrictive USING/WITH CHECK policies (73 school + 4 tenant)')
+      if (!state || state.forced < 77 || state.enabled !== state.forced ||
+          state.signed !== state.forced || state.signed_school < 73 ||
+          state.signed_tenant < 4 ||
+          state.signed_school + state.signed_tenant !== state.signed) {
+        const error = new Error('Signed tenant RLS requires complete restrictive signed-school/tenant policies on every protected table')
         error.code = 'DB_SIGNED_RLS_CATALOG_INCOMPLETE'
         throw error
       }

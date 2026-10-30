@@ -55,3 +55,58 @@ Core backend promotion regression tests 8/8 passed; signed audit role has INSERT
 Real Principal promotion after routing correction has not been verified or executed by the assistant.
 
 Pre Nine / Blue class exists and is active; the school fee rate for Pre Nine in 2026-2027 is PKR 3,000 monthly. The bulk fee voucher path uses the destination class fee configuration. Existing payment history must not be rewritten.
+
+## Second correction: failed audit security gate (14:07 UTC)
+
+After matching the JWT upstream, the genuine Principal promotion encountered
+503 STUDENT_MOVEMENT_AUDIT_SECURITY_NOT_READY on core port 5000. Core backend
+DB role apexos_user had no INSERT privilege on the signed FORCE-RLS
+student_class_movement_audit table. This is a real fail-closed protection;
+it was not bypassed, no broad GRANT was issued.
+
+Rerouting to the existing signed service on port 5091 uncovered its stale
+literal 77-table database catalog invariant, while the current PostgreSQL
+catalog contains 85 FORCE-RLS tables. The missing eight signed restrictive
+policies were on the following school-scoped tables:
+- grade910_human_signoff_evidence
+- grade910_personal_signature_assets
+- grade910_supporting_evidence_objects
+- grade910_verified_paper_publications
+- school_academic_approval_events
+- school_document_events
+- school_document_revisions
+- school_documents
+
+All contain school_id. An isolated transaction dry-run created exactly
+eight restrictive core_signed_tenant_guard policies for dedicated signed
+runtime roles using core_security.signed_school_allowed(school_id), then
+rolled back; 0 policies remained after dry run. The same reviewed one-time
+migration was committed in a single transaction and independently verified:
+**85 FORCE-RLS / 85 enabled / 85 signed restrictive guards**; exact
+qualifications **81 signed_school + 4 signed_tenant**. The signed catalog
+gate now accepts growth beyond baseline 77 *only* when every protected table
+has the exact restrictive school/tenant predicate (no bypass).
+
+The dedicated signed service assps-marks-green was restarted and serves
+localhost 5091 /health 200. A read-only signed RLS session passed:
+current_user assps_marks_signed_runtime, movement audit relforcerowsecurity
+true. The only public movement POST is now routed by Nginx to 5091;
+unauthenticated request remains 401. The normal app /api/auth, /api/students
+GET and /api/fees remain routed to core 5000. No fee, marks, roster or
+student movement rows were written by the assistant in this repair.
+
+Recovery:
+- One-time SQL migration source: ops/sql/assps_signed_rls_catalog_8_policy_repair_20261030.sql
+- Original script, stored on VPS: /root/secure-archive/assps_signed_rls_catalog_8_policy_repair_20261030.sql
+- Nginx pre-signed cutover backup:
+  /root/secure-archive/assps-promotion-route-before-signed5091-20261030.conf
+- Deployment source (signed server): /root/workspace/assps-core-promote-demote-review-20261011/al-siddique-backend
+- Site static root remains /var/www/assps-releases/promotion-auth-v2-20261030.
+
+**Acceptance distinction:** Real Principal authenticated movement after this
+second correction is still not proven. Previous 11 students remain active in
+Eight / Blue until signed authenticated transaction commits; never report
+them as Pre Nine without fresh database read. The fee class configuration
+for Pre Nine remains PKR 3000 for 2026-2027; November vouchers should be
+generated only after authenticated promotion, using class rates and audited
+arrears/discount calculations.
