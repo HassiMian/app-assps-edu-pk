@@ -46,4 +46,4 @@ State: REVIEW ONLY, production certification HOLD.
 No production database writes, releases, restarts, fake identity, academic signoff, or certificates performed or claimed.
 
 ## Broader diagnostic not yet cleared
-The pre-existing assessmentPersistenceBrowserAdversarial.test.js, not included in the CI PASS suite, fails late when attempting its stale 'Edit question content' control in a second tab. The separately verified first-question fix does not prove full two-tab/offline-replay acceptance. Do not certify that workflow until a fresh, source-backed adversarial suite passes.
+The pre-existing assessmentPersistenceBrowserAdversarial.test.js, not included in the CI PASS suite, still fails late on second-tab reopen: neither its older 'Edit question content' selector nor the current 'Selected question content' selector becomes available after its Edit Paper attempt. The first-question Chromium test passes, but this does not establish full multi-tab, stale-editor or offline-replay acceptance. Do not certify the unresolved path or reinterpret the failed full suite as passed.
