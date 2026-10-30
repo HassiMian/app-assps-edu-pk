@@ -1,0 +1,35 @@
+name: ASSPS Attendance Review (No Release)
+
+on:
+  push:
+    branches:
+      - review/assps-attendance-active-roster-20261030
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-regressions:
+    name: Attendance source-only review
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: al-siddique-frontend/package-lock.json
+      - name: Install frontend dependencies
+        working-directory: al-siddique-frontend
+        run: npm ci --no-audit --no-fund
+      - name: Exercise active-only roster and strict save acknowledgement
+        working-directory: al-siddique-frontend
+        run: node --test src/Modules/attendance/attendanceRosterScope.test.mjs src/Modules/attendance/attendanceSaveReceipt.test.mjs
+      - name: ESLint new, independently tested modules
+        working-directory: al-siddique-frontend
+        run: npx eslint src/Modules/attendance/attendanceRosterScope.js src/Modules/attendance/attendanceRosterScope.test.mjs src/Modules/attendance/attendanceSaveReceipt.js src/Modules/attendance/attendanceSaveReceipt.test.mjs
+      - name: Production-mode source build only (NO deployment)
+        working-directory: al-siddique-frontend
+        run: npm run build
