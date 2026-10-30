@@ -124,26 +124,37 @@ export const mergeMarksRoster = (responses, className) => {
 export const filterMarksStudents = (rows, className) =>
   (Array.isArray(rows)?rows:[]).filter(row=>equivalentMarksClass(row.class,className))
 
+// Reject JavaScript Number() coercions (hex, exponent, bool, arrays), while
+// accepting genuine 0 and decimal fractions. This mirrors server-side
+// result-state parsing without broadening accepted historical marks.
+const parseEnteredDecimal = value => {
+  if (typeof value === 'number') return Number.isFinite(value) ? value : null
+  if (typeof value !== 'string') return null
+  const trimmed = value.trim()
+  if (!/^(?:\d+(?:\.\d*)?|\.\d+)$/.test(trimmed)) return null
+  const parsed = Number(trimmed)
+  return Number.isFinite(parsed) ? parsed : null
+}
+
 export const validateMarksBatch = ({exam, selectedClass, students, subject, marks, totalMarks, passMarks}) => {
   if (!Number.isSafeInteger(Number(exam?.id)) || Number(exam?.id) <= 0)
-    return {error:'Select a valid saved First Term Exam record before entering marks.',rows:[]}
+    return {error:'Select a valid saved exam record before entering marks.',rows:[]}
   if (selectedClass && !matchesMarksExam(exam,exam.type,selectedClass))
     return {error:'Selected exam does not belong to the chosen class. Refresh the examination list.',rows:[]}
   if (!String(subject||'').trim()) return {error:'Select a subject before saving.',rows:[]}
-  const total=Number(totalMarks), pass=Number(passMarks)
-  if (String(totalMarks).trim()==='' || !Number.isFinite(total) || total<=0 ||
-      String(passMarks).trim()==='' || !Number.isFinite(pass) || pass<0 || pass>total)
+  const total=parseEnteredDecimal(totalMarks), pass=parseEnteredDecimal(passMarks)
+  if (total===null || total<=0 || pass===null || pass<0 || pass>total)
     return {error:'Enter valid total and passing marks before saving.',rows:[]}
   const rows=[]
   for(const student of students||[]){
     const entered=marks?.[student.id]
-    if(entered===undefined || entered===null || String(entered).trim()==='')continue
+    if(entered===undefined || entered===null || (typeof entered === 'string' && entered.trim()===''))continue
     if (!Number.isSafeInteger(Number(student.id)) || Number(student.id) <= 0)
       return {error:'Student record has an invalid ID. Refresh the roster before saving.',rows:[]}
     if (selectedClass && !equivalentMarksClass(student.class,selectedClass))
       return {error:'Student class differs from the selected class. Refresh the roster before saving.',rows:[]}
-    const value=Number(entered)
-    if(!Number.isFinite(value) || value<0 || value>total){
+    const value=parseEnteredDecimal(entered)
+    if(value===null || value<0 || value>total){
       return {error:`Invalid marks for ${student.name || 'student'}: enter 0 to ${total}.`,rows:[]}
     }
     rows.push({exam_id:Number(exam.id),student_id:Number(student.id),
