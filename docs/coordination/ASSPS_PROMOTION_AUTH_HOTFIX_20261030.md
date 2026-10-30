@@ -39,3 +39,19 @@ The original frontend /src/services/api.js unconditionally cleared session on an
 
 ## Release boundaries
 Production hotfix is deployed and smoke tested. Actual Principal account save/reopen, class destination, 11-student roster and fee vouchers printing cannot be certified from synthetic credentials. Do not bypass role guards or fabricate account acceptance. Do not deploy the separate unified review branch directly to live on the basis of this hotfix.
+
+## Root cause correction confirmed Oct 30, 13:35 UTC — Nginx backend mismatch
+
+Actual Nginx logs: at 13:31:14 UTC GET /api/auth/me returned 200 and POST /api/students/bulk-class-assignment returned 401; POST /api/auth/refresh returned 200. Thus expired access tokens alone cannot explain this error.
+
+**Root cause:** exact promotion endpoint in the Nginx included snippet was routed to isolated October 11 review process PORT 5091, while /api/auth/me and /api/students were handled by live production PORT 5000. The inconsistent backend JWT validation caused a valid login to be rejected by the movement endpoint.
+
+**Production repair:** exact POST-only Nginx promotion endpoint now routes to 127.0.0.1:5000. JWT Principal/Admin checks, atomic SQL updates, audit table RLS and rollback retained. No real user identity forged, password reset or student records changed.
+
+Source-of-truth copy: ops/nginx/assps-marks-only-locations.conf
+Nginx rollback snapshot: /root/secure-archive/assps-promotion-route-5091-before-fix-20261030.conf
+Nginx syntax test and reload successful; unauthenticated POST still returns 401.
+Core backend promotion regression tests 8/8 passed; signed audit role has INSERT and two matching RLS policies.
+Real Principal promotion after routing correction has not been verified or executed by the assistant.
+
+Pre Nine / Blue class exists and is active; the school fee rate for Pre Nine in 2026-2027 is PKR 3,000 monthly. The bulk fee voucher path uses the destination class fee configuration. Existing payment history must not be rewritten.
