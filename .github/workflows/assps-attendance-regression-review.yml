@@ -3,6 +3,7 @@ name: ASSPS Attendance Review (No Release)
 on:
   push:
     branches:
+      - review/assps-unified-exam-attendance-20261030
       - review/assps-attendance-active-roster-20261030
   workflow_dispatch:
 

@@ -3,6 +3,7 @@ name: ASSPS Exam and Result Integrity Review (No Release)
 on:
   push:
     branches:
+      - review/assps-unified-exam-attendance-20261030
       - review/assps-assessment-active-roster-20261030
       - review/assps-exam-modal-ack-20261030
   workflow_dispatch:
