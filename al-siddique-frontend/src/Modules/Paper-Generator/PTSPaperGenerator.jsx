@@ -1614,7 +1614,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  </div>
  </div>
  <PaperSelectionToolbar editMode={editMode} active={activeEditable} />
- {editMode && isOfficialPaper && <div className="no-print" data-section-inspector style={{ position:'fixed', right:14, top:150, zIndex:11500, width:300, maxHeight:'calc(100vh - 185px)', overflowY:'auto', padding:12, border:'1px solid var(--pg-panel-border,#ef4444)', borderRadius:12, background:'var(--pg-panel-bg,rgba(7,25,48,.98))', color:D.silver, boxShadow:'var(--pg-panel-shadow,0 10px 34px rgba(0,0,0,.42))', fontFamily:'Arial,sans-serif', direction:'ltr' }}>
+ {editMode && (isOfficialPaper || isUserAuthoredPaper) && <div className="no-print" data-section-inspector style={{ position:'fixed', right:14, top:150, zIndex:11500, width:300, maxHeight:'calc(100vh - 185px)', overflowY:'auto', padding:12, border:'1px solid var(--pg-panel-border,#ef4444)', borderRadius:12, background:'var(--pg-panel-bg,rgba(7,25,48,.98))', color:D.silver, boxShadow:'var(--pg-panel-shadow,0 10px 34px rgba(0,0,0,.42))', fontFamily:'Arial,sans-serif', direction:'ltr' }}>
   <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:8, marginBottom:10 }}>
    <div><b style={{ color:D.gold, fontSize:12 }}>EDIT PAPER</b><div style={{ color:D.muted, fontSize:10, marginTop:2 }}>{selectedSection ? 'Question settings — paper layout stays fixed' : 'Click any question or editable line'}</div></div>
    {selectedSection && <button type="button" aria-label="Close question inspector" onClick={()=>{setSelectedSectionId('');setActiveEditable(null)}} style={{border:0,background:'transparent',color:D.muted,fontSize:18,cursor:'pointer'}}>×</button>}
@@ -1742,7 +1742,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <div style={{ fontSize:72, marginBottom:16, opacity:0.4 }}></div>
  <div style={{ fontSize:22, fontWeight:700, color:D.silver, marginBottom:10 }}>Paper Preview</div>
  <div style={{ fontSize:14, color:D.muted, maxWidth:380, lineHeight:1.7 }}>Click <strong style={{color:'#4da6ff'}}>Question Menu</strong> to add questions.<br/>Your paper will appear here live as you add them.</div>
- <button onClick={()=>isOfficialPaper ? addOfficialSection() : setModalOpen(true)} style={{ marginTop:28, background:`linear-gradient(135deg,#0A84FF,#0055cc)`, color:'white', border:'none', borderRadius:12, padding:'13px 34px', fontWeight: 600, fontSize:16, cursor:'pointer', boxShadow:'0 6px 20px rgba(10,132,255,0.35)', }}>{isOfficialPaper ? '+ Type First Question' : 'Open Question Menu'}</button>
+ <button onClick={()=>(isOfficialPaper || isUserAuthoredPaper) ? addOfficialSection() : setModalOpen(true)} style={{ marginTop:28, background:`linear-gradient(135deg,#0A84FF,#0055cc)`, color:'white', border:'none', borderRadius:12, padding:'13px 34px', fontWeight: 600, fontSize:16, cursor:'pointer', boxShadow:'0 6px 20px rgba(10,132,255,0.35)', }}>{isOfficialPaper || isUserAuthoredPaper ? '+ Type First Question' : 'Open Question Menu'}</button>
  </div>
  ) : half ? (
  <div className="preview-container" data-watermark-enabled={showWatermark?'true':'false'} data-watermark-scale={watermarkScale} data-watermark-opacity={watermarkOpacity} style={{ width:794, height:1123, zoom:previewZoom, flexShrink:0, background:'white', boxShadow:'0 4px 20px rgba(0,0,0,0.35)', overflow:'hidden', position:'relative' }}>

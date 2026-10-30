@@ -12,12 +12,13 @@ State: REVIEW ONLY, production certification HOLD.
 - Legacy marks entry: blanks stay pending, explicit zero survives, invalid/over-maximum input rejected; server acknowledgement required before success.
 - Attendance: active-only roster and exact save acknowledgment with honest counts.
 - Backend: created_by on new exams now derives from authenticated actor, not user-supplied payload.
+- Blank manual Assessment Paper Workspace: user-authored documents now expose first-question creation and the selected-question inspector. Synthetic Chromium entry and question-edit acceptance passed.
 - Saved Papers review: the prior tab displayed only browser-local drafts, not Assessment Studio's tenant-authorized server list. It now shows server-saved assessment metadata separately and can request a server-verified revision for editable workspace reopening; failed or unavailable cloud reads never invent an empty recovered document, and no server item can be deleted by the local-only delete button.
 
 - Independent no-release GitHub CI workflows cover assessment and attendance on the same unified branch.
 
 ## Verified test evidence
-- Isolated VPS worktree: 47/47 frontend and 6/6 backend mock tests passed, plus a separate 47/47 backend service/authorization regression sweep and 24/24 lesson-policy/domain tests; targeted ESLint and full production-mode frontend build passed. Added 2/2 real Chromium component-browser tests with intercepted synthetic API: failed Assessment save leaves the dialog open, explicit retry with confirmed server ID closes it; server-saved assessments appear in Saved Papers, and failed reopening does not create a fabricated document. These tests did not write to school PostgreSQL.
+- Isolated VPS worktree: 47/47 frontend and 6/6 backend mock tests passed, plus a separate 47/47 backend service/authorization regression sweep and 24/24 lesson-policy/domain tests; targeted ESLint and full production-mode frontend build passed. Added 3/3 real Chromium component-browser tests with intercepted synthetic API: failed Assessment save leaves the dialog open, explicit retry with confirmed server ID closes it; server-saved assessments appear in Saved Papers and failed reopening does not create a fabricated document; a blank manual assessment can type/edit its first question. These tests did not write to school PostgreSQL.
 - Previous integrated commit 3ea86315: GitHub Actions exams run 41053116163 SUCCESS; attendance run 41053115964 SUCCESS. New creator-attribution change requires its own fresh CI on updated head.
 
 ## Fresh live READ-ONLY checkpoints (school_id 1)
@@ -43,3 +44,6 @@ State: REVIEW ONLY, production certification HOLD.
 6. Saved Papers server revision recovery and backend/API persistence acceptance; local-only saved banner is not accepted as cloud recovery.
 
 No production database writes, releases, restarts, fake identity, academic signoff, or certificates performed or claimed.
+
+## Broader diagnostic not yet cleared
+The pre-existing assessmentPersistenceBrowserAdversarial.test.js, not included in the CI PASS suite, fails late when attempting its stale 'Edit question content' control in a second tab. The separately verified first-question fix does not prove full two-tab/offline-replay acceptance. Do not certify that workflow until a fresh, source-backed adversarial suite passes.

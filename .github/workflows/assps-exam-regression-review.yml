@@ -39,7 +39,7 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Browser acceptance — failed Assessment save stays open, acknowledged retry closes
         working-directory: al-siddique-frontend
-        run: node --test src/Modules/examination/tests/ExamModalReviewBrowser.test.mjs src/Modules/Paper-Generator/tests/SavedCloudReviewBrowser.test.mjs
+        run: node --test src/Modules/examination/tests/ExamModalReviewBrowser.test.mjs src/Modules/Paper-Generator/tests/SavedCloudReviewBrowser.test.mjs src/Modules/Paper-Generator/tests/BlankManualAssessmentBrowser.test.mjs
       - name: Exercise isolated backend route and status tests (NO database writes)
         working-directory: al-siddique-backend/src
         run: |
@@ -47,7 +47,7 @@ jobs:
       - name: Targeted frontend lint
         working-directory: al-siddique-frontend
         run: |
-          npx eslint src/Modules/Paper-Generator/SavedPapersTab.jsx src/Modules/Paper-Generator/PaperGenerator.jsx src/Modules/Paper-Generator/savedCloudAssessment.js src/Modules/examination/ExaminationModule.jsx src/Modules/examination/legacyExamWriteModel.js src/Modules/examination/MarksSheet.jsx src/Modules/examination/marksEntryModel.js src/Modules/examination/marksInputStrict.test.mjs src/Modules/examination/marksRosterScope.test.mjs src/Modules/examination/resultCardScoreModel.js src/Modules/examination/resultCardScoreModel.test.mjs
+          npx eslint src/Modules/Paper-Generator/PTSPaperGenerator.jsx src/Modules/Paper-Generator/SavedPapersTab.jsx src/Modules/Paper-Generator/PaperGenerator.jsx src/Modules/Paper-Generator/savedCloudAssessment.js src/Modules/examination/ExaminationModule.jsx src/Modules/examination/legacyExamWriteModel.js src/Modules/examination/MarksSheet.jsx src/Modules/examination/marksEntryModel.js src/Modules/examination/marksInputStrict.test.mjs src/Modules/examination/marksRosterScope.test.mjs src/Modules/examination/resultCardScoreModel.js src/Modules/examination/resultCardScoreModel.test.mjs
       - name: Full frontend build (NO deploy)
         working-directory: al-siddique-frontend
         run: npm run build
