@@ -44,6 +44,9 @@ jobs:
         working-directory: al-siddique-backend/src
         run: |
           node --test tests/exam-delete-retention-isolated.test.js tests/exam-creation-principal-http-isolated.test.js tests/exam-result-status-20261013.test.js
+      - name: Promotion signed actor scope, class movement, and audit regression (no database writes)
+        working-directory: al-siddique-backend/src
+        run: node --test tests/school-scoped-movement.test.cjs tests/promote-demote-full-repair.test.cjs tests/signed-rls-catalog-contract-20261030.test.cjs
       - name: Targeted frontend lint
         working-directory: al-siddique-frontend
         run: |
