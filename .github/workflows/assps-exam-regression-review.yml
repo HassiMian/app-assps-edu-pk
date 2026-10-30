@@ -34,6 +34,12 @@ jobs:
         working-directory: al-siddique-frontend
         run: |
           node --test src/Modules/examination/resultCardScoreModel.test.mjs src/Modules/examination/marksInputStrict.test.mjs src/Modules/examination/marksRosterScope.test.mjs src/Modules/examination/examCreationModel.test.mjs src/Modules/examination/legacyExamWriteModel.test.mjs src/Modules/examination/resultSubjectState.test.mjs src/Modules/examination/tests/comparableResultRank.test.mjs
+      - name: Install isolated Chromium for genuine component-browser acceptance
+        working-directory: al-siddique-frontend
+        run: npx playwright install --with-deps chromium
+      - name: Browser acceptance — failed Assessment save stays open, acknowledged retry closes
+        working-directory: al-siddique-frontend
+        run: node --test src/Modules/examination/tests/ExamModalReviewBrowser.test.mjs
       - name: Exercise isolated backend route and status tests (NO database writes)
         working-directory: al-siddique-backend/src
         run: |

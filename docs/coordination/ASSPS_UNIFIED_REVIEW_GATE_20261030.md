@@ -15,7 +15,7 @@ State: REVIEW ONLY, production certification HOLD.
 - Independent no-release GitHub CI workflows cover assessment and attendance on the same unified branch.
 
 ## Verified test evidence
-- Isolated VPS worktree: 45/45 frontend and 6/6 backend mock tests passed; targeted ESLint and full production-mode frontend build passed. These tests did not write to school PostgreSQL.
+- Isolated VPS worktree: 45/45 frontend and 6/6 backend mock tests passed; targeted ESLint and full production-mode frontend build passed. Added 1/1 real Chromium component-browser test with intercepted synthetic API: failed Assessment save leaves the dialog open, explicit retry with confirmed server ID closes it. These tests did not write to school PostgreSQL.
 - Previous integrated commit 3ea86315: GitHub Actions exams run 41053116163 SUCCESS; attendance run 41053115964 SUCCESS. New creator-attribution change requires its own fresh CI on updated head.
 
 ## Fresh live READ-ONLY checkpoints (school_id 1)
