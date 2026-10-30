@@ -90,3 +90,21 @@ test('production-size Flyer layout: 24 comparable students outrank a higher RAW 
  assert.equal(r.get('1'),'24th')
  assert.equal(r.size,25)
 })
+// Regression: imported/edited empty marks must NOT be converted to numeric 0.
+for (const [name,bad] of [
+  ['blank marks','   '],
+  ['boolean marks',false],
+  ['exponential marks','1e1'],
+  ['hexadecimal marks','0x10'],
+]) {
+  test(`${name} cannot enter an approved ranking cohort`,()=>{
+    const a=ledger(1,[10,20,10,10,20,10,10])
+    const b=ledger(2,[9,19,9,9,19,9,9])
+    const unverified=ledger(3,[1,2,3,4,5,6,7])
+    unverified[0].marks_obtained=bad
+    const ranks=rank([...a,...b,...unverified],users(1,2,3))
+    assert.equal(ranks.get('1'),'1st')
+    assert.equal(ranks.get('2'),'2nd')
+    assert.equal(ranks.get('3'),null)
+  })
+}

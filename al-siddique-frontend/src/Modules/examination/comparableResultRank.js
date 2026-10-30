@@ -5,6 +5,16 @@
  * have no verified rank until an academic authority reconciles the mapping.
  */
 const normal = value => String(value ?? '').trim().toLowerCase().replace(/\s+/g,' ')
+// Never coerce missing/boolean/scientific/hex marks to a legitimate zero.
+// PostgreSQL numeric JSON values are numbers; older decimal-string data is allowed.
+const decimalMark = raw => {
+  if (typeof raw === 'number') return Number.isFinite(raw) ? raw : null
+  if (typeof raw !== 'string') return null
+  const trimmed = raw.trim()
+  if (!/^\d+(?:\.\d+)?$/.test(trimmed)) return null
+  const number = Number(trimmed)
+  return Number.isFinite(number) ? number : null
+}
 const ordinal = n => {
   const suffix = n % 100 >= 11 && n % 100 <= 13 ? 'th'
     : n % 10 === 1 ? 'st' : n % 10 === 2 ? 'nd' : n % 10 === 3 ? 'rd' : 'th'
@@ -30,10 +40,9 @@ export function rankComparableResults(results, students, {
     const subject=normal(r?.subject || r?.subjectName)
     const total=r?.total_marks
     const obtained=r?.marks_obtained
-    const max=Number(total),value=Number(obtained)
-    if(!subject || record.seen.has(subject) || total===null || total===undefined ||
-       obtained===null || obtained===undefined || !Number.isFinite(max) || max<=0 ||
-       !Number.isFinite(value) || value<0 || value>max) {
+    const max=decimalMark(total),value=decimalMark(obtained)
+    if(!subject || record.seen.has(subject) || max===null || max<=0 ||
+       value===null || value<0 || value>max) {
       record.invalid=true
       continue
     }
