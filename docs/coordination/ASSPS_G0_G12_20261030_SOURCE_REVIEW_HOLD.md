@@ -45,3 +45,22 @@ The interactive GitHub connector has pull access but no collaborator write acces
 8. Investigate the one genuinely unmarked active student through the authorized teacher attendance workflow; never mark present/absent without evidence.
 
 The previous completed packages and historic data are preserved; no synthetic signoff, release certificate, or approval has been issued.
+
+## Continuation — attendance source review (separate branch, NO release)
+Branch: review/assps-attendance-active-roster-20261030, based on canonical Core source safety base 97b37a78, head 50a8f31e49bb2b67866c5287c8c0ab7837d5829a. It is intentionally NOT bundled into the examination fix branch.
+- c38ec52a: MarkAttendance + AttendanceModule student-roster requests now explicitly require active=true, preserving selected class/section and existing authenticated tenant guards.
+- 23589bd8: both views require exact POST /api/attendance/mark acknowledgement success=true, savedCount=requestedCount=submitted count before claiming success; parent-alert counts reflect provider-accepted, not delivered statuses.
+- 50a8f31e: independent CI-only review GitHub Actions workflow (no deployment): https://github.com/HassiMian/app-assps-edu-pk/actions/runs/41032228540, result SUCCESS.
+- 7/7 targeted frontend tests, 5/5 existing isolated backend static/mock attendance checks, frontend Vite build and new helper lint PASS. Legacy JSX lint baseline remains 11 errors and one warning (both screens unchanged in aggregate before vs after); full JSX lint is NOT green.
+- Neither branch modifies live data or student status. One 30 October active student remains genuinely unmarked.
+
+## On-host backup re-verification / academic reconciliation
+- Backup /var/backups/assps-critical-20261030T013502Z: fresh 4/4 SHA256SUMS verification PASS; 2/2 PostgreSQL compressed dumps gzip integrity PASS; app/config compressed tar read PASS. Independent off-VPS database, ACL and private-media restore remains HOLD.
+- Eleven active Class Eight students each have six First Term subjects stored: Computer, English, Islamiyat, Mathematics, Science, Urdu, 11 records per subject; zero of the eleven has seven recorded subjects. Missing mandatory Quran/Nazra evidence blocks promotion.
+- Exam #9 stores total=100 and passing=33. The stated school-wide passing policy is 40%. There are 20 subject-result rows with scores at least 33% but under 40%. Keep original results and policy conflict for authorized reconciliation; do not silently regrade.
+
+## Saved Papers cloud migration contract — still open
+SavedPapersTab currently reads usePaperStore's tenant-scoped browser storage keyed al_siddique_paper_store; it does NOT use canonical Paper Studio server listing. The server has paperStudioRoutes GET/POST/PATCH/DELETE /papers under /api/portal/paper-studio, but the 10 Paper Vault records are not equivalent to legacy local Saved Papers. Proper integration requires school/author RLS, canonical drafts and revisions, idempotent IDs, optimistic concurrency, explicit migration preview, audit, rollback and genuine independently authenticated cross-device Save→Reopen→Edit→Print. No fake cloud persistence or auto-import is authorized.
+
+## Unified final review boundary
+Current review-source and checks passed; live release remains HOLD. GitHub PR creation encountered collaborator restriction 422 despite successful isolated SSH pushes. Core owner must review current V4 source lineage, exam patch stack, independent attendance branch, and previously preserved 13-patch Lesson/Ranking package before deploying. Still missing legitimate School1 Principal/Teacher and independently administered School2 real browser UAT, 11 marks ratifications, promotion and lesson academic proof, proper cloud Saved Papers and full encrypted independent off-VPS restoration. No security identity, role, marks, attendance or production changes by this mission.
