@@ -196,7 +196,7 @@ router.get('/', protect, requireScopeForServiceOnly('school.results.read'), asyn
 // POST /api/exams â€” teachers can create assessments
 router.post('/', protect, canManageExams, async (req, res) => {
   try {
-    const { name, type, class: cls, session, start_date, end_date, total_marks, pass_marks, created_by } = req.body
+    const { name, type, class: cls, session, start_date, end_date, total_marks, pass_marks } = req.body
     const examName = String(name || '').trim().slice(0, 180)
     const examType = String(type || '').trim().slice(0, 60)
     const examClass = String(cls || '').trim().slice(0, 80)
@@ -222,7 +222,7 @@ router.post('/', protect, canManageExams, async (req, res) => {
     const result = await query(`
       INSERT INTO exams (school_id, name, type, class, session, start_date, end_date, total_marks, pass_marks, created_by)
       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING *
-    `, [schoolId, examName, examType, examClass, examSession, start_date || null, end_date || null, totalMarks, passMarks, created_by || req.user?.id || null])
+    `, [schoolId, examName, examType, examClass, examSession, start_date || null, end_date || null, totalMarks, passMarks, req.user?.id || null])
     res.status(201).json({ success: true, data: result.rows[0] })
   } catch (err) {
     console.error('Exam create error:', err.message)

@@ -53,7 +53,7 @@ test('principal assessment creation accepts whole marks and rejects unsafe draft
   await new Promise(resolve => server.once('listening',resolve))
   t.after(() => server.close())
   const base = 'http://127.0.0.1:' + server.address().port
-  const draft = { name:'Assessment 1', type:'AS', class:'All Classes', session:'2026-2027', total_marks:25, pass_marks:10 }
+  const draft = { name:'Assessment 1', type:'AS', class:'All Classes', session:'2026-2027', total_marks:25, pass_marks:10, created_by:99999 }
   async function create(body) {
     const response = await fetch(base+'/api/exams', {method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)})
     return {status:response.status, body:await response.json()}
@@ -63,6 +63,7 @@ test('principal assessment creation accepts whole marks and rejects unsafe draft
   assert.equal(saved.body.data.name,'Assessment 1')
   assert.equal(inserted.length,1)
   assert.deepEqual(inserted[0].slice(1,5),['Assessment 1','AS','All Classes','2026-2027'])
+  assert.equal(inserted[0][9],actor.id,'API client cannot impersonate the audit creator')
   for (const body of [
     {...draft,total_marks:12.5}, {...draft,pass_marks:12.5},
     {...draft,total_marks:''}, {...draft,pass_marks:''},
