@@ -30,3 +30,26 @@ preflight access remains 401.
 
 Private original function backup, plan snapshot and deployment rollback
 source: /root/secure-archive/assps-class8-promotion-20261030/.
+
+## Owner's later correction on 30 October: Quran/Nazra was excluded from result
+
+The owner clarified that Quran/Nazra was intentionally skipped from the
+First Term RESULT. Its absent eleven marks must not be invented.
+All 66 original marks across six genuine scored subjects were verified.
+
+Reviewed 011_class_eight_result_six_scored_subjects_20261030.sql was executed
+in a SERIALIZABLE transaction after a successful ROLLBACK rehearsal.
+The migration retains Quran/Nazra historical subject row but marks it
+inactive ONLY in school 1 / exam 9 / class Eight Blue; it reduces the
+promotion plan expected subjects from 7 to 6. It reconciles the official
+maximum marks on the six remaining paper offerings from the already saved,
+uniform 11-student result denominators (Computer 50, English 75,
+Islamiyat 50, Mathematics 60, Science 50, Urdu 75). It does NOT
+approve papers, change any saved score, invent Quran marks, assert printing,
+or sign on behalf of a Principal.
+
+After commit, six subjects have consistent maxima and remain PENDING
+official academic approval; plan still AWAITING_RESULTS_AND_PRINT,
+print_verified_at and academic_approved_at still NULL. All eleven
+pupils are still in Eight; official certification is still held for
+real authenticated signoff and evidence, not for missing Quran marks.

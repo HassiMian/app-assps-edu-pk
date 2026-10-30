@@ -52,7 +52,7 @@ jobs:
         run: node --test tests/november-2026-fee-safety.test.cjs
       - name: Class Eight canonical Pre Nine promotion gate regression (no write)
         working-directory: al-siddique-backend/src
-        run: node --test tests/class-eight-canonical-destination-20261030.test.cjs tests/class-eight-promotion-preflight-http.test.js
+        run: node --test tests/class-eight-canonical-destination-20261030.test.cjs tests/class-eight-exclude-nazra-evidence-20261030.test.cjs tests/class-eight-promotion-preflight-http.test.js
       - name: Targeted frontend lint
         working-directory: al-siddique-frontend
         run: |
