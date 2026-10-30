@@ -18,6 +18,64 @@ import {
   CheckCheck
 } from 'lucide-react'
 
+// Preflight server-backed identity before an atomic school promotion.
+// Never retry a non-idempotent student write after an uncertain response.
+const PROMOTION_SIGN_IN = 'Your school session has expired. Sign in again as Principal, then reopen Promote / Demote. No student was moved.'
+
+function samePromotionActor(before, after) {
+  if (!before || !after || !Number.isSafeInteger(Number(before.id)) ||
+      Number(before.id) !== Number(after.id)) return false
+  const school = obj => obj?.school_id ?? obj?.schoolId
+  if (String(school(before) ?? '') !== String(school(after) ?? '')) return false
+  return String(before.role || '').toLowerCase() === String(after.role || '').toLowerCase()
+}
+
+async function promotionIdentity(accessToken) {
+  if (!accessToken) return {status:401,user:null}
+  const response=await fetch('/api/auth/me', {
+    method:'GET', headers:{Authorization:'Bearer '+accessToken,Accept:'application/json'},
+    credentials:'same-origin',cache:'no-store',
+  })
+  if (!response.ok) return {status:response.status,user:null}
+  const data=await response.json()
+  return {status:response.status,user:data?.user || null}
+}
+
+async function ensurePromotionAuthenticated() {
+  const storage=window.localStorage
+  const previousToken=storage.getItem('al_siddique_token')
+  const previousRefresh=storage.getItem('al_siddique_refresh_token')
+  let previousUser=null
+  try { previousUser=JSON.parse(storage.getItem('al_siddique_user') || 'null') } catch { /* reject */ }
+  if (!previousUser || !previousToken) throw new Error(PROMOTION_SIGN_IN)
+  const verified=await promotionIdentity(previousToken)
+  if (verified.status===200) {
+    if (!samePromotionActor(previousUser,verified.user)) throw new Error('Authenticated school identity changed. No promotion was submitted.')
+    return
+  }
+  if (verified.status!==401) throw new Error('Unable to verify the Principal session. No students were moved.')
+  if (!previousRefresh) throw new Error(PROMOTION_SIGN_IN)
+  const response=await fetch('/api/auth/refresh', {
+    method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
+    body:JSON.stringify({refreshToken:previousRefresh}),
+    credentials:'same-origin',cache:'no-store',
+  })
+  if (!response.ok) throw new Error(PROMOTION_SIGN_IN)
+  const refreshed=await response.json()
+  if (!refreshed?.token || !refreshed?.refreshToken ||
+      !samePromotionActor(previousUser,refreshed.user) ||
+      storage.getItem('al_siddique_refresh_token')!==previousRefresh) {
+    throw new Error('Authentication identity changed while refreshing. No students were moved.')
+  }
+  const confirmed=await promotionIdentity(refreshed.token)
+  if (confirmed.status!==200 || !samePromotionActor(previousUser,confirmed.user))
+    throw new Error(PROMOTION_SIGN_IN)
+  storage.setItem('al_siddique_token',refreshed.token)
+  storage.setItem('al_siddique_refresh_token',refreshed.refreshToken)
+  storage.setItem('al_siddique_user',JSON.stringify(refreshed.user))
+  window.dispatchEvent(new CustomEvent('auth:refreshed',{detail:{user:refreshed.user}}))
+}
+
 function exportCsv(rows, sourceClass, sourceSection) {
   const table = [
     ['GR No', 'Student Name', 'Current Class', 'Section', 'Roll No'],
@@ -230,8 +288,14 @@ export default function PromoteDemote() {
         assignments,
       }
 
+      // Refresh credentials BEFORE the non-idempotent write.
+      // Never retry an uncertain promotion automatically.
+      await ensurePromotionAuthenticated()
       const res = await api.post('/api/students/bulk-class-assignment', payload)
-      const movedCount = res.data?.count || assignments.length
+      if (res.data?.success !== true || Number(res.data?.count) !== assignments.length ||
+          !Array.isArray(res.data?.data) || res.data.data.length !== assignments.length)
+        throw new Error('Server did not confirm all student movements. Check the roster before retrying.')
+      const movedCount = Number(res.data.count)
 
       setShowPreview(false)
       setSelectedIds([])
