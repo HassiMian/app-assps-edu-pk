@@ -99,6 +99,14 @@ export const marksClassQueryAliases = className => {
     ...(numeric ? [numeric,`Class ${numeric}`] : []),
   ])]
 }
+// New Assessments must not include struck-off students in the marks entry
+// roster. Historical Term Exam records are intentionally not narrowed here:
+// authorized users may still need to inspect a former student's saved result.
+export const marksRosterQueryParams = (classAlias, exam) => ({
+  class: classAlias,
+  ...(['AS','Assessment'].includes(exam?.type) ? {active:'true'} : {}),
+})
+
 export const mergeMarksRoster = (responses, className) => {
   const seen = new Set()
   const result = []

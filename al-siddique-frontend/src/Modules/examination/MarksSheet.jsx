@@ -10,7 +10,7 @@ import { classPassingThreshold, DEFAULT_REQUESTED_PASS_PERCENT } from './classPa
 import { escapeMarksPrintHtml, approvedMarksLogoUrl, countRecordedMarks } from './marksBlankPrint'
 import {
  normalizeMarksClass, normalizeMarksExam, matchesMarksExam, pickMarksExam,
- marksEntryClasses, marksSubjectsForClass, marksClassQueryAliases, mergeMarksRoster, validateMarksBatch
+ marksEntryClasses, marksSubjectsForClass, marksClassQueryAliases, marksRosterQueryParams, mergeMarksRoster, validateMarksBatch
 } from './marksEntryModel'
 
 const FALLBACK_EXAM_TYPES = ['Term Exam', 'Assessment', 'Quiz', 'Annual Exam', 'Monthly Test']
@@ -135,7 +135,7 @@ export default function MarksSheet() {
  // even when the first class request already returned a partial roster.
  const responses = []
  for (const classAlias of marksClassQueryAliases(canonicalClass)) {
- const response = await api.get('/api/students', { params: { class: classAlias } })
+ const response = await api.get('/api/students', { params: marksRosterQueryParams(classAlias, selectedExam) })
  if (response.data?.success === false || !Array.isArray(response.data?.data)) {
  throw new Error('Student roster response was invalid or incomplete.')
  }
