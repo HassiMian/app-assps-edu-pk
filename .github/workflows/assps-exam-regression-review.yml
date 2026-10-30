@@ -1,0 +1,45 @@
+name: ASSPS Exam and Result Integrity Review (No Release)
+
+on:
+  push:
+    branches:
+      - review/assps-assessment-active-roster-20261030
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exams-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: |
+            al-siddique-frontend/package-lock.json
+            al-siddique-backend/src/package-lock.json
+      - name: Install frontend dependencies
+        working-directory: al-siddique-frontend
+        run: npm ci --no-audit --no-fund
+      - name: Install backend dependencies
+        working-directory: al-siddique-backend/src
+        run: npm ci --no-audit --no-fund
+      - name: Exercise marks / results / exam frontend regression suite
+        working-directory: al-siddique-frontend
+        run: |
+          node --test src/Modules/examination/resultCardScoreModel.test.mjs src/Modules/examination/marksInputStrict.test.mjs src/Modules/examination/marksRosterScope.test.mjs src/Modules/examination/examCreationModel.test.mjs src/Modules/examination/resultSubjectState.test.mjs src/Modules/examination/tests/comparableResultRank.test.mjs
+      - name: Exercise isolated backend route and status tests (NO database writes)
+        working-directory: al-siddique-backend/src
+        run: |
+          node --test tests/exam-delete-retention-isolated.test.js tests/exam-creation-principal-http-isolated.test.js tests/exam-result-status-20261013.test.js
+      - name: Targeted frontend lint
+        working-directory: al-siddique-frontend
+        run: |
+          npx eslint src/Modules/examination/ExaminationModule.jsx src/Modules/examination/MarksSheet.jsx src/Modules/examination/marksEntryModel.js src/Modules/examination/marksInputStrict.test.mjs src/Modules/examination/marksRosterScope.test.mjs src/Modules/examination/resultCardScoreModel.js src/Modules/examination/resultCardScoreModel.test.mjs
+      - name: Full frontend build (NO deploy)
+        working-directory: al-siddique-frontend
+        run: npm run build
