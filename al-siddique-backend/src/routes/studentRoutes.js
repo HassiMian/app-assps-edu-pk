@@ -12,6 +12,7 @@ const { tenantClause, currentSchoolId, currentTenantId, hasColumn } = require('.
 const { validateSameTenantOrThrow } = require('../services/tenantCredentialGuard')
 const { ensureStudentFeeProfileSchema, upsertStudentFeeProfile, getStudentFeeProfile, findExistingChallan } = require('../services/feeChallanService')
 const { resolveAcademicAssignment } = require('../services/academicAssignmentGuard')
+const { promotionErrorMap } = require('../services/promotionErrorMap')
 const { teacherStudentScopeClause, getTeacherAssignments } = require('../services/teacherAssignmentService')
 const { provisionPortalUser, resetPortalUserPassword, setPortalUserActive } = require('../services/portalAccountService')
 const STUDENT_ADMIN_ROLES = new Set(['super_admin', 'admin', 'principal', 'school_admin', 'accountant'])
@@ -909,7 +910,11 @@ router.post('/bulk-class-assignment', protect, adminOnly, schoolScopedMovement(t
     })
   } catch (err) {
     await client.query('ROLLBACK').catch(() => {})
-    console.error('Bulk student class assignment error:', err.message)
+    const knownAcademicGate=promotionErrorMap(err)
+    if(knownAcademicGate){
+      return res.status(409).json({success:false,...knownAcademicGate})
+    }
+    console.error('Bulk student class assignment error:', err.code || 'UNKNOWN', err.message)
     res.status(500).json({ success: false, message: 'Student class assignments could not be updated.' })
   } finally {
     client.release()
