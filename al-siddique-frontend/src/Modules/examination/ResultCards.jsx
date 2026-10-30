@@ -16,6 +16,7 @@ import {
 } from './premiumResultCardTemplates'
 import {DEFAULT_RESULT_OPTIONS, buildResultCardData, PREMIUM_IDS, isNazraSubject} from './premiumResultCardData'
 import {openResultPrintWindow, resultCardPrintCss} from './premiumResultCardPrint'
+import { rankComparableResults } from './comparableResultRank.js'
 
 function gradeLabel(pct, bands = []) {
   if (pct === null || pct === undefined || pct === '' || Number.isNaN(Number(pct))) return '—'
@@ -335,54 +336,10 @@ export default function ResultCards() {
     return Array.from(sectionSet).sort()
   }, [selectedPrintClass, sectionsForClass, students])
 
-  const classRanks = useMemo(() => {
-    const byClass = new Map()
-    const studentTotals = new Map()
-    activeResults.forEach(r => {
-      if (isNazraSubject(r?.subject || r?.subjectName)) return
-      const sId = String(r.student_id)
-      const cur = studentTotals.get(sId) || { id: sId, obtained: 0, possible: 0, className: r.student_class || '' }
-      const obt = Number(r.marks_obtained)
-      const tot = Number(r.total_marks || 0)
-      if (Number.isFinite(obt) && obt >= 0) cur.obtained += obt
-      if (Number.isFinite(tot) && tot > 0) cur.possible += tot
-      studentTotals.set(sId, cur)
-    })
-
-    students.forEach(s => {
-      const sId = String(s.id)
-      const cur = studentTotals.get(sId)
-      if (cur) {
-        cur.className = s.className || s.class || cur.className
-      }
-    })
-
-    studentTotals.forEach(item => {
-      const cls = schoolClassOrderKey(item.className)
-      if (!byClass.has(cls)) byClass.set(cls, [])
-      byClass.get(cls).push(item)
-    })
-
-    const rankMap = new Map()
-    const ordinal = n => {
-      const s = ['th', 'st', 'nd', 'rd']
-      const v = n % 100
-      return n + (s[(v - 20) % 10] || s[v] || s[0])
-    }
-
-    byClass.forEach(list => {
-      list.sort((a, b) => b.obtained - a.obtained)
-      let currentRank = 1
-      list.forEach((item, idx) => {
-        if (idx > 0 && item.obtained < list[idx - 1].obtained) {
-          currentRank = idx + 1
-        }
-        rankMap.set(item.id, ordinal(currentRank))
-      })
-    })
-
-    return rankMap
-  }, [activeResults, students])
+  const classRanks = useMemo(() => rankComparableResults(activeResults,students, {
+    classKey:schoolClassOrderKey,
+    excludedSubject:isNazraSubject,
+  }), [activeResults,students])
 
   const buildPrintCards = useCallback((rows = activeResults, examObj = exam, scopeStudents = students) =>
     scopeStudents.map(s => {
@@ -390,7 +347,7 @@ export default function ResultCards() {
       const safeClass = /^all\s+classes$/i.test(authenticatedClass.trim()) ? '' : authenticatedClass
       if (!safeClass) return null // incomplete identity must not be printed
       if (!isClassAllowedForExam(examObj, safeClass)) return null
-      const pos = classRanks.get(String(s.id)) || s.position || '—'
+      const pos = classRanks.get(String(s.id)) || '—'
       const sanitizedStudent = {
         ...s,
         className: safeClass,
