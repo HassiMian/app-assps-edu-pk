@@ -18,6 +18,7 @@ const express = require('express')
 const http = require('node:http')
 const path = require('node:path')
 const Module = require('node:module')
+const {AsyncLocalStorage} = require('node:async_hooks')
 
 test('Promote/Demote Full Repair Test Suite', { timeout: 30000 }, async (t) => {
   // ── Setup Synthetic Database Doubles & Spies ───────────────────────────────
@@ -82,7 +83,9 @@ test('Promote/Demote Full Repair Test Suite', { timeout: 30000 }, async (t) => {
     release() {},
   }
 
+  const tenantContext = new AsyncLocalStorage()
   const mockDb = {
+    tenantContext,
     pool: {
       async connect() { return mockClient },
     },
@@ -104,6 +107,14 @@ test('Promote/Demote Full Repair Test Suite', { timeout: 30000 }, async (t) => {
     protect(req, res, next) {
       if (!currentUser) return res.status(401).json({ success: false, message: 'Unauthenticated' })
       req.user = currentUser
+      req.school_id=currentUser.school_id
+      const ctx=tenantContext.getStore()
+      if(ctx){
+        ctx.rlsEnabled=true
+        ctx.actorId=Number(currentUser.id)
+        ctx.isSuperAdmin=currentUser.role==='super_admin'
+        ctx.tenantId=ctx.isSuperAdmin?null:Number(currentUser.school_id)
+      }
       next()
     },
     adminOnly(req, res, next) {
@@ -147,6 +158,7 @@ test('Promote/Demote Full Repair Test Suite', { timeout: 30000 }, async (t) => {
   // Build Express app with studentRoutes
   const app = express()
   app.use(express.json())
+  app.use((req,res,next)=>tenantContext.run({rlsEnabled:false,isSuperAdmin:false,tenantId:null},next))
   app.use('/api/students', studentRoutes)
 
   // Start HTTP server on dynamic port

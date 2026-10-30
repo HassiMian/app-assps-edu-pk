@@ -110,3 +110,17 @@ them as Pre Nine without fresh database read. The fee class configuration
 for Pre Nine remains PKR 3000 for 2026-2027; November vouchers should be
 generated only after authenticated promotion, using class rates and audited
 arrears/discount calculations.
+
+## Third correction: academic-validation 500 on 30 October, 14:33 UTC
+
+Authenticated live POST reached signed promotion backend on port 5091 and returned HTTP 500 with frontend message "Academic assignment validation failed." The signed service logged database code DB_SIGNED_TENANT_SCOPE_REQUIRED: "Signed database tenant context requires authenticated actor and school scope." This was misreported by the generic academic-validator catch; Academic Setup itself already has active Pre Nine / Blue.
+
+The signed auth middleware's super_admin context sets isSuperAdmin=true, with tenantId=null; dedicated signed database HMAC deliberately rejects elevated global scope. A promotion must instead use a school-bound signed scope for an authenticated, *active* Principal/Admin/super_admin account whose verified user.school_id matches the authenticated request school_id. No header, URL query, or request-body school override is accepted.
+
+Fix in src/middleware/schoolScopedMovement.js is inserted **after** existing protect and adminOnly, **before** academic configuration reads and the transaction. It enforces numeric actor and school IDs, existing authenticated RLS context, and matching verified school; forces isSuperAdmin=false, tenantId=verified school, actorId=active account ID, and tenant key from the server-authenticated account. It does not broaden JWT acceptance, bypass PostgreSQL RLS, change DB privileges or weaken audit checks.
+
+- Live PM2 assps-marks-green restarted on port 5091. /health HTTP 200.
+- 12/12 combined isolated tests PASS, including super_admin-to-school-scope, principal/admin, cross-school and forged header denial cases, transaction/audit semantics.
+- Signed DB rollback-only read test PASS as role assps_marks_signed_runtime, official Pre Nine class configured, 11 in Eight and 0 in Pre Nine at testing time.
+- Public anonymous promotion POST still returns 401.
+- Real authenticated Principal submit **after** this fix has not yet been observed; therefore successful promotion and voucher generation are not claimed.
