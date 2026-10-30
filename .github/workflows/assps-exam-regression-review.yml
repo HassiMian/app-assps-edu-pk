@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - review/assps-assessment-active-roster-20261030
+      - review/assps-exam-modal-ack-20261030
   workflow_dispatch:
 
 permissions:
@@ -31,7 +32,7 @@ jobs:
       - name: Exercise marks / results / exam frontend regression suite
         working-directory: al-siddique-frontend
         run: |
-          node --test src/Modules/examination/resultCardScoreModel.test.mjs src/Modules/examination/marksInputStrict.test.mjs src/Modules/examination/marksRosterScope.test.mjs src/Modules/examination/examCreationModel.test.mjs src/Modules/examination/resultSubjectState.test.mjs src/Modules/examination/tests/comparableResultRank.test.mjs
+          node --test src/Modules/examination/resultCardScoreModel.test.mjs src/Modules/examination/marksInputStrict.test.mjs src/Modules/examination/marksRosterScope.test.mjs src/Modules/examination/examCreationModel.test.mjs src/Modules/examination/legacyExamWriteModel.test.mjs src/Modules/examination/resultSubjectState.test.mjs src/Modules/examination/tests/comparableResultRank.test.mjs
       - name: Exercise isolated backend route and status tests (NO database writes)
         working-directory: al-siddique-backend/src
         run: |
@@ -39,7 +40,7 @@ jobs:
       - name: Targeted frontend lint
         working-directory: al-siddique-frontend
         run: |
-          npx eslint src/Modules/examination/ExaminationModule.jsx src/Modules/examination/MarksSheet.jsx src/Modules/examination/marksEntryModel.js src/Modules/examination/marksInputStrict.test.mjs src/Modules/examination/marksRosterScope.test.mjs src/Modules/examination/resultCardScoreModel.js src/Modules/examination/resultCardScoreModel.test.mjs
+          npx eslint src/Modules/examination/ExaminationModule.jsx src/Modules/examination/legacyExamWriteModel.js src/Modules/examination/MarksSheet.jsx src/Modules/examination/marksEntryModel.js src/Modules/examination/marksInputStrict.test.mjs src/Modules/examination/marksRosterScope.test.mjs src/Modules/examination/resultCardScoreModel.js src/Modules/examination/resultCardScoreModel.test.mjs
       - name: Full frontend build (NO deploy)
         working-directory: al-siddique-frontend
         run: npm run build

@@ -5,6 +5,8 @@ import { Trophy, Plus, Save, Printer, BarChart2, FileText, Bookmark } from "luci
 import { DonutChart, BarChart, ChartLegend } from "../../components/Charts";
 import { useAcademicStore } from "../../services/useAcademicStore";
 import api from "../../services/api";
+import { validateExamCreation } from "./examCreationModel";
+import { buildEnteredMarkRows, assertCreatedExam } from "./legacyExamWriteModel";
 import { summarizeResultCardScores } from "./resultCardScoreModel";
 const cardStyle = {
  background: 'var(--apex-bg-surface)',
@@ -138,10 +140,25 @@ function printExamResultCard({ student, marks, subjects, examName, totalMarks, p
  w.focus()
 }
 
-function AddExamModal({ onClose, onAdd, sessionOptions = [] }) {
+function AddExamModal({ onClose, onAdd, sessionOptions = [], classOptions = [], currentClass = "" }) {
  const sessions = sessionOptions.filter(Boolean);
- const [form, setForm] = useState({ name:'', type:'TE', date:'', session:sessions[0] || '', total_marks:'', pass_marks:'' });
- const set = (key, value) => setForm(prev => ({ ...prev, [key]: value }));
+ const [form, setForm] = useState({ name:'', type:'AS', class:currentClass || 'All Classes', date:'', session:sessions[0] || '', total_marks:'', pass_marks:'' });
+ const [saving, setSaving] = useState(false);
+ const [formError, setFormError] = useState('');
+ const submit = async () => {
+  if (saving) return;
+  const error = validateExamCreation(form);
+  if (error) { setFormError(error); return; }
+  setSaving(true);
+  setFormError('');
+  try {
+   await onAdd(form);
+   onClose(); // Close only after the server confirmed the new exam.
+  } catch (err) {
+   setFormError(err?.response?.data?.message || err?.message || 'Exam was not saved. Check the connection and try again.');
+  } finally { setSaving(false); }
+ };
+ const set = (key, value) => { setForm(prev => ({ ...prev, [key]: value })); setFormError(''); };
  const labelStyle = { color: 'var(--apex-text-tertiary)', fontSize: 12, fontWeight: 600, marginBottom: 8, display: 'block', textTransform: 'uppercase', letterSpacing: 0.6 };
  const fieldStyle = { width:'100%', padding:'12px 14px', borderRadius:12, background:'var(--apex-bg-surface-solid)', border: '1px solid var(--apex-border-default)', color: 'var(--apex-text-primary)', fontSize: 14, outline: 'none' };
 
@@ -153,7 +170,7 @@ function AddExamModal({ onClose, onAdd, sessionOptions = [] }) {
  <div style={{ ...accentText, fontSize: 18, fontWeight: 800 }}>Add New Exam</div>
  <div style={{ color: 'var(--apex-text-tertiary)', fontSize: 12 }}>Create a new exam schedule for the session</div>
  </div>
- <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'var(--apex-text-primary)', fontSize: 24, cursor: 'pointer' }}></button>
+ <button aria-label="Close exam form" disabled={saving} onClick={onClose} style={{ background: 'none', border: 'none', color: 'var(--apex-text-primary)', fontSize: 24, cursor: 'pointer' }}>×</button>
  </div>
 
  <div style={{ display: 'grid', gap: 16 }}>
@@ -166,16 +183,18 @@ function AddExamModal({ onClose, onAdd, sessionOptions = [] }) {
  ))}
  </div>
  </div>
- <div><label style={labelStyle}>Exam Date</label><input type="date" style={fieldStyle} value={form.date} onChange={e => set('date', e.target.value)} /></div>
+ <div><label style={labelStyle}>Exam Date (optional)</label><input type="date" style={fieldStyle} value={form.date} onChange={e => set('date', e.target.value)} /></div>
+ <div><label style={labelStyle}>Class</label><select style={fieldStyle} value={form.class} onChange={e => set('class', e.target.value)}><option value="All Classes">All Classes</option>{classOptions.map(cls => <option key={cls} value={cls}>{cls}</option>)}</select></div>
  <div><label style={labelStyle}>Session</label><select style={fieldStyle} value={form.session} onChange={e => set('session', e.target.value)}><option value="">Select session</option>{sessions.map(session => <option key={session}>{session}</option>)}</select></div>
  <div><label style={labelStyle}>Total Marks</label><input type="number" min="1" style={fieldStyle} value={form.total_marks} onChange={e => set('total_marks', e.target.value)} /></div>
  <div><label style={labelStyle}>Passing Marks</label><input type="number" min="0" max={form.total_marks || undefined} style={fieldStyle} value={form.pass_marks} onChange={e => set('pass_marks', e.target.value)} /></div>
  </div>
 
  <div style={{ display: 'flex', gap: 12, marginTop: 24 }}>
- <button onClick={onClose} style={{ ...btnSecondary, flex: 1, justifyContent: 'center' }}>Cancel</button>
- <button onClick={() => { const total=Number(form.total_marks); const pass=Number(form.pass_marks); if (form.name && form.date && form.session && total>0 && pass>=0 && pass<=total) { onAdd(form); onClose(); } }} style={{ ...btnPrimary, flex: 1, justifyContent: 'center' }}><Plus size={16} />Add Exam</button>
+ <button disabled={saving} onClick={onClose} style={{ ...btnSecondary, flex: 1, justifyContent: 'center' }}>Cancel</button>
+ <button disabled={saving} onClick={() => void submit()} style={{ ...btnPrimary, flex: 1, justifyContent: 'center', opacity:saving?0.65:1 }}><Plus size={16} />{saving ? 'Saving…' : 'Add Exam'}</button>
  </div>
+ {formError && <p role="alert" style={{ color:'var(--apex-action-danger)', fontSize:13, fontWeight:600, marginTop:12 }}>{formError}</p>}
  </div>
  </div>,
  document.body
@@ -313,33 +332,28 @@ export default function ExaminationModule() {
  const activeTab = path === '/examination' || path === '/examination/manage' ? 'exams' : path === '/examination/marks' ? 'marks' : path === '/examination/results' ? 'results' : path === '/examination/cards' ? 'cards' : 'exams';
 
  const setMark = (studentId, subject, value) => {
- const examTotal = Math.max(1, Number(selectedExam?.total_marks) || 100);
- const parsed = Math.min(examTotal, Math.max(0, parseInt(value) || 0));
- setMarks(prev => ({ ...prev, [studentId]: { ...(prev[studentId] || {}), [subject]: parsed } }));
+ // Empty input remains PENDING, never an invented numeric zero.
+ setMarks(prev => ({ ...prev, [studentId]: { ...(prev[studentId] || {}), [subject]: value } }));
  setSaved(false);
  };
 
  const handleSave = async () => {
  if (!selectedExam || !filteredStudents.length || !subjects.length) return;
- const results = [];
- filteredStudents.forEach(student => {
- subjects.forEach(subject => {
- results.push({
- exam_id: selectedExam.id,
- student_id: student.id,
- subject,
- marks_obtained: Number(marks[student.id]?.[subject] || 0),
- total_marks: Math.max(1, Number(selectedExam?.total_marks) || 100),
- pass_marks: Math.max(0, Number(selectedExam?.pass_marks) || 0),
- });
- });
- });
  try {
- await api.post('/api/exams/results', { results });
- setSaved(true);
- setTimeout(() => setSaved(false), 3000);
+  const results = buildEnteredMarkRows({
+   examId:selectedExam.id, students:filteredStudents, subjects, marks,
+   totalMarks:selectedExam.total_marks,
+  });
+  if (!results.length) throw new Error('No marks entered. Blank students are pending, not zero.');
+  const response = await api.post('/api/exams/results', { results });
+  if (response.data?.success !== true || Number(response.data?.savedCount) !== results.length)
+   throw new Error('Server did not acknowledge every entered mark. Refresh to verify; do not submit duplicates.');
+  setLoadError('');
+  setSaved(true);
+  setTimeout(() => setSaved(false), 3000);
  } catch (err) {
- console.error('Failed to save exam results', err);
+  setSaved(false);
+  setLoadError(err?.response?.data?.message || err?.message || 'Results were not confirmed. Existing records remain untouched.');
  }
  };
 
@@ -556,7 +570,7 @@ export default function ExaminationModule() {
  </td>
  {subjects.map(sub => (
  <td key={sub} style={{ padding: '6px 8px', textAlign: 'center' }}>
- <input type="number" min={0} max={100}
+ <input type="number" min={0} max={selectedExam?.total_marks || 100} step="0.01"
  value={marks[s.id]?.[sub] ?? ''}
  onChange={e => setMark(s.id, sub, e.target.value)}
  onFocus={e => e.target.select()}
@@ -653,21 +667,18 @@ export default function ExaminationModule() {
  )}
  </div>
 
- {showAdd && <AddExamModal sessionOptions={examSessionOptions} onClose={() => setShowAdd(false)} onAdd={async exam => {
- try {
- const response = await api.post('/api/exams', {
- name: exam.name,
- type: exam.type,
- class: selectedClass,
- session: exam.session,
- start_date: exam.date,
- end_date: exam.date,
- total_marks: Number(exam.total_marks),
- pass_marks: Number(exam.pass_marks),
- });
- const savedExam = response.data?.data;
- if (savedExam) { setExams(prev => [savedExam, ...prev]); setSelectedExam(savedExam); }
- } catch (err) { console.error('Failed to create exam', err); }
+ {showAdd && <AddExamModal sessionOptions={examSessionOptions} classOptions={CLASSES} currentClass={selectedClass}
+ onClose={() => setShowAdd(false)} onAdd={async exam => {
+  const response = await api.post('/api/exams', {
+   name: exam.name.trim(), type: exam.type, class: exam.class, session: exam.session,
+   start_date: exam.date || null, end_date: exam.date || null,
+   total_marks: Number(exam.total_marks), pass_marks: Number(exam.pass_marks),
+  });
+  const savedExam = assertCreatedExam(response);
+  setExams(prev => [savedExam, ...prev.filter(item => item.id !== savedExam.id)]);
+  setSelectedExam(savedExam);
+  setLoadError('');
+  return savedExam;
  }} />}
  {viewCard && <ResultCard student={viewCard} marks={marks} subjects={subjects} examName={selectedExam?.name || 'Exam'} totalMarks={selectedExam?.total_marks} passMarks={selectedExam?.pass_marks} gradeBands={gradeBands} onClose={() => setViewCard(null)} />}
  </div>
