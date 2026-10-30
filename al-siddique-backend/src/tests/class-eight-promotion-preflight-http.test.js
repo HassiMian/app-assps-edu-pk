@@ -65,6 +65,7 @@ test('authentic school role fixture sees pending print and missing Science, neve
  assert.equal(r.body.plan.sourceClass,'Eight')
  assert.equal(r.body.plan.targetClass,'Pre-Nine')
  assert.equal(r.body.plan.canPromoteNow,false)
+ assert.ok(r.body.releaseHoldReasons.includes('PRE_NINE_DESTINATION_NOT_CANONICAL'))
  assert.equal(r.body.plan.printedResultCardsVerified,false)
  assert.equal(r.body.plan.passingPercentage,40)
  assert.deepEqual(r.body.missingSubjects,['Quran / Nazra','Science'])

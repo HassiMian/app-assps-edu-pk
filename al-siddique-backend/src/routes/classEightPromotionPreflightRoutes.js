@@ -17,7 +17,7 @@ router.get('/eight-to-pre-nine/preflight',protect,requireScopeForServiceOnly('sc
     status,print_verified_at,academic_approved_at,executed_at,result_snapshot_sha256
     FROM public.school_class_promotion_plans
     WHERE school_id=$1 AND exam_id=9 AND source_class='Eight'
-      AND source_section='Blue' AND destination_class='Pre-Nine'`,[school])
+      AND source_section='Blue' AND destination_class IN ('Pre-Nine','Pre Nine')`,[school])
   if(policy.rows.length!==1)
     return res.status(404).json({success:false,code:'SCHOOL_PROMOTION_POLICY_NOT_FOUND'})
   const p=policy.rows[0]
@@ -75,8 +75,9 @@ router.get('/eight-to-pre-nine/preflight',protect,requireScopeForServiceOnly('sc
   const printed=Boolean(p.print_verified_at)&&Boolean(p.result_snapshot_sha256)
   const schoolApproved=Boolean(p.academic_approved_at)
   const sameRoster=total===Number(p.baseline_student_count)
+  const targetIsCanonical=p.destination_class==='Pre Nine'&&p.destination_section==='Blue'
   const canPromote=!noMatch&&missing.length===0&&!bad&&unapprovedMaxima.length===0&&
-    printed&&schoolApproved&&sameRoster&&originalCohortPreserved&&Boolean(p.destination_section)&&
+    printed&&schoolApproved&&sameRoster&&originalCohortPreserved&&targetIsCanonical&&
     p.status==='READY_FOR_APPROVED_PROMOTION'
   return res.json({success:true,
    plan:{id:p.id,schoolId:school,sourceExamId:p.exam_id,
@@ -102,7 +103,8 @@ router.get('/eight-to-pre-nine/preflight',protect,requireScopeForServiceOnly('sc
      ...(!printed?['RESULT_CARDS_NOT_PRINT_VERIFIED']:[]),
      ...(!schoolApproved?['ACADEMIC_PROMOTION_REVIEW_PENDING']:[]),
      ...(!sameRoster?['CLASS_EIGHT_ROSTER_CHANGED']:[]),
-     ...(!p.destination_section?['PRE_NINE_SECTION_NOT_ASSIGNED']:[])
+     ...(!p.destination_section?['PRE_NINE_SECTION_NOT_ASSIGNED']:[]),
+     ...(!targetIsCanonical?['PRE_NINE_DESTINATION_NOT_CANONICAL']:[])
    ],
    readOnly:true,noStudentClassChanged:true,
    note:'Class Eight First Term exam is final assessment for its promotion only. It is not a Class IX exam. Original class Eight cohort is preserved for historical results, but final marks and printed result-card batch still require their own signed post-examination evidence before transfers.'})
