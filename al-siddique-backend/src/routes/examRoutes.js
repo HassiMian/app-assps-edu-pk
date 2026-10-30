@@ -206,8 +206,10 @@ router.post('/', protect, canManageExams, async (req, res) => {
     if (!examName || !examType || !examClass || !examSession) {
       return res.status(422).json({ success: false, message: 'Exam name, type, class and academic session are required.' })
     }
-    if (!Number.isFinite(totalMarks) || totalMarks <= 0 || !Number.isFinite(passMarks) || passMarks < 0 || passMarks > totalMarks) {
-      return res.status(422).json({ success: false, message: 'Total marks must be greater than zero and passing marks must be between zero and total marks.' })
+    if (total_marks === '' || total_marks == null || pass_marks === '' || pass_marks == null ||
+        !Number.isSafeInteger(totalMarks) || totalMarks <= 0 ||
+        !Number.isSafeInteger(passMarks) || passMarks < 0 || passMarks > totalMarks) {
+      return res.status(422).json({ success: false, message: 'Total and passing marks must be whole numbers, with zero <= passing marks <= total marks and total above zero.' })
     }
     const supportsTenant = await hasColumn('exams', 'school_id')
     const schoolId = currentSchoolId(req)

@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Plus, RefreshCw } from 'lucide-react'
 import api from '../../services/api'
 import { C, card, btnPrimary, btnSecondary, input, select, labelStyle, sectionHeader } from '../moduleStyles'
 import { useAcademicStore } from '../../services/useAcademicStore'
+import { resolveExamSession, validateExamCreation, nextAssessmentName } from './examCreationModel'
 
 const EXAM_TYPES = ['Term Exam', 'Assessment', 'Quiz', 'Annual Exam', 'Monthly Test']
 const emptyForm = { name: '', type: EXAM_TYPES[0], class: 'All Classes', session: '', total_marks: '', pass_marks: '' }
@@ -27,6 +29,7 @@ function normalizeExam(exam) {
 }
 
 export default function ManageExams() {
+ const navigate = useNavigate()
  const { classNames, sessionStart, sessionEnd } = useAcademicStore()
  const activeSession = sessionStart && sessionEnd ? `${String(sessionStart).slice(0,4)}-${String(sessionEnd).slice(0,4)}` : ''
  const CLASS_OPTIONS = ['All Classes', ...classNames]
@@ -41,7 +44,9 @@ export default function ManageExams() {
  setMessage('')
  try {
  const res = await api.get('/api/exams')
- setExams((res.data.data || []).map(normalizeExam))
+ const saved = (res.data.data || []).map(normalizeExam)
+ setExams(saved)
+ return true
  } catch {
  setMessage('Refresh failed. Existing loaded exams were preserved; please check the backend connection.')
  } finally {
@@ -54,12 +59,19 @@ export default function ManageExams() {
  load()
  }, [])
 
- const set = (key) => (event) => setForm(prev => ({ ...prev, [key]: event.target.value }))
+ const set = (key) => (event) => {
+ const value = event.target.value
+ setForm(prev => ({ ...prev, [key]: value }))
+ if (message) setMessage('')
+ }
 
+ const effectiveSession = resolveExamSession(form.session, activeSession, exams)
  const addExam = async (event) => {
  event.preventDefault()
- if (!form.name.trim() || !form.session || Number(form.total_marks) <= 0 || Number(form.pass_marks) < 0 || Number(form.pass_marks) > Number(form.total_marks)) {
- setMessage('Enter exam name, academic session, total marks and valid passing marks.')
+ const draft = { ...form, session: effectiveSession }
+ const error = validateExamCreation(draft)
+ if (error) {
+ setMessage(error)
  return
  }
  setSaving(true)
@@ -74,14 +86,15 @@ export default function ManageExams() {
  name: form.name.trim(),
  type: resolvedType,
  class: form.class,
- session: form.session,
+ session: effectiveSession,
  total_marks: Number(form.total_marks),
  pass_marks: Number(form.pass_marks),
  })
- setForm({ ...emptyForm, session: activeSession })
- setMessage('Exam added successfully.')
- await load()
- setTimeout(() => setMessage(''), 3000)
+ setForm(prev => ({ ...prev, name: nextAssessmentName(form.name), session: effectiveSession }))
+ const refreshed = await load()
+ setMessage(refreshed
+   ? `${form.name.trim()} added. Select Enter Marks to record scores.`
+   : `${form.name.trim()} was created, but the exam list could not refresh. Please refresh before adding it again.`)
  } catch (err) {
  setMessage(err.response?.data?.message || 'Failed to add exam.')
  } finally {
@@ -90,7 +103,7 @@ export default function ManageExams() {
  }
 
  const sessionOptions = [...new Set([activeSession, ...exams.map(exam => exam.session)].filter(Boolean))]
- const currentSessionCount = exams.filter(exam => exam.session === form.session).length
+ const currentSessionCount = exams.filter(exam => exam.session === effectiveSession).length
 
  return (
  <div style={{ minHeight: '100%', padding: 24, background: 'var(--apex-shell-gradient)', color: C.silver }}>
@@ -154,17 +167,18 @@ export default function ManageExams() {
  </div>
  <div>
  <label style={labelStyle}>Session</label>
- <select style={select} value={form.session} onChange={set('session')}>
+ <select style={select} value={effectiveSession} onChange={set('session')} required>
+ <option value="" disabled>Select academic session</option>
  {sessionOptions.map(session => <option key={session} value={session}>{session}</option>)}
  </select>
  </div>
  <div>
  <label style={labelStyle}>Total Marks</label>
- <input type="number" min="1" style={input} value={form.total_marks} onChange={set('total_marks')} required />
+ <input type="number" min="1" step="1" style={input} value={form.total_marks} onChange={set('total_marks')} required />
  </div>
  <div>
  <label style={labelStyle}>Passing Marks</label>
- <input type="number" min="0" max={form.total_marks || undefined} style={input} value={form.pass_marks} onChange={set('pass_marks')} required />
+ <input type="number" min="0" step="1" max={form.total_marks || undefined} style={input} value={form.pass_marks} onChange={set('pass_marks')} required />
  </div>
  </div>
  <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
@@ -172,7 +186,7 @@ export default function ManageExams() {
  <Plus size={16} />
  {saving ? 'Adding...' : 'Add Exam'}
  </button>
- {message && <span style={{ color: message.includes('failed') || message.includes('Failed') ? C.red : C.green, fontWeight: 700 }}>{message}</span>}
+ {message && <span role="status" style={{ color: message.includes(' added. ') ? C.green : C.red, fontWeight: 700 }}>{message}</span>}
  </div>
  </form>
 
@@ -185,7 +199,7 @@ export default function ManageExams() {
  <table style={{ width: '100%', borderCollapse: 'collapse' }}>
  <thead>
  <tr style={{ borderBottom: `1px solid ${C.border}` }}>
- {['Exam', 'Type', 'Class', 'Session'].map(label => (
+ {['Exam', 'Type', 'Class', 'Session', 'Action'].map(label => (
  <th key={label} style={{ padding: '14px 16px', textAlign: 'left', color: C.muted, fontSize: 12, textTransform: 'uppercase', letterSpacing: 0.06 }}>{label}</th>
  ))}
  </tr>
@@ -197,10 +211,11 @@ export default function ManageExams() {
  <td style={{ padding: '14px 16px', color: C.silver }}>{exam.type || '—'}</td>
  <td style={{ padding: '14px 16px' }}>{classLabel(exam.class || 'All Classes')}</td>
  <td style={{ padding: '14px 16px' }}>{exam.session || '—'}</td>
+ <td style={{ padding: '14px 16px' }}><button type="button" style={btnSecondary} onClick={() => navigate(`/exams/marks?exam_id=${encodeURIComponent(exam.id)}`)}>Enter Marks</button></td>
  </tr>
  ))}
  {exams.length === 0 && (
- <tr><td colSpan={4} style={{ padding: 28, textAlign: 'center', color: C.muted }}>No exams yet.</td></tr>
+ <tr><td colSpan={5} style={{ padding: 28, textAlign: 'center', color: C.muted }}>No exams yet.</td></tr>
  )}
  </tbody>
  </table>
