@@ -1,3 +1,4 @@
+import { activeAttendanceRosterParams } from './attendanceRosterScope'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useAcademicStore } from '../../services/useAcademicStore'
 import {
@@ -203,7 +204,7 @@ export default function MarkAttendance() {
  setLoading(true)
  setMessage('')
  Promise.all([
- api.get('/api/students', { params: { class: attendanceApiClass(selectedClass), section: selectedSection } }),
+ api.get('/api/students', { params: activeAttendanceRosterParams({className:attendanceApiClass(selectedClass),section:selectedSection}) }),
  api.get('/api/attendance', { params: { class: attendanceApiClass(selectedClass), section: selectedSection, date } }),
  ])
  .then(([stuRes, attRes]) => {
