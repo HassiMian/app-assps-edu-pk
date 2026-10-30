@@ -1,3 +1,4 @@
+import { validateAttendanceSaveReceipt, countAcceptedAttendanceAlerts } from './attendanceSaveReceipt'
 import { activeAttendanceRosterParams } from './attendanceRosterScope'
 import { useState, useEffect } from "react";
 import {
@@ -205,7 +206,10 @@ export default function AttendanceModule() {
  try {
  const records = entries.map(([studentId, status]) => ({ student_id: Number(studentId), date: selectedDate, status }))
  const response = await api.post('/api/attendance/mark', { records })
- setNotificationQueueCount(Number(response.data?.notificationQueueCount || 0))
+ if (!validateAttendanceSaveReceipt(response.data, records.length)) {
+   throw new Error('Attendance server did not confirm the full saved batch. Reload before retrying.')
+ }
+ setNotificationQueueCount(countAcceptedAttendanceAlerts(response.data?.notificationSummary))
  emitAttendanceUpdated({ date: selectedDate, count: records.length })
  setSaved(true)
  setTimeout(() => setSaved(false), 3000)
@@ -430,7 +434,7 @@ export default function AttendanceModule() {
 
  {saved && (
  <div style={{ marginBottom: 16, padding: "10px 16px", background: "rgba(48,209,88,0.1)", border: "1px solid rgba(48,209,88,0.3)", borderRadius: 10 }}>
- <span style={{ color: "#30D158", fontWeight: 600 }}> Attendance saved successfully! {notificationQueueCount > 0 ? `${notificationQueueCount} parent notification${notificationQueueCount === 1 ? '' : 's'} queued.` : 'No parent notifications were queued.'}</span>
+ <span style={{ color: "#30D158", fontWeight: 600 }}> Attendance saved successfully! {notificationQueueCount > 0 ? `${notificationQueueCount} parent notification${notificationQueueCount === 1 ? '' : 's'} accepted by the provider (delivery unverified).` : 'No parent notifications were confirmed as accepted.'}</span>
  </div>
  )}
 

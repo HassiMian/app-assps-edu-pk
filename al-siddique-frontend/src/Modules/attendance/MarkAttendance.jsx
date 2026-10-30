@@ -1,3 +1,4 @@
+import { validateAttendanceSaveReceipt } from './attendanceSaveReceipt'
 import { activeAttendanceRosterParams } from './attendanceRosterScope'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useAcademicStore } from '../../services/useAcademicStore'
@@ -265,12 +266,15 @@ export default function MarkAttendance() {
  setSaving(false)
  return
  }
- await api.post('/api/attendance/mark', { records })
+ const response = await api.post('/api/attendance/mark', { records })
+ if (!validateAttendanceSaveReceipt(response.data, records.length)) {
+   throw new Error('Attendance server did not confirm the full saved batch. Reload before retrying.')
+ }
  emitAttendanceUpdated({ date, count: records.length })
  setMessage('Attendance saved successfully.')
  setTimeout(() => setMessage(''), 3000)
- } catch {
- setMessage('Failed to save. Try again.')
+ } catch (err) {
+ setMessage(err?.response?.data?.message || err?.message || 'Attendance could not be verified. Reload before retrying.')
  } finally {
  setSaving(false)
  }
