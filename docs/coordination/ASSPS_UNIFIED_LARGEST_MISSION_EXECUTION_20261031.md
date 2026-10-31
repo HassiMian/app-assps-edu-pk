@@ -25,3 +25,18 @@ One master engineering workstream with a planned 60+ minute scope. Do not claim 
 ## Safe continuation
 
 Print November invoices from authenticated Fees -> View Challans. Do NOT recreate 323 already-posted November vouchers; the six remaining students stay HOLD until identity and financial components are legitimately reconciled. For Assessment marks, choose saved Assessment 1-4 records and enter genuine student scores. Restrict Second Term lesson planning to Starter through Class Seven. Reuse the single GitHub review branch review/assps-unified-exam-attendance-20261030 for code and all acceptance reports.
+
+## Follow-up acceptance evidence — 31 October
+
+- Marks Register real headless browser tests: 3/3 PASS. Verify zero and
+  absent states, denial prevents print, and switching to denied exam
+  removes stale results before a 403. This is synthetic UI acceptance,
+  not the Principal's authenticated production browser.
+- Five isolated lesson schema/engine tests PASS in addition to the 15
+  scoped Second Term policy tests. An older integration test expects a
+  disposable PostgreSQL target and was not reported PASS; no production
+  secrets were copied into that test environment.
+- Oct30 attendance readback: 328/329 active children recorded, with one
+  Starter record unmarked. No attendance status was invented or changed.
+- The official exam/result and attendance review CI must pass for the
+  latest consolidated GitHub commit before it is considered source-reviewed.
