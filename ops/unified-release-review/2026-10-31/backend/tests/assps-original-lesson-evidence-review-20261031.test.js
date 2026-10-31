@@ -1,0 +1,47 @@
+'use strict'
+const {test}=require('node:test')
+const assert=require('node:assert/strict')
+const fs=require('node:fs')
+const {reviewOriginalLessonSources}=require('../services/lessonOriginalSourceReview')
+const source=fs.readFileSync('/var/www/apex-backend/src/routes/schoolAcademicCatalogRoutes.js','utf8')
+test('original SHA-pinned evidence limited strictly to Starter through Seven',()=>{
+ const result=reviewOriginalLessonSources(1)
+ assert.equal(result.success,true)
+ assert.equal(result.data.inScopeCandidateCount,57)
+ assert.equal(result.data.totalOriginalCandidates,59)
+ assert.equal(result.data.excludedClassEight,1)
+ assert.equal(result.data.deferredPreNine,1)
+ assert.equal(result.data.sourceSha256,'4d2ccdce5ec644750a530c890df5a0a41eaee5b76f1e4ba47d912617db5c0cda')
+ const classes=new Set(result.data.candidates.map(x=>x.className))
+ assert.equal(classes.has('Eight'),false)
+ assert.equal(classes.has('Pre-Nine'),false)
+ assert.equal(classes.size,10)
+})
+test('no candidate has invented academic signature, teacher approvals or publication',()=>{
+ const result=reviewOriginalLessonSources(1)
+ assert.equal(result.data.stagingWrites,0)
+ assert.equal(result.data.academicApprovalsGranted,0)
+ for(const r of result.data.candidates){
+  assert.equal(r.principalApproval,false)
+  assert.equal(r.reviewedByAuthenticatedTeacher,false)
+  assert.equal(r.publicationStatus,'BLOCKED_PENDING_OFFICIAL_TEXTBOOK_AND_SIGNED_REVIEW')
+  assert.ok(Array.isArray(r.blockingReasons))
+  assert.equal(Object.hasOwn(r,'teacher_user_id'),false)
+  assert.equal(Object.hasOwn(r,'source_detail_records'),false)
+  assert.equal(Object.hasOwn(r,'approval_signature'),false)
+ }
+})
+test('school2 or unsupported tenant never receives ASSPS original lesson metadata',()=>{
+ assert.equal(reviewOriginalLessonSources(2).error,'ASSPS_SCHOOL_SCOPE_REQUIRED')
+ assert.equal(reviewOriginalLessonSources(null).error,'ASSPS_SCHOOL_SCOPE_REQUIRED')
+})
+test('public API requires authenticated active Principal and read-only tenant context',()=>{
+ const snippet=source.split("router.get('/lesson-source-review'")[1]?.split("router.get('/assessment-catalog/:examId/preview'")[0]
+ assert.ok(snippet)
+ assert.match(snippet,/protect,requireRoles\('admin','principal'\)/)
+ assert.match(snippet,/BEGIN READ ONLY/)
+ assert.match(snippet,/applyTenantContext\(c\)/)
+ assert.match(snippet,/ACTIVE_PRINCIPAL_REQUIRED/)
+ assert.match(snippet,/private, no-store/)
+ assert.doesNotMatch(snippet,/\b(?:UPDATE|INSERT|DELETE)\s+/i)
+})

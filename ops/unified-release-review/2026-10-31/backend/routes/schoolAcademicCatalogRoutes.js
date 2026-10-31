@@ -6,6 +6,7 @@ const router = express.Router()
 const { pool, applyTenantContext } = require('../config/database')
 const { requireRoles } = require('../middleware/auth')
 const {sqlCanonicalClass}=require('../services/academicClassKey')
+const {reviewOriginalLessonSources}=require('../services/lessonOriginalSourceReview')
 const {parseFilters,expectedGradeSQL,summaryRows,mismatchHint,summarizeMismatchHints}=require('../services/gradeDiscrepancyReview')
 
 function canonical(text) { return String(text || '').trim().toLowerCase().replace(/\s+/g, ' ') }
@@ -255,6 +256,33 @@ router.get('/assessment-catalog/historical-subject-gaps',protect,requireRoles('a
   if(opened)await c.query('ROLLBACK').catch(()=>{})
   console.error('Historical subject gaps review:',e.code||'QUERY_FAILED')
   return res.status(503).json({success:false,code:'SUBJECT_GAP_REVIEW_UNAVAILABLE'})
+ }finally{c?.release()}
+})
+
+// Principal-only review of original academic lesson evidence. Never certifies textbooks.
+router.get('/lesson-source-review',protect,requireRoles('admin','principal'),async(req,res)=>{
+ const school=id(req.user?.school_id),actorId=id(req.user?.id)
+ if(!school||!actorId||school!==id(req.school_id))
+  return res.status(403).json({success:false,code:'SCHOOL_SCOPE_REQUIRED'})
+ let c,open=false
+ try{
+  c=await pool.connect()
+  await c.query('BEGIN READ ONLY');open=true
+  await applyTenantContext(c)
+  const actor=await c.query("SELECT id FROM users WHERE id=$1 AND school_id=$2 AND is_active=true AND role IN('admin','principal')",[actorId,school])
+  if(actor.rowCount!==1){
+   await c.query('ROLLBACK');open=false
+   return res.status(403).json({success:false,code:'ACTIVE_PRINCIPAL_REQUIRED'})
+  }
+  await c.query('COMMIT');open=false
+  const result=reviewOriginalLessonSources(school)
+  res.set('Cache-Control','private, no-store')
+  if(result.error)return res.status(result.error==='ASSPS_SCHOOL_SCOPE_REQUIRED'?403:503).json({success:false,code:result.error})
+  return res.json(result)
+ }catch(error){
+  if(open)await c.query('ROLLBACK').catch(()=>{})
+  console.error('Original lesson evidence review:',error.code||'UNAVAILABLE')
+  return res.status(503).json({success:false,code:'LESSON_EVIDENCE_REVIEW_UNAVAILABLE'})
  }finally{c?.release()}
 })
 

@@ -30,3 +30,19 @@ dependency updates and passed 78 regression tests. npm audit now reports
 zero critical/high advisories, with two moderate advisories remaining
 (qs and uuid). The candidate lockfile is provided for dependency review.
 No academic approval or automatic release follows this code review.
+
+## 31 October additional Principal review tools
+
+The production Manage Exams v6 asset now exports (a) 54 reviewed candidate
+assessment subject offerings plus six unstaffed student cohorts, (b) 97
+historical grade-label discrepancies as confidential review-only CSV, and
+(c) 57 original Lesson Planning source references, excluding Eight and
+Pre-Nine. Exports are client-triggered, rely on authenticated, tenant-scoped
+GET endpoints, prevent partial reviews and provide blank columns for real
+source verification. They never create subject approvals, assign staff,
+edit marks, publish lessons or unlock production certification.
+
+This directory is for source-code review, NOT a deployable release.
+Raw private academic evidence, actual student names and credentials are
+not included. Release remains HOLD; do not merge into main without a
+proper code/permissions review.
