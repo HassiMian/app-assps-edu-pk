@@ -10,6 +10,7 @@ const { isSchoolDocumentManager, canAccessAuthoredDocument } = require('../servi
 const { loadPlanningContext } = require('../services/lessonPlanningContext')
 const { mustHoldLessonPublication, privateLessonMutationAllowed } = require('../services/lessonPlanningPublicationGuard')
 const { violatesAsspsSecondTermPolicy } = require('../services/asspsSecondTermPolicy')
+const {checkSchoolPlanningScope}=require('../services/asspsLessonScope2026')
 const { buildDeterministicPlan, enhancePlanWithAi, parseSmartPlanningText, parseIsoDate, MAX_RANGE_DAYS } = require('../services/lessonPlanningEngine')
 
 const canManageLessonPlans = requireRoles('super_admin', 'admin', 'school_admin', 'principal', 'teacher')
@@ -225,6 +226,8 @@ router.post('/planner/generate', async (req, res) => {
     if (!schoolId) return res.status(400).json({ success:false, message:'School context is required.' })
     const input = req.body && typeof req.body === 'object' ? req.body : {}
     const classLevel = cleanText(input.classLevel || input.class_level || '',100)
+    const excluded=checkSchoolPlanningScope(schoolId,classLevel)
+    if(excluded)return res.status(409).json({success:false,...excluded})
     if(violatesAsspsSecondTermPolicy(schoolId,{...input,classLevel})) return res.status(422).json({success:false,code:'ASSPS_EIGHT_SECOND_TERM_FORBIDDEN',message:'Class Eight has no Second Term.'})
     const section = cleanText(input.section || '',80)
     const startDate = cleanDate(input.startDate || input.date)
@@ -295,6 +298,8 @@ router.post('/', async (req, res) => {
     const schoolId = resolveSchoolId(req)
     if (!schoolId) return res.status(400).json({ success:false, message:'School context is required.' })
     const plan = normalizePlan(req.body || {})
+    const excluded=checkSchoolPlanningScope(schoolId,plan.classLevel)
+    if(excluded)return res.status(409).json({success:false,...excluded})
     if(violatesAsspsSecondTermPolicy(schoolId,plan)) return res.status(422).json({success:false,code:'ASSPS_EIGHT_SECOND_TERM_FORBIDDEN',message:'Class Eight has no Second Term.'})
     const data = await withTenantTransaction(req, schoolId, async client => {
       const result = await client.query(`
@@ -333,6 +338,8 @@ router.put('/:id', async (req, res) => {
     const revision = expectedRevision(req)
     if (!revision) return res.status(428).json({ success:false, code:'LESSON_PLAN_REVISION_REQUIRED', message:'Current lesson plan revision is required.' })
     const plan = normalizePlan({ ...(req.body || {}), id })
+    const excluded=checkSchoolPlanningScope(schoolId,plan.classLevel)
+    if(excluded)return res.status(409).json({success:false,...excluded})
     if(violatesAsspsSecondTermPolicy(schoolId,plan)) return res.status(422).json({success:false,code:'ASSPS_EIGHT_SECOND_TERM_FORBIDDEN',message:'Class Eight has no Second Term.'})
     const data = await withTenantTransaction(req, schoolId, async client => {
       const prior = await client.query(
@@ -417,6 +424,7 @@ router.post('/:id/share', async (req, res) => {
 
       const payload = row.payload && typeof row.payload === 'object' ? row.payload : {}
       if(violatesAsspsSecondTermPolicy(schoolId,{classLevel:row.class_level,payload})) return {policyHold:true}
+      if(checkSchoolPlanningScope(schoolId,row.class_level)) return {preNinePolicyHold:true}
       if (mustHoldLessonPublication(payload,row.public_id)) return { academicHold:true }
       payload.sentToPortal = true
       payload.sent_to_portal = true
@@ -454,6 +462,7 @@ router.post('/:id/share', async (req, res) => {
     if (data.missing) return res.status(404).json({ success:false, code:'LESSON_PLAN_NOT_FOUND', message:'Lesson plan not found.' })
     if (data.forbidden) return res.status(403).json({ success:false, code:'LESSON_PLAN_SHARE_REVIEW_REQUIRED', message:'A school administrator must review and share this lesson plan.' })
     if (data.policyHold) return res.status(409).json({success:false,code:'ASSPS_EIGHT_SECOND_TERM_FORBIDDEN',message:'Class Eight has no Second Term.'})
+    if (data.preNinePolicyHold) return res.status(409).json({success:false,...checkSchoolPlanningScope(schoolId,'Pre Nine')})
     if (data.academicHold) return res.status(409).json({ success:false, code:'LESSON_PLAN_ACADEMIC_APPROVAL_REQUIRED', message:'Unapproved original-source weekly and term plans cannot be published to student or parent portals.' })
     if (data.conflict) return res.status(409).json({ success:false, code:'LESSON_PLAN_REVISION_CONFLICT', currentRevision:data.currentRevision, message:'Lesson plan changed in another session. Reopen it before sharing.' })
     res.json({ success:true, data:data.plan, delivery:{ students:data.studentCount, notifications:data.notifications } })
