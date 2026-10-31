@@ -46,3 +46,15 @@ This directory is for source-code review, NOT a deployable release.
 Raw private academic evidence, actual student names and credentials are
 not included. Release remains HOLD; do not merge into main without a
 proper code/permissions review.
+
+## Signed writer production safety preflight
+
+Academic staging now refuses to proceed without the technical signed,
+non-BYPASS tenant-writer prerequisites. The ordinary SaaS runtime does NOT
+possess signed academic audit privileges, and no privilege is added by this
+review. Principal UI uses a read-only preflight that reports technical readiness
+without implying source approval. Actual Assessment 1–4 subject grants,
+Assessment 5 creation, staff assignments, historical grade corrections and
+lesson publications remain HOLD until real authorized sign-off.
+
+Synthetic test authorization is NOT production identity acceptance.

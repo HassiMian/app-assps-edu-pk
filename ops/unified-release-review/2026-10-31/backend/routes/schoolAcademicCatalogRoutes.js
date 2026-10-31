@@ -7,6 +7,7 @@ const { pool, applyTenantContext } = require('../config/database')
 const { requireRoles } = require('../middleware/auth')
 const {sqlCanonicalClass}=require('../services/academicClassKey')
 const {reviewOriginalLessonSources}=require('../services/lessonOriginalSourceReview')
+const {inspectSignedAcademicWriter}=require('../services/academicWriterReadinessService')
 const {parseFilters,expectedGradeSQL,summaryRows,mismatchHint,summarizeMismatchHints}=require('../services/gradeDiscrepancyReview')
 
 function canonical(text) { return String(text || '').trim().toLowerCase().replace(/\s+/g, ' ') }
@@ -283,6 +284,28 @@ router.get('/lesson-source-review',protect,requireRoles('admin','principal'),asy
   if(open)await c.query('ROLLBACK').catch(()=>{})
   console.error('Original lesson evidence review:',error.code||'UNAVAILABLE')
   return res.status(503).json({success:false,code:'LESSON_EVIDENCE_REVIEW_UNAVAILABLE'})
+ }finally{c?.release()}
+})
+
+// Authenticated Principal preflight: report technical signed-writer availability,
+// never infer signed human academic consent or broaden database privileges.
+router.get('/academic-writer-preflight',protect,requireRoles('admin','principal'),async(req,res)=>{
+ const school=id(req.user?.school_id),actorId=id(req.user?.id)
+ if(!school||!actorId||school!==id(req.school_id))return res.status(403).json({success:false,code:'SCHOOL_SCOPE_REQUIRED'})
+ let c,open=false
+ try{
+  c=await pool.connect();await c.query('BEGIN READ ONLY');open=true
+  await applyTenantContext(c)
+  const actor=await c.query("SELECT id FROM users WHERE id=$1 AND school_id=$2 AND is_active=true AND role IN('admin','principal')",[actorId,school])
+  if(actor.rowCount!==1){await c.query('ROLLBACK');open=false;return res.status(403).json({success:false,code:'ACTIVE_PRINCIPAL_REQUIRED'})}
+  const status=await inspectSignedAcademicWriter(c)
+  await c.query('COMMIT');open=false
+  res.set('Cache-Control','private, no-store')
+  return res.json({success:true,data:status})
+ }catch(err){
+  if(open)await c.query('ROLLBACK').catch(()=>{})
+  console.error('Academic signed writer preflight:',err.code||'UNAVAILABLE')
+  return res.status(503).json({success:false,code:'SIGNED_WRITER_PREFLIGHT_UNAVAILABLE'})
  }finally{c?.release()}
 })
 

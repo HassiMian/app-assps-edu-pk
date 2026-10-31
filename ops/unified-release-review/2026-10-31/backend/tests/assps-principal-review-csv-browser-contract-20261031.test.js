@@ -3,7 +3,7 @@ const test=require('node:test')
 const assert=require('node:assert/strict')
 const fs=require('node:fs')
 const vm=require('node:vm')
-const source=fs.readFileSync('/var/www/assps-releases/promotion-auth-v2-20261030/assets/ManageExams-ASSPS-ACADEMIC-REVIEW-EXPORT-v6-20261031.js','utf8')
+const source=fs.readFileSync('/var/www/assps-releases/promotion-auth-v2-20261030/assets/ManageExams-ASSPS-ACADEMIC-REVIEW-EXPORT-v7-20261031.js','utf8')
 function extract(){
  const start='exportSourceReview=async t=>'
  const a=source.indexOf(start),b=source.indexOf('},exportGradesReview=async()=>',a)
@@ -122,7 +122,7 @@ test('historic grade reviewer uses only private authorized GET, no writes',()=>{
 
 function lessonHarness(sourceCount=57){
  const start='exportLessonEvidence=async()=>'
- const at=source.indexOf(start),end=source.indexOf('},V=async e=>',at)
+ const at=source.indexOf(start),end=source.indexOf('},inspectAcademicWriter=async()=>',at)
  assert.ok(at>0&&end>at)
  const expression='async()=>'+source.slice(at+start.length,end+1)
  const output={messages:[],requests:[],downloads:[]}
@@ -170,4 +170,45 @@ test('lesson export uses authenticated-only read endpoint and never edits school
  assert.match(expression,/o\.get\(/)
  assert.doesNotMatch(expression,/o\.(post|patch|put|delete)\(/)
  assert.match(source,/onClick:\(\)=>void exportLessonEvidence\(\)/)
+})
+
+function writerHarness(technicalReady=false,valid=true){
+ const start='inspectAcademicWriter=async()=>'
+ const a=source.indexOf(start),b=source.indexOf('},V=async e=>',a)
+ assert.ok(a>0&&b>a)
+ const expression='async()=>'+source.slice(a+start.length,b+1)
+ const output={requests:[],messages:[]}
+ const ctx={
+   o:{get:async(path)=>{output.requests.push(path);return {data:{success:true,data:{
+      technicalReady,
+      signedSourceEvidenceStillRequired:true,
+      wouldGrantAcademicApproval:valid?false:true
+   }}}}},
+   F:m=>output.messages.push(m)
+ }
+ return {fn:vm.runInNewContext('('+expression+')',ctx),output,expression}
+}
+test('Principal signed writer probe clearly reports staging unavailable without creating approvals',async()=>{
+ const {fn,output}=writerHarness(false)
+ await fn()
+ assert.deepEqual(output.requests,['/api/academic-approvals/academic-writer-preflight'])
+ assert.match(output.messages.at(-1),/SIGNED ACADEMIC WRITER NOT READY/)
+ assert.match(output.messages.at(-1),/No approvals, marks or teacher assignments were changed/)
+})
+test('technical writer preflight never claims school human academic approval',async()=>{
+ const {fn,output}=writerHarness(true)
+ await fn()
+ assert.match(output.messages.at(-1),/TECHNICAL PREFLIGHT ONLY/)
+ assert.match(output.messages.at(-1),/Genuine Principal source evidence/)
+})
+test('unverified or escalated writer result is rejected, never shown as ready',async()=>{
+ const {fn,output}=writerHarness(true,false)
+ await fn()
+ assert.match(output.messages.at(-1),/could not be verified/)
+})
+test('Principal signed writer UI uses read-only endpoint only',()=>{
+ const {expression}=writerHarness()
+ assert.match(expression,/o\.get\(/)
+ assert.doesNotMatch(expression,/o\.(post|put|patch|delete)\(/)
+ assert.match(source,/onClick:\(\)=>void inspectAcademicWriter\(\)/)
 })

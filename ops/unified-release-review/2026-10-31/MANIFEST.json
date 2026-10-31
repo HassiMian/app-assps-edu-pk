@@ -1,18 +1,28 @@
 {
-  "createdAtUtc": "2026-10-31T18:26:56.775445+00:00",
-  "purpose": "Source-backed QA handoff only; no signed release or academic approval.",
+  "createdAtUtc": "2026-10-31T18:33:04.696117+00:00",
+  "purpose": "Source and security QA review only, not automated deployment or approval",
   "status": "HOLD",
-  "schoolRecordsModified": false,
+  "genuineAcademicApprovalsCreated": 0,
   "files": [
     {
       "file": "README.md",
-      "sha256": "0d3861e4128f9c9029a10921ea089271274c605e9ceb889314da5dc99351b9ff",
-      "bytes": 2661
+      "sha256": "1d58d1bb0f8339ab977605a2baa789039575ac8ddd57a63074120d0554115ea3",
+      "bytes": 3292
+    },
+    {
+      "file": "backend/routes/schoolAcademicApprovalCore.js",
+      "sha256": "e8e8490b4cf16105b1209f88ad64009392478018a34d1da5e64a359b9edeca4a",
+      "bytes": 2640
     },
     {
       "file": "backend/routes/schoolAcademicCatalogRoutes.js",
-      "sha256": "fcf3b2b32e75794aa0ba654fe2bf63c37714ef0b8aa46770fb7d2f5651ac43c7",
-      "bytes": 21987
+      "sha256": "43f3fa539643714b815b9f42a116ba25d507313881bf55a89c8be9591a188023",
+      "bytes": 23378
+    },
+    {
+      "file": "backend/services/academicWriterReadinessService.js",
+      "sha256": "108f28106f4a74fa8c394afc574e81b69258765b4b67e0169cbe6393c7f8d106",
+      "bytes": 1542
     },
     {
       "file": "backend/services/asspsWeeklyTermConsolidator.js",
@@ -41,8 +51,8 @@
     },
     {
       "file": "backend/tests/assps-principal-review-csv-browser-contract-20261031.test.js",
-      "sha256": "267090f849177caf93318c26bbba9c2561eabea80dbe68608105e8d48208bf39",
-      "bytes": 8565
+      "sha256": "2b2fff42a45589f6b49a0d8daff198c97e9f3da6bc4c210af1dbac34ef0c92e3",
+      "bytes": 10414
     },
     {
       "file": "backend/tests/assps-readonly-academic-review-contract-20261031.test.js",
@@ -55,6 +65,11 @@
       "bytes": 1498
     },
     {
+      "file": "backend/tests/assps-signed-academic-writer-preflight-20261031.test.js",
+      "sha256": "a1040e967ceac67c5b21d1a76616fa90d4f5f99178583b82f75b04cfb56010a3",
+      "bytes": 2959
+    },
+    {
       "file": "backend/tests/assps-term-grade-scope-boundary-20261031.test.js",
       "sha256": "0f71aad85ab5cff38ef321e91a9175603a2fdb90f76e67a864ecbed7f3548420",
       "bytes": 1904
@@ -63,6 +78,11 @@
       "file": "backend/tests/assps-weekly-term-consolidation.test.js",
       "sha256": "ec24680b1d86b040df5a65e34ed9d70fe75b1d6208506780a7d1a2cc6c63177f",
       "bytes": 3141
+    },
+    {
+      "file": "backend/tests/school-academic-admin-approvals-http.test.js",
+      "sha256": "057761bd54c38d41a8e8571095836fb74b6ce2723080ce60cdb6dfcbaec6ef7d",
+      "bytes": 8469
     },
     {
       "file": "evidence/offsite-restore-receipt.json",
@@ -76,7 +96,7 @@
     },
     {
       "file": "evidence/release-gate-snapshot.json",
-      "sha256": "ea05849f47dff21ee425decb8acf3c0e2b9a0fda2bd0a3c28e2f460e2d26c2f2",
+      "sha256": "7eafa33e083222c6b1f80dba5bb1e73cf9ad8324add4aae93c51c43da5c826ea",
       "bytes": 4333
     },
     {
@@ -88,6 +108,11 @@
       "file": "frontend/assets/ManageExams-ASSPS-ACADEMIC-REVIEW-EXPORT-v6-20261031.js",
       "sha256": "1898b7f0f8899b6d8a1ffd1d1ac90d2063b4de6698238ef8695dba35bc48b435",
       "bytes": 17771
+    },
+    {
+      "file": "frontend/assets/ManageExams-ASSPS-ACADEMIC-REVIEW-EXPORT-v7-20261031.js",
+      "sha256": "d1ce1365592546467dac464a32aa112e923327902a486707bf5839b056479405",
+      "bytes": 18828
     }
   ]
 }
