@@ -1,0 +1,35 @@
+{
+  "checkedAtUtc": "2026-10-31T19:20:38.117145+00:00",
+  "fullAcademicRelease": "HOLD",
+  "changes": "Source review, not Principal signed acceptance",
+  "coreTests": {
+    "tests": 77,
+    "pass": 77,
+    "fail": 0
+  },
+  "greenSignedStageTests": {
+    "tests": 6,
+    "pass": 6,
+    "fail": 0
+  },
+  "anonymousIngressChecks": 19,
+  "unauthStatus": "all expected 401/403",
+  "productionNpmVulnerabilities": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "coreTestSha256": "6b118e6d652d6a441f9b7c9d58f90002417720388bd2a28f3ff04664ca9609d2",
+  "signedTestSha256": "915380902e827974a173179520b5203966c9491bba567cc5d03961639228d2b8",
+  "ingressTestSha256": "bd192b9f0418478a2fb50c908111e9bbdd9505ebcc22764c99102d4fcbc60c11",
+  "protectedFirstTermRecords": 1854,
+  "protectedGenuineZeros": 213,
+  "marksDigest": "e1f389a2863752c838a51ddb3a9c4549",
+  "approvalEvents": 0,
+  "approvedAssessmentCatalogOfferings": 0,
+  "principalRealAcceptance": "NOT_VERIFIED",
+  "schoolVouchers": "EXCLUDED"
+}

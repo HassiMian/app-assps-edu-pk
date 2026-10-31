@@ -25,3 +25,9 @@ Release posture: HOLD for full academic certification.
 
 ## Release discipline
 Review signed RLS and evidence scope in isolated restore; then source review, explicit authorized acceptance, and only then certified cutover. This is a source handoff, not production certification. The frontend JS is a generated asset: port to canonical JSX before normal build.
+
+## Follow-up: future assessments + original subject gap workbook
+- Exact GET whitelist includes signed Principal readiness and student cohort review. Numeric-only GET Assessment previews support future Assessment 6, 7 and higher without weakening the separate Green POST authority.
+- UI v9 adds a CSV export of the 45 historical First Term subject gaps (40 unstaffed-cohort subject rows and 5 naming-alignment rows); all teacher and source evidence cells remain blank for Principal verification.
+- CSV formula-injection prefixes and CRLF line separators are tested.
+- GitHub review branch commit is not a Principal academic sign-off or a production merge.

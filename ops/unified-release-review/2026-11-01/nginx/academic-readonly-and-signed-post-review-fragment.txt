@@ -1,0 +1,42 @@
+# Reviewed server-block excerpt. NOT a stand-alone nginx config.
+    # Strict public Principal academic read-only ingress. Signed POST remains on green.
+    location = /api/academic-approvals/assessment-catalog/readiness {
+        include /etc/nginx/snippets/assps-academic-read-only-core-20261101.conf;
+    }
+    location = /api/academic-approvals/assessment-catalog/cohort-coverage {
+        include /etc/nginx/snippets/assps-academic-read-only-core-20261101.conf;
+    }
+    location = /api/academic-approvals/assessment-catalog/historical-subject-gaps {
+        include /etc/nginx/snippets/assps-academic-read-only-core-20261101.conf;
+    }
+    location = /api/academic-approvals/grade-discrepancies {
+        include /etc/nginx/snippets/assps-academic-read-only-core-20261101.conf;
+    }
+    location = /api/academic-approvals/lesson-source-review {
+        include /etc/nginx/snippets/assps-academic-read-only-core-20261101.conf;
+    }
+    location = /api/academic-approvals/academic-writer-preflight {
+        include /etc/nginx/snippets/assps-academic-read-only-core-20261101.conf;
+    }
+
+    # Numeric-only, unlimited future Assessment preview; GET remains authenticated Core.
+    # Other academic paths still default to signed Green POST-only authority.
+    location ~ ^/api/academic-approvals/assessment-catalog/[1-9][0-9]*/preview/?$ {
+        include /etc/nginx/snippets/assps-academic-read-only-core-20261101.conf;
+    }
+
+    # Core signed Principal/Admin exact-school examination approvals only.
+    # Never route fee, paper, student or other /api endpoints to green.
+    location /api/academic-approvals/ {
+        limit_except POST { deny all; }
+        client_max_body_size 16k;
+        proxy_pass http://127.0.0.1:5094;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_read_timeout 15s;
+        add_header Cache-Control "private, no-store" always;
+    }
+

@@ -20,7 +20,7 @@ test('versioned Manage Exams asset is resolved by live importmap and is present'
  assert.ok(scripts)
  const map=JSON.parse(scripts[1]).imports
  const active=map['/assets/ManageExams-BIiLOLGD.js']
- assert.match(active,/^\/assets\/ManageExams-ASSPS-(?:READINESS|ACADEMIC-(?:REVIEW|SIGNED-STAGE))-[A-Za-z0-9_.-]+\.js$/)
+ assert.match(active,/^\/assets\/ManageExams-ASSPS-(?:READINESS|ACADEMIC-(?:REVIEW|SIGNED-STAGE|GAP-REVIEW))-[A-Za-z0-9_.-]+\.js$/)
  assert.ok(fs.existsSync(path.join(root,active)))
 })
 test('Principal review text marks unreadable signed ledger as unverified, not zero',()=>{
@@ -45,4 +45,16 @@ test('active stage action requires original reference, exact SHA and explicit Pr
  assert.match(code,/approvalStatus!==['\"\`]pending/)
  assert.match(code,/principalSubjectApprovalStillRequired/)
  assert.match(code,/No approval inferred/)
+})
+
+test('Principal historical subject CSV preserves read-only source and requires human teacher evidence',()=>{
+ const active=JSON.parse(scripts[1]).imports['/assets/ManageExams-BIiLOLGD.js']
+ const code=fs.readFileSync(path.join(root,active),'utf8')
+ assert.match(code,/exportHistoricalGapReview=async/)
+ assert.match(code,/historical-subject-gaps/)
+ assert.match(code,/sourceExamId:9/)
+ assert.match(code,/REVIEW_ONLY_NOT_APPROVED/)
+ assert.match(code,/UNVERIFIED_HISTORIC_REFERENCE_NOT_APPROVED/)
+ assert.match(code,/Teacher\/Employee Evidence/)
+ assert.match(code,/Active student counts must NOT be summed by subject/)
 })
