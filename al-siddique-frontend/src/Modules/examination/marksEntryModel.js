@@ -84,6 +84,14 @@ export const marksSubjectsForClass = ({exam, className, academicSubjects=[]}) =>
   return Array.isArray(academicSubjects) ? academicSubjects : []
 }
 
+// For All Classes assessments with no per-exam subject offerings the
+// school Academic Setup is authoritative. An empty offering array by itself
+// must NOT show a false "no active subjects" warning.
+export const needsMarksSubjectSetupWarning = ({exam,className,academicSubjects=[]}) => {
+  if (!exam || !className) return false
+  return marksSubjectsForClass({exam,className,academicSubjects}).length === 0
+}
+
 // Legacy admissions have used written, ordinal and prefixed class labels.
  // Query each exact class value through the authenticated API; NEVER request
  // the entire school roster merely to work around a class-label mismatch.

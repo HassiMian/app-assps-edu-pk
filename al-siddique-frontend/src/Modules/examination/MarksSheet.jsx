@@ -10,7 +10,7 @@ import { classPassingThreshold, DEFAULT_REQUESTED_PASS_PERCENT } from './classPa
 import { escapeMarksPrintHtml, approvedMarksLogoUrl, countRecordedMarks } from './marksBlankPrint'
 import {
  normalizeMarksClass, normalizeMarksExam, matchesMarksExam, pickMarksExam,
- marksEntryClasses, marksSubjectsForClass, marksClassQueryAliases, marksRosterQueryParams, mergeMarksRoster, validateMarksBatch
+ marksEntryClasses, marksSubjectsForClass, needsMarksSubjectSetupWarning, marksClassQueryAliases, marksRosterQueryParams, mergeMarksRoster, validateMarksBatch
 } from './marksEntryModel'
 
 const FALLBACK_EXAM_TYPES = ['Term Exam', 'Assessment', 'Quiz', 'Annual Exam', 'Monthly Test']
@@ -354,11 +354,12 @@ export default function MarksSheet() {
  <option value="">Select subject</option>
  {(selectedClass ? marksSubjectsForClass({exam:selectedExam,className:selectedClass,academicSubjects:subjectsForClass(selectedClass)}) : []).map(subject => <option key={subject} value={subject}>{subject}</option>)}
  </select>
- {selectedExam && selectedClass &&
-   Array.isArray(selectedExam.subject_offerings) &&
-   !marksSubjectsForClass({exam:selectedExam,className:selectedClass,academicSubjects:[]}).length &&
-   <div style={{ color:C.red, fontSize:12, marginTop:5 }}>
-     No active subjects are configured for this exam and class. Ask school administration to verify the section-specific exam schedule.
+ {needsMarksSubjectSetupWarning({
+   exam:selectedExam,className:selectedClass,
+   academicSubjects:selectedClass ? subjectsForClass(selectedClass) : []
+ }) && <div role="alert" style={{ color:C.red, fontSize:12, marginTop:5 }}>
+     No subjects are available for this class. Check the school's Academic Setup
+     {selectedExam?.type === 'Term Exam' ? ' and official exam schedule.' : '.'}
    </div>}
  </div>
  </div>

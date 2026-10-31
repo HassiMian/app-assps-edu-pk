@@ -96,7 +96,11 @@ export default function ManageExams() {
    ? `${form.name.trim()} added. Select Enter Marks to record scores.`
    : `${form.name.trim()} was created, but the exam list could not refresh. Please refresh before adding it again.`)
  } catch (err) {
- setMessage(err.response?.data?.message || 'Failed to add exam.')
+ if(err.response?.status===409){
+   setMessage('This exam already exists for '+form.class+' ('+effectiveSession+'). Select its Enter Marks action below, or enter a new assessment number.')
+ }else{
+   setMessage(err.response?.data?.message || 'Failed to add exam. Check your session and try again.')
+ }
  } finally {
  setSaving(false)
  }
