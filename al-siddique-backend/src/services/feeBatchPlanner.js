@@ -14,9 +14,9 @@ async function build(c,school,p){
  for(const s of settings.rows){if(s.session===session&&!classRates.has(s.class_name))classRates.set(s.class_name,Number(s.monthly_fee))}
  const priorMonth=monthCase.replaceAll('f.month','old.month')
  const sql="SELECT s.id,s.name,s.father_name,s.gr_number,s.class,s.section,pf.monthly_fee AS profile_fee, "
-  +"old.id AS prior_id,old.remaining_balance AS prior_balance,old.monthly_fee AS prior_monthly,nowfee.id AS existing_id "
+  +"old.id AS prior_id,old.year AS prior_year,old.month AS prior_month,old.remaining_balance AS prior_balance,old.monthly_fee AS prior_monthly,nowfee.id AS existing_id "
   +"FROM students s LEFT JOIN student_fee_profiles pf ON pf.student_id=s.id AND pf.school_id=s.school_id "
-  +"LEFT JOIN LATERAL(SELECT old.id,old.remaining_balance,old.monthly_fee FROM fee_challans old "
+  +"LEFT JOIN LATERAL(SELECT old.id,old.year,old.month,old.remaining_balance,old.monthly_fee FROM fee_challans old "
   +"WHERE old.school_id=s.school_id AND old.student_id=s.id AND (old.year<$3 OR (old.year=$3 AND "+priorMonth+"<$4)) "
   +"ORDER BY old.year DESC,"+priorMonth+" DESC,old.id DESC LIMIT 1) old ON true "
   +"LEFT JOIN LATERAL(SELECT f.id FROM fee_challans f WHERE f.school_id=s.school_id AND f.student_id=s.id "
@@ -37,12 +37,17 @@ async function build(c,school,p){
   const d=chooseDiscount(s,pkg,siblings.get(normalized(s.father_name))||1,session,rate)
   const extra=money(p.extra.exam_fee+p.extra.paper_fund+p.extra.other_fee)
   const payable=money(rate+arrears+extra-d.amount)
+  const priorMonthNumber=['january','february','march','april','may','june','july','august','september','october','november','december'].indexOf(String(s.prior_month||'').trim().toLowerCase())+1
+  const priorGap=s.prior_id?(p.year*12+p.monthNum)-(Number(s.prior_year)*12+priorMonthNumber):1
+  const priorDue=Number(s.prior_balance??0)
   let hold=''
   if(s.existing_id)hold='ALREADY_GENERATED'
   else if(school===1&&holdGr&&s.gr_number===holdGr&&s.class!=='Pre Nine')hold='PRE_NINE_CORRECTION_REQUIRED'
   else if(school===1&&historicHold.includes(Number(s.id)))hold='HISTORICAL_RECONCILIATION_REQUIRED'
   else if(school===1&&p.year===2026&&p.month==='November'&&!holdGr)hold='HOLD_CONFIG_MISSING'
   else if(s.class==='Eight'&&p.year===2026&&p.month==='November')hold='PRE_NINE_PROMOTION_REQUIRED'
+  else if(s.prior_id&&(priorMonthNumber<1||priorGap!==1))hold='MISSING_INTERMEDIATE_MONTH_RECONCILIATION'
+  else if(s.prior_id&&(!Number.isFinite(priorDue)||priorDue<0))hold='INVALID_PREVIOUS_BALANCE'
   else if(!rate||!Number.isFinite(payable)||payable<=0)hold='MISSING_MONTHLY_FEE'
   else if(dupes.get(s.class+'|'+normalized(s.name)+'|'+normalized(s.father_name))>1)hold='DUPLICATE_STUDENT_IDENTITY'
   return {student_id:Number(s.id),name:s.name,gr_number:s.gr_number,class:s.class,section:s.section,monthly_fee:rate,arrears,discount:d.amount,discount_package_id:d.packageId,discount_label:d.label,exam_fee:p.extra.exam_fee,paper_fund:p.extra.paper_fund,other_fee:p.extra.other_fee,total:payable,status:hold?(hold==='ALREADY_GENERATED'?'existing':'held'):'ready',reason:hold}
