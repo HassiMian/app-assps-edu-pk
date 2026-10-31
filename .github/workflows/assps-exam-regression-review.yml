@@ -56,6 +56,12 @@ jobs:
       - name: Fee Batch V3 atomic and billing-reconciliation checks (no write)
         working-directory: al-siddique-backend/src
         run: node --test tests/fee-batch-v3.test.cjs
+      - name: Unified October 31 fee lesson and exam creation safety tests (no database writes)
+        working-directory: al-siddique-backend/src
+        run: node --test tests/fee-batch-v3.test.cjs tests/fee-batch-gap-guard-20261031.test.cjs tests/assps-lesson-scope-20261031.test.cjs tests/assps-second-term-policy.test.cjs tests/exam-create-transaction-20261031.test.cjs tests/exam-creation-principal-http-isolated.test.js
+      - name: Assessment 1-4 All Classes Marks Entry contract (no database writes)
+        working-directory: al-siddique-frontend
+        run: node --test src/Modules/examination/assessment-all-classes-20261031.test.mjs
       - name: Targeted frontend lint
         working-directory: al-siddique-frontend
         run: |
