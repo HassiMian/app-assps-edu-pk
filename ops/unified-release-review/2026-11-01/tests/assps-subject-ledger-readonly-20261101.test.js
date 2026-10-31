@@ -1,0 +1,33 @@
+'use strict'
+const {test}=require('node:test')
+const assert=require('node:assert/strict')
+const fs=require('node:fs')
+const path=require('node:path')
+const code=fs.readFileSync(path.resolve(__dirname,'../routes/schoolAcademicCatalogRoutes.js'),'utf8')
+const body=code.split("router.get('/assessment-catalog/:examId/offerings'")[1]?.split("router.get('/assessment-catalog/:examId/preview'")[0]
+test('school-scoped pending subject ledger is authenticated Principal GET only',()=>{
+ assert.ok(body)
+ assert.match(code,/router\.get\('\/assessment-catalog\/:examId\/offerings',protect,requireRoles\('admin','principal'\)/)
+ assert.match(body,/BEGIN READ ONLY/)
+ assert.match(body,/applyTenantContext\(c\)/)
+ assert.match(body,/school_id=\$1 AND exam_id=\$2/)
+ assert.match(body,/ACTIVE_SCHOOL_PRINCIPAL_REQUIRED/)
+ assert.match(body,/requiresSignedPrincipalApproval:true/)
+ assert.match(body,/neverAutoApproves:true/)
+})
+test('specific subject ID, exact revision and approval state are server sourced',()=>{
+ assert.match(body,/Number\(x\.id\)/)
+ assert.match(body,/Number\(x\.approval_revision\)/)
+ assert.match(body,/approvalStatus:x\.approval_status/)
+ assert.match(body,/approved:x\.approval_status==='approved'/)
+ assert.match(body,/LIMIT 501/)
+ assert.match(body,/ASSESSMENT_CATALOG_TOO_LARGE/)
+ assert.doesNotMatch(body,/\b(?:INSERT INTO|UPDATE|DELETE FROM)\b/i)
+})
+test('separate signed Green approval route remains only writer and has revision guard',()=>{
+ const green=fs.readFileSync('/root/assps-core-candidates/admin-approval-59db01e/al-siddique-backend/src/routes/schoolAcademicApprovalRoutes.js','utf8')
+ assert.match(green,/router\.post\('\/exam-subjects\/:id\/approve',protect/)
+ assert.match(green,/SUBJECT_APPROVAL_REVISION_CONFLICT/)
+ assert.match(green,/approval_status='approved'/)
+ assert.match(green,/audit\(c,actor,req,'exam_subject_maximum'/)
+})

@@ -20,7 +20,7 @@ test('versioned Manage Exams asset is resolved by live importmap and is present'
  assert.ok(scripts)
  const map=JSON.parse(scripts[1]).imports
  const active=map['/assets/ManageExams-BIiLOLGD.js']
- assert.match(active,/^\/assets\/ManageExams-ASSPS-(?:READINESS|ACADEMIC-(?:REVIEW|SIGNED-STAGE|GAP-REVIEW))-[A-Za-z0-9_.-]+\.js$/)
+ assert.match(active,/^\/assets\/ManageExams-ASSPS-(?:READINESS|ACADEMIC-(?:REVIEW|SIGNED-STAGE|GAP-REVIEW)|SINGLE-SUBJECT-APPROVAL)-[A-Za-z0-9_.-]+\.js$/)
  assert.ok(fs.existsSync(path.join(root,active)))
 })
 test('Principal review text marks unreadable signed ledger as unverified, not zero',()=>{
@@ -57,4 +57,21 @@ test('Principal historical subject CSV preserves read-only source and requires h
  assert.match(code,/UNVERIFIED_HISTORIC_REFERENCE_NOT_APPROVED/)
  assert.match(code,/Teacher\/Employee Evidence/)
  assert.match(code,/Active student counts must NOT be summed by subject/)
+})
+
+test('live Principal approves exact subject ID and revision only after verified official source',()=>{
+ const active=JSON.parse(scripts[1]).imports['/assets/ManageExams-BIiLOLGD.js']
+ const code=fs.readFileSync(path.join(root,active),'utf8')
+ assert.match(code,/approveOneSubject=async/)
+ assert.match(code,/requiresSignedPrincipalApproval/)
+ assert.match(code,/neverAutoApproves/)
+ assert.match(code,/assessment-catalog\/'/)
+ assert.match(code,/\/offerings/)
+ assert.match(code,/approvalStatus==='pending'/)
+ assert.match(code,/item\.revision/)
+ assert.match(code,/subject ID/i)
+ assert.match(code,/I_VERIFIED_THE_EXACT_OFFICIAL_SOURCE/)
+ assert.match(code,/exam-subjects\/'/)
+ assert.match(code,/Approve One Subject \(Signed\)/)
+ assert.match(code,/No other subject will be approved/)
 })

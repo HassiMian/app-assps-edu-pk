@@ -1,4 +1,4 @@
-# Reviewed server-block excerpt. NOT a stand-alone nginx config.
+# Reviewed Nginx server excerpt — NOT a standalone config
     # Strict public Principal academic read-only ingress. Signed POST remains on green.
     location = /api/academic-approvals/assessment-catalog/readiness {
         include /etc/nginx/snippets/assps-academic-read-only-core-20261101.conf;
@@ -21,7 +21,7 @@
 
     # Numeric-only, unlimited future Assessment preview; GET remains authenticated Core.
     # Other academic paths still default to signed Green POST-only authority.
-    location ~ ^/api/academic-approvals/assessment-catalog/[1-9][0-9]*/preview/?$ {
+    location ~ ^/api/academic-approvals/assessment-catalog/[1-9][0-9]*/(preview|offerings)/?$ {
         include /etc/nginx/snippets/assps-academic-read-only-core-20261101.conf;
     }
 

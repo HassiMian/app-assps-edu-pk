@@ -31,3 +31,9 @@ Review signed RLS and evidence scope in isolated restore; then source review, ex
 - UI v9 adds a CSV export of the 45 historical First Term subject gaps (40 unstaffed-cohort subject rows and 5 naming-alignment rows); all teacher and source evidence cells remain blank for Principal verification.
 - CSV formula-injection prefixes and CRLF line separators are tested.
 - GitHub review branch commit is not a Principal academic sign-off or a production merge.
+
+## New: Principal exact pending subject ledger and one-subject signature
+- Core implements Principal-only GET /api/academic-approvals/assessment-catalog/:examId/offerings under READ ONLY transaction and exact school/active Principal scope. Returns server-owned subject ID, maximum, pass marks, approval status and immutable expected revision; no academic audit privilege bypass.
+- Public numeric GET whitelist covers both /preview and /offerings; ALL other signed approval methods retain independent Green authority.
+- Manage Exams v10 requires human selection of one pending subject ID from school-scoped ledger, exact original source reference, genuine SHA-256 and explicit Principal confirmation; POST /api/academic-approvals/exam-subjects/:id/approve via signed Green 5094. Separate authorization per subject; no bulk, no automatic approval.
+- New read-only 3/3 ledger source tests and UI contract 7/7; full core regression 81/81 and signed stage unit 6/6. Actual signed Principal/Teacher acceptance is still NOT VERIFIED.
