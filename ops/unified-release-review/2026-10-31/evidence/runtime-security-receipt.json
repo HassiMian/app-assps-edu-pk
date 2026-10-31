@@ -1,0 +1,31 @@
+{
+  "observedAtUtc": "2026-10-31T17:57:44.709702+00:00",
+  "productionBefore": {
+    "info": 0,
+    "low": 0,
+    "moderate": 3,
+    "high": 5,
+    "critical": 1,
+    "total": 9
+  },
+  "productionAfter": {
+    "info": 0,
+    "low": 0,
+    "moderate": 2,
+    "high": 0,
+    "critical": 0,
+    "total": 2
+  },
+  "remainingAdvisoryPackages": [
+    "qs",
+    "uuid"
+  ],
+  "productionOnlyPatchUpdates": true,
+  "unsupportedMajorUuidUpgradeNotApplied": true,
+  "sourceLockSha256": "c9d152d41ceca14bae40a0fd8aec791c8c5d09505dcec18beb2692d8204ec84a",
+  "regressionPassed": 78,
+  "regressionFailures": 0,
+  "regressionTapSha256": "7911ee29b566f515212b60da6892985fa86ec72474201f74e17c91df11bb6726",
+  "runtimeRollbackModulesPreservedPrivately": true,
+  "productionCertificate": "HOLD_PENDING_AUTHENTIC_ACADEMIC_APPROVALS"
+}

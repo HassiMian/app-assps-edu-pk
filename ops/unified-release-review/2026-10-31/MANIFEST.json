@@ -1,13 +1,13 @@
 {
-  "createdAtUtc": "2026-10-31T17:52:45.058752+00:00",
-  "purpose": "Source preservation and human review only",
+  "createdAtUtc": "2026-10-31T17:57:44.712911+00:00",
+  "purpose": "Production source/evidence and security patch review, not automatic deployment",
   "productionReleaseStatus": "HOLD",
   "sourceGitBase": "b47941ac7867af1b96664c53fd4428a59ccd5055",
   "files": [
     {
       "file": "README.md",
-      "sha256": "cd9c16bd970d39e91295dd042135e2d58dc5919034764cc8af188a614c7d2aa6",
-      "bytes": 1435
+      "sha256": "05a9fe4909e38c86924535ef419e5d063bdaede29035f58b0443a393be477021",
+      "bytes": 1790
     },
     {
       "file": "backend/routes/schoolAcademicCatalogRoutes.js",
@@ -50,9 +50,19 @@
       "bytes": 620
     },
     {
+      "file": "evidence/package-lock.security-candidate.json",
+      "sha256": "c9d152d41ceca14bae40a0fd8aec791c8c5d09505dcec18beb2692d8204ec84a",
+      "bytes": 116803
+    },
+    {
       "file": "evidence/release-gate-snapshot.json",
       "sha256": "a1f954e0c70b0d61bcef564af8731c7ac9e9e6069010383db01dc3c371ed3634",
       "bytes": 4333
+    },
+    {
+      "file": "evidence/runtime-security-receipt.json",
+      "sha256": "7b27445d0b369f4d03eb9b13ce7550e62f9495809750eb5d9476145fea1cf3d5",
+      "bytes": 815
     }
   ]
 }

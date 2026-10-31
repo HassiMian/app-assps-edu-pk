@@ -24,3 +24,9 @@ Authentic Principal/Teacher approvals, teacher coverage, Assessment 5,
 historic grades, lesson publication evidence, exact Times New Roman
 embedding and current canonical CI/acceptance are not yet verified.
 November vouchers are excluded and must never be changed by this handoff.
+
+Security hardening update: the live backend received patch-compatible
+dependency updates and passed 78 regression tests. npm audit now reports
+zero critical/high advisories, with two moderate advisories remaining
+(qs and uuid). The candidate lockfile is provided for dependency review.
+No academic approval or automatic release follows this code review.
