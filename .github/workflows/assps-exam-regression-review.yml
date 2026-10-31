@@ -77,6 +77,9 @@ jobs:
       - name: Lesson planning term and 3-up print model regression
         working-directory: al-siddique-frontend
         run: node --test src/Modules/Paper-Generator/tests/termPlanningModel.test.mjs src/Modules/Paper-Generator/tests/studentTermDiary3Up.test.mjs src/Modules/Paper-Generator/tests/plannerSubjectTypography.test.mjs src/Modules/Paper-Generator/tests/secondTermAcademicScope.test.mjs
+      - name: Academic source evidence gate cannot issue certificate from unverified archive
+        working-directory: al-siddique-backend/src
+        run: node --test tests/assps-academic-evidence-gate-20261031.test.cjs
       - name: Targeted frontend lint
         working-directory: al-siddique-frontend
         run: |

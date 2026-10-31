@@ -76,3 +76,23 @@ institutionally approved source-textbook page ranges. The first is
 measurable and delivered; the latter two stay HOLD pending authentic
 evidence. Do not claim full production certification merely because
 automated tests pass.
+
+## Final source and recovery evidence (31 October)
+- Source archive was independently parsed in the private VPS audit: exact scope
+  Starter, Mover, Flyer and One–Seven (10 classes), 57 original subject
+  groupings. ALL 57 have ownerVerified=false, academicApproval=false,
+  publishStatus=BLOCKED and sectionMapping=UNVERIFIED. The separate 59
+  original teacher source candidates have not received a verified school
+  academic signature. No external or artificial academic approval was posted.
+- Versioned read-only academic source gate inspects private evidence and
+  can NEVER grant a school academic certificate based solely on editable
+  JSON approval flags. Four dedicated anti-forgery/scope tests pass.
+- A fresh PostgreSQL full backup (3.9 MB custom archive) was SHA-256
+  verified and actually restored into an isolated database. Seven school
+  table counts matched the source: students 330 (329 active), exams 6,
+  exam_results 1854, attendance 17235, lesson_plans 4,
+  assessment_papers 4, assessment_revisions 2. The restore also verified
+  Pre Nine / Blue 12, Eight / Blue zero and four saved assessments.
+  Temporary restore DB was deleted after validation. No backup test touched
+  live student records, vouchers or exams. Independent OFFSITE restore
+  remains unverified and must not be labeled PASS.
