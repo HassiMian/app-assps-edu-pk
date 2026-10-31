@@ -118,6 +118,10 @@ export default function SavedPapersTab({ onLoadPaper, onDuplicatePaper }) {
  const visibleCloudPapers=cloudPapers.filter(paper=>!search || paper.name.toLowerCase().includes(search.toLowerCase()))
  const openCloudPaper=async paper=>{
   if(cloudOpening)return
+  if(!paper.revisionAvailable){
+    setCloudError('This saved assessment has no verified editable revision. Its historical metadata is preserved, but editing is blocked until an authentic source revision is recovered.')
+    return
+  }
   setCloudOpening(paper.serverPaperId)
   setCloudError('')
   try{await onLoadPaper(paper,'build')}
@@ -172,7 +176,7 @@ export default function SavedPapersTab({ onLoadPaper, onDuplicatePaper }) {
  <div style={{ fontSize: 36 }}></div>
  <div style={{ flex: 1 }}>
  <div style={{ color: '#fff', fontWeight: 800, fontSize: 20 }}>Saved Papers</div>
- <div style={{ color: C.muted, fontSize: 13 }}>{savedPapers.length} browser paper(s) · {cloudLoading?'Checking server…':cloudError?'Server unavailable':cloudPapers.length+' server assessment(s)'}</div>
+ <div style={{ color: C.muted, fontSize: 13 }}>{savedPapers.length} browser paper(s) · {cloudLoading?'Checking server…':cloudError?'Server unavailable':cloudPapers.filter(p=>p.revisionAvailable).length+' editable assessment(s) · '+cloudPapers.filter(p=>!p.revisionAvailable).length+' historical only'}</div>
  </div>
  <input value={search} onChange={e => setSearch(e.target.value)} placeholder=" Search papers..."
  style={{ background: 'rgba(11,44,77,0.6)', border: `1px solid ${C.border}`, borderRadius: 12, color: C.silver, padding: '10px 16px', fontSize: 13, outline: 'none', width: 220 }} />
@@ -188,9 +192,12 @@ export default function SavedPapersTab({ onLoadPaper, onDuplicatePaper }) {
    {visibleCloudPapers.map(paper=><div key={paper.serverPaperId} style={{background:C.card,border:'1px solid '+C.border,borderRadius:14,padding:18}}>
     <div style={{fontSize:15,color:C.silver,fontWeight:700}}>{paper.name}</div>
     <div style={{fontSize:12,color:C.muted,margin:'8px 0'}}>Server revision {paper.serverRevision} · {paper.status} · Not a local backup</div>
-    <button type="button" disabled={Boolean(cloudOpening)} onClick={()=>void openCloudPaper(paper)}
-      style={{background:C.gold,color:'#071e34',border:0,borderRadius:8,fontWeight:700,cursor:'pointer',padding:'8px 14px'}}>
-      {cloudOpening===paper.serverPaperId?'Verifying server revision…':'Open & Edit'}
+    {!paper.revisionAvailable && <div role="status" style={{fontSize:12,color:C.red,marginBottom:9}}>
+      Historical record only — original editable revision unavailable. No content was reconstructed.
+    </div>}
+    <button type="button" disabled={Boolean(cloudOpening)||!paper.revisionAvailable} onClick={()=>void openCloudPaper(paper)}
+      style={{background:paper.revisionAvailable?C.gold:'#9aa7b8',color:'#071e34',border:0,borderRadius:8,fontWeight:700,cursor:paper.revisionAvailable?'pointer':'not-allowed',padding:'8px 14px'}}>
+      {!paper.revisionAvailable?'Revision unavailable':cloudOpening===paper.serverPaperId?'Verifying server revision…':'Open & Edit'}
     </button>
    </div>)}
   </div>

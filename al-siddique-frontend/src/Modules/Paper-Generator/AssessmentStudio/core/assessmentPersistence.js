@@ -42,7 +42,7 @@ export function pruneQueuedAssessment(targetIdentifier) {
 // Auto-prune isolated disposable QA draft if present in recovery queue
 try {
   pruneQueuedAssessment('manual-draft-1792045825378-2xx7lg')
-} catch (_) {}
+} catch { /* Private recovery storage may be unavailable in a locked-down browser. */ }
 
 export function bindQueuedAssessmentSave(queueId, localPaperId) {
   if (!queueId || !localPaperId) return false
@@ -73,7 +73,7 @@ export async function saveAssessmentRevision({ paperId, expectedRevision = 0, ti
 }
 
 export async function loadAssessmentPaper(paperId) {
-  const response = await api.get(`/api/assessment-studio/papers/${encodeURIComponent(paperId)}`)
+  const response = await api.get(`/api/assessment-studio/papers/${encodeURIComponent(paperId)}`, {skipCache:true})
   return responseData(response)
 }
 

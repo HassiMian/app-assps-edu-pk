@@ -128,10 +128,15 @@ router.get('/papers', async (req, res) => {
     if (!schoolId) return res.status(400).json({ success:false, message:'School context required.' })
     await tenantClause(req, { table:'assessment_papers' })
     const result = await query(
-      `SELECT public_id, title, status, current_revision, created_at, updated_at
-         FROM assessment_papers
-        WHERE school_id = $1
-        ORDER BY updated_at DESC
+      `SELECT p.public_id, p.title, p.status, p.current_revision,
+              p.created_at, p.updated_at,
+              (r.id IS NOT NULL) AS current_revision_available
+         FROM assessment_papers p
+         LEFT JOIN assessment_paper_revisions r
+           ON r.school_id=p.school_id AND r.paper_id=p.id
+          AND r.revision_number=p.current_revision
+        WHERE p.school_id = $1
+        ORDER BY p.updated_at DESC
         LIMIT 100`,
       [schoolId]
     )
@@ -160,8 +165,15 @@ router.get('/papers/:paperId', async (req, res) => {
       [schoolId, publicId]
     )
     if (!result.rowCount) return res.status(404).json({ success:false, message:'Assessment paper not found.' })
-    await recheckVerifiedSnapshot({snapshot:result.rows[0].document_json,storedHash:result.rows[0].content_hash,schoolId,req})
-    return res.json({ success:true, data:result.rows[0] })
+    const revision=result.rows[0]
+    if (!revision.document_json || !revision.content_hash)
+      return res.status(409).json({success:false,code:'ASSESSMENT_REVISION_NOT_AVAILABLE',
+        message:'The saved assessment has no complete editable revision. Historical metadata remains preserved.'})
+    if (hashDocument(revision.document_json) !== String(revision.content_hash))
+      return res.status(409).json({success:false,code:'ASSESSMENT_REVISION_HASH_MISMATCH',
+        message:'The saved assessment revision failed integrity verification. Editing is blocked.'})
+    await recheckVerifiedSnapshot({snapshot:revision.document_json,storedHash:revision.content_hash,schoolId,req})
+    return res.json({ success:true, data:revision })
   } catch (error) {
     return respondVerifiedReadFailure(res,error,'Assessment Studio read failed')
   }

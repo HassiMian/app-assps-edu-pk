@@ -14,10 +14,11 @@ export function cloudAssessmentRows(serverRows) {
     userAuthored:true,
     name:String(row.title || '').trim() || 'Untitled assessment',
     serverRevision:Number(row.current_revision || 0),
+    revisionAvailable:row.current_revision_available !== false,
     status:String(row.status || 'DRAFT'),
     createdAt:row.created_at || null,
     updatedAt:row.updated_at || null,
     persistenceAuthority:'SERVER_REVISION_SOURCE_OF_TRUTH',
-    persistenceMode:'SERVER_LISTED_NOT_YET_OPENED',
+    persistenceMode:row.current_revision_available === false ? 'SERVER_REVISION_MISSING' : 'SERVER_LISTED_NOT_YET_OPENED',
   }))
 }
