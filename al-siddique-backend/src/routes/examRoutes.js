@@ -249,6 +249,12 @@ router.post('/', protect, canManageExams, async (req, res) => {
       if(client)client.release()
     }
   } catch (err) {
+    if(err.code==='23505')
+      return res.status(409).json({success:false,code:'EXAM_ALREADY_EXISTS',
+        message:'This exam already exists for this class and session. Open it to enter marks.'})
+    if(err.code==='40001')
+      return res.status(409).json({success:false,code:'EXAM_CREATE_RETRY',
+        message:'Another save occurred at the same time. Please click Add Exam again.'})
     console.error('Exam create error:', err.message)
     res.status(500).json({ success: false, message: 'Failed to create exam.' })
   }

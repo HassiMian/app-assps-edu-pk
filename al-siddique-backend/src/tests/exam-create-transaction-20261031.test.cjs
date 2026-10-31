@@ -24,3 +24,8 @@ test('actor taken from authenticated context, not client body',()=>{
  assert.match(part,/EXAM_CREATOR_AUTH_REQUIRED/)
  assert.match(part,/actorId\]/)
 })
+
+test('retryable serialization is not falsely reported as existing assessment',()=>{
+ assert.match(part,/EXAM_CREATE_RETRY/)
+ assert.match(part,/err.code==='40001'/)
+})
