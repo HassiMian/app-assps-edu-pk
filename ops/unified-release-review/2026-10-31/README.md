@@ -58,3 +58,11 @@ Assessment 5 creation, staff assignments, historical grade corrections and
 lesson publications remain HOLD until real authorized sign-off.
 
 Synthetic test authorization is NOT production identity acceptance.
+
+## Saved Papers original-source recovery (review-only)
+
+A live Vault row lacks editable sections. The Saved Papers UI now has a
+read-only authenticated Download Original JSON action for each Vault record,
+including non-editable legacy shapes. This is NOT a reconstruction, approval,
+print certificate, or database write. The 3 synthetic extraction/denial/no-write
+checks pass; actual school Principal acceptance is still pending.

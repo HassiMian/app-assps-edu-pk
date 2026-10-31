@@ -1,13 +1,12 @@
 {
-  "createdAtUtc": "2026-10-31T18:33:04.696117+00:00",
-  "purpose": "Source and security QA review only, not automated deployment or approval",
+  "createdAtUtc": "2026-10-31T18:37:44.632197+00:00",
   "status": "HOLD",
-  "genuineAcademicApprovalsCreated": 0,
+  "purpose": "Review-only source handoff, not production release",
   "files": [
     {
       "file": "README.md",
-      "sha256": "1d58d1bb0f8339ab977605a2baa789039575ac8ddd57a63074120d0554115ea3",
-      "bytes": 3292
+      "sha256": "edf290395e7f4a149312af9301d6a7997bcf4590bc64bcd38fa88ce46de139cb",
+      "bytes": 3723
     },
     {
       "file": "backend/routes/schoolAcademicApprovalCore.js",
@@ -75,6 +74,11 @@
       "bytes": 1904
     },
     {
+      "file": "backend/tests/assps-vault-original-recovery-browser-contract-20261031.test.js",
+      "sha256": "80cf924eb469f1b3542e4e78ccbe6ce8666d43594210c1146a21ff124a597bf2",
+      "bytes": 2559
+    },
+    {
       "file": "backend/tests/assps-weekly-term-consolidation.test.js",
       "sha256": "ec24680b1d86b040df5a65e34ed9d70fe75b1d6208506780a7d1a2cc6c63177f",
       "bytes": 3141
@@ -96,7 +100,7 @@
     },
     {
       "file": "evidence/release-gate-snapshot.json",
-      "sha256": "7eafa33e083222c6b1f80dba5bb1e73cf9ad8324add4aae93c51c43da5c826ea",
+      "sha256": "04c64c68d5faad7bbc29479891f621f83d7d80b0fd094a6c3129e36d21dc5d9f",
       "bytes": 4333
     },
     {
@@ -113,6 +117,11 @@
       "file": "frontend/assets/ManageExams-ASSPS-ACADEMIC-REVIEW-EXPORT-v7-20261031.js",
       "sha256": "d1ce1365592546467dac464a32aa112e923327902a486707bf5839b056479405",
       "bytes": 18828
+    },
+    {
+      "file": "frontend/assets/SavedPapersTab-ASSPS-UNIFIED-RECOVERY-v5-20261031.js",
+      "sha256": "d5bee1ad089405b5aae3ab266e0cbc677f3dd6500b89925d2d7a7df10217773f",
+      "bytes": 19260
     }
   ]
 }
