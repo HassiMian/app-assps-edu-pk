@@ -219,11 +219,35 @@ router.post('/', protect, canManageExams, async (req, res) => {
     if (!schoolId) {
       return res.status(403).json({ success: false, code: 'SCHOOL_CONTEXT_REQUIRED', message: 'A school context is required to create an exam.' })
     }
-    const result = await query(`
-      INSERT INTO exams (school_id, name, type, class, session, start_date, end_date, total_marks, pass_marks, created_by)
-      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING *
-    `, [schoolId, examName, examType, examClass, examSession, start_date || null, end_date || null, totalMarks, passMarks, req.user?.id || null])
-    res.status(201).json({ success: true, data: result.rows[0] })
+    const actorId=Number(req.user?.id)
+    if(!Number.isSafeInteger(actorId)||actorId<1)
+      return res.status(403).json({success:false,code:'EXAM_CREATOR_AUTH_REQUIRED',
+        message:'Authenticated school staff account required to create an exam.'})
+    let client
+    try{
+      client=await pool.connect()
+      await client.query('BEGIN ISOLATION LEVEL SERIALIZABLE')
+      await applyTenantContext(client)
+      await client.query('SELECT pg_advisory_xact_lock($1::bigint)',[100000000+Number(schoolId)])
+      const exists=await client.query(
+        'SELECT id FROM exams WHERE school_id=$1 AND lower(trim(name))=lower(trim($2)) AND lower(trim(class))=lower(trim($3)) AND coalesce(session,\'\')=$4 LIMIT 1',
+        [schoolId,examName,examClass,examSession])
+      if(exists.rowCount){
+        await client.query('ROLLBACK')
+        return res.status(409).json({success:false,code:'EXAM_ALREADY_EXISTS',
+          message:'This exam already exists for this class and session. Open it to enter marks.'})
+      }
+      const result=await client.query(
+        'INSERT INTO exams(school_id,name,type,class,session,start_date,end_date,total_marks,pass_marks,created_by) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING *',
+        [schoolId,examName,examType,examClass,examSession,start_date||null,end_date||null,totalMarks,passMarks,actorId])
+      await client.query('COMMIT')
+      return res.status(201).json({success:true,data:result.rows[0]})
+    }catch(error){
+      if(client)await client.query('ROLLBACK').catch(()=>{})
+      throw error
+    }finally{
+      if(client)client.release()
+    }
   } catch (err) {
     console.error('Exam create error:', err.message)
     res.status(500).json({ success: false, message: 'Failed to create exam.' })

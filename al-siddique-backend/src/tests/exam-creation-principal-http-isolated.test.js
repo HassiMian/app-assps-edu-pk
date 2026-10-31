@@ -11,15 +11,23 @@ test('principal assessment creation accepts whole marks and rejects unsafe draft
   const actor = { id: 51, role: 'principal', school_id: 7 }
   const inserted = []
   const db = {
-    pool: { connect: async () => { throw new Error('must not connect for POST create') } },
-    query: async (sql, params) => {
-      if (String(sql).includes('INSERT INTO exams')) {
-        inserted.push(params)
-        return { rows: [{id: 202, school_id: 7, name: params[1], type: params[2], class: params[3], session: params[4], total_marks: params[7], pass_marks: params[8]}] }
-      }
-      return {rows: []}
-    },
-    applyTenantContext: async () => {},
+    pool:{connect:async()=>({
+      async query(sql,params){
+        const text=String(sql)
+        if(text.includes('SELECT id FROM exams WHERE school_id=')){
+          const match=inserted.some(p=>p[0]===params[0]&&p[1].toLowerCase()===params[1].toLowerCase()&&p[3].toLowerCase()===params[2].toLowerCase()&&p[4]===params[3])
+          return {rowCount:match?1:0,rows:match?[{id:202}]:[]}
+        }
+        if(text.includes('INSERT INTO exams')){
+          inserted.push(params)
+          return {rowCount:1,rows:[{id:202,school_id:7,name:params[1],type:params[2],class:params[3],session:params[4],total_marks:params[7],pass_marks:params[8]}]}
+        }
+        return {rowCount:0,rows:[]}
+      },
+      release(){}
+    })},
+    query:async()=>{throw new Error('creation must use transaction, not pool query')},
+    applyTenantContext:async()=>{},
   }
   const auth = {
     protect: (req,_res,next) => { req.user = actor; next() },
@@ -61,6 +69,10 @@ test('principal assessment creation accepts whole marks and rejects unsafe draft
   const saved = await create(draft)
   assert.equal(saved.status,201)
   assert.equal(saved.body.data.name,'Assessment 1')
+  assert.equal(inserted.length,1)
+  const same=await create(draft)
+  assert.equal(same.status,409)
+  assert.equal(same.body.code,'EXAM_ALREADY_EXISTS')
   assert.equal(inserted.length,1)
   assert.deepEqual(inserted[0].slice(1,5),['Assessment 1','AS','All Classes','2026-2027'])
   assert.equal(inserted[0][9],actor.id,'API client cannot impersonate the audit creator')
