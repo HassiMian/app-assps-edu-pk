@@ -1,0 +1,142 @@
+{
+  "mission": "ASSPS Integrated Four-Workstream Production Release Gate",
+  "checkedAtUtc": "2026-10-31T17:06:17.311933+00:00",
+  "decision": "HOLD",
+  "scope": {
+    "schoolId": 1,
+    "novemberVouchers": "EXCLUDED_UNMODIFIED",
+    "writes": "ZERO_DATABASE_MUTATIONS"
+  },
+  "metrics": {
+    "database": "apexos",
+    "students": 330,
+    "exam_results": 1854,
+    "genuine_zero": 213,
+    "marks_null": 0,
+    "marks_invalid": 0,
+    "marks_sha": "e1f389a2863752c838a51ddb3a9c4549",
+    "exams": 6,
+    "exam_subjects": 81,
+    "assignments": 54,
+    "exam_enrollments": 12,
+    "grade_bands": 6,
+    "assessment_papers": 4,
+    "assessment_revisions": 2,
+    "paper_vault": 12,
+    "lesson_plans": 4,
+    "saved_papers": 0
+  },
+  "coverage": {
+    "activeStudents": 329,
+    "unassignedStudents": 220,
+    "historicalSubjectAssignmentGaps": 45,
+    "unstaffedCohortSubjectRows": 40,
+    "staffedCohortLabelAlignmentRows": 5,
+    "assessment1to4Offerings": 0,
+    "approvedOfferings": 0,
+    "approvalEvents": 0,
+    "assessment5Count": 0,
+    "historicGradeDiscrepancies": 97,
+    "visiblePaperVaultPapers": 10,
+    "lessonSources": 59,
+    "lessonSourceBlocked": 59
+  },
+  "security": {
+    "localApiHealth": 200,
+    "httpsSchoolApp": 200,
+    "anonymousGradeReview": 401,
+    "anonymousSubjectGaps": 401,
+    "anonymousPaperLibrary": 401
+  },
+  "checks": [
+    {
+      "name": "Production baseline and original numeric zeros unchanged",
+      "pass": true
+    },
+    {
+      "name": "Production uptime/HTTPS endpoints respond",
+      "pass": true
+    },
+    {
+      "name": "No anonymous access to Principal reviews or library",
+      "pass": true
+    },
+    {
+      "name": "Independent Windows data/schema restore and cleanup receipt",
+      "pass": true
+    },
+    {
+      "name": "Saved Papers and assessment UI assets included in active index",
+      "pass": true
+    },
+    {
+      "name": "Signed school academic approval events verified",
+      "pass": false
+    },
+    {
+      "name": "Assessment 1–4 exact approved class/subject offerings",
+      "pass": false
+    },
+    {
+      "name": "Assessment 5 authenticated creation and catalog",
+      "pass": false
+    },
+    {
+      "name": "Full teacher coverage of active cohorts",
+      "pass": false
+    },
+    {
+      "name": "Historic result grade-label discrepancies reconciled",
+      "pass": false
+    },
+    {
+      "name": "Lesson Planning academic source review and signoff",
+      "pass": false
+    },
+    {
+      "name": "Biology publisher source immutable pin matches",
+      "pass": true
+    },
+    {
+      "name": "Synthetic PDF embeds Jameel Noori Nastaleeq",
+      "pass": true
+    },
+    {
+      "name": "Exact Times New Roman embedded for school printing",
+      "pass": false
+    },
+    {
+      "name": "Real authenticated Principal/Teacher Save/Edit/Print acceptance",
+      "pass": false
+    },
+    {
+      "name": "Reviewed canonical GitHub source synchronized and signed",
+      "pass": false
+    }
+  ],
+  "hashes": {
+    "academicReviewMatrixSha256": "df51e83d82d62f73cee798da33b1858df2af13b22e93a47b878a6fb148187489",
+    "independentWindowsRecoveryReceiptSha256": "89ed134c9a1c83b1cef1ab8e39ce24463f53f3d05e93cd848985f8056565a58f",
+    "lessonSourceSha256": "4d2ccdce5ec644750a530c890df5a0a41eaee5b76f1e4ba47d912617db5c0cda",
+    "biologyOriginalActualSha256": "8b94fbb99340ca5558c936e7cefe0e628bf083b174bacfc7c4a16d6d5b83f524",
+    "biologyPublicationPinnedSha256": "8b94fbb99340ca5558c936e7cefe0e628bf083b174bacfc7c4a16d6d5b83f524"
+  },
+  "printQA": {
+    "checkedAtUtc": "2026-10-31T16:06:30.930285+00:00",
+    "syntheticOnly": true,
+    "inputContainsStudentData": false,
+    "source": "/opt/assps-editor-worker/jameelPrintWorker.js",
+    "validPDFHeader": true,
+    "bytes": 24135,
+    "sha256": "493d164ab06d22f7f5c876d17d8944f751850c5ad50a0160aa10de22097be59f",
+    "actualJameelNooriNastaleeqEmbedded": true,
+    "actualTimesNewRomanEmbedded": false,
+    "englishSubstituteLiberationSerif": true,
+    "exactFontCertification": "HOLD_TIMES_NEW_ROMAN_NOT_EMBEDDED"
+  },
+  "limits": [
+    "Synthetic or unauthenticated HTTP 401 tests are not Principal/Teacher acceptance",
+    "No external subject or lesson evidence has been fabricated",
+    "Independent Windows restored data and schema, not original runtime role credentials"
+  ]
+}

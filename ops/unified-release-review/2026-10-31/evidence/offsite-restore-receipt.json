@@ -1,0 +1,15 @@
+﻿{
+    "checkedAtUtc":  "2026-10-31T17:50:46.4999026Z",
+    "scope":  "off-host independent Windows PostgreSQL 18 isolated restore",
+    "backupSha256":  "fa4b1f791e9ee870e1454a29a0a4d7c26714032dab9be24a9061347713d58c02",
+    "comparedMetrics":  16,
+    "metricMismatches":  0,
+    "examResults":  1854,
+    "genuineNumericZeros":  213,
+    "marksSha256EquivalentDigest":  "e1f389a2863752c838a51ddb3a9c4549",
+    "restoration":  "PASS",
+    "authorizationRestore":  "NOT_TESTED_NO_ROLE_CREDENTIALS",
+    "clientEncoding":  "UTF8",
+    "sourceDataCleaned":  true,
+    "temporaryDatabaseCleaned":  true
+}

@@ -1,0 +1,58 @@
+{
+  "createdAtUtc": "2026-10-31T17:52:45.058752+00:00",
+  "purpose": "Source preservation and human review only",
+  "productionReleaseStatus": "HOLD",
+  "sourceGitBase": "b47941ac7867af1b96664c53fd4428a59ccd5055",
+  "files": [
+    {
+      "file": "README.md",
+      "sha256": "cd9c16bd970d39e91295dd042135e2d58dc5919034764cc8af188a614c7d2aa6",
+      "bytes": 1435
+    },
+    {
+      "file": "backend/routes/schoolAcademicCatalogRoutes.js",
+      "sha256": "a9aea09b0f4dabd6966a32476a8bf73ce2a71fd2c524d37be46d0207ad217bca",
+      "bytes": 20549
+    },
+    {
+      "file": "backend/services/asspsWeeklyTermConsolidator.js",
+      "sha256": "5ee1c4a0f6fc32f61ac5a89b64c0c53509bd6a1debc83e4d04f4e00f8685cb90",
+      "bytes": 5857
+    },
+    {
+      "file": "backend/services/gradeDiscrepancyReview.js",
+      "sha256": "05182c0b9c3502451dddee86c46b0072d22c578e67d89cc0b3e8e1d5b93f9ee6",
+      "bytes": 2911
+    },
+    {
+      "file": "backend/tests/assps-readonly-academic-review-contract-20261031.test.js",
+      "sha256": "3c15a045eea586b8c236ef610a51ab73497654ec334ed16d3910c3d4cea847c0",
+      "bytes": 3526
+    },
+    {
+      "file": "backend/tests/assps-signed-academic-audit-boundary-20261031.test.js",
+      "sha256": "428204a414e7ea8972e18816f0316313bd460d430f6fd4573a718affd9df1416",
+      "bytes": 1498
+    },
+    {
+      "file": "backend/tests/assps-term-grade-scope-boundary-20261031.test.js",
+      "sha256": "0f71aad85ab5cff38ef321e91a9175603a2fdb90f76e67a864ecbed7f3548420",
+      "bytes": 1904
+    },
+    {
+      "file": "backend/tests/assps-weekly-term-consolidation.test.js",
+      "sha256": "ec24680b1d86b040df5a65e34ed9d70fe75b1d6208506780a7d1a2cc6c63177f",
+      "bytes": 3141
+    },
+    {
+      "file": "evidence/offsite-restore-receipt.json",
+      "sha256": "6e82c14a5cb8a08f6c3560dc900404487b387d79879dd630d22cc80a7383370a",
+      "bytes": 620
+    },
+    {
+      "file": "evidence/release-gate-snapshot.json",
+      "sha256": "a1f954e0c70b0d61bcef564af8731c7ac9e9e6069010383db01dc3c371ed3634",
+      "bytes": 4333
+    }
+  ]
+}
