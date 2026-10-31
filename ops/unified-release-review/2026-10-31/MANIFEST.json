@@ -1,12 +1,22 @@
 {
-  "createdAtUtc": "2026-10-31T18:37:44.632197+00:00",
-  "status": "HOLD",
-  "purpose": "Review-only source handoff, not production release",
+  "createdAtUtc": "2026-10-31T18:42:19.394119+00:00",
+  "purpose": "Production source review, zero-advisory dependency evidence, NO academic approval",
+  "releaseStatus": "HOLD",
   "files": [
     {
       "file": "README.md",
-      "sha256": "edf290395e7f4a149312af9301d6a7997bcf4590bc64bcd38fa88ce46de139cb",
-      "bytes": 3723
+      "sha256": "186a4c0fdfbd539830a73eca1ba6937a46822f7a7dd397c763fc001dcbdb19e2",
+      "bytes": 4186
+    },
+    {
+      "file": "backend/package-lock.json",
+      "sha256": "1792c3dba661623bb4b687ab02916b0a301466bfa29dbd862de6a7a4ad318f4c",
+      "bytes": 115621
+    },
+    {
+      "file": "backend/package.json",
+      "sha256": "63249319ad51694e5f1937489b4734b08a7196013346f61d99ca9607c6721796",
+      "bytes": 1576
     },
     {
       "file": "backend/routes/schoolAcademicApprovalCore.js",
@@ -89,14 +99,19 @@
       "bytes": 8469
     },
     {
+      "file": "evidence/dependency-zero-advisory-20261031.json",
+      "sha256": "b95a322c3944c4f735384efed6de69522484e52e4fb36c57bd0e1e56df3c9000",
+      "bytes": 519
+    },
+    {
       "file": "evidence/offsite-restore-receipt.json",
       "sha256": "6e82c14a5cb8a08f6c3560dc900404487b387d79879dd630d22cc80a7383370a",
       "bytes": 620
     },
     {
       "file": "evidence/package-lock.security-candidate.json",
-      "sha256": "c9d152d41ceca14bae40a0fd8aec791c8c5d09505dcec18beb2692d8204ec84a",
-      "bytes": 116803
+      "sha256": "1792c3dba661623bb4b687ab02916b0a301466bfa29dbd862de6a7a4ad318f4c",
+      "bytes": 115621
     },
     {
       "file": "evidence/release-gate-snapshot.json",

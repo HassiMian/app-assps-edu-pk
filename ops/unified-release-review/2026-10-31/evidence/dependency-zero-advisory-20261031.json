@@ -1,0 +1,21 @@
+{
+  "checkedAtUtc": "2026-10-31T18:42:19.393498+00:00",
+  "runtimeSecurity": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "qsVersion": "6.17.1",
+  "uuidDirectDependencyRemoved": true,
+  "selectedPostdeployTests": {
+    "batchA": 56,
+    "batchB": 44,
+    "failures": 0
+  },
+  "officialAcademicApprovalStatus": "HOLD",
+  "previousRuntimeRollbackPreserved": true,
+  "livePackageLockSHA256": "1792c3dba661623bb4b687ab02916b0a301466bfa29dbd862de6a7a4ad318f4c"
+}

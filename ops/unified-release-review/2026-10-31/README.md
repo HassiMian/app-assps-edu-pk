@@ -66,3 +66,12 @@ read-only authenticated Download Original JSON action for each Vault record,
 including non-editable legacy shapes. This is NOT a reconstruction, approval,
 print certificate, or database write. The 3 synthetic extraction/denial/no-write
 checks pass; actual school Principal acceptance is still pending.
+
+## Production dependency security update
+
+After isolated npm-ci validation and regression, the live backend now
+uses patched qs 6.17.1 and removes the unused uuid 10 direct package.
+The live production-only npm audit reports zero vulnerabilities; all
+100 selected safe postdeployment regression tests pass. Previous live
+node_modules and package manifests are preserved as a recovery checkpoint.
+This does NOT change the separate academic release HOLD decision.
