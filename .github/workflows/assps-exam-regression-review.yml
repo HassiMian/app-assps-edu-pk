@@ -62,6 +62,9 @@ jobs:
       - name: Assessment creation, saved class subjects and warning regression
         working-directory: al-siddique-frontend
         run: node --test src/Modules/examination/assessment-all-classes-20261031.test.mjs src/Modules/examination/assessmentSubjectAvailability.test.mjs src/Modules/examination/examCreationModel.test.mjs src/Modules/examination/tests/ExamModalReviewBrowser.test.mjs
+      - name: Principal Add Exam and Assessment Marks subject browser tests
+        working-directory: al-siddique-frontend
+        run: node --test src/Modules/examination/tests/ManageExamsBrowser.test.mjs src/Modules/examination/tests/MarksAssessmentSubjectBrowser.test.mjs
       - name: Marks Register browser zero-absent-print and denied exam switch
         working-directory: al-siddique-frontend
         run: node --test src/Modules/examination/tests/MarksRegisterBrowser.test.js
