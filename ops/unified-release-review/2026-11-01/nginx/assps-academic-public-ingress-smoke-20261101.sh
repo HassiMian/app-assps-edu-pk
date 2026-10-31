@@ -15,6 +15,10 @@ check GET '/api/academic-approvals/assessment-catalog/historical-subject-gaps?so
 check GET /api/academic-approvals/grade-discrepancies 401
 check GET /api/academic-approvals/lesson-source-review 401
 check GET /api/academic-approvals/academic-writer-preflight 401
+check GET /api/academic-approvals/assessment-catalog/14/offerings 401
+check GET /api/academic-approvals/assessment-catalog/19/offerings 401
+check GET /api/academic-approvals/assessment-catalog/999/offerings 401
+check POST /api/academic-approvals/assessment-catalog/14/offerings 403
 check GET /api/academic-approvals/assessment-catalog/14/preview 401
 check GET /api/academic-approvals/assessment-catalog/18/preview 401
 check GET /api/academic-approvals/assessment-catalog/19/preview 401

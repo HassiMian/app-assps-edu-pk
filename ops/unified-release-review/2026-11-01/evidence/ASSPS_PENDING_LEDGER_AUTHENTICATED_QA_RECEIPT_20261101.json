@@ -1,0 +1,15 @@
+{
+  "testedAtUtc": "2026-10-31T19:30:05.478402+00:00",
+  "environment": "DISPOSABLE_CLONE_ONLY",
+  "authentication": "QA SYNTHETIC SIGNED JWT; no real school Principal login",
+  "principalStatus": 200,
+  "anonymousStatus": 401,
+  "teacherStatus": 403,
+  "parentStatus": 403,
+  "missingExamStatus": 404,
+  "verifiedPendingSubjectCount": 1,
+  "productionDataMutations": 0,
+  "qaAcademicApprovalAuditEvents": 0,
+  "qaDatabaseCleanup": "PASS - DATABASE DROPPED",
+  "scopeLimit": "NO authority to certify real Principal acceptance"
+}

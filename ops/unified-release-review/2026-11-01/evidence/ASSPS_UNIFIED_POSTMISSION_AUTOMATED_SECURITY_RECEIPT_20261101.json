@@ -1,0 +1,190 @@
+{
+  "checkedAtUtc": "2026-10-31T19:35:48.434460+00:00",
+  "release": "OPERATIONAL_CERTIFICATION_HOLD",
+  "sourceBranchCommit": "9350b012d7a0c3e6867c0c771abc85bb47d616c5",
+  "firstTermIntegrityPass": true,
+  "school": {
+    "activeStudents": 329,
+    "academicApprovalEvents": 0,
+    "stageOfferingsAssessments1to4": 0,
+    "assessment5Records": 0,
+    "historicalResultCount": 1854,
+    "genuineZeroMarks": 213,
+    "historicalMarksMd5": "e1f389a2863752c838a51ddb3a9c4549",
+    "teacherCoverageMissingStudents": 220,
+    "historicalGradeLabelDiscrepancies": 97,
+    "historicSubjectRowsRequiringReview": 45
+  },
+  "databaseRlsForcedCatalogCount": 86,
+  "databaseRlsRuntimeRolesHaveNoBypass": true,
+  "nginxSyntaxPass": true,
+  "publicWebsiteHTTP_TLS": "200:0",
+  "services": {
+    "apex-connect": {
+      "online": true
+    },
+    "apex-backend": {
+      "online": true
+    },
+    "assps-marks-green": {
+      "online": true
+    },
+    "assps-admin-green-5094": {
+      "online": true
+    }
+  },
+  "anonymousProtectedRoutes": [
+    {
+      "method": "GET",
+      "path": "/api/academic-approvals/assessment-catalog/readiness",
+      "status": 401,
+      "expected": 401,
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/academic-approvals/assessment-catalog/14/preview",
+      "status": 401,
+      "expected": 401,
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/academic-approvals/assessment-catalog/19/preview",
+      "status": 401,
+      "expected": 401,
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/academic-approvals/assessment-catalog/14/offerings",
+      "status": 401,
+      "expected": 401,
+      "pass": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/academic-approvals/assessment-catalog/14/offerings",
+      "status": 403,
+      "expected": 403,
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/academic-approvals/assessment-catalog/999/offerings",
+      "status": 401,
+      "expected": 401,
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/academic-approvals/assessment-catalog/historical-subject-gaps?sourceExamId=9",
+      "status": 401,
+      "expected": 401,
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/academic-approvals/grade-discrepancies",
+      "status": 401,
+      "expected": 401,
+      "pass": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/academic-approvals/assessment-catalog/14/stage",
+      "status": 401,
+      "expected": 401,
+      "pass": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/academic-approvals/exam-subjects/1/approve",
+      "status": 401,
+      "expected": 401,
+      "pass": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/academic-approvals/teacher-assignments",
+      "status": 401,
+      "expected": 401,
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/academic-approvals/secret",
+      "status": 403,
+      "expected": 403,
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/academic-approvals/assessment-catalog/14/stage",
+      "status": 403,
+      "expected": 403,
+      "pass": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/academic-approvals/assessment-catalog/14/offerings",
+      "status": 403,
+      "expected": 403,
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/portal/paper-studio/library",
+      "status": 401,
+      "expected": 401,
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/lesson-plans/planner/context",
+      "status": 401,
+      "expected": 401,
+      "pass": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/exams/next-assessment",
+      "status": 401,
+      "expected": 401,
+      "pass": true
+    }
+  ],
+  "anonymousProtectedRoutesPass": true,
+  "coreRegression": {
+    "tests": 84,
+    "pass": 84,
+    "fail": 0
+  },
+  "signedStagingRegression": {
+    "tests": 6,
+    "pass": 6,
+    "fail": 0
+  },
+  "npmProductionAdvisories": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "activeManageExamsAsset": "/assets/ManageExams-ASSPS-SINGLE-SUBJECT-APPROVAL-v10-20261101.js",
+  "activeSavedPapersAsset": "/assets/SavedPapersTab-ASSPS-UNIFIED-RECOVERY-v5-20261031.js",
+  "factsNotCertified": [
+    "Principal real source SHA/authority",
+    "individual genuine teacher agreements",
+    "historical grade revisions",
+    "original Lesson Planning pages",
+    "exact Times New Roman PDF font",
+    "signed production Principal/Teacher acceptance",
+    "canonical production main-branch release"
+  ],
+  "negativeFactsAreNeverAutoApproved": true,
+  "novemberVouchers": "EXCLUDED_UNCHANGED",
+  "overallSafe": true
+}
