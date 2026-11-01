@@ -16,7 +16,23 @@
    'portal_role',
    'portal_permissions',
    'portal_active',
-@@ -239,7 +239,7 @@
+@@ -220,6 +220,15 @@
+   }
+ })
+ 
++function rejectLegacyPortalPasswordWrite(req, res) {
++  // Never accept a new clear-text credential in the employee directory.
++  // Use the separate authenticated portal account reset/provision workflow.
++  if (!Object.prototype.hasOwnProperty.call(req.body || {}, 'portal_password')) return false
++  res.status(422).json({success:false,code:'LEGACY_PORTAL_PASSWORD_FIELD_FORBIDDEN',
++    message:'Set staff passwords through the authorized portal account reset workflow.'})
++  return true
++}
++
+ // GET /api/employees â€” list with search/filter
+ router.get('/', protect, canReadStaff, async (req, res) => {
+   try {
+@@ -239,7 +248,7 @@
      sql += ' ORDER BY name'
  
      const result = await query(sql, params)
@@ -25,7 +41,7 @@
    } catch (err) {
      console.error('Employee list error:', err.message)
      return res.status(503).json({ success: false, message: 'Employee directory is temporarily unavailable.' })
-@@ -294,7 +294,7 @@
+@@ -294,7 +303,7 @@
      const result = await query(sql, params)
      if (result.rows.length === 0)
        return res.status(404).json({ success: false, message: 'Employee nahi mila' })
@@ -34,7 +50,15 @@
    } catch (err) {
      console.error('Employee detail error:', err.message)
      return res.status(503).json({ success: false, message: 'Employee record is temporarily unavailable.' })
-@@ -347,7 +347,7 @@
+@@ -303,6 +312,7 @@
+ 
+ // POST /api/employees â€” add employee
+ router.post('/', protect, canManageStaff, async (req, res) => {
++  if (rejectLegacyPortalPasswordWrite(req,res)) return
+   try {
+     const {
+       emp_id, name, designation, department, phone, email, salary, join_date
+@@ -347,7 +357,7 @@
        RETURNING *
      `, values)
  
@@ -43,7 +67,15 @@
    } catch (err) {
      if (err.code === '23505')
        return res.status(400).json({ success: false, message: 'EMP ID already exists' })
-@@ -577,7 +577,7 @@
+@@ -526,6 +536,7 @@
+ 
+ // PUT /api/employees/:id â€” update
+ router.put('/:id', protect, canManageStaff, async (req, res) => {
++  if (rejectLegacyPortalPasswordWrite(req,res)) return
+   try {
+     const {
+       name, designation, department, phone, email, salary, join_date, is_active
+@@ -577,7 +588,7 @@
        await query('UPDATE users SET is_active = $1, updated_at = NOW() WHERE id = $2 AND school_id = $3', userParams)
      }
  

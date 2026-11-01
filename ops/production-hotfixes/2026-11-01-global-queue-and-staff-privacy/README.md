@@ -21,3 +21,5 @@ Patches were tested against exact active source before each change and reproduce
 Restricted rollback copies are in /root/secure-archive/assps-security-mission-20261101/ with *.before.js names. No private staff values included.
 
 Academic release remains HOLD (7 of 16 gates passed). No student results, fees, vouchers or signed approvals were modified.
+
+Final staff API hardening addition: employee POST/PUT now actively rejects portal_password input with HTTP422 LEGACY_PORTAL_PASSWORD_FIELD_FORBIDDEN; no silent acceptance or credential write. The updated employeeRoutes.patch was replayed byte-identically against the exact pre-fix active runtime. Synthetic employee HTTP boundary now passes 5/5 tests, core academic regressions 69/69. Existing legacy values at rest are STILL pending separately controlled cleanup, not claimed removed.
