@@ -1,0 +1,25 @@
+--- a/src/routes/paperRoute.js
++++ b/src/routes/paperRoute.js
+@@ -9,6 +9,7 @@
+ const { protect, requireRoles, requireFeature: maybeRequireFeature } = require('../middleware/auth')
+ const { pool } = require('../config/database')
+ const { currentSchoolId, tenantClause } = require('../middleware/tenant')
++const {canManageGlobalAiQueue} = require('../services/ai/globalAiQueueAuthority')
+ const { teacherCanAccessClass, ensureTeacherAssignmentSchema } = require('../services/teacherAssignmentService')
+ const {
+   getAiEnvConfig,
+@@ -216,9 +217,11 @@
+ }
+ 
+ function requireQueueAdmin(req, res) {
+-  const allowed = ['super_admin', 'admin', 'principal']
+-  if (allowed.includes(req.user?.role)) return true
+-  res.status(403).json({ success: false, message: 'Queue administration is limited to admins and principals.' })
++  // The queue is global, not partitioned by school. School Principals can manage
++  // only their own jobs; they cannot pause/resume the whole platform.
++  if (canManageGlobalAiQueue(req.user)) return true
++  res.status(403).json({ success: false, code: 'GLOBAL_QUEUE_SUPER_ADMIN_ONLY',
++    message: 'Global AI queue controls require a platform super admin.' })
+   return false
+ }
+ 

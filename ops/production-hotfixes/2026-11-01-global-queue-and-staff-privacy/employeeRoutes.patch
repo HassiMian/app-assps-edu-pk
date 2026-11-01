@@ -1,0 +1,54 @@
+--- a/src/routes/employeeRoutes.js
++++ b/src/routes/employeeRoutes.js
+@@ -8,6 +8,7 @@
+ const { protect, requireRoles, adminOrServiceScope } = require('../middleware/auth')
+ const { tenantClause, currentSchoolId, currentTenantId, hasColumn } = require('../middleware/tenant')
+ const { provisionPortalUser, resetPortalUserPassword, setPortalUserActive } = require('../services/portalAccountService')
++const {employeePublicRecord} = require('../services/staffSecurityProjection')
+ 
+ const canManageStaff = requireRoles('super_admin', 'admin', 'principal')
+ const canReadStaff = adminOrServiceScope('school.staff.read')
+@@ -95,7 +96,6 @@
+   'branch_name',
+   'app_access',
+   'portal_username',
+-  'portal_password',
+   'portal_role',
+   'portal_permissions',
+   'portal_active',
+@@ -239,7 +239,7 @@
+     sql += ' ORDER BY name'
+ 
+     const result = await query(sql, params)
+-    res.json({ success: true, count: result.rowCount, data: result.rows })
++    res.json({ success: true, count: result.rowCount, data: result.rows.map(employeePublicRecord) })
+   } catch (err) {
+     console.error('Employee list error:', err.message)
+     return res.status(503).json({ success: false, message: 'Employee directory is temporarily unavailable.' })
+@@ -294,7 +294,7 @@
+     const result = await query(sql, params)
+     if (result.rows.length === 0)
+       return res.status(404).json({ success: false, message: 'Employee nahi mila' })
+-    res.json({ success: true, data: result.rows[0] })
++    res.json({ success: true, data: employeePublicRecord(result.rows[0]) })
+   } catch (err) {
+     console.error('Employee detail error:', err.message)
+     return res.status(503).json({ success: false, message: 'Employee record is temporarily unavailable.' })
+@@ -347,7 +347,7 @@
+       RETURNING *
+     `, values)
+ 
+-    res.status(201).json({ success: true, message: 'Employee add ho gaya', data: result.rows[0] })
++    res.status(201).json({ success: true, message: 'Employee add ho gaya', data: employeePublicRecord(result.rows[0]) })
+   } catch (err) {
+     if (err.code === '23505')
+       return res.status(400).json({ success: false, message: 'EMP ID already exists' })
+@@ -577,7 +577,7 @@
+       await query('UPDATE users SET is_active = $1, updated_at = NOW() WHERE id = $2 AND school_id = $3', userParams)
+     }
+ 
+-    res.json({ success: true, message: 'Employee update ho gaya', data: updated })
++    res.json({ success: true, message: 'Employee update ho gaya', data: employeePublicRecord(updated) })
+   } catch (err) {
+     console.error('Employee update error:', err.message)
+     res.status(500).json({ success: false, message: 'Employee could not be updated.' })

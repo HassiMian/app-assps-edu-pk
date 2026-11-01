@@ -1,0 +1,49 @@
+--- a/src/routes/opsRoutes.js
++++ b/src/routes/opsRoutes.js
+@@ -101,20 +101,22 @@
+       query(`SELECT COUNT(*)::int AS count FROM attendance${schoolFilter}`, schoolParams),
+       query(`SELECT COUNT(*)::int AS count FROM notices${schoolFilter}`, schoolParams).catch((err) => { console.error('Diagnostics notices query failed:', err.message); return null }),
+       query(`SELECT COUNT(*)::int AS count FROM admissions${schoolFilter}`, schoolParams).catch((err) => { console.error('Diagnostics admissions query failed:', err.message); return null }),
+-      query(`SELECT COUNT(*)::int AS count FROM ai_queue_events WHERE created_at >= NOW() - INTERVAL '30 minutes'`).catch((err) => { console.error('Diagnostics AI activity query failed:', err.message); return null }),
+-      query(`
++      isSuperAdmin ? query(`SELECT COUNT(*)::int AS count FROM ai_queue_events WHERE created_at >= NOW() - INTERVAL '30 minutes'`).catch((err) => { console.error('Diagnostics AI activity query failed:', err.message); return null }) : Promise.resolve(null),
++      (isSuperAdmin ? query(`
+         SELECT
+           COUNT(*) FILTER (WHERE event_type = 'job_completed')::int AS completed,
+           COUNT(*) FILTER (WHERE event_type = 'job_failed')::int AS failed,
+           COUNT(*) FILTER (WHERE event_type = 'job_cancelled')::int AS cancelled
+         FROM ai_queue_events
+         WHERE created_at >= NOW() - INTERVAL '24 hours'
+-      `).catch((err) => { console.error('Diagnostics AI outcomes query failed:', err.message); return null }),
++      `).catch((err) => { console.error('Diagnostics AI outcomes query failed:', err.message); return null }) : Promise.resolve(null)),
+     ])
+ 
+     const ai = getAiEnvConfig()
+-    const queue = getQueueStats()
+-    const queueEvents = await listQueueEvents(1)
++    // The queue storage has NO school_id/tenant_id. Do not expose global event
++    // messages, queue state or aggregate counts to school Principal/Admin.
++    const queue = isSuperAdmin ? getQueueStats() : null
++    const queueEvents = isSuperAdmin ? await listQueueEvents(1) : []
+     const latestQueueEvent = queueEvents[0] || null
+     const latestQueueEventAgeMinutes = latestQueueEvent?.createdAt ? Math.max(0, Math.round((Date.now() - new Date(latestQueueEvent.createdAt).getTime()) / 60000)) : null
+     const outcomeMetrics = queueOutcomeR ? {
+@@ -126,8 +128,8 @@
+     const unavailableSources = []
+     if (!noticesR) unavailableSources.push('notices')
+     if (!admissionsR) unavailableSources.push('admissions')
+-    if (!queueActivityR) unavailableSources.push('ai_queue_activity')
+-    if (!queueOutcomeR) unavailableSources.push('ai_queue_outcomes')
++    if (isSuperAdmin && !queueActivityR) unavailableSources.push('ai_queue_activity')
++    if (isSuperAdmin && !queueOutcomeR) unavailableSources.push('ai_queue_outcomes')
+     if (unavailableSources.length) {
+       health.warnings.push(`Diagnostics source unavailable: ${unavailableSources.join(', ')}.`)
+       if (health.status === 'healthy') health.status = 'warning'
+@@ -163,6 +165,7 @@
+         admissions: admissionsR ? Number(admissionsR.rows[0]?.count || 0) : null,
+       },
+       ai: {
++        queueScope: isSuperAdmin ? 'global' : 'withheld_global_queue_not_school_scoped',
+         configured: Boolean(ai.apiKey),
+         models: {
+           primary: ai.primaryModel,
