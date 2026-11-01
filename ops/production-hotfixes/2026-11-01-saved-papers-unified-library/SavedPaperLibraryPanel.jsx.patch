@@ -1,0 +1,17 @@
+--- a/src/components/PaperGeneratorSaaS/SavedPaperLibraryPanel.jsx
++++ b/src/components/PaperGeneratorSaaS/SavedPaperLibraryPanel.jsx
+@@ -1,5 +1,6 @@
+ import { useEffect, useMemo, useState } from 'react'
+ import { usePaperStore } from './usePaperStore'
++import UnifiedSavedAssessmentSection from './UnifiedSavedAssessmentSection'
+ import {
+   filterSavedPapers,
+ } from './savedPaperUtils'
+@@ -241,6 +242,7 @@
+           })}
+         </div>
+       )}
++      {sourceFilter === 'all' && <UnifiedSavedAssessmentSection ready={savedPapersStatus === 'ready'} />}
+     </div>
+   )
+ }
