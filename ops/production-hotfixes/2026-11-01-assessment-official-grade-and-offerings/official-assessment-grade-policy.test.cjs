@@ -44,3 +44,8 @@ test('historical non-assessment exams preserve assigned subjects',()=>{
  assert.deepEqual(approvedAssessmentSubjects({type:'FT'},'One','Yellow',assigned),assigned)
  assert.deepEqual(approvedAssessmentSubjects(null,'One','Yellow',assigned),assigned)
 })
+test('unsectioned academic offering must not impersonate a signed section approval',()=>{
+  const emptySection={type:'AS',subject_offerings:[{class_name:'One',section:'',subject:'Math'}]}
+  assert.deepEqual(approvedAssessmentSubjects(emptySection,'One','Yellow',assigned),[])
+  assert.deepEqual(approvedAssessmentSubjects(emptySection,'One','',assigned),['Math'])
+})

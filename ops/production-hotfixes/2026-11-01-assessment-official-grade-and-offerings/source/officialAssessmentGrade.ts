@@ -50,8 +50,8 @@ export function approvedAssessmentSubjects(
   // If no verified offering exists, the picker must be empty, not teacher default.
   const allowed = (Array.isArray(exam.subject_offerings) ? exam.subject_offerings : [])
     .filter(o => canonicalClass(o.class_name || '') === canonicalClass(className))
-    .filter(o => !String(o.section || '').trim() ||
-      String(o.section).trim().toLowerCase() === String(section || '').trim().toLowerCase())
+    .filter(o => String(o.section || '').trim().toLowerCase() ===
+      String(section || '').trim().toLowerCase())
     .map(o => String(o.subject || '').trim().toLowerCase())
   const unique = new Set(allowed)
   return assigned.filter(x => unique.has(x.toLowerCase()))
