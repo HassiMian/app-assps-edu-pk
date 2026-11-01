@@ -1,0 +1,11 @@
+--- a/src/app/apex/page.tsx
++++ b/src/app/apex/page.tsx
+@@ -2,7 +2,7 @@
+ import ApexJsonLd from "./ApexJsonLd";
+ import ApexAnalytics from "./ApexAnalytics";
+ import { apexGatewayMetadata } from "./apexSeo";
+-import "./apex.module.css";
++import "./apex.global.css";
+ 
+ export const metadata = apexGatewayMetadata;
+ 

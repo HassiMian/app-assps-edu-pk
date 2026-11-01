@@ -1,0 +1,2772 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;800&display=swap');
+
+:root {
+  --apex-void: #020510;
+  --apex-navy: #020510;
+  --apex-navy-2: #030712;
+  --apex-navy-elevated: #040811;
+  --apex-blue: #0c1528;
+  --apex-gold: #c9a84c;
+  --apex-cyan: #22d3ee;
+  --apex-cream: #f4efe4;
+  --apex-white: #ffffff;
+  --apex-muted: #94a3b8;
+  --apex-line: rgba(255, 255, 255, 0.08);
+  --apex-glass-bg: rgba(255, 255, 255, 0.05);
+  --apex-glass-border: rgba(255, 255, 255, 0.1);
+  --mono-font: 'JetBrains Mono', monospace;
+}
+
+.apex-page,
+.apex-page * {
+  box-sizing: border-box;
+}
+
+.apex-portal-page {
+  background: var(--apex-void);
+  color: var(--apex-white);
+  min-height: 100dvh;
+}
+
+.apex-page {
+  background: transparent;
+  color: var(--apex-white);
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.apex-page img,
+.apex-page svg,
+.apex-page canvas,
+.apex-page video {
+  max-width: 100%;
+}
+
+.apex-page section,
+.apex-page article,
+.apex-page div {
+  min-width: 0;
+}
+
+/* Background canvas particles */
+.apex-particles-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Header Navigation (300% Brand Visibility Lockup) */
+.apex-nav {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 52px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(20px) saturate(110%);
+  border-bottom: 1px solid var(--apex-line);
+}
+
+.apex-brand {
+  text-decoration: none;
+  display: block;
+}
+
+.header-brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.apex-nav-logo {
+  height: 56px !important;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 0 12px rgba(201, 168, 76, 0.2));
+}
+
+.header-brand-labels {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  border-left: 1px solid rgba(255,255,255,0.15);
+  padding-left: 18px;
+}
+
+.h-title {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  line-height: 1;
+  color: var(--apex-white);
+}
+
+.h-sub {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--apex-gold);
+  margin-top: 3px;
+}
+
+.h-tagline {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 2px;
+  text-transform: uppercase;
+}
+
+.apex-nav-links {
+  display: flex;
+  gap: 32px;
+}
+
+.apex-nav-links a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.apex-nav-links a:hover {
+  color: var(--apex-gold);
+}
+
+/* Cinematic Hero Intro */
+.apex-hero-cinematic {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chaos-container {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.chaos-item {
+  position: absolute;
+  padding: 14px 24px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: var(--apex-cream);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  box-shadow: 
+    0 12px 36px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  text-transform: uppercase;
+}
+
+.chaos-item.type-records { border-color: rgba(201, 168, 76, 0.4); color: var(--apex-gold); }
+.chaos-item.type-exams { border-color: rgba(201, 168, 76, 0.4); color: var(--apex-gold); }
+.chaos-item.type-forge { border-color: rgba(201, 168, 76, 0.5); background: rgba(201, 168, 76, 0.06); color: var(--apex-gold); }
+
+/* Overlays */
+.chaos-text-overlay,
+.disconnected-text-overlay {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 40px;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.chaos-text-overlay h1,
+.disconnected-text-overlay h2 {
+  font-size: clamp(32px, 5.5vw, 68px);
+  line-height: 1.1;
+  font-weight: 800;
+  max-width: 980px;
+  margin: 0;
+}
+
+/* Scene 3 central emerge logo */
+.apex-logo-emerge {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  scale: 0.75;
+}
+
+.emerge-brand-svg {
+  width: min(520px, 80vw);
+  height: auto;
+  display: block;
+  margin-bottom: 48px;
+  filter: drop-shadow(0 0 80px rgba(201, 168, 76, 0.28));
+}
+
+.apex-hero-final-actions {
+  display: flex;
+  gap: 20px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Premium Buttons */
+.apex-btn {
+  padding: 16px 32px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  text-align: center;
+}
+
+.apex-btn.primary {
+  background: linear-gradient(135deg, #dfc067 0%, #c9a84c 100%);
+  color: #040b14;
+  box-shadow: 0 8px 30px rgba(201, 168, 76, 0.35);
+}
+
+.apex-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(201, 168, 76, 0.5);
+}
+
+.apex-btn.ghost {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: var(--apex-white);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(8px);
+}
+
+.apex-btn.ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Premium Product Split Sections (45/55 layout) */
+.apex-story {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 140px 6%;
+  gap: 60px;
+  border-bottom: 1px solid var(--apex-line);
+  overflow: hidden;
+}
+
+.apex-story.layout-reverse {
+  flex-direction: row-reverse;
+}
+
+.story-panel {
+  width: 45%;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 5;
+  text-align: left;
+}
+
+.apex-kicker {
+  color: var(--apex-muted);
+  font-family: var(--mono-font);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: block;
+  border-left: 1px solid var(--apex-gold);
+  padding-left: 12px;
+}
+
+.story-panel h2 {
+  font-size: clamp(36px, 4vw, 56px);
+  line-height: 1.1;
+  font-weight: 800;
+  margin: 0 0 24px;
+}
+
+.story-panel .lead-p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 18px;
+  line-height: 1.65;
+  max-width: 600px;
+  margin: 0 0 36px;
+}
+
+/* Feature Grid for split layout */
+.feature-grid {
+  border-top: 1px solid var(--apex-line);
+  padding-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.feature-grid .module-group h4 {
+  color: var(--apex-gold);
+  font-size: 13px;
+  font-weight: 800;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.feature-grid .module-group p {
+  color: var(--apex-muted);
+  font-size: 14.5px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Primary Visual container (55% width) */
+.visual-block {
+  width: 55%;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+}
+
+/* Animated Aurora Glow behind visual blocks */
+@keyframes auroraSpin {
+  0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+  50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.15); }
+  100% { transform: translate(-50%, -50%) rotate(360deg) scale(1); }
+}
+
+.visual-glow-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 130%;
+  height: 130%;
+  background: 
+    radial-gradient(ellipse at 30% 30%, rgba(201, 168, 76, 0.14) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 70%, rgba(31, 88, 148, 0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 80%, rgba(13, 33, 56, 0.4) 0%, transparent 70%);
+  filter: blur(60px);
+  z-index: 0;
+  pointer-events: none;
+  animation: auroraSpin 25s linear infinite;
+  opacity: 0.9;
+}
+
+/* Ultra-Premium Borderless Bento Glass */
+.premium-mock-window {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 20px;
+  background: rgba(9, 9, 11, 0.6);
+  backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 
+    0 40px 100px rgba(0, 0, 0, 0.9), 
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 10;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s ease;
+}
+.premium-mock-window:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-4px);
+}
+
+.window-header {
+  height: 42px;
+  background: rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.traffic-lights {
+  display: flex;
+  gap: 7px;
+}
+
+.tl {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+
+.tl.close { background: #ff5f56; }
+.tl.minimize { background: #ffbd2e; }
+.tl.maximize { background: #27c93f; }
+
+.window-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.03em;
+}
+
+.window-actions {
+  display: flex;
+  gap: 14px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.window-body {
+  flex: 1;
+  position: relative;
+  background: #000000;
+  overflow: hidden;
+}
+
+/* Screenshot Zoom wrapper (Cinematic motion Pan & Zoom Fallback) */
+.motion-scene-engine {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.screenshot-zoom-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  transform-origin: center center;
+}
+
+.screenshot-base-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.screenshot-glare {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 50%, transparent 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Layered Glass information panels overlaying screenshots */
+.floating-glass-panel {
+  position: absolute;
+  z-index: 4;
+  background: rgba(9, 9, 11, 0.85);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  padding: 16px 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 290px;
+  transition: all 0.3s ease;
+}
+.floating-glass-panel:hover {
+  border-color: rgba(201, 168, 76, 0.4);
+}
+
+.floating-glass-panel.panel-records {
+  left: 28px;
+  bottom: 28px;
+}
+
+.floating-glass-panel.panel-exams {
+  right: 28px;
+  bottom: 28px;
+}
+
+.floating-glass-panel.panel-fees {
+  left: 28px;
+  top: 28px;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.floating-glass-panel.panel-mobile {
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 250px;
+}
+
+.floating-glass-panel.panel-command {
+  right: 28px;
+  top: 28px;
+}
+
+.glow-icon {
+  color: var(--apex-gold);
+  filter: drop-shadow(0 0 8px rgba(201, 168, 76, 0.6));
+  flex-shrink: 0;
+}
+
+.panel-desc h5 {
+  color: white;
+  font-size: 12.5px;
+  font-weight: 700;
+  margin: 0 0 3px;
+  letter-spacing: 0.02em;
+}
+
+.panel-desc p {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 11px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Mapped SVG connection streams */
+.svg-data-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+}
+
+@keyframes strokeFlow {
+  to { stroke-dashoffset: -100; }
+}
+
+.flow-dash-path-1, .challan-path-1 {
+  animation: strokeFlow 8s linear infinite;
+}
+
+.flow-dash-path-2, .challan-path-2 {
+  stroke-dasharray: 6,4;
+  animation: strokeFlow 12s linear infinite;
+}
+
+/* ========================================================
+   FEES & FINANCE 8-STEP CHALLAN REVEAL TIMELINE
+   ======================================================== */
+
+.challan-revealer-section {
+  max-width: 680px;
+  min-height: 480px;
+  margin: 20px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.premium-challan-wrapper {
+  width: 100%;
+  position: relative;
+  z-index: 10;
+}
+
+.ledger-flow-lines {
+  position: absolute;
+  z-index: 1;
+  inset: -60px;
+  width: calc(100% + 120px);
+  height: calc(100% + 120px);
+  opacity: 0;
+}
+
+/* Timeline glowing label cards */
+.challan-timeline-label {
+  position: absolute;
+  z-index: 30;
+  background: rgba(13, 33, 56, 0.94);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(201, 168, 76, 0.42);
+  box-shadow: 
+    0 24px 60px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 0 20px rgba(201, 168, 76, 0.1);
+  padding: 14px 22px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 13.5px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+}
+
+.challan-timeline-label.paid {
+  background: rgba(39, 201, 63, 0.15);
+  border: 2px solid rgba(39, 201, 63, 0.5);
+  color: #27c93f;
+  box-shadow: 0 0 30px rgba(39, 201, 63, 0.15);
+}
+
+.label-monthly-fee {
+  left: -90px;
+  top: 50px;
+}
+
+.label-arrears {
+  right: -90px;
+  top: 130px;
+}
+
+.label-paid-badge {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  padding: 12px 28px;
+  letter-spacing: 0.1em;
+}
+
+.label-balance {
+  left: -40px;
+  bottom: 50px;
+}
+
+/* ========================================================
+   APEX CONNECT PHONE SIDEBAR SEQUENCE
+   ======================================================== */
+
+.phone-sequence-showcase {
+  max-width: 980px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 56px;
+  margin-top: 24px;
+}
+
+.phone-sequence-showcase .premium-mobile-frame {
+  width: 290px;
+  height: 590px;
+  flex-shrink: 0;
+  z-index: 5;
+}
+
+.phone-sequence-showcase .mobile-screen {
+  background: #000000;
+}
+
+.phone-screen-labels-left,
+.phone-screen-labels-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+
+.phone-screen-labels-left {
+  text-align: right;
+}
+
+.phone-screen-labels-right {
+  text-align: left;
+}
+
+/* Indicators */
+.app-screen-dot-indicator {
+  opacity: 0.28;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 12px 18px;
+  border-radius: 10px;
+  border-left: 2px solid transparent;
+  border-right: 2px solid transparent;
+}
+
+.phone-screen-labels-left .app-screen-dot-indicator {
+  border-right: 2px solid rgba(255, 255, 255, 0.05);
+}
+
+.phone-screen-labels-right .app-screen-dot-indicator {
+  border-left: 2px solid rgba(255, 255, 255, 0.05);
+}
+
+.phone-screen-labels-left .app-screen-dot-indicator.active {
+  opacity: 1;
+  border-right: 2px solid var(--apex-gold);
+  background: linear-gradient(to left, rgba(201, 168, 76, 0.06), transparent);
+}
+
+.phone-screen-labels-right .app-screen-dot-indicator.active {
+  opacity: 1;
+  border-left: 2px solid var(--apex-gold);
+  background: linear-gradient(to right, rgba(201, 168, 76, 0.06), transparent);
+}
+
+.app-screen-dot-indicator h5 {
+  color: var(--apex-white);
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+
+.app-screen-dot-indicator p {
+  color: var(--apex-muted);
+  font-size: 12.5px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Command center */
+.apex-story-command {
+  background: #000000;
+}
+
+
+
+/* Premium Mobile hardware bezels */
+.premium-mobile-frame {
+  border-radius: 46px;
+  background: #111827;
+  padding: 10px;
+  box-shadow: 
+    0 40px 90px rgba(0, 0, 0, 0.7),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18),
+    inset 0 0 0 3px #030712;
+  position: relative;
+}
+
+.mobile-notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 25px;
+  background: #000000;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  z-index: 10;
+}
+
+.mobile-home-indicator {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.28);
+  border-radius: 2px;
+  z-index: 5;
+}
+
+.mobile-header {
+  padding: 24px 16px 10px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mobile-hardware-bezel {
+  border-radius: 36px;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+}
+
+/* Portals section (Dark contrast) */
+.apex-portals {
+  background: linear-gradient(to bottom, #071525, #0a1829);
+  border-top: 1px solid var(--apex-line);
+}
+
+.portal-grid {
+  max-width: 1180px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* Glassmorphic cards */
+.premium-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0%, rgba(255, 255, 255, 0.005) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--apex-glass-border);
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.45), 
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-glare {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.portal-card {
+  text-decoration: none;
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  min-height: 250px;
+}
+
+.portal-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(201, 168, 76, 0.38);
+  box-shadow: 
+    0 35px 70px rgba(0, 0, 0, 0.55), 
+    0 0 30px rgba(201, 168, 76, 0.12);
+}
+
+.card-icon {
+  color: var(--apex-gold);
+  width: 32px;
+  height: 32px;
+  margin-bottom: 28px;
+}
+
+.portal-card h3 {
+  color: var(--apex-white);
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 12px;
+  letter-spacing: 0.02em;
+}
+
+.portal-card p {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 14px;
+  line-height: 1.6;
+  flex: 1;
+  margin: 0 0 24px;
+}
+
+.card-link {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--apex-gold);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Payments Section */
+.apex-payment {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 64px;
+  background: #000000;
+  align-items: center;
+  border-top: 1px solid var(--apex-line);
+}
+
+.payment-copy {
+  max-width: 580px;
+}
+
+.payment-copy h2 {
+  font-size: clamp(34px, 4.2vw, 54px);
+  line-height: 1.05;
+  font-weight: 800;
+  margin: 0 0 24px;
+}
+
+.payment-copy p {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.payment-card {
+  padding: 42px 36px;
+}
+
+.payment-card h3 {
+  color: var(--apex-white);
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 24px;
+}
+
+.payment-card ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.payment-card li {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14.5px;
+  line-height: 1.6;
+  margin-bottom: 18px;
+  padding-left: 32px;
+  position: relative;
+}
+
+.payment-card li:last-child {
+  margin-bottom: 0;
+}
+
+.payment-card li::before {
+  content: counter(item);
+  counter-increment: item;
+  position: absolute;
+  left: 0;
+  top: 1px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(201, 168, 76, 0.15);
+  border: 1px solid rgba(201, 168, 76, 0.38);
+  color: var(--apex-gold);
+  font-size: 11px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Demo Request section */
+.apex-demo {
+  background: linear-gradient(to bottom, #071525, #040b14);
+}
+
+.demo-form {
+  max-width: 860px;
+  margin: auto;
+  padding: 48px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.demo-form input,
+.demo-form textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 16px 20px;
+  color: white;
+  font-family: inherit;
+  font-size: 14.5px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.demo-form input:focus,
+.demo-form textarea:focus {
+  border-color: var(--apex-gold);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.demo-form textarea {
+  height: 120px;
+  resize: vertical;
+  margin-bottom: 24px;
+}
+
+.demo-form button {
+  width: 100%;
+  border: none;
+  cursor: pointer;
+}
+
+.demo-success {
+  color: #27c93f;
+  margin-top: 18px;
+  font-size: 14px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.demo-error {
+  color: #ff5f56;
+  margin-top: 18px;
+  font-size: 14px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Footer (300% Larger Brand Lockup) */
+.apex-footer {
+  background: #02070d;
+  border-top: 1px solid var(--apex-line);
+  padding: 100px 72px 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 48px;
+}
+
+.footer-brand-col {
+  max-width: 480px;
+}
+
+.footer-brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.apex-footer-logo {
+  height: 64px !important;
+  width: auto;
+  display: block;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 16px rgba(201, 168, 76, 0.25));
+}
+
+.f-title {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: var(--apex-white);
+  line-height: 1;
+}
+
+.f-sub {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--apex-gold);
+  margin-top: 4px;
+}
+
+.f-tagline {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 3px;
+  text-transform: uppercase;
+}
+
+.powered-by {
+  margin-top: 18px;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 800;
+  color: var(--apex-gold);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footer-links a {
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+  font-size: 14.5px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--apex-gold);
+}
+
+/* Typographic Overrides */
+.premium-text {
+  background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ========================================================
+   RESPONSIVENESS AND MOBILE VIEWPORTS
+   ======================================================= */
+
+@media (max-width: 1024px) {
+  .apex-payment {
+    padding: 100px 40px 60px;
+  }
+  
+  .feature-grid {
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .payment-copy {
+    max-width: 100%;
+  }
+
+  .portal-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .phone-sequence-showcase {
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  .phone-screen-labels-left,
+  .phone-screen-labels-right {
+    text-align: center;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .phone-screen-labels-left .app-screen-dot-indicator {
+    border-right: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .phone-screen-labels-right .app-screen-dot-indicator {
+    border-left: none;
+    border-top: 2px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .phone-screen-labels-left .app-screen-dot-indicator.active {
+    border-right: none;
+    border-bottom: 2px solid var(--apex-gold);
+  }
+
+  .phone-screen-labels-right .app-screen-dot-indicator.active {
+    border-left: none;
+    border-top: 2px solid var(--apex-gold);
+  }
+
+  /* Challan repositioning under 1024px */
+  .challan-timeline-label {
+    position: static;
+    opacity: 1 !important;
+    margin: 8px 0;
+    width: 100%;
+    justify-content: center;
+  }
+  .premium-challan-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .apex-nav {
+    padding: 0 24px;
+    height: 90px;
+  }
+  
+  .apex-nav-links {
+    display: none;
+  }
+
+  .header-brand-labels {
+    display: none; /* Simplify nav on very small viewports */
+  }
+
+  .apex-hero-cinematic {
+    min-height: auto;
+    padding: 120px 24px 80px;
+  }
+
+  .emerge-brand-svg {
+    margin-bottom: 32px;
+  }
+
+  .apex-section {
+    padding: 80px 24px;
+  }
+
+  .apex-showcase-visual {
+    transform: none !important;
+  }
+
+  .apex-showcase-visual img {
+    opacity: 0.82;
+  }
+
+  .apex-ai-core {
+    padding: 90px 24px;
+  }
+
+  .ai-core-grid {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .ai-visual-collage {
+    min-height: auto;
+  }
+
+  .ai-main-visual {
+    width: 100%;
+  }
+
+  .ai-float-visual {
+    position: relative;
+    inset: auto;
+    width: 88%;
+    margin: 18px auto 0;
+    transform: none;
+  }
+
+  .portal-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .demo-form {
+    padding: 24px;
+  }
+
+  .apex-footer {
+    padding: 60px 24px;
+    flex-direction: column;
+    gap: 36px;
+  }
+}
+
+/* APEX Gateway mobile shell fixes. Scoped to .apex-page so the SaaS/Super App dashboards keep their own layout rules. */
+.apex-page a,
+.apex-page button {
+  touch-action: manipulation;
+}
+
+.apex-page a:focus-visible,
+.apex-page button:focus-visible {
+  outline: 2px solid rgba(103, 232, 249, 0.9);
+  outline-offset: 3px;
+}
+
+.apex-mobile-drawer,
+.apex-mobile-menu-overlay {
+  box-sizing: border-box;
+}
+
+.apex-mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 220ms ease;
+}
+
+.apex-mobile-menu-overlay[data-open="false"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+body.apex-drawer-open {
+  overflow: hidden;
+  touch-action: none;
+}
+
+.apex-mobile-drawer {
+  position: fixed;
+  top: max(5rem, calc(4.5rem + env(safe-area-inset-top, 0px)));
+  right: 0.75rem;
+  z-index: 55;
+  width: min(22rem, calc(100vw - 1.5rem));
+  max-height: calc(100dvh - 6rem - env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+  transition: transform 260ms ease, opacity 220ms ease;
+}
+
+.apex-mobile-drawer[data-open="false"] {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transform: translateX(calc(100% + 1rem));
+}
+
+@media (min-width: 1280px) {
+  .apex-mobile-menu-overlay,
+  .apex-mobile-drawer {
+    display: none;
+  }
+}
+
+@media (max-width: 1279px) {
+  .apex-page {
+    overflow-x: clip;
+  }
+
+  .apex-page main,
+  .apex-page section {
+    max-width: 100vw;
+  }
+}
+
+@media (max-width: 1024px) {
+  .apex-page [class*="h-[520px]"],
+  .apex-page [class*="h-[580px]"],
+  .apex-page [class*="h-[620px]"],
+  .apex-page [class*="h-[720px]"],
+  .apex-page [class*="w-[520px]"],
+  .apex-page [class*="w-[580px]"],
+  .apex-page [class*="w-[620px]"],
+  .apex-page [class*="w-[720px]"],
+  .apex-page [class*="w-[760px]"] {
+    max-width: calc(100vw - 2rem);
+  }
+
+  .apex-page [class*="right-[-"],
+  .apex-page [class*="left-[-"] {
+    max-width: 100vw;
+  }
+
+  .apex-page .cinematic-card:hover,
+  .apex-page .group:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .apex-page {
+    font-size: 16px;
+  }
+
+  .apex-page .apex-scene {
+    scroll-margin-top: max(6rem, calc(5rem + env(safe-area-inset-top, 0px)));
+  }
+
+  .apex-page .apex-world-card:hover {
+    transform: none;
+    box-shadow: inherit;
+  }
+
+  .apex-page .apex-magnetic-btn {
+    width: 100%;
+    max-width: 20rem;
+  }
+
+  .apex-page .apex-final-mission-panel .apex-magnetic-btn {
+    max-width: 100%;
+  }
+
+  .apex-page .apex-scene {
+    scroll-margin-top: max(6rem, calc(5rem + env(safe-area-inset-top, 0px)));
+  }
+
+  .apex-page .apex-world-card:hover {
+    transform: none;
+    box-shadow: inherit;
+  }
+
+  .apex-page .apex-magnetic-btn {
+    width: 100%;
+    max-width: 20rem;
+  }
+
+  .apex-page .apex-final-mission-panel .apex-magnetic-btn {
+    max-width: 100%;
+  }
+
+  .apex-page > .fixed.inset-0 {
+    padding: 0;
+  }
+
+  .apex-page h1,
+  .apex-page h2,
+  .apex-page h3,
+  .apex-page p {
+    overflow-wrap: anywhere;
+  }
+
+  .apex-page [class*="max-w-7xl"],
+  .apex-page [class*="max-w-6xl"],
+  .apex-page [class*="max-w-5xl"] {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .apex-page [class*="grid-cols-2"],
+  .apex-page [class*="grid-cols-3"],
+  .apex-page [class*="grid-cols-4"],
+  .apex-page [class*="md:grid-cols-2"],
+  .apex-page [class*="md:grid-cols-3"],
+  .apex-page [class*="lg:grid-cols-2"],
+  .apex-page [class*="lg:grid-cols-3"],
+  .apex-page [class*="lg:grid-cols-4"] {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .apex-page [class*="rounded-[2.5rem]"],
+  .apex-page [class*="rounded-[2.25rem]"],
+  .apex-page [class*="rounded-[2rem]"] {
+    border-radius: 1.35rem;
+  }
+
+  .apex-page [class*="p-8"],
+  .apex-page [class*="md:p-8"],
+  .apex-page [class*="md:p-16"] {
+    padding: 1.25rem !important;
+  }
+
+  .apex-page .apex-mobile-drawer a,
+  .apex-page .apex-mobile-drawer button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 430px) {
+  .apex-galaxy-scene {
+    min-height: auto;
+    padding-bottom: 5rem !important;
+  }
+
+  .apex-page [class*="px-6"],
+  .apex-page [class*="md:px-8"] {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .apex-page [class*="py-28"],
+  .apex-page [class*="py-24"] {
+    padding-top: 4.5rem !important;
+    padding-bottom: 4.5rem !important;
+  }
+
+  .apex-page [class*="gap-16"],
+  .apex-page [class*="gap-14"],
+  .apex-page [class*="gap-12"] {
+    gap: 1.5rem !important;
+  }
+
+  .apex-page .apex-mobile-drawer {
+    right: 0.75rem;
+    left: 0.75rem;
+    width: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .apex-page * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ========================================================
+   RESPONSIVE MEDIA QUERIES FOR SPLIT LAYOUT
+   ======================================================== */
+@media (max-width: 1024px) {
+  .apex-story, .apex-story.layout-reverse {
+    flex-direction: column;
+    padding: 100px 6%;
+    gap: 40px;
+  }
+  .story-panel, .visual-block {
+    width: 100%;
+  }
+  .story-panel {
+    text-align: center;
+  }
+  .feature-grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: left;
+  }
+  .feature-grid .module-group {
+    flex: 1 1 300px;
+  }
+}
+
+/* ========================================================
+   APEX CONNECT CUSTOM SEQUENCING INDICATORS
+   ======================================================== */
+.phone-sequence-showcase {
+  width: 100%;
+  max-width: 1080px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 64px;
+}
+
+.app-screen-dot-indicator {
+  background: none;
+  border: none;
+  text-align: inherit;
+  cursor: pointer;
+  opacity: 0.28;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 16px 24px;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 280px;
+}
+
+.app-screen-dot-indicator.active {
+  opacity: 1;
+}
+
+/* Under 1024px responsive grid stacked visuals */
+@media (max-width: 1024px) {
+  .phone-sequence-showcase {
+    flex-direction: column;
+    gap: 32px;
+  }
+  
+  .app-screen-dot-indicator {
+    max-width: 100%;
+    text-align: center;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+    border-radius: 0;
+  }
+  
+  .app-screen-dot-indicator.active {
+    border-bottom-color: var(--apex-gold);
+    background: rgba(201, 168, 76, 0.04);
+  }
+}
+
+
+
+/* Engineering Grid for Hero */
+.engineering-grid {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  z-index: 0;
+  mask-image: radial-gradient(circle at 50% 40%, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 70%);
+  -webkit-mask-image: radial-gradient(circle at 50% 40%, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 70%);
+  pointer-events: none;
+}
+
+
+/* GSAP Text Stagger wrappers */
+.text-stagger-line {
+  overflow: hidden;
+  display: block;
+}
+.text-stagger-inner {
+  display: block;
+}
+
+/* Monumental Hero */
+.monumental-hero {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 22vh;
+  min-height: 120vh;
+  z-index: 10;
+}
+.monumental-hero h1 {
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 800;
+  line-height: 1;
+  text-align: center;
+  letter-spacing: -0.04em;
+  max-width: 1100px;
+  margin: 0 0 24px;
+}
+.monumental-sub {
+  font-size: clamp(18px, 2vw, 24px);
+  color: var(--apex-muted);
+  text-align: center;
+  max-width: 700px;
+  line-height: 1.5;
+  margin-bottom: 48px;
+}
+.hero-bento-dock {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  height: 60vh;
+  margin-top: 60px;
+  transform: perspective(1000px) rotateX(15deg) scale(0.95);
+  transform-origin: top center;
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(201,168,76,0.05) 0%, transparent 100%);
+  border-top: 1px solid rgba(201,168,76,0.2);
+  box-shadow: 0 -40px 100px rgba(201,168,76,0.1);
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+.hero-bento-dock::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 50%;
+  background: linear-gradient(to bottom, transparent, #000000);
+}
+
+/* Real rendered APEX interface visuals */
+.apex-showcase-visual {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: perspective(1400px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
+  will-change: transform;
+}
+
+.apex-showcase-visual img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(0.95) contrast(1.04);
+}
+
+.apex-showcase-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(115deg, rgba(255,255,255,0.12), transparent 34%),
+    radial-gradient(circle at 78% 18%, rgba(201,168,76,0.14), transparent 28%);
+  mix-blend-mode: screen;
+  opacity: 0.55;
+}
+
+.apex-showcase-visual.hero-showcase {
+  min-height: 100%;
+}
+
+.device-frame-desktop .apex-showcase-visual.in-device {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.apex-showcase-overlays {
+  position: absolute;
+  inset: 42px 0 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.apex-showcase-overlays > * {
+  pointer-events: auto;
+}
+
+.apex-showcase-titlebar {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  right: 16px;
+  z-index: 22;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(3, 8, 16, 0.58);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.35);
+}
+
+.apex-showcase-titlebar span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  color: rgba(255,255,255,0.86);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.apex-showcase-titlebar small {
+  color: rgba(201,168,76,0.82);
+  font-family: var(--mono-font);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.device-frame-mobile .connect-mobile-showcase {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 34px;
+  overflow: hidden;
+}
+
+.device-frame-mobile .connect-mobile-showcase img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.apex-section {
+  position: relative;
+  padding: 120px 6%;
+  overflow: hidden;
+}
+
+.apex-section-head {
+  max-width: 880px;
+  margin: 0 auto 64px;
+  text-align: center;
+  position: relative;
+  z-index: 5;
+}
+
+.apex-section-head h2 {
+  font-size: clamp(38px, 5vw, 68px);
+  line-height: 1.02;
+  margin: 0 0 20px;
+}
+
+.apex-section-head p {
+  color: rgba(255,255,255,0.62);
+  font-size: 17px;
+  line-height: 1.7;
+  margin: 0 auto;
+  max-width: 720px;
+}
+
+/* AI Core section */
+.apex-ai-core {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(201,168,76,0.11), transparent 36%),
+    radial-gradient(circle at 76% 48%, rgba(38,84,145,0.14), transparent 34%),
+    #000000;
+  border-top: 1px solid var(--apex-line);
+  border-bottom: 1px solid var(--apex-line);
+}
+
+.ai-core-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.86fr 1.14fr;
+  gap: 52px;
+  align-items: center;
+  position: relative;
+  z-index: 5;
+}
+
+.ai-feature-stack {
+  display: grid;
+  gap: 16px;
+}
+
+.ai-feature-card {
+  padding: 24px 26px;
+}
+
+.ai-feature-card h3 {
+  color: var(--apex-white);
+  font-size: 18px;
+  margin: 0 0 8px;
+}
+
+.ai-feature-card p {
+  color: rgba(255,255,255,0.58);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.ai-visual-collage {
+  min-height: 620px;
+  position: relative;
+  border-radius: 32px;
+  perspective: 1400px;
+}
+
+.ai-main-visual {
+  position: absolute;
+  inset: 7% 3% 10% 3%;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow:
+    0 50px 120px rgba(0,0,0,0.74),
+    0 0 0 1px rgba(255,255,255,0.08);
+}
+
+.ai-float-visual {
+  position: absolute;
+  width: 43%;
+  height: 30%;
+  overflow: hidden;
+  border-radius: 22px;
+  box-shadow:
+    0 34px 80px rgba(0,0,0,0.68),
+    0 0 0 1px rgba(255,255,255,0.10);
+}
+
+.ai-float-one {
+  left: -2%;
+  bottom: 1%;
+}
+
+.ai-float-two {
+  right: -2%;
+  top: 0;
+}
+
+/* ========================================================
+   ULTRA-HD NATIVE DOM MOCKUPS
+   ======================================================== */
+
+/* Generic UI Container */
+.native-ui-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background: #000000;
+  color: #fff;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.ui-sidebar {
+  width: 22%;
+  background: #04080f;
+  border-right: 1px solid rgba(255,255,255,0.06);
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ui-nav-item {
+  height: 24px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.02);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  gap: 8px;
+}
+.ui-nav-item.active {
+  background: rgba(201, 168, 76, 0.15);
+  border-left: 2px solid var(--apex-gold);
+}
+.ui-nav-icon {
+  width: 12px; height: 12px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 3px;
+}
+.ui-nav-item.active .ui-nav-icon {
+  background: var(--apex-gold);
+}
+.ui-nav-text {
+  width: 60%; height: 6px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 3px;
+}
+.ui-nav-item.active .ui-nav-text {
+  background: var(--apex-gold);
+}
+
+/* Main Content Area */
+.ui-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #010306;
+}
+.ui-header {
+  height: 48px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  justify-content: space-between;
+}
+.ui-header-title {
+  width: 120px; height: 10px;
+  background: rgba(255,255,255,0.4);
+  border-radius: 4px;
+}
+.ui-header-actions {
+  display: flex;
+  gap: 8px;
+}
+.ui-avatar {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--apex-gold);
+}
+.ui-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* OS Dashboard Grid */
+.ui-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.ui-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ui-card-title {
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  font-family: var(--mono-font);
+}
+.ui-card-value {
+  font-size: 24px;
+  font-weight: 800;
+  color: #fff;
+}
+.ui-chart-area {
+  flex: 1;
+  background: rgba(255,255,255,0.02);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+  gap: 8px;
+}
+.ui-bar {
+  flex: 1;
+  background: rgba(201, 168, 76, 0.4);
+  border-radius: 4px 4px 0 0;
+  min-height: 10%;
+}
+
+/* Academic Forge specific */
+.ui-forge-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ui-forge-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255,255,255,0.02);
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+.ui-q-text {
+  width: 70%; height: 8px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 4px;
+}
+.ui-q-tag {
+  padding: 4px 8px;
+  background: rgba(201,168,76,0.1);
+  color: var(--apex-gold);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 800;
+  font-family: var(--mono-font);
+}
+
+/* Finance Ledger specific */
+.ui-receipt {
+  background: #ffffff;
+  border-radius: 12px;
+  flex: 1;
+  margin: 10px 40px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  color: #000;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+.ui-receipt-head {
+  text-align: center;
+  border-bottom: 2px dashed #ccc;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+.ui-receipt-title {
+  font-size: 16px; font-weight: 800; letter-spacing: 2px;
+}
+.ui-receipt-row {
+  display: flex; justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-family: var(--mono-font);
+  font-weight: 600;
+  color: #444;
+}
+.ui-receipt-total {
+  border-top: 2px dashed #ccc;
+  padding-top: 12px;
+  margin-top: 12px;
+  display: flex; justify-content: space-between;
+  font-size: 14px; font-weight: 800;
+}
+.ui-stamp {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  border: 4px solid #27c93f;
+  color: #27c93f;
+  font-size: 32px;
+  font-weight: 800;
+  padding: 8px 16px;
+  border-radius: 8px;
+  opacity: 0.8;
+  letter-spacing: 6px;
+}
+
+/* Mobile specific */
+.ui-mobile-head {
+  padding: 20px 16px 16px;
+  background: #04080f;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.ui-mobile-avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--apex-gold), #fff);
+}
+.ui-mobile-info {
+  display: flex; flex-direction: column; gap: 4px;
+}
+.ui-mobile-name {
+  width: 100px; height: 10px; background: #fff; border-radius: 4px;
+}
+.ui-mobile-class {
+  width: 60px; height: 6px; background: rgba(255,255,255,0.4); border-radius: 3px;
+}
+.ui-mobile-feed {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ui-feed-card {
+  background: rgba(255,255,255,0.04);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+/* Background Texture classes for split sections */
+.bg-texture-grid {
+  position: absolute; inset: 0;
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  z-index: 0; pointer-events: none;
+}
+
+/* ========================================================
+   ULTRA-HD REALISTIC DEVICE FRAMES
+   ======================================================== */
+
+.device-frame-desktop {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: #000;
+  border-radius: 14px;
+  border: 14px solid #09090b; /* MacBook Dark Bezel */
+  box-shadow: 
+    0 0 0 1px rgba(255,255,255,0.08),
+    0 50px 100px rgba(0,0,0,0.95),
+    inset 0 0 0 1px rgba(255,255,255,0.05);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+}
+.device-frame-desktop:hover {
+  transform: translateY(-8px);
+  box-shadow: 
+    0 0 0 1px rgba(255,255,255,0.15),
+    0 60px 120px rgba(0,0,0,1),
+    inset 0 0 0 1px rgba(255,255,255,0.05);
+}
+.device-frame-desktop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.device-frame-mobile {
+  width: 300px;
+  height: 620px;
+  background: #000;
+  border-radius: 46px;
+  border: 12px solid #000; /* iPhone Pro Bezel */
+  box-shadow: 
+    0 0 0 2px rgba(255,255,255,0.15),
+    0 40px 100px rgba(0,0,0,0.9),
+    inset 0 0 0 2px rgba(255,255,255,0.1);
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.device-frame-mobile:hover {
+  transform: translateY(-8px);
+}
+.dynamic-island {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 28px;
+  background: #000;
+  border-radius: 20px;
+  z-index: 20;
+  box-shadow: inset 0 0 4px rgba(255,255,255,0.1);
+}
+.device-frame-mobile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 34px;
+}
+
+/* ── Cinematic universe scroll (one continuous world) ── */
+.apex-universe-scroll {
+  position: relative;
+  width: 100%;
+}
+
+.apex-journey-rail {
+  opacity: 0.85;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.apex-journey-rail {
+  will-change: transform, opacity;
+}
+
+.apex-journey-rail {
+  will-change: transform, opacity;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* ── Premium cinematic gateway polish (2026) ── */
+.apex-scene-reveal {
+  position: relative;
+  overflow: visible;
+}
+
+.apex-scene-reveal-inner {
+  will-change: transform, opacity;
+}
+
+.apex-scene {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Scene washes removed — unified navy void via ApexCinematicBackground */
+.apex-scene-wash,
+.apex-scene-wash-hero,
+.apex-scene-wash-cyan,
+.apex-scene-wash-blue,
+.apex-scene-wash-gold {
+  display: none;
+}
+
+.apex-brand-lockup .apex-symbol {
+  filter: drop-shadow(0 0 18px rgba(201, 168, 76, 0.35));
+}
+
+.apex-brand-lockup {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.apex-nav-link {
+  position: relative;
+  padding-bottom: 2px;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.apex-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: linear-gradient(90deg, rgba(201, 168, 76, 0.9), rgba(34, 211, 238, 0.9));
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  border-radius: 2px;
+}
+
+.apex-nav-link:hover {
+  color: #e0f2fe;
+  text-shadow: 0 0 20px rgba(34, 211, 238, 0.35);
+}
+
+.apex-nav-link:hover::after,
+.apex-nav-link[data-active="true"]::after {
+  transform: scaleX(1);
+}
+
+.apex-nav-link[data-active="true"] {
+  color: #fff;
+}
+
+.apex-btn-demo {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+}
+
+.apex-btn-demo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.55) 50%, transparent 65%);
+  transform: translateX(-120%);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.apex-btn-demo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(255, 255, 255, 0.18);
+}
+
+.apex-btn-demo:hover::before {
+  transform: translateX(120%);
+}
+
+.apex-core-engine,
+.apex-core-stage,
+.apex-core-tilt,
+.apex-core-halo,
+.apex-converge-stage {
+  overflow: visible;
+}
+
+.apex-core-engine {
+  transform-style: preserve-3d;
+  perspective: 1100px;
+}
+
+.apex-core-tilt {
+  transform-style: preserve-3d;
+  border-radius: 9999px;
+}
+
+.apex-core-3d {
+  transform-style: preserve-3d;
+}
+
+.apex-core-stage {
+  transform-style: preserve-3d;
+}
+
+.apex-core-mark {
+  transform-style: preserve-3d;
+}
+
+.apex-data-planet-sphere {
+  transform-style: preserve-3d;
+}
+
+.apex-converge-planet-sphere {
+  transform-style: preserve-3d;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+}
+
+.apex-converge-planet:hover .apex-converge-planet-sphere {
+  transform: translateY(-4px) scale(1.06);
+}
+
+.apex-orbit-planet,
+.apex-converge-planet-sphere,
+.apex-data-planet-sphere {
+  aspect-ratio: 1 / 1;
+  flex-shrink: 0;
+  border-radius: 9999px;
+}
+
+.apex-core-planet {
+  background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.22), rgba(15, 23, 42, 0.65) 48%, rgba(2, 6, 23, 0.95) 72%);
+  box-shadow:
+    inset 0 2px 24px rgba(255, 255, 255, 0.12),
+    inset 0 -12px 32px rgba(0, 0, 0, 0.45),
+    0 0 80px rgba(201, 168, 76, 0.28),
+    0 0 120px rgba(34, 211, 238, 0.15);
+  border: 1px solid rgba(201, 168, 76, 0.35);
+}
+
+/* Version E — realistic core sphere */
+.apex-core-sphere-wrap {
+  transform-style: preserve-3d;
+}
+
+.apex-core-sphere-aura {
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.2), rgba(34, 211, 238, 0.1) 45%, transparent 75%);
+  filter: blur(28px);
+}
+
+.apex-core-sphere-surface {
+  background:
+    radial-gradient(circle at 30% 24%, rgba(255, 255, 255, 0.28), transparent 42%),
+    radial-gradient(circle at 72% 78%, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.98) 68%),
+    linear-gradient(155deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 50%, rgba(2, 6, 23, 1) 100%);
+  box-shadow:
+    inset 0 3px 28px rgba(255, 255, 255, 0.14),
+    inset 0 -16px 36px rgba(0, 0, 0, 0.55),
+    0 0 64px rgba(201, 168, 76, 0.22),
+    0 0 100px rgba(34, 211, 238, 0.12);
+  border: 1px solid rgba(201, 168, 76, 0.32);
+}
+
+.apex-core-sphere-rim {
+  background: radial-gradient(circle, transparent 58%, rgba(201, 168, 76, 0.18) 72%, transparent 82%);
+  mix-blend-mode: screen;
+}
+
+.apex-core-sphere-shine {
+  background: linear-gradient(125deg, rgba(255, 255, 255, 0.22) 0%, transparent 38%);
+  mix-blend-mode: overlay;
+  opacity: 0.7;
+}
+
+/* Version E — hero glass stat capsules */
+.apex-glass-capsule {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.65rem 0.4rem 0.45rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(15, 23, 42, 0.75) 55%, rgba(2, 6, 23, 0.9) 100%);
+  backdrop-filter: blur(12px);
+  box-shadow:
+    inset 0 1px 10px rgba(255, 255, 255, 0.1),
+    0 8px 24px rgba(2, 6, 23, 0.5),
+    0 0 20px color-mix(in srgb, var(--capsule-accent) 25%, transparent);
+  min-width: 7.5rem;
+  white-space: nowrap;
+}
+
+.apex-glass-capsule-icon {
+  display: flex;
+  height: 2rem;
+  width: 2rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.16), rgba(15, 23, 42, 0.85) 65%);
+}
+
+.apex-glass-capsule-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.2;
+}
+
+.apex-glass-capsule-label {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(148, 163, 184, 0.95);
+}
+
+.apex-glass-capsule-value {
+  font-size: 0.8125rem;
+  font-weight: 800;
+  color: #f8fafc;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Version E — orbit module nodes */
+.apex-orbit-module-shell {
+  transform-style: preserve-3d;
+}
+
+.apex-orbit-module-glass {
+  background:
+    radial-gradient(circle at 32% 26%, rgba(255, 255, 255, 0.2), transparent 40%),
+    radial-gradient(circle at 70% 75%, rgba(15, 23, 42, 0.85), rgba(2, 6, 23, 0.95) 70%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    inset 0 2px 14px rgba(255, 255, 255, 0.1),
+    inset 0 -8px 20px rgba(0, 0, 0, 0.4),
+    0 0 28px color-mix(in srgb, var(--node-color) 30%, transparent);
+}
+
+.apex-orbit-module-icon-badge {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.14), rgba(15, 23, 42, 0.88) 65%);
+  box-shadow: inset 0 1px 8px rgba(255, 255, 255, 0.1);
+}
+
+.apex-orbit-module-label {
+  letter-spacing: 0.03em;
+  text-shadow: 0 1px 8px rgba(2, 6, 23, 0.8);
+}
+
+.apex-orbit-module-dot {
+  display: block;
+  height: 0.25rem;
+  width: 0.25rem;
+  border-radius: 9999px;
+  box-shadow: 0 0 8px currentColor;
+}
+
+.apex-brand-lockup:hover .apex-symbol {
+  filter: drop-shadow(0 0 24px rgba(201, 168, 76, 0.55)) drop-shadow(0 0 40px rgba(34, 211, 238, 0.25));
+}
+
+.apex-orbit-node {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 5.5rem;
+  text-align: center;
+}
+
+.apex-orbit-node-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  opacity: 0.6;
+  animation: apex-orbit-halo 5s ease-in-out infinite;
+}
+
+.apex-orbit-node-icon {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  height: 3.75rem;
+  width: 3.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.14), rgba(15, 23, 42, 0.85) 60%);
+  box-shadow:
+    inset 0 1px 12px rgba(255, 255, 255, 0.1),
+    0 8px 28px rgba(2, 6, 23, 0.55);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+}
+
+.apex-orbit-node:hover .apex-orbit-node-icon {
+  transform: translateY(-4px) scale(1.06);
+}
+
+.apex-orbit-node-label {
+  margin-top: 0.5rem;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #f8fafc;
+}
+
+.apex-orbit-live {
+  margin-top: 0.2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(110, 231, 183, 0.85);
+}
+
+.apex-world-card {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.4s ease;
+}
+
+.apex-world-card:hover {
+  transform: translateY(-6px) rotateX(2deg);
+  box-shadow: 0 24px 48px rgba(2, 6, 23, 0.65), 0 0 32px rgba(34, 211, 238, 0.12);
+}
+
+.apex-scroll-glow {
+  box-shadow: 0 0 18px rgba(34, 211, 238, 0.55), 0 0 36px rgba(201, 168, 76, 0.25);
+}
+
+@keyframes apex-orbit-halo {
+  0%, 100% { opacity: 0.35; transform: scale(0.96); }
+  50% { opacity: 0.85; transform: scale(1.04); }
+}
+
+/* Version E — celestial realism + official logo cores */
+.apex-celestial-core {
+  transform-style: preserve-3d;
+}
+
+.apex-celestial-corona {
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.24), rgba(34, 211, 238, 0.12) 38%, transparent 72%);
+  filter: blur(36px);
+}
+
+.apex-celestial-atmosphere {
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.14), transparent 68%);
+  filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 9999px;
+}
+
+.apex-celestial-body {
+  border-radius: 9999px;
+}
+
+.apex-celestial-surface {
+  border-radius: 9999px;
+  background:
+    radial-gradient(ellipse 72% 48% at 26% 20%, rgba(255, 255, 255, 0.38), transparent 54%),
+    radial-gradient(ellipse 85% 70% at 78% 82%, rgba(2, 5, 16, 0.98), rgba(0, 0, 0, 1) 76%),
+    radial-gradient(circle at 48% 56%, rgba(12, 22, 48, 0.92), rgba(2, 5, 18, 0.99) 90%),
+    radial-gradient(circle at 62% 38%, rgba(var(--planet-accent-rgb, 34 211 238), 0.14), transparent 48%),
+    conic-gradient(from 198deg at 50% 50%, rgba(8, 14, 32, 0.75), rgba(22, 36, 68, 0.55), rgba(6, 12, 28, 0.8));
+  box-shadow:
+    inset 0 6px 36px rgba(255, 255, 255, 0.14),
+    inset 0 -24px 52px rgba(0, 0, 0, 0.72),
+    inset 14px -10px 44px rgba(var(--planet-accent-rgb, 201 168 76), 0.1),
+    0 0 80px rgba(var(--planet-accent-rgb, 201 168 76), 0.22),
+    0 0 140px rgba(34, 211, 238, 0.08);
+}
+
+.apex-celestial-clouds {
+  mix-blend-mode: screen;
+  mask-image: radial-gradient(circle at 38% 32%, black 20%, transparent 72%);
+  -webkit-mask-image: radial-gradient(circle at 38% 32%, black 20%, transparent 72%);
+}
+
+.apex-celestial-atmo-shell {
+  background: radial-gradient(circle, rgba(var(--planet-accent-rgb, 34 211 238), 0.16), transparent 68%);
+  filter: blur(12px);
+  opacity: 0.82;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.apex-galaxy-planet {
+  position: relative;
+  border-radius: 9999px;
+  overflow: hidden;
+  box-shadow:
+    0 0 28px color-mix(in srgb, var(--planet-accent, #22d3ee) 35%, transparent),
+    inset 0 2px 12px rgba(255, 255, 255, 0.12);
+}
+
+.apex-final-mission-panel {
+  border: 1px solid var(--apex-glass-border);
+  background: var(--apex-glass-bg);
+  backdrop-filter: blur(20px);
+}
+
+.apex-world-card {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(2, 5, 16, 0.72);
+}
+
+.apex-celestial-terminator {
+  background: radial-gradient(ellipse 90% 80% at 68% 72%, rgba(0, 0, 0, 0.55), transparent 58%);
+  mix-blend-mode: multiply;
+  opacity: 0.85;
+}
+
+.apex-celestial-specular {
+  background: radial-gradient(ellipse 45% 30% at 32% 24%, rgba(255, 255, 255, 0.35), transparent 70%);
+  mix-blend-mode: overlay;
+}
+
+.apex-celestial-rimlight {
+  background: radial-gradient(circle, transparent 62%, rgba(201, 168, 76, 0.22) 74%, rgba(34, 211, 238, 0.12) 82%, transparent 92%);
+  mix-blend-mode: screen;
+}
+
+.apex-volumetric-glow {
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.16), rgba(34, 211, 238, 0.08) 42%, transparent 78%);
+  filter: blur(44px);
+}
+
+.apex-nebula-fog {
+  background:
+    radial-gradient(ellipse 90% 60% at 20% 30%, rgba(59, 130, 246, 0.08), transparent 70%),
+    radial-gradient(ellipse 70% 50% at 80% 60%, rgba(201, 168, 76, 0.06), transparent 68%),
+    radial-gradient(ellipse 100% 80% at 50% 50%, rgba(34, 211, 238, 0.04), transparent 75%);
+  opacity: 0.9;
+}
+
+.apex-world-node-halo {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.18), rgba(15, 23, 42, 0.82) 65%);
+  box-shadow:
+    0 0 24px color-mix(in srgb, var(--node-color) 35%, transparent),
+    inset 0 1px 10px rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+}
+
+.apex-world-planet-surface {
+  background:
+    radial-gradient(ellipse 70% 55% at 30% 25%, rgba(255, 255, 255, 0.22), transparent 48%),
+    radial-gradient(circle at 70% 75%, rgba(10, 18, 38, 0.92), rgba(2, 5, 16, 0.98) 70%),
+    radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--node-color) 18%, rgba(15, 23, 42, 0.9)), rgba(2, 6, 18, 0.95));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    inset 0 2px 16px rgba(255, 255, 255, 0.1),
+    inset 0 -10px 24px rgba(0, 0, 0, 0.45);
+}
+
+.apex-world-planet-glow {
+  box-shadow: 0 0 32px color-mix(in srgb, var(--node-color) 28%, transparent);
+}
+
+.apex-world-node-name {
+  text-shadow: 0 2px 12px rgba(2, 6, 23, 0.9);
+}
+
+.apex-world-node-status {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(110, 231, 183, 0.85);
+}
+
+.apex-mini-moon {
+  aspect-ratio: 1 / 1;
+  background:
+    radial-gradient(ellipse 70% 50% at 28% 22%, rgba(255, 255, 255, 0.42), transparent 52%),
+    radial-gradient(circle at 72% 78%, rgba(2, 5, 14, 0.98), rgba(0, 0, 0, 1) 68%),
+    radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--moon-color, #22d3ee) 32%, rgba(8, 14, 32, 0.95)), rgba(2, 5, 16, 0.98));
+  box-shadow:
+    inset 0 1px 4px rgba(255, 255, 255, 0.2),
+    inset 0 -3px 8px rgba(0, 0, 0, 0.55),
+    0 0 12px color-mix(in srgb, var(--moon-color, #22d3ee) 45%, transparent);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.apex-page::before {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .apex-orbit-node-ring {
+    animation: none;
+  }
+  .apex-scene-reveal-inner {
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+}
