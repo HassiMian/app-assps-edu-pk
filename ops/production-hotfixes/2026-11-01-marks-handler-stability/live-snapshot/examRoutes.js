@@ -1,0 +1,751 @@
+const express = require('express')
+const router  = express.Router()
+const { pool, query, applyTenantContext } = require('../config/database')
+const { protect, requireRoles, requireScopeForServiceOnly, hasServiceScope } = require('../middleware/auth')
+const { tenantClause, currentSchoolId, hasColumn } = require('../middleware/tenant')
+const { isTeacher, validateTeacherMarksWrite, teacherResultReadScope } = require('../services/examMarksTeacherScope')
+const {validateAssessmentMarksApproval}=require('../services/assessmentMarksApprovalGate')
+const { parseExactMarksNumber } = require('../services/examMarksInputValidation')
+const { validatePaperMaxima } = require('../services/examMarksSubjectMaximum')
+const { validateResultState } = require('../services/examResultStatus')
+const { selectGradeBand } = require('../services/gradeBandAssignment')
+const {proposeNextAssessment}=require('../services/nextAssessmentProposal')
+
+const canManageExams = requireRoles('super_admin', 'admin', 'principal')
+const {isSequentialAllClassAssessment,officialPassMarks} = require('../services/examMutationSafety')
+const canWriteMarks = requireRoles('super_admin', 'admin', 'principal', 'teacher')
+function canReadResults(req, res, next) {
+  if (req.user?.account_type === 'service') {
+    if (hasServiceScope(req, 'school.results.read')) return next()
+    return res.status(403).json({ success: false, message: 'Service permission denied. Required scope: school.results.read' })
+  }
+  const role = String(req.user?.role || '').toLowerCase()
+  if (['super_admin', 'admin', 'principal', 'teacher', 'parent', 'student'].includes(role)) return next()
+  return res.status(403).json({ success: false, message: 'Results access denied.' })
+}
+
+function portalStudentScope(req, alias = 's', startIndex = 1) {
+  const role = String(req.user?.role || '').toLowerCase()
+  const prefix = alias ? `${alias}.` : ''
+  if (role === 'parent') {
+    return { clause: ` AND ${prefix}parent_user_id = $${startIndex}`, params: [req.user?.id || null], nextIndex: startIndex + 1 }
+  }
+  if (role === 'student') {
+    return { clause: ` AND ${prefix}student_user_id = $${startIndex}`, params: [req.user?.id || null], nextIndex: startIndex + 1 }
+  }
+  if (role === 'teacher') {
+    return teacherResultReadScope(req,alias || 's','er',startIndex)
+  }
+  return { clause: '', params: [], nextIndex: startIndex }
+}
+
+let gradeSchemaReady = null
+async function ensureGradeSettingsSchema() {
+  if (gradeSchemaReady) return true
+  const result = await query("SELECT to_regclass('public.grade_settings') AS table_name")
+  if (!result.rows[0]?.table_name) {
+    const err = new Error('grade_settings schema migration is not applied.')
+    err.code = 'GRADE_SCHEMA_NOT_READY'
+    throw err
+  }
+  gradeSchemaReady = true
+  return true
+}
+
+const DEFAULT_GRADE_SETTINGS = [
+  { label:'A+', from:90, to:100 },
+  { label:'A', from:80, to:89 },
+  { label:'B', from:70, to:79 },
+  { label:'C', from:60, to:69 },
+  { label:'D', from:50, to:59 },
+  { label:'F', from:0, to:49 },
+]
+
+function gradeFromBands(obtained, total, bands = DEFAULT_GRADE_SETTINGS) {
+  const obtainedValue = Number(obtained)
+  const totalValue = Number(total)
+  if (!Number.isFinite(obtainedValue) || !Number.isFinite(totalValue) || totalValue <= 0) return ''
+  const pct = Math.max(0, Math.min(100, (obtainedValue / totalValue) * 100))
+  const candidate = Array.isArray(bands) && bands.length ? bands : DEFAULT_GRADE_SETTINGS
+  const normalized = candidate.map(row => ({ label: String(row.label), from: Number(row.from), to: Number(row.to) }))
+  return selectGradeBand(pct, normalized)?.label || ''
+}
+
+async function loadGradeBandsForSchool(schoolId, {previewDefaults = true} = {}) {
+  await ensureGradeSettingsSchema()
+  const result = await query(`
+    SELECT label, min_percentage, max_percentage
+    FROM grade_settings
+    WHERE school_id = $1
+    ORDER BY sort_order, max_percentage DESC
+  `, [schoolId])
+  return result.rowCount
+    ? result.rows.map(row => ({ label: row.label, from: Number(row.min_percentage), to: Number(row.max_percentage) }))
+    : (previewDefaults ? DEFAULT_GRADE_SETTINGS : [])
+}
+
+function validateGradeSettings(rows) {
+  if (!Array.isArray(rows) || !rows.length) return { errors:['At least one grade band is required.'], rows:[] }
+  const normalized = rows.map((row, index) => ({
+    label: String(row?.label || '').trim().slice(0, 24),
+    from: Number(row?.from),
+    to: Number(row?.to),
+    sortOrder: index,
+  }))
+  const errors = []
+  const seen = new Set()
+  normalized.forEach((row, index) => {
+    if (!row.label) errors.push(`Row ${index + 1}: grade label is required.`)
+    if (seen.has(row.label.toLowerCase())) errors.push(`Row ${index + 1}: duplicate grade label.`)
+    seen.add(row.label.toLowerCase())
+    if (!Number.isInteger(row.from) || !Number.isInteger(row.to) || row.from < 0 || row.to > 100 || row.from > row.to) {
+      errors.push(`Row ${index + 1}: percentage range must be valid and between 0 and 100.`)
+    }
+  })
+  const coverage = Array.from({ length: 101 }, () => 0)
+  normalized.forEach(row => {
+    if (!Number.isInteger(row.from) || !Number.isInteger(row.to)) return
+    for (let pct = Math.max(0, row.from); pct <= Math.min(100, row.to); pct += 1) coverage[pct] += 1
+  })
+  if (coverage.some(value => value === 0)) errors.push('Grade bands must cover every percentage from 0 to 100.')
+  if (coverage.some(value => value > 1)) errors.push('Grade bands must not overlap.')
+  return { errors, rows: normalized }
+}
+
+// School-approved policy driven preview; never inserts or auto-approves exams.
+router.get('/next-assessment',protect,canManageExams,async(req,res)=>{
+  try {
+    const schoolId=currentSchoolId(req)
+    const session=String(req.query.session||'2026-2027').trim()
+    if(!schoolId||!/^20\d{2}-20\d{2}$/.test(session))
+      return res.status(422).json({success:false,code:'VALID_SCHOOL_SESSION_REQUIRED'})
+    const [exams,grade]=await Promise.all([
+      query(`SELECT name,total_marks FROM exams
+        WHERE school_id=$1 AND session=$2 AND type='AS'
+        AND LOWER(BTRIM(class))='all classes'`,[schoolId,session]),
+      query("SELECT min_percentage,max_percentage FROM grade_settings WHERE school_id=$1 AND label='F'",[schoolId])
+    ])
+    if(grade.rowCount!==1)return res.status(409).json({success:false,code:'OFFICIAL_PASS_POLICY_REQUIRED'})
+    const data=proposeNextAssessment(exams.rows,grade.rows[0],session)
+    res.set('Cache-Control','private, no-store')
+    return res.json({success:true,data})
+  }catch(err){
+    const known=['OFFICIAL_PASS_POLICY_REQUIRED','PREVIOUS_ASSESSMENT_MAXIMUM_INVALID','ASSESSMENT_SEQUENCE_EXHAUSTED','INVALID_SESSION']
+    if(known.includes(err.code))return res.status(409).json({success:false,code:err.code})
+    console.error('Next assessment preview unavailable:',err.code||'QUERY_FAILED')
+    return res.status(503).json({success:false,code:'NEXT_ASSESSMENT_PREVIEW_UNAVAILABLE'})
+  }
+})
+
+router.get('/grade-settings', protect, canReadResults, async (req, res) => {
+  try {
+    await ensureGradeSettingsSchema()
+    const schoolId = currentSchoolId(req)
+    const result = await query(`SELECT COUNT(*)::int AS count FROM grade_settings WHERE school_id = $1`, [schoolId])
+    const rows = await loadGradeBandsForSchool(schoolId)
+    res.json({ success:true, data:rows, configured:Number(result.rows[0]?.count || 0) > 0 })
+  } catch (err) {
+    console.error('Grade settings read error:', err.message)
+    res.status(err.code === 'GRADE_SCHEMA_NOT_READY' ? 503 : 500).json({ success:false, message:err.code === 'GRADE_SCHEMA_NOT_READY' ? 'Grade settings storage is not initialized.' : 'Grade settings could not be loaded.' })
+  }
+})
+
+router.put('/grade-settings', protect, canManageExams, async (req, res) => {
+  const parsed = validateGradeSettings(req.body?.grades)
+  if (parsed.errors.length) return res.status(422).json({ success:false, message:'Grade settings validation failed.', fieldErrors:parsed.errors })
+  const schoolId = currentSchoolId(req)
+  const client = await require('../config/database').pool.connect()
+  try {
+    await ensureGradeSettingsSchema()
+    await client.query('BEGIN')
+    await applyTenantContext(client)
+    await client.query('DELETE FROM grade_settings WHERE school_id = $1', [schoolId])
+    for (const row of parsed.rows) {
+      await client.query(`INSERT INTO grade_settings (school_id, label, min_percentage, max_percentage, sort_order) VALUES ($1,$2,$3,$4,$5)`, [schoolId,row.label,row.from,row.to,row.sortOrder])
+    }
+    await client.query('COMMIT')
+    res.json({ success:true, data:parsed.rows.map(({sortOrder,...row}) => row), message:'Grade settings saved successfully.' })
+  } catch (err) {
+    await client.query('ROLLBACK').catch(() => {})
+    console.error('Grade settings save error:', err.message)
+    res.status(500).json({ success:false, message:'Grade settings could not be saved.' })
+  } finally {
+    client.release()
+  }
+})
+
+// GET /api/exams
+router.get('/', protect, requireScopeForServiceOnly('school.results.read'), async (req, res) => {
+  try {
+    let sql = 'SELECT * FROM exams WHERE 1=1'
+    const tenant = await tenantClause(req, { table: 'exams', paramIndex: 1 })
+    sql += tenant.clause + ' ORDER BY created_at DESC'
+    const result = await query(sql, tenant.params)
+    // Optional authoritative class/section-specific exam subject catalog.
+    // Existing clients continue receiving the original exam records. Results
+    // stay school-scoped by BOTH the validated JWT and FORCE RLS policies.
+    if (req.query.include_subjects === '1' && result.rows.length) {
+      const role = String(req.user?.role || '').toLowerCase()
+      if (!['principal','admin','super_admin','teacher'].includes(role) &&
+          !(req.user?.account_type === 'service' && hasServiceScope(req,'school.results.read'))) {
+        return res.status(403).json({success:false,code:'EXAM_SUBJECT_CATALOG_PERMISSION_DENIED'})
+      }
+      const schoolId = currentSchoolId(req)
+      if (!Number.isSafeInteger(Number(schoolId)) || Number(schoolId) <= 0)
+        return res.status(403).json({success:false,code:'EXAM_SUBJECT_CATALOG_SCHOOL_REQUIRED'})
+      const examIds = result.rows.map(row => Number(row.id))
+        .filter(id => Number.isSafeInteger(id) && id > 0)
+      const offerings = examIds.length ? await query(`
+        SELECT x.exam_id,x.class_name,x.section,x.subject,x.sort_order,x.total_marks,x.pass_marks
+        FROM exam_subjects x
+        JOIN exams e ON e.id=x.exam_id AND e.school_id=x.school_id
+        LEFT JOIN users approver ON approver.id=x.approved_by_user_id
+          AND approver.school_id=x.school_id AND approver.is_active=true
+          AND approver.role IN ('principal','admin')
+        WHERE x.school_id=$1 AND x.exam_id=ANY($2::integer[]) AND x.is_active = true
+          AND (COALESCE(e.type,'')<>'AS' OR (
+            x.approval_status='approved' AND x.approval_revision>0
+            AND x.approved_at IS NOT NULL AND approver.id IS NOT NULL))
+        ORDER BY x.exam_id,x.class_name,x.section,x.sort_order NULLS LAST,x.id
+      `, [schoolId, examIds]) : { rows: [] }
+      const byExam = new Map()
+      for (const offering of offerings.rows) {
+        const key = Number(offering.exam_id)
+        if (!byExam.has(key)) byExam.set(key, [])
+        byExam.get(key).push(offering)
+      }
+      return res.json({ success:true, data:result.rows.map(row => ({
+        ...row, subject_offerings:byExam.get(Number(row.id)) || []
+      })) })
+    }
+    res.json({ success: true, data: result.rows })
+  } catch (err) {
+    console.error('Exam list error:', err.message)
+    return res.status(503).json({ success: false, message: 'Database unavailable. Exams could not be loaded.' })
+  }
+})
+
+// POST /api/exams â€” teachers can create assessments
+router.post('/', protect, canManageExams, async (req, res) => {
+  try {
+    const { name, type, class: cls, session, start_date, end_date, total_marks, pass_marks } = req.body
+    const examName = String(name || '').trim().slice(0, 180)
+    const examType = String(type || '').trim().slice(0, 60)
+    const examClass = String(cls || '').trim().slice(0, 80)
+    const examSession = String(session || '').trim().slice(0, 80)
+    const totalMarks = Number(total_marks)
+    const passMarks = Number(pass_marks)
+    if (!examName || !examType || !examClass || !examSession) {
+      return res.status(422).json({ success: false, message: 'Exam name, type, class and academic session are required.' })
+    }
+    if (!Number.isFinite(totalMarks) || totalMarks <= 0 || !Number.isFinite(passMarks) || passMarks < 0 || passMarks > totalMarks) {
+      return res.status(422).json({ success: false, message: 'Total marks must be greater than zero and passing marks must be between zero and total marks.' })
+    }
+    const supportsTenant = await hasColumn('exams', 'school_id')
+    const schoolId = currentSchoolId(req)
+    if (!supportsTenant) {
+      return res.status(503).json({ success: false, code: 'EXAM_TENANT_SCHEMA_REQUIRED', message: 'Exam storage is not tenant-safe for writes.' })
+    }
+    if (!schoolId) {
+      return res.status(403).json({ success: false, code: 'SCHOOL_CONTEXT_REQUIRED', message: 'A school context is required to create an exam.' })
+    }
+    const actorId=Number(req.user?.id)
+    if(!Number.isSafeInteger(actorId)||actorId<1)
+      return res.status(403).json({success:false,code:'EXAM_CREATOR_AUTH_REQUIRED',
+        message:'Authenticated school staff account required to create an exam.'})
+    let client
+    try{
+      client=await pool.connect()
+      await client.query('BEGIN ISOLATION LEVEL SERIALIZABLE')
+      await applyTenantContext(client)
+      await client.query('SELECT pg_advisory_xact_lock($1::bigint)',[100000000+Number(schoolId)])
+      // New sequential all-class Assessment only: reject incorrect passing percentage.
+      // Historic First Term and legacy assessments stay untouched.
+      if(isSequentialAllClassAssessment({name:examName,type:examType,className:examClass})){
+        const gradePolicy=await client.query(
+          "SELECT max_percentage FROM grade_settings WHERE school_id=$1 AND label='F'",[schoolId])
+        const official=gradePolicy.rowCount===1 ?
+          officialPassMarks(totalMarks,Number(gradePolicy.rows[0].max_percentage)):null
+        if(official===null){
+          await client.query('ROLLBACK')
+          return res.status(409).json({success:false,code:'OFFICIAL_PASS_POLICY_REQUIRED',
+            message:'School passing policy must be verified before adding an assessment.'})
+        }
+        if(passMarks!==official){
+          await client.query('ROLLBACK')
+          return res.status(422).json({success:false,code:'ASSESSMENT_PASS_MARKS_POLICY_CONFLICT',
+            message:'This assessment must use the official school passing marks ('+official+').'})
+        }
+      }
+      const exists=await client.query(
+        'SELECT id FROM exams WHERE school_id=$1 AND lower(trim(name))=lower(trim($2)) AND lower(trim(class))=lower(trim($3)) AND coalesce(session,\'\')=$4 LIMIT 1',
+        [schoolId,examName,examClass,examSession])
+      if(exists.rowCount){
+        await client.query('ROLLBACK')
+        return res.status(409).json({success:false,code:'EXAM_ALREADY_EXISTS',
+          message:'This exam already exists for this class and session. Open it to enter marks.'})
+      }
+      const result=await client.query(
+        'INSERT INTO exams(school_id,name,type,class,session,start_date,end_date,total_marks,pass_marks,created_by) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING *',
+        [schoolId,examName,examType,examClass,examSession,start_date||null,end_date||null,totalMarks,passMarks,actorId])
+      await client.query('COMMIT')
+      return res.status(201).json({success:true,data:result.rows[0]})
+    }catch(error){
+      if(client)await client.query('ROLLBACK').catch(()=>{})
+      throw error
+    }finally{
+      if(client)client.release()
+    }
+  } catch (err) {
+    if(err.code==='23505')
+      return res.status(409).json({success:false,code:'EXAM_ALREADY_EXISTS',
+        message:'This exam already exists for this class and session. Open it to enter marks.'})
+    if(err.code==='40001')
+      return res.status(409).json({success:false,code:'EXAM_CREATE_RETRY',
+        message:'Another save occurred at the same time. Please click Add Exam again.'})
+    console.error('Exam create error:', err.message)
+    res.status(500).json({ success: false, message: 'Failed to create exam.' })
+  }
+})
+
+// DELETE /api/exams/:id — remove one exam and its result rows atomically
+router.delete('/:id', protect, canManageExams, async (req, res) => {
+  const examId = Number(req.params.id)
+  if (!Number.isInteger(examId) || examId <= 0) {
+    return res.status(400).json({ success: false, message: 'Valid exam id is required.' })
+  }
+  const client = await pool.connect()
+  try {
+    const schoolId = currentSchoolId(req)
+    const supportsTenant = await hasColumn('exams', 'school_id')
+    if (!supportsTenant) {
+      return res.status(503).json({ success: false, code: 'EXAM_TENANT_SCHEMA_REQUIRED', message: 'Exam storage is not tenant-safe for deletion.' })
+    }
+    if (!schoolId) {
+      return res.status(403).json({ success: false, code: 'SCHOOL_CONTEXT_REQUIRED', message: 'A school context is required to delete an exam.' })
+    }
+    await client.query('BEGIN')
+    await applyTenantContext(client)
+    const lookup = await client.query('SELECT id, name FROM exams WHERE id = $1 AND school_id = $2 LIMIT 1', [examId, schoolId])
+    if (!lookup.rowCount) {
+      await client.query('ROLLBACK')
+      return res.status(404).json({ success: false, message: 'Exam not found.' })
+    }
+    // The original 2026-27 First Term school 1 Exam 9 is a frozen academic record.
+    // Refuse deletion even if a future corruption causes its result count to read 0.
+    if(Number(schoolId)===1 && examId===9){
+      await client.query('ROLLBACK')
+      return res.status(409).json({success:false,code:'ORIGINAL_FIRST_TERM_IMMUTABLE',
+        message:'The original First Term exam is permanently protected from normal deletion.'})
+    }
+    // Never silently erase saved academic results. An original immutable term is
+    // denied here before attempting a database mutation (DB guard remains active).
+    const hasSavedResults=await client.query(
+      'SELECT 1 FROM exam_results WHERE exam_id=$1 AND school_id=$2 LIMIT 1',[examId,schoolId])
+    if(hasSavedResults.rowCount){
+      await client.query('ROLLBACK')
+      return res.status(409).json({success:false,code:'EXAM_RESULTS_RETENTION_REQUIRED',
+        message:'This exam has saved student results and cannot be deleted from the standard exam manager.'})
+    }
+    // Signed subject offerings are academic evidence: normal exam deletion
+    // cannot silently remove an approved scope even before marks are entered.
+    const approvedSubjects=await client.query(
+      "SELECT 1 FROM exam_subjects WHERE exam_id=$1 AND school_id=$2 AND approval_status='approved' LIMIT 1",
+      [examId,schoolId])
+    if(approvedSubjects.rowCount){
+      await client.query('ROLLBACK')
+      return res.status(409).json({success:false,code:'APPROVED_EXAM_SCOPE_RETENTION_REQUIRED',
+        message:'The approved academic subject scope must be preserved. Use the authorized correction workflow.'})
+    }
+    await client.query('DELETE FROM exam_results WHERE exam_id = $1 AND school_id=$2', [examId,schoolId])
+    await client.query('DELETE FROM exams WHERE id = $1 AND school_id=$2', [examId,schoolId])
+    await client.query('COMMIT')
+    return res.json({ success: true, message: 'Exam deleted successfully.', data: { id: examId, name: lookup.rows[0].name } })
+  } catch (err) {
+    await client.query('ROLLBACK').catch(() => {})
+    console.error('Exam delete error:', err.message)
+    return res.status(500).json({ success: false, message: 'Exam could not be deleted.' })
+  } finally {
+    client.release()
+  }
+})
+
+// POST /api/exams/results — tenant-scoped, transactional bulk result save
+router.post('/results', protect, canWriteMarks, async (req, res) => {
+  const results = req.body?.results
+  if (!Array.isArray(results) || !results.length) {
+    return res.status(400).json({ success: false, message: 'results must be a non-empty array' })
+  }
+
+  if (results.length > 5000) return res.status(422).json({success:false,code:'RESULT_BATCH_LIMIT_EXCEEDED'})
+
+  const schoolId = currentSchoolId(req)
+  const [supportsStudentTenant, supportsExamTenant, supportsResultTenant] = await Promise.all([
+    hasColumn('students', 'school_id'),
+    hasColumn('exams', 'school_id'),
+    hasColumn('exam_results', 'school_id'),
+  ])
+  if (!supportsStudentTenant || !supportsExamTenant || !supportsResultTenant) {
+    return res.status(503).json({
+      success: false,
+      code: 'RESULT_TENANT_SCHEMA_REQUIRED',
+      message: 'Student, exam, and result storage must all be tenant-safe before results can be written.',
+    })
+  }
+  if (!schoolId) {
+    return res.status(403).json({ success: false, code: 'SCHOOL_CONTEXT_REQUIRED', message: 'A school context is required to save results.' })
+  }
+
+  let gradeBands
+  try {
+    gradeBands = await loadGradeBandsForSchool(schoolId, {previewDefaults:false})
+  } catch (err) {
+    console.error('Grade policy load error:', err.message)
+    return res.status(500).json({ success: false, message: 'School grading policy could not be loaded.' })
+  }
+
+  const normalized = []
+  for (const row of results) {
+    const examId = Number(row?.exam_id)
+    const studentId = Number(row?.student_id)
+    const subject = String(row?.subject || '').trim().slice(0, 160)
+    const parsedState = validateResultState(row, req.user?.role)
+    if (parsedState.error) {
+      return res.status(parsedState.error === 'EXCUSED_REQUIRES_PRINCIPAL' ? 403 : 422)
+        .json({success:false,code:parsedState.error,
+          message:'Exam subject status and numeric marks are inconsistent or unauthorized.'})
+    }
+    const marksObtained = parsedState.marks
+    const totalMarks = parseExactMarksNumber(row?.total_marks)
+    if (!Number.isInteger(examId) || examId <= 0 || !Number.isInteger(studentId) || studentId <= 0 || !subject) {
+      return res.status(422).json({ success: false, message: 'Valid exam_id, student_id and subject are required for every result.' })
+    }
+    if (!Number.isFinite(totalMarks) || totalMarks <= 0 ||
+        (parsedState.status === 'SCORED' &&
+        (!Number.isFinite(marksObtained) || marksObtained < 0 || marksObtained > totalMarks))) {
+      return res.status(422).json({ success: false, message: 'Marks must be numeric, total marks must be greater than zero, and obtained marks cannot exceed total marks.' })
+    }
+    normalized.push({
+      examId,
+      studentId,
+      subject,
+      marksObtained,
+      totalMarks,
+      resultStatus:parsedState.status,
+      grade:parsedState.status === 'SCORED' && gradeBands.length > 0 ? gradeFromBands(marksObtained, totalMarks, gradeBands) : null,
+    })
+  }
+
+  let client
+  try {
+    client = await pool.connect()
+  } catch (err) {
+    console.error('Marks database connection unavailable:', err.code || 'DB_CONNECTION_UNAVAILABLE')
+    return res.status(503).json({success:false,code:'MARKS_STORAGE_UNAVAILABLE'})
+  }
+  try {
+    await client.query('BEGIN')
+    await applyTenantContext(client)
+    const studentIds = [...new Set(normalized.map(row => row.studentId))]
+    const examIds = [...new Set(normalized.map(row => row.examId))]
+    const [studentScope, examScope] = await Promise.all([
+      client.query('SELECT id, class, section FROM students WHERE school_id = $1 AND id = ANY($2::int[])', [schoolId, studentIds]),
+      client.query('SELECT id, class, type, total_marks, pass_marks FROM exams WHERE school_id = $1 AND id = ANY($2::int[])', [schoolId, examIds]),
+    ])
+    const validStudents = new Set(studentScope.rows.map(row => Number(row.id)))
+    const validExams = new Set(examScope.rows.map(row => Number(row.id)))
+    const foreignStudent = studentIds.find(id => !validStudents.has(id))
+    const foreignExam = examIds.find(id => !validExams.has(id))
+    if (foreignStudent || foreignExam) {
+      await client.query('ROLLBACK')
+      return res.status(403).json({
+        success: false,
+        message: foreignStudent ? 'One or more students do not belong to this school.' : 'One or more exams do not belong to this school.',
+      })
+    }
+
+    // Assessment 1/2/3/... requires a genuinely signed subject catalog before
+    // ANY principal/admin/teacher can save marks. First Term remains unchanged.
+    const assessmentIds=examScope.rows.filter(x=>String(x.type||'').toUpperCase()==='AS').map(x=>Number(x.id))
+    if(assessmentIds.length){
+      const [subjectCatalog,cohortCatalog]=await Promise.all([
+        client.query(`SELECT x.school_id,x.exam_id,x.class_name,x.section,x.subject,x.total_marks,x.pass_marks,
+            x.is_active,x.approval_status,x.approval_revision,x.approved_by_user_id,x.approved_at,
+            (u.id IS NOT NULL AND u.is_active=true AND u.school_id=x.school_id
+              AND u.role IN ('admin','principal')) AS reviewer_valid
+          FROM exam_subjects x LEFT JOIN users u ON u.id=x.approved_by_user_id
+          WHERE x.school_id=$1 AND x.exam_id=ANY($2::int[]) AND x.is_active=true
+          AND x.approval_status='approved'`,[schoolId,assessmentIds]),
+        client.query(`SELECT exam_id,class_name,section,is_active FROM exam_class_enrollments
+          WHERE school_id=$1 AND exam_id=ANY($2::int[]) AND is_active=true`,[schoolId,assessmentIds])
+      ])
+      const gate=validateAssessmentMarksApproval({schoolId,results:normalized,
+        students:studentScope.rows,exams:examScope.rows,
+        offerings:subjectCatalog.rows,enrollments:cohortCatalog.rows})
+      if(!gate.ok){
+        await client.query('ROLLBACK')
+        return res.status(gate.code==='ASSESSMENT_MARKS_MAXIMUM_CONFLICT'?422:409).json({
+          success:false,code:gate.code,
+          message:'Assessment marks require the official approved subject, maximum and cohort enrollment.'
+        })
+      }
+    }
+
+    if (isTeacher(req)) {
+      const assignmentScope = await client.query(
+        `SELECT school_id, teacher_user_id, class_name, section, subject, is_active
+         FROM teacher_class_assignments
+         WHERE school_id=$1 AND teacher_user_id=$2 AND is_active=true`,
+        [schoolId, req.user?.id]
+      )
+      if (!validateTeacherMarksWrite({
+        user:req.user,schoolId,results:normalized,
+        students:studentScope.rows,exams:examScope.rows,assignments:assignmentScope.rows,
+      })) {
+        await client.query('ROLLBACK')
+        return res.status(403).json({
+          success:false,
+          code:'EXAM_MARKS_TEACHER_ASSIGNMENT_REQUIRED',
+          message:'Marks entry requires an active teacher assignment matching each student class, section and subject.',
+        })
+      }
+    }
+
+    // A school-published subject catalog, not the exam's general 100-mark
+    // ceiling, must authorize every teacher write and every Exam 9 write.
+    // Check within the same transaction to prevent TOCTOU catalog drift.
+    if (isTeacher(req) || normalized.some(row => row.examId === 9)) {
+      const offerings = await client.query(`
+        SELECT x.exam_id, x.school_id, x.class_name, x.section, x.subject,
+          x.total_marks, x.is_active, x.approval_status, x.approval_revision,
+          x.approved_by_user_id, x.approved_at,
+          (u.id IS NOT NULL AND u.is_active=true AND u.school_id=x.school_id
+           AND u.role IN ('principal','admin')) AS reviewer_valid
+        FROM exam_subjects x
+        LEFT JOIN users u ON u.id=x.approved_by_user_id
+        WHERE x.school_id = $1 AND x.exam_id = ANY($2::int[]) AND x.is_active = true
+      `, [schoolId, examIds])
+      const guardedRows = normalized.filter(row => isTeacher(req) || row.examId === 9)
+      if (!validatePaperMaxima({
+        schoolId, results:guardedRows, students:studentScope.rows, offerings:offerings.rows
+      })) {
+        await client.query('ROLLBACK')
+        return res.status(422).json({success:false,code:'EXAM_SUBJECT_MAXIMUM_NOT_APPROVED',
+          message:'A unique approved class/section/subject maximum is required. Existing results were not changed.'})
+      }
+    }
+
+    // Duplicate row protection: each row must target a unique (exam, student, subject)
+
+    const keys = normalized.map(row => `${row.examId}|${row.studentId}|${row.subject}`)
+    if (new Set(keys).size !== keys.length) {
+      await client.query('ROLLBACK')
+      return res.status(422).json({success:false,code:'DUPLICATE_MARKS_ROW'})
+    }
+    const existing = await client.query(`
+      WITH requested (exam_id,student_id,subject) AS (
+        SELECT * FROM UNNEST($2::int[], $3::int[], $4::text[])
+      )
+      SELECT er.exam_id,er.student_id,er.subject,er.marks_obtained,
+        er.total_marks,er.grade,er.result_status
+      FROM exam_results er
+      JOIN requested r ON r.exam_id=er.exam_id
+        AND r.student_id=er.student_id AND r.subject=er.subject
+      WHERE er.school_id=$1
+      FOR UPDATE OF er
+    `,[schoolId,normalized.map(row=>row.examId),normalized.map(row=>row.studentId),normalized.map(row=>row.subject)])
+    const prior = new Map(existing.rows.map(row=>[
+      `${row.exam_id}|${row.student_id}|${row.subject}`,row,
+    ]))
+    const sameScore = (oldRow,newRow) =>
+      (oldRow.marks_obtained === null ? newRow.marksObtained === null : Number(oldRow.marks_obtained) === newRow.marksObtained) &&
+      Number(oldRow.total_marks) === newRow.totalMarks &&
+      (oldRow.grade ?? null) === (newRow.grade ?? null) &&
+      (oldRow.result_status ?? 'SCORED') === newRow.resultStatus
+    for(const row of normalized) {
+      const key=`${row.examId}|${row.studentId}|${row.subject}`
+      const before=prior.get(key)
+      if(before && !sameScore(before,row)) {
+        await client.query('ROLLBACK')
+        return res.status(409).json({success:false,code:'OFFICIAL_MARKS_REVISION_REQUIRED',
+          message:'Previously saved marks cannot be changed without an audited Principal revision.'})
+      }
+    }
+    let insertedCount=0
+    for (const row of normalized) {
+      const key=`${row.examId}|${row.studentId}|${row.subject}`
+      if(prior.has(key)) continue // Exact replay; do not alter DB row or timestamp.
+      const inserted=await client.query(`
+        INSERT INTO exam_results (school_id, exam_id, student_id, subject, marks_obtained, total_marks, grade, result_status)
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
+        ON CONFLICT (exam_id, student_id, subject) DO NOTHING
+        RETURNING id
+      `,[schoolId,row.examId,row.studentId,row.subject,row.marksObtained,row.totalMarks,row.grade,row.resultStatus])
+      // Concurrent insert: fail the whole transaction instead of overwriting.
+      if(inserted.rowCount!==1) {
+        await client.query('ROLLBACK')
+        return res.status(409).json({success:false,code:'OFFICIAL_MARKS_WRITE_CONFLICT'})
+      }
+      insertedCount++
+    }
+    await client.query('COMMIT')
+    return res.json({success:true,savedCount:normalized.length,insertedCount,
+      unchangedCount:normalized.length-insertedCount,message:'Results accepted without rewriting prior marks.'})
+  } catch (err) {
+    await client.query('ROLLBACK').catch(() => {})
+    console.error('Exam result save error:', err.message)
+    return res.status(500).json({ success: false, message: 'Results could not be saved.' })
+  } finally {
+    client.release()
+  }
+})
+
+// GET /api/exams/results
+router.get('/results', protect, canReadResults, async (req, res) => {
+  try {
+    const filters = []
+    const params = []
+    let idx = 1
+
+    let explicitExamIds = []
+    if (req.query.exam_ids) {
+      explicitExamIds = String(req.query.exam_ids)
+        .split(',')
+        .map(value => Number(value.trim()))
+        .filter(value => Number.isInteger(value) && value > 0)
+      explicitExamIds = [...new Set(explicitExamIds)]
+      if (!explicitExamIds.length || explicitExamIds.length > 100) {
+        return res.status(422).json({ success: false, message: 'exam_ids must contain between 1 and 100 valid exam IDs.' })
+      }
+      filters.push(`er.exam_id = ANY($${idx++}::int[])`)
+      params.push(explicitExamIds)
+    }
+
+    if (req.query.student_id) {
+      filters.push(`er.student_id = $${idx++}`)
+      params.push(req.query.student_id)
+    }
+    if (req.query.exam_type) {
+      filters.push(`LOWER(e.type) = LOWER($${idx++})`)
+      params.push(req.query.exam_type)
+    }
+    if (req.query.subject) {
+      filters.push(`LOWER(er.subject) = LOWER($${idx++})`)
+      params.push(req.query.subject)
+    }
+    if (req.query.class) {
+      filters.push(`LOWER(s.class) = LOWER($${idx++})`)
+      params.push(req.query.class)
+    }
+
+    let sql = `
+      SELECT er.*, e.name as exam_name, e.session, e.type as exam_type,
+             s.name as student_name, s.class, s.section, s.gr_number, s.father_name,
+             COALESCE(att.attendance_total_days, 0) as attendance_total_days,
+             COALESCE(att.attendance_attended, 0) as attendance_attended,
+             COALESCE(att.attendance_absent, 0) as attendance_absent
+      FROM exam_results er
+      JOIN exams e ON er.exam_id = e.id
+      JOIN students s ON er.student_id = s.id AND s.school_id = e.school_id
+      LEFT JOIN (
+        SELECT school_id, student_id, COUNT(DISTINCT date) AS attendance_total_days,
+               COUNT(*) FILTER (WHERE status = 'present') AS attendance_attended,
+               COUNT(*) FILTER (WHERE status = 'absent') AS attendance_absent
+        FROM attendance GROUP BY school_id, student_id
+      ) att ON att.school_id = s.school_id AND att.student_id = s.id
+      WHERE 1=1
+    `
+    if (filters.length) sql += ` AND ${filters.join(' AND ')}`
+
+    const isSuperAdmin = req.user?.role === 'super_admin'
+    if (!isSuperAdmin) {
+      const studentTenant = await tenantClause(req, { table: 'students', alias: 's', paramIndex: idx })
+      const examTenant = await tenantClause(req, { table: 'exams', alias: 'e', paramIndex: studentTenant.nextIndex })
+      sql += studentTenant.clause + examTenant.clause
+      params.push(...studentTenant.params, ...examTenant.params)
+      const portalScope = portalStudentScope(req, 's', examTenant.nextIndex)
+      sql += portalScope.clause
+      params.push(...portalScope.params)
+    }
+
+    sql += ` ORDER BY e.created_at DESC, s.class, s.roll_number, er.subject`
+    if (!explicitExamIds.length) sql += ` LIMIT 500`
+    const result = await query(sql, params)
+    res.json({ success: true, data: result.rows })
+  } catch (err) {
+    console.error('Exam results list error:', err.message)
+    res.status(500).json({ success: false, message: 'Failed to load exam results.' })
+  }
+})
+
+// GET /api/exams/results/:exam_id
+router.get('/results/:exam_id', protect, canReadResults, async (req, res) => {
+  try {
+    let sql = `
+      SELECT er.*, s.name, s.class AS student_class, s.section AS student_section, s.gr_number, s.roll_number, s.father_name, s.photo,
+             COALESCE(att.attendance_total_days, 0) as attendance_total_days,
+             COALESCE(att.attendance_attended, 0) as attendance_attended,
+             COALESCE(att.attendance_absent, 0) as attendance_absent
+      FROM exam_results er
+      JOIN exams e ON er.exam_id = e.id
+      JOIN students s ON er.student_id = s.id AND s.school_id = e.school_id
+      LEFT JOIN (
+        SELECT school_id, student_id, COUNT(DISTINCT date) AS attendance_total_days,
+               COUNT(*) FILTER (WHERE status = 'present') AS attendance_attended,
+               COUNT(*) FILTER (WHERE status = 'absent') AS attendance_absent
+        FROM attendance GROUP BY school_id, student_id
+      ) att ON att.school_id = s.school_id AND att.student_id = s.id
+      WHERE er.exam_id = $1
+    `
+    const params = [req.params.exam_id]
+    const isSuperAdmin = req.user?.role === 'super_admin'
+    if (!isSuperAdmin) {
+      const studentTenant = await tenantClause(req, { table: 'students', alias: 's', paramIndex: 2 })
+      const examTenant = await tenantClause(req, { table: 'exams', alias: 'e', paramIndex: studentTenant.nextIndex })
+      sql += studentTenant.clause + examTenant.clause
+      params.push(...studentTenant.params, ...examTenant.params)
+      const portalScope = portalStudentScope(req, 's', examTenant.nextIndex)
+      sql += portalScope.clause
+      params.push(...portalScope.params)
+    }
+    sql += ` ORDER BY s.roll_number, er.subject`
+    const result = await query(sql, params)
+    res.json({ success: true, data: result.rows })
+  } catch (err) {
+    console.error('Exam results fetch error:', err.message)
+    return res.status(503).json({ success: false, message: 'Database unavailable. Exam results could not be loaded.' })
+  }
+})
+
+
+// GET /api/exams/student-results/:student_id
+router.get('/student-results/:student_id', protect, requireScopeForServiceOnly('school.results.read'), async (req, res) => {
+  try {
+    let sql = `
+      SELECT er.*, e.name as exam_name, e.session, e.type as exam_type, s.name as student_name, s.class, s.section, s.gr_number, s.father_name, s.photo
+      FROM exam_results er
+      JOIN exams e ON er.exam_id = e.id
+      JOIN students s ON er.student_id = s.id AND s.school_id = e.school_id
+      WHERE er.student_id = $1
+    `
+    const params = [req.params.student_id]
+    const isSuperAdmin = req.user?.role === 'super_admin'
+    if (!isSuperAdmin) {
+      const studentTenant = await tenantClause(req, { table: 'students', alias: 's', paramIndex: 2 })
+      const examTenant = await tenantClause(req, { table: 'exams', alias: 'e', paramIndex: studentTenant.nextIndex })
+      sql += studentTenant.clause + examTenant.clause
+      params.push(...studentTenant.params, ...examTenant.params)
+      const portalScope = portalStudentScope(req, 's', examTenant.nextIndex)
+      sql += portalScope.clause
+      params.push(...portalScope.params)
+    }
+    sql += ` ORDER BY e.created_at DESC, er.subject`
+    const result = await query(sql, params)
+    res.json({ success: true, data: result.rows })
+  } catch (err) {
+    console.error('Student results fetch error:', err.message)
+    return res.status(503).json({ success: false, message: 'Database unavailable. Student results could not be loaded.' })
+  }
+})
+
+module.exports = router
