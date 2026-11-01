@@ -1,0 +1,62 @@
+--- a/src/routes/examRoutes.js
++++ b/src/routes/examRoutes.js
+@@ -12,6 +12,7 @@
+ const {proposeNextAssessment}=require('../services/nextAssessmentProposal')
+ 
+ const canManageExams = requireRoles('super_admin', 'admin', 'principal')
++const {isSequentialAllClassAssessment,officialPassMarks} = require('../services/examMutationSafety')
+ const canWriteMarks = requireRoles('super_admin', 'admin', 'principal', 'teacher')
+ function canReadResults(req, res, next) {
+   if (req.user?.account_type === 'service') {
+@@ -258,6 +259,24 @@
+       await client.query('BEGIN ISOLATION LEVEL SERIALIZABLE')
+       await applyTenantContext(client)
+       await client.query('SELECT pg_advisory_xact_lock($1::bigint)',[100000000+Number(schoolId)])
++      // New sequential all-class Assessment only: reject incorrect passing percentage.
++      // Historic First Term and legacy assessments stay untouched.
++      if(isSequentialAllClassAssessment({name:examName,type:examType,className:examClass})){
++        const gradePolicy=await client.query(
++          "SELECT max_percentage FROM grade_settings WHERE school_id=$1 AND label='F'",[schoolId])
++        const official=gradePolicy.rowCount===1 ?
++          officialPassMarks(totalMarks,Number(gradePolicy.rows[0].max_percentage)):null
++        if(official===null){
++          await client.query('ROLLBACK')
++          return res.status(409).json({success:false,code:'OFFICIAL_PASS_POLICY_REQUIRED',
++            message:'School passing policy must be verified before adding an assessment.'})
++        }
++        if(passMarks!==official){
++          await client.query('ROLLBACK')
++          return res.status(422).json({success:false,code:'ASSESSMENT_PASS_MARKS_POLICY_CONFLICT',
++            message:'This assessment must use the official school passing marks ('+official+').'})
++        }
++      }
+       const exists=await client.query(
+         'SELECT id FROM exams WHERE school_id=$1 AND lower(trim(name))=lower(trim($2)) AND lower(trim(class))=lower(trim($3)) AND coalesce(session,\'\')=$4 LIMIT 1',
+         [schoolId,examName,examClass,examSession])
+@@ -312,8 +331,24 @@
+       await client.query('ROLLBACK')
+       return res.status(404).json({ success: false, message: 'Exam not found.' })
+     }
+-    await client.query('DELETE FROM exam_results WHERE exam_id = $1', [examId])
+-    await client.query('DELETE FROM exams WHERE id = $1', [examId])
++    // The original 2026-27 First Term school 1 Exam 9 is a frozen academic record.
++    // Refuse deletion even if a future corruption causes its result count to read 0.
++    if(Number(schoolId)===1 && examId===9){
++      await client.query('ROLLBACK')
++      return res.status(409).json({success:false,code:'ORIGINAL_FIRST_TERM_IMMUTABLE',
++        message:'The original First Term exam is permanently protected from normal deletion.'})
++    }
++    // Never silently erase saved academic results. An original immutable term is
++    // denied here before attempting a database mutation (DB guard remains active).
++    const hasSavedResults=await client.query(
++      'SELECT 1 FROM exam_results WHERE exam_id=$1 AND school_id=$2 LIMIT 1',[examId,schoolId])
++    if(hasSavedResults.rowCount){
++      await client.query('ROLLBACK')
++      return res.status(409).json({success:false,code:'EXAM_RESULTS_RETENTION_REQUIRED',
++        message:'This exam has saved student results and cannot be deleted from the standard exam manager.'})
++    }
++    await client.query('DELETE FROM exam_results WHERE exam_id = $1 AND school_id=$2', [examId,schoolId])
++    await client.query('DELETE FROM exams WHERE id = $1 AND school_id=$2', [examId,schoolId])
+     await client.query('COMMIT')
+     return res.json({ success: true, message: 'Exam deleted successfully.', data: { id: examId, name: lookup.rows[0].name } })
+   } catch (err) {
