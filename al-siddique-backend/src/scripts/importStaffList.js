@@ -284,7 +284,7 @@ async function insertEmployee(client, record, batch, user, plainPassword, permis
       )
       VALUES (
         $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,
-        $16,$17,$18,$19::jsonb,$20,$21,$22,'teacher',$23::jsonb,true,
+        $16,$17,$18,$19::jsonb,$20,$21,NULL,'teacher',$23::jsonb,true,
         'Staff List.pdf',$24,$25,$26::jsonb,true
       )
       RETURNING id
@@ -344,7 +344,7 @@ async function updateDuplicate(client, employeeId, record, batch, user, plainPas
         app_access = COALESCE(app_access, $13::jsonb),
         user_id = COALESCE(user_id, $14),
         portal_username = COALESCE(NULLIF(portal_username, ''), $15),
-        portal_password = COALESCE(NULLIF(portal_password, ''), $16),
+        portal_password = NULL,
         portal_role = COALESCE(NULLIF(portal_role, ''), 'teacher'),
         portal_permissions = COALESCE(portal_permissions, $13::jsonb),
         portal_active = true,
