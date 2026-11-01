@@ -34,6 +34,8 @@ test('exam delete is tenant-bound and refuses original First Term and saved resu
  assert.match(src,/ORIGINAL_FIRST_TERM_IMMUTABLE/)
  assert.match(src,/SELECT 1 FROM exam_results WHERE exam_id=\$1 AND school_id=\$2 LIMIT 1/)
  assert.match(src,/EXAM_RESULTS_RETENTION_REQUIRED/)
+ assert.match(src,/SELECT 1 FROM exam_subjects WHERE exam_id=\$1 AND school_id=\$2 AND approval_status='approved' LIMIT 1/)
+ assert.match(src,/APPROVED_EXAM_SCOPE_RETENTION_REQUIRED/)
  assert.match(src,/DELETE FROM exam_results WHERE exam_id = \$1 AND school_id=\$2/)
  assert.match(src,/DELETE FROM exams WHERE id = \$1 AND school_id=\$2/)
 })

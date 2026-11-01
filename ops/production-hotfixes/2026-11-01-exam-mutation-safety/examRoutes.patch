@@ -33,7 +33,7 @@
        const exists=await client.query(
          'SELECT id FROM exams WHERE school_id=$1 AND lower(trim(name))=lower(trim($2)) AND lower(trim(class))=lower(trim($3)) AND coalesce(session,\'\')=$4 LIMIT 1',
          [schoolId,examName,examClass,examSession])
-@@ -312,8 +331,24 @@
+@@ -312,8 +331,34 @@
        await client.query('ROLLBACK')
        return res.status(404).json({ success: false, message: 'Exam not found.' })
      }
@@ -54,6 +54,16 @@
 +      await client.query('ROLLBACK')
 +      return res.status(409).json({success:false,code:'EXAM_RESULTS_RETENTION_REQUIRED',
 +        message:'This exam has saved student results and cannot be deleted from the standard exam manager.'})
++    }
++    // Signed subject offerings are academic evidence: normal exam deletion
++    // cannot silently remove an approved scope even before marks are entered.
++    const approvedSubjects=await client.query(
++      "SELECT 1 FROM exam_subjects WHERE exam_id=$1 AND school_id=$2 AND approval_status='approved' LIMIT 1",
++      [examId,schoolId])
++    if(approvedSubjects.rowCount){
++      await client.query('ROLLBACK')
++      return res.status(409).json({success:false,code:'APPROVED_EXAM_SCOPE_RETENTION_REQUIRED',
++        message:'The approved academic subject scope must be preserved. Use the authorized correction workflow.'})
 +    }
 +    await client.query('DELETE FROM exam_results WHERE exam_id = $1 AND school_id=$2', [examId,schoolId])
 +    await client.query('DELETE FROM exams WHERE id = $1 AND school_id=$2', [examId,schoolId])

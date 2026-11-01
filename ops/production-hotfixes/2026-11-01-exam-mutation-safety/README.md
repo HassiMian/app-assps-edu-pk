@@ -25,3 +25,6 @@ Live rollback source on restricted VPS:
 /root/secure-archive/assps-resume-20261101/EXAM_ROUTES_BEFORE_MUTATION_SAFETY_20261101.js
 
 This branch is review-only; source-of-truth merge is BLOCKED until canonical runtime parity is independently approved. Private students are not included.
+
+## Final additional retention protection
+Approved academic subject offerings now also independently block normal exam deletion (HTTP409 APPROVED_EXAM_SCOPE_RETENTION_REQUIRED), even when no marks have yet been entered. Post-restart 59/59 core and 4/4 focused tests PASS. The unified diff was replayed against the exact pre-fix runtime source and matched deployed examRoutes.js byte for byte.
