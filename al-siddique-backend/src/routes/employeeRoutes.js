@@ -1,4 +1,4 @@
-﻿// src/routes/employeeRoutes.js
+// src/routes/employeeRoutes.js
 // Al Siddique Smart School OS â€” Employee Routes
 
 const express = require('express')
@@ -8,6 +8,7 @@ const { protect, requireRoles, adminOrServiceScope } = require('../middleware/au
 const { tenantClause, currentSchoolId, hasColumn } = require('../middleware/tenant')
 const ALLOW_MOCK_FALLBACK = process.env.ALLOW_MOCK_FALLBACK === 'true' && process.env.NODE_ENV !== 'production'
 
+const {employeePublicRecord} = require('../services/staffSecurityProjection')
 const canManageStaff = requireRoles('super_admin', 'admin', 'principal')
 const canReadStaff = adminOrServiceScope('school.staff.read')
 
@@ -48,7 +49,6 @@ const EMPLOYEE_WRITE_FIELDS = [
   'branch_name',
   'app_access',
   'portal_username',
-  'portal_password',
   'portal_role',
   'portal_permissions',
   'portal_active',
@@ -74,6 +74,13 @@ function nullableDate(value) {
   return value === '' || value === undefined ? null : value
 }
 
+function rejectLegacyPortalPasswordWrite(req, res) {
+  if (!Object.prototype.hasOwnProperty.call(req.body || {}, 'portal_password')) return false
+  res.status(422).json({ success:false, code:'LEGACY_PORTAL_PASSWORD_FIELD_FORBIDDEN',
+    message:'Set staff passwords using the authorized portal account reset workflow.' })
+  return true
+}
+
 // GET /api/employees â€” list with search/filter
 router.get('/', protect, canReadStaff, async (req, res) => {
   try {
@@ -93,7 +100,7 @@ router.get('/', protect, canReadStaff, async (req, res) => {
     sql += ' ORDER BY name'
 
     const result = await query(sql, params)
-    res.json({ success: true, count: result.rowCount, data: result.rows })
+    res.json({ success: true, count: result.rowCount, data: result.rows.map(employeePublicRecord) })
   } catch (err) {
     console.error('Employee list error:', err.message)
     if (!ALLOW_MOCK_FALLBACK) {
@@ -156,6 +163,13 @@ router.get('/', protect, canReadStaff, async (req, res) => {
   }
 })
 
+function rejectLegacyPortalPasswordWrite(req, res) {
+  if (!Object.prototype.hasOwnProperty.call(req.body || {}, 'portal_password')) return false
+  res.status(422).json({ success:false, code:'LEGACY_PORTAL_PASSWORD_FIELD_FORBIDDEN',
+    message:'Set staff passwords using the authorized portal account reset workflow.' })
+  return true
+}
+
 // GET /api/employees/:id
 router.get('/:id', protect, canReadStaff, async (req, res) => {
   try {
@@ -167,7 +181,7 @@ router.get('/:id', protect, canReadStaff, async (req, res) => {
     const result = await query(sql, params)
     if (result.rows.length === 0)
       return res.status(404).json({ success: false, message: 'Employee nahi mila' })
-    res.json({ success: true, data: result.rows[0] })
+    res.json({ success: true, data: employeePublicRecord(result.rows[0]) })
   } catch (err) {
     console.error('Employee detail error:', err.message)
     if (!ALLOW_MOCK_FALLBACK) {
@@ -193,6 +207,7 @@ router.get('/:id', protect, canReadStaff, async (req, res) => {
 
 // POST /api/employees â€” add employee
 router.post('/', protect, canManageStaff, async (req, res) => {
+  if (rejectLegacyPortalPasswordWrite(req,res)) return
   try {
     const {
       emp_id, name, designation, department, phone, email, salary, join_date
@@ -237,7 +252,7 @@ router.post('/', protect, canManageStaff, async (req, res) => {
       RETURNING *
     `, values)
 
-    res.status(201).json({ success: true, message: 'Employee add ho gaya', data: result.rows[0] })
+    res.status(201).json({ success: true, message: 'Employee add ho gaya', data: employeePublicRecord(result.rows[0]) })
   } catch (err) {
     if (err.code === '23505')
       return res.status(400).json({ success: false, message: 'EMP ID already exists' })
@@ -247,6 +262,7 @@ router.post('/', protect, canManageStaff, async (req, res) => {
 
 // PUT /api/employees/:id â€” update
 router.put('/:id', protect, canManageStaff, async (req, res) => {
+  if (rejectLegacyPortalPasswordWrite(req,res)) return
   try {
     const {
       name, designation, department, phone, email, salary, join_date, is_active
@@ -302,7 +318,7 @@ router.put('/:id', protect, canManageStaff, async (req, res) => {
         .catch(err => console.warn('Could not sync employee active state to user:', err.message))
     }
 
-    res.json({ success: true, message: 'Employee update ho gaya', data: updated })
+    res.json({ success: true, message: 'Employee update ho gaya', data: employeePublicRecord(updated) })
   } catch (err) {
     res.status(500).json({ success: false, message: err.message })
   }

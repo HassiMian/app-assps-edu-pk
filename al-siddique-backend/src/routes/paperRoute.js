@@ -8,6 +8,7 @@ const router = express.Router()
 const { protect, requireRoles, requireFeature: maybeRequireFeature } = require('../middleware/auth')
 const { pool } = require('../config/database')
 const { currentSchoolId, tenantClause } = require('../middleware/tenant')
+const {canManageGlobalAiQueue} = require('../services/ai/globalAiQueueAuthority')
 const {
   getAiEnvConfig,
   publicMessageFor,
@@ -131,9 +132,9 @@ function scopedQueueStats(req) {
 }
 
 function requireQueueAdmin(req, res) {
-  const allowed = ['super_admin', 'admin', 'principal']
-  if (allowed.includes(req.user?.role)) return true
-  res.status(403).json({ success: false, message: 'Queue administration is limited to admins and principals.' })
+  if (canManageGlobalAiQueue(req.user)) return true
+  res.status(403).json({ success: false, code: 'GLOBAL_QUEUE_SUPER_ADMIN_ONLY',
+    message: 'Global AI queue controls require a platform super admin.' })
   return false
 }
 
