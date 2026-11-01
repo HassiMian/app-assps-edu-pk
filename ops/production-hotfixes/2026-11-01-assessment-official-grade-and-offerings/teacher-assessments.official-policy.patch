@@ -1,0 +1,149 @@
+--- a/src/app/teacher/assessments/page.tsx
++++ b/src/app/teacher/assessments/page.tsx
+@@ -3,6 +3,7 @@
+ import DashboardLayout from "@/components/DashboardLayout";
+ import {PortalModuleHeading, PortalSupportNote} from '@/components/PortalModulePrimitives';
+ import api from "@/utils/api";
++import {approvedAssessmentSubjects, officialGrade, verifiedBands, type OfficialBand, type Offering} from "@/utils/officialAssessmentGrade";
+ import {
+   BookOpen,
+   CheckCircle2,
+@@ -34,6 +35,7 @@
+   class: string;
+   session: string;
+   total_marks: number;
++  subject_offerings?: Offering[];
+ };
+ 
+ function examForClass(examClass: string, assignedClass: string): boolean {
+@@ -100,6 +102,8 @@
+   const [assignmentError,setAssignmentError] = useState('');
+   const [session, setSession] = useState("2026-2027");
+   const [existingExams, setExistingExams] = useState<ExistingExam[]>([]);
++  const [officialBands, setOfficialBands] = useState<OfficialBand[]>([]);
++  const [gradePreviewError, setGradePreviewError] = useState("");
+   const [examId, setExamId] = useState("");
+   const [examLoadError, setExamLoadError] = useState("");
+   const [totalMarks, setTotalMarks] = useState("100");
+@@ -111,7 +115,7 @@
+   const [toast, setToast] = useState<Toast>(null);
+ 
+   const selectedClass = classes.find((item) => item.label === classLabel) || null;
+-  const availableSubjects = useMemo(() => selectedClass?.subjects || [], [selectedClass]);
++
+   const compatibleExams = useMemo(() => existingExams.filter((exam) =>
+     selectedClass && Number.isInteger(exam.id) && exam.id > 0 &&
+     String(exam.session || "") === session &&
+@@ -119,6 +123,8 @@
+     Number(exam.total_marks) > 0
+   ), [existingExams, selectedClass, session]);
+   const selectedExam = compatibleExams.find((exam) => String(exam.id) === examId) || null;
++  const availableSubjects = useMemo(() => approvedAssessmentSubjects(selectedExam, selectedClass?.cls || "", selectedClass?.section || "", selectedClass?.subjects || []), [selectedExam, selectedClass]);
++  const assessmentMissingOfferings = selectedExam?.type?.toUpperCase() === "AS" && availableSubjects.length === 0;
+   useEffect(() => {
+     let cancelled = false;
+     api.get('/portal/teaching-options')
+@@ -151,7 +157,7 @@
+ 
+   useEffect(() => {
+     let cancelled = false;
+-    api.get('/admin/exams')
++    api.get('/admin/exams', { params: { include_subjects: 1 } })
+       .then((res) => {
+         if (cancelled) return;
+         const rows = Array.isArray(res.data?.data) ? res.data.data : [];
+@@ -159,6 +165,7 @@
+           id: Number(raw.id), name: String(raw.name || ""),
+           type: String(raw.type || ""), class: String(raw.class || ""),
+           session: String(raw.session || ""), total_marks: Number(raw.total_marks),
++          subject_offerings: Array.isArray(raw.subject_offerings) ? raw.subject_offerings : [],
+         })));
+         setExamLoadError("");
+       })
+@@ -172,6 +179,23 @@
+   }, []);
+ 
+   useEffect(() => {
++    let cancelled = false;
++    api.get('/admin/exams/grade-settings')
++      .then(res => {
++        if (cancelled) return;
++        const bands = verifiedBands(res.data);
++        setOfficialBands(bands);
++        setGradePreviewError(bands.length ? '' : 'Official grade bands are not verified. Grade preview is hidden.');
++      })
++      .catch(() => {
++        if (cancelled) return;
++        setOfficialBands([]);
++        setGradePreviewError('Could not load the school grade policy. Grade preview is hidden.');
++      });
++    return () => { cancelled = true; };
++  }, []);
++
++  useEffect(() => {
+     setExamId("");
+     setMarks({});
+   }, [classLabel, session]);
+@@ -307,6 +331,8 @@
+       <PortalModuleHeading eyebrow="ACADEMIC ASSESSMENT" title="Marks and examinations" description="Choose a verified assigned class, enter marks carefully and publish only server-confirmed results."/>
+       {assignmentError&&<p className="cw-error mb-5" role="alert">{assignmentError}</p>}
+       {examLoadError&&<p className="cw-error mb-5" role="alert">{examLoadError}</p>}
++      {gradePreviewError&&<p className="cw-error mb-5" role="alert">{gradePreviewError}</p>}
++      {assessmentMissingOfferings&&<p className="cw-error mb-5" role="alert">No Principal-approved subject offering exists for this selected assessment/class/section and teacher. Ask School Admin to verify the authorized subject catalog before entering marks.</p>}
+       {!assignmentError&&!classes.length&&<div className="mb-5"><PortalSupportNote>No class is linked to this teacher identity yet. School Admin can configure the class and subject assignments; unrelated classes are intentionally not shown.</PortalSupportNote></div>}
+       {toast && (
+         <div
+@@ -375,7 +401,7 @@
+ 
+           <Field step="2" label="Subject Select">
+             <SelectBox value={subject} disabled={!selectedClass} onChange={(event) => { setSubject(event.target.value); setMarks({}); }}>
+-              {!availableSubjects.length&&<option value="">No assigned class selected</option>}
++              {!availableSubjects.length&&<option value="">{assessmentMissingOfferings ? "No approved assessment subject" : "No assigned subject"}</option>}
+               {availableSubjects.map((item) => (
+                 <option key={item}>{item}</option>
+               ))}
+@@ -430,7 +456,7 @@
+           </div>
+           <button
+             onClick={saveMarks}
+-            disabled={saving || !selectedExam || !students.length || enteredCount === 0}
++            disabled={saving || !selectedExam || assessmentMissingOfferings || !availableSubjects.length || !students.length || enteredCount === 0}
+             className="flex items-center gap-2 rounded-xl bg-emerald-600 px-5 py-2.5 font-bold text-white transition hover:bg-emerald-500 disabled:opacity-50"
+           >
+             {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
+@@ -454,7 +480,7 @@
+               {students.map((student) => {
+                 const value = marks[student.id] || "";
+                 const pct = value && Number(totalMarks) ? Math.round((Number(value) / Number(totalMarks)) * 100) : 0;
+-                const grade = !value ? "-" : pct >= 90 ? "A+" : pct >= 80 ? "A" : pct >= 70 ? "B" : pct >= 60 ? "C" : pct >= 50 ? "D" : pct >= 33 ? "E" : "F";
++                const grade = !value ? "-" : (officialGrade(Number(value), Number(totalMarks), officialBands) || "-");
+                 return (
+                   <div key={student.id} className="bg-slate-800/50 rounded-xl p-4 border border-slate-700/50 shadow-sm">
+                     <div className="flex justify-between items-center mb-4">
+@@ -473,7 +499,7 @@
+                             ? "bg-slate-700/40 text-slate-500"
+                             : pct >= 80
+                               ? "bg-emerald-500/10 text-emerald-400"
+-                              : pct >= 50
++                              : grade !== "F" && grade !== "-"
+                                 ? "bg-amber-500/10 text-amber-400"
+                                 : "bg-red-500/10 text-red-400"
+                         }`}>
+@@ -518,7 +544,7 @@
+                   {students.map((student) => {
+                     const value = marks[student.id] || "";
+                     const pct = value && Number(totalMarks) ? Math.round((Number(value) / Number(totalMarks)) * 100) : 0;
+-                    const grade = !value ? "-" : pct >= 90 ? "A+" : pct >= 80 ? "A" : pct >= 70 ? "B" : pct >= 60 ? "C" : pct >= 50 ? "D" : pct >= 33 ? "E" : "F";
++                    const grade = !value ? "-" : (officialGrade(Number(value), Number(totalMarks), officialBands) || "-");
+                     return (
+                       <tr key={student.id} className="border-b border-slate-700/30 transition hover:bg-slate-800/30">
+                         <td className="px-5 py-4 font-mono text-xs text-slate-400">{student.gr_number || student.roll_number || `#${student.id}`}</td>
+@@ -552,7 +578,7 @@
+                                 ? "bg-slate-700/40 text-slate-500"
+                                 : pct >= 80
+                                   ? "bg-emerald-500/10 text-emerald-400"
+-                                  : pct >= 50
++                                  : grade !== "F" && grade !== "-"
+                                     ? "bg-amber-500/10 text-amber-400"
+                                     : "bg-red-500/10 text-red-400"
+                             }`}
