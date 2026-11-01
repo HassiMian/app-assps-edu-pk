@@ -396,7 +396,8 @@ async function main() {
   const batch = `staff_pdf_20260529_${new Date().toISOString().replace(/[-:TZ.]/g, '').slice(0, 14)}`
   const batchSuffix = batch.replace(/[^a-zA-Z0-9_]/g, '_')
   const outDir = path.join(process.cwd(), 'migration-output')
-  fs.mkdirSync(outDir, { recursive: true })
+  fs.mkdirSync(outDir, { recursive: true, mode: 0o700 })
+  fs.chmodSync(outDir, 0o700)
   const credentialsPath = path.join(outDir, `${batch}_teacher_credentials_private.csv`)
   const reportPath = path.join(outDir, `${batch}_report.json`)
   const client = await pool.connect()
@@ -467,16 +468,19 @@ async function main() {
       await client.query('ROLLBACK')
     } else {
       await client.query('COMMIT')
-      fs.writeFileSync(credentialsPath, credentials.map(row => row.map(csvCell).join(',')).join('\n'))
+      fs.writeFileSync(credentialsPath, credentials.map(row => row.map(csvCell).join(',')).join('\n'), { mode: 0o600 })
+      fs.chmodSync(credentialsPath, 0o600)
     }
 
-    fs.writeFileSync(reportPath, JSON.stringify(summary, null, 2))
+    fs.writeFileSync(reportPath, JSON.stringify(summary, null, 2), { mode: 0o600 })
+    fs.chmodSync(reportPath, 0o600)
     console.log(JSON.stringify(summary, null, 2))
   } catch (err) {
     try { await client.query('ROLLBACK') } catch {}
     summary.error = err.message
     summary.failed = summary.failed || records.length
-    fs.writeFileSync(reportPath, JSON.stringify(summary, null, 2))
+    fs.writeFileSync(reportPath, JSON.stringify(summary, null, 2), { mode: 0o600 })
+    fs.chmodSync(reportPath, 0o600)
     console.error(JSON.stringify(summary, null, 2))
     process.exitCode = 1
   } finally {

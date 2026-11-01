@@ -4,6 +4,7 @@
 const express = require('express')
 const router  = express.Router()
 const { pool } = require('../config/database')
+const {employeePublicRecord} = require('../services/staffSecurityProjection')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
 const ALLOW_MOCK_FALLBACK = process.env.NODE_ENV !== 'production'
@@ -108,7 +109,7 @@ router.get('/dashboard', protect, async (req, res) => {
         pool.query(studentQuery, studentParams),
         pool.query(attendanceQuery, attendanceParams),
         pool.query(feesQuery, feesParams),
-        scopedPortalRole ? Promise.resolve({ rows: [] }) : pool.query('SELECT * FROM employees WHERE school_id = $1 ORDER BY created_at DESC LIMIT 20', [schoolId]).catch(() => ({ rows: [] })),
+        scopedPortalRole ? Promise.resolve({ rows: [] }) : pool.query('SELECT id,school_id,emp_id,name,designation,department,photo,portal_role,is_active,created_at FROM employees WHERE school_id = $1 ORDER BY created_at DESC LIMIT 20', [schoolId]).catch(() => ({ rows: [] })),
         pool.query('SELECT * FROM notices WHERE school_id = $1 ORDER BY created_at DESC LIMIT 5', [schoolId]).catch(() => ({ rows: [] })),
         pool.query('SELECT * FROM exams WHERE school_id = $1 ORDER BY exam_date DESC LIMIT 10', [schoolId]).catch(() => ({ rows: [] })),
       ])
@@ -321,7 +322,7 @@ router.get('/dashboard', protect, async (req, res) => {
         recentStudents,
         recentNotices: noticesRes.rows,
         recentExams:   examsRes.rows.slice(0, 5),
-        employees:     empRes.rows.slice(0, 5),
+        employees:     empRes.rows.slice(0, 5).map(employeePublicRecord),
         role: req.user?.role,
       }
     })
