@@ -91,23 +91,10 @@ const statusMeta = {
  },
 }
 
-const ATTENDANCE_CLASS_LABEL_FIXES = {
- 'Pre Nine': 'Nine',
-}
-
-function attendanceClassLabel(value) {
- return ATTENDANCE_CLASS_LABEL_FIXES[value] || value
-}
-
-function attendanceApiClass(value) {
- return value === 'Pre Nine' ? 'Nine' : value
-}
-
 function attendanceSectionsForClass(className, sectionsForClass) {
  const direct = sectionsForClass(className)
  if (direct.length) return direct
- if (className === 'Nine') return sectionsForClass('Pre Nine')
- return []
+ return className === 'Pre Nine' ? ['Blue'] : []
 }
 
 function Panel({ children, accent = C.blue, style = {}, className = '' }) {
@@ -156,7 +143,7 @@ function StatCard({ state, value, delay }) {
 export default function MarkAttendance() {
  const { classNames: CLASSES, allSections: SECTIONS, sectionsForClass } = useAcademicStore()
  const attendanceClasses = useMemo(
- () => [...new Set(CLASSES.map(attendanceClassLabel))],
+ () => [...new Set([...CLASSES, 'Pre Nine'])],
  [CLASSES]
  )
  const [selectedClass, setSelectedClass] = useState(CLASSES[0] || 'Starter')
@@ -172,8 +159,8 @@ export default function MarkAttendance() {
  setLoading(true)
  setMessage('')
  Promise.all([
- api.get('/api/students', { params: { class: attendanceApiClass(selectedClass), section: selectedSection, active: 'true' } }).catch(() => ({ data: { data: [] } })),
- api.get('/api/attendance', { params: { class: attendanceApiClass(selectedClass), section: selectedSection, date } }).catch(() => ({ data: { data: [] } })),
+ api.get('/api/students', { params: { class: selectedClass, section: selectedSection, active: 'true' } }).catch(() => ({ data: { data: [] } })),
+ api.get('/api/attendance', { params: { class: selectedClass, section: selectedSection, date } }).catch(() => ({ data: { data: [] } })),
  ])
  .then(([stuRes, attRes]) => {
  const list = (stuRes.data?.data || []).filter((s) => s.is_active !== false)
