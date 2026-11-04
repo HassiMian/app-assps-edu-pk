@@ -177,6 +177,8 @@ test('Daily Diary split workspace personalizes students, supports dynamic A4 cou
   await page.locator('[data-studio-design="35"]').waitFor({state:'visible'});
   assert.equal(await page.locator('[data-studio-design="35"]').getAttribute('aria-pressed'),'true','Structure not persisted in local draft');
   assert.equal(await page.locator('[data-studio-color="lavender"]').getAttribute('aria-pressed'),'true','Independent color not persisted in local draft');
+  assert.equal((await page.locator('[data-table-heading-controls] b').first().innerText()).trim(),'13px','Table heading size not restored after reload');
+  assert.equal(await page.locator('[data-table-heading-controls] button[title="Toggle Subject and Home Task heading bold"]').getAttribute('class'),'dd-sqb-btn-bold','Table heading bold toggle not restored');
   // The backend save payload must preserve the pair without changing legacy template IDs.
   let capturedPayload=null;
   await page.route('**/api/daily-diary', async route=>{
@@ -188,6 +190,9 @@ test('Daily Diary split workspace personalizes students, supports dynamic A4 cou
   await page.getByText('Daily diary saved safely (ID #41001).').waitFor({timeout:10000});
   assert.equal(capturedPayload?.template_id,35);
   assert.equal(capturedPayload?.style_settings?.studioColorId,'lavender');
+  assert.equal(capturedPayload?.style_settings?.tableHeaderFontSize,13);
+  assert.equal(capturedPayload?.style_settings?.tableHeaderBold,false);
+  console.log('A195_TABLE_HEADINGS_PERSISTENCE_PASS');
   console.log('STUDIO_STRUCTURE_COLOR_SAVE_AND_RELOAD_PASS');
   console.log('STUDIO_64_INDEPENDENT_STRUCTURE_COLOR_COMBINATIONS_PASS');
   console.log('STUDIO_8_DISTINCT_ARCHITECTURES_PASS',studioNames.join(', '));
